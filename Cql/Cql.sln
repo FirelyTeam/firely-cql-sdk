@@ -33,6 +33,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ValueSetLoaders", "ValueSet
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerminologyClient", "TerminologyClient\TerminologyClient.csproj", "{10BBEA08-C8E2-4A38-AF04-3B3DCF19E8B6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqlRuntime.Firely", "CqlRuntime.Firely\CqlRuntime.Firely.csproj", "{6D985F3F-5DB9-474F-951D-269698BB633C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -95,6 +97,10 @@ Global
 		{10BBEA08-C8E2-4A38-AF04-3B3DCF19E8B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10BBEA08-C8E2-4A38-AF04-3B3DCF19E8B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10BBEA08-C8E2-4A38-AF04-3B3DCF19E8B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D985F3F-5DB9-474F-951D-269698BB633C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D985F3F-5DB9-474F-951D-269698BB633C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D985F3F-5DB9-474F-951D-269698BB633C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D985F3F-5DB9-474F-951D-269698BB633C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
