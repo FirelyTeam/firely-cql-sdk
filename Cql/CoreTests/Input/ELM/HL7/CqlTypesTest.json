@@ -1,0 +1,1438 @@
+{
+  "library" : {
+    "type" : "Library",
+    "identifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "CqlTypesTest",
+      "version" : "1.0.0"
+    },
+    "schemaIdentifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "type" : "Library$Usings",
+      "def" : [ {
+        "type" : "UsingDef",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "type" : "UsingDef",
+        "locator" : "3:1-3:26",
+        "localIdentifier" : "FHIR",
+        "uri" : "http://hl7.org/fhir",
+        "version" : "4.0.1"
+      } ]
+    },
+    "includes" : {
+      "type" : "Library$Includes",
+      "def" : [ {
+        "type" : "IncludeDef",
+        "locator" : "5:1-5:54",
+        "localIdentifier" : "FHIRHelpers",
+        "path" : "FHIRHelpers",
+        "version" : "4.0.1"
+      } ]
+    },
+    "contexts" : {
+      "type" : "Library$Contexts",
+      "def" : [ {
+        "type" : "ContextDef",
+        "locator" : "7:1-7:15",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "type" : "Library$Statements",
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "operand" : {
+            "type" : "Retrieve",
+            "locator" : "7:1-7:15",
+            "dataType" : "{http://hl7.org/fhir}Patient",
+            "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient"
+          }
+        },
+        "locator" : "7:1-7:15",
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Quantity",
+            "locator" : "10:3-10:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 5.0,
+            "unit" : "g"
+          }, {
+            "type" : "Quantity",
+            "locator" : "10:13-10:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 5.0,
+            "unit" : "g"
+          } ],
+          "locator" : "10:3-10:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "9:1-10:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "AnyQuantity",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "locator" : "13:12-13:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2012"
+            },
+            "month" : {
+              "type" : "Literal",
+              "locator" : "13:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4"
+            },
+            "day" : {
+              "type" : "Literal",
+              "locator" : "13:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "4"
+            },
+            "locator" : "13:3-13:22",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          }, {
+            "type" : "ToDateTime",
+            "operand" : {
+              "type" : "Date",
+              "year" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2012"
+              },
+              "month" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4"
+              },
+              "day" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4"
+              },
+              "locator" : "13:25-13:35",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date"
+            }
+          } ],
+          "locator" : "13:3-13:35",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "12:1-13:35",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "AnyDateTime",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "9"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "16:3-16:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          }, {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "9"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "16:20-16:33",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          } ],
+          "locator" : "16:3-16:33",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "15:1-16:33",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "AnyTime",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Interval",
+            "low" : {
+              "type" : "Literal",
+              "locator" : "19:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            },
+            "high" : {
+              "type" : "Literal",
+              "locator" : "19:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "7"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "19:3-19:16",
+            "lowClosed" : true,
+            "highClosed" : true
+          }, {
+            "type" : "Interval",
+            "low" : {
+              "type" : "Literal",
+              "locator" : "19:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            },
+            "high" : {
+              "type" : "Literal",
+              "locator" : "19:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "7"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "IntervalTypeSpecifier",
+              "pointType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "19:19-19:32",
+            "lowClosed" : true,
+            "highClosed" : true
+          } ],
+          "locator" : "19:3-19:32",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "18:1-19:32",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "AnyInterval",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "22:5",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            }, {
+              "type" : "Literal",
+              "locator" : "22:8",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            }, {
+              "type" : "Literal",
+              "locator" : "22:11",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "22:3-22:13"
+          }, {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "22:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            }, {
+              "type" : "Literal",
+              "locator" : "22:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            }, {
+              "type" : "Literal",
+              "locator" : "22:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "22:17-22:27"
+          } ],
+          "locator" : "22:3-22:27",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "21:1-22:27",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "AnyList",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Tuple",
+            "element" : [ {
+              "type" : "TupleElement",
+              "value" : {
+                "type" : "Literal",
+                "locator" : "26:9",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              },
+              "name" : "id"
+            }, {
+              "type" : "TupleElement",
+              "value" : {
+                "type" : "Literal",
+                "locator" : "27:11-27:17",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "Chris"
+              },
+              "name" : "name"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "element" : [ {
+                "type" : "TupleElementDefinition",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "name" : "id"
+              }, {
+                "type" : "TupleElementDefinition",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}String"
+                },
+                "name" : "name"
+              } ]
+            },
+            "locator" : "25:3-28:3"
+          }, {
+            "type" : "Tuple",
+            "element" : [ {
+              "type" : "TupleElement",
+              "value" : {
+                "type" : "Literal",
+                "locator" : "29:9",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              },
+              "name" : "id"
+            }, {
+              "type" : "TupleElement",
+              "value" : {
+                "type" : "Literal",
+                "locator" : "30:11-30:17",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "Chris"
+              },
+              "name" : "name"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "TupleTypeSpecifier",
+              "element" : [ {
+                "type" : "TupleElementDefinition",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "name" : "id"
+              }, {
+                "type" : "TupleElementDefinition",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}String"
+                },
+                "name" : "name"
+              } ]
+            },
+            "locator" : "28:7-31:3"
+          } ],
+          "locator" : "25:3-31:3",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "24:1-31:3",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "AnyTuple",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Property",
+            "source" : {
+              "type" : "Tuple",
+              "element" : [ {
+                "type" : "TupleElement",
+                "value" : {
+                  "type" : "Literal",
+                  "locator" : "35:9",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "5"
+                },
+                "name" : "id"
+              }, {
+                "type" : "TupleElement",
+                "value" : {
+                  "type" : "Literal",
+                  "locator" : "36:11-36:17",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                  "value" : "Chris"
+                },
+                "name" : "name"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "TupleTypeSpecifier",
+                "element" : [ {
+                  "type" : "TupleElementDefinition",
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                  },
+                  "name" : "id"
+                }, {
+                  "type" : "TupleElementDefinition",
+                  "elementType" : {
+                    "type" : "NamedTypeSpecifier",
+                    "name" : "{urn:hl7-org:elm-types:r1}String"
+                  },
+                  "name" : "name"
+                } ]
+              },
+              "locator" : "34:3-37:3"
+            },
+            "locator" : "34:3-37:8",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "path" : "name"
+          }, {
+            "type" : "Literal",
+            "locator" : "37:12-37:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Chris"
+          } ],
+          "locator" : "34:3-37:18",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "33:1-37:18",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "AnyString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "40:12-40:15",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "locator" : "40:3-40:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "40:19-40:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}DateTime"
+          } ],
+          "locator" : "40:3-40:22",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "39:1-40:22",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "DateTime",
+          "year" : {
+            "type" : "Literal",
+            "locator" : "43:12-43:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "10000"
+          },
+          "month" : {
+            "type" : "Literal",
+            "locator" : "43:19-43:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "12"
+          },
+          "day" : {
+            "type" : "Literal",
+            "locator" : "43:23-43:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "31"
+          },
+          "hour" : {
+            "type" : "Literal",
+            "locator" : "43:27-43:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "23"
+          },
+          "minute" : {
+            "type" : "Literal",
+            "locator" : "43:31-43:32",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "59"
+          },
+          "second" : {
+            "type" : "Literal",
+            "locator" : "43:35-43:36",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "59"
+          },
+          "millisecond" : {
+            "type" : "Literal",
+            "locator" : "43:39-43:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "999"
+          },
+          "locator" : "43:3-43:42",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+        },
+        "locator" : "42:1-43:42",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeUpperBoundExcept",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "DateTime",
+          "year" : {
+            "type" : "Literal",
+            "locator" : "46:12-46:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0000"
+          },
+          "month" : {
+            "type" : "Literal",
+            "locator" : "46:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          },
+          "day" : {
+            "type" : "Literal",
+            "locator" : "46:21",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          },
+          "hour" : {
+            "type" : "Literal",
+            "locator" : "46:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          },
+          "minute" : {
+            "type" : "Literal",
+            "locator" : "46:27",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          },
+          "second" : {
+            "type" : "Literal",
+            "locator" : "46:30",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          },
+          "millisecond" : {
+            "type" : "Literal",
+            "locator" : "46:33",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          },
+          "locator" : "46:3-46:34",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+        },
+        "locator" : "45:1-46:34",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeLowerBoundExcept",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "locator" : "49:12-49:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2016"
+            },
+            "month" : {
+              "type" : "Literal",
+              "locator" : "49:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "7"
+            },
+            "day" : {
+              "type" : "Literal",
+              "locator" : "49:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "7"
+            },
+            "hour" : {
+              "type" : "Literal",
+              "locator" : "49:24",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "6"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "locator" : "49:27-49:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "25"
+            },
+            "second" : {
+              "type" : "Literal",
+              "locator" : "49:31-49:32",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "33"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "locator" : "49:35-49:37",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "910"
+            },
+            "locator" : "49:3-49:38",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          }, {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2016"
+            },
+            "month" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "7"
+            },
+            "day" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "7"
+            },
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "6"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "25"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "33"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "910"
+            },
+            "locator" : "49:41-49:64",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          } ],
+          "locator" : "49:3-49:64",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "48:1-49:64",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeProper",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "locator" : "52:12-52:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2015"
+            },
+            "month" : {
+              "type" : "Literal",
+              "locator" : "52:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            },
+            "day" : {
+              "type" : "Literal",
+              "locator" : "52:21-52:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10"
+            },
+            "locator" : "52:3-52:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          }, {
+            "type" : "ToDateTime",
+            "operand" : {
+              "type" : "Date",
+              "year" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2015"
+              },
+              "month" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              },
+              "day" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "10"
+              },
+              "locator" : "52:26-52:36",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date"
+            }
+          } ],
+          "locator" : "52:3-52:36",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "51:1-52:36",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeIncomplete",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "DurationBetween",
+            "operand" : [ {
+              "type" : "DateTime",
+              "year" : {
+                "type" : "Literal",
+                "locator" : "55:27-55:30",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2015"
+              },
+              "month" : {
+                "type" : "Literal",
+                "locator" : "55:33",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              },
+              "day" : {
+                "type" : "Literal",
+                "locator" : "55:36-55:37",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "10"
+              },
+              "locator" : "55:18-55:38",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+            }, {
+              "type" : "DateTime",
+              "year" : {
+                "type" : "Literal",
+                "locator" : "55:52-55:55",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2015"
+              },
+              "month" : {
+                "type" : "Literal",
+                "locator" : "55:58",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3"
+              },
+              "locator" : "55:43-55:59",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+            } ],
+            "locator" : "55:3-55:60",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "precision" : "Day"
+          }, {
+            "type" : "Literal",
+            "locator" : "55:64-55:65",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "30"
+          } ],
+          "locator" : "55:3-55:65",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "54:1-55:65",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeUncertain",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "locator" : "58:12-58:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0001"
+            },
+            "month" : {
+              "type" : "Literal",
+              "locator" : "58:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "day" : {
+              "type" : "Literal",
+              "locator" : "58:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "hour" : {
+              "type" : "Literal",
+              "locator" : "58:24",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "locator" : "58:27",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "second" : {
+              "type" : "Literal",
+              "locator" : "58:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "locator" : "58:33",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "58:3-58:34",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          }, {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "month" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "day" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "58:37-58:60",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          } ],
+          "locator" : "58:3-58:60",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "57:1-58:60",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeMin",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "locator" : "61:12-61:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "9999"
+            },
+            "month" : {
+              "type" : "Literal",
+              "locator" : "61:18-61:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12"
+            },
+            "day" : {
+              "type" : "Literal",
+              "locator" : "61:22-61:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "31"
+            },
+            "hour" : {
+              "type" : "Literal",
+              "locator" : "61:26-61:27",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "23"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "locator" : "61:30-61:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "second" : {
+              "type" : "Literal",
+              "locator" : "61:34-61:35",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "locator" : "61:38-61:40",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "999"
+            },
+            "locator" : "61:3-61:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          }, {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "9999"
+            },
+            "month" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12"
+            },
+            "day" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "31"
+            },
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "23"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "999"
+            },
+            "locator" : "61:44-61:67",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          } ],
+          "locator" : "61:3-61:67",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "60:1-61:67",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeMax",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Quantity",
+            "locator" : "64:3-64:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 150.2,
+            "unit" : "lbs"
+          }, {
+            "type" : "Quantity",
+            "locator" : "64:17-64:27",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 150.2,
+            "unit" : "lbs"
+          } ],
+          "locator" : "64:3-64:27",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "63:1-64:27",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "QuantityTest",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Quantity",
+            "locator" : "67:3-67:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 2.5589,
+            "unit" : "eskimo kisses"
+          }, {
+            "type" : "Quantity",
+            "locator" : "67:28-67:49",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 2.5589,
+            "unit" : "eskimo kisses"
+          } ],
+          "locator" : "67:3-67:49",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "66:1-67:49",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "QuantityTest2",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Quantity",
+            "locator" : "70:3-70:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 5.999999999,
+            "unit" : "g"
+          }, {
+            "type" : "Quantity",
+            "locator" : "70:21-70:35",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+            "value" : 5.999999999,
+            "unit" : "g"
+          } ],
+          "locator" : "70:3-70:35",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "69:1-70:35",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "QuantityFractionalTooBig",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "73:3-73:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "'I start with a single quote and end with a double quote\""
+          }, {
+            "type" : "Literal",
+            "locator" : "73:67-73:135",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "'I start with a single quote and end with a double quote\""
+          } ],
+          "locator" : "73:3-73:135",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "72:1-73:135",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StringTestEscapeQuotes",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "76:3-76:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Hi"
+          }, {
+            "type" : "Literal",
+            "locator" : "76:20-76:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Hi"
+          } ],
+          "locator" : "76:3-76:23",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "75:1-76:23",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StringUnicodeTest",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "25"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "863"
+            },
+            "locator" : "91:3-91:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          }, {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "25"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "12"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "863"
+            },
+            "locator" : "91:20-91:33",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          } ],
+          "locator" : "91:3-91:33",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "annotation" : [ {
+          "type" : "Annotation",
+          "t" : [ {
+            "name" : "T24",
+            "value" : "\"TimeUpperBoundMinutes\":"
+          }, {
+            "name" : "T23",
+            "value" : "\"TimeUpperBoundSeconds\":"
+          }, {
+            "name" : "T23",
+            "value" : "\"TimeUpperBoundMillis\":"
+          }, {
+            "name" : "T23",
+            "value" : "59:59.10000"
+          } ]
+        } ],
+        "locator" : "90:1-91:33",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TimeProper",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "23"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "999"
+            },
+            "locator" : "94:3-94:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          }, {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "23"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "59"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "999"
+            },
+            "locator" : "94:20-94:33",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          } ],
+          "locator" : "94:3-94:33",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "93:1-94:33",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TimeAllMax",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "97:3-97:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          }, {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "97:20-97:33",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          } ],
+          "locator" : "97:3-97:33",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "96:1-97:33",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TimeAllMin",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    },
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableLocators,EnableResultTypes,EnableDetailedErrors"
+    } ]
+  }
+}

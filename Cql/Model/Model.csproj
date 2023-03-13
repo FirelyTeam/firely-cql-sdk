@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<RootNamespace>Ncqa.Cql.Model</RootNamespace>
+		<AssemblyName>Ncqa.Cql.Model</AssemblyName>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Version>4.0.1</Version>
+		<Authors>NCQA</Authors>
+		<Description>Abstracts CQL models</Description>
+		<PackageId>Ncqa.Cql.Model</PackageId>
+		<Product>CQL Model</Product>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="Models\fhir-modelinfo-4.0.1.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
+			<LogicalName>Fhir401</LogicalName>
+		</EmbeddedResource>
+	</ItemGroup>
+
+</Project>

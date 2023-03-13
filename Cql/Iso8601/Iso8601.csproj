@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Ncqa.Iso8601</AssemblyName>
+		<RootNamespace>Ncqa.Iso8601</RootNamespace>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Authors>NCQA</Authors>
+		<Company>NCQA</Company>
+		<Product>ISO 8601 datetime abstractions</Product>
+		<Description>Contains implementations of ISO 8601 date, time, and datetime structures for use in the CQL engine.  These date structures have nullable values beyond the most significant (year for dates, hour for times), and have an understanding of precision.</Description>
+	</PropertyGroup>
+
+</Project>

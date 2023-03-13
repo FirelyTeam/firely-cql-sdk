@@ -1,0 +1,2914 @@
+{
+  "library" : {
+    "type" : "Library",
+    "identifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "ValueLiteralsAndSelectors",
+      "version" : "1.0.0"
+    },
+    "schemaIdentifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "type" : "Library$Usings",
+      "def" : [ {
+        "type" : "UsingDef",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "type" : "UsingDef",
+        "locator" : "3:1-3:26",
+        "localIdentifier" : "FHIR",
+        "uri" : "http://hl7.org/fhir",
+        "version" : "4.0.1"
+      } ]
+    },
+    "includes" : {
+      "type" : "Library$Includes",
+      "def" : [ {
+        "type" : "IncludeDef",
+        "locator" : "5:1-5:54",
+        "localIdentifier" : "FHIRHelpers",
+        "path" : "FHIRHelpers",
+        "version" : "4.0.1"
+      } ]
+    },
+    "contexts" : {
+      "type" : "Library$Contexts",
+      "def" : [ {
+        "type" : "ContextDef",
+        "locator" : "7:1-7:15",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "type" : "Library$Statements",
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "operand" : {
+            "type" : "Retrieve",
+            "locator" : "7:1-7:15",
+            "dataType" : "{http://hl7.org/fhir}Patient",
+            "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient"
+          }
+        },
+        "locator" : "7:1-7:15",
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "10:3-10:10",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Less",
+            "operand" : [ {
+              "type" : "Date",
+              "year" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2000"
+              },
+              "locator" : "10:14-10:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date"
+            }, {
+              "type" : "Date",
+              "year" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2000"
+              },
+              "month" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "locator" : "10:22-10:29",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date"
+            } ],
+            "locator" : "10:14-10:29",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "10:3-10:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "9:1-10:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Null",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "13:3-13:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false"
+          }, {
+            "type" : "Equivalent",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "13:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            }, {
+              "type" : "Literal",
+              "locator" : "13:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            } ],
+            "locator" : "13:15-13:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "13:3-13:23",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "12:1-13:23",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "BooleanFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "16:3-16:10",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          }, {
+            "type" : "Equivalent",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "16:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            }, {
+              "type" : "Literal",
+              "locator" : "16:20",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            } ],
+            "locator" : "16:14-16:22",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "16:3-16:22",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "15:1-16:22",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "BooleanTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "19:3-19:7",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "19:11-19:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "19:16-19:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            } ],
+            "locator" : "19:11-19:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "19:3-19:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "18:1-19:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "22:3-22:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "22:13-22:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "22:18-22:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            } ],
+            "locator" : "22:13-22:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "22:3-22:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "21:1-22:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerPosZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "25:7",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "25:3-25:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "25:13-25:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "25:18-25:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            } ],
+            "locator" : "25:13-25:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "25:3-25:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "24:1-25:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerNegZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "28:3-28:7",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "28:11-28:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "28:16-28:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "41"
+            } ],
+            "locator" : "28:11-28:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "28:3-28:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "27:1-28:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "31:3-31:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "31:13-31:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "31:18-31:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "41"
+            } ],
+            "locator" : "31:13-31:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "31:3-31:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "30:1-31:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerPosOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "34:7",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "34:3-34:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "34:13-34:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "34:18-34:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "43"
+            } ],
+            "locator" : "34:13-34:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "34:3-34:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "33:1-34:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerNegOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "37:3-37:7",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "37:11-37:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "37:16-37:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "40"
+            } ],
+            "locator" : "37:11-37:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "37:3-37:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "36:1-37:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerTwo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "40:3-40:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "40:13-40:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "40:18-40:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "40"
+            } ],
+            "locator" : "40:13-40:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "40:3-40:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "39:1-40:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerPosTwo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "43:7",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            },
+            "locator" : "43:3-43:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "43:13-43:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "42"
+            }, {
+              "type" : "Literal",
+              "locator" : "43:18-43:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "44"
+            } ],
+            "locator" : "43:13-43:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "43:3-43:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "42:1-43:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerNegTwo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "46:3-46:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1000000000"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "46:26-46:27",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10"
+            }, {
+              "type" : "Literal",
+              "locator" : "46:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "9"
+            } ],
+            "locator" : "46:20-46:31",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "46:3-46:31",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "45:1-46:31",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Integer10Pow9",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "49:3-49:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1000000000"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "49:30-49:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "10"
+            }, {
+              "type" : "Literal",
+              "locator" : "49:34",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "9"
+            } ],
+            "locator" : "49:22-49:35",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "49:3-49:35",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "48:1-49:35",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerPos10Pow9",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "52:7-52:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1000000000"
+            },
+            "locator" : "52:3-52:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "52:30-52:31",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "10"
+              }, {
+                "type" : "Literal",
+                "locator" : "52:34",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "9"
+              } ],
+              "locator" : "52:24-52:35",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "locator" : "52:22-52:35",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "52:3-52:35",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "51:1-52:35",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerNeg10Pow9",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "55:3-55:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2147483647"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Subtract",
+              "operand" : [ {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "55:26",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "55:29-55:30",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "30"
+                } ],
+                "locator" : "55:20-55:31",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }, {
+                "type" : "Literal",
+                "locator" : "55:34",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              } ],
+              "locator" : "55:20-55:34",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "55:44",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "55:47-55:48",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "30"
+              } ],
+              "locator" : "55:38-55:49",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            } ],
+            "locator" : "55:20-55:49",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "55:3-55:49",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "54:1-55:49",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Integer2Pow31ToZero1IntegerMaxValue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "58:3-58:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2147483647"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Subtract",
+              "operand" : [ {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "58:30",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "58:33-58:34",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "30"
+                } ],
+                "locator" : "58:22-58:35",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }, {
+                "type" : "Literal",
+                "locator" : "58:38",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              } ],
+              "locator" : "58:22-58:38",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "58:48",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "58:51-58:52",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "30"
+              } ],
+              "locator" : "58:42-58:53",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            } ],
+            "locator" : "58:22-58:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "58:3-58:53",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "57:1-58:53",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerPos2Pow31ToZero1IntegerMaxValue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "61:7-61:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2147483647"
+            },
+            "locator" : "61:3-61:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Add",
+              "operand" : [ {
+                "type" : "Negate",
+                "operand" : {
+                  "type" : "Power",
+                  "operand" : [ {
+                    "type" : "Literal",
+                    "locator" : "61:30",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "2"
+                  }, {
+                    "type" : "Literal",
+                    "locator" : "61:33-61:34",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "30"
+                  } ],
+                  "locator" : "61:24-61:35",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "locator" : "61:22-61:35",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }, {
+                "type" : "Literal",
+                "locator" : "61:38",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              } ],
+              "locator" : "61:22-61:38",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "61:48",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "61:51-61:52",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "30"
+              } ],
+              "locator" : "61:42-61:53",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            } ],
+            "locator" : "61:22-61:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "61:3-61:53",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "60:1-61:53",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerNeg2Pow31ToZero1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "64:3-64:12",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+          "value" : "2147483648"
+        },
+        "locator" : "63:1-64:12",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "Integer2Pow31",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "67:3-67:14",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+          "value" : "2147483648"
+        },
+        "locator" : "66:1-67:14",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "IntegerPos2Pow31",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "70:7-70:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2147483648"
+            },
+            "locator" : "70:3-70:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Negate",
+              "operand" : {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "70:30",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "2"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "70:33-70:34",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "30"
+                } ],
+                "locator" : "70:24-70:35",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              "locator" : "70:22-70:35",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "70:44",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "70:47-70:48",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "30"
+              } ],
+              "locator" : "70:38-70:49",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            } ],
+            "locator" : "70:22-70:49",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "70:3-70:49",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "69:1-70:49",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IntegerNeg2Pow31IntegerMinValue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "73:3-73:12",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+          "value" : "2147483649"
+        },
+        "locator" : "72:1-73:12",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "Integer2Pow31ToInf1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "76:3-76:14",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+          "value" : "2147483649"
+        },
+        "locator" : "75:1-76:14",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "IntegerPos2Pow31ToInf1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Negate",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "79:5-79:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2147483649"
+          },
+          "locator" : "79:3-79:14",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+        },
+        "locator" : "78:1-79:14",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "IntegerNeg2Pow31ToInf1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "82:3-82:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "82:13-82:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "82:20-82:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            } ],
+            "locator" : "82:13-82:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "82:3-82:23",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "81:1-82:23",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "85:3-85:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "85:15-85:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "85:22-85:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            } ],
+            "locator" : "85:15-85:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "85:3-85:25",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "84:1-85:25",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPosZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "88:7-88:9",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.0"
+            },
+            "locator" : "88:3-88:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "88:15-88:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "88:22-88:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            } ],
+            "locator" : "88:15-88:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "88:3-88:25",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "87:1-88:25",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNegZero",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "91:3-91:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "91:13-91:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "91:20-91:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "41.0"
+            } ],
+            "locator" : "91:13-91:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "91:3-91:23",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "90:1-91:23",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "94:3-94:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1.0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "94:15-94:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "94:22-94:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "41.0"
+            } ],
+            "locator" : "94:15-94:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "94:3-94:25",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "93:1-94:25",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPosOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "97:7-97:9",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1.0"
+            },
+            "locator" : "97:3-97:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "97:15-97:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "97:22-97:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "43.0"
+            } ],
+            "locator" : "97:15-97:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "97:3-97:25",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "96:1-97:25",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNegOne",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "100:3-100:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2.0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "100:13-100:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "100:20-100:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "40.0"
+            } ],
+            "locator" : "100:13-100:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "100:3-100:23",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "99:1-100:23",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalTwo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "103:3-103:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2.0"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "103:15-103:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "103:22-103:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "40.0"
+            } ],
+            "locator" : "103:15-103:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "103:3-103:25",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "102:1-103:25",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPosTwo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "106:7-106:9",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0"
+            },
+            "locator" : "106:3-106:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "106:15-106:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "106:22-106:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "44.0"
+            } ],
+            "locator" : "106:15-106:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "106:3-106:25",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "105:1-106:25",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNegTwo",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "109:3-109:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1000000000.0"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "109:28-109:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "10.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "109:34-109:36",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "9.0"
+            } ],
+            "locator" : "109:22-109:37",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "109:3-109:37",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "108:1-109:37",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Decimal10Pow9",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "112:3-112:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "1000000000.0"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "112:32-112:35",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "10.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "112:38-112:40",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "9.0"
+            } ],
+            "locator" : "112:24-112:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "112:3-112:41",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "111:1-112:41",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPos10Pow9",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "115:7-115:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "1000000000.0"
+            },
+            "locator" : "115:3-115:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "115:32-115:35",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "10.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "115:38-115:40",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "9.0"
+              } ],
+              "locator" : "115:26-115:41",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            },
+            "locator" : "115:24-115:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "115:3-115:41",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "114:1-115:41",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNeg10Pow9",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "118:3-118:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483647.0"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Subtract",
+              "operand" : [ {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "118:28-118:30",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "2.0"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "118:33-118:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "30.0"
+                } ],
+                "locator" : "118:22-118:37",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+              }, {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "118:40",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1"
+                }
+              } ],
+              "locator" : "118:22-118:40",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "118:50-118:52",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "118:55-118:58",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "118:44-118:59",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "118:22-118:59",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "118:3-118:59",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "117:1-118:59",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Decimal2Pow31ToZero1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "121:3-121:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483647.0"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Subtract",
+              "operand" : [ {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "121:32-121:34",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "2.0"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "121:37-121:40",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "30.0"
+                } ],
+                "locator" : "121:24-121:41",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+              }, {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "121:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1"
+                }
+              } ],
+              "locator" : "121:24-121:44",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "121:54-121:56",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "121:59-121:62",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "121:48-121:63",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "121:24-121:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "121:3-121:63",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "120:1-121:63",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPos2Pow31ToZero1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "124:7-124:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2147483647.0"
+            },
+            "locator" : "124:3-124:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Add",
+              "operand" : [ {
+                "type" : "Negate",
+                "operand" : {
+                  "type" : "Power",
+                  "operand" : [ {
+                    "type" : "Literal",
+                    "locator" : "124:32-124:34",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "value" : "2.0"
+                  }, {
+                    "type" : "Literal",
+                    "locator" : "124:37-124:40",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "value" : "30.0"
+                  } ],
+                  "locator" : "124:26-124:41",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+                },
+                "locator" : "124:24-124:41",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+              }, {
+                "type" : "Literal",
+                "locator" : "124:44-124:46",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1.0"
+              } ],
+              "locator" : "124:24-124:46",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "124:56-124:58",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "124:61-124:64",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "124:50-124:65",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "124:24-124:65",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "124:3-124:65",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "123:1-124:65",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNeg2Pow31ToZero1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "127:3-127:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483648.0"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "127:28-127:30",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "127:33-127:36",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "127:22-127:37",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "127:46-127:48",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "127:51-127:54",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "127:40-127:55",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "127:22-127:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "127:3-127:55",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "126:1-127:55",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Decimal2Pow31",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "130:3-130:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483648.0"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "130:32-130:34",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "130:37-130:40",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "130:24-130:41",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "130:50-130:52",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "130:55-130:58",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "130:44-130:59",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "130:24-130:59",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "130:3-130:59",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "129:1-130:59",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPos2Pow31",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "133:7-133:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2147483648.0"
+            },
+            "locator" : "133:3-133:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Negate",
+              "operand" : {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "133:32-133:34",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "2.0"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "133:37-133:40",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "30.0"
+                } ],
+                "locator" : "133:26-133:41",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+              },
+              "locator" : "133:24-133:41",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "133:50-133:52",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "133:55-133:58",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "133:44-133:59",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "133:24-133:59",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "133:3-133:59",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "132:1-133:59",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNeg2Pow31",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "136:3-136:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483649.0"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Add",
+              "operand" : [ {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "136:28-136:30",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "2.0"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "136:33-136:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "30.0"
+                } ],
+                "locator" : "136:22-136:37",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+              }, {
+                "type" : "Literal",
+                "locator" : "136:40-136:42",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1.0"
+              } ],
+              "locator" : "136:22-136:42",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "136:52-136:54",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "136:57-136:60",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "136:46-136:61",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "136:22-136:61",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "136:3-136:61",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "135:1-136:61",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Decimal2Pow31ToInf1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "139:3-139:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "2147483649.0"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Add",
+              "operand" : [ {
+                "type" : "Power",
+                "operand" : [ {
+                  "type" : "Literal",
+                  "locator" : "139:32-139:34",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "2.0"
+                }, {
+                  "type" : "Literal",
+                  "locator" : "139:37-139:40",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                  "value" : "30.0"
+                } ],
+                "locator" : "139:24-139:41",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+              }, {
+                "type" : "Literal",
+                "locator" : "139:44-139:46",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1.0"
+              } ],
+              "locator" : "139:24-139:46",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "139:56-139:58",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "139:61-139:64",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "139:50-139:65",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "139:24-139:65",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "139:3-139:65",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "138:1-139:65",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPos2Pow31ToInf1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "142:7-142:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2147483649.0"
+            },
+            "locator" : "142:3-142:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Subtract",
+              "operand" : [ {
+                "type" : "Negate",
+                "operand" : {
+                  "type" : "Power",
+                  "operand" : [ {
+                    "type" : "Literal",
+                    "locator" : "142:32-142:34",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "value" : "2.0"
+                  }, {
+                    "type" : "Literal",
+                    "locator" : "142:37-142:40",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                    "value" : "30.0"
+                  } ],
+                  "locator" : "142:26-142:41",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+                },
+                "locator" : "142:24-142:41",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+              }, {
+                "type" : "Literal",
+                "locator" : "142:44-142:46",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1.0"
+              } ],
+              "locator" : "142:24-142:46",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "142:56-142:58",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              }, {
+                "type" : "Literal",
+                "locator" : "142:61-142:64",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "30.0"
+              } ],
+              "locator" : "142:50-142:65",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "142:24-142:65",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "142:3-142:65",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "141:1-142:65",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNeg2Pow31ToInf1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "145:3-145:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000000"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "145:20-145:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "145:27-145:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            } ],
+            "locator" : "145:20-145:30",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "145:3-145:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "144:1-145:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalZeroStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "148:3-148:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000000"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "148:22-148:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "148:29-148:32",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            } ],
+            "locator" : "148:22-148:32",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "148:3-148:32",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "147:1-148:32",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPosZeroStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "151:7-151:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.00000000"
+            },
+            "locator" : "151:3-151:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "151:22-151:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            }, {
+              "type" : "Literal",
+              "locator" : "151:29-151:32",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "42.0"
+            } ],
+            "locator" : "151:22-151:32",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "151:3-151:32",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "150:1-151:32",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNegZeroStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "154:3-154:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000001"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "154:26-154:29",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "10.0"
+            }, {
+              "type" : "ToDecimal",
+              "operand" : {
+                "type" : "Negate",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "154:34",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "8"
+                },
+                "locator" : "154:32-154:34",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            } ],
+            "locator" : "154:20-154:35",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "154:3-154:35",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "153:1-154:35",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalOneStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "157:3-157:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000001"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "157:30-157:33",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "10.0"
+            }, {
+              "type" : "ToDecimal",
+              "operand" : {
+                "type" : "Negate",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "157:38",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "8"
+                },
+                "locator" : "157:36-157:38",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            } ],
+            "locator" : "157:22-157:39",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "157:3-157:39",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "156:1-157:39",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPosOneStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "160:7-160:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.00000001"
+            },
+            "locator" : "160:3-160:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "160:30-160:33",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "10.0"
+              }, {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                    "type" : "Literal",
+                    "locator" : "160:38",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "8"
+                  },
+                  "locator" : "160:36-160:38",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              } ],
+              "locator" : "160:24-160:39",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            },
+            "locator" : "160:22-160:39",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "160:3-160:39",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "159:1-160:39",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNegOneStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "163:3-163:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000002"
+          }, {
+            "type" : "Multiply",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "163:20-163:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "163:32-163:35",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "10.0"
+              }, {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                    "type" : "Literal",
+                    "locator" : "163:40",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "8"
+                  },
+                  "locator" : "163:38-163:40",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              } ],
+              "locator" : "163:26-163:41",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "163:20-163:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "163:3-163:41",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "162:1-163:41",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalTwoStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "166:3-166:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.00000002"
+          }, {
+            "type" : "Multiply",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "166:22-166:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "2.0"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "166:36-166:39",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "10.0"
+              }, {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                    "type" : "Literal",
+                    "locator" : "166:44",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "8"
+                  },
+                  "locator" : "166:42-166:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              } ],
+              "locator" : "166:30-166:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "166:22-166:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "166:3-166:45",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "165:1-166:45",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPosTwoStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "169:7-169:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.00000002"
+            },
+            "locator" : "169:3-169:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Multiply",
+            "operand" : [ {
+              "type" : "Negate",
+              "operand" : {
+                "type" : "Literal",
+                "locator" : "169:24-169:26",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "2.0"
+              },
+              "locator" : "169:22-169:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "169:36-169:39",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "10.0"
+              }, {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                    "type" : "Literal",
+                    "locator" : "169:44",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "8"
+                  },
+                  "locator" : "169:42-169:44",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              } ],
+              "locator" : "169:30-169:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            } ],
+            "locator" : "169:22-169:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "169:3-169:45",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "168:1-169:45",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNegTwoStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "172:3-172:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.0000001"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "172:25-172:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "10.0"
+            }, {
+              "type" : "ToDecimal",
+              "operand" : {
+                "type" : "Negate",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "172:33",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "7"
+                },
+                "locator" : "172:31-172:33",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            } ],
+            "locator" : "172:19-172:34",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "172:3-172:34",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "171:1-172:34",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalTenStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "175:3-175:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.0000001"
+          }, {
+            "type" : "Power",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "175:29-175:32",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "10.0"
+            }, {
+              "type" : "ToDecimal",
+              "operand" : {
+                "type" : "Negate",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "175:37",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "7"
+                },
+                "locator" : "175:35-175:37",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            } ],
+            "locator" : "175:21-175:38",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "175:3-175:38",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "174:1-175:38",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPosTenStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "178:7-178:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.0000001"
+            },
+            "locator" : "178:3-178:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Power",
+              "operand" : [ {
+                "type" : "Literal",
+                "locator" : "178:29-178:32",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "10.0"
+              }, {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                    "type" : "Literal",
+                    "locator" : "178:37",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "7"
+                  },
+                  "locator" : "178:35-178:37",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              } ],
+              "locator" : "178:23-178:38",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            },
+            "locator" : "178:21-178:38",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "178:3-178:38",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "177:1-178:38",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNegTenStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "181:3-181:13",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "value" : "0.000000001"
+        },
+        "locator" : "180:1-181:13",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalTenthStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "184:3-184:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "value" : "0.000000001"
+        },
+        "locator" : "183:1-184:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalPosTenthStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Negate",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "187:5-187:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "0.000000001"
+          },
+          "locator" : "187:3-187:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+        },
+        "locator" : "186:1-187:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalNegTenthStep",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "190:3-190:43",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "9999999999999999999999999999.99999999"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Multiply",
+              "operand" : [ {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "190:47-190:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10"
+                }
+              }, {
+                "type" : "Literal",
+                "locator" : "190:52-190:88",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1000000000000000000000000000.00000000"
+              } ],
+              "locator" : "190:47-190:88",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Literal",
+              "locator" : "190:92-190:101",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.00000001"
+            } ],
+            "locator" : "190:47-190:101",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "190:3-190:101",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "189:1-190:101",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "Decimal10Pow28ToZeroOneStepDecimalMaxValue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "193:3-193:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "9999999999999999999999999999.99999999"
+          }, {
+            "type" : "Subtract",
+            "operand" : [ {
+              "type" : "Multiply",
+              "operand" : [ {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Literal",
+                  "locator" : "193:49-193:52",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10"
+                }
+              }, {
+                "type" : "Literal",
+                "locator" : "193:56-193:92",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1000000000000000000000000000.00000000"
+              } ],
+              "locator" : "193:49-193:92",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Literal",
+              "locator" : "193:96-193:105",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.00000001"
+            } ],
+            "locator" : "193:49-193:105",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "193:3-193:105",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "192:1-193:105",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalPos10Pow28ToZeroOneStepDecimalMaxValue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "196:7-196:43",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "9999999999999999999999999999.99999999"
+            },
+            "locator" : "196:3-196:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          }, {
+            "type" : "Add",
+            "operand" : [ {
+              "type" : "Multiply",
+              "operand" : [ {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                    "type" : "Literal",
+                    "locator" : "196:51-196:52",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "10"
+                  },
+                  "locator" : "196:49-196:52",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              }, {
+                "type" : "Literal",
+                "locator" : "196:56-196:92",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                "value" : "1000000000000000000000000000.00000000"
+              } ],
+              "locator" : "196:49-196:92",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+            }, {
+              "type" : "Literal",
+              "locator" : "196:96-196:105",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+              "value" : "0.00000001"
+            } ],
+            "locator" : "196:49-196:105",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+          } ],
+          "locator" : "196:3-196:105",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "195:1-196:105",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DecimalNeg10Pow28ToZeroOneStepDecimalMinValue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "199:3-199:40",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "value" : "10000000000000000000000000000.00000000"
+        },
+        "locator" : "198:1-199:40",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "Decimal10Pow28",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "202:3-202:42",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+          "value" : "10000000000000000000000000000.00000000"
+        },
+        "locator" : "201:1-202:42",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalPos10Pow28",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Negate",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "205:5-205:42",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+            "value" : "10000000000000000000000000000.00000000"
+          },
+          "locator" : "205:3-205:42",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal"
+        },
+        "locator" : "204:1-205:42",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Decimal",
+        "name" : "DecimalNeg10Pow28",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    },
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableLocators,EnableResultTypes,EnableDetailedErrors"
+    } ]
+  }
+}

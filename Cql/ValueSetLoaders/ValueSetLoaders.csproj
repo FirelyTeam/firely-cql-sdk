@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Authors>NCQA</Authors>
+    <AssemblyName>Ncqa.Cql.ValueSetLoaders</AssemblyName>
+    <RootNamespace>Ncqa.Cql.ValueSetLoaders</RootNamespace>
+    <Description>Loads value set information from various sources for use in CqlRuntime.</Description>
+    <PackageId>Ncqa.Cql.ValueSetLoaders</PackageId>
+    <Product>Ncqa.Cql.ValueSetLoaders</Product>
+	<Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sylvan.Common" Version="0.3.0" />
+    <PackageReference Include="Sylvan.Data.Csv" Version="1.1.13" />
+	  <PackageReference Include="System.Text.Json" Version="7.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CqlRuntime\CqlRuntime.csproj" />
+    <ProjectReference Include="..\Fhir.R4\Fhir.R4.csproj" />
+    <ProjectReference Include="..\TerminologyClient\TerminologyClient.csproj" />
+  </ItemGroup>
+
+</Project>

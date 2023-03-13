@@ -1,0 +1,3433 @@
+{
+  "library" : {
+    "type" : "Library",
+    "identifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "CqlStringOperatorsTest",
+      "version" : "1.0.0"
+    },
+    "schemaIdentifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "type" : "Library$Usings",
+      "def" : [ {
+        "type" : "UsingDef",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "type" : "UsingDef",
+        "locator" : "3:1-3:26",
+        "localIdentifier" : "FHIR",
+        "uri" : "http://hl7.org/fhir",
+        "version" : "4.0.1"
+      } ]
+    },
+    "includes" : {
+      "type" : "Library$Includes",
+      "def" : [ {
+        "type" : "IncludeDef",
+        "locator" : "5:1-5:54",
+        "localIdentifier" : "FHIRHelpers",
+        "path" : "FHIRHelpers",
+        "version" : "4.0.1"
+      } ]
+    },
+    "contexts" : {
+      "type" : "Library$Contexts",
+      "def" : [ {
+        "type" : "ContextDef",
+        "locator" : "7:1-7:15",
+        "name" : "Patient"
+      } ]
+    },
+    "statements" : {
+      "type" : "Library$Statements",
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "SingletonFrom",
+          "operand" : {
+            "type" : "Retrieve",
+            "locator" : "7:1-7:15",
+            "dataType" : "{http://hl7.org/fhir}Patient",
+            "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient"
+          }
+        },
+        "locator" : "7:1-7:15",
+        "name" : "Patient",
+        "context" : "Patient"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Combine",
+            "source" : {
+              "type" : "As",
+              "asTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}String"
+                }
+              },
+              "operand" : {
+                "type" : "Null",
+                "locator" : "10:11-10:14",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              }
+            },
+            "locator" : "10:3-10:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "10:18-10:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "10:3-10:21",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "9:1-10:21",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CombineNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Combine",
+            "source" : {
+              "type" : "Query",
+              "source" : [ {
+                "type" : "AliasedQuerySource",
+                "expression" : {
+                  "type" : "List",
+                  "resultTypeSpecifier" : {
+                    "type" : "ListTypeSpecifier",
+                    "elementType" : {
+                      "type" : "NamedTypeSpecifier",
+                      "name" : "{urn:hl7-org:elm-types:r1}Any"
+                    }
+                  },
+                  "locator" : "13:11-13:13"
+                },
+                "alias" : "X"
+              } ],
+              "return" : {
+                "type" : "ReturnClause",
+                "expression" : {
+                  "type" : "As",
+                  "operand" : {
+                    "type" : "AliasRef",
+                    "name" : "X"
+                  },
+                  "asType" : "{urn:hl7-org:elm-types:r1}String"
+                },
+                "distinct" : false
+              }
+            },
+            "locator" : "13:3-13:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "13:17-13:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          } ],
+          "locator" : "13:3-13:18",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "12:1-13:18",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CombineEmptyList",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Combine",
+            "source" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "16:13-16:15",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "a"
+              }, {
+                "type" : "Literal",
+                "locator" : "16:18-16:20",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "b"
+              }, {
+                "type" : "Literal",
+                "locator" : "16:23-16:25",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "c"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}String"
+                }
+              },
+              "locator" : "16:11-16:27"
+            },
+            "locator" : "16:3-16:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "16:31-16:35",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "abc"
+          } ],
+          "locator" : "16:3-16:35",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "15:1-16:35",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CombineABC",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Combine",
+            "source" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "19:13-19:15",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "a"
+              }, {
+                "type" : "Literal",
+                "locator" : "19:18-19:20",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "b"
+              }, {
+                "type" : "Literal",
+                "locator" : "19:23-19:25",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                "value" : "c"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}String"
+                }
+              },
+              "locator" : "19:11-19:27"
+            },
+            "separator" : {
+              "type" : "Literal",
+              "locator" : "19:30-19:32",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "-"
+            },
+            "locator" : "19:3-19:33",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "19:36-19:42",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a-b-c"
+          } ],
+          "locator" : "19:3-19:42",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "18:1-19:42",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "CombineABCSepDash",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Concatenate",
+            "operand" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "22:15-22:18",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "22:21-22:24",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            } ],
+            "locator" : "22:3-22:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "22:28-22:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "22:3-22:31",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "21:1-22:31",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ConcatenateNullNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Concatenate",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "25:15-25:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "25:20-25:23",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            } ],
+            "locator" : "25:3-25:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "25:27-25:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "25:3-25:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "24:1-25:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ConcatenateANull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Concatenate",
+            "operand" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "28:15-28:18",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "Literal",
+              "locator" : "28:21-28:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "b"
+            } ],
+            "locator" : "28:3-28:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "28:27-28:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "28:3-28:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "27:1-28:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ConcatenateNullB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Concatenate",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "31:15-31:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            }, {
+              "type" : "Literal",
+              "locator" : "31:20-31:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "b"
+            } ],
+            "locator" : "31:3-31:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "31:26-31:29",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ab"
+          } ],
+          "locator" : "31:3-31:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "30:1-31:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ConcatenateAB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Concatenate",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "34:3-34:5",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            }, {
+              "type" : "Literal",
+              "locator" : "34:9-34:11",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "b"
+            } ],
+            "locator" : "34:3-34:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "34:15-34:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ab"
+          } ],
+          "locator" : "34:3-34:18",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "33:1-34:18",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ConcatenateABWithAdd",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "EndsWith",
+            "operand" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "37:12-37:15",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "37:18-37:21",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            } ],
+            "locator" : "37:3-37:22",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "37:25-37:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "37:3-37:28",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "36:1-37:28",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "EndsWithNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "EndsWith",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "40:12-40:39",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Chris Schuler is the man!!"
+            }, {
+              "type" : "Literal",
+              "locator" : "40:42-40:46",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "n!!"
+            } ],
+            "locator" : "40:3-40:47",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "40:50-40:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          } ],
+          "locator" : "40:3-40:53",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "39:1-40:53",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "EndsWithTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "EndsWith",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "43:12-43:39",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Chris Schuler is the man!!"
+            }, {
+              "type" : "Literal",
+              "locator" : "43:42-43:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "n!"
+            } ],
+            "locator" : "43:3-43:46",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "43:49-43:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false"
+          } ],
+          "locator" : "43:3-43:53",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "42:1-43:53",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "EndsWithFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Indexer",
+            "operand" : [ {
+              "type" : "As",
+              "asTypeSpecifier" : {
+                "type" : "NamedTypeSpecifier",
+                "locator" : "46:19-46:24",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "operand" : {
+                "type" : "Null",
+                "locator" : "46:11-46:14",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "locator" : "46:11-46:24",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "strict" : false
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "46:27-46:30",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+            } ],
+            "locator" : "46:3-46:31",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "46:34-46:37",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "46:3-46:37",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "45:1-46:37",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IndexerNullNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Indexer",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "49:11-49:13",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "49:16-49:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+            } ],
+            "locator" : "49:3-49:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "49:23-49:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "49:3-49:26",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "48:1-49:26",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IndexerANull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Indexer",
+            "operand" : [ {
+              "type" : "As",
+              "asTypeSpecifier" : {
+                "type" : "NamedTypeSpecifier",
+                "locator" : "52:19-52:24",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "operand" : {
+                "type" : "Null",
+                "locator" : "52:11-52:14",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "locator" : "52:11-52:24",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "strict" : false
+            }, {
+              "type" : "Literal",
+              "locator" : "52:27",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            } ],
+            "locator" : "52:3-52:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "52:31-52:34",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "52:3-52:34",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "51:1-52:34",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IndexerNull1String",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Indexer",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "55:11-55:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            }, {
+              "type" : "Literal",
+              "locator" : "55:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            } ],
+            "locator" : "55:3-55:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "55:21-55:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a"
+          } ],
+          "locator" : "55:3-55:23",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "54:1-55:23",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IndexerAB0",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Indexer",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "58:11-58:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            }, {
+              "type" : "Literal",
+              "locator" : "58:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            } ],
+            "locator" : "58:3-58:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "58:21-58:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "b"
+          } ],
+          "locator" : "58:3-58:23",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "57:1-58:23",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IndexerAB1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Indexer",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "61:11-61:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            }, {
+              "type" : "Literal",
+              "locator" : "61:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            } ],
+            "locator" : "61:3-61:18",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "61:21-61:24",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "61:3-61:24",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "60:1-61:24",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IndexerAB2",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Indexer",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "64:11-64:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            }, {
+              "type" : "Negate",
+              "operand" : {
+                "type" : "Literal",
+                "locator" : "64:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "locator" : "64:17-64:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            } ],
+            "locator" : "64:3-64:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "64:23-64:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "64:3-64:26",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "63:1-64:26",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IndexerABNeg1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "LastPositionOf",
+            "pattern" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "67:18-67:21",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "string" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "67:24-67:27",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "locator" : "67:3-67:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "67:31-67:34",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "67:3-67:34",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "66:1-67:34",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LastPositionOfNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "LastPositionOf",
+            "pattern" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "70:18-70:21",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "string" : {
+              "type" : "Literal",
+              "locator" : "70:24-70:27",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "hi"
+            },
+            "locator" : "70:3-70:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "70:31-70:34",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "70:3-70:34",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "69:1-70:34",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LastPositionOfNull1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "LastPositionOf",
+            "pattern" : {
+              "type" : "Literal",
+              "locator" : "73:18-73:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "hi"
+            },
+            "string" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "73:24-73:27",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "locator" : "73:3-73:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "73:31-73:34",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "73:3-73:34",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "72:1-73:34",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LastPositionOfNull2",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "LastPositionOf",
+            "pattern" : {
+              "type" : "Literal",
+              "locator" : "76:18-76:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "hi"
+            },
+            "string" : {
+              "type" : "Literal",
+              "locator" : "76:24-76:49",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Ohio is the place to be!"
+            },
+            "locator" : "76:3-76:50",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "76:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          } ],
+          "locator" : "76:3-76:53",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "75:1-76:53",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LastPositionOf1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "LastPositionOf",
+            "pattern" : {
+              "type" : "Literal",
+              "locator" : "79:18-79:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "hi"
+            },
+            "string" : {
+              "type" : "Literal",
+              "locator" : "79:24-79:40",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Say hi to Ohio!"
+            },
+            "locator" : "79:3-79:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "79:44-79:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "11"
+          } ],
+          "locator" : "79:3-79:45",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "78:1-79:45",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LastPositionOf2",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Length",
+            "operand" : {
+              "type" : "As",
+              "asTypeSpecifier" : {
+                "type" : "NamedTypeSpecifier",
+                "locator" : "82:18-82:23",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "operand" : {
+                "type" : "Null",
+                "locator" : "82:10-82:13",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "locator" : "82:10-82:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "strict" : false
+            },
+            "locator" : "82:3-82:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "82:27",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          } ],
+          "locator" : "82:3-82:27",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "81:1-82:27",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LengthNullString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Length",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "85:10-85:11",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            },
+            "locator" : "85:3-85:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "85:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          } ],
+          "locator" : "85:3-85:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "84:1-85:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LengthEmptyString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Length",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "88:10-88:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            },
+            "locator" : "88:3-88:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "88:16",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          } ],
+          "locator" : "88:3-88:16",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "87:1-88:16",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LengthA",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Length",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "91:10-91:13",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "locator" : "91:3-91:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "91:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2"
+          } ],
+          "locator" : "91:3-91:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "90:1-91:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LengthAB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Lower",
+            "operand" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "94:9-94:12",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "locator" : "94:3-94:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "94:16-94:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "94:3-94:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "93:1-94:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LowerNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Lower",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "97:9-97:10",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            },
+            "locator" : "97:3-97:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "97:14-97:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          } ],
+          "locator" : "97:3-97:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "96:1-97:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LowerEmpty",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Lower",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "100:9-100:11",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "A"
+            },
+            "locator" : "100:3-100:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "100:15-100:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a"
+          } ],
+          "locator" : "100:3-100:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "99:1-100:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LowerA",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Lower",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "103:9-103:11",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "b"
+            },
+            "locator" : "103:3-103:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "103:15-103:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "b"
+          } ],
+          "locator" : "103:3-103:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "102:1-103:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LowerB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Lower",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "106:9-106:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Ab"
+            },
+            "locator" : "106:3-106:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "106:16-106:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ab"
+          } ],
+          "locator" : "106:3-106:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "105:1-106:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "LowerAB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "109:11-109:39",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "109:42-109:45",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            } ],
+            "locator" : "109:3-109:46",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "109:49-109:52",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "109:3-109:52",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "108:1-109:52",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "112:11-112:39",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost"
+            }, {
+              "type" : "Literal",
+              "locator" : "112:42-112:49",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ".*\\d+"
+            } ],
+            "locator" : "112:3-112:50",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "112:53-112:57",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false"
+          } ],
+          "locator" : "112:3-112:57",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "111:1-112:57",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesNumberFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "115:11-115:52",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost - circa 2017"
+            }, {
+              "type" : "Literal",
+              "locator" : "115:55-115:62",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ".*\\d+"
+            } ],
+            "locator" : "115:3-115:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "115:66-115:69",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          } ],
+          "locator" : "115:3-115:69",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "114:1-115:69",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesNumberTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "118:11-118:39",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost"
+            }, {
+              "type" : "Literal",
+              "locator" : "118:42-118:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ".*"
+            } ],
+            "locator" : "118:3-118:46",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "118:49-118:52",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          } ],
+          "locator" : "118:3-118:52",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "117:1-118:52",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesAllTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "121:11-121:39",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost"
+            }, {
+              "type" : "Literal",
+              "locator" : "121:42-121:53",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "[\\w|\\s]+"
+            } ],
+            "locator" : "121:3-121:54",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "121:57-121:60",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          } ],
+          "locator" : "121:3-121:60",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "120:1-121:60",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesWordsAndSpacesTrue",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "124:11-124:52",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost - circa 2017"
+            }, {
+              "type" : "Literal",
+              "locator" : "124:55-124:62",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "[\\w]+"
+            } ],
+            "locator" : "124:3-124:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "124:66-124:70",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false"
+          } ],
+          "locator" : "124:3-124:70",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "123:1-124:70",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesWordsAndSpacesFalse",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "127:11-127:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "   "
+            }, {
+              "type" : "Literal",
+              "locator" : "127:18-127:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "\\W+"
+            } ],
+            "locator" : "127:3-127:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "127:27-127:30",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          } ],
+          "locator" : "127:3-127:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "126:1-127:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesNotWords",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Matches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "130:11-130:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : " \n\t"
+            }, {
+              "type" : "Literal",
+              "locator" : "130:20-130:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "\\s+"
+            } ],
+            "locator" : "130:3-130:26",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "130:29-130:32",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          } ],
+          "locator" : "130:3-130:32",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "129:1-130:32",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "MatchesWhiteSpace",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "PositionOf",
+            "pattern" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "133:14-133:17",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "string" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "133:20-133:23",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "locator" : "133:3-133:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "133:27-133:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "133:3-133:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "132:1-133:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PositionOfNullNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "PositionOf",
+            "pattern" : {
+              "type" : "Literal",
+              "locator" : "136:14-136:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            },
+            "string" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "136:19-136:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "locator" : "136:3-136:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "136:26-136:29",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "136:3-136:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "135:1-136:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PositionOfANull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "PositionOf",
+            "pattern" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "139:14-139:17",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "string" : {
+              "type" : "Literal",
+              "locator" : "139:20-139:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            },
+            "locator" : "139:3-139:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "139:26-139:29",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "139:3-139:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "138:1-139:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PositionOfNullA",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "PositionOf",
+            "pattern" : {
+              "type" : "Literal",
+              "locator" : "142:14-142:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            },
+            "string" : {
+              "type" : "Literal",
+              "locator" : "142:19-142:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "locator" : "142:3-142:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "142:26",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          } ],
+          "locator" : "142:3-142:26",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "141:1-142:26",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PositionOfAInAB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "PositionOf",
+            "pattern" : {
+              "type" : "Literal",
+              "locator" : "145:14-145:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "b"
+            },
+            "string" : {
+              "type" : "Literal",
+              "locator" : "145:19-145:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "locator" : "145:3-145:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "145:26",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          } ],
+          "locator" : "145:3-145:26",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "144:1-145:26",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PositionOfBInAB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "PositionOf",
+            "pattern" : {
+              "type" : "Literal",
+              "locator" : "148:14-148:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "c"
+            },
+            "string" : {
+              "type" : "Literal",
+              "locator" : "148:19-148:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "locator" : "148:3-148:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Negate",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "148:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "148:26-148:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "locator" : "148:3-148:28",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "147:1-148:28",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "PositionOfCInAB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ReplaceMatches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "151:18-151:46",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "151:49-151:52",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "Literal",
+              "locator" : "151:55-151:67",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "But I am..."
+            } ],
+            "locator" : "151:3-151:68",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "151:71-151:74",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "151:3-151:74",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "150:1-151:74",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ReplaceMatchesNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ReplaceMatches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "154:18-154:46",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost"
+            }, {
+              "type" : "Literal",
+              "locator" : "154:49-154:77",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Not all who wander are lost"
+            }, {
+              "type" : "Literal",
+              "locator" : "154:80-154:106",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "But still waters run deep"
+            } ],
+            "locator" : "154:3-154:107",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "154:110-154:136",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "But still waters run deep"
+          } ],
+          "locator" : "154:3-154:136",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "153:1-154:136",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ReplaceMatchesAll",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ReplaceMatches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "157:18-157:62",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Who put the bop in the bop she bop she bop?"
+            }, {
+              "type" : "Literal",
+              "locator" : "157:65-157:69",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "bop"
+            }, {
+              "type" : "Literal",
+              "locator" : "157:72-157:77",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "bang"
+            } ],
+            "locator" : "157:3-157:78",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "157:81-157:129",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "Who put the bang in the bang she bang she bang?"
+          } ],
+          "locator" : "157:3-157:129",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "156:1-157:129",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ReplaceMatchesMany",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ReplaceMatches",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "160:18-160:48",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "All that glitters is not gold"
+            }, {
+              "type" : "Literal",
+              "locator" : "160:51-160:55",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "\\s"
+            }, {
+              "type" : "Literal",
+              "locator" : "160:58-160:60",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "$"
+            } ],
+            "locator" : "160:3-160:61",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "160:64-160:94",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "All$that$glitters$is$not$gold"
+          } ],
+          "locator" : "160:3-160:94",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "159:1-160:94",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "ReplaceMatchesSpaces",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Split",
+            "stringToSplit" : {
+              "type" : "As",
+              "asTypeSpecifier" : {
+                "type" : "NamedTypeSpecifier",
+                "locator" : "163:17-163:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "operand" : {
+                "type" : "Null",
+                "locator" : "163:9-163:12",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "locator" : "163:9-163:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "strict" : false
+            },
+            "separator" : {
+              "type" : "As",
+              "asTypeSpecifier" : {
+                "type" : "NamedTypeSpecifier",
+                "locator" : "163:33-163:38",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "operand" : {
+                "type" : "Null",
+                "locator" : "163:25-163:28",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "locator" : "163:25-163:38",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "strict" : false
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "163:3-163:39"
+          }, {
+            "type" : "As",
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "locator" : "163:55-163:60",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              },
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}String"
+                }
+              },
+              "locator" : "163:50-163:61"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "operand" : {
+              "type" : "Null",
+              "locator" : "163:42-163:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "locator" : "163:42-163:61",
+            "strict" : false
+          } ],
+          "locator" : "163:3-163:61",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "162:1-163:61",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SplitNullNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Split",
+            "stringToSplit" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "166:9-166:12",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "separator" : {
+              "type" : "Literal",
+              "locator" : "166:15-166:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ","
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "166:3-166:18"
+          }, {
+            "type" : "As",
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "operand" : {
+              "type" : "Null",
+              "locator" : "166:21-166:24",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          } ],
+          "locator" : "166:3-166:24",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "165:1-166:24",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SplitNullComma",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Split",
+            "stringToSplit" : {
+              "type" : "Literal",
+              "locator" : "169:9-169:13",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a,b"
+            },
+            "separator" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "169:16-169:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "169:3-169:20"
+          }, {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "169:25-169:29",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a,b"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "169:23-169:31"
+          } ],
+          "locator" : "169:3-169:31",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "168:1-169:31",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SplitABNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Split",
+            "stringToSplit" : {
+              "type" : "Literal",
+              "locator" : "172:9-172:13",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a,b"
+            },
+            "separator" : {
+              "type" : "Literal",
+              "locator" : "172:16-172:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "-"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "172:3-172:19"
+          }, {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "172:24-172:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a,b"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "172:22-172:30"
+          } ],
+          "locator" : "172:3-172:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "171:1-172:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SplitABDash",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Split",
+            "stringToSplit" : {
+              "type" : "Literal",
+              "locator" : "175:9-175:13",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a,b"
+            },
+            "separator" : {
+              "type" : "Literal",
+              "locator" : "175:16-175:18",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ","
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "175:3-175:19"
+          }, {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "175:24-175:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            }, {
+              "type" : "Literal",
+              "locator" : "175:29-175:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "b"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "175:22-175:33"
+          } ],
+          "locator" : "175:3-175:33",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "174:1-175:33",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SplitABComma",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "StartsWith",
+            "operand" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "178:14-178:17",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "178:20-178:23",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            } ],
+            "locator" : "178:3-178:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "178:27-178:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "178:3-178:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "177:1-178:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StartsWithNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "StartsWith",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "181:14-181:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "hi"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "181:20-181:23",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            } ],
+            "locator" : "181:3-181:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "181:27-181:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "181:3-181:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "180:1-181:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StartsWithNull1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "StartsWith",
+            "operand" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "184:14-184:17",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "Literal",
+              "locator" : "184:20-184:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "hi"
+            } ],
+            "locator" : "184:3-184:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "184:27-184:30",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          } ],
+          "locator" : "184:3-184:30",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "183:1-184:30",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StartsWithNull2",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "StartsWith",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "187:14-187:47",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Breathe deep the gathering gloom"
+            }, {
+              "type" : "Literal",
+              "locator" : "187:50-187:54",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Bre"
+            } ],
+            "locator" : "187:3-187:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "187:58-187:61",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          } ],
+          "locator" : "187:3-187:61",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "186:1-187:61",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StartsWithTrue1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "StartsWith",
+            "operand" : [ {
+              "type" : "Literal",
+              "locator" : "190:14-190:47",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "Breathe deep the gathering gloom"
+            }, {
+              "type" : "Literal",
+              "locator" : "190:50-190:54",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "bre"
+            } ],
+            "locator" : "190:3-190:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          }, {
+            "type" : "Literal",
+            "locator" : "190:58-190:62",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false"
+          } ],
+          "locator" : "190:3-190:62",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "189:1-190:62",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "StartsWithFalse1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "193:13-193:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "startIndex" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "193:19-193:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "locator" : "193:3-193:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "193:26-193:29",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "193:3-193:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "192:1-193:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringNullNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "196:13-196:15",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            },
+            "startIndex" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "196:18-196:21",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "locator" : "196:3-196:22",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "196:25-196:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "196:3-196:28",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "195:1-196:28",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringANull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "199:13-199:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "startIndex" : {
+              "type" : "Literal",
+              "locator" : "199:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "199:3-199:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "199:23-199:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "199:3-199:26",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "198:1-199:26",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringNull1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "202:13-202:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "startIndex" : {
+              "type" : "Literal",
+              "locator" : "202:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "202:3-202:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "202:23-202:26",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ab"
+          } ],
+          "locator" : "202:3-202:26",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "201:1-202:26",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringAB0",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "205:13-205:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "startIndex" : {
+              "type" : "Literal",
+              "locator" : "205:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "205:3-205:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "205:23-205:25",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "b"
+          } ],
+          "locator" : "205:3-205:25",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "204:1-205:25",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringAB1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "208:13-208:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "startIndex" : {
+              "type" : "Literal",
+              "locator" : "208:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            },
+            "locator" : "208:3-208:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "208:23-208:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "208:3-208:26",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "207:1-208:26",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringAB2",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "211:13-211:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "startIndex" : {
+              "type" : "Negate",
+              "operand" : {
+                "type" : "Literal",
+                "locator" : "211:21",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "locator" : "211:19-211:21",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "locator" : "211:3-211:22",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "211:25-211:28",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "211:3-211:28",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "210:1-211:28",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringABNeg1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "214:13-214:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "startIndex" : {
+              "type" : "Literal",
+              "locator" : "214:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "length" : {
+              "type" : "Literal",
+              "locator" : "214:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "214:3-214:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "214:26-214:28",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a"
+          } ],
+          "locator" : "214:3-214:28",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "213:1-214:28",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringAB0To1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "217:13-217:17",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "abc"
+            },
+            "startIndex" : {
+              "type" : "Literal",
+              "locator" : "217:20",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "length" : {
+              "type" : "Literal",
+              "locator" : "217:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "217:3-217:24",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "217:27-217:29",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "b"
+          } ],
+          "locator" : "217:3-217:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "216:1-217:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringABC1To1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Substring",
+            "stringToSub" : {
+              "type" : "Literal",
+              "locator" : "220:13-220:16",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "ab"
+            },
+            "startIndex" : {
+              "type" : "Literal",
+              "locator" : "220:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "length" : {
+              "type" : "Literal",
+              "locator" : "220:22",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "3"
+            },
+            "locator" : "220:3-220:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "220:26-220:29",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "ab"
+          } ],
+          "locator" : "220:3-220:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "219:1-220:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "SubstringAB0To3",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Upper",
+            "operand" : {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "223:9-223:12",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            },
+            "locator" : "223:3-223:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "223:16-223:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "223:3-223:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "222:1-223:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "UpperNull",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Upper",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "226:9-226:10",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : ""
+            },
+            "locator" : "226:3-226:11",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "226:14-226:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          } ],
+          "locator" : "226:3-226:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "225:1-226:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "UpperEmpty",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Upper",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "229:9-229:11",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            },
+            "locator" : "229:3-229:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "229:15-229:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "A"
+          } ],
+          "locator" : "229:3-229:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "228:1-229:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "UpperA",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Upper",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "232:9-232:11",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "B"
+            },
+            "locator" : "232:3-232:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "232:15-232:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "B"
+          } ],
+          "locator" : "232:3-232:17",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "231:1-232:17",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "UpperB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "Upper",
+            "operand" : {
+              "type" : "Literal",
+              "locator" : "235:9-235:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "aB"
+            },
+            "locator" : "235:3-235:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "235:16-235:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "AB"
+          } ],
+          "locator" : "235:3-235:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "234:1-235:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "UpperAB",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ToString",
+            "operand" : {
+              "type" : "Quantity",
+              "locator" : "238:12-238:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+              "value" : 125,
+              "unit" : "cm"
+            },
+            "locator" : "238:3-238:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "238:23-238:29",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "125cm"
+          } ],
+          "locator" : "238:3-238:29",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "237:1-238:29",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "QuantityToString",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ToString",
+            "operand" : {
+              "type" : "DateTime",
+              "year" : {
+                "type" : "Literal",
+                "locator" : "241:21-241:24",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2000"
+              },
+              "month" : {
+                "type" : "Literal",
+                "locator" : "241:27",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "day" : {
+                "type" : "Literal",
+                "locator" : "241:30",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "locator" : "241:12-241:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+            },
+            "locator" : "241:3-241:32",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "241:35-241:46",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "2000-01-01"
+          } ],
+          "locator" : "241:3-241:46",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "240:1-241:46",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeToString1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ToString",
+            "operand" : {
+              "type" : "DateTime",
+              "year" : {
+                "type" : "Literal",
+                "locator" : "244:21-244:24",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2000"
+              },
+              "month" : {
+                "type" : "Literal",
+                "locator" : "244:27",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "day" : {
+                "type" : "Literal",
+                "locator" : "244:30",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "hour" : {
+                "type" : "Literal",
+                "locator" : "244:33-244:34",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "15"
+              },
+              "minute" : {
+                "type" : "Literal",
+                "locator" : "244:37-244:38",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "25"
+              },
+              "second" : {
+                "type" : "Literal",
+                "locator" : "244:41-244:42",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "25"
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "locator" : "244:45-244:47",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "300"
+              },
+              "locator" : "244:12-244:48",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+            },
+            "locator" : "244:3-244:49",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "244:52-244:76",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "2000-01-01T15:25:25.300"
+          } ],
+          "locator" : "244:3-244:76",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "243:1-244:76",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeToString2",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ToString",
+            "operand" : {
+              "type" : "DateTime",
+              "year" : {
+                "type" : "Literal",
+                "locator" : "247:21-247:24",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2000"
+              },
+              "month" : {
+                "type" : "Literal",
+                "locator" : "247:27",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "day" : {
+                "type" : "Literal",
+                "locator" : "247:30",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "hour" : {
+                "type" : "Literal",
+                "locator" : "247:33",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "8"
+              },
+              "minute" : {
+                "type" : "Literal",
+                "locator" : "247:36-247:37",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "25"
+              },
+              "second" : {
+                "type" : "Literal",
+                "locator" : "247:40-247:41",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "25"
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "locator" : "247:44-247:46",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "300"
+              },
+              "timezoneOffset" : {
+                "type" : "ToDecimal",
+                "operand" : {
+                  "type" : "Negate",
+                  "operand" : {
+                    "type" : "Literal",
+                    "locator" : "247:51",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "value" : "7"
+                  },
+                  "locator" : "247:49-247:51",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "247:12-247:52",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+            },
+            "locator" : "247:3-247:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "247:56-247:80",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "2000-01-01T08:25:25.300"
+          } ],
+          "locator" : "247:3-247:80",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "246:1-247:80",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "DateTimeToString3",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Equal",
+          "operand" : [ {
+            "type" : "ToString",
+            "operand" : {
+              "type" : "Time",
+              "hour" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "9"
+              },
+              "minute" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "30"
+              },
+              "second" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3"
+              },
+              "locator" : "250:12-250:25",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+            },
+            "locator" : "250:3-250:26",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "250:29-250:42",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "09:30:01.003"
+          } ],
+          "locator" : "250:3-250:42",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "249:1-250:42",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "TimeToString1",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    },
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableLocators,EnableResultTypes,EnableDetailedErrors"
+    } ]
+  }
+}

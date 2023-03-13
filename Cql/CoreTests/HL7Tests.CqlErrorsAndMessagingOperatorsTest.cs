@@ -1,0 +1,55 @@
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Ncqa.Cql.Runtime;
+using Ncqa.Fhir.R4.Model;
+using System;
+
+namespace CoreTests
+{
+    public partial class HL7Tests
+    {
+
+        /// <summaray>
+		///define "TestMessageInfo":
+		///	( Message(1, true, '100', 'Message', 'Test Message') ) = 1
+		/// </summary>
+        [TestCategory("CqlErrorsAndMessagingOperatorsTest")]
+        [TestMethod]
+        public void TestMessageInfo_Test()
+        {
+            var lambda = LambdasByTestName["CqlErrorsAndMessagingOperatorsTest", "TestMessageInfo"];
+            var function = (Func<RuntimeContext, bool?>)lambda.Compile();
+            bool? result = function(RuntimeContext);
+            Assert.AreEqual(true, result);
+        }
+                                        
+        /// <summaray>
+		///define "TestMessageWarn":
+		///	( Message(2, true, '200', 'Warning', 'You have been warned!') ) = 2
+		/// </summary>
+        [TestCategory("CqlErrorsAndMessagingOperatorsTest")]
+        [TestMethod]
+        public void TestMessageWarn_Test()
+        {
+            var lambda = LambdasByTestName["CqlErrorsAndMessagingOperatorsTest", "TestMessageWarn"];
+            var function = (Func<RuntimeContext, bool?>)lambda.Compile();
+            bool? result = function(RuntimeContext);
+            Assert.AreEqual(true, result);
+        }
+                                        
+        /// <summaray>
+		///define "TestMessageTrace":
+		///	( Message({3, 4, 5}, true, '300', 'Trace', 'This is a trace') ) = {3, 4, 5}
+		/// </summary>
+        [TestCategory("CqlErrorsAndMessagingOperatorsTest")]
+        [TestMethod]
+        public void TestMessageTrace_Test()
+        {
+            var lambda = LambdasByTestName["CqlErrorsAndMessagingOperatorsTest", "TestMessageTrace"];
+            var function = (Func<RuntimeContext, bool?>)lambda.Compile();
+            bool? result = function(RuntimeContext);
+            Assert.AreEqual(true, result);
+        }
+                                        
+    }
+}
+                

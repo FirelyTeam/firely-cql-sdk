@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Ncqa.Fhir.R4</AssemblyName>
+		<RootNamespace>Ncqa.Fhir.R4</RootNamespace>
+		<Nullable>disable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Authors>NCQA</Authors>
+		<Version>4.0.1</Version>
+		<Description>Contains a generated model for HL7 FHIR v4.0.1 and helpers to deserialize JSON.</Description>
+		<Product>FHIR 4.0.1 models</Product>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Text.Json" Version="7.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Fhir\Fhir.csproj" />
+	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Serialization\" />
+	</ItemGroup>
+</Project>

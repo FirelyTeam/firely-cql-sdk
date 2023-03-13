@@ -1,0 +1,936 @@
+{
+  "library" : {
+    "type" : "Library",
+    "identifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "QueriesTest",
+      "version" : "1.0.0"
+    },
+    "schemaIdentifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "type" : "Library$Usings",
+      "def" : [ {
+        "type" : "UsingDef",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "type" : "UsingDef",
+        "locator" : "3:1-3:26",
+        "localIdentifier" : "FHIR",
+        "uri" : "http://hl7.org/fhir",
+        "version" : "4.0.1"
+      } ]
+    },
+    "includes" : {
+      "type" : "Library$Includes",
+      "def" : [ {
+        "type" : "IncludeDef",
+        "locator" : "5:1-5:54",
+        "localIdentifier" : "FHIRHelpers",
+        "path" : "FHIRHelpers",
+        "version" : "4.0.1"
+      } ]
+    },
+    "codeSystems" : {
+      "type" : "Library$CodeSystems",
+      "def" : [ {
+        "type" : "CodeSystemDef",
+        "locator" : "9:1-9:73",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+        "name" : "Test",
+        "id" : "https://www.ncqa.org/fhir/codesystem/test-cs",
+        "accessLevel" : "Private"
+      } ]
+    },
+    "valueSets" : {
+      "type" : "Library$ValueSets",
+      "def" : [ {
+        "type" : "ValueSetDef",
+        "locator" : "7:1-7:78",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+        "name" : "Example Expansion",
+        "id" : "http://hl7.org/fhir/ValueSet/example-expansion",
+        "accessLevel" : "Public"
+      } ]
+    },
+    "codes" : {
+      "type" : "Library$Codes",
+      "def" : [ {
+        "type" : "CodeDef",
+        "codeSystem" : {
+          "type" : "CodeSystemRef",
+          "locator" : "10:33-10:38",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+          "name" : "Test"
+        },
+        "locator" : "10:1-10:38",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+        "name" : "Code 1",
+        "id" : "1",
+        "accessLevel" : "Private"
+      }, {
+        "type" : "CodeDef",
+        "codeSystem" : {
+          "type" : "CodeSystemRef",
+          "locator" : "11:33-11:38",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+          "name" : "Test"
+        },
+        "locator" : "11:1-11:38",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+        "name" : "Code 2",
+        "id" : "2",
+        "accessLevel" : "Private"
+      }, {
+        "type" : "CodeDef",
+        "codeSystem" : {
+          "type" : "CodeSystemRef",
+          "locator" : "12:33-12:38",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+          "name" : "Test"
+        },
+        "locator" : "12:1-12:38",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+        "name" : "Code 3",
+        "id" : "3",
+        "accessLevel" : "Private"
+      } ]
+    },
+    "statements" : {
+      "type" : "Library$Statements",
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "List",
+          "element" : [ {
+            "type" : "CodeRef",
+            "locator" : "14:24-14:31",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Code 1"
+          }, {
+            "type" : "CodeRef",
+            "locator" : "14:34-14:41",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Code 2"
+          }, {
+            "type" : "CodeRef",
+            "locator" : "14:44-14:51",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Code 3"
+          } ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}Code"
+            }
+          },
+          "locator" : "14:22-14:53"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}Code"
+          }
+        },
+        "locator" : "14:1-14:53",
+        "name" : "Test Codes",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Retrieve",
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "17:27-17:39",
+          "dataType" : "{http://hl7.org/fhir}Observation",
+          "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "17:1-17:39",
+        "name" : "Simple retrieve",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Retrieve",
+          "codes" : {
+            "type" : "ValueSetRef",
+            "locator" : "19:49-19:67",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Example Expansion",
+            "preserve" : true
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "19:34-19:68",
+          "dataType" : "{http://hl7.org/fhir}Observation",
+          "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+          "codeProperty" : "code",
+          "codeComparator" : "in"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "19:1-19:68",
+        "name" : "Retrieve with ValueSet",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "ExpressionRef",
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{http://hl7.org/fhir}Observation"
+                }
+              },
+              "locator" : "21:37-21:53",
+              "name" : "Simple retrieve"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{http://hl7.org/fhir}Observation"
+              }
+            },
+            "locator" : "21:37-21:55",
+            "alias" : "r"
+          } ],
+          "relationship" : [ ],
+          "return" : {
+            "type" : "ReturnClause",
+            "expression" : {
+              "type" : "AliasRef",
+              "locator" : "22:9",
+              "resultTypeName" : "{http://hl7.org/fhir}Observation",
+              "name" : "r"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{http://hl7.org/fhir}Observation"
+              }
+            },
+            "locator" : "22:2-22:9"
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "21:37-22:9"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "21:1-22:9",
+        "name" : "Query source using define",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Retrieve",
+          "codes" : {
+            "type" : "ToList",
+            "operand" : {
+              "type" : "ExpressionRef",
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code"
+                }
+              },
+              "locator" : "24:54-24:65",
+              "name" : "Test Codes"
+            }
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "24:39-24:66",
+          "dataType" : "{http://hl7.org/fhir}Observation",
+          "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+          "codeProperty" : "code",
+          "codeComparator" : "in"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "24:1-24:66",
+        "name" : "Retrieve with list of codes",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Retrieve",
+          "codes" : {
+            "type" : "ToList",
+            "operand" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "CodeRef",
+                "locator" : "26:63-26:70",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                "name" : "Code 1"
+              }, {
+                "type" : "CodeRef",
+                "locator" : "26:73-26:80",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                "name" : "Code 2"
+              }, {
+                "type" : "CodeRef",
+                "locator" : "26:83-26:90",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                "name" : "Code 3"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code"
+                }
+              },
+              "locator" : "26:61-26:92"
+            }
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "26:46-26:93",
+          "dataType" : "{http://hl7.org/fhir}Observation",
+          "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+          "codeProperty" : "code",
+          "codeComparator" : "in"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "26:1-26:93",
+        "name" : "Retrieve with inline list of codes",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Retrieve",
+          "codes" : {
+            "type" : "ValueSetRef",
+            "locator" : "28:71-28:89",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Example Expansion",
+            "preserve" : true
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "28:48-28:90",
+          "dataType" : "{http://hl7.org/fhir}Observation",
+          "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+          "codeProperty" : "code",
+          "codeComparator" : "in"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "28:1-28:90",
+        "name" : "Retrieve with ValueSet and code path",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Retrieve",
+          "codes" : {
+            "type" : "ToList",
+            "operand" : {
+              "type" : "ExpressionRef",
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code"
+                }
+              },
+              "locator" : "30:76-30:87",
+              "name" : "Test Codes"
+            }
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "30:53-30:88",
+          "dataType" : "{http://hl7.org/fhir}Observation",
+          "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+          "codeProperty" : "code",
+          "codeComparator" : "in"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "30:1-30:88",
+        "name" : "Retrieve with list of codes and code path",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Retrieve",
+          "codes" : {
+            "type" : "ToList",
+            "operand" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "CodeRef",
+                "locator" : "32:85-32:92",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                "name" : "Code 1"
+              }, {
+                "type" : "CodeRef",
+                "locator" : "32:95-32:102",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                "name" : "Code 2"
+              }, {
+                "type" : "CodeRef",
+                "locator" : "32:105-32:112",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                "name" : "Code 3"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Code"
+                }
+              },
+              "locator" : "32:83-32:114"
+            }
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{http://hl7.org/fhir}Observation"
+            }
+          },
+          "locator" : "32:60-32:115",
+          "dataType" : "{http://hl7.org/fhir}Observation",
+          "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+          "codeProperty" : "code",
+          "codeComparator" : "in"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{http://hl7.org/fhir}Observation"
+          }
+        },
+        "locator" : "32:1-32:115",
+        "name" : "Retrieve with inline list of codes and code path",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Null",
+          "locator" : "34:16-34:19",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "34:1-34:19",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "Null",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "ExpressionRef",
+              "locator" : "36:43-36:48",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "name" : "Null"
+            },
+            "locator" : "36:43-36:50",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+            "alias" : "o"
+          } ],
+          "relationship" : [ ],
+          "return" : {
+            "type" : "ReturnClause",
+            "expression" : {
+              "type" : "AliasRef",
+              "locator" : "36:59",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "name" : "o"
+            },
+            "locator" : "36:52-36:59",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          },
+          "locator" : "36:43-36:59",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "36:1-36:59",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "Retrieve with null query source",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "List",
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          },
+          "locator" : "38:22-38:23"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}Any"
+          }
+        },
+        "locator" : "38:1-38:23",
+        "name" : "Empty list",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "ExpressionRef",
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Any"
+                }
+              },
+              "locator" : "40:44-40:55",
+              "name" : "Empty list"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Any"
+              }
+            },
+            "locator" : "40:44-40:57",
+            "alias" : "o"
+          } ],
+          "relationship" : [ ],
+          "return" : {
+            "type" : "ReturnClause",
+            "expression" : {
+              "type" : "AliasRef",
+              "locator" : "40:66",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "name" : "o"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Any"
+              }
+            },
+            "locator" : "40:59-40:66"
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          },
+          "locator" : "40:44-40:66"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}Any"
+          }
+        },
+        "locator" : "40:1-40:66",
+        "name" : "Retrieve with empty query source",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "List",
+          "element" : [ {
+            "type" : "Null",
+            "locator" : "42:27-42:30",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          }, {
+            "type" : "Null",
+            "locator" : "42:33-42:36",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          }, {
+            "type" : "Null",
+            "locator" : "42:39-42:42",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          } ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          },
+          "locator" : "42:25-42:44"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}Any"
+          }
+        },
+        "locator" : "42:1-42:44",
+        "name" : "All null list",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "ExpressionRef",
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Any"
+                }
+              },
+              "locator" : "44:47-44:61",
+              "name" : "All null list"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Any"
+              }
+            },
+            "locator" : "44:47-44:63",
+            "alias" : "o"
+          } ],
+          "relationship" : [ ],
+          "return" : {
+            "type" : "ReturnClause",
+            "expression" : {
+              "type" : "AliasRef",
+              "locator" : "44:72",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+              "name" : "o"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Any"
+              }
+            },
+            "locator" : "44:65-44:72"
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          },
+          "locator" : "44:47-44:72"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}Any"
+          }
+        },
+        "locator" : "44:1-44:72",
+        "name" : "Retrieve with all null query source",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "List",
+          "element" : [ {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "46:33-46:36",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          }, {
+            "type" : "Literal",
+            "locator" : "46:39",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "46:42-46:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Integer"
+          } ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer"
+            }
+          },
+          "locator" : "46:31-46:47"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer"
+          }
+        },
+        "locator" : "46:1-46:47",
+        "name" : "Paritally null list",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "ExpressionRef",
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "48:53-48:73",
+              "name" : "Paritally null list"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "48:53-48:75",
+            "alias" : "o"
+          } ],
+          "relationship" : [ ],
+          "return" : {
+            "type" : "ReturnClause",
+            "expression" : {
+              "type" : "AliasRef",
+              "locator" : "48:84",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "name" : "o"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "48:77-48:84"
+          },
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}Integer"
+            }
+          },
+          "locator" : "48:53-48:84"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}Integer"
+          }
+        },
+        "locator" : "48:1-48:84",
+        "name" : "Retrieve with partially null query source",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    },
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableLocators,EnableResultTypes,EnableDetailedErrors"
+    }, {
+      "type" : "CqlToElmError",
+      "librarySystem" : "C:\\Code\\Ncqa.HT\\Hedis2023\\Cql\\input\\test\\QueriesTest-1.0.0.cql",
+      "libraryId" : "QueriesTest-1.0.0",
+      "startLine" : 1,
+      "startChar" : 0,
+      "endLine" : 1,
+      "endChar" : 0,
+      "message" : "token recognition error at: '?'",
+      "errorType" : "syntax",
+      "errorSeverity" : "error"
+    }, {
+      "type" : "CqlToElmError",
+      "librarySystem" : "C:\\Code\\Ncqa.HT\\Hedis2023\\Cql\\input\\test\\QueriesTest-1.0.0.cql",
+      "libraryId" : "QueriesTest-1.0.0",
+      "startLine" : 1,
+      "startChar" : 0,
+      "endLine" : 1,
+      "endChar" : 0,
+      "message" : "token recognition error at: '?'",
+      "errorType" : "internal",
+      "errorSeverity" : "error"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "QueriesTest",
+      "libraryVersion" : "1.0.0",
+      "startLine" : 24,
+      "startChar" : 39,
+      "endLine" : 24,
+      "endChar" : 66,
+      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "QueriesTest",
+      "libraryVersion" : "1.0.0",
+      "startLine" : 26,
+      "startChar" : 46,
+      "endLine" : 26,
+      "endChar" : 93,
+      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "QueriesTest",
+      "libraryVersion" : "1.0.0",
+      "startLine" : 30,
+      "startChar" : 53,
+      "endLine" : 30,
+      "endChar" : 88,
+      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    }, {
+      "type" : "CqlToElmError",
+      "libraryId" : "QueriesTest",
+      "libraryVersion" : "1.0.0",
+      "startLine" : 32,
+      "startChar" : 60,
+      "endLine" : 32,
+      "endChar" : 115,
+      "message" : "Could not resolve membership operator for terminology target of the retrieve.",
+      "errorType" : "semantic",
+      "errorSeverity" : "warning"
+    } ]
+  }
+}
