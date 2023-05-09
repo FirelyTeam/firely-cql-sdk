@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Ncqa.Cql.Runtime.Conversion</AssemblyName>
+		<RootNamespace>Ncqa.Cql.Runtime.Conversion</RootNamespace>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Authors>NCQA</Authors>
+		<Company>NCQA</Company>
+		<Product>CQL engine unit conversion</Product>
+		<Description>Unit conversion for CQL</Description>
+		<NoWarn>CS8601</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+	</ItemGroup>
+
+</Project>

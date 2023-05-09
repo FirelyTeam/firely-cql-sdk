@@ -1,0 +1,68 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Ncqa.Cql.MeasureCompiler</AssemblyName>
+		<RootNamespace>Ncqa.Cql.MeasureCompiler</RootNamespace>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Authors>NCQA</Authors>
+		<Product>CQL measure compiler</Product>
+		<Description>Translates ELM into C# expression trees and can emit those expression trees into either runtime Delegates or C# source code.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+	  <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
+		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
+		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\ELM\ELM.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="ExpressionBuilder.AggregateFunctions.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.ArithmeticOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.ClinicalOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.ComparisonOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.DateAndTimeOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.ErrorsAndMessaging.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.IntervalOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.ListOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.LogicalOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.NullologicalOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.StringOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.TypeOperators.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.Types.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+</Project>

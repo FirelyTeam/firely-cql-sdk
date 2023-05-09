@@ -71,7 +71,7 @@ namespace Ncqa.Fhir.Schemas
         }
 
 
-        private static readonly Regex Indexer = new Regex("(?<name>\\S+)\\[\\S+\\]", RegexOptions.Compiled);
+        private static readonly Regex Indexer = new("(?<name>\\S+)\\[\\S+\\]", RegexOptions.Compiled);
 
         private void DefineMembers(Dictionary<string, TypeBuilder> allTypes, 
             Dictionary<Type, Dictionary<string, PropertyBuilder>> allProperties, 
@@ -127,7 +127,7 @@ namespace Ncqa.Fhir.Schemas
                         // but is assumed to be an IdElement in CQL.
                         if (propertyElement.Element.Path == "Resource.id")
                             propertyType = allTypes["http://hl7.org/fhir/StructureDefinition/id"];
-                        else propertyType = propertyType ?? ElementCodeToType(propertyElement.Element.Type[0].Code!, allTypes);
+                        else propertyType ??= ElementCodeToType(propertyElement.Element.Type[0].Code!, allTypes);
                         var propertyBuilder = DefineProperty(thisType, propertyName, propertyType!, propertyElement.Element.Min, propertyElement.Element.Max!, propertyElement.Element.Binding!);
                         propertiesForType.Add(propertyName, propertyBuilder);
                     }

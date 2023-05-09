@@ -103,7 +103,7 @@ namespace Ncqa.Fhir.Schemas.r4
 
     internal static class SchemaConverter
     {
-        public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
+        public static readonly JsonSerializerSettings Settings = new()
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,
@@ -163,7 +163,7 @@ namespace Ncqa.Fhir.Schemas.r4
             throw new Exception("Cannot marshal type TypeEnum");
         }
 
-        public static readonly TypeEnumConverter Singleton = new TypeEnumConverter();
+        public static readonly TypeEnumConverter Singleton = new();
     }
 
 }

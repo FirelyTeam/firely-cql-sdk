@@ -293,7 +293,7 @@ namespace Ncqa.Fhir
             return name;
         }
 
-        private Dictionary<string, string> TypeNameSubstitutions = new Dictionary<string, string>
+        private Dictionary<string, string> TypeNameSubstitutions = new()
         {
         };
 

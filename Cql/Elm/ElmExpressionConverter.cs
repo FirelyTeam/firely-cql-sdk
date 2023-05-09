@@ -27,6 +27,7 @@ namespace Ncqa.Elm
                 "Abs" => new AbsExpression(),
                 "Add" => new AddExpression(),
                 "After" => new AfterExpression(),
+                "AggregateClause" => new AggregateQueryExpression(),
                 "AliasRef" => new AliasRefExpression(),
                 "AllTrue" => new AllTrueExpression(),
                 "And" => new AndExpression(),

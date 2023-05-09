@@ -35,7 +35,9 @@ namespace Ncqa.Fhir.R4.Model
 		public Reference source { get; set; }
 
 		public ICollection<ItemComponent> item { get; set; }
-		[FhirUri("http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse.item")]
+        public string linkId { get; set; }
+
+        [FhirUri("http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse.item")]
 		public partial class ItemComponent
 		{
 

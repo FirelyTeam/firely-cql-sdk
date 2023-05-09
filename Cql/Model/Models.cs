@@ -9,8 +9,8 @@ namespace Ncqa.Cql.Model
 {
     public static class Models
     {
-        private static XmlSerializer xmlSerializer = new XmlSerializer(typeof(ModelInfo));
-        private static Lazy<ModelInfo> _Fhir401 = new Lazy<ModelInfo>(() => LoadEmbeddedResource("Fhir401"), true);
+        private static XmlSerializer xmlSerializer = new(typeof(ModelInfo));
+        private static Lazy<ModelInfo> _Fhir401 = new(() => LoadEmbeddedResource("Fhir401"), true);
         
         public static ModelInfo Fhir401 => _Fhir401.Value;
         

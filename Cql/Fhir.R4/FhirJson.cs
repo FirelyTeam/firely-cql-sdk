@@ -35,7 +35,7 @@ namespace Ncqa.Fhir.R4
             return jsonOptions;
         }
 
-        private static Lazy<JsonSerializerOptions> DefaultOptions = new Lazy<JsonSerializerOptions>(() => GetJsonSerializerOptions(), true);
+        private static Lazy<JsonSerializerOptions> DefaultOptions = new(() => GetJsonSerializerOptions(), true);
         public static T Deserialize<T>(Stream stream, FhirOptions options = null)
         {
             JsonSerializerOptions jsonOptions = null;

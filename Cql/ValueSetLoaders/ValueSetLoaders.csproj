@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CqlRuntime\CqlRuntime.csproj" />
+    <ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
     <ProjectReference Include="..\Fhir.R4\Fhir.R4.csproj" />
     <ProjectReference Include="..\TerminologyClient\TerminologyClient.csproj" />
   </ItemGroup>

@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Ncqa.Cql.CodeGeneration.NET</AssemblyName>
+		<RootNamespace>Ncqa.Cql.CodeGeneration.NET</RootNamespace>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Authors>NCQA</Authors>
+		<Product>.NET Code Generation</Product>
+		<Description>Converts .NET lambda expressions into source code in .NET languages</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="AgileObjects.ReadableExpressions" Version="2.6.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="6.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\Graph\Graph.csproj" />
+	</ItemGroup>
+
+
+</Project>

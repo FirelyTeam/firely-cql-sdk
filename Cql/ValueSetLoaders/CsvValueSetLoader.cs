@@ -1,5 +1,6 @@
 ﻿using Ncqa.Cql.Runtime;
 using Ncqa.Cql.Runtime.Primitives;
+using Ncqa.Cql.ValueSets;
 using Ncqa.Fhir.R4;
 using Ncqa.Fhir.R4.Model;
 using Sylvan;
@@ -28,7 +29,7 @@ namespace Ncqa.Cql.ValueSetLoaders
 
         public IValueSetDictionary Load()
         {
-            var vsd = new CqlValueSetDictionary();
+            var vsd = new HashValueSetDictionary();
             LoadHedisCsv(vsd, Csv, OidMap, ValueSetFormatString);
             return vsd;
         }

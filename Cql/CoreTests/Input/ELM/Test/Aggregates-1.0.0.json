@@ -1,0 +1,748 @@
+{
+  "library" : {
+    "type" : "Library",
+    "identifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "Aggregates",
+      "version" : "1.0.0"
+    },
+    "schemaIdentifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "type" : "Library$Usings",
+      "def" : [ {
+        "type" : "UsingDef",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      }, {
+        "type" : "UsingDef",
+        "locator" : "3:1-3:26",
+        "localIdentifier" : "FHIR",
+        "uri" : "http://hl7.org/fhir",
+        "version" : "4.0.1"
+      } ]
+    },
+    "statements" : {
+      "type" : "Library$Statements",
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "6:11",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              }, {
+                "type" : "Literal",
+                "locator" : "6:14",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "6:17",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3"
+              }, {
+                "type" : "Literal",
+                "locator" : "6:20",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4"
+              }, {
+                "type" : "Literal",
+                "locator" : "6:23",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "6:8-6:26"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "6:8-6:30",
+            "alias" : "Num"
+          } ],
+          "relationship" : [ ],
+          "aggregate" : {
+            "type" : "AggregateClause",
+            "expression" : {
+              "type" : "Multiply",
+              "operand" : [ {
+                "type" : "QueryLetRef",
+                "locator" : "7:34-7:39",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Result"
+              }, {
+                "type" : "AliasRef",
+                "locator" : "7:43-7:45",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num"
+              } ],
+              "locator" : "7:34-7:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "starting" : {
+              "type" : "Literal",
+              "locator" : "7:22-7:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "7:5-7:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "identifier" : "Result"
+          },
+          "locator" : "6:3-7:45",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+        },
+        "locator" : "5:1-7:45",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "FactorialOfFive",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "10:10",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              }, {
+                "type" : "Literal",
+                "locator" : "10:13",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "10:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3"
+              }, {
+                "type" : "Literal",
+                "locator" : "10:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4"
+              }, {
+                "type" : "Literal",
+                "locator" : "10:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              }, {
+                "type" : "Literal",
+                "locator" : "10:25",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "6"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "10:8-10:27"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "10:8-10:31",
+            "alias" : "Num"
+          } ],
+          "relationship" : [ ],
+          "where" : {
+            "type" : "Equal",
+            "operand" : [ {
+              "type" : "Modulo",
+              "operand" : [ {
+                "type" : "AliasRef",
+                "locator" : "11:11-11:13",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num"
+              }, {
+                "type" : "Literal",
+                "locator" : "11:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              } ],
+              "locator" : "11:11-11:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            }, {
+              "type" : "Literal",
+              "locator" : "11:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            } ],
+            "locator" : "11:5-11:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "aggregate" : {
+            "type" : "AggregateClause",
+            "expression" : {
+              "type" : "Multiply",
+              "operand" : [ {
+                "type" : "QueryLetRef",
+                "locator" : "12:34-12:39",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Result"
+              }, {
+                "type" : "AliasRef",
+                "locator" : "12:43-12:45",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num"
+              } ],
+              "locator" : "12:34-12:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "starting" : {
+              "type" : "Literal",
+              "locator" : "12:22-12:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "12:5-12:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "identifier" : "Result"
+          },
+          "locator" : "10:3-12:45",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+        },
+        "locator" : "9:1-12:45",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "With where",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "15:10",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              }, {
+                "type" : "Literal",
+                "locator" : "15:13",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "15:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3"
+              }, {
+                "type" : "Literal",
+                "locator" : "15:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4"
+              }, {
+                "type" : "Literal",
+                "locator" : "15:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              }, {
+                "type" : "Literal",
+                "locator" : "15:25",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "6"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "15:8-15:27"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "15:8-15:31",
+            "alias" : "Num"
+          } ],
+          "let" : [ {
+            "type" : "LetClause",
+            "expression" : {
+              "type" : "Literal",
+              "locator" : "16:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "16:9-16:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "identifier" : "i"
+          }, {
+            "type" : "LetClause",
+            "expression" : {
+              "type" : "Literal",
+              "locator" : "17:8",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2"
+            },
+            "locator" : "17:5-17:8",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "identifier" : "j"
+          } ],
+          "relationship" : [ ],
+          "where" : {
+            "type" : "Equal",
+            "operand" : [ {
+              "type" : "Modulo",
+              "operand" : [ {
+                "type" : "AliasRef",
+                "locator" : "18:11-18:13",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num"
+              }, {
+                "type" : "Literal",
+                "locator" : "18:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              } ],
+              "locator" : "18:11-18:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            }, {
+              "type" : "Literal",
+              "locator" : "18:23",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            } ],
+            "locator" : "18:5-18:23",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "aggregate" : {
+            "type" : "AggregateClause",
+            "expression" : {
+              "type" : "Multiply",
+              "operand" : [ {
+                "type" : "QueryLetRef",
+                "locator" : "19:34-19:39",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Result"
+              }, {
+                "type" : "Add",
+                "operand" : [ {
+                  "type" : "Add",
+                  "operand" : [ {
+                    "type" : "AliasRef",
+                    "locator" : "19:44-19:46",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "name" : "Num"
+                  }, {
+                    "type" : "QueryLetRef",
+                    "locator" : "19:50",
+                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                    "name" : "i"
+                  } ],
+                  "locator" : "19:44-19:50",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+                }, {
+                  "type" : "QueryLetRef",
+                  "locator" : "19:54",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "name" : "j"
+                } ],
+                "locator" : "19:43-19:55",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              } ],
+              "locator" : "19:34-19:55",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "starting" : {
+              "type" : "Literal",
+              "locator" : "19:22-19:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "19:5-19:55",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "identifier" : "Result"
+          },
+          "locator" : "15:3-19:55",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+        },
+        "locator" : "14:1-19:55",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "With where and let",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "22:10",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              }, {
+                "type" : "Literal",
+                "locator" : "22:13",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "22:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3"
+              }, {
+                "type" : "Literal",
+                "locator" : "22:19",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4"
+              }, {
+                "type" : "Literal",
+                "locator" : "22:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              }, {
+                "type" : "Literal",
+                "locator" : "22:25",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "6"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "22:8-22:27"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "22:8-22:31",
+            "alias" : "Num"
+          } ],
+          "relationship" : [ {
+            "type" : "With",
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "expression" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "23:12",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              }, {
+                "type" : "Literal",
+                "locator" : "23:14",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              }, {
+                "type" : "Literal",
+                "locator" : "23:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "3"
+              }, {
+                "type" : "Literal",
+                "locator" : "23:18",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "4"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "23:10-23:20"
+            },
+            "suchThat" : {
+              "type" : "Equal",
+              "operand" : [ {
+                "type" : "AliasRef",
+                "locator" : "23:37-23:39",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num"
+              }, {
+                "type" : "AliasRef",
+                "locator" : "23:43-23:46",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num2"
+              } ],
+              "locator" : "23:37-23:46",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+            },
+            "locator" : "23:5-23:46",
+            "alias" : "Num2"
+          } ],
+          "aggregate" : {
+            "type" : "AggregateClause",
+            "expression" : {
+              "type" : "Multiply",
+              "operand" : [ {
+                "type" : "QueryLetRef",
+                "locator" : "24:34-24:39",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Result"
+              }, {
+                "type" : "AliasRef",
+                "locator" : "24:43-24:45",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num"
+              } ],
+              "locator" : "24:34-24:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "starting" : {
+              "type" : "Literal",
+              "locator" : "24:22-24:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "1"
+            },
+            "locator" : "24:5-24:45",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "identifier" : "Result"
+          },
+          "locator" : "22:3-24:45",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+        },
+        "locator" : "21:1-24:45",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "With such that",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Query",
+          "source" : [ {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "28:7",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              }, {
+                "type" : "Literal",
+                "locator" : "28:10",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "28:5-28:12"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "28:5-28:17",
+            "alias" : "Num1"
+          }, {
+            "type" : "AliasedQuerySource",
+            "expression" : {
+              "type" : "List",
+              "element" : [ {
+                "type" : "Literal",
+                "locator" : "29:7",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "1"
+              }, {
+                "type" : "Literal",
+                "locator" : "29:10",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2"
+              } ],
+              "resultTypeSpecifier" : {
+                "type" : "ListTypeSpecifier",
+                "elementType" : {
+                  "type" : "NamedTypeSpecifier",
+                  "name" : "{urn:hl7-org:elm-types:r1}Integer"
+                }
+              },
+              "locator" : "29:5-29:12"
+            },
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            },
+            "locator" : "29:5-29:17",
+            "alias" : "Num2"
+          } ],
+          "relationship" : [ ],
+          "aggregate" : {
+            "type" : "AggregateClause",
+            "expression" : {
+              "type" : "Add",
+              "operand" : [ {
+                "type" : "Add",
+                "operand" : [ {
+                  "type" : "QueryLetRef",
+                  "locator" : "30:34-30:39",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "name" : "Result"
+                }, {
+                  "type" : "AliasRef",
+                  "locator" : "30:43-30:46",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "name" : "Num1"
+                } ],
+                "locator" : "30:34-30:46",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+              }, {
+                "type" : "AliasRef",
+                "locator" : "30:50-30:53",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "name" : "Num2"
+              } ],
+              "locator" : "30:34-30:53",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "starting" : {
+              "type" : "Literal",
+              "locator" : "30:22-30:31",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "0"
+            },
+            "locator" : "30:5-30:53",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "identifier" : "Result"
+          },
+          "locator" : "27:3-30:53",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer"
+        },
+        "locator" : "26:1-30:53",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+        "name" : "Multisource query",
+        "context" : "Patient",
+        "accessLevel" : "Public"
+      } ]
+    },
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableLocators,EnableResultTypes,EnableDetailedErrors,DisableListTraversal,DisableListDemotion,DisableListPromotion"
+    }, {
+      "type" : "CqlToElmError",
+      "librarySystem" : "C:\\Code\\Ncqa.HT\\Hedis2023\\Cql\\input\\libs\\test\\Aggregates-1.0.0.cql",
+      "libraryId" : "Aggregates-1.0.0",
+      "startLine" : 1,
+      "startChar" : 0,
+      "endLine" : 1,
+      "endChar" : 0,
+      "message" : "token recognition error at: '?'",
+      "errorType" : "syntax",
+      "errorSeverity" : "error"
+    }, {
+      "type" : "CqlToElmError",
+      "librarySystem" : "C:\\Code\\Ncqa.HT\\Hedis2023\\Cql\\input\\libs\\test\\Aggregates-1.0.0.cql",
+      "libraryId" : "Aggregates-1.0.0",
+      "startLine" : 1,
+      "startChar" : 0,
+      "endLine" : 1,
+      "endChar" : 0,
+      "message" : "token recognition error at: '?'",
+      "errorType" : "internal",
+      "errorSeverity" : "error"
+    } ]
+  }
+}

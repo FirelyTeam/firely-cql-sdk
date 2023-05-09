@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Cql.Firely;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Ncqa.Cql.MeasureCompiler;
-using Ncqa.Cql.MeasureCompiler.CodeGeneration;
+using Ncqa.Cql.Model;
 using Ncqa.Cql.Runtime;
 using Ncqa.Cql.Runtime.FhirR4;
 using Ncqa.Elm;
@@ -31,7 +32,7 @@ namespace CoreTests
             .Create(logging => logging.AddDebug())
             .CreateLogger<ExpressionBuilder>();
 
-        private static readonly LambdasFacade LambdasByTestName = new LambdasFacade();
+        private static readonly LambdasFacade LambdasByTestName = new();
 
         private class LambdasFacade
         {
@@ -49,8 +50,9 @@ namespace CoreTests
         public static void ClassInitialize(TestContext context)
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
-            var binding = new FhirOperatorsBinding(FhirTypeConverter.Default, FhirTypeResolver.Default);
-            var typeManager = new TypeManager(FhirTypeResolver.Default);
+            var resolver = new FirelyTypeResolver(Models.Fhir401);
+            var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Default);
+            var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = ElmPackage.LoadFrom(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));            
             var fhirHelpersBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
@@ -81,13 +83,7 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            RuntimeContext = new FhirRuntimeContext(new Bundle(),
-                definitions: allDelegates,
-                valueSetDictionary: new CqlValueSetDictionary(),
-                parameters: new Dictionary<string, object>(),
-                now: DateTime.UtcNow);
-
-
+            RuntimeContext = FhirRuntimeContext.Create(delegates: allDelegates);
         }
 
         public static RuntimeContext RuntimeContext;

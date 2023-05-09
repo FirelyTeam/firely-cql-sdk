@@ -14,7 +14,7 @@ namespace Ncqa.Fhir.R4.Model
             element is null ? null : element.value;
         public static implicit operator BooleanElement(bool? value) =>
             value is null ? null : new BooleanElement { value = value.Value };
-        public static implicit operator BooleanElement(bool value) => new BooleanElement { value = value };
+        public static implicit operator BooleanElement(bool value) => new() { value = value };
 
     }
     partial class CanonicalElement
@@ -58,7 +58,7 @@ namespace Ncqa.Fhir.R4.Model
                   element is null ? null : element.value;
         public static implicit operator DecimalElement(decimal? value) =>
             value is null ? null : new DecimalElement { value = value.Value };
-        public static implicit operator DecimalElement(decimal value) => new DecimalElement { value = value };
+        public static implicit operator DecimalElement(decimal value) => new() { value = value };
     }
 
     partial class IdElement
@@ -83,7 +83,7 @@ namespace Ncqa.Fhir.R4.Model
             element is null ? null : element.value;
         public static implicit operator IntegerElement(int? value) =>
             value is null ? null : new IntegerElement { value = value.Value };
-        public static implicit operator IntegerElement(int value) => new IntegerElement { value = value };
+        public static implicit operator IntegerElement(int value) => new() { value = value };
     }
 
     partial class PositiveIntElement
@@ -92,7 +92,7 @@ namespace Ncqa.Fhir.R4.Model
             element is null ? null : element.value;
         public static implicit operator PositiveIntElement(int? value) =>
             value is null ? null : new PositiveIntElement { value = value.Value };
-        public static implicit operator PositiveIntElement(int value) => new PositiveIntElement { value = value };
+        public static implicit operator PositiveIntElement(int value) => new() { value = value };
     }
 
     partial class StringElement
@@ -133,7 +133,7 @@ namespace Ncqa.Fhir.R4.Model
         public static implicit operator UriElement(string value) =>
             value is null ? null : new UriElement { value = value };
 
-        public static implicit operator Uri(UriElement element) => new Uri(element.value);
+        public static implicit operator Uri(UriElement element) => new(element.value);
         public static implicit operator UriElement(Uri value) =>
             value is null ? null : new UriElement { value = value.ToString() };
     }

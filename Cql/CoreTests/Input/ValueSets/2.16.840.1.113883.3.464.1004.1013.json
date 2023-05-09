@@ -1,0 +1,2829 @@
+{
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1013",
+      "system": "urn:ietf:rfc:3986"
+    }
+  ],
+  "version": "2022-08-01",
+  "status": "active",
+  "expansion": {
+    "identifier": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013#all",
+    "parameter": [
+      {
+        "valueDateTime": "2022-12-20T18:21:16.451Z",
+        "name": "date"
+      }
+    ],
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.10",
+        "display": "[F10.10] Alcohol abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.120",
+        "display": "[F10.120] Alcohol abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.121",
+        "display": "[F10.121] Alcohol abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.129",
+        "display": "[F10.129] Alcohol abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.130",
+        "display": "[F10.130] Alcohol abuse with withdrawal, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.131",
+        "display": "[F10.131] Alcohol abuse with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.132",
+        "display": "[F10.132] Alcohol abuse with withdrawal with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.139",
+        "display": "[F10.139] Alcohol abuse with withdrawal, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.14",
+        "display": "[F10.14] Alcohol abuse with alcohol-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.150",
+        "display": "[F10.150] Alcohol abuse with alcohol-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.151",
+        "display": "[F10.151] Alcohol abuse with alcohol-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.159",
+        "display": "[F10.159] Alcohol abuse with alcohol-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.180",
+        "display": "[F10.180] Alcohol abuse with alcohol-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.181",
+        "display": "[F10.181] Alcohol abuse with alcohol-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.182",
+        "display": "[F10.182] Alcohol abuse with alcohol-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.188",
+        "display": "[F10.188] Alcohol abuse with other alcohol-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.19",
+        "display": "[F10.19] Alcohol abuse with unspecified alcohol-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.20",
+        "display": "[F10.20] Alcohol dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.220",
+        "display": "[F10.220] Alcohol dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.221",
+        "display": "[F10.221] Alcohol dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.229",
+        "display": "[F10.229] Alcohol dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.230",
+        "display": "[F10.230] Alcohol dependence with withdrawal, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.231",
+        "display": "[F10.231] Alcohol dependence with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.232",
+        "display": "[F10.232] Alcohol dependence with withdrawal with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.239",
+        "display": "[F10.239] Alcohol dependence with withdrawal, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.24",
+        "display": "[F10.24] Alcohol dependence with alcohol-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.250",
+        "display": "[F10.250] Alcohol dependence with alcohol-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.251",
+        "display": "[F10.251] Alcohol dependence with alcohol-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.259",
+        "display": "[F10.259] Alcohol dependence with alcohol-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.26",
+        "display": "[F10.26] Alcohol dependence with alcohol-induced persisting amnestic disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.27",
+        "display": "[F10.27] Alcohol dependence with alcohol-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.280",
+        "display": "[F10.280] Alcohol dependence with alcohol-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.281",
+        "display": "[F10.281] Alcohol dependence with alcohol-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.282",
+        "display": "[F10.282] Alcohol dependence with alcohol-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.288",
+        "display": "[F10.288] Alcohol dependence with other alcohol-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F10.29",
+        "display": "[F10.29] Alcohol dependence with unspecified alcohol-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.10",
+        "display": "[F11.10] Opioid abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.120",
+        "display": "[F11.120] Opioid abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.121",
+        "display": "[F11.121] Opioid abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.122",
+        "display": "[F11.122] Opioid abuse with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.129",
+        "display": "[F11.129] Opioid abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.13",
+        "display": "[F11.13] Opioid abuse with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.14",
+        "display": "[F11.14] Opioid abuse with opioid-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.150",
+        "display": "[F11.150] Opioid abuse with opioid-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.151",
+        "display": "[F11.151] Opioid abuse with opioid-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.159",
+        "display": "[F11.159] Opioid abuse with opioid-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.181",
+        "display": "[F11.181] Opioid abuse with opioid-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.182",
+        "display": "[F11.182] Opioid abuse with opioid-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.188",
+        "display": "[F11.188] Opioid abuse with other opioid-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.19",
+        "display": "[F11.19] Opioid abuse with unspecified opioid-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.20",
+        "display": "[F11.20] Opioid dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.220",
+        "display": "[F11.220] Opioid dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.221",
+        "display": "[F11.221] Opioid dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.222",
+        "display": "[F11.222] Opioid dependence with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.229",
+        "display": "[F11.229] Opioid dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.23",
+        "display": "[F11.23] Opioid dependence with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.24",
+        "display": "[F11.24] Opioid dependence with opioid-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.250",
+        "display": "[F11.250] Opioid dependence with opioid-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.251",
+        "display": "[F11.251] Opioid dependence with opioid-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.259",
+        "display": "[F11.259] Opioid dependence with opioid-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.281",
+        "display": "[F11.281] Opioid dependence with opioid-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.282",
+        "display": "[F11.282] Opioid dependence with opioid-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.288",
+        "display": "[F11.288] Opioid dependence with other opioid-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F11.29",
+        "display": "[F11.29] Opioid dependence with unspecified opioid-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.10",
+        "display": "[F12.10] Cannabis abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.120",
+        "display": "[F12.120] Cannabis abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.121",
+        "display": "[F12.121] Cannabis abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.122",
+        "display": "[F12.122] Cannabis abuse with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.129",
+        "display": "[F12.129] Cannabis abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.13",
+        "display": "[F12.13] Cannabis abuse with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.150",
+        "display": "[F12.150] Cannabis abuse with psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.151",
+        "display": "[F12.151] Cannabis abuse with psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.159",
+        "display": "[F12.159] Cannabis abuse with psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.180",
+        "display": "[F12.180] Cannabis abuse with cannabis-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.188",
+        "display": "[F12.188] Cannabis abuse with other cannabis-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.19",
+        "display": "[F12.19] Cannabis abuse with unspecified cannabis-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.20",
+        "display": "[F12.20] Cannabis dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.220",
+        "display": "[F12.220] Cannabis dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.221",
+        "display": "[F12.221] Cannabis dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.222",
+        "display": "[F12.222] Cannabis dependence with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.229",
+        "display": "[F12.229] Cannabis dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.23",
+        "display": "[F12.23] Cannabis dependence with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.250",
+        "display": "[F12.250] Cannabis dependence with psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.251",
+        "display": "[F12.251] Cannabis dependence with psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.259",
+        "display": "[F12.259] Cannabis dependence with psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.280",
+        "display": "[F12.280] Cannabis dependence with cannabis-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.288",
+        "display": "[F12.288] Cannabis dependence with other cannabis-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F12.29",
+        "display": "[F12.29] Cannabis dependence with unspecified cannabis-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.10",
+        "display": "[F13.10] Sedative, hypnotic or anxiolytic abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.120",
+        "display": "[F13.120] Sedative, hypnotic or anxiolytic abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.121",
+        "display": "[F13.121] Sedative, hypnotic or anxiolytic abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.129",
+        "display": "[F13.129] Sedative, hypnotic or anxiolytic abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.130",
+        "display": "[F13.130] Sedative, hypnotic or anxiolytic abuse with withdrawal, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.131",
+        "display": "[F13.131] Sedative, hypnotic or anxiolytic abuse with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.132",
+        "display": "[F13.132] Sedative, hypnotic or anxiolytic abuse with withdrawal with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.139",
+        "display": "[F13.139] Sedative, hypnotic or anxiolytic abuse with withdrawal, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.14",
+        "display": "[F13.14] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.150",
+        "display": "[F13.150] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.151",
+        "display": "[F13.151] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.159",
+        "display": "[F13.159] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.180",
+        "display": "[F13.180] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.181",
+        "display": "[F13.181] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.182",
+        "display": "[F13.182] Sedative, hypnotic or anxiolytic abuse with sedative, hypnotic or anxiolytic-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.188",
+        "display": "[F13.188] Sedative, hypnotic or anxiolytic abuse with other sedative, hypnotic or anxiolytic-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.19",
+        "display": "[F13.19] Sedative, hypnotic or anxiolytic abuse with unspecified sedative, hypnotic or anxiolytic-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.20",
+        "display": "[F13.20] Sedative, hypnotic or anxiolytic dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.220",
+        "display": "[F13.220] Sedative, hypnotic or anxiolytic dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.221",
+        "display": "[F13.221] Sedative, hypnotic or anxiolytic dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.229",
+        "display": "[F13.229] Sedative, hypnotic or anxiolytic dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.230",
+        "display": "[F13.230] Sedative, hypnotic or anxiolytic dependence with withdrawal, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.231",
+        "display": "[F13.231] Sedative, hypnotic or anxiolytic dependence with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.232",
+        "display": "[F13.232] Sedative, hypnotic or anxiolytic dependence with withdrawal with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.239",
+        "display": "[F13.239] Sedative, hypnotic or anxiolytic dependence with withdrawal, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.24",
+        "display": "[F13.24] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.250",
+        "display": "[F13.250] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.251",
+        "display": "[F13.251] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.259",
+        "display": "[F13.259] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.26",
+        "display": "[F13.26] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced persisting amnestic disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.27",
+        "display": "[F13.27] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.280",
+        "display": "[F13.280] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.281",
+        "display": "[F13.281] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.282",
+        "display": "[F13.282] Sedative, hypnotic or anxiolytic dependence with sedative, hypnotic or anxiolytic-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.288",
+        "display": "[F13.288] Sedative, hypnotic or anxiolytic dependence with other sedative, hypnotic or anxiolytic-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F13.29",
+        "display": "[F13.29] Sedative, hypnotic or anxiolytic dependence with unspecified sedative, hypnotic or anxiolytic-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.10",
+        "display": "[F14.10] Cocaine abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.120",
+        "display": "[F14.120] Cocaine abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.121",
+        "display": "[F14.121] Cocaine abuse with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.122",
+        "display": "[F14.122] Cocaine abuse with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.129",
+        "display": "[F14.129] Cocaine abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.13",
+        "display": "[F14.13] Cocaine abuse, unspecified with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.14",
+        "display": "[F14.14] Cocaine abuse with cocaine-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.150",
+        "display": "[F14.150] Cocaine abuse with cocaine-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.151",
+        "display": "[F14.151] Cocaine abuse with cocaine-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.159",
+        "display": "[F14.159] Cocaine abuse with cocaine-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.180",
+        "display": "[F14.180] Cocaine abuse with cocaine-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.181",
+        "display": "[F14.181] Cocaine abuse with cocaine-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.182",
+        "display": "[F14.182] Cocaine abuse with cocaine-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.188",
+        "display": "[F14.188] Cocaine abuse with other cocaine-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.19",
+        "display": "[F14.19] Cocaine abuse with unspecified cocaine-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.20",
+        "display": "[F14.20] Cocaine dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.220",
+        "display": "[F14.220] Cocaine dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.221",
+        "display": "[F14.221] Cocaine dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.222",
+        "display": "[F14.222] Cocaine dependence with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.229",
+        "display": "[F14.229] Cocaine dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.23",
+        "display": "[F14.23] Cocaine dependence with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.24",
+        "display": "[F14.24] Cocaine dependence with cocaine-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.250",
+        "display": "[F14.250] Cocaine dependence with cocaine-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.251",
+        "display": "[F14.251] Cocaine dependence with cocaine-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.259",
+        "display": "[F14.259] Cocaine dependence with cocaine-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.280",
+        "display": "[F14.280] Cocaine dependence with cocaine-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.281",
+        "display": "[F14.281] Cocaine dependence with cocaine-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.282",
+        "display": "[F14.282] Cocaine dependence with cocaine-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.288",
+        "display": "[F14.288] Cocaine dependence with other cocaine-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F14.29",
+        "display": "[F14.29] Cocaine dependence with unspecified cocaine-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.10",
+        "display": "[F15.10] Other stimulant abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.120",
+        "display": "[F15.120] Other stimulant abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.121",
+        "display": "[F15.121] Other stimulant abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.122",
+        "display": "[F15.122] Other stimulant abuse with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.129",
+        "display": "[F15.129] Other stimulant abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.13",
+        "display": "[F15.13] Other stimulant abuse with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.14",
+        "display": "[F15.14] Other stimulant abuse with stimulant-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.150",
+        "display": "[F15.150] Other stimulant abuse with stimulant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.151",
+        "display": "[F15.151] Other stimulant abuse with stimulant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.159",
+        "display": "[F15.159] Other stimulant abuse with stimulant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.180",
+        "display": "[F15.180] Other stimulant abuse with stimulant-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.181",
+        "display": "[F15.181] Other stimulant abuse with stimulant-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.182",
+        "display": "[F15.182] Other stimulant abuse with stimulant-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.188",
+        "display": "[F15.188] Other stimulant abuse with other stimulant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.19",
+        "display": "[F15.19] Other stimulant abuse with unspecified stimulant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.20",
+        "display": "[F15.20] Other stimulant dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.220",
+        "display": "[F15.220] Other stimulant dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.221",
+        "display": "[F15.221] Other stimulant dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.222",
+        "display": "[F15.222] Other stimulant dependence with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.229",
+        "display": "[F15.229] Other stimulant dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.23",
+        "display": "[F15.23] Other stimulant dependence with withdrawal"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.24",
+        "display": "[F15.24] Other stimulant dependence with stimulant-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.250",
+        "display": "[F15.250] Other stimulant dependence with stimulant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.251",
+        "display": "[F15.251] Other stimulant dependence with stimulant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.259",
+        "display": "[F15.259] Other stimulant dependence with stimulant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.280",
+        "display": "[F15.280] Other stimulant dependence with stimulant-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.281",
+        "display": "[F15.281] Other stimulant dependence with stimulant-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.282",
+        "display": "[F15.282] Other stimulant dependence with stimulant-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.288",
+        "display": "[F15.288] Other stimulant dependence with other stimulant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F15.29",
+        "display": "[F15.29] Other stimulant dependence with unspecified stimulant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.10",
+        "display": "[F16.10] Hallucinogen abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.120",
+        "display": "[F16.120] Hallucinogen abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.121",
+        "display": "[F16.121] Hallucinogen abuse with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.122",
+        "display": "[F16.122] Hallucinogen abuse with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.129",
+        "display": "[F16.129] Hallucinogen abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.14",
+        "display": "[F16.14] Hallucinogen abuse with hallucinogen-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.150",
+        "display": "[F16.150] Hallucinogen abuse with hallucinogen-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.151",
+        "display": "[F16.151] Hallucinogen abuse with hallucinogen-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.159",
+        "display": "[F16.159] Hallucinogen abuse with hallucinogen-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.180",
+        "display": "[F16.180] Hallucinogen abuse with hallucinogen-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.183",
+        "display": "[F16.183] Hallucinogen abuse with hallucinogen persisting perception disorder (flashbacks)"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.188",
+        "display": "[F16.188] Hallucinogen abuse with other hallucinogen-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.19",
+        "display": "[F16.19] Hallucinogen abuse with unspecified hallucinogen-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.20",
+        "display": "[F16.20] Hallucinogen dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.220",
+        "display": "[F16.220] Hallucinogen dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.221",
+        "display": "[F16.221] Hallucinogen dependence with intoxication with delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.229",
+        "display": "[F16.229] Hallucinogen dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.24",
+        "display": "[F16.24] Hallucinogen dependence with hallucinogen-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.250",
+        "display": "[F16.250] Hallucinogen dependence with hallucinogen-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.251",
+        "display": "[F16.251] Hallucinogen dependence with hallucinogen-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.259",
+        "display": "[F16.259] Hallucinogen dependence with hallucinogen-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.280",
+        "display": "[F16.280] Hallucinogen dependence with hallucinogen-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.283",
+        "display": "[F16.283] Hallucinogen dependence with hallucinogen persisting perception disorder (flashbacks)"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.288",
+        "display": "[F16.288] Hallucinogen dependence with other hallucinogen-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F16.29",
+        "display": "[F16.29] Hallucinogen dependence with unspecified hallucinogen-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.10",
+        "display": "[F18.10] Inhalant abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.120",
+        "display": "[F18.120] Inhalant abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.121",
+        "display": "[F18.121] Inhalant abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.129",
+        "display": "[F18.129] Inhalant abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.14",
+        "display": "[F18.14] Inhalant abuse with inhalant-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.150",
+        "display": "[F18.150] Inhalant abuse with inhalant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.151",
+        "display": "[F18.151] Inhalant abuse with inhalant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.159",
+        "display": "[F18.159] Inhalant abuse with inhalant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.17",
+        "display": "[F18.17] Inhalant abuse with inhalant-induced dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.180",
+        "display": "[F18.180] Inhalant abuse with inhalant-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.188",
+        "display": "[F18.188] Inhalant abuse with other inhalant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.19",
+        "display": "[F18.19] Inhalant abuse with unspecified inhalant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.20",
+        "display": "[F18.20] Inhalant dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.220",
+        "display": "[F18.220] Inhalant dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.221",
+        "display": "[F18.221] Inhalant dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.229",
+        "display": "[F18.229] Inhalant dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.24",
+        "display": "[F18.24] Inhalant dependence with inhalant-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.250",
+        "display": "[F18.250] Inhalant dependence with inhalant-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.251",
+        "display": "[F18.251] Inhalant dependence with inhalant-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.259",
+        "display": "[F18.259] Inhalant dependence with inhalant-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.27",
+        "display": "[F18.27] Inhalant dependence with inhalant-induced dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.280",
+        "display": "[F18.280] Inhalant dependence with inhalant-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.288",
+        "display": "[F18.288] Inhalant dependence with other inhalant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F18.29",
+        "display": "[F18.29] Inhalant dependence with unspecified inhalant-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.10",
+        "display": "[F19.10] Other psychoactive substance abuse, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.120",
+        "display": "[F19.120] Other psychoactive substance abuse with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.121",
+        "display": "[F19.121] Other psychoactive substance abuse with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.122",
+        "display": "[F19.122] Other psychoactive substance abuse with intoxication with perceptual disturbances"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.129",
+        "display": "[F19.129] Other psychoactive substance abuse with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.130",
+        "display": "[F19.130] Other psychoactive substance abuse with withdrawal, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.131",
+        "display": "[F19.131] Other psychoactive substance abuse with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.132",
+        "display": "[F19.132] Other psychoactive substance abuse with withdrawal with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.139",
+        "display": "[F19.139] Other psychoactive substance abuse with withdrawal, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.14",
+        "display": "[F19.14] Other psychoactive substance abuse with psychoactive substance-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.150",
+        "display": "[F19.150] Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.151",
+        "display": "[F19.151] Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.159",
+        "display": "[F19.159] Other psychoactive substance abuse with psychoactive substance-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.16",
+        "display": "[F19.16] Other psychoactive substance abuse with psychoactive substance-induced persisting amnestic disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.17",
+        "display": "[F19.17] Other psychoactive substance abuse with psychoactive substance-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.180",
+        "display": "[F19.180] Other psychoactive substance abuse with psychoactive substance-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.181",
+        "display": "[F19.181] Other psychoactive substance abuse with psychoactive substance-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.182",
+        "display": "[F19.182] Other psychoactive substance abuse with psychoactive substance-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.188",
+        "display": "[F19.188] Other psychoactive substance abuse with other psychoactive substance-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.19",
+        "display": "[F19.19] Other psychoactive substance abuse with unspecified psychoactive substance-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.20",
+        "display": "[F19.20] Other psychoactive substance dependence, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.220",
+        "display": "[F19.220] Other psychoactive substance dependence with intoxication, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.221",
+        "display": "[F19.221] Other psychoactive substance dependence with intoxication delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.222",
+        "display": "[F19.222] Other psychoactive substance dependence with intoxication with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.229",
+        "display": "[F19.229] Other psychoactive substance dependence with intoxication, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.230",
+        "display": "[F19.230] Other psychoactive substance dependence with withdrawal, uncomplicated"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.231",
+        "display": "[F19.231] Other psychoactive substance dependence with withdrawal delirium"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.232",
+        "display": "[F19.232] Other psychoactive substance dependence with withdrawal with perceptual disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.239",
+        "display": "[F19.239] Other psychoactive substance dependence with withdrawal, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.24",
+        "display": "[F19.24] Other psychoactive substance dependence with psychoactive substance-induced mood disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.250",
+        "display": "[F19.250] Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder with delusions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.251",
+        "display": "[F19.251] Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder with hallucinations"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.259",
+        "display": "[F19.259] Other psychoactive substance dependence with psychoactive substance-induced psychotic disorder, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.26",
+        "display": "[F19.26] Other psychoactive substance dependence with psychoactive substance-induced persisting amnestic disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.27",
+        "display": "[F19.27] Other psychoactive substance dependence with psychoactive substance-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.280",
+        "display": "[F19.280] Other psychoactive substance dependence with psychoactive substance-induced anxiety disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.281",
+        "display": "[F19.281] Other psychoactive substance dependence with psychoactive substance-induced sexual dysfunction"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.282",
+        "display": "[F19.282] Other psychoactive substance dependence with psychoactive substance-induced sleep disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.288",
+        "display": "[F19.288] Other psychoactive substance dependence with other psychoactive substance-induced disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "F19.29",
+        "display": "[F19.29] Other psychoactive substance dependence with unspecified psychoactive substance-induced disorder"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "281004",
+        "display": "Dementia associated with alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "1383008",
+        "display": "Hallucinogen mood disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "1686006",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced anxiety disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "1973000",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced psychotic disorder with delusions (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "2403008",
+        "display": "Psychoactive substance dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "5002000",
+        "display": "Inhalant dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "5444000",
+        "display": "Sedative, hypnotic AND/OR anxiolytic intoxication delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "5602001",
+        "display": "Opioid abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "6348008",
+        "display": "Cocaine-induced psychotic disorder with hallucinations (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "7052005",
+        "display": "Alcohol hallucinosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "7071007",
+        "display": "Phencyclidine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "7200002",
+        "display": "Alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "8635005",
+        "display": "Alcohol withdrawal delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "8837000",
+        "display": "Delirium caused by amphetamine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "10028000",
+        "display": "Uncomplicated sedative, hypnotic AND/OR anxiolytic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "10327003",
+        "display": "Cocaine-induced mood disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "11387009",
+        "display": "Organic mental disorder caused by psychoactive substance (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "14784000",
+        "display": "Organic mental disorder caused by opioid (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15167005",
+        "display": "Alcohol abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15277004",
+        "display": "Hallucinogen-induced anxiety disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "18653004",
+        "display": "Alcohol intoxication delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "18689007",
+        "display": "Inhalant intoxication delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "19445006",
+        "display": "Opioid-induced psychotic disorder with hallucinations (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "20385005",
+        "display": "Psychotic disorder with delusions caused by opioid (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "20876004",
+        "display": "Inhalant-induced anxiety disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "21647008",
+        "display": "Amphetamine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "22574000",
+        "display": "Cocaine-induced sleep disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "25753007",
+        "display": "Amphetamine-induced sleep disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "26714005",
+        "display": "Cannabis-induced psychotic disorder with hallucinations (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "27956007",
+        "display": "Cocaine intoxication (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "28864000",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced mood disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "29212009",
+        "display": "Organic mental disorder caused by ingestible alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "29733004",
+        "display": "Mood disorder caused by opioid (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "30491001",
+        "display": "Cocaine delusional disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "31956009",
+        "display": "Cocaine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "32009006",
+        "display": "Hallucinogen hallucinosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "32358001",
+        "display": "Amphetamine delusional disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "32875003",
+        "display": "Inhalant-induced persisting dementia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "34938008",
+        "display": "Anxiety disorder caused by alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "37344009",
+        "display": "Cannabis abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "38247002",
+        "display": "Hallucinogen dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "39807006",
+        "display": "Cannabis intoxication delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "39951001",
+        "display": "Cannabis-induced anxiety disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "40571009",
+        "display": "Hallucinogen intoxication delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "41083005",
+        "display": "Sleep disorder caused by ingestible alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "42344001",
+        "display": "Psychosis caused by ingestible alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "43497001",
+        "display": "Amphetamine-induced mood disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "46975003",
+        "display": "Organic mental disorder caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "47664006",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced psychotic disorder with hallucinations (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "50320000",
+        "display": "Hallucinogen intoxication (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "50933003",
+        "display": "Hallucinogen delusional disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "51443000",
+        "display": "Amphetamine-induced psychotic disorder with hallucinations (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "51493001",
+        "display": "Anxiety disorder caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "52866005",
+        "display": "Opioid intoxication delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "53050002",
+        "display": "Organic mental disorder caused by hallucinogen (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "53936005",
+        "display": "Mood disorder caused by ingestible alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "57588009",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced sleep disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "59651006",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced persisting dementia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "61104008",
+        "display": "Inhalant-induced organic mental disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "61144001",
+        "display": "Alcohol-induced psychotic disorder with delusions (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "63649001",
+        "display": "Cannabis delusional disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "63983005",
+        "display": "Inhalant-induced psychotic disorder with hallucinations (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "64386003",
+        "display": "Sedative abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "66590003",
+        "display": "Alcohol dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "70328006",
+        "display": "Cocaine intoxication delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "70340006",
+        "display": "Inhalant abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "70701004",
+        "display": "Alcoholic amblyopia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "70932007",
+        "display": "Sexual dysfunction caused by amfetamine (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "71328000",
+        "display": "Sexual dysfunction caused by opioid (finding)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "73097000",
+        "display": "Alcohol amnestic disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "74851005",
+        "display": "Hallucinogen abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "74934004",
+        "display": "Psychoactive substance-induced withdrawal syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "75122001",
+        "display": "Inhalant-induced psychotic disorder with delusions (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "75544000",
+        "display": "Opioid dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "77355000",
+        "display": "Organic mental disorder caused by cannabis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "78267003",
+        "display": "Cocaine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "78358001",
+        "display": "Amphetamine withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "80868005",
+        "display": "Cocaine withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "82339009",
+        "display": "Anxiety disorder caused by amfetamine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "83367009",
+        "display": "Organic mental disorder caused by amphetamine and/or amfetamine derivative (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "84758004",
+        "display": "Amphetamine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "85005007",
+        "display": "Cannabis dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "85561006",
+        "display": "Uncomplicated alcohol withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "86325007",
+        "display": "Non megaloblastic anemia due to alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "87132004",
+        "display": "Opioid withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "87810006",
+        "display": "Megaloblastic anemia due to alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "88926005",
+        "display": "Opioid-induced sleep disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "89451009",
+        "display": "Inhalant-induced mood disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "91388009",
+        "display": "Psychoactive substance abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "95661003",
+        "display": "Ergotamine withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191475009",
+        "display": "Chronic alcoholic brain syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191476005",
+        "display": "Alcohol withdrawal hallucinosis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191478006",
+        "display": "Alcoholic paranoia (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191480000",
+        "display": "Alcohol withdrawal syndrome (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191802004",
+        "display": "Acute alcoholic intoxication in alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191804003",
+        "display": "Continuous acute alcoholic intoxication in alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191805002",
+        "display": "Episodic acute alcoholic intoxication in alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191811004",
+        "display": "Continuous chronic alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191812006",
+        "display": "Episodic chronic alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191819002",
+        "display": "Continuous opioid dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191820008",
+        "display": "Episodic opioid dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191825003",
+        "display": "Hypnotic or anxiolytic dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191826002",
+        "display": "Hypnotic or anxiolytic dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191831000",
+        "display": "Cocaine dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191832007",
+        "display": "Cocaine dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191837001",
+        "display": "Cannabis dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191838006",
+        "display": "Cannabis dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191843004",
+        "display": "Amphetamine or psychostimulant dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191844005",
+        "display": "Amphetamine or psychostimulant dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191849000",
+        "display": "Hallucinogen dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191850000",
+        "display": "Hallucinogen dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191853003",
+        "display": "Glue sniffing dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191855005",
+        "display": "Glue sniffing dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191856006",
+        "display": "Glue sniffing dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191865004",
+        "display": "Combined opioid with non-opioid drug dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191867007",
+        "display": "Combined opioid with non-opioid drug dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191868002",
+        "display": "Combined opioid with non-opioid drug dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191877009",
+        "display": "Ecstasy type drug dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191882002",
+        "display": "Nondependent alcohol abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191883007",
+        "display": "Nondependent alcohol abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191891003",
+        "display": "Nondependent cannabis abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191893000",
+        "display": "Nondependent cannabis abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191894006",
+        "display": "Nondependent cannabis abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191899001",
+        "display": "Nondependent hallucinogen abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191900006",
+        "display": "Nondependent hallucinogen abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191905001",
+        "display": "Nondependent hypnotic or anxiolytic abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191906000",
+        "display": "Nondependent hypnotic or anxiolytic abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191909007",
+        "display": "Nondependent opioid abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191912005",
+        "display": "Nondependent opioid abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191913000",
+        "display": "Nondependent opioid abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191916008",
+        "display": "Nondependent cocaine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191918009",
+        "display": "Nondependent cocaine abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191919001",
+        "display": "Nondependent cocaine abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191924003",
+        "display": "Nondependent amphetamine or psychostimulant abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "191925002",
+        "display": "Nondependent amphetamine or psychostimulant abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "230443000",
+        "display": "Narcotic withdrawal epilepsy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231461004",
+        "display": "Hypnotic or anxiolytic abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231462006",
+        "display": "Barbiturate abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231468005",
+        "display": "Lysergic acid diethylamide dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231469002",
+        "display": "Mescaline dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231470001",
+        "display": "Anxiolytic dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231472009",
+        "display": "Barbiturate dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231473004",
+        "display": "Benzodiazepine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231474005",
+        "display": "Diazepam dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231475006",
+        "display": "Librium dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231477003",
+        "display": "Dependence on diamorphine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231478008",
+        "display": "Methadone dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231479000",
+        "display": "Morphine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "231480002",
+        "display": "Opium dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "268640002",
+        "display": "Hypnotic or anxiolytic dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "268645007",
+        "display": "Nondependent alcohol abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "268646008",
+        "display": "Nondependent hallucinogen abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "268647004",
+        "display": "Nondependent hypnotic or anxiolytic abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "268648009",
+        "display": "Nondependent amphetamine or other psychostimulant abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "275471001",
+        "display": "Psychostimulant dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "284591009",
+        "display": "Persistent alcohol abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "301643003",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced persisting amnestic disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "308742005",
+        "display": "Alcohol withdrawal-induced convulsion (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "312098001",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-related disorder (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "312936002",
+        "display": "Organic mental disorder caused by anxiolytic agent (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "361150008",
+        "display": "Sedative, hypnotic AND/OR anxiolytic withdrawal delirium (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "361151007",
+        "display": "Delirium due to sedative withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "416714005",
+        "display": "Episodic flashbacks (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "417143004",
+        "display": "Short duration flashbacks (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "425339005",
+        "display": "Barbiturate withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "425885002",
+        "display": "Continuous phencyclidine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "426001001",
+        "display": "Fentanyl dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "426095000",
+        "display": "Continuous inhalant abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "426873000",
+        "display": "Methamphetamine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "427205009",
+        "display": "Amphetamine abuse, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "427229002",
+        "display": "Episodic inhalant abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "427327003",
+        "display": "Sedative dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "428370001",
+        "display": "Psychostimulant withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "429692000",
+        "display": "Amphetamine abuse, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "441527004",
+        "display": "Stimulant abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "442406005",
+        "display": "Stimulant dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "699449003",
+        "display": "Methamphetamine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703845008",
+        "display": "Buprenorphine dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703846009",
+        "display": "Buprenorphine withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703847000",
+        "display": "Buprenorphine \u002B naloxone withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703848005",
+        "display": "Cannabis withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703849002",
+        "display": "Benzodiazepine withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703850002",
+        "display": "Delirium due to benzodiazepine withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "713583005",
+        "display": "Mild alcohol dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "713862009",
+        "display": "Severe alcohol dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "714829008",
+        "display": "Moderate alcohol dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723926008",
+        "display": "Perceptual disturbances and seizures co-occurrent and due to alcohol withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723927004",
+        "display": "Psychotic disorder caused by alcohol with schizophreniform symptoms (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723928009",
+        "display": "Mood disorder with depressive symptoms caused by alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723929001",
+        "display": "Mood disorder with manic symptoms caused by alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723930006",
+        "display": "Mood disorder with mixed manic and depressive symptoms caused by alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723933008",
+        "display": "Cannabis dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723936000",
+        "display": "Psychotic disorder caused by cannabis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "723937009",
+        "display": "Sleep disorder caused by cannabis (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724653003",
+        "display": "Opioid dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724655005",
+        "display": "Psychotic disorder caused by opioid (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724656006",
+        "display": "Hypnotic dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724657002",
+        "display": "Sedative dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724658007",
+        "display": "Hypnotic dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724659004",
+        "display": "Anxiolytic dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724660009",
+        "display": "Hypnotic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724661008",
+        "display": "Anxiolytic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724662001",
+        "display": "Sedative withdrawal without complication (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724663006",
+        "display": "Hypnotic withdrawal without complication (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724664000",
+        "display": "Anxiolytic withdrawal without complication (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724665004",
+        "display": "Perceptual disturbances co-occurrent and due to sedative withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724666003",
+        "display": "Perceptual disturbances co-occurrent and due to hypnotic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724667007",
+        "display": "Perceptual disturbances co-occurrent and due to anxiolytic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724668002",
+        "display": "Seizure co-occurrent and due to sedative withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724669005",
+        "display": "Seizure co-occurrent and due to hypnotic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724670006",
+        "display": "Seizure co-occurrent and due to anxiolytic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724671005",
+        "display": "Perceptual disturbances and seizures co-occurrent and due to sedative withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724672003",
+        "display": "Perceptual disturbances and seizures co-occurrent and due to hypnotic withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724675001",
+        "display": "Psychotic disorder caused by anxiolytic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724688003",
+        "display": "Cocaine dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724689006",
+        "display": "Psychotic disorder caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724690002",
+        "display": "Mood disorder with depressive symptoms caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724691003",
+        "display": "Mood disorder with manic symptoms caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724692005",
+        "display": "Mood disorder with mixed depressive and manic symptoms caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724693000",
+        "display": "Obsessive compulsive disorder caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724695007",
+        "display": "Hallucinogen dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724696008",
+        "display": "Psychotic disorder caused by hallucinogen (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724700000",
+        "display": "Volatile inhalant dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724701001",
+        "display": "Volatile inhalant withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724702008",
+        "display": "Psychotic disorder caused by volatile inhalant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724704009",
+        "display": "Methylenedioxymethamphetamine dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724706006",
+        "display": "Psychotic disorder caused by methylenedioxymethamphetamine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724712001",
+        "display": "Harmful use of dissociative drug (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724714000",
+        "display": "Dependence caused by dissociative substance (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724715004",
+        "display": "Dependence caused by ketamine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724720004",
+        "display": "Mood disorder caused by dissociative drug (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724724008",
+        "display": "Psychoactive substance dependence with current use (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724725009",
+        "display": "Psychoactive substance withdrawal without complication (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724726005",
+        "display": "Perceptual disturbances co-occurrent and due to psychoactive substance withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724727001",
+        "display": "Seizure co-occurrent and due to psychoactive substance withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724728006",
+        "display": "Perceptual disturbances and seizures co-occurrent and due to psychoactive substance withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "724732000",
+        "display": "Sleep disorder caused by psychoactive substance (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "735750005",
+        "display": "Psychotic disorder with schizophreniform symptoms caused by cocaine (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "737338002",
+        "display": "Synthetic cannabinoid withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762320004",
+        "display": "Mood disorder with manic symptoms caused by opioid (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762321000",
+        "display": "Mood disorder with depressive symptoms caused by opioid (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762322007",
+        "display": "Mood disorder with mixed depressive and manic symptoms caused by opioid (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762324008",
+        "display": "Delirium caused by stimulant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762325009",
+        "display": "Psychotic disorder caused by stimulant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762326005",
+        "display": "Psychotic disorder with hallucinations caused by stimulant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762327001",
+        "display": "Psychotic disorder with delusions caused by stimulant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762333005",
+        "display": "Sexual dysfunction caused by stimulant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762334004",
+        "display": "Sleep disorder caused by stimulant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762335003",
+        "display": "Mood disorder with manic symptoms caused by hallucinogen (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762336002",
+        "display": "Mood disorder with depressive symptoms caused by hallucinogen (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762337006",
+        "display": "Mood disorder with mixed depressive and manic symptoms caused by hallucinogen (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762338001",
+        "display": "Mood disorder with manic symptoms caused by volatile inhalant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762339009",
+        "display": "Mood disorder with depressive symptoms caused by volatile inhalant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762340006",
+        "display": "Mood disorder with mixed depressive and manic symptoms caused by volatile inhalant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762344002",
+        "display": "Mood disorder with manic symptoms caused by dissociative drug (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762345001",
+        "display": "Mood disorder with depressive symptoms caused by dissociative drug (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762346000",
+        "display": "Mood disorder with mixed depressive and manic symptoms caused by dissociative drug (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762517008",
+        "display": "Sexual dysfunction caused by synthetic cathinone (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "762672001",
+        "display": "Synthetic cathinone withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "785277001",
+        "display": "Harmful pattern of use of amfetamine and/or amfetamine derivative (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "817962007",
+        "display": "Chlordiazepoxide dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "838527002",
+        "display": "Amfetamine and/or amfetamine derivative drug dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "1081000119105",
+        "display": "Opioid dependence, on agonist therapy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "23601000119102",
+        "display": "Sedative withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "34111000119108",
+        "display": "Nondependent amphetamine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "86391000119101",
+        "display": "Inhalant dependence, continuous (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "86401000119104",
+        "display": "Inhalant dependence, episodic (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "97571000119109",
+        "display": "Thrombocytopenia co-occurrent and due to alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "125851000119106",
+        "display": "Continuous sedative abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "135301000119103",
+        "display": "Parasomnia caused by alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "135311000119100",
+        "display": "Insomnia caused by alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "135321000119107",
+        "display": "Hypersomnia caused by alcohol (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "144981000119109",
+        "display": "Nondependent intraveous amphetamine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "145101000119102",
+        "display": "Intravenous cocaine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "145121000119106",
+        "display": "Intravenous nondependent opioid abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "145841000119107",
+        "display": "Episodic phencyclidine abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "154211000119108",
+        "display": "Chronic pancreatitis due to chronic alcoholism (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "288021000119107",
+        "display": "Disorder due to alcohol abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "288031000119105",
+        "display": "Alcohol induced disorder co-occurrent and due to alcohol dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "288461000119105",
+        "display": "Psychosis caused by inhalant (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "288851000119106",
+        "display": "Opioid-induced mood disorder due to opioid abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "288861000119108",
+        "display": "Opioid-induced mood disorder due to opioid dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "10741871000119101",
+        "display": "Alcohol dependence in pregnancy (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "10755041000119100",
+        "display": "Alcohol dependence in childbirth (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "11047881000119101",
+        "display": "Cannabis hyperemesis syndrome co-occurrent and due to cannabis abuse (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "11048011000119103",
+        "display": "Cannabis hyperemesis syndrome co-occurrent and due to cannabis dependence (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "12398281000119105",
+        "display": "Methamphetamine withdrawal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "12398651000119100",
+        "display": "Sleep disorder caused by methamphetamine (disorder)"
+      }
+    ]
+  },
+  "id": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013",
+  "resourceType": "ValueSet"
+}

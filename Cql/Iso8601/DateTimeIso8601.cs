@@ -5,37 +5,100 @@ using System.Text.RegularExpressions;
 
 namespace Ncqa.Iso8601
 {
+    /// <summary>
+    /// Represents an instant in time according to ISO 8601, with components isolated and with supplied precision level retained.
+    /// </summary>
     public class DateTimeIso8601
     {
 
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
         // That conversion ad nauseum is more expensive than superfluous memory use.
 
+        /// <summary>
+        /// Gets the year component of this date time.
+        /// </summary>
         public int Year { get; }
+        /// <summary>
+        /// Gets the month component of this date time.
+        /// </summary>
         public int? Month { get; }
+        /// <summary>
+        /// Gets the day component of this date time.
+        /// </summary>
         public int? Day { get; }
+        /// <summary>
+        /// Gets the hour component of this date time.
+        /// </summary>
         public int? Hour { get; }
+        /// <summary>
+        /// Gets the minute component of this date time.
+        /// </summary>
         public int? Minute { get; }
+        /// <summary>
+        /// Gets the second component of this date time.
+        /// </summary>
         public int? Second { get; }
+        /// <summary>
+        /// Gets the millisecond component of this date time.
+        /// </summary>
         public int? Millisecond { get; }
+        /// <summary>
+        /// Gets the offset hour component of this date time.
+        /// </summary>
         public int? OffsetHour { get; }
+        /// <summary>
+        /// Gets the offset minute component of this date time.
+        /// </summary>
         public int? OffsetMinute { get; }
-
+        /// <summary>
+        /// Gets the offset component expressed as rational hours, for example an offset of 01:30 would be expressed as 1.5.
+        /// </summary>
         public decimal? RationalOffset { get; }
 
+        /// <summary>
+        /// Gets the precision of this date time.
+        /// </summary>
         public DateTimePrecision Precision { get; }
 
+        /// <summary>
+        /// Gets this date time represented as a <see cref="DateTimeOffset"/>.
+        /// </summary>
         public DateTimeOffset DateTimeOffset { get; }
 
+        /// <summary>
+        /// Gets this date time represented as a <see cref="DateTimeOffset"/ in UTC.
+        /// </summary>
         public DateTimeOffset DateTimeOffsetUtc { get; set; }
 
         private readonly string String;
 
-        public static readonly Regex Expression = new Regex(@"(?'year'\d\d\d\d)(-(?'month'\d\d)(-(?'day'\d\d)(T(?'hour'\d\d)?(:(?'minute'\d\d)?(:(?'second'\d\d)(\.(?'ms'\d{1,3}))?)?)?(?'timezone'([\+\-]?(?'tzhour'\d\d)(:(?'tzminute'\d\d))?)|Z)?)?)?)?", RegexOptions.Compiled);
+        /// <summary>
+        /// The regular expression used to parse ISO 8601 date times.
+        /// </summary>
+        public static readonly Regex Expression = new(@"(?'year'\d\d\d\d)(-(?'month'\d\d)(-(?'day'\d\d)(T(?'hour'\d\d)?(:(?'minute'\d\d)?(:(?'second'\d\d)(\.(?'ms'\d{1,3}))?)?)?(?'timezone'([\+\-]?(?'tzhour'\d\d)(:(?'tzminute'\d\d))?)|Z)?)?)?)?", RegexOptions.Compiled);
 
-        public static DateTimeIso8601 Now => new DateTimeIso8601(DateTimeOffset.Now, DateTimePrecision.Millisecond);
-        public static DateTimeIso8601 UtcNow => new DateTimeIso8601(DateTimeOffset.UtcNow, DateTimePrecision.Millisecond);
+        /// <summary>
+        /// Local now expressed as a <see cref="DateTimeOffset"/>.
+        /// </summary>
+        public static DateTimeIso8601 Now => new(DateTimeOffset.Now, DateTimePrecision.Millisecond);
+        /// <summary>
+        /// UTC now expressed as a <see cref="DateTimeOffset"/>.
+        /// </summary>
+        public static DateTimeIso8601 UtcNow => new(DateTimeOffset.UtcNow, DateTimePrecision.Millisecond);
 
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        /// <param name="year">The year component of the date.</param>
+        /// <param name="month">The month component of the date, or <see langword ="null"/>.</param>
+        /// <param name="day">The day component of the date, or <see langword ="null"/>.</param>
+        /// <param name="hour">The hour component of the date, or <see langword ="null"/>.</param>
+        /// <param name="minute">The minute component of the date, or <see langword ="null"/>.</param>
+        /// <param name="second">The second component of the date, or <see langword ="null"/>.</param>
+        /// <param name="ms">The millisecond component of the date, or <see langword ="null"/>.</param>
+        /// <param name="osHour">The hour component of the date, or <see langword ="null"/>.</param>
+        /// <param name="osMinute">The minute component of the date, or <see langword ="null"/>.</param>
+        /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateTimeIso8601(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, bool strict = false) :
             this(Format(year, month, day, hour, minute, second, ms, osHour, osMinute, DateTimePrecision.Millisecond),
                 year, month, day, hour, minute, second, ms, osHour, osMinute, strict)
@@ -46,14 +109,24 @@ namespace Ncqa.Iso8601
         /// Creates a new instance, initializing fields from the values specified in <paramref name="dto"/>
         /// up to and including <paramref name="precision"/>, leaving all others <see langword="null"/>.
         /// </summary>
+        /// <param name="dto">The date time represented by a <see cref="DateTimeOffset"/>.</param>
+        /// <param name="precision">The desired precision for this ISO date time.</param>
+        /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public DateTimeIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
             this(Format(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes, precision),
                 dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes, strict, precision)
         {
         }
 
-        public DateTimeIso8601(DateIso8601 date, TimeIso8601? time = null) :
-            this(date.Year, date.Month, date.Day, time?.Hour, time?.Minute, time?.Second, time?.Millisecond, time?.OffsetHour, time?.OffsetMinute)
+        /// <summary>
+        /// Creates a new instance, initializing fields from the values specified in <paramref name="dto"/>
+        /// up to and including <paramref name="precision"/>, leaving all others <see langword="null"/>.
+        /// </summary>
+        /// <param name="date">The date portion of the date time represented by a <see cref="DateTimeOffset"/>.</param>
+        /// <param name="date">The time portion represented by a <see cref="DateTimeOffset"/>.</param>
+        /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
+        public DateTimeIso8601(DateIso8601 date, TimeIso8601? time = null, bool strict = false) :
+            this(date.Year, date.Month, date.Day, time?.Hour, time?.Minute, time?.Second, time?.Millisecond, time?.OffsetHour, time?.OffsetMinute, strict)
         {
         }
 
@@ -131,7 +204,7 @@ namespace Ncqa.Iso8601
                             else if (osMinute.HasValue)
                                 throw new ArgumentException("If offset hour is not specified, then all following values must also not be specified.", nameof(day));
                         }
-                        else if (minute.HasValue || second.HasValue || ms.HasValue )
+                        else if (minute.HasValue || second.HasValue || ms.HasValue)
                             throw new ArgumentException("If hour is not specified, then all following values must also not be specified.", nameof(day));
                         else
                             Precision = DateTimePrecision.Day;
@@ -219,18 +292,23 @@ namespace Ncqa.Iso8601
             String = @string;
         }
 
-        public DateTimeIso8601 InPrecision(DateTimePrecision precision) => new DateTimeIso8601(DateTimeOffset, precision);
-
         public override string ToString() => String;
         public override bool Equals(object obj) => Equals(String, obj?.ToString());
         public override int GetHashCode() => String.GetHashCode();
 
-        public static DateTimeIso8601 Parse(string stringValue)
+        internal static DateTimeIso8601 Parse(string stringValue)
         {
             if (TryParse(stringValue, out var dateTime))
                 return dateTime!;
             else throw new ArgumentException($"Unable to parse value {stringValue} as an ISO 8601 datetime");
         }
+
+        /// <summary>
+        /// Tries to parse <paramref name="stringValue"/> as an ISO 8601 date time.
+        /// </summary>
+        /// <param name="stringValue">The string to parse</param>
+        /// <param name="dateTimeValue">The parsed result, or <see langword ="null"/> if unparseable.</param>
+        /// <returns><see langword ="true"/> if the string is a valid ISO 8601 date and parsing is successful; otherwise <see langword ="false"/>.</returns>
 
         public static bool TryParse(string stringValue, out DateTimeIso8601? dateTimeValue)
         {
@@ -245,9 +323,13 @@ namespace Ncqa.Iso8601
                 dateTimeValue = stringValue;
                 return true;
             }
-
         }
 
+        /// <summary>
+        /// Converts a string to an ISO 8601 date time, or throws.
+        /// </summary>
+        /// <param name="stringValue">The string to convert.</param>
+        /// <exception cref="ArgumentException">When <paramref name="stringValue"/> cannot be parsed.</exception>
         public static implicit operator DateTimeIso8601(string stringValue)
         {
             var parts = Expression.Match(stringValue);

@@ -1,0 +1,469 @@
+{
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1009",
+      "system": "urn:ietf:rfc:3986"
+    }
+  ],
+  "version": "2022-08-01",
+  "status": "active",
+  "expansion": {
+    "identifier": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009#all",
+    "parameter": [
+      {
+        "valueDateTime": "2022-12-20T18:21:16.451Z",
+        "name": "date"
+      }
+    ],
+    "contains": [
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.01",
+        "display": "[I21.01] ST elevation (STEMI) myocardial infarction involving left main coronary artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.02",
+        "display": "[I21.02] ST elevation (STEMI) myocardial infarction involving left anterior descending coronary artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.09",
+        "display": "[I21.09] ST elevation (STEMI) myocardial infarction involving other coronary artery of anterior wall"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.11",
+        "display": "[I21.11] ST elevation (STEMI) myocardial infarction involving right coronary artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.19",
+        "display": "[I21.19] ST elevation (STEMI) myocardial infarction involving other coronary artery of inferior wall"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.21",
+        "display": "[I21.21] ST elevation (STEMI) myocardial infarction involving left circumflex coronary artery"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.29",
+        "display": "[I21.29] ST elevation (STEMI) myocardial infarction involving other sites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.3",
+        "display": "[I21.3] ST elevation (STEMI) myocardial infarction of unspecified site"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "code": "I21.4",
+        "display": "[I21.4] Non-ST elevation (NSTEMI) myocardial infarction"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "282006",
+        "display": "Acute myocardial infarction of basal-lateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15990001",
+        "display": "Acute myocardial infarction of posterolateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "30277009",
+        "display": "Rupture of ventricle due to acute myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "52035003",
+        "display": "Acute anteroapical myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "54329005",
+        "display": "Acute myocardial infarction of anterior wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "57054005",
+        "display": "Acute myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "58612006",
+        "display": "Acute myocardial infarction of lateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "59063002",
+        "display": "Acute myocardial infarction of apical-lateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "62695002",
+        "display": "Acute anteroseptal myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "64627002",
+        "display": "Acute myocardial infarction of high lateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "65547006",
+        "display": "Acute myocardial infarction of inferolateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "70211005",
+        "display": "Acute myocardial infarction of anterolateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "70422006",
+        "display": "Acute subendocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "70998009",
+        "display": "Acute myocardial infarction of basal inferior segment of left ventricle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "73795002",
+        "display": "Acute myocardial infarction of inferior wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "76593002",
+        "display": "Acute myocardial infarction of inferoposterior wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "79009004",
+        "display": "Acute myocardial infarction of septum (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "194809007",
+        "display": "Acute atrial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233825009",
+        "display": "Acute Q wave infarction - anteroseptal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233826005",
+        "display": "Acute non-Q wave infarction - anteroseptal (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233827001",
+        "display": "Acute Q wave infarction - anterolateral (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233828006",
+        "display": "Acute non-Q wave infarction - anterolateral (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233829003",
+        "display": "Acute Q wave infarction - inferior (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233830008",
+        "display": "Acute non-Q wave infarction - inferior (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233831007",
+        "display": "Acute Q wave infarction - inferolateral (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233832000",
+        "display": "Acute non-Q wave infarction - inferolateral (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233833005",
+        "display": "Acute Q wave infarction - lateral (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233834004",
+        "display": "Acute non-Q wave infarction - lateral (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233835003",
+        "display": "Acute widespread myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233836002",
+        "display": "Acute Q wave infarction - widespread (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233837006",
+        "display": "Acute non-Q wave infarction - widespread (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "233838001",
+        "display": "Acute posterior myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "304914007",
+        "display": "Acute Q wave myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "307140009",
+        "display": "Acute non-Q wave infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "401303003",
+        "display": "Acute ST segment elevation myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "401314000",
+        "display": "Acute non-ST segment elevation myocardial infarction (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703164000",
+        "display": "Acute ST segment elevation myocardial infarction of anterior wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703165004",
+        "display": "Acute ST segment elevation myocardial infarction of anterior wall involving right ventricle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703212004",
+        "display": "Acute myocardial infarction during procedure (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703213009",
+        "display": "Acute ST segment elevation myocardial infarction of inferior wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703251009",
+        "display": "Acute myocardial infarction of inferior wall involving right ventricle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703252002",
+        "display": "Acute myocardial infarction of anterior wall involving right ventricle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "703253007",
+        "display": "Acute ST segment elevation myocardial infarction of inferior wall involving right ventricle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "836293000",
+        "display": "Acute myocardial infarction of right ventricle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "836294006",
+        "display": "Acute myocardial infarction of apex of heart (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "836295007",
+        "display": "Acute myocardial infarction of inferolateral wall with posterior extension (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "840309000",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of proximal portion of anterior descending branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "840312002",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of mid portion of anterior descending branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "840316004",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of distal portion of anterior descending branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "840609007",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of anterior descending branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "840680009",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of septal branch of anterior descending branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "846668006",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of diagonal branch of anterior descending branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "846683001",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of intermediate artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "868214006",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of proximal portion of right coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "868217004",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of distal portion of right coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "868220007",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of mid portion of right coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "868224003",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of marginal branch of right coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "868225002",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of posterior descending branch of right coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "868226001",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of posterior lateral branch of right coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "896689003",
+        "display": "Acute myocardial infarction due to occlusion of circumflex branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "896691006",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of circumflex branch of left coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "896696001",
+        "display": "Acute ST segment elevation myocardial infarction of apex of heart (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "896697005",
+        "display": "Acute ST segment elevation myocardial infarction of right ventricle (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "17531000119105",
+        "display": "Acute myocardial infarction due to left coronary artery occlusion (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "23311000119105",
+        "display": "Acute myocardial infarction due to right coronary artery occlusion (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "285981000119103",
+        "display": "Acute ST segment elevation myocardial infarction involving left anterior descending coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "285991000119100",
+        "display": "Acute ST segment elevation myocardial infarction involving left main coronary artery (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "12238111000119106",
+        "display": "Acute ST segment elevation myocardial infarction of inferolateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "12238151000119107",
+        "display": "Acute ST segment elevation myocardial infarction of inferoposterior wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15712841000119100",
+        "display": "Acute ST segment elevation myocardial infarction of posterolateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15712881000119105",
+        "display": "Acute ST segment elevation myocardial infarction of anterolateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15712921000119103",
+        "display": "Acute ST segment elevation myocardial infarction of lateral wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15712961000119108",
+        "display": "Acute ST segment elevation myocardial infarction of anteroseptal wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15713041000119103",
+        "display": "Acute ST segment elevation myocardial infarction of posterior wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15713081000119108",
+        "display": "Acute ST segment elevation myocardial infarction due to left coronary artery occlusion (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15713121000119105",
+        "display": "Acute ST segment elevation myocardial infarction due to right coronary artery occlusion (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15713161000119100",
+        "display": "Acute ST segment elevation myocardial infarction of septum (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15713201000119105",
+        "display": "Acute ST segment elevation myocardial infarction of posterobasal wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15962541000119106",
+        "display": "Acute ST segment elevation myocardial infarction of anteroapical wall (disorder)"
+      },
+      {
+        "system": "http://snomed.info/sct/731000124108",
+        "code": "15963181000119104",
+        "display": "Acute ST segment elevation myocardial infarction due to occlusion of circumflex coronary artery (disorder)"
+      }
+    ]
+  },
+  "id": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009",
+  "resourceType": "ValueSet"
+}

@@ -31,6 +31,13 @@ namespace Ncqa.Elm
             var identifier = lib["identifier"];
             return (identifier?["id"]!.Value<string>()!, identifier?["version"]!.Value<string>()!);
         }
+
+        /// <summary>
+        /// Returns "<paramref name="name"/>-<paramref name="version"/>".
+        /// </summary>
+        /// <param name="name">The name of the library.</param>
+        /// <param name="version">The version.</param>
+        /// <returns>"<paramref name="name"/>-<paramref name="version"/>"</returns>
         public static string? NameAndVersionFor(string? name, string? version)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -42,6 +49,35 @@ namespace Ncqa.Elm
         }
 
         public string NameAndVersion => $"{library?.identifier?.id}-{library?.identifier?.version}";
+
+        /// <returns>(startLine, startColumn, endLine, endColumn)</returns>
+        public static (int, int, int, int) ParseLocator(string locator)
+        {
+            var firstColon = locator.IndexOf(':');
+            if (firstColon > -1)
+            {
+                var dash = locator.IndexOf('-', firstColon);
+                if (dash > -1)
+                {
+                    var secondColon = locator.IndexOf(':', dash);
+                    if (secondColon > -1)
+                    {
+                        var startLine = int.Parse(locator.Substring(0, firstColon));
+                        var startCol = int.Parse(locator.Substring(firstColon + 1, dash - firstColon - 1));
+                        var endline = int.Parse(locator.Substring(dash + 1, secondColon - dash - 1));
+                        var endCol = int.Parse(locator.Substring(secondColon + 1));
+                        return (startLine, startCol, endline, endCol);
+                    }
+                }
+                else
+                {
+                    var startLine = int.Parse(locator.Substring(0, firstColon));
+                    var startCol = int.Parse(locator.Substring(firstColon + 1));
+                    return (startLine, startCol, startLine, startCol);
+                }
+            }
+            throw new ArgumentException("Locator is not in the right format (dd:dd-dd:dd)", nameof(locator));
+        }
 
         public static ElmPackage? LoadFrom(string path) => LoadFrom(new FileInfo(path));
 
