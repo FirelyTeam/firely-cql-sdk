@@ -1,6 +1,6 @@
-﻿using Ncqa.Iso8601;
+﻿using Hl7.Cql.Iso8601;
 
-namespace Ncqa.Cql
+namespace Hl7.Cql
 {
     /// <summary>
     /// Defines UCUM unit constants.

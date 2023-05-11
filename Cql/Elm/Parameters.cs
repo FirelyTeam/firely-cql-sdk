@@ -1,9 +1,6 @@
-﻿using Ncqa.Elm.Expressions;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hl7.Cql.Elm.Expressions;
 
-namespace Ncqa.Elm
+namespace Hl7.Cql.Elm
 {
     public class Parameters
     {

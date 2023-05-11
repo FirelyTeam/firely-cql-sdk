@@ -1,11 +1,11 @@
-﻿using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
+﻿using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
-using elm = Ncqa.Elm.Expressions;
+using elm = Hl7.Cql.Elm.Expressions;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {

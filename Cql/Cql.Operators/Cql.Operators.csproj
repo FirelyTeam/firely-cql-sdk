@@ -12,7 +12,6 @@
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-		<ProjectReference Include="..\Cql\Cql.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -1,12 +1,10 @@
 ﻿
-using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.ValueSets;
+using Hl7.Cql.Operators;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
-namespace Ncqa.Cql.Runtime
+namespace Hl7.Cql.Runtime
 {
     /// <summary>
     /// Contains information required to execute CQL.

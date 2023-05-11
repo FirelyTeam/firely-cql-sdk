@@ -1,14 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.ValueSetLoaders;
-using Ncqa.Fhir.R4;
-using Ncqa.Fhir.R4.Model;
+using Hl7.Cql.ValueSetLoaders;
+
+using Hl7.Cql.Poco.Fhir.R4;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
 namespace CoreTests
 {

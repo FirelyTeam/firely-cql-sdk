@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using AgileObjects.ReadableExpressions;
 
-namespace Ncqa.Cql.CodeGeneration.NET.Visitors
+namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     /// <summary>
     /// This visitor converts some expression types to blocks (i.e., wraps them in braces).

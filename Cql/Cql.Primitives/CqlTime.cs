@@ -1,9 +1,8 @@
-﻿using Ncqa.Iso8601;
+﻿using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql.Runtime.Primitives
+namespace Hl7.Cql.Primitives
 {
     /// <summary>
     /// Implements the System Time type.

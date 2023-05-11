@@ -1,10 +1,8 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
-using System;
+﻿using Hl7.Cql.Primitives;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 
-namespace Ncqa.Cql.Operators
+namespace Hl7.Cql.Operators
 {
     /// <summary>
     /// Defines how the <see cref="CqlOperator.Retrieve"/> operator acquires its data.

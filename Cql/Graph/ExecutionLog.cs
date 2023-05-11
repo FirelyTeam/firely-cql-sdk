@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public abstract class ExecutionLog
     {

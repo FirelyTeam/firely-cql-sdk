@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql", "Cql\Cql.csproj", "{2AD5A32B-8CAC-4B99-B353-07C9FC49C142}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elm", "Elm\Elm.csproj", "{78C3855A-EEE7-4283-BE5F-71F3E3677C11}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Iso8601", "Iso8601\Iso8601.csproj", "{AB8DB957-28A1-4D39-B924-F8E3E39020E4}"
@@ -49,16 +47,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TerminologyClient", "Termin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Firely", "Cql.Firely\Cql.Firely.csproj", "{399B718D-41C6-4DD9-A7E3-B9758CAAEB89}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Abstractions", "Cql.Abstractions\Cql.Abstractions.csproj", "{02DCA9CB-92A1-47C9-BF40-97DDD56DEFF3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2AD5A32B-8CAC-4B99-B353-07C9FC49C142}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2AD5A32B-8CAC-4B99-B353-07C9FC49C142}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2AD5A32B-8CAC-4B99-B353-07C9FC49C142}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2AD5A32B-8CAC-4B99-B353-07C9FC49C142}.Release|Any CPU.Build.0 = Release|Any CPU
 		{78C3855A-EEE7-4283-BE5F-71F3E3677C11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{78C3855A-EEE7-4283-BE5F-71F3E3677C11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78C3855A-EEE7-4283-BE5F-71F3E3677C11}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -143,6 +139,10 @@ Global
 		{399B718D-41C6-4DD9-A7E3-B9758CAAEB89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{399B718D-41C6-4DD9-A7E3-B9758CAAEB89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{399B718D-41C6-4DD9-A7E3-B9758CAAEB89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02DCA9CB-92A1-47C9-BF40-97DDD56DEFF3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02DCA9CB-92A1-47C9-BF40-97DDD56DEFF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02DCA9CB-92A1-47C9-BF40-97DDD56DEFF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02DCA9CB-92A1-47C9-BF40-97DDD56DEFF3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

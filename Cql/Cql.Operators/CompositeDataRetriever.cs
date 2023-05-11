@@ -1,11 +1,10 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
-namespace Ncqa.Cql.Operators
+namespace Hl7.Cql.Operators
 {
     /// <summary>
     /// Composes zero or more <see cref="IDataRetriever"/> instances by concatenating the results of the retrieve methods.

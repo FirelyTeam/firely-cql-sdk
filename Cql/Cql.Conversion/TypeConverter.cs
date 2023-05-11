@@ -1,9 +1,9 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Iso8601;
+﻿using Hl7.Cql.Primitives;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 
-namespace Ncqa.Cql.Runtime.Conversion
+namespace Hl7.Cql.Conversion
 {
     /// <summary>
     /// Converts CQL model types to .NET types, and vice versa.
@@ -39,7 +39,7 @@ namespace Ncqa.Cql.Runtime.Conversion
         }
 
         /// <summary>
-        /// Provides conversion between types in the <see cref="Ncqa.Cql.Runtime.Primitives"/> namespace to equivalent <see cref="Iso8601"/> types.
+        /// Provides conversion between types in the <see cref="Hl7.Cql.Primitives"/> namespace to equivalent <see cref="Iso8601"/> types.
         /// </summary>
         /// <returns>This instance.</returns>
         public TypeConverter ConvertsIsoToCqlPrimitives()

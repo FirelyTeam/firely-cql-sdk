@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql
+namespace Hl7.Cql
 {
     /// <summary>
     /// <para>Defines a generalized type-specific comparison method that a value type or class implements to order or sort its instances.</para>

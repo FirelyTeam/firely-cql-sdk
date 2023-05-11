@@ -1,11 +1,8 @@
-﻿using Ncqa.Cql.MeasureCompiler;
-using Ncqa.Cql.Runtime;
-using System;
-using System.Collections.Generic;
+﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Runtime;
 using System.Linq.Expressions;
-using System.Text;
 
-namespace Ncqa.Cql.CodeGeneration.NET
+namespace Hl7.Cql.CodeGeneration.NET
 {
     public interface ILambdaProvider
     {

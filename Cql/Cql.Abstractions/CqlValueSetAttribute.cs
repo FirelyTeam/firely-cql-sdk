@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql
+namespace Hl7.Cql
 {
     /// <summary>
     /// Declares that this method or property is translated from an ELM value set expression.

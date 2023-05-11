@@ -2,12 +2,10 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>Ncqa.Cql.Comparers</AssemblyName>
-		<RootNamespace>Ncqa.Cql.Comparers</RootNamespace>
+		<AssemblyName>Hl7.Cql.Comparers</AssemblyName>
+		<RootNamespace>Hl7.Cql.Comparers</RootNamespace>
 		<Nullable>enable</Nullable>
 		<LangVersion>9.0</LangVersion>
-		<Authors>NCQA</Authors>
-		<Company>NCQA</Company>
 		<Product>CQL comparers</Product>
 		<Description>Contains CQL comparers</Description>
 		<NoWarn>CS8601</NoWarn>
@@ -15,7 +13,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-	  <ProjectReference Include="..\Cql\Cql.csproj" />
 	</ItemGroup>
 
 </Project>

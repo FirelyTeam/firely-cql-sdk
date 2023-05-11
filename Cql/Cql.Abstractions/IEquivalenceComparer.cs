@@ -1,4 +1,4 @@
-﻿namespace Ncqa.Cql
+﻿namespace Hl7.Cql
 {
     /// <summary>
     /// Defines a method that a type implements to compare two objects for equivalence.

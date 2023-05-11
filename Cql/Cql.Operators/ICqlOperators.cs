@@ -1,9 +1,9 @@
-﻿using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Conversion;
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 
-namespace Ncqa.Cql.Operators
+namespace Hl7.Cql.Operators
 {
     /// <summary>
     /// Defines the operators in the CQL specification.

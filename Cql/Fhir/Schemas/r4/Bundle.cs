@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-
-using System.Globalization;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
-namespace Ncqa.Fhir.Schemas.r4
+namespace Hl7.Cql.Poco.Fhir.Schemas.r4
 {
     public partial class Bundle
     {

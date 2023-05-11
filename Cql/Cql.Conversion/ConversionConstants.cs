@@ -1,4 +1,4 @@
-﻿namespace Ncqa.Cql.Runtime.Conversion
+﻿namespace Hl7.Cql.Conversion
 {
     /// <summary>
     /// Conversions according to https://cql.hl7.org/09-b-cqlreference.html#quantity

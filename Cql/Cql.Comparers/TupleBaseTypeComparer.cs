@@ -1,10 +1,7 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
-using System;
+﻿using Hl7.Cql.Primitives;
 using System.Linq;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql.Comparers
+namespace Hl7.Cql.Comparers
 {
     public class TupleBaseTypeComparer : ICqlComparer<TupleBaseType?>, ICqlComparer
     {

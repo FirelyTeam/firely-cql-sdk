@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql
+namespace Hl7.Cql
 {
     /// <summary>
     /// Utilities for converting between CQL and UCUM units.

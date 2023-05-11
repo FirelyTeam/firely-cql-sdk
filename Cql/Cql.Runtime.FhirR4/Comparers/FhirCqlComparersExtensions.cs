@@ -1,14 +1,10 @@
-﻿using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Fhir.R4.Model;
-using Ncqa.Iso8601;
+﻿using Hl7.Cql.Comparers;
 using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Cql.Runtime.FhirR4.Comparers
+namespace Hl7.Cql.Runtime.FhirR4.Comparers
 {
     public static class FhirCqlComparersExtensions
     {

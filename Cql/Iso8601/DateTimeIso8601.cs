@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Ncqa.Iso8601
+namespace Hl7.Cql.Iso8601
 {
     /// <summary>
     /// Represents an instant in time according to ISO 8601, with components isolated and with supplied precision level retained.

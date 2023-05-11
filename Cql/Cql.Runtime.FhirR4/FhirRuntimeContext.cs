@@ -1,18 +1,12 @@
-﻿using Cql.Operators;
-using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.FhirR4.Comparers;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
-using Ncqa.Fhir.R4.Model;
-using Ncqa.Iso8601;
+﻿using Hl7.Cql.Operators;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Runtime.Loader;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Cql.Runtime.FhirR4
+namespace Hl7.Cql.Runtime.FhirR4
 {
     public static class FhirRuntimeContext
     {

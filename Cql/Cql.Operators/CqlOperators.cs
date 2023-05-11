@@ -1,18 +1,15 @@
 ﻿using Cql.Operators;
-using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
-using Ncqa.Iso8601;
+using Hl7.Cql.Comparers;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 
-namespace Ncqa.Cql.Runtime
+namespace Hl7.Cql.Runtime
 {
     /// <summary>
     /// Impelements <see cref="ICqlOperators"/>.

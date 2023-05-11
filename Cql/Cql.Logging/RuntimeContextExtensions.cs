@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime;
 
-namespace Ncqa.Cql.Runtime.Logging
+namespace Hl7.Cql.Logging
 {
     public static class RuntimeContextExtensions
     {

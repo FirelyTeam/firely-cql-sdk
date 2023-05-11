@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ncqa.Cql.Comparers
+namespace Hl7.Cql.Comparers
 {
     /// <summary>
     /// Compares normalized strings given <see cref="Comparer"/>.

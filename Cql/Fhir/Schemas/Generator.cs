@@ -1,19 +1,16 @@
-﻿using Ncqa.Fhir.Schemas;
-using Ncqa.Graph;
-using Ncqa.Iso8601;
+﻿using Hl7.Cql.Graph;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 using System.Text.RegularExpressions;
+using Hl7.Cql.Poco.Fhir;
 
-namespace Ncqa.Fhir.Schemas
+namespace Hl7.Cql.Poco.Fhir.Schemas
 {
     public class Generator
     {
@@ -25,7 +22,7 @@ namespace Ncqa.Fhir.Schemas
                 graph.SerializeToJson(stream);
             }
             graph = GetBuildOrder(profiles, true);
-            var asmName = "Ncqa.Fhir.Schemas.R4";
+            var asmName = "Hl7.Cql.Poco.Fhir.R4";
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new System.Reflection.AssemblyName(asmName), AssemblyBuilderAccess.Run);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(asmName);
 

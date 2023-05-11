@@ -1,11 +1,10 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Ncqa.Cql.ValueSets
+namespace Hl7.Cql.ValueSets
 {
     /// <summary>
     /// Creates a facade for value set unions.

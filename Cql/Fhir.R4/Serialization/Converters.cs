@@ -1,9 +1,7 @@
-using Ncqa.Fhir.Serialization;
-using Ncqa.Iso8601;
 using System.Text.Json;
-using Ncqa.Fhir.R4.Model;
 
-namespace Ncqa.Fhir.R4.Serialization
+
+namespace Hl7.Cql.Poco.Fhir.R4.Serialization
 {
 	public static class Converters
 	{

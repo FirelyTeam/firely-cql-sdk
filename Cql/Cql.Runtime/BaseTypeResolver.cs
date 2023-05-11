@@ -1,12 +1,10 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Primitives;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 
-namespace Ncqa.Cql.Runtime
+namespace Hl7.Cql.Runtime
 {
     /// <summary>
     /// Provides default resolution of CQL System types to .NET types.

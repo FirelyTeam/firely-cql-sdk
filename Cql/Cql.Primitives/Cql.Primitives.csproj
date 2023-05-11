@@ -2,19 +2,17 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>Ncqa.Cql.Runtime.Primitives</AssemblyName>
-		<RootNamespace>Ncqa.Cql.Runtime.Primitives</RootNamespace>
+		<AssemblyName>Hl7.Cql.Runtime.Primitives</AssemblyName>
+		<RootNamespace>Hl7.Cql.Runtime.Primitives</RootNamespace>
 		<Nullable>enable</Nullable>
 		<LangVersion>9.0</LangVersion>
-		<Authors>NCQA</Authors>
-		<Company>NCQA</Company>
 		<Product>CQL primitive types</Product>
 		<Description>Contains .NET types that model the System namespace in CQL</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Cql\Cql.csproj" />
+	  <ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
 	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>
 

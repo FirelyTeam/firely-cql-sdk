@@ -1,9 +1,6 @@
-﻿using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime.Primitives;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hl7.Cql.Comparers;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 
 namespace Cql.Operators
 {

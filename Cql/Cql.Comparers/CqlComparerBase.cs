@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Cql.Comparers
-{ 
+﻿namespace Hl7.Cql.Comparers
+{
     /// <summary>
     /// Implements base functionality for <see cref="ICqlComparer"/> and <see cref="IEquivalenceComparer"/>.
     /// </summary>

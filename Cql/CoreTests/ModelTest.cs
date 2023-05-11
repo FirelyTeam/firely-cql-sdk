@@ -1,17 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.Model;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Iso8601;
+using Hl7.Cql.Model;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Ncqa.Cql.Operators;
+using Hl7.Cql.Operators;
 
 namespace CoreTests
 {

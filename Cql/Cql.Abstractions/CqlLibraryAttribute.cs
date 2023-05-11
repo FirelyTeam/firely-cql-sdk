@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql
+namespace Hl7.Cql
 {
     /// <summary>
     /// Declares that this class is the translation of an ELM library.

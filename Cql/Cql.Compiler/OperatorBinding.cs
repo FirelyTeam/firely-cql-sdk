@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Linq;
-using Ncqa.Cql.Runtime;
+﻿using System.Linq.Expressions;
+using Hl7.Cql.Runtime;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// Binds <see cref="CqlOperator"/>s to <see cref="Expression"/>s.

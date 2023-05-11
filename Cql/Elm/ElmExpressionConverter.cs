@@ -1,12 +1,9 @@
-﻿using Ncqa.Elm.Expressions;
+﻿using Hl7.Cql.Elm.Expressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Elm
+namespace Hl7.Cql.Elm
 {
     public class ElmExpressionConverter : JsonConverter
     {

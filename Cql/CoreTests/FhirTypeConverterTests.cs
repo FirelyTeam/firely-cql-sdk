@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.Runtime.FhirR4;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Fhir.R4.Model;
+using Hl7.Cql.Runtime.FhirR4;
+using Hl7.Cql.Primitives;
 using System;
-using static Ncqa.Fhir.R4.Model.Parameters;
+using static Hl7.Cql.Poco.Fhir.R4.Model.Parameters;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
 namespace CoreTests
 {
@@ -77,7 +77,7 @@ namespace CoreTests
             var parameter = new ParameterComponent()
             {
                 name = "param1",
-                valueDate = new DateElement() { value = new Ncqa.Iso8601.DateIso8601(2022, 01, 01, false) },
+                valueDate = new DateElement() { value = new Hl7.Cql.Iso8601.DateIso8601(2022, 01, 01, false) },
             };
 
             var converted = FhirTypeConverter.Default.Convert<CqlDate>(parameter);
@@ -165,7 +165,7 @@ namespace CoreTests
             var parameter = new ParameterComponent()
             {
                 name = "param1",
-                valueDateTime = new DateTimeElement() { value = new Ncqa.Iso8601.DateTimeIso8601(2022, 01, 01, 1, 1, 1, 1, 0, 0, false) },
+                valueDateTime = new DateTimeElement() { value = new Hl7.Cql.Iso8601.DateTimeIso8601(2022, 01, 01, 1, 1, 1, 1, 0, 0, false) },
             };
 
             var converted = FhirTypeConverter.Default.Convert<CqlDateTime>(parameter);
@@ -209,7 +209,7 @@ namespace CoreTests
             var parameters = new ParameterComponent()
             {
                 name = "param1",
-                valueTime = new TimeElement() { value = new Ncqa.Iso8601.TimeIso8601(1, 1, 1, 1, 0, 0, false) },
+                valueTime = new TimeElement() { value = new Hl7.Cql.Iso8601.TimeIso8601(1, 1, 1, 1, 0, 0, false) },
             };
 
             var converted = FhirTypeConverter.Default.Convert<CqlTime>(parameters);
@@ -251,11 +251,11 @@ namespace CoreTests
                 {
                     start = new DateTimeElement()
                     {
-                        value = new Ncqa.Iso8601.DateTimeIso8601(2022, 01, 01, 1, 1, 1, 1, 0, 0, false)
+                        value = new Hl7.Cql.Iso8601.DateTimeIso8601(2022, 01, 01, 1, 1, 1, 1, 0, 0, false)
                     },
                     end = new DateTimeElement()
                     {
-                        value = new Ncqa.Iso8601.DateTimeIso8601(2022, 3, 31, 1, 1, 1, 1, 0, 0, false)
+                        value = new Hl7.Cql.Iso8601.DateTimeIso8601(2022, 3, 31, 1, 1, 1, 1, 0, 0, false)
                     }
                 }
             };
@@ -378,11 +378,11 @@ namespace CoreTests
                 {
                     start = new DateTimeElement()
                     {
-                        value = new Ncqa.Iso8601.DateTimeIso8601(2022, 01, 01, 1, 1, 1, 1, 0, 0, false)
+                        value = new Hl7.Cql.Iso8601.DateTimeIso8601(2022, 01, 01, 1, 1, 1, 1, 0, 0, false)
                     },
                     end = new DateTimeElement()
                     {
-                        value = new Ncqa.Iso8601.DateTimeIso8601(2022, 3, 31, 1, 1, 1, 1, 0, 0, false)
+                        value = new Hl7.Cql.Iso8601.DateTimeIso8601(2022, 3, 31, 1, 1, 1, 1, 0, 0, false)
                     }
                 }
             };
@@ -411,7 +411,7 @@ namespace CoreTests
             var parameter = new ParameterComponent()
             {
                 name = "param1",
-                valueRange = new Ncqa.Fhir.R4.Model.Range()
+                valueRange = new Hl7.Cql.Poco.Fhir.R4.Model.Range()
                 {
                     high = new Quantity { value = new DecimalElement() { value = 10 }, unit = "oranges" },
                     low = new Quantity { value = new DecimalElement() { value = 1 }, unit = "oranges" },
@@ -502,7 +502,7 @@ namespace CoreTests
                     value = 10
                 }, true, true
             );
-            var converted = FhirTypeConverter.Default.Convert<Ncqa.Fhir.R4.Model.Range>(quantityInterval);
+            var converted = FhirTypeConverter.Default.Convert<Hl7.Cql.Poco.Fhir.R4.Model.Range>(quantityInterval);
 
             Assert.IsNotNull(converted);
 
@@ -518,7 +518,7 @@ namespace CoreTests
             var quantityInterval = new CqlInterval<decimal?>(
                 1, 10, true, true
             );
-            var converted = FhirTypeConverter.Default.Convert<Ncqa.Fhir.R4.Model.Range>(quantityInterval);
+            var converted = FhirTypeConverter.Default.Convert<Hl7.Cql.Poco.Fhir.R4.Model.Range>(quantityInterval);
 
             Assert.IsNotNull(converted);
 
@@ -532,7 +532,7 @@ namespace CoreTests
             var quantityInterval = new CqlInterval<int?>(
                 1, 10, true, true
             );
-            var converted = FhirTypeConverter.Default.Convert<Ncqa.Fhir.R4.Model.Range>(quantityInterval);
+            var converted = FhirTypeConverter.Default.Convert<Hl7.Cql.Poco.Fhir.R4.Model.Range>(quantityInterval);
 
             Assert.IsNotNull(converted);
 

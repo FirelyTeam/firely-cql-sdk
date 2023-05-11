@@ -1,23 +1,19 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Iso8601;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Ncqa.Cql.Runtime;
+using Hl7.Cql.Runtime;
 using System.Linq.Expressions;
-using Ncqa.Cql.Runtime.FhirR4;
+using Hl7.Cql.Runtime.FhirR4;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
 using System.IO;
-using Ncqa.Cql.MeasureCompiler;
-using Ncqa.Elm;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging;
-using R4 = Ncqa.Fhir.R4.Model;
-using System.Runtime.ConstrainedExecution;
-using Ncqa.Cql.CodeGeneration.NET;
-using Ncqa.Cql.Operators;
-using Ncqa.Cql;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Operators;
+using Hl7.Cql;
 
 namespace CoreTests
 {

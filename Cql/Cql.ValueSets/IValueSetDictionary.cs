@@ -1,9 +1,8 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql.ValueSets
+namespace Hl7.Cql.ValueSets
 {
     /// <summary>
     /// Defines a dictionary of value sets and their codes.

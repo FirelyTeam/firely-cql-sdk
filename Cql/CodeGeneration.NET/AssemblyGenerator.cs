@@ -1,19 +1,14 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.Emit;
-using Ncqa.Cql.MeasureCompiler;
-using Ncqa.Cql.Runtime;
-using Ncqa.Graph;
+using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
-using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Ncqa.Cql.CodeGeneration.NET
+namespace Hl7.Cql.CodeGeneration.NET
 {
     /// <summary>
     /// Uses the <see cref="CSharpSourceCodeWriter"/> to write source code which is compiled via Roslyn into an assembly.

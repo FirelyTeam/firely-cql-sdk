@@ -8,12 +8,12 @@ using System.Text;
 using AgileObjects.ReadableExpressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
-using Ncqa.Cql.CodeGeneration.NET.Visitors;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Graph;
+using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Graph;
 
-namespace Ncqa.Cql.CodeGeneration.NET
+namespace Hl7.Cql.CodeGeneration.NET
 {
     /// <summary>
     /// Writes <see cref="LambdaExpression"/>s as members of a .NET class.
@@ -57,8 +57,8 @@ namespace Ncqa.Cql.CodeGeneration.NET
             nameof(System),
             $"{nameof(System)}.{nameof(System.Linq)}",
             $"{nameof(System)}.{nameof(System.Collections)}.{nameof(System.Collections.Generic)}",
-            $"{nameof(Ncqa)}.{nameof(Ncqa.Cql)}.{nameof(Ncqa.Cql.Runtime)}",
-            $"{nameof(Ncqa)}.{nameof(Ncqa.Cql)}.{nameof(Ncqa.Cql.Runtime)}.{nameof(Ncqa.Cql.Runtime.Primitives)}",
+            $"{nameof(Hl7)}.{nameof(Hl7.Cql)}.{nameof(Hl7.Cql.Runtime)}",
+            $"{nameof(Hl7)}.{nameof(Hl7.Cql)}.{nameof(Hl7.Cql.Runtime)}.{nameof(Hl7.Cql.Primitives)}",
 
         };
         /// <summary>

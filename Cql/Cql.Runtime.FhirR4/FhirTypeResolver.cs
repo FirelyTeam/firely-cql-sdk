@@ -1,12 +1,11 @@
-﻿using Ncqa.Cql.Model;
-using Ncqa.Cql.Runtime.Model;
-using Ncqa.Fhir;
-using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Model;
+using Hl7.Cql.Poco.Fhir;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Cql.Runtime.FhirR4
+namespace Hl7.Cql.Runtime.FhirR4
 {
     public class FhirTypeResolver : ModelTypeResolver
     {

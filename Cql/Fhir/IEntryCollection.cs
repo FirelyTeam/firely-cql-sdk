@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Ncqa.Fhir
+namespace Hl7.Cql.Poco.Fhir
 {
     public interface IEntryCollection<TEntry> : ICollection<TEntry>
     {

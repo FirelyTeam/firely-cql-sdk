@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Elm.Expressions
+﻿namespace Hl7.Cql.Elm.Expressions
 {
     public class MessageExpression: Expression
     {

@@ -1,17 +1,17 @@
 ﻿using Microsoft.Extensions.Logging;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
-using Ncqa.Elm;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using elm = Ncqa.Elm.Expressions;
+using elm = Hl7.Cql.Elm.Expressions;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// The ExpressionBuilder translates abstract syntax trees expressed by <see cref="ElmPackage"/> instances into
@@ -2011,7 +2011,6 @@ namespace Ncqa.Cql.MeasureCompiler
                 {
                     // In this construct, instead of querying a value set, we're testing resources
                     // against a list of codes, e.g., as defined by the code from or codesystem construct
-                    // used in NCQA_Terminology library
                     var codes = TranslateExpression(retrieve.codes, ctx);
                     var call = Operators.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);

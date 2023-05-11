@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public class DirectedGraphNode
     {

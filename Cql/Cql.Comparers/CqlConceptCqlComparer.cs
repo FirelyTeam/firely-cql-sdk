@@ -1,8 +1,7 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
-using System;
+﻿using Hl7.Cql.Primitives;
 using System.Linq;
 
-namespace Ncqa.Cql.Comparers
+namespace Hl7.Cql.Comparers
 {
     /// <summary>
     /// Compares the code and system using the specified comparers.

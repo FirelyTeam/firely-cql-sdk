@@ -2,14 +2,12 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>Ncqa.Cql.Runtime</AssemblyName>
-		<RootNamespace>Ncqa.Cql.Runtime</RootNamespace>
+		<AssemblyName>Hl7.Cql.Runtime</AssemblyName>
+		<RootNamespace>Hl7.Cql.Runtime</RootNamespace>
 		<Nullable>enable</Nullable>
 		<LangVersion>9.0</LangVersion>
-		<Authors>NCQA</Authors>
-		<Company>NCQA</Company>
 		<Product>CQL engine runtime</Product>
-		<Description>Contains the required runtime components for the NCQA CQL engine.</Description>
+		<Description>Contains the required runtime components for CQL execution.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 

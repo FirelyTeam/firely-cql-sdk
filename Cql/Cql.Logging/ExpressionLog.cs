@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.Json;
 using System.Text.Json.Nodes;
 
-namespace Ncqa.Cql.Runtime.Logging
+namespace Hl7.Cql.Logging
 {
     public class ExpressionLog
     {

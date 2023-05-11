@@ -1,4 +1,4 @@
-﻿namespace Ncqa.Cql.Runtime.Logging
+﻿namespace Hl7.Cql.Logging
 {
     public interface ILogger
     {

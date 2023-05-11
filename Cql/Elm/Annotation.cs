@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace Ncqa.Elm
+namespace Hl7.Cql.Elm
 {
     public class Annotation
     {

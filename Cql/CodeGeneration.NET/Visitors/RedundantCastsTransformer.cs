@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Text;
+﻿using System.Linq.Expressions;
 
-namespace Ncqa.Cql.CodeGeneration.NET.Visitors
+namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class RedundantCastsTransformer : TransformerBase
     {

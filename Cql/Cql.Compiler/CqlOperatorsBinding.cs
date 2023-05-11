@@ -1,17 +1,15 @@
-﻿using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
+﻿using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using Primitives = Ncqa.Cql.Runtime.Primitives;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// Implements <see cref="OperatorBinding"/> by calling methods in <see cref="CqlOperators"/>.

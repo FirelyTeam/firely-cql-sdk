@@ -2,14 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <RootNamespace>Ncqa.Cql.Runtime.FhirR4</RootNamespace>
-    <AssemblyName>Ncqa.Cql.Runtime.FhirR4</AssemblyName>
+    <RootNamespace>Hl7.Cql.Runtime.FhirR4</RootNamespace>
+    <AssemblyName>Hl7.Cql.Runtime.FhirR4</AssemblyName>
 	  <Nullable>enable</Nullable>
 	  <LangVersion>9.0</LangVersion>
 	  <Version>4.0.1</Version>
-	  <Authors>NCQA</Authors>
 	  <Description>Integrates the Fhir.R4 model into the CQL engine runtime.</Description>
-	  <PackageId>Ncqa.Cql.Runtime.FhirR4</PackageId>
+	  <PackageId>Hl7.Cql.Runtime.FhirR4</PackageId>
 	  <Product>CQL FHIR R4 runtime</Product>
   </PropertyGroup>
 

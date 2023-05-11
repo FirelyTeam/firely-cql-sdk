@@ -1,10 +1,9 @@
-﻿using Ncqa.Cql.Comparers;
-using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Comparers;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql.Runtime.FhirR4.Comparers
+namespace Hl7.Cql.Runtime.FhirR4.Comparers
 {
     public class CodingCqlComparer : CqlComparerBase<Coding>
     {

@@ -1,22 +1,15 @@
 ﻿using Hl7.Fhir.Model;
-using Ncqa.Cql.Model;
-using Ncqa.Cql.Runtime.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Hl7.Cql.Model;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
-using Hl7.Fhir.ElementModel.Types;
 using Ratio = Hl7.Fhir.Model.Ratio;
 
 namespace Cql.Firely
 {
     public class FirelyTypeResolver : ModelTypeResolver
     {
-        public FirelyTypeResolver(Ncqa.Cql.Model.ModelInfo model) : base(model)
+        public FirelyTypeResolver(Hl7.Cql.Model.ModelInfo model) : base(model)
         {
             var x = typeof(Ratio).Assembly;
             AddTypes(typeof(Resource).Assembly);

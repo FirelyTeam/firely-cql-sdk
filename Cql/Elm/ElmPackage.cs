@@ -1,5 +1,5 @@
-﻿using Ncqa.Elm.Expressions;
-using Ncqa.Graph;
+﻿using Hl7.Cql.Elm.Expressions;
+using Hl7.Cql.Graph;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Ncqa.Elm
+namespace Hl7.Cql.Elm
 {
     [DebuggerDisplay("{NameAndVersion}")]
     public class ElmPackage

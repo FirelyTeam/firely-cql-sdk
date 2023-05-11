@@ -1,14 +1,9 @@
-using Ncqa.Fhir;
-using Ncqa.Fhir.Serialization;
-using Ncqa.Iso8601;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
+using Hl7.Cql.Poco.Fhir;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Fhir.R4.Model
+namespace Hl7.Cql.Poco.Fhir.R4.Model
 {
-	[FhirUri("http://hl7.org/fhir/StructureDefinition/Population")]
+    [FhirUri("http://hl7.org/fhir/StructureDefinition/Population")]
 	public partial class Population : BackboneElement
 	{
 

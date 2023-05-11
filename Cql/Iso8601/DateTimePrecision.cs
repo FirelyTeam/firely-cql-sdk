@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Iso8601
+﻿namespace Hl7.Cql.Iso8601
 {
     public static class DateTimePrecisionExtensions
     {

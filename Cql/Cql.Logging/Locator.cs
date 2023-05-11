@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ncqa.Cql.Runtime.Logging
+namespace Hl7.Cql.Logging
 {
     public class Locator
     {

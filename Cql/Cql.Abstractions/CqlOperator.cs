@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Cql
+﻿namespace Hl7.Cql
 {
     /// <summary>
     /// Enumerates the operators in the CQL specification.

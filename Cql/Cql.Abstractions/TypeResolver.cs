@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Ncqa.Cql
+namespace Hl7.Cql
 {
     /// <summary>
     /// Resolves the .NET type for the given ELM type specifier.
@@ -10,72 +10,72 @@ namespace Ncqa.Cql
     {
         #region CQL types defined in section 1
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Any"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Any"/>.
         /// </summary>
         public abstract Type AnyType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Boolean"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Boolean"/>.
         /// </summary>
         public abstract Type BooleanType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Code"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Code"/>.
         /// </summary>
         public abstract Type CodeType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.CodeSystem"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.CodeSystem"/>.
         /// </summary>
         public abstract Type CodeSystemType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Concept"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Concept"/>.
         /// </summary>
         public abstract Type ConceptType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Date"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Date"/>.
         /// </summary>
         public abstract Type DateType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.DateTime"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.DateTime"/>.
         /// </summary>
         public abstract Type DateTimeType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Decimal"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Decimal"/>.
         /// </summary>
         public abstract Type DecimalType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Long"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Long"/>.
         /// </summary>
         public abstract Type LongType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Interval"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Interval"/>.
         /// </summary>
         /// <param name="pointType">The type of this interval.</param>
         public abstract Type IntervalType(Type pointType);
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Integer"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Integer"/>.
         /// </summary>
         public abstract Type IntegerType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Quantity"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Quantity"/>.
         /// </summary>
         public abstract Type QuantityType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Ratio"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Ratio"/>.
         /// </summary>
         public abstract Type RatioType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.String"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.String"/>.
         /// </summary>
         public abstract Type StringType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Time"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Time"/>.
         /// </summary>
         public abstract Type TimeType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.ValueSet"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.ValueSet"/>.
         /// </summary>
         public abstract Type ValueSetType { get; }
         /// <summary>
-        /// The type to use for <see cref="Ncqa.Cql.Runtime.Primitives.CqlPrimitiveType.Vocabulary"/>.
+        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Vocabulary"/>.
         /// </summary>
         public abstract Type VocabularyType { get; }
 

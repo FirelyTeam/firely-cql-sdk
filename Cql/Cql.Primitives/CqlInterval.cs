@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Text;
 
-namespace Ncqa.Cql.Runtime.Primitives
+namespace Hl7.Cql.Primitives
 {
     /// <summary>
     /// Implements the System Interval type.
