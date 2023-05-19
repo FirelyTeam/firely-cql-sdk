@@ -45,7 +45,7 @@ namespace Hl7.Cql.ValueSets
         }
 
         /// <summary>
-        /// Adds the code to the given value set by its canonical URI, but will not throw if the code exists already.
+        /// Adds or overwrites the code to the given value set by its canonical URI, and will not throw if the code exists already.
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="code">The code to add.</param>

@@ -16,6 +16,17 @@ namespace Hl7.Cql.Runtime
     /// </summary>
     public partial class CqlOperators : ICqlOperators, ICqlComparer, ICqlComparer<object>
     {
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        /// <param name="resolver">The type resolver to use.</param>
+        /// <param name="converter">The type converter to use, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="TypeConverter.Create"/> is used.</param>
+        /// <param name="dataRetriever">The data retriever to use, or <see langword="null" />.  When <see langword="null" />, no data will be returned by any retrieve expression.</param>
+        /// <param name="comparer">The comparer to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="CqlComparers"/> is used.</param>
+        /// <param name="valueSets">The value set dictionary to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="HashValueSetDictionary"/> is used.</param>
+        /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
+        /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
+        /// <returns></returns>
         public static CqlOperators Create(TypeResolver resolver, 
             TypeConverter? converter = null,
             IDataRetriever? dataRetriever = null,
@@ -65,6 +76,9 @@ namespace Hl7.Cql.Runtime
         /// </remarks>
         /// <seealso cref="CqlComparers"/>
         public ICqlComparer Comparer { get; set; }
+        /// <summary>
+        /// Gets the implemenation of <see cref="IValueSetDictionary"/> to use.
+        /// </summary>
         public IValueSetDictionary ValueSets { get; }
         public IUnitConverter UnitConverter { get; }
 
