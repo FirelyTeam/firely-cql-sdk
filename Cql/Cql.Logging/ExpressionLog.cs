@@ -36,16 +36,16 @@ namespace Hl7.Cql.Logging
         {
             if(obj is ExpressionLog otherLog)
             {
-                if(this.locator != null && otherLog.locator != null 
-                    && this.locator.CompareTo(otherLog.locator) == RangeComparisonResult.ExactlyEqual)
+                if(locator != null && otherLog.locator != null 
+                    && locator.CompareTo(otherLog.locator) == RangeComparisonResult.ExactlyEqual)
                 {
-                    if(this.callStack == null && otherLog.callStack == null)
+                    if(callStack == null && otherLog.callStack == null)
                     {
                         return true;
                     }
-                    if(this.callStack != null && otherLog.callStack != null)
+                    if(callStack != null && otherLog.callStack != null)
                     {
-                        return this.callStack.SequenceEqual(otherLog.callStack);
+                        return callStack.SequenceEqual(otherLog.callStack);
                     }
                 }
             }

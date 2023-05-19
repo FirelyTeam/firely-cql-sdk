@@ -14,6 +14,8 @@ namespace Hl7.Cql.Runtime
 
         private Dictionary<string, Dictionary<string, List<(Type[] Signature, T T)>>> ExpressionsByLibrary = new();
 
+        private Dictionary<string, List<Tag>> TagsByLibrary = new();
+
 
         /// <summary>
         /// Gets the value for the given <paramref name="libraryName"/> and <paramref name="definition"/>.
@@ -303,6 +305,75 @@ namespace Hl7.Cql.Runtime
         }
 
         /// <summary>
+        /// Adds a tag to the definition with the specified signature.
+        /// </summary>
+        /// <param name="library">The library identifier in which <paramref name="definition"/> is defined.</param>
+        /// <param name="definition">The definition name whose tags to retrieve.</param>
+        /// <param name="signature">The signature, or an empty array for non-function definitions.</param>
+        /// <param name="name">The name of the tag.</param>
+        /// <param name="values">One or more values for the specified tag.</param>
+        public void AddTag(string library, string definition, Type[] signature, string name, params string[] values)
+        {
+            if (values?.Length > 0)
+            {
+                if (!TagsByLibrary.TryGetValue(library, out var tags))
+                {
+                    tags = new();
+                    TagsByLibrary.Add(library, tags);
+                }
+                foreach (var value in values)
+                {
+                    var tag = new Tag(library, definition, signature ?? new Type[0], name, value);
+                    tags.Add(tag);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Gets a dictionary of tags for the <paramref name="library"/> and <paramref name="definition"/>.
+        /// </summary>
+        /// <param name="library">The library identifier in which <paramref name="definition"/> is defined.</param>
+        /// <param name="definition">The definition name whose tags to retrieve.</param>
+        /// <param name="tags">The <see langword="out"/> parameter to hold the resulting lookup of tags and their values.</param>
+        /// <returns><see langword="true"/> if the definiton has tags and thus <paramref name="tags"/> is not <see langword="null"/>; otherwise, <see langword="false"/>.</returns>
+        public bool TryGetTags(string library, string definition, Type[] signature, out ILookup<string, string>? tags)
+        {
+            signature ??= new Type[0];
+            if (TagsByLibrary.TryGetValue(library, out var tagsList))
+            {
+                foreach (var tag in tagsList)
+                {
+                    if (signature.Length == 0)
+                    {
+                        var lookup = tagsList
+                             .Where(t => t.Definition == definition)
+                             .ToLookup(t => t.Name, t => t.Value);
+                        if (lookup.Count > 0)
+                        {
+                            tags = lookup;
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        var lookup = tagsList
+                            .Where(t => t.Definition == definition
+                                && t.Signature != null
+                                && Score(signature, t.Signature) == 0)
+                            .ToLookup(t => t.Name, t => t.Value);
+                        if (lookup.Count > 0)
+                        {
+                            tags = lookup;
+                            return true;
+                        }
+                    }
+                }
+            }
+            tags = null;
+            return false;
+        }
+
+        /// <summary>
         /// Merges <paramref name="dictionaries"/> into this dictionary, with existing keys remaining preserved.
         /// This means that if a key exists in this dictionary, it will not be overwritten by the value of keys in <paramref name="dictionaries"/>.
         /// </summary>
@@ -392,6 +463,25 @@ namespace Hl7.Cql.Runtime
                 return distance;
             }
             else return null;
+        }
+
+        internal class Tag
+        {
+            public string Library { get; }
+
+            public Tag(string library, string definition, Type[] signature, string name, string value)
+            {
+                Library = library;
+                Definition = definition;
+                Value = value;
+                Name = name;
+                Signature = signature;
+            }
+
+            public string Definition { get; }
+            public Type[] Signature { get; }
+            public string Value { get; }
+            public string Name { get; }
         }
     }
 }

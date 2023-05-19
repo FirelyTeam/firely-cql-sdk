@@ -268,7 +268,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                             {
                                 foreach (var overload in kvp.Value)
                                 {
-                                    WriteMemoizedInstanceMethod(className!, writer, indentLevel, invocationsTransformer, kvp.Key, overload);
+                                    definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
+                                    WriteMemoizedInstanceMethod(className!, writer, indentLevel, invocationsTransformer, kvp.Key, overload, tags);
                                     writer.WriteLine();
                                 }
                             }
@@ -365,7 +366,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private void WriteMemoizedInstanceMethod(string className, TextWriter writer, int indentLevel,
             InvocationsToMethodCallsTransformer invocationsTransformer,
             string cqlName,
-            (Type[], LambdaExpression) overload)
+            (Type[], LambdaExpression) overload,
+            ILookup<string, string>? tags)
         {
             var methodName = VariableNameGenerator.NormalizeIdentifier(cqlName);
             var returnType = PrettyTypeName(overload.Item2.ReturnType);
@@ -401,6 +403,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
                 writer.WriteLine();
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
+                WriteTags(writer, indentLevel, tags);
                 if (overload.Item2.ReturnType == typeof(CqlValueSet))
                 {
                     if (overload.Item2.Body is NewExpression @new)
@@ -423,6 +426,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     .Skip(1) // skip runtimeContext
                     .Select(p => $"{PrettyTypeName(p.Type)} {PrefixKeywords(p.Name)}"));
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
+                WriteTags(writer, indentLevel, tags);
                 writer.WriteLine(indentLevel, $"public {returnType} {methodName}({parameterString})");
                 if (visitedBody is BlockExpression)
                     WriteExpression(className, methodName!, writer, indentLevel, visitedBody, true);
@@ -435,6 +439,20 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine();
             }
 
+        }
+
+        private static void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
+        {
+            if (tags != null)
+            {
+                foreach (var group in tags)
+                {
+                    foreach (var tag in group)
+                    {
+                        writer.WriteLine(indentLevel, $"[CqlTag(\"{group.Key}\", \"{tag}\")]");
+                    }
+                }
+            }
         }
 
         private void WriteUsings(TextWriter writer)

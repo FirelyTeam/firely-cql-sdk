@@ -58,7 +58,7 @@ namespace Hl7.Cql.Runtime
             IDictionary<string, object>? parameters = null) : this()
         {
             Operators = operators;
-            Definitions = delegates;
+            Definitions = delegates ?? new DefinitionDictionary<Delegate>();
             if (parameters != null) 
                 Parameters = parameters;
         }
@@ -113,16 +113,17 @@ namespace Hl7.Cql.Runtime
         /// <param name="libraryNameAndVersion">The library name and version.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <returns>The value of the parameter or <see langword="null"/> if not defined.</returns>
-        public object? ResolveParameter(string libraryNameAndVersion, string parameterName)
+        public object? ResolveParameter(string libraryNameAndVersion, string parameterName, object? defaultValue)
         {
             var fullyQualified = $"{libraryNameAndVersion}{ParameterDelimiter}{parameterName}";
-            if (this.Parameters.ContainsKey(fullyQualified))
-                return this.Parameters[fullyQualified];
+            if (Parameters.ContainsKey(fullyQualified))
+                return Parameters[fullyQualified];
 
-            if (this.Parameters.ContainsKey(parameterName))
-                return this.Parameters[parameterName];
+            if (Parameters.ContainsKey(parameterName))
+                return Parameters[parameterName];
 
-            return null;
+            return defaultValue;
+
         }
 
         /// <summary>
@@ -133,9 +134,9 @@ namespace Hl7.Cql.Runtime
         /// <returns>The value of the parameter or <paramref name="defaultValue"> if not defined.</returns>
         public object? ResolveExtension(string key, object? defaultValue)
         {
-            if (!this.Extensions.TryGetValue(key, out var value))
+            if (!Extensions.TryGetValue(key, out var value))
             {
-                this.Extensions[key] = defaultValue;
+                Extensions[key] = defaultValue;
                 return defaultValue;
             }
 

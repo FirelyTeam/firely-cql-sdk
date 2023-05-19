@@ -185,7 +185,7 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region  Now
-        public CqlDateTime Now() => this.NowValue;
+        public CqlDateTime Now() => NowValue;
         #endregion
 
         #region  Same/On Or After

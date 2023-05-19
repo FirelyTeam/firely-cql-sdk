@@ -2,6 +2,8 @@
 {
     public class ParameterDeclarationExpression: Expression
     {
+        public Annotation[]? annotation { get; set; }
+
         public string? name { get; set; }
 
         public TypeSpecifierExpression? parameterTypeSpecifier { get; set; }

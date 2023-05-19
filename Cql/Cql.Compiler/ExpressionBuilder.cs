@@ -14,8 +14,7 @@ using Expression = System.Linq.Expressions.Expression;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilder translates abstract syntax trees expressed by <see cref="ElmPackage"/> instances into
-    /// <see cref="DefinitionDictionary{LambdaExpression}"/>.
+    /// The ExpressionBuilder translates ELM <see cref="Elm.Expressions.Expression"/>s into <see cref="System.Linq.Expressions.Expression"/>.
     /// </summary>
     public partial class ExpressionBuilder
     {
@@ -196,18 +195,23 @@ namespace Hl7.Cql.Compiler
                             throw new InvalidOperationException($"There is already a definition named {parameter.name}");
 
                         var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var buildContext = new ExpressionBuilderContext(this,
+                            contextParameter,
+                            definitions,
+                            localLibraryIdentifiers);
+
+                        Expression? defaultValue = null;
+                        if (parameter.@default != null)
+                            defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default, buildContext), typeof(object));
+                        else defaultValue = Expression.Constant(null, typeof(object));
 
                         var resolveParam = Expression.Call(
                             contextParameter,
                             typeof(RuntimeContext).GetMethod(nameof(RuntimeContext.ResolveParameter)),
                             Expression.Constant(Package!.NameAndVersion),
-                            Expression.Constant(parameter.name)
+                            Expression.Constant(parameter.name),
+                            defaultValue
                         );
-
-                        var buildContext = new ExpressionBuilderContext(this,
-                            contextParameter,
-                            definitions,
-                            localLibraryIdentifiers);
 
                         var parameterType = TypeManager.TypeFor(parameter.parameterTypeSpecifier!, buildContext);
                         var cast = Expression.Convert(resolveParam, parameterType);
@@ -302,6 +306,19 @@ namespace Hl7.Cql.Compiler
                         }
                         else
                         {
+                            foreach (var annotation in def.annotation ?? Enumerable.Empty<Annotation>())
+                            {
+                                foreach (var tag in annotation.t ?? Enumerable.Empty<Tag>())
+                                {
+                                    var name = tag.name;
+                                    if (!string.IsNullOrWhiteSpace(name))
+                                    {
+                                        var value = tag.value ?? string.Empty;
+                                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes ?? new Type[0], name, value);
+
+                                    }
+                                }
+                            }
                             definitions.Add(ThisLibraryKey, def.name, functionParameterTypes, lambda);
                         }
                     }
