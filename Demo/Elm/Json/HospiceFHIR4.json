@@ -5,17 +5,6 @@
          "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       }, {
-         "libraryId" : "MATGlobalCommonFunctionsFHIR4",
-         "libraryVersion" : "6.1.000",
-         "startLine" : 344,
-         "startChar" : 19,
-         "endLine" : 344,
-         "endChar" : 53,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
          "type" : "Annotation",
          "s" : {
             "r" : "80",

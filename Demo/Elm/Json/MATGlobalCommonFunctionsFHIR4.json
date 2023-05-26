@@ -5,20 +5,9 @@
          "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       }, {
-         "libraryId" : "MATGlobalCommonFunctionsFHIR4",
-         "libraryVersion" : "6.1.000",
-         "startLine" : 344,
-         "startChar" : 19,
-         "endLine" : 344,
-         "endChar" : 53,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
          "type" : "Annotation",
          "s" : {
-            "r" : "813",
+            "r" : "809",
             "s" : [ {
                "value" : [ "","library MATGlobalCommonFunctionsFHIR4 version '6.1.000'" ]
             } ]
@@ -14278,108 +14267,7 @@
                }
             } ]
          }, {
-            "localId" : "720",
-            "locator" : "343:1-344:54",
-            "resultTypeName" : "{http://hl7.org/fhir}Provenance",
-            "name" : "GetProvenance",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "720",
-                  "s" : [ {
-                     "value" : [ "/*NOTE: Provenance is not the preferred approach, this is provided only as an illustration\nfor what using Provenance could look like, and is not a tested pattern*/\n","define function ","\"GetProvenance\"","(","resource"," " ]
-                  }, {
-                     "r" : "717",
-                     "s" : [ {
-                        "value" : [ "Resource" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "719",
-                     "s" : [ {
-                        "r" : "719",
-                        "s" : [ {
-                           "value" : [ "singleton from " ]
-                        }, {
-                           "r" : "718",
-                           "s" : [ {
-                              "value" : [ "(" ]
-                           }, {
-                              "r" : "718",
-                              "s" : [ {
-                                 "value" : [ "[","Provenance",": " ]
-                              }, {
-                                 "s" : [ {
-                                    "value" : [ "target" ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","in"," " ]
-                              }, {
-                                 "s" : [ {
-                                    "value" : [ "resource",".","id" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "]" ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
-            "expression" : {
-               "localId" : "719",
-               "locator" : "344:3-344:54",
-               "resultTypeName" : "{http://hl7.org/fhir}Provenance",
-               "type" : "SingletonFrom",
-               "operand" : {
-                  "localId" : "718",
-                  "locator" : "344:18-344:54",
-                  "dataType" : "{http://hl7.org/fhir}Provenance",
-                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Provenance",
-                  "codeProperty" : "target",
-                  "codeComparator" : "in",
-                  "type" : "Retrieve",
-                  "resultTypeSpecifier" : {
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "name" : "{http://hl7.org/fhir}Provenance",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  },
-                  "codes" : {
-                     "type" : "ToList",
-                     "operand" : {
-                        "locator" : "344:42-344:52",
-                        "resultTypeName" : "{http://hl7.org/fhir}id",
-                        "path" : "id",
-                        "type" : "Property",
-                        "source" : {
-                           "name" : "resource",
-                           "type" : "OperandRef"
-                        }
-                     }
-                  }
-               }
-            },
-            "operand" : [ {
-               "name" : "resource",
-               "operandTypeSpecifier" : {
-                  "localId" : "717",
-                  "locator" : "343:42-343:49",
-                  "resultTypeName" : "{http://hl7.org/fhir}Resource",
-                  "name" : "{http://hl7.org/fhir}Resource",
-                  "type" : "NamedTypeSpecifier"
-               }
-            } ]
-         }, {
-            "localId" : "745",
+            "localId" : "741",
             "locator" : "346:1-350:107",
             "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
             "name" : "GetMedicationCode",
@@ -14389,22 +14277,49 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "745",
+                  "r" : "741",
                   "s" : [ {
-                     "value" : [ "","define function ","\"GetMedicationCode\"","(","request"," " ]
+                     "value" : [ "/*NOTE: Provenance is not the preferred approach, this is provided only as an illustration\nfor what using Provenance could look like, and is not a tested pattern*/\n// define function \"GetProvenance\"(resource Resource ):\n//   singleton from ([Provenance: target in resource.id])","define function ","\"GetMedicationCode\"","(","request"," " ]
                   }, {
-                     "r" : "721",
+                     "r" : "717",
                      "s" : [ {
                         "value" : [ "MedicationRequest" ]
                      } ]
                   }, {
                      "value" : [ " ):\n  " ]
                   }, {
-                     "r" : "744",
+                     "r" : "740",
                      "s" : [ {
-                        "r" : "744",
+                        "r" : "740",
                         "s" : [ {
                            "value" : [ "if " ]
+                        }, {
+                           "r" : "721",
+                           "s" : [ {
+                              "r" : "719",
+                              "s" : [ {
+                                 "r" : "718",
+                                 "s" : [ {
+                                    "value" : [ "request" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "719",
+                                 "s" : [ {
+                                    "value" : [ "medication" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " is " ]
+                           }, {
+                              "r" : "720",
+                              "s" : [ {
+                                 "value" : [ "CodeableConcept" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " then\n  \t  " ]
                         }, {
                            "r" : "725",
                            "s" : [ {
@@ -14423,7 +14338,7 @@
                                  } ]
                               } ]
                            }, {
-                              "value" : [ " is " ]
+                              "value" : [ " as " ]
                            }, {
                               "r" : "724",
                               "s" : [ {
@@ -14431,57 +14346,30 @@
                               } ]
                            } ]
                         }, {
-                           "value" : [ " then\n  \t  " ]
-                        }, {
-                           "r" : "729",
-                           "s" : [ {
-                              "r" : "727",
-                              "s" : [ {
-                                 "r" : "726",
-                                 "s" : [ {
-                                    "value" : [ "request" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "727",
-                                 "s" : [ {
-                                    "value" : [ "medication" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " as " ]
-                           }, {
-                              "r" : "728",
-                              "s" : [ {
-                                 "value" : [ "CodeableConcept" ]
-                              } ]
-                           } ]
-                        }, {
                            "value" : [ "\n  \telse\n  \t  " ]
                         }, {
-                           "r" : "743",
+                           "r" : "739",
                            "s" : [ {
-                              "r" : "742",
+                              "r" : "738",
                               "s" : [ {
                                  "value" : [ "(" ]
                               }, {
-                                 "r" : "742",
+                                 "r" : "738",
                                  "s" : [ {
                                     "value" : [ "singleton from " ]
                                  }, {
-                                    "r" : "741",
+                                    "r" : "737",
                                     "s" : [ {
                                        "value" : [ "(" ]
                                     }, {
-                                       "r" : "741",
+                                       "r" : "737",
                                        "s" : [ {
                                           "s" : [ {
-                                             "r" : "731",
+                                             "r" : "727",
                                              "s" : [ {
-                                                "r" : "730",
+                                                "r" : "726",
                                                 "s" : [ {
-                                                   "r" : "730",
+                                                   "r" : "726",
                                                    "s" : [ {
                                                       "value" : [ "[","Medication","]" ]
                                                    } ]
@@ -14493,22 +14381,22 @@
                                        }, {
                                           "value" : [ " " ]
                                        }, {
-                                          "r" : "740",
+                                          "r" : "736",
                                           "s" : [ {
                                              "value" : [ "where " ]
                                           }, {
-                                             "r" : "740",
+                                             "r" : "736",
                                              "s" : [ {
-                                                "r" : "733",
+                                                "r" : "729",
                                                 "s" : [ {
-                                                   "r" : "732",
+                                                   "r" : "728",
                                                    "s" : [ {
                                                       "value" : [ "M" ]
                                                    } ]
                                                 }, {
                                                    "value" : [ "." ]
                                                 }, {
-                                                   "r" : "733",
+                                                   "r" : "729",
                                                    "s" : [ {
                                                       "value" : [ "id" ]
                                                    } ]
@@ -14516,28 +14404,28 @@
                                              }, {
                                                 "value" : [ " ","="," " ]
                                              }, {
-                                                "r" : "739",
+                                                "r" : "735",
                                                 "s" : [ {
                                                    "value" : [ "GetId","(" ]
                                                 }, {
-                                                   "r" : "738",
+                                                   "r" : "734",
                                                    "s" : [ {
-                                                      "r" : "737",
+                                                      "r" : "733",
                                                       "s" : [ {
                                                          "value" : [ "(" ]
                                                       }, {
-                                                         "r" : "737",
+                                                         "r" : "733",
                                                          "s" : [ {
-                                                            "r" : "735",
+                                                            "r" : "731",
                                                             "s" : [ {
-                                                               "r" : "734",
+                                                               "r" : "730",
                                                                "s" : [ {
                                                                   "value" : [ "request" ]
                                                                } ]
                                                             }, {
                                                                "value" : [ "." ]
                                                             }, {
-                                                               "r" : "735",
+                                                               "r" : "731",
                                                                "s" : [ {
                                                                   "value" : [ "medication" ]
                                                                } ]
@@ -14545,7 +14433,7 @@
                                                          }, {
                                                             "value" : [ " as " ]
                                                          }, {
-                                                            "r" : "736",
+                                                            "r" : "732",
                                                             "s" : [ {
                                                                "value" : [ "Reference" ]
                                                             } ]
@@ -14556,7 +14444,7 @@
                                                    }, {
                                                       "value" : [ "." ]
                                                    }, {
-                                                      "r" : "738",
+                                                      "r" : "734",
                                                       "s" : [ {
                                                          "value" : [ "reference" ]
                                                       } ]
@@ -14577,7 +14465,7 @@
                            }, {
                               "value" : [ "." ]
                            }, {
-                              "r" : "743",
+                              "r" : "739",
                               "s" : [ {
                                  "value" : [ "code" ]
                               } ]
@@ -14588,17 +14476,17 @@
                }
             } ],
             "expression" : {
-               "localId" : "744",
+               "localId" : "740",
                "locator" : "347:3-350:107",
                "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                "type" : "If",
                "condition" : {
-                  "localId" : "725",
+                  "localId" : "721",
                   "locator" : "347:6-347:42",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Is",
                   "operand" : {
-                     "localId" : "723",
+                     "localId" : "719",
                      "locator" : "347:6-347:23",
                      "path" : "medication",
                      "type" : "Property",
@@ -14613,7 +14501,7 @@
                         } ]
                      },
                      "source" : {
-                        "localId" : "722",
+                        "localId" : "718",
                         "locator" : "347:6-347:12",
                         "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                         "name" : "request",
@@ -14621,7 +14509,7 @@
                      }
                   },
                   "isTypeSpecifier" : {
-                     "localId" : "724",
+                     "localId" : "720",
                      "locator" : "347:28-347:42",
                      "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                      "name" : "{http://hl7.org/fhir}CodeableConcept",
@@ -14629,13 +14517,13 @@
                   }
                },
                "then" : {
-                  "localId" : "729",
+                  "localId" : "725",
                   "locator" : "348:6-348:42",
                   "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                   "strict" : false,
                   "type" : "As",
                   "operand" : {
-                     "localId" : "727",
+                     "localId" : "723",
                      "locator" : "348:6-348:23",
                      "path" : "medication",
                      "type" : "Property",
@@ -14650,7 +14538,7 @@
                         } ]
                      },
                      "source" : {
-                        "localId" : "726",
+                        "localId" : "722",
                         "locator" : "348:6-348:12",
                         "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                         "name" : "request",
@@ -14658,7 +14546,7 @@
                      }
                   },
                   "asTypeSpecifier" : {
-                     "localId" : "728",
+                     "localId" : "724",
                      "locator" : "348:28-348:42",
                      "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                      "name" : "{http://hl7.org/fhir}CodeableConcept",
@@ -14666,18 +14554,18 @@
                   }
                },
                "else" : {
-                  "localId" : "743",
+                  "localId" : "739",
                   "locator" : "350:6-350:107",
                   "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                   "path" : "code",
                   "type" : "Property",
                   "source" : {
-                     "localId" : "742",
+                     "localId" : "738",
                      "locator" : "350:6-350:102",
                      "resultTypeName" : "{http://hl7.org/fhir}Medication",
                      "type" : "SingletonFrom",
                      "operand" : {
-                        "localId" : "741",
+                        "localId" : "737",
                         "locator" : "350:22-350:101",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
@@ -14688,7 +14576,7 @@
                            }
                         },
                         "source" : [ {
-                           "localId" : "731",
+                           "localId" : "727",
                            "locator" : "350:23-350:36",
                            "alias" : "M",
                            "resultTypeSpecifier" : {
@@ -14699,7 +14587,7 @@
                               }
                            },
                            "expression" : {
-                              "localId" : "730",
+                              "localId" : "726",
                               "locator" : "350:23-350:34",
                               "dataType" : "{http://hl7.org/fhir}Medication",
                               "templateId" : "http://hl7.org/fhir/StructureDefinition/Medication",
@@ -14715,7 +14603,7 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "localId" : "740",
+                           "localId" : "736",
                            "locator" : "350:38-350:100",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Equal",
@@ -14724,7 +14612,7 @@
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
                               "operand" : [ {
-                                 "localId" : "733",
+                                 "localId" : "729",
                                  "locator" : "350:44-350:47",
                                  "resultTypeName" : "{http://hl7.org/fhir}id",
                                  "path" : "id",
@@ -14732,7 +14620,7 @@
                                  "type" : "Property"
                               } ]
                            }, {
-                              "localId" : "739",
+                              "localId" : "735",
                               "locator" : "350:51-350:100",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "name" : "GetId",
@@ -14742,19 +14630,19 @@
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
                                  "operand" : [ {
-                                    "localId" : "738",
+                                    "localId" : "734",
                                     "locator" : "350:57-350:99",
                                     "resultTypeName" : "{http://hl7.org/fhir}string",
                                     "path" : "reference",
                                     "type" : "Property",
                                     "source" : {
-                                       "localId" : "737",
+                                       "localId" : "733",
                                        "locator" : "350:57-350:89",
                                        "resultTypeName" : "{http://hl7.org/fhir}Reference",
                                        "strict" : false,
                                        "type" : "As",
                                        "operand" : {
-                                          "localId" : "735",
+                                          "localId" : "731",
                                           "locator" : "350:58-350:75",
                                           "path" : "medication",
                                           "type" : "Property",
@@ -14769,7 +14657,7 @@
                                              } ]
                                           },
                                           "source" : {
-                                             "localId" : "734",
+                                             "localId" : "730",
                                              "locator" : "350:58-350:64",
                                              "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                                              "name" : "request",
@@ -14777,7 +14665,7 @@
                                           }
                                        },
                                        "asTypeSpecifier" : {
-                                          "localId" : "736",
+                                          "localId" : "732",
                                           "locator" : "350:80-350:88",
                                           "resultTypeName" : "{http://hl7.org/fhir}Reference",
                                           "name" : "{http://hl7.org/fhir}Reference",
@@ -14795,7 +14683,7 @@
             "operand" : [ {
                "name" : "request",
                "operandTypeSpecifier" : {
-                  "localId" : "721",
+                  "localId" : "717",
                   "locator" : "346:45-346:61",
                   "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                   "name" : "{http://hl7.org/fhir}MedicationRequest",
@@ -14803,7 +14691,7 @@
                }
             } ]
          }, {
-            "localId" : "758",
+            "localId" : "754",
             "locator" : "353:1-356:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "HasStart",
@@ -14813,15 +14701,15 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "758",
+                  "r" : "754",
                   "s" : [ {
                      "value" : [ "/*Given an interval, return true if the interval has a starting boundary specified (i.e. the start of the interval is not null and not the minimum DateTime value)*/\n","define function ","\"HasStart\"","(","period"," " ]
                   }, {
-                     "r" : "747",
+                     "r" : "743",
                      "s" : [ {
                         "value" : [ "Interval<" ]
                      }, {
-                        "r" : "746",
+                        "r" : "742",
                         "s" : [ {
                            "value" : [ "DateTime" ]
                         } ]
@@ -14831,25 +14719,25 @@
                   }, {
                      "value" : [ " ):\n  " ]
                   }, {
-                     "r" : "757",
+                     "r" : "753",
                      "s" : [ {
-                        "r" : "757",
+                        "r" : "753",
                         "s" : [ {
                            "value" : [ "not " ]
                         }, {
-                           "r" : "756",
+                           "r" : "752",
                            "s" : [ {
                               "value" : [ "( " ]
                            }, {
-                              "r" : "756",
+                              "r" : "752",
                               "s" : [ {
-                                 "r" : "750",
+                                 "r" : "746",
                                  "s" : [ {
-                                    "r" : "749",
+                                    "r" : "745",
                                     "s" : [ {
                                        "value" : [ "start of " ]
                                     }, {
-                                       "r" : "748",
+                                       "r" : "744",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -14860,13 +14748,13 @@
                               }, {
                                  "value" : [ "\n      or " ]
                               }, {
-                                 "r" : "755",
+                                 "r" : "751",
                                  "s" : [ {
-                                    "r" : "752",
+                                    "r" : "748",
                                     "s" : [ {
                                        "value" : [ "start of " ]
                                     }, {
-                                       "r" : "751",
+                                       "r" : "747",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -14874,11 +14762,11 @@
                                  }, {
                                     "value" : [ " ","="," " ]
                                  }, {
-                                    "r" : "754",
+                                    "r" : "750",
                                     "s" : [ {
                                        "value" : [ "minimum"," " ]
                                     }, {
-                                       "r" : "753",
+                                       "r" : "749",
                                        "s" : [ {
                                           "value" : [ "DateTime" ]
                                        } ]
@@ -14894,27 +14782,27 @@
                }
             } ],
             "expression" : {
-               "localId" : "757",
+               "localId" : "753",
                "locator" : "354:3-356:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
                "operand" : {
-                  "localId" : "756",
+                  "localId" : "752",
                   "locator" : "354:7-356:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "operand" : [ {
-                     "localId" : "750",
+                     "localId" : "746",
                      "locator" : "354:9-354:31",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IsNull",
                      "operand" : {
-                        "localId" : "749",
+                        "localId" : "745",
                         "locator" : "354:9-354:23",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "operand" : {
-                           "localId" : "748",
+                           "localId" : "744",
                            "locator" : "354:18-354:23",
                            "name" : "period",
                            "type" : "OperandRef",
@@ -14928,17 +14816,17 @@
                         }
                      }
                   }, {
-                     "localId" : "755",
+                     "localId" : "751",
                      "locator" : "355:10-355:43",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "operand" : [ {
-                        "localId" : "752",
+                        "localId" : "748",
                         "locator" : "355:10-355:24",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "operand" : {
-                           "localId" : "751",
+                           "localId" : "747",
                            "locator" : "355:19-355:24",
                            "name" : "period",
                            "type" : "OperandRef",
@@ -14951,7 +14839,7 @@
                            }
                         }
                      }, {
-                        "localId" : "754",
+                        "localId" : "750",
                         "locator" : "355:28-355:43",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -14963,7 +14851,7 @@
             "operand" : [ {
                "name" : "period",
                "operandTypeSpecifier" : {
-                  "localId" : "747",
+                  "localId" : "743",
                   "locator" : "353:35-353:52",
                   "type" : "IntervalTypeSpecifier",
                   "resultTypeSpecifier" : {
@@ -14974,7 +14862,7 @@
                      }
                   },
                   "pointType" : {
-                     "localId" : "746",
+                     "localId" : "742",
                      "locator" : "353:44-353:51",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -14983,7 +14871,7 @@
                }
             } ]
          }, {
-            "localId" : "771",
+            "localId" : "767",
             "locator" : "359:1-364:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "HasEnd",
@@ -14993,15 +14881,15 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "771",
+                  "r" : "767",
                   "s" : [ {
                      "value" : [ "/*Given an interval, return true if the interval has an ending boundary specified (i.e. the end of the interval is not null and not the maximum DateTime value)*/\n","define function ","\"HasEnd\"","(","period"," " ]
                   }, {
-                     "r" : "760",
+                     "r" : "756",
                      "s" : [ {
                         "value" : [ "Interval<" ]
                      }, {
-                        "r" : "759",
+                        "r" : "755",
                         "s" : [ {
                            "value" : [ "DateTime" ]
                         } ]
@@ -15011,25 +14899,25 @@
                   }, {
                      "value" : [ " ):\n  " ]
                   }, {
-                     "r" : "770",
+                     "r" : "766",
                      "s" : [ {
-                        "r" : "770",
+                        "r" : "766",
                         "s" : [ {
                            "value" : [ "not " ]
                         }, {
-                           "r" : "769",
+                           "r" : "765",
                            "s" : [ {
                               "value" : [ "(\n    " ]
                            }, {
-                              "r" : "769",
+                              "r" : "765",
                               "s" : [ {
-                                 "r" : "763",
+                                 "r" : "759",
                                  "s" : [ {
-                                    "r" : "762",
+                                    "r" : "758",
                                     "s" : [ {
                                        "value" : [ "end of " ]
                                     }, {
-                                       "r" : "761",
+                                       "r" : "757",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -15040,13 +14928,13 @@
                               }, {
                                  "value" : [ "\n      or\n      " ]
                               }, {
-                                 "r" : "768",
+                                 "r" : "764",
                                  "s" : [ {
-                                    "r" : "765",
+                                    "r" : "761",
                                     "s" : [ {
                                        "value" : [ "end of " ]
                                     }, {
-                                       "r" : "764",
+                                       "r" : "760",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -15054,11 +14942,11 @@
                                  }, {
                                     "value" : [ " ","="," " ]
                                  }, {
-                                    "r" : "767",
+                                    "r" : "763",
                                     "s" : [ {
                                        "value" : [ "maximum"," " ]
                                     }, {
-                                       "r" : "766",
+                                       "r" : "762",
                                        "s" : [ {
                                           "value" : [ "DateTime" ]
                                        } ]
@@ -15074,27 +14962,27 @@
                }
             } ],
             "expression" : {
-               "localId" : "770",
+               "localId" : "766",
                "locator" : "360:3-364:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
                "operand" : {
-                  "localId" : "769",
+                  "localId" : "765",
                   "locator" : "360:7-364:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "operand" : [ {
-                     "localId" : "763",
+                     "localId" : "759",
                      "locator" : "361:5-361:25",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IsNull",
                      "operand" : {
-                        "localId" : "762",
+                        "localId" : "758",
                         "locator" : "361:5-361:17",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
                         "operand" : {
-                           "localId" : "761",
+                           "localId" : "757",
                            "locator" : "361:12-361:17",
                            "name" : "period",
                            "type" : "OperandRef",
@@ -15108,17 +14996,17 @@
                         }
                      }
                   }, {
-                     "localId" : "768",
+                     "localId" : "764",
                      "locator" : "363:7-363:38",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "operand" : [ {
-                        "localId" : "765",
+                        "localId" : "761",
                         "locator" : "363:7-363:19",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
                         "operand" : {
-                           "localId" : "764",
+                           "localId" : "760",
                            "locator" : "363:14-363:19",
                            "name" : "period",
                            "type" : "OperandRef",
@@ -15131,7 +15019,7 @@
                            }
                         }
                      }, {
-                        "localId" : "767",
+                        "localId" : "763",
                         "locator" : "363:23-363:38",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "valueType" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -15143,7 +15031,7 @@
             "operand" : [ {
                "name" : "period",
                "operandTypeSpecifier" : {
-                  "localId" : "760",
+                  "localId" : "756",
                   "locator" : "359:33-359:50",
                   "type" : "IntervalTypeSpecifier",
                   "resultTypeSpecifier" : {
@@ -15154,7 +15042,7 @@
                      }
                   },
                   "pointType" : {
-                     "localId" : "759",
+                     "localId" : "755",
                      "locator" : "359:42-359:49",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -15163,7 +15051,7 @@
                }
             } ]
          }, {
-            "localId" : "792",
+            "localId" : "788",
             "locator" : "367:1-371:26",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "Latest",
@@ -15173,57 +15061,57 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "792",
+                  "r" : "788",
                   "s" : [ {
                      "value" : [ "/*Given an interval, return the ending point if the interval has an ending boundary specified, otherwise, return the starting point*/\n","define function ","\"Latest\"","(","choice"," " ]
                   }, {
-                     "r" : "779",
+                     "r" : "775",
                      "s" : [ {
                         "value" : [ "Choice<" ]
                      }, {
-                        "r" : "772",
+                        "r" : "768",
                         "s" : [ {
                            "value" : [ "FHIR",".","dateTime" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "773",
+                        "r" : "769",
                         "s" : [ {
                            "value" : [ "FHIR",".","Period" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "774",
+                        "r" : "770",
                         "s" : [ {
                            "value" : [ "FHIR",".","Timing" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "775",
+                        "r" : "771",
                         "s" : [ {
                            "value" : [ "FHIR",".","instant" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "776",
+                        "r" : "772",
                         "s" : [ {
                            "value" : [ "FHIR",".","string" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "777",
+                        "r" : "773",
                         "s" : [ {
                            "value" : [ "FHIR",".","Age" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "778",
+                        "r" : "774",
                         "s" : [ {
                            "value" : [ "FHIR",".","Range" ]
                         } ]
@@ -15233,22 +15121,22 @@
                   }, {
                      "value" : [ " ):\n  " ]
                   }, {
-                     "r" : "791",
+                     "r" : "787",
                      "s" : [ {
-                        "r" : "791",
+                        "r" : "787",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "782",
+                              "r" : "778",
                               "s" : [ {
-                                 "r" : "781",
+                                 "r" : "777",
                                  "s" : [ {
                                     "value" : [ "(" ]
                                  }, {
-                                    "r" : "781",
+                                    "r" : "777",
                                     "s" : [ {
                                        "value" : [ "\"Normalize Interval\"","(" ]
                                     }, {
-                                       "r" : "780",
+                                       "r" : "776",
                                        "s" : [ {
                                           "value" : [ "choice" ]
                                        } ]
@@ -15265,23 +15153,23 @@
                         }, {
                            "value" : [ "\n    " ]
                         }, {
-                           "r" : "790",
+                           "r" : "786",
                            "s" : [ {
                               "value" : [ "return\n      " ]
                            }, {
-                              "r" : "789",
+                              "r" : "785",
                               "s" : [ {
                                  "value" : [ "if " ]
                               }, {
-                                 "r" : "784",
+                                 "r" : "780",
                                  "s" : [ {
                                     "value" : [ "( " ]
                                  }, {
-                                    "r" : "784",
+                                    "r" : "780",
                                     "s" : [ {
                                        "value" : [ "HasEnd","(" ]
                                     }, {
-                                       "r" : "783",
+                                       "r" : "779",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -15294,11 +15182,11 @@
                               }, {
                                  "value" : [ " then " ]
                               }, {
-                                 "r" : "786",
+                                 "r" : "782",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "785",
+                                    "r" : "781",
                                     "s" : [ {
                                        "value" : [ "period" ]
                                     } ]
@@ -15306,11 +15194,11 @@
                               }, {
                                  "value" : [ "\n      else " ]
                               }, {
-                                 "r" : "788",
+                                 "r" : "784",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "787",
+                                    "r" : "783",
                                     "s" : [ {
                                        "value" : [ "period" ]
                                     } ]
@@ -15323,12 +15211,12 @@
                }
             } ],
             "expression" : {
-               "localId" : "791",
+               "localId" : "787",
                "locator" : "368:3-371:26",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "782",
+                  "localId" : "778",
                   "locator" : "368:3-368:39",
                   "alias" : "period",
                   "resultTypeSpecifier" : {
@@ -15339,7 +15227,7 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "781",
+                     "localId" : "777",
                      "locator" : "368:3-368:32",
                      "name" : "Normalize Interval",
                      "type" : "FunctionRef",
@@ -15351,7 +15239,7 @@
                         }
                      },
                      "operand" : [ {
-                        "localId" : "780",
+                        "localId" : "776",
                         "locator" : "368:25-368:30",
                         "name" : "choice",
                         "type" : "OperandRef",
@@ -15385,22 +15273,22 @@
                } ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "790",
+                  "localId" : "786",
                   "locator" : "369:5-371:26",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "expression" : {
-                     "localId" : "789",
+                     "localId" : "785",
                      "locator" : "370:7-371:26",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "If",
                      "condition" : {
-                        "localId" : "784",
+                        "localId" : "780",
                         "locator" : "370:10-370:26",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "HasEnd",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "783",
+                           "localId" : "779",
                            "locator" : "370:19-370:24",
                            "name" : "period",
                            "type" : "AliasRef",
@@ -15414,12 +15302,12 @@
                         } ]
                      },
                      "then" : {
-                        "localId" : "786",
+                        "localId" : "782",
                         "locator" : "370:33-370:45",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
                         "operand" : {
-                           "localId" : "785",
+                           "localId" : "781",
                            "locator" : "370:40-370:45",
                            "name" : "period",
                            "type" : "AliasRef",
@@ -15433,12 +15321,12 @@
                         }
                      },
                      "else" : {
-                        "localId" : "788",
+                        "localId" : "784",
                         "locator" : "371:12-371:26",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "operand" : {
-                           "localId" : "787",
+                           "localId" : "783",
                            "locator" : "371:21-371:26",
                            "name" : "period",
                            "type" : "AliasRef",
@@ -15457,7 +15345,7 @@
             "operand" : [ {
                "name" : "choice",
                "operandTypeSpecifier" : {
-                  "localId" : "779",
+                  "localId" : "775",
                   "locator" : "367:33-367:128",
                   "type" : "ChoiceTypeSpecifier",
                   "resultTypeSpecifier" : {
@@ -15486,43 +15374,43 @@
                      } ]
                   },
                   "choice" : [ {
-                     "localId" : "772",
+                     "localId" : "768",
                      "locator" : "367:40-367:52",
                      "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                      "name" : "{http://hl7.org/fhir}dateTime",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "773",
+                     "localId" : "769",
                      "locator" : "367:55-367:65",
                      "resultTypeName" : "{http://hl7.org/fhir}Period",
                      "name" : "{http://hl7.org/fhir}Period",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "774",
+                     "localId" : "770",
                      "locator" : "367:68-367:78",
                      "resultTypeName" : "{http://hl7.org/fhir}Timing",
                      "name" : "{http://hl7.org/fhir}Timing",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "775",
+                     "localId" : "771",
                      "locator" : "367:81-367:92",
                      "resultTypeName" : "{http://hl7.org/fhir}instant",
                      "name" : "{http://hl7.org/fhir}instant",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "776",
+                     "localId" : "772",
                      "locator" : "367:95-367:105",
                      "resultTypeName" : "{http://hl7.org/fhir}string",
                      "name" : "{http://hl7.org/fhir}string",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "777",
+                     "localId" : "773",
                      "locator" : "367:108-367:115",
                      "resultTypeName" : "{http://hl7.org/fhir}Age",
                      "name" : "{http://hl7.org/fhir}Age",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "778",
+                     "localId" : "774",
                      "locator" : "367:118-367:127",
                      "resultTypeName" : "{http://hl7.org/fhir}Range",
                      "name" : "{http://hl7.org/fhir}Range",
@@ -15531,7 +15419,7 @@
                }
             } ]
          }, {
-            "localId" : "813",
+            "localId" : "809",
             "locator" : "374:1-378:24",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "Earliest",
@@ -15541,57 +15429,57 @@
             "annotation" : [ {
                "type" : "Annotation",
                "s" : {
-                  "r" : "813",
+                  "r" : "809",
                   "s" : [ {
                      "value" : [ "/*Given an interval, return the starting point if the interval has a starting boundary specified, otherwise, return the ending point*/\n","define function ","\"Earliest\"","(","choice"," " ]
                   }, {
-                     "r" : "800",
+                     "r" : "796",
                      "s" : [ {
                         "value" : [ "Choice<" ]
                      }, {
-                        "r" : "793",
+                        "r" : "789",
                         "s" : [ {
                            "value" : [ "FHIR",".","dateTime" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "794",
+                        "r" : "790",
                         "s" : [ {
                            "value" : [ "FHIR",".","Period" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "795",
+                        "r" : "791",
                         "s" : [ {
                            "value" : [ "FHIR",".","Timing" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "796",
+                        "r" : "792",
                         "s" : [ {
                            "value" : [ "FHIR",".","instant" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "797",
+                        "r" : "793",
                         "s" : [ {
                            "value" : [ "FHIR",".","string" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "798",
+                        "r" : "794",
                         "s" : [ {
                            "value" : [ "FHIR",".","Age" ]
                         } ]
                      }, {
                         "value" : [ ", " ]
                      }, {
-                        "r" : "799",
+                        "r" : "795",
                         "s" : [ {
                            "value" : [ "FHIR",".","Range" ]
                         } ]
@@ -15601,22 +15489,22 @@
                   }, {
                      "value" : [ " ):\n  " ]
                   }, {
-                     "r" : "812",
+                     "r" : "808",
                      "s" : [ {
-                        "r" : "812",
+                        "r" : "808",
                         "s" : [ {
                            "s" : [ {
-                              "r" : "803",
+                              "r" : "799",
                               "s" : [ {
-                                 "r" : "802",
+                                 "r" : "798",
                                  "s" : [ {
                                     "value" : [ "(" ]
                                  }, {
-                                    "r" : "802",
+                                    "r" : "798",
                                     "s" : [ {
                                        "value" : [ "\"Normalize Interval\"","(" ]
                                     }, {
-                                       "r" : "801",
+                                       "r" : "797",
                                        "s" : [ {
                                           "value" : [ "choice" ]
                                        } ]
@@ -15633,23 +15521,23 @@
                         }, {
                            "value" : [ "\n    " ]
                         }, {
-                           "r" : "811",
+                           "r" : "807",
                            "s" : [ {
                               "value" : [ "return\n      " ]
                            }, {
-                              "r" : "810",
+                              "r" : "806",
                               "s" : [ {
                                  "value" : [ "if " ]
                               }, {
-                                 "r" : "805",
+                                 "r" : "801",
                                  "s" : [ {
                                     "value" : [ "(" ]
                                  }, {
-                                    "r" : "805",
+                                    "r" : "801",
                                     "s" : [ {
                                        "value" : [ "HasStart","(" ]
                                     }, {
-                                       "r" : "804",
+                                       "r" : "800",
                                        "s" : [ {
                                           "value" : [ "period" ]
                                        } ]
@@ -15662,11 +15550,11 @@
                               }, {
                                  "value" : [ " then " ]
                               }, {
-                                 "r" : "807",
+                                 "r" : "803",
                                  "s" : [ {
                                     "value" : [ "start of " ]
                                  }, {
-                                    "r" : "806",
+                                    "r" : "802",
                                     "s" : [ {
                                        "value" : [ "period" ]
                                     } ]
@@ -15674,11 +15562,11 @@
                               }, {
                                  "value" : [ "\n      else " ]
                               }, {
-                                 "r" : "809",
+                                 "r" : "805",
                                  "s" : [ {
                                     "value" : [ "end of " ]
                                  }, {
-                                    "r" : "808",
+                                    "r" : "804",
                                     "s" : [ {
                                        "value" : [ "period" ]
                                     } ]
@@ -15691,12 +15579,12 @@
                }
             } ],
             "expression" : {
-               "localId" : "812",
+               "localId" : "808",
                "locator" : "375:3-378:24",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Query",
                "source" : [ {
-                  "localId" : "803",
+                  "localId" : "799",
                   "locator" : "375:3-375:39",
                   "alias" : "period",
                   "resultTypeSpecifier" : {
@@ -15707,7 +15595,7 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "802",
+                     "localId" : "798",
                      "locator" : "375:3-375:32",
                      "name" : "Normalize Interval",
                      "type" : "FunctionRef",
@@ -15719,7 +15607,7 @@
                         }
                      },
                      "operand" : [ {
-                        "localId" : "801",
+                        "localId" : "797",
                         "locator" : "375:25-375:30",
                         "name" : "choice",
                         "type" : "OperandRef",
@@ -15753,22 +15641,22 @@
                } ],
                "relationship" : [ ],
                "return" : {
-                  "localId" : "811",
+                  "localId" : "807",
                   "locator" : "376:5-378:24",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "expression" : {
-                     "localId" : "810",
+                     "localId" : "806",
                      "locator" : "377:7-378:24",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "If",
                      "condition" : {
-                        "localId" : "805",
+                        "localId" : "801",
                         "locator" : "377:10-377:27",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "HasStart",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "804",
+                           "localId" : "800",
                            "locator" : "377:20-377:25",
                            "name" : "period",
                            "type" : "AliasRef",
@@ -15782,12 +15670,12 @@
                         } ]
                      },
                      "then" : {
-                        "localId" : "807",
+                        "localId" : "803",
                         "locator" : "377:34-377:48",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "operand" : {
-                           "localId" : "806",
+                           "localId" : "802",
                            "locator" : "377:43-377:48",
                            "name" : "period",
                            "type" : "AliasRef",
@@ -15801,12 +15689,12 @@
                         }
                      },
                      "else" : {
-                        "localId" : "809",
+                        "localId" : "805",
                         "locator" : "378:12-378:24",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "End",
                         "operand" : {
-                           "localId" : "808",
+                           "localId" : "804",
                            "locator" : "378:19-378:24",
                            "name" : "period",
                            "type" : "AliasRef",
@@ -15825,7 +15713,7 @@
             "operand" : [ {
                "name" : "choice",
                "operandTypeSpecifier" : {
-                  "localId" : "800",
+                  "localId" : "796",
                   "locator" : "374:35-374:130",
                   "type" : "ChoiceTypeSpecifier",
                   "resultTypeSpecifier" : {
@@ -15854,43 +15742,43 @@
                      } ]
                   },
                   "choice" : [ {
-                     "localId" : "793",
+                     "localId" : "789",
                      "locator" : "374:42-374:54",
                      "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                      "name" : "{http://hl7.org/fhir}dateTime",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "794",
+                     "localId" : "790",
                      "locator" : "374:57-374:67",
                      "resultTypeName" : "{http://hl7.org/fhir}Period",
                      "name" : "{http://hl7.org/fhir}Period",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "795",
+                     "localId" : "791",
                      "locator" : "374:70-374:80",
                      "resultTypeName" : "{http://hl7.org/fhir}Timing",
                      "name" : "{http://hl7.org/fhir}Timing",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "796",
+                     "localId" : "792",
                      "locator" : "374:83-374:94",
                      "resultTypeName" : "{http://hl7.org/fhir}instant",
                      "name" : "{http://hl7.org/fhir}instant",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "797",
+                     "localId" : "793",
                      "locator" : "374:97-374:107",
                      "resultTypeName" : "{http://hl7.org/fhir}string",
                      "name" : "{http://hl7.org/fhir}string",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "798",
+                     "localId" : "794",
                      "locator" : "374:110-374:117",
                      "resultTypeName" : "{http://hl7.org/fhir}Age",
                      "name" : "{http://hl7.org/fhir}Age",
                      "type" : "NamedTypeSpecifier"
                   }, {
-                     "localId" : "799",
+                     "localId" : "795",
                      "locator" : "374:120-374:129",
                      "resultTypeName" : "{http://hl7.org/fhir}Range",
                      "name" : "{http://hl7.org/fhir}Range",

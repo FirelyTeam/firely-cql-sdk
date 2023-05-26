@@ -339,10 +339,9 @@ define function "BaseExtension"(element Element, id String ):
   singleton from BaseExtensions(element, id)
 
 /*NOTE: Provenance is not the preferred approach, this is provided only as an illustration
-for what using Provenance could look like, and is not a tested pattern
-define function "GetProvenance"(resource Resource ):
-  singleton from ([Provenance: target in resource.id])
-*/
+for what using Provenance could look like, and is not a tested pattern*/
+// define function "GetProvenance"(resource Resource ):
+//   singleton from ([Provenance: target in resource.id])
 
 define function "GetMedicationCode"(request MedicationRequest ):
   if request.medication is CodeableConcept then

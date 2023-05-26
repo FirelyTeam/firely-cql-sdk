@@ -131,8 +131,10 @@ define function "Pharmacy Claim With Medication"(claim List<FHIR.Claim>, Medicat
                   where LineCode.code in ClaimWithMedication."MedicationsAsStrings"
               )
               return all Tuple {
-                DaysSupplyInterval: ( if i.quantity is not null then if i.serviced is Period then Interval[start of FHIRBase."Normalize Interval" ( i.serviced ), start of FHIRBase."Normalize Interval" ( i.serviced ) + System.Quantity { value: i.quantity.value, unit: 'day' } - 1 day]
-                    else Interval[i.serviced, i.serviced + System.Quantity { value: i.quantity.value, unit: 'day' } - 1 day]
+                DaysSupplyInterval: ( 
+                    if i.quantity is not null then 
+                        if i.serviced is Period then Interval[start of FHIRBase."Normalize Interval" ( i.serviced ), start of FHIRBase."Normalize Interval" ( i.serviced ) + System.Quantity { value: i.quantity.value, unit: 'day' } - 1 day]
+                        else Interval[i.serviced as FHIR.date, (i.serviced as FHIR.date) + System.Quantity { value: i.quantity.value, unit: 'day' } - 1 day]
                     else null
                 )
               }

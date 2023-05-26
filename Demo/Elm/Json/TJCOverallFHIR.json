@@ -5,17 +5,6 @@
          "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       }, {
-         "libraryId" : "MATGlobalCommonFunctionsFHIR4",
-         "libraryVersion" : "6.1.000",
-         "startLine" : 344,
-         "startChar" : 19,
-         "endLine" : 344,
-         "endChar" : 53,
-         "message" : "Could not resolve membership operator for terminology target of the retrieve.",
-         "errorType" : "semantic",
-         "errorSeverity" : "warning",
-         "type" : "CqlToElmError"
-      }, {
          "type" : "Annotation",
          "s" : {
             "r" : "179",
@@ -434,9 +423,9 @@
             } ]
          }, {
             "localId" : "14",
-            "locator" : "28:1-28:117",
+            "locator" : "28:1-28:107",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-            "name" : "Non-Elective Inpatient Encounter",
+            "name" : "Non-Elective Inpatient",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424",
             "accessLevel" : "Public",
             "annotation" : [ {
@@ -444,7 +433,7 @@
                "s" : {
                   "r" : "14",
                   "s" : [ {
-                     "value" : [ "","valueset ","\"Non-Elective Inpatient Encounter\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424'" ]
+                     "value" : [ "","valueset ","\"Non-Elective Inpatient\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424'" ]
                   } ]
                }
             } ]
@@ -576,7 +565,7 @@
                                     "value" : [ "[","\"Encounter\"",": " ]
                                  }, {
                                     "s" : [ {
-                                       "value" : [ "\"Non-Elective Inpatient Encounter\"" ]
+                                       "value" : [ "\"Non-Elective Inpatient\"" ]
                                     } ]
                                  }, {
                                     "value" : [ "]" ]
@@ -686,7 +675,7 @@
                },
                "source" : [ {
                   "localId" : "27",
-                  "locator" : "60:3-60:72",
+                  "locator" : "60:3-60:62",
                   "alias" : "NonElectiveEncounter",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -697,7 +686,7 @@
                   },
                   "expression" : {
                      "localId" : "26",
-                     "locator" : "60:3-60:51",
+                     "locator" : "60:3-60:41",
                      "dataType" : "{http://hl7.org/fhir}Encounter",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
                      "codeProperty" : "type",
@@ -711,9 +700,9 @@
                         }
                      },
                      "codes" : {
-                        "locator" : "60:17-60:50",
+                        "locator" : "60:17-60:40",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                        "name" : "Non-Elective Inpatient Encounter",
+                        "name" : "Non-Elective Inpatient",
                         "preserve" : true,
                         "type" : "ValueSetRef"
                      }
