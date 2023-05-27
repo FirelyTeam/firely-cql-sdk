@@ -4,6 +4,8 @@ using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm.Expressions;
+using Hl7.Cql.Operators;
+using System.Xml;
 
 namespace Hl7.Cql.Compiler
 {
@@ -72,10 +74,12 @@ namespace Hl7.Cql.Compiler
         public Expression ExpandValueSet(elm.ExpandValueSetExpression e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(RuntimeContext) });
-            var @new = Expression.New(ctor, operand, ctx.RuntimeContextParameter);
-            return @new;
+            var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(IValueSetDictionary) });
+            var operatorsProperty = typeof(RuntimeContext).GetProperty(nameof(RuntimeContext.Operators));
+            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade));
+            var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);
+            var call = Expression.Call(property, createFacadeMethod, operand);
+            return call;
         }
-
     }
 }

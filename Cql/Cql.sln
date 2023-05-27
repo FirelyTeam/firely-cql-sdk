@@ -19,8 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Operators", "Cql.Operat
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.ValueSets", "Cql.ValueSets\Cql.ValueSets.csproj", "{A1F3DE53-D965-4398-AE84-1B066626CDC3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Model", "Model\Model.csproj", "{512D1ACE-9D22-45D3-B834-003C04851A7F}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeGeneration.NET", "CodeGeneration.NET\CodeGeneration.NET.csproj", "{4B05E790-92F8-4F2A-9DF2-B77FDF22B28E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Runtime", "Cql.Runtime\Cql.Runtime.csproj", "{0BDEB106-877A-40C3-A9DB-6A604F8D873A}"
@@ -89,10 +87,6 @@ Global
 		{A1F3DE53-D965-4398-AE84-1B066626CDC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1F3DE53-D965-4398-AE84-1B066626CDC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1F3DE53-D965-4398-AE84-1B066626CDC3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{512D1ACE-9D22-45D3-B834-003C04851A7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{512D1ACE-9D22-45D3-B834-003C04851A7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{512D1ACE-9D22-45D3-B834-003C04851A7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{512D1ACE-9D22-45D3-B834-003C04851A7F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4B05E790-92F8-4F2A-9DF2-B77FDF22B28E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4B05E790-92F8-4F2A-9DF2-B77FDF22B28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B05E790-92F8-4F2A-9DF2-B77FDF22B28E}.Release|Any CPU.ActiveCfg = Release|Any CPU

@@ -170,6 +170,7 @@ namespace Hl7.Cql.Elm
                 "Tail" => new TailExpression(),
                 "Time" => new TimeExpression(),
                 "TimeOfDay" => new TimeOfDayExpression(),
+                "TimezoneOffsetFrom" => new TimezoneOffsetFromExpression(),
                 "ToBoolean" => new ToBooleanExpression(),
                 "ToConcept" => new ToConceptExpression(),
                 "ToDate" => new ToDateExpression(),

@@ -793,6 +793,9 @@ namespace Hl7.Cql.Compiler
                 case elm.TimeOfDayExpression tod:
                     expression = TimeOfDay(tod, ctx);
                     break;
+                case elm.TimezoneOffsetFromExpression tofe:
+                    expression = TimezoneOffsetFrom(tofe, ctx);
+                    break;
                 case elm.ToBooleanExpression e:
                     expression = ToBoolean(e, ctx);
                     break;
@@ -1025,53 +1028,45 @@ namespace Hl7.Cql.Compiler
 
             if (query.aggregate != null)
             {
-                if (query.aggregate!.type == "AggregateClause")
+                var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
+                ?? TypeNameToIdentifier(elementType, ctx);
+                var sourceAliasParameter = Expression.Parameter(elementType, parameterName);
+                var resultAlias = query.aggregate.identifier!;
+                Type? resultType = null;
+                if (query.aggregate.resultTypeSpecifier != null)
                 {
-                    var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
-                    ?? TypeNameToIdentifier(elementType, ctx);
-                    var sourceAliasParameter = Expression.Parameter(elementType, parameterName);
-                    var resultAlias = query.aggregate.identifier!;
-                    Type? resultType = null;
-                    if (query.aggregate.resultTypeSpecifier != null)
-                    {
-                        resultType = TypeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx, true);
-                    }
-                    else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName!))
-                    {
-                        resultType = TypeResolver.ResolveType(query.aggregate.resultTypeName!);
-                    }
-                    if (resultType == null)
-                    {
-                        throw new InvalidOperationException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
-                    }
-                    var resultParameter = Expression.Parameter(resultType, resultAlias);
-                    var scopes = new[]
-                    {
+                    resultType = TypeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx, true);
+                }
+                else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName!))
+                {
+                    resultType = TypeResolver.ResolveType(query.aggregate.resultTypeName!);
+                }
+                if (resultType == null)
+                {
+                    throw new InvalidOperationException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
+                }
+                var resultParameter = Expression.Parameter(resultType, resultAlias);
+                var scopes = new[]
+                {
                         new KeyValuePair<string, (Expression, elm.Expression)>(querySourceAlias!, (sourceAliasParameter, query)),
                         new KeyValuePair<string, (Expression, elm.Expression)>(resultAlias!, (resultParameter, query.aggregate))
                     };
-                    var subContext = ctx.WithScopes(scopes);
-                    if (query.let != null)
-                    {
-                        for (int i = 0; i < query.let.Length; i++)
-                        {
-                            var let = query.let[i];
-                            var expression = TranslateExpression(let.expression!, subContext);
-                            subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Expression)>(let.identifier!, (expression, let.expression!)));
-                        }
-                    }
-                    var startingValue = TranslateExpression(query.aggregate.starting!, subContext);
-
-                    var lambdaBody = TranslateExpression(query.aggregate.expression!, subContext);
-                    var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceAliasParameter);
-                    var aggregateCall = Operators.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
-                    @return = aggregateCall;
-                }
-                else
+                var subContext = ctx.WithScopes(scopes);
+                if (query.let != null)
                 {
-                    throw new NotImplementedException($"Aggregate type {query.aggregate.type} is not yet implemented.");
-
+                    for (int i = 0; i < query.let.Length; i++)
+                    {
+                        var let = query.let[i];
+                        var expression = TranslateExpression(let.expression!, subContext);
+                        subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Expression)>(let.identifier!, (expression, let.expression!)));
+                    }
                 }
+                var startingValue = TranslateExpression(query.aggregate.starting!, subContext);
+
+                var lambdaBody = TranslateExpression(query.aggregate.expression!, subContext);
+                var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceAliasParameter);
+                var aggregateCall = Operators.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
+                @return = aggregateCall;
             }
 
             if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)

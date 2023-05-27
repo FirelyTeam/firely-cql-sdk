@@ -1,10 +1,13 @@
 ﻿
+using Hl7.Cql;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Poco.Fhir;
 using Hl7.Cql.Poco.Fhir.R4.Model;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.FhirR4;
+using Hl7.Cql.ValueSets;
 using MeasurePackager;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -59,8 +62,15 @@ public static class Program
             Console.Error.WriteLine($"-d: expected true|false, got {dArg}");
             return -1;
         }
-        var fArg = config["f"];
 
+        var csArg = config["cs"];
+        var csDir = new DirectoryInfo(csArg);
+        if (!csDir.Exists)
+        {
+            EnsureDirectory(oDir);
+        }
+
+        var fArg = config["f"];
         bool force = false;
         if (fArg != null && !bool.TryParse(fArg, out force))
         {
@@ -97,20 +107,29 @@ public static class Program
 
         var requiredAssemblies = new[]
         {
-                typeof(ValueSetBindingAttribute).Assembly,
-                typeof(Resource).Assembly,
-                typeof(Hl7.Cql.Iso8601.DateIso8601).Assembly,
-                typeof(RuntimeContext).Assembly,
-                typeof(FhirRuntimeContext).Assembly,
+            // Core engine references
+            typeof(CqlDeclarationAttribute).Assembly, // Cql.Abstractions
+            typeof(Hl7.Cql.Comparers.CqlComparers).Assembly, // Cql.Comparers
+            typeof(Hl7.Cql.Conversion.IUnitConverter).Assembly, // Cql.Conversion
+            typeof(Hl7.Cql.Model.ModelTypeResolver).Assembly, // Cql.Model,
+            typeof(Hl7.Cql.Operators.ICqlOperators).Assembly, // Cql.Operators
+            typeof(Hl7.Cql.Primitives.CqlPrimitiveType).Assembly, // Cql.Primitives
+            typeof(Hl7.Cql.Runtime.RuntimeContext).Assembly, // Cql.Runtime
+            typeof(Hl7.Cql.ValueSets.IValueSetDictionary).Assembly, // Cql.ValueSets
+            // Model bindings
+            typeof(Hl7.Cql.Poco.Fhir.ValueSetBindingAttribute).Assembly, // Fhir
+            typeof(Hl7.Cql.Poco.Fhir.R4.Model.Resource).Assembly, // Fhir.R4
+            typeof(Hl7.Cql.Iso8601.DateIso8601).Assembly, // Iso8601
+
         };
         var namespaces = new[]
-        {
-            typeof(Bundle).Namespace!,
-            typeof(FhirRuntimeContext).Namespace!,
-            typeof(Hl7.Cql.Iso8601.DateTimeIso8601).Namespace!,
+        { 
+            typeof(CqlDeclarationAttribute).Namespace!,
+            typeof(Hl7.Cql.Poco.Fhir.R4.Model.Resource).Namespace!,
+            typeof(Hl7.Cql.Iso8601.DateIso8601).Namespace!,
         };
         var crosswalk = new FhirCqlCrosswalk(typeResolver);
-        var bundles = packager.PackageMeasures(elmDir,
+        var resources = packager.PackageResources(elmDir,
             cqlDir,
             graph,
             new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Default),
@@ -122,17 +141,11 @@ public static class Program
             builderLogger,
             writerLogger);
 
-        foreach (var kvp in bundles)
+        foreach (var resource in resources)
         {
-            string name = kvp.Key;
-            if (debug)
-                name = kvp.Key.Replace("-bundle", ".debug.bundle");
-            else
-                name = kvp.Key.Replace("-bundle", ".bundle");
-
-            var file = new FileInfo(Path.Combine(oDir.FullName, $"{name}.json"));
+            var file = new FileInfo(Path.Combine(oDir.FullName, $"{resource.id.value}.json"));
             using var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
-            Hl7.Cql.Poco.Fhir.R4.FhirJson.Serialize(kvp.Value, fs);
+            Hl7.Cql.Poco.Fhir.R4.FhirJson.Serialize(resource, fs);
         }
         return 0;
     }

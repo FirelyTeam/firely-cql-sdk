@@ -22,6 +22,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Poco.Fhir.R4;
 
 namespace MeasurePackager
 {
@@ -64,7 +65,7 @@ namespace MeasurePackager
             return buildOrder;
         }
 
-        public IDictionary<string, Bundle> PackageMeasures(DirectoryInfo elmDirectory,
+        public IEnumerable<Resource> PackageResources(DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
             DirectedGraph packageGraph,
             OperatorBinding operatorBinding,
@@ -91,7 +92,7 @@ namespace MeasurePackager
             var scw = new CSharpSourceCodeWriter(writerLogger);
             foreach (var @using in usings)
                 scw.Usings.Add(@using);
-            scw.AliasedUsings.Add(("Range", "Ncqa.Fhir.R4.Model.Range"));
+            scw.AliasedUsings.Add(("Range", typeof(Hl7.Cql.Poco.Fhir.R4.Model.Range).FullName!));
 
             var navToLibraryStream = new Dictionary<string, Stream>();
             var assemblies = Generate(all, typeManager, packageGraph, scw, navToLibraryStream, references);
@@ -99,11 +100,19 @@ namespace MeasurePackager
             foreach (var package in elmPackages)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.NameAndVersion}.json"));
+                if (!elmFile.Exists)
+                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.library.identifier.id}.json"));
+                if (!elmFile.Exists)
+                    throw new InvalidOperationException($"Cannot find ELM file for {package.NameAndVersion}");
                 var cqlFiles = cqlDirectory.GetFiles($"{package.NameAndVersion}.cql", SearchOption.AllDirectories);
                 if (cqlFiles.Length == 0)
-                    throw new InvalidOperationException($"No CQL files matching {package.NameAndVersion}.cql");
-                else if (cqlFiles.Length > 1)
-                    throw new InvalidOperationException($"More than 1 CQL file matching {package.NameAndVersion}.cql");
+                {
+                    cqlFiles = cqlDirectory.GetFiles($"{package.library!.identifier!.id}.cql", SearchOption.AllDirectories);
+                    if (cqlFiles.Length == 0)
+                        throw new InvalidOperationException($"{package.library!.identifier!.id}.cql");
+                }
+                if (cqlFiles.Length > 1)
+                    throw new InvalidOperationException($"More than 1 CQL file found.");
                 var cqlFile = cqlFiles[0];
                 if (!assemblies.TryGetValue(package.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {package.NameAndVersion}");
@@ -111,88 +120,92 @@ namespace MeasurePackager
                 var library = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, package);
                 libraries.Add(package.NameAndVersion, library);
             }
-            var measureBundles = new Dictionary<string, Bundle>();
+            var resources = new List<Resource>();
+            resources.AddRange(libraries.Values);
+
+            var tupleAssembly = assemblies["TupleTypes"];
+            var assemblyBytes = File.ReadAllBytes(tupleAssembly.Location.FullName);
+            var asm = Assembly.Load(assemblyBytes);
+            var assemblyBase64 = Convert.ToBase64String(assemblyBytes);
+
+            var tuplesBinary = new Binary
+            {
+                id = "TupleTypes-Binary",
+                contentType = "application/octet-stream",
+                data = new Base64BinaryElement { value = assemblyBase64 },
+            };
+            resources.Add(tuplesBinary);
+            foreach (var sourceKvp in tupleAssembly.SourceCode)
+            {
+                var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
+                var tuplesSourceBase64 = Convert.ToBase64String(tuplesSourceBytes);
+                var tuplesCSharp = new Binary
+                {
+                    id = sourceKvp.Key,
+                    contentType = "text/plain",
+                    data = new Base64BinaryElement { value = tuplesSourceBase64 },
+                };
+                resources.Add(tuplesCSharp);
+            }
+
             foreach (var package in elmPackages)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.NameAndVersion}.json"));
                 foreach (var def in package.library?.statements?.def ?? Enumerable.Empty<Hl7.Cql.Elm.Expressions.DefinitionExpression>())
                 {
-                    var measureAnnotation = def.annotation?.SelectMany(a => a.t).SingleOrDefault(t => t.name == "measure");
-                    var yearAnnotation = def.annotation?.SelectMany(a => a.t).SingleOrDefault(t => t.name == "year");
-                    if (measureAnnotation != null
-                        && !string.IsNullOrWhiteSpace(measureAnnotation.value)
-                        && yearAnnotation != null
-                        && !string.IsNullOrWhiteSpace(yearAnnotation.value)
-                        && int.TryParse(yearAnnotation.value, out var measureYear))
+                    if (def.annotation != null)
                     {
-                        var measure = new Measure();
-                        measure.name = measureAnnotation.value;
-                        measure.id = package.library?.identifier?.id!;
-                        measure.version = package.library?.identifier?.version!;
-                        measure.status = "active"!;
-                        measure.date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)!;
-                        measure.effectivePeriod = new Period
+                        var tags = new List<Tag>();
+                        foreach (var a in def.annotation)
                         {
-                            start = new DateTimeElement
+                            if (a.t != null)
                             {
-                                value = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0)
-                            },
-                            end = new DateTimeElement
-                            {
-                                value = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0)
+                                foreach (var t in a.t)
+                                {
+                                    if (t != null)
+                                        tags.Add(t);
+                                }
                             }
-                        };
-                        measure.group = new List<Measure.GroupComponent>();
-                        measure.url = canon(measure)!;
-                        if (!libraries.TryGetValue(package.NameAndVersion, out var libForMeasure) || libForMeasure is null)
-                            throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
-                        measure.library = new List<CanonicalElement> { libForMeasure!.url.value! };
-                        DiscoverPopulations(measure, package);
-                        var node = packageGraph.Nodes[package.NameAndVersion];
-                        var paths = packageGraph.GetAllPaths(node);
-                        var edges = paths.SelectMany(edge => edge);
-                        var nodeIds = edges.Select(edge => edge.ToId)
-                            .Where(id => id != packageGraph.EndNode.NodeId)
-                            .Distinct();
-                        var libs = new[] { libraries[node.NodeId] }
-                            .Concat(nodeIds.Select(id => libraries[id]))
-                            .ToArray();
-                        var bundle = new Bundle { entry = new Hl7.Cql.Poco.Fhir.R4.R4EntryCollection() };
-                        bundle.total = new UnsignedIntElement { value = libs.Length + 2 };
-                        bundle.type = new CodeElement { value = "collection" };
-                        bundle.id = $"{package.NameAndVersion}-bundle";
-                        bundle.entry.Add(new Bundle.EntryComponent
-                        {
-                            id = measure.id,
-                            resource = measure,
-                        });
-                        var tupleAssembly = assemblies["TupleTypes"];
-                        var assemblyBytes = File.ReadAllBytes(tupleAssembly.Location.FullName);
-                        var asm = Assembly.Load(assemblyBytes);
-                        var assemblyBase64 = Convert.ToBase64String(assemblyBytes);
-                        bundle.entry.Add(new Bundle.EntryComponent
-                        {
-                            id = "TupleTypes",
-                            resource = new Binary
-                            {
-                                id = "TupleTypes",
-                                contentType = "application/octet-stream",
-                                data = new Base64BinaryElement { value = assemblyBase64 },
-                            }
-                        });
-                        foreach (var lib in libs)
-                        {
-                            bundle.entry.Add(new Bundle.EntryComponent
-                            {
-                                id = lib.id,
-                                resource = lib,
-                            });
                         }
-                        measureBundles.Add(bundle.id, bundle);
+                        var measureAnnotation = tags
+                            .SingleOrDefault(t => t?.name == "measure");
+                        var yearAnnotation = tags
+                            .SingleOrDefault(t => t?.name == "year");
+                        if (measureAnnotation != null
+                            && !string.IsNullOrWhiteSpace(measureAnnotation.value)
+                            && yearAnnotation != null
+                            && !string.IsNullOrWhiteSpace(yearAnnotation.value)
+                            && int.TryParse(yearAnnotation.value, out var measureYear))
+                        {
+                            var measure = new Measure();
+                            measure.name = measureAnnotation.value;
+                            measure.id = package.library?.identifier?.id!;
+                            measure.version = package.library?.identifier?.version!;
+                            measure.status = "active"!;
+                            measure.date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)!;
+                            measure.effectivePeriod = new Period
+                            {
+                                start = new DateTimeElement
+                                {
+                                    value = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0)
+                                },
+                                end = new DateTimeElement
+                                {
+                                    value = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0)
+                                }
+                            };
+                            measure.group = new List<Measure.GroupComponent>();
+                            measure.url = canon(measure)!;
+                            if (!libraries.TryGetValue(package.NameAndVersion, out var libForMeasure) || libForMeasure is null)
+                                throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
+                            measure.library = new List<CanonicalElement> { libForMeasure!.url.value! };
+                            resources.Add(measure);
+                        }
                     }
                 }
             }
-            return measureBundles;
+
+            return resources;
         }
 
         private static readonly Dictionary<string, string> Populations = new Dictionary<string, string>
@@ -244,7 +257,7 @@ namespace MeasurePackager
                             group = new Measure.GroupComponent
                             {
                                 id = rate,
-                                code = CodeableConcept((rate, "https://www.ncqa.org/fhir/codesystem/measure-group")),
+                                code = CodeableConcept((rate, Constants.MeasureGroupCodeSystem)),
                                 description = $"Rate {tuple.Group}",
                                 population = new List<Measure.GroupComponent.PopulationComponent>()
                             };
@@ -266,7 +279,7 @@ namespace MeasurePackager
                             population = new Measure.GroupComponent.PopulationComponent
                             {
                                 id = pop,
-                                code = CodeableConcept((tuple.Population, "https://www.ncqa.org/fhir/codesystem/measure-group")),
+                                code = CodeableConcept((tuple.Population, Constants.MeasureGroupCodeSystem)),
                                 description = Populations[tuple.Population],
                                 criteria = new Hl7.Cql.Poco.Fhir.R4.Model.Expression
                                 {
@@ -347,14 +360,7 @@ namespace MeasurePackager
                     optimizationLevel: OptimizationLevel.Release))
                 .WithReferences(metadataReferences);
 
-            var sources = new List<string>();
-
-            DirectoryInfo? tuplesDir = null;
-            if (csOutput != null)
-            {
-                tuplesDir = new DirectoryInfo(Path.Combine(csOutput.FullName, "Tuples"));
-                EnsureDirectory(tuplesDir);
-            }
+            var sources = new Dictionary<string, string>();
 
             foreach (var kvp in tupleStreams)
             {
@@ -363,12 +369,7 @@ namespace MeasurePackager
                 sourceCodeStream.Seek(0, SeekOrigin.Begin);
                 var reader = new StreamReader(sourceCodeStream);
                 var sourceCode = reader.ReadToEnd().Trim();
-                if (tuplesDir != null)
-                {
-                    var fi = new FileInfo(Path.Combine(tuplesDir.FullName, $"{kvp.Key}.cs"));
-                    File.WriteAllText(fi.FullName, sourceCode, Encoding.UTF8);
-                }
-                sources.Add(sourceCode);
+                sources.Add(kvp.Key.Substring("Tuples\\".Length), sourceCode);
                 var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
 
                 compilation = compilation.AddSyntaxTrees(tree);
@@ -480,7 +481,10 @@ namespace MeasurePackager
             //var loadedAsm = Assembly.Load(bytes);
             var tempFile = new FileInfo(Path.Combine(Path.GetTempPath(), $"{node.NodeId}.dll"));
             File.WriteAllBytes(tempFile.FullName, bytes);
-            var data = new AssemblyData(tempFile, new List<string> { sourceCode });
+            var sources = new Dictionary<string, string> {
+                { node.NodeId, sourceCode }
+            };
+            var data = new AssemblyData(tempFile, sources);
             assemblies.Add(node.NodeId, data);
         }
 
@@ -629,6 +633,19 @@ namespace MeasurePackager
                         data = new Base64BinaryElement { value = assemblyBase64 },
                     };
                     library.content.Add(assemblyAttachment);
+                    foreach (var kvp in assembly.SourceCode)
+                    {
+                        var sourceBytes = Encoding.UTF8.GetBytes(kvp.Value);
+                        var sourceBase64 = Convert.ToBase64String(sourceBytes);
+                        var sourceAttachment = new Attachment
+                        {
+                            id = $"{kvp.Key}+csharp",
+                            contentType = new CodeElement { value = "text/plain" },
+                            data = new Base64BinaryElement { value = sourceBase64 },
+                        };
+                        library.content.Add(sourceAttachment);
+                    }
+
                 }
                 library.url = canon(library)!;
                 return library;
@@ -663,7 +680,7 @@ namespace MeasurePackager
             var cqlTypeExtensions = new List<Extension> {
                 new Extension()
                 {
-                    id = ExtensionConstants.CqlTypeExtensionId,
+                    id = Constants.ParameterCqlType,
                     value = new StringElement() { value = type.CqlType!.ToString() }
                 }
             };
@@ -672,7 +689,7 @@ namespace MeasurePackager
             {
                 cqlTypeExtensions.Add(new Extension()
                 {
-                    id = ExtensionConstants.CqlElementTypeExtensionId,
+                    id = Constants.ParameterCqlElementType,
                     valueString = new StringElement() { value = type.ElementType.CqlType!.ToString() }
                 });
             }
@@ -701,7 +718,7 @@ namespace MeasurePackager
                 {
                     cqlTypeExtensions.Add(new Extension()
                     {
-                        id = "https://ncqa.org/fhir/Extension/parameter-canonical-uri",
+                        id = Constants.ParameterCanonicalUri,
                         valueString = uri.value
                     });
                 }
@@ -719,7 +736,7 @@ namespace MeasurePackager
             return parameterDefinition;
         }
 
-        private static CqlDate ConvertExpressionToDate(Hl7.Cql.Elm.Expressions.ParameterDeclarationExpression elmParameter, 
+        private static CqlDate ConvertExpressionToDate(Hl7.Cql.Elm.Expressions.ParameterDeclarationExpression elmParameter,
             Hl7.Cql.Elm.Expressions.DateExpression defaultDateValue)
         {
             var yearExpr = defaultDateValue.year ?? throw new InvalidOperationException($"Date expressions must have a year value on parameter: {elmParameter.name}");
@@ -760,7 +777,7 @@ namespace MeasurePackager
         {
             var defaultValueExt = new Extension()
             {
-                id = ExtensionConstants.CqlDefaultValueExtensionId
+                id = Constants.ParameterCqlDefaultValue
             };
             MapValueToExtension(defaultValueExt, value, defaultType);
             cqlTypeExtensions.Add(defaultValueExt);
@@ -769,7 +786,7 @@ namespace MeasurePackager
 
             cqlTypeExtensions.Add(new Extension()
             {
-                id = ExtensionConstants.CqlDefaultValueTypeExtensionId,
+                id = Constants.ParameterCqlDefaultValueType,
                 valueString = new StringElement() { value = defaultTypeCode }
             });
         }
@@ -846,7 +863,7 @@ namespace MeasurePackager
                     new Extension
                     {
                        valueCode = elementTypeCode!,
-                       url = ExtensionConstants.ParameterElementTypeExtensionUri
+                       url = Constants.ParameterElementTypeExtensionUri
                     }
                 };
             }
@@ -861,7 +878,7 @@ namespace MeasurePackager
                 parameterDefinition.extension.Add(new Extension
                 {
                     valueCode = definition.accessLevel.ToLower(),
-                    url = "https://www.ncqa.org/fhir/StructureDefinition/access-level"
+                    url = Constants.ParameterAccessLevel,
                 });
             }
 

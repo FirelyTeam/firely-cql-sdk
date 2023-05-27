@@ -116,12 +116,6 @@ under the License.
      | NOTE: You should either specify username/password OR privateKey/passphrase, since these pairings are
      |       used together.
      |-->
-    <server>
-      <id>ncqa-shared</id>
-      <username>NCQA_Shared</username>
-      <password>26myjsgl4bybzb5bdheghmtdemuldxzjnv5im2iw7u7nvibzhjfq</password>
-    </server>
-
     <!-- Another sample, using keys to authenticate.
     <server>
       <id>siteServer</id>

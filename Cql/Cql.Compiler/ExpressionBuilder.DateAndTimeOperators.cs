@@ -67,7 +67,6 @@ namespace Hl7.Cql.Compiler
             return Operators.Bind(CqlOperator.Date, ctx.RuntimeContextParameter, year, month, day);
         }
 
-
         protected Expression DateTime(elm.DateTimeExpression e, ExpressionBuilderContext ctx)
         {
 
@@ -213,9 +212,11 @@ namespace Hl7.Cql.Compiler
             return Operators.Bind(CqlOperator.Time, ctx.RuntimeContextParameter, hour, minute, second, millisecond);
         }
 
-
         protected Expression? TimeOfDay(elm.TimeOfDayExpression e, ExpressionBuilderContext ctx) =>
             Operators.Bind(CqlOperator.TimeOfDay, ctx.RuntimeContextParameter);
+
+        protected Expression? TimezoneOffsetFrom(elm.TimezoneOffsetFromExpression e, ExpressionBuilderContext ctx) =>
+            UnaryOperator(CqlOperator.TimeZoneComponent, e, ctx);
 
         protected Expression? Today(elm.TodayExpression e, ExpressionBuilderContext ctx) =>
             Operators.Bind(CqlOperator.Today, ctx.RuntimeContextParameter);

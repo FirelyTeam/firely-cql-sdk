@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Measures\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
 
 </Project>

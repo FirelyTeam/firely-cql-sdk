@@ -13,7 +13,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         /// <param name="location">The location on disk which this assembly's bytes were written.</param>
         /// <param name="sourceCode">The collection of source code files that contributed to this assembly.</param>
-        public AssemblyData(FileInfo location, ICollection<string> sourceCode)
+        public AssemblyData(FileInfo location, IDictionary<string,string> sourceCode)
         {
             Location = location;
             SourceCode = sourceCode;
@@ -26,6 +26,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <summary>
         /// Gets the collection of source code files that contributed to this assembly.
         /// </summary>
-        public ICollection<string> SourceCode { get; }
+        public IDictionary<string, string> SourceCode { get; }
     }
 }

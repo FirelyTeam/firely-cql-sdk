@@ -21,7 +21,6 @@
     <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
     <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
     <ProjectReference Include="..\Fhir.R4\Fhir.R4.csproj" />
-    <ProjectReference Include="..\Model\Model.csproj" />
   </ItemGroup>
 
 </Project>

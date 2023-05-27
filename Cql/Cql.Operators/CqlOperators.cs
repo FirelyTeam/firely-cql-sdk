@@ -173,6 +173,10 @@ namespace Hl7.Cql.Runtime
         public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
+        public ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) =>
+            new ValueSetFacade(valueSet, ValueSets);
+
+
         public object NotSupported() => throw new NotSupportedException();
 
         public bool? Equals(object x, object y, string? precision)
@@ -194,5 +198,6 @@ namespace Hl7.Cql.Runtime
         {
             return Comparer.Equivalent(x, y, precision);
         }
+
     }
 }

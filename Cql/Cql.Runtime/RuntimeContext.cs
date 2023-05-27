@@ -1,5 +1,6 @@
 ﻿
 using Hl7.Cql.Operators;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -83,8 +84,6 @@ namespace Hl7.Cql.Runtime
             clone.Parameters = Parameters;
         }
 
-
-
         /// <summary>
         /// Creates a clone of this context with a deeper call stack.
         /// </summary>
@@ -142,5 +141,6 @@ namespace Hl7.Cql.Runtime
 
             return value;
         }
+
     }
 }

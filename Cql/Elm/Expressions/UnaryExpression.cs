@@ -44,8 +44,8 @@
     public class StartExpression : UnaryExpression { }
     public class SingletonFromExpression : UnaryExpression { }
     public class SuccessorExpression : UnaryExpression { }
+    public class TimezoneOffsetFromExpression: UnaryExpression { }
     public class ToBooleanExpression : UnaryExpression { }
-
     public class ToConceptExpression : UnaryExpression { }
     public class ToDecimalExpression : UnaryExpression { }
     public class ToDateExpression : UnaryExpression { }

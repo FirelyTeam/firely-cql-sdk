@@ -2,6 +2,7 @@
 {
     public class IsExpression : UnaryExpression
     {
+        public string? isType { get; set; }
         public Expression? isTypeSpecifier { get; set; }
     }
 }

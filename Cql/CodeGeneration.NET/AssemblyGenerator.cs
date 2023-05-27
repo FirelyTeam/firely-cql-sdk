@@ -68,8 +68,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var assemblies = new Dictionary<string, AssemblyData>();
                 var tupleStreams = navToLibraryStream
                     .Where(kvp => kvp.Key.StartsWith("Tuples\\"))
-                    .Select(kvp => kvp.Value)
-                    .ToList();
+                    .ToDictionary(kvp => kvp.Key.Substring("Tuples\\".Length), kvp => kvp.Value);
                 const string tupleTypesLibraryId = "TupleTypes";
                 var tupleTypesNode = new DirectedGraphNode
                 {
@@ -107,8 +106,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void CompileNode(IEnumerable<Stream> sourceCodeStreams,
-            Dictionary<string, AssemblyData> assemblies, DirectedGraphNode node,
+        private void CompileNode(IDictionary<string, Stream> sourceCodeStreams,
+            Dictionary<string, AssemblyData> assemblies, 
+            DirectedGraphNode node,
             IEnumerable<AssemblyData>? references)
         {
             var metadataReferences = new List<MetadataReference>();
@@ -135,14 +135,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
                     optimizationLevel: OptimizationLevel.Release))
                 .WithReferences(metadataReferences);
-            var sources = new List<string>();
-            foreach (var sourceCodeStream in sourceCodeStreams)
+            var sources = new Dictionary<string, string>();
+            foreach (var streamKvp in sourceCodeStreams)
             {
-                sourceCodeStream.Flush();
-                sourceCodeStream.Seek(0, SeekOrigin.Begin);
-                var reader = new StreamReader(sourceCodeStream);
+                streamKvp.Value.Flush();
+                streamKvp.Value.Seek(0, SeekOrigin.Begin);
+                var reader = new StreamReader(streamKvp.Value);
                 var sourceCode = reader.ReadToEnd().Trim();
-                sources.Add(sourceCode);
+                sources.Add(streamKvp.Key, sourceCode);
                 var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
                 compilation = compilation.AddSyntaxTrees(tree);
             }
@@ -250,7 +250,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             var bytes = codeStream.ToArray();
             var tempFile = new FileInfo(Path.Combine(Path.GetTempPath(), $"{node.NodeId}.dll"));
             File.WriteAllBytes(tempFile.FullName, bytes);
-            var data = new AssemblyData(tempFile, new List<string> { sourceCode });
+            var sources = new Dictionary<string, string>
+            {
+                { node.NodeId, sourceCode }
+            };
+            var data = new AssemblyData(tempFile, sources);
             assemblies.Add(node.NodeId, data);
         }
 

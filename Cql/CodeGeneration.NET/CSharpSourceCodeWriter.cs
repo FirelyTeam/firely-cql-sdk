@@ -55,11 +55,10 @@ namespace Hl7.Cql.CodeGeneration.NET
         public IList<string> Usings { get; } = new List<string>
         {
             nameof(System),
-            $"{nameof(System)}.{nameof(System.Linq)}",
-            $"{nameof(System)}.{nameof(System.Collections)}.{nameof(System.Collections.Generic)}",
-            $"{nameof(Hl7)}.{nameof(Hl7.Cql)}.{nameof(Hl7.Cql.Runtime)}",
-            $"{nameof(Hl7)}.{nameof(Hl7.Cql)}.{nameof(Hl7.Cql.Runtime)}.{nameof(Hl7.Cql.Primitives)}",
-
+            typeof(Enumerable).Namespace, // System.Linq
+            typeof(ICollection<>).Namespace, // System.Collections.Generic
+            typeof(RuntimeContext).Namespace,
+            typeof(CqlPrimitiveType).Namespace,
         };
         /// <summary>
         /// Gets the aliased <see langword="using"/> statements to be included in the generated code.
@@ -457,7 +456,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private void WriteUsings(TextWriter writer)
         {
-            foreach (var @using in Usings)
+            foreach (var @using in Usings.Distinct())
             {
                 writer.WriteLine($"using {@using};");
             }
@@ -679,6 +678,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                             var code = $"typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
                             return code;
                         }
+                    }
+                    else if (constant.Type == typeof(string))
+                    {
+                        if (constant.Value == null)
+                            return "null";
+                        else if (constant.Value is string str)
+                            return $"\"{SymbolDisplay.FormatLiteral(str, false)}\"";
+                        else
+                            throw new InvalidOperationException("Constant claims to be a string, but its Value property is not one.");
                     }
                     break;
                 case NewExpression @new:

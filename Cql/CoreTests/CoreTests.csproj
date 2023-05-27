@@ -25,7 +25,6 @@
     <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
     <ProjectReference Include="..\ELM\ELM.csproj" />
     <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
-    <ProjectReference Include="..\Model\Model.csproj" />
     <ProjectReference Include="..\ValueSetLoaders\ValueSetLoaders.csproj" />
   </ItemGroup>
 

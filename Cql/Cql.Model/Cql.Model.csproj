@@ -11,8 +11,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Models\fhir-modelinfo-4.0.1.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
+	    <LogicalName>Fhir401</LogicalName>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-		<ProjectReference Include="..\Model\Model.csproj" />
 	</ItemGroup>
 
 </Project>

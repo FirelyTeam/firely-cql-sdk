@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 
@@ -17,6 +18,10 @@ namespace Hl7.Cql.Operators
         TypeConverter TypeConverter { get; }
         IDataRetriever DataRetriever { get; }
         ICqlComparer Comparer { get; }
+
+        ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
+
+        #region Operators
 
         CqlQuantity? Abs(CqlQuantity? argument);
         decimal? Abs(decimal? argument);
@@ -513,5 +518,7 @@ namespace Hl7.Cql.Operators
         long? Width(CqlInterval<long?>? @this);
         bool? Xor(bool? left, bool? right);
         bool? Xor(Lazy<bool?> left, Lazy<bool?> right);
+
+        #endregion
     }
 }
