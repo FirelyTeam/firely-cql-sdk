@@ -1,0 +1,30 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33111",
+  "meta": {
+    "lastUpdated": "2019-06-09T17:11:28.476-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1230"
+    }
+  ],
+  "version": "Working",
+  "name": "Right_Modifier",
+  "title": "Right Modifier",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:09-04:00",
+    "total": 1,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://www.ama-assn.org/go/cpt",
+        "version": "2021.2.20AB",
+        "code": "RT",
+        "display": "Right side (used to identify procedures performed on the right side of the body) [RT]"
+      }
+    ]
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33124",
+  "meta": {
+    "lastUpdated": "2019-06-09T17:13:51.612-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1335"
+    }
+  ],
+  "version": "Working",
+  "name": "Unilateral_Mastectomy_Right",
+  "title": "Unilateral Mastectomy Right",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:10-04:00",
+    "total": 8,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "429400009",
+        "display": "Mastectomy of right breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726436000",
+        "display": "Modified radical mastectomy of right breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "451201000124106",
+        "display": "Prophylactic mastectomy of right breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726430006",
+        "display": "Radical mastectomy of right breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "741010006",
+        "display": "Simple mastectomy of right breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726434002",
+        "display": "Subcutaneous mastectomy of right breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "741019007",
+        "display": "Subcutaneous mastectomy of right breast with prosthetic implant"
+      },
+      {
+        "system": "https://www.cms.gov/Medicare/Coding/ICD10/index.html",
+        "version": "2021.1.20AA",
+        "code": "0HTT0ZZ",
+        "display": "Resection of Right Breast, Open Approach"
+      }
+    ]
+  }
+}

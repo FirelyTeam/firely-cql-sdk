@@ -1,0 +1,144 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33451",
+  "meta": {
+    "lastUpdated": "2020-06-05T15:36:49.379-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.2225"
+    }
+  ],
+  "version": "Working",
+  "name": "Palliative_Care_Assessment",
+  "title": "Palliative Care Assessment",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:57-04:00",
+    "total": 20,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718893008",
+        "display": "Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718898004",
+        "display": "Assessment using Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718901003",
+        "display": "Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718903000",
+        "display": "Assessment using Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718904006",
+        "display": "Assessment using Integrated Palliative care Outcome Scale Patient Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718899007",
+        "display": "Assessment using Integrated Palliative care Outcome Scale Patient Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718895001",
+        "display": "Assessment using Integrated Palliative care Outcome Scale Staff Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718890006",
+        "display": "Assessment using Integrated Palliative care Outcome Scale Staff Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "761867005",
+        "display": "Assessment using POS-S Renal (Palliative care Outcome Scale symptom list for end-stage renal disease)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718967002",
+        "display": "IPOS (Integrated Palliative care Outcome Scale) Staff Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718976009",
+        "display": "Integrated Palliative care Outcome Scale 5 Patient Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718974007",
+        "display": "Integrated Palliative care Outcome Scale 5 Patient Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718957007",
+        "display": "Integrated Palliative care Outcome Scale 5 Staff Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718969004",
+        "display": "Integrated Palliative care Outcome Scale 5 Staff Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718975008",
+        "display": "Integrated Palliative care Outcome Scale Patient Version (1 week recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718973001",
+        "display": "Integrated Palliative care Outcome Scale Patient Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "718971004",
+        "display": "Integrated Palliative care Outcome Scale Staff Version (3 day recall period)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "761865002",
+        "display": "POS-S Renal (Palliative care Outcome Scale symptom list for end-stage renal disease)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "761866001",
+        "display": "POS-S Renal (Palliative care Outcome Scale symptom list for end-stage renal disease) score"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "457511000124100",
+        "display": "Palliative performance scale"
+      }
+    ]
+  }
+}
