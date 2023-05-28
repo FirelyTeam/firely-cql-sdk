@@ -13,8 +13,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 
 public static class Program
 {
@@ -123,7 +126,7 @@ public static class Program
 
         };
         var namespaces = new[]
-        { 
+        {
             typeof(CqlDeclarationAttribute).Namespace!,
             typeof(Hl7.Cql.Poco.Fhir.R4.Model.Resource).Namespace!,
             typeof(Hl7.Cql.Iso8601.DateIso8601).Namespace!,
@@ -146,6 +149,35 @@ public static class Program
             var file = new FileInfo(Path.Combine(oDir.FullName, $"{resource.id.value}.json"));
             using var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
             Hl7.Cql.Poco.Fhir.R4.FhirJson.Serialize(resource, fs);
+        }
+        if (csDir != null)
+        {
+            // Write out the C# source code to the desired output location
+            foreach (var resource in resources)
+            {
+                if (resource is Binary binary)
+                {
+                    if (binary.contentType == "text/plain")
+                    {
+                        var bytes = Convert.FromBase64String(binary.data.value);
+                        var sourceFilePath = binary.id.value.StartsWith("Tuple_")
+                            ? Path.Combine(csDir.FullName, "Tuples", $"{binary.id.value}.cs")
+                            : Path.Combine(csDir.FullName, $"{binary.id.value}.cs");
+                        File.WriteAllBytes(sourceFilePath, bytes);
+                    }
+                }
+                else if (resource is Library library && library.content != null)
+                {
+                    var textPlain = library.content
+                        .SingleOrDefault(c => c.contentType == "text/plain");
+                    if (textPlain != null)
+                    {
+                        var bytes = Convert.FromBase64String(textPlain.data.value);
+                        var sourceFilePath = Path.Combine(csDir.FullName, $"{library.id.value}.cs");
+                        File.WriteAllBytes(sourceFilePath, bytes);
+                    }
+                }
+            }
         }
         return 0;
     }

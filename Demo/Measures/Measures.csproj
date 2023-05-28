@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
+    <ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
+    <ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
+    <ProjectReference Include="..\..\Cql\Fhir.R4\Fhir.R4.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Tuples\" />
   </ItemGroup>
 

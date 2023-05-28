@@ -657,16 +657,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ConstantExpression constant:
                     if (constant.Type == typeof(decimal))
                     {
-                        var code = $"{constant.Value}m";
+                        var code = $"{leadingIndentString}{constant.Value}m";
                         return code;
                     }
                     else if (constant.Type == typeof(decimal?))
                     {
                         if (constant.Value == null)
-                            return "null";
+                            return $"{leadingIndentString}null";
                         else
                         {
-                            var code = $"{constant.Value}m";
+                            var code = $"{leadingIndentString}{constant.Value}m";
                             return code;
                         }
                     }
@@ -675,16 +675,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                         if (constant.Value != null && constant.Value is PropertyInfo propertyInfo)
                         {
                             var declaringType = PrettyTypeName(propertyInfo.DeclaringType);
-                            var code = $"typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
+                            var code = $"{leadingIndentString}typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
                             return code;
                         }
                     }
                     else if (constant.Type == typeof(string))
                     {
                         if (constant.Value == null)
-                            return "null";
+                            return $"{leadingIndentString}null";
                         else if (constant.Value is string str)
-                            return $"\"{SymbolDisplay.FormatLiteral(str, false)}\"";
+                            return $"{leadingIndentString}\"{SymbolDisplay.FormatLiteral(str, false)}\"";
                         else
                             throw new InvalidOperationException("Constant claims to be a string, but its Value property is not one.");
                     }

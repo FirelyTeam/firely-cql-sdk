@@ -2,7 +2,7 @@
   "profiles": {
     "MeasurePackager": {
       "commandName": "Project",
-      "commandLineArgs": "--elm C:\\Code\\FirelyTeam\\ncqa-cql\\Demo\\Elm\\Json --cql C:\\Code\\FirelyTeam\\ncqa-cql\\Demo\\Cql\\input --o C:\\Code\\FirelyTeam\\ncqa-cql\\Demo\\Test\\Resources --cs C:\\Code\\FirelyTeam\\ncqa-cql\\Measures --force true"
+      "commandLineArgs": "--elm C:\\Code\\FirelyTeam\\ncqa-cql\\Demo\\Elm\\Json --cql C:\\Code\\FirelyTeam\\ncqa-cql\\Demo\\Cql\\input --o C:\\Code\\FirelyTeam\\ncqa-cql\\Demo\\Test\\Resources --cs C:\\Code\\FirelyTeam\\ncqa-cql\\Demo\\Measures --force true"
     }
   }
 }
