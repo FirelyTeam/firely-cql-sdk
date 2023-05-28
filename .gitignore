@@ -393,3 +393,4 @@ VSCodeExtension/ncqa-cql-engine/dist/*.map
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/bundles/*.json
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/Test/Resources
+/Demo/Measures/AdultOutpatientEncountersFHIR4-2.2.000.cs
