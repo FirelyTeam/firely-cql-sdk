@@ -7,7 +7,7 @@ With this body:
     "parameter": [
         {
             "name": "library",
-            "valueString": "BCSEHEDISMY2022-1.0.0"
+            "valueId": "BCSEHEDISMY2022-1.0.0"
         },
         { 
             "name": "subject",

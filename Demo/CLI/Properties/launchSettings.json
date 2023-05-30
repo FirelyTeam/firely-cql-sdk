@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "--l BCSEHEDISMY2022-1.0.0 --d Data\\95085.json"
+    }
+  }
+}

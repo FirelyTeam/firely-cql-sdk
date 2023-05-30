@@ -23,6 +23,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Poco.Fhir.R4;
+using Hl7.Cql.Elm.Expressions;
 
 namespace MeasurePackager
 {
@@ -120,6 +121,7 @@ namespace MeasurePackager
                 var library = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, package);
                 libraries.Add(package.NameAndVersion, library);
             }
+
             var resources = new List<Resource>();
             resources.AddRange(libraries.Values);
 
@@ -608,6 +610,17 @@ namespace MeasurePackager
                 }
                 parameters.AddRange(valueSetParameterDefinitions);
                 library.parameter = parameters.Count > 0 ? parameters : null!;
+                library.relatedArtifact = new List<RelatedArtifact>();
+
+                foreach(var include in libPackage?.library?.includes?.def ?? Enumerable.Empty<IncludeExpression>())
+                {
+                    var includeId = $"{include.path}-{include.version}";
+                    library.relatedArtifact.Add(new RelatedArtifact
+                    {
+                        type = "depends-on",
+                        resource = new CanonicalElement { value = includeId }
+                    });
+                }
 
                 if (cqlFile!.Exists)
                 {

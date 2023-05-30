@@ -66,12 +66,6 @@ namespace Hl7.Cql.Primitives
             String = new Lazy<string>(() => $"[null, null]");
         }
 
-
-        /// <summary>
-        /// Gets the type of <typeparamref name="T"/>.
-        /// </summary>
-        public Type PointType => typeof(T);
-
         /// <summary>
         /// Gets the low value of this interval.
         /// </summary>
