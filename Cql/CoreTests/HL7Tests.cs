@@ -79,10 +79,10 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            RuntimeContext = FhirRuntimeContext.Create(delegates: allDelegates);
+            RuntimeContext = FhirCqlContext.Create(delegates: allDelegates);
         }
 
-        public static RuntimeContext RuntimeContext;
+        public static CqlContext RuntimeContext;
 
 
         private static void MergeAllCqlInto(DirectoryInfo libsDirectory, DirectedGraph buildOrder)

@@ -41,7 +41,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         public bool PartialClass { get; set; }
 
         /// <summary>
-        /// The <see cref="AccessModifier"/> to use for the <see cref="RuntimeContext"/> class member; its default value is <see cref="AccessModifier.Internal"/>.
+        /// The <see cref="AccessModifier"/> to use for the <see cref="CqlContext"/> class member; its default value is <see cref="AccessModifier.Internal"/>.
         /// </summary>
         public AccessModifier ContextAccessModifier { get; set; } = AccessModifier.Internal;
         /// <summary>
@@ -57,7 +57,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             nameof(System),
             typeof(Enumerable).Namespace, // System.Linq
             typeof(ICollection<>).Namespace, // System.Collections.Generic
-            typeof(RuntimeContext).Namespace,
+            typeof(CqlContext).Namespace,
             typeof(CqlPrimitiveType).Namespace,
         };
         /// <summary>
@@ -203,7 +203,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         {
                             writer.WriteLine();
 
-                            writer.WriteLine(indentLevel, $"{AccessModifierString(ContextAccessModifier)} RuntimeContext context;");
+                            writer.WriteLine(indentLevel, $"{AccessModifierString(ContextAccessModifier)} CqlContext context;");
                             writer.WriteLine();
                             writer.WriteLine(indentLevel, "#region Cached values");
                             writer.WriteLine();
@@ -223,7 +223,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             }
                             writer.WriteLine();
                             writer.WriteLine(indentLevel, "#endregion");
-                            writer.WriteLine(indentLevel, $"public {className}(RuntimeContext context)");
+                            writer.WriteLine(indentLevel, $"public {className}(CqlContext context)");
                             writer.WriteLine(indentLevel, "{");
                             {
                                 indentLevel += 1;
@@ -296,7 +296,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private bool IsDefinition((Type[], LambdaExpression) overload)
         {
             if (overload.Item2.Parameters.Count == 1
-                && overload.Item2.Parameters[0].Type == typeof(RuntimeContext))
+                && overload.Item2.Parameters[0].Type == typeof(CqlContext))
                 return true;
             return false;
         }

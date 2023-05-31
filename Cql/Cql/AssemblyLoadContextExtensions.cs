@@ -13,7 +13,7 @@ namespace Hl7.Cql
     public static class AssemblyLoadContextExtensions
     {
         public static IDictionary<string, object?> Run(this AssemblyLoadContext assemblyContext,
-            string library, string version, RuntimeContext context)
+            string library, string version, CqlContext context)
         {
             using (var scope = assemblyContext.EnterContextualReflection())
             {
@@ -52,7 +52,7 @@ namespace Hl7.Cql
             }
             return null;
         }
-        private static IDictionary<string, object?> Run(object instance, RuntimeContext context)
+        private static IDictionary<string, object?> Run(object instance, CqlContext context)
         {
             var type = instance.GetType();
             var values = new Dictionary<string, object?>();

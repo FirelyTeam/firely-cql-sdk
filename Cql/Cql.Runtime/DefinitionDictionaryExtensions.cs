@@ -57,7 +57,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="rtx">The runtime context to use for the execution.</param>
         /// <param name="parameters">The definition's parameters, excluding <paramref name="rtx"/>.</param>
         /// <returns></returns>
-        public static T Invoke<T>(this DefinitionDictionary<Delegate> delegates, string libraryName, string define, RuntimeContext rtx, params object[] parameters)
+        public static T Invoke<T>(this DefinitionDictionary<Delegate> delegates, string libraryName, string define, CqlContext rtx, params object[] parameters)
         {
             var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
             var @delegate = delegates[libraryName, define, parameterTypes];

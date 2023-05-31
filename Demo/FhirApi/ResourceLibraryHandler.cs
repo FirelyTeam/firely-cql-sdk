@@ -43,7 +43,7 @@ namespace FhirApi
             };
             var bundle = FhirJson.Deserialize<Bundle>(dataStream);
             var valueSets = ValueSetProvider.ValueSets;
-            var context = FhirRuntimeContext.Create(bundle,
+            var context = FhirCqlContext.Create(bundle,
                 MY2023,
                 valueSets,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));

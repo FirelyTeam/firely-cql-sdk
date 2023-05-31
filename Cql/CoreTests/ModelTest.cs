@@ -30,7 +30,7 @@ namespace CoreTests
                 }
             });
 
-            var ctx = new RuntimeContext(CqlOperators.Create(new UnitTestTypeResolver(),
+            var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
                 dataRetriever: dataRetriever,
                 now: new DateTimeIso8601(2023, 3, 28, null, null, null, null, null, null)));
             var age = ctx.Operators.Age("a");
@@ -45,7 +45,7 @@ namespace CoreTests
                     birthDate = new DateIso8601(1983, 4, 4)
                 }
             });
-            var ctx = new RuntimeContext(CqlOperators.Create(new UnitTestTypeResolver(),
+            var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
                 dataRetriever: dataRetriever,
                 now: new DateTimeIso8601(2023, 3, 28, null, null, null, null, null, null)));
             var age = ctx.Operators.AgeAt(new CqlDate(2013, 3, 28), "a");

@@ -117,7 +117,7 @@ public static class Program
             typeof(Hl7.Cql.Model.ModelTypeResolver).Assembly, // Cql.Model,
             typeof(Hl7.Cql.Operators.ICqlOperators).Assembly, // Cql.Operators
             typeof(Hl7.Cql.Primitives.CqlPrimitiveType).Assembly, // Cql.Primitives
-            typeof(Hl7.Cql.Runtime.RuntimeContext).Assembly, // Cql.Runtime
+            typeof(Hl7.Cql.Runtime.CqlContext).Assembly, // Cql.Runtime
             typeof(Hl7.Cql.ValueSets.IValueSetDictionary).Assembly, // Cql.ValueSets
             // Model bindings
             typeof(Hl7.Cql.Poco.Fhir.ValueSetBindingAttribute).Assembly, // Fhir

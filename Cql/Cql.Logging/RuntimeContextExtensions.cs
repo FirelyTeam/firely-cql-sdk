@@ -6,8 +6,8 @@ namespace Hl7.Cql.Logging
 {
     public static class RuntimeContextExtensions
     {
-        public static RuntimeContext AddMessageLogging(this RuntimeContext context,
-            ILogger<RuntimeContext> logger)
+        public static CqlContext AddMessageLogging(this CqlContext context,
+            ILogger<CqlContext> logger)
         {
             context.Operators.MessageReceived += (sender, args) =>
             {

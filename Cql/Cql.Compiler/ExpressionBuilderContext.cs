@@ -55,7 +55,7 @@ namespace Hl7.Cql.Compiler
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
         /// </summary>
         /// <remarks>
-        /// Having access to the <see cref="RuntimeContext"/> is almost always necessary when implementing operators because the context contains all comparers, value sets, CQL parameter values, and other data provided at runtime.
+        /// Having access to the <see cref="CqlContext"/> is almost always necessary when implementing operators because the context contains all comparers, value sets, CQL parameter values, and other data provided at runtime.
         /// </remarks>
         public ParameterExpression RuntimeContextParameter { get; }
 

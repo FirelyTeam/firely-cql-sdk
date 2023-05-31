@@ -31,8 +31,8 @@ namespace Test
         public void Compile_All()
         {
             var elmDir = new DirectoryInfo("Resources");
-            var rtx = FhirRuntimeContext.Create(new Bundle(), MY2023);
-            var results = FhirRuntimeContext.Run(elmDir, "BCSEHEDISMY2022", "1.0.0", rtx);
+            var results = FhirCqlContext.Run(elmDir, "BCSEHEDISMY2022", "1.0.0", 
+                FhirCqlContext.Create(new Bundle(), MY2023));
         }
     }
 }

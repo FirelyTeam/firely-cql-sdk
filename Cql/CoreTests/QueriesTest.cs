@@ -63,7 +63,7 @@ namespace CoreTests
 
         };
 
-        private RuntimeContext Context(Bundle bundle) => FhirRuntimeContext.Create(
+        private CqlContext Context(Bundle bundle) => FhirCqlContext.Create(
             bundle: bundle,
             valueSets: ValueSets,
             delegates: QueriesDefinitions);

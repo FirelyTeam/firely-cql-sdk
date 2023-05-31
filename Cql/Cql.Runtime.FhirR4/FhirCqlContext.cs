@@ -13,9 +13,9 @@ using System.Linq;
 
 namespace Hl7.Cql.Runtime.FhirR4
 {
-    public static class FhirRuntimeContext
+    public static class FhirCqlContext
     {
-        public static RuntimeContext Create(Bundle? bundle = null, 
+        public static CqlContext Create(Bundle? bundle = null, 
             IDictionary<string,object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
@@ -34,7 +34,7 @@ namespace Hl7.Cql.Runtime.FhirR4
                 valueSets,
                 null,
                 new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond));
-            var ctx = new RuntimeContext(operators, delegates, parameters);
+            var ctx = new CqlContext(operators, delegates, parameters);
             return ctx;
         }
 
@@ -49,7 +49,7 @@ namespace Hl7.Cql.Runtime.FhirR4
         /// <exception cref="InvalidOperationException"></exception>
         public static IDictionary<string, object?> Run(DirectoryInfo elmDirectory,
             string name, string version,
-            RuntimeContext rtx)
+            CqlContext rtx)
         {
             var elmPackages = new List<ElmPackage>();
             foreach (var file in new DirectoryInfo("Resources").GetFiles("*.json"))
@@ -77,7 +77,7 @@ namespace Hl7.Cql.Runtime.FhirR4
         }
         public static IDictionary<string, object?> RunOnce(IEnumerable<ElmPackage> packages,
             string name, string version,
-            RuntimeContext rtx)
+            CqlContext rtx)
         {
             var binding = new CqlOperatorsBinding(FhirTypeResolver.Default,
                            FhirTypeConverter.Default);

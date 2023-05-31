@@ -406,7 +406,7 @@ namespace MeasurePackager
                 }
             }
         };
-        private static RuntimeContext RuntimeContext => FhirRuntimeContext.Create();
+        private static CqlContext CqlContext => FhirCqlContext.Create();
 
         private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.Expressions.ParameterDeclarationExpression elmParameter,
             FhirCqlCrosswalk typeCrosswalk,
@@ -442,7 +442,7 @@ namespace MeasurePackager
                 var typeEntry = typeCrosswalk.TypeEntryFor(elmParameter.@default);
                 var lambda = builder.Lambda(elmParameter.@default);
                 var func = lambda.Compile();
-                var value = func.DynamicInvoke(RuntimeContext);
+                var value = func.DynamicInvoke(CqlContext);
                 AddDefaultValueToExtensions(cqlTypeExtensions, value, typeEntry);
             }
 

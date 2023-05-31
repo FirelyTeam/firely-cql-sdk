@@ -10,7 +10,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>
-    public class RuntimeContext
+    public class CqlContext
     {
         /// <summary>
         /// Contains all definitions required during execution.
@@ -33,7 +33,7 @@ namespace Hl7.Cql.Runtime
         /// </remarks>
         public ConcurrentDictionary<string, object> Extensions { get; protected set; } = new ConcurrentDictionary<string, object>();
         /// <summary>
-        /// Stores information about the current execution state of this RuntimeContext.
+        /// Stores information about the current execution state of this CqlContext.
         /// </summary>
         public Stack<CallStackEntry> CallStack { get; protected set; }
 
@@ -54,7 +54,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="operators">The <see cref="ICqlOperators"/> implementation to use.</param>
         /// <param name="parameters">The input parameters, or <see langword="null"/>. </param>
         /// <param name="delegates">The delegates, or <see langword="null"/>.  If <see langword="null"/>, runtime errors will occur when CQL expressions attempt to reference other definitions.</param>
-        public RuntimeContext(ICqlOperators operators,
+        public CqlContext(ICqlOperators operators,
             DefinitionDictionary<Delegate>? delegates = null,
             IDictionary<string, object>? parameters = null) : this()
         {
@@ -65,19 +65,19 @@ namespace Hl7.Cql.Runtime
         }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        protected RuntimeContext()
+        protected CqlContext()
         {
             CallStack = new Stack<CallStackEntry>();
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        internal virtual RuntimeContext Clone()
+        internal virtual CqlContext Clone()
         {
-            var clone = new RuntimeContext();
+            var clone = new CqlContext();
             PopulateClone(clone);
             return clone;
         }
-        protected void PopulateClone<T>(T clone) where T : RuntimeContext
+        protected void PopulateClone<T>(T clone) where T : CqlContext
         {
             clone.Operators = Operators;
             clone.Extensions = Extensions;
@@ -90,7 +90,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="callStack">The new call stack entry to add.</param>
         /// <returns>A clone of this context with a deeper call stack.</returns>
         /// TODO: Make this behavior optional in ExpressionBuilder
-        public RuntimeContext Deeper(CallStackEntry callStack)
+        public CqlContext Deeper(CallStackEntry callStack)
         {
             var existingStack = CallStack ?? new Stack<CallStackEntry>();
             var newStack = new Stack<CallStackEntry>(existingStack);

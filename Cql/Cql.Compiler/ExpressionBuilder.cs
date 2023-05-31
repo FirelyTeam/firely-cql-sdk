@@ -121,7 +121,7 @@ namespace Hl7.Cql.Compiler
                     {
                         var ctor = typeof(CqlValueSet).GetConstructor(new[] { typeof(string), typeof(string) });
                         var @new = Expression.New(ctor, Expression.Constant(def.id, typeof(string)), Expression.Constant(def.version, typeof(string)));
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var lambda = Expression.Lambda(@new, contextParameter);
                         definitions.Add(ThisLibraryKey, def.name!, lambda);
                     }
@@ -166,7 +166,7 @@ namespace Hl7.Cql.Compiler
                             Expression.Constant(null, typeof(string))
                         );
 
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var lambda = Expression.Lambda(newCodingExpression, contextParameter);
                         definitions.Add(ThisLibraryKey, code.name!, lambda);
                     }
@@ -181,7 +181,7 @@ namespace Hl7.Cql.Compiler
                             )).ToArray();
 
                         var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
                         definitions.Add(ThisLibraryKey, kvp.Key, lambda);
                     }
@@ -194,7 +194,7 @@ namespace Hl7.Cql.Compiler
                         if (definitions.ContainsKey(null, parameter.name!))
                             throw new InvalidOperationException($"There is already a definition named {parameter.name}");
 
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var buildContext = new ExpressionBuilderContext(this,
                             contextParameter,
                             definitions,
@@ -207,7 +207,7 @@ namespace Hl7.Cql.Compiler
 
                         var resolveParam = Expression.Call(
                             contextParameter,
-                            typeof(RuntimeContext).GetMethod(nameof(RuntimeContext.ResolveParameter)),
+                            typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter)),
                             Expression.Constant(Package!.NameAndVersion),
                             Expression.Constant(parameter.name),
                             defaultValue
@@ -226,7 +226,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (def.expression != null)
                     {
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var buildContext = new ExpressionBuilderContext(this,
                             contextParameter,
                             definitions,
@@ -282,7 +282,7 @@ namespace Hl7.Cql.Compiler
                                 if (Settings.AllowUnresolvedExternals)
                                 {
                                     var returnType = TypeManager.TypeFor(def, buildContext, throwIfNotFound: true)!;
-                                    var paramTypes = new[] { typeof(RuntimeContext) }
+                                    var paramTypes = new[] { typeof(CqlContext) }
                                         .Concat(functionParameterTypes)
                                         .ToArray();
                                     var notImplemented = NotImplemented(customKey, paramTypes, returnType, buildContext);
@@ -330,7 +330,7 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <summary>
-        /// Generates a lambda expression taking a <see cref="RuntimeContext"/> parameter whose body is
+        /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
         /// <paramref name="expression"/> translated into a <see cref="System.Linq.Expressions.Expression"/>.
         /// </summary>
         /// <remarks>
@@ -343,7 +343,7 @@ namespace Hl7.Cql.Compiler
             DefinitionDictionary<LambdaExpression>? lambdas = null,
             ExpressionBuilderContext? ctx = null)
         {
-            var parameter = Expression.Parameter(typeof(RuntimeContext), "rtx");
+            var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
             ctx ??= new ExpressionBuilderContext(this, parameter, lambdas, new Dictionary<string, string>());
             lambdas = new DefinitionDictionary<LambdaExpression>();
@@ -1382,7 +1382,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeResolver.GetListElementType(type);
                 if (elementType == typeof(CqlCode))
                 {
-                    var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(RuntimeContext) });
+                    var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(CqlContext) });
                     var @new = Expression.New(ctor, cqlValueSet, ctx.RuntimeContextParameter);
                     return @new;
                 }
@@ -2159,7 +2159,7 @@ namespace Hl7.Cql.Compiler
             var functionType = GetFunctionRefReturnType(op, operandTypes, ctx);
 
             var funcTypeParameters =
-                new[] { typeof(RuntimeContext) }
+                new[] { typeof(CqlContext) }
                 .Concat(operandTypes)
                 .Concat(new[] { functionType })
                 .ToArray();
@@ -2171,7 +2171,7 @@ namespace Hl7.Cql.Compiler
                 Expression.Constant(op.locator, typeof(string)),
                 Expression.Constant(op.localId, typeof(int?)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(RuntimeContext).GetMethod(nameof(RuntimeContext.Deeper)), newCallStack);
+            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper)), newCallStack);
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
@@ -2404,7 +2404,7 @@ namespace Hl7.Cql.Compiler
             Expression[] arguments,
             ExpressionBuilderContext ctx)
         {
-            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(RuntimeContext).GetProperty(nameof(RuntimeContext.Definitions)));
+            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions)));
             var itemProperty = typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string), typeof(Type[]) });
             var argumentTypes = arguments
                 .Skip(1) // skip runtimecontext
@@ -2448,7 +2448,7 @@ namespace Hl7.Cql.Compiler
         Type definitionReturnType,
         ExpressionBuilderContext ctx)
         {
-            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(RuntimeContext).GetProperty(nameof(RuntimeContext.Definitions)));
+            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions)));
             // gets indexer that takes two strings - lib name and def name
             var itemProperty = typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string) });
             Expression[]? indices;
@@ -2463,7 +2463,7 @@ namespace Hl7.Cql.Compiler
                 indices = new[] { Expression.Constant(libraryName), Expression.Constant(name) };
             }
             var index = Expression.MakeIndex(definitionsProperty, itemProperty, indices);
-            var funcType = typeof(Func<,>).MakeGenericType(typeof(RuntimeContext), definitionReturnType);
+            var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
             var asFunc = Expression.TypeAs(index, funcType);
             var invoke = Expression.Invoke(asFunc, new[] { ctx.RuntimeContextParameter });
             return invoke;

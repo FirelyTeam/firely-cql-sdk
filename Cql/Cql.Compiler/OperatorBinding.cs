@@ -13,7 +13,7 @@ namespace Hl7.Cql.Compiler
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
         /// </summary>
         /// <param name="operator">The operator to bind.</param>
-        /// <param name="runtimeContext">The <see cref="Expression"/> that provides access to the <see cref="RuntimeContext"/>.</param>
+        /// <param name="runtimeContext">The <see cref="Expression"/> that provides access to the <see cref="CqlContext"/>.</param>
         /// <param name="parameters">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
         /// <returns>An expression that implements <paramref name="operator"/>.</returns>
         /// <seealso cref="CqlOperatorsBinding"/>
