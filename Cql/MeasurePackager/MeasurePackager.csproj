@@ -29,6 +29,7 @@
 	  <ProjectReference Include="..\Cql.Runtime.FhirR4\Cql.Runtime.FhirR4.csproj" />
 	  <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 	  <ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
+	  <ProjectReference Include="..\Cql\Cql.csproj" />
 	  <ProjectReference Include="..\Elm\Elm.csproj" />
 	  <ProjectReference Include="..\Graph\Graph.csproj" />
 	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />

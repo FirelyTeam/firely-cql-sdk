@@ -24,6 +24,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Poco.Fhir.R4;
 using Hl7.Cql.Elm.Expressions;
+using Hl7.Cql;
 
 namespace MeasurePackager
 {
@@ -44,31 +45,11 @@ namespace MeasurePackager
             return dict;
         }
 
-        public DirectedGraph GetPackageGraph(IDictionary<string, ElmPackage> packages, ILogger<Packager> logger)
-        {
-            var buildOrder = new DirectedGraph();
-            foreach (var package in packages.Values)
-            {
-                var includes = ElmPackage.GetIncludedLibraries(package, (name, version) =>
-                {
-                    var id = ElmPackage.NameAndVersionFor(name, version);
-                    if (id != null && packages.TryGetValue(id, out var dependency))
-                        return dependency;
-                    else
-                    {
-                        var ex = new InvalidOperationException($"Cannot find library {id} referenced in {package.NameAndVersion}");
-                        logger.Log(LogLevel.Critical, ex, null);
-                        throw ex;
-                    }
-                });
-                MergeGraphInfo(includes, buildOrder);
-            }
-            return buildOrder;
-        }
 
         public IEnumerable<Resource> PackageResources(DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
             DirectedGraph packageGraph,
+            TypeResolver typeResolver,
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             FhirCqlCrosswalk typeCrosswalk,
@@ -96,7 +77,8 @@ namespace MeasurePackager
             scw.AliasedUsings.Add(("Range", typeof(Hl7.Cql.Poco.Fhir.R4.Model.Range).FullName!));
 
             var navToLibraryStream = new Dictionary<string, Stream>();
-            var assemblies = Generate(all, typeManager, packageGraph, scw, navToLibraryStream, references);
+            var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
+            var assemblies = compiler.Compile(elmPackages, builderLogger, writerLogger);
             var libraries = new Dictionary<string, Hl7.Cql.Poco.Fhir.R4.Model.Library>();
             foreach (var package in elmPackages)
             {
@@ -126,9 +108,7 @@ namespace MeasurePackager
             resources.AddRange(libraries.Values);
 
             var tupleAssembly = assemblies["TupleTypes"];
-            var assemblyBytes = File.ReadAllBytes(tupleAssembly.Location.FullName);
-            var asm = Assembly.Load(assemblyBytes);
-            var assemblyBase64 = Convert.ToBase64String(assemblyBytes);
+            var assemblyBase64 = Convert.ToBase64String(tupleAssembly.Binary);
 
             var tuplesBinary = new Binary
             {
@@ -304,259 +284,9 @@ namespace MeasurePackager
                     .Select(t => new Coding { code = t.code!, system = t.system! })
                     .ToList(),
             };
-
-
-        private IDictionary<string, AssemblyData> Generate(DefinitionDictionary<LambdaExpression> expressions,
-            TypeManager typeManager,
-            DirectedGraph dependencies,
-            CSharpSourceCodeWriter writer,
-            Dictionary<string, Stream> navToLibraryStream,
-            IEnumerable<Assembly> references)
-        {
-            Stream getStreamForLibrary(string nav)
-            {
-                if (!navToLibraryStream.TryGetValue(nav, out var stream))
-                {
-                    stream = new MemoryStream();
-                    navToLibraryStream.Add(nav, stream);
-                }
-                return stream;
-            }
-            writer.Write(expressions,
-                typeManager.TupleTypes,
-                dependencies,
-                getStreamForLibrary,
-                closeStream: false);
-
-            var assemblies = new Dictionary<string, AssemblyData>();
-            var tupleStreams = navToLibraryStream
-                .Where(kvp => kvp.Key.StartsWith("Tuples\\"));
-            var tupleAssembly = CompileTuples(tupleStreams, references);
-            var additionalReferences = new[]
-            {
-                tupleAssembly
-            };
-            assemblies.Add("TupleTypes", tupleAssembly);
-            var buildOrder = DetermineBuildOrder(dependencies);
-            foreach (var node in buildOrder)
-            {
-                if (!navToLibraryStream.TryGetValue(node.NodeId, out var sourceCodeStream))
-                    throw new InvalidOperationException($"Library {node.NodeId} doesn't exist in the source code dictionary.");
-                CompileNode(sourceCodeStream, assemblies, node, references, additionalReferences);
-            }
-            return assemblies;
-        }
-
-        private AssemblyData CompileTuples(IEnumerable<KeyValuePair<string, Stream>> tupleStreams,
-            IEnumerable<Assembly> assemblyReferences,
-            DirectoryInfo? csOutput = null)
-        {
-            var metadataReferences = new List<MetadataReference>();
-            AddNetCoreReferences(metadataReferences);
-            foreach (var asm in assemblyReferences)
-            {
-                metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
-            }
-            var compilation = CSharpCompilation.Create($"Tuples")
-                .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel: OptimizationLevel.Release))
-                .WithReferences(metadataReferences);
-
-            var sources = new Dictionary<string, string>();
-
-            foreach (var kvp in tupleStreams)
-            {
-                var sourceCodeStream = kvp.Value;
-                sourceCodeStream.Flush();
-                sourceCodeStream.Seek(0, SeekOrigin.Begin);
-                var reader = new StreamReader(sourceCodeStream);
-                var sourceCode = reader.ReadToEnd().Trim();
-                sources.Add(kvp.Key.Substring("Tuples\\".Length), sourceCode);
-                var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
-
-                compilation = compilation.AddSyntaxTrees(tree);
-            }
-            var codeStream = new MemoryStream();
-            var compilationResult = compilation.Emit(codeStream);
-            var errors = new List<Diagnostic>();
-            var warnings = new List<Diagnostic>();
-            if (!compilationResult.Success)
-            {
-                var sb = new StringBuilder();
-                foreach (var diag in compilationResult.Diagnostics)
-                {
-                    switch (diag.Severity)
-                    {
-                        case DiagnosticSeverity.Warning:
-                            warnings.Add(diag);
-                            break;
-                        case DiagnosticSeverity.Error:
-                            errors.Add(diag);
-                            break;
-                        case DiagnosticSeverity.Hidden:
-                        case DiagnosticSeverity.Info:
-                        default:
-                            break;
-                    }
-                    sb.AppendLine(diag.ToString());
-                }
-                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling Tuples:{Environment.NewLine}{sb}");
-                ex.Data["Errors"] = errors;
-                ex.Data["Warnings"] = warnings;
-
-                throw ex;
-            }
-            var bytes = codeStream.ToArray();
-            var tempFile = new FileInfo(Path.Combine(Path.GetTempPath(), $"Tuples.dll"));
-            File.WriteAllBytes(tempFile.FullName, bytes);
-            var data = new AssemblyData(tempFile, sources);
-            return data;
-        }
-
-        private void CompileNode(Stream sourceCodeStream,
-            Dictionary<string, AssemblyData> assemblies,
-            DirectedGraphNode node,
-            IEnumerable<Assembly> assemblyReferences,
-            IEnumerable<AssemblyData>? assemblyDataReferences)
-        {
-            sourceCodeStream.Flush();
-            sourceCodeStream.Seek(0, SeekOrigin.Begin);
-            var reader = new StreamReader(sourceCodeStream);
-            var sourceCode = reader.ReadToEnd().Trim();
-            var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
-            var metadataReferences = new List<MetadataReference>();
-            AddNetCoreReferences(metadataReferences);
-            foreach (var asm in assemblyReferences)
-            {
-                metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
-            }
-            foreach (var edge in node.ForwardEdges)
-            {
-                if (assemblies.TryGetValue(edge.ToId, out var referencedDll))
-                {
-                    metadataReferences.Add(MetadataReference.CreateFromFile(referencedDll.Location.FullName));
-                }
-            }
-            if (assemblyDataReferences != null)
-            {
-                foreach (var @ref in assemblyDataReferences)
-                {
-                    metadataReferences.Add(MetadataReference.CreateFromFile(@ref.Location.FullName));
-                }
-            }
-            var compilation = CSharpCompilation.Create($"{node.NodeId}")
-                .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
-                    optimizationLevel: OptimizationLevel.Release))
-                .WithReferences(metadataReferences)
-                .AddSyntaxTrees(tree);
-            var codeStream = new MemoryStream();
-            var compilationResult = compilation.Emit(codeStream);
-            var errors = new List<Diagnostic>();
-            var warnings = new List<Diagnostic>();
-            if (!compilationResult.Success)
-            {
-                var sb = new StringBuilder();
-                foreach (var diag in compilationResult.Diagnostics)
-                {
-                    switch (diag.Severity)
-                    {
-                        case DiagnosticSeverity.Warning:
-                            warnings.Add(diag);
-                            break;
-                        case DiagnosticSeverity.Error:
-                            errors.Add(diag);
-                            break;
-                        case DiagnosticSeverity.Hidden:
-                        case DiagnosticSeverity.Info:
-                        default:
-                            break;
-                    }
-                    sb.AppendLine(diag.ToString());
-                }
-                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {node.NodeId}:{Environment.NewLine}{sb}");
-                ex.Data["Errors"] = errors;
-                ex.Data["Warnings"] = warnings;
-
-                throw ex;
-            }
-            var bytes = codeStream.ToArray();
-            //var loadedAsm = Assembly.Load(bytes);
-            var tempFile = new FileInfo(Path.Combine(Path.GetTempPath(), $"{node.NodeId}.dll"));
-            File.WriteAllBytes(tempFile.FullName, bytes);
-            var sources = new Dictionary<string, string> {
-                { node.NodeId, sourceCode }
-            };
-            var data = new AssemblyData(tempFile, sources);
-            assemblies.Add(node.NodeId, data);
-        }
-
-        private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
-        {
-            var sorted = minimalGraph.TopologicalSort()
-                .Where(n => n.NodeId != minimalGraph.StartNode.NodeId && n.NodeId != minimalGraph.EndNode.NodeId)
-                .ToList();
-            return sorted;
-        }
-
-        private void AddNetCoreReferences(List<MetadataReference> metadataReferences)
-        {
-            var rtPath = Path.GetDirectoryName(typeof(object).Assembly.Location);
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Private.CoreLib.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Runtime.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Console.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "netstandard.dll")));
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Text.RegularExpressions.dll"))); // IMPORTANT!
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Linq.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Linq.Expressions.dll"))); // IMPORTANT!
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.IO.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Net.Primitives.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Net.Http.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Private.Uri.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Reflection.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.Primitives.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Globalization.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Collections.Concurrent.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Collections.NonGeneric.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "Microsoft.CSharp.dll")));
-
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Diagnostics.Tools.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Diagnostics.Debug.dll")));
-            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Collections.dll")));
-        }
-
-        private void MergeGraphInfo(DirectedGraph graph, DirectedGraph into)
-        {
-            foreach (var sourceNode in graph.Nodes)
-            {
-                if (!into.Nodes.ContainsKey(sourceNode.Key))
-                    into.Add(sourceNode.Value);
-            }
-            foreach (var edge in graph.Edges)
-            {
-                if (!into.Edges.ContainsKey(edge.Key))
-                    into.Add(edge.Value);
-            }
-            var orphaned = true;
-            foreach (var edge in into.Edges)
-            {
-                if (edge.Value.ToId == graph.StartNode.NodeId)
-                {
-                    orphaned = false;
-                    break;
-                }
-            }
-            if (orphaned)
-            {
-                into.Add(new DirectedGraphEdge(into.StartNode.NodeId, graph.StartNode.NodeId));
-            }
-        }
-
         private Hl7.Cql.Poco.Fhir.R4.Model.Library CreateLibraryResource(FileInfo elmFile,
             FileInfo? cqlFile,
-            AssemblyData? assembly,
+            AssemblyData assembly,
             FhirCqlCrosswalk typeCrosswalk,
             ExpressionBuilder builder,
             Func<Resource, string> canon,
@@ -612,7 +342,7 @@ namespace MeasurePackager
                 library.parameter = parameters.Count > 0 ? parameters : null!;
                 library.relatedArtifact = new List<RelatedArtifact>();
 
-                foreach(var include in libPackage?.library?.includes?.def ?? Enumerable.Empty<IncludeExpression>())
+                foreach (var include in libPackage?.library?.includes?.def ?? Enumerable.Empty<IncludeExpression>())
                 {
                     var includeId = $"{include.path}-{include.version}";
                     library.relatedArtifact.Add(new RelatedArtifact
@@ -637,7 +367,7 @@ namespace MeasurePackager
                 }
                 if (assembly != null)
                 {
-                    var assemblyBytes = File.ReadAllBytes(assembly.Location.FullName);
+                    var assemblyBytes = assembly.Binary;
                     var assemblyBase64 = Convert.ToBase64String(assemblyBytes);
                     var assemblyAttachment = new Attachment
                     {

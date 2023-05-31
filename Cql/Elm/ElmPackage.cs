@@ -113,6 +113,27 @@ namespace Hl7.Cql.Elm
             return LoadFrom(reader);
 
         }
+
+        public static DirectedGraph GetIncludedLibraries(IEnumerable<ElmPackage> packages)
+        {
+            var buildOrder = new DirectedGraph();
+            foreach (var package in packages)
+            {
+                var includes = ElmPackage.GetIncludedLibraries(package, (name, version) =>
+                {
+                    var dependency = packages.SingleOrDefault(p =>
+                        p.library?.identifier?.id == name
+                        && p.library?.identifier?.version == version);
+                    if (dependency != null)
+                        return dependency;
+                    else
+                        throw new InvalidOperationException($"Cannot find library {ElmPackage.NameAndVersionFor(name, version) ?? "<unknown>"} referenced in {package.NameAndVersion}");
+                });
+                Merge(includes, buildOrder);
+            }
+            return buildOrder;
+        }
+        
         public static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, Func<string, string, ElmPackage>? locateLibrary = null)
         {
             if (locateLibrary == null)
@@ -268,6 +289,33 @@ namespace Hl7.Cql.Elm
                 thisGraph.Add(edgeToEnd);
             }
             return thisGraph;
+        }
+        
+        private static void Merge(DirectedGraph from, DirectedGraph into)
+        {
+            foreach (var sourceNode in from.Nodes)
+            {
+                if (!into.Nodes.ContainsKey(sourceNode.Key))
+                    into.Add(sourceNode.Value);
+            }
+            foreach (var edge in from.Edges)
+            {
+                if (!into.Edges.ContainsKey(edge.Key))
+                    into.Add(edge.Value);
+            }
+            var orphaned = true;
+            foreach (var edge in into.Edges)
+            {
+                if (edge.Value.ToId == from.StartNode.NodeId)
+                {
+                    orphaned = false;
+                    break;
+                }
+            }
+            if (orphaned)
+            {
+                into.Add(new DirectedGraphEdge(into.StartNode.NodeId, from.StartNode.NodeId));
+            }
         }
 
 

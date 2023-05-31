@@ -2,6 +2,7 @@
 using Hl7.Cql;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Graph;
 using Hl7.Cql.Poco.Fhir;
 using Hl7.Cql.Poco.Fhir.R4.Model;
 using Hl7.Cql.Primitives;
@@ -101,8 +102,7 @@ public static class Program
         var packager = new Packager();
         var packagerLogger = logFactory.CreateLogger<Packager>();
         var packages = packager.LoadPackages(elmDir);
-        var graph = packager.GetPackageGraph(packages, packagerLogger);
-
+        var graph = Hl7.Cql.Elm.ElmPackage.GetIncludedLibraries(packages.Values);
         var typeResolver = Hl7.Cql.Runtime.FhirR4.FhirTypeResolver.Default;
         var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
 
@@ -135,6 +135,7 @@ public static class Program
         var resources = packager.PackageResources(elmDir,
             cqlDir,
             graph,
+            typeResolver,
             new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Default),
             new TypeManager(typeResolver),
             crosswalk,

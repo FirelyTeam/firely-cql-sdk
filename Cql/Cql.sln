@@ -49,6 +49,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Abstractions", "Cql.Abs
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeasurePackager", "MeasurePackager\MeasurePackager.csproj", "{DB461D68-6746-4A79-8CD8-F0E09D04D954}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql", "Cql\Cql.csproj", "{8FF55BB5-6004-4461-B8EA-19E9F41B970B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -143,6 +145,10 @@ Global
 		{DB461D68-6746-4A79-8CD8-F0E09D04D954}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB461D68-6746-4A79-8CD8-F0E09D04D954}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB461D68-6746-4A79-8CD8-F0E09D04D954}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FF55BB5-6004-4461-B8EA-19E9F41B970B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FF55BB5-6004-4461-B8EA-19E9F41B970B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FF55BB5-6004-4461-B8EA-19E9F41B970B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FF55BB5-6004-4461-B8EA-19E9F41B970B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

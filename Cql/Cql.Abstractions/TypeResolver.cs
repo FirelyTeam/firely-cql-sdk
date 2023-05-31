@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 
 namespace Hl7.Cql
@@ -140,5 +142,37 @@ namespace Hl7.Cql
         /// </remarks>
         public abstract PropertyInfo? PatientBirthDateProperty { get; }
 
+        /// <summary>
+        /// Gets the assemblies that contain types that this type resolver resolves for 
+        /// model types, e.g. in the http://hl7.org/fhir namespace.  This property may,
+        /// but is not required to, return types resolved from the System namespace, e.g.
+        /// Cql.Primitives.
+        /// </summary>
+        public abstract IEnumerable<Assembly> ModelAssemblies { get; }
+        /// <summary>
+        /// Gets the namespaces of the types that this type resolver resolves for 
+        /// model types, e.g. in the http://hl7.org/fhir namespace.  This property may,
+        /// but is not required to, return types resolved from the System namespace, e.g.
+        /// Cql.Primitives.
+        /// </summary>
+        public abstract IEnumerable<string> ModelNamespaces { get; }
+
+        /// <summary>
+        /// Gets any aliases for types that conflict with commonly imported .NET types.
+        /// </summary>
+        /// <remarks>
+        /// The base implementation aliases the FHIR Range type to whatever type
+        /// <see cref="TypeResolver.ResolveType(string)"/> returns when passed "{http://hl7.org/fhir}"
+        /// to avoid conflicts with <see cref="System.Range"/>.
+        /// </remarks>
+        public virtual IEnumerable<(string alias, string type)> Aliases
+        {
+            get
+            {
+                var rangeType = ResolveType("{http://hl7.org/fhir}Range");
+                if (rangeType != null)
+                    yield return ("Range", rangeType.FullName);
+            }
+        }
     }
 }

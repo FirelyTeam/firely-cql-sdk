@@ -9,6 +9,10 @@ namespace Cql.Firely
 {
     public class FirelyTypeResolver : ModelTypeResolver
     {
+        public override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
+
+        public override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
+
         public FirelyTypeResolver(Hl7.Cql.Model.ModelInfo model) : base(model)
         {
             var x = typeof(Ratio).Assembly;

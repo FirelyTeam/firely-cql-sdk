@@ -79,6 +79,10 @@ namespace CoreTests
 
             public override PropertyInfo PatientBirthDateProperty => typeof(UnitTestPatient).GetProperty(nameof(UnitTestPatient.birthDate));
 
+            public override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
+
+            public override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
+
             public override PropertyInfo GetPrimaryCodePath(string typeSpecifier) =>
                 throw new NotImplementedException();
         }

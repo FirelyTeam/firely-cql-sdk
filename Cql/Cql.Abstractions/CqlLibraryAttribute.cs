@@ -5,7 +5,7 @@ namespace Hl7.Cql
     /// <summary>
     /// Declares that this class is the translation of an ELM library.
     /// </summary>
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
     public class CqlLibraryAttribute: Attribute
     {
         /// <summary>
