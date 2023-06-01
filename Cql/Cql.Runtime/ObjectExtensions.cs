@@ -15,6 +15,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="object">The source object which is the first parameter to <paramref name="access"/>.</param>
         /// <param name="access">The function that accesses the property.</param>
         /// <returns>The value of the property, or <see langword="null"/> if <paramref name="object"/> is <see langword="null"/>.</returns>
+        /// TODO: Remove this?
         public static TProp PropertyOrDefault<T, TProp>(this T @object, Func<T, TProp> access)
         {
             if (@object == null)

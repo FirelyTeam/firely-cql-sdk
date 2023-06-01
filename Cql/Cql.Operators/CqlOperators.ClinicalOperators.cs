@@ -130,8 +130,16 @@ namespace Hl7.Cql.Runtime
         {
             if (code == null || valueSet == null || code.code == null || valueSet.id == null)
                 return null;
-            var result = ValueSets.IsCodeInValueSet(valueSet.id, code.code, code.system);
-            return result;
+            if (!string.IsNullOrWhiteSpace(code.system))
+            {
+                var result = ValueSets.IsCodeInValueSet(valueSet.id, code.code, code.system);
+                return result;
+            }
+            else
+            {
+                var result = ValueSets.IsCodeInValueSet(valueSet.id, code.code);
+                return result;
+            }
         }
         public bool? ConceptInValueSet(CqlConcept? concept, CqlValueSet? valueSet)
         {

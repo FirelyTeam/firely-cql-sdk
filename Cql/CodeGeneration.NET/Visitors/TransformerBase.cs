@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using System;
+using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
@@ -7,6 +8,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitNew(NewExpression node)
         {
+            if (node.Constructor == null)
+                throw new ArgumentException($"NewExpression does not have a Constructor property");
             if (node.Arguments?.Count > 0)
             {
                 var newArguments = new Expression[node.Arguments.Count];
@@ -23,7 +26,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            Expression @object = node.Object;
+            Expression? @object = node.Object;
             var newArguments = new Expression[node.Arguments.Count];
             for (int i = 0; i < node.Arguments.Count; i++)
             {

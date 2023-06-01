@@ -57,11 +57,12 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                                 }
                                 else if (Throw) throw new InvalidOperationException("Unexpected values in Invocation index arguments; expected an array of constant type values.");
                             }
-                            if (libraryConstant.Value is string libraryName)
+                            if (libraryConstant.Value is string libraryName && definitionConstant.Value is string definitionConstantString)
                             {
                                 if (libraryName == ThisLibrary)
                                 {
-                                    if (Methods.TryGetValue(ThisLibrary, (string)definitionConstant.Value, types, out var method))
+                                    if (Methods.TryGetValue(ThisLibrary, definitionConstantString, types, out var method)
+                                        && method != null)
                                     {
                                         if (Types.TryGetValue(ThisLibrary, out var thisType))
                                         {
@@ -82,7 +83,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                                 {
                                     if (LibraryMembers.TryGetValue(libraryName, out var memberName))
                                     {
-                                        if (Methods.TryGetValue(libraryName, (string)definitionConstant.Value, types, out var method))
+                                        if (Methods.TryGetValue(libraryName, definitionConstantString, types, out var method))
                                         {
                                             var nodeArguments = node.Arguments
                                                 .Skip(1) // skip runtimecontext
@@ -117,7 +118,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                                         }
                                         else
                                         {
-                                            if (Methods.TryGetDefinitionsForLibrary(libraryName, out var definitions))
+                                            if (Methods.TryGetDefinitionsForLibrary(libraryName, out var definitions)
+                                                && definitions != null)
                                             {
                                                 var defs = definitions
                                                     .Where(kvp => kvp.Key == (string)definitionConstant.Value)

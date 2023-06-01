@@ -62,12 +62,13 @@ namespace MeasurePackager
             var elmPackages = packageGraph.Nodes.Values
                 .Select(node => node.Properties?[ElmPackage.PackageNodeProperty] as ElmPackage)
                 .Where(p => p is not null)
+                .Select(p => p!)
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, package, builderLogger);
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, package!, builderLogger);
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
@@ -84,7 +85,7 @@ namespace MeasurePackager
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.NameAndVersion}.json"));
                 if (!elmFile.Exists)
-                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.library.identifier.id}.json"));
+                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.library?.identifier?.id ?? string.Empty}.json"));
                 if (!elmFile.Exists)
                     throw new InvalidOperationException($"Cannot find ELM file for {package.NameAndVersion}");
                 var cqlFiles = cqlDirectory.GetFiles($"{package.NameAndVersion}.cql", SearchOption.AllDirectories);
@@ -359,7 +360,7 @@ namespace MeasurePackager
 
                     var cqlAttachment = new Attachment
                     {
-                        id = $"{libPackage.NameAndVersion}+cql",
+                        id = $"{libPackage!.NameAndVersion}+cql",
                         contentType = new CodeElement { value = "text/cql" },
                         data = new Base64BinaryElement { value = cqlBase64 },
                     };
@@ -371,7 +372,7 @@ namespace MeasurePackager
                     var assemblyBase64 = Convert.ToBase64String(assemblyBytes);
                     var assemblyAttachment = new Attachment
                     {
-                        id = $"{libPackage.NameAndVersion}+dll",
+                        id = $"{libPackage!.NameAndVersion}+dll",
                         contentType = new CodeElement { value = "application/octet-stream" },
                         data = new Base64BinaryElement { value = assemblyBase64 },
                     };
@@ -440,10 +441,13 @@ namespace MeasurePackager
             if (elmParameter.@default is not null)
             {
                 var typeEntry = typeCrosswalk.TypeEntryFor(elmParameter.@default);
-                var lambda = builder.Lambda(elmParameter.@default);
-                var func = lambda.Compile();
-                var value = func.DynamicInvoke(CqlContext);
-                AddDefaultValueToExtensions(cqlTypeExtensions, value, typeEntry);
+                if (typeEntry != null)
+                {
+                    var lambda = builder.Lambda(elmParameter.@default);
+                    var func = lambda.Compile();
+                    var value = func.DynamicInvoke(CqlContext);
+                    AddDefaultValueToExtensions(cqlTypeExtensions, value, typeEntry);
+                }
             }
 
             var annotations = (elmParameter.annotation?
@@ -516,22 +520,25 @@ namespace MeasurePackager
         }
 
 
-        private static void AddDefaultValueToExtensions(List<Extension> cqlTypeExtensions, object? value, TypeEntry? defaultType)
+        private static void AddDefaultValueToExtensions(List<Extension> cqlTypeExtensions, object? value, TypeEntry defaultType)
         {
-            var defaultValueExt = new Extension()
+            if (defaultType.FhirType != null)
             {
-                id = Constants.ParameterCqlDefaultValue
-            };
-            MapValueToExtension(defaultValueExt, value, defaultType);
-            cqlTypeExtensions.Add(defaultValueExt);
+                var defaultValueExt = new Extension()
+                {
+                    id = Constants.ParameterCqlDefaultValue
+                };
+                MapValueToExtension(defaultValueExt, value, defaultType);
+                cqlTypeExtensions.Add(defaultValueExt);
 
-            var defaultTypeCode = Enum.GetName(typeof(FhirAllTypes), defaultType.FhirType);
+                var defaultTypeCode = Enum.GetName(typeof(FhirAllTypes), defaultType.FhirType);
 
-            cqlTypeExtensions.Add(new Extension()
-            {
-                id = Constants.ParameterCqlDefaultValueType,
-                valueString = new StringElement() { value = defaultTypeCode }
-            });
+                cqlTypeExtensions.Add(new Extension()
+                {
+                    id = Constants.ParameterCqlDefaultValueType,
+                    valueString = new StringElement() { value = defaultTypeCode }
+                });
+            }
         }
 
         private static void MapValueToExtension(Extension ext, object? value, TypeEntry mappedType)

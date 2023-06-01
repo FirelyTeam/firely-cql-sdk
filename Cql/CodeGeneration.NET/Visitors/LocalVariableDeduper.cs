@@ -1,4 +1,5 @@
 ﻿using AgileObjects.ReadableExpressions;
+using Microsoft.Extensions.Logging.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,8 +16,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         public IEnumerable<string> ScopeReservedVariables { get; }
 
-        public override Expression Visit(Expression node)
+        public override Expression? Visit(Expression? node)
         {
+            if (node == null)
+                return null;
             switch (node.NodeType)
             {
                 case ExpressionType.Block:
@@ -42,7 +45,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 var expression = node.Expressions[i];
                 if (expression is BinaryExpression be && be.Left is ParameterExpression)
                 {
-                    var right = Visit(be.Right);
+                    var right = Visit(be.Right) ??
+                        throw new InvalidOperationException("Visit returned a null expression");
                     var newExpression = Expression.Assign(be.Left, right);
                     variableExpressions.Add(newExpression);
                     newExpressions[i] = newExpression;
@@ -72,7 +76,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                                     var typesSame = replaceParameter.Type == keep.Type;
                                     if (typesSame)
                                     {
-                                        var replace = replaceParameter.Name;
+                                        var replace = replaceParameter.Name!;
                                         if (replacements.TryGetValue(replace, out var existingReplacement))
                                         {
                                             if (existingReplacement.Name != keep.Name)
@@ -120,10 +124,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         {
             if (node is LambdaExpression lambda)
             {
-                var newLambdaBody = Visit(lambda.Body);
-                if (newLambdaBody is BlockExpression block && block.Variables?.Count == 0)
-                {
-                }
+                var newLambdaBody = Visit(lambda.Body)
+                    ?? throw new InvalidOperationException("Visit returned null");
                 var newLambda = Expression.Lambda(newLambdaBody, lambda.Parameters);
                 return newLambda;
             }

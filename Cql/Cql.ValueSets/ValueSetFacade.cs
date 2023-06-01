@@ -43,8 +43,16 @@ namespace Hl7.Cql.ValueSets
         {
             if (code == null || code.code == null)
                 return null;
-            var @in = ValueSets.IsCodeInValueSet(Id, code.code, code.system);
-            return @in;
+            if (code.system != null)
+            {
+                var @in = ValueSets.IsCodeInValueSet(Id, code.code, code.system);
+                return @in;
+            }
+            else
+            {
+                var @in = ValueSets.IsCodeInValueSet(Id, code.code);
+                return @in;
+            }
         }
 
         /// <summary>

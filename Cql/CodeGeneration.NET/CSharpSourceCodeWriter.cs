@@ -55,10 +55,10 @@ namespace Hl7.Cql.CodeGeneration.NET
         public IList<string> Usings { get; } = new List<string>
         {
             nameof(System),
-            typeof(Enumerable).Namespace, // System.Linq
-            typeof(ICollection<>).Namespace, // System.Collections.Generic
-            typeof(CqlContext).Namespace,
-            typeof(CqlPrimitiveType).Namespace,
+            typeof(Enumerable).Namespace!, // System.Linq
+            typeof(ICollection<>).Namespace!, // System.Collections.Generic
+            typeof(CqlContext).Namespace!,
+            typeof(CqlPrimitiveType).Namespace!,
         };
         /// <summary>
         /// Gets the aliased <see langword="using"/> statements to be included in the generated code.
@@ -123,7 +123,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 foreach (var tupleType in tupleTypes!)
                 {
-                    var tupleTypeStream = libraryNameToStream(Path.Combine(tupleType.Namespace, tupleType.Name));
+                    if (tupleType == null)
+                        continue;
+                    var tupleTypeStream = libraryNameToStream(Path.Combine(tupleType.Namespace!, tupleType.Name));
                     try
                     {
                         var writer = new StreamWriter(tupleTypeStream);
@@ -374,7 +376,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var parameters = overload.Item2.Parameters
                 .Skip(1) // skip runtimeContext
-                .Select(p => p.Name);
+                .Where(p => p.Name != null)
+                .Select(p => p.Name!)!;
 
             var parameterFinder = new ParameterFinder();
             parameterFinder.Visit(overload.Item2.Body);
@@ -423,7 +426,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 var parameterString = string.Join(", ", overload.Item2.Parameters
                     .Skip(1) // skip runtimeContext
-                    .Select(p => $"{PrettyTypeName(p.Type)} {PrefixKeywords(p.Name)}"));
+                    .Where(p => p.Name != null)
+                    .Select(p => $"{PrettyTypeName(p.Type)} {PrefixKeywords(p.Name!)}"));
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
                 writer.WriteLine(indentLevel, $"public {returnType} {methodName}({parameterString})");
@@ -470,7 +474,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             writer.WriteLine();
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{Tool}\", \"{Version}\")]");
-            writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {PrettyTypeName(tupleType.BaseType)}");
+            writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {PrettyTypeName(tupleType.BaseType!)}");
             writer.WriteLine(indentLevel, "{");
 
             indentLevel++;
@@ -516,7 +520,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
                 else
                 {
-                    var str = value.ToString();
+                    var str = value.ToString()!;
                     return str;
                 }
 
@@ -546,7 +550,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
-                    typeName = $"{PrettyTypeName(Nullable.GetUnderlyingType(type))}?";
+                    typeName = $"{PrettyTypeName(Nullable.GetUnderlyingType(type)!)}?";
                 }
                 else
                 {
@@ -563,7 +567,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             if (type.IsNested)
             {
-                typeName = $"{PrettyTypeName(type.DeclaringType)}.{typeName}";
+                typeName = $"{PrettyTypeName(type.DeclaringType!)}.{typeName}";
             }
             if (typeName.StartsWith("Tuple_"))
             {
@@ -571,7 +575,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else if (type.IsArray)
             {
-                var elementType = type.GetElementType();
+                var elementType = type.GetElementType() ??
+                    throw new InvalidOperationException($"Unable to get array element type for {type.FullName}");
                 return $"{PrettyTypeName(elementType)}[]";
             }
             else return typeName;
@@ -645,7 +650,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault));
+        private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
 
         private string ToCode(int indent, System.Linq.Expressions.Expression expression, bool leadingIndent = true)
         {
@@ -674,7 +679,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         if (constant.Value != null && constant.Value is PropertyInfo propertyInfo)
                         {
-                            var declaringType = PrettyTypeName(propertyInfo.DeclaringType);
+                            var declaringType = PrettyTypeName(propertyInfo.DeclaringType ??
+                                throw new InvalidOperationException($"PropertyInfo.DeclaringType is null"));
                             var code = $"{leadingIndentString}typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
                             return code;
                         }
@@ -766,7 +772,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         }
                         else if (call.Method.IsStatic)
                         {
-                            @object = $"{PrettyTypeName(call.Method.DeclaringType)}.";
+                            @object = $"{PrettyTypeName(call.Method.DeclaringType!)}.";
                         }
                         var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
                         sb.Append($"{@object}{PrettyMethodName(call.Method)}({firstArgument}");
@@ -923,7 +929,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var newArraySb = new StringBuilder();
                         newArraySb.Append(leadingIndentString);
-                        var arrayType = PrettyTypeName(newArray.Type.GetElementType());
+                        var arrayType = PrettyTypeName(newArray.Type.GetElementType() ??
+                            throw new InvalidOperationException($"Array type {newArray.Type.FullName} does not have an element type"));
                         var size = ToCode(0, newArray.Expressions[0], false);
                         newArraySb.AppendLine($"new {arrayType}[{size}]");
                         return newArraySb.ToString();
@@ -931,10 +938,17 @@ namespace Hl7.Cql.CodeGeneration.NET
                     break;
                 case MemberExpression me:
                     {
-                        var @object = ToCode(0, me.Expression);
-                        var memberName = PrefixKeywords(me.Member.Name);
-                        var nullCoalesce = $"{@object}?.{memberName}";
-                        return nullCoalesce;
+                        if (me.Expression != null)
+                        {
+                            var @object = ToCode(0, me.Expression);
+                            var memberName = PrefixKeywords(me.Member.Name);
+                            var nullCoalesce = $"{@object}?.{memberName}";
+                            return nullCoalesce;
+                        }
+                        else
+                        {
+                            throw new InvalidOperationException("MemberExpression has a null Expression");
+                        }
                     }
                 case MemberInitExpression memberInit:
                     var memberInitSb = new StringBuilder();
@@ -968,7 +982,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     break;
                 case LabelExpression label:
-                    var defaultValueCode = ToCode(indent, label.DefaultValue, false);
+                    var defaultValueCode = ToCode(indent, label.DefaultValue!, false);
                     var @return = $"{leadingIndentString}return {defaultValueCode};";
                     return @return;
                 case ConditionalExpression ce:
