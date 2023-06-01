@@ -1,4 +1,4 @@
-﻿namespace Ncqa.Cql.Runtime
+﻿namespace Hl7.Cql.Runtime
 {
     /// <summary>
     /// Stores an entry in an ELM call stack.

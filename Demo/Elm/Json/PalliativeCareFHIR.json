@@ -1,0 +1,1383 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.2.0",
+         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "78",
+            "s" : [ {
+               "value" : [ "","library PalliativeCareFHIR version '0.6.000'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "PalliativeCareFHIR",
+         "version" : "0.6.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "locator" : "3:1-3:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIR" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "2",
+            "locator" : "5:1-5:69",
+            "localIdentifier" : "Global",
+            "path" : "MATGlobalCommonFunctionsFHIR4",
+            "version" : "6.1.000",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "MATGlobalCommonFunctionsFHIR4" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'6.1.000'"," called ","Global" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "3",
+            "locator" : "6:1-6:56",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.001",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIRHelpers" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "14",
+            "locator" : "17:1-17:49",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "value" : [ "Interval<" ]
+                     }, {
+                        "r" : "12",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "localId" : "13",
+               "locator" : "17:32-17:49",
+               "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "pointType" : {
+                  "localId" : "12",
+                  "locator" : "17:41-17:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "4",
+            "locator" : "8:1-8:38",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "LOINC",
+            "id" : "http://loinc.org",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "5",
+            "locator" : "9:1-9:99",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "ObservationCategoryCodes",
+            "id" : "http://terminology.hl7.org/CodeSystem/observation-category",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"ObservationCategoryCodes\"",": ","'http://terminology.hl7.org/CodeSystem/observation-category'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "6",
+            "locator" : "11:1-11:117",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Encounter",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Palliative Care Encounter\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "7",
+            "locator" : "12:1-12:120",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Palliative Care Intervention",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Palliative Care Intervention\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "localId" : "9",
+            "locator" : "14:1-14:226",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)",
+            "id" : "71007-9",
+            "display" : "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)\"",": ","'71007-9'"," from " ]
+                  }, {
+                     "r" : "8",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : {
+               "localId" : "8",
+               "locator" : "14:117-14:123",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "LOINC"
+            }
+         }, {
+            "localId" : "11",
+            "locator" : "15:1-15:72",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "survey",
+            "id" : "survey",
+            "display" : "survey",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "","code ","\"survey\"",": ","'survey'"," from " ]
+                  }, {
+                     "r" : "10",
+                     "s" : [ {
+                        "value" : [ "\"ObservationCategoryCodes\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'survey'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : {
+               "localId" : "10",
+               "locator" : "15:30-15:55",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "ObservationCategoryCodes"
+            }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "19:1-19:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "19:1-19:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "19:1-19:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "78",
+            "locator" : "21:1-36:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Palliative Care in the Measurement Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "78",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Palliative Care in the Measurement Period\"",":\n  " ]
+                  }, {
+                     "r" : "77",
+                     "s" : [ {
+                        "r" : "59",
+                        "s" : [ {
+                           "r" : "43",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "42",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "42",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "r" : "16",
+                                       "s" : [ {
+                                          "r" : "15",
+                                          "s" : [ {
+                                             "r" : "15",
+                                             "s" : [ {
+                                                "value" : [ "[","Observation",": " ]
+                                             }, {
+                                                "s" : [ {
+                                                   "value" : [ "\"Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)\"" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "]" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " ","PalliativeAssessment" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n              " ]
+                                 }, {
+                                    "r" : "41",
+                                    "s" : [ {
+                                       "value" : [ "where " ]
+                                    }, {
+                                       "r" : "41",
+                                       "s" : [ {
+                                          "r" : "34",
+                                          "s" : [ {
+                                             "r" : "23",
+                                             "s" : [ {
+                                                "r" : "18",
+                                                "s" : [ {
+                                                   "r" : "17",
+                                                   "s" : [ {
+                                                      "value" : [ "PalliativeAssessment" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "." ]
+                                                }, {
+                                                   "r" : "18",
+                                                   "s" : [ {
+                                                      "value" : [ "status" ]
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "value" : [ " in " ]
+                                             }, {
+                                                "r" : "22",
+                                                "s" : [ {
+                                                   "value" : [ "{ " ]
+                                                }, {
+                                                   "r" : "19",
+                                                   "s" : [ {
+                                                      "value" : [ "'final'" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ ", " ]
+                                                }, {
+                                                   "r" : "20",
+                                                   "s" : [ {
+                                                      "value" : [ "'amended'" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ ", " ]
+                                                }, {
+                                                   "r" : "21",
+                                                   "s" : [ {
+                                                      "value" : [ "'corrected'" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " }" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "\n                and " ]
+                                          }, {
+                                             "r" : "33",
+                                             "s" : [ {
+                                                "value" : [ "exists " ]
+                                             }, {
+                                                "r" : "32",
+                                                "s" : [ {
+                                                   "value" : [ "( " ]
+                                                }, {
+                                                   "r" : "32",
+                                                   "s" : [ {
+                                                      "s" : [ {
+                                                         "r" : "25",
+                                                         "s" : [ {
+                                                            "r" : "24",
+                                                            "s" : [ {
+                                                               "s" : [ {
+                                                                  "value" : [ "PalliativeAssessment",".","category" ]
+                                                               } ]
+                                                            } ]
+                                                         }, {
+                                                            "value" : [ " ","PalliativeAssessmentCategory" ]
+                                                         } ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "\n                    " ]
+                                                   }, {
+                                                      "r" : "31",
+                                                      "s" : [ {
+                                                         "value" : [ "where " ]
+                                                      }, {
+                                                         "r" : "31",
+                                                         "s" : [ {
+                                                            "r" : "26",
+                                                            "s" : [ {
+                                                               "value" : [ "\"survey\"" ]
+                                                            } ]
+                                                         }, {
+                                                            "value" : [ " in " ]
+                                                         }, {
+                                                            "r" : "30",
+                                                            "s" : [ {
+                                                               "r" : "29",
+                                                               "s" : [ {
+                                                                  "r" : "27",
+                                                                  "s" : [ {
+                                                                     "value" : [ "FHIRHelpers" ]
+                                                                  } ]
+                                                               }, {
+                                                                  "value" : [ "." ]
+                                                               }, {
+                                                                  "r" : "29",
+                                                                  "s" : [ {
+                                                                     "value" : [ "ToConcept"," ( " ]
+                                                                  }, {
+                                                                     "r" : "28",
+                                                                     "s" : [ {
+                                                                        "value" : [ "PalliativeAssessmentCategory" ]
+                                                                     } ]
+                                                                  }, {
+                                                                     "value" : [ " )" ]
+                                                                  } ]
+                                                               } ]
+                                                            }, {
+                                                               "value" : [ "." ]
+                                                            }, {
+                                                               "r" : "30",
+                                                               "s" : [ {
+                                                                  "value" : [ "codes" ]
+                                                               } ]
+                                                            } ]
+                                                         } ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "\n                )" ]
+                                                } ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n                and " ]
+                                       }, {
+                                          "r" : "40",
+                                          "s" : [ {
+                                             "r" : "38",
+                                             "s" : [ {
+                                                "r" : "35",
+                                                "s" : [ {
+                                                   "value" : [ "Global" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "38",
+                                                "s" : [ {
+                                                   "value" : [ "\"Normalize Interval\""," ( " ]
+                                                }, {
+                                                   "r" : "37",
+                                                   "s" : [ {
+                                                      "r" : "36",
+                                                      "s" : [ {
+                                                         "value" : [ "PalliativeAssessment" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "37",
+                                                      "s" : [ {
+                                                         "value" : [ "effective" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " )" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "r" : "40",
+                                             "value" : [ " ","overlaps"," " ]
+                                          }, {
+                                             "r" : "39",
+                                             "s" : [ {
+                                                "value" : [ "\"Measurement Period\"" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n          )" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n            or " ]
+                        }, {
+                           "r" : "58",
+                           "s" : [ {
+                              "value" : [ "exists " ]
+                           }, {
+                              "r" : "57",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "57",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "r" : "45",
+                                       "s" : [ {
+                                          "r" : "44",
+                                          "s" : [ {
+                                             "r" : "44",
+                                             "s" : [ {
+                                                "value" : [ "[","Encounter",": " ]
+                                             }, {
+                                                "s" : [ {
+                                                   "value" : [ "\"Palliative Care Encounter\"" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "]" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " ","PalliativeEncounter" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n                " ]
+                                 }, {
+                                    "r" : "56",
+                                    "s" : [ {
+                                       "value" : [ "where " ]
+                                    }, {
+                                       "r" : "56",
+                                       "s" : [ {
+                                          "r" : "49",
+                                          "s" : [ {
+                                             "r" : "47",
+                                             "s" : [ {
+                                                "r" : "46",
+                                                "s" : [ {
+                                                   "value" : [ "PalliativeEncounter" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "47",
+                                                "s" : [ {
+                                                   "value" : [ "status" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " ","="," " ]
+                                          }, {
+                                             "r" : "48",
+                                             "s" : [ {
+                                                "value" : [ "'finished'" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "\n                  and " ]
+                                       }, {
+                                          "r" : "55",
+                                          "s" : [ {
+                                             "r" : "53",
+                                             "s" : [ {
+                                                "r" : "50",
+                                                "s" : [ {
+                                                   "value" : [ "Global" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "53",
+                                                "s" : [ {
+                                                   "value" : [ "\"Normalize Interval\""," ( " ]
+                                                }, {
+                                                   "r" : "52",
+                                                   "s" : [ {
+                                                      "r" : "51",
+                                                      "s" : [ {
+                                                         "value" : [ "PalliativeEncounter" ]
+                                                      } ]
+                                                   }, {
+                                                      "value" : [ "." ]
+                                                   }, {
+                                                      "r" : "52",
+                                                      "s" : [ {
+                                                         "value" : [ "period" ]
+                                                      } ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ " )" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "r" : "55",
+                                             "value" : [ " ","overlaps"," " ]
+                                          }, {
+                                             "r" : "54",
+                                             "s" : [ {
+                                                "value" : [ "\"Measurement Period\"" ]
+                                             } ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n            )" ]
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n            or " ]
+                     }, {
+                        "r" : "76",
+                        "s" : [ {
+                           "value" : [ "exists " ]
+                        }, {
+                           "r" : "75",
+                           "s" : [ {
+                              "value" : [ "( " ]
+                           }, {
+                              "r" : "75",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "r" : "61",
+                                    "s" : [ {
+                                       "r" : "60",
+                                       "s" : [ {
+                                          "r" : "60",
+                                          "s" : [ {
+                                             "value" : [ "[","Procedure",": " ]
+                                          }, {
+                                             "s" : [ {
+                                                "value" : [ "\"Palliative Care Intervention\"" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "]" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " ","PalliativeIntervention" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n                " ]
+                              }, {
+                                 "r" : "74",
+                                 "s" : [ {
+                                    "value" : [ "where " ]
+                                 }, {
+                                    "r" : "74",
+                                    "s" : [ {
+                                       "r" : "67",
+                                       "s" : [ {
+                                          "r" : "63",
+                                          "s" : [ {
+                                             "r" : "62",
+                                             "s" : [ {
+                                                "value" : [ "PalliativeIntervention" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "63",
+                                             "s" : [ {
+                                                "value" : [ "status" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " in " ]
+                                       }, {
+                                          "r" : "66",
+                                          "s" : [ {
+                                             "value" : [ "{ " ]
+                                          }, {
+                                             "r" : "64",
+                                             "s" : [ {
+                                                "value" : [ "'completed'" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ", " ]
+                                          }, {
+                                             "r" : "65",
+                                             "s" : [ {
+                                                "value" : [ "'in-progress'" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ " }" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n                  and " ]
+                                    }, {
+                                       "r" : "73",
+                                       "s" : [ {
+                                          "r" : "71",
+                                          "s" : [ {
+                                             "r" : "68",
+                                             "s" : [ {
+                                                "value" : [ "Global" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "71",
+                                             "s" : [ {
+                                                "value" : [ "\"Normalize Interval\""," ( " ]
+                                             }, {
+                                                "r" : "70",
+                                                "s" : [ {
+                                                   "r" : "69",
+                                                   "s" : [ {
+                                                      "value" : [ "PalliativeIntervention" ]
+                                                   } ]
+                                                }, {
+                                                   "value" : [ "." ]
+                                                }, {
+                                                   "r" : "70",
+                                                   "s" : [ {
+                                                      "value" : [ "performed" ]
+                                                   } ]
+                                                } ]
+                                             }, {
+                                                "value" : [ " )" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "r" : "73",
+                                          "value" : [ " ","overlaps"," " ]
+                                       }, {
+                                          "r" : "72",
+                                          "s" : [ {
+                                             "value" : [ "\"Measurement Period\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n            )" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "expression" : {
+               "localId" : "77",
+               "locator" : "22:3-36:13",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Or",
+               "operand" : [ {
+                  "localId" : "59",
+                  "locator" : "22:3-32:13",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "43",
+                     "locator" : "22:3-28:11",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "42",
+                        "locator" : "22:10-28:11",
+                        "type" : "Query",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Observation",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "source" : [ {
+                           "localId" : "16",
+                           "locator" : "22:12-22:141",
+                           "alias" : "PalliativeAssessment",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Observation",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "expression" : {
+                              "localId" : "15",
+                              "locator" : "22:12-22:120",
+                              "dataType" : "{http://hl7.org/fhir}Observation",
+                              "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+                              "codeProperty" : "code",
+                              "codeComparator" : "~",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Observation",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "type" : "ToList",
+                                 "operand" : {
+                                    "locator" : "22:26-22:119",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                    "name" : "Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)",
+                                    "type" : "CodeRef"
+                                 }
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "localId" : "41",
+                           "locator" : "23:15-27:112",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "34",
+                              "locator" : "23:21-26:17",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "And",
+                              "operand" : [ {
+                                 "localId" : "23",
+                                 "locator" : "23:21-23:86",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "In",
+                                 "operand" : [ {
+                                    "name" : "ToString",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "localId" : "18",
+                                       "locator" : "23:21-23:47",
+                                       "resultTypeName" : "{http://hl7.org/fhir}ObservationStatus",
+                                       "path" : "status",
+                                       "scope" : "PalliativeAssessment",
+                                       "type" : "Property"
+                                    } ]
+                                 }, {
+                                    "localId" : "22",
+                                    "locator" : "23:52-23:86",
+                                    "type" : "List",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "element" : [ {
+                                       "localId" : "19",
+                                       "locator" : "23:54-23:60",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "final",
+                                       "type" : "Literal"
+                                    }, {
+                                       "localId" : "20",
+                                       "locator" : "23:63-23:71",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "amended",
+                                       "type" : "Literal"
+                                    }, {
+                                       "localId" : "21",
+                                       "locator" : "23:74-23:84",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                       "value" : "corrected",
+                                       "type" : "Literal"
+                                    } ]
+                                 } ]
+                              }, {
+                                 "localId" : "33",
+                                 "locator" : "24:21-26:17",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "Exists",
+                                 "operand" : {
+                                    "localId" : "32",
+                                    "locator" : "24:28-26:17",
+                                    "type" : "Query",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "source" : [ {
+                                       "localId" : "25",
+                                       "locator" : "24:30-24:87",
+                                       "alias" : "PalliativeAssessmentCategory",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       },
+                                       "expression" : {
+                                          "localId" : "24",
+                                          "locator" : "24:30-24:58",
+                                          "path" : "category",
+                                          "scope" : "PalliativeAssessment",
+                                          "type" : "Property",
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          }
+                                       }
+                                    } ],
+                                    "relationship" : [ ],
+                                    "where" : {
+                                       "localId" : "31",
+                                       "locator" : "25:21-25:98",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "In",
+                                       "operand" : [ {
+                                          "localId" : "26",
+                                          "locator" : "25:27-25:34",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                          "name" : "survey",
+                                          "type" : "CodeRef"
+                                       }, {
+                                          "localId" : "30",
+                                          "locator" : "25:39-25:98",
+                                          "path" : "codes",
+                                          "type" : "Property",
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ListTypeSpecifier",
+                                             "elementType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          },
+                                          "source" : {
+                                             "localId" : "29",
+                                             "locator" : "25:39-25:92",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                                             "name" : "ToConcept",
+                                             "libraryName" : "FHIRHelpers",
+                                             "type" : "FunctionRef",
+                                             "operand" : [ {
+                                                "localId" : "28",
+                                                "locator" : "25:63-25:90",
+                                                "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                                                "name" : "PalliativeAssessmentCategory",
+                                                "type" : "AliasRef"
+                                             } ]
+                                          }
+                                       } ]
+                                    }
+                                 }
+                              } ]
+                           }, {
+                              "localId" : "40",
+                              "locator" : "27:21-27:112",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Overlaps",
+                              "operand" : [ {
+                                 "localId" : "38",
+                                 "locator" : "27:21-27:82",
+                                 "name" : "Normalize Interval",
+                                 "libraryName" : "Global",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "localId" : "37",
+                                    "locator" : "27:51-27:80",
+                                    "path" : "effective",
+                                    "scope" : "PalliativeAssessment",
+                                    "type" : "Property",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ChoiceTypeSpecifier",
+                                       "choice" : [ {
+                                          "name" : "{http://hl7.org/fhir}dateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}Period",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}Timing",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}instant",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ]
+                                    }
+                                 } ]
+                              }, {
+                                 "localId" : "39",
+                                 "locator" : "27:93-27:112",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }
+                  }, {
+                     "localId" : "58",
+                     "locator" : "29:16-32:13",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Exists",
+                     "operand" : {
+                        "localId" : "57",
+                        "locator" : "29:23-32:13",
+                        "type" : "Query",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "source" : [ {
+                           "localId" : "45",
+                           "locator" : "29:25-29:84",
+                           "alias" : "PalliativeEncounter",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Encounter",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "expression" : {
+                              "localId" : "44",
+                              "locator" : "29:25-29:64",
+                              "dataType" : "{http://hl7.org/fhir}Encounter",
+                              "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
+                              "codeProperty" : "type",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "locator" : "29:37-29:63",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Palliative Care Encounter",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef"
+                              }
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "localId" : "56",
+                           "locator" : "30:17-31:110",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "And",
+                           "operand" : [ {
+                              "localId" : "49",
+                              "locator" : "30:23-30:61",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "name" : "ToString",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "localId" : "47",
+                                    "locator" : "30:23-30:48",
+                                    "resultTypeName" : "{http://hl7.org/fhir}EncounterStatus",
+                                    "path" : "status",
+                                    "scope" : "PalliativeEncounter",
+                                    "type" : "Property"
+                                 } ]
+                              }, {
+                                 "localId" : "48",
+                                 "locator" : "30:52-30:61",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "finished",
+                                 "type" : "Literal"
+                              } ]
+                           }, {
+                              "localId" : "55",
+                              "locator" : "31:23-31:110",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Overlaps",
+                              "operand" : [ {
+                                 "localId" : "53",
+                                 "locator" : "31:23-31:80",
+                                 "name" : "Normalize Interval",
+                                 "libraryName" : "Global",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "type" : "As",
+                                    "operand" : {
+                                       "localId" : "52",
+                                       "locator" : "31:53-31:78",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Period",
+                                       "path" : "period",
+                                       "scope" : "PalliativeEncounter",
+                                       "type" : "Property"
+                                    },
+                                    "asTypeSpecifier" : {
+                                       "type" : "ChoiceTypeSpecifier",
+                                       "choice" : [ {
+                                          "name" : "{http://hl7.org/fhir}dateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}Period",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}Timing",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}instant",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}string",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}Age",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}Range",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ]
+                                    }
+                                 } ]
+                              }, {
+                                 "localId" : "54",
+                                 "locator" : "31:91-31:110",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              } ]
+                           } ]
+                        }
+                     }
+                  } ]
+               }, {
+                  "localId" : "76",
+                  "locator" : "33:16-36:13",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Exists",
+                  "operand" : {
+                     "localId" : "75",
+                     "locator" : "33:23-36:13",
+                     "type" : "Query",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "source" : [ {
+                        "localId" : "61",
+                        "locator" : "33:25-33:90",
+                        "alias" : "PalliativeIntervention",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "expression" : {
+                           "localId" : "60",
+                           "locator" : "33:25-33:67",
+                           "dataType" : "{http://hl7.org/fhir}Procedure",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                           "codeProperty" : "code",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "codes" : {
+                              "locator" : "33:37-33:66",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Palliative Care Intervention",
+                              "preserve" : true,
+                              "type" : "ValueSetRef"
+                           }
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "localId" : "74",
+                        "locator" : "34:17-35:116",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "operand" : [ {
+                           "localId" : "67",
+                           "locator" : "34:23-34:85",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "In",
+                           "operand" : [ {
+                              "name" : "ToString",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "localId" : "63",
+                                 "locator" : "34:23-34:51",
+                                 "resultTypeName" : "{http://hl7.org/fhir}ProcedureStatus",
+                                 "path" : "status",
+                                 "scope" : "PalliativeIntervention",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "localId" : "66",
+                              "locator" : "34:56-34:85",
+                              "type" : "List",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "element" : [ {
+                                 "localId" : "64",
+                                 "locator" : "34:58-34:68",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "completed",
+                                 "type" : "Literal"
+                              }, {
+                                 "localId" : "65",
+                                 "locator" : "34:71-34:83",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "in-progress",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        }, {
+                           "localId" : "73",
+                           "locator" : "35:23-35:116",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Overlaps",
+                           "operand" : [ {
+                              "localId" : "71",
+                              "locator" : "35:23-35:86",
+                              "name" : "Normalize Interval",
+                              "libraryName" : "Global",
+                              "type" : "FunctionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "operand" : [ {
+                                 "localId" : "70",
+                                 "locator" : "35:53-35:84",
+                                 "path" : "performed",
+                                 "scope" : "PalliativeIntervention",
+                                 "type" : "Property",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "choice" : [ {
+                                       "name" : "{http://hl7.org/fhir}dateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Period",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}string",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Age",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Range",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ]
+                                 }
+                              } ]
+                           }, {
+                              "localId" : "72",
+                              "locator" : "35:97-35:116",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           } ]
+                        } ]
+                     }
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Cql.Runtime": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:64325;http://localhost:64326"
+    }
+  }
+}

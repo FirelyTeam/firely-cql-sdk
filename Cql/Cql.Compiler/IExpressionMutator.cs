@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// Provides a method for altering an expression, e.g., translating a Conditional to an if/else block, or adding a call to a logging method.

@@ -1,9 +1,9 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 
 
-namespace Ncqa.Cql.Runtime.Conversion
+namespace Hl7.Cql.Conversion
 {
     /// <summary>
     /// Provides a base implementation of <see cref="IUnitConverter"/>.

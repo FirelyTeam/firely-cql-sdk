@@ -1,10 +1,6 @@
-﻿using Ncqa.Cql.Runtime;
-using Ncqa.Cql.ValueSets;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Hl7.Cql.ValueSets;
 
-namespace Ncqa.Cql.ValueSetLoaders
+namespace Hl7.Cql.ValueSetLoaders
 {
     public interface IValueSetLoader
     {

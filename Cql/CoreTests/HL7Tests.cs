@@ -1,16 +1,12 @@
 ﻿using Cql.Firely;
 using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.MeasureCompiler;
-using Ncqa.Cql.Model;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.FhirR4;
-using Ncqa.Elm;
-using Ncqa.Fhir.R4.Model;
-using Ncqa.Graph;
-using System;
-using System.Collections.Generic;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Model;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.FhirR4;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Graph;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -83,10 +79,10 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            RuntimeContext = FhirRuntimeContext.Create(delegates: allDelegates);
+            RuntimeContext = FhirCqlContext.Create(delegates: allDelegates);
         }
 
-        public static RuntimeContext RuntimeContext;
+        public static CqlContext RuntimeContext;
 
 
         private static void MergeAllCqlInto(DirectoryInfo libsDirectory, DirectedGraph buildOrder)

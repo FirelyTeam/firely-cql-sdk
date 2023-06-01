@@ -1,15 +1,13 @@
-﻿using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
-using elm = Ncqa.Elm.Expressions;
+using elm = Hl7.Cql.Elm.Expressions;
 
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// The TypeManager class maps ELM types to .NET types usually through its <see cref="Resolver"/>, and

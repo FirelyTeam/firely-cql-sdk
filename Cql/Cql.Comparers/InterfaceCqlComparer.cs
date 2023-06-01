@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Cql.Comparers
+﻿namespace Hl7.Cql.Comparers
 {
     public class InterfaceCqlComparer<T> : ICqlComparer<T>, ICqlComparer
         where T : class, ICqlComparable<T>, IEquivalentable<T>

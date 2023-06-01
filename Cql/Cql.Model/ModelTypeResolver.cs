@@ -1,16 +1,14 @@
-﻿using Ncqa.Cql.Runtime;
+﻿using Hl7.Cql.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
-using Ncqa.Cql.Model;
 
-namespace Ncqa.Cql.Runtime.Model
+namespace Hl7.Cql.Model
 {
     /// <summary>
     /// This class implements <see cref="GetPrimaryCodePath"/> through the provided <see cref="ModelInfo"/>
     /// </summary>
-    public class ModelTypeResolver : BaseTypeResolver
+    public abstract class ModelTypeResolver : BaseTypeResolver
     {
         protected ModelTypeResolver(ModelInfo model)
         {

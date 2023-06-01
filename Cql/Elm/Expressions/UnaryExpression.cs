@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Elm.Expressions
+﻿namespace Hl7.Cql.Elm.Expressions
 {
     public abstract class UnaryExpression: Expression
     {
@@ -48,8 +44,8 @@ namespace Ncqa.Elm.Expressions
     public class StartExpression : UnaryExpression { }
     public class SingletonFromExpression : UnaryExpression { }
     public class SuccessorExpression : UnaryExpression { }
+    public class TimezoneOffsetFromExpression: UnaryExpression { }
     public class ToBooleanExpression : UnaryExpression { }
-
     public class ToConceptExpression : UnaryExpression { }
     public class ToDecimalExpression : UnaryExpression { }
     public class ToDateExpression : UnaryExpression { }

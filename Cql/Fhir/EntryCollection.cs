@@ -2,9 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Ncqa.Fhir
+namespace Hl7.Cql.Poco.Fhir
 {
 
     public abstract class EntryCollection<TEntry> : IEntryCollection<TEntry>

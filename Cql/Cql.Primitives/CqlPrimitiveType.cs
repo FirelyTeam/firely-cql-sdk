@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ncqa.Cql.Runtime.Primitives
+﻿namespace Hl7.Cql.Primitives
 {
     /// <summary>
     /// Enumerates the System types

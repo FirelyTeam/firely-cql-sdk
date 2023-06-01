@@ -1,17 +1,14 @@
-﻿using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Model;
-using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
-using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Comparers;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Cql.Runtime.FhirR4
+namespace Hl7.Cql.Runtime.FhirR4
 {
     public abstract class FhirDataRetriever : IDataRetriever
     {

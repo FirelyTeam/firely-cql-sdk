@@ -3,8 +3,8 @@
 	<PropertyGroup>
 		<TargetFramework>netstandard2.1</TargetFramework>
 		<Nullable>enable</Nullable>
-		<AssemblyName>Ncqa.Cql.Runtime.Logging</AssemblyName>
-		<RootNamespace>Ncqa.Cql.Runtime.Logging</RootNamespace>
+		<AssemblyName>Hl7.Cql.Runtime.Logging</AssemblyName>
+		<RootNamespace>Hl7.Cql.Runtime.Logging</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

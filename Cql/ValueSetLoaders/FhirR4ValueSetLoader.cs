@@ -1,11 +1,11 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
-using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Cql.ValueSetLoaders
+namespace Hl7.Cql.ValueSetLoaders
 {
     public class FhirR4ValueSetLoader : IValueSetLoader
     {

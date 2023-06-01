@@ -1,9 +1,7 @@
-﻿using Ncqa.Iso8601;
+﻿using Hl7.Cql.Iso8601;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Fhir.R4.Model
+namespace Hl7.Cql.Poco.Fhir.R4.Model
 {
     // Adds implicit operators to assign the value property of commonly used Element derivations.
 

@@ -1,14 +1,11 @@
-using Ncqa.Fhir;
-using Ncqa.Fhir.Serialization;
-using Ncqa.Iso8601;
+using Hl7.Cql.Poco.Fhir;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Fhir.R4.Model
+namespace Hl7.Cql.Poco.Fhir.R4.Model
 {
-	[FhirUri("http://hl7.org/fhir/StructureDefinition/AllergyIntolerance")]
+    [FhirUri("http://hl7.org/fhir/StructureDefinition/AllergyIntolerance")]
 	public partial class AllergyIntolerance : DomainResource
 	{
 

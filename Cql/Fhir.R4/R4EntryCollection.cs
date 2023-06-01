@@ -1,12 +1,11 @@
-﻿using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Poco.Fhir.R4.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Fhir.R4
+namespace Hl7.Cql.Poco.Fhir.R4
 {
     public class R4EntryCollection : EntryCollection<Bundle.EntryComponent>
     {

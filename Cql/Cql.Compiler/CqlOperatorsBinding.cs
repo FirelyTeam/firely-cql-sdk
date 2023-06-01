@@ -1,17 +1,15 @@
-﻿using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
+﻿using Hl7.Cql.Operators;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using Primitives = Ncqa.Cql.Runtime.Primitives;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// Implements <see cref="OperatorBinding"/> by calling methods in <see cref="CqlOperators"/>.
@@ -40,9 +38,9 @@ namespace Ncqa.Cql.MeasureCompiler
             TypeResolver = typeResolver;
         }
 
-        protected virtual PropertyInfo OperatorsProperty => typeof(RuntimeContext).GetProperty(nameof(RuntimeContext.Operators));
+        protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators));
 
-        protected virtual PropertyInfo DataRetrieverProperty => typeof(RuntimeContext).GetProperty(nameof(RuntimeContext.DataRetriever));
+        protected virtual PropertyInfo DataRetrieverProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.DataRetriever));
 
 
         protected virtual PropertyInfo TypeConverterProperty => typeof(ICqlOperators).GetProperty(nameof(ICqlOperators.TypeConverter));
@@ -53,13 +51,13 @@ namespace Ncqa.Cql.MeasureCompiler
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
         /// </summary>
         /// <param name="operator">The operator to bind.</param>
-        /// <param name="runtimeContext">The <see cref="Expression"/> that provides access to the <see cref="RuntimeContext"/>.</param>
+        /// <param name="runtimeContext">The <see cref="Expression"/> that provides access to the <see cref="CqlContext"/>.</param>
         /// <param name="parameters">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
         /// <returns>An expression that implements <paramref name="operator"/>.  In most cases, this will be a <see cref="MethodCallExpression"/>.</returns>
         public override Expression Bind(CqlOperator @operator, Expression runtimeContext, params Expression[] parameters)
         {
-            if (!typeof(RuntimeContext).IsAssignableFrom(runtimeContext.Type))
-                throw new ArgumentException($"The second parameter to {nameof(Bind)} must be a {nameof(RuntimeContext)} expression", nameof(runtimeContext));
+            if (!typeof(CqlContext).IsAssignableFrom(runtimeContext.Type))
+                throw new ArgumentException($"The second parameter to {nameof(Bind)} must be a {nameof(CqlContext)} expression", nameof(runtimeContext));
             var operators = Expression.Property(runtimeContext, OperatorsProperty);
             switch (@operator)
             {

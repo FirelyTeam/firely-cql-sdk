@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Fhir.Serialization
+namespace Hl7.Cql.Poco.Fhir.Serialization
 {
     public class ResourceConverter<TResource> : JsonConverter<TResource>
         where TResource : class

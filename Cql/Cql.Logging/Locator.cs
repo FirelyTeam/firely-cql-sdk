@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ncqa.Cql.Runtime.Logging
+namespace Hl7.Cql.Logging
 {
     public class Locator
     {
@@ -46,8 +46,8 @@ namespace Ncqa.Cql.Runtime.Logging
             // (10:10, 20:20) compared to (15:15, 16:16)
             // (15:15, 16:16) compared to (10:10, 20:20)
             
-            if(this.StartLine == other.StartLine && this.StartColumn == other.StartColumn &&
-                this.EndLine == other.EndLine && this.EndColumn == other.EndColumn)
+            if(StartLine == other.StartLine && StartColumn == other.StartColumn &&
+                EndLine == other.EndLine && EndColumn == other.EndColumn)
                 return RangeComparisonResult.ExactlyEqual;
 
             bool thisStartBefore = false;
@@ -55,31 +55,31 @@ namespace Ncqa.Cql.Runtime.Logging
             bool thisEndBefore = false;
             bool thisEndEqual = false;
 
-            if(this.StartLine < other.StartLine)
+            if(StartLine < other.StartLine)
             {
                 thisStartBefore = true;
 
-            }else if(this.StartLine == other.StartLine)
+            }else if(StartLine == other.StartLine)
             {
-                if (this.StartColumn < other.StartColumn)
+                if (StartColumn < other.StartColumn)
                 {
                     thisStartBefore = true;
                 }
-                else if (this.StartColumn == other.StartColumn)
+                else if (StartColumn == other.StartColumn)
                     thisStartEqual = true;
             }
 
-            if (this.EndLine < other.EndLine)
+            if (EndLine < other.EndLine)
             {
                 thisEndBefore = true;
 
-            }else if(this.EndLine == other.EndLine) {
+            }else if(EndLine == other.EndLine) {
 
-                if (this.EndColumn < other.EndColumn)
+                if (EndColumn < other.EndColumn)
                 {
                     thisEndBefore = true;
                 }
-                else if (this.EndColumn == other.EndColumn)
+                else if (EndColumn == other.EndColumn)
                     thisEndEqual = true;
             }
 

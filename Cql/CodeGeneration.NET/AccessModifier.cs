@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Cql.CodeGeneration.NET
+﻿namespace Hl7.Cql.CodeGeneration.NET
 {
- 
+
     /// <summary>
     /// Enumerates .NET access modifiers.
     /// </summary>

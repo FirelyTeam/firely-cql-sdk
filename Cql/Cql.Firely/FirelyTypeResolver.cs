@@ -1,6 +1,6 @@
-﻿using Hl7.Fhir.Introspection;
+using Hl7.Cql.Runtime;
+using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
-using Ncqa.Cql.Runtime;
 using System.Reflection;
 
 namespace Cql.Firely
@@ -29,6 +29,8 @@ namespace Cql.Firely
             addProfiledTypesAsQuantity();
         }
 
+        public override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
+        public override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
 
         /// <summary>
         /// Returns the concrete property for the given property name.

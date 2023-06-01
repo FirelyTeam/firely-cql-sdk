@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.Json;
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public class DirectedGraph
     {

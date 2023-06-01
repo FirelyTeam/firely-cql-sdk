@@ -8,12 +8,12 @@ using System.Text;
 using AgileObjects.ReadableExpressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
-using Ncqa.Cql.CodeGeneration.NET.Visitors;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Graph;
+using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Graph;
 
-namespace Ncqa.Cql.CodeGeneration.NET
+namespace Hl7.Cql.CodeGeneration.NET
 {
     /// <summary>
     /// Writes <see cref="LambdaExpression"/>s as members of a .NET class.
@@ -41,7 +41,7 @@ namespace Ncqa.Cql.CodeGeneration.NET
         public bool PartialClass { get; set; }
 
         /// <summary>
-        /// The <see cref="AccessModifier"/> to use for the <see cref="RuntimeContext"/> class member; its default value is <see cref="AccessModifier.Internal"/>.
+        /// The <see cref="AccessModifier"/> to use for the <see cref="CqlContext"/> class member; its default value is <see cref="AccessModifier.Internal"/>.
         /// </summary>
         public AccessModifier ContextAccessModifier { get; set; } = AccessModifier.Internal;
         /// <summary>
@@ -55,11 +55,10 @@ namespace Ncqa.Cql.CodeGeneration.NET
         public IList<string> Usings { get; } = new List<string>
         {
             nameof(System),
-            $"{nameof(System)}.{nameof(System.Linq)}",
-            $"{nameof(System)}.{nameof(System.Collections)}.{nameof(System.Collections.Generic)}",
-            $"{nameof(Ncqa)}.{nameof(Ncqa.Cql)}.{nameof(Ncqa.Cql.Runtime)}",
-            $"{nameof(Ncqa)}.{nameof(Ncqa.Cql)}.{nameof(Ncqa.Cql.Runtime)}.{nameof(Ncqa.Cql.Runtime.Primitives)}",
-
+            typeof(Enumerable).Namespace, // System.Linq
+            typeof(ICollection<>).Namespace, // System.Collections.Generic
+            typeof(CqlContext).Namespace,
+            typeof(CqlPrimitiveType).Namespace,
         };
         /// <summary>
         /// Gets the aliased <see langword="using"/> statements to be included in the generated code.
@@ -204,7 +203,7 @@ namespace Ncqa.Cql.CodeGeneration.NET
                         {
                             writer.WriteLine();
 
-                            writer.WriteLine(indentLevel, $"{AccessModifierString(ContextAccessModifier)} RuntimeContext context;");
+                            writer.WriteLine(indentLevel, $"{AccessModifierString(ContextAccessModifier)} CqlContext context;");
                             writer.WriteLine();
                             writer.WriteLine(indentLevel, "#region Cached values");
                             writer.WriteLine();
@@ -224,7 +223,7 @@ namespace Ncqa.Cql.CodeGeneration.NET
                             }
                             writer.WriteLine();
                             writer.WriteLine(indentLevel, "#endregion");
-                            writer.WriteLine(indentLevel, $"public {className}(RuntimeContext context)");
+                            writer.WriteLine(indentLevel, $"public {className}(CqlContext context)");
                             writer.WriteLine(indentLevel, "{");
                             {
                                 indentLevel += 1;
@@ -268,7 +267,8 @@ namespace Ncqa.Cql.CodeGeneration.NET
                             {
                                 foreach (var overload in kvp.Value)
                                 {
-                                    WriteMemoizedInstanceMethod(className!, writer, indentLevel, invocationsTransformer, kvp.Key, overload);
+                                    definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
+                                    WriteMemoizedInstanceMethod(className!, writer, indentLevel, invocationsTransformer, kvp.Key, overload, tags);
                                     writer.WriteLine();
                                 }
                             }
@@ -296,7 +296,7 @@ namespace Ncqa.Cql.CodeGeneration.NET
         private bool IsDefinition((Type[], LambdaExpression) overload)
         {
             if (overload.Item2.Parameters.Count == 1
-                && overload.Item2.Parameters[0].Type == typeof(RuntimeContext))
+                && overload.Item2.Parameters[0].Type == typeof(CqlContext))
                 return true;
             return false;
         }
@@ -365,7 +365,8 @@ namespace Ncqa.Cql.CodeGeneration.NET
         private void WriteMemoizedInstanceMethod(string className, TextWriter writer, int indentLevel,
             InvocationsToMethodCallsTransformer invocationsTransformer,
             string cqlName,
-            (Type[], LambdaExpression) overload)
+            (Type[], LambdaExpression) overload,
+            ILookup<string, string>? tags)
         {
             var methodName = VariableNameGenerator.NormalizeIdentifier(cqlName);
             var returnType = PrettyTypeName(overload.Item2.ReturnType);
@@ -401,6 +402,7 @@ namespace Ncqa.Cql.CodeGeneration.NET
                 }
                 writer.WriteLine();
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
+                WriteTags(writer, indentLevel, tags);
                 if (overload.Item2.ReturnType == typeof(CqlValueSet))
                 {
                     if (overload.Item2.Body is NewExpression @new)
@@ -423,6 +425,7 @@ namespace Ncqa.Cql.CodeGeneration.NET
                     .Skip(1) // skip runtimeContext
                     .Select(p => $"{PrettyTypeName(p.Type)} {PrefixKeywords(p.Name)}"));
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
+                WriteTags(writer, indentLevel, tags);
                 writer.WriteLine(indentLevel, $"public {returnType} {methodName}({parameterString})");
                 if (visitedBody is BlockExpression)
                     WriteExpression(className, methodName!, writer, indentLevel, visitedBody, true);
@@ -437,9 +440,23 @@ namespace Ncqa.Cql.CodeGeneration.NET
 
         }
 
+        private static void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
+        {
+            if (tags != null)
+            {
+                foreach (var group in tags)
+                {
+                    foreach (var tag in group)
+                    {
+                        writer.WriteLine(indentLevel, $"[CqlTag(\"{group.Key}\", \"{tag}\")]");
+                    }
+                }
+            }
+        }
+
         private void WriteUsings(TextWriter writer)
         {
-            foreach (var @using in Usings)
+            foreach (var @using in Usings.Distinct())
             {
                 writer.WriteLine($"using {@using};");
             }
@@ -640,16 +657,16 @@ namespace Ncqa.Cql.CodeGeneration.NET
                 case ConstantExpression constant:
                     if (constant.Type == typeof(decimal))
                     {
-                        var code = $"{constant.Value}m";
+                        var code = $"{leadingIndentString}{constant.Value}m";
                         return code;
                     }
                     else if (constant.Type == typeof(decimal?))
                     {
                         if (constant.Value == null)
-                            return "null";
+                            return $"{leadingIndentString}null";
                         else
                         {
-                            var code = $"{constant.Value}m";
+                            var code = $"{leadingIndentString}{constant.Value}m";
                             return code;
                         }
                     }
@@ -658,9 +675,18 @@ namespace Ncqa.Cql.CodeGeneration.NET
                         if (constant.Value != null && constant.Value is PropertyInfo propertyInfo)
                         {
                             var declaringType = PrettyTypeName(propertyInfo.DeclaringType);
-                            var code = $"typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
+                            var code = $"{leadingIndentString}typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
                             return code;
                         }
+                    }
+                    else if (constant.Type == typeof(string))
+                    {
+                        if (constant.Value == null)
+                            return $"{leadingIndentString}null";
+                        else if (constant.Value is string str)
+                            return $"{leadingIndentString}\"{SymbolDisplay.FormatLiteral(str, false)}\"";
+                        else
+                            throw new InvalidOperationException("Constant claims to be a string, but its Value property is not one.");
                     }
                     break;
                 case NewExpression @new:

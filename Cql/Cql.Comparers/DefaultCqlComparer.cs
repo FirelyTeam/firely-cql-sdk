@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ncqa.Cql.Comparers
+namespace Hl7.Cql.Comparers
 {
     /// <summary>
     /// Implements comparison through <see cref="Comparer{T}.Default"/>.

@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Reflection.Emit;
-using Ncqa.Cql.Runtime;
+using Hl7.Cql.Runtime;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Ncqa.Cql.CodeGeneration.NET.Visitors
+namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
 
     internal class InvocationsToMethodCallsTransformer : TransformerBase

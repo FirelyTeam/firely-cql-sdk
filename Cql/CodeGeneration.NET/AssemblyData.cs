@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Ncqa.Cql.CodeGeneration.NET
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// Stores information about a dynamically generated assembly.
@@ -13,19 +13,19 @@ namespace Ncqa.Cql.CodeGeneration.NET
         /// </summary>
         /// <param name="location">The location on disk which this assembly's bytes were written.</param>
         /// <param name="sourceCode">The collection of source code files that contributed to this assembly.</param>
-        public AssemblyData(FileInfo location, ICollection<string> sourceCode)
+        public AssemblyData(byte[] binary, IDictionary<string,string> sourceCode)
         {
-            Location = location;
+            Binary = binary;
             SourceCode = sourceCode;
         }
         /// <summary>
-        /// Gets the location on disk which this assembly's bytes were written.
+        /// Gets the binary data for the <see cref="Assembly"/>.
         /// </summary>
-        public FileInfo Location { get; }
+        public byte[] Binary { get; }
 
         /// <summary>
         /// Gets the collection of source code files that contributed to this assembly.
         /// </summary>
-        public ICollection<string> SourceCode { get; }
+        public IDictionary<string, string> SourceCode { get; }
     }
 }

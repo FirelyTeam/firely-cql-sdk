@@ -1,0 +1,1143 @@
+{
+  "resourceType": "Bundle",
+  "id": "95085",
+  "entry": [
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Patient/95085",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "95085",
+        "extension": [
+          {
+            "extension": [
+              {
+                "url": "detailed",
+                "valueCoding": {
+                  "system": "urn:oid:2.16.840.1.113883.6.238",
+                  "code": "1729-3"
+                }
+              },
+              {
+                "url": "detailed",
+                "valueCoding": {
+                  "system": "urn:oid:2.16.840.1.113883.6.238",
+                  "code": "2062-8"
+                }
+              },
+              {
+                "url": "detailed",
+                "valueCoding": {
+                  "system": "urn:oid:2.16.840.1.113883.6.238",
+                  "code": "2031-3"
+                }
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race"
+          },
+          {
+            "extension": [
+              {
+                "url": "ombCategory",
+                "valueCoding": {
+                  "system": "urn:oid:2.16.840.1.113883.6.238",
+                  "code": "2186-5"
+                }
+              }
+            ],
+            "url": "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity"
+          }
+        ],
+        "identifier": [
+          {
+            "use": "official",
+            "system": "urn:oid:2.16.840.1.113883.3.464.1005.1",
+            "value": "95085"
+          },
+          {
+            "system": "source-line-number",
+            "value": "77"
+          },
+          {
+            "system": "source-record",
+            "value": "member-gm"
+          }
+        ],
+        "name": [
+          {
+            "family": "PLastName",
+            "given": [
+              "PFirstName",
+              "P."
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "9999999999"
+          }
+        ],
+        "gender": "female",
+        "birthDate": "1957-01-08",
+        "address": [
+          {
+            "line": [
+              "Address1",
+              "Address2"
+            ],
+            "city": "City",
+            "state": "AB",
+            "postalCode": "99999"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Practitioner/UNK001",
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "UNK001",
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "302"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/PractitionerRole/visit-practitioner-role-302",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "visit-practitioner-role-302",
+        "practitioner": {
+          "reference": "UNK001"
+        },
+        "organization": {
+          "reference": "visit-org-302"
+        },
+        "location": [
+          {
+            "reference": "visit-location-302"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/ExplanationOfBenefit/visit-eob-302",
+      "resource": {
+        "resourceType": "ExplanationOfBenefit",
+        "id": "visit-eob-302",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "administrative"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "302"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "institutional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "95085"
+        },
+        "provider": {
+          "reference": "visit-org-302"
+        },
+        "facility": {
+          "reference": "visit-location-302"
+        },
+        "careTeam": [
+          {
+            "sequence": 1,
+            "provider": {
+              "reference": "UNK001"
+            }
+          }
+        ],
+        "supportingInfo": [
+          {
+            "category": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                  "code": "typeofbill"
+                }
+              ]
+            }
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "L89.619"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 2,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S42.333A"
+                }
+              ]
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "diagnosisSequence": [
+              1,
+              2
+            ],
+            "servicedDate": "2023-08-01",
+            "encounter": [
+              {
+                "reference": "visit-encounter-302"
+              }
+            ],
+            "adjudication": [
+              {
+                "category": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/adjudication",
+                      "code": "benefit"
+                    }
+                  ]
+                },
+                "amount": {
+                  "value": 0.02,
+                  "currency": "USD"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Claim/visit-claim-302",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "visit-claim-302",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "administrative"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "302"
+          }
+        ],
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "institutional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "vision"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "95085"
+        },
+        "careTeam": [
+          {
+            "sequence": 1,
+            "provider": {
+              "reference": "UNK001"
+            }
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "L89.619"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 2,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S42.333A"
+                }
+              ]
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "diagnosisSequence": [
+              1,
+              2
+            ],
+            "servicedDate": "2023-08-01",
+            "encounter": [
+              {
+                "reference": "visit-encounter-302"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/ClaimResponse/visit-claim-302-response",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "visit-claim-302-response",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "administrative"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "302"
+          }
+        ],
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "pharmacy"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "institutional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "vision"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "95085"
+        },
+        "request": {
+          "reference": "visit-claim-302"
+        },
+        "outcome": "complete",
+        "item": [
+          {
+            "itemSequence": 1,
+            "adjudication": [
+              {
+                "category": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/adjudication",
+                      "code": "benefit"
+                    }
+                  ]
+                },
+                "amount": {
+                  "value": 0.02,
+                  "currency": "USD"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Organization/visit-org-302",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "visit-org-302"
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/PractitionerRole/visit-practitioner-role-303",
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "visit-practitioner-role-303",
+        "practitioner": {
+          "reference": "UNK001"
+        },
+        "organization": {
+          "reference": "visit-org-303"
+        },
+        "location": [
+          {
+            "reference": "visit-location-303"
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/ExplanationOfBenefit/visit-eob-303",
+      "resource": {
+        "resourceType": "ExplanationOfBenefit",
+        "id": "visit-eob-303",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "administrative"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "303"
+          }
+        ],
+        "status": "active",
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "institutional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "95085"
+        },
+        "provider": {
+          "reference": "visit-org-303"
+        },
+        "facility": {
+          "reference": "visit-location-303"
+        },
+        "careTeam": [
+          {
+            "sequence": 1,
+            "provider": {
+              "reference": "UNK001"
+            }
+          }
+        ],
+        "supportingInfo": [
+          {
+            "category": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/us/carin-bb/CodeSystem/C4BBSupportingInfoType",
+                  "code": "typeofbill"
+                }
+              ]
+            }
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S43.085S"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 2,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S43.395D"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 3,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "Z90.12"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 4,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S72.441K"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S52.101A"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 6,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S82.291P"
+                }
+              ]
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "diagnosisSequence": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "servicedDate": "2018-12-04",
+            "encounter": [
+              {
+                "reference": "visit-encounter-303"
+              }
+            ],
+            "adjudication": [
+              {
+                "category": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/adjudication",
+                      "code": "benefit"
+                    }
+                  ]
+                },
+                "amount": {
+                  "value": 0.02,
+                  "currency": "USD"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Claim/visit-claim-303",
+      "resource": {
+        "resourceType": "Claim",
+        "id": "visit-claim-303",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "administrative"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "303"
+          }
+        ],
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "institutional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "vision"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "95085"
+        },
+        "careTeam": [
+          {
+            "sequence": 1,
+            "provider": {
+              "reference": "UNK001"
+            }
+          }
+        ],
+        "diagnosis": [
+          {
+            "sequence": 1,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S43.085S"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 2,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S43.395D"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 3,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "Z90.12"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 4,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S72.441K"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 5,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S52.101A"
+                }
+              ]
+            }
+          },
+          {
+            "sequence": 6,
+            "diagnosisCodeableConcept": {
+              "coding": [
+                {
+                  "system": "http://hl7.org/fhir/sid/icd-10-cm",
+                  "code": "S82.291P"
+                }
+              ]
+            }
+          }
+        ],
+        "item": [
+          {
+            "sequence": 1,
+            "diagnosisSequence": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "servicedDate": "2018-12-04",
+            "encounter": [
+              {
+                "reference": "visit-encounter-303"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/ClaimResponse/visit-claim-303-response",
+      "resource": {
+        "resourceType": "ClaimResponse",
+        "id": "visit-claim-303-response",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "administrative"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "303"
+          }
+        ],
+        "type": {
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "pharmacy"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "institutional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "professional"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "oral"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+              "code": "vision"
+            }
+          ]
+        },
+        "patient": {
+          "reference": "95085"
+        },
+        "request": {
+          "reference": "visit-claim-303"
+        },
+        "outcome": "complete",
+        "item": [
+          {
+            "itemSequence": 1,
+            "adjudication": [
+              {
+                "category": {
+                  "coding": [
+                    {
+                      "system": "http://terminology.hl7.org/CodeSystem/adjudication",
+                      "code": "benefit"
+                    }
+                  ]
+                },
+                "amount": {
+                  "value": 0.02,
+                  "currency": "USD"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Organization/visit-org-303",
+      "resource": {
+        "resourceType": "Organization",
+        "id": "visit-org-303"
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Procedure/proc-procedure-26",
+      "resource": {
+        "resourceType": "Procedure",
+        "id": "proc-procedure-26",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "supplemental"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "26"
+          }
+        ],
+        "status": "completed",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct/731000124108",
+              "code": "723780005"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "95085"
+        },
+        "performedPeriod": {
+          "start": "2023-05-18T00:00:00.000-05:00",
+          "end": "2023-05-18T00:00:00.000-05:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Observation/proc-observation-26",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "proc-observation-26",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "supplemental"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "26"
+          }
+        ],
+        "status": "final",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct/731000124108",
+              "code": "723780005",
+              "display": "Digital tomosynthesis of bilateral breasts (procedure)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "95085"
+        },
+        "effectiveDateTime": "2023-05-18T00:00:00.000-05:00"
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Procedure/proc-procedure-27",
+      "resource": {
+        "resourceType": "Procedure",
+        "id": "proc-procedure-27",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "supplemental"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "27"
+          }
+        ],
+        "status": "preparation",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct/731000124108",
+              "code": "456903003"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "95085"
+        },
+        "performedPeriod": {
+          "start": "2027-12-14T00:00:00.000-05:00",
+          "end": "2027-12-14T00:00:00.000-05:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Observation/proc-observation-27",
+      "resource": {
+        "resourceType": "Observation",
+        "id": "proc-observation-27",
+        "meta": {
+          "tag": [
+            {
+              "system": "https://ncqa.org/fhir/CodeSystem/hedis-data-source",
+              "code": "supplemental"
+            }
+          ]
+        },
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "27"
+          }
+        ],
+        "status": "preliminary",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct/731000124108",
+              "code": "456903003",
+              "display": "Bilateral extended radical mastectomy (procedure)"
+            }
+          ]
+        },
+        "subject": {
+          "reference": "95085"
+        },
+        "effectiveDateTime": "2027-12-14T00:00:00.000-05:00"
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Coverage/member-en-coverage-204",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "member-en-coverage-204",
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "204"
+          }
+        ],
+        "type": {
+          "extension": [
+            {
+              "id": "originalPayer",
+              "valueString": "HMO"
+            }
+          ],
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MENTPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "SUBPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MCPOL"
+            },
+            {
+              "system": "https://ncqa.org/fhir/codesystem/hedis-coverage-type",
+              "code": "HMO"
+            }
+          ]
+        },
+        "subscriberId": "95085",
+        "period": {
+          "start": "1960-03-14T00:00:00.000-05:00",
+          "end": "1961-05-09T00:00:00.000-05:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Coverage/member-en-coverage-205",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "member-en-coverage-205",
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "205"
+          }
+        ],
+        "type": {
+          "extension": [
+            {
+              "id": "originalPayer",
+              "valueString": "MOS"
+            }
+          ],
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MENTPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "SUBPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MCPOL"
+            },
+            {
+              "system": "https://ncqa.org/fhir/codesystem/hedis-coverage-type",
+              "code": "MOS"
+            }
+          ]
+        },
+        "subscriberId": "95085",
+        "period": {
+          "start": "2021-08-10T00:00:00.000-05:00",
+          "end": "2023-03-12T00:00:00.000-05:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Coverage/member-en-coverage-206",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "member-en-coverage-206",
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "206"
+          }
+        ],
+        "type": {
+          "extension": [
+            {
+              "id": "originalPayer",
+              "valueString": "CEP"
+            }
+          ],
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MENTPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "SUBPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MCPOL"
+            },
+            {
+              "system": "https://ncqa.org/fhir/codesystem/hedis-coverage-type",
+              "code": "CEP"
+            }
+          ]
+        },
+        "subscriberId": "95085",
+        "period": {
+          "start": "2023-03-13T00:00:00.000-05:00",
+          "end": "2023-04-18T00:00:00.000-05:00"
+        }
+      }
+    },
+    {
+      "fullUrl": "http://ncqa.org/measures/Hedis/2023/bcs-e/example/13759/Coverage/member-en-coverage-207",
+      "resource": {
+        "resourceType": "Coverage",
+        "id": "member-en-coverage-207",
+        "extension": [
+          {
+            "id": "linenumber",
+            "valueString": "207"
+          }
+        ],
+        "type": {
+          "extension": [
+            {
+              "id": "originalPayer",
+              "valueString": "MMO"
+            }
+          ],
+          "coding": [
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "DRUGPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MENTPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "SUBPOL"
+            },
+            {
+              "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+              "code": "MCPOL"
+            },
+            {
+              "system": "https://ncqa.org/fhir/codesystem/hedis-coverage-type",
+              "code": "MMO"
+            }
+          ]
+        },
+        "subscriberId": "95085",
+        "period": {
+          "start": "2023-04-19T00:00:00.000-05:00",
+          "end": "2024-12-31T00:00:00.000-05:00"
+        }
+      }
+    }
+  ]
+}

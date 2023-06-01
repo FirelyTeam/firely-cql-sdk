@@ -1,12 +1,12 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Elm.Expressions;
-using Ncqa.Fhir;
+﻿using Hl7.Cql.Primitives;
+using Hl7.Cql.Elm.Expressions;
+using Hl7.Cql.Poco.Fhir;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Ncqa.Cql.Runtime.FhirR4
+namespace Hl7.Cql.Runtime.FhirR4
 {
     public class FhirCqlCrosswalk
     {

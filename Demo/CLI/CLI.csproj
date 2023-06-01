@@ -1,0 +1,121 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>Exe</OutputType>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="ValueSets\2.16.840.1.113762.1.4.1147.197.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1003.108.11.1047.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1003.118.11.1097.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1003.198.11.1036.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1003.198.11.1136.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1042.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1043.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1086.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1148.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1168.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1182.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1189.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1191.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1202.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1230.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1246.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1256.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1329.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1330.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1331.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1334.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1335.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1395.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1398.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1446.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1450.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1465.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1530.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1531.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1532.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1533.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1729.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1761.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1762.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1810.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1948.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1949.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1950.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.1951.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.2224.json" />
+	  <None Remove="ValueSets\2.16.840.1.113883.3.464.1004.2225.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113762.1.4.1147.197.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1003.108.11.1047.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1003.118.11.1097.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1003.198.11.1036.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1003.198.11.1136.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1042.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1043.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1086.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1148.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1168.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1182.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1189.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1191.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1202.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1230.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1246.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1256.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1329.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1330.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1331.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1334.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1335.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1395.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1398.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1446.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1450.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1465.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1530.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1531.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1532.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1533.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1729.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1761.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1762.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1810.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1948.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1949.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1950.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.1951.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.2224.json" />
+	  <EmbeddedResource Include="ValueSets\2.16.840.1.113883.3.464.1004.2225.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Cql\Cql.Runtime.FhirR4\Cql.Runtime.FhirR4.csproj" />
+		<ProjectReference Include="..\..\Cql\ValueSetLoaders\ValueSetLoaders.csproj" />
+		<ProjectReference Include="..\Measures\Measures.csproj" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" Version="6.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <None Update="Data\95085.json">
+	    <LogicalName>95085</LogicalName>
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+
+</Project>

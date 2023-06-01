@@ -1,0 +1,151 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33045",
+  "meta": {
+    "lastUpdated": "2019-06-09T16:58:15.088-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1948"
+    }
+  ],
+  "version": "Working",
+  "name": "Clinical_Unilateral_Mastectomy",
+  "title": "Clinical Unilateral Mastectomy",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:07-04:00",
+    "total": 21,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359740003",
+        "display": "Extended radical mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "287654001",
+        "display": "Extended simple mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359734005",
+        "display": "Halsted mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "66398006",
+        "display": "Mastectomy with excision of regional lymph nodes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "318190001",
+        "display": "Mastectomy with preservation of skin and nipple with synchronous implant"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "406505007",
+        "display": "Modified radical mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "395702000",
+        "display": "Patey total mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "447421006",
+        "display": "Prophylactic mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "384723003",
+        "display": "Radical mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "274957008",
+        "display": "Radical mastectomy including axillary lymph nodes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359728003",
+        "display": "Radical mastectomy including pectoral muscles and axillary lymph nodes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "172043006",
+        "display": "Simple mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "447135002",
+        "display": "Simple mastectomy with axillary lymph node sampling"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "446420001",
+        "display": "Total mastectomy and axillary clearance"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "446109005",
+        "display": "Total mastectomy and axillary dissection"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "428564008",
+        "display": "Skin sparing mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "70183006",
+        "display": "Subcutaneous mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "287653007",
+        "display": "Subcutaneous mastectomy and prosthetic implant"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "237367009",
+        "display": "Total mastectomy and division of pectoralis minor muscle"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "237368004",
+        "display": "Total mastectomy and excision of part of pectoral muscles and chest wall"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359731002",
+        "display": "Urban operation, extended radical mastectomy"
+      }
+    ]
+  }
+}

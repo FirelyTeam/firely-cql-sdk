@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <Authors>NCQA</Authors>
-    <AssemblyName>Ncqa.Cql.ValueSetLoaders</AssemblyName>
-    <RootNamespace>Ncqa.Cql.ValueSetLoaders</RootNamespace>
+    <AssemblyName>Hl7.Cql.ValueSetLoaders</AssemblyName>
+    <RootNamespace>Hl7.Cql.ValueSetLoaders</RootNamespace>
     <Description>Loads value set information from various sources for use in CqlRuntime.</Description>
-    <PackageId>Ncqa.Cql.ValueSetLoaders</PackageId>
-    <Product>Ncqa.Cql.ValueSetLoaders</Product>
+    <PackageId>Hl7.Cql.ValueSetLoaders</PackageId>
+    <Product>Hl7.Cql.ValueSetLoaders</Product>
 	<Nullable>enable</Nullable>
   </PropertyGroup>
 

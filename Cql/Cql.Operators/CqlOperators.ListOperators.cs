@@ -1,12 +1,10 @@
-﻿using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
+﻿using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace Ncqa.Cql.Runtime
+namespace Hl7.Cql.Runtime
 {
     public partial class CqlOperators
     {

@@ -1,12 +1,12 @@
-﻿using Ncqa.Cql.Model;
-using Ncqa.Cql.Runtime.Model;
-using Ncqa.Fhir;
-using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Model;
+using Hl7.Cql.Poco.Fhir;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Hl7.Cql.Poco.Fhir.R4.Model;
+using System.Reflection;
 
-namespace Ncqa.Cql.Runtime.FhirR4
+namespace Hl7.Cql.Runtime.FhirR4
 {
     public class FhirTypeResolver : ModelTypeResolver
     {
@@ -16,7 +16,7 @@ namespace Ncqa.Cql.Runtime.FhirR4
         {
         }
 
-        public FhirTypeResolver(ModelInfo? model = null): base(model ?? Models.Fhir401)
+        public FhirTypeResolver(ModelInfo? model = null) : base(model ?? Models.Fhir401)
         {
             MapTypes(typeof(Resource))
             .MapTypes(typeof(Element))
@@ -24,6 +24,18 @@ namespace Ncqa.Cql.Runtime.FhirR4
         }
 
         internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
+
+        public override IEnumerable<Assembly> ModelAssemblies => new[]
+        {
+            typeof(Hl7.Cql.Poco.Fhir.ValueSetBindingAttribute).Assembly, // Fhir
+            typeof(Hl7.Cql.Poco.Fhir.R4.Model.Resource).Assembly, // Fhir.R4
+        };
+
+
+        public override IEnumerable<string> ModelNamespaces => new[] 
+        {
+            typeof(Hl7.Cql.Poco.Fhir.R4.Model.Resource).Namespace!,
+        };
 
         protected FhirTypeResolver MapTypes(Type baseType)
         {

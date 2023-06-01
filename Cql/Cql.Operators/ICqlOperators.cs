@@ -1,9 +1,10 @@
-﻿using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Conversion;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 
-namespace Ncqa.Cql.Operators
+namespace Hl7.Cql.Operators
 {
     /// <summary>
     /// Defines the operators in the CQL specification.
@@ -17,6 +18,10 @@ namespace Ncqa.Cql.Operators
         TypeConverter TypeConverter { get; }
         IDataRetriever DataRetriever { get; }
         ICqlComparer Comparer { get; }
+
+        ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
+
+        #region Operators
 
         CqlQuantity? Abs(CqlQuantity? argument);
         decimal? Abs(decimal? argument);
@@ -513,5 +518,7 @@ namespace Ncqa.Cql.Operators
         long? Width(CqlInterval<long?>? @this);
         bool? Xor(bool? left, bool? right);
         bool? Xor(Lazy<bool?> left, Lazy<bool?> right);
+
+        #endregion
     }
 }

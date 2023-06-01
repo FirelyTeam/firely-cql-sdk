@@ -1,11 +1,13 @@
-﻿using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
+﻿using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
-using elm = Ncqa.Elm.Expressions;
+using elm = Hl7.Cql.Elm.Expressions;
+using Hl7.Cql.Operators;
+using System.Xml;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
@@ -72,10 +74,12 @@ namespace Ncqa.Cql.MeasureCompiler
         public Expression ExpandValueSet(elm.ExpandValueSetExpression e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(RuntimeContext) });
-            var @new = Expression.New(ctor, operand, ctx.RuntimeContextParameter);
-            return @new;
+            var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(IValueSetDictionary) });
+            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators));
+            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade));
+            var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);
+            var call = Expression.Call(property, createFacadeMethod, operand);
+            return call;
         }
-
     }
 }

@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Text;
-using System.Linq;
-using Ncqa.Cql.Runtime;
+﻿using System.Linq.Expressions;
+using Hl7.Cql.Runtime;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// Binds <see cref="CqlOperator"/>s to <see cref="Expression"/>s.
@@ -18,7 +13,7 @@ namespace Ncqa.Cql.MeasureCompiler
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
         /// </summary>
         /// <param name="operator">The operator to bind.</param>
-        /// <param name="runtimeContext">The <see cref="Expression"/> that provides access to the <see cref="RuntimeContext"/>.</param>
+        /// <param name="runtimeContext">The <see cref="Expression"/> that provides access to the <see cref="CqlContext"/>.</param>
         /// <param name="parameters">Zero or more parameter <see cref="Expression"/>s.  The number and order of expressions is dependent on <paramref name="operator"/>.</param>
         /// <returns>An expression that implements <paramref name="operator"/>.</returns>
         /// <seealso cref="CqlOperatorsBinding"/>

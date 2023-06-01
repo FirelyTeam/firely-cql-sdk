@@ -1,17 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.Model;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Iso8601;
+using Hl7.Cql.Model;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Ncqa.Cql.Operators;
+using Hl7.Cql.Operators;
 
 namespace CoreTests
 {
@@ -34,7 +30,7 @@ namespace CoreTests
                 }
             });
 
-            var ctx = new RuntimeContext(CqlOperators.Create(new UnitTestTypeResolver(),
+            var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
                 dataRetriever: dataRetriever,
                 now: new DateTimeIso8601(2023, 3, 28, null, null, null, null, null, null)));
             var age = ctx.Operators.Age("a");
@@ -49,7 +45,7 @@ namespace CoreTests
                     birthDate = new DateIso8601(1983, 4, 4)
                 }
             });
-            var ctx = new RuntimeContext(CqlOperators.Create(new UnitTestTypeResolver(),
+            var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
                 dataRetriever: dataRetriever,
                 now: new DateTimeIso8601(2023, 3, 28, null, null, null, null, null, null)));
             var age = ctx.Operators.AgeAt(new CqlDate(2013, 3, 28), "a");
@@ -82,6 +78,10 @@ namespace CoreTests
             public override Type PatientType => typeof(UnitTestPatient);
 
             public override PropertyInfo PatientBirthDateProperty => typeof(UnitTestPatient).GetProperty(nameof(UnitTestPatient.birthDate));
+
+            public override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
+
+            public override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
 
             public override PropertyInfo GetPrimaryCodePath(string typeSpecifier) =>
                 throw new NotImplementedException();

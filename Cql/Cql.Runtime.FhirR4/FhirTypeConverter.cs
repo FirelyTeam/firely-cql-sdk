@@ -1,11 +1,10 @@
-﻿using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Fhir.R4.Model;
-using Ncqa.Iso8601;
+﻿using Hl7.Cql.Conversion;
+using Hl7.Cql.Poco.Fhir.R4.Model;
+using Hl7.Cql.Primitives;
 using System;
-using static Ncqa.Fhir.R4.Model.Parameters;
+using Fhir = Hl7.Cql.Poco.Fhir;
 
-namespace Ncqa.Cql.Runtime.FhirR4
+namespace Hl7.Cql.Runtime.FhirR4
 {
     public static class FhirTypeConverter
     {

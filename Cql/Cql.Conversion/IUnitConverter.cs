@@ -1,7 +1,7 @@
 ﻿
-using Ncqa.Cql.Runtime.Primitives;
+using Hl7.Cql.Primitives;
 
-namespace Ncqa.Cql.Runtime.Conversion
+namespace Hl7.Cql.Conversion
 {
     /// <summary>
     /// Defines a method to convert a <see cref="CqlQuantity"/> to a new quantity with different units.

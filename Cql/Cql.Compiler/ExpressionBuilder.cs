@@ -1,21 +1,20 @@
 ﻿using Microsoft.Extensions.Logging;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
-using Ncqa.Elm;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using elm = Ncqa.Elm.Expressions;
+using elm = Hl7.Cql.Elm.Expressions;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilder translates abstract syntax trees expressed by <see cref="ElmPackage"/> instances into
-    /// <see cref="DefinitionDictionary{LambdaExpression}"/>.
+    /// The ExpressionBuilder translates ELM <see cref="Elm.Expressions.Expression"/>s into <see cref="System.Linq.Expressions.Expression"/>.
     /// </summary>
     public partial class ExpressionBuilder
     {
@@ -122,7 +121,7 @@ namespace Ncqa.Cql.MeasureCompiler
                     {
                         var ctor = typeof(CqlValueSet).GetConstructor(new[] { typeof(string), typeof(string) });
                         var @new = Expression.New(ctor, Expression.Constant(def.id, typeof(string)), Expression.Constant(def.version, typeof(string)));
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var lambda = Expression.Lambda(@new, contextParameter);
                         definitions.Add(ThisLibraryKey, def.name!, lambda);
                     }
@@ -167,7 +166,7 @@ namespace Ncqa.Cql.MeasureCompiler
                             Expression.Constant(null, typeof(string))
                         );
 
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var lambda = Expression.Lambda(newCodingExpression, contextParameter);
                         definitions.Add(ThisLibraryKey, code.name!, lambda);
                     }
@@ -182,7 +181,7 @@ namespace Ncqa.Cql.MeasureCompiler
                             )).ToArray();
 
                         var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
                         definitions.Add(ThisLibraryKey, kvp.Key, lambda);
                     }
@@ -195,19 +194,24 @@ namespace Ncqa.Cql.MeasureCompiler
                         if (definitions.ContainsKey(null, parameter.name!))
                             throw new InvalidOperationException($"There is already a definition named {parameter.name}");
 
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
-
-                        var resolveParam = Expression.Call(
-                            contextParameter,
-                            typeof(RuntimeContext).GetMethod(nameof(RuntimeContext.ResolveParameter)),
-                            Expression.Constant(Package!.NameAndVersion),
-                            Expression.Constant(parameter.name)
-                        );
-
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var buildContext = new ExpressionBuilderContext(this,
                             contextParameter,
                             definitions,
                             localLibraryIdentifiers);
+
+                        Expression? defaultValue = null;
+                        if (parameter.@default != null)
+                            defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default, buildContext), typeof(object));
+                        else defaultValue = Expression.Constant(null, typeof(object));
+
+                        var resolveParam = Expression.Call(
+                            contextParameter,
+                            typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter)),
+                            Expression.Constant(Package!.NameAndVersion),
+                            Expression.Constant(parameter.name),
+                            defaultValue
+                        );
 
                         var parameterType = TypeManager.TypeFor(parameter.parameterTypeSpecifier!, buildContext);
                         var cast = Expression.Convert(resolveParam, parameterType);
@@ -222,7 +226,7 @@ namespace Ncqa.Cql.MeasureCompiler
                 {
                     if (def.expression != null)
                     {
-                        var contextParameter = Expression.Parameter(typeof(RuntimeContext), "context");
+                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var buildContext = new ExpressionBuilderContext(this,
                             contextParameter,
                             definitions,
@@ -278,7 +282,7 @@ namespace Ncqa.Cql.MeasureCompiler
                                 if (Settings.AllowUnresolvedExternals)
                                 {
                                     var returnType = TypeManager.TypeFor(def, buildContext, throwIfNotFound: true)!;
-                                    var paramTypes = new[] { typeof(RuntimeContext) }
+                                    var paramTypes = new[] { typeof(CqlContext) }
                                         .Concat(functionParameterTypes)
                                         .ToArray();
                                     var notImplemented = NotImplemented(customKey, paramTypes, returnType, buildContext);
@@ -302,6 +306,19 @@ namespace Ncqa.Cql.MeasureCompiler
                         }
                         else
                         {
+                            foreach (var annotation in def.annotation ?? Enumerable.Empty<Annotation>())
+                            {
+                                foreach (var tag in annotation.t ?? Enumerable.Empty<Tag>())
+                                {
+                                    var name = tag.name;
+                                    if (!string.IsNullOrWhiteSpace(name))
+                                    {
+                                        var value = tag.value ?? string.Empty;
+                                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes ?? new Type[0], name, value);
+
+                                    }
+                                }
+                            }
                             definitions.Add(ThisLibraryKey, def.name, functionParameterTypes, lambda);
                         }
                     }
@@ -313,7 +330,7 @@ namespace Ncqa.Cql.MeasureCompiler
         }
 
         /// <summary>
-        /// Generates a lambda expression taking a <see cref="RuntimeContext"/> parameter whose body is
+        /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
         /// <paramref name="expression"/> translated into a <see cref="System.Linq.Expressions.Expression"/>.
         /// </summary>
         /// <remarks>
@@ -326,7 +343,7 @@ namespace Ncqa.Cql.MeasureCompiler
             DefinitionDictionary<LambdaExpression>? lambdas = null,
             ExpressionBuilderContext? ctx = null)
         {
-            var parameter = Expression.Parameter(typeof(RuntimeContext), "rtx");
+            var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
             ctx ??= new ExpressionBuilderContext(this, parameter, lambdas, new Dictionary<string, string>());
             lambdas = new DefinitionDictionary<LambdaExpression>();
@@ -776,6 +793,9 @@ namespace Ncqa.Cql.MeasureCompiler
                 case elm.TimeOfDayExpression tod:
                     expression = TimeOfDay(tod, ctx);
                     break;
+                case elm.TimezoneOffsetFromExpression tofe:
+                    expression = TimezoneOffsetFrom(tofe, ctx);
+                    break;
                 case elm.ToBooleanExpression e:
                     expression = ToBoolean(e, ctx);
                     break;
@@ -1008,53 +1028,45 @@ namespace Ncqa.Cql.MeasureCompiler
 
             if (query.aggregate != null)
             {
-                if (query.aggregate!.type == "AggregateClause")
+                var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
+                ?? TypeNameToIdentifier(elementType, ctx);
+                var sourceAliasParameter = Expression.Parameter(elementType, parameterName);
+                var resultAlias = query.aggregate.identifier!;
+                Type? resultType = null;
+                if (query.aggregate.resultTypeSpecifier != null)
                 {
-                    var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
-                    ?? TypeNameToIdentifier(elementType, ctx);
-                    var sourceAliasParameter = Expression.Parameter(elementType, parameterName);
-                    var resultAlias = query.aggregate.identifier!;
-                    Type? resultType = null;
-                    if (query.aggregate.resultTypeSpecifier != null)
-                    {
-                        resultType = TypeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx, true);
-                    }
-                    else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName!))
-                    {
-                        resultType = TypeResolver.ResolveType(query.aggregate.resultTypeName!);
-                    }
-                    if (resultType == null)
-                    {
-                        throw new InvalidOperationException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
-                    }
-                    var resultParameter = Expression.Parameter(resultType, resultAlias);
-                    var scopes = new[]
-                    {
+                    resultType = TypeManager.TypeFor(query.aggregate.resultTypeSpecifier, ctx, true);
+                }
+                else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName!))
+                {
+                    resultType = TypeResolver.ResolveType(query.aggregate.resultTypeName!);
+                }
+                if (resultType == null)
+                {
+                    throw new InvalidOperationException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
+                }
+                var resultParameter = Expression.Parameter(resultType, resultAlias);
+                var scopes = new[]
+                {
                         new KeyValuePair<string, (Expression, elm.Expression)>(querySourceAlias!, (sourceAliasParameter, query)),
                         new KeyValuePair<string, (Expression, elm.Expression)>(resultAlias!, (resultParameter, query.aggregate))
                     };
-                    var subContext = ctx.WithScopes(scopes);
-                    if (query.let != null)
-                    {
-                        for (int i = 0; i < query.let.Length; i++)
-                        {
-                            var let = query.let[i];
-                            var expression = TranslateExpression(let.expression!, subContext);
-                            subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Expression)>(let.identifier!, (expression, let.expression!)));
-                        }
-                    }
-                    var startingValue = TranslateExpression(query.aggregate.starting!, subContext);
-
-                    var lambdaBody = TranslateExpression(query.aggregate.expression!, subContext);
-                    var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceAliasParameter);
-                    var aggregateCall = Operators.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
-                    @return = aggregateCall;
-                }
-                else
+                var subContext = ctx.WithScopes(scopes);
+                if (query.let != null)
                 {
-                    throw new NotImplementedException($"Aggregate type {query.aggregate.type} is not yet implemented.");
-
+                    for (int i = 0; i < query.let.Length; i++)
+                    {
+                        var let = query.let[i];
+                        var expression = TranslateExpression(let.expression!, subContext);
+                        subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Expression)>(let.identifier!, (expression, let.expression!)));
+                    }
                 }
+                var startingValue = TranslateExpression(query.aggregate.starting!, subContext);
+
+                var lambdaBody = TranslateExpression(query.aggregate.expression!, subContext);
+                var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceAliasParameter);
+                var aggregateCall = Operators.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
+                @return = aggregateCall;
             }
 
             if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)
@@ -1370,7 +1382,7 @@ namespace Ncqa.Cql.MeasureCompiler
                 var elementType = TypeResolver.GetListElementType(type);
                 if (elementType == typeof(CqlCode))
                 {
-                    var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(RuntimeContext) });
+                    var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(CqlContext) });
                     var @new = Expression.New(ctor, cqlValueSet, ctx.RuntimeContextParameter);
                     return @new;
                 }
@@ -2011,7 +2023,6 @@ namespace Ncqa.Cql.MeasureCompiler
                 {
                     // In this construct, instead of querying a value set, we're testing resources
                     // against a list of codes, e.g., as defined by the code from or codesystem construct
-                    // used in NCQA_Terminology library
                     var codes = TranslateExpression(retrieve.codes, ctx);
                     var call = Operators.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
@@ -2148,7 +2159,7 @@ namespace Ncqa.Cql.MeasureCompiler
             var functionType = GetFunctionRefReturnType(op, operandTypes, ctx);
 
             var funcTypeParameters =
-                new[] { typeof(RuntimeContext) }
+                new[] { typeof(CqlContext) }
                 .Concat(operandTypes)
                 .Concat(new[] { functionType })
                 .ToArray();
@@ -2160,7 +2171,7 @@ namespace Ncqa.Cql.MeasureCompiler
                 Expression.Constant(op.locator, typeof(string)),
                 Expression.Constant(op.localId, typeof(int?)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(RuntimeContext).GetMethod(nameof(RuntimeContext.Deeper)), newCallStack);
+            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper)), newCallStack);
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
@@ -2393,7 +2404,7 @@ namespace Ncqa.Cql.MeasureCompiler
             Expression[] arguments,
             ExpressionBuilderContext ctx)
         {
-            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(RuntimeContext).GetProperty(nameof(RuntimeContext.Definitions)));
+            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions)));
             var itemProperty = typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string), typeof(Type[]) });
             var argumentTypes = arguments
                 .Skip(1) // skip runtimecontext
@@ -2437,7 +2448,7 @@ namespace Ncqa.Cql.MeasureCompiler
         Type definitionReturnType,
         ExpressionBuilderContext ctx)
         {
-            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(RuntimeContext).GetProperty(nameof(RuntimeContext.Definitions)));
+            var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions)));
             // gets indexer that takes two strings - lib name and def name
             var itemProperty = typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string) });
             Expression[]? indices;
@@ -2452,7 +2463,7 @@ namespace Ncqa.Cql.MeasureCompiler
                 indices = new[] { Expression.Constant(libraryName), Expression.Constant(name) };
             }
             var index = Expression.MakeIndex(definitionsProperty, itemProperty, indices);
-            var funcType = typeof(Func<,>).MakeGenericType(typeof(RuntimeContext), definitionReturnType);
+            var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
             var asFunc = Expression.TypeAs(index, funcType);
             var invoke = Expression.Invoke(asFunc, new[] { ctx.RuntimeContextParameter });
             return invoke;

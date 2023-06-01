@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Reflection;
-using System.Text;
 
-namespace Ncqa.Cql.Runtime.Primitives
+namespace Hl7.Cql.Primitives
 {
     /// <summary>
     /// Implements the System Interval type.
@@ -69,12 +65,6 @@ namespace Ncqa.Cql.Runtime.Primitives
             highClosed = false;
             String = new Lazy<string>(() => $"[null, null]");
         }
-
-
-        /// <summary>
-        /// Gets the type of <typeparamref name="T"/>.
-        /// </summary>
-        public Type PointType => typeof(T);
 
         /// <summary>
         /// Gets the low value of this interval.

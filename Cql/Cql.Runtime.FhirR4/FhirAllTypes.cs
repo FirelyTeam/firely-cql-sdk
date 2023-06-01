@@ -1,4 +1,4 @@
-﻿namespace Ncqa.Cql.Runtime.FhirR4
+﻿namespace Hl7.Cql.Runtime.FhirR4
 {
     /// <summary>
     /// ValueSet expansion for https://www.hl7.org/fhir/valueset-all-types.html

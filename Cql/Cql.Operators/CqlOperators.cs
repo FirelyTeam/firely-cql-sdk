@@ -1,24 +1,32 @@
 ﻿using Cql.Operators;
-using Ncqa.Cql.Comparers;
-using Ncqa.Cql.Operators;
-using Ncqa.Cql.Runtime.Conversion;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Cql.ValueSets;
-using Ncqa.Iso8601;
+using Hl7.Cql.Comparers;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.RegularExpressions;
 
-namespace Ncqa.Cql.Runtime
+namespace Hl7.Cql.Runtime
 {
     /// <summary>
     /// Impelements <see cref="ICqlOperators"/>.
     /// </summary>
     public partial class CqlOperators : ICqlOperators, ICqlComparer, ICqlComparer<object>
     {
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        /// <param name="resolver">The type resolver to use.</param>
+        /// <param name="converter">The type converter to use, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="TypeConverter.Create"/> is used.</param>
+        /// <param name="dataRetriever">The data retriever to use, or <see langword="null" />.  When <see langword="null" />, no data will be returned by any retrieve expression.</param>
+        /// <param name="comparer">The comparer to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="CqlComparers"/> is used.</param>
+        /// <param name="valueSets">The value set dictionary to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="HashValueSetDictionary"/> is used.</param>
+        /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
+        /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
+        /// <returns></returns>
         public static CqlOperators Create(TypeResolver resolver, 
             TypeConverter? converter = null,
             IDataRetriever? dataRetriever = null,
@@ -68,6 +76,9 @@ namespace Ncqa.Cql.Runtime
         /// </remarks>
         /// <seealso cref="CqlComparers"/>
         public ICqlComparer Comparer { get; set; }
+        /// <summary>
+        /// Gets the implemenation of <see cref="IValueSetDictionary"/> to use.
+        /// </summary>
         public IValueSetDictionary ValueSets { get; }
         public IUnitConverter UnitConverter { get; }
 
@@ -162,6 +173,10 @@ namespace Ncqa.Cql.Runtime
         public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
+        public ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) =>
+            new ValueSetFacade(valueSet, ValueSets);
+
+
         public object NotSupported() => throw new NotSupportedException();
 
         public bool? Equals(object x, object y, string? precision)
@@ -183,5 +198,6 @@ namespace Ncqa.Cql.Runtime
         {
             return Comparer.Equivalent(x, y, precision);
         }
+
     }
 }

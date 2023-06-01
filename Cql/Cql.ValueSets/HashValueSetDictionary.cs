@@ -1,9 +1,8 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
+﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql.ValueSets
+namespace Hl7.Cql.ValueSets
 {
     /// <summary>
     /// Uses hash sets to identify code membership within value sets.
@@ -46,7 +45,7 @@ namespace Ncqa.Cql.ValueSets
         }
 
         /// <summary>
-        /// Adds the code to the given value set by its canonical URI, but will not throw if the code exists already.
+        /// Adds or overwrites the code to the given value set by its canonical URI, and will not throw if the code exists already.
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="code">The code to add.</param>

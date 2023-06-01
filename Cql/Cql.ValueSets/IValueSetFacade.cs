@@ -1,9 +1,7 @@
-﻿using Ncqa.Cql.Runtime.Primitives;
-using System;
+﻿using Hl7.Cql.Primitives;
 using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Cql.ValueSets
+namespace Hl7.Cql.ValueSets
 {
     /// <summary>
     /// Acts as a facade for <see cref="IEnumerable{Code}"/> which remembers that this sequence

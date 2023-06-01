@@ -5,10 +5,8 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.Json;
 
-namespace Ncqa.Fhir
+namespace Hl7.Cql.Poco.Fhir
 {
     public class TypeWriter
     {
@@ -37,12 +35,12 @@ namespace Ncqa.Fhir
             using var convertersFs = new FileStream(convertersFi.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
             using var convertersWriter = new StreamWriter(convertersFs);
 
-            convertersWriter.WriteLine("using Ncqa.Fhir.Serialization;");
-            convertersWriter.WriteLine("using Ncqa.Iso8601;");
+            convertersWriter.WriteLine("using Hl7.Cql.Poco.Fhir.Serialization;");
+            convertersWriter.WriteLine("using Hl7.Cql.Iso8601;");
             convertersWriter.WriteLine("using System.Text.Json;");
-            convertersWriter.WriteLine("using Ncqa.Fhir.R4.Model;");
+            convertersWriter.WriteLine("using Hl7.Cql.Poco.Fhir.R4;");
             convertersWriter.WriteLine();
-            convertersWriter.WriteLine("namespace Ncqa.Fhir.R4.Serialization");
+            convertersWriter.WriteLine("namespace Hl7.Cql.Poco.Fhir.R4.Serialization");
             convertersWriter.WriteLine("{");
             convertersWriter.WriteLineIndented(1, $"public static class Converters");
             convertersWriter.WriteLineIndented(1, $"{{");
@@ -130,12 +128,12 @@ namespace Ncqa.Fhir
                             throw new NotImplementedException($"Element type {propTypeName} isn't implemented for writing during conversion.");
                     }
                     converterTypeNames.Add(className);
-                    writer.WriteLine("using Ncqa.Fhir.Serialization;");
-                    writer.WriteLine("using Ncqa.Iso8601;");
+                    writer.WriteLine("using Hl7.Cql.Poco.Fhir.Serialization;");
+                    writer.WriteLine("using Hl7.Cql.Iso8601;");
                     writer.WriteLine("using System.Text.Json;");
-                    writer.WriteLine("using Ncqa.Fhir.R4.Model;");
+                    writer.WriteLine("using Hl7.Cql.Poco.Fhir.R4;");
                     writer.WriteLine();
-                    writer.WriteLine("namespace Ncqa.Fhir.R4.Serialization");
+                    writer.WriteLine("namespace Hl7.Cql.Poco.Fhir.R4.Serialization");
                     writer.WriteLine("{");
                     writer.WriteLineIndented(1, $"public class {className} : ElementConverter<{typeName}>");
                     writer.WriteLineIndented(1, "{");
@@ -157,9 +155,9 @@ namespace Ncqa.Fhir
 
         private static readonly string[] Usings = new[]
         {
-            "Ncqa.Fhir",
-            "Ncqa.Fhir.Serialization",
-            "Ncqa.Iso8601",
+            "Hl7.Cql.Poco.Fhir",
+            "Hl7.Cql.Poco.Fhir.Serialization",
+            "Hl7.Cql.Iso8601",
             "System.Collections.Generic",
             "System.Diagnostics",
             "System.Diagnostics.CodeAnalysis",
@@ -183,7 +181,7 @@ namespace Ncqa.Fhir
                     writer.WriteLine($"using {@using};");
                 }
                 writer.WriteLine();
-                writer.WriteLine("namespace Ncqa.Fhir.R4.Model");
+                writer.WriteLine("namespace Hl7.Cql.Poco.Fhir.R4.Model");
                 writer.WriteLine("{");
                 indent += 1;
             }

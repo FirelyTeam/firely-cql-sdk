@@ -1,11 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.Runtime;
-using Ncqa.Fhir.R4.Model;
-using System;
-using System.Collections.Generic;
+using Hl7.Cql.Runtime;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
 namespace CoreTests
 {

@@ -1,7 +1,6 @@
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.Runtime;
-using Ncqa.Fhir.R4.Model;
+using Hl7.Cql.Runtime;
 using System;
 
 namespace CoreTests
@@ -21,7 +20,7 @@ namespace CoreTests
         public void FactorialOfFive_Test()
         {
             var lambda = LambdasByTestName["CqlAggregateTest", "FactorialOfFive"];
-            var function = (Func<RuntimeContext, bool?>)lambda.Compile();
+            var function = (Func<CqlContext, bool?>)lambda.Compile();
             bool? result = function(RuntimeContext);
             Assert.AreEqual(true, result);
         }
@@ -42,7 +41,7 @@ namespace CoreTests
         public void RolledOutIntervals_Test()
         {
             var lambda = LambdasByTestName["CqlAggregateTest", "RolledOutIntervals"];
-            var function = (Func<RuntimeContext, bool?>)lambda.Compile();
+            var function = (Func<CqlContext, bool?>)lambda.Compile();
             bool? result = function(RuntimeContext);
             Assert.AreEqual(true, result);
         }

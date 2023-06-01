@@ -1,8 +1,8 @@
-﻿using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Poco.Fhir.R4.Model;
 using System;
 using System.Text.RegularExpressions;
 
-namespace Ncqa.Fhir.R4
+namespace Hl7.Cql.Poco.Fhir.R4
 {
     public static class Base64Extensions
     {

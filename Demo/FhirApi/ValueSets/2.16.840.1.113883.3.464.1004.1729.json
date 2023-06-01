@@ -1,0 +1,364 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33133",
+  "meta": {
+    "lastUpdated": "2019-06-11T12:31:01.644-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1729"
+    }
+  ],
+  "version": "Working",
+  "name": "Dementia_Medications",
+  "title": "Dementia Medications",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:47-04:00",
+    "total": 56,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2015.02.02.14AB",
+        "code": "1599805",
+        "display": "24 HR Donepezil hydrochloride 10 MG / Memantine hydrochloride 14 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1805420",
+        "display": "24 HR Donepezil hydrochloride 10 MG / Memantine hydrochloride 21 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2015.02.02.14AB",
+        "code": "1599803",
+        "display": "24 HR Donepezil hydrochloride 10 MG / Memantine hydrochloride 28 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1805425",
+        "display": "24 HR Donepezil hydrochloride 10 MG / Memantine hydrochloride 7 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "998581",
+        "display": "24 HR Donepezil hydrochloride 23 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996594",
+        "display": "24 HR Memantine hydrochloride 14 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996603",
+        "display": "24 HR Memantine hydrochloride 21 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996609",
+        "display": "24 HR Memantine hydrochloride 28 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996615",
+        "display": "24 HR Memantine hydrochloride 7 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "860695",
+        "display": "24 HR galantamine hydrobromide 16 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "860707",
+        "display": "24 HR galantamine hydrobromide 24 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "860715",
+        "display": "24 HR galantamine hydrobromide 8 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "725021",
+        "display": "24 HR rivastigmine 0.192 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "725023",
+        "display": "24 HR rivastigmine 0.396 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1308569",
+        "display": "24 HR rivastigmine 0.554 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2010.AB",
+        "code": "997216",
+        "display": "Donepezil hydrochloride 1 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2015.02.02.14AB",
+        "code": "1599806",
+        "display": "Donepezil hydrochloride 10 MG / Memantine hydrochloride 14 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1805423",
+        "display": "Donepezil hydrochloride 10 MG / Memantine hydrochloride 21 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2015.02.02.14AB",
+        "code": "1599804",
+        "display": "Donepezil hydrochloride 10 MG / Memantine hydrochloride 28 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1805428",
+        "display": "Donepezil hydrochloride 10 MG / Memantine hydrochloride 7 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "997220",
+        "display": "Donepezil hydrochloride 10 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2010.AB",
+        "code": "997223",
+        "display": "Donepezil hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "998585",
+        "display": "Donepezil hydrochloride 23 MG Extended Release Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.06.06.11AA",
+        "code": "1100184",
+        "display": "Donepezil hydrochloride 23 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "997226",
+        "display": "Donepezil hydrochloride 5 MG Disintegrating Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2010.AB",
+        "code": "997229",
+        "display": "Donepezil hydrochloride 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.06.06.11AA",
+        "code": "579148",
+        "display": "Galantamine 12 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.06.06.11AA",
+        "code": "310436",
+        "display": "Galantamine 4 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "inactive": true,
+        "version": "2009.AB",
+        "code": "349246",
+        "display": "Galantamine 4 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.09.06.11AA",
+        "code": "429251",
+        "display": "Galantamine 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2010.AB",
+        "code": "310437",
+        "display": "Galantamine 8 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "inactive": true,
+        "version": "2010.AB",
+        "code": "250507",
+        "display": "Memantine 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.09.06.11AA",
+        "code": "413274",
+        "display": "Memantine 5 MG/ML Injectable Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2010.AB",
+        "code": "996561",
+        "display": "Memantine hydrochloride 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996598",
+        "display": "Memantine hydrochloride 14 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.09.06.11AA",
+        "code": "996748",
+        "display": "Memantine hydrochloride 15 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2010.AB",
+        "code": "996740",
+        "display": "Memantine hydrochloride 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.09.06.11AA",
+        "code": "996752",
+        "display": "Memantine hydrochloride 20 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996606",
+        "display": "Memantine hydrochloride 21 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996612",
+        "display": "Memantine hydrochloride 28 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2010.AB",
+        "code": "996571",
+        "display": "Memantine hydrochloride 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "996618",
+        "display": "Memantine hydrochloride 7 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "inactive": true,
+        "version": "2010.AB",
+        "code": "310009",
+        "display": "donepezil 10 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "inactive": true,
+        "version": "2010.AB",
+        "code": "310010",
+        "display": "donepezil 5 MG Oral Tablet"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "860698",
+        "display": "galantamine hydrobromide 16 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "860710",
+        "display": "galantamine hydrobromide 24 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2009.AB",
+        "code": "860901",
+        "display": "galantamine hydrobromide 4 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2014.07.07.14AA",
+        "code": "860718",
+        "display": "galantamine hydrobromide 8 MG Extended Release Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1359895",
+        "display": "rivastigmine 0.192 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1360423",
+        "display": "rivastigmine 0.396 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2016.09.06.16AA",
+        "code": "1360267",
+        "display": "rivastigmine 0.554 MG/HR Transdermal System"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2006.AC",
+        "code": "314214",
+        "display": "rivastigmine 1.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.06.06.11AA",
+        "code": "312834",
+        "display": "rivastigmine 2 MG/ML Oral Solution"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.06.06.11AA",
+        "code": "312835",
+        "display": "rivastigmine 3 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2006.AC",
+        "code": "314215",
+        "display": "rivastigmine 4.5 MG Oral Capsule"
+      },
+      {
+        "system": "http://www.nlm.nih.gov/research/umls/rxnorm",
+        "version": "2011.06.06.11AA",
+        "code": "312836",
+        "display": "rivastigmine 6 MG Oral Capsule"
+      }
+    ]
+  }
+}

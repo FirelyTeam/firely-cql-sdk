@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Cql.Runtime.Primitives
+﻿namespace Hl7.Cql.Primitives
 {
     /// <summary>
     /// Implements the System Ratio type.

@@ -1,4 +1,4 @@
-﻿namespace Ncqa.Fhir.Serialization
+﻿namespace Hl7.Cql.Poco.Fhir.Serialization
 {
     public class FhirOptions
     {

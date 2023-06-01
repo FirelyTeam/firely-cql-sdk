@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Ncqa.Cql.Operators
+namespace Hl7.Cql.Operators
 {
     /// <summary>
     /// Provides data for <see cref="ICqlOperators.MessageReceived"/>.

@@ -1,12 +1,10 @@
-﻿using Ncqa.Fhir.Schemas.r4;
+﻿using Hl7.Cql.Poco.Fhir.Schemas.r4;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Linq;
 
-namespace Ncqa.Fhir.Schemas
+namespace Hl7.Cql.Poco.Fhir.Schemas
 {
     public static class R4
     {

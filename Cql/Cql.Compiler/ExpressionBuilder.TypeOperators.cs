@@ -1,12 +1,9 @@
-﻿using Ncqa.Cql.Runtime;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using elm = Ncqa.Elm.Expressions;
+using elm = Hl7.Cql.Elm.Expressions;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
@@ -73,7 +70,16 @@ namespace Ncqa.Cql.MeasureCompiler
 
         protected Expression Is(elm.IsExpression @is, ExpressionBuilderContext ctx)
         {
-            var type = TypeResolver.ResolveType(@is.isTypeSpecifier!.resultTypeName!);
+
+            string? typeName = null;
+            if (@is.isTypeSpecifier?.resultTypeName != null)
+                typeName = @is.isTypeSpecifier!.resultTypeName!;
+            else if (@is.isType != null)
+                typeName = @is.isType;
+            if (string.IsNullOrWhiteSpace(typeName))
+                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.IsExpression.isTypeSpecifier)} or {nameof(elm.IsExpression.isType)}.");
+            var type = TypeResolver.ResolveType(typeName)
+                ?? throw new InvalidOperationException($"Could not resolve type {typeName}");
             var op = TranslateExpression(@is.operand!, ctx);
             var isExpression = Expression.TypeIs(op, type);
             var nullable = Expression.TypeAs(isExpression, typeof(bool?));
@@ -103,7 +109,6 @@ namespace Ncqa.Cql.MeasureCompiler
             var call = Operators.Bind(CqlOperator.ConvertQuantity, ctx.RuntimeContextParameter, quantity, unit);
             return call;
         }
-
 
         protected Expression? ConvertsToLong(elm.ConvertsToLongExpression e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToLong, e, ctx);

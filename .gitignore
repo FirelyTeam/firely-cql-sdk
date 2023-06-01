@@ -392,3 +392,5 @@ VSCodeExtension/ncqa-cql-engine/dist/*.map
 /Ncqa.IMAS.MeasureCompiler/Fhir.R4.Test/Input/bcse-9583-store/*.json
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/bundles/*.json
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
+/Demo/Test/Resources
+/Demo/Measures/**/*.cs

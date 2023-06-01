@@ -1,13 +1,13 @@
 ﻿using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
-using Ncqa.Cql.Runtime;
+using Hl7.Cql.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using elm = Ncqa.Elm.Expressions;
+using elm = Hl7.Cql.Elm.Expressions;
 
-namespace Ncqa.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// The ExpressionBuilderContext class maintains scope information for the traversal of <see cref="Elm.ElmPackage"/> statements during <see cref="ExpressionBuilder.Build"/>.
@@ -55,7 +55,7 @@ namespace Ncqa.Cql.MeasureCompiler
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
         /// </summary>
         /// <remarks>
-        /// Having access to the <see cref="RuntimeContext"/> is almost always necessary when implementing operators because the context contains all comparers, value sets, CQL parameter values, and other data provided at runtime.
+        /// Having access to the <see cref="CqlContext"/> is almost always necessary when implementing operators because the context contains all comparers, value sets, CQL parameter values, and other data provided at runtime.
         /// </remarks>
         public ParameterExpression RuntimeContextParameter { get; }
 
@@ -90,8 +90,8 @@ namespace Ncqa.Cql.MeasureCompiler
 
         /// <summary>
         /// Used for mappings such as:
-        ///     include NCQA_CQLBase version '1.0.0' called CQLBase
-        /// The key is "CQLBase" and the value is "NCQA_CQLBase.1.0.0"
+        ///     include canonical_id version '1.0.0' called alias
+        /// The key is "alias" and the value is "canonical_id.1.0.0"
         /// </summary>
         internal readonly IDictionary<string, string> LocalLibraryIdentifiers = new Dictionary<string, string>();
 

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Ncqa.Cql.Comparers
+namespace Hl7.Cql.Comparers
 {
     public class DecimalCqlComparer : ICqlComparer, ICqlComparer<decimal?>
     {
