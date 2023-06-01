@@ -7,7 +7,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class LazyBoolAssignmentVisitor : ExpressionVisitor
     {
-        private static readonly ConstructorInfo LazyCtor = typeof(Lazy<bool?>).GetConstructor(new[] { typeof(Func<bool?>) });
+        private static readonly ConstructorInfo LazyCtor = typeof(Lazy<bool?>).GetConstructor(new[] { typeof(Func<bool?>) })!;
 
         public List<ParameterExpression> NewParameters { get; } = new List<ParameterExpression>();
 
@@ -39,7 +39,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
     internal class LazyBoolAccessorVisitor : ExpressionVisitor
     {
-        private static readonly PropertyInfo LazyValue = typeof(Lazy<bool?>).GetProperty(nameof(Lazy<bool?>.Value));
+        private static readonly PropertyInfo LazyValue = typeof(Lazy<bool?>).GetProperty(nameof(Lazy<bool?>.Value))!;
 
         public List<ParameterExpression> NewParameters { get; }
 

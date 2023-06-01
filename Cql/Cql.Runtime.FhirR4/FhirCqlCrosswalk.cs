@@ -341,30 +341,34 @@ namespace Hl7.Cql.Runtime.FhirR4
 
         public TypeEntry? TypeEntryFor(string? name)
         {
-            var runtimeType = TypeResolver.ResolveType(name);
-            if (string.IsNullOrWhiteSpace(name))
-                return null;
-            if (name.StartsWith("{urn:hl7-org:elm-types:r1}"))
+            if (!string.IsNullOrWhiteSpace(name))
             {
-                int prefixLength = "{urn:hl7-org:elm-types:r1}".Length;
-                var remainder = name.Substring(prefixLength);
-                if (Enum.TryParse<CqlPrimitiveType>(remainder, out var primitiveType))
-                    return TypeEntryFor(primitiveType);
+                var runtimeType = TypeResolver.ResolveType(name);
+                if (string.IsNullOrWhiteSpace(name))
+                    return null;
+                if (name.StartsWith("{urn:hl7-org:elm-types:r1}"))
+                {
+                    int prefixLength = "{urn:hl7-org:elm-types:r1}".Length;
+                    var remainder = name.Substring(prefixLength);
+                    if (Enum.TryParse<CqlPrimitiveType>(remainder, out var primitiveType))
+                        return TypeEntryFor(primitiveType);
+                    else
+                        return null;
+                }
+                else if (name.StartsWith("{http://hl7.org/fhir}"))
+                {
+                    int prefixLength = "{http://hl7.org/fhir}".Length;
+                    var remainder = name.Substring(prefixLength);
+                    var split = remainder.Split('.');
+                    if (Enum.TryParse<FhirAllTypes>(split[0], out var fhirType))
+                        return TypeEntryFor(fhirType);
+                    else
+                        return null;
+                }
                 else
                     return null;
             }
-            else if (name.StartsWith("{http://hl7.org/fhir}"))
-            {
-                int prefixLength = "{http://hl7.org/fhir}".Length;
-                var remainder = name.Substring(prefixLength);
-                var split = remainder.Split('.');
-                if (Enum.TryParse<FhirAllTypes>(split[0], out var fhirType))
-                    return TypeEntryFor(fhirType);
-                else
-                    return null;
-            }
-            else
-                return null;
+            else return null;
         }
 
         public TypeEntry? TypeEntryFor(Expression expression)
@@ -440,7 +444,7 @@ namespace Hl7.Cql.Runtime.FhirR4
         {
             if (Nullable.GetUnderlyingType(type) != null)
             {
-                return PrimitiveToFhir(Nullable.GetUnderlyingType(type));
+                return PrimitiveToFhir(Nullable.GetUnderlyingType(type)!);
             }
 
             switch (Type.GetTypeCode(type))

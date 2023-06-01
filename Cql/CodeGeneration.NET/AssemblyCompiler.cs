@@ -303,7 +303,8 @@ namespace Hl7.Cql.Compiler
 
         private void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {
-            var rtPath = Path.GetDirectoryName(typeof(object).Assembly.Location);
+            var rtPath = Path.GetDirectoryName(typeof(object).Assembly.Location) ??
+                throw new InvalidOperationException($"Couldn't identify system file path for the System assembly");
 
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Private.CoreLib.dll")));
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Runtime.dll")));

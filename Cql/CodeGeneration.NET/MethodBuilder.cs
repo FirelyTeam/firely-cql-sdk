@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Runtime;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -21,7 +22,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             AssemblyName = new AssemblyName(AssemblyCount++.ToString());
             AssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(AssemblyName, AssemblyBuilderAccess.Run);
-            ModuleBuilder = AssemblyBuilder.DefineDynamicModule(AssemblyName.Name);
+            ModuleBuilder = AssemblyBuilder.DefineDynamicModule(AssemblyName.Name!);
         }
 
         public (DefinitionDictionary<MethodInfo>,IDictionary<string,Type>) CreateMethodsFor(DefinitionDictionary<LambdaExpression> expressions)
@@ -39,8 +40,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                         {
                             var returnType = overload.Item2.ReturnType;
                             var parameterTypes = overload.Item1;
-                            var name = VariableNameGenerator.NormalizeIdentifier(definition.Key);
-                            interfaceType.DefineMethod(name, MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, returnType, parameterTypes);
+                            if (definition.Key != null) {
+                                var name = VariableNameGenerator.NormalizeIdentifier(definition.Key);
+                                interfaceType.DefineMethod(name!, MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, returnType, parameterTypes);
+                            }
                         }
                     }
                     var createdType = interfaceType.CreateTypeInfo();
@@ -49,10 +52,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         foreach (var overload in definition.Value)
                         {
-                            var parameterTypes = overload.Item1;
-                            var name = VariableNameGenerator.NormalizeIdentifier(definition.Key);
-                            var methodInfo = createdType!.GetMethod(name, parameterTypes);
-                            methods.Add(library!, definition.Key, parameterTypes, methodInfo);
+                            if (definition.Key != null)
+                            {
+                                var parameterTypes = overload.Item1;
+                                var name = VariableNameGenerator.NormalizeIdentifier(definition.Key)!;
+                                var methodInfo = createdType!.GetMethod(name, parameterTypes)
+                                    ?? throw new InvalidOperationException($"Could not find method {name} matching parameter types {string.Join(", ", parameterTypes.Select(p=>p.Name))}");
+                                methods.Add(library!, definition.Key, parameterTypes, methodInfo);
+                            }
                         }
                     }
                 }

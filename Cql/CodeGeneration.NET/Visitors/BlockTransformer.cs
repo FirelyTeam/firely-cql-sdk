@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using AgileObjects.ReadableExpressions;
@@ -26,8 +27,10 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             UseLazyBools = useLazyBools;
         }
 
-        public override Expression Visit(Expression node)
+        public override Expression? Visit(Expression? node)
         {
+            if (node == null)
+                return node;
             switch (node.NodeType)
             {
                 case ExpressionType.Call:
@@ -60,7 +63,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
                 var block = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
                 var deduper = new LocalVariableDeduper(ScopeReservedVariables);
-                var deduped = deduper.Visit(block);
+                var deduped = deduper.Visit(block)
+                    ?? throw new InvalidOperationException("Visit returned null");
                 var result = deduped;
                 if (UseLazyBools)
                 {
@@ -113,7 +117,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitLambda<T>(Expression<T> node)
         {
-            var newBody = Visit(node.Body);
+            var newBody = Visit(node.Body) ??
+                throw new InvalidOperationException("Visit returned null");
             var newLambda = Expression.Lambda(newBody, node.Parameters);
             return newLambda;
         }

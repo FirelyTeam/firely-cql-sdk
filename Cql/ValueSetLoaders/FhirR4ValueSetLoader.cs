@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Poco.Fhir.R4.Model;
+using System.Diagnostics;
 
 namespace Hl7.Cql.ValueSetLoaders
 {
@@ -110,10 +111,11 @@ namespace Hl7.Cql.ValueSetLoaders
                                     Load(dictionary, includedVs, deeper);
                                     if (!dictionary.TryGetCodesInValueSet(includedValueSetUri, out cvsCodes))
                                         cvsCodes = new List<CqlCode>().AsReadOnly();
+                                    else throw new InvalidOperationException($"Couldn't load {includedValueSetUri}");
                                 }
                                 else throw new InvalidOperationException($"Intensional value set {vs.id} includes value set {includedValueSetUri}, which was not provided to this loader.");
                             }
-                            foreach (var code in cvsCodes)
+                            foreach (var code in cvsCodes!)
                             {
                                 if (!string.IsNullOrWhiteSpace(code.code) && !string.IsNullOrWhiteSpace(code.system))
                                 {

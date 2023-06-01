@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -19,7 +20,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         public VariableNameGenerator NameGenerator { get; }
 
-        private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault));
+        private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions)
+            .GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
@@ -65,9 +67,11 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                             .Select(l => l.Left)
                             .Cast<ParameterExpression>()
                             .Concat(lambda.Parameters)
-                            .Select(pe => pe.Name);
+                            .Where(pe => pe.Name != null)
+                            .Select(pe => pe.Name!)!;
                         var subTransformer = new BlockTransformer(NameGenerator, reservedNames, true);
-                        var newBody = subTransformer.Visit(lambda.Body);
+                        var newBody = subTransformer.Visit(lambda.Body) ??
+                            throw new InvalidOperationException("Block transformer returned null");
                         var vn = NameGenerator.Next();
                         var newLocal = Expression.Parameter(lambda.Type, vn);
                         var newLambda = Expression.Lambda(newBody, lambda.Parameters);
@@ -128,7 +132,9 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                     Locals.Add(localAssignment);
                     newExpressions[i] = newLocal;
                 }
-                var newInit = Expression.NewArrayInit(node.Type.GetElementType(), newExpressions);
+                var elementType = node.Type.GetElementType()
+                    ?? throw new InvalidOperationException($"Unable to determine array element type for {node.Type.FullName}");
+                var newInit = Expression.NewArrayInit(elementType, newExpressions);
                 return newInit;
             }
             else return node;
