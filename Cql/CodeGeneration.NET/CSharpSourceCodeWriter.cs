@@ -966,9 +966,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                             if (binding is MemberAssignment assignment)
                             {
                                 var memberName = assignment.Member.Name;
-                                if (memberName == "ValueElement")
-                                {
-                                }
                                 var assignmentCode = ToCode(indent + 1, assignment.Expression, false);
                                 memberInitSb.Append(braceIndentPlusOne);
                                 memberInitSb.Append($"{memberName} = {assignmentCode}");
