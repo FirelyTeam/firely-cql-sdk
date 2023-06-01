@@ -15,7 +15,7 @@ using System.Linq.Expressions;
 using System.Runtime.Loader;
 using System.IO;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Compiler
 {
     public class AssemblyCompiler
     {
@@ -71,7 +71,6 @@ namespace Hl7.Cql
                 typeof(Hl7.Cql.CqlDeclarationAttribute).Assembly, // Cql.Abstractions
                 typeof(Hl7.Cql.Comparers.CqlComparers).Assembly, // Cql.Comparers
                 typeof(Hl7.Cql.Conversion.IUnitConverter).Assembly, // Cql.Conversion
-                typeof(Hl7.Cql.Model.ModelTypeResolver).Assembly, // Cql.Model,
                 typeof(Hl7.Cql.Operators.ICqlOperators).Assembly, // Cql.Operators
                 typeof(Hl7.Cql.Primitives.CqlPrimitiveType).Assembly, // Cql.Primitives
                 typeof(Hl7.Cql.Runtime.CqlContext).Assembly, // Cql.Runtime

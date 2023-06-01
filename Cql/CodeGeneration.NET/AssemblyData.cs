@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 
-namespace Hl7.Cql.CodeGeneration.NET
+namespace Hl7.Cql.Compiler
 {
     /// <summary>
     /// Stores information about a dynamically generated assembly.

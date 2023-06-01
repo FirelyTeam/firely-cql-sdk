@@ -6,8 +6,6 @@
 		<RootNamespace>Ncqa.Cql</RootNamespace>
 		<Nullable>enable</Nullable>
 		<LangVersion>9.0</LangVersion>
-		<Authors>NCQA</Authors>
-		<Company>NCQA</Company>
 		<Product>CQL</Product>
 		<Description>Contains shared interfaces and abstraction for CQL</Description>
 		<NoWarn>CS8601</NoWarn>
