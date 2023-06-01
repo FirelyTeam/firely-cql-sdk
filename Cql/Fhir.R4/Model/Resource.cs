@@ -1,14 +1,8 @@
-using Ncqa.Fhir;
-using Ncqa.Fhir.Serialization;
-using Ncqa.Iso8601;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Serialization;
+using Hl7.Cql.Poco.Fhir;
 
-namespace Ncqa.Fhir.R4.Model
+namespace Hl7.Cql.Poco.Fhir.R4.Model
 {
-	[FhirUri("http://hl7.org/fhir/StructureDefinition/Resource")]
+    [FhirUri("http://hl7.org/fhir/StructureDefinition/Resource")]
 	public partial class Resource
 	{
 

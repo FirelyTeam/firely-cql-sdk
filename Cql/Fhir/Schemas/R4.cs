@@ -1,16 +1,14 @@
-﻿using Ncqa.Fhir.Schemas.r4;
+﻿using Hl7.Cql.Poco.Fhir.Schemas.r4;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Linq;
 
-namespace Ncqa.Fhir.Schemas
+namespace Hl7.Cql.Poco.Fhir.Schemas
 {
     public static class R4
     {
-        private static readonly Lazy<r4.Schema> schema = new Lazy<r4.Schema>(() =>
+        private static readonly Lazy<r4.Schema> schema = new(() =>
         {
             using var stream = typeof(r4.Schema).Assembly.GetManifestResourceStream("r4");
             using var streamReader = new StreamReader(stream);
@@ -22,7 +20,7 @@ namespace Ncqa.Fhir.Schemas
                 throw new InvalidOperationException("Can't deserialize JSON as a Schema");
             return r4;
         });
-        private static readonly Lazy<Bundle> profilesOthers = new Lazy<Bundle>(() =>
+        private static readonly Lazy<Bundle> profilesOthers = new(() =>
         {
         
             using var stream = typeof(r4.Bundle).Assembly.GetManifestResourceStream("r4/profiles-others");
@@ -35,7 +33,7 @@ namespace Ncqa.Fhir.Schemas
                 ?? throw new InvalidOperationException("Cannot deserialize as bundle");
             return bundle;
         });
-        private static readonly Lazy<Bundle> profilesResources = new Lazy<Bundle>(() =>
+        private static readonly Lazy<Bundle> profilesResources = new(() =>
         {
 
             using var stream = typeof(r4.Bundle).Assembly.GetManifestResourceStream("r4/profiles-resources");
@@ -48,7 +46,7 @@ namespace Ncqa.Fhir.Schemas
                 ?? throw new InvalidOperationException("Cannot deserialize as bundle");
             return bundle;
         });
-        private static readonly Lazy<Bundle> profileTypes = new Lazy<Bundle>(() =>
+        private static readonly Lazy<Bundle> profileTypes = new(() =>
         {
             using var stream = typeof(r4.Bundle).Assembly.GetManifestResourceStream("r4/profiles-types");
             using var streamReader = new StreamReader(stream);
@@ -60,7 +58,7 @@ namespace Ncqa.Fhir.Schemas
                 ?? throw new InvalidOperationException("Cannot deserialize as bundle");
             return bundle;
         });
-        private static readonly Lazy<Bundle> profiles = new Lazy<Bundle>(() =>
+        private static readonly Lazy<Bundle> profiles = new(() =>
         {
             var resources = profilesResources.Value;
             var types = profileTypes.Value;

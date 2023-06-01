@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Fhir
+namespace Hl7.Cql.Poco.Fhir
 {
     /// <summary>
     /// Structure definition URI in the form of http://hl7.org/fhir/StructureDefinition/{Resource}

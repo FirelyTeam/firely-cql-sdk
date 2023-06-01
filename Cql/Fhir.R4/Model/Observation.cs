@@ -1,14 +1,12 @@
-using Ncqa.Fhir;
-using Ncqa.Fhir.Serialization;
-using Ncqa.Iso8601;
+using Hl7.Cql.Poco.Fhir;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Fhir.R4.Model
+namespace Hl7.Cql.Poco.Fhir.R4.Model
 {
-	[DebuggerDisplay("{value}")]
+    [DebuggerDisplay("{value}")]
 	[FhirUri("http://hl7.org/fhir/StructureDefinition/Observation")]
 	public partial class Observation : DomainResource
 	{

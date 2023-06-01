@@ -1,0 +1,814 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33097",
+  "meta": {
+    "lastUpdated": "2019-06-09T17:09:00.744-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1398",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1398"
+    }
+  ],
+  "version": "Working",
+  "name": "Nonacute_Inpatient_Stay",
+  "title": "Nonacute Inpatient Stay",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:49:16-04:00",
+    "total": 158,
+    "offset": 0,
+    "contains": [
+      {
+        "version": "2012.05",
+        "code": "0022",
+        "display": "Skilled nursing facility prospective payment system"
+      },
+      {
+        "version": "2012.05",
+        "code": "0024",
+        "display": "Inpatient rehabilitation facility prospective payment system"
+      },
+      {
+        "version": "2012.05",
+        "code": "0118",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0128",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0138",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0148",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0158",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0180",
+        "display": "Nonpayment/Zero Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0181",
+        "display": "Admit-Through-Discharge Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0182",
+        "display": "Interim - First Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0183",
+        "display": "Interim - Continuing Claim (Not Valid for Medicare PPS Claims), Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0184",
+        "display": "Interim - Last Claim (Not Valid for Medicare Inpatient Hospital PPS Claims), Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0185",
+        "display": "Late Charges Only Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0187",
+        "display": "Replacement of Prior Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0188",
+        "display": "Void/Cancel of a Prior Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018F",
+        "display": "Beneficiary Initiated Adjustment Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018G",
+        "display": "CWF Initiated Adjustment Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018H",
+        "display": "CMS Initiated Adjustment Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018I",
+        "display": "Intermediary Adjustment Claim (Other Than PRO or Provider), Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018J",
+        "display": "Initiated Adjustment Claim - Other, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018K",
+        "display": "OIG Initiated Adjustment Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018M",
+        "display": "MSP Initiated Adjustment Claim, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018O",
+        "display": "Nonpayment/Zero Claims, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018X",
+        "display": "Void/Cancel a Prior Abbreviated Encounter Submission, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018Y",
+        "display": "Replacement of a Prior Abbreviated Encounter Submission, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "018Z",
+        "display": "New Abbreviated Encounter Submission, Swing bed hospital"
+      },
+      {
+        "version": "2012.05",
+        "code": "0190",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0191",
+        "display": "Subacute care-Level I"
+      },
+      {
+        "version": "2012.05",
+        "code": "0192",
+        "display": "Subacute care-Level II"
+      },
+      {
+        "version": "2012.05",
+        "code": "0193",
+        "display": "Subacute care-Level III"
+      },
+      {
+        "version": "2012.05",
+        "code": "0194",
+        "display": "Subacute care-Level IV"
+      },
+      {
+        "version": "2012.05",
+        "code": "0199",
+        "display": "Other subacute care"
+      },
+      {
+        "version": "2012.05",
+        "code": "0210",
+        "display": "Nonpayment/Zero Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0211",
+        "display": "Admit-Through-Discharge Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0212",
+        "display": "Interim - First Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0213",
+        "display": "Interim - Continuing Claim (Not Valid for Medicare PPS Claims), Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0214",
+        "display": "Interim - Last Claim (Not Valid for Medicare Inpatient Hospital PPS Claims), Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0215",
+        "display": "Late Charges Only Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0217",
+        "display": "Replacement of Prior Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0218",
+        "display": "Void/Cancel of a Prior Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021F",
+        "display": "Beneficiary Initiated Adjustment Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021G",
+        "display": "CWF Initiated Adjustment Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021H",
+        "display": "CMS Initiated Adjustment Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021I",
+        "display": "Intermediary Adjustment Claim (Other Than PRO or Provider), Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021J",
+        "display": "Initiated Adjustment Claim - Other, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021K",
+        "display": "OIG Initiated Adjustment Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021M",
+        "display": "MSP Initiated Adjustment Claim, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021O",
+        "display": "Nonpayment/Zero Claims, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021X",
+        "display": "Void/Cancel a Prior Abbreviated Encounter Submission, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021Y",
+        "display": "Replacement of a Prior Abbreviated Encounter Submission, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "021Z",
+        "display": "New Abbreviated Encounter Submission, Inpatient skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0220",
+        "display": "Nonpayment/Zero Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0221",
+        "display": "Admit-Through-Discharge Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0222",
+        "display": "Interim - First Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0223",
+        "display": "Interim - Continuing Claim (Not Valid for Medicare PPS Claims), Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0224",
+        "display": "Interim - Last Claim (Not Valid for Medicare Inpatient Hospital PPS Claims), Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0225",
+        "display": "Late Charges Only Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0227",
+        "display": "Replacement of Prior Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0228",
+        "display": "Void/Cancel of a Prior Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022F",
+        "display": "Beneficiary Initiated Adjustment Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022G",
+        "display": "CWF Initiated Adjustment Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022H",
+        "display": "CMS Initiated Adjustment Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022I",
+        "display": "Intermediary Adjustment Claim (Other Than PRO or Provider), Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022J",
+        "display": "Initiated Adjustment Claim - Other, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022K",
+        "display": "OIG Initiated Adjustment Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022M",
+        "display": "MSP Initiated Adjustment Claim, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022O",
+        "display": "Nonpayment/Zero Claims, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022X",
+        "display": "Void/Cancel a Prior Abbreviated Encounter Submission, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022Y",
+        "display": "Replacement of a Prior Abbreviated Encounter Submission, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "022Z",
+        "display": "New Abbreviated Encounter Submission, Inpatient skilled nursing (Medicare Part B only)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0280",
+        "display": "Nonpayment/Zero Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0281",
+        "display": "Admit-Through-Discharge Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0282",
+        "display": "Interim - First Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0283",
+        "display": "Interim - Continuing Claim (Not Valid for Medicare PPS Claims), Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0284",
+        "display": "Interim - Last Claim (Not Valid for Medicare Inpatient Hospital PPS Claims), Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0285",
+        "display": "Late Charges Only Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0287",
+        "display": "Replacement of Prior Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0288",
+        "display": "Void/Cancel of a Prior Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0289",
+        "display": "Final Claim for a Home Health PPS Episode, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028F",
+        "display": "Beneficiary Initiated Adjustment Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028G",
+        "display": "CWF Initiated Adjustment Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028H",
+        "display": "CMS Initiated Adjustment Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028I",
+        "display": "Intermediary Adjustment Claim (Other Than PRO or Provider), Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028J",
+        "display": "Initiated Adjustment Claim - Other, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028K",
+        "display": "OIG Initiated Adjustment Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028M",
+        "display": "MSP Initiated Adjustment Claim, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028O",
+        "display": "Nonpayment/Zero Claims, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028X",
+        "display": "Void/Cancel a Prior Abbreviated Encounter Submission, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028Y",
+        "display": "Replacement of a Prior Abbreviated Encounter Submission, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "028Z",
+        "display": "New Abbreviated Encounter Submission, Swing bed skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0524",
+        "display": "Visit by RHC/FQHC practitioner to a member in a covered part A stay at SNF"
+      },
+      {
+        "version": "2012.05",
+        "code": "0525",
+        "display": "Visit by RHC/FQHC practitioner to a member in a at SNF (not in a covered part A stay) or NF or ICF MR or other residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "0550",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0551",
+        "display": "Visit charge"
+      },
+      {
+        "version": "2012.05",
+        "code": "0552",
+        "display": "Hourly charge"
+      },
+      {
+        "version": "2012.05",
+        "code": "0559",
+        "display": "Other skilled nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0650",
+        "display": "Nonpayment/Zero Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0652",
+        "display": "Interim - First Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0653",
+        "display": "Interim - Continuing Claim (Not Valid for Medicare PPS Claims), Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0654",
+        "display": "Interim - Last Claim (Not Valid for Medicare Inpatient Hospital PPS Claims), Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0655",
+        "display": "Late Charges Only Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0657",
+        "display": "Replacement of Prior Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0658",
+        "display": "Void/Cancel of a Prior Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065F",
+        "display": "Beneficiary Initiated Adjustment Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065G",
+        "display": "CWF Initiated Adjustment Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065H",
+        "display": "CMS Initiated Adjustment Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065I",
+        "display": "Intermediary Adjustment Claim (Other Than PRO or Provider), Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065J",
+        "display": "Initiated Adjustment Claim - Other, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065K",
+        "display": "OIG Initiated Adjustment Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065M",
+        "display": "MSP Initiated Adjustment Claim, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065O",
+        "display": "Nonpayment/Zero Claims, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065X",
+        "display": "Void/Cancel a Prior Abbreviated Encounter Submission, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065Y",
+        "display": "Replacement of a Prior Abbreviated Encounter Submission, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "065Z",
+        "display": "New Abbreviated Encounter Submission, Inpatient intermediate care - level I (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0660",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0660",
+        "display": "Nonpayment/Zero Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0661",
+        "display": "Hourly charge/nursing"
+      },
+      {
+        "version": "2012.05",
+        "code": "0662",
+        "display": "Hourly charge/aide/homemaker/companion"
+      },
+      {
+        "version": "2012.05",
+        "code": "0662",
+        "display": "Interim - First Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0663",
+        "display": "Daily respite care"
+      },
+      {
+        "version": "2012.05",
+        "code": "0663",
+        "display": "Interim - Continuing Claim (Not Valid for Medicare PPS Claims), Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0664",
+        "display": "Interim - Last Claim (Not Valid for Medicare Inpatient Hospital PPS Claims), Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0665",
+        "display": "Late Charges Only Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0667",
+        "display": "Replacement of Prior Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0668",
+        "display": "Void/Cancel of a Prior Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0669",
+        "display": "Other respite care"
+      },
+      {
+        "version": "2012.05",
+        "code": "066F",
+        "display": "Beneficiary Initiated Adjustment Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066G",
+        "display": "CWF Initiated Adjustment Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066H",
+        "display": "CMS Initiated Adjustment Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066I",
+        "display": "Intermediary Adjustment Claim (Other Than PRO or Provider), Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066J",
+        "display": "Initiated Adjustment Claim - Other, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066K",
+        "display": "OIG Initiated Adjustment Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066M",
+        "display": "MSP Initiated Adjustment Claim, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066O",
+        "display": "Nonpayment/Zero Claims, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066X",
+        "display": "Void/Cancel a Prior Abbreviated Encounter Submission, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066Y",
+        "display": "Replacement of a Prior Abbreviated Encounter Submission, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "066Z",
+        "display": "New Abbreviated Encounter Submission, Inpatient intermediate care - level II (Not Used for Medicare)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0860",
+        "display": "Nonpayment/Zero Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "0862",
+        "display": "Interim - First Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "0863",
+        "display": "Interim - Continuing Claim (Not Valid for Medicare PPS Claims), Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "0864",
+        "display": "Interim - Last Claim (Not Valid for Medicare Inpatient Hospital PPS Claims), Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "0865",
+        "display": "Late Charges Only Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "0867",
+        "display": "Replacement of Prior Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "0868",
+        "display": "Void/Cancel of a Prior Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086F",
+        "display": "Beneficiary Initiated Adjustment Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086G",
+        "display": "CWF Initiated Adjustment Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086H",
+        "display": "CMS Initiated Adjustment Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086I",
+        "display": "Intermediary Adjustment Claim (Other Than PRO or Provider), Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086J",
+        "display": "Initiated Adjustment Claim - Other, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086K",
+        "display": "OIG Initiated Adjustment Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086M",
+        "display": "MSP Initiated Adjustment Claim, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086O",
+        "display": "Nonpayment/Zero Claims, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086X",
+        "display": "Void/Cancel a Prior Abbreviated Encounter Submission, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086Y",
+        "display": "Replacement of a Prior Abbreviated Encounter Submission, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "086Z",
+        "display": "New Abbreviated Encounter Submission, Residential facility"
+      },
+      {
+        "version": "2012.05",
+        "code": "1000",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "1001",
+        "display": "Residential treatment-psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "1002",
+        "display": "Residential treatment-chemical dependency"
+      }
+    ]
+  }
+}

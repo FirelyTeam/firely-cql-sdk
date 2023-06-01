@@ -2,11 +2,9 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.Json;
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public class DirectedGraph
     {
@@ -170,7 +168,7 @@ namespace Ncqa.Graph
 
         }
 
-        public IEnumerable<IList<DirectedGraphEdge>> GetAllPaths()
+        public IEnumerable<IList<DirectedGraphEdge>> GetAllPaths(DirectedGraphNode? node = null)
         {
             var danglingLeafNodeIds = Nodes.Values
                 .Where(node => node.NodeId != DirectedGraphNode.EndId && node.ForwardEdges.Count == 0)
@@ -178,7 +176,7 @@ namespace Ncqa.Graph
                 .ToList();
             if (danglingLeafNodeIds.Count > 0)
                 throw new InvalidOperationException($"Dangling leaf nodes detected.  Node IDs: {string.Join(", ", danglingLeafNodeIds)}");
-            foreach (var path in DepthFirst(StartNode, new DirectedGraphEdge[0], new List<DirectedGraphEdge>(), new List<DirectedGraphEdge>()))
+            foreach (var path in DepthFirst(node ?? StartNode, new DirectedGraphEdge[0], new List<DirectedGraphEdge>(), new List<DirectedGraphEdge>()))
                 yield return path;
         }
 

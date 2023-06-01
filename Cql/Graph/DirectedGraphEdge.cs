@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public class DirectedGraphEdge
     {

@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Fhir.Serialization
+namespace Hl7.Cql.Poco.Fhir.Serialization
 {
     public abstract class ElementConverter<TElement> : JsonConverter<TElement>
     {

@@ -1,0 +1,1598 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.2.0",
+         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "88",
+            "s" : [ {
+               "value" : [ "","library NCQAStatus version '1.0.0'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "NCQAStatus",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "locator" : "3:1-3:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIR" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "2",
+            "locator" : "5:1-5:56",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.001",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIRHelpers" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "3",
+            "locator" : "6:1-6:58",
+            "localIdentifier" : "Terminology",
+            "path" : "NCQATerminology",
+            "version" : "1.0.0",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "NCQATerminology" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'1.0.0'"," called ","Terminology" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "8:1-8:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "8:1-8:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "8:1-8:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "14",
+            "locator" : "11:1-13:62",
+            "name" : "Active Allergy",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "// AllergyIntolerance\n","define function ","\"Active Allergy\"","(","Allergy"," " ]
+                  }, {
+                     "r" : "5",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "4",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","AllergyIntolerance" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n    " ]
+                  }, {
+                     "r" : "13",
+                     "s" : [ {
+                        "r" : "13",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "7",
+                              "s" : [ {
+                                 "r" : "6",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Allergy" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","A" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n         " ]
+                        }, {
+                           "r" : "12",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "12",
+                              "s" : [ {
+                                 "r" : "9",
+                                 "s" : [ {
+                                    "r" : "8",
+                                    "s" : [ {
+                                       "value" : [ "A" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "9",
+                                    "s" : [ {
+                                       "value" : [ "clinicalStatus" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","="," " ]
+                              }, {
+                                 "r" : "11",
+                                 "s" : [ {
+                                    "r" : "10",
+                                    "s" : [ {
+                                       "value" : [ "Terminology" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "11",
+                                    "s" : [ {
+                                       "value" : [ "\"allergy-active\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "13",
+               "locator" : "12:5-13:62",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "7",
+                  "locator" : "12:5-12:13",
+                  "alias" : "A",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "6",
+                     "locator" : "12:5-12:11",
+                     "name" : "Allergy",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "12",
+                  "locator" : "13:10-13:62",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "name" : "ToConcept",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "9",
+                        "locator" : "13:16-13:31",
+                        "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                        "path" : "clinicalStatus",
+                        "scope" : "A",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "type" : "ToConcept",
+                     "operand" : {
+                        "localId" : "11",
+                        "locator" : "13:35-13:62",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                        "name" : "allergy-active",
+                        "libraryName" : "Terminology",
+                        "type" : "CodeRef"
+                     }
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Allergy",
+               "operandTypeSpecifier" : {
+                  "localId" : "5",
+                  "locator" : "11:42-11:70",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "4",
+                     "locator" : "11:47-11:69",
+                     "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                     "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "25",
+            "locator" : "16:1-18:52",
+            "name" : "Active Condition",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "// Condition\n","define function ","\"Active Condition\"","(","Condition"," " ]
+                  }, {
+                     "r" : "16",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "15",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","Condition" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n   " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "r" : "24",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "18",
+                              "s" : [ {
+                                 "r" : "17",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Condition" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","C" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n       " ]
+                        }, {
+                           "r" : "23",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "23",
+                              "s" : [ {
+                                 "r" : "20",
+                                 "s" : [ {
+                                    "r" : "19",
+                                    "s" : [ {
+                                       "value" : [ "C" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "20",
+                                    "s" : [ {
+                                       "value" : [ "clinicalStatus" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","="," " ]
+                              }, {
+                                 "r" : "22",
+                                 "s" : [ {
+                                    "r" : "21",
+                                    "s" : [ {
+                                       "value" : [ "Terminology" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "22",
+                                    "s" : [ {
+                                       "value" : [ "\"active\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Condition",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "24",
+               "locator" : "17:4-18:52",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "18",
+                  "locator" : "17:4-17:14",
+                  "alias" : "C",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "17",
+                     "locator" : "17:4-17:12",
+                     "name" : "Condition",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "23",
+                  "locator" : "18:8-18:52",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "name" : "ToConcept",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "20",
+                        "locator" : "18:14-18:29",
+                        "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                        "path" : "clinicalStatus",
+                        "scope" : "C",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "type" : "ToConcept",
+                     "operand" : {
+                        "localId" : "22",
+                        "locator" : "18:33-18:52",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                        "name" : "active",
+                        "libraryName" : "Terminology",
+                        "type" : "CodeRef"
+                     }
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Condition",
+               "operandTypeSpecifier" : {
+                  "localId" : "16",
+                  "locator" : "16:46-16:65",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "15",
+                     "locator" : "16:51-16:64",
+                     "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "35",
+            "locator" : "21:1-23:35",
+            "name" : "Finished Encounter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "35",
+                  "s" : [ {
+                     "value" : [ "// Encounter\n","define function ","\"Finished Encounter\"","(","Enc"," " ]
+                  }, {
+                     "r" : "27",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "26",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","Encounter" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n    " ]
+                  }, {
+                     "r" : "34",
+                     "s" : [ {
+                        "r" : "34",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "29",
+                              "s" : [ {
+                                 "r" : "28",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Enc" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","E" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n        " ]
+                        }, {
+                           "r" : "33",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "33",
+                              "s" : [ {
+                                 "r" : "31",
+                                 "s" : [ {
+                                    "r" : "30",
+                                    "s" : [ {
+                                       "value" : [ "E" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "31",
+                                    "s" : [ {
+                                       "value" : [ "status" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","="," " ]
+                              }, {
+                                 "r" : "32",
+                                 "s" : [ {
+                                    "value" : [ "'finished'" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "34",
+               "locator" : "22:5-23:35",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "29",
+                  "locator" : "22:5-22:9",
+                  "alias" : "E",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "28",
+                     "locator" : "22:5-22:7",
+                     "name" : "Enc",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "33",
+                  "locator" : "23:9-23:35",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "name" : "ToString",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "31",
+                        "locator" : "23:15-23:22",
+                        "resultTypeName" : "{http://hl7.org/fhir}EncounterStatus",
+                        "path" : "status",
+                        "scope" : "E",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "localId" : "32",
+                     "locator" : "23:26-23:35",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "finished",
+                     "type" : "Literal"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Enc",
+               "operandTypeSpecifier" : {
+                  "localId" : "27",
+                  "locator" : "21:42-21:61",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "26",
+                     "locator" : "21:47-21:60",
+                     "resultTypeName" : "{http://hl7.org/fhir}Encounter",
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "45",
+            "locator" : "26:1-28:36",
+            "name" : "Completed Immunization",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "45",
+                  "s" : [ {
+                     "value" : [ "// Immunization\n","define function ","\"Completed Immunization\"","(","Immunization"," " ]
+                  }, {
+                     "r" : "37",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "36",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","Immunization" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n    " ]
+                  }, {
+                     "r" : "44",
+                     "s" : [ {
+                        "r" : "44",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "39",
+                              "s" : [ {
+                                 "r" : "38",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Immunization" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","I" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n        " ]
+                        }, {
+                           "r" : "43",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "43",
+                              "s" : [ {
+                                 "r" : "41",
+                                 "s" : [ {
+                                    "r" : "40",
+                                    "s" : [ {
+                                       "value" : [ "I" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "41",
+                                    "s" : [ {
+                                       "value" : [ "status" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","="," " ]
+                              }, {
+                                 "r" : "42",
+                                 "s" : [ {
+                                    "value" : [ "'completed'" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Immunization",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "44",
+               "locator" : "27:5-28:36",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Immunization",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "39",
+                  "locator" : "27:5-27:18",
+                  "alias" : "I",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Immunization",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "38",
+                     "locator" : "27:5-27:16",
+                     "name" : "Immunization",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Immunization",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "43",
+                  "locator" : "28:9-28:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "name" : "ToString",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "41",
+                        "locator" : "28:15-28:22",
+                        "resultTypeName" : "{http://hl7.org/fhir}ImmunizationStatus",
+                        "path" : "status",
+                        "scope" : "I",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "localId" : "42",
+                     "locator" : "28:26-28:36",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "completed",
+                     "type" : "Literal"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Immunization",
+               "operandTypeSpecifier" : {
+                  "localId" : "37",
+                  "locator" : "26:55-26:77",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Immunization",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "36",
+                     "locator" : "26:60-26:76",
+                     "resultTypeName" : "{http://hl7.org/fhir}Immunization",
+                     "name" : "{http://hl7.org/fhir}Immunization",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "55",
+            "locator" : "31:1-33:36",
+            "name" : "Dispensed Medication",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "55",
+                  "s" : [ {
+                     "value" : [ "// MedicationDispense\n","define function ","\"Dispensed Medication\"","(","Med"," " ]
+                  }, {
+                     "r" : "47",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "46",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","MedicationDispense" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n    " ]
+                  }, {
+                     "r" : "54",
+                     "s" : [ {
+                        "r" : "54",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "49",
+                              "s" : [ {
+                                 "r" : "48",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Med" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","M" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n        " ]
+                        }, {
+                           "r" : "53",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "53",
+                              "s" : [ {
+                                 "r" : "51",
+                                 "s" : [ {
+                                    "r" : "50",
+                                    "s" : [ {
+                                       "value" : [ "M" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "51",
+                                    "s" : [ {
+                                       "value" : [ "status" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","="," " ]
+                              }, {
+                                 "r" : "52",
+                                 "s" : [ {
+                                    "value" : [ "'completed'" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}MedicationDispense",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "54",
+               "locator" : "32:5-33:36",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationDispense",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "49",
+                  "locator" : "32:5-32:9",
+                  "alias" : "M",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationDispense",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "48",
+                     "locator" : "32:5-32:7",
+                     "name" : "Med",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationDispense",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "53",
+                  "locator" : "33:9-33:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "name" : "ToString",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "51",
+                        "locator" : "33:15-33:22",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationDispenseStatus",
+                        "path" : "status",
+                        "scope" : "M",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "localId" : "52",
+                     "locator" : "33:26-33:36",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "completed",
+                     "type" : "Literal"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Med",
+               "operandTypeSpecifier" : {
+                  "localId" : "47",
+                  "locator" : "31:44-31:72",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationDispense",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "46",
+                     "locator" : "31:49-31:71",
+                     "resultTypeName" : "{http://hl7.org/fhir}MedicationDispense",
+                     "name" : "{http://hl7.org/fhir}MedicationDispense",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "66",
+            "locator" : "36:1-38:39",
+            "name" : "Active Medication",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "66",
+                  "s" : [ {
+                     "value" : [ "// MedicationRequest\n","define function ","\"Active Medication\"","(","Med"," " ]
+                  }, {
+                     "r" : "57",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "56",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","MedicationRequest" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n    " ]
+                  }, {
+                     "r" : "65",
+                     "s" : [ {
+                        "r" : "65",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "59",
+                              "s" : [ {
+                                 "r" : "58",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Med" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","M" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n        " ]
+                        }, {
+                           "r" : "64",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "64",
+                              "s" : [ {
+                                 "r" : "61",
+                                 "s" : [ {
+                                    "r" : "60",
+                                    "s" : [ {
+                                       "value" : [ "M" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "61",
+                                    "s" : [ {
+                                       "value" : [ "status" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " in " ]
+                              }, {
+                                 "r" : "63",
+                                 "s" : [ {
+                                    "value" : [ "{" ]
+                                 }, {
+                                    "r" : "62",
+                                    "s" : [ {
+                                       "value" : [ "'completed'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}MedicationRequest",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "65",
+               "locator" : "37:5-38:39",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "59",
+                  "locator" : "37:5-37:9",
+                  "alias" : "M",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "58",
+                     "locator" : "37:5-37:7",
+                     "name" : "Med",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "64",
+                  "locator" : "38:9-38:39",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "In",
+                  "operand" : [ {
+                     "name" : "ToString",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "61",
+                        "locator" : "38:15-38:22",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequestStatus",
+                        "path" : "status",
+                        "scope" : "M",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "localId" : "63",
+                     "locator" : "38:27-38:39",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "62",
+                        "locator" : "38:28-38:38",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "completed",
+                        "type" : "Literal"
+                     } ]
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Med",
+               "operandTypeSpecifier" : {
+                  "localId" : "57",
+                  "locator" : "36:41-36:68",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "56",
+                     "locator" : "36:46-36:67",
+                     "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "76",
+            "locator" : "41:1-43:36",
+            "name" : "Completed Procedure",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "76",
+                  "s" : [ {
+                     "value" : [ "// Procedure\n","define function ","\"Completed Procedure\"","(","Proc"," " ]
+                  }, {
+                     "r" : "68",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "67",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","Procedure" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n    " ]
+                  }, {
+                     "r" : "75",
+                     "s" : [ {
+                        "r" : "75",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "70",
+                              "s" : [ {
+                                 "r" : "69",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Proc" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","P" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n        " ]
+                        }, {
+                           "r" : "74",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "74",
+                              "s" : [ {
+                                 "r" : "72",
+                                 "s" : [ {
+                                    "r" : "71",
+                                    "s" : [ {
+                                       "value" : [ "P" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "72",
+                                    "s" : [ {
+                                       "value" : [ "status" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","="," " ]
+                              }, {
+                                 "r" : "73",
+                                 "s" : [ {
+                                    "value" : [ "'completed'" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Procedure",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "75",
+               "locator" : "42:5-43:36",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "70",
+                  "locator" : "42:5-42:10",
+                  "alias" : "P",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "69",
+                     "locator" : "42:5-42:8",
+                     "name" : "Proc",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "74",
+                  "locator" : "43:9-43:36",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Equal",
+                  "operand" : [ {
+                     "name" : "ToString",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "72",
+                        "locator" : "43:15-43:22",
+                        "resultTypeName" : "{http://hl7.org/fhir}ProcedureStatus",
+                        "path" : "status",
+                        "scope" : "P",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "localId" : "73",
+                     "locator" : "43:26-43:36",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "completed",
+                     "type" : "Literal"
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Proc",
+               "operandTypeSpecifier" : {
+                  "localId" : "68",
+                  "locator" : "41:44-41:63",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "67",
+                     "locator" : "41:49-41:62",
+                     "resultTypeName" : "{http://hl7.org/fhir}Procedure",
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         }, {
+            "localId" : "88",
+            "locator" : "45:1-47:54",
+            "name" : "Completed or Ongoing Procedure",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "88",
+                  "s" : [ {
+                     "value" : [ "","define function ","\"Completed or Ongoing Procedure\"","(","Proc"," " ]
+                  }, {
+                     "r" : "78",
+                     "s" : [ {
+                        "value" : [ "List<" ]
+                     }, {
+                        "r" : "77",
+                        "s" : [ {
+                           "value" : [ "FHIR",".","Procedure" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "):\n    " ]
+                  }, {
+                     "r" : "87",
+                     "s" : [ {
+                        "r" : "87",
+                        "s" : [ {
+                           "s" : [ {
+                              "r" : "80",
+                              "s" : [ {
+                                 "r" : "79",
+                                 "s" : [ {
+                                    "s" : [ {
+                                       "value" : [ "Proc" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " ","P" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n        " ]
+                        }, {
+                           "r" : "86",
+                           "s" : [ {
+                              "value" : [ "where " ]
+                           }, {
+                              "r" : "86",
+                              "s" : [ {
+                                 "r" : "82",
+                                 "s" : [ {
+                                    "r" : "81",
+                                    "s" : [ {
+                                       "value" : [ "P" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "82",
+                                    "s" : [ {
+                                       "value" : [ "status" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " in " ]
+                              }, {
+                                 "r" : "85",
+                                 "s" : [ {
+                                    "value" : [ "{" ]
+                                 }, {
+                                    "r" : "83",
+                                    "s" : [ {
+                                       "value" : [ "'completed'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ", " ]
+                                 }, {
+                                    "r" : "84",
+                                    "s" : [ {
+                                       "value" : [ "'in-progress'" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "}" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Procedure",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "87",
+               "locator" : "46:5-47:54",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "80",
+                  "locator" : "46:5-46:10",
+                  "alias" : "P",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "79",
+                     "locator" : "46:5-46:8",
+                     "name" : "Proc",
+                     "type" : "OperandRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "86",
+                  "locator" : "47:9-47:54",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "In",
+                  "operand" : [ {
+                     "name" : "ToString",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "82",
+                        "locator" : "47:15-47:22",
+                        "resultTypeName" : "{http://hl7.org/fhir}ProcedureStatus",
+                        "path" : "status",
+                        "scope" : "P",
+                        "type" : "Property"
+                     } ]
+                  }, {
+                     "localId" : "85",
+                     "locator" : "47:27-47:54",
+                     "type" : "List",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}String",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "element" : [ {
+                        "localId" : "83",
+                        "locator" : "47:28-47:38",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "completed",
+                        "type" : "Literal"
+                     }, {
+                        "localId" : "84",
+                        "locator" : "47:41-47:53",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "in-progress",
+                        "type" : "Literal"
+                     } ]
+                  } ]
+               }
+            },
+            "operand" : [ {
+               "name" : "Proc",
+               "operandTypeSpecifier" : {
+                  "localId" : "78",
+                  "locator" : "45:55-45:74",
+                  "type" : "ListTypeSpecifier",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "elementType" : {
+                     "localId" : "77",
+                     "locator" : "45:60-45:73",
+                     "resultTypeName" : "{http://hl7.org/fhir}Procedure",
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            } ]
+         } ]
+      }
+   }
+}
+

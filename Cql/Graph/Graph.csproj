@@ -4,8 +4,8 @@
     <TargetFramework>netstandard2.0</TargetFramework>
 	  <Nullable>enable</Nullable>
 	  <LangVersion>8.0</LangVersion>
-	  <AssemblyName>Ncqa.Graph</AssemblyName>
-	  <RootNamespace>Ncqa.Graph</RootNamespace>
+	  <AssemblyName>Hl7.Cql.Graph</AssemblyName>
+	  <RootNamespace>Hl7.Cql.Graph</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

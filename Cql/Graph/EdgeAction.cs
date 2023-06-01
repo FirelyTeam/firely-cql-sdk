@@ -1,5 +1,5 @@
 ﻿
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public abstract class EdgeAction
     {

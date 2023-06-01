@@ -1,0 +1,72 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33123",
+  "meta": {
+    "lastUpdated": "2019-06-09T17:13:35.627-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1334"
+    }
+  ],
+  "version": "Working",
+  "name": "Unilateral_Mastectomy_Left",
+  "title": "Unilateral Mastectomy Left",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:10-04:00",
+    "total": 8,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "428571003",
+        "display": "Mastectomy of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726437009",
+        "display": "Modified radical mastectomy of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "451211000124109",
+        "display": "Prophylactic mastectomy of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726429001",
+        "display": "Radical mastectomy of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "741009001",
+        "display": "Simple mastectomy of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726435001",
+        "display": "Subcutaneous mastectomy of left breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "741018004",
+        "display": "Subcutaneous mastectomy of left breast with prosthetic implant"
+      },
+      {
+        "system": "https://www.cms.gov/Medicare/Coding/ICD10/index.html",
+        "version": "2021.1.20AA",
+        "code": "0HTU0ZZ",
+        "display": "Resection of Left Breast, Open Approach"
+      }
+    ]
+  }
+}

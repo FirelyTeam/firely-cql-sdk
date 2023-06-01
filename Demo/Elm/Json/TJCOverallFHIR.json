@@ -1,0 +1,3062 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.2.0",
+         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      }, {
+         "type" : "Annotation",
+         "s" : {
+            "r" : "179",
+            "s" : [ {
+               "value" : [ "","library TJCOverallFHIR version '1.8.000'" ]
+            } ]
+         }
+      } ],
+      "identifier" : {
+         "id" : "TJCOverallFHIR",
+         "version" : "1.8.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "localId" : "1",
+            "locator" : "12:1-12:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "update"
+               }, {
+                  "name" : "update"
+               } ],
+               "s" : {
+                  "r" : "1",
+                  "s" : [ {
+                     "value" : [ "/*@update: @@BTR 2020-03-31 ->\nIncremented version to 5.0.000\nUpdated FHIR version to 4.0.1\n@@\n@update: @@BTR 2021-07-02 ->\nIncremented GCL version to 6.0.000\nApplied 2021 AU changes\n@@*/\n","using " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIR" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.1'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "localId" : "2",
+            "locator" : "14:1-14:69",
+            "localIdentifier" : "Global",
+            "path" : "MATGlobalCommonFunctionsFHIR4",
+            "version" : "6.1.000",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "2",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "MATGlobalCommonFunctionsFHIR4" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'6.1.000'"," called ","Global" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "3",
+            "locator" : "15:1-15:56",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.001",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "3",
+                  "s" : [ {
+                     "value" : [ "","include " ]
+                  }, {
+                     "s" : [ {
+                        "value" : [ "FHIRHelpers" ]
+                     } ]
+                  }, {
+                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "localId" : "25",
+            "locator" : "35:1-36:66",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "25",
+                  "s" : [ {
+                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
+                  }, {
+                     "r" : "24",
+                     "s" : [ {
+                        "value" : [ "Interval<" ]
+                     }, {
+                        "r" : "23",
+                        "s" : [ {
+                           "value" : [ "DateTime" ]
+                        } ]
+                     }, {
+                        "value" : [ ">" ]
+                     } ]
+                  }, {
+                     "value" : [ "\n  default " ]
+                  }, {
+                     "r" : "22",
+                     "s" : [ {
+                        "r" : "20",
+                        "value" : [ "Interval[","@2019-01-01T00:00:00.0",", ","@2020-01-01T00:00:00.0",")" ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "default" : {
+               "localId" : "22",
+               "locator" : "36:11-36:66",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "low" : {
+                  "localId" : "20",
+                  "locator" : "36:20-36:41",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2019",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "localId" : "21",
+                  "locator" : "36:44-36:65",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2020",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "localId" : "24",
+               "locator" : "35:32-35:49",
+               "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "pointType" : {
+                  "localId" : "23",
+                  "locator" : "35:41-35:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "codeSystems" : {
+         "def" : [ {
+            "localId" : "4",
+            "locator" : "17:1-17:38",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+            "name" : "LOINC",
+            "id" : "http://loinc.org",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "4",
+                  "s" : [ {
+                     "value" : [ "","codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "localId" : "5",
+            "locator" : "19:1-19:94",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Comfort Measures",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "5",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Comfort Measures\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "6",
+            "locator" : "20:1-20:116",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Discharge To Acute Care Facility",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "6",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Discharge To Acute Care Facility\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "7",
+            "locator" : "21:1-21:136",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Discharged to Health Care Facility for Hospice Care",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "7",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Discharged to Health Care Facility for Hospice Care\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "8",
+            "locator" : "22:1-22:120",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Discharged to Home for Hospice Care",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "8",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Discharged to Home for Hospice Care\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "9",
+            "locator" : "23:1-23:111",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Emergency Department Visit",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "9",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Emergency Department Visit\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "10",
+            "locator" : "24:1-24:100",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Encounter Inpatient",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "10",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Encounter Inpatient\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "11",
+            "locator" : "25:1-25:103",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Hemorrhagic Stroke",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "11",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Hemorrhagic Stroke\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "12",
+            "locator" : "26:1-26:100",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Ischemic Stroke",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "12",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Ischemic Stroke\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "13",
+            "locator" : "27:1-27:112",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Left Against Medical Advice",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "13",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Left Against Medical Advice\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "14",
+            "locator" : "28:1-28:107",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Non-Elective Inpatient",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "14",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Non-Elective Inpatient\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "15",
+            "locator" : "29:1-29:102",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Observation Services",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "15",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Observation Services\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "16",
+            "locator" : "30:1-30:100",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Patient Expired",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "16",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Patient Expired\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309'" ]
+                  } ]
+               }
+            } ]
+         }, {
+            "localId" : "17",
+            "locator" : "31:1-31:99",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Ticagrelor Therapy",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.39",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "17",
+                  "s" : [ {
+                     "value" : [ "","valueset ","\"Ticagrelor Therapy\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.39'" ]
+                  } ]
+               }
+            } ]
+         } ]
+      },
+      "codes" : {
+         "def" : [ {
+            "localId" : "19",
+            "locator" : "33:1-33:62",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "Birth date",
+            "id" : "21112-8",
+            "display" : "Birth date",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "19",
+                  "s" : [ {
+                     "value" : [ "","code ","\"Birth date\"",": ","'21112-8'"," from " ]
+                  }, {
+                     "r" : "18",
+                     "s" : [ {
+                        "value" : [ "\"LOINC\"" ]
+                     } ]
+                  }, {
+                     "value" : [ " display ","'Birth date'" ]
+                  } ]
+               }
+            } ],
+            "codeSystem" : {
+               "localId" : "18",
+               "locator" : "33:35-33:41",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
+               "name" : "LOINC"
+            }
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "38:1-38:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "38:1-38:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "38:1-38:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "localId" : "40",
+            "locator" : "59:1-62:92",
+            "name" : "Non Elective Inpatient Encounter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "40",
+                  "s" : [ {
+                     "value" : [ "// Translator issue with 1.4.9-SNAPSHOT: https://github.com/cqframework/clinical_quality_language/issues/511\n","define ","\"Non Elective Inpatient Encounter\"",":\n  " ]
+                  }, {
+                     "r" : "39",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "27",
+                           "s" : [ {
+                              "r" : "26",
+                              "s" : [ {
+                                 "r" : "26",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Encounter\"",": " ]
+                                 }, {
+                                    "s" : [ {
+                                       "value" : [ "\"Non-Elective Inpatient\"" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","NonElectiveEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n                  \t\t" ]
+                     }, {
+                        "r" : "38",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "38",
+                           "s" : [ {
+                              "r" : "33",
+                              "s" : [ {
+                                 "r" : "31",
+                                 "s" : [ {
+                                    "r" : "28",
+                                    "s" : [ {
+                                       "value" : [ "Global" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "31",
+                                    "s" : [ {
+                                       "value" : [ "\"LengthInDays\"","(" ]
+                                    }, {
+                                       "r" : "30",
+                                       "s" : [ {
+                                          "r" : "29",
+                                          "s" : [ {
+                                             "value" : [ "NonElectiveEncounter" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "30",
+                                          "s" : [ {
+                                             "value" : [ "period" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "r" : "32",
+                                 "value" : [ " ","<="," ","120" ]
+                              } ]
+                           }, {
+                              "value" : [ "\n                  \t\t\tand " ]
+                           }, {
+                              "r" : "37",
+                              "s" : [ {
+                                 "r" : "35",
+                                 "s" : [ {
+                                    "r" : "34",
+                                    "s" : [ {
+                                       "value" : [ "NonElectiveEncounter" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "35",
+                                    "s" : [ {
+                                       "value" : [ "period" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "r" : "37",
+                                 "value" : [ " ","ends during day of"," " ]
+                              }, {
+                                 "r" : "36",
+                                 "s" : [ {
+                                    "value" : [ "\"Measurement Period\"" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "39",
+               "locator" : "60:3-62:92",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "27",
+                  "locator" : "60:3-60:62",
+                  "alias" : "NonElectiveEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "26",
+                     "locator" : "60:3-60:41",
+                     "dataType" : "{http://hl7.org/fhir}Encounter",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
+                     "codeProperty" : "type",
+                     "codeComparator" : "in",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "codes" : {
+                        "locator" : "60:17-60:40",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "Non-Elective Inpatient",
+                        "preserve" : true,
+                        "type" : "ValueSetRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "38",
+                  "locator" : "61:21-62:92",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "operand" : [ {
+                     "localId" : "33",
+                     "locator" : "61:27-61:83",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "LessOrEqual",
+                     "operand" : [ {
+                        "localId" : "31",
+                        "locator" : "61:27-61:76",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "name" : "LengthInDays",
+                        "libraryName" : "Global",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "name" : "ToInterval",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "30",
+                              "locator" : "61:49-61:75",
+                              "resultTypeName" : "{http://hl7.org/fhir}Period",
+                              "path" : "period",
+                              "scope" : "NonElectiveEncounter",
+                              "type" : "Property"
+                           } ]
+                        } ]
+                     }, {
+                        "localId" : "32",
+                        "locator" : "61:81-61:83",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "120",
+                        "type" : "Literal"
+                     } ]
+                  }, {
+                     "localId" : "37",
+                     "locator" : "62:26-62:92",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "precision" : "Day",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "62:54-62:57",
+                        "type" : "End",
+                        "operand" : {
+                           "name" : "ToInterval",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "35",
+                              "locator" : "62:26-62:52",
+                              "resultTypeName" : "{http://hl7.org/fhir}Period",
+                              "path" : "period",
+                              "scope" : "NonElectiveEncounter",
+                              "type" : "Property"
+                           } ]
+                        }
+                     }, {
+                        "localId" : "36",
+                        "locator" : "62:73-62:92",
+                        "name" : "Measurement Period",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     } ]
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "57",
+            "locator" : "40:1-43:100",
+            "name" : "All Stroke Encounter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "57",
+                  "s" : [ {
+                     "value" : [ "","define ","\"All Stroke Encounter\"",":\n  " ]
+                  }, {
+                     "r" : "56",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "42",
+                           "s" : [ {
+                              "r" : "41",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Non Elective Inpatient Encounter\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","NonElectiveEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n                      " ]
+                     }, {
+                        "r" : "55",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "55",
+                           "s" : [ {
+                              "r" : "48",
+                              "s" : [ {
+                                 "r" : "46",
+                                 "s" : [ {
+                                    "r" : "45",
+                                    "s" : [ {
+                                       "r" : "43",
+                                       "s" : [ {
+                                          "value" : [ "Global" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "45",
+                                       "s" : [ {
+                                          "value" : [ "PrincipalDiagnosis","(" ]
+                                       }, {
+                                          "r" : "44",
+                                          "s" : [ {
+                                             "value" : [ "NonElectiveEncounter" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ")" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "46",
+                                    "s" : [ {
+                                       "value" : [ "code" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " in " ]
+                              }, {
+                                 "r" : "47",
+                                 "s" : [ {
+                                    "value" : [ "\"Hemorrhagic Stroke\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n                        or " ]
+                           }, {
+                              "r" : "54",
+                              "s" : [ {
+                                 "r" : "52",
+                                 "s" : [ {
+                                    "r" : "51",
+                                    "s" : [ {
+                                       "r" : "49",
+                                       "s" : [ {
+                                          "value" : [ "Global" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "51",
+                                       "s" : [ {
+                                          "value" : [ "PrincipalDiagnosis","(" ]
+                                       }, {
+                                          "r" : "50",
+                                          "s" : [ {
+                                             "value" : [ "NonElectiveEncounter" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ ")" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "52",
+                                    "s" : [ {
+                                       "value" : [ "code" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " in " ]
+                              }, {
+                                 "r" : "53",
+                                 "s" : [ {
+                                    "value" : [ "\"Ischemic Stroke\"" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "56",
+               "locator" : "41:3-43:100",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "42",
+                  "locator" : "41:3-41:57",
+                  "alias" : "NonElectiveEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "41",
+                     "locator" : "41:3-41:36",
+                     "name" : "Non Elective Inpatient Encounter",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "55",
+                  "locator" : "42:23-43:100",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "48",
+                     "locator" : "42:29-42:104",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "InValueSet",
+                     "code" : {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "localId" : "46",
+                           "locator" : "42:29-42:80",
+                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                           "path" : "code",
+                           "type" : "Property",
+                           "source" : {
+                              "localId" : "45",
+                              "locator" : "42:29-42:75",
+                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                              "name" : "PrincipalDiagnosis",
+                              "libraryName" : "Global",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "localId" : "44",
+                                 "locator" : "42:55-42:74",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Encounter",
+                                 "name" : "NonElectiveEncounter",
+                                 "type" : "AliasRef"
+                              } ]
+                           }
+                        } ]
+                     },
+                     "valueset" : {
+                        "localId" : "47",
+                        "locator" : "42:85-42:104",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "Hemorrhagic Stroke",
+                        "preserve" : true
+                     }
+                  }, {
+                     "localId" : "54",
+                     "locator" : "43:28-43:100",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "InValueSet",
+                     "code" : {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "localId" : "52",
+                           "locator" : "43:28-43:79",
+                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                           "path" : "code",
+                           "type" : "Property",
+                           "source" : {
+                              "localId" : "51",
+                              "locator" : "43:28-43:74",
+                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                              "name" : "PrincipalDiagnosis",
+                              "libraryName" : "Global",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "localId" : "50",
+                                 "locator" : "43:54-43:73",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Encounter",
+                                 "name" : "NonElectiveEncounter",
+                                 "type" : "AliasRef"
+                              } ]
+                           }
+                        } ]
+                     },
+                     "valueset" : {
+                        "localId" : "53",
+                        "locator" : "43:84-43:100",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "Ischemic Stroke",
+                        "preserve" : true
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "70",
+            "locator" : "64:1-67:85",
+            "name" : "Encounter with Principal Diagnosis and Age",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "70",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Encounter with Principal Diagnosis and Age\"",":\n  " ]
+                  }, {
+                     "r" : "69",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "59",
+                           "s" : [ {
+                              "r" : "58",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"All Stroke Encounter\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","AllStrokeEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n                  \t\t" ]
+                     }, {
+                        "r" : "68",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "61",
+                           "s" : [ {
+                              "r" : "60",
+                              "s" : [ {
+                                 "r" : "60",
+                                 "s" : [ {
+                                    "value" : [ "[","\"Patient\"","]" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","BirthDate" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n                  \t\t\tsuch that " ]
+                        }, {
+                           "r" : "67",
+                           "s" : [ {
+                              "r" : "65",
+                              "s" : [ {
+                                 "value" : [ "AgeInYearsAt","(" ]
+                              }, {
+                                 "r" : "64",
+                                 "s" : [ {
+                                    "value" : [ "start of " ]
+                                 }, {
+                                    "r" : "63",
+                                    "s" : [ {
+                                       "r" : "62",
+                                       "s" : [ {
+                                          "value" : [ "AllStrokeEncounter" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "63",
+                                       "s" : [ {
+                                          "value" : [ "period" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "r" : "66",
+                              "value" : [ " ",">="," ","18" ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "69",
+               "locator" : "65:3-67:85",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "59",
+                  "locator" : "65:3-65:43",
+                  "alias" : "AllStrokeEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "58",
+                     "locator" : "65:3-65:24",
+                     "name" : "All Stroke Encounter",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "68",
+                  "locator" : "66:21-67:85",
+                  "alias" : "BirthDate",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Patient",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "60",
+                     "locator" : "66:26-66:36",
+                     "dataType" : "{http://hl7.org/fhir}Patient",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Patient",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "localId" : "67",
+                     "locator" : "67:32-67:85",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "GreaterOrEqual",
+                     "operand" : [ {
+                        "localId" : "65",
+                        "locator" : "67:32-67:79",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "precision" : "Year",
+                        "type" : "CalculateAgeAt",
+                        "operand" : [ {
+                           "type" : "ToDateTime",
+                           "operand" : {
+                              "path" : "birthDate.value",
+                              "type" : "Property",
+                              "source" : {
+                                 "name" : "Patient",
+                                 "type" : "ExpressionRef"
+                              }
+                           }
+                        }, {
+                           "localId" : "64",
+                           "locator" : "67:45-67:78",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "Start",
+                           "operand" : {
+                              "name" : "ToInterval",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "localId" : "63",
+                                 "locator" : "67:54-67:78",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Period",
+                                 "path" : "period",
+                                 "scope" : "AllStrokeEncounter",
+                                 "type" : "Property"
+                              } ]
+                           }
+                        } ]
+                     }, {
+                        "localId" : "66",
+                        "locator" : "67:84-67:85",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "18",
+                        "type" : "Literal"
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "80",
+            "locator" : "45:1-47:95",
+            "name" : "Ischemic Stroke Encounter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "80",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Ischemic Stroke Encounter\"",":\n  " ]
+                  }, {
+                     "r" : "79",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "72",
+                           "s" : [ {
+                              "r" : "71",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Encounter with Principal Diagnosis and Age\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","EncounterWithAge" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n                  \t\t" ]
+                     }, {
+                        "r" : "78",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "78",
+                           "s" : [ {
+                              "r" : "76",
+                              "s" : [ {
+                                 "r" : "75",
+                                 "s" : [ {
+                                    "r" : "73",
+                                    "s" : [ {
+                                       "value" : [ "Global" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "75",
+                                    "s" : [ {
+                                       "value" : [ "PrincipalDiagnosis","(" ]
+                                    }, {
+                                       "r" : "74",
+                                       "s" : [ {
+                                          "value" : [ "EncounterWithAge" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "76",
+                                 "s" : [ {
+                                    "value" : [ "code" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " in " ]
+                           }, {
+                              "r" : "77",
+                              "s" : [ {
+                                 "value" : [ "\"Ischemic Stroke\"" ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "79",
+               "locator" : "46:3-47:95",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "72",
+                  "locator" : "46:3-46:63",
+                  "alias" : "EncounterWithAge",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "71",
+                     "locator" : "46:3-46:46",
+                     "name" : "Encounter with Principal Diagnosis and Age",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "78",
+                  "locator" : "47:21-47:95",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "InValueSet",
+                  "code" : {
+                     "name" : "ToConcept",
+                     "libraryName" : "FHIRHelpers",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "localId" : "76",
+                        "locator" : "47:27-47:74",
+                        "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                        "path" : "code",
+                        "type" : "Property",
+                        "source" : {
+                           "localId" : "75",
+                           "locator" : "47:27-47:69",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "PrincipalDiagnosis",
+                           "libraryName" : "Global",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "74",
+                              "locator" : "47:53-47:68",
+                              "resultTypeName" : "{http://hl7.org/fhir}Encounter",
+                              "name" : "EncounterWithAge",
+                              "type" : "AliasRef"
+                           } ]
+                        }
+                     } ]
+                  },
+                  "valueset" : {
+                     "localId" : "77",
+                     "locator" : "47:79-47:95",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "name" : "Ischemic Stroke",
+                     "preserve" : true
+                  }
+               }
+            }
+         }, {
+            "localId" : "113",
+            "locator" : "49:1-55:141",
+            "name" : "Ischemic Stroke Encounters with Discharge Disposition",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "113",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Ischemic Stroke Encounters with Discharge Disposition\"",":\n  " ]
+                  }, {
+                     "r" : "112",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "82",
+                           "s" : [ {
+                              "r" : "81",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Ischemic Stroke Encounter\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","IschemicStrokeEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n                  \t\t" ]
+                     }, {
+                        "r" : "111",
+                        "s" : [ {
+                           "value" : [ "where " ]
+                        }, {
+                           "r" : "111",
+                           "s" : [ {
+                              "r" : "105",
+                              "s" : [ {
+                                 "r" : "99",
+                                 "s" : [ {
+                                    "r" : "93",
+                                    "s" : [ {
+                                       "r" : "87",
+                                       "s" : [ {
+                                          "r" : "85",
+                                          "s" : [ {
+                                             "r" : "84",
+                                             "s" : [ {
+                                                "r" : "83",
+                                                "s" : [ {
+                                                   "value" : [ "IschemicStrokeEncounter" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "84",
+                                                "s" : [ {
+                                                   "value" : [ "hospitalization" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "85",
+                                             "s" : [ {
+                                                "value" : [ "dischargeDisposition" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " in " ]
+                                       }, {
+                                          "r" : "86",
+                                          "s" : [ {
+                                             "value" : [ "\"Discharge To Acute Care Facility\"" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "\n                  \t\t\tor " ]
+                                    }, {
+                                       "r" : "92",
+                                       "s" : [ {
+                                          "r" : "90",
+                                          "s" : [ {
+                                             "r" : "89",
+                                             "s" : [ {
+                                                "r" : "88",
+                                                "s" : [ {
+                                                   "value" : [ "IschemicStrokeEncounter" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "89",
+                                                "s" : [ {
+                                                   "value" : [ "hospitalization" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "90",
+                                             "s" : [ {
+                                                "value" : [ "dischargeDisposition" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " in " ]
+                                       }, {
+                                          "r" : "91",
+                                          "s" : [ {
+                                             "value" : [ "\"Left Against Medical Advice\"" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "\n                  \t\t\tor " ]
+                                 }, {
+                                    "r" : "98",
+                                    "s" : [ {
+                                       "r" : "96",
+                                       "s" : [ {
+                                          "r" : "95",
+                                          "s" : [ {
+                                             "r" : "94",
+                                             "s" : [ {
+                                                "value" : [ "IschemicStrokeEncounter" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "95",
+                                             "s" : [ {
+                                                "value" : [ "hospitalization" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "96",
+                                          "s" : [ {
+                                             "value" : [ "dischargeDisposition" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " in " ]
+                                    }, {
+                                       "r" : "97",
+                                       "s" : [ {
+                                          "value" : [ "\"Patient Expired\"" ]
+                                       } ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ "\n                  \t\t\tor " ]
+                              }, {
+                                 "r" : "104",
+                                 "s" : [ {
+                                    "r" : "102",
+                                    "s" : [ {
+                                       "r" : "101",
+                                       "s" : [ {
+                                          "r" : "100",
+                                          "s" : [ {
+                                             "value" : [ "IschemicStrokeEncounter" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "101",
+                                          "s" : [ {
+                                             "value" : [ "hospitalization" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "102",
+                                       "s" : [ {
+                                          "value" : [ "dischargeDisposition" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " in " ]
+                                 }, {
+                                    "r" : "103",
+                                    "s" : [ {
+                                       "value" : [ "\"Discharged to Home for Hospice Care\"" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n                  \t\t\tor " ]
+                           }, {
+                              "r" : "110",
+                              "s" : [ {
+                                 "r" : "108",
+                                 "s" : [ {
+                                    "r" : "107",
+                                    "s" : [ {
+                                       "r" : "106",
+                                       "s" : [ {
+                                          "value" : [ "IschemicStrokeEncounter" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "107",
+                                       "s" : [ {
+                                          "value" : [ "hospitalization" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "108",
+                                    "s" : [ {
+                                       "value" : [ "dischargeDisposition" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " in " ]
+                              }, {
+                                 "r" : "109",
+                                 "s" : [ {
+                                    "value" : [ "\"Discharged to Health Care Facility for Hospice Care\"" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "112",
+               "locator" : "50:3-55:141",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "82",
+                  "locator" : "50:3-50:53",
+                  "alias" : "IschemicStrokeEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "81",
+                     "locator" : "50:3-50:29",
+                     "name" : "Ischemic Stroke Encounter",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "localId" : "111",
+                  "locator" : "51:21-55:141",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "localId" : "105",
+                     "locator" : "51:27-54:125",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Or",
+                     "operand" : [ {
+                        "localId" : "99",
+                        "locator" : "51:27-53:105",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Or",
+                        "operand" : [ {
+                           "localId" : "93",
+                           "locator" : "51:27-52:117",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Or",
+                           "operand" : [ {
+                              "localId" : "87",
+                              "locator" : "51:27-51:124",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "InValueSet",
+                              "code" : {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "localId" : "85",
+                                    "locator" : "51:27-51:86",
+                                    "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                                    "path" : "dischargeDisposition",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "localId" : "84",
+                                       "locator" : "51:27-51:65",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Encounter.Hospitalization",
+                                       "path" : "hospitalization",
+                                       "scope" : "IschemicStrokeEncounter",
+                                       "type" : "Property"
+                                    }
+                                 } ]
+                              },
+                              "valueset" : {
+                                 "localId" : "86",
+                                 "locator" : "51:91-51:124",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Discharge To Acute Care Facility",
+                                 "preserve" : true
+                              }
+                           }, {
+                              "localId" : "92",
+                              "locator" : "52:25-52:117",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "InValueSet",
+                              "code" : {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "localId" : "90",
+                                    "locator" : "52:25-52:84",
+                                    "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                                    "path" : "dischargeDisposition",
+                                    "type" : "Property",
+                                    "source" : {
+                                       "localId" : "89",
+                                       "locator" : "52:25-52:63",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Encounter.Hospitalization",
+                                       "path" : "hospitalization",
+                                       "scope" : "IschemicStrokeEncounter",
+                                       "type" : "Property"
+                                    }
+                                 } ]
+                              },
+                              "valueset" : {
+                                 "localId" : "91",
+                                 "locator" : "52:89-52:117",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Left Against Medical Advice",
+                                 "preserve" : true
+                              }
+                           } ]
+                        }, {
+                           "localId" : "98",
+                           "locator" : "53:25-53:105",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "InValueSet",
+                           "code" : {
+                              "name" : "ToConcept",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "localId" : "96",
+                                 "locator" : "53:25-53:84",
+                                 "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                                 "path" : "dischargeDisposition",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "localId" : "95",
+                                    "locator" : "53:25-53:63",
+                                    "resultTypeName" : "{http://hl7.org/fhir}Encounter.Hospitalization",
+                                    "path" : "hospitalization",
+                                    "scope" : "IschemicStrokeEncounter",
+                                    "type" : "Property"
+                                 }
+                              } ]
+                           },
+                           "valueset" : {
+                              "localId" : "97",
+                              "locator" : "53:89-53:105",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Patient Expired",
+                              "preserve" : true
+                           }
+                        } ]
+                     }, {
+                        "localId" : "104",
+                        "locator" : "54:25-54:125",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "InValueSet",
+                        "code" : {
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "102",
+                              "locator" : "54:25-54:84",
+                              "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                              "path" : "dischargeDisposition",
+                              "type" : "Property",
+                              "source" : {
+                                 "localId" : "101",
+                                 "locator" : "54:25-54:63",
+                                 "resultTypeName" : "{http://hl7.org/fhir}Encounter.Hospitalization",
+                                 "path" : "hospitalization",
+                                 "scope" : "IschemicStrokeEncounter",
+                                 "type" : "Property"
+                              }
+                           } ]
+                        },
+                        "valueset" : {
+                           "localId" : "103",
+                           "locator" : "54:89-54:125",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Discharged to Home for Hospice Care",
+                           "preserve" : true
+                        }
+                     } ]
+                  }, {
+                     "localId" : "110",
+                     "locator" : "55:25-55:141",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "InValueSet",
+                     "code" : {
+                        "name" : "ToConcept",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "localId" : "108",
+                           "locator" : "55:25-55:84",
+                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
+                           "path" : "dischargeDisposition",
+                           "type" : "Property",
+                           "source" : {
+                              "localId" : "107",
+                              "locator" : "55:25-55:63",
+                              "resultTypeName" : "{http://hl7.org/fhir}Encounter.Hospitalization",
+                              "path" : "hospitalization",
+                              "scope" : "IschemicStrokeEncounter",
+                              "type" : "Property"
+                           }
+                        } ]
+                     },
+                     "valueset" : {
+                        "localId" : "109",
+                        "locator" : "55:89-55:141",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "Discharged to Health Care Facility for Hospice Care",
+                        "preserve" : true
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "localId" : "133",
+            "locator" : "79:1-85:9",
+            "name" : "Intervention Comfort Measures",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "133",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Intervention Comfort Measures\"",":\n  " ]
+                  }, {
+                     "r" : "132",
+                     "s" : [ {
+                        "r" : "122",
+                        "s" : [ {
+                           "value" : [ "( " ]
+                        }, {
+                           "r" : "122",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "117",
+                                 "s" : [ {
+                                    "r" : "116",
+                                    "s" : [ {
+                                       "r" : "116",
+                                       "s" : [ {
+                                          "value" : [ "[","\"ServiceRequest\"",": " ]
+                                       }, {
+                                          "s" : [ {
+                                             "value" : [ "\"Comfort Measures\"" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "]" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","P" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n          " ]
+                           }, {
+                              "r" : "121",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "121",
+                                 "s" : [ {
+                                    "r" : "119",
+                                    "s" : [ {
+                                       "r" : "118",
+                                       "s" : [ {
+                                          "value" : [ "P" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "119",
+                                       "s" : [ {
+                                          "value" : [ "intent" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","="," " ]
+                                 }, {
+                                    "r" : "120",
+                                    "s" : [ {
+                                       "value" : [ "'order'" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n      )" ]
+                        } ]
+                     }, {
+                        "value" : [ "\n        union " ]
+                     }, {
+                        "r" : "131",
+                        "s" : [ {
+                           "value" : [ "( " ]
+                        }, {
+                           "r" : "131",
+                           "s" : [ {
+                              "s" : [ {
+                                 "r" : "124",
+                                 "s" : [ {
+                                    "r" : "123",
+                                    "s" : [ {
+                                       "r" : "123",
+                                       "s" : [ {
+                                          "value" : [ "[","\"Procedure\"",": " ]
+                                       }, {
+                                          "s" : [ {
+                                             "value" : [ "\"Comfort Measures\"" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "]" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " ","InterventionPerformed" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ "\n            " ]
+                           }, {
+                              "r" : "130",
+                              "s" : [ {
+                                 "value" : [ "where " ]
+                              }, {
+                                 "r" : "130",
+                                 "s" : [ {
+                                    "r" : "126",
+                                    "s" : [ {
+                                       "r" : "125",
+                                       "s" : [ {
+                                          "value" : [ "InterventionPerformed" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "." ]
+                                    }, {
+                                       "r" : "126",
+                                       "s" : [ {
+                                          "value" : [ "status" ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " in " ]
+                                 }, {
+                                    "r" : "129",
+                                    "s" : [ {
+                                       "value" : [ "{ " ]
+                                    }, {
+                                       "r" : "127",
+                                       "s" : [ {
+                                          "value" : [ "'completed'" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ", " ]
+                                    }, {
+                                       "r" : "128",
+                                       "s" : [ {
+                                          "value" : [ "'in-progress'" ]
+                                       } ]
+                                    }, {
+                                       "value" : [ " }" ]
+                                    } ]
+                                 } ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ "\n        )" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "type" : "ChoiceTypeSpecifier",
+                  "choice" : [ {
+                     "name" : "{http://hl7.org/fhir}ServiceRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }, {
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  } ]
+               }
+            },
+            "expression" : {
+               "localId" : "132",
+               "locator" : "80:3-85:9",
+               "type" : "Union",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "type" : "ChoiceTypeSpecifier",
+                     "choice" : [ {
+                        "name" : "{http://hl7.org/fhir}ServiceRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     } ]
+                  }
+               },
+               "operand" : [ {
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "122",
+                     "locator" : "80:3-82:7",
+                     "type" : "Query",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}ServiceRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "source" : [ {
+                        "localId" : "117",
+                        "locator" : "80:5-80:44",
+                        "alias" : "P",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}ServiceRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "expression" : {
+                           "localId" : "116",
+                           "locator" : "80:5-80:42",
+                           "dataType" : "{http://hl7.org/fhir}ServiceRequest",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/ServiceRequest",
+                           "codeProperty" : "code",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}ServiceRequest",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "codes" : {
+                              "locator" : "80:24-80:41",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Comfort Measures",
+                              "preserve" : true,
+                              "type" : "ValueSetRef"
+                           }
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "localId" : "121",
+                        "locator" : "81:11-81:34",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Equal",
+                        "operand" : [ {
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "119",
+                              "locator" : "81:17-81:24",
+                              "resultTypeName" : "{http://hl7.org/fhir}ServiceRequestIntent",
+                              "path" : "intent",
+                              "scope" : "P",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "localId" : "120",
+                           "locator" : "81:28-81:34",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "order",
+                           "type" : "Literal"
+                        } ]
+                     }
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}ServiceRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     }
+                  }
+               }, {
+                  "type" : "As",
+                  "operand" : {
+                     "localId" : "131",
+                     "locator" : "83:15-85:9",
+                     "type" : "Query",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "source" : [ {
+                        "localId" : "124",
+                        "locator" : "83:17-83:71",
+                        "alias" : "InterventionPerformed",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "expression" : {
+                           "localId" : "123",
+                           "locator" : "83:17-83:49",
+                           "dataType" : "{http://hl7.org/fhir}Procedure",
+                           "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                           "codeProperty" : "code",
+                           "codeComparator" : "in",
+                           "type" : "Retrieve",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "codes" : {
+                              "locator" : "83:31-83:48",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Comfort Measures",
+                              "preserve" : true,
+                              "type" : "ValueSetRef"
+                           }
+                        }
+                     } ],
+                     "relationship" : [ ],
+                     "where" : {
+                        "localId" : "130",
+                        "locator" : "84:13-84:80",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "In",
+                        "operand" : [ {
+                           "name" : "ToString",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "126",
+                              "locator" : "84:19-84:46",
+                              "resultTypeName" : "{http://hl7.org/fhir}ProcedureStatus",
+                              "path" : "status",
+                              "scope" : "InterventionPerformed",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "localId" : "129",
+                           "locator" : "84:51-84:80",
+                           "type" : "List",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "element" : [ {
+                              "localId" : "127",
+                              "locator" : "84:53-84:63",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "completed",
+                              "type" : "Literal"
+                           }, {
+                              "localId" : "128",
+                              "locator" : "84:66-84:78",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "in-progress",
+                              "type" : "Literal"
+                           } ]
+                        } ]
+                     }
+                  },
+                  "asTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}ServiceRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "151",
+            "locator" : "69:1-72:192",
+            "name" : "Comfort Measures during Hospitalization",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "151",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Comfort Measures during Hospitalization\"",":\n  " ]
+                  }, {
+                     "r" : "150",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "115",
+                           "s" : [ {
+                              "r" : "114",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Ischemic Stroke Encounter\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","IschemicStrokeEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n              " ]
+                     }, {
+                        "r" : "149",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "135",
+                           "s" : [ {
+                              "r" : "134",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Intervention Comfort Measures\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","ComfortMeasure" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n              such that " ]
+                        }, {
+                           "r" : "148",
+                           "s" : [ {
+                              "r" : "144",
+                              "s" : [ {
+                                 "r" : "136",
+                                 "s" : [ {
+                                    "value" : [ "FHIRHelpers" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "144",
+                                 "s" : [ {
+                                    "value" : [ "ToDateTime","(" ]
+                                 }, {
+                                    "r" : "143",
+                                    "s" : [ {
+                                       "value" : [ "Coalesce","(" ]
+                                    }, {
+                                       "r" : "140",
+                                       "s" : [ {
+                                          "r" : "138",
+                                          "s" : [ {
+                                             "r" : "137",
+                                             "s" : [ {
+                                                "value" : [ "ComfortMeasure" ]
+                                             } ]
+                                          }, {
+                                             "value" : [ "." ]
+                                          }, {
+                                             "r" : "138",
+                                             "s" : [ {
+                                                "value" : [ "performed" ]
+                                             } ]
+                                          } ]
+                                       }, {
+                                          "value" : [ " as " ]
+                                       }, {
+                                          "r" : "139",
+                                          "s" : [ {
+                                             "value" : [ "dateTime" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ "," ]
+                                    }, {
+                                       "r" : "142",
+                                       "s" : [ {
+                                          "r" : "141",
+                                          "s" : [ {
+                                             "value" : [ "ComfortMeasure" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "142",
+                                          "s" : [ {
+                                             "value" : [ "authoredOn" ]
+                                          } ]
+                                       } ]
+                                    }, {
+                                       "value" : [ ")" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ")" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "r" : "148",
+                              "value" : [ " ","during"," " ]
+                           }, {
+                              "r" : "147",
+                              "s" : [ {
+                                 "r" : "145",
+                                 "s" : [ {
+                                    "value" : [ "Global" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "147",
+                                 "s" : [ {
+                                    "value" : [ "\"HospitalizationWithObservation\"","(" ]
+                                 }, {
+                                    "r" : "146",
+                                    "s" : [ {
+                                       "value" : [ "IschemicStrokeEncounter" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ")" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "150",
+               "locator" : "70:3-72:192",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "115",
+                  "locator" : "70:3-70:53",
+                  "alias" : "IschemicStrokeEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "114",
+                     "locator" : "70:3-70:29",
+                     "name" : "Ischemic Stroke Encounter",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "149",
+                  "locator" : "71:15-72:192",
+                  "alias" : "ComfortMeasure",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}ServiceRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "134",
+                     "locator" : "71:20-71:50",
+                     "name" : "Intervention Comfort Measures",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{http://hl7.org/fhir}ServiceRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "localId" : "148",
+                     "locator" : "72:25-72:192",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "localId" : "144",
+                        "locator" : "72:25-72:120",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "name" : "ToDateTime",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "operand" : [ {
+                           "localId" : "143",
+                           "locator" : "72:48-72:119",
+                           "resultTypeName" : "{http://hl7.org/fhir}dateTime",
+                           "type" : "Coalesce",
+                           "operand" : [ {
+                              "localId" : "140",
+                              "locator" : "72:57-72:92",
+                              "resultTypeName" : "{http://hl7.org/fhir}dateTime",
+                              "strict" : false,
+                              "type" : "As",
+                              "operand" : {
+                                 "localId" : "138",
+                                 "locator" : "72:57-72:80",
+                                 "path" : "performed",
+                                 "scope" : "ComfortMeasure",
+                                 "type" : "Property",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "choice" : [ {
+                                       "name" : "{http://hl7.org/fhir}dateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Period",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}string",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Age",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Range",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ]
+                                 }
+                              },
+                              "asTypeSpecifier" : {
+                                 "localId" : "139",
+                                 "locator" : "72:85-72:92",
+                                 "resultTypeName" : "{http://hl7.org/fhir}dateTime",
+                                 "name" : "{http://hl7.org/fhir}dateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "localId" : "142",
+                              "locator" : "72:94-72:118",
+                              "resultTypeName" : "{http://hl7.org/fhir}dateTime",
+                              "path" : "authoredOn",
+                              "scope" : "ComfortMeasure",
+                              "type" : "Property"
+                           } ]
+                        } ]
+                     }, {
+                        "localId" : "147",
+                        "locator" : "72:129-72:192",
+                        "name" : "HospitalizationWithObservation",
+                        "libraryName" : "Global",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "localId" : "146",
+                           "locator" : "72:169-72:191",
+                           "resultTypeName" : "{http://hl7.org/fhir}Encounter",
+                           "name" : "IschemicStrokeEncounter",
+                           "type" : "AliasRef"
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "170",
+            "locator" : "74:1-77:195",
+            "name" : "Encounter with Comfort Measures during Hospitalization",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "170",
+                  "s" : [ {
+                     "value" : [ "","define ","\"Encounter with Comfort Measures during Hospitalization\"",":\n  " ]
+                  }, {
+                     "r" : "169",
+                     "s" : [ {
+                        "s" : [ {
+                           "r" : "153",
+                           "s" : [ {
+                              "r" : "152",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Ischemic Stroke Encounter\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","IschemicStrokeEncounter" ]
+                           } ]
+                        } ]
+                     }, {
+                        "value" : [ "\n        " ]
+                     }, {
+                        "r" : "168",
+                        "s" : [ {
+                           "value" : [ "with " ]
+                        }, {
+                           "r" : "155",
+                           "s" : [ {
+                              "r" : "154",
+                              "s" : [ {
+                                 "s" : [ {
+                                    "value" : [ "\"Intervention Comfort Measures\"" ]
+                                 } ]
+                              } ]
+                           }, {
+                              "value" : [ " ","ComfortMeasure" ]
+                           } ]
+                        }, {
+                           "value" : [ "\n          such that " ]
+                        }, {
+                           "r" : "167",
+                           "s" : [ {
+                              "r" : "163",
+                              "s" : [ {
+                                 "value" : [ "Coalesce","(" ]
+                              }, {
+                                 "r" : "160",
+                                 "s" : [ {
+                                    "value" : [ "(" ]
+                                 }, {
+                                    "r" : "160",
+                                    "s" : [ {
+                                       "value" : [ "start of " ]
+                                    }, {
+                                       "r" : "159",
+                                       "s" : [ {
+                                          "r" : "156",
+                                          "s" : [ {
+                                             "value" : [ "Global" ]
+                                          } ]
+                                       }, {
+                                          "value" : [ "." ]
+                                       }, {
+                                          "r" : "159",
+                                          "s" : [ {
+                                             "value" : [ "\"Normalize Interval\"","(" ]
+                                          }, {
+                                             "r" : "158",
+                                             "s" : [ {
+                                                "r" : "157",
+                                                "s" : [ {
+                                                   "value" : [ "ComfortMeasure" ]
+                                                } ]
+                                             }, {
+                                                "value" : [ "." ]
+                                             }, {
+                                                "r" : "158",
+                                                "s" : [ {
+                                                   "value" : [ "performed" ]
+                                                } ]
+                                             } ]
+                                          }, {
+                                             "value" : [ ")" ]
+                                          } ]
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "value" : [ ")" ]
+                                 } ]
+                              }, {
+                                 "value" : [ ", " ]
+                              }, {
+                                 "r" : "162",
+                                 "s" : [ {
+                                    "r" : "161",
+                                    "s" : [ {
+                                       "value" : [ "ComfortMeasure" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ "." ]
+                                 }, {
+                                    "r" : "162",
+                                    "s" : [ {
+                                       "value" : [ "authoredOn" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ ")" ]
+                              } ]
+                           }, {
+                              "r" : "167",
+                              "value" : [ "during"," " ]
+                           }, {
+                              "r" : "166",
+                              "s" : [ {
+                                 "r" : "164",
+                                 "s" : [ {
+                                    "value" : [ "Global" ]
+                                 } ]
+                              }, {
+                                 "value" : [ "." ]
+                              }, {
+                                 "r" : "166",
+                                 "s" : [ {
+                                    "value" : [ "\"HospitalizationWithObservation\""," ( " ]
+                                 }, {
+                                    "r" : "165",
+                                    "s" : [ {
+                                       "value" : [ "IschemicStrokeEncounter" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " )" ]
+                                 } ]
+                              } ]
+                           } ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "169",
+               "locator" : "75:3-77:195",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "localId" : "153",
+                  "locator" : "75:3-75:53",
+                  "alias" : "IschemicStrokeEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "152",
+                     "locator" : "75:3-75:29",
+                     "name" : "Ischemic Stroke Encounter",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "localId" : "168",
+                  "locator" : "76:9-77:195",
+                  "alias" : "ComfortMeasure",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}ServiceRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "localId" : "154",
+                     "locator" : "76:14-76:44",
+                     "name" : "Intervention Comfort Measures",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{http://hl7.org/fhir}ServiceRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "localId" : "167",
+                     "locator" : "77:21-77:195",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "localId" : "163",
+                        "locator" : "77:21-77:121",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "Coalesce",
+                        "operand" : [ {
+                           "localId" : "160",
+                           "locator" : "77:30-77:93",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "Start",
+                           "operand" : {
+                              "localId" : "159",
+                              "locator" : "77:40-77:92",
+                              "name" : "Normalize Interval",
+                              "libraryName" : "Global",
+                              "type" : "FunctionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "operand" : [ {
+                                 "localId" : "158",
+                                 "locator" : "77:68-77:91",
+                                 "path" : "performed",
+                                 "scope" : "ComfortMeasure",
+                                 "type" : "Property",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "choice" : [ {
+                                       "name" : "{http://hl7.org/fhir}dateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Period",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}string",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Age",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{http://hl7.org/fhir}Range",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ]
+                                 }
+                              } ]
+                           }
+                        }, {
+                           "name" : "ToDateTime",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "localId" : "162",
+                              "locator" : "77:96-77:120",
+                              "resultTypeName" : "{http://hl7.org/fhir}dateTime",
+                              "path" : "authoredOn",
+                              "scope" : "ComfortMeasure",
+                              "type" : "Property"
+                           } ]
+                        } ]
+                     }, {
+                        "localId" : "166",
+                        "locator" : "77:129-77:195",
+                        "name" : "HospitalizationWithObservation",
+                        "libraryName" : "Global",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "localId" : "165",
+                           "locator" : "77:171-77:193",
+                           "resultTypeName" : "{http://hl7.org/fhir}Encounter",
+                           "name" : "IschemicStrokeEncounter",
+                           "type" : "AliasRef"
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "localId" : "179",
+            "locator" : "87:1-88:71",
+            "name" : "CalendarDayOfOrDayAfter",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "s" : {
+                  "r" : "179",
+                  "s" : [ {
+                     "value" : [ "","define function ","\"CalendarDayOfOrDayAfter\"","(","StartValue"," " ]
+                  }, {
+                     "r" : "171",
+                     "s" : [ {
+                        "value" : [ "DateTime" ]
+                     } ]
+                  }, {
+                     "value" : [ " ):\n  " ]
+                  }, {
+                     "r" : "178",
+                     "s" : [ {
+                        "r" : "178",
+                        "s" : [ {
+                           "value" : [ "Interval[" ]
+                        }, {
+                           "r" : "173",
+                           "s" : [ {
+                              "value" : [ "date from " ]
+                           }, {
+                              "r" : "172",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "172",
+                                 "s" : [ {
+                                    "value" : [ "StartValue" ]
+                                 } ]
+                              }, {
+                                 "value" : [ " )" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ ", " ]
+                        }, {
+                           "r" : "177",
+                           "s" : [ {
+                              "value" : [ "date from " ]
+                           }, {
+                              "r" : "176",
+                              "s" : [ {
+                                 "value" : [ "( " ]
+                              }, {
+                                 "r" : "176",
+                                 "s" : [ {
+                                    "r" : "174",
+                                    "s" : [ {
+                                       "value" : [ "StartValue" ]
+                                    } ]
+                                 }, {
+                                    "value" : [ " + " ]
+                                 }, {
+                                    "r" : "175",
+                                    "s" : [ {
+                                       "value" : [ "1 ","day" ]
+                                    } ]
+                                 } ]
+                              }, {
+                                 "value" : [ " )" ]
+                              } ]
+                           } ]
+                        }, {
+                           "value" : [ " ]" ]
+                        } ]
+                     } ]
+                  } ]
+               }
+            } ],
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "localId" : "178",
+               "locator" : "88:3-88:71",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "low" : {
+                  "localId" : "173",
+                  "locator" : "88:12-88:35",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "DateFrom",
+                  "operand" : {
+                     "localId" : "172",
+                     "locator" : "88:22-88:35",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "name" : "StartValue",
+                     "type" : "OperandRef"
+                  }
+               },
+               "high" : {
+                  "localId" : "177",
+                  "locator" : "88:38-88:69",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                  "type" : "DateFrom",
+                  "operand" : {
+                     "localId" : "176",
+                     "locator" : "88:48-88:69",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "Add",
+                     "operand" : [ {
+                        "localId" : "174",
+                        "locator" : "88:50-88:59",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "name" : "StartValue",
+                        "type" : "OperandRef"
+                     }, {
+                        "localId" : "175",
+                        "locator" : "88:63-88:67",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                        "value" : 1,
+                        "unit" : "day",
+                        "type" : "Quantity"
+                     } ]
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "StartValue",
+               "operandTypeSpecifier" : {
+                  "localId" : "171",
+                  "locator" : "87:54-87:61",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         } ]
+      }
+   }
+}
+

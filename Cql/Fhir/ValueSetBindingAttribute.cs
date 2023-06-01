@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Fhir
+namespace Hl7.Cql.Poco.Fhir
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class ValueSetBindingAttribute : Attribute

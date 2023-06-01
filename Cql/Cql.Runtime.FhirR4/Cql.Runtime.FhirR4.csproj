@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<RootNamespace>Hl7.Cql.Runtime.FhirR4</RootNamespace>
+		<AssemblyName>Hl7.Cql.Runtime.FhirR4</AssemblyName>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Version>4.0.1</Version>
+		<Description>Integrates the Fhir.R4 model into the CQL engine runtime.</Description>
+		<PackageId>Hl7.Cql.Runtime.FhirR4</PackageId>
+		<Product>CQL FHIR R4 runtime</Product>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Runtime.Loader" Version="4.3.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\Cql\Cql.csproj" />
+		<ProjectReference Include="..\Fhir.R4\Fhir.R4.csproj" />
+
+	</ItemGroup>
+
+</Project>

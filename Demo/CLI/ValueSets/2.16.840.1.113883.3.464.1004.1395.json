@@ -1,0 +1,429 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33087",
+  "meta": {
+    "lastUpdated": "2019-06-09T17:06:51.846-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1395",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1395"
+    }
+  ],
+  "version": "Working",
+  "name": "Inpatient_Stay",
+  "title": "Inpatient Stay",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:49:16-04:00",
+    "total": 81,
+    "offset": 0,
+    "contains": [
+      {
+        "version": "2012.05",
+        "code": "0100",
+        "display": "All-inclusive room and board plus ancillary"
+      },
+      {
+        "version": "2012.05",
+        "code": "0101",
+        "display": "All-inclusive room and board"
+      },
+      {
+        "version": "2012.05",
+        "code": "0110",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0111",
+        "display": "Medical/surgical/GYN"
+      },
+      {
+        "version": "2012.05",
+        "code": "0112",
+        "display": "Obstetrics (OB)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0113",
+        "display": "Pediatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0114",
+        "display": "Psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0116",
+        "display": "Detoxification"
+      },
+      {
+        "version": "2012.05",
+        "code": "0117",
+        "display": "Oncology"
+      },
+      {
+        "version": "2012.05",
+        "code": "0118",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0119",
+        "display": "Other"
+      },
+      {
+        "version": "2012.05",
+        "code": "0120",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0121",
+        "display": "Medical/surgical/GYN"
+      },
+      {
+        "version": "2012.05",
+        "code": "0122",
+        "display": "OB"
+      },
+      {
+        "version": "2012.05",
+        "code": "0123",
+        "display": "Pediatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0124",
+        "display": "Psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0126",
+        "display": "Detoxification"
+      },
+      {
+        "version": "2012.05",
+        "code": "0127",
+        "display": "Oncology"
+      },
+      {
+        "version": "2012.05",
+        "code": "0128",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0129",
+        "display": "Other"
+      },
+      {
+        "version": "2012.05",
+        "code": "0130",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0131",
+        "display": "Medical/surgical/GYN"
+      },
+      {
+        "version": "2012.05",
+        "code": "0132",
+        "display": "OB"
+      },
+      {
+        "version": "2012.05",
+        "code": "0133",
+        "display": "Pediatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0134",
+        "display": "Psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0136",
+        "display": "Detoxification"
+      },
+      {
+        "version": "2012.05",
+        "code": "0137",
+        "display": "Oncology"
+      },
+      {
+        "version": "2012.05",
+        "code": "0138",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0139",
+        "display": "Other"
+      },
+      {
+        "version": "2012.05",
+        "code": "0140",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0141",
+        "display": "Medical/surgical/GYN"
+      },
+      {
+        "version": "2012.05",
+        "code": "0142",
+        "display": "OB"
+      },
+      {
+        "version": "2012.05",
+        "code": "0143",
+        "display": "Pediatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0144",
+        "display": "Psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0146",
+        "display": "Detoxification"
+      },
+      {
+        "version": "2012.05",
+        "code": "0147",
+        "display": "Oncology"
+      },
+      {
+        "version": "2012.05",
+        "code": "0148",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0149",
+        "display": "Other"
+      },
+      {
+        "version": "2012.05",
+        "code": "0150",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0151",
+        "display": "Medical/surgical/GYN"
+      },
+      {
+        "version": "2012.05",
+        "code": "0152",
+        "display": "OB"
+      },
+      {
+        "version": "2012.05",
+        "code": "0153",
+        "display": "Pediatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0154",
+        "display": "Psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0156",
+        "display": "Detoxification"
+      },
+      {
+        "version": "2012.05",
+        "code": "0157",
+        "display": "Oncology"
+      },
+      {
+        "version": "2012.05",
+        "code": "0158",
+        "display": "Rehabilitation"
+      },
+      {
+        "version": "2012.05",
+        "code": "0159",
+        "display": "Other"
+      },
+      {
+        "version": "2012.05",
+        "code": "0160",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0164",
+        "display": "Sterile environment"
+      },
+      {
+        "version": "2012.05",
+        "code": "0167",
+        "display": "Self-care"
+      },
+      {
+        "version": "2012.05",
+        "code": "0169",
+        "display": "Other"
+      },
+      {
+        "version": "2012.05",
+        "code": "0170",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0171",
+        "display": "Newborn-Level I"
+      },
+      {
+        "version": "2012.05",
+        "code": "0172",
+        "display": "Newborn-Level II"
+      },
+      {
+        "version": "2012.05",
+        "code": "0173",
+        "display": "Newborn-Level III"
+      },
+      {
+        "version": "2012.05",
+        "code": "0174",
+        "display": "Newborn-Level IV"
+      },
+      {
+        "version": "2012.05",
+        "code": "0179",
+        "display": "Other Nursery"
+      },
+      {
+        "version": "2012.05",
+        "code": "0190",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0191",
+        "display": "Subacute care-Level I"
+      },
+      {
+        "version": "2012.05",
+        "code": "0192",
+        "display": "Subacute care-Level II"
+      },
+      {
+        "version": "2012.05",
+        "code": "0193",
+        "display": "Subacute care-Level III"
+      },
+      {
+        "version": "2012.05",
+        "code": "0194",
+        "display": "Subacute care-Level IV"
+      },
+      {
+        "version": "2012.05",
+        "code": "0199",
+        "display": "Other subacute care"
+      },
+      {
+        "version": "2012.05",
+        "code": "0200",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0201",
+        "display": "Surgical"
+      },
+      {
+        "version": "2012.05",
+        "code": "0202",
+        "display": "Medical"
+      },
+      {
+        "version": "2012.05",
+        "code": "0203",
+        "display": "Pediatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0204",
+        "display": "Psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "0206",
+        "display": "Intermediate intensive care unit (ICU)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0207",
+        "display": "Burn care"
+      },
+      {
+        "version": "2012.05",
+        "code": "0208",
+        "display": "Trauma"
+      },
+      {
+        "version": "2012.05",
+        "code": "0209",
+        "display": "Other intensive care"
+      },
+      {
+        "version": "2012.05",
+        "code": "0210",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "0211",
+        "display": "Myocardial infarction"
+      },
+      {
+        "version": "2012.05",
+        "code": "0212",
+        "display": "Pulmonary care"
+      },
+      {
+        "version": "2012.05",
+        "code": "0213",
+        "display": "Heart transplant"
+      },
+      {
+        "version": "2012.05",
+        "code": "0214",
+        "display": "Intermediate coronary care unit (CCU)"
+      },
+      {
+        "version": "2012.05",
+        "code": "0219",
+        "display": "Other coronary care"
+      },
+      {
+        "version": "2012.05",
+        "code": "1000",
+        "display": "General"
+      },
+      {
+        "version": "2012.05",
+        "code": "1001",
+        "display": "Residential treatment-psychiatric"
+      },
+      {
+        "version": "2012.05",
+        "code": "1002",
+        "display": "Residential treatment-chemical dependency"
+      }
+    ]
+  }
+}

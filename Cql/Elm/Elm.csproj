@@ -2,17 +2,15 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
-		<AssemblyName>Ncqa.Elm</AssemblyName>
-		<RootNamespace>Ncqa.Elm</RootNamespace>
+		<AssemblyName>Hl7.Cql.Elm</AssemblyName>
+		<RootNamespace>Hl7.Cql.Elm</RootNamespace>
 		<Nullable>enable</Nullable>
 		<LangVersion>8.0</LangVersion>
-		<Authors>NCQA</Authors>
 		<Product>CQL ELM abstractions</Product>
 		<Description>Contains abstractions for the expression logical model (ELM) and utilities to deserialize an ELM library into classes.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AgileObjects.ReadableExpressions" Version="2.6.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="3.11.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />

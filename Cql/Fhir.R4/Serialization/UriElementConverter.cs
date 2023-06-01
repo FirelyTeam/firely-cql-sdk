@@ -1,9 +1,9 @@
-using Ncqa.Fhir.Serialization;
-using Ncqa.Iso8601;
+using Hl7.Cql.Poco.Fhir.Serialization;
 using System.Text.Json;
-using Ncqa.Fhir.R4.Model;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Fhir.R4.Serialization
+
+namespace Hl7.Cql.Poco.Fhir.R4.Serialization
 {
 	public class UriElementConverter : ElementConverter<UriElement>
 	{

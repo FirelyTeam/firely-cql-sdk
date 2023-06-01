@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Hl7.Cql</AssemblyName>
+		<RootNamespace>Hl7.Cql</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
+	  <ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
+	  <ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
+	  <ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+	  <ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
+	  <ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
+	  <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+	  <ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
+	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+	  <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+	  <ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
+	  <ProjectReference Include="..\Elm\Elm.csproj" />
+	  <ProjectReference Include="..\Graph\Graph.csproj" />
+	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+	</ItemGroup>
+</Project>

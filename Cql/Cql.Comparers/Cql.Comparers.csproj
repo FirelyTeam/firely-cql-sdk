@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Hl7.Cql.Comparers</AssemblyName>
+		<RootNamespace>Hl7.Cql.Comparers</RootNamespace>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Product>CQL comparers</Product>
+		<Description>Contains CQL comparers</Description>
+		<NoWarn>CS8601</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+	</ItemGroup>
+
+</Project>

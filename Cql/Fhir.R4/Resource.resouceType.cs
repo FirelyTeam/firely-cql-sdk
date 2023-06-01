@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ncqa.Fhir.R4.Model
+﻿namespace Hl7.Cql.Poco.Fhir.R4.Model
 {
     partial class Resource
     {

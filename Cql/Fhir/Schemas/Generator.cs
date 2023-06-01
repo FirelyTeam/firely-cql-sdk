@@ -1,19 +1,16 @@
-﻿using Ncqa.Fhir.Schemas;
-using Ncqa.Graph;
-using Ncqa.Iso8601;
+﻿using Hl7.Cql.Graph;
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using System.Text;
 using System.Text.RegularExpressions;
+using Hl7.Cql.Poco.Fhir;
 
-namespace Ncqa.Fhir.Schemas
+namespace Hl7.Cql.Poco.Fhir.Schemas
 {
     public class Generator
     {
@@ -25,7 +22,7 @@ namespace Ncqa.Fhir.Schemas
                 graph.SerializeToJson(stream);
             }
             graph = GetBuildOrder(profiles, true);
-            var asmName = "Ncqa.Fhir.Schemas.R4";
+            var asmName = "Hl7.Cql.Poco.Fhir.R4";
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new System.Reflection.AssemblyName(asmName), AssemblyBuilderAccess.Run);
             var moduleBuilder = assemblyBuilder.DefineDynamicModule(asmName);
 
@@ -71,7 +68,7 @@ namespace Ncqa.Fhir.Schemas
         }
 
 
-        private static readonly Regex Indexer = new Regex("(?<name>\\S+)\\[\\S+\\]", RegexOptions.Compiled);
+        private static readonly Regex Indexer = new("(?<name>\\S+)\\[\\S+\\]", RegexOptions.Compiled);
 
         private void DefineMembers(Dictionary<string, TypeBuilder> allTypes, 
             Dictionary<Type, Dictionary<string, PropertyBuilder>> allProperties, 
@@ -127,7 +124,7 @@ namespace Ncqa.Fhir.Schemas
                         // but is assumed to be an IdElement in CQL.
                         if (propertyElement.Element.Path == "Resource.id")
                             propertyType = allTypes["http://hl7.org/fhir/StructureDefinition/id"];
-                        else propertyType = propertyType ?? ElementCodeToType(propertyElement.Element.Type[0].Code!, allTypes);
+                        else propertyType ??= ElementCodeToType(propertyElement.Element.Type[0].Code!, allTypes);
                         var propertyBuilder = DefineProperty(thisType, propertyName, propertyType!, propertyElement.Element.Min, propertyElement.Element.Max!, propertyElement.Element.Binding!);
                         propertiesForType.Add(propertyName, propertyBuilder);
                     }

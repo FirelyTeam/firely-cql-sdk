@@ -1,0 +1,42 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33021",
+  "meta": {
+    "lastUpdated": "2019-06-09T16:52:55.701-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1329"
+    }
+  ],
+  "version": "Working",
+  "name": "Absence_of_Left_Breast",
+  "title": "Absence of Left Breast",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:04-04:00",
+    "total": 3,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "429009003",
+        "display": "History of left mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "137671000119105",
+        "display": "History of prophylactic mastectomy of left breast"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "Z90.12",
+        "display": "Acquired absence of left breast and nipple"
+      }
+    ]
+  }
+}

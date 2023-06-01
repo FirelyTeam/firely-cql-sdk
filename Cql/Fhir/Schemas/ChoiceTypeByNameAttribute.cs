@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Ncqa.Fhir.Schemas
+namespace Hl7.Cql.Poco.Fhir.Schemas
 {
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
     public class ChoiceTypeByNameAttribute: Attribute

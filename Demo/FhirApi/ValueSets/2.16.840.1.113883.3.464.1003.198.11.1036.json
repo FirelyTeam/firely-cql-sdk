@@ -1,0 +1,54 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.464.1003.198.11.1036",
+  "meta": {
+    "versionId": "40",
+    "lastUpdated": "2021-02-20T01:02:00.000-05:00"
+  },
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.11.1036",
+  "version": "20210220",
+  "name": "Total Colectomy",
+  "status": "active",
+  "date": "2021-02-20T01:02:00-05:00",
+  "publisher": "NCQA PHEMUR",
+  "compose": {
+    "include": [ {
+      "system": "http://www.ama-assn.org/go/cpt",
+      "version": "2021",
+      "concept": [ {
+        "code": "44150",
+        "display": "Colectomy, total, abdominal, without proctectomy; with ileostomy or ileoproctostomy"
+      }, {
+        "code": "44151",
+        "display": "Colectomy, total, abdominal, without proctectomy; with continent ileostomy"
+      }, {
+        "code": "44152",
+        "display": "Colectomy, total, abdominal, without proctectomy; with rectal mucosectomy, ileoanal anastomosis, with or without loop ileostomy"
+      }, {
+        "code": "44153",
+        "display": "Colectomy, total, abdominal, without proctectomy; with rectal mucosectomy, ileoanal anastomosis, creation of ileal reservoir (S or J), with or without loop ileostomy"
+      }, {
+        "code": "44155",
+        "display": "Colectomy, total, abdominal, with proctectomy; with ileostomy"
+      }, {
+        "code": "44156",
+        "display": "Colectomy, total, abdominal, with proctectomy; with continent ileostomy"
+      }, {
+        "code": "44157",
+        "display": "Colectomy, total, abdominal, with proctectomy; with ileoanal anastomosis, includes loop ileostomy, and rectal mucosectomy, when performed"
+      }, {
+        "code": "44158",
+        "display": "Colectomy, total, abdominal, with proctectomy; with ileoanal anastomosis, creation of ileal reservoir (S or J), includes loop ileostomy, and rectal mucosectomy, when performed"
+      }, {
+        "code": "44210",
+        "display": "Laparoscopy, surgical; colectomy, total, abdominal, without proctectomy, with ileostomy or ileoproctostomy"
+      }, {
+        "code": "44211",
+        "display": "Laparoscopy, surgical; colectomy, total, abdominal, with proctectomy, with ileoanal anastomosis, creation of ileal reservoir (S or J), with loop ileostomy, includes rectal mucosectomy, when performed"
+      }, {
+        "code": "44212",
+        "display": "Laparoscopy, surgical; colectomy, total, abdominal, with proctectomy, with ileostomy"
+      } ]
+    } ]
+  }
+}

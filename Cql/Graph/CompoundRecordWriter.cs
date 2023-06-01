@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public class CompoundRecordWriter<TContext> : IRecordWriter<TContext>
         where TContext : ExecutionContext

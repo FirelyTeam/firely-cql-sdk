@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
+		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
+		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="CqlOperators.AggregateFunctions.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.ArithmeticOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.ClinicalOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.ComparisonOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.DateTimeOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.IntervalOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.ListOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.LogicalOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.ModelOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.NullologicalOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.StringOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="CqlOperators.TypeOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+</Project>

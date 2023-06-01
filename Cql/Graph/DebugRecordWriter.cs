@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
     public class DebugRecordWriter<TExecutionContext> : IRecordWriter<TExecutionContext>
         where TExecutionContext: ExecutionContext

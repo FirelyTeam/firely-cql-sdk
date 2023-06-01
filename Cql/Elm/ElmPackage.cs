@@ -1,5 +1,5 @@
-﻿using Ncqa.Elm.Expressions;
-using Ncqa.Graph;
+﻿using Hl7.Cql.Elm.Expressions;
+using Hl7.Cql.Graph;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -9,7 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Ncqa.Elm
+namespace Hl7.Cql.Elm
 {
     [DebuggerDisplay("{NameAndVersion}")]
     public class ElmPackage
@@ -31,6 +31,13 @@ namespace Ncqa.Elm
             var identifier = lib["identifier"];
             return (identifier?["id"]!.Value<string>()!, identifier?["version"]!.Value<string>()!);
         }
+
+        /// <summary>
+        /// Returns "<paramref name="name"/>-<paramref name="version"/>".
+        /// </summary>
+        /// <param name="name">The name of the library.</param>
+        /// <param name="version">The version.</param>
+        /// <returns>"<paramref name="name"/>-<paramref name="version"/>"</returns>
         public static string? NameAndVersionFor(string? name, string? version)
         {
             if (string.IsNullOrWhiteSpace(name))
@@ -42,6 +49,35 @@ namespace Ncqa.Elm
         }
 
         public string NameAndVersion => $"{library?.identifier?.id}-{library?.identifier?.version}";
+
+        /// <returns>(startLine, startColumn, endLine, endColumn)</returns>
+        public static (int, int, int, int) ParseLocator(string locator)
+        {
+            var firstColon = locator.IndexOf(':');
+            if (firstColon > -1)
+            {
+                var dash = locator.IndexOf('-', firstColon);
+                if (dash > -1)
+                {
+                    var secondColon = locator.IndexOf(':', dash);
+                    if (secondColon > -1)
+                    {
+                        var startLine = int.Parse(locator.Substring(0, firstColon));
+                        var startCol = int.Parse(locator.Substring(firstColon + 1, dash - firstColon - 1));
+                        var endline = int.Parse(locator.Substring(dash + 1, secondColon - dash - 1));
+                        var endCol = int.Parse(locator.Substring(secondColon + 1));
+                        return (startLine, startCol, endline, endCol);
+                    }
+                }
+                else
+                {
+                    var startLine = int.Parse(locator.Substring(0, firstColon));
+                    var startCol = int.Parse(locator.Substring(firstColon + 1));
+                    return (startLine, startCol, startLine, startCol);
+                }
+            }
+            throw new ArgumentException("Locator is not in the right format (dd:dd-dd:dd)", nameof(locator));
+        }
 
         public static ElmPackage? LoadFrom(string path) => LoadFrom(new FileInfo(path));
 
@@ -77,6 +113,27 @@ namespace Ncqa.Elm
             return LoadFrom(reader);
 
         }
+
+        public static DirectedGraph GetIncludedLibraries(IEnumerable<ElmPackage> packages)
+        {
+            var buildOrder = new DirectedGraph();
+            foreach (var package in packages)
+            {
+                var includes = ElmPackage.GetIncludedLibraries(package, (name, version) =>
+                {
+                    var dependency = packages.SingleOrDefault(p =>
+                        p.library?.identifier?.id == name
+                        && p.library?.identifier?.version == version);
+                    if (dependency != null)
+                        return dependency;
+                    else
+                        throw new InvalidOperationException($"Cannot find library {ElmPackage.NameAndVersionFor(name, version) ?? "<unknown>"} referenced in {package.NameAndVersion}");
+                });
+                Merge(includes, buildOrder);
+            }
+            return buildOrder;
+        }
+        
         public static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, Func<string, string, ElmPackage>? locateLibrary = null)
         {
             if (locateLibrary == null)
@@ -232,6 +289,33 @@ namespace Ncqa.Elm
                 thisGraph.Add(edgeToEnd);
             }
             return thisGraph;
+        }
+        
+        private static void Merge(DirectedGraph from, DirectedGraph into)
+        {
+            foreach (var sourceNode in from.Nodes)
+            {
+                if (!into.Nodes.ContainsKey(sourceNode.Key))
+                    into.Add(sourceNode.Value);
+            }
+            foreach (var edge in from.Edges)
+            {
+                if (!into.Edges.ContainsKey(edge.Key))
+                    into.Add(edge.Value);
+            }
+            var orphaned = true;
+            foreach (var edge in into.Edges)
+            {
+                if (edge.Value.ToId == from.StartNode.NodeId)
+                {
+                    orphaned = false;
+                    break;
+                }
+            }
+            if (orphaned)
+            {
+                into.Add(new DirectedGraphEdge(into.StartNode.NodeId, from.StartNode.NodeId));
+            }
         }
 
 

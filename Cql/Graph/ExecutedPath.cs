@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ncqa.Graph
+namespace Hl7.Cql.Graph
 {
 
     public class ExecutedPath<TContext>

@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.1</TargetFramework>
+		<AssemblyName>Ncqa.Cql.MeasureCompiler.Mutators.FhirR4</AssemblyName>
+		<RootNamespace>Ncqa.Cql.MeasureCompiler.Mutators.FhirR4</RootNamespace>
+		<Nullable>enable</Nullable>
+		<LangVersion>9.0</LangVersion>
+		<Authors>NCQA</Authors>
+		<Product>FHIR mutators</Product>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\CqlRuntime\Cql.Runtime.csproj" />
+	  <ProjectReference Include="..\Fhir.R4\Fhir.R4.csproj" />
+	  <ProjectReference Include="..\MeasureCompiler.Mutators\MeasureCompiler.Mutators.csproj" />
+	</ItemGroup>
+
+</Project>

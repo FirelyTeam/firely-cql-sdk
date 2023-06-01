@@ -1,15 +1,14 @@
-﻿using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.Primitives;
-using Ncqa.Fhir.R4;
-using Ncqa.Fhir.R4.Model;
+﻿using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
+using Hl7.Cql.Poco.Fhir.R4;
 using Sylvan;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using System.Text.Json;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Cql.ValueSetLoaders
+namespace Hl7.Cql.ValueSetLoaders
 {
     public class CsvValueSetLoader: IValueSetLoader
     {
@@ -19,7 +18,7 @@ namespace Ncqa.Cql.ValueSetLoaders
 
         public CsvValueSetLoader(Stream csv,
             Stream oidMap,
-            string valueSetFormatString = "https://www.ncqa.org/fhir/valueset/{0}")
+            string valueSetFormatString)
         {
             Csv = csv ?? throw new ArgumentNullException(nameof(csv));
             OidMap = oidMap ?? throw new ArgumentNullException(nameof(oidMap));
@@ -28,7 +27,7 @@ namespace Ncqa.Cql.ValueSetLoaders
 
         public IValueSetDictionary Load()
         {
-            var vsd = new CqlValueSetDictionary();
+            var vsd = new HashValueSetDictionary();
             LoadHedisCsv(vsd, Csv, OidMap, ValueSetFormatString);
             return vsd;
         }
@@ -40,7 +39,7 @@ namespace Ncqa.Cql.ValueSetLoaders
 
         public static void LoadHedisCsv(IValueSetDictionary vsd, Stream csv,
             Stream oidMap,
-            string valueSetFormatString = "https://www.ncqa.org/fhir/valueset/{0}")
+            string valueSetFormatString)
         {
             var systemMap = FhirJson.Deserialize<Dictionary<string, CodeSystem>>(oidMap);
             LoadCsv(vsd,

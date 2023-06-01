@@ -1,15 +1,12 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestPlatform.TestHost;
+﻿using Cql.Firely;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ncqa.Cql.MeasureCompiler;
-using Ncqa.Cql.MeasureCompiler.CodeGeneration;
-using Ncqa.Cql.Runtime;
-using Ncqa.Cql.Runtime.FhirR4;
-using Ncqa.Elm;
-using Ncqa.Fhir.R4.Model;
-using Ncqa.Graph;
-using System;
-using System.Collections.Generic;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Model;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.FhirR4;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Graph;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -31,7 +28,7 @@ namespace CoreTests
             .Create(logging => logging.AddDebug())
             .CreateLogger<ExpressionBuilder>();
 
-        private static readonly LambdasFacade LambdasByTestName = new LambdasFacade();
+        private static readonly LambdasFacade LambdasByTestName = new();
 
         private class LambdasFacade
         {
@@ -49,8 +46,9 @@ namespace CoreTests
         public static void ClassInitialize(TestContext context)
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
-            var binding = new FhirOperatorsBinding(FhirTypeConverter.Default, FhirTypeResolver.Default);
-            var typeManager = new TypeManager(FhirTypeResolver.Default);
+            var resolver = new FirelyTypeResolver(Models.Fhir401);
+            var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Default);
+            var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = ElmPackage.LoadFrom(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));            
             var fhirHelpersBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
@@ -81,16 +79,10 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            RuntimeContext = new FhirRuntimeContext(new Bundle(),
-                definitions: allDelegates,
-                valueSetDictionary: new CqlValueSetDictionary(),
-                parameters: new Dictionary<string, object>(),
-                now: DateTime.UtcNow);
-
-
+            RuntimeContext = FhirCqlContext.Create(delegates: allDelegates);
         }
 
-        public static RuntimeContext RuntimeContext;
+        public static CqlContext RuntimeContext;
 
 
         private static void MergeAllCqlInto(DirectoryInfo libsDirectory, DirectedGraph buildOrder)

@@ -1,14 +1,14 @@
-﻿using Ncqa.Fhir.Serialization;
+﻿using Hl7.Cql.Poco.Fhir.Serialization;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
-using Ncqa.Fhir.R4.Serialization;
-using Ncqa.Fhir.R4.Model;
 using System.IO;
 using System.Text.Json.Serialization;
+using Hl7.Cql.Poco.Fhir.R4.Model;
+using Hl7.Cql.Poco.Fhir.R4.Serialization;
+using NHl7.Cql.Poco.Fhir.Serialization;
 
-namespace Ncqa.Fhir.R4
+namespace Hl7.Cql.Poco.Fhir.R4
 {
     public static class FhirJson
     {
@@ -35,7 +35,7 @@ namespace Ncqa.Fhir.R4
             return jsonOptions;
         }
 
-        private static Lazy<JsonSerializerOptions> DefaultOptions = new Lazy<JsonSerializerOptions>(() => GetJsonSerializerOptions(), true);
+        private static Lazy<JsonSerializerOptions> DefaultOptions = new(() => GetJsonSerializerOptions(), true);
         public static T Deserialize<T>(Stream stream, FhirOptions options = null)
         {
             JsonSerializerOptions jsonOptions = null;

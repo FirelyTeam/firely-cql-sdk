@@ -1,24 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace Ncqa.Iso8601
+namespace Hl7.Cql.Iso8601
 {
+    /// <summary>
+    /// Represents a date in time according to ISO 8601, with year, month and day components isolated and with supplied precision level retained.
+    /// </summary>
     public class DateIso8601
     {
 
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
         // That conversion ad nauseum is more expensive than superfluous memory use.
+        
+        /// <summary>
+        /// Gets the year component of this date.
+        /// </summary>
         public int Year { get; }
+        /// <summary>
+        /// Gets the month component of this date.
+        /// </summary>
         public int? Month { get; }
+        /// <summary>
+        /// Gets the day component of this date.
+        /// </summary>
         public int? Day { get; }
+        /// <summary>
+        /// Gets the precision of this date.
+        /// </summary>
         public DateTimePrecision Precision { get; }
+        /// <summary>
+        /// Gets this date represented as a <see cref="DateTimeOffset"/>.
+        /// </summary>
         public DateTimeOffset DateTimeOffset { get; }
+
         private readonly string String;
 
-        public static readonly Regex Expression = new Regex(@"(?'year'\d\d\d\d)(-(?'month'\d\d)(-(?'day'\d\d))?)?", RegexOptions.Compiled);
+        /// <summary>
+        /// The regular expression used to parse ISO 8601 dates.
+        /// </summary>
+        public static readonly Regex Expression = new(@"(?'year'\d\d\d\d)(-(?'month'\d\d)(-(?'day'\d\d))?)?", RegexOptions.Compiled);
 
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        /// <param name="year">The year component of the date.</param>
+        /// <param name="month">The month component of the date, or <see langword ="null"/>.</param>
+        /// <param name="day">The day component of the date, or <see langword ="null"/>.</param>
+        /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateIso8601(int year, int? month, int? day, bool strict = false) :
             this(Format(year, month, day, DateTimePrecision.Day),
                 year, month, day, strict)
@@ -29,6 +58,9 @@ namespace Ncqa.Iso8601
         /// Creates a new instance, initializing fields from the values specified in <paramref name="dto"/>
         /// up to and including <paramref name="precision"/>, leaving all others <see langword="null"/>.
         /// </summary>
+        /// <param name="dto">The date represented by a <see cref="DateTimeOffset"/>.</param>
+        /// <param name="precision">The desired precision for this ISO date.</param>
+        /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public DateIso8601(DateTimeOffset dto, DateTimePrecision precision, bool strict = false) :
             this(Format(dto.Year, dto.Month, dto.Day, precision),
                 dto.Year, dto.Month, dto.Day, strict, precision)
@@ -112,28 +144,37 @@ namespace Ncqa.Iso8601
             String = @string;
         }
 
-        public DateIso8601 InPrecision(DateTimePrecision precision) => new DateIso8601(DateTimeOffset, precision);
-
         public override string ToString() => String;
         public override bool Equals(object obj) => Equals(String, obj?.ToString());
         public override int GetHashCode() => String.GetHashCode();
 
-        public static bool TryParse(string stringValue, out DateIso8601? dateTimeValue)
+        /// <summary>
+        /// Tries to parse <paramref name="stringValue"/> as an ISO 8601 date.
+        /// </summary>
+        /// <param name="stringValue">The string to parse</param>
+        /// <param name="dateValue">The parsed result, or <see langword ="null"/> if unparseable.</param>
+        /// <returns><see langword ="true"/> if the string is a valid ISO 8601 date and parsing is successful; otherwise <see langword ="false"/>.</returns>
+        public static bool TryParse(string stringValue, out DateIso8601? dateValue)
         {
             var parts = Expression.Match(stringValue);
             if (!parts.Success || parts.Captures.Count != 1 || parts.Captures[0].Length != stringValue.Length)
             {
-                dateTimeValue = null;
+                dateValue = null;
                 return false;
             }
             else
             {
-                dateTimeValue = stringValue;
+                dateValue = stringValue;
                 return true;
             }
 
         }
 
+        /// <summary>
+        /// Converts a string to an ISO 8601 date, or throws.
+        /// </summary>
+        /// <param name="stringValue">The string to convert.</param>
+        /// <exception cref="ArgumentException">When <paramref name="stringValue"/> cannot be parsed.</exception>
         public static implicit operator DateIso8601(string stringValue)
         {
             var parts = Expression.Match(stringValue);

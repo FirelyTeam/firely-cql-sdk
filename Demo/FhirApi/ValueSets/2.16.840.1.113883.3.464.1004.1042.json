@@ -1,0 +1,114 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33033",
+  "meta": {
+    "lastUpdated": "2019-06-09T16:55:40.203-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1042"
+    }
+  ],
+  "version": "Working",
+  "name": "Bilateral_Mastectomy",
+  "title": "Bilateral Mastectomy",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:05-04:00",
+    "total": 15,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "456903003",
+        "display": "Bilateral extended radical mastectomy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "version": "2014.1.13AA",
+        "code": "85.48",
+        "display": "Bilateral extended radical mastectomy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "version": "2014.1.13AA",
+        "code": "85.44",
+        "display": "Bilateral extended simple mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "27865001",
+        "display": "Bilateral mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "52314009",
+        "display": "Bilateral mastectomy extended simple"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "14714006",
+        "display": "Bilateral mastectomy with excision of bilateral regional lymph nodes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "76468001",
+        "display": "Bilateral radical mastectomy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "version": "2014.1.13AA",
+        "code": "85.46",
+        "display": "Bilateral radical mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "22418005",
+        "display": "Bilateral simple mastectomy"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-9-cm",
+        "version": "2014.1.13AA",
+        "code": "85.42",
+        "display": "Bilateral simple mastectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "14693006",
+        "display": "Bilateral subcutaneous mammectomy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "60633004",
+        "display": "Bilateral subcutaneous mammectomy with synchronous implant"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "17086001",
+        "display": "Modified radical mastectomy, bilateral"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "726636007",
+        "display": "Prophylactic bilateral mastectomy"
+      },
+      {
+        "system": "https://www.cms.gov/Medicare/Coding/ICD10/index.html",
+        "version": "2021.1.20AA",
+        "code": "0HTV0ZZ",
+        "display": "Resection of Bilateral Breast, Open Approach"
+      }
+    ]
+  }
+}

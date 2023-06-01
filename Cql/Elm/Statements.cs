@@ -1,6 +1,6 @@
-﻿using Ncqa.Elm.Expressions;
+﻿using Hl7.Cql.Elm.Expressions;
 
-namespace Ncqa.Elm
+namespace Hl7.Cql.Elm
 {
     public class Statements
     {

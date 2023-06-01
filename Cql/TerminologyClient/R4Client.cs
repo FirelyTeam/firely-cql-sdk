@@ -1,15 +1,14 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Ncqa.Fhir.R4;
-using Ncqa.Fhir.R4.Model;
+
+using Hl7.Cql.Poco.Fhir.R4;
 using System;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Net.Http.Json;
-using System.Text;
+using Hl7.Cql.Poco.Fhir.R4.Model;
 
-namespace Ncqa.Fhir.TerminologyClient
+namespace Hl7.Cql.Poco.Fhir.TerminologyClient
 {
     public class R4Client
     {

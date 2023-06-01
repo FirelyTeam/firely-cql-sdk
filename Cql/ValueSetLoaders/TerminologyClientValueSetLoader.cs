@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Ncqa.Cql.Runtime;
-using Ncqa.Fhir.R4.Model;
-using Ncqa.Fhir.TerminologyClient;
+using Hl7.Cql.ValueSets;
 using System;
+using Hl7.Cql.Poco.Fhir.R4.Model;
+using Hl7.Cql.Poco.Fhir.TerminologyClient;
 
-namespace Ncqa.Cql.ValueSetLoaders
+namespace Hl7.Cql.ValueSetLoaders
 {
     public class TerminologyClientValueSetLoader : IValueSetLoader
     {

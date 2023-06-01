@@ -1,14 +1,12 @@
-using Ncqa.Fhir;
-using Ncqa.Fhir.Serialization;
-using Ncqa.Iso8601;
+using Hl7.Cql.Poco.Fhir;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json.Serialization;
 
-namespace Ncqa.Fhir.R4.Model
+namespace Hl7.Cql.Poco.Fhir.R4.Model
 {
-	[FhirUri("http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse")]
+    [FhirUri("http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse")]
 	public partial class QuestionnaireResponse : DomainResource
 	{
 
@@ -35,7 +33,9 @@ namespace Ncqa.Fhir.R4.Model
 		public Reference source { get; set; }
 
 		public ICollection<ItemComponent> item { get; set; }
-		[FhirUri("http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse.item")]
+        public string linkId { get; set; }
+
+        [FhirUri("http://hl7.org/fhir/StructureDefinition/QuestionnaireResponse.item")]
 		public partial class ItemComponent
 		{
 

@@ -1,0 +1,6037 @@
+{
+  "resourceType": "ValueSet",
+  "id": "ValueSet-33027",
+  "meta": {
+    "lastUpdated": "2019-06-09T16:54:09.166-04:00"
+  },
+  "url": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465",
+  "identifier": [
+    {
+      "value": "2.16.840.1.113883.3.464.1004.1465"
+    }
+  ],
+  "version": "Working",
+  "name": "Advanced_Illness",
+  "title": "Advanced Illness",
+  "status": "active",
+  "expansion": {
+    "timestamp": "2021-04-05T14:51:11-04:00",
+    "total": 999,
+    "offset": 0,
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "153931000119109",
+        "display": "Acute combined systolic and diastolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10633002",
+        "display": "Acute congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "49584005",
+        "display": "Acute cor pulmonale"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15964701000119109",
+        "display": "Saddle embolus of pulmonary artery with acute cor pulmonale"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "443343001",
+        "display": "Acute diastolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698296002",
+        "display": "Acute exacerbation of chronic congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "56675007",
+        "display": "Acute heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "101301000119106",
+        "display": "Acute hypercapnic respiratory failure due to obstructive sleep apnea"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "195114002",
+        "display": "Acute left ventricular failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "364006",
+        "display": "Acute left-sided heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "153951000119103",
+        "display": "Acute on chronic combined systolic and diastolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "443344007",
+        "display": "Acute on chronic diastolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "20091000175107",
+        "display": "Acute on chronic hypoxemic and hypercapnic respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "443253003",
+        "display": "Acute on chronic systolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230372003",
+        "display": "Acute relapsing multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "65710008",
+        "display": "Acute respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "397767007",
+        "display": "Acute respiratory failure requiring reintubation"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359617009",
+        "display": "Acute right-sided heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "443254009",
+        "display": "Acute systolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "195963002",
+        "display": "Acute vesicular emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10672271000119100",
+        "display": "Acute on chronic hypoxemic respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "236433006",
+        "display": "Acute-on-chronic renal failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "67905004",
+        "display": "Acute-on-chronic respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10762071000119109",
+        "display": "Acute-on-chronic respiratory failure following trauma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "423595004",
+        "display": "Adenocarcinoma carcinomatosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "700423003",
+        "display": "Adenocarcinoma of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "123717006",
+        "display": "Advanced cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230301006",
+        "display": "Akinetic-rigid form of Huntington's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "420054005",
+        "display": "Alcoholic cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "50325005",
+        "display": "Alcoholic fatty liver"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235881000",
+        "display": "Alcoholic hepatic failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235875008",
+        "display": "Alcoholic hepatitis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "41309000",
+        "display": "Alcoholic liver damage"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "26929004",
+        "display": "Alzheimer's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "142011000119109",
+        "display": "Alzheimer's disease co-occurrent with delirium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "3298001",
+        "display": "Amnestic disorder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "105451000119102",
+        "display": "Amnestic disorder associated with general medical condition"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230258005",
+        "display": "Amyotrophic lateral sclerosis with dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "277461004",
+        "display": "Anaplastic astrocytoma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "424151006",
+        "display": "Anaplastic glioma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "49708008",
+        "display": "Anemia of chronic renal failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1801000119106",
+        "display": "Anemia, pre-end stage renal disease on erythropoietin protocol"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191464005",
+        "display": "Arteriosclerotic dementia with delirium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191466007",
+        "display": "Arteriosclerotic dementia with depression"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191465006",
+        "display": "Arteriosclerotic dementia with paranoia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "254938000",
+        "display": "Astrocytoma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "107581000119103",
+        "display": "Astrocytoma of brain stem"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "266356006",
+        "display": "Atrophic (senile) emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "13274008",
+        "display": "Atrophic fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197303009",
+        "display": "Bacterial portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "14700006",
+        "display": "Bauxite fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "16219201000119101",
+        "display": "Behavioral disturbance co-occurrent and due to late onset Alzheimer dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "194767001",
+        "display": "Benign hypertensive heart disease with congestive cardiac failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "438511000",
+        "display": "Benign multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "13839000",
+        "display": "Bernheim's syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1761006",
+        "display": "Biliary cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197310003",
+        "display": "Biliary cirrhosis of children"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "129458007",
+        "display": "Bronchiolitis obliterans organizing pneumonia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "266355005",
+        "display": "Bullous emphysema with collapse"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197296006",
+        "display": "Capsular portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "254609000",
+        "display": "Carcinoma of ampulla of Vater"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363368005",
+        "display": "Carcinoma of body of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "254612002",
+        "display": "Carcinoma of endocrine pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "326072005",
+        "display": "Carcinoma of head of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "372142002",
+        "display": "Carcinoma of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363369002",
+        "display": "Carcinoma of tail of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "307593001",
+        "display": "Carcinomatosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "255121007",
+        "display": "Carcinomatosis of peritoneal cavity"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404092006",
+        "display": "Carcinomatous metastasis in skin"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "55565007",
+        "display": "Cardiac failure after obstetrical surgery AND/OR other procedure including delivery"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "5053004",
+        "display": "Cardiac insufficiency due to prosthesis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "60856006",
+        "display": "Cardiac insufficiency following cardiac surgery"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "266470007",
+        "display": "Cardiac portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "445236007",
+        "display": "Cardiorenal syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "410430005",
+        "display": "Cardiorespiratory arrest"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "699748007",
+        "display": "Cardiorespiratory arrest with successful resuscitation"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "410431009",
+        "display": "Cardiorespiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "213215000",
+        "display": "Cardiorespiratory failure as a complication of care"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "68328006",
+        "display": "Centriacinar emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "123606000",
+        "display": "Cholangiolitic cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "307757001",
+        "display": "Chronic alcoholic hepatitis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "195957006",
+        "display": "Chronic bullous emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "153941000119100",
+        "display": "Chronic combined systolic and diastolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "441530006",
+        "display": "Chronic diastolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "66110007",
+        "display": "Chronic diffuse emphysema due to inhalation of chemical fumes AND/OR vapors"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "196026004",
+        "display": "Chronic emphysema due to chemical fumes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "36599006",
+        "display": "Chronic fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "48447003",
+        "display": "Chronic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "426896000",
+        "display": "Chronic hypercapnic respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "428173007",
+        "display": "Chronic hypoxemic respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "700251005",
+        "display": "Chronic idiopathic pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "433146000",
+        "display": "Chronic kidney disease stage 5"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "5375005",
+        "display": "Chronic left-sided congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "111283005",
+        "display": "Chronic left-sided heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "57557005",
+        "display": "Chronic milk alkali syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "230373008",
+        "display": "Chronic progressive multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "425369003",
+        "display": "Chronic progressive renal failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "196028003",
+        "display": "Chronic pulmonary fibrosis due to chemical fumes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "57488007",
+        "display": "Chronic pulmonary fibrosis due to inhalation of chemical fumes AND/OR vapors"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "39871006",
+        "display": "Chronic respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "66989003",
+        "display": "Chronic right-sided congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10335000",
+        "display": "Chronic right-sided heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "441481004",
+        "display": "Chronic systolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "266468003",
+        "display": "Cirrhosis - non-alcoholic"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197279005",
+        "display": "Cirrhosis and chronic liver disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "19943007",
+        "display": "Cirrhosis of liver"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "103611000119102",
+        "display": "Cirrhosis of liver due to hepatitis B"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "271440004",
+        "display": "Cirrhosis secondary to cholestasis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "37688005",
+        "display": "Clonorchiasis with biliary cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "195112003",
+        "display": "Compensated cardiac failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "33325001",
+        "display": "Compensatory emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "30042003",
+        "display": "Confluent fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "206586007",
+        "display": "Congenital cardiac failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "42343007",
+        "display": "Congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285211000119102",
+        "display": "Congestive heart failure as post-operative complication of cardiac surgery"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285221000119109",
+        "display": "Congestive heart failure as post-operative complication of non-cardiac surgery"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "101281000119107",
+        "display": "Congestive heart failure due to cardiomyopathy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "426263006",
+        "display": "Congestive heart failure due to left ventricular systolic dysfunction"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "426611007",
+        "display": "Congestive heart failure due to valvular disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15629591000119103",
+        "display": "Congestive heart failure stage B due to ischemic cardiomyopathy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "67441000119101",
+        "display": "Congestive heart failure stage C"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15629541000119106",
+        "display": "Congestive heart failure stage C due to ischemic cardiomyopathy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "67431000119105",
+        "display": "Congestive heart failure stage D"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "23341000119109",
+        "display": "Congestive heart failure with right heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "45256007",
+        "display": "Cruveilhier-Baumgarten syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235966007",
+        "display": "Cystadenocarcinoma of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "2912004",
+        "display": "Cystic-bullous disease of the lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "195111005",
+        "display": "Decompensated cardiac failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "424404003",
+        "display": "Decompensated chronic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "141991000119109",
+        "display": "Delusions in Alzheimer's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "52448006",
+        "display": "Dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "425390006",
+        "display": "Dementia associated with Parkinson's Disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "421529006",
+        "display": "Dementia associated with AIDS"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "281004",
+        "display": "Dementia associated with alcoholism"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191519005",
+        "display": "Dementia associated with another disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698781002",
+        "display": "Dementia associated with cerebral anoxia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698624003",
+        "display": "Dementia associated with cerebral lipidosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698626001",
+        "display": "Dementia associated with multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698725008",
+        "display": "Dementia associated with neurosyphilis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698625002",
+        "display": "Dementia associated with normal pressure hydrocephalus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698726009",
+        "display": "Dementia associated with viral encephalitis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "21921000119103",
+        "display": "Dementia due to Pick's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "429458009",
+        "display": "Dementia due to Creutzfeldt Jakob disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "442344002",
+        "display": "Dementia due to Huntington chorea"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "101421000119107",
+        "display": "Dementia due to Parkinson's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "130121000119104",
+        "display": "Dementia due to Rett's syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698949001",
+        "display": "Dementia in remission"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "278857002",
+        "display": "Dementia of frontal lobe type"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1581000119101",
+        "display": "Dementia of the Alzheimer type with behavioral disturbance"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1591000119103",
+        "display": "Dementia with behavioral disturbance"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "142001000119106",
+        "display": "Depressed mood in Alzheimer's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "418304008",
+        "display": "Diastolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "120901000119108",
+        "display": "Diastolic heart failure stage B"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "120891000119109",
+        "display": "Diastolic heart failure stage C"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "120881000119106",
+        "display": "Diastolic heart failure stage D"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "196125002",
+        "display": "Diffuse interstitial pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197293003",
+        "display": "Diffuse nodular cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285645000",
+        "display": "Disseminated malignancy of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191494004",
+        "display": "Drug-induced amnestic syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "425413006",
+        "display": "Drug-induced cirrhosis of liver"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191493005",
+        "display": "Drug-induced dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233725001",
+        "display": "Drug-induced diffuse interstitial pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "371139006",
+        "display": "Early cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "105421000119105",
+        "display": "Early onset Alzheimer's disease with behavioral disturbance"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "57686001",
+        "display": "Emphysematous bleb of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "111411000119103",
+        "display": "End stage renal disease due to hypertension"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "153891000119101",
+        "display": "End stage renal disease on dialysis due to hypertension"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "236435004",
+        "display": "End stage renal failure on dialysis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "236434000",
+        "display": "End stage renal failure untreated by renal replacement therapy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "236436003",
+        "display": "End stage renal failure with renal transplant"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "46177005",
+        "display": "End-stage renal disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "192929006",
+        "display": "Exacerbation of multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230265002",
+        "display": "Familial Alzheimer's disease of early onset"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230267005",
+        "display": "Familial Alzheimer's disease of late onset"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "426437004",
+        "display": "Familial idiopathic pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197294009",
+        "display": "Fatty portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "462172006",
+        "display": "Fetal heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "462174007",
+        "display": "Fetal heart failure with myocardial hypertrophy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "462175008",
+        "display": "Fetal heart failure with redistribution of cardiac output"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "51615001",
+        "display": "Fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230269008",
+        "display": "Focal Alzheimer's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "51928006",
+        "display": "General paresis - neurosyphilis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "192928003",
+        "display": "Generalized multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "16003001",
+        "display": "Giant bullous emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "276828006",
+        "display": "Glioblastoma multiforme of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "536002",
+        "display": "Glissonian cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "67771000119102",
+        "display": "Grade 2 astrocytoma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "17385007",
+        "display": "Graphite fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "2421000119107",
+        "display": "Hallucinations co-occurrent and due to late onset dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233924009",
+        "display": "Heart failure as a complication of care"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "471880001",
+        "display": "Heart failure due to end stage congenital heart disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "446221000",
+        "display": "Heart failure with normal ejection fraction"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "60805002",
+        "display": "Hemolytic anemia with emphysema AND cutis laxa"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235901004",
+        "display": "Hepatic fibrosis with hepatic sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235899008",
+        "display": "Hepatic sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "100721000119109",
+        "display": "High grade astrocytoma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10091002",
+        "display": "High output heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "58756001",
+        "display": "Huntington's chorea"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "128001000119105",
+        "display": "Hypertension concurrent and due to end stage renal disease on dialysis due to type 1 diabetes mellitus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "127991000119101",
+        "display": "Hypertension concurrent and due to end stage renal disease on dialysis due to type 2 diabetes mellitus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "434431000124103",
+        "display": "Hypertensive end stage renal disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15781000119107",
+        "display": "Hypertensive heart AND chronic kidney disease with congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "194779001",
+        "display": "Hypertensive heart and renal disease with (congestive) heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "194781004",
+        "display": "Hypertensive heart and renal disease with both (congestive) heart failure and renal failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "5148006",
+        "display": "Hypertensive heart disease with congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "46113002",
+        "display": "Hypertensive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "698810000",
+        "display": "Hypertensive renal disease with end stage renal failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10676831000119101",
+        "display": "Hypoxemic respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235897005",
+        "display": "Hypoxia-associated cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "700250006",
+        "display": "Idiopathic pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "6183001",
+        "display": "Indian childhood cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "609507007",
+        "display": "Induced termination of pregnancy complicated by cardiac failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235896001",
+        "display": "Infectious cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "32875003",
+        "display": "Inhalant-induced persisting dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "473419009",
+        "display": "Intraductal papillary mucinous carcinoma in situ of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235902006",
+        "display": "Intrahepatic phlebosclerosis and fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230299004",
+        "display": "Juvenile onset Huntington's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "266471006",
+        "display": "Juvenile portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "69482004",
+        "display": "Korsakoff's psychosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191471000",
+        "display": "Korsakov's alcoholic psychosis with peripheral neuritis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359987004",
+        "display": "Krukenberg tumor"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "235895002",
+        "display": "Laennec's cirrhosis, non-alcoholic"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230300007",
+        "display": "Late onset Huntington's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "123716002",
+        "display": "Latent cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314408000",
+        "display": "Leukemic infiltrate of choroid"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "236512004",
+        "display": "Leukemic infiltrate of kidney"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314418005",
+        "display": "Leukemic infiltrate of retina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "423032007",
+        "display": "Leukemic infiltration of orbit"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404124002",
+        "display": "Leukemic infiltration of skin (T-cell lymphoblastic leukemia)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404123008",
+        "display": "Leukemic infiltration of skin (T-cell prolymphocytic leukemia)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404122003",
+        "display": "Leukemic infiltration of skin (chronic T-cell lymphocytic leukemia)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404156009",
+        "display": "Leukemic infiltration of skin"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188648000",
+        "display": "Leukemic reticuloendotheliosis of lymph nodes of axilla and upper limb"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188645002",
+        "display": "Leukemic reticuloendotheliosis of lymph nodes of head, face and neck"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188649008",
+        "display": "Leukemic reticuloendotheliosis of lymph nodes of inguinal region and lower limb"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314964006",
+        "display": "Local recurrence of malignant tumor of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233726000",
+        "display": "Localized pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "44088000",
+        "display": "Low cardiac output syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "100731000119107",
+        "display": "Low grade astrocytoma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "25544003",
+        "display": "Low output heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "255119002",
+        "display": "Lymphangitis carcinomatosa"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "44274007",
+        "display": "Lymphoid interstitial pneumonia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "236513009",
+        "display": "Lymphoma of kidney"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "43904005",
+        "display": "Macronodular cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "143401000119106",
+        "display": "Malignant carcinoid tumor of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "235965006",
+        "display": "Malignant cystic tumor of exocrine pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "448989001",
+        "display": "Carcinoma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "449253005",
+        "display": "Carcinoma of hypothalamus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "448863000",
+        "display": "Carcinoma of pineal gland"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "276826005",
+        "display": "Malignant glioma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "424276002",
+        "display": "Malignant glioma of brainstem"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285841000119104",
+        "display": "Malignant hypertensive end stage renal disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "286371000119107",
+        "display": "Malignant hypertensive end stage renal disease on dialysis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404090003",
+        "display": "Malignant infiltration of oral cavity by underlying tumor"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404091004",
+        "display": "Malignant infiltration of skin by underlying tumor"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "278433008",
+        "display": "Malignant infiltration of soft tissue"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "278051002",
+        "display": "Malignant lymphoma of thyroid gland"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "108101000119101",
+        "display": "Malignant melanoma metastatic to kidney"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230156002",
+        "display": "Malignant meningitis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "439567002",
+        "display": "Malignant multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "448248006",
+        "display": "Malignant neoplasm of axial suprasellar region of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188281006",
+        "display": "Malignant neoplasm of basal ganglia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "428061005",
+        "display": "Malignant neoplasm of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363473003",
+        "display": "Malignant neoplasm of brainstem"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "448218008",
+        "display": "Malignant neoplasm of cerebellopontine angle"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "449420002",
+        "display": "Malignant neoplasm of cerebellum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188282004",
+        "display": "Malignant neoplasm of cerebral cortex"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188295009",
+        "display": "Malignant neoplasm of cerebral peduncle"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363471001",
+        "display": "Malignant neoplasm of cerebral ventricles"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "429033009",
+        "display": "Malignant neoplasm of cerebrum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188280007",
+        "display": "Malignant neoplasm of cerebrum (excluding lobes and ventricles)"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188301005",
+        "display": "Malignant neoplasm of corpus callosum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188283009",
+        "display": "Malignant neoplasm of corpus striatum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "187798008",
+        "display": "Malignant neoplasm of ectopic pancreatic tissue"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188293002",
+        "display": "Malignant neoplasm of floor of cerebral ventricle"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363467004",
+        "display": "Malignant neoplasm of frontal lobe"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188285002",
+        "display": "Malignant neoplasm of globus pallidus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188289008",
+        "display": "Malignant neoplasm of hippocampus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188296005",
+        "display": "Malignant neoplasm of medulla oblongata"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188297001",
+        "display": "Malignant neoplasm of midbrain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363470000",
+        "display": "Malignant neoplasm of occipital lobe"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188308004",
+        "display": "Malignant neoplasm of olfactory bulb"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363469001",
+        "display": "Malignant neoplasm of parietal lobe"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188339002",
+        "display": "Malignant neoplasm of pituitary gland and craniopharyngeal duct"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188298006",
+        "display": "Malignant neoplasm of pons"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "187786003",
+        "display": "Malignant neoplasm of sphincter of Oddi"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188302003",
+        "display": "Malignant neoplasm of tapetum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363468009",
+        "display": "Malignant neoplasm of temporal lobe"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188287005",
+        "display": "Malignant neoplasm of thalamus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188290004",
+        "display": "Malignant neoplasm of uncus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "255044008",
+        "display": "Malignant pinealoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "448250003",
+        "display": "Malignant teratoma of pineal region"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369602008",
+        "display": "Malignant tumor involving an organ by separate metastasis from bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369603003",
+        "display": "Malignant tumor involving an organ by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369604009",
+        "display": "Malignant tumor involving an organ by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369605005",
+        "display": "Malignant tumor involving an organ by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369606006",
+        "display": "Malignant tumor involving an organ by separate metastasis from prostate"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369607002",
+        "display": "Malignant tumor involving an organ by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369608007",
+        "display": "Malignant tumor involving an organ by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369609004",
+        "display": "Malignant tumor involving an organ by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369476004",
+        "display": "Malignant tumor involving bladder by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369477008",
+        "display": "Malignant tumor involving bladder by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369478003",
+        "display": "Malignant tumor involving bladder by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369479006",
+        "display": "Malignant tumor involving bladder by separate metastasis from prostate"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369480009",
+        "display": "Malignant tumor involving bladder by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369481008",
+        "display": "Malignant tumor involving bladder by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369482001",
+        "display": "Malignant tumor involving bladder by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369538008",
+        "display": "Malignant tumor involving left broad ligament by metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369542006",
+        "display": "Malignant tumor involving left fallopian tube by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369543001",
+        "display": "Malignant tumor involving left fallopian tube by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369544007",
+        "display": "Malignant tumor involving left fallopian tube by separate metastasis from right fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369610009",
+        "display": "Malignant tumor involving left fallopian tube by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369545008",
+        "display": "Malignant tumor involving left fallopian tube by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369546009",
+        "display": "Malignant tumor involving left fallopian tube by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369560006",
+        "display": "Malignant tumor involving left ovary by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369561005",
+        "display": "Malignant tumor involving left ovary by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369562003",
+        "display": "Malignant tumor involving left ovary by separate metastasis from right ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369563008",
+        "display": "Malignant tumor involving left ovary by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369564002",
+        "display": "Malignant tumor involving left ovary by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369565001",
+        "display": "Malignant tumor involving left ovary by separate metastasis uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369486003",
+        "display": "Malignant tumor involving prostate by separate metastasis from bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369455009",
+        "display": "Malignant tumor involving rectum by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369456005",
+        "display": "Malignant tumor involving rectum by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369457001",
+        "display": "Malignant tumor involving rectum by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369458006",
+        "display": "Malignant tumor involving rectum by separate metastasis from prostate"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369459003",
+        "display": "Malignant tumor involving rectum by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369460008",
+        "display": "Malignant tumor involving rectum by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369461007",
+        "display": "Malignant tumor involving rectum by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369540003",
+        "display": "Malignant tumor involving right broad ligament by metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369553000",
+        "display": "Malignant tumor involving right fallopian tube by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369554006",
+        "display": "Malignant tumor involving right fallopian tube by separate metastasis from left fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369555007",
+        "display": "Malignant tumor involving right fallopian tube by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369556008",
+        "display": "Malignant tumor involving right fallopian tube by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369557004",
+        "display": "Malignant tumor involving right fallopian tube by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369558009",
+        "display": "Malignant tumor involving right fallopian tube by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369568004",
+        "display": "Malignant tumor involving right ovary by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369569007",
+        "display": "Malignant tumor involving right ovary by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369570008",
+        "display": "Malignant tumor involving right ovary by separate metastasis from left ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369571007",
+        "display": "Malignant tumor involving right ovary by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369572000",
+        "display": "Malignant tumor involving right ovary by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369573005",
+        "display": "Malignant tumor involving right ovary by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369464004",
+        "display": "Malignant tumor involving ureter by separate metastasis from bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369467006",
+        "display": "Malignant tumor involving urethra by separate metastasis from bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369468001",
+        "display": "Malignant tumor involving urethra by separate metastasis from prostate"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369500009",
+        "display": "Malignant tumor involving uterine cervix by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369501008",
+        "display": "Malignant tumor involving uterine cervix by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369574004",
+        "display": "Malignant tumor involving uterine cervix by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369502001",
+        "display": "Malignant tumor involving uterine corpus by separate metastasis from bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369575003",
+        "display": "Malignant tumor involving uterine corpus by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369576002",
+        "display": "Malignant tumor involving uterine corpus by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369577006",
+        "display": "Malignant tumor involving uterine corpus by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369578001",
+        "display": "Malignant tumor involving uterine corpus by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369581006",
+        "display": "Malignant tumor involving vagina by separate metastasis from bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369582004",
+        "display": "Malignant tumor involving vagina by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369583009",
+        "display": "Malignant tumor involving vagina by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369584003",
+        "display": "Malignant tumor involving vagina by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369585002",
+        "display": "Malignant tumor involving vagina by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369586001",
+        "display": "Malignant tumor involving vagina by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369484000",
+        "display": "Malignant tumor involving vasa deferentia by separate metastasis from prostate"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369588000",
+        "display": "Malignant tumor involving vulva by separate metastasis from endometrium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369589008",
+        "display": "Malignant tumor involving vulva by separate metastasis from fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369590004",
+        "display": "Malignant tumor involving vulva by separate metastasis from ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369591000",
+        "display": "Malignant tumor involving vulva by separate metastasis from uterine cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369592007",
+        "display": "Malignant tumor involving vulva by separate metastasis from uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369593002",
+        "display": "Malignant tumor involving vulva by separate metastasis from vagina"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "187794005",
+        "display": "Malignant tumor of Islets of Langerhans"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363417006",
+        "display": "Malignant tumor of ampulla of Vater"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "187791002",
+        "display": "Malignant tumor of body of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188292007",
+        "display": "Malignant tumor of choroid plexus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188340000",
+        "display": "Malignant tumor of craniopharyngeal duct"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "254611009",
+        "display": "Malignant tumor of endocrine pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "255088001",
+        "display": "Malignant tumor of exocrine pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363419009",
+        "display": "Malignant tumor of head of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188286001",
+        "display": "Malignant tumor of hypothalamus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "254969001",
+        "display": "Malignant tumor of olfactory tract"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363418001",
+        "display": "Malignant tumor of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "187793004",
+        "display": "Malignant tumor of pancreatic duct"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363483004",
+        "display": "Malignant tumor of pineal gland"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "255112006",
+        "display": "Malignant tumor of pituitary and hypothalamus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "363482009",
+        "display": "Malignant tumor of pituitary gland"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "187792009",
+        "display": "Malignant tumor of tail of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "56841008",
+        "display": "Massive fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "40640008",
+        "display": "Massive silicotic fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "277505007",
+        "display": "Medulloblastoma of cerebellum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "103511000119103",
+        "display": "Melanoma carcinomatosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "459411000124109",
+        "display": "Metastatic collecting duct carcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "459371000124108",
+        "display": "Metastatic gastroesophageal adenocarcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "459381000124106",
+        "display": "Metastatic castration-resistant prostate cancer"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "459391000124109",
+        "display": "Metastatic human epidermal growth factor 2 positive carcinoma of breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314987003",
+        "display": "Metastasis from malignant melanoma of skin"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315006004",
+        "display": "Metastasis from malignant tumor of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314991008",
+        "display": "Metastasis from malignant tumor of adrenal gland"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314995004",
+        "display": "Metastasis from malignant tumor of bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314990009",
+        "display": "Metastasis from malignant tumor of bone"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315004001",
+        "display": "Metastasis from malignant tumor of breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315005000",
+        "display": "Metastasis from malignant tumor of bronchus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315008003",
+        "display": "Metastasis from malignant tumor of buccal cavity"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314992001",
+        "display": "Metastasis from malignant tumor of cervix"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314998002",
+        "display": "Metastasis from malignant tumor of colon"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315003007",
+        "display": "Metastasis from malignant tumor of esophagus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315001009",
+        "display": "Metastasis from malignant tumor of gallbladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314996003",
+        "display": "Metastasis from malignant tumor of kidney"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315000005",
+        "display": "Metastasis from malignant tumor of liver"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314999005",
+        "display": "Metastasis from malignant tumor of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "459421000124101",
+        "display": "Metastatic penile cancer"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314994000",
+        "display": "Metastasis from malignant tumor of prostate"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314997007",
+        "display": "Metastasis from malignant tumor of rectum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314988008",
+        "display": "Metastasis from malignant tumor of skin"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314989000",
+        "display": "Metastasis from malignant tumor of soft tissues"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315002002",
+        "display": "Metastasis from malignant tumor of stomach"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315007008",
+        "display": "Metastasis from malignant tumor of thyroid"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "315009006",
+        "display": "Metastasis from malignant tumor of tongue"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314993006",
+        "display": "Metastasis from malignant tumor of uterus"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "459401000124106",
+        "display": "Metastatic pancreatic endocrine carcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404094007",
+        "display": "Metastasis involving oral cavity"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285643007",
+        "display": "Metastasis to adrenal gland of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285640005",
+        "display": "Metastasis to bladder of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285618001",
+        "display": "Metastasis to bone of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285641009",
+        "display": "Metastasis to brain of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285634003",
+        "display": "Metastasis to breast of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285603002",
+        "display": "Metastasis to bronchus of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285611007",
+        "display": "Metastasis to colon of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "275266006",
+        "display": "Metastasis to digestive organs"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285642002",
+        "display": "Metastasis to eye of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "303194003",
+        "display": "Metastasis to head and neck lymph node"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285606005",
+        "display": "Metastasis to heart of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285639008",
+        "display": "Metastasis to kidney of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285610008",
+        "display": "Metastasis to large intestine of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1691000119104",
+        "display": "Metastasis to liver from adenocarcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285613005",
+        "display": "Metastasis to liver of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1661000119106",
+        "display": "Metastasis to lung from adenocarcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285604008",
+        "display": "Metastasis to lung of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1681000119102",
+        "display": "Metastasis to lymph node from adenocarcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1671000119100",
+        "display": "Metastasis to lymph node from squamous cell carcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285644001",
+        "display": "Metastasis to lymph node of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285607001",
+        "display": "Metastasis to mediastinum of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "303201005",
+        "display": "Metastasis to multiple lymph nodes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "255123005",
+        "display": "Metastasis to nervous system and eye"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285637005",
+        "display": "Metastasis to ovary of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285614004",
+        "display": "Metastasis to pancreas of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "255124004",
+        "display": "Metastasis to peripheral nerve"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285616002",
+        "display": "Metastasis to peritoneum of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285605009",
+        "display": "Metastasis to pleura of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285612000",
+        "display": "Metastasis to rectum of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285617006",
+        "display": "Metastasis to retroperitoneum of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285631006",
+        "display": "Metastasis to skin of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285609003",
+        "display": "Metastasis to small intestine of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285633009",
+        "display": "Metastasis to soft tissue of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285615003",
+        "display": "Metastasis to spleen of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285608006",
+        "display": "Metastasis to thymus of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285598005",
+        "display": "Metastasis to trachea of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285635002",
+        "display": "Metastasis to uterus of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285638000",
+        "display": "Metastasis to vagina of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "285619009",
+        "display": "Metastasis to vertebral column of unknown primary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "458581000124106",
+        "display": "Metastatic HER2 positive gastroesophageal junction cancer"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "307226002",
+        "display": "Metastatic adenocarcinoma of unknown origin"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "443493003",
+        "display": "Metastatic malignant melanoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "402563000",
+        "display": "Metastatic malignant melanoma with diffuse hypermelanosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359782004",
+        "display": "Metastatic malignant neoplasm to apex of urinary bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359785002",
+        "display": "Metastatic malignant neoplasm to dome of urinary bladder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "359780007",
+        "display": "Metastatic malignant neoplasm to lateral axillary lymph nodes"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "241861008",
+        "display": "Metastatic malignant neoplasm to nasopharynx"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "19090001000004101",
+        "display": "Metastatic neoplasm of left basal ganglion"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "414676007",
+        "display": "Metastatic neuroblastoma of orbit proper"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "457721000124104",
+        "display": "Metastatic non-small cell lung cancer"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "443144000",
+        "display": "Metastatic sarcoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "403906006",
+        "display": "Metastatic squamous cell carcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "458321000124102",
+        "display": "Metastatic urothelial carcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233758005",
+        "display": "Mica pneumoconiosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "21861000",
+        "display": "Micronodular cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "428051000124108",
+        "display": "Mild dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230287006",
+        "display": "Mixed cortical and subcortical vascular dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15999000",
+        "display": "Mixed micro and macronodular cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "430771000124100",
+        "display": "Moderate dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "56267009",
+        "display": "Multi-infarct dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "106021000119105",
+        "display": "Multi-infarct dementia due to atherosclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10349009",
+        "display": "Multi-infarct dementia with delirium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "25772007",
+        "display": "Multi-infarct dementia with delusions"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "14070001",
+        "display": "Multi-infarct dementia with depression"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "266469006",
+        "display": "Multilobular portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "24700007",
+        "display": "Multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "192926004",
+        "display": "Multiple sclerosis of the brainstem"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "192927008",
+        "display": "Multiple sclerosis of the spinal cord"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "276514007",
+        "display": "Neonatal cardiac failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "181869007",
+        "display": "Neonatal cardiorespiratory arrest"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "281560004",
+        "display": "Neuroblastoma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "116811000119106",
+        "display": "Non-Hodgkin lymphoma of central nervous system metastatic to lymph node of lower limb"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "116821000119104",
+        "display": "Non-Hodgkin lymphoma of central nervous system metastatic to lymph node of upper limb"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "17262008",
+        "display": "Non-alcoholic Korsakoff's psychosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230266001",
+        "display": "Non-familial Alzheimer's disease of early onset"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230268000",
+        "display": "Non-familial Alzheimer's disease of late onset"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "123605001",
+        "display": "Nutritional cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "109819003",
+        "display": "Obstructive biliary cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "16846004",
+        "display": "Obstructive emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "254940005",
+        "display": "Oligodendroglioma of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "107571000119101",
+        "display": "Oligodendroglioma of brain stem"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "104981000119104",
+        "display": "Oligodendroglioma of cerebrum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "162712007",
+        "display": "O/E - collapse - asphyxia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "162711000",
+        "display": "On examination - collapse - respiratory arrest"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "162974009",
+        "display": "O/E - fibrosis of lung present"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "274282003",
+        "display": "On examination - respiratory arrest"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "420614009",
+        "display": "Organic dementia associated with AIDS"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "109912006",
+        "display": "Overlapping malignant neoplasm of brain"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "109848009",
+        "display": "Overlapping malignant neoplasm of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "4981000",
+        "display": "Panacinar emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "31898008",
+        "display": "Paraseptal emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "33144001",
+        "display": "Parasitic cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "49049000",
+        "display": "Parkinson's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "62239001",
+        "display": "Parkinson-dementia complex of Guam"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230289009",
+        "display": "Patchy dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "50196008",
+        "display": "Perialveolar fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "3514002",
+        "display": "Peribronchial fibrosis of lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "40312006",
+        "display": "Pericarditis secondary to tumor metastatic to pericardium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "13092008",
+        "display": "Pick's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230271008",
+        "display": "Pick's disease with Pick bodies"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230272001",
+        "display": "Pick's disease with Pick cells and no Pick bodies"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197299004",
+        "display": "Pigmentary portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "254955001",
+        "display": "Pituitary carcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "419728003",
+        "display": "Portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "266368002",
+        "display": "Post-inflammatory pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230282000",
+        "display": "Traumatic encephalopathy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698687007",
+        "display": "Post-traumatic dementia with behavioral change"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "40425004",
+        "display": "Postconcussion syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "27156006",
+        "display": "Posthepatitic cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698504006",
+        "display": "Postoperative cardiopulmonary failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "309775007",
+        "display": "Postprocedural respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "33644002",
+        "display": "Postvalvulotomy syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "12348006",
+        "display": "Presenile dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "421023003",
+        "display": "Presenile dementia associated with AIDS"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191452002",
+        "display": "Presenile dementia with delirium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "31081000119101",
+        "display": "Presenile dementia with delusions"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191455000",
+        "display": "Presenile dementia with depression"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191454001",
+        "display": "Presenile dementia with paranoia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "681621000119105",
+        "display": "Primary adenocarcinoma of body of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "681721000119103",
+        "display": "Primary adenocarcinoma of head of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "1651000119109",
+        "display": "Primary adenocarcinoma of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "31712002",
+        "display": "Primary biliary cholangitis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "276836002",
+        "display": "Primary cerebral lymphoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "22381000119105",
+        "display": "Primary degenerative dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "416780008",
+        "display": "Primary degenerative dementia of the Alzheimer type, presenile onset"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698955006",
+        "display": "Primary degenerative dementia of the Alzheimer type, presenile onset in remission"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "6475002",
+        "display": "Primary degenerative dementia of the Alzheimer type, presenile onset, uncomplicated"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "65096006",
+        "display": "Primary degenerative dementia of the Alzheimer type, presenile onset, with delirium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "54502004",
+        "display": "Primary degenerative dementia of the Alzheimer type, presenile onset, with delusions"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "10532003",
+        "display": "Primary degenerative dementia of the Alzheimer type, presenile onset, with depression"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "416975007",
+        "display": "Primary degenerative dementia of the Alzheimer type, senile onset"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698954005",
+        "display": "Primary degenerative dementia of the Alzheimer type, senile onset in remission"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "66108005",
+        "display": "Primary degenerative dementia of the Alzheimer type, senile onset, uncomplicated"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "429161000124103",
+        "display": "Primary degenerative dementia of the Alzheimer type, senile onset, with behavioral disturbance"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "4817008",
+        "display": "Primary degenerative dementia of the Alzheimer type, senile onset, with delirium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "55009008",
+        "display": "Primary degenerative dementia of the Alzheimer type, senile onset, with delusions"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "26852004",
+        "display": "Primary degenerative dementia of the Alzheimer type, senile onset, with depression"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "684911000119105",
+        "display": "Primary glioblastoma multiforme of frontal lobe"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "421283008",
+        "display": "Primary lymphoma of brain associated with AIDS"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "371967001",
+        "display": "Primary malignant neoplasm of ampulla of Vater"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "372119009",
+        "display": "Primary malignant neoplasm of head of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "422782004",
+        "display": "Ovarian cancer, disseminated"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "372003004",
+        "display": "Primary malignant neoplasm of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "424887002",
+        "display": "Thyroid cancer metastatic to bone"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "423987006",
+        "display": "Cancer of vulva, disseminated"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "143391000119109",
+        "display": "Primary malignant neuroendocrine neoplasm of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "428700003",
+        "display": "Primary progressive multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230280008",
+        "display": "Progressive aphasia in Alzheimer's disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "460561000124109",
+        "display": "PF-ILD-progressive fibrosing interstitial lung disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "307601000",
+        "display": "Pseudomyxoma peritonei"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "111480006",
+        "display": "Psychoactive substance-induced organic dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233674008",
+        "display": "Pulmonary emphysema in alpha-1 PI deficiency"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "405570007",
+        "display": "Pulmonary fibrosis due to and following radiotherapy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233940007",
+        "display": "Pulmonary tumor embolism"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230283005",
+        "display": "Punch drunk syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "314206003",
+        "display": "Refractory heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "426373005",
+        "display": "Relapsing remitting multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "230374002",
+        "display": "Remittent-progressive multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "276259003",
+        "display": "Respiratory arrest preceding cardiac arrest"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "409622000",
+        "display": "Respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "16055271000119107",
+        "display": "Respiratory failure following trauma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233765002",
+        "display": "Respiratory failure without hypercapnia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "43736008",
+        "display": "Rheumatic left ventricular failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "54867000",
+        "display": "Rheumatoid fibrosing alveolitis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "128404006",
+        "display": "Right heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "426012001",
+        "display": "Right heart failure due to pulmonary hypertension"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "44313006",
+        "display": "Right heart failure secondary to left heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "367363000",
+        "display": "Right ventricular failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "404093001",
+        "display": "Sarcomatous metastasis in skin"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233677001",
+        "display": "Scar emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233713004",
+        "display": "Seasonal cryptogenic organizing pneumonia with biochemical cholestasis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15956181000119102",
+        "display": "Secondary adenocarcinoma of bilateral lungs"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "108211000119108",
+        "display": "Secondary adenocarcinoma of kidney"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "12368000",
+        "display": "Secondary biliary cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "286902000",
+        "display": "Secondary carcinoma of gastrointestinal tract"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "255118005",
+        "display": "Secondary lymphangitic carcinoma"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "128465005",
+        "display": "Secondary malignant neoplasm of articular cartilage"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "372093008",
+        "display": "Secondary malignant neoplasm of axillary tail of breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "12246561000119101",
+        "display": "Secondary malignant neoplasm of bilateral adrenal glands"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "12246601000119101",
+        "display": "Secondary malignant neoplasm of bilateral lungs"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "400058002",
+        "display": "Secondary malignant neoplasm of blood vessel of lower leg"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "399969009",
+        "display": "Secondary malignant neoplasm of blood vessel of upper arm"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188462001",
+        "display": "Secondary malignant neoplasm of brain and spinal cord"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188469005",
+        "display": "Secondary malignant neoplasm of cervix uteri"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188471005",
+        "display": "Secondary malignant neoplasm of epididymis and vas deferens"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "418529003",
+        "display": "Secondary malignant neoplasm of lacrimal drainage structure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "423384009",
+        "display": "Secondary malignant neoplasm of lacrimal gland duct"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "448922007",
+        "display": "Secondary malignant neoplasm of large intestine and rectum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369514009",
+        "display": "Secondary malignant neoplasm of left fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "353741000119106",
+        "display": "Secondary malignant neoplasm of left lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369523007",
+        "display": "Secondary malignant neoplasm of left ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "449632009",
+        "display": "Secondary malignant neoplasm of lower leg"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "16260631000119101",
+        "display": "Secondary malignant neoplasm of lymph node from neoplasm of female breast"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "13351431000119102",
+        "display": "Secondary malignant neoplasm of lymph nodes of neck from thyroid"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "242862004",
+        "display": "Secondary malignant neoplasm of nasopharyngeal wall"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "269473008",
+        "display": "Secondary malignant neoplasm of respiratory and digestive systems"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188445006",
+        "display": "Secondary malignant neoplasm of retroperitoneum and peritoneum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369521009",
+        "display": "Secondary malignant neoplasm of right fallopian tube"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "353561000119103",
+        "display": "Secondary malignant neoplasm of right lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369530001",
+        "display": "Secondary malignant neoplasm of right ovary"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188454009",
+        "display": "Secondary malignant neoplasm of skin of head"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "188459004",
+        "display": "Secondary malignant neoplasm of skin of hip and leg"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "449630001",
+        "display": "Secondary malignant neoplasm of skin of lower leg"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "188458007",
+        "display": "Secondary malignant neoplasm of skin of shoulder and arm"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "449631002",
+        "display": "Secondary malignant neoplasm of skin of upper arm"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "274088005",
+        "display": "Secondary malignant neoplasm of unknown site"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "449633004",
+        "display": "Secondary malignant neoplasm of upper arm"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "128462008",
+        "display": "Secondary malignant neoplastic disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369535006",
+        "display": "Secondary neoplasm of left broad ligament"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "369536007",
+        "display": "Secondary neoplasm of right broad ligament"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "135091000119106",
+        "display": "Secondary neuroendocrine carcinoma of peritoneum"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "269616004",
+        "display": "Secondary nodes - axilla/arm"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "269617008",
+        "display": "Secondary nodes - inguinal/leg"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "425500002",
+        "display": "Secondary progressive multiple sclerosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "302507002",
+        "display": "Sedative amnestic disorder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "301643003",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced persisting amnestic disorder"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "59651006",
+        "display": "Sedative, hypnotic AND/OR anxiolytic-induced persisting dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "195958001",
+        "display": "Segmental bullous emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230288001",
+        "display": "Semantic dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "268612007",
+        "display": "Senile and presenile organic psychotic conditions"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15662003",
+        "display": "Senile dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "312991009",
+        "display": "Senile dementia of the Lewy body type"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191461002",
+        "display": "Senile dementia with delirium"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "371024007",
+        "display": "Senile dementia with delusion"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191459006",
+        "display": "Senile dementia with depression"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191457008",
+        "display": "Senile dementia with depressive or paranoid features"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191458003",
+        "display": "Senile dementia with paranoia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "371026009",
+        "display": "Senile dementia with psychosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "277638005",
+        "display": "Sepsis-associated left ventricular failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "277639002",
+        "display": "Sepsis-associated right ventricular failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "690801000119108",
+        "display": "Serous cystadenocarcinoma of pancreas"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "428351000124105",
+        "display": "Severe dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "59773008",
+        "display": "Simple pulmonary alveolitis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230499002",
+        "display": "Sleep-related respiratory failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "424052001",
+        "display": "Small cell carcinoma carcinomatosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "108131000119108",
+        "display": "Small cell carcinoma metastatic to kidney"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "425303004",
+        "display": "Squamous cell carcinomatosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "inactive": true,
+        "version": "2020.09.20AA",
+        "code": "700252003",
+        "display": "Subacute idiopathic pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233761006",
+        "display": "Subacute silicosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230286002",
+        "display": "Subcortical vascular dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "699318007",
+        "display": "Supratentorial primitive neuroectodermal tumor"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698594003",
+        "display": "Symptomatic congestive heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "16070004",
+        "display": "Syphilitic cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197305002",
+        "display": "Syphilitic portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "417996009",
+        "display": "Systolic heart failure"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "120871000119108",
+        "display": "Systolic heart failure stage B"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15629641000119107",
+        "display": "Systolic heart failure stage B due to ischemic cardiomyopathy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "120861000119102",
+        "display": "Systolic heart failure stage C"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "15629741000119102",
+        "display": "Systolic heart failure stage C due to ischemic cardiomyopathy"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "120851000119104",
+        "display": "Systolic heart failure stage D"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "402879006",
+        "display": "T-cell leukemic infiltration of skin"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "123604002",
+        "display": "Toxic cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233724002",
+        "display": "Toxic diffuse interstitial pulmonary fibrosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "233675009",
+        "display": "Toxic emphysema"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197301006",
+        "display": "Toxic portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191463004",
+        "display": "Uncomplicated arteriosclerotic dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191451009",
+        "display": "Uncomplicated presenile dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "191449005",
+        "display": "Uncomplicated senile dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "108201000119105",
+        "display": "Secondary undifferentiated large cell malignant neoplasm of kidney"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "424954002",
+        "display": "Undifferentiated large cell carcinomatosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "197291001",
+        "display": "Unilobular portal cirrhosis"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "23958009",
+        "display": "Vanishing lung"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "304603007",
+        "display": "Variant Creutzfeldt-Jakob disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "429998004",
+        "display": "Vascular dementia"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "698948009",
+        "display": "Vascular dementia in remission"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "230285003",
+        "display": "Vascular dementia of acute onset"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "288631000119104",
+        "display": "Vascular dementia with behavioral disturbance"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "16276361000119109",
+        "display": "Vascular dementia without behavioral disturbance"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "405843009",
+        "display": "Widespread metastatic malignant neoplastic disease"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "44047000",
+        "display": "Zieve's syndrome"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "version": "2020.09.20AA",
+        "code": "195959009",
+        "display": "Zonal bullous emphysema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "A81.00",
+        "display": "Creutzfeldt-Jakob disease, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "A81.01",
+        "display": "Variant Creutzfeldt-Jakob disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "A81.09",
+        "display": "Other Creutzfeldt-Jakob disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.0",
+        "display": "Malignant neoplasm of head of pancreas"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.1",
+        "display": "Malignant neoplasm of body of pancreas"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.2",
+        "display": "Malignant neoplasm of tail of pancreas"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.3",
+        "display": "Malignant neoplasm of pancreatic duct"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.4",
+        "display": "Malignant neoplasm of endocrine pancreas"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.7",
+        "display": "Malignant neoplasm of other parts of pancreas"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.8",
+        "display": "Malignant neoplasm of overlapping sites of pancreas"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C25.9",
+        "display": "Malignant neoplasm of pancreas, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.0",
+        "display": "Malignant neoplasm of cerebrum, except lobes and ventricles"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.1",
+        "display": "Malignant neoplasm of frontal lobe"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.2",
+        "display": "Malignant neoplasm of temporal lobe"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.3",
+        "display": "Malignant neoplasm of parietal lobe"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.4",
+        "display": "Malignant neoplasm of occipital lobe"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.5",
+        "display": "Malignant neoplasm of cerebral ventricle"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.6",
+        "display": "Malignant neoplasm of cerebellum"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.7",
+        "display": "Malignant neoplasm of brain stem"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.8",
+        "display": "Malignant neoplasm of overlapping sites of brain"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C71.9",
+        "display": "Malignant neoplasm of brain, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.0",
+        "display": "Secondary and unspecified malignant neoplasm of lymph nodes of head, face and neck"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.1",
+        "display": "Secondary and unspecified malignant neoplasm of intrathoracic lymph nodes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.2",
+        "display": "Secondary and unspecified malignant neoplasm of intra-abdominal lymph nodes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.3",
+        "display": "Secondary and unspecified malignant neoplasm of axilla and upper limb lymph nodes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.4",
+        "display": "Secondary and unspecified malignant neoplasm of inguinal and lower limb lymph nodes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.5",
+        "display": "Secondary and unspecified malignant neoplasm of intrapelvic lymph nodes"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.8",
+        "display": "Secondary and unspecified malignant neoplasm of lymph nodes of multiple regions"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C77.9",
+        "display": "Secondary and unspecified malignant neoplasm of lymph node, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.00",
+        "display": "Secondary malignant neoplasm of unspecified lung"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.01",
+        "display": "Secondary malignant neoplasm of right lung"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.02",
+        "display": "Secondary malignant neoplasm of left lung"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.1",
+        "display": "Secondary malignant neoplasm of mediastinum"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.2",
+        "display": "Secondary malignant neoplasm of pleura"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.30",
+        "display": "Secondary malignant neoplasm of unspecified respiratory organ"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.39",
+        "display": "Secondary malignant neoplasm of other respiratory organs"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.4",
+        "display": "Secondary malignant neoplasm of small intestine"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.5",
+        "display": "Secondary malignant neoplasm of large intestine and rectum"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.6",
+        "display": "Secondary malignant neoplasm of retroperitoneum and peritoneum"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.7",
+        "display": "Secondary malignant neoplasm of liver and intrahepatic bile duct"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.80",
+        "display": "Secondary malignant neoplasm of unspecified digestive organ"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C78.89",
+        "display": "Secondary malignant neoplasm of other digestive organs"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.00",
+        "display": "Secondary malignant neoplasm of unspecified kidney and renal pelvis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.01",
+        "display": "Secondary malignant neoplasm of right kidney and renal pelvis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.02",
+        "display": "Secondary malignant neoplasm of left kidney and renal pelvis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.10",
+        "display": "Secondary malignant neoplasm of unspecified urinary organs"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.11",
+        "display": "Secondary malignant neoplasm of bladder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.19",
+        "display": "Secondary malignant neoplasm of other urinary organs"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.2",
+        "display": "Secondary malignant neoplasm of skin"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.31",
+        "display": "Secondary malignant neoplasm of brain"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.32",
+        "display": "Secondary malignant neoplasm of cerebral meninges"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.40",
+        "display": "Secondary malignant neoplasm of unspecified part of nervous system"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.49",
+        "display": "Secondary malignant neoplasm of other parts of nervous system"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.51",
+        "display": "Secondary malignant neoplasm of bone"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.52",
+        "display": "Secondary malignant neoplasm of bone marrow"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.60",
+        "display": "Secondary malignant neoplasm of unspecified ovary"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.61",
+        "display": "Secondary malignant neoplasm of right ovary"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.62",
+        "display": "Secondary malignant neoplasm of left ovary"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.70",
+        "display": "Secondary malignant neoplasm of unspecified adrenal gland"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.71",
+        "display": "Secondary malignant neoplasm of right adrenal gland"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.72",
+        "display": "Secondary malignant neoplasm of left adrenal gland"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.81",
+        "display": "Secondary malignant neoplasm of breast"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.82",
+        "display": "Secondary malignant neoplasm of genital organs"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.89",
+        "display": "Secondary malignant neoplasm of other specified sites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C79.9",
+        "display": "Secondary malignant neoplasm of unspecified site"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C91.00",
+        "display": "Acute lymphoblastic leukemia not having achieved remission"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C91.02",
+        "display": "Acute lymphoblastic leukemia, in relapse"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C92.00",
+        "display": "Acute myeloblastic leukemia, not having achieved remission"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C92.02",
+        "display": "Acute myeloblastic leukemia, in relapse"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C93.00",
+        "display": "Acute monoblastic/monocytic leukemia, not having achieved remission"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C93.02",
+        "display": "Acute monoblastic/monocytic leukemia, in relapse"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C93.90",
+        "display": "Monocytic leukemia, unspecified, not having achieved remission"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C93.92",
+        "display": "Monocytic leukemia, unspecified in relapse"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C93.Z0",
+        "display": "Other monocytic leukemia, not having achieved remission"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C93.Z2",
+        "display": "Other monocytic leukemia, in relapse"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C94.30",
+        "display": "Mast cell leukemia not having achieved remission"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "C94.32",
+        "display": "Mast cell leukemia, in relapse"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F01.50",
+        "display": "Vascular dementia without behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F01.51",
+        "display": "Vascular dementia with behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F02.80",
+        "display": "Dementia in other diseases classified elsewhere without behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F02.81",
+        "display": "Dementia in other diseases classified elsewhere with behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F03.90",
+        "display": "Unspecified dementia without behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F03.91",
+        "display": "Unspecified dementia with behavioral disturbance"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F04",
+        "display": "Amnestic disorder due to known physiological condition"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F10.27",
+        "display": "Alcohol dependence with alcohol-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F10.96",
+        "display": "Alcohol use, unspecified with alcohol-induced persisting amnestic disorder"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "F10.97",
+        "display": "Alcohol use, unspecified with alcohol-induced persisting dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G10",
+        "display": "Huntington's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G12.21",
+        "display": "Amyotrophic lateral sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G20",
+        "display": "Parkinson's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G30.0",
+        "display": "Alzheimer's disease with early onset"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G30.1",
+        "display": "Alzheimer's disease with late onset"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G30.8",
+        "display": "Other Alzheimer's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G30.9",
+        "display": "Alzheimer's disease, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G31.01",
+        "display": "Pick's disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G31.09",
+        "display": "Other frontotemporal dementia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "G31.83",
+        "display": "Dementia with Lewy bodies"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I09.81",
+        "display": "Rheumatic heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I11.0",
+        "display": "Hypertensive heart disease with heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I12.0",
+        "display": "Hypertensive chronic kidney disease with stage 5 chronic kidney disease or end stage renal disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I13.0",
+        "display": "Hypertensive heart and chronic kidney disease with heart failure and stage 1 through stage 4 chronic kidney disease, or unspecified chronic kidney disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I13.11",
+        "display": "Hypertensive heart and chronic kidney disease without heart failure, with stage 5 chronic kidney disease, or end stage renal disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I13.2",
+        "display": "Hypertensive heart and chronic kidney disease with heart failure and with stage 5 chronic kidney disease, or end stage renal disease"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.1",
+        "display": "Left ventricular failure, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.20",
+        "display": "Unspecified systolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.21",
+        "display": "Acute systolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.22",
+        "display": "Chronic systolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.23",
+        "display": "Acute on chronic systolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.30",
+        "display": "Unspecified diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.31",
+        "display": "Acute diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.32",
+        "display": "Chronic diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.33",
+        "display": "Acute on chronic diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.40",
+        "display": "Unspecified combined systolic (congestive) and diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.41",
+        "display": "Acute combined systolic (congestive) and diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.42",
+        "display": "Chronic combined systolic (congestive) and diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.43",
+        "display": "Acute on chronic combined systolic (congestive) and diastolic (congestive) heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.810",
+        "display": "Right heart failure, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.811",
+        "display": "Acute right heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.812",
+        "display": "Chronic right heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.813",
+        "display": "Acute on chronic right heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.814",
+        "display": "Right heart failure due to left heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.82",
+        "display": "Biventricular heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.83",
+        "display": "High output heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.84",
+        "display": "End stage heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.89",
+        "display": "Other heart failure"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "I50.9",
+        "display": "Heart failure, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J43.0",
+        "display": "Unilateral pulmonary emphysema [MacLeod's syndrome]"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J43.1",
+        "display": "Panlobular emphysema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J43.2",
+        "display": "Centrilobular emphysema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J43.8",
+        "display": "Other emphysema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J43.9",
+        "display": "Emphysema, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J68.4",
+        "display": "Chronic respiratory conditions due to chemicals, gases, fumes and vapors"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J84.10",
+        "display": "Pulmonary fibrosis, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J84.112",
+        "display": "Idiopathic pulmonary fibrosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J84.17",
+        "display": "Other interstitial pulmonary diseases with fibrosis in diseases classified elsewhere"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.10",
+        "display": "Chronic respiratory failure, unspecified whether with hypoxia or hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.11",
+        "display": "Chronic respiratory failure with hypoxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.12",
+        "display": "Chronic respiratory failure with hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.20",
+        "display": "Acute and chronic respiratory failure, unspecified whether with hypoxia or hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.21",
+        "display": "Acute and chronic respiratory failure with hypoxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.22",
+        "display": "Acute and chronic respiratory failure with hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.90",
+        "display": "Respiratory failure, unspecified, unspecified whether with hypoxia or hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.91",
+        "display": "Respiratory failure, unspecified with hypoxia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J96.92",
+        "display": "Respiratory failure, unspecified with hypercapnia"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J98.2",
+        "display": "Interstitial emphysema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "J98.3",
+        "display": "Compensatory emphysema"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.10",
+        "display": "Alcoholic hepatitis without ascites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.11",
+        "display": "Alcoholic hepatitis with ascites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.2",
+        "display": "Alcoholic fibrosis and sclerosis of liver"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.30",
+        "display": "Alcoholic cirrhosis of liver without ascites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.31",
+        "display": "Alcoholic cirrhosis of liver with ascites"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.40",
+        "display": "Alcoholic hepatic failure without coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.41",
+        "display": "Alcoholic hepatic failure with coma"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K70.9",
+        "display": "Alcoholic liver disease, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K74.0",
+        "display": "Hepatic fibrosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K74.1",
+        "display": "Hepatic sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K74.2",
+        "display": "Hepatic fibrosis with hepatic sclerosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K74.4",
+        "display": "Secondary biliary cirrhosis"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K74.5",
+        "display": "Biliary cirrhosis, unspecified"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K74.60",
+        "display": "Unspecified cirrhosis of liver"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "K74.69",
+        "display": "Other cirrhosis of liver"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.000",
+        "display": "Pressure ulcer of unspecified elbow, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.001",
+        "display": "Pressure ulcer of unspecified elbow, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.002",
+        "display": "Pressure ulcer of unspecified elbow, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.003",
+        "display": "Pressure ulcer of unspecified elbow, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.004",
+        "display": "Pressure ulcer of unspecified elbow, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.009",
+        "display": "Pressure ulcer of unspecified elbow, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.010",
+        "display": "Pressure ulcer of right elbow, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.011",
+        "display": "Pressure ulcer of right elbow, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.012",
+        "display": "Pressure ulcer of right elbow, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.013",
+        "display": "Pressure ulcer of right elbow, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.014",
+        "display": "Pressure ulcer of right elbow, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.019",
+        "display": "Pressure ulcer of right elbow, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.020",
+        "display": "Pressure ulcer of left elbow, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.021",
+        "display": "Pressure ulcer of left elbow, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.022",
+        "display": "Pressure ulcer of left elbow, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.023",
+        "display": "Pressure ulcer of left elbow, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.024",
+        "display": "Pressure ulcer of left elbow, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.029",
+        "display": "Pressure ulcer of left elbow, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.100",
+        "display": "Pressure ulcer of unspecified part of back, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.101",
+        "display": "Pressure ulcer of unspecified part of back, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.102",
+        "display": "Pressure ulcer of unspecified part of back, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.103",
+        "display": "Pressure ulcer of unspecified part of back, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.104",
+        "display": "Pressure ulcer of unspecified part of back, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.109",
+        "display": "Pressure ulcer of unspecified part of back, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.110",
+        "display": "Pressure ulcer of right upper back, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.111",
+        "display": "Pressure ulcer of right upper back, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.112",
+        "display": "Pressure ulcer of right upper back, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.113",
+        "display": "Pressure ulcer of right upper back, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.114",
+        "display": "Pressure ulcer of right upper back, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.119",
+        "display": "Pressure ulcer of right upper back, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.120",
+        "display": "Pressure ulcer of left upper back, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.121",
+        "display": "Pressure ulcer of left upper back, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.122",
+        "display": "Pressure ulcer of left upper back, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.123",
+        "display": "Pressure ulcer of left upper back, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.124",
+        "display": "Pressure ulcer of left upper back, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.129",
+        "display": "Pressure ulcer of left upper back, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.130",
+        "display": "Pressure ulcer of right lower back, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.131",
+        "display": "Pressure ulcer of right lower back, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.132",
+        "display": "Pressure ulcer of right lower back, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.133",
+        "display": "Pressure ulcer of right lower back, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.134",
+        "display": "Pressure ulcer of right lower back, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.139",
+        "display": "Pressure ulcer of right lower back, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.140",
+        "display": "Pressure ulcer of left lower back, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.141",
+        "display": "Pressure ulcer of left lower back, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.142",
+        "display": "Pressure ulcer of left lower back, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.143",
+        "display": "Pressure ulcer of left lower back, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.144",
+        "display": "Pressure ulcer of left lower back, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.149",
+        "display": "Pressure ulcer of left lower back, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.150",
+        "display": "Pressure ulcer of sacral region, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.151",
+        "display": "Pressure ulcer of sacral region, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.152",
+        "display": "Pressure ulcer of sacral region, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.153",
+        "display": "Pressure ulcer of sacral region, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.154",
+        "display": "Pressure ulcer of sacral region, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.159",
+        "display": "Pressure ulcer of sacral region, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.200",
+        "display": "Pressure ulcer of unspecified hip, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.201",
+        "display": "Pressure ulcer of unspecified hip, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.202",
+        "display": "Pressure ulcer of unspecified hip, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.203",
+        "display": "Pressure ulcer of unspecified hip, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.204",
+        "display": "Pressure ulcer of unspecified hip, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.209",
+        "display": "Pressure ulcer of unspecified hip, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.210",
+        "display": "Pressure ulcer of right hip, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.211",
+        "display": "Pressure ulcer of right hip, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.212",
+        "display": "Pressure ulcer of right hip, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.213",
+        "display": "Pressure ulcer of right hip, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.214",
+        "display": "Pressure ulcer of right hip, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.219",
+        "display": "Pressure ulcer of right hip, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.220",
+        "display": "Pressure ulcer of left hip, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.221",
+        "display": "Pressure ulcer of left hip, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.222",
+        "display": "Pressure ulcer of left hip, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.223",
+        "display": "Pressure ulcer of left hip, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.224",
+        "display": "Pressure ulcer of left hip, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.229",
+        "display": "Pressure ulcer of left hip, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.300",
+        "display": "Pressure ulcer of unspecified buttock, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.301",
+        "display": "Pressure ulcer of unspecified buttock, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.302",
+        "display": "Pressure ulcer of unspecified buttock, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.303",
+        "display": "Pressure ulcer of unspecified buttock, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.304",
+        "display": "Pressure ulcer of unspecified buttock, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.309",
+        "display": "Pressure ulcer of unspecified buttock, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.310",
+        "display": "Pressure ulcer of right buttock, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.311",
+        "display": "Pressure ulcer of right buttock, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.312",
+        "display": "Pressure ulcer of right buttock, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.313",
+        "display": "Pressure ulcer of right buttock, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.314",
+        "display": "Pressure ulcer of right buttock, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.319",
+        "display": "Pressure ulcer of right buttock, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.320",
+        "display": "Pressure ulcer of left buttock, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.321",
+        "display": "Pressure ulcer of left buttock, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.322",
+        "display": "Pressure ulcer of left buttock, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.323",
+        "display": "Pressure ulcer of left buttock, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.324",
+        "display": "Pressure ulcer of left buttock, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.329",
+        "display": "Pressure ulcer of left buttock, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.40",
+        "display": "Pressure ulcer of contiguous site of back, buttock and hip, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.41",
+        "display": "Pressure ulcer of contiguous site of back, buttock and hip, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.42",
+        "display": "Pressure ulcer of contiguous site of back, buttock and hip, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.43",
+        "display": "Pressure ulcer of contiguous site of back, buttock and hip, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.44",
+        "display": "Pressure ulcer of contiguous site of back, buttock and hip, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.45",
+        "display": "Pressure ulcer of contiguous site of back, buttock and hip, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.500",
+        "display": "Pressure ulcer of unspecified ankle, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.501",
+        "display": "Pressure ulcer of unspecified ankle, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.502",
+        "display": "Pressure ulcer of unspecified ankle, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.503",
+        "display": "Pressure ulcer of unspecified ankle, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.504",
+        "display": "Pressure ulcer of unspecified ankle, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.509",
+        "display": "Pressure ulcer of unspecified ankle, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.510",
+        "display": "Pressure ulcer of right ankle, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.511",
+        "display": "Pressure ulcer of right ankle, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.512",
+        "display": "Pressure ulcer of right ankle, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.513",
+        "display": "Pressure ulcer of right ankle, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.514",
+        "display": "Pressure ulcer of right ankle, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.519",
+        "display": "Pressure ulcer of right ankle, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.520",
+        "display": "Pressure ulcer of left ankle, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.521",
+        "display": "Pressure ulcer of left ankle, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.522",
+        "display": "Pressure ulcer of left ankle, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.523",
+        "display": "Pressure ulcer of left ankle, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.524",
+        "display": "Pressure ulcer of left ankle, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.529",
+        "display": "Pressure ulcer of left ankle, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.600",
+        "display": "Pressure ulcer of unspecified heel, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.601",
+        "display": "Pressure ulcer of unspecified heel, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.602",
+        "display": "Pressure ulcer of unspecified heel, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.603",
+        "display": "Pressure ulcer of unspecified heel, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.604",
+        "display": "Pressure ulcer of unspecified heel, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.609",
+        "display": "Pressure ulcer of unspecified heel, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.610",
+        "display": "Pressure ulcer of right heel, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.611",
+        "display": "Pressure ulcer of right heel, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.612",
+        "display": "Pressure ulcer of right heel, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.613",
+        "display": "Pressure ulcer of right heel, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.614",
+        "display": "Pressure ulcer of right heel, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.619",
+        "display": "Pressure ulcer of right heel, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.620",
+        "display": "Pressure ulcer of left heel, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.621",
+        "display": "Pressure ulcer of left heel, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.622",
+        "display": "Pressure ulcer of left heel, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.623",
+        "display": "Pressure ulcer of left heel, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.624",
+        "display": "Pressure ulcer of left heel, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.629",
+        "display": "Pressure ulcer of left heel, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.810",
+        "display": "Pressure ulcer of head, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.811",
+        "display": "Pressure ulcer of head, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.812",
+        "display": "Pressure ulcer of head, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.813",
+        "display": "Pressure ulcer of head, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.814",
+        "display": "Pressure ulcer of head, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.819",
+        "display": "Pressure ulcer of head, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.890",
+        "display": "Pressure ulcer of other site, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.891",
+        "display": "Pressure ulcer of other site, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.892",
+        "display": "Pressure ulcer of other site, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.893",
+        "display": "Pressure ulcer of other site, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.894",
+        "display": "Pressure ulcer of other site, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.899",
+        "display": "Pressure ulcer of other site, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.90",
+        "display": "Pressure ulcer of unspecified site, unspecified stage"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.91",
+        "display": "Pressure ulcer of unspecified site, stage 1"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.92",
+        "display": "Pressure ulcer of unspecified site, stage 2"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.93",
+        "display": "Pressure ulcer of unspecified site, stage 3"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.94",
+        "display": "Pressure ulcer of unspecified site, stage 4"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "L89.95",
+        "display": "Pressure ulcer of unspecified site, unstageable"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "N18.5",
+        "display": "Chronic kidney disease, stage 5"
+      },
+      {
+        "system": "http://hl7.org/fhir/sid/icd-10-cm",
+        "version": "2021.2.20AB",
+        "code": "N18.6",
+        "display": "End stage renal disease"
+      }
+    ]
+  }
+}
