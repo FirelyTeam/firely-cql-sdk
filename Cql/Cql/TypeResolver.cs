@@ -105,6 +105,7 @@ namespace Ncqa.Cql
         /// <param name="propertyName">The property name.</param>
         /// <returns>The .NET property for the path, or <see langword="null"/> if none exists.</returns>
         public abstract PropertyInfo? GetProperty(Type type, string propertyName);
+
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="type"/> implements the generic interface specified by <paramref name="genericInterfaceTypeDefinition"/>.
         /// </summary>

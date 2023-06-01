@@ -1,45 +1,73 @@
-﻿using Hl7.Fhir.Model;
-using Ncqa.Cql.Model;
-using Ncqa.Cql.Runtime.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Hl7.Fhir.Introspection;
+﻿using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
-using Hl7.Fhir.ElementModel.Types;
-using Ratio = Hl7.Fhir.Model.Ratio;
+using Ncqa.Cql.Runtime;
+using System.Reflection;
 
 namespace Cql.Firely
 {
-    public class FirelyTypeResolver : ModelTypeResolver
+
+    // TODO: for type mappings, we need to be sure we include this exception
+    /// <summary>
+    /// The list of elements that would normally be represented using a CodeOfT enum, but that we
+    /// want to be generated as a normal Code instead.
+    /// </summary>
+    //private readonly List<string> _codedElementOverrides = new()
+    //        {
+    //            "CapabilityStatement.rest.resource.type"
+    //        };
+
+
+    public class FirelyTypeResolver : BaseTypeResolver
     {
-        public FirelyTypeResolver(Ncqa.Cql.Model.ModelInfo model) : base(model)
+        public FirelyTypeResolver(ModelInspector inspector)
         {
-            var x = typeof(Ratio).Assembly;
-            AddTypes(typeof(Resource).Assembly);
-            AddTypes(typeof(DataType).Assembly);
+            Inspector = inspector;
 
+            addTypesFromInspector(inspector);
+            addEnumsFromInspector(inspector);
+
+            addProfiledTypesAsQuantity();
         }
 
-        public override PropertyInfo? GetProperty(Type type, string propertyName)
+
+        /// <summary>
+        /// Returns the concrete property for the given property name.
+        /// </summary>
+        /// <returns>The property, or <c>null</c> if the type or property is unknown.</returns>
+        protected override PropertyInfo? GetPropertyCore(Type type, string propertyName) =>
+            Inspector
+                .FindClassMapping(type)
+                ?.FindMappedElementByName(propertyName)
+                ?.NativeProperty;
+
+        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
-            return base.GetProperty(type, propertyName);
+            var type = ResolveType(typeSpecifier);
+            if (type is null) return null;
+
+            var mapping = Inspector.FindClassMapping(type);
+
+            return mapping
+                ?.PrimaryCodePath
+                ?.NativeProperty;
         }
 
-        private void AddTypes(Assembly assembly)
+        public override Type? PatientType => Inspector.PatientMapping?.NativeType;
+
+        public override PropertyInfo? PatientBirthDateProperty =>
+            Inspector.PatientMapping
+                    ?.PatientBirthDateMapping
+                    .NativeType;
+
+        public ModelInspector Inspector { get; }
+
+        private void addProfiledTypesAsQuantity()
         {
-            foreach(var type in assembly.GetTypes())
-            {
-                Add(type);
-            }
             Types["{http://hl7.org/fhir}SimpleQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
         }
 
-        private void Add(Type type)
+        private void addTypesFromInspector(Type type)
         {
             var fhirType = type.GetCustomAttribute<FhirTypeAttribute>();
             var fhirEnum = type.GetCustomAttribute<FhirEnumerationAttribute>();
