@@ -294,6 +294,9 @@ namespace Hl7.Cql.Compiler
 
                         }
                         buildContext = buildContext.Deeper(def);
+                        if (def.name == "DateTimeUnion")
+                        {
+                        }
                         var bodyExpression = TranslateExpression(def.expression, buildContext);
                         var lambda = Expression.Lambda(bodyExpression, parameters);
                         if (definitions.ContainsKey(ThisLibraryKey, def.name, functionParameterTypes))
