@@ -1,12 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
+	<Import Project="..\..\cql-sdk.props" />
+
+	<PropertyGroup>		
 		<AssemblyName>Hl7.Cql.Poco.Fhir.R4</AssemblyName>
 		<RootNamespace>Hl7.Cql.Poco.Fhir.R4</RootNamespace>
 		<Nullable>disable</Nullable>
-		<LangVersion>9.0</LangVersion>
-		<Version>4.0.1</Version>
 		<Description>Contains a generated model for HL7 FHIR v4.0.1 and helpers to deserialize JSON.</Description>
 		<Product>FHIR 4.0.1 models</Product>
 	</PropertyGroup>

@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>Hl7.Cql.Runtime.Conversion</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime.Conversion</RootNamespace>
 		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
 		<Product>CQL engine unit conversion</Product>
 		<Description>Unit conversion for CQL</Description>
 		<NoWarn>CS8601</NoWarn>

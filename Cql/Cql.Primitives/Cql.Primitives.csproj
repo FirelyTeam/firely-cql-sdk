@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>Hl7.Cql.Runtime.Primitives</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime.Primitives</RootNamespace>
 		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
 		<Product>CQL primitive types</Product>
 		<Description>Contains .NET types that model the System namespace in CQL</Description>
 		<NoWarn>CS8601</NoWarn>

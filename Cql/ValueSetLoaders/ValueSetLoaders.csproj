@@ -1,7 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+	<Import Project="..\..\cql-sdk.props" />
+
+
+	<PropertyGroup>
     <AssemblyName>Hl7.Cql.ValueSetLoaders</AssemblyName>
     <RootNamespace>Hl7.Cql.ValueSetLoaders</RootNamespace>
     <Description>Loads value set information from various sources for use in CqlRuntime.</Description>

@@ -49,7 +49,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Abstractions", "Cql\Cql
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MeasurePackager", "Cql\MeasurePackager\MeasurePackager.csproj", "{DB461D68-6746-4A79-8CD8-F0E09D04D954}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql", "Cql\Cql\Cql.csproj", "{8FF55BB5-6004-4461-B8EA-19E9F41B970B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql", "Cql\Cql\Cql.csproj", "{8FF55BB5-6004-4461-B8EA-19E9F41B970B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{12B16EE0-B39A-4672-9CA1-578793DB7B1C}"
+	ProjectSection(SolutionItems) = preProject
+		cql-sdk.props = cql-sdk.props
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

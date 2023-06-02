@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+	
+	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>Hl7.Cql.MeasureCompiler</AssemblyName>
 		<RootNamespace>Hl7.Cql.MeasureCompiler</RootNamespace>
 		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
 		<Product>CQL measure compiler</Product>
 		<Description>Translates ELM into C# expression trees and can emit those expression trees into either runtime Delegates or C# source code.</Description>
 	</PropertyGroup>

@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
+
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
+		
 		<RootNamespace>Hl7.Cql.Runtime.FhirR4</RootNamespace>
 		<AssemblyName>Hl7.Cql.Runtime.FhirR4</AssemblyName>
 		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
 		<Version>4.0.1</Version>
 		<Description>Integrates the Fhir.R4 model into the CQL engine runtime.</Description>
 		<PackageId>Hl7.Cql.Runtime.FhirR4</PackageId>

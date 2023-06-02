@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>Hl7.Cql.Runtime.Model</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime.Model</RootNamespace>
 		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
 		<Product>CQL engine runtime model binding</Product>
 		<Description>Incorporates CQL model information into the runtime</Description>
 	</PropertyGroup>

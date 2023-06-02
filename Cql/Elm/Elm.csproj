@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>netstandard2.0</TargetFramework>
 		<AssemblyName>Hl7.Cql.Elm</AssemblyName>
 		<RootNamespace>Hl7.Cql.Elm</RootNamespace>
 		<Nullable>enable</Nullable>
-		<LangVersion>8.0</LangVersion>
 		<Product>CQL ELM abstractions</Product>
 		<Description>Contains abstractions for the expression logical model (ELM) and utilities to deserialize an ELM library into classes.</Description>
 	</PropertyGroup>

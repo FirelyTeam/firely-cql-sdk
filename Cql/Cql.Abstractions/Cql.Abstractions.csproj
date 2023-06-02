@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>netstandard2.1</TargetFramework>
 		<AssemblyName>Ncqa.Cql</AssemblyName>
 		<RootNamespace>Ncqa.Cql</RootNamespace>
 		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
 		<Product>CQL</Product>
 		<Description>Contains shared interfaces and abstraction for CQL</Description>
 		<NoWarn>CS8601</NoWarn>
