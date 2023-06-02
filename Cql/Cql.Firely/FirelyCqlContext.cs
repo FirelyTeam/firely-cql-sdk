@@ -4,6 +4,7 @@ using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace Hl7.Cql.Firely
         {
             valueSets ??= new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
-            var typeResolver = new FirelyTypeResolver(Models.Fhir401);
+            var typeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
             IDataRetriever dataRetriever = bundle != null
                 ? new BundleDataRetriever(bundle, valueSets, typeResolver)
                 : new CompositeDataRetriever();

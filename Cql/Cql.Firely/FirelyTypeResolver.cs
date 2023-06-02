@@ -4,7 +4,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
 using System.Reflection;
 
-namespace Cql.Firely
+namespace Hl7.Cql.Firely
 {
 
     // TODO: for type mappings, we need to be sure we include this exception
@@ -77,6 +77,8 @@ namespace Cql.Firely
 
         public ModelInspector Inspector { get; }
 
+        internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
+
         private void addProfiledTypesAsQuantity()
         {
             Types["{http://hl7.org/fhir}SimpleQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
@@ -94,6 +96,7 @@ namespace Cql.Firely
             foreach (var (name, type) in classes)
             {
                 Types.TryAdd(name, type);
+                TypeSpecifiers.TryAdd(type, name);
             }
 
             var bindings = from cm in Inspector.ClassMappings.Concat(Inspector.BackboneClassMappings)
@@ -109,6 +112,8 @@ namespace Cql.Firely
                     binding.Name.Replace("-", "_");
 
                 Types.TryAdd(bindingName, binding.Type);
+                TypeSpecifiers.TryAdd(binding.Type, bindingName);
+
             }
         }
     }

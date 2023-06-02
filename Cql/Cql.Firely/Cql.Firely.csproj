@@ -9,10 +9,8 @@
 	</PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Hl7.Fhir.R4B" Version="5.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.Base\Hl7.Fhir.Base.csproj" />
+    <ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj" />
     <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
   </ItemGroup>
 

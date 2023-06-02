@@ -1,21 +1,23 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hl7.Cql.Primitives;
+﻿using Hl7.Cql;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Firely;
 using Hl7.Cql.Iso8601;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using Hl7.Cql.Runtime;
-using System.Linq.Expressions;
-using Hl7.Cql.Firely;
-using System.Linq;
 using System.IO;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
-using Microsoft.Extensions.Logging;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Operators;
-using Hl7.Cql;
-using Hl7.Cql.Model;
-using Hl7.Cql.Conversion;
+using System.Linq;
+using System.Linq.Expressions;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace CoreTests
 {
@@ -23,7 +25,7 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(Models.Fhir401);
+        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
         private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
 
 

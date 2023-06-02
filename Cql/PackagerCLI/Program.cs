@@ -1,25 +1,14 @@
 ﻿
-using Hl7.Cql.Firely;
-using Hl7.Cql;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Graph;
-using Hl7.Cql.Model;
+using Hl7.Cql.Firely;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 
 public static class Program
@@ -105,7 +94,7 @@ public static class Program
         var packagerLogger = logFactory.CreateLogger<LibraryPackager>();
         var packages = packager.LoadPackages(elmDir);
         var graph = Hl7.Cql.Elm.ElmPackage.GetIncludedLibraries(packages.Values);
-        var typeResolver = new FirelyTypeResolver(Models.Fhir401);
+        var typeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
         var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
 
         var writerLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();

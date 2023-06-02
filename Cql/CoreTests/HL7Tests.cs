@@ -1,11 +1,12 @@
-﻿using Hl7.Cql.Firely;
+﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Firely;
+using Hl7.Cql.Graph;
+using Hl7.Cql.Runtime;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Model;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Graph;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -45,7 +46,7 @@ namespace CoreTests
         public static void ClassInitialize(TestContext context)
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
-            var resolver = new FirelyTypeResolver(Models.Fhir401);
+            var resolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
             var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Default);
             var typeManager = new TypeManager(resolver);
 

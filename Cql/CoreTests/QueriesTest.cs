@@ -1,26 +1,26 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Hl7.Cql;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Firely;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.ValueSets;
-using Hl7.Fhir.Model;
-using Hl7.Cql;
-using Hl7.Cql.Conversion;
-using Hl7.Cql.Model;
 
 namespace CoreTests
 {
     [TestClass]
     public class QueriesTest
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(Models.Fhir401);
+        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
         private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
 
         [ClassInitialize]

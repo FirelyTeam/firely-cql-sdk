@@ -45,6 +45,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Packaging", "Cql.Packag
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackagerCLI", "PackagerCLI\PackagerCLI.csproj", "{FEF0C134-505D-4206-8630-569A6762F787}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hl7.Fhir.Base", "..\..\firely-net-sdk\src\Hl7.Fhir.Base\Hl7.Fhir.Base.csproj", "{22FB7D68-CE44-44ED-B88C-8917F0E92064}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -172,12 +174,19 @@ Global
 		{FEF0C134-505D-4206-8630-569A6762F787}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
 		{FEF0C134-505D-4206-8630-569A6762F787}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FEF0C134-505D-4206-8630-569A6762F787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22FB7D68-CE44-44ED-B88C-8917F0E92064}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22FB7D68-CE44-44ED-B88C-8917F0E92064}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22FB7D68-CE44-44ED-B88C-8917F0E92064}.FullDebug|Any CPU.ActiveCfg = FullDebug|Any CPU
+		{22FB7D68-CE44-44ED-B88C-8917F0E92064}.FullDebug|Any CPU.Build.0 = FullDebug|Any CPU
+		{22FB7D68-CE44-44ED-B88C-8917F0E92064}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22FB7D68-CE44-44ED-B88C-8917F0E92064}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{47D6CE19-10EE-4DA9-9A8E-AFE2880AED6E} = {B7ADA41D-03C6-4F85-AF08-724C663F9FA1}
+		{22FB7D68-CE44-44ED-B88C-8917F0E92064} = {B7ADA41D-03C6-4F85-AF08-724C663F9FA1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0BE2CF9-BA74-4860-A54C-6AB1B33DB549}
