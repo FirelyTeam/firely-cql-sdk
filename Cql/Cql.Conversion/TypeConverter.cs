@@ -102,9 +102,7 @@ namespace Hl7.Cql.Conversion
         /// <returns>The result of the conversion.</returns>
         public T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
 
-        public object? Convert(object? from, Type to) => ConvertHelper(from, to);
-
-        protected object? ConvertHelper(object? from, Type to)
+        public object? ConvertHelper(object? from, Type to)
         {
             if (from == null)
                 return null;

@@ -44,7 +44,7 @@ namespace Hl7.Cql.Firely
             void addParametersToCqlPrimitivesConverters(IEnumerable<Type> tos)
             {
                 foreach (Type t in tos) converter.AddConversion(typeof(M.Parameters.ParameterComponent), t,
-                    f => converter.Convert(((M.Parameters.ParameterComponent)f).Value, t)!);
+                    f => converter.ConvertHelper(((M.Parameters.ParameterComponent)f).Value, t)!);
             }
         }
 
