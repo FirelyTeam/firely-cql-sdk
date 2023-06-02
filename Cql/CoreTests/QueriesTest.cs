@@ -20,7 +20,7 @@ namespace CoreTests
     [TestClass]
     public class QueriesTest
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
+        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
         private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
 
         [ClassInitialize]
@@ -90,6 +90,7 @@ namespace CoreTests
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Simple retrieve", ctx);
             Assert.AreEqual(1, result.Count());
 
+            bundle = new Bundle();
             bundle.Entry.Add(new Bundle.EntryComponent
             {
                 Resource = new Observation()
@@ -188,6 +189,7 @@ namespace CoreTests
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
             Assert.AreEqual(1, result.Count());
 
+            bundle = new Bundle();
             bundle.Entry.Add(new Bundle.EntryComponent
             {
                 Resource = new Observation()

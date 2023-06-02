@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Conversion;
+﻿using Hl7.Cql.Comparers;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
@@ -16,6 +17,9 @@ namespace Hl7.Cql.Firely
 {
     public static class FirelyCqlContext
     {
+
+        private static readonly CqlComparers Comparers = new CqlComparers().AddFirelyComparers();
+
         public static CqlContext Create(Bundle? bundle = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
@@ -24,7 +28,7 @@ namespace Hl7.Cql.Firely
         {
             valueSets ??= new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
-            var typeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
+            var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
             IDataRetriever dataRetriever = bundle != null
                 ? new BundleDataRetriever(bundle, valueSets, typeResolver)
                 : new CompositeDataRetriever();
@@ -32,7 +36,7 @@ namespace Hl7.Cql.Firely
             var operators = CqlOperators.Create(typeResolver,
                 FirelyTypeConverter.Default,
                 dataRetriever,
-                null,
+                Comparers,
                 valueSets,
                 null,
                 new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond));

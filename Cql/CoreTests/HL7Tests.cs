@@ -46,7 +46,7 @@ namespace CoreTests
         public static void ClassInitialize(TestContext context)
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
-            var resolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
+            var resolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
             var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Default);
             var typeManager = new TypeManager(resolver);
 
@@ -79,10 +79,10 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            RuntimeContext = FirelyCqlContext.Create(delegates: allDelegates);
+            Context = FirelyCqlContext.Create(delegates: allDelegates);
         }
 
-        public static CqlContext RuntimeContext;
+        public static CqlContext Context;
 
 
         private static void MergeAllCqlInto(DirectoryInfo libsDirectory, DirectedGraph buildOrder)

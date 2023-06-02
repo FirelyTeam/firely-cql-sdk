@@ -17,9 +17,15 @@ namespace CoreTests
         public void Resolve_Types(TypeResolver typeResolver)
         {
             var model = Models.Fhir401;
-            foreach (var typeInfo in model.typeInfo.OfType<ClassInfo>())
+            foreach (var classInfo in model.typeInfo.OfType<ClassInfo>())
             {
-                var elmId = $"{{{model.url}}}{typeInfo.name}";
+                var elmId = $"{{{model.url}}}{classInfo.name}";
+                var type = typeResolver.ResolveType(elmId);
+                Assert.IsNotNull(type);
+            }
+            foreach(var simpleTypeInfo in model.typeInfo.OfType<SimpleTypeInfo>())
+            {
+                var elmId = $"{{{model.url}}}{simpleTypeInfo.name}";
                 var type = typeResolver.ResolveType(elmId);
                 Assert.IsNotNull(type);
             }

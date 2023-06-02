@@ -25,7 +25,7 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
+        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
         private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
 
 

@@ -1,5 +1,5 @@
 ﻿{
-  "resouceType": "ValueSet",
+  "resourceType": "ValueSet",
   "url": "https://www.ncqa.org/fhir/valueset/intensional-value-set",
   "identifier": [
     {

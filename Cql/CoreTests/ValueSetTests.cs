@@ -11,8 +11,6 @@ namespace CoreTests
     [TestClass]
     public class ValueSetTests
     {
-        private static readonly FhirJsonParser Parser = new FhirJsonParser();
-
         [TestMethod]
         public void Intensional_Value_Set()
         {

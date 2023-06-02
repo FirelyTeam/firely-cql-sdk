@@ -94,7 +94,7 @@ public static class Program
         var packagerLogger = logFactory.CreateLogger<LibraryPackager>();
         var packages = packager.LoadPackages(elmDir);
         var graph = Hl7.Cql.Elm.ElmPackage.GetIncludedLibraries(packages.Values);
-        var typeResolver = new FirelyTypeResolver(ModelInspector.ForAssembly(typeof(Resource).Assembly));
+        var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
         var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
 
         var writerLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
