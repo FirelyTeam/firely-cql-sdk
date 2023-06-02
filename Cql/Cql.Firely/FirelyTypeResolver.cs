@@ -41,19 +41,23 @@ namespace Hl7.Cql.Firely
             {
                 return ReflectionHelper.FindProperty(type, "Value");
             }
-
             var cm = Inspector.FindClassMapping(type);
-            if (cm is null) return null;
-
-            if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
+            if (cm != null)
             {
-                return valueProp.NativeProperty;
+                if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
+                {
+                    return valueProp.NativeProperty;
+                }
+                else
+                {
+                    return cm.FindMappedElementByName(propertyName)?.NativeProperty;
+                }
             }
             else
             {
-                return cm.FindMappedElementByName(propertyName)?.NativeProperty;
+                var @base = base.GetPropertyCore(type, propertyName);
+                return @base;
             }
-
         }
 
         public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
