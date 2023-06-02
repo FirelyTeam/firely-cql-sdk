@@ -5,7 +5,7 @@ using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
 using Ratio = Hl7.Fhir.Model.Ratio;
 
-namespace Cql.Firely
+namespace Hl7.Cql.Firely
 {
     public class FirelyTypeResolver : ModelTypeResolver
     {
@@ -25,6 +25,8 @@ namespace Cql.Firely
         {
             return base.GetProperty(type, propertyName);
         }
+
+        internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
 
         private void AddTypes(Assembly assembly)
         {
@@ -50,12 +52,15 @@ namespace Cql.Firely
                     var id = canonical.Substring(40);
                     var typeId = $"{{{Model.url}}}{id}";
                     Types.TryAdd(typeId, type);
+                    TypeSpecifiers.TryAdd(type, typeId);
                 }
             }
             else if (fhirEnum != null)
             {
                 var enumId = $"{{{Model.url}}}{fhirEnum.BindingName}";
                 Types.TryAdd(enumId, type);
+                TypeSpecifiers.TryAdd(type, enumId);
+
             }
 
             foreach (var nestedType in type.GetNestedTypes())
@@ -63,5 +68,7 @@ namespace Cql.Firely
                 Add(nestedType);
             }
         }
+
+
     }
 }

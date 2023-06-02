@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Conversion;
 
-namespace Cql.Firely
+namespace Hl7.Cql.Firely
 {
     public static class FirelyTypeConverter
     {

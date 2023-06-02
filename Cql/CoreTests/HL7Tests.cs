@@ -1,10 +1,9 @@
-﻿using Cql.Firely;
+﻿using Hl7.Cql.Firely;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.FhirR4;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Graph;
 using System.IO;
@@ -79,7 +78,7 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            RuntimeContext = FhirCqlContext.Create(delegates: allDelegates);
+            RuntimeContext = FirelyCqlContext.Create(delegates: allDelegates);
         }
 
         public static CqlContext RuntimeContext;

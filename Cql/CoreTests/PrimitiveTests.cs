@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using System.Linq.Expressions;
-using Hl7.Cql.Runtime.FhirR4;
+using Hl7.Cql.Firely;
 using System.Linq;
 using System.IO;
 using Hl7.Cql.Compiler;
@@ -14,6 +14,8 @@ using Microsoft.Extensions.Logging;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Operators;
 using Hl7.Cql;
+using Hl7.Cql.Model;
+using Hl7.Cql.Conversion;
 
 namespace CoreTests
 {
@@ -21,7 +23,8 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
-
+        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(Models.Fhir401);
+        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
 
 
         private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
@@ -141,7 +144,7 @@ namespace CoreTests
             var odExpr = Expression.Constant(oneDay);
 
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
             var memExpr = Expression.Constant(fcq);
 
@@ -231,7 +234,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(3, null, true, false);
             var five = (decimal)5;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalContains(interval, five, null);
@@ -247,7 +250,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(3, null, true, true);
             var five = (decimal)5;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalContains(interval, five, null);
@@ -263,7 +266,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(null, 10, false, true);
             var five = (decimal)5;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalContains(interval, five, null);
@@ -279,7 +282,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(null, 10, true, true);
             var five = (decimal)5;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalContains(interval, five, null);
@@ -295,7 +298,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(null, 5, true, false);
             var five = (decimal)5;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalContains(interval, five, null);
@@ -313,7 +316,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(null, 20, true, true);
             var nine = (decimal)9;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalAfterElement(interval, nine, null);
@@ -331,7 +334,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(null, 20, false, true);
             var nine = (decimal)9;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalAfterElement(interval, nine, null);
@@ -348,7 +351,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(1, null, true, true);
             var nine = (decimal)9;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalBeforeElement(interval, nine, null);
@@ -365,7 +368,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(1, null, true, true);
             var nine = (decimal)9;
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
             var fcq = rc.Operators;
 
             var contains = fcq.IntervalBeforeElement(interval, nine, null);
@@ -383,7 +386,7 @@ namespace CoreTests
             var interval = new CqlInterval<int?>(1, 10, true, true);
             var expected = new List<int?> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
@@ -400,7 +403,7 @@ namespace CoreTests
             var quantity = new CqlQuantity { value = 2 };
             var expected = new List<int?> { 1, 3, 5, 7, 9 };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -417,7 +420,7 @@ namespace CoreTests
             var quantity = new CqlQuantity { value = (decimal)1.5 };
             var expected = new List<decimal?> { 1, (decimal)2.5, 4, (decimal)5.5, 7, (decimal)8.5, 10 };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -434,7 +437,7 @@ namespace CoreTests
             var quantity = new CqlQuantity { value = 4 };
             var expected = new List<long?> { 1, 5, 9 };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -450,7 +453,7 @@ namespace CoreTests
             var interval = new CqlInterval<decimal?>(1, 10, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();
+            var rc = FirelyCqlContext.Create();
 
             var fcq = rc.Operators;
 
@@ -469,7 +472,7 @@ namespace CoreTests
             var quantity = new CqlQuantity { value = 1, unit = "1" };
             var expected = new List<decimal?> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -485,7 +488,7 @@ namespace CoreTests
             var interval = new CqlInterval<int?>(1, 10, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -502,7 +505,7 @@ namespace CoreTests
             var quantity = new CqlQuantity { value = 1, unit = "1" };
             var expected = new List<int?> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -518,7 +521,7 @@ namespace CoreTests
             var interval = new CqlInterval<long?>(1, 10, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -535,7 +538,7 @@ namespace CoreTests
             var quantity = new CqlQuantity { value = 1, unit = "1" };
             var expected = new List<long?> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -560,7 +563,7 @@ namespace CoreTests
                 new CqlDate(2022,1,4)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
@@ -580,7 +583,7 @@ namespace CoreTests
                 new CqlDate(2022,2, null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
@@ -601,7 +604,7 @@ namespace CoreTests
                 new CqlDate(2022,2, null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -624,7 +627,7 @@ namespace CoreTests
                 new CqlDate(2022,1,4)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -644,7 +647,7 @@ namespace CoreTests
                 new CqlDate(2022,1,1)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -665,7 +668,7 @@ namespace CoreTests
                 new CqlDate(2024,1,1)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -689,7 +692,7 @@ namespace CoreTests
                 new CqlDate(2022,1,29)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -705,7 +708,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
             var quantity = new CqlQuantity { value = 1, unit = "minute" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -721,7 +724,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
             var quantity = new CqlQuantity { value = 1, unit = "hour" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -737,7 +740,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
             var quantity = new CqlQuantity { value = 1, unit = "second" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -753,7 +756,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
             var quantity = new CqlQuantity { value = 1, unit = "millisecond" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -779,7 +782,7 @@ namespace CoreTests
                 new CqlDate(2022,4,null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -798,7 +801,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(start, end, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -817,7 +820,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDate>(start, end, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -846,7 +849,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,1,12,0,0,5,0,0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
@@ -870,7 +873,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,4,null,null,null,null,null,null),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
@@ -889,7 +892,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "minute" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -915,7 +918,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,4,12,0,0,0,0,0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -938,7 +941,7 @@ namespace CoreTests
                 start
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -962,7 +965,7 @@ namespace CoreTests
                 new CqlDateTime(2024, 1, 1, 12, 0, 0, 0, 0, 0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -989,7 +992,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,29,12,0,0,0,0,0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1014,7 +1017,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,1,0,4,0,0,0,0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1040,7 +1043,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,1,6,0,0,0,0,0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1065,7 +1068,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,1,0,0,6,0,0,0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1094,7 +1097,7 @@ namespace CoreTests
                 new CqlDateTime(2022,1,1,0,0,3,0,0,0)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1120,7 +1123,7 @@ namespace CoreTests
                 new CqlTime(12,null,null,null,null,null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
@@ -1143,7 +1146,7 @@ namespace CoreTests
                 new CqlTime(11, null, null, null, null, null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, null);
             Assert.IsNotNull(expand);
@@ -1162,7 +1165,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1181,7 +1184,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity { value = 3, unit = "month" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1200,7 +1203,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity { value = 2, unit = "years" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1219,7 +1222,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "week" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1238,7 +1241,7 @@ namespace CoreTests
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
             var quantity = new CqlQuantity { value = 1, unit = "minute" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1265,7 +1268,7 @@ namespace CoreTests
                 new CqlTime(12,0,null,null,null,null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1290,7 +1293,7 @@ namespace CoreTests
                 new CqlTime(12,null,null,null,null,null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1314,7 +1317,7 @@ namespace CoreTests
                 new CqlTime(10,0,5,null,null,null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1339,7 +1342,7 @@ namespace CoreTests
                 new CqlTime(10,0,0,10,null,null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1363,7 +1366,7 @@ namespace CoreTests
                 new CqlTime(11, null, null, null, null, null)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandInterval(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1398,7 +1401,7 @@ namespace CoreTests
                 new CqlInterval<int>(10,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -1432,7 +1435,7 @@ namespace CoreTests
                 new CqlInterval<int>(9,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1468,7 +1471,7 @@ namespace CoreTests
                 new CqlInterval<decimal>(10,11.49999999m, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1499,7 +1502,7 @@ namespace CoreTests
                 new CqlInterval<decimal>(5,8, true, true),
                 new CqlInterval<decimal>(9,12, true, true)
             };
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1525,7 +1528,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1557,7 +1560,7 @@ namespace CoreTests
                 new CqlInterval<decimal>(10,10.99999999m, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1583,7 +1586,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1615,7 +1618,7 @@ namespace CoreTests
                 new CqlInterval<int>(10,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1641,7 +1644,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -1673,7 +1676,7 @@ namespace CoreTests
                 new CqlInterval<long>(10,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1713,7 +1716,7 @@ namespace CoreTests
                 new CqlInterval<int>(10,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1753,7 +1756,7 @@ namespace CoreTests
                 new CqlInterval<decimal>(10,10.99999999m, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1793,7 +1796,7 @@ namespace CoreTests
                 new CqlInterval<long>(10,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1832,7 +1835,7 @@ namespace CoreTests
                 new CqlInterval<int>(10,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1871,7 +1874,7 @@ namespace CoreTests
                 new CqlInterval<decimal>(10,10.99999999m, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1910,7 +1913,7 @@ namespace CoreTests
                 new CqlInterval<long>(10,10, true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -1946,7 +1949,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 4), new CqlDate(2022, 1, 4), true, true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -1979,7 +1982,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022, 4, null), new CqlDate(2022, 4, null), true, true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -2012,7 +2015,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 4), new CqlDate(2022, 1, 4), true, true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2043,7 +2046,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 31), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2075,7 +2078,7 @@ namespace CoreTests
                  new CqlInterval<CqlDate>(new CqlDate(2024, 1, 1), new CqlDate(2025, 12, 31), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2110,7 +2113,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 29), new CqlDate(2022, 2, 4), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2137,7 +2140,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "minute" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -2156,7 +2159,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "hour" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -2175,7 +2178,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "second" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -2194,7 +2197,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "millisecond" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -2223,7 +2226,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022, 4, null), new CqlDate(2022, 4, null), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2254,7 +2257,7 @@ namespace CoreTests
 
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -2276,7 +2279,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -2317,7 +2320,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2365,7 +2368,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022,12,1),new CqlDate(2022,12,31), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2410,7 +2413,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(new CqlDate(2022,12,8),new CqlDate(2023,1,7), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2451,7 +2454,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,5,0,0), new CqlDateTime(2022,1,1,12,0,0,5,0,0), true, true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -2487,7 +2490,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,4,null, null, null, null, null, null), new CqlDateTime(2022,1,4,null, null, null, null, null, null), true, true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -2517,7 +2520,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "minute" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -2546,7 +2549,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,4,12,0,0,0,0,0),new CqlDateTime(2022,1,5,11,59,59,999,0,0),true,true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2580,7 +2583,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,4,1,11,59,59,999,0,0),true,true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2615,7 +2618,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2024,1,1,12,0,0,0,0,0),new CqlDateTime(2026,1,1,11,59,59,999,0,0),true,true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2653,7 +2656,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,29,12,0,0,0,0,0),new CqlDateTime(2022,2,5,11,59,59,999,0,0),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2689,7 +2692,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,4,0,0,0,0),new CqlDateTime(2022,1,1,0,5,59,999,0,0),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2726,7 +2729,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,6,0,0,0,0,0),new CqlDateTime(2022,1,1,7,59,59,999,0,0),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2762,7 +2765,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,6,0,0,0),new CqlDateTime(2022,1,1,0,0,8,999,0,0),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2802,7 +2805,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,3,0,0,0),new CqlDateTime(2022,1,1,0,0,3,499,0,0),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2851,7 +2854,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2899,7 +2902,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,12,1,0,0,0,0,0,0),new CqlDateTime(2022,12,31,23,59,59,999,0,0), true, true)
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -2936,7 +2939,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -2970,7 +2973,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -3005,7 +3008,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(11,null,null,null,null,null),new CqlTime(11,null,null,null,null,null),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, null).ToArray();
             Assert.IsNotNull(expand);
@@ -3035,7 +3038,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "day" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -3057,7 +3060,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 3, unit = "month" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -3079,7 +3082,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 2, unit = "years" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -3101,7 +3104,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "week" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -3123,7 +3126,7 @@ namespace CoreTests
             };
             var quantity = new CqlQuantity { value = 1, unit = "minute" };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity);
             Assert.IsNotNull(expand);
@@ -3154,7 +3157,7 @@ namespace CoreTests
             };
 
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -3189,7 +3192,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(12,null,null,null,null,null),new CqlTime(12,null,null,null,null,null),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -3223,7 +3226,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(10,0,5,null,null,null),new CqlTime(10,0,9,null,null,null),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -3258,7 +3261,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(10,0,0,10,null,null),new CqlTime(10,0,0,14,null,null),true,true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -3301,7 +3304,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -3343,7 +3346,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(new CqlTime(16,0,0,0,null,null),new CqlTime(16,59,59,999,null,null), true, true),
             };
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var expand = fcq.ExpandList(interval, quantity).ToArray();
             Assert.IsNotNull(expand);
@@ -3368,7 +3371,7 @@ namespace CoreTests
             var thru2022 = new CqlInterval<CqlDate>(null, new CqlDate(2022, null, null), true, true);
             var thru2023 = new CqlInterval<CqlDate>(null, new CqlDate(2023, null, null), true, true);
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var sameOrBefore = fcq.IntervalSameOrBefore(thru2022, thru2023, null);
 
@@ -3384,7 +3387,7 @@ namespace CoreTests
             var thru2022 = new CqlInterval<CqlDate>(new CqlDate(2022, null, null), new CqlDate(2022, null, null), true, true);
             var thru2023 = new CqlInterval<CqlDate>(new CqlDate(2023, null, null), new CqlDate(2023, null, null), true, true);
 
-            var rc = FhirCqlContext.Create();            var fcq = rc.Operators;
+            var rc = FirelyCqlContext.Create();            var fcq = rc.Operators;
 
             var sameOrBefore = fcq.IntervalSameOrBefore(thru2022, thru2023, null);
 
@@ -3397,7 +3400,7 @@ namespace CoreTests
         [TestMethod]
         public void Sort_Lists_Containing_Null()
         {
-            var rtx = FhirCqlContext.Create();
+            var rtx = FirelyCqlContext.Create();
             var items = new List<int?> { 1, 2, null, 4, 5 };
             var ascending = rtx.Operators
                 .ListSort(items, SortOrder.Ascending)
@@ -3421,7 +3424,7 @@ namespace CoreTests
         [TestMethod]
         public void Sort_Lists_Dates_Containing_Null()
         {
-            var rtx = FhirCqlContext.Create();
+            var rtx = FirelyCqlContext.Create();
             var items = new List<CqlDate>
             {
                 new CqlDate(2022, 12, 01),
@@ -3446,7 +3449,7 @@ namespace CoreTests
         [TestMethod]
         public void Collapse_Containing_Null()
         {
-            var rtx = FhirCqlContext.Create();
+            var rtx = FirelyCqlContext.Create();
 
             var expected = new[] {
                 new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 1),true, true),
@@ -3472,8 +3475,8 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            var binding = new CqlOperatorsBinding(FhirTypeResolver.Default, FhirTypeConverter.Default);
-            var typeManager = new TypeManager(FhirTypeResolver.Default);
+            var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
+            var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = ElmPackage.LoadFrom(elm);
             var logger = CreateLogger();
@@ -3493,7 +3496,7 @@ namespace CoreTests
         [TestMethod]
         public void Meets_Date()
         {
-            var rtx = FhirCqlContext.Create();
+            var rtx = FirelyCqlContext.Create();
 
             var meets = rtx.Operators.Meets(
                 new CqlInterval<CqlDate>(null, new CqlDate(2022, 12, 31), true, true),

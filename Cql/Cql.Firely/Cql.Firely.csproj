@@ -1,17 +1,16 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>Hl7.Cql.Firely</RootNamespace>
+		<AssemblyName>Hl7.Cql.Firely</AssemblyName>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Hl7.Fhir.R4B" Version="5.1.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj" />
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+	</ItemGroup>
 
 </Project>

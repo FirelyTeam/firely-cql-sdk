@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hl7.Cql.Runtime;
 using System.Linq;
-using Hl7.Cql.Poco.Fhir.R4.Model;
+using Hl7.Fhir.Model;
 
 namespace CoreTests
 {
