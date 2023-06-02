@@ -29,7 +29,7 @@ namespace Hl7.Cql.Runtime
             { "{urn:hl7-org:elm-types:r1}ValueSet", typeof(CqlValueSet) },
             { "{urn:hl7-org:elm-types:r1}Vocabulary", typeof(CqlVocabulary) },
         };
-        
+
         /// <<inheritdoc/>>
         public override Type AnyType => Types["{urn:hl7-org:elm-types:r1}Any"];
 
@@ -71,7 +71,7 @@ namespace Hl7.Cql.Runtime
 
         /// <<inheritdoc/>>
         public override Type RatioType => Types["{urn:hl7-org:elm-types:r1}Ratio"];
-        
+
         /// <<inheritdoc/>>
         public override Type StringType => Types["{urn:hl7-org:elm-types:r1}String"];
 
@@ -85,12 +85,12 @@ namespace Hl7.Cql.Runtime
         public override Type VocabularyType => Types["{urn:hl7-org:elm-types:r1}Vocabulary"];
 
         /// <<inheritdoc/>>
-        public override PropertyInfo? GetProperty(Type type, string propertyName)
+        public sealed override PropertyInfo? GetProperty(Type type, string propertyName)
         {
             if (typeof(TupleBaseType).IsAssignableFrom(type))
             {
                 var properties = type.GetProperties();
-                foreach(var prop in properties)
+                foreach (var prop in properties)
                 {
                     var cqlDeclaration = prop.GetCustomAttribute<CqlDeclarationAttribute>();
                     if (cqlDeclaration != null && cqlDeclaration.Name == propertyName)
@@ -99,8 +99,11 @@ namespace Hl7.Cql.Runtime
 
             }
 
-            return type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
+            return GetPropertyCore(type, propertyName);
         }
+
+        protected virtual PropertyInfo? GetPropertyCore(Type type, string propertyName) =>
+            type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
         /// <<inheritdoc/>>
         public override Type? ResolveType(string typeSpecifier)
