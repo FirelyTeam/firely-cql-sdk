@@ -31,6 +31,9 @@ namespace Hl7.Cql.Firely
         public override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
         public override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
 
+        public override IEnumerable<(string alias, string type)> Aliases => base.Aliases
+            .Concat(new[] { ("Range", typeof(Hl7.Fhir.Model.Range).FullName) });
+
         /// <summary>
         /// Returns the concrete property for the given property name.
         /// </summary>
