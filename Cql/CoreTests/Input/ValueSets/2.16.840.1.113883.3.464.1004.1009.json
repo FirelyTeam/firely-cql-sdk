@@ -9,6 +9,7 @@
   "version": "2022-08-01",
   "status": "active",
   "expansion": {
+    "timestamp": "2023-06-03T13:56:07Z",
     "identifier": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009#all",
     "parameter": [
       {
@@ -464,6 +465,6 @@
       }
     ]
   },
-  "id": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009",
+  "id": "2.16.840.1.113883.3.464.1004.1009",
   "resourceType": "ValueSet"
 }

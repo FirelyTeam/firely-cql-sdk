@@ -1,4 +1,5 @@
-﻿using Hl7.Fhir.Model;
+﻿using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ namespace CoreTests
 {
     public static class StreamExtensions
     {
-        private static readonly JsonSerializerOptions Options =  new JsonSerializerOptions()
-            .ForFhir(typeof(Resource).Assembly);
+        private static readonly JsonSerializerOptions Options = new JsonSerializerOptions()
+            .ForFhir(Hl7.Fhir.Model.ModelInfo.ModelInspector);
         public static T ParseFhir<T>(this Stream stream) => JsonSerializer.Deserialize<T>(stream, Options);
     }
 }

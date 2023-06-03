@@ -99,7 +99,7 @@ namespace Hl7.Cql.ValueSetLoaders
                             if (soFar.Contains(includedValueSetUri))
                             {
                                 var cycle = string.Join(" => ", soFar);
-                                throw new InvalidOperationException($"Value set {vs.Id} has a cyclical reference in its composition: {cycle}");
+                                    throw new InvalidOperationException($"Value set {vs.Id} has a cyclical reference in its composition: {cycle}");
                             }
                             if (!dictionary.TryGetCodesInValueSet(includedValueSetUri, out var cvsCodes))
                             {
@@ -110,8 +110,7 @@ namespace Hl7.Cql.ValueSetLoaders
                                     deeper[deeper.Length - 1] = includedValueSetUri;
                                     Load(dictionary, includedVs, deeper);
                                     if (!dictionary.TryGetCodesInValueSet(includedValueSetUri, out cvsCodes))
-                                        cvsCodes = new List<CqlCode>().AsReadOnly();
-                                    else throw new InvalidOperationException($"Couldn't load {includedValueSetUri}");
+                                        throw new InvalidOperationException($"Couldn't load {includedValueSetUri}");
                                 }
                                 else throw new InvalidOperationException($"Intensional value set {vs.Id} includes value set {includedValueSetUri}, which was not provided to this loader.");
                             }
