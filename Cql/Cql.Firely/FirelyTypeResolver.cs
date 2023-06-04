@@ -25,14 +25,19 @@ namespace Hl7.Cql.Firely
             Inspector = inspector;
 
             addTypesFromInspector();
-            addProfiledTypesAsQuantity();
+            // Fix lack of inheritance in the SDK
+            adjust();
         }
 
         public override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
         public override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
 
         public override IEnumerable<(string alias, string type)> Aliases => base.Aliases
-            .Concat(new[] { ("Range", typeof(Hl7.Fhir.Model.Range).FullName) });
+            .Concat(new[] 
+            { 
+                ("Range", typeof(Hl7.Fhir.Model.Range).FullName!),
+                ("Task", typeof(Hl7.Fhir.Model.Task).FullName!),
+            });
 
         /// <summary>
         /// Returns the concrete property for the given property name.
@@ -40,27 +45,35 @@ namespace Hl7.Cql.Firely
         /// <returns>The property, or <c>null</c> if the type or property is unknown.</returns>
         protected override PropertyInfo? GetPropertyCore(Type type, string propertyName)
         {
+            PropertyInfo? result = null;
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
             {
-                return ReflectionHelper.FindProperty(type, "Value");
-            }
-            var cm = Inspector.FindClassMapping(type);
-            if (cm != null)
-            {
-                if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
-                {
-                    return valueProp.NativeProperty;
-                }
-                else
-                {
-                    return cm.FindMappedElementByName(propertyName)?.NativeProperty;
-                }
+                result = ReflectionHelper.FindProperty(type, "Value");
             }
             else
             {
-                var @base = base.GetPropertyCore(type, propertyName);
-                return @base;
+                var cm = Inspector.FindClassMapping(type);
+                if (cm != null)
+                {
+                    if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
+                    {
+                        result = valueProp.NativeProperty;
+                    }
+                    else
+                    {
+                        result = cm.FindMappedElementByName(propertyName)?.NativeProperty;
+                    }
+                }
+                else
+                {
+                    var @base = base.GetPropertyCore(type, propertyName);
+                    result = @base;
+                }
             }
+            if (result == null)
+            {
+            }
+            return result;
         }
 
         public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
@@ -82,12 +95,23 @@ namespace Hl7.Cql.Firely
                     ?.PatientBirthDateMapping
                     ?.NativeProperty;
 
+        public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
+        {
+            if (genericInterfaceTypeDefinition == typeof(IEnumerable<>)
+                && type.GetCustomAttribute<FhirTypeAttribute>() != null)
+                return false;
+            return base.ImplementsGenericInterface(type, genericInterfaceTypeDefinition);
+        }
+
         public ModelInspector Inspector { get; }
 
         internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
 
-        private void addProfiledTypesAsQuantity()
+        private void adjust()
         {
+            Types["{http://hl7.org/fhir}positiveInt"] = typeof(Hl7.Fhir.Model.Integer);
+            Types["{http://hl7.org/fhir}unsignedInt"] = typeof(Hl7.Fhir.Model.Integer);
+
             Types["{http://hl7.org/fhir}SimpleQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
         }

@@ -26,7 +26,7 @@ namespace CoreTests
     public class PrimitiveTests
     {
         private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
+        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
 
         private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory

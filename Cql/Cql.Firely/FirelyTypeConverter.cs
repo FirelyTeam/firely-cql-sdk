@@ -1,17 +1,25 @@
 ﻿using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
+using Hl7.Fhir.ElementModel.Types;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
+using Hl7.Fhir.Utility;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely
 {
     public static class FirelyTypeConverter
     {
-        public static readonly TypeConverter Default =
+        public static TypeConverter Create(ModelInspector model) =>
             TypeConverter
                 .Create()
                 .ConvertSystemTypes()
                 .ConvertFhirToCqlPrimitives()
-                .ConvertCqlPrimitivesToFhir();
+                .ConvertCqlPrimitivesToFhir()
+                .ConvertCodeTypes(model);
+
 
         public static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
@@ -29,8 +37,12 @@ namespace Hl7.Cql.Firely
                 converter.Convert<CqlDateTime>(f.StartElement), converter.Convert<CqlDateTime>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<CqlQuantity>(
                     converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
+            add((M.Id id) => id.Value);
+            add((M.PositiveInt pi) => new M.Integer(pi.Value));
+            add((M.UnsignedInt ui) => new M.Integer(ui.Value));
 
-            addParametersToCqlPrimitivesConverters(toTypes);
+
+            //addParametersToCqlPrimitivesConverters(toTypes);
             return converter;
 
             // Add a basic Fhir primitive->Cql primitive conversion
@@ -72,11 +84,66 @@ namespace Hl7.Cql.Firely
         }
 
 
-
         public static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
             converter.AddConversion<byte[], string>(binary => Convert.ToBase64String(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
+            // TODO: this is a performance problem
+            converter.AddConversion<string, CqlDate?>(str => {
+                if (CqlDate.TryParse(str, out var date))
+                    return date!;
+                else return null;
+            });
+            converter.AddConversion<string, CqlDateTime?>(str => {
+                if (CqlDateTime.TryParse(str, out var dateTime))
+                    return dateTime;
+                else return null;
+            });
+            converter.AddConversion<string, CqlTime?>(str => {
+                if (CqlTime.TryParse(str, out var time))
+                    return time;
+                else return null;
+            });
+            converter.AddConversion<string, FhirUri>(str => new FhirUri(str));
+            converter.AddConversion<FhirUri, string>(uri => uri.Value);
+
+
+            return converter;
+        }
+
+        public static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
+        {
+            var enumTypes = model.EnumMappings
+                .Select(map => map.NativeType)
+                .Concat(model.ClassMappings
+                    .SelectMany(map => map.NativeType
+                        .GetNestedTypes()
+                        .Where(t => t.GetCustomAttribute<FhirEnumerationAttribute>() != null)))
+                .Distinct()
+                .ToArray();
+            foreach (var enumType in enumTypes)
+            {
+                addEnumConversion(enumType);
+            }
+
+            void addEnumConversion(Type enumType)
+            {
+                var codeType = typeof(Code<>).MakeGenericType(enumType);
+                converter.AddConversion(codeType, typeof(CqlCode), (code) =>
+                {
+                    var systemAndCode = (ISystemAndCode)code;
+                    return new CqlCode(systemAndCode.Code, systemAndCode.System, null, null);
+                });
+                converter.AddConversion(codeType, typeof(string), (code) =>
+                {
+                    var systemAndCode = (ISystemAndCode)code;
+                    return systemAndCode.Code;
+                });
+
+                var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
+                converter.AddConversion(nullableEnumType, typeof(string), (@enum) =>
+                    Enum.GetName(nullableEnumType, @enum));
+            }
             return converter;
         }
     }

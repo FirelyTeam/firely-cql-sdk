@@ -21,7 +21,7 @@ namespace CoreTests
     public class QueriesTest
     {
         private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
+        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
 
         [ClassInitialize]
         public static void Initialize(TestContext context)

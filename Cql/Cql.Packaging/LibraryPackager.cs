@@ -15,11 +15,17 @@ using Hl7.Cql.Elm.Expressions;
 using Hl7.Fhir.Model;
 using Library = Hl7.Fhir.Model.Library;
 using Hl7.Cql.Firely;
+using Hl7.Cql.Conversion;
 
 namespace Hl7.Cql.Packaging
 {
     public class LibraryPackager
     {
+        public LibraryPackager(TypeConverter? typeConverter = null)
+        {
+            TypeConverter = typeConverter ?? FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+        }
+
         public IDictionary<string, ElmPackage> LoadPackages(DirectoryInfo elmDir)
         {
             var dict = new ConcurrentDictionary<string, ElmPackage>();
@@ -383,8 +389,11 @@ namespace Hl7.Cql.Packaging
                 }
             }
         };
-        private static CqlContext CqlContext => null!;
-            //new CqlContext(new CqlOperators(null));
+        private static CqlContext CqlContext => FirelyCqlContext.Create();
+
+        public TypeConverter? TypeConverter { get; }
+
+        //new CqlContext(new CqlOperators(null));
 
         private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.Expressions.ParameterDeclarationExpression elmParameter,
             CqlCrosswalk typeCrosswalk,
@@ -496,7 +505,7 @@ namespace Hl7.Cql.Packaging
         }
 
 
-        private static void AddDefaultValueToExtensions(List<Extension> cqlTypeExtensions, object? value, TypeEntry defaultType)
+        private void AddDefaultValueToExtensions(List<Extension> cqlTypeExtensions, object? value, TypeEntry defaultType)
         {
             if (defaultType.FhirType != null)
             {
@@ -515,7 +524,7 @@ namespace Hl7.Cql.Packaging
             }
         }
 
-        private static void MapValueToExtension(Extension ext, object? value, TypeEntry mappedType)
+        private void MapValueToExtension(Extension ext, object? value, TypeEntry mappedType)
         {
             switch (mappedType.FhirType)
             {
@@ -532,25 +541,25 @@ namespace Hl7.Cql.Packaging
                     ext.Value = new FhirString(value as string);
                     break;
                 case FHIRAllTypes.Date:
-                    ext.Value = FirelyTypeConverter.Default.Convert<Date>(value);
+                    ext.Value = TypeConverter.Convert<Date>(value);
                     break;
                 case FHIRAllTypes.DateTime:
-                    ext.Value = FirelyTypeConverter.Default.Convert<FhirDateTime>(value);
+                    ext.Value = TypeConverter.Convert<FhirDateTime>(value);
                     break;
                 case FHIRAllTypes.Time:
-                    ext.Value = FirelyTypeConverter.Default.Convert<Time>(value);
+                    ext.Value = TypeConverter.Convert<Time>(value);
                     break;
                 case FHIRAllTypes.Quantity:
-                    ext.Value = FirelyTypeConverter.Default.Convert<Quantity>(value);
+                    ext.Value = TypeConverter.Convert<Quantity>(value);
                     break;
                 case FHIRAllTypes.Range:
-                    ext.Value = FirelyTypeConverter.Default.Convert<Fhir.Model.Range>(value);
+                    ext.Value = TypeConverter.Convert<Fhir.Model.Range>(value);
                     break;
                 case FHIRAllTypes.Ratio:
-                    ext.Value = FirelyTypeConverter.Default.Convert<Ratio>(value);
+                    ext.Value = TypeConverter.Convert<Ratio>(value);
                     break;
                 case FHIRAllTypes.Period:
-                    ext.Value = FirelyTypeConverter.Default.Convert<Period>(value);
+                    ext.Value = TypeConverter.Convert<Period>(value);
                     break;
                 default:
                     throw new InvalidOperationException($"Type '{mappedType.FhirType}' is not supported for Extension mappings");

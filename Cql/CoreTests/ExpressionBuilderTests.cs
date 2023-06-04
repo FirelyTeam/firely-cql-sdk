@@ -16,7 +16,7 @@ namespace CoreTests
     public class ExpressionBuilderTests
     {
         private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Default;
+        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
         private ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
             .Create(logging => logging.AddDebug())

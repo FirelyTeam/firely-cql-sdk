@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -7,10 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
-    <ProjectReference Include="..\..\Cql\Fhir.R4\Fhir.R4.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -983,7 +983,10 @@ namespace Hl7.Cql.Compiler
                 var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
                     ?? TypeNameToIdentifier(elementType, ctx);
                 var whereLambdaParameter = Expression.Parameter(elementType, parameterName);
-                var scopes = new[] { new KeyValuePair<string, (Expression, elm.Expression)>(querySourceAlias!, (whereLambdaParameter, query.where)) };
+                if (querySourceAlias == "ItemOnLine")
+                {
+                }
+                var scopes = new[] { new KeyValuePair<string, (Expression, elm.Expression)>(querySourceAlias!, (whereLambdaParameter, querySource.expression)) };
                 var subContext = ctx.WithScopes(scopes);
 
                 if (query.let != null)
@@ -1712,6 +1715,8 @@ namespace Hl7.Cql.Compiler
                 {
                     @else = HandleNullable(@else, then.Type);
                 }
+                if (then.Type != @else.Type)
+                    throw new InvalidOperationException($"The If expression at {@if.locator} produces two branches with different types.");
                 var ifThenElse = Expression.Condition(condition, then, @else);
                 return ifThenElse;
             }
@@ -2072,6 +2077,11 @@ namespace Hl7.Cql.Compiler
                 //    var call = Expression.Call(method, propogate);
                 //    return call;
                 //}
+                var resultType = TypeManager.TypeFor(op, ctx, false);
+                if (resultType != propogate.Type)
+                {
+                    propogate = ChangeType(propogate, resultType, ctx);
+                }
                 return propogate;
             }
             else if (op.source != null)
@@ -2200,7 +2210,7 @@ namespace Hl7.Cql.Compiler
             operands = new[]
             {
                     deeper
-                }
+            }
             .Concat(operands)
             .ToArray();
 

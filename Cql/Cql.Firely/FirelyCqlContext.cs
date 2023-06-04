@@ -35,7 +35,7 @@ namespace Hl7.Cql.Firely
 
             var cqlComparers = new CqlComparers();
             var operators = CqlOperators.Create(typeResolver,
-                FirelyTypeConverter.Default,
+                FirelyTypeConverter.Create(Fhir.Model.ModelInfo.ModelInspector),
                 dataRetriever,
                 cqlComparers,
                 valueSets,

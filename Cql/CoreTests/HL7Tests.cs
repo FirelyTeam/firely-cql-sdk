@@ -47,7 +47,7 @@ namespace CoreTests
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
             var resolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-            var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Default);
+            var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
             var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = ElmPackage.LoadFrom(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));            

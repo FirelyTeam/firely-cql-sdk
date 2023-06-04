@@ -30,7 +30,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Cql\Cql.Runtime.FhirR4\Cql.Runtime.FhirR4.csproj" />
 		<ProjectReference Include="..\..\Cql\Fhir.R4\Fhir.R4.csproj" />
 		<ProjectReference Include="..\..\Cql\Fhir\Fhir.csproj" />
 		<ProjectReference Include="..\..\Cql\Iso8601\Iso8601.csproj" />

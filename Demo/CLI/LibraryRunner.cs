@@ -1,8 +1,8 @@
 ﻿using Hl7.Cql;
+using Hl7.Cql.Firely;
 using Hl7.Cql.Poco.Fhir.R4;
 using Hl7.Cql.Poco.Fhir.R4.Model;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime.FhirR4;
 using Hl7.Cql.ValueSetLoaders;
 using Hl7.Cql.ValueSets;
 using System;
@@ -23,7 +23,7 @@ namespace CLI
             {
                 throw new ArgumentException($"Uknown library: {library}");
             }
-            var context = FhirCqlContext.Create(bundle, MY2023, ValueSets.Value,
+            var context = FirelyCqlContext.Create(bundle, MY2023, ValueSets.Value,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));
             var instance = Activator.CreateInstance(type, context);
             var values = new Dictionary<string, object>();

@@ -103,7 +103,7 @@ public static class Program
             cqlDir,
             graph,
             typeResolver,
-            new CqlOperatorsBinding(typeResolver, FirelyTypeConverter.Default),
+            new CqlOperatorsBinding(typeResolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)),
             new TypeManager(typeResolver),
             CanonicalUri,
             builderLogger,
@@ -128,10 +128,18 @@ public static class Program
                     if (binary.ContentType == "text/plain")
                     {
                         var bytes = binary.Data;
-                        var sourceFilePath = binary.Id.StartsWith("Tuple_")
-                            ? Path.Combine(csDir.FullName, "Tuples", $"{binary.Id}.cs")
-                            : Path.Combine(csDir.FullName, $"{binary.Id}.cs");
-                        File.WriteAllBytes(sourceFilePath, bytes);
+                        DirectoryInfo? sourceDir = null;
+                        if (binary.Id.StartsWith("Tuple_")) 
+                        {
+                            sourceDir = new(Path.Combine(csDir.FullName, "Tuples"));
+                        }
+                        else
+                        {
+                            sourceDir = new(csDir.FullName);
+                        }
+                        EnsureDirectory(sourceDir);
+                        var filePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
+                        File.WriteAllBytes(filePath, bytes);
                     }
                 }
                 else if (resource is Library library && library.Content != null)

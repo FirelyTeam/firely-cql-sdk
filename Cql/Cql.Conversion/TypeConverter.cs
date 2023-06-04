@@ -12,7 +12,6 @@ namespace Hl7.Cql.Conversion
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> Converters
             = new();
-
         /// <summary>
         /// Creates a default instance that provides some default conversions.
         /// </summary>
