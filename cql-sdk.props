@@ -9,7 +9,6 @@
 		<VersionPrefix>0.0.1</VersionPrefix>
 		<VersionSuffix></VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
-		<Company>NCQA and Firely (https://fire.ly)</Company>
 		<Copyright>Copyright 2013-2023 NCQA, Firely.  Contains materials (C) HL7 International</Copyright>
 		<PackageProjectUrl>https://github.com/FirelyTeam/cql-sdk</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/FirelyTeam/cql-sdk</RepositoryUrl>
@@ -38,6 +37,15 @@
 		<NoWarn>1591</NoWarn>
 		<Optimize>false</Optimize>
 		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>	
+	
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<SignAssembly>True</SignAssembly>
+		<DelaySign>true</DelaySign>
+		<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
+		<IncludeSymbols>True</IncludeSymbols>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 	</PropertyGroup>
 
 </Project>
