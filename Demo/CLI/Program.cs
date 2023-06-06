@@ -1,5 +1,5 @@
-﻿using Hl7.Cql.Poco.Fhir.R4;
-using Hl7.Cql.Poco.Fhir.R4.Model;
+﻿using Hl7.Cql.Firely;
+using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
@@ -30,7 +30,7 @@ namespace CLI
             }
             var dataFile = new FileInfo(dArg);
             using var dataStream = dataFile.OpenRead();
-            var bundle = FhirJson.Deserialize<Bundle>(dataStream);
+            var bundle = dataStream.ParseFhir<Bundle>();
 
             var oArg = config["o"] ?? config["out"];
             TextWriter? output = null;

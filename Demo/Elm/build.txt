@@ -1,0 +1,660 @@
+2023-06-06 00:25:11.131 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.185 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.226 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.241 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.248 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.251 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.256 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.259 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.264 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.271 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.272 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.274 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.275 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.302 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.312 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.317 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.322 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.323 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.325 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.326 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.326 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.327 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.327 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.333 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.335 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.335 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.335 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.337 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.339 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.343 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.345 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.346 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.346 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.369 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.384 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.387 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:11.484 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:11.484 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:11.484 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:11.485 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:11.485 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.485 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.489 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:11.489 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:11.489 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:11.489 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:11.489 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:11.489 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:11.496 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.497 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.499 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.499 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.525 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.525 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.546 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.546 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.554 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.554 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.555 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.555 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.567 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.568 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.568 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.568 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.568 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.568 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.569 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.569 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.572 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.573 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.574 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:11.574 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:11.575 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.575 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.576 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:11.576 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:11.577 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.577 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.577 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:11.578 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:11.587 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.587 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.593 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.593 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:25:11.593 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:11.594 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:25:11.717 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:11.717 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:11.723 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.723 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.727 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.727 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.742 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.742 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.744 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.744 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.751 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.752 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.754 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.757 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.765 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.765 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.803 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.803 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.864 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.868 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:11.894 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.894 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.895 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.895 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:11.986 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.002 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.008 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.010 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.011 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.011 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.013 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.013 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.014 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.015 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.016 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.017 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.018 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.025 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.028 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.029 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.032 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.033 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.034 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.035 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.035 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.035 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.036 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.038 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.038 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.038 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.038 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.040 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.041 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.042 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.042 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.043 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.043 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.049 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.052 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.053 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:12.096 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:12.096 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:12.096 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:12.096 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:12.096 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.096 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.097 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:12.097 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:12.097 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:12.097 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:12.098 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:12.098 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:12.101 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.101 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.109 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.110 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.118 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.118 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.147 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.147 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.150 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.151 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.151 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.151 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.167 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.167 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.167 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.167 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.168 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.168 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.169 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.169 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.178 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.179 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.180 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:12.180 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:12.182 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.182 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.183 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:12.183 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:12.184 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.184 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.185 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:12.185 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:12.193 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.194 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.198 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.198 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:25:12.198 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:12.198 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:25:12.249 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:12.249 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:12.251 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.251 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.252 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.253 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.256 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.256 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.257 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.257 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.259 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.260 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.260 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.262 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.266 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.266 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.271 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.271 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.298 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.300 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:12.307 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.307 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.308 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:12.308 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:28.683 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:28.708 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:28.736 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.757 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.759 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.760 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.764 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.766 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.770 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.773 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.774 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.775 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.775 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.789 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.797 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.801 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.811 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.812 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.815 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.818 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.818 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.818 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.819 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.829 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.832 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.832 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.832 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.835 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.838 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.843 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.845 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.845 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.845 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.861 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.872 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.874 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:28.993 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:28.993 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:28.993 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:28.993 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:28.993 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:28.993 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:28.997 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:28.997 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:28.997 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:28.997 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:28.997 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:28.997 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:29.016 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.016 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.017 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.017 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.018 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.018 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.019 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.019 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.094 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.094 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.101 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.101 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.105 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.105 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.171 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.172 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.177 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.177 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.183 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.183 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.203 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.203 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.206 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.206 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.211 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.211 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.214 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.216 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.235 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.235 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.262 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.262 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.359 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.359 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.360 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.361 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.362 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.362 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.363 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.364 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.365 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.365 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.366 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.366 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.390 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.390 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.390 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.391 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.406 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.406 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.423 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.423 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.424 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.424 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.466 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.473 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.483 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.483 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.490 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.490 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:25:29.490 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.490 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:25:29.529 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.532 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.542 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.545 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.546 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.546 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.548 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.548 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.551 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.552 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.553 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.553 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.554 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.557 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.559 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.560 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.562 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.562 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.563 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.563 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.564 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.564 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.564 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.565 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.567 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.567 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.568 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.569 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.569 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.571 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.571 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.571 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.571 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.576 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.581 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.582 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:25:29.636 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.636 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.636 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.636 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.636 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.636 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.638 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:29.638 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:25:29.638 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:29.638 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:25:29.638 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:29.638 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.645 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.689 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.690 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.695 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.695 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.705 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.705 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.723 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.723 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:25:29.724 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.724 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.725 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.725 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.728 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.729 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.729 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.729 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.731 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.731 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.731 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.732 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.735 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.735 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.740 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.740 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.765 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.765 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.765 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.766 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.766 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.766 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.766 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.766 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.767 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.767 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.767 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.767 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:25:29.777 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.777 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.777 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.777 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.785 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.785 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.787 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.787 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.787 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.787 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.808 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.813 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:25:29.833 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.833 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:25:29.841 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.842 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:25:29.842 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:25:29.842 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:56:27.204 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.261 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.265 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.266 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.279 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.282 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.293 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.302 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.303 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.310 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.310 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.347 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.362 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.368 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.378 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.380 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.385 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.393 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.395 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.395 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.396 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.413 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.419 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.420 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.420 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.428 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.433 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.441 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.443 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.444 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.445 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.471 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.487 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.492 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:27.779 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.781 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.788 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.788 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.801 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.801 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.869 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:27.870 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:27.876 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.877 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.887 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.888 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.913 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.914 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.917 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.918 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.928 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.928 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.933 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.938 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.954 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.955 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.980 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:27.980 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.117 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.117 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.119 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.119 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.309 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:28.309 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:28.310 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:28.310 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:28.311 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.311 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.317 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:56:28.317 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:56:28.317 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:56:28.318 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:56:28.318 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:56:28.318 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:56:28.331 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.341 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.371 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.372 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.374 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:28.375 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:28.378 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.379 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.380 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:28.380 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:28.381 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.382 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.383 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:28.383 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:28.435 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.435 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.457 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.457 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.458 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.459 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.536 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.536 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:28.545 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.545 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:56:28.545 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:28.545 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:56:28.554 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.554 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.554 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.555 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.556 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.556 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.557 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.557 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.568 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.573 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.632 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.641 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.643 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.643 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.647 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.648 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.651 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.654 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.657 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.660 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.660 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.672 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.677 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.679 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.683 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.684 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.686 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.688 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.689 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.689 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.690 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.697 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.699 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.700 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.700 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.703 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.705 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.710 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.711 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.711 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.711 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.723 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.730 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.731 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 00:56:28.810 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.812 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.818 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.818 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.833 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.833 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.862 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:28.862 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:28.866 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.867 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.870 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.871 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.883 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.883 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.886 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.886 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.898 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.899 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.902 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.908 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.916 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.916 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.930 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:28.931 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.003 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.003 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.005 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.005 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.092 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:29.093 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:29.093 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:29.094 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 00:56:29.094 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.095 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.098 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:56:29.098 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 00:56:29.098 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:56:29.099 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 00:56:29.099 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:56:29.100 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 00:56:29.105 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.114 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.144 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.144 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.147 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:29.147 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:29.149 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.150 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.151 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:29.151 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:29.153 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.154 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.156 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:29.157 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 00:56:29.194 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.195 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.201 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.201 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.202 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.202 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.232 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.232 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 00:56:29.245 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.246 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:56:29.246 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 00:56:29.246 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 00:56:29.253 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.254 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.254 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.254 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.255 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.255 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.256 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.256 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.270 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 00:56:29.274 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.

@@ -1,16 +1,17 @@
 ﻿using Hl7.Cql;
 using Hl7.Cql.Firely;
-using Hl7.Cql.Poco.Fhir.R4;
-using Hl7.Cql.Poco.Fhir.R4.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSetLoaders;
 using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Hl7.Fhir.Serialization;
+using System.Text.Json;
 
 namespace CLI
 {
@@ -40,7 +41,9 @@ namespace CLI
                     }
                 }
             }
-            var json = FhirJson.SerializeToString(values);
+            var json = JsonSerializer.Serialize(values,
+                new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector));
+
             output.WriteLine(json);
         }
 
@@ -89,12 +92,11 @@ namespace CLI
                 if (name.Contains(".ValueSets."))
                 {
                     var stream = asm.GetManifestResourceStream(name);
-                    var valueSet = FhirJson.Deserialize<ValueSet>(stream);
+                    var valueSet = stream.ParseFhir<ValueSet>();
                     valueSets.Add(valueSet);
                 }
             }
-            var loader = new FhirR4ValueSetLoader(valueSets, false);
-            var dictionary = loader.Load();
+            var dictionary = valueSets.ToValueSetDictionary();
             return dictionary;
         });
 

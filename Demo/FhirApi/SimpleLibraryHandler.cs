@@ -1,12 +1,12 @@
-﻿using Hl7.Cql.Poco.Fhir.R4;
-using Hl7.Cql.Poco.Fhir.R4.Model;
-using Hl7.Cql.Primitives;
+﻿using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.FhirR4;
 using Hl7.Cql.ValueSetLoaders;
 using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
 using Microsoft.AspNetCore.Mvc.TagHelpers;
 using System.Text;
+using Hl7.Cql.Firely;
 
 namespace FhirApi
 {
@@ -15,12 +15,12 @@ namespace FhirApi
         public IResult Evaluate(Parameters @in)
         {
             Parameters? parameters = null;
-            var library = @in.parameter?.SingleOrDefault(p => p.name == "library");
+            var library = @in.Parameter?.SingleOrDefault(p => p.Name == "library");
             if (library != null
-                && library.value is IdElement libraryId
-                && !string.IsNullOrWhiteSpace(libraryId.value))
+                && library.Value is Id libraryId
+                && !string.IsNullOrWhiteSpace(libraryId.Value))
             {
-                switch (libraryId.value.ToLowerInvariant())
+                switch (libraryId.Value.ToLowerInvariant())
                 {
                     case "bcsehedismy2022-1.0.0":
                         parameters = RunBCSE(@in);
@@ -31,7 +31,7 @@ namespace FhirApi
             }
             else return Results.BadRequest();
 
-            var json = FhirJson.SerializeToString(parameters);
+            var json = parameters.ToJson();
             return Results
                .Content(json, "application/fhir+json", Encoding.UTF8);
         }
@@ -51,14 +51,14 @@ namespace FhirApi
         private Parameters? RunBCSE(Parameters @in)
         {
             Stream? dataStream = null;
-            var subject = @in.parameter
-                .SingleOrDefault(p => p.name == "subject");
-            if (subject != null && subject.value is IdElement id)
+            var subject = @in.Parameter
+                .SingleOrDefault(p => p.Name == "subject");
+            if (subject != null && subject.Value is Id id)
             {
                 dataStream = typeof(SimpleLibraryHandler)
                     .Assembly
-                    .GetManifestResourceStream(id.value)
-                    ?? throw new InvalidOperationException($"Subject {id.value} not found");
+                    .GetManifestResourceStream(id.Value)
+                    ?? throw new InvalidOperationException($"Subject {id.Value} not found");
             }
             /// TODO: support data parameter if subject not specified
             if (dataStream == null)
@@ -67,19 +67,19 @@ namespace FhirApi
             }
             var @out = new Parameters
             {
-                parameter = new List<Parameters.ParameterComponent>()
+                Parameter = new List<Parameters.ParameterComponent>()
             };
-            var bundle = FhirJson.Deserialize<Bundle>(dataStream);
+            var bundle = dataStream.ParseFhir<Bundle>();
             var valueSets = ValueSetProvider.ValueSets;
-            var context = FhirCqlContext.Create(bundle,
+            var context = FirelyCqlContext.Create(bundle,
                 MY2023,
                 valueSets,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));
             var bcse = new BCSEHEDISMY2022_1_0_0(context);
-            @out.parameter.Add(new Parameters.ParameterComponent
+            @out.Parameter.Add(new Parameters.ParameterComponent
             {
-                name = "Numerator",
-                value = new BooleanElement { value = bcse.Numerator() }
+                Name = "Numerator",
+                Value = new FhirBoolean(bcse.Numerator())
             });
             return @out;
         }

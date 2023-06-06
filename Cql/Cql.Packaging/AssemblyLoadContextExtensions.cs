@@ -8,7 +8,7 @@ using System.Runtime.Loader;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Packaging
 {
     public static class AssemblyLoadContextExtensions
     {
@@ -52,6 +52,10 @@ namespace Hl7.Cql
             }
             return null;
         }
+
+
+      
+
         private static IDictionary<string, object?> Run(object instance, CqlContext context)
         {
             var type = instance.GetType();

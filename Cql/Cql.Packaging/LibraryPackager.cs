@@ -116,7 +116,7 @@ namespace Hl7.Cql.Packaging
                 var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
                 var tuplesCSharp = new Binary
                 {
-                    Id = sourceKvp.Key,
+                    Id = sourceKvp.Key.Replace("_", "-"),
                     ContentType = "text/plain",
                     Data = tuplesSourceBytes,
                 };
@@ -409,7 +409,7 @@ namespace Hl7.Cql.Packaging
             var cqlTypeExtensions = new List<Extension> {
                 new Extension()
                 {
-                    ElementId = Constants.ParameterCqlType,
+                    Url = Constants.ParameterCqlType,
                     Value = new FhirString(type.CqlType!.ToString())
                 }
             };
@@ -418,7 +418,7 @@ namespace Hl7.Cql.Packaging
             {
                 cqlTypeExtensions.Add(new Extension()
                 {
-                    ElementId = Constants.ParameterCqlElementType,
+                    Url = Constants.ParameterCqlElementType,
                     Value = new FhirString(type.ElementType.CqlType!.ToString())
                 });
             }
@@ -450,7 +450,7 @@ namespace Hl7.Cql.Packaging
                 {
                     cqlTypeExtensions.Add(new Extension()
                     {
-                        ElementId = Constants.ParameterCanonicalUri,
+                        Url = Constants.ParameterCanonicalUri,
                         Value = new FhirString(uri.value)
                     });
                 }
@@ -511,14 +511,14 @@ namespace Hl7.Cql.Packaging
             {
                 var defaultValueExt = new Extension()
                 {
-                    ElementId = Constants.ParameterCqlDefaultValue
+                    Url = Constants.ParameterCqlDefaultValue
                 };
                 MapValueToExtension(defaultValueExt, value, defaultType);
                 cqlTypeExtensions.Add(defaultValueExt);
 
                 cqlTypeExtensions.Add(new Extension()
                 {
-                    ElementId = Constants.ParameterCqlDefaultValueType,
+                    Url = Constants.ParameterCqlDefaultValueType,
                     Value = new Code<FHIRAllTypes>(defaultType.FhirType),
                 });
             }

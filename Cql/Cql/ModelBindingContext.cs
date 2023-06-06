@@ -13,7 +13,7 @@ namespace Hl7.Cql
     /// <summary>
     /// Defines the implementations that a model binding provides to the SDK.
     /// </summary>
-    public abstract class ModelBindingContext
+    internal abstract class ModelBindingContext
     {
         /// <summary>
         /// The <see cref="TypeResolver"/> for the model.

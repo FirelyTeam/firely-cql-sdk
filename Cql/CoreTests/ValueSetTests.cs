@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
+using Hl7.Cql.Firely;
 
 namespace CoreTests
 {

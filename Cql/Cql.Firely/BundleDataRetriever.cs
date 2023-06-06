@@ -162,7 +162,7 @@ namespace Hl7.Cql.Firely
         {
             Func<T, IEnumerable<Coding>?>? getCoding = null;
             var type = property.PropertyType;
-            if (type == typeof(Element))
+            if (type == typeof(Element) || type == typeof(DataType))
             {
                 getCoding = (resource) =>
                 {

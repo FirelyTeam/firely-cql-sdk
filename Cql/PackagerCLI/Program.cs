@@ -41,14 +41,7 @@ public static class Program
             return -1;
         }
 
-        var oArg = config["o"];
-        if (oArg == null)
-            return ShowHelp();
-        var oDir = new DirectoryInfo(oArg);
-        if (!oDir.Exists)
-        {
-            EnsureDirectory(oDir);
-        }
+
 
         var dArg = config["d"];
         bool debug = false;
@@ -62,7 +55,7 @@ public static class Program
         var csDir = new DirectoryInfo(csArg);
         if (!csDir.Exists)
         {
-            EnsureDirectory(oDir);
+            EnsureDirectory(csDir);
         }
 
         var fArg = config["f"];
@@ -82,7 +75,7 @@ public static class Program
                 {
                     console.LogToStandardErrorThreshold = LogLevel.Error;
                 });
-                var logFile = Path.Combine(oDir.FullName, "build.txt");
+                var logFile = Path.Combine(".", "build.txt");
                 Log.Logger = new LoggerConfiguration()
                   .Enrich.FromLogContext()
                   .WriteTo
@@ -96,8 +89,8 @@ public static class Program
         var graph = Hl7.Cql.Elm.ElmPackage.GetIncludedLibraries(packages.Values);
         var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
         var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-
         var writerLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
+        var cliLogger = logFactory.CreateLogger("CLI");
 
         var resources = packager.PackageResources(elmDir,
             cqlDir,
@@ -112,14 +105,28 @@ public static class Program
         var options = new JsonSerializerOptions()
             .ForFhir(typeof(Resource).Assembly)
             .Pretty();
-        foreach (var resource in resources)
+
+        var fhirArg = config["fhir"];
+        if (fhirArg != null)
         {
-            var file = new FileInfo(Path.Combine(oDir.FullName, $"{resource.Id}.json"));
-            using var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
-            JsonSerializer.Serialize(fs, resource, options);
+            var fhirDir = new DirectoryInfo(fhirArg);
+            if (!fhirDir.Exists)
+            {
+                EnsureDirectory(fhirDir);
+            }
+            cliLogger.LogInformation($"Writing FHIR resources to {fhirDir.FullName}");
+
+            foreach (var resource in resources)
+            {
+                var file = new FileInfo(Path.Combine(fhirDir.FullName, $"{resource.Id}.json"));
+                cliLogger.LogInformation($"Writing {file.FullName}");
+                using var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
+                JsonSerializer.Serialize(fs, resource, options);
+            }
         }
         if (csDir != null)
         {
+            cliLogger.LogInformation($"Writing C# source files to {csDir.FullName}");
             // Write out the C# source code to the desired output location
             foreach (var resource in resources)
             {
@@ -129,7 +136,7 @@ public static class Program
                     {
                         var bytes = binary.Data;
                         DirectoryInfo? sourceDir = null;
-                        if (binary.Id.StartsWith("Tuple_")) 
+                        if (binary.Id.StartsWith("Tuple_"))
                         {
                             sourceDir = new(Path.Combine(csDir.FullName, "Tuples"));
                         }
@@ -139,6 +146,7 @@ public static class Program
                         }
                         EnsureDirectory(sourceDir);
                         var filePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
+                        cliLogger.LogInformation($"Writing {filePath}");
                         File.WriteAllBytes(filePath, bytes);
                     }
                 }
@@ -187,7 +195,7 @@ public static class Program
         Console.WriteLine();
         Console.WriteLine($"\t--elm <directory>\tLibrary root path");
         Console.WriteLine($"\t--cql <directory>\tCQL root path");
-        Console.WriteLine($"\t--o <file>\t\tOutput location, either file name or directory");
+        Console.WriteLine($"\t--fhir <file>\tResource location, either file name or directory");
         Console.WriteLine($"\t[--cs] <file>\tC# output location, either file name or directory");
         Console.WriteLine($"\t[--d] true|false\t\tProduce as a debug assmebly");
         Console.WriteLine($"\t[--f] true|false\tIf output file already exists, overwrite");
