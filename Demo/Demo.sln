@@ -39,6 +39,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Packaging", "..\Cql\Cql
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hl7.Fhir.R4", "..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj", "{5141A936-3136-445D-BA60-ECAD4FC214C8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elm", "..\Cql\Elm\Elm.csproj", "{270F53BE-283A-4CC4-88AC-99B773E4464B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -140,6 +142,12 @@ Global
 		{5141A936-3136-445D-BA60-ECAD4FC214C8}.FullDebug|Any CPU.Build.0 = FullDebug|Any CPU
 		{5141A936-3136-445D-BA60-ECAD4FC214C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5141A936-3136-445D-BA60-ECAD4FC214C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{270F53BE-283A-4CC4-88AC-99B773E4464B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270F53BE-283A-4CC4-88AC-99B773E4464B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{270F53BE-283A-4CC4-88AC-99B773E4464B}.FullDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{270F53BE-283A-4CC4-88AC-99B773E4464B}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
+		{270F53BE-283A-4CC4-88AC-99B773E4464B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{270F53BE-283A-4CC4-88AC-99B773E4464B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -157,6 +165,7 @@ Global
 		{5396025B-4EDF-4D9D-BDE6-1E4D4747B3FD} = {B2DA3E3F-AD3D-4053-A4BE-CE4F0F094B40}
 		{EF8C2BD9-4C91-45BC-9B07-AFD199418170} = {B2DA3E3F-AD3D-4053-A4BE-CE4F0F094B40}
 		{5141A936-3136-445D-BA60-ECAD4FC214C8} = {B2DA3E3F-AD3D-4053-A4BE-CE4F0F094B40}
+		{270F53BE-283A-4CC4-88AC-99B773E4464B} = {B2DA3E3F-AD3D-4053-A4BE-CE4F0F094B40}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {94A73CD1-7AAD-482E-9889-488F8195532A}

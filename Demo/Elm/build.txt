@@ -658,3 +658,410 @@
 2023-06-06 00:56:29.256 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
 2023-06-06 00:56:29.270 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
 2023-06-06 00:56:29.274 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.354 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.382 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.386 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.387 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.395 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.398 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.410 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.413 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.415 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.418 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.418 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.431 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.442 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.444 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.453 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.458 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.461 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.463 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.463 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.464 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.464 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.480 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.485 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.487 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.487 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.492 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.497 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.505 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.507 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.508 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.508 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.527 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.540 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.572 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:03.588 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.589 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.604 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.604 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.612 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.613 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.697 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.697 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.698 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.698 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.826 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:03.826 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:03.827 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:03.827 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:03.827 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:03.828 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:03.834 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 02:09:03.834 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 02:09:03.834 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 02:09:03.834 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 02:09:03.835 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 02:09:03.835 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 02:09:03.845 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.846 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.864 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.865 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.865 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.865 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:03.905 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:03.905 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:03.916 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.917 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.925 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.925 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.935 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.935 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.937 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.937 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.946 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.946 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.950 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.955 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.961 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.961 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.991 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:03.991 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.143 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.146 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.152 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.154 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.184 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.185 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.196 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.197 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 02:09:04.197 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.197 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 02:09:04.224 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.225 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.225 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.225 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.227 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.227 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.227 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.227 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.250 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.251 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.252 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.252 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.255 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.255 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.256 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.257 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.257 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.257 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.258 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.258 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.278 -04:00 [WRN] FHIRHelpers-4.0.001 line 81:1-82:13: Function ToString(value {http://hl7.org/fhir}ActivityParticipantType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.282 -04:00 [WRN] FHIRHelpers-4.0.001 line 177:1-178:13: Function ToString(value {http://hl7.org/fhir}ClaimStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.283 -04:00 [WRN] FHIRHelpers-4.0.001 line 195:1-196:13: Function ToString(value {http://hl7.org/fhir}CommunicationRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.284 -04:00 [WRN] FHIRHelpers-4.0.001 line 204:1-205:13: Function ToString(value {http://hl7.org/fhir}CompartmentType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.289 -04:00 [WRN] FHIRHelpers-4.0.001 line 252:1-253:13: Function ToString(value {http://hl7.org/fhir}CoverageStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.290 -04:00 [WRN] FHIRHelpers-4.0.001 line 261:1-262:13: Function ToString(value {http://hl7.org/fhir}DaysOfWeek) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.292 -04:00 [WRN] FHIRHelpers-4.0.001 line 288:1-289:13: Function ToString(value {http://hl7.org/fhir}DeviceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.295 -04:00 [WRN] FHIRHelpers-4.0.001 line 315:1-316:13: Function ToString(value {http://hl7.org/fhir}EligibilityRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.307 -04:00 [WRN] FHIRHelpers-4.0.001 line 321:1-322:13: Function ToString(value {http://hl7.org/fhir}EligibilityResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.309 -04:00 [WRN] FHIRHelpers-4.0.001 line 336:1-337:13: Function ToString(value {http://hl7.org/fhir}EnrollmentRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.309 -04:00 [WRN] FHIRHelpers-4.0.001 line 339:1-340:13: Function ToString(value {http://hl7.org/fhir}EnrollmentResponseStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.312 -04:00 [WRN] FHIRHelpers-4.0.001 line 435:1-436:13: Function ToString(value {http://hl7.org/fhir}InvoicePriceComponentType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.315 -04:00 [WRN] FHIRHelpers-4.0.001 line 471:1-472:13: Function ToString(value {http://hl7.org/fhir}MediaStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.316 -04:00 [WRN] FHIRHelpers-4.0.001 line 486:1-487:13: Function ToString(value {http://hl7.org/fhir}MedicationRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.318 -04:00 [WRN] FHIRHelpers-4.0.001 line 525:1-526:13: Function ToString(value {http://hl7.org/fhir}NutritionOrderStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.318 -04:00 [WRN] FHIRHelpers-4.0.001 line 534:1-535:13: Function ToString(value {http://hl7.org/fhir}ObservationStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.320 -04:00 [WRN] FHIRHelpers-4.0.001 line 546:1-547:13: Function ToString(value {http://hl7.org/fhir}ParameterUse) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.320 -04:00 [WRN] FHIRHelpers-4.0.001 line 555:1-556:13: Function ToString(value {http://hl7.org/fhir}ParticipationStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.321 -04:00 [WRN] FHIRHelpers-4.0.001 line 558:1-559:13: Function ToString(value {http://hl7.org/fhir}PaymentNoticeStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.321 -04:00 [WRN] FHIRHelpers-4.0.001 line 561:1-562:13: Function ToString(value {http://hl7.org/fhir}PaymentReconciliationStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.321 -04:00 [WRN] FHIRHelpers-4.0.001 line 564:1-565:13: Function ToString(value {http://hl7.org/fhir}ProcedureStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.323 -04:00 [WRN] FHIRHelpers-4.0.001 line 600:1-601:13: Function ToString(value {http://hl7.org/fhir}ReferredDocumentStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.324 -04:00 [WRN] FHIRHelpers-4.0.001 line 612:1-613:13: Function ToString(value {http://hl7.org/fhir}RequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.324 -04:00 [WRN] FHIRHelpers-4.0.001 line 615:1-616:13: Function ToString(value {http://hl7.org/fhir}RequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.324 -04:00 [WRN] FHIRHelpers-4.0.001 line 618:1-619:13: Function ToString(value {http://hl7.org/fhir}RequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.325 -04:00 [WRN] FHIRHelpers-4.0.001 line 630:1-631:13: Function ToString(value {http://hl7.org/fhir}ResourceType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.326 -04:00 [WRN] FHIRHelpers-4.0.001 line 642:1-643:13: Function ToString(value {http://hl7.org/fhir}RiskAssessmentStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.328 -04:00 [WRN] FHIRHelpers-4.0.001 line 660:1-661:13: Function ToString(value {http://hl7.org/fhir}SectionMode) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.328 -04:00 [WRN] FHIRHelpers-4.0.001 line 666:1-667:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestIntent) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.329 -04:00 [WRN] FHIRHelpers-4.0.001 line 669:1-670:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.329 -04:00 [WRN] FHIRHelpers-4.0.001 line 672:1-673:13: Function ToString(value {http://hl7.org/fhir}ServiceRequestStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.332 -04:00 [WRN] FHIRHelpers-4.0.001 line 738:1-739:13: Function ToString(value {http://hl7.org/fhir}TaskPriority) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.337 -04:00 [WRN] FHIRHelpers-4.0.001 line 777:1-778:13: Function ToString(value {http://hl7.org/fhir}VariableType) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.338 -04:00 [WRN] FHIRHelpers-4.0.001 line 786:1-787:13: Function ToString(value {http://hl7.org/fhir}VisionStatus) skipped; another function matching this signature already exists.
+2023-06-06 02:09:04.342 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.342 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.346 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.346 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.355 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property start can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.356 -04:00 [WRN] NCQAFHIRBase-1.0.0: Property end can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.365 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.365 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 79:17-79:45: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.366 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.366 -04:00 [WRN] HospitalHarmSevereHypoglycemiaFHIR-0.0.012 line 81:15-81:35: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.423 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:04.423 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:04.424 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:04.424 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 309:48-309:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:04.424 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.425 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 310:27-310:50: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.426 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 02:09:04.426 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 351:85-351:94: Potentially unsafe cast from Object to type MedicationAdministration
+2023-06-06 02:09:04.426 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 02:09:04.426 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 350:73-350:82: Potentially unsafe cast from Object to type MedicationDispense
+2023-06-06 02:09:04.426 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 02:09:04.426 -04:00 [WRN] CumulativeMedicationDurationFHIR4-1.0.000 line 349:71-349:80: Potentially unsafe cast from Object to type MedicationRequest
+2023-06-06 02:09:04.434 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.434 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 132:13-132:33: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.441 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.442 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 146:23-146:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.442 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.442 -04:00 [WRN] HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006 line 151:23-151:44: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.451 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:04.451 -04:00 [WRN] NCQAClaims-1.0.0 line 48:54-48:72: Potentially unsafe cast from Object to type CodeableConcept
+2023-06-06 02:09:04.455 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.455 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.456 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.456 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.460 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.460 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.460 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.460 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.466 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.466 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.468 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.469 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.477 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.477 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.484 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.484 -04:00 [WRN] NCQAClaims-1.0.0: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.540 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.542 -04:00 [WRN] ColorectalCancerScreeningsFHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.551 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.555 -04:00 [WRN] Exam130FHIR-0.0.003: Property coding can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.574 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.574 -04:00 [WRN] FHIR347-0.1.021 line 150:15-150:23: Potentially unsafe cast from Object to type Quantity
+2023-06-06 02:09:04.587 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.587 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 02:09:04.588 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.588 -04:00 [WRN] FHIR347-0.1.021 line 216:45-216:59: Potentially unsafe cast from Object to type Range
+2023-06-06 02:09:04.613 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.614 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.614 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:57-72:80: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.615 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 72:94-72:118: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.615 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.616 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:68-77:91: Property performed can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.616 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.616 -04:00 [WRN] TJCOverallFHIR-1.8.000 line 77:96-77:120: Property authoredOn can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.
+2023-06-06 02:09:04.637 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.637 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 108:17-108:97: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.638 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.638 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 110:11-110:88: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.639 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.639 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 98:17-98:100: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.639 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.640 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 100:11-100:91: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.641 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.641 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 118:17-118:101: Potentially unsafe cast from Object to type Period
+2023-06-06 02:09:04.641 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:04.641 -04:00 [WRN] DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004 line 120:11-120:92: Potentially unsafe cast from Object to type FhirBoolean
+2023-06-06 02:09:15.082 -04:00 [INF] Writing FHIR resources to C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources
+2023-06-06 02:09:15.082 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAEncounter-1.0.0.json
+2023-06-06 02:09:15.152 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\FHIRHelpers-4.0.001.json
+2023-06-06 02:09:15.159 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAFHIRBase-1.0.0.json
+2023-06-06 02:09:15.169 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAStatus-1.0.0.json
+2023-06-06 02:09:15.174 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQATerminology-1.0.0.json
+2023-06-06 02:09:15.178 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\HospitalHarmSevereHypoglycemiaFHIR-0.0.012.json
+2023-06-06 02:09:15.190 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\SupplementalDataElementsFHIR4-2.0.000.json
+2023-06-06 02:09:15.196 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\MATGlobalCommonFunctionsFHIR4-6.1.000.json
+2023-06-06 02:09:15.205 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\BreastCancerScreeningsFHIR-0.0.009.json
+2023-06-06 02:09:15.212 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\AdultOutpatientEncountersFHIR4-2.2.000.json
+2023-06-06 02:09:15.217 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000.json
+2023-06-06 02:09:15.226 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\CumulativeMedicationDurationFHIR4-1.0.000.json
+2023-06-06 02:09:15.230 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\PalliativeCareFHIR-0.6.000.json
+2023-06-06 02:09:15.233 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\HospiceFHIR4-2.3.000.json
+2023-06-06 02:09:15.238 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\HospitalHarmHyperglycemiainHospitalizedPatientsFHIR-0.0.006.json
+2023-06-06 02:09:15.244 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAAdvancedIllnessandFrailty-1.0.0.json
+2023-06-06 02:09:15.250 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAClaims-1.0.0.json
+2023-06-06 02:09:15.265 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQACQLBase-1.0.0.json
+2023-06-06 02:09:15.272 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015.json
+2023-06-06 02:09:15.277 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\CervicalCancerScreeningFHIR-0.0.005.json
+2023-06-06 02:09:15.283 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\HybridHWRFHIR-1.3.005.json
+2023-06-06 02:09:15.290 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\ColorectalCancerScreeningsFHIR-0.0.003.json
+2023-06-06 02:09:15.327 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Exam130FHIR-0.0.003.json
+2023-06-06 02:09:15.331 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAHealthPlanEnrollment-1.0.0.json
+2023-06-06 02:09:15.335 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAHospice-1.0.0.json
+2023-06-06 02:09:15.338 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\FHIR347-0.1.021.json
+2023-06-06 02:09:15.344 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\VTEFHIR4-4.8.000.json
+2023-06-06 02:09:15.348 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\BCSEHEDISMY2022-1.0.0.json
+2023-06-06 02:09:15.354 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\NCQAPalliativeCare-1.0.0.json
+2023-06-06 02:09:15.358 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\HybridHWMFHIR-0.102.005.json
+2023-06-06 02:09:15.365 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\DischargedonAntithromboticTherapyFHIR-0.0.010.json
+2023-06-06 02:09:15.369 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\TJCOverallFHIR-1.8.000.json
+2023-06-06 02:09:15.374 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008.json
+2023-06-06 02:09:15.377 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Exam125FHIR-0.0.009.json
+2023-06-06 02:09:15.381 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\SafeUseofOpioidsConcurrentPrescribingFHIR-0.0.012.json
+2023-06-06 02:09:15.384 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\DRCommunicationWithPhysicianManagingDiabetesFHIR-0.0.004.json
+2023-06-06 02:09:15.388 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\TupleTypes-Binary.json
+2023-06-06 02:09:15.394 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GcLaDggiecCUAgUhQSXhADYJf.json
+2023-06-06 02:09:15.397 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GTiMeVaPZjPXLPBaGARAOCFd.json
+2023-06-06 02:09:15.399 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DUDddjZaCdFGjLXVHKdDKIRfT.json
+2023-06-06 02:09:15.400 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CFQHSgYJOXjAOCKdWLdZNNHDG.json
+2023-06-06 02:09:15.401 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EYKUVMTUWTABihhEAdHIGbSFe.json
+2023-06-06 02:09:15.402 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-IWAGVXGPWIVBAWDaHPGIVVBK.json
+2023-06-06 02:09:15.404 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CXAFdKaHNVUHbTOBaaLVHDiaW.json
+2023-06-06 02:09:15.406 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EBCeiDEEJUjLQKCDbhKCQVIHW.json
+2023-06-06 02:09:15.407 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BZfjDHYASdKbVKTOeigaYPBVf.json
+2023-06-06 02:09:15.408 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FdccSJcWTSebijGjABdUMLEdR.json
+2023-06-06 02:09:15.409 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EPQMNeOgChVRHOcBPRccPNZeF.json
+2023-06-06 02:09:15.410 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GiWKJXbiXAiGGBDVZJdMTaVhK.json
+2023-06-06 02:09:15.411 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-HBBaLFUhhUfQBEJKjEZegSRLi.json
+2023-06-06 02:09:15.413 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CAbQjTVRCSKOYWiIhECGMcDPA.json
+2023-06-06 02:09:15.414 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CYfZbbEjJgLODachBhLiZaXQE.json
+2023-06-06 02:09:15.415 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-HLLRUdKceDPKeIXGFiiNKjMKI.json
+2023-06-06 02:09:15.416 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EaBFagdYTZfYEiNNhIYITEIUR.json
+2023-06-06 02:09:15.418 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EWMRhBHgcOUGZLgIBDbjPHISO.json
+2023-06-06 02:09:15.419 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CNibCQZPIWCUUGeAXcXWGiTgj.json
+2023-06-06 02:09:15.421 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DTeHhjMPXBSEFRBcdiBHhKQDA.json
+2023-06-06 02:09:15.422 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-HGJgSEUEXcXLiIPXgcJWiVdUX.json
+2023-06-06 02:09:15.423 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FcALBBGFXRhKjhIaDWMVWUhJg.json
+2023-06-06 02:09:15.424 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BAGeQidBiLhNHVFiERZPAUdCY.json
+2023-06-06 02:09:15.425 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DadNQNcGichTGjKhdjJicQeTP.json
+2023-06-06 02:09:15.427 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BYGeMjQEUUIJcKZHQOCRZhZCU.json
+2023-06-06 02:09:15.428 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FOLKddIQBPRMYYfjeMUjEIBhC.json
+2023-06-06 02:09:15.429 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EUYHPiEZNTBOHPgZNKhGAORRb.json
+2023-06-06 02:09:15.430 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DQefEeUREeePUGdeeZLYSgFcU.json
+2023-06-06 02:09:15.431 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CIIbRNfJieBVcNIWHEUWMVhOB.json
+2023-06-06 02:09:15.432 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-iUHcMLYFdMEcPJJeOVJdQjbI.json
+2023-06-06 02:09:15.433 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FADJTWQjaQgiVVcFZjGXbPFbN.json
+2023-06-06 02:09:15.434 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GjTATZbNccdVYWChGHHdRUXSM.json
+2023-06-06 02:09:15.436 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GRhdjhBUGcJfFRBeODDiYLCdD.json
+2023-06-06 02:09:15.437 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EbJRLQXEhRCeIIZLcXEYbTEDL.json
+2023-06-06 02:09:15.438 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DXaYeZVOEAELKIhLMVHZBeASM.json
+2023-06-06 02:09:15.439 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-ELXXNjRZXJcQDXjEEQXFeNQKZ.json
+2023-06-06 02:09:15.441 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CAKcSTUVVXcPjYRXATiiRAEMg.json
+2023-06-06 02:09:15.442 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CTafBejCOJKDPBQMRaUKGZGDD.json
+2023-06-06 02:09:15.443 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FbAEUOYETObSHBafYbFNIeSNO.json
+2023-06-06 02:09:15.445 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-ENRfaLDabXeaNdJYVdOfebBTR.json
+2023-06-06 02:09:15.446 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EDASHZgEHSQJbecPJIZegfOIB.json
+2023-06-06 02:09:15.447 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DgRFfDaEDhBINgYbMaeRWZWVT.json
+2023-06-06 02:09:15.448 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DOALBUVOFWRHAUjdPUNBfNdUB.json
+2023-06-06 02:09:15.450 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BOANHMYNiCIfFjRZRMEXCcXTO.json
+2023-06-06 02:09:15.450 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-HQUdYchKGNXjEWMCbcWSEKdVI.json
+2023-06-06 02:09:15.452 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BcRbRSiZXcAFIKNCdPcQULMGb.json
+2023-06-06 02:09:15.454 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GIfhUVACThMQNGPGjYhYHEfGS.json
+2023-06-06 02:09:15.455 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GMJgYefQcULgUcRJJAbTfRThR.json
+2023-06-06 02:09:15.456 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DIQeTbDBBRFOAGiGbFgLLFZOe.json
+2023-06-06 02:09:15.458 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FNLPNAPOaaMjChWUXdhfgcWIR.json
+2023-06-06 02:09:15.459 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-QDOjYOQaAUWAWKDPBcQCSKDH.json
+2023-06-06 02:09:15.460 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CEXhgaFKbhdeeAYTYBhHTGXUY.json
+2023-06-06 02:09:15.461 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FPCXihcEeChSjIUJHVXRcEXMI.json
+2023-06-06 02:09:15.462 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FbiEbRAPBSZAgWUQOLFeLJQTa.json
+2023-06-06 02:09:15.464 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CZQfDISCFaOQaLKEbbAcDRfcP.json
+2023-06-06 02:09:15.465 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DXgGhLJSUaCHQXWCIGhOfjCeA.json
+2023-06-06 02:09:15.466 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-UKiMhSTCRNIPefSbODPWDGLQ.json
+2023-06-06 02:09:15.467 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EHUBiUYZGHNGdhCYfLiYVfUdS.json
+2023-06-06 02:09:15.468 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-FXGMiYhHaiIMEGdRUYMPEAHCR.json
+2023-06-06 02:09:15.469 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CUJFCVgQUNRcdHdTeVDjJcYaZ.json
+2023-06-06 02:09:15.471 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-HAejSJNFdWPBCHgSSZUeVRIHA.json
+2023-06-06 02:09:15.474 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-DMLKdYCdQIGCNZIeiaWHeZXaD.json
+2023-06-06 02:09:15.475 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-ECVjLWJcUFIRQXFBcGfYDAJeU.json
+2023-06-06 02:09:15.476 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BiacLIDOWQWTUEhhUVDjWHeBU.json
+2023-06-06 02:09:15.478 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EcPDQKeCFLjSYgUXJScRcgbKG.json
+2023-06-06 02:09:15.479 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GXTFGWGiVAGFGKWKdcWVdAEBf.json
+2023-06-06 02:09:15.481 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BhaRdDVNNUEZDBgSheMGTUMHO.json
+2023-06-06 02:09:15.482 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GBYTHaefaUNajDZadEXbadOFW.json
+2023-06-06 02:09:15.483 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CbDWBMGYObPdSJUZaIQTNfFXY.json
+2023-06-06 02:09:15.484 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-BdbDhEjXOINLgCRGiAFGdHJIB.json
+2023-06-06 02:09:15.486 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-CZdRYXLJAeJaPSIRaUHDXVHPV.json
+2023-06-06 02:09:15.488 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GHYDcaRJOeEdWbTSSCjjBhBFW.json
+2023-06-06 02:09:15.489 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-GDEcEaQjOFQDGfGXNEXUVihLK.json
+2023-06-06 02:09:15.490 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Test\Resources\Tuple-EEdUbUaNBDSUUQFEZDJDbZRcC.json
+2023-06-06 02:09:15.492 -04:00 [INF] Writing C# source files to C:\Code\FirelyTeam\cql-sdk\Demo\Measures
+2023-06-06 02:09:15.572 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GcLaDggiecCUAgUhQSXhADYJf.cs
+2023-06-06 02:09:15.573 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GTiMeVaPZjPXLPBaGARAOCFd.cs
+2023-06-06 02:09:15.574 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DUDddjZaCdFGjLXVHKdDKIRfT.cs
+2023-06-06 02:09:15.576 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CFQHSgYJOXjAOCKdWLdZNNHDG.cs
+2023-06-06 02:09:15.577 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EYKUVMTUWTABihhEAdHIGbSFe.cs
+2023-06-06 02:09:15.579 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-IWAGVXGPWIVBAWDaHPGIVVBK.cs
+2023-06-06 02:09:15.581 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CXAFdKaHNVUHbTOBaaLVHDiaW.cs
+2023-06-06 02:09:15.582 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EBCeiDEEJUjLQKCDbhKCQVIHW.cs
+2023-06-06 02:09:15.584 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BZfjDHYASdKbVKTOeigaYPBVf.cs
+2023-06-06 02:09:15.586 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FdccSJcWTSebijGjABdUMLEdR.cs
+2023-06-06 02:09:15.588 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EPQMNeOgChVRHOcBPRccPNZeF.cs
+2023-06-06 02:09:15.589 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GiWKJXbiXAiGGBDVZJdMTaVhK.cs
+2023-06-06 02:09:15.591 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-HBBaLFUhhUfQBEJKjEZegSRLi.cs
+2023-06-06 02:09:15.592 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CAbQjTVRCSKOYWiIhECGMcDPA.cs
+2023-06-06 02:09:15.595 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CYfZbbEjJgLODachBhLiZaXQE.cs
+2023-06-06 02:09:15.597 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-HLLRUdKceDPKeIXGFiiNKjMKI.cs
+2023-06-06 02:09:15.598 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EaBFagdYTZfYEiNNhIYITEIUR.cs
+2023-06-06 02:09:15.599 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EWMRhBHgcOUGZLgIBDbjPHISO.cs
+2023-06-06 02:09:15.600 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CNibCQZPIWCUUGeAXcXWGiTgj.cs
+2023-06-06 02:09:15.601 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DTeHhjMPXBSEFRBcdiBHhKQDA.cs
+2023-06-06 02:09:15.603 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-HGJgSEUEXcXLiIPXgcJWiVdUX.cs
+2023-06-06 02:09:15.604 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FcALBBGFXRhKjhIaDWMVWUhJg.cs
+2023-06-06 02:09:15.605 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BAGeQidBiLhNHVFiERZPAUdCY.cs
+2023-06-06 02:09:15.606 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DadNQNcGichTGjKhdjJicQeTP.cs
+2023-06-06 02:09:15.607 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BYGeMjQEUUIJcKZHQOCRZhZCU.cs
+2023-06-06 02:09:15.609 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FOLKddIQBPRMYYfjeMUjEIBhC.cs
+2023-06-06 02:09:15.610 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EUYHPiEZNTBOHPgZNKhGAORRb.cs
+2023-06-06 02:09:15.612 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DQefEeUREeePUGdeeZLYSgFcU.cs
+2023-06-06 02:09:15.612 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CIIbRNfJieBVcNIWHEUWMVhOB.cs
+2023-06-06 02:09:15.614 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-iUHcMLYFdMEcPJJeOVJdQjbI.cs
+2023-06-06 02:09:15.615 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FADJTWQjaQgiVVcFZjGXbPFbN.cs
+2023-06-06 02:09:15.617 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GjTATZbNccdVYWChGHHdRUXSM.cs
+2023-06-06 02:09:15.618 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GRhdjhBUGcJfFRBeODDiYLCdD.cs
+2023-06-06 02:09:15.619 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EbJRLQXEhRCeIIZLcXEYbTEDL.cs
+2023-06-06 02:09:15.621 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DXaYeZVOEAELKIhLMVHZBeASM.cs
+2023-06-06 02:09:15.622 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-ELXXNjRZXJcQDXjEEQXFeNQKZ.cs
+2023-06-06 02:09:15.624 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CAKcSTUVVXcPjYRXATiiRAEMg.cs
+2023-06-06 02:09:15.625 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CTafBejCOJKDPBQMRaUKGZGDD.cs
+2023-06-06 02:09:15.626 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FbAEUOYETObSHBafYbFNIeSNO.cs
+2023-06-06 02:09:15.628 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-ENRfaLDabXeaNdJYVdOfebBTR.cs
+2023-06-06 02:09:15.629 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EDASHZgEHSQJbecPJIZegfOIB.cs
+2023-06-06 02:09:15.631 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DgRFfDaEDhBINgYbMaeRWZWVT.cs
+2023-06-06 02:09:15.632 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DOALBUVOFWRHAUjdPUNBfNdUB.cs
+2023-06-06 02:09:15.634 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BOANHMYNiCIfFjRZRMEXCcXTO.cs
+2023-06-06 02:09:15.636 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-HQUdYchKGNXjEWMCbcWSEKdVI.cs
+2023-06-06 02:09:15.637 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BcRbRSiZXcAFIKNCdPcQULMGb.cs
+2023-06-06 02:09:15.639 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GIfhUVACThMQNGPGjYhYHEfGS.cs
+2023-06-06 02:09:15.640 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GMJgYefQcULgUcRJJAbTfRThR.cs
+2023-06-06 02:09:15.642 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DIQeTbDBBRFOAGiGbFgLLFZOe.cs
+2023-06-06 02:09:15.644 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FNLPNAPOaaMjChWUXdhfgcWIR.cs
+2023-06-06 02:09:15.645 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-QDOjYOQaAUWAWKDPBcQCSKDH.cs
+2023-06-06 02:09:15.647 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CEXhgaFKbhdeeAYTYBhHTGXUY.cs
+2023-06-06 02:09:15.649 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FPCXihcEeChSjIUJHVXRcEXMI.cs
+2023-06-06 02:09:15.650 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FbiEbRAPBSZAgWUQOLFeLJQTa.cs
+2023-06-06 02:09:15.651 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CZQfDISCFaOQaLKEbbAcDRfcP.cs
+2023-06-06 02:09:15.652 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DXgGhLJSUaCHQXWCIGhOfjCeA.cs
+2023-06-06 02:09:15.653 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-UKiMhSTCRNIPefSbODPWDGLQ.cs
+2023-06-06 02:09:15.655 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EHUBiUYZGHNGdhCYfLiYVfUdS.cs
+2023-06-06 02:09:15.656 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-FXGMiYhHaiIMEGdRUYMPEAHCR.cs
+2023-06-06 02:09:15.657 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CUJFCVgQUNRcdHdTeVDjJcYaZ.cs
+2023-06-06 02:09:15.658 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-HAejSJNFdWPBCHgSSZUeVRIHA.cs
+2023-06-06 02:09:15.660 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-DMLKdYCdQIGCNZIeiaWHeZXaD.cs
+2023-06-06 02:09:15.662 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-ECVjLWJcUFIRQXFBcGfYDAJeU.cs
+2023-06-06 02:09:15.663 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BiacLIDOWQWTUEhhUVDjWHeBU.cs
+2023-06-06 02:09:15.665 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EcPDQKeCFLjSYgUXJScRcgbKG.cs
+2023-06-06 02:09:15.666 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GXTFGWGiVAGFGKWKdcWVdAEBf.cs
+2023-06-06 02:09:15.667 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BhaRdDVNNUEZDBgSheMGTUMHO.cs
+2023-06-06 02:09:15.668 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GBYTHaefaUNajDZadEXbadOFW.cs
+2023-06-06 02:09:15.669 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CbDWBMGYObPdSJUZaIQTNfFXY.cs
+2023-06-06 02:09:15.670 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-BdbDhEjXOINLgCRGiAFGdHJIB.cs
+2023-06-06 02:09:15.673 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-CZdRYXLJAeJaPSIRaUHDXVHPV.cs
+2023-06-06 02:09:15.675 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GHYDcaRJOeEdWbTSSCjjBhBFW.cs
+2023-06-06 02:09:15.677 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-GDEcEaQjOFQDGfGXNEXUVihLK.cs
+2023-06-06 02:09:15.679 -04:00 [INF] Writing C:\Code\FirelyTeam\cql-sdk\Demo\Measures\Tuple-EEdUbUaNBDSUUQFEZDJDbZRcC.cs

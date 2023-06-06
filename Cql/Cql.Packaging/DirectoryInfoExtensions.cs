@@ -1,18 +1,18 @@
-﻿using Hl7.Cql.Firely;
+﻿using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Firely;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using Microsoft.Extensions.Logging;
 using System.Runtime.Loader;
-using System.Text;
-using System.Threading.Tasks;
+using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
 {
-    public static  class DirectoryInfoExtensions
+    public static class DirectoryInfoExtensions
     {
-        public static IDictionary<string, object?> Run(this DirectoryInfo dir, string lib, string version, CqlContext cqlContext)
+        public static IDictionary<string, object?> RunLibraryResource(this DirectoryInfo dir, string lib, string version, CqlContext cqlContext)
         {
             var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
             using var fs = libFile.OpenRead();
@@ -29,10 +29,48 @@ namespace Hl7.Cql.Packaging
                 tupleFs.ParseFhir<Binary>()
             };
             binaries.LoadAssembles(asmContext);
-
-
             var results = asmContext.Run(lib, version, cqlContext);
             return results;
+        }
+
+        public static AssemblyLoadContext LoadElm(this DirectoryInfo elmDirectory,
+            string lib,
+            string version,
+            ILogger<ExpressionBuilder>? builderLogger = null,
+            ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
+            LogLevel logLevel = LogLevel.Information)
+        {
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
+            if (!elmFile.Exists)
+                elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
+            if (!elmFile.Exists)
+                throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
+            var elmPackage = ElmPackage.LoadFrom(elmFile)
+                ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
+            var dependencies = ElmPackage
+                .GetIncludedLibraries(elmPackage, elmDirectory)
+                .Packages()
+                .ToArray();
+
+            var typeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
+            var typeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            var typeManager = new TypeManager(typeResolver);
+            var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
+            var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
+
+            var assemblyData = compiler.Compile(dependencies,
+                builderLogger,
+                codeWriterLogger,
+                logLevel);
+
+            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+            foreach (var kvp in assemblyData)
+            {
+                var assemblyBytes = kvp.Value.Binary;
+                using var ms = new MemoryStream(assemblyBytes);
+                asmContext.LoadFromStream(ms);
+            }
+            return asmContext;
         }
 
     }
