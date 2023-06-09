@@ -105,7 +105,7 @@ namespace Test
         {
             var bundle = new Bundle();
             var suckedIntoJetEngine = new Condition();
-            suckedIntoJetEngine.Onset = new FhirDateTime(2023, 6, 9);
+            suckedIntoJetEngine.Onset = new FhirDateTime(2022, 6, 9);
             suckedIntoJetEngine.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33");
             bundle.AddResourceEntry(suckedIntoJetEngine, "http://ncqa.org/fhir/test/devdays/condition-1");
 
@@ -118,7 +118,7 @@ namespace Test
             Assert.IsFalse(numerator);
 
             var subsequentEncounter = new Condition();
-            subsequentEncounter.Onset = new FhirDateTime(2023, 6, 10);
+            subsequentEncounter.Onset = new FhirDateTime(2022, 6, 10);
             subsequentEncounter.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33XD");
             bundle.AddResourceEntry(subsequentEncounter, "http://ncqa.org/fhir/test/devdays/condition-2");
 
