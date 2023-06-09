@@ -12,7 +12,7 @@ namespace Hl7.Cql.Packaging
 {
     public static class DirectoryInfoExtensions
     {
-        public static IDictionary<string, object?> RunLibraryResource(this DirectoryInfo dir, string lib, string version, CqlContext cqlContext)
+        public static AssemblyLoadContext LoadResources(this DirectoryInfo dir, string lib, string version)
         {
             var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
             using var fs = libFile.OpenRead();
@@ -29,8 +29,7 @@ namespace Hl7.Cql.Packaging
                 tupleFs.ParseFhir<Binary>()
             };
             binaries.LoadAssembles(asmContext);
-            var results = asmContext.Run(lib, version, cqlContext);
-            return results;
+            return asmContext;
         }
 
         public static AssemblyLoadContext LoadElm(this DirectoryInfo elmDirectory,

@@ -9,6 +9,8 @@ using Hl7.Fhir.Model;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Runtime;
 using System.Diagnostics;
+using Hl7.Cql.ValueSetLoaders;
+using Hl7.Cql.Elm.Expressions;
 
 namespace Test
 {
@@ -32,23 +34,27 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator()
         {
-            var bcs = new BCSEHEDISMY2022_1_0_0(FirelyCqlContext.Create());
+            var patientEverything = new Bundle();
+            var valueSets = new ValueSet[0].ToValueSetDictionary();
+            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
+            var bcs = new BCSEHEDISMY2022_1_0_0(cqlContext);
             var numerator = bcs.Numerator();
             Assert.IsFalse(numerator);
         }
 
         [TestMethod]
-        public void BCSEHEDIS2022_Numerator_Dynamic()
+        public void BCSEHEDIS2022_Numerator_FromResource()
         {
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
             var dir = new DirectoryInfo("Resources");
+            var asmContext = dir.LoadResources(lib, version);
 
-            var bundle = new Bundle();
-            var valueSets = new HashValueSetDictionary();
-            var cqlContext = FirelyCqlContext.Create(bundle, MY2023, valueSets);
-            var results = dir.RunLibraryResource(lib, version, cqlContext);
+            var patientEverything = new Bundle();
+            var valueSets = new ValueSet[0].ToValueSetDictionary();
+            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
 
+            var results = asmContext.Run(lib, version, cqlContext);
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
@@ -63,9 +69,9 @@ namespace Test
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
 
-            var bundle = new Bundle();
-            var valueSets = new HashValueSetDictionary();
-            var cqlContext = FirelyCqlContext.Create(bundle, MY2023, valueSets);
+            var patientEverything = new Bundle();
+            var valueSets = new ValueSet[0].ToValueSetDictionary();
+            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -91,6 +97,34 @@ namespace Test
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
 
+
+        }
+
+        [TestMethod]
+        public void DevDays()
+        {
+            var bundle = new Bundle();
+            var suckedIntoJetEngine = new Condition();
+            suckedIntoJetEngine.Onset = new FhirDateTime(2023, 6, 9);
+            suckedIntoJetEngine.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33");
+            bundle.AddResourceEntry(suckedIntoJetEngine, "http://ncqa.org/fhir/test/devdays/condition-1");
+
+            var rtx = FirelyCqlContext.Create(bundle, MY2023);
+            var measure = new DevDays_2023_0_0(rtx);
+            var ip = measure.Initial_population();
+            Assert.IsTrue(ip);
+
+            var numerator = measure.Numerator();
+            Assert.IsFalse(numerator);
+
+            var subsequentEncounter = new Condition();
+            subsequentEncounter.Onset = new FhirDateTime(2023, 6, 10);
+            subsequentEncounter.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33XD");
+            bundle.AddResourceEntry(subsequentEncounter, "http://ncqa.org/fhir/test/devdays/condition-2");
+
+            measure = new DevDays_2023_0_0(rtx);
+            numerator = measure.Numerator();
+            Assert.IsTrue(numerator);
 
         }
 
