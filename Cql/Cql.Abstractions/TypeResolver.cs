@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 
 namespace Hl7.Cql
@@ -107,6 +108,7 @@ namespace Hl7.Cql
         /// <param name="propertyName">The property name.</param>
         /// <returns>The .NET property for the path, or <see langword="null"/> if none exists.</returns>
         public abstract PropertyInfo? GetProperty(Type type, string propertyName);
+
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="type"/> implements the generic interface specified by <paramref name="genericInterfaceTypeDefinition"/>.
         /// </summary>
@@ -165,14 +167,8 @@ namespace Hl7.Cql
         /// <see cref="TypeResolver.ResolveType(string)"/> returns when passed "{http://hl7.org/fhir}"
         /// to avoid conflicts with <see cref="System.Range"/>.
         /// </remarks>
-        public virtual IEnumerable<(string alias, string type)> Aliases
-        {
-            get
-            {
-                var rangeType = ResolveType("{http://hl7.org/fhir}Range");
-                if (rangeType != null)
-                    yield return ("Range", rangeType.FullName);
-            }
-        }
+        public virtual IEnumerable<(string alias, string type)> Aliases =>
+            Enumerable.Empty<(string alias, string type)>();
+
     }
 }

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Hl7.Cql.Packaging</AssemblyName>
+		<RootNamespace>Hl7.Cql.Packaging</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj" />
+	  <ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
+	  <ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+	  <ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+	  <ProjectReference Include="..\Graph\Graph.csproj" />
+	</ItemGroup>
+
+</Project>

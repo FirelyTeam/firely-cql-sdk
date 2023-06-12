@@ -1,66 +1,150 @@
-﻿using Hl7.Fhir.Model;
-using Hl7.Cql.Model;
-using System.Reflection;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
-using Ratio = Hl7.Fhir.Model.Ratio;
+using System.Reflection;
 
-namespace Cql.Firely
+namespace Hl7.Cql.Firely
 {
-    public class FirelyTypeResolver : ModelTypeResolver
+
+    // TODO: for type mappings, we need to be sure we include this exception
+    /// <summary>
+    /// The list of elements that would normally be represented using a CodeOfT enum, but that we
+    /// want to be generated as a normal Code instead.
+    /// </summary>
+    //private readonly List<string> _codedElementOverrides = new()
+    //        {
+    //            "CapabilityStatement.rest.resource.type"
+    //        };
+
+
+    public class FirelyTypeResolver : BaseTypeResolver
     {
-        public override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
-
-        public override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
-
-        public FirelyTypeResolver(Hl7.Cql.Model.ModelInfo model) : base(model)
+        public FirelyTypeResolver(ModelInspector inspector)
         {
-            var x = typeof(Ratio).Assembly;
-            AddTypes(typeof(Resource).Assembly);
-            AddTypes(typeof(DataType).Assembly);
+            Inspector = inspector;
 
+            addTypesFromInspector();
+            // Fix lack of inheritance in the SDK
+            adjust();
         }
 
-        public override PropertyInfo? GetProperty(Type type, string propertyName)
-        {
-            return base.GetProperty(type, propertyName);
-        }
+        public override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
+        public override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
 
-        private void AddTypes(Assembly assembly)
+        public override IEnumerable<(string alias, string type)> Aliases => base.Aliases
+            .Concat(new[] 
+            { 
+                ("Range", typeof(Hl7.Fhir.Model.Range).FullName!),
+                ("Task", typeof(Hl7.Fhir.Model.Task).FullName!),
+            });
+
+        /// <summary>
+        /// Returns the concrete property for the given property name.
+        /// </summary>
+        /// <returns>The property, or <c>null</c> if the type or property is unknown.</returns>
+        protected override PropertyInfo? GetPropertyCore(Type type, string propertyName)
         {
-            foreach(var type in assembly.GetTypes())
+            PropertyInfo? result = null;
+            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
             {
-                Add(type);
+                result = ReflectionHelper.FindProperty(type, "Value");
             }
+            else
+            {
+                var cm = Inspector.FindClassMapping(type);
+                if (cm != null)
+                {
+                    if (propertyName == "value" && cm.PrimitiveValueProperty is { } valueProp)
+                    {
+                        result = valueProp.NativeProperty;
+                    }
+                    else
+                    {
+                        result = cm.FindMappedElementByName(propertyName)?.NativeProperty;
+                    }
+                }
+                else
+                {
+                    var @base = base.GetPropertyCore(type, propertyName);
+                    result = @base;
+                }
+            }
+            if (result == null)
+            {
+            }
+            return result;
+        }
+
+        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
+        {
+            var type = ResolveType(typeSpecifier);
+            if (type is null) return null;
+
+            var mapping = Inspector.FindClassMapping(type);
+
+            return mapping
+                ?.PrimaryCodePath
+                ?.NativeProperty;
+        }
+
+        public override Type? PatientType => Inspector.PatientMapping?.NativeType;
+
+        public override PropertyInfo? PatientBirthDateProperty =>
+            Inspector.PatientMapping
+                    ?.PatientBirthDateMapping
+                    ?.NativeProperty;
+
+        public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
+        {
+            if (genericInterfaceTypeDefinition == typeof(IEnumerable<>)
+                && type.GetCustomAttribute<FhirTypeAttribute>() != null)
+                return false;
+            return base.ImplementsGenericInterface(type, genericInterfaceTypeDefinition);
+        }
+
+        public ModelInspector Inspector { get; }
+
+        internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
+
+        private void adjust()
+        {
+            Types["{http://hl7.org/fhir}positiveInt"] = typeof(Hl7.Fhir.Model.Integer);
+            Types["{http://hl7.org/fhir}unsignedInt"] = typeof(Hl7.Fhir.Model.Integer);
+
             Types["{http://hl7.org/fhir}SimpleQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
         }
 
-        private void Add(Type type)
+        private void addTypesFromInspector()
         {
-            var fhirType = type.GetCustomAttribute<FhirTypeAttribute>();
-            var fhirEnum = type.GetCustomAttribute<FhirEnumerationAttribute>();
+            var classes = Inspector.ClassMappings.Where(cm => cm.CqlTypeSpecifier is not null).Select(cm => (cm.CqlTypeSpecifier!, cm.NativeType));
+            //var enums = Inspector.EnumMappings.Select(em => (em.CqlTypeSpecifier, em.NativeType));
+            var nested = Inspector.BackboneClassMappings.Where(cm => cm.CqlTypeSpecifier is not null).Select(cm => (cm.CqlTypeSpecifier!, cm.NativeType));
+            var all = classes.Concat(nested);
 
-            if (fhirType != null)
+            // Ignore the valuesets, we have to resolve via bindings for now.
+            foreach (var (name, type) in classes)
             {
-                // http://hl7.org/fhir/StructureDefinition/ is 40 chars long
-                var canonical = fhirType.Canonical;
-                if (!string.IsNullOrWhiteSpace(canonical))
-                {
-                    var id = canonical.Substring(40);
-                    var typeId = $"{{{Model.url}}}{id}";
-                    Types.TryAdd(typeId, type);
-                }
-            }
-            else if (fhirEnum != null)
-            {
-                var enumId = $"{{{Model.url}}}{fhirEnum.BindingName}";
-                Types.TryAdd(enumId, type);
+                Types.TryAdd(name, type);
+                TypeSpecifiers.TryAdd(type, name);
             }
 
-            foreach (var nestedType in type.GetNestedTypes())
+            var bindings = from cm in Inspector.ClassMappings.Concat(Inspector.BackboneClassMappings)
+                           from pm in cm.PropertyMappings
+                           orderby pm.BindingName
+                           where pm.BindingName is not null
+                           group pm by pm.BindingName into pmg
+                           select new { Name = pmg.Key, Type = pmg.First().ImplementingType };
+
+            foreach (var binding in bindings)
             {
-                Add(nestedType);
+                var bindingName = "{http://hl7.org/fhir}" +
+                    binding.Name.Replace("-", "_");
+
+                Types.TryAdd(bindingName, binding.Type);
+                TypeSpecifiers.TryAdd(binding.Type, bindingName);
+
             }
         }
     }

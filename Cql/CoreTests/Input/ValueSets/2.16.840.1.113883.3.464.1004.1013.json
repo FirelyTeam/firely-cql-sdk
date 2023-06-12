@@ -10,6 +10,7 @@
   "status": "active",
   "expansion": {
     "identifier": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013#all",
+    "timestamp": "2023-06-03T13:56:07Z",
     "parameter": [
       {
         "valueDateTime": "2022-12-20T18:21:16.451Z",
@@ -2824,6 +2825,6 @@
       }
     ]
   },
-  "id": "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013",
+  "id": "2.16.840.1.113883.3.464.1004.1013",
   "resourceType": "ValueSet"
 }

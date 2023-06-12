@@ -1,11 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hl7.Cql.ValueSetLoaders;
-
-using Hl7.Cql.Poco.Fhir.R4;
 using System;
 using System.IO;
 using System.Linq;
-using Hl7.Cql.Poco.Fhir.R4.Model;
+using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
+using Hl7.Cql.Firely;
 
 namespace CoreTests
 {
@@ -24,11 +24,11 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = FhirJson.Deserialize<ValueSet>(fs);
+                var vs = fs.ParseFhir<ValueSet>();
                 return vs;
             }).ToArray();
 
-            var loader = new FhirR4ValueSetLoader(valueSets);
+            var loader = new ValueSetLoader(valueSets, false);
             var vsd = loader.Load();
 
             Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
@@ -52,11 +52,11 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = FhirJson.Deserialize<ValueSet>(fs);
+                var vs = fs.ParseFhir<ValueSet>();
                 return vs;
             }).ToArray();
 
-            var loader = new FhirR4ValueSetLoader(valueSets);
+            var loader = new ValueSetLoader(valueSets, false);
             var vsd = loader.Load();
 
             Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
@@ -83,11 +83,11 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = FhirJson.Deserialize<ValueSet>(fs);
+                var vs = fs.ParseFhir<ValueSet>();
                 return vs;
             }).ToArray();
 
-            var loader = new FhirR4ValueSetLoader(valueSets);
+            var loader = new ValueSetLoader(valueSets, false);
 
             Assert.ThrowsException<InvalidOperationException>(() => loader.Load());
         }

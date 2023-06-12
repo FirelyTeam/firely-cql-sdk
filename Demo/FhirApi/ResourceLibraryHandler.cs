@@ -1,7 +1,6 @@
-﻿using Hl7.Cql.Poco.Fhir.R4;
-using Hl7.Cql.Poco.Fhir.R4.Model;
+﻿using Hl7.Cql.Firely;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime.FhirR4;
+using Hl7.Fhir.Model;
 using System.Text;
 
 namespace FhirApi
@@ -24,12 +23,12 @@ namespace FhirApi
 
             Stream? dataStream = null;
             var subject = @in.Named("subject");
-            if (subject != null && subject.value is IdElement id)
+            if (subject != null && subject.Value is Id id)
             {
                 dataStream = typeof(SimpleLibraryHandler)
                     .Assembly
-                    .GetManifestResourceStream(id.value)
-                    ?? throw new InvalidOperationException($"Subject {id.value} not found");
+                    .GetManifestResourceStream(id.Value)
+                    ?? throw new InvalidOperationException($"Subject {id.Value} not found");
             }
             /// TODO: support data parameter if subject not specified
             if (dataStream == null)
@@ -39,37 +38,39 @@ namespace FhirApi
 
             var @out = new Parameters
             {
-                parameter = new List<Parameters.ParameterComponent>()
+                Parameter = new List<Parameters.ParameterComponent>()
             };
-            var bundle = FhirJson.Deserialize<Bundle>(dataStream);
+
+            var bundle = dataStream.ParseFhir<Bundle>();
             var valueSets = ValueSetProvider.ValueSets;
-            var context = FhirCqlContext.Create(bundle,
+            var context = FirelyCqlContext.Create(bundle,
                 MY2023,
                 valueSets,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));
 
             var library = @in.Named("library");
             if (library != null
-                && library.value is IdElement libraryId
-                && !string.IsNullOrWhiteSpace(libraryId.value))
+                && library.Value is Id libraryId
+                && !string.IsNullOrWhiteSpace(libraryId.Value))
             {
+
             }
 
-            var json = FhirJson.SerializeToString(@out);
+            var json = @out.ToJson();
             return Results
                .Content(json, "application/fhir+json", Encoding.UTF8);
         }
         private IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
             {
-                        {
-                            "Measurement Period",
-                            new CqlInterval<CqlDateTime>(
-                                new CqlDateTime(2023, 1, 1, 0, 0, 0, 0, 0, 0),
-                                new CqlDateTime(2023, 12, 31, 0, 0, 0, 0, 0, 0),
-                                true,
-                                true)
-                        }
+                {
+                    "Measurement Period",
+                    new CqlInterval<CqlDateTime>(
+                        new CqlDateTime(2023, 1, 1, 0, 0, 0, 0, 0, 0),
+                        new CqlDateTime(2023, 12, 31, 0, 0, 0, 0, 0, 0),
+                        true,
+                        true)
+                }
             };
 
     }

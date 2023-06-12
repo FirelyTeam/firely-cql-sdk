@@ -1,11 +1,11 @@
-﻿using Hl7.Cql.Model;
-using Hl7.Cql.Runtime.FhirR4;
+﻿using Hl7.Cql;
+using Hl7.Cql.Firely;
+using Hl7.Cql.Model;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoreTests
 {
@@ -13,22 +13,28 @@ namespace CoreTests
     public class TypeResolverTest
     {
         [TestMethod]
-        public void Resolve_Types()
+        [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
+        public void Resolve_Types(TypeResolver typeResolver)
         {
-            var typeResolver = FhirTypeResolver.Default;
             var model = Models.Fhir401;
-            foreach (var typeInfo in model.typeInfo.OfType<ClassInfo>())
+            foreach (var classInfo in model.typeInfo.OfType<ClassInfo>())
             {
-                var elmId = $"{{{model.url}}}{typeInfo.name}";
+                var elmId = $"{{{model.url}}}{classInfo.name}";
+                var type = typeResolver.ResolveType(elmId);
+                Assert.IsNotNull(type);
+            }
+            foreach(var simpleTypeInfo in model.typeInfo.OfType<SimpleTypeInfo>())
+            {
+                var elmId = $"{{{model.url}}}{simpleTypeInfo.name}";
                 var type = typeResolver.ResolveType(elmId);
                 Assert.IsNotNull(type);
             }
         }
 
         [TestMethod]
-        public void Resolve_Properties()
+        [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
+        public void Resolve_Properties(TypeResolver typeResolver)
         {
-            var typeResolver = FhirTypeResolver.Default;
             var model = Models.Fhir401;
             foreach (var typeInfo in model.typeInfo.OfType<ClassInfo>())
             {
@@ -37,10 +43,14 @@ namespace CoreTests
                 foreach (var element in typeInfo.element ?? Enumerable.Empty<ClassInfoElement>())
                 {
                     var property = typeResolver.GetProperty(type, element.name);
-                    Assert.IsNotNull(property);
+                    Assert.IsNotNull(property, $"Missing property {element.name} in {typeInfo.name}.");
                 }
             }
         }
 
+        public static IEnumerable<object[]> GetData()
+        {
+            yield return new object[] { new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector) };
+        }
     }
 }

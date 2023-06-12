@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Poco.Fhir.R4.Model;
+﻿
+using Hl7.Fhir.Model;
 
 namespace FhirApi
 {

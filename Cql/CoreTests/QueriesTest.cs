@@ -1,29 +1,33 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Hl7.Cql;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Runtime.FhirR4;
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Firely;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Poco.Fhir.R4;
-using Hl7.Cql.Primitives;
-
-using Hl7.Cql.ValueSets;
-using Hl7.Cql.Poco.Fhir.R4.Model;
 
 namespace CoreTests
 {
     [TestClass]
     public class QueriesTest
     {
+        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
+        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            var binding = new CqlOperatorsBinding(FhirTypeResolver.Default, FhirTypeConverter.Default);
-            var typeManager = new TypeManager(FhirTypeResolver.Default);
+            var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
+            var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\QueriesTest-1.0.0.json");
             var elmPackage = ElmPackage.LoadFrom(elm);
             var logger = LoggerFactory
@@ -63,7 +67,7 @@ namespace CoreTests
 
         };
 
-        private CqlContext Context(Bundle bundle) => FhirCqlContext.Create(
+        private CqlContext Context(Bundle bundle) => FirelyCqlContext.Create(
             bundle: bundle,
             valueSets: ValueSets,
             delegates: QueriesDefinitions);
@@ -78,33 +82,22 @@ namespace CoreTests
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Simple retrieve", ctx);
             Assert.AreEqual(0, result.Count());
 
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Simple retrieve", ctx);
             Assert.AreEqual(1, result.Count());
 
-            bundle = new Bundle()
+            bundle = new Bundle();
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Simple retrieve", ctx);
@@ -120,64 +113,52 @@ namespace CoreTests
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with ValueSet", ctx);
             Assert.AreEqual(0, result.Count());
 
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with ValueSet", ctx);
             Assert.AreEqual(0, result.Count());
 
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
+                Resource = new Observation()
                 {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
-                {
-                    id = "obs1",
-                    code = new CodeableConcept
+                    Id = "obs1",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                        Coding = new List<Coding>
                         {
-                            new Coding { code = "code", system = "system" }
+                            new Coding { Code = "code", System = "system" }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs2",
-                    code = new CodeableConcept
+                    Id = "obs2",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "bad code", system = "system" }
+                            new Coding { Code = "bad code", System = "system" }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs3",
-                    code = new CodeableConcept
+                    Id = "obs3",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "code", system = "bad system" }
+                            new Coding { Code = "code", System = "bad system" }
                         }
                     }
                 }
@@ -187,7 +168,7 @@ namespace CoreTests
                 .ToArray();
 
             Assert.AreEqual(1, resultArray.Length);
-            Assert.AreEqual("obs1", resultArray[0].id.value);
+            Assert.AreEqual("obs1", resultArray[0].Id);
 
         }
 
@@ -200,33 +181,22 @@ namespace CoreTests
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
             Assert.AreEqual(0, result.Count());
 
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
             Assert.AreEqual(1, result.Count());
 
-            bundle = new Bundle()
+            bundle = new Bundle();
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
@@ -241,65 +211,51 @@ namespace CoreTests
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes", ctx);
             Assert.AreEqual(0, result.Count());
-
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes", ctx);
             Assert.AreEqual(0, result.Count());
-
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
+                Resource = new Observation()
                 {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
-                {
-                    id = "obs1",
-                    code = new CodeableConcept
+                    Id = "obs1",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "1", system = TestCodeSystem }
+                            new Coding { Code = "1", System = TestCodeSystem }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs2",
-                    code = new CodeableConcept
+                    Id = "obs2",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "bad code", system = "system" }
+                            new Coding { Code = "bad code", System = "system" }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs3",
-                    code = new CodeableConcept
+                    Id = "obs3",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "code", system = "bad system" }
+                            new Coding { Code = "code", System = "bad system" }
                         }
                     }
                 }
@@ -309,7 +265,7 @@ namespace CoreTests
                 .ToArray();
 
             Assert.AreEqual(1, resultArray.Length);
-            Assert.AreEqual("obs1", resultArray[0].id.value);
+            Assert.AreEqual("obs1", resultArray[0].Id);
         }
 
         [TestMethod]
@@ -320,65 +276,52 @@ namespace CoreTests
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
-
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
 
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
+                Resource = new Observation()
                 {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
-                {
-                    id = "obs1",
-                    code = new CodeableConcept
+                    Id = "obs1",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "1", system = TestCodeSystem }
+                            new Coding { Code = "1", System = TestCodeSystem }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs2",
-                    code = new CodeableConcept
+                    Id = "obs2",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "bad code", system = "system" }
+                            new Coding { Code = "bad code", System = "system" }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs3",
-                    code = new CodeableConcept
+                    Id = "obs3",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "code", system = "bad system" }
+                            new Coding { Code = "code", System = "bad system" }
                         }
                     }
                 }
@@ -388,7 +331,7 @@ namespace CoreTests
                 .ToArray();
 
             Assert.AreEqual(1, resultArray.Length);
-            Assert.AreEqual("obs1", resultArray[0].id.value);
+            Assert.AreEqual("obs1", resultArray[0].Id);
         }
 
         [TestMethod]
@@ -399,65 +342,52 @@ namespace CoreTests
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
-
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
-                {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
+                Resource = new Observation()
             });
             ctx = Context(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
 
-            bundle = new Bundle()
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                entry = new R4EntryCollection()
+                Resource = new Observation()
                 {
-                }
-            };
-            bundle.entry.Add(new Bundle.EntryComponent
-            {
-                resource = new Observation()
-                {
-                    id = "obs1",
-                    code = new CodeableConcept
+                    Id = "obs1",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "1", system = TestCodeSystem }
+                            new Coding { Code = "1", System = TestCodeSystem }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs2",
-                    code = new CodeableConcept
+                    Id = "obs2",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "bad code", system = "system" }
+                            new Coding { Code = "bad code", System = "system" }
                         }
                     }
                 }
             });
-            bundle.entry.Add(new Bundle.EntryComponent
+            bundle.Entry.Add(new Bundle.EntryComponent
             {
-                resource = new Observation()
+                Resource = new Observation()
                 {
-                    id = "obs3",
-                    code = new CodeableConcept
+                    Id = "obs3",
+                    Code = new CodeableConcept
                     {
-                        coding = new[]
+                      Coding = new List<Coding>
                         {
-                            new Coding { code = "code", system = "bad system" }
+                            new Coding { Code = "code", System = "bad system" }
                         }
                     }
                 }
@@ -467,7 +397,7 @@ namespace CoreTests
                 .ToArray();
 
             Assert.AreEqual(1, resultArray.Length);
-            Assert.AreEqual("obs1", resultArray[0].id.value);
+            Assert.AreEqual("obs1", resultArray[0].Id);
         }
 
         [TestMethod]

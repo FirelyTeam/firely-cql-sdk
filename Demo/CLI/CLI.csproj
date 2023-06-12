@@ -96,8 +96,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\Cql\Cql.Runtime.FhirR4\Cql.Runtime.FhirR4.csproj" />
-		<ProjectReference Include="..\..\Cql\ValueSetLoaders\ValueSetLoaders.csproj" />
+		<ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Measures\Measures.csproj" />
 	</ItemGroup>
 
