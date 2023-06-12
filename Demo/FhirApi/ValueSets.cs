@@ -1,7 +1,7 @@
-﻿using Hl7.Cql.Poco.Fhir.R4.Model;
-using Hl7.Cql.Poco.Fhir.R4;
+﻿using Hl7.Cql.Firely;
 using Hl7.Cql.ValueSetLoaders;
 using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Model;
 
 namespace FhirApi
 {
@@ -17,13 +17,12 @@ namespace FhirApi
             {
                 if (name.StartsWith("FhirApi.ValueSets."))
                 {
-                    var stream = asm.GetManifestResourceStream(name);
-                    var valueSet = FhirJson.Deserialize<ValueSet>(stream);
+                    var stream = asm.GetManifestResourceStream(name)!;
+                    var valueSet = stream.ParseFhir<ValueSet>();
                     valueSets.Add(valueSet);
                 }
             }
-            var loader = new FhirR4ValueSetLoader(valueSets, false);
-            var dictionary = loader.Load();
+            var dictionary = valueSets.ToValueSetDictionary(false);
             return dictionary;
         });
     }

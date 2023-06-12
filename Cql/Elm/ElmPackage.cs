@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.Elm.Expressions;
 using Hl7.Cql.Graph;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -320,5 +321,20 @@ namespace Hl7.Cql.Elm
 
 
 
+    }
+    public static class DirectedGraphExtensions
+    {
+        public static IEnumerable<ElmPackage> Packages(this DirectedGraph graph)
+        {
+            foreach (var node in graph.Nodes)
+            {
+                if (node.Value.Properties != null
+                    && node.Value.Properties.TryGetValue(ElmPackage.PackageNodeProperty, out object? packageObject)
+                    && packageObject is ElmPackage package)
+                {
+                    yield return package;
+                }
+            }
+        }
     }
 }

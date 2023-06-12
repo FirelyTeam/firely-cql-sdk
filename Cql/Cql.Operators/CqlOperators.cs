@@ -35,15 +35,13 @@ namespace Hl7.Cql.Runtime
             IUnitConverter? unitConverter = null,
             DateTimeIso8601? now = null)
         {
-            var comparers = new CqlComparers();
             var operators = new CqlOperators(resolver,
                 converter ?? TypeConverter.Create(),
                 dataRetriever ?? new CompositeDataRetriever(),
-                comparer ?? comparers,
+                comparer ?? new CqlComparers(),
                 valueSets ?? new HashValueSetDictionary(),
                 unitConverter ?? new UnitConverter(),
                 now ?? DateTimeIso8601.UtcNow);
-            comparers.AddIntervalComparisons(operators);
             return operators;
         }
 

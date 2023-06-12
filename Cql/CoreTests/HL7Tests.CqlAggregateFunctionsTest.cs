@@ -19,7 +19,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AllTrueAllTrue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -33,7 +33,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AllTrueTrueFirst"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -47,7 +47,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AllTrueFalseFirst"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -61,7 +61,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AllTrueAllTrueFalseTrue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -75,7 +75,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AllTrueAllFalseTrueFalse"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -89,7 +89,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AllTrueNullFirst"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -103,7 +103,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AllTrueEmptyList"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -117,7 +117,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueAllTrue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -131,7 +131,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueAllFalse"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -145,7 +145,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueAllTrueFalseTrue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -159,7 +159,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueAllFalseTrueFalse"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -173,7 +173,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueTrueFirst"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -187,7 +187,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueFalseFirst"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -201,7 +201,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueNullFirstThenTrue"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -215,7 +215,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueNullFirstThenFalse"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -229,7 +229,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AnyTrueEmptyList"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -243,7 +243,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "AvgTest1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -257,7 +257,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "CountTest1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -271,7 +271,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "CountTestDateTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -285,7 +285,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "CountTestTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -299,7 +299,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "CountTestNull"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -313,7 +313,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MaxTestInteger"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -327,7 +327,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MaxTestString"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -341,7 +341,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MaxTestDateTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -355,7 +355,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MaxTestTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -369,7 +369,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MedianTestDecimal"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -383,7 +383,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MinTestInteger"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -397,7 +397,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MinTestString"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -411,7 +411,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MinTestDateTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -425,7 +425,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "MinTestTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -439,7 +439,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "ModeTestInteger"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -453,7 +453,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "ModeTestDateTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -467,7 +467,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "ModeTestTime"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -481,7 +481,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "PopStdDevTest1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -495,7 +495,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "PopVarianceTest1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -509,7 +509,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "StdDevTest1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -523,7 +523,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "SumTest1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -537,7 +537,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "SumTestNull"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         
@@ -551,7 +551,7 @@ namespace CoreTests
         {
             var lambda = LambdasByTestName["CqlAggregateFunctionsTest", "VarianceTest1"];
             var function = (Func<CqlContext, bool?>)lambda.Compile();
-            bool? result = function(RuntimeContext);
+            bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
                                         

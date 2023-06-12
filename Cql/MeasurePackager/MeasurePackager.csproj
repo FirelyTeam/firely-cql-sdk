@@ -26,7 +26,6 @@
 	  <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 	  <ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
 	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-	  <ProjectReference Include="..\Cql.Runtime.FhirR4\Cql.Runtime.FhirR4.csproj" />
 	  <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 	  <ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 	  <ProjectReference Include="..\Cql\Cql.csproj" />

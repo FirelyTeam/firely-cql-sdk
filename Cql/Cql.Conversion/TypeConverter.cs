@@ -1,5 +1,5 @@
-﻿using Hl7.Cql.Primitives;
-using Hl7.Cql.Iso8601;
+﻿using Hl7.Cql.Iso8601;
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 
@@ -10,9 +10,8 @@ namespace Hl7.Cql.Conversion
     /// </summary>
     public class TypeConverter
     {
-        private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> Converters 
+        private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> Converters
             = new();
-
         /// <summary>
         /// Creates a default instance that provides some default conversions.
         /// </summary>
@@ -63,7 +62,7 @@ namespace Hl7.Cql.Conversion
         /// <param name="to">The desired type.</param>
         /// <param name="conversion">The function which implements the conversion.</param>
         /// <exception cref="ArgumentException">If this conversion is already defined.</exception>
-        public void AddConversion(Type from, Type to, Func<object,object> conversion)
+        public void AddConversion(Type from, Type to, Func<object, object> conversion)
         {
             if (!Converters.TryGetValue(from, out var toDictionary))
             {
@@ -102,7 +101,7 @@ namespace Hl7.Cql.Conversion
         /// <returns>The result of the conversion.</returns>
         public T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
 
-        protected object? ConvertHelper(object? from, Type to)
+        public object? ConvertHelper(object? from, Type to)
         {
             if (from == null)
                 return null;
@@ -126,5 +125,7 @@ namespace Hl7.Cql.Conversion
                     return true;
             return false;
         }
+
+
     }
 }
