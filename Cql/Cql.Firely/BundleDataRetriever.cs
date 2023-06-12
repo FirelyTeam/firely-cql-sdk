@@ -3,18 +3,13 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Firely
 {
     public class BundleDataRetriever : IDataRetriever
     {
-        public BundleDataRetriever(Bundle bundle, 
+        public BundleDataRetriever(Bundle bundle,
             IValueSetDictionary valueSets,
             FirelyTypeResolver typeResolver,
             ICqlComparer? codeComparer = null, ICqlComparer? systemComparer = null)
@@ -172,7 +167,7 @@ namespace Hl7.Cql.Firely
                     else switch (t)
                         {
                             case IEnumerable<Coding> codings:
-                                return (property.GetValue(t) as IEnumerable<Coding>) ?? Enumerable.Empty<Coding>();
+                                return codings ?? Enumerable.Empty<Coding>();
                             case Coding coding:
                                 return new[] { coding };
                             case Code codeElement:

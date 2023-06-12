@@ -108,9 +108,6 @@ namespace Hl7.Cql.Runtime
         /// <<inheritdoc/>>
         public override Type? ResolveType(string typeSpecifier)
         {
-            if (typeSpecifier == "{http://hl7.org/fhir}positiveInt")
-            {
-            }
             if (Types.TryGetValue(typeSpecifier, out var type))
                 return type;
             else throw new ArgumentException($"Type {typeSpecifier} is not bound", nameof(typeSpecifier));
