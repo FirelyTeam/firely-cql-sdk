@@ -6,18 +6,6 @@ using System.Reflection;
 
 namespace Hl7.Cql.Firely
 {
-
-    // TODO: for type mappings, we need to be sure we include this exception
-    /// <summary>
-    /// The list of elements that would normally be represented using a CodeOfT enum, but that we
-    /// want to be generated as a normal Code instead.
-    /// </summary>
-    //private readonly List<string> _codedElementOverrides = new()
-    //        {
-    //            "CapabilityStatement.rest.resource.type"
-    //        };
-
-
     public class FirelyTypeResolver : BaseTypeResolver
     {
         public FirelyTypeResolver(ModelInspector inspector)
@@ -33,8 +21,8 @@ namespace Hl7.Cql.Firely
         public override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
 
         public override IEnumerable<(string alias, string type)> Aliases => base.Aliases
-            .Concat(new[] 
-            { 
+            .Concat(new[]
+            {
                 ("Range", typeof(Hl7.Fhir.Model.Range).FullName!),
                 ("Task", typeof(Hl7.Fhir.Model.Task).FullName!),
             });
@@ -90,10 +78,7 @@ namespace Hl7.Cql.Firely
 
         public override Type? PatientType => Inspector.PatientMapping?.NativeType;
 
-        public override PropertyInfo? PatientBirthDateProperty =>
-            Inspector.PatientMapping
-                    ?.PatientBirthDateMapping
-                    ?.NativeProperty;
+        public override PropertyInfo? PatientBirthDateProperty => typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
 
         public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
         {
@@ -118,10 +103,17 @@ namespace Hl7.Cql.Firely
 
         private void addTypesFromInspector()
         {
-            var classes = Inspector.ClassMappings.Where(cm => cm.CqlTypeSpecifier is not null).Select(cm => (cm.CqlTypeSpecifier!, cm.NativeType));
-            //var enums = Inspector.EnumMappings.Select(em => (em.CqlTypeSpecifier, em.NativeType));
-            var nested = Inspector.BackboneClassMappings.Where(cm => cm.CqlTypeSpecifier is not null).Select(cm => (cm.CqlTypeSpecifier!, cm.NativeType));
-            var all = classes.Concat(nested);
+            var classes = Inspector.ClassMappings.Select(cm => (getTypeSpecFromMapping(cm), cm.NativeType));
+
+            static string getTypeSpecFromMapping(ClassMapping cm)
+            {
+                string fhirPrefix = "{http://hl7.org/fhir}";
+                return cm.IsBackboneType switch
+                {
+                    false => fhirPrefix + cm.Name,
+                    true => fhirPrefix + cm.DefinitionPath
+                };
+            }
 
             // Ignore the valuesets, we have to resolve via bindings for now.
             foreach (var (name, type) in classes)
@@ -130,7 +122,7 @@ namespace Hl7.Cql.Firely
                 TypeSpecifiers.TryAdd(type, name);
             }
 
-            var bindings = from cm in Inspector.ClassMappings.Concat(Inspector.BackboneClassMappings)
+            var bindings = from cm in Inspector.ClassMappings
                            from pm in cm.PropertyMappings
                            orderby pm.BindingName
                            where pm.BindingName is not null
