@@ -1,14 +1,22 @@
-﻿namespace Hl7.Cql.Elm.Expressions
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql.Elm.Expressions
 {
-    public abstract class UnaryExpression: Expression
+    public abstract class UnaryExpression : Expression
     {
         public Expression? operand { get; set; }
     }
 
     public class AbsExpression : UnaryExpression { }
-    
-    public class CalculateAgeExpression: UnaryExpression 
-    { 
+
+    public class CalculateAgeExpression : UnaryExpression
+    {
         public string? precision { get; set; }
     }
     public class CeilingExpression : UnaryExpression { }
@@ -19,7 +27,7 @@
     public class DistinctExpression : UnaryExpression { }
     public class EndExpression : UnaryExpression { }
     public class ExistsExpression : UnaryExpression { }
-    public class ExpandValueSetExpression: UnaryExpression { }
+    public class ExpandValueSetExpression : UnaryExpression { }
     public class ExpExpression : UnaryExpression { }
 
     public class FlattenExpression : UnaryExpression { }
@@ -44,7 +52,7 @@
     public class StartExpression : UnaryExpression { }
     public class SingletonFromExpression : UnaryExpression { }
     public class SuccessorExpression : UnaryExpression { }
-    public class TimezoneOffsetFromExpression: UnaryExpression { }
+    public class TimezoneOffsetFromExpression : UnaryExpression { }
     public class ToBooleanExpression : UnaryExpression { }
     public class ToConceptExpression : UnaryExpression { }
     public class ToDecimalExpression : UnaryExpression { }

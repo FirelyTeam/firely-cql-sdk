@@ -1,7 +1,14 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
-
 
 namespace Hl7.Cql.Conversion
 {
@@ -10,7 +17,7 @@ namespace Hl7.Cql.Conversion
     /// </summary>
     public class UnitConverter : IUnitConverter
     {
-        private object SyncRoot = new();
+        private readonly object SyncRoot = new();
         private IDictionary<string, IDictionary<string, Func<decimal, decimal>>> Conversions { get; } = new Dictionary<string, IDictionary<string, Func<decimal, decimal>>>();
         private decimal Self(decimal d) => d;
 

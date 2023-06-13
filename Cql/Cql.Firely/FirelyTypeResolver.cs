@@ -1,3 +1,11 @@
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
@@ -33,8 +41,8 @@ namespace Hl7.Cql.Firely
         public override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
 
         public override IEnumerable<(string alias, string type)> Aliases => base.Aliases
-            .Concat(new[] 
-            { 
+            .Concat(new[]
+            {
                 ("Range", typeof(Hl7.Fhir.Model.Range).FullName!),
                 ("Task", typeof(Hl7.Fhir.Model.Task).FullName!),
             });

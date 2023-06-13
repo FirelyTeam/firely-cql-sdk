@@ -1,9 +1,13 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Diagnostics;
 using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.ValueSetLoaders
@@ -106,7 +110,7 @@ namespace Hl7.Cql.ValueSetLoaders
                             if (soFar.Contains(includedValueSetUri))
                             {
                                 var cycle = string.Join(" => ", soFar);
-                                    throw new InvalidOperationException($"Value set {vs.Id} has a cyclical reference in its composition: {cycle}");
+                                throw new InvalidOperationException($"Value set {vs.Id} has a cyclical reference in its composition: {cycle}");
                             }
                             if (!dictionary.TryGetCodesInValueSet(includedValueSetUri, out var cvsCodes))
                             {

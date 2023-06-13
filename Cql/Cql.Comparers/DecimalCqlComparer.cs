@@ -1,4 +1,11 @@
-﻿
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
 using System;
 using System.Collections.Generic;
 
@@ -7,7 +14,7 @@ namespace Hl7.Cql.Comparers
     public class DecimalCqlComparer : ICqlComparer, ICqlComparer<decimal?>
     {
         // CQL only supports 8 digits of scale.
-        const int MaxDecimalDigits = 8;
+        private const int MaxDecimalDigits = 8;
 
         public int? Compare(object x, object y, string? precision = null) =>
             Compare(x as decimal?, y as decimal?, precision);

@@ -1,9 +1,17 @@
-﻿namespace Hl7.Cql
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql
 {
     /// <summary>
     /// Defines a method that a type implements to compare two objects.
     /// </summary>
-    public interface ICqlComparer: IEquivalenceComparer
+    public interface ICqlComparer : IEquivalenceComparer
     {
         /// <summary>
         /// Compares two objects for equality.  This method is equivalent to calling <see cref="Compare(object, object, string?)"/> and comparing its result with 0.  When equal, this method returns <see langword="true"/>.

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -11,7 +19,7 @@ namespace Hl7.Cql.Iso8601
     {
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
         // That conversion ad nauseum is more expensive than superfluous memory use.
-        
+
         /// <summary>
         /// Gets the hour component of this date time.
         /// </summary>
