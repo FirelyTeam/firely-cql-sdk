@@ -12,6 +12,7 @@
 *.sqlite
 VSWorkspaceState.json
 .vs/
+*.snk
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)

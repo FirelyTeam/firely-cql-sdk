@@ -1,11 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<AssemblyName>Hl7.Cql.CodeGeneration.NET</AssemblyName>
 		<RootNamespace>Hl7.Cql.CodeGeneration.NET</RootNamespace>
-		<Nullable>enable</Nullable>
-		<LangVersion>9.0</LangVersion>
 		<Product>.NET Code Generation</Product>
 		<Description>Converts .NET lambda expressions into source code in .NET languages</Description>
 	</PropertyGroup>

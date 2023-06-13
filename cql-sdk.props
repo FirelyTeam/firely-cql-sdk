@@ -1,0 +1,57 @@
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+	<PropertyGroup>
+		<TargetFrameworks>net6.0</TargetFrameworks>
+	</PropertyGroup>
+
+	<!-- Solution-wide properties for NuGet packaging -->
+	<PropertyGroup>
+		<VersionPrefix>0.0.1</VersionPrefix>
+		<VersionSuffix></VersionSuffix>
+		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
+		<Copyright>Copyright 2013-2023 NCQA, Firely.  Contains materials (C) HL7 International</Copyright>
+		<PackageProjectUrl>https://github.com/FirelyTeam/cql-sdk</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/FirelyTeam/cql-sdk</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageReleaseNotes>See https://github.com/FirelyTeam/cql-sdk/releases</PackageReleaseNotes>
+		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+	</ItemGroup>
+
+	<PropertyGroup>
+		<FirelySdkVersion>5.2.1-20230612.2</FirelySdkVersion>
+	</PropertyGroup>
+
+	<!-- Compiler settings -->
+	<PropertyGroup>
+		<Nullable>enable</Nullable>
+		<LangVersion>11.0</LangVersion>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
+		<Configurations>Debug;Release;FullDebug</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' ">
+		<DebugType>portable</DebugType>
+		<DebugSymbols>True</DebugSymbols>
+		<NoWarn>1591</NoWarn>
+		<Optimize>false</Optimize>
+		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
+	</PropertyGroup>	
+	
+	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+		<SignAssembly>True</SignAssembly>
+		<DelaySign>true</DelaySign>
+		<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
+		<IncludeSymbols>True</IncludeSymbols>
+		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+	</PropertyGroup>
+
+</Project>
+

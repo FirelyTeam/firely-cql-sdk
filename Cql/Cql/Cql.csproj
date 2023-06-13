@@ -1,12 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>disable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<AssemblyName>Hl7.Cql</AssemblyName>
 		<RootNamespace>Hl7.Cql</RootNamespace>
-	</PropertyGroup>
+	</PropertyGroup>	
+	
 	<ItemGroup>
 	  <ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 	  <ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />

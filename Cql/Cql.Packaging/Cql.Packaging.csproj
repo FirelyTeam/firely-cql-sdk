@@ -1,15 +1,19 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+	<Import Project="..\..\cql-sdk.props" />
+
+
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<AssemblyName>Hl7.Cql.Packaging</AssemblyName>
 		<RootNamespace>Hl7.Cql.Packaging</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 	  <ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 	  <ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />

@@ -1,9 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <LangVersion>8.0</LangVersion>
+	<Import Project="..\..\cql-sdk.props" />
+
+	<PropertyGroup>    
 	  <AssemblyName>Hl7.Cql.Graph</AssemblyName>
 	  <RootNamespace>Hl7.Cql.Graph</RootNamespace>
   </PropertyGroup>
