@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.MeasureCompiler</AssemblyName>
 		<RootNamespace>Hl7.Cql.MeasureCompiler</RootNamespace>
-		<Nullable>enable</Nullable>
 		<Product>CQL measure compiler</Product>
 		<Description>Translates ELM into C# expression trees and can emit those expression trees into either runtime Delegates or C# source code.</Description>
 	</PropertyGroup>

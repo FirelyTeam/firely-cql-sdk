@@ -4,7 +4,6 @@
 
 
 	<PropertyGroup>
-		<Nullable>enable</Nullable>
 		<AssemblyName>Hl7.Cql.Runtime.Logging</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime.Logging</RootNamespace>
 	</PropertyGroup>

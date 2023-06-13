@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Runtime.Conversion</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime.Conversion</RootNamespace>
-		<Nullable>enable</Nullable>
 		<Product>CQL engine unit conversion</Product>
 		<Description>Unit conversion for CQL</Description>
 		<NoWarn>CS8601</NoWarn>

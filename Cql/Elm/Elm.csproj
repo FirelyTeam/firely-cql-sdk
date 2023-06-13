@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Elm</AssemblyName>
 		<RootNamespace>Hl7.Cql.Elm</RootNamespace>
-		<Nullable>enable</Nullable>
 		<Product>CQL ELM abstractions</Product>
 		<Description>Contains abstractions for the expression logical model (ELM) and utilities to deserialize an ELM library into classes.</Description>
 	</PropertyGroup>

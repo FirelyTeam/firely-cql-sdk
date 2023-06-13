@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<AssemblyName>Ncqa.Cql</AssemblyName>
 		<RootNamespace>Ncqa.Cql</RootNamespace>
-		<Nullable>enable</Nullable>
 		<Product>CQL</Product>
 		<Description>Contains shared interfaces and abstraction for CQL</Description>
 		<NoWarn>CS8601</NoWarn>

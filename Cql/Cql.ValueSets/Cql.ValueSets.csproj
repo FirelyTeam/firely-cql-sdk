@@ -2,10 +2,6 @@
 
   <Import Project="..\..\cql-sdk.props" />
   
-  <PropertyGroup>
-	  <Nullable>enable</Nullable>
-  </PropertyGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
   </ItemGroup>

@@ -3,9 +3,7 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<RootNamespace>Hl7.Cql.Firely</RootNamespace>
 		<AssemblyName>Hl7.Cql.Firely</AssemblyName>
 	</PropertyGroup>

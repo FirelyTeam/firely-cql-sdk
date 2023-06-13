@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Runtime.Primitives</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime.Primitives</RootNamespace>
-		<Nullable>enable</Nullable>
 		<Product>CQL primitive types</Product>
 		<Description>Contains .NET types that model the System namespace in CQL</Description>
 		<NoWarn>CS8601</NoWarn>

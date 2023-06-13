@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.CodeGeneration.NET</AssemblyName>
 		<RootNamespace>Hl7.Cql.CodeGeneration.NET</RootNamespace>
-		<Nullable>enable</Nullable>
 		<Product>.NET Code Generation</Product>
 		<Description>Converts .NET lambda expressions into source code in .NET languages</Description>
 	</PropertyGroup>

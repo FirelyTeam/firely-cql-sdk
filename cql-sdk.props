@@ -30,6 +30,7 @@
 
 	<!-- Compiler settings -->
 	<PropertyGroup>
+		<Nullable>enable</Nullable>
 		<LangVersion>11.0</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Configurations>Debug;Release;FullDebug</Configurations>

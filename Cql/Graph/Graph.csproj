@@ -3,7 +3,6 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>    
-	  <Nullable>enable</Nullable>	
 	  <AssemblyName>Hl7.Cql.Graph</AssemblyName>
 	  <RootNamespace>Hl7.Cql.Graph</RootNamespace>
   </PropertyGroup>

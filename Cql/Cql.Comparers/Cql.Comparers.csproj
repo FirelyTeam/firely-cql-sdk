@@ -5,7 +5,6 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Comparers</AssemblyName>
 		<RootNamespace>Hl7.Cql.Comparers</RootNamespace>
-		<Nullable>enable</Nullable>
 		<Product>CQL comparers</Product>
 		<Description>Contains CQL comparers</Description>
 		<NoWarn>CS8601</NoWarn>

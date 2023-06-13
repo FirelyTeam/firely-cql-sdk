@@ -5,7 +5,6 @@
 
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<Nullable>enable</Nullable>
 		<AssemblyName>Hl7.Cql.Packaging</AssemblyName>
 		<RootNamespace>Hl7.Cql.Packaging</RootNamespace>
 	</PropertyGroup>
