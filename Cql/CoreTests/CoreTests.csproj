@@ -6,6 +6,10 @@
 		<IsPackable>false</IsPackable>
 	</PropertyGroup>
 
+	<PropertyGroup>
+		<FirelySdkVersion>5.2.1-20230612.2</FirelySdkVersion>
+	</PropertyGroup>
+
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
 		<SignAssembly>True</SignAssembly>
 		<DelaySign>true</DelaySign>
@@ -23,11 +27,12 @@
 		<PackageReference Include="MSTest.TestAdapter" Version="2.1.1" />
 		<PackageReference Include="MSTest.TestFramework" Version="2.1.1" />
 		<PackageReference Include="coverlet.collector" Version="1.3.0" />
+		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.Base\Hl7.Fhir.Base.csproj" />
-		<ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj" />
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />

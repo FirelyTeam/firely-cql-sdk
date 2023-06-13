@@ -24,6 +24,10 @@
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
 	</ItemGroup>
 
+	<PropertyGroup>
+		<FirelySdkVersion>5.2.1-20230612.2</FirelySdkVersion>
+	</PropertyGroup>
+
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<LangVersion>11.0</LangVersion>
