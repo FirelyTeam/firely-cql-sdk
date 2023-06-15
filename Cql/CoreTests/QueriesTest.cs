@@ -28,7 +28,7 @@ namespace CoreTests
         {
             var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
             var typeManager = new TypeManager(TypeResolver);
-            var elm = new FileInfo(@"Input\ELM\QueriesTest-1.0.0.json");
+            var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = ElmPackage.LoadFrom(elm);
             var logger = LoggerFactory
                 .Create(logging => logging.AddDebug())
