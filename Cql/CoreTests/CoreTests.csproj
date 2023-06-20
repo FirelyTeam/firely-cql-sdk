@@ -49,6 +49,9 @@
 		<None Include="Input\ELM\Libs\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Include="Input\ELM\Test\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
 		<None Include="Input\Xml\*.xml">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>

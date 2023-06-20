@@ -29,7 +29,7 @@ namespace Hl7.Cql.Firely
 
         public static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
-            List<Type> toTypes = new();
+            HashSet<Type> toTypes = new();
 
             add((M.Integer p) => p.Value);
             add((M.FhirString p) => p.Value);
@@ -47,15 +47,15 @@ namespace Hl7.Cql.Firely
             add((M.PositiveInt pi) => new M.Integer(pi.Value));
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));
 
-
-            //addParametersToCqlPrimitivesConverters(toTypes);
+            addParametersToCqlPrimitivesConverters(toTypes);
             return converter;
 
             // Add a basic Fhir primitive->Cql primitive conversion
             void add<I, O>(Func<I, O> tos)
             {
                 converter.AddConversion<I, O>(tos);
-                toTypes.Add(typeof(O));
+                if (!toTypes.Contains(typeof(O)))
+                    toTypes.Add(typeof(O));
             }
 
             // Add a ParameterComponent->Cql primitive via the now registered basic conversion.
