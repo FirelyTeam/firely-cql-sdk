@@ -15,7 +15,7 @@
 		<RepositoryType>git</RepositoryType>
 		<PackageReleaseNotes>See https://github.com/FirelyTeam/cql-sdk/releases</PackageReleaseNotes>
 		<PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression>
-		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<!--<PackageReadmeFile>README.md</PackageReadmeFile>-->
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 	</PropertyGroup>
