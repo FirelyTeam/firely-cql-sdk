@@ -15,7 +15,7 @@ steps:
   - powershell: |        
           $filePaths = @('$(Build.SourcesDirectory)\Cql\Cql\bin\Release\*\Hl7.Cql.dll',
           '$(Build.SourcesDirectory)\Cql\Cql.Abstractions\bin\Release\*\Ncqa.Cql.dll',
-          '$(Build.SourcesDirectory)Cql\Cql.Compiler\bin\Release\*\Hl7.Cql.MeasureCompiler.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Compiler\bin\Release\*\Hl7.Cql.MeasureCompiler.dll',
           '$(Build.SourcesDirectory)\Cql\Cql.Conversion\bin\Release\*\Hl7.Cql.Runtime.Conversion.dll',
           '$(Build.SourcesDirectory)\Cql\Cql.Firely\bin\Release\*\Hl7.Cql.Firely.dll',
           '$(Build.SourcesDirectory)\Cql\Cql.Logging\bin\Release\*\Hl7.Cql.Runtime.Logging.dll',
