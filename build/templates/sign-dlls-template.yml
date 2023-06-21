@@ -14,22 +14,22 @@ steps:
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   - powershell: |        
            $filePaths = @(
-          "$(Build.SourcesDirectory)\Cql\Cql\bin\Release\*\Hl7.Cql.dll",
-          "$(Build.SourcesDirectory)\Cql.Abstractions\bin\Release\*\Ncqa.Cql.dll",
-          "$(Build.SourcesDirectory)Cql\Cql.Compiler\bin\Release\*\Hl7.Cql.MeasureCompiler.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Conversion\bin\Release\*\Hl7.Cql.Runtime.Conversion.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Firely\bin\Release\*\Hl7.Cql.Firely.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Logging\bin\Release\*\Hl7.Cql.Runtime.Logging.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Model\bin\Release\*\Hl7.Cql.Runtime.Model.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Operators\bin\Release\*\Cql.Operators.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Packaging\bin\Release\*\Hl7.Cql.Packaging.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Primitives\bin\Release\*\Hl7.Cql.Runtime.Primitives.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.Runtime\bin\Release\*\Cql.Operators.dll",
-          "$(Build.SourcesDirectory)\Cql\Cql.ValueSets\bin\Release\*\Cql.ValueSets.dll",
-          "$(Build.SourcesDirectory)\Cql\Elm\bin\Release\*\Hl7.Cql.Elm.dll",
-          "$(Build.SourcesDirectory)\Cql\Graph\bin\Release\*\Hl7.Cql.Graph.dll",
-          "$(Build.SourcesDirectory)\Cql\Iso8601\bin\Release\*\Hl7.Cql.Iso8601.dll",
-          "$(Build.SourcesDirectory)\Cql\PackagerCLI\bin\Release\*\PackagerCLI.dll"
+          '$(Build.SourcesDirectory)\Cql\Cql\bin\Release\*\Hl7.Cql.dll',
+          '$(Build.SourcesDirectory)\Cql.Abstractions\bin\Release\*\Ncqa.Cql.dll',
+          '$(Build.SourcesDirectory)Cql\Cql.Compiler\bin\Release\*\Hl7.Cql.MeasureCompiler.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Conversion\bin\Release\*\Hl7.Cql.Runtime.Conversion.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Firely\bin\Release\*\Hl7.Cql.Firely.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Logging\bin\Release\*\Hl7.Cql.Runtime.Logging.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Model\bin\Release\*\Hl7.Cql.Runtime.Model.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Operators\bin\Release\*\Cql.Operators.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Packaging\bin\Release\*\Hl7.Cql.Packaging.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Primitives\bin\Release\*\Hl7.Cql.Runtime.Primitives.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.Runtime\bin\Release\*\Cql.Operators.dll',
+          '$(Build.SourcesDirectory)\Cql\Cql.ValueSets\bin\Release\*\Cql.ValueSets.dll',
+          '$(Build.SourcesDirectory)\Cql\Elm\bin\Release\*\Hl7.Cql.Elm.dll',
+          '$(Build.SourcesDirectory)\Cql\Graph\bin\Release\*\Hl7.Cql.Graph.dll',
+          '$(Build.SourcesDirectory)\Cql\Iso8601\bin\Release\*\Hl7.Cql.Iso8601.dll',
+          '$(Build.SourcesDirectory)\Cql\PackagerCLI\bin\Release\*\PackagerCLI.dll'
           )
 
           # Create an array to store the matching files
