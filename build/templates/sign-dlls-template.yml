@@ -2,14 +2,14 @@ steps:
   - task: DownloadSecureFile@1
     displayName: Download Signing key file
     inputs:
-      secureFile: FirelyPackages.snk
+      secureFile: cql-sdk.snk
       retryCount: 
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   - task: CopyFiles@2
     displayName: Copy key file to $(Build.SourcesDirectory)
     inputs:
       SourceFolder: $(Agent.TempDirectory)
-      Contents: FirelyPackages.snk
+      Contents: cql-sdk.snk
       TargetFolder: $(Build.SourcesDirectory)
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   - powershell: |        
