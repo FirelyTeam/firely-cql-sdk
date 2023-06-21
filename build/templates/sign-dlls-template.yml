@@ -1,0 +1,59 @@
+steps:
+  - task: DownloadSecureFile@1
+    displayName: Download Signing key file
+    inputs:
+      secureFile: FirelyPackages.snk
+      retryCount: 
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
+  - task: CopyFiles@2
+    displayName: Copy key file to $(Build.SourcesDirectory)
+    inputs:
+      SourceFolder: $(Agent.TempDirectory)
+      Contents: FirelyPackages.snk
+      TargetFolder: $(Build.SourcesDirectory)
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
+  - powershell: |        
+           $filePaths = @(
+          "$(Build.SourcesDirectory)\Cql\Cql\bin\Release\*\Hl7.Cql.dll",
+          "$(Build.SourcesDirectory)\Cql.Abstractions\bin\Release\*\Ncqa.Cql.dll",
+          "$(Build.SourcesDirectory)Cql\Cql.Compiler\bin\Release\*\Hl7.Cql.MeasureCompiler.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Conversion\bin\Release\*\Hl7.Cql.Runtime.Conversion.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Firely\bin\Release\*\Hl7.Cql.Firely.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Logging\bin\Release\*\Hl7.Cql.Runtime.Logging.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Model\bin\Release\*\Hl7.Cql.Runtime.Model.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Operators\bin\Release\*\Cql.Operators.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Packaging\bin\Release\*\Hl7.Cql.Packaging.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Primitives\bin\Release\*\Hl7.Cql.Runtime.Primitives.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.Runtime\bin\Release\*\Cql.Operators.dll",
+          "$(Build.SourcesDirectory)\Cql\Cql.ValueSets\bin\Release\*\Cql.ValueSets.dll",
+          "$(Build.SourcesDirectory)\Cql\Elm\bin\Release\*\Hl7.Cql.Elm.dll",
+          "$(Build.SourcesDirectory)\Cql\Graph\bin\Release\*\Hl7.Cql.Graph.dll",
+          "$(Build.SourcesDirectory)\Cql\Iso8601\bin\Release\*\Hl7.Cql.Iso8601.dll",
+          "$(Build.SourcesDirectory)\Cql\PackagerCLI\bin\Release\*\PackagerCLI.dll"
+          )
+
+          # Create an array to store the matching files
+          $files = @()
+
+          # Iterate over each file path
+          foreach ($path in $filePaths) 
+          {
+              # Use Get-ChildItem to find files matching the path
+              $files += Get-ChildItem -Path $path -File 
+          }
+
+          Write-Verbose "Last exitcode before signing: $lastexitcode" 
+
+          foreach ($file in $files)
+          {          
+            Write-Verbose "Signing file: $file"
+            & '$(Build.SourcesDirectory)\build\tools\sn.exe' -R $file  $(Build.SourcesDirectory)\cql-sdk.snk
+            Write-Verbose "Last exitcode after signing file: $lastexitcode" 
+          }           
+          Write-VErbose "Last exitcode after signing all files: $lastexitcode"
+          # suppress exitcode 
+          if ($lastexitcode -lt 2) { $global:lastexitcode = 0 }
+    displayName: Signing the dlls
+    name: signing
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
+  
