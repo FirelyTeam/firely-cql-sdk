@@ -13,8 +13,7 @@ steps:
       TargetFolder: $(Build.SourcesDirectory)
     condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
   - powershell: |        
-           $filePaths = @(
-          '$(Build.SourcesDirectory)\Cql\Cql\bin\Release\*\Hl7.Cql.dll',
+          $filePaths = @('$(Build.SourcesDirectory)\Cql\Cql\bin\Release\*\Hl7.Cql.dll',
           '$(Build.SourcesDirectory)\Cql.Abstractions\bin\Release\*\Ncqa.Cql.dll',
           '$(Build.SourcesDirectory)Cql\Cql.Compiler\bin\Release\*\Hl7.Cql.MeasureCompiler.dll',
           '$(Build.SourcesDirectory)\Cql\Cql.Conversion\bin\Release\*\Hl7.Cql.Runtime.Conversion.dll',
@@ -29,8 +28,7 @@ steps:
           '$(Build.SourcesDirectory)\Cql\Elm\bin\Release\*\Hl7.Cql.Elm.dll',
           '$(Build.SourcesDirectory)\Cql\Graph\bin\Release\*\Hl7.Cql.Graph.dll',
           '$(Build.SourcesDirectory)\Cql\Iso8601\bin\Release\*\Hl7.Cql.Iso8601.dll',
-          '$(Build.SourcesDirectory)\Cql\PackagerCLI\bin\Release\*\PackagerCLI.dll'
-          )
+          '$(Build.SourcesDirectory)\Cql\PackagerCLI\bin\Release\*\PackagerCLI.dll')
 
           # Create an array to store the matching files
           $files = @()
