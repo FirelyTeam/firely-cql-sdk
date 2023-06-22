@@ -26,7 +26,7 @@ stages:
 - stage: build
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
-    - template: build.yml@templates  # Template reference
+    - template: templates/build.yml  # Template reference
       parameters:
         dotNetCoreVersion: $(DOTNET_CORE_SDK)
         useVersionSuffix: true
@@ -38,7 +38,7 @@ stages:
           vmImage: $(vmImage)
     
   - ${{ if startswith(variables['Build.SourceBranch'], 'refs/tags/v') }}:  # release mode
-    - template: build.yml@templates  # Template reference
+    - template: templates/build.yml  # Template reference
       parameters:
         dotNetCoreVersion: $(DOTNET_CORE_SDK)
         useVersionSuffix: false
