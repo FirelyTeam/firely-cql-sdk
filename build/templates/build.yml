@@ -1,0 +1,70 @@
+# Repo: FirelyTeam/azure-pipeline-templates
+# File: build.yml
+
+parameters:
+  # Default values
+  dotNetCoreVersion: '3.1.102' # can also be use with wildcards:  latest minor version of 3. , use '3.x'
+  useVersionSuffix: true
+  restoreDependencies: false
+  nuGetServiceConnections: #required when restoreDependies = true
+  nuGetSources: #required when restoreDependies = true
+  packageArtifacts: false
+  publishArtifacts: false
+  packageArtifactName: 'NuGetPackages'
+  publishWebProjects: false
+  zipAfterPublish: false
+  checkoutSubmodules: false
+  pool: {}
+
+jobs:
+- job: Build
+  pool: ${{ parameters.pool }}
+  steps:
+  - task: DotNetCoreInstaller@2
+    inputs:
+      version: ${{ parameters.dotNetCoreVersion }}
+
+  - ${{ if eq(parameters.checkoutSubmodules, 'true') }}:
+    - checkout: self
+      submodules: true
+
+  - ${{ if eq(parameters.restoreDependencies, 'true') }}:
+    - template: restore.yml@templates
+      parameters:
+        nuGetServiceConnections: ${{ parameters.nuGetServiceConnections }}
+        nuGetSources: ${{ parameters.nuGetSources }}
+      
+  - script: dotnet build --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true 
+    displayName: 'dotnet build $(buildConfiguration) with version suffix  and no restore'
+    condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'true')))
+    
+  - script: dotnet build --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
+    displayName: 'dotnet build $(buildConfiguration) with version suffix'
+    condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'false')))
+
+  - script: dotnet build --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true 
+    displayName: 'dotnet build $(buildConfiguration)'
+    condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
+
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet test UnitTests'
+    inputs:
+      command: test
+      projects: '**/*Tests/*Tests.csproj'
+      arguments: '--configuration $(buildConfiguration) --no-build --no-restore'
+
+  - template: sign-dlls-template.yml
+
+  - ${{ if eq(parameters.packageArtifacts, 'true') }}:
+    - template: package.yml@templates
+      parameters:
+        artifactName: ${{parameters.packageArtifactName}}
+        useVersionSuffix: ${{ parameters.useVersionSuffix }}  
+  
+  - ${{ if eq(parameters.publishArtifacts, 'true') }}:
+    - template: publish.yml@templates
+      parameters:
+        useVersionSuffix: ${{ parameters.useVersionSuffix }}
+        publishWebProjects: ${{ parameters.publishWebProjects }}
+        zipAfterPublish: ${{ parameters.zipAfterPublish }}
+        
