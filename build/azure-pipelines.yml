@@ -10,6 +10,7 @@ resources:
 
 variables:
   - group: CodeSigning
+  - group: APIKeys
   - template: variables.yml  
 
 pool: 
