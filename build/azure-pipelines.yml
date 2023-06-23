@@ -47,23 +47,23 @@ stages:
         pool: 
           vmImage: $(vmImage)
 
-# - stage: deployToGitHub
-#   dependsOn: build
-#   displayName: Deploy packages To Github
-#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
-#   jobs:
-#   - deployment: gitHub
-#     displayName: Deploy Packages to GitHub
-#     environment: GitHub
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - template: push-nuget-package.yml@templates
-#             parameters:
-#               artifact: 'NuGetPackages'
-#               source: https://nuget.pkg.github.com/FirelyTeam/index.json
-#               apiKey: $(GITHUB_PACKAGES_APIKEY)                
+- stage: deployToGitHub
+  dependsOn: build
+  displayName: Deploy packages To Github
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
+  jobs:
+  - deployment: gitHub
+    displayName: Deploy Packages to GitHub
+    environment: GitHub
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: push-nuget-package.yml@templates
+            parameters:
+              artifact: 'NuGetPackages'
+              source: https://nuget.pkg.github.com/FirelyTeam/index.json
+              apiKey: $(GITHUB_PACKAGES_APIKEY)                
 
 # - stage: deployToNuget
 #   dependsOn: deployToGitHub
