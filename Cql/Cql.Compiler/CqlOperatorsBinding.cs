@@ -8,6 +8,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using ListSortDirection = System.ComponentModel.ListSortDirection;
+using Hl7.Cql.MeasureCompiler;
 
 namespace Hl7.Cql.Compiler
 {
@@ -35,15 +37,16 @@ namespace Hl7.Cql.Compiler
         public CqlOperatorsBinding(TypeResolver typeResolver, TypeConverter? typeConverter = null)
         {
             TypeConverter = typeConverter;
+                //.AddElmConversions();
             TypeResolver = typeResolver;
         }
 
-        protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators));
+        protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
 
-        protected virtual PropertyInfo DataRetrieverProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.DataRetriever));
+        protected virtual PropertyInfo DataRetrieverProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.DataRetriever))!;
 
 
-        protected virtual PropertyInfo TypeConverterProperty => typeof(ICqlOperators).GetProperty(nameof(ICqlOperators.TypeConverter));
+        protected virtual PropertyInfo TypeConverterProperty => typeof(ICqlOperators).GetProperty(nameof(ICqlOperators.TypeConverter))!;
         protected virtual Type OperatorsType => OperatorsProperty.PropertyType;
         protected virtual Type DataRetrieverType => DataRetrieverProperty.PropertyType;
 
@@ -434,7 +437,7 @@ namespace Hl7.Cql.Compiler
                 case CqlOperator.ConvertQuantity:
                     return BindBinaryOperator(nameof(ICqlOperators.ConvertQuantity), operators, parameters[0], parameters[1]);
                 case CqlOperator.Descendents:
-                    break;
+                    return BindUnaryOperator(nameof(ICqlOperators.Descendents), operators, parameters[0]);
                 case CqlOperator.SortBy:
                     return SortBy(operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Aggregate:
@@ -501,7 +504,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression SortBy(MemberExpression operators, Expression source, Expression by, Expression order)
         {
-            if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(SortOrder))
+            if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
             {
                 var elementType = TypeResolver.GetListElementType(source.Type);
                 var method = OperatorsType
@@ -813,6 +816,7 @@ namespace Hl7.Cql.Compiler
                     return call;
                 }
             }
+            
             throw new ArgumentException($"No suitable binary method {methodName}({first.Type}, {second.Type}) could be found.", nameof(methodName));
         }
 
@@ -828,14 +832,27 @@ namespace Hl7.Cql.Compiler
                 {
                     var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
                     var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                    if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
+                    if (leftConversion == ConversionType.Incompatible
+                        || rightConversion == ConversionType.Incompatible)
+                    {
                         continue;
-                    left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
-                    right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
-                    if (methodParameters.Length > 2)
-                        return Expression.Call(operators, method, left, right, precision);
+                    }
                     else
-                        return Expression.Call(operators, method, left, right);
+                    {
+                        left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
+                        right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
+                        if (methodParameters.Length > 2)
+                        {
+                            var precisionConversion = CanConvert(precision.Type, methodParameters[2].ParameterType);
+                            if (precisionConversion == ConversionType.Incompatible)
+                                continue;
+                            precision = Convert(precision, methodParameters[2].ParameterType, operators, precisionConversion);
+                            return Expression.Call(operators, method, left, right, precision);
+
+                        }
+                        else
+                            return Expression.Call(operators, method, left, right);
+                    }
                 }
             }
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
@@ -1019,11 +1036,14 @@ namespace Hl7.Cql.Compiler
                     methodParameters = genericMethod.GetParameters();
                     var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
                     var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                    if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
+                    var precisionConversion = CanConvert(precision.Type, methodParameters[2].ParameterType);
+                    if (leftConversion == ConversionType.Incompatible
+                        || rightConversion == ConversionType.Incompatible
+                        || precisionConversion == ConversionType.Incompatible)
                         continue;
                     left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
                     right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
-
+                    precision = Convert(precision, methodParameters[2].ParameterType, operators, precisionConversion);
                     var call = Expression.Call(operators, genericMethod, left, right, precision);
                     return call;
                 }
@@ -1038,8 +1058,8 @@ namespace Hl7.Cql.Compiler
         {
             if (typeExpression is ConstantExpression ce && ce.Type == typeof(Type))
             {
-                if (ce.Value is Type type 
-                    && codePropertyExpression is ConstantExpression cpe 
+                if (ce.Value is Type type
+                    && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
                     return Retrieve(operators, dataRetriever, type, valueSetOrCodes, codePropertyExpression);
@@ -1188,10 +1208,7 @@ namespace Hl7.Cql.Compiler
                         var typeConverter = Expression.Property(operators, TypeConverterProperty);
                         var method = typeof(TypeConverter).GetMethod(nameof(TypeConverter.Convert))
                                  .MakeGenericMethod(destinationType);
-
-                        if (source.Type.GenericTypeArguments.Any(a => a.IsEnum) || source.Type.IsAssignableFrom(typeof(DateTimeOffset)))
-                            source = Expression.TypeAs(source, typeof(object));
-
+                        source = Expression.TypeAs(source, typeof(object));
                         var call = Expression.Call(typeConverter, method, source);
                         return call;
                     }

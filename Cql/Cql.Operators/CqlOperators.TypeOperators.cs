@@ -180,7 +180,7 @@ namespace Hl7.Cql.Runtime
 
         #region Descendents
 
-        public IEnumerable<object> Descendents(object argument) => throw new NotSupportedException();
+        public IEnumerable<object?> Descendents(object? argument) => argument == null ? null : throw new NotSupportedException();
 
         #endregion
 

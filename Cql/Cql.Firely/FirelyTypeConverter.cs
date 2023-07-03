@@ -67,20 +67,101 @@ namespace Hl7.Cql.Firely
             converter.AddConversion((CqlDate f) => new M.FhirDateTime(f.ToString()));
             converter.AddConversion((CqlTime f) => new M.Time(f.ToString()));
             converter.AddConversion((CqlQuantity f) => f.value is not null ? new M.Quantity(f.value.Value, f.unit, Fhir.ElementModel.Types.Quantity.UCUM) : null);
-            converter.AddConversion((CqlInterval<CqlQuantity> f) => v(f, new M.Range(converter.Convert<M.Quantity>(f.low), converter.Convert<M.Quantity>(f.high))));
-            converter.AddConversion((CqlInterval<decimal?> f) => v(f, new M.Range(new M.Quantity(f.low!.Value, "1"), new M.Quantity(f.high!.Value, "1"))));
-            converter.AddConversion((CqlInterval<int?> f) => v(f, new M.Range(new M.Quantity(f.low!.Value, "1"), new M.Quantity(f.high!.Value, "1"))));
-            converter.AddConversion((CqlInterval<CqlDateTime> f) => v(f, new M.Period(converter.Convert<M.FhirDateTime>(f.low), converter.Convert<M.FhirDateTime>(f.high))));
-            converter.AddConversion((CqlInterval<CqlDate> f) => v(f, new M.Period(converter.Convert<M.FhirDateTime>(f.low), converter.Convert<M.FhirDateTime>(f.high))));
+            converter.AddConversion((CqlInterval<CqlQuantity>? interval) =>
+            {
+                if (interval is null)
+                    return null;
+                else
+                {
+                    var range = new M.Range();
+                    if (interval.low is not null && interval.low.value.HasValue)
+                    {
+                        range.Low = new M.Quantity(interval.low.value.Value, interval.low.unit ?? "1");
+                    }
+                    if (interval.high is not null && interval.high.value.HasValue)
+                    {
+                        range.High = new M.Quantity(interval.high.value.Value, interval.high.unit ?? "1");
 
+                    }
+                    return range;
+                }
+            });
+            converter.AddConversion((CqlInterval<decimal?> interval) =>
+            {
+                if (interval is null)
+                    return null;
+                else
+                {
+                    var range = new M.Range();
+                    if (interval.low is not null && interval.low.HasValue)
+                    {
+                        range.Low = new M.Quantity(interval.low.Value, "1");
+                    }
+                    if (interval.high is not null && interval.high.HasValue)
+                    {
+                        range.High = new M.Quantity(interval.high.Value, "1");
+                    }
+                    return range;
+                }
+            });
+            converter.AddConversion((CqlInterval<int?> interval) =>
+            {
+                if (interval is null)
+                    return null;
+                else
+                {
+                    var range = new M.Range();
+                    if (interval.low is not null && interval.low.HasValue)
+                    {
+                        range.Low = new M.Quantity(interval.low.Value, "1");
+                    }
+                    if (interval.high is not null && interval.high.HasValue)
+                    {
+                        range.High = new M.Quantity(interval.high.Value, "1");
+                    }
+                    return range;
+                }
+            });
+            converter.AddConversion((CqlInterval<CqlDateTime> interval) =>{
+                if (interval is null)
+                    return null;
+                else
+                {
+                    var period = new M.Period();
+                    if (interval.low is not null && interval.low is not null)
+                    {
+                        period.Start = interval.low.ToString();
+                    }
+                    if (interval.high is not null && interval.high is not null)
+                    {
+                        period.End = interval.high.ToString();
+
+                    }
+                    return period;
+                }
+            });
+            converter.AddConversion((CqlInterval<CqlDate> interval) => {
+                if (interval is null)
+                    return null;
+                else
+                {
+                    var period = new M.Period();
+                    if (interval.low is not null && interval.low is not null)
+                    {
+                        period.Start = interval.low.ToString();
+                    }
+                    if (interval.high is not null && interval.high is not null)
+                    {
+                        period.End = interval.high.ToString();
+
+                    }
+                    return period;
+                }
+            });
             converter.AddConversion((CqlRatio f) => (f.denominator is not null && f.numerator is not null) ?
                 new M.Ratio(converter.Convert<M.Quantity>(f.numerator), converter.Convert<M.Quantity>(f.denominator)) : null);
 
             return converter;
-
-            // If the interval is convertable to for FHIR, convert it
-            static U? v<T, U>(CqlInterval<T> f, U value) => f.lowClosed == true && f.highClosed == true && f.low is not null && f.high is not null ?
-                    value : default;
         }
 
 

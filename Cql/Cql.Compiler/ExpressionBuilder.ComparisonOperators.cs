@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm.Expressions;
+using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
-        protected Expression Equal(elm.EqualExpression eq, ExpressionBuilderContext ctx)
+        protected Expression Equal(elm.Equal eq, ExpressionBuilderContext ctx)
         {
             var lhsExpression = TranslateExpression(eq.operand![0], ctx);
             var rhsExpression = TranslateExpression(eq.operand![1], ctx);
@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else if (rightNv.Type == typeof(string))
                 {
-                    var call = Operators.Bind(CqlOperator.EnumEqualsString,
+                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString,
                         ctx.RuntimeContextParameter,
                         Expression.Convert(leftNv, typeof(object)),
                         right);
@@ -40,7 +40,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (leftNv.Type == typeof(string))
                 {
-                    var call = Operators.Bind(CqlOperator.EnumEqualsString, 
+                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString, 
                         ctx.RuntimeContextParameter,
                         Expression.Convert(rightNv, typeof(object)),
                         left);
@@ -57,19 +57,19 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = TypeResolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
                         throw new InvalidOperationException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                    var call = Operators.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
+                    var call = OperatorBinding.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
                     return call;
                 }
                 throw new NotImplementedException();
             }
             else 
             {
-                var call = Operators.Bind(CqlOperator.Equal, ctx.RuntimeContextParameter, left, right);
+                var call = OperatorBinding.Bind(CqlOperator.Equal, ctx.RuntimeContextParameter, left, right);
                 return call;
             }
         }
 
-        protected Expression Equivalent(elm.EquivalentExpression eqv, ExpressionBuilderContext ctx)
+        protected Expression Equivalent(elm.Equivalent eqv, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(eqv.operand![0], ctx);
             var right = TranslateExpression(eqv.operand![1], ctx);
@@ -85,7 +85,7 @@ namespace Hl7.Cql.Compiler
                         //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
                         return Expression.Constant(false, typeof(bool?));
                     }
-                    var call = Operators.Bind(CqlOperator.ListEquivalent, ctx.RuntimeContextParameter, left, right);
+                    var call = OperatorBinding.Bind(CqlOperator.ListEquivalent, ctx.RuntimeContextParameter, left, right);
                     return call;
                 }
                 else
@@ -95,20 +95,20 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var call = Operators.Bind(CqlOperator.Equivalent, ctx.RuntimeContextParameter, left, right);
+                var call = OperatorBinding.Bind(CqlOperator.Equivalent, ctx.RuntimeContextParameter, left, right);
                 return call;
             }
         }
 
-        protected Expression Greater(elm.GreaterExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression Greater(elm.Greater e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Greater, e, ctx);
 
-        protected Expression GreaterOrEqual(elm.GreaterOrEqualExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression GreaterOrEqual(elm.GreaterOrEqual e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.GreaterOrEqual, e, ctx);
 
-        protected Expression Less(elm.LessExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression Less(elm.Less e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Less, e, ctx);
-        protected Expression LessOrEqual(elm.LessOrEqualExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression LessOrEqual(elm.LessOrEqual e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.LessOrEqual, e, ctx);
 
 

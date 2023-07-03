@@ -18,9 +18,10 @@ namespace Hl7.Cql.Compiler
         /// Intercepts this expression and possibly modifies it.  If no modification is desired, return <paramref name="linqExpression"/>.
         /// </summary>
         /// <param name="linqExpression">The source expression.</param>
+        /// <param name="elmExpression">The corresponding ELM expression.</param>
         /// <param name="context">The build context.  Be careful modifying this value as it can have unexpected side effects (e.g., removing key from <see cref="ExpressionBuilderContext.Scopes"/> could break the builder.).</param>
         public System.Linq.Expressions.Expression Mutate(System.Linq.Expressions.Expression linqExpression,
-            Elm.Expressions.Expression elmExpression,
+            Elm.Element elmExpression,
             ExpressionBuilderContext context);
     }
 }

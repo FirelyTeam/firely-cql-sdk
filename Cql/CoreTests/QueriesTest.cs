@@ -29,7 +29,7 @@ namespace CoreTests
             var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
             var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
-            var elmPackage = ElmPackage.LoadFrom(elm);
+            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = LoggerFactory
                 .Create(logging => logging.AddDebug())
                 .CreateLogger<ExpressionBuilder>();
@@ -43,7 +43,7 @@ namespace CoreTests
 
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
-            elmPackage = ElmPackage.LoadFrom(elm);
+            elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
             expressions = eb.Build();
             AggregatesDefinitions = expressions
