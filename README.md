@@ -10,7 +10,7 @@ During development we sometimes use Firely's Github Package feed, to be able to 
 
  - Get a Personal Access token (PAT) from [github.com][github-pat] with scope ```read:packages```
 
-- Next open a console on your machine and run ```dotnet nuget add source --name github --username <USERNAME> --password <PAT> https://nuget.pkg.github.com/FirelyTeam/index.json --configfile .\NuGet.config```
+- Next open a console on your machine and run ```dotnet nuget add source --name github --username <USERNAME> --password <PAT> https://nuget.pkg.github.com/FirelyTeam/index.json```
 
 ```USERNAME```: your username on GitHub
 ```PAT```: your Personal access token with at least the scope ```read:packages```
