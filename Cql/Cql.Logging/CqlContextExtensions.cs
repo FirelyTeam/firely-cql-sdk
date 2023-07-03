@@ -4,7 +4,7 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Logging
 {
-    public static class RuntimeContextExtensions
+    public static class CqlContextExtensions
     {
         public static CqlContext AddMessageLogging(this CqlContext context,
             ILogger<CqlContext> logger)
