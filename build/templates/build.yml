@@ -56,13 +56,13 @@ jobs:
   - template: sign-dlls-template.yml
 
   - ${{ if eq(parameters.packageArtifacts, 'true') }}:
-    - template: package.yml@templates
+    - template: package.yml
       parameters:
         artifactName: ${{parameters.packageArtifactName}}
         useVersionSuffix: ${{ parameters.useVersionSuffix }}  
   
   - ${{ if eq(parameters.publishArtifacts, 'true') }}:
-    - template: publish.yml@templates
+    - template: publish.yml
       parameters:
         useVersionSuffix: ${{ parameters.useVersionSuffix }}
         publishWebProjects: ${{ parameters.publishWebProjects }}

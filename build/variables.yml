@@ -6,5 +6,5 @@ variables:
   buildConfiguration: 'Release'
   vmImage: 'windows-latest'
   DOTNET_CORE_SDK: '7.0.x'
-  GITHUB_PACKAGES_APIKEY: $(GitHubPushPackagesAPIKey) # key is set in UI of Azure Devops
-  NUGET_APIKEY: $(NuGetAPIKey)
+  GITHUB_PACKAGES_APIKEY: $(GitHubPushPackagesAPIKey) # key is set in variable group APIKeys
+  NUGET_APIKEY: $(NuGetFhirPackagesAPIKey) # key is set in variable group APIKeys
