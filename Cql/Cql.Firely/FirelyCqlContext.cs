@@ -39,9 +39,11 @@ namespace Hl7.Cql.Firely
                 dataRetriever,
                 cqlComparers,
                 valueSets,
-                null,
+                unitConverter,
                 new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond));
-            cqlComparers.AddIntervalComparisons(operators);
+            cqlComparers
+                .AddIntervalComparisons(operators)
+                .AddFirelyComparers();
             var ctx = new CqlContext(operators, delegates, parameters);
             return ctx;
         }
