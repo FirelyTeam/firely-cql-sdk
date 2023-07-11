@@ -15,6 +15,7 @@ namespace Hl7.Cql.Firely
         {
             comparers.Register(typeof(FhirDecimal), new IValueComparer<decimal?>());
             comparers.Register(typeof(Id), new IValueComparer<string>());
+            comparers.Register(typeof(Identifier), new IValueComparer<int?>());
             comparers.Register(typeof(Integer), new IValueComparer<int?>());
             return comparers;
         }
