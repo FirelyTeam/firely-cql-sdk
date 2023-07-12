@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Runtime;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -44,7 +52,7 @@ namespace Hl7.Cql.Model
         }
 
         public override Type? PatientType => patientType.Value;
-        private Lazy<Type?> patientType;
+        private readonly Lazy<Type?> patientType;
         private Type? GetPatientType()
         {
             if (!string.IsNullOrWhiteSpace(Model.patientClassName))
@@ -67,7 +75,7 @@ namespace Hl7.Cql.Model
         }
 
         public override PropertyInfo? PatientBirthDateProperty => patientBirthDate.Value;
-        private Lazy<PropertyInfo?> patientBirthDate;
+        private readonly Lazy<PropertyInfo?> patientBirthDate;
         private PropertyInfo? GetPatientBirthdate()
         {
             var patientType = PatientType;

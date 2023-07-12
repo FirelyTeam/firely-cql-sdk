@@ -1,4 +1,12 @@
-﻿using System.Collections.Generic;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.Primitives
@@ -28,7 +36,7 @@ namespace Hl7.Cql.Primitives
         {
             if (codes == null)
                 this.codes = new CqlCode[0];
-            else 
+            else
                 this.codes = codes.ToArray();
             this.display = display;
         }

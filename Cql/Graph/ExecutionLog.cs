@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,9 +21,9 @@ namespace Hl7.Cql.Graph
 
     }
 
-    public class CompoundExecutionLog: ExecutionLog
+    public class CompoundExecutionLog : ExecutionLog
     {
-        private ExecutionLog[] logs;
+        private readonly ExecutionLog[] logs;
 
         public CompoundExecutionLog(params ExecutionLog[] logs)
         {
@@ -36,7 +44,7 @@ namespace Hl7.Cql.Graph
 
     }
 
-    public class DebugExecutionLog: ExecutionLog
+    public class DebugExecutionLog : ExecutionLog
     {
         public static readonly DebugExecutionLog Instance = new DebugExecutionLog();
         private DebugExecutionLog() { }
@@ -45,9 +53,9 @@ namespace Hl7.Cql.Graph
         public override void WriteLine(string message) => System.Diagnostics.Debug.WriteLine(message);
     }
 
-    public class MemoryExecutionLog: ExecutionLog
+    public class MemoryExecutionLog : ExecutionLog
     {
-        private StringBuilder currentLine = new StringBuilder();
+        private readonly StringBuilder currentLine = new StringBuilder();
 
         public IList<string> Lines { get; } = new List<string>();
 
@@ -60,14 +68,14 @@ namespace Hl7.Cql.Graph
         }
     }
 
-    public class FlatFileExecutionLog: ExecutionLog
+    public class FlatFileExecutionLog : ExecutionLog
     {
         private static readonly char[] DenormalCharacters = Path.GetInvalidPathChars()
             .Concat(new[] { '/' })
             .ToArray();
 
-        private StringBuilder currentLine = new StringBuilder();
-        private StreamWriter writer;
+        private readonly StringBuilder currentLine = new StringBuilder();
+        private readonly StreamWriter writer;
 
         public DirectoryInfo OutputDirectory { get; }
 
@@ -97,7 +105,7 @@ namespace Hl7.Cql.Graph
         }
 
         #region Dispose
-        private object SyncRoot = new object();
+        private readonly object SyncRoot = new object();
         public void Dispose()
         {
             Dispose(true);

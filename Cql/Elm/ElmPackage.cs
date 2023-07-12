@@ -1,6 +1,13 @@
-﻿using Hl7.Cql.Elm.Expressions;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Elm.Expressions;
 using Hl7.Cql.Graph;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -134,7 +141,7 @@ namespace Hl7.Cql.Elm
             }
             return buildOrder;
         }
-        
+
         public static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, Func<string, string, ElmPackage>? locateLibrary = null)
         {
             if (locateLibrary == null)
@@ -291,7 +298,7 @@ namespace Hl7.Cql.Elm
             }
             return thisGraph;
         }
-        
+
         private static void Merge(DirectedGraph from, DirectedGraph into)
         {
             foreach (var sourceNode in from.Nodes)

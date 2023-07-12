@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -172,7 +180,7 @@ namespace Hl7.Cql.Iso8601
                                     if (ms.HasValue)
                                     {
                                         if (ms.Value < 0 || ms.Value > 999)
-                                            throw new ArgumentException("Millsecond must between [0,999]", nameof(ms));                                        
+                                            throw new ArgumentException("Millsecond must between [0,999]", nameof(ms));
                                         Precision = DateTimePrecision.Millisecond;
                                     }
                                     else
@@ -349,7 +357,7 @@ namespace Hl7.Cql.Iso8601
                     osHour = 0;
                     osMinute = 0;
                 }
-                else 
+                else
                 {
                     if (tzh.Success)
                     {

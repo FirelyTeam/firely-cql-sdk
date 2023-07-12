@@ -1,6 +1,12 @@
-﻿
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
 using Hl7.Cql.Operators;
-using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -60,7 +66,7 @@ namespace Hl7.Cql.Runtime
         {
             Operators = operators;
             Definitions = delegates ?? new DefinitionDictionary<Delegate>();
-            if (parameters != null) 
+            if (parameters != null)
                 Parameters = parameters;
         }
 

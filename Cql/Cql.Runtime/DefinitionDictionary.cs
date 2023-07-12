@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,9 +20,9 @@ namespace Hl7.Cql.Runtime
         where T : class
     {
 
-        private Dictionary<string, Dictionary<string, List<(Type[] Signature, T T)>>> ExpressionsByLibrary = new();
+        private readonly Dictionary<string, Dictionary<string, List<(Type[] Signature, T T)>>> ExpressionsByLibrary = new();
 
-        private Dictionary<string, List<Tag>> TagsByLibrary = new();
+        private readonly Dictionary<string, List<Tag>> TagsByLibrary = new();
 
 
         /// <summary>
@@ -104,7 +112,7 @@ namespace Hl7.Cql.Runtime
 
                 if (library.TryGetValue(definition, out var overloads))
                 {
-                    foreach(var overload in overloads)
+                    foreach (var overload in overloads)
                     {
                         var score = Score(signature, overload.Signature);
                         if (score == 0)
@@ -217,7 +225,7 @@ namespace Hl7.Cql.Runtime
 
             if (ContainsKey(libraryName, definition, signature))
                 throw new ArgumentException("Overload already exists.");
-            
+
             if (!library.TryGetValue(definition, out var overloads))
             {
                 overloads = new List<(Type[], T)>();
@@ -280,13 +288,13 @@ namespace Hl7.Cql.Runtime
             if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName, out var library))
             {
                 var allDefinitions = library;
-                var defines = new Dictionary<string, T>();   
+                var defines = new Dictionary<string, T>();
 
-                foreach(var (defName, overloads) in allDefinitions)
+                foreach (var (defName, overloads) in allDefinitions)
                 {
-                    foreach(var (paramTypes, del) in overloads)
+                    foreach (var (paramTypes, del) in overloads)
                     {
-                        if(paramTypes.Length == 0)
+                        if (paramTypes.Length == 0)
                         {
                             defines.Add(defName, del);
                         }
