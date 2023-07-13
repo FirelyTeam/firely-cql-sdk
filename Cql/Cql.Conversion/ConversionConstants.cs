@@ -1,4 +1,12 @@
-﻿namespace Hl7.Cql.Conversion
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql.Conversion
 {
     /// <summary>
     /// Conversions according to https://cql.hl7.org/09-b-cqlreference.html#quantity
@@ -25,7 +33,7 @@
         /// <summary>
         /// Defines years per day, equal to 1 over <see cref="DaysPerYear"/>.
         /// </summary>
-        public const decimal YearsPerDay = 1/DaysPerYear;
+        public const decimal YearsPerDay = 1 / DaysPerYear;
         /// <summary>
         /// Defines 12 months per year in <see cref="System.Decimal"/> precision.
         /// </summary>
@@ -52,7 +60,7 @@
         /// <summary>
         /// Defines years per day, equal to 1 over <see cref="DaysPerMonth"/>.
         /// </summary>
-        public const decimal MonthsPerDay = 1/ DaysPerMonth;
+        public const decimal MonthsPerDay = 1 / DaysPerMonth;
 
 
         /// <summary>
@@ -73,7 +81,7 @@
         /// <summary>
         /// Defines imperial feet per imperial inch, equal to 1 over <see cref="InchesPerFoot"/>.
         /// </summary>
-        public const decimal FeetPerInch = 1/ InchesPerFoot;
+        public const decimal FeetPerInch = 1 / InchesPerFoot;
 
         /// <summary>
         /// Defines 36 imperial inches per imperial yard.
@@ -92,7 +100,7 @@
         /// <summary>
         /// Defines imperial inches per centimeter inch, equal to 1 over <see cref="CentimetersPerInch"/>.
         /// </summary>
-        public const decimal InchesPerCentimeter = 1/ CentimetersPerInch;
+        public const decimal InchesPerCentimeter = 1 / CentimetersPerInch;
 
 
 

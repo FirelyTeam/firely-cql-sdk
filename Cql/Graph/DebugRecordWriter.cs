@@ -1,10 +1,17 @@
-﻿using System.Threading.Tasks;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
 
+using System.Threading.Tasks;
 
 namespace Hl7.Cql.Graph
 {
     public class DebugRecordWriter<TExecutionContext> : IRecordWriter<TExecutionContext>
-        where TExecutionContext: ExecutionContext
+        where TExecutionContext : ExecutionContext
     {
         public static readonly DebugRecordWriter<TExecutionContext> Instance = new DebugRecordWriter<TExecutionContext>();
         private DebugRecordWriter() { }

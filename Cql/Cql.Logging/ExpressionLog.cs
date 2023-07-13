@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Nodes;
@@ -34,16 +42,16 @@ namespace Hl7.Cql.Logging
 
         public override bool Equals(object obj)
         {
-            if(obj is ExpressionLog otherLog)
+            if (obj is ExpressionLog otherLog)
             {
-                if(locator != null && otherLog.locator != null 
+                if (locator != null && otherLog.locator != null
                     && locator.CompareTo(otherLog.locator) == RangeComparisonResult.ExactlyEqual)
                 {
-                    if(callStack == null && otherLog.callStack == null)
+                    if (callStack == null && otherLog.callStack == null)
                     {
                         return true;
                     }
-                    if(callStack != null && otherLog.callStack != null)
+                    if (callStack != null && otherLog.callStack != null)
                     {
                         return callStack.SequenceEqual(otherLog.callStack);
                     }
@@ -67,7 +75,7 @@ namespace Hl7.Cql.Logging
             var allNodes = new List<ExpressionLog>();
             allNodes.Add(root);
 
-            foreach(var log in sourceLogs)
+            foreach (var log in sourceLogs)
             {
                 AddLogToTree(root, log, allNodes);
             }
@@ -94,7 +102,7 @@ namespace Hl7.Cql.Logging
             if (currNode.locator == null) return false;
             if (logToAdd.locator == null) return false;
 
-           
+
             // Check for Redundency 
             foreach (var child in nodes)
             {
@@ -116,7 +124,7 @@ namespace Hl7.Cql.Logging
 
             if (currNode.parent == null) // We are the root, just add to children
             {
-                if (currNode.children == null) 
+                if (currNode.children == null)
                     currNode.children = new List<ExpressionLog>();
 
                 logToAdd.parent = currNode;
@@ -124,7 +132,7 @@ namespace Hl7.Cql.Logging
             }
             else // Add to current node's parent. the logToAdd is in the same depth as currNode
             {
-                if (currNode.parent.children == null) 
+                if (currNode.parent.children == null)
                     currNode.parent.children = new List<ExpressionLog>();
 
                 logToAdd.parent = currNode.parent;
@@ -154,7 +162,7 @@ namespace Hl7.Cql.Logging
                 var comparisonWithLogToAdd = logToAdd.locator!.CompareTo(child.locator!);
                 if (comparisonWithLogToAdd == RangeComparisonResult.Contains)
                 {
-                    if (logToAdd.children == null) 
+                    if (logToAdd.children == null)
                         logToAdd.children = new List<ExpressionLog>();
 
                     child.parent = logToAdd;

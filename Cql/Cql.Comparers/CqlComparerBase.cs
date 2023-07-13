@@ -1,4 +1,12 @@
-﻿namespace Hl7.Cql.Comparers
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql.Comparers
 {
     /// <summary>
     /// Implements base functionality for <see cref="ICqlComparer"/> and <see cref="IEquivalenceComparer"/>.
@@ -6,8 +14,8 @@
     /// <typeparam name="T">The type to compare.</typeparam>
     public abstract class CqlComparerBase<T> : ICqlComparer<T>, ICqlComparer,
         IEquivalenceComparer<T>, IEquivalenceComparer
-        where T: class
-    {        
+        where T : class
+    {
 
         /// <inheritdoc />
         public abstract int? Compare(T x, T y, string? precision);
@@ -34,7 +42,7 @@
 
         /// <inheritdoc />
         public abstract int GetHashCode(T x);
-        
+
         /// <inheritdoc />
         public int GetHashCode(object x) => GetHashCode((x as T)!);
     }

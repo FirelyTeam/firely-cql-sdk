@@ -1,21 +1,28 @@
-﻿using Microsoft.Extensions.Logging;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Elm.Expressions;
+using Hl7.Cql.Firely;
+using Hl7.Cql.Graph;
+using Hl7.Cql.Iso8601;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Text;
-using System.Reflection;
 using ElmPackage = Hl7.Cql.Elm.ElmPackage;
-using Hl7.Cql.Graph;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Iso8601;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Elm.Expressions;
-using Hl7.Fhir.Model;
 using Library = Hl7.Fhir.Model.Library;
-using Hl7.Cql.Firely;
-using Hl7.Cql.Conversion;
 
 namespace Hl7.Cql.Packaging
 {
@@ -611,8 +618,7 @@ namespace Hl7.Cql.Packaging
             return parameterDefinition;
         }
 
-
-        static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
+        private static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
         {
             var now = DateTime.Now;
             var loop = true;

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
@@ -8,7 +16,7 @@ namespace Hl7.Cql.Compiler
     internal class Hasher
     {
 
-        private MD5 MD5 { get; }  = MD5.Create();
+        private MD5 MD5 { get; } = MD5.Create();
         public virtual string Hash(string input)
         {
             var bytes = Encoding.UTF8.GetBytes(input);

@@ -1,17 +1,25 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using AgileObjects.ReadableExpressions;
+using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Graph;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using AgileObjects.ReadableExpressions;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Logging;
-using Hl7.Cql.CodeGeneration.NET.Visitors;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Graph;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -106,7 +114,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Func<string, Stream> libraryNameToStream,
             Func<string, string?>? libraryNameToClassName = null,
             bool closeStream = true,
-            Func<string,bool>? writeFile = null)
+            Func<string, bool>? writeFile = null)
         {
             if (libraryNameToClassName == null)
                 libraryNameToClassName = VariableNameGenerator.NormalizeIdentifier;
@@ -469,7 +477,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
         }
-       
+
         private int WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
             writer.WriteLine();

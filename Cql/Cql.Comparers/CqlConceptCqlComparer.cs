@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System.Linq;
 
 namespace Hl7.Cql.Comparers
@@ -26,7 +34,7 @@ namespace Hl7.Cql.Comparers
                 .ToArray();
             if (xCodes.Length != yCodes.Length)
                 return xCodes.Length - yCodes.Length;
-            for(int i = 0; i < xCodes.Length; i++)
+            for (int i = 0; i < xCodes.Length; i++)
             {
                 var xCode = xCodes[i];
                 var yCode = yCodes[i];
@@ -55,7 +63,7 @@ namespace Hl7.Cql.Comparers
                 .ToArray();
             var yCodes = y.codes.Select(code => code.code)
                 .ToArray();
-            
+
             for (int i = 0; i < xCodes.Length; i++)
             {
                 var xCode = xCodes[i];
@@ -75,7 +83,7 @@ namespace Hl7.Cql.Comparers
             int baseCode = typeof(CqlConcept).GetHashCode();
             if (x == null || x.codes == null)
                 return baseCode;
-            foreach(var code in x.codes)
+            foreach (var code in x.codes)
             {
                 var codeHashCode = CodeComparer.GetHashCode(code);
                 baseCode ^= codeHashCode;

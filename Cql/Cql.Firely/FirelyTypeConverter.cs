@@ -1,11 +1,17 @@
-﻿using Hl7.Cql.Conversion;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
-using Hl7.Fhir.ElementModel.Types;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
 using System.Reflection;
-using System.Runtime.CompilerServices;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely
@@ -89,17 +95,20 @@ namespace Hl7.Cql.Firely
             converter.AddConversion<byte[], string>(binary => Convert.ToBase64String(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
             // TODO: this is a performance problem
-            converter.AddConversion<string, CqlDate?>(str => {
+            converter.AddConversion<string, CqlDate?>(str =>
+            {
                 if (CqlDate.TryParse(str, out var date))
                     return date!;
                 else return null;
             });
-            converter.AddConversion<string, CqlDateTime?>(str => {
+            converter.AddConversion<string, CqlDateTime?>(str =>
+            {
                 if (CqlDateTime.TryParse(str, out var dateTime))
                     return dateTime;
                 else return null;
             });
-            converter.AddConversion<string, CqlTime?>(str => {
+            converter.AddConversion<string, CqlTime?>(str =>
+            {
                 if (CqlTime.TryParse(str, out var time))
                     return time;
                 else return null;

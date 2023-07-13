@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -32,7 +40,7 @@ namespace Hl7.Cql.Operators
         /// <param name="codes">The list of codes on which to filter the resources, or <see langword="null"/>.</param>
         /// <param name="codeProperty">The property of <typeparamref name="T"/> which defines the code to compare against <paramref name="codes"/>.  This parameter should be <see langword="null"/> when <paramref name="codes"/> is <see langword="null"/>.</param>
         /// <returns>Resources of type <typeparamref name="T"/> matching the parameter criteria.</returns>
-        IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, 
+        IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null,
             PropertyInfo? codeProperty = null)
             where T : class;
 

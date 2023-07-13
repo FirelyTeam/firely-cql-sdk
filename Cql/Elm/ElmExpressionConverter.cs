@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Elm.Expressions;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Elm.Expressions;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -12,7 +20,7 @@ namespace Hl7.Cql.Elm
 
         public override object ReadJson(JsonReader reader, Type objectType, object? existingValue, JsonSerializer serializer)
         {
-            
+
             if (reader.TokenType == JsonToken.Null)
                 return null!;
             var expression = JToken.ReadFrom(reader);
@@ -117,7 +125,7 @@ namespace Hl7.Cql.Elm
                 "MeetsAfter" => new MeetsAfterExpression(),
                 "Message" => new MessageExpression(),
                 "Min" => new MinExpression(),
-                "MinValue" =>  new MinimumExpression(),
+                "MinValue" => new MinimumExpression(),
                 "Minimum" => new MinimumExpression(),
                 "Mode" => new ModeExpression(),
                 "Modulo" => new ModuloExpression(),
@@ -177,7 +185,7 @@ namespace Hl7.Cql.Elm
                 "ToDateTime" => new ToDateTimeExpression(),
                 "Today" => new TodayExpression(),
                 "ToDecimal" => new ToDecimalExpression(),
-                "ToInteger"=> new ToIntegerExpression(),
+                "ToInteger" => new ToIntegerExpression(),
                 "ToList" => new ToListExpression(),
                 "ToQuantity" => new ToQuantityExpression(),
                 "ToString" => new ToStringExpression(),

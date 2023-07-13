@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 
@@ -112,8 +120,8 @@ namespace Hl7.Cql.ValueSets
         private string GetKey(string valueSetUri, string? code, string? systemUri) =>
             $"{valueSetUri?.ToLowerInvariant()}\0{systemUri?.ToLowerInvariant() ?? ""}\0{code?.ToLowerInvariant() ?? ""}";
 
-        private Dictionary<string, CqlCode> CodesByHash = new();
-        private Dictionary<string, HashSet<CqlCode>> CodesInValueSet =
+        private readonly Dictionary<string, CqlCode> CodesByHash = new();
+        private readonly Dictionary<string, HashSet<CqlCode>> CodesInValueSet =
             new(StringComparer.OrdinalIgnoreCase);
 
         private class CqlCodeHasher : IEqualityComparer<CqlCode>

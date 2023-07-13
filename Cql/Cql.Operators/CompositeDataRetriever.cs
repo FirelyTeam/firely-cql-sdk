@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +17,7 @@ namespace Hl7.Cql.Operators
     /// <summary>
     /// Composes zero or more <see cref="IDataRetriever"/> instances by concatenating the results of the retrieve methods.
     /// </summary>
-    public class CompositeDataRetriever: IDataRetriever
+    public class CompositeDataRetriever : IDataRetriever
     {
         /// <summary>
         /// Creates an instance.
@@ -19,7 +27,7 @@ namespace Hl7.Cql.Operators
         public CompositeDataRetriever(params IDataRetriever[] retrievers)
         {
             Retrievers = retrievers ?? throw new ArgumentNullException(nameof(retrievers));
-            if (retrievers.Any(r=>r is null))
+            if (retrievers.Any(r => r is null))
                 throw new ArgumentNullException(nameof(retrievers), "At least one retriever supplied is null.");
         }
 
@@ -39,7 +47,7 @@ namespace Hl7.Cql.Operators
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class
         {
             IEnumerable<T> result = Enumerable.Empty<T>();
-            foreach(var retriever in Retrievers)
+            foreach (var retriever in Retrievers)
             {
                 result = result.Concat(retriever.RetrieveByCodes<T>(codes, codeProperty));
             }

@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Conversion;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
@@ -37,7 +45,7 @@ namespace Hl7.Cql.Operators
         bool? After(object? left, object? right, string? precision);
         int? Age(string precision);
         int? AgeAt(CqlDate? asOf, string precision);
-        TAccumulate? AggregateOrNull<TSource,TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
+        TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
         bool? AllTrue(IEnumerable<bool?> argument);
         bool? AllTrue(IEnumerable<Lazy<bool?>> argument);
         bool? And(bool? left, bool? right);

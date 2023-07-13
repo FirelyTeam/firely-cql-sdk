@@ -1,10 +1,17 @@
-﻿using Cql.Operators;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
 using Hl7.Cql.Comparers;
-using Hl7.Cql.Operators;
 using Hl7.Cql.Conversion;
+using Hl7.Cql.Iso8601;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
-using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +34,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
         /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
         /// <returns></returns>
-        public static CqlOperators Create(TypeResolver resolver, 
+        public static CqlOperators Create(TypeResolver resolver,
             TypeConverter? converter = null,
             IDataRetriever? dataRetriever = null,
             ICqlComparer? comparer = null,
