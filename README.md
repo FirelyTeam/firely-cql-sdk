@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/firely/firely-net-sdk/_apis/build/status%2FFirelyTeam.cql-sdk?repoName=FirelyTeam%2Fcql-sdk&branchName=develop)](https://dev.azure.com/firely/firely-net-sdk/_build/latest?definitionId=135&repoName=FirelyTeam%2Fcql-sdk&branchName=develop)
+[![Build Status](https://dev.azure.com/firely/firely-net-sdk/_apis/build/status%2FFirelyTeam.firely-cql-sdk?repoName=FirelyTeam%2Ffirely-cql-sdk&branchName=develop)](https://dev.azure.com/firely/firely-net-sdk/_build/latest?definitionId=143&repoName=FirelyTeam%2Ffirely-cql-sdk&branchName=develop)
 
 
 ## Introduction ##
@@ -6,7 +6,7 @@ This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec
 
 ## Release notes ##
 This software is in alpha phase. Any part of the public interface can (and will) change as we prepare the library for its 1.0 release. Read the releases notes 
-on [cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases). 
+on [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases). 
 
 ## Getting Started ##
 Some parts of the presentation from Evan?
