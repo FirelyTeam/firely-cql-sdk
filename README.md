@@ -6,7 +6,7 @@ This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec
 
 ## Release notes ##
 This software is in alpha phase. Any part of the public interface can (and will) change as we prepare the library for its 1.0 release. Read the releases notes 
-on [cql-sdk/releases](https://github.com/FirelyTeam/cql-sdk/releases). 
+on [cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases). 
 
 ## Getting Started ##
 Some parts of the presentation from Evan?
@@ -24,7 +24,7 @@ During development we sometimes use Firely's Github Package feed, to be able to 
 
 
 ## Support 
-We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/cql-sdk/issues](https://github.com/FirelyTeam/cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.
+We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.
 
 ## Contributing ##
 We are welcoming contributions!
