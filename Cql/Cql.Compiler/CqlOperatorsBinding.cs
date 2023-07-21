@@ -1050,7 +1050,7 @@ namespace Hl7.Cql.Compiler
                     && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
-                    return Retrieve(operators, dataRetriever, type, valueSetOrCodes, codePropertyExpression);
+                    return Retrieve(operators, dataRetriever, type, valueSetOrCodes);
                 }
                 else throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));
             }
@@ -1058,12 +1058,12 @@ namespace Hl7.Cql.Compiler
         }
 
         protected MethodCallExpression Retrieve(MemberExpression operators, MemberExpression dataRetrieve,
-            Type resourceType, Expression codes, Expression? codeProperty)
+            Type resourceType, Expression codes)
         {
             MethodInfo? forType = null;
             if (codes.Type == typeof(CqlValueSet))
             {
-                var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByValueSet));
+                var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByValueSet))!;
                 forType = method.MakeGenericMethod(resourceType);
             }
             else if (IsOrImplementsIEnumerableOfT(codes.Type))
@@ -1071,7 +1071,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeResolver.GetListElementType(codes.Type, true)!;
                 if (elementType == typeof(CqlCode))
                 {
-                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes));
+                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes))!;
                     forType = method.MakeGenericMethod(resourceType);
                 }
                 // cql-to-elm blindly calls ToList when an expression ref is used
@@ -1082,7 +1082,7 @@ namespace Hl7.Cql.Compiler
                 {
                     // call Flatten.
                     codes = Flatten(operators, codes);
-                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes));
+                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes))!;
                     forType = method.MakeGenericMethod(resourceType);
                 }
                 else throw new ArgumentException($"Retrieve statements with an ExpressionRef in the terminology position must be list of {nameof(CqlCode)} or a list of lists of {nameof(CqlCode)}.  Instead, the list's element type is {elementType.Name}.", nameof(codes));
