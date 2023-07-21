@@ -2,14 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace Hl7.Cql.Operators
 {
     /// <summary>
     /// Composes zero or more <see cref="IDataRetriever"/> instances by concatenating the results of the retrieve methods.
     /// </summary>
-    public class CompositeDataRetriever: IDataRetriever
+    public class CompositeDataRetriever : IDataRetriever
     {
         /// <summary>
         /// Creates an instance.
@@ -19,7 +18,7 @@ namespace Hl7.Cql.Operators
         public CompositeDataRetriever(params IDataRetriever[] retrievers)
         {
             Retrievers = retrievers ?? throw new ArgumentNullException(nameof(retrievers));
-            if (retrievers.Any(r=>r is null))
+            if (retrievers.Any(r => r is null))
                 throw new ArgumentNullException(nameof(retrievers), "At least one retriever supplied is null.");
         }
 
@@ -36,12 +35,12 @@ namespace Hl7.Cql.Operators
         /// <param name="codes">The list of codes on which to filter the resources, or <see langword="null"/>.</param>
         /// <param name="codeProperty">The property of <typeparamref name="T"/> which defines the code to compare against <paramref name="codes"/>.  This parameter should be <see langword="null"/> when <paramref name="codes"/> is <see langword="null"/>.</param>
         /// <returns>Resources of type <typeparamref name="T"/> matching the parameter criteria.</returns>
-        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class
+        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null) where T : class
         {
             IEnumerable<T> result = Enumerable.Empty<T>();
-            foreach(var retriever in Retrievers)
+            foreach (var retriever in Retrievers)
             {
-                result = result.Concat(retriever.RetrieveByCodes<T>(codes, codeProperty));
+                result = result.Concat(retriever.RetrieveByCodes<T>(codes));
             }
             return result;
         }
@@ -54,12 +53,12 @@ namespace Hl7.Cql.Operators
         /// <param name="valueSet">The value set on which to filter the resources, or <see langword="null"/>.</param>
         /// <param name="codeProperty">The property of <typeparamref name="T"/> which defines the code to compare against <paramref name="valueSet"/>.  This parameter should be <see langword="null"/> when <paramref name="valueSet"/> is <see langword="null"/>.</param>
         /// <returns>Resources of type <typeparamref name="T"/> matching the parameter criteria.</returns>
-        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class
+        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null) where T : class
         {
             IEnumerable<T> result = Enumerable.Empty<T>();
             foreach (var retriever in Retrievers)
             {
-                result = result.Concat(retriever.RetrieveByValueSet<T>(valueSet, codeProperty));
+                result = result.Concat(retriever.RetrieveByValueSet<T>(valueSet));
             }
             return result;
         }

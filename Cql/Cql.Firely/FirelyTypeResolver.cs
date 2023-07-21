@@ -12,9 +12,9 @@ namespace Hl7.Cql.Firely
         {
             Inspector = inspector;
 
-            addTypesFromInspector();
+            AddTypesFromInspector();
             // Fix lack of inheritance in the SDK
-            adjust();
+            Adjust();
         }
 
         public override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
@@ -33,7 +33,7 @@ namespace Hl7.Cql.Firely
         /// <returns>The property, or <c>null</c> if the type or property is unknown.</returns>
         protected override PropertyInfo? GetPropertyCore(Type type, string propertyName)
         {
-            PropertyInfo? result = null;
+            PropertyInfo? result;
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
             {
                 result = ReflectionHelper.FindProperty(type, "Value");
@@ -64,18 +64,6 @@ namespace Hl7.Cql.Firely
             return result;
         }
 
-        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
-        {
-            var type = ResolveType(typeSpecifier);
-            if (type is null) return null;
-
-            var mapping = Inspector.FindClassMapping(type);
-
-            return mapping
-                ?.PrimaryCodePath
-                ?.NativeProperty;
-        }
-
         public override Type? PatientType => Inspector.PatientMapping?.NativeType;
 
         public override PropertyInfo? PatientBirthDateProperty => typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
@@ -92,7 +80,7 @@ namespace Hl7.Cql.Firely
 
         internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
 
-        private void adjust()
+        private void Adjust()
         {
             Types["{http://hl7.org/fhir}positiveInt"] = typeof(Hl7.Fhir.Model.Integer);
             Types["{http://hl7.org/fhir}unsignedInt"] = typeof(Hl7.Fhir.Model.Integer);
@@ -101,7 +89,7 @@ namespace Hl7.Cql.Firely
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
         }
 
-        private void addTypesFromInspector()
+        private void AddTypesFromInspector()
         {
             var classes = Inspector.ClassMappings.Select(cm => (getTypeSpecFromMapping(cm), cm.NativeType));
 

@@ -47,7 +47,7 @@ namespace Hl7.Cql.Comparers
             }
         }
 
-        public int? Compare(object x, object y, string? precision) => Compare(x as CqlCode, y as CqlCode, precision);
+        public int? Compare(object? x, object? y, string? precision) => Compare(x as CqlCode, y as CqlCode, precision);
 
         public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
         {
@@ -59,7 +59,7 @@ namespace Hl7.Cql.Comparers
             else return compare == 0;
         }
 
-        public bool? Equals(object x, object y, string? precision) => Equals(x as CqlCode, y as CqlCode, precision);
+        public bool? Equals(object? x, object? y, string? precision) => Equals(x as CqlCode, y as CqlCode, precision);
 
         public bool Equivalent(CqlCode x, CqlCode y, string? precision)
         {
@@ -81,13 +81,13 @@ namespace Hl7.Cql.Comparers
             }
         }
 
-        public bool Equivalent(object x, object y, string? precision) => Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
+        public bool Equivalent(object? x, object? y, string? precision) => Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
 
         public int GetHashCode(CqlCode? x) =>
             x == null
             ? typeof(CqlCode).GetHashCode()
             : $"{x.code ?? "null"}\0{x.system}\0".GetHashCode();
 
-        public int GetHashCode(object x) => GetHashCode(x as CqlCode);
+        public int GetHashCode(object? x) => GetHashCode(x as CqlCode);
     }
 }

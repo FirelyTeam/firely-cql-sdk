@@ -35,11 +35,11 @@ namespace Hl7.Cql.Comparers
                 throw new NotSupportedException($"Comparison against unlike units {x.unit} and {y.unit} is not supported.");
         }
 
-        public int? Compare(object x, object y, string? precision = null) => Compare(x as CqlQuantity, y as CqlQuantity, precision);
+        public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlQuantity, y as CqlQuantity, precision);
 
         public bool? Equals(CqlQuantity? x, CqlQuantity? y, string? precision = null) => Compare(x, y, precision) == 0;
 
-        public bool? Equals(object x, object y, string? precision = null)=> Equals(x as CqlQuantity, y as CqlQuantity, precision); 
+        public bool? Equals(object? x, object? y, string? precision = null) => Equals(x as CqlQuantity, y as CqlQuantity, precision);
 
         public bool Equivalent(CqlQuantity? x, CqlQuantity? y, string? precision = null)
         {

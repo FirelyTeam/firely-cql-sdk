@@ -15,8 +15,8 @@ namespace Hl7.Cql.Comparers
 
         public ICqlComparer CodeComparer { get; }
 
-        public int? Compare(object x, object y, string? precision = null) => Compare((CqlConcept)x, (CqlConcept)y, precision);
-        public int? Compare(CqlConcept x, CqlConcept y, string? precision = null)
+        public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlConcept, y as CqlConcept, precision);
+        public int? Compare(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
             if (x == null || y == null || x.codes == null || y.codes == null)
                 return null;
@@ -26,7 +26,7 @@ namespace Hl7.Cql.Comparers
                 .ToArray();
             if (xCodes.Length != yCodes.Length)
                 return xCodes.Length - yCodes.Length;
-            for(int i = 0; i < xCodes.Length; i++)
+            for (int i = 0; i < xCodes.Length; i++)
             {
                 var xCode = xCodes[i];
                 var yCode = yCodes[i];
@@ -37,17 +37,17 @@ namespace Hl7.Cql.Comparers
             return 0;
         }
 
-        public bool? Equals(object x, object y, string? precision = null) =>
-            Equals((CqlConcept)x, (CqlConcept)y, precision);
+        public bool? Equals(object? x, object? y, string? precision = null) =>
+            Equals(x as CqlConcept, y as CqlConcept, precision);
 
-        public bool? Equals(CqlConcept x, CqlConcept y, string? precision = null)
+        public bool? Equals(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
             if (x == null || y == null)
                 return null;
             else return Compare(x, y, precision) == 0;
         }
 
-        public bool Equivalent(CqlConcept x, CqlConcept y, string? precision = null)
+        public bool Equivalent(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
             if (x == null || y == null || x.codes == null || y.codes == null)
                 return false;
@@ -55,34 +55,34 @@ namespace Hl7.Cql.Comparers
                 .ToArray();
             var yCodes = y.codes.Select(code => code.code)
                 .ToArray();
-            
+
             for (int i = 0; i < xCodes.Length; i++)
             {
                 var xCode = xCodes[i];
                 var yCode = yCodes[i];
-                var equivalent = CodeComparer.Equivalent(xCode!, yCode!, precision);
+                var equivalent = CodeComparer.Equivalent(xCode, yCode, precision);
                 if (equivalent)
                     return true;
             }
             return false;
         }
 
-        public bool Equivalent(object x, object y, string? precision = null) =>
-             Equivalent((x as CqlConcept)!, (y as CqlConcept)!, precision);
+        public bool Equivalent(object? x, object? y, string? precision = null) =>
+             Equivalent(x as CqlConcept, y as CqlConcept, precision);
 
         public int GetHashCode(CqlConcept? x)
         {
             int baseCode = typeof(CqlConcept).GetHashCode();
             if (x == null || x.codes == null)
                 return baseCode;
-            foreach(var code in x.codes)
+            foreach (var code in x.codes)
             {
                 var codeHashCode = CodeComparer.GetHashCode(code);
                 baseCode ^= codeHashCode;
             }
             return baseCode;
         }
-        public int GetHashCode(object x) => GetHashCode(x as CqlConcept);
+        public int GetHashCode(object? x) => GetHashCode(x as CqlConcept);
 
     }
 }

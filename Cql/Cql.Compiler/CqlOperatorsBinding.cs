@@ -1,7 +1,7 @@
-﻿using Hl7.Cql.Operators;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Conversion;
+﻿using Hl7.Cql.Conversion;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
@@ -1038,8 +1038,8 @@ namespace Hl7.Cql.Compiler
         {
             if (typeExpression is ConstantExpression ce && ce.Type == typeof(Type))
             {
-                if (ce.Value is Type type 
-                    && codePropertyExpression is ConstantExpression cpe 
+                if (ce.Value is Type type
+                    && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
                     return Retrieve(operators, dataRetriever, type, valueSetOrCodes, codePropertyExpression);
@@ -1080,7 +1080,7 @@ namespace Hl7.Cql.Compiler
                 else throw new ArgumentException($"Retrieve statements with an ExpressionRef in the terminology position must be list of {nameof(CqlCode)} or a list of lists of {nameof(CqlCode)}.  Instead, the list's element type is {elementType.Name}.", nameof(codes));
             }
             else throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
-            var call = Expression.Call(dataRetrieve, forType, codes, codeProperty);
+            var call = Expression.Call(dataRetrieve, forType, codes);
             return call;
         }
 

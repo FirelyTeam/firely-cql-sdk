@@ -1,6 +1,5 @@
 ﻿using Hl7.Cql.Runtime;
 using System;
-using System.Collections.Generic;
 using System.Reflection;
 
 namespace Hl7.Cql.Model
@@ -13,38 +12,14 @@ namespace Hl7.Cql.Model
         protected ModelTypeResolver(ModelInfo model)
         {
             Model = model;
-            ClassInfo = Models.ClassesById(model);
-            Properties = new Dictionary<string, PropertyInfo?>();
             patientType = new Lazy<Type?>(GetPatientType);
             patientBirthDate = new Lazy<PropertyInfo?>(GetPatientBirthdate);
         }
 
         public ModelInfo Model { get; }
-        private readonly IDictionary<string, ClassInfo> ClassInfo;
-        private readonly IDictionary<string, PropertyInfo?> Properties;
-
-        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
-        {
-            PropertyInfo? propertyInfo = null;
-            if (Properties.TryGetValue(typeSpecifier, out propertyInfo))
-            {
-                return propertyInfo;
-            }
-            else
-            {
-                if (ClassInfo.TryGetValue(typeSpecifier, out var classInfo)
-                    && !string.IsNullOrWhiteSpace(classInfo.primaryCodePath)
-                    && Types.TryGetValue(typeSpecifier, out var type))
-                {
-                    propertyInfo = GetProperty(type, classInfo.primaryCodePath);
-                }
-                Properties.Add(typeSpecifier, propertyInfo);
-                return propertyInfo;
-            }
-        }
 
         public override Type? PatientType => patientType.Value;
-        private Lazy<Type?> patientType;
+        private readonly Lazy<Type?> patientType;
         private Type? GetPatientType()
         {
             if (!string.IsNullOrWhiteSpace(Model.patientClassName))
@@ -67,7 +42,7 @@ namespace Hl7.Cql.Model
         }
 
         public override PropertyInfo? PatientBirthDateProperty => patientBirthDate.Value;
-        private Lazy<PropertyInfo?> patientBirthDate;
+        private readonly Lazy<PropertyInfo?> patientBirthDate;
         private PropertyInfo? GetPatientBirthdate()
         {
             var patientType = PatientType;

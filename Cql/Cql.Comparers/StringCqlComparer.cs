@@ -1,23 +1,30 @@
-﻿using System;
+﻿#nullable enable
+using System;
 
 namespace Hl7.Cql.Comparers
 {
     /// <summary>
-    /// Compares normalized strings given <see cref="Comparer"/>.
+    /// Compares normalized strings given <see cref="_comparer"/>.
     /// </summary>
     /// <remarks>
-    /// Strings are normalized using <see cref="String.Normalize"/>.
+    /// Strings are normalized using <see cref="string.Normalize()"/>.
     /// </remarks>
-    public class StringCqlComparer : ICqlComparer, ICqlComparer<string>
+    public class StringCqlComparer : ICqlComparer, ICqlComparer<string?>
     {
-        public System.StringComparer Comparer { get; }
-        public StringCqlComparer(System.StringComparer idComparer)
+        private readonly StringComparer _comparer;
+
+        /// <summary>
+        /// Creates an instance that uses the indicated <see cref="StringComparer"/> on normalized string.
+        /// </summary>
+        public StringCqlComparer(StringComparer idComparer)
         {
-            Comparer = idComparer ?? throw new ArgumentNullException(nameof(idComparer));
+            _comparer = idComparer ?? throw new ArgumentNullException(nameof(idComparer));
         }
 
         /// <inheritdoc/>
-        public int? Compare(object x, object y, string? precision = null) => Compare(x as string, y as string, null);
+        public int? Compare(object? x, object? y, string? precision = null) => Compare(x as string, y as string, null);
+
+        /// <inheritdoc/>
         public int? Compare(string? x, string? y, string? precision = null)
         {
             if (x == null)
@@ -28,17 +35,17 @@ namespace Hl7.Cql.Comparers
             }
             else if (y == null)
                 return 1;
-            return Comparer.Compare(x.Normalize(), y.Normalize());
+            return _comparer.Compare(x.Normalize(), y.Normalize());
         }
 
         /// <inheritdoc/>
-        public bool? Equals(string x, string y, string? precision = null) => Compare(x, y, precision) == 0;
-        
-        /// <inheritdoc/>
-        public bool? Equals(object x, object y, string? precision = null) => Compare(x as string, y as string, precision) == 0;
+        public bool? Equals(string? x, string? y, string? precision = null) => Compare(x, y, precision) == 0;
 
         /// <inheritdoc/>
-        public bool Equivalent(object x, object y, string? precision = null) =>
+        public bool? Equals(object? x, object? y, string? precision = null) => Compare(x as string, y as string, precision) == 0;
+
+        /// <inheritdoc/>
+        public bool Equivalent(object? x, object? y, string? precision = null) =>
             Equivalent(x as string, y as string, precision);
 
         /// <inheritdoc/>
@@ -54,7 +61,7 @@ namespace Hl7.Cql.Comparers
                 return false;
             var thisNormalized = x!.Normalize();
             var otherNormalized = y!.Normalize();
-            var areEqual = Comparer.Equals(thisNormalized, otherNormalized);
+            var areEqual = _comparer.Equals(thisNormalized, otherNormalized);
             return areEqual;
         }
 
@@ -65,6 +72,8 @@ namespace Hl7.Cql.Comparers
             : x.GetHashCode();
 
         /// <inheritdoc/>
-        public int GetHashCode(object x) => GetHashCode(x as string);
+        public int GetHashCode(object? x) => GetHashCode(x as string);
     }
 }
+
+#nullable restore
