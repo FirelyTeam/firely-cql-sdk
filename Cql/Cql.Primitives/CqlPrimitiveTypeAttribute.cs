@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 
 namespace Hl7.Cql.Primitives
 {
@@ -6,7 +14,7 @@ namespace Hl7.Cql.Primitives
     /// Decorates one of the primitive types with the System type it models.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Struct)]
-    public class CqlPrimitiveTypeAttribute: Attribute
+    public class CqlPrimitiveTypeAttribute : Attribute
     {
         /// <summary>
         /// The System type modeled by the class decorated with this attribute.

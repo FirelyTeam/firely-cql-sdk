@@ -1,9 +1,15 @@
-﻿
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Configuration;
@@ -165,7 +171,8 @@ public static class Program
         }
         return 0;
     }
-    static string CanonicalUri(Resource resource)
+
+    private static string CanonicalUri(Resource resource)
     {
         if (string.IsNullOrWhiteSpace(resource.Id))
             throw new ArgumentException("Resource must have an id", nameof(resource));
@@ -173,8 +180,7 @@ public static class Program
         return path;
     }
 
-
-    static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
+    private static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
     {
         var now = DateTime.Now;
         var loop = true;
@@ -188,7 +194,7 @@ public static class Program
         }
     }
 
-    static int ShowHelp()
+    private static int ShowHelp()
     {
         Console.WriteLine();
         Console.WriteLine("Measure Packager");

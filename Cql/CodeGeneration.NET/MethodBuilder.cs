@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Runtime;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Runtime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +21,9 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static int AssemblyCount = 1;
         private static int InterfaceCount = 1;
 
-        private AssemblyName AssemblyName;
-        private AssemblyBuilder AssemblyBuilder;
-        private ModuleBuilder ModuleBuilder;
+        private readonly AssemblyName AssemblyName;
+        private readonly AssemblyBuilder AssemblyBuilder;
+        private readonly ModuleBuilder ModuleBuilder;
 
 
         public MethodBuilder()
@@ -25,7 +33,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             ModuleBuilder = AssemblyBuilder.DefineDynamicModule(AssemblyName.Name!);
         }
 
-        public (DefinitionDictionary<MethodInfo>,IDictionary<string,Type>) CreateMethodsFor(DefinitionDictionary<LambdaExpression> expressions)
+        public (DefinitionDictionary<MethodInfo>, IDictionary<string, Type>) CreateMethodsFor(DefinitionDictionary<LambdaExpression> expressions)
         {
             var types = new Dictionary<string, Type>();
             var methods = new DefinitionDictionary<MethodInfo>();
@@ -40,7 +48,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                         {
                             var returnType = overload.Item2.ReturnType;
                             var parameterTypes = overload.Item1;
-                            if (definition.Key != null) {
+                            if (definition.Key != null)
+                            {
                                 var name = VariableNameGenerator.NormalizeIdentifier(definition.Key);
                                 interfaceType.DefineMethod(name!, MethodAttributes.Public | MethodAttributes.Abstract | MethodAttributes.Virtual, returnType, parameterTypes);
                             }
@@ -57,7 +66,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 var parameterTypes = overload.Item1;
                                 var name = VariableNameGenerator.NormalizeIdentifier(definition.Key)!;
                                 var methodInfo = createdType!.GetMethod(name, parameterTypes)
-                                    ?? throw new InvalidOperationException($"Could not find method {name} matching parameter types {string.Join(", ", parameterTypes.Select(p=>p.Name))}");
+                                    ?? throw new InvalidOperationException($"Could not find method {name} matching parameter types {string.Join(", ", parameterTypes.Select(p => p.Name))}");
                                 methods.Add(library!, definition.Key, parameterTypes, methodInfo);
                             }
                         }

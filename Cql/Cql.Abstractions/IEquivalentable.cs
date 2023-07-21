@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 
 namespace Hl7.Cql
 {
@@ -11,7 +19,7 @@ namespace Hl7.Cql
     /// The type of object to compare.
     /// </typeparam>
     public interface IEquivalentable<T>
-        where T: class
+        where T : class
     {
         /// <summary>
         /// Compares this object to <paramref name="other"/> for equivalence.

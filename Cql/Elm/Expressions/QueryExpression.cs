@@ -1,6 +1,14 @@
-﻿namespace Hl7.Cql.Elm.Expressions
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql.Elm.Expressions
 {
-    public class QueryExpression: Expression
+    public class QueryExpression : Expression
     {
         public Expression? where { get; set; }
         public SourceExpression[]? source { get; set; }
@@ -12,11 +20,11 @@
 
     }
     // note: type property is absent on return expressions... why?  who knows
-    public class ReturnExpression: Expression
+    public class ReturnExpression : Expression
     {
         public Expression? expression { get; set; }
     }
-    public class LetExpression: Expression
+    public class LetExpression : Expression
     {
         public string? identifier { get; set; }
         public Expression? expression { get; set; }

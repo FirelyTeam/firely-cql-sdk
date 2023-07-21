@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 
 namespace Hl7.Cql.Operators
 {
@@ -6,7 +14,7 @@ namespace Hl7.Cql.Operators
     /// Provides data for <see cref="ICqlOperators.MessageReceived"/>.
     /// </summary>
     /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#message"/>
-    public class MessageEventArgs: EventArgs
+    public class MessageEventArgs : EventArgs
     {
         internal MessageEventArgs(object? source, string? code, string? message, string? severity)
         {

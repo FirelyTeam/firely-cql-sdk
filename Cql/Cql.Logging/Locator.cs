@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 
 namespace Hl7.Cql.Logging
 {
@@ -16,7 +24,7 @@ namespace Hl7.Cql.Logging
             EndColumn = col2;
         }
 
-        public Locator((int?,int?,int?,int?) tuple)
+        public Locator((int?, int?, int?, int?) tuple)
         {
             StartLine = tuple.Item1!.Value;
             StartColumn = tuple.Item2!.Value;
@@ -45,8 +53,8 @@ namespace Hl7.Cql.Logging
             // (49:30,50:9) compared to (50:10,60:12)
             // (10:10, 20:20) compared to (15:15, 16:16)
             // (15:15, 16:16) compared to (10:10, 20:20)
-            
-            if(StartLine == other.StartLine && StartColumn == other.StartColumn &&
+
+            if (StartLine == other.StartLine && StartColumn == other.StartColumn &&
                 EndLine == other.EndLine && EndColumn == other.EndColumn)
                 return RangeComparisonResult.ExactlyEqual;
 
@@ -55,11 +63,12 @@ namespace Hl7.Cql.Logging
             bool thisEndBefore = false;
             bool thisEndEqual = false;
 
-            if(StartLine < other.StartLine)
+            if (StartLine < other.StartLine)
             {
                 thisStartBefore = true;
 
-            }else if(StartLine == other.StartLine)
+            }
+            else if (StartLine == other.StartLine)
             {
                 if (StartColumn < other.StartColumn)
                 {
@@ -73,7 +82,9 @@ namespace Hl7.Cql.Logging
             {
                 thisEndBefore = true;
 
-            }else if(EndLine == other.EndLine) {
+            }
+            else if (EndLine == other.EndLine)
+            {
 
                 if (EndColumn < other.EndColumn)
                 {
@@ -83,13 +94,13 @@ namespace Hl7.Cql.Logging
                     thisEndEqual = true;
             }
 
-            if(thisStartBefore && thisEndBefore)                        
+            if (thisStartBefore && thisEndBefore)
                 return RangeComparisonResult.Before;
-            else if((thisStartBefore || thisStartEqual) && (thisEndBefore == false || thisEndEqual))          
+            else if ((thisStartBefore || thisStartEqual) && (thisEndBefore == false || thisEndEqual))
                 return RangeComparisonResult.Contains;
-            else if(thisStartBefore == false && thisEndBefore == false) 
+            else if (thisStartBefore == false && thisEndBefore == false)
                 return RangeComparisonResult.After;
-            else if((thisStartEqual || thisStartBefore == false) && (thisEndEqual || thisEndBefore))
+            else if ((thisStartEqual || thisStartBefore == false) && (thisEndEqual || thisEndBefore))
                 return RangeComparisonResult.ContainedBy;
 
             throw new ArgumentException("Illegal Bounds");

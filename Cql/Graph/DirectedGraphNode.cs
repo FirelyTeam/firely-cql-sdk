@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
@@ -33,7 +41,7 @@ namespace Hl7.Cql.Graph
             return defaultIfMissing;
         }
 
-        public DirectedGraphNode Clone(Func<string,string>? newId = null)
+        public DirectedGraphNode Clone(Func<string, string>? newId = null)
         {
             var id = newId != null ? newId(NodeId) : NodeId;
             var clonedNode = new DirectedGraphNode
