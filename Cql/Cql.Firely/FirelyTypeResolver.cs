@@ -20,9 +20,9 @@ namespace Hl7.Cql.Firely
         {
             Inspector = inspector;
 
-            AddTypesFromInspector();
+            addTypesFromInspector();
             // Fix lack of inheritance in the SDK
-            Adjust();
+            adjust();
         }
 
         public override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
@@ -88,7 +88,7 @@ namespace Hl7.Cql.Firely
 
         internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
 
-        private void Adjust()
+        private void adjust()
         {
             Types["{http://hl7.org/fhir}positiveInt"] = typeof(Hl7.Fhir.Model.Integer);
             Types["{http://hl7.org/fhir}unsignedInt"] = typeof(Hl7.Fhir.Model.Integer);
@@ -97,7 +97,7 @@ namespace Hl7.Cql.Firely
             Types["{http://hl7.org/fhir}MoneyQuantity"] = Types["{http://hl7.org/fhir}Quantity"];
         }
 
-        private void AddTypesFromInspector()
+        private void addTypesFromInspector()
         {
             var classes = Inspector.ClassMappings.Select(cm => (getTypeSpecFromMapping(cm), cm.NativeType));
 
