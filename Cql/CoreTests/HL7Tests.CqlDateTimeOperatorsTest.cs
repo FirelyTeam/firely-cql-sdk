@@ -582,17 +582,6 @@ namespace CoreTests
         }
 
         /// <summaray>
-        ///define "AfterTimezoneFalse":
-        ///	( @2012-03-10T10:20:00.999+07:00 after hour of @2012-03-10T10:20:00.999+06:00 ) = false
-        /// </summary>
-        [TestCategory("CqlDateTimeOperatorsTest")]
-        [TestMethod]
-        public void AfterTimezoneFalser_Test()
-        {
-            Assert.Fail("Should fail");
-        }
-
-        /// <summaray>
         ///define "TimeAfterHourTrue":
         ///	( @T15:59:59.999 after hour of @T14:59:59.999 ) = true
         /// </summary>
