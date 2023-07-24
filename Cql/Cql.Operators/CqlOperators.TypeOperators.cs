@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Hl7.Cql.Runtime
 {
@@ -70,7 +71,7 @@ namespace Hl7.Cql.Runtime
 
         public bool? ConvertDecimalToBoolean(decimal? d) => d == null ? null : (d.Value == 1m ? true : false);
         public CqlQuantity? ConvertDecimalToQuantity(decimal? d) => d == null ? null : new CqlQuantity(d, "1");
-        public string? ConvertDecimalToString(decimal? d) => d?.ToString();
+        public string? ConvertDecimalToString(decimal? d) => d?.ToString(CultureInfo.InvariantCulture);
 
         public string? ConvertQuantityToString(CqlQuantity? q) => q?.ToString();
 
@@ -121,7 +122,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (decimal.TryParse(s, out decimal value))
+            else if (decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value))
                 return value;
             else return null;
         }
