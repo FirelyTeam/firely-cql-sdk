@@ -61,7 +61,7 @@ namespace Hl7.Cql.Runtime
         public long? ConvertIntegerToLong(int? i) => i;
         public decimal? ConvertIntegerToDecimal(int? i) => i;
         public CqlQuantity? ConvertIntegerToQuantity(int? i) => i == null ? null : new CqlQuantity(i, "1");
-        public string? ConvertIntegerToString(int? i) => i?.ToString();
+        public string? ConvertIntegerToString(int? i) => i?.ToString(CultureInfo.InvariantCulture);
 
         public bool? ConvertLongToBoolean(long? i) => i == null ? null : (i.Value == 1 ? true : false);
         public int? ConvertLongToInteger(long? i) => (int?)i;
@@ -106,7 +106,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (int.TryParse(s, out int value))
+            else if (int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value))
                 return value;
             else return null;
         }
@@ -114,7 +114,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (long.TryParse(s, out long value))
+            else if (long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long value))
                 return value;
             else return null;
         }

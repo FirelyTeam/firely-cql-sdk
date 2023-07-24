@@ -153,7 +153,7 @@ namespace Hl7.Cql.Iso8601
         }
 
         public override string ToString() => String;
-        public override bool Equals(object obj) => Equals(String, obj?.ToString());
+        public override bool Equals(object? obj) => Equals(String, obj?.ToString());
         public override int GetHashCode() => String.GetHashCode();
 
         /// <summary>
