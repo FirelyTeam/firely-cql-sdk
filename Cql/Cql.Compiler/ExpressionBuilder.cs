@@ -13,6 +13,7 @@ using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -1772,7 +1773,7 @@ namespace Hl7.Cql.Compiler
                     {
                         try
                         {
-                            var converted = Convert.ChangeType(lit.value, underlyingType);
+                            var converted = Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture);
                             return (converted, underlyingType);
                         }
                         catch (OverflowException)
@@ -1789,7 +1790,7 @@ namespace Hl7.Cql.Compiler
                     return (lit.value, type);
                 if (typeof(IConvertible).IsAssignableFrom(type!))
                 {
-                    var converted = Convert.ChangeType(lit.value, type);
+                    var converted = Convert.ChangeType(lit.value, type, CultureInfo.InvariantCulture);
                     return (converted, type);
                 }
                 else throw new NotSupportedException("Only convertible types can be used for literals.");
