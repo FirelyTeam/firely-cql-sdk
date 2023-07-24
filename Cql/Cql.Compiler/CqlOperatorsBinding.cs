@@ -408,7 +408,7 @@ namespace Hl7.Cql.Compiler
                 case CqlOperator.ToList:
                     {
                         var method = OperatorsType
-                                .GetMethod(nameof(ICqlOperators.ToList))
+                                .GetMethod(nameof(ICqlOperators.ToList))!
                                 .MakeGenericMethod(parameters[0].Type);
                         var call = Expression.Call(operators, method, parameters[0]);
                         return call;

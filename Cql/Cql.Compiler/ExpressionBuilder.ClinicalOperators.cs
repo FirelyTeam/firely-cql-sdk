@@ -1,11 +1,10 @@
-﻿using Hl7.Cql.Runtime;
+﻿using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm.Expressions;
-using Hl7.Cql.Operators;
-using System.Xml;
 
 namespace Hl7.Cql.Compiler
 {

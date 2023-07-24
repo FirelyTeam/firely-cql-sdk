@@ -151,7 +151,7 @@ namespace Hl7.Cql.Firely
 
                 var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
                 converter.AddConversion(nullableEnumType, typeof(string), (@enum) =>
-                    Enum.GetName(nullableEnumType, @enum));
+                    Enum.GetName(nullableEnumType, @enum)!);
             }
             return converter;
         }
