@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using System.Globalization;
+
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
@@ -63,7 +65,8 @@ namespace Hl7.Cql.Primitives
             {
                 unitString = cqlUnit;
             }
-            return $"{value}{unitString}";
+
+            return string.Create(CultureInfo.InvariantCulture, $"{value}{unitString}");
         }
 
         /// <summary>
@@ -82,7 +85,7 @@ namespace Hl7.Cql.Primitives
             var parts = s.Split(' ');
             if (parts.Length == 2)
             {
-                if (decimal.TryParse(parts[0], out var value) && !string.IsNullOrWhiteSpace(parts[1]))
+                if (decimal.TryParse(parts[0], NumberStyles.Number, CultureInfo.InvariantCulture, out var value) && !string.IsNullOrWhiteSpace(parts[1]))
                 {
                     var units = Dequote(parts[1])!;
                     q = new CqlQuantity(value, units);

@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Hl7.Cql.Runtime
 {
@@ -60,7 +61,7 @@ namespace Hl7.Cql.Runtime
         public long? ConvertIntegerToLong(int? i) => i;
         public decimal? ConvertIntegerToDecimal(int? i) => i;
         public CqlQuantity? ConvertIntegerToQuantity(int? i) => i == null ? null : new CqlQuantity(i, "1");
-        public string? ConvertIntegerToString(int? i) => i?.ToString();
+        public string? ConvertIntegerToString(int? i) => i?.ToString(CultureInfo.InvariantCulture);
 
         public bool? ConvertLongToBoolean(long? i) => i == null ? null : (i.Value == 1 ? true : false);
         public int? ConvertLongToInteger(long? i) => (int?)i;
@@ -70,7 +71,7 @@ namespace Hl7.Cql.Runtime
 
         public bool? ConvertDecimalToBoolean(decimal? d) => d == null ? null : (d.Value == 1m ? true : false);
         public CqlQuantity? ConvertDecimalToQuantity(decimal? d) => d == null ? null : new CqlQuantity(d, "1");
-        public string? ConvertDecimalToString(decimal? d) => d?.ToString();
+        public string? ConvertDecimalToString(decimal? d) => d?.ToString(CultureInfo.InvariantCulture);
 
         public string? ConvertQuantityToString(CqlQuantity? q) => q?.ToString();
 
@@ -105,7 +106,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (int.TryParse(s, out int value))
+            else if (int.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out int value))
                 return value;
             else return null;
         }
@@ -113,7 +114,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (long.TryParse(s, out long value))
+            else if (long.TryParse(s, NumberStyles.Integer, CultureInfo.InvariantCulture, out long value))
                 return value;
             else return null;
         }
@@ -121,7 +122,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (decimal.TryParse(s, out decimal value))
+            else if (decimal.TryParse(s, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal value))
                 return value;
             else return null;
         }

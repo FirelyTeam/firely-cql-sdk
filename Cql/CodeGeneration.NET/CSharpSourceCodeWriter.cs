@@ -15,6 +15,7 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -522,10 +523,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return value?.ToString()!.ToLowerInvariant() ?? "null";
                 else if (constantType == typeof(Uri))
                     return $"new Uri(\"{value!}\")";
+                else if (constantType == typeof(decimal))
+                    return ((decimal)value).ToString(CultureInfo.InvariantCulture);
                 else if (typeof(Type).IsAssignableFrom(constantType))
-                {
                     return $"typeof({PrettyTypeName((Type)value)})";
-                }
                 else
                 {
                     var str = value.ToString()!;

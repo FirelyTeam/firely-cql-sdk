@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 
@@ -148,12 +149,12 @@ namespace Hl7.Cql.Runtime
             strPrec.Append('1');
 
             StringBuilder strInp = new("0.");
-            strInp.Append('0', input.ToString().Split('.')
+            strInp.Append('0', input.Value.ToString(CultureInfo.InvariantCulture).Split('.')
                 .Last()
                 .Length - 1);
             strInp.Append('1');
-            input += decimal.Parse(strInp.ToString());
-            input -= decimal.Parse(strPrec.ToString());
+            input += decimal.Parse(strInp.ToString(), CultureInfo.InvariantCulture);
+            input -= decimal.Parse(strPrec.ToString(), CultureInfo.InvariantCulture);
             return input;
         }
 
@@ -168,7 +169,7 @@ namespace Hl7.Cql.Runtime
                 case 8:
                     {
                         var month = input.Value.Month ?? 12;
-                        switch(month)
+                        switch (month)
                         {
                             case 1:
                             case 3:
@@ -184,7 +185,7 @@ namespace Hl7.Cql.Runtime
                             case 11:
                                 return new CqlDate(input.Value.Year, month, 30);
                             case 2:
-                                return System.DateTime.IsLeapYear(input.Value.Year) 
+                                return System.DateTime.IsLeapYear(input.Value.Year)
                                     ? new CqlDate(input.Value.Year, month, 29)
                                     : new CqlDate(input.Value.Year, month, 28);
                             default:
@@ -289,12 +290,12 @@ namespace Hl7.Cql.Runtime
             strPrec.Append('0', (int)precision);
 
             StringBuilder strInp = new("0.");
-            strInp.Append('0', input.ToString().Split('.')
+            strInp.Append('0', input.Value.ToString(CultureInfo.InvariantCulture).Split('.')
                 .Last()
                 .Length);
 
-            input += decimal.Parse(strInp.ToString());
-            input -= decimal.Parse(strPrec.ToString());
+            input += decimal.Parse(strInp.ToString(), CultureInfo.InvariantCulture);
+            input -= decimal.Parse(strPrec.ToString(), CultureInfo.InvariantCulture);
             return input;
         }
 
@@ -306,7 +307,7 @@ namespace Hl7.Cql.Runtime
             {
                 case 4: return new CqlDate(1, null, null);
                 case 6: return new CqlDate(input.Value.Year, 1, null);
-                case 8:return new CqlDate(input.Value.Year, input.Value.Month, 1);
+                case 8: return new CqlDate(input.Value.Year, input.Value.Month, 1);
                 default:
                     return null;
             }
@@ -517,7 +518,7 @@ namespace Hl7.Cql.Runtime
             if (argument == null) return null;
             else
             {
-                string val = argument.ToString();
+                string val = argument.Value.ToString(CultureInfo.InvariantCulture);
                 int ret = val.Length - (val.IndexOf(".") + 1);
                 if (ret <= 0) return 0;
                 else return ret;
@@ -732,7 +733,7 @@ namespace Hl7.Cql.Runtime
         public CqlDate? Successor(CqlDate? argument) => argument == null ? null : argument.Successor();
 
         public CqlDateTime? Successor(CqlDateTime? argument) => argument == null ? null : argument.Successor();
-        
+
         public CqlTime? Successor(CqlTime? argument) => argument == null ? null : argument.Successor();
 
         #endregion

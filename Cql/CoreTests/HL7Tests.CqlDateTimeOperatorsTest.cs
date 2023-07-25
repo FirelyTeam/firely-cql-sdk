@@ -1,6 +1,8 @@
 using Hl7.Cql.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace CoreTests
 {
@@ -1701,6 +1703,15 @@ namespace CoreTests
             var function = (Func<CqlContext, bool?>)lambda.Compile();
             bool? result = function(Context);
             Assert.AreEqual(true, result);
+        }
+
+        public static string GetDebugView(Expression exp)
+        {
+            if (exp == null)
+                return null;
+
+            var propertyInfo = typeof(Expression).GetProperty("DebugView", BindingFlags.Instance | BindingFlags.NonPublic);
+            return propertyInfo.GetValue(exp) as string;
         }
 
         /// <summaray>
