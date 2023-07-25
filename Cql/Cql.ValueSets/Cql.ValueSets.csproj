@@ -3,6 +3,7 @@
   <Import Project="..\..\cql-sdk.props" />
   
   <ItemGroup>
+    <ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
     <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
   </ItemGroup>
 
