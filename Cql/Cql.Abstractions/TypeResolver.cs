@@ -20,72 +20,72 @@ namespace Hl7.Cql
     {
         #region CQL types defined in section 1
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Any"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Any</c>.
         /// </summary>
         public abstract Type AnyType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Boolean"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Boolean</c>.
         /// </summary>
         public abstract Type BooleanType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Code"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Code</c>.
         /// </summary>
         public abstract Type CodeType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.CodeSystem"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.CodeSystem</c>.
         /// </summary>
         public abstract Type CodeSystemType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Concept"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Concept</c>.
         /// </summary>
         public abstract Type ConceptType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Date"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Date</c>.
         /// </summary>
         public abstract Type DateType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.DateTime"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.DateTime</c>.
         /// </summary>
         public abstract Type DateTimeType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Decimal"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Decimal</c>.
         /// </summary>
         public abstract Type DecimalType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Long"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Long</c>.
         /// </summary>
         public abstract Type LongType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Interval"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Interval</c>.
         /// </summary>
         /// <param name="pointType">The type of this interval.</param>
         public abstract Type IntervalType(Type pointType);
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Integer"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Integer</c>.
         /// </summary>
         public abstract Type IntegerType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Quantity"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Quantity</c>.
         /// </summary>
         public abstract Type QuantityType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Ratio"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Ratio</c>.
         /// </summary>
         public abstract Type RatioType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.String"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.String</c>.
         /// </summary>
         public abstract Type StringType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Time"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Time</c>.
         /// </summary>
         public abstract Type TimeType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.ValueSet"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.ValueSet</c>.
         /// </summary>
         public abstract Type ValueSetType { get; }
         /// <summary>
-        /// The type to use for <see cref="Hl7.Cql.Primitives.CqlPrimitiveType.Vocabulary"/>.
+        /// The type to use for <c>Hl7.Cql.Primitives.Vocabulary</c>.
         /// </summary>
         public abstract Type VocabularyType { get; }
 

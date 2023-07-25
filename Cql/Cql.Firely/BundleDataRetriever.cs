@@ -45,7 +45,7 @@ namespace Hl7.Cql.Firely
                 if (!typeof(T).IsAssignableTo(typeof(ICoded)))
                     throw new InvalidOperationException($"When retrieving with a code filter, a primary code path must exist for {typeof(T)}. None is defined.");
 
-                if (allowedCodes is ValueSetFacade valueSet)
+                if (allowedCodes is IValueSetFacade valueSet)
                 {
                     return Bundle.FilterByType<T>(c => valueSet.IsCodeInValueSet(c.Code, c.System) == true);
                 }

@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Primitives;
-using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -185,7 +184,7 @@ namespace Hl7.Cql.Runtime
         }
         #endregion
 
-        public IEnumerable<CqlCode> ResolveValueSet(CqlValueSet valueSet) => new ValueSetFacade(valueSet, ValueSets);
+        public IEnumerable<CqlCode> ResolveValueSet(CqlValueSet valueSet) => CreateValueSetFacade(valueSet);
 
     }
 }

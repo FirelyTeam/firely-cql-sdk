@@ -700,7 +700,7 @@ namespace Hl7.Cql.Runtime
                     var listItem = interval.low!.Value;
                     do
                     {
-                        
+
 
                         var high = decimal.Add(listItem, per.value ?? 1);
                         var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
@@ -894,7 +894,7 @@ namespace Hl7.Cql.Runtime
                 return null;
             else if (argument == null)
                 return false;
-            else if (argument is ValueSetFacade facade)
+            else if (argument is IValueSetFacade facade)
             {
                 var result = facade.IsCodeInValueSet(element);
                 return result;
@@ -1173,42 +1173,8 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else if (left is ValueSetFacade leftFacade)
-            {
-                if (right is ValueSetFacade rightFacade)
-                {
-                    var union = new ValueSetUnion(new[] { leftFacade, rightFacade }, ValueSets, this);
-                    return union;
-                }
-                else if (right is ValueSetUnion rightUnion)
-                {
-                    var all = rightUnion.Facades
-                        .Concat(new[] { leftFacade })
-                        .ToArray();
-                    var union = new ValueSetUnion(all, ValueSets, this);
-                    return union;
-                }
-            }
-            else if (left is ValueSetUnion leftUnion)
-            {
-                if (right is ValueSetFacade rightFacade)
-                {
-                    var all = leftUnion.Facades
-                        .Concat(new[] { rightFacade })
-                        .ToArray();
-                    var union = new ValueSetUnion(all, ValueSets, this);
-                    return union;
-                }
-                else if (right is ValueSetUnion rightUnion)
-                {
-                    var all = leftUnion.Facades
-                        .Concat(rightUnion.Facades)
-                        .ToArray();
-                    var union = new ValueSetUnion(all, ValueSets, this);
-                    return union;
-                }
-            }
-            return ListUnion(left, right);
+            else
+                return left.Union(right);
         }
 
         #endregion

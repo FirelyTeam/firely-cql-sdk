@@ -21,7 +21,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Impelements <see cref="ICqlOperators"/>.
     /// </summary>
-    public partial class CqlOperators : ICqlOperators, ICqlComparer, ICqlComparer<object>
+    public sealed partial class CqlOperators : ICqlOperators, ICqlComparer, ICqlComparer<object>
     {
         /// <summary>
         /// Creates an instance.
@@ -52,7 +52,7 @@ namespace Hl7.Cql.Runtime
             return operators;
         }
 
-        protected CqlOperators(
+        private CqlOperators(
             TypeResolver typeResolver,
             TypeConverter typeConverter,
             IDataRetriever dataRetriever,
@@ -178,31 +178,17 @@ namespace Hl7.Cql.Runtime
         public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
-        public ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) =>
-            new ValueSetFacade(valueSet, ValueSets);
-
+        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);
 
         public object NotSupported() => throw new NotSupportedException();
 
-        public bool? Equals(object x, object y, string? precision)
-        {
-            return Comparer.Equals(x, y, precision);
-        }
+        public bool? Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
 
-        public int? Compare(object x, object y, string? precision)
-        {
-            return Comparer.Compare(x, y, precision);
-        }
+        public int? Compare(object? x, object? y, string? precision) => Comparer.Compare(x, y, precision);
 
-        public int GetHashCode(object x)
-        {
-            return Comparer.GetHashCode(x);
-        }
+        public int GetHashCode(object x) => Comparer.GetHashCode(x);
 
-        public bool Equivalent(object x, object y, string? precision)
-        {
-            return Comparer.Equivalent(x, y, precision);
-        }
+        public bool Equivalent(object? x, object? y, string? precision) => Comparer.Equivalent(x, y, precision);
 
     }
 }

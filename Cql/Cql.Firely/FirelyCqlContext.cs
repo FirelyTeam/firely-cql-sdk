@@ -20,7 +20,7 @@ namespace Hl7.Cql.Firely
     public static class FirelyCqlContext
     {
         public static CqlContext Create(Bundle? bundle = null,
-            IDictionary<string, object>? parameters = null,
+            IReadOnlyDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null)

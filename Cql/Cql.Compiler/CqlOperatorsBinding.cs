@@ -195,13 +195,13 @@ namespace Hl7.Cql.Compiler
                     return BindTernaryOperator(nameof(ICqlOperators.Before), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Date:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Date)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Date))!,
                         parameters[0],
                         parameters[1],
                         parameters[2]);
                 case CqlOperator.DateTime:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.DateTime)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.DateTime))!,
                         parameters[0],
                         parameters[1],
                         parameters[2],
@@ -224,7 +224,7 @@ namespace Hl7.Cql.Compiler
                     return BindTernaryOperator(nameof(ICqlOperators.DurationBetween), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Now:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Now)));
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Now))!);
                 case CqlOperator.IntervalSameAs:
                     return BindTernaryGenericOperator(nameof(ICqlOperators.IntervalSameAs), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.SameAs:
@@ -239,17 +239,17 @@ namespace Hl7.Cql.Compiler
                     return BindTernaryOperator(nameof(ICqlOperators.SameOrBefore), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Time:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Time)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Time))!,
                         parameters[0],
                         parameters[1],
                         parameters[2],
                         parameters[3]);
                 case CqlOperator.TimeOfDay:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.TimeOfDay)));
+                        OperatorsType.GetMethod(nameof(ICqlOperators.TimeOfDay))!);
                 case CqlOperator.Today:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Today)));
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Today))!);
                 case CqlOperator.Collapse:
                     return BindBinaryOperator(nameof(ICqlOperators.Collapse), operators, parameters[0], parameters[1]);
                 case CqlOperator.ListContains:
@@ -378,7 +378,7 @@ namespace Hl7.Cql.Compiler
                     return BindUnaryGenericOperator(nameof(ICqlOperators.SingleOrNull), operators, parameters[0]);
                 case CqlOperator.Quantity:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Quantity)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Quantity))!,
                         parameters[0],
                         parameters[1]);
                 case CqlOperator.Interval:
@@ -408,7 +408,7 @@ namespace Hl7.Cql.Compiler
                 case CqlOperator.ToList:
                     {
                         var method = OperatorsType
-                                .GetMethod(nameof(ICqlOperators.ToList))
+                                .GetMethod(nameof(ICqlOperators.ToList))!
                                 .MakeGenericMethod(parameters[0].Type);
                         var call = Expression.Call(operators, method, parameters[0]);
                         return call;
@@ -513,7 +513,7 @@ namespace Hl7.Cql.Compiler
             {
                 var elementType = TypeResolver.GetListElementType(source.Type);
                 var method = OperatorsType
-                    .GetMethod(nameof(ICqlOperators.ListSortBy))
+                    .GetMethod(nameof(ICqlOperators.ListSortBy))!
                     .MakeGenericMethod(elementType);
                 var call = Expression.Call(operators, method, source, lambda, orderConstant);
                 return call;
@@ -537,7 +537,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression ListUnion(MemberExpression operators, Expression left, Expression right)
         {
-            if (left.Type == typeof(ValueSetFacade) && right.Type == typeof(ValueSetFacade))
+            if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
             {
                 return BindBinaryOperator(nameof(ICqlOperators.ValueSetUnion), operators,
                     Expression.TypeAs(left, typeof(IEnumerable<CqlCode>)),
@@ -560,7 +560,7 @@ namespace Hl7.Cql.Compiler
         {
             if (expression is NewExpression @new && @new.Type == typeof(CqlValueSet))
             {
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.ResolveValueSet));
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.ResolveValueSet))!;
                 var call = Expression.Call(operators, method, @new);
                 return call;
             }
@@ -571,7 +571,7 @@ namespace Hl7.Cql.Compiler
         {
             if (typeConstant is ConstantExpression constant && constant.Value is Type t)
             {
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Minimum))
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Minimum))!
                     .MakeGenericMethod(t);
                 var call = Expression.Call(operators, method);
                 return call;
@@ -583,7 +583,7 @@ namespace Hl7.Cql.Compiler
         {
             if (typeConstant is ConstantExpression constant && constant.Value is Type t)
             {
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Maximum))
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Maximum))!
                     .MakeGenericMethod(t);
                 var call = Expression.Call(operators, method);
                 return call;

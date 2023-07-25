@@ -17,7 +17,8 @@ namespace Hl7.Cql.Operators
     /// <remarks>
     /// <para>For CQL libraries defining <code>context Patient</code> it is implied that all results of retrieve statements
     /// will only pertain to the singular patient "in context."  This is typically operationalized by storing all
-    /// resources germane to a specific patient resource in a single bundle.
+    /// resources germane to a specific patient resource in a single bundle.  This bundle becomes the source of data
+    /// for a given runtime context.
     /// </para>
     /// <para>
     /// Other options are available.  Implementers can acquire data however they want (e.g., remotely from a FHIR server or database),
