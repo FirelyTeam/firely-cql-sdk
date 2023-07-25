@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Primitives;
-using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,12 +12,12 @@ namespace Hl7.Cql.Runtime
 
         public int? Age(string precision)
         {
-            var patientType = TypeResolver.PatientType 
+            var patientType = TypeResolver.PatientType
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
             var method = DataRetriever.GetType()
-                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))
+                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
             var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients.ToArray();
@@ -42,7 +41,7 @@ namespace Hl7.Cql.Runtime
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
             var method = DataRetriever.GetType()
-                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))
+                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
             var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients.ToArray();
@@ -151,7 +150,7 @@ namespace Hl7.Cql.Runtime
         {
             if (codes == null)
                 return null;
-            foreach(var code in codes)
+            foreach (var code in codes)
             {
                 var result = CodeInValueSet(code, valueSet);
                 if (result != false)
@@ -185,7 +184,7 @@ namespace Hl7.Cql.Runtime
         }
         #endregion
 
-        public IEnumerable<CqlCode> ResolveValueSet(CqlValueSet valueSet) => new ValueSetFacade(valueSet, ValueSets);
+        public IEnumerable<CqlCode> ResolveValueSet(CqlValueSet valueSet) => CreateValueSetFacade(valueSet);
 
     }
 }

@@ -55,7 +55,7 @@ namespace Hl7.Cql.Firely
                 }
                 var source = Retrieve<T>();
                 var getCode = FunctionForCodeProperty<T>(codeProperty!);
-                if (codes is ValueSetFacade valueSet)
+                if (codes is IValueSetFacade valueSet)
                 {
                     foreach (var t in source)
                     {

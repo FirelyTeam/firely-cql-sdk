@@ -23,10 +23,9 @@ namespace Hl7.Cql.ValueSets
         /// Creates an instance.
         /// </summary>
         /// <param name="facades">The facades to combine in a union.</param>
-        /// <param name="valueSets">The collection of valuesets.</param>
         /// <param name="comparer">The <see cref="ICqlComparer"/> to use when comparing codes.</param>
         /// <exception cref="ArgumentNullException"></exception>
-        public ValueSetUnion(ValueSetFacade[] facades, IValueSetDictionary valueSets, ICqlComparer comparer)
+        public ValueSetUnion(IValueSetFacade[] facades, ICqlComparer comparer)
         {
             Facades = facades.ToArray();
             Hasher = new CqlCodeEqualityHasher(comparer);
@@ -35,22 +34,20 @@ namespace Hl7.Cql.ValueSets
                 var codes = new HashSet<CqlCode>(Hasher);
                 foreach (var facade in Facades)
                 {
-                    if (valueSets.TryGetCodesInValueSet(facade.Id, out var cqlCodes))
+                    foreach (var cqlCode in facade)
                     {
-                        foreach (var cqlCode in cqlCodes!)
-                        {
-                            if (!codes.Contains(cqlCode))
-                                codes.Add(cqlCode);
-                        }
+                        if (!codes.Contains(cqlCode))
+                            codes.Add(cqlCode);
                     }
                 }
                 return codes;
             }, true);
         }
+
         /// <summary>
         /// The facades that comprise this union.
         /// </summary>
-        public ValueSetFacade[] Facades { get; }
+        public IValueSetFacade[] Facades { get; }
         /// <summary>
         /// The comparer which hashes <see cref="CqlCode"/> instances.
         /// </summary>

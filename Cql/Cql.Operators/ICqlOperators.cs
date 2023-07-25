@@ -27,7 +27,7 @@ namespace Hl7.Cql.Operators
         IDataRetriever DataRetriever { get; }
         ICqlComparer Comparer { get; }
 
-        ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
+        IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
 
         #region Operators
 

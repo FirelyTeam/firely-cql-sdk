@@ -19,6 +19,9 @@ namespace Hl7.Cql.Runtime
     /// </summary>
     public abstract class BaseTypeResolver : TypeResolver
     {
+        /// <summary>
+        /// The list of types from which the resolver resolves types by typespec.
+        /// </summary>
         protected readonly Dictionary<string, Type> Types = new(StringComparer.OrdinalIgnoreCase) {
             { "{urn:hl7-org:elm-types:r1}Any", typeof(object) },
             { "{urn:hl7-org:elm-types:r1}Date", typeof(CqlDate) },
@@ -38,61 +41,61 @@ namespace Hl7.Cql.Runtime
             { "{urn:hl7-org:elm-types:r1}Vocabulary", typeof(CqlVocabulary) },
         };
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type AnyType => Types["{urn:hl7-org:elm-types:r1}Any"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type BooleanType => Types["{urn:hl7-org:elm-types:r1}Boolean"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type CodeType => Types["{urn:hl7-org:elm-types:r1}Code"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type CodeSystemType => Types["{urn:hl7-org:elm-types:r1}CodeSystem"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type ConceptType => Types["{urn:hl7-org:elm-types:r1}Concept"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type DateType => Types["{urn:hl7-org:elm-types:r1}Date"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type DateTimeType => Types["{urn:hl7-org:elm-types:r1}DateTime"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type DecimalType => Types["{urn:hl7-org:elm-types:r1}Decimal"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type LongType => Types["{urn:hl7-org:elm-types:r1}Long"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type IntegerType => Types["{urn:hl7-org:elm-types:r1}Integer"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type IntervalType(Type pointType) =>
             pointType is not null
             ? typeof(CqlInterval<>).MakeGenericType(pointType)
             : throw new ArgumentNullException(nameof(pointType));
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type QuantityType => Types["{urn:hl7-org:elm-types:r1}Quantity"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type RatioType => Types["{urn:hl7-org:elm-types:r1}Ratio"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type StringType => Types["{urn:hl7-org:elm-types:r1}String"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type TimeType => Types["{urn:hl7-org:elm-types:r1}Time"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type ValueSetType => Types["{urn:hl7-org:elm-types:r1}ValueSet"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type VocabularyType => Types["{urn:hl7-org:elm-types:r1}Vocabulary"];
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public sealed override PropertyInfo? GetProperty(Type type, string propertyName)
         {
             if (typeof(TupleBaseType).IsAssignableFrom(type))
@@ -110,10 +113,13 @@ namespace Hl7.Cql.Runtime
             return GetPropertyCore(type, propertyName);
         }
 
+        /// <summary>
+        /// Additional logic get retrieve a <see cref="PropertyInfo"/> by name for a given type.
+        /// </summary>
         protected virtual PropertyInfo? GetPropertyCore(Type type, string propertyName) =>
             type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type? ResolveType(string typeSpecifier)
         {
             if (Types.TryGetValue(typeSpecifier, out var type))
@@ -121,7 +127,7 @@ namespace Hl7.Cql.Runtime
             else throw new ArgumentException($"Type {typeSpecifier} is not bound", nameof(typeSpecifier));
         }
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
         {
             if (type == typeof(string))
@@ -133,7 +139,7 @@ namespace Hl7.Cql.Runtime
                     .Any(ifc => ifc == genericInterfaceTypeDefinition);
         }
 
-        /// <<inheritdoc/>>
+        /// <inheritdoc/>
         public override Type? GetListElementType(Type type, bool @throw = false)
         {
             if (type.IsGenericType)
