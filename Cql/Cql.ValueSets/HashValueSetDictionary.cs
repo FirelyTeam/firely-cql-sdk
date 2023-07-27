@@ -10,7 +10,6 @@ using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -19,60 +18,78 @@ namespace Hl7.Cql.ValueSets
     /// </summary>
     public class HashValueSetDictionary : IValueSetDictionary
     {
-        public HashValueSetDictionary(ICqlComparer<CqlCode> comparer) => _comparer = comparer;
+        public HashValueSetDictionary(ICqlComparer<CqlCode> comparer)
+        {
+            _comparer = comparer;
+            _allCodes = new HashSet<CqlCode>(_comparer.ToEqualityComparer());
+        }
 
         public HashValueSetDictionary() : this(new CqlCodeCqlComparer())
         {
             // nothing
         }
 
+        // Table with unique CqlCodes, so having many valuesets with identical codes will
+        // not result in duplicate codes. Also helps with comparing codes by reference for speed.
+        // TO BE FINISHED ;-)
+        private readonly HashSet<CqlCode> _allCodes;
+
         /// <summary>
         /// Adds the code to the given value set by its canonical URI.
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="code">The code to add.</param>
-        /// <exception cref="ArgumentException">If <paramref name="code"/> already exists in the specified value set.</exception>
         public void Add(string valueSetUri, CqlCode code)
         {
             if (string.IsNullOrEmpty(valueSetUri)) throw new ArgumentException($"'{nameof(valueSetUri)}' cannot be null or empty.", nameof(valueSetUri));
             if (code is null) throw new ArgumentNullException(nameof(code));
 
-            if (!CodesInValueSet.TryGetValue(valueSetUri, out var codes))
+            if (!_codesInValueSet.TryGetValue(valueSetUri, out var codes))
             {
                 codes = new InMemoryValueSet(new[] { code }, _comparer);
-                CodesInValueSet.Add(valueSetUri, codes);
+                _codesInValueSet.Add(valueSetUri, codes);
             }
             else
-                codes.Add(code);
+            {
+                if (codes is InMemoryValueSet imvs)
+                    imvs.Add(code);
+                else
+                    throw new NotSupportedException($"Valueset {valueSetUri} is read-only and cannot be added to.");
+            }
         }
 
         /// <summary>
-        /// Adds or overwrites the code to the given value set by its canonical URI, and will not throw if the code exists already.
+        /// Adds the code to the given value set by its canonical URI.
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
-        /// <param name="code">The code to add.</param>
-        public void Set(string valueSetUri, CqlCode code)
+        /// <param name="codes">The codes to add.</param>
+        public void Add(string valueSetUri, IEnumerable<CqlCode> codes) => Add(valueSetUri, new InMemoryValueSet(codes));
+
+        /// <summary>
+        /// Adds the code to the given value set by its canonical URI.
+        /// </summary>
+        /// <param name="valueSetUri">The value set's canonical URI.</param>
+        /// <param name="codes">The codes to add.</param>
+        /// <exception cref="ArgumentException">If the valueset already exists in the dictionary.</exception>
+        public void Add(string valueSetUri, IValueSetFacade codes)
         {
-            if (!CodesInValueSet.TryGetValue(valueSetUri, out var codes))
-            {
-                codes = new InMemoryValueSet(new[] { code }, _comparer);
-                CodesInValueSet.Add(valueSetUri, codes);
-            }
-            else if (!codes.Contains(code))
-                codes.Add(code);
+            if (_codesInValueSet.ContainsKey(valueSetUri))
+                throw new ArgumentException($"Valueset {valueSetUri} already exists in dictionary.");
+
+            _codesInValueSet.Add(valueSetUri, codes);
         }
 
         /// <inheritdoc/>
         public bool IsCodeInValueSet(string valueSetUri, string code) =>
-             CodesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
+             _codesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
 
         /// <inheritdoc/>
         public bool IsCodeInValueSet(string valueSetUri, string code, string? systemUriOrOid) =>
-            CodesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code, systemUriOrOid);
+            _codesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code, systemUriOrOid);
 
         /// <inheritdoc/>
         public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
-            CodesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
+            _codesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
 
         /// <summary>
         /// Tries to ge the codes in the value set as an <see cref="IReadOnlyCollection{CqlCode}"/>.
@@ -82,7 +99,7 @@ namespace Hl7.Cql.ValueSets
         /// <returns><see langword="true"/> if the given value set is defined; otherwise, <see langword="false"/>.</returns>
         public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode>? codes)
         {
-            if (CodesInValueSet.TryGetValue(valueSetUri, out var codeSet))
+            if (_codesInValueSet.TryGetValue(valueSetUri, out var codeSet))
             {
                 codes = codeSet;
                 return true;
@@ -91,7 +108,10 @@ namespace Hl7.Cql.ValueSets
             return false;
         }
 
-        private readonly Dictionary<string, InMemoryValueSet> CodesInValueSet = new(StringComparer.OrdinalIgnoreCase);
+        public bool HasValueSet(string valueSetUri) => _codesInValueSet.ContainsKey(valueSetUri);
+
+
+        private readonly Dictionary<string, IValueSetFacade> _codesInValueSet = new(StringComparer.OrdinalIgnoreCase);
         private readonly ICqlComparer<CqlCode> _comparer;
     }
 }

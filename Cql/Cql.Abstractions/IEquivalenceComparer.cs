@@ -39,6 +39,6 @@ namespace Hl7.Cql
         /// <param name="y">The second object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not.  Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
-        bool Equivalent(T x, T y, string? precision);
+        bool Equivalent(T? x, T? y, string? precision);
     }
 }

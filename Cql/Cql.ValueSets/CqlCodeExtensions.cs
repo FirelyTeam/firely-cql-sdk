@@ -14,9 +14,22 @@ namespace Hl7.Cql.ValueSets
 {
     public static class CqlCodeExtensions
     {
-        public static IValueSetFacade GetValueSet(this IValueSetDictionary all, string canonical) => new CqlValueSetFacade(canonical, all);
+        public static bool TryGetValueSet(this IValueSetDictionary all, string canonical, out IValueSetFacade? result)
+        {
+            if (all.HasValueSet(canonical))
+            {
+                result = new CqlValueSetFacade(canonical, all);
+                return true;
+            }
+            else
+            {
+                result = null;
+                return false;
+            }
+        }
 
-        public static IValueSetFacade GetValueSet(this IValueSetDictionary all, CqlValueSet valueset) => new CqlValueSetFacade(valueset, all);
+        public static bool TryGetValueSet(this IValueSetDictionary all, CqlValueSet valueset, out IValueSetFacade? result) =>
+                TryGetValueSet(all, valueset.id ?? throw new ArgumentException("Valueset does not have a canonical."), out result);
 
         public static IEnumerable<CqlCode> Union(this IEnumerable<CqlCode> left, IEnumerable<CqlCode> right)
         {
@@ -46,6 +59,7 @@ namespace Hl7.Cql.ValueSets
             }
 
             public bool Equals(T? x, T? y) =>
+                ReferenceEquals(x, y) ||
                 _useEquivalence ? Comparer.Equivalent(x, y, _precision) == true : Comparer.Equals(x, y, _precision) == true;
 
             public int GetHashCode(T obj) => Comparer.GetHashCode(obj);

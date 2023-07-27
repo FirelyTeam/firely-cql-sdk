@@ -24,6 +24,8 @@ namespace Hl7.Cql.ValueSets
 
         private static readonly ICqlComparer<CqlCode> _defaultComparer = new CqlCodeCqlComparer();
 
+        public static readonly InMemoryValueSet EMPTY = new(Enumerable.Empty<CqlCode>());
+
         private readonly Lazy<HashSet<CqlCode>> _lazyContents;
 
         private readonly Lazy<HashSet<CqlCode>> _lazyContentsByCode;

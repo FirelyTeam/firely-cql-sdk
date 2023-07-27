@@ -17,6 +17,11 @@ namespace Hl7.Cql.ValueSets
     public interface IValueSetDictionary
     {
         /// <summary>
+        /// Returns whether the dictionary contains the given valueset.
+        /// </summary>
+        bool HasValueSet(string valueSetUri);
+
+        /// <summary>
         /// Returns <see langword="true"/> if the given code is present in the given value set.
         /// This method uses equality as defined for Cql codes.
         /// </summary>
