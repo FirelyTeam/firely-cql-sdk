@@ -890,18 +890,21 @@ namespace Hl7.Cql.Runtime
 
         public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument)
         {
-            if (element! == null)
+            if (element == null || element.code is null)
                 return null;
             else if (argument == null)
                 return false;
             else if (argument is IValueSetFacade facade)
             {
-                var result = facade.IsCodeInValueSet(element);
+                var result = element.system is not null ?
+                    facade.IsCodeInValueSet(element.code, element.system)
+                    : facade.IsCodeInValueSet(element.code);
+
                 return result;
             }
             else
             {
-                var result = argument.Any(t => Compare(element, t!, null) == 0);
+                var result = argument.Any(t => Compare(element, t, null) == 0);
                 return result;
             }
         }

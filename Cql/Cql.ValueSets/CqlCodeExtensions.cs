@@ -28,26 +28,27 @@ namespace Hl7.Cql.ValueSets
 
         public static IValueSetFacade Union(this IValueSetFacade left, IValueSetFacade right) => new ValueSetUnion(left, right);
 
-        public static IEqualityComparer<CqlCode> ToEqualityComparer(this ICqlComparer comparer) =>
-            new CqlCodeEqualityHasher(comparer ?? throw new ArgumentNullException(nameof(comparer)));
+        public static IEqualityComparer<T> ToEqualityComparer<T>(this ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false) =>
+            new CqlCodeEqualityComparer<T>(comparer ?? throw new ArgumentNullException(nameof(comparer)), precision, useEquivalence);
 
-        private class CqlCodeEqualityHasher : IEqualityComparer<CqlCode>
+        private class CqlCodeEqualityComparer<T> : IEqualityComparer<T>
         {
-            public ICqlComparer Comparer { get; }
+            private readonly string? _precision;
+            private readonly bool _useEquivalence;
 
-            public CqlCodeEqualityHasher(ICqlComparer comparer)
+            public ICqlComparer<T> Comparer { get; }
+
+            public CqlCodeEqualityComparer(ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false)
             {
                 Comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
+                _precision = precision;
+                _useEquivalence = useEquivalence;
             }
 
-            public bool Equals(CqlCode? x, CqlCode? y) => Comparer.Compare(x, y, null) == 0;
+            public bool Equals(T? x, T? y) =>
+                _useEquivalence ? Comparer.Equivalent(x, y, _precision) == true : Comparer.Equals(x, y, _precision) == true;
 
-            public int GetHashCode(CqlCode obj) =>
-                (obj.code ?? "code").GetHashCode()
-                ^ (obj.system ?? "system").GetHashCode()
-                ^ (obj.display ?? "display").GetHashCode()
-                ^ (obj.version ?? "version").GetHashCode();
-
+            public int GetHashCode(T obj) => Comparer.GetHashCode(obj);
         }
     }
 }

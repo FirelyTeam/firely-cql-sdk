@@ -6,9 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -17,8 +19,12 @@ namespace Hl7.Cql.ValueSets
     /// </summary>
     public class HashValueSetDictionary : IValueSetDictionary
     {
-        private const string NullCodeSystem = "\0";
-        private readonly CqlCodeHasher CodeHasher = new();
+        public HashValueSetDictionary(ICqlComparer<CqlCode> comparer) => _comparer = comparer;
+
+        public HashValueSetDictionary() : this(new CqlCodeCqlComparer())
+        {
+            // nothing
+        }
 
         /// <summary>
         /// Adds the code to the given value set by its canonical URI.
@@ -28,24 +34,12 @@ namespace Hl7.Cql.ValueSets
         /// <exception cref="ArgumentException">If <paramref name="code"/> already exists in the specified value set.</exception>
         public void Add(string valueSetUri, CqlCode code)
         {
-            if (string.IsNullOrEmpty(valueSetUri))
-            {
-                throw new ArgumentException($"'{nameof(valueSetUri)}' cannot be null or empty.", nameof(valueSetUri));
-            }
+            if (string.IsNullOrEmpty(valueSetUri)) throw new ArgumentException($"'{nameof(valueSetUri)}' cannot be null or empty.", nameof(valueSetUri));
+            if (code is null) throw new ArgumentNullException(nameof(code));
 
-            if (code is null)
-            {
-                throw new ArgumentNullException(nameof(code));
-            }
-
-            CodesByHash.Add(GetKey(valueSetUri, code.code, code.system), code);
-            var nullKey = GetKey(valueSetUri, code.code, NullCodeSystem);
-            if (!CodesByHash.ContainsKey(nullKey))
-                CodesByHash.Add(nullKey, code);
             if (!CodesInValueSet.TryGetValue(valueSetUri, out var codes))
             {
-                codes = new HashSet<CqlCode>(CodeHasher);
-                codes.Add(code);
+                codes = new InMemoryValueSet(new[] { code }, _comparer);
                 CodesInValueSet.Add(valueSetUri, codes);
             }
             else
@@ -59,41 +53,26 @@ namespace Hl7.Cql.ValueSets
         /// <param name="code">The code to add.</param>
         public void Set(string valueSetUri, CqlCode code)
         {
-            CodesByHash[GetKey(valueSetUri, code.code, code.system)] = code;
-            CodesByHash[GetKey(valueSetUri, code.code, NullCodeSystem)] = code;
             if (!CodesInValueSet.TryGetValue(valueSetUri, out var codes))
             {
-                codes = new HashSet<CqlCode>(CodeHasher)
-                {
-                    code
-                };
+                codes = new InMemoryValueSet(new[] { code }, _comparer);
                 CodesInValueSet.Add(valueSetUri, codes);
             }
             else if (!codes.Contains(code))
                 codes.Add(code);
         }
 
-        /// <summary>
-        /// Returns <see langword="true"/> if the given code is present in the given value set.
-        /// This method ignores the code system of the codes present in <paramref name="valueSetUri"/>.
-        /// This method approaches an O(1) operation.
-        /// </summary>
-        /// <param name="valueSetUri">The value set's canonical URI.</param>
-        /// <param name="code">The code to check.</param>
-        /// <returns><see langword="true"/> if the given code is present in the given value set.</returns>
+        /// <inheritdoc/>
         public bool IsCodeInValueSet(string valueSetUri, string code) =>
-            CodesByHash.ContainsKey(GetKey(valueSetUri, code, NullCodeSystem));
+             CodesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
 
-        /// <summary>
-        /// Returns <see langword="true"/> if the given code is present in the given value set.
-        /// This method approaches an O(1) operation.
-        /// </summary>
-        /// <param name="valueSetUri">The value set's canonical URI.</param>
-        /// <param name="code">The code to check.</param>
-        /// <param name="systemUriOrOid">The code system's canonical URI or its OID.</param>
-        /// <returns><see langword="true"/> if the given code is present in the given value set.</returns>
-        public bool IsCodeInValueSet(string valueSetUri, string code, string systemUriOrOid) =>
-            CodesByHash.ContainsKey(GetKey(valueSetUri, code, systemUriOrOid));
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string valueSetUri, string code, string? systemUriOrOid) =>
+            CodesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code, systemUriOrOid);
+
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
+            CodesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
 
         /// <summary>
         /// Tries to ge the codes in the value set as an <see cref="IReadOnlyCollection{CqlCode}"/>.
@@ -101,7 +80,7 @@ namespace Hl7.Cql.ValueSets
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="codes">The <see langword="out"/> parameter for the value set's codes, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the given value set is defined; otherwise, <see langword="false"/>.</returns>
-        public bool TryGetCodesInValueSet(string valueSetUri, out IReadOnlyCollection<CqlCode>? codes)
+        public bool TryGetCodesInValueSet(string valueSetUri, out IEnumerable<CqlCode>? codes)
         {
             if (CodesInValueSet.TryGetValue(valueSetUri, out var codeSet))
             {
@@ -112,28 +91,7 @@ namespace Hl7.Cql.ValueSets
             return false;
         }
 
-        /// <summary>
-        /// Gets the total number of codes in all value sets in this dictionary.
-        /// </summary>
-        public int Count => CodesByHash.Count / 2;
-
-        private string GetKey(string valueSetUri, string? code, string? systemUri) =>
-            $"{valueSetUri?.ToLowerInvariant()}\0{systemUri?.ToLowerInvariant() ?? ""}\0{code?.ToLowerInvariant() ?? ""}";
-
-        private readonly Dictionary<string, CqlCode> CodesByHash = new();
-        private readonly Dictionary<string, HashSet<CqlCode>> CodesInValueSet =
-            new(StringComparer.OrdinalIgnoreCase);
-
-        private class CqlCodeHasher : IEqualityComparer<CqlCode>
-        {
-            public bool Equals(CqlCode? x, CqlCode? y) => true;
-
-            // we're using low ASCII values that are invalid in real codes
-            public int GetHashCode(CqlCode obj) =>
-                ($"{obj.code ?? "\x1"}\x1").GetHashCode()
-                ^ ($"{obj.system ?? "\x2"}\x2").GetHashCode();
-
-        }
-
+        private readonly Dictionary<string, InMemoryValueSet> CodesInValueSet = new(StringComparer.OrdinalIgnoreCase);
+        private readonly ICqlComparer<CqlCode> _comparer;
     }
 }

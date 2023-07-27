@@ -64,7 +64,7 @@ namespace Hl7.Cql.Firely
                         {
                             foreach (var resourceCoding in resourceCodings)
                             {
-                                if (valueSet.IsCodeInValueSet(resourceCoding.Code, resourceCoding.System) ?? false)
+                                if (valueSet.IsCodeInValueSet(resourceCoding.Code, resourceCoding.System))
                                 {
                                     yield return t;
                                     break;
@@ -87,8 +87,8 @@ namespace Hl7.Cql.Firely
                                 {
                                     if (resourceCoding != null
                                         && allowedCode != null
-                                        && CodeComparer.Equivalent(resourceCoding.Code, allowedCode.code!, null)
-                                        && SystemComparer.Equivalent(resourceCoding.System, allowedCode.system!, null))
+                                        && CodeComparer.Equivalent(resourceCoding.Code, allowedCode.code, null)
+                                        && SystemComparer.Equivalent(resourceCoding.System, allowedCode.system, null))
                                     {
                                         found = true;
                                         break;

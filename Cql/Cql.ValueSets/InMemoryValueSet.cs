@@ -11,6 +11,7 @@ using Hl7.Cql.Primitives;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -19,30 +20,53 @@ namespace Hl7.Cql.ValueSets
     /// </summary>
     public class InMemoryValueSet : IValueSetFacade
     {
-        private static readonly ICqlComparer _defaultComparer = new StringCqlComparer(StringComparer.OrdinalIgnoreCase);
+        private const string NullCodeSystem = "\0";
+
+        private static readonly ICqlComparer<CqlCode> _defaultComparer = new CqlCodeCqlComparer();
 
         private readonly Lazy<HashSet<CqlCode>> _lazyContents;
+
+        private readonly Lazy<HashSet<CqlCode>> _lazyContentsByCode;
+
         private HashSet<CqlCode> _contents => _lazyContents.Value;
+
+        private HashSet<CqlCode> _contentsByCode => _lazyContentsByCode.Value;
 
         public InMemoryValueSet(IEnumerable<CqlCode> contents) : this(contents, _defaultComparer)
         {
             // nothing
         }
 
-        public InMemoryValueSet(IEnumerable<CqlCode> contents, ICqlComparer comparer)
+        public InMemoryValueSet(IEnumerable<CqlCode> contents, ICqlComparer<CqlCode> comparer)
         {
             if (contents is null) throw new ArgumentNullException(nameof(contents));
 
-            var hasher = comparer?.ToEqualityComparer() ?? throw new ArgumentNullException(nameof(comparer));
-            _lazyContents = new Lazy<HashSet<CqlCode>>(() => new(contents, hasher));
+            var equalityComparer = comparer?.ToEqualityComparer() ?? throw new ArgumentNullException(nameof(comparer));
+            _lazyContents = new(() => new(contents, equalityComparer));
+
+            var equivalenceComparer = comparer.ToEqualityComparer(useEquivalence: true);
+            _lazyContentsByCode = new(() => new(contents.Concat(makeContentsWithNullSystem()), equivalenceComparer));
+
+            IEnumerable<CqlCode> makeContentsWithNullSystem() => contents.Select(c => new CqlCode(c.code, NullCodeSystem));
         }
 
-        public bool? IsCodeInValueSet(CqlCode? code) => code is not null ? _contents.Contains(code) : false;
+        public InMemoryValueSet Add(CqlCode code)
+        {
+            _contents.Add(code);
+            _contentsByCode.Add(code);
+            _contentsByCode.Add(new CqlCode(code.code, NullCodeSystem));
 
-        public bool? IsCodeInValueSet(string? code, string? system) => IsCodeInValueSet(new CqlCode(code, system, null, null));
+            return this;
+        }
 
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_contents).GetEnumerator();
 
         IEnumerator<CqlCode> IEnumerable<CqlCode>.GetEnumerator() => _contents.GetEnumerator();
+
+        public bool IsCodeInValueSet(string code) => _contentsByCode.Contains(new CqlCode(code, NullCodeSystem));
+
+        public bool IsCodeInValueSet(string code, string? system) => _contentsByCode.Contains(new CqlCode(code, system));
+
+        public bool IsCodeInValueSet(CqlCode code) => _contents.Contains(code);
     }
 }

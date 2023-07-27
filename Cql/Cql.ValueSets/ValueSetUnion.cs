@@ -36,51 +36,35 @@ namespace Hl7.Cql.ValueSets
 
         private IValueSetFacade[] _facades;
 
-        /// <summary>
-        /// Enumerates the code in this value set facade union.
-        /// </summary>
         IEnumerator<CqlCode> IEnumerable<CqlCode>.GetEnumerator()
         {
             // If there is more than one source, create an in-memory hash to serve the enumerable.
             // From now on, this in-memory hash will be used to servce the other methods in the
             // interface as well.
+            // TODO: If this interface would not require codes to be unique, we could make this more performant.
+            // Uniqueness could then be done by the Union operator itself, not the IEnumerable.
             if (_facades.Length > 1)
             {
+                // TODO: it's undefined what comparator to use for the equality of the Union operator,
+                // so we assume our default here, which is probably wrong.
                 var unifiedFacade = new InMemoryValueSet(_facades.SelectMany(f => f));
                 _facades = new[] { unifiedFacade };
             }
+            else if (_facades.Length == 0)
+                return Enumerable.Empty<CqlCode>().GetEnumerator();
 
             return _facades[0].GetEnumerator();
         }
 
-        /// <summary>
-        /// Enumerates the code in this value set facade union.
-        /// </summary>
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable<CqlCode>)this).GetEnumerator();
 
-        /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set union.
-        /// </summary>
-        /// <param name="code">The code to check.</param>
-        /// <returns><see langword="true"/> if <paramref name="code"/> is in this value set.</returns>
-        public bool? IsCodeInValueSet(CqlCode? code)
-        {
-            if (code == null) return null;
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(CqlCode code) => _facades.Any(f => f.IsCodeInValueSet(code));
 
-            return _facades.Any(f => f.IsCodeInValueSet(code) == true);
-        }
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string code, string? system) => _facades.Any(f => f.IsCodeInValueSet(code, system));
 
-        /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set union.
-        /// </summary>
-        /// <param name="code">The code to check.</param>
-        /// <param name="system">The code system to check.</param>
-        /// <returns><see langword="true"/> if the code is in this value set.</returns>
-        public bool? IsCodeInValueSet(string? code, string? system)
-        {
-            if (code == null) return null;
-
-            return _facades.Any(f => f.IsCodeInValueSet(code, system) == true);
-        }
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string code) => _facades.Any(f => f.IsCodeInValueSet(code));
     }
 }

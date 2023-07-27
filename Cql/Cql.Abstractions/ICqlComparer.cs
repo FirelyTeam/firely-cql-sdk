@@ -60,7 +60,7 @@ namespace Hl7.Cql
         /// <param name="y">The second object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the objects are equal, <see langword="false"/> if not, and <see langword="null"/> if the answer cannot be computed due to uncertainty related to <paramref name="precision"/>.</returns>
-        bool? Equals(T x, T y, string? precision);
+        bool? Equals(T? x, T? y, string? precision);
         /// <summary>
         /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
         /// </summary>
@@ -74,7 +74,7 @@ namespace Hl7.Cql
         /// If the value is greater than zero, <paramref name="x"/> is greater than <paramref name="y"/>.
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
-        int? Compare(T x, T y, string? precision);
+        int? Compare(T? x, T? y, string? precision);
         /// <summary>
         /// Computes a hash code for <paramref name="x"/>.
         /// If <see cref="Equals(T, T, string?)"/> returns <see langword="true"/> for two objects x and y, this method must return the same value for both x and y.
