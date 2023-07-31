@@ -9,7 +9,9 @@
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -18,21 +20,23 @@ namespace Hl7.Cql.ValueSets
     /// </summary>
     public class HashValueSetDictionary : IValueSetDictionary
     {
+        // Table with unique CqlCodes, so having many valuesets with identical codes will
+        // not result in duplicate codes. Also helps with comparing codes by reference for speed.
+
+        private readonly ConcurrentDictionary<CqlCode, CqlCode> _internHash;
+
+        public CqlCode Intern(CqlCode code) => _internHash.GetOrAdd(code, code);
+
         public HashValueSetDictionary(ICqlComparer<CqlCode> comparer)
         {
             _comparer = comparer;
-            _allCodes = new HashSet<CqlCode>(_comparer.ToEqualityComparer());
+            _internHash = new(_comparer.ToEqualityComparer());
         }
 
         public HashValueSetDictionary() : this(new CqlCodeCqlComparer())
         {
             // nothing
         }
-
-        // Table with unique CqlCodes, so having many valuesets with identical codes will
-        // not result in duplicate codes. Also helps with comparing codes by reference for speed.
-        // TO BE FINISHED ;-)
-        private readonly HashSet<CqlCode> _allCodes;
 
         /// <summary>
         /// Adds the code to the given value set by its canonical URI.
@@ -44,6 +48,7 @@ namespace Hl7.Cql.ValueSets
             if (string.IsNullOrEmpty(valueSetUri)) throw new ArgumentException($"'{nameof(valueSetUri)}' cannot be null or empty.", nameof(valueSetUri));
             if (code is null) throw new ArgumentNullException(nameof(code));
 
+            code = Intern(code);
             if (!_codesInValueSet.TryGetValue(valueSetUri, out var codes))
             {
                 codes = new InMemoryValueSet(new[] { code }, _comparer);
@@ -63,20 +68,14 @@ namespace Hl7.Cql.ValueSets
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="codes">The codes to add.</param>
-        public void Add(string valueSetUri, IEnumerable<CqlCode> codes) => Add(valueSetUri, new InMemoryValueSet(codes));
-
-        /// <summary>
-        /// Adds the code to the given value set by its canonical URI.
-        /// </summary>
-        /// <param name="valueSetUri">The value set's canonical URI.</param>
-        /// <param name="codes">The codes to add.</param>
         /// <exception cref="ArgumentException">If the valueset already exists in the dictionary.</exception>
-        public void Add(string valueSetUri, IValueSetFacade codes)
+        public void Add(string valueSetUri, IEnumerable<CqlCode> codes)
         {
             if (_codesInValueSet.ContainsKey(valueSetUri))
                 throw new ArgumentException($"Valueset {valueSetUri} already exists in dictionary.");
 
-            _codesInValueSet.Add(valueSetUri, codes);
+            var internedCodes = codes.Select(Intern);
+            _codesInValueSet.Add(valueSetUri, new InMemoryValueSet(internedCodes));
         }
 
         /// <inheritdoc/>

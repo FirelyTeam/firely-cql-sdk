@@ -18,6 +18,11 @@ namespace Hl7.Cql.Comparers
     public class CqlCodeCqlComparer : ICqlComparer<CqlCode>, ICqlComparer
     {
         /// <summary>
+        /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
+        /// </summary>
+        public static readonly CqlCodeCqlComparer DefaultCqlComparer = new();
+
+        /// <summary>
         /// Create a comparer that uses a given <see cref="IComparer{T}"/> to compare the code part of the CqlCode.
         /// </summary>
         public CqlCodeCqlComparer(IComparer<string> codeComparer)
@@ -48,6 +53,9 @@ namespace Hl7.Cql.Comparers
                 return null;
             else
             {
+                // Speed up comparison if these are the same objects
+                if (ReferenceEquals(x, y)) return 0;
+
                 var cc = CodeComparer.Compare(x.code, y.code);
                 if (cc == 0)
                 {
@@ -83,6 +91,10 @@ namespace Hl7.Cql.Comparers
         {
             if (x == null || y == null)
                 return null;
+
+            // Speed up comparison if these are the same objects
+            if (ReferenceEquals(x, y)) return true;
+
             var compare = Compare(x, y, precision);
             if (compare == null)
                 return null;
