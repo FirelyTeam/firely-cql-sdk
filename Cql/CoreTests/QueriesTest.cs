@@ -36,10 +36,9 @@ namespace CoreTests
             var expressions = eb.Build();
             QueriesDefinitions = expressions
                 .CompileAll();
-            ValueSets = new HashValueSetDictionary();
+            ValueSets = new InMemoryValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
-                new CqlCode("code", "system", null, null));
-
+                new[] { new CqlCode("code", "system", null, null) });
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = ElmPackage.LoadFrom(elm);
@@ -47,7 +46,6 @@ namespace CoreTests
             expressions = eb.Build();
             AggregatesDefinitions = expressions
                 .CompileAll();
-
         }
 
         private static DefinitionDictionary<Delegate> QueriesDefinitions;
@@ -56,7 +54,7 @@ namespace CoreTests
         private const string QueriesLibrary = "QueriesTest-1.0.0";
         private const string AggregatesLibrary = "Aggregates-1.0.0";
 
-        private static HashValueSetDictionary ValueSets;
+        private static InMemoryValueSetDictionary ValueSets;
         private const string TestCodeSystem = "https://www.ncqa.org/fhir/codesystem/test-cs";
         private static readonly CqlCode[] TestCodes = new CqlCode[]
         {

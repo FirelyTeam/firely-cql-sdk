@@ -16,9 +16,9 @@ using System.Linq;
 namespace Hl7.Cql.ValueSets
 {
     /// <summary>
-    /// Uses hash sets to identify code membership within value sets.
+    /// A valueset dictionary that keeps FHIR valuesets in memory.
     /// </summary>
-    public class HashValueSetDictionary : IValueSetDictionary
+    public class InMemoryValueSetDictionary : IValueSetDictionary
     {
         // Table with unique CqlCodes, so having many valuesets with identical codes will
         // not result in duplicate codes. Also helps with comparing codes by reference for speed.
@@ -27,40 +27,15 @@ namespace Hl7.Cql.ValueSets
 
         public CqlCode Intern(CqlCode code) => _internHash.GetOrAdd(code, code);
 
-        public HashValueSetDictionary(ICqlComparer<CqlCode> comparer)
+        public InMemoryValueSetDictionary(ICqlComparer<CqlCode> comparer)
         {
             _comparer = comparer;
             _internHash = new(_comparer.ToEqualityComparer());
         }
 
-        public HashValueSetDictionary() : this(new CqlCodeCqlComparer())
+        public InMemoryValueSetDictionary() : this(new CqlCodeCqlComparer())
         {
             // nothing
-        }
-
-        /// <summary>
-        /// Adds the code to the given value set by its canonical URI.
-        /// </summary>
-        /// <param name="valueSetUri">The value set's canonical URI.</param>
-        /// <param name="code">The code to add.</param>
-        public void Add(string valueSetUri, CqlCode code)
-        {
-            if (string.IsNullOrEmpty(valueSetUri)) throw new ArgumentException($"'{nameof(valueSetUri)}' cannot be null or empty.", nameof(valueSetUri));
-            if (code is null) throw new ArgumentNullException(nameof(code));
-
-            code = Intern(code);
-            if (!_codesInValueSet.TryGetValue(valueSetUri, out var codes))
-            {
-                codes = new InMemoryValueSet(new[] { code }, _comparer);
-                _codesInValueSet.Add(valueSetUri, codes);
-            }
-            else
-            {
-                if (codes is InMemoryValueSet imvs)
-                    imvs.Add(code);
-                else
-                    throw new NotSupportedException($"Valueset {valueSetUri} is read-only and cannot be added to.");
-            }
         }
 
         /// <summary>
@@ -91,7 +66,7 @@ namespace Hl7.Cql.ValueSets
             _codesInValueSet.TryGetValue(valueSetUri, out var vs) && vs.IsCodeInValueSet(code);
 
         /// <summary>
-        /// Tries to ge the codes in the value set as an <see cref="IReadOnlyCollection{CqlCode}"/>.
+        /// Tries to get the codes in the value set as an <see cref="IReadOnlyCollection{CqlCode}"/>.
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="codes">The <see langword="out"/> parameter for the value set's codes, or <see langword="null"/>.</param>
@@ -106,9 +81,6 @@ namespace Hl7.Cql.ValueSets
             codes = null!;
             return false;
         }
-
-        public bool HasValueSet(string valueSetUri) => _codesInValueSet.ContainsKey(valueSetUri);
-
 
         private readonly Dictionary<string, IValueSetFacade> _codesInValueSet = new(StringComparer.OrdinalIgnoreCase);
         private readonly ICqlComparer<CqlCode> _comparer;

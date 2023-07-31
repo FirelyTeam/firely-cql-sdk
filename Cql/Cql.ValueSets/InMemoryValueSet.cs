@@ -26,13 +26,13 @@ namespace Hl7.Cql.ValueSets
 
         public static readonly InMemoryValueSet EMPTY = new(Enumerable.Empty<CqlCode>());
 
-        private readonly Lazy<HashSet<CqlCode>> _lazyContents;
+        private readonly Lazy<IReadOnlySet<CqlCode>> _lazyContents;
 
-        private readonly Lazy<HashSet<CqlCode>> _lazyContentsByCode;
+        private readonly Lazy<IReadOnlySet<CqlCode>> _lazyContentsByCode;
 
-        private HashSet<CqlCode> _contents => _lazyContents.Value;
+        private IReadOnlySet<CqlCode> _contents => _lazyContents.Value;
 
-        private HashSet<CqlCode> _contentsByCode => _lazyContentsByCode.Value;
+        private IReadOnlySet<CqlCode> _contentsByCode => _lazyContentsByCode.Value;
 
         public InMemoryValueSet(IEnumerable<CqlCode> contents) : this(contents, _defaultComparer)
         {
@@ -43,22 +43,22 @@ namespace Hl7.Cql.ValueSets
         {
             if (contents is null) throw new ArgumentNullException(nameof(contents));
 
-            var equalityComparer = comparer?.ToEqualityComparer() ?? throw new ArgumentNullException(nameof(comparer));
-            _lazyContents = new(() => new(contents, equalityComparer));
+            if (contents is InMemoryValueSet imvs)
+            {
+                // Since the InMemoryValueSet is immutable, we can simply re-use its contents.
+                _lazyContents = imvs._lazyContents;
+                _lazyContentsByCode = imvs._lazyContentsByCode;
+            }
+            else
+            {
+                var equalityComparer = comparer?.ToEqualityComparer() ?? throw new ArgumentNullException(nameof(comparer));
+                _lazyContents = new(() => new HashSet<CqlCode>(contents, equalityComparer));
 
-            var equivalenceComparer = comparer.ToEqualityComparer(useEquivalence: true);
-            _lazyContentsByCode = new(() => new(contents.Concat(makeContentsWithNullSystem()), equivalenceComparer));
+                var equivalenceComparer = comparer.ToEqualityComparer(useEquivalence: true);
+                _lazyContentsByCode = new(() => new HashSet<CqlCode>(contents.Concat(makeContentsWithNullSystem()), equivalenceComparer));
 
-            IEnumerable<CqlCode> makeContentsWithNullSystem() => contents.Select(c => new CqlCode(c.code, NullCodeSystem));
-        }
-
-        public InMemoryValueSet Add(CqlCode code)
-        {
-            _contents.Add(code);
-            _contentsByCode.Add(code);
-            _contentsByCode.Add(new CqlCode(code.code, NullCodeSystem));
-
-            return this;
+                IEnumerable<CqlCode> makeContentsWithNullSystem() => contents.Select(c => new CqlCode(c.code, NullCodeSystem));
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable)_contents).GetEnumerator();

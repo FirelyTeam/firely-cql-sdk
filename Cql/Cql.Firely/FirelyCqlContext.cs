@@ -27,7 +27,7 @@ namespace Hl7.Cql.Firely
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null)
         {
-            valueSets ??= new HashValueSetDictionary();
+            valueSets ??= new InMemoryValueSetDictionary();
             var unitConverter = new UnitConverter();
             var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
             IDataRetriever dataRetriever = bundle != null

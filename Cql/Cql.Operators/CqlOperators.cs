@@ -30,7 +30,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="converter">The type converter to use, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="TypeConverter.Create"/> is used.</param>
         /// <param name="dataRetriever">The data retriever to use, or <see langword="null" />.  When <see langword="null" />, no data will be returned by any retrieve expression.</param>
         /// <param name="comparer">The comparer to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="CqlComparers"/> is used.</param>
-        /// <param name="valueSets">The value set dictionary to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="HashValueSetDictionary"/> is used.</param>
+        /// <param name="valueSets">The value set dictionary to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="InMemoryValueSetDictionary"/> is used.</param>
         /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
         /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
         /// <returns></returns>
@@ -46,7 +46,7 @@ namespace Hl7.Cql.Runtime
                 converter ?? TypeConverter.Create(),
                 dataRetriever ?? new CompositeDataRetriever(),
                 comparer ?? new CqlComparers(),
-                valueSets ?? new HashValueSetDictionary(),
+                valueSets ?? new InMemoryValueSetDictionary(),
                 unitConverter ?? new UnitConverter(),
                 now ?? DateTimeIso8601.UtcNow);
             return operators;
@@ -178,8 +178,7 @@ namespace Hl7.Cql.Runtime
         public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
-        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.TryGetValueSet(valueSet, out var result)
-              ? result! : InMemoryValueSet.EMPTY;
+        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);
 
         public object NotSupported() => throw new NotSupportedException();
 

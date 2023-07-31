@@ -43,9 +43,9 @@ namespace CoreTests
             inMemoryVS = new InMemoryValueSet(all);
             unionVS = new InMemoryValueSet(TestCodesA).Union(new InMemoryValueSet(TestCodesB));
 
-            var dict = new HashValueSetDictionary();
+            var dict = new InMemoryValueSetDictionary();
             dict.Add("valuesetA", all);
-            _ = dict.TryGetValueSet("valuesetA", out cqlValueSetVS);
+            cqlValueSetVS = dict.GetValueSet("valuesetA");
         }
 
         [TestMethod]

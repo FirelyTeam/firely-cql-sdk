@@ -1,15 +1,13 @@
 ﻿#nullable enable
 
 using FluentAssertions;
-using Hl7.Cql.Firely;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSetLoaders;
 using Hl7.Cql.ValueSets;
-using Hl7.Fhir.Model;
+using Hl7.Fhir.Specification.Source;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace CoreTests
@@ -60,13 +58,13 @@ namespace CoreTests
         public void CanGetFacade()
         {
             var dict = buildDict();
-            dict.TryGetValueSet("http://valuesetA", out var f).Should().BeTrue();
+            var f = dict.GetValueSet("http://valuesetA");
             allCodesInA(f!);
         }
 
-        private HashValueSetDictionary buildDict()
+        private InMemoryValueSetDictionary buildDict()
         {
-            var dict = new HashValueSetDictionary();
+            var dict = new InMemoryValueSetDictionary();
 
             dict.Add("http://valuesetA", TestCodesA);
             dict.Add("http://valuesetB", TestCodesB);
@@ -77,12 +75,10 @@ namespace CoreTests
         [TestMethod]
         public void HashDictonaryInternsCodes()
         {
-            var dict = new HashValueSetDictionary();
+            var dict = new InMemoryValueSetDictionary();
 
-            dict.Add("http://valuesetA", new CqlCode("x", "http://nu.nl", "1.0"));
-            dict.Add("http://valuesetA", new CqlCode("y", "http://nu.nl"));
-            dict.Add("http://valuesetB", new CqlCode("x", "http://nu.nl"));
-            dict.Add("http://valuesetB", new CqlCode("y", "http://nu.nl"));
+            dict.Add("http://valuesetA", new[] { new CqlCode("x", "http://nu.nl", "1.0"), new CqlCode("y", "http://nu.nl") });
+            dict.Add("http://valuesetB", new[] { new CqlCode("x", "http://nu.nl"), new CqlCode("y", "http://nu.nl") });
 
             _ = dict.TryGetCodesInValueSet("http://valuesetA", out var vsA);
             _ = dict.TryGetCodesInValueSet("http://valuesetB", out var vsB);
@@ -94,21 +90,8 @@ namespace CoreTests
         [TestMethod]
         public void Intensional_Value_Set()
         {
-            var files = new[]
-            {
-                @"Input\ValueSets\intensional-value-set.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1009.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json",
-            };
-            var valueSets = files.Select(path =>
-            {
-                using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
-                return vs;
-            }).ToArray();
-
-            var loader = new ValueSetLoader(valueSets, false);
-            var vsd = loader.Load();
+            var resolver = new DirectorySource(@"Input\ValueSets");
+            var vsd = new ValueSetSource(resolver);
 
             Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
             Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013", out var codes1013));
@@ -123,23 +106,8 @@ namespace CoreTests
         [TestMethod]
         public void Intensional_Value_Set_2_Levels()
         {
-            var files = new[]
-            {
-                @"Input\ValueSets\intensional-value-set-2.json",
-                @"Input\ValueSets\intensional-value-set.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1009.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json",
-            };
-            var valueSets = files.Select(path =>
-            {
-                using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
-                return vs;
-            }).ToArray();
-
-            var loader = new ValueSetLoader(valueSets, false);
-            var vsd = loader.Load();
-
+            var resolver = new DirectorySource(@"Input\ValueSets");
+            var vsd = new ValueSetSource(resolver);
 
             Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
             Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013", out var codes1013));
@@ -156,25 +124,13 @@ namespace CoreTests
 
         }
 
-        [TestMethod]
+        [TestMethod, Ignore("Until we have SDK 5.4, which will detect cycles.")]
         public void Intensional_Value_Set_Cycle()
         {
-            var files = new[]
-{
-                @"Input\ValueSets\intensional-value-set-3.json",
-                @"Input\ValueSets\intensional-value-set-4.json",
+            var resolver = new DirectorySource(@"Input\ValueSets");
+            var vsd = new ValueSetSource(resolver);
 
-            };
-            var valueSets = files.Select(path =>
-            {
-                using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
-                return vs;
-            }).ToArray();
-
-            var loader = new ValueSetLoader(valueSets, false);
-
-            Assert.ThrowsException<InvalidOperationException>(() => loader.Load());
+            Assert.ThrowsException<InvalidOperationException>(() => vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set-3", out var _));
         }
     }
 }

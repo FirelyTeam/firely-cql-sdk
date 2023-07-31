@@ -17,11 +17,6 @@ namespace Hl7.Cql.ValueSets
     public interface IValueSetDictionary
     {
         /// <summary>
-        /// Returns whether the dictionary contains the given valueset.
-        /// </summary>
-        bool HasValueSet(string valueSetUri);
-
-        /// <summary>
         /// Returns <see langword="true"/> if the given code is present in the given value set.
         /// This method uses equality as defined for Cql codes.
         /// </summary>
@@ -45,9 +40,9 @@ namespace Hl7.Cql.ValueSets
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="code">The code to check.</param>
-        /// <param name="systemUriOrOid">The code system's canonical URI or its OID.</param>
+        /// <param name="system">The code system's canonical URI or its OID.</param>
         /// <returns><see langword="true"/> if the given code is present in the given value set.</returns>
-        bool IsCodeInValueSet(string valueSetUri, string code, string? systemUriOrOid);
+        bool IsCodeInValueSet(string valueSetUri, string code, string? system);
 
         /// <summary>
         /// Tries to get the codes in the value set as an <see cref="IReadOnlyCollection{CqlCode}"/>.

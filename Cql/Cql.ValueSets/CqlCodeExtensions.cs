@@ -14,22 +14,18 @@ namespace Hl7.Cql.ValueSets
 {
     public static class CqlCodeExtensions
     {
-        public static bool TryGetValueSet(this IValueSetDictionary all, string canonical, out IValueSetFacade? result)
-        {
-            if (all.HasValueSet(canonical))
-            {
-                result = new CqlValueSetFacade(canonical, all);
-                return true;
-            }
-            else
-            {
-                result = null;
-                return false;
-            }
-        }
+        /// <summary>
+        /// Returns a facade on a <see cref="IValueSetDictionary"/> that represents access to the valueset within the dictionary.
+        /// </summary>
+        /// <remarks>This method does not check that the dictionary contains the given valueset.</remarks>
+        public static IValueSetFacade GetValueSet(this IValueSetDictionary all, string canonical) => new CqlValueSetFacade(canonical, all);
 
-        public static bool TryGetValueSet(this IValueSetDictionary all, CqlValueSet valueset, out IValueSetFacade? result) =>
-                TryGetValueSet(all, valueset.id ?? throw new ArgumentException("Valueset does not have a canonical."), out result);
+        /// <summary>
+        /// Returns a facade on a <see cref="IValueSetDictionary"/> that represents access to the valueset within the dictionary.
+        /// </summary>
+        /// <remarks>This method does not check that the dictionary contains the given valueset.</remarks>
+        public static IValueSetFacade GetValueSet(this IValueSetDictionary all, CqlValueSet valueset) =>
+                GetValueSet(all, valueset.id ?? throw new ArgumentException("Valueset does not have a canonical."));
 
         public static IEnumerable<CqlCode> Union(this IEnumerable<CqlCode> left, IEnumerable<CqlCode> right)
         {
