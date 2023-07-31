@@ -1,6 +1,7 @@
 ﻿using Cql.Operators;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
+using Hl7.Cql.Firely.Comparers;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
@@ -40,7 +41,8 @@ namespace Hl7.Cql.Firely
                 cqlComparers,
                 valueSets,
                 unitConverter,
-                new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond));
+                new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond),
+                FirelyEnumComparer.Default);
             cqlComparers
                 .AddIntervalComparisons(operators)
                 .AddFirelyComparers();

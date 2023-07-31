@@ -27,13 +27,14 @@ namespace Hl7.Cql.Runtime
         /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
         /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
         /// <returns></returns>
-        public static CqlOperators Create(TypeResolver resolver, 
+        public static CqlOperators Create(TypeResolver resolver,
             TypeConverter? converter = null,
             IDataRetriever? dataRetriever = null,
             ICqlComparer? comparer = null,
             IValueSetDictionary? valueSets = null,
             IUnitConverter? unitConverter = null,
-            DateTimeIso8601? now = null)
+            DateTimeIso8601? now = null,
+            ICqlComparer? enumComparer = null)
         {
             var operators = new CqlOperators(resolver,
                 converter ?? TypeConverter.Create(),
@@ -41,7 +42,8 @@ namespace Hl7.Cql.Runtime
                 comparer ?? new CqlComparers(),
                 valueSets ?? new HashValueSetDictionary(),
                 unitConverter ?? new UnitConverter(),
-                now ?? DateTimeIso8601.UtcNow);
+                now ?? DateTimeIso8601.UtcNow,
+                enumComparer ?? Comparers.EnumComparer.Default);
             return operators;
         }
 
@@ -52,11 +54,13 @@ namespace Hl7.Cql.Runtime
             ICqlComparer comparer,
             IValueSetDictionary valueSets,
             IUnitConverter unitConverter,
-            DateTimeIso8601 now)
+            DateTimeIso8601 now,
+            ICqlComparer enumComparer)
         {
             Comparer = comparer;
             ValueSets = valueSets;
             UnitConverter = unitConverter ?? throw new ArgumentNullException(nameof(unitConverter));
+            EnumComparer = enumComparer;
             NowValue = new CqlDateTime(now);
             TypeResolver = typeResolver ?? throw new ArgumentNullException(nameof(typeResolver));
             TypeConverter = typeConverter ?? throw new ArgumentNullException(nameof(typeConverter));
@@ -91,24 +95,15 @@ namespace Hl7.Cql.Runtime
         internal IEqualityComparer<object> IEqualityComparer { get; private set; }
         internal IComparer<object> IComparer { get; private set; }
 
+        internal ICqlComparer EnumComparer { get; private set; }
+
         /// <summary>
         /// Raised when the <see cref="ICqlOperators.Message{T}(T, string, string, string)"/> method is called in a CQL library.
         /// </summary>
         public event EventHandler<MessageEventArgs>? MessageReceived;
 
-        public bool? EnumEqualsString(object? @enum, string? value)
-        {
-            if (@enum == null)
-            {
-                if (value == null)
-                    return true;
-                else return false;
-            }
-            else if (value == null)
-                return false;
-            var leftValue = Enum.GetName(@enum.GetType(), @enum);
-            return string.Equals(leftValue, value, StringComparison.OrdinalIgnoreCase);
-        }
+        public bool? EnumEqualsString(object? @enum, string? value) => EnumComparer.Equals(@enum!, value!, null);
+        
         public T LateBoundProperty<T>(object? source, string propertyName)
         {
             if (source == null || string.IsNullOrWhiteSpace(propertyName))
@@ -161,10 +156,7 @@ namespace Hl7.Cql.Runtime
             Func<TSource, TCollection, TResult> resultSelector) =>
             source == null ? null : source!.SelectMany(collectionSelector!, resultSelector!).ToList();
 
-        //public IEnumerable<R>? SelectManyOrNull<T, R>(IEnumerable<T>? source, 
-        //    Func<T, IEnumerable<R>> collectionSelector,
-        //    Func<T, R> resultSelector) =>
-        //    source == null ? null : source.SelectMany(collectionSelector).ToList();
+
         public IEnumerable<T>? WhereOrNull<T>(IEnumerable<T>? source, Func<T, bool?> lambda) =>
             source == null ? null : source.Where(x => lambda(x) ?? false).ToList();
 

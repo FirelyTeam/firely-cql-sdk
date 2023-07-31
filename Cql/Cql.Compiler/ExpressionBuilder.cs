@@ -1509,8 +1509,9 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Instance(Instance ine, ExpressionBuilderContext ctx)
         {
-            var instanceType = TypeResolver.ResolveType(ine.classType.Name!);
-            if (instanceType!.IsEnum)
+            var instanceType = TypeResolver.ResolveType(ine.classType.Name!) ??
+                throw new ArgumentException($"Can't resolve type for instance", nameof(ine));
+            if (IsEnum(instanceType))
             {
                 // constructs like:
                 // FHIR.RemittanceOutcome {value: 'complete'}
@@ -2170,9 +2171,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (expectedType == typeof(string))
                 {
-                    if (result.Type.IsEnum)
-                        return result;
-                    else if (IsNullable(result.Type) && Nullable.GetUnderlyingType(result.Type).IsEnum)
+                    if (IsEnum(result.Type))
                         return result;
                 }
                 result = ChangeType(result, expectedType, ctx);
@@ -2687,6 +2686,15 @@ namespace Hl7.Cql.Compiler
             //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
             //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
             return lambda;
+        }
+
+        protected static bool IsEnum(Type type)
+        {
+            if (type.IsEnum)
+                return true;
+            else if (IsNullable(type) && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
+                return true;
+            return false;
         }
 
     }
