@@ -31,8 +31,40 @@ namespace Hl7.Cql.Firely
             comparers.Register(typeof(Time), new IValueComparer<string?>());
             comparers.Register(typeof(UnsignedInt), new IValueComparer<int?>());
             comparers.Register(typeof(Uuid), new IValueComparer<string?>());
-
             comparers.Register(typeof(Identifier), new IdentifierComparer(comparers, comparers));
+
+            comparers.Register(typeof(Code<>), (type,_comparers) =>
+            {
+                var codeType = type.GetGenericArguments()[0];
+                var comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
+                var comparer = (ICqlComparer)Activator.CreateInstance(comparerType, _comparers)!;
+                return comparer;
+            });
+
+            return comparers;
+        }
+
+        /// <summary>
+        /// Adds comparers for all types derived from <see cref="Resource"/> which compare them by their <see cref="Resource.Id"/> property only.
+        /// </summary>
+        /// <remarks>
+        /// CQL models all complex types such as FHIR resources as Tuple types.  Equality semantics for Tuples states that each property must be compared
+        /// and equal for two Tuple instances to be considered equal.  For FHIR resources with their large numbers of properties, these comparisons
+        /// are expensive and usually superfluous.  Comparing by resource ID alone is sufficient in nearly every use case.
+        /// </remarks>
+        /// <see href="https://cql.hl7.org/09-b-cqlreference.html#equal">
+        /// <param name="comparers"></param>
+        /// <param name="idComparer"></param>
+        /// <returns></returns>
+        public static CqlComparers CompareResourcesById(this CqlComparers comparers, StringComparer idComparer)
+        {
+            var derviedFromResource = typeof(Patient).Assembly.GetTypes()
+                .Where(t => typeof(Resource).IsAssignableFrom(t));
+            var resourceIdComparer = new ResourceIdCqlComparer(new StringCqlComparer(idComparer));
+            foreach(var type in derviedFromResource)
+            {
+                comparers.Register(type, resourceIdComparer);
+            }
             return comparers;
         }
     }
