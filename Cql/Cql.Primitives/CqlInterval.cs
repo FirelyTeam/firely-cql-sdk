@@ -24,8 +24,6 @@ namespace Hl7.Cql.Primitives
         /// <exception cref="ArgumentNullException">If both <paramref name="low"/> and <paramref name="high"/> are null.</exception>
         public CqlInterval(T low, T high, bool lowClosed, bool highClosed)
         {
-            if (low == null && high == null)
-                throw new ArgumentNullException(nameof(low), $"Intervals can have null values for either low or high, but not both.");
             this.low = low;
             this.high = high;
             this.lowClosed = lowClosed;
@@ -47,8 +45,6 @@ namespace Hl7.Cql.Primitives
         /// <exception cref="ArgumentNullException">If both <paramref name="low"/> and <paramref name="high"/> are null.</exception>
         public CqlInterval(T low, T high, bool? lowClosed, bool? highClosed)
         {
-            if (low == null && high == null)
-                throw new ArgumentNullException(nameof(low), $"Intervals can have null values for either low or high, but not both.");
             this.low = low;
             this.high = high;
             this.lowClosed = lowClosed ?? false;
