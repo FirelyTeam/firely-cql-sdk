@@ -24,6 +24,7 @@ namespace Hl7.Cql.Elm
                     var newOptions = new JsonSerializerOptions
                     {
                         TypeInfoResolver = options.TypeInfoResolver,
+                        MaxDepth = options.MaxDepth,
                     };
                     foreach(var converter in converters)
                     {

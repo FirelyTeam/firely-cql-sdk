@@ -33,6 +33,7 @@ namespace Hl7.Cql.Elm
         {
             var options = new JsonSerializerOptions()
             {
+                MaxDepth = int.MaxValue
             }
             .AddLibraryConverters()
             .AddPolymorphicConverters(strict);
