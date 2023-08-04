@@ -173,7 +173,7 @@ namespace Hl7.Cql.Firely
 
         public static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
-            converter.AddConversion<byte[], string>(binary => Convert.ToBase64String(binary));
+            converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
             // TODO: this is a performance problem
             converter.AddConversion<string, CqlDate?>(str =>
@@ -194,8 +194,18 @@ namespace Hl7.Cql.Firely
                     return time;
                 else return null;
             });
+            converter.AddConversion<DateTimeOffset, CqlDateTime>(dto => new CqlDateTime(dto, Iso8601.DateTimePrecision.Millisecond));
             converter.AddConversion<string, FhirUri>(str => new FhirUri(str));
             converter.AddConversion<FhirUri, string>(uri => uri.Value);
+            //converter.AddConversion<M.Quantity.QuantityComparator, string>(qc => qc switch
+            //{
+            //    M.Quantity.QuantityComparator.Ad => "=",
+            //    M.Quantity.QuantityComparator.LessThan => "<",
+            //    M.Quantity.QuantityComparator.LessOrEqual => "<=",
+            //    M.Quantity.QuantityComparator.GreaterThan => ">",
+            //    M.Quantity.QuantityComparator.GreaterOrEqual => ">=",
+            //    _ => throw new ArgumentException(nameof(qc))
+            //});
 
 
             return converter;

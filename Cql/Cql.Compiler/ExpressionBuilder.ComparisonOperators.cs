@@ -15,34 +15,31 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)
         {
-            var leftNv = CoalesceNullableValueType(left);
-            var rightNv = CoalesceNullableValueType(right);
-
-            if (leftNv.Type.IsEnum)
+            if (IsEnum(left.Type))
             {
-                if (rightNv.Type.IsEnum)
+                if (IsEnum(right.Type))
                 {
-                    var equal = Expression.Equal(leftNv, rightNv);
+                    var equal = Expression.Equal(left, right);
                     var asNullable = Expression.Convert(equal, typeof(bool?));
                     return asNullable;
                 }
-                else if (rightNv.Type == typeof(string))
+                else if (right.Type == typeof(string))
                 {
                     var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString,
                         ctx.RuntimeContextParameter,
-                        Expression.Convert(leftNv, typeof(object)),
+                        Expression.Convert(left, typeof(object)),
                         right);
                     return call;
                 }
                 else throw new NotImplementedException();
             }
-            else if (rightNv.Type.IsEnum)
+            else if (IsEnum(right.Type))
             {
-                if (leftNv.Type == typeof(string))
+                if (left.Type == typeof(string))
                 {
                     var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString, 
                         ctx.RuntimeContextParameter,
-                        Expression.Convert(rightNv, typeof(object)),
+                        Expression.Convert(right, typeof(object)),
                         left);
                     return call;
 
