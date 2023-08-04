@@ -82,11 +82,13 @@ public static class Program
                     console.LogToStandardErrorThreshold = LogLevel.Error;
                 });
                 var logFile = Path.Combine(".", "build.txt");
+#pragma warning disable CA1305 // Specify IFormatProvider
                 Log.Logger = new LoggerConfiguration()
                   .Enrich.FromLogContext()
                   .WriteTo
                   .File(logFile)
                   .CreateLogger();
+#pragma warning restore CA1305 // Specify IFormatProvider
                 logging.AddSerilog();
             });
         var packager = new LibraryPackager();

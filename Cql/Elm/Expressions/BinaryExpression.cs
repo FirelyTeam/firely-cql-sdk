@@ -18,7 +18,7 @@ namespace Hl7.Cql.Elm.Expressions
     public class CanConvertQuantityExpression : BinaryExpression { }
 
     /// <summary>
-    /// The & operator for strings in CQL
+    /// The &amp; operator for strings in CQL
     /// </summary>
     public class ConcatenateExpression : BinaryExpression { }
     public class ConvertQuantityExpression : BinaryExpression { }

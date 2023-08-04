@@ -22,7 +22,7 @@ namespace Hl7.Cql.Elm.Expressions
     public class TupleElementDefinition
     {
         public string? name { get; set; }
-        [Obsolete]
+        [Obsolete()]
         [System.Text.Json.Serialization.JsonIgnore, Newtonsoft.Json.JsonIgnore]
         public TypeSpecifierExpression? type { get; set; }
         public TypeSpecifierExpression? elementType { get; set; }

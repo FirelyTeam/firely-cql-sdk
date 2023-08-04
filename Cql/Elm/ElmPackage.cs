@@ -13,6 +13,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -70,17 +71,17 @@ namespace Hl7.Cql.Elm
                     var secondColon = locator.IndexOf(':', dash);
                     if (secondColon > -1)
                     {
-                        var startLine = int.Parse(locator.Substring(0, firstColon));
-                        var startCol = int.Parse(locator.Substring(firstColon + 1, dash - firstColon - 1));
-                        var endline = int.Parse(locator.Substring(dash + 1, secondColon - dash - 1));
-                        var endCol = int.Parse(locator.Substring(secondColon + 1));
+                        var startLine = int.Parse(locator.Substring(0, firstColon), CultureInfo.InvariantCulture);
+                        var startCol = int.Parse(locator.Substring(firstColon + 1, dash - firstColon - 1), CultureInfo.InvariantCulture);
+                        var endline = int.Parse(locator.Substring(dash + 1, secondColon - dash - 1), CultureInfo.InvariantCulture);
+                        var endCol = int.Parse(locator.Substring(secondColon + 1), CultureInfo.InvariantCulture);
                         return (startLine, startCol, endline, endCol);
                     }
                 }
                 else
                 {
-                    var startLine = int.Parse(locator.Substring(0, firstColon));
-                    var startCol = int.Parse(locator.Substring(firstColon + 1));
+                    var startLine = int.Parse(locator.Substring(0, firstColon), CultureInfo.InvariantCulture);
+                    var startCol = int.Parse(locator.Substring(firstColon + 1), CultureInfo.InvariantCulture);
                     return (startLine, startCol, startLine, startCol);
                 }
             }
@@ -148,7 +149,7 @@ namespace Hl7.Cql.Elm
             {
                 locateLibrary = (name, version) =>
                 {
-                    var path = Path.Combine(elmLocation.Directory.FullName, $"{name}-{version}.json");
+                    var path = Path.Combine(elmLocation.Directory!.FullName, $"{name}-{version}.json");
                     var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                     var package = LoadFrom(stream) ?? throw new InvalidOperationException($"Cannot load ELM from {path}");
                     return package;

@@ -606,7 +606,7 @@ namespace Hl7.Cql.Packaging
                 };
             }
 
-            if (!string.IsNullOrWhiteSpace(definition.accessLevel) && definition.accessLevel.Equals("private", StringComparison.CurrentCultureIgnoreCase))
+            if (!string.IsNullOrWhiteSpace(definition.accessLevel) && definition.accessLevel.Equals("private", StringComparison.InvariantCultureIgnoreCase))
             {
                 parameterDefinition.Extension.Add(new Extension
                 {

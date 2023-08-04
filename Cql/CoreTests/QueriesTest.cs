@@ -6,7 +6,6 @@ using Hl7.Cql.Firely;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -142,7 +141,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "bad code", System = "system" }
                         }
@@ -156,7 +155,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "code", System = "bad system" }
                         }
@@ -225,7 +224,7 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "1", System = TestCodeSystem }
                         }
@@ -239,7 +238,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "bad code", System = "system" }
                         }
@@ -253,7 +252,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "code", System = "bad system" }
                         }
@@ -291,7 +290,7 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "1", System = TestCodeSystem }
                         }
@@ -305,7 +304,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "bad code", System = "system" }
                         }
@@ -319,7 +318,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "code", System = "bad system" }
                         }
@@ -357,7 +356,7 @@ namespace CoreTests
                     Id = "obs1",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "1", System = TestCodeSystem }
                         }
@@ -371,7 +370,7 @@ namespace CoreTests
                     Id = "obs2",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "bad code", System = "system" }
                         }
@@ -385,7 +384,7 @@ namespace CoreTests
                     Id = "obs3",
                     Code = new CodeableConcept
                     {
-                      Coding = new List<Coding>
+                        Coding = new List<Coding>
                         {
                             new Coding { Code = "code", System = "bad system" }
                         }
