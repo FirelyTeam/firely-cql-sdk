@@ -17,7 +17,7 @@ namespace Hl7.Cql
     public static class UCUMUnits
     {
         /// <summary>
-        /// <see cref="Unary">
+        /// <see cref="Unary" />
         /// </summary>
         public const string Default = Unary;
 
@@ -87,27 +87,17 @@ namespace Hl7.Cql
         /// <returns>The corresponding UCUM units, or <see langword="null"/> if no mapping is defined.</returns>
         public static string? FromDateTimePrecision(DateTimePrecision dtp)
         {
-            switch (dtp)
+            return dtp switch
             {
-
-                case DateTimePrecision.Year:
-                    return Year;
-                case DateTimePrecision.Month:
-                    return Month;
-                case DateTimePrecision.Day:
-                    return Day;
-                case DateTimePrecision.Hour:
-                    return Hour;
-                case DateTimePrecision.Minute:
-                    return Minute;
-                case DateTimePrecision.Second:
-                    return Second;
-                case DateTimePrecision.Millisecond:
-                    return Millisecond;
-                case DateTimePrecision.Unknown:
-                default:
-                    return null;
-            }
+                DateTimePrecision.Year => Year,
+                DateTimePrecision.Month => Month,
+                DateTimePrecision.Day => Day,
+                DateTimePrecision.Hour => Hour,
+                DateTimePrecision.Minute => Minute,
+                DateTimePrecision.Second => Second,
+                DateTimePrecision.Millisecond => Millisecond,
+                _ => null,
+            };
         }
     }
 

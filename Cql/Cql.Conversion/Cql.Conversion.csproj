@@ -11,6 +11,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="Fhir.Metrics" Version="1.2.2" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 	</ItemGroup>
 
