@@ -33,6 +33,19 @@ namespace Hl7.Cql.Firely
                 }
             }
         }
+
+        public IEnumerable<T> FilterByType<T>(Predicate<Coding> filter, Func<T, IEnumerable<Coding>> getCodes)
+        {
+            var candidates = FilterByType<T>();
+
+            foreach (var candidate in candidates)
+            {
+                var codings = getCodes.Invoke(candidate);
+                foreach (var coding in codings)
+                    if (filter(coding)) yield return candidate;
+            }
+        }
+
     }
 }
 

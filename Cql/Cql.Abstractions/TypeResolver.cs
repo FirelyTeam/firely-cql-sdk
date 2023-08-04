@@ -99,6 +99,13 @@ namespace Hl7.Cql
         public abstract Type? ResolveType(string typeSpecifier);
 
         /// <summary>
+        /// Gets the primary code path used in retrieve short-hand notation e.g., <code>[Condition: "value set"]</code>
+        /// </summary>
+        /// <param name="typeSpecifier">The ELM type specifier.</param>
+        /// <returns>The .NET property for the primary code path, or <see langword="null"/> if none exists.</returns>
+        public abstract PropertyInfo? GetPrimaryCodePath(string typeSpecifier);
+
+        /// <summary>
         /// Gets the property for the given path.
         /// </summary>
         /// <remarks>

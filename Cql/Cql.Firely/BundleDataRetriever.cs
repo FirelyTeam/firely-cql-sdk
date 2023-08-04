@@ -11,6 +11,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
+using System.Reflection;
 
 #nullable enable
 
@@ -28,7 +29,6 @@ namespace Hl7.Cql.Firely
             Bundle = bundle is not null ? new IndexedBundle(bundle.Entry) : throw new ArgumentNullException(nameof(bundle));
         }
 
-
         private static readonly Lazy<ICqlComparer> DefaultStringComparer = new(() =>
             new StringCqlComparer(StringComparer.OrdinalIgnoreCase));
 
@@ -38,23 +38,17 @@ namespace Hl7.Cql.Firely
         private readonly ICqlComparer _codeComparer;
         private readonly ICqlComparer _systemComparer;
 
-        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? allowedCodes = null) where T : class
+        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? allowedCodes = null, PropertyInfo? codeProperty = null) where T : class
         {
             if (allowedCodes is not null)
             {
-                if (!typeof(T).IsAssignableTo(typeof(ICoded)))
-                    throw new InvalidOperationException($"When retrieving with a code filter, a primary code path must exist for {typeof(T)}. None is defined.");
+                Predicate<Coding> filter = allowedCodes is ValueSetFacade valueSet ?
+                    c => valueSet.IsCodeInValueSet(c.Code, c.System) == true
+                    : listFilter;
 
-                if (allowedCodes is ValueSetFacade valueSet)
-                {
-                    return Bundle.FilterByType<T>(c => valueSet.IsCodeInValueSet(c.Code, c.System) == true);
-                }
-                else
-                {
-                    return Bundle.FilterByType<T>(isAllowed);
-                }
+                return executeFilter<T>(filter, codeProperty);
 
-                bool isAllowed(Coding l) => allowedCodes.Any(allowed =>
+                bool listFilter(Coding l) => allowedCodes.Any(allowed =>
                     allowed is not null &&
                     _systemComparer.Equivalent(l.System, allowed.system, null) &&
                     _codeComparer.Equivalent(l.Code, allowed.code, null));
@@ -65,21 +59,44 @@ namespace Hl7.Cql.Firely
             }
         }
 
-        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null) where T : class
+        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class
         {
             if (valueSet != null && valueSet.id != null)
             {
-                if (!typeof(T).IsAssignableTo(typeof(ICoded)))
-                    throw new InvalidOperationException($"When retrieving with a code filter, a primary code path must exist for {typeof(T)}. None is defined.");
-
-                return Bundle.FilterByType<T>(c => ValueSets.IsCodeInValueSet(valueSet.id, c.Code, c.System));
+                return executeFilter<T>(c => ValueSets.IsCodeInValueSet(valueSet.id, c.Code, c.System), codeProperty);
             }
             else
             {
                 return Bundle.FilterByType<T>();
             }
         }
+
+        private IEnumerable<T> executeFilter<T>(Predicate<Coding> filter, PropertyInfo? codeProperty) where T : class
+        {
+            if (codeProperty is null)
+            {
+                if (!typeof(T).IsAssignableTo(typeof(ICoded)))
+                    throw new InvalidOperationException($"When retrieving with a code filter, a primary code path must exist for {typeof(T)}. None is defined.");
+
+                return Bundle.FilterByType<T>(filter);
+            }
+            else
+            {
+                IEnumerable<Coding> getCodedValues(T instance)
+                {
+                    var objectResult = codeProperty!.GetValue(instance);
+
+                    return objectResult switch
+                    {
+                        IEnumerable<DataType> idt => idt.ToCodings(),
+                        DataType dt => dt.ToCodings(),
+                        _ => Enumerable.Empty<Coding>()
+                    };
+                }
+
+                return Bundle.FilterByType<T>(filter, getCodedValues);
+            }
+        }
     }
 }
-
 #nullable disable

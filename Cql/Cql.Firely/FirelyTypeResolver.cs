@@ -14,6 +14,7 @@ using System.Reflection;
 
 namespace Hl7.Cql.Firely
 {
+
     public class FirelyTypeResolver : BaseTypeResolver
     {
         public FirelyTypeResolver(ModelInspector inspector)
@@ -41,7 +42,7 @@ namespace Hl7.Cql.Firely
         /// <returns>The property, or <c>null</c> if the type or property is unknown.</returns>
         protected override PropertyInfo? GetPropertyCore(Type type, string propertyName)
         {
-            PropertyInfo? result;
+            PropertyInfo? result = null;
             if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Code<>) && propertyName == "value")
             {
                 result = ReflectionHelper.FindProperty(type, "Value");
@@ -57,7 +58,9 @@ namespace Hl7.Cql.Firely
                     }
                     else
                     {
-                        result = cm.FindMappedElementByName(propertyName)?.NativeProperty;
+                        var propMapping = cm.FindMappedElementByName(propertyName);
+                        if (propMapping is not null)
+                            result = new PocoModelPropertyInfo(propMapping.NativeProperty, propMapping);
                     }
                 }
                 else
@@ -66,10 +69,20 @@ namespace Hl7.Cql.Firely
                     result = @base;
                 }
             }
-            if (result == null)
-            {
-            }
+
             return result;
+        }
+
+        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
+        {
+            // This is not used by the Firely BundleRetriever, but we'll implement it nonetheless.
+            var specifiedType = ResolveType(typeSpecifier);
+            if (specifiedType == null) return null;
+
+            var codeInterfaceType = typeof(ICoded<>).MakeGenericType(specifiedType);
+            var codeProperty = codeInterfaceType.GetProperty("Code", BindingFlags.Instance | BindingFlags.Public);
+
+            return codeProperty;
         }
 
         public override Type? PatientType => Inspector.PatientMapping?.NativeType;

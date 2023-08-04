@@ -1050,7 +1050,7 @@ namespace Hl7.Cql.Compiler
                     && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
-                    return Retrieve(operators, dataRetriever, type, valueSetOrCodes);
+                    return Retrieve(operators, dataRetriever, type, valueSetOrCodes, codePropertyExpression);
                 }
                 else throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));
             }
@@ -1058,7 +1058,7 @@ namespace Hl7.Cql.Compiler
         }
 
         protected MethodCallExpression Retrieve(MemberExpression operators, MemberExpression dataRetrieve,
-            Type resourceType, Expression codes)
+            Type resourceType, Expression codes, Expression codeProperty)
         {
             MethodInfo? forType = null;
             if (codes.Type == typeof(CqlValueSet))
@@ -1088,7 +1088,7 @@ namespace Hl7.Cql.Compiler
                 else throw new ArgumentException($"Retrieve statements with an ExpressionRef in the terminology position must be list of {nameof(CqlCode)} or a list of lists of {nameof(CqlCode)}.  Instead, the list's element type is {elementType.Name}.", nameof(codes));
             }
             else throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
-            var call = Expression.Call(dataRetrieve, forType, codes);
+            var call = Expression.Call(dataRetrieve, forType, codes, codeProperty);
             return call;
         }
 

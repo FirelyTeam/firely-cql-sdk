@@ -66,10 +66,10 @@ namespace CoreTests
 
             public IList<object> Data { get; }
 
-            public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode> codes = null) where T : class =>
+            public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode> codes = null, PropertyInfo _ = null) where T : class =>
                 Data.OfType<T>();
 
-            public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet = null) where T : class =>
+            public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet = null, PropertyInfo _ = null) where T : class =>
                 Data.OfType<T>();
         }
 
@@ -82,6 +82,8 @@ namespace CoreTests
             public override IEnumerable<Assembly> ModelAssemblies => throw new NotImplementedException();
 
             public override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
+
+            public override PropertyInfo GetPrimaryCodePath(string typeSpecifier) => throw new NotImplementedException();
         }
     }
 }

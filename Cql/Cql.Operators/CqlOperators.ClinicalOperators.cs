@@ -20,7 +20,7 @@ namespace Hl7.Cql.Runtime
             var method = DataRetriever.GetType()
                 .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataRetriever, new object?[] { null }) as IEnumerable<object>;
+            var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {
@@ -44,7 +44,7 @@ namespace Hl7.Cql.Runtime
             var method = DataRetriever.GetType()
                 .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataRetriever, new object?[] { null }) as IEnumerable<object>;
+            var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {
