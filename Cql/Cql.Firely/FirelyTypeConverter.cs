@@ -12,6 +12,7 @@ using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
 using System.Reflection;
+using System.Text;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely
