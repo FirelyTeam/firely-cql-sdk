@@ -43,6 +43,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PackagerCLI", "Cql\Packager
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{48AC6657-DE6A-4858-908A-266ACD346BD5}"
 	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 		cql-sdk.props = cql-sdk.props
 	EndProjectSection
 EndProject

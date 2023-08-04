@@ -1,5 +1,4 @@
-﻿
-using Hl7.Cql.CodeGeneration.NET;
+﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
 using Hl7.Fhir.Model;

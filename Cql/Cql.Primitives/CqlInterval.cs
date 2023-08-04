@@ -7,6 +7,7 @@
  */
 
 using System;
+using System.Globalization;
 
 namespace Hl7.Cql.Primitives
 {
@@ -38,7 +39,8 @@ namespace Hl7.Cql.Primitives
             this.high = high;
             this.lowClosed = lowClosed;
             this.highClosed = highClosed;
-            String = new Lazy<string>(() => $"{(this.lowClosed ?? false ? "[" : "(")}{this.low}, {this.high}{(this.highClosed ?? false ? "]" : ")")}");
+            String = new Lazy<string>(() =>
+            string.Create(CultureInfo.InvariantCulture, $"{(this.lowClosed ?? false ? "[" : "(")}{this.low}, {this.high}{(this.highClosed ?? false ? "]" : ")")}"));
         }
 
         /// <summary>
@@ -61,7 +63,8 @@ namespace Hl7.Cql.Primitives
             this.high = high;
             this.lowClosed = lowClosed ?? false;
             this.highClosed = highClosed ?? false;
-            String = new Lazy<string>(() => $"{(this.lowClosed ?? false ? "[" : "(")}{this.low}, {this.high}{(this.highClosed ?? false ? "]" : ")")}");
+            String = new Lazy<string>(() =>
+                string.Create(CultureInfo.InvariantCulture, $"{(this.lowClosed ?? false ? "[" : "(")}{this.low}, {this.high}{(this.highClosed ?? false ? "]" : ")")}"));
         }
 
 
@@ -110,7 +113,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="obj">The object to compare against this value.</param>
         /// <returns><see langword="true"/> if equal.</returns>
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj == null)
                 return false;
