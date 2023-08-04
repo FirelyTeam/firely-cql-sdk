@@ -10,6 +10,7 @@ resources:
 
 variables:
   - group: CodeSigning
+  - group: APIKeys
   - template: variables.yml  
 
 pool: 
@@ -26,7 +27,7 @@ stages:
 - stage: build
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
-    - template: build.yml@templates  # Template reference
+    - template: templates/build.yml  # Template reference
       parameters:
         dotNetCoreVersion: $(DOTNET_CORE_SDK)
         useVersionSuffix: true
@@ -38,7 +39,7 @@ stages:
           vmImage: $(vmImage)
     
   - ${{ if startswith(variables['Build.SourceBranch'], 'refs/tags/v') }}:  # release mode
-    - template: build.yml@templates  # Template reference
+    - template: templates/build.yml  # Template reference
       parameters:
         dotNetCoreVersion: $(DOTNET_CORE_SDK)
         useVersionSuffix: false
@@ -47,23 +48,23 @@ stages:
         pool: 
           vmImage: $(vmImage)
 
-# - stage: deployToGitHub
-#   dependsOn: build
-#   displayName: Deploy packages To Github
-#   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
-#   jobs:
-#   - deployment: gitHub
-#     displayName: Deploy Packages to GitHub
-#     environment: GitHub
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - template: push-nuget-package.yml@templates
-#             parameters:
-#               artifact: 'NuGetPackages'
-#               source: https://nuget.pkg.github.com/FirelyTeam/index.json
-#               apiKey: $(GITHUB_PACKAGES_APIKEY)                
+- stage: deployToGitHub
+  dependsOn: build
+  displayName: Deploy packages To Github
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
+  jobs:
+  - deployment: gitHub
+    displayName: Deploy Packages to GitHub
+    environment: GitHub
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: push-nuget-package.yml@templates
+            parameters:
+              artifact: 'NuGetPackages'
+              source: https://nuget.pkg.github.com/FirelyTeam/index.json
+              apiKey: $(GITHUB_PACKAGES_APIKEY)                
 
 # - stage: deployToNuget
 #   dependsOn: deployToGitHub

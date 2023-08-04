@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Serialization;
@@ -7,11 +15,11 @@ namespace Hl7.Cql.Model
 {
     public static class Models
     {
-        private static XmlSerializer xmlSerializer = new(typeof(ModelInfo));
-        private static Lazy<ModelInfo> _Fhir401 = new(() => LoadEmbeddedResource("Fhir401"), true);
-        
+        private static readonly XmlSerializer xmlSerializer = new(typeof(ModelInfo));
+        private static readonly Lazy<ModelInfo> _Fhir401 = new(() => LoadEmbeddedResource("Fhir401"), true);
+
         public static ModelInfo Fhir401 => _Fhir401.Value;
-        
+
         public static IDictionary<string, ClassInfo> ClassesById(ModelInfo model)
         {
             var baseUrl = model.url;

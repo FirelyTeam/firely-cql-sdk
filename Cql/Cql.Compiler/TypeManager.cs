@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Elm;
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
@@ -33,7 +41,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         public IEnumerable<Type> TupleTypes => TupleTypeList;
 
-        private List<Type> TupleTypeList = new List<Type>();
+        private readonly List<Type> TupleTypeList = new List<Type>();
         private ModuleBuilder ModuleBuilder { get; }
         internal Hasher Hasher { get; } = new Hasher();
 
@@ -58,8 +66,8 @@ namespace Hl7.Cql.Compiler
             TupleTypeNamespace = tupleTypeNamespace;
         }
 
-        internal Type? TypeFor(elm.Element element, 
-            ExpressionBuilderContext context, 
+        internal Type? TypeFor(elm.Element element,
+            ExpressionBuilderContext context,
             bool throwIfNotFound = true)
         {
             if (element?.resultTypeSpecifier != null)
@@ -312,6 +320,6 @@ namespace Hl7.Cql.Compiler
                 propertyBuilder.SetSetMethod(set);
             }
         }
-     
+
     }
 }

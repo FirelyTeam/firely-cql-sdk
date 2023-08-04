@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -12,7 +20,7 @@ namespace Hl7.Cql.Iso8601
 
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
         // That conversion ad nauseum is more expensive than superfluous memory use.
-        
+
         /// <summary>
         /// Gets the year component of this date.
         /// </summary>
@@ -93,7 +101,7 @@ namespace Hl7.Cql.Iso8601
                                 throw new ArgumentException("Only leap years have 29 days in February", nameof(day));
                             else if (day > 30)
                                 throw new ArgumentException("February only has 29 days during leap years", nameof(day));
-                        }                        
+                        }
                         else
                             Precision = DateTimePrecision.Day;
                     }
@@ -216,7 +224,7 @@ namespace Hl7.Cql.Iso8601
                 if (day.HasValue && precision > DateTimePrecision.Month)
                 {
                     sb.Append('-');
-                    sb.Append(day.Value.ToString("D2"));                    
+                    sb.Append(day.Value.ToString("D2"));
                 }
             }
             return sb.ToString();

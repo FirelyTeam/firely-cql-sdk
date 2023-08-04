@@ -2,8 +2,6 @@
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
-using Hl7.Cql.Packaging;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Configuration;
@@ -181,7 +179,7 @@ namespace Hl7.Cql.Packaging.CLI
             }
         }
 
-        static string CanonicalUri(Resource resource)
+        private static string CanonicalUri(Resource resource)
         {
             if (string.IsNullOrWhiteSpace(resource.Id))
                 throw new ArgumentException("Resource must have an id", nameof(resource));
@@ -189,8 +187,7 @@ namespace Hl7.Cql.Packaging.CLI
             return path;
         }
 
-
-        static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
+        private static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
         {
             var now = DateTime.Now;
             var loop = true;
@@ -204,7 +201,7 @@ namespace Hl7.Cql.Packaging.CLI
             }
         }
 
-        static int ShowHelp()
+        private static int ShowHelp()
         {
             Console.WriteLine();
             Console.WriteLine("Measure Packager");

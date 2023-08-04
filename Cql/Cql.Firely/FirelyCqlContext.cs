@@ -1,18 +1,19 @@
-﻿using Cql.Operators;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Cql.Operators;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Iso8601;
-using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Firely
 {

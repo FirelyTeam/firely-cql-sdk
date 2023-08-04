@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 
 namespace Hl7.Cql.Comparers
@@ -39,7 +47,7 @@ namespace Hl7.Cql.Comparers
 
         public bool? Equals(CqlQuantity? x, CqlQuantity? y, string? precision = null) => Compare(x, y, precision) == 0;
 
-        public bool? Equals(object x, object y, string? precision = null)=> Equals(x as CqlQuantity, y as CqlQuantity, precision); 
+        public bool? Equals(object x, object y, string? precision = null) => Equals(x as CqlQuantity, y as CqlQuantity, precision);
 
         public bool Equivalent(CqlQuantity? x, CqlQuantity? y, string? precision = null)
         {

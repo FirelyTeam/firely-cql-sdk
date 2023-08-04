@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Iso8601;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 
@@ -185,7 +193,7 @@ namespace Hl7.Cql.Primitives
                     default: throw new ArgumentException($"Unknown date unit {quantity.unit} supplied");
                 }
             }
-            catch(ArgumentOutOfRangeException)
+            catch (ArgumentOutOfRangeException)
             {
                 // In cases where e.g. Predecessor is called on minimum Date.
                 return null;

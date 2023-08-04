@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System.Linq;
 
 namespace Hl7.Cql.Comparers
@@ -30,7 +38,7 @@ namespace Hl7.Cql.Comparers
                              YValue = foundY == null ? null : foundY.GetValue(y)
                          };
             var result = 0;
-            foreach(var prop in joined)
+            foreach (var prop in joined)
             {
                 var compare = MemberComparer.Compare(prop.XValue, prop.YValue, precision);
                 if (compare == null)
@@ -41,10 +49,10 @@ namespace Hl7.Cql.Comparers
         }
 
 
-        public int? Compare(object x, object y, string? precision = null) => 
+        public int? Compare(object x, object y, string? precision = null) =>
             Compare(x as TupleBaseType, y as TupleBaseType, null);
 
-        public bool? Equals(TupleBaseType? x, TupleBaseType? y, string? precision = null) => 
+        public bool? Equals(TupleBaseType? x, TupleBaseType? y, string? precision = null) =>
             Compare(x, y, null) == 0;
 
         public bool? Equals(object x, object y, string? precision = null) =>

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace Hl7.Cql.Graph
@@ -22,7 +30,7 @@ namespace Hl7.Cql.Graph
 
         public string EdgeId { get; set; } = string.Empty;
 
-        public IList<EdgeAction> Actions { get;  } = new List<EdgeAction>();
+        public IList<EdgeAction> Actions { get; } = new List<EdgeAction>();
 
         public string FromId { get; set; } = DirectedGraphNode.StartId;
 

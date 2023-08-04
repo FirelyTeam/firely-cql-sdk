@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Iso8601;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Iso8601;
 using System;
 using System.Collections.Generic;
 
@@ -228,7 +236,7 @@ namespace Hl7.Cql.Primitives
         /// </remarks>
         /// <returns>The immediate predecessor value.</returns>
         public CqlTime Predecessor() => Subtract(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision])!;
-        
+
         /// <summary>
         /// Gets the immediate successor of this value in its precision.
         /// </summary>

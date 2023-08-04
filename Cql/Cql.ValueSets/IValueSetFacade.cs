@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System.Collections.Generic;
 
 namespace Hl7.Cql.ValueSets
@@ -8,7 +16,7 @@ namespace Hl7.Cql.ValueSets
     /// is from a value set, enabling implementations to use <see cref="IsCodeInValueSet(CqlCode?)"/>
     /// for optimized code-in-valueset checks.
     /// </summary>
-    public interface IValueSetFacade: IEnumerable<CqlCode>
+    public interface IValueSetFacade : IEnumerable<CqlCode>
     {
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
