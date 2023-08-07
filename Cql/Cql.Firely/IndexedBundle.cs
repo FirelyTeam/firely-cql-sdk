@@ -13,14 +13,14 @@ namespace Hl7.Cql.Firely
             foreach(var entry in entries)
             {
                 var type = entry.Resource.GetType();
-                while(type != typeof(object) && type != null)
+                while (type != typeof(object) && type != null)
                 {
                     if (!_byType.TryGetValue(type, out var resources))
                     {
-                        resources = new LinkedList<Resource>();
+                        resources = new List<Resource>();
                         _byType.Add(type, resources);
                     }
-                    resources.AddLast(entry.Resource);
+                    resources.Add(entry.Resource);
                     type = type.BaseType;
                 }
             }
@@ -28,7 +28,7 @@ namespace Hl7.Cql.Firely
 
         public IEnumerable<Bundle.EntryComponent> Entries { get; }
 
-        private readonly Dictionary<Type, LinkedList<Resource>> _byType = new();
+        private readonly Dictionary<Type, List<Resource>> _byType = new();
 
         public IEnumerable<T> FilterByType<T>()
         {
