@@ -27,6 +27,8 @@ namespace Hl7.Cql.Firely
                 .ConvertCqlPrimitivesToFhir()
                 .ConvertCodeTypes(model);
 
+        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
+
 
         public static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
