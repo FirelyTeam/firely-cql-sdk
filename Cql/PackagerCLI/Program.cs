@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
 using Hl7.Fhir.Model;

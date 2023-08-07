@@ -1,4 +1,13 @@
-﻿using Hl7.Cql.Primitives;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 
 namespace Hl7.Cql.Runtime
@@ -9,28 +18,28 @@ namespace Hl7.Cql.Runtime
 
         public bool? Between(int? argument, int? low, int? high)
         {
-            if (argument == null || low == null || high == null) 
+            if (argument == null || low == null || high == null)
                 return null;
-            else if (argument >= low && argument <= high) 
+            else if (argument >= low && argument <= high)
                 return true;
             else return false;
         }
 
         public bool? Between(long? argument, long? low, long? high)
         {
-            if (argument == null || low == null || high == null) 
+            if (argument == null || low == null || high == null)
                 return null;
-            else if (argument >= low && argument <= high) 
+            else if (argument >= low && argument <= high)
                 return true;
-            else 
+            else
                 return false;
         }
 
         public bool? Between(decimal? argument, decimal? low, decimal? high)
         {
-            if (argument == null || low == null || high == null) 
+            if (argument == null || low == null || high == null)
                 return null;
-            else if (argument >= low && argument <= high) 
+            else if (argument >= low && argument <= high)
                 return true;
             else return false;
         }
@@ -165,3 +174,4 @@ namespace Hl7.Cql.Runtime
 
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

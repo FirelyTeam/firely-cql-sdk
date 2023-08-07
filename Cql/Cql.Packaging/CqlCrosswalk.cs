@@ -1,21 +1,26 @@
-﻿using Hl7.Cql.Elm;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 namespace Hl7.Cql.Packaging
 {
     public class CqlCrosswalk
     {
         public TypeResolver TypeResolver { get; private set; }
-        
+
         public CqlCrosswalk(TypeResolver typeResolver)
         {
             TypeResolver = typeResolver;
         }
-        
+
         public TypeEntry? TypeEntryFor(FHIRAllTypes fhirType)
         {
             switch (fhirType)
@@ -73,7 +78,7 @@ namespace Hl7.Cql.Packaging
                     return new TypeEntry(fhirType, CqlPrimitiveType.Fhir);
             }
         }
-        
+
         public TypeEntry? TypeEntryFor(CqlPrimitiveType cqlType, TypeEntry? elementType = null)
         {
             switch (cqlType)
@@ -151,7 +156,7 @@ namespace Hl7.Cql.Packaging
                     return null;
             }
         }
-        
+
         public TypeEntry? TypeEntryFor(Elm.TypeSpecifier? resultTypeSpecifier)
         {
             if (resultTypeSpecifier is null)
@@ -182,7 +187,7 @@ namespace Hl7.Cql.Packaging
             }
             return null;
         }
-        
+
         public TypeEntry? TypeEntryFor(string? name)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -214,7 +219,7 @@ namespace Hl7.Cql.Packaging
             }
             else return null;
         }
-        
+
         public TypeEntry? TypeEntryFor(Elm.Element element) =>
             TypeEntryFor(element.resultTypeSpecifier);
 
@@ -255,3 +260,4 @@ namespace Hl7.Cql.Packaging
         public TypeEntry? ElementType { get; set; } = null;
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

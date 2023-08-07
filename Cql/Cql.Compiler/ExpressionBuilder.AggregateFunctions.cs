@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -52,3 +53,4 @@ namespace Hl7.Cql.Compiler
             AggregateOperator(CqlOperator.Variance, e, ctx);
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

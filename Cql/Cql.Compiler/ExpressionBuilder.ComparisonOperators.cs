@@ -1,4 +1,13 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
@@ -37,7 +46,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (left.Type == typeof(string))
                 {
-                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString, 
+                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString,
                         ctx.RuntimeContextParameter,
                         Expression.Convert(right, typeof(object)),
                         left);
@@ -59,7 +68,7 @@ namespace Hl7.Cql.Compiler
                 }
                 throw new NotImplementedException();
             }
-            else 
+            else
             {
                 var call = OperatorBinding.Bind(CqlOperator.Equal, ctx.RuntimeContextParameter, left, right);
                 return call;

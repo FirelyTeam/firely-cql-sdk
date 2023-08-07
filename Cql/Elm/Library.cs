@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Graph;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
 using System.IO;

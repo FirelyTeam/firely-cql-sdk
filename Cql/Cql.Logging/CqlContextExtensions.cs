@@ -12,8 +12,14 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Logging
 {
+    /// <summary>
+    /// An extension class for controlling logging on a <see cref="CqlContext"/>
+    /// </summary>
     public static class CqlContextExtensions
     {
+        /// <summary>
+        /// Adds functionality to a context to direct log messages to the given logger.
+        /// </summary>
         public static CqlContext AddMessageLogging(this CqlContext context,
             ILogger<CqlContext> logger)
         {
@@ -35,6 +41,5 @@ namespace Hl7.Cql.Logging
                 "trace" => LogLevel.Trace,
                 _ => LogLevel.None,
             };
-
     }
 }

@@ -12,8 +12,16 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely
 {
+    /// <summary>
+    /// Extension class for configuring comparers for the Firely SDK.
+    /// </summary>
     public static class CqlComparersExtensions
     {
+        /// <summary>
+        /// Add comparison operators for the POCO types provided by the Firely SDK.
+        /// </summary>
+        /// <param name="comparers"></param>
+        /// <returns></returns>
         public static CqlComparers AddFirelyComparers(this CqlComparers comparers)
         {
             comparers.Register(typeof(Canonical), new IValueComparer<string?>());

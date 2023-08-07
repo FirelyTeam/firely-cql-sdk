@@ -40,6 +40,9 @@ namespace Hl7.Cql.ValueSets
         /// </summary>
         public string Id { get; }
 
+        /// <summary>
+        /// A link to the dictionary where the content of this valueset can be retrieved.
+        /// </summary>
         public IValueSetDictionary ValueSets { get; }
 
         /// <summary>

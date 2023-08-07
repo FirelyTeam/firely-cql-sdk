@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using System;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Elm
 {
@@ -26,7 +24,7 @@ namespace Hl7.Cql.Elm
                         TypeInfoResolver = options.TypeInfoResolver,
                         MaxDepth = options.MaxDepth,
                     };
-                    foreach(var converter in converters)
+                    foreach (var converter in converters)
                     {
                         newOptions.Converters.Add(converter);
                     }

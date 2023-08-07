@@ -17,8 +17,21 @@ using System.Reflection;
 
 namespace Hl7.Cql.Firely
 {
+    /// <summary>
+    /// A IDataRetriever that uses POCO Bundles as a source of information.
+    /// </summary>
+    /// <remarks>A simple model that assumes the Bundles contain all the information about a
+    /// patient, e.g. as the result of a $everything operation.</remarks>
     public class BundleDataRetriever : IDataRetriever
     {
+        /// <summary>
+        /// Construct a new IDataRetriever passing in the necessary terminology information
+        /// </summary>
+        /// <param name="bundle"></param>
+        /// <param name="valueSets"></param>
+        /// <param name="codeComparer"></param>
+        /// <param name="systemComparer"></param>
+        /// <exception cref="ArgumentNullException"></exception>
         public BundleDataRetriever(Bundle bundle,
             IValueSetDictionary valueSets,
             ICqlComparer? codeComparer = null, ICqlComparer? systemComparer = null)
@@ -38,6 +51,7 @@ namespace Hl7.Cql.Firely
         private readonly ICqlComparer _codeComparer;
         private readonly ICqlComparer _systemComparer;
 
+        /// <inheritdoc/>
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? allowedCodes = null, PropertyInfo? codeProperty = null) where T : class
         {
             if (allowedCodes is not null)
@@ -59,6 +73,7 @@ namespace Hl7.Cql.Firely
             }
         }
 
+        /// <inheritdoc/>
         public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class
         {
             if (valueSet != null && valueSet.id != null)

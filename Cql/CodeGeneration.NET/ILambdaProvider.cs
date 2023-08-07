@@ -12,6 +12,9 @@ using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
+    /// <summary>
+    /// An interface representing an instance that can produce Lambdas, given the name of a measure.
+    /// </summary>
     public interface ILambdaProvider
     {
         /// <summary>
