@@ -1,16 +1,17 @@
-﻿using Microsoft.Extensions.Logging;
-using Hl7.Cql.Runtime;
+﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Hl7.Cql.Elm;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
-using System.ComponentModel;
 
 namespace Hl7.Cql.Compiler
 {
@@ -1786,7 +1787,7 @@ namespace Hl7.Cql.Compiler
                     {
                         try
                         {
-                            var converted = System.Convert.ChangeType(lit.value, underlyingType);
+                            var converted = System.Convert.ChangeType(lit.value, underlyingType, CultureInfo.InvariantCulture);
                             return (converted, underlyingType);
                         }
                         catch (OverflowException)
@@ -1947,7 +1948,7 @@ namespace Hl7.Cql.Compiler
         }
 
         protected LambdaExpression WithToSelectManyBody(Type tupleType,
-            RelationshipClause with, 
+            RelationshipClause with,
             ExpressionBuilderContext ctx)
         {
             if (with.expression == null)

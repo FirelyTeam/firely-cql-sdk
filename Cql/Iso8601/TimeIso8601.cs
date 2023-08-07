@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -11,7 +20,7 @@ namespace Hl7.Cql.Iso8601
     {
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
         // That conversion ad nauseum is more expensive than superfluous memory use.
-        
+
         /// <summary>
         /// Gets the hour component of this date time.
         /// </summary>
@@ -61,7 +70,7 @@ namespace Hl7.Cql.Iso8601
         /// </summary>
         /// <remarks>
         /// <para>
-        /// The rationale for using <see cref="BaseDateTime"/> instead of <see cref="DateTimeOffset.MinValue"/> (<langword cref="default"/>) is that
+        /// The rationale for using <see cref="BaseDateTime"/> instead of <see cref="DateTimeOffset.MinValue"/> (<c>default"</c>) is that
         /// underflow exceptions would be thrown by subtracting quantities from this time.
         /// </para>
         /// <para>
@@ -74,7 +83,7 @@ namespace Hl7.Cql.Iso8601
         public DateTimeOffset DateTimeOffset { get; }
 
         /// <summary>
-        /// Gets this time represented as a <see cref="DateTimeOffset"/ in UTC.
+        /// Gets this time represented as a <see cref="DateTimeOffset"/> in UTC.
         /// </summary>
         /// <remarks>
         /// This value is produced by converting <see cref="DateTimeOffset"/> to UTC, which is different than
@@ -106,8 +115,8 @@ namespace Hl7.Cql.Iso8601
         /// <param name="minute">The minute component of the time, or <see langword ="null"/>.</param>
         /// <param name="second">The second component of the time, or <see langword ="null"/>.</param>
         /// <param name="ms">The millisecond component of the time, or <see langword ="null"/>.</param>
-        /// <param name="osHour">The hour component of the time, or <see langword ="null"/>.</param>
-        /// <param name="osMinute">The minute component of the time, or <see langword ="null"/>.</param>
+        /// <param name="osHours">The hour component of the time, or <see langword ="null"/>.</param>
+        /// <param name="osMinutes">The minute component of the time, or <see langword ="null"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real dates.</param>
         public TimeIso8601(int hour, int? minute, int? second, int? ms, int? osHours, int? osMinutes, bool strict = false) :
             this(Format(hour, minute, second, ms, osHours, osMinutes, DateTimePrecision.Millisecond),
@@ -236,14 +245,14 @@ namespace Hl7.Cql.Iso8601
         }
 
         public override string ToString() => String;
-        public override bool Equals(object obj) => Equals(String, obj?.ToString());
+        public override bool Equals(object? obj) => Equals(String, obj?.ToString());
         public override int GetHashCode() => String.GetHashCode();
 
         /// <summary>
         /// Tries to parse <paramref name="stringValue"/> as an ISO 8601 time.
         /// </summary>
         /// <param name="stringValue">The string to parse</param>
-        /// <param name="dateTimeValue">The parsed result, or <see langword ="null"/> if unparseable.</param>
+        /// <param name="timeValue">The parsed result, or <see langword ="null"/> if unparseable.</param>
         /// <returns><see langword ="true"/> if the string is a valid ISO 8601 time and parsing is successful; otherwise <see langword ="false"/>.</returns>
         public static bool TryParse(string stringValue, out TimeIso8601? timeValue)
         {
@@ -290,14 +299,14 @@ namespace Hl7.Cql.Iso8601
                 {
                     if (tzh.Success)
                     {
-                        int hourValue = int.Parse(tzh.Value);
+                        int hourValue = int.Parse(tzh.Value, CultureInfo.InvariantCulture);
                         if (timezone.Value[0] == '-')
                             osHour = -hourValue;
                         else osHour = hourValue;
                     }
 
                     if (tzm.Success)
-                        osMinute = int.Parse(tzm.Value);
+                        osMinute = int.Parse(tzm.Value, CultureInfo.InvariantCulture);
                 }
             }
 
@@ -307,16 +316,16 @@ namespace Hl7.Cql.Iso8601
             var millisecondGroup = parts.Groups["ms"];
             if (hourGroup.Success)
             {
-                hour = int.Parse(hourGroup.Value);
+                hour = int.Parse(hourGroup.Value, CultureInfo.InvariantCulture);
                 if (minuteGroup.Success)
                 {
-                    minute = int.Parse(minuteGroup.Value);
+                    minute = int.Parse(minuteGroup.Value, CultureInfo.InvariantCulture);
                     if (secondGroup.Success)
                     {
-                        second = int.Parse(secondGroup.Value);
+                        second = int.Parse(secondGroup.Value, CultureInfo.InvariantCulture);
                         if (millisecondGroup.Success)
                         {
-                            ms = int.Parse(millisecondGroup.Value);
+                            ms = int.Parse(millisecondGroup.Value, CultureInfo.InvariantCulture);
                             if (millisecondGroup.Value.Length == 1)
                                 ms *= 100;
                             else if (millisecondGroup.Value.Length == 2)
@@ -333,19 +342,19 @@ namespace Hl7.Cql.Iso8601
         private static string Format(int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)
         {
             var sb = new StringBuilder();
-            sb.Append(hour.ToString("D2"));
+            sb.Append(hour.ToString("D2", CultureInfo.InvariantCulture));
             if (minute.HasValue && precision > DateTimePrecision.Hour)
             {
                 sb.Append(':');
-                sb.Append(minute.Value.ToString("D2"));
+                sb.Append(minute.Value.ToString("D2", CultureInfo.InvariantCulture));
                 if (second.HasValue && precision > DateTimePrecision.Minute)
                 {
                     sb.Append(':');
-                    sb.Append(second.Value.ToString("D2"));
+                    sb.Append(second.Value.ToString("D2", CultureInfo.InvariantCulture));
                     if (ms.HasValue && precision > DateTimePrecision.Second)
                     {
                         sb.Append('.');
-                        sb.Append(ms.Value.ToString("D3"));
+                        sb.Append(ms.Value.ToString("D3", CultureInfo.InvariantCulture));
                     }
                 }
             }
@@ -357,9 +366,9 @@ namespace Hl7.Cql.Iso8601
                 {
                     if (osHour > 0)
                         sb.Append('+');
-                    sb.Append(osHour.Value.ToString("D2"));
+                    sb.Append(osHour.Value.ToString("D2", CultureInfo.InvariantCulture));
                     sb.Append(':');
-                    sb.Append((osMinute ?? 0).ToString("D2"));
+                    sb.Append((osMinute ?? 0).ToString("D2", CultureInfo.InvariantCulture));
                 }
             }
             return sb.ToString();

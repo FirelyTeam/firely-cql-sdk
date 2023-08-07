@@ -1,4 +1,13 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -12,7 +21,7 @@ namespace Hl7.Cql.Iso8601
 
         // Note: integer types used here because C# promotes smaller types to 4 byte ints for all math.
         // That conversion ad nauseum is more expensive than superfluous memory use.
-        
+
         /// <summary>
         /// Gets the year component of this date.
         /// </summary>
@@ -93,7 +102,7 @@ namespace Hl7.Cql.Iso8601
                                 throw new ArgumentException("Only leap years have 29 days in February", nameof(day));
                             else if (day > 30)
                                 throw new ArgumentException("February only has 29 days during leap years", nameof(day));
-                        }                        
+                        }
                         else
                             Precision = DateTimePrecision.Day;
                     }
@@ -145,7 +154,7 @@ namespace Hl7.Cql.Iso8601
         }
 
         public override string ToString() => String;
-        public override bool Equals(object obj) => Equals(String, obj?.ToString());
+        public override bool Equals(object? obj) => Equals(String, obj?.ToString());
         public override int GetHashCode() => String.GetHashCode();
 
         /// <summary>
@@ -189,13 +198,13 @@ namespace Hl7.Cql.Iso8601
 
             if (yearGroup.Success)
             {
-                year = int.Parse(yearGroup.Value);
+                year = int.Parse(yearGroup.Value, CultureInfo.InvariantCulture);
                 if (monthGroup.Success)
                 {
-                    month = int.Parse(monthGroup.Value);
+                    month = int.Parse(monthGroup.Value, CultureInfo.InvariantCulture);
                     if (dayGroup.Success)
                     {
-                        day = int.Parse(dayGroup.Value);
+                        day = int.Parse(dayGroup.Value, CultureInfo.InvariantCulture);
                     }
                 }
             }
@@ -208,15 +217,15 @@ namespace Hl7.Cql.Iso8601
         private static string Format(int year, int? month, int? day, DateTimePrecision precision)
         {
             var sb = new StringBuilder();
-            sb.Append(year.ToString("D4"));
+            sb.Append(year.ToString("D4", CultureInfo.InvariantCulture));
             if (month.HasValue && precision > DateTimePrecision.Year)
             {
                 sb.Append('-');
-                sb.Append(month.Value.ToString("D2"));
+                sb.Append(month.Value.ToString("D2", CultureInfo.InvariantCulture));
                 if (day.HasValue && precision > DateTimePrecision.Month)
                 {
                     sb.Append('-');
-                    sb.Append(day.Value.ToString("D2"));                    
+                    sb.Append(day.Value.ToString("D2", CultureInfo.InvariantCulture));
                 }
             }
             return sb.ToString();

@@ -1,20 +1,28 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Graph;
-using Microsoft.CodeAnalysis.CSharp;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using Hl7.Cql.Runtime;
-using System.Linq.Expressions;
-using System.Runtime.Loader;
+using System.Globalization;
 using System.IO;
-using Hl7.Cql.ValueSets;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Reflection;
+using System.Runtime.Loader;
+using System.Text;
 
 namespace Hl7.Cql.Compiler
 {
@@ -259,7 +267,7 @@ namespace Hl7.Cql.Compiler
             string version = string.Empty;
             if (parts.Length > 1)
                 version = parts[1];
-            asmInfo.AppendLine($"[assembly: Hl7.Cql.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
+            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
             var compilation = CSharpCompilation.Create($"{node.NodeId}")

@@ -1,4 +1,14 @@
-﻿namespace Hl7.Cql.Primitives
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System.Globalization;
+
+namespace Hl7.Cql.Primitives
 {
     /// <summary>
     /// Implements the System Quantity type.
@@ -55,7 +65,8 @@
             {
                 unitString = cqlUnit;
             }
-            return $"{value}{unitString}";
+
+            return string.Create(CultureInfo.InvariantCulture, $"{value}{unitString}");
         }
 
         /// <summary>
@@ -74,7 +85,7 @@
             var parts = s.Split(' ');
             if (parts.Length == 2)
             {
-                if (decimal.TryParse(parts[0], out var value) && !string.IsNullOrWhiteSpace(parts[1]))
+                if (decimal.TryParse(parts[0], NumberStyles.Number, CultureInfo.InvariantCulture, out var value) && !string.IsNullOrWhiteSpace(parts[1]))
                 {
                     var units = Dequote(parts[1])!;
                     q = new CqlQuantity(value, units);

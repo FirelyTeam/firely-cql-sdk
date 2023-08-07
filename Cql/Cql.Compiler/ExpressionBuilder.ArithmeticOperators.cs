@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
@@ -7,7 +8,7 @@ namespace Hl7.Cql.Compiler
     public partial class ExpressionBuilder
     {
 
-        protected Expression Abs(elm.Abs e, ExpressionBuilderContext ctx) => 
+        protected Expression Abs(elm.Abs e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Abs, e, ctx);
 
         protected Expression Add(elm.Add e, ExpressionBuilderContext ctx) =>
@@ -28,7 +29,7 @@ namespace Hl7.Cql.Compiler
         protected Expression? HighBoundary(elm.HighBoundary e, ExpressionBuilderContext ctx) =>
              BinaryOperator(CqlOperator.HighBoundary, e, ctx);
 
-        protected Expression? Log(elm.Log e, ExpressionBuilderContext ctx) => 
+        protected Expression? Log(elm.Log e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Log, e, ctx);
 
         protected Expression? LowBoundary(elm.LowBoundary e, ExpressionBuilderContext ctx) =>
@@ -49,8 +50,8 @@ namespace Hl7.Cql.Compiler
         protected Expression MinValue(elm.MinValue min, ExpressionBuilderContext ctx)
         {
             var type = TypeResolver.ResolveType(min.valueType!.Name);
-            var call = OperatorBinding.Bind(CqlOperator.MinimumValue, 
-                ctx.RuntimeContextParameter, 
+            var call = OperatorBinding.Bind(CqlOperator.MinimumValue,
+                ctx.RuntimeContextParameter,
                 Expression.Constant(type, typeof(Type)));
             return call;
         }
@@ -71,7 +72,7 @@ namespace Hl7.Cql.Compiler
                 {
                     return Expression.Constant(int.MinValue);
                 }
-                else if (literalType == typeof(long?) && literal.value == long.MinValue.ToString())
+                else if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
                 {
                     return Expression.Constant(long.MinValue);
                 }
@@ -81,10 +82,10 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Precision(elm.Precision e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Precision, e, ctx);
-        
+
         protected Expression? Predecessor(elm.Predecessor e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Predecessor, e, ctx);
-        
+
         protected Expression? Power(elm.Power e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Pow, e, ctx);
 

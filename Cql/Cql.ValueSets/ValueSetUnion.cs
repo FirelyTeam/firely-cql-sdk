@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Primitives;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +17,7 @@ namespace Hl7.Cql.ValueSets
     /// <summary>
     /// Creates a facade for value set unions.
     /// </summary>
-    public class ValueSetUnion: IValueSetFacade
+    public class ValueSetUnion : IValueSetFacade
     {
         /// <summary>
         /// Creates an instance.
@@ -47,7 +55,7 @@ namespace Hl7.Cql.ValueSets
         /// </summary>
         public IEqualityComparer<CqlCode> Hasher { get; }
 
-        private Lazy<HashSet<CqlCode>> DistinctCodes;
+        private readonly Lazy<HashSet<CqlCode>> DistinctCodes;
 
         /// <summary>
         /// Enumerates the code in this value set facade union.

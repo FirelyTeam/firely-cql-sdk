@@ -1,5 +1,12 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System.Collections.Generic;
 
 namespace Hl7.Cql.Compiler
 {
@@ -13,7 +20,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="location">The location on disk which this assembly's bytes were written.</param>
         /// <param name="sourceCode">The collection of source code files that contributed to this assembly.</param>
-        public AssemblyData(byte[] binary, IDictionary<string,string> sourceCode)
+        public AssemblyData(byte[] binary, IDictionary<string, string> sourceCode)
         {
             Binary = binary;
             SourceCode = sourceCode;

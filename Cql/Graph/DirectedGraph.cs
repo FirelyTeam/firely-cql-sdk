@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -27,7 +35,7 @@ namespace Hl7.Cql.Graph
             Add(edge);
             from.ForwardEdges.Add(edge);
         }
-        
+
         public DirectedGraphNode Attach(string newNodeId, DirectedGraphNode from, string? edgeId = null)
         {
             if (Nodes.ContainsKey(newNodeId))
@@ -308,7 +316,7 @@ namespace Hl7.Cql.Graph
                             IsRandomSelectedEdge = false
                         };
                         context.Exceptions.Add(error);
-                        throw ex;
+                        throw;
                     }
                 }
             }
@@ -338,7 +346,7 @@ namespace Hl7.Cql.Graph
                                 IsRandomSelectedEdge = true
                             };
                             context.Exceptions.Add(error);
-                            throw ex;
+                            throw;
                         }
                 }
             }
@@ -412,7 +420,7 @@ namespace Hl7.Cql.Graph
                 DirectedGraphNode? fromNode = null;
                 if (group.Key == StartNode.NodeId)
                     fromNode = StartNode;
-                else 
+                else
                     fromNode = reversed.Nodes[group.Key];
                 foreach (var edge in group)
                     fromNode.ForwardEdges.Add(edge);

@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 
 namespace Hl7.Cql.Comparers
 {
@@ -33,7 +41,7 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc/>
         public bool? Equals(string x, string y, string? precision = null) => Compare(x, y, precision) == 0;
-        
+
         /// <inheritdoc/>
         public bool? Equals(object x, object y, string? precision = null) => Compare(x as string, y as string, precision) == 0;
 

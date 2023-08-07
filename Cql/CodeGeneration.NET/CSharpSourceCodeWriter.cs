@@ -1,17 +1,26 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using AgileObjects.ReadableExpressions;
+using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Graph;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
-using AgileObjects.ReadableExpressions;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Logging;
-using Hl7.Cql.CodeGeneration.NET.Visitors;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Graph;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -106,7 +115,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Func<string, Stream> libraryNameToStream,
             Func<string, string?>? libraryNameToClassName = null,
             bool closeStream = true,
-            Func<string,bool>? writeFile = null)
+            Func<string, bool>? writeFile = null)
         {
             if (libraryNameToClassName == null)
                 libraryNameToClassName = VariableNameGenerator.NormalizeIdentifier;
@@ -469,7 +478,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
         }
-       
+
         private int WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
             writer.WriteLine();
@@ -514,10 +523,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return value?.ToString()!.ToLowerInvariant() ?? "null";
                 else if (constantType == typeof(Uri))
                     return $"new Uri(\"{value!}\")";
+                else if (constantType == typeof(decimal))
+                    return ((decimal)value).ToString(CultureInfo.InvariantCulture);
                 else if (typeof(Type).IsAssignableFrom(constantType))
-                {
                     return $"typeof({PrettyTypeName((Type)value)})";
-                }
                 else
                 {
                     var str = value.ToString()!;
@@ -699,7 +708,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     if (@new.Arguments.Count > 0)
                     {
                         var newSb = new StringBuilder();
-                        newSb.Append($"{leadingIndentString}new {PrettyTypeName(@new.Type)}({ToCode(indent + 1, @new.Arguments[0], false)}");
+                        newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}({ToCode(indent + 1, @new.Arguments[0], false)}");
                         if (@new.Arguments.Count > 1)
                         {
                             newSb.AppendLine(", ");
@@ -739,7 +748,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             {
                                 var sb = new StringBuilder();
                                 sb.Append(leadingIndentString);
-                                sb.Append($"{@object}{PrettyMethodName(call.Method)}({ToCode(indent + 1, call.Arguments[1], false)}");
+                                sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}({ToCode(indent + 1, call.Arguments[1], false)}");
                                 if (call.Arguments.Count > 2)
                                 {
                                     sb.AppendLine(", ");
@@ -775,7 +784,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                             @object = $"{PrettyTypeName(call.Method.DeclaringType!)}.";
                         }
                         var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
+#pragma warning disable CA1305 // Specify IFormatProvider
                         sb.Append($"{@object}{PrettyMethodName(call.Method)}({firstArgument}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                         if (call.Arguments.Count > 1)
                         {
                             sb.AppendLine(", ");
@@ -910,7 +921,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         if (newArray.Expressions.Count > 0)
                         {
                             var arrayType = PrettyTypeName(newArray.Type);
+#pragma warning disable CA1305 // Specify IFormatProvider
                             newArraySb.AppendLine($"new {arrayType}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                             var braceIndent = IndentString(indent);
                             newArraySb.Append(braceIndent);
                             newArraySb.AppendLine("{");
@@ -932,7 +945,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var arrayType = PrettyTypeName(newArray.Type.GetElementType() ??
                             throw new InvalidOperationException($"Array type {newArray.Type.FullName} does not have an element type"));
                         var size = ToCode(0, newArray.Expressions[0], false);
+#pragma warning disable CA1305 // Specify IFormatProvider
                         newArraySb.AppendLine($"new {arrayType}[{size}]");
+#pragma warning restore CA1305 // Specify IFormatProvider
                         return newArraySb.ToString();
                     }
                     break;
@@ -956,7 +971,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     if (memberInit.Bindings.Count > 0)
                     {
                         var arrayType = PrettyTypeName(memberInit.Type);
+#pragma warning disable CA1305 // Specify IFormatProvider
                         memberInitSb.AppendLine($"new {arrayType}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                         var braceIndent = IndentString(indent);
                         memberInitSb.Append(braceIndent);
                         memberInitSb.AppendLine("{");
@@ -968,7 +985,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 var memberName = assignment.Member.Name;
                                 var assignmentCode = ToCode(indent + 1, assignment.Expression, false);
                                 memberInitSb.Append(braceIndentPlusOne);
+#pragma warning disable CA1305 // Specify IFormatProvider
                                 memberInitSb.Append($"{memberName} = {assignmentCode}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                                 memberInitSb.AppendLine(",");
                             }
                             else throw new NotImplementedException();
@@ -989,12 +1008,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                     var conditionalSb = new StringBuilder();
                     conditionalSb.Append("(");
                     var test = ToCode(indent, ce.Test, false);
+#pragma warning disable CA1305 // Specify IFormatProvider
                     conditionalSb.AppendLine($"({test})");
+#pragma warning restore CA1305 // Specify IFormatProvider
                     var ifTrue = $"({ToCode(indent + 2, ce.IfTrue, false)})";
 
                     var ifFalse = $"({ToCode(indent + 2, ce.IfFalse, false)})";
+#pragma warning disable CA1305 // Specify IFormatProvider
                     conditionalSb.AppendLine($"{IndentString(indent + 1)}? {ifTrue}");
                     conditionalSb.AppendLine($"{IndentString(indent + 1)}: {ifFalse})");
+#pragma warning restore CA1305 // Specify IFormatProvider
                     return conditionalSb.ToString();
                 case TypeBinaryExpression typeBinary:
                     if (typeBinary.NodeType == ExpressionType.TypeIs)

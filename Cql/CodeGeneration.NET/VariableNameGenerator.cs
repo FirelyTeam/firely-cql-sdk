@@ -1,4 +1,12 @@
-﻿using Microsoft.CodeAnalysis.CSharp;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -6,7 +14,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class VariableNameGenerator
     {
-        private object SyncRoot = new();
+        private readonly object SyncRoot = new();
         public string Postfix { get; }
 
         private List<string> Reserved { get; }
@@ -17,9 +25,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             Postfix = postfix;
         }
 
-        private List<char> Letters = new() { (char)('a' - 1) };
-        private string Prefix = string.Empty;
-        private List<string> Generated = new();
+        private readonly List<char> Letters = new() { (char)('a' - 1) };
+        private readonly string Prefix = string.Empty;
+        private readonly List<string> Generated = new();
 
 
         public virtual string Next()

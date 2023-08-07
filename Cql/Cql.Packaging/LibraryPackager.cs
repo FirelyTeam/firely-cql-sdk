@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
@@ -611,8 +619,7 @@ namespace Hl7.Cql.Packaging
             return parameterDefinition;
         }
 
-
-        static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
+        private static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
         {
             var now = System.DateTime.Now;
             var loop = true;

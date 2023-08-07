@@ -1,4 +1,12 @@
-﻿using System;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 
 namespace Hl7.Cql
 {
@@ -6,7 +14,7 @@ namespace Hl7.Cql
     /// Declares that this method or property is translated from an ELM value set expression.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Property, AllowMultiple = false, Inherited = false)]
-    public class CqlValueSetAttribute: Attribute
+    public class CqlValueSetAttribute : Attribute
     {
         /// <summary>
         /// Creates an instance.
