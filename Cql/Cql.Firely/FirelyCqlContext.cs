@@ -9,6 +9,7 @@
 using Cql.Operators;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
+using Hl7.Cql.Firely.Comparers;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
@@ -38,9 +39,12 @@ namespace Hl7.Cql.Firely
                 dataRetriever,
                 cqlComparers,
                 valueSets,
-                unitConverter,   // was null?
-                new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond));
-            cqlComparers.AddIntervalComparisons(operators);
+                unitConverter,
+                new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond),
+                FirelyEnumComparer.Default);
+            cqlComparers
+                .AddIntervalComparisons(operators)
+                .AddFirelyComparers();
             var ctx = new CqlContext(operators, delegates, parameters);
             return ctx;
         }

@@ -67,7 +67,7 @@ namespace Hl7.Cql.Runtime
         public int? ConvertLongToInteger(long? i) => (int?)i;
         public decimal? ConvertLongToDecimal(long? i) => i;
         public CqlQuantity? ConvertLongToQuantity(long? i) => i == null ? null : new CqlQuantity(i, "1");
-        public string? ConvertLongToString(long? i) => i?.ToString();
+        public string? ConvertLongToString(long? i) => i?.ToString(CultureInfo.InvariantCulture);
 
         public bool? ConvertDecimalToBoolean(decimal? d) => d == null ? null : (d.Value == 1m ? true : false);
         public CqlQuantity? ConvertDecimalToQuantity(decimal? d) => d == null ? null : new CqlQuantity(d, "1");
@@ -181,7 +181,7 @@ namespace Hl7.Cql.Runtime
 
         #region Descendents
 
-        public IEnumerable<object> Descendents(object argument) => throw new NotSupportedException();
+        public IEnumerable<object?> Descendents(object? argument) => argument == null ? null : throw new NotSupportedException();
 
         #endregion
 

@@ -1,16 +1,9 @@
-﻿/* 
- * Copyright (c) 2023, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- * 
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
- */
-
-using Hl7.Cql.Conversion;
+﻿using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
+using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Operators
 {
@@ -45,7 +38,7 @@ namespace Hl7.Cql.Operators
         bool? After(object? left, object? right, string? precision);
         int? Age(string precision);
         int? AgeAt(CqlDate? asOf, string precision);
-        TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
+        TAccumulate? AggregateOrNull<TSource,TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
         bool? AllTrue(IEnumerable<bool?> argument);
         bool? AllTrue(IEnumerable<Lazy<bool?>> argument);
         bool? And(bool? left, bool? right);
@@ -147,7 +140,7 @@ namespace Hl7.Cql.Operators
         CqlDate? Date(int? year, int? month, int? day);
         CqlDate? DateFrom(CqlDateTime? argument);
         CqlDateTime? DateTime(int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, decimal? offset);
-        IEnumerable<object> Descendents(object argument);
+        IEnumerable<object?> Descendents(object? argument);
         int? DifferenceBetween(CqlDate? low, CqlDate? high, string? precision);
         int? DifferenceBetween(CqlDateTime? low, CqlDateTime? high, string? precision);
         int? DifferenceBetween(CqlTime? low, CqlTime? high, string? precision);
@@ -327,8 +320,8 @@ namespace Hl7.Cql.Operators
         bool? ListProperlyIncludesElement<T>(IEnumerable<T>? left, T right);
         bool? ListProperlyIncludesList<T>(IEnumerable<T>? left, IEnumerable<T> right);
         IEnumerable<T>? ListSkip<T>(IEnumerable<T> argument, int? number);
-        IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, SortOrder order);
-        IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, SortOrder order);
+        IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, ListSortDirection order);
+        IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order);
         IEnumerable<T>? ListTail<T>(IEnumerable<T> argument);
         IEnumerable<T>? ListTake<T>(IEnumerable<T> argument, int? number);
         IEnumerable<T>? ListUnion<T>(IEnumerable<T>? left, IEnumerable<T>? right);

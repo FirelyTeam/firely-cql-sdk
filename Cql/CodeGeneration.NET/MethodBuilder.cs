@@ -9,6 +9,7 @@
 using Hl7.Cql.Runtime;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -28,7 +29,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public MethodBuilder()
         {
-            AssemblyName = new AssemblyName(AssemblyCount++.ToString());
+            AssemblyName = new AssemblyName(AssemblyCount++.ToString(CultureInfo.InvariantCulture));
             AssemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(AssemblyName, AssemblyBuilderAccess.Run);
             ModuleBuilder = AssemblyBuilder.DefineDynamicModule(AssemblyName.Name!);
         }

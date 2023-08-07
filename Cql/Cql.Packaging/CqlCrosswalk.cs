@@ -1,25 +1,21 @@
-﻿/* 
- * Copyright (c) 2023, NCQA and contributors
- * See the file CONTRIBUTORS for details.
- * 
- * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
- */
-
+﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 namespace Hl7.Cql.Packaging
 {
     public class CqlCrosswalk
     {
         public TypeResolver TypeResolver { get; private set; }
-
+        
         public CqlCrosswalk(TypeResolver typeResolver)
         {
             TypeResolver = typeResolver;
         }
-
+        
         public TypeEntry? TypeEntryFor(FHIRAllTypes fhirType)
         {
             switch (fhirType)
@@ -77,7 +73,7 @@ namespace Hl7.Cql.Packaging
                     return new TypeEntry(fhirType, CqlPrimitiveType.Fhir);
             }
         }
-
+        
         public TypeEntry? TypeEntryFor(CqlPrimitiveType cqlType, TypeEntry? elementType = null)
         {
             switch (cqlType)
@@ -155,42 +151,38 @@ namespace Hl7.Cql.Packaging
                     return null;
             }
         }
-
-        public TypeEntry? TypeEntryFor(Elm.Expressions.TypeSpecifierExpression? resultTypeSpecifier)
+        
+        public TypeEntry? TypeEntryFor(Elm.TypeSpecifier? resultTypeSpecifier)
         {
-            if (resultTypeSpecifier is null || resultTypeSpecifier.type is null)
+            if (resultTypeSpecifier is null)
                 return null;
-            switch (resultTypeSpecifier.type)
+            switch (resultTypeSpecifier)
             {
-                case "IntervalTypeSpecifier":
+                case IntervalTypeSpecifier interval:
                     {
-                        if (resultTypeSpecifier.pointType is null)
+                        if (interval.pointType is null)
                             return null;
-                        var pointType = TypeEntryFor(resultTypeSpecifier.pointType);
+                        var pointType = TypeEntryFor(interval.pointType);
                         return TypeEntryFor(CqlPrimitiveType.Interval, pointType);
                     }
-                case "ListTypeSpecifier":
-                    if (resultTypeSpecifier.elementType is null)
+                case ListTypeSpecifier list:
+                    if (list.elementType is null)
                         return null;
-                    var elementType = TypeEntryFor(resultTypeSpecifier.elementType);
+                    var elementType = TypeEntryFor(list.elementType);
                     if (elementType is null)
                         return null;
-                    if (elementType.CqlType == CqlPrimitiveType.Interval && elementType.ElementType is null)
-                    {
-                        //What's the purpose of this?
-                    }
                     return TypeEntryFor(CqlPrimitiveType.List, elementType);
-                case "NamedTypeSpecifier":
-                    return TypeEntryFor(resultTypeSpecifier.name);
-                case "ChoiceTypeSpecifier":
-                case "TupleTypeSpecifier":
+                case NamedTypeSpecifier named:
+                    return TypeEntryFor(named.name.Name);
+                case ChoiceTypeSpecifier:
+                case TupleTypeSpecifier:
                     return new TypeEntry(FHIRAllTypes.Basic, CqlPrimitiveType.Tuple);
                 default:
                     break;
             }
             return null;
         }
-
+        
         public TypeEntry? TypeEntryFor(string? name)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -222,16 +214,9 @@ namespace Hl7.Cql.Packaging
             }
             else return null;
         }
-
-        public TypeEntry? TypeEntryFor(Elm.Expressions.Expression expression)
-        {
-
-            if (!string.IsNullOrWhiteSpace(expression.resultTypeName))
-                return TypeEntryFor(expression.resultTypeName);
-            else if (expression.resultTypeSpecifier != null)
-                return TypeEntryFor(expression.resultTypeSpecifier);
-            else return null;
-        }
+        
+        public TypeEntry? TypeEntryFor(Elm.Element element) =>
+            TypeEntryFor(element.resultTypeSpecifier);
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)
         {

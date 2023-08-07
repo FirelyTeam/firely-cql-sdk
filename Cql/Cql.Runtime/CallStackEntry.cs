@@ -29,7 +29,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="name">The name of the definition or function.</param>
         /// <param name="locator">The location in the source code.</param>
         /// <param name="localId">The local ID for this ELM node.</param>
-        public CallStackEntry(string? name, string? locator, int? localId)
+        public CallStackEntry(string? name, string? locator, string? localId)
         {
             Name = name;
             Locator = locator;
@@ -48,6 +48,6 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// The local ID for this ELM node.
         /// </summary>
-        public int? LocalId { get; set; } = null;
+        public string? LocalId { get; set; } = null;
     }
 }

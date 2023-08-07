@@ -7,6 +7,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -73,7 +74,7 @@ namespace Hl7.Cql.Iso8601
         public DateTimeOffset DateTimeOffset { get; }
 
         /// <summary>
-        /// Gets this date time represented as a <see cref="DateTimeOffset"/ in UTC.
+        /// Gets this date time represented as a <see cref="DateTimeOffset"/> in UTC.
         /// </summary>
         public DateTimeOffset DateTimeOffsetUtc { get; set; }
 
@@ -126,11 +127,11 @@ namespace Hl7.Cql.Iso8601
         }
 
         /// <summary>
-        /// Creates a new instance, initializing fields from the values specified in <paramref name="dto"/>
-        /// up to and including <paramref name="precision"/>, leaving all others <see langword="null"/>.
+        /// Creates a new instance, initializing fields from the values specified in <paramref name="date"/>
+        /// and <paramref name="time"/>.
         /// </summary>
-        /// <param name="date">The date portion of the date time represented by a <see cref="DateTimeOffset"/>.</param>
-        /// <param name="date">The time portion represented by a <see cref="DateTimeOffset"/>.</param>
+        /// <param name="date">The date portion of the date time represented by a <see cref="DateIso8601"/>.</param>
+        /// <param name="time">The time portion represented by a <see cref="TimeIso8601"/>.</param>
         /// <param name="strict">If <see langword ="true"/>, validates the ranges of all parameters to ensure only real date times.</param>
         public DateTimeIso8601(DateIso8601 date, TimeIso8601? time = null, bool strict = false) :
             this(date.Year, date.Month, date.Day, time?.Hour, time?.Minute, time?.Second, time?.Millisecond, time?.OffsetHour, time?.OffsetMinute, strict)
@@ -361,14 +362,14 @@ namespace Hl7.Cql.Iso8601
                 {
                     if (tzh.Success)
                     {
-                        int hourValue = int.Parse(tzh.Value);
+                        int hourValue = int.Parse(tzh.Value, CultureInfo.InvariantCulture);
                         if (timezone.Value[0] == '-')
                             osHour = -hourValue;
                         else osHour = hourValue;
                     }
 
                     if (tzm.Success)
-                        osMinute = int.Parse(tzm.Value);
+                        osMinute = int.Parse(tzm.Value, CultureInfo.InvariantCulture);
                 }
             }
 
@@ -380,13 +381,13 @@ namespace Hl7.Cql.Iso8601
             // but not from hour/min/sec/ms
             if (yearGroup.Success)
             {
-                year = int.Parse(yearGroup.Value);
+                year = int.Parse(yearGroup.Value, CultureInfo.InvariantCulture);
                 if (monthGroup.Success)
                 {
-                    month = int.Parse(monthGroup.Value);
+                    month = int.Parse(monthGroup.Value, CultureInfo.InvariantCulture);
                     if (dayGroup.Success)
                     {
-                        day = int.Parse(dayGroup.Value);
+                        day = int.Parse(dayGroup.Value, CultureInfo.InvariantCulture);
                     }
                 }
             }
@@ -398,16 +399,16 @@ namespace Hl7.Cql.Iso8601
             var millisecondGroup = parts.Groups["ms"];
             if (hourGroup.Success)
             {
-                hour = int.Parse(hourGroup.Value);
+                hour = int.Parse(hourGroup.Value, CultureInfo.InvariantCulture);
                 if (minuteGroup.Success)
                 {
-                    minute = int.Parse(minuteGroup.Value);
+                    minute = int.Parse(minuteGroup.Value, CultureInfo.InvariantCulture);
                     if (secondGroup.Success)
                     {
-                        second = int.Parse(secondGroup.Value);
+                        second = int.Parse(secondGroup.Value, CultureInfo.InvariantCulture);
                         if (millisecondGroup.Success)
                         {
-                            ms = int.Parse(millisecondGroup.Value);
+                            ms = int.Parse(millisecondGroup.Value, CultureInfo.InvariantCulture);
                             if (millisecondGroup.Value.Length == 1)
                                 ms *= 100;
                             else if (millisecondGroup.Value.Length == 2)
@@ -424,31 +425,31 @@ namespace Hl7.Cql.Iso8601
         private static string Format(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)
         {
             var sb = new StringBuilder();
-            sb.Append(year.ToString("D4"));
+            sb.Append(year.ToString("D4", CultureInfo.InvariantCulture));
             if (month.HasValue && precision > DateTimePrecision.Year)
             {
                 sb.Append('-');
-                sb.Append(month.Value.ToString("D2"));
+                sb.Append(month.Value.ToString("D2", CultureInfo.InvariantCulture));
                 if (day.HasValue && precision > DateTimePrecision.Month)
                 {
                     sb.Append('-');
-                    sb.Append(day.Value.ToString("D2"));
+                    sb.Append(day.Value.ToString("D2", CultureInfo.InvariantCulture));
                     if (hour.HasValue && precision > DateTimePrecision.Day)
                     {
                         sb.Append('T');
-                        sb.Append(hour.Value.ToString("D2"));
+                        sb.Append(hour.Value.ToString("D2", CultureInfo.InvariantCulture));
                         if (minute.HasValue && precision > DateTimePrecision.Hour)
                         {
                             sb.Append(':');
-                            sb.Append(minute.Value.ToString("D2"));
+                            sb.Append(minute.Value.ToString("D2", CultureInfo.InvariantCulture));
                             if (second.HasValue && precision > DateTimePrecision.Minute)
                             {
                                 sb.Append(':');
-                                sb.Append(second.Value.ToString("D2"));
+                                sb.Append(second.Value.ToString("D2", CultureInfo.InvariantCulture));
                                 if (ms.HasValue && precision > DateTimePrecision.Second)
                                 {
                                     sb.Append('.');
-                                    sb.Append(ms.Value.ToString("D3"));
+                                    sb.Append(ms.Value.ToString("D3", CultureInfo.InvariantCulture));
                                 }
                             }
                         }
@@ -460,9 +461,9 @@ namespace Hl7.Cql.Iso8601
                             {
                                 if (osHour > 0)
                                     sb.Append('+');
-                                sb.Append(osHour.Value.ToString("D2"));
+                                sb.Append(osHour.Value.ToString("D2", CultureInfo.InvariantCulture));
                                 sb.Append(':');
-                                sb.Append((osMinute ?? 0).ToString("D2"));
+                                sb.Append((osMinute ?? 0).ToString("D2", CultureInfo.InvariantCulture));
                             }
                         }
                     }

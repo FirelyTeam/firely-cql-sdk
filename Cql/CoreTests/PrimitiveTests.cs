@@ -14,10 +14,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using Expression = System.Linq.Expressions.Expression;
+using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 
 namespace CoreTests
 {
@@ -26,7 +28,7 @@ namespace CoreTests
     public class PrimitiveTests
     {
         private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        private static readonly Hl7.Cql.Conversion.TypeConverter TypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
 
         private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
@@ -3405,7 +3407,7 @@ namespace CoreTests
             var rtx = FirelyCqlContext.Create();
             var items = new List<int?> { 1, 2, null, 4, 5 };
             var ascending = rtx.Operators
-                .ListSort(items, SortOrder.Ascending)
+                .ListSort(items, ListSortDirection.Ascending)
                 .ToArray();
             Assert.AreEqual(null, ascending[0]);
             Assert.AreEqual(1, ascending[1]);
@@ -3414,7 +3416,7 @@ namespace CoreTests
             Assert.AreEqual(5, ascending[4]);
 
             var descending = rtx.Operators
-                .ListSort(items, SortOrder.Descending)
+                .ListSort(items, ListSortDirection.Descending)
                 .ToArray();
             Assert.AreEqual(5, descending[0]);
             Assert.AreEqual(4, descending[1]);
@@ -3434,14 +3436,14 @@ namespace CoreTests
                 new CqlDate(2022,05,01)
             };
             var ascending = rtx.Operators
-                .ListSort(items, SortOrder.Ascending)
+                .ListSort(items, ListSortDirection.Ascending)
                 .ToArray();
             Assert.AreEqual(null, ascending[0]);
             Assert.AreEqual(new CqlDate(2022, 05, 01), ascending[1]);
             Assert.AreEqual(new CqlDate(2022, 12, 01), ascending[2]);
 
             var descending = rtx.Operators
-                .ListSort(items, SortOrder.Descending)
+                .ListSort(items, ListSortDirection.Descending)
                 .ToArray();
             Assert.AreEqual(new CqlDate(2022, 12, 01), descending[0]);
             Assert.AreEqual(new CqlDate(2022, 05, 01), descending[1]);
@@ -3480,7 +3482,7 @@ namespace CoreTests
             var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
             var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
-            var elmPackage = ElmPackage.LoadFrom(elm);
+            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
             var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
             var expressions = eb.Build();
