@@ -1,8 +1,5 @@
 ﻿using Hl7.Cql.Comparers;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Hl7.Cql.Firely.Comparers
 {
@@ -16,7 +13,7 @@ namespace Hl7.Cql.Firely.Comparers
 
         public ICqlComparer IdComparer { get; }
 
-        public override int? Compare(Resource x, Resource y, string? precision)
+        public override int? Compare(Resource? x, Resource? y, string? precision)
         {
             if (x == null || y == null)
                 return null;
@@ -25,7 +22,7 @@ namespace Hl7.Cql.Firely.Comparers
 
         }
 
-        public override bool? Equals(Resource x, Resource y, string? precision)
+        public override bool? Equals(Resource? x, Resource? y, string? precision)
         {
             if (x == null || y == null)
                 return null;
@@ -33,7 +30,7 @@ namespace Hl7.Cql.Firely.Comparers
             return compareId;
         }
 
-        public override bool Equivalent(Resource x, Resource y, string? precision)
+        public override bool Equivalent(Resource? x, Resource? y, string? precision)
         {
             if (x == null)
             {

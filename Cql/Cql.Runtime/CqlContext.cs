@@ -74,18 +74,28 @@ namespace Hl7.Cql.Runtime
         }
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+        /// <summary>
+        /// Construct a new instance of a CqlContext with just the call stack initialized.
+        /// </summary>
         protected CqlContext()
         {
             CallStack = new Stack<CallStackEntry>();
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+        /// <summary>
+        /// Deepclones the CqlContext.
+        /// </summary>        
         internal virtual CqlContext Clone()
         {
             var clone = new CqlContext();
             PopulateClone(clone);
             return clone;
         }
+
+        /// <summary>
+        /// Copies the operators, extensions and parameters from a source CqlContext to a target CqlContext.
+        /// </summary>
         protected void PopulateClone<T>(T clone) where T : CqlContext
         {
             clone.Operators = Operators;
@@ -120,6 +130,7 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         /// <param name="libraryNameAndVersion">The library name and version.</param>
         /// <param name="parameterName">The name of the parameter.</param>
+        /// <param name="defaultValue">The value to returns when the parameter could not be resolved.</param>
         /// <returns>The value of the parameter or <see langword="null"/> if not defined.</returns>
         public object? ResolveParameter(string libraryNameAndVersion, string parameterName, object? defaultValue)
         {
@@ -139,7 +150,7 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         /// <param name="key">The extension key.</param>
         /// <param name="defaultValue">The default value to use if the extension isn't found.</param>
-        /// <returns>The value of the parameter or <paramref name="defaultValue"> if not defined.</returns>
+        /// <returns>The value of the parameter or <paramref name="defaultValue"/> if not defined.</returns>
         public object? ResolveExtension(string key, object? defaultValue)
         {
             if (!Extensions.TryGetValue(key, out var value))

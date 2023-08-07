@@ -51,7 +51,7 @@ namespace Hl7.Cql.Compiler
         /// <param name="resolver">The <see cref="TypeResolver"/> that this instance uses.</param>
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
         /// <param name="tupleTypeNamespace">The namespace of all generated tuple types.  If not specified, the value will be "Tuples".</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="resolver"/> is <langword cref="null"/>.</exception>
+        /// <exception cref="ArgumentNullException">If <paramref name="resolver"/> is <c>null</c>.</exception>
         public TypeManager(TypeResolver resolver, string assemblyName = "Tuples", string? tupleTypeNamespace = "Tuples")
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
@@ -131,8 +131,7 @@ namespace Hl7.Cql.Compiler
         }
 
         internal Type TypeFor(elm.TypeSpecifier resultTypeSpecifier,
-            ExpressionBuilderContext context,
-            bool throwIfNotFound = true)
+            ExpressionBuilderContext context)
         {
             if (resultTypeSpecifier == null) return typeof(object);
             else if (resultTypeSpecifier is IntervalTypeSpecifier interval)
@@ -144,7 +143,7 @@ namespace Hl7.Cql.Compiler
             else if (resultTypeSpecifier is NamedTypeSpecifier named)
             {
                 var type = Resolver.ResolveType(named.name.Name!);
-                if (type == null && throwIfNotFound)
+                if (type == null)
                     throw new ArgumentException("Cannot resolve type for expression");
                 return type!;
             }
@@ -157,8 +156,9 @@ namespace Hl7.Cql.Compiler
                 if (list.elementType == null)
                     throw new ArgumentException("ListTypeSpecifier must have a non-null elementType");
                 var elementType = TypeFor(list.elementType, context);
-                if (elementType == null && throwIfNotFound)
+                if (elementType == null)
                     throw new ArgumentException("Cannot resolve type for expression");
+
                 var enumerableOfElementType = typeof(IEnumerable<>).MakeGenericType(elementType);
                 return enumerableOfElementType;
             }
@@ -188,7 +188,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
                 {
-                    typeName = Nullable.GetUnderlyingType(type).Name;
+                    typeName = Nullable.GetUnderlyingType(type)!.Name;
                 }
                 else
                 {
@@ -212,7 +212,7 @@ namespace Hl7.Cql.Compiler
                 return typeof(object);
             else
             {
-                var elementInfo = tuple.element
+                var elementInfo = tuple.element!
                     .ToDictionary(el => el.name, el =>
                     {
                         Type? type;
@@ -235,7 +235,7 @@ namespace Hl7.Cql.Compiler
                     foreach (var kvp in elementInfo)
                     {
                         var normalizedKey = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
-                        var typeProperty = type.GetProperty(normalizedKey);
+                        var typeProperty = type.GetProperty(normalizedKey!);
                         if (typeProperty == null || typeProperty.PropertyType != kvp.Value)
                         {
                             typeIsMatch = false;
@@ -274,7 +274,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
         /// <returns>The unique tuple type name.</returns>
-        protected virtual string TupleTypeNameFor(IEnumerable<KeyValuePair<string?, Type>> elementInfo)
+        protected virtual string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)
@@ -296,7 +296,7 @@ namespace Hl7.Cql.Compiler
         {
             var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
             var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
-            var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor(new[] { typeof(string) }), new object?[] { cqlName });
+            var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor(new[] { typeof(string) })!, new object?[] { cqlName });
             propertyBuilder.SetCustomAttribute(customAttributeBuilder);
             MethodAttributes attributes = MethodAttributes.Public
                     | MethodAttributes.SpecialName

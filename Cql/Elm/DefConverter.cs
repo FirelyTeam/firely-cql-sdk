@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Elm
 {
@@ -19,10 +15,10 @@ namespace Hl7.Cql.Elm
                 {
                     var array = new T[defElement.GetArrayLength()];
                     int i = 0;
-                    foreach(var ele in defElement.EnumerateArray())
+                    foreach (var ele in defElement.EnumerateArray())
                     {
                         var json = ele.GetRawText();
-                        var t = JsonSerializer.Deserialize<T>(json, options);
+                        var t = JsonSerializer.Deserialize<T>(json, options)!;
                         array[i] = t;
                         i++;
                     }
@@ -30,7 +26,7 @@ namespace Hl7.Cql.Elm
                 }
                 else return null;
             }
-             return null;
+            return null;
         }
 
         public override void Write(Utf8JsonWriter writer, T[] value, JsonSerializerOptions options)

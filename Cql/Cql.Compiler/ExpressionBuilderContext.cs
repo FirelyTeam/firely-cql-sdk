@@ -18,10 +18,10 @@ using elm = Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of <see cref="Elm.ElmPackage"/> statements during <see cref="ExpressionBuilder.Build"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.Build"/>.
     /// </summary>
     /// <remarks>
-    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Expression, ExpressionBuilderContext)"/>.
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
     public class ExpressionBuilderContext
     {

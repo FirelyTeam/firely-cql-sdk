@@ -17,7 +17,7 @@ namespace Hl7.Cql
     public static class UCUMUnits
     {
         /// <summary>
-        /// <see cref="Unary">
+        /// <see cref="Unary" />
         /// </summary>
         public const string Default = Unary;
 

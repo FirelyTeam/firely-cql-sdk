@@ -1,20 +1,15 @@
 ﻿using Hl7.Fhir.Utility;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Firely.Comparers
 {
-    internal class FirelyEnumComparer: ICqlComparer
+    internal class FirelyEnumComparer : ICqlComparer
     {
 
         public static readonly FirelyEnumComparer Default = new FirelyEnumComparer();
         private FirelyEnumComparer() { }
         /// <inheritdoc/>
-        public int? Compare(object x, object y, string? precision)
+        public int? Compare(object? x, object? y, string? precision)
         {
             if (x == null || y == null) return null;
             var xType = x.GetType();
@@ -50,7 +45,7 @@ namespace Hl7.Cql.Firely.Comparers
         }
 
         /// <inheritdoc/>
-        public bool? Equals(object x, object y, string? precision)
+        public bool? Equals(object? x, object? y, string? precision)
         {
             var result = Compare(x, y, precision);
             if (result == null) return null;
@@ -58,10 +53,10 @@ namespace Hl7.Cql.Firely.Comparers
         }
 
         /// <inheritdoc/>
-        public bool Equivalent(object x, object y, string? precision) => (Equals(x, y, precision) ?? false) == false;
+        public bool Equivalent(object? x, object? y, string? precision) => (Equals(x, y, precision) ?? false) == false;
 
         /// <inheritdoc/>
-        public int GetHashCode(object x)
+        public int GetHashCode(object? x)
         {
             if (x == null) return typeof(object).GetHashCode();
             else return x.GetHashCode();

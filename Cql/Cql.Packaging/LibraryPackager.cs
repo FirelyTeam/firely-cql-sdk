@@ -39,7 +39,7 @@ namespace Hl7.Cql.Packaging
             Parallel.ForEach(files, file =>
             {
                 var library = elm.Library.LoadFromJson(file);
-                if (library != null)
+                if (library?.NameAndVersion != null)
                 {
                     dict.TryAdd(library.NameAndVersion, library);
                 }
@@ -99,6 +99,8 @@ namespace Hl7.Cql.Packaging
                 if (cqlFiles.Length > 1)
                     throw new InvalidOperationException($"More than 1 CQL file found.");
                 var cqlFile = cqlFiles[0];
+                if (library.NameAndVersion is null)
+                    throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger);
@@ -173,6 +175,8 @@ namespace Hl7.Cql.Packaging
                             };
                             measure.Group = new List<Measure.GroupComponent>();
                             measure.Url = canon(measure)!;
+                            if (library.NameAndVersion is null)
+                                throw new InvalidOperationException("Library NameAndVersion should not be null.");
                             if (!libraries.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
                                 throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
                             measure.Library = new List<string> { libForMeasure!.Url };
@@ -399,7 +403,7 @@ namespace Hl7.Cql.Packaging
         };
         private static CqlContext CqlContext => FirelyCqlContext.Create();
 
-        public TypeConverter? TypeConverter { get; }
+        public TypeConverter TypeConverter { get; }
 
         //new CqlContext(new CqlOperators(null));
 

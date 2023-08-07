@@ -48,8 +48,8 @@ namespace Hl7.Cql.Primitives
         /// <param name="minute">The minute component, or <see langword="null"/> to indicate minute precision.</param>
         /// <param name="second">The second component, or <see langword="null"/> to indicate second precision.</param>
         /// <param name="millisecond">The day component, or <see langword="null"/> to indicate millisecond precision.</param>
-        /// <param name="offsetHours">The time zone offset hours component, or <see langword="null"/> to indicate UTC.</param>
-        /// <param name="offsetMinutes">The time zone offset minutes component, or <see langword="null"/> to indicate UTC.</param>
+        /// <param name="offsetHour">The time zone offset hours component, or <see langword="null"/> to indicate UTC.</param>
+        /// <param name="offsetMinute">The time zone offset minutes component, or <see langword="null"/> to indicate UTC.</param>
         public CqlTime(int hour, int? minute, int? second, int? millisecond, int? offsetHour, int? offsetMinute) :
             this(new TimeIso8601(hour, minute, second, millisecond, offsetHour, offsetMinute))
         {
@@ -58,7 +58,7 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// Creates an instance for the given ISO time.
         /// </summary>
-        /// <param name="isoDate">The time value.</param>
+        /// <param name="time">The time value.</param>
         public CqlTime(TimeIso8601 time)
         {
             Value = time;
@@ -72,7 +72,7 @@ namespace Hl7.Cql.Primitives
         /// Tries to parse an ISO 8601 string as a time.
         /// </summary>
         /// <param name="s">The string value</param>
-        /// <param name="cqlDateTime">The resulting time.</param>
+        /// <param name="time">The resulting time.</param>
         /// <returns><see langword="true"/> if successfully parsed; otherwise, <see langword="false"/>.</returns>
         public static bool TryParse(string s, out CqlTime? time)
         {
@@ -372,7 +372,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="other">The object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
-        /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.
+        /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
         public bool Equivalent(CqlTime? other, string? precision) => (CompareTo(other, precision) ?? 0) == 0;
 
         /// <summary>
@@ -384,7 +384,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="obj">The object to compare against this value.</param>
         /// <returns><see langword="true"/> if equal.</returns>
-        public override bool Equals(object obj) => Value.Equals((obj as CqlTime)?.Value!);
+        public override bool Equals(object? obj) => Value.Equals((obj as CqlTime)?.Value!);
         /// <summary>
         /// Gets the value of <see cref="DateTimeIso8601.GetHashCode"/> for <see cref="Value"/>.
         /// </summary>

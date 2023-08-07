@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Elm
 {
@@ -21,7 +16,7 @@ namespace Hl7.Cql.Elm
                 var gtd = converterBaseType.GetGenericTypeDefinition();
                 if (typeof(JsonConverter<>).IsAssignableFrom(gtd))
                 {
-                    var readMethod = converterType.GetMethod(nameof(Read));
+                    var readMethod = converterType.GetMethod(nameof(Read))!;
                     var @delegate = readMethod.CreateDelegate<ReadDelegate>(converter);
                     var result = @delegate(ref reader, typeToConvert, options);
                     return result;

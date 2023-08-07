@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Comparers
 {
@@ -18,7 +15,7 @@ namespace Hl7.Cql.Comparers
         private EnumComparer() { }
 
         /// <inheritdoc/>
-        public int? Compare(object x, object y, string? precision)
+        public int? Compare(object? x, object? y, string? precision)
         {
             if (x == null || y == null) return null;
             var xType = x.GetType();
@@ -47,7 +44,7 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc/>
-        public bool? Equals(object x, object y, string? precision)
+        public bool? Equals(object? x, object? y, string? precision)
         {
             var result = Compare(x, y, precision);
             if (result == null) return null;
@@ -55,7 +52,7 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc/>
-        public bool Equivalent(object x, object y, string? precision) => (Equals(x, y, precision) ?? false) == false;
+        public bool Equivalent(object? x, object? y, string? precision) => (Equals(x, y, precision) ?? false) == false;
 
         /// <inheritdoc/>
         public int GetHashCode(object x)

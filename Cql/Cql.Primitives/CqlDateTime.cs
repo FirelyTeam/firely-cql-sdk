@@ -80,7 +80,7 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// Creates an instance for the given ISO date time.
         /// </summary>
-        /// <param name="isoDate">The date time value.</param>
+        /// <param name="dateTime">The date time value.</param>
         public CqlDateTime(DateTimeIso8601 dateTime)
         {
             Value = dateTime;
@@ -554,7 +554,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="other">The object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
-        /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.
+        /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
         public bool Equivalent(CqlDateTime? other, string? precision) => (CompareTo(other, precision) ?? 0) == 0;
 
         /// <summary>
@@ -566,7 +566,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="obj">The object to compare against this value.</param>
         /// <returns><see langword="true"/> if equal.</returns>
-        public override bool Equals(object obj) => Value.Equals((obj as CqlDateTime)?.Value!);
+        public override bool Equals(object? obj) => Value.Equals((obj as CqlDateTime)?.Value!);
         /// <summary>
         /// Gets the value of <see cref="DateTimeIso8601.GetHashCode"/> for <see cref="Value"/>.
         /// </summary>

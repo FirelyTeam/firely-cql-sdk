@@ -90,7 +90,7 @@ namespace Hl7.Cql.ValueSets
         /// </summary>
         /// <param name="valueSetUri">The value set's canonical URI.</param>
         /// <param name="code">The code to check.</param>
-        /// <param name="systemUriOrOid">The code system's canonical URI or its OID.</param>
+        /// <param name="systemUri">The code system's canonical URI or its OID.</param>
         /// <returns><see langword="true"/> if the given code is present in the given value set.</returns>
         public bool IsCodeInValueSet(string valueSetUri, string code, string systemUri) =>
             CodesByHash.ContainsKey(GetKey(valueSetUri, code, systemUri));
@@ -126,7 +126,7 @@ namespace Hl7.Cql.ValueSets
 
         private class CqlCodeHasher : IEqualityComparer<CqlCode>
         {
-            public bool Equals(CqlCode x, CqlCode y) => true;
+            public bool Equals(CqlCode? x, CqlCode? y) => true;
 
             // we're using low ASCII values that are invalid in real codes
             public int GetHashCode(CqlCode obj) =>

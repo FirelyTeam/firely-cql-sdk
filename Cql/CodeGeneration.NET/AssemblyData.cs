@@ -7,6 +7,7 @@
  */
 
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace Hl7.Cql.Compiler
 {
@@ -18,7 +19,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="location">The location on disk which this assembly's bytes were written.</param>
+        /// <param name="binary">This assembly's binary data.</param>
         /// <param name="sourceCode">The collection of source code files that contributed to this assembly.</param>
         public AssemblyData(byte[] binary, IDictionary<string, string> sourceCode)
         {

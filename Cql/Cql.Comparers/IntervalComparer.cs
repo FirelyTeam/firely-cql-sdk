@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -24,7 +25,7 @@ namespace Hl7.Cql.Comparers
         public Func<T, T> Predecessor { get; }
         public Func<T, T> Successor { get; }
 
-        public override int? Compare(CqlInterval<T> x, CqlInterval<T> y, string? precision)
+        public override int? Compare(CqlInterval<T>? x, CqlInterval<T>? y, string? precision)
         {
             if (x == null || y == null)
                 return null;
@@ -71,7 +72,7 @@ namespace Hl7.Cql.Comparers
             }
         }
 
-        public override bool Equivalent(CqlInterval<T> x, CqlInterval<T> y, string? precision) =>
+        public override bool Equivalent(CqlInterval<T>? x, CqlInterval<T>? y, string? precision) =>
             Compare(x, y, precision) == 0 ? true : false;
 
         public override int GetHashCode(CqlInterval<T> x) =>
@@ -80,3 +81,5 @@ namespace Hl7.Cql.Comparers
             : x.ToString()!.GetHashCode();
     }
 }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

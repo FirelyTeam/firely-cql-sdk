@@ -1,4 +1,6 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -49,13 +51,14 @@ namespace Hl7.Cql.Comparers
         }
 
 
-        public int? Compare(object x, object y, string? precision = null) =>
+
+        public int? Compare(object? x, object? y, string? precision = null) =>
             Compare(x as TupleBaseType, y as TupleBaseType, null);
 
         public bool? Equals(TupleBaseType? x, TupleBaseType? y, string? precision = null) =>
             Compare(x, y, null) == 0;
 
-        public bool? Equals(object x, object y, string? precision = null) =>
+        public bool? Equals(object? x, object? y, string? precision = null) =>
             Compare(x, y, null) == 0;
 
         public bool Equivalent(TupleBaseType? x, TupleBaseType? y, string? precision = null)
@@ -90,13 +93,15 @@ namespace Hl7.Cql.Comparers
             return true;
         }
 
-        public bool Equivalent(object x, object y) =>
+        public bool Equivalent(object? x, object? y) =>
             Equivalent(x as TupleBaseType, y as TupleBaseType);
 
-        public bool Equivalent(object x, object y, string? precision = null) =>
+        public bool Equivalent(object? x, object? y, string? precision = null) =>
             Equivalent(x as TupleBaseType, y as TupleBaseType);
 
         public int GetHashCode(TupleBaseType? obj) => obj?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
         public int GetHashCode(object obj) => GetHashCode(obj as TupleBaseType);
     }
 }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

@@ -10,14 +10,14 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// The and operator returns true if both its arguments are true. If either argument is false, the result is false. Otherwise, the result is null.
         /// </summary>
-        /// <see cref="https://cql.hl7.org/09-b-cqlreference.html#and"/>
+        /// <remarks>See https://cql.hl7.org/09-b-cqlreference.html#and</remarks>
         protected Expression And(elm.And e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.And, e, ctx);
 
         /// <summary>
         /// The or operator returns true if either of its arguments are true. If both arguments are false, the result is false. Otherwise, the result is null.
         /// </summary>
-        /// <see cref="https://cql.hl7.org/09-b-cqlreference.html#or"/>
+        /// <remarks>See https://cql.hl7.org/09-b-cqlreference.html#or</remarks>
         protected Expression Or(elm.Or e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Or, e, ctx);
         protected Expression Not(elm.Not e, ExpressionBuilderContext ctx) =>

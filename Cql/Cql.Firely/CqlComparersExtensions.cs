@@ -36,7 +36,7 @@ namespace Hl7.Cql.Firely
             comparers.Register(typeof(Uuid), new IValueComparer<string?>());
             comparers.Register(typeof(Identifier), new IdentifierComparer(comparers, comparers));
 
-            comparers.Register(typeof(Code<>), (type,_comparers) =>
+            comparers.Register(typeof(Code<>), (type, _comparers) =>
             {
                 var codeType = type.GetGenericArguments()[0];
                 var comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
@@ -55,7 +55,7 @@ namespace Hl7.Cql.Firely
         /// and equal for two Tuple instances to be considered equal.  For FHIR resources with their large numbers of properties, these comparisons
         /// are expensive and usually superfluous.  Comparing by resource ID alone is sufficient in nearly every use case.
         /// </remarks>
-        /// <see href="https://cql.hl7.org/09-b-cqlreference.html#equal">
+        /// <see href="https://cql.hl7.org/09-b-cqlreference.html#equal" />
         /// <param name="comparers"></param>
         /// <param name="idComparer"></param>
         /// <returns></returns>
@@ -64,7 +64,7 @@ namespace Hl7.Cql.Firely
             var derviedFromResource = typeof(Patient).Assembly.GetTypes()
                 .Where(t => typeof(Resource).IsAssignableFrom(t));
             var resourceIdComparer = new ResourceIdCqlComparer(new StringCqlComparer(idComparer));
-            foreach(var type in derviedFromResource)
+            foreach (var type in derviedFromResource)
             {
                 comparers.Register(type, resourceIdComparer);
             }

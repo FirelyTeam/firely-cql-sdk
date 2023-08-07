@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler
     public interface IExpressionMutator
     {
         /// <summary>
-        /// Gets the keys that are required by this interceptor on <see cref="RuntimeContext.Externals"/>.  
+        /// Gets the keys that are required by this interceptor.
         /// Using two <see cref="IExpressionMutator"/> on the same <see cref="ExpressionBuilder"/> which require the same keys will result in an <see cref="InvalidOperationException"/>.
         /// </summary>
         public IEnumerable<(string, Type)> RuntimeContextKeys { get; }

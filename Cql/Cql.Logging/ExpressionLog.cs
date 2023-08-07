@@ -40,7 +40,7 @@ namespace Hl7.Cql.Logging
 
         public IList<ExpressionLog>? callStack { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is ExpressionLog otherLog)
             {

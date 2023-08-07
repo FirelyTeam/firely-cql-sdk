@@ -83,10 +83,10 @@ namespace Hl7.Cql.Compiler
                 offset = ChangeType(offset, typeof(decimal?), ctx);
             }
 
-            return OperatorBinding.Bind(CqlOperator.DateTime, ctx.RuntimeContextParameter, year, month, day, hour, minute, second,  milliseconds, offset);
+            return OperatorBinding.Bind(CqlOperator.DateTime, ctx.RuntimeContextParameter, year, month, day, hour, minute, second, milliseconds, offset);
         }
 
-        /// <see cref="https://cql.hl7.org/02-authorsguide.html#datetime-operators"/>
+        /// <remarks>See https://cql.hl7.org/02-authorsguide.html#datetime-operators</remarks>
         protected Expression DateTimeComponentFrom(elm.DateTimeComponentFrom e, ExpressionBuilderContext ctx)
         {
             var op = TranslateExpression(e.operand!, ctx);

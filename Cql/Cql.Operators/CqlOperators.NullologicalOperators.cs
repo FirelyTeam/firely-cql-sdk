@@ -7,8 +7,8 @@ namespace Hl7.Cql.Runtime
     {
         #region Coalesce
 
-        public T Coalesce<T>(IEnumerable<T>? source)
-            where T: class
+        public T? Coalesce<T>(IEnumerable<T>? source)
+            where T : class
         {
             if (source == null)
                 return null!;
@@ -17,7 +17,7 @@ namespace Hl7.Cql.Runtime
         }
 
         public T? CoalesceValueTypes<T>(IEnumerable<T?>? source)
-            where T: struct
+            where T : struct
         {
             if (source == null)
                 return null;
