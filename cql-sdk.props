@@ -38,6 +38,7 @@
 		<LangVersion>11.0</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Configurations>Debug;Release;FullDebug</Configurations>
+		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' ">

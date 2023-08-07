@@ -316,7 +316,7 @@ namespace Hl7.Cql.Graph
                             IsRandomSelectedEdge = false
                         };
                         context.Exceptions.Add(error);
-                        throw ex;
+                        throw;
                     }
                 }
             }
@@ -346,7 +346,7 @@ namespace Hl7.Cql.Graph
                                 IsRandomSelectedEdge = true
                             };
                             context.Exceptions.Add(error);
-                            throw ex;
+                            throw;
                         }
                 }
             }

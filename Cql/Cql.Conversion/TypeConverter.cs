@@ -96,10 +96,35 @@ namespace Hl7.Cql.Conversion
                 toDictionary = new Dictionary<Type, Func<object, object>>();
                 Converters.Add(typeof(TFrom), toDictionary);
             }
-            if (toDictionary.TryGetValue(typeof(TTo), out Func<object, object> existing))
+            if (toDictionary.TryGetValue(typeof(TTo), out Func<object, object>? existing))
                 throw new ArgumentException($"Conversion from {typeof(TFrom)} to {typeof(TTo)} is already defined.");
             else toDictionary.Add(typeof(TTo), x => conversion((TFrom)x)!);
         }
+
+        /// <summary>
+        /// Tries to add a new function for converting <paramref name="from"/> to <paramref name="to"/>.
+        /// If the conversion already exists, this method returns <see langword="false"/>.
+        /// </summary>
+        /// <typeparam name="TFrom">The source type.</typeparam>
+        /// <typeparam name="TTo">The desired type.</typeparam>
+        /// <param name="conversion">The function which implements the conversion.</param>
+        /// <returns> <see langword="true"/> if this conversion was not previously defined; otherwise, <see langword="false"/></returns>
+        public bool TryAddConversion<TFrom, TTo>(Func<TFrom, TTo> conversion)
+        {
+            if (!Converters.TryGetValue(typeof(TFrom), out var toDictionary))
+            {
+                toDictionary = new Dictionary<Type, Func<object, object>>();
+                Converters.Add(typeof(TFrom), toDictionary);
+            }
+            if (toDictionary.TryGetValue(typeof(TTo), out Func<object, object>? existing))
+                return false;
+            else
+            {
+                toDictionary.Add(typeof(TTo), x => conversion((TFrom)x)!);
+                return true;
+            }
+        }
+
 
         /// <summary>
         /// Performs the conversion of <paramref name="from"/> to <typeparamref name="T"/>.

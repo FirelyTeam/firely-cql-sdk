@@ -7,6 +7,11 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 	</PropertyGroup>
 
+
+	<ItemGroup>
+	  <None Include="..\..\.editorconfig" Link=".editorconfig" />
+	</ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
