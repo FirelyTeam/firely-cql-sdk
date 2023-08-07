@@ -3,8 +3,8 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<AssemblyName>Ncqa.Cql</AssemblyName>
-		<RootNamespace>Ncqa.Cql</RootNamespace>
+		<AssemblyName>HL7.Cql.Abstractions</AssemblyName>
+		<RootNamespace>HL7.Cql.Abstractions</RootNamespace>
 		<Product>CQL</Product>
 		<Description>Contains shared interfaces and abstraction for CQL</Description>
 		<NoWarn>CS8601</NoWarn>

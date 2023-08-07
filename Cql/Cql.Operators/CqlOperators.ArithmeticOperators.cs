@@ -16,7 +16,7 @@ using System.Text;
 
 namespace Hl7.Cql.Runtime
 {
-    public partial class CqlOperators
+    internal partial class CqlOperators
     {
         #region Abs
 

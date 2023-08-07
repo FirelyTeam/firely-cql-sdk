@@ -24,7 +24,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Implements <see cref="OperatorBinding"/> by calling methods in <see cref="CqlOperators"/>.
     /// </summary>
-    public class CqlOperatorsBinding : OperatorBinding
+    internal class CqlOperatorsBinding : OperatorBinding
     {
         internal TypeConverter? TypeConverter { get; private set; }
         internal TypeResolver TypeResolver { get; private set; }

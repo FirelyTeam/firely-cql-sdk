@@ -3,8 +3,8 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<AssemblyName>Hl7.Cql.Runtime.Model</AssemblyName>
-		<RootNamespace>Hl7.Cql.Runtime.Model</RootNamespace>
+		<AssemblyName>Hl7.Cql.Model</AssemblyName>
+		<RootNamespace>Hl7.Cql.Model</RootNamespace>
 		<Product>CQL engine runtime model binding</Product>
 		<Description>Incorporates CQL model information into the runtime</Description>
 	</PropertyGroup>

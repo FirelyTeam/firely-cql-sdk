@@ -22,7 +22,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Impelements <see cref="ICqlOperators"/>.
     /// </summary>
-    public partial class CqlOperators : ICqlOperators, ICqlComparer, ICqlComparer<object>
+    internal partial class CqlOperators : ICqlOperators, ICqlComparer, ICqlComparer<object>
     {
         /// <summary>
         /// Creates an instance.

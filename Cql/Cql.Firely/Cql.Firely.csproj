@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -16,6 +16,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<InternalsVisibleTo Include="CoreTests"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
+		<InternalsVisibleTo Include="PackagerCLI"/>
 	</ItemGroup>
 
 </Project>

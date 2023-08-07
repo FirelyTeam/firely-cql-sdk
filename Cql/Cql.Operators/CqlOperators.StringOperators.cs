@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Runtime
 {
-    public partial class CqlOperators
+    internal partial class CqlOperators
     {
         #region Combine
         public string? Combine(IEnumerable<string> source, string? separator)

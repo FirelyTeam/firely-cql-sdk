@@ -15,7 +15,7 @@ namespace Hl7.Cql.Conversion
     /// <summary>
     /// Provides a base implementation of <see cref="IUnitConverter"/>.
     /// </summary>
-    public class UnitConverter : IUnitConverter
+    internal class UnitConverter : IUnitConverter
     {
         private readonly object SyncRoot = new();
         private IDictionary<string, IDictionary<string, Func<decimal, decimal>>> Conversions { get; } = new Dictionary<string, IDictionary<string, Func<decimal, decimal>>>();

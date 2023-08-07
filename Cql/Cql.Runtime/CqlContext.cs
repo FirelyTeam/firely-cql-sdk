@@ -16,7 +16,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>
-    public class CqlContext
+    internal class CqlContext
     {
         /// <summary>
         /// Contains all definitions required during execution.

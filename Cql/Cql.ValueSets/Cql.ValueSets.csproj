@@ -1,8 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <Import Project="..\..\cql-sdk.props" />
-  
-  <ItemGroup>
+
+	<PropertyGroup>
+		<AssemblyName>Hl7.Cql.ValueSets</AssemblyName>
+		<RootNamespace>Hl7.Cql.ValueSets</RootNamespace>
+		<Product>Assembly for working with CQL terminologies.</Product>
+		<Description>Assembly for working with CQL terminologies.</Description>
+	</PropertyGroup>
+
+
+	<ItemGroup>
     <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
   </ItemGroup>
 

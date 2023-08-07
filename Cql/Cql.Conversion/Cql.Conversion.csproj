@@ -1,10 +1,10 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<AssemblyName>Hl7.Cql.Runtime.Conversion</AssemblyName>
-		<RootNamespace>Hl7.Cql.Runtime.Conversion</RootNamespace>
+		<AssemblyName>Hl7.Cql.Conversion</AssemblyName>
+		<RootNamespace>Hl7.Cql.Conversion</RootNamespace>
 		<Product>CQL engine unit conversion</Product>
 		<Description>Unit conversion for CQL</Description>
 		<NoWarn>CS8601</NoWarn>
@@ -12,6 +12,13 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Operators"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Firely"/>
+		<InternalsVisibleTo Include="Hl7.Cql"/>
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
+		<InternalsVisibleTo Include="CoreTests"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
+		<InternalsVisibleTo Include="PackagerCLI"/>
 	</ItemGroup>
-
 </Project>

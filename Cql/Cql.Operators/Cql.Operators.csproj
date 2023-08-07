@@ -2,6 +2,12 @@
 
 	<Import Project="..\..\cql-sdk.props" />
 
+	<PropertyGroup>
+		<AssemblyName>Hl7.Cql.Operators</AssemblyName>
+		<RootNamespace>Hl7.Cql.Operators</RootNamespace>
+		<Product>CQL operators implementation</Product>
+		<Description>Implementation of the various operators and methods in the Cql spec.</Description>
+	</PropertyGroup>
 
 	<PropertyGroup>
 		<ImplicitUsings>disable</ImplicitUsings>
@@ -17,6 +23,12 @@
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Runtime" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Firely"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Logging"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler"/>
+		<InternalsVisibleTo Include="CoreTests"/>
 	</ItemGroup>
 
 	<ItemGroup>

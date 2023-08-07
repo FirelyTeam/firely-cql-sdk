@@ -13,7 +13,7 @@ using System.Runtime.Loader;
 
 namespace Hl7.Cql.Packaging
 {
-    public static class AssemblyLoadContextExtensions
+    internal static class AssemblyLoadContextExtensions
     {
         public static IDictionary<string, object?> Run(this AssemblyLoadContext assemblyContext,
             string library, string version, CqlContext context)

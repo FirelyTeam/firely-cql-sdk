@@ -20,7 +20,7 @@ namespace Cql.Operators
         /// <summary>
         /// Add comparison operators for the CQL primitive datatypes.
         /// </summary>
-        public static CqlComparers AddIntervalComparisons(this CqlComparers Comparers, ICqlOperators operators) =>
+        internal static CqlComparers AddIntervalComparisons(this CqlComparers Comparers, ICqlOperators operators) =>
             Comparers
                 .Register(typeof(CqlInterval<int?>), new IntervalComparer<int?>(Comparers, operators.Predecessor, operators.Successor))
                 .Register(typeof(CqlInterval<long?>), new IntervalComparer<long?>(Comparers, operators.Predecessor, operators.Successor))

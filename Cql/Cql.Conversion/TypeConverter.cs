@@ -16,7 +16,7 @@ namespace Hl7.Cql.Conversion
     /// <summary>
     /// Converts CQL model types to .NET types, and vice versa.
     /// </summary>
-    public class TypeConverter
+    internal class TypeConverter
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> Converters
             = new();

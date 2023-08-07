@@ -15,6 +15,11 @@
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Logging"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Firely"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
 	</ItemGroup>
 	
 	<ItemGroup>

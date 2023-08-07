@@ -28,7 +28,12 @@ namespace Hl7.Cql.Packaging
 {
     public class LibraryPackager
     {
-        public LibraryPackager(TypeConverter? typeConverter = null)
+        public LibraryPackager()
+        {
+            TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+        }
+
+        internal LibraryPackager(TypeConverter? typeConverter)
         {
             TypeConverter = typeConverter ?? FirelyTypeConverter.Create(ModelInfo.ModelInspector);
         }
@@ -404,7 +409,7 @@ namespace Hl7.Cql.Packaging
         };
         private static CqlContext CqlContext => FirelyCqlContext.Create();
 
-        public TypeConverter TypeConverter { get; }
+        internal TypeConverter TypeConverter { get; }
 
         //new CqlContext(new CqlOperators(null));
 

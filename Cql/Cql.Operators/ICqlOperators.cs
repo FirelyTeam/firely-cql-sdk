@@ -12,7 +12,7 @@ namespace Hl7.Cql.Operators
     /// Defines the operators in the CQL specification.
     /// </summary>
     /// <seealso gref="https://cql.hl7.org/09-b-cqlreference.html"/>
-    public interface ICqlOperators
+    internal interface ICqlOperators
     {
         /// <summary>
         /// Gets the type converter used for type conversions not handled by the built in conversion operators.

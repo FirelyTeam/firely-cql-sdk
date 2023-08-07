@@ -4,8 +4,8 @@
 
 
 	<PropertyGroup>
-		<AssemblyName>Hl7.Cql.Runtime.Logging</AssemblyName>
-		<RootNamespace>Hl7.Cql.Runtime.Logging</RootNamespace>
+		<AssemblyName>Hl7.Cql.Logging</AssemblyName>
+		<RootNamespace>Hl7.Cql.Logging</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
