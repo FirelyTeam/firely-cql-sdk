@@ -2,6 +2,7 @@
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Hl7.Cql.Runtime
@@ -1216,7 +1217,7 @@ namespace Hl7.Cql.Runtime
         #region Sort
 
 
-        public IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, SortOrder order)
+        public IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, ListSortDirection order)
         {
             if (source == null)
                 return null;
@@ -1224,7 +1225,7 @@ namespace Hl7.Cql.Runtime
             var nullRecords = source.Where(w => w == null);
             var nonNullRecords = source.Where(w => w != null);
 
-            if (order == SortOrder.Ascending)
+            if (order == ListSortDirection.Ascending)
             {
                 var ordered = nonNullRecords
                     .Cast<object>()
@@ -1233,7 +1234,7 @@ namespace Hl7.Cql.Runtime
                     .ToList();
                 return nullRecords.Concat(ordered);
             }
-            else if (order == SortOrder.Descending)
+            else if (order == ListSortDirection.Descending)
             {
                 var ordered = nonNullRecords
                     .Cast<object>()
@@ -1246,11 +1247,11 @@ namespace Hl7.Cql.Runtime
             else throw new NotSupportedException($"Unknown sort order {order}");
         }
 
-        public IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, SortOrder order)
+        public IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
         {
             if (source == null)
                 return null;
-            if (order == SortOrder.Ascending)
+            if (order == ListSortDirection.Ascending)
             {
                 var nullRecords = source.Where(s => sortByExpr(s) == null);
                 var nonNullRecords = source.Where(s => sortByExpr(s) != null);
@@ -1258,7 +1259,7 @@ namespace Hl7.Cql.Runtime
                 var result = nullRecords.Concat(ordered);
                 return result;
             }
-            else if (order == SortOrder.Descending)
+            else if (order == ListSortDirection.Descending)
             {
                 var nullRecords = source.Where(s => sortByExpr(s) == null);
                 var nonNullRecords = source.Where(s => sortByExpr(s) != null);

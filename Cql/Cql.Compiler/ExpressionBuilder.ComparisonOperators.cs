@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm.Expressions;
+using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
-        protected Expression Equal(elm.EqualExpression eq, ExpressionBuilderContext ctx)
+        protected Expression Equal(elm.Equal eq, ExpressionBuilderContext ctx)
         {
             var lhsExpression = TranslateExpression(eq.operand![0], ctx);
             var rhsExpression = TranslateExpression(eq.operand![1], ctx);
@@ -15,34 +15,31 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)
         {
-            var leftNv = CoalesceNullableValueType(left);
-            var rightNv = CoalesceNullableValueType(right);
-
-            if (leftNv.Type.IsEnum)
+            if (IsEnum(left.Type))
             {
-                if (rightNv.Type.IsEnum)
+                if (IsEnum(right.Type))
                 {
-                    var equal = Expression.Equal(leftNv, rightNv);
+                    var equal = Expression.Equal(left, right);
                     var asNullable = Expression.Convert(equal, typeof(bool?));
                     return asNullable;
                 }
-                else if (rightNv.Type == typeof(string))
+                else if (right.Type == typeof(string))
                 {
-                    var call = Operators.Bind(CqlOperator.EnumEqualsString,
+                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString,
                         ctx.RuntimeContextParameter,
-                        Expression.Convert(leftNv, typeof(object)),
+                        Expression.Convert(left, typeof(object)),
                         right);
                     return call;
                 }
                 else throw new NotImplementedException();
             }
-            else if (rightNv.Type.IsEnum)
+            else if (IsEnum(right.Type))
             {
-                if (leftNv.Type == typeof(string))
+                if (left.Type == typeof(string))
                 {
-                    var call = Operators.Bind(CqlOperator.EnumEqualsString, 
+                    var call = OperatorBinding.Bind(CqlOperator.EnumEqualsString, 
                         ctx.RuntimeContextParameter,
-                        Expression.Convert(rightNv, typeof(object)),
+                        Expression.Convert(right, typeof(object)),
                         left);
                     return call;
 
@@ -57,19 +54,19 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = TypeResolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
                         throw new InvalidOperationException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
-                    var call = Operators.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
+                    var call = OperatorBinding.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
                     return call;
                 }
                 throw new NotImplementedException();
             }
             else 
             {
-                var call = Operators.Bind(CqlOperator.Equal, ctx.RuntimeContextParameter, left, right);
+                var call = OperatorBinding.Bind(CqlOperator.Equal, ctx.RuntimeContextParameter, left, right);
                 return call;
             }
         }
 
-        protected Expression Equivalent(elm.EquivalentExpression eqv, ExpressionBuilderContext ctx)
+        protected Expression Equivalent(elm.Equivalent eqv, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(eqv.operand![0], ctx);
             var right = TranslateExpression(eqv.operand![1], ctx);
@@ -85,7 +82,7 @@ namespace Hl7.Cql.Compiler
                         //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
                         return Expression.Constant(false, typeof(bool?));
                     }
-                    var call = Operators.Bind(CqlOperator.ListEquivalent, ctx.RuntimeContextParameter, left, right);
+                    var call = OperatorBinding.Bind(CqlOperator.ListEquivalent, ctx.RuntimeContextParameter, left, right);
                     return call;
                 }
                 else
@@ -95,20 +92,20 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var call = Operators.Bind(CqlOperator.Equivalent, ctx.RuntimeContextParameter, left, right);
+                var call = OperatorBinding.Bind(CqlOperator.Equivalent, ctx.RuntimeContextParameter, left, right);
                 return call;
             }
         }
 
-        protected Expression Greater(elm.GreaterExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression Greater(elm.Greater e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Greater, e, ctx);
 
-        protected Expression GreaterOrEqual(elm.GreaterOrEqualExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression GreaterOrEqual(elm.GreaterOrEqual e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.GreaterOrEqual, e, ctx);
 
-        protected Expression Less(elm.LessExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression Less(elm.Less e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Less, e, ctx);
-        protected Expression LessOrEqual(elm.LessOrEqualExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression LessOrEqual(elm.LessOrEqual e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.LessOrEqual, e, ctx);
 
 

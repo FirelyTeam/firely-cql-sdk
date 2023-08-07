@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Hl7.Cql.Runtime
@@ -342,7 +343,7 @@ namespace Hl7.Cql.Runtime
                 return new CqlInterval<T?>[0];
 
             // need null check on i because i!.low! causes HL7 unit test TestCollapseNull_Test to fail since i is null
-            var queue = ListSortBy(intervals, i => i == null ? null! : i.low!, SortOrder.Ascending).ToList();
+            var queue = ListSortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending).ToList();
             if (queue.Count == 0) return null;
 
             CqlInterval<T?>? TryCombine(CqlInterval<T?>? x, CqlInterval<T?>? y)

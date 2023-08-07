@@ -26,7 +26,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="system">The code system.</param>
         /// <param name="version">The code version.</param>
         /// <param name="display">The display value for this code.</param>
-        public CqlCode(string? code, string? system, string? version, string? display)
+        public CqlCode(string? code, string? system, string? version = null, string? display = null)
         {
             this.code = code;
             this.system = system;

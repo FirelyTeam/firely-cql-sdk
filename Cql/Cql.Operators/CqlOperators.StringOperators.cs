@@ -42,7 +42,7 @@ namespace Hl7.Cql.Runtime
                 return null;
             else
             {
-                char value = argument[index.Value];
+                var value = argument[index.Value];
                 return value.ToString();
             }
         }

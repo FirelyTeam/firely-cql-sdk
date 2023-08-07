@@ -1,6 +1,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hl7.Cql.Runtime;
 using System;
+using System.Linq.Expressions;
+using System.Reflection;
 
 namespace CoreTests
 {
@@ -1702,7 +1704,16 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
+        public static string GetDebugView(Expression exp)
+        {
+            if (exp == null)
+                return null;
+
+            var propertyInfo = typeof(Expression).GetProperty("DebugView", BindingFlags.Instance | BindingFlags.NonPublic);
+            return propertyInfo.GetValue(exp) as string;
+        }
+
         /// <summaray>
 		///define "DateTimeEE":
 		///	( DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) ) = @2017-03-12T00:00:00.000

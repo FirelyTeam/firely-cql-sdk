@@ -1,11 +1,11 @@
 ﻿using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm.Expressions;
+using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
-        private Expression Message(elm.MessageExpression e, ExpressionBuilderContext ctx)
+        private Expression Message(elm.Message e, ExpressionBuilderContext ctx)
         {
             var source = TranslateExpression(e.source!, ctx);
             var condition = TranslateExpression(e.condition!, ctx);
@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler
                 // create an explicit "null as object" so the generic type can be inferred in source code.
                 source = Expression.TypeAs(constant, constant.Type);
             }
-            var call = Operators.Bind(CqlOperator.Message, ctx.RuntimeContextParameter, source, code, severity, message);
+            var call = OperatorBinding.Bind(CqlOperator.Message, ctx.RuntimeContextParameter, source, code, severity, message);
             if (IsNullable(condition.Type))
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));

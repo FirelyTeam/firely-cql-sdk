@@ -27,6 +27,9 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         public ICqlOperators Operators { get; protected set; }
 
+        /// <summary>
+        /// Gets <see cref="ICqlOperators.DataRetriever"/> through <see cref="Operators"/>.
+        /// </summary>
         public IDataRetriever DataRetriever => Operators.DataRetriever;
 
         /// <summary>
