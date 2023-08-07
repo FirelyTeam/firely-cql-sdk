@@ -12,7 +12,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 namespace Hl7.Cql.Packaging
 {
-    public class CqlCrosswalk
+    internal class CqlCrosswalk
     {
         public TypeResolver TypeResolver { get; private set; }
 

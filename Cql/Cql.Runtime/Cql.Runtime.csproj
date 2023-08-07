@@ -20,6 +20,7 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Firely"/>
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler"/>
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Model"/>
 	</ItemGroup>
 	
 	<ItemGroup>

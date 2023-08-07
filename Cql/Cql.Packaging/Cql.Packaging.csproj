@@ -10,7 +10,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />		
 	</ItemGroup>
 
 	<ItemGroup>
@@ -19,6 +19,7 @@
 	  <ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 	  <ProjectReference Include="..\Graph\Graph.csproj" />
+		<InternalsVisibleTo Include="PackagerCLI"/>
 	</ItemGroup>
 
 </Project>

@@ -29,7 +29,7 @@ namespace Hl7.Cql.Compiler
 {
     public class AssemblyCompiler
     {
-        public AssemblyCompiler(TypeResolver typeResolver,
+        internal AssemblyCompiler(TypeResolver typeResolver,
             TypeManager? typeManager = null,
             OperatorBinding? operatorBinding = null)
         {
@@ -38,16 +38,14 @@ namespace Hl7.Cql.Compiler
             Binding = operatorBinding ?? new CqlOperatorsBinding(typeResolver);
         }
 
-        public TypeResolver TypeResolver { get; }
-        public TypeManager TypeManager { get; }
-        public OperatorBinding Binding { get; }
+        private TypeResolver TypeResolver { get; }
+        private TypeManager TypeManager { get; }
+        private OperatorBinding Binding { get; }
 
         public AssemblyLoadContext Load(IEnumerable<Library> elmPackages,
-                    ILogger<ExpressionBuilder>? builderLogger = null,
-                    ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
-                    LogLevel logLevel = LogLevel.Information)
+                    ILoggerFactory logFactory)
         {
-            var assemblies = Compile(elmPackages, builderLogger, codeWriterLogger, logLevel);
+            var assemblies = Compile(elmPackages, logFactory);
             var assemblyLoadContext = new AssemblyLoadContext("UnitTest", false);
             foreach (var kvp in assemblies)
             {
@@ -58,21 +56,10 @@ namespace Hl7.Cql.Compiler
         }
 
         public IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
-                    ILogger<ExpressionBuilder>? builderLogger = null,
-                    ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
-                    LogLevel logLevel = LogLevel.Information)
+                    ILoggerFactory logFactory)
         {
-            var logFactory = LoggerFactory
-                .Create(logging =>
-                {
-                    logging.AddFilter(level => level >= logLevel);
-                    logging.AddConsole(console =>
-                    {
-                        console.LogToStandardErrorThreshold = LogLevel.Error;
-                    });
-                });
-            builderLogger ??= logFactory.CreateLogger<ExpressionBuilder>();
-            codeWriterLogger ??= logFactory.CreateLogger<CSharpSourceCodeWriter>();
+            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
+            var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
             var graph = Library.GetIncludedLibraries(elmPackages);
             var references = new[]

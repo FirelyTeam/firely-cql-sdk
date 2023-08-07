@@ -7,7 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Firely;
@@ -18,7 +17,7 @@ using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
 {
-    public static class DirectoryInfoExtensions
+    internal static class DirectoryInfoExtensions
     {
         public static AssemblyLoadContext LoadResources(this DirectoryInfo dir, string lib, string version)
         {
@@ -43,9 +42,7 @@ namespace Hl7.Cql.Packaging
         public static AssemblyLoadContext LoadElm(this DirectoryInfo elmDirectory,
             string lib,
             string version,
-            ILogger<ExpressionBuilder>? builderLogger = null,
-            ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
-            LogLevel logLevel = LogLevel.Information)
+            ILoggerFactory logFactory)
         {
             var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
             if (!elmFile.Exists)
@@ -66,9 +63,7 @@ namespace Hl7.Cql.Packaging
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
 
             var assemblyData = compiler.Compile(dependencies,
-                builderLogger,
-                codeWriterLogger,
-                logLevel);
+                logFactory);
 
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var kvp in assemblyData)

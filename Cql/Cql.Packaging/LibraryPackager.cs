@@ -38,7 +38,7 @@ namespace Hl7.Cql.Packaging
             TypeConverter = typeConverter ?? FirelyTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
-        public IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
+        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
         {
             var dict = new ConcurrentDictionary<string, elm.Library>();
             var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
@@ -53,16 +53,18 @@ namespace Hl7.Cql.Packaging
             return dict;
         }
 
-        public IEnumerable<Resource> PackageResources(DirectoryInfo elmDirectory,
+        internal IEnumerable<Resource> PackageResources(DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
             DirectedGraph packageGraph,
             TypeResolver typeResolver,
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             Func<Resource, string> canon,
-            ILogger<ExpressionBuilder> builderLogger,
-            ILogger<CSharpSourceCodeWriter> writerLogger)
+            ILoggerFactory logFactory)
         {
+            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
+            var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
+
             var elmLibraries = packageGraph.Nodes.Values
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
                 .Where(p => p is not null)
@@ -77,7 +79,7 @@ namespace Hl7.Cql.Packaging
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
-            var scw = new CSharpSourceCodeWriter(writerLogger);
+            var scw = new CSharpSourceCodeWriter(codeWriterLogger);
             foreach (var @using in typeResolver.ModelNamespaces)
                 scw.Usings.Add(@using);
             foreach (var alias in typeResolver.Aliases)
@@ -85,7 +87,7 @@ namespace Hl7.Cql.Packaging
 
             var navToLibraryStream = new Dictionary<string, Stream>();
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
-            var assemblies = compiler.Compile(elmLibraries, builderLogger, writerLogger);
+            var assemblies = compiler.Compile(elmLibraries, logFactory);
             var libraries = new Dictionary<string, Library>();
             var typeCrosswalk = new CqlCrosswalk(typeResolver);
             foreach (var library in elmLibraries)
@@ -110,7 +112,7 @@ namespace Hl7.Cql.Packaging
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger);
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
+                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -289,7 +291,7 @@ namespace Hl7.Cql.Packaging
                     .Select(t => new Coding { Code = t.code!, System = t.system! })
                     .ToList(),
             };
-        private Hl7.Fhir.Model.Library CreateLibraryResource(FileInfo elmFile,
+        private Hl7.Fhir.Model.Library createLibraryResource(FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlCrosswalk typeCrosswalk,

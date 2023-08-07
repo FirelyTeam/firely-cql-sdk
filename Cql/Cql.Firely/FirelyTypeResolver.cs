@@ -16,7 +16,7 @@ using System.Reflection;
 namespace Hl7.Cql.Firely
 {
 
-    public class FirelyTypeResolver : BaseTypeResolver
+    internal class FirelyTypeResolver : BaseTypeResolver
     {
         public FirelyTypeResolver(ModelInspector inspector)
         {

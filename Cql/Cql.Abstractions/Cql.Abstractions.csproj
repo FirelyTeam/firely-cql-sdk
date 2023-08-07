@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -12,6 +12,15 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Firely"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Model"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Runtime"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Operators"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
+		<InternalsVisibleTo Include="Hl7.Cql"/>
+		<InternalsVisibleTo Include="CoreTests"/>
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
 	</ItemGroup>
 
 </Project>

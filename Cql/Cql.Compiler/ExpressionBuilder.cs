@@ -27,7 +27,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
-    public partial class ExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         /// <summary>
         /// Creates an instance.

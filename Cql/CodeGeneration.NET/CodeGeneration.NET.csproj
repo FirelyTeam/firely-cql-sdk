@@ -24,6 +24,7 @@
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
 	</ItemGroup>
 
 
