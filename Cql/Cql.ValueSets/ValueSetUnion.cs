@@ -17,7 +17,7 @@ namespace Hl7.Cql.ValueSets
     /// <summary>
     /// Creates a facade for value set unions.
     /// </summary>
-    public class ValueSetUnion : IValueSetFacade
+    internal class ValueSetUnion : IValueSetFacade
     {
         /// <summary>
         /// Creates an instance.

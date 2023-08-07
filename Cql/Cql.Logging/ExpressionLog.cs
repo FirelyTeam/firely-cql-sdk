@@ -14,7 +14,7 @@ using System.Text.Json.Nodes;
 
 namespace Hl7.Cql.Logging
 {
-    public class ExpressionLog
+    internal class ExpressionLog
     {
         /// <summary>
         /// The definition name (for top level expressions) as defined in the CQL source

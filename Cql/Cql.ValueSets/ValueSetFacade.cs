@@ -19,7 +19,7 @@ namespace Hl7.Cql.ValueSets
     /// Implements <see cref="IValueSetFacade"/>.
     /// </summary>
     [DebuggerDisplay("{Uri}")]
-    public class ValueSetFacade : IValueSetFacade
+    internal class ValueSetFacade : IValueSetFacade
     {
         /// <summary>
         /// Creates an interface for <paramref name="valueSet"/>.

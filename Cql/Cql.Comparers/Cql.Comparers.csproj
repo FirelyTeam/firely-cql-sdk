@@ -11,7 +11,11 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Firely"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Operators"/>
+		<InternalsVisibleTo Include="Hl7.Cql"/>
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
 	</ItemGroup>
 
 </Project>

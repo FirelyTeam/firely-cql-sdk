@@ -11,7 +11,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Stores an entry in an ELM call stack.
     /// </summary>
-    public class CallStackEntry
+    internal class CallStackEntry
     {
         /// <summary>
         /// Creates an instance.

@@ -16,7 +16,7 @@ namespace Hl7.Cql.Runtime
     /// Maps library, definition, and signatures to values.
     /// </summary>
     /// <typeparam name="T">The value mapped by the keys in this dictionary.</typeparam>
-    public class DefinitionDictionary<T>
+    internal class DefinitionDictionary<T>
         where T : class
     {
 

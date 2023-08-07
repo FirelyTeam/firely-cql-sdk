@@ -26,9 +26,9 @@ using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
 {
-    public class LibraryPackager
+    internal class LibraryPackager
     {
-        public LibraryPackager()
+        internal LibraryPackager()
         {
             TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
         }

@@ -15,7 +15,7 @@ namespace Hl7.Cql.ValueSets
     /// <summary>
     /// Defines a dictionary of value sets and their codes.
     /// </summary>
-    public interface IValueSetDictionary
+    internal interface IValueSetDictionary
     {
         /// <summary>
         /// Adds the code to the given value set by its canonical URI.

@@ -16,7 +16,7 @@ namespace Hl7.Cql.Comparers
     /// <remarks>
     /// Strings are normalized using <see cref="string.Normalize()"/>.
     /// </remarks>
-    public class StringCqlComparer : ICqlComparer, ICqlComparer<string?>
+    internal class StringCqlComparer : ICqlComparer, ICqlComparer<string?>
     {
         private readonly StringComparer _comparer;
 

@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Comparers
 {
-    public class NullComparer<T> : IComparer<T>, IComparer
+    internal class NullComparer<T> : IComparer<T>, IComparer
     {
 
         private readonly IComparer<T> through;

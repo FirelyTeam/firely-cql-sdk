@@ -17,6 +17,11 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Graph\Graph.csproj" />
+		<InternalsVisibleTo Include="CoreTests"/>
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
+		<InternalsVisibleTo Include="PackagerCLI"/>
 	</ItemGroup>
 
 </Project>
+

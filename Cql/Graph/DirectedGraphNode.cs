@@ -14,7 +14,7 @@ using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Graph
 {
-    public class DirectedGraphNode
+    internal class DirectedGraphNode
     {
         public const string StartId = "Start";
         public const string EndId = "End";

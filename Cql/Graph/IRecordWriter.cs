@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Hl7.Cql.Graph
 {
-    public interface IRecordWriter<TContext>
+    internal interface IRecordWriter<TContext>
         where TContext : ExecutionContext
     {
         void WriteRecord(ExecutedPath<TContext> path, ExecutedPathRecord record);

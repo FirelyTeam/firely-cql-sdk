@@ -15,7 +15,7 @@ namespace Hl7.Cql.Firely
     /// <summary>
     /// Extension class for configuring comparers for the Firely SDK.
     /// </summary>
-    public static class CqlComparersExtensions
+    internal static class CqlComparersExtensions
     {
         /// <summary>
         /// Add comparison operators for the POCO types provided by the Firely SDK.

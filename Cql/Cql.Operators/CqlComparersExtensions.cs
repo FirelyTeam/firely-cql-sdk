@@ -15,7 +15,7 @@ namespace Cql.Operators
     /// <summary>
     /// Extension class for configuring comparers for the Cql types.
     /// </summary>
-    public static class CqlComparersExtensions
+    internal static class CqlComparersExtensions
     {
         /// <summary>
         /// Add comparison operators for the CQL primitive datatypes.

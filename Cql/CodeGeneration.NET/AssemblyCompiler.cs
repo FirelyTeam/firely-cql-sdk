@@ -55,7 +55,7 @@ namespace Hl7.Cql.Compiler
             return assemblyLoadContext;
         }
 
-        public IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
+        internal IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
                     ILoggerFactory logFactory)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
@@ -105,7 +105,7 @@ namespace Hl7.Cql.Compiler
             }
 
             var navToLibraryStream = new Dictionary<string, Stream>();
-            var assemblies = Generate(all,
+            var assemblies = generate(all,
                 TypeManager,
                 graph,
                 scw,
@@ -114,8 +114,7 @@ namespace Hl7.Cql.Compiler
             return assemblies;
         }
 
-
-        private IDictionary<string, AssemblyData> Generate(DefinitionDictionary<LambdaExpression> expressions,
+        private IDictionary<string, AssemblyData> generate(DefinitionDictionary<LambdaExpression> expressions,
            TypeManager typeManager,
            DirectedGraph dependencies,
            CSharpSourceCodeWriter writer,

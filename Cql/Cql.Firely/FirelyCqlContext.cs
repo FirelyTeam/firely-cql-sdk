@@ -32,11 +32,11 @@ namespace Hl7.Cql.Firely
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null)
         {
-            valueSets ??= new HashValueSetDictionary();
+            var vss = valueSets ?? new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
             var typeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
             IDataRetriever dataRetriever = bundle != null
-                ? new BundleDataRetriever(bundle, valueSets)
+                ? new BundleDataRetriever(bundle, vss)
                 : new CompositeDataRetriever();
 
             var cqlComparers = new CqlComparers();
@@ -44,7 +44,7 @@ namespace Hl7.Cql.Firely
                 FirelyTypeConverter.Create(Fhir.Model.ModelInfo.ModelInspector),
                 dataRetriever,
                 cqlComparers,
-                valueSets,
+                (IValueSetDictionary)vss,
                 unitConverter,
                 new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond),
                 FirelyEnumComparer.Default);

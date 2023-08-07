@@ -11,7 +11,7 @@ using System.Collections;
 
 namespace Hl7.Cql.Comparers
 {
-    public class ListEqualComparer : ICqlComparer, ICqlComparer<IEnumerable>
+    internal class ListEqualComparer : ICqlComparer, ICqlComparer<IEnumerable>
     {
         public ListEqualComparer(ICqlComparer elementComparer)
         {

@@ -14,7 +14,7 @@ using System.Text;
 namespace Hl7.Cql.Graph
 {
 
-    public class ExecutedPath<TContext>
+    internal class ExecutedPath<TContext>
         where TContext : ExecutionContext
     {
         public ExecutedPath(TContext context)
