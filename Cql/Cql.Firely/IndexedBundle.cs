@@ -10,14 +10,32 @@ namespace Hl7.Cql.Firely
         {
             Entries = entries;
 
-            _byType = Entries.Where(e => e.Resource is not null).ToLookup(e => e.Resource.GetType(), e => e.Resource);
+            foreach(var entry in entries)
+            {
+                var type = entry.Resource.GetType();
+                while(type != typeof(object) && type != null)
+                {
+                    if (!_byType.TryGetValue(type, out var resources))
+                    {
+                        resources = new LinkedList<Resource>();
+                        _byType.Add(type, resources);
+                    }
+                    resources.AddLast(entry.Resource);
+                    type = type.BaseType;
+                }
+            }
         }
 
         public IEnumerable<Bundle.EntryComponent> Entries { get; }
 
-        private readonly ILookup<Type, Resource> _byType;
+        private readonly Dictionary<Type, LinkedList<Resource>> _byType = new();
 
-        public IEnumerable<T> FilterByType<T>() => _byType[typeof(T)].Cast<T>();
+        public IEnumerable<T> FilterByType<T>()
+        {
+            if (_byType.TryGetValue(typeof(T), out var resources))
+                return resources?.Cast<T>() ?? Enumerable.Empty<T>();
+            else return Enumerable.Empty<T>();
+        }
 
         public IEnumerable<T> FilterByType<T>(Predicate<Coding> filter)
         {
