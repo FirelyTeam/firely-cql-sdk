@@ -1,8 +1,8 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.2.0",
-         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
       }, {
          "message" : "List-valued expression was demoted to a singleton.",
@@ -14,14 +14,6 @@
          "errorType" : "semantic",
          "errorSeverity" : "warning",
          "type" : "CqlToElmError"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "336",
-            "s" : [ {
-               "value" : [ "","library DRCommunicationWithPhysicianManagingDiabetesFHIR version '0.0.004'" ]
-            } ]
-         }
       } ],
       "identifier" : {
          "id" : "DRCommunicationWithPhysicianManagingDiabetesFHIR",
@@ -36,121 +28,35 @@
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
             "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.1",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "1",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIR" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.1'" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.1"
          } ]
       },
       "includes" : {
          "def" : [ {
-            "localId" : "2",
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.001",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "2",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIRHelpers" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.001"
          }, {
-            "localId" : "3",
             "locator" : "6:1-6:66",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElementsFHIR4",
-            "version" : "2.0.000",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "3",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "SupplementalDataElementsFHIR4" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'2.0.000'"," called ","SDE" ]
-                  } ]
-               }
-            } ]
+            "version" : "2.0.000"
          }, {
-            "localId" : "4",
             "locator" : "7:1-7:69",
             "localIdentifier" : "Global",
             "path" : "MATGlobalCommonFunctionsFHIR4",
-            "version" : "6.1.000",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "4",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "MATGlobalCommonFunctionsFHIR4" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'6.1.000'"," called ","Global" ]
-                  } ]
-               }
-            } ]
+            "version" : "6.1.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "34",
             "locator" : "32:1-32:49",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "34",
-                  "s" : [ {
-                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
-                  }, {
-                     "r" : "33",
-                     "s" : [ {
-                        "value" : [ "Interval<" ]
-                     }, {
-                        "r" : "32",
-                        "s" : [ {
-                           "value" : [ "DateTime" ]
-                        } ]
-                     }, {
-                        "value" : [ ">" ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
@@ -159,7 +65,6 @@
                }
             },
             "parameterTypeSpecifier" : {
-               "localId" : "33",
                "locator" : "32:32-32:49",
                "type" : "IntervalTypeSpecifier",
                "resultTypeSpecifier" : {
@@ -170,7 +75,6 @@
                   }
                },
                "pointType" : {
-                  "localId" : "32",
                   "locator" : "32:41-32:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -181,425 +85,169 @@
       },
       "codeSystems" : {
          "def" : [ {
-            "localId" : "5",
             "locator" : "9:1-9:38",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "LOINC",
             "id" : "http://loinc.org",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "5",
-                  "s" : [ {
-                     "value" : [ "","codesystem ","\"LOINC\"",": ","'http://loinc.org'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "6",
             "locator" : "10:1-10:47",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "SNOMEDCT",
             "id" : "http://snomed.info/sct",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "6",
-                  "s" : [ {
-                     "value" : [ "","codesystem ","\"SNOMEDCT\"",": ","'http://snomed.info/sct'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          } ]
       },
       "valueSets" : {
          "def" : [ {
-            "localId" : "7",
             "locator" : "12:1-12:139",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Care Services in Long-Term Residential Facility",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "7",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Care Services in Long-Term Residential Facility\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "8",
             "locator" : "13:1-13:101",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Diabetic Retinopathy",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "8",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Diabetic Retinopathy\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "9",
             "locator" : "14:1-14:123",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Level of Severity of Retinopathy Findings",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "9",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Level of Severity of Retinopathy Findings\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "10",
             "locator" : "15:1-15:112",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Macular Edema Findings Present",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "10",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Macular Edema Findings Present\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "11",
             "locator" : "16:1-16:94",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Macular Exam",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "11",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Macular Exam\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "12",
             "locator" : "17:1-17:96",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Medical Reason",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "12",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Medical Reason\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "13",
             "locator" : "18:1-18:114",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Nursing Facility Visit",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "13",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Nursing Facility Visit\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "14",
             "locator" : "19:1-19:104",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Office Visit",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "14",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Office Visit\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "15",
             "locator" : "20:1-20:107",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Ophthalmological Services",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "15",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Ophthalmological Services\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "16",
             "locator" : "21:1-21:115",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Outpatient Consultation",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "16",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Outpatient Consultation\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "17",
             "locator" : "22:1-22:96",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Patient Reason",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "17",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Patient Reason\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          } ]
       },
       "codes" : {
          "def" : [ {
-            "localId" : "19",
             "locator" : "24:1-24:62",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Birth date",
             "id" : "21112-8",
             "display" : "Birth date",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "19",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Birth date\"",": ","'21112-8'"," from " ]
-                  }, {
-                     "r" : "18",
-                     "s" : [ {
-                        "value" : [ "\"LOINC\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Birth date'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "18",
                "locator" : "24:35-24:41",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "LOINC"
             }
          }, {
-            "localId" : "21",
             "locator" : "25:1-25:119",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Healthcare professional (occupation)",
             "id" : "223366009",
             "display" : "Healthcare professional (occupation)",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "21",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Healthcare professional (occupation)\"",": ","'223366009'"," from " ]
-                  }, {
-                     "r" : "20",
-                     "s" : [ {
-                        "value" : [ "\"SNOMEDCT\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Healthcare professional (occupation)'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "20",
                "locator" : "25:63-25:72",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMEDCT"
             }
          }, {
-            "localId" : "23",
             "locator" : "26:1-26:117",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Macular edema absent (situation)",
             "id" : "428341000124108",
             "display" : "Macular edema absent (situation)",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "23",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Macular edema absent (situation)\"",": ","'428341000124108'"," from " ]
-                  }, {
-                     "r" : "22",
-                     "s" : [ {
-                        "value" : [ "\"SNOMEDCT\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Macular edema absent (situation)'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "22",
                "locator" : "26:65-26:74",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMEDCT"
             }
          }, {
-            "localId" : "25",
             "locator" : "27:1-27:113",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Medical practitioner (occupation)",
             "id" : "158965000",
             "display" : "Medical practitioner (occupation)",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "25",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Medical practitioner (occupation)\"",": ","'158965000'"," from " ]
-                  }, {
-                     "r" : "24",
-                     "s" : [ {
-                        "value" : [ "\"SNOMEDCT\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Medical practitioner (occupation)'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "24",
                "locator" : "27:60-27:69",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMEDCT"
             }
          }, {
-            "localId" : "27",
             "locator" : "28:1-28:103",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Ophthalmologist (occupation)",
             "id" : "422234006",
             "display" : "Ophthalmologist (occupation)",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "27",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Ophthalmologist (occupation)\"",": ","'422234006'"," from " ]
-                  }, {
-                     "r" : "26",
-                     "s" : [ {
-                        "value" : [ "\"SNOMEDCT\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Ophthalmologist (occupation)'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "26",
                "locator" : "28:55-28:64",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMEDCT"
             }
          }, {
-            "localId" : "29",
             "locator" : "29:1-29:94",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Optometrist (occupation)",
             "id" : "28229004",
             "display" : "Optometrist (occupation)",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "29",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Optometrist (occupation)\"",": ","'28229004'"," from " ]
-                  }, {
-                     "r" : "28",
-                     "s" : [ {
-                        "value" : [ "\"SNOMEDCT\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Optometrist (occupation)'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "28",
                "locator" : "29:50-29:59",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMEDCT"
             }
          }, {
-            "localId" : "31",
             "locator" : "30:1-30:91",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Physician (occupation)",
             "id" : "309343006",
             "display" : "Physician (occupation)",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "31",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Physician (occupation)\"",": ","'309343006'"," from " ]
-                  }, {
-                     "r" : "30",
-                     "s" : [ {
-                        "value" : [ "\"SNOMEDCT\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Physician (occupation)'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "30",
                "locator" : "30:49-30:58",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMEDCT"
@@ -627,35 +275,10 @@
                }
             }
          }, {
-            "localId" : "37",
             "locator" : "36:1-37:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "37",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Ethnicity\"",":\n  " ]
-                  }, {
-                     "r" : "36",
-                     "s" : [ {
-                        "r" : "35",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "36",
-                        "s" : [ {
-                           "value" : [ "\"SDE Ethnicity\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -664,7 +287,6 @@
                }
             },
             "expression" : {
-               "localId" : "36",
                "locator" : "37:3-37:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
@@ -678,35 +300,10 @@
                }
             }
          }, {
-            "localId" : "40",
             "locator" : "39:1-40:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "40",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Payer\"",":\n  " ]
-                  }, {
-                     "r" : "39",
-                     "s" : [ {
-                        "r" : "38",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "39",
-                        "s" : [ {
-                           "value" : [ "\"SDE Payer\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -727,7 +324,6 @@
                }
             },
             "expression" : {
-               "localId" : "39",
                "locator" : "40:3-40:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
@@ -753,35 +349,10 @@
                }
             }
          }, {
-            "localId" : "43",
             "locator" : "42:1-43:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "43",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Race\"",":\n  " ]
-                  }, {
-                     "r" : "42",
-                     "s" : [ {
-                        "r" : "41",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "42",
-                        "s" : [ {
-                           "value" : [ "\"SDE Race\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -790,7 +361,6 @@
                }
             },
             "expression" : {
-               "localId" : "42",
                "locator" : "43:3-43:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
@@ -804,38 +374,12 @@
                }
             }
          }, {
-            "localId" : "46",
             "locator" : "45:1-46:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "46",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Sex\"",":\n  " ]
-                  }, {
-                     "r" : "45",
-                     "s" : [ {
-                        "r" : "44",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "45",
-                        "s" : [ {
-                           "value" : [ "\"SDE Sex\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "45",
                "locator" : "46:3-46:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
@@ -843,175 +387,10 @@
                "type" : "ExpressionRef"
             }
          }, {
-            "localId" : "70",
             "locator" : "73:1-80:57",
             "name" : "Qualifying Encounter During Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "70",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Qualifying Encounter During Measurement Period\"",":\n  " ]
-                  }, {
-                     "r" : "69",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "59",
-                           "s" : [ {
-                              "r" : "58",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "58",
-                                 "s" : [ {
-                                    "r" : "56",
-                                    "s" : [ {
-                                       "r" : "53",
-                                       "s" : [ {
-                                          "r" : "51",
-                                          "s" : [ {
-                                             "r" : "49",
-                                             "s" : [ {
-                                                "value" : [ "[","\"Encounter\"",": " ]
-                                             }, {
-                                                "s" : [ {
-                                                   "value" : [ "\"Office Visit\"" ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "]" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "\n          union " ]
-                                          }, {
-                                             "r" : "50",
-                                             "s" : [ {
-                                                "value" : [ "[","\"Encounter\"",": " ]
-                                             }, {
-                                                "s" : [ {
-                                                   "value" : [ "\"Ophthalmological Services\"" ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "]" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n          union " ]
-                                       }, {
-                                          "r" : "52",
-                                          "s" : [ {
-                                             "value" : [ "[","\"Encounter\"",": " ]
-                                          }, {
-                                             "s" : [ {
-                                                "value" : [ "\"Outpatient Consultation\"" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "]" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "\n          union " ]
-                                    }, {
-                                       "r" : "54",
-                                       "s" : [ {
-                                          "value" : [ "[","\"Encounter\"",": " ]
-                                       }, {
-                                          "s" : [ {
-                                             "value" : [ "\"Care Services in Long-Term Residential Facility\"" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "]" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n          union " ]
-                                 }, {
-                                    "r" : "57",
-                                    "s" : [ {
-                                       "value" : [ "[","\"Encounter\"",": " ]
-                                    }, {
-                                       "s" : [ {
-                                          "value" : [ "\"Nursing Facility Visit\"" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "]" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " )" ]
-                              } ]
-                           }, {
-                              "value" : [ " ","QualifyingEncounter" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          " ]
-                     }, {
-                        "r" : "68",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "68",
-                           "s" : [ {
-                              "r" : "63",
-                              "s" : [ {
-                                 "r" : "61",
-                                 "s" : [ {
-                                    "r" : "60",
-                                    "s" : [ {
-                                       "value" : [ "QualifyingEncounter" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "61",
-                                    "s" : [ {
-                                       "value" : [ "period" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "r" : "63",
-                                 "value" : [ " ","during"," " ]
-                              }, {
-                                 "r" : "62",
-                                 "s" : [ {
-                                    "value" : [ "\"Measurement Period\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n              and " ]
-                           }, {
-                              "r" : "67",
-                              "s" : [ {
-                                 "r" : "65",
-                                 "s" : [ {
-                                    "r" : "64",
-                                    "s" : [ {
-                                       "value" : [ "QualifyingEncounter" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "65",
-                                    "s" : [ {
-                                       "value" : [ "status" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","="," " ]
-                              }, {
-                                 "r" : "66",
-                                 "s" : [ {
-                                    "value" : [ "'finished'" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -1020,7 +399,6 @@
                }
             },
             "expression" : {
-               "localId" : "69",
                "locator" : "74:3-80:57",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -1031,7 +409,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "59",
                   "locator" : "74:3-78:77",
                   "alias" : "QualifyingEncounter",
                   "resultTypeSpecifier" : {
@@ -1042,7 +419,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "58",
                      "locator" : "74:3-78:57",
                      "type" : "Union",
                      "resultTypeSpecifier" : {
@@ -1053,7 +429,6 @@
                         }
                      },
                      "operand" : [ {
-                        "localId" : "56",
                         "locator" : "74:5-77:80",
                         "type" : "Union",
                         "resultTypeSpecifier" : {
@@ -1064,7 +439,6 @@
                            }
                         },
                         "operand" : [ {
-                           "localId" : "51",
                            "locator" : "74:5-75:58",
                            "type" : "Union",
                            "resultTypeSpecifier" : {
@@ -1075,7 +449,6 @@
                               }
                            },
                            "operand" : [ {
-                              "localId" : "49",
                               "locator" : "74:5-74:33",
                               "dataType" : "{http://hl7.org/fhir}Encounter",
                               "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
@@ -1097,7 +470,6 @@
                                  "type" : "ValueSetRef"
                               }
                            }, {
-                              "localId" : "50",
                               "locator" : "75:17-75:58",
                               "dataType" : "{http://hl7.org/fhir}Encounter",
                               "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
@@ -1120,10 +492,8 @@
                               }
                            } ]
                         }, {
-                           "localId" : "55",
                            "type" : "Union",
                            "operand" : [ {
-                              "localId" : "52",
                               "locator" : "76:17-76:56",
                               "dataType" : "{http://hl7.org/fhir}Encounter",
                               "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
@@ -1145,7 +515,6 @@
                                  "type" : "ValueSetRef"
                               }
                            }, {
-                              "localId" : "54",
                               "locator" : "77:17-77:80",
                               "dataType" : "{http://hl7.org/fhir}Encounter",
                               "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
@@ -1169,7 +538,6 @@
                            } ]
                         } ]
                      }, {
-                        "localId" : "57",
                         "locator" : "78:17-78:55",
                         "dataType" : "{http://hl7.org/fhir}Encounter",
                         "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
@@ -1195,12 +563,10 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "68",
                   "locator" : "79:11-80:57",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "63",
                      "locator" : "79:17-79:70",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IncludedIn",
@@ -1209,7 +575,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "61",
                            "locator" : "79:17-79:42",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -1217,7 +582,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "62",
                         "locator" : "79:51-79:70",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
@@ -1230,7 +594,6 @@
                         }
                      } ]
                   }, {
-                     "localId" : "67",
                      "locator" : "80:19-80:57",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
@@ -1239,7 +602,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "65",
                            "locator" : "80:19-80:44",
                            "resultTypeName" : "{http://hl7.org/fhir}EncounterStatus",
                            "path" : "status",
@@ -1247,7 +609,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "66",
                         "locator" : "80:48-80:57",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -1258,148 +619,10 @@
                }
             }
          }, {
-            "localId" : "89",
             "locator" : "67:1-71:106",
             "name" : "Diabetic Retinopathy Encounter",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "89",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Diabetic Retinopathy Encounter\"",":\n  " ]
-                  }, {
-                     "r" : "88",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "72",
-                           "s" : [ {
-                              "r" : "71",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Qualifying Encounter During Measurement Period\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","ValidQualifyingEncounter" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          " ]
-                     }, {
-                        "r" : "87",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "74",
-                           "s" : [ {
-                              "r" : "73",
-                              "s" : [ {
-                                 "r" : "73",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Condition\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Diabetic Retinopathy\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","DiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n            such that " ]
-                        }, {
-                           "r" : "86",
-                           "s" : [ {
-                              "r" : "79",
-                              "s" : [ {
-                                 "r" : "76",
-                                 "s" : [ {
-                                    "r" : "75",
-                                    "s" : [ {
-                                       "value" : [ "DiabeticRetinopathy" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "76",
-                                    "s" : [ {
-                                       "value" : [ "clinicalStatus" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","~"," " ]
-                              }, {
-                                 "r" : "78",
-                                 "s" : [ {
-                                    "r" : "77",
-                                    "s" : [ {
-                                       "value" : [ "Global" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "78",
-                                    "s" : [ {
-                                       "value" : [ "\"active\"" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n              and " ]
-                           }, {
-                              "r" : "85",
-                              "s" : [ {
-                                 "r" : "82",
-                                 "s" : [ {
-                                    "r" : "80",
-                                    "s" : [ {
-                                       "value" : [ "Global" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "82",
-                                    "s" : [ {
-                                       "value" : [ "\"Prevalence Period\"","(" ]
-                                    }, {
-                                       "r" : "81",
-                                       "s" : [ {
-                                          "value" : [ "DiabeticRetinopathy" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "r" : "85",
-                                 "value" : [ " ","overlaps"," " ]
-                              }, {
-                                 "r" : "84",
-                                 "s" : [ {
-                                    "r" : "83",
-                                    "s" : [ {
-                                       "value" : [ "ValidQualifyingEncounter" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "84",
-                                    "s" : [ {
-                                       "value" : [ "period" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -1408,7 +631,6 @@
                }
             },
             "expression" : {
-               "localId" : "88",
                "locator" : "68:3-71:106",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -1419,7 +641,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "72",
                   "locator" : "68:3-68:75",
                   "alias" : "ValidQualifyingEncounter",
                   "resultTypeSpecifier" : {
@@ -1430,7 +651,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "71",
                      "locator" : "68:3-68:50",
                      "name" : "Qualifying Encounter During Measurement Period",
                      "type" : "ExpressionRef",
@@ -1444,7 +664,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "87",
                   "locator" : "69:11-71:106",
                   "alias" : "DiabeticRetinopathy",
                   "type" : "With",
@@ -1456,7 +675,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "73",
                      "locator" : "69:16-69:52",
                      "dataType" : "{http://hl7.org/fhir}Condition",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
@@ -1479,12 +697,10 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "86",
                      "locator" : "70:23-71:106",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "79",
                         "locator" : "70:23-70:74",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equivalent",
@@ -1493,7 +709,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "76",
                               "locator" : "70:23-70:56",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                               "path" : "clinicalStatus",
@@ -1503,7 +718,6 @@
                         }, {
                            "type" : "ToConcept",
                            "operand" : {
-                              "localId" : "78",
                               "locator" : "70:60-70:74",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                               "name" : "active",
@@ -1512,12 +726,10 @@
                            }
                         } ]
                      }, {
-                        "localId" : "85",
                         "locator" : "71:19-71:106",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Overlaps",
                         "operand" : [ {
-                           "localId" : "82",
                            "locator" : "71:19-71:65",
                            "name" : "Prevalence Period",
                            "libraryName" : "Global",
@@ -1530,7 +742,6 @@
                               }
                            },
                            "operand" : [ {
-                              "localId" : "81",
                               "locator" : "71:46-71:64",
                               "resultTypeName" : "{http://hl7.org/fhir}Condition",
                               "name" : "DiabeticRetinopathy",
@@ -1541,7 +752,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "84",
                               "locator" : "71:76-71:106",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
                               "path" : "period",
@@ -1554,116 +764,11 @@
                } ]
             }
          }, {
-            "localId" : "124",
             "locator" : "143:1-146:16",
             "name" : "GetModifierExtensions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "124",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"GetModifierExtensions\"","(","domainResource"," " ]
-                  }, {
-                     "r" : "111",
-                     "s" : [ {
-                        "value" : [ "DomainResource" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","url"," " ]
-                  }, {
-                     "r" : "112",
-                     "s" : [ {
-                        "value" : [ "String" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "123",
-                     "s" : [ {
-                        "r" : "123",
-                        "s" : [ {
-                           "s" : [ {
-                              "r" : "114",
-                              "s" : [ {
-                                 "r" : "113",
-                                 "s" : [ {
-                                    "s" : [ {
-                                       "value" : [ "domainResource",".","modifierExtension" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","E" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n      " ]
-                        }, {
-                           "r" : "120",
-                           "s" : [ {
-                              "value" : [ "where " ]
-                           }, {
-                              "r" : "120",
-                              "s" : [ {
-                                 "r" : "116",
-                                 "s" : [ {
-                                    "r" : "115",
-                                    "s" : [ {
-                                       "value" : [ "E" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "116",
-                                    "s" : [ {
-                                       "value" : [ "url" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","="," " ]
-                              }, {
-                                 "r" : "119",
-                                 "s" : [ {
-                                    "value" : [ "(" ]
-                                 }, {
-                                    "r" : "119",
-                                    "s" : [ {
-                                       "r" : "117",
-                                       "s" : [ {
-                                          "value" : [ "'http://hl7.org/fhir/us/qicore/StructureDefinition/'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " + " ]
-                                    }, {
-                                       "r" : "118",
-                                       "s" : [ {
-                                          "value" : [ "url" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n        " ]
-                        }, {
-                           "r" : "122",
-                           "s" : [ {
-                              "value" : [ "return " ]
-                           }, {
-                              "r" : "121",
-                              "s" : [ {
-                                 "value" : [ "E" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -1672,7 +777,6 @@
                }
             },
             "expression" : {
-               "localId" : "123",
                "locator" : "144:3-146:16",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -1683,7 +787,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "114",
                   "locator" : "144:3-144:36",
                   "alias" : "E",
                   "resultTypeSpecifier" : {
@@ -1694,7 +797,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "113",
                      "locator" : "144:3-144:34",
                      "path" : "modifierExtension",
                      "type" : "Property",
@@ -1713,7 +815,6 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "120",
                   "locator" : "145:7-145:80",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equal",
@@ -1722,7 +823,6 @@
                      "libraryName" : "FHIRHelpers",
                      "type" : "FunctionRef",
                      "operand" : [ {
-                        "localId" : "116",
                         "locator" : "145:13-145:17",
                         "resultTypeName" : "{http://hl7.org/fhir}uri",
                         "path" : "url",
@@ -1730,19 +830,16 @@
                         "type" : "Property"
                      } ]
                   }, {
-                     "localId" : "119",
                      "locator" : "145:21-145:80",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "type" : "Concatenate",
                      "operand" : [ {
-                        "localId" : "117",
                         "locator" : "145:22-145:73",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "http://hl7.org/fhir/us/qicore/StructureDefinition/",
                         "type" : "Literal"
                      }, {
-                        "localId" : "118",
                         "locator" : "145:77-145:79",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "name" : "url",
@@ -1751,7 +848,6 @@
                   } ]
                },
                "return" : {
-                  "localId" : "122",
                   "locator" : "146:9-146:16",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -1761,7 +857,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "121",
                      "locator" : "146:16",
                      "resultTypeName" : "{http://hl7.org/fhir}Extension",
                      "name" : "E",
@@ -1772,7 +867,6 @@
             "operand" : [ {
                "name" : "domainResource",
                "operandTypeSpecifier" : {
-                  "localId" : "111",
                   "locator" : "143:56-143:69",
                   "resultTypeName" : "{http://hl7.org/fhir}DomainResource",
                   "name" : "{http://hl7.org/fhir}DomainResource",
@@ -1781,7 +875,6 @@
             }, {
                "name" : "url",
                "operandTypeSpecifier" : {
-                  "localId" : "112",
                   "locator" : "143:76-143:81",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
@@ -1789,70 +882,17 @@
                }
             } ]
          }, {
-            "localId" : "127",
             "locator" : "148:1-149:61",
             "resultTypeName" : "{http://hl7.org/fhir}Extension",
             "name" : "GetModifierExtension",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "127",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"GetModifierExtension\"","(","domainResource"," " ]
-                  }, {
-                     "r" : "107",
-                     "s" : [ {
-                        "value" : [ "DomainResource" ]
-                     } ]
-                  }, {
-                     "value" : [ ", ","url"," " ]
-                  }, {
-                     "r" : "108",
-                     "s" : [ {
-                        "value" : [ "String" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "126",
-                     "s" : [ {
-                        "r" : "126",
-                        "s" : [ {
-                           "value" : [ "singleton from " ]
-                        }, {
-                           "r" : "125",
-                           "s" : [ {
-                              "value" : [ "\"GetModifierExtensions\"","(" ]
-                           }, {
-                              "r" : "109",
-                              "s" : [ {
-                                 "value" : [ "domainResource" ]
-                              } ]
-                           }, {
-                              "value" : [ ", " ]
-                           }, {
-                              "r" : "110",
-                              "s" : [ {
-                                 "value" : [ "url" ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "126",
                "locator" : "149:3-149:61",
                "resultTypeName" : "{http://hl7.org/fhir}Extension",
                "type" : "SingletonFrom",
                "operand" : {
-                  "localId" : "125",
                   "locator" : "149:18-149:61",
                   "name" : "GetModifierExtensions",
                   "type" : "FunctionRef",
@@ -1864,13 +904,11 @@
                      }
                   },
                   "operand" : [ {
-                     "localId" : "109",
                      "locator" : "149:42-149:55",
                      "resultTypeName" : "{http://hl7.org/fhir}DomainResource",
                      "name" : "domainResource",
                      "type" : "OperandRef"
                   }, {
-                     "localId" : "110",
                      "locator" : "149:58-149:60",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "name" : "url",
@@ -1881,7 +919,6 @@
             "operand" : [ {
                "name" : "domainResource",
                "operandTypeSpecifier" : {
-                  "localId" : "107",
                   "locator" : "148:55-148:68",
                   "resultTypeName" : "{http://hl7.org/fhir}DomainResource",
                   "name" : "{http://hl7.org/fhir}DomainResource",
@@ -1890,7 +927,6 @@
             }, {
                "name" : "url",
                "operandTypeSpecifier" : {
-                  "localId" : "108",
                   "locator" : "148:75-148:80",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                   "name" : "{urn:hl7-org:elm-types:r1}String",
@@ -1898,263 +934,10 @@
                }
             } ]
          }, {
-            "localId" : "143",
             "locator" : "105:1-113:7",
             "name" : "Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "143",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy\"",":\n  " ]
-                  }, {
-                     "r" : "142",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "48",
-                           "s" : [ {
-                              "r" : "47",
-                              "s" : [ {
-                                 "r" : "47",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Communication\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Level of Severity of Retinopathy Findings\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","LevelOfSeverityNotCommunicated" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "100",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "91",
-                           "s" : [ {
-                              "r" : "90",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","EncounterDiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n      such that " ]
-                        }, {
-                           "r" : "99",
-                           "s" : [ {
-                              "r" : "96",
-                              "s" : [ {
-                                 "r" : "95",
-                                 "s" : [ {
-                                    "r" : "92",
-                                    "s" : [ {
-                                       "value" : [ "Global" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "95",
-                                    "s" : [ {
-                                       "value" : [ "\"GetExtension\""," ( " ]
-                                    }, {
-                                       "r" : "93",
-                                       "s" : [ {
-                                          "value" : [ "LevelOfSeverityNotCommunicated" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "94",
-                                       "s" : [ {
-                                          "value" : [ "'qicore-recorded'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " )" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "96",
-                                 "s" : [ {
-                                    "value" : [ "value" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "99",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "98",
-                              "s" : [ {
-                                 "r" : "97",
-                                 "s" : [ {
-                                    "value" : [ "EncounterDiabeticRetinopathy" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "98",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "141",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "141",
-                           "s" : [ {
-                              "r" : "131",
-                              "s" : [ {
-                                 "r" : "104",
-                                 "s" : [ {
-                                    "r" : "102",
-                                    "s" : [ {
-                                       "r" : "101",
-                                       "s" : [ {
-                                          "value" : [ "LevelOfSeverityNotCommunicated" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "102",
-                                       "s" : [ {
-                                          "value" : [ "status" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " ","="," " ]
-                                 }, {
-                                    "r" : "103",
-                                    "s" : [ {
-                                       "value" : [ "'not-done'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      and " ]
-                              }, {
-                                 "r" : "130",
-                                 "s" : [ {
-                                    "r" : "129",
-                                    "s" : [ {
-                                       "r" : "128",
-                                       "s" : [ {
-                                          "value" : [ "\"GetModifierExtension\"","(" ]
-                                       }, {
-                                          "r" : "105",
-                                          "s" : [ {
-                                             "value" : [ "LevelOfSeverityNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ ", " ]
-                                       }, {
-                                          "r" : "106",
-                                          "s" : [ {
-                                             "value" : [ "'qicore-notDone'" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ ")" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "129",
-                                       "s" : [ {
-                                          "value" : [ "value" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " is true" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n      and " ]
-                           }, {
-                              "r" : "140",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "140",
-                                 "s" : [ {
-                                    "r" : "135",
-                                    "s" : [ {
-                                       "r" : "133",
-                                       "s" : [ {
-                                          "r" : "132",
-                                          "s" : [ {
-                                             "value" : [ "LevelOfSeverityNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "133",
-                                          "s" : [ {
-                                             "value" : [ "statusReason" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " in " ]
-                                    }, {
-                                       "r" : "134",
-                                       "s" : [ {
-                                          "value" : [ "\"Medical Reason\"" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n          or " ]
-                                 }, {
-                                    "r" : "139",
-                                    "s" : [ {
-                                       "r" : "137",
-                                       "s" : [ {
-                                          "r" : "136",
-                                          "s" : [ {
-                                             "value" : [ "LevelOfSeverityNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "137",
-                                          "s" : [ {
-                                             "value" : [ "statusReason" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " in " ]
-                                    }, {
-                                       "r" : "138",
-                                       "s" : [ {
-                                          "value" : [ "\"Patient Reason\"" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      )" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -2163,7 +946,6 @@
                }
             },
             "expression" : {
-               "localId" : "142",
                "locator" : "106:3-113:7",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -2174,7 +956,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "48",
                   "locator" : "106:3-106:95",
                   "alias" : "LevelOfSeverityNotCommunicated",
                   "resultTypeSpecifier" : {
@@ -2185,7 +966,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "47",
                      "locator" : "106:3-106:64",
                      "dataType" : "{http://hl7.org/fhir}Communication",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Communication",
@@ -2209,7 +989,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "100",
                   "locator" : "107:5-108:140",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
@@ -2221,7 +1000,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "90",
                      "locator" : "107:10-107:41",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -2234,7 +1012,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "99",
                      "locator" : "108:17-108:140",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IncludedIn",
@@ -2246,7 +1023,6 @@
                            "asType" : "{http://hl7.org/fhir}Period",
                            "type" : "As",
                            "operand" : {
-                              "localId" : "96",
                               "locator" : "108:17-108:97",
                               "path" : "value",
                               "type" : "Property",
@@ -2405,20 +1181,17 @@
                                  } ]
                               },
                               "source" : {
-                                 "localId" : "95",
                                  "locator" : "108:17-108:91",
                                  "resultTypeName" : "{http://hl7.org/fhir}Extension",
                                  "name" : "GetExtension",
                                  "libraryName" : "Global",
                                  "type" : "FunctionRef",
                                  "operand" : [ {
-                                    "localId" : "93",
                                     "locator" : "108:41-108:70",
                                     "resultTypeName" : "{http://hl7.org/fhir}Communication",
                                     "name" : "LevelOfSeverityNotCommunicated",
                                     "type" : "AliasRef"
                                  }, {
-                                    "localId" : "94",
                                     "locator" : "108:73-108:89",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -2433,7 +1206,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "98",
                            "locator" : "108:106-108:140",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -2444,17 +1216,14 @@
                   }
                } ],
                "where" : {
-                  "localId" : "141",
                   "locator" : "109:5-113:7",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "131",
                      "locator" : "109:11-110:96",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "104",
                         "locator" : "109:11-109:60",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
@@ -2463,7 +1232,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "102",
                               "locator" : "109:11-109:47",
                               "resultTypeName" : "{http://hl7.org/fhir}CommunicationStatus",
                               "path" : "status",
@@ -2471,7 +1239,6 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "localId" : "103",
                            "locator" : "109:51-109:60",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -2479,7 +1246,6 @@
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "130",
                         "locator" : "110:11-110:96",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IsTrue",
@@ -2491,7 +1257,6 @@
                               "asType" : "{http://hl7.org/fhir}boolean",
                               "type" : "As",
                               "operand" : {
-                                 "localId" : "129",
                                  "locator" : "110:11-110:88",
                                  "path" : "value",
                                  "type" : "Property",
@@ -2650,19 +1415,16 @@
                                     } ]
                                  },
                                  "source" : {
-                                    "localId" : "128",
                                     "locator" : "110:11-110:82",
                                     "resultTypeName" : "{http://hl7.org/fhir}Extension",
                                     "name" : "GetModifierExtension",
                                     "type" : "FunctionRef",
                                     "operand" : [ {
-                                       "localId" : "105",
                                        "locator" : "110:34-110:63",
                                        "resultTypeName" : "{http://hl7.org/fhir}Communication",
                                        "name" : "LevelOfSeverityNotCommunicated",
                                        "type" : "AliasRef"
                                     }, {
-                                       "localId" : "106",
                                        "locator" : "110:66-110:81",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -2675,12 +1437,10 @@
                         }
                      } ]
                   }, {
-                     "localId" : "140",
                      "locator" : "111:11-113:7",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "operand" : [ {
-                        "localId" : "135",
                         "locator" : "111:13-111:75",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
@@ -2689,7 +1449,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "133",
                               "locator" : "111:13-111:55",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                               "path" : "statusReason",
@@ -2698,14 +1457,12 @@
                            } ]
                         },
                         "valueset" : {
-                           "localId" : "134",
                            "locator" : "111:60-111:75",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Medical Reason",
                            "preserve" : true
                         }
                      }, {
-                        "localId" : "139",
                         "locator" : "112:14-112:76",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
@@ -2714,7 +1471,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "137",
                               "locator" : "112:14-112:56",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                               "path" : "statusReason",
@@ -2723,7 +1479,6 @@
                            } ]
                         },
                         "valueset" : {
-                           "localId" : "138",
                            "locator" : "112:61-112:76",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Patient Reason",
@@ -2734,263 +1489,10 @@
                }
             }
          }, {
-            "localId" : "180",
             "locator" : "95:1-103:7",
             "name" : "Medical or Patient Reason for Not Communicating Absence of Macular Edema",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "180",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Medical or Patient Reason for Not Communicating Absence of Macular Edema\"",":\n  " ]
-                  }, {
-                     "r" : "179",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "147",
-                           "s" : [ {
-                              "r" : "146",
-                              "s" : [ {
-                                 "r" : "146",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Communication\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Macular edema absent (situation)\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","MacularEdemaAbsentNotCommunicated" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "158",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "149",
-                           "s" : [ {
-                              "r" : "148",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","EncounterDiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n      such that " ]
-                        }, {
-                           "r" : "157",
-                           "s" : [ {
-                              "r" : "154",
-                              "s" : [ {
-                                 "r" : "153",
-                                 "s" : [ {
-                                    "r" : "150",
-                                    "s" : [ {
-                                       "value" : [ "Global" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "153",
-                                    "s" : [ {
-                                       "value" : [ "\"GetExtension\""," ( " ]
-                                    }, {
-                                       "r" : "151",
-                                       "s" : [ {
-                                          "value" : [ "MacularEdemaAbsentNotCommunicated" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "152",
-                                       "s" : [ {
-                                          "value" : [ "'qicore-recorded'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " )" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "154",
-                                 "s" : [ {
-                                    "value" : [ "value" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "157",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "156",
-                              "s" : [ {
-                                 "r" : "155",
-                                 "s" : [ {
-                                    "value" : [ "EncounterDiabeticRetinopathy" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "156",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "178",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "178",
-                           "s" : [ {
-                              "r" : "168",
-                              "s" : [ {
-                                 "r" : "162",
-                                 "s" : [ {
-                                    "r" : "160",
-                                    "s" : [ {
-                                       "r" : "159",
-                                       "s" : [ {
-                                          "value" : [ "MacularEdemaAbsentNotCommunicated" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "160",
-                                       "s" : [ {
-                                          "value" : [ "status" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " ","="," " ]
-                                 }, {
-                                    "r" : "161",
-                                    "s" : [ {
-                                       "value" : [ "'not-done'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      and " ]
-                              }, {
-                                 "r" : "167",
-                                 "s" : [ {
-                                    "r" : "166",
-                                    "s" : [ {
-                                       "r" : "165",
-                                       "s" : [ {
-                                          "value" : [ "\"GetModifierExtension\"","(" ]
-                                       }, {
-                                          "r" : "163",
-                                          "s" : [ {
-                                             "value" : [ "MacularEdemaAbsentNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ ", " ]
-                                       }, {
-                                          "r" : "164",
-                                          "s" : [ {
-                                             "value" : [ "'qicore-notDone'" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ ")" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "166",
-                                       "s" : [ {
-                                          "value" : [ "value" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " is true" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n      and " ]
-                           }, {
-                              "r" : "177",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "177",
-                                 "s" : [ {
-                                    "r" : "172",
-                                    "s" : [ {
-                                       "r" : "170",
-                                       "s" : [ {
-                                          "r" : "169",
-                                          "s" : [ {
-                                             "value" : [ "MacularEdemaAbsentNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "170",
-                                          "s" : [ {
-                                             "value" : [ "statusReason" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " in " ]
-                                    }, {
-                                       "r" : "171",
-                                       "s" : [ {
-                                          "value" : [ "\"Medical Reason\"" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n          or " ]
-                                 }, {
-                                    "r" : "176",
-                                    "s" : [ {
-                                       "r" : "174",
-                                       "s" : [ {
-                                          "r" : "173",
-                                          "s" : [ {
-                                             "value" : [ "MacularEdemaAbsentNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "174",
-                                          "s" : [ {
-                                             "value" : [ "statusReason" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " in " ]
-                                    }, {
-                                       "r" : "175",
-                                       "s" : [ {
-                                          "value" : [ "\"Patient Reason\"" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      )" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -2999,7 +1501,6 @@
                }
             },
             "expression" : {
-               "localId" : "179",
                "locator" : "96:3-103:7",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -3010,7 +1511,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "147",
                   "locator" : "96:3-96:89",
                   "alias" : "MacularEdemaAbsentNotCommunicated",
                   "resultTypeSpecifier" : {
@@ -3021,7 +1521,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "146",
                      "locator" : "96:3-96:55",
                      "dataType" : "{http://hl7.org/fhir}Communication",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Communication",
@@ -3047,7 +1546,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "158",
                   "locator" : "97:5-98:143",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
@@ -3059,7 +1557,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "148",
                      "locator" : "97:10-97:41",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -3072,7 +1569,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "157",
                      "locator" : "98:17-98:143",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IncludedIn",
@@ -3084,7 +1580,6 @@
                            "asType" : "{http://hl7.org/fhir}Period",
                            "type" : "As",
                            "operand" : {
-                              "localId" : "154",
                               "locator" : "98:17-98:100",
                               "path" : "value",
                               "type" : "Property",
@@ -3243,20 +1738,17 @@
                                  } ]
                               },
                               "source" : {
-                                 "localId" : "153",
                                  "locator" : "98:17-98:94",
                                  "resultTypeName" : "{http://hl7.org/fhir}Extension",
                                  "name" : "GetExtension",
                                  "libraryName" : "Global",
                                  "type" : "FunctionRef",
                                  "operand" : [ {
-                                    "localId" : "151",
                                     "locator" : "98:41-98:73",
                                     "resultTypeName" : "{http://hl7.org/fhir}Communication",
                                     "name" : "MacularEdemaAbsentNotCommunicated",
                                     "type" : "AliasRef"
                                  }, {
-                                    "localId" : "152",
                                     "locator" : "98:76-98:92",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -3271,7 +1763,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "156",
                            "locator" : "98:109-98:143",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -3282,17 +1773,14 @@
                   }
                } ],
                "where" : {
-                  "localId" : "178",
                   "locator" : "99:5-103:7",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "168",
                      "locator" : "99:11-100:99",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "162",
                         "locator" : "99:11-99:63",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
@@ -3301,7 +1789,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "160",
                               "locator" : "99:11-99:50",
                               "resultTypeName" : "{http://hl7.org/fhir}CommunicationStatus",
                               "path" : "status",
@@ -3309,7 +1796,6 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "localId" : "161",
                            "locator" : "99:54-99:63",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -3317,7 +1803,6 @@
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "167",
                         "locator" : "100:11-100:99",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IsTrue",
@@ -3329,7 +1814,6 @@
                               "asType" : "{http://hl7.org/fhir}boolean",
                               "type" : "As",
                               "operand" : {
-                                 "localId" : "166",
                                  "locator" : "100:11-100:91",
                                  "path" : "value",
                                  "type" : "Property",
@@ -3488,19 +1972,16 @@
                                     } ]
                                  },
                                  "source" : {
-                                    "localId" : "165",
                                     "locator" : "100:11-100:85",
                                     "resultTypeName" : "{http://hl7.org/fhir}Extension",
                                     "name" : "GetModifierExtension",
                                     "type" : "FunctionRef",
                                     "operand" : [ {
-                                       "localId" : "163",
                                        "locator" : "100:34-100:66",
                                        "resultTypeName" : "{http://hl7.org/fhir}Communication",
                                        "name" : "MacularEdemaAbsentNotCommunicated",
                                        "type" : "AliasRef"
                                     }, {
-                                       "localId" : "164",
                                        "locator" : "100:69-100:84",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -3513,12 +1994,10 @@
                         }
                      } ]
                   }, {
-                     "localId" : "177",
                      "locator" : "101:11-103:7",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "operand" : [ {
-                        "localId" : "172",
                         "locator" : "101:13-101:78",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
@@ -3527,7 +2006,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "170",
                               "locator" : "101:13-101:58",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                               "path" : "statusReason",
@@ -3536,14 +2014,12 @@
                            } ]
                         },
                         "valueset" : {
-                           "localId" : "171",
                            "locator" : "101:63-101:78",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Medical Reason",
                            "preserve" : true
                         }
                      }, {
-                        "localId" : "176",
                         "locator" : "102:14-102:79",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
@@ -3552,7 +2028,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "174",
                               "locator" : "102:14-102:59",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                               "path" : "statusReason",
@@ -3561,7 +2036,6 @@
                            } ]
                         },
                         "valueset" : {
-                           "localId" : "175",
                            "locator" : "102:64-102:79",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Patient Reason",
@@ -3572,263 +2046,10 @@
                }
             }
          }, {
-            "localId" : "218",
             "locator" : "115:1-123:7",
             "name" : "Medical or Patient Reason for Not Communicating Presence of Macular Edema",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "218",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Medical or Patient Reason for Not Communicating Presence of Macular Edema\"",":\n  " ]
-                  }, {
-                     "r" : "217",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "185",
-                           "s" : [ {
-                              "r" : "184",
-                              "s" : [ {
-                                 "r" : "184",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Communication\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Macular Edema Findings Present\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","MacularEdemaPresentNotCommunicated" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "196",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "187",
-                           "s" : [ {
-                              "r" : "186",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","EncounterDiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n      such that " ]
-                        }, {
-                           "r" : "195",
-                           "s" : [ {
-                              "r" : "192",
-                              "s" : [ {
-                                 "r" : "191",
-                                 "s" : [ {
-                                    "r" : "188",
-                                    "s" : [ {
-                                       "value" : [ "Global" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "191",
-                                    "s" : [ {
-                                       "value" : [ "\"GetExtension\""," ( " ]
-                                    }, {
-                                       "r" : "189",
-                                       "s" : [ {
-                                          "value" : [ "MacularEdemaPresentNotCommunicated" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "190",
-                                       "s" : [ {
-                                          "value" : [ "'qicore-recorded'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " )" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "192",
-                                 "s" : [ {
-                                    "value" : [ "value" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "195",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "194",
-                              "s" : [ {
-                                 "r" : "193",
-                                 "s" : [ {
-                                    "value" : [ "EncounterDiabeticRetinopathy" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "194",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "216",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "216",
-                           "s" : [ {
-                              "r" : "206",
-                              "s" : [ {
-                                 "r" : "200",
-                                 "s" : [ {
-                                    "r" : "198",
-                                    "s" : [ {
-                                       "r" : "197",
-                                       "s" : [ {
-                                          "value" : [ "MacularEdemaPresentNotCommunicated" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "198",
-                                       "s" : [ {
-                                          "value" : [ "status" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " ","="," " ]
-                                 }, {
-                                    "r" : "199",
-                                    "s" : [ {
-                                       "value" : [ "'not-done'" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      and " ]
-                              }, {
-                                 "r" : "205",
-                                 "s" : [ {
-                                    "r" : "204",
-                                    "s" : [ {
-                                       "r" : "203",
-                                       "s" : [ {
-                                          "value" : [ "\"GetModifierExtension\"","(" ]
-                                       }, {
-                                          "r" : "201",
-                                          "s" : [ {
-                                             "value" : [ "MacularEdemaPresentNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ ", " ]
-                                       }, {
-                                          "r" : "202",
-                                          "s" : [ {
-                                             "value" : [ "'qicore-notDone'" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ ")" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "204",
-                                       "s" : [ {
-                                          "value" : [ "value" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " is true" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n      and " ]
-                           }, {
-                              "r" : "215",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "215",
-                                 "s" : [ {
-                                    "r" : "210",
-                                    "s" : [ {
-                                       "r" : "208",
-                                       "s" : [ {
-                                          "r" : "207",
-                                          "s" : [ {
-                                             "value" : [ "MacularEdemaPresentNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "208",
-                                          "s" : [ {
-                                             "value" : [ "statusReason" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " in " ]
-                                    }, {
-                                       "r" : "209",
-                                       "s" : [ {
-                                          "value" : [ "\"Medical Reason\"" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n          or " ]
-                                 }, {
-                                    "r" : "214",
-                                    "s" : [ {
-                                       "r" : "212",
-                                       "s" : [ {
-                                          "r" : "211",
-                                          "s" : [ {
-                                             "value" : [ "MacularEdemaPresentNotCommunicated" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "212",
-                                          "s" : [ {
-                                             "value" : [ "statusReason" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " in " ]
-                                    }, {
-                                       "r" : "213",
-                                       "s" : [ {
-                                          "value" : [ "\"Patient Reason\"" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      )" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -3837,7 +2058,6 @@
                }
             },
             "expression" : {
-               "localId" : "217",
                "locator" : "116:3-123:7",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -3848,7 +2068,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "185",
                   "locator" : "116:3-116:88",
                   "alias" : "MacularEdemaPresentNotCommunicated",
                   "resultTypeSpecifier" : {
@@ -3859,7 +2078,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "184",
                      "locator" : "116:3-116:53",
                      "dataType" : "{http://hl7.org/fhir}Communication",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Communication",
@@ -3883,7 +2101,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "196",
                   "locator" : "117:5-118:144",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
@@ -3895,7 +2112,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "186",
                      "locator" : "117:10-117:41",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -3908,7 +2124,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "195",
                      "locator" : "118:17-118:144",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IncludedIn",
@@ -3920,7 +2135,6 @@
                            "asType" : "{http://hl7.org/fhir}Period",
                            "type" : "As",
                            "operand" : {
-                              "localId" : "192",
                               "locator" : "118:17-118:101",
                               "path" : "value",
                               "type" : "Property",
@@ -4079,20 +2293,17 @@
                                  } ]
                               },
                               "source" : {
-                                 "localId" : "191",
                                  "locator" : "118:17-118:95",
                                  "resultTypeName" : "{http://hl7.org/fhir}Extension",
                                  "name" : "GetExtension",
                                  "libraryName" : "Global",
                                  "type" : "FunctionRef",
                                  "operand" : [ {
-                                    "localId" : "189",
                                     "locator" : "118:41-118:74",
                                     "resultTypeName" : "{http://hl7.org/fhir}Communication",
                                     "name" : "MacularEdemaPresentNotCommunicated",
                                     "type" : "AliasRef"
                                  }, {
-                                    "localId" : "190",
                                     "locator" : "118:77-118:93",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -4107,7 +2318,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "194",
                            "locator" : "118:110-118:144",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -4118,17 +2328,14 @@
                   }
                } ],
                "where" : {
-                  "localId" : "216",
                   "locator" : "119:5-123:7",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "206",
                      "locator" : "119:11-120:100",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "200",
                         "locator" : "119:11-119:64",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
@@ -4137,7 +2344,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "198",
                               "locator" : "119:11-119:51",
                               "resultTypeName" : "{http://hl7.org/fhir}CommunicationStatus",
                               "path" : "status",
@@ -4145,7 +2351,6 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "localId" : "199",
                            "locator" : "119:55-119:64",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -4153,7 +2358,6 @@
                            "type" : "Literal"
                         } ]
                      }, {
-                        "localId" : "205",
                         "locator" : "120:11-120:100",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IsTrue",
@@ -4165,7 +2369,6 @@
                               "asType" : "{http://hl7.org/fhir}boolean",
                               "type" : "As",
                               "operand" : {
-                                 "localId" : "204",
                                  "locator" : "120:11-120:92",
                                  "path" : "value",
                                  "type" : "Property",
@@ -4324,19 +2527,16 @@
                                     } ]
                                  },
                                  "source" : {
-                                    "localId" : "203",
                                     "locator" : "120:11-120:86",
                                     "resultTypeName" : "{http://hl7.org/fhir}Extension",
                                     "name" : "GetModifierExtension",
                                     "type" : "FunctionRef",
                                     "operand" : [ {
-                                       "localId" : "201",
                                        "locator" : "120:34-120:67",
                                        "resultTypeName" : "{http://hl7.org/fhir}Communication",
                                        "name" : "MacularEdemaPresentNotCommunicated",
                                        "type" : "AliasRef"
                                     }, {
-                                       "localId" : "202",
                                        "locator" : "120:70-120:85",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -4349,12 +2549,10 @@
                         }
                      } ]
                   }, {
-                     "localId" : "215",
                      "locator" : "121:11-123:7",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "operand" : [ {
-                        "localId" : "210",
                         "locator" : "121:13-121:79",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
@@ -4363,7 +2561,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "208",
                               "locator" : "121:13-121:59",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                               "path" : "statusReason",
@@ -4372,14 +2569,12 @@
                            } ]
                         },
                         "valueset" : {
-                           "localId" : "209",
                            "locator" : "121:64-121:79",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Medical Reason",
                            "preserve" : true
                         }
                      }, {
-                        "localId" : "214",
                         "locator" : "122:14-122:80",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
@@ -4388,7 +2583,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "212",
                               "locator" : "122:14-122:60",
                               "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                               "path" : "statusReason",
@@ -4397,7 +2591,6 @@
                            } ]
                         },
                         "valueset" : {
-                           "localId" : "213",
                            "locator" : "122:65-122:80",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Patient Reason",
@@ -4408,78 +2601,24 @@
                }
             }
          }, {
-            "localId" : "222",
             "locator" : "48:1-51:95",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator Exceptions",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "222",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Denominator Exceptions\"",":\n  " ]
-                  }, {
-                     "r" : "221",
-                     "s" : [ {
-                        "r" : "183",
-                        "s" : [ {
-                           "r" : "145",
-                           "s" : [ {
-                              "value" : [ "exists " ]
-                           }, {
-                              "r" : "144",
-                              "s" : [ {
-                                 "value" : [ "\"Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy\"" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n          or " ]
-                        }, {
-                           "r" : "182",
-                           "s" : [ {
-                              "value" : [ "exists " ]
-                           }, {
-                              "r" : "181",
-                              "s" : [ {
-                                 "value" : [ "\"Medical or Patient Reason for Not Communicating Absence of Macular Edema\"" ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          or " ]
-                     }, {
-                        "r" : "220",
-                        "s" : [ {
-                           "value" : [ "exists " ]
-                        }, {
-                           "r" : "219",
-                           "s" : [ {
-                              "value" : [ "\"Medical or Patient Reason for Not Communicating Presence of Macular Edema\"" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "221",
                "locator" : "49:3-51:95",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "operand" : [ {
-                  "localId" : "183",
                   "locator" : "49:3-50:94",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "operand" : [ {
-                     "localId" : "145",
                      "locator" : "49:3-49:91",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "144",
                         "locator" : "49:10-49:91",
                         "name" : "Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy",
                         "type" : "ExpressionRef",
@@ -4492,12 +2631,10 @@
                         }
                      }
                   }, {
-                     "localId" : "182",
                      "locator" : "50:14-50:94",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "181",
                         "locator" : "50:21-50:94",
                         "name" : "Medical or Patient Reason for Not Communicating Absence of Macular Edema",
                         "type" : "ExpressionRef",
@@ -4511,12 +2648,10 @@
                      }
                   } ]
                }, {
-                  "localId" : "220",
                   "locator" : "51:14-51:95",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "operand" : {
-                     "localId" : "219",
                      "locator" : "51:21-51:95",
                      "name" : "Medical or Patient Reason for Not Communicating Presence of Macular Edema",
                      "type" : "ExpressionRef",
@@ -4531,71 +2666,20 @@
                } ]
             }
          }, {
-            "localId" : "231",
             "locator" : "63:1-65:53",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "231",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Initial Population\"",":\n  " ]
-                  }, {
-                     "r" : "230",
-                     "s" : [ {
-                        "r" : "227",
-                        "s" : [ {
-                           "r" : "225",
-                           "s" : [ {
-                              "value" : [ "AgeInYearsAt"," (" ]
-                           }, {
-                              "r" : "224",
-                              "s" : [ {
-                                 "value" : [ "start of " ]
-                              }, {
-                                 "r" : "223",
-                                 "s" : [ {
-                                    "value" : [ "\"Measurement Period\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
-                           } ]
-                        }, {
-                           "r" : "226",
-                           "value" : [ " ",">="," ","18" ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          and " ]
-                     }, {
-                        "r" : "229",
-                        "s" : [ {
-                           "value" : [ "exists " ]
-                        }, {
-                           "r" : "228",
-                           "s" : [ {
-                              "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "230",
                "locator" : "64:3-65:53",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "operand" : [ {
-                  "localId" : "227",
                   "locator" : "64:3-64:52",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "GreaterOrEqual",
                   "operand" : [ {
-                     "localId" : "225",
                      "locator" : "64:3-64:46",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "precision" : "Year",
@@ -4611,12 +2695,10 @@
                            }
                         }
                      }, {
-                        "localId" : "224",
                         "locator" : "64:17-64:45",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "operand" : {
-                           "localId" : "223",
                            "locator" : "64:26-64:45",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
@@ -4630,7 +2712,6 @@
                         }
                      } ]
                   }, {
-                     "localId" : "226",
                      "locator" : "64:51-64:52",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
@@ -4638,12 +2719,10 @@
                      "type" : "Literal"
                   } ]
                }, {
-                  "localId" : "229",
                   "locator" : "65:15-65:53",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "operand" : {
-                     "localId" : "228",
                      "locator" : "65:22-65:53",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -4658,196 +2737,10 @@
                } ]
             }
          }, {
-            "localId" : "257",
             "locator" : "88:1-93:47",
             "name" : "Macular Exam Performed",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "257",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Macular Exam Performed\"",":\n  " ]
-                  }, {
-                     "r" : "256",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "234",
-                           "s" : [ {
-                              "r" : "233",
-                              "s" : [ {
-                                 "r" : "233",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Observation\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Macular Exam\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","MacularExam" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          " ]
-                     }, {
-                        "r" : "244",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "236",
-                           "s" : [ {
-                              "r" : "235",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","EncounterDiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n            such that " ]
-                        }, {
-                           "r" : "243",
-                           "s" : [ {
-                              "r" : "240",
-                              "s" : [ {
-                                 "r" : "237",
-                                 "s" : [ {
-                                    "value" : [ "Global" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "240",
-                                 "s" : [ {
-                                    "value" : [ "\"Normalize Interval\""," (" ]
-                                 }, {
-                                    "r" : "239",
-                                    "s" : [ {
-                                       "r" : "238",
-                                       "s" : [ {
-                                          "value" : [ "MacularExam" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "239",
-                                       "s" : [ {
-                                          "value" : [ "effective" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "243",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "242",
-                              "s" : [ {
-                                 "r" : "241",
-                                 "s" : [ {
-                                    "value" : [ "EncounterDiabeticRetinopathy" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "242",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          " ]
-                     }, {
-                        "r" : "255",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "255",
-                           "s" : [ {
-                              "r" : "251",
-                              "s" : [ {
-                                 "r" : "246",
-                                 "s" : [ {
-                                    "r" : "245",
-                                    "s" : [ {
-                                       "value" : [ "MacularExam" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "246",
-                                    "s" : [ {
-                                       "value" : [ "status" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " in " ]
-                              }, {
-                                 "r" : "250",
-                                 "s" : [ {
-                                    "value" : [ "{" ]
-                                 }, {
-                                    "r" : "247",
-                                    "s" : [ {
-                                       "value" : [ "'final'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "248",
-                                    "s" : [ {
-                                       "value" : [ "'amended'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ", " ]
-                                 }, {
-                                    "r" : "249",
-                                    "s" : [ {
-                                       "value" : [ "'corrected'" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "}" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n              and " ]
-                           }, {
-                              "r" : "254",
-                              "s" : [ {
-                                 "r" : "253",
-                                 "s" : [ {
-                                    "r" : "252",
-                                    "s" : [ {
-                                       "value" : [ "MacularExam" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "253",
-                                    "s" : [ {
-                                       "value" : [ "value" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " is not null" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -4856,7 +2749,6 @@
                }
             },
             "expression" : {
-               "localId" : "256",
                "locator" : "89:3-93:47",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -4867,7 +2759,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "234",
                   "locator" : "89:3-89:45",
                   "alias" : "MacularExam",
                   "resultTypeSpecifier" : {
@@ -4878,7 +2769,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "233",
                      "locator" : "89:3-89:33",
                      "dataType" : "{http://hl7.org/fhir}Observation",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
@@ -4902,7 +2792,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "244",
                   "locator" : "90:11-91:116",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
@@ -4914,7 +2803,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "235",
                      "locator" : "90:16-90:47",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -4927,12 +2815,10 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "243",
                      "locator" : "91:23-91:116",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "IncludedIn",
                      "operand" : [ {
-                        "localId" : "240",
                         "locator" : "91:23-91:73",
                         "name" : "Normalize Interval",
                         "libraryName" : "Global",
@@ -4945,7 +2831,6 @@
                            }
                         },
                         "operand" : [ {
-                           "localId" : "239",
                            "locator" : "91:52-91:72",
                            "path" : "effective",
                            "scope" : "MacularExam",
@@ -4972,7 +2857,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "242",
                            "locator" : "91:82-91:116",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -4983,12 +2867,10 @@
                   }
                } ],
                "where" : {
-                  "localId" : "255",
                   "locator" : "92:11-93:47",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "251",
                      "locator" : "92:17-92:71",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
@@ -4997,7 +2879,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "246",
                            "locator" : "92:17-92:34",
                            "resultTypeName" : "{http://hl7.org/fhir}ObservationStatus",
                            "path" : "status",
@@ -5005,7 +2886,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "250",
                         "locator" : "92:39-92:71",
                         "type" : "List",
                         "resultTypeSpecifier" : {
@@ -5016,21 +2896,18 @@
                            }
                         },
                         "element" : [ {
-                           "localId" : "247",
                            "locator" : "92:40-92:46",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "final",
                            "type" : "Literal"
                         }, {
-                           "localId" : "248",
                            "locator" : "92:49-92:57",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "amended",
                            "type" : "Literal"
                         }, {
-                           "localId" : "249",
                            "locator" : "92:60-92:70",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -5039,7 +2916,6 @@
                         } ]
                      } ]
                   }, {
-                     "localId" : "254",
                      "locator" : "93:19-93:47",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Not",
@@ -5048,7 +2924,6 @@
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IsNull",
                         "operand" : {
-                           "localId" : "253",
                            "locator" : "93:19-93:35",
                            "path" : "value",
                            "scope" : "MacularExam",
@@ -5096,59 +2971,25 @@
                }
             }
          }, {
-            "localId" : "261",
             "locator" : "53:1-55:45",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "261",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Denominator\"",":\n  " ]
-                  }, {
-                     "r" : "260",
-                     "s" : [ {
-                        "r" : "232",
-                        "s" : [ {
-                           "value" : [ "\"Initial Population\"" ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          and " ]
-                     }, {
-                        "r" : "259",
-                        "s" : [ {
-                           "value" : [ "exists " ]
-                        }, {
-                           "r" : "258",
-                           "s" : [ {
-                              "value" : [ "\"Macular Exam Performed\"" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "260",
                "locator" : "54:3-55:45",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "operand" : [ {
-                  "localId" : "232",
                   "locator" : "54:3-54:22",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Initial Population",
                   "type" : "ExpressionRef"
                }, {
-                  "localId" : "259",
                   "locator" : "55:15-55:45",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "operand" : {
-                     "localId" : "258",
                      "locator" : "55:22-55:45",
                      "name" : "Macular Exam Performed",
                      "type" : "ExpressionRef",
@@ -5163,138 +3004,10 @@
                } ]
             }
          }, {
-            "localId" : "278",
             "locator" : "125:1-129:58",
             "name" : "Level of Severity of Retinopathy Findings Communicated",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "278",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Level of Severity of Retinopathy Findings Communicated\"",":\n  " ]
-                  }, {
-                     "r" : "277",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "263",
-                           "s" : [ {
-                              "r" : "262",
-                              "s" : [ {
-                                 "r" : "262",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Communication\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Level of Severity of Retinopathy Findings\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","LevelOfSeverityCommunicated" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "272",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "265",
-                           "s" : [ {
-                              "r" : "264",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","EncounterDiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n      such that " ]
-                        }, {
-                           "r" : "271",
-                           "s" : [ {
-                              "r" : "267",
-                              "s" : [ {
-                                 "r" : "266",
-                                 "s" : [ {
-                                    "value" : [ "LevelOfSeverityCommunicated" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "267",
-                                 "s" : [ {
-                                    "value" : [ "sent" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "271",
-                              "value" : [ " ","after"," " ]
-                           }, {
-                              "r" : "270",
-                              "s" : [ {
-                                 "value" : [ "start of " ]
-                              }, {
-                                 "r" : "269",
-                                 "s" : [ {
-                                    "r" : "268",
-                                    "s" : [ {
-                                       "value" : [ "EncounterDiabeticRetinopathy" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "269",
-                                    "s" : [ {
-                                       "value" : [ "period" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "276",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "276",
-                           "s" : [ {
-                              "r" : "274",
-                              "s" : [ {
-                                 "r" : "273",
-                                 "s" : [ {
-                                    "value" : [ "LevelOfSeverityCommunicated" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "274",
-                                 "s" : [ {
-                                    "value" : [ "status" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","="," " ]
-                           }, {
-                              "r" : "275",
-                              "s" : [ {
-                                 "value" : [ "'completed'" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -5303,7 +3016,6 @@
                }
             },
             "expression" : {
-               "localId" : "277",
                "locator" : "126:3-129:58",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -5314,7 +3026,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "263",
                   "locator" : "126:3-126:92",
                   "alias" : "LevelOfSeverityCommunicated",
                   "resultTypeSpecifier" : {
@@ -5325,7 +3036,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "262",
                      "locator" : "126:3-126:64",
                      "dataType" : "{http://hl7.org/fhir}Communication",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Communication",
@@ -5349,7 +3059,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "272",
                   "locator" : "127:5-128:99",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
@@ -5361,7 +3070,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "264",
                      "locator" : "127:10-127:41",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -5374,7 +3082,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "271",
                      "locator" : "128:17-128:99",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "After",
@@ -5383,7 +3090,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "267",
                            "locator" : "128:17-128:48",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "path" : "sent",
@@ -5391,7 +3097,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "270",
                         "locator" : "128:56-128:99",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
@@ -5400,7 +3105,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "269",
                               "locator" : "128:65-128:99",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
                               "path" : "period",
@@ -5412,7 +3116,6 @@
                   }
                } ],
                "where" : {
-                  "localId" : "276",
                   "locator" : "129:5-129:58",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equal",
@@ -5421,7 +3124,6 @@
                      "libraryName" : "FHIRHelpers",
                      "type" : "FunctionRef",
                      "operand" : [ {
-                        "localId" : "274",
                         "locator" : "129:11-129:44",
                         "resultTypeName" : "{http://hl7.org/fhir}CommunicationStatus",
                         "path" : "status",
@@ -5429,7 +3131,6 @@
                         "type" : "Property"
                      } ]
                   }, {
-                     "localId" : "275",
                      "locator" : "129:48-129:58",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -5439,138 +3140,10 @@
                }
             }
          }, {
-            "localId" : "297",
             "locator" : "131:1-135:61",
             "name" : "Macular Edema Absence Communicated",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "297",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Macular Edema Absence Communicated\"",":\n  " ]
-                  }, {
-                     "r" : "296",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "282",
-                           "s" : [ {
-                              "r" : "281",
-                              "s" : [ {
-                                 "r" : "281",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Communication\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Macular edema absent (situation)\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","MacularEdemaAbsentCommunicated" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "291",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "284",
-                           "s" : [ {
-                              "r" : "283",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","EncounterDiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n      such that " ]
-                        }, {
-                           "r" : "290",
-                           "s" : [ {
-                              "r" : "286",
-                              "s" : [ {
-                                 "r" : "285",
-                                 "s" : [ {
-                                    "value" : [ "MacularEdemaAbsentCommunicated" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "286",
-                                 "s" : [ {
-                                    "value" : [ "sent" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "290",
-                              "value" : [ " ","after"," " ]
-                           }, {
-                              "r" : "289",
-                              "s" : [ {
-                                 "value" : [ "start of " ]
-                              }, {
-                                 "r" : "288",
-                                 "s" : [ {
-                                    "r" : "287",
-                                    "s" : [ {
-                                       "value" : [ "EncounterDiabeticRetinopathy" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "288",
-                                    "s" : [ {
-                                       "value" : [ "period" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "295",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "295",
-                           "s" : [ {
-                              "r" : "293",
-                              "s" : [ {
-                                 "r" : "292",
-                                 "s" : [ {
-                                    "value" : [ "MacularEdemaAbsentCommunicated" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "293",
-                                 "s" : [ {
-                                    "value" : [ "status" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","="," " ]
-                           }, {
-                              "r" : "294",
-                              "s" : [ {
-                                 "value" : [ "'completed'" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -5579,7 +3152,6 @@
                }
             },
             "expression" : {
-               "localId" : "296",
                "locator" : "132:3-135:61",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -5590,7 +3162,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "282",
                   "locator" : "132:3-132:86",
                   "alias" : "MacularEdemaAbsentCommunicated",
                   "resultTypeSpecifier" : {
@@ -5601,7 +3172,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "281",
                      "locator" : "132:3-132:55",
                      "dataType" : "{http://hl7.org/fhir}Communication",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Communication",
@@ -5627,7 +3197,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "291",
                   "locator" : "133:5-134:102",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
@@ -5639,7 +3208,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "283",
                      "locator" : "133:10-133:41",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -5652,7 +3220,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "290",
                      "locator" : "134:17-134:102",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "After",
@@ -5661,7 +3228,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "286",
                            "locator" : "134:17-134:51",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "path" : "sent",
@@ -5669,7 +3235,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "289",
                         "locator" : "134:59-134:102",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
@@ -5678,7 +3243,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "288",
                               "locator" : "134:68-134:102",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
                               "path" : "period",
@@ -5690,7 +3254,6 @@
                   }
                } ],
                "where" : {
-                  "localId" : "295",
                   "locator" : "135:5-135:61",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equal",
@@ -5699,7 +3262,6 @@
                      "libraryName" : "FHIRHelpers",
                      "type" : "FunctionRef",
                      "operand" : [ {
-                        "localId" : "293",
                         "locator" : "135:11-135:47",
                         "resultTypeName" : "{http://hl7.org/fhir}CommunicationStatus",
                         "path" : "status",
@@ -5707,7 +3269,6 @@
                         "type" : "Property"
                      } ]
                   }, {
-                     "localId" : "294",
                      "locator" : "135:51-135:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -5717,138 +3278,10 @@
                }
             }
          }, {
-            "localId" : "316",
             "locator" : "137:1-141:62",
             "name" : "Macular Edema Presence Communicated",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "316",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Macular Edema Presence Communicated\"",":\n  " ]
-                  }, {
-                     "r" : "315",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "301",
-                           "s" : [ {
-                              "r" : "300",
-                              "s" : [ {
-                                 "r" : "300",
-                                 "s" : [ {
-                                    "value" : [ "[","\"Communication\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Macular Edema Findings Present\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","MacularEdemaPresentCommunicated" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "310",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "303",
-                           "s" : [ {
-                              "r" : "302",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Diabetic Retinopathy Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","EncounterDiabeticRetinopathy" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n      such that " ]
-                        }, {
-                           "r" : "309",
-                           "s" : [ {
-                              "r" : "305",
-                              "s" : [ {
-                                 "r" : "304",
-                                 "s" : [ {
-                                    "value" : [ "MacularEdemaPresentCommunicated" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "305",
-                                 "s" : [ {
-                                    "value" : [ "sent" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "309",
-                              "value" : [ " ","after"," " ]
-                           }, {
-                              "r" : "308",
-                              "s" : [ {
-                                 "value" : [ "start of " ]
-                              }, {
-                                 "r" : "307",
-                                 "s" : [ {
-                                    "r" : "306",
-                                    "s" : [ {
-                                       "value" : [ "EncounterDiabeticRetinopathy" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "307",
-                                    "s" : [ {
-                                       "value" : [ "period" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "314",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "314",
-                           "s" : [ {
-                              "r" : "312",
-                              "s" : [ {
-                                 "r" : "311",
-                                 "s" : [ {
-                                    "value" : [ "MacularEdemaPresentCommunicated" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "312",
-                                 "s" : [ {
-                                    "value" : [ "status" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","="," " ]
-                           }, {
-                              "r" : "313",
-                              "s" : [ {
-                                 "value" : [ "'completed'" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -5857,7 +3290,6 @@
                }
             },
             "expression" : {
-               "localId" : "315",
                "locator" : "138:3-141:62",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -5868,7 +3300,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "301",
                   "locator" : "138:3-138:85",
                   "alias" : "MacularEdemaPresentCommunicated",
                   "resultTypeSpecifier" : {
@@ -5879,7 +3310,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "300",
                      "locator" : "138:3-138:53",
                      "dataType" : "{http://hl7.org/fhir}Communication",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Communication",
@@ -5903,7 +3333,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "310",
                   "locator" : "139:5-140:103",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
@@ -5915,7 +3344,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "302",
                      "locator" : "139:10-139:41",
                      "name" : "Diabetic Retinopathy Encounter",
                      "type" : "ExpressionRef",
@@ -5928,7 +3356,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "309",
                      "locator" : "140:17-140:103",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "After",
@@ -5937,7 +3364,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "305",
                            "locator" : "140:17-140:52",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "path" : "sent",
@@ -5945,7 +3371,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "308",
                         "locator" : "140:60-140:103",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
@@ -5954,7 +3379,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "307",
                               "locator" : "140:69-140:103",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
                               "path" : "period",
@@ -5966,7 +3390,6 @@
                   }
                } ],
                "where" : {
-                  "localId" : "314",
                   "locator" : "141:5-141:62",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Equal",
@@ -5975,7 +3398,6 @@
                      "libraryName" : "FHIRHelpers",
                      "type" : "FunctionRef",
                      "operand" : [ {
-                        "localId" : "312",
                         "locator" : "141:11-141:48",
                         "resultTypeName" : "{http://hl7.org/fhir}CommunicationStatus",
                         "path" : "status",
@@ -5983,7 +3405,6 @@
                         "type" : "Property"
                      } ]
                   }, {
-                     "localId" : "313",
                      "locator" : "141:52-141:62",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                      "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -5993,80 +3414,20 @@
                }
             }
          }, {
-            "localId" : "321",
             "locator" : "57:1-61:11",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Results of Dilated Macular or Fundus Exam Communicated",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "321",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Results of Dilated Macular or Fundus Exam Communicated\"",":\n  " ]
-                  }, {
-                     "r" : "320",
-                     "s" : [ {
-                        "r" : "280",
-                        "s" : [ {
-                           "value" : [ "exists " ]
-                        }, {
-                           "r" : "279",
-                           "s" : [ {
-                              "value" : [ "\"Level of Severity of Retinopathy Findings Communicated\"" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          and " ]
-                     }, {
-                        "r" : "319",
-                        "s" : [ {
-                           "value" : [ "( " ]
-                        }, {
-                           "r" : "319",
-                           "s" : [ {
-                              "r" : "299",
-                              "s" : [ {
-                                 "value" : [ "exists " ]
-                              }, {
-                                 "r" : "298",
-                                 "s" : [ {
-                                    "value" : [ "\"Macular Edema Absence Communicated\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n              or " ]
-                           }, {
-                              "r" : "318",
-                              "s" : [ {
-                                 "value" : [ "exists " ]
-                              }, {
-                                 "r" : "317",
-                                 "s" : [ {
-                                    "value" : [ "\"Macular Edema Presence Communicated\"" ]
-                                 } ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n          )" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "320",
                "locator" : "58:3-61:11",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "operand" : [ {
-                  "localId" : "280",
                   "locator" : "58:3-58:65",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "operand" : {
-                     "localId" : "279",
                      "locator" : "58:10-58:65",
                      "name" : "Level of Severity of Retinopathy Findings Communicated",
                      "type" : "ExpressionRef",
@@ -6079,17 +3440,14 @@
                      }
                   }
                }, {
-                  "localId" : "319",
                   "locator" : "59:15-61:11",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "operand" : [ {
-                     "localId" : "299",
                      "locator" : "59:17-59:59",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "298",
                         "locator" : "59:24-59:59",
                         "name" : "Macular Edema Absence Communicated",
                         "type" : "ExpressionRef",
@@ -6102,12 +3460,10 @@
                         }
                      }
                   }, {
-                     "localId" : "318",
                      "locator" : "60:18-60:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "317",
                         "locator" : "60:25-60:61",
                         "name" : "Macular Edema Presence Communicated",
                         "type" : "ExpressionRef",
@@ -6123,80 +3479,20 @@
                } ]
             }
          }, {
-            "localId" : "330",
             "locator" : "82:1-86:11",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "330",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Numerator\"",":\n  " ]
-                  }, {
-                     "r" : "329",
-                     "s" : [ {
-                        "r" : "323",
-                        "s" : [ {
-                           "value" : [ "exists " ]
-                        }, {
-                           "r" : "322",
-                           "s" : [ {
-                              "value" : [ "\"Level of Severity of Retinopathy Findings Communicated\"" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n          and " ]
-                     }, {
-                        "r" : "328",
-                        "s" : [ {
-                           "value" : [ "( " ]
-                        }, {
-                           "r" : "328",
-                           "s" : [ {
-                              "r" : "325",
-                              "s" : [ {
-                                 "value" : [ "exists " ]
-                              }, {
-                                 "r" : "324",
-                                 "s" : [ {
-                                    "value" : [ "\"Macular Edema Absence Communicated\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n              or " ]
-                           }, {
-                              "r" : "327",
-                              "s" : [ {
-                                 "value" : [ "exists " ]
-                              }, {
-                                 "r" : "326",
-                                 "s" : [ {
-                                    "value" : [ "\"Macular Edema Presence Communicated\"" ]
-                                 } ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n          )" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "329",
                "locator" : "83:3-86:11",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "operand" : [ {
-                  "localId" : "323",
                   "locator" : "83:3-83:65",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "operand" : {
-                     "localId" : "322",
                      "locator" : "83:10-83:65",
                      "name" : "Level of Severity of Retinopathy Findings Communicated",
                      "type" : "ExpressionRef",
@@ -6209,17 +3505,14 @@
                      }
                   }
                }, {
-                  "localId" : "328",
                   "locator" : "84:15-86:11",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "operand" : [ {
-                     "localId" : "325",
                      "locator" : "84:17-84:59",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "324",
                         "locator" : "84:24-84:59",
                         "name" : "Macular Edema Absence Communicated",
                         "type" : "ExpressionRef",
@@ -6232,12 +3525,10 @@
                         }
                      }
                   }, {
-                     "localId" : "327",
                      "locator" : "85:18-85:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "326",
                         "locator" : "85:25-85:61",
                         "name" : "Macular Edema Presence Communicated",
                         "type" : "ExpressionRef",

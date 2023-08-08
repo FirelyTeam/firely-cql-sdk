@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Hl7.Cql.Elm
 {
@@ -112,7 +109,10 @@ namespace Hl7.Cql.Elm
                         }
                         if (reader.TokenType == JsonTokenType.StartObject
                             || reader.TokenType == JsonTokenType.StartArray)
+                        {
                             reader.Skip(); // skip structure
+                            reader.Read(); // read past closing of object/array
+                        }
                         else reader.Read(); // skip value
                     }
                 }

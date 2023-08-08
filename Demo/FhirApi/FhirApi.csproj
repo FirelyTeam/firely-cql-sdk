@@ -27,10 +27,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
+		<PackageReference Include="Hl7.Fhir.R4" Version="5.3.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\..\firely-net-sdk\src\Hl7.Fhir.R4\Hl7.Fhir.R4.csproj" />
 		<ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\..\Cql\Iso8601\Iso8601.csproj" />
 		<ProjectReference Include="..\Measures\Measures.csproj" />
