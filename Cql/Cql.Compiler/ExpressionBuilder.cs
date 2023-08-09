@@ -2327,7 +2327,7 @@ namespace Hl7.Cql.Compiler
                         if (op.operand?.Length == 1)
                         {
                             var operand = op.operand![0];
-                            var typeName = operand.resultTypeName.Name;
+                            var typeName = operand.resultTypeName?.Name;
                             if (operand is As @as)
                             {
                                 typeName = @as.asType?.Name;

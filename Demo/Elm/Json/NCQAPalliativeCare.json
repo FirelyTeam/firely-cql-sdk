@@ -1,17 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.2.0",
-         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "120",
-            "s" : [ {
-               "value" : [ "","library NCQAPalliativeCare version '1.0.0'" ]
-            } ]
-         }
       } ],
       "identifier" : {
          "id" : "NCQAPalliativeCare",
@@ -26,191 +18,69 @@
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
             "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.1",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "1",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIR" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.1'" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.1"
          } ]
       },
       "includes" : {
          "def" : [ {
-            "localId" : "2",
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.001",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "2",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIRHelpers" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.001"
          }, {
-            "localId" : "3",
             "locator" : "6:1-6:52",
             "localIdentifier" : "FHIRBase",
             "path" : "NCQAFHIRBase",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "3",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "NCQAFHIRBase" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'1.0.0'"," called ","FHIRBase" ]
-                  } ]
-               }
-            } ]
+            "version" : "1.0.0"
          }, {
-            "localId" : "4",
             "locator" : "7:1-7:48",
             "localIdentifier" : "Status",
             "path" : "NCQAStatus",
-            "version" : "1.0.0",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "4",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "NCQAStatus" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'1.0.0'"," called ","Status" ]
-                  } ]
-               }
-            } ]
+            "version" : "1.0.0"
          } ]
       },
       "codeSystems" : {
          "def" : [ {
-            "localId" : "5",
             "locator" : "9:1-9:56",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "ICD-10",
             "id" : "http://hl7.org/fhir/sid/icd-10-cm",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "5",
-                  "s" : [ {
-                     "value" : [ "","codesystem ","\"ICD-10\"",": ","'http://hl7.org/fhir/sid/icd-10-cm'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          } ]
       },
       "valueSets" : {
          "def" : [ {
-            "localId" : "6",
             "locator" : "11:1-11:109",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Palliative Care Assessment",
             "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "6",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Palliative Care Assessment\"",": ","'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "7",
             "locator" : "12:1-12:108",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Palliative Care Encounter",
             "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "7",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Palliative Care Encounter\"",": ","'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "8",
             "locator" : "13:1-13:111",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Palliative Care Intervention",
             "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "8",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Palliative Care Intervention\"",": ","'https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          } ]
       },
       "codes" : {
          "def" : [ {
-            "localId" : "10",
             "locator" : "15:1-15:99",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Encounter for palliative care",
             "id" : "Z51.5",
             "display" : "Encounter for palliative care",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "10",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Encounter for palliative care\"",": ","'Z51.5'"," from " ]
-                  }, {
-                     "r" : "9",
-                     "s" : [ {
-                        "value" : [ "\"ICD-10\"" ]
-                     } ]
-                  }, {
-                     "value" : [ " display ","'Encounter for palliative care'" ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "9",
                "locator" : "15:52-15:59",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "ICD-10"
@@ -219,843 +89,29 @@
       },
       "statements" : {
          "def" : [ {
-            "localId" : "120",
             "locator" : "17:1-37:5",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Palliative Care Overlapping Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "120",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"Palliative Care Overlapping Period\"","(","Period"," " ]
-                  }, {
-                     "r" : "12",
-                     "s" : [ {
-                        "value" : [ "Interval<" ]
-                     }, {
-                        "r" : "11",
-                        "s" : [ {
-                           "value" : [ "DateTime" ]
-                        } ]
-                     }, {
-                        "value" : [ ">" ]
-                     } ]
-                  }, {
-                     "value" : [ "):\n  " ]
-                  }, {
-                     "r" : "119",
-                     "s" : [ {
-                        "r" : "119",
-                        "s" : [ {
-                           "r" : "93",
-                           "s" : [ {
-                              "r" : "65",
-                              "s" : [ {
-                                 "r" : "37",
-                                 "s" : [ {
-                                    "value" : [ "exists " ]
-                                 }, {
-                                    "r" : "36",
-                                    "s" : [ {
-                                       "value" : [ "( " ]
-                                    }, {
-                                       "r" : "36",
-                                       "s" : [ {
-                                          "s" : [ {
-                                             "r" : "14",
-                                             "s" : [ {
-                                                "r" : "13",
-                                                "s" : [ {
-                                                   "r" : "13",
-                                                   "s" : [ {
-                                                      "value" : [ "[","Observation",": " ]
-                                                   }, {
-                                                      "s" : [ {
-                                                         "value" : [ "\"Palliative Care Assessment\"" ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ "]" ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ " ","PalliativeAssessment" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n      " ]
-                                       }, {
-                                          "r" : "35",
-                                          "s" : [ {
-                                             "value" : [ "where " ]
-                                          }, {
-                                             "r" : "35",
-                                             "s" : [ {
-                                                "r" : "27",
-                                                "s" : [ {
-                                                   "value" : [ "Interval[" ]
-                                                }, {
-                                                   "r" : "20",
-                                                   "s" : [ {
-                                                      "value" : [ "date from " ]
-                                                   }, {
-                                                      "r" : "19",
-                                                      "s" : [ {
-                                                         "value" : [ "start of " ]
-                                                      }, {
-                                                         "r" : "18",
-                                                         "s" : [ {
-                                                            "r" : "15",
-                                                            "s" : [ {
-                                                               "value" : [ "FHIRBase" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ "." ]
-                                                         }, {
-                                                            "r" : "18",
-                                                            "s" : [ {
-                                                               "value" : [ "\"Normalize Interval\""," ( " ]
-                                                            }, {
-                                                               "r" : "17",
-                                                               "s" : [ {
-                                                                  "r" : "16",
-                                                                  "s" : [ {
-                                                                     "value" : [ "PalliativeAssessment" ]
-                                                                  } ]
-                                                               }, {
-                                                                  "value" : [ "." ]
-                                                               }, {
-                                                                  "r" : "17",
-                                                                  "s" : [ {
-                                                                     "value" : [ "effective" ]
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ " )" ]
-                                                            } ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ ", " ]
-                                                }, {
-                                                   "r" : "26",
-                                                   "s" : [ {
-                                                      "value" : [ "date from\n      " ]
-                                                   }, {
-                                                      "r" : "25",
-                                                      "s" : [ {
-                                                         "value" : [ "end of " ]
-                                                      }, {
-                                                         "r" : "24",
-                                                         "s" : [ {
-                                                            "r" : "21",
-                                                            "s" : [ {
-                                                               "value" : [ "FHIRBase" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ "." ]
-                                                         }, {
-                                                            "r" : "24",
-                                                            "s" : [ {
-                                                               "value" : [ "\"Normalize Interval\""," ( " ]
-                                                            }, {
-                                                               "r" : "23",
-                                                               "s" : [ {
-                                                                  "r" : "22",
-                                                                  "s" : [ {
-                                                                     "value" : [ "PalliativeAssessment" ]
-                                                                  } ]
-                                                               }, {
-                                                                  "value" : [ "." ]
-                                                               }, {
-                                                                  "r" : "23",
-                                                                  "s" : [ {
-                                                                     "value" : [ "effective" ]
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ " )" ]
-                                                            } ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "]" ]
-                                                } ]
-                                             }, {
-                                                "r" : "35",
-                                                "value" : [ "overlaps"," " ]
-                                             }, {
-                                                "r" : "34",
-                                                "s" : [ {
-                                                   "value" : [ "Interval[" ]
-                                                }, {
-                                                   "r" : "30",
-                                                   "s" : [ {
-                                                      "value" : [ "date from " ]
-                                                   }, {
-                                                      "r" : "29",
-                                                      "s" : [ {
-                                                         "value" : [ "start of " ]
-                                                      }, {
-                                                         "r" : "28",
-                                                         "s" : [ {
-                                                            "value" : [ "Period" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ ", " ]
-                                                }, {
-                                                   "r" : "33",
-                                                   "s" : [ {
-                                                      "value" : [ "date from\n      " ]
-                                                   }, {
-                                                      "r" : "32",
-                                                      "s" : [ {
-                                                         "value" : [ "end of " ]
-                                                      }, {
-                                                         "r" : "31",
-                                                         "s" : [ {
-                                                            "value" : [ "Period" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "]" ]
-                                                } ]
-                                             } ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "\n  )" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n    or " ]
-                              }, {
-                                 "r" : "64",
-                                 "s" : [ {
-                                    "value" : [ "exists " ]
-                                 }, {
-                                    "r" : "63",
-                                    "s" : [ {
-                                       "value" : [ "( " ]
-                                    }, {
-                                       "r" : "63",
-                                       "s" : [ {
-                                          "s" : [ {
-                                             "r" : "41",
-                                             "s" : [ {
-                                                "r" : "40",
-                                                "s" : [ {
-                                                   "value" : [ "( " ]
-                                                }, {
-                                                   "r" : "40",
-                                                   "s" : [ {
-                                                      "r" : "38",
-                                                      "s" : [ {
-                                                         "value" : [ "Status" ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ "." ]
-                                                   }, {
-                                                      "r" : "40",
-                                                      "s" : [ {
-                                                         "value" : [ "\"Finished Encounter\""," ( " ]
-                                                      }, {
-                                                         "r" : "39",
-                                                         "s" : [ {
-                                                            "value" : [ "[","Encounter",": " ]
-                                                         }, {
-                                                            "s" : [ {
-                                                               "value" : [ "\"Palliative Care Encounter\"" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ "]" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ " )" ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ " )" ]
-                                                } ]
-                                             }, {
-                                                "value" : [ " ","PalliativeEncounter" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n        " ]
-                                       }, {
-                                          "r" : "62",
-                                          "s" : [ {
-                                             "value" : [ "where " ]
-                                          }, {
-                                             "r" : "62",
-                                             "s" : [ {
-                                                "r" : "54",
-                                                "s" : [ {
-                                                   "value" : [ "Interval[" ]
-                                                }, {
-                                                   "r" : "47",
-                                                   "s" : [ {
-                                                      "value" : [ "date from " ]
-                                                   }, {
-                                                      "r" : "46",
-                                                      "s" : [ {
-                                                         "value" : [ "start of " ]
-                                                      }, {
-                                                         "r" : "45",
-                                                         "s" : [ {
-                                                            "r" : "42",
-                                                            "s" : [ {
-                                                               "value" : [ "FHIRBase" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ "." ]
-                                                         }, {
-                                                            "r" : "45",
-                                                            "s" : [ {
-                                                               "value" : [ "\"Normalize Interval\""," ( " ]
-                                                            }, {
-                                                               "r" : "44",
-                                                               "s" : [ {
-                                                                  "r" : "43",
-                                                                  "s" : [ {
-                                                                     "value" : [ "PalliativeEncounter" ]
-                                                                  } ]
-                                                               }, {
-                                                                  "value" : [ "." ]
-                                                               }, {
-                                                                  "r" : "44",
-                                                                  "s" : [ {
-                                                                     "value" : [ "period" ]
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ " )" ]
-                                                            } ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ ", " ]
-                                                }, {
-                                                   "r" : "53",
-                                                   "s" : [ {
-                                                      "value" : [ "date from\n        " ]
-                                                   }, {
-                                                      "r" : "52",
-                                                      "s" : [ {
-                                                         "value" : [ "end of " ]
-                                                      }, {
-                                                         "r" : "51",
-                                                         "s" : [ {
-                                                            "r" : "48",
-                                                            "s" : [ {
-                                                               "value" : [ "FHIRBase" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ "." ]
-                                                         }, {
-                                                            "r" : "51",
-                                                            "s" : [ {
-                                                               "value" : [ "\"Normalize Interval\""," ( " ]
-                                                            }, {
-                                                               "r" : "50",
-                                                               "s" : [ {
-                                                                  "r" : "49",
-                                                                  "s" : [ {
-                                                                     "value" : [ "PalliativeEncounter" ]
-                                                                  } ]
-                                                               }, {
-                                                                  "value" : [ "." ]
-                                                               }, {
-                                                                  "r" : "50",
-                                                                  "s" : [ {
-                                                                     "value" : [ "period" ]
-                                                                  } ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ " )" ]
-                                                            } ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "]" ]
-                                                } ]
-                                             }, {
-                                                "r" : "62",
-                                                "value" : [ "overlaps"," " ]
-                                             }, {
-                                                "r" : "61",
-                                                "s" : [ {
-                                                   "value" : [ "Interval[" ]
-                                                }, {
-                                                   "r" : "57",
-                                                   "s" : [ {
-                                                      "value" : [ "date from " ]
-                                                   }, {
-                                                      "r" : "56",
-                                                      "s" : [ {
-                                                         "value" : [ "start of " ]
-                                                      }, {
-                                                         "r" : "55",
-                                                         "s" : [ {
-                                                            "value" : [ "Period" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ ", " ]
-                                                }, {
-                                                   "r" : "60",
-                                                   "s" : [ {
-                                                      "value" : [ "date from\n        " ]
-                                                   }, {
-                                                      "r" : "59",
-                                                      "s" : [ {
-                                                         "value" : [ "end of " ]
-                                                      }, {
-                                                         "r" : "58",
-                                                         "s" : [ {
-                                                            "value" : [ "Period" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "]" ]
-                                                } ]
-                                             } ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "\n    )" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n    or " ]
-                           }, {
-                              "r" : "92",
-                              "s" : [ {
-                                 "value" : [ "exists " ]
-                              }, {
-                                 "r" : "91",
-                                 "s" : [ {
-                                    "value" : [ "( " ]
-                                 }, {
-                                    "r" : "91",
-                                    "s" : [ {
-                                       "s" : [ {
-                                          "r" : "69",
-                                          "s" : [ {
-                                             "r" : "68",
-                                             "s" : [ {
-                                                "value" : [ "( " ]
-                                             }, {
-                                                "r" : "68",
-                                                "s" : [ {
-                                                   "r" : "66",
-                                                   "s" : [ {
-                                                      "value" : [ "Status" ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "." ]
-                                                }, {
-                                                   "r" : "68",
-                                                   "s" : [ {
-                                                      "value" : [ "\"Completed or Ongoing Procedure\""," ( " ]
-                                                   }, {
-                                                      "r" : "67",
-                                                      "s" : [ {
-                                                         "value" : [ "[","Procedure",": " ]
-                                                      }, {
-                                                         "s" : [ {
-                                                            "value" : [ "\"Palliative Care Intervention\"" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "]" ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " )" ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ " )" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " ","PalliativeIntervention" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "\n        " ]
-                                    }, {
-                                       "r" : "90",
-                                       "s" : [ {
-                                          "value" : [ "where " ]
-                                       }, {
-                                          "r" : "90",
-                                          "s" : [ {
-                                             "r" : "82",
-                                             "s" : [ {
-                                                "value" : [ "Interval[" ]
-                                             }, {
-                                                "r" : "75",
-                                                "s" : [ {
-                                                   "value" : [ "date from " ]
-                                                }, {
-                                                   "r" : "74",
-                                                   "s" : [ {
-                                                      "value" : [ "start of " ]
-                                                   }, {
-                                                      "r" : "73",
-                                                      "s" : [ {
-                                                         "r" : "70",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRBase" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "73",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Normalize Interval\""," ( " ]
-                                                         }, {
-                                                            "r" : "72",
-                                                            "s" : [ {
-                                                               "r" : "71",
-                                                               "s" : [ {
-                                                                  "value" : [ "PalliativeIntervention" ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ "." ]
-                                                            }, {
-                                                               "r" : "72",
-                                                               "s" : [ {
-                                                                  "value" : [ "performed" ]
-                                                               } ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ ", " ]
-                                             }, {
-                                                "r" : "81",
-                                                "s" : [ {
-                                                   "value" : [ "date from\n        " ]
-                                                }, {
-                                                   "r" : "80",
-                                                   "s" : [ {
-                                                      "value" : [ "end of " ]
-                                                   }, {
-                                                      "r" : "79",
-                                                      "s" : [ {
-                                                         "r" : "76",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRBase" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "79",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Normalize Interval\""," ( " ]
-                                                         }, {
-                                                            "r" : "78",
-                                                            "s" : [ {
-                                                               "r" : "77",
-                                                               "s" : [ {
-                                                                  "value" : [ "PalliativeIntervention" ]
-                                                               } ]
-                                                            }, {
-                                                               "value" : [ "." ]
-                                                            }, {
-                                                               "r" : "78",
-                                                               "s" : [ {
-                                                                  "value" : [ "performed" ]
-                                                               } ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "]" ]
-                                             } ]
-                                          }, {
-                                             "r" : "90",
-                                             "value" : [ "overlaps"," " ]
-                                          }, {
-                                             "r" : "89",
-                                             "s" : [ {
-                                                "value" : [ "Interval[" ]
-                                             }, {
-                                                "r" : "85",
-                                                "s" : [ {
-                                                   "value" : [ "date from " ]
-                                                }, {
-                                                   "r" : "84",
-                                                   "s" : [ {
-                                                      "value" : [ "start of " ]
-                                                   }, {
-                                                      "r" : "83",
-                                                      "s" : [ {
-                                                         "value" : [ "Period" ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ ", " ]
-                                             }, {
-                                                "r" : "88",
-                                                "s" : [ {
-                                                   "value" : [ "date from\n        " ]
-                                                }, {
-                                                   "r" : "87",
-                                                   "s" : [ {
-                                                      "value" : [ "end of " ]
-                                                   }, {
-                                                      "r" : "86",
-                                                      "s" : [ {
-                                                         "value" : [ "Period" ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "]" ]
-                                             } ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n    )" ]
-                                 } ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n    or " ]
-                        }, {
-                           "r" : "118",
-                           "s" : [ {
-                              "value" : [ "exists " ]
-                           }, {
-                              "r" : "117",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "117",
-                                 "s" : [ {
-                                    "s" : [ {
-                                       "r" : "97",
-                                       "s" : [ {
-                                          "r" : "96",
-                                          "s" : [ {
-                                             "value" : [ "( " ]
-                                          }, {
-                                             "r" : "96",
-                                             "s" : [ {
-                                                "r" : "94",
-                                                "s" : [ {
-                                                   "value" : [ "Status" ]
-                                                } ]
-                                             }, {
-                                                "value" : [ "." ]
-                                             }, {
-                                                "r" : "96",
-                                                "s" : [ {
-                                                   "value" : [ "\"Active Condition\""," ( " ]
-                                                }, {
-                                                   "r" : "95",
-                                                   "s" : [ {
-                                                      "value" : [ "[","Condition",": " ]
-                                                   }, {
-                                                      "s" : [ {
-                                                         "value" : [ "\"Encounter for palliative care\"" ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ "]" ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ " )" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " )" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ " ","PalliativeDiagnosis" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n        " ]
-                                 }, {
-                                    "r" : "116",
-                                    "s" : [ {
-                                       "value" : [ "where " ]
-                                    }, {
-                                       "r" : "116",
-                                       "s" : [ {
-                                          "r" : "108",
-                                          "s" : [ {
-                                             "value" : [ "Interval[" ]
-                                          }, {
-                                             "r" : "102",
-                                             "s" : [ {
-                                                "value" : [ "date from " ]
-                                             }, {
-                                                "r" : "101",
-                                                "s" : [ {
-                                                   "value" : [ "start of " ]
-                                                }, {
-                                                   "r" : "100",
-                                                   "s" : [ {
-                                                      "r" : "98",
-                                                      "s" : [ {
-                                                         "value" : [ "FHIRBase" ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ "." ]
-                                                   }, {
-                                                      "r" : "100",
-                                                      "s" : [ {
-                                                         "value" : [ "\"Prevalence Period\""," ( " ]
-                                                      }, {
-                                                         "r" : "99",
-                                                         "s" : [ {
-                                                            "value" : [ "PalliativeDiagnosis" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ " )" ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ ", " ]
-                                          }, {
-                                             "r" : "107",
-                                             "s" : [ {
-                                                "value" : [ "date from\n        " ]
-                                             }, {
-                                                "r" : "106",
-                                                "s" : [ {
-                                                   "value" : [ "end of " ]
-                                                }, {
-                                                   "r" : "105",
-                                                   "s" : [ {
-                                                      "r" : "103",
-                                                      "s" : [ {
-                                                         "value" : [ "FHIRBase" ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ "." ]
-                                                   }, {
-                                                      "r" : "105",
-                                                      "s" : [ {
-                                                         "value" : [ "\"Prevalence Period\""," ( " ]
-                                                      }, {
-                                                         "r" : "104",
-                                                         "s" : [ {
-                                                            "value" : [ "PalliativeDiagnosis" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ " )" ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "]" ]
-                                          } ]
-                                       }, {
-                                          "r" : "116",
-                                          "value" : [ "overlaps"," " ]
-                                       }, {
-                                          "r" : "115",
-                                          "s" : [ {
-                                             "value" : [ "Interval[" ]
-                                          }, {
-                                             "r" : "111",
-                                             "s" : [ {
-                                                "value" : [ "date from " ]
-                                             }, {
-                                                "r" : "110",
-                                                "s" : [ {
-                                                   "value" : [ "start of " ]
-                                                }, {
-                                                   "r" : "109",
-                                                   "s" : [ {
-                                                      "value" : [ "Period" ]
-                                                   } ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ ", " ]
-                                          }, {
-                                             "r" : "114",
-                                             "s" : [ {
-                                                "value" : [ "date from\n        " ]
-                                             }, {
-                                                "r" : "113",
-                                                "s" : [ {
-                                                   "value" : [ "end of " ]
-                                                }, {
-                                                   "r" : "112",
-                                                   "s" : [ {
-                                                      "value" : [ "Period" ]
-                                                   } ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "]" ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n    )" ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "119",
                "locator" : "18:3-37:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "operand" : [ {
-                  "localId" : "93",
                   "locator" : "18:3-32:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "operand" : [ {
-                     "localId" : "65",
                      "locator" : "18:3-27:5",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "operand" : [ {
-                        "localId" : "37",
                         "locator" : "18:3-22:3",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Exists",
                         "operand" : {
-                           "localId" : "36",
                            "locator" : "18:10-22:3",
                            "type" : "Query",
                            "resultTypeSpecifier" : {
@@ -1066,7 +122,6 @@
                               }
                            },
                            "source" : [ {
-                              "localId" : "14",
                               "locator" : "18:12-18:75",
                               "alias" : "PalliativeAssessment",
                               "resultTypeSpecifier" : {
@@ -1077,7 +132,6 @@
                                  }
                               },
                               "expression" : {
-                                 "localId" : "13",
                                  "locator" : "18:12-18:54",
                                  "dataType" : "{http://hl7.org/fhir}Observation",
                                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
@@ -1102,12 +156,10 @@
                            } ],
                            "relationship" : [ ],
                            "where" : {
-                              "localId" : "35",
                               "locator" : "19:7-21:20",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Overlaps",
                               "operand" : [ {
-                                 "localId" : "27",
                                  "locator" : "19:13-20:78",
                                  "lowClosed" : true,
                                  "highClosed" : true,
@@ -1120,17 +172,14 @@
                                     }
                                  },
                                  "low" : {
-                                    "localId" : "20",
                                     "locator" : "19:22-19:104",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "19",
                                        "locator" : "19:32-19:104",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Start",
                                        "operand" : {
-                                          "localId" : "18",
                                           "locator" : "19:41-19:104",
                                           "name" : "Normalize Interval",
                                           "libraryName" : "FHIRBase",
@@ -1143,7 +192,6 @@
                                              }
                                           },
                                           "operand" : [ {
-                                             "localId" : "17",
                                              "locator" : "19:73-19:102",
                                              "path" : "effective",
                                              "scope" : "PalliativeAssessment",
@@ -1169,17 +217,14 @@
                                     }
                                  },
                                  "high" : {
-                                    "localId" : "26",
                                     "locator" : "19:107-20:77",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "25",
                                        "locator" : "20:7-20:77",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "End",
                                        "operand" : {
-                                          "localId" : "24",
                                           "locator" : "20:14-20:77",
                                           "name" : "Normalize Interval",
                                           "libraryName" : "FHIRBase",
@@ -1192,7 +237,6 @@
                                              }
                                           },
                                           "operand" : [ {
-                                             "localId" : "23",
                                              "locator" : "20:46-20:75",
                                              "path" : "effective",
                                              "scope" : "PalliativeAssessment",
@@ -1218,7 +262,6 @@
                                     }
                                  }
                               }, {
-                                 "localId" : "34",
                                  "locator" : "20:88-21:20",
                                  "lowClosed" : true,
                                  "highClosed" : true,
@@ -1231,17 +274,14 @@
                                     }
                                  },
                                  "low" : {
-                                    "localId" : "30",
                                     "locator" : "20:97-20:121",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "29",
                                        "locator" : "20:107-20:121",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Start",
                                        "operand" : {
-                                          "localId" : "28",
                                           "locator" : "20:116-20:121",
                                           "name" : "Period",
                                           "type" : "OperandRef",
@@ -1256,17 +296,14 @@
                                     }
                                  },
                                  "high" : {
-                                    "localId" : "33",
                                     "locator" : "20:124-21:19",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "32",
                                        "locator" : "21:7-21:19",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "End",
                                        "operand" : {
-                                          "localId" : "31",
                                           "locator" : "21:14-21:19",
                                           "name" : "Period",
                                           "type" : "OperandRef",
@@ -1284,12 +321,10 @@
                            }
                         }
                      }, {
-                        "localId" : "64",
                         "locator" : "23:8-27:5",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Exists",
                         "operand" : {
-                           "localId" : "63",
                            "locator" : "23:15-27:5",
                            "type" : "Query",
                            "resultTypeSpecifier" : {
@@ -1300,7 +335,6 @@
                               }
                            },
                            "source" : [ {
-                              "localId" : "41",
                               "locator" : "23:17-23:112",
                               "alias" : "PalliativeEncounter",
                               "resultTypeSpecifier" : {
@@ -1311,7 +345,6 @@
                                  }
                               },
                               "expression" : {
-                                 "localId" : "40",
                                  "locator" : "23:17-23:92",
                                  "name" : "Finished Encounter",
                                  "libraryName" : "Status",
@@ -1324,7 +357,6 @@
                                     }
                                  },
                                  "operand" : [ {
-                                    "localId" : "39",
                                     "locator" : "23:49-23:88",
                                     "dataType" : "{http://hl7.org/fhir}Encounter",
                                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Encounter",
@@ -1350,12 +382,10 @@
                            } ],
                            "relationship" : [ ],
                            "where" : {
-                              "localId" : "62",
                               "locator" : "24:9-26:22",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Overlaps",
                               "operand" : [ {
-                                 "localId" : "54",
                                  "locator" : "24:15-25:76",
                                  "lowClosed" : true,
                                  "highClosed" : true,
@@ -1368,17 +398,14 @@
                                     }
                                  },
                                  "low" : {
-                                    "localId" : "47",
                                     "locator" : "24:24-24:102",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "46",
                                        "locator" : "24:34-24:102",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Start",
                                        "operand" : {
-                                          "localId" : "45",
                                           "locator" : "24:43-24:102",
                                           "name" : "Normalize Interval",
                                           "libraryName" : "FHIRBase",
@@ -1393,7 +420,6 @@
                                           "operand" : [ {
                                              "type" : "As",
                                              "operand" : {
-                                                "localId" : "44",
                                                 "locator" : "24:75-24:100",
                                                 "resultTypeName" : "{http://hl7.org/fhir}Period",
                                                 "path" : "period",
@@ -1433,17 +459,14 @@
                                     }
                                  },
                                  "high" : {
-                                    "localId" : "53",
                                     "locator" : "24:105-25:75",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "52",
                                        "locator" : "25:9-25:75",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "End",
                                        "operand" : {
-                                          "localId" : "51",
                                           "locator" : "25:16-25:75",
                                           "name" : "Normalize Interval",
                                           "libraryName" : "FHIRBase",
@@ -1458,7 +481,6 @@
                                           "operand" : [ {
                                              "type" : "As",
                                              "operand" : {
-                                                "localId" : "50",
                                                 "locator" : "25:48-25:73",
                                                 "resultTypeName" : "{http://hl7.org/fhir}Period",
                                                 "path" : "period",
@@ -1498,7 +520,6 @@
                                     }
                                  }
                               }, {
-                                 "localId" : "61",
                                  "locator" : "25:86-26:22",
                                  "lowClosed" : true,
                                  "highClosed" : true,
@@ -1511,17 +532,14 @@
                                     }
                                  },
                                  "low" : {
-                                    "localId" : "57",
                                     "locator" : "25:95-25:119",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "56",
                                        "locator" : "25:105-25:119",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "Start",
                                        "operand" : {
-                                          "localId" : "55",
                                           "locator" : "25:114-25:119",
                                           "name" : "Period",
                                           "type" : "OperandRef",
@@ -1536,17 +554,14 @@
                                     }
                                  },
                                  "high" : {
-                                    "localId" : "60",
                                     "locator" : "25:122-26:21",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                     "type" : "DateFrom",
                                     "operand" : {
-                                       "localId" : "59",
                                        "locator" : "26:9-26:21",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "type" : "End",
                                        "operand" : {
-                                          "localId" : "58",
                                           "locator" : "26:16-26:21",
                                           "name" : "Period",
                                           "type" : "OperandRef",
@@ -1565,12 +580,10 @@
                         }
                      } ]
                   }, {
-                     "localId" : "92",
                      "locator" : "28:8-32:5",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "91",
                         "locator" : "28:15-32:5",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
@@ -1581,7 +594,6 @@
                            }
                         },
                         "source" : [ {
-                           "localId" : "69",
                            "locator" : "28:17-28:130",
                            "alias" : "PalliativeIntervention",
                            "resultTypeSpecifier" : {
@@ -1592,7 +604,6 @@
                               }
                            },
                            "expression" : {
-                              "localId" : "68",
                               "locator" : "28:17-28:107",
                               "name" : "Completed or Ongoing Procedure",
                               "libraryName" : "Status",
@@ -1605,7 +616,6 @@
                                  }
                               },
                               "operand" : [ {
-                                 "localId" : "67",
                                  "locator" : "28:61-28:103",
                                  "dataType" : "{http://hl7.org/fhir}Procedure",
                                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
@@ -1631,12 +641,10 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "localId" : "90",
                            "locator" : "29:9-31:22",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Overlaps",
                            "operand" : [ {
-                              "localId" : "82",
                               "locator" : "29:15-30:82",
                               "lowClosed" : true,
                               "highClosed" : true,
@@ -1649,17 +657,14 @@
                                  }
                               },
                               "low" : {
-                                 "localId" : "75",
                                  "locator" : "29:24-29:108",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "type" : "DateFrom",
                                  "operand" : {
-                                    "localId" : "74",
                                     "locator" : "29:34-29:108",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
                                     "operand" : {
-                                       "localId" : "73",
                                        "locator" : "29:43-29:108",
                                        "name" : "Normalize Interval",
                                        "libraryName" : "FHIRBase",
@@ -1672,7 +677,6 @@
                                           }
                                        },
                                        "operand" : [ {
-                                          "localId" : "72",
                                           "locator" : "29:75-29:106",
                                           "path" : "performed",
                                           "scope" : "PalliativeIntervention",
@@ -1701,17 +705,14 @@
                                  }
                               },
                               "high" : {
-                                 "localId" : "81",
                                  "locator" : "29:111-30:81",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "type" : "DateFrom",
                                  "operand" : {
-                                    "localId" : "80",
                                     "locator" : "30:9-30:81",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "End",
                                     "operand" : {
-                                       "localId" : "79",
                                        "locator" : "30:16-30:81",
                                        "name" : "Normalize Interval",
                                        "libraryName" : "FHIRBase",
@@ -1724,7 +725,6 @@
                                           }
                                        },
                                        "operand" : [ {
-                                          "localId" : "78",
                                           "locator" : "30:48-30:79",
                                           "path" : "performed",
                                           "scope" : "PalliativeIntervention",
@@ -1753,7 +753,6 @@
                                  }
                               }
                            }, {
-                              "localId" : "89",
                               "locator" : "30:92-31:22",
                               "lowClosed" : true,
                               "highClosed" : true,
@@ -1766,17 +765,14 @@
                                  }
                               },
                               "low" : {
-                                 "localId" : "85",
                                  "locator" : "30:101-30:125",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "type" : "DateFrom",
                                  "operand" : {
-                                    "localId" : "84",
                                     "locator" : "30:111-30:125",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
                                     "operand" : {
-                                       "localId" : "83",
                                        "locator" : "30:120-30:125",
                                        "name" : "Period",
                                        "type" : "OperandRef",
@@ -1791,17 +787,14 @@
                                  }
                               },
                               "high" : {
-                                 "localId" : "88",
                                  "locator" : "30:128-31:21",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                                  "type" : "DateFrom",
                                  "operand" : {
-                                    "localId" : "87",
                                     "locator" : "31:9-31:21",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "End",
                                     "operand" : {
-                                       "localId" : "86",
                                        "locator" : "31:16-31:21",
                                        "name" : "Period",
                                        "type" : "OperandRef",
@@ -1820,12 +813,10 @@
                      }
                   } ]
                }, {
-                  "localId" : "118",
                   "locator" : "33:8-37:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "operand" : {
-                     "localId" : "117",
                      "locator" : "33:15-37:5",
                      "type" : "Query",
                      "resultTypeSpecifier" : {
@@ -1836,7 +827,6 @@
                         }
                      },
                      "source" : [ {
-                        "localId" : "97",
                         "locator" : "33:17-33:114",
                         "alias" : "PalliativeDiagnosis",
                         "resultTypeSpecifier" : {
@@ -1847,7 +837,6 @@
                            }
                         },
                         "expression" : {
-                           "localId" : "96",
                            "locator" : "33:17-33:94",
                            "name" : "Active Condition",
                            "libraryName" : "Status",
@@ -1860,7 +849,6 @@
                               }
                            },
                            "operand" : [ {
-                              "localId" : "95",
                               "locator" : "33:47-33:90",
                               "dataType" : "{http://hl7.org/fhir}Condition",
                               "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
@@ -1888,12 +876,10 @@
                      } ],
                      "relationship" : [ ],
                      "where" : {
-                        "localId" : "116",
                         "locator" : "34:9-36:22",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Overlaps",
                         "operand" : [ {
-                           "localId" : "108",
                            "locator" : "34:15-35:68",
                            "lowClosed" : true,
                            "highClosed" : true,
@@ -1906,17 +892,14 @@
                               }
                            },
                            "low" : {
-                              "localId" : "102",
                               "locator" : "34:24-34:94",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "type" : "DateFrom",
                               "operand" : {
-                                 "localId" : "101",
                                  "locator" : "34:34-34:94",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "operand" : {
-                                    "localId" : "100",
                                     "locator" : "34:43-34:94",
                                     "name" : "Prevalence Period",
                                     "libraryName" : "FHIRBase",
@@ -1929,7 +912,6 @@
                                        }
                                     },
                                     "operand" : [ {
-                                       "localId" : "99",
                                        "locator" : "34:74-34:92",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "PalliativeDiagnosis",
@@ -1939,17 +921,14 @@
                               }
                            },
                            "high" : {
-                              "localId" : "107",
                               "locator" : "34:97-35:67",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "type" : "DateFrom",
                               "operand" : {
-                                 "localId" : "106",
                                  "locator" : "35:9-35:67",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
                                  "operand" : {
-                                    "localId" : "105",
                                     "locator" : "35:16-35:67",
                                     "name" : "Prevalence Period",
                                     "libraryName" : "FHIRBase",
@@ -1962,7 +941,6 @@
                                        }
                                     },
                                     "operand" : [ {
-                                       "localId" : "104",
                                        "locator" : "35:47-35:65",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "PalliativeDiagnosis",
@@ -1972,7 +950,6 @@
                               }
                            }
                         }, {
-                           "localId" : "115",
                            "locator" : "35:78-36:22",
                            "lowClosed" : true,
                            "highClosed" : true,
@@ -1985,17 +962,14 @@
                               }
                            },
                            "low" : {
-                              "localId" : "111",
                               "locator" : "35:87-35:111",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "type" : "DateFrom",
                               "operand" : {
-                                 "localId" : "110",
                                  "locator" : "35:97-35:111",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "operand" : {
-                                    "localId" : "109",
                                     "locator" : "35:106-35:111",
                                     "name" : "Period",
                                     "type" : "OperandRef",
@@ -2010,17 +984,14 @@
                               }
                            },
                            "high" : {
-                              "localId" : "114",
                               "locator" : "35:114-36:21",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                               "type" : "DateFrom",
                               "operand" : {
-                                 "localId" : "113",
                                  "locator" : "36:9-36:21",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "End",
                                  "operand" : {
-                                    "localId" : "112",
                                     "locator" : "36:16-36:21",
                                     "name" : "Period",
                                     "type" : "OperandRef",
@@ -2042,7 +1013,6 @@
             "operand" : [ {
                "name" : "Period",
                "operandTypeSpecifier" : {
-                  "localId" : "12",
                   "locator" : "17:61-17:78",
                   "type" : "IntervalTypeSpecifier",
                   "resultTypeSpecifier" : {
@@ -2053,7 +1023,6 @@
                      }
                   },
                   "pointType" : {
-                     "localId" : "11",
                      "locator" : "17:70-17:77",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",

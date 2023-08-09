@@ -4,13 +4,8 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSetLoaders;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using Hl7.Fhir.Serialization;
+using System.Reflection;
 using System.Text.Json;
 
 namespace CLI
@@ -36,7 +31,7 @@ namespace CLI
                     var valueset = method.GetCustomAttribute<CqlValueSetAttribute>();
                     if (declaration != null && valueset == null)
                     {
-                        var value = method.Invoke(instance, Array.Empty<object?>());
+                        var value = method.Invoke(instance, Array.Empty<object?>())!;
                         values.Add(declaration.Name, value);
                     }
                 }
@@ -47,7 +42,7 @@ namespace CLI
             output.WriteLine(json);
         }
 
-        private static IDictionary<string, object> MY2023 =
+        private static readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
             {
                         {
@@ -91,7 +86,7 @@ namespace CLI
             {
                 if (name.Contains(".ValueSets."))
                 {
-                    var stream = asm.GetManifestResourceStream(name);
+                    var stream = asm.GetManifestResourceStream(name) ?? throw new InvalidOperationException($"Cannot find manifest {name}.");
                     var valueSet = stream.ParseFhir<ValueSet>();
                     valueSets.Add(valueSet);
                 }

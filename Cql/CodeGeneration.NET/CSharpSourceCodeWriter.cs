@@ -525,6 +525,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return $"new Uri(\"{value!}\")";
                 else if (constantType == typeof(decimal))
                     return ((decimal)value).ToString(CultureInfo.InvariantCulture);
+                else if (constantType == typeof(decimal?))
+                {
+                    var dv = (decimal?)value;
+                    return dv.HasValue ? dv.Value.ToString(CultureInfo.InvariantCulture) : "null";
+                }
                 else if (typeof(Type).IsAssignableFrom(constantType))
                     return $"typeof({PrettyTypeName((Type)value)})";
                 else
@@ -671,7 +676,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ConstantExpression constant:
                     if (constant.Type == typeof(decimal))
                     {
-                        var code = $"{leadingIndentString}{constant.Value}m";
+                        var code = FormattableString.Invariant($"{leadingIndentString}{constant.Value}m");
                         return code;
                     }
                     else if (constant.Type == typeof(decimal?))
@@ -680,7 +685,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             return $"{leadingIndentString}null";
                         else
                         {
-                            var code = $"{leadingIndentString}{constant.Value}m";
+                            var code = FormattableString.Invariant($"{leadingIndentString}{constant.Value}m");
                             return code;
                         }
                     }

@@ -65,7 +65,7 @@ namespace CoreTests
 
         };
 
-        private CqlContext Context(Bundle bundle) => FirelyCqlContext.Create(
+        private CqlContext Context(Bundle bundle) => FirelyCqlContext.FromBundle(
             bundle: bundle,
             valueSets: ValueSets,
             delegates: QueriesDefinitions);

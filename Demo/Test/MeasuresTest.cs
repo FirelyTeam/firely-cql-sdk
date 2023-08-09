@@ -1,16 +1,9 @@
-using Cql;
-using Hl7.Cql;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
-using Hl7.Cql.Primitives;
-using System.Runtime.Loader;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Model;
-using Hl7.Cql.ValueSets;
-using Hl7.Cql.Runtime;
-using System.Diagnostics;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSetLoaders;
-using Hl7.Cql.Elm.Expressions;
+using Hl7.Fhir.Model;
+using System.Diagnostics;
 
 namespace Test
 {
@@ -18,7 +11,7 @@ namespace Test
     public class MeasuresTest
     {
 
-        private IDictionary<string, object> MY2023 =
+        private readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
             {
                 {
@@ -34,9 +27,8 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator()
         {
-            var patientEverything = new Bundle();
-            var valueSets = new ValueSet[0].ToValueSetDictionary();
-            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
+            var patientEverything = new Bundle();  // add some data
+            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023);
             var bcs = new BCSEHEDISMY2022_1_0_0(cqlContext);
             var numerator = bcs.Numerator();
             Assert.IsFalse(numerator);
@@ -50,8 +42,8 @@ namespace Test
             var dir = new DirectoryInfo("Resources");
             var asmContext = dir.LoadResources(lib, version);
 
-            var patientEverything = new Bundle();
-            var valueSets = new ValueSet[0].ToValueSetDictionary();
+            var patientEverything = new Bundle();   // Add data
+            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
             var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
 
             var results = asmContext.Run(lib, version, cqlContext);
@@ -69,8 +61,8 @@ namespace Test
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
 
-            var patientEverything = new Bundle();
-            var valueSets = new ValueSet[0].ToValueSetDictionary();
+            var patientEverything = new Bundle();  // Add some data
+            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
             var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
 
             var stopwatch = new Stopwatch();

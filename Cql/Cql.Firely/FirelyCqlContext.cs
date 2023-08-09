@@ -26,25 +26,40 @@ namespace Hl7.Cql.Firely
         /// <summary>
         /// Factory method for creating the CqlContext.
         /// </summary>
-        public static CqlContext Create(Bundle? bundle = null,
+        public static CqlContext FromBundle(Bundle bundle,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null)
         {
-            var vss = valueSets ?? new HashValueSetDictionary();
+            IDataRetriever retriever = bundle is not null ?
+                new BundleDataRetriever(bundle, valueSets ?? new HashValueSetDictionary()) :
+                new CompositeDataRetriever();
+
+            return Create(retriever, parameters, valueSets, now, delegates);
+        }
+
+        /// <summary>
+        /// Factory method for creating the CqlContext.
+        /// </summary>
+        public static CqlContext Create(IDataRetriever? bundle = null,
+            IDictionary<string, object>? parameters = null,
+            IValueSetDictionary? valueSets = null,
+            DateTimeOffset? now = null,
+            DefinitionDictionary<Delegate>? delegates = null)
+        {
+            valueSets ??= new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
             var typeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-            IDataRetriever dataRetriever = bundle != null
-                ? new BundleDataRetriever(bundle, vss)
-                : new CompositeDataRetriever();
+            IDataRetriever dataRetriever = bundle ??
+                new CompositeDataRetriever(); // empty data retriever
 
             var cqlComparers = new CqlComparers();
             var operators = CqlOperators.Create(typeResolver,
                 FirelyTypeConverter.Create(Fhir.Model.ModelInfo.ModelInspector),
                 dataRetriever,
                 cqlComparers,
-                (IValueSetDictionary)vss,
+                valueSets,
                 unitConverter,
                 new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond),
                 FirelyEnumComparer.Default);

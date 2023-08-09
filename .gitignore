@@ -46,14 +46,12 @@ obj
 bin
 net5.0/
 netstandard2.1/
-*.suo
 .dll
 .obj
 FileListAbsolute.txt
 .cache
 
 # Visual Studio 2015/2017 cache/options directory
-.vs/
 # Uncomment if you have tasks that create the project's static files in wwwroot
 #wwwroot/
 
@@ -94,7 +92,6 @@ StyleCopReport.xml
 *_h.h
 *.ilk
 *.meta
-*.obj
 *.iobj
 *.pch
 *.pdb
@@ -394,4 +391,7 @@ VSCodeExtension/ncqa-cql-engine/dist/*.map
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/bundles/*.json
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/Test/Resources
-/Demo/Measures/**/*.cs
+/Demo/Elm/build.txt
+/Demo/Cql/Build/target/**/*.*
+/Demo/Measures/*.cs
+/Measures/*.cs
