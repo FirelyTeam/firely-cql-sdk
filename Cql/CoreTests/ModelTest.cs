@@ -1,13 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
-using Hl7.Cql.Runtime;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Iso8601;
+using Hl7.Cql.Runtime;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Hl7.Cql.Operators;
 
 namespace CoreTests
 {
@@ -17,7 +17,7 @@ namespace CoreTests
         [TestMethod]
         public void Model_FhirR4()
         {
-            var modelInfo = Models.Fhir401;
+            _ = Models.Fhir401;
         }
 
 
@@ -66,10 +66,10 @@ namespace CoreTests
 
             public IList<object> Data { get; }
 
-            public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode> codes = null, PropertyInfo codeProperty = null) where T : class =>
+            public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode> codes = null, PropertyInfo _ = null) where T : class =>
                 Data.OfType<T>();
 
-            public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet = null, PropertyInfo codeProperty = null) where T : class =>
+            public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet = null, PropertyInfo _ = null) where T : class =>
                 Data.OfType<T>();
         }
 
@@ -83,8 +83,7 @@ namespace CoreTests
 
             public override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
 
-            public override PropertyInfo GetPrimaryCodePath(string typeSpecifier) =>
-                throw new NotImplementedException();
+            public override PropertyInfo GetPrimaryCodePath(string typeSpecifier) => throw new NotImplementedException();
         }
     }
 }

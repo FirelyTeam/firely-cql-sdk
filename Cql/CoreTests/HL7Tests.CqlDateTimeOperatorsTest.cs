@@ -1,5 +1,5 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hl7.Cql.Runtime;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq.Expressions;
 using System.Reflection;
@@ -22,11 +22,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd5Months":
-		///	( DateTime(2005, 5, 10) + 5 months ) = @2005-10-10
-		/// </summary>
+        ///define "DateTimeAdd5Months":
+        ///	( DateTime(2005, 5, 10) + 5 months ) = @2005-10-10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd5Months_Test()
@@ -36,11 +36,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddMonthsOverflow":
-		///	( DateTime(2005, 5, 10) + 10 months ) = @2006-03-10
-		/// </summary>
+        ///define "DateTimeAddMonthsOverflow":
+        ///	( DateTime(2005, 5, 10) + 10 months ) = @2006-03-10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddMonthsOverflow_Test()
@@ -50,11 +50,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd5Days":
-		///	( DateTime(2005, 5, 10) + 5 days ) = @2005-05-15
-		/// </summary>
+        ///define "DateTimeAdd5Days":
+        ///	( DateTime(2005, 5, 10) + 5 days ) = @2005-05-15
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd5Days_Test()
@@ -64,11 +64,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddDaysOverflow":
-		///	( DateTime(2016, 6, 10) + 21 days ) = @2016-07-01
-		/// </summary>
+        ///define "DateTimeAddDaysOverflow":
+        ///	( DateTime(2016, 6, 10) + 21 days ) = @2016-07-01
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddDaysOverflow_Test()
@@ -78,11 +78,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd5Hours":
-		///	( DateTime(2005, 5, 10, 5) + 5 hours ) = @2005-05-10T10
-		/// </summary>
+        ///define "DateTimeAdd5Hours":
+        ///	( DateTime(2005, 5, 10, 5) + 5 hours ) = @2005-05-10T10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd5Hours_Test()
@@ -92,11 +92,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddHoursOverflow":
-		///	( DateTime(2016, 6, 10, 5) + 19 hours ) = @2016-06-11T00
-		/// </summary>
+        ///define "DateTimeAddHoursOverflow":
+        ///	( DateTime(2016, 6, 10, 5) + 19 hours ) = @2016-06-11T00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddHoursOverflow_Test()
@@ -106,11 +106,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd5Minutes":
-		///	( DateTime(2005, 5, 10, 5, 5) + 5 minutes ) = @2005-05-10T05:10
-		/// </summary>
+        ///define "DateTimeAdd5Minutes":
+        ///	( DateTime(2005, 5, 10, 5, 5) + 5 minutes ) = @2005-05-10T05:10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd5Minutes_Test()
@@ -120,11 +120,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddMinutesOverflow":
-		///	( DateTime(2016, 6, 10, 5, 5) + 55 minutes ) = @2016-06-10T06:00
-		/// </summary>
+        ///define "DateTimeAddMinutesOverflow":
+        ///	( DateTime(2016, 6, 10, 5, 5) + 55 minutes ) = @2016-06-10T06:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddMinutesOverflow_Test()
@@ -134,11 +134,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd5Seconds":
-		///	( DateTime(2005, 5, 10, 5, 5, 5) + 5 seconds ) = @2005-05-10T05:05:10
-		/// </summary>
+        ///define "DateTimeAdd5Seconds":
+        ///	( DateTime(2005, 5, 10, 5, 5, 5) + 5 seconds ) = @2005-05-10T05:05:10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd5Seconds_Test()
@@ -148,11 +148,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddSecondsOverflow":
-		///	( DateTime(2016, 6, 10, 5, 5, 5) + 55 seconds ) = @2016-06-10T05:06:00
-		/// </summary>
+        ///define "DateTimeAddSecondsOverflow":
+        ///	( DateTime(2016, 6, 10, 5, 5, 5) + 55 seconds ) = @2016-06-10T05:06:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddSecondsOverflow_Test()
@@ -162,11 +162,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd5Milliseconds":
-		///	( DateTime(2005, 5, 10, 5, 5, 5, 5) + 5 milliseconds ) = @2005-05-10T05:05:05.010
-		/// </summary>
+        ///define "DateTimeAdd5Milliseconds":
+        ///	( DateTime(2005, 5, 10, 5, 5, 5, 5) + 5 milliseconds ) = @2005-05-10T05:05:05.010
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd5Milliseconds_Test()
@@ -176,11 +176,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddMillisecondsOverflow":
-		///	( DateTime(2016, 6, 10, 5, 5, 5, 5) + 995 milliseconds ) = @2016-06-10T05:05:06.000
-		/// </summary>
+        ///define "DateTimeAddMillisecondsOverflow":
+        ///	( DateTime(2016, 6, 10, 5, 5, 5, 5) + 995 milliseconds ) = @2016-06-10T05:05:06.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddMillisecondsOverflow_Test()
@@ -190,11 +190,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddLeapYear":
-		///	( DateTime(2012, 2, 29) + 1 year ) = @2013-02-28
-		/// </summary>
+        ///define "DateTimeAddLeapYear":
+        ///	( DateTime(2012, 2, 29) + 1 year ) = @2013-02-28
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddLeapYear_Test()
@@ -204,11 +204,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd2YearsByMonths":
-		///	( DateTime(2014) + 24 months ) = @2016
-		/// </summary>
+        ///define "DateTimeAdd2YearsByMonths":
+        ///	( DateTime(2014) + 24 months ) = @2016
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd2YearsByMonths_Test()
@@ -218,11 +218,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd2YearsByDays":
-		///	( DateTime(2014) + 730 days ) = @2016
-		/// </summary>
+        ///define "DateTimeAdd2YearsByDays":
+        ///	( DateTime(2014) + 730 days ) = @2016
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd2YearsByDays_Test()
@@ -232,11 +232,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAdd2YearsByDaysRem5Days":
-		///	( DateTime(2014) + 735 days ) = @2016
-		/// </summary>
+        ///define "DateTimeAdd2YearsByDaysRem5Days":
+        ///	( DateTime(2014) + 735 days ) = @2016
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAdd2YearsByDaysRem5Days_Test()
@@ -246,11 +246,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAdd5Hours":
-		///	( @T15:59:59.999 + 5 hours ) = @T20:59:59.999
-		/// </summary>
+        ///define "TimeAdd5Hours":
+        ///	( @T15:59:59.999 + 5 hours ) = @T20:59:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAdd5Hours_Test()
@@ -260,11 +260,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAdd1Minute":
-		///	( @T15:59:59.999 + 1 minute ) = @T16:00:59.999
-		/// </summary>
+        ///define "TimeAdd1Minute":
+        ///	( @T15:59:59.999 + 1 minute ) = @T16:00:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAdd1Minute_Test()
@@ -274,11 +274,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAdd1Second":
-		///	( @T15:59:59.999 + 1 seconds ) = @T16:00:00.999
-		/// </summary>
+        ///define "TimeAdd1Second":
+        ///	( @T15:59:59.999 + 1 seconds ) = @T16:00:00.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAdd1Second_Test()
@@ -288,11 +288,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAdd1Millisecond":
-		///	( @T15:59:59.999 + 1 milliseconds ) = @T16:00:00.000
-		/// </summary>
+        ///define "TimeAdd1Millisecond":
+        ///	( @T15:59:59.999 + 1 milliseconds ) = @T16:00:00.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAdd1Millisecond_Test()
@@ -302,11 +302,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAdd5Hours1Minute":
-		///	( @T15:59:59.999 + 5 hours + 1 minutes ) = @T21:00:59.999
-		/// </summary>
+        ///define "TimeAdd5Hours1Minute":
+        ///	( @T15:59:59.999 + 5 hours + 1 minutes ) = @T21:00:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAdd5Hours1Minute_Test()
@@ -316,11 +316,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAdd5hoursByMinute":
-		///	( @T15:59:59.999 + 300 minutes ) = @T20:59:59.999
-		/// </summary>
+        ///define "TimeAdd5hoursByMinute":
+        ///	( @T15:59:59.999 + 300 minutes ) = @T20:59:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAdd5hoursByMinute_Test()
@@ -330,11 +330,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterYearTrue":
-		///	( DateTime(2005, 10, 10) after year of DateTime(2004, 10, 10) ) = true
-		/// </summary>
+        ///define "DateTimeAfterYearTrue":
+        ///	( DateTime(2005, 10, 10) after year of DateTime(2004, 10, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterYearTrue_Test()
@@ -344,11 +344,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterYearFalse":
-		///	( DateTime(2004, 11, 10) after year of DateTime(2004, 10, 10) ) = false
-		/// </summary>
+        ///define "DateTimeAfterYearFalse":
+        ///	( DateTime(2004, 11, 10) after year of DateTime(2004, 10, 10) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterYearFalse_Test()
@@ -358,11 +358,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterMonthTrue":
-		///	( DateTime(2004, 12, 10) after month of DateTime(2004, 11, 10) ) = true
-		/// </summary>
+        ///define "DateTimeAfterMonthTrue":
+        ///	( DateTime(2004, 12, 10) after month of DateTime(2004, 11, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterMonthTrue_Test()
@@ -372,11 +372,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterMonthFalse":
-		///	( DateTime(2004, 9, 10) after month of DateTime(2004, 10, 10) ) = false
-		/// </summary>
+        ///define "DateTimeAfterMonthFalse":
+        ///	( DateTime(2004, 9, 10) after month of DateTime(2004, 10, 10) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterMonthFalse_Test()
@@ -386,11 +386,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterDayTrue":
-		///	( DateTime(2004, 12, 11) after day of DateTime(2004, 10, 10) ) = true
-		/// </summary>
+        ///define "DateTimeAfterDayTrue":
+        ///	( DateTime(2004, 12, 11) after day of DateTime(2004, 10, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterDayTrue_Test()
@@ -400,11 +400,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterDayTrue2":
-		///	( DateTime(2004, 12, 09) after day of DateTime(2003, 10, 10) ) = true
-		/// </summary>
+        ///define "DateTimeAfterDayTrue2":
+        ///	( DateTime(2004, 12, 09) after day of DateTime(2003, 10, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterDayTrue2_Test()
@@ -414,11 +414,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterDayFalse":
-		///	( DateTime(2004, 10, 9) after day of DateTime(2004, 10, 10) ) = false
-		/// </summary>
+        ///define "DateTimeAfterDayFalse":
+        ///	( DateTime(2004, 10, 9) after day of DateTime(2004, 10, 10) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterDayFalse_Test()
@@ -428,11 +428,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterHourTrue":
-		///	( DateTime(2004, 10, 10, 10) after hour of DateTime(2004, 10, 10, 5) ) = true
-		/// </summary>
+        ///define "DateTimeAfterHourTrue":
+        ///	( DateTime(2004, 10, 10, 10) after hour of DateTime(2004, 10, 10, 5) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterHourTrue_Test()
@@ -442,11 +442,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterHourFalse":
-		///	( DateTime(2004, 10, 10, 20) after hour of DateTime(2004, 10, 10, 21) ) = false
-		/// </summary>
+        ///define "DateTimeAfterHourFalse":
+        ///	( DateTime(2004, 10, 10, 20) after hour of DateTime(2004, 10, 10, 21) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterHourFalse_Test()
@@ -456,11 +456,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterMinuteTrue":
-		///	( DateTime(2004, 10, 10, 20, 30) after minute of DateTime(2004, 10, 10, 20, 29) ) = true
-		/// </summary>
+        ///define "DateTimeAfterMinuteTrue":
+        ///	( DateTime(2004, 10, 10, 20, 30) after minute of DateTime(2004, 10, 10, 20, 29) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterMinuteTrue_Test()
@@ -470,11 +470,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterMinuteFalse":
-		///	( DateTime(2004, 10, 10, 20, 30) after minute of DateTime(2004, 10, 10, 20, 31) ) = false
-		/// </summary>
+        ///define "DateTimeAfterMinuteFalse":
+        ///	( DateTime(2004, 10, 10, 20, 30) after minute of DateTime(2004, 10, 10, 20, 31) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterMinuteFalse_Test()
@@ -484,11 +484,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterSecondTrue":
-		///	( DateTime(2004, 10, 10, 20, 30, 15) after second of DateTime(2004, 10, 10, 20, 30, 14) ) = true
-		/// </summary>
+        ///define "DateTimeAfterSecondTrue":
+        ///	( DateTime(2004, 10, 10, 20, 30, 15) after second of DateTime(2004, 10, 10, 20, 30, 14) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterSecondTrue_Test()
@@ -498,11 +498,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterSecondFalse":
-		///	( DateTime(2004, 10, 10, 20, 30, 15) after second of DateTime(2004, 10, 10, 20, 30, 16) ) = false
-		/// </summary>
+        ///define "DateTimeAfterSecondFalse":
+        ///	( DateTime(2004, 10, 10, 20, 30, 15) after second of DateTime(2004, 10, 10, 20, 30, 16) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterSecondFalse_Test()
@@ -512,11 +512,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterMillisecondTrue":
-		///	( DateTime(2004, 10, 10, 20, 30, 15, 512) after millisecond of DateTime(2004, 10, 10, 20, 30, 15, 510) ) = true
-		/// </summary>
+        ///define "DateTimeAfterMillisecondTrue":
+        ///	( DateTime(2004, 10, 10, 20, 30, 15, 512) after millisecond of DateTime(2004, 10, 10, 20, 30, 15, 510) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterMillisecondTrue_Test()
@@ -526,11 +526,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterMillisecondFalse":
-		///	( DateTime(2004, 10, 10, 20, 30, 15, 512) after millisecond of DateTime(2004, 10, 10, 20, 30, 15, 513) ) = false
-		/// </summary>
+        ///define "DateTimeAfterMillisecondFalse":
+        ///	( DateTime(2004, 10, 10, 20, 30, 15, 512) after millisecond of DateTime(2004, 10, 10, 20, 30, 15, 513) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterMillisecondFalse_Test()
@@ -540,11 +540,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAfterUncertain":
-		///	( DateTime(2005, 10, 10) after day of DateTime(2005, 9) ) = true
-		/// </summary>
+        ///define "DateTimeAfterUncertain":
+        ///	( DateTime(2005, 10, 10) after day of DateTime(2005, 9) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAfterUncertain_Test()
@@ -554,11 +554,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "AfterTimezoneTrue":
-		///	( @2012-03-10T10:20:00.999+07:00 after hour of @2012-03-10T08:20:00.999+06:00 ) = true
-		/// </summary>
+        ///define "AfterTimezoneTrue":
+        ///	( @2012-03-10T10:20:00.999+07:00 after hour of @2012-03-10T08:20:00.999+06:00 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void AfterTimezoneTrue_Test()
@@ -568,11 +568,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "AfterTimezoneFalse":
-		///	( @2012-03-10T10:20:00.999+07:00 after hour of @2012-03-10T10:20:00.999+06:00 ) = false
-		/// </summary>
+        ///define "AfterTimezoneFalse":
+        ///	( @2012-03-10T10:20:00.999+07:00 after hour of @2012-03-10T10:20:00.999+06:00 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void AfterTimezoneFalse_Test()
@@ -582,11 +582,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterHourTrue":
-		///	( @T15:59:59.999 after hour of @T14:59:59.999 ) = true
-		/// </summary>
+        ///define "TimeAfterHourTrue":
+        ///	( @T15:59:59.999 after hour of @T14:59:59.999 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterHourTrue_Test()
@@ -596,11 +596,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterHourFalse":
-		///	( @T15:59:59.999 after hour of @T16:59:59.999 ) = false
-		/// </summary>
+        ///define "TimeAfterHourFalse":
+        ///	( @T15:59:59.999 after hour of @T16:59:59.999 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterHourFalse_Test()
@@ -610,11 +610,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterMinuteTrue":
-		///	( @T15:59:59.999 after minute of @T15:58:59.999 ) = true
-		/// </summary>
+        ///define "TimeAfterMinuteTrue":
+        ///	( @T15:59:59.999 after minute of @T15:58:59.999 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterMinuteTrue_Test()
@@ -624,11 +624,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterMinuteFalse":
-		///	( @T15:58:59.999 after minute of @T15:59:59.999 ) = false
-		/// </summary>
+        ///define "TimeAfterMinuteFalse":
+        ///	( @T15:58:59.999 after minute of @T15:59:59.999 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterMinuteFalse_Test()
@@ -638,11 +638,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterSecondTrue":
-		///	( @T15:59:59.999 after second of @T15:59:58.999 ) = true
-		/// </summary>
+        ///define "TimeAfterSecondTrue":
+        ///	( @T15:59:59.999 after second of @T15:59:58.999 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterSecondTrue_Test()
@@ -652,11 +652,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterSecondFalse":
-		///	( @T15:59:58.999 after second of @T15:59:59.999 ) = false
-		/// </summary>
+        ///define "TimeAfterSecondFalse":
+        ///	( @T15:59:58.999 after second of @T15:59:59.999 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterSecondFalse_Test()
@@ -666,11 +666,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterMillisecondTrue":
-		///	( @T15:59:59.999 after millisecond of @T15:59:59.998 ) = true
-		/// </summary>
+        ///define "TimeAfterMillisecondTrue":
+        ///	( @T15:59:59.999 after millisecond of @T15:59:59.998 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterMillisecondTrue_Test()
@@ -680,11 +680,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterMillisecondFalse":
-		///	( @T15:59:59.998 after millisecond of @T15:59:59.999 ) = false
-		/// </summary>
+        ///define "TimeAfterMillisecondFalse":
+        ///	( @T15:59:59.998 after millisecond of @T15:59:59.999 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterMillisecondFalse_Test()
@@ -694,11 +694,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeAfterTimeCstor":
-		///	( Time(12, 30) after hour of Time(11, 55) ) = true
-		/// </summary>
+        ///define "TimeAfterTimeCstor":
+        ///	( Time(12, 30) after hour of Time(11, 55) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeAfterTimeCstor_Test()
@@ -708,11 +708,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeYearTrue":
-		///	( DateTime(2003) before year of DateTime(2004, 10, 10) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeYearTrue":
+        ///	( DateTime(2003) before year of DateTime(2004, 10, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeYearTrue_Test()
@@ -722,11 +722,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeYearFalse":
-		///	( DateTime(2004, 11, 10) before year of DateTime(2003, 10, 10) ) = false
-		/// </summary>
+        ///define "DateTimeBeforeYearFalse":
+        ///	( DateTime(2004, 11, 10) before year of DateTime(2003, 10, 10) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeYearFalse_Test()
@@ -736,11 +736,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeMonthTrue":
-		///	( DateTime(2004, 10, 10) before month of DateTime(2004, 11, 10) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeMonthTrue":
+        ///	( DateTime(2004, 10, 10) before month of DateTime(2004, 11, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeMonthTrue_Test()
@@ -750,11 +750,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeMonthFalse":
-		///	( DateTime(2004, 11, 10) before month of DateTime(2004, 10, 10) ) = false
-		/// </summary>
+        ///define "DateTimeBeforeMonthFalse":
+        ///	( DateTime(2004, 11, 10) before month of DateTime(2004, 10, 10) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeMonthFalse_Test()
@@ -764,11 +764,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeDayTrue":
-		///	( DateTime(2004, 10, 1) before day of DateTime(2004, 10, 10) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeDayTrue":
+        ///	( DateTime(2004, 10, 1) before day of DateTime(2004, 10, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeDayTrue_Test()
@@ -778,11 +778,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeDayTrue2":
-		///	( DateTime(2003, 10, 11) before day of DateTime(2004, 10, 10) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeDayTrue2":
+        ///	( DateTime(2003, 10, 11) before day of DateTime(2004, 10, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeDayTrue2_Test()
@@ -792,11 +792,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeDayFalse":
-		///	( DateTime(2004, 10, 11) before day of DateTime(2004, 10, 10) ) = false
-		/// </summary>
+        ///define "DateTimeBeforeDayFalse":
+        ///	( DateTime(2004, 10, 11) before day of DateTime(2004, 10, 10) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeDayFalse_Test()
@@ -806,11 +806,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeHourTrue":
-		///	( DateTime(2004, 10, 10, 1) before hour of DateTime(2004, 10, 10, 5) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeHourTrue":
+        ///	( DateTime(2004, 10, 10, 1) before hour of DateTime(2004, 10, 10, 5) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeHourTrue_Test()
@@ -820,11 +820,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeHourFalse":
-		///	( DateTime(2004, 10, 10, 23) before hour of DateTime(2004, 10, 10, 21) ) = false
-		/// </summary>
+        ///define "DateTimeBeforeHourFalse":
+        ///	( DateTime(2004, 10, 10, 23) before hour of DateTime(2004, 10, 10, 21) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeHourFalse_Test()
@@ -834,11 +834,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeMinuteTrue":
-		///	( DateTime(2004, 10, 10, 20, 28) before minute of DateTime(2004, 10, 10, 20, 29) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeMinuteTrue":
+        ///	( DateTime(2004, 10, 10, 20, 28) before minute of DateTime(2004, 10, 10, 20, 29) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeMinuteTrue_Test()
@@ -848,11 +848,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeMinuteFalse":
-		///	( DateTime(2004, 10, 10, 20, 35) before minute of DateTime(2004, 10, 10, 20, 31) ) = false
-		/// </summary>
+        ///define "DateTimeBeforeMinuteFalse":
+        ///	( DateTime(2004, 10, 10, 20, 35) before minute of DateTime(2004, 10, 10, 20, 31) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeMinuteFalse_Test()
@@ -862,11 +862,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeSecondTrue":
-		///	( DateTime(2004, 10, 10, 20, 30, 12) before second of DateTime(2004, 10, 10, 20, 30, 14) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeSecondTrue":
+        ///	( DateTime(2004, 10, 10, 20, 30, 12) before second of DateTime(2004, 10, 10, 20, 30, 14) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeSecondTrue_Test()
@@ -876,11 +876,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeSecondFalse":
-		///	( DateTime(2004, 10, 10, 20, 30, 55) before second of DateTime(2004, 10, 10, 20, 30, 16) ) = false
-		/// </summary>
+        ///define "DateTimeBeforeSecondFalse":
+        ///	( DateTime(2004, 10, 10, 20, 30, 55) before second of DateTime(2004, 10, 10, 20, 30, 16) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeSecondFalse_Test()
@@ -890,11 +890,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeMillisecondTrue":
-		///	( DateTime(2004, 10, 10, 20, 30, 15, 508) before millisecond of DateTime(2004, 10, 10, 20, 30, 15, 510) ) = true
-		/// </summary>
+        ///define "DateTimeBeforeMillisecondTrue":
+        ///	( DateTime(2004, 10, 10, 20, 30, 15, 508) before millisecond of DateTime(2004, 10, 10, 20, 30, 15, 510) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeMillisecondTrue_Test()
@@ -904,11 +904,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBeforeMillisecondFalse":
-		///	( DateTime(2004, 10, 10, 20, 30, 15, 599) before millisecond of DateTime(2004, 10, 10, 20, 30, 15, 513) ) = false
-		/// </summary>
+        ///define "DateTimeBeforeMillisecondFalse":
+        ///	( DateTime(2004, 10, 10, 20, 30, 15, 599) before millisecond of DateTime(2004, 10, 10, 20, 30, 15, 513) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBeforeMillisecondFalse_Test()
@@ -932,11 +932,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "BeforeTimezoneFalse":
-		///	( @2012-03-10T10:20:00.999+07:00 before hour of @2012-03-10T09:20:00.999+06:00 ) = false
-		/// </summary>
+        ///define "BeforeTimezoneFalse":
+        ///	( @2012-03-10T10:20:00.999+07:00 before hour of @2012-03-10T09:20:00.999+06:00 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void BeforeTimezoneFalse_Test()
@@ -946,11 +946,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeHourTrue":
-		///	( @T13:59:59.999 before hour of @T14:59:59.999 ) = true
-		/// </summary>
+        ///define "TimeBeforeHourTrue":
+        ///	( @T13:59:59.999 before hour of @T14:59:59.999 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeHourTrue_Test()
@@ -960,11 +960,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeHourFalse":
-		///	( @T16:59:59.999 before hour of @T15:59:59.999 ) = false
-		/// </summary>
+        ///define "TimeBeforeHourFalse":
+        ///	( @T16:59:59.999 before hour of @T15:59:59.999 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeHourFalse_Test()
@@ -974,11 +974,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeMinuteTrue":
-		///	( @T15:57:59.999 before minute of @T15:58:59.999 ) = true
-		/// </summary>
+        ///define "TimeBeforeMinuteTrue":
+        ///	( @T15:57:59.999 before minute of @T15:58:59.999 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeMinuteTrue_Test()
@@ -988,11 +988,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeMinuteFalse":
-		///	( @T15:59:59.999 before minute of @T15:59:59.999 ) = false
-		/// </summary>
+        ///define "TimeBeforeMinuteFalse":
+        ///	( @T15:59:59.999 before minute of @T15:59:59.999 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeMinuteFalse_Test()
@@ -1002,11 +1002,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeSecondTrue":
-		///	( @T15:59:57.999 before second of @T15:59:58.999 ) = true
-		/// </summary>
+        ///define "TimeBeforeSecondTrue":
+        ///	( @T15:59:57.999 before second of @T15:59:58.999 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeSecondTrue_Test()
@@ -1016,11 +1016,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeSecondFalse":
-		///	( @T15:59:56.999 before second of @T15:59:55.999 ) = false
-		/// </summary>
+        ///define "TimeBeforeSecondFalse":
+        ///	( @T15:59:56.999 before second of @T15:59:55.999 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeSecondFalse_Test()
@@ -1030,11 +1030,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeMillisecondTrue":
-		///	( @T15:59:59.997 before millisecond of @T15:59:59.998 ) = true
-		/// </summary>
+        ///define "TimeBeforeMillisecondTrue":
+        ///	( @T15:59:59.997 before millisecond of @T15:59:59.998 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeMillisecondTrue_Test()
@@ -1044,11 +1044,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeBeforeMillisecondFalse":
-		///	( @T15:59:59.998 before millisecond of @T15:59:59.997 ) = false
-		/// </summary>
+        ///define "TimeBeforeMillisecondFalse":
+        ///	( @T15:59:59.998 before millisecond of @T15:59:59.997 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeBeforeMillisecondFalse_Test()
@@ -1058,11 +1058,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeYear":
-		///	( DateTime(2003) ) = @2003
-		/// </summary>
+        ///define "DateTimeYear":
+        ///	( DateTime(2003) ) = @2003
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeYear_Test()
@@ -1072,11 +1072,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeMonth":
-		///	( DateTime(2003, 10) ) = @2003-10
-		/// </summary>
+        ///define "DateTimeMonth":
+        ///	( DateTime(2003, 10) ) = @2003-10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeMonth_Test()
@@ -1086,11 +1086,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDay":
-		///	( DateTime(2003, 10, 29) ) = @2003-10-29
-		/// </summary>
+        ///define "DateTimeDay":
+        ///	( DateTime(2003, 10, 29) ) = @2003-10-29
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDay_Test()
@@ -1100,11 +1100,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeHour":
-		///	( DateTime(2003, 10, 29, 20) ) = @2003-10-29T20
-		/// </summary>
+        ///define "DateTimeHour":
+        ///	( DateTime(2003, 10, 29, 20) ) = @2003-10-29T20
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeHour_Test()
@@ -1114,11 +1114,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeMinute":
-		///	( DateTime(2003, 10, 29, 20, 50) ) = @2003-10-29T20:50
-		/// </summary>
+        ///define "DateTimeMinute":
+        ///	( DateTime(2003, 10, 29, 20, 50) ) = @2003-10-29T20:50
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeMinute_Test()
@@ -1128,11 +1128,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSecond":
-		///	( DateTime(2003, 10, 29, 20, 50, 33) ) = @2003-10-29T20:50:33
-		/// </summary>
+        ///define "DateTimeSecond":
+        ///	( DateTime(2003, 10, 29, 20, 50, 33) ) = @2003-10-29T20:50:33
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSecond_Test()
@@ -1142,11 +1142,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeMillisecond":
-		///	( DateTime(2003, 10, 29, 20, 50, 33, 955) ) = @2003-10-29T20:50:33.955
-		/// </summary>
+        ///define "DateTimeMillisecond":
+        ///	( DateTime(2003, 10, 29, 20, 50, 33, 955) ) = @2003-10-29T20:50:33.955
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeMillisecond_Test()
@@ -1156,11 +1156,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromYear":
-		///	( year from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 2003
-		/// </summary>
+        ///define "DateTimeComponentFromYear":
+        ///	( year from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 2003
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromYear_Test()
@@ -1170,11 +1170,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromMonth":
-		///	( month from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 10
-		/// </summary>
+        ///define "DateTimeComponentFromMonth":
+        ///	( month from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromMonth_Test()
@@ -1184,11 +1184,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromMonthMinBoundary":
-		///	( month from DateTime(2003, 01, 29, 20, 50, 33, 955) ) = 1
-		/// </summary>
+        ///define "DateTimeComponentFromMonthMinBoundary":
+        ///	( month from DateTime(2003, 01, 29, 20, 50, 33, 955) ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromMonthMinBoundary_Test()
@@ -1198,11 +1198,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromDay":
-		///	( day from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 29
-		/// </summary>
+        ///define "DateTimeComponentFromDay":
+        ///	( day from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 29
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromDay_Test()
@@ -1212,11 +1212,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromHour":
-		///	( hour from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 20
-		/// </summary>
+        ///define "DateTimeComponentFromHour":
+        ///	( hour from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 20
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromHour_Test()
@@ -1226,11 +1226,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromMinute":
-		///	( minute from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 50
-		/// </summary>
+        ///define "DateTimeComponentFromMinute":
+        ///	( minute from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 50
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromMinute_Test()
@@ -1240,11 +1240,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromSecond":
-		///	( second from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 33
-		/// </summary>
+        ///define "DateTimeComponentFromSecond":
+        ///	( second from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 33
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromSecond_Test()
@@ -1254,11 +1254,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromMillisecond":
-		///	( millisecond from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 955
-		/// </summary>
+        ///define "DateTimeComponentFromMillisecond":
+        ///	( millisecond from DateTime(2003, 10, 29, 20, 50, 33, 955) ) = 955
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromMillisecond_Test()
@@ -1268,11 +1268,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromTimezone":
-		///	( timezone from DateTime(2003, 10, 29, 20, 50, 33, 955, 1) ) = 1.00
-		/// </summary>
+        ///define "DateTimeComponentFromTimezone":
+        ///	( timezone from DateTime(2003, 10, 29, 20, 50, 33, 955, 1) ) = 1.00
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1283,11 +1283,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeComponentFromDate":
-		///	( date from DateTime(2003, 10, 29, 20, 50, 33, 955, 1) ) = @2003-10-29
-		/// </summary>
+        ///define "DateTimeComponentFromDate":
+        ///	( date from DateTime(2003, 10, 29, 20, 50, 33, 955, 1) ) = @2003-10-29
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeComponentFromDate_Test()
@@ -1297,11 +1297,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeComponentFromHour":
-		///	( hour from @T23:20:15.555 ) = 23
-		/// </summary>
+        ///define "TimeComponentFromHour":
+        ///	( hour from @T23:20:15.555 ) = 23
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeComponentFromHour_Test()
@@ -1311,11 +1311,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeComponentFromMinute":
-		///	( minute from @T23:20:15.555 ) = 20
-		/// </summary>
+        ///define "TimeComponentFromMinute":
+        ///	( minute from @T23:20:15.555 ) = 20
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeComponentFromMinute_Test()
@@ -1325,11 +1325,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeComponentFromSecond":
-		///	( second from @T23:20:15.555 ) = 15
-		/// </summary>
+        ///define "TimeComponentFromSecond":
+        ///	( second from @T23:20:15.555 ) = 15
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeComponentFromSecond_Test()
@@ -1339,11 +1339,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeComponentFromMilli":
-		///	( millisecond from @T23:20:15.555 ) = 555
-		/// </summary>
+        ///define "TimeComponentFromMilli":
+        ///	( millisecond from @T23:20:15.555 ) = 555
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeComponentFromMilli_Test()
@@ -1353,11 +1353,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceYear":
-		///	( difference in years between DateTime(2000) and DateTime(2005, 12) ) = 5
-		/// </summary>
+        ///define "DateTimeDifferenceYear":
+        ///	( difference in years between DateTime(2000) and DateTime(2005, 12) ) = 5
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceYear_Test()
@@ -1367,11 +1367,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceMonth":
-		///	( difference in months between DateTime(2000, 2) and DateTime(2000, 10) ) = 8
-		/// </summary>
+        ///define "DateTimeDifferenceMonth":
+        ///	( difference in months between DateTime(2000, 2) and DateTime(2000, 10) ) = 8
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceMonth_Test()
@@ -1381,11 +1381,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceDay":
-		///	( difference in days between DateTime(2000, 10, 15, 10, 30) and DateTime(2000, 10, 25, 10, 0) ) = 10
-		/// </summary>
+        ///define "DateTimeDifferenceDay":
+        ///	( difference in days between DateTime(2000, 10, 15, 10, 30) and DateTime(2000, 10, 25, 10, 0) ) = 10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceDay_Test()
@@ -1395,11 +1395,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceHour":
-		///	( difference in hours between DateTime(2000, 4, 1, 12) and DateTime(2000, 4, 1, 20) ) = 8
-		/// </summary>
+        ///define "DateTimeDifferenceHour":
+        ///	( difference in hours between DateTime(2000, 4, 1, 12) and DateTime(2000, 4, 1, 20) ) = 8
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceHour_Test()
@@ -1409,11 +1409,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceMinute":
-		///	( difference in minutes between DateTime(2005, 12, 10, 5, 16) and DateTime(2005, 12, 10, 5, 25) ) = 9
-		/// </summary>
+        ///define "DateTimeDifferenceMinute":
+        ///	( difference in minutes between DateTime(2005, 12, 10, 5, 16) and DateTime(2005, 12, 10, 5, 25) ) = 9
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceMinute_Test()
@@ -1423,11 +1423,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceSecond":
-		///	( difference in seconds between DateTime(2000, 10, 10, 10, 5, 45) and DateTime(2000, 10, 10, 10, 5, 50) ) = 5
-		/// </summary>
+        ///define "DateTimeDifferenceSecond":
+        ///	( difference in seconds between DateTime(2000, 10, 10, 10, 5, 45) and DateTime(2000, 10, 10, 10, 5, 50) ) = 5
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceSecond_Test()
@@ -1437,11 +1437,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceMillisecond":
-		///	( difference in milliseconds between DateTime(2000, 10, 10, 10, 5, 45, 500, -6.0) and DateTime(2000, 10, 10, 10, 5, 45, 900, -7.0) ) = 3600400
-		/// </summary>
+        ///define "DateTimeDifferenceMillisecond":
+        ///	( difference in milliseconds between DateTime(2000, 10, 10, 10, 5, 45, 500, -6.0) and DateTime(2000, 10, 10, 10, 5, 45, 900, -7.0) ) = 3600400
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceMillisecond_Test()
@@ -1451,11 +1451,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceWeeks":
-		///	( difference in weeks between DateTime(2000, 10, 15) and DateTime(2000, 10, 28) ) = 1
-		/// </summary>
+        ///define "DateTimeDifferenceWeeks":
+        ///	( difference in weeks between DateTime(2000, 10, 15) and DateTime(2000, 10, 28) ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceWeeks_Test()
@@ -1465,11 +1465,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceWeeks2":
-		///	( difference in weeks between DateTime(2000, 10, 15) and DateTime(2000, 10, 29) ) = 2
-		/// </summary>
+        ///define "DateTimeDifferenceWeeks2":
+        ///	( difference in weeks between DateTime(2000, 10, 15) and DateTime(2000, 10, 29) ) = 2
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceWeeks2_Test()
@@ -1479,11 +1479,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceWeeks3":
-		///	( difference in weeks between @2012-03-10T22:05:09 and @2012-03-24T07:19:33 ) = 2
-		/// </summary>
+        ///define "DateTimeDifferenceWeeks3":
+        ///	( difference in weeks between @2012-03-10T22:05:09 and @2012-03-24T07:19:33 ) = 2
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceWeeks3_Test()
@@ -1493,11 +1493,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceNegative":
-		///	( difference in years between DateTime(2016) and DateTime(1998) ) = -18
-		/// </summary>
+        ///define "DateTimeDifferenceNegative":
+        ///	( difference in years between DateTime(2016) and DateTime(1998) ) = -18
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceNegative_Test()
@@ -1507,11 +1507,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDifferenceUncertain":
-		///	( difference in months between DateTime(2005) and DateTime(2006, 7) > 5 ) = true
-		/// </summary>
+        ///define "DateTimeDifferenceUncertain":
+        ///	( difference in months between DateTime(2005) and DateTime(2006, 7) > 5 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDifferenceUncertain_Test()
@@ -1521,11 +1521,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDifferenceHour":
-		///	( difference in hours between @T20 and @T23:25:15.555 ) = 3
-		/// </summary>
+        ///define "TimeDifferenceHour":
+        ///	( difference in hours between @T20 and @T23:25:15.555 ) = 3
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDifferenceHour_Test()
@@ -1535,11 +1535,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDifferenceMinute":
-		///	( difference in minutes between @T20:20:15.555 and @T20:25:15.555 ) = 5
-		/// </summary>
+        ///define "TimeDifferenceMinute":
+        ///	( difference in minutes between @T20:20:15.555 and @T20:25:15.555 ) = 5
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDifferenceMinute_Test()
@@ -1549,11 +1549,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDifferenceSecond":
-		///	( difference in seconds between @T20:20:15.555 and @T20:20:20.555 ) = 5
-		/// </summary>
+        ///define "TimeDifferenceSecond":
+        ///	( difference in seconds between @T20:20:15.555 and @T20:20:20.555 ) = 5
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDifferenceSecond_Test()
@@ -1563,11 +1563,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDifferenceMillis":
-		///	( difference in milliseconds between @T20:20:15.555 and @T20:20:15.550 ) = -5
-		/// </summary>
+        ///define "TimeDifferenceMillis":
+        ///	( difference in milliseconds between @T20:20:15.555 and @T20:20:15.550 ) = -5
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDifferenceMillis_Test()
@@ -1577,11 +1577,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeA":
-		///	( @2017-03-12T01:00:00-07:00 ) = @2017-03-12T01:00:00
-		/// </summary>
+        ///define "DateTimeA":
+        ///	( @2017-03-12T01:00:00-07:00 ) = @2017-03-12T01:00:00
+        /// </summary>
         [Ignore(DoesNotConformToSpec)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1592,11 +1592,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAA":
-		///	( DateTime(2017, 3, 12, 1, 0, 0, 0, -7.0) ) = @2017-03-12T01:00:00.000
-		/// </summary>
+        ///define "DateTimeAA":
+        ///	( DateTime(2017, 3, 12, 1, 0, 0, 0, -7.0) ) = @2017-03-12T01:00:00.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAA_Test()
@@ -1606,11 +1606,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeB":
-		///	( @2017-03-12T03:00:00-06:00 ) = @2017-03-12T03:00:00
-		/// </summary>
+        ///define "DateTimeB":
+        ///	( @2017-03-12T03:00:00-06:00 ) = @2017-03-12T03:00:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeB_Test()
@@ -1620,11 +1620,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeBB":
-		///	( DateTime(2017, 3, 12, 3, 0, 0, 0, -6.0) ) = @2017-03-12T03:00:00.000
-		/// </summary>
+        ///define "DateTimeBB":
+        ///	( DateTime(2017, 3, 12, 3, 0, 0, 0, -6.0) ) = @2017-03-12T03:00:00.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeBB_Test()
@@ -1634,11 +1634,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeC":
-		///	( @2017-11-05T01:30:00-06:00 ) = @2017-11-05T01:30:00
-		/// </summary>
+        ///define "DateTimeC":
+        ///	( @2017-11-05T01:30:00-06:00 ) = @2017-11-05T01:30:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeC_Test()
@@ -1648,11 +1648,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeCC":
-		///	( DateTime(2017, 11, 5, 1, 30, 0, 0, -6.0) ) = @2017-11-05T01:30:00.000
-		/// </summary>
+        ///define "DateTimeCC":
+        ///	( DateTime(2017, 11, 5, 1, 30, 0, 0, -6.0) ) = @2017-11-05T01:30:00.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeCC_Test()
@@ -1662,11 +1662,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeD":
-		///	( @2017-11-05T01:15:00-07:00 ) = @2017-11-05T01:15:00
-		/// </summary>
+        ///define "DateTimeD":
+        ///	( @2017-11-05T01:15:00-07:00 ) = @2017-11-05T01:15:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeD_Test()
@@ -1676,11 +1676,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDD":
-		///	( DateTime(2017, 11, 5, 1, 15, 0, 0, -7.0) ) = @2017-11-05T01:15:00.000
-		/// </summary>
+        ///define "DateTimeDD":
+        ///	( DateTime(2017, 11, 5, 1, 15, 0, 0, -7.0) ) = @2017-11-05T01:15:00.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDD_Test()
@@ -1690,11 +1690,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeE":
-		///	( @2017-03-12T00:00:00-07:00 ) = @2017-03-12T00:00:00
-		/// </summary>
+        ///define "DateTimeE":
+        ///	( @2017-03-12T00:00:00-07:00 ) = @2017-03-12T00:00:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeE_Test()
@@ -1715,9 +1715,9 @@ namespace CoreTests
         }
 
         /// <summaray>
-		///define "DateTimeEE":
-		///	( DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) ) = @2017-03-12T00:00:00.000
-		/// </summary>
+        ///define "DateTimeEE":
+        ///	( DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) ) = @2017-03-12T00:00:00.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeEE_Test()
@@ -1727,11 +1727,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeF":
-		///	( @2017-03-13T00:00:00-06:00 ) = @2017-03-13T00:00:00
-		/// </summary>
+        ///define "DateTimeF":
+        ///	( @2017-03-13T00:00:00-06:00 ) = @2017-03-13T00:00:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeF_Test()
@@ -1741,11 +1741,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeFF":
-		///	( DateTime(2017, 3, 13, 0, 0, 0, 0, -6.0) ) = @2017-03-13T00:00:00.000
-		/// </summary>
+        ///define "DateTimeFF":
+        ///	( DateTime(2017, 3, 13, 0, 0, 0, 0, -6.0) ) = @2017-03-13T00:00:00.000
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeFF_Test()
@@ -1755,11 +1755,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DifferenceInHoursA":
-		///	( difference in hours between @2017-03-12T01:00:00-07:00 and @2017-03-12T03:00:00-06:00 ) = 1
-		/// </summary>
+        ///define "DifferenceInHoursA":
+        ///	( difference in hours between @2017-03-12T01:00:00-07:00 and @2017-03-12T03:00:00-06:00 ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DifferenceInHoursA_Test()
@@ -1769,11 +1769,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DifferenceInMinutesA":
-		///	( difference in minutes between @2017-11-05T01:30:00-06:00 and @2017-11-05T01:15:00-07:00 ) = 45
-		/// </summary>
+        ///define "DifferenceInMinutesA":
+        ///	( difference in minutes between @2017-11-05T01:30:00-06:00 and @2017-11-05T01:15:00-07:00 ) = 45
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DifferenceInMinutesA_Test()
@@ -1797,11 +1797,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DifferenceInHoursAA":
-		///	( difference in hours between DateTime(2017, 3, 12, 1, 0, 0, 0, -7.0) and DateTime(2017, 3, 12, 3, 0, 0, 0, -6.0) ) = 1
-		/// </summary>
+        ///define "DifferenceInHoursAA":
+        ///	( difference in hours between DateTime(2017, 3, 12, 1, 0, 0, 0, -7.0) and DateTime(2017, 3, 12, 3, 0, 0, 0, -6.0) ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DifferenceInHoursAA_Test()
@@ -1811,11 +1811,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DifferenceInMinutesAA":
-		///	( difference in minutes between DateTime(2017, 11, 5, 1, 30, 0, 0, -6.0) and DateTime(2017, 11, 5, 1, 15, 0, 0, -7.0) ) = 45
-		/// </summary>
+        ///define "DifferenceInMinutesAA":
+        ///	( difference in minutes between DateTime(2017, 11, 5, 1, 30, 0, 0, -6.0) and DateTime(2017, 11, 5, 1, 15, 0, 0, -7.0) ) = 45
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DifferenceInMinutesAA_Test()
@@ -1825,11 +1825,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DifferenceInDaysAA":
-		///	( difference in days between DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) and DateTime(2017, 3, 13, 0, 0, 0, 0, -6.0) ) = 1
-		/// </summary>
+        ///define "DifferenceInDaysAA":
+        ///	( difference in days between DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) and DateTime(2017, 3, 13, 0, 0, 0, 0, -6.0) ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DifferenceInDaysAA_Test()
@@ -1839,11 +1839,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenYear":
-		///	( years between DateTime(2005) and DateTime(2010) ) = 5
-		/// </summary>
+        ///define "DateTimeDurationBetweenYear":
+        ///	( years between DateTime(2005) and DateTime(2010) ) = 5
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDurationBetweenYear_Test()
@@ -1853,11 +1853,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenYearOffset":
-		///	( years between DateTime(2005, 5) and DateTime(2010, 4) ) = 4
-		/// </summary>
+        ///define "DateTimeDurationBetweenYearOffset":
+        ///	( years between DateTime(2005, 5) and DateTime(2010, 4) ) = 4
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDurationBetweenYearOffset_Test()
@@ -1867,11 +1867,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonth":
-		///	( months between @2014-01-31 and @2014-02-01 ) = 0
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonth":
+        ///	( months between @2014-01-31 and @2014-02-01 ) = 0
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDurationBetweenMonth_Test()
@@ -1881,11 +1881,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenDaysDiffYears":
-		///	( days between DateTime(2010, 10, 12, 12, 5) and DateTime(2008, 8, 15, 8, 8) ) = -788
-		/// </summary>
+        ///define "DateTimeDurationBetweenDaysDiffYears":
+        ///	( days between DateTime(2010, 10, 12, 12, 5) and DateTime(2008, 8, 15, 8, 8) ) = -788
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeDurationBetweenDaysDiffYears_Test()
@@ -1895,11 +1895,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenUncertainInterval":
-		///	( days between DateTime(2014, 1, 15) and DateTime(2014, 2) ) = Interval[ 17, 44 ]
-		/// </summary>
+        ///define "DateTimeDurationBetweenUncertainInterval":
+        ///	( days between DateTime(2014, 1, 15) and DateTime(2014, 2) ) = Interval[ 17, 44 ]
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1910,11 +1910,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenUncertainInterval2":
-		///	( months between DateTime(2005) and DateTime(2006, 5) ) = Interval[ 5, 16 ]
-		/// </summary>
+        ///define "DateTimeDurationBetweenUncertainInterval2":
+        ///	( months between DateTime(2005) and DateTime(2006, 5) ) = Interval[ 5, 16 ]
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1925,12 +1925,12 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenUncertainAdd":
-		///	( (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
-		///				+ (days between DateTime(2014, 1, 15) and DateTime(2014, 2)) ) = Interval[ 34, 88 ]
-		/// </summary>
+        ///define "DateTimeDurationBetweenUncertainAdd":
+        ///	( (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
+        ///				+ (days between DateTime(2014, 1, 15) and DateTime(2014, 2)) ) = Interval[ 34, 88 ]
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1941,12 +1941,12 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenUncertainSubtract":
-		///	( (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
-		///				- (months between DateTime(2005) and DateTime(2006, 5)) ) = Interval[ 12, 28 ]
-		/// </summary>
+        ///define "DateTimeDurationBetweenUncertainSubtract":
+        ///	( (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
+        ///				- (months between DateTime(2005) and DateTime(2006, 5)) ) = Interval[ 12, 28 ]
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1957,12 +1957,12 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenUncertainMultiply":
-		///	( (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
-		///				* (days between DateTime(2014, 1, 15) and DateTime(2014, 2)) ) = Interval[ 289, 1936 ]
-		/// </summary>
+        ///define "DateTimeDurationBetweenUncertainMultiply":
+        ///	( (days between DateTime(2014, 1, 15) and DateTime(2014, 2))
+        ///				* (days between DateTime(2014, 1, 15) and DateTime(2014, 2)) ) = Interval[ 289, 1936 ]
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1973,11 +1973,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonthUncertain":
-		///	( months between DateTime(2005) and DateTime(2006, 7) > 5 ) = true
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonthUncertain":
+        ///	( months between DateTime(2005) and DateTime(2006, 7) > 5 ) = true
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -1988,11 +1988,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonthUncertain2":
-		///	( months between DateTime(2005) and DateTime(2006, 2) > 5 ) = null
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonthUncertain2":
+        ///	( months between DateTime(2005) and DateTime(2006, 2) > 5 ) = null
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -2003,11 +2003,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonthUncertain3":
-		///	( months between DateTime(2005) and DateTime(2006, 7) > 25 ) = false
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonthUncertain3":
+        ///	( months between DateTime(2005) and DateTime(2006, 7) > 25 ) = false
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -2018,11 +2018,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonthUncertain4":
-		///	( months between DateTime(2005) and DateTime(2006, 7) < 24 ) = true
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonthUncertain4":
+        ///	( months between DateTime(2005) and DateTime(2006, 7) < 24 ) = true
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -2033,11 +2033,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonthUncertain5":
-		///	( months between DateTime(2005) and DateTime(2006, 7) = 24 ) = false
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonthUncertain5":
+        ///	( months between DateTime(2005) and DateTime(2006, 7) = 24 ) = false
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -2048,11 +2048,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonthUncertain6":
-		///	( months between DateTime(2005) and DateTime(2006, 7) >= 5 ) = true
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonthUncertain6":
+        ///	( months between DateTime(2005) and DateTime(2006, 7) >= 5 ) = true
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -2063,11 +2063,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeDurationBetweenMonthUncertain7":
-		///	( months between DateTime(2005) and DateTime(2006, 7) <= 24 ) = true
-		/// </summary>
+        ///define "DateTimeDurationBetweenMonthUncertain7":
+        ///	( months between DateTime(2005) and DateTime(2006, 7) <= 24 ) = true
+        /// </summary>
         [Ignore(NotTestedByReferenceEngine)]
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
@@ -2078,11 +2078,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTime1":
-		///	( @2012-03-10T10:20:00 ) = @2012-03-10T10:20:00
-		/// </summary>
+        ///define "DateTime1":
+        ///	( @2012-03-10T10:20:00 ) = @2012-03-10T10:20:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTime1_Test()
@@ -2092,11 +2092,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTime2":
-		///	( @2013-03-10T09:20:00 ) = @2013-03-10T09:20:00
-		/// </summary>
+        ///define "DateTime2":
+        ///	( @2013-03-10T09:20:00 ) = @2013-03-10T09:20:00
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTime2_Test()
@@ -2106,11 +2106,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInYears":
-		///	( years between (date from @2012-03-10T10:20:00) and (date from @2013-03-10T09:20:00) ) = 1
-		/// </summary>
+        ///define "DurationInYears":
+        ///	( years between (date from @2012-03-10T10:20:00) and (date from @2013-03-10T09:20:00) ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInYears_Test()
@@ -2120,11 +2120,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInWeeks":
-		///	( weeks between @2012-03-10T22:05:09 and @2012-03-20T07:19:33 ) = 1
-		/// </summary>
+        ///define "DurationInWeeks":
+        ///	( weeks between @2012-03-10T22:05:09 and @2012-03-20T07:19:33 ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInWeeks_Test()
@@ -2134,11 +2134,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInWeeks2":
-		///	( weeks between @2012-03-10T22:05:09 and @2012-03-24T07:19:33 ) = 1
-		/// </summary>
+        ///define "DurationInWeeks2":
+        ///	( weeks between @2012-03-10T22:05:09 and @2012-03-24T07:19:33 ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInWeeks2_Test()
@@ -2148,11 +2148,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInWeeks3":
-		///	( weeks between @2012-03-10T06:05:09 and @2012-03-24T07:19:33 ) = 2
-		/// </summary>
+        ///define "DurationInWeeks3":
+        ///	( weeks between @2012-03-10T06:05:09 and @2012-03-24T07:19:33 ) = 2
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInWeeks3_Test()
@@ -2162,11 +2162,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDurationBetweenHour":
-		///	( hours between @T20:26:15.555 and @T23:25:15.555 ) = 2
-		/// </summary>
+        ///define "TimeDurationBetweenHour":
+        ///	( hours between @T20:26:15.555 and @T23:25:15.555 ) = 2
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDurationBetweenHour_Test()
@@ -2176,11 +2176,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDurationBetweenHourDiffPrecision":
-		///	( hours between @T06Z and @T07:00:00Z ) = 1
-		/// </summary>
+        ///define "TimeDurationBetweenHourDiffPrecision":
+        ///	( hours between @T06Z and @T07:00:00Z ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDurationBetweenHourDiffPrecision_Test()
@@ -2190,11 +2190,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDurationBetweenMinute":
-		///	( minutes between @T23:20:16.555 and @T23:25:15.555 ) = 4
-		/// </summary>
+        ///define "TimeDurationBetweenMinute":
+        ///	( minutes between @T23:20:16.555 and @T23:25:15.555 ) = 4
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDurationBetweenMinute_Test()
@@ -2204,11 +2204,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDurationBetweenSecond":
-		///	( seconds between @T23:25:10.556 and @T23:25:15.555 ) = 4
-		/// </summary>
+        ///define "TimeDurationBetweenSecond":
+        ///	( seconds between @T23:25:10.556 and @T23:25:15.555 ) = 4
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDurationBetweenSecond_Test()
@@ -2218,11 +2218,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeDurationBetweenMillis":
-		///	( milliseconds between @T23:25:25.555 and @T23:25:25.560 ) = 5
-		/// </summary>
+        ///define "TimeDurationBetweenMillis":
+        ///	( milliseconds between @T23:25:25.555 and @T23:25:25.560 ) = 5
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeDurationBetweenMillis_Test()
@@ -2232,11 +2232,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInHoursA":
-		///	( hours between @2017-03-12T01:00:00-07:00 and @2017-03-12T03:00:00-06:00 ) = 1
-		/// </summary>
+        ///define "DurationInHoursA":
+        ///	( hours between @2017-03-12T01:00:00-07:00 and @2017-03-12T03:00:00-06:00 ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInHoursA_Test()
@@ -2246,11 +2246,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInMinutesA":
-		///	( minutes between @2017-11-05T01:30:00-06:00 and @2017-11-05T01:15:00-07:00 ) = 45
-		/// </summary>
+        ///define "DurationInMinutesA":
+        ///	( minutes between @2017-11-05T01:30:00-06:00 and @2017-11-05T01:15:00-07:00 ) = 45
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInMinutesA_Test()
@@ -2260,11 +2260,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInDaysA":
-		///	( days between @2017-03-12T00:00:00-07:00 and @2017-03-13T00:00:00-06:00 ) = 0
-		/// </summary>
+        ///define "DurationInDaysA":
+        ///	( days between @2017-03-12T00:00:00-07:00 and @2017-03-13T00:00:00-06:00 ) = 0
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInDaysA_Test()
@@ -2274,11 +2274,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInHoursAA":
-		///	( hours between DateTime(2017, 3, 12, 1, 0, 0, 0, -7.0) and DateTime(2017, 3, 12, 3, 0, 0, 0, -6.0) ) = 1
-		/// </summary>
+        ///define "DurationInHoursAA":
+        ///	( hours between DateTime(2017, 3, 12, 1, 0, 0, 0, -7.0) and DateTime(2017, 3, 12, 3, 0, 0, 0, -6.0) ) = 1
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInHoursAA_Test()
@@ -2288,11 +2288,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInMinutesAA":
-		///	( minutes between DateTime(2017, 11, 5, 1, 30, 0, 0, -6.0) and DateTime(2017, 11, 5, 1, 15, 0, 0, -7.0) ) = 45
-		/// </summary>
+        ///define "DurationInMinutesAA":
+        ///	( minutes between DateTime(2017, 11, 5, 1, 30, 0, 0, -6.0) and DateTime(2017, 11, 5, 1, 15, 0, 0, -7.0) ) = 45
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInMinutesAA_Test()
@@ -2302,11 +2302,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DurationInDaysAA":
-		///	( days between DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) and DateTime(2017, 3, 13, 0, 0, 0, 0, -6.0) ) = 0
-		/// </summary>
+        ///define "DurationInDaysAA":
+        ///	( days between DateTime(2017, 3, 12, 0, 0, 0, 0, -7.0) and DateTime(2017, 3, 13, 0, 0, 0, 0, -6.0) ) = 0
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DurationInDaysAA_Test()
@@ -2316,11 +2316,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeNow":
-		///	( Now() = Now() ) = true
-		/// </summary>
+        ///define "DateTimeNow":
+        ///	( Now() = Now() ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeNow_Test()
@@ -2330,11 +2330,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsYearTrue":
-		///	( DateTime(2014) same year as DateTime(2014) ) = true
-		/// </summary>
+        ///define "DateTimeSameAsYearTrue":
+        ///	( DateTime(2014) same year as DateTime(2014) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsYearTrue_Test()
@@ -2344,11 +2344,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsYearFalse":
-		///	( DateTime(2013) same year as DateTime(2014) ) = false
-		/// </summary>
+        ///define "DateTimeSameAsYearFalse":
+        ///	( DateTime(2013) same year as DateTime(2014) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsYearFalse_Test()
@@ -2358,11 +2358,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsMonthTrue":
-		///	( DateTime(2014, 12) same month as DateTime(2014, 12) ) = true
-		/// </summary>
+        ///define "DateTimeSameAsMonthTrue":
+        ///	( DateTime(2014, 12) same month as DateTime(2014, 12) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsMonthTrue_Test()
@@ -2372,11 +2372,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsMonthFalse":
-		///	( DateTime(2014, 12) same month as DateTime(2014, 10) ) = false
-		/// </summary>
+        ///define "DateTimeSameAsMonthFalse":
+        ///	( DateTime(2014, 12) same month as DateTime(2014, 10) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsMonthFalse_Test()
@@ -2386,11 +2386,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsDayTrue":
-		///	( DateTime(2014, 12, 10) same day as DateTime(2014, 12, 10) ) = true
-		/// </summary>
+        ///define "DateTimeSameAsDayTrue":
+        ///	( DateTime(2014, 12, 10) same day as DateTime(2014, 12, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsDayTrue_Test()
@@ -2400,11 +2400,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsDayFalse":
-		///	( DateTime(2014, 10, 10) same day as DateTime(2014, 10, 11) ) = false
-		/// </summary>
+        ///define "DateTimeSameAsDayFalse":
+        ///	( DateTime(2014, 10, 10) same day as DateTime(2014, 10, 11) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsDayFalse_Test()
@@ -2414,11 +2414,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsHourTrue":
-		///	( DateTime(2014, 12, 10, 20) same hour as DateTime(2014, 12, 10, 20) ) = true
-		/// </summary>
+        ///define "DateTimeSameAsHourTrue":
+        ///	( DateTime(2014, 12, 10, 20) same hour as DateTime(2014, 12, 10, 20) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsHourTrue_Test()
@@ -2428,11 +2428,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsHourFalse":
-		///	( DateTime(2014, 10, 10, 20) same hour as DateTime(2014, 10, 10, 21) ) = false
-		/// </summary>
+        ///define "DateTimeSameAsHourFalse":
+        ///	( DateTime(2014, 10, 10, 20) same hour as DateTime(2014, 10, 10, 21) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsHourFalse_Test()
@@ -2442,11 +2442,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsMinuteTrue":
-		///	( DateTime(2014, 12, 10, 20, 55) same minute as DateTime(2014, 12, 10, 20, 55) ) = true
-		/// </summary>
+        ///define "DateTimeSameAsMinuteTrue":
+        ///	( DateTime(2014, 12, 10, 20, 55) same minute as DateTime(2014, 12, 10, 20, 55) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsMinuteTrue_Test()
@@ -2456,11 +2456,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsMinuteFalse":
-		///	( DateTime(2014, 10, 10, 20, 55) same minute as DateTime(2014, 10, 10, 21, 56) ) = false
-		/// </summary>
+        ///define "DateTimeSameAsMinuteFalse":
+        ///	( DateTime(2014, 10, 10, 20, 55) same minute as DateTime(2014, 10, 10, 21, 56) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsMinuteFalse_Test()
@@ -2470,11 +2470,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsSecondTrue":
-		///	( DateTime(2014, 12, 10, 20, 55, 45) same second as DateTime(2014, 12, 10, 20, 55, 45) ) = true
-		/// </summary>
+        ///define "DateTimeSameAsSecondTrue":
+        ///	( DateTime(2014, 12, 10, 20, 55, 45) same second as DateTime(2014, 12, 10, 20, 55, 45) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsSecondTrue_Test()
@@ -2484,11 +2484,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsSecondFalse":
-		///	( DateTime(2014, 10, 10, 20, 55, 45) same second as DateTime(2014, 10, 10, 21, 55, 44) ) = false
-		/// </summary>
+        ///define "DateTimeSameAsSecondFalse":
+        ///	( DateTime(2014, 10, 10, 20, 55, 45) same second as DateTime(2014, 10, 10, 21, 55, 44) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsSecondFalse_Test()
@@ -2498,11 +2498,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsMillisecondTrue":
-		///	( DateTime(2014, 12, 10, 20, 55, 45, 500) same millisecond as DateTime(2014, 12, 10, 20, 55, 45, 500) ) = true
-		/// </summary>
+        ///define "DateTimeSameAsMillisecondTrue":
+        ///	( DateTime(2014, 12, 10, 20, 55, 45, 500) same millisecond as DateTime(2014, 12, 10, 20, 55, 45, 500) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsMillisecondTrue_Test()
@@ -2512,11 +2512,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsMillisecondFalse":
-		///	( DateTime(2014, 10, 10, 20, 55, 45, 500) same millisecond as DateTime(2014, 10, 10, 21, 55, 45, 501) ) = false
-		/// </summary>
+        ///define "DateTimeSameAsMillisecondFalse":
+        ///	( DateTime(2014, 10, 10, 20, 55, 45, 500) same millisecond as DateTime(2014, 10, 10, 21, 55, 45, 501) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsMillisecondFalse_Test()
@@ -2526,11 +2526,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameAsNull":
-		///	( DateTime(2014, 10) same day as DateTime(2014, 10, 12) ) = null
-		/// </summary>
+        ///define "DateTimeSameAsNull":
+        ///	( DateTime(2014, 10) same day as DateTime(2014, 10, 12) ) = null
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameAsNull_Test()
@@ -2540,11 +2540,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summaray>
-		///define "SameAsTimezoneTrue":
-		///	( @2012-03-10T10:20:00.999+07:00 same hour as @2012-03-10T09:20:00.999+06:00 ) = true
-		/// </summary>
+        ///define "SameAsTimezoneTrue":
+        ///	( @2012-03-10T10:20:00.999+07:00 same hour as @2012-03-10T09:20:00.999+06:00 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void SameAsTimezoneTrue_Test()
@@ -2554,11 +2554,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "SameAsTimezoneFalse":
-		///	( @2012-03-10T10:20:00.999+07:00 same hour as @2012-03-10T10:20:00.999+06:00 ) = false
-		/// </summary>
+        ///define "SameAsTimezoneFalse":
+        ///	( @2012-03-10T10:20:00.999+07:00 same hour as @2012-03-10T10:20:00.999+06:00 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void SameAsTimezoneFalse_Test()
@@ -2568,11 +2568,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsHourTrue":
-		///	( @T23:25:25.555 same hour as @T23:55:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameAsHourTrue":
+        ///	( @T23:25:25.555 same hour as @T23:55:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsHourTrue_Test()
@@ -2582,11 +2582,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsHourFalse":
-		///	( @T22:25:25.555 same hour as @T23:25:25.555 ) = false
-		/// </summary>
+        ///define "TimeSameAsHourFalse":
+        ///	( @T22:25:25.555 same hour as @T23:25:25.555 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsHourFalse_Test()
@@ -2596,11 +2596,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsMinuteTrue":
-		///	( @T23:55:22.555 same minute as @T23:55:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameAsMinuteTrue":
+        ///	( @T23:55:22.555 same minute as @T23:55:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsMinuteTrue_Test()
@@ -2610,11 +2610,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsMinuteFalse":
-		///	( @T23:26:25.555 same minute as @T23:25:25.555 ) = false
-		/// </summary>
+        ///define "TimeSameAsMinuteFalse":
+        ///	( @T23:26:25.555 same minute as @T23:25:25.555 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsMinuteFalse_Test()
@@ -2624,11 +2624,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsSecondTrue":
-		///	( @T23:55:25.555 same second as @T23:55:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameAsSecondTrue":
+        ///	( @T23:55:25.555 same second as @T23:55:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsSecondTrue_Test()
@@ -2638,11 +2638,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsSecondFalse":
-		///	( @T23:25:35.555 same second as @T23:25:25.555 ) = false
-		/// </summary>
+        ///define "TimeSameAsSecondFalse":
+        ///	( @T23:25:35.555 same second as @T23:25:25.555 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsSecondFalse_Test()
@@ -2652,11 +2652,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsMillisTrue":
-		///	( @T23:55:25.555 same millisecond as @T23:55:25.555 ) = true
-		/// </summary>
+        ///define "TimeSameAsMillisTrue":
+        ///	( @T23:55:25.555 same millisecond as @T23:55:25.555 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsMillisTrue_Test()
@@ -2666,11 +2666,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameAsMillisFalse":
-		///	( @T23:25:25.555 same millisecond as @T23:25:25.554 ) = false
-		/// </summary>
+        ///define "TimeSameAsMillisFalse":
+        ///	( @T23:25:25.555 same millisecond as @T23:25:25.554 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameAsMillisFalse_Test()
@@ -2680,11 +2680,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterYearTrue1":
-		///	( DateTime(2014) same year or after DateTime(2014) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterYearTrue1":
+        ///	( DateTime(2014) same year or after DateTime(2014) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterYearTrue1_Test()
@@ -2694,11 +2694,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterYearTrue2":
-		///	( DateTime(2016) same year or after DateTime(2014) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterYearTrue2":
+        ///	( DateTime(2016) same year or after DateTime(2014) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterYearTrue2_Test()
@@ -2708,11 +2708,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterYearFalse":
-		///	( DateTime(2013) same year or after DateTime(2014) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrAfterYearFalse":
+        ///	( DateTime(2013) same year or after DateTime(2014) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterYearFalse_Test()
@@ -2722,11 +2722,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMonthTrue1":
-		///	( DateTime(2014, 12) same month or after DateTime(2014, 12) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterMonthTrue1":
+        ///	( DateTime(2014, 12) same month or after DateTime(2014, 12) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMonthTrue1_Test()
@@ -2736,11 +2736,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMonthTrue2":
-		///	( DateTime(2014, 10) same month or after DateTime(2014, 9) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterMonthTrue2":
+        ///	( DateTime(2014, 10) same month or after DateTime(2014, 9) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMonthTrue2_Test()
@@ -2750,11 +2750,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMonthFalse":
-		///	( DateTime(2014, 10) same month or after DateTime(2014, 11) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrAfterMonthFalse":
+        ///	( DateTime(2014, 10) same month or after DateTime(2014, 11) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMonthFalse_Test()
@@ -2764,11 +2764,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterDayTrue1":
-		///	( DateTime(2014, 12, 20) same day or after DateTime(2014, 12, 20) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterDayTrue1":
+        ///	( DateTime(2014, 12, 20) same day or after DateTime(2014, 12, 20) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterDayTrue1_Test()
@@ -2778,11 +2778,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterDayTrue2":
-		///	( DateTime(2014, 10, 25) same day or after DateTime(2014, 10, 20) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterDayTrue2":
+        ///	( DateTime(2014, 10, 25) same day or after DateTime(2014, 10, 20) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterDayTrue2_Test()
@@ -2792,11 +2792,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterDayFalse":
-		///	( DateTime(2014, 10, 20) same day or after DateTime(2014, 10, 25) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrAfterDayFalse":
+        ///	( DateTime(2014, 10, 20) same day or after DateTime(2014, 10, 25) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterDayFalse_Test()
@@ -2806,11 +2806,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterHourTrue1":
-		///	( DateTime(2014, 12, 20, 12) same hour or after DateTime(2014, 12, 20, 12) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterHourTrue1":
+        ///	( DateTime(2014, 12, 20, 12) same hour or after DateTime(2014, 12, 20, 12) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterHourTrue1_Test()
@@ -2820,11 +2820,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterHourTrue2":
-		///	( DateTime(2014, 10, 25, 12) same hour or after DateTime(2014, 10, 25, 10) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterHourTrue2":
+        ///	( DateTime(2014, 10, 25, 12) same hour or after DateTime(2014, 10, 25, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterHourTrue2_Test()
@@ -2834,11 +2834,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterHourFalse":
-		///	( DateTime(2014, 10, 25, 12) same hour or after DateTime(2014, 10, 25, 15) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrAfterHourFalse":
+        ///	( DateTime(2014, 10, 25, 12) same hour or after DateTime(2014, 10, 25, 15) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterHourFalse_Test()
@@ -2848,11 +2848,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMinuteTrue1":
-		///	( DateTime(2014, 12, 20, 12, 30) same minute or after DateTime(2014, 12, 20, 12, 30) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterMinuteTrue1":
+        ///	( DateTime(2014, 12, 20, 12, 30) same minute or after DateTime(2014, 12, 20, 12, 30) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMinuteTrue1_Test()
@@ -2862,11 +2862,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMinuteTrue2":
-		///	( DateTime(2014, 10, 25, 10, 30) same minute or after DateTime(2014, 10, 25, 10, 25) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterMinuteTrue2":
+        ///	( DateTime(2014, 10, 25, 10, 30) same minute or after DateTime(2014, 10, 25, 10, 25) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMinuteTrue2_Test()
@@ -2876,11 +2876,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMinuteFalse":
-		///	( DateTime(2014, 10, 25, 15, 30) same minute or after DateTime(2014, 10, 25, 15, 45) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrAfterMinuteFalse":
+        ///	( DateTime(2014, 10, 25, 15, 30) same minute or after DateTime(2014, 10, 25, 15, 45) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMinuteFalse_Test()
@@ -2890,11 +2890,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterSecondTrue1":
-		///	( DateTime(2014, 12, 20, 12, 30, 15) same second or after DateTime(2014, 12, 20, 12, 30, 15) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterSecondTrue1":
+        ///	( DateTime(2014, 12, 20, 12, 30, 15) same second or after DateTime(2014, 12, 20, 12, 30, 15) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterSecondTrue1_Test()
@@ -2904,11 +2904,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterSecondTrue2":
-		///	( DateTime(2014, 10, 25, 10, 25, 25) same second or after DateTime(2014, 10, 25, 10, 25, 20) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterSecondTrue2":
+        ///	( DateTime(2014, 10, 25, 10, 25, 25) same second or after DateTime(2014, 10, 25, 10, 25, 20) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterSecondTrue2_Test()
@@ -2918,11 +2918,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterSecondFalse":
-		///	( DateTime(2014, 10, 25, 15, 45, 20) same second or after DateTime(2014, 10, 25, 15, 45, 21) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrAfterSecondFalse":
+        ///	( DateTime(2014, 10, 25, 15, 45, 20) same second or after DateTime(2014, 10, 25, 15, 45, 21) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterSecondFalse_Test()
@@ -2932,11 +2932,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMillisecondTrue1":
-		///	( DateTime(2014, 12, 20, 12, 30, 15, 250) same millisecond or after DateTime(2014, 12, 20, 12, 30, 15, 250) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterMillisecondTrue1":
+        ///	( DateTime(2014, 12, 20, 12, 30, 15, 250) same millisecond or after DateTime(2014, 12, 20, 12, 30, 15, 250) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMillisecondTrue1_Test()
@@ -2946,11 +2946,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMillisecondTrue2":
-		///	( DateTime(2014, 10, 25, 10, 25, 20, 500) same millisecond or after DateTime(2014, 10, 25, 10, 25, 20, 499) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrAfterMillisecondTrue2":
+        ///	( DateTime(2014, 10, 25, 10, 25, 20, 500) same millisecond or after DateTime(2014, 10, 25, 10, 25, 20, 499) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMillisecondTrue2_Test()
@@ -2960,11 +2960,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterMillisecondFalse":
-		///	( DateTime(2014, 10, 25, 15, 45, 20, 500) same millisecond or after DateTime(2014, 10, 25, 15, 45, 20, 501) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrAfterMillisecondFalse":
+        ///	( DateTime(2014, 10, 25, 15, 45, 20, 500) same millisecond or after DateTime(2014, 10, 25, 15, 45, 20, 501) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterMillisecondFalse_Test()
@@ -2974,11 +2974,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrAfterNull1":
-		///	( DateTime(2014, 12, 20) same day or after DateTime(2014, 12) ) = null
-		/// </summary>
+        ///define "DateTimeSameOrAfterNull1":
+        ///	( DateTime(2014, 12, 20) same day or after DateTime(2014, 12) ) = null
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrAfterNull1_Test()
@@ -2988,11 +2988,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summaray>
-		///define "SameOrAfterTimezoneTrue":
-		///	( @2012-03-10T10:20:00.999+07:00 same hour or after @2012-03-10T09:20:00.999+06:00 ) = true
-		/// </summary>
+        ///define "SameOrAfterTimezoneTrue":
+        ///	( @2012-03-10T10:20:00.999+07:00 same hour or after @2012-03-10T09:20:00.999+06:00 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void SameOrAfterTimezoneTrue_Test()
@@ -3002,11 +3002,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "SameOrAfterTimezoneFalse":
-		///	( @2012-03-10T10:20:00.999+07:00 same hour or after @2012-03-10T10:20:00.999+06:00 ) = false
-		/// </summary>
+        ///define "SameOrAfterTimezoneFalse":
+        ///	( @2012-03-10T10:20:00.999+07:00 same hour or after @2012-03-10T10:20:00.999+06:00 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void SameOrAfterTimezoneFalse_Test()
@@ -3016,11 +3016,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterHourTrue1":
-		///	( @T23:25:25.555 same hour or after @T23:55:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterHourTrue1":
+        ///	( @T23:25:25.555 same hour or after @T23:55:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterHourTrue1_Test()
@@ -3030,11 +3030,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterHourTrue2":
-		///	( @T23:25:25.555 same hour or after @T22:55:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterHourTrue2":
+        ///	( @T23:25:25.555 same hour or after @T22:55:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterHourTrue2_Test()
@@ -3044,11 +3044,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterHourFalse":
-		///	( @T22:25:25.555 same hour or after @T23:55:25.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrAfterHourFalse":
+        ///	( @T22:25:25.555 same hour or after @T23:55:25.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterHourFalse_Test()
@@ -3058,11 +3058,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterMinuteTrue1":
-		///	( @T23:25:25.555 same minute or after @T23:25:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterMinuteTrue1":
+        ///	( @T23:25:25.555 same minute or after @T23:25:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterMinuteTrue1_Test()
@@ -3072,11 +3072,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterMinuteTrue2":
-		///	( @T23:25:25.555 same minute or after @T22:15:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterMinuteTrue2":
+        ///	( @T23:25:25.555 same minute or after @T22:15:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterMinuteTrue2_Test()
@@ -3086,11 +3086,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterMinuteFalse":
-		///	( @T23:25:25.555 same minute or after @T23:55:25.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrAfterMinuteFalse":
+        ///	( @T23:25:25.555 same minute or after @T23:55:25.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterMinuteFalse_Test()
@@ -3100,11 +3100,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterSecondTrue1":
-		///	( @T23:25:25.555 same second or after @T23:25:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterSecondTrue1":
+        ///	( @T23:25:25.555 same second or after @T23:25:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterSecondTrue1_Test()
@@ -3114,11 +3114,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterSecondTrue2":
-		///	( @T23:25:35.555 same second or after @T22:25:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterSecondTrue2":
+        ///	( @T23:25:35.555 same second or after @T22:25:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterSecondTrue2_Test()
@@ -3128,11 +3128,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterSecondFalse":
-		///	( @T23:55:25.555 same second or after @T23:55:35.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrAfterSecondFalse":
+        ///	( @T23:55:25.555 same second or after @T23:55:35.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterSecondFalse_Test()
@@ -3142,11 +3142,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterMillisTrue1":
-		///	( @T23:25:25.555 same millisecond or after @T23:25:25.555 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterMillisTrue1":
+        ///	( @T23:25:25.555 same millisecond or after @T23:25:25.555 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterMillisTrue1_Test()
@@ -3156,11 +3156,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterMillisTrue2":
-		///	( @T23:25:25.555 same millisecond or after @T22:25:25.550 ) = true
-		/// </summary>
+        ///define "TimeSameOrAfterMillisTrue2":
+        ///	( @T23:25:25.555 same millisecond or after @T22:25:25.550 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterMillisTrue2_Test()
@@ -3170,11 +3170,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrAfterMillisFalse":
-		///	( @T23:55:25.555 same millisecond or after @T23:55:25.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrAfterMillisFalse":
+        ///	( @T23:55:25.555 same millisecond or after @T23:55:25.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrAfterMillisFalse_Test()
@@ -3184,11 +3184,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "OnOrAfterTrue":
-		///	( @2017-12-20T11:00:00.000 on or after @2017-12-20T11:00:00.000 ) = true
-		/// </summary>
+        ///define "OnOrAfterTrue":
+        ///	( @2017-12-20T11:00:00.000 on or after @2017-12-20T11:00:00.000 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void OnOrAfterTrue_Test()
@@ -3198,11 +3198,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "Issue32DateTime":
-		///	( @2017-12-21T02:00:00.0 same or after @2017-12-20T11:00:00.0 ) = true
-		/// </summary>
+        ///define "Issue32DateTime":
+        ///	( @2017-12-21T02:00:00.0 same or after @2017-12-20T11:00:00.0 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void Issue32DateTime_Test()
@@ -3212,11 +3212,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeYearTrue1":
-		///	( DateTime(2014) same year or before DateTime(2014) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeYearTrue1":
+        ///	( DateTime(2014) same year or before DateTime(2014) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeYearTrue1_Test()
@@ -3226,11 +3226,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeYearTrue2":
-		///	( DateTime(2013) same year or before DateTime(2014) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeYearTrue2":
+        ///	( DateTime(2013) same year or before DateTime(2014) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeYearTrue2_Test()
@@ -3240,11 +3240,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeYearFalse":
-		///	( DateTime(2015) same year or before DateTime(2014) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeYearFalse":
+        ///	( DateTime(2015) same year or before DateTime(2014) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeYearFalse_Test()
@@ -3254,11 +3254,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMonthTrue1":
-		///	( DateTime(2014, 12) same month or before DateTime(2014, 12) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMonthTrue1":
+        ///	( DateTime(2014, 12) same month or before DateTime(2014, 12) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMonthTrue1_Test()
@@ -3268,11 +3268,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMonthTrue2":
-		///	( DateTime(2014, 8) same month or before DateTime(2014, 9) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMonthTrue2":
+        ///	( DateTime(2014, 8) same month or before DateTime(2014, 9) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMonthTrue2_Test()
@@ -3282,11 +3282,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMonthFalse":
-		///	( DateTime(2014, 12) same month or before DateTime(2014, 11) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMonthFalse":
+        ///	( DateTime(2014, 12) same month or before DateTime(2014, 11) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMonthFalse_Test()
@@ -3296,11 +3296,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeDayTrue1":
-		///	( DateTime(2014, 12, 20) same day or before DateTime(2014, 12, 20) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeDayTrue1":
+        ///	( DateTime(2014, 12, 20) same day or before DateTime(2014, 12, 20) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeDayTrue1_Test()
@@ -3310,11 +3310,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeDayTrue2":
-		///	( DateTime(2014, 10, 15) same day or before DateTime(2014, 10, 20) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeDayTrue2":
+        ///	( DateTime(2014, 10, 15) same day or before DateTime(2014, 10, 20) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeDayTrue2_Test()
@@ -3324,11 +3324,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeDayFalse":
-		///	( DateTime(2014, 10, 30) same day or before DateTime(2014, 10, 25) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeDayFalse":
+        ///	( DateTime(2014, 10, 30) same day or before DateTime(2014, 10, 25) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeDayFalse_Test()
@@ -3338,11 +3338,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeHourTrue1":
-		///	( DateTime(2014, 12, 20, 12) same hour or before DateTime(2014, 12, 20, 12) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeHourTrue1":
+        ///	( DateTime(2014, 12, 20, 12) same hour or before DateTime(2014, 12, 20, 12) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeHourTrue1_Test()
@@ -3352,11 +3352,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeHourTrue2":
-		///	( DateTime(2014, 10, 25, 5) same hour or before DateTime(2014, 10, 25, 10) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeHourTrue2":
+        ///	( DateTime(2014, 10, 25, 5) same hour or before DateTime(2014, 10, 25, 10) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeHourTrue2_Test()
@@ -3366,11 +3366,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeHourFalse":
-		///	( DateTime(2014, 10, 25, 20) same hour or before DateTime(2014, 10, 25, 15) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeHourFalse":
+        ///	( DateTime(2014, 10, 25, 20) same hour or before DateTime(2014, 10, 25, 15) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeHourFalse_Test()
@@ -3380,11 +3380,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMinuteTrue1":
-		///	( DateTime(2014, 12, 20, 12, 30) same minute or before DateTime(2014, 12, 20, 12, 30) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMinuteTrue1":
+        ///	( DateTime(2014, 12, 20, 12, 30) same minute or before DateTime(2014, 12, 20, 12, 30) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMinuteTrue1_Test()
@@ -3394,11 +3394,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMinuteTrue2":
-		///	( DateTime(2014, 10, 25, 10, 20) same minute or before DateTime(2014, 10, 25, 10, 25) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMinuteTrue2":
+        ///	( DateTime(2014, 10, 25, 10, 20) same minute or before DateTime(2014, 10, 25, 10, 25) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMinuteTrue2_Test()
@@ -3408,11 +3408,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMinuteFalse":
-		///	( DateTime(2014, 10, 25, 15, 55) same minute or before DateTime(2014, 10, 25, 15, 45) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMinuteFalse":
+        ///	( DateTime(2014, 10, 25, 15, 55) same minute or before DateTime(2014, 10, 25, 15, 45) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMinuteFalse_Test()
@@ -3422,11 +3422,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeSecondTrue1":
-		///	( DateTime(2014, 12, 20, 12, 30, 15) same second or before DateTime(2014, 12, 20, 12, 30, 15) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeSecondTrue1":
+        ///	( DateTime(2014, 12, 20, 12, 30, 15) same second or before DateTime(2014, 12, 20, 12, 30, 15) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeSecondTrue1_Test()
@@ -3436,11 +3436,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeSecondTrue2":
-		///	( DateTime(2014, 10, 25, 10, 25, 15) same second or before DateTime(2014, 10, 25, 10, 25, 20) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeSecondTrue2":
+        ///	( DateTime(2014, 10, 25, 10, 25, 15) same second or before DateTime(2014, 10, 25, 10, 25, 20) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeSecondTrue2_Test()
@@ -3450,11 +3450,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeSecondFalse":
-		///	( DateTime(2014, 10, 25, 15, 45, 25) same second or before DateTime(2014, 10, 25, 15, 45, 21) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeSecondFalse":
+        ///	( DateTime(2014, 10, 25, 15, 45, 25) same second or before DateTime(2014, 10, 25, 15, 45, 21) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeSecondFalse_Test()
@@ -3464,11 +3464,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMillisecondTrue1":
-		///	( DateTime(2014, 12, 20, 12, 30, 15, 250) same millisecond or before DateTime(2014, 12, 20, 12, 30, 15, 250) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMillisecondTrue1":
+        ///	( DateTime(2014, 12, 20, 12, 30, 15, 250) same millisecond or before DateTime(2014, 12, 20, 12, 30, 15, 250) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMillisecondTrue1_Test()
@@ -3478,11 +3478,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMillisecondTrue2":
-		///	( DateTime(2014, 10, 25, 10, 25, 20, 450) same millisecond or before DateTime(2014, 10, 25, 10, 25, 20, 499) ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMillisecondTrue2":
+        ///	( DateTime(2014, 10, 25, 10, 25, 20, 450) same millisecond or before DateTime(2014, 10, 25, 10, 25, 20, 499) ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMillisecondTrue2_Test()
@@ -3492,11 +3492,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeMillisecondFalse":
-		///	( DateTime(2014, 10, 25, 15, 45, 20, 505) same millisecond or before DateTime(2014, 10, 25, 15, 45, 20, 501) ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeMillisecondFalse":
+        ///	( DateTime(2014, 10, 25, 15, 45, 20, 505) same millisecond or before DateTime(2014, 10, 25, 15, 45, 20, 501) ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeMillisecondFalse_Test()
@@ -3506,11 +3506,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeNull1":
-		///	( DateTime(2014, 12, 20) same minute or before DateTime(2014, 12, 20, 15) ) = null
-		/// </summary>
+        ///define "DateTimeSameOrBeforeNull1":
+        ///	( DateTime(2014, 12, 20) same minute or before DateTime(2014, 12, 20, 15) ) = null
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeNull1_Test()
@@ -3520,11 +3520,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(null, result);
         }
-                                        
+
         /// <summaray>
-		///define "SameOrBeforeTimezoneTrue":
-		///	( @2012-03-10T09:20:00.999+07:00 same hour or before @2012-03-10T10:20:00.999+06:00 ) = true
-		/// </summary>
+        ///define "SameOrBeforeTimezoneTrue":
+        ///	( @2012-03-10T09:20:00.999+07:00 same hour or before @2012-03-10T10:20:00.999+06:00 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void SameOrBeforeTimezoneTrue_Test()
@@ -3534,11 +3534,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "SameOrBeforeTimezoneFalse":
-		///	( @2012-03-10T10:20:00.999+06:00 same hour or before @2012-03-10T10:20:00.999+07:00 ) = false
-		/// </summary>
+        ///define "SameOrBeforeTimezoneFalse":
+        ///	( @2012-03-10T10:20:00.999+06:00 same hour or before @2012-03-10T10:20:00.999+07:00 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void SameOrBeforeTimezoneFalse_Test()
@@ -3548,11 +3548,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeHourTrue1":
-		///	( @T23:25:25.555 same hour or before @T23:55:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrBeforeHourTrue1":
+        ///	( @T23:25:25.555 same hour or before @T23:55:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeHourTrue1_Test()
@@ -3562,11 +3562,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeHourTrue2":
-		///	( @T21:25:25.555 same hour or before @T22:55:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrBeforeHourTrue2":
+        ///	( @T21:25:25.555 same hour or before @T22:55:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeHourTrue2_Test()
@@ -3576,11 +3576,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeHourFalse":
-		///	( @T22:25:25.555 same hour or before @T21:55:25.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrBeforeHourFalse":
+        ///	( @T22:25:25.555 same hour or before @T21:55:25.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeHourFalse_Test()
@@ -3590,11 +3590,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeMinuteTrue1":
-		///	( @T23:25:25.555 same minute or before @T23:25:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrBeforeMinuteTrue1":
+        ///	( @T23:25:25.555 same minute or before @T23:25:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeMinuteTrue1_Test()
@@ -3604,11 +3604,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeMinuteFalse0":
-		///	( @T23:10:25.555 same minute or before @T22:15:25.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrBeforeMinuteFalse0":
+        ///	( @T23:10:25.555 same minute or before @T22:15:25.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeMinuteFalse0_Test()
@@ -3618,11 +3618,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeMinuteFalse":
-		///	( @T23:56:25.555 same minute or before @T23:55:25.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrBeforeMinuteFalse":
+        ///	( @T23:56:25.555 same minute or before @T23:55:25.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeMinuteFalse_Test()
@@ -3632,11 +3632,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeSecondTrue1":
-		///	( @T23:25:25.555 same second or before @T23:25:25.900 ) = true
-		/// </summary>
+        ///define "TimeSameOrBeforeSecondTrue1":
+        ///	( @T23:25:25.555 same second or before @T23:25:25.900 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeSecondTrue1_Test()
@@ -3646,11 +3646,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeSecondFalse0":
-		///	( @T23:25:35.555 same second or before @T22:25:45.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrBeforeSecondFalse0":
+        ///	( @T23:25:35.555 same second or before @T22:25:45.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeSecondFalse0_Test()
@@ -3660,11 +3660,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeSecondFalse":
-		///	( @T23:55:45.555 same second or before @T23:55:35.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrBeforeSecondFalse":
+        ///	( @T23:55:45.555 same second or before @T23:55:35.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeSecondFalse_Test()
@@ -3674,11 +3674,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeMillisTrue1":
-		///	( @T23:25:25.555 same millisecond or before @T23:25:25.555 ) = true
-		/// </summary>
+        ///define "TimeSameOrBeforeMillisTrue1":
+        ///	( @T23:25:25.555 same millisecond or before @T23:25:25.555 ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeMillisTrue1_Test()
@@ -3688,11 +3688,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeMillisFalse0":
-		///	( @T23:25:25.200 same millisecond or before @T22:25:25.550 ) = false
-		/// </summary>
+        ///define "TimeSameOrBeforeMillisFalse0":
+        ///	( @T23:25:25.200 same millisecond or before @T22:25:25.550 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeMillisFalse0_Test()
@@ -3702,11 +3702,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSameOrBeforeMillisFalse":
-		///	( @T23:55:25.966 same millisecond or before @T23:55:25.900 ) = false
-		/// </summary>
+        ///define "TimeSameOrBeforeMillisFalse":
+        ///	( @T23:55:25.966 same millisecond or before @T23:55:25.900 ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSameOrBeforeMillisFalse_Test()
@@ -3716,11 +3716,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract5Years":
-		///	( DateTime(2005, 10, 10) - 5 years ) = @2000-10-10
-		/// </summary>
+        ///define "DateTimeSubtract5Years":
+        ///	( DateTime(2005, 10, 10) - 5 years ) = @2000-10-10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract5Years_Test()
@@ -3730,11 +3730,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract5Months":
-		///	( DateTime(2005, 6, 10) - 5 months ) = @2005-01-10
-		/// </summary>
+        ///define "DateTimeSubtract5Months":
+        ///	( DateTime(2005, 6, 10) - 5 months ) = @2005-01-10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract5Months_Test()
@@ -3744,11 +3744,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtractMonthsUnderflow":
-		///	( DateTime(2005, 5, 10) - 6 months ) = @2004-11-10
-		/// </summary>
+        ///define "DateTimeSubtractMonthsUnderflow":
+        ///	( DateTime(2005, 5, 10) - 6 months ) = @2004-11-10
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtractMonthsUnderflow_Test()
@@ -3758,11 +3758,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract5Days":
-		///	( DateTime(2005, 5, 10) - 5 days ) = @2005-05-05
-		/// </summary>
+        ///define "DateTimeSubtract5Days":
+        ///	( DateTime(2005, 5, 10) - 5 days ) = @2005-05-05
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract5Days_Test()
@@ -3772,11 +3772,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtractDaysUnderflow":
-		///	( DateTime(2016, 6, 10) - 11 days ) = @2016-05-30
-		/// </summary>
+        ///define "DateTimeSubtractDaysUnderflow":
+        ///	( DateTime(2016, 6, 10) - 11 days ) = @2016-05-30
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtractDaysUnderflow_Test()
@@ -3786,11 +3786,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract5Hours":
-		///	( DateTime(2005, 5, 10, 10) - 5 hours ) = @2005-05-10T05
-		/// </summary>
+        ///define "DateTimeSubtract5Hours":
+        ///	( DateTime(2005, 5, 10, 10) - 5 hours ) = @2005-05-10T05
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract5Hours_Test()
@@ -3800,11 +3800,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtractHoursUnderflow":
-		///	( DateTime(2016, 6, 10, 5) - 6 hours ) = @2016-06-09T23
-		/// </summary>
+        ///define "DateTimeSubtractHoursUnderflow":
+        ///	( DateTime(2016, 6, 10, 5) - 6 hours ) = @2016-06-09T23
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtractHoursUnderflow_Test()
@@ -3814,11 +3814,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract5Minutes":
-		///	( DateTime(2005, 5, 10, 5, 10) - 5 minutes ) = @2005-05-10T05:05
-		/// </summary>
+        ///define "DateTimeSubtract5Minutes":
+        ///	( DateTime(2005, 5, 10, 5, 10) - 5 minutes ) = @2005-05-10T05:05
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract5Minutes_Test()
@@ -3828,11 +3828,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtractMinutesUnderflow":
-		///	( DateTime(2016, 6, 10, 5, 5) - 6 minutes ) = @2016-06-10T04:59
-		/// </summary>
+        ///define "DateTimeSubtractMinutesUnderflow":
+        ///	( DateTime(2016, 6, 10, 5, 5) - 6 minutes ) = @2016-06-10T04:59
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtractMinutesUnderflow_Test()
@@ -3842,11 +3842,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract5Seconds":
-		///	( DateTime(2005, 5, 10, 5, 5, 10) - 5 seconds ) = @2005-05-10T05:05:05
-		/// </summary>
+        ///define "DateTimeSubtract5Seconds":
+        ///	( DateTime(2005, 5, 10, 5, 5, 10) - 5 seconds ) = @2005-05-10T05:05:05
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract5Seconds_Test()
@@ -3856,11 +3856,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtractSecondsUnderflow":
-		///	( DateTime(2016, 6, 10, 5, 5, 5) - 6 seconds ) = @2016-06-10T05:04:59
-		/// </summary>
+        ///define "DateTimeSubtractSecondsUnderflow":
+        ///	( DateTime(2016, 6, 10, 5, 5, 5) - 6 seconds ) = @2016-06-10T05:04:59
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtractSecondsUnderflow_Test()
@@ -3870,11 +3870,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract5Milliseconds":
-		///	( DateTime(2005, 5, 10, 5, 5, 5, 10) - 5 milliseconds ) = @2005-05-10T05:05:05.005
-		/// </summary>
+        ///define "DateTimeSubtract5Milliseconds":
+        ///	( DateTime(2005, 5, 10, 5, 5, 5, 10) - 5 milliseconds ) = @2005-05-10T05:05:05.005
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract5Milliseconds_Test()
@@ -3884,11 +3884,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtractMillisecondsUnderflow":
-		///	( DateTime(2016, 6, 10, 5, 5, 5, 5) - 6 milliseconds ) = @2016-06-10T05:05:04.999
-		/// </summary>
+        ///define "DateTimeSubtractMillisecondsUnderflow":
+        ///	( DateTime(2016, 6, 10, 5, 5, 5, 5) - 6 milliseconds ) = @2016-06-10T05:05:04.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtractMillisecondsUnderflow_Test()
@@ -3898,11 +3898,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract2YearsAsMonths":
-		///	( DateTime(2014) - 24 months ) = @2012
-		/// </summary>
+        ///define "DateTimeSubtract2YearsAsMonths":
+        ///	( DateTime(2014) - 24 months ) = @2012
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract2YearsAsMonths_Test()
@@ -3912,11 +3912,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSubtract2YearsAsMonthsRem1":
-		///	( DateTime(2014) - 25 months ) = @2011
-		/// </summary>
+        ///define "DateTimeSubtract2YearsAsMonthsRem1":
+        ///	( DateTime(2014) - 25 months ) = @2011
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSubtract2YearsAsMonthsRem1_Test()
@@ -3926,11 +3926,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSubtract5Hours":
-		///	( @T15:59:59.999 - 5 hours ) = @T10:59:59.999
-		/// </summary>
+        ///define "TimeSubtract5Hours":
+        ///	( @T15:59:59.999 - 5 hours ) = @T10:59:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSubtract5Hours_Test()
@@ -3940,11 +3940,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSubtract1Minute":
-		///	( @T15:59:59.999 - 1 minutes ) = @T15:58:59.999
-		/// </summary>
+        ///define "TimeSubtract1Minute":
+        ///	( @T15:59:59.999 - 1 minutes ) = @T15:58:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSubtract1Minute_Test()
@@ -3954,11 +3954,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSubtract1Second":
-		///	( @T15:59:59.999 - 1 seconds ) = @T15:59:58.999
-		/// </summary>
+        ///define "TimeSubtract1Second":
+        ///	( @T15:59:59.999 - 1 seconds ) = @T15:59:58.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSubtract1Second_Test()
@@ -3968,11 +3968,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSubtract1Millisecond":
-		///	( @T15:59:59.0 - 1 milliseconds ) = @T15:59:58.999
-		/// </summary>
+        ///define "TimeSubtract1Millisecond":
+        ///	( @T15:59:59.0 - 1 milliseconds ) = @T15:59:58.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSubtract1Millisecond_Test()
@@ -3982,11 +3982,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSubtract5Hours1Minute":
-		///	( @T15:59:59.999 - 5 hours - 1 minutes ) = @T10:58:59.999
-		/// </summary>
+        ///define "TimeSubtract5Hours1Minute":
+        ///	( @T15:59:59.999 - 5 hours - 1 minutes ) = @T10:58:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSubtract5Hours1Minute_Test()
@@ -3996,11 +3996,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeSubtract5hoursByMinute":
-		///	( @T15:59:59.999 - 300 minutes ) = @T10:59:59.999
-		/// </summary>
+        ///define "TimeSubtract5hoursByMinute":
+        ///	( @T15:59:59.999 - 300 minutes ) = @T10:59:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeSubtract5hoursByMinute_Test()
@@ -4010,11 +4010,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeTest2":
-		///	( @T23:59:59.999 ) = @T23:59:59.999
-		/// </summary>
+        ///define "TimeTest2":
+        ///	( @T23:59:59.999 ) = @T23:59:59.999
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeTest2_Test()
@@ -4024,11 +4024,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "TimeOfDayTest":
-		///	( TimeOfDay() ) = TimeOfDay()
-		/// </summary>
+        ///define "TimeOfDayTest":
+        ///	( TimeOfDay() ) = TimeOfDay()
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void TimeOfDayTest_Test()
@@ -4038,11 +4038,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeTodayTrue1":
-		///	( Today() same day or before Today() ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeTodayTrue1":
+        ///	( Today() same day or before Today() ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeTodayTrue1_Test()
@@ -4052,11 +4052,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeTodayTrue2":
-		///	( Today() same day or before Today() + 1 days ) = true
-		/// </summary>
+        ///define "DateTimeSameOrBeforeTodayTrue2":
+        ///	( Today() same day or before Today() + 1 days ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeTodayTrue2_Test()
@@ -4066,11 +4066,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeSameOrBeforeTodayFalse":
-		///	( Today() + 1 years same day or before Today() ) = false
-		/// </summary>
+        ///define "DateTimeSameOrBeforeTodayFalse":
+        ///	( Today() + 1 years same day or before Today() ) = false
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeSameOrBeforeTodayFalse_Test()
@@ -4080,11 +4080,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "DateTimeAddTodayTrue":
-		///	( Today() + 1 days > Today() ) = true
-		/// </summary>
+        ///define "DateTimeAddTodayTrue":
+        ///	( Today() + 1 days > Today() ) = true
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void DateTimeAddTodayTrue_Test()
@@ -4094,11 +4094,11 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
         /// <summaray>
-		///define "Issue34B":
-		///	( Today() ) = Today()
-		/// </summary>
+        ///define "Issue34B":
+        ///	( Today() ) = Today()
+        /// </summary>
         [TestCategory("CqlDateTimeOperatorsTest")]
         [TestMethod]
         public void Issue34B_Test()
@@ -4108,7 +4108,7 @@ namespace CoreTests
             bool? result = function(Context);
             Assert.AreEqual(true, result);
         }
-                                        
+
     }
 }
-                
+

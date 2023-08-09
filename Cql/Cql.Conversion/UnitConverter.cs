@@ -65,8 +65,8 @@ namespace Hl7.Cql.Conversion
         /// Performs the conversion using <see cref="ConversionFunctionFor(string, string)"/>.
         /// </summary>
         /// <param name="value">The value to convert.</param>
-        /// <param name="fromUnits">The source units.</param>
-        /// <param name="toUnits">The desired units.</param>
+        /// <param name="fromUnit">The source unit.</param>
+        /// <param name="toUnit">The desired unit.</param>
         /// <returns>The converted value.</returns>
         /// <exception cref="ArgumentException">If this conversion has not yet been added to this converter via <see cref="UseConversion(string, string, Func{decimal, decimal})"/></exception>
         public decimal ChangeUnits(decimal value, string fromUnit, string toUnit)

@@ -1,4 +1,4 @@
-﻿/* 
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -97,6 +97,7 @@ namespace Hl7.Cql
         /// <param name="typeSpecifier">The ELM type specifier.</param>
         /// <returns>The .NET type to use.</returns>
         public abstract Type? ResolveType(string typeSpecifier);
+
         /// <summary>
         /// Gets the primary code path used in retrieve short-hand notation e.g., <code>[Condition: "value set"]</code>
         /// </summary>

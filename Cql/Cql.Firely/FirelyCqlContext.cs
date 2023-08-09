@@ -20,8 +20,6 @@ namespace Hl7.Cql.Firely
 {
     public static class FirelyCqlContext
     {
-
-
         public static CqlContext Create(Bundle? bundle = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
@@ -30,14 +28,14 @@ namespace Hl7.Cql.Firely
         {
             valueSets ??= new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
-            var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+            var typeResolver = FirelyTypeResolver.Default;
             IDataRetriever dataRetriever = bundle != null
-                ? new BundleDataRetriever(bundle, valueSets, typeResolver)
+                ? new BundleDataRetriever(bundle, valueSets)
                 : new CompositeDataRetriever();
 
             var cqlComparers = new CqlComparers();
             var operators = CqlOperators.Create(typeResolver,
-                FirelyTypeConverter.Create(Fhir.Model.ModelInfo.ModelInspector),
+                FirelyTypeConverter.Default,
                 dataRetriever,
                 cqlComparers,
                 valueSets,
