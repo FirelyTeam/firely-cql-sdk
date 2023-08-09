@@ -2,17 +2,21 @@
 
 
 ## Introduction ##
-This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform.
+This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform. It contains an engine for executing ELM, and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
 ## Release notes ##
-This software is in alpha phase. Any part of the public interface can (and will) change as we prepare the library for its 1.0 release. Read the releases notes 
-on [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases). 
+We are preparing to release version 1.0 of the engine. The engine has been tested by running it against the current NCQA HEDIS measures. There is quite some variation in how CQL is written and interpreted, so it is likely at this early stage that there will be deviations from other engines currently available. As well, we expect parts of the public interface can to change. 
+
+The releases notes 
+at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
 
 ## Getting Started ##
-Some parts of the presentation from Evan?
+
+* Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
+* There is a great presentation on the engine from DevDays 2023 (TODO: need approval to publish link)
 
 ## Dev Start
-During development we sometimes use Firely's Github Package feed, to be able to use pre-release packages within the cql solution. To use theses packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
+During development, new alpha releases will appear on Firely's Github Package feed, to be able to use pre-release packages within the cql solution. To use theses packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:
 
  - Get a Personal Access token (PAT) from [github.com][github-pat] with scope ```read:packages```
 
@@ -20,8 +24,6 @@ During development we sometimes use Firely's Github Package feed, to be able to 
 
 ```USERNAME```: your username on GitHub
 ```PAT```: your Personal access token with at least the scope ```read:packages```
-
-
 
 ## Support 
 We actively monitor the issues coming in through the GitHub repository at [https://github.com/FirelyTeam/firely-cql-sdk/issues](https://github.com/FirelyTeam/firely-cql-sdk/issues). You are welcome to register your bugs and feature suggestions there. For questions and broader discussions, we use the [.NET FHIR Implementers chat][netsdk-zulip] and [CQL chat][cql-spec] on Zulip.

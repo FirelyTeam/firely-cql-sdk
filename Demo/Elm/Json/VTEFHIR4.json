@@ -1,17 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.2.0",
-         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "84",
-            "s" : [ {
-               "value" : [ "","library VTEFHIR4 version '4.8.000'" ]
-            } ]
-         }
       } ],
       "identifier" : {
          "id" : "VTEFHIR4",
@@ -26,108 +18,30 @@
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
             "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.1",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "1",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIR" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.1'" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.1"
          } ]
       },
       "includes" : {
          "def" : [ {
-            "localId" : "2",
             "locator" : "5:1-5:69",
             "localIdentifier" : "Global",
             "path" : "MATGlobalCommonFunctionsFHIR4",
-            "version" : "6.1.000",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "2",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "MATGlobalCommonFunctionsFHIR4" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'6.1.000'"," called ","Global" ]
-                  } ]
-               }
-            } ]
+            "version" : "6.1.000"
          }, {
-            "localId" : "3",
             "locator" : "6:1-6:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.001",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "3",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIRHelpers" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.001"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "10",
             "locator" : "10:1-11:66",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "10",
-                  "s" : [ {
-                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
-                  }, {
-                     "r" : "9",
-                     "s" : [ {
-                        "value" : [ "Interval<" ]
-                     }, {
-                        "r" : "8",
-                        "s" : [ {
-                           "value" : [ "DateTime" ]
-                        } ]
-                     }, {
-                        "value" : [ ">" ]
-                     } ]
-                  }, {
-                     "value" : [ "\n  default " ]
-                  }, {
-                     "r" : "7",
-                     "s" : [ {
-                        "r" : "5",
-                        "value" : [ "Interval[","@2019-01-01T00:00:00.0",", ","@2020-01-01T00:00:00.0",")" ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
@@ -136,7 +50,6 @@
                }
             },
             "default" : {
-               "localId" : "7",
                "locator" : "11:11-11:66",
                "lowClosed" : true,
                "highClosed" : false,
@@ -149,7 +62,6 @@
                   }
                },
                "low" : {
-                  "localId" : "5",
                   "locator" : "11:20-11:41",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
@@ -190,7 +102,6 @@
                   }
                },
                "high" : {
-                  "localId" : "6",
                   "locator" : "11:44-11:65",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
@@ -232,7 +143,6 @@
                }
             },
             "parameterTypeSpecifier" : {
-               "localId" : "9",
                "locator" : "10:32-10:49",
                "type" : "IntervalTypeSpecifier",
                "resultTypeSpecifier" : {
@@ -243,7 +153,6 @@
                   }
                },
                "pointType" : {
-                  "localId" : "8",
                   "locator" : "10:41-10:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -254,21 +163,11 @@
       },
       "valueSets" : {
          "def" : [ {
-            "localId" : "4",
             "locator" : "8:1-8:101",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Intensive Care Unit",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "4",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Intensive Care Unit\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          } ]
       },
       "contexts" : {
@@ -292,198 +191,17 @@
                }
             }
          }, {
-            "localId" : "38",
             "locator" : "21:1-26:4",
             "resultTypeName" : "{http://hl7.org/fhir}Encounter.Location",
             "name" : "FirstInpatientIntensiveCareUnit",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "38",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"FirstInpatientIntensiveCareUnit\"","(","Encounter"," " ]
-                  }, {
-                     "r" : "15",
-                     "s" : [ {
-                        "value" : [ "FHIR",".","Encounter" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "37",
-                     "s" : [ {
-                        "r" : "37",
-                        "s" : [ {
-                           "value" : [ "First","(" ]
-                        }, {
-                           "r" : "36",
-                           "s" : [ {
-                              "s" : [ {
-                                 "r" : "18",
-                                 "s" : [ {
-                                    "r" : "17",
-                                    "s" : [ {
-                                       "value" : [ "(" ]
-                                    }, {
-                                       "r" : "17",
-                                       "s" : [ {
-                                          "r" : "16",
-                                          "s" : [ {
-                                             "value" : [ "Encounter" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "17",
-                                          "s" : [ {
-                                             "value" : [ "location" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "HospitalLocation" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n  \t\t\t" ]
-                           }, {
-                              "r" : "31",
-                              "s" : [ {
-                                 "value" : [ "where " ]
-                              }, {
-                                 "r" : "31",
-                                 "s" : [ {
-                                    "r" : "25",
-                                    "s" : [ {
-                                       "r" : "23",
-                                       "s" : [ {
-                                          "r" : "22",
-                                          "s" : [ {
-                                             "r" : "19",
-                                             "s" : [ {
-                                                "value" : [ "Global" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "22",
-                                             "s" : [ {
-                                                "value" : [ "GetLocation","(" ]
-                                             }, {
-                                                "r" : "21",
-                                                "s" : [ {
-                                                   "r" : "20",
-                                                   "s" : [ {
-                                                      "value" : [ "HospitalLocation" ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "." ]
-                                                }, {
-                                                   "r" : "21",
-                                                   "s" : [ {
-                                                      "value" : [ "location" ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ ")" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "23",
-                                          "s" : [ {
-                                             "value" : [ "type" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " in " ]
-                                    }, {
-                                       "r" : "24",
-                                       "s" : [ {
-                                          "value" : [ "\"Intensive Care Unit\"" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n  \t\t\t\tand " ]
-                                 }, {
-                                    "r" : "30",
-                                    "s" : [ {
-                                       "r" : "27",
-                                       "s" : [ {
-                                          "r" : "26",
-                                          "s" : [ {
-                                             "value" : [ "HospitalLocation" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "27",
-                                          "s" : [ {
-                                             "value" : [ "period" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "r" : "30",
-                                       "value" : [ " ","during"," " ]
-                                    }, {
-                                       "r" : "29",
-                                       "s" : [ {
-                                          "r" : "28",
-                                          "s" : [ {
-                                             "value" : [ "Encounter" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "29",
-                                          "s" : [ {
-                                             "value" : [ "period" ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n  \t\t\t" ]
-                           }, {
-                              "r" : "35",
-                              "s" : [ {
-                                 "value" : [ "sort by " ]
-                              }, {
-                                 "r" : "34",
-                                 "s" : [ {
-                                    "r" : "33",
-                                    "s" : [ {
-                                       "value" : [ "start of " ]
-                                    }, {
-                                       "r" : "32",
-                                       "s" : [ {
-                                          "value" : [ "period" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "\n  \t)" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "37",
                "locator" : "22:3-26:4",
                "resultTypeName" : "{http://hl7.org/fhir}Encounter.Location",
                "type" : "First",
                "source" : {
-                  "localId" : "36",
                   "locator" : "22:9-25:28",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
@@ -494,7 +212,6 @@
                      }
                   },
                   "source" : [ {
-                     "localId" : "18",
                      "locator" : "22:9-22:44",
                      "alias" : "HospitalLocation",
                      "resultTypeSpecifier" : {
@@ -505,7 +222,6 @@
                         }
                      },
                      "expression" : {
-                        "localId" : "17",
                         "locator" : "22:9-22:28",
                         "path" : "location",
                         "type" : "Property",
@@ -517,7 +233,6 @@
                            }
                         },
                         "source" : {
-                           "localId" : "16",
                            "locator" : "22:10-22:18",
                            "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                            "name" : "Encounter",
@@ -527,12 +242,10 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "localId" : "31",
                      "locator" : "23:6-24:57",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "25",
                         "locator" : "23:12-23:86",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "AnyInValueSet",
@@ -541,7 +254,6 @@
                            "source" : [ {
                               "alias" : "X",
                               "expression" : {
-                                 "localId" : "23",
                                  "locator" : "23:12-23:61",
                                  "path" : "type",
                                  "type" : "Property",
@@ -553,14 +265,12 @@
                                     }
                                  },
                                  "source" : {
-                                    "localId" : "22",
                                     "locator" : "23:12-23:56",
                                     "resultTypeName" : "{http://hl7.org/fhir}Location",
                                     "name" : "GetLocation",
                                     "libraryName" : "Global",
                                     "type" : "FunctionRef",
                                     "operand" : [ {
-                                       "localId" : "21",
                                        "locator" : "23:31-23:55",
                                        "resultTypeName" : "{http://hl7.org/fhir}Reference",
                                        "path" : "location",
@@ -584,14 +294,12 @@
                            }
                         },
                         "valueset" : {
-                           "localId" : "24",
                            "locator" : "23:66-23:86",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Intensive Care Unit",
                            "preserve" : true
                         }
                      }, {
-                        "localId" : "30",
                         "locator" : "24:11-24:57",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "IncludedIn",
@@ -600,7 +308,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "27",
                               "locator" : "24:11-24:33",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
                               "path" : "period",
@@ -612,13 +319,11 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "29",
                               "locator" : "24:42-24:57",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
                               "path" : "period",
                               "type" : "Property",
                               "source" : {
-                                 "localId" : "28",
                                  "locator" : "24:42-24:50",
                                  "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                                  "name" : "Encounter",
@@ -629,16 +334,13 @@
                      } ]
                   },
                   "sort" : {
-                     "localId" : "35",
                      "locator" : "25:6-25:28",
                      "by" : [ {
-                        "localId" : "34",
                         "locator" : "25:14-25:28",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "direction" : "asc",
                         "type" : "ByExpression",
                         "expression" : {
-                           "localId" : "33",
                            "locator" : "25:14-25:28",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
@@ -647,7 +349,6 @@
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
                               "operand" : [ {
-                                 "localId" : "32",
                                  "locator" : "25:23-25:28",
                                  "resultTypeName" : "{http://hl7.org/fhir}Period",
                                  "name" : "period",
@@ -662,7 +363,6 @@
             "operand" : [ {
                "name" : "Encounter",
                "operandTypeSpecifier" : {
-                  "localId" : "15",
                   "locator" : "21:61-21:74",
                   "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                   "name" : "{http://hl7.org/fhir}Encounter",
@@ -670,68 +370,23 @@
                }
             } ]
          }, {
-            "localId" : "41",
             "locator" : "18:1-19:53",
             "resultTypeName" : "{http://hl7.org/fhir}Period",
             "name" : "FirstICULocationPeriod",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "41",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"FirstICULocationPeriod\"","(","Encounter"," " ]
-                  }, {
-                     "r" : "13",
-                     "s" : [ {
-                        "value" : [ "FHIR",".","Encounter" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "40",
-                     "s" : [ {
-                        "r" : "40",
-                        "s" : [ {
-                           "r" : "39",
-                           "s" : [ {
-                              "value" : [ "\"FirstInpatientIntensiveCareUnit\"","(" ]
-                           }, {
-                              "r" : "14",
-                              "s" : [ {
-                                 "value" : [ "Encounter" ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
-                           } ]
-                        }, {
-                           "value" : [ "." ]
-                        }, {
-                           "r" : "40",
-                           "s" : [ {
-                              "value" : [ "period" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "40",
                "locator" : "19:3-19:53",
                "resultTypeName" : "{http://hl7.org/fhir}Period",
                "path" : "period",
                "type" : "Property",
                "source" : {
-                  "localId" : "39",
                   "locator" : "19:3-19:46",
                   "resultTypeName" : "{http://hl7.org/fhir}Encounter.Location",
                   "name" : "FirstInpatientIntensiveCareUnit",
                   "type" : "FunctionRef",
                   "operand" : [ {
-                     "localId" : "14",
                      "locator" : "19:37-19:45",
                      "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                      "name" : "Encounter",
@@ -742,7 +397,6 @@
             "operand" : [ {
                "name" : "Encounter",
                "operandTypeSpecifier" : {
-                  "localId" : "13",
                   "locator" : "18:52-18:65",
                   "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                   "name" : "{http://hl7.org/fhir}Encounter",
@@ -750,51 +404,13 @@
                }
             } ]
          }, {
-            "localId" : "44",
             "locator" : "15:1-16:46",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
             "name" : "StartOfFirstICU",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "44",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"StartOfFirstICU\"","(","Encounter"," " ]
-                  }, {
-                     "r" : "11",
-                     "s" : [ {
-                        "value" : [ "FHIR",".","Encounter" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "43",
-                     "s" : [ {
-                        "r" : "43",
-                        "s" : [ {
-                           "value" : [ "start of " ]
-                        }, {
-                           "r" : "42",
-                           "s" : [ {
-                              "value" : [ "\"FirstICULocationPeriod\"","(" ]
-                           }, {
-                              "r" : "12",
-                              "s" : [ {
-                                 "value" : [ "Encounter" ]
-                              } ]
-                           }, {
-                              "value" : [ ")" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "43",
                "locator" : "16:3-16:46",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                "type" : "Start",
@@ -803,13 +419,11 @@
                   "libraryName" : "FHIRHelpers",
                   "type" : "FunctionRef",
                   "operand" : [ {
-                     "localId" : "42",
                      "locator" : "16:12-16:46",
                      "resultTypeName" : "{http://hl7.org/fhir}Period",
                      "name" : "FirstICULocationPeriod",
                      "type" : "FunctionRef",
                      "operand" : [ {
-                        "localId" : "12",
                         "locator" : "16:37-16:45",
                         "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                         "name" : "Encounter",
@@ -821,7 +435,6 @@
             "operand" : [ {
                "name" : "Encounter",
                "operandTypeSpecifier" : {
-                  "localId" : "11",
                   "locator" : "15:45-15:58",
                   "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                   "name" : "{http://hl7.org/fhir}Encounter",
@@ -829,84 +442,11 @@
                }
             } ]
          }, {
-            "localId" : "57",
             "locator" : "28:1-29:70",
             "name" : "CalendarDayOfOrDayAfter",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "57",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"CalendarDayOfOrDayAfter\"","(","StartValue"," " ]
-                  }, {
-                     "r" : "49",
-                     "s" : [ {
-                        "value" : [ "DateTime" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "56",
-                     "s" : [ {
-                        "r" : "56",
-                        "s" : [ {
-                           "value" : [ "Interval[" ]
-                        }, {
-                           "r" : "51",
-                           "s" : [ {
-                              "value" : [ "date from " ]
-                           }, {
-                              "r" : "50",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "50",
-                                 "s" : [ {
-                                    "value" : [ "StartValue" ]
-                                 } ]
-                              }, {
-                                 "value" : [ " )" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "55",
-                           "s" : [ {
-                              "r" : "53",
-                              "s" : [ {
-                                 "value" : [ "date from " ]
-                              }, {
-                                 "r" : "52",
-                                 "s" : [ {
-                                    "value" : [ "( " ]
-                                 }, {
-                                    "r" : "52",
-                                    "s" : [ {
-                                       "value" : [ "StartValue" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " )" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "54",
-                              "s" : [ {
-                                 "value" : [ "1 ","day" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "]" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
@@ -915,7 +455,6 @@
                }
             },
             "expression" : {
-               "localId" : "56",
                "locator" : "29:3-29:70",
                "lowClosed" : true,
                "highClosed" : true,
@@ -928,12 +467,10 @@
                   }
                },
                "low" : {
-                  "localId" : "51",
                   "locator" : "29:12-29:35",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "DateFrom",
                   "operand" : {
-                     "localId" : "50",
                      "locator" : "29:22-29:35",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "name" : "StartValue",
@@ -941,24 +478,20 @@
                   }
                },
                "high" : {
-                  "localId" : "55",
                   "locator" : "29:38-29:69",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "Add",
                   "operand" : [ {
-                     "localId" : "53",
                      "locator" : "29:38-29:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "DateFrom",
                      "operand" : {
-                        "localId" : "52",
                         "locator" : "29:48-29:61",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "name" : "StartValue",
                         "type" : "OperandRef"
                      }
                   }, {
-                     "localId" : "54",
                      "locator" : "29:65-29:69",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
@@ -970,7 +503,6 @@
             "operand" : [ {
                "name" : "StartValue",
                "operandTypeSpecifier" : {
-                  "localId" : "49",
                   "locator" : "28:54-28:61",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -978,121 +510,11 @@
                }
             } ]
          }, {
-            "localId" : "71",
             "locator" : "31:1-32:137",
             "name" : "FromDayOfStartOfHospitalizationToDayAfterAdmission",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "71",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"FromDayOfStartOfHospitalizationToDayAfterAdmission\"","(","Encounter"," " ]
-                  }, {
-                     "r" : "58",
-                     "s" : [ {
-                        "value" : [ "FHIR",".","Encounter" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "70",
-                     "s" : [ {
-                        "r" : "70",
-                        "s" : [ {
-                           "value" : [ "Interval[" ]
-                        }, {
-                           "r" : "63",
-                           "s" : [ {
-                              "value" : [ "date from " ]
-                           }, {
-                              "r" : "62",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "62",
-                                 "s" : [ {
-                                    "value" : [ "start of " ]
-                                 }, {
-                                    "r" : "61",
-                                    "s" : [ {
-                                       "r" : "59",
-                                       "s" : [ {
-                                          "value" : [ "Global" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "61",
-                                       "s" : [ {
-                                          "value" : [ "\"HospitalizationWithObservation\""," ( " ]
-                                       }, {
-                                          "r" : "60",
-                                          "s" : [ {
-                                             "value" : [ "Encounter" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ " )" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " )" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "69",
-                           "s" : [ {
-                              "r" : "67",
-                              "s" : [ {
-                                 "value" : [ "date from " ]
-                              }, {
-                                 "r" : "66",
-                                 "s" : [ {
-                                    "value" : [ "( " ]
-                                 }, {
-                                    "r" : "66",
-                                    "s" : [ {
-                                       "value" : [ "start of " ]
-                                    }, {
-                                       "r" : "65",
-                                       "s" : [ {
-                                          "r" : "64",
-                                          "s" : [ {
-                                             "value" : [ "Encounter" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "65",
-                                          "s" : [ {
-                                             "value" : [ "period" ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " )" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "68",
-                              "s" : [ {
-                                 "value" : [ "1 ","day" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "]" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
@@ -1101,7 +523,6 @@
                }
             },
             "expression" : {
-               "localId" : "70",
                "locator" : "32:3-32:137",
                "lowClosed" : true,
                "highClosed" : true,
@@ -1114,17 +535,14 @@
                   }
                },
                "low" : {
-                  "localId" : "63",
                   "locator" : "32:12-32:87",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "DateFrom",
                   "operand" : {
-                     "localId" : "62",
                      "locator" : "32:22-32:87",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "Start",
                      "operand" : {
-                        "localId" : "61",
                         "locator" : "32:33-32:85",
                         "name" : "HospitalizationWithObservation",
                         "libraryName" : "Global",
@@ -1137,7 +555,6 @@
                            }
                         },
                         "operand" : [ {
-                           "localId" : "60",
                            "locator" : "32:75-32:83",
                            "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                            "name" : "Encounter",
@@ -1147,17 +564,14 @@
                   }
                },
                "high" : {
-                  "localId" : "69",
                   "locator" : "32:90-32:136",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "Add",
                   "operand" : [ {
-                     "localId" : "67",
                      "locator" : "32:90-32:128",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "DateFrom",
                      "operand" : {
-                        "localId" : "66",
                         "locator" : "32:100-32:128",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
@@ -1166,13 +580,11 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "65",
                               "locator" : "32:111-32:126",
                               "resultTypeName" : "{http://hl7.org/fhir}Period",
                               "path" : "period",
                               "type" : "Property",
                               "source" : {
-                                 "localId" : "64",
                                  "locator" : "32:111-32:119",
                                  "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                                  "name" : "Encounter",
@@ -1182,7 +594,6 @@
                         }
                      }
                   }, {
-                     "localId" : "68",
                      "locator" : "32:132-32:136",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
@@ -1194,7 +605,6 @@
             "operand" : [ {
                "name" : "Encounter",
                "operandTypeSpecifier" : {
-                  "localId" : "58",
                   "locator" : "31:80-31:93",
                   "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                   "name" : "{http://hl7.org/fhir}Encounter",
@@ -1202,113 +612,11 @@
                }
             } ]
          }, {
-            "localId" : "84",
             "locator" : "34:1-35:137",
             "name" : "FromDayOfStartOfHospitalizationToDayAfterFirstICU",
             "context" : "Patient",
             "accessLevel" : "Public",
             "type" : "FunctionDef",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "84",
-                  "s" : [ {
-                     "value" : [ "","define function ","\"FromDayOfStartOfHospitalizationToDayAfterFirstICU\"","(","Encounter"," " ]
-                  }, {
-                     "r" : "72",
-                     "s" : [ {
-                        "value" : [ "FHIR",".","Encounter" ]
-                     } ]
-                  }, {
-                     "value" : [ " ):\n  " ]
-                  }, {
-                     "r" : "83",
-                     "s" : [ {
-                        "r" : "83",
-                        "s" : [ {
-                           "value" : [ "Interval[" ]
-                        }, {
-                           "r" : "77",
-                           "s" : [ {
-                              "value" : [ "date from " ]
-                           }, {
-                              "r" : "76",
-                              "s" : [ {
-                                 "value" : [ "( " ]
-                              }, {
-                                 "r" : "76",
-                                 "s" : [ {
-                                    "value" : [ "start of " ]
-                                 }, {
-                                    "r" : "75",
-                                    "s" : [ {
-                                       "r" : "73",
-                                       "s" : [ {
-                                          "value" : [ "Global" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "75",
-                                       "s" : [ {
-                                          "value" : [ "\"HospitalizationWithObservation\""," ( " ]
-                                       }, {
-                                          "r" : "74",
-                                          "s" : [ {
-                                             "value" : [ "Encounter" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ " )" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " )" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ ", " ]
-                        }, {
-                           "r" : "82",
-                           "s" : [ {
-                              "r" : "80",
-                              "s" : [ {
-                                 "value" : [ "date from " ]
-                              }, {
-                                 "r" : "79",
-                                 "s" : [ {
-                                    "value" : [ "( " ]
-                                 }, {
-                                    "r" : "79",
-                                    "s" : [ {
-                                       "value" : [ "StartOfFirstICU","(" ]
-                                    }, {
-                                       "r" : "78",
-                                       "s" : [ {
-                                          "value" : [ "Encounter" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ")" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " + " ]
-                           }, {
-                              "r" : "81",
-                              "s" : [ {
-                                 "value" : [ "1 ","day" ]
-                              } ]
-                           } ]
-                        }, {
-                           "value" : [ "]" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
@@ -1317,7 +625,6 @@
                }
             },
             "expression" : {
-               "localId" : "83",
                "locator" : "35:3-35:137",
                "lowClosed" : true,
                "highClosed" : true,
@@ -1330,17 +637,14 @@
                   }
                },
                "low" : {
-                  "localId" : "77",
                   "locator" : "35:12-35:87",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "DateFrom",
                   "operand" : {
-                     "localId" : "76",
                      "locator" : "35:22-35:87",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                      "type" : "Start",
                      "operand" : {
-                        "localId" : "75",
                         "locator" : "35:33-35:85",
                         "name" : "HospitalizationWithObservation",
                         "libraryName" : "Global",
@@ -1353,7 +657,6 @@
                            }
                         },
                         "operand" : [ {
-                           "localId" : "74",
                            "locator" : "35:75-35:83",
                            "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                            "name" : "Encounter",
@@ -1363,23 +666,19 @@
                   }
                },
                "high" : {
-                  "localId" : "82",
                   "locator" : "35:90-35:136",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                   "type" : "Add",
                   "operand" : [ {
-                     "localId" : "80",
                      "locator" : "35:90-35:128",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
                      "type" : "DateFrom",
                      "operand" : {
-                        "localId" : "79",
                         "locator" : "35:100-35:128",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "name" : "StartOfFirstICU",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "78",
                            "locator" : "35:118-35:126",
                            "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                            "name" : "Encounter",
@@ -1387,7 +686,6 @@
                         } ]
                      }
                   }, {
-                     "localId" : "81",
                      "locator" : "35:132-35:136",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                      "value" : 1,
@@ -1399,7 +697,6 @@
             "operand" : [ {
                "name" : "Encounter",
                "operandTypeSpecifier" : {
-                  "localId" : "72",
                   "locator" : "34:79-34:92",
                   "resultTypeName" : "{http://hl7.org/fhir}Encounter",
                   "name" : "{http://hl7.org/fhir}Encounter",

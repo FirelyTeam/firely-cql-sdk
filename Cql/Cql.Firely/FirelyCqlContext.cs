@@ -26,7 +26,23 @@ namespace Hl7.Cql.Firely
         /// <summary>
         /// Factory method for creating the CqlContext.
         /// </summary>
-        public static CqlContext Create(Bundle? bundle = null,
+        public static CqlContext ForBundle(Bundle bundle,
+            IDictionary<string, object>? parameters = null,
+            IValueSetDictionary? valueSets = null,
+            DateTimeOffset? now = null,
+            DefinitionDictionary<Delegate>? delegates = null)
+        {
+            IDataRetriever retriever = bundle is not null ?
+                new BundleDataRetriever(bundle, valueSets ?? new HashValueSetDictionary()) :
+                new CompositeDataRetriever();
+
+            return Create(retriever, parameters, valueSets, now, delegates);
+        }
+
+        /// <summary>
+        /// Factory method for creating the CqlContext.
+        /// </summary>
+        public static CqlContext Create(IDataRetriever? retriever = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
@@ -35,9 +51,7 @@ namespace Hl7.Cql.Firely
             valueSets ??= new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
             var typeResolver = FirelyTypeResolver.Default;
-            IDataRetriever dataRetriever = bundle != null
-                ? new BundleDataRetriever(bundle, valueSets)
-                : new CompositeDataRetriever();
+            IDataRetriever dataRetriever = retriever ?? new CompositeDataRetriever();
 
             var cqlComparers = new CqlComparers();
             var operators = CqlOperators.Create(typeResolver,

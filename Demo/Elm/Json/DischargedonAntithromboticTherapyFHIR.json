@@ -1,17 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.2.0",
-         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "124",
-            "s" : [ {
-               "value" : [ "","library DischargedonAntithromboticTherapyFHIR version '0.0.010'" ]
-            } ]
-         }
       } ],
       "identifier" : {
          "id" : "DischargedonAntithromboticTherapyFHIR",
@@ -26,142 +18,40 @@
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
             "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.1",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "1",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIR" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.1'" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.1"
          } ]
       },
       "includes" : {
          "def" : [ {
-            "localId" : "2",
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.001",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "2",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIRHelpers" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.001"
          }, {
-            "localId" : "3",
             "locator" : "6:1-6:66",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElementsFHIR4",
-            "version" : "2.0.000",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "3",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "SupplementalDataElementsFHIR4" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'2.0.000'"," called ","SDE" ]
-                  } ]
-               }
-            } ]
+            "version" : "2.0.000"
          }, {
-            "localId" : "4",
             "locator" : "7:1-7:69",
             "localIdentifier" : "Global",
             "path" : "MATGlobalCommonFunctionsFHIR4",
-            "version" : "6.1.000",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "4",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "MATGlobalCommonFunctionsFHIR4" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'6.1.000'"," called ","Global" ]
-                  } ]
-               }
-            } ]
+            "version" : "6.1.000"
          }, {
-            "localId" : "5",
             "locator" : "8:1-8:51",
             "localIdentifier" : "TJC",
             "path" : "TJCOverallFHIR",
-            "version" : "1.8.000",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "5",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "TJCOverallFHIR" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'1.8.000'"," called ","TJC" ]
-                  } ]
-               }
-            } ]
+            "version" : "1.8.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "22",
             "locator" : "25:1-25:49",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "22",
-                  "s" : [ {
-                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
-                  }, {
-                     "r" : "21",
-                     "s" : [ {
-                        "value" : [ "Interval<" ]
-                     }, {
-                        "r" : "20",
-                        "s" : [ {
-                           "value" : [ "DateTime" ]
-                        } ]
-                     }, {
-                        "value" : [ ">" ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
@@ -170,7 +60,6 @@
                }
             },
             "parameterTypeSpecifier" : {
-               "localId" : "21",
                "locator" : "25:32-25:49",
                "type" : "IntervalTypeSpecifier",
                "resultTypeSpecifier" : {
@@ -181,7 +70,6 @@
                   }
                },
                "pointType" : {
-                  "localId" : "20",
                   "locator" : "25:41-25:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -192,229 +80,89 @@
       },
       "valueSets" : {
          "def" : [ {
-            "localId" : "6",
             "locator" : "10:1-10:107",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Antithrombotic Therapy",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "6",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Antithrombotic Therapy\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "7",
             "locator" : "11:1-11:94",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Comfort Measures",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "7",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Comfort Measures\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "8",
             "locator" : "12:1-12:116",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Discharge To Acute Care Facility",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "8",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Discharge To Acute Care Facility\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "9",
             "locator" : "13:1-13:136",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Discharged to Health Care Facility for Hospice Care",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "9",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Discharged to Health Care Facility for Hospice Care\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "10",
             "locator" : "14:1-14:120",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Discharged to Home for Hospice Care",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "10",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Discharged to Home for Hospice Care\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "11",
             "locator" : "15:1-15:111",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Emergency Department Visit",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "11",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Emergency Department Visit\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "12",
             "locator" : "16:1-16:103",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Hemorrhagic Stroke",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "12",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Hemorrhagic Stroke\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "13",
             "locator" : "17:1-17:100",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Ischemic Stroke",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "13",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Ischemic Stroke\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "14",
             "locator" : "18:1-18:112",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Left Against Medical Advice",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "14",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Left Against Medical Advice\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "15",
             "locator" : "19:1-19:99",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Medical Reason",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "15",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Medical Reason\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "16",
             "locator" : "20:1-20:117",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Non-Elective Inpatient Encounter",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "16",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Non-Elective Inpatient Encounter\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "17",
             "locator" : "21:1-21:100",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Patient Expired",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "17",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Patient Expired\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "18",
             "locator" : "22:1-22:99",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Patient Refusal",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "18",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Patient Refusal\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          }, {
-            "localId" : "19",
             "locator" : "23:1-23:141",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Pharmacological Contraindications For Antithrombotic Therapy",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "19",
-                  "s" : [ {
-                     "value" : [ "","valueset ","\"Pharmacological Contraindications For Antithrombotic Therapy\"",": ","'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          } ]
       },
       "contexts" : {
@@ -438,35 +186,10 @@
                }
             }
          }, {
-            "localId" : "25",
             "locator" : "29:1-30:33",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "25",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Denominator\"",":\n  " ]
-                  }, {
-                     "r" : "24",
-                     "s" : [ {
-                        "r" : "23",
-                        "s" : [ {
-                           "value" : [ "TJC" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "24",
-                        "s" : [ {
-                           "value" : [ "\"Ischemic Stroke Encounter\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -475,7 +198,6 @@
                }
             },
             "expression" : {
-               "localId" : "24",
                "locator" : "30:3-30:33",
                "name" : "Ischemic Stroke Encounter",
                "libraryName" : "TJC",
@@ -489,348 +211,10 @@
                }
             }
          }, {
-            "localId" : "74",
             "locator" : "80:1-91:52",
             "name" : "Antithrombotic Not Given at Discharge",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "74",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Antithrombotic Not Given at Discharge\"",":\n  " ]
-                  }, {
-                     "r" : "73",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "29",
-                           "s" : [ {
-                              "r" : "28",
-                              "s" : [ {
-                                 "r" : "28",
-                                 "s" : [ {
-                                    "value" : [ "[","\"MedicationRequest\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "medication" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " ","in"," " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Antithrombotic Therapy\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","NoAntithromboticDischarge" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "72",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "72",
-                           "s" : [ {
-                              "r" : "67",
-                              "s" : [ {
-                                 "r" : "60",
-                                 "s" : [ {
-                                    "r" : "42",
-                                    "s" : [ {
-                                       "r" : "32",
-                                       "s" : [ {
-                                          "r" : "31",
-                                          "s" : [ {
-                                             "r" : "30",
-                                             "s" : [ {
-                                                "value" : [ "NoAntithromboticDischarge" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "." ]
-                                          }, {
-                                             "r" : "31",
-                                             "s" : [ {
-                                                "value" : [ "doNotPerform" ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ " is true" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "\n      and " ]
-                                    }, {
-                                       "r" : "41",
-                                       "s" : [ {
-                                          "value" : [ "( " ]
-                                       }, {
-                                          "r" : "41",
-                                          "s" : [ {
-                                             "r" : "36",
-                                             "s" : [ {
-                                                "r" : "34",
-                                                "s" : [ {
-                                                   "r" : "33",
-                                                   "s" : [ {
-                                                      "value" : [ "NoAntithromboticDischarge" ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "." ]
-                                                }, {
-                                                   "r" : "34",
-                                                   "s" : [ {
-                                                      "value" : [ "reasonCode" ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ " in " ]
-                                             }, {
-                                                "r" : "35",
-                                                "s" : [ {
-                                                   "value" : [ "\"Medical Reason\"" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "\n          or " ]
-                                          }, {
-                                             "r" : "40",
-                                             "s" : [ {
-                                                "r" : "38",
-                                                "s" : [ {
-                                                   "r" : "37",
-                                                   "s" : [ {
-                                                      "value" : [ "NoAntithromboticDischarge" ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "." ]
-                                                }, {
-                                                   "r" : "38",
-                                                   "s" : [ {
-                                                      "value" : [ "reasonCode" ]
-                                                   } ]
-                                                } ]
-                                             }, {
-                                                "value" : [ " in " ]
-                                             }, {
-                                                "r" : "39",
-                                                "s" : [ {
-                                                   "value" : [ "\"Patient Refusal\"" ]
-                                                } ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n      )" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n      and " ]
-                                 }, {
-                                    "r" : "59",
-                                    "s" : [ {
-                                       "value" : [ "exists " ]
-                                    }, {
-                                       "r" : "58",
-                                       "s" : [ {
-                                          "value" : [ "( " ]
-                                       }, {
-                                          "r" : "58",
-                                          "s" : [ {
-                                             "s" : [ {
-                                                "r" : "44",
-                                                "s" : [ {
-                                                   "r" : "43",
-                                                   "s" : [ {
-                                                      "s" : [ {
-                                                         "value" : [ "NoAntithromboticDischarge",".","category" ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ " ","C" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "\n          " ]
-                                          }, {
-                                             "r" : "57",
-                                             "s" : [ {
-                                                "value" : [ "where " ]
-                                             }, {
-                                                "r" : "57",
-                                                "s" : [ {
-                                                   "r" : "50",
-                                                   "s" : [ {
-                                                      "r" : "47",
-                                                      "s" : [ {
-                                                         "r" : "45",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRHelpers" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "47",
-                                                         "s" : [ {
-                                                            "value" : [ "ToConcept"," ( " ]
-                                                         }, {
-                                                            "r" : "46",
-                                                            "s" : [ {
-                                                               "value" : [ "C" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " ","~"," " ]
-                                                   }, {
-                                                      "r" : "49",
-                                                      "s" : [ {
-                                                         "r" : "48",
-                                                         "s" : [ {
-                                                            "value" : [ "Global" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "49",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Community\"" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "\n            or " ]
-                                                }, {
-                                                   "r" : "56",
-                                                   "s" : [ {
-                                                      "r" : "53",
-                                                      "s" : [ {
-                                                         "r" : "51",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRHelpers" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "53",
-                                                         "s" : [ {
-                                                            "value" : [ "ToConcept"," ( " ]
-                                                         }, {
-                                                            "r" : "52",
-                                                            "s" : [ {
-                                                               "value" : [ "C" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " ","~"," " ]
-                                                   }, {
-                                                      "r" : "55",
-                                                      "s" : [ {
-                                                         "r" : "54",
-                                                         "s" : [ {
-                                                            "value" : [ "Global" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "55",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Discharge\"" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n      )" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      and " ]
-                              }, {
-                                 "r" : "66",
-                                 "s" : [ {
-                                    "r" : "62",
-                                    "s" : [ {
-                                       "r" : "61",
-                                       "s" : [ {
-                                          "value" : [ "NoAntithromboticDischarge" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "62",
-                                       "s" : [ {
-                                          "value" : [ "status" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " in " ]
-                                 }, {
-                                    "r" : "65",
-                                    "s" : [ {
-                                       "value" : [ "{ " ]
-                                    }, {
-                                       "r" : "63",
-                                       "s" : [ {
-                                          "value" : [ "'completed'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "64",
-                                       "s" : [ {
-                                          "value" : [ "'cancelled'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " }" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n      and " ]
-                           }, {
-                              "r" : "71",
-                              "s" : [ {
-                                 "r" : "69",
-                                 "s" : [ {
-                                    "r" : "68",
-                                    "s" : [ {
-                                       "value" : [ "NoAntithromboticDischarge" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "69",
-                                    "s" : [ {
-                                       "value" : [ "intent" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","="," " ]
-                              }, {
-                                 "r" : "70",
-                                 "s" : [ {
-                                    "value" : [ "'order'" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -839,7 +223,6 @@
                }
             },
             "expression" : {
-               "localId" : "73",
                "locator" : "81:3-91:52",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -850,7 +233,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "29",
                   "locator" : "81:3-81:89",
                   "alias" : "NoAntithromboticDischarge",
                   "resultTypeSpecifier" : {
@@ -861,7 +243,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "28",
                      "locator" : "81:3-81:63",
                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
@@ -886,27 +267,22 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "72",
                   "locator" : "82:5-91:52",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "67",
                      "locator" : "82:11-90:74",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "60",
                         "locator" : "82:11-89:7",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "operand" : [ {
-                           "localId" : "42",
                            "locator" : "82:11-85:7",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "operand" : [ {
-                              "localId" : "32",
                               "locator" : "82:11-82:56",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "IsTrue",
@@ -915,7 +291,6 @@
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
                                  "operand" : [ {
-                                    "localId" : "31",
                                     "locator" : "82:11-82:48",
                                     "resultTypeName" : "{http://hl7.org/fhir}boolean",
                                     "path" : "doNotPerform",
@@ -924,12 +299,10 @@
                                  } ]
                               }
                            }, {
-                              "localId" : "41",
                               "locator" : "83:11-85:7",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Or",
                               "operand" : [ {
-                                 "localId" : "36",
                                  "locator" : "83:13-83:68",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "AnyInValueSet",
@@ -938,7 +311,6 @@
                                     "source" : [ {
                                        "alias" : "X",
                                        "expression" : {
-                                          "localId" : "34",
                                           "locator" : "83:13-83:48",
                                           "path" : "reasonCode",
                                           "scope" : "NoAntithromboticDischarge",
@@ -966,14 +338,12 @@
                                     }
                                  },
                                  "valueset" : {
-                                    "localId" : "35",
                                     "locator" : "83:53-83:68",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Medical Reason",
                                     "preserve" : true
                                  }
                               }, {
-                                 "localId" : "40",
                                  "locator" : "84:14-84:70",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "AnyInValueSet",
@@ -982,7 +352,6 @@
                                     "source" : [ {
                                        "alias" : "X",
                                        "expression" : {
-                                          "localId" : "38",
                                           "locator" : "84:14-84:49",
                                           "path" : "reasonCode",
                                           "scope" : "NoAntithromboticDischarge",
@@ -1010,7 +379,6 @@
                                     }
                                  },
                                  "valueset" : {
-                                    "localId" : "39",
                                     "locator" : "84:54-84:70",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Patient Refusal",
@@ -1019,12 +387,10 @@
                               } ]
                            } ]
                         }, {
-                           "localId" : "59",
                            "locator" : "86:11-89:7",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
                            "operand" : {
-                              "localId" : "58",
                               "locator" : "86:18-89:7",
                               "type" : "Query",
                               "resultTypeSpecifier" : {
@@ -1035,7 +401,6 @@
                                  }
                               },
                               "source" : [ {
-                                 "localId" : "44",
                                  "locator" : "86:20-86:55",
                                  "alias" : "C",
                                  "resultTypeSpecifier" : {
@@ -1046,7 +411,6 @@
                                     }
                                  },
                                  "expression" : {
-                                    "localId" : "43",
                                     "locator" : "86:20-86:53",
                                     "path" : "category",
                                     "scope" : "NoAntithromboticDischarge",
@@ -1062,24 +426,20 @@
                               } ],
                               "relationship" : [ ],
                               "where" : {
-                                 "localId" : "57",
                                  "locator" : "87:11-88:63",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Or",
                                  "operand" : [ {
-                                    "localId" : "50",
                                     "locator" : "87:17-87:64",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "localId" : "47",
                                        "locator" : "87:17-87:43",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
                                        "operand" : [ {
-                                          "localId" : "46",
                                           "locator" : "87:41",
                                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                                           "name" : "C",
@@ -1088,7 +448,6 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "localId" : "49",
                                           "locator" : "87:47-87:64",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Community",
@@ -1097,19 +456,16 @@
                                        }
                                     } ]
                                  }, {
-                                    "localId" : "56",
                                     "locator" : "88:16-88:63",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "localId" : "53",
                                        "locator" : "88:16-88:42",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
                                        "operand" : [ {
-                                          "localId" : "52",
                                           "locator" : "88:40",
                                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                                           "name" : "C",
@@ -1118,7 +474,6 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "localId" : "55",
                                           "locator" : "88:46-88:63",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Discharge",
@@ -1131,7 +486,6 @@
                            }
                         } ]
                      }, {
-                        "localId" : "66",
                         "locator" : "90:11-90:74",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "In",
@@ -1140,7 +494,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "62",
                               "locator" : "90:11-90:42",
                               "resultTypeName" : "{http://hl7.org/fhir}MedicationRequestStatus",
                               "path" : "status",
@@ -1148,7 +501,6 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "localId" : "65",
                            "locator" : "90:47-90:74",
                            "type" : "List",
                            "resultTypeSpecifier" : {
@@ -1159,14 +511,12 @@
                               }
                            },
                            "element" : [ {
-                              "localId" : "63",
                               "locator" : "90:49-90:59",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "completed",
                               "type" : "Literal"
                            }, {
-                              "localId" : "64",
                               "locator" : "90:62-90:72",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -1176,7 +526,6 @@
                         } ]
                      } ]
                   }, {
-                     "localId" : "71",
                      "locator" : "91:11-91:52",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
@@ -1185,7 +534,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "69",
                            "locator" : "91:11-91:42",
                            "resultTypeName" : "{http://hl7.org/fhir}MedicationRequestIntent",
                            "path" : "intent",
@@ -1193,7 +541,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "70",
                         "locator" : "91:46-91:52",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -1204,94 +551,10 @@
                }
             }
          }, {
-            "localId" : "84",
             "locator" : "40:1-43:101",
             "name" : "Encounter With No Antithrombotic At Discharge",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "84",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Encounter With No Antithrombotic At Discharge\"",":\n  " ]
-                  }, {
-                     "r" : "83",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "27",
-                           "s" : [ {
-                              "r" : "26",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "TJC",".","\"Ischemic Stroke Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","IschemicStrokeEncounter" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n                \t" ]
-                     }, {
-                        "r" : "82",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "76",
-                           "s" : [ {
-                              "r" : "75",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Antithrombotic Not Given at Discharge\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","NoDischargeAntithrombotic" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n                \tsuch that " ]
-                        }, {
-                           "r" : "81",
-                           "s" : [ {
-                              "r" : "78",
-                              "s" : [ {
-                                 "r" : "77",
-                                 "s" : [ {
-                                    "value" : [ "NoDischargeAntithrombotic" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "78",
-                                 "s" : [ {
-                                    "value" : [ "authoredOn" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "81",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "80",
-                              "s" : [ {
-                                 "r" : "79",
-                                 "s" : [ {
-                                    "value" : [ "IschemicStrokeEncounter" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "80",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -1300,7 +563,6 @@
                }
             },
             "expression" : {
-               "localId" : "83",
                "locator" : "41:3-43:101",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -1311,7 +573,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "27",
                   "locator" : "41:3-41:57",
                   "alias" : "IschemicStrokeEncounter",
                   "resultTypeSpecifier" : {
@@ -1322,7 +583,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "26",
                      "locator" : "41:3-41:33",
                      "name" : "Ischemic Stroke Encounter",
                      "libraryName" : "TJC",
@@ -1337,7 +597,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "82",
                   "locator" : "42:18-43:101",
                   "alias" : "NoDischargeAntithrombotic",
                   "type" : "With",
@@ -1349,7 +608,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "75",
                      "locator" : "42:23-42:61",
                      "name" : "Antithrombotic Not Given at Discharge",
                      "type" : "ExpressionRef",
@@ -1362,7 +620,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "81",
                      "locator" : "43:28-43:101",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
@@ -1371,7 +628,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "78",
                            "locator" : "43:28-43:63",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "path" : "authoredOn",
@@ -1383,7 +639,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "80",
                            "locator" : "43:72-43:101",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -1395,281 +650,10 @@
                } ]
             }
          }, {
-            "localId" : "124",
             "locator" : "93:1-101:42",
             "name" : "Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "124",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Pharmacological Contraindications for Antithrombotic Therapy at Discharge\"",":\n  " ]
-                  }, {
-                     "r" : "123",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "89",
-                           "s" : [ {
-                              "r" : "88",
-                              "s" : [ {
-                                 "r" : "88",
-                                 "s" : [ {
-                                    "value" : [ "[","\"MedicationRequest\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "medication" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " ","in"," " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Pharmacological Contraindications For Antithrombotic Therapy\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","Pharmacological" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "122",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "122",
-                           "s" : [ {
-                              "r" : "117",
-                              "s" : [ {
-                                 "r" : "110",
-                                 "s" : [ {
-                                    "r" : "92",
-                                    "s" : [ {
-                                       "r" : "91",
-                                       "s" : [ {
-                                          "r" : "90",
-                                          "s" : [ {
-                                             "value" : [ "Pharmacological" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "91",
-                                          "s" : [ {
-                                             "value" : [ "doNotPerform" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " is not true" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n      and " ]
-                                 }, {
-                                    "r" : "109",
-                                    "s" : [ {
-                                       "value" : [ "exists " ]
-                                    }, {
-                                       "r" : "108",
-                                       "s" : [ {
-                                          "value" : [ "( " ]
-                                       }, {
-                                          "r" : "108",
-                                          "s" : [ {
-                                             "s" : [ {
-                                                "r" : "94",
-                                                "s" : [ {
-                                                   "r" : "93",
-                                                   "s" : [ {
-                                                      "s" : [ {
-                                                         "value" : [ "Pharmacological",".","category" ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ " ","C" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "\n          " ]
-                                          }, {
-                                             "r" : "107",
-                                             "s" : [ {
-                                                "value" : [ "where " ]
-                                             }, {
-                                                "r" : "107",
-                                                "s" : [ {
-                                                   "r" : "100",
-                                                   "s" : [ {
-                                                      "r" : "97",
-                                                      "s" : [ {
-                                                         "r" : "95",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRHelpers" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "97",
-                                                         "s" : [ {
-                                                            "value" : [ "ToConcept"," ( " ]
-                                                         }, {
-                                                            "r" : "96",
-                                                            "s" : [ {
-                                                               "value" : [ "C" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " ","~"," " ]
-                                                   }, {
-                                                      "r" : "99",
-                                                      "s" : [ {
-                                                         "r" : "98",
-                                                         "s" : [ {
-                                                            "value" : [ "Global" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "99",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Community\"" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "\n            or " ]
-                                                }, {
-                                                   "r" : "106",
-                                                   "s" : [ {
-                                                      "r" : "103",
-                                                      "s" : [ {
-                                                         "r" : "101",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRHelpers" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "103",
-                                                         "s" : [ {
-                                                            "value" : [ "ToConcept"," ( " ]
-                                                         }, {
-                                                            "r" : "102",
-                                                            "s" : [ {
-                                                               "value" : [ "C" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " ","~"," " ]
-                                                   }, {
-                                                      "r" : "105",
-                                                      "s" : [ {
-                                                         "r" : "104",
-                                                         "s" : [ {
-                                                            "value" : [ "Global" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "105",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Discharge\"" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n      )" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      and " ]
-                              }, {
-                                 "r" : "116",
-                                 "s" : [ {
-                                    "r" : "112",
-                                    "s" : [ {
-                                       "r" : "111",
-                                       "s" : [ {
-                                          "value" : [ "Pharmacological" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "112",
-                                       "s" : [ {
-                                          "value" : [ "status" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " in " ]
-                                 }, {
-                                    "r" : "115",
-                                    "s" : [ {
-                                       "value" : [ "{ " ]
-                                    }, {
-                                       "r" : "113",
-                                       "s" : [ {
-                                          "value" : [ "'active'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "114",
-                                       "s" : [ {
-                                          "value" : [ "'completed'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " }" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n      and " ]
-                           }, {
-                              "r" : "121",
-                              "s" : [ {
-                                 "r" : "119",
-                                 "s" : [ {
-                                    "r" : "118",
-                                    "s" : [ {
-                                       "value" : [ "Pharmacological" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "119",
-                                    "s" : [ {
-                                       "value" : [ "intent" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","="," " ]
-                              }, {
-                                 "r" : "120",
-                                 "s" : [ {
-                                    "value" : [ "'order'" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -1678,7 +662,6 @@
                }
             },
             "expression" : {
-               "localId" : "123",
                "locator" : "94:3-101:42",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -1689,7 +672,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "89",
                   "locator" : "94:3-94:117",
                   "alias" : "Pharmacological",
                   "resultTypeSpecifier" : {
@@ -1700,7 +682,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "88",
                      "locator" : "94:3-94:101",
                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
@@ -1725,22 +706,18 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "122",
                   "locator" : "95:5-101:42",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "117",
                      "locator" : "95:11-100:61",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "110",
                         "locator" : "95:11-99:7",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "operand" : [ {
-                           "localId" : "92",
                            "locator" : "95:11-95:50",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Not",
@@ -1753,7 +730,6 @@
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
                                  "operand" : [ {
-                                    "localId" : "91",
                                     "locator" : "95:11-95:38",
                                     "resultTypeName" : "{http://hl7.org/fhir}boolean",
                                     "path" : "doNotPerform",
@@ -1763,12 +739,10 @@
                               }
                            }
                         }, {
-                           "localId" : "109",
                            "locator" : "96:11-99:7",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
                            "operand" : {
-                              "localId" : "108",
                               "locator" : "96:18-99:7",
                               "type" : "Query",
                               "resultTypeSpecifier" : {
@@ -1779,7 +753,6 @@
                                  }
                               },
                               "source" : [ {
-                                 "localId" : "94",
                                  "locator" : "96:20-96:45",
                                  "alias" : "C",
                                  "resultTypeSpecifier" : {
@@ -1790,7 +763,6 @@
                                     }
                                  },
                                  "expression" : {
-                                    "localId" : "93",
                                     "locator" : "96:20-96:43",
                                     "path" : "category",
                                     "scope" : "Pharmacological",
@@ -1806,24 +778,20 @@
                               } ],
                               "relationship" : [ ],
                               "where" : {
-                                 "localId" : "107",
                                  "locator" : "97:11-98:63",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Or",
                                  "operand" : [ {
-                                    "localId" : "100",
                                     "locator" : "97:17-97:64",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "localId" : "97",
                                        "locator" : "97:17-97:43",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
                                        "operand" : [ {
-                                          "localId" : "96",
                                           "locator" : "97:41",
                                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                                           "name" : "C",
@@ -1832,7 +800,6 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "localId" : "99",
                                           "locator" : "97:47-97:64",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Community",
@@ -1841,19 +808,16 @@
                                        }
                                     } ]
                                  }, {
-                                    "localId" : "106",
                                     "locator" : "98:16-98:63",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "localId" : "103",
                                        "locator" : "98:16-98:42",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
                                        "operand" : [ {
-                                          "localId" : "102",
                                           "locator" : "98:40",
                                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                                           "name" : "C",
@@ -1862,7 +826,6 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "localId" : "105",
                                           "locator" : "98:46-98:63",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Discharge",
@@ -1875,7 +838,6 @@
                            }
                         } ]
                      }, {
-                        "localId" : "116",
                         "locator" : "100:11-100:61",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "In",
@@ -1884,7 +846,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "112",
                               "locator" : "100:11-100:32",
                               "resultTypeName" : "{http://hl7.org/fhir}MedicationRequestStatus",
                               "path" : "status",
@@ -1892,7 +853,6 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "localId" : "115",
                            "locator" : "100:37-100:61",
                            "type" : "List",
                            "resultTypeSpecifier" : {
@@ -1903,14 +863,12 @@
                               }
                            },
                            "element" : [ {
-                              "localId" : "113",
                               "locator" : "100:39-100:46",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "active",
                               "type" : "Literal"
                            }, {
-                              "localId" : "114",
                               "locator" : "100:49-100:59",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -1920,7 +878,6 @@
                         } ]
                      } ]
                   }, {
-                     "localId" : "121",
                      "locator" : "101:11-101:42",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
@@ -1929,7 +886,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "119",
                            "locator" : "101:11-101:32",
                            "resultTypeName" : "{http://hl7.org/fhir}MedicationRequestIntent",
                            "path" : "intent",
@@ -1937,7 +893,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "120",
                         "locator" : "101:36-101:42",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -1948,94 +903,10 @@
                }
             }
          }, {
-            "localId" : "134",
             "locator" : "45:1-48:105",
             "name" : "Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "134",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge\"",":\n  " ]
-                  }, {
-                     "r" : "133",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "87",
-                           "s" : [ {
-                              "r" : "86",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "TJC",".","\"Ischemic Stroke Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","IschemicStrokeEncounter" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n                    " ]
-                     }, {
-                        "r" : "132",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "126",
-                           "s" : [ {
-                              "r" : "125",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Pharmacological Contraindications for Antithrombotic Therapy at Discharge\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","DischargePharmacological" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n                      such that " ]
-                        }, {
-                           "r" : "131",
-                           "s" : [ {
-                              "r" : "128",
-                              "s" : [ {
-                                 "r" : "127",
-                                 "s" : [ {
-                                    "value" : [ "DischargePharmacological" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "128",
-                                 "s" : [ {
-                                    "value" : [ "authoredOn" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "131",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "130",
-                              "s" : [ {
-                                 "r" : "129",
-                                 "s" : [ {
-                                    "value" : [ "IschemicStrokeEncounter" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "130",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -2044,7 +915,6 @@
                }
             },
             "expression" : {
-               "localId" : "133",
                "locator" : "46:3-48:105",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -2055,7 +925,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "87",
                   "locator" : "46:3-46:57",
                   "alias" : "IschemicStrokeEncounter",
                   "resultTypeSpecifier" : {
@@ -2066,7 +935,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "86",
                      "locator" : "46:3-46:33",
                      "name" : "Ischemic Stroke Encounter",
                      "libraryName" : "TJC",
@@ -2081,7 +949,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "132",
                   "locator" : "47:21-48:105",
                   "alias" : "DischargePharmacological",
                   "type" : "With",
@@ -2093,7 +960,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "125",
                      "locator" : "47:26-47:100",
                      "name" : "Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
                      "type" : "ExpressionRef",
@@ -2106,7 +972,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "131",
                      "locator" : "48:33-48:105",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
@@ -2115,7 +980,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "128",
                            "locator" : "48:33-48:67",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "path" : "authoredOn",
@@ -2127,7 +991,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "130",
                            "locator" : "48:76-48:105",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -2139,35 +1002,10 @@
                } ]
             }
          }, {
-            "localId" : "137",
             "locator" : "32:1-34:114",
             "name" : "Denominator Exceptions",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "137",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Denominator Exceptions\"",":\n  " ]
-                  }, {
-                     "r" : "136",
-                     "s" : [ {
-                        "r" : "85",
-                        "s" : [ {
-                           "value" : [ "\"Encounter With No Antithrombotic At Discharge\"" ]
-                        } ]
-                     }, {
-                        "value" : [ "\n                \t\tunion " ]
-                     }, {
-                        "r" : "135",
-                        "s" : [ {
-                           "value" : [ "\"Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -2176,7 +1014,6 @@
                }
             },
             "expression" : {
-               "localId" : "136",
                "locator" : "33:3-34:114",
                "type" : "Union",
                "resultTypeSpecifier" : {
@@ -2187,7 +1024,6 @@
                   }
                },
                "operand" : [ {
-                  "localId" : "85",
                   "locator" : "33:3-33:49",
                   "name" : "Encounter With No Antithrombotic At Discharge",
                   "type" : "ExpressionRef",
@@ -2199,7 +1035,6 @@
                      }
                   }
                }, {
-                  "localId" : "135",
                   "locator" : "34:25-34:114",
                   "name" : "Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
                   "type" : "ExpressionRef",
@@ -2213,55 +1048,10 @@
                } ]
             }
          }, {
-            "localId" : "143",
             "locator" : "36:1-38:84",
             "name" : "Denominator Exclusions",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "143",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Denominator Exclusions\"",":\n  " ]
-                  }, {
-                     "r" : "142",
-                     "s" : [ {
-                        "r" : "139",
-                        "s" : [ {
-                           "r" : "138",
-                           "s" : [ {
-                              "value" : [ "TJC" ]
-                           } ]
-                        }, {
-                           "value" : [ "." ]
-                        }, {
-                           "r" : "139",
-                           "s" : [ {
-                              "value" : [ "\"Ischemic Stroke Encounters with Discharge Disposition\"" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n                \t\tunion " ]
-                     }, {
-                        "r" : "141",
-                        "s" : [ {
-                           "r" : "140",
-                           "s" : [ {
-                              "value" : [ "TJC" ]
-                           } ]
-                        }, {
-                           "value" : [ "." ]
-                        }, {
-                           "r" : "141",
-                           "s" : [ {
-                              "value" : [ "\"Encounter with Comfort Measures during Hospitalization\"" ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -2270,7 +1060,6 @@
                }
             },
             "expression" : {
-               "localId" : "142",
                "locator" : "37:3-38:84",
                "type" : "Union",
                "resultTypeSpecifier" : {
@@ -2281,7 +1070,6 @@
                   }
                },
                "operand" : [ {
-                  "localId" : "139",
                   "locator" : "37:3-37:61",
                   "name" : "Ischemic Stroke Encounters with Discharge Disposition",
                   "libraryName" : "TJC",
@@ -2294,7 +1082,6 @@
                      }
                   }
                }, {
-                  "localId" : "141",
                   "locator" : "38:25-38:84",
                   "name" : "Encounter with Comfort Measures during Hospitalization",
                   "libraryName" : "TJC",
@@ -2309,35 +1096,10 @@
                } ]
             }
          }, {
-            "localId" : "146",
             "locator" : "50:1-51:50",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "146",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Initial Population\"",":\n  " ]
-                  }, {
-                     "r" : "145",
-                     "s" : [ {
-                        "r" : "144",
-                        "s" : [ {
-                           "value" : [ "TJC" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "145",
-                        "s" : [ {
-                           "value" : [ "\"Encounter with Principal Diagnosis and Age\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -2346,7 +1108,6 @@
                }
             },
             "expression" : {
-               "localId" : "145",
                "locator" : "51:3-51:50",
                "name" : "Encounter with Principal Diagnosis and Age",
                "libraryName" : "TJC",
@@ -2360,281 +1121,10 @@
                }
             }
          }, {
-            "localId" : "185",
             "locator" : "70:1-78:41",
             "name" : "Antithrombotic Therapy at Discharge",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "185",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Antithrombotic Therapy at Discharge\"",":\n  " ]
-                  }, {
-                     "r" : "184",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "150",
-                           "s" : [ {
-                              "r" : "149",
-                              "s" : [ {
-                                 "r" : "149",
-                                 "s" : [ {
-                                    "value" : [ "[","\"MedicationRequest\"",": " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "medication" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " ","in"," " ]
-                                 }, {
-                                    "s" : [ {
-                                       "value" : [ "\"Antithrombotic Therapy\"" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","Antithrombotic" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n    " ]
-                     }, {
-                        "r" : "183",
-                        "s" : [ {
-                           "value" : [ "where " ]
-                        }, {
-                           "r" : "183",
-                           "s" : [ {
-                              "r" : "178",
-                              "s" : [ {
-                                 "r" : "171",
-                                 "s" : [ {
-                                    "r" : "153",
-                                    "s" : [ {
-                                       "r" : "152",
-                                       "s" : [ {
-                                          "r" : "151",
-                                          "s" : [ {
-                                             "value" : [ "Antithrombotic" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "152",
-                                          "s" : [ {
-                                             "value" : [ "doNotPerform" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " is not true" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "\n      and " ]
-                                 }, {
-                                    "r" : "170",
-                                    "s" : [ {
-                                       "value" : [ "exists " ]
-                                    }, {
-                                       "r" : "169",
-                                       "s" : [ {
-                                          "value" : [ "( " ]
-                                       }, {
-                                          "r" : "169",
-                                          "s" : [ {
-                                             "s" : [ {
-                                                "r" : "155",
-                                                "s" : [ {
-                                                   "r" : "154",
-                                                   "s" : [ {
-                                                      "s" : [ {
-                                                         "value" : [ "Antithrombotic",".","category" ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ " ","C" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ "\n          " ]
-                                          }, {
-                                             "r" : "168",
-                                             "s" : [ {
-                                                "value" : [ "where " ]
-                                             }, {
-                                                "r" : "168",
-                                                "s" : [ {
-                                                   "r" : "161",
-                                                   "s" : [ {
-                                                      "r" : "158",
-                                                      "s" : [ {
-                                                         "r" : "156",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRHelpers" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "158",
-                                                         "s" : [ {
-                                                            "value" : [ "ToConcept"," ( " ]
-                                                         }, {
-                                                            "r" : "157",
-                                                            "s" : [ {
-                                                               "value" : [ "C" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " ","~"," " ]
-                                                   }, {
-                                                      "r" : "160",
-                                                      "s" : [ {
-                                                         "r" : "159",
-                                                         "s" : [ {
-                                                            "value" : [ "Global" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "160",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Community\"" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                }, {
-                                                   "value" : [ "\n            or " ]
-                                                }, {
-                                                   "r" : "167",
-                                                   "s" : [ {
-                                                      "r" : "164",
-                                                      "s" : [ {
-                                                         "r" : "162",
-                                                         "s" : [ {
-                                                            "value" : [ "FHIRHelpers" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "164",
-                                                         "s" : [ {
-                                                            "value" : [ "ToConcept"," ( " ]
-                                                         }, {
-                                                            "r" : "163",
-                                                            "s" : [ {
-                                                               "value" : [ "C" ]
-                                                            } ]
-                                                         }, {
-                                                            "value" : [ " )" ]
-                                                         } ]
-                                                      } ]
-                                                   }, {
-                                                      "value" : [ " ","~"," " ]
-                                                   }, {
-                                                      "r" : "166",
-                                                      "s" : [ {
-                                                         "r" : "165",
-                                                         "s" : [ {
-                                                            "value" : [ "Global" ]
-                                                         } ]
-                                                      }, {
-                                                         "value" : [ "." ]
-                                                      }, {
-                                                         "r" : "166",
-                                                         "s" : [ {
-                                                            "value" : [ "\"Discharge\"" ]
-                                                         } ]
-                                                      } ]
-                                                   } ]
-                                                } ]
-                                             } ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "\n      )" ]
-                                       } ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ "\n      and " ]
-                              }, {
-                                 "r" : "177",
-                                 "s" : [ {
-                                    "r" : "173",
-                                    "s" : [ {
-                                       "r" : "172",
-                                       "s" : [ {
-                                          "value" : [ "Antithrombotic" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ "." ]
-                                    }, {
-                                       "r" : "173",
-                                       "s" : [ {
-                                          "value" : [ "status" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ " in " ]
-                                 }, {
-                                    "r" : "176",
-                                    "s" : [ {
-                                       "value" : [ "{ " ]
-                                    }, {
-                                       "r" : "174",
-                                       "s" : [ {
-                                          "value" : [ "'active'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ ", " ]
-                                    }, {
-                                       "r" : "175",
-                                       "s" : [ {
-                                          "value" : [ "'completed'" ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " }" ]
-                                    } ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n      and " ]
-                           }, {
-                              "r" : "182",
-                              "s" : [ {
-                                 "r" : "180",
-                                 "s" : [ {
-                                    "r" : "179",
-                                    "s" : [ {
-                                       "value" : [ "Antithrombotic" ]
-                                    } ]
-                                 }, {
-                                    "value" : [ "." ]
-                                 }, {
-                                    "r" : "180",
-                                    "s" : [ {
-                                       "value" : [ "intent" ]
-                                    } ]
-                                 } ]
-                              }, {
-                                 "value" : [ " ","="," " ]
-                              }, {
-                                 "r" : "181",
-                                 "s" : [ {
-                                    "value" : [ "'order'" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -2643,7 +1133,6 @@
                }
             },
             "expression" : {
-               "localId" : "184",
                "locator" : "71:3-78:41",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -2654,7 +1143,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "150",
                   "locator" : "71:3-71:78",
                   "alias" : "Antithrombotic",
                   "resultTypeSpecifier" : {
@@ -2665,7 +1153,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "149",
                      "locator" : "71:3-71:63",
                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/MedicationRequest",
@@ -2690,22 +1177,18 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "183",
                   "locator" : "72:5-78:41",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "178",
                      "locator" : "72:11-77:60",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "localId" : "171",
                         "locator" : "72:11-76:7",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "operand" : [ {
-                           "localId" : "153",
                            "locator" : "72:11-72:49",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Not",
@@ -2718,7 +1201,6 @@
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
                                  "operand" : [ {
-                                    "localId" : "152",
                                     "locator" : "72:11-72:37",
                                     "resultTypeName" : "{http://hl7.org/fhir}boolean",
                                     "path" : "doNotPerform",
@@ -2728,12 +1210,10 @@
                               }
                            }
                         }, {
-                           "localId" : "170",
                            "locator" : "73:11-76:7",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
                            "operand" : {
-                              "localId" : "169",
                               "locator" : "73:18-76:7",
                               "type" : "Query",
                               "resultTypeSpecifier" : {
@@ -2744,7 +1224,6 @@
                                  }
                               },
                               "source" : [ {
-                                 "localId" : "155",
                                  "locator" : "73:20-73:44",
                                  "alias" : "C",
                                  "resultTypeSpecifier" : {
@@ -2755,7 +1234,6 @@
                                     }
                                  },
                                  "expression" : {
-                                    "localId" : "154",
                                     "locator" : "73:20-73:42",
                                     "path" : "category",
                                     "scope" : "Antithrombotic",
@@ -2771,24 +1249,20 @@
                               } ],
                               "relationship" : [ ],
                               "where" : {
-                                 "localId" : "168",
                                  "locator" : "74:11-75:63",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Or",
                                  "operand" : [ {
-                                    "localId" : "161",
                                     "locator" : "74:17-74:64",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "localId" : "158",
                                        "locator" : "74:17-74:43",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
                                        "operand" : [ {
-                                          "localId" : "157",
                                           "locator" : "74:41",
                                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                                           "name" : "C",
@@ -2797,7 +1271,6 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "localId" : "160",
                                           "locator" : "74:47-74:64",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Community",
@@ -2806,19 +1279,16 @@
                                        }
                                     } ]
                                  }, {
-                                    "localId" : "167",
                                     "locator" : "75:16-75:63",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "localId" : "164",
                                        "locator" : "75:16-75:42",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
                                        "operand" : [ {
-                                          "localId" : "163",
                                           "locator" : "75:40",
                                           "resultTypeName" : "{http://hl7.org/fhir}CodeableConcept",
                                           "name" : "C",
@@ -2827,7 +1297,6 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "localId" : "166",
                                           "locator" : "75:46-75:63",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Discharge",
@@ -2840,7 +1309,6 @@
                            }
                         } ]
                      }, {
-                        "localId" : "177",
                         "locator" : "77:11-77:60",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "In",
@@ -2849,7 +1317,6 @@
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
                            "operand" : [ {
-                              "localId" : "173",
                               "locator" : "77:11-77:31",
                               "resultTypeName" : "{http://hl7.org/fhir}MedicationRequestStatus",
                               "path" : "status",
@@ -2857,7 +1324,6 @@
                               "type" : "Property"
                            } ]
                         }, {
-                           "localId" : "176",
                            "locator" : "77:36-77:60",
                            "type" : "List",
                            "resultTypeSpecifier" : {
@@ -2868,14 +1334,12 @@
                               }
                            },
                            "element" : [ {
-                              "localId" : "174",
                               "locator" : "77:38-77:45",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
                               "value" : "active",
                               "type" : "Literal"
                            }, {
-                              "localId" : "175",
                               "locator" : "77:48-77:58",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                               "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -2885,7 +1349,6 @@
                         } ]
                      } ]
                   }, {
-                     "localId" : "182",
                      "locator" : "78:11-78:41",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
@@ -2894,7 +1357,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "180",
                            "locator" : "78:11-78:31",
                            "resultTypeName" : "{http://hl7.org/fhir}MedicationRequestIntent",
                            "path" : "intent",
@@ -2902,7 +1364,6 @@
                            "type" : "Property"
                         } ]
                      }, {
-                        "localId" : "181",
                         "locator" : "78:35-78:41",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
@@ -2913,94 +1374,10 @@
                }
             }
          }, {
-            "localId" : "195",
             "locator" : "53:1-56:90",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "195",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Numerator\"",":\n  " ]
-                  }, {
-                     "r" : "194",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "148",
-                           "s" : [ {
-                              "r" : "147",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "TJC",".","\"Ischemic Stroke Encounter\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","IschemicStrokeEncounter" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n      " ]
-                     }, {
-                        "r" : "193",
-                        "s" : [ {
-                           "value" : [ "with " ]
-                        }, {
-                           "r" : "187",
-                           "s" : [ {
-                              "r" : "186",
-                              "s" : [ {
-                                 "s" : [ {
-                                    "value" : [ "\"Antithrombotic Therapy at Discharge\"" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","DischargeAntithrombotic" ]
-                           } ]
-                        }, {
-                           "value" : [ "\n        such that " ]
-                        }, {
-                           "r" : "192",
-                           "s" : [ {
-                              "r" : "189",
-                              "s" : [ {
-                                 "r" : "188",
-                                 "s" : [ {
-                                    "value" : [ "DischargeAntithrombotic" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "189",
-                                 "s" : [ {
-                                    "value" : [ "authoredOn" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "r" : "192",
-                              "value" : [ " ","during"," " ]
-                           }, {
-                              "r" : "191",
-                              "s" : [ {
-                                 "r" : "190",
-                                 "s" : [ {
-                                    "value" : [ "IschemicStrokeEncounter" ]
-                                 } ]
-                              }, {
-                                 "value" : [ "." ]
-                              }, {
-                                 "r" : "191",
-                                 "s" : [ {
-                                    "value" : [ "period" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -3009,7 +1386,6 @@
                }
             },
             "expression" : {
-               "localId" : "194",
                "locator" : "54:3-56:90",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -3020,7 +1396,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "148",
                   "locator" : "54:3-54:57",
                   "alias" : "IschemicStrokeEncounter",
                   "resultTypeSpecifier" : {
@@ -3031,7 +1406,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "147",
                      "locator" : "54:3-54:33",
                      "name" : "Ischemic Stroke Encounter",
                      "libraryName" : "TJC",
@@ -3046,7 +1420,6 @@
                   }
                } ],
                "relationship" : [ {
-                  "localId" : "193",
                   "locator" : "55:7-56:90",
                   "alias" : "DischargeAntithrombotic",
                   "type" : "With",
@@ -3058,7 +1431,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "186",
                      "locator" : "55:12-55:48",
                      "name" : "Antithrombotic Therapy at Discharge",
                      "type" : "ExpressionRef",
@@ -3071,7 +1443,6 @@
                      }
                   },
                   "suchThat" : {
-                     "localId" : "192",
                      "locator" : "56:19-56:90",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
@@ -3080,7 +1451,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "189",
                            "locator" : "56:19-56:52",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "path" : "authoredOn",
@@ -3092,7 +1462,6 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "191",
                            "locator" : "56:61-56:90",
                            "resultTypeName" : "{http://hl7.org/fhir}Period",
                            "path" : "period",
@@ -3104,35 +1473,10 @@
                } ]
             }
          }, {
-            "localId" : "198",
             "locator" : "58:1-59:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "198",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Ethnicity\"",":\n  " ]
-                  }, {
-                     "r" : "197",
-                     "s" : [ {
-                        "r" : "196",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "197",
-                        "s" : [ {
-                           "value" : [ "\"SDE Ethnicity\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -3141,7 +1485,6 @@
                }
             },
             "expression" : {
-               "localId" : "197",
                "locator" : "59:3-59:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
@@ -3155,35 +1498,10 @@
                }
             }
          }, {
-            "localId" : "201",
             "locator" : "61:1-62:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "201",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Payer\"",":\n  " ]
-                  }, {
-                     "r" : "200",
-                     "s" : [ {
-                        "r" : "199",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "200",
-                        "s" : [ {
-                           "value" : [ "\"SDE Payer\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -3204,7 +1522,6 @@
                }
             },
             "expression" : {
-               "localId" : "200",
                "locator" : "62:3-62:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
@@ -3230,35 +1547,10 @@
                }
             }
          }, {
-            "localId" : "204",
             "locator" : "64:1-65:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "204",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Race\"",":\n  " ]
-                  }, {
-                     "r" : "203",
-                     "s" : [ {
-                        "r" : "202",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "203",
-                        "s" : [ {
-                           "value" : [ "\"SDE Race\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -3267,7 +1559,6 @@
                }
             },
             "expression" : {
-               "localId" : "203",
                "locator" : "65:3-65:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
@@ -3281,38 +1572,12 @@
                }
             }
          }, {
-            "localId" : "207",
             "locator" : "67:1-68:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "207",
-                  "s" : [ {
-                     "value" : [ "","define ","\"SDE Sex\"",":\n  " ]
-                  }, {
-                     "r" : "206",
-                     "s" : [ {
-                        "r" : "205",
-                        "s" : [ {
-                           "value" : [ "SDE" ]
-                        } ]
-                     }, {
-                        "value" : [ "." ]
-                     }, {
-                        "r" : "206",
-                        "s" : [ {
-                           "value" : [ "\"SDE Sex\"" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "206",
                "locator" : "68:3-68:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",

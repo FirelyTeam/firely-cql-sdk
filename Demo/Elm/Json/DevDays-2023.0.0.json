@@ -1,17 +1,9 @@
 {
    "library" : {
       "annotation" : [ {
-         "translatorVersion" : "2.2.0",
-         "translatorOptions" : "EnableAnnotations,EnableLocators,EnableResultTypes",
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
          "type" : "CqlToElmInfo"
-      }, {
-         "type" : "Annotation",
-         "s" : {
-            "r" : "52",
-            "s" : [ {
-               "value" : [ "","library DevDays version '2023.0.0'" ]
-            } ]
-         }
       } ],
       "identifier" : {
          "id" : "DevDays",
@@ -26,79 +18,25 @@
             "localIdentifier" : "System",
             "uri" : "urn:hl7-org:elm-types:r1"
          }, {
-            "localId" : "1",
             "locator" : "3:1-3:26",
             "localIdentifier" : "FHIR",
             "uri" : "http://hl7.org/fhir",
-            "version" : "4.0.1",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "1",
-                  "s" : [ {
-                     "value" : [ "","using " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIR" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.1'" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.1"
          } ]
       },
       "includes" : {
          "def" : [ {
-            "localId" : "5",
             "locator" : "7:1-7:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.0.001",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "5",
-                  "s" : [ {
-                     "value" : [ "","include " ]
-                  }, {
-                     "s" : [ {
-                        "value" : [ "FHIRHelpers" ]
-                     } ]
-                  }, {
-                     "value" : [ " version ","'4.0.001'"," called ","FHIRHelpers" ]
-                  } ]
-               }
-            } ]
+            "version" : "4.0.001"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "localId" : "4",
             "locator" : "5:1-5:49",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "4",
-                  "s" : [ {
-                     "value" : [ "","parameter ","\"Measurement Period\""," " ]
-                  }, {
-                     "r" : "3",
-                     "s" : [ {
-                        "value" : [ "Interval<" ]
-                     }, {
-                        "r" : "2",
-                        "s" : [ {
-                           "value" : [ "DateTime" ]
-                        } ]
-                     }, {
-                        "value" : [ ">" ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "IntervalTypeSpecifier",
                "pointType" : {
@@ -107,7 +45,6 @@
                }
             },
             "parameterTypeSpecifier" : {
-               "localId" : "3",
                "locator" : "5:32-5:49",
                "type" : "IntervalTypeSpecifier",
                "resultTypeSpecifier" : {
@@ -118,7 +55,6 @@
                   }
                },
                "pointType" : {
-                  "localId" : "2",
                   "locator" : "5:41-5:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
@@ -129,74 +65,32 @@
       },
       "codeSystems" : {
          "def" : [ {
-            "localId" : "6",
             "locator" : "9:1-9:52",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
             "name" : "ICD10",
             "id" : "http://hl7.org/fhir/sid/icd-10",
-            "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "6",
-                  "s" : [ {
-                     "value" : [ "","codesystem ","\"ICD10\"",": ","'http://hl7.org/fhir/sid/icd-10'" ]
-                  } ]
-               }
-            } ]
+            "accessLevel" : "Public"
          } ]
       },
       "codes" : {
          "def" : [ {
-            "localId" : "8",
             "locator" : "10:1-10:52",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Sucked into jet engine",
             "id" : "V97.33",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "8",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Sucked into jet engine\"",": ","'V97.33'"," from " ]
-                  }, {
-                     "r" : "7",
-                     "s" : [ {
-                        "value" : [ "\"ICD10\"" ]
-                     } ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "7",
                "locator" : "10:46-10:52",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "ICD10"
             }
          }, {
-            "localId" : "10",
             "locator" : "11:1-11:76",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Sucked into jet engine, subsequent encounter",
             "id" : "V97.33XD",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "10",
-                  "s" : [ {
-                     "value" : [ "","code ","\"Sucked into jet engine, subsequent encounter\"",": ","'V97.33XD'"," from " ]
-                  }, {
-                     "r" : "9",
-                     "s" : [ {
-                        "value" : [ "\"ICD10\"" ]
-                     } ]
-                  } ]
-               }
-            } ],
             "codeSystem" : {
-               "localId" : "9",
                "locator" : "11:70-11:76",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "ICD10"
@@ -224,143 +118,10 @@
                }
             }
          }, {
-            "localId" : "28",
             "locator" : "16:1-20:57",
             "name" : "Jet engine conditions",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "28",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Jet engine conditions\"",":\n\t" ]
-                  }, {
-                     "r" : "27",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "12",
-                           "s" : [ {
-                              "r" : "11",
-                              "s" : [ {
-                                 "r" : "11",
-                                 "s" : [ {
-                                    "value" : [ "[","Condition","]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","c" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n\t\t" ]
-                     }, {
-                        "r" : "26",
-                        "s" : [ {
-                           "value" : [ "where \n\t\t\t" ]
-                        }, {
-                           "r" : "26",
-                           "s" : [ {
-                              "r" : "19",
-                              "s" : [ {
-                                 "value" : [ "exists" ]
-                              }, {
-                                 "r" : "18",
-                                 "s" : [ {
-                                    "value" : [ "(" ]
-                                 }, {
-                                    "r" : "18",
-                                    "s" : [ {
-                                       "s" : [ {
-                                          "r" : "14",
-                                          "s" : [ {
-                                             "r" : "13",
-                                             "s" : [ {
-                                                "s" : [ {
-                                                   "value" : [ "c",".","code",".","coding" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " ","coding" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " " ]
-                                    }, {
-                                       "r" : "17",
-                                       "s" : [ {
-                                          "value" : [ "where " ]
-                                       }, {
-                                          "r" : "17",
-                                          "s" : [ {
-                                             "r" : "15",
-                                             "s" : [ {
-                                                "value" : [ "coding" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " ","~"," " ]
-                                          }, {
-                                             "r" : "16",
-                                             "s" : [ {
-                                                "value" : [ "\"Sucked into jet engine\"" ]
-                                             } ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n\t\t\tand " ]
-                           }, {
-                              "r" : "25",
-                              "s" : [ {
-                                 "r" : "23",
-                                 "s" : [ {
-                                    "value" : [ "(" ]
-                                 }, {
-                                    "r" : "23",
-                                    "s" : [ {
-                                       "r" : "21",
-                                       "s" : [ {
-                                          "r" : "20",
-                                          "s" : [ {
-                                             "value" : [ "c" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "21",
-                                          "s" : [ {
-                                             "value" : [ "onset" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " as " ]
-                                    }, {
-                                       "r" : "22",
-                                       "s" : [ {
-                                          "value" : [ "FHIR",".","dateTime" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              }, {
-                                 "value" : [ " in " ]
-                              }, {
-                                 "r" : "24",
-                                 "s" : [ {
-                                    "value" : [ "\"Measurement Period\"" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -369,7 +130,6 @@
                }
             },
             "expression" : {
-               "localId" : "27",
                "locator" : "17:2-20:57",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -380,7 +140,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "12",
                   "locator" : "17:2-17:14",
                   "alias" : "c",
                   "resultTypeSpecifier" : {
@@ -391,7 +150,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "11",
                      "locator" : "17:2-17:12",
                      "dataType" : "{http://hl7.org/fhir}Condition",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
@@ -407,17 +165,14 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "26",
                   "locator" : "18:3-20:57",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "19",
                      "locator" : "19:4-19:71",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "18",
                         "locator" : "19:10-19:71",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
@@ -428,7 +183,6 @@
                            }
                         },
                         "source" : [ {
-                           "localId" : "14",
                            "locator" : "19:11-19:30",
                            "alias" : "coding",
                            "resultTypeSpecifier" : {
@@ -439,7 +193,6 @@
                               }
                            },
                            "expression" : {
-                              "localId" : "13",
                               "locator" : "19:11-19:23",
                               "path" : "coding",
                               "type" : "Property",
@@ -459,7 +212,6 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "localId" : "17",
                            "locator" : "19:32-19:70",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Equivalent",
@@ -468,14 +220,12 @@
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
                               "operand" : [ {
-                                 "localId" : "15",
                                  "locator" : "19:38-19:43",
                                  "resultTypeName" : "{http://hl7.org/fhir}Coding",
                                  "name" : "coding",
                                  "type" : "AliasRef"
                               } ]
                            }, {
-                              "localId" : "16",
                               "locator" : "19:47-19:70",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                               "name" : "Sucked into jet engine",
@@ -484,7 +234,6 @@
                         }
                      }
                   }, {
-                     "localId" : "25",
                      "locator" : "20:8-20:57",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
@@ -493,13 +242,11 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "23",
                            "locator" : "20:8-20:33",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "strict" : false,
                            "type" : "As",
                            "operand" : {
-                              "localId" : "21",
                               "locator" : "20:9-20:15",
                               "path" : "onset",
                               "scope" : "c",
@@ -525,7 +272,6 @@
                               }
                            },
                            "asTypeSpecifier" : {
-                              "localId" : "22",
                               "locator" : "20:20-20:32",
                               "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                               "name" : "{http://hl7.org/fhir}dateTime",
@@ -533,7 +279,6 @@
                            }
                         } ]
                      }, {
-                        "localId" : "24",
                         "locator" : "20:38-20:57",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
@@ -549,143 +294,10 @@
                }
             }
          }, {
-            "localId" : "46",
             "locator" : "22:1-26:57",
             "name" : "Subsequent encounters",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "46",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Subsequent encounters\"",":\n\t" ]
-                  }, {
-                     "r" : "45",
-                     "s" : [ {
-                        "s" : [ {
-                           "r" : "30",
-                           "s" : [ {
-                              "r" : "29",
-                              "s" : [ {
-                                 "r" : "29",
-                                 "s" : [ {
-                                    "value" : [ "[","Condition","]" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ " ","c" ]
-                           } ]
-                        } ]
-                     }, {
-                        "value" : [ "\n\t\t" ]
-                     }, {
-                        "r" : "44",
-                        "s" : [ {
-                           "value" : [ "where \n\t\t\t" ]
-                        }, {
-                           "r" : "44",
-                           "s" : [ {
-                              "r" : "37",
-                              "s" : [ {
-                                 "value" : [ "exists" ]
-                              }, {
-                                 "r" : "36",
-                                 "s" : [ {
-                                    "value" : [ "(" ]
-                                 }, {
-                                    "r" : "36",
-                                    "s" : [ {
-                                       "s" : [ {
-                                          "r" : "32",
-                                          "s" : [ {
-                                             "r" : "31",
-                                             "s" : [ {
-                                                "s" : [ {
-                                                   "value" : [ "c",".","code",".","coding" ]
-                                                } ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " ","coding" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " " ]
-                                    }, {
-                                       "r" : "35",
-                                       "s" : [ {
-                                          "value" : [ "where " ]
-                                       }, {
-                                          "r" : "35",
-                                          "s" : [ {
-                                             "r" : "33",
-                                             "s" : [ {
-                                                "value" : [ "coding" ]
-                                             } ]
-                                          }, {
-                                             "value" : [ " ","~"," " ]
-                                          }, {
-                                             "r" : "34",
-                                             "s" : [ {
-                                                "value" : [ "\"Sucked into jet engine, subsequent encounter\"" ]
-                                             } ]
-                                          } ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              } ]
-                           }, {
-                              "value" : [ "\n\t\t\tand " ]
-                           }, {
-                              "r" : "43",
-                              "s" : [ {
-                                 "r" : "41",
-                                 "s" : [ {
-                                    "value" : [ "(" ]
-                                 }, {
-                                    "r" : "41",
-                                    "s" : [ {
-                                       "r" : "39",
-                                       "s" : [ {
-                                          "r" : "38",
-                                          "s" : [ {
-                                             "value" : [ "c" ]
-                                          } ]
-                                       }, {
-                                          "value" : [ "." ]
-                                       }, {
-                                          "r" : "39",
-                                          "s" : [ {
-                                             "value" : [ "onset" ]
-                                          } ]
-                                       } ]
-                                    }, {
-                                       "value" : [ " as " ]
-                                    }, {
-                                       "r" : "40",
-                                       "s" : [ {
-                                          "value" : [ "FHIR",".","dateTime" ]
-                                       } ]
-                                    } ]
-                                 }, {
-                                    "value" : [ ")" ]
-                                 } ]
-                              }, {
-                                 "value" : [ " in " ]
-                              }, {
-                                 "r" : "42",
-                                 "s" : [ {
-                                    "value" : [ "\"Measurement Period\"" ]
-                                 } ]
-                              } ]
-                           } ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "resultTypeSpecifier" : {
                "type" : "ListTypeSpecifier",
                "elementType" : {
@@ -694,7 +306,6 @@
                }
             },
             "expression" : {
-               "localId" : "45",
                "locator" : "23:2-26:57",
                "type" : "Query",
                "resultTypeSpecifier" : {
@@ -705,7 +316,6 @@
                   }
                },
                "source" : [ {
-                  "localId" : "30",
                   "locator" : "23:2-23:14",
                   "alias" : "c",
                   "resultTypeSpecifier" : {
@@ -716,7 +326,6 @@
                      }
                   },
                   "expression" : {
-                     "localId" : "29",
                      "locator" : "23:2-23:12",
                      "dataType" : "{http://hl7.org/fhir}Condition",
                      "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
@@ -732,17 +341,14 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "localId" : "44",
                   "locator" : "24:3-26:57",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "operand" : [ {
-                     "localId" : "37",
                      "locator" : "25:4-25:93",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "operand" : {
-                        "localId" : "36",
                         "locator" : "25:10-25:93",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
@@ -753,7 +359,6 @@
                            }
                         },
                         "source" : [ {
-                           "localId" : "32",
                            "locator" : "25:11-25:30",
                            "alias" : "coding",
                            "resultTypeSpecifier" : {
@@ -764,7 +369,6 @@
                               }
                            },
                            "expression" : {
-                              "localId" : "31",
                               "locator" : "25:11-25:23",
                               "path" : "coding",
                               "type" : "Property",
@@ -784,7 +388,6 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "localId" : "35",
                            "locator" : "25:32-25:92",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Equivalent",
@@ -793,14 +396,12 @@
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
                               "operand" : [ {
-                                 "localId" : "33",
                                  "locator" : "25:38-25:43",
                                  "resultTypeName" : "{http://hl7.org/fhir}Coding",
                                  "name" : "coding",
                                  "type" : "AliasRef"
                               } ]
                            }, {
-                              "localId" : "34",
                               "locator" : "25:47-25:92",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                               "name" : "Sucked into jet engine, subsequent encounter",
@@ -809,7 +410,6 @@
                         }
                      }
                   }, {
-                     "localId" : "43",
                      "locator" : "26:8-26:57",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
@@ -818,13 +418,11 @@
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "localId" : "41",
                            "locator" : "26:8-26:33",
                            "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                            "strict" : false,
                            "type" : "As",
                            "operand" : {
-                              "localId" : "39",
                               "locator" : "26:9-26:15",
                               "path" : "onset",
                               "scope" : "c",
@@ -850,7 +448,6 @@
                               }
                            },
                            "asTypeSpecifier" : {
-                              "localId" : "40",
                               "locator" : "26:20-26:32",
                               "resultTypeName" : "{http://hl7.org/fhir}dateTime",
                               "name" : "{http://hl7.org/fhir}dateTime",
@@ -858,7 +455,6 @@
                            }
                         } ]
                      }, {
-                        "localId" : "42",
                         "locator" : "26:38-26:57",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
@@ -874,45 +470,16 @@
                }
             }
          }, {
-            "localId" : "49",
             "locator" : "29:1-30:32",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Initial population",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "49",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Initial population\"",":\n\t" ]
-                  }, {
-                     "r" : "48",
-                     "s" : [ {
-                        "value" : [ "exists" ]
-                     }, {
-                        "r" : "47",
-                        "s" : [ {
-                           "value" : [ "(" ]
-                        }, {
-                           "r" : "47",
-                           "s" : [ {
-                              "value" : [ "\"Jet engine conditions\"" ]
-                           } ]
-                        }, {
-                           "value" : [ ")" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "48",
                "locator" : "30:2-30:32",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "operand" : {
-                  "localId" : "47",
                   "locator" : "30:8-30:32",
                   "name" : "Jet engine conditions",
                   "type" : "ExpressionRef",
@@ -926,45 +493,16 @@
                }
             }
          }, {
-            "localId" : "52",
             "locator" : "32:1-33:32",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
-            "annotation" : [ {
-               "type" : "Annotation",
-               "s" : {
-                  "r" : "52",
-                  "s" : [ {
-                     "value" : [ "","define ","\"Numerator\"",":\n\t" ]
-                  }, {
-                     "r" : "51",
-                     "s" : [ {
-                        "value" : [ "exists" ]
-                     }, {
-                        "r" : "50",
-                        "s" : [ {
-                           "value" : [ "(" ]
-                        }, {
-                           "r" : "50",
-                           "s" : [ {
-                              "value" : [ "\"Subsequent encounters\"" ]
-                           } ]
-                        }, {
-                           "value" : [ ")" ]
-                        } ]
-                     } ]
-                  } ]
-               }
-            } ],
             "expression" : {
-               "localId" : "51",
                "locator" : "33:2-33:32",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "operand" : {
-                  "localId" : "50",
                   "locator" : "33:8-33:32",
                   "name" : "Subsequent encounters",
                   "type" : "ExpressionRef",

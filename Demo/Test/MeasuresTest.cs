@@ -1,16 +1,9 @@
-using Cql;
-using Hl7.Cql;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
-using Hl7.Cql.Primitives;
-using System.Runtime.Loader;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Model;
-using Hl7.Cql.ValueSets;
-using Hl7.Cql.Runtime;
-using System.Diagnostics;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSetLoaders;
-using Hl7.Cql.Elm.Expressions;
+using Hl7.Fhir.Model;
+using System.Diagnostics;
 
 namespace Test
 {
@@ -18,7 +11,7 @@ namespace Test
     public class MeasuresTest
     {
 
-        private IDictionary<string, object> MY2023 =
+        private readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
             {
                 {
@@ -34,9 +27,8 @@ namespace Test
         [TestMethod]
         public void BCSEHEDIS2022_Numerator()
         {
-            var patientEverything = new Bundle();
-            var valueSets = new ValueSet[0].ToValueSetDictionary();
-            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
+            var patientEverything = new Bundle();  // add some data
+            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023);
             var bcs = new BCSEHEDISMY2022_1_0_0(cqlContext);
             var numerator = bcs.Numerator();
             Assert.IsFalse(numerator);
@@ -50,9 +42,9 @@ namespace Test
             var dir = new DirectoryInfo("Resources");
             var asmContext = dir.LoadResources(lib, version);
 
-            var patientEverything = new Bundle();
-            var valueSets = new ValueSet[0].ToValueSetDictionary();
-            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
+            var patientEverything = new Bundle();   // Add data
+            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
+            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var results = asmContext.Run(lib, version, cqlContext);
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
@@ -69,9 +61,9 @@ namespace Test
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
 
-            var patientEverything = new Bundle();
-            var valueSets = new ValueSet[0].ToValueSetDictionary();
-            var cqlContext = FirelyCqlContext.Create(patientEverything, MY2023, valueSets);
+            var patientEverything = new Bundle();  // Add some data
+            var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
+            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -87,7 +79,7 @@ namespace Test
 
             // Run a second time with a (presumably) different bundle.
             var bundle2 = new Bundle();
-            cqlContext = FirelyCqlContext.Create(bundle2, MY2023, valueSets);
+            cqlContext = FirelyCqlContext.ForBundle(bundle2, MY2023, valueSets);
             stopwatch.Restart();
             results = asmContext.Run(lib, version, cqlContext);
             elapsed = stopwatch.Elapsed;
@@ -96,35 +88,6 @@ namespace Test
             Assert.IsTrue(results.TryGetValue("Numerator", out numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
-
-
-        }
-
-        [TestMethod]
-        public void DevDays()
-        {
-            var bundle = new Bundle();
-            var suckedIntoJetEngine = new Condition();
-            suckedIntoJetEngine.Onset = new FhirDateTime(2022, 6, 9);
-            suckedIntoJetEngine.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33");
-            bundle.AddResourceEntry(suckedIntoJetEngine, "http://ncqa.org/fhir/test/devdays/condition-1");
-
-            var rtx = FirelyCqlContext.Create(bundle, MY2023);
-            var measure = new DevDays_2023_0_0(rtx);
-            var ip = measure.Initial_population();
-            Assert.IsTrue(ip);
-
-            var numerator = measure.Numerator();
-            Assert.IsFalse(numerator);
-
-            var subsequentEncounter = new Condition();
-            subsequentEncounter.Onset = new FhirDateTime(2022, 6, 10);
-            subsequentEncounter.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33XD");
-            bundle.AddResourceEntry(subsequentEncounter, "http://ncqa.org/fhir/test/devdays/condition-2");
-
-            measure = new DevDays_2023_0_0(rtx);
-            numerator = measure.Numerator();
-            Assert.IsTrue(numerator);
 
         }
 

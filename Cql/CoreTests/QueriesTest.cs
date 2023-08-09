@@ -1,7 +1,6 @@
 ﻿using Hl7.Cql;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Firely;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -66,7 +65,7 @@ namespace CoreTests
 
         };
 
-        private CqlContext Context(Bundle bundle) => FirelyCqlContext.Create(
+        private CqlContext Context(Bundle bundle) => FirelyCqlContext.ForBundle(
             bundle: bundle,
             valueSets: ValueSets,
             delegates: QueriesDefinitions);
