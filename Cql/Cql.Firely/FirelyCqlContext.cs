@@ -26,7 +26,7 @@ namespace Hl7.Cql.Firely
         /// <summary>
         /// Factory method for creating the CqlContext.
         /// </summary>
-        public static CqlContext Create(Bundle? bundle = null,
+        public static CqlContext ForBundle(Bundle bundle,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
