@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -77,14 +78,18 @@ namespace Hl7.Cql.Graph
         public string RecordType { get; set; } = string.Empty;
 
         /// <summary>
-        /// Gets or sets the record that the execution engine is currently building.  This record will be written and nullified by the next <see cref="MakeRecordAction"/>.
+        /// Gets or sets the record that the execution engine is currently building.  This record will be written and nullified by the next <c>MakeRecordAction</c> />.
         /// </summary>
         public ExecutedPathRecord? CurrentRecord { get; set; }
+
         /// <summary>
-        /// Gets or sets the record that was last written by <see cref="MakeRecordAction"/>.  This field will be <see langword="null"/> until the first <see cref="MakeRecordAction"/> is encountered.
+        /// Gets or sets the record that was last written by <c>MakeRecordAction</c>.  This field will be <see langword="null"/> until the first <c>MakeRecordAction</c> is encountered.
         /// </summary>
         public ExecutedPathRecord? LastRecord { get; set; }
 
+        /// <summary>
+        /// The list of all records produced by <c>MakeRecordAction</c>.
+        /// </summary>
         public IList<ExecutedPathRecord> Records = new List<ExecutedPathRecord>();
 
     }

@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -79,7 +80,7 @@ namespace Hl7.Cql.Firely
             converter.AddConversion((CqlDateTime f) => new M.FhirDateTime(f.ToString()));
             converter.AddConversion((CqlDate f) => new M.FhirDateTime(f.ToString()));
             converter.AddConversion((CqlTime f) => new M.Time(f.ToString()));
-            converter.AddConversion((CqlQuantity f) => f.value is not null ? new M.Quantity(f.value.Value, f.unit, Fhir.ElementModel.Types.Quantity.UCUM) : null);
+            converter.AddConversion((CqlQuantity f) => f.value is not null ? new M.Quantity(f.value.Value, f.unit ?? "1", Fhir.ElementModel.Types.Quantity.UCUM) : null);
             converter.AddConversion((CqlInterval<CqlQuantity>? interval) =>
             {
                 if (interval is null)
@@ -135,7 +136,8 @@ namespace Hl7.Cql.Firely
                     return range;
                 }
             });
-            converter.AddConversion((CqlInterval<CqlDateTime> interval) =>{
+            converter.AddConversion((CqlInterval<CqlDateTime> interval) =>
+            {
                 if (interval is null)
                     return null;
                 else
@@ -153,7 +155,8 @@ namespace Hl7.Cql.Firely
                     return period;
                 }
             });
-            converter.AddConversion((CqlInterval<CqlDate> interval) => {
+            converter.AddConversion((CqlInterval<CqlDate> interval) =>
+            {
                 if (interval is null)
                     return null;
                 else
@@ -249,7 +252,7 @@ namespace Hl7.Cql.Firely
 
                 var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
                 converter.AddConversion(nullableEnumType, typeof(string), (@enum) =>
-                    Enum.GetName(nullableEnumType, @enum));
+                    Enum.GetName(nullableEnumType, @enum) ?? throw new InvalidOperationException($"Did not find enum member {@enum} on type {nullableEnumType}."));
             }
             return converter;
         }

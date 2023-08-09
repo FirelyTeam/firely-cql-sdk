@@ -355,7 +355,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="other">The object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
-        /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.
+        /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
         public bool Equivalent(CqlDate? other, string? precision) => (CompareTo(other, precision) ?? 0) == 0;
 
         /// <summary>
@@ -367,7 +367,7 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         /// <param name="obj">The object to compare against this value.</param>
         /// <returns><see langword="true"/> if equal.</returns>
-        public override bool Equals(object obj) => Value.Equals((obj as CqlDate)?.Value!);
+        public override bool Equals(object? obj) => Value.Equals((obj as CqlDate)?.Value!);
         /// <summary>
         /// Gets the value of <see cref="DateIso8601.GetHashCode"/> for <see cref="Value"/>.
         /// </summary>

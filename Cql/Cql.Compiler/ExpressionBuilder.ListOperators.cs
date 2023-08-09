@@ -1,4 +1,13 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
@@ -15,7 +24,7 @@ namespace Hl7.Cql.Compiler
         protected Expression Flatten(elm.Flatten e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Flatten, e, ctx);
 
-        protected Expression First(elm.First e, ExpressionBuilderContext ctx) 
+        protected Expression First(elm.First e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.source!, ctx);
             var call = OperatorBinding.Bind(CqlOperator.First, ctx.RuntimeContextParameter, operand);

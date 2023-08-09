@@ -18,8 +18,14 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely
 {
+    /// <summary>
+    /// A CqlContext that uses the Firely SDK POCO model.
+    /// </summary>
     public static class FirelyCqlContext
     {
+        /// <summary>
+        /// Factory method for creating the CqlContext.
+        /// </summary>
         public static CqlContext Create(Bundle? bundle = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,

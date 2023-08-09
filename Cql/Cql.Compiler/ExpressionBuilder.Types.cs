@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Ratio(elm.Ratio re, ExpressionBuilderContext ctx)
+        private Expression Ratio(elm.Ratio re, ExpressionBuilderContext ctx)
         {
             var numExpr = new elm.Quantity();
             numExpr.value = re.numerator!.value;

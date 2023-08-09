@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -59,7 +60,7 @@ namespace Hl7.Cql.Comparers
             return x.value == y.value && x.unit == y.unit;
         }
 
-        public bool Equivalent(object x, object y, string? precision = null) => Equivalent(x as CqlQuantity, y as CqlQuantity, precision);
+        public bool Equivalent(object? x, object? y, string? precision = null) => Equivalent(x as CqlQuantity, y as CqlQuantity, precision);
 
         public int GetHashCode(CqlQuantity? x) =>
             x == null
@@ -69,3 +70,5 @@ namespace Hl7.Cql.Comparers
         public int GetHashCode(object x) => GetHashCode(x as CqlQuantity);
     }
 }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

@@ -18,7 +18,7 @@ namespace Hl7.Cql.Comparers
     public class DefaultCqlComparer<T> : ICqlComparer, ICqlComparer<T>
     {
         /// <inheritdoc />
-        public int? Compare(object x, object y, string? precision = null)
+        public int? Compare(object? x, object? y, string? precision = null)
         {
             if (x is T tx)
             {
@@ -29,24 +29,24 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc />
-        public int? Compare(T x, T y, string? precision = null) => Comparer<T>.Default.Compare(x, y);
+        public int? Compare(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y);
 
         /// <inheritdoc />
-        public bool? Equals(object x, object y, string? precision = null) =>
+        public bool? Equals(object? x, object? y, string? precision = null) =>
             Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
-        public bool? Equals(T x, T y, string? precision = null) => Comparer<T>.Default.Compare(x, y) == 0;
+        public bool? Equals(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y) == 0;
 
         /// <inheritdoc />
-        public bool Equivalent(object x, object y, string? precision = null) =>
+        public bool Equivalent(object? x, object? y, string? precision = null) =>
             Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
-        public bool Equivalent(T x, T y, string? precision = null) => Compare(x, y, precision) == 0;
+        public bool Equivalent(T? x, T? y, string? precision = null) => Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
-        public int GetHashCode(T x) => EqualityComparer<T>.Default.GetHashCode(x);
+        public int GetHashCode(T x) => x is not null ? EqualityComparer<T>.Default.GetHashCode(x) : typeof(T).GetHashCode();
 
         /// <inheritdoc />
         public int GetHashCode(object x) =>

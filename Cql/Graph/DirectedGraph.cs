@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -234,7 +235,7 @@ namespace Hl7.Cql.Graph
             return sorted;
 
             void Visit<T>(T item, Func<T, IEnumerable<T>> getDependencies,
-                          List<T> sorted, Dictionary<T, bool> visited)
+                          List<T> sorted, Dictionary<T, bool> visited) where T : notnull
             {
                 bool inProcess;
                 var alreadyVisited = visited.TryGetValue(item, out inProcess);
@@ -263,7 +264,7 @@ namespace Hl7.Cql.Graph
                     sorted.Add(item);
                 }
             }
-            IList<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies)
+            IList<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies) where T : notnull
             {
                 var sorted = new List<T>();
                 var visited = new Dictionary<T, bool>();

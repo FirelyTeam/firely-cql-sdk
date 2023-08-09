@@ -25,7 +25,7 @@ namespace Hl7.Cql.ValueSets
         /// Creates an interface for <paramref name="valueSet"/>.
         /// </summary>
         /// <param name="valueSet">The value set for this facade.</param>
-        /// <param name="context">The runtime context.</param>
+        /// <param name="valueSets">The  <see cref="IValueSetDictionary"/> with all valuesets.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null" />.</exception>
         /// <exception cref="ArgumentException">If <paramref name="valueSet"/> has a <see langword="null" /> <see cref="CqlVocabulary.id"/> property.</exception>
         public ValueSetFacade(CqlValueSet valueSet, IValueSetDictionary valueSets)
@@ -40,6 +40,9 @@ namespace Hl7.Cql.ValueSets
         /// </summary>
         public string Id { get; }
 
+        /// <summary>
+        /// A link to the dictionary where the content of this valueset can be retrieved.
+        /// </summary>
         public IValueSetDictionary ValueSets { get; }
 
         /// <summary>

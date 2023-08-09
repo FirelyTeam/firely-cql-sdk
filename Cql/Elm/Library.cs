@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Graph;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -8,7 +9,7 @@ using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Elm
 {
-    partial class Library
+    public partial class Library
     {
         public const string JsonMimeType = "application/elm+json";
         public const string XmlMimeType = "application/elm+xml";
@@ -99,6 +100,7 @@ namespace Hl7.Cql.Elm
             {
                 locateLibrary = (name, version) =>
                 {
+                    if (elmLocation.Directory is null) throw new InvalidOperationException("Directory within library is null.");
                     var path = Path.Combine(elmLocation.Directory.FullName, $"{name}-{version}.json");
                     var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
                     var library = LoadFromJson(stream) ?? throw new InvalidOperationException($"Cannot load ELM from {path}");

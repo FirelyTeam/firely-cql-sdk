@@ -1,11 +1,19 @@
-﻿using Hl7.Cql.Runtime;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
-using Hl7.Cql.Operators;
-using System.Xml;
 
 namespace Hl7.Cql.Compiler
 {
@@ -75,8 +83,8 @@ namespace Hl7.Cql.Compiler
         {
             var operand = TranslateExpression(e.operand!, ctx);
             var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(IValueSetDictionary) });
-            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators));
-            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade));
+            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
+            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
             var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);
             var call = Expression.Call(property, createFacadeMethod, operand);
             return call;

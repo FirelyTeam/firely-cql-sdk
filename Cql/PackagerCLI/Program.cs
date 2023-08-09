@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
 using Hl7.Fhir.Model;
@@ -95,11 +96,13 @@ namespace Hl7.Cql.Packaging.CLI
                         console.LogToStandardErrorThreshold = LogLevel.Error;
                     });
                     var logFile = Path.Combine(".", "build.txt");
+#pragma warning disable CA1305 // Specify IFormatProvider
                     Log.Logger = new LoggerConfiguration()
                       .Enrich.FromLogContext()
                       .WriteTo
                       .File(logFile)
                       .CreateLogger();
+#pragma warning restore CA1305 // Specify IFormatProvider
                     logging.AddSerilog();
                 });
             var packager = new LibraryPackager();

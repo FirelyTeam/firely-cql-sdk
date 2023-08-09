@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -33,6 +34,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="valueSets">The value set dictionary to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="HashValueSetDictionary"/> is used.</param>
         /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
         /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
+        /// <param name="enumComparer">The comparer to  use to compare enumerated values.</param>
         /// <returns></returns>
         public static CqlOperators Create(TypeResolver resolver,
             TypeConverter? converter = null,
@@ -110,7 +112,7 @@ namespace Hl7.Cql.Runtime
         public event EventHandler<MessageEventArgs>? MessageReceived;
 
         public bool? EnumEqualsString(object? @enum, string? value) => EnumComparer.Equals(@enum!, value!, null);
-        
+
         public T LateBoundProperty<T>(object? source, string propertyName)
         {
             if (source == null || string.IsNullOrWhiteSpace(propertyName))
@@ -176,12 +178,12 @@ namespace Hl7.Cql.Runtime
 
         public object NotSupported() => throw new NotSupportedException();
 
-        public bool? Equals(object x, object y, string? precision)
+        public bool? Equals(object? x, object? y, string? precision)
         {
             return Comparer.Equals(x, y, precision);
         }
 
-        public int? Compare(object x, object y, string? precision)
+        public int? Compare(object? x, object? y, string? precision)
         {
             return Comparer.Compare(x, y, precision);
         }
@@ -191,10 +193,11 @@ namespace Hl7.Cql.Runtime
             return Comparer.GetHashCode(x);
         }
 
-        public bool Equivalent(object x, object y, string? precision)
+        public bool Equivalent(object? x, object? y, string? precision)
         {
             return Comparer.Equivalent(x, y, precision);
         }
 
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

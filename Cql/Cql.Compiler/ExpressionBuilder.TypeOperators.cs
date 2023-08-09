@@ -1,4 +1,13 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
@@ -17,7 +26,7 @@ namespace Hl7.Cql.Compiler
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     if (IsOrImplementsIEnumerableOfT(type))
                     {
-                        var listElementType = TypeResolver.GetListElementType(type);
+                        var listElementType = TypeResolver.GetListElementType(type) ?? throw new InvalidOperationException($"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
                         var typeAs = Expression.TypeAs(newArray, type);
                         return typeAs;
@@ -215,7 +224,7 @@ namespace Hl7.Cql.Compiler
                 return input;
             else if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
                 return Expression.TypeAs(input, outputType);
-            else if (IsOrImplementsIEnumerableOfT(input.Type) 
+            else if (IsOrImplementsIEnumerableOfT(input.Type)
                 && IsOrImplementsIEnumerableOfT(outputType))
             {
                 var inputElementType = TypeResolver.GetListElementType(input.Type, true)!;

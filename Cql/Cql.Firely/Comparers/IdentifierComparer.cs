@@ -1,10 +1,5 @@
 ﻿using Hl7.Cql.Comparers;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Firely.Comparers
 {
@@ -19,7 +14,7 @@ namespace Hl7.Cql.Firely.Comparers
         public ICqlComparer SystemComparer { get; }
         public ICqlComparer ValueComparer { get; }
 
-        public override int? Compare(Identifier x, Identifier y, string? precision)
+        public override int? Compare(Identifier? x, Identifier? y, string? precision)
         {
             if (x == null || y == null) return null;
             else
@@ -34,7 +29,7 @@ namespace Hl7.Cql.Firely.Comparers
             }
         }
 
-        public override bool Equivalent(Identifier x, Identifier y, string? precision) =>
+        public override bool Equivalent(Identifier? x, Identifier? y, string? precision) =>
             (Compare(x, y, precision) ?? -1) == 0;
 
         public override int GetHashCode(Identifier x)

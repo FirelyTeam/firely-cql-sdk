@@ -48,7 +48,7 @@ namespace Hl7.Cql.Primitives
         /// Tries to parse a quantity from this string, e.g. <code>365 'd':1.0m 'a'</code>.
         /// </summary>
         /// <param name="s">The string to parse</param>
-        /// <param name="q">The resulting ratio.</param>
+        /// <param name="value">The resulting ratio.</param>
         /// <returns><see langword="true"/> if successfully parsed; otherwise, <see langword="false"/>.</returns>
         public static bool? TryParse(string s, out CqlRatio? value)
         {

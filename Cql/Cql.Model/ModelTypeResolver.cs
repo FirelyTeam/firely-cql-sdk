@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -50,8 +51,8 @@ namespace Hl7.Cql.Model
             else return null;
         }
 
-        private readonly IDictionary<string, ClassInfo> ClassInfo;
-        private readonly IDictionary<string, PropertyInfo?> Properties;
+        private readonly IDictionary<string, ClassInfo> ClassInfo = new Dictionary<string, ClassInfo>();
+        private readonly IDictionary<string, PropertyInfo?> Properties = new Dictionary<string, PropertyInfo?>();
 
         public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {

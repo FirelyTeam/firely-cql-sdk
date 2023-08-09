@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Conversion;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
@@ -38,7 +39,7 @@ namespace Hl7.Cql.Operators
         bool? After(object? left, object? right, string? precision);
         int? Age(string precision);
         int? AgeAt(CqlDate? asOf, string precision);
-        TAccumulate? AggregateOrNull<TSource,TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
+        TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda);
         bool? AllTrue(IEnumerable<bool?> argument);
         bool? AllTrue(IEnumerable<Lazy<bool?>> argument);
         bool? And(bool? left, bool? right);
@@ -66,7 +67,7 @@ namespace Hl7.Cql.Operators
         int? Ceiling(int? argument);
         long? Ceiling(long? argument);
         IEnumerable<object> Children(object o);
-        T Coalesce<T>(IEnumerable<T>? source) where T : class;
+        T? Coalesce<T>(IEnumerable<T>? source) where T : class;
         T? CoalesceValueTypes<T>(IEnumerable<T?>? source) where T : struct;
         bool? CodeInCodeSystem(CqlCode? code, CqlCodeSystem? codesystem);
         bool? CodeInCodeSystem(CqlConcept? code, CqlCodeSystem? codesystem);
@@ -140,7 +141,7 @@ namespace Hl7.Cql.Operators
         CqlDate? Date(int? year, int? month, int? day);
         CqlDate? DateFrom(CqlDateTime? argument);
         CqlDateTime? DateTime(int? year, int? month, int? day, int? hour, int? minute, int? second, int? millisecond, decimal? offset);
-        IEnumerable<object?> Descendents(object? argument);
+        IEnumerable<object?>? Descendents(object? argument);
         int? DifferenceBetween(CqlDate? low, CqlDate? high, string? precision);
         int? DifferenceBetween(CqlDateTime? low, CqlDateTime? high, string? precision);
         int? DifferenceBetween(CqlTime? low, CqlTime? high, string? precision);
@@ -182,7 +183,7 @@ namespace Hl7.Cql.Operators
         IEnumerable<decimal?>? ExpandInterval(CqlInterval<decimal?>? argument, CqlQuantity? per);
         IEnumerable<int?>? ExpandInterval(CqlInterval<int?>? argument, CqlQuantity? per);
         IEnumerable<long?>? ExpandInterval(CqlInterval<long?>? argument, CqlQuantity? per);
-        T FirstOfList<T>(IEnumerable<T> enumerable);
+        T? FirstOfList<T>(IEnumerable<T> enumerable);
         IEnumerable<object>? FlattenLateBoundList(IEnumerable<object> argument);
         IEnumerable<T>? FlattenList<T>(IEnumerable<IEnumerable<T>> argument);
         int? Floor(decimal? argument);
@@ -297,7 +298,7 @@ namespace Hl7.Cql.Operators
         bool? IsNull<T>(T value) where T : class;
         bool? IsNullValue<T>(T? value) where T : struct;
         bool? IsTrue(bool? b);
-        T LastOfList<T>(IEnumerable<T> enumerable);
+        T? LastOfList<T>(IEnumerable<T> enumerable);
         int? LastPositionOf(string? argument, string? pattern);
         T LateBoundProperty<T>(object? source, string propertyName);
         bool? Less(object? left, object? right);
@@ -450,7 +451,7 @@ namespace Hl7.Cql.Operators
         IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TResult>> collectionSelector);
         IEnumerable<TResult>? SelectManyResultsOrNull<TSource, TCollection, TResult>(IEnumerable<TSource>? source, Func<TSource, IEnumerable<TCollection>> collectionSelector, Func<TSource, TCollection, TResult> resultSelector);
         IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select);
-        T SingleOrNull<T>(IEnumerable<T>? source);
+        T? SingleOrNull<T>(IEnumerable<T>? source);
         IEnumerable<T>? Slice<T>(IEnumerable<T>? source, int? startIndex, int? endIndex);
         IEnumerable<string>? Split(string stringToSplit, string separator);
         IEnumerable<string>? SplitOnMatches(string stringToSplit, string separatorPattern);

@@ -1,4 +1,13 @@
-﻿using Hl7.Cql.Primitives;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -181,7 +190,7 @@ namespace Hl7.Cql.Runtime
 
         #region Descendents
 
-        public IEnumerable<object?> Descendents(object? argument) => argument == null ? null : throw new NotSupportedException();
+        public IEnumerable<object?>? Descendents(object? argument) => argument == null ? null : throw new NotSupportedException();
 
         #endregion
 

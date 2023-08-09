@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -23,10 +24,12 @@ namespace Hl7.Cql.Comparers
         public int CoalesceCompareTo { get; }
         public bool CoalesceEqualTo { get; }
 
-        public int Compare(T x, T y) => CqlComparer.Compare(x, y, null) ?? CoalesceCompareTo;
+        public int Compare(T? x, T? y) => CqlComparer.Compare(x, y, null) ?? CoalesceCompareTo;
 
-        public bool Equals(T x, T y) => CqlComparer.Equals(x, y, null) ?? CoalesceEqualTo;
+        public bool Equals(T? x, T? y) => CqlComparer.Equals(x, y, null) ?? CoalesceEqualTo;
 
         public int GetHashCode(T obj) => CqlComparer.GetHashCode(obj);
     }
 }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

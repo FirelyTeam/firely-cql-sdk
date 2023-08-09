@@ -29,6 +29,9 @@ namespace Hl7.Cql.Conversion
                 .ConvertNetTypes()
                 .ConvertsIsoToCqlPrimitives();
 
+        /// <summary>
+        /// Creates a TypeConverter with an empty set of conversions.
+        /// </summary>
         protected TypeConverter()
         {
         }
@@ -77,13 +80,13 @@ namespace Hl7.Cql.Conversion
                 toDictionary = new Dictionary<Type, Func<object, object>>();
                 Converters.Add(from, toDictionary);
             }
-            if (toDictionary.TryGetValue(to, out Func<object, object> existing))
+            if (toDictionary.TryGetValue(to, out Func<object, object>? existing))
                 throw new ArgumentException($"Conversion from {from} to {to} is already defined.");
             else toDictionary.Add(to, conversion);
         }
 
         /// <summary>
-        /// Adds a new function for converting <paramref name="from"/> to <paramref name="to"/>.
+        /// Adds a new function for converting  <typeparamref name="TFrom"/> to <typeparamref name="TTo"/>.
         /// </summary>
         /// <typeparam name="TFrom">The source type.</typeparam>
         /// <typeparam name="TTo">The desired type.</typeparam>
@@ -102,7 +105,7 @@ namespace Hl7.Cql.Conversion
         }
 
         /// <summary>
-        /// Tries to add a new function for converting <paramref name="from"/> to <paramref name="to"/>.
+        /// Tries to add a new function for converting <typeparamref name="TFrom"/> to <typeparamref name="TTo"/>.
         /// If the conversion already exists, this method returns <see langword="false"/>.
         /// </summary>
         /// <typeparam name="TFrom">The source type.</typeparam>
@@ -134,27 +137,28 @@ namespace Hl7.Cql.Conversion
         /// <returns>The result of the conversion.</returns>
         public T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
 
+        /// <inheritdoc cref="Convert{T}(object?)"/>
         public object? ConvertHelper(object? from, Type to)
         {
             if (from == null)
                 return null;
             var fromType = from?.GetType() ?? throw new ArgumentNullException(nameof(from));
             if (Converters.TryGetValue(fromType, out var toDictionary))
-                if (toDictionary.TryGetValue(to, out Func<object, object> convert))
+                if (toDictionary.TryGetValue(to, out Func<object, object>? convert))
                     return convert(from);
             throw new InvalidOperationException($"No conversion from {from} to {to} is defined.");
         }
 
         /// <summary>
-        /// Returns <see langword="true"/> if this converter is able to convert <see cref="from"/> to <see cref="to"/>.
+        /// Returns <see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.
         /// </summary>
-        /// <typeparam name="TFrom">The source type.</typeparam>
-        /// <typeparam name="TTo">The desired type.</typeparam>
-        /// <returns><see langword="true"/> if this converter is able to convert <see cref="from"/> to <see cref="to"/>.</returns>
+        /// <param name="from">The source type.</param>
+        /// <param name="to">The desired type.</param>
+        /// <returns><see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.</returns>
         public bool CanConvert(Type from, Type to)
         {
             if (Converters.TryGetValue(from, out var toDictionary))
-                if (toDictionary.TryGetValue(to, out Func<object, object> existing))
+                if (toDictionary.TryGetValue(to, out Func<object, object>? existing))
                     return true;
             return false;
         }

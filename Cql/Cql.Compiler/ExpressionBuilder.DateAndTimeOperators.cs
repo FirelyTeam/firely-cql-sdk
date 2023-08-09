@@ -1,4 +1,13 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
@@ -83,10 +92,10 @@ namespace Hl7.Cql.Compiler
                 offset = ChangeType(offset, typeof(decimal?), ctx);
             }
 
-            return OperatorBinding.Bind(CqlOperator.DateTime, ctx.RuntimeContextParameter, year, month, day, hour, minute, second,  milliseconds, offset);
+            return OperatorBinding.Bind(CqlOperator.DateTime, ctx.RuntimeContextParameter, year, month, day, hour, minute, second, milliseconds, offset);
         }
 
-        /// <see cref="https://cql.hl7.org/02-authorsguide.html#datetime-operators"/>
+        /// <remarks>See https://cql.hl7.org/02-authorsguide.html#datetime-operators</remarks>
         protected Expression DateTimeComponentFrom(elm.DateTimeComponentFrom e, ExpressionBuilderContext ctx)
         {
             var op = TranslateExpression(e.operand!, ctx);
