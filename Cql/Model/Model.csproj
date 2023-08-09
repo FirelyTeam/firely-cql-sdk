@@ -20,6 +20,11 @@
 		<EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
 			<LogicalName>Fhir401</LogicalName>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Models\elm-modelinfo-r1.xml">
+			<LogicalName>ElmR1</LogicalName>
+		</EmbeddedResource>
+
+		
 	</ItemGroup>
 
 </Project>
