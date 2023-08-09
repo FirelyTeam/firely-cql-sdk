@@ -53,14 +53,14 @@ namespace FhirApi
                 && library.Value is Id libraryId
                 && !string.IsNullOrWhiteSpace(libraryId.Value))
             {
-
+                // TODO: load the measure?
             }
 
             var json = @out.ToJson();
             return Results
                .Content(json, "application/fhir+json", Encoding.UTF8);
         }
-        private IDictionary<string, object> MY2023 =
+        private readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
             {
                 {

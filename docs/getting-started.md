@@ -42,10 +42,19 @@ Note that although it is possible to directly execute the `Linq.Expressions` gen
 With the measures generated, we can now build the other projects: two sample projects (one CLI and one Web application to evaluate the measures) and a Test project with four unit tests.
 
 ## Evaluating measures
-The demo project showcases X ways to use the CQL SDK to execute measures.
+The demo project showcases four ways to use the CQL SDK to execute measures in `MeasuresTest.cs`. No matter how the CQL expressions in each CQL file are invoked, you need to create an instance of a `CqlContext` first,
+which holds the basic external inputs to the function call: 
+* The data to run the function on, either as a `Bundle` FHIR resource, or an implementation of `IDataRetriever`. (default: empty data)
+* The parameters passed to the measure (default: none).
+* A set of external valuesets (default: no valuesets).
+* The date to server as "today" (default: today)
 
-1.
-1.
-1.
-1.
+This is most easily done by calling one of the overloads of the factory method `FirelyCqlContext.Create()`. When the `CqlContext` is created,
+we can now invoke the defined functions in the measure:
 
+1. Directly call the generated measure. This is shown in `BCSEHEDIS2022_Numerator`. Calling a CQL expression directly requires the measures to be known in advance as a pre-compiled assembly.
+
+1. Dynamically load the packaged `Library` resources and invoke the CQL expressions dynamically. This is shown in `BCSEHEDIS2022_Numerator_FromResource`.
+1. Dynamically load ELM files, compile them and then run the expressions within the measure. This is shown in `BCSEHEDIS2022_Numerator_FromElm`.
+
+> When using the "direct" approach, we are constructing an instance of the whole measure, and then invoking the individual expressions. The results of these expressions are cached, to speed up processing when they are called repeatedly. This means that manipulating the parameters or the Bundle contents will not change the outcome of the expressions anymore, and you will have to create a new instance of the generated measure to force re-calculation. 

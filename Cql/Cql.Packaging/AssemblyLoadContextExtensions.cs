@@ -56,9 +56,6 @@ namespace Hl7.Cql.Packaging
             return null;
         }
 
-
-
-
         private static IDictionary<string, object?> Run(object instance, CqlContext context)
         {
             var type = instance.GetType();
