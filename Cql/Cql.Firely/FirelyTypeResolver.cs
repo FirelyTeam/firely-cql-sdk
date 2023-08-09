@@ -18,6 +18,8 @@ namespace Hl7.Cql.Firely
 
     public class FirelyTypeResolver : BaseTypeResolver
     {
+        public static readonly FirelyTypeResolver Default = new FirelyTypeResolver(ModelInfo.ModelInspector);
+
         public FirelyTypeResolver(ModelInspector inspector)
         {
             Inspector = inspector;
