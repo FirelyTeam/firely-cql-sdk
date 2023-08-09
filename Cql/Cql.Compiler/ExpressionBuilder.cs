@@ -2212,7 +2212,7 @@ namespace Hl7.Cql.Compiler
                 Expression.Constant(op.locator, typeof(string)),
                 Expression.Constant(op.localId, typeof(string)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper))!, newCallStack);
+            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper), BindingFlags.NonPublic | BindingFlags.Instance)!, newCallStack);
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.

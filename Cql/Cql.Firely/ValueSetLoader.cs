@@ -13,13 +13,14 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.ValueSetLoaders
 {
-    internal static class ValueSetExtensions
+    public static class ValueSetExtensions
     {
         public static IValueSetDictionary ToValueSetDictionary(this IEnumerable<ValueSet> values,
             bool activeOnly = true,
             Func<ValueSet, bool>? onInvalidValueSet = null) =>
                 new ValueSetLoader(values, activeOnly, onInvalidValueSet).Load();
     }
+
     internal class ValueSetLoader : IValueSetLoader
     {
 

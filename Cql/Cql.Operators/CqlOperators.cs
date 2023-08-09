@@ -16,6 +16,7 @@ using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Hl7.Cql.Runtime
 {
@@ -172,32 +173,27 @@ namespace Hl7.Cql.Runtime
         public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
-        public ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) =>
+        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) =>
             new ValueSetFacade(valueSet, ValueSets);
 
 
         public object NotSupported() => throw new NotSupportedException();
 
-        public bool? Equals(object? x, object? y, string? precision)
-        {
-            return Comparer.Equals(x, y, precision);
-        }
+        public bool? Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
 
-        public int? Compare(object? x, object? y, string? precision)
-        {
-            return Comparer.Compare(x, y, precision);
-        }
+        public int? Compare(object? x, object? y, string? precision) => Comparer.Compare(x, y, precision);
 
-        public int GetHashCode(object x)
-        {
-            return Comparer.GetHashCode(x);
-        }
+        public int GetHashCode(object x) => Comparer.GetHashCode(x);
 
-        public bool Equivalent(object? x, object? y, string? precision)
-        {
-            return Comparer.Equivalent(x, y, precision);
-        }
+        public bool Equivalent(object? x, object? y, string? precision) => Comparer.Equivalent(x, y, precision);
 
+        public T Convert<T>(object? from) => TypeConverter.Convert<T>(from);
+
+        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class =>
+            DataRetriever.RetrieveByCodes<T>(codes, codeProperty);
+
+        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class =>
+            DataRetriever.RetrieveByValueSet<T>(valueSet, codeProperty);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

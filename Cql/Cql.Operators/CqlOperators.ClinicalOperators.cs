@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
@@ -26,8 +27,8 @@ namespace Hl7.Cql.Runtime
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
-            var method = DataRetriever.GetType()
-                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
+            var method = typeof(IDataRetriever)
+                .GetMethod(nameof(IDataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
             var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
@@ -50,8 +51,8 @@ namespace Hl7.Cql.Runtime
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
-            var method = DataRetriever.GetType()
-                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
+            var method = typeof(IDataRetriever)
+                .GetMethod(nameof(IDataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
             var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();

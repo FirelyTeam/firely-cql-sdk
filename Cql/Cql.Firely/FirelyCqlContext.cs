@@ -21,12 +21,12 @@ namespace Hl7.Cql.Firely
     /// <summary>
     /// A CqlContext that uses the Firely SDK POCO model.
     /// </summary>
-    internal static class FirelyCqlContext
+    public static class FirelyCqlContext
     {
         /// <summary>
         /// Factory method for creating the CqlContext.
         /// </summary>
-        public static CqlContext FromBundle(Bundle bundle,
+        public static CqlContext ForBundle(Bundle bundle,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,

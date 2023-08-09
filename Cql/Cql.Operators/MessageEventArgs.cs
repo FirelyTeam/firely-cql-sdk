@@ -14,7 +14,7 @@ namespace Hl7.Cql.Operators
     /// Provides data for <see cref="ICqlOperators.MessageReceived"/>.
     /// </summary>
     /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#message"/>
-    internal class MessageEventArgs : EventArgs
+    public class MessageEventArgs : EventArgs
     {
         internal MessageEventArgs(object? source, string? code, string? message, string? severity)
         {
