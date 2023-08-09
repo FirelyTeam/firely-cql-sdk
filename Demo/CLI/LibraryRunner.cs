@@ -12,6 +12,11 @@ namespace CLI
 {
     internal static class LibraryRunner
     {
+        private static readonly JsonSerializerOptions Options = new JsonSerializerOptions()
+            .ForFhir(ModelInfo.ModelInspector);
+        public static T ParseFhir<T>(this Stream stream) => JsonSerializer.Deserialize<T>(stream, Options)
+            ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(T).Name}");
+
         internal static void Run(string library, Bundle bundle, TextWriter output)
         {
             var type = ResolveLibraryType(library);
@@ -19,7 +24,7 @@ namespace CLI
             {
                 throw new ArgumentException($"Uknown library: {library}");
             }
-            var context = FirelyCqlContext.Create(bundle, MY2023, ValueSets.Value,
+            var context = FirelyCqlContext.ForBundle(bundle, MY2023, ValueSets.Value,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));
             var instance = Activator.CreateInstance(type, context);
             var values = new Dictionary<string, object>();

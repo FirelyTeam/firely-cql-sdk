@@ -43,7 +43,7 @@ namespace FhirApi
 
             var bundle = dataStream.ParseFhir<Bundle>();
             var valueSets = ValueSetProvider.ValueSets;
-            var context = FirelyCqlContext.Create(bundle,
+            var context = FirelyCqlContext.ForBundle(bundle,
                 MY2023,
                 valueSets,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));

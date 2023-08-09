@@ -22,7 +22,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Loader;
 using System.Text;
 
 namespace Hl7.Cql.Compiler
@@ -41,19 +40,6 @@ namespace Hl7.Cql.Compiler
         private TypeResolver TypeResolver { get; }
         private TypeManager TypeManager { get; }
         private OperatorBinding Binding { get; }
-
-        public AssemblyLoadContext Load(IEnumerable<Library> elmPackages,
-                    ILoggerFactory logFactory)
-        {
-            var assemblies = Compile(elmPackages, logFactory);
-            var assemblyLoadContext = new AssemblyLoadContext("UnitTest", false);
-            foreach (var kvp in assemblies)
-            {
-                using var ms = new MemoryStream(kvp.Value.Binary);
-                assemblyLoadContext.LoadFromStream(ms);
-            }
-            return assemblyLoadContext;
-        }
 
         internal IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
                     ILoggerFactory logFactory)

@@ -37,10 +37,13 @@ namespace Hl7.Cql.Runtime
         /// keys in this dictionary to store any kind of state they need.
         /// </remarks>
         internal ConcurrentDictionary<string, object> Extensions { get; set; } = new ConcurrentDictionary<string, object>();
+
+#if WE_STILL_NEED_THE_STACK
         /// <summary>
         /// Stores information about the current execution state of this CqlContext.
         /// </summary>
-        internal Stack<CallStackEntry> CallStack { get; private set; }
+        public Stack<CallStackEntry> CallStack { get; private set; }
+#endif
 
         /// <summary>
         /// Gets the values of library parameters for this execution.
@@ -75,10 +78,13 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         internal CqlContext()
         {
+#if WE_STILL_NEED_THE_STACK
             CallStack = new Stack<CallStackEntry>();
+#endif
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+#if WE_STILL_NEED_THE_STACK
         /// <summary>
         /// Deepclones the CqlContext.
         /// </summary>        
@@ -105,7 +111,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="callStack">The new call stack entry to add.</param>
         /// <returns>A clone of this context with a deeper call stack.</returns>
         /// TODO: Make this behavior optional in ExpressionBuilder
-        internal CqlContext Deeper(CallStackEntry callStack)
+        public CqlContext Deeper(CallStackEntry callStack)
         {
             var existingStack = CallStack ?? new Stack<CallStackEntry>();
             var newStack = new Stack<CallStackEntry>(existingStack);
@@ -115,6 +121,7 @@ namespace Hl7.Cql.Runtime
             clone.CallStack = newStack;
             return clone;
         }
+#endif
 
         /// <summary>
         /// Defines the delimiter separating library names from parameter names.

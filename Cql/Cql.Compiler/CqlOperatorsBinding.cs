@@ -50,10 +50,7 @@ namespace Hl7.Cql.Compiler
 
         protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
 
-        protected virtual PropertyInfo DataRetrieverProperty => typeof(CqlOperators).GetProperty(nameof(CqlOperators.DataRetriever))!;
-
         protected virtual Type OperatorsType => OperatorsProperty.PropertyType;
-        protected virtual Type DataRetrieverType => DataRetrieverProperty.PropertyType;
 
         /// <summary>
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.

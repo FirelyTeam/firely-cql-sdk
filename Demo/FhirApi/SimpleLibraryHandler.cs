@@ -1,12 +1,7 @@
-﻿using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSetLoaders;
-using Hl7.Cql.ValueSets;
+﻿using Hl7.Cql.Firely;
+using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
-using Microsoft.AspNetCore.Mvc.TagHelpers;
 using System.Text;
-using Hl7.Cql.Firely;
 
 namespace FhirApi
 {
@@ -36,7 +31,7 @@ namespace FhirApi
                .Content(json, "application/fhir+json", Encoding.UTF8);
         }
 
-        private IDictionary<string, object> MY2023 =
+        private readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
             {
                 {
@@ -71,7 +66,7 @@ namespace FhirApi
             };
             var bundle = dataStream.ParseFhir<Bundle>();
             var valueSets = ValueSetProvider.ValueSets;
-            var context = FirelyCqlContext.Create(bundle,
+            var context = FirelyCqlContext.ForBundle(bundle,
                 MY2023,
                 valueSets,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));

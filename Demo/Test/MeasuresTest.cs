@@ -40,7 +40,7 @@ namespace Test
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
             var dir = new DirectoryInfo("Resources");
-            var asmContext = dir.LoadResources(lib, version);
+            var asmContext = LibraryPackager.LoadResources(dir, lib, version);
 
             var patientEverything = new Bundle();   // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
@@ -67,7 +67,7 @@ namespace Test
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var asmContext = elmDir.LoadElm(lib, version);
+            var asmContext = LibraryPackager.LoadElm(elmDir, lib, version);
             var results = asmContext.Run(lib, version, cqlContext);
             var elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
