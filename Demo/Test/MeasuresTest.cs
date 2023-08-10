@@ -89,35 +89,6 @@ namespace Test
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
 
-
-        }
-
-        [TestMethod]
-        public void DevDays()
-        {
-            var bundle = new Bundle();
-            var suckedIntoJetEngine = new Condition();
-            suckedIntoJetEngine.Onset = new FhirDateTime(2022, 6, 9);
-            suckedIntoJetEngine.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33");
-            bundle.AddResourceEntry(suckedIntoJetEngine, "http://ncqa.org/fhir/test/devdays/condition-1");
-
-            var rtx = FirelyCqlContext.ForBundle(bundle, MY2023);
-            var measure = new DevDays_2023_0_0(rtx);
-            var ip = measure.Initial_population();
-            Assert.IsTrue(ip);
-
-            var numerator = measure.Numerator();
-            Assert.IsFalse(numerator);
-
-            var subsequentEncounter = new Condition();
-            subsequentEncounter.Onset = new FhirDateTime(2022, 6, 10);
-            subsequentEncounter.Code = new CodeableConcept("http://hl7.org/fhir/sid/icd-10", "V97.33XD");
-            bundle.AddResourceEntry(subsequentEncounter, "http://ncqa.org/fhir/test/devdays/condition-2");
-
-            measure = new DevDays_2023_0_0(rtx);
-            numerator = measure.Numerator();
-            Assert.IsTrue(numerator);
-
         }
 
     }
