@@ -1,0 +1,1283 @@
+﻿#nullable enable
+const Hl7.Cql.Elm.Library.JsonMimeType = "application/elm+json" -> string!
+const Hl7.Cql.Elm.Library.LibraryNodeProperty = "Library" -> string!
+const Hl7.Cql.Elm.Library.XmlMimeType = "application/elm+xml" -> string!
+Hl7.Cql.Elm.Abs
+Hl7.Cql.Elm.Abs.Abs() -> void
+Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.AccessModifier.Private = 1 -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.AccessModifier.Public = 0 -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.Add
+Hl7.Cql.Elm.Add.Add() -> void
+Hl7.Cql.Elm.After
+Hl7.Cql.Elm.After.After() -> void
+Hl7.Cql.Elm.After.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.After.precision.set -> void
+Hl7.Cql.Elm.After.precisionSpecified.get -> bool
+Hl7.Cql.Elm.After.precisionSpecified.set -> void
+Hl7.Cql.Elm.Aggregate
+Hl7.Cql.Elm.Aggregate.Aggregate() -> void
+Hl7.Cql.Elm.AggregateClause
+Hl7.Cql.Elm.AggregateClause.AggregateClause() -> void
+Hl7.Cql.Elm.AggregateClause.distinct.get -> bool
+Hl7.Cql.Elm.AggregateClause.distinct.set -> void
+Hl7.Cql.Elm.AggregateExpression
+Hl7.Cql.Elm.AggregateExpression.AggregateExpression() -> void
+Hl7.Cql.Elm.AliasedQuerySource
+Hl7.Cql.Elm.AliasedQuerySource.AliasedQuerySource() -> void
+Hl7.Cql.Elm.AliasRef
+Hl7.Cql.Elm.AliasRef.AliasRef() -> void
+Hl7.Cql.Elm.AllTrue
+Hl7.Cql.Elm.AllTrue.AllTrue() -> void
+Hl7.Cql.Elm.And
+Hl7.Cql.Elm.And.And() -> void
+Hl7.Cql.Elm.Annotation
+Hl7.Cql.Elm.Annotation.Annotation() -> void
+Hl7.Cql.Elm.AnyInCodeSystem
+Hl7.Cql.Elm.AnyInCodeSystem.AnyInCodeSystem() -> void
+Hl7.Cql.Elm.AnyInValueSet
+Hl7.Cql.Elm.AnyInValueSet.AnyInValueSet() -> void
+Hl7.Cql.Elm.AnyTrue
+Hl7.Cql.Elm.AnyTrue.AnyTrue() -> void
+Hl7.Cql.Elm.As
+Hl7.Cql.Elm.As.As() -> void
+Hl7.Cql.Elm.As.strict.get -> bool
+Hl7.Cql.Elm.As.strict.set -> void
+Hl7.Cql.Elm.Avg
+Hl7.Cql.Elm.Avg.Avg() -> void
+Hl7.Cql.Elm.Before
+Hl7.Cql.Elm.Before.Before() -> void
+Hl7.Cql.Elm.Before.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Before.precision.set -> void
+Hl7.Cql.Elm.Before.precisionSpecified.get -> bool
+Hl7.Cql.Elm.Before.precisionSpecified.set -> void
+Hl7.Cql.Elm.BinaryExpression
+Hl7.Cql.Elm.BinaryExpression.BinaryExpression() -> void
+Hl7.Cql.Elm.ByColumn
+Hl7.Cql.Elm.ByColumn.ByColumn() -> void
+Hl7.Cql.Elm.ByDirection
+Hl7.Cql.Elm.ByDirection.ByDirection() -> void
+Hl7.Cql.Elm.ByExpression
+Hl7.Cql.Elm.ByExpression.ByExpression() -> void
+Hl7.Cql.Elm.CalculateAge
+Hl7.Cql.Elm.CalculateAge.CalculateAge() -> void
+Hl7.Cql.Elm.CalculateAge.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.CalculateAge.precision.set -> void
+Hl7.Cql.Elm.CalculateAge.precisionSpecified.get -> bool
+Hl7.Cql.Elm.CalculateAge.precisionSpecified.set -> void
+Hl7.Cql.Elm.CalculateAgeAt
+Hl7.Cql.Elm.CalculateAgeAt.CalculateAgeAt() -> void
+Hl7.Cql.Elm.CalculateAgeAt.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.CalculateAgeAt.precision.set -> void
+Hl7.Cql.Elm.CalculateAgeAt.precisionSpecified.get -> bool
+Hl7.Cql.Elm.CalculateAgeAt.precisionSpecified.set -> void
+Hl7.Cql.Elm.CanConvert
+Hl7.Cql.Elm.CanConvert.CanConvert() -> void
+Hl7.Cql.Elm.CanConvertQuantity
+Hl7.Cql.Elm.CanConvertQuantity.CanConvertQuantity() -> void
+Hl7.Cql.Elm.Case
+Hl7.Cql.Elm.Case.Case() -> void
+Hl7.Cql.Elm.CaseItem
+Hl7.Cql.Elm.CaseItem.CaseItem() -> void
+Hl7.Cql.Elm.Ceiling
+Hl7.Cql.Elm.Ceiling.Ceiling() -> void
+Hl7.Cql.Elm.Children
+Hl7.Cql.Elm.Children.Children() -> void
+Hl7.Cql.Elm.ChoiceTypeSpecifier
+Hl7.Cql.Elm.ChoiceTypeSpecifier.ChoiceTypeSpecifier() -> void
+Hl7.Cql.Elm.Coalesce
+Hl7.Cql.Elm.Coalesce.Coalesce() -> void
+Hl7.Cql.Elm.Code
+Hl7.Cql.Elm.Code.Code() -> void
+Hl7.Cql.Elm.CodeDef
+Hl7.Cql.Elm.CodeDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.CodeDef.accessLevel.set -> void
+Hl7.Cql.Elm.CodeDef.CodeDef() -> void
+Hl7.Cql.Elm.CodeFilterElement
+Hl7.Cql.Elm.CodeFilterElement.CodeFilterElement() -> void
+Hl7.Cql.Elm.CodeRef
+Hl7.Cql.Elm.CodeRef.CodeRef() -> void
+Hl7.Cql.Elm.CodeSystemDef
+Hl7.Cql.Elm.CodeSystemDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.CodeSystemDef.accessLevel.set -> void
+Hl7.Cql.Elm.CodeSystemDef.CodeSystemDef() -> void
+Hl7.Cql.Elm.CodeSystemRef
+Hl7.Cql.Elm.CodeSystemRef.CodeSystemRef() -> void
+Hl7.Cql.Elm.Collapse
+Hl7.Cql.Elm.Collapse.Collapse() -> void
+Hl7.Cql.Elm.Combine
+Hl7.Cql.Elm.Combine.Combine() -> void
+Hl7.Cql.Elm.Concatenate
+Hl7.Cql.Elm.Concatenate.Concatenate() -> void
+Hl7.Cql.Elm.Concept
+Hl7.Cql.Elm.Concept.Concept() -> void
+Hl7.Cql.Elm.ConceptDef
+Hl7.Cql.Elm.ConceptDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.ConceptDef.accessLevel.set -> void
+Hl7.Cql.Elm.ConceptDef.ConceptDef() -> void
+Hl7.Cql.Elm.ConceptRef
+Hl7.Cql.Elm.ConceptRef.ConceptRef() -> void
+Hl7.Cql.Elm.Contains
+Hl7.Cql.Elm.Contains.Contains() -> void
+Hl7.Cql.Elm.Contains.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Contains.precision.set -> void
+Hl7.Cql.Elm.Contains.precisionSpecified.get -> bool
+Hl7.Cql.Elm.Contains.precisionSpecified.set -> void
+Hl7.Cql.Elm.ContextDef
+Hl7.Cql.Elm.ContextDef.ContextDef() -> void
+Hl7.Cql.Elm.Convert
+Hl7.Cql.Elm.Convert.Convert() -> void
+Hl7.Cql.Elm.ConvertQuantity
+Hl7.Cql.Elm.ConvertQuantity.ConvertQuantity() -> void
+Hl7.Cql.Elm.ConvertsToBoolean
+Hl7.Cql.Elm.ConvertsToBoolean.ConvertsToBoolean() -> void
+Hl7.Cql.Elm.ConvertsToDate
+Hl7.Cql.Elm.ConvertsToDate.ConvertsToDate() -> void
+Hl7.Cql.Elm.ConvertsToDateTime
+Hl7.Cql.Elm.ConvertsToDateTime.ConvertsToDateTime() -> void
+Hl7.Cql.Elm.ConvertsToDecimal
+Hl7.Cql.Elm.ConvertsToDecimal.ConvertsToDecimal() -> void
+Hl7.Cql.Elm.ConvertsToInteger
+Hl7.Cql.Elm.ConvertsToInteger.ConvertsToInteger() -> void
+Hl7.Cql.Elm.ConvertsToLong
+Hl7.Cql.Elm.ConvertsToLong.ConvertsToLong() -> void
+Hl7.Cql.Elm.ConvertsToQuantity
+Hl7.Cql.Elm.ConvertsToQuantity.ConvertsToQuantity() -> void
+Hl7.Cql.Elm.ConvertsToRatio
+Hl7.Cql.Elm.ConvertsToRatio.ConvertsToRatio() -> void
+Hl7.Cql.Elm.ConvertsToString
+Hl7.Cql.Elm.ConvertsToString.ConvertsToString() -> void
+Hl7.Cql.Elm.ConvertsToTime
+Hl7.Cql.Elm.ConvertsToTime.ConvertsToTime() -> void
+Hl7.Cql.Elm.Count
+Hl7.Cql.Elm.Count.Count() -> void
+Hl7.Cql.Elm.CqlToElmBase
+Hl7.Cql.Elm.CqlToElmBase.CqlToElmBase() -> void
+Hl7.Cql.Elm.CqlToElmError
+Hl7.Cql.Elm.CqlToElmError.CqlToElmError() -> void
+Hl7.Cql.Elm.CqlToElmError.errorSeverity.get -> Hl7.Cql.Elm.ErrorSeverity
+Hl7.Cql.Elm.CqlToElmError.errorSeverity.set -> void
+Hl7.Cql.Elm.CqlToElmError.errorSeveritySpecified.get -> bool
+Hl7.Cql.Elm.CqlToElmError.errorSeveritySpecified.set -> void
+Hl7.Cql.Elm.CqlToElmError.errorType.get -> Hl7.Cql.Elm.ErrorType
+Hl7.Cql.Elm.CqlToElmError.errorType.set -> void
+Hl7.Cql.Elm.CqlToElmInfo
+Hl7.Cql.Elm.CqlToElmInfo.CqlToElmInfo() -> void
+Hl7.Cql.Elm.Current
+Hl7.Cql.Elm.Current.Current() -> void
+Hl7.Cql.Elm.Date
+Hl7.Cql.Elm.Date.Date() -> void
+Hl7.Cql.Elm.DateFilterElement
+Hl7.Cql.Elm.DateFilterElement.DateFilterElement() -> void
+Hl7.Cql.Elm.DateFrom
+Hl7.Cql.Elm.DateFrom.DateFrom() -> void
+Hl7.Cql.Elm.DateTime
+Hl7.Cql.Elm.DateTime.DateTime() -> void
+Hl7.Cql.Elm.DateTimeComponentFrom
+Hl7.Cql.Elm.DateTimeComponentFrom.DateTimeComponentFrom() -> void
+Hl7.Cql.Elm.DateTimeComponentFrom.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimeComponentFrom.precision.set -> void
+Hl7.Cql.Elm.DateTimeComponentFrom.precisionSpecified.get -> bool
+Hl7.Cql.Elm.DateTimeComponentFrom.precisionSpecified.set -> void
+Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Day = 3 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Hour = 4 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Millisecond = 7 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Minute = 5 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Month = 1 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Second = 6 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Week = 2 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DateTimePrecision.Year = 0 -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Descendents
+Hl7.Cql.Elm.Descendents.Descendents() -> void
+Hl7.Cql.Elm.DifferenceBetween
+Hl7.Cql.Elm.DifferenceBetween.DifferenceBetween() -> void
+Hl7.Cql.Elm.DifferenceBetween.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DifferenceBetween.precision.set -> void
+Hl7.Cql.Elm.DifferenceBetween.precisionSpecified.get -> bool
+Hl7.Cql.Elm.DifferenceBetween.precisionSpecified.set -> void
+Hl7.Cql.Elm.Distinct
+Hl7.Cql.Elm.Distinct.Distinct() -> void
+Hl7.Cql.Elm.Divide
+Hl7.Cql.Elm.Divide.Divide() -> void
+Hl7.Cql.Elm.DurationBetween
+Hl7.Cql.Elm.DurationBetween.DurationBetween() -> void
+Hl7.Cql.Elm.DurationBetween.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.DurationBetween.precision.set -> void
+Hl7.Cql.Elm.DurationBetween.precisionSpecified.get -> bool
+Hl7.Cql.Elm.DurationBetween.precisionSpecified.set -> void
+Hl7.Cql.Elm.Element
+Hl7.Cql.Elm.Element.Element() -> void
+Hl7.Cql.Elm.End
+Hl7.Cql.Elm.End.End() -> void
+Hl7.Cql.Elm.Ends
+Hl7.Cql.Elm.Ends.Ends() -> void
+Hl7.Cql.Elm.Ends.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Ends.precision.set -> void
+Hl7.Cql.Elm.Ends.precisionSpecified.get -> bool
+Hl7.Cql.Elm.Ends.precisionSpecified.set -> void
+Hl7.Cql.Elm.EndsWith
+Hl7.Cql.Elm.EndsWith.EndsWith() -> void
+Hl7.Cql.Elm.Equal
+Hl7.Cql.Elm.Equal.Equal() -> void
+Hl7.Cql.Elm.Equivalent
+Hl7.Cql.Elm.Equivalent.Equivalent() -> void
+Hl7.Cql.Elm.ErrorSeverity
+Hl7.Cql.Elm.ErrorSeverity.error = 2 -> Hl7.Cql.Elm.ErrorSeverity
+Hl7.Cql.Elm.ErrorSeverity.info = 0 -> Hl7.Cql.Elm.ErrorSeverity
+Hl7.Cql.Elm.ErrorSeverity.warning = 1 -> Hl7.Cql.Elm.ErrorSeverity
+Hl7.Cql.Elm.ErrorType
+Hl7.Cql.Elm.ErrorType.environment = 0 -> Hl7.Cql.Elm.ErrorType
+Hl7.Cql.Elm.ErrorType.include = 2 -> Hl7.Cql.Elm.ErrorType
+Hl7.Cql.Elm.ErrorType.internal = 4 -> Hl7.Cql.Elm.ErrorType
+Hl7.Cql.Elm.ErrorType.semantic = 3 -> Hl7.Cql.Elm.ErrorType
+Hl7.Cql.Elm.ErrorType.syntax = 1 -> Hl7.Cql.Elm.ErrorType
+Hl7.Cql.Elm.Except
+Hl7.Cql.Elm.Except.Except() -> void
+Hl7.Cql.Elm.Exists
+Hl7.Cql.Elm.Exists.Exists() -> void
+Hl7.Cql.Elm.Exp
+Hl7.Cql.Elm.Exp.Exp() -> void
+Hl7.Cql.Elm.Expand
+Hl7.Cql.Elm.Expand.Expand() -> void
+Hl7.Cql.Elm.ExpandValueSet
+Hl7.Cql.Elm.ExpandValueSet.ExpandValueSet() -> void
+Hl7.Cql.Elm.Expression
+Hl7.Cql.Elm.Expression.Expression() -> void
+Hl7.Cql.Elm.ExpressionDef
+Hl7.Cql.Elm.ExpressionDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.ExpressionDef.accessLevel.set -> void
+Hl7.Cql.Elm.ExpressionDef.ExpressionDef() -> void
+Hl7.Cql.Elm.ExpressionRef
+Hl7.Cql.Elm.ExpressionRef.ExpressionRef() -> void
+Hl7.Cql.Elm.ExtensionMethods
+Hl7.Cql.Elm.Filter
+Hl7.Cql.Elm.Filter.Filter() -> void
+Hl7.Cql.Elm.First
+Hl7.Cql.Elm.First.First() -> void
+Hl7.Cql.Elm.Flatten
+Hl7.Cql.Elm.Flatten.Flatten() -> void
+Hl7.Cql.Elm.Floor
+Hl7.Cql.Elm.Floor.Floor() -> void
+Hl7.Cql.Elm.ForEach
+Hl7.Cql.Elm.ForEach.ForEach() -> void
+Hl7.Cql.Elm.FunctionDef
+Hl7.Cql.Elm.FunctionDef.external.get -> bool
+Hl7.Cql.Elm.FunctionDef.external.set -> void
+Hl7.Cql.Elm.FunctionDef.externalSpecified.get -> bool
+Hl7.Cql.Elm.FunctionDef.externalSpecified.set -> void
+Hl7.Cql.Elm.FunctionDef.fluent.get -> bool
+Hl7.Cql.Elm.FunctionDef.fluent.set -> void
+Hl7.Cql.Elm.FunctionDef.fluentSpecified.get -> bool
+Hl7.Cql.Elm.FunctionDef.fluentSpecified.set -> void
+Hl7.Cql.Elm.FunctionDef.FunctionDef() -> void
+Hl7.Cql.Elm.FunctionRef
+Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
+Hl7.Cql.Elm.GeometricMean
+Hl7.Cql.Elm.GeometricMean.GeometricMean() -> void
+Hl7.Cql.Elm.Greater
+Hl7.Cql.Elm.Greater.Greater() -> void
+Hl7.Cql.Elm.GreaterOrEqual
+Hl7.Cql.Elm.GreaterOrEqual.GreaterOrEqual() -> void
+Hl7.Cql.Elm.HighBoundary
+Hl7.Cql.Elm.HighBoundary.HighBoundary() -> void
+Hl7.Cql.Elm.IdentifierRef
+Hl7.Cql.Elm.IdentifierRef.IdentifierRef() -> void
+Hl7.Cql.Elm.If
+Hl7.Cql.Elm.If.If() -> void
+Hl7.Cql.Elm.Implies
+Hl7.Cql.Elm.Implies.Implies() -> void
+Hl7.Cql.Elm.In
+Hl7.Cql.Elm.In.In() -> void
+Hl7.Cql.Elm.In.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.In.precision.set -> void
+Hl7.Cql.Elm.In.precisionSpecified.get -> bool
+Hl7.Cql.Elm.In.precisionSpecified.set -> void
+Hl7.Cql.Elm.IncludeDef
+Hl7.Cql.Elm.IncludeDef.IncludeDef() -> void
+Hl7.Cql.Elm.IncludedIn
+Hl7.Cql.Elm.IncludedIn.IncludedIn() -> void
+Hl7.Cql.Elm.IncludedIn.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.IncludedIn.precision.set -> void
+Hl7.Cql.Elm.IncludedIn.precisionSpecified.get -> bool
+Hl7.Cql.Elm.IncludedIn.precisionSpecified.set -> void
+Hl7.Cql.Elm.IncludeElement
+Hl7.Cql.Elm.IncludeElement.IncludeElement() -> void
+Hl7.Cql.Elm.IncludeElement.isReverse.get -> bool
+Hl7.Cql.Elm.IncludeElement.isReverse.set -> void
+Hl7.Cql.Elm.IncludeElement.isReverseSpecified.get -> bool
+Hl7.Cql.Elm.IncludeElement.isReverseSpecified.set -> void
+Hl7.Cql.Elm.Includes
+Hl7.Cql.Elm.Includes.Includes() -> void
+Hl7.Cql.Elm.Includes.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Includes.precision.set -> void
+Hl7.Cql.Elm.Includes.precisionSpecified.get -> bool
+Hl7.Cql.Elm.Includes.precisionSpecified.set -> void
+Hl7.Cql.Elm.InCodeSystem
+Hl7.Cql.Elm.InCodeSystem.InCodeSystem() -> void
+Hl7.Cql.Elm.Indexer
+Hl7.Cql.Elm.Indexer.Indexer() -> void
+Hl7.Cql.Elm.IndexOf
+Hl7.Cql.Elm.IndexOf.IndexOf() -> void
+Hl7.Cql.Elm.Instance
+Hl7.Cql.Elm.Instance.Instance() -> void
+Hl7.Cql.Elm.InstanceElement
+Hl7.Cql.Elm.InstanceElement.InstanceElement() -> void
+Hl7.Cql.Elm.Intersect
+Hl7.Cql.Elm.Intersect.Intersect() -> void
+Hl7.Cql.Elm.Interval
+Hl7.Cql.Elm.Interval.highClosed.get -> bool
+Hl7.Cql.Elm.Interval.highClosed.set -> void
+Hl7.Cql.Elm.Interval.Interval() -> void
+Hl7.Cql.Elm.Interval.lowClosed.get -> bool
+Hl7.Cql.Elm.Interval.lowClosed.set -> void
+Hl7.Cql.Elm.IntervalTypeSpecifier
+Hl7.Cql.Elm.IntervalTypeSpecifier.IntervalTypeSpecifier() -> void
+Hl7.Cql.Elm.InValueSet
+Hl7.Cql.Elm.InValueSet.InValueSet() -> void
+Hl7.Cql.Elm.Is
+Hl7.Cql.Elm.Is.Is() -> void
+Hl7.Cql.Elm.IsFalse
+Hl7.Cql.Elm.IsFalse.IsFalse() -> void
+Hl7.Cql.Elm.IsNull
+Hl7.Cql.Elm.IsNull.IsNull() -> void
+Hl7.Cql.Elm.IsTrue
+Hl7.Cql.Elm.IsTrue.IsTrue() -> void
+Hl7.Cql.Elm.Iteration
+Hl7.Cql.Elm.Iteration.Iteration() -> void
+Hl7.Cql.Elm.Last
+Hl7.Cql.Elm.Last.Last() -> void
+Hl7.Cql.Elm.LastPositionOf
+Hl7.Cql.Elm.LastPositionOf.LastPositionOf() -> void
+Hl7.Cql.Elm.Length
+Hl7.Cql.Elm.Length.Length() -> void
+Hl7.Cql.Elm.Less
+Hl7.Cql.Elm.Less.Less() -> void
+Hl7.Cql.Elm.LessOrEqual
+Hl7.Cql.Elm.LessOrEqual.LessOrEqual() -> void
+Hl7.Cql.Elm.LetClause
+Hl7.Cql.Elm.LetClause.LetClause() -> void
+Hl7.Cql.Elm.Library
+Hl7.Cql.Elm.Library.Library() -> void
+Hl7.Cql.Elm.Library.NameAndVersion.get -> string?
+Hl7.Cql.Elm.List
+Hl7.Cql.Elm.List.List() -> void
+Hl7.Cql.Elm.ListTypeSpecifier
+Hl7.Cql.Elm.ListTypeSpecifier.ListTypeSpecifier() -> void
+Hl7.Cql.Elm.Literal
+Hl7.Cql.Elm.Literal.Literal() -> void
+Hl7.Cql.Elm.Ln
+Hl7.Cql.Elm.Ln.Ln() -> void
+Hl7.Cql.Elm.Locator
+Hl7.Cql.Elm.Locator.endChar.get -> int
+Hl7.Cql.Elm.Locator.endChar.set -> void
+Hl7.Cql.Elm.Locator.endCharSpecified.get -> bool
+Hl7.Cql.Elm.Locator.endCharSpecified.set -> void
+Hl7.Cql.Elm.Locator.endLine.get -> int
+Hl7.Cql.Elm.Locator.endLine.set -> void
+Hl7.Cql.Elm.Locator.endLineSpecified.get -> bool
+Hl7.Cql.Elm.Locator.endLineSpecified.set -> void
+Hl7.Cql.Elm.Locator.Locator() -> void
+Hl7.Cql.Elm.Locator.startChar.get -> int
+Hl7.Cql.Elm.Locator.startChar.set -> void
+Hl7.Cql.Elm.Locator.startCharSpecified.get -> bool
+Hl7.Cql.Elm.Locator.startCharSpecified.set -> void
+Hl7.Cql.Elm.Locator.startLine.get -> int
+Hl7.Cql.Elm.Locator.startLine.set -> void
+Hl7.Cql.Elm.Locator.startLineSpecified.get -> bool
+Hl7.Cql.Elm.Locator.startLineSpecified.set -> void
+Hl7.Cql.Elm.Log
+Hl7.Cql.Elm.Log.Log() -> void
+Hl7.Cql.Elm.LowBoundary
+Hl7.Cql.Elm.LowBoundary.LowBoundary() -> void
+Hl7.Cql.Elm.Lower
+Hl7.Cql.Elm.Lower.Lower() -> void
+Hl7.Cql.Elm.Matches
+Hl7.Cql.Elm.Matches.Matches() -> void
+Hl7.Cql.Elm.Max
+Hl7.Cql.Elm.Max.Max() -> void
+Hl7.Cql.Elm.MaxValue
+Hl7.Cql.Elm.MaxValue.MaxValue() -> void
+Hl7.Cql.Elm.Median
+Hl7.Cql.Elm.Median.Median() -> void
+Hl7.Cql.Elm.Meets
+Hl7.Cql.Elm.Meets.Meets() -> void
+Hl7.Cql.Elm.Meets.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Meets.precision.set -> void
+Hl7.Cql.Elm.Meets.precisionSpecified.get -> bool
+Hl7.Cql.Elm.Meets.precisionSpecified.set -> void
+Hl7.Cql.Elm.MeetsAfter
+Hl7.Cql.Elm.MeetsAfter.MeetsAfter() -> void
+Hl7.Cql.Elm.MeetsAfter.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.MeetsAfter.precision.set -> void
+Hl7.Cql.Elm.MeetsAfter.precisionSpecified.get -> bool
+Hl7.Cql.Elm.MeetsAfter.precisionSpecified.set -> void
+Hl7.Cql.Elm.MeetsBefore
+Hl7.Cql.Elm.MeetsBefore.MeetsBefore() -> void
+Hl7.Cql.Elm.MeetsBefore.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.MeetsBefore.precision.set -> void
+Hl7.Cql.Elm.MeetsBefore.precisionSpecified.get -> bool
+Hl7.Cql.Elm.MeetsBefore.precisionSpecified.set -> void
+Hl7.Cql.Elm.Message
+Hl7.Cql.Elm.Message.Message() -> void
+Hl7.Cql.Elm.Min
+Hl7.Cql.Elm.Min.Min() -> void
+Hl7.Cql.Elm.MinValue
+Hl7.Cql.Elm.MinValue.MinValue() -> void
+Hl7.Cql.Elm.Mode
+Hl7.Cql.Elm.Mode.Mode() -> void
+Hl7.Cql.Elm.Modulo
+Hl7.Cql.Elm.Modulo.Modulo() -> void
+Hl7.Cql.Elm.Multiply
+Hl7.Cql.Elm.Multiply.Multiply() -> void
+Hl7.Cql.Elm.NamedTypeSpecifier
+Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier() -> void
+Hl7.Cql.Elm.Narrative
+Hl7.Cql.Elm.Narrative.Narrative() -> void
+Hl7.Cql.Elm.NaryExpression
+Hl7.Cql.Elm.NaryExpression.NaryExpression() -> void
+Hl7.Cql.Elm.Negate
+Hl7.Cql.Elm.Negate.Negate() -> void
+Hl7.Cql.Elm.Not
+Hl7.Cql.Elm.Not.Not() -> void
+Hl7.Cql.Elm.NotEqual
+Hl7.Cql.Elm.NotEqual.NotEqual() -> void
+Hl7.Cql.Elm.Now
+Hl7.Cql.Elm.Now.Now() -> void
+Hl7.Cql.Elm.Null
+Hl7.Cql.Elm.Null.Null() -> void
+Hl7.Cql.Elm.OperandDef
+Hl7.Cql.Elm.OperandDef.OperandDef() -> void
+Hl7.Cql.Elm.OperandRef
+Hl7.Cql.Elm.OperandRef.OperandRef() -> void
+Hl7.Cql.Elm.OperatorExpression
+Hl7.Cql.Elm.OperatorExpression.OperatorExpression() -> void
+Hl7.Cql.Elm.Or
+Hl7.Cql.Elm.Or.Or() -> void
+Hl7.Cql.Elm.OtherFilterElement
+Hl7.Cql.Elm.OtherFilterElement.OtherFilterElement() -> void
+Hl7.Cql.Elm.Overlaps
+Hl7.Cql.Elm.Overlaps.Overlaps() -> void
+Hl7.Cql.Elm.Overlaps.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Overlaps.precision.set -> void
+Hl7.Cql.Elm.Overlaps.precisionSpecified.get -> bool
+Hl7.Cql.Elm.Overlaps.precisionSpecified.set -> void
+Hl7.Cql.Elm.OverlapsAfter
+Hl7.Cql.Elm.OverlapsAfter.OverlapsAfter() -> void
+Hl7.Cql.Elm.OverlapsAfter.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.OverlapsAfter.precision.set -> void
+Hl7.Cql.Elm.OverlapsAfter.precisionSpecified.get -> bool
+Hl7.Cql.Elm.OverlapsAfter.precisionSpecified.set -> void
+Hl7.Cql.Elm.OverlapsBefore
+Hl7.Cql.Elm.OverlapsBefore.OverlapsBefore() -> void
+Hl7.Cql.Elm.OverlapsBefore.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.OverlapsBefore.precision.set -> void
+Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.get -> bool
+Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.set -> void
+Hl7.Cql.Elm.ParameterDef
+Hl7.Cql.Elm.ParameterDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.ParameterDef.accessLevel.set -> void
+Hl7.Cql.Elm.ParameterDef.ParameterDef() -> void
+Hl7.Cql.Elm.ParameterRef
+Hl7.Cql.Elm.ParameterRef.ParameterRef() -> void
+Hl7.Cql.Elm.ParameterTypeSpecifier
+Hl7.Cql.Elm.ParameterTypeSpecifier.ParameterTypeSpecifier() -> void
+Hl7.Cql.Elm.PointFrom
+Hl7.Cql.Elm.PointFrom.PointFrom() -> void
+Hl7.Cql.Elm.PopulationStdDev
+Hl7.Cql.Elm.PopulationStdDev.PopulationStdDev() -> void
+Hl7.Cql.Elm.PopulationVariance
+Hl7.Cql.Elm.PopulationVariance.PopulationVariance() -> void
+Hl7.Cql.Elm.PositionOf
+Hl7.Cql.Elm.PositionOf.PositionOf() -> void
+Hl7.Cql.Elm.Power
+Hl7.Cql.Elm.Power.Power() -> void
+Hl7.Cql.Elm.Precision
+Hl7.Cql.Elm.Precision.Precision() -> void
+Hl7.Cql.Elm.Predecessor
+Hl7.Cql.Elm.Predecessor.Predecessor() -> void
+Hl7.Cql.Elm.Product
+Hl7.Cql.Elm.Product.Product() -> void
+Hl7.Cql.Elm.ProperContains
+Hl7.Cql.Elm.ProperContains.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.ProperContains.precision.set -> void
+Hl7.Cql.Elm.ProperContains.precisionSpecified.get -> bool
+Hl7.Cql.Elm.ProperContains.precisionSpecified.set -> void
+Hl7.Cql.Elm.ProperContains.ProperContains() -> void
+Hl7.Cql.Elm.ProperIn
+Hl7.Cql.Elm.ProperIn.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.ProperIn.precision.set -> void
+Hl7.Cql.Elm.ProperIn.precisionSpecified.get -> bool
+Hl7.Cql.Elm.ProperIn.precisionSpecified.set -> void
+Hl7.Cql.Elm.ProperIn.ProperIn() -> void
+Hl7.Cql.Elm.ProperIncludedIn
+Hl7.Cql.Elm.ProperIncludedIn.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.ProperIncludedIn.precision.set -> void
+Hl7.Cql.Elm.ProperIncludedIn.precisionSpecified.get -> bool
+Hl7.Cql.Elm.ProperIncludedIn.precisionSpecified.set -> void
+Hl7.Cql.Elm.ProperIncludedIn.ProperIncludedIn() -> void
+Hl7.Cql.Elm.ProperIncludes
+Hl7.Cql.Elm.ProperIncludes.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.ProperIncludes.precision.set -> void
+Hl7.Cql.Elm.ProperIncludes.precisionSpecified.get -> bool
+Hl7.Cql.Elm.ProperIncludes.precisionSpecified.set -> void
+Hl7.Cql.Elm.ProperIncludes.ProperIncludes() -> void
+Hl7.Cql.Elm.Property
+Hl7.Cql.Elm.Property.Property() -> void
+Hl7.Cql.Elm.Quantity
+Hl7.Cql.Elm.Quantity.Quantity() -> void
+Hl7.Cql.Elm.Quantity.value.get -> decimal
+Hl7.Cql.Elm.Quantity.value.set -> void
+Hl7.Cql.Elm.Quantity.valueSpecified.get -> bool
+Hl7.Cql.Elm.Quantity.valueSpecified.set -> void
+Hl7.Cql.Elm.Query
+Hl7.Cql.Elm.Query.Query() -> void
+Hl7.Cql.Elm.QueryLetRef
+Hl7.Cql.Elm.QueryLetRef.QueryLetRef() -> void
+Hl7.Cql.Elm.Ratio
+Hl7.Cql.Elm.Ratio.Ratio() -> void
+Hl7.Cql.Elm.RelationshipClause
+Hl7.Cql.Elm.RelationshipClause.RelationshipClause() -> void
+Hl7.Cql.Elm.Repeat
+Hl7.Cql.Elm.Repeat.Repeat() -> void
+Hl7.Cql.Elm.ReplaceMatches
+Hl7.Cql.Elm.ReplaceMatches.ReplaceMatches() -> void
+Hl7.Cql.Elm.Retrieve
+Hl7.Cql.Elm.Retrieve.Retrieve() -> void
+Hl7.Cql.Elm.ReturnClause
+Hl7.Cql.Elm.ReturnClause.distinct.get -> bool
+Hl7.Cql.Elm.ReturnClause.distinct.set -> void
+Hl7.Cql.Elm.ReturnClause.ReturnClause() -> void
+Hl7.Cql.Elm.Round
+Hl7.Cql.Elm.Round.Round() -> void
+Hl7.Cql.Elm.SameAs
+Hl7.Cql.Elm.SameAs.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.SameAs.precision.set -> void
+Hl7.Cql.Elm.SameAs.precisionSpecified.get -> bool
+Hl7.Cql.Elm.SameAs.precisionSpecified.set -> void
+Hl7.Cql.Elm.SameAs.SameAs() -> void
+Hl7.Cql.Elm.SameOrAfter
+Hl7.Cql.Elm.SameOrAfter.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.SameOrAfter.precision.set -> void
+Hl7.Cql.Elm.SameOrAfter.precisionSpecified.get -> bool
+Hl7.Cql.Elm.SameOrAfter.precisionSpecified.set -> void
+Hl7.Cql.Elm.SameOrAfter.SameOrAfter() -> void
+Hl7.Cql.Elm.SameOrBefore
+Hl7.Cql.Elm.SameOrBefore.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.SameOrBefore.precision.set -> void
+Hl7.Cql.Elm.SameOrBefore.precisionSpecified.get -> bool
+Hl7.Cql.Elm.SameOrBefore.precisionSpecified.set -> void
+Hl7.Cql.Elm.SameOrBefore.SameOrBefore() -> void
+Hl7.Cql.Elm.Search
+Hl7.Cql.Elm.Search.Search() -> void
+Hl7.Cql.Elm.SingletonFrom
+Hl7.Cql.Elm.SingletonFrom.SingletonFrom() -> void
+Hl7.Cql.Elm.Size
+Hl7.Cql.Elm.Size.Size() -> void
+Hl7.Cql.Elm.Slice
+Hl7.Cql.Elm.Slice.Slice() -> void
+Hl7.Cql.Elm.Sort
+Hl7.Cql.Elm.Sort.Sort() -> void
+Hl7.Cql.Elm.SortByItem
+Hl7.Cql.Elm.SortByItem.direction.get -> Hl7.Cql.Elm.SortDirection
+Hl7.Cql.Elm.SortByItem.direction.set -> void
+Hl7.Cql.Elm.SortByItem.directionSpecified.get -> bool
+Hl7.Cql.Elm.SortByItem.directionSpecified.set -> void
+Hl7.Cql.Elm.SortByItem.SortByItem() -> void
+Hl7.Cql.Elm.SortClause
+Hl7.Cql.Elm.SortClause.SortClause() -> void
+Hl7.Cql.Elm.SortDirection
+Hl7.Cql.Elm.SortDirection.asc = 0 -> Hl7.Cql.Elm.SortDirection
+Hl7.Cql.Elm.SortDirection.ascending = 1 -> Hl7.Cql.Elm.SortDirection
+Hl7.Cql.Elm.SortDirection.desc = 2 -> Hl7.Cql.Elm.SortDirection
+Hl7.Cql.Elm.SortDirection.descending = 3 -> Hl7.Cql.Elm.SortDirection
+Hl7.Cql.Elm.Split
+Hl7.Cql.Elm.Split.Split() -> void
+Hl7.Cql.Elm.SplitOnMatches
+Hl7.Cql.Elm.SplitOnMatches.SplitOnMatches() -> void
+Hl7.Cql.Elm.Start
+Hl7.Cql.Elm.Start.Start() -> void
+Hl7.Cql.Elm.Starts
+Hl7.Cql.Elm.Starts.precision.get -> Hl7.Cql.Elm.DateTimePrecision
+Hl7.Cql.Elm.Starts.precision.set -> void
+Hl7.Cql.Elm.Starts.precisionSpecified.get -> bool
+Hl7.Cql.Elm.Starts.precisionSpecified.set -> void
+Hl7.Cql.Elm.Starts.Starts() -> void
+Hl7.Cql.Elm.StartsWith
+Hl7.Cql.Elm.StartsWith.StartsWith() -> void
+Hl7.Cql.Elm.StdDev
+Hl7.Cql.Elm.StdDev.StdDev() -> void
+Hl7.Cql.Elm.Substring
+Hl7.Cql.Elm.Substring.Substring() -> void
+Hl7.Cql.Elm.SubsumedBy
+Hl7.Cql.Elm.SubsumedBy.SubsumedBy() -> void
+Hl7.Cql.Elm.Subsumes
+Hl7.Cql.Elm.Subsumes.Subsumes() -> void
+Hl7.Cql.Elm.Subtract
+Hl7.Cql.Elm.Subtract.Subtract() -> void
+Hl7.Cql.Elm.Successor
+Hl7.Cql.Elm.Successor.Successor() -> void
+Hl7.Cql.Elm.Sum
+Hl7.Cql.Elm.Sum.Sum() -> void
+Hl7.Cql.Elm.Tag
+Hl7.Cql.Elm.Tag.Tag() -> void
+Hl7.Cql.Elm.TernaryExpression
+Hl7.Cql.Elm.TernaryExpression.TernaryExpression() -> void
+Hl7.Cql.Elm.Time
+Hl7.Cql.Elm.Time.Time() -> void
+Hl7.Cql.Elm.TimeFrom
+Hl7.Cql.Elm.TimeFrom.TimeFrom() -> void
+Hl7.Cql.Elm.TimeOfDay
+Hl7.Cql.Elm.TimeOfDay.TimeOfDay() -> void
+Hl7.Cql.Elm.Times
+Hl7.Cql.Elm.Times.Times() -> void
+Hl7.Cql.Elm.TimezoneFrom
+Hl7.Cql.Elm.TimezoneFrom.TimezoneFrom() -> void
+Hl7.Cql.Elm.TimezoneOffsetFrom
+Hl7.Cql.Elm.TimezoneOffsetFrom.TimezoneOffsetFrom() -> void
+Hl7.Cql.Elm.ToBoolean
+Hl7.Cql.Elm.ToBoolean.ToBoolean() -> void
+Hl7.Cql.Elm.ToChars
+Hl7.Cql.Elm.ToChars.ToChars() -> void
+Hl7.Cql.Elm.ToConcept
+Hl7.Cql.Elm.ToConcept.ToConcept() -> void
+Hl7.Cql.Elm.ToDate
+Hl7.Cql.Elm.ToDate.ToDate() -> void
+Hl7.Cql.Elm.ToDateTime
+Hl7.Cql.Elm.ToDateTime.ToDateTime() -> void
+Hl7.Cql.Elm.Today
+Hl7.Cql.Elm.Today.Today() -> void
+Hl7.Cql.Elm.ToDecimal
+Hl7.Cql.Elm.ToDecimal.ToDecimal() -> void
+Hl7.Cql.Elm.ToInteger
+Hl7.Cql.Elm.ToInteger.ToInteger() -> void
+Hl7.Cql.Elm.ToList
+Hl7.Cql.Elm.ToList.ToList() -> void
+Hl7.Cql.Elm.ToLong
+Hl7.Cql.Elm.ToLong.ToLong() -> void
+Hl7.Cql.Elm.ToQuantity
+Hl7.Cql.Elm.ToQuantity.ToQuantity() -> void
+Hl7.Cql.Elm.ToRatio
+Hl7.Cql.Elm.ToRatio.ToRatio() -> void
+Hl7.Cql.Elm.ToString
+Hl7.Cql.Elm.ToString.ToString() -> void
+Hl7.Cql.Elm.Total
+Hl7.Cql.Elm.Total.Total() -> void
+Hl7.Cql.Elm.ToTime
+Hl7.Cql.Elm.ToTime.ToTime() -> void
+Hl7.Cql.Elm.Truncate
+Hl7.Cql.Elm.Truncate.Truncate() -> void
+Hl7.Cql.Elm.TruncatedDivide
+Hl7.Cql.Elm.TruncatedDivide.TruncatedDivide() -> void
+Hl7.Cql.Elm.Tuple
+Hl7.Cql.Elm.Tuple.Tuple() -> void
+Hl7.Cql.Elm.TupleElement
+Hl7.Cql.Elm.TupleElement.TupleElement() -> void
+Hl7.Cql.Elm.TupleElementDefinition
+Hl7.Cql.Elm.TupleElementDefinition.TupleElementDefinition() -> void
+Hl7.Cql.Elm.TupleTypeSpecifier
+Hl7.Cql.Elm.TupleTypeSpecifier.TupleTypeSpecifier() -> void
+Hl7.Cql.Elm.TypeSpecifier
+Hl7.Cql.Elm.TypeSpecifier.TypeSpecifier() -> void
+Hl7.Cql.Elm.UnaryExpression
+Hl7.Cql.Elm.UnaryExpression.UnaryExpression() -> void
+Hl7.Cql.Elm.Union
+Hl7.Cql.Elm.Union.Union() -> void
+Hl7.Cql.Elm.Upper
+Hl7.Cql.Elm.Upper.Upper() -> void
+Hl7.Cql.Elm.UsingDef
+Hl7.Cql.Elm.UsingDef.UsingDef() -> void
+Hl7.Cql.Elm.ValueSetDef
+Hl7.Cql.Elm.ValueSetDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.ValueSetDef.accessLevel.set -> void
+Hl7.Cql.Elm.ValueSetDef.ValueSetDef() -> void
+Hl7.Cql.Elm.ValueSetRef
+Hl7.Cql.Elm.ValueSetRef.preserve.get -> bool
+Hl7.Cql.Elm.ValueSetRef.preserve.set -> void
+Hl7.Cql.Elm.ValueSetRef.preserveSpecified.get -> bool
+Hl7.Cql.Elm.ValueSetRef.preserveSpecified.set -> void
+Hl7.Cql.Elm.ValueSetRef.ValueSetRef() -> void
+Hl7.Cql.Elm.Variance
+Hl7.Cql.Elm.Variance.Variance() -> void
+Hl7.Cql.Elm.VersionedIdentifier
+Hl7.Cql.Elm.VersionedIdentifier.VersionedIdentifier() -> void
+Hl7.Cql.Elm.Width
+Hl7.Cql.Elm.Width.Width() -> void
+Hl7.Cql.Elm.With
+Hl7.Cql.Elm.With.With() -> void
+Hl7.Cql.Elm.Without
+Hl7.Cql.Elm.Without.Without() -> void
+Hl7.Cql.Elm.Xor
+Hl7.Cql.Elm.Xor.Xor() -> void
+static Hl7.Cql.Elm.ExtensionMethods.ListSortOrder(this Hl7.Cql.Elm.SortDirection direction) -> System.ComponentModel.ListSortDirection
+static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! include) -> string?
+static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
+static readonly Hl7.Cql.Elm.Library.JsonSerializerOptions -> System.Text.Json.JsonSerializerOptions!
+static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.Json.JsonSerializerOptions!
+~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Aggregate.initialValue.set -> void
+~Hl7.Cql.Elm.Aggregate.iteration.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Aggregate.iteration.set -> void
+~Hl7.Cql.Elm.AggregateClause.expression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AggregateClause.expression.set -> void
+~Hl7.Cql.Elm.AggregateClause.identifier.get -> string
+~Hl7.Cql.Elm.AggregateClause.identifier.set -> void
+~Hl7.Cql.Elm.AggregateClause.starting.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AggregateClause.starting.set -> void
+~Hl7.Cql.Elm.AggregateExpression.path.get -> string
+~Hl7.Cql.Elm.AggregateExpression.path.set -> void
+~Hl7.Cql.Elm.AggregateExpression.signature.get -> Hl7.Cql.Elm.TypeSpecifier[]
+~Hl7.Cql.Elm.AggregateExpression.signature.set -> void
+~Hl7.Cql.Elm.AggregateExpression.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AggregateExpression.source.set -> void
+~Hl7.Cql.Elm.AliasedQuerySource.alias.get -> string
+~Hl7.Cql.Elm.AliasedQuerySource.alias.set -> void
+~Hl7.Cql.Elm.AliasedQuerySource.expression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AliasedQuerySource.expression.set -> void
+~Hl7.Cql.Elm.AliasRef.name.get -> string
+~Hl7.Cql.Elm.AliasRef.name.set -> void
+~Hl7.Cql.Elm.Annotation.locator.get -> Hl7.Cql.Elm.Locator
+~Hl7.Cql.Elm.Annotation.locator.set -> void
+~Hl7.Cql.Elm.Annotation.s.get -> Hl7.Cql.Elm.Narrative
+~Hl7.Cql.Elm.Annotation.s.set -> void
+~Hl7.Cql.Elm.Annotation.t.get -> Hl7.Cql.Elm.Tag[]
+~Hl7.Cql.Elm.Annotation.t.set -> void
+~Hl7.Cql.Elm.AnyInCodeSystem.codes.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AnyInCodeSystem.codes.set -> void
+~Hl7.Cql.Elm.AnyInCodeSystem.codesystem.get -> Hl7.Cql.Elm.CodeSystemRef
+~Hl7.Cql.Elm.AnyInCodeSystem.codesystem.set -> void
+~Hl7.Cql.Elm.AnyInCodeSystem.codesystemExpression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AnyInCodeSystem.codesystemExpression.set -> void
+~Hl7.Cql.Elm.AnyInValueSet.codes.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AnyInValueSet.codes.set -> void
+~Hl7.Cql.Elm.AnyInValueSet.valueset.get -> Hl7.Cql.Elm.ValueSetRef
+~Hl7.Cql.Elm.AnyInValueSet.valueset.set -> void
+~Hl7.Cql.Elm.AnyInValueSet.valuesetExpression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.AnyInValueSet.valuesetExpression.set -> void
+~Hl7.Cql.Elm.As.asType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.As.asType.set -> void
+~Hl7.Cql.Elm.As.asTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.As.asTypeSpecifier.set -> void
+~Hl7.Cql.Elm.BinaryExpression.operand.get -> Hl7.Cql.Elm.Expression[]
+~Hl7.Cql.Elm.BinaryExpression.operand.set -> void
+~Hl7.Cql.Elm.ByColumn.path.get -> string
+~Hl7.Cql.Elm.ByColumn.path.set -> void
+~Hl7.Cql.Elm.ByExpression.expression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.ByExpression.expression.set -> void
+~Hl7.Cql.Elm.CanConvert.toType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.CanConvert.toType.set -> void
+~Hl7.Cql.Elm.CanConvert.toTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.CanConvert.toTypeSpecifier.set -> void
+~Hl7.Cql.Elm.Case.caseItem.get -> Hl7.Cql.Elm.CaseItem[]
+~Hl7.Cql.Elm.Case.caseItem.set -> void
+~Hl7.Cql.Elm.Case.comparand.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Case.comparand.set -> void
+~Hl7.Cql.Elm.Case.else.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Case.else.set -> void
+~Hl7.Cql.Elm.CaseItem.then.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.CaseItem.then.set -> void
+~Hl7.Cql.Elm.CaseItem.when.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.CaseItem.when.set -> void
+~Hl7.Cql.Elm.Children.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Children.source.set -> void
+~Hl7.Cql.Elm.ChoiceTypeSpecifier.choice.get -> Hl7.Cql.Elm.TypeSpecifier[]
+~Hl7.Cql.Elm.ChoiceTypeSpecifier.choice.set -> void
+~Hl7.Cql.Elm.ChoiceTypeSpecifier.type.get -> Hl7.Cql.Elm.TypeSpecifier[]
+~Hl7.Cql.Elm.ChoiceTypeSpecifier.type.set -> void
+~Hl7.Cql.Elm.Code.code.get -> string
+~Hl7.Cql.Elm.Code.code.set -> void
+~Hl7.Cql.Elm.Code.display.get -> string
+~Hl7.Cql.Elm.Code.display.set -> void
+~Hl7.Cql.Elm.Code.system.get -> Hl7.Cql.Elm.CodeSystemRef
+~Hl7.Cql.Elm.Code.system.set -> void
+~Hl7.Cql.Elm.CodeDef.codeSystem.get -> Hl7.Cql.Elm.CodeSystemRef
+~Hl7.Cql.Elm.CodeDef.codeSystem.set -> void
+~Hl7.Cql.Elm.CodeDef.display.get -> string
+~Hl7.Cql.Elm.CodeDef.display.set -> void
+~Hl7.Cql.Elm.CodeDef.id.get -> string
+~Hl7.Cql.Elm.CodeDef.id.set -> void
+~Hl7.Cql.Elm.CodeDef.name.get -> string
+~Hl7.Cql.Elm.CodeDef.name.set -> void
+~Hl7.Cql.Elm.CodeFilterElement.comparator.get -> string
+~Hl7.Cql.Elm.CodeFilterElement.comparator.set -> void
+~Hl7.Cql.Elm.CodeFilterElement.property.get -> string
+~Hl7.Cql.Elm.CodeFilterElement.property.set -> void
+~Hl7.Cql.Elm.CodeFilterElement.search.get -> string
+~Hl7.Cql.Elm.CodeFilterElement.search.set -> void
+~Hl7.Cql.Elm.CodeFilterElement.value.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.CodeFilterElement.value.set -> void
+~Hl7.Cql.Elm.CodeFilterElement.valueSetProperty.get -> string
+~Hl7.Cql.Elm.CodeFilterElement.valueSetProperty.set -> void
+~Hl7.Cql.Elm.CodeRef.libraryName.get -> string
+~Hl7.Cql.Elm.CodeRef.libraryName.set -> void
+~Hl7.Cql.Elm.CodeRef.name.get -> string
+~Hl7.Cql.Elm.CodeRef.name.set -> void
+~Hl7.Cql.Elm.CodeSystemDef.id.get -> string
+~Hl7.Cql.Elm.CodeSystemDef.id.set -> void
+~Hl7.Cql.Elm.CodeSystemDef.name.get -> string
+~Hl7.Cql.Elm.CodeSystemDef.name.set -> void
+~Hl7.Cql.Elm.CodeSystemDef.version.get -> string
+~Hl7.Cql.Elm.CodeSystemDef.version.set -> void
+~Hl7.Cql.Elm.CodeSystemRef.libraryName.get -> string
+~Hl7.Cql.Elm.CodeSystemRef.libraryName.set -> void
+~Hl7.Cql.Elm.CodeSystemRef.name.get -> string
+~Hl7.Cql.Elm.CodeSystemRef.name.set -> void
+~Hl7.Cql.Elm.Combine.separator.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Combine.separator.set -> void
+~Hl7.Cql.Elm.Combine.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Combine.source.set -> void
+~Hl7.Cql.Elm.Concept.code.get -> Hl7.Cql.Elm.Code[]
+~Hl7.Cql.Elm.Concept.code.set -> void
+~Hl7.Cql.Elm.Concept.display.get -> string
+~Hl7.Cql.Elm.Concept.display.set -> void
+~Hl7.Cql.Elm.ConceptDef.code.get -> Hl7.Cql.Elm.CodeRef[]
+~Hl7.Cql.Elm.ConceptDef.code.set -> void
+~Hl7.Cql.Elm.ConceptDef.display.get -> string
+~Hl7.Cql.Elm.ConceptDef.display.set -> void
+~Hl7.Cql.Elm.ConceptDef.name.get -> string
+~Hl7.Cql.Elm.ConceptDef.name.set -> void
+~Hl7.Cql.Elm.ConceptRef.libraryName.get -> string
+~Hl7.Cql.Elm.ConceptRef.libraryName.set -> void
+~Hl7.Cql.Elm.ConceptRef.name.get -> string
+~Hl7.Cql.Elm.ConceptRef.name.set -> void
+~Hl7.Cql.Elm.ContextDef.name.get -> string
+~Hl7.Cql.Elm.ContextDef.name.set -> void
+~Hl7.Cql.Elm.Convert.toType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.Convert.toType.set -> void
+~Hl7.Cql.Elm.Convert.toTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.Convert.toTypeSpecifier.set -> void
+~Hl7.Cql.Elm.CqlToElmError.message.get -> string
+~Hl7.Cql.Elm.CqlToElmError.message.set -> void
+~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibraryId.get -> string
+~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibraryId.set -> void
+~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibrarySystem.get -> string
+~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibrarySystem.set -> void
+~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibraryVersionId.get -> string
+~Hl7.Cql.Elm.CqlToElmError.targetIncludeLibraryVersionId.set -> void
+~Hl7.Cql.Elm.CqlToElmInfo.translatorOptions.get -> string
+~Hl7.Cql.Elm.CqlToElmInfo.translatorOptions.set -> void
+~Hl7.Cql.Elm.CqlToElmInfo.translatorVersion.get -> string
+~Hl7.Cql.Elm.CqlToElmInfo.translatorVersion.set -> void
+~Hl7.Cql.Elm.Current.scope.get -> string
+~Hl7.Cql.Elm.Current.scope.set -> void
+~Hl7.Cql.Elm.Date.day.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Date.day.set -> void
+~Hl7.Cql.Elm.Date.month.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Date.month.set -> void
+~Hl7.Cql.Elm.Date.year.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Date.year.set -> void
+~Hl7.Cql.Elm.DateFilterElement.highProperty.get -> string
+~Hl7.Cql.Elm.DateFilterElement.highProperty.set -> void
+~Hl7.Cql.Elm.DateFilterElement.lowProperty.get -> string
+~Hl7.Cql.Elm.DateFilterElement.lowProperty.set -> void
+~Hl7.Cql.Elm.DateFilterElement.property.get -> string
+~Hl7.Cql.Elm.DateFilterElement.property.set -> void
+~Hl7.Cql.Elm.DateFilterElement.search.get -> string
+~Hl7.Cql.Elm.DateFilterElement.search.set -> void
+~Hl7.Cql.Elm.DateFilterElement.value.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateFilterElement.value.set -> void
+~Hl7.Cql.Elm.DateTime.day.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.day.set -> void
+~Hl7.Cql.Elm.DateTime.hour.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.hour.set -> void
+~Hl7.Cql.Elm.DateTime.millisecond.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.millisecond.set -> void
+~Hl7.Cql.Elm.DateTime.minute.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.minute.set -> void
+~Hl7.Cql.Elm.DateTime.month.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.month.set -> void
+~Hl7.Cql.Elm.DateTime.second.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.second.set -> void
+~Hl7.Cql.Elm.DateTime.timezoneOffset.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.timezoneOffset.set -> void
+~Hl7.Cql.Elm.DateTime.year.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.DateTime.year.set -> void
+~Hl7.Cql.Elm.Descendents.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Descendents.source.set -> void
+~Hl7.Cql.Elm.Element.annotation.get -> Hl7.Cql.Elm.CqlToElmBase[]
+~Hl7.Cql.Elm.Element.annotation.set -> void
+~Hl7.Cql.Elm.Element.localId.get -> string
+~Hl7.Cql.Elm.Element.localId.set -> void
+~Hl7.Cql.Elm.Element.locator.get -> string
+~Hl7.Cql.Elm.Element.locator.set -> void
+~Hl7.Cql.Elm.Element.resultTypeName.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.Element.resultTypeName.set -> void
+~Hl7.Cql.Elm.Element.resultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.Element.resultTypeSpecifier.set -> void
+~Hl7.Cql.Elm.ExpressionDef.context.get -> string
+~Hl7.Cql.Elm.ExpressionDef.context.set -> void
+~Hl7.Cql.Elm.ExpressionDef.expression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.ExpressionDef.expression.set -> void
+~Hl7.Cql.Elm.ExpressionDef.name.get -> string
+~Hl7.Cql.Elm.ExpressionDef.name.set -> void
+~Hl7.Cql.Elm.ExpressionRef.libraryName.get -> string
+~Hl7.Cql.Elm.ExpressionRef.libraryName.set -> void
+~Hl7.Cql.Elm.ExpressionRef.name.get -> string
+~Hl7.Cql.Elm.ExpressionRef.name.set -> void
+~Hl7.Cql.Elm.Filter.condition.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Filter.condition.set -> void
+~Hl7.Cql.Elm.Filter.scope.get -> string
+~Hl7.Cql.Elm.Filter.scope.set -> void
+~Hl7.Cql.Elm.Filter.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Filter.source.set -> void
+~Hl7.Cql.Elm.First.orderBy.get -> string
+~Hl7.Cql.Elm.First.orderBy.set -> void
+~Hl7.Cql.Elm.First.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.First.source.set -> void
+~Hl7.Cql.Elm.ForEach.element.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.ForEach.element.set -> void
+~Hl7.Cql.Elm.ForEach.scope.get -> string
+~Hl7.Cql.Elm.ForEach.scope.set -> void
+~Hl7.Cql.Elm.ForEach.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.ForEach.source.set -> void
+~Hl7.Cql.Elm.FunctionDef.operand.get -> Hl7.Cql.Elm.OperandDef[]
+~Hl7.Cql.Elm.FunctionDef.operand.set -> void
+~Hl7.Cql.Elm.FunctionRef.operand.get -> Hl7.Cql.Elm.Expression[]
+~Hl7.Cql.Elm.FunctionRef.operand.set -> void
+~Hl7.Cql.Elm.FunctionRef.signature.get -> Hl7.Cql.Elm.TypeSpecifier[]
+~Hl7.Cql.Elm.FunctionRef.signature.set -> void
+~Hl7.Cql.Elm.IdentifierRef.libraryName.get -> string
+~Hl7.Cql.Elm.IdentifierRef.libraryName.set -> void
+~Hl7.Cql.Elm.IdentifierRef.name.get -> string
+~Hl7.Cql.Elm.IdentifierRef.name.set -> void
+~Hl7.Cql.Elm.If.condition.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.If.condition.set -> void
+~Hl7.Cql.Elm.If.else.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.If.else.set -> void
+~Hl7.Cql.Elm.If.then.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.If.then.set -> void
+~Hl7.Cql.Elm.IncludeDef.localIdentifier.get -> string
+~Hl7.Cql.Elm.IncludeDef.localIdentifier.set -> void
+~Hl7.Cql.Elm.IncludeDef.mediaType.get -> string
+~Hl7.Cql.Elm.IncludeDef.mediaType.set -> void
+~Hl7.Cql.Elm.IncludeDef.path.get -> string
+~Hl7.Cql.Elm.IncludeDef.path.set -> void
+~Hl7.Cql.Elm.IncludeDef.version.get -> string
+~Hl7.Cql.Elm.IncludeDef.version.set -> void
+~Hl7.Cql.Elm.IncludeElement.includeFrom.get -> string
+~Hl7.Cql.Elm.IncludeElement.includeFrom.set -> void
+~Hl7.Cql.Elm.IncludeElement.relatedDataType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.IncludeElement.relatedDataType.set -> void
+~Hl7.Cql.Elm.IncludeElement.relatedProperty.get -> string
+~Hl7.Cql.Elm.IncludeElement.relatedProperty.set -> void
+~Hl7.Cql.Elm.IncludeElement.relatedSearch.get -> string
+~Hl7.Cql.Elm.IncludeElement.relatedSearch.set -> void
+~Hl7.Cql.Elm.InCodeSystem.code.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.InCodeSystem.code.set -> void
+~Hl7.Cql.Elm.InCodeSystem.codesystem.get -> Hl7.Cql.Elm.CodeSystemRef
+~Hl7.Cql.Elm.InCodeSystem.codesystem.set -> void
+~Hl7.Cql.Elm.InCodeSystem.codesystemExpression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.InCodeSystem.codesystemExpression.set -> void
+~Hl7.Cql.Elm.IndexOf.element.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.IndexOf.element.set -> void
+~Hl7.Cql.Elm.IndexOf.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.IndexOf.source.set -> void
+~Hl7.Cql.Elm.Instance.classType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.Instance.classType.set -> void
+~Hl7.Cql.Elm.Instance.element.get -> Hl7.Cql.Elm.InstanceElement[]
+~Hl7.Cql.Elm.Instance.element.set -> void
+~Hl7.Cql.Elm.InstanceElement.name.get -> string
+~Hl7.Cql.Elm.InstanceElement.name.set -> void
+~Hl7.Cql.Elm.InstanceElement.value.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.InstanceElement.value.set -> void
+~Hl7.Cql.Elm.Interval.high.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Interval.high.set -> void
+~Hl7.Cql.Elm.Interval.highClosedExpression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Interval.highClosedExpression.set -> void
+~Hl7.Cql.Elm.Interval.low.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Interval.low.set -> void
+~Hl7.Cql.Elm.Interval.lowClosedExpression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Interval.lowClosedExpression.set -> void
+~Hl7.Cql.Elm.IntervalTypeSpecifier.pointType.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.IntervalTypeSpecifier.pointType.set -> void
+~Hl7.Cql.Elm.InValueSet.code.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.InValueSet.code.set -> void
+~Hl7.Cql.Elm.InValueSet.valueset.get -> Hl7.Cql.Elm.ValueSetRef
+~Hl7.Cql.Elm.InValueSet.valueset.set -> void
+~Hl7.Cql.Elm.InValueSet.valuesetExpression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.InValueSet.valuesetExpression.set -> void
+~Hl7.Cql.Elm.Is.isType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.Is.isType.set -> void
+~Hl7.Cql.Elm.Is.isTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.Is.isTypeSpecifier.set -> void
+~Hl7.Cql.Elm.Iteration.scope.get -> string
+~Hl7.Cql.Elm.Iteration.scope.set -> void
+~Hl7.Cql.Elm.Last.orderBy.get -> string
+~Hl7.Cql.Elm.Last.orderBy.set -> void
+~Hl7.Cql.Elm.Last.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Last.source.set -> void
+~Hl7.Cql.Elm.LastPositionOf.pattern.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.LastPositionOf.pattern.set -> void
+~Hl7.Cql.Elm.LastPositionOf.string.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.LastPositionOf.string.set -> void
+~Hl7.Cql.Elm.LetClause.expression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.LetClause.expression.set -> void
+~Hl7.Cql.Elm.LetClause.identifier.get -> string
+~Hl7.Cql.Elm.LetClause.identifier.set -> void
+~Hl7.Cql.Elm.Library.codes.get -> Hl7.Cql.Elm.CodeDef[]
+~Hl7.Cql.Elm.Library.codes.set -> void
+~Hl7.Cql.Elm.Library.codeSystems.get -> Hl7.Cql.Elm.CodeSystemDef[]
+~Hl7.Cql.Elm.Library.codeSystems.set -> void
+~Hl7.Cql.Elm.Library.concepts.get -> Hl7.Cql.Elm.ConceptDef[]
+~Hl7.Cql.Elm.Library.concepts.set -> void
+~Hl7.Cql.Elm.Library.contexts.get -> Hl7.Cql.Elm.ContextDef[]
+~Hl7.Cql.Elm.Library.contexts.set -> void
+~Hl7.Cql.Elm.Library.identifier.get -> Hl7.Cql.Elm.VersionedIdentifier
+~Hl7.Cql.Elm.Library.identifier.set -> void
+~Hl7.Cql.Elm.Library.includes.get -> Hl7.Cql.Elm.IncludeDef[]
+~Hl7.Cql.Elm.Library.includes.set -> void
+~Hl7.Cql.Elm.Library.parameters.get -> Hl7.Cql.Elm.ParameterDef[]
+~Hl7.Cql.Elm.Library.parameters.set -> void
+~Hl7.Cql.Elm.Library.schemaIdentifier.get -> Hl7.Cql.Elm.VersionedIdentifier
+~Hl7.Cql.Elm.Library.schemaIdentifier.set -> void
+~Hl7.Cql.Elm.Library.statements.get -> Hl7.Cql.Elm.ExpressionDef[]
+~Hl7.Cql.Elm.Library.statements.set -> void
+~Hl7.Cql.Elm.Library.usings.get -> Hl7.Cql.Elm.UsingDef[]
+~Hl7.Cql.Elm.Library.usings.set -> void
+~Hl7.Cql.Elm.Library.valueSets.get -> Hl7.Cql.Elm.ValueSetDef[]
+~Hl7.Cql.Elm.Library.valueSets.set -> void
+~Hl7.Cql.Elm.List.element.get -> Hl7.Cql.Elm.Expression[]
+~Hl7.Cql.Elm.List.element.set -> void
+~Hl7.Cql.Elm.List.typeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.List.typeSpecifier.set -> void
+~Hl7.Cql.Elm.ListTypeSpecifier.elementType.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.ListTypeSpecifier.elementType.set -> void
+~Hl7.Cql.Elm.Literal.value.get -> string
+~Hl7.Cql.Elm.Literal.value.set -> void
+~Hl7.Cql.Elm.Literal.valueType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.Literal.valueType.set -> void
+~Hl7.Cql.Elm.Locator.libraryId.get -> string
+~Hl7.Cql.Elm.Locator.libraryId.set -> void
+~Hl7.Cql.Elm.Locator.librarySystem.get -> string
+~Hl7.Cql.Elm.Locator.librarySystem.set -> void
+~Hl7.Cql.Elm.Locator.libraryVersion.get -> string
+~Hl7.Cql.Elm.Locator.libraryVersion.set -> void
+~Hl7.Cql.Elm.MaxValue.valueType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.MaxValue.valueType.set -> void
+~Hl7.Cql.Elm.Message.code.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Message.code.set -> void
+~Hl7.Cql.Elm.Message.condition.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Message.condition.set -> void
+~Hl7.Cql.Elm.Message.message.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Message.message.set -> void
+~Hl7.Cql.Elm.Message.severity.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Message.severity.set -> void
+~Hl7.Cql.Elm.Message.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Message.source.set -> void
+~Hl7.Cql.Elm.MinValue.valueType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.MinValue.valueType.set -> void
+~Hl7.Cql.Elm.NamedTypeSpecifier.name.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.NamedTypeSpecifier.name.set -> void
+~Hl7.Cql.Elm.Narrative.Text.get -> string[]
+~Hl7.Cql.Elm.Narrative.Text.set -> void
+~Hl7.Cql.Elm.NaryExpression.operand.get -> Hl7.Cql.Elm.Expression[]
+~Hl7.Cql.Elm.NaryExpression.operand.set -> void
+~Hl7.Cql.Elm.Null.valueType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.Null.valueType.set -> void
+~Hl7.Cql.Elm.OperandDef.name.get -> string
+~Hl7.Cql.Elm.OperandDef.name.set -> void
+~Hl7.Cql.Elm.OperandDef.operandType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.OperandDef.operandType.set -> void
+~Hl7.Cql.Elm.OperandDef.operandTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.OperandDef.operandTypeSpecifier.set -> void
+~Hl7.Cql.Elm.OperandRef.name.get -> string
+~Hl7.Cql.Elm.OperandRef.name.set -> void
+~Hl7.Cql.Elm.OperatorExpression.signature.get -> Hl7.Cql.Elm.TypeSpecifier[]
+~Hl7.Cql.Elm.OperatorExpression.signature.set -> void
+~Hl7.Cql.Elm.OtherFilterElement.comparator.get -> string
+~Hl7.Cql.Elm.OtherFilterElement.comparator.set -> void
+~Hl7.Cql.Elm.OtherFilterElement.property.get -> string
+~Hl7.Cql.Elm.OtherFilterElement.property.set -> void
+~Hl7.Cql.Elm.OtherFilterElement.search.get -> string
+~Hl7.Cql.Elm.OtherFilterElement.search.set -> void
+~Hl7.Cql.Elm.OtherFilterElement.value.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.OtherFilterElement.value.set -> void
+~Hl7.Cql.Elm.ParameterDef.default.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.ParameterDef.default.set -> void
+~Hl7.Cql.Elm.ParameterDef.name.get -> string
+~Hl7.Cql.Elm.ParameterDef.name.set -> void
+~Hl7.Cql.Elm.ParameterDef.parameterType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.ParameterDef.parameterType.set -> void
+~Hl7.Cql.Elm.ParameterDef.parameterTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.ParameterDef.parameterTypeSpecifier.set -> void
+~Hl7.Cql.Elm.ParameterRef.libraryName.get -> string
+~Hl7.Cql.Elm.ParameterRef.libraryName.set -> void
+~Hl7.Cql.Elm.ParameterRef.name.get -> string
+~Hl7.Cql.Elm.ParameterRef.name.set -> void
+~Hl7.Cql.Elm.ParameterTypeSpecifier.parameterName.get -> string
+~Hl7.Cql.Elm.ParameterTypeSpecifier.parameterName.set -> void
+~Hl7.Cql.Elm.PositionOf.pattern.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.PositionOf.pattern.set -> void
+~Hl7.Cql.Elm.PositionOf.string.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.PositionOf.string.set -> void
+~Hl7.Cql.Elm.Property.path.get -> string
+~Hl7.Cql.Elm.Property.path.set -> void
+~Hl7.Cql.Elm.Property.scope.get -> string
+~Hl7.Cql.Elm.Property.scope.set -> void
+~Hl7.Cql.Elm.Property.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Property.source.set -> void
+~Hl7.Cql.Elm.Quantity.unit.get -> string
+~Hl7.Cql.Elm.Quantity.unit.set -> void
+~Hl7.Cql.Elm.Query.aggregate.get -> Hl7.Cql.Elm.AggregateClause
+~Hl7.Cql.Elm.Query.aggregate.set -> void
+~Hl7.Cql.Elm.Query.let.get -> Hl7.Cql.Elm.LetClause[]
+~Hl7.Cql.Elm.Query.let.set -> void
+~Hl7.Cql.Elm.Query.relationship.get -> Hl7.Cql.Elm.RelationshipClause[]
+~Hl7.Cql.Elm.Query.relationship.set -> void
+~Hl7.Cql.Elm.Query.return.get -> Hl7.Cql.Elm.ReturnClause
+~Hl7.Cql.Elm.Query.return.set -> void
+~Hl7.Cql.Elm.Query.sort.get -> Hl7.Cql.Elm.SortClause
+~Hl7.Cql.Elm.Query.sort.set -> void
+~Hl7.Cql.Elm.Query.source.get -> Hl7.Cql.Elm.AliasedQuerySource[]
+~Hl7.Cql.Elm.Query.source.set -> void
+~Hl7.Cql.Elm.Query.where.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Query.where.set -> void
+~Hl7.Cql.Elm.QueryLetRef.name.get -> string
+~Hl7.Cql.Elm.QueryLetRef.name.set -> void
+~Hl7.Cql.Elm.Ratio.denominator.get -> Hl7.Cql.Elm.Quantity
+~Hl7.Cql.Elm.Ratio.denominator.set -> void
+~Hl7.Cql.Elm.Ratio.numerator.get -> Hl7.Cql.Elm.Quantity
+~Hl7.Cql.Elm.Ratio.numerator.set -> void
+~Hl7.Cql.Elm.RelationshipClause.suchThat.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.RelationshipClause.suchThat.set -> void
+~Hl7.Cql.Elm.Repeat.element.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Repeat.element.set -> void
+~Hl7.Cql.Elm.Repeat.scope.get -> string
+~Hl7.Cql.Elm.Repeat.scope.set -> void
+~Hl7.Cql.Elm.Repeat.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Repeat.source.set -> void
+~Hl7.Cql.Elm.Retrieve.codeComparator.get -> string
+~Hl7.Cql.Elm.Retrieve.codeComparator.set -> void
+~Hl7.Cql.Elm.Retrieve.codeFilter.get -> Hl7.Cql.Elm.CodeFilterElement[]
+~Hl7.Cql.Elm.Retrieve.codeFilter.set -> void
+~Hl7.Cql.Elm.Retrieve.codeProperty.get -> string
+~Hl7.Cql.Elm.Retrieve.codeProperty.set -> void
+~Hl7.Cql.Elm.Retrieve.codes.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Retrieve.codes.set -> void
+~Hl7.Cql.Elm.Retrieve.codeSearch.get -> string
+~Hl7.Cql.Elm.Retrieve.codeSearch.set -> void
+~Hl7.Cql.Elm.Retrieve.context.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Retrieve.context.set -> void
+~Hl7.Cql.Elm.Retrieve.contextProperty.get -> string
+~Hl7.Cql.Elm.Retrieve.contextProperty.set -> void
+~Hl7.Cql.Elm.Retrieve.contextSearch.get -> string
+~Hl7.Cql.Elm.Retrieve.contextSearch.set -> void
+~Hl7.Cql.Elm.Retrieve.dataType.get -> System.Xml.XmlQualifiedName
+~Hl7.Cql.Elm.Retrieve.dataType.set -> void
+~Hl7.Cql.Elm.Retrieve.dateFilter.get -> Hl7.Cql.Elm.DateFilterElement[]
+~Hl7.Cql.Elm.Retrieve.dateFilter.set -> void
+~Hl7.Cql.Elm.Retrieve.dateHighProperty.get -> string
+~Hl7.Cql.Elm.Retrieve.dateHighProperty.set -> void
+~Hl7.Cql.Elm.Retrieve.dateLowProperty.get -> string
+~Hl7.Cql.Elm.Retrieve.dateLowProperty.set -> void
+~Hl7.Cql.Elm.Retrieve.dateProperty.get -> string
+~Hl7.Cql.Elm.Retrieve.dateProperty.set -> void
+~Hl7.Cql.Elm.Retrieve.dateRange.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Retrieve.dateRange.set -> void
+~Hl7.Cql.Elm.Retrieve.dateSearch.get -> string
+~Hl7.Cql.Elm.Retrieve.dateSearch.set -> void
+~Hl7.Cql.Elm.Retrieve.id.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Retrieve.id.set -> void
+~Hl7.Cql.Elm.Retrieve.idProperty.get -> string
+~Hl7.Cql.Elm.Retrieve.idProperty.set -> void
+~Hl7.Cql.Elm.Retrieve.idSearch.get -> string
+~Hl7.Cql.Elm.Retrieve.idSearch.set -> void
+~Hl7.Cql.Elm.Retrieve.include.get -> Hl7.Cql.Elm.IncludeElement[]
+~Hl7.Cql.Elm.Retrieve.include.set -> void
+~Hl7.Cql.Elm.Retrieve.includedIn.get -> string
+~Hl7.Cql.Elm.Retrieve.includedIn.set -> void
+~Hl7.Cql.Elm.Retrieve.otherFilter.get -> Hl7.Cql.Elm.OtherFilterElement[]
+~Hl7.Cql.Elm.Retrieve.otherFilter.set -> void
+~Hl7.Cql.Elm.Retrieve.templateId.get -> string
+~Hl7.Cql.Elm.Retrieve.templateId.set -> void
+~Hl7.Cql.Elm.Retrieve.valueSetProperty.get -> string
+~Hl7.Cql.Elm.Retrieve.valueSetProperty.set -> void
+~Hl7.Cql.Elm.ReturnClause.expression.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.ReturnClause.expression.set -> void
+~Hl7.Cql.Elm.Round.operand.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Round.operand.set -> void
+~Hl7.Cql.Elm.Round.precision.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Round.precision.set -> void
+~Hl7.Cql.Elm.Slice.endIndex.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Slice.endIndex.set -> void
+~Hl7.Cql.Elm.Slice.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Slice.source.set -> void
+~Hl7.Cql.Elm.Slice.startIndex.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Slice.startIndex.set -> void
+~Hl7.Cql.Elm.Sort.by.get -> Hl7.Cql.Elm.SortByItem[]
+~Hl7.Cql.Elm.Sort.by.set -> void
+~Hl7.Cql.Elm.Sort.source.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Sort.source.set -> void
+~Hl7.Cql.Elm.SortClause.by.get -> Hl7.Cql.Elm.SortByItem[]
+~Hl7.Cql.Elm.SortClause.by.set -> void
+~Hl7.Cql.Elm.Split.separator.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Split.separator.set -> void
+~Hl7.Cql.Elm.Split.stringToSplit.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Split.stringToSplit.set -> void
+~Hl7.Cql.Elm.SplitOnMatches.separatorPattern.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.SplitOnMatches.separatorPattern.set -> void
+~Hl7.Cql.Elm.SplitOnMatches.stringToSplit.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.SplitOnMatches.stringToSplit.set -> void
+~Hl7.Cql.Elm.Substring.length.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Substring.length.set -> void
+~Hl7.Cql.Elm.Substring.startIndex.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Substring.startIndex.set -> void
+~Hl7.Cql.Elm.Substring.stringToSub.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Substring.stringToSub.set -> void
+~Hl7.Cql.Elm.Tag.name.get -> string
+~Hl7.Cql.Elm.Tag.name.set -> void
+~Hl7.Cql.Elm.Tag.value.get -> string
+~Hl7.Cql.Elm.Tag.value.set -> void
+~Hl7.Cql.Elm.TernaryExpression.operand.get -> Hl7.Cql.Elm.Expression[]
+~Hl7.Cql.Elm.TernaryExpression.operand.set -> void
+~Hl7.Cql.Elm.Time.hour.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Time.hour.set -> void
+~Hl7.Cql.Elm.Time.millisecond.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Time.millisecond.set -> void
+~Hl7.Cql.Elm.Time.minute.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Time.minute.set -> void
+~Hl7.Cql.Elm.Time.second.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.Time.second.set -> void
+~Hl7.Cql.Elm.Total.scope.get -> string
+~Hl7.Cql.Elm.Total.scope.set -> void
+~Hl7.Cql.Elm.Tuple.element.get -> Hl7.Cql.Elm.TupleElement[]
+~Hl7.Cql.Elm.Tuple.element.set -> void
+~Hl7.Cql.Elm.TupleElement.name.get -> string
+~Hl7.Cql.Elm.TupleElement.name.set -> void
+~Hl7.Cql.Elm.TupleElement.value.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.TupleElement.value.set -> void
+~Hl7.Cql.Elm.TupleElementDefinition.elementType.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.TupleElementDefinition.elementType.set -> void
+~Hl7.Cql.Elm.TupleElementDefinition.name.get -> string
+~Hl7.Cql.Elm.TupleElementDefinition.name.set -> void
+~Hl7.Cql.Elm.TupleElementDefinition.type.get -> Hl7.Cql.Elm.TypeSpecifier
+~Hl7.Cql.Elm.TupleElementDefinition.type.set -> void
+~Hl7.Cql.Elm.TupleTypeSpecifier.element.get -> Hl7.Cql.Elm.TupleElementDefinition[]
+~Hl7.Cql.Elm.TupleTypeSpecifier.element.set -> void
+~Hl7.Cql.Elm.UnaryExpression.operand.get -> Hl7.Cql.Elm.Expression
+~Hl7.Cql.Elm.UnaryExpression.operand.set -> void
+~Hl7.Cql.Elm.UsingDef.localIdentifier.get -> string
+~Hl7.Cql.Elm.UsingDef.localIdentifier.set -> void
+~Hl7.Cql.Elm.UsingDef.uri.get -> string
+~Hl7.Cql.Elm.UsingDef.uri.set -> void
+~Hl7.Cql.Elm.UsingDef.version.get -> string
+~Hl7.Cql.Elm.UsingDef.version.set -> void
+~Hl7.Cql.Elm.ValueSetDef.codeSystem.get -> Hl7.Cql.Elm.CodeSystemRef[]
+~Hl7.Cql.Elm.ValueSetDef.codeSystem.set -> void
+~Hl7.Cql.Elm.ValueSetDef.id.get -> string
+~Hl7.Cql.Elm.ValueSetDef.id.set -> void
+~Hl7.Cql.Elm.ValueSetDef.name.get -> string
+~Hl7.Cql.Elm.ValueSetDef.name.set -> void
+~Hl7.Cql.Elm.ValueSetDef.version.get -> string
+~Hl7.Cql.Elm.ValueSetDef.version.set -> void
+~Hl7.Cql.Elm.ValueSetRef.libraryName.get -> string
+~Hl7.Cql.Elm.ValueSetRef.libraryName.set -> void
+~Hl7.Cql.Elm.ValueSetRef.name.get -> string
+~Hl7.Cql.Elm.ValueSetRef.name.set -> void
+~Hl7.Cql.Elm.VersionedIdentifier.id.get -> string
+~Hl7.Cql.Elm.VersionedIdentifier.id.set -> void
+~Hl7.Cql.Elm.VersionedIdentifier.system.get -> string
+~Hl7.Cql.Elm.VersionedIdentifier.system.set -> void
+~Hl7.Cql.Elm.VersionedIdentifier.version.get -> string
+~Hl7.Cql.Elm.VersionedIdentifier.version.set -> void

@@ -73,7 +73,7 @@ namespace Hl7.Cql.Graph
 
     }
 
-    public class ExecutedPathRecordCollection
+    internal class ExecutedPathRecordCollection
     {
         public string RecordType { get; set; } = string.Empty;
 
@@ -94,7 +94,7 @@ namespace Hl7.Cql.Graph
 
     }
 
-    public class ExecutedPathRecord : ICloneable
+    internal class ExecutedPathRecord : ICloneable
     {
         public string RecordType { get; set; } = string.Empty;
         public IDictionary<string, object?> Variables { get; } = new Dictionary<string, object?>(StringComparer.OrdinalIgnoreCase);

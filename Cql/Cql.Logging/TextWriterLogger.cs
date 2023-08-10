@@ -13,7 +13,7 @@ using System.Text;
 
 namespace Hl7.Cql.Logging
 {
-    public class TextWriterLogger : ICqlLogger
+    internal class TextWriterLogger : ICqlLogger
     {
         public TextWriterLogger(Stream output)
         {

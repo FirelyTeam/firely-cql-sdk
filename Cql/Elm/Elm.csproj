@@ -13,14 +13,15 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="System.Collections.Concurrent" Version="4.3.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Graph\Graph.csproj" />
-		<InternalsVisibleTo Include="CoreTests"/>
-		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
-		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
-		<InternalsVisibleTo Include="PackagerCLI"/>
+		<ProjectReference Include="..\Graph\Graph.csproj" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)"/>
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)"/>
+		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)"/>
 	</ItemGroup>
 
 </Project>

@@ -117,7 +117,7 @@ namespace Hl7.Cql.Logging
         }
     }
 
-    public enum RangeComparisonResult
+    internal enum RangeComparisonResult
     {
         Before,
         Contains,

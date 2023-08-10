@@ -246,7 +246,7 @@ namespace Hl7.Cql.Packaging
         }
     }
 
-    public class TypeEntry
+    internal class TypeEntry
     {
         public TypeEntry(FHIRAllTypes fhirType, CqlPrimitiveType cqlType, TypeEntry? elementType = null)
         {

@@ -26,7 +26,7 @@ using System.Text;
 
 namespace Hl7.Cql.Compiler
 {
-    public class AssemblyCompiler
+    internal class AssemblyCompiler
     {
         internal AssemblyCompiler(TypeResolver typeResolver,
             TypeManager? typeManager = null,

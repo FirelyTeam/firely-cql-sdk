@@ -1,0 +1,326 @@
+﻿#nullable enable
+Hl7.Cql.Model.BindingInfo
+Hl7.Cql.Model.BindingInfo.BindingInfo() -> void
+Hl7.Cql.Model.BindingInfo.strength.get -> Hl7.Cql.Model.BindingStrength
+Hl7.Cql.Model.BindingInfo.strength.set -> void
+Hl7.Cql.Model.BindingStrength
+Hl7.Cql.Model.BindingStrength.Example = 3 -> Hl7.Cql.Model.BindingStrength
+Hl7.Cql.Model.BindingStrength.Extensible = 1 -> Hl7.Cql.Model.BindingStrength
+Hl7.Cql.Model.BindingStrength.Preferred = 2 -> Hl7.Cql.Model.BindingStrength
+Hl7.Cql.Model.BindingStrength.Required = 0 -> Hl7.Cql.Model.BindingStrength
+Hl7.Cql.Model.BoundParameterTypeSpecifier
+Hl7.Cql.Model.BoundParameterTypeSpecifier.BoundParameterTypeSpecifier() -> void
+Hl7.Cql.Model.ChoiceTypeInfo
+Hl7.Cql.Model.ChoiceTypeInfo.ChoiceTypeInfo() -> void
+Hl7.Cql.Model.ChoiceTypeSpecifier
+Hl7.Cql.Model.ChoiceTypeSpecifier.ChoiceTypeSpecifier() -> void
+Hl7.Cql.Model.ClassInfo
+Hl7.Cql.Model.ClassInfo.ClassInfo() -> void
+Hl7.Cql.Model.ClassInfo.retrievable.get -> bool
+Hl7.Cql.Model.ClassInfo.retrievable.set -> void
+Hl7.Cql.Model.ClassInfoElement
+Hl7.Cql.Model.ClassInfoElement.ClassInfoElement() -> void
+Hl7.Cql.Model.ClassInfoElement.min.get -> int
+Hl7.Cql.Model.ClassInfoElement.min.set -> void
+Hl7.Cql.Model.ClassInfoElement.minSpecified.get -> bool
+Hl7.Cql.Model.ClassInfoElement.minSpecified.set -> void
+Hl7.Cql.Model.ClassInfoElement.mustSupport.get -> bool
+Hl7.Cql.Model.ClassInfoElement.mustSupport.set -> void
+Hl7.Cql.Model.ClassInfoElement.mustSupportSpecified.get -> bool
+Hl7.Cql.Model.ClassInfoElement.mustSupportSpecified.set -> void
+Hl7.Cql.Model.ClassInfoElement.oneBased.get -> bool
+Hl7.Cql.Model.ClassInfoElement.oneBased.set -> void
+Hl7.Cql.Model.ClassInfoElement.oneBasedSpecified.get -> bool
+Hl7.Cql.Model.ClassInfoElement.oneBasedSpecified.set -> void
+Hl7.Cql.Model.ClassInfoElement.prohibited.get -> bool
+Hl7.Cql.Model.ClassInfoElement.prohibited.set -> void
+Hl7.Cql.Model.ClassInfoElement.prohibitedSpecified.get -> bool
+Hl7.Cql.Model.ClassInfoElement.prohibitedSpecified.set -> void
+Hl7.Cql.Model.ConstraintInfo
+Hl7.Cql.Model.ConstraintInfo.ConstraintInfo() -> void
+Hl7.Cql.Model.ContextInfo
+Hl7.Cql.Model.ContextInfo.ContextInfo() -> void
+Hl7.Cql.Model.ConversionInfo
+Hl7.Cql.Model.ConversionInfo.ConversionInfo() -> void
+Hl7.Cql.Model.ExpressionInfo
+Hl7.Cql.Model.ExpressionInfo.ExpressionInfo() -> void
+Hl7.Cql.Model.IntervalTypeInfo
+Hl7.Cql.Model.IntervalTypeInfo.IntervalTypeInfo() -> void
+Hl7.Cql.Model.IntervalTypeSpecifier
+Hl7.Cql.Model.IntervalTypeSpecifier.IntervalTypeSpecifier() -> void
+Hl7.Cql.Model.ListTypeInfo
+Hl7.Cql.Model.ListTypeInfo.ListTypeInfo() -> void
+Hl7.Cql.Model.ListTypeSpecifier
+Hl7.Cql.Model.ListTypeSpecifier.ListTypeSpecifier() -> void
+Hl7.Cql.Model.ModelInfo
+Hl7.Cql.Model.ModelInfo.caseSensitive.get -> bool
+Hl7.Cql.Model.ModelInfo.caseSensitive.set -> void
+Hl7.Cql.Model.ModelInfo.caseSensitiveSpecified.get -> bool
+Hl7.Cql.Model.ModelInfo.caseSensitiveSpecified.set -> void
+Hl7.Cql.Model.ModelInfo.ModelInfo() -> void
+Hl7.Cql.Model.ModelInfo.strictRetrieveTyping.get -> bool
+Hl7.Cql.Model.ModelInfo.strictRetrieveTyping.set -> void
+Hl7.Cql.Model.ModelInfo.strictRetrieveTypingSpecified.get -> bool
+Hl7.Cql.Model.ModelInfo.strictRetrieveTypingSpecified.set -> void
+Hl7.Cql.Model.ModelSpecifier
+Hl7.Cql.Model.ModelSpecifier.ModelSpecifier() -> void
+Hl7.Cql.Model.NamedTypeSpecifier
+Hl7.Cql.Model.NamedTypeSpecifier.NamedTypeSpecifier() -> void
+Hl7.Cql.Model.ParameterTypeSpecifier
+Hl7.Cql.Model.ParameterTypeSpecifier.ParameterTypeSpecifier() -> void
+Hl7.Cql.Model.ProfileInfo
+Hl7.Cql.Model.ProfileInfo.ProfileInfo() -> void
+Hl7.Cql.Model.RelationshipInfo
+Hl7.Cql.Model.RelationshipInfo.RelationshipInfo() -> void
+Hl7.Cql.Model.SearchInfo
+Hl7.Cql.Model.SearchInfo.SearchInfo() -> void
+Hl7.Cql.Model.SimpleTypeInfo
+Hl7.Cql.Model.SimpleTypeInfo.SimpleTypeInfo() -> void
+Hl7.Cql.Model.TupleTypeInfo
+Hl7.Cql.Model.TupleTypeInfo.TupleTypeInfo() -> void
+Hl7.Cql.Model.TupleTypeInfoElement
+Hl7.Cql.Model.TupleTypeInfoElement.oneBased.get -> bool
+Hl7.Cql.Model.TupleTypeInfoElement.oneBased.set -> void
+Hl7.Cql.Model.TupleTypeInfoElement.oneBasedSpecified.get -> bool
+Hl7.Cql.Model.TupleTypeInfoElement.oneBasedSpecified.set -> void
+Hl7.Cql.Model.TupleTypeInfoElement.prohibited.get -> bool
+Hl7.Cql.Model.TupleTypeInfoElement.prohibited.set -> void
+Hl7.Cql.Model.TupleTypeInfoElement.prohibitedSpecified.get -> bool
+Hl7.Cql.Model.TupleTypeInfoElement.prohibitedSpecified.set -> void
+Hl7.Cql.Model.TupleTypeInfoElement.TupleTypeInfoElement() -> void
+Hl7.Cql.Model.TupleTypeSpecifier
+Hl7.Cql.Model.TupleTypeSpecifier.TupleTypeSpecifier() -> void
+Hl7.Cql.Model.TupleTypeSpecifierElement
+Hl7.Cql.Model.TupleTypeSpecifierElement.TupleTypeSpecifierElement() -> void
+Hl7.Cql.Model.TypeInfo
+Hl7.Cql.Model.TypeInfo.TypeInfo() -> void
+Hl7.Cql.Model.TypeParameterInfo
+Hl7.Cql.Model.TypeParameterInfo.TypeParameterInfo() -> void
+Hl7.Cql.Model.TypeSpecifier
+Hl7.Cql.Model.TypeSpecifier.TypeSpecifier() -> void
+~Hl7.Cql.Model.BindingInfo.description.get -> string
+~Hl7.Cql.Model.BindingInfo.description.set -> void
+~Hl7.Cql.Model.BindingInfo.name.get -> string
+~Hl7.Cql.Model.BindingInfo.name.set -> void
+~Hl7.Cql.Model.BindingInfo.valueSet.get -> string
+~Hl7.Cql.Model.BindingInfo.valueSet.set -> void
+~Hl7.Cql.Model.BoundParameterTypeSpecifier.boundType.get -> string
+~Hl7.Cql.Model.BoundParameterTypeSpecifier.boundType.set -> void
+~Hl7.Cql.Model.BoundParameterTypeSpecifier.elementTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.BoundParameterTypeSpecifier.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.BoundParameterTypeSpecifier.parameterName.get -> string
+~Hl7.Cql.Model.BoundParameterTypeSpecifier.parameterName.set -> void
+~Hl7.Cql.Model.ChoiceTypeInfo.choice.get -> Hl7.Cql.Model.TypeSpecifier[]
+~Hl7.Cql.Model.ChoiceTypeInfo.choice.set -> void
+~Hl7.Cql.Model.ChoiceTypeInfo.type.get -> Hl7.Cql.Model.TypeSpecifier[]
+~Hl7.Cql.Model.ChoiceTypeInfo.type.set -> void
+~Hl7.Cql.Model.ChoiceTypeSpecifier.choice.get -> Hl7.Cql.Model.TypeSpecifier[]
+~Hl7.Cql.Model.ChoiceTypeSpecifier.choice.set -> void
+~Hl7.Cql.Model.ClassInfo.comment.get -> string
+~Hl7.Cql.Model.ClassInfo.comment.set -> void
+~Hl7.Cql.Model.ClassInfo.constraint.get -> Hl7.Cql.Model.ConstraintInfo[]
+~Hl7.Cql.Model.ClassInfo.constraint.set -> void
+~Hl7.Cql.Model.ClassInfo.contextRelationship.get -> Hl7.Cql.Model.RelationshipInfo[]
+~Hl7.Cql.Model.ClassInfo.contextRelationship.set -> void
+~Hl7.Cql.Model.ClassInfo.definition.get -> string
+~Hl7.Cql.Model.ClassInfo.definition.set -> void
+~Hl7.Cql.Model.ClassInfo.description.get -> string
+~Hl7.Cql.Model.ClassInfo.description.set -> void
+~Hl7.Cql.Model.ClassInfo.element.get -> Hl7.Cql.Model.ClassInfoElement[]
+~Hl7.Cql.Model.ClassInfo.element.set -> void
+~Hl7.Cql.Model.ClassInfo.identifier.get -> string
+~Hl7.Cql.Model.ClassInfo.identifier.set -> void
+~Hl7.Cql.Model.ClassInfo.inferenceExpression.get -> Hl7.Cql.Model.ExpressionInfo[]
+~Hl7.Cql.Model.ClassInfo.inferenceExpression.set -> void
+~Hl7.Cql.Model.ClassInfo.label.get -> string
+~Hl7.Cql.Model.ClassInfo.label.set -> void
+~Hl7.Cql.Model.ClassInfo.name.get -> string
+~Hl7.Cql.Model.ClassInfo.name.set -> void
+~Hl7.Cql.Model.ClassInfo.namespace.get -> string
+~Hl7.Cql.Model.ClassInfo.namespace.set -> void
+~Hl7.Cql.Model.ClassInfo.parameter.get -> Hl7.Cql.Model.TypeParameterInfo[]
+~Hl7.Cql.Model.ClassInfo.parameter.set -> void
+~Hl7.Cql.Model.ClassInfo.primaryCodePath.get -> string
+~Hl7.Cql.Model.ClassInfo.primaryCodePath.set -> void
+~Hl7.Cql.Model.ClassInfo.primaryValueSetPath.get -> string
+~Hl7.Cql.Model.ClassInfo.primaryValueSetPath.set -> void
+~Hl7.Cql.Model.ClassInfo.search.get -> Hl7.Cql.Model.SearchInfo[]
+~Hl7.Cql.Model.ClassInfo.search.set -> void
+~Hl7.Cql.Model.ClassInfo.target.get -> string
+~Hl7.Cql.Model.ClassInfo.target.set -> void
+~Hl7.Cql.Model.ClassInfo.targetContextRelationship.get -> Hl7.Cql.Model.RelationshipInfo[]
+~Hl7.Cql.Model.ClassInfo.targetContextRelationship.set -> void
+~Hl7.Cql.Model.ClassInfoElement.binding.get -> Hl7.Cql.Model.BindingInfo
+~Hl7.Cql.Model.ClassInfoElement.binding.set -> void
+~Hl7.Cql.Model.ClassInfoElement.comment.get -> string
+~Hl7.Cql.Model.ClassInfoElement.comment.set -> void
+~Hl7.Cql.Model.ClassInfoElement.constraint.get -> Hl7.Cql.Model.ConstraintInfo[]
+~Hl7.Cql.Model.ClassInfoElement.constraint.set -> void
+~Hl7.Cql.Model.ClassInfoElement.definition.get -> string
+~Hl7.Cql.Model.ClassInfoElement.definition.set -> void
+~Hl7.Cql.Model.ClassInfoElement.description.get -> string
+~Hl7.Cql.Model.ClassInfoElement.description.set -> void
+~Hl7.Cql.Model.ClassInfoElement.elementType.get -> string
+~Hl7.Cql.Model.ClassInfoElement.elementType.set -> void
+~Hl7.Cql.Model.ClassInfoElement.elementTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.ClassInfoElement.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.ClassInfoElement.label.get -> string
+~Hl7.Cql.Model.ClassInfoElement.label.set -> void
+~Hl7.Cql.Model.ClassInfoElement.max.get -> string
+~Hl7.Cql.Model.ClassInfoElement.max.set -> void
+~Hl7.Cql.Model.ClassInfoElement.name.get -> string
+~Hl7.Cql.Model.ClassInfoElement.name.set -> void
+~Hl7.Cql.Model.ClassInfoElement.target.get -> string
+~Hl7.Cql.Model.ClassInfoElement.target.set -> void
+~Hl7.Cql.Model.ClassInfoElement.type.get -> string
+~Hl7.Cql.Model.ClassInfoElement.type.set -> void
+~Hl7.Cql.Model.ClassInfoElement.typeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.ClassInfoElement.typeSpecifier.set -> void
+~Hl7.Cql.Model.ConstraintInfo.description.get -> string
+~Hl7.Cql.Model.ConstraintInfo.description.set -> void
+~Hl7.Cql.Model.ConstraintInfo.expression.get -> Hl7.Cql.Model.ExpressionInfo[]
+~Hl7.Cql.Model.ConstraintInfo.expression.set -> void
+~Hl7.Cql.Model.ConstraintInfo.message.get -> string
+~Hl7.Cql.Model.ConstraintInfo.message.set -> void
+~Hl7.Cql.Model.ConstraintInfo.name.get -> string
+~Hl7.Cql.Model.ConstraintInfo.name.set -> void
+~Hl7.Cql.Model.ConstraintInfo.severity.get -> string
+~Hl7.Cql.Model.ConstraintInfo.severity.set -> void
+~Hl7.Cql.Model.ContextInfo.birthDateElement.get -> string
+~Hl7.Cql.Model.ContextInfo.birthDateElement.set -> void
+~Hl7.Cql.Model.ContextInfo.contextType.get -> Hl7.Cql.Model.NamedTypeSpecifier
+~Hl7.Cql.Model.ContextInfo.contextType.set -> void
+~Hl7.Cql.Model.ContextInfo.keyElement.get -> string
+~Hl7.Cql.Model.ContextInfo.keyElement.set -> void
+~Hl7.Cql.Model.ContextInfo.name.get -> string
+~Hl7.Cql.Model.ContextInfo.name.set -> void
+~Hl7.Cql.Model.ConversionInfo.fromType.get -> string
+~Hl7.Cql.Model.ConversionInfo.fromType.set -> void
+~Hl7.Cql.Model.ConversionInfo.fromTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.ConversionInfo.fromTypeSpecifier.set -> void
+~Hl7.Cql.Model.ConversionInfo.functionName.get -> string
+~Hl7.Cql.Model.ConversionInfo.functionName.set -> void
+~Hl7.Cql.Model.ConversionInfo.toType.get -> string
+~Hl7.Cql.Model.ConversionInfo.toType.set -> void
+~Hl7.Cql.Model.ConversionInfo.toTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.ConversionInfo.toTypeSpecifier.set -> void
+~Hl7.Cql.Model.ExpressionInfo.expression.get -> string
+~Hl7.Cql.Model.ExpressionInfo.expression.set -> void
+~Hl7.Cql.Model.ExpressionInfo.language.get -> string
+~Hl7.Cql.Model.ExpressionInfo.language.set -> void
+~Hl7.Cql.Model.IntervalTypeInfo.pointType.get -> string
+~Hl7.Cql.Model.IntervalTypeInfo.pointType.set -> void
+~Hl7.Cql.Model.IntervalTypeInfo.pointTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.IntervalTypeInfo.pointTypeSpecifier.set -> void
+~Hl7.Cql.Model.IntervalTypeSpecifier.pointType.get -> string
+~Hl7.Cql.Model.IntervalTypeSpecifier.pointType.set -> void
+~Hl7.Cql.Model.IntervalTypeSpecifier.pointTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.IntervalTypeSpecifier.pointTypeSpecifier.set -> void
+~Hl7.Cql.Model.ListTypeInfo.elementType.get -> string
+~Hl7.Cql.Model.ListTypeInfo.elementType.set -> void
+~Hl7.Cql.Model.ListTypeInfo.elementTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.ListTypeInfo.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.ListTypeSpecifier.elementType.get -> string
+~Hl7.Cql.Model.ListTypeSpecifier.elementType.set -> void
+~Hl7.Cql.Model.ListTypeSpecifier.elementTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.ListTypeSpecifier.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.ModelInfo.contextInfo.get -> Hl7.Cql.Model.ContextInfo[]
+~Hl7.Cql.Model.ModelInfo.contextInfo.set -> void
+~Hl7.Cql.Model.ModelInfo.conversionInfo.get -> Hl7.Cql.Model.ConversionInfo[]
+~Hl7.Cql.Model.ModelInfo.conversionInfo.set -> void
+~Hl7.Cql.Model.ModelInfo.defaultContext.get -> string
+~Hl7.Cql.Model.ModelInfo.defaultContext.set -> void
+~Hl7.Cql.Model.ModelInfo.name.get -> string
+~Hl7.Cql.Model.ModelInfo.name.set -> void
+~Hl7.Cql.Model.ModelInfo.patientBirthDatePropertyName.get -> string
+~Hl7.Cql.Model.ModelInfo.patientBirthDatePropertyName.set -> void
+~Hl7.Cql.Model.ModelInfo.patientClassIdentifier.get -> string
+~Hl7.Cql.Model.ModelInfo.patientClassIdentifier.set -> void
+~Hl7.Cql.Model.ModelInfo.patientClassName.get -> string
+~Hl7.Cql.Model.ModelInfo.patientClassName.set -> void
+~Hl7.Cql.Model.ModelInfo.requiredModelInfo.get -> Hl7.Cql.Model.ModelSpecifier[]
+~Hl7.Cql.Model.ModelInfo.requiredModelInfo.set -> void
+~Hl7.Cql.Model.ModelInfo.schemaLocation.get -> string
+~Hl7.Cql.Model.ModelInfo.schemaLocation.set -> void
+~Hl7.Cql.Model.ModelInfo.targetQualifier.get -> string
+~Hl7.Cql.Model.ModelInfo.targetQualifier.set -> void
+~Hl7.Cql.Model.ModelInfo.targetUrl.get -> string
+~Hl7.Cql.Model.ModelInfo.targetUrl.set -> void
+~Hl7.Cql.Model.ModelInfo.targetVersion.get -> string
+~Hl7.Cql.Model.ModelInfo.targetVersion.set -> void
+~Hl7.Cql.Model.ModelInfo.typeInfo.get -> Hl7.Cql.Model.TypeInfo[]
+~Hl7.Cql.Model.ModelInfo.typeInfo.set -> void
+~Hl7.Cql.Model.ModelInfo.url.get -> string
+~Hl7.Cql.Model.ModelInfo.url.set -> void
+~Hl7.Cql.Model.ModelInfo.version.get -> string
+~Hl7.Cql.Model.ModelInfo.version.set -> void
+~Hl7.Cql.Model.ModelSpecifier.name.get -> string
+~Hl7.Cql.Model.ModelSpecifier.name.set -> void
+~Hl7.Cql.Model.ModelSpecifier.url.get -> string
+~Hl7.Cql.Model.ModelSpecifier.url.set -> void
+~Hl7.Cql.Model.ModelSpecifier.version.get -> string
+~Hl7.Cql.Model.ModelSpecifier.version.set -> void
+~Hl7.Cql.Model.NamedTypeSpecifier.modelName.get -> string
+~Hl7.Cql.Model.NamedTypeSpecifier.modelName.set -> void
+~Hl7.Cql.Model.NamedTypeSpecifier.name.get -> string
+~Hl7.Cql.Model.NamedTypeSpecifier.name.set -> void
+~Hl7.Cql.Model.NamedTypeSpecifier.namespace.get -> string
+~Hl7.Cql.Model.NamedTypeSpecifier.namespace.set -> void
+~Hl7.Cql.Model.ParameterTypeSpecifier.parameterName.get -> string
+~Hl7.Cql.Model.ParameterTypeSpecifier.parameterName.set -> void
+~Hl7.Cql.Model.RelationshipInfo.context.get -> string
+~Hl7.Cql.Model.RelationshipInfo.context.set -> void
+~Hl7.Cql.Model.RelationshipInfo.relatedKeyElement.get -> string
+~Hl7.Cql.Model.RelationshipInfo.relatedKeyElement.set -> void
+~Hl7.Cql.Model.SearchInfo.comment.get -> string
+~Hl7.Cql.Model.SearchInfo.comment.set -> void
+~Hl7.Cql.Model.SearchInfo.definition.get -> string
+~Hl7.Cql.Model.SearchInfo.definition.set -> void
+~Hl7.Cql.Model.SearchInfo.description.get -> string
+~Hl7.Cql.Model.SearchInfo.description.set -> void
+~Hl7.Cql.Model.SearchInfo.label.get -> string
+~Hl7.Cql.Model.SearchInfo.label.set -> void
+~Hl7.Cql.Model.SearchInfo.name.get -> string
+~Hl7.Cql.Model.SearchInfo.name.set -> void
+~Hl7.Cql.Model.SearchInfo.path.get -> string
+~Hl7.Cql.Model.SearchInfo.path.set -> void
+~Hl7.Cql.Model.SearchInfo.type.get -> string
+~Hl7.Cql.Model.SearchInfo.type.set -> void
+~Hl7.Cql.Model.SearchInfo.typeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.SearchInfo.typeSpecifier.set -> void
+~Hl7.Cql.Model.SimpleTypeInfo.name.get -> string
+~Hl7.Cql.Model.SimpleTypeInfo.name.set -> void
+~Hl7.Cql.Model.SimpleTypeInfo.namespace.get -> string
+~Hl7.Cql.Model.SimpleTypeInfo.namespace.set -> void
+~Hl7.Cql.Model.SimpleTypeInfo.target.get -> string
+~Hl7.Cql.Model.SimpleTypeInfo.target.set -> void
+~Hl7.Cql.Model.TupleTypeInfo.element.get -> Hl7.Cql.Model.TupleTypeInfoElement[]
+~Hl7.Cql.Model.TupleTypeInfo.element.set -> void
+~Hl7.Cql.Model.TupleTypeInfoElement.elementType.get -> string
+~Hl7.Cql.Model.TupleTypeInfoElement.elementType.set -> void
+~Hl7.Cql.Model.TupleTypeInfoElement.elementTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.TupleTypeInfoElement.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.TupleTypeInfoElement.name.get -> string
+~Hl7.Cql.Model.TupleTypeInfoElement.name.set -> void
+~Hl7.Cql.Model.TupleTypeInfoElement.type.get -> string
+~Hl7.Cql.Model.TupleTypeInfoElement.type.set -> void
+~Hl7.Cql.Model.TupleTypeInfoElement.typeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.TupleTypeInfoElement.typeSpecifier.set -> void
+~Hl7.Cql.Model.TupleTypeSpecifier.element.get -> Hl7.Cql.Model.TupleTypeSpecifierElement[]
+~Hl7.Cql.Model.TupleTypeSpecifier.element.set -> void
+~Hl7.Cql.Model.TupleTypeSpecifierElement.elementType.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.TupleTypeSpecifierElement.elementType.set -> void
+~Hl7.Cql.Model.TupleTypeSpecifierElement.name.get -> string
+~Hl7.Cql.Model.TupleTypeSpecifierElement.name.set -> void
+~Hl7.Cql.Model.TypeInfo.baseType.get -> string
+~Hl7.Cql.Model.TypeInfo.baseType.set -> void
+~Hl7.Cql.Model.TypeInfo.baseTypeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.TypeInfo.baseTypeSpecifier.set -> void
+~Hl7.Cql.Model.TypeParameterInfo.constraint.get -> string
+~Hl7.Cql.Model.TypeParameterInfo.constraint.set -> void
+~Hl7.Cql.Model.TypeParameterInfo.constraintType.get -> string
+~Hl7.Cql.Model.TypeParameterInfo.constraintType.set -> void
+~Hl7.Cql.Model.TypeParameterInfo.name.get -> string
+~Hl7.Cql.Model.TypeParameterInfo.name.set -> void
+~Hl7.Cql.Model.TypeParameterInfo.typeSpecifier.get -> Hl7.Cql.Model.TypeSpecifier
+~Hl7.Cql.Model.TypeParameterInfo.typeSpecifier.set -> void

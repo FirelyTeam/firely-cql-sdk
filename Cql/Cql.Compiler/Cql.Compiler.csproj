@@ -20,11 +20,12 @@
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\ELM\ELM.csproj" />
-		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
-		<InternalsVisibleTo Include="PackagerCLI"/>
-		<InternalsVisibleTo Include="CoreTests"/>
-		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
-		<InternalsVisibleTo Include="Hl7.Cql"/>
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>

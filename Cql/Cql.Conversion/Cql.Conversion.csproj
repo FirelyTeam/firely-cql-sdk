@@ -11,14 +11,15 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-		<InternalsVisibleTo Include="Hl7.Cql.Operators"/>
-		<InternalsVisibleTo Include="Hl7.Cql.Compiler"/>
-		<InternalsVisibleTo Include="Hl7.Cql.Firely"/>
-		<InternalsVisibleTo Include="Hl7.Cql"/>
-		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET"/>
-		<InternalsVisibleTo Include="CoreTests"/>
-		<InternalsVisibleTo Include="Hl7.Cql.Packaging"/>
-		<InternalsVisibleTo Include="PackagerCLI"/>
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 </Project>
