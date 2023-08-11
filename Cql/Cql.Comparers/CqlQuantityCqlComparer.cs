@@ -7,8 +7,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Cql.Conversion;
 using Hl7.Cql.Primitives;
-using Hl7.Fhir.ElementModel.Types;
 using System;
 
 namespace Hl7.Cql.Comparers
@@ -43,10 +43,10 @@ namespace Hl7.Cql.Comparers
             else if (y == null)
                 return 1;
 
-            var unitCompare = UnitComparer.Compare(x.unit!, y.unit!, precision);
+            var unitCompare = UnitComparer.Compare(x.unit, y.unit, precision);
             if (unitCompare == 0 || x.unit == "1" || y.unit == "1")
             {
-                var valueComparison = ValueComparer.Compare(x.value!, y.value!, precision);
+                var valueComparison = ValueComparer.Compare(x.value, y.value, precision);
                 return valueComparison;
             }
             else
