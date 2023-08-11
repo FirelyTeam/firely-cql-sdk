@@ -1,13 +1,12 @@
 ﻿using Hl7.Cql.Firely;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 
 namespace CLI
 {
     internal class Program
     {
-        static int Main(string[] args)
+        public static int Main(string[] args)
         {
             var config = new ConfigurationBuilder()
                             .AddCommandLine(args)
@@ -39,24 +38,25 @@ namespace CLI
             {
                 var outFile = new FileInfo(oArg);
                 var fs = new FileStream(outFile.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
-                output = new StreamWriter(fs);            
+                output = new StreamWriter(fs);
             }
             else
             {
                 output = Console.Out;
                 disposeOutput = true;
             }
-        
-            if (disposeOutput && output != null) {
-                output.Dispose();
-            }
 
             LibraryRunner.Run(lArg, bundle, output);
+
+            if (disposeOutput && output != null)
+            {
+                output.Dispose();
+            }
 
             return 0;
         }
 
-        static int ShowHelp()
+        private static int ShowHelp()
         {
             Console.WriteLine();
             Console.WriteLine("Measures CLI example");

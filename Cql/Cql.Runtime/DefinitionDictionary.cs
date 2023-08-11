@@ -32,7 +32,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="libraryName">The name of the library.</param>
         /// <param name="definition">The name of the definition.</param>
         /// <returns>The value, if present.</returns>
-        /// <exception cref="KeyNotFoundException">If the library & definition pair is not found in the dictionary.</exception>
+        /// <exception cref="KeyNotFoundException">If the library &amp; definition pair is not found in the dictionary.</exception>
         public T this[string? libraryName, string definition]
         {
             get
@@ -56,7 +56,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="definition">The name of the definition.</param>
         /// <param name="signature">The signature of the definition.</param>
         /// <returns>The value, if present.</returns>
-        /// <exception cref="KeyNotFoundException">If the library, definition, & signature is not found in the dictionary.</exception>
+        /// <exception cref="KeyNotFoundException">If the library, definition, &amp; signature is not found in the dictionary.</exception>
         public T this[string? libraryName, string definition, params Type[] signature]
         {
             get
@@ -85,7 +85,7 @@ namespace Hl7.Cql.Runtime
         /// Returns <see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definition"/> is present in this dictionary.
         /// </summary>
         /// <param name="libraryName">The name of the library.</param>
-        /// <param name="libraryName">The name of the definition.</param>
+        /// <param name="definition">The name of the definition.</param>
         /// <returns><see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definition"/> is present in this dictionary.</returns>
         public bool ContainsKey(string? libraryName, string definition)
         {
@@ -101,7 +101,7 @@ namespace Hl7.Cql.Runtime
         /// Returns <see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definition"/>, and <paramref name="signature"/> is present in this dictionary.
         /// </summary>
         /// <param name="libraryName">The name of the library.</param>
-        /// <param name="libraryName">The name of the definition.</param>
+        /// <param name="definition">The name of the definition.</param>
         /// <param name="signature">The signature of the definition.</param>
         /// <returns><see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definition"/>, and <paramref name="signature"/> is present in this dictionary.</returns>
         public bool ContainsKey(string? libraryName, string definition, Type[] signature)
@@ -127,7 +127,7 @@ namespace Hl7.Cql.Runtime
         /// Tries to get the value for the given library and definition.
         /// </summary>
         /// <param name="libraryName">The name of the library.</param>
-        /// <param name="libraryName">The name of the definition.</param>
+        /// <param name="definition">The name of the definition.</param>
         /// <param name="expression">The <see langword="out"/> parameter containing the result.</param>
         /// <returns><see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definition"/> is present in this dictionary.</returns>
         public bool TryGetValue(string? libraryName, string definition, out T? expression)
@@ -154,22 +154,22 @@ namespace Hl7.Cql.Runtime
         /// Tries to get the value for <see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definition"/>, and <paramref name="signature"/>.
         /// </summary>
         /// <param name="libraryName">The name of the library.</param>
-        /// <param name="libraryName">The name of the definition.</param>
+        /// <param name="definition">The name of the definition.</param>
         /// <param name="signature">The signature of the definition.</param>
         /// <param name="expression">The <see langword="out"/> parameter containing the result.</param>
         /// <returns><see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definition"/>, and <paramref name="signature"/> is present in this dictionary.</returns>
-        public bool TryGetValue(string? libraryName, string definition, Type[] signature, out T? t)
+        public bool TryGetValue(string? libraryName, string definition, Type[] signature, out T? expression)
         {
             libraryName ??= string.Empty;
             if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
             {
                 if (library.TryGetValue(definition, out var overloads))
                 {
-                    t = BestMatch(signature, overloads);
-                    return t != default;
+                    expression = BestMatch(signature, overloads);
+                    return expression != default;
                 }
             }
-            t = default;
+            expression = default;
             return false;
         }
 
@@ -342,6 +342,7 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         /// <param name="library">The library identifier in which <paramref name="definition"/> is defined.</param>
         /// <param name="definition">The definition name whose tags to retrieve.</param>
+        /// <param name="signature">The list of types to select the correct definition.</param>
         /// <param name="tags">The <see langword="out"/> parameter to hold the resulting lookup of tags and their values.</param>
         /// <returns><see langword="true"/> if the definiton has tags and thus <paramref name="tags"/> is not <see langword="null"/>; otherwise, <see langword="false"/>.</returns>
         public bool TryGetTags(string library, string definition, Type[] signature, out ILookup<string, string>? tags)
@@ -413,7 +414,7 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         /// <param name="parameterTypes">The type of the parameters being passed to the method</param>
         /// <param name="overloads">The signatures of overloads available</param>
-        /// <returns>The best match for <paramref name="parameterTypes"/>, or <langword cref="null"/> if no match exists</returns>
+        /// <returns>The best match for <paramref name="parameterTypes"/>, or <c>null</c> if no match exists</returns>
         internal T? BestMatch(Type[] parameterTypes, IEnumerable<(Type[] Signature, T T)> overloads)
         {
             var groups = (from overload in overloads
@@ -439,7 +440,7 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Calculates a score (lower is better) for matching <paramref name="parameterTypes"/> to the overload <paramref name="signature"/>.
         /// </summary>
-        /// <returns>0 for exact matches; greater than 0 for signatures that can be bound through polymorphism; and <langword cref="null"/> for incompatibility</returns>
+        /// <returns>0 for exact matches; greater than 0 for signatures that can be bound through polymorphism; and <c>null</c> for incompatibility</returns>
         internal int? Score(Type[] parameterTypes, Type[] signature)
         {
             int? distance = 0;

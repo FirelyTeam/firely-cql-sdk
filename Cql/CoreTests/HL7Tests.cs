@@ -10,6 +10,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Text.Json;
 
 namespace CoreTests
 {
@@ -50,7 +51,7 @@ namespace CoreTests
             var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
             var typeManager = new TypeManager(resolver);
 
-            var fhirHelpersPackage = ElmPackage.LoadFrom(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));            
+            var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));            
             var fhirHelpersBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
             var fhirHelpersLambdas = fhirHelpersBuilder.Build();
             LambdasByTestName.Lambdas.Merge(fhirHelpersLambdas);
@@ -61,7 +62,7 @@ namespace CoreTests
                 //if (file.Name == "CqlComparisonOperatorsTest.json"
                 //    || file.Name == "CqlConditionalOperatorsTest.json")
                 //    continue;
-                var elmPackage = ElmPackage.LoadFrom(file);
+                var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
                 var includes = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
                 var builder = new ExpressionBuilder(binding, typeManager, elmPackage, CreateLogger());
                 var lambdas = builder.Build();
@@ -92,7 +93,7 @@ namespace CoreTests
                 var elm = lib.SingleOrDefault(f => f.Extension == ".json");
                 if (elm != null)
                 {
-                    var package = ElmPackage.LoadFrom(elm);
+                    var package = Hl7.Cql.Elm.Library.LoadFromJson(elm);
                     var includes = package.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
                     MergeGraphInto(includes, buildOrder);
                 }

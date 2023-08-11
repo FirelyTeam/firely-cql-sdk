@@ -1,12 +1,21 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm.Expressions;
+using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
-        private Expression Collapse(elm.CollapseExpression e, ExpressionBuilderContext ctx)
+        private Expression Collapse(elm.Collapse e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand![0]!, ctx);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
@@ -15,21 +24,21 @@ namespace Hl7.Cql.Compiler
                 if (IsInterval(elementType, out var pointType))
                 {
                     var precision = Expression.Constant(null, typeof(string));
-                    if (e.operand.Length > 1 && e.operand[1] is elm.QuantityExpression quant)
+                    if (e.operand.Length > 1 && e.operand[1] is elm.Quantity quant)
                     {
                         precision = Expression.Constant(quant.unit, typeof(string));
                     }
-                    return Operators.Bind(CqlOperator.Collapse, ctx.RuntimeContextParameter, operand, precision);
+                    return OperatorBinding.Bind(CqlOperator.Collapse, ctx.RuntimeContextParameter, operand, precision);
                 }
             }
             throw new NotImplementedException();
         }
 
-        private Expression Contains(elm.ContainsExpression e, ExpressionBuilderContext ctx)
+        private Expression Contains(elm.Contains e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e!.operand![0]!, ctx);
             var right = TranslateExpression(e.operand[1]!, ctx);
-            var precision = Expression.Constant(e.precision, typeof(string));
+            var precision = Precision(e.precision, e.precisionSpecified);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
                 var elementType = TypeResolver.GetListElementType(left.Type, @throw: true)!;
@@ -41,45 +50,45 @@ namespace Hl7.Cql.Compiler
                     }
                     else throw new ArgumentException($"Cannot convert Contains target {TypeManager.PrettyTypeName(right.Type)} to {TypeManager.PrettyTypeName(elementType)}", nameof(e));
                 }
-                var call = Operators.Bind(CqlOperator.ListContains, ctx.RuntimeContextParameter, left, right);
+                var call = OperatorBinding.Bind(CqlOperator.ListContains, ctx.RuntimeContextParameter, left, right);
                 return call;
             }
             else if (IsInterval(left.Type, out var pointType))
             {
-                var call = Operators.Bind(CqlOperator.IntervalContains, ctx.RuntimeContextParameter, left, right, precision);
+                var call = OperatorBinding.Bind(CqlOperator.IntervalContains, ctx.RuntimeContextParameter, left, right, precision);
                 return call;
             }
             throw new NotImplementedException();
         }
 
-        private Expression End(elm.EndExpression e, ExpressionBuilderContext ctx) =>
+        private Expression End(elm.End e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.IntervalEnd, e, ctx);
 
-        private Expression? Ends(elm.EndsExpression e, ExpressionBuilderContext ctx)
+        private Expression? Ends(elm.Ends e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
-            var precision = Expression.Constant(e.precision, typeof(string));
+            var precision = Precision(e.precision, e.precisionSpecified);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.Ends, ctx.RuntimeContextParameter, left, right, precision);
+                    return OperatorBinding.Bind(CqlOperator.Ends, ctx.RuntimeContextParameter, left, right, precision);
 
                 }
             }
             throw new NotImplementedException();
         }
 
-        protected Expression Except(elm.ExceptExpression e, ExpressionBuilderContext ctx)
+        protected Expression Except(elm.Except e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type) && IsOrImplementsIEnumerableOfT(right.Type))
             {
-                return Operators.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter, left, right);
+                return OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter, left, right);
             }
             else if (IsInterval(left.Type, out var leftPointType))
             {
@@ -87,7 +96,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.IntervalExcept, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.IntervalExcept, ctx.RuntimeContextParameter, left, right);
 
                 }
                 else throw new NotImplementedException();
@@ -95,33 +104,33 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? Expand(elm.ExpandExpression e, ExpressionBuilderContext ctx)
+        protected Expression? Expand(elm.Expand e, ExpressionBuilderContext ctx)
         {
             var source = TranslateExpression(e!.operand![0]!, ctx);
             var quantity = TranslateExpression(e!.operand![1]!, ctx);
-            return Operators.Bind(CqlOperator.Expand, ctx.RuntimeContextParameter, source, quantity);
+            return OperatorBinding.Bind(CqlOperator.Expand, ctx.RuntimeContextParameter, source, quantity);
         }
 
-        protected Expression In(elm.InExpression e, ExpressionBuilderContext ctx)
+        protected Expression In(elm.In e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0]!, ctx);
             var right = TranslateExpression(e.operand![1]!, ctx);
             if (IsOrImplementsIEnumerableOfT(right.Type))
             {
-                return Operators.Bind(CqlOperator.InList, ctx.RuntimeContextParameter, left, right);
+                return OperatorBinding.Bind(CqlOperator.InList, ctx.RuntimeContextParameter, left, right);
             }
             else if (IsInterval(right.Type, out var rightElementType))
             {
-                var precision = Expression.Constant(e.precision, typeof(string));
+                var precision = Precision(e.precision, e.precisionSpecified);
 
-                return Operators.Bind(CqlOperator.InInterval, ctx.RuntimeContextParameter, left, right, precision);
+                return OperatorBinding.Bind(CqlOperator.InInterval, ctx.RuntimeContextParameter, left, right, precision);
 
             }
             else throw new NotImplementedException();
         }
 
 
-        protected Expression? Includes(elm.IncludesExpression e, ExpressionBuilderContext ctx)
+        protected Expression? Includes(elm.Includes e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -133,32 +142,32 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = TypeResolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, left, right);
                 }
                 else
                 {
                     if (leftElementType != right.Type)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListIncludesElement, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.ListIncludesElement, ctx.RuntimeContextParameter, left, right);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var pointType))
                 {
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.IntervalIncludesInterval, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.IntervalIncludesInterval, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else
                 {
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.IntervalIncludesElement, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.IntervalIncludesElement, ctx.RuntimeContextParameter, left, right, precision);
                 }
             }
             throw new NotImplementedException();
         }
 
-        protected Expression IncludedIn(elm.IncludedInExpression e, ExpressionBuilderContext ctx)
+        protected Expression IncludedIn(elm.IncludedIn e, ExpressionBuilderContext ctx)
         {
 
             var left = TranslateExpression(e.operand![0], ctx);
@@ -171,51 +180,51 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = TypeResolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, right, left);
+                    return OperatorBinding.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, right, left);
                 }
                 else
                 {
                     if (leftElementType != right.Type)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListIncludesElement, ctx.RuntimeContextParameter, right, left);
+                    return OperatorBinding.Bind(CqlOperator.ListIncludesElement, ctx.RuntimeContextParameter, right, left);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType) && IsInterval(right.Type, out var rightPointType))
             {
-                var precision = Expression.Constant(e.precision, typeof(string));
-                return Operators.Bind(CqlOperator.IntervalIncludesInterval, ctx.RuntimeContextParameter, right, left, precision);
+                var precision = Precision(e.precision, e.precisionSpecified);
+                return OperatorBinding.Bind(CqlOperator.IntervalIncludesInterval, ctx.RuntimeContextParameter, right, left, precision);
             }
             else if (IsInterval(right.Type, out var pointType))
             {
-                var precision = Expression.Constant(e.precision, typeof(string));
+                var precision = Precision(e.precision, e.precisionSpecified);
                 if (left.Type != pointType)
                     throw new InvalidOperationException();
-                return Operators.Bind(CqlOperator.IntervalIncludesElement, ctx.RuntimeContextParameter, right, left, precision);
+                return OperatorBinding.Bind(CqlOperator.IntervalIncludesElement, ctx.RuntimeContextParameter, right, left, precision);
 
             }
             throw new NotImplementedException();
         }
 
-        protected Expression Intersect(elm.IntersectExpression e, ExpressionBuilderContext ctx)
+        protected Expression Intersect(elm.Intersect e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0]!, ctx);
             var right = TranslateExpression(e.operand![1]!, ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                return Operators.Bind(CqlOperator.ListIntersect, ctx.RuntimeContextParameter, left, right);
+                return OperatorBinding.Bind(CqlOperator.ListIntersect, ctx.RuntimeContextParameter, left, right);
             }
             else if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
                 {
-                    return Operators.Bind(CqlOperator.IntervalIntersect, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.IntervalIntersect, ctx.RuntimeContextParameter, left, right);
                 }
                 else throw new NotImplementedException();
             }
             throw new NotImplementedException();
         }
 
-        protected Expression? Meets(elm.MeetsExpression e, ExpressionBuilderContext ctx)
+        protected Expression? Meets(elm.Meets e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -225,15 +234,15 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.Meets, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.Meets, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else throw new NotImplementedException();
             }
             throw new NotImplementedException();
         }
 
-        private Expression? MeetsAfter(elm.MeetsAfterExpression e, ExpressionBuilderContext ctx)
+        private Expression? MeetsAfter(elm.MeetsAfter e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -243,15 +252,15 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.MeetsAfter, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.MeetsAfter, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else throw new NotImplementedException();
             }
             throw new NotImplementedException();
         }
 
-        private Expression? MeetsBefore(elm.MeetsBeforeExpression e, ExpressionBuilderContext ctx)
+        private Expression? MeetsBefore(elm.MeetsBefore e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -262,15 +271,15 @@ namespace Hl7.Cql.Compiler
 
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.MeetsBefore, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.MeetsBefore, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else throw new NotImplementedException();
             }
             throw new NotImplementedException();
         }
 
-        protected Expression Overlaps(elm.OverlapsExpression e, ExpressionBuilderContext ctx)
+        protected Expression Overlaps(elm.Overlaps e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -280,15 +289,15 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.Overlaps, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.Overlaps, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else throw new NotImplementedException();
             }
             throw new NotImplementedException();
         }
 
-        private Expression OverlapsBefore(elm.OverlapsBeforeExpression e, ExpressionBuilderContext ctx)
+        private Expression OverlapsBefore(elm.OverlapsBefore e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -298,15 +307,15 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.OverlapsBefore, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.OverlapsBefore, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else throw new NotImplementedException();
             }
             throw new NotImplementedException();
         }
 
-        private Expression OverlapsAfter(elm.OverlapsAfterExpression e, ExpressionBuilderContext ctx)
+        private Expression OverlapsAfter(elm.OverlapsAfter e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -316,8 +325,8 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.OverlapsAfter, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.OverlapsAfter, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else throw new NotImplementedException();
             }
@@ -327,10 +336,10 @@ namespace Hl7.Cql.Compiler
 
 
 
-        protected Expression? PointFrom(elm.PointFromExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression? PointFrom(elm.PointFrom e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.PointFrom, e, ctx);
 
-        protected Expression? ProperIncludes(elm.ProperIncludesExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ProperIncludes(elm.ProperIncludes e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -338,8 +347,8 @@ namespace Hl7.Cql.Compiler
             {
                 if (IsInterval(right.Type, out var rightPointType))
                 {
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.IntervalProperlyIncludesInterval, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.IntervalProperlyIncludesInterval, ctx.RuntimeContextParameter, left, right, precision);
                 }
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
@@ -348,23 +357,23 @@ namespace Hl7.Cql.Compiler
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
                     var rightElementType = TypeResolver.GetListElementType(right.Type);
-                    return Operators.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
                 }
             }
             throw new NotImplementedException();
         }
 
 
-        protected Expression? ProperIncludedIn(elm.ProperIncludedInExpression pie, ExpressionBuilderContext ctx)
+        protected Expression? ProperIncludedIn(elm.ProperIncludedIn e, ExpressionBuilderContext ctx)
         {
-            var left = TranslateExpression(pie.operand![0], ctx);
-            var right = TranslateExpression(pie.operand![1], ctx);
+            var left = TranslateExpression(e.operand![0], ctx);
+            var right = TranslateExpression(e.operand![1], ctx);
             if (IsInterval(left.Type, out var leftPointType))
             {
                 if (IsInterval(right.Type, out var rightPointType))
                 {
-                    var precision = Expression.Constant(pie.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.IntervalProperlyIncludesInterval, ctx.RuntimeContextParameter, right, left, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.IntervalProperlyIncludesInterval, ctx.RuntimeContextParameter, right, left, precision);
                 }
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
@@ -375,29 +384,29 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = TypeResolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, right, left);
+                    return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, right, left);
                 }
             }
             throw new NotImplementedException();
         }
 
-        private Expression? ProperIn(elm.ProperInExpression e, ExpressionBuilderContext ctx)
+        private Expression? ProperIn(elm.ProperIn e, ExpressionBuilderContext ctx)
         {
             var element = TranslateExpression(e.operand![0], ctx);
             var intervalOrList = TranslateExpression(e.operand![1], ctx);
             if (IsInterval(intervalOrList.Type, out var pointType))
             {
-                var precision = Expression.Constant(e.precision, typeof(string));
-                return Operators.Bind(CqlOperator.IntervalProperlyIncludesElement, ctx.RuntimeContextParameter, intervalOrList, element, precision);
+                var precision = Precision(e.precision, e.precisionSpecified);
+                return OperatorBinding.Bind(CqlOperator.IntervalProperlyIncludesElement, ctx.RuntimeContextParameter, intervalOrList, element, precision);
             }
             else if (IsOrImplementsIEnumerableOfT(intervalOrList.Type))
             {
-                return Operators.Bind(CqlOperator.ListProperlyIncludesElement, ctx.RuntimeContextParameter, intervalOrList, element);
+                return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesElement, ctx.RuntimeContextParameter, intervalOrList, element);
             }
             throw new NotImplementedException();
         }
 
-        protected Expression? ProperContains(elm.ProperContainsExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ProperContains(elm.ProperContains e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -409,31 +418,31 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = TypeResolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
                 }
                 else
                 {
                     if (leftElementType != right.Type)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListProperlyIncludesElement, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesElement, ctx.RuntimeContextParameter, left, right);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType))
             {
                 if (leftPointType != right.Type)
                     throw new InvalidOperationException();
-                var precision = Expression.Constant(e.precision, typeof(string));
-                return Operators.Bind(CqlOperator.IntervalProperlyIncludesElement, ctx.RuntimeContextParameter, left, right, precision);
+                var precision = Precision(e.precision, e.precisionSpecified);
+                return OperatorBinding.Bind(CqlOperator.IntervalProperlyIncludesElement, ctx.RuntimeContextParameter, left, right, precision);
             }
             throw new NotImplementedException();
         }
 
 
-        protected Expression Start(elm.StartExpression start, ExpressionBuilderContext ctx) =>
+        protected Expression Start(elm.Start start, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.IntervalStart, start, ctx);
 
 
-        protected Expression? Starts(elm.StartsExpression e, ExpressionBuilderContext ctx)
+        protected Expression? Starts(elm.Starts e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -443,8 +452,8 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    var precision = Expression.Constant(e.precision, typeof(string));
-                    return Operators.Bind(CqlOperator.Starts, ctx.RuntimeContextParameter, left, right, precision);
+                    var precision = Precision(e.precision, e.precisionSpecified);
+                    return OperatorBinding.Bind(CqlOperator.Starts, ctx.RuntimeContextParameter, left, right, precision);
 
                 }
             }
@@ -452,7 +461,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Union(elm.UnionExpression e, ExpressionBuilderContext ctx)
+        protected Expression Union(elm.Union e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -464,7 +473,7 @@ namespace Hl7.Cql.Compiler
                     var rightElementType = TypeResolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.ListUnion, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.ListUnion, ctx.RuntimeContextParameter, left, right);
                 }
             }
             else if (IsInterval(left.Type, out var leftPointType))
@@ -473,13 +482,13 @@ namespace Hl7.Cql.Compiler
                 {
                     if (leftPointType != rightPointType)
                         throw new InvalidOperationException();
-                    return Operators.Bind(CqlOperator.IntervalUnion, ctx.RuntimeContextParameter, left, right);
+                    return OperatorBinding.Bind(CqlOperator.IntervalUnion, ctx.RuntimeContextParameter, left, right);
                 }
             }
             throw new NotImplementedException();
         }
 
-        protected Expression? Width(elm.WidthExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression? Width(elm.Width e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Width, e, ctx);
     }
 }

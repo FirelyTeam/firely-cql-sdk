@@ -1,4 +1,5 @@
-﻿/* 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -10,7 +11,6 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Elm.Expressions;
 using Hl7.Cql.Firely;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
@@ -21,7 +21,7 @@ using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Text;
-using ElmPackage = Hl7.Cql.Elm.ElmPackage;
+using elm = Hl7.Cql.Elm;
 using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
@@ -33,16 +33,16 @@ namespace Hl7.Cql.Packaging
             TypeConverter = typeConverter ?? FirelyTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
-        public IDictionary<string, ElmPackage> LoadPackages(DirectoryInfo elmDir)
+        public IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
         {
-            var dict = new ConcurrentDictionary<string, ElmPackage>();
+            var dict = new ConcurrentDictionary<string, elm.Library>();
             var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
             Parallel.ForEach(files, file =>
             {
-                var package = ElmPackage.LoadFrom(file);
-                if (package != null)
+                var library = elm.Library.LoadFromJson(file);
+                if (library?.NameAndVersion != null)
                 {
-                    dict.TryAdd(package.NameAndVersion, package);
+                    dict.TryAdd(library.NameAndVersion, library);
                 }
             });
             return dict;
@@ -58,16 +58,17 @@ namespace Hl7.Cql.Packaging
             ILogger<ExpressionBuilder> builderLogger,
             ILogger<CSharpSourceCodeWriter> writerLogger)
         {
-            var elmPackages = packageGraph.Nodes.Values
-                .Select(node => node.Properties?[ElmPackage.PackageNodeProperty] as ElmPackage)
+            var elmLibraries = packageGraph.Nodes.Values
+                .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
                 .Where(p => p is not null)
                 .Select(p => p!)
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();
-            foreach (var package in elmPackages)
+            foreach (var library in elmLibraries)
             {
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, package!, builderLogger);
+                builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger);
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
@@ -79,31 +80,33 @@ namespace Hl7.Cql.Packaging
 
             var navToLibraryStream = new Dictionary<string, Stream>();
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
-            var assemblies = compiler.Compile(elmPackages, builderLogger, writerLogger);
+            var assemblies = compiler.Compile(elmLibraries, builderLogger, writerLogger);
             var libraries = new Dictionary<string, Library>();
             var typeCrosswalk = new CqlCrosswalk(typeResolver);
-            foreach (var package in elmPackages)
+            foreach (var library in elmLibraries)
             {
-                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.NameAndVersion}.json"));
+                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
                 if (!elmFile.Exists)
-                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.library?.identifier?.id ?? string.Empty}.json"));
+                    elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
                 if (!elmFile.Exists)
-                    throw new InvalidOperationException($"Cannot find ELM file for {package.NameAndVersion}");
-                var cqlFiles = cqlDirectory.GetFiles($"{package.NameAndVersion}.cql", SearchOption.AllDirectories);
+                    throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion}");
+                var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion}.cql", SearchOption.AllDirectories);
                 if (cqlFiles.Length == 0)
                 {
-                    cqlFiles = cqlDirectory.GetFiles($"{package.library!.identifier!.id}.cql", SearchOption.AllDirectories);
+                    cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
                     if (cqlFiles.Length == 0)
-                        throw new InvalidOperationException($"{package.library!.identifier!.id}.cql");
+                        throw new InvalidOperationException($"{library.identifier!.id}.cql");
                 }
                 if (cqlFiles.Length > 1)
                     throw new InvalidOperationException($"More than 1 CQL file found.");
                 var cqlFile = cqlFiles[0];
-                if (!assemblies.TryGetValue(package.NameAndVersion, out var assembly))
-                    throw new InvalidOperationException($"No assembly for {package.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, package, builderLogger);
-                var library = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, package);
-                libraries.Add(package.NameAndVersion, library);
+                if (library.NameAndVersion is null)
+                    throw new InvalidOperationException("Library NameAndVersion should not be null.");
+                if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
+                    throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger);
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
+                libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
             var resources = new List<Resource>();
@@ -130,15 +133,15 @@ namespace Hl7.Cql.Packaging
                 resources.Add(tuplesCSharp);
             }
 
-            foreach (var package in elmPackages)
+            foreach (var library in elmLibraries)
             {
-                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{package.NameAndVersion}.json"));
-                foreach (var def in package.library?.statements?.def ?? Enumerable.Empty<Hl7.Cql.Elm.Expressions.DefinitionExpression>())
+                var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
+                foreach (var def in library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>())
                 {
                     if (def.annotation != null)
                     {
                         var tags = new List<Tag>();
-                        foreach (var a in def.annotation)
+                        foreach (var a in def.annotation.OfType<Elm.Annotation>())
                         {
                             if (a.t != null)
                             {
@@ -161,10 +164,10 @@ namespace Hl7.Cql.Packaging
                         {
                             var measure = new Measure();
                             measure.Name = measureAnnotation.value;
-                            measure.Id = package.library?.identifier?.id!;
-                            measure.Version = package.library?.identifier?.version!;
+                            measure.Id = library.identifier?.id!;
+                            measure.Version = library.identifier?.version!;
                             measure.Status = PublicationStatus.Active;
-                            measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
+                            measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond)
                                 .ToString();
                             measure.EffectivePeriod = new Period
                             {
@@ -173,7 +176,9 @@ namespace Hl7.Cql.Packaging
                             };
                             measure.Group = new List<Measure.GroupComponent>();
                             measure.Url = canon(measure)!;
-                            if (!libraries.TryGetValue(package.NameAndVersion, out var libForMeasure) || libForMeasure is null)
+                            if (library.NameAndVersion is null)
+                                throw new InvalidOperationException("Library NameAndVersion should not be null.");
+                            if (!libraries.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
                                 throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
                             measure.Library = new List<string> { libForMeasure!.Url };
                             resources.Add(measure);
@@ -193,12 +198,13 @@ namespace Hl7.Cql.Packaging
             { "denominator-exclusion", "Denominator Exclusion" }
         };
 
-        private void DiscoverPopulations(Measure measure, ElmPackage package)
+        private void DiscoverPopulations(Measure measure, Elm.Library library)
         {
-            var defs = package.library?.statements?.def ?? Enumerable.Empty<Hl7.Cql.Elm.Expressions.DefinitionExpression>();
+            var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
             foreach (var def in defs)
             {
                 var annotations = (def.annotation?
+                    .OfType<elm.Annotation>()
                     .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
                     ?? Enumerable.Empty<Tag>())
                     .ToArray();
@@ -284,44 +290,44 @@ namespace Hl7.Cql.Packaging
             CqlCrosswalk typeCrosswalk,
             ExpressionBuilder builder,
             Func<Resource, string> canon,
-            ElmPackage? libPackage = null)
+            elm.Library? elmLibrary = null)
         {
             if (elmFile.Exists)
             {
-                if (libPackage is null)
+                if (elmLibrary is null)
                 {
-                    libPackage = ElmPackage.LoadFrom(elmFile);
-                    if (libPackage is null)
+                    elmLibrary = elm.Library.LoadFromJson(elmFile);
+                    if (elmLibrary is null)
                         throw new ArgumentException($"File at {elmFile.FullName} is not valid ELM");
                 }
                 var bytes = File.ReadAllBytes(elmFile.FullName);
                 var attachment = new Attachment
                 {
-                    ElementId = $"{libPackage.NameAndVersion}+elm",
-                    ContentType = ElmPackage.JsonMimeType,
+                    ElementId = $"{elmLibrary.NameAndVersion}+elm",
+                    ContentType = elm.Library.JsonMimeType,
                     Data = bytes,
                 };
                 var library = new Fhir.Model.Library();
                 library.Content.Add(attachment);
                 library.Type = LogicLibraryCodeableConcept;
-                string libraryId = $"{libPackage!.NameAndVersion}";
+                string libraryId = $"{elmLibrary!.NameAndVersion}";
                 library.Id = libraryId!;
-                library.Version = libPackage!.library?.identifier?.version!;
-                library.Name = libPackage!.library?.identifier?.id!;
+                library.Version = elmLibrary!.identifier?.version!;
+                library.Name = elmLibrary!.identifier?.id!;
                 library.Status = PublicationStatus.Active;
-                library.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond).ToString();
+                library.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond).ToString();
                 var parameters = new List<ParameterDefinition>();
-                var inParams = libPackage.library?.parameters?.def?
+                var inParams = elmLibrary.parameters?
                     .Select(pd => ElmParameterToFhir(pd, typeCrosswalk, builder));
                 if (inParams is not null)
                     parameters.AddRange(inParams);
-                var outParams = libPackage.library?.statements?.def?
-                    .Where(def => def.name != "Patient" && (def.operand is null || def.operand.Length == 0))
+                var outParams = elmLibrary.statements?
+                    .Where(def => def.name != "Patient" && def is not FunctionDef)
                     .Select(def => ElmDefinitionToParameter(def, typeCrosswalk));
                 if (outParams is not null)
                     parameters.AddRange(outParams);
                 var valueSetParameterDefinitions = new List<ParameterDefinition>();
-                foreach (var valueSet in libPackage.library?.valueSets?.def ?? Enumerable.Empty<ValueSetDefinitionExpression>())
+                foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<elm.ValueSetDef>())
                 {
                     var valueSetParameter = new ParameterDefinition
                     {
@@ -334,7 +340,7 @@ namespace Hl7.Cql.Packaging
                 parameters.AddRange(valueSetParameterDefinitions);
                 library.Parameter = parameters.Count > 0 ? parameters : null!;
 
-                foreach (var include in libPackage?.library?.includes?.def ?? Enumerable.Empty<IncludeExpression>())
+                foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<elm.IncludeDef>())
                 {
                     var includeId = $"{include.path}-{include.version}";
                     library.RelatedArtifact.Add(new RelatedArtifact
@@ -350,7 +356,7 @@ namespace Hl7.Cql.Packaging
 
                     var cqlAttachment = new Attachment
                     {
-                        ElementId = $"{libPackage!.NameAndVersion}+cql",
+                        ElementId = $"{elmLibrary!.NameAndVersion}+cql",
                         ContentType = "text/cql",
                         Data = cqlBytes,
                     };
@@ -361,7 +367,7 @@ namespace Hl7.Cql.Packaging
                     var assemblyBytes = assembly.Binary;
                     var assemblyAttachment = new Attachment
                     {
-                        ElementId = $"{libPackage!.NameAndVersion}+dll",
+                        ElementId = $"{elmLibrary!.NameAndVersion}+dll",
                         ContentType = "application/octet-stream",
                         Data = assemblyBytes,
                     };
@@ -369,7 +375,7 @@ namespace Hl7.Cql.Packaging
                     foreach (var kvp in assembly.SourceCode)
                     {
                         var sourceBytes = Encoding.UTF8.GetBytes(kvp.Value);
-                        var sourceBase64 = Convert.ToBase64String(sourceBytes);
+                        var sourceBase64 = System.Convert.ToBase64String(sourceBytes);
                         var sourceAttachment = new Attachment
                         {
                             ElementId = $"{kvp.Key}+csharp",
@@ -398,11 +404,11 @@ namespace Hl7.Cql.Packaging
         };
         private static CqlContext CqlContext => FirelyCqlContext.Create();
 
-        public TypeConverter? TypeConverter { get; }
+        public TypeConverter TypeConverter { get; }
 
         //new CqlContext(new CqlOperators(null));
 
-        private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.Expressions.ParameterDeclarationExpression elmParameter,
+        private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.ParameterDef elmParameter,
             CqlCrosswalk typeCrosswalk,
             ExpressionBuilder builder)
         {
@@ -443,6 +449,7 @@ namespace Hl7.Cql.Packaging
             }
 
             var annotations = (elmParameter.annotation?
+                .OfType<Elm.Annotation>()
                 .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
                 ?? Enumerable.Empty<Tag>())
                 .ToArray();
@@ -475,26 +482,26 @@ namespace Hl7.Cql.Packaging
             return parameterDefinition;
         }
 
-        private static CqlDate ConvertExpressionToDate(Hl7.Cql.Elm.Expressions.ParameterDeclarationExpression elmParameter,
-            Hl7.Cql.Elm.Expressions.DateExpression defaultDateValue)
+        private static CqlDate ConvertExpressionToDate(Hl7.Cql.Elm.ParameterDef parameterDef,
+            Hl7.Cql.Elm.Date defaultDateValue)
         {
-            var yearExpr = defaultDateValue.year ?? throw new InvalidOperationException($"Date expressions must have a year value on parameter: {elmParameter.name}");
-            var monthExpr = defaultDateValue.month ?? throw new InvalidOperationException($"Date expressions must have a month value on parameter: {elmParameter.name}");
-            var dayExpr = defaultDateValue.day ?? throw new InvalidOperationException($"Date expressions must have a day value on parameter: {elmParameter.name}");
+            var yearExpr = defaultDateValue.year ?? throw new InvalidOperationException($"Date expressions must have a year value on parameter: {parameterDef.name}");
+            var monthExpr = defaultDateValue.month ?? throw new InvalidOperationException($"Date expressions must have a month value on parameter: {parameterDef.name}");
+            var dayExpr = defaultDateValue.day ?? throw new InvalidOperationException($"Date expressions must have a day value on parameter: {parameterDef.name}");
 
-            int year = ConvertExpressionToLiteral<int>(elmParameter, yearExpr, "year");
-            int month = ConvertExpressionToLiteral<int>(elmParameter, monthExpr, "month");
-            int day = ConvertExpressionToLiteral<int>(elmParameter, dayExpr, "day");
+            int year = ConvertExpressionToLiteral<int>(parameterDef, yearExpr, "year");
+            int month = ConvertExpressionToLiteral<int>(parameterDef, monthExpr, "month");
+            int day = ConvertExpressionToLiteral<int>(parameterDef, dayExpr, "day");
 
             var dateValue = new CqlDate(year, month, day);
             return dateValue;
         }
 
-        private static T ConvertExpressionToLiteral<T>(Hl7.Cql.Elm.Expressions.ParameterDeclarationExpression elmParameter,
-            Hl7.Cql.Elm.Expressions.Expression expr, string name)
+        private static T ConvertExpressionToLiteral<T>(ParameterDef elmParameter,
+            Hl7.Cql.Elm.Expression expr, string name)
         {
             T val;
-            if (expr is Hl7.Cql.Elm.Expressions.LiteralExpression literal)
+            if (expr is Literal literal)
             {
                 var (literalValue, _) = ExpressionBuilder.ConvertLiteral(literal, typeof(T));
                 if (literalValue is T)
@@ -548,22 +555,22 @@ namespace Hl7.Cql.Packaging
                     ext.Value = new FhirString(value as string);
                     break;
                 case FHIRAllTypes.Date:
-                    ext.Value = TypeConverter.Convert<Date>(value);
+                    ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Date>(value);
                     break;
                 case FHIRAllTypes.DateTime:
                     ext.Value = TypeConverter.Convert<FhirDateTime>(value);
                     break;
                 case FHIRAllTypes.Time:
-                    ext.Value = TypeConverter.Convert<Time>(value);
+                    ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Time>(value);
                     break;
                 case FHIRAllTypes.Quantity:
-                    ext.Value = TypeConverter.Convert<Quantity>(value);
+                    ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Quantity>(value);
                     break;
                 case FHIRAllTypes.Range:
                     ext.Value = TypeConverter.Convert<Fhir.Model.Range>(value);
                     break;
                 case FHIRAllTypes.Ratio:
-                    ext.Value = TypeConverter.Convert<Ratio>(value);
+                    ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Ratio>(value);
                     break;
                 case FHIRAllTypes.Period:
                     ext.Value = TypeConverter.Convert<Period>(value);
@@ -573,14 +580,13 @@ namespace Hl7.Cql.Packaging
             }
         }
 
-        private ParameterDefinition ElmDefinitionToParameter(Hl7.Cql.Elm.Expressions.DefinitionExpression definition,
+        private ParameterDefinition ElmDefinitionToParameter(Hl7.Cql.Elm.ExpressionDef definition,
             CqlCrosswalk typeCrosswalk)
         {
             var resultTypeSpecifier = definition.resultTypeSpecifier;
-            if (resultTypeSpecifier is null && !string.IsNullOrWhiteSpace(definition.resultTypeName))
-                resultTypeSpecifier = new Hl7.Cql.Elm.Expressions.TypeSpecifierExpression
+            if (resultTypeSpecifier is null && !string.IsNullOrWhiteSpace(definition.resultTypeName.Name))
+                resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier
                 {
-                    type = "NamedTypeSpecifier",
                     name = definition.resultTypeName
                 };
             var type = typeCrosswalk.TypeEntryFor(resultTypeSpecifier);
@@ -606,11 +612,11 @@ namespace Hl7.Cql.Packaging
                 };
             }
 
-            if (!string.IsNullOrWhiteSpace(definition.accessLevel) && definition.accessLevel.Equals("private", StringComparison.CurrentCultureIgnoreCase))
+            if (definition.accessLevel == elm.AccessModifier.Private)
             {
                 parameterDefinition.Extension.Add(new Extension
                 {
-                    Value = new Code(definition.accessLevel.ToLower()),
+                    Value = new Fhir.Model.Code("private"),
                     Url = Constants.ParameterAccessLevel,
                 });
             }
@@ -620,14 +626,14 @@ namespace Hl7.Cql.Packaging
 
         private static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
         {
-            var now = DateTime.Now;
+            var now = System.DateTime.Now;
             var loop = true;
             var timeout = TimeSpan.FromMilliseconds(timeoutMs);
             while (!directory.Exists && loop)
             {
                 directory.Create();
                 directory.Refresh();
-                if (DateTime.Now.Subtract(now) > timeout)
+                if (System.DateTime.Now.Subtract(now) > timeout)
                     throw new InvalidOperationException($"Unable to create directory {directory.FullName} after {timeout}");
             }
         }

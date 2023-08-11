@@ -1,4 +1,13 @@
-﻿using Hl7.Cql.Primitives;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
@@ -13,15 +22,15 @@ namespace Hl7.Cql.Runtime
 
         public int? Age(string precision)
         {
-            var patientType = TypeResolver.PatientType 
+            var patientType = TypeResolver.PatientType
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
             var method = DataRetriever.GetType()
-                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))
+                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
             var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
-            var patientsArray = patients.ToArray();
+            var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {
                 var birthDate = birthDateProperty.GetValue(patientsArray[0]);
@@ -42,10 +51,10 @@ namespace Hl7.Cql.Runtime
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
             var method = DataRetriever.GetType()
-                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))
+                .GetMethod(nameof(DataRetriever.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
             var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
-            var patientsArray = patients.ToArray();
+            var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {
                 var birthDate = birthDateProperty.GetValue(patientsArray[0]);
@@ -151,7 +160,7 @@ namespace Hl7.Cql.Runtime
         {
             if (codes == null)
                 return null;
-            foreach(var code in codes)
+            foreach (var code in codes)
             {
                 var result = CodeInValueSet(code, valueSet);
                 if (result != false)
@@ -189,3 +198,4 @@ namespace Hl7.Cql.Runtime
 
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

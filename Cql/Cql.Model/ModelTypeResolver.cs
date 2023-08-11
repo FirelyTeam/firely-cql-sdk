@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -21,35 +22,11 @@ namespace Hl7.Cql.Model
         protected ModelTypeResolver(ModelInfo model)
         {
             Model = model;
-            ClassInfo = Models.ClassesById(model);
-            Properties = new Dictionary<string, PropertyInfo?>();
             patientType = new Lazy<Type?>(GetPatientType);
             patientBirthDate = new Lazy<PropertyInfo?>(GetPatientBirthdate);
         }
 
         public ModelInfo Model { get; }
-        private readonly IDictionary<string, ClassInfo> ClassInfo;
-        private readonly IDictionary<string, PropertyInfo?> Properties;
-
-        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
-        {
-            PropertyInfo? propertyInfo = null;
-            if (Properties.TryGetValue(typeSpecifier, out propertyInfo))
-            {
-                return propertyInfo;
-            }
-            else
-            {
-                if (ClassInfo.TryGetValue(typeSpecifier, out var classInfo)
-                    && !string.IsNullOrWhiteSpace(classInfo.primaryCodePath)
-                    && Types.TryGetValue(typeSpecifier, out var type))
-                {
-                    propertyInfo = GetProperty(type, classInfo.primaryCodePath);
-                }
-                Properties.Add(typeSpecifier, propertyInfo);
-                return propertyInfo;
-            }
-        }
 
         public override Type? PatientType => patientType.Value;
         private readonly Lazy<Type?> patientType;
@@ -72,6 +49,29 @@ namespace Hl7.Cql.Model
                 return type;
             }
             else return null;
+        }
+
+        private readonly IDictionary<string, ClassInfo> ClassInfo = new Dictionary<string, ClassInfo>();
+        private readonly IDictionary<string, PropertyInfo?> Properties = new Dictionary<string, PropertyInfo?>();
+
+        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
+        {
+            PropertyInfo? propertyInfo = null;
+            if (Properties.TryGetValue(typeSpecifier, out propertyInfo))
+            {
+                return propertyInfo;
+            }
+            else
+            {
+                if (ClassInfo.TryGetValue(typeSpecifier, out var classInfo)
+                    && !string.IsNullOrWhiteSpace(classInfo.primaryCodePath)
+                    && Types.TryGetValue(typeSpecifier, out var type))
+                {
+                    propertyInfo = GetProperty(type, classInfo.primaryCodePath);
+                }
+                Properties.Add(typeSpecifier, propertyInfo);
+                return propertyInfo;
+            }
         }
 
         public override PropertyInfo? PatientBirthDateProperty => patientBirthDate.Value;

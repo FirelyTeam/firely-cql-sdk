@@ -1,5 +1,14 @@
-﻿using Hl7.Cql.Primitives;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
 using Hl7.Cql.Iso8601;
+using Hl7.Cql.Primitives;
 using System;
 
 namespace Hl7.Cql.Runtime
@@ -306,7 +315,7 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else 
+            else
                 return left!.Value.Precision == right!.Value.Precision;
         }
         public bool? SamePrecision(CqlDateTime? left, CqlDateTime? right)

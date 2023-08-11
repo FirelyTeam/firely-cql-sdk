@@ -2,7 +2,7 @@
   "profiles": {
     "PackagerCLI": {
       "commandName": "Project",
-      "commandLineArgs": "--elm C:\\Code\\FirelyTeam\\cql-sdk\\Demo\\Elm\\Json --cql C:\\Code\\FirelyTeam\\cql-sdk\\Demo\\Cql\\input --o C:\\Code\\FirelyTeam\\cql-sdk\\Demo\\Test\\Resources --cs C:\\Code\\FirelyTeam\\cql-sdk\\Demo\\Measures --force true"
+      "commandLineArgs": "--elm $(ProjectDir)/../../Demo/Elm/Json --cql $(ProjectDir)/../../Demo/Cql/input --o $(ProjectDir)/../../Demo/Test/Resources --cs $(ProjectDir)/../../Measures --force true"
     }
   }
 }

@@ -23,7 +23,8 @@ namespace Hl7.Cql.ValueSets
         /// Creates an instance.
         /// </summary>
         /// <param name="facades">The facades to combine in a union.</param>
-        /// <param name="context">This runtime context.</param>
+        /// <param name="valueSets">All valuesets.</param>
+        /// <param name="comparer">The comparer to use to determine the union.</param>
         /// <exception cref="ArgumentNullException"></exception>
         public ValueSetUnion(ValueSetFacade[] facades, IValueSetDictionary valueSets, ICqlComparer comparer)
         {
@@ -107,7 +108,7 @@ namespace Hl7.Cql.ValueSets
                 Comparer = comparer;
             }
 
-            public bool Equals(CqlCode x, CqlCode y) => Comparer.Compare(x, y, null) == 0;
+            public bool Equals(CqlCode? x, CqlCode? y) => Comparer.Compare(x, y, null) == 0;
 
             public int GetHashCode(CqlCode obj) =>
                 (obj.code ?? "code").GetHashCode()

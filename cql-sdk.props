@@ -18,6 +18,7 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -29,7 +30,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.2.1-20230613.5</FirelySdkVersion>
+		<FirelySdkVersion>5.3.0</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Compiler settings -->
@@ -38,12 +39,12 @@
 		<LangVersion>11.0</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Configurations>Debug;Release;FullDebug</Configurations>
+		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' ">
 		<DebugType>portable</DebugType>
 		<DebugSymbols>True</DebugSymbols>
-		<NoWarn>1591</NoWarn>
 		<Optimize>false</Optimize>
 		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
 	</PropertyGroup>	

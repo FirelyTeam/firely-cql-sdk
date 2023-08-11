@@ -1,4 +1,13 @@
-﻿using Hl7.Cql.Primitives;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,10 +31,13 @@ namespace Hl7.Cql.Runtime
             }
         }
 
-        public bool? AllTrue(IEnumerable<Lazy<bool?>> argument) {
+        public bool? AllTrue(IEnumerable<Lazy<bool?>> argument)
+        {
             if (argument == null) return true;
-            else {
-                foreach (Lazy<bool?> val in argument) {
+            else
+            {
+                foreach (Lazy<bool?> val in argument)
+                {
                     if (val.Value == false) return false;
                 }
                 return true;
@@ -46,7 +58,8 @@ namespace Hl7.Cql.Runtime
             return false;
         }
 
-        public bool? AnyTrue(IEnumerable<Lazy<bool?>> argument) {
+        public bool? AnyTrue(IEnumerable<Lazy<bool?>> argument)
+        {
             if (argument == null) return false;
             foreach (Lazy<bool?> value in argument)
                 if (value.Value == true) return true;
@@ -567,6 +580,8 @@ namespace Hl7.Cql.Runtime
 
         public decimal? StdDev(IEnumerable<decimal?>? argument)
         {
+            if (argument is null) return null;
+
             double result = 0;
             var nonNull = argument
                 .Where(d => d != null)
@@ -582,6 +597,8 @@ namespace Hl7.Cql.Runtime
 
         public CqlQuantity? StdDev(IEnumerable<CqlQuantity?>? argument)
         {
+            if (argument is null) return null;
+
             var nonNull = argument
                 .Where(d => d != null && d.value != null)
                 .ToArray();
@@ -645,7 +662,7 @@ namespace Hl7.Cql.Runtime
         public CqlQuantity? Variance(IEnumerable<CqlQuantity?>? argument)
         {
             var stdDev = StdDev(argument);
-            if (stdDev == null || stdDev.value == null) 
+            if (stdDev == null || stdDev.value == null)
                 return null;
 
             var varianceVal = (decimal)Math.Pow((double)stdDev!.value!.Value, 2);
@@ -655,3 +672,4 @@ namespace Hl7.Cql.Runtime
         #endregion
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

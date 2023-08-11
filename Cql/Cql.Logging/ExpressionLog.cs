@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -40,7 +41,7 @@ namespace Hl7.Cql.Logging
 
         public IList<ExpressionLog>? callStack { get; set; }
 
-        public override bool Equals(object obj)
+        public override bool Equals(object? obj)
         {
             if (obj is ExpressionLog otherLog)
             {
@@ -220,3 +221,4 @@ namespace Hl7.Cql.Logging
 
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

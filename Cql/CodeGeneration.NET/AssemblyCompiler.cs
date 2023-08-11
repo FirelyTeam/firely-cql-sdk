@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -10,11 +11,13 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -39,7 +42,7 @@ namespace Hl7.Cql.Compiler
         public TypeManager TypeManager { get; }
         public OperatorBinding Binding { get; }
 
-        public AssemblyLoadContext Load(IEnumerable<ElmPackage> elmPackages,
+        public AssemblyLoadContext Load(IEnumerable<Library> elmPackages,
                     ILogger<ExpressionBuilder>? builderLogger = null,
                     ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
                     LogLevel logLevel = LogLevel.Information)
@@ -54,7 +57,7 @@ namespace Hl7.Cql.Compiler
             return assemblyLoadContext;
         }
 
-        public IDictionary<string, AssemblyData> Compile(IEnumerable<ElmPackage> elmPackages,
+        public IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
                     ILogger<ExpressionBuilder>? builderLogger = null,
                     ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
                     LogLevel logLevel = LogLevel.Information)
@@ -71,7 +74,7 @@ namespace Hl7.Cql.Compiler
             builderLogger ??= logFactory.CreateLogger<ExpressionBuilder>();
             codeWriterLogger ??= logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
-            var graph = ElmPackage.GetIncludedLibraries(elmPackages);
+            var graph = Library.GetIncludedLibraries(elmPackages);
             var references = new[]
             {
             // Core engine references
@@ -91,7 +94,8 @@ namespace Hl7.Cql.Compiler
             var namespaces = new[]
             {
                 typeof(CqlDeclarationAttribute).Namespace!,
-                typeof(Hl7.Cql.Iso8601.DateIso8601).Namespace!,
+                typeof(ValueSetFacade).Namespace!,
+                typeof(Iso8601.DateIso8601).Namespace!,
             }
             .Concat(TypeResolver.ModelNamespaces)
             .Distinct()
@@ -264,7 +268,7 @@ namespace Hl7.Cql.Compiler
             string version = string.Empty;
             if (parts.Length > 1)
                 version = parts[1];
-            asmInfo.AppendLine($"[assembly: Hl7.Cql.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
+            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
             var compilation = CSharpCompilation.Create($"{node.NodeId}")
@@ -336,6 +340,13 @@ namespace Hl7.Cql.Compiler
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Diagnostics.Tools.dll")));
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Diagnostics.Debug.dll")));
             metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.Collections.dll")));
+
+            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ObjectModel.dll")));
+            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.dll")));
+            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.Annotations.dll")));
+            metadataReferences.Add(MetadataReference.CreateFromFile(Path.Combine(rtPath, "System.ComponentModel.TypeConverter.dll")));
+
+
         }
         private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
         {
@@ -347,3 +358,4 @@ namespace Hl7.Cql.Compiler
 
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

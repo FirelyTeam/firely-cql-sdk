@@ -9,6 +9,7 @@
 using Cql.Operators;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
+using Hl7.Cql.Firely.Comparers;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
@@ -17,11 +18,31 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely
 {
+    /// <summary>
+    /// A CqlContext that uses the Firely SDK POCO model.
+    /// </summary>
     public static class FirelyCqlContext
     {
+        /// <summary>
+        /// Factory method for creating the CqlContext.
+        /// </summary>
+        public static CqlContext ForBundle(Bundle bundle,
+            IDictionary<string, object>? parameters = null,
+            IValueSetDictionary? valueSets = null,
+            DateTimeOffset? now = null,
+            DefinitionDictionary<Delegate>? delegates = null)
+        {
+            IDataRetriever retriever = bundle is not null ?
+                new BundleDataRetriever(bundle, valueSets ?? new HashValueSetDictionary()) :
+                new CompositeDataRetriever();
 
+            return Create(retriever, parameters, valueSets, now, delegates);
+        }
 
-        public static CqlContext Create(Bundle? bundle = null,
+        /// <summary>
+        /// Factory method for creating the CqlContext.
+        /// </summary>
+        public static CqlContext Create(IDataRetriever? retriever = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
@@ -29,20 +50,21 @@ namespace Hl7.Cql.Firely
         {
             valueSets ??= new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
-            var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
-            IDataRetriever dataRetriever = bundle != null
-                ? new BundleDataRetriever(bundle, valueSets, typeResolver)
-                : new CompositeDataRetriever();
+            var typeResolver = FirelyTypeResolver.Default;
+            IDataRetriever dataRetriever = retriever ?? new CompositeDataRetriever();
 
             var cqlComparers = new CqlComparers();
             var operators = CqlOperators.Create(typeResolver,
-                FirelyTypeConverter.Create(Fhir.Model.ModelInfo.ModelInspector),
+                FirelyTypeConverter.Default,
                 dataRetriever,
                 cqlComparers,
                 valueSets,
-                null,
-                new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond));
-            cqlComparers.AddIntervalComparisons(operators);
+                unitConverter,
+                new DateTimeIso8601(now ?? DateTimeOffset.UtcNow, DateTimePrecision.Millisecond),
+                FirelyEnumComparer.Default);
+            cqlComparers
+                .AddIntervalComparisons(operators)
+                .AddFirelyComparers();
             var ctx = new CqlContext(operators, delegates, parameters);
             return ctx;
         }

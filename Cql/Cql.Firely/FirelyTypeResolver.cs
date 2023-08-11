@@ -1,3 +1,4 @@
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 /* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
@@ -14,8 +15,11 @@ using System.Reflection;
 
 namespace Hl7.Cql.Firely
 {
+
     public class FirelyTypeResolver : BaseTypeResolver
     {
+        public static readonly FirelyTypeResolver Default = new FirelyTypeResolver(ModelInfo.ModelInspector);
+
         public FirelyTypeResolver(ModelInspector inspector)
         {
             Inspector = inspector;
@@ -57,7 +61,9 @@ namespace Hl7.Cql.Firely
                     }
                     else
                     {
-                        result = cm.FindMappedElementByName(propertyName)?.NativeProperty;
+                        var propMapping = cm.FindMappedElementByName(propertyName);
+                        if (propMapping is not null)
+                            result = new PocoModelPropertyInfo(propMapping.NativeProperty, propMapping);
                     }
                 }
                 else
@@ -66,22 +72,20 @@ namespace Hl7.Cql.Firely
                     result = @base;
                 }
             }
-            if (result == null)
-            {
-            }
+
             return result;
         }
 
         public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
-            var type = ResolveType(typeSpecifier);
-            if (type is null) return null;
+            // This is not used by the Firely BundleRetriever, but we'll implement it nonetheless.
+            var specifiedType = ResolveType(typeSpecifier);
+            if (specifiedType == null) return null;
 
-            var mapping = Inspector.FindClassMapping(type);
+            var codeInterfaceType = typeof(ICoded<>).MakeGenericType(specifiedType);
+            var codeProperty = codeInterfaceType.GetProperty("Code", BindingFlags.Instance | BindingFlags.Public);
 
-            return mapping
-                ?.PrimaryCodePath
-                ?.NativeProperty;
+            return codeProperty;
         }
 
         public override Type? PatientType => Inspector.PatientMapping?.NativeType;

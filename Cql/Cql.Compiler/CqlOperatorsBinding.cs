@@ -1,4 +1,5 @@
-﻿/* 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -16,6 +17,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Compiler
 {
@@ -43,15 +45,16 @@ namespace Hl7.Cql.Compiler
         public CqlOperatorsBinding(TypeResolver typeResolver, TypeConverter? typeConverter = null)
         {
             TypeConverter = typeConverter;
+            //.AddElmConversions();
             TypeResolver = typeResolver;
         }
 
-        protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators));
+        protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
 
-        protected virtual PropertyInfo DataRetrieverProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.DataRetriever));
+        protected virtual PropertyInfo DataRetrieverProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.DataRetriever))!;
 
 
-        protected virtual PropertyInfo TypeConverterProperty => typeof(ICqlOperators).GetProperty(nameof(ICqlOperators.TypeConverter));
+        protected virtual PropertyInfo TypeConverterProperty => typeof(ICqlOperators).GetProperty(nameof(ICqlOperators.TypeConverter))!;
         protected virtual Type OperatorsType => OperatorsProperty.PropertyType;
         protected virtual Type DataRetrieverType => DataRetrieverProperty.PropertyType;
 
@@ -195,13 +198,13 @@ namespace Hl7.Cql.Compiler
                     return BindTernaryOperator(nameof(ICqlOperators.Before), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Date:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Date)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Date))!,
                         parameters[0],
                         parameters[1],
                         parameters[2]);
                 case CqlOperator.DateTime:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.DateTime)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.DateTime))!,
                         parameters[0],
                         parameters[1],
                         parameters[2],
@@ -224,7 +227,7 @@ namespace Hl7.Cql.Compiler
                     return BindTernaryOperator(nameof(ICqlOperators.DurationBetween), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Now:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Now)));
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Now))!);
                 case CqlOperator.IntervalSameAs:
                     return BindTernaryGenericOperator(nameof(ICqlOperators.IntervalSameAs), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.SameAs:
@@ -239,17 +242,17 @@ namespace Hl7.Cql.Compiler
                     return BindTernaryOperator(nameof(ICqlOperators.SameOrBefore), operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Time:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Time)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Time))!,
                         parameters[0],
                         parameters[1],
                         parameters[2],
                         parameters[3]);
                 case CqlOperator.TimeOfDay:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.TimeOfDay)));
+                        OperatorsType.GetMethod(nameof(ICqlOperators.TimeOfDay))!);
                 case CqlOperator.Today:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Today)));
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Today))!);
                 case CqlOperator.Collapse:
                     return BindBinaryOperator(nameof(ICqlOperators.Collapse), operators, parameters[0], parameters[1]);
                 case CqlOperator.ListContains:
@@ -378,7 +381,7 @@ namespace Hl7.Cql.Compiler
                     return BindUnaryGenericOperator(nameof(ICqlOperators.SingleOrNull), operators, parameters[0]);
                 case CqlOperator.Quantity:
                     return Expression.Call(operators,
-                        OperatorsType.GetMethod(nameof(ICqlOperators.Quantity)),
+                        OperatorsType.GetMethod(nameof(ICqlOperators.Quantity))!,
                         parameters[0],
                         parameters[1]);
                 case CqlOperator.Interval:
@@ -408,7 +411,7 @@ namespace Hl7.Cql.Compiler
                 case CqlOperator.ToList:
                     {
                         var method = OperatorsType
-                                .GetMethod(nameof(ICqlOperators.ToList))
+                                .GetMethod(nameof(ICqlOperators.ToList))!
                                 .MakeGenericMethod(parameters[0].Type);
                         var call = Expression.Call(operators, method, parameters[0]);
                         return call;
@@ -442,7 +445,7 @@ namespace Hl7.Cql.Compiler
                 case CqlOperator.ConvertQuantity:
                     return BindBinaryOperator(nameof(ICqlOperators.ConvertQuantity), operators, parameters[0], parameters[1]);
                 case CqlOperator.Descendents:
-                    break;
+                    return BindUnaryOperator(nameof(ICqlOperators.Descendents), operators, parameters[0]);
                 case CqlOperator.SortBy:
                     return SortBy(operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Aggregate:
@@ -509,11 +512,11 @@ namespace Hl7.Cql.Compiler
 
         private Expression SortBy(MemberExpression operators, Expression source, Expression by, Expression order)
         {
-            if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(SortOrder))
+            if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
             {
-                var elementType = TypeResolver.GetListElementType(source.Type);
+                var elementType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
                 var method = OperatorsType
-                    .GetMethod(nameof(ICqlOperators.ListSortBy))
+                    .GetMethod(nameof(ICqlOperators.ListSortBy))!
                     .MakeGenericMethod(elementType);
                 var call = Expression.Call(operators, method, source, lambda, orderConstant);
                 return call;
@@ -560,7 +563,7 @@ namespace Hl7.Cql.Compiler
         {
             if (expression is NewExpression @new && @new.Type == typeof(CqlValueSet))
             {
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.ResolveValueSet));
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.ResolveValueSet))!;
                 var call = Expression.Call(operators, method, @new);
                 return call;
             }
@@ -571,7 +574,7 @@ namespace Hl7.Cql.Compiler
         {
             if (typeConstant is ConstantExpression constant && constant.Value is Type t)
             {
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Minimum))
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Minimum))!
                     .MakeGenericMethod(t);
                 var call = Expression.Call(operators, method);
                 return call;
@@ -583,7 +586,7 @@ namespace Hl7.Cql.Compiler
         {
             if (typeConstant is ConstantExpression constant && constant.Value is Type t)
             {
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Maximum))
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.Maximum))!
                     .MakeGenericMethod(t);
                 var call = Expression.Call(operators, method);
                 return call;
@@ -599,8 +602,8 @@ namespace Hl7.Cql.Compiler
                 && memberTypeExpression is ConstantExpression memberTypeConstant
                 && memberTypeConstant.Type == typeof(Type))
             {
-                var method = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))
-                    .MakeGenericMethod(new[] { sourceTypeConstant.Value as Type, memberTypeConstant.Value as Type });
+                var method = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!
+                    .MakeGenericMethod(new[] { (Type)sourceTypeConstant.Value!, (Type)memberTypeConstant.Value! });
                 var call = Expression.Call(method, sourceExpression, lambdaExpression);
                 return call;
             }
@@ -617,15 +620,15 @@ namespace Hl7.Cql.Compiler
 
                     if (genericArgumentType.IsGenericType && genericArgumentType.GetGenericTypeDefinition() == typeof(Nullable<>))
                     {
-                        var underlying = Nullable.GetUnderlyingType(genericArgumentType);
-                        var method = OperatorsType.GetMethod(nameof(ICqlOperators.CoalesceValueTypes))
+                        var underlying = Nullable.GetUnderlyingType(genericArgumentType)!;
+                        var method = OperatorsType.GetMethod(nameof(ICqlOperators.CoalesceValueTypes))!
                             .MakeGenericMethod(underlying);
                         var call = Expression.Call(operators, method, operand);
                         return call;
                     }
                     else
                     {
-                        var method = OperatorsType.GetMethod(nameof(ICqlOperators.CoalesceValueTypes))
+                        var method = OperatorsType.GetMethod(nameof(ICqlOperators.CoalesceValueTypes))!
                             .MakeGenericMethod(genericArgumentType);
                         var call = Expression.Call(operators, method, operand);
                         return call;
@@ -633,7 +636,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var method = OperatorsType.GetMethod(nameof(ICqlOperators.Coalesce))
+                    var method = OperatorsType.GetMethod(nameof(ICqlOperators.Coalesce))!
                         .MakeGenericMethod(genericArgumentType);
                     var call = Expression.Call(operators, method, operand);
                     return call;
@@ -648,9 +651,9 @@ namespace Hl7.Cql.Compiler
             var elementType = TypeResolver.GetListElementType(operand.Type, @throw: true)!;
             if (IsOrImplementsIEnumerableOfT(elementType))
             {
-                var nestedElementType = TypeResolver.GetListElementType(elementType);
+                var nestedElementType = TypeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"{elementType} was expected to be a list type.");
                 var method = OperatorsType
-                        .GetMethod(nameof(ICqlOperators.FlattenList))
+                        .GetMethod(nameof(ICqlOperators.FlattenList))!
                         .MakeGenericMethod(nestedElementType);
                 var call = Expression.Call(operators, method, operand);
                 return call;
@@ -659,7 +662,7 @@ namespace Hl7.Cql.Compiler
             {
                 // This scenario can happen in late-bound property chains
                 var method = OperatorsType
-                    .GetMethod(nameof(ICqlOperators.FlattenLateBoundList));
+                    .GetMethod(nameof(ICqlOperators.FlattenLateBoundList))!;
                 var call = Expression.Call(operators, method, operand);
                 return call;
             }
@@ -680,8 +683,8 @@ namespace Hl7.Cql.Compiler
             if (typeExpression is ConstantExpression constExpression)
             {
                 var type = constExpression.Value as Type;
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.LateBoundProperty))
-                    .MakeGenericMethod(type);
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.LateBoundProperty))!
+                    .MakeGenericMethod(type!);
                 if (source.Type != typeof(object))
                     source = Expression.TypeAs(source, typeof(object));
                 var call = Expression.Call(operators, method, source, propertyName);
@@ -738,7 +741,7 @@ namespace Hl7.Cql.Compiler
 
         private MethodCallExpression Message(MemberExpression operators, Expression[] parameters)
         {
-            var messageMethod = OperatorsType.GetMethod(nameof(ICqlOperators.Message))
+            var messageMethod = OperatorsType.GetMethod(nameof(ICqlOperators.Message))!
                 .MakeGenericMethod(parameters[0].Type);
             return Expression.Call(operators, messageMethod, parameters[0], parameters[1], parameters[2], parameters[3]);
         }
@@ -821,6 +824,7 @@ namespace Hl7.Cql.Compiler
                     return call;
                 }
             }
+
             throw new ArgumentException($"No suitable binary method {methodName}({first.Type}, {second.Type}) could be found.", nameof(methodName));
         }
 
@@ -836,14 +840,27 @@ namespace Hl7.Cql.Compiler
                 {
                     var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
                     var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                    if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
+                    if (leftConversion == ConversionType.Incompatible
+                        || rightConversion == ConversionType.Incompatible)
+                    {
                         continue;
-                    left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
-                    right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
-                    if (methodParameters.Length > 2)
-                        return Expression.Call(operators, method, left, right, precision);
+                    }
                     else
-                        return Expression.Call(operators, method, left, right);
+                    {
+                        left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
+                        right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
+                        if (methodParameters.Length > 2)
+                        {
+                            var precisionConversion = CanConvert(precision.Type, methodParameters[2].ParameterType);
+                            if (precisionConversion == ConversionType.Incompatible)
+                                continue;
+                            precision = Convert(precision, methodParameters[2].ParameterType, operators, precisionConversion);
+                            return Expression.Call(operators, method, left, right, precision);
+
+                        }
+                        else
+                            return Expression.Call(operators, method, left, right);
+                    }
                 }
             }
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
@@ -1027,11 +1044,14 @@ namespace Hl7.Cql.Compiler
                     methodParameters = genericMethod.GetParameters();
                     var leftConversion = CanConvert(left.Type, methodParameters[0].ParameterType);
                     var rightConversion = CanConvert(right.Type, methodParameters[1].ParameterType);
-                    if (leftConversion == ConversionType.Incompatible || rightConversion == ConversionType.Incompatible)
+                    var precisionConversion = CanConvert(precision.Type, methodParameters[2].ParameterType);
+                    if (leftConversion == ConversionType.Incompatible
+                        || rightConversion == ConversionType.Incompatible
+                        || precisionConversion == ConversionType.Incompatible)
                         continue;
                     left = Convert(left, methodParameters[0].ParameterType, operators, leftConversion);
                     right = Convert(right, methodParameters[1].ParameterType, operators, rightConversion);
-
+                    precision = Convert(precision, methodParameters[2].ParameterType, operators, precisionConversion);
                     var call = Expression.Call(operators, genericMethod, left, right, precision);
                     return call;
                 }
@@ -1058,12 +1078,12 @@ namespace Hl7.Cql.Compiler
         }
 
         protected MethodCallExpression Retrieve(MemberExpression operators, MemberExpression dataRetrieve,
-            Type resourceType, Expression codes, Expression? codeProperty)
+            Type resourceType, Expression codes, Expression codeProperty)
         {
             MethodInfo? forType = null;
             if (codes.Type == typeof(CqlValueSet))
             {
-                var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByValueSet));
+                var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByValueSet))!;
                 forType = method.MakeGenericMethod(resourceType);
             }
             else if (IsOrImplementsIEnumerableOfT(codes.Type))
@@ -1071,7 +1091,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeResolver.GetListElementType(codes.Type, true)!;
                 if (elementType == typeof(CqlCode))
                 {
-                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes));
+                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes))!;
                     forType = method.MakeGenericMethod(resourceType);
                 }
                 // cql-to-elm blindly calls ToList when an expression ref is used
@@ -1082,7 +1102,7 @@ namespace Hl7.Cql.Compiler
                 {
                     // call Flatten.
                     codes = Flatten(operators, codes);
-                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes));
+                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes))!;
                     forType = method.MakeGenericMethod(resourceType);
                 }
                 else throw new ArgumentException($"Retrieve statements with an ExpressionRef in the terminology position must be list of {nameof(CqlCode)} or a list of lists of {nameof(CqlCode)}.  Instead, the list's element type is {elementType.Name}.", nameof(codes));
@@ -1097,9 +1117,9 @@ namespace Hl7.Cql.Compiler
         {
             if (lambda is LambdaExpression lamdaExpr)
             {
-                var sourceType = TypeResolver.GetListElementType(source.Type);
+                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
                 var resultType = lamdaExpr.ReturnType;
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectOrNull));
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType, resultType);
                 var call = Expression.Call(operators, genericMethod, source, lambda);
                 return call;
@@ -1111,8 +1131,8 @@ namespace Hl7.Cql.Compiler
         {
             if (lambda is LambdaExpression lamdaExpr)
             {
-                var sourceType = TypeResolver.GetListElementType(source.Type);
-                var method = OperatorsType.GetMethod(nameof(ICqlOperators.WhereOrNull));
+                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var method = OperatorsType.GetMethod(nameof(ICqlOperators.WhereOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType);
                 var call = Expression.Call(operators, genericMethod, source, lambda);
                 return call;
@@ -1125,11 +1145,11 @@ namespace Hl7.Cql.Compiler
         {
             if (collectionSelectorLambda is LambdaExpression collectionSelector)
             {
-                var firstGenericArgument = TypeResolver.GetListElementType(source.Type);
+                var firstGenericArgument = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
                 if (IsOrImplementsIEnumerableOfT(collectionSelector.ReturnType))
                 {
-                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType);
-                    var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectManyOrNull));
+                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
+                    var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectManyOrNull))!;
                     var genericMethod = method.MakeGenericMethod(
                         firstGenericArgument,
                         secondGenericArgument);
@@ -1146,13 +1166,13 @@ namespace Hl7.Cql.Compiler
         {
             if (collectionSelectorLambda is LambdaExpression collectionSelector)
             {
-                var firstGenericArgument = TypeResolver.GetListElementType(source.Type);
+                var firstGenericArgument = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
                 if (IsOrImplementsIEnumerableOfT(collectionSelector.ReturnType))
                 {
-                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType);
+                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
                     if (resultSelectorLambda is LambdaExpression resultSelector)
                     {
-                        var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectManyResultsOrNull));
+                        var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectManyResultsOrNull))!;
                         var genericMethod = method.MakeGenericMethod(
                             firstGenericArgument,
                             secondGenericArgument,
@@ -1194,12 +1214,9 @@ namespace Hl7.Cql.Compiler
                 case ConversionType.Convertible:
                     {
                         var typeConverter = Expression.Property(operators, TypeConverterProperty);
-                        var method = typeof(TypeConverter).GetMethod(nameof(TypeConverter.Convert))
+                        var method = typeof(TypeConverter).GetMethod(nameof(TypeConverter.Convert))!
                                  .MakeGenericMethod(destinationType);
-
-                        if (source.Type.GenericTypeArguments.Any(a => a.IsEnum) || source.Type.IsAssignableFrom(typeof(DateTimeOffset)))
-                            source = Expression.TypeAs(source, typeof(object));
-
+                        source = Expression.TypeAs(source, typeof(object));
                         var call = Expression.Call(typeConverter, method, source);
                         return call;
                     }
@@ -1214,7 +1231,7 @@ namespace Hl7.Cql.Compiler
             var sourceType = TypeResolver.GetListElementType(source.Type, false) ??
                 throw new ArgumentException($"Cannot resolve element type for {source.Type.Name}", nameof(source));
             var accumulateType = seed.Type;
-            var method = OperatorsType.GetMethod(nameof(ICqlOperators.AggregateOrNull));
+            var method = OperatorsType.GetMethod(nameof(ICqlOperators.AggregateOrNull))!;
             var genericMethod = method.MakeGenericMethod(sourceType, accumulateType);
             var call = Expression.Call(operators, genericMethod, source, seed, lambda);
             return call;
@@ -1242,3 +1259,4 @@ namespace Hl7.Cql.Compiler
         }
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

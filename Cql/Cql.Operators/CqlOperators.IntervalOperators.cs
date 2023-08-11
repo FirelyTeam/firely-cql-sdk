@@ -1,6 +1,16 @@
-﻿using Hl7.Cql.Primitives;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Hl7.Cql.Runtime
@@ -342,8 +352,8 @@ namespace Hl7.Cql.Runtime
                 return new CqlInterval<T?>[0];
 
             // need null check on i because i!.low! causes HL7 unit test TestCollapseNull_Test to fail since i is null
-            var queue = ListSortBy(intervals, i => i == null ? null! : i.low!, SortOrder.Ascending).ToList();
-            if (queue.Count == 0) return null;
+            var queue = ListSortBy(intervals, i => i == null ? null! : i.low!, ListSortDirection.Ascending)?.ToList();
+            if (queue is null || queue.Count == 0) return null;
 
             CqlInterval<T?>? TryCombine(CqlInterval<T?>? x, CqlInterval<T?>? y)
             {
@@ -1226,7 +1236,7 @@ namespace Hl7.Cql.Runtime
             var highCompare = Compare(larger.high ?? Maximum<T>()!, smaller.high ?? Maximum<T>()!, precision);
             //var smallerSelfCompare = rtx.Compare(smaller.Low ?? Minimum<T>(), smaller.High ?? Maximum<T>(), precision);
 
-            /// From docs: If smaller is point interval, and exactly on the boundary of either side of larger, null
+            // From docs: If smaller is point interval, and exactly on the boundary of either side of larger, null
             //if (smallerSelfCompare == 0 && (lowCompare == 0 || highCompare == 0)) return null;
 
             if (lowCompare <= 0 && highCompare >= 0)

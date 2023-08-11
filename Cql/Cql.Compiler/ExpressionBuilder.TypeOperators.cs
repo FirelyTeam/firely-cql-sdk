@@ -1,15 +1,24 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm.Expressions;
+using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
-        protected Expression As(elm.AsExpression @as, ExpressionBuilderContext ctx)
+        protected Expression As(elm.As @as, ExpressionBuilderContext ctx)
         {
-            if (@as.operand is elm.ListExpression list)
+            if (@as.operand is elm.List list)
             {
                 // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
                 if ((list.element?.Length ?? 0) == 0)
@@ -17,7 +26,7 @@ namespace Hl7.Cql.Compiler
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     if (IsOrImplementsIEnumerableOfT(type))
                     {
-                        var listElementType = TypeResolver.GetListElementType(type);
+                        var listElementType = TypeResolver.GetListElementType(type) ?? throw new InvalidOperationException($"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
                         var typeAs = Expression.TypeAs(newArray, type);
                         return typeAs;
@@ -32,7 +41,7 @@ namespace Hl7.Cql.Compiler
             // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
             if (@as.asTypeSpecifier != null)
             {
-                if (@as.operand!.type == "Null")
+                if (@as.operand is elm.Null)
                 {
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     var defaultExpression = Expression.Default(type);
@@ -47,11 +56,11 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(@as.asType))
+                if (string.IsNullOrWhiteSpace(@as.asType.Name))
                     throw new ArgumentException("asType cannot be null", nameof(@as));
                 if (@as.operand == null)
                     throw new ArgumentException("operand cannot be null", nameof(@as));
-                var type = TypeResolver.ResolveType(@as.asType!);
+                var type = TypeResolver.ResolveType(@as.asType.Name!);
                 var operand = TranslateExpression(@as.operand, ctx);
                 if (type!.IsValueType)
                     return Expression.Convert(operand, type);
@@ -68,16 +77,16 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Children() => throw new NotImplementedException();
 
-        protected Expression Is(elm.IsExpression @is, ExpressionBuilderContext ctx)
+        protected Expression Is(elm.Is @is, ExpressionBuilderContext ctx)
         {
 
             string? typeName = null;
             if (@is.isTypeSpecifier?.resultTypeName != null)
-                typeName = @is.isTypeSpecifier!.resultTypeName!;
+                typeName = @is.isTypeSpecifier!.resultTypeName.Name!;
             else if (@is.isType != null)
-                typeName = @is.isType;
+                typeName = @is.isType.Name;
             if (string.IsNullOrWhiteSpace(typeName))
-                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.IsExpression.isTypeSpecifier)} or {nameof(elm.IsExpression.isType)}.");
+                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
             var type = TypeResolver.ResolveType(typeName)
                 ?? throw new InvalidOperationException($"Could not resolve type {typeName}");
             var op = TranslateExpression(@is.operand!, ctx);
@@ -86,12 +95,16 @@ namespace Hl7.Cql.Compiler
             return nullable;
         }
 
-        private Expression? Descendents(elm.DescendentsExpression e, ExpressionBuilderContext ctx)
+        private Expression? Descendents(elm.Descendents e, ExpressionBuilderContext ctx)
         {
-            if (e.operand == null)
+            if (e.source == null)
                 return Expression.Constant(null, typeof(IEnumerable<object>));
             else
-                return UnaryOperator(CqlOperator.Descendents, e, ctx);
+            {
+                var source = TranslateExpression(e.source, ctx);
+                var call = OperatorBinding.Bind(CqlOperator.Descendents, ctx.RuntimeContextParameter, source);
+                return call;
+            }
         }
 
         /// <summary>
@@ -102,106 +115,106 @@ namespace Hl7.Cql.Compiler
         /// <param name="cqe"></param>
         /// <param name="ctx"></param>
         /// <returns></returns>
-        protected Expression ConvertQuantity(elm.ConvertQuantityExpression cqe, ExpressionBuilderContext ctx)
+        protected Expression ConvertQuantity(elm.ConvertQuantity cqe, ExpressionBuilderContext ctx)
         {
             var quantity = TranslateExpression(cqe.operand![0], ctx);
             var unit = TranslateExpression(cqe.operand![1], ctx);
-            var call = Operators.Bind(CqlOperator.ConvertQuantity, ctx.RuntimeContextParameter, quantity, unit);
+            var call = OperatorBinding.Bind(CqlOperator.ConvertQuantity, ctx.RuntimeContextParameter, quantity, unit);
             return call;
         }
 
-        protected Expression? ConvertsToLong(elm.ConvertsToLongExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression? ConvertsToLong(elm.ConvertsToLong e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToLong, e, ctx);
 
-        private Expression? ConvertsToInteger(elm.ConvertsToIntegerExpression e, ExpressionBuilderContext ctx) =>
+        private Expression? ConvertsToInteger(elm.ConvertsToInteger e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToInteger, e, ctx);
 
-        protected Expression? ConvertsToDecimal(elm.ConvertsToDecimalExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression? ConvertsToDecimal(elm.ConvertsToDecimal e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToDecimal, e, ctx);
 
-        protected Expression? ConvertsToDateTime(elm.ConvertsToDateTimeExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression? ConvertsToDateTime(elm.ConvertsToDateTime e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToDateTime, e, ctx);
 
-        protected Expression? ConvertsToDate(elm.ConvertsToDateExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression? ConvertsToDate(elm.ConvertsToDate e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToDate, e, ctx);
 
-        protected Expression? ConvertsToBoolean(elm.ConvertsToBooleanExpression e, ExpressionBuilderContext ctx) =>
+        protected Expression? ConvertsToBoolean(elm.ConvertsToBoolean e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToDate, e, ctx);
 
-        private Expression? ConvertsToQuantity(elm.ConvertsToQuantityExpression e, ExpressionBuilderContext ctx) =>
+        private Expression? ConvertsToQuantity(elm.ConvertsToQuantity e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToQuantity, e, ctx);
 
-        private Expression? ConvertsToString(elm.ConvertsToStringExpression e, ExpressionBuilderContext ctx) =>
+        private Expression? ConvertsToString(elm.ConvertsToString e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToString, e, ctx);
 
-        private Expression? ConvertsToTime(elm.ConvertsToTimeExpression e, ExpressionBuilderContext ctx) =>
+        private Expression? ConvertsToTime(elm.ConvertsToTime e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.ConvertsToTime, e, ctx);
 
 
-        protected Expression? ToBoolean(elm.ToBooleanExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ToBoolean(elm.ToBoolean e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, typeof(bool?), ctx);
         }
 
-        protected Expression? ToConcept(elm.ToConceptExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ToConcept(elm.ToConcept e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, TypeResolver.ConceptType, ctx);
         }
 
-        protected Expression? ToDate(elm.ToDateExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ToDate(elm.ToDate e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, TypeResolver.DateType, ctx);
         }
 
-        protected Expression ToDateTime(elm.ToDateTimeExpression e, ExpressionBuilderContext ctx)
+        protected Expression ToDateTime(elm.ToDateTime e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, TypeResolver.DateTimeType, ctx);
         }
 
 
-        protected Expression ToDecimal(elm.ToDecimalExpression e, ExpressionBuilderContext ctx)
+        protected Expression ToDecimal(elm.ToDecimal e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, typeof(decimal?), ctx);
         }
 
-        protected Expression ToLong(elm.ToLongExpression e, ExpressionBuilderContext ctx)
+        protected Expression ToLong(elm.ToLong e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, typeof(decimal?), ctx);
         }
 
-        protected Expression? ToInteger(elm.ToIntegerExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ToInteger(elm.ToInteger e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, typeof(int?), ctx);
         }
 
-        protected Expression? ToQuantity(elm.ToQuantityExpression tq, ExpressionBuilderContext ctx)
+        protected Expression? ToQuantity(elm.ToQuantity tq, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(tq.operand!, ctx);
             return ChangeType(operand, TypeResolver.QuantityType, ctx);
         }
 
-        protected Expression? ToString(elm.ToStringExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ToString(elm.ToString e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, typeof(string), ctx);
         }
-        protected Expression? ToTime(elm.ToTimeExpression e, ExpressionBuilderContext ctx)
+        protected Expression? ToTime(elm.ToTime e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             return ChangeType(operand, TypeResolver.TimeType, ctx);
         }
 
-        protected Expression ToList(elm.ToListExpression e, ExpressionBuilderContext ctx)
+        protected Expression ToList(elm.ToList e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            var call = Operators.Bind(CqlOperator.ToList, ctx.RuntimeContextParameter, operand);
+            var call = OperatorBinding.Bind(CqlOperator.ToList, ctx.RuntimeContextParameter, operand);
             return call;
         }
 
@@ -211,7 +224,7 @@ namespace Hl7.Cql.Compiler
                 return input;
             else if (input.Type == typeof(object) || outputType.IsAssignableFrom(input.Type))
                 return Expression.TypeAs(input, outputType);
-            else if (IsOrImplementsIEnumerableOfT(input.Type) 
+            else if (IsOrImplementsIEnumerableOfT(input.Type)
                 && IsOrImplementsIEnumerableOfT(outputType))
             {
                 var inputElementType = TypeResolver.GetListElementType(input.Type, true)!;
@@ -219,12 +232,12 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, ctx));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType, ctx);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                var callSelect = Operators.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, input, lambda);
+                var callSelect = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, input, lambda);
                 return callSelect;
             }
             else
             {
-                var call = Operators.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter, input, Expression.Constant(outputType, typeof(Type)));
+                var call = OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter, input, Expression.Constant(outputType, typeof(Type)));
                 return call;
             }
         }

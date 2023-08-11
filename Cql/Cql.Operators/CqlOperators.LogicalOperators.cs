@@ -1,4 +1,13 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 
 namespace Hl7.Cql.Runtime
 {
@@ -52,10 +61,12 @@ namespace Hl7.Cql.Runtime
                 else return null;
             }
         }
-        public bool? Implies(Lazy<bool?> left, Lazy<bool?> right) {
+        public bool? Implies(Lazy<bool?> left, Lazy<bool?> right)
+        {
             if (left.Value == true) return right.Value;
             else if (left.Value == false) return true;
-            else {
+            else
+            {
                 if (right.Value == true) return true;
                 else return null;
             }
@@ -101,7 +112,8 @@ namespace Hl7.Cql.Runtime
             else return null;
         }
 
-        public bool? Xor(Lazy<bool?> left, Lazy<bool?> right) {
+        public bool? Xor(Lazy<bool?> left, Lazy<bool?> right)
+        {
             if (left.Value == true)
             {
                 if (right.Value == null) return null;

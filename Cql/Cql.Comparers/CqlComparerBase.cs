@@ -18,12 +18,12 @@ namespace Hl7.Cql.Comparers
     {
 
         /// <inheritdoc />
-        public abstract int? Compare(T x, T y, string? precision);
+        public abstract int? Compare(T? x, T? y, string? precision);
         /// <inheritdoc />
-        public abstract bool Equivalent(T x, T y, string? precision);
+        public abstract bool Equivalent(T? x, T? y, string? precision);
 
         /// <inheritdoc />
-        public virtual bool? Equals(T x, T y, string? precision)
+        public virtual bool? Equals(T? x, T? y, string? precision)
         {
             var result = Compare(x, y, precision);
             if (result == null)
@@ -32,13 +32,13 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc />
-        public int? Compare(object x, object y, string? precision) => Compare((x as T)!, (y as T)!, precision);
+        public int? Compare(object? x, object? y, string? precision) => Compare(x as T, y as T, precision);
 
         /// <inheritdoc />
-        public bool? Equals(object x, object y, string? precision) => Equals((x as T)!, (y as T)!, precision);
+        public bool? Equals(object? x, object? y, string? precision) => Equals(x as T, y as T, precision);
 
         /// <inheritdoc />
-        public bool Equivalent(object x, object y, string? precision) => Equivalent((x as T)!, (y as T)!, precision);
+        public bool Equivalent(object? x, object? y, string? precision) => Equivalent(x as T, y as T, precision);
 
         /// <inheritdoc />
         public abstract int GetHashCode(T x);

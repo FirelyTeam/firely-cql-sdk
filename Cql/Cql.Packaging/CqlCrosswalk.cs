@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -6,9 +7,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-
 namespace Hl7.Cql.Packaging
 {
     public class CqlCrosswalk
@@ -156,34 +157,30 @@ namespace Hl7.Cql.Packaging
             }
         }
 
-        public TypeEntry? TypeEntryFor(Elm.Expressions.TypeSpecifierExpression? resultTypeSpecifier)
+        public TypeEntry? TypeEntryFor(Elm.TypeSpecifier? resultTypeSpecifier)
         {
-            if (resultTypeSpecifier is null || resultTypeSpecifier.type is null)
+            if (resultTypeSpecifier is null)
                 return null;
-            switch (resultTypeSpecifier.type)
+            switch (resultTypeSpecifier)
             {
-                case "IntervalTypeSpecifier":
+                case IntervalTypeSpecifier interval:
                     {
-                        if (resultTypeSpecifier.pointType is null)
+                        if (interval.pointType is null)
                             return null;
-                        var pointType = TypeEntryFor(resultTypeSpecifier.pointType);
+                        var pointType = TypeEntryFor(interval.pointType);
                         return TypeEntryFor(CqlPrimitiveType.Interval, pointType);
                     }
-                case "ListTypeSpecifier":
-                    if (resultTypeSpecifier.elementType is null)
+                case ListTypeSpecifier list:
+                    if (list.elementType is null)
                         return null;
-                    var elementType = TypeEntryFor(resultTypeSpecifier.elementType);
+                    var elementType = TypeEntryFor(list.elementType);
                     if (elementType is null)
                         return null;
-                    if (elementType.CqlType == CqlPrimitiveType.Interval && elementType.ElementType is null)
-                    {
-                        //What's the purpose of this?
-                    }
                     return TypeEntryFor(CqlPrimitiveType.List, elementType);
-                case "NamedTypeSpecifier":
-                    return TypeEntryFor(resultTypeSpecifier.name);
-                case "ChoiceTypeSpecifier":
-                case "TupleTypeSpecifier":
+                case NamedTypeSpecifier named:
+                    return TypeEntryFor(named.name.Name);
+                case ChoiceTypeSpecifier:
+                case TupleTypeSpecifier:
                     return new TypeEntry(FHIRAllTypes.Basic, CqlPrimitiveType.Tuple);
                 default:
                     break;
@@ -223,15 +220,8 @@ namespace Hl7.Cql.Packaging
             else return null;
         }
 
-        public TypeEntry? TypeEntryFor(Elm.Expressions.Expression expression)
-        {
-
-            if (!string.IsNullOrWhiteSpace(expression.resultTypeName))
-                return TypeEntryFor(expression.resultTypeName);
-            else if (expression.resultTypeSpecifier != null)
-                return TypeEntryFor(expression.resultTypeSpecifier);
-            else return null;
-        }
+        public TypeEntry? TypeEntryFor(Elm.Element element) =>
+            TypeEntryFor(element.resultTypeSpecifier);
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)
         {
@@ -270,3 +260,4 @@ namespace Hl7.Cql.Packaging
         public TypeEntry? ElementType { get; set; } = null;
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

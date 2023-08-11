@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -21,7 +22,7 @@ namespace Hl7.Cql.Comparers
             this.through = through;
         }
 
-        public int Compare(T x, T y)
+        public int Compare(T? x, T? y)
         {
             if (x == null)
             {
@@ -34,7 +35,7 @@ namespace Hl7.Cql.Comparers
             else return through.Compare(x!, y!);
         }
 
-        public int Compare(object x, object y) => Compare((T)x, (T)y);
+        public int Compare(object? x, object? y) => Compare((T?)x, (T?)y);
     }
 
     public class NullValueTypeComparer<T> : IComparer<T?>, IComparer
@@ -61,6 +62,8 @@ namespace Hl7.Cql.Comparers
             else return through.Compare(x.Value, y.Value);
         }
 
-        public int Compare(object x, object y) => Compare((T?)x, (T?)y);
+        public int Compare(object? x, object? y) => Compare((T?)x, (T?)y);
     }
 }
+
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

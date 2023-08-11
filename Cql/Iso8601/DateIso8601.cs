@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -7,6 +8,7 @@
  */
 
 using System;
+using System.Globalization;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -197,13 +199,13 @@ namespace Hl7.Cql.Iso8601
 
             if (yearGroup.Success)
             {
-                year = int.Parse(yearGroup.Value);
+                year = int.Parse(yearGroup.Value, CultureInfo.InvariantCulture);
                 if (monthGroup.Success)
                 {
-                    month = int.Parse(monthGroup.Value);
+                    month = int.Parse(monthGroup.Value, CultureInfo.InvariantCulture);
                     if (dayGroup.Success)
                     {
-                        day = int.Parse(dayGroup.Value);
+                        day = int.Parse(dayGroup.Value, CultureInfo.InvariantCulture);
                     }
                 }
             }
@@ -216,15 +218,15 @@ namespace Hl7.Cql.Iso8601
         private static string Format(int year, int? month, int? day, DateTimePrecision precision)
         {
             var sb = new StringBuilder();
-            sb.Append(year.ToString("D4"));
+            sb.Append(year.ToString("D4", CultureInfo.InvariantCulture));
             if (month.HasValue && precision > DateTimePrecision.Year)
             {
                 sb.Append('-');
-                sb.Append(month.Value.ToString("D2"));
+                sb.Append(month.Value.ToString("D2", CultureInfo.InvariantCulture));
                 if (day.HasValue && precision > DateTimePrecision.Month)
                 {
                     sb.Append('-');
-                    sb.Append(day.Value.ToString("D2"));
+                    sb.Append(day.Value.ToString("D2", CultureInfo.InvariantCulture));
                 }
             }
             return sb.ToString();

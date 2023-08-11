@@ -525,6 +525,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return $"new Uri(\"{value!}\")";
                 else if (constantType == typeof(decimal))
                     return ((decimal)value).ToString(CultureInfo.InvariantCulture);
+                else if (constantType == typeof(decimal?))
+                {
+                    var dv = (decimal?)value;
+                    return dv.HasValue ? dv.Value.ToString(CultureInfo.InvariantCulture) : "null";
+                }
                 else if (typeof(Type).IsAssignableFrom(constantType))
                     return $"typeof({PrettyTypeName((Type)value)})";
                 else
@@ -671,7 +676,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ConstantExpression constant:
                     if (constant.Type == typeof(decimal))
                     {
-                        var code = $"{leadingIndentString}{constant.Value}m";
+                        var code = FormattableString.Invariant($"{leadingIndentString}{constant.Value}m");
                         return code;
                     }
                     else if (constant.Type == typeof(decimal?))
@@ -680,7 +685,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             return $"{leadingIndentString}null";
                         else
                         {
-                            var code = $"{leadingIndentString}{constant.Value}m";
+                            var code = FormattableString.Invariant($"{leadingIndentString}{constant.Value}m");
                             return code;
                         }
                     }
@@ -708,7 +713,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     if (@new.Arguments.Count > 0)
                     {
                         var newSb = new StringBuilder();
-                        newSb.Append($"{leadingIndentString}new {PrettyTypeName(@new.Type)}({ToCode(indent + 1, @new.Arguments[0], false)}");
+                        newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}({ToCode(indent + 1, @new.Arguments[0], false)}");
                         if (@new.Arguments.Count > 1)
                         {
                             newSb.AppendLine(", ");
@@ -748,7 +753,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             {
                                 var sb = new StringBuilder();
                                 sb.Append(leadingIndentString);
-                                sb.Append($"{@object}{PrettyMethodName(call.Method)}({ToCode(indent + 1, call.Arguments[1], false)}");
+                                sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}({ToCode(indent + 1, call.Arguments[1], false)}");
                                 if (call.Arguments.Count > 2)
                                 {
                                     sb.AppendLine(", ");
@@ -784,7 +789,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                             @object = $"{PrettyTypeName(call.Method.DeclaringType!)}.";
                         }
                         var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
+#pragma warning disable CA1305 // Specify IFormatProvider
                         sb.Append($"{@object}{PrettyMethodName(call.Method)}({firstArgument}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                         if (call.Arguments.Count > 1)
                         {
                             sb.AppendLine(", ");
@@ -919,7 +926,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         if (newArray.Expressions.Count > 0)
                         {
                             var arrayType = PrettyTypeName(newArray.Type);
+#pragma warning disable CA1305 // Specify IFormatProvider
                             newArraySb.AppendLine($"new {arrayType}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                             var braceIndent = IndentString(indent);
                             newArraySb.Append(braceIndent);
                             newArraySb.AppendLine("{");
@@ -941,7 +950,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var arrayType = PrettyTypeName(newArray.Type.GetElementType() ??
                             throw new InvalidOperationException($"Array type {newArray.Type.FullName} does not have an element type"));
                         var size = ToCode(0, newArray.Expressions[0], false);
+#pragma warning disable CA1305 // Specify IFormatProvider
                         newArraySb.AppendLine($"new {arrayType}[{size}]");
+#pragma warning restore CA1305 // Specify IFormatProvider
                         return newArraySb.ToString();
                     }
                     break;
@@ -965,7 +976,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     if (memberInit.Bindings.Count > 0)
                     {
                         var arrayType = PrettyTypeName(memberInit.Type);
+#pragma warning disable CA1305 // Specify IFormatProvider
                         memberInitSb.AppendLine($"new {arrayType}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                         var braceIndent = IndentString(indent);
                         memberInitSb.Append(braceIndent);
                         memberInitSb.AppendLine("{");
@@ -977,7 +990,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 var memberName = assignment.Member.Name;
                                 var assignmentCode = ToCode(indent + 1, assignment.Expression, false);
                                 memberInitSb.Append(braceIndentPlusOne);
+#pragma warning disable CA1305 // Specify IFormatProvider
                                 memberInitSb.Append($"{memberName} = {assignmentCode}");
+#pragma warning restore CA1305 // Specify IFormatProvider
                                 memberInitSb.AppendLine(",");
                             }
                             else throw new NotImplementedException();
@@ -998,12 +1013,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                     var conditionalSb = new StringBuilder();
                     conditionalSb.Append("(");
                     var test = ToCode(indent, ce.Test, false);
+#pragma warning disable CA1305 // Specify IFormatProvider
                     conditionalSb.AppendLine($"({test})");
+#pragma warning restore CA1305 // Specify IFormatProvider
                     var ifTrue = $"({ToCode(indent + 2, ce.IfTrue, false)})";
 
                     var ifFalse = $"({ToCode(indent + 2, ce.IfFalse, false)})";
+#pragma warning disable CA1305 // Specify IFormatProvider
                     conditionalSb.AppendLine($"{IndentString(indent + 1)}? {ifTrue}");
                     conditionalSb.AppendLine($"{IndentString(indent + 1)}: {ifFalse})");
+#pragma warning restore CA1305 // Specify IFormatProvider
                     return conditionalSb.ToString();
                 case TypeBinaryExpression typeBinary:
                     if (typeBinary.NodeType == ExpressionType.TypeIs)

@@ -1,4 +1,13 @@
-﻿using System.Collections.Generic;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.Runtime
@@ -7,8 +16,8 @@ namespace Hl7.Cql.Runtime
     {
         #region Coalesce
 
-        public T Coalesce<T>(IEnumerable<T>? source)
-            where T: class
+        public T? Coalesce<T>(IEnumerable<T>? source)
+            where T : class
         {
             if (source == null)
                 return null!;
@@ -17,7 +26,7 @@ namespace Hl7.Cql.Runtime
         }
 
         public T? CoalesceValueTypes<T>(IEnumerable<T?>? source)
-            where T: struct
+            where T : struct
         {
             if (source == null)
                 return null;

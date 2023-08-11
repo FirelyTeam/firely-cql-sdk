@@ -1,4 +1,13 @@
-﻿using System;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -42,7 +51,7 @@ namespace Hl7.Cql.Runtime
                 return null;
             else
             {
-                char value = argument[index.Value];
+                var value = argument[index.Value];
                 return value.ToString();
             }
         }
@@ -52,9 +61,9 @@ namespace Hl7.Cql.Runtime
         #region LastPositionOf
         public int? LastPositionOf(string? argument, string? pattern)
         {
-            if (pattern == null || argument == null) 
+            if (pattern == null || argument == null)
                 return null;
-            else 
+            else
                 return argument.LastIndexOf(pattern);
         }
 
@@ -63,9 +72,9 @@ namespace Hl7.Cql.Runtime
         #region Length
         public int? StringLength(string argument)
         {
-            if (argument == null) 
+            if (argument == null)
                 return 0;
-            else 
+            else
                 return argument.Length;
         }
 
@@ -74,9 +83,9 @@ namespace Hl7.Cql.Runtime
         #region Lower
         public string? Lower(string argument)
         {
-            if (argument == null) 
+            if (argument == null)
                 return null;
-            else 
+            else
                 return argument.ToLower();
         }
 

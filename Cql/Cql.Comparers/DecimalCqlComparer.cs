@@ -1,4 +1,5 @@
-﻿/* 
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -16,7 +17,7 @@ namespace Hl7.Cql.Comparers
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;
 
-        public int? Compare(object x, object y, string? precision = null) =>
+        public int? Compare(object? x, object? y, string? precision = null) =>
             Compare(x as decimal?, y as decimal?, precision);
 
         public int? Compare(decimal? x, decimal? y, string? precision = null)
@@ -33,7 +34,7 @@ namespace Hl7.Cql.Comparers
         }
 
 
-        public bool? Equals(object x, object y, string? precision = null) =>
+        public bool? Equals(object? x, object? y, string? precision = null) =>
             Equals(x as decimal?, y as decimal?, precision);
 
         public bool? Equals(decimal? x, decimal? y, string? precision = null)
@@ -49,7 +50,7 @@ namespace Hl7.Cql.Comparers
             return Comparer<decimal?>.Default.Compare(x, y) == 0;
         }
 
-        public bool Equivalent(object x, object y, string? precision = null) =>
+        public bool Equivalent(object? x, object? y, string? precision = null) =>
             Equivalent(x as decimal?, y as decimal?, precision);
 
         public bool Equivalent(decimal? x, decimal? y, string? precision = null)
@@ -93,3 +94,4 @@ namespace Hl7.Cql.Comparers
 
     }
 }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

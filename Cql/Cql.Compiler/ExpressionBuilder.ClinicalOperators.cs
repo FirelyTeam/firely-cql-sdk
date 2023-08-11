@@ -1,54 +1,62 @@
-﻿using Hl7.Cql.Runtime;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Linq.Expressions;
-using elm = Hl7.Cql.Elm.Expressions;
-using Hl7.Cql.Operators;
-using System.Xml;
+using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     public partial class ExpressionBuilder
     {
 
-        protected Expression CalculateAge(elm.CalculateAgeExpression e, ExpressionBuilderContext ctx)
+        protected Expression CalculateAge(elm.CalculateAge e, ExpressionBuilderContext ctx)
         {
-            var units = Expression.Constant(e.precision, typeof(string));
+            var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand!, ctx);
-            return Operators.Bind(CqlOperator.CalculateAge, ctx.RuntimeContextParameter, birthDate, units);
+            return OperatorBinding.Bind(CqlOperator.CalculateAge, ctx.RuntimeContextParameter, birthDate, units);
         }
 
-        protected Expression CalculateAgeAt(elm.CalculateAgeAtExpression e, ExpressionBuilderContext ctx)
+        protected Expression CalculateAgeAt(elm.CalculateAgeAt e, ExpressionBuilderContext ctx)
         {
-            var units = Expression.Constant(e.precision, typeof(string));
+            var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand![0], ctx);
             var asOf = TranslateExpression(e.operand[1], ctx); // should be "as of" argument
-            return Operators.Bind(CqlOperator.CalculateAgeAt, ctx.RuntimeContextParameter, birthDate, asOf, units);
+            return OperatorBinding.Bind(CqlOperator.CalculateAgeAt, ctx.RuntimeContextParameter, birthDate, asOf, units);
         }
 
 
-        protected Expression InValueSet(elm.InValueSetExpression e, ExpressionBuilderContext ctx)
+        protected Expression InValueSet(elm.InValueSet e, ExpressionBuilderContext ctx)
         {
             var code = TranslateExpression(e.code!, ctx);
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
             var codeType = code.Type;
             if (codeType == TypeResolver.CodeType)
             {
-                return Operators.Bind(CqlOperator.CodeInValueSet, ctx.RuntimeContextParameter, code, valueSet);
+                return OperatorBinding.Bind(CqlOperator.CodeInValueSet, ctx.RuntimeContextParameter, code, valueSet);
             }
             else if (codeType == TypeResolver.ConceptType)
             {
-                return Operators.Bind(CqlOperator.ConceptInValueSet, ctx.RuntimeContextParameter, code, valueSet);
+                return OperatorBinding.Bind(CqlOperator.ConceptInValueSet, ctx.RuntimeContextParameter, code, valueSet);
             }
             else if (codeType == typeof(string))
             {
-                return Operators.Bind(CqlOperator.StringInValueSet, ctx.RuntimeContextParameter, code, valueSet);
+                return OperatorBinding.Bind(CqlOperator.StringInValueSet, ctx.RuntimeContextParameter, code, valueSet);
             }
             else throw new NotImplementedException();
         }
 
-        private Expression AnyInValueSet(elm.AnyInValueSetExpression e, ExpressionBuilderContext ctx)
+        private Expression AnyInValueSet(elm.AnyInValueSet e, ExpressionBuilderContext ctx)
         {
             var codes = TranslateExpression(e.codes!, ctx);
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
@@ -57,26 +65,26 @@ namespace Hl7.Cql.Compiler
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
             if (codeType == TypeResolver.CodeType)
             {
-                return Operators.Bind(CqlOperator.CodesInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
+                return OperatorBinding.Bind(CqlOperator.CodesInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
             }
             else if (codeType == TypeResolver.ConceptType)
             {
-                return Operators.Bind(CqlOperator.ConceptsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
+                return OperatorBinding.Bind(CqlOperator.ConceptsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
             }
             else if (codeType == typeof(string))
             {
-                return Operators.Bind(CqlOperator.StringsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
+                return OperatorBinding.Bind(CqlOperator.StringsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
             }
             else throw new NotImplementedException($"AnyInValueSet not implemented for element type {TypeManager.PrettyTypeName(codeType)}");
 
         }
 
-        public Expression ExpandValueSet(elm.ExpandValueSetExpression e, ExpressionBuilderContext ctx)
+        public Expression ExpandValueSet(elm.ExpandValueSet e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(IValueSetDictionary) });
-            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators));
-            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade));
+            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
+            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
             var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);
             var call = Expression.Call(property, createFacadeMethod, operand);
             return call;

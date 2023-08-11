@@ -1,7 +1,17 @@
-﻿using Hl7.Cql.Primitives;
+﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 namespace Hl7.Cql.Runtime
@@ -700,7 +710,7 @@ namespace Hl7.Cql.Runtime
                     var listItem = interval.low!.Value;
                     do
                     {
-                        
+
 
                         var high = decimal.Add(listItem, per.value ?? 1);
                         var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
@@ -841,7 +851,7 @@ namespace Hl7.Cql.Runtime
                 var flat = argument
                     .Select(i => i as IEnumerable<object>)
                     .Where(i => i != null)
-                    .SelectMany(i => i)
+                    .SelectMany(i => i!)
                     .ToList();
                 return flat;
 
@@ -852,11 +862,11 @@ namespace Hl7.Cql.Runtime
 
         #region First
 
-        public T FirstOfList<T>(IEnumerable<T> enumerable)
+        public T? FirstOfList<T>(IEnumerable<T> enumerable)
         {
             if (enumerable == null)
             {
-                return (T)(object)null!;
+                return (T?)(object?)null;
             }
             else if (enumerable is IList<T> list)
             {
@@ -1010,11 +1020,11 @@ namespace Hl7.Cql.Runtime
 
         #region Last
 
-        public T LastOfList<T>(IEnumerable<T> enumerable)
+        public T? LastOfList<T>(IEnumerable<T> enumerable)
         {
             if (enumerable == null)
             {
-                return (T)(object)null!;
+                return (T?)(object?)null;
             }
             if (enumerable is IList<T> list)
             {
@@ -1060,6 +1070,8 @@ namespace Hl7.Cql.Runtime
 
         public bool? ListProperlyIncludesList<T>(IEnumerable<T>? left, IEnumerable<T>? right)
         {
+            if (left is null || right is null) return null;
+
             var includes = ListIncludedInList(right, left);
             if (includes != true) return includes;
 
@@ -1081,10 +1093,10 @@ namespace Hl7.Cql.Runtime
 
         #region Singleton From
 
-        public T SingleOrNull<T>(IEnumerable<T>? source)
+        public T? SingleOrNull<T>(IEnumerable<T>? source)
         {
             if (source == null)
-                return (T)(object)null!;
+                return (T?)(object?)null;
             else
                 return source.SingleOrDefault();
         }
@@ -1098,11 +1110,10 @@ namespace Hl7.Cql.Runtime
         {
             if (source == null)
                 return null;
-            if (startIndex == null && endIndex == null)
+            if ((startIndex == null && endIndex == null) || !source.Any())
             {
                 return Enumerable.Empty<T>();
             }
-
             var si = startIndex ?? 0;
             if (source is List<T> list)
             {
@@ -1216,7 +1227,7 @@ namespace Hl7.Cql.Runtime
         #region Sort
 
 
-        public IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, SortOrder order)
+        public IEnumerable<T>? ListSort<T>(IEnumerable<T>? source, ListSortDirection order)
         {
             if (source == null)
                 return null;
@@ -1224,7 +1235,7 @@ namespace Hl7.Cql.Runtime
             var nullRecords = source.Where(w => w == null);
             var nonNullRecords = source.Where(w => w != null);
 
-            if (order == SortOrder.Ascending)
+            if (order == ListSortDirection.Ascending)
             {
                 var ordered = nonNullRecords
                     .Cast<object>()
@@ -1233,7 +1244,7 @@ namespace Hl7.Cql.Runtime
                     .ToList();
                 return nullRecords.Concat(ordered);
             }
-            else if (order == SortOrder.Descending)
+            else if (order == ListSortDirection.Descending)
             {
                 var ordered = nonNullRecords
                     .Cast<object>()
@@ -1246,11 +1257,11 @@ namespace Hl7.Cql.Runtime
             else throw new NotSupportedException($"Unknown sort order {order}");
         }
 
-        public IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, SortOrder order)
+        public IEnumerable<T>? ListSortBy<T>(IEnumerable<T>? source, Func<T, object> sortByExpr, ListSortDirection order)
         {
             if (source == null)
                 return null;
-            if (order == SortOrder.Ascending)
+            if (order == ListSortDirection.Ascending)
             {
                 var nullRecords = source.Where(s => sortByExpr(s) == null);
                 var nonNullRecords = source.Where(s => sortByExpr(s) != null);
@@ -1258,7 +1269,7 @@ namespace Hl7.Cql.Runtime
                 var result = nullRecords.Concat(ordered);
                 return result;
             }
-            else if (order == SortOrder.Descending)
+            else if (order == ListSortDirection.Descending)
             {
                 var nullRecords = source.Where(s => sortByExpr(s) == null);
                 var nonNullRecords = source.Where(s => sortByExpr(s) != null);
