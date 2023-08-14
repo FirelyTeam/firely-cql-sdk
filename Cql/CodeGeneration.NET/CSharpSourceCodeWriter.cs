@@ -659,7 +659,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             else if (expression is UnaryExpression unary && unary.NodeType == ExpressionType.Throw)
             {
                 var asString = ToCode(indentLevel, expression, false);
-                writer.WriteLine($"{asString};");
+                writer.WriteLine(indentLevel, $"{asString};");
             }
             else
             {
