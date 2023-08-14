@@ -304,7 +304,7 @@ namespace Hl7.Cql.Compiler
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
 
-                throw ex;
+                //       throw ex;
             }
             var bytes = codeStream.ToArray();
             var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { node.NodeId, sourceCode } });
