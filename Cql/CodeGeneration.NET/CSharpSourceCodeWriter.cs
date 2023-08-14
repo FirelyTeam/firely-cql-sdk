@@ -616,7 +616,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             bool writeLeadingIndent = true)
         {
 
-            expression = new RedundantConditionalTransformer().Visit(expression);
+            expression = new RedundantCastsTransformer().Visit(expression);
 
             if (expression is BlockExpression block)
             {
