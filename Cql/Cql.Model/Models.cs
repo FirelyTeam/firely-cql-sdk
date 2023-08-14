@@ -18,8 +18,10 @@ namespace Hl7.Cql.Model
     {
         private static readonly XmlSerializer xmlSerializer = new(typeof(ModelInfo));
         private static readonly Lazy<ModelInfo> _Fhir401 = new(() => LoadEmbeddedResource("Fhir401"), true);
+        private static readonly Lazy<ModelInfo> _ElmR1 = new(() => LoadEmbeddedResource("ElmR1"), true);
 
         public static ModelInfo Fhir401 => _Fhir401.Value;
+        public static ModelInfo ElmR1 => _ElmR1.Value;
 
         public static IDictionary<string, ClassInfo> ClassesById(ModelInfo model)
         {
