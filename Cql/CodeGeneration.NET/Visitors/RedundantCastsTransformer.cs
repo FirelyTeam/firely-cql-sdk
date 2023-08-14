@@ -11,7 +11,7 @@ using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
-    internal class RedundantConditionalTransformer : ExpressionVisitor
+    internal class RedundantCastsTransformer : ExpressionVisitor
     {
         protected override Expression VisitConditional(ConditionalExpression node)
         {
