@@ -255,63 +255,64 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private IEnumerable<Encounter> Qualifying_Encounters_Value()
     {
         var a_ = this.Office_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
-        var c_ = this.Preventive_Care___Established_Office_Visit__0_to_17();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
-			typeof(Encounter).GetProperty("Type"));
-        var e_ = context?.Operators.ListUnion<Encounter>(b_, 
-			d_);
-        var f_ = this.Preventive_Care__Initial_Office_Visit__0_to_17();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
-			typeof(Encounter).GetProperty("Type"));
-        var h_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
-			typeof(Encounter).GetProperty("Type"));
-        var j_ = context?.Operators.ListUnion<Encounter>(g_, 
-			i_);
-        var k_ = context?.Operators.ListUnion<Encounter>(e_, 
-			j_);
-        var l_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
-			typeof(Encounter).GetProperty("Type"));
-        var n_ = this.Clinical_Oral_Evaluation();
-        var o_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(n_, 
-			typeof(Encounter).GetProperty("Type"));
-        var p_ = context?.Operators.ListUnion<Encounter>(m_, 
-			o_);
-        var q_ = context?.Operators.ListUnion<Encounter>(k_, 
-			p_);
-        var r_ = this.Telephone_Visits();
-        var s_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(r_, 
-			typeof(Encounter).GetProperty("Type"));
-        var t_ = this.Online_Assessments();
-        var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
-			typeof(Encounter).GetProperty("Type"));
-        var v_ = context?.Operators.ListUnion<Encounter>(s_, 
+        var b_ = typeof(Encounter).GetProperty("Type");
+        var c_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+			b_);
+        var d_ = this.Preventive_Care___Established_Office_Visit__0_to_17();
+        var f_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(d_, 
+			b_);
+        var g_ = context?.Operators.ListUnion<Encounter>(c_, 
+			f_);
+        var h_ = this.Preventive_Care__Initial_Office_Visit__0_to_17();
+        var j_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+			b_);
+        var k_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(k_, 
+			b_);
+        var n_ = context?.Operators.ListUnion<Encounter>(j_, 
+			m_);
+        var o_ = context?.Operators.ListUnion<Encounter>(g_, 
+			n_);
+        var p_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+        var r_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(p_, 
+			b_);
+        var s_ = this.Clinical_Oral_Evaluation();
+        var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(s_, 
+			b_);
+        var v_ = context?.Operators.ListUnion<Encounter>(r_, 
 			u_);
-        var w_ = context?.Operators.ListUnion<Encounter>(q_, 
+        var w_ = context?.Operators.ListUnion<Encounter>(o_, 
 			v_);
-        Func<Encounter,bool?> af_ = (ValidEncounter) => 
+        var x_ = this.Telephone_Visits();
+        var z_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(x_, 
+			b_);
+        var aa_ = this.Online_Assessments();
+        var ac_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(aa_, 
+			b_);
+        var ad_ = context?.Operators.ListUnion<Encounter>(z_, 
+			ac_);
+        var ae_ = context?.Operators.ListUnion<Encounter>(w_, 
+			ad_);
+        Func<Encounter,bool?> an_ = (ValidEncounter) => 
         {
-            var x_ = this.Measurement_Period();
-            var y_ = (ValidEncounter?.Period as object);
-            var z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(y_);
-            var aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, 
-				z_, 
+            var af_ = this.Measurement_Period();
+            var ag_ = (ValidEncounter?.Period as object);
+            var ah_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ag_);
+            var ai_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(af_, 
+				ah_, 
 				null);
-            var ac_ = (ValidEncounter?.StatusElement as object);
-            var ab_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var ak_ = (ValidEncounter?.StatusElement as object);
+            var aj_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ac_) as object);
-            var ad_ = ("finished" as object);
-            var ae_ = context?.Operators.Equal(ab_, 
-				ad_);
-            return context?.Operators.And(aa_, 
-				ae_);
+		null))?.Operators?.TypeConverter).Convert<string>(ak_) as object);
+            var al_ = ("finished" as object);
+            var am_ = context?.Operators.Equal(aj_, 
+				al_);
+            return context?.Operators.And(ai_, 
+				am_);
         };
-        return context?.Operators.WhereOrNull<Encounter>(w_, 
-			af_);
+        return context?.Operators.WhereOrNull<Encounter>(ae_, 
+			an_);
     }
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters() => __Qualifying_Encounters.Value;
@@ -429,29 +430,30 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Numerator_Value()
     {
         var a_ = this.Fluoride_Varnish_Application_for_Children();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
-        Func<Procedure,bool?> k_ = (FluorideApplication) => 
+        var b_ = typeof(Procedure).GetProperty("Code");
+        var c_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+			b_);
+        Func<Procedure,bool?> l_ = (FluorideApplication) => 
         {
-            var c_ = this.Measurement_Period();
-            var d_ = (FluorideApplication?.Performed as object);
-            var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(d_);
-            var f_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(c_, 
-				e_, 
+            var d_ = this.Measurement_Period();
+            var e_ = (FluorideApplication?.Performed as object);
+            var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(e_);
+            var g_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(d_, 
+				f_, 
 				null);
-            var h_ = (FluorideApplication?.StatusElement as object);
-            var g_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var i_ = (FluorideApplication?.StatusElement as object);
+            var h_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(h_) as object);
-            var i_ = ("completed" as object);
-            var j_ = context?.Operators.Equal(g_, 
-				i_);
-            return context?.Operators.And(f_, 
+		null))?.Operators?.TypeConverter).Convert<string>(i_) as object);
+            var j_ = ("completed" as object);
+            var k_ = context?.Operators.Equal(h_, 
 				j_);
+            return context?.Operators.And(g_, 
+				k_);
         };
-        var l_ = context?.Operators.WhereOrNull<Procedure>(b_, 
-			k_);
-        return context?.Operators.ExistsInList<Procedure>(l_);
+        var m_ = context?.Operators.WhereOrNull<Procedure>(c_, 
+			l_);
+        return context?.Operators.ExistsInList<Procedure>(m_);
     }
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;

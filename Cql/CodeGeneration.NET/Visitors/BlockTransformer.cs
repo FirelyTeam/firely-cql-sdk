@@ -34,27 +34,13 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             UseLazyBools = useLazyBools;
         }
 
-        public override Expression? Visit(Expression? node)
-        {
-            if (node == null)
-                return node;
-            switch (node.NodeType)
+        public override Expression? Visit(Expression? node) =>
+            node switch
             {
-                case ExpressionType.Call:
-                case ExpressionType.NewArrayInit:
-                case ExpressionType.MemberInit:
-                case ExpressionType.Lambda:
-                    return base.Visit(node);
-                default:
-                    return node;
-            }
-        }
-
-        protected override Expression VisitMethodCall(MethodCallExpression node)
-        {
-            return ToBlock(node);
-
-        }
+                { NodeType: ExpressionType.Call or ExpressionType.NewArrayInit or ExpressionType.MemberInit } =>
+                            ToBlock(node),
+                _ => node,
+            };
 
         private Expression ToBlock(Expression node)
         {
@@ -112,22 +98,5 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         //    else return Expression.Block(@return);
         //}
 
-        protected override Expression VisitMemberInit(MemberInitExpression node)
-        {
-            return ToBlock(node);
-        }
-
-        protected override Expression VisitNewArray(NewArrayExpression node)
-        {
-            return ToBlock(node);
-        }
-
-        protected override Expression VisitLambda<T>(Expression<T> node)
-        {
-            var newBody = Visit(node.Body) ??
-                throw new InvalidOperationException("Visit returned null");
-            var newLambda = Expression.Lambda(newBody, node.Parameters);
-            return newLambda;
-        }
     }
 }

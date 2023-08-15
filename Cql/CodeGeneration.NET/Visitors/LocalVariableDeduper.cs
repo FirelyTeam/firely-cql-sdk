@@ -125,17 +125,5 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             }
             return newBody;
         }
-
-        protected override Expression VisitLambda<T>(Expression<T> node)
-        {
-            if (node is LambdaExpression lambda)
-            {
-                var newLambdaBody = Visit(lambda.Body)
-                    ?? throw new InvalidOperationException("Visit returned null");
-                var newLambda = Expression.Lambda(newLambdaBody, lambda.Parameters);
-                return newLambda;
-            }
-            return base.VisitLambda(node);
-        }
     }
 }

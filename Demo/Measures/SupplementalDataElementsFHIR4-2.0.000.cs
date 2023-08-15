@@ -152,20 +152,21 @@ public class SupplementalDataElementsFHIR4_2_0_000
     private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
     {
         var a_ = this.Payer();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Coverage>(a_, 
-			typeof(Coverage).GetProperty("Type"));
-        Func<Coverage,Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> e_ = (Payer) => 
+        var b_ = typeof(Coverage).GetProperty("Type");
+        var c_ = context?.DataRetriever.RetrieveByValueSet<Coverage>(a_, 
+			b_);
+        Func<Coverage,Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> f_ = (Payer) => 
         {
-            var c_ = Payer?.Type;
-            var d_ = Payer?.Period;
+            var d_ = Payer?.Type;
+            var e_ = Payer?.Period;
             return new Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG
 			{
-				code = c_,
-				period = d_,
+				code = d_,
+				period = e_,
 			};
         };
-        return context?.Operators.SelectOrNull<Coverage, Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, 
-			e_);
+        return context?.Operators.SelectOrNull<Coverage, Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(c_, 
+			f_);
     }
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
