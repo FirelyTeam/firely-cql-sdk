@@ -686,36 +686,35 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     private IEnumerable<Encounter> Inpatient_Encounter_Value()
     {
         var a_ = this.Encounter_Inpatient();
-        var b_ = typeof(Encounter).GetProperty("Type");
-        var c_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			b_);
-        Func<Encounter,bool?> s_ = (EncounterInpatient) => 
+        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+			null);
+        Func<Encounter,bool?> r_ = (EncounterInpatient) => 
         {
-            var e_ = (EncounterInpatient?.StatusElement as object);
-            var d_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (EncounterInpatient?.StatusElement as object);
+            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_) as object);
-            var f_ = ("finished" as object);
-            var g_ = context?.Operators.Equal(d_, 
-				f_);
-            var i_ = EncounterInpatient?.Period;
-            var j_ = FHIRHelpers_4_0_001.ToInterval(i_);
-            var h_ = (this.LengthInDays(j_) as object);
-            var k_ = (((int?)120) as object);
-            var l_ = context?.Operators.LessOrEqual(h_, 
+		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var e_ = ("finished" as object);
+            var f_ = context?.Operators.Equal(c_, 
+				e_);
+            var h_ = EncounterInpatient?.Period;
+            var i_ = FHIRHelpers_4_0_001.ToInterval(h_);
+            var g_ = (this.LengthInDays(i_) as object);
+            var j_ = (((int?)120) as object);
+            var k_ = context?.Operators.LessOrEqual(g_, 
+				j_);
+            var l_ = context?.Operators.And(f_, 
 				k_);
-            var m_ = context?.Operators.And(g_, 
-				l_);
-            var p_ = context?.Operators.End(j_);
-            var q_ = this.Measurement_Period();
-            var r_ = context?.Operators.ElementInInterval<CqlDateTime>(p_, 
-				q_, 
+            var o_ = context?.Operators.End(i_);
+            var p_ = this.Measurement_Period();
+            var q_ = context?.Operators.ElementInInterval<CqlDateTime>(o_, 
+				p_, 
 				null);
-            return context?.Operators.And(m_, 
-				r_);
+            return context?.Operators.And(l_, 
+				q_);
         };
-        return context?.Operators.WhereOrNull<Encounter>(c_, 
-			s_);
+        return context?.Operators.WhereOrNull<Encounter>(b_, 
+			r_);
     }
     [CqlDeclaration("Inpatient Encounter")]
     public IEnumerable<Encounter> Inpatient_Encounter() => __Inpatient_Encounter.Value;
@@ -724,49 +723,48 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     public Encounter ED_Visit(Encounter TheEncounter)
     {
         var a_ = this.Emergency_Department_Visit();
-        var b_ = typeof(Encounter).GetProperty("Type");
-        var c_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			b_);
-        Func<Encounter,bool?> z_ = (EDVisit) => 
+        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+			null);
+        Func<Encounter,bool?> y_ = (EDVisit) => 
         {
-            var e_ = (EDVisit?.StatusElement as object);
-            var d_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (EDVisit?.StatusElement as object);
+            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_) as object);
-            var f_ = ("finished" as object);
-            var g_ = context?.Operators.Equal(d_, 
-				f_);
-            var h_ = EDVisit?.Period;
-            var i_ = FHIRHelpers_4_0_001.ToInterval(h_);
-            var j_ = context?.Operators.End(i_);
-            var k_ = TheEncounter?.Period;
-            var l_ = FHIRHelpers_4_0_001.ToInterval(k_);
-            var m_ = context?.Operators.Start(l_);
-            var n_ = context?.Operators.Quantity(1m, 
+		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var e_ = ("finished" as object);
+            var f_ = context?.Operators.Equal(c_, 
+				e_);
+            var g_ = EDVisit?.Period;
+            var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
+            var i_ = context?.Operators.End(h_);
+            var j_ = TheEncounter?.Period;
+            var k_ = FHIRHelpers_4_0_001.ToInterval(j_);
+            var l_ = context?.Operators.Start(k_);
+            var m_ = context?.Operators.Quantity(1m, 
 				"hour");
-            var o_ = context?.Operators.Subtract(m_, 
-				n_);
-            var s_ = context?.Operators.Interval(o_, 
-				m_, 
+            var n_ = context?.Operators.Subtract(l_, 
+				m_);
+            var r_ = context?.Operators.Interval(n_, 
+				l_, 
 				true, 
 				true);
-            var t_ = context?.Operators.ElementInInterval<CqlDateTime>(j_, 
-				s_, 
+            var s_ = context?.Operators.ElementInInterval<CqlDateTime>(i_, 
+				r_, 
 				null);
-            bool? u_ = ((bool?)(context?.Operators.Start(l_) == null));
-            var x_ = context?.Operators.Not(u_);
-            var y_ = context?.Operators.And(t_, 
+            bool? t_ = ((bool?)(context?.Operators.Start(k_) == null));
+            var w_ = context?.Operators.Not(t_);
+            var x_ = context?.Operators.And(s_, 
+				w_);
+            return context?.Operators.And(f_, 
 				x_);
-            return context?.Operators.And(g_, 
-				y_);
         };
-        var aa_ = context?.Operators.WhereOrNull<Encounter>(c_, 
-			z_);
-        Func<Encounter,object> ab_ = (@this) => context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(@this?.Period));
-        var ac_ = context?.Operators.ListSortBy<Encounter>(aa_, 
-			ab_, 
+        var z_ = context?.Operators.WhereOrNull<Encounter>(b_, 
+			y_);
+        Func<Encounter,object> aa_ = (@this) => context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(@this?.Period));
+        var ab_ = context?.Operators.ListSortBy<Encounter>(z_, 
+			aa_, 
 			System.ComponentModel.ListSortDirection.Ascending);
-        return context?.Operators.LastOfList<Encounter>(ac_);
+        return context?.Operators.LastOfList<Encounter>(ab_);
     }
 
     [CqlDeclaration("Hospitalization")]
@@ -853,10 +851,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Encounter,CqlInterval<CqlDateTime>> m_ = (Visit) => 
         {
             var d_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Emergency_Department_Visit(), 
-								typeof(Encounter).GetProperty("Type")), 
+								null), 
 							(LastED) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastED?.Period)), 
 										context?.Operators.Interval(context?.Operators.Subtract((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																			typeof(Encounter).GetProperty("Type")), 
+																			null), 
 																		(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																					context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																							context?.Operators.Quantity(1m, 
@@ -871,7 +869,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 												context?.Operators.Quantity(1m, 
 													"hour")), 
 											(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																		typeof(Encounter).GetProperty("Type")), 
+																		null), 
 																	(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																				context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																						context?.Operators.Quantity(1m, 
@@ -887,7 +885,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 											true), 
 										null), 
 									context?.Operators.Not(((bool?)((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																	typeof(Encounter).GetProperty("Type")), 
+																	null), 
 																(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																			context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																					context?.Operators.Quantity(1m, 
@@ -903,7 +901,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 						System.ComponentModel.ListSortDirection.Ascending)))?.Period;
             var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
             var f_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-								typeof(Encounter).GetProperty("Type")), 
+								null), 
 							(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 										context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 												context?.Operators.Quantity(1m, 

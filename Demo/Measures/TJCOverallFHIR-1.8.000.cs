@@ -280,27 +280,26 @@ public class TJCOverallFHIR_1_8_000
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_Value()
     {
         var a_ = this.Non_Elective_Inpatient();
-        var b_ = typeof(Encounter).GetProperty("Type");
-        var c_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			b_);
-        Func<Encounter,bool?> n_ = (NonElectiveEncounter) => 
+        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+			null);
+        Func<Encounter,bool?> m_ = (NonElectiveEncounter) => 
         {
-            var e_ = NonElectiveEncounter?.Period;
-            var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
-            var d_ = (MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(f_) as object);
-            var g_ = (((int?)120) as object);
-            var h_ = context?.Operators.LessOrEqual(d_, 
-				g_);
-            var k_ = context?.Operators.End(f_);
-            var l_ = this.Measurement_Period();
-            var m_ = context?.Operators.ElementInInterval<CqlDateTime>(k_, 
-				l_, 
+            var d_ = NonElectiveEncounter?.Period;
+            var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
+            var c_ = (MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(e_) as object);
+            var f_ = (((int?)120) as object);
+            var g_ = context?.Operators.LessOrEqual(c_, 
+				f_);
+            var j_ = context?.Operators.End(e_);
+            var k_ = this.Measurement_Period();
+            var l_ = context?.Operators.ElementInInterval<CqlDateTime>(j_, 
+				k_, 
 				"day");
-            return context?.Operators.And(h_, 
-				m_);
+            return context?.Operators.And(g_, 
+				l_);
         };
-        return context?.Operators.WhereOrNull<Encounter>(c_, 
-			n_);
+        return context?.Operators.WhereOrNull<Encounter>(b_, 
+			m_);
     }
     [CqlDeclaration("Non Elective Inpatient Encounter")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter() => __Non_Elective_Inpatient_Encounter.Value;
@@ -417,44 +416,42 @@ public class TJCOverallFHIR_1_8_000
     private IEnumerable<object> Intervention_Comfort_Measures_Value()
     {
         var b_ = this.Comfort_Measures();
-        var c_ = typeof(ServiceRequest).GetProperty("Code");
-        var d_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(b_, 
-			c_);
-        Func<ServiceRequest,bool?> h_ = (P) => 
+        var c_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(b_, 
+			null);
+        Func<ServiceRequest,bool?> g_ = (P) => 
         {
-            var f_ = (P?.IntentElement as object);
-            var e_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var e_ = (P?.IntentElement as object);
+            var d_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(f_) as object);
-            var g_ = ("order" as object);
-            return context?.Operators.Equal(e_, 
-				g_);
+		null))?.Operators?.TypeConverter).Convert<string>(e_) as object);
+            var f_ = ("order" as object);
+            return context?.Operators.Equal(d_, 
+				f_);
         };
-        var a_ = (context?.Operators.WhereOrNull<ServiceRequest>(d_, 
-			h_) as IEnumerable<object>);
-        var k_ = typeof(Procedure).GetProperty("Code");
-        var l_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(b_, 
-			k_);
-        Func<Procedure,bool?> r_ = (InterventionPerformed) => 
+        var a_ = (context?.Operators.WhereOrNull<ServiceRequest>(c_, 
+			g_) as IEnumerable<object>);
+        var j_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(b_, 
+			null);
+        Func<Procedure,bool?> p_ = (InterventionPerformed) => 
         {
-            var m_ = (InterventionPerformed?.StatusElement as object);
-            var n_ = (context.Deeper(new CallStackEntry("ToString", 
+            var k_ = (InterventionPerformed?.StatusElement as object);
+            var l_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(m_);
-            var p_ = "completed";
-            var q_ = "in-progress";
-            var o_ = (new string[]
+		null))?.Operators?.TypeConverter).Convert<string>(k_);
+            var n_ = "completed";
+            var o_ = "in-progress";
+            var m_ = (new string[]
 			{
-				p_,
-				q_,
+				n_,
+				o_,
 			} as IEnumerable<string>);
-            return context?.Operators.InList<string>(n_, 
-				o_);
+            return context?.Operators.InList<string>(l_, 
+				m_);
         };
-        var i_ = (context?.Operators.WhereOrNull<Procedure>(l_, 
-			r_) as IEnumerable<object>);
+        var h_ = (context?.Operators.WhereOrNull<Procedure>(j_, 
+			p_) as IEnumerable<object>);
         return context?.Operators.ListUnion<object>(a_, 
-			i_);
+			h_);
     }
     [CqlDeclaration("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures() => __Intervention_Comfort_Measures.Value;

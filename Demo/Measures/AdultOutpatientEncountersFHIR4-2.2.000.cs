@@ -124,49 +124,48 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     private IEnumerable<Encounter> Qualifying_Encounters_Value()
     {
         var a_ = this.Office_Visit();
-        var b_ = typeof(Encounter).GetProperty("Type");
-        var c_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			b_);
-        var d_ = this.Annual_Wellness_Visit();
-        var f_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(d_, 
-			b_);
-        var g_ = context?.Operators.ListUnion<Encounter>(c_, 
-			f_);
-        var h_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var j_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
-			b_);
-        var k_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(k_, 
-			b_);
-        var n_ = context?.Operators.ListUnion<Encounter>(j_, 
+        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+			null);
+        var c_ = this.Annual_Wellness_Visit();
+        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+			null);
+        var e_ = context?.Operators.ListUnion<Encounter>(b_, 
+			d_);
+        var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
+			null);
+        var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+			null);
+        var j_ = context?.Operators.ListUnion<Encounter>(g_, 
+			i_);
+        var k_ = context?.Operators.ListUnion<Encounter>(e_, 
+			j_);
+        var l_ = this.Home_Healthcare_Services();
+        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
+			null);
+        var n_ = context?.Operators.ListUnion<Encounter>(k_, 
 			m_);
-        var o_ = context?.Operators.ListUnion<Encounter>(g_, 
-			n_);
-        var p_ = this.Home_Healthcare_Services();
-        var r_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(p_, 
-			b_);
-        var s_ = context?.Operators.ListUnion<Encounter>(o_, 
-			r_);
-        Func<Encounter,bool?> ab_ = (ValidEncounter) => 
+        Func<Encounter,bool?> w_ = (ValidEncounter) => 
         {
-            var u_ = (ValidEncounter?.StatusElement as object);
-            var t_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var p_ = (ValidEncounter?.StatusElement as object);
+            var o_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(u_) as object);
-            var v_ = ("finished" as object);
-            var w_ = context?.Operators.Equal(t_, 
-				v_);
-            var x_ = this.Measurement_Period();
-            var y_ = (ValidEncounter?.Period as object);
-            var z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(y_);
-            var aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, 
-				z_, 
+		null))?.Operators?.TypeConverter).Convert<string>(p_) as object);
+            var q_ = ("finished" as object);
+            var r_ = context?.Operators.Equal(o_, 
+				q_);
+            var s_ = this.Measurement_Period();
+            var t_ = (ValidEncounter?.Period as object);
+            var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(t_);
+            var v_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(s_, 
+				u_, 
 				null);
-            return context?.Operators.And(w_, 
-				aa_);
+            return context?.Operators.And(r_, 
+				v_);
         };
-        return context?.Operators.WhereOrNull<Encounter>(s_, 
-			ab_);
+        return context?.Operators.WhereOrNull<Encounter>(n_, 
+			w_);
     }
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters() => __Qualifying_Encounters.Value;
