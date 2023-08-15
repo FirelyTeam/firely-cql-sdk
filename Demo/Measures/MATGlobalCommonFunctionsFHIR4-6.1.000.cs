@@ -641,21 +641,21 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     {
         return ((CqlInterval<CqlDateTime>)context.ResolveParameter("MATGlobalCommonFunctionsFHIR4-6.1.000", 
 			"Measurement Period", 
-(context?.Operators.Interval(context?.Operators.DateTime(((int?)2019), 
-((int?)1), 
-((int?)1), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
+			(context?.Operators.Interval(context?.Operators.DateTime(((int?)2019), 
+					((int?)1), 
+					((int?)1), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
 					context?.Operators.ConvertIntegerToDecimal(default)), 
 				context?.Operators.DateTime(((int?)2020), 
-((int?)1), 
-((int?)1), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
+					((int?)1), 
+					((int?)1), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
 					context?.Operators.ConvertIntegerToDecimal(default)), 
 				true, 
 				false) as object)));
@@ -799,8 +799,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				? ((TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>))
 				: (context?.Operators.FlattenList<Encounter.LocationComponent>((new IEnumerable<Encounter.LocationComponent>[]
 						{
-(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
-(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
+							(EDEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
+							(TheEncounter?.Location as IEnumerable<Encounter.LocationComponent>),
 						} as IEnumerable<IEnumerable<Encounter.LocationComponent>>))))
 ;
         var d_ = context?.Operators.SelectOrNull<Encounter, IEnumerable<Encounter.LocationComponent>>(a_, 
@@ -868,7 +868,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 																	System.ComponentModel.ListSortDirection.Ascending)))?.Period)) ?? context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period))), 
 												context?.Operators.Quantity(1m, 
 													"hour")), 
-(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+											(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
 																		typeof(Encounter).GetProperty("Type")), 
 																	(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																				context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
@@ -1181,11 +1181,11 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     public CqlInterval<CqlDateTime> Prevalence_Period(Condition condition)
     {
         if ((context?.Operators.Or(context?.Operators.Or(context?.Operators.Equivalent((FHIRHelpers_4_0_001.ToConcept(condition?.ClinicalStatus) as object), 
-(context?.Operators.ConvertCodeToConcept(this.active()) as object)), 
+						(context?.Operators.ConvertCodeToConcept(this.active()) as object)), 
 					context?.Operators.Equivalent((FHIRHelpers_4_0_001.ToConcept(condition?.ClinicalStatus) as object), 
-(context?.Operators.ConvertCodeToConcept(this.recurrence()) as object))), 
+						(context?.Operators.ConvertCodeToConcept(this.recurrence()) as object))), 
 				context?.Operators.Equivalent((FHIRHelpers_4_0_001.ToConcept(condition?.ClinicalStatus) as object), 
-(context?.Operators.ConvertCodeToConcept(this.relapse()) as object))) ?? false))
+					(context?.Operators.ConvertCodeToConcept(this.relapse()) as object))) ?? false))
             {
                 var a__ = (condition?.Onset as object);
                 var b__ = this.Normalize_Interval(a__);
@@ -1489,7 +1489,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 							(M) => context?.Operators.Equal(((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>((M?.IdElement as object)) as object), 
-(this.GetId((context.Deeper(new CallStackEntry("ToString", 
+									(this.GetId((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(((((request?.Medication as object) as ResourceReference))?.ReferenceElement as object))) as object)))))?.Code;
             }

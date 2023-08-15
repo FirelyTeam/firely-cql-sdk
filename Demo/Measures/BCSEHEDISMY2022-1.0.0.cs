@@ -286,15 +286,15 @@ public class BCSEHEDISMY2022_1_0_0
         var c_ = context?.Operators.ComponentFrom(b_, 
 			"year");
         var d_ = context?.Operators.Subtract(c_, 
-((int?)2));
+			((int?)2));
         var e_ = context?.Operators.ConvertIntegerToDecimal(((int?)0));
         return context?.Operators.DateTime(d_, 
-((int?)10), 
-((int?)1), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
+			((int?)10), 
+			((int?)1), 
+			((int?)0), 
+			((int?)0), 
+			((int?)0), 
+			((int?)0), 
 			e_);
     }
     [CqlDeclaration("October 1 Two Years Prior to the Measurement Period")]
@@ -351,7 +351,7 @@ public class BCSEHEDISMY2022_1_0_0
         var m_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, 
 			d_, 
 			l_, 
-((int?)0));
+			((int?)0));
         var s_ = context?.Operators.Start(b_);
         var t_ = context?.Operators.DateFrom(s_);
         var u_ = context?.Operators.Quantity(1m, 
@@ -367,7 +367,7 @@ public class BCSEHEDISMY2022_1_0_0
         var ac_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, 
 			d_, 
 			ab_, 
-((int?)45));
+			((int?)45));
         var ad_ = context?.Operators.And(m_, 
 			ac_);
         var ao_ = context?.Operators.Interval(t_, 
@@ -377,7 +377,7 @@ public class BCSEHEDISMY2022_1_0_0
         var ap_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, 
 			d_, 
 			ao_, 
-((int?)45));
+			((int?)45));
         return context?.Operators.And(ad_, 
 			ap_);
     }
@@ -395,7 +395,7 @@ public class BCSEHEDISMY2022_1_0_0
 			e_, 
 			"year");
         var g_ = context?.Operators.Interval(((int?)52), 
-((int?)74), 
+			((int?)74), 
 			true, 
 			true);
         var h_ = context?.Operators.ElementInInterval<int?>(f_, 

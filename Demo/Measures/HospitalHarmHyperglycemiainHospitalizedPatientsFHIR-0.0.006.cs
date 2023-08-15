@@ -488,7 +488,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
             var e_ = context?.Operators.Quantity(24m, 
 				"hours");
             var f_ = context?.Operators.Subtract(DayIndex, 
-((int?)1));
+				((int?)1));
             var g_ = context?.Operators.ConvertIntegerToQuantity(f_);
             var h_ = context?.Operators.Multiply(e_, 
 				g_);
@@ -690,12 +690,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 var n_ = EncounterDay?.hasNoResult;
                 var o_ = (context?.Operators.ListElementAt<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(EncounterWithResultDays?.relevantDays, 
 						context?.Operators.Subtract(EncounterDay?.dayIndex, 
-((int?)2))))?.hasElevatedResult;
+							((int?)2))))?.hasElevatedResult;
                 var p_ = context?.Operators.And(n_, 
 					o_);
                 var q_ = (context?.Operators.ListElementAt<Tuples.Tuple_EPQMNeOgChVRHOcBPRccPNZeF>(EncounterWithResultDays?.relevantDays, 
 						context?.Operators.Subtract(EncounterDay?.dayIndex, 
-((int?)3))))?.hasElevatedResult;
+							((int?)3))))?.hasElevatedResult;
                 var r_ = context?.Operators.And(p_, 
 					q_);
                 var l_ = context?.Operators.Or(m_, 

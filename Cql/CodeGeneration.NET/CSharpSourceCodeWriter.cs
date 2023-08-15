@@ -868,7 +868,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                     typeDeclaration = PrettyTypeName(binary.Left.Type);
                                 }
                                 var right = ToCode(indent, binary.Right, false);
-                                var assignment = $"{typeDeclaration} {parameter.Name} = {right};";
+                                var assignment = $"{leadingIndentString}{typeDeclaration} {parameter.Name} = {right};";
                                 return assignment;
                             }
                             else if (binary.NodeType == ExpressionType.Coalesce &&
@@ -889,7 +889,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             {
                                 var left = ToCode(indent, binary.Left, false);
                                 var right = ToCode(indent, binary.Right, false);
-                                var binaryString = $"({left} {@operator} {right})";
+                                var binaryString = $"{leadingIndentString}({left} {@operator} {right})";
                                 return binaryString;
                             }
                         }
@@ -934,7 +934,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                     else
                                     {
                                         var typeName = PrettyTypeName(unary.Type);
-                                        var code = $"(({typeName}){operand})";
+                                        var code = $"{leadingIndentString}(({typeName}){operand})";
                                         return code;
                                     }
                                 }
@@ -942,7 +942,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 {
                                     var operand = ToCode(indent, unary.Operand, false);
                                     var typeName = PrettyTypeName(unary.Type);
-                                    var code = $"({operand} as {typeName})";
+                                    var code = $"{leadingIndentString}({operand} as {typeName})";
                                     return code;
                                 }
 

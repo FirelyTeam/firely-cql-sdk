@@ -463,7 +463,7 @@ public class NCQAFHIRBase_1_0_0
     {
         if ((context?.Operators.Greater((context?.Operators.PositionOf("/", 
 					uri) as object), 
-(((int?)0) as object)) ?? false))
+				(((int?)0) as object)) ?? false))
             {
                 var a__ = context?.Operators.Split(uri, 
 					"/");
@@ -550,7 +550,7 @@ public class NCQAFHIRBase_1_0_0
                 var r_ = context?.Operators.WhereOrNull<CqlDate>(DateList, 
 					ae_);
                 var af_ = context?.Operators.Add(q_, 
-((int?)1));
+					((int?)1));
                 var n_ = new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 				{
 					NextDate = o_,
@@ -584,7 +584,7 @@ public class NCQAFHIRBase_1_0_0
 																true), 
 															null))),
 											IndexofNewDate = context?.Operators.Add(FirstList?.IndexofNewDate, 
-((int?)1)),
+												((int?)1)),
 										},
 									}, 
 									(SecondList) => (((context?.Operators.ListElementAt<CqlDate>(SecondList?.NewList, 
@@ -610,7 +610,7 @@ public class NCQAFHIRBase_1_0_0
 																					true), 
 																				null))),
 																IndexofNewDate = context?.Operators.Add(SecondList?.IndexofNewDate, 
-((int?)1)),
+																	((int?)1)),
 															},
 														}, 
 														(ThirdList) => (((context?.Operators.ListElementAt<CqlDate>(ThirdList?.NewList, 
@@ -636,7 +636,7 @@ public class NCQAFHIRBase_1_0_0
 																										true), 
 																									null))),
 																					IndexofNewDate = context?.Operators.Add(ThirdList?.IndexofNewDate, 
-((int?)1)),
+																						((int?)1)),
 																				},
 																			}, 
 																			(FourthList) => (((context?.Operators.ListElementAt<CqlDate>(FourthList?.NewList, 
@@ -662,7 +662,7 @@ public class NCQAFHIRBase_1_0_0
 																															true), 
 																														null))),
 																										IndexofNewDate = context?.Operators.Add(FourthList?.IndexofNewDate, 
-((int?)1)),
+																											((int?)1)),
 																									},
 																								}, 
 																								(FifthList) => (((context?.Operators.ListElementAt<CqlDate>(FifthList?.NewList, 
@@ -688,7 +688,7 @@ public class NCQAFHIRBase_1_0_0
 																																				true), 
 																																			null))),
 																															IndexofNewDate = context?.Operators.Add(FifthList?.IndexofNewDate, 
-((int?)1)),
+																																((int?)1)),
 																														},
 																													}, 
 																													(SixthList) => (((context?.Operators.ListElementAt<CqlDate>(SixthList?.NewList, 
@@ -714,7 +714,7 @@ public class NCQAFHIRBase_1_0_0
 																																									true), 
 																																								null))),
 																																				IndexofNewDate = context?.Operators.Add(SixthList?.IndexofNewDate, 
-((int?)1)),
+																																					((int?)1)),
 																																			},
 																																		}, 
 																																		(SeventhList) => (((context?.Operators.ListElementAt<CqlDate>(SeventhList?.NewList, 
@@ -740,7 +740,7 @@ public class NCQAFHIRBase_1_0_0
 																																														true), 
 																																													null))),
 																																									IndexofNewDate = context?.Operators.Add(SeventhList?.IndexofNewDate, 
-((int?)1)),
+																																										((int?)1)),
 																																								},
 																																							}, 
 																																							(EighthList) => (((context?.Operators.ListElementAt<CqlDate>(EighthList?.NewList, 
@@ -766,7 +766,7 @@ public class NCQAFHIRBase_1_0_0
 																																																			true), 
 																																																		null))),
 																																														IndexofNewDate = context?.Operators.Add(EighthList?.IndexofNewDate, 
-((int?)1)),
+																																															((int?)1)),
 																																													},
 																																												}, 
 																																												(NinethList) => (((context?.Operators.ListElementAt<CqlDate>(NinethList?.NewList, 
@@ -792,7 +792,7 @@ public class NCQAFHIRBase_1_0_0
 																																																								true), 
 																																																							null))),
 																																																			IndexofNewDate = context?.Operators.Add(NinethList?.IndexofNewDate, 
-((int?)1)),
+																																																				((int?)1)),
 																																																		},
 																																																	}, 
 																																																	(TenthList) => (((context?.Operators.ListElementAt<CqlDate>(TenthList?.NewList, 
@@ -818,7 +818,7 @@ public class NCQAFHIRBase_1_0_0
 																																																													true), 
 																																																												null))),
 																																																								IndexofNewDate = context?.Operators.Add(TenthList?.IndexofNewDate, 
-((int?)1)),
+																																																									((int?)1)),
 																																																							},
 																																																						}, 
 																																																						(EleventhList) => (((context?.Operators.ListElementAt<CqlDate>(EleventhList?.NewList, 
@@ -842,7 +842,7 @@ public class NCQAFHIRBase_1_0_0
 																																																															true), 
 																																																														null))),
 																																																										IndexofNewDate = context?.Operators.Add(EleventhList?.IndexofNewDate, 
-((int?)1)),
+																																																											((int?)1)),
 																																																									}))
 ))))
 ))))
