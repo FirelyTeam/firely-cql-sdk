@@ -1501,7 +1501,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     {
         bool? a_ = ((bool?)(context?.Operators.Start(period) == null));
         var b_ = (context?.Operators.Start(period) as object);
-        var c_ = (context.Operators.Minimum<Hl7.Cql.Primitives.CqlDateTime>() as object);
+        var c_ = (context?.Operators.Minimum<CqlDateTime>() as object);
         var d_ = context?.Operators.Equal(b_, 
 			c_);
         var e_ = context?.Operators.Or(a_, 
@@ -1514,7 +1514,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     {
         bool? a_ = ((bool?)(context?.Operators.End(period) == null));
         var b_ = (context?.Operators.End(period) as object);
-        var c_ = (context.Operators.Maximum<Hl7.Cql.Primitives.CqlDateTime>() as object);
+        var c_ = (context?.Operators.Maximum<CqlDateTime>() as object);
         var d_ = context?.Operators.Equal(b_, 
 			c_);
         var e_ = context?.Operators.Or(a_, 

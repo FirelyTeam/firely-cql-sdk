@@ -562,22 +562,22 @@ public class NCQAFHIRBase_1_0_0
 					n_,
 				};
                 Func<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT,Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT> ah_ = (FirstList) => (((context?.Operators.ListElementAt<CqlDate>(FirstList?.NewList, 
-FirstList?.IndexofNewDate) == null))
+						FirstList?.IndexofNewDate) == null))
 						? (FirstList)
 						: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 									{
 										new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 										{
 											NextDate = (context?.Operators.ListElementAt<CqlDate>(FirstList?.NewList, 
-FirstList?.IndexofNewDate) as CqlDate),
+												FirstList?.IndexofNewDate) as CqlDate),
 											NewList = context?.Operators.WhereOrNull<CqlDate>(FirstList?.NewList, 
 												(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 															context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(FirstList?.NewList, 
-FirstList?.IndexofNewDate) as CqlDate), 
+																		FirstList?.IndexofNewDate) as CqlDate), 
 																	context?.Operators.Quantity(1m, 
 																		"day")), 
 																context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(FirstList?.NewList, 
-FirstList?.IndexofNewDate) as CqlDate), 
+																		FirstList?.IndexofNewDate) as CqlDate), 
 																	context?.Operators.Quantity(30m, 
 																		"days")), 
 																true, 
@@ -588,22 +588,22 @@ FirstList?.IndexofNewDate) as CqlDate),
 										},
 									}, 
 									(SecondList) => (((context?.Operators.ListElementAt<CqlDate>(SecondList?.NewList, 
-SecondList?.IndexofNewDate) == null))
+											SecondList?.IndexofNewDate) == null))
 											? (SecondList)
 											: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 														{
 															new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 															{
 																NextDate = (context?.Operators.ListElementAt<CqlDate>(SecondList?.NewList, 
-SecondList?.IndexofNewDate) as CqlDate),
+																	SecondList?.IndexofNewDate) as CqlDate),
 																NewList = context?.Operators.WhereOrNull<CqlDate>(SecondList?.NewList, 
 																	(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																				context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(SecondList?.NewList, 
-SecondList?.IndexofNewDate) as CqlDate), 
+																							SecondList?.IndexofNewDate) as CqlDate), 
 																						context?.Operators.Quantity(1m, 
 																							"day")), 
 																					context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(SecondList?.NewList, 
-SecondList?.IndexofNewDate) as CqlDate), 
+																							SecondList?.IndexofNewDate) as CqlDate), 
 																						context?.Operators.Quantity(30m, 
 																							"days")), 
 																					true, 
@@ -614,22 +614,22 @@ SecondList?.IndexofNewDate) as CqlDate),
 															},
 														}, 
 														(ThirdList) => (((context?.Operators.ListElementAt<CqlDate>(ThirdList?.NewList, 
-ThirdList?.IndexofNewDate) == null))
+																ThirdList?.IndexofNewDate) == null))
 																? (ThirdList)
 																: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																			{
 																				new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																				{
 																					NextDate = (context?.Operators.ListElementAt<CqlDate>(ThirdList?.NewList, 
-ThirdList?.IndexofNewDate) as CqlDate),
+																						ThirdList?.IndexofNewDate) as CqlDate),
 																					NewList = context?.Operators.WhereOrNull<CqlDate>(ThirdList?.NewList, 
 																						(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																									context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(ThirdList?.NewList, 
-ThirdList?.IndexofNewDate) as CqlDate), 
+																												ThirdList?.IndexofNewDate) as CqlDate), 
 																											context?.Operators.Quantity(1m, 
 																												"day")), 
 																										context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(ThirdList?.NewList, 
-ThirdList?.IndexofNewDate) as CqlDate), 
+																												ThirdList?.IndexofNewDate) as CqlDate), 
 																											context?.Operators.Quantity(30m, 
 																												"days")), 
 																										true, 
@@ -640,22 +640,22 @@ ThirdList?.IndexofNewDate) as CqlDate),
 																				},
 																			}, 
 																			(FourthList) => (((context?.Operators.ListElementAt<CqlDate>(FourthList?.NewList, 
-FourthList?.IndexofNewDate) == null))
+																					FourthList?.IndexofNewDate) == null))
 																					? (FourthList)
 																					: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																								{
 																									new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																									{
 																										NextDate = (context?.Operators.ListElementAt<CqlDate>(FourthList?.NewList, 
-FourthList?.IndexofNewDate) as CqlDate),
+																											FourthList?.IndexofNewDate) as CqlDate),
 																										NewList = context?.Operators.WhereOrNull<CqlDate>(FourthList?.NewList, 
 																											(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																														context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(FourthList?.NewList, 
-FourthList?.IndexofNewDate) as CqlDate), 
+																																	FourthList?.IndexofNewDate) as CqlDate), 
 																																context?.Operators.Quantity(1m, 
 																																	"day")), 
 																															context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(FourthList?.NewList, 
-FourthList?.IndexofNewDate) as CqlDate), 
+																																	FourthList?.IndexofNewDate) as CqlDate), 
 																																context?.Operators.Quantity(30m, 
 																																	"days")), 
 																															true, 
@@ -666,22 +666,22 @@ FourthList?.IndexofNewDate) as CqlDate),
 																									},
 																								}, 
 																								(FifthList) => (((context?.Operators.ListElementAt<CqlDate>(FifthList?.NewList, 
-FifthList?.IndexofNewDate) == null))
+																										FifthList?.IndexofNewDate) == null))
 																										? (FifthList)
 																										: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																													{
 																														new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																														{
 																															NextDate = (context?.Operators.ListElementAt<CqlDate>(FifthList?.NewList, 
-FifthList?.IndexofNewDate) as CqlDate),
+																																FifthList?.IndexofNewDate) as CqlDate),
 																															NewList = context?.Operators.WhereOrNull<CqlDate>(FifthList?.NewList, 
 																																(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																																			context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(FifthList?.NewList, 
-FifthList?.IndexofNewDate) as CqlDate), 
+																																						FifthList?.IndexofNewDate) as CqlDate), 
 																																					context?.Operators.Quantity(1m, 
 																																						"day")), 
 																																				context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(FifthList?.NewList, 
-FifthList?.IndexofNewDate) as CqlDate), 
+																																						FifthList?.IndexofNewDate) as CqlDate), 
 																																					context?.Operators.Quantity(30m, 
 																																						"days")), 
 																																				true, 
@@ -692,22 +692,22 @@ FifthList?.IndexofNewDate) as CqlDate),
 																														},
 																													}, 
 																													(SixthList) => (((context?.Operators.ListElementAt<CqlDate>(SixthList?.NewList, 
-SixthList?.IndexofNewDate) == null))
+																															SixthList?.IndexofNewDate) == null))
 																															? (SixthList)
 																															: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																																		{
 																																			new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																																			{
 																																				NextDate = (context?.Operators.ListElementAt<CqlDate>(SixthList?.NewList, 
-SixthList?.IndexofNewDate) as CqlDate),
+																																					SixthList?.IndexofNewDate) as CqlDate),
 																																				NewList = context?.Operators.WhereOrNull<CqlDate>(SixthList?.NewList, 
 																																					(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																																								context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(SixthList?.NewList, 
-SixthList?.IndexofNewDate) as CqlDate), 
+																																											SixthList?.IndexofNewDate) as CqlDate), 
 																																										context?.Operators.Quantity(1m, 
 																																											"day")), 
 																																									context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(SixthList?.NewList, 
-SixthList?.IndexofNewDate) as CqlDate), 
+																																											SixthList?.IndexofNewDate) as CqlDate), 
 																																										context?.Operators.Quantity(30m, 
 																																											"days")), 
 																																									true, 
@@ -718,22 +718,22 @@ SixthList?.IndexofNewDate) as CqlDate),
 																																			},
 																																		}, 
 																																		(SeventhList) => (((context?.Operators.ListElementAt<CqlDate>(SeventhList?.NewList, 
-SeventhList?.IndexofNewDate) == null))
+																																				SeventhList?.IndexofNewDate) == null))
 																																				? (SeventhList)
 																																				: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																																							{
 																																								new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																																								{
 																																									NextDate = (context?.Operators.ListElementAt<CqlDate>(SeventhList?.NewList, 
-SeventhList?.IndexofNewDate) as CqlDate),
+																																										SeventhList?.IndexofNewDate) as CqlDate),
 																																									NewList = context?.Operators.WhereOrNull<CqlDate>(SeventhList?.NewList, 
 																																										(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																																													context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(SeventhList?.NewList, 
-SeventhList?.IndexofNewDate) as CqlDate), 
+																																																SeventhList?.IndexofNewDate) as CqlDate), 
 																																															context?.Operators.Quantity(1m, 
 																																																"day")), 
 																																														context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(SeventhList?.NewList, 
-SeventhList?.IndexofNewDate) as CqlDate), 
+																																																SeventhList?.IndexofNewDate) as CqlDate), 
 																																															context?.Operators.Quantity(30m, 
 																																																"days")), 
 																																														true, 
@@ -744,22 +744,22 @@ SeventhList?.IndexofNewDate) as CqlDate),
 																																								},
 																																							}, 
 																																							(EighthList) => (((context?.Operators.ListElementAt<CqlDate>(EighthList?.NewList, 
-EighthList?.IndexofNewDate) == null))
+																																									EighthList?.IndexofNewDate) == null))
 																																									? (EighthList)
 																																									: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																																												{
 																																													new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																																													{
 																																														NextDate = (context?.Operators.ListElementAt<CqlDate>(EighthList?.NewList, 
-EighthList?.IndexofNewDate) as CqlDate),
+																																															EighthList?.IndexofNewDate) as CqlDate),
 																																														NewList = context?.Operators.WhereOrNull<CqlDate>(EighthList?.NewList, 
 																																															(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																																																		context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(EighthList?.NewList, 
-EighthList?.IndexofNewDate) as CqlDate), 
+																																																					EighthList?.IndexofNewDate) as CqlDate), 
 																																																				context?.Operators.Quantity(1m, 
 																																																					"day")), 
 																																																			context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(EighthList?.NewList, 
-EighthList?.IndexofNewDate) as CqlDate), 
+																																																					EighthList?.IndexofNewDate) as CqlDate), 
 																																																				context?.Operators.Quantity(30m, 
 																																																					"days")), 
 																																																			true, 
@@ -770,22 +770,22 @@ EighthList?.IndexofNewDate) as CqlDate),
 																																													},
 																																												}, 
 																																												(NinethList) => (((context?.Operators.ListElementAt<CqlDate>(NinethList?.NewList, 
-NinethList?.IndexofNewDate) == null))
+																																														NinethList?.IndexofNewDate) == null))
 																																														? (NinethList)
 																																														: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																																																	{
 																																																		new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																																																		{
 																																																			NextDate = (context?.Operators.ListElementAt<CqlDate>(NinethList?.NewList, 
-NinethList?.IndexofNewDate) as CqlDate),
+																																																				NinethList?.IndexofNewDate) as CqlDate),
 																																																			NewList = context?.Operators.WhereOrNull<CqlDate>(NinethList?.NewList, 
 																																																				(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																																																							context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(NinethList?.NewList, 
-NinethList?.IndexofNewDate) as CqlDate), 
+																																																										NinethList?.IndexofNewDate) as CqlDate), 
 																																																									context?.Operators.Quantity(1m, 
 																																																										"day")), 
 																																																								context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(NinethList?.NewList, 
-NinethList?.IndexofNewDate) as CqlDate), 
+																																																										NinethList?.IndexofNewDate) as CqlDate), 
 																																																									context?.Operators.Quantity(30m, 
 																																																										"days")), 
 																																																								true, 
@@ -796,22 +796,22 @@ NinethList?.IndexofNewDate) as CqlDate),
 																																																		},
 																																																	}, 
 																																																	(TenthList) => (((context?.Operators.ListElementAt<CqlDate>(TenthList?.NewList, 
-TenthList?.IndexofNewDate) == null))
+																																																			TenthList?.IndexofNewDate) == null))
 																																																			? (TenthList)
 																																																			: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 																																																						{
 																																																							new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																																																							{
 																																																								NextDate = (context?.Operators.ListElementAt<CqlDate>(TenthList?.NewList, 
-TenthList?.IndexofNewDate) as CqlDate),
+																																																									TenthList?.IndexofNewDate) as CqlDate),
 																																																								NewList = context?.Operators.WhereOrNull<CqlDate>(TenthList?.NewList, 
 																																																									(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																																																												context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(TenthList?.NewList, 
-TenthList?.IndexofNewDate) as CqlDate), 
+																																																															TenthList?.IndexofNewDate) as CqlDate), 
 																																																														context?.Operators.Quantity(1m, 
 																																																															"day")), 
 																																																													context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(TenthList?.NewList, 
-TenthList?.IndexofNewDate) as CqlDate), 
+																																																															TenthList?.IndexofNewDate) as CqlDate), 
 																																																														context?.Operators.Quantity(30m, 
 																																																															"days")), 
 																																																													true, 
@@ -822,20 +822,20 @@ TenthList?.IndexofNewDate) as CqlDate),
 																																																							},
 																																																						}, 
 																																																						(EleventhList) => (((context?.Operators.ListElementAt<CqlDate>(EleventhList?.NewList, 
-EleventhList?.IndexofNewDate) == null))
+																																																								EleventhList?.IndexofNewDate) == null))
 																																																								? (EleventhList)
 																																																								: (new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 																																																									{
 																																																										NextDate = (context?.Operators.ListElementAt<CqlDate>(EleventhList?.NewList, 
-EleventhList?.IndexofNewDate) as CqlDate),
+																																																											EleventhList?.IndexofNewDate) as CqlDate),
 																																																										NewList = context?.Operators.WhereOrNull<CqlDate>(EleventhList?.NewList, 
 																																																											(X) => context?.Operators.Not(context?.Operators.ElementInInterval<CqlDate>(X, 
 																																																														context?.Operators.Interval(context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(EleventhList?.NewList, 
-EleventhList?.IndexofNewDate) as CqlDate), 
+																																																																	EleventhList?.IndexofNewDate) as CqlDate), 
 																																																																context?.Operators.Quantity(1m, 
 																																																																	"day")), 
 																																																															context?.Operators.Add((context?.Operators.ListElementAt<CqlDate>(EleventhList?.NewList, 
-EleventhList?.IndexofNewDate) as CqlDate), 
+																																																																	EleventhList?.IndexofNewDate) as CqlDate), 
 																																																																context?.Operators.Quantity(30m, 
 																																																																	"days")), 
 																																																															true, 

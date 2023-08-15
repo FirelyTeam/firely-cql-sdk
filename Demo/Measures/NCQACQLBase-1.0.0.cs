@@ -50,7 +50,7 @@ public class NCQACQLBase_1_0_0
                 {
                     var a__ = I;
                     var b__ = (((context?.Operators.Start(I) == null))
-						? (context.Operators.Minimum<Hl7.Cql.Primitives.CqlDate>())
+						? (context?.Operators.Minimum<CqlDate>())
 						: (context?.Operators.Start(I)))
 ;
                     return new Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA
@@ -93,7 +93,7 @@ public class NCQACQLBase_1_0_0
                 {
                     var a__ = I;
                     var b__ = (((context?.Operators.Start(I) == null))
-						? (context.Operators.Minimum<Hl7.Cql.Primitives.CqlDateTime>())
+						? (context?.Operators.Minimum<CqlDateTime>())
 						: (context?.Operators.Start(I)))
 ;
                     return new Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ

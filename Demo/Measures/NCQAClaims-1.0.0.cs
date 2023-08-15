@@ -1713,7 +1713,7 @@ public class NCQAClaims_1_0_0
 ((bool?)(MedicalClaimAndResponse?.MedicalClaim == null))) ?? false))
 				? ((null as Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO))
 				: (this.Get_Corresponding_Claim_for_Services_and_Conditions(MedicalClaimAndResponse?.MedicalClaimResponse, 
-MedicalClaimAndResponse?.MedicalClaim, 
+						MedicalClaimAndResponse?.MedicalClaim, 
 						ProductOrServiceValueSet, 
 						DiagnosisValueSet)))
 ;
@@ -2023,7 +2023,7 @@ MedicalClaimAndResponse?.MedicalClaim,
 ((bool?)(MedicalClaimAndResponse?.MedicalClaim == null))) ?? false))
 				? ((null as Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO))
 				: (this.Get_Corresponding_Claim_for_Services_or_Conditions(MedicalClaimAndResponse?.MedicalClaimResponse, 
-MedicalClaimAndResponse?.MedicalClaim, 
+						MedicalClaimAndResponse?.MedicalClaim, 
 						ProductOrServiceValueSet, 
 						DiagnosisValueSet)))
 ;
@@ -2279,7 +2279,7 @@ MedicalClaimAndResponse?.MedicalClaim,
 ((bool?)(MedicalClaimAndResponse?.MedicalClaim == null))) ?? false))
 				? ((null as Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO))
 				: (this.Get_Corresponding_Claim_for_Services_Only(MedicalClaimAndResponse?.MedicalClaimResponse, 
-MedicalClaimAndResponse?.MedicalClaim, 
+						MedicalClaimAndResponse?.MedicalClaim, 
 						ProductOrServiceValueSet)))
 ;
         var d_ = context?.Operators.SelectOrNull<Tuples.Tuple_GjTATZbNccdVYWChGHHdRUXSM, Tuples.Tuple_FbAEUOYETObSHBafYbFNIeSNO>(a_, 
@@ -2497,7 +2497,7 @@ MedicalClaimAndResponse?.MedicalClaim,
 ((bool?)(PharmacyClaimAndResponse?.PharmacyClaim == null))) ?? false))
 				? ((null as Tuples.Tuple_BOANHMYNiCIfFjRZRMEXCcXTO))
 				: (this.Get_Corresponding_Claim_for_Pharmacy_Services(PharmacyClaimAndResponse?.PharmacyClaimResponse, 
-PharmacyClaimAndResponse?.PharmacyClaim, 
+						PharmacyClaimAndResponse?.PharmacyClaim, 
 						ProductOrServiceValueSet)))
 ;
         var d_ = context?.Operators.SelectOrNull<Tuples.Tuple_ENRfaLDabXeaNdJYVdOfebBTR, Tuples.Tuple_BOANHMYNiCIfFjRZRMEXCcXTO>(a_, 

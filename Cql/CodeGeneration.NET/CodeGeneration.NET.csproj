@@ -10,21 +10,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AgileObjects.ReadableExpressions" Version="2.6.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
 	</ItemGroup>
-
-	
 	
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
 	</ItemGroup>
-
 
 </Project>

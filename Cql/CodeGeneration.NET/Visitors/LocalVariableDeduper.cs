@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using AgileObjects.ReadableExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +67,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             while (replacementsFound)
             {
-                foreach (var likeVariables in variableExpressions.GroupBy(expr => expr.Right.ToReadableString()))
+                foreach (var likeVariables in variableExpressions.GroupBy(expr => expr.Right.GetDebugView()))
                 {
                     if (likeVariables.Count() > 1)
                     {

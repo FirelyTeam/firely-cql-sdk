@@ -875,7 +875,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 		};
         Func<MedicationRequest,CqlInterval<CqlDateTime>> c_ = (R) => (((context?.Operators.Not(context?.Operators.Or(((bool?)(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval((((((context?.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds as object) as Period))) == null)), 
 					context?.Operators.Equal((context?.Operators.End(FHIRHelpers_4_0_001.ToInterval((((((context?.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds as object) as Period))) as object), 
-(context.Operators.Maximum<Hl7.Cql.Primitives.CqlDateTime>() as object)))) ?? false))
+(context?.Operators.Maximum<CqlDateTime>() as object)))) ?? false))
 				? (context?.Operators.Interval(((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((((((context?.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds as object) as Period))) ?? context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(R?.DispenseRequest?.ValidityPeriod))) ?? FHIRHelpers_4_0_001.ToDateTime(R?.AuthoredOnElement)), 
 						context?.Operators.End(FHIRHelpers_4_0_001.ToInterval((((((context?.Operators.SingleOrNull<Dosage>((R?.DosageInstruction as IEnumerable<Dosage>)))?.Timing)?.Repeat)?.Bounds as object) as Period))), 
 						true, 
