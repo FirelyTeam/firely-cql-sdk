@@ -185,7 +185,7 @@ namespace Hl7.Cql.Compiler
         protected Expression ToLong(elm.ToLong e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            return ChangeType(operand, typeof(decimal?), ctx);
+            return ChangeType(operand, typeof(long?), ctx);
         }
 
         protected Expression? ToInteger(elm.ToInteger e, ExpressionBuilderContext ctx)

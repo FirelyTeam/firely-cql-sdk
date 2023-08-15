@@ -824,6 +824,9 @@ namespace Hl7.Cql.Compiler
                 case ToList tle:
                     expression = ToList(tle, ctx);
                     break;
+                case ToLong toLong:
+                    expression = ToLong(toLong, ctx);
+                    break;
                 case ToQuantity tq:
                     expression = ToQuantity(tq, ctx);
                     break;
