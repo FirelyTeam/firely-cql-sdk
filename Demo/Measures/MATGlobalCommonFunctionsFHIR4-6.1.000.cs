@@ -1037,17 +1037,21 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 					f__);
             }
         else if (((choice is Timing as bool?) ?? false))
-            return context?.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), 
-				"1", 
-				"Error", 
-				"Cannot compute a single interval from a Timing type");
-
+            {
+                var a__ = (null as CqlInterval<CqlDateTime>);
+                return context?.Operators.Message<CqlInterval<CqlDateTime>>(a__, 
+					"1", 
+					"Error", 
+					"Cannot compute a single interval from a Timing type");
+            }
         else if (((choice is FhirString as bool?) ?? false))
-            return context?.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), 
-				"1", 
-				"Error", 
-				"Cannot compute an interval from a String value");
-
+            {
+                var a__ = (null as CqlInterval<CqlDateTime>);
+                return context?.Operators.Message<CqlInterval<CqlDateTime>>(a__, 
+					"1", 
+					"Error", 
+					"Cannot compute an interval from a String value");
+            }
         else 
             return (null as CqlInterval<CqlDateTime>);
 
@@ -1072,11 +1076,13 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
                 return FHIRHelpers_4_0_001.ToInterval(a__);
             }
         else if ((((condition?.Abatement as object) is FhirString as bool?) ?? false))
-            return context?.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), 
-				"1", 
-				"Error", 
-				"Cannot compute an interval from a String value");
-
+            {
+                var a__ = (null as CqlInterval<CqlDateTime>);
+                return context?.Operators.Message<CqlInterval<CqlDateTime>>(a__, 
+					"1", 
+					"Error", 
+					"Cannot compute an interval from a String value");
+            }
         else if ((((condition?.Abatement as object) is Age as bool?) ?? false))
             {
                 var a__ = (context?.Operators.Interval(context?.Operators.Add(FHIRHelpers_4_0_001.ToDate(this.Patient()?.BirthDateElement), 

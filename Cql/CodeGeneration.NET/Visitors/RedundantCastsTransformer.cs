@@ -13,30 +13,37 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class RedundantCastsTransformer : ExpressionVisitor
     {
+        private readonly bool special;
+
+        public RedundantCastsTransformer(bool special = false)
+        {
+            this.special = special;
+        }
         protected override Expression VisitConditional(ConditionalExpression node)
         {
             var condition = Visit(node.Test);
-            var reducedNode = node.Update(condition, node.IfTrue, node.IfFalse);
 
             // if(true,A,B) => A /  if(false,A,B) => B
             return condition switch
             {
-                ConstantExpression { Value: true } => reducedNode.IfTrue,
-                ConstantExpression { Value: false } => reducedNode.IfFalse,
-                _ => reducedNode
+                ConstantExpression { Value: true } => Visit(node.IfTrue),
+                ConstantExpression { Value: false } => Visit(node.IfFalse),
+                _ => node.Update(condition, Visit(node.IfTrue), Visit(node.IfFalse))
             };
         }
 
         protected override Expression VisitBinary(BinaryExpression node)
         {
-            // ((T?)T_A) ?? T_B => T_A
+            // ((T?)a::T) ?? b::T => a
             if (node is
                 {
                     NodeType: ExpressionType.Coalesce,
-                    Left: UnaryExpression { NodeType: ExpressionType.Convert } ue
-                } coal && coal.Type == Nullable.GetUnderlyingType(ue.Type))
+                    Left: UnaryExpression { NodeType: ExpressionType.Convert } conversion
+                } && Nullable.GetUnderlyingType(conversion.Operand.Type) is null
+                 && Nullable.GetUnderlyingType(conversion.Type) == conversion.Operand.Type
+                )
             {
-                return Visit(ue.Operand);
+                return Visit(conversion.Operand);
             }
 
             return base.VisitBinary(node);
@@ -44,26 +51,71 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitUnary(UnaryExpression node)
         {
-            //unwrap useless chained casts, e.g.:
-            //    ((bool)((bool?)((bool?)(ClaimofInterest == null))))
-            if (node.NodeType == ExpressionType.Convert)
+            if (node is { NodeType: ExpressionType.Convert } conversion)
             {
-                var finalType = node.Type;
-                var operand = node.Operand;
-                while (operand.NodeType == ExpressionType.Convert && operand is UnaryExpression unaryOperand)
+                var reducedOperand = Visit(conversion.Operand);
+
+                // Deal with nested conversions, so node is a conversion and nested is a conversion
+                if (reducedOperand is UnaryExpression { NodeType: ExpressionType.Convert } nestedConversion)
                 {
-                    operand = unaryOperand.Operand;
+                    // (Z)(Z)x => (Z)x
+                    if (nestedConversion.Type == conversion.Type)
+                    {
+                        return nestedConversion;
+                    }
+
+                    // (T)(T?)x::T => x
+                    else if (Nullable.GetUnderlyingType(nestedConversion.Type) == conversion.Type)
+                    {
+                        var reducedOperandOfNestedConversion = Visit(nestedConversion.Operand);
+                        if (reducedOperandOfNestedConversion.Type == node.Type)
+                            return reducedOperandOfNestedConversion;
+                        else
+                            return conversion.Update(nestedConversion.Update(reducedOperandOfNestedConversion));
+                    }
                 }
-                if (finalType == operand.Type)
-                    //if (finalType.IsAssignableFrom(operand.Type))
-                    return Visit(operand);
+
+                // Check whether we can remove the cast otherwise
+                var removeCast = true;
+                if (conversion.Type.IsAssignableFrom(conversion.Operand.Type) == false)
+                    removeCast = false;
+
+                if (conversion.Method != null)
+                    removeCast = false;
+                if (conversion.Type.IsGenericType
+                    && conversion.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    if (conversion.Operand.NodeType == ExpressionType.Constant
+                        || conversion.Operand.NodeType == ExpressionType.Default)
+                        removeCast = false;
+                    if (conversion.Operand is BinaryExpression be && be.NodeType == ExpressionType.Equal
+                        && (be.Right.NodeType == ExpressionType.Constant
+                        || be.Right.NodeType == ExpressionType.Default))
+                    {
+                        removeCast = false;
+                    }
+                }
                 else
                 {
-                    var visited = Visit(operand);
-                    var finalConvert = Expression.Convert(visited, finalType);
-                    return finalConvert;
+                    if (conversion.Type != typeof(object))
+                    {
+                        removeCast = false;
+                    }
+                    else
+                    {
+                        if (reducedOperand.Type.IsValueType)
+                            removeCast = false;
+                    }
                 }
+
+                if (removeCast)
+                {
+                    return reducedOperand;
+                }
+
+                return conversion.Update(reducedOperand);
             }
+
             return base.VisitUnary(node);
         }
     }

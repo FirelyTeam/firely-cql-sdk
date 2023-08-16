@@ -71,11 +71,13 @@ public class NCQAFHIRBase_1_0_0
 					true);
             }
         else if (((onset is FhirString as bool?) ?? false))
-            return context?.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), 
-				"1", 
-				"Error", 
-				"Cannot compute an interval from a String value");
-
+            {
+                var a__ = (null as CqlInterval<CqlDateTime>);
+                return context?.Operators.Message<CqlInterval<CqlDateTime>>(a__, 
+					"1", 
+					"Error", 
+					"Cannot compute an interval from a String value");
+            }
         else 
             {
                 var a__ = (((((onset is Age as bool?) ?? false))
@@ -198,11 +200,13 @@ public class NCQAFHIRBase_1_0_0
 					true);
             }
         else if (((abatement is FhirString as bool?) ?? false))
-            return context?.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), 
-				"1", 
-				"Error", 
-				"Cannot compute an interval from a String value");
-
+            {
+                var a__ = (null as CqlInterval<CqlDateTime>);
+                return context?.Operators.Message<CqlInterval<CqlDateTime>>(a__, 
+					"1", 
+					"Error", 
+					"Cannot compute an interval from a String value");
+            }
         else 
             {
                 var a__ = (((((abatement is Age as bool?) ?? false))
@@ -441,17 +445,21 @@ public class NCQAFHIRBase_1_0_0
 					f__);
             }
         else if (((choice is Timing as bool?) ?? false))
-            return context?.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), 
-				"1", 
-				"Error", 
-				"Cannot compute a single interval from a Timing type");
-
+            {
+                var a__ = (null as CqlInterval<CqlDateTime>);
+                return context?.Operators.Message<CqlInterval<CqlDateTime>>(a__, 
+					"1", 
+					"Error", 
+					"Cannot compute a single interval from a Timing type");
+            }
         else if (((choice is FhirString as bool?) ?? false))
-            return context?.Operators.Message<CqlInterval<CqlDateTime>>((null as CqlInterval<CqlDateTime>), 
-				"1", 
-				"Error", 
-				"Cannot compute an interval from a String value");
-
+            {
+                var a__ = (null as CqlInterval<CqlDateTime>);
+                return context?.Operators.Message<CqlInterval<CqlDateTime>>(a__, 
+					"1", 
+					"Error", 
+					"Cannot compute an interval from a String value");
+            }
         else 
             return (null as CqlInterval<CqlDateTime>);
 

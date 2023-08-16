@@ -510,7 +510,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return indentLevel;
         }
 
-        private string WriteConstantValue(Type constantType, object? value, string? identString = "")
+        private static string WriteConstantValue(Type constantType, object? value, string? identString = "")
         {
             return $"{identString}{formatValue(constantType, value)}";
 
@@ -554,7 +554,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         }
 
-        private string PrettyTypeName(Type type)
+        private static string PrettyTypeName(Type type)
         {
 
             string typeName = type.Name;
@@ -686,9 +686,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
+        private static readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
 
-        private string ToCode(int indent, Expression expression, bool leadingIndent = true)
+        private static string ToCode(int indent, Expression expression, bool leadingIndent = true)
         {
             var leadingIndentString = leadingIndent ? IndentString(indent) : string.Empty;
 
@@ -830,114 +830,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                         return sb.ToString();
                     }
                 case LambdaExpression lambda:
-                    var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => p.Name))})";
-                    var lambdaBody = ToCode(indent + 1, lambda.Body, lambda.Body is BlockExpression);
-                    var lambdaSb = new StringBuilder();
-                    lambdaSb.Append(leadingIndentString);
-                    lambdaSb.Append(lambdaParameters);
-                    if (lambda.Body is BlockExpression)
-                        lambdaSb.AppendLine(" => ");
-                    else lambdaSb.Append(" => ");
-                    lambdaSb.Append(lambdaBody);
-                    return lambdaSb.ToString();
+                    return convertLambdaExpression(indent, leadingIndentString, lambda);
                 case BinaryExpression binary:
-                    {
-                        var @operator = BinaryOperatorFor(binary.NodeType);
-                        if (@operator != null)
-                        {
-                            if (binary.NodeType == ExpressionType.Assign &&
-                                binary.Left is ParameterExpression parameter)
-                            {
-                                string typeDeclaration = "var";
-                                if (binary.Right is DefaultExpression
-                                    || (binary.Right is ConstantExpression ce && ce.Value == null)
-                                    || (binary.Right.NodeType == ExpressionType.Convert && binary.Right is UnaryExpression rightUnary))
-                                {
-                                    typeDeclaration = PrettyTypeName(binary.Left.Type);
-                                }
-                                var right = ToCode(indent, binary.Right, false);
-                                var assignment = $"{leadingIndentString}{typeDeclaration} {parameter.Name} = {right};";
-                                return assignment;
-                            }
-                            else if (binary.NodeType == ExpressionType.Coalesce &&
-                                binary.Left.NodeType == ExpressionType.Convert
-                                    && (binary.Right.NodeType == ExpressionType.Constant
-                                        || binary.Right.NodeType == ExpressionType.Default))
-                            {
-                                // usually something like:
-                                // (bool?)(x == null) ?? false;
-                                // this can be simplified to just:
-                                // x == null
-                                // C# can figure this one out
-                                var unary = (UnaryExpression)binary.Left;
-                                var unaryToCode = ToCode(indent, unary.Operand, false);
-                                return unaryToCode;
-                            }
-                            else
-                            {
-                                var left = ToCode(indent, binary.Left, false);
-                                var right = ToCode(indent, binary.Right, false);
-                                var binaryString = $"{leadingIndentString}({left} {@operator} {right})";
-                                return binaryString;
-                            }
-                        }
-                        break;
-                    }
+                    return convertBinaryExpression(indent, leadingIndentString, binary);
                 case UnaryExpression unary:
-                    {
-                        switch (unary.NodeType)
-                        {
-                            case ExpressionType.Convert:
-                                {
-                                    var removeCast = true;
-                                    if (unary.Type.IsAssignableFrom(unary.Operand.Type) == false)
-                                        removeCast = false;
-                                    if (unary.Method != null)
-                                        removeCast = false;
-                                    if (unary.Type.IsGenericType
-                                        && unary.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                                    {
-                                        if (unary.Operand.NodeType == ExpressionType.Constant
-                                            || unary.Operand.NodeType == ExpressionType.Default)
-                                            removeCast = false;
-                                        if (unary.Operand is BinaryExpression be && be.NodeType == ExpressionType.Equal
-                                            && (be.Right.NodeType == ExpressionType.Constant
-                                            || be.Right.NodeType == ExpressionType.Default))
-                                        {
-                                            removeCast = false;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        if (unary.Type != typeof(object))
-                                        {
-                                            removeCast = false;
-                                        }
-                                    }
-                                    var operand = ToCode(indent, unary.Operand, false);
-                                    if (removeCast)
-                                    {
-                                        return operand;
-                                    }
-                                    else
-                                    {
-                                        var typeName = PrettyTypeName(unary.Type);
-                                        var code = $"{leadingIndentString}(({typeName}){operand})";
-                                        return code;
-                                    }
-                                }
-                            case ExpressionType.TypeAs:
-                                {
-                                    var operand = ToCode(indent, unary.Operand, false);
-                                    var typeName = PrettyTypeName(unary.Type);
-                                    var code = $"{leadingIndentString}({operand} as {typeName})";
-                                    return code;
-                                }
-
-                            default: break;
-                        }
-                        break;
-                    }
+                    return convertUnaryExpression(indent, leadingIndentString, unary);
                 case NewArrayExpression newArray:
                     if (newArray.NodeType == ExpressionType.NewArrayInit)
                     {
@@ -977,19 +874,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     break;
                 case MemberExpression me:
-                    {
-                        if (me.Expression != null)
-                        {
-                            var @object = ToCode(0, me.Expression);
-                            var memberName = PrefixKeywords(me.Member.Name);
-                            var nullCoalesce = $"{@object}?.{memberName}";
-                            return $"{leadingIndentString}{nullCoalesce}";
-                        }
-                        else
-                        {
-                            throw new InvalidOperationException("MemberExpression has a null Expression");
-                        }
-                    }
+                    return convertMemberExpression(leadingIndentString, me);
                 case MemberInitExpression memberInit:
                     var memberInitSb = new StringBuilder();
                     memberInitSb.Append(leadingIndentString);
@@ -1066,94 +951,134 @@ namespace Hl7.Cql.CodeGeneration.NET
                     break;
             }
 
-            throw new NotImplementedException($"Do not know how to convert {expression.NodeType} or type {expression.GetType()}.");
+            throw new NotSupportedException($"Do not know how to convert {expression.NodeType} or type {expression.GetType()}.");
         }
 
-        private string? BinaryOperatorFor(ExpressionType nodeType)
+        private static string convertMemberExpression(string leadingIndentString, MemberExpression me)
         {
-            switch (nodeType)
+            var @object = me.Expression is not null ? ToCode(0, me.Expression) + "?" : PrettyTypeName(me.Member.DeclaringType!);
+            var memberName = PrefixKeywords(me.Member.Name);
+            var nullCoalesce = $"{@object}.{memberName}";
+            return $"{leadingIndentString}{nullCoalesce}";
+        }
+
+        private static string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda)
+        {
+            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => p.Name))})";
+            var lambdaBody = ToCode(indent + 1, lambda.Body, lambda.Body is BlockExpression);
+            var lambdaSb = new StringBuilder();
+            lambdaSb.Append(leadingIndentString);
+            lambdaSb.Append(lambdaParameters);
+            if (lambda.Body is BlockExpression)
+                lambdaSb.AppendLine(" => ");
+            else lambdaSb.Append(" => ");
+            lambdaSb.Append(lambdaBody);
+            return lambdaSb.ToString();
+        }
+
+        private static string convertUnaryExpression(int indent, string leadingIndentString, UnaryExpression unary)
+        {
+            switch (unary.NodeType)
             {
-                case ExpressionType.Add:
-                    return "+";
-                case ExpressionType.AddAssign:
-                case ExpressionType.AddAssignChecked:
-                case ExpressionType.AddChecked:
-                    return "+=";
-                case ExpressionType.And:
-                    return "&";
-                case ExpressionType.AndAlso:
-                    return "&&";
-                case ExpressionType.AndAssign:
-                    return "&=";
-                case ExpressionType.Assign:
-                    return "=";
-                case ExpressionType.Coalesce:
-                    return "??";
-                case ExpressionType.Divide:
-                    return "/";
-                case ExpressionType.DivideAssign:
-                    return "/=";
-                case ExpressionType.Equal:
-                    return "==";
-                case ExpressionType.ExclusiveOr:
-                    return "^^";
-                case ExpressionType.ExclusiveOrAssign:
-                    return "^^=";
-                case ExpressionType.GreaterThan:
-                    return ">";
-                case ExpressionType.GreaterThanOrEqual:
-                    return ">=";
-                case ExpressionType.LeftShift:
-                    return "<<";
-                case ExpressionType.LeftShiftAssign:
-                    return "<<=";
-                case ExpressionType.LessThan:
-                    return "<";
-                case ExpressionType.LessThanOrEqual:
-                    return "<=";
-                case ExpressionType.Modulo:
-                    return "%";
-                case ExpressionType.ModuloAssign:
-                    return "%=";
-                case ExpressionType.Multiply:
-                case ExpressionType.MultiplyChecked:
-                    return "*";
-                case ExpressionType.MultiplyAssign:
-                case ExpressionType.MultiplyAssignChecked:
-                    return "*=";
-                case ExpressionType.NotEqual:
-                    return "!=";
-                case ExpressionType.Or:
-                    return "|";
-                case ExpressionType.OrAssign:
-                    return "|=";
-                case ExpressionType.OrElse:
-                    return "||";
-                case ExpressionType.RightShift:
-                    return ">>";
-                case ExpressionType.RightShiftAssign:
-                    return ">>=";
-                case ExpressionType.Subtract:
-                case ExpressionType.SubtractChecked:
-                    return "-";
-                case ExpressionType.SubtractAssign:
-                case ExpressionType.SubtractAssignChecked:
-                    return "-=";
+                case ExpressionType.ConvertChecked:
+                case ExpressionType.Convert:
+                    {
+                        var operand = ToCode(indent, unary.Operand, false);
+
+                        if (unary.Type == typeof(object) && unary.Operand.Type.IsValueType)
+                        {
+                            return operand;
+                        }
+                        else
+                        {
+                            var typeName = PrettyTypeName(unary.Type);
+                            var code = $"{leadingIndentString}(({typeName}){operand})";
+                            return code;
+                        }
+                    }
                 case ExpressionType.TypeAs:
-                    return "as";
-                case ExpressionType.TypeIs:
-                    return "is";
+                    {
+                        var operand = ToCode(indent, unary.Operand, false);
+                        var typeName = PrettyTypeName(unary.Type);
+                        var code = $"{leadingIndentString}({operand} as {typeName})";
+                        return code;
+                    }
+
                 default:
-                    return null;
+                    throw new NotSupportedException($"Don't know how to convert unary operator {unary.NodeType} into C#.");
             }
         }
+
+        private static string convertBinaryExpression(int indent, string leadingIndentString, BinaryExpression binary)
+        {
+            var @operator = BinaryOperatorFor(binary.NodeType);
+
+            if (binary.NodeType == ExpressionType.Assign &&
+                binary.Left is ParameterExpression parameter)
+            {
+                string typeDeclaration = "var";
+                if (binary.Right is DefaultExpression
+                    || (binary.Right is ConstantExpression ce && ce.Value == null)
+                    || (binary.Right.NodeType == ExpressionType.Convert && binary.Right is UnaryExpression rightUnary))
+                {
+                    typeDeclaration = PrettyTypeName(binary.Left.Type);
+                }
+                var right = ToCode(indent, binary.Right, false);
+                var assignment = $"{leadingIndentString}{typeDeclaration} {parameter.Name} = {right};";
+                return assignment;
+            }
+            else
+            {
+                var left = ToCode(indent, binary.Left, false);
+                var right = ToCode(indent, binary.Right, false);
+                var binaryString = $"{leadingIndentString}({left} {@operator} {right})";
+                return binaryString;
+            }
+        }
+
+        private static string BinaryOperatorFor(ExpressionType nodeType) => nodeType switch
+        {
+            ExpressionType.Add => "+",
+            ExpressionType.AddAssign or ExpressionType.AddAssignChecked or ExpressionType.AddChecked => "+=",
+            ExpressionType.And => "&",
+            ExpressionType.AndAlso => "&&",
+            ExpressionType.AndAssign => "&=",
+            ExpressionType.Assign => "=",
+            ExpressionType.Coalesce => "??",
+            ExpressionType.Divide => "/",
+            ExpressionType.DivideAssign => "/=",
+            ExpressionType.Equal => "==",
+            ExpressionType.ExclusiveOr => "^^",
+            ExpressionType.ExclusiveOrAssign => "^^=",
+            ExpressionType.GreaterThan => ">",
+            ExpressionType.GreaterThanOrEqual => ">=",
+            ExpressionType.LeftShift => "<<",
+            ExpressionType.LeftShiftAssign => "<<=",
+            ExpressionType.LessThan => "<",
+            ExpressionType.LessThanOrEqual => "<=",
+            ExpressionType.Modulo => "%",
+            ExpressionType.ModuloAssign => "%=",
+            ExpressionType.Multiply or ExpressionType.MultiplyChecked => "*",
+            ExpressionType.MultiplyAssign or ExpressionType.MultiplyAssignChecked => "*=",
+            ExpressionType.NotEqual => "!=",
+            ExpressionType.Or => "|",
+            ExpressionType.OrAssign => "|=",
+            ExpressionType.OrElse => "||",
+            ExpressionType.RightShift => ">>",
+            ExpressionType.RightShiftAssign => ">>=",
+            ExpressionType.Subtract or ExpressionType.SubtractChecked => "-",
+            ExpressionType.SubtractAssign or ExpressionType.SubtractAssignChecked => "-=",
+            ExpressionType.TypeAs => "as",
+            ExpressionType.TypeIs => "is",
+            _ => throw new NotSupportedException($"Don't know how to convert operator {nodeType} into C#."),
+        };
 
         private static string IndentString(int indent)
         {
             return new string(Enumerable.Repeat('\t', indent).ToArray());
         }
 
-        private string PrettyMethodName(MethodInfo method)
+        private static string PrettyMethodName(MethodInfo method)
         {
             if (method.IsGenericMethod)
             {
@@ -1223,14 +1148,14 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private string Parenthesize(string term)
+        private static string Parenthesize(string term)
         {
             if (term.Contains(" "))
                 return $"({term})";
             else return term;
         }
 
-        private string PrefixKeywords(string symbol)
+        private static string PrefixKeywords(string symbol)
         {
             var keyword = SyntaxFacts.GetKeywordKind(symbol);
             if (keyword != SyntaxKind.None)

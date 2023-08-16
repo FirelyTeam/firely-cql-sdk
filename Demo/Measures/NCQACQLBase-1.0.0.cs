@@ -61,7 +61,10 @@ public class NCQACQLBase_1_0_0
                 };
                 var d__ = context?.Operators.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA>(intervals, 
 					c__);
-                Func<Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA,object> e__ = (@this) => @this?.startOfInterval;
+                Func<Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA,CqlDate> e__ = (@this) => 
+                {
+                    return @this?.startOfInterval;
+                };
                 var f__ = context?.Operators.ListSortBy<Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA>(d__, 
 					e__, 
 					System.ComponentModel.ListSortDirection.Ascending);
@@ -104,7 +107,10 @@ public class NCQACQLBase_1_0_0
                 };
                 var d__ = context?.Operators.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ>(intervals, 
 					c__);
-                Func<Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ,object> e__ = (@this) => @this?.startOfInterval;
+                Func<Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ,CqlDateTime> e__ = (@this) => 
+                {
+                    return @this?.startOfInterval;
+                };
                 var f__ = context?.Operators.ListSortBy<Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ>(d__, 
 					e__, 
 					System.ComponentModel.ListSortDirection.Ascending);
