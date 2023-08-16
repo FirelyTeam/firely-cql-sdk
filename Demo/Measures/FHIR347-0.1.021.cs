@@ -536,16 +536,16 @@ public class FHIR347_0_1_021
     public CqlCode Encounter_for_palliative_care() => __Encounter_for_palliative_care.Value;
 
     private CqlCode[] ICD10CM_Value()
-    {
-        var a_ = new CqlCode("Z51.5", 
+	{
+		var a_ = new CqlCode("Z51.5", 
 			"http://hl7.org/fhir/sid/icd-10-cm", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 		};
-    }
+	}
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM() => __ICD10CM.Value;
 
@@ -560,834 +560,834 @@ public class FHIR347_0_1_021
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
 
     private Patient Patient_Value()
-    {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+	{
+		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
 			null);
-        return context?.Operators.SingleOrNull<Patient>(a_);
-    }
+		return context?.Operators.SingleOrNull<Patient>(a_);
+	}
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
     private IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period_Value()
-    {
-        var b_ = this.Myocardial_Infarction();
-        var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
+	{
+		var b_ = this.Myocardial_Infarction();
+		var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
 			null);
-        var d_ = this.Cerebrovascular_Disease__Stroke__TIA();
-        var e_ = context?.DataRetriever.RetrieveByValueSet<Condition>(d_, 
+		var d_ = this.Cerebrovascular_Disease__Stroke__TIA();
+		var e_ = context?.DataRetriever.RetrieveByValueSet<Condition>(d_, 
 			null);
-        var f_ = context?.Operators.ListUnion<Condition>(c_, 
+		var f_ = context?.Operators.ListUnion<Condition>(c_, 
 			e_);
-        var g_ = this.Atherosclerosis_and_Peripheral_Arterial_Disease();
-        var h_ = context?.DataRetriever.RetrieveByValueSet<Condition>(g_, 
+		var g_ = this.Atherosclerosis_and_Peripheral_Arterial_Disease();
+		var h_ = context?.DataRetriever.RetrieveByValueSet<Condition>(g_, 
 			null);
-        var i_ = this.Ischemic_Heart_Disease_or_Other_Related_Diagnoses();
-        var j_ = context?.DataRetriever.RetrieveByValueSet<Condition>(i_, 
+		var i_ = this.Ischemic_Heart_Disease_or_Other_Related_Diagnoses();
+		var j_ = context?.DataRetriever.RetrieveByValueSet<Condition>(i_, 
 			null);
-        var k_ = context?.Operators.ListUnion<Condition>(h_, 
+		var k_ = context?.Operators.ListUnion<Condition>(h_, 
 			j_);
-        var l_ = context?.Operators.ListUnion<Condition>(f_, 
+		var l_ = context?.Operators.ListUnion<Condition>(f_, 
 			k_);
-        var m_ = this.Stable_and_Unstable_Angina();
-        var n_ = context?.DataRetriever.RetrieveByValueSet<Condition>(m_, 
+		var m_ = this.Stable_and_Unstable_Angina();
+		var n_ = context?.DataRetriever.RetrieveByValueSet<Condition>(m_, 
 			null);
-        var o_ = context?.Operators.ListUnion<Condition>(l_, 
+		var o_ = context?.Operators.ListUnion<Condition>(l_, 
 			n_);
-        Func<Condition,bool?> t_ = (ASCVDDiagnosis) => 
-        {
-            var q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ASCVDDiagnosis);
-            var p_ = (context?.Operators.Start(q_) as object);
-            var s_ = this.Measurement_Period();
-            var r_ = (context?.Operators.End(s_) as object);
-            return context?.Operators.Before(p_, 
+		Func<Condition,bool?> t_ = (ASCVDDiagnosis) => 
+		{
+			var q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ASCVDDiagnosis);
+			var p_ = (context?.Operators.Start(q_) as object);
+			var s_ = this.Measurement_Period();
+			var r_ = (context?.Operators.End(s_) as object);
+			return context?.Operators.Before(p_, 
 				r_, 
 				null);
-        };
-        var a_ = (context?.Operators.WhereOrNull<Condition>(o_, 
+		};
+		var a_ = (context?.Operators.WhereOrNull<Condition>(o_, 
 			t_) as IEnumerable<object>);
-        var v_ = this.PCI();
-        var w_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(v_, 
+		var v_ = this.PCI();
+		var w_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(v_, 
 			null);
-        var x_ = this.CABG_Surgeries();
-        var y_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(x_, 
+		var x_ = this.CABG_Surgeries();
+		var y_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(x_, 
 			null);
-        var z_ = context?.Operators.ListUnion<Procedure>(w_, 
+		var z_ = context?.Operators.ListUnion<Procedure>(w_, 
 			y_);
-        var aa_ = this.Carotid_Intervention();
-        var ab_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(aa_, 
+		var aa_ = this.Carotid_Intervention();
+		var ab_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(aa_, 
 			null);
-        var ac_ = this.CABG__PCI_Procedure();
-        var ad_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(ac_, 
+		var ac_ = this.CABG__PCI_Procedure();
+		var ad_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(ac_, 
 			null);
-        var ae_ = context?.Operators.ListUnion<Procedure>(ab_, 
+		var ae_ = context?.Operators.ListUnion<Procedure>(ab_, 
 			ad_);
-        var af_ = context?.Operators.ListUnion<Procedure>(z_, 
+		var af_ = context?.Operators.ListUnion<Procedure>(z_, 
 			ae_);
-        Func<Procedure,bool?> aq_ = (ASCVDProcedure) => 
-        {
-            var ah_ = (ASCVDProcedure?.Performed as object);
-            var ai_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ah_);
-            var ag_ = (context?.Operators.Start(ai_) as object);
-            var ak_ = this.Measurement_Period();
-            var aj_ = (context?.Operators.End(ak_) as object);
-            var al_ = context?.Operators.Before(ag_, 
+		Func<Procedure,bool?> aq_ = (ASCVDProcedure) => 
+		{
+			var ah_ = (ASCVDProcedure?.Performed as object);
+			var ai_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ah_);
+			var ag_ = (context?.Operators.Start(ai_) as object);
+			var ak_ = this.Measurement_Period();
+			var aj_ = (context?.Operators.End(ak_) as object);
+			var al_ = context?.Operators.Before(ag_, 
 				aj_, 
 				null);
-            var an_ = (ASCVDProcedure?.StatusElement as object);
-            var am_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var an_ = (ASCVDProcedure?.StatusElement as object);
+			var am_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(an_) as object);
-            var ao_ = ("completed" as object);
-            var ap_ = context?.Operators.Equal(am_, 
+			var ao_ = ("completed" as object);
+			var ap_ = context?.Operators.Equal(am_, 
 				ao_);
-            return context?.Operators.And(al_, 
+			return context?.Operators.And(al_, 
 				ap_);
-        };
-        var u_ = (context?.Operators.WhereOrNull<Procedure>(af_, 
+		};
+		var u_ = (context?.Operators.WhereOrNull<Procedure>(af_, 
 			aq_) as IEnumerable<object>);
-        return context?.Operators.ListUnion<object>(a_, 
+		return context?.Operators.ListUnion<object>(a_, 
 			u_);
-    }
+	}
     [CqlDeclaration("ASCVD Diagnosis or Procedure before End of Measurement Period")]
     public IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period() => __ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period.Value;
 
     private IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Value()
-    {
-        var a_ = this.Annual_Wellness_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+	{
+		var a_ = this.Annual_Wellness_Visit();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
 			null);
-        var c_ = this.Office_Visit();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+		var c_ = this.Office_Visit();
+		var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
 			null);
-        var e_ = context?.Operators.ListUnion<Encounter>(b_, 
+		var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
-        var f_ = this.Outpatient_Consultation();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
+		var f_ = this.Outpatient_Consultation();
+		var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
 			null);
-        var h_ = this.Outpatient_Encounters_for_Preventive_Care();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+		var h_ = this.Outpatient_Encounters_for_Preventive_Care();
+		var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
 			null);
-        var j_ = context?.Operators.ListUnion<Encounter>(g_, 
+		var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
-        var k_ = context?.Operators.ListUnion<Encounter>(e_, 
+		var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
-        var l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
+		var l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+		var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
 			null);
-        var n_ = this.Preventive_Care_Services___Other();
-        var o_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(n_, 
+		var n_ = this.Preventive_Care_Services___Other();
+		var o_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(n_, 
 			null);
-        var p_ = context?.Operators.ListUnion<Encounter>(m_, 
+		var p_ = context?.Operators.ListUnion<Encounter>(m_, 
 			o_);
-        var q_ = context?.Operators.ListUnion<Encounter>(k_, 
+		var q_ = context?.Operators.ListUnion<Encounter>(k_, 
 			p_);
-        var r_ = this.Preventive_Care_Services_Individual_Counseling();
-        var s_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(r_, 
+		var r_ = this.Preventive_Care_Services_Individual_Counseling();
+		var s_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(r_, 
 			null);
-        var t_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
+		var t_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
 			null);
-        var v_ = context?.Operators.ListUnion<Encounter>(s_, 
+		var v_ = context?.Operators.ListUnion<Encounter>(s_, 
 			u_);
-        var w_ = context?.Operators.ListUnion<Encounter>(q_, 
+		var w_ = context?.Operators.ListUnion<Encounter>(q_, 
 			v_);
-        Func<Encounter,bool?> af_ = (ValidEncounter) => 
-        {
-            var x_ = this.Measurement_Period();
-            var y_ = ValidEncounter?.Period;
-            var z_ = FHIRHelpers_4_0_001.ToInterval(y_);
-            var aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, 
+		Func<Encounter,bool?> af_ = (ValidEncounter) => 
+		{
+			var x_ = this.Measurement_Period();
+			var y_ = ValidEncounter?.Period;
+			var z_ = FHIRHelpers_4_0_001.ToInterval(y_);
+			var aa_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(x_, 
 				z_, 
 				null);
-            var ac_ = (ValidEncounter?.StatusElement as object);
-            var ab_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var ac_ = (ValidEncounter?.StatusElement as object);
+			var ab_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(ac_) as object);
-            var ad_ = ("finished" as object);
-            var ae_ = context?.Operators.Equal(ab_, 
+			var ad_ = ("finished" as object);
+			var ae_ = context?.Operators.Equal(ab_, 
 				ad_);
-            return context?.Operators.And(aa_, 
+			return context?.Operators.And(aa_, 
 				ae_);
-        };
-        return context?.Operators.WhereOrNull<Encounter>(w_, 
+		};
+		return context?.Operators.WhereOrNull<Encounter>(w_, 
 			af_);
-    }
+	}
     [CqlDeclaration("Qualifying Encounter during Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period() => __Qualifying_Encounter_during_Measurement_Period.Value;
 
     private bool? Initial_Population_1_Value()
-    {
-        var a_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-        var b_ = context?.Operators.ExistsInList<object>(a_);
-        var c_ = this.Qualifying_Encounter_during_Measurement_Period();
-        var d_ = context?.Operators.ExistsInList<Encounter>(c_);
-        return context?.Operators.And(b_, 
+	{
+		var a_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
+		var b_ = context?.Operators.ExistsInList<object>(a_);
+		var c_ = this.Qualifying_Encounter_during_Measurement_Period();
+		var d_ = context?.Operators.ExistsInList<Encounter>(c_);
+		return context?.Operators.And(b_, 
 			d_);
-    }
+	}
     [CqlDeclaration("Initial Population 1")]
     public bool? Initial_Population_1() => __Initial_Population_1.Value;
 
     private bool? Denominator_1_Value()
-    {
-        return this.Initial_Population_1();
-    }
+	{
+		return this.Initial_Population_1();
+	}
     [CqlDeclaration("Denominator 1")]
     public bool? Denominator_1() => __Denominator_1.Value;
 
     private bool? Patients_Age_20_or_Older_at_Start_of_Measurement_Period_Value()
-    {
-        var b_ = this.Patient()?.BirthDateElement?.Value;
-        var c_ = context?.Operators.ConvertStringToDateTime(b_);
-        var d_ = this.Measurement_Period();
-        var e_ = context?.Operators.Start(d_);
-        var a_ = (context?.Operators.CalculateAgeAt(c_, 
+	{
+		var b_ = this.Patient()?.BirthDateElement?.Value;
+		var c_ = context?.Operators.ConvertStringToDateTime(b_);
+		var d_ = this.Measurement_Period();
+		var e_ = context?.Operators.Start(d_);
+		var a_ = (context?.Operators.CalculateAgeAt(c_, 
 			e_, 
 			"year") as object);
-        var f_ = (((int?)20) as object);
-        return context?.Operators.GreaterOrEqual(a_, 
+		var f_ = (((int?)20) as object);
+		return context?.Operators.GreaterOrEqual(a_, 
 			f_);
-    }
+	}
     [CqlDeclaration("Patients Age 20 or Older at Start of Measurement Period")]
     public bool? Patients_Age_20_or_Older_at_Start_of_Measurement_Period() => __Patients_Age_20_or_Older_at_Start_of_Measurement_Period.Value;
 
     private IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190_Value()
-    {
-        var a_ = this.LDL_Cholesterol();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+	{
+		var a_ = this.LDL_Cholesterol();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
 			null);
-        Func<Observation,bool?> v_ = (LDL) => 
-        {
-            var d_ = ((LDL?.Value as object) as Quantity);
-            var c_ = (FHIRHelpers_4_0_001.ToQuantity(d_) as object);
-            var e_ = (context?.Operators.Quantity(190m, 
+		Func<Observation,bool?> v_ = (LDL) => 
+		{
+			var d_ = ((LDL?.Value as object) as Quantity);
+			var c_ = (FHIRHelpers_4_0_001.ToQuantity(d_) as object);
+			var e_ = (context?.Operators.Quantity(190m, 
 				"mg/dL") as object);
-            var f_ = context?.Operators.GreaterOrEqual(c_, 
+			var f_ = context?.Operators.GreaterOrEqual(c_, 
 				e_);
-            var h_ = (LDL?.Effective as object);
-            var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
-            var g_ = (context?.Operators.Start(i_) as object);
-            var k_ = this.Measurement_Period();
-            var j_ = (context?.Operators.End(k_) as object);
-            var l_ = context?.Operators.Before(g_, 
+			var h_ = (LDL?.Effective as object);
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
+			var g_ = (context?.Operators.Start(i_) as object);
+			var k_ = this.Measurement_Period();
+			var j_ = (context?.Operators.End(k_) as object);
+			var l_ = context?.Operators.Before(g_, 
 				j_, 
 				null);
-            var m_ = context?.Operators.And(f_, 
+			var m_ = context?.Operators.And(f_, 
 				l_);
-            var n_ = (LDL?.StatusElement as object);
-            var o_ = (context.Deeper(new CallStackEntry("ToString", 
+			var n_ = (LDL?.StatusElement as object);
+			var o_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(n_);
-            var q_ = "final";
-            var r_ = "amended";
-            var s_ = "corrected";
-            var t_ = "appended";
-            var p_ = (new string[]
+			var q_ = "final";
+			var r_ = "amended";
+			var s_ = "corrected";
+			var t_ = "appended";
+			var p_ = (new string[]
 			{
 				q_,
 				r_,
 				s_,
 				t_,
 			} as IEnumerable<string>);
-            var u_ = context?.Operators.InList<string>(o_, 
+			var u_ = context?.Operators.InList<string>(o_, 
 				p_);
-            return context?.Operators.And(m_, 
+			return context?.Operators.And(m_, 
 				u_);
-        };
-        return context?.Operators.WhereOrNull<Observation>(b_, 
+		};
+		return context?.Operators.WhereOrNull<Observation>(b_, 
 			v_);
-    }
+	}
     [CqlDeclaration("LDL Result Greater Than or Equal To 190")]
     public IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190() => __LDL_Result_Greater_Than_or_Equal_To_190.Value;
 
     private IEnumerable<Condition> Hypercholesterolemia_Diagnosis_Value()
-    {
-        var a_ = this.Hypercholesterolemia();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+	{
+		var a_ = this.Hypercholesterolemia();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
 			null);
-        Func<Condition,bool?> g_ = (Hypercholesterolemia) => 
-        {
-            var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Hypercholesterolemia);
-            var c_ = (context?.Operators.Start(d_) as object);
-            var f_ = this.Measurement_Period();
-            var e_ = (context?.Operators.End(f_) as object);
-            return context?.Operators.Before(c_, 
+		Func<Condition,bool?> g_ = (Hypercholesterolemia) => 
+		{
+			var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Hypercholesterolemia);
+			var c_ = (context?.Operators.Start(d_) as object);
+			var f_ = this.Measurement_Period();
+			var e_ = (context?.Operators.End(f_) as object);
+			return context?.Operators.Before(c_, 
 				e_, 
 				null);
-        };
-        return context?.Operators.WhereOrNull<Condition>(b_, 
+		};
+		return context?.Operators.WhereOrNull<Condition>(b_, 
 			g_);
-    }
+	}
     [CqlDeclaration("Hypercholesterolemia Diagnosis")]
     public IEnumerable<Condition> Hypercholesterolemia_Diagnosis() => __Hypercholesterolemia_Diagnosis.Value;
 
     private bool? Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD_Value()
-    {
-        var a_ = this.Patients_Age_20_or_Older_at_Start_of_Measurement_Period();
-        var b_ = (this.LDL_Result_Greater_Than_or_Equal_To_190() as IEnumerable<object>);
-        var c_ = (this.Hypercholesterolemia_Diagnosis() as IEnumerable<object>);
-        var d_ = context?.Operators.ListUnion<object>(b_, 
+	{
+		var a_ = this.Patients_Age_20_or_Older_at_Start_of_Measurement_Period();
+		var b_ = (this.LDL_Result_Greater_Than_or_Equal_To_190() as IEnumerable<object>);
+		var c_ = (this.Hypercholesterolemia_Diagnosis() as IEnumerable<object>);
+		var d_ = context?.Operators.ListUnion<object>(b_, 
 			c_);
-        var e_ = context?.Operators.ExistsInList<object>(d_);
-        var f_ = context?.Operators.And(a_, 
+		var e_ = context?.Operators.ExistsInList<object>(d_);
+		var f_ = context?.Operators.And(a_, 
 			e_);
-        var g_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-        var h_ = context?.Operators.ExistsInList<object>(g_);
-        var i_ = context?.Operators.Not(h_);
-        return context?.Operators.And(f_, 
+		var g_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
+		var h_ = context?.Operators.ExistsInList<object>(g_);
+		var i_ = context?.Operators.Not(h_);
+		return context?.Operators.And(f_, 
 			i_);
-    }
+	}
     [CqlDeclaration("Patients Age 20 Years and Older with LDL Cholesterol Result Greater than or Equal to 190 or Hypercholesterolemia without ASCVD")]
     public bool? Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD() => __Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD.Value;
 
     private bool? Initial_Population_2_Value()
-    {
-        var a_ = this.Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD();
-        var b_ = this.Qualifying_Encounter_during_Measurement_Period();
-        var c_ = context?.Operators.ExistsInList<Encounter>(b_);
-        return context?.Operators.And(a_, 
+	{
+		var a_ = this.Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD();
+		var b_ = this.Qualifying_Encounter_during_Measurement_Period();
+		var c_ = context?.Operators.ExistsInList<Encounter>(b_);
+		return context?.Operators.And(a_, 
 			c_);
-    }
+	}
     [CqlDeclaration("Initial Population 2")]
     public bool? Initial_Population_2() => __Initial_Population_2.Value;
 
     private bool? Denominator_2_Value()
-    {
-        return this.Initial_Population_2();
-    }
+	{
+		return this.Initial_Population_2();
+	}
     [CqlDeclaration("Denominator 2")]
     public bool? Denominator_2() => __Denominator_2.Value;
 
     private bool? Has_Diabetes_Diagnosis_Value()
-    {
-        var a_ = this.Diabetes();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+	{
+		var a_ = this.Diabetes();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
 			null);
-        Func<Condition,bool?> e_ = (Diabetes) => 
-        {
-            var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
-            var d_ = this.Measurement_Period();
-            return context?.Operators.Overlaps(c_, 
+		Func<Condition,bool?> e_ = (Diabetes) => 
+		{
+			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
+			var d_ = this.Measurement_Period();
+			return context?.Operators.Overlaps(c_, 
 				d_, 
 				null);
-        };
-        var f_ = context?.Operators.WhereOrNull<Condition>(b_, 
+		};
+		var f_ = context?.Operators.WhereOrNull<Condition>(b_, 
 			e_);
-        return context?.Operators.ExistsInList<Condition>(f_);
-    }
+		return context?.Operators.ExistsInList<Condition>(f_);
+	}
     [CqlDeclaration("Has Diabetes Diagnosis")]
     public bool? Has_Diabetes_Diagnosis() => __Has_Diabetes_Diagnosis.Value;
 
     private bool? Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia_Value()
-    {
-        var a_ = this.Patient()?.BirthDateElement?.Value;
-        var b_ = context?.Operators.ConvertStringToDateTime(a_);
-        var c_ = this.Measurement_Period();
-        var d_ = context?.Operators.Start(c_);
-        var e_ = context?.Operators.CalculateAgeAt(b_, 
+	{
+		var a_ = this.Patient()?.BirthDateElement?.Value;
+		var b_ = context?.Operators.ConvertStringToDateTime(a_);
+		var c_ = this.Measurement_Period();
+		var d_ = context?.Operators.Start(c_);
+		var e_ = context?.Operators.CalculateAgeAt(b_, 
 			d_, 
 			"year");
-        var f_ = context?.Operators.Interval(((int?)40), 
+		var f_ = context?.Operators.Interval(((int?)40), 
 			((int?)75), 
 			true, 
 			true);
-        var g_ = context?.Operators.ElementInInterval<int?>(e_, 
+		var g_ = context?.Operators.ElementInInterval<int?>(e_, 
 			f_, 
 			null);
-        var h_ = this.Has_Diabetes_Diagnosis();
-        var i_ = context?.Operators.And(g_, 
+		var h_ = this.Has_Diabetes_Diagnosis();
+		var i_ = context?.Operators.And(g_, 
 			h_);
-        var j_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-        var k_ = context?.Operators.ExistsInList<object>(j_);
-        var l_ = context?.Operators.Not(k_);
-        var m_ = context?.Operators.And(i_, 
+		var j_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
+		var k_ = context?.Operators.ExistsInList<object>(j_);
+		var l_ = context?.Operators.Not(k_);
+		var m_ = context?.Operators.And(i_, 
 			l_);
-        var n_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
-        var o_ = context?.Operators.ExistsInList<Observation>(n_);
-        var p_ = context?.Operators.Not(o_);
-        var q_ = context?.Operators.And(m_, 
+		var n_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
+		var o_ = context?.Operators.ExistsInList<Observation>(n_);
+		var p_ = context?.Operators.Not(o_);
+		var q_ = context?.Operators.And(m_, 
 			p_);
-        var r_ = this.Hypercholesterolemia_Diagnosis();
-        var s_ = context?.Operators.ExistsInList<Condition>(r_);
-        var t_ = context?.Operators.Not(s_);
-        return context?.Operators.And(q_, 
+		var r_ = this.Hypercholesterolemia_Diagnosis();
+		var s_ = context?.Operators.ExistsInList<Condition>(r_);
+		var t_ = context?.Operators.Not(s_);
+		return context?.Operators.And(q_, 
 			t_);
-    }
+	}
     [CqlDeclaration("Patients Age 40 to 75 Years with Diabetes without ASCVD or LDL Greater than 190 or Hypercholesterolemia")]
     public bool? Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia() => __Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia.Value;
 
     private bool? Initial_Population_3_Value()
-    {
-        var a_ = this.Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia();
-        var b_ = this.Qualifying_Encounter_during_Measurement_Period();
-        var c_ = context?.Operators.ExistsInList<Encounter>(b_);
-        return context?.Operators.And(a_, 
+	{
+		var a_ = this.Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia();
+		var b_ = this.Qualifying_Encounter_during_Measurement_Period();
+		var c_ = context?.Operators.ExistsInList<Encounter>(b_);
+		return context?.Operators.And(a_, 
 			c_);
-    }
+	}
     [CqlDeclaration("Initial Population 3")]
     public bool? Initial_Population_3() => __Initial_Population_3.Value;
 
     private bool? Denominator_3_Value()
-    {
-        return this.Initial_Population_3();
-    }
+	{
+		return this.Initial_Population_3();
+	}
     [CqlDeclaration("Denominator 3")]
     public bool? Denominator_3() => __Denominator_3.Value;
 
     private IEnumerable<Coding> SDE_Ethnicity_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
+	}
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
     private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+	}
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
     private IEnumerable<Coding> SDE_Race_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
+	}
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
     private CqlCode SDE_Sex_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
+	}
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
     private bool? Has_Allergy_to_Statin_Value()
-    {
-        var a_ = this.Statin_Allergen();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<AllergyIntolerance>(a_, 
+	{
+		var a_ = this.Statin_Allergen();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<AllergyIntolerance>(a_, 
 			null);
-        Func<AllergyIntolerance,bool?> h_ = (StatinAllergy) => 
-        {
-            var d_ = (StatinAllergy?.Onset as object);
-            var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(d_);
-            var c_ = (context?.Operators.Start(e_) as object);
-            var g_ = this.Measurement_Period();
-            var f_ = (context?.Operators.End(g_) as object);
-            return context?.Operators.Before(c_, 
+		Func<AllergyIntolerance,bool?> h_ = (StatinAllergy) => 
+		{
+			var d_ = (StatinAllergy?.Onset as object);
+			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(d_);
+			var c_ = (context?.Operators.Start(e_) as object);
+			var g_ = this.Measurement_Period();
+			var f_ = (context?.Operators.End(g_) as object);
+			return context?.Operators.Before(c_, 
 				f_, 
 				null);
-        };
-        var i_ = context?.Operators.WhereOrNull<AllergyIntolerance>(b_, 
+		};
+		var i_ = context?.Operators.WhereOrNull<AllergyIntolerance>(b_, 
 			h_);
-        return context?.Operators.ExistsInList<AllergyIntolerance>(i_);
-    }
+		return context?.Operators.ExistsInList<AllergyIntolerance>(i_);
+	}
     [CqlDeclaration("Has Allergy to Statin")]
     public bool? Has_Allergy_to_Statin() => __Has_Allergy_to_Statin.Value;
 
     private bool? Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care_Value()
-    {
-        var a_ = this.Hospice_Care_Ambulatory();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(a_, 
+	{
+		var a_ = this.Hospice_Care_Ambulatory();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(a_, 
 			null);
-        var c_ = this.Palliative_or_Hospice_Care();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(c_, 
+		var c_ = this.Palliative_or_Hospice_Care();
+		var d_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(c_, 
 			null);
-        var e_ = context?.Operators.ListUnion<ServiceRequest>(b_, 
+		var e_ = context?.Operators.ListUnion<ServiceRequest>(b_, 
 			d_);
-        Func<ServiceRequest,bool?> w_ = (PalliativeOrHospiceCareOrder) => 
-        {
-            var f_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
-            var g_ = FHIRHelpers_4_0_001.ToDateTime(f_);
-            var h_ = this.Measurement_Period();
-            var i_ = context?.Operators.End(h_);
-            var j_ = context?.Operators.SameOrBefore(g_, 
+		Func<ServiceRequest,bool?> w_ = (PalliativeOrHospiceCareOrder) => 
+		{
+			var f_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
+			var g_ = FHIRHelpers_4_0_001.ToDateTime(f_);
+			var h_ = this.Measurement_Period();
+			var i_ = context?.Operators.End(h_);
+			var j_ = context?.Operators.SameOrBefore(g_, 
 				i_, 
 				null);
-            var k_ = (PalliativeOrHospiceCareOrder?.StatusElement as object);
-            var l_ = (context.Deeper(new CallStackEntry("ToString", 
+			var k_ = (PalliativeOrHospiceCareOrder?.StatusElement as object);
+			var l_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(k_);
-            var n_ = "active";
-            var o_ = "on-hold";
-            var p_ = "completed";
-            var m_ = (new string[]
+			var n_ = "active";
+			var o_ = "on-hold";
+			var p_ = "completed";
+			var m_ = (new string[]
 			{
 				n_,
 				o_,
 				p_,
 			} as IEnumerable<string>);
-            var q_ = context?.Operators.InList<string>(l_, 
+			var q_ = context?.Operators.InList<string>(l_, 
 				m_);
-            var r_ = context?.Operators.And(j_, 
+			var r_ = context?.Operators.And(j_, 
 				q_);
-            var t_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
-            var s_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var t_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
+			var s_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(t_) as object);
-            var u_ = ("order" as object);
-            var v_ = context?.Operators.Equal(s_, 
+			var u_ = ("order" as object);
+			var v_ = context?.Operators.Equal(s_, 
 				u_);
-            return context?.Operators.And(r_, 
+			return context?.Operators.And(r_, 
 				v_);
-        };
-        var x_ = context?.Operators.WhereOrNull<ServiceRequest>(e_, 
+		};
+		var x_ = context?.Operators.WhereOrNull<ServiceRequest>(e_, 
 			w_);
-        var y_ = context?.Operators.ExistsInList<ServiceRequest>(x_);
-        var aa_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+		var y_ = context?.Operators.ExistsInList<ServiceRequest>(x_);
+		var aa_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
 			null);
-        var ac_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(c_, 
+		var ac_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(c_, 
 			null);
-        var ad_ = context?.Operators.ListUnion<Procedure>(aa_, 
+		var ad_ = context?.Operators.ListUnion<Procedure>(aa_, 
 			ac_);
-        Func<Procedure,bool?> ao_ = (PalliativeOrHospiceCarePerformed) => 
-        {
-            var ae_ = (PalliativeOrHospiceCarePerformed?.Performed as object);
-            var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ae_);
-            var ag_ = context?.Operators.Start(af_);
-            var ah_ = this.Measurement_Period();
-            var ai_ = context?.Operators.End(ah_);
-            var aj_ = context?.Operators.SameOrBefore(ag_, 
+		Func<Procedure,bool?> ao_ = (PalliativeOrHospiceCarePerformed) => 
+		{
+			var ae_ = (PalliativeOrHospiceCarePerformed?.Performed as object);
+			var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ae_);
+			var ag_ = context?.Operators.Start(af_);
+			var ah_ = this.Measurement_Period();
+			var ai_ = context?.Operators.End(ah_);
+			var aj_ = context?.Operators.SameOrBefore(ag_, 
 				ai_, 
 				null);
-            var al_ = (PalliativeOrHospiceCarePerformed?.StatusElement as object);
-            var ak_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var al_ = (PalliativeOrHospiceCarePerformed?.StatusElement as object);
+			var ak_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(al_) as object);
-            var am_ = ("completed" as object);
-            var an_ = context?.Operators.Equal(ak_, 
+			var am_ = ("completed" as object);
+			var an_ = context?.Operators.Equal(ak_, 
 				am_);
-            return context?.Operators.And(aj_, 
+			return context?.Operators.And(aj_, 
 				an_);
-        };
-        var ap_ = context?.Operators.WhereOrNull<Procedure>(ad_, 
+		};
+		var ap_ = context?.Operators.WhereOrNull<Procedure>(ad_, 
 			ao_);
-        var aq_ = context?.Operators.ExistsInList<Procedure>(ap_);
-        var ar_ = context?.Operators.Or(y_, 
+		var aq_ = context?.Operators.ExistsInList<Procedure>(ap_);
+		var ar_ = context?.Operators.Or(y_, 
 			aq_);
-        var as_ = this.Encounter_for_palliative_care();
-        var at_ = context?.Operators.ToList<CqlCode>(as_);
-        var au_ = context?.DataRetriever.RetrieveByCodes<Encounter>(at_, 
+		var as_ = this.Encounter_for_palliative_care();
+		var at_ = context?.Operators.ToList<CqlCode>(as_);
+		var au_ = context?.DataRetriever.RetrieveByCodes<Encounter>(at_, 
 			null);
-        Func<Encounter,bool?> bf_ = (PalliativeEncounter) => 
-        {
-            var av_ = PalliativeEncounter?.Period;
-            var aw_ = FHIRHelpers_4_0_001.ToInterval(av_);
-            var ax_ = context?.Operators.Start(aw_);
-            var ay_ = this.Measurement_Period();
-            var az_ = context?.Operators.End(ay_);
-            var ba_ = context?.Operators.SameOrBefore(ax_, 
+		Func<Encounter,bool?> bf_ = (PalliativeEncounter) => 
+		{
+			var av_ = PalliativeEncounter?.Period;
+			var aw_ = FHIRHelpers_4_0_001.ToInterval(av_);
+			var ax_ = context?.Operators.Start(aw_);
+			var ay_ = this.Measurement_Period();
+			var az_ = context?.Operators.End(ay_);
+			var ba_ = context?.Operators.SameOrBefore(ax_, 
 				az_, 
 				null);
-            var bc_ = (PalliativeEncounter?.StatusElement as object);
-            var bb_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var bc_ = (PalliativeEncounter?.StatusElement as object);
+			var bb_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(bc_) as object);
-            var bd_ = ("finished" as object);
-            var be_ = context?.Operators.Equal(bb_, 
+			var bd_ = ("finished" as object);
+			var be_ = context?.Operators.Equal(bb_, 
 				bd_);
-            return context?.Operators.And(ba_, 
+			return context?.Operators.And(ba_, 
 				be_);
-        };
-        var bg_ = context?.Operators.WhereOrNull<Encounter>(au_, 
+		};
+		var bg_ = context?.Operators.WhereOrNull<Encounter>(au_, 
 			bf_);
-        var bh_ = context?.Operators.ExistsInList<Encounter>(bg_);
-        return context?.Operators.Or(ar_, 
+		var bh_ = context?.Operators.ExistsInList<Encounter>(bg_);
+		return context?.Operators.Or(ar_, 
 			bh_);
-    }
+	}
     [CqlDeclaration("Has Order or Receiving Hospice Care or Palliative Care")]
     public bool? Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care() => __Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care.Value;
 
     private bool? Has_Hepatitis_or_Liver_Disease_Diagnosis_Value()
-    {
-        var a_ = this.Hepatitis_A();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+	{
+		var a_ = this.Hepatitis_A();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
 			null);
-        var c_ = this.Hepatitis_B();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
+		var c_ = this.Hepatitis_B();
+		var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
 			null);
-        var e_ = context?.Operators.ListUnion<Condition>(b_, 
+		var e_ = context?.Operators.ListUnion<Condition>(b_, 
 			d_);
-        var f_ = this.Liver_Disease();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Condition>(f_, 
+		var f_ = this.Liver_Disease();
+		var g_ = context?.DataRetriever.RetrieveByValueSet<Condition>(f_, 
 			null);
-        var h_ = context?.Operators.ListUnion<Condition>(e_, 
+		var h_ = context?.Operators.ListUnion<Condition>(e_, 
 			g_);
-        Func<Condition,bool?> k_ = (HepatitisLiverDisease) => 
-        {
-            var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(HepatitisLiverDisease);
-            var j_ = this.Measurement_Period();
-            return context?.Operators.Overlaps(i_, 
+		Func<Condition,bool?> k_ = (HepatitisLiverDisease) => 
+		{
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(HepatitisLiverDisease);
+			var j_ = this.Measurement_Period();
+			return context?.Operators.Overlaps(i_, 
 				j_, 
 				null);
-        };
-        var l_ = context?.Operators.WhereOrNull<Condition>(h_, 
+		};
+		var l_ = context?.Operators.WhereOrNull<Condition>(h_, 
 			k_);
-        return context?.Operators.ExistsInList<Condition>(l_);
-    }
+		return context?.Operators.ExistsInList<Condition>(l_);
+	}
     [CqlDeclaration("Has Hepatitis or Liver Disease Diagnosis")]
     public bool? Has_Hepatitis_or_Liver_Disease_Diagnosis() => __Has_Hepatitis_or_Liver_Disease_Diagnosis.Value;
 
     private bool? Has_Statin_Associated_Muscle_Symptoms_Value()
-    {
-        var a_ = this.Statin_Associated_Muscle_Symptoms();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+	{
+		var a_ = this.Statin_Associated_Muscle_Symptoms();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
 			null);
-        Func<Condition,bool?> g_ = (StatinMuscleSymptom) => 
-        {
-            var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(StatinMuscleSymptom);
-            var c_ = (context?.Operators.Start(d_) as object);
-            var f_ = this.Measurement_Period();
-            var e_ = (context?.Operators.End(f_) as object);
-            return context?.Operators.Before(c_, 
+		Func<Condition,bool?> g_ = (StatinMuscleSymptom) => 
+		{
+			var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(StatinMuscleSymptom);
+			var c_ = (context?.Operators.Start(d_) as object);
+			var f_ = this.Measurement_Period();
+			var e_ = (context?.Operators.End(f_) as object);
+			return context?.Operators.Before(c_, 
 				e_, 
 				null);
-        };
-        var h_ = context?.Operators.WhereOrNull<Condition>(b_, 
+		};
+		var h_ = context?.Operators.WhereOrNull<Condition>(b_, 
 			g_);
-        return context?.Operators.ExistsInList<Condition>(h_);
-    }
+		return context?.Operators.ExistsInList<Condition>(h_);
+	}
     [CqlDeclaration("Has Statin Associated Muscle Symptoms")]
     public bool? Has_Statin_Associated_Muscle_Symptoms() => __Has_Statin_Associated_Muscle_Symptoms.Value;
 
     private bool? Has_ESRD_Diagnosis_Value()
-    {
-        var a_ = this.End_Stage_Renal_Disease();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+	{
+		var a_ = this.End_Stage_Renal_Disease();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
 			null);
-        Func<Condition,bool?> e_ = (ESRD) => 
-        {
-            var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ESRD);
-            var d_ = this.Measurement_Period();
-            return context?.Operators.Overlaps(c_, 
+		Func<Condition,bool?> e_ = (ESRD) => 
+		{
+			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ESRD);
+			var d_ = this.Measurement_Period();
+			return context?.Operators.Overlaps(c_, 
 				d_, 
 				null);
-        };
-        var f_ = context?.Operators.WhereOrNull<Condition>(b_, 
+		};
+		var f_ = context?.Operators.WhereOrNull<Condition>(b_, 
 			e_);
-        return context?.Operators.ExistsInList<Condition>(f_);
-    }
+		return context?.Operators.ExistsInList<Condition>(f_);
+	}
     [CqlDeclaration("Has ESRD Diagnosis")]
     public bool? Has_ESRD_Diagnosis() => __Has_ESRD_Diagnosis.Value;
 
     private bool? Has_Adverse_Reaction_to_Statin_Value()
-    {
-        var a_ = this.Statin_Allergen();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<AdverseEvent>(a_, 
+	{
+		var a_ = this.Statin_Allergen();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<AdverseEvent>(a_, 
 			null);
-        Func<AdverseEvent,bool?> f_ = (StatinReaction) => 
-        {
-            var c_ = StatinReaction?.DateElement;
-            var d_ = FHIRHelpers_4_0_001.ToDateTime(c_);
-            var e_ = this.Measurement_Period();
-            return context?.Operators.ElementInInterval<CqlDateTime>(d_, 
+		Func<AdverseEvent,bool?> f_ = (StatinReaction) => 
+		{
+			var c_ = StatinReaction?.DateElement;
+			var d_ = FHIRHelpers_4_0_001.ToDateTime(c_);
+			var e_ = this.Measurement_Period();
+			return context?.Operators.ElementInInterval<CqlDateTime>(d_, 
 				e_, 
 				null);
-        };
-        var g_ = context?.Operators.WhereOrNull<AdverseEvent>(b_, 
+		};
+		var g_ = context?.Operators.WhereOrNull<AdverseEvent>(b_, 
 			f_);
-        return context?.Operators.ExistsInList<AdverseEvent>(g_);
-    }
+		return context?.Operators.ExistsInList<AdverseEvent>(g_);
+	}
     [CqlDeclaration("Has Adverse Reaction to Statin")]
     public bool? Has_Adverse_Reaction_to_Statin() => __Has_Adverse_Reaction_to_Statin.Value;
 
     private bool? Denominator_Exceptions_Value()
-    {
-        var a_ = this.Has_Allergy_to_Statin();
-        var b_ = this.Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care();
-        var c_ = context?.Operators.Or(a_, 
+	{
+		var a_ = this.Has_Allergy_to_Statin();
+		var b_ = this.Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care();
+		var c_ = context?.Operators.Or(a_, 
 			b_);
-        var d_ = this.Has_Hepatitis_or_Liver_Disease_Diagnosis();
-        var e_ = context?.Operators.Or(c_, 
+		var d_ = this.Has_Hepatitis_or_Liver_Disease_Diagnosis();
+		var e_ = context?.Operators.Or(c_, 
 			d_);
-        var f_ = this.Has_Statin_Associated_Muscle_Symptoms();
-        var g_ = context?.Operators.Or(e_, 
+		var f_ = this.Has_Statin_Associated_Muscle_Symptoms();
+		var g_ = context?.Operators.Or(e_, 
 			f_);
-        var h_ = this.Has_ESRD_Diagnosis();
-        var i_ = context?.Operators.Or(g_, 
+		var h_ = this.Has_ESRD_Diagnosis();
+		var i_ = context?.Operators.Or(g_, 
 			h_);
-        var j_ = this.Has_Adverse_Reaction_to_Statin();
-        return context?.Operators.Or(i_, 
+		var j_ = this.Has_Adverse_Reaction_to_Statin();
+		return context?.Operators.Or(i_, 
 			j_);
-    }
+	}
     [CqlDeclaration("Denominator Exceptions")]
     public bool? Denominator_Exceptions() => __Denominator_Exceptions.Value;
 
     private bool? Denominator_Exclusions_Value()
-    {
-        var a_ = this.Pregnancy_or_Other_Related_Diagnoses();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+	{
+		var a_ = this.Pregnancy_or_Other_Related_Diagnoses();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
 			null);
-        var c_ = this.Breastfeeding();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
+		var c_ = this.Breastfeeding();
+		var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
 			null);
-        var e_ = context?.Operators.ListUnion<Condition>(b_, 
+		var e_ = context?.Operators.ListUnion<Condition>(b_, 
 			d_);
-        var f_ = this.Rhabdomyolysis();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Condition>(f_, 
+		var f_ = this.Rhabdomyolysis();
+		var g_ = context?.DataRetriever.RetrieveByValueSet<Condition>(f_, 
 			null);
-        var h_ = context?.Operators.ListUnion<Condition>(e_, 
+		var h_ = context?.Operators.ListUnion<Condition>(e_, 
 			g_);
-        Func<Condition,bool?> k_ = (ExclusionDiagnosis) => 
-        {
-            var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ExclusionDiagnosis);
-            var j_ = this.Measurement_Period();
-            return context?.Operators.Overlaps(i_, 
+		Func<Condition,bool?> k_ = (ExclusionDiagnosis) => 
+		{
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ExclusionDiagnosis);
+			var j_ = this.Measurement_Period();
+			return context?.Operators.Overlaps(i_, 
 				j_, 
 				null);
-        };
-        var l_ = context?.Operators.WhereOrNull<Condition>(h_, 
+		};
+		var l_ = context?.Operators.WhereOrNull<Condition>(h_, 
 			k_);
-        return context?.Operators.ExistsInList<Condition>(l_);
-    }
+		return context?.Operators.ExistsInList<Condition>(l_);
+	}
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
     private IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period_Value()
-    {
-        var a_ = this.Low_Intensity_Statin_Therapy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
+	{
+		var a_ = this.Low_Intensity_Statin_Therapy();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
 			null);
-        var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
+		var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
 			b_);
-        var f_ = this.Moderate_Intensity_Statin_Therapy();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(f_, 
+		var f_ = this.Moderate_Intensity_Statin_Therapy();
+		var g_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(f_, 
 			null);
-        var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
+		var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
 			g_);
-        var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
+		var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
 			j_);
-        var l_ = this.High_Intensity_Statin_Therapy();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(l_, 
+		var l_ = this.High_Intensity_Statin_Therapy();
+		var m_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(l_, 
 			null);
-        var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
+		var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
 			m_);
-        var q_ = context?.Operators.ListUnion<MedicationRequest>(k_, 
+		var q_ = context?.Operators.ListUnion<MedicationRequest>(k_, 
 			p_);
-        Func<MedicationRequest,bool?> ag_ = (StatinOrdered) => 
-        {
-            var r_ = StatinOrdered?.AuthoredOnElement;
-            var s_ = FHIRHelpers_4_0_001.ToDateTime(r_);
-            var t_ = this.Measurement_Period();
-            var u_ = context?.Operators.ElementInInterval<CqlDateTime>(s_, 
+		Func<MedicationRequest,bool?> ag_ = (StatinOrdered) => 
+		{
+			var r_ = StatinOrdered?.AuthoredOnElement;
+			var s_ = FHIRHelpers_4_0_001.ToDateTime(r_);
+			var t_ = this.Measurement_Period();
+			var u_ = context?.Operators.ElementInInterval<CqlDateTime>(s_, 
 				t_, 
 				null);
-            var v_ = (StatinOrdered?.StatusElement as object);
-            var w_ = (context.Deeper(new CallStackEntry("ToString", 
+			var v_ = (StatinOrdered?.StatusElement as object);
+			var w_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(v_);
-            var y_ = "active";
-            var z_ = "completed";
-            var x_ = (new string[]
+			var y_ = "active";
+			var z_ = "completed";
+			var x_ = (new string[]
 			{
 				y_,
 				z_,
 			} as IEnumerable<string>);
-            var aa_ = context?.Operators.InList<string>(w_, 
+			var aa_ = context?.Operators.InList<string>(w_, 
 				x_);
-            var ab_ = context?.Operators.And(u_, 
+			var ab_ = context?.Operators.And(u_, 
 				aa_);
-            var ad_ = (StatinOrdered?.IntentElement as object);
-            var ac_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var ad_ = (StatinOrdered?.IntentElement as object);
+			var ac_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(ad_) as object);
-            var ae_ = ("order" as object);
-            var af_ = context?.Operators.Equal(ac_, 
+			var ae_ = ("order" as object);
+			var af_ = context?.Operators.Equal(ac_, 
 				ae_);
-            return context?.Operators.And(ab_, 
+			return context?.Operators.And(ab_, 
 				af_);
-        };
-        return context?.Operators.WhereOrNull<MedicationRequest>(q_, 
+		};
+		return context?.Operators.WhereOrNull<MedicationRequest>(q_, 
 			ag_);
-    }
+	}
     [CqlDeclaration("Statin Therapy Ordered during Measurement Period")]
     public IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period() => __Statin_Therapy_Ordered_during_Measurement_Period.Value;
 
     private IEnumerable<MedicationRequest> Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period_Value()
-    {
-        var a_ = this.Low_Intensity_Statin_Therapy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
+	{
+		var a_ = this.Low_Intensity_Statin_Therapy();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
 			null);
-        var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
+		var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
 			b_);
-        var f_ = this.Moderate_Intensity_Statin_Therapy();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(f_, 
+		var f_ = this.Moderate_Intensity_Statin_Therapy();
+		var g_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(f_, 
 			null);
-        var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
+		var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
 			g_);
-        var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
+		var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
 			j_);
-        var l_ = this.High_Intensity_Statin_Therapy();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(l_, 
+		var l_ = this.High_Intensity_Statin_Therapy();
+		var m_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(l_, 
 			null);
-        var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
+		var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
 			m_);
-        var q_ = context?.Operators.ListUnion<MedicationRequest>(k_, 
+		var q_ = context?.Operators.ListUnion<MedicationRequest>(k_, 
 			p_);
-        Func<MedicationRequest,bool?> aj_ = (ActiveStatin) => 
-        {
-            var r_ = ActiveStatin?.DosageInstruction;
-            Func<Dosage,bool?> t_ = (@this) => 
-            {
-                bool? s_ = ((bool?)(@this?.Timing == null));
-                return context?.Operators.Not(s_);
-            };
-            var u_ = context?.Operators.WhereOrNull<Dosage>(r_, 
+		Func<MedicationRequest,bool?> aj_ = (ActiveStatin) => 
+		{
+			var r_ = ActiveStatin?.DosageInstruction;
+			Func<Dosage,bool?> t_ = (@this) => 
+			{
+				bool? s_ = ((bool?)(@this?.Timing == null));
+				return context?.Operators.Not(s_);
+			};
+			var u_ = context?.Operators.WhereOrNull<Dosage>(r_, 
 				t_);
-            Func<Dosage,Timing> v_ = (@this) => 
-            {
-                return @this?.Timing;
-            };
-            var w_ = context?.Operators.SelectOrNull<Dosage, Timing>(u_, 
+			Func<Dosage,Timing> v_ = (@this) => 
+			{
+				return @this?.Timing;
+			};
+			var w_ = context?.Operators.SelectOrNull<Dosage, Timing>(u_, 
 				v_);
-            Func<Timing,bool?> aa_ = (T) => 
-            {
-                var x_ = (((((T?.Repeat?.Bounds as object) is Range as bool?) ?? false))
+			Func<Timing,bool?> aa_ = (T) => 
+			{
+				var x_ = (((((T?.Repeat?.Bounds as object) is Range as bool?) ?? false))
 					? ((((T?.Repeat?.Bounds as object) as Range) as object))
 					: ((((((T?.Repeat?.Bounds as object) is Period as bool?) ?? false))
 							? ((((T?.Repeat?.Bounds as object) as Period) as object))
 							: (null))
 ))
 ;
-                var y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(x_);
-                var z_ = this.Measurement_Period();
-                return context?.Operators.Overlaps(y_, 
+				var y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(x_);
+				var z_ = this.Measurement_Period();
+				return context?.Operators.Overlaps(y_, 
 					z_, 
 					null);
-            };
-            var ab_ = context?.Operators.WhereOrNull<Timing>(w_, 
+			};
+			var ab_ = context?.Operators.WhereOrNull<Timing>(w_, 
 				aa_);
-            var ac_ = context?.Operators.ExistsInList<Timing>(ab_);
-            var ad_ = (ActiveStatin?.StatusElement as object);
-            var ae_ = (context.Deeper(new CallStackEntry("ToString", 
+			var ac_ = context?.Operators.ExistsInList<Timing>(ab_);
+			var ad_ = (ActiveStatin?.StatusElement as object);
+			var ae_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(ad_);
-            var ag_ = "active";
-            var ah_ = "completed";
-            var af_ = (new string[]
+			var ag_ = "active";
+			var ah_ = "completed";
+			var af_ = (new string[]
 			{
 				ag_,
 				ah_,
 			} as IEnumerable<string>);
-            var ai_ = context?.Operators.InList<string>(ae_, 
+			var ai_ = context?.Operators.InList<string>(ae_, 
 				af_);
-            return context?.Operators.And(ac_, 
+			return context?.Operators.And(ac_, 
 				ai_);
-        };
-        return context?.Operators.WhereOrNull<MedicationRequest>(q_, 
+		};
+		return context?.Operators.WhereOrNull<MedicationRequest>(q_, 
 			aj_);
-    }
+	}
     [CqlDeclaration("Prescribed Statin Therapy Any Time during Measurement Period")]
     public IEnumerable<MedicationRequest> Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period() => __Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period.Value;
 
     private bool? Numerator_Value()
-    {
-        var a_ = this.Statin_Therapy_Ordered_during_Measurement_Period();
-        var b_ = context?.Operators.ExistsInList<MedicationRequest>(a_);
-        var c_ = this.Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period();
-        var d_ = context?.Operators.ExistsInList<MedicationRequest>(c_);
-        return context?.Operators.Or(b_, 
+	{
+		var a_ = this.Statin_Therapy_Ordered_during_Measurement_Period();
+		var b_ = context?.Operators.ExistsInList<MedicationRequest>(a_);
+		var c_ = this.Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period();
+		var d_ = context?.Operators.ExistsInList<MedicationRequest>(c_);
+		return context?.Operators.Or(b_, 
 			d_);
-    }
+	}
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 

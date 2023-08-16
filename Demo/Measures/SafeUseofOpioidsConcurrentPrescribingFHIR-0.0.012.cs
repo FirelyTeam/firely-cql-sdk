@@ -172,16 +172,16 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     public CqlCode Birth_date() => __Birth_date.Value;
 
     private CqlCode[] LOINC_Value()
-    {
-        var a_ = new CqlCode("21112-8", 
+	{
+		var a_ = new CqlCode("21112-8", 
 			"http://loinc.org", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 		};
-    }
+	}
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -196,333 +196,333 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
 
     private Patient Patient_Value()
-    {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+	{
+		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
 			null);
-        return context?.Operators.SingleOrNull<Patient>(a_);
-    }
+		return context?.Operators.SingleOrNull<Patient>(a_);
+	}
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
     private IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18_Value()
-    {
-        var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Inpatient_Encounter();
-        Func<Encounter,bool?> o_ = (EncounterInpatient) => 
-        {
-            var c_ = (this.Patient()?.BirthDateElement?.Value as object);
-            var d_ = context?.Operators?.TypeConverter.Convert<CqlDate>(c_);
-            var e_ = EncounterInpatient?.Period;
-            var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
-            var g_ = context?.Operators.Start(f_);
-            var h_ = context?.Operators.DateFrom(g_);
-            var b_ = (context?.Operators.CalculateAgeAt(d_, 
+	{
+		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Inpatient_Encounter();
+		Func<Encounter,bool?> o_ = (EncounterInpatient) => 
+		{
+			var c_ = (this.Patient()?.BirthDateElement?.Value as object);
+			var d_ = context?.Operators?.TypeConverter.Convert<CqlDate>(c_);
+			var e_ = EncounterInpatient?.Period;
+			var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
+			var g_ = context?.Operators.Start(f_);
+			var h_ = context?.Operators.DateFrom(g_);
+			var b_ = (context?.Operators.CalculateAgeAt(d_, 
 				h_, 
 				"year") as object);
-            var i_ = (((int?)18) as object);
-            var j_ = context?.Operators.GreaterOrEqual(b_, 
+			var i_ = (((int?)18) as object);
+			var j_ = context?.Operators.GreaterOrEqual(b_, 
 				i_);
-            var l_ = (EncounterInpatient?.StatusElement as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var l_ = (EncounterInpatient?.StatusElement as object);
+			var k_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
-            var m_ = ("finished" as object);
-            var n_ = context?.Operators.Equal(k_, 
+			var m_ = ("finished" as object);
+			var n_ = context?.Operators.Equal(k_, 
 				m_);
-            return context?.Operators.And(j_, 
+			return context?.Operators.And(j_, 
 				n_);
-        };
-        return context?.Operators.WhereOrNull<Encounter>(a_, 
+		};
+		return context?.Operators.WhereOrNull<Encounter>(a_, 
 			o_);
-    }
+	}
     [CqlDeclaration("Inpatient Encounter with Age Greater than or Equal to 18")]
     public IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18() => __Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18.Value;
 
     private IEnumerable<Encounter> Initial_Population_Value()
-    {
-        var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
-        Func<Encounter,IEnumerable<Encounter>> al_ = (InpatientEncounter) => 
-        {
-            var b_ = this.Schedule_II_and_III_Opioid_Medications();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(b_, 
+	{
+		var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
+		Func<Encounter,IEnumerable<Encounter>> al_ = (InpatientEncounter) => 
+		{
+			var b_ = this.Schedule_II_and_III_Opioid_Medications();
+			var c_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(b_, 
 				null);
-            var f_ = context?.Operators.ListUnion<MedicationRequest>(c_, 
+			var f_ = context?.Operators.ListUnion<MedicationRequest>(c_, 
 				c_);
-            var g_ = this.Schedule_IV_Benzodiazepines();
-            var h_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(g_, 
+			var g_ = this.Schedule_IV_Benzodiazepines();
+			var h_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(g_, 
 				null);
-            var k_ = context?.Operators.ListUnion<MedicationRequest>(h_, 
+			var k_ = context?.Operators.ListUnion<MedicationRequest>(h_, 
 				h_);
-            Func<MedicationRequest,bool?> r_ = (Medications) => 
-            {
-                var l_ = (Medications?.Category as IEnumerable<CodeableConcept>);
-                Func<CodeableConcept,bool?> p_ = (C) => 
-                {
-                    var m_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
-                    var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
-                    var n_ = (context?.Operators.ConvertCodeToConcept(o_) as object);
-                    return context?.Operators.Equivalent(m_, 
+			Func<MedicationRequest,bool?> r_ = (Medications) => 
+			{
+				var l_ = (Medications?.Category as IEnumerable<CodeableConcept>);
+				Func<CodeableConcept,bool?> p_ = (C) => 
+				{
+					var m_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
+					var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
+					var n_ = (context?.Operators.ConvertCodeToConcept(o_) as object);
+					return context?.Operators.Equivalent(m_, 
 						n_);
-                };
-                var q_ = context?.Operators.WhereOrNull<CodeableConcept>(l_, 
+				};
+				var q_ = context?.Operators.WhereOrNull<CodeableConcept>(l_, 
 					p_);
-                return context?.Operators.ExistsInList<CodeableConcept>(q_);
-            };
-            var s_ = context?.Operators.WhereOrNull<MedicationRequest>(k_, 
+				return context?.Operators.ExistsInList<CodeableConcept>(q_);
+			};
+			var s_ = context?.Operators.WhereOrNull<MedicationRequest>(k_, 
 				r_);
-            var t_ = context?.Operators.ListUnion<MedicationRequest>(f_, 
+			var t_ = context?.Operators.ListUnion<MedicationRequest>(f_, 
 				s_);
-            Func<MedicationRequest,bool?> ai_ = (OpioidOrBenzodiazepineDischargeMedication) => 
-            {
-                var u_ = OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement;
-                var v_ = FHIRHelpers_4_0_001.ToDateTime(u_);
-                var w_ = InpatientEncounter?.Period;
-                var x_ = FHIRHelpers_4_0_001.ToInterval(w_);
-                var y_ = context?.Operators.ElementInInterval<CqlDateTime>(v_, 
+			Func<MedicationRequest,bool?> ai_ = (OpioidOrBenzodiazepineDischargeMedication) => 
+			{
+				var u_ = OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement;
+				var v_ = FHIRHelpers_4_0_001.ToDateTime(u_);
+				var w_ = InpatientEncounter?.Period;
+				var x_ = FHIRHelpers_4_0_001.ToInterval(w_);
+				var y_ = context?.Operators.ElementInInterval<CqlDateTime>(v_, 
 					x_, 
 					null);
-                var aa_ = (OpioidOrBenzodiazepineDischargeMedication?.StatusElement as object);
-                var z_ = ((context.Deeper(new CallStackEntry("ToString", 
+				var aa_ = (OpioidOrBenzodiazepineDischargeMedication?.StatusElement as object);
+				var z_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(aa_) as object);
-                var ab_ = ("active" as object);
-                var ac_ = context?.Operators.Equal(z_, 
+				var ab_ = ("active" as object);
+				var ac_ = context?.Operators.Equal(z_, 
 					ab_);
-                var ad_ = context?.Operators.And(y_, 
+				var ad_ = context?.Operators.And(y_, 
 					ac_);
-                var af_ = (OpioidOrBenzodiazepineDischargeMedication?.IntentElement as object);
-                var ae_ = ((context.Deeper(new CallStackEntry("ToString", 
+				var af_ = (OpioidOrBenzodiazepineDischargeMedication?.IntentElement as object);
+				var ae_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(af_) as object);
-                var ag_ = ("plan" as object);
-                var ah_ = context?.Operators.Equal(ae_, 
+				var ag_ = ("plan" as object);
+				var ah_ = context?.Operators.Equal(ae_, 
 					ag_);
-                return context?.Operators.And(ad_, 
+				return context?.Operators.And(ad_, 
 					ah_);
-            };
-            var aj_ = context?.Operators.WhereOrNull<MedicationRequest>(t_, 
+			};
+			var aj_ = context?.Operators.WhereOrNull<MedicationRequest>(t_, 
 				ai_);
-            Func<MedicationRequest,Encounter> ak_ = (OpioidOrBenzodiazepineDischargeMedication) => InpatientEncounter;
-            return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(aj_, 
+			Func<MedicationRequest,Encounter> ak_ = (OpioidOrBenzodiazepineDischargeMedication) => InpatientEncounter;
+			return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(aj_, 
 				ak_);
-        };
-        return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
+		};
+		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			al_);
-    }
+	}
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population() => __Initial_Population.Value;
 
     private IEnumerable<Encounter> Denominator_Value()
-    {
-        return this.Initial_Population();
-    }
+	{
+		return this.Initial_Population();
+	}
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator() => __Denominator.Value;
 
     private IEnumerable<Coding> SDE_Ethnicity_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
+	}
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
     private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+	}
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
     private IEnumerable<Coding> SDE_Race_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
+	}
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
     private CqlCode SDE_Sex_Value()
-    {
-        return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
-    }
+	{
+		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
+	}
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
     private IEnumerable<Encounter> Numerator_Value()
-    {
-        var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
-        Func<Encounter,bool?> n_ = (InpatientEncounter) => 
-        {
-            var c_ = this.Schedule_II_and_III_Opioid_Medications();
-            var d_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(c_, 
+	{
+		var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
+		Func<Encounter,bool?> n_ = (InpatientEncounter) => 
+		{
+			var c_ = this.Schedule_II_and_III_Opioid_Medications();
+			var d_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(c_, 
 				null);
-            Func<MedicationRequest,bool?> i_ = (Opioids) => 
-            {
-                var e_ = Opioids?.AuthoredOnElement;
-                var f_ = FHIRHelpers_4_0_001.ToDateTime(e_);
-                var g_ = InpatientEncounter?.Period;
-                var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
-                return context?.Operators.ElementInInterval<CqlDateTime>(f_, 
+			Func<MedicationRequest,bool?> i_ = (Opioids) => 
+			{
+				var e_ = Opioids?.AuthoredOnElement;
+				var f_ = FHIRHelpers_4_0_001.ToDateTime(e_);
+				var g_ = InpatientEncounter?.Period;
+				var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
+				return context?.Operators.ElementInInterval<CqlDateTime>(f_, 
 					h_, 
 					null);
-            };
-            var j_ = context?.Operators.WhereOrNull<MedicationRequest>(d_, 
+			};
+			var j_ = context?.Operators.WhereOrNull<MedicationRequest>(d_, 
 				i_);
-            Func<MedicationRequest,object> k_ = (Opioids) => (Opioids?.Medication as object);
-            var l_ = context?.Operators.SelectOrNull<MedicationRequest, object>(j_, 
+			Func<MedicationRequest,object> k_ = (Opioids) => (Opioids?.Medication as object);
+			var l_ = context?.Operators.SelectOrNull<MedicationRequest, object>(j_, 
 				k_);
-            var b_ = (context?.Operators.CountOrNull<object>(l_) as object);
-            var m_ = (((int?)2) as object);
-            return context?.Operators.GreaterOrEqual(b_, 
+			var b_ = (context?.Operators.CountOrNull<object>(l_) as object);
+			var m_ = (((int?)2) as object);
+			return context?.Operators.GreaterOrEqual(b_, 
 				m_);
-        };
-        var o_ = context?.Operators.WhereOrNull<Encounter>(a_, 
+		};
+		var o_ = context?.Operators.WhereOrNull<Encounter>(a_, 
 			n_);
-        Func<Encounter,IEnumerable<Encounter>> z_ = (InpatientEncounter) => 
-        {
-            var q_ = this.Schedule_II_and_III_Opioid_Medications();
-            var r_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(q_, 
+		Func<Encounter,IEnumerable<Encounter>> z_ = (InpatientEncounter) => 
+		{
+			var q_ = this.Schedule_II_and_III_Opioid_Medications();
+			var r_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(q_, 
 				null);
-            Func<MedicationRequest,bool?> w_ = (OpioidsDischarge) => 
-            {
-                var s_ = OpioidsDischarge?.AuthoredOnElement;
-                var t_ = FHIRHelpers_4_0_001.ToDateTime(s_);
-                var u_ = InpatientEncounter?.Period;
-                var v_ = FHIRHelpers_4_0_001.ToInterval(u_);
-                return context?.Operators.ElementInInterval<CqlDateTime>(t_, 
+			Func<MedicationRequest,bool?> w_ = (OpioidsDischarge) => 
+			{
+				var s_ = OpioidsDischarge?.AuthoredOnElement;
+				var t_ = FHIRHelpers_4_0_001.ToDateTime(s_);
+				var u_ = InpatientEncounter?.Period;
+				var v_ = FHIRHelpers_4_0_001.ToInterval(u_);
+				return context?.Operators.ElementInInterval<CqlDateTime>(t_, 
 					v_, 
 					null);
-            };
-            var x_ = context?.Operators.WhereOrNull<MedicationRequest>(r_, 
+			};
+			var x_ = context?.Operators.WhereOrNull<MedicationRequest>(r_, 
 				w_);
-            Func<MedicationRequest,Encounter> y_ = (OpioidsDischarge) => InpatientEncounter;
-            return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(x_, 
+			Func<MedicationRequest,Encounter> y_ = (OpioidsDischarge) => InpatientEncounter;
+			return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(x_, 
 				y_);
-        };
-        var aa_ = context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
+		};
+		var aa_ = context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			z_);
-        Func<Encounter,IEnumerable<Encounter>> ak_ = (InpatientEncounter) => 
-        {
-            var ab_ = this.Schedule_IV_Benzodiazepines();
-            var ac_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ab_, 
+		Func<Encounter,IEnumerable<Encounter>> ak_ = (InpatientEncounter) => 
+		{
+			var ab_ = this.Schedule_IV_Benzodiazepines();
+			var ac_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ab_, 
 				null);
-            Func<MedicationRequest,bool?> ah_ = (BenzodiazepinesDischarge) => 
-            {
-                var ad_ = BenzodiazepinesDischarge?.AuthoredOnElement;
-                var ae_ = FHIRHelpers_4_0_001.ToDateTime(ad_);
-                var af_ = InpatientEncounter?.Period;
-                var ag_ = FHIRHelpers_4_0_001.ToInterval(af_);
-                return context?.Operators.ElementInInterval<CqlDateTime>(ae_, 
+			Func<MedicationRequest,bool?> ah_ = (BenzodiazepinesDischarge) => 
+			{
+				var ad_ = BenzodiazepinesDischarge?.AuthoredOnElement;
+				var ae_ = FHIRHelpers_4_0_001.ToDateTime(ad_);
+				var af_ = InpatientEncounter?.Period;
+				var ag_ = FHIRHelpers_4_0_001.ToInterval(af_);
+				return context?.Operators.ElementInInterval<CqlDateTime>(ae_, 
 					ag_, 
 					null);
-            };
-            var ai_ = context?.Operators.WhereOrNull<MedicationRequest>(ac_, 
+			};
+			var ai_ = context?.Operators.WhereOrNull<MedicationRequest>(ac_, 
 				ah_);
-            Func<MedicationRequest,Encounter> aj_ = (BenzodiazepinesDischarge) => InpatientEncounter;
-            return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(ai_, 
+			Func<MedicationRequest,Encounter> aj_ = (BenzodiazepinesDischarge) => InpatientEncounter;
+			return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(ai_, 
 				aj_);
-        };
-        var al_ = context?.Operators.SelectManyOrNull<Encounter, Encounter>(aa_, 
+		};
+		var al_ = context?.Operators.SelectManyOrNull<Encounter, Encounter>(aa_, 
 			ak_);
-        return context?.Operators.ListUnion<Encounter>(o_, 
+		return context?.Operators.ListUnion<Encounter>(o_, 
 			al_);
-    }
+	}
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator() => __Numerator.Value;
 
     private IEnumerable<Encounter> Denominator_Exclusion_Value()
-    {
-        var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
-        Func<Encounter,bool?> az_ = (InpatientEncounter) => 
-        {
-            var b_ = this.All_Primary_and_Secondary_Cancer();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
+	{
+		var a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
+		Func<Encounter,bool?> az_ = (InpatientEncounter) => 
+		{
+			var b_ = this.All_Primary_and_Secondary_Cancer();
+			var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
 				null);
-            Func<Condition,bool?> g_ = (Cancer) => 
-            {
-                var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Cancer);
-                var e_ = InpatientEncounter?.Period;
-                var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
-                return context?.Operators.Overlaps(d_, 
+			Func<Condition,bool?> g_ = (Cancer) => 
+			{
+				var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Cancer);
+				var e_ = InpatientEncounter?.Period;
+				var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
+				return context?.Operators.Overlaps(d_, 
 					f_, 
 					null);
-            };
-            var h_ = context?.Operators.WhereOrNull<Condition>(c_, 
+			};
+			var h_ = context?.Operators.WhereOrNull<Condition>(c_, 
 				g_);
-            var i_ = context?.Operators.ExistsInList<Condition>(h_);
-            var j_ = this.Palliative_or_Hospice_Care();
-            var k_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(j_, 
+			var i_ = context?.Operators.ExistsInList<Condition>(h_);
+			var j_ = this.Palliative_or_Hospice_Care();
+			var k_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(j_, 
 				null);
-            Func<ServiceRequest,bool?> u_ = (PalliativeOrHospiceCareOrder) => 
-            {
-                var l_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
-                var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
-                var n_ = InpatientEncounter?.Period;
-                var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
-                var p_ = context?.Operators.ElementInInterval<CqlDateTime>(m_, 
+			Func<ServiceRequest,bool?> u_ = (PalliativeOrHospiceCareOrder) => 
+			{
+				var l_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
+				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
+				var n_ = InpatientEncounter?.Period;
+				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
+				var p_ = context?.Operators.ElementInInterval<CqlDateTime>(m_, 
 					o_, 
 					null);
-                var r_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
-                var q_ = ((context.Deeper(new CallStackEntry("ToString", 
+				var r_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
+				var q_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(r_) as object);
-                var s_ = ("order" as object);
-                var t_ = context?.Operators.Equal(q_, 
+				var s_ = ("order" as object);
+				var t_ = context?.Operators.Equal(q_, 
 					s_);
-                return context?.Operators.And(p_, 
+				return context?.Operators.And(p_, 
 					t_);
-            };
-            var v_ = context?.Operators.WhereOrNull<ServiceRequest>(k_, 
+			};
+			var v_ = context?.Operators.WhereOrNull<ServiceRequest>(k_, 
 				u_);
-            var w_ = context?.Operators.ExistsInList<ServiceRequest>(v_);
-            var x_ = context?.Operators.Or(i_, 
+			var w_ = context?.Operators.ExistsInList<ServiceRequest>(v_);
+			var x_ = context?.Operators.Or(i_, 
 				w_);
-            var z_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(j_, 
+			var z_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(j_, 
 				null);
-            Func<Procedure,bool?> ae_ = (PalliativeOrHospiceCarePerformed) => 
-            {
-                var aa_ = (PalliativeOrHospiceCarePerformed?.Performed as object);
-                var ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aa_);
-                var ac_ = InpatientEncounter?.Period;
-                var ad_ = FHIRHelpers_4_0_001.ToInterval(ac_);
-                return context?.Operators.Overlaps(ab_, 
+			Func<Procedure,bool?> ae_ = (PalliativeOrHospiceCarePerformed) => 
+			{
+				var aa_ = (PalliativeOrHospiceCarePerformed?.Performed as object);
+				var ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aa_);
+				var ac_ = InpatientEncounter?.Period;
+				var ad_ = FHIRHelpers_4_0_001.ToInterval(ac_);
+				return context?.Operators.Overlaps(ab_, 
 					ad_, 
 					null);
-            };
-            var af_ = context?.Operators.WhereOrNull<Procedure>(z_, 
+			};
+			var af_ = context?.Operators.WhereOrNull<Procedure>(z_, 
 				ae_);
-            var ag_ = context?.Operators.ExistsInList<Procedure>(af_);
-            var ah_ = context?.Operators.Or(x_, 
+			var ag_ = context?.Operators.ExistsInList<Procedure>(af_);
+			var ah_ = context?.Operators.Or(x_, 
 				ag_);
-            var ai_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
-            Func<Encounter,bool?> aw_ = (InpatientEncounter) => 
-            {
-                var aj_ = InpatientEncounter?.Hospitalization?.DischargeDisposition;
-                var ak_ = FHIRHelpers_4_0_001.ToConcept(aj_);
-                var al_ = this.Discharge_To_Acute_Care_Facility();
-                var am_ = context?.Operators.ConceptInValueSet(ak_, 
+			var ai_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
+			Func<Encounter,bool?> aw_ = (InpatientEncounter) => 
+			{
+				var aj_ = InpatientEncounter?.Hospitalization?.DischargeDisposition;
+				var ak_ = FHIRHelpers_4_0_001.ToConcept(aj_);
+				var al_ = this.Discharge_To_Acute_Care_Facility();
+				var am_ = context?.Operators.ConceptInValueSet(ak_, 
 					al_);
-                var ap_ = this.Hospice_Care_Referral_or_Admission();
-                var aq_ = context?.Operators.ConceptInValueSet(ak_, 
+				var ap_ = this.Hospice_Care_Referral_or_Admission();
+				var aq_ = context?.Operators.ConceptInValueSet(ak_, 
 					ap_);
-                var ar_ = context?.Operators.Or(am_, 
+				var ar_ = context?.Operators.Or(am_, 
 					aq_);
-                var au_ = this.Patient_Expired();
-                var av_ = context?.Operators.ConceptInValueSet(ak_, 
+				var au_ = this.Patient_Expired();
+				var av_ = context?.Operators.ConceptInValueSet(ak_, 
 					au_);
-                return context?.Operators.Or(ar_, 
+				return context?.Operators.Or(ar_, 
 					av_);
-            };
-            var ax_ = context?.Operators.WhereOrNull<Encounter>(ai_, 
+			};
+			var ax_ = context?.Operators.WhereOrNull<Encounter>(ai_, 
 				aw_);
-            var ay_ = context?.Operators.ExistsInList<Encounter>(ax_);
-            return context?.Operators.Or(ah_, 
+			var ay_ = context?.Operators.ExistsInList<Encounter>(ax_);
+			return context?.Operators.Or(ah_, 
 				ay_);
-        };
-        var ba_ = context?.Operators.WhereOrNull<Encounter>(a_, 
+		};
+		var ba_ = context?.Operators.WhereOrNull<Encounter>(a_, 
 			az_);
-        Func<Encounter,Encounter> bb_ = (InpatientEncounter) => InpatientEncounter;
-        return context?.Operators.SelectOrNull<Encounter, Encounter>(ba_, 
+		Func<Encounter,Encounter> bb_ = (InpatientEncounter) => InpatientEncounter;
+		return context?.Operators.SelectOrNull<Encounter, Encounter>(ba_, 
 			bb_);
-    }
+	}
     [CqlDeclaration("Denominator Exclusion")]
     public IEnumerable<Encounter> Denominator_Exclusion() => __Denominator_Exclusion.Value;
 

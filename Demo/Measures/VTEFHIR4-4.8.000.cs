@@ -80,113 +80,113 @@ public class VTEFHIR4_4_8_000
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
 
     private Patient Patient_Value()
-    {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+	{
+		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
 			null);
-        return context?.Operators.SingleOrNull<Patient>(a_);
-    }
+		return context?.Operators.SingleOrNull<Patient>(a_);
+	}
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
     [CqlDeclaration("FirstInpatientIntensiveCareUnit")]
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
-    {
-        var a_ = (Encounter?.Location as IEnumerable<Encounter.LocationComponent>);
-        Func<Encounter.LocationComponent,bool?> l_ = (HospitalLocation) => 
-        {
-            var b_ = (MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(HospitalLocation?.Location)?.Type as IEnumerable<CodeableConcept>);
-            Func<CodeableConcept,CqlConcept> c_ = (X) => 
-            {
-                return FHIRHelpers_4_0_001.ToConcept(X);
-            };
-            var d_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(b_, 
+	{
+		var a_ = (Encounter?.Location as IEnumerable<Encounter.LocationComponent>);
+		Func<Encounter.LocationComponent,bool?> l_ = (HospitalLocation) => 
+		{
+			var b_ = (MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(HospitalLocation?.Location)?.Type as IEnumerable<CodeableConcept>);
+			Func<CodeableConcept,CqlConcept> c_ = (X) => 
+			{
+				return FHIRHelpers_4_0_001.ToConcept(X);
+			};
+			var d_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(b_, 
 				c_);
-            var e_ = this.Intensive_Care_Unit();
-            var f_ = context?.Operators.ConceptsInValueSet(d_, 
+			var e_ = this.Intensive_Care_Unit();
+			var f_ = context?.Operators.ConceptsInValueSet(d_, 
 				e_);
-            var g_ = Encounter?.Period;
-            var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
-            var i_ = HospitalLocation?.Period;
-            var j_ = FHIRHelpers_4_0_001.ToInterval(i_);
-            var k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, 
+			var g_ = Encounter?.Period;
+			var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
+			var i_ = HospitalLocation?.Period;
+			var j_ = FHIRHelpers_4_0_001.ToInterval(i_);
+			var k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, 
 				j_, 
 				null);
-            return context?.Operators.And(f_, 
+			return context?.Operators.And(f_, 
 				k_);
-        };
-        var m_ = context?.Operators.WhereOrNull<Encounter.LocationComponent>(a_, 
+		};
+		var m_ = context?.Operators.WhereOrNull<Encounter.LocationComponent>(a_, 
 			l_);
-        Func<Encounter.LocationComponent,object> n_ = (@this) => context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(@this?.Period));
-        var o_ = context?.Operators.ListSortBy<Encounter.LocationComponent>(m_, 
+		Func<Encounter.LocationComponent,object> n_ = (@this) => context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(@this?.Period));
+		var o_ = context?.Operators.ListSortBy<Encounter.LocationComponent>(m_, 
 			n_, 
 			System.ComponentModel.ListSortDirection.Ascending);
-        return context?.Operators.FirstOfList<Encounter.LocationComponent>(o_);
-    }
+		return context?.Operators.FirstOfList<Encounter.LocationComponent>(o_);
+	}
 
     [CqlDeclaration("FirstICULocationPeriod")]
     public Period FirstICULocationPeriod(Encounter Encounter)
-    {
-        return this.FirstInpatientIntensiveCareUnit(Encounter)?.Period;
-    }
+	{
+		return this.FirstInpatientIntensiveCareUnit(Encounter)?.Period;
+	}
 
     [CqlDeclaration("StartOfFirstICU")]
     public CqlDateTime StartOfFirstICU(Encounter Encounter)
-    {
-        var a_ = this.FirstICULocationPeriod(Encounter);
-        var b_ = FHIRHelpers_4_0_001.ToInterval(a_);
-        return context?.Operators.Start(b_);
-    }
+	{
+		var a_ = this.FirstICULocationPeriod(Encounter);
+		var b_ = FHIRHelpers_4_0_001.ToInterval(a_);
+		return context?.Operators.Start(b_);
+	}
 
     [CqlDeclaration("CalendarDayOfOrDayAfter")]
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
-    {
-        var a_ = context?.Operators.DateFrom(StartValue);
-        var c_ = context?.Operators.Quantity(1m, 
+	{
+		var a_ = context?.Operators.DateFrom(StartValue);
+		var c_ = context?.Operators.Quantity(1m, 
 			"day");
-        var d_ = context?.Operators.Add(a_, 
+		var d_ = context?.Operators.Add(a_, 
 			c_);
-        return context?.Operators.Interval(a_, 
+		return context?.Operators.Interval(a_, 
 			d_, 
 			true, 
 			true);
-    }
+	}
 
     [CqlDeclaration("FromDayOfStartOfHospitalizationToDayAfterAdmission")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(Encounter Encounter)
-    {
-        var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(Encounter);
-        var b_ = context?.Operators.Start(a_);
-        var c_ = context?.Operators.DateFrom(b_);
-        var d_ = Encounter?.Period;
-        var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
-        var f_ = context?.Operators.Start(e_);
-        var g_ = context?.Operators.DateFrom(f_);
-        var h_ = context?.Operators.Quantity(1m, 
+	{
+		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(Encounter);
+		var b_ = context?.Operators.Start(a_);
+		var c_ = context?.Operators.DateFrom(b_);
+		var d_ = Encounter?.Period;
+		var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
+		var f_ = context?.Operators.Start(e_);
+		var g_ = context?.Operators.DateFrom(f_);
+		var h_ = context?.Operators.Quantity(1m, 
 			"day");
-        var i_ = context?.Operators.Add(g_, 
+		var i_ = context?.Operators.Add(g_, 
 			h_);
-        return context?.Operators.Interval(c_, 
+		return context?.Operators.Interval(c_, 
 			i_, 
 			true, 
 			true);
-    }
+	}
 
     [CqlDeclaration("FromDayOfStartOfHospitalizationToDayAfterFirstICU")]
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(Encounter Encounter)
-    {
-        var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(Encounter);
-        var b_ = context?.Operators.Start(a_);
-        var c_ = context?.Operators.DateFrom(b_);
-        var d_ = this.StartOfFirstICU(Encounter);
-        var e_ = context?.Operators.DateFrom(d_);
-        var f_ = context?.Operators.Quantity(1m, 
+	{
+		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(Encounter);
+		var b_ = context?.Operators.Start(a_);
+		var c_ = context?.Operators.DateFrom(b_);
+		var d_ = this.StartOfFirstICU(Encounter);
+		var e_ = context?.Operators.DateFrom(d_);
+		var f_ = context?.Operators.Quantity(1m, 
 			"day");
-        var g_ = context?.Operators.Add(e_, 
+		var g_ = context?.Operators.Add(e_, 
 			f_);
-        return context?.Operators.Interval(c_, 
+		return context?.Operators.Interval(c_, 
 			g_, 
 			true, 
 			true);
-    }
+	}
 
 }

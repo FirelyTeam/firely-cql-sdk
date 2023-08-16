@@ -683,51 +683,51 @@ public class NCQATerminology_1_0_0
     public CqlCode Provider_number() => __Provider_number.Value;
 
     private CqlCode[] ConditionCategoryCodes_Value()
-    {
-        var a_ = new CqlCode("problem-list-item", 
+	{
+		var a_ = new CqlCode("problem-list-item", 
 			"http://terminology.hl7.org/CodeSystem/condition-category", 
 			null, 
 			null);
-        var b_ = new CqlCode("encounter-diagnosis", 
+		var b_ = new CqlCode("encounter-diagnosis", 
 			"http://terminology.hl7.org/CodeSystem/condition-category", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
 		};
-    }
+	}
     [CqlDeclaration("ConditionCategoryCodes")]
     public CqlCode[] ConditionCategoryCodes() => __ConditionCategoryCodes.Value;
 
     private CqlCode[] ConditionClinicalStatusCodes_Value()
-    {
-        var a_ = new CqlCode("active", 
+	{
+		var a_ = new CqlCode("active", 
 			"http://terminology.hl7.org/CodeSystem/condition-clinical", 
 			null, 
 			null);
-        var b_ = new CqlCode("recurrence", 
+		var b_ = new CqlCode("recurrence", 
 			"http://terminology.hl7.org/CodeSystem/condition-clinical", 
 			null, 
 			null);
-        var c_ = new CqlCode("relapse", 
+		var c_ = new CqlCode("relapse", 
 			"http://terminology.hl7.org/CodeSystem/condition-clinical", 
 			null, 
 			null);
-        var d_ = new CqlCode("inactive", 
+		var d_ = new CqlCode("inactive", 
 			"http://terminology.hl7.org/CodeSystem/condition-clinical", 
 			null, 
 			null);
-        var e_ = new CqlCode("remission", 
+		var e_ = new CqlCode("remission", 
 			"http://terminology.hl7.org/CodeSystem/condition-clinical", 
 			null, 
 			null);
-        var f_ = new CqlCode("resolved", 
+		var f_ = new CqlCode("resolved", 
 			"http://terminology.hl7.org/CodeSystem/condition-clinical", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
@@ -736,37 +736,37 @@ public class NCQATerminology_1_0_0
 			e_,
 			f_,
 		};
-    }
+	}
     [CqlDeclaration("ConditionClinicalStatusCodes")]
     public CqlCode[] ConditionClinicalStatusCodes() => __ConditionClinicalStatusCodes.Value;
 
     private CqlCode[] ConditionVerificationStatusCodes_Value()
-    {
-        var a_ = new CqlCode("unconfirmed", 
+	{
+		var a_ = new CqlCode("unconfirmed", 
 			"http://terminology.hl7.org/CodeSystem/condition-verification", 
 			null, 
 			null);
-        var b_ = new CqlCode("provisional", 
+		var b_ = new CqlCode("provisional", 
 			"http://terminology.hl7.org/CodeSystem/condition-verification", 
 			null, 
 			null);
-        var c_ = new CqlCode("differential", 
+		var c_ = new CqlCode("differential", 
 			"http://terminology.hl7.org/CodeSystem/condition-verification", 
 			null, 
 			null);
-        var d_ = new CqlCode("confirmed", 
+		var d_ = new CqlCode("confirmed", 
 			"http://terminology.hl7.org/CodeSystem/condition-verification", 
 			null, 
 			null);
-        var e_ = new CqlCode("refuted", 
+		var e_ = new CqlCode("refuted", 
 			"http://terminology.hl7.org/CodeSystem/condition-verification", 
 			null, 
 			null);
-        var f_ = new CqlCode("entered-in-error", 
+		var f_ = new CqlCode("entered-in-error", 
 			"http://terminology.hl7.org/CodeSystem/condition-verification", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
@@ -775,158 +775,158 @@ public class NCQATerminology_1_0_0
 			e_,
 			f_,
 		};
-    }
+	}
     [CqlDeclaration("ConditionVerificationStatusCodes")]
     public CqlCode[] ConditionVerificationStatusCodes() => __ConditionVerificationStatusCodes.Value;
 
     private CqlCode[] AllergyIntoleranceClinicalStatusCodes_Value()
-    {
-        var a_ = new CqlCode("active", 
+	{
+		var a_ = new CqlCode("active", 
 			"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", 
 			null, 
 			null);
-        var b_ = new CqlCode("inactive", 
+		var b_ = new CqlCode("inactive", 
 			"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", 
 			null, 
 			null);
-        var c_ = new CqlCode("resolved", 
+		var c_ = new CqlCode("resolved", 
 			"http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
 			c_,
 		};
-    }
+	}
     [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
     public CqlCode[] AllergyIntoleranceClinicalStatusCodes() => __AllergyIntoleranceClinicalStatusCodes.Value;
 
     private CqlCode[] AllergyIntoleranceVerificationStatusCodes_Value()
-    {
-        var a_ = new CqlCode("unconfirmed", 
+	{
+		var a_ = new CqlCode("unconfirmed", 
 			"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", 
 			null, 
 			null);
-        var b_ = new CqlCode("confirmed", 
+		var b_ = new CqlCode("confirmed", 
 			"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", 
 			null, 
 			null);
-        var c_ = new CqlCode("refuted", 
+		var c_ = new CqlCode("refuted", 
 			"http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
 			c_,
 		};
-    }
+	}
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
     public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => __AllergyIntoleranceVerificationStatusCodes.Value;
 
     private CqlCode[] AllergyIntoleranceCategory_Value()
-    {
-        var a_ = new CqlCode("food", 
+	{
+		var a_ = new CqlCode("food", 
 			"http://hl7.org/fhir/allergy-intolerance-category", 
 			null, 
 			null);
-        var b_ = new CqlCode("medication", 
+		var b_ = new CqlCode("medication", 
 			"http://hl7.org/fhir/allergy-intolerance-category", 
 			null, 
 			null);
-        var c_ = new CqlCode("environment", 
+		var c_ = new CqlCode("environment", 
 			"http://hl7.org/fhir/allergy-intolerance-category", 
 			null, 
 			null);
-        var d_ = new CqlCode("biologic", 
+		var d_ = new CqlCode("biologic", 
 			"http://hl7.org/fhir/allergy-intolerance-category", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
 			c_,
 			d_,
 		};
-    }
+	}
     [CqlDeclaration("AllergyIntoleranceCategory")]
     public CqlCode[] AllergyIntoleranceCategory() => __AllergyIntoleranceCategory.Value;
 
     private CqlCode[] AllergyIntoleranceType_Value()
-    {
-        var a_ = new CqlCode("allergy", 
+	{
+		var a_ = new CqlCode("allergy", 
 			"http://hl7.org/fhir/allergy-intolerance-type", 
 			null, 
 			null);
-        var b_ = new CqlCode("intolerance", 
+		var b_ = new CqlCode("intolerance", 
 			"http://hl7.org/fhir/allergy-intolerance-type", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
 		};
-    }
+	}
     [CqlDeclaration("AllergyIntoleranceType")]
     public CqlCode[] AllergyIntoleranceType() => __AllergyIntoleranceType.Value;
 
     private CqlCode[] MedicationRequestCategory_Value()
-    {
-        var a_ = new CqlCode("inpatient", 
+	{
+		var a_ = new CqlCode("inpatient", 
 			"http://terminology.hl7.org/CodeSystem/medicationrequest-category", 
 			null, 
 			null);
-        var b_ = new CqlCode("outpatient", 
+		var b_ = new CqlCode("outpatient", 
 			"http://terminology.hl7.org/CodeSystem/medicationrequest-category", 
 			null, 
 			null);
-        var c_ = new CqlCode("community", 
+		var c_ = new CqlCode("community", 
 			"http://terminology.hl7.org/CodeSystem/medicationrequest-category", 
 			null, 
 			null);
-        var d_ = new CqlCode("discharge", 
+		var d_ = new CqlCode("discharge", 
 			"http://terminology.hl7.org/CodeSystem/medicationrequest-category", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
 			c_,
 			d_,
 		};
-    }
+	}
     [CqlDeclaration("MedicationRequestCategory")]
     public CqlCode[] MedicationRequestCategory() => __MedicationRequestCategory.Value;
 
     private CqlCode[] claim_type_Value()
-    {
-        var a_ = new CqlCode("pharmacy", 
+	{
+		var a_ = new CqlCode("pharmacy", 
 			"http://terminology.hl7.org/CodeSystem/claim-type", 
 			null, 
 			null);
-        var b_ = new CqlCode("institutional", 
+		var b_ = new CqlCode("institutional", 
 			"http://terminology.hl7.org/CodeSystem/claim-type", 
 			null, 
 			null);
-        var c_ = new CqlCode("professional", 
+		var c_ = new CqlCode("professional", 
 			"http://terminology.hl7.org/CodeSystem/claim-type", 
 			null, 
 			null);
-        var d_ = new CqlCode("oral", 
+		var d_ = new CqlCode("oral", 
 			"http://terminology.hl7.org/CodeSystem/claim-type", 
 			null, 
 			null);
-        var e_ = new CqlCode("vision", 
+		var e_ = new CqlCode("vision", 
 			"http://terminology.hl7.org/CodeSystem/claim-type", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
@@ -934,37 +934,37 @@ public class NCQATerminology_1_0_0
 			d_,
 			e_,
 		};
-    }
+	}
     [CqlDeclaration("claim-type")]
     public CqlCode[] claim_type() => __claim_type.Value;
 
     private CqlCode[] ActEncounterCodes_Value()
-    {
-        var a_ = new CqlCode("VR", 
+	{
+		var a_ = new CqlCode("VR", 
 			"http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", 
 			null, 
 			null);
-        var b_ = new CqlCode("AMB", 
+		var b_ = new CqlCode("AMB", 
 			"http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", 
 			null, 
 			null);
-        var c_ = new CqlCode("HH", 
+		var c_ = new CqlCode("HH", 
 			"http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", 
 			null, 
 			null);
-        var d_ = new CqlCode("NONAC", 
+		var d_ = new CqlCode("NONAC", 
 			"http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", 
 			null, 
 			null);
-        var e_ = new CqlCode("EMER", 
+		var e_ = new CqlCode("EMER", 
 			"http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", 
 			null, 
 			null);
-        var f_ = new CqlCode("ACUTE", 
+		var f_ = new CqlCode("ACUTE", 
 			"http://terminology.hl7.org/ValueSet/v3-ActEncounterCode", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
@@ -973,37 +973,37 @@ public class NCQATerminology_1_0_0
 			e_,
 			f_,
 		};
-    }
+	}
     [CqlDeclaration("ActEncounterCodes")]
     public CqlCode[] ActEncounterCodes() => __ActEncounterCodes.Value;
 
     private CqlCode[] coverage_type_Value()
-    {
-        var a_ = new CqlCode("DRUGPOL", 
+	{
+		var a_ = new CqlCode("DRUGPOL", 
 			"http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", 
 			null, 
 			null);
-        var b_ = new CqlCode("MENTPOL", 
+		var b_ = new CqlCode("MENTPOL", 
 			"http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", 
 			null, 
 			null);
-        var c_ = new CqlCode("MCPOL", 
+		var c_ = new CqlCode("MCPOL", 
 			"http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", 
 			null, 
 			null);
-        var d_ = new CqlCode("SUBSIDIZ", 
+		var d_ = new CqlCode("SUBSIDIZ", 
 			"http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", 
 			null, 
 			null);
-        var e_ = new CqlCode("RETIRE", 
+		var e_ = new CqlCode("RETIRE", 
 			"http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", 
 			null, 
 			null);
-        var f_ = new CqlCode("SUBPOL", 
+		var f_ = new CqlCode("SUBPOL", 
 			"http://terminology.hl7.org/ValueSet/v3-ActCoverageTypeCode", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 			b_,
@@ -1012,21 +1012,21 @@ public class NCQATerminology_1_0_0
 			e_,
 			f_,
 		};
-    }
+	}
     [CqlDeclaration("coverage-type")]
     public CqlCode[] coverage_type() => __coverage_type.Value;
 
     private CqlCode[] IdentifierType_Value()
-    {
-        var a_ = new CqlCode("PRN", 
+	{
+		var a_ = new CqlCode("PRN", 
 			"http://terminology.hl7.org/CodeSystem/v2-0203", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 		};
-    }
+	}
     [CqlDeclaration("IdentifierType")]
     public CqlCode[] IdentifierType() => __IdentifierType.Value;
 

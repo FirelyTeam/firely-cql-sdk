@@ -113,60 +113,60 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
 
     private Patient Patient_Value()
-    {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+	{
+		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
 			null);
-        return context?.Operators.SingleOrNull<Patient>(a_);
-    }
+		return context?.Operators.SingleOrNull<Patient>(a_);
+	}
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
     private IEnumerable<Encounter> Qualifying_Encounters_Value()
-    {
-        var a_ = this.Office_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+	{
+		var a_ = this.Office_Visit();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
 			null);
-        var c_ = this.Annual_Wellness_Visit();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+		var c_ = this.Annual_Wellness_Visit();
+		var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
 			null);
-        var e_ = context?.Operators.ListUnion<Encounter>(b_, 
+		var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
-        var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
+		var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+		var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
 			null);
-        var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+		var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
 			null);
-        var j_ = context?.Operators.ListUnion<Encounter>(g_, 
+		var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
-        var k_ = context?.Operators.ListUnion<Encounter>(e_, 
+		var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
-        var l_ = this.Home_Healthcare_Services();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
+		var l_ = this.Home_Healthcare_Services();
+		var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
 			null);
-        var n_ = context?.Operators.ListUnion<Encounter>(k_, 
+		var n_ = context?.Operators.ListUnion<Encounter>(k_, 
 			m_);
-        Func<Encounter,bool?> w_ = (ValidEncounter) => 
-        {
-            var p_ = (ValidEncounter?.StatusElement as object);
-            var o_ = ((context.Deeper(new CallStackEntry("ToString", 
+		Func<Encounter,bool?> w_ = (ValidEncounter) => 
+		{
+			var p_ = (ValidEncounter?.StatusElement as object);
+			var o_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(p_) as object);
-            var q_ = ("finished" as object);
-            var r_ = context?.Operators.Equal(o_, 
+			var q_ = ("finished" as object);
+			var r_ = context?.Operators.Equal(o_, 
 				q_);
-            var s_ = this.Measurement_Period();
-            var t_ = (ValidEncounter?.Period as object);
-            var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(t_);
-            var v_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(s_, 
+			var s_ = this.Measurement_Period();
+			var t_ = (ValidEncounter?.Period as object);
+			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(t_);
+			var v_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(s_, 
 				u_, 
 				null);
-            return context?.Operators.And(r_, 
+			return context?.Operators.And(r_, 
 				v_);
-        };
-        return context?.Operators.WhereOrNull<Encounter>(n_, 
+		};
+		return context?.Operators.WhereOrNull<Encounter>(n_, 
 			w_);
-    }
+	}
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters() => __Qualifying_Encounters.Value;
 

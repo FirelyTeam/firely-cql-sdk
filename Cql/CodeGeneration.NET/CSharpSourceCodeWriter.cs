@@ -361,18 +361,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             return sorted;
         }
 
-        //private TranslationSettings Settings(TranslationSettings c) => Settings(c, 0);
-
-        //private TranslationSettings Settings(TranslationSettings c, int indent)
-        //{
-        //    return c
-        //        .UseFullyQualifiedTypeNames
-        //        .TranslateConstantsUsing((type, @object) =>
-        //        {
-        //            return WriteConstantValue(type, @object);
-        //        })
-        //        .IndentUsing(TextWriterExtensions.Indent);
-        //}
         private string DefinitionCacheKeyForMethod(string methodName)
         {
             if (methodName[0] == '@')
@@ -412,11 +400,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var privateMethodName = PrivateMethodNameFor(methodName!);
                 writer.WriteLine(indentLevel, $"private {returnType} {privateMethodName}()");
                 if (visitedBody is BlockExpression)
-                    WriteExpression(className, methodName!, writer, indentLevel, visitedBody, true);
+                    WriteExpression(writer, indentLevel, visitedBody);
                 else
                 {
                     writer.WriteLine(indentLevel, "{");
-                    WriteExpression(className, methodName!, writer, indentLevel + 1, visitedBody, true);
+                    WriteExpression(writer, indentLevel + 1, visitedBody);
                     writer.WriteLine(indentLevel, "}");
                 }
                 writer.WriteLine();
@@ -443,16 +431,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var parameterString = string.Join(", ", overload.Item2.Parameters
                     .Skip(1) // skip runtimeContext
                     .Where(p => p.Name != null)
-                    .Select(p => $"{PrettyTypeName(p.Type)} {PrefixKeywords(p.Name!)}"));
+                    .Select(p => $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}"));
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
                 writer.WriteLine(indentLevel, $"public {returnType} {methodName}({parameterString})");
                 if (visitedBody is BlockExpression)
-                    WriteExpression(className, methodName!, writer, indentLevel, visitedBody, true);
+                    WriteExpression(writer, indentLevel, visitedBody);
                 else
                 {
                     writer.WriteLine(indentLevel, "{");
-                    WriteExpression(className, methodName!, writer, indentLevel + 1, visitedBody, true);
+                    WriteExpression(writer, indentLevel + 1, visitedBody);
                     writer.WriteLine(indentLevel, "}");
                 }
                 writer.WriteLine();
@@ -510,164 +498,31 @@ namespace Hl7.Cql.CodeGeneration.NET
             return indentLevel;
         }
 
-        private static string WriteConstantValue(Type constantType, object? value, string? identString = "")
-        {
-            return $"{identString}{formatValue(constantType, value)}";
-
-            string formatValue(Type constantType, object? value)
-            {
-                if (value == default)
-                {
-                    if (constantType.IsValueType)
-                        return "default";
-                    else return "null";
-                }
-                else
-                {
-                    if (constantType.IsEnum)
-                        return $"{constantType.Namespace}.{constantType.Name}.{value}";
-                    if (constantType == typeof(string))
-                        return $"\"{value!}\"";
-                    else if (constantType == typeof(bool))
-                        return value.ToString()!.ToLowerInvariant();
-                    else if (constantType == typeof(bool?))
-                        return value?.ToString()!.ToLowerInvariant() ?? "null";
-                    else if (constantType == typeof(Uri))
-                        return $"new Uri(\"{value!}\")";
-                    else if (constantType == typeof(decimal))
-                        return ((decimal)value).ToString(CultureInfo.InvariantCulture);
-                    else if (constantType == typeof(decimal?))
-                    {
-                        var dv = (decimal?)value;
-                        return dv.HasValue ? dv.Value.ToString(CultureInfo.InvariantCulture) : "null";
-                    }
-                    else if (typeof(Type).IsAssignableFrom(constantType))
-                        return $"typeof({PrettyTypeName((Type)value)})";
-                    else
-                    {
-                        var str = value.ToString()!;
-                        return str;
-                    }
-
-                }
-            }
-
-        }
-
-        private static string PrettyTypeName(Type type)
-        {
-
-            string typeName = type.Name;
-            if (type == typeof(int))
-                return "int";
-            else if (type == typeof(bool))
-                return "bool";
-            else if (type == typeof(decimal))
-                return "decimal";
-            else if (type == typeof(float))
-                return "float";
-            else if (type == typeof(double))
-                return "double";
-            else if (type == typeof(string))
-                return "string";
-            else if (type == typeof(object))
-                return "object";
-            if (type.IsGenericType)
-            {
-                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
-                {
-                    typeName = $"{PrettyTypeName(Nullable.GetUnderlyingType(type)!)}?";
-                }
-                else
-                {
-                    if (type.IsGenericType)
-                    {
-                        var tildeIndex = type.Name.IndexOf('`');
-                        var rootName = type.Name.Substring(0, tildeIndex);
-                        var genericArgumentNames = type.GetGenericArguments()
-                            .Select(arg => PrettyTypeName(arg));
-                        var prettyName = $"{rootName}<{string.Join(",", genericArgumentNames)}>";
-                        typeName = prettyName;
-                    }
-                }
-            }
-            if (type.IsNested)
-            {
-                typeName = $"{PrettyTypeName(type.DeclaringType!)}.{typeName}";
-            }
-            if (typeName.StartsWith("Tuple_"))
-            {
-                return $"{type.Namespace}.{typeName}";
-            }
-            else if (type.IsArray)
-            {
-                var elementType = type.GetElementType() ??
-                    throw new InvalidOperationException($"Unable to get array element type for {type.FullName}");
-                return $"{PrettyTypeName(elementType)}[]";
-            }
-            else return typeName;
-        }
-
-        private System.Linq.Expressions.Expression Transform(System.Linq.Expressions.Expression body, params ExpressionVisitor[] visitors)
+        private Expression Transform(Expression body, params ExpressionVisitor[] visitors)
         {
             foreach (var visitor in visitors)
             {
-                //var visitedBody = overload.Item2.Body;
                 body = visitor.Visit(body);
             }
             return body;
         }
 
-
-        private void WriteExpression(
-            string className,
-            string methodName,
+        private static void WriteExpression(
             TextWriter writer,
             int indentLevel,
             Expression expression,
-            bool @return,
             bool writeLeadingIndent = true)
         {
-
             expression = new RedundantCastsTransformer().Visit(expression);
 
             if (expression is BlockExpression block)
             {
-                writer.WriteLine(indentLevel, "{");
-                foreach (var blockStatement in block.Expressions)
-                {
-                    if (blockStatement is BinaryExpression be && be.Left is ParameterExpression localVariable)
-                    {
-                        if (be.Right is LambdaExpression lambda)
-                        {
-                            if (lambda.Body is BlockExpression lambdaBlock)
-                            {
-                                var lambdaParameters = string.Join(", ", lambda.Parameters.Select(p => ToCode(indentLevel + 1, p, false)));
-                                var funcType = PrettyTypeName(lambda.Type);
-                                writer.WriteLine(indentLevel + 1, $"{funcType} {localVariable.Name} = ({lambdaParameters}) => ");
-                                WriteExpression(className, methodName, writer, indentLevel + 1, lambdaBlock, true);
-                                writer.WriteLine(";");
-                            }
-                            else
-                            {
-                                var declaration = $"{PrettyTypeName(lambda.Type)} {localVariable.Name}";
-                                var value = ToCode(indentLevel + 1, be.Right, false);
-                                var assignment = $"{declaration} = {value};";
-                                writer.WriteLine(indentLevel + 1, assignment);
-                            }
-                            continue;
-                        }
-                        writer.WriteLine(indentLevel + 1, ToCode(indentLevel + 1, blockStatement, false));
-                        continue;
-                    }
-                    WriteExpression(className, methodName, writer, indentLevel + 1, blockStatement, false);
-                }
-                writer.WriteLine();
-                writer.Write(indentLevel, "}");
+                var asString = ToCode(indentLevel, block, false);
+                writer.Write(asString);
             }
             else if (expression is ConditionalExpression conditional)
             {
-                WriteConditional(className, methodName, writer, indentLevel, conditional, writeLeadingIndent, @return);
+                WriteConditional(writer, indentLevel, conditional, writeLeadingIndent);
             }
             else if (expression is UnaryExpression unary && unary.NodeType == ExpressionType.Throw)
             {
@@ -677,12 +532,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             else
             {
                 var asString = ToCode(indentLevel, expression, false);
-                if (@return)
-                {
-                    writer.WriteLine(indentLevel, $"return {asString};");
-                }
-                else
-                    writer.Write(indentLevel, asString);
+                writer.WriteLine(indentLevel, $"return {asString};");
             }
         }
 
@@ -692,136 +542,150 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var leadingIndentString = leadingIndent ? IndentString(indent) : string.Empty;
 
-            switch (expression)
+            return expression switch
             {
-                case ConstantExpression constant:
-                    if (constant.Type == typeof(decimal))
-                    {
-                        var code = FormattableString.Invariant($"{leadingIndentString}{constant.Value}m");
-                        return code;
-                    }
-                    else if (constant.Type == typeof(decimal?))
-                    {
-                        if (constant.Value == null)
-                            return $"{leadingIndentString}null";
-                        else
-                        {
-                            var code = FormattableString.Invariant($"{leadingIndentString}{constant.Value}m");
-                            return code;
-                        }
-                    }
-                    else if (constant.Type == typeof(string))
-                    {
-                        if (constant.Value == null)
-                            return $"{leadingIndentString}null";
-                        else if (constant.Value is string str)
-                            return $"{leadingIndentString}\"{SymbolDisplay.FormatLiteral(str, false)}\"";
-                        else
-                            throw new InvalidOperationException("Constant claims to be a string, but its Value property is not one.");
-                    }
-                    else
-                        return WriteConstantValue(constant.Type, constant.Value, leadingIndentString);
+                BlockExpression block => convertBlockExpression(indent, block),
+                ConstantExpression constant => convertConstantExpression(constant.Type, constant.Value, leadingIndentString),
+                NewExpression @new => convertNewExpression(indent, leadingIndentString, @new),
+                MethodCallExpression call => convertMethodCallExpression(indent, leadingIndentString, call),
+                LambdaExpression lambda => convertLambdaExpression(indent, leadingIndentString, lambda),
+                BinaryExpression binary => convertBinaryExpression(indent, leadingIndentString, binary),
+                UnaryExpression unary => convertUnaryExpression(indent, leadingIndentString, unary),
+                NewArrayExpression newArray => convertNewArrayExpression(indent, leadingIndentString, newArray),
+                MemberExpression me => convertMemberExpression(leadingIndentString, me),
+                MemberInitExpression memberInit => convertMemberInitExpression(indent, leadingIndentString, memberInit),
+                LabelExpression label => convertLabelExpression(indent, leadingIndentString, label),
+                ConditionalExpression ce => convertConditionalExpression(indent, ce),
+                TypeBinaryExpression typeBinary => convertTypeBinaryExpression(indent, typeBinary),
+                ParameterExpression pe => convertParameterExpression(leadingIndentString, pe),
+                DefaultExpression de => convertDefaultExpression(leadingIndentString, de),
+                _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
+            };
+        }
 
-                case NewExpression @new:
-                    if (@new.Arguments.Count > 0)
+        private static string convertBlockExpression(int indent, BlockExpression block)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(indent, "{");
+            foreach (var blockStatement in block.Expressions)
+            {
+                if (blockStatement is BinaryExpression be && be.Left is ParameterExpression localVariable)
+                {
+                    if (be.Right is LambdaExpression lambda)
                     {
-                        var newSb = new StringBuilder();
-                        newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}({ToCode(indent + 1, @new.Arguments[0], false)}");
-                        if (@new.Arguments.Count > 1)
+                        if (lambda.Body is BlockExpression lambdaBlock)
                         {
-                            newSb.AppendLine(", ");
-                            for (int i = 1; i < @new.Arguments.Count - 1; i++)
-                            {
-                                var argument = @new.Arguments[i];
-                                newSb.Append(ToCode(indent + 1, argument));
-                                newSb.AppendLine(", ");
-                            }
-                            newSb.Append(ToCode(indent + 1, @new.Arguments[@new.Arguments.Count - 1]));
-                        }
-                        newSb.Append(")");
-                        return newSb.ToString();
-                    }
-                    else
-                        break;
-                case MethodCallExpression call:
-                    if (call.Method.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), true))
-                    {
-                        var thisArgument = call.Arguments[0];
-                        if (call.Method.IsGenericMethod && call.Method.GetGenericMethodDefinition() == PropertyOrDefaultMethod)
-                        {
-                            var @object = $"{Parenthesize(ToCode(indent + 1, thisArgument, false))}";
-                            if (call.Arguments[1] is LambdaExpression lambda
-                                && lambda.Body is MemberExpression memberAccess)
-                            {
-                                var memberName = PrefixKeywords(memberAccess.Member.Name);
-                                var nullCoalesce = $"{@object}?.{memberName}";
-                                return $"{leadingIndentString}{nullCoalesce}";
-                            }
-                            else throw new InvalidOperationException("Expected lambda argument with a member expression body");
+                            var lambdaParameters = string.Join(", ", lambda.Parameters.Select(p => ToCode(indent + 1, p, false)));
+                            var funcType = PrettyTypeName(lambda.Type);
+                            sb.AppendLine(indent + 1, $"{funcType} {localVariable.Name} = ({lambdaParameters}) => ");
+                            sb.Append(ToCode(indent + 1, lambdaBlock));
+                            sb.AppendLine(";");
                         }
                         else
                         {
-                            var @object = $"{Parenthesize(ToCode(indent + 1, thisArgument, false))}.";
-                            if (call.Arguments.Count > 1)
-                            {
-                                var sb = new StringBuilder();
-                                sb.Append(leadingIndentString);
-                                sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}({ToCode(indent + 1, call.Arguments[1], false)}");
-                                if (call.Arguments.Count > 2)
-                                {
-                                    sb.AppendLine(", ");
-                                    for (int i = 2; i < call.Arguments.Count - 1; i++)
-                                    {
-                                        var argument = call.Arguments[i];
-                                        sb.Append(IndentString(indent + 1));
-                                        sb.Append(ToCode(0, argument));
-                                        sb.AppendLine(", ");
-                                    }
-                                    sb.Append(ToCode(indent + 1, call.Arguments[call.Arguments.Count - 1]));
-                                }
-                                sb.Append(")");
-                                return sb.ToString();
-                            }
-                            else
-                            {
-                                return $"{leadingIndentString}{@object}{PrettyMethodName(call.Method)}()";
-                            }
+                            var declaration = $"{PrettyTypeName(lambda.Type)} {localVariable.Name}";
+                            var value = ToCode(indent + 1, be.Right, false);
+                            var assignment = $"{declaration} = {value};";
+                            sb.AppendLine(indent + 1, assignment);
                         }
                     }
                     else
+                        sb.AppendLine(indent + 1, ToCode(indent + 1, blockStatement, false));
+                }
+                else
+                    sb.Append(ToCode(indent + 1, blockStatement));
+            }
+
+            sb.AppendLine();
+            sb.Append(indent, "}");
+
+            return sb.ToString();
+        }
+
+        private static string convertConstantExpression(Type constantType, object? value, string? identString = "")
+        {
+            return $"{identString}{formatValue(constantType, value)}";
+
+            string formatValue(Type constantType, object? value)
+            {
+                if (value == default)
+                {
+                    return constantType.IsValueType ? "default" : "null";
+                }
+                else
+                {
+                    if (constantType.IsEnum)
+                        return $"{constantType.Namespace}.{constantType.Name}.{value}";
+                    if (constantType == typeof(string))
+                        return SymbolDisplay.FormatLiteral((string)value, true);
+                    else if (constantType == typeof(bool))
+                        return value.ToString()!.ToLowerInvariant();
+                    else if (constantType == typeof(bool?))
+                        return value.ToString()!.ToLowerInvariant();
+                    else if (constantType == typeof(Uri))
+                        return $"new Uri(\"{value}\")";
+                    else if (constantType == typeof(decimal))
+                        return ((decimal)value).ToString(CultureInfo.InvariantCulture) + "m";
+                    else if (constantType == typeof(decimal?))
+                        return ((decimal?)value).Value.ToString(CultureInfo.InvariantCulture) + "m";
+                    else if (typeof(Type).IsAssignableFrom(constantType))
+                        return $"typeof({PrettyTypeName((Type)value)})";
+                    else
+                    {
+                        var str = value.ToString()!;
+                        return str;
+                    }
+                }
+            }
+        }
+
+
+        private static string convertParameterExpression(string leadingIndentString, ParameterExpression pe)
+        {
+            return $"{leadingIndentString}{pe.Name!}";
+        }
+
+        private static string convertLabelExpression(int indent, string leadingIndentString, LabelExpression label)
+        {
+            var defaultValueCode = ToCode(indent, label.DefaultValue!, false);
+            var @return = $"{leadingIndentString}return {defaultValueCode};";
+            return @return;
+        }
+
+        private static string convertMethodCallExpression(int indent, string leadingIndentString, MethodCallExpression call)
+        {
+            if (call.Method.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), true))
+            {
+                var thisArgument = call.Arguments[0];
+                if (call.Method.IsGenericMethod && call.Method.GetGenericMethodDefinition() == PropertyOrDefaultMethod)
+                {
+                    var @object = $"{Parenthesize(ToCode(indent + 1, thisArgument, false))}";
+                    if (call.Arguments[1] is LambdaExpression lambda
+                        && lambda.Body is MemberExpression memberAccess)
+                    {
+                        var memberName = escapeKeywords(memberAccess.Member.Name);
+                        var nullCoalesce = $"{@object}?.{memberName}";
+                        return $"{leadingIndentString}{nullCoalesce}";
+                    }
+                    else throw new InvalidOperationException("Expected lambda argument with a member expression body");
+                }
+                else
+                {
+                    var @object = $"{Parenthesize(ToCode(indent + 1, thisArgument, false))}.";
+                    if (call.Arguments.Count > 1)
                     {
                         var sb = new StringBuilder();
                         sb.Append(leadingIndentString);
-                        var @object = string.Empty;
-                        if (call.Object != null)
+                        sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}({ToCode(indent + 1, call.Arguments[1], false)}");
+                        if (call.Arguments.Count > 2)
                         {
-                            @object = $"{Parenthesize(ToCode(indent, call.Object, false))}.";
-                        }
-                        else if (call.Method.IsStatic)
-                        {
-                            @object = $"{PrettyTypeName(call.Method.DeclaringType!)}.";
-                        }
-
-#pragma warning disable CA1305 // Specify IFormatProvider
-
-                        sb.Append($"{@object}{PrettyMethodName(call.Method)}(");
-
-                        if (call.Arguments.Count > 0)
-                        {
-                            var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
-                            sb.Append(firstArgument);
-                        }
-
-#pragma warning restore CA1305 // Specify IFormatProvider
-                        if (call.Arguments.Count > 1)
-                        {
-
                             sb.AppendLine(", ");
-                            for (int i = 1; i < call.Arguments.Count - 1; i++)
+                            for (int i = 2; i < call.Arguments.Count - 1; i++)
                             {
                                 var argument = call.Arguments[i];
-                                var argumentCode = ToCode(indent + 1, argument);
-                                sb.Append(argumentCode);
+                                sb.Append(IndentString(indent + 1));
+                                sb.Append(ToCode(0, argument));
                                 sb.AppendLine(", ");
                             }
                             sb.Append(ToCode(indent + 1, call.Arguments[call.Arguments.Count - 1]));
@@ -829,135 +693,190 @@ namespace Hl7.Cql.CodeGeneration.NET
                         sb.Append(")");
                         return sb.ToString();
                     }
-                case LambdaExpression lambda:
-                    return convertLambdaExpression(indent, leadingIndentString, lambda);
-                case BinaryExpression binary:
-                    return convertBinaryExpression(indent, leadingIndentString, binary);
-                case UnaryExpression unary:
-                    return convertUnaryExpression(indent, leadingIndentString, unary);
-                case NewArrayExpression newArray:
-                    if (newArray.NodeType == ExpressionType.NewArrayInit)
+                    else
                     {
-                        var newArraySb = new StringBuilder();
-                        newArraySb.Append(leadingIndentString);
-                        if (newArray.Expressions.Count > 0)
-                        {
-                            var arrayType = PrettyTypeName(newArray.Type);
-#pragma warning disable CA1305 // Specify IFormatProvider
-                            newArraySb.AppendLine($"new {arrayType}");
-#pragma warning restore CA1305 // Specify IFormatProvider
-                            var braceIndent = IndentString(indent);
-                            newArraySb.Append(braceIndent);
-                            newArraySb.AppendLine("{");
-                            foreach (var expr in newArray.Expressions)
-                            {
-                                var exprCode = ToCode(indent + 1, expr, true);
-                                newArraySb.Append(exprCode);
-                                newArraySb.AppendLine(",");
-                            }
-                            newArraySb.Append(braceIndent);
-                            newArraySb.Append("}");
-                            return newArraySb.ToString();
-                        }
+                        return $"{leadingIndentString}{@object}{PrettyMethodName(call.Method)}()";
                     }
-                    else if (newArray.NodeType == ExpressionType.NewArrayBounds)
+                }
+            }
+            else
+            {
+                var sb = new StringBuilder();
+                sb.Append(leadingIndentString);
+                var @object = string.Empty;
+                if (call.Object != null)
+                {
+                    @object = $"{Parenthesize(ToCode(indent, call.Object, false))}.";
+                }
+                else if (call.Method.IsStatic)
+                {
+                    @object = $"{PrettyTypeName(call.Method.DeclaringType!)}.";
+                }
+
+#pragma warning disable CA1305 // Specify IFormatProvider
+
+                sb.Append($"{@object}{PrettyMethodName(call.Method)}(");
+
+                if (call.Arguments.Count > 0)
+                {
+                    var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
+                    sb.Append(firstArgument);
+                }
+
+#pragma warning restore CA1305 // Specify IFormatProvider
+                if (call.Arguments.Count > 1)
+                {
+
+                    sb.AppendLine(", ");
+                    for (int i = 1; i < call.Arguments.Count - 1; i++)
+                    {
+                        var argument = call.Arguments[i];
+                        var argumentCode = ToCode(indent + 1, argument);
+                        sb.Append(argumentCode);
+                        sb.AppendLine(", ");
+                    }
+                    sb.Append(ToCode(indent + 1, call.Arguments[call.Arguments.Count - 1]));
+                }
+                sb.Append(")");
+                return sb.ToString();
+            }
+
+        }
+
+        private static string convertDefaultExpression(string leadingIndentString, DefaultExpression de)
+        {
+            var isNullableType = !de.Type.IsValueType || Nullable.GetUnderlyingType(de.Type) is not null;
+            var defaultExpression = isNullableType ? "null" : $"default({PrettyTypeName(de.Type)})";
+            return $"{leadingIndentString}{defaultExpression}";
+        }
+
+        private static string convertTypeBinaryExpression(int indent, TypeBinaryExpression typeBinary)
+        {
+            if (typeBinary.NodeType == ExpressionType.TypeIs)
+            {
+                var left = ToCode(indent, typeBinary.Expression, false);
+                var type = PrettyTypeName(typeBinary.TypeOperand);
+                var @is = $"{left} is {type}";
+                return @is;
+            }
+            else
+                throw new NotSupportedException($"Don't know how to convert a type binary operator {typeBinary.NodeType} into C#.");
+        }
+
+        private static string convertConditionalExpression(int indent, ConditionalExpression ce)
+        {
+            var conditionalSb = new StringBuilder();
+            conditionalSb.Append('(');
+            var test = ToCode(indent, ce.Test, false);
+#pragma warning disable CA1305 // Specify IFormatProvider
+            conditionalSb.AppendLine($"({test})");
+#pragma warning restore CA1305 // Specify IFormatProvider
+            var ifTrue = $"({ToCode(indent + 2, ce.IfTrue, false)})";
+
+            var ifFalse = $"({ToCode(indent + 2, ce.IfFalse, false)})";
+#pragma warning disable CA1305 // Specify IFormatProvider
+            conditionalSb.AppendLine($"{IndentString(indent + 1)}? {ifTrue}");
+            conditionalSb.AppendLine($"{IndentString(indent + 1)}: {ifFalse})");
+#pragma warning restore CA1305 // Specify IFormatProvider
+            return conditionalSb.ToString();
+        }
+
+        private static string convertMemberInitExpression(int indent, string leadingIndentString, MemberInitExpression memberInit)
+        {
+            var memberInitSb = new StringBuilder();
+            memberInitSb.Append(leadingIndentString);
+            var arrayType = PrettyTypeName(memberInit.Type);
+#pragma warning disable CA1305 // Specify IFormatProvider
+            memberInitSb.AppendLine($"new {arrayType}");
+#pragma warning restore CA1305 // Specify IFormatProvider
+            var braceIndent = IndentString(indent);
+            memberInitSb.Append(braceIndent);
+            memberInitSb.AppendLine("{");
+            var braceIndentPlusOne = IndentString(indent + 1);
+
+            foreach (var binding in memberInit.Bindings)
+            {
+                if (binding is MemberAssignment assignment)
+                {
+                    var memberName = assignment.Member.Name;
+                    var assignmentCode = ToCode(indent + 1, assignment.Expression, false);
+                    memberInitSb.Append(braceIndentPlusOne);
+#pragma warning disable CA1305 // Specify IFormatProvider
+                    memberInitSb.Append($"{memberName} = {assignmentCode}");
+#pragma warning restore CA1305 // Specify IFormatProvider
+                    memberInitSb.AppendLine(",");
+                }
+                else
+                    throw new NotSupportedException($"Don't know how to convert a new member init of type {binding.GetType()} into C#.");
+            }
+
+            memberInitSb.Append(braceIndent);
+            memberInitSb.Append("}");
+
+            return memberInitSb.ToString();
+        }
+
+        private static string convertNewArrayExpression(int indent, string leadingIndentString, NewArrayExpression newArray)
+        {
+            switch (newArray.NodeType)
+            {
+                case ExpressionType.NewArrayInit:
                     {
                         var newArraySb = new StringBuilder();
                         newArraySb.Append(leadingIndentString);
-                        var arrayType = PrettyTypeName(newArray.Type.GetElementType() ??
-                            throw new InvalidOperationException($"Array type {newArray.Type.FullName} does not have an element type"));
+
+                        var arrayType = PrettyTypeName(newArray.Type);
+
+#pragma warning disable CA1305 // Specify IFormatProvider
+                        newArraySb.AppendLine($"new {arrayType}");
+#pragma warning restore CA1305 // Specify IFormatProvider
+                        var braceIndent = IndentString(indent);
+                        newArraySb.Append(braceIndent);
+                        newArraySb.AppendLine("{");
+
+                        foreach (var expr in newArray.Expressions)
+                        {
+                            var exprCode = ToCode(indent + 1, expr);
+                            newArraySb.Append(exprCode);
+                            newArraySb.AppendLine(",");
+                        }
+
+                        newArraySb.Append(braceIndent);
+                        newArraySb.Append('}');
+                        return newArraySb.ToString();
+                    }
+                case ExpressionType.NewArrayBounds:
+                    {
+                        var newArraySb = new StringBuilder();
+                        newArraySb.Append(leadingIndentString);
+                        var arrayType = PrettyTypeName(newArray.Type.GetElementType()!);
                         var size = ToCode(0, newArray.Expressions[0], false);
 #pragma warning disable CA1305 // Specify IFormatProvider
                         newArraySb.AppendLine($"new {arrayType}[{size}]");
 #pragma warning restore CA1305 // Specify IFormatProvider
                         return newArraySb.ToString();
                     }
-                    break;
-                case MemberExpression me:
-                    return convertMemberExpression(leadingIndentString, me);
-                case MemberInitExpression memberInit:
-                    var memberInitSb = new StringBuilder();
-                    memberInitSb.Append(leadingIndentString);
-                    if (memberInit.Bindings.Count > 0)
-                    {
-                        var arrayType = PrettyTypeName(memberInit.Type);
-#pragma warning disable CA1305 // Specify IFormatProvider
-                        memberInitSb.AppendLine($"new {arrayType}");
-#pragma warning restore CA1305 // Specify IFormatProvider
-                        var braceIndent = IndentString(indent);
-                        memberInitSb.Append(braceIndent);
-                        memberInitSb.AppendLine("{");
-                        var braceIndentPlusOne = IndentString(indent + 1);
-                        foreach (var binding in memberInit.Bindings)
-                        {
-                            if (binding is MemberAssignment assignment)
-                            {
-                                var memberName = assignment.Member.Name;
-                                var assignmentCode = ToCode(indent + 1, assignment.Expression, false);
-                                memberInitSb.Append(braceIndentPlusOne);
-#pragma warning disable CA1305 // Specify IFormatProvider
-                                memberInitSb.Append($"{memberName} = {assignmentCode}");
-#pragma warning restore CA1305 // Specify IFormatProvider
-                                memberInitSb.AppendLine(",");
-                            }
-                            else throw new NotImplementedException();
-                        }
-                        memberInitSb.Append(braceIndent);
-                        memberInitSb.Append("}");
-                        return memberInitSb.ToString();
-                    }
-                    break;
-                case LabelExpression label:
-                    var defaultValueCode = ToCode(indent, label.DefaultValue!, false);
-                    var @return = $"{leadingIndentString}return {defaultValueCode};";
-                    return @return;
-                case ConditionalExpression ce:
-#if DEBUG
-                    //var original = $"{leadingIndentString}({expression.ToReadableString(Settings)})";
-                    var debug = expression.GetDebugView();
-#endif
-                    var conditionalSb = new StringBuilder();
-                    conditionalSb.Append("(");
-                    var test = ToCode(indent, ce.Test, false);
-#pragma warning disable CA1305 // Specify IFormatProvider
-                    conditionalSb.AppendLine($"({test})");
-#pragma warning restore CA1305 // Specify IFormatProvider
-                    var ifTrue = $"({ToCode(indent + 2, ce.IfTrue, false)})";
 
-                    var ifFalse = $"({ToCode(indent + 2, ce.IfFalse, false)})";
-#pragma warning disable CA1305 // Specify IFormatProvider
-                    conditionalSb.AppendLine($"{IndentString(indent + 1)}? {ifTrue}");
-                    conditionalSb.AppendLine($"{IndentString(indent + 1)}: {ifFalse})");
-#pragma warning restore CA1305 // Specify IFormatProvider
-                    return conditionalSb.ToString();
-                case TypeBinaryExpression typeBinary:
-                    if (typeBinary.NodeType == ExpressionType.TypeIs)
-                    {
-                        var left = ToCode(indent, typeBinary.Expression, false);
-                        var type = PrettyTypeName(typeBinary.TypeOperand);
-                        var @is = $"{left} is {type}";
-                        return @is;
-                    }
-                    break;
-                case ParameterExpression pe:
-                    return $"{leadingIndentString}{pe.Name!}";
-                case DefaultExpression de:
-                    {
-                        var isNullableType = !de.Type.IsValueType || Nullable.GetUnderlyingType(de.Type) is not null;
-                        var defaultExpression = isNullableType ? "null" : $"default({PrettyTypeName(de.Type)})";
-                        return $"{leadingIndentString}{defaultExpression}";
-                    }
                 default:
-                    break;
+                    throw new NotSupportedException($"Don't know how to convert new array operator {newArray.NodeType} into C#.");
             }
+        }
 
-            throw new NotSupportedException($"Do not know how to convert {expression.NodeType} or type {expression.GetType()}.");
+        private static string convertNewExpression(int indent, string leadingIndentString, NewExpression @new)
+        {
+            var arguments = @new.Arguments.Select(a => ToCode(0, a));
+            var argString = string.Join($", {Environment.NewLine}{IndentString(indent + 1)}", arguments);
+
+            var newSb = new StringBuilder();
+            newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}");
+            newSb.Append(CultureInfo.InvariantCulture, $"({argString})");
+            return newSb.ToString();
         }
 
         private static string convertMemberExpression(string leadingIndentString, MemberExpression me)
         {
             var @object = me.Expression is not null ? ToCode(0, me.Expression) + "?" : PrettyTypeName(me.Member.DeclaringType!);
-            var memberName = PrefixKeywords(me.Member.Name);
+            var memberName = escapeKeywords(me.Member.Name);
             var nullCoalesce = $"{@object}.{memberName}";
             return $"{leadingIndentString}{nullCoalesce}";
         }
@@ -985,6 +904,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var operand = ToCode(indent, unary.Operand, false);
 
+                        // Linq.Expressions needs an explicit conversion from a value
+                        // type to object, but the C# compiler will insert that boxing,
+                        // so we can remove those casts.
                         if (unary.Type == typeof(object) && unary.Operand.Type.IsValueType)
                         {
                             return operand;
@@ -1073,22 +995,75 @@ namespace Hl7.Cql.CodeGeneration.NET
             _ => throw new NotSupportedException($"Don't know how to convert operator {nodeType} into C#."),
         };
 
-        private static string IndentString(int indent)
-        {
-            return new string(Enumerable.Repeat('\t', indent).ToArray());
-        }
+        private static string IndentString(int indent) => new string(Enumerable.Repeat('\t', indent).ToArray());
 
         private static string PrettyMethodName(MethodInfo method)
         {
             if (method.IsGenericMethod)
             {
-                var genericArgs = string.Join(", ", method.GetGenericArguments().Select(a => PrettyTypeName(a)));
+                var genericArgs = string.Join(", ", method.GetGenericArguments().Select(PrettyTypeName));
                 return $"{method.Name}<{genericArgs}>";
             }
-            return method.Name;
+            else
+                return method.Name;
         }
 
-        private void WriteConditional(string className, string methodName, TextWriter writer, int indentLevel, ConditionalExpression conditional, bool indentLeadingIf, bool @return)
+        private static string PrettyTypeName(Type type)
+        {
+            string typeName = type.Name;
+            if (type == typeof(int))
+                return "int";
+            else if (type == typeof(bool))
+                return "bool";
+            else if (type == typeof(decimal))
+                return "decimal";
+            else if (type == typeof(float))
+                return "float";
+            else if (type == typeof(double))
+                return "double";
+            else if (type == typeof(string))
+                return "string";
+            else if (type == typeof(object))
+                return "object";
+            if (type.IsGenericType)
+            {
+                if (type.IsGenericTypeDefinition == false && type.GetGenericTypeDefinition() == typeof(Nullable<>))
+                {
+                    typeName = $"{PrettyTypeName(Nullable.GetUnderlyingType(type)!)}?";
+                }
+                else
+                {
+                    if (type.IsGenericType)
+                    {
+                        var tildeIndex = type.Name.IndexOf('`');
+                        var rootName = type.Name.Substring(0, tildeIndex);
+                        var genericArgumentNames = type.GetGenericArguments()
+                            .Select(PrettyTypeName);
+                        var prettyName = $"{rootName}<{string.Join(",", genericArgumentNames)}>";
+                        typeName = prettyName;
+                    }
+                }
+            }
+            if (type.IsNested)
+            {
+                typeName = $"{PrettyTypeName(type.DeclaringType!)}.{typeName}";
+            }
+            if (typeName.StartsWith("Tuple_"))
+            {
+                return $"{type.Namespace}.{typeName}";
+            }
+            else if (type.IsArray)
+            {
+                var elementType = type.GetElementType() ??
+                    throw new InvalidOperationException($"Unable to get array element type for {type.FullName}");
+                return $"{PrettyTypeName(elementType)}[]";
+            }
+            else return typeName;
+        }
+
+
+
+        private static void WriteConditional(TextWriter writer, int indentLevel, ConditionalExpression conditional, bool indentLeadingIf)
         {
             if (indentLeadingIf)
                 writer.Write(indentLevel, "if (");
@@ -1102,7 +1077,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             if (conditional.IfTrue is BlockExpression)
             {
-                WriteExpression(className, methodName, writer, indentLevel, conditional.IfTrue, @return);
+                WriteExpression(writer, indentLevel, conditional.IfTrue);
+                writer.WriteLine();
             }
             else
             {
@@ -1110,100 +1086,61 @@ namespace Hl7.Cql.CodeGeneration.NET
                 parameterFinder.Visit(conditional.IfTrue);
                 var parametersInBody = parameterFinder.Names;
                 var vng = new VariableNameGenerator(parametersInBody, "__");
-                var newBlock = Transform(conditional.IfTrue,
-                    new BlockTransformer(vng, parametersInBody));
-                WriteExpression(className, methodName, writer, indentLevel + 1, newBlock, @return);
-                writer.WriteLine();
+                var newBlock = new BlockTransformer(vng, parametersInBody).Visit(conditional.IfTrue)!;
+
+                var thenBlockIndentLevel = newBlock is BlockExpression ? indentLevel : indentLevel + 1;
+                WriteExpression(writer, thenBlockIndentLevel, newBlock);
+
+                if (newBlock is BlockExpression)
+                    writer.WriteLine();
             }
+
             if (conditional.IfFalse is BlockExpression)
             {
                 writer.WriteLine(indentLevel, "else");
+                WriteExpression(writer, indentLevel, conditional.IfFalse);
             }
             else
             {
-                writer.Write(indentLevel, "else ");
-            }
-            if (conditional.IfFalse is ConditionalExpression elseIf)
-            {
-                WriteExpression(className, methodName, writer, indentLevel, elseIf, @return, false);
-            }
-            else
-            {
-                writer.WriteLine();
-                if (conditional.IfFalse is BlockExpression)
+                if (conditional.IfFalse is ConditionalExpression elseIf)
                 {
-                    WriteExpression(className, methodName, writer, indentLevel, conditional.IfFalse, @return);
+                    writer.Write(indentLevel, "else ");
+                    WriteExpression(writer, indentLevel, elseIf, false);
                 }
                 else
                 {
+                    writer.WriteLine(indentLevel, "else");
                     var parameterFinder = new ParameterFinder();
                     parameterFinder.Visit(conditional.IfFalse);
                     var parametersInBody = parameterFinder.Names;
                     var vng = new VariableNameGenerator(parametersInBody, "__");
-                    var newBlock = Transform(conditional.IfFalse,
-                        new BlockTransformer(vng, parametersInBody));
-                    WriteExpression(className, methodName, writer, indentLevel + 1, newBlock, @return);
-                    writer.WriteLine();
+                    var newBlock = new BlockTransformer(vng, parametersInBody).Visit(conditional.IfFalse)!;
+                    var elseBlockIndentLevel = newBlock is BlockExpression ? indentLevel : indentLevel + 1;
+                    WriteExpression(writer, elseBlockIndentLevel, newBlock);
+
+                    if (newBlock is BlockExpression)
+                        writer.WriteLine();
                 }
             }
         }
 
-        private static string Parenthesize(string term)
-        {
-            if (term.Contains(" "))
-                return $"({term})";
-            else return term;
-        }
+        private static string Parenthesize(string term) => term.ToCharArray().Any(char.IsWhiteSpace) ? $"({term})" : term;
 
-        private static string PrefixKeywords(string symbol)
+        private static string escapeKeywords(string symbol)
         {
             var keyword = SyntaxFacts.GetKeywordKind(symbol);
-            if (keyword != SyntaxKind.None)
-            {
-                symbol = $"@{symbol}";
-            }
-            return symbol;
+            return keyword == SyntaxKind.None ? symbol : $"@{symbol}";
         }
 
-        private static string AccessModifierString(AccessModifier modifier)
+        private static string AccessModifierString(AccessModifier modifier) => modifier switch
         {
-            switch (modifier)
-            {
-                case AccessModifier.Public:
-                    return "public";
-                case AccessModifier.Private:
-                    return "private";
-                case AccessModifier.Internal:
-                    return "internal";
-                case AccessModifier.Protected:
-                    return "protected";
-                case AccessModifier.ProtectedInternal:
-                    return "protected internal";
-                default:
-                    throw new ArgumentException("Invalid access modifier", nameof(modifier));
-            }
-        }
-
-    }
-
-    internal static class TextWriterExtensions
-    {
-        public const int SpacesPerIndentLevel = 4;
-        public static readonly string Indent = string.Join(string.Empty,
-            Enumerable.Range(0, SpacesPerIndentLevel).Select(i => ' '));
-        public static void WriteLine(this TextWriter writer, int indent, string text)
-        {
-            for (int i = 0; i < indent * SpacesPerIndentLevel; i++)
-                writer.Write(' ');
-            writer.WriteLine(text);
-        }
-        public static void Write(this TextWriter writer, int indent, string text)
-        {
-            for (int i = 0; i < indent * SpacesPerIndentLevel; i++)
-                writer.Write(' ');
-            writer.Write(text);
-        }
-
+            AccessModifier.Public => "public",
+            AccessModifier.Private => "private",
+            AccessModifier.Internal => "internal",
+            AccessModifier.Protected => "protected",
+            AccessModifier.ProtectedInternal => "protected internal",
+            _ => throw new ArgumentException("Invalid access modifier", nameof(modifier)),
+        };
     }
 }
 

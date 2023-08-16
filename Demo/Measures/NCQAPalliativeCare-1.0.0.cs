@@ -90,151 +90,151 @@ public class NCQAPalliativeCare_1_0_0
     public CqlCode Encounter_for_palliative_care() => __Encounter_for_palliative_care.Value;
 
     private CqlCode[] ICD_10_Value()
-    {
-        var a_ = new CqlCode("Z51.5", 
+	{
+		var a_ = new CqlCode("Z51.5", 
 			"http://hl7.org/fhir/sid/icd-10-cm", 
 			null, 
 			null);
-        return new CqlCode[]
+		return new CqlCode[]
 		{
 			a_,
 		};
-    }
+	}
     [CqlDeclaration("ICD-10")]
     public CqlCode[] ICD_10() => __ICD_10.Value;
 
     [CqlDeclaration("Palliative Care Overlapping Period")]
     public bool? Palliative_Care_Overlapping_Period(CqlInterval<CqlDateTime> Period)
-    {
-        var a_ = this.Palliative_Care_Assessment();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+	{
+		var a_ = this.Palliative_Care_Assessment();
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
 			null);
-        Func<Observation,bool?> q_ = (PalliativeAssessment) => 
-        {
-            var c_ = (PalliativeAssessment?.Effective as object);
-            var d_ = NCQAFHIRBase_1_0_0.Normalize_Interval(c_);
-            var e_ = context?.Operators.Start(d_);
-            var f_ = context?.Operators.DateFrom(e_);
-            var i_ = context?.Operators.End(d_);
-            var j_ = context?.Operators.DateFrom(i_);
-            var k_ = context?.Operators.Interval(f_, 
+		Func<Observation,bool?> q_ = (PalliativeAssessment) => 
+		{
+			var c_ = (PalliativeAssessment?.Effective as object);
+			var d_ = NCQAFHIRBase_1_0_0.Normalize_Interval(c_);
+			var e_ = context?.Operators.Start(d_);
+			var f_ = context?.Operators.DateFrom(e_);
+			var i_ = context?.Operators.End(d_);
+			var j_ = context?.Operators.DateFrom(i_);
+			var k_ = context?.Operators.Interval(f_, 
 				j_, 
 				true, 
 				true);
-            var l_ = context?.Operators.Start(Period);
-            var m_ = context?.Operators.DateFrom(l_);
-            var n_ = context?.Operators.End(Period);
-            var o_ = context?.Operators.DateFrom(n_);
-            var p_ = context?.Operators.Interval(m_, 
+			var l_ = context?.Operators.Start(Period);
+			var m_ = context?.Operators.DateFrom(l_);
+			var n_ = context?.Operators.End(Period);
+			var o_ = context?.Operators.DateFrom(n_);
+			var p_ = context?.Operators.Interval(m_, 
 				o_, 
 				true, 
 				true);
-            return context?.Operators.Overlaps(k_, 
+			return context?.Operators.Overlaps(k_, 
 				p_, 
 				null);
-        };
-        var r_ = context?.Operators.WhereOrNull<Observation>(b_, 
+		};
+		var r_ = context?.Operators.WhereOrNull<Observation>(b_, 
 			q_);
-        var s_ = context?.Operators.ExistsInList<Observation>(r_);
-        var t_ = this.Palliative_Care_Encounter();
-        var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
+		var s_ = context?.Operators.ExistsInList<Observation>(r_);
+		var t_ = this.Palliative_Care_Encounter();
+		var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
 			null);
-        var v_ = NCQAStatus_1_0_0.Finished_Encounter(u_);
-        Func<Encounter,bool?> ak_ = (PalliativeEncounter) => 
-        {
-            var w_ = (PalliativeEncounter?.Period as object);
-            var x_ = NCQAFHIRBase_1_0_0.Normalize_Interval(w_);
-            var y_ = context?.Operators.Start(x_);
-            var z_ = context?.Operators.DateFrom(y_);
-            var ac_ = context?.Operators.End(x_);
-            var ad_ = context?.Operators.DateFrom(ac_);
-            var ae_ = context?.Operators.Interval(z_, 
+		var v_ = NCQAStatus_1_0_0.Finished_Encounter(u_);
+		Func<Encounter,bool?> ak_ = (PalliativeEncounter) => 
+		{
+			var w_ = (PalliativeEncounter?.Period as object);
+			var x_ = NCQAFHIRBase_1_0_0.Normalize_Interval(w_);
+			var y_ = context?.Operators.Start(x_);
+			var z_ = context?.Operators.DateFrom(y_);
+			var ac_ = context?.Operators.End(x_);
+			var ad_ = context?.Operators.DateFrom(ac_);
+			var ae_ = context?.Operators.Interval(z_, 
 				ad_, 
 				true, 
 				true);
-            var af_ = context?.Operators.Start(Period);
-            var ag_ = context?.Operators.DateFrom(af_);
-            var ah_ = context?.Operators.End(Period);
-            var ai_ = context?.Operators.DateFrom(ah_);
-            var aj_ = context?.Operators.Interval(ag_, 
+			var af_ = context?.Operators.Start(Period);
+			var ag_ = context?.Operators.DateFrom(af_);
+			var ah_ = context?.Operators.End(Period);
+			var ai_ = context?.Operators.DateFrom(ah_);
+			var aj_ = context?.Operators.Interval(ag_, 
 				ai_, 
 				true, 
 				true);
-            return context?.Operators.Overlaps(ae_, 
+			return context?.Operators.Overlaps(ae_, 
 				aj_, 
 				null);
-        };
-        var al_ = context?.Operators.WhereOrNull<Encounter>(v_, 
+		};
+		var al_ = context?.Operators.WhereOrNull<Encounter>(v_, 
 			ak_);
-        var am_ = context?.Operators.ExistsInList<Encounter>(al_);
-        var an_ = context?.Operators.Or(s_, 
+		var am_ = context?.Operators.ExistsInList<Encounter>(al_);
+		var an_ = context?.Operators.Or(s_, 
 			am_);
-        var ao_ = this.Palliative_Care_Intervention();
-        var ap_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(ao_, 
+		var ao_ = this.Palliative_Care_Intervention();
+		var ap_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(ao_, 
 			null);
-        var aq_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(ap_);
-        Func<Procedure,bool?> bf_ = (PalliativeIntervention) => 
-        {
-            var ar_ = (PalliativeIntervention?.Performed as object);
-            var as_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ar_);
-            var at_ = context?.Operators.Start(as_);
-            var au_ = context?.Operators.DateFrom(at_);
-            var ax_ = context?.Operators.End(as_);
-            var ay_ = context?.Operators.DateFrom(ax_);
-            var az_ = context?.Operators.Interval(au_, 
+		var aq_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(ap_);
+		Func<Procedure,bool?> bf_ = (PalliativeIntervention) => 
+		{
+			var ar_ = (PalliativeIntervention?.Performed as object);
+			var as_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ar_);
+			var at_ = context?.Operators.Start(as_);
+			var au_ = context?.Operators.DateFrom(at_);
+			var ax_ = context?.Operators.End(as_);
+			var ay_ = context?.Operators.DateFrom(ax_);
+			var az_ = context?.Operators.Interval(au_, 
 				ay_, 
 				true, 
 				true);
-            var ba_ = context?.Operators.Start(Period);
-            var bb_ = context?.Operators.DateFrom(ba_);
-            var bc_ = context?.Operators.End(Period);
-            var bd_ = context?.Operators.DateFrom(bc_);
-            var be_ = context?.Operators.Interval(bb_, 
+			var ba_ = context?.Operators.Start(Period);
+			var bb_ = context?.Operators.DateFrom(ba_);
+			var bc_ = context?.Operators.End(Period);
+			var bd_ = context?.Operators.DateFrom(bc_);
+			var be_ = context?.Operators.Interval(bb_, 
 				bd_, 
 				true, 
 				true);
-            return context?.Operators.Overlaps(az_, 
+			return context?.Operators.Overlaps(az_, 
 				be_, 
 				null);
-        };
-        var bg_ = context?.Operators.WhereOrNull<Procedure>(aq_, 
+		};
+		var bg_ = context?.Operators.WhereOrNull<Procedure>(aq_, 
 			bf_);
-        var bh_ = context?.Operators.ExistsInList<Procedure>(bg_);
-        var bi_ = context?.Operators.Or(an_, 
+		var bh_ = context?.Operators.ExistsInList<Procedure>(bg_);
+		var bi_ = context?.Operators.Or(an_, 
 			bh_);
-        var bj_ = this.Encounter_for_palliative_care();
-        var bk_ = context?.Operators.ToList<CqlCode>(bj_);
-        var bl_ = context?.DataRetriever.RetrieveByCodes<Condition>(bk_, 
+		var bj_ = this.Encounter_for_palliative_care();
+		var bk_ = context?.Operators.ToList<CqlCode>(bj_);
+		var bl_ = context?.DataRetriever.RetrieveByCodes<Condition>(bk_, 
 			null);
-        var bm_ = NCQAStatus_1_0_0.Active_Condition(bl_);
-        Func<Condition,bool?> bz_ = (PalliativeDiagnosis) => 
-        {
-            var bn_ = NCQAFHIRBase_1_0_0.Prevalence_Period(PalliativeDiagnosis);
-            var bo_ = context?.Operators.Start(bn_);
-            var bp_ = context?.Operators.DateFrom(bo_);
-            var br_ = context?.Operators.End(bn_);
-            var bs_ = context?.Operators.DateFrom(br_);
-            var bt_ = context?.Operators.Interval(bp_, 
+		var bm_ = NCQAStatus_1_0_0.Active_Condition(bl_);
+		Func<Condition,bool?> bz_ = (PalliativeDiagnosis) => 
+		{
+			var bn_ = NCQAFHIRBase_1_0_0.Prevalence_Period(PalliativeDiagnosis);
+			var bo_ = context?.Operators.Start(bn_);
+			var bp_ = context?.Operators.DateFrom(bo_);
+			var br_ = context?.Operators.End(bn_);
+			var bs_ = context?.Operators.DateFrom(br_);
+			var bt_ = context?.Operators.Interval(bp_, 
 				bs_, 
 				true, 
 				true);
-            var bu_ = context?.Operators.Start(Period);
-            var bv_ = context?.Operators.DateFrom(bu_);
-            var bw_ = context?.Operators.End(Period);
-            var bx_ = context?.Operators.DateFrom(bw_);
-            var by_ = context?.Operators.Interval(bv_, 
+			var bu_ = context?.Operators.Start(Period);
+			var bv_ = context?.Operators.DateFrom(bu_);
+			var bw_ = context?.Operators.End(Period);
+			var bx_ = context?.Operators.DateFrom(bw_);
+			var by_ = context?.Operators.Interval(bv_, 
 				bx_, 
 				true, 
 				true);
-            return context?.Operators.Overlaps(bt_, 
+			return context?.Operators.Overlaps(bt_, 
 				by_, 
 				null);
-        };
-        var ca_ = context?.Operators.WhereOrNull<Condition>(bm_, 
+		};
+		var ca_ = context?.Operators.WhereOrNull<Condition>(bm_, 
 			bz_);
-        var cb_ = context?.Operators.ExistsInList<Condition>(ca_);
-        return context?.Operators.Or(bi_, 
+		var cb_ = context?.Operators.ExistsInList<Condition>(ca_);
+		return context?.Operators.Or(bi_, 
 			cb_);
-    }
+	}
 
 }
