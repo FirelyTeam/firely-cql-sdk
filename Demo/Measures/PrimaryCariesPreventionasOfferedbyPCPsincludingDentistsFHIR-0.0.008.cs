@@ -202,6 +202,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -221,6 +222,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -228,6 +230,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -235,6 +238,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -242,6 +246,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -249,6 +254,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -313,6 +319,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		return context?.Operators.WhereOrNull<Encounter>(w_, 
 			af_);
 	}
+
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters() => __Qualifying_Encounters.Value;
 
@@ -342,6 +349,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		return context?.Operators.And(q_, 
 			s_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
@@ -349,6 +357,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
@@ -356,6 +365,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	{
 		return HospiceFHIR4_2_3_000.Has_Hospice();
 	}
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
@@ -381,6 +391,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		return context?.Operators.And(h_, 
 			p_);
 	}
+
     [CqlDeclaration("Stratification 1")]
     public bool? Stratification_1() => __Stratification_1.Value;
 
@@ -402,6 +413,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			g_, 
 			null);
 	}
+
     [CqlDeclaration("Stratification 2")]
     public bool? Stratification_2() => __Stratification_2.Value;
 
@@ -423,6 +435,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			g_, 
 			null);
 	}
+
     [CqlDeclaration("Stratification 3")]
     public bool? Stratification_3() => __Stratification_3.Value;
 
@@ -453,6 +466,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 			k_);
 		return context?.Operators.ExistsInList<Procedure>(l_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 

@@ -276,6 +276,7 @@ public class BCSEHEDISMY2022_1_0_0
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -297,6 +298,7 @@ public class BCSEHEDISMY2022_1_0_0
 			((int?)0), 
 			e_);
 	}
+
     [CqlDeclaration("October 1 Two Years Prior to the Measurement Period")]
     public CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period() => __October_1_Two_Years_Prior_to_the_Measurement_Period.Value;
 
@@ -310,6 +312,7 @@ public class BCSEHEDISMY2022_1_0_0
 			true, 
 			true);
 	}
+
     [CqlDeclaration("Participation Period")]
     public CqlInterval<CqlDateTime> Participation_Period() => __Participation_Period.Value;
 
@@ -329,6 +332,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.WhereOrNull<Coverage>(a_, 
 			e_);
 	}
+
     [CqlDeclaration("Member Coverage")]
     public IEnumerable<Coverage> Member_Coverage() => __Member_Coverage.Value;
 
@@ -381,6 +385,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.And(ad_, 
 			ap_);
 	}
+
     [CqlDeclaration("Enrolled During Participation Period")]
     public bool? Enrolled_During_Participation_Period() => __Enrolled_During_Participation_Period.Value;
 
@@ -410,6 +415,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.And(k_, 
 			l_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
@@ -417,6 +423,7 @@ public class BCSEHEDISMY2022_1_0_0
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
@@ -439,6 +446,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.WhereOrNull<Condition>(c_, 
 			h_);
 	}
+
     [CqlDeclaration("Right Mastectomy Diagnosis")]
     public IEnumerable<Condition> Right_Mastectomy_Diagnosis() => __Right_Mastectomy_Diagnosis.Value;
 
@@ -504,6 +512,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.WhereOrNull<Procedure>(w_, 
 			ac_);
 	}
+
     [CqlDeclaration("Right Mastectomy Procedure")]
     public IEnumerable<Procedure> Right_Mastectomy_Procedure() => __Right_Mastectomy_Procedure.Value;
 
@@ -526,6 +535,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.WhereOrNull<Condition>(c_, 
 			h_);
 	}
+
     [CqlDeclaration("Left Mastectomy Diagnosis")]
     public IEnumerable<Condition> Left_Mastectomy_Diagnosis() => __Left_Mastectomy_Diagnosis.Value;
 
@@ -591,6 +601,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.WhereOrNull<Procedure>(w_, 
 			ac_);
 	}
+
     [CqlDeclaration("Left Mastectomy Procedure")]
     public IEnumerable<Procedure> Left_Mastectomy_Procedure() => __Left_Mastectomy_Procedure.Value;
 
@@ -613,6 +624,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.WhereOrNull<Condition>(c_, 
 			h_);
 	}
+
     [CqlDeclaration("Bilateral Mastectomy Diagnosis")]
     public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis() => __Bilateral_Mastectomy_Diagnosis.Value;
 
@@ -678,6 +690,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.WhereOrNull<Procedure>(w_, 
 			ac_);
 	}
+
     [CqlDeclaration("Bilateral Mastectomy Procedure")]
     public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure() => __Bilateral_Mastectomy_Procedure.Value;
 
@@ -706,6 +719,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.Or(n_, 
 			p_);
 	}
+
     [CqlDeclaration("Mastectomy Exclusion")]
     public bool? Mastectomy_Exclusion() => __Mastectomy_Exclusion.Value;
 
@@ -723,6 +737,7 @@ public class BCSEHEDISMY2022_1_0_0
 		return context?.Operators.Or(e_, 
 			g_);
 	}
+
     [CqlDeclaration("Exclusions")]
     public bool? Exclusions() => __Exclusions.Value;
 
@@ -745,6 +760,7 @@ public class BCSEHEDISMY2022_1_0_0
 			g_);
 		return context?.Operators.ExistsInList<Observation>(h_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 

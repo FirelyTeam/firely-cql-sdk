@@ -271,6 +271,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -278,6 +279,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -285,6 +287,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -292,6 +295,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -299,6 +303,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -333,6 +338,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.WhereOrNull<Encounter>(e_, 
 			n_);
 	}
+
     [CqlDeclaration("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services() => __Telehealth_Services.Value;
 
@@ -347,6 +353,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			e_, 
 			"year");
 	}
+
     [CqlDeclaration("Age at start of Measurement Period")]
     public int? Age_at_start_of_Measurement_Period() => __Age_at_start_of_Measurement_Period.Value;
 
@@ -384,6 +391,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.And(m_, 
 			q_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
@@ -391,6 +399,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
@@ -432,6 +441,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.WhereOrNull<Condition>(k_, 
 			p_);
 	}
+
     [CqlDeclaration("Right Mastectomy Diagnosis")]
     public IEnumerable<Condition> Right_Mastectomy_Diagnosis() => __Right_Mastectomy_Diagnosis.Value;
 
@@ -463,6 +473,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			m_);
 	}
+
     [CqlDeclaration("Right Mastectomy Procedure")]
     public IEnumerable<Procedure> Right_Mastectomy_Procedure() => __Right_Mastectomy_Procedure.Value;
 
@@ -504,6 +515,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.WhereOrNull<Condition>(k_, 
 			p_);
 	}
+
     [CqlDeclaration("Left Mastectomy Diagnosis")]
     public IEnumerable<Condition> Left_Mastectomy_Diagnosis() => __Left_Mastectomy_Diagnosis.Value;
 
@@ -535,6 +547,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			m_);
 	}
+
     [CqlDeclaration("Left Mastectomy Procedure")]
     public IEnumerable<Procedure> Left_Mastectomy_Procedure() => __Left_Mastectomy_Procedure.Value;
 
@@ -556,6 +569,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.WhereOrNull<Condition>(b_, 
 			g_);
 	}
+
     [CqlDeclaration("Bilateral Mastectomy Diagnosis")]
     public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis() => __Bilateral_Mastectomy_Diagnosis.Value;
 
@@ -587,6 +601,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			m_);
 	}
+
     [CqlDeclaration("Bilateral Mastectomy Procedure")]
     public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure() => __Bilateral_Mastectomy_Procedure.Value;
 
@@ -640,6 +655,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.Or(af_, 
 			ag_);
 	}
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
@@ -694,6 +710,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			z_);
 		return context?.Operators.ExistsInList<Observation>(aa_);
 	}
+
     [CqlDeclaration("Observation with status")]
     public bool? Observation_with_status() => __Observation_with_status.Value;
 
@@ -748,6 +765,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			z_);
 		return context?.Operators.ExistsInList<DiagnosticReport>(aa_);
 	}
+
     [CqlDeclaration("Diagnostic Report with status")]
     public bool? Diagnostic_Report_with_status() => __Diagnostic_Report_with_status.Value;
 
@@ -758,6 +776,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.Or(a_, 
 			b_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 
@@ -775,6 +794,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		return context?.Operators.And(e_, 
 			g_);
 	}
+
     [CqlDeclaration("Final Numerator Population")]
     public bool? Final_Numerator_Population() => __Final_Numerator_Population.Value;
 
@@ -830,6 +850,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			aa_);
 		return context?.Operators.ExistsInList<Observation>(ab_);
 	}
+
     [CqlDeclaration("Observation without appropriate status")]
     public bool? Observation_without_appropriate_status() => __Observation_without_appropriate_status.Value;
 
@@ -885,6 +906,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			aa_);
 		return context?.Operators.ExistsInList<DiagnosticReport>(ab_);
 	}
+
     [CqlDeclaration("Diagnostic Report without appropriate status")]
     public bool? Diagnostic_Report_without_appropriate_status() => __Diagnostic_Report_without_appropriate_status.Value;
 

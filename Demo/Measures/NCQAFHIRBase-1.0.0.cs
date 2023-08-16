@@ -42,6 +42,7 @@ public class NCQAFHIRBase_1_0_0
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 

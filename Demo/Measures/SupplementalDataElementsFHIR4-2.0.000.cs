@@ -98,6 +98,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -146,6 +147,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		return context?.Operators.SelectOrNull<Extension, Coding>(v_, 
 			w_);
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -167,6 +169,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		return context?.Operators.SelectOrNull<Coverage, Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, 
 			e_);
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -215,6 +218,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		return context?.Operators.SelectOrNull<Extension, Coding>(v_, 
 			w_);
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 

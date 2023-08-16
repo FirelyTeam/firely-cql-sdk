@@ -176,6 +176,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -212,6 +213,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -219,6 +221,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -226,6 +229,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -233,6 +237,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -263,6 +268,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		return context?.Operators.WhereOrNull<Encounter>(b_, 
 			l_);
 	}
+
     [CqlDeclaration("Inpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period() => __Inpatient_Encounter_During_Measurement_Period.Value;
 
@@ -285,6 +291,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		return context?.Operators.WhereOrNull<Encounter>(a_, 
 			h_);
 	}
+
     [CqlDeclaration("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter() => __Qualifying_Encounter.Value;
 
@@ -314,6 +321,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		return context?.Operators.WhereOrNull<MedicationAdministration>(e_, 
 			o_);
 	}
+
     [CqlDeclaration("Hypoglycemic Medication Administration")]
     public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration() => __Hypoglycemic_Medication_Administration.Value;
 
@@ -342,6 +350,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			j_);
 	}
+
     [CqlDeclaration("Qualifying Encounter with Hypoglycemic Medication Administration")]
     public IEnumerable<Encounter> Qualifying_Encounter_with_Hypoglycemic_Medication_Administration() => __Qualifying_Encounter_with_Hypoglycemic_Medication_Administration.Value;
 
@@ -349,6 +358,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		return this.Qualifying_Encounter_with_Hypoglycemic_Medication_Administration();
 	}
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population() => __Initial_Population.Value;
 
@@ -356,6 +366,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator() => __Denominator.Value;
 
@@ -572,6 +583,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 		return context?.Operators.WhereOrNull<Encounter>(a_, 
 			en_);
 	}
+
     [CqlDeclaration("Severe Hypoglycemic Harm Event")]
     public IEnumerable<Encounter> Severe_Hypoglycemic_Harm_Event() => __Severe_Hypoglycemic_Harm_Event.Value;
 
@@ -579,6 +591,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		return this.Severe_Hypoglycemic_Harm_Event();
 	}
+
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator() => __Numerator.Value;
 
@@ -586,6 +599,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 

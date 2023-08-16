@@ -110,6 +110,7 @@ public class HospiceFHIR4_2_3_000
 			b_,
 		};
 	}
+
     [CqlDeclaration("SNOMEDCT:2017-09")]
     public CqlCode[] SNOMEDCT_2017_09() => __SNOMEDCT_2017_09.Value;
 
@@ -129,6 +130,7 @@ public class HospiceFHIR4_2_3_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -240,6 +242,7 @@ public class HospiceFHIR4_2_3_000
 		return context?.Operators.Or(au_, 
 			bh_);
 	}
+
     [CqlDeclaration("Has Hospice")]
     public bool? Has_Hospice() => __Has_Hospice.Value;
 

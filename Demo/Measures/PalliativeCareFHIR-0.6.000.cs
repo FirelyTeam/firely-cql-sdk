@@ -107,6 +107,7 @@ public class PalliativeCareFHIR_0_6_000
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -121,6 +122,7 @@ public class PalliativeCareFHIR_0_6_000
 			a_,
 		};
 	}
+
     [CqlDeclaration("ObservationCategoryCodes")]
     public CqlCode[] ObservationCategoryCodes() => __ObservationCategoryCodes.Value;
 
@@ -140,6 +142,7 @@ public class PalliativeCareFHIR_0_6_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -250,6 +253,7 @@ public class PalliativeCareFHIR_0_6_000
 		return context?.Operators.Or(al_, 
 			ba_);
 	}
+
     [CqlDeclaration("Palliative Care in the Measurement Period")]
     public bool? Palliative_Care_in_the_Measurement_Period() => __Palliative_Care_in_the_Measurement_Period.Value;
 

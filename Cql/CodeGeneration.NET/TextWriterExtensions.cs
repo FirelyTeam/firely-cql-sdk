@@ -8,6 +8,7 @@
 
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -43,6 +44,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             sb.Append(IndentString(indent));
             sb.Append(text);
         }
+
+        public static bool IsExtensionMethod(this MethodInfo info) =>
+            info.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), true);
 
     }
 }

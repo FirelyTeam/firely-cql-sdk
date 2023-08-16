@@ -698,6 +698,7 @@ public class NCQATerminology_1_0_0
 			b_,
 		};
 	}
+
     [CqlDeclaration("ConditionCategoryCodes")]
     public CqlCode[] ConditionCategoryCodes() => __ConditionCategoryCodes.Value;
 
@@ -737,6 +738,7 @@ public class NCQATerminology_1_0_0
 			f_,
 		};
 	}
+
     [CqlDeclaration("ConditionClinicalStatusCodes")]
     public CqlCode[] ConditionClinicalStatusCodes() => __ConditionClinicalStatusCodes.Value;
 
@@ -776,6 +778,7 @@ public class NCQATerminology_1_0_0
 			f_,
 		};
 	}
+
     [CqlDeclaration("ConditionVerificationStatusCodes")]
     public CqlCode[] ConditionVerificationStatusCodes() => __ConditionVerificationStatusCodes.Value;
 
@@ -800,6 +803,7 @@ public class NCQATerminology_1_0_0
 			c_,
 		};
 	}
+
     [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
     public CqlCode[] AllergyIntoleranceClinicalStatusCodes() => __AllergyIntoleranceClinicalStatusCodes.Value;
 
@@ -824,6 +828,7 @@ public class NCQATerminology_1_0_0
 			c_,
 		};
 	}
+
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
     public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => __AllergyIntoleranceVerificationStatusCodes.Value;
 
@@ -853,6 +858,7 @@ public class NCQATerminology_1_0_0
 			d_,
 		};
 	}
+
     [CqlDeclaration("AllergyIntoleranceCategory")]
     public CqlCode[] AllergyIntoleranceCategory() => __AllergyIntoleranceCategory.Value;
 
@@ -872,6 +878,7 @@ public class NCQATerminology_1_0_0
 			b_,
 		};
 	}
+
     [CqlDeclaration("AllergyIntoleranceType")]
     public CqlCode[] AllergyIntoleranceType() => __AllergyIntoleranceType.Value;
 
@@ -901,6 +908,7 @@ public class NCQATerminology_1_0_0
 			d_,
 		};
 	}
+
     [CqlDeclaration("MedicationRequestCategory")]
     public CqlCode[] MedicationRequestCategory() => __MedicationRequestCategory.Value;
 
@@ -935,6 +943,7 @@ public class NCQATerminology_1_0_0
 			e_,
 		};
 	}
+
     [CqlDeclaration("claim-type")]
     public CqlCode[] claim_type() => __claim_type.Value;
 
@@ -974,6 +983,7 @@ public class NCQATerminology_1_0_0
 			f_,
 		};
 	}
+
     [CqlDeclaration("ActEncounterCodes")]
     public CqlCode[] ActEncounterCodes() => __ActEncounterCodes.Value;
 
@@ -1013,6 +1023,7 @@ public class NCQATerminology_1_0_0
 			f_,
 		};
 	}
+
     [CqlDeclaration("coverage-type")]
     public CqlCode[] coverage_type() => __coverage_type.Value;
 
@@ -1027,6 +1038,7 @@ public class NCQATerminology_1_0_0
 			a_,
 		};
 	}
+
     [CqlDeclaration("IdentifierType")]
     public CqlCode[] IdentifierType() => __IdentifierType.Value;
 

@@ -84,6 +84,7 @@ public class NCQAHospice_1_0_0
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -124,6 +125,7 @@ public class NCQAHospice_1_0_0
 		return context?.Operators.Or(i_, 
 			r_);
 	}
+
     [CqlDeclaration("Hospice Intervention or Encounter")]
     public bool? Hospice_Intervention_or_Encounter() => __Hospice_Intervention_or_Encounter.Value;
 

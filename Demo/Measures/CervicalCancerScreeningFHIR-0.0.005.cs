@@ -220,6 +220,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			a_,
 		};
 	}
+
     [CqlDeclaration("ObservationCategoryCodes")]
     public CqlCode[] ObservationCategoryCodes() => __ObservationCategoryCodes.Value;
 
@@ -256,6 +257,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -263,6 +265,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -270,6 +273,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -277,6 +281,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -284,6 +289,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -338,6 +344,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.WhereOrNull<Encounter>(q_, 
 			z_);
 	}
+
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters() => __Qualifying_Encounters.Value;
 
@@ -372,6 +379,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.And(m_, 
 			o_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
@@ -379,6 +387,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
@@ -427,6 +436,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.ListUnion<object>(a_, 
 			o_);
 	}
+
     [CqlDeclaration("Absence of Cervix")]
     public IEnumerable<object> Absence_of_Cervix() => __Absence_of_Cervix.Value;
 
@@ -441,6 +451,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.Or(d_, 
 			e_);
 	}
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
@@ -508,6 +519,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			ah_);
 	}
+
     [CqlDeclaration("Cervical Cytology Within 3 Years")]
     public IEnumerable<Observation> Cervical_Cytology_Within_3_Years() => __Cervical_Cytology_Within_3_Years.Value;
 
@@ -588,6 +600,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			ar_);
 	}
+
     [CqlDeclaration("HPV Test Within 5 Years for Women Age 30 and Older")]
     public IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older() => __HPV_Test_Within_5_Years_for_Women_Age_30_and_Older.Value;
 
@@ -600,6 +613,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.Or(b_, 
 			d_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 
@@ -685,6 +699,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			w_);
 	}
+
     [CqlDeclaration("Cervical Cytology Within 3 Years (2)")]
     public IEnumerable<Observation> Cervical_Cytology_Within_3_Years__2_() => __Cervical_Cytology_Within_3_Years__2_.Value;
 
@@ -747,6 +762,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			ag_);
 	}
+
     [CqlDeclaration("HPV Test Within 5 Years for Women Age 30 and Older (2)")]
     public IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older__2_() => __HPV_Test_Within_5_Years_for_Women_Age_30_and_Older__2_.Value;
 

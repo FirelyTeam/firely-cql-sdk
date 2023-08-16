@@ -238,6 +238,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -288,6 +289,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.WhereOrNull<MedicationRequest>(e_, 
 			y_);
 	}
+
     [CqlDeclaration("Dementia Medications In Year Before or During Measurement Period")]
     public IEnumerable<MedicationRequest> Dementia_Medications_In_Year_Before_or_During_Measurement_Period() => __Dementia_Medications_In_Year_Before_or_During_Measurement_Period.Value;
 
@@ -332,6 +334,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.SelectOrNull<Encounter, CqlInterval<CqlDateTime>>(o_, 
 			s_);
 	}
+
     [CqlDeclaration("Long Term Care Periods During Measurement Period")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Periods_During_Measurement_Period() => __Long_Term_Care_Periods_During_Measurement_Period.Value;
 
@@ -409,6 +412,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(p_, 
 			am_);
 	}
+
     [CqlDeclaration("Outpatient Encounters with Advanced Illness")]
     public IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness() => __Outpatient_Encounters_with_Advanced_Illness.Value;
 
@@ -454,6 +458,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.SelectOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe, Encounter>(p_, 
 			q_);
 	}
+
     [CqlDeclaration("Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]
     public IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service() => __Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service.Value;
 
@@ -463,6 +468,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.Collapse(a_, 
 			null);
 	}
+
     [CqlDeclaration("Long Term Care Overlapping Periods")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Overlapping_Periods() => __Long_Term_Care_Overlapping_Periods.Value;
 
@@ -522,6 +528,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.SelectOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(s_, 
 			v_);
 	}
+
     [CqlDeclaration("Long Term Care Adjacent Periods")]
     public IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods() => __Long_Term_Care_Adjacent_Periods.Value;
 
@@ -545,6 +552,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			g_);
 		return context?.Operators.MaxOrNull<int?>(h_);
 	}
+
     [CqlDeclaration("Max Long Term Care Period Length")]
     public int? Max_Long_Term_Care_Period_Length() => __Max_Long_Term_Care_Period_Length.Value;
 
@@ -607,6 +615,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(g_, 
 			ad_);
 	}
+
     [CqlDeclaration("Inpatient Encounter with Advanced Illness")]
     public IEnumerable<Encounter> Inpatient_Encounter_with_Advanced_Illness() => __Inpatient_Encounter_with_Advanced_Illness.Value;
 
@@ -767,6 +776,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.Or(bk_, 
 			cb_);
 	}
+
     [CqlDeclaration("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty() => __Has_Criteria_Indicating_Frailty.Value;
 
@@ -813,6 +823,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.Or(s_, 
 			ac_);
 	}
+
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80() => __Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80.Value;
 
@@ -845,6 +856,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.And(j_, 
 			r_);
 	}
+
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80() => __Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80.Value;
 
@@ -855,6 +867,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		return context?.Operators.Greater(a_, 
 			b_);
 	}
+
     [CqlDeclaration("Has Long Term Care Periods Longer Than 90 Consecutive Days")]
     public bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days() => __Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days.Value;
 

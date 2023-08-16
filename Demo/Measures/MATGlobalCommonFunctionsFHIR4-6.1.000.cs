@@ -467,6 +467,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			f_,
 		};
 	}
+
     [CqlDeclaration("ConditionClinicalStatusCodes")]
     public CqlCode[] ConditionClinicalStatusCodes() => __ConditionClinicalStatusCodes.Value;
 
@@ -491,6 +492,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			c_,
 		};
 	}
+
     [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
     public CqlCode[] AllergyIntoleranceClinicalStatusCodes() => __AllergyIntoleranceClinicalStatusCodes.Value;
 
@@ -515,6 +517,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			c_,
 		};
 	}
+
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
     public CqlCode[] AllergyIntoleranceVerificationStatusCodes() => __AllergyIntoleranceVerificationStatusCodes.Value;
 
@@ -529,6 +532,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			a_,
 		};
 	}
+
     [CqlDeclaration("Diagnosis Role")]
     public CqlCode[] Diagnosis_Role() => __Diagnosis_Role.Value;
 
@@ -543,6 +547,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -562,6 +567,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			b_,
 		};
 	}
+
     [CqlDeclaration("MedicationRequestCategory")]
     public CqlCode[] MedicationRequestCategory() => __MedicationRequestCategory.Value;
 
@@ -601,6 +607,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			f_,
 		};
 	}
+
     [CqlDeclaration("ConditionVerificationStatusCodes")]
     public CqlCode[] ConditionVerificationStatusCodes() => __ConditionVerificationStatusCodes.Value;
 
@@ -615,6 +622,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			a_,
 		};
 	}
+
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT() => __SNOMEDCT.Value;
 
@@ -634,6 +642,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			b_,
 		};
 	}
+
     [CqlDeclaration("RoleCode")]
     public CqlCode[] RoleCode() => __RoleCode.Value;
 
@@ -670,6 +679,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -716,6 +726,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		return context?.Operators.WhereOrNull<Encounter>(b_, 
 			r_);
 	}
+
     [CqlDeclaration("Inpatient Encounter")]
     public IEnumerable<Encounter> Inpatient_Encounter() => __Inpatient_Encounter.Value;
 

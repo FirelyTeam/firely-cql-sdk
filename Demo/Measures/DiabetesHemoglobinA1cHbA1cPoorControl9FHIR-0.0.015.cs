@@ -248,6 +248,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -267,6 +268,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -274,6 +276,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -281,6 +284,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -288,6 +292,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -295,6 +300,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -324,6 +330,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		return context?.Operators.WhereOrNull<Encounter>(b_, 
 			k_);
 	}
+
     [CqlDeclaration("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services() => __Telehealth_Services.Value;
 
@@ -368,6 +375,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		return context?.Operators.And(m_, 
 			t_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
@@ -375,6 +383,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
@@ -417,6 +426,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			System.ComponentModel.ListSortDirection.Ascending);
 		return context?.Operators.LastOfList<Observation>(q_);
 	}
+
     [CqlDeclaration("Most Recent HbA1c")]
     public Observation Most_Recent_HbA1c() => __Most_Recent_HbA1c.Value;
 
@@ -428,6 +438,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		return context?.Operators.And(b_, 
 			c_);
 	}
+
     [CqlDeclaration("Has Most Recent HbA1c Without Result")]
     public bool? Has_Most_Recent_HbA1c_Without_Result() => __Has_Most_Recent_HbA1c_Without_Result.Value;
 
@@ -440,6 +451,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		return context?.Operators.Greater(a_, 
 			c_);
 	}
+
     [CqlDeclaration("Has Most Recent Elevated HbA1c")]
     public bool? Has_Most_Recent_Elevated_HbA1c() => __Has_Most_Recent_Elevated_HbA1c.Value;
 
@@ -479,6 +491,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var p_ = context?.Operators.ExistsInList<Observation>(o_);
 		return context?.Operators.Not(p_);
 	}
+
     [CqlDeclaration("Has No Record Of HbA1c")]
     public bool? Has_No_Record_Of_HbA1c() => __Has_No_Record_Of_HbA1c.Value;
 
@@ -492,6 +505,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		return context?.Operators.Or(c_, 
 			d_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 
@@ -521,6 +535,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		return context?.Operators.Or(n_, 
 			o_);
 	}
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
 

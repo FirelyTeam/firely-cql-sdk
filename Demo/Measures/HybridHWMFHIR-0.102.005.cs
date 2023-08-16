@@ -316,6 +316,7 @@ public class HybridHWMFHIR_0_102_005
 			d_,
 		};
 	}
+
     [CqlDeclaration("LOINC:2.69")]
     public CqlCode[] LOINC_2_69() => __LOINC_2_69.Value;
 
@@ -352,6 +353,7 @@ public class HybridHWMFHIR_0_102_005
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -359,6 +361,7 @@ public class HybridHWMFHIR_0_102_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -366,6 +369,7 @@ public class HybridHWMFHIR_0_102_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -373,6 +377,7 @@ public class HybridHWMFHIR_0_102_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -380,6 +385,7 @@ public class HybridHWMFHIR_0_102_005
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -465,6 +471,7 @@ public class HybridHWMFHIR_0_102_005
 		return context?.Operators.SelectOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(ah_, 
 			ai_);
 	}
+
     [CqlDeclaration("Inpatient Encounters")]
     public IEnumerable<Encounter> Inpatient_Encounters() => __Inpatient_Encounters.Value;
 
@@ -472,6 +479,7 @@ public class HybridHWMFHIR_0_102_005
 	{
 		return this.Inpatient_Encounters();
 	}
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population() => __Initial_Population.Value;
 
@@ -715,6 +723,7 @@ public class HybridHWMFHIR_0_102_005
 		} as IEnumerable<IEnumerable<string>>);
 		return context?.Operators.FlattenList<string>(a_);
 	}
+
     [CqlDeclaration("Results")]
     public IEnumerable<string> Results() => __Results.Value;
 

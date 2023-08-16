@@ -40,6 +40,7 @@ public class FHIRHelpers_4_0_001
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 

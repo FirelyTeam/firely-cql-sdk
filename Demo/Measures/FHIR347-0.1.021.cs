@@ -546,6 +546,7 @@ public class FHIR347_0_1_021
 			a_,
 		};
 	}
+
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM() => __ICD10CM.Value;
 
@@ -565,6 +566,7 @@ public class FHIR347_0_1_021
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -648,6 +650,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.ListUnion<object>(a_, 
 			u_);
 	}
+
     [CqlDeclaration("ASCVD Diagnosis or Procedure before End of Measurement Period")]
     public IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period() => __ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period.Value;
 
@@ -712,6 +715,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.WhereOrNull<Encounter>(w_, 
 			af_);
 	}
+
     [CqlDeclaration("Qualifying Encounter during Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period() => __Qualifying_Encounter_during_Measurement_Period.Value;
 
@@ -724,6 +728,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.And(b_, 
 			d_);
 	}
+
     [CqlDeclaration("Initial Population 1")]
     public bool? Initial_Population_1() => __Initial_Population_1.Value;
 
@@ -731,6 +736,7 @@ public class FHIR347_0_1_021
 	{
 		return this.Initial_Population_1();
 	}
+
     [CqlDeclaration("Denominator 1")]
     public bool? Denominator_1() => __Denominator_1.Value;
 
@@ -747,6 +753,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.GreaterOrEqual(a_, 
 			f_);
 	}
+
     [CqlDeclaration("Patients Age 20 or Older at Start of Measurement Period")]
     public bool? Patients_Age_20_or_Older_at_Start_of_Measurement_Period() => __Patients_Age_20_or_Older_at_Start_of_Measurement_Period.Value;
 
@@ -796,6 +803,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			v_);
 	}
+
     [CqlDeclaration("LDL Result Greater Than or Equal To 190")]
     public IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190() => __LDL_Result_Greater_Than_or_Equal_To_190.Value;
 
@@ -817,6 +825,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.WhereOrNull<Condition>(b_, 
 			g_);
 	}
+
     [CqlDeclaration("Hypercholesterolemia Diagnosis")]
     public IEnumerable<Condition> Hypercholesterolemia_Diagnosis() => __Hypercholesterolemia_Diagnosis.Value;
 
@@ -836,6 +845,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.And(f_, 
 			i_);
 	}
+
     [CqlDeclaration("Patients Age 20 Years and Older with LDL Cholesterol Result Greater than or Equal to 190 or Hypercholesterolemia without ASCVD")]
     public bool? Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD() => __Patients_Age_20_Years_and_Older_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD.Value;
 
@@ -847,6 +857,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.And(a_, 
 			c_);
 	}
+
     [CqlDeclaration("Initial Population 2")]
     public bool? Initial_Population_2() => __Initial_Population_2.Value;
 
@@ -854,6 +865,7 @@ public class FHIR347_0_1_021
 	{
 		return this.Initial_Population_2();
 	}
+
     [CqlDeclaration("Denominator 2")]
     public bool? Denominator_2() => __Denominator_2.Value;
 
@@ -874,6 +886,7 @@ public class FHIR347_0_1_021
 			e_);
 		return context?.Operators.ExistsInList<Condition>(f_);
 	}
+
     [CqlDeclaration("Has Diabetes Diagnosis")]
     public bool? Has_Diabetes_Diagnosis() => __Has_Diabetes_Diagnosis.Value;
 
@@ -912,6 +925,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.And(q_, 
 			t_);
 	}
+
     [CqlDeclaration("Patients Age 40 to 75 Years with Diabetes without ASCVD or LDL Greater than 190 or Hypercholesterolemia")]
     public bool? Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia() => __Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia.Value;
 
@@ -923,6 +937,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.And(a_, 
 			c_);
 	}
+
     [CqlDeclaration("Initial Population 3")]
     public bool? Initial_Population_3() => __Initial_Population_3.Value;
 
@@ -930,6 +945,7 @@ public class FHIR347_0_1_021
 	{
 		return this.Initial_Population_3();
 	}
+
     [CqlDeclaration("Denominator 3")]
     public bool? Denominator_3() => __Denominator_3.Value;
 
@@ -937,6 +953,7 @@ public class FHIR347_0_1_021
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -944,6 +961,7 @@ public class FHIR347_0_1_021
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -951,6 +969,7 @@ public class FHIR347_0_1_021
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -958,6 +977,7 @@ public class FHIR347_0_1_021
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -981,6 +1001,7 @@ public class FHIR347_0_1_021
 			h_);
 		return context?.Operators.ExistsInList<AllergyIntolerance>(i_);
 	}
+
     [CqlDeclaration("Has Allergy to Statin")]
     public bool? Has_Allergy_to_Statin() => __Has_Allergy_to_Statin.Value;
 
@@ -1094,6 +1115,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.Or(ar_, 
 			bh_);
 	}
+
     [CqlDeclaration("Has Order or Receiving Hospice Care or Palliative Care")]
     public bool? Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care() => __Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care.Value;
 
@@ -1124,6 +1146,7 @@ public class FHIR347_0_1_021
 			k_);
 		return context?.Operators.ExistsInList<Condition>(l_);
 	}
+
     [CqlDeclaration("Has Hepatitis or Liver Disease Diagnosis")]
     public bool? Has_Hepatitis_or_Liver_Disease_Diagnosis() => __Has_Hepatitis_or_Liver_Disease_Diagnosis.Value;
 
@@ -1146,6 +1169,7 @@ public class FHIR347_0_1_021
 			g_);
 		return context?.Operators.ExistsInList<Condition>(h_);
 	}
+
     [CqlDeclaration("Has Statin Associated Muscle Symptoms")]
     public bool? Has_Statin_Associated_Muscle_Symptoms() => __Has_Statin_Associated_Muscle_Symptoms.Value;
 
@@ -1166,6 +1190,7 @@ public class FHIR347_0_1_021
 			e_);
 		return context?.Operators.ExistsInList<Condition>(f_);
 	}
+
     [CqlDeclaration("Has ESRD Diagnosis")]
     public bool? Has_ESRD_Diagnosis() => __Has_ESRD_Diagnosis.Value;
 
@@ -1187,6 +1212,7 @@ public class FHIR347_0_1_021
 			f_);
 		return context?.Operators.ExistsInList<AdverseEvent>(g_);
 	}
+
     [CqlDeclaration("Has Adverse Reaction to Statin")]
     public bool? Has_Adverse_Reaction_to_Statin() => __Has_Adverse_Reaction_to_Statin.Value;
 
@@ -1209,6 +1235,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.Or(i_, 
 			j_);
 	}
+
     [CqlDeclaration("Denominator Exceptions")]
     public bool? Denominator_Exceptions() => __Denominator_Exceptions.Value;
 
@@ -1239,6 +1266,7 @@ public class FHIR347_0_1_021
 			k_);
 		return context?.Operators.ExistsInList<Condition>(l_);
 	}
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
@@ -1299,6 +1327,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.WhereOrNull<MedicationRequest>(q_, 
 			ag_);
 	}
+
     [CqlDeclaration("Statin Therapy Ordered during Measurement Period")]
     public IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period() => __Statin_Therapy_Ordered_during_Measurement_Period.Value;
 
@@ -1376,6 +1405,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.WhereOrNull<MedicationRequest>(q_, 
 			aj_);
 	}
+
     [CqlDeclaration("Prescribed Statin Therapy Any Time during Measurement Period")]
     public IEnumerable<MedicationRequest> Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period() => __Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period.Value;
 
@@ -1388,6 +1418,7 @@ public class FHIR347_0_1_021
 		return context?.Operators.Or(b_, 
 			d_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 

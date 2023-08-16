@@ -118,6 +118,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -167,6 +168,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 		return context?.Operators.WhereOrNull<Encounter>(n_, 
 			w_);
 	}
+
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters() => __Qualifying_Encounters.Value;
 

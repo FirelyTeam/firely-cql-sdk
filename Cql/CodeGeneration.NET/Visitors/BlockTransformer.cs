@@ -46,13 +46,12 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         {
             var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
             var newMethodCall = elvTransformer.Visit(node);
-            LabelTarget returnLabelTarget = Expression.Label(newMethodCall.Type);
-            LabelExpression @return = Expression.Label(returnLabelTarget, newMethodCall);
+
             if (elvTransformer.LocalAssignments.Any())
             {
                 var parameters = elvTransformer.LocalAssignments
                     .Select(b => (ParameterExpression)b.Left);
-                var all = elvTransformer.LocalAssignments.Concat(new Expression[] { @return });
+                var all = elvTransformer.LocalAssignments.Concat(new Expression[] { newMethodCall });
 
                 var block = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
                 var deduper = new LocalVariableDeduper(ScopeReservedVariables);
@@ -71,32 +70,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             }
             else
             {
-                return Expression.Block(@return);
+                return Expression.Block(newMethodCall);
             }
         }
-
-        // Not used currently.  Generates too many confusing locals
-        //protected override Expression VisitConditional(ConditionalExpression node)
-        //{
-        //    var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
-        //    var newNode = elvTransformer.Visit(node);
-        //    LabelTarget returnLabelTarget = Expression.Label(newNode.Type);
-        //    LabelExpression @return = Expression.Label(returnLabelTarget, newNode);
-        //    if (elvTransformer.LocalAssignments.Any())
-        //    {
-        //        foreach (var assignment in elvTransformer.LocalAssignments)
-        //        {
-        //            var asString = assignment.ToReadableString();
-        //        }
-
-        //        var parameters = elvTransformer.LocalAssignments
-        //            .Select(b => (ParameterExpression)b.Left);
-        //        var all = elvTransformer.LocalAssignments.Concat(new Expression[] { @return });
-        //        var newBlock = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
-        //        return newBlock;
-        //    }
-        //    else return Expression.Block(@return);
-        //}
-
     }
 }

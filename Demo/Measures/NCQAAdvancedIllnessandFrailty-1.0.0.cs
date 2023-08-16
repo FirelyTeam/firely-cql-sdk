@@ -238,6 +238,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -311,6 +312,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		return context?.Operators.Or(aa_, 
 			ai_);
 	}
+
     [CqlDeclaration("Has Criteria Indicating Frailty")]
     public bool? Has_Criteria_Indicating_Frailty() => __Has_Criteria_Indicating_Frailty.Value;
 
@@ -387,6 +389,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		return context?.Operators.SelectOrNull<Encounter, CqlDate>(ak_, 
 			ao_);
 	}
+
     [CqlDeclaration("Outpatient Encounters with Advanced Illness")]
     public IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness() => __Outpatient_Encounters_with_Advanced_Illness.Value;
 
@@ -426,6 +429,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		return context?.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlDate>(n_, 
 			p_);
 	}
+
     [CqlDeclaration("Nonacute Inpatient Discharge with Advanced Illness")]
     public IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness() => __Nonacute_Inpatient_Discharge_with_Advanced_Illness.Value;
 
@@ -491,6 +495,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			k_);
 		return context?.Operators.ExistsInList<CqlDate>(l_);
 	}
+
     [CqlDeclaration("Two Outpatient Visits with Advanced Illness on Different Dates of Service")]
     public bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service() => __Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service.Value;
 
@@ -534,6 +539,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			u_);
 		return context?.Operators.ExistsInList<Encounter>(v_);
 	}
+
     [CqlDeclaration("Acute Inpatient Encounter with Advanced Illness")]
     public bool? Acute_Inpatient_Encounter_with_Advanced_Illness() => __Acute_Inpatient_Encounter_with_Advanced_Illness.Value;
 
@@ -567,6 +573,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			m_);
 		return context?.Operators.ExistsInList<CqlInterval<CqlDateTime>>(n_);
 	}
+
     [CqlDeclaration("Acute Inpatient Discharge with Advanced Illness")]
     public bool? Acute_Inpatient_Discharge_with_Advanced_Illness() => __Acute_Inpatient_Discharge_with_Advanced_Illness.Value;
 
@@ -605,6 +612,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			t_);
 		return context?.Operators.ExistsInList<MedicationDispense>(u_);
 	}
+
     [CqlDeclaration("Dementia Medications In Year Before or During Measurement Period")]
     public bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period() => __Dementia_Medications_In_Year_Before_or_During_Measurement_Period.Value;
 
@@ -651,6 +659,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		return context?.Operators.Or(r_, 
 			ab_);
 	}
+
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80() => __Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80.Value;
 
@@ -683,6 +692,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		return context?.Operators.And(j_, 
 			q_);
 	}
+
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80() => __Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80.Value;
 

@@ -516,6 +516,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			a_,
 		};
 	}
+
     [CqlDeclaration("ObservationCategoryCodes")]
     public CqlCode[] ObservationCategoryCodes() => __ObservationCategoryCodes.Value;
 
@@ -552,6 +553,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -559,6 +561,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -566,6 +569,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -573,6 +577,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -580,6 +585,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -614,6 +620,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Encounter>(e_, 
 			n_);
 	}
+
     [CqlDeclaration("Telehealth Services")]
     public IEnumerable<Encounter> Telehealth_Services() => __Telehealth_Services.Value;
 
@@ -628,6 +635,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 			e_, 
 			"year");
 	}
+
     [CqlDeclaration("Age at start of Measurement Period")]
     public int? Age_at_start_of_Measurement_Period() => __Age_at_start_of_Measurement_Period.Value;
 
@@ -656,6 +664,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.And(h_, 
 			l_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
@@ -663,6 +672,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
@@ -684,6 +694,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Condition>(b_, 
 			g_);
 	}
+
     [CqlDeclaration("Malignant Neoplasm")]
     public IEnumerable<Condition> Malignant_Neoplasm() => __Malignant_Neoplasm.Value;
 
@@ -715,6 +726,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			m_);
 	}
+
     [CqlDeclaration("Total Colectomy Performed")]
     public IEnumerable<Procedure> Total_Colectomy_Performed() => __Total_Colectomy_Performed.Value;
 
@@ -736,6 +748,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Condition>(b_, 
 			g_);
 	}
+
     [CqlDeclaration("Total Colectomy Condition")]
     public IEnumerable<Condition> Total_Colectomy_Condition() => __Total_Colectomy_Condition.Value;
 
@@ -777,6 +790,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.Or(w_, 
 			x_);
 	}
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
@@ -879,6 +893,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(m_, 
 			ao_);
 	}
+
     [CqlDeclaration("Fecal Occult Blood Test Display Date, Result, Category, Status")]
     public IEnumerable<Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status() => __Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status.Value;
 
@@ -963,6 +978,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			ai_);
 	}
+
     [CqlDeclaration("Fecal Occult Blood Test Performed")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed() => __Fecal_Occult_Blood_Test_Performed.Value;
 
@@ -1047,6 +1063,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			ai_);
 	}
+
     [CqlDeclaration("Fecal Occult Blood Test Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset() => __Fecal_Occult_Blood_Test_Performed__day_of_TZoffset.Value;
 
@@ -1115,6 +1132,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			ab_);
 	}
+
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset() => __Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset.Value;
 
@@ -1157,6 +1175,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			r_);
 	}
+
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset() => __Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset.Value;
 
@@ -1262,6 +1281,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(q_, 
 			as_);
 	}
+
     [CqlDeclaration("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
     public IEnumerable<Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status() => __Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status.Value;
 
@@ -1359,6 +1379,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			as_);
 	}
+
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed() => __Fecal_Immunochemical_Test_DNA_Performed.Value;
 
@@ -1456,6 +1477,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			as_);
 	}
+
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset() => __Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset.Value;
 
@@ -1537,6 +1559,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			al_);
 	}
+
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate category, ignore status, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset() => __Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset.Value;
 
@@ -1592,6 +1615,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			ab_);
 	}
+
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate status, ignore category, day of TZoffset")]
     public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset() => __Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset.Value;
 
@@ -1633,6 +1657,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.SelectOrNull<Observation, CqlDateTime>(r_, 
 			t_);
 	}
+
     [CqlDeclaration("CT Colonography Display Date")]
     public IEnumerable<CqlDateTime> CT_Colonography_Display_Date() => __CT_Colonography_Display_Date.Value;
 
@@ -1686,6 +1711,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			z_);
 	}
+
     [CqlDeclaration("CT Colonography Performed")]
     public IEnumerable<Observation> CT_Colonography_Performed() => __CT_Colonography_Performed.Value;
 
@@ -1740,6 +1766,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Observation>(b_, 
 			aa_);
 	}
+
     [CqlDeclaration("CT Colonography Performed without appropriate status")]
     public IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status() => __CT_Colonography_Performed_without_appropriate_status.Value;
 
@@ -1781,6 +1808,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.SelectOrNull<Procedure, CqlDateTime>(r_, 
 			t_);
 	}
+
     [CqlDeclaration("Flexible Sigmoidoscopy Display Date")]
     public IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date() => __Flexible_Sigmoidoscopy_Display_Date.Value;
 
@@ -1824,6 +1852,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			v_);
 	}
+
     [CqlDeclaration("Flexible Sigmoidoscopy Performed")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed() => __Flexible_Sigmoidoscopy_Performed.Value;
 
@@ -1868,6 +1897,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			w_);
 	}
+
     [CqlDeclaration("Flexible Sigmoidoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status() => __Flexible_Sigmoidoscopy_Performed_without_appropriate_status.Value;
 
@@ -1909,6 +1939,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.SelectOrNull<Procedure, CqlDateTime>(r_, 
 			t_);
 	}
+
     [CqlDeclaration("Colonoscopy Display Date")]
     public IEnumerable<CqlDateTime> Colonoscopy_Display_Date() => __Colonoscopy_Display_Date.Value;
 
@@ -1952,6 +1983,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			v_);
 	}
+
     [CqlDeclaration("Colonoscopy Performed")]
     public IEnumerable<Procedure> Colonoscopy_Performed() => __Colonoscopy_Performed.Value;
 
@@ -1996,6 +2028,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.WhereOrNull<Procedure>(b_, 
 			w_);
 	}
+
     [CqlDeclaration("Colonoscopy Performed without appropriate status")]
     public IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status() => __Colonoscopy_Performed_without_appropriate_status.Value;
 
@@ -2020,6 +2053,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.Or(k_, 
 			m_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 
@@ -2037,6 +2071,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		return context?.Operators.And(e_, 
 			g_);
 	}
+
     [CqlDeclaration("Final Numerator Population")]
     public bool? Final_Numerator_Population() => __Final_Numerator_Population.Value;
 

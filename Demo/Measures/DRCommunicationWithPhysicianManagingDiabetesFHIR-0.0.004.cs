@@ -316,6 +316,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -355,6 +356,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			f_,
 		};
 	}
+
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT() => __SNOMEDCT.Value;
 
@@ -374,6 +376,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -381,6 +384,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -388,6 +392,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -395,6 +400,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -402,6 +408,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -451,6 +458,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Encounter>(n_, 
 			w_);
 	}
+
     [CqlDeclaration("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period() => __Qualifying_Encounter_During_Measurement_Period.Value;
 
@@ -488,6 +496,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			p_);
 	}
+
     [CqlDeclaration("Diabetic Retinopathy Encounter")]
     public IEnumerable<Encounter> Diabetic_Retinopathy_Encounter() => __Diabetic_Retinopathy_Encounter.Value;
 
@@ -581,6 +590,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Communication>(m_, 
 			ae_);
 	}
+
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy() => __Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy.Value;
 
@@ -644,6 +654,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Communication>(n_, 
 			af_);
 	}
+
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Absence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema() => __Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema.Value;
 
@@ -706,6 +717,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Communication>(m_, 
 			ae_);
 	}
+
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Presence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema() => __Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema.Value;
 
@@ -722,6 +734,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.Or(e_, 
 			g_);
 	}
+
     [CqlDeclaration("Denominator Exceptions")]
     public bool? Denominator_Exceptions() => __Denominator_Exceptions.Value;
 
@@ -742,6 +755,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.And(g_, 
 			i_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
@@ -796,6 +810,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Observation>(l_, 
 			v_);
 	}
+
     [CqlDeclaration("Macular Exam Performed")]
     public IEnumerable<Observation> Macular_Exam_Performed() => __Macular_Exam_Performed.Value;
 
@@ -807,6 +822,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.And(a_, 
 			c_);
 	}
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
@@ -851,6 +867,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Communication>(n_, 
 			r_);
 	}
+
     [CqlDeclaration("Level of Severity of Retinopathy Findings Communicated")]
     public IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated() => __Level_of_Severity_of_Retinopathy_Findings_Communicated.Value;
 
@@ -896,6 +913,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Communication>(o_, 
 			s_);
 	}
+
     [CqlDeclaration("Macular Edema Absence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Absence_Communicated() => __Macular_Edema_Absence_Communicated.Value;
 
@@ -940,6 +958,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.WhereOrNull<Communication>(n_, 
 			r_);
 	}
+
     [CqlDeclaration("Macular Edema Presence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Presence_Communicated() => __Macular_Edema_Presence_Communicated.Value;
 
@@ -956,6 +975,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.And(b_, 
 			g_);
 	}
+
     [CqlDeclaration("Results of Dilated Macular or Fundus Exam Communicated")]
     public bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated() => __Results_of_Dilated_Macular_or_Fundus_Exam_Communicated.Value;
 
@@ -972,6 +992,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		return context?.Operators.And(b_, 
 			g_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 

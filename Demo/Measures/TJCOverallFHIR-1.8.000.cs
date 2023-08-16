@@ -238,6 +238,7 @@ public class TJCOverallFHIR_1_8_000
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -274,6 +275,7 @@ public class TJCOverallFHIR_1_8_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -301,6 +303,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.WhereOrNull<Encounter>(b_, 
 			m_);
 	}
+
     [CqlDeclaration("Non Elective Inpatient Encounter")]
     public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter() => __Non_Elective_Inpatient_Encounter.Value;
 
@@ -323,6 +326,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.WhereOrNull<Encounter>(a_, 
 			j_);
 	}
+
     [CqlDeclaration("All Stroke Encounter")]
     public IEnumerable<Encounter> All_Stroke_Encounter() => __All_Stroke_Encounter.Value;
 
@@ -356,6 +360,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			m_);
 	}
+
     [CqlDeclaration("Encounter with Principal Diagnosis and Age")]
     public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age() => __Encounter_with_Principal_Diagnosis_and_Age.Value;
 
@@ -373,6 +378,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.WhereOrNull<Encounter>(a_, 
 			e_);
 	}
+
     [CqlDeclaration("Ischemic Stroke Encounter")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounter() => __Ischemic_Stroke_Encounter.Value;
 
@@ -410,6 +416,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.WhereOrNull<Encounter>(a_, 
 			y_);
 	}
+
     [CqlDeclaration("Ischemic Stroke Encounters with Discharge Disposition")]
     public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition() => __Ischemic_Stroke_Encounters_with_Discharge_Disposition.Value;
 
@@ -453,6 +460,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.ListUnion<object>(a_, 
 			h_);
 	}
+
     [CqlDeclaration("Intervention Comfort Measures")]
     public IEnumerable<object> Intervention_Comfort_Measures() => __Intervention_Comfort_Measures.Value;
 
@@ -482,6 +490,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			i_);
 	}
+
     [CqlDeclaration("Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization() => __Comfort_Measures_during_Hospitalization.Value;
 
@@ -513,6 +522,7 @@ public class TJCOverallFHIR_1_8_000
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			k_);
 	}
+
     [CqlDeclaration("Encounter with Comfort Measures during Hospitalization")]
     public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization() => __Encounter_with_Comfort_Measures_during_Hospitalization.Value;
 

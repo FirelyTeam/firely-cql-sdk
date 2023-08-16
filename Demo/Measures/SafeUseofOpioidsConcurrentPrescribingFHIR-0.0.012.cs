@@ -182,6 +182,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			a_,
 		};
 	}
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
@@ -201,6 +202,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -234,6 +236,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		return context?.Operators.WhereOrNull<Encounter>(a_, 
 			o_);
 	}
+
     [CqlDeclaration("Inpatient Encounter with Age Greater than or Equal to 18")]
     public IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18() => __Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18.Value;
 
@@ -308,6 +311,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			al_);
 	}
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population() => __Initial_Population.Value;
 
@@ -315,6 +319,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	{
 		return this.Initial_Population();
 	}
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator() => __Denominator.Value;
 
@@ -322,6 +327,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -329,6 +335,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -336,6 +343,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -343,6 +351,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 
@@ -425,6 +434,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		return context?.Operators.ListUnion<Encounter>(o_, 
 			al_);
 	}
+
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator() => __Numerator.Value;
 
@@ -523,6 +533,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		return context?.Operators.SelectOrNull<Encounter, Encounter>(ba_, 
 			bb_);
 	}
+
     [CqlDeclaration("Denominator Exclusion")]
     public IEnumerable<Encounter> Denominator_Exclusion() => __Denominator_Exclusion.Value;
 

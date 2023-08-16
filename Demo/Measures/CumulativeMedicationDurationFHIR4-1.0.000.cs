@@ -456,6 +456,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			n_,
 		};
 	}
+
     [CqlDeclaration("V3TimingEvent")]
     public CqlCode[] V3TimingEvent() => __V3TimingEvent.Value;
 
@@ -525,6 +526,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			l_,
 		};
 	}
+
     [CqlDeclaration("EventTiming")]
     public CqlCode[] EventTiming() => __EventTiming.Value;
 
@@ -544,6 +546,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 

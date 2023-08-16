@@ -90,6 +90,7 @@ public class DevDays_2023_0_0
 			b_,
 		};
 	}
+
     [CqlDeclaration("ICD10")]
     public CqlCode[] ICD10() => __ICD10.Value;
 
@@ -109,6 +110,7 @@ public class DevDays_2023_0_0
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -141,6 +143,7 @@ public class DevDays_2023_0_0
 		return context?.Operators.WhereOrNull<Condition>(a_, 
 			l_);
 	}
+
     [CqlDeclaration("Jet engine conditions")]
     public IEnumerable<Condition> Jet_engine_conditions() => __Jet_engine_conditions.Value;
 
@@ -173,6 +176,7 @@ public class DevDays_2023_0_0
 		return context?.Operators.WhereOrNull<Condition>(a_, 
 			l_);
 	}
+
     [CqlDeclaration("Subsequent encounters")]
     public IEnumerable<Condition> Subsequent_encounters() => __Subsequent_encounters.Value;
 
@@ -181,6 +185,7 @@ public class DevDays_2023_0_0
 		var a_ = this.Jet_engine_conditions();
 		return context?.Operators.ExistsInList<Condition>(a_);
 	}
+
     [CqlDeclaration("Initial population")]
     public bool? Initial_population() => __Initial_population.Value;
 
@@ -189,6 +194,7 @@ public class DevDays_2023_0_0
 		var a_ = this.Subsequent_encounters();
 		return context?.Operators.ExistsInList<Condition>(a_);
 	}
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator() => __Numerator.Value;
 

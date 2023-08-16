@@ -100,6 +100,7 @@ public class NCQAPalliativeCare_1_0_0
 			a_,
 		};
 	}
+
     [CqlDeclaration("ICD-10")]
     public CqlCode[] ICD_10() => __ICD_10.Value;
 

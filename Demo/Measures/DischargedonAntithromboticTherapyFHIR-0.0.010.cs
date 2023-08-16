@@ -256,6 +256,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			null);
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
+
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
@@ -263,6 +264,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		return TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
 	}
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator() => __Denominator.Value;
 
@@ -341,6 +343,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.WhereOrNull<MedicationRequest>(b_, 
 			ap_);
 	}
+
     [CqlDeclaration("Antithrombotic Not Given at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge() => __Antithrombotic_Not_Given_at_Discharge.Value;
 
@@ -369,6 +372,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			j_);
 	}
+
     [CqlDeclaration("Encounter With No Antithrombotic At Discharge")]
     public IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge() => __Encounter_With_No_Antithrombotic_At_Discharge.Value;
 
@@ -431,6 +435,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.WhereOrNull<MedicationRequest>(b_, 
 			ae_);
 	}
+
     [CqlDeclaration("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge() => __Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge.Value;
 
@@ -459,6 +464,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			j_);
 	}
+
     [CqlDeclaration("Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge() => __Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge.Value;
 
@@ -469,6 +475,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.ListUnion<Encounter>(a_, 
 			b_);
 	}
+
     [CqlDeclaration("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions() => __Denominator_Exceptions.Value;
 
@@ -479,6 +486,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.ListUnion<Encounter>(a_, 
 			b_);
 	}
+
     [CqlDeclaration("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
@@ -486,6 +494,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		return TJCOverallFHIR_1_8_000.Encounter_with_Principal_Diagnosis_and_Age();
 	}
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population() => __Initial_Population.Value;
 
@@ -548,6 +557,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.WhereOrNull<MedicationRequest>(b_, 
 			ae_);
 	}
+
     [CqlDeclaration("Antithrombotic Therapy at Discharge")]
     public IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge() => __Antithrombotic_Therapy_at_Discharge.Value;
 
@@ -576,6 +586,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(a_, 
 			j_);
 	}
+
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator() => __Numerator.Value;
 
@@ -583,6 +594,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 	}
+
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
@@ -590,6 +602,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 	}
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
@@ -597,6 +610,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 	}
+
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
@@ -604,6 +618,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 	}
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
 

@@ -17,7 +17,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class ExtractLocalVariablesTransformer : ExpressionVisitor
     {
-
         public ExtractLocalVariablesTransformer(VariableNameGenerator generator)
         {
             NameGenerator = generator;
