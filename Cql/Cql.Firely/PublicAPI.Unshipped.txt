@@ -1,6 +1,11 @@
 ﻿#nullable enable
+Hl7.Cql.Firely.CqlOptions
+Hl7.Cql.Firely.CqlOptions.CqlOptions() -> void
+Hl7.Cql.Firely.CqlOptions.ResourceIdComparer.get -> System.StringComparer?
+Hl7.Cql.Firely.CqlOptions.ResourceIdComparer.init -> void
 Hl7.Cql.Firely.FirelyCqlContext
 Hl7.Cql.ValueSetLoaders.ValueSetExtensions
 static Hl7.Cql.Firely.FirelyCqlContext.Create(Hl7.Cql.Operators.IDataRetriever? retriever = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Firely.FirelyCqlContext.ForBundle(Hl7.Fhir.Model.Bundle! bundle, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.ValueSets.IValueSetDictionary? valueSets = null, System.DateTimeOffset? now = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.ValueSetLoaders.ValueSetExtensions.ToValueSetDictionary(this System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.ValueSet!>! values, bool activeOnly = true, System.Func<Hl7.Fhir.Model.ValueSet!, bool>? onInvalidValueSet = null) -> Hl7.Cql.ValueSets.IValueSetDictionary!
+static readonly Hl7.Cql.Firely.CqlOptions.Default -> Hl7.Cql.Firely.CqlOptions!

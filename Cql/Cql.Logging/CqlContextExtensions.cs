@@ -15,7 +15,7 @@ namespace Hl7.Cql.Logging
     /// <summary>
     /// An extension class for controlling logging on a <see cref="CqlContext"/>
     /// </summary>
-    internal static class CqlContextExtensions
+    public static class CqlContextExtensions
     {
         /// <summary>
         /// Adds functionality to a context to direct log messages to the given logger.
