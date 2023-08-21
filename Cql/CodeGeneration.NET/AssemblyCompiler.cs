@@ -22,14 +22,13 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Loader;
 using System.Text;
 
 namespace Hl7.Cql.Compiler
 {
-    public class AssemblyCompiler
+    internal class AssemblyCompiler
     {
-        public AssemblyCompiler(TypeResolver typeResolver,
+        internal AssemblyCompiler(TypeResolver typeResolver,
             TypeManager? typeManager = null,
             OperatorBinding? operatorBinding = null)
         {
@@ -38,41 +37,15 @@ namespace Hl7.Cql.Compiler
             Binding = operatorBinding ?? new CqlOperatorsBinding(typeResolver);
         }
 
-        public TypeResolver TypeResolver { get; }
-        public TypeManager TypeManager { get; }
-        public OperatorBinding Binding { get; }
+        private TypeResolver TypeResolver { get; }
+        private TypeManager TypeManager { get; }
+        private OperatorBinding Binding { get; }
 
-        public AssemblyLoadContext Load(IEnumerable<Library> elmPackages,
-                    ILogger<ExpressionBuilder>? builderLogger = null,
-                    ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
-                    LogLevel logLevel = LogLevel.Information)
+        internal IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
+                    ILoggerFactory logFactory)
         {
-            var assemblies = Compile(elmPackages, builderLogger, codeWriterLogger, logLevel);
-            var assemblyLoadContext = new AssemblyLoadContext("UnitTest", false);
-            foreach (var kvp in assemblies)
-            {
-                using var ms = new MemoryStream(kvp.Value.Binary);
-                assemblyLoadContext.LoadFromStream(ms);
-            }
-            return assemblyLoadContext;
-        }
-
-        public IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
-                    ILogger<ExpressionBuilder>? builderLogger = null,
-                    ILogger<CSharpSourceCodeWriter>? codeWriterLogger = null,
-                    LogLevel logLevel = LogLevel.Information)
-        {
-            var logFactory = LoggerFactory
-                .Create(logging =>
-                {
-                    logging.AddFilter(level => level >= logLevel);
-                    logging.AddConsole(console =>
-                    {
-                        console.LogToStandardErrorThreshold = LogLevel.Error;
-                    });
-                });
-            builderLogger ??= logFactory.CreateLogger<ExpressionBuilder>();
-            codeWriterLogger ??= logFactory.CreateLogger<CSharpSourceCodeWriter>();
+            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
+            var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
             var graph = Library.GetIncludedLibraries(elmPackages);
             var references = new[]
@@ -118,7 +91,7 @@ namespace Hl7.Cql.Compiler
             }
 
             var navToLibraryStream = new Dictionary<string, Stream>();
-            var assemblies = Generate(all,
+            var assemblies = generate(all,
                 TypeManager,
                 graph,
                 scw,
@@ -127,8 +100,7 @@ namespace Hl7.Cql.Compiler
             return assemblies;
         }
 
-
-        private IDictionary<string, AssemblyData> Generate(DefinitionDictionary<LambdaExpression> expressions,
+        private IDictionary<string, AssemblyData> generate(DefinitionDictionary<LambdaExpression> expressions,
            TypeManager typeManager,
            DirectedGraph dependencies,
            CSharpSourceCodeWriter writer,

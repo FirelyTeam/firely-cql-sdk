@@ -13,7 +13,7 @@ using System.Linq;
 
 namespace Hl7.Cql.Comparers
 {
-    public class TupleBaseTypeComparer : ICqlComparer<TupleBaseType?>, ICqlComparer
+    internal class TupleBaseTypeComparer : ICqlComparer<TupleBaseType?>, ICqlComparer
     {
         public TupleBaseTypeComparer(ICqlComparer memberComparer)
         {

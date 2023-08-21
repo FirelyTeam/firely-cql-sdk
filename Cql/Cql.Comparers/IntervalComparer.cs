@@ -12,7 +12,7 @@ using System;
 
 namespace Hl7.Cql.Comparers
 {
-    public class IntervalComparer<T> : CqlComparerBase<CqlInterval<T>>
+    internal class IntervalComparer<T> : CqlComparerBase<CqlInterval<T>>
     {
         public IntervalComparer(ICqlComparer pointComparer, Func<T, T> predecessor, Func<T, T> successor)
         {

@@ -16,21 +16,17 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>
-    public class CqlContext
+    public sealed class CqlContext
     {
         /// <summary>
         /// Contains all definitions required during execution.
         /// </summary>
-        public DefinitionDictionary<Delegate> Definitions { get; protected set; }
+        public DefinitionDictionary<Delegate> Definitions { get; private set; }
+
         /// <summary>
         /// Gets the implementation of <see cref="ICqlOperators"/> this execution uses.
         /// </summary>
-        public ICqlOperators Operators { get; protected set; }
-
-        /// <summary>
-        /// Gets <see cref="ICqlOperators.DataRetriever"/> through <see cref="Operators"/>.
-        /// </summary>
-        public IDataRetriever DataRetriever => Operators.DataRetriever;
+        public ICqlOperators Operators { get; private set; }
 
         /// <summary>
         /// Manages state of runtime extensions this execution uses.
@@ -40,11 +36,14 @@ namespace Hl7.Cql.Runtime
         /// between ELM and .NET expressions is done.  For implementations that need to hold state, they can use
         /// keys in this dictionary to store any kind of state they need.
         /// </remarks>
-        public ConcurrentDictionary<string, object> Extensions { get; protected set; } = new ConcurrentDictionary<string, object>();
+        internal ConcurrentDictionary<string, object> Extensions { get; set; } = new ConcurrentDictionary<string, object>();
+
+#if WE_STILL_NEED_THE_STACK
         /// <summary>
         /// Stores information about the current execution state of this CqlContext.
         /// </summary>
-        public Stack<CallStackEntry> CallStack { get; protected set; }
+        public Stack<CallStackEntry> CallStack { get; private set; }
+#endif
 
         /// <summary>
         /// Gets the values of library parameters for this execution.
@@ -55,7 +54,7 @@ namespace Hl7.Cql.Runtime
         /// To scope a parameter globally, omit the library name and version.  If two libraries define the same parameter name but use different types, runtime errors will occur.
         /// If the value provided for a given parameter name is the incorrect type, a runtime error will occur.
         /// </remarks>
-        public IDictionary<string, object> Parameters { get; protected set; } = new Dictionary<string, object>();
+        public IDictionary<string, object> Parameters { get; private set; } = new Dictionary<string, object>();
 
         /// <summary>
         /// Creates an instance.
@@ -77,16 +76,19 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Construct a new instance of a CqlContext with just the call stack initialized.
         /// </summary>
-        protected CqlContext()
+        internal CqlContext()
         {
+#if WE_STILL_NEED_THE_STACK
             CallStack = new Stack<CallStackEntry>();
+#endif
         }
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
+#if WE_STILL_NEED_THE_STACK
         /// <summary>
         /// Deepclones the CqlContext.
         /// </summary>        
-        internal virtual CqlContext Clone()
+        internal CqlContext Clone()
         {
             var clone = new CqlContext();
             PopulateClone(clone);
@@ -96,7 +98,7 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Copies the operators, extensions and parameters from a source CqlContext to a target CqlContext.
         /// </summary>
-        protected void PopulateClone<T>(T clone) where T : CqlContext
+        internal void PopulateClone(CqlContext clone)
         {
             clone.Operators = Operators;
             clone.Extensions = Extensions;
@@ -119,6 +121,7 @@ namespace Hl7.Cql.Runtime
             clone.CallStack = newStack;
             return clone;
         }
+#endif
 
         /// <summary>
         /// Defines the delimiter separating library names from parameter names.
@@ -161,6 +164,5 @@ namespace Hl7.Cql.Runtime
 
             return value;
         }
-
     }
 }

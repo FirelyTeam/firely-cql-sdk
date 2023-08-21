@@ -24,7 +24,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Implements <see cref="OperatorBinding"/> by calling methods in <see cref="CqlOperators"/>.
     /// </summary>
-    public class CqlOperatorsBinding : OperatorBinding
+    internal class CqlOperatorsBinding : OperatorBinding
     {
         internal TypeConverter? TypeConverter { get; private set; }
         internal TypeResolver TypeResolver { get; private set; }
@@ -45,18 +45,12 @@ namespace Hl7.Cql.Compiler
         public CqlOperatorsBinding(TypeResolver typeResolver, TypeConverter? typeConverter = null)
         {
             TypeConverter = typeConverter;
-            //.AddElmConversions();
             TypeResolver = typeResolver;
         }
 
         protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
 
-        protected virtual PropertyInfo DataRetrieverProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.DataRetriever))!;
-
-
-        protected virtual PropertyInfo TypeConverterProperty => typeof(ICqlOperators).GetProperty(nameof(ICqlOperators.TypeConverter))!;
         protected virtual Type OperatorsType => OperatorsProperty.PropertyType;
-        protected virtual Type DataRetrieverType => DataRetrieverProperty.PropertyType;
 
         /// <summary>
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
@@ -387,7 +381,7 @@ namespace Hl7.Cql.Compiler
                 case CqlOperator.Interval:
                     return Interval(operators, parameters[0], parameters[1], parameters[2], parameters[3]);
                 case CqlOperator.Retrieve:
-                    return Retrieve(operators, Expression.Property(runtimeContext, DataRetrieverProperty), parameters[0], parameters[1], parameters[2]);
+                    return Retrieve(operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.LateBoundProperty:
                     return LateBoundProperty(operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.PropertyOrDefault:
@@ -1059,7 +1053,6 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
         private MethodCallExpression Retrieve(MemberExpression operators,
-            MemberExpression dataRetriever,
             Expression typeExpression,
             Expression valueSetOrCodes,
             Expression codePropertyExpression)
@@ -1070,20 +1063,20 @@ namespace Hl7.Cql.Compiler
                     && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
-                    return Retrieve(operators, dataRetriever, type, valueSetOrCodes, codePropertyExpression);
+                    return Retrieve(operators, type, valueSetOrCodes, codePropertyExpression);
                 }
                 else throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));
             }
             else throw new ArgumentException("First parameter to Retrieve is expected to be a constant Type", nameof(typeExpression));
         }
 
-        protected MethodCallExpression Retrieve(MemberExpression operators, MemberExpression dataRetrieve,
+        protected MethodCallExpression Retrieve(MemberExpression operators,
             Type resourceType, Expression codes, Expression codeProperty)
         {
             MethodInfo? forType = null;
             if (codes.Type == typeof(CqlValueSet))
             {
-                var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByValueSet))!;
+                var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByValueSet))!;
                 forType = method.MakeGenericMethod(resourceType);
             }
             else if (IsOrImplementsIEnumerableOfT(codes.Type))
@@ -1091,7 +1084,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeResolver.GetListElementType(codes.Type, true)!;
                 if (elementType == typeof(CqlCode))
                 {
-                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes))!;
+                    var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByCodes))!;
                     forType = method.MakeGenericMethod(resourceType);
                 }
                 // cql-to-elm blindly calls ToList when an expression ref is used
@@ -1102,13 +1095,15 @@ namespace Hl7.Cql.Compiler
                 {
                     // call Flatten.
                     codes = Flatten(operators, codes);
-                    var method = DataRetrieverType.GetMethod(nameof(IDataRetriever.RetrieveByCodes))!;
+                    var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByCodes))!;
                     forType = method.MakeGenericMethod(resourceType);
                 }
                 else throw new ArgumentException($"Retrieve statements with an ExpressionRef in the terminology position must be list of {nameof(CqlCode)} or a list of lists of {nameof(CqlCode)}.  Instead, the list's element type is {elementType.Name}.", nameof(codes));
             }
-            else throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
-            var call = Expression.Call(dataRetrieve, forType, codes, codeProperty);
+            else
+                throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
+
+            var call = Expression.Call(operators, forType, codes, codeProperty);
             return call;
         }
 
@@ -1205,23 +1200,21 @@ namespace Hl7.Cql.Compiler
         private Expression Convert(Expression source, Type destinationType,
             Expression operators, ConversionType conversion)
         {
-            switch (conversion)
+            return conversion switch
             {
-                case ConversionType.SameType:
-                    return source;
-                case ConversionType.Assignable:
-                    return Expression.TypeAs(source, destinationType);
-                case ConversionType.Convertible:
-                    {
-                        var typeConverter = Expression.Property(operators, TypeConverterProperty);
-                        var method = typeof(TypeConverter).GetMethod(nameof(TypeConverter.Convert))!
-                                 .MakeGenericMethod(destinationType);
-                        source = Expression.TypeAs(source, typeof(object));
-                        var call = Expression.Call(typeConverter, method, source);
-                        return call;
-                    }
-                default:
-                    throw new ArgumentException($"Cannot convert source to {destinationType}", nameof(source));
+                ConversionType.SameType => source,
+                ConversionType.Assignable => Expression.TypeAs(source, destinationType),
+                ConversionType.Convertible => buildConvertCall(),
+                _ => throw new ArgumentException($"Cannot convert source to {destinationType}", nameof(source)),
+            };
+
+            Expression buildConvertCall()
+            {
+                var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.Convert))!
+                    .MakeGenericMethod(destinationType);
+                source = Expression.TypeAs(source, typeof(object));
+                var call = Expression.Call(operators, method, source);
+                return call;
             }
         }
 

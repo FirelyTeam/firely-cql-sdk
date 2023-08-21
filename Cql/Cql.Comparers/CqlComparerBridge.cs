@@ -11,7 +11,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Comparers
 {
-    public class CqlComparerBridge<T> : IComparer<T>, IEqualityComparer<T>
+    internal class CqlComparerBridge<T> : IComparer<T>, IEqualityComparer<T>
     {
         public CqlComparerBridge(ICqlComparer<T> cqlComparer, int coalesceCompareTo = -1, bool coalesceBoolTo = false)
         {
