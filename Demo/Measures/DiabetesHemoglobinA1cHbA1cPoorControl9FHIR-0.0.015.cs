@@ -344,36 +344,38 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var f_ = context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year");
-		var g_ = context?.Operators.Interval(((int?)18), 
-			((int?)75), 
+		int? g_ = ((int?)18);
+		int? h_ = ((int?)75);
+		var i_ = context?.Operators.Interval(g_, 
+			h_, 
 			true, 
 			false);
-		var h_ = context?.Operators.ElementInInterval<int?>(f_, 
-			g_, 
+		var j_ = context?.Operators.ElementInInterval<int?>(f_, 
+			i_, 
 			null);
-		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var j_ = this.Telehealth_Services();
-		var k_ = context?.Operators.ListUnion<Encounter>(i_, 
-			j_);
-		var l_ = context?.Operators.ExistsInList<Encounter>(k_);
-		var m_ = context?.Operators.And(h_, 
+		var k_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var l_ = this.Telehealth_Services();
+		var m_ = context?.Operators.ListUnion<Encounter>(k_, 
 			l_);
-		var n_ = this.Diabetes();
-		var o_ = context?.DataRetriever.RetrieveByValueSet<Condition>(n_, 
+		var n_ = context?.Operators.ExistsInList<Encounter>(m_);
+		var o_ = context?.Operators.And(j_, 
+			n_);
+		var p_ = this.Diabetes();
+		var q_ = context?.DataRetriever.RetrieveByValueSet<Condition>(p_, 
 			null);
-		Func<Condition,bool?> r_ = (Diabetes) => 
+		Func<Condition,bool?> t_ = (Diabetes) => 
 		{
-			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
-			var q_ = this.Measurement_Period();
-			return context?.Operators.Overlaps(p_, 
-				q_, 
+			var r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
+			var s_ = this.Measurement_Period();
+			return context?.Operators.Overlaps(r_, 
+				s_, 
 				null);
 		};
-		var s_ = context?.Operators.WhereOrNull<Condition>(o_, 
-			r_);
-		var t_ = context?.Operators.ExistsInList<Condition>(s_);
-		return context?.Operators.And(m_, 
+		var u_ = context?.Operators.WhereOrNull<Condition>(q_, 
 			t_);
+		var v_ = context?.Operators.ExistsInList<Condition>(u_);
+		return context?.Operators.And(o_, 
+			v_);
 	}
 
     [CqlDeclaration("Initial Population")]

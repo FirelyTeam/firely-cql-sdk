@@ -1250,10 +1250,10 @@ public class NCQAClaims_1_0_0
 		{
 			b_,
 		};
-		Func<Tuples.Tuple_GRhdjhBUGcJfFRBeODDiYLCdD,IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>> av_ = (ClaimResponse) => 
+		Func<Tuples.Tuple_GRhdjhBUGcJfFRBeODDiYLCdD,IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>> aw_ = (ClaimResponse) => 
 		{
 			var j_ = ClaimResponse?.PaidResponse;
-			Func<ClaimResponse,Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL> au_ = (ClmResp) => 
+			Func<ClaimResponse,Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL> av_ = (ClmResp) => 
 			{
 				var k_ = ClmResp;
 				var m_ = (ClmResp?.Request?.ReferenceElement as object);
@@ -1262,7 +1262,7 @@ public class NCQAClaims_1_0_0
 		null))?.Operators?.TypeConverter).Convert<string>(m_);
 				var l_ = NCQAFHIRBase_1_0_0.GetId(n_);
 				var p_ = (ClmResp?.Item as IEnumerable<ClaimResponse.ItemComponent>);
-				Func<ClaimResponse.ItemComponent,bool?> at_ = (ResponseItem) => 
+				Func<ClaimResponse.ItemComponent,bool?> au_ = (ResponseItem) => 
 				{
 					var q_ = ResponseItem?.Adjudication;
 					Func<ClaimResponse.AdjudicationComponent,bool?> s_ = (@this) => 
@@ -1306,22 +1306,23 @@ public class NCQAClaims_1_0_0
 					Func<ClaimResponse.AdjudicationComponent,Money> al_ = (@this) => @this?.Amount;
 					var am_ = context?.Operators.SelectOrNull<ClaimResponse.AdjudicationComponent, Money>(ak_, 
 						al_);
-					Func<Money,bool?> aq_ = (DollarAmount) => 
+					Func<Money,bool?> ar_ = (DollarAmount) => 
 					{
 						var ao_ = DollarAmount?.ValueElement;
 						var an_ = (FHIRHelpers_4_0_001.ToDecimal(ao_) as object);
-						var ap_ = (context?.Operators.ConvertIntegerToDecimal(((int?)0)) as object);
+						int? aq_ = ((int?)0);
+						var ap_ = (context?.Operators.ConvertIntegerToDecimal(aq_) as object);
 						return context?.Operators.Greater(an_, 
 							ap_);
 					};
-					var ar_ = context?.Operators.WhereOrNull<Money>(am_, 
-						aq_);
-					var as_ = context?.Operators.ExistsInList<Money>(ar_);
+					var as_ = context?.Operators.WhereOrNull<Money>(am_, 
+						ar_);
+					var at_ = context?.Operators.ExistsInList<Money>(as_);
 					return context?.Operators.And(ag_, 
-						as_);
+						at_);
 				};
 				var o_ = context?.Operators.WhereOrNull<ClaimResponse.ItemComponent>(p_, 
-					at_);
+					au_);
 				return new Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL
 				{
 					Response = k_,
@@ -1330,11 +1331,11 @@ public class NCQAClaims_1_0_0
 				};
 			};
 			return context?.Operators.SelectOrNull<ClaimResponse, Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>(j_, 
-				au_);
+				av_);
 		};
-		var aw_ = context?.Operators.SelectOrNull<Tuples.Tuple_GRhdjhBUGcJfFRBeODDiYLCdD, IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>>(a_, 
-			av_);
-		return context?.Operators.SingleOrNull<IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>>(aw_);
+		var ax_ = context?.Operators.SelectOrNull<Tuples.Tuple_GRhdjhBUGcJfFRBeODDiYLCdD, IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>>(a_, 
+			aw_);
+		return context?.Operators.SingleOrNull<IEnumerable<Tuples.Tuple_EbJRLQXEhRCeIIZLcXEYbTEDL>>(ax_);
 	}
 
     [CqlDeclaration("Get All Claims With Procedure and Diagnosis")]

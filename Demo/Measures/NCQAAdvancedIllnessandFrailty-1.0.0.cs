@@ -636,38 +636,40 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var f_ = context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year");
-		var g_ = context?.Operators.Interval(((int?)66), 
-			((int?)80), 
+		int? g_ = ((int?)66);
+		int? h_ = ((int?)80);
+		var i_ = context?.Operators.Interval(g_, 
+			h_, 
 			true, 
 			true);
-		var h_ = context?.Operators.ElementInInterval<int?>(f_, 
-			g_, 
+		var j_ = context?.Operators.ElementInInterval<int?>(f_, 
+			i_, 
 			null);
-		var i_ = this.Has_Criteria_Indicating_Frailty();
-		var j_ = context?.Operators.And(h_, 
-			i_);
-		var k_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service();
-		var l_ = this.Acute_Inpatient_Encounter_with_Advanced_Illness();
-		var m_ = context?.Operators.Or(k_, 
-			l_);
-		var n_ = this.Acute_Inpatient_Discharge_with_Advanced_Illness();
+		var k_ = this.Has_Criteria_Indicating_Frailty();
+		var l_ = context?.Operators.And(j_, 
+			k_);
+		var m_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var n_ = this.Acute_Inpatient_Encounter_with_Advanced_Illness();
 		var o_ = context?.Operators.Or(m_, 
 			n_);
-		var p_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
+		var p_ = this.Acute_Inpatient_Discharge_with_Advanced_Illness();
 		var q_ = context?.Operators.Or(o_, 
 			p_);
-		var r_ = context?.Operators.And(j_, 
-			q_);
-		var s_ = (context?.Operators.CalculateAgeAt(b_, 
+		var r_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
+		var s_ = context?.Operators.Or(q_, 
+			r_);
+		var t_ = context?.Operators.And(l_, 
+			s_);
+		var u_ = (context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year") as object);
-		var y_ = (((int?)81) as object);
-		var z_ = context?.Operators.GreaterOrEqual(s_, 
-			y_);
-		var ab_ = context?.Operators.And(z_, 
-			i_);
-		return context?.Operators.Or(r_, 
-			ab_);
+		var aa_ = (((int?)81) as object);
+		var ab_ = context?.Operators.GreaterOrEqual(u_, 
+			aa_);
+		var ad_ = context?.Operators.And(ab_, 
+			k_);
+		return context?.Operators.Or(t_, 
+			ad_);
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]

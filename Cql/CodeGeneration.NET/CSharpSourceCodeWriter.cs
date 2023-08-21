@@ -387,7 +387,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             var visitedBody = Transform(overload.Item2.Body,
                 invocationsTransformer,
                 new BlockTransformer(vng, parameters),
-                new RedundantCastsTransformer()
+                new RedundantCastsTransformer(),
+                new FlattenLetExpressionVisitor()
             );
 
             if (isDefinition(overload))
@@ -553,8 +554,48 @@ namespace Hl7.Cql.CodeGeneration.NET
                 ParameterExpression pe => convertParameterExpression(leadingIndentString, pe),
                 DefaultExpression de => convertDefaultExpression(leadingIndentString, de),
                 NullConditionalMemberExpression nullp => convertNullConditionalMemberExpression(indent, nullp),
+                LetExpression let => convertLetExpression(indent, let),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
             };
+        }
+
+        private static string convertLetExpression(int indent, LetExpression let)
+        {
+            var sb = new StringBuilder();
+
+            sb.AppendLine(indent, "{");
+
+            foreach (var letStatement in let.LetStatements)
+            {
+                if (letStatement.Right is LambdaExpression lambda && letStatement.Left is ParameterExpression localVariable)
+                {
+                    if (lambda.Body is BlockExpression lambdaBlock)
+                    {
+                        var lambdaParameters = string.Join(", ", lambda.Parameters.Select(p => ToCode(indent + 1, p, false)));
+                        var funcType = PrettyTypeName(lambda.Type);
+                        sb.AppendLine(indent + 1, $"{funcType} {localVariable.Name} = ({lambdaParameters}) => ");
+                        sb.Append(ToCode(indent + 1, lambdaBlock));
+                        sb.AppendLine(";");
+                    }
+                    else
+                    {
+                        var declaration = $"{PrettyTypeName(lambda.Type)} {localVariable.Name}";
+                        var value = ToCode(indent + 1, letStatement.Right, false);
+                        var assignment = $"{declaration} = {value};";
+                        sb.AppendLine(indent + 1, assignment);
+                    }
+                }
+                else
+                    sb.AppendLine(indent + 1, ToCode(indent + 1, letStatement.Right, false));
+            }
+
+            sb.Append(indent + 1, "return ");
+            sb.Append(ToCode(indent + 1, let.Expression, false));
+            sb.Append(';');
+            sb.AppendLine();
+            sb.Append(indent, "}");
+
+            return sb.ToString();
         }
 
         private static string convertNullConditionalMemberExpression(int indent, NullConditionalMemberExpression nullp)

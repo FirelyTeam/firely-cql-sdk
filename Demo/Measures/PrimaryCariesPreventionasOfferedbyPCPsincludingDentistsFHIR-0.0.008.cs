@@ -405,12 +405,14 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var f_ = context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year");
-		var g_ = context?.Operators.Interval(((int?)5), 
-			((int?)11), 
+		int? g_ = ((int?)5);
+		int? h_ = ((int?)11);
+		var i_ = context?.Operators.Interval(g_, 
+			h_, 
 			true, 
 			true);
 		return context?.Operators.ElementInInterval<int?>(f_, 
-			g_, 
+			i_, 
 			null);
 	}
 
@@ -427,12 +429,14 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var f_ = context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year");
-		var g_ = context?.Operators.Interval(((int?)12), 
-			((int?)20), 
+		int? g_ = ((int?)12);
+		int? h_ = ((int?)20);
+		var i_ = context?.Operators.Interval(g_, 
+			h_, 
 			true, 
 			false);
 		return context?.Operators.ElementInInterval<int?>(f_, 
-			g_, 
+			i_, 
 			null);
 	}
 

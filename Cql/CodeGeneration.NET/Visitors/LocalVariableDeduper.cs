@@ -24,15 +24,12 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         public override Expression? Visit(Expression? node)
         {
-            if (node == null)
-                return null;
-            switch (node.NodeType)
+            return node switch
             {
-                case ExpressionType.Block:
-                    return base.Visit(node);
-                default:
-                    return node;
-            }
+                null => null,
+                BlockExpression block => VisitBlock(block),
+                _ => node
+            };
         }
 
         protected override Expression VisitBlock(BlockExpression node)

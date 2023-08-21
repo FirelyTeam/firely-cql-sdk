@@ -557,289 +557,337 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 				("h" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			return context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
+			return context?.Operators.Multiply(a__, 
+				d__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("min" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)60));
-			return context?.Operators.Multiply(d__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)60);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			return context?.Operators.Multiply(e__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("s" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)60));
-			var f__ = context?.Operators.Multiply(d__, 
-				e__);
-			return context?.Operators.Multiply(f__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)60);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			var h__ = context?.Operators.Multiply(e__, 
+				g__);
+			return context?.Operators.Multiply(h__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("d" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)24));
-			return context?.Operators.Divide(d__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			return context?.Operators.Divide(e__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("wk" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)7));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)7);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("mo" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)30));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)30);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("a" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)365));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)365);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("hour" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			return context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
+			return context?.Operators.Multiply(a__, 
+				d__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("minute" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)60));
-			return context?.Operators.Multiply(d__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)60);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			return context?.Operators.Multiply(e__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("second" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)60));
-			var f__ = context?.Operators.Multiply(d__, 
-				e__);
-			return context?.Operators.Multiply(f__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)60);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			var h__ = context?.Operators.Multiply(e__, 
+				g__);
+			return context?.Operators.Multiply(h__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("day" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)24));
-			return context?.Operators.Divide(d__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			return context?.Operators.Divide(e__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("week" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)7));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)7);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("month" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)30));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)30);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("year" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)365));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)365);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("hours" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			return context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
+			return context?.Operators.Multiply(a__, 
+				d__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("minutes" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)60));
-			return context?.Operators.Multiply(d__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)60);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			return context?.Operators.Multiply(e__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("seconds" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)60));
-			var f__ = context?.Operators.Multiply(d__, 
-				e__);
-			return context?.Operators.Multiply(f__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)60);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			var h__ = context?.Operators.Multiply(e__, 
+				g__);
+			return context?.Operators.Multiply(h__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("days" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.ConvertIntegerToDecimal(((int?)24));
-			return context?.Operators.Divide(d__, 
-				e__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			var g__ = context?.Operators.ConvertIntegerToDecimal(f__);
+			return context?.Operators.Divide(e__, 
+				g__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("weeks" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)7));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)7);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("months" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)30));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)30);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else if ((context?.Operators.Equal((period?.unit as object), 
 				("years" as object)) ?? false))
 		{
 			var a__ = context?.Operators.ConvertIntegerToDecimal(frequency);
-			var b__ = period?.value;
-			var c__ = context?.Operators.Divide(((decimal?)24.0m), 
-				b__);
-			var d__ = context?.Operators.Multiply(a__, 
+			decimal? b__ = ((decimal?)24.0m);
+			var c__ = period?.value;
+			var d__ = context?.Operators.Divide(b__, 
 				c__);
-			var e__ = context?.Operators.Multiply(((int?)24), 
-				((int?)365));
-			var f__ = context?.Operators.ConvertIntegerToDecimal(e__);
-			return context?.Operators.Divide(d__, 
-				f__);
+			var e__ = context?.Operators.Multiply(a__, 
+				d__);
+			int? f__ = ((int?)24);
+			int? g__ = ((int?)365);
+			var h__ = context?.Operators.Multiply(f__, 
+				g__);
+			var i__ = context?.Operators.ConvertIntegerToDecimal(h__);
+			return context?.Operators.Divide(e__, 
+				i__);
 		}
         else
             return ((decimal?)context?.Operators.Message<object>((null as object), 

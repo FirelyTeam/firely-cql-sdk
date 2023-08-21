@@ -899,31 +899,33 @@ public class FHIR347_0_1_021
 		var e_ = context?.Operators.CalculateAgeAt(b_, 
 			d_, 
 			"year");
-		var f_ = context?.Operators.Interval(((int?)40), 
-			((int?)75), 
+		int? f_ = ((int?)40);
+		int? g_ = ((int?)75);
+		var h_ = context?.Operators.Interval(f_, 
+			g_, 
 			true, 
 			true);
-		var g_ = context?.Operators.ElementInInterval<int?>(e_, 
-			f_, 
+		var i_ = context?.Operators.ElementInInterval<int?>(e_, 
+			h_, 
 			null);
-		var h_ = this.Has_Diabetes_Diagnosis();
-		var i_ = context?.Operators.And(g_, 
-			h_);
-		var j_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
-		var k_ = context?.Operators.ExistsInList<object>(j_);
-		var l_ = context?.Operators.Not(k_);
-		var m_ = context?.Operators.And(i_, 
-			l_);
-		var n_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
-		var o_ = context?.Operators.ExistsInList<Observation>(n_);
-		var p_ = context?.Operators.Not(o_);
-		var q_ = context?.Operators.And(m_, 
-			p_);
-		var r_ = this.Hypercholesterolemia_Diagnosis();
-		var s_ = context?.Operators.ExistsInList<Condition>(r_);
-		var t_ = context?.Operators.Not(s_);
-		return context?.Operators.And(q_, 
-			t_);
+		var j_ = this.Has_Diabetes_Diagnosis();
+		var k_ = context?.Operators.And(i_, 
+			j_);
+		var l_ = this.ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period();
+		var m_ = context?.Operators.ExistsInList<object>(l_);
+		var n_ = context?.Operators.Not(m_);
+		var o_ = context?.Operators.And(k_, 
+			n_);
+		var p_ = this.LDL_Result_Greater_Than_or_Equal_To_190();
+		var q_ = context?.Operators.ExistsInList<Observation>(p_);
+		var r_ = context?.Operators.Not(q_);
+		var s_ = context?.Operators.And(o_, 
+			r_);
+		var t_ = this.Hypercholesterolemia_Diagnosis();
+		var u_ = context?.Operators.ExistsInList<Condition>(t_);
+		var v_ = context?.Operators.Not(u_);
+		return context?.Operators.And(s_, 
+			v_);
 	}
 
     [CqlDeclaration("Patients Age 40 to 75 Years with Diabetes without ASCVD or LDL Greater than 190 or Hypercholesterolemia")]

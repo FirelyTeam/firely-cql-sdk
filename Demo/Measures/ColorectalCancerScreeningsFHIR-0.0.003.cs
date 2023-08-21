@@ -649,20 +649,22 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		var f_ = context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year");
-		var g_ = context?.Operators.Interval(((int?)51), 
-			((int?)75), 
+		int? g_ = ((int?)51);
+		int? h_ = ((int?)75);
+		var i_ = context?.Operators.Interval(g_, 
+			h_, 
 			true, 
 			false);
-		var h_ = context?.Operators.ElementInInterval<int?>(f_, 
-			g_, 
+		var j_ = context?.Operators.ElementInInterval<int?>(f_, 
+			i_, 
 			null);
-		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var j_ = this.Telehealth_Services();
-		var k_ = context?.Operators.ListUnion<Encounter>(i_, 
-			j_);
-		var l_ = context?.Operators.ExistsInList<Encounter>(k_);
-		return context?.Operators.And(h_, 
+		var k_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var l_ = this.Telehealth_Services();
+		var m_ = context?.Operators.ListUnion<Encounter>(k_, 
 			l_);
+		var n_ = context?.Operators.ExistsInList<Encounter>(m_);
+		return context?.Operators.And(j_, 
+			n_);
 	}
 
     [CqlDeclaration("Initial Population")]

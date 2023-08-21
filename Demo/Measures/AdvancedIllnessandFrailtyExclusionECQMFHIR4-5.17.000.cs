@@ -794,38 +794,40 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var f_ = context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year");
-		var g_ = context?.Operators.Interval(((int?)65), 
-			((int?)79), 
+		int? g_ = ((int?)65);
+		int? h_ = ((int?)79);
+		var i_ = context?.Operators.Interval(g_, 
+			h_, 
 			true, 
 			true);
-		var h_ = context?.Operators.ElementInInterval<int?>(f_, 
-			g_, 
+		var j_ = context?.Operators.ElementInInterval<int?>(f_, 
+			i_, 
 			null);
-		var i_ = this.Has_Criteria_Indicating_Frailty();
-		var j_ = context?.Operators.And(h_, 
-			i_);
-		var k_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
-		var l_ = context?.Operators.ExistsInList<Encounter>(k_);
-		var m_ = this.Inpatient_Encounter_with_Advanced_Illness();
+		var k_ = this.Has_Criteria_Indicating_Frailty();
+		var l_ = context?.Operators.And(j_, 
+			k_);
+		var m_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
 		var n_ = context?.Operators.ExistsInList<Encounter>(m_);
-		var o_ = context?.Operators.Or(l_, 
-			n_);
-		var p_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		var q_ = context?.Operators.ExistsInList<MedicationRequest>(p_);
-		var r_ = context?.Operators.Or(o_, 
-			q_);
-		var s_ = context?.Operators.And(j_, 
-			r_);
-		var t_ = (context?.Operators.CalculateAgeAt(b_, 
+		var o_ = this.Inpatient_Encounter_with_Advanced_Illness();
+		var p_ = context?.Operators.ExistsInList<Encounter>(o_);
+		var q_ = context?.Operators.Or(n_, 
+			p_);
+		var r_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
+		var s_ = context?.Operators.ExistsInList<MedicationRequest>(r_);
+		var t_ = context?.Operators.Or(q_, 
+			s_);
+		var u_ = context?.Operators.And(l_, 
+			t_);
+		var v_ = (context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year") as object);
-		var z_ = (((int?)80) as object);
-		var aa_ = context?.Operators.GreaterOrEqual(t_, 
-			z_);
-		var ac_ = context?.Operators.And(aa_, 
-			i_);
-		return context?.Operators.Or(s_, 
-			ac_);
+		var ab_ = (((int?)80) as object);
+		var ac_ = context?.Operators.GreaterOrEqual(v_, 
+			ab_);
+		var ae_ = context?.Operators.And(ac_, 
+			k_);
+		return context?.Operators.Or(u_, 
+			ae_);
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]

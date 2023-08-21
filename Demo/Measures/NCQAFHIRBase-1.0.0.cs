@@ -480,7 +480,7 @@ public class NCQAFHIRBase_1_0_0
 		{
 			b_,
 		};
-		Func<Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf,Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT> al_ = (SortedDates) => 
+		Func<Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf,Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT> am_ = (SortedDates) => 
 		{
 			var k_ = SortedDates?.SortedDates;
 			int? l_ = ((int?)0);
@@ -493,7 +493,7 @@ public class NCQAFHIRBase_1_0_0
 			{
 				j_,
 			};
-			Func<Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd,Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT> aj_ = (AnchorList) => 
+			Func<Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd,Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT> ak_ = (AnchorList) => 
 			{
 				var p_ = AnchorList?.SortedList;
 				var q_ = AnchorList?.AnchorIndex;
@@ -524,8 +524,9 @@ public class NCQAFHIRBase_1_0_0
 				};
 				var r_ = context?.Operators.WhereOrNull<CqlDate>(DateList, 
 					ae_);
+				int? ah_ = ((int?)1);
 				var af_ = context?.Operators.Add(q_, 
-					((int?)1));
+					ah_);
 				var n_ = new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 				{
 					NextDate = o_,
@@ -536,7 +537,7 @@ public class NCQAFHIRBase_1_0_0
 				{
 					n_,
 				};
-				Func<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT,Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT> ah_ = (FirstList) => (((context?.Operators.ListElementAt<CqlDate>(FirstList?.NewList, 
+				Func<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT,Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT> ai_ = (FirstList) => (((context?.Operators.ListElementAt<CqlDate>(FirstList?.NewList, 
 						FirstList?.IndexofNewDate) == null))
 						? (FirstList)
 						: (context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
@@ -830,17 +831,17 @@ public class NCQAFHIRBase_1_0_0
 ))))
 ))))
 ;
-				var ai_ = context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(m_, 
-					ah_);
-				return context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(ai_);
+				var aj_ = context?.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(m_, 
+					ai_);
+				return context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(aj_);
 			};
-			var ak_ = context?.Operators.SelectOrNull<Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(i_, 
-				aj_);
-			return context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(ak_);
+			var al_ = context?.Operators.SelectOrNull<Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(i_, 
+				ak_);
+			return context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(al_);
 		};
-		var am_ = context?.Operators.SelectOrNull<Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(a_, 
-			al_);
-		return context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(am_);
+		var an_ = context?.Operators.SelectOrNull<Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(a_, 
+			am_);
+		return context?.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(an_);
 	}
 
 }

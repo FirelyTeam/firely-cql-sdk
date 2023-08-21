@@ -14,6 +14,97 @@ using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
+    internal class ExtractLetExpressionTransformer : ExpressionVisitor
+    {
+        protected override Expression VisitMethodCall(MethodCallExpression node)
+        {
+            var newArguments = new List<Expression>();
+            var newLets = new List<BinaryExpression>();
+
+            foreach (var argument in node.Arguments)
+            {
+                if (argument.NodeType == ExpressionType.Constant
+                    || argument.NodeType == ExpressionType.Parameter)
+                {
+                    newArguments.Add(argument); // Unchanged;
+                }
+                else if (argument is UnaryExpression { NodeType: ExpressionType.Convert } convert
+                    && convert.Operand.NodeType == ExpressionType.Constant)
+                {
+                    newArguments.Add(argument); // Unchanged;
+                }
+                else
+                {
+                    // transform complex argument into assignment to variable + variable as argument
+                    var newArgument = Expression.Parameter(argument.Type);
+                    var assign = Expression.Assign(newArgument, Visit(argument));
+                    newArguments.Add(newArgument);
+                    newLets.Add(assign);
+                }
+            }
+
+            var expression = node.Update(Visit(node.Object), newArguments);
+
+            return new LetExpression(newLets, expression);
+        }
+
+        protected override Expression VisitMemberInit(MemberInitExpression node)
+        {
+            var newMemberBindings = new MemberBinding[node.Bindings.Count];
+            var newLets = new List<BinaryExpression>();
+
+            for (int i = 0; i < node.Bindings.Count; i++)
+            {
+                if (node.Bindings[i] is MemberAssignment binding)
+                {
+                    var newLocal = Expression.Parameter(binding.Expression.Type);
+                    var visitedExpression = Visit(binding.Expression);
+                    var localAssignment = Expression.Assign(newLocal, visitedExpression);
+                    newLets.Add(localAssignment);
+                    newMemberBindings[i] = Expression.Bind(binding.Member, newLocal);
+                }
+                else
+                    newMemberBindings[i] = node.Bindings[i];
+            }
+
+            var expression = node.Update(node.NewExpression, newMemberBindings);
+
+            return new LetExpression(newLets, expression);
+        }
+
+
+        protected override Expression VisitNewArray(NewArrayExpression node)
+        {
+            // replaces
+            //    var x = new T[] { exprA, exprB, exprC }};
+            // with
+            //    var p = exprA;
+            //    var q = exprB;
+            //    var r = exprC;
+            //    var x = new T[] { p,q,r };
+
+            if (node.NodeType == ExpressionType.NewArrayInit)
+            {
+                var newLets = new List<BinaryExpression>();
+                var newExpressions = new List<Expression>();
+
+                foreach (var valueExpr in node.Expressions)
+                {
+                    var newLocal = Expression.Parameter(valueExpr.Type);
+                    var visitedExpression = Visit(valueExpr);
+                    var assignment = Expression.Assign(newLocal, visitedExpression);
+                    newLets.Add(assignment);
+                    newExpressions.Add(newLocal);
+                }
+
+                var expression = node.Update(newExpressions);
+                return new LetExpression(newLets, expression);
+            }
+            else
+                return node;
+        }
+    }
+
     internal class ExtractLocalVariablesTransformer : ExpressionVisitor
     {
         public ExtractLocalVariablesTransformer(VariableNameGenerator generator)
@@ -26,36 +117,26 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         public VariableNameGenerator NameGenerator { get; }
 
-        //      private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions)
-        //          .GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
-
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            //if (node.Method.IsGenericMethod && node.Method.GetGenericMethodDefinition() == PropertyOrDefaultMethod)
-            //    return node;
             if (node.Arguments.Count > 0)
             {
                 var newArguments = new Expression[node.Arguments.Count];
                 for (int i = 0; i < node.Arguments.Count; i++)
                 {
                     if (node.Arguments[i].NodeType == ExpressionType.Constant
-                        || node.Arguments[i].NodeType == ExpressionType.Parameter
-                        || node.Arguments[i] is NullConditionalMemberExpression)
+                        || node.Arguments[i].NodeType == ExpressionType.Parameter)
                     {
                         newArguments[i] = node.Arguments[i];
                     }
-                    else if (node.Arguments[i].NodeType == ExpressionType.Convert
-                        && node.Arguments[i] is UnaryExpression convert
+                    else
+                    if (node.Arguments[i] is UnaryExpression { NodeType: ExpressionType.Convert } convert
                         && convert.Operand.NodeType == ExpressionType.Constant)
                     {
                         newArguments[i] = node.Arguments[i];
                     }
                     else if (node.Arguments[i].NodeType == ExpressionType.Call)
                     {
-                        var reservedNames = Locals
-                            .Select(l => l.Left)
-                            .Cast<ParameterExpression>()
-                            .Select(pe => pe.Name);
                         var subTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
                         var argument = subTransformer.Visit(node.Arguments[i]);
                         Locals.AddRange(subTransformer.LocalAssignments);

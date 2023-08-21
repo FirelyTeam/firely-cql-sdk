@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,9 +39,21 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             node switch
             {
                 { NodeType: ExpressionType.Call or ExpressionType.NewArrayInit or ExpressionType.MemberInit } =>
-                            ToBlock(node),
+                        ToLetExpression(node),
+                //     ToBlock(node),
                 _ => node,
             };
+
+        private Expression ToLetExpression(Expression node)
+        {
+            var letTransformer = new ExtractLetExpressionTransformer();
+            var letExpression = (LetExpression)letTransformer.Visit(node);
+
+            // TODO: Dedupe
+            // TODO: Convert to lazy bools
+
+            return letExpression;
+        }
 
         private Expression ToBlock(Expression node)
         {

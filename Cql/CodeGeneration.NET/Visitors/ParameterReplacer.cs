@@ -6,11 +6,59 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
+    internal class FlattenLetExpressionVisitor : ExpressionVisitor
+    {
+        private readonly List<BinaryExpression> _assignments = new();
+        public IReadOnlyCollection<BinaryExpression> Assignments => _assignments;
+
+        //protected override Expression VisitBlock(BlockExpression node)
+        //{
+        //    var judgedVariables = node.Variables.GroupBy(_encounteredVariables.Contains);
+        //    var newVariables = judgedVariables.Single(j => j.Key == false);
+        //    var reintroducedVariables = judgedVariables.Single(j => j.Key == true);
+
+        //    _encounteredVariables.AddRange(newVariables);
+
+        //    // Beginning of scope, add replacements for this scope
+        //    var replacements = reintroducedVariables.Select(v => (v, Expression.Parameter(v.Type)));
+        //    foreach (var replacement in replacements) _replacements.Add(replacement.Item1, replacement.Item2);
+        //    _encounteredVariables.AddRange(replacements.Select(r => r.Item2));
+
+        //    var replacedChildren = node.Expressions.Select(n => base.Visit(n));
+
+        //    // End of scope, remove replacements for this scope.
+        //    foreach (var replacement in replacements) _replacements.Remove(replacement.Item1);
+
+        //    return Expression.Block(replacedChildren);
+        //}
+
+        // Todo: we could support the other assignments too (but we don't need them ourselves).
+        // private static bool isAssignment(Expression e) => e is BinaryExpression { NodeType: ExpressionType.Assign };
+
+        protected override Expression VisitExtension(Expression node)
+        {
+            if (node is LetExpression le)
+            {
+                var visitedLets = le.LetStatements.Select(ls => ls.Update(ls.Left, ls.Conversion, Visit(ls.Right)));
+                _assignments.AddRange(visitedLets);
+
+                return le.Update(visitedLets, Visit(le.Expression));
+            }
+            else
+            {
+                return VisitExtension(node);
+            }
+        }
+    }
+
+
     internal class ParameterReplacer : ExpressionVisitor
     {
         public ParameterReplacer(IDictionary<string, ParameterExpression> replacements)
@@ -26,55 +74,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 return replacement;
             else
                 return base.VisitParameter(node);
-        }
-
-        protected override Expression VisitMethodCall(MethodCallExpression node)
-        {
-            var replace = false;
-            var newMethodObject = node.Object;
-            // check object & arguments for opportunities to replace
-            if (node.Object is ParameterExpression objectParameter && objectParameter.Name != null)
-            {
-                if (Replacements.TryGetValue(objectParameter.Name, out var newObject))
-                {
-                    newMethodObject = newObject;
-                    replace = true;
-                }
-            }
-            var newArguments = new Expression[node.Arguments.Count];
-            for (int i = 0; i < newArguments.Length; i++)
-            {
-                var newArg = node.Arguments[i];
-                if (newArg is ParameterExpression argParameter && argParameter.Name != null)
-                {
-                    if (argParameter.Name == "p")
-                    {
-                    }
-                    if (Replacements.TryGetValue(argParameter.Name, out var newParameter))
-                    {
-                        // this shouldn't happen
-                        if (argParameter.Type == newParameter.Type)
-                        {
-                            newArg = newParameter;
-                            replace = true;
-                        }
-                        else
-                        {
-                            // this shouldn't happen - there is a bug in localvariablededuper
-                        }
-                    }
-                }
-                newArguments[i] = newArg;
-            }
-
-            if (replace)
-            {
-                var newCall = Expression.Call(newMethodObject, node.Method, newArguments);
-                return newCall;
-            }
-            else
-                return node;
-
         }
 
         protected override Expression VisitBlock(BlockExpression node)
@@ -97,36 +96,5 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             var newBlock = Expression.Block(node.Variables, newExpressions.ToArray());
             return newBlock;
         }
-
-        protected override Expression VisitMemberInit(MemberInitExpression node)
-        {
-            var newMemberBindings = new MemberBinding[node.Bindings.Count];
-            for (int i = 0; i < node.Bindings.Count; i++)
-            {
-                if (node.Bindings[i] is MemberAssignment binding)
-                {
-                    if (binding.Expression is ParameterExpression)
-                    {
-                        var visited = Visit(binding.Expression);
-                        newMemberBindings[i] = Expression.Bind(binding.Member, visited);
-                    }
-                    else
-                    {
-                        newMemberBindings[i] = node.Bindings[i];
-                    }
-                }
-                else
-                    newMemberBindings[i] = node.Bindings[i];
-            }
-            var newInit = Expression.MemberInit(node.NewExpression, newMemberBindings);
-            return newInit;
-        }
-
-        //protected override Expression VisitLambda<T>(Expression<T> node)
-        //{
-        //    var newBody = Visit(node.Body);
-        //    var newLambda = Expression.Lambda(newBody, node.Parameters);
-        //    return newLambda;
-        //}
     }
 }

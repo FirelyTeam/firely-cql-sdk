@@ -1258,15 +1258,16 @@ public class HybridHWRFHIR_1_3_005
 			"month");
 		var c_ = context?.Operators.ComponentFrom(Value, 
 			"day");
-		var d_ = context?.Operators.TimezoneOffsetFrom(Value);
+		int? d_ = ((int?)0);
+		var h_ = context?.Operators.TimezoneOffsetFrom(Value);
 		return context?.Operators.DateTime(a_, 
 			b_, 
 			c_, 
-			((int?)0), 
-			((int?)0), 
-			((int?)0), 
-			((int?)0), 
-			d_);
+			d_, 
+			d_, 
+			d_, 
+			d_, 
+			h_);
 	}
 
     [CqlDeclaration("LengthOfStay")]

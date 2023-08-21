@@ -358,26 +358,28 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		var f_ = context?.Operators.CalculateAgeAt(b_, 
 			e_, 
 			"year");
-		var g_ = context?.Operators.Interval(((int?)23), 
-			((int?)64), 
+		int? g_ = ((int?)23);
+		int? h_ = ((int?)64);
+		var i_ = context?.Operators.Interval(g_, 
+			h_, 
 			true, 
 			false);
-		var h_ = context?.Operators.ElementInInterval<int?>(f_, 
-			g_, 
+		var j_ = context?.Operators.ElementInInterval<int?>(f_, 
+			i_, 
 			null);
-		var j_ = (this.Patient()?.GenderElement as object);
-		var i_ = ((context.Deeper(new CallStackEntry("ToString", 
+		var l_ = (this.Patient()?.GenderElement as object);
+		var k_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(j_) as object);
-		var k_ = ("female" as object);
-		var l_ = context?.Operators.Equal(i_, 
-			k_);
-		var m_ = context?.Operators.And(h_, 
-			l_);
-		var n_ = this.Qualifying_Encounters();
-		var o_ = context?.Operators.ExistsInList<Encounter>(n_);
-		return context?.Operators.And(m_, 
-			o_);
+		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
+		var m_ = ("female" as object);
+		var n_ = context?.Operators.Equal(k_, 
+			m_);
+		var o_ = context?.Operators.And(j_, 
+			n_);
+		var p_ = this.Qualifying_Encounters();
+		var q_ = context?.Operators.ExistsInList<Encounter>(p_);
+		return context?.Operators.And(o_, 
+			q_);
 	}
 
     [CqlDeclaration("Initial Population")]

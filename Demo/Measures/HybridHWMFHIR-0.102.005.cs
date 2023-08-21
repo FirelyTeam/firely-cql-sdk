@@ -423,7 +423,7 @@ public class HybridHWMFHIR_0_102_005
 		var h_ = context?.Operators.SelectManyResultsOrNull<Encounter, Coverage, Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(b_, 
 			d_, 
 			g_);
-		Func<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV,bool?> ah_ = (tuple_czdryxljaejapsirauhdxvhpv) => 
+		Func<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV,bool?> aj_ = (tuple_czdryxljaejapsirauhdxvhpv) => 
 		{
 			var j_ = (tuple_czdryxljaejapsirauhdxvhpv?.InpatientEncounter?.StatusElement as object);
 			var i_ = ((context.Deeper(new CallStackEntry("ToString", 
@@ -456,21 +456,23 @@ public class HybridHWMFHIR_0_102_005
 			var ae_ = context?.Operators.CalculateAgeAt(z_, 
 				ad_, 
 				"year");
-			var af_ = context?.Operators.Interval(((int?)65), 
-				((int?)94), 
+			int? af_ = ((int?)65);
+			int? ag_ = ((int?)94);
+			var ah_ = context?.Operators.Interval(af_, 
+				ag_, 
 				true, 
 				true);
-			var ag_ = context?.Operators.ElementInInterval<int?>(ae_, 
-				af_, 
+			var ai_ = context?.Operators.ElementInInterval<int?>(ae_, 
+				ah_, 
 				null);
 			return context?.Operators.And(x_, 
-				ag_);
+				ai_);
 		};
-		var ai_ = context?.Operators.WhereOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(h_, 
-			ah_);
-		Func<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV,Encounter> aj_ = (tuple_czdryxljaejapsirauhdxvhpv) => tuple_czdryxljaejapsirauhdxvhpv?.InpatientEncounter;
-		return context?.Operators.SelectOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(ai_, 
+		var ak_ = context?.Operators.WhereOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV>(h_, 
 			aj_);
+		Func<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV,Encounter> al_ = (tuple_czdryxljaejapsirauhdxvhpv) => tuple_czdryxljaejapsirauhdxvhpv?.InpatientEncounter;
+		return context?.Operators.SelectOrNull<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV, Encounter>(ak_, 
+			al_);
 	}
 
     [CqlDeclaration("Inpatient Encounters")]
@@ -867,15 +869,16 @@ public class HybridHWMFHIR_0_102_005
 			"month");
 		var c_ = context?.Operators.ComponentFrom(Value, 
 			"day");
-		var d_ = context?.Operators.TimezoneOffsetFrom(Value);
+		int? d_ = ((int?)0);
+		var h_ = context?.Operators.TimezoneOffsetFrom(Value);
 		return context?.Operators.DateTime(a_, 
 			b_, 
 			c_, 
-			((int?)0), 
-			((int?)0), 
-			((int?)0), 
-			((int?)0), 
-			d_);
+			d_, 
+			d_, 
+			d_, 
+			d_, 
+			h_);
 	}
 
     [CqlDeclaration("LengthOfStay")]
