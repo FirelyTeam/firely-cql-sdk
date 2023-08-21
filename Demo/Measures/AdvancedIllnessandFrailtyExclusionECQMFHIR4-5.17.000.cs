@@ -492,41 +492,45 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var f_ = context?.Operators.SelectManyResultsOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>, Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(a_, 
 			b_, 
 			e_);
-		Func<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK,bool?> r_ = (tuple_iwagvxgpwivbawdahpgivvbk) => 
+		Func<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK,bool?> v_ = (tuple_iwagvxgpwivbawdahpgivvbk) => 
 		{
-			var g_ = context?.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod1);
-			var h_ = context?.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod2);
-			var i_ = context?.Operators.Quantity(1m, 
+			var g_ = tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod1;
+			var h_ = context?.Operators.End(g_);
+			var i_ = tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod2;
+			var j_ = context?.Operators.Start(i_);
+			var k_ = context?.Operators.Quantity(1m, 
 				"day");
-			var j_ = context?.Operators.Subtract(h_, 
-				i_);
-			var m_ = context?.Operators.Add(h_, 
-				i_);
-			var n_ = context?.Operators.Interval(j_, 
-				m_, 
+			var l_ = context?.Operators.Subtract(j_, 
+				k_);
+			var p_ = context?.Operators.Add(j_, 
+				k_);
+			var q_ = context?.Operators.Interval(l_, 
+				p_, 
 				true, 
 				true);
-			var o_ = context?.Operators.ElementInInterval<CqlDateTime>(g_, 
-				n_, 
+			var r_ = context?.Operators.ElementInInterval<CqlDateTime>(h_, 
+				q_, 
 				null);
-			bool? p_ = ((bool?)(context?.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod2) == null));
-			var q_ = context?.Operators.Not(p_);
-			return context?.Operators.And(o_, 
-				q_);
+			bool? s_ = ((bool?)(context?.Operators.Start(i_) == null));
+			var u_ = context?.Operators.Not(s_);
+			return context?.Operators.And(r_, 
+				u_);
 		};
-		var s_ = context?.Operators.WhereOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(f_, 
-			r_);
-		Func<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK,CqlInterval<CqlDateTime>> v_ = (tuple_iwagvxgpwivbawdahpgivvbk) => 
+		var w_ = context?.Operators.WhereOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(f_, 
+			v_);
+		Func<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK,CqlInterval<CqlDateTime>> ab_ = (tuple_iwagvxgpwivbawdahpgivvbk) => 
 		{
-			var t_ = context?.Operators.Start(tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod1);
-			var u_ = context?.Operators.End(tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod2);
-			return context?.Operators.Interval(t_, 
-				u_, 
+			var x_ = tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod1;
+			var y_ = context?.Operators.Start(x_);
+			var z_ = tuple_iwagvxgpwivbawdahpgivvbk?.LTCPeriod2;
+			var aa_ = context?.Operators.End(z_);
+			return context?.Operators.Interval(y_, 
+				aa_, 
 				true, 
 				true);
 		};
-		return context?.Operators.SelectOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(s_, 
-			v_);
+		return context?.Operators.SelectOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(w_, 
+			ab_);
 	}
 
     [CqlDeclaration("Long Term Care Adjacent Periods")]

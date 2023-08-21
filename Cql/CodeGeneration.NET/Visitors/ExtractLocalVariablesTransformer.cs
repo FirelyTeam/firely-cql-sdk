@@ -6,12 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Runtime;
+using Hl7.Cql.Compiler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
@@ -27,13 +26,13 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         public VariableNameGenerator NameGenerator { get; }
 
-        private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions)
-            .GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
+        //      private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions)
+        //          .GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (node.Method.IsGenericMethod && node.Method.GetGenericMethodDefinition() == PropertyOrDefaultMethod)
-                return node;
+            //if (node.Method.IsGenericMethod && node.Method.GetGenericMethodDefinition() == PropertyOrDefaultMethod)
+            //    return node;
             if (node.Arguments.Count > 0)
             {
                 var newArguments = new Expression[node.Arguments.Count];
@@ -41,7 +40,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 {
                     if (node.Arguments[i].NodeType == ExpressionType.Constant
                         || node.Arguments[i].NodeType == ExpressionType.Parameter
-                        || node.Arguments[i].NodeType == ExpressionType.MemberAccess)
+                        || node.Arguments[i] is NullConditionalMemberExpression)
                     {
                         newArguments[i] = node.Arguments[i];
                     }
@@ -153,18 +152,5 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 return newLocal;
             }
         }
-
-
-        // Not currently used
-        protected override Expression VisitConditional(ConditionalExpression node)
-        {
-            var newTest = Visit(node.Test);
-            var newIfTrue = Visit(node.IfTrue);
-            var newIfFalse = Visit(node.IfFalse);
-
-            var newConditional = Expression.Condition(newTest, newIfTrue, newIfFalse);
-            return newConditional;
-        }
-
     }
 }

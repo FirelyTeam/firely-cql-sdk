@@ -44,10 +44,7 @@ public class NCQAEncounter_1_0_0
     public bool? Encounter_Has_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		var a_ = (Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>);
-		Func<Encounter.DiagnosisComponent,FhirString> b_ = (D) => 
-		{
-			return D?.Condition?.ReferenceElement;
-		};
+		Func<Encounter.DiagnosisComponent,FhirString> b_ = (D) => D?.Condition?.ReferenceElement;
 		var c_ = context?.Operators.SelectOrNull<Encounter.DiagnosisComponent, FhirString>(a_, 
 			b_);
 		Func<FhirString,bool?> k_ = (CRef) => 

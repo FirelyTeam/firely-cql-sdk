@@ -597,17 +597,19 @@ namespace Hl7.Cql.Compiler
         private Expression PropertyOrDefault(MemberExpression operators, Expression sourceExpression, Expression lambdaExpression,
             Expression sourceTypeExpression, Expression memberTypeExpression)
         {
-            if (sourceTypeExpression is ConstantExpression sourceTypeConstant
-                && sourceTypeConstant.Type == typeof(Type)
-                && memberTypeExpression is ConstantExpression memberTypeConstant
-                && memberTypeConstant.Type == typeof(Type))
-            {
-                var method = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!
-                    .MakeGenericMethod(new[] { (Type)sourceTypeConstant.Value!, (Type)memberTypeConstant.Value! });
-                var call = Expression.Call(method, sourceExpression, lambdaExpression);
-                return call;
-            }
-            else throw new ArgumentException("Improper usage of PropertyOrDefault");
+            throw new NotImplementedException();
+
+            //if (sourceTypeExpression is ConstantExpression sourceTypeConstant
+            //    && sourceTypeConstant.Type == typeof(Type)
+            //    && memberTypeExpression is ConstantExpression memberTypeConstant
+            //    && memberTypeConstant.Type == typeof(Type))
+            //{
+            //    var method = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!
+            //        .MakeGenericMethod(new[] { (Type)sourceTypeConstant.Value!, (Type)memberTypeConstant.Value! });
+            //    var call = Expression.Call(method, sourceExpression, lambdaExpression);
+            //    return call;
+            //}
+            //else throw new ArgumentException("Improper usage of PropertyOrDefault");
         }
 
         private Expression Coalesce(MemberExpression operators, Expression operand)

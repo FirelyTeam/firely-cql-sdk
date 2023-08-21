@@ -93,42 +93,44 @@ public class VTEFHIR4_4_8_000
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
 	{
 		var a_ = (Encounter?.Location as IEnumerable<Encounter.LocationComponent>);
-		Func<Encounter.LocationComponent,bool?> l_ = (HospitalLocation) => 
+		Func<Encounter.LocationComponent,bool?> m_ = (HospitalLocation) => 
 		{
-			var b_ = (MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(HospitalLocation?.Location)?.Type as IEnumerable<CodeableConcept>);
-			Func<CodeableConcept,CqlConcept> c_ = (X) => 
+			var c_ = HospitalLocation?.Location;
+			var b_ = (MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(c_)?.Type as IEnumerable<CodeableConcept>);
+			Func<CodeableConcept,CqlConcept> d_ = (X) => 
 			{
 				return FHIRHelpers_4_0_001.ToConcept(X);
 			};
-			var d_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(b_, 
-				c_);
-			var e_ = this.Intensive_Care_Unit();
-			var f_ = context?.Operators.ConceptsInValueSet(d_, 
-				e_);
-			var g_ = Encounter?.Period;
-			var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
-			var i_ = HospitalLocation?.Period;
-			var j_ = FHIRHelpers_4_0_001.ToInterval(i_);
-			var k_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(h_, 
-				j_, 
+			var e_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(b_, 
+				d_);
+			var f_ = this.Intensive_Care_Unit();
+			var g_ = context?.Operators.ConceptsInValueSet(e_, 
+				f_);
+			var h_ = Encounter?.Period;
+			var i_ = FHIRHelpers_4_0_001.ToInterval(h_);
+			var j_ = HospitalLocation?.Period;
+			var k_ = FHIRHelpers_4_0_001.ToInterval(j_);
+			var l_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(i_, 
+				k_, 
 				null);
-			return context?.Operators.And(f_, 
-				k_);
+			return context?.Operators.And(g_, 
+				l_);
 		};
-		var m_ = context?.Operators.WhereOrNull<Encounter.LocationComponent>(a_, 
-			l_);
-		Func<Encounter.LocationComponent,object> n_ = (@this) => context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(@this?.Period));
-		var o_ = context?.Operators.ListSortBy<Encounter.LocationComponent>(m_, 
-			n_, 
+		var n_ = context?.Operators.WhereOrNull<Encounter.LocationComponent>(a_, 
+			m_);
+		Func<Encounter.LocationComponent,object> o_ = (@this) => context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(@this?.Period));
+		var p_ = context?.Operators.ListSortBy<Encounter.LocationComponent>(n_, 
+			o_, 
 			System.ComponentModel.ListSortDirection.Ascending);
-		return context?.Operators.FirstOfList<Encounter.LocationComponent>(o_);
+		return context?.Operators.FirstOfList<Encounter.LocationComponent>(p_);
 	}
 
     [CqlDeclaration("FirstICULocationPeriod")]
     public Period FirstICULocationPeriod(Encounter Encounter)
-	{
-		return this.FirstInpatientIntensiveCareUnit(Encounter)?.Period;
-	}
+    {
+        return this.FirstInpatientIntensiveCareUnit(Encounter)?.Period;
+    }
+
 
     [CqlDeclaration("StartOfFirstICU")]
     public CqlDateTime StartOfFirstICU(Encounter Encounter)

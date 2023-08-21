@@ -537,108 +537,45 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var b_ = typeof(Communication).GetProperty("ReasonCode");
 		var c_ = context?.DataRetriever.RetrieveByValueSet<Communication>(a_, 
 			b_);
-		Func<Communication,IEnumerable<Communication>> l_ = (LevelOfSeverityNotCommunicated) => 
+		Func<Communication,IEnumerable<Communication>> m_ = (LevelOfSeverityNotCommunicated) => 
 		{
 			var d_ = this.Diabetic_Retinopathy_Encounter();
-			Func<Encounter,bool?> i_ = (EncounterDiabeticRetinopathy) => 
+			Func<Encounter,bool?> j_ = (EncounterDiabeticRetinopathy) => 
 			{
 				var e_ = EncounterDiabeticRetinopathy?.Period;
 				var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
-				var g_ = (((MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(((DomainResource)LevelOfSeverityNotCommunicated), 
-						"qicore-recorded"))?.Value as object) as Period);
-				var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
+				DomainResource h_ = ((DomainResource)LevelOfSeverityNotCommunicated);
+				var g_ = ((MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(h_, 
+	"qicore-recorded")?.Value as object) as Period);
+				var i_ = FHIRHelpers_4_0_001.ToInterval(g_);
 				return context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, 
-					h_, 
-					null);
-			};
-			var j_ = context?.Operators.WhereOrNull<Encounter>(d_, 
-				i_);
-			Func<Encounter,Communication> k_ = (EncounterDiabeticRetinopathy) => LevelOfSeverityNotCommunicated;
-			return context?.Operators.SelectOrNull<Encounter, Communication>(j_, 
-				k_);
-		};
-		var m_ = context?.Operators.SelectManyOrNull<Communication, Communication>(c_, 
-			l_);
-		Func<Communication,bool?> ae_ = (LevelOfSeverityNotCommunicated) => 
-		{
-			var o_ = (LevelOfSeverityNotCommunicated?.StatusElement as object);
-			var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
-			var p_ = ("not-done" as object);
-			var q_ = context?.Operators.Equal(n_, 
-				p_);
-			var r_ = (((this.GetModifierExtension(LevelOfSeverityNotCommunicated, 
-					"qicore-notDone"))?.Value as object) as FhirBoolean);
-			var s_ = FHIRHelpers_4_0_001.ToBoolean(r_);
-			var t_ = context?.Operators.IsTrue(s_);
-			var u_ = context?.Operators.And(q_, 
-				t_);
-			var v_ = LevelOfSeverityNotCommunicated?.StatusReason;
-			var w_ = FHIRHelpers_4_0_001.ToConcept(v_);
-			var x_ = this.Medical_Reason();
-			var y_ = context?.Operators.ConceptInValueSet(w_, 
-				x_);
-			var ab_ = this.Patient_Reason();
-			var ac_ = context?.Operators.ConceptInValueSet(w_, 
-				ab_);
-			var ad_ = context?.Operators.Or(y_, 
-				ac_);
-			return context?.Operators.And(u_, 
-				ad_);
-		};
-		return context?.Operators.WhereOrNull<Communication>(m_, 
-			ae_);
-	}
-
-    [CqlDeclaration("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
-    public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy() => __Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy.Value;
-
-    private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Value()
-	{
-		var a_ = this.Macular_edema_absent__situation_();
-		var b_ = context?.Operators.ToList<CqlCode>(a_);
-		var c_ = typeof(Communication).GetProperty("ReasonCode");
-		var d_ = context?.DataRetriever.RetrieveByCodes<Communication>(b_, 
-			c_);
-		Func<Communication,IEnumerable<Communication>> m_ = (MacularEdemaAbsentNotCommunicated) => 
-		{
-			var e_ = this.Diabetic_Retinopathy_Encounter();
-			Func<Encounter,bool?> j_ = (EncounterDiabeticRetinopathy) => 
-			{
-				var f_ = EncounterDiabeticRetinopathy?.Period;
-				var g_ = FHIRHelpers_4_0_001.ToInterval(f_);
-				var h_ = (((MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(((DomainResource)MacularEdemaAbsentNotCommunicated), 
-						"qicore-recorded"))?.Value as object) as Period);
-				var i_ = FHIRHelpers_4_0_001.ToInterval(h_);
-				return context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, 
 					i_, 
 					null);
 			};
-			var k_ = context?.Operators.WhereOrNull<Encounter>(e_, 
+			var k_ = context?.Operators.WhereOrNull<Encounter>(d_, 
 				j_);
-			Func<Encounter,Communication> l_ = (EncounterDiabeticRetinopathy) => MacularEdemaAbsentNotCommunicated;
+			Func<Encounter,Communication> l_ = (EncounterDiabeticRetinopathy) => LevelOfSeverityNotCommunicated;
 			return context?.Operators.SelectOrNull<Encounter, Communication>(k_, 
 				l_);
 		};
-		var n_ = context?.Operators.SelectManyOrNull<Communication, Communication>(d_, 
+		var n_ = context?.Operators.SelectManyOrNull<Communication, Communication>(c_, 
 			m_);
-		Func<Communication,bool?> af_ = (MacularEdemaAbsentNotCommunicated) => 
+		Func<Communication,bool?> af_ = (LevelOfSeverityNotCommunicated) => 
 		{
-			var p_ = (MacularEdemaAbsentNotCommunicated?.StatusElement as object);
+			var p_ = (LevelOfSeverityNotCommunicated?.StatusElement as object);
 			var o_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
 		null))?.Operators?.TypeConverter).Convert<string>(p_) as object);
 			var q_ = ("not-done" as object);
 			var r_ = context?.Operators.Equal(o_, 
 				q_);
-			var s_ = (((this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, 
-					"qicore-notDone"))?.Value as object) as FhirBoolean);
+			var s_ = ((this.GetModifierExtension(LevelOfSeverityNotCommunicated, 
+	"qicore-notDone")?.Value as object) as FhirBoolean);
 			var t_ = FHIRHelpers_4_0_001.ToBoolean(s_);
 			var u_ = context?.Operators.IsTrue(t_);
 			var v_ = context?.Operators.And(r_, 
 				u_);
-			var w_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
+			var w_ = LevelOfSeverityNotCommunicated?.StatusReason;
 			var x_ = FHIRHelpers_4_0_001.ToConcept(w_);
 			var y_ = this.Medical_Reason();
 			var z_ = context?.Operators.ConceptInValueSet(x_, 
@@ -655,6 +592,71 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			af_);
 	}
 
+    [CqlDeclaration("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
+    public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy() => __Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy.Value;
+
+    private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema_Value()
+	{
+		var a_ = this.Macular_edema_absent__situation_();
+		var b_ = context?.Operators.ToList<CqlCode>(a_);
+		var c_ = typeof(Communication).GetProperty("ReasonCode");
+		var d_ = context?.DataRetriever.RetrieveByCodes<Communication>(b_, 
+			c_);
+		Func<Communication,IEnumerable<Communication>> n_ = (MacularEdemaAbsentNotCommunicated) => 
+		{
+			var e_ = this.Diabetic_Retinopathy_Encounter();
+			Func<Encounter,bool?> k_ = (EncounterDiabeticRetinopathy) => 
+			{
+				var f_ = EncounterDiabeticRetinopathy?.Period;
+				var g_ = FHIRHelpers_4_0_001.ToInterval(f_);
+				DomainResource i_ = ((DomainResource)MacularEdemaAbsentNotCommunicated);
+				var h_ = ((MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(i_, 
+	"qicore-recorded")?.Value as object) as Period);
+				var j_ = FHIRHelpers_4_0_001.ToInterval(h_);
+				return context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, 
+					j_, 
+					null);
+			};
+			var l_ = context?.Operators.WhereOrNull<Encounter>(e_, 
+				k_);
+			Func<Encounter,Communication> m_ = (EncounterDiabeticRetinopathy) => MacularEdemaAbsentNotCommunicated;
+			return context?.Operators.SelectOrNull<Encounter, Communication>(l_, 
+				m_);
+		};
+		var o_ = context?.Operators.SelectManyOrNull<Communication, Communication>(d_, 
+			n_);
+		Func<Communication,bool?> ag_ = (MacularEdemaAbsentNotCommunicated) => 
+		{
+			var q_ = (MacularEdemaAbsentNotCommunicated?.StatusElement as object);
+			var p_ = ((context.Deeper(new CallStackEntry("ToString", 
+		null, 
+		null))?.Operators?.TypeConverter).Convert<string>(q_) as object);
+			var r_ = ("not-done" as object);
+			var s_ = context?.Operators.Equal(p_, 
+				r_);
+			var t_ = ((this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, 
+	"qicore-notDone")?.Value as object) as FhirBoolean);
+			var u_ = FHIRHelpers_4_0_001.ToBoolean(t_);
+			var v_ = context?.Operators.IsTrue(u_);
+			var w_ = context?.Operators.And(s_, 
+				v_);
+			var x_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
+			var y_ = FHIRHelpers_4_0_001.ToConcept(x_);
+			var z_ = this.Medical_Reason();
+			var aa_ = context?.Operators.ConceptInValueSet(y_, 
+				z_);
+			var ad_ = this.Patient_Reason();
+			var ae_ = context?.Operators.ConceptInValueSet(y_, 
+				ad_);
+			var af_ = context?.Operators.Or(aa_, 
+				ae_);
+			return context?.Operators.And(w_, 
+				af_);
+		};
+		return context?.Operators.WhereOrNull<Communication>(o_, 
+			ag_);
+	}
+
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Absence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema() => __Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema.Value;
 
@@ -664,58 +666,59 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var b_ = typeof(Communication).GetProperty("ReasonCode");
 		var c_ = context?.DataRetriever.RetrieveByValueSet<Communication>(a_, 
 			b_);
-		Func<Communication,IEnumerable<Communication>> l_ = (MacularEdemaPresentNotCommunicated) => 
+		Func<Communication,IEnumerable<Communication>> m_ = (MacularEdemaPresentNotCommunicated) => 
 		{
 			var d_ = this.Diabetic_Retinopathy_Encounter();
-			Func<Encounter,bool?> i_ = (EncounterDiabeticRetinopathy) => 
+			Func<Encounter,bool?> j_ = (EncounterDiabeticRetinopathy) => 
 			{
 				var e_ = EncounterDiabeticRetinopathy?.Period;
 				var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
-				var g_ = (((MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(((DomainResource)MacularEdemaPresentNotCommunicated), 
-						"qicore-recorded"))?.Value as object) as Period);
-				var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
+				DomainResource h_ = ((DomainResource)MacularEdemaPresentNotCommunicated);
+				var g_ = ((MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(h_, 
+	"qicore-recorded")?.Value as object) as Period);
+				var i_ = FHIRHelpers_4_0_001.ToInterval(g_);
 				return context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, 
-					h_, 
+					i_, 
 					null);
 			};
-			var j_ = context?.Operators.WhereOrNull<Encounter>(d_, 
-				i_);
-			Func<Encounter,Communication> k_ = (EncounterDiabeticRetinopathy) => MacularEdemaPresentNotCommunicated;
-			return context?.Operators.SelectOrNull<Encounter, Communication>(j_, 
-				k_);
+			var k_ = context?.Operators.WhereOrNull<Encounter>(d_, 
+				j_);
+			Func<Encounter,Communication> l_ = (EncounterDiabeticRetinopathy) => MacularEdemaPresentNotCommunicated;
+			return context?.Operators.SelectOrNull<Encounter, Communication>(k_, 
+				l_);
 		};
-		var m_ = context?.Operators.SelectManyOrNull<Communication, Communication>(c_, 
-			l_);
-		Func<Communication,bool?> ae_ = (MacularEdemaPresentNotCommunicated) => 
+		var n_ = context?.Operators.SelectManyOrNull<Communication, Communication>(c_, 
+			m_);
+		Func<Communication,bool?> af_ = (MacularEdemaPresentNotCommunicated) => 
 		{
-			var o_ = (MacularEdemaPresentNotCommunicated?.StatusElement as object);
-			var n_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var p_ = (MacularEdemaPresentNotCommunicated?.StatusElement as object);
+			var o_ = ((context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
-			var p_ = ("not-done" as object);
-			var q_ = context?.Operators.Equal(n_, 
-				p_);
-			var r_ = (((this.GetModifierExtension(MacularEdemaPresentNotCommunicated, 
-					"qicore-notDone"))?.Value as object) as FhirBoolean);
-			var s_ = FHIRHelpers_4_0_001.ToBoolean(r_);
-			var t_ = context?.Operators.IsTrue(s_);
-			var u_ = context?.Operators.And(q_, 
-				t_);
-			var v_ = MacularEdemaPresentNotCommunicated?.StatusReason;
-			var w_ = FHIRHelpers_4_0_001.ToConcept(v_);
-			var x_ = this.Medical_Reason();
-			var y_ = context?.Operators.ConceptInValueSet(w_, 
-				x_);
-			var ab_ = this.Patient_Reason();
-			var ac_ = context?.Operators.ConceptInValueSet(w_, 
-				ab_);
-			var ad_ = context?.Operators.Or(y_, 
+		null))?.Operators?.TypeConverter).Convert<string>(p_) as object);
+			var q_ = ("not-done" as object);
+			var r_ = context?.Operators.Equal(o_, 
+				q_);
+			var s_ = ((this.GetModifierExtension(MacularEdemaPresentNotCommunicated, 
+	"qicore-notDone")?.Value as object) as FhirBoolean);
+			var t_ = FHIRHelpers_4_0_001.ToBoolean(s_);
+			var u_ = context?.Operators.IsTrue(t_);
+			var v_ = context?.Operators.And(r_, 
+				u_);
+			var w_ = MacularEdemaPresentNotCommunicated?.StatusReason;
+			var x_ = FHIRHelpers_4_0_001.ToConcept(w_);
+			var y_ = this.Medical_Reason();
+			var z_ = context?.Operators.ConceptInValueSet(x_, 
+				y_);
+			var ac_ = this.Patient_Reason();
+			var ad_ = context?.Operators.ConceptInValueSet(x_, 
 				ac_);
-			return context?.Operators.And(u_, 
+			var ae_ = context?.Operators.Or(z_, 
 				ad_);
+			return context?.Operators.And(v_, 
+				ae_);
 		};
-		return context?.Operators.WhereOrNull<Communication>(m_, 
-			ae_);
+		return context?.Operators.WhereOrNull<Communication>(n_, 
+			af_);
 	}
 
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Presence of Macular Edema")]

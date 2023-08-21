@@ -834,10 +834,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var u_ = context?.Operators.WhereOrNull<Coding>(r_, 
 				t_);
-			Func<Coding,FhirString> v_ = (@this) => 
-			{
-				return @this?.DisplayElement;
-			};
+			Func<Coding,FhirString> v_ = (@this) => @this?.DisplayElement;
 			var p_ = context?.Operators.SelectOrNull<Coding, FhirString>(u_, 
 				v_);
 			var x_ = (FecalOccult?.Category as IEnumerable<CodeableConcept>);
@@ -848,10 +845,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var aa_ = context?.Operators.WhereOrNull<CodeableConcept>(x_, 
 				z_);
-			Func<CodeableConcept,List<Coding>> ab_ = (@this) => 
-			{
-				return @this?.Coding;
-			};
+			Func<CodeableConcept,List<Coding>> ab_ = (@this) => @this?.Coding;
 			var ac_ = context?.Operators.SelectOrNull<CodeableConcept, List<Coding>>(aa_, 
 				ab_);
 			var ad_ = context?.Operators.FlattenList<Coding>(ac_);
@@ -862,10 +856,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var ag_ = context?.Operators.WhereOrNull<Coding>(ad_, 
 				af_);
-			Func<Coding,Code> ah_ = (@this) => 
-			{
-				return @this?.CodeElement;
-			};
+			Func<Coding,Code> ah_ = (@this) => @this?.CodeElement;
 			var ai_ = context?.Operators.SelectOrNull<Coding, Code>(ag_, 
 				ah_);
 			Func<Code,bool?> ak_ = (@this) => 
@@ -875,10 +866,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var al_ = context?.Operators.WhereOrNull<Code>(ai_, 
 				ak_);
-			Func<Code,string> am_ = (@this) => 
-			{
-				return @this?.Value;
-			};
+			Func<Code,string> am_ = (@this) => @this?.Value;
 			var w_ = context?.Operators.SelectOrNull<Code, string>(al_, 
 				am_);
 			var an_ = FecalOccult?.StatusElement;
@@ -930,10 +918,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var n_ = context?.Operators.WhereOrNull<Coding>(k_, 
 					m_);
-				Func<Coding,Code> o_ = (@this) => 
-				{
-					return @this?.CodeElement;
-				};
+				Func<Coding,Code> o_ = (@this) => @this?.CodeElement;
 				var p_ = context?.Operators.SelectOrNull<Coding, Code>(n_, 
 					o_);
 				Func<Code,bool?> r_ = (@this) => 
@@ -943,10 +928,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var s_ = context?.Operators.WhereOrNull<Code>(p_, 
 					r_);
-				Func<Code,string> t_ = (@this) => 
-				{
-					return @this?.Value;
-				};
+				Func<Code,string> t_ = (@this) => @this?.Value;
 				var u_ = context?.Operators.SelectOrNull<Code, string>(s_, 
 					t_);
 				var w_ = "laboratory";
@@ -1015,10 +997,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var n_ = context?.Operators.WhereOrNull<Coding>(k_, 
 					m_);
-				Func<Coding,Code> o_ = (@this) => 
-				{
-					return @this?.CodeElement;
-				};
+				Func<Coding,Code> o_ = (@this) => @this?.CodeElement;
 				var p_ = context?.Operators.SelectOrNull<Coding, Code>(n_, 
 					o_);
 				Func<Code,bool?> r_ = (@this) => 
@@ -1028,10 +1007,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var s_ = context?.Operators.WhereOrNull<Code>(p_, 
 					r_);
-				Func<Code,string> t_ = (@this) => 
-				{
-					return @this?.Value;
-				};
+				Func<Code,string> t_ = (@this) => @this?.Value;
 				var u_ = context?.Operators.SelectOrNull<Code, string>(s_, 
 					t_);
 				var w_ = "laboratory";
@@ -1085,10 +1061,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var g_ = context?.Operators.WhereOrNull<Coding>(d_, 
 					f_);
-				Func<Coding,Code> h_ = (@this) => 
-				{
-					return @this?.CodeElement;
-				};
+				Func<Coding,Code> h_ = (@this) => @this?.CodeElement;
 				var i_ = context?.Operators.SelectOrNull<Coding, Code>(g_, 
 					h_);
 				Func<Code,bool?> k_ = (@this) => 
@@ -1098,10 +1071,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var l_ = context?.Operators.WhereOrNull<Code>(i_, 
 					k_);
-				Func<Code,string> m_ = (@this) => 
-				{
-					return @this?.Value;
-				};
+				Func<Code,string> m_ = (@this) => @this?.Value;
 				var n_ = context?.Operators.SelectOrNull<Code, string>(l_, 
 					m_);
 				var p_ = "laboratory";
@@ -1222,10 +1192,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var y_ = context?.Operators.WhereOrNull<Coding>(v_, 
 				x_);
-			Func<Coding,FhirString> z_ = (@this) => 
-			{
-				return @this?.DisplayElement;
-			};
+			Func<Coding,FhirString> z_ = (@this) => @this?.DisplayElement;
 			var t_ = context?.Operators.SelectOrNull<Coding, FhirString>(y_, 
 				z_);
 			var ab_ = (FitDNA?.Category as IEnumerable<CodeableConcept>);
@@ -1236,10 +1203,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var ae_ = context?.Operators.WhereOrNull<CodeableConcept>(ab_, 
 				ad_);
-			Func<CodeableConcept,List<Coding>> af_ = (@this) => 
-			{
-				return @this?.Coding;
-			};
+			Func<CodeableConcept,List<Coding>> af_ = (@this) => @this?.Coding;
 			var ag_ = context?.Operators.SelectOrNull<CodeableConcept, List<Coding>>(ae_, 
 				af_);
 			var ah_ = context?.Operators.FlattenList<Coding>(ag_);
@@ -1250,10 +1214,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var ak_ = context?.Operators.WhereOrNull<Coding>(ah_, 
 				aj_);
-			Func<Coding,Code> al_ = (@this) => 
-			{
-				return @this?.CodeElement;
-			};
+			Func<Coding,Code> al_ = (@this) => @this?.CodeElement;
 			var am_ = context?.Operators.SelectOrNull<Coding, Code>(ak_, 
 				al_);
 			Func<Code,bool?> ao_ = (@this) => 
@@ -1263,10 +1224,7 @@ public class Exam130FHIR_0_0_003
 			};
 			var ap_ = context?.Operators.WhereOrNull<Code>(am_, 
 				ao_);
-			Func<Code,string> aq_ = (@this) => 
-			{
-				return @this?.Value;
-			};
+			Func<Code,string> aq_ = (@this) => @this?.Value;
 			var aa_ = context?.Operators.SelectOrNull<Code, string>(ap_, 
 				aq_);
 			var ar_ = FitDNA?.StatusElement;
@@ -1318,10 +1276,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var n_ = context?.Operators.WhereOrNull<Coding>(k_, 
 					m_);
-				Func<Coding,Code> o_ = (@this) => 
-				{
-					return @this?.CodeElement;
-				};
+				Func<Coding,Code> o_ = (@this) => @this?.CodeElement;
 				var p_ = context?.Operators.SelectOrNull<Coding, Code>(n_, 
 					o_);
 				Func<Code,bool?> r_ = (@this) => 
@@ -1331,10 +1286,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var s_ = context?.Operators.WhereOrNull<Code>(p_, 
 					r_);
-				Func<Code,string> t_ = (@this) => 
-				{
-					return @this?.Value;
-				};
+				Func<Code,string> t_ = (@this) => @this?.Value;
 				var u_ = context?.Operators.SelectOrNull<Code, string>(s_, 
 					t_);
 				var w_ = "laboratory";
@@ -1416,10 +1368,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var n_ = context?.Operators.WhereOrNull<Coding>(k_, 
 					m_);
-				Func<Coding,Code> o_ = (@this) => 
-				{
-					return @this?.CodeElement;
-				};
+				Func<Coding,Code> o_ = (@this) => @this?.CodeElement;
 				var p_ = context?.Operators.SelectOrNull<Coding, Code>(n_, 
 					o_);
 				Func<Code,bool?> r_ = (@this) => 
@@ -1429,10 +1378,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var s_ = context?.Operators.WhereOrNull<Code>(p_, 
 					r_);
-				Func<Code,string> t_ = (@this) => 
-				{
-					return @this?.Value;
-				};
+				Func<Code,string> t_ = (@this) => @this?.Value;
 				var u_ = context?.Operators.SelectOrNull<Code, string>(s_, 
 					t_);
 				var w_ = "laboratory";
@@ -1499,10 +1445,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var g_ = context?.Operators.WhereOrNull<Coding>(d_, 
 					f_);
-				Func<Coding,Code> h_ = (@this) => 
-				{
-					return @this?.CodeElement;
-				};
+				Func<Coding,Code> h_ = (@this) => @this?.CodeElement;
 				var i_ = context?.Operators.SelectOrNull<Coding, Code>(g_, 
 					h_);
 				Func<Code,bool?> k_ = (@this) => 
@@ -1512,10 +1455,7 @@ public class Exam130FHIR_0_0_003
 				};
 				var l_ = context?.Operators.WhereOrNull<Code>(i_, 
 					k_);
-				Func<Code,string> m_ = (@this) => 
-				{
-					return @this?.Value;
-				};
+				Func<Code,string> m_ = (@this) => @this?.Value;
 				var n_ = context?.Operators.SelectOrNull<Code, string>(l_, 
 					m_);
 				var p_ = "laboratory";

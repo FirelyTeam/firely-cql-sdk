@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET.Visitors;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -287,7 +288,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 foreach (var overload in kvp.Value)
                                 {
                                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
-                                    WriteMemoizedInstanceMethod(className!, writer, indentLevel, invocationsTransformer, kvp.Key, overload, tags);
+                                    WriteMemoizedInstanceMethod(writer, indentLevel, invocationsTransformer, kvp.Key, overload, tags);
                                     writer.WriteLine();
                                 }
                             }
@@ -365,15 +366,13 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
         private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
 
-        private void WriteMemoizedInstanceMethod(string className, TextWriter writer, int indentLevel,
-            InvocationsToMethodCallsTransformer invocationsTransformer,
+        private void WriteMemoizedInstanceMethod(TextWriter writer, int indentLevel, InvocationsToMethodCallsTransformer invocationsTransformer,
             string cqlName,
             (Type[], LambdaExpression) overload,
             ILookup<string, string>? tags)
         {
             var methodName = VariableNameGenerator.NormalizeIdentifier(cqlName);
             var returnType = PrettyTypeName(overload.Item2.ReturnType);
-
 
             var parameters = overload.Item2.Parameters
                 .Skip(1) // skip runtimeContext
@@ -533,8 +532,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
-
         private static string ToCode(int indent, Expression expression, bool leadingIndent = true)
         {
             var leadingIndentString = leadingIndent ? IndentString(indent) : string.Empty;
@@ -555,8 +552,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                 TypeBinaryExpression typeBinary => convertTypeBinaryExpression(indent, typeBinary),
                 ParameterExpression pe => convertParameterExpression(leadingIndentString, pe),
                 DefaultExpression de => convertDefaultExpression(leadingIndentString, de),
+                NullConditionalMemberExpression nullp => convertNullConditionalMemberExpression(indent, nullp),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
             };
+        }
+
+        private static string convertNullConditionalMemberExpression(int indent, NullConditionalMemberExpression nullp)
+        {
+            return $"{Parenthesize(
+                ToCode(indent, nullp.MemberExpression.Expression!))})?.{nullp.MemberExpression.Member.Name}";
         }
 
         private static string convertBlockExpression(int indent, BlockExpression block)
@@ -658,92 +662,40 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string convertMethodCallExpression(int indent, string leadingIndentString, MethodCallExpression call)
         {
-            if (call.Method.IsExtensionMethod())
+            var sb = new StringBuilder();
+            sb.Append(leadingIndentString);
+
+            var @object = call switch
             {
-                // Turn the call inside out, so the first parameter becomes the target object.
-                var thisArgument = call.Arguments[0];
-                if (call.Method.IsGenericMethod && call.Method.GetGenericMethodDefinition() == PropertyOrDefaultMethod)
+                { Object: not null } => $"{Parenthesize(ToCode(indent, call.Object, false))}.",
+                { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() =>
+                        $"{Parenthesize(ToCode(indent, call.Arguments[0], false))}.",
+                { Method.IsStatic: true } => $"{PrettyTypeName(call.Method.DeclaringType!)}.",
+                _ => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
+            };
+
+            sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}(");
+
+            var paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1) : call.Arguments;
+            var firstArg = true;
+            foreach (var argument in paramList)
+            {
+                var argAsCode = ToCode(indent + 1, argument, !firstArg);
+                if (firstArg)
                 {
-                    var @object = $"{Parenthesize(ToCode(indent + 1, thisArgument, false))}";
-                    if (call.Arguments[1] is LambdaExpression lambda
-                        && lambda.Body is MemberExpression memberAccess)
-                    {
-                        var memberName = escapeKeywords(memberAccess.Member.Name);
-                        var nullCoalesce = $"{@object}?.{memberName}";
-                        return $"{leadingIndentString}{nullCoalesce}";
-                    }
-                    else throw new InvalidOperationException("Expected lambda argument with a member expression body");
+                    sb.Append(argAsCode);
+                    firstArg = false;
                 }
                 else
-                {
-                    var @object = $"{Parenthesize(ToCode(indent + 1, thisArgument, false))}.";
-                    if (call.Arguments.Count > 1)
-                    {
-                        var sb = new StringBuilder();
-                        sb.Append(leadingIndentString);
-                        sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}({ToCode(indent + 1, call.Arguments[1], false)}");
-                        if (call.Arguments.Count > 2)
-                        {
-                            sb.AppendLine(", ");
-                            for (int i = 2; i < call.Arguments.Count - 1; i++)
-                            {
-                                var argument = call.Arguments[i];
-                                sb.Append(IndentString(indent + 1));
-                                sb.Append(ToCode(0, argument));
-                                sb.AppendLine(", ");
-                            }
-                            sb.Append(ToCode(indent + 1, call.Arguments[call.Arguments.Count - 1]));
-                        }
-                        sb.Append(")");
-                        return sb.ToString();
-                    }
-                    else
-                    {
-                        return $"{leadingIndentString}{@object}{PrettyMethodName(call.Method)}()";
-                    }
-                }
-            }
-            else
-            {
-                var sb = new StringBuilder();
-                sb.Append(leadingIndentString);
-                var @object = string.Empty;
-                if (call.Object != null)
-                {
-                    @object = $"{Parenthesize(ToCode(indent, call.Object, false))}.";
-                }
-                else if (call.Method.IsStatic)
-                {
-                    @object = $"{PrettyTypeName(call.Method.DeclaringType!)}.";
-                }
 
-#pragma warning disable CA1305 // Specify IFormatProvider
-
-                sb.Append($"{@object}{PrettyMethodName(call.Method)}(");
-
-                if (call.Arguments.Count > 0)
                 {
-                    var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
-                    sb.Append(firstArgument);
-                }
-
-#pragma warning restore CA1305 // Specify IFormatProvider
-                if (call.Arguments.Count > 1)
-                {
-
                     sb.AppendLine(", ");
-                    for (int i = 1; i < call.Arguments.Count - 1; i++)
-                    {
-                        var argument = call.Arguments[i];
-                        var argumentCode = ToCode(indent + 1, argument);
-                        sb.Append(argumentCode);
-                        sb.AppendLine(", ");
-                    }
-                    sb.Append(ToCode(indent + 1, call.Arguments[call.Arguments.Count - 1]));
+                    sb.Append(argAsCode);
                 }
-                sb.Append(")");
-                return sb.ToString();
             }
+
+            sb.Append(')');
+            return sb.ToString();
 
         }
 

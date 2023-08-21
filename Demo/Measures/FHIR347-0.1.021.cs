@@ -1362,10 +1362,7 @@ public class FHIR347_0_1_021
 			};
 			var u_ = context?.Operators.WhereOrNull<Dosage>(r_, 
 				t_);
-			Func<Dosage,Timing> v_ = (@this) => 
-			{
-				return @this?.Timing;
-			};
+			Func<Dosage,Timing> v_ = (@this) => @this?.Timing;
 			var w_ = context?.Operators.SelectOrNull<Dosage, Timing>(u_, 
 				v_);
 			Func<Timing,bool?> aa_ = (T) => 
