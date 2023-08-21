@@ -15,7 +15,7 @@ namespace Hl7.Cql.Comparers
     /// <summary>
     /// Compares the code and system using the specified comparers.
     /// </summary>
-    public class CqlConceptCqlComparer : ICqlComparer<CqlConcept>, ICqlComparer
+    internal class CqlConceptCqlComparer : ICqlComparer<CqlConcept>, ICqlComparer
     {
         public CqlConceptCqlComparer(ICqlComparer codeComparer)
         {

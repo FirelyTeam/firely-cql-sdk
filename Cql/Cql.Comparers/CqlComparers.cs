@@ -17,7 +17,7 @@ namespace Hl7.Cql.Comparers
     /// <summary>
     /// Implements <see cref="ICqlComparer"/> by dispatching to registerred typed comparers.
     /// </summary>
-    public sealed class CqlComparers : ICqlComparer
+    internal sealed class CqlComparers : ICqlComparer
     {
 
         internal ConcurrentDictionary<Type, ICqlComparer> Comparers { get; } = new ConcurrentDictionary<Type, ICqlComparer>();

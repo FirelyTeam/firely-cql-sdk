@@ -1,8 +1,6 @@
 ﻿using Hl7.Cql;
 using Hl7.Cql.Firely;
 using Hl7.Cql.Model;
-using Hl7.Fhir.Introspection;
-using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +12,10 @@ namespace CoreTests
     {
         [TestMethod]
         [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
-        public void Resolve_Types(TypeResolver typeResolver)
+        public void Resolve_Types(object tr)
         {
+            var typeResolver = (TypeResolver)tr;
+
             var model = Models.Fhir401;
             foreach (var classInfo in model.typeInfo.OfType<ClassInfo>())
             {
@@ -23,7 +23,7 @@ namespace CoreTests
                 var type = typeResolver.ResolveType(elmId);
                 Assert.IsNotNull(type);
             }
-            foreach(var simpleTypeInfo in model.typeInfo.OfType<SimpleTypeInfo>())
+            foreach (var simpleTypeInfo in model.typeInfo.OfType<SimpleTypeInfo>())
             {
                 var elmId = $"{{{model.url}}}{simpleTypeInfo.name}";
                 var type = typeResolver.ResolveType(elmId);
@@ -33,8 +33,9 @@ namespace CoreTests
 
         [TestMethod]
         [DynamicData(nameof(GetData), DynamicDataSourceType.Method)]
-        public void Resolve_Properties(TypeResolver typeResolver)
+        public void Resolve_Properties(object tr)
         {
+            var typeResolver = (TypeResolver)tr;
             var model = Models.Fhir401;
             foreach (var typeInfo in model.typeInfo.OfType<ClassInfo>())
             {

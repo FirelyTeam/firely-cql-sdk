@@ -15,7 +15,7 @@ namespace Hl7.Cql.Comparers
     /// Implements comparison through <see cref="Comparer{T}.Default"/>.
     /// </summary>
     /// <typeparam name="T">The type to compare.</typeparam>
-    public class DefaultCqlComparer<T> : ICqlComparer, ICqlComparer<T>
+    internal class DefaultCqlComparer<T> : ICqlComparer, ICqlComparer<T>
     {
         /// <inheritdoc />
         public int? Compare(object? x, object? y, string? precision = null)

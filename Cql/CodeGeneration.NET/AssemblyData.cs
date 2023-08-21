@@ -14,7 +14,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Stores information about a dynamically generated assembly.
     /// </summary>
-    public class AssemblyData
+    internal class AssemblyData
     {
         /// <summary>
         /// Creates an instance.

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -12,10 +12,14 @@
 	<ItemGroup>
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

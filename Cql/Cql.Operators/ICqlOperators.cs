@@ -1,9 +1,9 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Operators
@@ -14,14 +14,14 @@ namespace Hl7.Cql.Operators
     /// <seealso gref="https://cql.hl7.org/09-b-cqlreference.html"/>
     public interface ICqlOperators
     {
-        /// <summary>
-        /// Gets the type converter used for type conversions not handled by the built in conversion operators.
-        /// </summary>
-        TypeConverter TypeConverter { get; }
-        IDataRetriever DataRetriever { get; }
         ICqlComparer Comparer { get; }
 
-        ValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
+        IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
+
+        T Convert<T>(object? from);
+
+        IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class;
+        IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class;
 
         #region Operators
 

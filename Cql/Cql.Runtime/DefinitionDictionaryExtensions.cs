@@ -17,7 +17,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Adds extension methods to <see cref="DefinitionDictionary{T}"/> for specific types.
     /// </summary>
-    public static class DefinitionDictionaryExtensions
+    internal static class DefinitionDictionaryExtensions
     {
 
         /// <summary>

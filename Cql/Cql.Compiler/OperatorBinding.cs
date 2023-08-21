@@ -15,7 +15,7 @@ namespace Hl7.Cql.Compiler
     /// Binds <see cref="CqlOperator"/>s to <see cref="Expression"/>s.
     /// </summary>
     /// <seealso cref="ExpressionBuilder"/>
-    public abstract class OperatorBinding
+    internal abstract class OperatorBinding
     {
         /// <summary>
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
