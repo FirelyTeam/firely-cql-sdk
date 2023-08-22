@@ -106,133 +106,107 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
     #endregion
 
-    private CqlValueSet Annual_Wellness_Visit_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", 
+    private CqlValueSet Annual_Wellness_Visit_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", 
 			null);
-    }
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
     public CqlValueSet Annual_Wellness_Visit() => __Annual_Wellness_Visit.Value;
 
-    private CqlValueSet Diabetes_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", 
+    private CqlValueSet Diabetes_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", 
 			null);
-    }
 
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
     public CqlValueSet Diabetes() => __Diabetes.Value;
 
-    private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", 
+    private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", 
 			null);
-    }
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
     public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => __Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
-    private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", 
+    private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", 
 			null);
-    }
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
     public CqlValueSet Discharged_to_Home_for_Hospice_Care() => __Discharged_to_Home_for_Hospice_Care.Value;
 
-    private CqlValueSet Encounter_Inpatient_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", 
+    private CqlValueSet Encounter_Inpatient_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", 
 			null);
-    }
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient() => __Encounter_Inpatient.Value;
 
-    private CqlValueSet HbA1c_Laboratory_Test_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013", 
+    private CqlValueSet HbA1c_Laboratory_Test_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013", 
 			null);
-    }
 
     [CqlDeclaration("HbA1c Laboratory Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013")]
     public CqlValueSet HbA1c_Laboratory_Test() => __HbA1c_Laboratory_Test.Value;
 
-    private CqlValueSet Home_Healthcare_Services_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", 
+    private CqlValueSet Home_Healthcare_Services_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", 
 			null);
-    }
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
     public CqlValueSet Home_Healthcare_Services() => __Home_Healthcare_Services.Value;
 
-    private CqlValueSet Hospice_care_ambulatory_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", 
+    private CqlValueSet Hospice_care_ambulatory_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", 
 			null);
-    }
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
     public CqlValueSet Hospice_care_ambulatory() => __Hospice_care_ambulatory.Value;
 
-    private CqlValueSet Office_Visit_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", 
+    private CqlValueSet Office_Visit_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", 
 			null);
-    }
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit() => __Office_Visit.Value;
 
-    private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", 
+    private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", 
 			null);
-    }
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => __Preventive_Care_Services___Established_Office_Visit__18_and_Up.Value;
 
-    private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", 
+    private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", 
 			null);
-    }
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => __Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-    private CqlValueSet Telephone_Visits_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", 
+    private CqlValueSet Telephone_Visits_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", 
 			null);
-    }
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits() => __Telephone_Visits.Value;
 
-    private CqlCode Birth_date_Value()
-    {
-        return new CqlCode("21112-8", 
+    private CqlCode Birth_date_Value() =>
+		new CqlCode("21112-8", 
 			"http://loinc.org", 
 			null, 
 			null);
-    }
 
     [CqlDeclaration("Birth date")]
     public CqlCode Birth_date() => __Birth_date.Value;
@@ -243,6 +217,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			"http://loinc.org", 
 			null, 
 			null);
+
 		return new CqlCode[]
 		{
 			a_,
@@ -252,54 +227,42 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC() => __LOINC.Value;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Value()
-    {
-        return ((CqlInterval<CqlDateTime>)context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015", 
-			"Measurement Period", 
-			null));
-    }
+    private CqlInterval<CqlDateTime> Measurement_Period_Value() =>
+		(CqlInterval<CqlDateTime>)context.ResolveParameter("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR-0.0.015", "Measurement Period", null);
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
 
     private Patient Patient_Value()
 	{
-		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
-			null);
+		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
 
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
-    private IEnumerable<Coding> SDE_Ethnicity_Value()
-	{
-		return SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
-	}
+    private IEnumerable<Coding> SDE_Ethnicity_Value() =>
+		SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
-    private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
-	{
-		return SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
-	}
+    private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value() =>
+		SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
-    private IEnumerable<Coding> SDE_Race_Value()
-	{
-		return SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
-	}
+    private IEnumerable<Coding> SDE_Race_Value() =>
+		SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
-    private CqlCode SDE_Sex_Value()
-	{
-		return SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
-	}
+    private CqlCode SDE_Sex_Value() =>
+		SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;
@@ -307,28 +270,24 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     private IEnumerable<Encounter> Telehealth_Services_Value()
 	{
 		var a_ = this.Telephone_Visits();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
-		Func<Encounter,bool?> k_ = (TelehealthEncounter) => 
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = (Encounter TelehealthEncounter) =>
 		{
-			var d_ = (TelehealthEncounter?.StatusElement as object);
-			var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+			var a_ = (TelehealthEncounter?.StatusElement as object);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
-			var e_ = ("finished" as object);
-			var f_ = context?.Operators.Equal(c_, 
-				e_);
-			var g_ = this.Measurement_Period();
-			var h_ = (TelehealthEncounter?.Period as object);
-			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
-			var j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(g_, 
-				i_, 
-				null);
-			return context?.Operators.And(f_, 
-				j_);
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var c_ = (b_ as object);
+			var d_ = context?.Operators.Equal(c_, ("finished" as object));
+			var e_ = this.Measurement_Period();
+			var f_ = (TelehealthEncounter?.Period as object);
+			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
+			var h_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, null);
+
+			return context?.Operators.And(d_, h_);
 		};
-		return context?.Operators.WhereOrNull<Encounter>(b_, 
-			k_);
+
+		return context?.Operators.WhereOrNull<Encounter>(b_, c_);
 	}
 
     [CqlDeclaration("Telehealth Services")]
@@ -341,50 +300,34 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 		var c_ = this.Measurement_Period();
 		var d_ = context?.Operators.Start(c_);
 		var e_ = context?.Operators.DateFrom(d_);
-		var f_ = context?.Operators.CalculateAgeAt(b_, 
-			e_, 
-			"year");
-		int? g_ = ((int?)18);
-		int? h_ = ((int?)75);
-		var i_ = context?.Operators.Interval(g_, 
-			h_, 
-			true, 
-			false);
-		var j_ = context?.Operators.ElementInInterval<int?>(f_, 
-			i_, 
-			null);
-		var k_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var l_ = this.Telehealth_Services();
-		var m_ = context?.Operators.ListUnion<Encounter>(k_, 
-			l_);
-		var n_ = context?.Operators.ExistsInList<Encounter>(m_);
-		var o_ = context?.Operators.And(j_, 
-			n_);
-		var p_ = this.Diabetes();
-		var q_ = context?.DataRetriever.RetrieveByValueSet<Condition>(p_, 
-			null);
-		Func<Condition,bool?> t_ = (Diabetes) => 
+		var f_ = context?.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context?.Operators.Interval((int?)18, (int?)75, true, false);
+		var h_ = context?.Operators.ElementInInterval<int?>(f_, g_, null);
+		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var j_ = this.Telehealth_Services();
+		var k_ = context?.Operators.ListUnion<Encounter>(i_, j_);
+		var l_ = context?.Operators.ExistsInList<Encounter>(k_);
+		var m_ = context?.Operators.And(h_, l_);
+		var n_ = this.Diabetes();
+		var o_ = context?.DataRetriever.RetrieveByValueSet<Condition>(n_, null);
+		var p_ = (Condition Diabetes) =>
 		{
-			var r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
-			var s_ = this.Measurement_Period();
-			return context?.Operators.Overlaps(r_, 
-				s_, 
-				null);
+			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
+			var b_ = this.Measurement_Period();
+
+			return context?.Operators.Overlaps(a_, b_, null);
 		};
-		var u_ = context?.Operators.WhereOrNull<Condition>(q_, 
-			t_);
-		var v_ = context?.Operators.ExistsInList<Condition>(u_);
-		return context?.Operators.And(o_, 
-			v_);
+		var q_ = context?.Operators.WhereOrNull<Condition>(o_, p_);
+		var r_ = context?.Operators.ExistsInList<Condition>(q_);
+
+		return context?.Operators.And(m_, r_);
 	}
 
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
-    private bool? Denominator_Value()
-	{
-		return this.Initial_Population();
-	}
+    private bool? Denominator_Value() =>
+		this.Initial_Population();
 
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
@@ -392,41 +335,42 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     private Observation Most_Recent_HbA1c_Value()
 	{
 		var a_ = this.HbA1c_Laboratory_Test();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
-			null);
-		Func<Observation,bool?> n_ = (RecentHbA1c) => 
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, null);
+		var c_ = (Observation RecentHbA1c) =>
 		{
-			var c_ = (RecentHbA1c?.StatusElement as object);
-			var d_ = (context.Deeper(new CallStackEntry("ToString", 
+			var a_ = (RecentHbA1c?.StatusElement as object);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
-			var f_ = "final";
-			var g_ = "amended";
-			var h_ = "corrected";
-			var e_ = (new string[]
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var c_ = "final";
+			var d_ = "amended";
+			var e_ = "corrected";
+			var f_ = new string[]
 			{
-				f_,
-				g_,
-				h_,
-			} as IEnumerable<string>);
-			var i_ = context?.Operators.InList<string>(d_, 
-				e_);
-			var j_ = (RecentHbA1c?.Effective as object);
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(j_);
-			var l_ = this.Measurement_Period();
-			var m_ = context?.Operators.ElementInInterval<CqlDateTime>(k_, 
-				l_, 
-				null);
-			return context?.Operators.And(i_, 
-				m_);
+				c_,
+				d_,
+				e_,
+			};
+			var g_ = (f_ as IEnumerable<string>);
+			var h_ = context?.Operators.InList<string>(b_, g_);
+			var i_ = (RecentHbA1c?.Effective as object);
+			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(i_);
+			var k_ = this.Measurement_Period();
+			var l_ = context?.Operators.ElementInInterval<CqlDateTime>(j_, k_, null);
+
+			return context?.Operators.And(h_, l_);
 		};
-		var o_ = context?.Operators.WhereOrNull<Observation>(b_, 
-			n_);
-		Func<Observation,object> p_ = (@this) => context?.Operators.Start(MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((@this?.Effective as object)));
-		var q_ = context?.Operators.ListSortBy<Observation>(o_, 
-			p_, 
-			System.ComponentModel.ListSortDirection.Ascending);
-		return context?.Operators.LastOfList<Observation>(q_);
+		var d_ = context?.Operators.WhereOrNull<Observation>(b_, c_);
+		var e_ = (Observation @this) =>
+		{
+			var a_ = (@this?.Effective as object);
+			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(a_);
+
+			return context?.Operators.Start(b_);
+		};
+		var f_ = context?.Operators.ListSortBy<Observation>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+
+		return context?.Operators.LastOfList<Observation>(f_);
 	}
 
     [CqlDeclaration("Most Recent HbA1c")]
@@ -434,11 +378,11 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
     private bool? Has_Most_Recent_HbA1c_Without_Result_Value()
 	{
-		bool? a_ = ((bool?)(this.Most_Recent_HbA1c() == null));
+		var a_ = (bool?)(this.Most_Recent_HbA1c() == null);
 		var b_ = context?.Operators.Not(a_);
-		bool? c_ = ((bool?)((this.Most_Recent_HbA1c()?.Value as object) == null));
-		return context?.Operators.And(b_, 
-			c_);
+		var c_ = (bool?)((this.Most_Recent_HbA1c()?.Value as object) == null);
+
+		return context?.Operators.And(b_, c_);
 	}
 
     [CqlDeclaration("Has Most Recent HbA1c Without Result")]
@@ -446,12 +390,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
     private bool? Has_Most_Recent_Elevated_HbA1c_Value()
 	{
-		var b_ = ((this.Most_Recent_HbA1c()?.Value as object) as Quantity);
-		var a_ = (FHIRHelpers_4_0_001.ToQuantity(b_) as object);
-		var c_ = (context?.Operators.Quantity(9m, 
-			"%") as object);
-		return context?.Operators.Greater(a_, 
-			c_);
+		var a_ = ((this.Most_Recent_HbA1c()?.Value as object) as Quantity);
+		var b_ = FHIRHelpers_4_0_001.ToQuantity(a_);
+		var c_ = (b_ as object);
+		var d_ = (context?.Operators.Quantity(9m, "%") as object);
+
+		return context?.Operators.Greater(c_, d_);
 	}
 
     [CqlDeclaration("Has Most Recent Elevated HbA1c")]
@@ -460,38 +404,35 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     private bool? Has_No_Record_Of_HbA1c_Value()
 	{
 		var a_ = this.HbA1c_Laboratory_Test();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
-			null);
-		Func<Observation,bool?> n_ = (NoHbA1c) => 
+		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, null);
+		var c_ = (Observation NoHbA1c) =>
 		{
-			var c_ = (NoHbA1c?.StatusElement as object);
-			var d_ = (context.Deeper(new CallStackEntry("ToString", 
+			var a_ = (NoHbA1c?.StatusElement as object);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
-			var f_ = "final";
-			var g_ = "amended";
-			var h_ = "corrected";
-			var e_ = (new string[]
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var c_ = "final";
+			var d_ = "amended";
+			var e_ = "corrected";
+			var f_ = new string[]
 			{
-				f_,
-				g_,
-				h_,
-			} as IEnumerable<string>);
-			var i_ = context?.Operators.InList<string>(d_, 
-				e_);
-			var j_ = (NoHbA1c?.Effective as object);
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(j_);
-			var l_ = this.Measurement_Period();
-			var m_ = context?.Operators.ElementInInterval<CqlDateTime>(k_, 
-				l_, 
-				null);
-			return context?.Operators.And(i_, 
-				m_);
+				c_,
+				d_,
+				e_,
+			};
+			var g_ = (f_ as IEnumerable<string>);
+			var h_ = context?.Operators.InList<string>(b_, g_);
+			var i_ = (NoHbA1c?.Effective as object);
+			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(i_);
+			var k_ = this.Measurement_Period();
+			var l_ = context?.Operators.ElementInInterval<CqlDateTime>(j_, k_, null);
+
+			return context?.Operators.And(h_, l_);
 		};
-		var o_ = context?.Operators.WhereOrNull<Observation>(b_, 
-			n_);
-		var p_ = context?.Operators.ExistsInList<Observation>(o_);
-		return context?.Operators.Not(p_);
+		var d_ = context?.Operators.WhereOrNull<Observation>(b_, c_);
+		var e_ = context?.Operators.ExistsInList<Observation>(d_);
+
+		return context?.Operators.Not(e_);
 	}
 
     [CqlDeclaration("Has No Record Of HbA1c")]
@@ -501,11 +442,10 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		var a_ = this.Has_Most_Recent_HbA1c_Without_Result();
 		var b_ = this.Has_Most_Recent_Elevated_HbA1c();
-		var c_ = context?.Operators.Or(a_, 
-			b_);
+		var c_ = context?.Operators.Or(a_, b_);
 		var d_ = this.Has_No_Record_Of_HbA1c();
-		return context?.Operators.Or(c_, 
-			d_);
+
+		return context?.Operators.Or(c_, d_);
 	}
 
     [CqlDeclaration("Numerator")]
@@ -515,27 +455,22 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 	{
 		var a_ = HospiceFHIR4_2_3_000.Has_Hospice();
 		var b_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
-		var c_ = context?.Operators.Or(a_, 
-			b_);
-		var e_ = (this.Patient()?.BirthDateElement?.Value as object);
-		var f_ = context?.Operators?.TypeConverter.Convert<CqlDate>(e_);
-		var g_ = this.Measurement_Period();
-		var h_ = context?.Operators.Start(g_);
-		var i_ = context?.Operators.DateFrom(h_);
-		var d_ = (context?.Operators.CalculateAgeAt(f_, 
-			i_, 
-			"year") as object);
-		var j_ = (((int?)65) as object);
-		var k_ = context?.Operators.GreaterOrEqual(d_, 
-			j_);
-		var l_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
-		var m_ = context?.Operators.And(k_, 
-			l_);
-		var n_ = context?.Operators.Or(c_, 
-			m_);
-		var o_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
-		return context?.Operators.Or(n_, 
-			o_);
+		var c_ = context?.Operators.Or(a_, b_);
+		var d_ = (this.Patient()?.BirthDateElement?.Value as object);
+		var e_ = context?.Operators?.TypeConverter.Convert<CqlDate>(d_);
+		var f_ = this.Measurement_Period();
+		var g_ = context?.Operators.Start(f_);
+		var h_ = context?.Operators.DateFrom(g_);
+		var i_ = context?.Operators.CalculateAgeAt(e_, h_, "year");
+		var j_ = (i_ as object);
+		var k_ = ((int?)65 as object);
+		var l_ = context?.Operators.GreaterOrEqual(j_, k_);
+		var m_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
+		var n_ = context?.Operators.And(l_, m_);
+		var o_ = context?.Operators.Or(c_, n_);
+		var p_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+
+		return context?.Operators.Or(o_, p_);
 	}
 
     [CqlDeclaration("Denominator Exclusions")]

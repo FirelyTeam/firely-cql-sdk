@@ -36,8 +36,8 @@ public class FHIRHelpers_4_0_001
 
     private Patient Patient_Value()
 	{
-		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
-			null);
+		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
 
@@ -51,14 +51,12 @@ public class FHIRHelpers_4_0_001
             return (null as CqlInterval<CqlDateTime>);
         else
 		{
-			var a__ = period?.StartElement?.Value;
-			var b__ = context?.Operators.ConvertStringToDateTime(a__);
-			var c__ = period?.EndElement?.Value;
-			var d__ = context?.Operators.ConvertStringToDateTime(c__);
-			return context?.Operators.Interval(b__, 
-				d__, 
-				true, 
-				true);
+			var a_ = period?.StartElement?.Value;
+			var b_ = context?.Operators.ConvertStringToDateTime(a_);
+			var c_ = period?.EndElement?.Value;
+			var d_ = context?.Operators.ConvertStringToDateTime(c_);
+
+			return context?.Operators.Interval(b_, d_, true, true);
 		}
     }
 
@@ -70,14 +68,12 @@ public class FHIRHelpers_4_0_001
             return (null as CqlInterval<CqlQuantity>);
         else
 		{
-			var a__ = range?.Low;
-			var b__ = this.ToQuantity(a__);
-			var c__ = range?.High;
-			var d__ = this.ToQuantity(c__);
-			return context?.Operators.Interval(b__, 
-				d__, 
-				true, 
-				true);
+			var a_ = range?.Low;
+			var b_ = this.ToQuantity(a_);
+			var c_ = range?.High;
+			var d_ = this.ToQuantity(c_);
+
+			return context?.Operators.Interval(b_, d_, true, true);
 		}
     }
 
@@ -89,12 +85,13 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a__ = quantity?.ValueElement?.Value;
-			var b__ = quantity?.UnitElement?.Value;
+			var a_ = quantity?.ValueElement?.Value;
+			var b_ = quantity?.UnitElement?.Value;
+
 			return new CqlQuantity
 			{
-				value = a__,
-				unit = b__,
+				value = a_,
+				unit = b_,
 			};
 		}
     }
@@ -106,8 +103,15 @@ public class FHIRHelpers_4_0_001
         if ((ratio == null))
             return null;
         else
-            return new CqlRatio(this.ToQuantity(ratio?.Numerator), 
-				this.ToQuantity(ratio?.Denominator));
+		{
+			var a_ = ratio?.Numerator;
+			var b_ = this.ToQuantity(a_);
+			var c_ = ratio?.Denominator;
+			var d_ = this.ToQuantity(c_);
+
+			return new CqlRatio(b_, 
+				d_);
+		}
     }
 
 
@@ -130,1585 +134,1160 @@ public class FHIRHelpers_4_0_001
         if ((concept == null))
             return null;
         else
-            return new CqlConcept(context?.Operators.SelectOrNull<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), 
-	(C) => this.ToCode(C)), 
+		{
+			var a_ = (concept?.Coding as IEnumerable<Coding>);
+			var b_ = (Coding C) => this.ToCode(C);
+			var c_ = context?.Operators.SelectOrNull<Coding, CqlCode>(a_, b_);
+
+			return new CqlConcept(c_, 
 				concept?.TextElement?.Value);
+		}
     }
 
 
     [CqlDeclaration("ToString")]
-    public Account.AccountStatus? ToString(Code<Account.AccountStatus> value)
-    {
-        return value?.Value;
-    }
+    public Account.AccountStatus? ToString(Code<Account.AccountStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionCardinalityBehavior? ToString(Code<ActionCardinalityBehavior> value)
-    {
-        return value?.Value;
-    }
+    public ActionCardinalityBehavior? ToString(Code<ActionCardinalityBehavior> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionConditionKind? ToString(Code<ActionConditionKind> value)
-    {
-        return value?.Value;
-    }
+    public ActionConditionKind? ToString(Code<ActionConditionKind> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionGroupingBehavior? ToString(Code<ActionGroupingBehavior> value)
-    {
-        return value?.Value;
-    }
+    public ActionGroupingBehavior? ToString(Code<ActionGroupingBehavior> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionParticipantType? ToString(Code<ActionParticipantType> value)
-    {
-        return value?.Value;
-    }
+    public ActionParticipantType? ToString(Code<ActionParticipantType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionPrecheckBehavior? ToString(Code<ActionPrecheckBehavior> value)
-    {
-        return value?.Value;
-    }
+    public ActionPrecheckBehavior? ToString(Code<ActionPrecheckBehavior> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionRelationshipType? ToString(Code<ActionRelationshipType> value)
-    {
-        return value?.Value;
-    }
+    public ActionRelationshipType? ToString(Code<ActionRelationshipType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionRequiredBehavior? ToString(Code<ActionRequiredBehavior> value)
-    {
-        return value?.Value;
-    }
+    public ActionRequiredBehavior? ToString(Code<ActionRequiredBehavior> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActionSelectionBehavior? ToString(Code<ActionSelectionBehavior> value)
-    {
-        return value?.Value;
-    }
+    public ActionSelectionBehavior? ToString(Code<ActionSelectionBehavior> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ActivityDefinition.RequestResourceType? ToString(Code<ActivityDefinition.RequestResourceType> value)
-    {
-        return value?.Value;
-    }
+    public ActivityDefinition.RequestResourceType? ToString(Code<ActivityDefinition.RequestResourceType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Address.AddressType? ToString(Code<Address.AddressType> value)
-    {
-        return value?.Value;
-    }
+    public Address.AddressType? ToString(Code<Address.AddressType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Address.AddressUse? ToString(Code<Address.AddressUse> value)
-    {
-        return value?.Value;
-    }
+    public Address.AddressUse? ToString(Code<Address.AddressUse> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AdministrativeGender? ToString(Code<AdministrativeGender> value)
-    {
-        return value?.Value;
-    }
+    public AdministrativeGender? ToString(Code<AdministrativeGender> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AdverseEvent.AdverseEventActuality? ToString(Code<AdverseEvent.AdverseEventActuality> value)
-    {
-        return value?.Value;
-    }
+    public AdverseEvent.AdverseEventActuality? ToString(Code<AdverseEvent.AdverseEventActuality> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ElementDefinition.AggregationMode? ToString(Code<ElementDefinition.AggregationMode> value)
-    {
-        return value?.Value;
-    }
+    public ElementDefinition.AggregationMode? ToString(Code<ElementDefinition.AggregationMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AllergyIntolerance.AllergyIntoleranceCategory? ToString(Code<AllergyIntolerance.AllergyIntoleranceCategory> value)
-    {
-        return value?.Value;
-    }
+    public AllergyIntolerance.AllergyIntoleranceCategory? ToString(Code<AllergyIntolerance.AllergyIntoleranceCategory> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AllergyIntolerance.AllergyIntoleranceCriticality? ToString(Code<AllergyIntolerance.AllergyIntoleranceCriticality> value)
-    {
-        return value?.Value;
-    }
+    public AllergyIntolerance.AllergyIntoleranceCriticality? ToString(Code<AllergyIntolerance.AllergyIntoleranceCriticality> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AllergyIntolerance.AllergyIntoleranceSeverity? ToString(Code<AllergyIntolerance.AllergyIntoleranceSeverity> value)
-    {
-        return value?.Value;
-    }
+    public AllergyIntolerance.AllergyIntoleranceSeverity? ToString(Code<AllergyIntolerance.AllergyIntoleranceSeverity> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AllergyIntolerance.AllergyIntoleranceType? ToString(Code<AllergyIntolerance.AllergyIntoleranceType> value)
-    {
-        return value?.Value;
-    }
+    public AllergyIntolerance.AllergyIntoleranceType? ToString(Code<AllergyIntolerance.AllergyIntoleranceType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Appointment.AppointmentStatus? ToString(Code<Appointment.AppointmentStatus> value)
-    {
-        return value?.Value;
-    }
+    public Appointment.AppointmentStatus? ToString(Code<Appointment.AppointmentStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestScript.AssertionDirectionType? ToString(Code<TestScript.AssertionDirectionType> value)
-    {
-        return value?.Value;
-    }
+    public TestScript.AssertionDirectionType? ToString(Code<TestScript.AssertionDirectionType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestScript.AssertionOperatorType? ToString(Code<TestScript.AssertionOperatorType> value)
-    {
-        return value?.Value;
-    }
+    public TestScript.AssertionOperatorType? ToString(Code<TestScript.AssertionOperatorType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestScript.AssertionResponseTypes? ToString(Code<TestScript.AssertionResponseTypes> value)
-    {
-        return value?.Value;
-    }
+    public TestScript.AssertionResponseTypes? ToString(Code<TestScript.AssertionResponseTypes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AuditEvent.AuditEventAction? ToString(Code<AuditEvent.AuditEventAction> value)
-    {
-        return value?.Value;
-    }
+    public AuditEvent.AuditEventAction? ToString(Code<AuditEvent.AuditEventAction> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AuditEvent.AuditEventAgentNetworkType? ToString(Code<AuditEvent.AuditEventAgentNetworkType> value)
-    {
-        return value?.Value;
-    }
+    public AuditEvent.AuditEventAgentNetworkType? ToString(Code<AuditEvent.AuditEventAgentNetworkType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public AuditEvent.AuditEventOutcome? ToString(Code<AuditEvent.AuditEventOutcome> value)
-    {
-        return value?.Value;
-    }
+    public AuditEvent.AuditEventOutcome? ToString(Code<AuditEvent.AuditEventOutcome> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public BindingStrength? ToString(Code<BindingStrength> value)
-    {
-        return value?.Value;
-    }
+    public BindingStrength? ToString(Code<BindingStrength> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> value)
-    {
-        return value?.Value;
-    }
+    public BiologicallyDerivedProduct.BiologicallyDerivedProductCategory? ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> value)
-    {
-        return value?.Value;
-    }
+    public BiologicallyDerivedProduct.BiologicallyDerivedProductStatus? ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> value)
-    {
-        return value?.Value;
-    }
+    public BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale? ToString(Code<BiologicallyDerivedProduct.BiologicallyDerivedProductStorageScale> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Bundle.BundleType? ToString(Code<Bundle.BundleType> value)
-    {
-        return value?.Value;
-    }
+    public Bundle.BundleType? ToString(Code<Bundle.BundleType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatementKind? ToString(Code<CapabilityStatementKind> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatementKind? ToString(Code<CapabilityStatementKind> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CarePlan.CarePlanActivityKind? ToString(Code<CarePlan.CarePlanActivityKind> value)
-    {
-        return value?.Value;
-    }
+    public CarePlan.CarePlanActivityKind? ToString(Code<CarePlan.CarePlanActivityKind> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CarePlan.CarePlanActivityStatus? ToString(Code<CarePlan.CarePlanActivityStatus> value)
-    {
-        return value?.Value;
-    }
+    public CarePlan.CarePlanActivityStatus? ToString(Code<CarePlan.CarePlanActivityStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CarePlan.CarePlanIntent? ToString(Code<CarePlan.CarePlanIntent> value)
-    {
-        return value?.Value;
-    }
+    public CarePlan.CarePlanIntent? ToString(Code<CarePlan.CarePlanIntent> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public RequestStatus? ToString(Code<RequestStatus> value)
-    {
-        return value?.Value;
-    }
+    public RequestStatus? ToString(Code<RequestStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CareTeam.CareTeamStatus? ToString(Code<CareTeam.CareTeamStatus> value)
-    {
-        return value?.Value;
-    }
+    public CareTeam.CareTeamStatus? ToString(Code<CareTeam.CareTeamStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CatalogEntry.CatalogEntryRelationType? ToString(Code<CatalogEntry.CatalogEntryRelationType> value)
-    {
-        return value?.Value;
-    }
+    public CatalogEntry.CatalogEntryRelationType? ToString(Code<CatalogEntry.CatalogEntryRelationType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public InvoicePriceComponentType? ToString(Code<InvoicePriceComponentType> value)
-    {
-        return value?.Value;
-    }
+    public InvoicePriceComponentType? ToString(Code<InvoicePriceComponentType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ChargeItem.ChargeItemStatus? ToString(Code<ChargeItem.ChargeItemStatus> value)
-    {
-        return value?.Value;
-    }
+    public ChargeItem.ChargeItemStatus? ToString(Code<ChargeItem.ChargeItemStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public FinancialResourceStatusCodes? ToString(Code<FinancialResourceStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public FinancialResourceStatusCodes? ToString(Code<FinancialResourceStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ClinicalImpression.ClinicalImpressionStatus? ToString(Code<ClinicalImpression.ClinicalImpressionStatus> value)
-    {
-        return value?.Value;
-    }
+    public ClinicalImpression.ClinicalImpressionStatus? ToString(Code<ClinicalImpression.ClinicalImpressionStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TerminologyCapabilities.CodeSearchSupport? ToString(Code<TerminologyCapabilities.CodeSearchSupport> value)
-    {
-        return value?.Value;
-    }
+    public TerminologyCapabilities.CodeSearchSupport? ToString(Code<TerminologyCapabilities.CodeSearchSupport> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CodeSystemContentMode? ToString(Code<CodeSystemContentMode> value)
-    {
-        return value?.Value;
-    }
+    public CodeSystemContentMode? ToString(Code<CodeSystemContentMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CodeSystem.CodeSystemHierarchyMeaning? ToString(Code<CodeSystem.CodeSystemHierarchyMeaning> value)
-    {
-        return value?.Value;
-    }
+    public CodeSystem.CodeSystemHierarchyMeaning? ToString(Code<CodeSystem.CodeSystemHierarchyMeaning> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public RequestPriority? ToString(Code<RequestPriority> value)
-    {
-        return value?.Value;
-    }
+    public RequestPriority? ToString(Code<RequestPriority> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public EventStatus? ToString(Code<EventStatus> value)
-    {
-        return value?.Value;
-    }
+    public EventStatus? ToString(Code<EventStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CompartmentType? ToString(Code<CompartmentType> value)
-    {
-        return value?.Value;
-    }
+    public CompartmentType? ToString(Code<CompartmentType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Composition.CompositionAttestationMode? ToString(Code<Composition.CompositionAttestationMode> value)
-    {
-        return value?.Value;
-    }
+    public Composition.CompositionAttestationMode? ToString(Code<Composition.CompositionAttestationMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CompositionStatus? ToString(Code<CompositionStatus> value)
-    {
-        return value?.Value;
-    }
+    public CompositionStatus? ToString(Code<CompositionStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ConceptMapEquivalence? ToString(Code<ConceptMapEquivalence> value)
-    {
-        return value?.Value;
-    }
+    public ConceptMapEquivalence? ToString(Code<ConceptMapEquivalence> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ConceptMap.ConceptMapGroupUnmappedMode? ToString(Code<ConceptMap.ConceptMapGroupUnmappedMode> value)
-    {
-        return value?.Value;
-    }
+    public ConceptMap.ConceptMapGroupUnmappedMode? ToString(Code<ConceptMap.ConceptMapGroupUnmappedMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.ConditionalDeleteStatus? ToString(Code<CapabilityStatement.ConditionalDeleteStatus> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.ConditionalDeleteStatus? ToString(Code<CapabilityStatement.ConditionalDeleteStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.ConditionalReadStatus? ToString(Code<CapabilityStatement.ConditionalReadStatus> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.ConditionalReadStatus? ToString(Code<CapabilityStatement.ConditionalReadStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Consent.ConsentDataMeaning? ToString(Code<Consent.ConsentDataMeaning> value)
-    {
-        return value?.Value;
-    }
+    public Consent.ConsentDataMeaning? ToString(Code<Consent.ConsentDataMeaning> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Consent.ConsentProvisionType? ToString(Code<Consent.ConsentProvisionType> value)
-    {
-        return value?.Value;
-    }
+    public Consent.ConsentProvisionType? ToString(Code<Consent.ConsentProvisionType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Consent.ConsentState? ToString(Code<Consent.ConsentState> value)
-    {
-        return value?.Value;
-    }
+    public Consent.ConsentState? ToString(Code<Consent.ConsentState> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ConstraintSeverity? ToString(Code<ConstraintSeverity> value)
-    {
-        return value?.Value;
-    }
+    public ConstraintSeverity? ToString(Code<ConstraintSeverity> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ContactPoint.ContactPointSystem? ToString(Code<ContactPoint.ContactPointSystem> value)
-    {
-        return value?.Value;
-    }
+    public ContactPoint.ContactPointSystem? ToString(Code<ContactPoint.ContactPointSystem> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ContactPoint.ContactPointUse? ToString(Code<ContactPoint.ContactPointUse> value)
-    {
-        return value?.Value;
-    }
+    public ContactPoint.ContactPointUse? ToString(Code<ContactPoint.ContactPointUse> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Contract.ContractResourcePublicationStatusCodes? ToString(Code<Contract.ContractResourcePublicationStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public Contract.ContractResourcePublicationStatusCodes? ToString(Code<Contract.ContractResourcePublicationStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Contract.ContractResourceStatusCodes? ToString(Code<Contract.ContractResourceStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public Contract.ContractResourceStatusCodes? ToString(Code<Contract.ContractResourceStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Contributor.ContributorType? ToString(Code<Contributor.ContributorType> value)
-    {
-        return value?.Value;
-    }
+    public Contributor.ContributorType? ToString(Code<Contributor.ContributorType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Money.Currencies? ToString(Code<Money.Currencies> value)
-    {
-        return value?.Value;
-    }
+    public Money.Currencies? ToString(Code<Money.Currencies> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DaysOfWeek? ToString(Code<DaysOfWeek> value)
-    {
-        return value?.Value;
-    }
+    public DaysOfWeek? ToString(Code<DaysOfWeek> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DetectedIssue.DetectedIssueSeverity? ToString(Code<DetectedIssue.DetectedIssueSeverity> value)
-    {
-        return value?.Value;
-    }
+    public DetectedIssue.DetectedIssueSeverity? ToString(Code<DetectedIssue.DetectedIssueSeverity> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ObservationStatus? ToString(Code<ObservationStatus> value)
-    {
-        return value?.Value;
-    }
+    public ObservationStatus? ToString(Code<ObservationStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DeviceMetric.DeviceMetricCalibrationState? ToString(Code<DeviceMetric.DeviceMetricCalibrationState> value)
-    {
-        return value?.Value;
-    }
+    public DeviceMetric.DeviceMetricCalibrationState? ToString(Code<DeviceMetric.DeviceMetricCalibrationState> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DeviceMetric.DeviceMetricCalibrationType? ToString(Code<DeviceMetric.DeviceMetricCalibrationType> value)
-    {
-        return value?.Value;
-    }
+    public DeviceMetric.DeviceMetricCalibrationType? ToString(Code<DeviceMetric.DeviceMetricCalibrationType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DeviceMetric.DeviceMetricCategory? ToString(Code<DeviceMetric.DeviceMetricCategory> value)
-    {
-        return value?.Value;
-    }
+    public DeviceMetric.DeviceMetricCategory? ToString(Code<DeviceMetric.DeviceMetricCategory> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DeviceMetric.DeviceMetricColor? ToString(Code<DeviceMetric.DeviceMetricColor> value)
-    {
-        return value?.Value;
-    }
+    public DeviceMetric.DeviceMetricColor? ToString(Code<DeviceMetric.DeviceMetricColor> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DeviceMetric.DeviceMetricOperationalStatus? ToString(Code<DeviceMetric.DeviceMetricOperationalStatus> value)
-    {
-        return value?.Value;
-    }
+    public DeviceMetric.DeviceMetricOperationalStatus? ToString(Code<DeviceMetric.DeviceMetricOperationalStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DeviceNameType? ToString(Code<DeviceNameType> value)
-    {
-        return value?.Value;
-    }
+    public DeviceNameType? ToString(Code<DeviceNameType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DeviceUseStatement.DeviceUseStatementStatus? ToString(Code<DeviceUseStatement.DeviceUseStatementStatus> value)
-    {
-        return value?.Value;
-    }
+    public DeviceUseStatement.DeviceUseStatementStatus? ToString(Code<DeviceUseStatement.DeviceUseStatementStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DiagnosticReport.DiagnosticReportStatus? ToString(Code<DiagnosticReport.DiagnosticReportStatus> value)
-    {
-        return value?.Value;
-    }
+    public DiagnosticReport.DiagnosticReportStatus? ToString(Code<DiagnosticReport.DiagnosticReportStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ElementDefinition.DiscriminatorType? ToString(Code<ElementDefinition.DiscriminatorType> value)
-    {
-        return value?.Value;
-    }
+    public ElementDefinition.DiscriminatorType? ToString(Code<ElementDefinition.DiscriminatorType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Composition.V3ConfidentialityClassification? ToString(Code<Composition.V3ConfidentialityClassification> value)
-    {
-        return value?.Value;
-    }
+    public Composition.V3ConfidentialityClassification? ToString(Code<Composition.V3ConfidentialityClassification> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.DocumentMode? ToString(Code<CapabilityStatement.DocumentMode> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.DocumentMode? ToString(Code<CapabilityStatement.DocumentMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DocumentReferenceStatus? ToString(Code<DocumentReferenceStatus> value)
-    {
-        return value?.Value;
-    }
+    public DocumentReferenceStatus? ToString(Code<DocumentReferenceStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DocumentRelationshipType? ToString(Code<DocumentRelationshipType> value)
-    {
-        return value?.Value;
-    }
+    public DocumentRelationshipType? ToString(Code<DocumentRelationshipType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CoverageEligibilityRequest.EligibilityRequestPurpose? ToString(Code<CoverageEligibilityRequest.EligibilityRequestPurpose> value)
-    {
-        return value?.Value;
-    }
+    public CoverageEligibilityRequest.EligibilityRequestPurpose? ToString(Code<CoverageEligibilityRequest.EligibilityRequestPurpose> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CoverageEligibilityResponse.EligibilityResponsePurpose? ToString(Code<CoverageEligibilityResponse.EligibilityResponsePurpose> value)
-    {
-        return value?.Value;
-    }
+    public CoverageEligibilityResponse.EligibilityResponsePurpose? ToString(Code<CoverageEligibilityResponse.EligibilityResponsePurpose> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Questionnaire.EnableWhenBehavior? ToString(Code<Questionnaire.EnableWhenBehavior> value)
-    {
-        return value?.Value;
-    }
+    public Questionnaire.EnableWhenBehavior? ToString(Code<Questionnaire.EnableWhenBehavior> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Encounter.EncounterLocationStatus? ToString(Code<Encounter.EncounterLocationStatus> value)
-    {
-        return value?.Value;
-    }
+    public Encounter.EncounterLocationStatus? ToString(Code<Encounter.EncounterLocationStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Encounter.EncounterStatus? ToString(Code<Encounter.EncounterStatus> value)
-    {
-        return value?.Value;
-    }
+    public Encounter.EncounterStatus? ToString(Code<Encounter.EncounterStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Endpoint.EndpointStatus? ToString(Code<Endpoint.EndpointStatus> value)
-    {
-        return value?.Value;
-    }
+    public Endpoint.EndpointStatus? ToString(Code<Endpoint.EndpointStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public EpisodeOfCare.EpisodeOfCareStatus? ToString(Code<EpisodeOfCare.EpisodeOfCareStatus> value)
-    {
-        return value?.Value;
-    }
+    public EpisodeOfCare.EpisodeOfCareStatus? ToString(Code<EpisodeOfCare.EpisodeOfCareStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.EventCapabilityMode? ToString(Code<CapabilityStatement.EventCapabilityMode> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.EventCapabilityMode? ToString(Code<CapabilityStatement.EventCapabilityMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Timing.EventTiming? ToString(Code<Timing.EventTiming> value)
-    {
-        return value?.Value;
-    }
+    public Timing.EventTiming? ToString(Code<Timing.EventTiming> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public VariableTypeCode? ToString(Code<VariableTypeCode> value)
-    {
-        return value?.Value;
-    }
+    public VariableTypeCode? ToString(Code<VariableTypeCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ExampleScenario.ExampleScenarioActorType? ToString(Code<ExampleScenario.ExampleScenarioActorType> value)
-    {
-        return value?.Value;
-    }
+    public ExampleScenario.ExampleScenarioActorType? ToString(Code<ExampleScenario.ExampleScenarioActorType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ExplanationOfBenefit.ExplanationOfBenefitStatus? ToString(Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> value)
-    {
-        return value?.Value;
-    }
+    public ExplanationOfBenefit.ExplanationOfBenefitStatus? ToString(Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public EffectEvidenceSynthesis.ExposureStateCode? ToString(Code<EffectEvidenceSynthesis.ExposureStateCode> value)
-    {
-        return value?.Value;
-    }
+    public EffectEvidenceSynthesis.ExposureStateCode? ToString(Code<EffectEvidenceSynthesis.ExposureStateCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureDefinition.ExtensionContextType? ToString(Code<StructureDefinition.ExtensionContextType> value)
-    {
-        return value?.Value;
-    }
+    public StructureDefinition.ExtensionContextType? ToString(Code<StructureDefinition.ExtensionContextType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public FHIRAllTypes? ToString(Code<FHIRAllTypes> value)
-    {
-        return value?.Value;
-    }
+    public FHIRAllTypes? ToString(Code<FHIRAllTypes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public FHIRDefinedType? ToString(Code<FHIRDefinedType> value)
-    {
-        return value?.Value;
-    }
+    public FHIRDefinedType? ToString(Code<FHIRDefinedType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Device.FHIRDeviceStatus? ToString(Code<Device.FHIRDeviceStatus> value)
-    {
-        return value?.Value;
-    }
+    public Device.FHIRDeviceStatus? ToString(Code<Device.FHIRDeviceStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ResourceType? ToString(Code<ResourceType> value)
-    {
-        return value?.Value;
-    }
+    public ResourceType? ToString(Code<ResourceType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Substance.FHIRSubstanceStatus? ToString(Code<Substance.FHIRSubstanceStatus> value)
-    {
-        return value?.Value;
-    }
+    public Substance.FHIRSubstanceStatus? ToString(Code<Substance.FHIRSubstanceStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public FHIRVersion? ToString(Code<FHIRVersion> value)
-    {
-        return value?.Value;
-    }
+    public FHIRVersion? ToString(Code<FHIRVersion> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public FamilyMemberHistory.FamilyHistoryStatus? ToString(Code<FamilyMemberHistory.FamilyHistoryStatus> value)
-    {
-        return value?.Value;
-    }
+    public FamilyMemberHistory.FamilyHistoryStatus? ToString(Code<FamilyMemberHistory.FamilyHistoryStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public FilterOperator? ToString(Code<FilterOperator> value)
-    {
-        return value?.Value;
-    }
+    public FilterOperator? ToString(Code<FilterOperator> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Flag.FlagStatus? ToString(Code<Flag.FlagStatus> value)
-    {
-        return value?.Value;
-    }
+    public Flag.FlagStatus? ToString(Code<Flag.FlagStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Goal.GoalLifecycleStatus? ToString(Code<Goal.GoalLifecycleStatus> value)
-    {
-        return value?.Value;
-    }
+    public Goal.GoalLifecycleStatus? ToString(Code<Goal.GoalLifecycleStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public GraphDefinition.GraphCompartmentRule? ToString(Code<GraphDefinition.GraphCompartmentRule> value)
-    {
-        return value?.Value;
-    }
+    public GraphDefinition.GraphCompartmentRule? ToString(Code<GraphDefinition.GraphCompartmentRule> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public GraphDefinition.GraphCompartmentUse? ToString(Code<GraphDefinition.GraphCompartmentUse> value)
-    {
-        return value?.Value;
-    }
+    public GraphDefinition.GraphCompartmentUse? ToString(Code<GraphDefinition.GraphCompartmentUse> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public GroupMeasureCode? ToString(Code<GroupMeasureCode> value)
-    {
-        return value?.Value;
-    }
+    public GroupMeasureCode? ToString(Code<GroupMeasureCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Group.GroupType? ToString(Code<Group.GroupType> value)
-    {
-        return value?.Value;
-    }
+    public Group.GroupType? ToString(Code<Group.GroupType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public GuidanceResponse.GuidanceResponseStatus? ToString(Code<GuidanceResponse.GuidanceResponseStatus> value)
-    {
-        return value?.Value;
-    }
+    public GuidanceResponse.GuidanceResponseStatus? ToString(Code<GuidanceResponse.GuidanceResponseStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ImplementationGuide.GuidePageGeneration? ToString(Code<ImplementationGuide.GuidePageGeneration> value)
-    {
-        return value?.Value;
-    }
+    public ImplementationGuide.GuidePageGeneration? ToString(Code<ImplementationGuide.GuidePageGeneration> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ImplementationGuide.GuideParameterCode? ToString(Code<ImplementationGuide.GuideParameterCode> value)
-    {
-        return value?.Value;
-    }
+    public ImplementationGuide.GuideParameterCode? ToString(Code<ImplementationGuide.GuideParameterCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Bundle.HTTPVerb? ToString(Code<Bundle.HTTPVerb> value)
-    {
-        return value?.Value;
-    }
+    public Bundle.HTTPVerb? ToString(Code<Bundle.HTTPVerb> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Identifier.IdentifierUse? ToString(Code<Identifier.IdentifierUse> value)
-    {
-        return value?.Value;
-    }
+    public Identifier.IdentifierUse? ToString(Code<Identifier.IdentifierUse> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Person.IdentityAssuranceLevel? ToString(Code<Person.IdentityAssuranceLevel> value)
-    {
-        return value?.Value;
-    }
+    public Person.IdentityAssuranceLevel? ToString(Code<Person.IdentityAssuranceLevel> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ImagingStudy.ImagingStudyStatus? ToString(Code<ImagingStudy.ImagingStudyStatus> value)
-    {
-        return value?.Value;
-    }
+    public ImagingStudy.ImagingStudyStatus? ToString(Code<ImagingStudy.ImagingStudyStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? ToString(Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public ImmunizationEvaluation.ImmunizationEvaluationStatusCodes? ToString(Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Immunization.ImmunizationStatusCodes? ToString(Code<Immunization.ImmunizationStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public Immunization.ImmunizationStatusCodes? ToString(Code<Immunization.ImmunizationStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Invoice.InvoiceStatus? ToString(Code<Invoice.InvoiceStatus> value)
-    {
-        return value?.Value;
-    }
+    public Invoice.InvoiceStatus? ToString(Code<Invoice.InvoiceStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public OperationOutcome.IssueSeverity? ToString(Code<OperationOutcome.IssueSeverity> value)
-    {
-        return value?.Value;
-    }
+    public OperationOutcome.IssueSeverity? ToString(Code<OperationOutcome.IssueSeverity> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public OperationOutcome.IssueType? ToString(Code<OperationOutcome.IssueType> value)
-    {
-        return value?.Value;
-    }
+    public OperationOutcome.IssueType? ToString(Code<OperationOutcome.IssueType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Patient.LinkType? ToString(Code<Patient.LinkType> value)
-    {
-        return value?.Value;
-    }
+    public Patient.LinkType? ToString(Code<Patient.LinkType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Linkage.LinkageType? ToString(Code<Linkage.LinkageType> value)
-    {
-        return value?.Value;
-    }
+    public Linkage.LinkageType? ToString(Code<Linkage.LinkageType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ListMode? ToString(Code<ListMode> value)
-    {
-        return value?.Value;
-    }
+    public ListMode? ToString(Code<ListMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public List.ListStatus? ToString(Code<List.ListStatus> value)
-    {
-        return value?.Value;
-    }
+    public List.ListStatus? ToString(Code<List.ListStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Location.LocationMode? ToString(Code<Location.LocationMode> value)
-    {
-        return value?.Value;
-    }
+    public Location.LocationMode? ToString(Code<Location.LocationMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Location.LocationStatus? ToString(Code<Location.LocationStatus> value)
-    {
-        return value?.Value;
-    }
+    public Location.LocationStatus? ToString(Code<Location.LocationStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MeasureReport.MeasureReportStatus? ToString(Code<MeasureReport.MeasureReportStatus> value)
-    {
-        return value?.Value;
-    }
+    public MeasureReport.MeasureReportStatus? ToString(Code<MeasureReport.MeasureReportStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MeasureReport.MeasureReportType? ToString(Code<MeasureReport.MeasureReportType> value)
-    {
-        return value?.Value;
-    }
+    public MeasureReport.MeasureReportType? ToString(Code<MeasureReport.MeasureReportType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MedicationAdministration.MedicationAdministrationStatusCodes? ToString(Code<MedicationAdministration.MedicationAdministrationStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public MedicationAdministration.MedicationAdministrationStatusCodes? ToString(Code<MedicationAdministration.MedicationAdministrationStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MedicationDispense.MedicationDispenseStatusCodes? ToString(Code<MedicationDispense.MedicationDispenseStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public MedicationDispense.MedicationDispenseStatusCodes? ToString(Code<MedicationDispense.MedicationDispenseStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MedicationKnowledge.MedicationKnowledgeStatusCodes? ToString(Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public MedicationKnowledge.MedicationKnowledgeStatusCodes? ToString(Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MedicationRequest.MedicationRequestIntent? ToString(Code<MedicationRequest.MedicationRequestIntent> value)
-    {
-        return value?.Value;
-    }
+    public MedicationRequest.MedicationRequestIntent? ToString(Code<MedicationRequest.MedicationRequestIntent> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MedicationRequest.MedicationrequestStatus? ToString(Code<MedicationRequest.MedicationrequestStatus> value)
-    {
-        return value?.Value;
-    }
+    public MedicationRequest.MedicationrequestStatus? ToString(Code<MedicationRequest.MedicationrequestStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MedicationStatement.MedicationStatusCodes? ToString(Code<MedicationStatement.MedicationStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public MedicationStatement.MedicationStatusCodes? ToString(Code<MedicationStatement.MedicationStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Medication.MedicationStatusCodes? ToString(Code<Medication.MedicationStatusCodes> value)
-    {
-        return value?.Value;
-    }
+    public Medication.MedicationStatusCodes? ToString(Code<Medication.MedicationStatusCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MessageDefinition.MessageSignificanceCategory? ToString(Code<MessageDefinition.MessageSignificanceCategory> value)
-    {
-        return value?.Value;
-    }
+    public MessageDefinition.MessageSignificanceCategory? ToString(Code<MessageDefinition.MessageSignificanceCategory> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MessageheaderResponseRequest? ToString(Code<MessageheaderResponseRequest> value)
-    {
-        return value?.Value;
-    }
+    public MessageheaderResponseRequest? ToString(Code<MessageheaderResponseRequest> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public string ToString(Code value)
-    {
-        return value?.Value;
-    }
+    public string ToString(Code value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public HumanName.NameUse? ToString(Code<HumanName.NameUse> value)
-    {
-        return value?.Value;
-    }
+    public HumanName.NameUse? ToString(Code<HumanName.NameUse> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public NamingSystem.NamingSystemIdentifierType? ToString(Code<NamingSystem.NamingSystemIdentifierType> value)
-    {
-        return value?.Value;
-    }
+    public NamingSystem.NamingSystemIdentifierType? ToString(Code<NamingSystem.NamingSystemIdentifierType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public NamingSystem.NamingSystemType? ToString(Code<NamingSystem.NamingSystemType> value)
-    {
-        return value?.Value;
-    }
+    public NamingSystem.NamingSystemType? ToString(Code<NamingSystem.NamingSystemType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Narrative.NarrativeStatus? ToString(Code<Narrative.NarrativeStatus> value)
-    {
-        return value?.Value;
-    }
+    public Narrative.NarrativeStatus? ToString(Code<Narrative.NarrativeStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public NoteType? ToString(Code<NoteType> value)
-    {
-        return value?.Value;
-    }
+    public NoteType? ToString(Code<NoteType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public RequestIntent? ToString(Code<RequestIntent> value)
-    {
-        return value?.Value;
-    }
+    public RequestIntent? ToString(Code<RequestIntent> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ObservationDefinition.ObservationDataType? ToString(Code<ObservationDefinition.ObservationDataType> value)
-    {
-        return value?.Value;
-    }
+    public ObservationDefinition.ObservationDataType? ToString(Code<ObservationDefinition.ObservationDataType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ObservationDefinition.ObservationRangeCategory? ToString(Code<ObservationDefinition.ObservationRangeCategory> value)
-    {
-        return value?.Value;
-    }
+    public ObservationDefinition.ObservationRangeCategory? ToString(Code<ObservationDefinition.ObservationRangeCategory> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public OperationDefinition.OperationKind? ToString(Code<OperationDefinition.OperationKind> value)
-    {
-        return value?.Value;
-    }
+    public OperationDefinition.OperationKind? ToString(Code<OperationDefinition.OperationKind> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public OperationParameterUse? ToString(Code<OperationParameterUse> value)
-    {
-        return value?.Value;
-    }
+    public OperationParameterUse? ToString(Code<OperationParameterUse> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MolecularSequence.OrientationType? ToString(Code<MolecularSequence.OrientationType> value)
-    {
-        return value?.Value;
-    }
+    public MolecularSequence.OrientationType? ToString(Code<MolecularSequence.OrientationType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Appointment.ParticipantRequired? ToString(Code<Appointment.ParticipantRequired> value)
-    {
-        return value?.Value;
-    }
+    public Appointment.ParticipantRequired? ToString(Code<Appointment.ParticipantRequired> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ParticipationStatus? ToString(Code<ParticipationStatus> value)
-    {
-        return value?.Value;
-    }
+    public ParticipationStatus? ToString(Code<ParticipationStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ElementDefinition.PropertyRepresentation? ToString(Code<ElementDefinition.PropertyRepresentation> value)
-    {
-        return value?.Value;
-    }
+    public ElementDefinition.PropertyRepresentation? ToString(Code<ElementDefinition.PropertyRepresentation> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CodeSystem.PropertyType? ToString(Code<CodeSystem.PropertyType> value)
-    {
-        return value?.Value;
-    }
+    public CodeSystem.PropertyType? ToString(Code<CodeSystem.PropertyType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Provenance.ProvenanceEntityRole? ToString(Code<Provenance.ProvenanceEntityRole> value)
-    {
-        return value?.Value;
-    }
+    public Provenance.ProvenanceEntityRole? ToString(Code<Provenance.ProvenanceEntityRole> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public PublicationStatus? ToString(Code<PublicationStatus> value)
-    {
-        return value?.Value;
-    }
+    public PublicationStatus? ToString(Code<PublicationStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MolecularSequence.QualityType? ToString(Code<MolecularSequence.QualityType> value)
-    {
-        return value?.Value;
-    }
+    public MolecularSequence.QualityType? ToString(Code<MolecularSequence.QualityType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Quantity.QuantityComparator? ToString(Code<Quantity.QuantityComparator> value)
-    {
-        return value?.Value;
-    }
+    public Quantity.QuantityComparator? ToString(Code<Quantity.QuantityComparator> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Questionnaire.QuestionnaireItemOperator? ToString(Code<Questionnaire.QuestionnaireItemOperator> value)
-    {
-        return value?.Value;
-    }
+    public Questionnaire.QuestionnaireItemOperator? ToString(Code<Questionnaire.QuestionnaireItemOperator> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Questionnaire.QuestionnaireItemType? ToString(Code<Questionnaire.QuestionnaireItemType> value)
-    {
-        return value?.Value;
-    }
+    public Questionnaire.QuestionnaireItemType? ToString(Code<Questionnaire.QuestionnaireItemType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public QuestionnaireResponse.QuestionnaireResponseStatus? ToString(Code<QuestionnaireResponse.QuestionnaireResponseStatus> value)
-    {
-        return value?.Value;
-    }
+    public QuestionnaireResponse.QuestionnaireResponseStatus? ToString(Code<QuestionnaireResponse.QuestionnaireResponseStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.ReferenceHandlingPolicy? ToString(Code<CapabilityStatement.ReferenceHandlingPolicy> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.ReferenceHandlingPolicy? ToString(Code<CapabilityStatement.ReferenceHandlingPolicy> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ElementDefinition.ReferenceVersionRules? ToString(Code<ElementDefinition.ReferenceVersionRules> value)
-    {
-        return value?.Value;
-    }
+    public ElementDefinition.ReferenceVersionRules? ToString(Code<ElementDefinition.ReferenceVersionRules> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public RelatedArtifact.RelatedArtifactType? ToString(Code<RelatedArtifact.RelatedArtifactType> value)
-    {
-        return value?.Value;
-    }
+    public RelatedArtifact.RelatedArtifactType? ToString(Code<RelatedArtifact.RelatedArtifactType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ClaimProcessingCodes? ToString(Code<ClaimProcessingCodes> value)
-    {
-        return value?.Value;
-    }
+    public ClaimProcessingCodes? ToString(Code<ClaimProcessingCodes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MolecularSequence.RepositoryType? ToString(Code<MolecularSequence.RepositoryType> value)
-    {
-        return value?.Value;
-    }
+    public MolecularSequence.RepositoryType? ToString(Code<MolecularSequence.RepositoryType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ResearchElementDefinition.ResearchElementType? ToString(Code<ResearchElementDefinition.ResearchElementType> value)
-    {
-        return value?.Value;
-    }
+    public ResearchElementDefinition.ResearchElementType? ToString(Code<ResearchElementDefinition.ResearchElementType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ResearchStudy.ResearchStudyStatus? ToString(Code<ResearchStudy.ResearchStudyStatus> value)
-    {
-        return value?.Value;
-    }
+    public ResearchStudy.ResearchStudyStatus? ToString(Code<ResearchStudy.ResearchStudyStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ResearchSubject.ResearchSubjectStatus? ToString(Code<ResearchSubject.ResearchSubjectStatus> value)
-    {
-        return value?.Value;
-    }
+    public ResearchSubject.ResearchSubjectStatus? ToString(Code<ResearchSubject.ResearchSubjectStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.ResourceVersionPolicy? ToString(Code<CapabilityStatement.ResourceVersionPolicy> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.ResourceVersionPolicy? ToString(Code<CapabilityStatement.ResourceVersionPolicy> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MessageHeader.ResponseType? ToString(Code<MessageHeader.ResponseType> value)
-    {
-        return value?.Value;
-    }
+    public MessageHeader.ResponseType? ToString(Code<MessageHeader.ResponseType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.RestfulCapabilityMode? ToString(Code<CapabilityStatement.RestfulCapabilityMode> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.RestfulCapabilityMode? ToString(Code<CapabilityStatement.RestfulCapabilityMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ImplementationGuide.SPDXLicense? ToString(Code<ImplementationGuide.SPDXLicense> value)
-    {
-        return value?.Value;
-    }
+    public ImplementationGuide.SPDXLicense? ToString(Code<ImplementationGuide.SPDXLicense> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public SearchParameter.SearchComparator? ToString(Code<SearchParameter.SearchComparator> value)
-    {
-        return value?.Value;
-    }
+    public SearchParameter.SearchComparator? ToString(Code<SearchParameter.SearchComparator> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Bundle.SearchEntryMode? ToString(Code<Bundle.SearchEntryMode> value)
-    {
-        return value?.Value;
-    }
+    public Bundle.SearchEntryMode? ToString(Code<Bundle.SearchEntryMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public SearchParameter.SearchModifierCode? ToString(Code<SearchParameter.SearchModifierCode> value)
-    {
-        return value?.Value;
-    }
+    public SearchParameter.SearchModifierCode? ToString(Code<SearchParameter.SearchModifierCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public SearchParamType? ToString(Code<SearchParamType> value)
-    {
-        return value?.Value;
-    }
+    public SearchParamType? ToString(Code<SearchParamType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MolecularSequence.SequenceType? ToString(Code<MolecularSequence.SequenceType> value)
-    {
-        return value?.Value;
-    }
+    public MolecularSequence.SequenceType? ToString(Code<MolecularSequence.SequenceType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ElementDefinition.SlicingRules? ToString(Code<ElementDefinition.SlicingRules> value)
-    {
-        return value?.Value;
-    }
+    public ElementDefinition.SlicingRules? ToString(Code<ElementDefinition.SlicingRules> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Slot.SlotStatus? ToString(Code<Slot.SlotStatus> value)
-    {
-        return value?.Value;
-    }
+    public Slot.SlotStatus? ToString(Code<Slot.SlotStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public DataRequirement.SortDirection? ToString(Code<DataRequirement.SortDirection> value)
-    {
-        return value?.Value;
-    }
+    public DataRequirement.SortDirection? ToString(Code<DataRequirement.SortDirection> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public SpecimenDefinition.SpecimenContainedPreference? ToString(Code<SpecimenDefinition.SpecimenContainedPreference> value)
-    {
-        return value?.Value;
-    }
+    public SpecimenDefinition.SpecimenContainedPreference? ToString(Code<SpecimenDefinition.SpecimenContainedPreference> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Specimen.SpecimenStatus? ToString(Code<Specimen.SpecimenStatus> value)
-    {
-        return value?.Value;
-    }
+    public Specimen.SpecimenStatus? ToString(Code<Specimen.SpecimenStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public VerificationResult.StatusCode? ToString(Code<VerificationResult.StatusCode> value)
-    {
-        return value?.Value;
-    }
+    public VerificationResult.StatusCode? ToString(Code<VerificationResult.StatusCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public MolecularSequence.StrandType? ToString(Code<MolecularSequence.StrandType> value)
-    {
-        return value?.Value;
-    }
+    public MolecularSequence.StrandType? ToString(Code<MolecularSequence.StrandType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureDefinition.StructureDefinitionKind? ToString(Code<StructureDefinition.StructureDefinitionKind> value)
-    {
-        return value?.Value;
-    }
+    public StructureDefinition.StructureDefinitionKind? ToString(Code<StructureDefinition.StructureDefinitionKind> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureMap.StructureMapContextType? ToString(Code<StructureMap.StructureMapContextType> value)
-    {
-        return value?.Value;
-    }
+    public StructureMap.StructureMapContextType? ToString(Code<StructureMap.StructureMapContextType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureMap.StructureMapGroupTypeMode? ToString(Code<StructureMap.StructureMapGroupTypeMode> value)
-    {
-        return value?.Value;
-    }
+    public StructureMap.StructureMapGroupTypeMode? ToString(Code<StructureMap.StructureMapGroupTypeMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureMap.StructureMapInputMode? ToString(Code<StructureMap.StructureMapInputMode> value)
-    {
-        return value?.Value;
-    }
+    public StructureMap.StructureMapInputMode? ToString(Code<StructureMap.StructureMapInputMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureMap.StructureMapModelMode? ToString(Code<StructureMap.StructureMapModelMode> value)
-    {
-        return value?.Value;
-    }
+    public StructureMap.StructureMapModelMode? ToString(Code<StructureMap.StructureMapModelMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureMap.StructureMapSourceListMode? ToString(Code<StructureMap.StructureMapSourceListMode> value)
-    {
-        return value?.Value;
-    }
+    public StructureMap.StructureMapSourceListMode? ToString(Code<StructureMap.StructureMapSourceListMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureMap.StructureMapTargetListMode? ToString(Code<StructureMap.StructureMapTargetListMode> value)
-    {
-        return value?.Value;
-    }
+    public StructureMap.StructureMapTargetListMode? ToString(Code<StructureMap.StructureMapTargetListMode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureMap.StructureMapTransform? ToString(Code<StructureMap.StructureMapTransform> value)
-    {
-        return value?.Value;
-    }
+    public StructureMap.StructureMapTransform? ToString(Code<StructureMap.StructureMapTransform> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Subscription.SubscriptionChannelType? ToString(Code<Subscription.SubscriptionChannelType> value)
-    {
-        return value?.Value;
-    }
+    public Subscription.SubscriptionChannelType? ToString(Code<Subscription.SubscriptionChannelType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Subscription.SubscriptionStatus? ToString(Code<Subscription.SubscriptionStatus> value)
-    {
-        return value?.Value;
-    }
+    public Subscription.SubscriptionStatus? ToString(Code<Subscription.SubscriptionStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public SupplyDelivery.SupplyDeliveryStatus? ToString(Code<SupplyDelivery.SupplyDeliveryStatus> value)
-    {
-        return value?.Value;
-    }
+    public SupplyDelivery.SupplyDeliveryStatus? ToString(Code<SupplyDelivery.SupplyDeliveryStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public SupplyRequest.SupplyRequestStatus? ToString(Code<SupplyRequest.SupplyRequestStatus> value)
-    {
-        return value?.Value;
-    }
+    public SupplyRequest.SupplyRequestStatus? ToString(Code<SupplyRequest.SupplyRequestStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.SystemRestfulInteraction? ToString(Code<CapabilityStatement.SystemRestfulInteraction> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.SystemRestfulInteraction? ToString(Code<CapabilityStatement.SystemRestfulInteraction> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Task.TaskIntent? ToString(Code<Task.TaskIntent> value)
-    {
-        return value?.Value;
-    }
+    public Task.TaskIntent? ToString(Code<Task.TaskIntent> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Task.TaskStatus? ToString(Code<Task.TaskStatus> value)
-    {
-        return value?.Value;
-    }
+    public Task.TaskStatus? ToString(Code<Task.TaskStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestReport.TestReportActionResult? ToString(Code<TestReport.TestReportActionResult> value)
-    {
-        return value?.Value;
-    }
+    public TestReport.TestReportActionResult? ToString(Code<TestReport.TestReportActionResult> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestReport.TestReportParticipantType? ToString(Code<TestReport.TestReportParticipantType> value)
-    {
-        return value?.Value;
-    }
+    public TestReport.TestReportParticipantType? ToString(Code<TestReport.TestReportParticipantType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestReport.TestReportResult? ToString(Code<TestReport.TestReportResult> value)
-    {
-        return value?.Value;
-    }
+    public TestReport.TestReportResult? ToString(Code<TestReport.TestReportResult> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestReport.TestReportStatus? ToString(Code<TestReport.TestReportStatus> value)
-    {
-        return value?.Value;
-    }
+    public TestReport.TestReportStatus? ToString(Code<TestReport.TestReportStatus> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TestScript.TestScriptRequestMethodCode? ToString(Code<TestScript.TestScriptRequestMethodCode> value)
-    {
-        return value?.Value;
-    }
+    public TestScript.TestScriptRequestMethodCode? ToString(Code<TestScript.TestScriptRequestMethodCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public TriggerDefinition.TriggerType? ToString(Code<TriggerDefinition.TriggerType> value)
-    {
-        return value?.Value;
-    }
+    public TriggerDefinition.TriggerType? ToString(Code<TriggerDefinition.TriggerType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public StructureDefinition.TypeDerivationRule? ToString(Code<StructureDefinition.TypeDerivationRule> value)
-    {
-        return value?.Value;
-    }
+    public StructureDefinition.TypeDerivationRule? ToString(Code<StructureDefinition.TypeDerivationRule> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public CapabilityStatement.TypeRestfulInteraction? ToString(Code<CapabilityStatement.TypeRestfulInteraction> value)
-    {
-        return value?.Value;
-    }
+    public CapabilityStatement.TypeRestfulInteraction? ToString(Code<CapabilityStatement.TypeRestfulInteraction> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Device.UDIEntryType? ToString(Code<Device.UDIEntryType> value)
-    {
-        return value?.Value;
-    }
+    public Device.UDIEntryType? ToString(Code<Device.UDIEntryType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public Timing.UnitsOfTime? ToString(Code<Timing.UnitsOfTime> value)
-    {
-        return value?.Value;
-    }
+    public Timing.UnitsOfTime? ToString(Code<Timing.UnitsOfTime> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public ClaimUseCode? ToString(Code<ClaimUseCode> value)
-    {
-        return value?.Value;
-    }
+    public ClaimUseCode? ToString(Code<ClaimUseCode> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public VisionPrescription.VisionBase? ToString(Code<VisionPrescription.VisionBase> value)
-    {
-        return value?.Value;
-    }
+    public VisionPrescription.VisionBase? ToString(Code<VisionPrescription.VisionBase> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public VisionPrescription.VisionEyes? ToString(Code<VisionPrescription.VisionEyes> value)
-    {
-        return value?.Value;
-    }
+    public VisionPrescription.VisionEyes? ToString(Code<VisionPrescription.VisionEyes> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public SearchParameter.XPathUsageType? ToString(Code<SearchParameter.XPathUsageType> value)
-    {
-        return value?.Value;
-    }
+    public SearchParameter.XPathUsageType? ToString(Code<SearchParameter.XPathUsageType> value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
     public string ToString(Base64Binary value)
 	{
 		var a_ = (value?.Value as object);
+
 		return context?.Operators?.TypeConverter.Convert<string>(a_);
 	}
 
-    [CqlDeclaration("ToString")]
-    public string ToString(Id value)
-    {
-        return value?.Value;
-    }
-
 
     [CqlDeclaration("ToString")]
-    public string ToString(FhirString value)
-    {
-        return value?.Value;
-    }
+    public string ToString(Id value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public string ToString(FhirUri value)
-    {
-        return value?.Value;
-    }
+    public string ToString(FhirString value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToString")]
-    public string ToString(XHtml value)
-    {
-        return value?.Value;
-    }
+    public string ToString(FhirUri value) =>
+		value?.Value;
+
+
+    [CqlDeclaration("ToString")]
+    public string ToString(XHtml value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToBoolean")]
-    public bool? ToBoolean(FhirBoolean value)
-    {
-        return value?.Value;
-    }
+    public bool? ToBoolean(FhirBoolean value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToDate")]
     public CqlDate ToDate(Date value)
 	{
 		var a_ = value?.Value;
+
 		return context?.Operators.ConvertStringToDate(a_);
 	}
+
 
     [CqlDeclaration("ToDateTime")]
     public CqlDateTime ToDateTime(FhirDateTime value)
 	{
 		var a_ = value?.Value;
+
 		return context?.Operators.ConvertStringToDateTime(a_);
 	}
+
 
     [CqlDeclaration("ToDateTime")]
     public CqlDateTime ToDateTime(Instant value)
 	{
 		var a_ = (value?.Value as object);
+
 		return context?.Operators?.TypeConverter.Convert<CqlDateTime>(a_);
 	}
 
+
     [CqlDeclaration("ToDecimal")]
-    public decimal? ToDecimal(FhirDecimal value)
-    {
-        return value?.Value;
-    }
+    public decimal? ToDecimal(FhirDecimal value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToInteger")]
-    public int? ToInteger(Integer value)
-    {
-        return value?.Value;
-    }
+    public int? ToInteger(Integer value) =>
+		value?.Value;
 
 
     [CqlDeclaration("ToTime")]
     public CqlTime ToTime(Time value)
 	{
 		var a_ = value?.Value;
+
 		return context?.Operators.ConvertStringToTime(a_);
 	}
+
 
 }

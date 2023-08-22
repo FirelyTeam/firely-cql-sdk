@@ -13,13 +13,13 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class ParameterFinder : ExpressionVisitor
     {
-        public IList<string> Names { get; } = new List<string>();
+        public IList<ParameterExpression> Parameters { get; } = new List<ParameterExpression>();
 
 
         protected override Expression VisitParameter(ParameterExpression node)
         {
-            if (node.Name != null && !Names.Contains(node.Name))
-                Names.Add(node.Name);
+            if (!Parameters.Contains(node))
+                Parameters.Add(node);
             return base.VisitParameter(node);
         }
     }

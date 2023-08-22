@@ -62,7 +62,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     vn = $"{Prefix}{new string(Letters.ToArray())}{Postfix}";
                 }
-                while (Reserved.Contains(vn) && SyntaxFacts.GetKeywordKind(vn) != SyntaxKind.None);
+                while (Reserved.Contains(vn) || SyntaxFacts.GetKeywordKind(vn) != SyntaxKind.None);
                 Generated.Add(vn);
                 return vn;
             }

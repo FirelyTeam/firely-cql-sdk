@@ -44,160 +44,168 @@ public class NCQAEncounter_1_0_0
     public bool? Encounter_Has_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		var a_ = (Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>);
-		Func<Encounter.DiagnosisComponent,FhirString> b_ = (D) => D?.Condition?.ReferenceElement;
-		var c_ = context?.Operators.SelectOrNull<Encounter.DiagnosisComponent, FhirString>(a_, 
-			b_);
-		Func<FhirString,bool?> k_ = (CRef) => 
+		var b_ = (Encounter.DiagnosisComponent D) => D?.Condition?.ReferenceElement;
+		var c_ = context?.Operators.SelectOrNull<Encounter.DiagnosisComponent, FhirString>(a_, b_);
+		var d_ = (FhirString CRef) =>
 		{
-			Func<Condition,bool?> i_ = (C) => 
+			var a_ = (Condition C) =>
 			{
-				var e_ = (C?.IdElement as object);
-				var d_ = ((context.Deeper(new CallStackEntry("ToString", 
+				var a_ = (C?.IdElement as object);
+				var b_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_) as object);
-				var g_ = (CRef as object);
-				var h_ = (context.Deeper(new CallStackEntry("ToString", 
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+				var c_ = (b_ as object);
+				var d_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(g_);
-				var f_ = (NCQAFHIRBase_1_0_0.GetId(h_) as object);
-				return context?.Operators.Equal(d_, 
-					f_);
+		null))?.Operators?.TypeConverter).Convert<string>((CRef as object));
+				var e_ = NCQAFHIRBase_1_0_0.GetId(d_);
+				var f_ = (e_ as object);
+
+				return context?.Operators.Equal(c_, f_);
 			};
-			var j_ = context?.Operators.WhereOrNull<Condition>(Conditions, 
-				i_);
-			return context?.Operators.ExistsInList<Condition>(j_);
+			var b_ = context?.Operators.WhereOrNull<Condition>(Conditions, a_);
+
+			return context?.Operators.ExistsInList<Condition>(b_);
 		};
-		var l_ = context?.Operators.SelectOrNull<FhirString, bool?>(c_, 
-			k_);
-		return context?.Operators.AnyTrue(l_);
+		var e_ = context?.Operators.SelectOrNull<FhirString, bool?>(c_, d_);
+
+		return context?.Operators.AnyTrue(e_);
 	}
+
 
     [CqlDeclaration("Encounter Has Principal Diagnosis")]
     public bool? Encounter_Has_Principal_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
-		var c_ = (Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>);
-		Func<Encounter.DiagnosisComponent,bool?> h_ = (D) => 
+		var a_ = (Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>);
+		var b_ = (Encounter.DiagnosisComponent D) =>
 		{
-			var e_ = (D?.RankElement as object);
-			var f_ = context?.Operators?.TypeConverter.Convert<Integer>(e_);
-			var d_ = (FHIRHelpers_4_0_001.ToInteger(f_) as object);
-			var g_ = (((int?)1) as object);
-			return context?.Operators.Equal(d_, 
-				g_);
+			var a_ = (D?.RankElement as object);
+			var b_ = context?.Operators?.TypeConverter.Convert<Integer>(a_);
+			var c_ = FHIRHelpers_4_0_001.ToInteger(b_);
+			var d_ = (c_ as object);
+			var e_ = ((int?)1 as object);
+
+			return context?.Operators.Equal(d_, e_);
 		};
-		var i_ = context?.Operators.WhereOrNull<Encounter.DiagnosisComponent>(c_, 
-			h_);
-		var b_ = context?.Operators.SingleOrNull<Encounter.DiagnosisComponent>(i_);
-		var a_ = new Encounter.DiagnosisComponent[]
+		var c_ = context?.Operators.WhereOrNull<Encounter.DiagnosisComponent>(a_, b_);
+		var d_ = context?.Operators.SingleOrNull<Encounter.DiagnosisComponent>(c_);
+		var e_ = new Encounter.DiagnosisComponent[]
 		{
-			b_,
+			d_,
 		};
-		Func<Encounter.DiagnosisComponent,bool?> q_ = (PrincipalDiagnosis) => 
+		var f_ = (Encounter.DiagnosisComponent PrincipalDiagnosis) =>
 		{
-			Func<Condition,bool?> o_ = (C) => 
+			var a_ = (Condition C) =>
 			{
-				var k_ = (C?.IdElement as object);
-				var j_ = ((context.Deeper(new CallStackEntry("ToString", 
+				var a_ = (C?.IdElement as object);
+				var b_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(k_) as object);
-				var m_ = (PrincipalDiagnosis?.Condition?.ReferenceElement as object);
-				var n_ = (context.Deeper(new CallStackEntry("ToString", 
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+				var c_ = (b_ as object);
+				var d_ = (PrincipalDiagnosis?.Condition?.ReferenceElement as object);
+				var e_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(m_);
-				var l_ = (NCQAFHIRBase_1_0_0.GetId(n_) as object);
-				return context?.Operators.Equal(j_, 
-					l_);
+		null))?.Operators?.TypeConverter).Convert<string>(d_);
+				var f_ = NCQAFHIRBase_1_0_0.GetId(e_);
+				var g_ = (f_ as object);
+
+				return context?.Operators.Equal(c_, g_);
 			};
-			var p_ = context?.Operators.WhereOrNull<Condition>(Conditions, 
-				o_);
-			return context?.Operators.ExistsInList<Condition>(p_);
+			var b_ = context?.Operators.WhereOrNull<Condition>(Conditions, a_);
+
+			return context?.Operators.ExistsInList<Condition>(b_);
 		};
-		var r_ = context?.Operators.SelectOrNull<Encounter.DiagnosisComponent, bool?>(a_, 
-			q_);
-		return context?.Operators.SingleOrNull<bool?>(r_);
+		var g_ = context?.Operators.SelectOrNull<Encounter.DiagnosisComponent, bool?>(e_, f_);
+
+		return context?.Operators.SingleOrNull<bool?>(g_);
 	}
+
 
     [CqlDeclaration("Encounter Completed during Period")]
     public bool? Encounter_Completed_during_Period(IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
 	{
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Enc);
-		Func<Encounter,bool?> e_ = (EncounterPeriod) => 
+		var b_ = (Encounter EncounterPeriod) =>
 		{
-			var b_ = (EncounterPeriod?.Period as object);
-			var c_ = NCQAFHIRBase_1_0_0.Normalize_Interval(b_);
-			var d_ = context?.Operators.End(c_);
-			return context?.Operators.ElementInInterval<CqlDateTime>(d_, 
-				timeperiod, 
-				null);
+			var a_ = (EncounterPeriod?.Period as object);
+			var b_ = NCQAFHIRBase_1_0_0.Normalize_Interval(a_);
+			var c_ = context?.Operators.End(b_);
+
+			return context?.Operators.ElementInInterval<CqlDateTime>(c_, timeperiod, null);
 		};
-		var f_ = context?.Operators.WhereOrNull<Encounter>(a_, 
-			e_);
-		return context?.Operators.ExistsInList<Encounter>(f_);
+		var c_ = context?.Operators.WhereOrNull<Encounter>(a_, b_);
+
+		return context?.Operators.ExistsInList<Encounter>(c_);
 	}
+
 
     [CqlDeclaration("Finished Encounter with Telehealth POS")]
     public IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS(IEnumerable<Encounter> Encounter)
 	{
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
-		Func<Encounter,bool?> h_ = (E) => 
+		var b_ = (Encounter E) =>
 		{
-			bool? b_ = ((bool?)(E?.Class == null));
-			var c_ = context?.Operators.Not(b_);
-			var e_ = E?.Class;
-			var d_ = (FHIRHelpers_4_0_001.ToCode(e_) as object);
+			var a_ = (bool?)(E?.Class == null);
+			var b_ = context?.Operators.Not(a_);
+			var c_ = E?.Class;
+			var d_ = FHIRHelpers_4_0_001.ToCode(c_);
+			var e_ = (d_ as object);
 			var f_ = (NCQATerminology_1_0_0.@virtual() as object);
-			var g_ = context?.Operators.Equivalent(d_, 
-				f_);
-			return context?.Operators.And(c_, 
-				g_);
+			var g_ = context?.Operators.Equivalent(e_, f_);
+
+			return context?.Operators.And(b_, g_);
 		};
-		return context?.Operators.WhereOrNull<Encounter>(a_, 
-			h_);
+
+		return context?.Operators.WhereOrNull<Encounter>(a_, b_);
 	}
+
 
     [CqlDeclaration("Finished Encounter with Outpatient POS")]
     public IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS(IEnumerable<Encounter> Encounter)
 	{
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
-		Func<Encounter,bool?> m_ = (E) => 
+		var b_ = (Encounter E) =>
 		{
-			bool? b_ = ((bool?)(E?.Class == null));
-			var c_ = context?.Operators.Not(b_);
-			var e_ = E?.Class;
-			var d_ = (FHIRHelpers_4_0_001.ToCode(e_) as object);
+			var a_ = (bool?)(E?.Class == null);
+			var b_ = context?.Operators.Not(a_);
+			var c_ = E?.Class;
+			var d_ = FHIRHelpers_4_0_001.ToCode(c_);
+			var e_ = (d_ as object);
 			var f_ = (NCQATerminology_1_0_0.ambulatory() as object);
-			var g_ = context?.Operators.Equivalent(d_, 
-				f_);
-			var j_ = (NCQATerminology_1_0_0.home_health() as object);
-			var k_ = context?.Operators.Equivalent(d_, 
-				j_);
-			var l_ = context?.Operators.Or(g_, 
-				k_);
-			return context?.Operators.And(c_, 
-				l_);
+			var g_ = context?.Operators.Equivalent(e_, f_);
+			var h_ = E?.Class;
+			var i_ = FHIRHelpers_4_0_001.ToCode(h_);
+			var j_ = (i_ as object);
+			var k_ = (NCQATerminology_1_0_0.home_health() as object);
+			var l_ = context?.Operators.Equivalent(j_, k_);
+			var m_ = context?.Operators.Or(g_, l_);
+
+			return context?.Operators.And(b_, m_);
 		};
-		return context?.Operators.WhereOrNull<Encounter>(a_, 
-			m_);
+
+		return context?.Operators.WhereOrNull<Encounter>(a_, b_);
 	}
+
 
     [CqlDeclaration("Finished Encounter with Ambulatory POS")]
     public IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS(IEnumerable<Encounter> Encounter)
 	{
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
-		Func<Encounter,bool?> h_ = (E) => 
+		var b_ = (Encounter E) =>
 		{
-			bool? b_ = ((bool?)(E?.Class == null));
-			var c_ = context?.Operators.Not(b_);
-			var e_ = E?.Class;
-			var d_ = (FHIRHelpers_4_0_001.ToCode(e_) as object);
+			var a_ = (bool?)(E?.Class == null);
+			var b_ = context?.Operators.Not(a_);
+			var c_ = E?.Class;
+			var d_ = FHIRHelpers_4_0_001.ToCode(c_);
+			var e_ = (d_ as object);
 			var f_ = (NCQATerminology_1_0_0.ambulatory() as object);
-			var g_ = context?.Operators.Equivalent(d_, 
-				f_);
-			return context?.Operators.And(c_, 
-				g_);
+			var g_ = context?.Operators.Equivalent(e_, f_);
+
+			return context?.Operators.And(b_, g_);
 		};
-		return context?.Operators.WhereOrNull<Encounter>(a_, 
-			h_);
+
+		return context?.Operators.WhereOrNull<Encounter>(a_, b_);
 	}
+
 
 }

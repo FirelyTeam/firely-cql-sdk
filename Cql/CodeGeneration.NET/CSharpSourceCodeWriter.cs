@@ -20,6 +20,7 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -381,15 +382,15 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var parameterFinder = new ParameterFinder();
             parameterFinder.Visit(overload.Item2.Body);
-            var parametersInBody = parameterFinder.Names;
+            var parametersInBody = parameterFinder.Parameters;
 
-            var vng = new VariableNameGenerator(parameters.Concat(parametersInBody), "_");
             var visitedBody = Transform(overload.Item2.Body,
                 invocationsTransformer,
-                new BlockTransformer(vng, parameters),
-                new RedundantCastsTransformer(),
-                new FlattenLetExpressionVisitor()
+                new BlockTransformer(parameters),
+                new RedundantCastsTransformer()
             );
+
+            visitedBody = FlattenLetExpressionVisitor.FlattenAndRename(visitedBody, parametersInBody);
 
             if (isDefinition(overload))
             {
@@ -399,21 +400,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 // first _Value method.
                 var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
                 var privateMethodName = PrivateMethodNameFor(methodName!);
-                writer.WriteLine(indentLevel, $"private {returnType} {privateMethodName}()");
-                if (visitedBody is BlockExpression)
-                {
-                    WriteExpression(writer, indentLevel, visitedBody);
-                    writer.WriteLine();
-                }
-                else
-                {
-                    writer.WriteLine(indentLevel, "{");
-                    WriteExpression(writer, indentLevel + 1, visitedBody);
-                    writer.WriteLine(indentLevel, "}");
-                }
+
+                writer.Write(indentLevel, $"private {returnType} {privateMethodName}()");
+                WriteExpression(writer, indentLevel, visitedBody);
                 writer.WriteLine();
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
+
                 if (overload.Item2.ReturnType == typeof(CqlValueSet))
                 {
                     if (overload.Item2.Body is NewExpression @new)
@@ -438,15 +431,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                     .Select(p => $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}"));
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
-                writer.WriteLine(indentLevel, $"public {returnType} {methodName}({parameterString})");
-                if (visitedBody is BlockExpression)
-                    WriteExpression(writer, indentLevel, visitedBody);
-                else
-                {
-                    writer.WriteLine(indentLevel, "{");
-                    WriteExpression(writer, indentLevel + 1, visitedBody);
-                    writer.WriteLine(indentLevel, "}");
-                }
+                writer.Write(indentLevel, $"public {returnType} {methodName}({parameterString})");
+                WriteExpression(writer, indentLevel, visitedBody);
                 writer.WriteLine();
             }
 
@@ -517,19 +503,24 @@ namespace Hl7.Cql.CodeGeneration.NET
             Expression expression,
             bool writeLeadingIndent = true)
         {
-            if (expression is BlockExpression block)
+            if (expression is ConditionalExpression conditional)
             {
-                var asString = ToCode(indentLevel, block, false);
-                writer.Write(asString);
+                writer.WriteLine();
+                writer.WriteLine(indentLevel, "{");
+                WriteConditional(writer, indentLevel + 1, conditional, writeLeadingIndent);
+                writer.WriteLine(indentLevel, "}");
             }
-            else if (expression is ConditionalExpression conditional)
+            else if (expression is LetExpression)
             {
-                WriteConditional(writer, indentLevel, conditional, writeLeadingIndent);
+                writer.WriteLine();
+                var asString = ToCode(indentLevel, expression, false);
+                writer.WriteLine(asString);
             }
             else
             {
-                var asString = ToCode(indentLevel, expression, false);
-                writer.WriteLine(indentLevel, $"return {asString};");
+                writer.WriteLine(0, " =>");
+                var asString = ToCode(indentLevel + 1, expression);
+                writer.WriteLine($"{asString};");
             }
         }
 
@@ -539,7 +530,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             return expression switch
             {
-                BlockExpression block => convertBlockExpression(indent, block),
                 ConstantExpression constant => convertConstantExpression(constant.Type, constant.Value, leadingIndentString),
                 NewExpression @new => convertNewExpression(indent, leadingIndentString, @new),
                 MethodCallExpression call => convertMethodCallExpression(indent, leadingIndentString, call),
@@ -559,103 +549,36 @@ namespace Hl7.Cql.CodeGeneration.NET
             };
         }
 
+        private static readonly ObjectIDGenerator gen = new();
+
         private static string convertLetExpression(int indent, LetExpression let)
         {
-            var sb = new StringBuilder();
-
-            sb.AppendLine(indent, "{");
-
-            foreach (var letStatement in let.LetStatements)
+            if (!let.LetStatements.Any())
+                return ToCode(indent, let.Expression, false);
+            else
             {
-                if (letStatement.Right is LambdaExpression lambda && letStatement.Left is ParameterExpression localVariable)
+                var sb = new StringBuilder();
+                sb.AppendLine(indent, "{");
+
+                foreach (var letStatement in let.LetStatements)
                 {
-                    if (lambda.Body is BlockExpression lambdaBlock)
-                    {
-                        var lambdaParameters = string.Join(", ", lambda.Parameters.Select(p => ToCode(indent + 1, p, false)));
-                        var funcType = PrettyTypeName(lambda.Type);
-                        sb.AppendLine(indent + 1, $"{funcType} {localVariable.Name} = ({lambdaParameters}) => ");
-                        sb.Append(ToCode(indent + 1, lambdaBlock));
-                        sb.AppendLine(";");
-                    }
-                    else
-                    {
-                        var declaration = $"{PrettyTypeName(lambda.Type)} {localVariable.Name}";
-                        var value = ToCode(indent + 1, letStatement.Right, false);
-                        var assignment = $"{declaration} = {value};";
-                        sb.AppendLine(indent + 1, assignment);
-                    }
+                    sb.AppendLine(indent + 1, ToCode(indent + 1, letStatement, false));
                 }
-                else
-                    sb.AppendLine(indent + 1, ToCode(indent + 1, letStatement.Right, false));
+
+                sb.AppendLine();
+                sb.Append(indent + 1, "return ");
+                sb.Append(ToCode(indent + 1, let.Expression, false));
+                sb.Append(';');
+                sb.AppendLine();
+                sb.Append(indent, "}");
+
+                return sb.ToString();
             }
-
-            sb.Append(indent + 1, "return ");
-            sb.Append(ToCode(indent + 1, let.Expression, false));
-            sb.Append(';');
-            sb.AppendLine();
-            sb.Append(indent, "}");
-
-            return sb.ToString();
         }
 
         private static string convertNullConditionalMemberExpression(int indent, NullConditionalMemberExpression nullp)
         {
-            return $"{Parenthesize(
-                ToCode(indent, nullp.MemberExpression.Expression!))})?.{nullp.MemberExpression.Member.Name}";
-        }
-
-        private static string convertBlockExpression(int indent, BlockExpression block)
-        {
-            var sb = new StringBuilder();
-
-            sb.AppendLine(indent, "{");
-
-            var lastExpression = block.Expressions.LastOrDefault();
-            foreach (var blockStatement in block.Expressions)
-            {
-                if (blockStatement is BinaryExpression be && be.Left is ParameterExpression localVariable)
-                {
-                    if (be.Right is LambdaExpression lambda)
-                    {
-                        if (lambda.Body is BlockExpression lambdaBlock)
-                        {
-                            var lambdaParameters = string.Join(", ", lambda.Parameters.Select(p => ToCode(indent + 1, p, false)));
-                            var funcType = PrettyTypeName(lambda.Type);
-                            sb.AppendLine(indent + 1, $"{funcType} {localVariable.Name} = ({lambdaParameters}) => ");
-                            sb.Append(ToCode(indent + 1, lambdaBlock));
-                            sb.AppendLine(";");
-                        }
-                        else
-                        {
-                            var declaration = $"{PrettyTypeName(lambda.Type)} {localVariable.Name}";
-                            var value = ToCode(indent + 1, be.Right, false);
-                            var assignment = $"{declaration} = {value};";
-                            sb.AppendLine(indent + 1, assignment);
-                        }
-                    }
-                    else
-                        sb.AppendLine(indent + 1, ToCode(indent + 1, blockStatement, false));
-                }
-                else
-                {
-                    if (ReferenceEquals(blockStatement, lastExpression))
-                    {
-                        sb.Append(indent + 1, "return ");
-                        sb.Append(ToCode(indent + 1, blockStatement, false));
-                    }
-                    else
-                    {
-                        sb.Append(ToCode(indent + 1, blockStatement));
-                    }
-
-                    sb.Append(';');
-                }
-            }
-
-            sb.AppendLine();
-            sb.Append(indent, "}");
-
-            return sb.ToString();
+            return $"{ToCode(indent, nullp.MemberExpression.Expression!)})?.{nullp.MemberExpression.Member.Name}";
         }
 
         private static string convertConstantExpression(Type constantType, object? value, string? identString = "")
@@ -698,7 +621,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string convertParameterExpression(string leadingIndentString, ParameterExpression pe)
         {
-            return $"{leadingIndentString}{pe.Name!}";
+            return $"{leadingIndentString}{paramName(pe)}";
         }
 
         private static string convertMethodCallExpression(int indent, string leadingIndentString, MethodCallExpression call)
@@ -718,26 +641,25 @@ namespace Hl7.Cql.CodeGeneration.NET
             sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}(");
 
             var paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1) : call.Arguments;
-            var firstArg = true;
+
+            bool firstArg = true;
             foreach (var argument in paramList)
             {
-                var argAsCode = ToCode(indent + 1, argument, !firstArg);
+                var argAsCode = ToCode(indent + 1, argument, false);
                 if (firstArg)
                 {
                     sb.Append(argAsCode);
                     firstArg = false;
                 }
                 else
-
                 {
-                    sb.AppendLine(", ");
+                    sb.Append(", ");
                     sb.Append(argAsCode);
                 }
             }
 
             sb.Append(')');
             return sb.ToString();
-
         }
 
         private static string convertDefaultExpression(string leadingIndentString, DefaultExpression de)
@@ -880,14 +802,16 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda)
         {
-            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => p.Name))})";
-            var lambdaBody = ToCode(indent + 1, lambda.Body, lambda.Body is BlockExpression);
+            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {p.Name}"))})";
+            var lambdaBody = ToCode(indent, lambda.Body, lambda.Body is LetExpression);
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
             lambdaSb.Append(lambdaParameters);
-            if (lambda.Body is BlockExpression)
-                lambdaSb.AppendLine(" => ");
-            else lambdaSb.Append(" => ");
+            if (lambda.Body is LetExpression)
+                lambdaSb.AppendLine(" =>");
+            else
+                lambdaSb.Append(" => ");
+
             lambdaSb.Append(lambdaBody);
             return lambdaSb.ToString();
         }
@@ -911,7 +835,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         else
                         {
                             var typeName = PrettyTypeName(unary.Type);
-                            var code = $"{leadingIndentString}(({typeName}){operand})";
+                            var code = $"{leadingIndentString}{Parenthesize($"({typeName}){operand}")}";
                             return code;
                         }
                     }
@@ -919,7 +843,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var operand = ToCode(indent, unary.Operand, false);
                         var typeName = PrettyTypeName(unary.Type);
-                        var code = $"{leadingIndentString}({operand} as {typeName})";
+                        var code = $"{leadingIndentString}{Parenthesize($"{operand} as {typeName}")}";
                         return code;
                     }
 
@@ -928,26 +852,32 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
+        private static string paramName(ParameterExpression p)
+        {
+            if (p.Name is not null) return p.Name;
+            else
+                return $"var{gen.GetId(p, out var _)}";
+        }
+
         private static string convertBinaryExpression(int indent, string leadingIndentString, BinaryExpression binary)
         {
-            var @operator = BinaryOperatorFor(binary.NodeType);
-
             if (binary.NodeType == ExpressionType.Assign &&
                 binary.Left is ParameterExpression parameter)
             {
                 string typeDeclaration = "var";
                 if (binary.Right is DefaultExpression
                     || (binary.Right is ConstantExpression ce && ce.Value == null)
-                    || (binary.Right.NodeType == ExpressionType.Convert && binary.Right is UnaryExpression rightUnary))
+                    )
                 {
                     typeDeclaration = PrettyTypeName(binary.Left.Type);
                 }
                 var right = ToCode(indent, binary.Right, false);
-                var assignment = $"{leadingIndentString}{typeDeclaration} {parameter.Name} = {right};";
+                var assignment = $"{leadingIndentString}{typeDeclaration} {paramName(parameter)} = {right};";
                 return assignment;
             }
             else
             {
+                var @operator = BinaryOperatorFor(binary.NodeType);
                 var left = ToCode(indent, binary.Left, false);
                 var right = ToCode(indent, binary.Right, false);
                 var binaryString = $"{leadingIndentString}({left} {@operator} {right})";
@@ -1091,27 +1021,29 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static void writeConditionalStatementBlock(TextWriter writer, int indentLevel, Expression conditional)
+        private static void writeConditionalStatementBlock(TextWriter writer, int indentLevel, Expression conditionalActionBlock)
         {
-            var parameterFinder = new ParameterFinder();
-            parameterFinder.Visit(conditional);
-            var parametersInBody = parameterFinder.Names;
-            var vng = new VariableNameGenerator(parametersInBody, "__");
-            var newBlock = new BlockTransformer(vng, parametersInBody).Visit(conditional)!;
+            var visitor = new ExtractLetExpressionTransformer();
+            conditionalActionBlock = FlattenLetExpressionVisitor.FlattenAndRename(visitor.Visit(conditionalActionBlock));
 
-            if (newBlock is BlockExpression)
+            if (conditionalActionBlock is LetExpression)
             {
-                writer.WriteLine(ToCode(indentLevel, newBlock));
+                writer.WriteLine(ToCode(indentLevel, conditionalActionBlock));
             }
             else
             {
                 writer.Write(indentLevel + 1, "return ");
-                writer.Write(ToCode(indentLevel + 1, newBlock, false));
+                writer.Write(ToCode(indentLevel + 1, conditionalActionBlock, false));
                 writer.WriteLine(";");
             }
         }
 
-        private static string Parenthesize(string term) => term.ToCharArray().Any(char.IsWhiteSpace) ? $"({term})" : term;
+        private static string Parenthesize(string term)
+        {
+            if (term.StartsWith('(') && term.EndsWith(')')) return term;
+
+            return term.ToCharArray().Any(char.IsWhiteSpace) ? $"({term})" : term;
+        }
 
         private static string escapeKeywords(string symbol)
         {

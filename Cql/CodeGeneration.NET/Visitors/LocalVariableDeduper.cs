@@ -34,8 +34,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitBlock(BlockExpression node)
         {
-            var replacements = new Dictionary<string, ParameterExpression>();
             var replacementsFound = true;
+            var replacements = new Dictionary<ParameterExpression, ParameterExpression>();
 
             //var variableExpressions = node.Expressions
             //    .OfType<BinaryExpression>()
@@ -64,6 +64,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             while (replacementsFound)
             {
+
+
                 foreach (var likeVariables in variableExpressions.GroupBy(expr => expr.Right.GetDebugView()))
                 {
                     if (likeVariables.Count() > 1)
@@ -80,17 +82,14 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                                     if (typesSame)
                                     {
                                         var replace = replaceParameter.Name!;
-                                        if (replacements.TryGetValue(replace, out var existingReplacement))
+                                        if (replacements.TryGetValue(replaceParameter, out var existingReplacement))
                                         {
                                             if (existingReplacement.Name != keep.Name)
                                                 continue; // don't attempt to replace this variable
                                         }
                                         else
                                         {
-                                            if (replace == "p")
-                                            {
-                                            }
-                                            replacements.Add(replace, keep);
+                                            replacements.Add(replaceParameter, keep);
                                         }
                                     }
                                 }

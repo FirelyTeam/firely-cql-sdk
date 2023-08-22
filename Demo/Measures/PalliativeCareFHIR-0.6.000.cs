@@ -54,44 +54,36 @@ public class PalliativeCareFHIR_0_6_000
 
     #endregion
 
-    private CqlValueSet Palliative_Care_Encounter_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", 
+    private CqlValueSet Palliative_Care_Encounter_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", 
 			null);
-    }
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090")]
     public CqlValueSet Palliative_Care_Encounter() => __Palliative_Care_Encounter.Value;
 
-    private CqlValueSet Palliative_Care_Intervention_Value()
-    {
-        return new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", 
+    private CqlValueSet Palliative_Care_Intervention_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", 
 			null);
-    }
 
     [CqlDeclaration("Palliative Care Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135")]
     public CqlValueSet Palliative_Care_Intervention() => __Palliative_Care_Intervention.Value;
 
-    private CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal__Value()
-    {
-        return new CqlCode("71007-9", 
+    private CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal__Value() =>
+		new CqlCode("71007-9", 
 			"http://loinc.org", 
 			null, 
 			null);
-    }
 
     [CqlDeclaration("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)")]
     public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_() => __Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_.Value;
 
-    private CqlCode survey_Value()
-    {
-        return new CqlCode("survey", 
+    private CqlCode survey_Value() =>
+		new CqlCode("survey", 
 			"http://terminology.hl7.org/CodeSystem/observation-category", 
 			null, 
 			null);
-    }
 
     [CqlDeclaration("survey")]
     public CqlCode survey() => __survey.Value;
@@ -102,6 +94,7 @@ public class PalliativeCareFHIR_0_6_000
 			"http://loinc.org", 
 			null, 
 			null);
+
 		return new CqlCode[]
 		{
 			a_,
@@ -117,6 +110,7 @@ public class PalliativeCareFHIR_0_6_000
 			"http://terminology.hl7.org/CodeSystem/observation-category", 
 			null, 
 			null);
+
 		return new CqlCode[]
 		{
 			a_,
@@ -126,20 +120,16 @@ public class PalliativeCareFHIR_0_6_000
     [CqlDeclaration("ObservationCategoryCodes")]
     public CqlCode[] ObservationCategoryCodes() => __ObservationCategoryCodes.Value;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Value()
-    {
-        return ((CqlInterval<CqlDateTime>)context.ResolveParameter("PalliativeCareFHIR-0.6.000", 
-			"Measurement Period", 
-			null));
-    }
+    private CqlInterval<CqlDateTime> Measurement_Period_Value() =>
+		(CqlInterval<CqlDateTime>)context.ResolveParameter("PalliativeCareFHIR-0.6.000", "Measurement Period", null);
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
 
     private Patient Patient_Value()
 	{
-		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
-			null);
+		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+
 		return context?.Operators.SingleOrNull<Patient>(a_);
 	}
 
@@ -150,108 +140,92 @@ public class PalliativeCareFHIR_0_6_000
 	{
 		var a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_();
 		var b_ = context?.Operators.ToList<CqlCode>(a_);
-		var c_ = context?.DataRetriever.RetrieveByCodes<Observation>(b_, 
-			null);
-		Func<Observation,bool?> v_ = (PalliativeAssessment) => 
+		var c_ = context?.DataRetriever.RetrieveByCodes<Observation>(b_, null);
+		var d_ = (Observation PalliativeAssessment) =>
 		{
-			var d_ = (PalliativeAssessment?.StatusElement as object);
-			var e_ = (context.Deeper(new CallStackEntry("ToString", 
+			var a_ = (PalliativeAssessment?.StatusElement as object);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_);
-			var g_ = "final";
-			var h_ = "amended";
-			var i_ = "corrected";
-			var f_ = (new string[]
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var c_ = "final";
+			var d_ = "amended";
+			var e_ = "corrected";
+			var f_ = new string[]
 			{
-				g_,
-				h_,
-				i_,
-			} as IEnumerable<string>);
-			var j_ = context?.Operators.InList<string>(e_, 
-				f_);
-			var k_ = (PalliativeAssessment?.Category as IEnumerable<CodeableConcept>);
-			Func<CodeableConcept,bool?> n_ = (PalliativeAssessmentCategory) => 
-			{
-				var l_ = this.survey();
-				var m_ = (FHIRHelpers_4_0_001.ToConcept(PalliativeAssessmentCategory)?.codes as IEnumerable<CqlCode>);
-				return context?.Operators.CodeInList(l_, 
-					m_);
+				c_,
+				d_,
+				e_,
 			};
-			var o_ = context?.Operators.WhereOrNull<CodeableConcept>(k_, 
-				n_);
-			var p_ = context?.Operators.ExistsInList<CodeableConcept>(o_);
-			var q_ = context?.Operators.And(j_, 
-				p_);
-			var r_ = (PalliativeAssessment?.Effective as object);
-			var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context?.Operators.Overlaps(s_, 
-				t_, 
-				null);
-			return context?.Operators.And(q_, 
-				u_);
-		};
-		var w_ = context?.Operators.WhereOrNull<Observation>(c_, 
-			v_);
-		var x_ = context?.Operators.ExistsInList<Observation>(w_);
-		var y_ = this.Palliative_Care_Encounter();
-		var z_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(y_, 
-			null);
-		Func<Encounter,bool?> ai_ = (PalliativeEncounter) => 
-		{
-			var ab_ = (PalliativeEncounter?.StatusElement as object);
-			var aa_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ab_) as object);
-			var ac_ = ("finished" as object);
-			var ad_ = context?.Operators.Equal(aa_, 
-				ac_);
-			var ae_ = (PalliativeEncounter?.Period as object);
-			var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ae_);
-			var ag_ = this.Measurement_Period();
-			var ah_ = context?.Operators.Overlaps(af_, 
-				ag_, 
-				null);
-			return context?.Operators.And(ad_, 
-				ah_);
-		};
-		var aj_ = context?.Operators.WhereOrNull<Encounter>(z_, 
-			ai_);
-		var ak_ = context?.Operators.ExistsInList<Encounter>(aj_);
-		var al_ = context?.Operators.Or(x_, 
-			ak_);
-		var am_ = this.Palliative_Care_Intervention();
-		var an_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(am_, 
-			null);
-		Func<Procedure,bool?> ay_ = (PalliativeIntervention) => 
-		{
-			var ao_ = (PalliativeIntervention?.StatusElement as object);
-			var ap_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ao_);
-			var ar_ = "completed";
-			var as_ = "in-progress";
-			var aq_ = (new string[]
+			var g_ = (f_ as IEnumerable<string>);
+			var h_ = context?.Operators.InList<string>(b_, g_);
+			var i_ = (PalliativeAssessment?.Category as IEnumerable<CodeableConcept>);
+			var j_ = (CodeableConcept PalliativeAssessmentCategory) =>
 			{
-				ar_,
-				as_,
-			} as IEnumerable<string>);
-			var at_ = context?.Operators.InList<string>(ap_, 
-				aq_);
-			var au_ = (PalliativeIntervention?.Performed as object);
-			var av_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(au_);
-			var aw_ = this.Measurement_Period();
-			var ax_ = context?.Operators.Overlaps(av_, 
-				aw_, 
-				null);
-			return context?.Operators.And(at_, 
-				ax_);
+				var a_ = this.survey();
+				var b_ = (FHIRHelpers_4_0_001.ToConcept(PalliativeAssessmentCategory)?.codes as IEnumerable<CqlCode>);
+
+				return context?.Operators.CodeInList(a_, b_);
+			};
+			var k_ = context?.Operators.WhereOrNull<CodeableConcept>(i_, j_);
+			var l_ = context?.Operators.ExistsInList<CodeableConcept>(k_);
+			var m_ = context?.Operators.And(h_, l_);
+			var n_ = (PalliativeAssessment?.Effective as object);
+			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(n_);
+			var p_ = this.Measurement_Period();
+			var q_ = context?.Operators.Overlaps(o_, p_, null);
+
+			return context?.Operators.And(m_, q_);
 		};
-		var az_ = context?.Operators.WhereOrNull<Procedure>(an_, 
-			ay_);
-		var ba_ = context?.Operators.ExistsInList<Procedure>(az_);
-		return context?.Operators.Or(al_, 
-			ba_);
+		var e_ = context?.Operators.WhereOrNull<Observation>(c_, d_);
+		var f_ = context?.Operators.ExistsInList<Observation>(e_);
+		var g_ = this.Palliative_Care_Encounter();
+		var h_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(g_, null);
+		var i_ = (Encounter PalliativeEncounter) =>
+		{
+			var a_ = (PalliativeEncounter?.StatusElement as object);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", 
+		null, 
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var c_ = (b_ as object);
+			var d_ = context?.Operators.Equal(c_, ("finished" as object));
+			var e_ = (PalliativeEncounter?.Period as object);
+			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(e_);
+			var g_ = this.Measurement_Period();
+			var h_ = context?.Operators.Overlaps(f_, g_, null);
+
+			return context?.Operators.And(d_, h_);
+		};
+		var j_ = context?.Operators.WhereOrNull<Encounter>(h_, i_);
+		var k_ = context?.Operators.ExistsInList<Encounter>(j_);
+		var l_ = context?.Operators.Or(f_, k_);
+		var m_ = this.Palliative_Care_Intervention();
+		var n_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(m_, null);
+		var o_ = (Procedure PalliativeIntervention) =>
+		{
+			var a_ = (PalliativeIntervention?.StatusElement as object);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", 
+		null, 
+		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var c_ = "completed";
+			var d_ = "in-progress";
+			var e_ = new string[]
+			{
+				c_,
+				d_,
+			};
+			var f_ = (e_ as IEnumerable<string>);
+			var g_ = context?.Operators.InList<string>(b_, f_);
+			var h_ = (PalliativeIntervention?.Performed as object);
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
+			var j_ = this.Measurement_Period();
+			var k_ = context?.Operators.Overlaps(i_, j_, null);
+
+			return context?.Operators.And(g_, k_);
+		};
+		var p_ = context?.Operators.WhereOrNull<Procedure>(n_, o_);
+		var q_ = context?.Operators.ExistsInList<Procedure>(p_);
+
+		return context?.Operators.Or(l_, q_);
 	}
 
     [CqlDeclaration("Palliative Care in the Measurement Period")]

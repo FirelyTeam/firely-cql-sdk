@@ -42,7 +42,8 @@ namespace Hl7.Cql.Compiler
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
             // Visit only the expression value of the assignment, and update the assignment if necessary.
-            var letStatements = LetStatements.Select(ls => ls.Update(ls.Left, ls.Conversion, visitor.Visit(ls.Right)));
+            var letStatements = LetStatements.Select(visitor.Visit).Cast<BinaryExpression>().ToList();
+
             var expression = visitor.Visit(Expression);
 
             return Update(letStatements, expression);

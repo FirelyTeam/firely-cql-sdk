@@ -6,10 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Compiler;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
@@ -19,72 +16,60 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
     /// </summary>
     internal class BlockTransformer : ExpressionVisitor
     {
-        public VariableNameGenerator NameGenerator { get; }
         public IEnumerable<string> ScopeReservedVariables { get; }
 
         public bool DeclareLocals { get; }
         public bool UseLazyBools { get; }
 
-        public BlockTransformer(VariableNameGenerator nameGenerator, IEnumerable<string> scopeReservedVariables,
+        public BlockTransformer(IEnumerable<string> scopeReservedVariables,
             bool declareLocals = false,
             bool useLazyBools = false)
         {
-            NameGenerator = nameGenerator;
             ScopeReservedVariables = scopeReservedVariables;
             DeclareLocals = declareLocals;
             UseLazyBools = useLazyBools;
         }
 
-        public override Expression? Visit(Expression? node) =>
-            node switch
-            {
-                { NodeType: ExpressionType.Call or ExpressionType.NewArrayInit or ExpressionType.MemberInit } =>
-                        ToLetExpression(node),
-                //     ToBlock(node),
-                _ => node,
-            };
-
-        private Expression ToLetExpression(Expression node)
+        public override Expression? Visit(Expression? node)
         {
-            var letTransformer = new ExtractLetExpressionTransformer();
-            var letExpression = (LetExpression)letTransformer.Visit(node);
+            var toLet = new ExtractLetExpressionTransformer();
+            return toLet.Visit(node);
 
             // TODO: Dedupe
             // TODO: Convert to lazy bools
 
-            return letExpression;
         }
 
-        private Expression ToBlock(Expression node)
-        {
-            var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
-            var newMethodCall = elvTransformer.Visit(node);
+        //private Expression ToBlock(Expression node)
+        //{
+        //    var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
+        //    var newMethodCall = elvTransformer.Visit(node);
 
-            if (elvTransformer.LocalAssignments.Any())
-            {
-                var parameters = elvTransformer.LocalAssignments
-                    .Select(b => (ParameterExpression)b.Left);
-                var all = elvTransformer.LocalAssignments.Concat(new Expression[] { newMethodCall });
+        //    if (elvTransformer.LocalAssignments.Any())
+        //    {
+        //        var parameters = elvTransformer.LocalAssignments
+        //            .Select(b => (ParameterExpression)b.Left);
+        //        var all = elvTransformer.LocalAssignments.Concat(new Expression[] { newMethodCall });
 
-                var block = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
-                var deduper = new LocalVariableDeduper(ScopeReservedVariables);
-                var deduped = deduper.Visit(block)
-                    ?? throw new InvalidOperationException("Visit returned null");
-                var result = deduped;
-                if (UseLazyBools)
-                {
-                    var vis = new LazyBoolAssignmentVisitor();
-                    var toLazies = vis.Visit(deduped);
-                    var referenceLazies = new LazyBoolAccessorVisitor(vis.NewParameters)
-                         .Visit(toLazies);
-                    result = referenceLazies;
-                }
-                return result;
-            }
-            else
-            {
-                return Expression.Block(newMethodCall);
-            }
-        }
+        //        var block = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
+        //        var deduper = new LocalVariableDeduper(ScopeReservedVariables);
+        //        var deduped = deduper.Visit(block)
+        //            ?? throw new InvalidOperationException("Visit returned null");
+        //        var result = deduped;
+        //        if (UseLazyBools)
+        //        {
+        //            var vis = new LazyBoolAssignmentVisitor();
+        //            var toLazies = vis.Visit(deduped);
+        //            var referenceLazies = new LazyBoolAccessorVisitor(vis.NewParameters)
+        //                 .Visit(toLazies);
+        //            result = referenceLazies;
+        //        }
+        //        return result;
+        //    }
+        //    else
+        //    {
+        //        return Expression.Block(newMethodCall);
+        //    }
+        //}
     }
 }
