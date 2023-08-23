@@ -665,6 +665,9 @@ namespace Hl7.Cql.Compiler
                 case Not not:
                     expression = Not(not, ctx);
                     break;
+                case NotEqual ne:
+                    expression = NotEqual(ne, ctx);
+                    break;
                 case Now now:
                     expression = Now(now, ctx);
                     break;
