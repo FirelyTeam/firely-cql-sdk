@@ -3,8 +3,8 @@
 	<Import Project="$(ProjectPath)..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<AssemblyName>Hl7.Cql.MeasureCompiler</AssemblyName>
-		<RootNamespace>Hl7.Cql.MeasureCompiler</RootNamespace>
+		<AssemblyName>Hl7.Cql.Compiler</AssemblyName>
+		<RootNamespace>Hl7.Cql.Compiler</RootNamespace>
 		<Product>CQL measure compiler</Product>
 		<Description>Translates ELM into C# expression trees and can emit those expression trees into either runtime Delegates or C# source code.</Description>
 	</PropertyGroup>
@@ -20,6 +20,12 @@
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\ELM\ELM.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>

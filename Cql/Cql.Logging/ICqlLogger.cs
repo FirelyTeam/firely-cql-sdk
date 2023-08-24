@@ -7,16 +7,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Fhir.Model;
-using System.Runtime.Loader;
-
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Logging
 {
-    public static class LibraryExtensions
+    internal interface ICqlLogger
     {
-        public static void LoadInto(this Library library, AssemblyLoadContext context)
-        {
-
-        }
+        void Write(string value);
+        void WriteLine(string value);
     }
 }

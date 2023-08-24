@@ -20,7 +20,8 @@ namespace Hl7.Cql.ValueSetLoaders
             Func<ValueSet, bool>? onInvalidValueSet = null) =>
                 new ValueSetLoader(values, activeOnly, onInvalidValueSet).Load();
     }
-    public class ValueSetLoader : IValueSetLoader
+
+    internal class ValueSetLoader : IValueSetLoader
     {
 
         public ValueSetLoader(IEnumerable<ValueSet> valuesets,

@@ -17,7 +17,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Provides default resolution of CQL System types to .NET types.
     /// </summary>
-    public abstract class BaseTypeResolver : TypeResolver
+    internal abstract class BaseTypeResolver : TypeResolver
     {
         /// <summary>
         /// Mapping from CQL typerefs to .NET types.

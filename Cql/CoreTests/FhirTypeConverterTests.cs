@@ -12,7 +12,7 @@ namespace CoreTests
     [TestClass]
     public class FhirTypeConverterTests
     {
-        public static readonly TypeConverter FhirTypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        internal static readonly TypeConverter FhirTypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
         [TestMethod]
         public void ConvertParameters_Integer()

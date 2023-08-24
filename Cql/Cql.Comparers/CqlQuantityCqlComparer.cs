@@ -12,7 +12,7 @@ using System;
 
 namespace Hl7.Cql.Comparers
 {
-    public class CqlQuantityCqlComparer : ICqlComparer<CqlQuantity>, ICqlComparer
+    internal class CqlQuantityCqlComparer : ICqlComparer<CqlQuantity>, ICqlComparer
     {
         public CqlQuantityCqlComparer(ICqlComparer valueComparer, ICqlComparer unitComparer)
         {

@@ -27,7 +27,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
-    public partial class ExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         /// <summary>
         /// Creates an instance.
@@ -2212,14 +2212,15 @@ namespace Hl7.Cql.Compiler
                 .ToArray();
 
             var funcType = GetFuncType(funcTypeParameters);
+#if WE_STILL_NEED_THE_STACK
             var callStackCtor = typeof(CallStackEntry).GetConstructor(new[] { typeof(string), typeof(string), typeof(string) })!;
             var newCallStack = Expression.New(callStackCtor,
                 Expression.Constant(op.name, typeof(string)),
                 Expression.Constant(op.locator, typeof(string)),
                 Expression.Constant(op.localId, typeof(string)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper))!, newCallStack);
-
+            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!, newCallStack);
+#endif
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
@@ -2233,7 +2234,11 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
+#if WE_STILL_NEED_THE_STACK
                         var bind = OperatorBinding.Bind(CqlOperator.Convert, deeper,
+#else
+                        var bind = OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter,
+#endif
                             new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                         return bind;
                     }
@@ -2243,7 +2248,11 @@ namespace Hl7.Cql.Compiler
             // to the actual function are.
             operands = new[]
             {
-                    deeper
+#if WE_STILL_NEED_THE_STACK
+                 deeper
+#else
+                    ctx.RuntimeContextParameter
+#endif
             }
             .Concat(operands)
             .ToArray();

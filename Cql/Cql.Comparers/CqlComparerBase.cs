@@ -12,7 +12,7 @@ namespace Hl7.Cql.Comparers
     /// Implements base functionality for <see cref="ICqlComparer"/> and <see cref="IEquivalenceComparer"/>.
     /// </summary>
     /// <typeparam name="T">The type to compare.</typeparam>
-    public abstract class CqlComparerBase<T> : ICqlComparer<T>, ICqlComparer,
+    internal abstract class CqlComparerBase<T> : ICqlComparer<T>, ICqlComparer,
         IEquivalenceComparer<T>, IEquivalenceComparer
         where T : class
     {

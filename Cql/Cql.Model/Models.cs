@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace Hl7.Cql.Model
 {
-    public static class Models
+    internal static class Models
     {
         private static readonly XmlSerializer xmlSerializer = new(typeof(ModelInfo));
         private static readonly Lazy<ModelInfo> _Fhir401 = new(() => LoadEmbeddedResource("Fhir401"), true);

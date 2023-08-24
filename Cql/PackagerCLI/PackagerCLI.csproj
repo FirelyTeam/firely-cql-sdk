@@ -1,11 +1,12 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>PackagerCLI</RootNamespace>
+		<AssemblyName>PackagerCLI</AssemblyName>
 	</PropertyGroup>
 
 	<ItemGroup>
