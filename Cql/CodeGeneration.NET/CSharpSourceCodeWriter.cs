@@ -383,14 +383,14 @@ namespace Hl7.Cql.CodeGeneration.NET
             var parameterFinder = new ParameterFinder();
             parameterFinder.Visit(overload.Item2.Body);
             var parametersInBody = parameterFinder.Parameters;
+            var vng = new VariableNameGenerator(parametersInBody, postfix: "_");
 
             var visitedBody = Transform(overload.Item2.Body,
                 invocationsTransformer,
-                new BlockTransformer(parameters),
-                new RedundantCastsTransformer()
+                new ExtractLetExpressionTransformer(),
+                new RedundantCastsTransformer(),
+                new LetExpressionVisitor(vng)
             );
-
-            visitedBody = FlattenLetExpressionVisitor.FlattenAndRename(visitedBody, parametersInBody);
 
             if (isDefinition(overload))
             {
@@ -510,7 +510,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 WriteConditional(writer, indentLevel + 1, conditional, writeLeadingIndent);
                 writer.WriteLine(indentLevel, "}");
             }
-            else if (expression is LetExpression)
+            else if (expression is BlockExpression)
             {
                 writer.WriteLine();
                 var asString = ToCode(indentLevel, expression, false);
@@ -544,36 +544,39 @@ namespace Hl7.Cql.CodeGeneration.NET
                 ParameterExpression pe => convertParameterExpression(leadingIndentString, pe),
                 DefaultExpression de => convertDefaultExpression(leadingIndentString, de),
                 NullConditionalMemberExpression nullp => convertNullConditionalMemberExpression(indent, nullp),
-                LetExpression let => convertLetExpression(indent, let),
+                BlockExpression block => convertBlockExpression(indent, block),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
             };
         }
 
         private static readonly ObjectIDGenerator gen = new();
 
-        private static string convertLetExpression(int indent, LetExpression let)
+        private static string convertBlockExpression(int indent, BlockExpression block)
         {
-            if (!let.LetStatements.Any())
-                return ToCode(indent, let.Expression, false);
-            else
-            {
-                var sb = new StringBuilder();
-                sb.AppendLine(indent, "{");
+            var sb = new StringBuilder();
 
-                foreach (var letStatement in let.LetStatements)
+            sb.AppendLine(indent, "{");
+
+            var lastExpression = block.Expressions.LastOrDefault();
+            foreach (var blockStatement in block.Expressions)
+            {
+                if (ReferenceEquals(blockStatement, lastExpression))
                 {
-                    sb.AppendLine(indent + 1, ToCode(indent + 1, letStatement, false));
+                    sb.AppendLine();
+                    sb.Append(indent + 1, "return ");
+                    sb.Append(ToCode(indent + 1, blockStatement, false));
+                }
+                else
+                {
+                    sb.Append(ToCode(indent + 1, blockStatement));
                 }
 
-                sb.AppendLine();
-                sb.Append(indent + 1, "return ");
-                sb.Append(ToCode(indent + 1, let.Expression, false));
-                sb.Append(';');
-                sb.AppendLine();
-                sb.Append(indent, "}");
-
-                return sb.ToString();
+                sb.AppendLine(";");
             }
+
+            sb.Append(indent, "}");
+
+            return sb.ToString();
         }
 
         private static string convertNullConditionalMemberExpression(int indent, NullConditionalMemberExpression nullp)
@@ -784,7 +787,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static string convertNewExpression(int indent, string leadingIndentString, NewExpression @new)
         {
             var arguments = @new.Arguments.Select(a => ToCode(0, a));
-            var argString = string.Join($", {Environment.NewLine}{IndentString(indent + 1)}", arguments);
+            var argString = string.Join(", ", arguments);
 
             var newSb = new StringBuilder();
             newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}");
@@ -803,11 +806,11 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda)
         {
             var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {p.Name}"))})";
-            var lambdaBody = ToCode(indent, lambda.Body, lambda.Body is LetExpression);
+            var lambdaBody = ToCode(indent, lambda.Body, lambda.Body is BlockExpression);
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
             lambdaSb.Append(lambdaParameters);
-            if (lambda.Body is LetExpression)
+            if (lambda.Body is BlockExpression)
                 lambdaSb.AppendLine(" =>");
             else
                 lambdaSb.Append(" => ");
@@ -865,14 +868,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 binary.Left is ParameterExpression parameter)
             {
                 string typeDeclaration = "var";
-                if (binary.Right is DefaultExpression
-                    || (binary.Right is ConstantExpression ce && ce.Value == null)
-                    )
+                if (binary.Right is DefaultExpression ||
+                   (binary.Right is ConstantExpression ce && ce.Value == null))
                 {
                     typeDeclaration = PrettyTypeName(binary.Left.Type);
                 }
                 var right = ToCode(indent, binary.Right, false);
-                var assignment = $"{leadingIndentString}{typeDeclaration} {paramName(parameter)} = {right};";
+                var assignment = $"{leadingIndentString}{typeDeclaration} {paramName(parameter)} = {right}";
                 return assignment;
             }
             else
@@ -1024,9 +1026,9 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static void writeConditionalStatementBlock(TextWriter writer, int indentLevel, Expression conditionalActionBlock)
         {
             var visitor = new ExtractLetExpressionTransformer();
-            conditionalActionBlock = FlattenLetExpressionVisitor.FlattenAndRename(visitor.Visit(conditionalActionBlock));
+            conditionalActionBlock = new LetExpressionVisitor(new VariableNameGenerator(postfix: "__")).Visit(visitor.Visit(conditionalActionBlock));
 
-            if (conditionalActionBlock is LetExpression)
+            if (conditionalActionBlock is BlockExpression)
             {
                 writer.WriteLine(ToCode(indentLevel, conditionalActionBlock));
             }

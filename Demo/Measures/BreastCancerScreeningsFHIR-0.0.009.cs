@@ -119,96 +119,84 @@ public class BreastCancerScreeningsFHIR_0_0_009
     #endregion
 
     private CqlValueSet Bilateral_Mastectomy_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005", null);
 
     [CqlDeclaration("Bilateral Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005")]
     public CqlValueSet Bilateral_Mastectomy() => __Bilateral_Mastectomy.Value;
 
     private CqlValueSet History_of_bilateral_mastectomy_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1068", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1068", null);
 
     [CqlDeclaration("History of bilateral mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1068")]
     public CqlValueSet History_of_bilateral_mastectomy() => __History_of_bilateral_mastectomy.Value;
 
     private CqlValueSet Left_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1036", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1036", null);
 
     [CqlDeclaration("Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1036")]
     public CqlValueSet Left() => __Left.Value;
 
     private CqlValueSet Mammography_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.11.1047", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.11.1047", null);
 
     [CqlDeclaration("Mammography")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.11.1047")]
     public CqlValueSet Mammography() => __Mammography.Value;
 
     private CqlValueSet Online_Assessments_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Online_Assessments() => __Online_Assessments.Value;
 
     private CqlValueSet Right_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1035", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1035", null);
 
     [CqlDeclaration("Right")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1035")]
     public CqlValueSet Right() => __Right.Value;
 
     private CqlValueSet Status_Post_Left_Mastectomy_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1069", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1069", null);
 
     [CqlDeclaration("Status Post Left Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1069")]
     public CqlValueSet Status_Post_Left_Mastectomy() => __Status_Post_Left_Mastectomy.Value;
 
     private CqlValueSet Status_Post_Right_Mastectomy_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1070", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1070", null);
 
     [CqlDeclaration("Status Post Right Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1070")]
     public CqlValueSet Status_Post_Right_Mastectomy() => __Status_Post_Right_Mastectomy.Value;
 
     private CqlValueSet Telephone_Visits_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits() => __Telephone_Visits.Value;
 
     private CqlValueSet Unilateral_Mastectomy_Left_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1133", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1133", null);
 
     [CqlDeclaration("Unilateral Mastectomy Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1133")]
     public CqlValueSet Unilateral_Mastectomy_Left() => __Unilateral_Mastectomy_Left.Value;
 
     private CqlValueSet Unilateral_Mastectomy_Right_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1134", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1134", null);
 
     [CqlDeclaration("Unilateral Mastectomy Right")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1134")]
     public CqlValueSet Unilateral_Mastectomy_Right() => __Unilateral_Mastectomy_Right.Value;
 
     private CqlValueSet Unilateral_Mastectomy__Unspecified_Laterality_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1071", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1071", null);
 
     [CqlDeclaration("Unilateral Mastectomy, Unspecified Laterality")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1071")]
@@ -266,17 +254,15 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private IEnumerable<Encounter> Telehealth_Services_Value()
 	{
-		var a_ = this.Online_Assessments();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, null);
-		var c_ = this.Telephone_Visits();
-		var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, null);
-		var e_ = context?.Operators.ListUnion<Encounter>(b_, d_);
-		var f_ = (Encounter TelehealthEncounter) =>
+		var i_ = this.Online_Assessments();
+		var j_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(i_, null);
+		var k_ = this.Telephone_Visits();
+		var l_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(k_, null);
+		var m_ = context?.Operators.ListUnion<Encounter>(j_, l_);
+		var n_ = (Encounter TelehealthEncounter) =>
 		{
 			var a_ = (TelehealthEncounter?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = (b_ as object);
 			var d_ = context?.Operators.Equal(c_, ("finished" as object));
 			var e_ = this.Measurement_Period();
@@ -287,7 +273,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return context?.Operators.And(d_, h_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(e_, f_);
+		return context?.Operators.WhereOrNull<Encounter>(m_, n_);
 	}
 
     [CqlDeclaration("Telehealth Services")]
@@ -318,9 +304,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var g_ = context?.Operators.Interval((int?)51, (int?)74, true, false);
 		var h_ = context?.Operators.ElementInInterval<int?>(f_, g_, null);
 		var i_ = (this.Patient()?.GenderElement as object);
-		var j_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(i_);
+		var j_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(i_);
 		var k_ = (j_ as object);
 		var l_ = context?.Operators.Equal(k_, ("female" as object));
 		var m_ = context?.Operators.And(h_, l_);
@@ -343,11 +327,11 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Value()
 	{
-		var a_ = this.Status_Post_Right_Mastectomy();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
-		var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = (Condition UnilateralMastectomyDiagnosis) =>
+		var i_ = this.Status_Post_Right_Mastectomy();
+		var j_ = context?.DataRetriever.RetrieveByValueSet<Condition>(i_, null);
+		var k_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
+		var l_ = context?.DataRetriever.RetrieveByValueSet<Condition>(k_, null);
+		var m_ = (Condition UnilateralMastectomyDiagnosis) =>
 		{
 			var a_ = (UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>);
 			var b_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
@@ -356,19 +340,19 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return context?.Operators.ConceptsInValueSet(c_, d_);
 		};
-		var f_ = context?.Operators.WhereOrNull<Condition>(d_, e_);
-		var g_ = context?.Operators.ListUnion<Condition>(b_, f_);
-		var h_ = (Condition RightMastectomy) =>
+		var n_ = context?.Operators.WhereOrNull<Condition>(l_, m_);
+		var o_ = context?.Operators.ListUnion<Condition>(j_, n_);
+		var p_ = (Condition RightMastectomy) =>
 		{
-			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(RightMastectomy);
-			var b_ = context?.Operators.Start(a_);
-			var c_ = this.Measurement_Period();
-			var d_ = context?.Operators.End(c_);
+			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(RightMastectomy);
+			var f_ = context?.Operators.Start(e_);
+			var g_ = this.Measurement_Period();
+			var h_ = context?.Operators.End(g_);
 
-			return context?.Operators.SameOrBefore(b_, d_, null);
+			return context?.Operators.SameOrBefore(f_, h_, null);
 		};
 
-		return context?.Operators.WhereOrNull<Condition>(g_, h_);
+		return context?.Operators.WhereOrNull<Condition>(o_, p_);
 	}
 
     [CqlDeclaration("Right Mastectomy Diagnosis")]
@@ -376,14 +360,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private IEnumerable<Procedure> Right_Mastectomy_Procedure_Value()
 	{
-		var a_ = this.Unilateral_Mastectomy_Right();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = (Procedure UnilateralMastectomyRightPerformed) =>
+		var k_ = this.Unilateral_Mastectomy_Right();
+		var l_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(k_, null);
+		var m_ = (Procedure UnilateralMastectomyRightPerformed) =>
 		{
 			var a_ = (UnilateralMastectomyRightPerformed?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = (b_ as object);
 			var d_ = context?.Operators.Equal(c_, ("completed" as object));
 			var e_ = (UnilateralMastectomyRightPerformed?.Performed as object);
@@ -396,7 +378,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return context?.Operators.And(d_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(b_, c_);
+		return context?.Operators.WhereOrNull<Procedure>(l_, m_);
 	}
 
     [CqlDeclaration("Right Mastectomy Procedure")]
@@ -404,11 +386,11 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Value()
 	{
-		var a_ = this.Status_Post_Left_Mastectomy();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
-		var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, null);
-		var e_ = (Condition UnilateralMastectomyDiagnosis) =>
+		var i_ = this.Status_Post_Left_Mastectomy();
+		var j_ = context?.DataRetriever.RetrieveByValueSet<Condition>(i_, null);
+		var k_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
+		var l_ = context?.DataRetriever.RetrieveByValueSet<Condition>(k_, null);
+		var m_ = (Condition UnilateralMastectomyDiagnosis) =>
 		{
 			var a_ = (UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>);
 			var b_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
@@ -417,19 +399,19 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return context?.Operators.ConceptsInValueSet(c_, d_);
 		};
-		var f_ = context?.Operators.WhereOrNull<Condition>(d_, e_);
-		var g_ = context?.Operators.ListUnion<Condition>(b_, f_);
-		var h_ = (Condition LeftMastectomy) =>
+		var n_ = context?.Operators.WhereOrNull<Condition>(l_, m_);
+		var o_ = context?.Operators.ListUnion<Condition>(j_, n_);
+		var p_ = (Condition LeftMastectomy) =>
 		{
-			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(LeftMastectomy);
-			var b_ = context?.Operators.Start(a_);
-			var c_ = this.Measurement_Period();
-			var d_ = context?.Operators.End(c_);
+			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(LeftMastectomy);
+			var f_ = context?.Operators.Start(e_);
+			var g_ = this.Measurement_Period();
+			var h_ = context?.Operators.End(g_);
 
-			return context?.Operators.SameOrBefore(b_, d_, null);
+			return context?.Operators.SameOrBefore(f_, h_, null);
 		};
 
-		return context?.Operators.WhereOrNull<Condition>(g_, h_);
+		return context?.Operators.WhereOrNull<Condition>(o_, p_);
 	}
 
     [CqlDeclaration("Left Mastectomy Diagnosis")]
@@ -437,14 +419,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private IEnumerable<Procedure> Left_Mastectomy_Procedure_Value()
 	{
-		var a_ = this.Unilateral_Mastectomy_Left();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = (Procedure UnilateralMastectomyLeftPerformed) =>
+		var k_ = this.Unilateral_Mastectomy_Left();
+		var l_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(k_, null);
+		var m_ = (Procedure UnilateralMastectomyLeftPerformed) =>
 		{
 			var a_ = (UnilateralMastectomyLeftPerformed?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = (b_ as object);
 			var d_ = context?.Operators.Equal(c_, ("completed" as object));
 			var e_ = (UnilateralMastectomyLeftPerformed?.Performed as object);
@@ -457,7 +437,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return context?.Operators.And(d_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(b_, c_);
+		return context?.Operators.WhereOrNull<Procedure>(l_, m_);
 	}
 
     [CqlDeclaration("Left Mastectomy Procedure")]
@@ -465,9 +445,9 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Value()
 	{
-		var a_ = this.History_of_bilateral_mastectomy();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, null);
-		var c_ = (Condition BilateralMastectomyHistory) =>
+		var e_ = this.History_of_bilateral_mastectomy();
+		var f_ = context?.DataRetriever.RetrieveByValueSet<Condition>(e_, null);
+		var g_ = (Condition BilateralMastectomyHistory) =>
 		{
 			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(BilateralMastectomyHistory);
 			var b_ = context?.Operators.Start(a_);
@@ -477,7 +457,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return context?.Operators.SameOrBefore(b_, d_, null);
 		};
 
-		return context?.Operators.WhereOrNull<Condition>(b_, c_);
+		return context?.Operators.WhereOrNull<Condition>(f_, g_);
 	}
 
     [CqlDeclaration("Bilateral Mastectomy Diagnosis")]
@@ -485,14 +465,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Value()
 	{
-		var a_ = this.Bilateral_Mastectomy();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, null);
-		var c_ = (Procedure BilateralMastectomyPerformed) =>
+		var k_ = this.Bilateral_Mastectomy();
+		var l_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(k_, null);
+		var m_ = (Procedure BilateralMastectomyPerformed) =>
 		{
 			var a_ = (BilateralMastectomyPerformed?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = (b_ as object);
 			var d_ = context?.Operators.Equal(c_, ("completed" as object));
 			var e_ = (BilateralMastectomyPerformed?.Performed as object);
@@ -505,7 +483,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			return context?.Operators.And(d_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(b_, c_);
+		return context?.Operators.WhereOrNull<Procedure>(l_, m_);
 	}
 
     [CqlDeclaration("Bilateral Mastectomy Procedure")]
@@ -556,14 +534,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private bool? Observation_with_status_Value()
 	{
-		var a_ = this.Mammography();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = (Observation Mammogram) =>
+		var z_ = this.Mammography();
+		var aa_ = context?.DataRetriever.RetrieveByValueSet<Observation>(z_, null);
+		var ab_ = (Observation Mammogram) =>
 		{
 			var a_ = (Mammogram?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = "final";
 			var d_ = "amended";
 			var e_ = "corrected";
@@ -596,9 +572,9 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return context?.Operators.And(i_, y_);
 		};
-		var d_ = context?.Operators.WhereOrNull<Observation>(b_, c_);
+		var ac_ = context?.Operators.WhereOrNull<Observation>(aa_, ab_);
 
-		return context?.Operators.ExistsInList<Observation>(d_);
+		return context?.Operators.ExistsInList<Observation>(ac_);
 	}
 
     [CqlDeclaration("Observation with status")]
@@ -606,14 +582,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private bool? Diagnostic_Report_with_status_Value()
 	{
-		var a_ = this.Mammography();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<DiagnosticReport>(a_, null);
-		var c_ = (DiagnosticReport Mammogram) =>
+		var z_ = this.Mammography();
+		var aa_ = context?.DataRetriever.RetrieveByValueSet<DiagnosticReport>(z_, null);
+		var ab_ = (DiagnosticReport Mammogram) =>
 		{
 			var a_ = (Mammogram?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = "final";
 			var d_ = "amended";
 			var e_ = "corrected";
@@ -646,9 +620,9 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return context?.Operators.And(i_, y_);
 		};
-		var d_ = context?.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
+		var ac_ = context?.Operators.WhereOrNull<DiagnosticReport>(aa_, ab_);
 
-		return context?.Operators.ExistsInList<DiagnosticReport>(d_);
+		return context?.Operators.ExistsInList<DiagnosticReport>(ac_);
 	}
 
     [CqlDeclaration("Diagnostic Report with status")]
@@ -683,14 +657,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private bool? Observation_without_appropriate_status_Value()
 	{
-		var a_ = this.Mammography();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, null);
-		var c_ = (Observation Mammogram) =>
+		var aa_ = this.Mammography();
+		var ab_ = context?.DataRetriever.RetrieveByValueSet<Observation>(aa_, null);
+		var ac_ = (Observation Mammogram) =>
 		{
 			var a_ = (Mammogram?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = "final";
 			var d_ = "amended";
 			var e_ = "corrected";
@@ -724,9 +696,9 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return context?.Operators.And(j_, z_);
 		};
-		var d_ = context?.Operators.WhereOrNull<Observation>(b_, c_);
+		var ad_ = context?.Operators.WhereOrNull<Observation>(ab_, ac_);
 
-		return context?.Operators.ExistsInList<Observation>(d_);
+		return context?.Operators.ExistsInList<Observation>(ad_);
 	}
 
     [CqlDeclaration("Observation without appropriate status")]
@@ -734,14 +706,12 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private bool? Diagnostic_Report_without_appropriate_status_Value()
 	{
-		var a_ = this.Mammography();
-		var b_ = context?.DataRetriever.RetrieveByValueSet<DiagnosticReport>(a_, null);
-		var c_ = (DiagnosticReport Mammogram) =>
+		var aa_ = this.Mammography();
+		var ab_ = context?.DataRetriever.RetrieveByValueSet<DiagnosticReport>(aa_, null);
+		var ac_ = (DiagnosticReport Mammogram) =>
 		{
 			var a_ = (Mammogram?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
 			var c_ = "final";
 			var d_ = "amended";
 			var e_ = "corrected";
@@ -775,9 +745,9 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
 			return context?.Operators.And(j_, z_);
 		};
-		var d_ = context?.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
+		var ad_ = context?.Operators.WhereOrNull<DiagnosticReport>(ab_, ac_);
 
-		return context?.Operators.ExistsInList<DiagnosticReport>(d_);
+		return context?.Operators.ExistsInList<DiagnosticReport>(ad_);
 	}
 
     [CqlDeclaration("Diagnostic Report without appropriate status")]

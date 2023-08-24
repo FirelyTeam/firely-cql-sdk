@@ -12,12 +12,15 @@ using System.Linq.Expressions;
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
 
-
+    /// <summary>
+    /// This visitor travels a (subtree), replacing ParameterExpressions, where the 'key' in the dictionary
+    /// is the parameter to replace, and the value is the replacement.
+    /// </summary>
     internal class ParameterReplacer : ExpressionVisitor
     {
-        public ParameterReplacer(IDictionary<ParameterExpression, ParameterExpression> replacements)
+        public ParameterReplacer(IDictionary<ParameterExpression, ParameterExpression>? replacements = null)
         {
-            Replacements = replacements;
+            Replacements = replacements ?? new Dictionary<ParameterExpression, ParameterExpression>();
         }
 
         public IDictionary<ParameterExpression, ParameterExpression> Replacements { get; }
@@ -28,27 +31,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 return replacement;
             else
                 return base.VisitParameter(node);
-        }
-
-        protected override Expression VisitBlock(BlockExpression node)
-        {
-            var newExpressions = new List<Expression>();
-            foreach (var expression in node.Expressions)
-            {
-                if (expression is BinaryExpression be
-                    && be.Left is ParameterExpression parameter
-                    && parameter.Name != null
-                    && Replacements.Keys.Contains(parameter))
-                {
-                    continue;
-                }
-                else
-                {
-                    newExpressions.Add(Visit(expression));
-                }
-            }
-            var newBlock = Expression.Block(node.Variables, newExpressions.ToArray());
-            return newBlock;
         }
     }
 }

@@ -15,6 +15,29 @@ namespace Hl7.Cql.Compiler
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+    /// <summary>
+    /// Represents an ML-style "let" expression, i.e. a expression with a set of variables.
+    /// An example would be:
+    ///     let x = 4,
+    ///         y = 5,
+    ///     in x + y*2;
+    /// 
+    /// This expression is used in our system to represent the rewrite from a deeply nested single 
+    /// expression into a simpler one, e.g. where a function call `(x+6).SomeFunc(y+6, "long string", subfunc(x))`
+    /// would be converted to:
+    ///     let a = x+6,
+    ///         b = y+6,
+    ///         c = "long string",
+    ///         d = subfunc(x)
+    ///     in a.SomeFunc(b,c,d)
+    ///     
+    /// Note that the result of this expression is still an expression (which is the single expression
+    /// after the 'in'), and the variables are "fresh" and not supposed to be mutated, they should be
+    /// considered read-only "definitions" rather than variables.
+    /// 
+    /// The LetExpression reduces to a block that scopes the variables in the lets, turns the lets
+    /// into assignments and then returns the "in" expression as a result (=last expression in block).
+    /// </summary>
     public class LetExpression : Expression
     {
         public LetExpression(IEnumerable<BinaryExpression> letStatements, Expression expression)

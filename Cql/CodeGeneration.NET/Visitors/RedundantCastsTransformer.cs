@@ -19,6 +19,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         {
             this.special = special;
         }
+
         protected override Expression VisitConditional(ConditionalExpression node)
         {
             var condition = Visit(node.Test);
@@ -30,6 +31,19 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 ConstantExpression { Value: false } => Visit(node.IfFalse),
                 _ => node.Update(condition, Visit(node.IfTrue), Visit(node.IfFalse))
             };
+        }
+
+        protected override Expression VisitTypeBinary(TypeBinaryExpression node)
+        {
+            // ((x as Y) as Y) => (x as Y)
+            if (node.NodeType == ExpressionType.TypeAs &&
+                node.Expression is TypeBinaryExpression { NodeType: ExpressionType.TypeAs } nested &&
+                node.TypeOperand == nested.TypeOperand)
+            {
+                return base.Visit(node.Expression);
+            }
+            else
+                return base.VisitTypeBinary(node);
         }
 
         protected override Expression VisitBinary(BinaryExpression node)

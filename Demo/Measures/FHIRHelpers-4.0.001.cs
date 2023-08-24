@@ -51,12 +51,12 @@ public class FHIRHelpers_4_0_001
             return (null as CqlInterval<CqlDateTime>);
         else
 		{
-			var a_ = period?.StartElement?.Value;
-			var b_ = context?.Operators.ConvertStringToDateTime(a_);
-			var c_ = period?.EndElement?.Value;
-			var d_ = context?.Operators.ConvertStringToDateTime(c_);
+			var a__ = period?.StartElement?.Value;
+			var b__ = context?.Operators.ConvertStringToDateTime(a__);
+			var c__ = period?.EndElement?.Value;
+			var d__ = context?.Operators.ConvertStringToDateTime(c__);
 
-			return context?.Operators.Interval(b_, d_, true, true);
+			return context?.Operators.Interval(b__, d__, true, true);
 		}
     }
 
@@ -68,12 +68,12 @@ public class FHIRHelpers_4_0_001
             return (null as CqlInterval<CqlQuantity>);
         else
 		{
-			var a_ = range?.Low;
-			var b_ = this.ToQuantity(a_);
-			var c_ = range?.High;
-			var d_ = this.ToQuantity(c_);
+			var a__ = range?.Low;
+			var b__ = this.ToQuantity(a__);
+			var c__ = range?.High;
+			var d__ = this.ToQuantity(c__);
 
-			return context?.Operators.Interval(b_, d_, true, true);
+			return context?.Operators.Interval(b__, d__, true, true);
 		}
     }
 
@@ -85,13 +85,13 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a_ = quantity?.ValueElement?.Value;
-			var b_ = quantity?.UnitElement?.Value;
+			var a__ = quantity?.ValueElement?.Value;
+			var b__ = quantity?.UnitElement?.Value;
 
 			return new CqlQuantity
 			{
-				value = a_,
-				unit = b_,
+				value = a__,
+				unit = b__,
 			};
 		}
     }
@@ -104,13 +104,12 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a_ = ratio?.Numerator;
-			var b_ = this.ToQuantity(a_);
-			var c_ = ratio?.Denominator;
-			var d_ = this.ToQuantity(c_);
+			var a__ = ratio?.Numerator;
+			var b__ = this.ToQuantity(a__);
+			var c__ = ratio?.Denominator;
+			var d__ = this.ToQuantity(c__);
 
-			return new CqlRatio(b_, 
-				d_);
+			return new CqlRatio(b__, d__);
 		}
     }
 
@@ -121,10 +120,7 @@ public class FHIRHelpers_4_0_001
         if ((coding == null))
             return null;
         else
-            return new CqlCode(coding?.CodeElement?.Value, 
-				coding?.SystemElement?.Value, 
-				coding?.VersionElement?.Value, 
-				coding?.DisplayElement?.Value);
+            return new CqlCode(coding?.CodeElement?.Value, coding?.SystemElement?.Value, coding?.VersionElement?.Value, coding?.DisplayElement?.Value);
     }
 
 
@@ -135,12 +131,11 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a_ = (concept?.Coding as IEnumerable<Coding>);
-			var b_ = (Coding C) => this.ToCode(C);
-			var c_ = context?.Operators.SelectOrNull<Coding, CqlCode>(a_, b_);
+			var a__ = (concept?.Coding as IEnumerable<Coding>);
+			var b__ = (Coding C) => this.ToCode(C);
+			var c__ = context?.Operators.SelectOrNull<Coding, CqlCode>(a__, b__);
 
-			return new CqlConcept(c_, 
-				concept?.TextElement?.Value);
+			return new CqlConcept(c__, concept?.TextElement?.Value);
 		}
     }
 

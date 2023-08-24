@@ -43,8 +43,7 @@ public class VTEFHIR4_4_8_000
     #endregion
 
     private CqlValueSet Intensive_Care_Unit_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", 
-			null);
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
@@ -79,8 +78,8 @@ public class VTEFHIR4_4_8_000
     [CqlDeclaration("FirstInpatientIntensiveCareUnit")]
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
 	{
-		var a_ = (Encounter?.Location as IEnumerable<Encounter.LocationComponent>);
-		var b_ = (Encounter.LocationComponent HospitalLocation) =>
+		var o_ = (Encounter?.Location as IEnumerable<Encounter.LocationComponent>);
+		var p_ = (Encounter.LocationComponent HospitalLocation) =>
 		{
 			var a_ = HospitalLocation?.Location;
 			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(a_);
@@ -97,17 +96,17 @@ public class VTEFHIR4_4_8_000
 
 			return context?.Operators.And(g_, l_);
 		};
-		var c_ = context?.Operators.WhereOrNull<Encounter.LocationComponent>(a_, b_);
-		var d_ = (Encounter.LocationComponent @this) =>
+		var q_ = context?.Operators.WhereOrNull<Encounter.LocationComponent>(o_, p_);
+		var r_ = (Encounter.LocationComponent @this) =>
 		{
-			var a_ = @this?.Period;
-			var b_ = FHIRHelpers_4_0_001.ToInterval(a_);
+			var m_ = @this?.Period;
+			var n_ = FHIRHelpers_4_0_001.ToInterval(m_);
 
-			return context?.Operators.Start(b_);
+			return context?.Operators.Start(n_);
 		};
-		var e_ = context?.Operators.ListSortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
+		var s_ = context?.Operators.ListSortBy<Encounter.LocationComponent>(q_, r_, System.ComponentModel.ListSortDirection.Ascending);
 
-		return context?.Operators.FirstOfList<Encounter.LocationComponent>(e_);
+		return context?.Operators.FirstOfList<Encounter.LocationComponent>(s_);
 	}
 
 
