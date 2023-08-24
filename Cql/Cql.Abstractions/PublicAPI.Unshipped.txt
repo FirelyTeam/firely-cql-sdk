@@ -81,6 +81,7 @@ Hl7.Cql.CqlOperator.GeometricMean = 121 -> Hl7.Cql.CqlOperator
 Hl7.Cql.CqlOperator.Greater = 14 -> Hl7.Cql.CqlOperator
 Hl7.Cql.CqlOperator.GreaterOrEqual = 15 -> Hl7.Cql.CqlOperator
 Hl7.Cql.CqlOperator.HighBoundary = 25 -> Hl7.Cql.CqlOperator
+Hl7.Cql.CqlOperator.Implies = 172 -> Hl7.Cql.CqlOperator
 Hl7.Cql.CqlOperator.IndexOf = 113 -> Hl7.Cql.CqlOperator
 Hl7.Cql.CqlOperator.InInterval = 91 -> Hl7.Cql.CqlOperator
 Hl7.Cql.CqlOperator.InList = 90 -> Hl7.Cql.CqlOperator

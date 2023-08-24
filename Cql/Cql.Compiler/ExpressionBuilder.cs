@@ -548,6 +548,9 @@ namespace Hl7.Cql.Compiler
                 case If @if:
                     expression = If(@if, ctx);
                     break;
+                case Implies implies:
+                    expression = Implies(implies, ctx);
+                    break;
                 case Includes inc:
                     expression = Includes(inc, ctx);
                     break;

@@ -186,7 +186,8 @@ namespace Hl7.Cql
         MinimumValue,
         MaximumValue,
         ResolveValueSet,
-        Aggregate
+        Aggregate,
+        Implies
     }
 }
 
