@@ -48,15 +48,21 @@ public class FHIRHelpers_4_0_001
     public CqlInterval<CqlDateTime> ToInterval(Period period)
     {
         if ((period == null))
-            return (null as CqlInterval<CqlDateTime>);
+		{
+			CqlInterval<CqlDateTime> a__ = null;
+
+			return (a__ as CqlInterval<CqlDateTime>);
+		}
         else
 		{
-			var a__ = period?.StartElement?.Value;
-			var b__ = context?.Operators.ConvertStringToDateTime(a__);
-			var c__ = period?.EndElement?.Value;
-			var d__ = context?.Operators.ConvertStringToDateTime(c__);
+			var a__ = period?.StartElement;
+			var b__ = a__?.Value;
+			var c__ = context?.Operators.ConvertStringToDateTime(b__);
+			var d__ = period?.EndElement;
+			var e__ = d__?.Value;
+			var f__ = context?.Operators.ConvertStringToDateTime(e__);
 
-			return context?.Operators.Interval(b__, d__, true, true);
+			return context?.Operators.Interval(c__, f__, true, true);
 		}
     }
 
@@ -65,7 +71,11 @@ public class FHIRHelpers_4_0_001
     public CqlInterval<CqlQuantity> ToInterval(Range range)
     {
         if ((range == null))
-            return (null as CqlInterval<CqlQuantity>);
+		{
+			CqlInterval<CqlQuantity> a__ = null;
+
+			return (a__ as CqlInterval<CqlQuantity>);
+		}
         else
 		{
 			var a__ = range?.Low;
@@ -85,13 +95,15 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a__ = quantity?.ValueElement?.Value;
-			var b__ = quantity?.UnitElement?.Value;
+			var a__ = quantity?.ValueElement;
+			var b__ = a__?.Value;
+			var c__ = quantity?.UnitElement;
+			var d__ = c__?.Value;
 
 			return new CqlQuantity
 			{
-				value = a__,
-				unit = b__,
+				value = b__,
+				unit = d__,
 			};
 		}
     }
@@ -120,7 +132,18 @@ public class FHIRHelpers_4_0_001
         if ((coding == null))
             return null;
         else
-            return new CqlCode(coding?.CodeElement?.Value, coding?.SystemElement?.Value, coding?.VersionElement?.Value, coding?.DisplayElement?.Value);
+		{
+			var a__ = coding?.CodeElement;
+			var b__ = a__?.Value;
+			var c__ = coding?.SystemElement;
+			var d__ = c__?.Value;
+			var e__ = coding?.VersionElement;
+			var f__ = e__?.Value;
+			var g__ = coding?.DisplayElement;
+			var h__ = g__?.Value;
+
+			return new CqlCode(b__, d__, f__, h__);
+		}
     }
 
 
@@ -131,11 +154,14 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a__ = (concept?.Coding as IEnumerable<Coding>);
-			var b__ = (Coding C) => this.ToCode(C);
-			var c__ = context?.Operators.SelectOrNull<Coding, CqlCode>(a__, b__);
+			var a__ = concept?.Coding;
+			var b__ = (a__ as IEnumerable<Coding>);
+			var c__ = (Coding C) => this.ToCode(C);
+			var d__ = context?.Operators.SelectOrNull<Coding, CqlCode>(b__, c__);
+			var e__ = concept?.TextElement;
+			var f__ = e__?.Value;
 
-			return new CqlConcept(c__, concept?.TextElement?.Value);
+			return new CqlConcept(d__, f__);
 		}
     }
 
@@ -1208,9 +1234,10 @@ public class FHIRHelpers_4_0_001
     [CqlDeclaration("ToString")]
     public string ToString(Base64Binary value)
 	{
-		var a_ = (value?.Value as object);
+		var a_ = value?.Value;
+		var b_ = (a_ as object);
 
-		return context?.Operators?.TypeConverter.Convert<string>(a_);
+		return context?.Operators?.TypeConverter.Convert<string>(b_);
 	}
 
 
@@ -1260,9 +1287,10 @@ public class FHIRHelpers_4_0_001
     [CqlDeclaration("ToDateTime")]
     public CqlDateTime ToDateTime(Instant value)
 	{
-		var a_ = (value?.Value as object);
+		var a_ = value?.Value;
+		var b_ = a_;
 
-		return context?.Operators?.TypeConverter.Convert<CqlDateTime>(a_);
+		return context?.Operators?.TypeConverter.Convert<CqlDateTime>(b_);
 	}
 
 

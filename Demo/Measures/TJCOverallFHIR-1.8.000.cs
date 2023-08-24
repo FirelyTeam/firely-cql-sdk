@@ -224,26 +224,27 @@ public class TJCOverallFHIR_1_8_000
 
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_Value()
 	{
-		var l_ = this.Non_Elective_Inpatient();
-		var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, null);
-		var n_ = (Encounter NonElectiveEncounter) =>
+		var m_ = this.Non_Elective_Inpatient();
+		var n_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(m_, null);
+		var o_ = (Encounter NonElectiveEncounter) =>
 		{
 			var a_ = NonElectiveEncounter?.Period;
 			var b_ = FHIRHelpers_4_0_001.ToInterval(a_);
 			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(b_);
-			var d_ = (c_ as object);
-			var e_ = ((int?)120 as object);
-			var f_ = context?.Operators.LessOrEqual(d_, e_);
-			var g_ = NonElectiveEncounter?.Period;
-			var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
-			var i_ = context?.Operators.End(h_);
-			var j_ = this.Measurement_Period();
-			var k_ = context?.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var d_ = c_;
+			var e_ = (int?)120;
+			var f_ = e_;
+			var g_ = context?.Operators.LessOrEqual(d_, f_);
+			var h_ = NonElectiveEncounter?.Period;
+			var i_ = FHIRHelpers_4_0_001.ToInterval(h_);
+			var j_ = context?.Operators.End(i_);
+			var k_ = this.Measurement_Period();
+			var l_ = context?.Operators.ElementInInterval<CqlDateTime>(j_, k_, "day");
 
-			return context?.Operators.And(f_, k_);
+			return context?.Operators.And(g_, l_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(m_, n_);
+		return context?.Operators.WhereOrNull<Encounter>(n_, o_);
 	}
 
     [CqlDeclaration("Non Elective Inpatient Encounter")]
@@ -251,22 +252,24 @@ public class TJCOverallFHIR_1_8_000
 
     private IEnumerable<Encounter> All_Stroke_Encounter_Value()
 	{
-		var i_ = this.Non_Elective_Inpatient_Encounter();
-		var j_ = (Encounter NonElectiveEncounter) =>
+		var k_ = this.Non_Elective_Inpatient_Encounter();
+		var l_ = (Encounter NonElectiveEncounter) =>
 		{
-			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(NonElectiveEncounter)?.Code;
-			var b_ = FHIRHelpers_4_0_001.ToConcept(a_);
-			var c_ = this.Hemorrhagic_Stroke();
-			var d_ = context?.Operators.ConceptInValueSet(b_, c_);
-			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(NonElectiveEncounter)?.Code;
-			var f_ = FHIRHelpers_4_0_001.ToConcept(e_);
-			var g_ = this.Ischemic_Stroke();
-			var h_ = context?.Operators.ConceptInValueSet(f_, g_);
+			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(NonElectiveEncounter);
+			var b_ = a_?.Code;
+			var c_ = FHIRHelpers_4_0_001.ToConcept(b_);
+			var d_ = this.Hemorrhagic_Stroke();
+			var e_ = context?.Operators.ConceptInValueSet(c_, d_);
+			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(NonElectiveEncounter);
+			var g_ = f_?.Code;
+			var h_ = FHIRHelpers_4_0_001.ToConcept(g_);
+			var i_ = this.Ischemic_Stroke();
+			var j_ = context?.Operators.ConceptInValueSet(h_, i_);
 
-			return context?.Operators.Or(d_, h_);
+			return context?.Operators.Or(e_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(i_, j_);
+		return context?.Operators.WhereOrNull<Encounter>(k_, l_);
 	}
 
     [CqlDeclaration("All Stroke Encounter")]
@@ -274,30 +277,33 @@ public class TJCOverallFHIR_1_8_000
 
     private IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age_Value()
 	{
-		var m_ = this.All_Stroke_Encounter();
-		var n_ = (Encounter AllStrokeEncounter) =>
+		var p_ = this.All_Stroke_Encounter();
+		var q_ = (Encounter AllStrokeEncounter) =>
 		{
-			var i_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
-			var j_ = (Patient BirthDate) =>
+			var l_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+			var m_ = (Patient BirthDate) =>
 			{
-				var a_ = this.Patient()?.BirthDateElement?.Value;
-				var b_ = context?.Operators.ConvertStringToDateTime(a_);
-				var c_ = AllStrokeEncounter?.Period;
-				var d_ = FHIRHelpers_4_0_001.ToInterval(c_);
-				var e_ = context?.Operators.Start(d_);
-				var f_ = context?.Operators.CalculateAgeAt(b_, e_, "year");
-				var g_ = (f_ as object);
-				var h_ = ((int?)18 as object);
+				var a_ = this.Patient();
+				var b_ = a_?.BirthDateElement;
+				var c_ = b_?.Value;
+				var d_ = context?.Operators.ConvertStringToDateTime(c_);
+				var e_ = AllStrokeEncounter?.Period;
+				var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
+				var g_ = context?.Operators.Start(f_);
+				var h_ = context?.Operators.CalculateAgeAt(d_, g_, "year");
+				var i_ = h_;
+				var j_ = (int?)18;
+				var k_ = j_;
 
-				return context?.Operators.GreaterOrEqual(g_, h_);
+				return context?.Operators.GreaterOrEqual(i_, k_);
 			};
-			var k_ = context?.Operators.WhereOrNull<Patient>(i_, j_);
-			var l_ = (Patient BirthDate) => AllStrokeEncounter;
+			var n_ = context?.Operators.WhereOrNull<Patient>(l_, m_);
+			var o_ = (Patient BirthDate) => AllStrokeEncounter;
 
-			return context?.Operators.SelectOrNull<Patient, Encounter>(k_, l_);
+			return context?.Operators.SelectOrNull<Patient, Encounter>(n_, o_);
 		};
 
-		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(m_, n_);
+		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(p_, q_);
 	}
 
     [CqlDeclaration("Encounter with Principal Diagnosis and Age")]
@@ -305,17 +311,18 @@ public class TJCOverallFHIR_1_8_000
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounter_Value()
 	{
-		var d_ = this.Encounter_with_Principal_Diagnosis_and_Age();
-		var e_ = (Encounter EncounterWithAge) =>
+		var e_ = this.Encounter_with_Principal_Diagnosis_and_Age();
+		var f_ = (Encounter EncounterWithAge) =>
 		{
-			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(EncounterWithAge)?.Code;
-			var b_ = FHIRHelpers_4_0_001.ToConcept(a_);
-			var c_ = this.Ischemic_Stroke();
+			var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(EncounterWithAge);
+			var b_ = a_?.Code;
+			var c_ = FHIRHelpers_4_0_001.ToConcept(b_);
+			var d_ = this.Ischemic_Stroke();
 
-			return context?.Operators.ConceptInValueSet(b_, c_);
+			return context?.Operators.ConceptInValueSet(c_, d_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(d_, e_);
+		return context?.Operators.WhereOrNull<Encounter>(e_, f_);
 	}
 
     [CqlDeclaration("Ischemic Stroke Encounter")]
@@ -323,37 +330,42 @@ public class TJCOverallFHIR_1_8_000
 
     private IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition_Value()
 	{
-		var x_ = this.Ischemic_Stroke_Encounter();
-		var y_ = (Encounter IschemicStrokeEncounter) =>
+		var ac_ = this.Ischemic_Stroke_Encounter();
+		var ad_ = (Encounter IschemicStrokeEncounter) =>
 		{
-			var a_ = IschemicStrokeEncounter?.Hospitalization?.DischargeDisposition;
-			var b_ = FHIRHelpers_4_0_001.ToConcept(a_);
-			var c_ = this.Discharge_To_Acute_Care_Facility();
-			var d_ = context?.Operators.ConceptInValueSet(b_, c_);
-			var e_ = IschemicStrokeEncounter?.Hospitalization?.DischargeDisposition;
-			var f_ = FHIRHelpers_4_0_001.ToConcept(e_);
-			var g_ = this.Left_Against_Medical_Advice();
-			var h_ = context?.Operators.ConceptInValueSet(f_, g_);
-			var i_ = context?.Operators.Or(d_, h_);
-			var j_ = IschemicStrokeEncounter?.Hospitalization?.DischargeDisposition;
-			var k_ = FHIRHelpers_4_0_001.ToConcept(j_);
-			var l_ = this.Patient_Expired();
-			var m_ = context?.Operators.ConceptInValueSet(k_, l_);
-			var n_ = context?.Operators.Or(i_, m_);
-			var o_ = IschemicStrokeEncounter?.Hospitalization?.DischargeDisposition;
-			var p_ = FHIRHelpers_4_0_001.ToConcept(o_);
-			var q_ = this.Discharged_to_Home_for_Hospice_Care();
-			var r_ = context?.Operators.ConceptInValueSet(p_, q_);
-			var s_ = context?.Operators.Or(n_, r_);
-			var t_ = IschemicStrokeEncounter?.Hospitalization?.DischargeDisposition;
-			var u_ = FHIRHelpers_4_0_001.ToConcept(t_);
-			var v_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
-			var w_ = context?.Operators.ConceptInValueSet(u_, v_);
+			var a_ = IschemicStrokeEncounter?.Hospitalization;
+			var b_ = a_?.DischargeDisposition;
+			var c_ = FHIRHelpers_4_0_001.ToConcept(b_);
+			var d_ = this.Discharge_To_Acute_Care_Facility();
+			var e_ = context?.Operators.ConceptInValueSet(c_, d_);
+			var f_ = IschemicStrokeEncounter?.Hospitalization;
+			var g_ = f_?.DischargeDisposition;
+			var h_ = FHIRHelpers_4_0_001.ToConcept(g_);
+			var i_ = this.Left_Against_Medical_Advice();
+			var j_ = context?.Operators.ConceptInValueSet(h_, i_);
+			var k_ = context?.Operators.Or(e_, j_);
+			var l_ = IschemicStrokeEncounter?.Hospitalization;
+			var m_ = l_?.DischargeDisposition;
+			var n_ = FHIRHelpers_4_0_001.ToConcept(m_);
+			var o_ = this.Patient_Expired();
+			var p_ = context?.Operators.ConceptInValueSet(n_, o_);
+			var q_ = context?.Operators.Or(k_, p_);
+			var r_ = IschemicStrokeEncounter?.Hospitalization;
+			var s_ = r_?.DischargeDisposition;
+			var t_ = FHIRHelpers_4_0_001.ToConcept(s_);
+			var u_ = this.Discharged_to_Home_for_Hospice_Care();
+			var v_ = context?.Operators.ConceptInValueSet(t_, u_);
+			var w_ = context?.Operators.Or(q_, v_);
+			var x_ = IschemicStrokeEncounter?.Hospitalization;
+			var y_ = x_?.DischargeDisposition;
+			var z_ = FHIRHelpers_4_0_001.ToConcept(y_);
+			var aa_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
+			var ab_ = context?.Operators.ConceptInValueSet(z_, aa_);
 
-			return context?.Operators.Or(s_, w_);
+			return context?.Operators.Or(w_, ab_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(x_, y_);
+		return context?.Operators.WhereOrNull<Encounter>(ac_, ad_);
 	}
 
     [CqlDeclaration("Ischemic Stroke Encounters with Discharge Disposition")]
@@ -361,39 +373,41 @@ public class TJCOverallFHIR_1_8_000
 
     private IEnumerable<object> Intervention_Comfort_Measures_Value()
 	{
-		var j_ = this.Comfort_Measures();
-		var k_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(j_, null);
-		var l_ = (ServiceRequest P) =>
+		var l_ = this.Comfort_Measures();
+		var m_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(l_, null);
+		var n_ = (ServiceRequest P) =>
 		{
-			var a_ = (P?.IntentElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
+			var a_ = P?.IntentElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
 
-			return context?.Operators.Equal(c_, ("order" as object));
+			return context?.Operators.Equal(d_, ("order" as object));
 		};
-		var m_ = context?.Operators.WhereOrNull<ServiceRequest>(k_, l_);
-		var n_ = (m_ as IEnumerable<object>);
-		var o_ = this.Comfort_Measures();
-		var p_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(o_, null);
-		var q_ = (Procedure InterventionPerformed) =>
+		var o_ = context?.Operators.WhereOrNull<ServiceRequest>(m_, n_);
+		var p_ = (o_ as IEnumerable<object>);
+		var q_ = this.Comfort_Measures();
+		var r_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(q_, null);
+		var s_ = (Procedure InterventionPerformed) =>
 		{
-			var d_ = (InterventionPerformed?.StatusElement as object);
-			var e_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(d_);
-			var f_ = "completed";
-			var g_ = "in-progress";
-			var h_ = new string[]
+			var e_ = InterventionPerformed?.StatusElement;
+			var f_ = (e_ as object);
+			var g_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(f_);
+			var h_ = "completed";
+			var i_ = "in-progress";
+			var j_ = new string[]
 			{
-				f_,
-				g_,
+				h_,
+				i_,
 			};
-			var i_ = (h_ as IEnumerable<string>);
+			var k_ = (j_ as IEnumerable<string>);
 
-			return context?.Operators.InList<string>(e_, i_);
+			return context?.Operators.InList<string>(g_, k_);
 		};
-		var r_ = context?.Operators.WhereOrNull<Procedure>(p_, q_);
-		var s_ = (r_ as IEnumerable<object>);
+		var t_ = context?.Operators.WhereOrNull<Procedure>(r_, s_);
+		var u_ = (t_ as IEnumerable<object>);
 
-		return context?.Operators.ListUnion<object>(n_, s_);
+		return context?.Operators.ListUnion<object>(p_, u_);
 	}
 
     [CqlDeclaration("Intervention Comfort Measures")]
@@ -401,25 +415,28 @@ public class TJCOverallFHIR_1_8_000
 
     private IEnumerable<Encounter> Comfort_Measures_during_Hospitalization_Value()
 	{
-		var h_ = this.Ischemic_Stroke_Encounter();
-		var i_ = (Encounter IschemicStrokeEncounter) =>
+		var k_ = this.Ischemic_Stroke_Encounter();
+		var l_ = (Encounter IschemicStrokeEncounter) =>
 		{
-			var d_ = this.Intervention_Comfort_Measures();
-			var e_ = (object ComfortMeasure) =>
+			var g_ = this.Intervention_Comfort_Measures();
+			var h_ = (object ComfortMeasure) =>
 			{
-				var a_ = ((context?.Operators.LateBoundProperty<object>(ComfortMeasure, "performed") as FhirDateTime) ?? context?.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn"));
-				var b_ = FHIRHelpers_4_0_001.ToDateTime(a_);
-				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
+				var a_ = context?.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
+				var b_ = (a_ as FhirDateTime);
+				var c_ = context?.Operators.LateBoundProperty<FhirDateTime>(ComfortMeasure, "authoredOn");
+				var d_ = (b_ ?? c_);
+				var e_ = FHIRHelpers_4_0_001.ToDateTime(d_);
+				var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(IschemicStrokeEncounter);
 
-				return context?.Operators.ElementInInterval<CqlDateTime>(b_, c_, null);
+				return context?.Operators.ElementInInterval<CqlDateTime>(e_, f_, null);
 			};
-			var f_ = context?.Operators.WhereOrNull<object>(d_, e_);
-			var g_ = (object ComfortMeasure) => IschemicStrokeEncounter;
+			var i_ = context?.Operators.WhereOrNull<object>(g_, h_);
+			var j_ = (object ComfortMeasure) => IschemicStrokeEncounter;
 
-			return context?.Operators.SelectOrNull<object, Encounter>(f_, g_);
+			return context?.Operators.SelectOrNull<object, Encounter>(i_, j_);
 		};
 
-		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(h_, i_);
+		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(k_, l_);
 	}
 
     [CqlDeclaration("Comfort Measures during Hospitalization")]

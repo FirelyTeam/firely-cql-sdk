@@ -531,7 +531,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return expression switch
             {
                 ConstantExpression constant => convertConstantExpression(constant.Type, constant.Value, leadingIndentString),
-                NewExpression @new => convertNewExpression(indent, leadingIndentString, @new),
+                NewExpression @new => convertNewExpression(leadingIndentString, @new),
                 MethodCallExpression call => convertMethodCallExpression(indent, leadingIndentString, call),
                 LambdaExpression lambda => convertLambdaExpression(indent, leadingIndentString, lambda),
                 BinaryExpression binary => convertBinaryExpression(indent, leadingIndentString, binary),
@@ -784,7 +784,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static string convertNewExpression(int indent, string leadingIndentString, NewExpression @new)
+        private static string convertNewExpression(string leadingIndentString, NewExpression @new)
         {
             var arguments = @new.Arguments.Select(a => ToCode(0, a));
             var argString = string.Join(", ", arguments);
@@ -821,37 +821,27 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string convertUnaryExpression(int indent, string leadingIndentString, UnaryExpression unary)
         {
-            switch (unary.NodeType)
+            var stripped = ExtractLetExpressionTransformer.StripBoxing(unary);
+
+            if (stripped is not UnaryExpression strippedUnary)
+                return ToCode(indent, stripped, false);
+
+            switch (strippedUnary.NodeType)
             {
                 case ExpressionType.ConvertChecked:
                 case ExpressionType.Convert:
-                    {
-                        var operand = ToCode(indent, unary.Operand, false);
-
-                        // Linq.Expressions needs an explicit conversion from a value
-                        // type to object, but the C# compiler will insert that boxing,
-                        // so we can remove those casts.
-                        if (unary.Type == typeof(object) && unary.Operand.Type.IsValueType)
-                        {
-                            return operand;
-                        }
-                        else
-                        {
-                            var typeName = PrettyTypeName(unary.Type);
-                            var code = $"{leadingIndentString}{Parenthesize($"({typeName}){operand}")}";
-                            return code;
-                        }
-                    }
                 case ExpressionType.TypeAs:
                     {
-                        var operand = ToCode(indent, unary.Operand, false);
-                        var typeName = PrettyTypeName(unary.Type);
-                        var code = $"{leadingIndentString}{Parenthesize($"{operand} as {typeName}")}";
+                        var operand = ToCode(indent, strippedUnary.Operand, false);
+
+                        var typeName = PrettyTypeName(strippedUnary.Type);
+                        var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
+                            $"{leadingIndentString}{Parenthesize($"{operand} as {typeName}")}" :
+                            $"{leadingIndentString}{Parenthesize($"({typeName}){operand}")}";
                         return code;
                     }
-
                 default:
-                    throw new NotSupportedException($"Don't know how to convert unary operator {unary.NodeType} into C#.");
+                    throw new NotSupportedException($"Don't know how to convert unary operator {strippedUnary.NodeType} into C#.");
             }
         }
 

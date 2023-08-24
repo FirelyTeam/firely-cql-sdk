@@ -89,108 +89,114 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Finished Encounter")]
     public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
 	{
-		var d_ = (Encounter E) =>
+		var e_ = (Encounter E) =>
 		{
-			var a_ = (E?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
+			var a_ = E?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
 
-			return context?.Operators.Equal(c_, ("finished" as object));
+			return context?.Operators.Equal(d_, ("finished" as object));
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(Enc, d_);
+		return context?.Operators.WhereOrNull<Encounter>(Enc, e_);
 	}
 
 
     [CqlDeclaration("Completed Immunization")]
     public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
 	{
-		var d_ = (Immunization I) =>
+		var e_ = (Immunization I) =>
 		{
-			var a_ = (I?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
+			var a_ = I?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
 
-			return context?.Operators.Equal(c_, ("completed" as object));
+			return context?.Operators.Equal(d_, ("completed" as object));
 		};
 
-		return context?.Operators.WhereOrNull<Immunization>(Immunization, d_);
+		return context?.Operators.WhereOrNull<Immunization>(Immunization, e_);
 	}
 
 
     [CqlDeclaration("Dispensed Medication")]
     public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
 	{
-		var d_ = (MedicationDispense M) =>
+		var e_ = (MedicationDispense M) =>
 		{
-			var a_ = (M?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
+			var a_ = M?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
 
-			return context?.Operators.Equal(c_, ("completed" as object));
+			return context?.Operators.Equal(d_, ("completed" as object));
 		};
 
-		return context?.Operators.WhereOrNull<MedicationDispense>(Med, d_);
+		return context?.Operators.WhereOrNull<MedicationDispense>(Med, e_);
 	}
 
 
     [CqlDeclaration("Active Medication")]
     public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
 	{
-		var f_ = (MedicationRequest M) =>
+		var g_ = (MedicationRequest M) =>
 		{
-			var a_ = (M?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = "completed";
-			var d_ = new string[]
+			var a_ = M?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = "completed";
+			var e_ = new string[]
 			{
-				c_,
+				d_,
 			};
-			var e_ = (d_ as IEnumerable<string>);
+			var f_ = (e_ as IEnumerable<string>);
 
-			return context?.Operators.InList<string>(b_, e_);
+			return context?.Operators.InList<string>(c_, f_);
 		};
 
-		return context?.Operators.WhereOrNull<MedicationRequest>(Med, f_);
+		return context?.Operators.WhereOrNull<MedicationRequest>(Med, g_);
 	}
 
 
     [CqlDeclaration("Completed Procedure")]
     public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
 	{
-		var d_ = (Procedure P) =>
+		var e_ = (Procedure P) =>
 		{
-			var a_ = (P?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
+			var a_ = P?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
 
-			return context?.Operators.Equal(c_, ("completed" as object));
+			return context?.Operators.Equal(d_, ("completed" as object));
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(Proc, d_);
+		return context?.Operators.WhereOrNull<Procedure>(Proc, e_);
 	}
 
 
     [CqlDeclaration("Completed or Ongoing Procedure")]
     public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
 	{
-		var g_ = (Procedure P) =>
+		var h_ = (Procedure P) =>
 		{
-			var a_ = (P?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = "completed";
-			var d_ = "in-progress";
-			var e_ = new string[]
+			var a_ = P?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = "completed";
+			var e_ = "in-progress";
+			var f_ = new string[]
 			{
-				c_,
 				d_,
+				e_,
 			};
-			var f_ = (e_ as IEnumerable<string>);
+			var g_ = (f_ as IEnumerable<string>);
 
-			return context?.Operators.InList<string>(b_, f_);
+			return context?.Operators.InList<string>(c_, g_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(Proc, g_);
+		return context?.Operators.WhereOrNull<Procedure>(Proc, h_);
 	}
 
 

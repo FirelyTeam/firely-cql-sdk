@@ -198,24 +198,25 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
     private IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period_Value()
 	{
-		var j_ = this.Encounter_Inpatient();
-		var k_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(j_, null);
-		var l_ = (Encounter EncounterInpatient) =>
+		var k_ = this.Encounter_Inpatient();
+		var l_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(k_, null);
+		var m_ = (Encounter EncounterInpatient) =>
 		{
-			var a_ = (EncounterInpatient?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("finished" as object));
-			var e_ = EncounterInpatient?.Period;
-			var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
-			var g_ = context?.Operators.End(f_);
-			var h_ = this.Measurement_Period();
-			var i_ = context?.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var a_ = EncounterInpatient?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("finished" as object));
+			var f_ = EncounterInpatient?.Period;
+			var g_ = FHIRHelpers_4_0_001.ToInterval(f_);
+			var h_ = context?.Operators.End(g_);
+			var i_ = this.Measurement_Period();
+			var j_ = context?.Operators.ElementInInterval<CqlDateTime>(h_, i_, null);
 
-			return context?.Operators.And(d_, i_);
+			return context?.Operators.And(e_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(k_, l_);
+		return context?.Operators.WhereOrNull<Encounter>(l_, m_);
 	}
 
     [CqlDeclaration("Inpatient Encounter During Measurement Period")]
@@ -223,21 +224,24 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
     private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
-		var h_ = this.Inpatient_Encounter_During_Measurement_Period();
-		var i_ = (Encounter InpatientEncounter) =>
+		var k_ = this.Inpatient_Encounter_During_Measurement_Period();
+		var l_ = (Encounter InpatientEncounter) =>
 		{
-			var a_ = this.Patient()?.BirthDateElement?.Value;
-			var b_ = context?.Operators.ConvertStringToDateTime(a_);
-			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(InpatientEncounter);
-			var d_ = context?.Operators.Start(c_);
-			var e_ = context?.Operators.CalculateAgeAt(b_, d_, "year");
-			var f_ = (e_ as object);
-			var g_ = ((int?)18 as object);
+			var a_ = this.Patient();
+			var b_ = a_?.BirthDateElement;
+			var c_ = b_?.Value;
+			var d_ = context?.Operators.ConvertStringToDateTime(c_);
+			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(InpatientEncounter);
+			var f_ = context?.Operators.Start(e_);
+			var g_ = context?.Operators.CalculateAgeAt(d_, f_, "year");
+			var h_ = g_;
+			var i_ = (int?)18;
+			var j_ = i_;
 
-			return context?.Operators.GreaterOrEqual(f_, g_);
+			return context?.Operators.GreaterOrEqual(h_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(h_, i_);
+		return context?.Operators.WhereOrNull<Encounter>(k_, l_);
 	}
 
     [CqlDeclaration("Qualifying Encounter")]
@@ -245,27 +249,29 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
     private IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration_Value()
 	{
-		var j_ = this.Hypoglycemics_Severe_Hypoglycemia();
-		var k_ = context?.DataRetriever.RetrieveByValueSet<MedicationAdministration>(j_, null);
 		var l_ = this.Hypoglycemics_Severe_Hypoglycemia();
 		var m_ = context?.DataRetriever.RetrieveByValueSet<MedicationAdministration>(l_, null);
-		var n_ = context?.Operators.ListUnion<MedicationAdministration>(k_, m_);
-		var o_ = (MedicationAdministration HypoMedication) =>
+		var n_ = this.Hypoglycemics_Severe_Hypoglycemia();
+		var o_ = context?.DataRetriever.RetrieveByValueSet<MedicationAdministration>(n_, null);
+		var p_ = context?.Operators.ListUnion<MedicationAdministration>(m_, o_);
+		var q_ = (MedicationAdministration HypoMedication) =>
 		{
-			var a_ = (HypoMedication?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("completed" as object));
-			var e_ = (HypoMedication?.StatusElement as object);
-			var f_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(e_);
+			var a_ = HypoMedication?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("completed" as object));
+			var f_ = HypoMedication?.StatusElement;
 			var g_ = (f_ as object);
-			var h_ = context?.Operators.Equal(g_, ("not-done" as object));
-			var i_ = context?.Operators.Not(h_);
+			var h_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(g_);
+			var i_ = (h_ as object);
+			var j_ = context?.Operators.Equal(i_, ("not-done" as object));
+			var k_ = context?.Operators.Not(j_);
 
-			return context?.Operators.And(d_, i_);
+			return context?.Operators.And(e_, k_);
 		};
 
-		return context?.Operators.WhereOrNull<MedicationAdministration>(n_, o_);
+		return context?.Operators.WhereOrNull<MedicationAdministration>(p_, q_);
 	}
 
     [CqlDeclaration("Hypoglycemic Medication Administration")]
@@ -273,26 +279,27 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
     private IEnumerable<Encounter> Qualifying_Encounter_with_Hypoglycemic_Medication_Administration_Value()
 	{
-		var i_ = this.Qualifying_Encounter();
-		var j_ = (Encounter QualifyingEncounter) =>
+		var j_ = this.Qualifying_Encounter();
+		var k_ = (Encounter QualifyingEncounter) =>
 		{
-			var e_ = this.Hypoglycemic_Medication_Administration();
-			var f_ = (MedicationAdministration HypoglycemicMedication) =>
+			var f_ = this.Hypoglycemic_Medication_Administration();
+			var g_ = (MedicationAdministration HypoglycemicMedication) =>
 			{
-				var a_ = (HypoglycemicMedication?.Effective as object);
-				var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(a_);
-				var c_ = context?.Operators.Start(b_);
-				var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
+				var a_ = HypoglycemicMedication?.Effective;
+				var b_ = (a_ as object);
+				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(b_);
+				var d_ = context?.Operators.Start(c_);
+				var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
 
-				return context?.Operators.ElementInInterval<CqlDateTime>(c_, d_, null);
+				return context?.Operators.ElementInInterval<CqlDateTime>(d_, e_, null);
 			};
-			var g_ = context?.Operators.WhereOrNull<MedicationAdministration>(e_, f_);
-			var h_ = (MedicationAdministration HypoglycemicMedication) => QualifyingEncounter;
+			var h_ = context?.Operators.WhereOrNull<MedicationAdministration>(f_, g_);
+			var i_ = (MedicationAdministration HypoglycemicMedication) => QualifyingEncounter;
 
-			return context?.Operators.SelectOrNull<MedicationAdministration, Encounter>(g_, h_);
+			return context?.Operators.SelectOrNull<MedicationAdministration, Encounter>(h_, i_);
 		};
 
-		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(i_, j_);
+		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(j_, k_);
 	}
 
     [CqlDeclaration("Qualifying Encounter with Hypoglycemic Medication Administration")]
@@ -312,189 +319,220 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
     private IEnumerable<Encounter> Severe_Hypoglycemic_Harm_Event_Value()
 	{
-		var er_ = this.Denominator();
-		var es_ = (Encounter QualifyingEncounter) =>
+		var fw_ = this.Denominator();
+		var fx_ = (Encounter QualifyingEncounter) =>
 		{
-			var ee_ = this.Glucose_lab_test();
-			var ef_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ee_, null);
-			var eg_ = (Observation BloodGlucoseLab) =>
+			var fj_ = this.Glucose_lab_test();
+			var fk_ = context?.DataRetriever.RetrieveByValueSet<Observation>(fj_, null);
+			var fl_ = (Observation BloodGlucoseLab) =>
 			{
-				var aj_ = this.Hypoglycemic_Medication_Administration();
-				var ak_ = (MedicationAdministration HypoglycemicMeds) =>
+				var ar_ = this.Hypoglycemic_Medication_Administration();
+				var as_ = (MedicationAdministration HypoglycemicMeds) =>
 				{
-					var a_ = (HypoglycemicMeds?.Effective as object);
-					var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(a_);
-					var c_ = context?.Operators.Start(b_);
-					var d_ = (BloodGlucoseLab?.Effective as object);
-					var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(d_);
-					var f_ = context?.Operators.Start(e_);
-					var g_ = context?.Operators.Quantity(24m, "hours");
-					var h_ = context?.Operators.Subtract(f_, g_);
-					var i_ = (BloodGlucoseLab?.Effective as object);
-					var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_);
-					var k_ = context?.Operators.Start(j_);
-					var l_ = context?.Operators.Interval(h_, k_, true, true);
-					var m_ = context?.Operators.ElementInInterval<CqlDateTime>(c_, l_, null);
-					var n_ = (BloodGlucoseLab?.Effective as object);
-					var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(n_);
-					var p_ = context?.Operators.Start(o_);
-					var q_ = (bool?)(p_ == null);
-					var r_ = context?.Operators.Not(q_);
-					var s_ = context?.Operators.And(m_, r_);
-					var t_ = (BloodGlucoseLab?.StatusElement as object);
-					var u_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(t_);
-					var v_ = (u_ as object);
-					var w_ = context?.Operators.Equal(v_, ("final" as object));
-					var x_ = context?.Operators.And(s_, w_);
-					var y_ = (BloodGlucoseLab?.StatusElement as object);
-					var z_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(y_);
-					var aa_ = (z_ as object);
-					var ab_ = context?.Operators.Equal(aa_, ("cancelled" as object));
-					var ac_ = context?.Operators.Not(ab_);
+					var a_ = HypoglycemicMeds?.Effective;
+					var b_ = (a_ as object);
+					var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(b_);
+					var d_ = context?.Operators.Start(c_);
+					var e_ = BloodGlucoseLab?.Effective;
+					var f_ = (e_ as object);
+					var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
+					var h_ = context?.Operators.Start(g_);
+					var i_ = context?.Operators.Quantity(24m, "hours");
+					var j_ = context?.Operators.Subtract(h_, i_);
+					var k_ = BloodGlucoseLab?.Effective;
+					var l_ = (k_ as object);
+					var m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(l_);
+					var n_ = context?.Operators.Start(m_);
+					var o_ = context?.Operators.Interval(j_, n_, true, true);
+					var p_ = context?.Operators.ElementInInterval<CqlDateTime>(d_, o_, null);
+					var q_ = BloodGlucoseLab?.Effective;
+					var r_ = (q_ as object);
+					var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
+					var t_ = context?.Operators.Start(s_);
+					var u_ = (t_ == null);
+					var v_ = (bool?)u_;
+					var w_ = context?.Operators.Not(v_);
+					var x_ = context?.Operators.And(p_, w_);
+					var y_ = BloodGlucoseLab?.StatusElement;
+					var z_ = (y_ as object);
+					var aa_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(z_);
+					var ab_ = (aa_ as object);
+					var ac_ = context?.Operators.Equal(ab_, ("final" as object));
 					var ad_ = context?.Operators.And(x_, ac_);
-					var ae_ = (HypoglycemicMeds?.Effective as object);
-					var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ae_);
-					var ag_ = context?.Operators.Start(af_);
-					var ah_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
-					var ai_ = context?.Operators.ElementInInterval<CqlDateTime>(ag_, ah_, null);
+					var ae_ = BloodGlucoseLab?.StatusElement;
+					var af_ = (ae_ as object);
+					var ag_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(af_);
+					var ah_ = (ag_ as object);
+					var ai_ = context?.Operators.Equal(ah_, ("cancelled" as object));
+					var aj_ = context?.Operators.Not(ai_);
+					var ak_ = context?.Operators.And(ad_, aj_);
+					var al_ = HypoglycemicMeds?.Effective;
+					var am_ = (al_ as object);
+					var an_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(am_);
+					var ao_ = context?.Operators.Start(an_);
+					var ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
+					var aq_ = context?.Operators.ElementInInterval<CqlDateTime>(ao_, ap_, null);
 
-					return context?.Operators.And(ad_, ai_);
+					return context?.Operators.And(ak_, aq_);
 				};
-				var al_ = context?.Operators.WhereOrNull<MedicationAdministration>(aj_, ak_);
-				var am_ = (MedicationAdministration HypoglycemicMeds) => BloodGlucoseLab;
+				var at_ = context?.Operators.WhereOrNull<MedicationAdministration>(ar_, as_);
+				var au_ = (MedicationAdministration HypoglycemicMeds) => BloodGlucoseLab;
 
-				return context?.Operators.SelectOrNull<MedicationAdministration, Observation>(al_, am_);
+				return context?.Operators.SelectOrNull<MedicationAdministration, Observation>(at_, au_);
 			};
-			var eh_ = context?.Operators.SelectManyOrNull<Observation, Observation>(ef_, eg_);
-			var ei_ = this.Glucose_lab_test();
-			var ej_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ei_, null);
-			var ek_ = (Observation BloodGlucoseLab) =>
+			var fm_ = context?.Operators.SelectManyOrNull<Observation, Observation>(fk_, fl_);
+			var fn_ = this.Glucose_lab_test();
+			var fo_ = context?.DataRetriever.RetrieveByValueSet<Observation>(fn_, null);
+			var fp_ = (Observation BloodGlucoseLab) =>
 			{
-				var bw_ = this.Hypoglycemic_Medication_Administration();
-				var bx_ = (MedicationAdministration HypoglycemicMeds) =>
+				var cm_ = this.Hypoglycemic_Medication_Administration();
+				var cn_ = (MedicationAdministration HypoglycemicMeds) =>
 				{
-					var an_ = (HypoglycemicMeds?.Effective as object);
-					var ao_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(an_);
-					var ap_ = context?.Operators.Start(ao_);
-					var aq_ = (BloodGlucoseLab?.Effective as object);
-					var ar_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aq_);
-					var as_ = context?.Operators.Start(ar_);
-					var at_ = context?.Operators.Quantity(24m, "hours");
-					var au_ = context?.Operators.Subtract(as_, at_);
-					var av_ = (BloodGlucoseLab?.Effective as object);
-					var aw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(av_);
-					var ax_ = context?.Operators.Start(aw_);
-					var ay_ = context?.Operators.Interval(au_, ax_, true, true);
-					var az_ = context?.Operators.ElementInInterval<CqlDateTime>(ap_, ay_, null);
-					var ba_ = (BloodGlucoseLab?.Effective as object);
+					var av_ = HypoglycemicMeds?.Effective;
+					var aw_ = (av_ as object);
+					var ax_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aw_);
+					var ay_ = context?.Operators.Start(ax_);
+					var az_ = BloodGlucoseLab?.Effective;
+					var ba_ = (az_ as object);
 					var bb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ba_);
 					var bc_ = context?.Operators.Start(bb_);
-					var bd_ = (bool?)(bc_ == null);
-					var be_ = context?.Operators.Not(bd_);
-					var bf_ = context?.Operators.And(az_, be_);
-					var bg_ = (BloodGlucoseLab?.StatusElement as object);
-					var bh_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(bg_);
-					var bi_ = (bh_ as object);
-					var bj_ = context?.Operators.Equal(bi_, ("final" as object));
-					var bk_ = context?.Operators.And(bf_, bj_);
-					var bl_ = (BloodGlucoseLab?.StatusElement as object);
-					var bm_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(bl_);
-					var bn_ = (bm_ as object);
-					var bo_ = context?.Operators.Equal(bn_, ("cancelled" as object));
-					var bp_ = context?.Operators.Not(bo_);
-					var bq_ = context?.Operators.And(bk_, bp_);
-					var br_ = (HypoglycemicMeds?.Effective as object);
-					var bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(br_);
-					var bt_ = context?.Operators.Start(bs_);
-					var bu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
-					var bv_ = context?.Operators.ElementInInterval<CqlDateTime>(bt_, bu_, null);
+					var bd_ = context?.Operators.Quantity(24m, "hours");
+					var be_ = context?.Operators.Subtract(bc_, bd_);
+					var bf_ = BloodGlucoseLab?.Effective;
+					var bg_ = (bf_ as object);
+					var bh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bg_);
+					var bi_ = context?.Operators.Start(bh_);
+					var bj_ = context?.Operators.Interval(be_, bi_, true, true);
+					var bk_ = context?.Operators.ElementInInterval<CqlDateTime>(ay_, bj_, null);
+					var bl_ = BloodGlucoseLab?.Effective;
+					var bm_ = (bl_ as object);
+					var bn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bm_);
+					var bo_ = context?.Operators.Start(bn_);
+					var bp_ = (bo_ == null);
+					var bq_ = (bool?)bp_;
+					var br_ = context?.Operators.Not(bq_);
+					var bs_ = context?.Operators.And(bk_, br_);
+					var bt_ = BloodGlucoseLab?.StatusElement;
+					var bu_ = (bt_ as object);
+					var bv_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(bu_);
+					var bw_ = (bv_ as object);
+					var bx_ = context?.Operators.Equal(bw_, ("final" as object));
+					var by_ = context?.Operators.And(bs_, bx_);
+					var bz_ = BloodGlucoseLab?.StatusElement;
+					var ca_ = (bz_ as object);
+					var cb_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ca_);
+					var cc_ = (cb_ as object);
+					var cd_ = context?.Operators.Equal(cc_, ("cancelled" as object));
+					var ce_ = context?.Operators.Not(cd_);
+					var cf_ = context?.Operators.And(by_, ce_);
+					var cg_ = HypoglycemicMeds?.Effective;
+					var ch_ = (cg_ as object);
+					var ci_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ch_);
+					var cj_ = context?.Operators.Start(ci_);
+					var ck_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
+					var cl_ = context?.Operators.ElementInInterval<CqlDateTime>(cj_, ck_, null);
 
-					return context?.Operators.And(bq_, bv_);
+					return context?.Operators.And(cf_, cl_);
 				};
-				var by_ = context?.Operators.WhereOrNull<MedicationAdministration>(bw_, bx_);
-				var bz_ = (MedicationAdministration HypoglycemicMeds) => BloodGlucoseLab;
+				var co_ = context?.Operators.WhereOrNull<MedicationAdministration>(cm_, cn_);
+				var cp_ = (MedicationAdministration HypoglycemicMeds) => BloodGlucoseLab;
 
-				return context?.Operators.SelectOrNull<MedicationAdministration, Observation>(by_, bz_);
+				return context?.Operators.SelectOrNull<MedicationAdministration, Observation>(co_, cp_);
 			};
-			var el_ = context?.Operators.SelectManyOrNull<Observation, Observation>(ej_, ek_);
-			var em_ = (Observation BloodGlucoseLab) =>
+			var fq_ = context?.Operators.SelectManyOrNull<Observation, Observation>(fo_, fp_);
+			var fr_ = (Observation BloodGlucoseLab) =>
 			{
-				var dp_ = this.Glucose_lab_test();
-				var dq_ = context?.DataRetriever.RetrieveByValueSet<Observation>(dp_, null);
-				var dr_ = (Observation FollowupBloodGlucoseLab) =>
+				var eq_ = this.Glucose_lab_test();
+				var er_ = context?.DataRetriever.RetrieveByValueSet<Observation>(eq_, null);
+				var es_ = (Observation FollowupBloodGlucoseLab) =>
 				{
-					var ca_ = (FollowupBloodGlucoseLab?.Effective as object);
-					var cb_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ca_);
-					var cc_ = context?.Operators.Start(cb_);
-					var cd_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
-					var ce_ = context?.Operators.ElementInInterval<CqlDateTime>(cc_, cd_, null);
-					var cf_ = (FollowupBloodGlucoseLab?.Effective as object);
-					var cg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cf_);
-					var ch_ = context?.Operators.Start(cg_);
-					var ci_ = (BloodGlucoseLab?.Effective as object);
-					var cj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ci_);
-					var ck_ = context?.Operators.Start(cj_);
-					var cl_ = (BloodGlucoseLab?.Effective as object);
-					var cm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cl_);
-					var cn_ = context?.Operators.Start(cm_);
-					var co_ = context?.Operators.Quantity(5m, "minutes");
-					var cp_ = context?.Operators.Add(cn_, co_);
-					var cq_ = context?.Operators.Interval(ck_, cp_, false, true);
-					var cr_ = context?.Operators.ElementInInterval<CqlDateTime>(ch_, cq_, null);
-					var cs_ = (BloodGlucoseLab?.Effective as object);
-					var ct_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cs_);
-					var cu_ = context?.Operators.Start(ct_);
-					var cv_ = (bool?)(cu_ == null);
-					var cw_ = context?.Operators.Not(cv_);
-					var cx_ = context?.Operators.And(cr_, cw_);
-					var cy_ = context?.Operators.And(ce_, cx_);
-					var cz_ = (FollowupBloodGlucoseLab?.StatusElement as object);
-					var da_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(cz_);
+					var cq_ = FollowupBloodGlucoseLab?.Effective;
+					var cr_ = (cq_ as object);
+					var cs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cr_);
+					var ct_ = context?.Operators.Start(cs_);
+					var cu_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
+					var cv_ = context?.Operators.ElementInInterval<CqlDateTime>(ct_, cu_, null);
+					var cw_ = FollowupBloodGlucoseLab?.Effective;
+					var cx_ = (cw_ as object);
+					var cy_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cx_);
+					var cz_ = context?.Operators.Start(cy_);
+					var da_ = BloodGlucoseLab?.Effective;
 					var db_ = (da_ as object);
-					var dc_ = context?.Operators.Equal(db_, ("final" as object));
-					var dd_ = context?.Operators.And(cy_, dc_);
-					var de_ = (FollowupBloodGlucoseLab?.StatusElement as object);
-					var df_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(de_);
-					var dg_ = (df_ as object);
-					var dh_ = context?.Operators.Equal(dg_, ("cancelled" as object));
-					var di_ = context?.Operators.Not(dh_);
-					var dj_ = context?.Operators.And(dd_, di_);
-					var dk_ = ((FollowupBloodGlucoseLab?.Value as object) as Quantity);
-					var dl_ = FHIRHelpers_4_0_001.ToQuantity(dk_);
-					var dm_ = (dl_ as object);
-					var dn_ = (context?.Operators.Quantity(80m, "mg/dL") as object);
-					var do_ = context?.Operators.Greater(dm_, dn_);
+					var dc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(db_);
+					var dd_ = context?.Operators.Start(dc_);
+					var de_ = BloodGlucoseLab?.Effective;
+					var df_ = (de_ as object);
+					var dg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(df_);
+					var dh_ = context?.Operators.Start(dg_);
+					var di_ = context?.Operators.Quantity(5m, "minutes");
+					var dj_ = context?.Operators.Add(dh_, di_);
+					var dk_ = context?.Operators.Interval(dd_, dj_, false, true);
+					var dl_ = context?.Operators.ElementInInterval<CqlDateTime>(cz_, dk_, null);
+					var dm_ = BloodGlucoseLab?.Effective;
+					var dn_ = (dm_ as object);
+					var do_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(dn_);
+					var dp_ = context?.Operators.Start(do_);
+					var dq_ = (dp_ == null);
+					var dr_ = (bool?)dq_;
+					var ds_ = context?.Operators.Not(dr_);
+					var dt_ = context?.Operators.And(dl_, ds_);
+					var du_ = context?.Operators.And(cv_, dt_);
+					var dv_ = FollowupBloodGlucoseLab?.StatusElement;
+					var dw_ = (dv_ as object);
+					var dx_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(dw_);
+					var dy_ = (dx_ as object);
+					var dz_ = context?.Operators.Equal(dy_, ("final" as object));
+					var ea_ = context?.Operators.And(du_, dz_);
+					var eb_ = FollowupBloodGlucoseLab?.StatusElement;
+					var ec_ = (eb_ as object);
+					var ed_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ec_);
+					var ee_ = (ed_ as object);
+					var ef_ = context?.Operators.Equal(ee_, ("cancelled" as object));
+					var eg_ = context?.Operators.Not(ef_);
+					var eh_ = context?.Operators.And(ea_, eg_);
+					var ei_ = FollowupBloodGlucoseLab?.Value;
+					var ej_ = (ei_ as object);
+					var ek_ = (ej_ as Quantity);
+					var el_ = FHIRHelpers_4_0_001.ToQuantity(ek_);
+					var em_ = (el_ as object);
+					var en_ = context?.Operators.Quantity(80m, "mg/dL");
+					var eo_ = (en_ as object);
+					var ep_ = context?.Operators.Greater(em_, eo_);
 
-					return context?.Operators.And(dj_, do_);
+					return context?.Operators.And(eh_, ep_);
 				};
-				var ds_ = context?.Operators.WhereOrNull<Observation>(dq_, dr_);
-				var dt_ = (Observation FollowupBloodGlucoseLab) => BloodGlucoseLab;
+				var et_ = context?.Operators.WhereOrNull<Observation>(er_, es_);
+				var eu_ = (Observation FollowupBloodGlucoseLab) => BloodGlucoseLab;
 
-				return context?.Operators.SelectOrNull<Observation, Observation>(ds_, dt_);
+				return context?.Operators.SelectOrNull<Observation, Observation>(et_, eu_);
 			};
-			var en_ = context?.Operators.SelectManyOrNull<Observation, Observation>(el_, em_);
-			var eo_ = context?.Operators.ListExcept<Observation>(eh_, en_);
-			var ep_ = (Observation BloodGlucoseLab) =>
+			var fs_ = context?.Operators.SelectManyOrNull<Observation, Observation>(fq_, fr_);
+			var ft_ = context?.Operators.ListExcept<Observation>(fm_, fs_);
+			var fu_ = (Observation BloodGlucoseLab) =>
 			{
-				var du_ = (BloodGlucoseLab?.Effective as object);
-				var dv_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(du_);
-				var dw_ = context?.Operators.Start(dv_);
-				var dx_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
-				var dy_ = context?.Operators.ElementInInterval<CqlDateTime>(dw_, dx_, null);
-				var dz_ = ((BloodGlucoseLab?.Value as object) as Quantity);
-				var ea_ = FHIRHelpers_4_0_001.ToQuantity(dz_);
-				var eb_ = (ea_ as object);
-				var ec_ = (context?.Operators.Quantity(40m, "mg/dL") as object);
-				var ed_ = context?.Operators.Less(eb_, ec_);
+				var ev_ = BloodGlucoseLab?.Effective;
+				var ew_ = (ev_ as object);
+				var ex_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ew_);
+				var ey_ = context?.Operators.Start(ex_);
+				var ez_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(QualifyingEncounter);
+				var fa_ = context?.Operators.ElementInInterval<CqlDateTime>(ey_, ez_, null);
+				var fb_ = BloodGlucoseLab?.Value;
+				var fc_ = (fb_ as object);
+				var fd_ = (fc_ as Quantity);
+				var fe_ = FHIRHelpers_4_0_001.ToQuantity(fd_);
+				var ff_ = (fe_ as object);
+				var fg_ = context?.Operators.Quantity(40m, "mg/dL");
+				var fh_ = (fg_ as object);
+				var fi_ = context?.Operators.Less(ff_, fh_);
 
-				return context?.Operators.And(dy_, ed_);
+				return context?.Operators.And(fa_, fi_);
 			};
-			var eq_ = context?.Operators.WhereOrNull<Observation>(eo_, ep_);
+			var fv_ = context?.Operators.WhereOrNull<Observation>(ft_, fu_);
 
-			return context?.Operators.ExistsInList<Observation>(eq_);
+			return context?.Operators.ExistsInList<Observation>(fv_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(er_, es_);
+		return context?.Operators.WhereOrNull<Encounter>(fw_, fx_);
 	}
 
     [CqlDeclaration("Severe Hypoglycemic Harm Event")]

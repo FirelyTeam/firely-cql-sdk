@@ -198,8 +198,12 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52")]
     public CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy() => __Pharmacological_Contraindications_For_Antithrombotic_Therapy.Value;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Value() =>
-		(CqlInterval<CqlDateTime>)context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", null);
+    private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	{
+		var a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", null);
+
+		return (CqlInterval<CqlDateTime>)a_;
+	}
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
@@ -222,65 +226,72 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge_Value()
 	{
-		var aq_ = this.Antithrombotic_Therapy();
-		var ar_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(aq_, null);
-		var as_ = (MedicationRequest NoAntithromboticDischarge) =>
+		var ax_ = this.Antithrombotic_Therapy();
+		var ay_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ax_, null);
+		var az_ = (MedicationRequest NoAntithromboticDischarge) =>
 		{
-			var k_ = NoAntithromboticDischarge?.DoNotPerformElement;
-			var l_ = FHIRHelpers_4_0_001.ToBoolean(k_);
-			var m_ = context?.Operators.IsTrue(l_);
-			var n_ = (NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>);
-			var o_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var p_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(n_, o_);
-			var q_ = this.Medical_Reason();
-			var r_ = context?.Operators.ConceptsInValueSet(p_, q_);
-			var s_ = (NoAntithromboticDischarge?.ReasonCode as IEnumerable<CodeableConcept>);
-			var t_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var u_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(s_, t_);
-			var v_ = this.Patient_Refusal();
-			var w_ = context?.Operators.ConceptsInValueSet(u_, v_);
-			var x_ = context?.Operators.Or(r_, w_);
-			var y_ = context?.Operators.And(m_, x_);
-			var z_ = (NoAntithromboticDischarge?.Category as IEnumerable<CodeableConcept>);
-			var aa_ = (CodeableConcept C) =>
+			var m_ = NoAntithromboticDischarge?.DoNotPerformElement;
+			var n_ = FHIRHelpers_4_0_001.ToBoolean(m_);
+			var o_ = context?.Operators.IsTrue(n_);
+			var p_ = NoAntithromboticDischarge?.ReasonCode;
+			var q_ = (p_ as IEnumerable<CodeableConcept>);
+			var r_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
+			var s_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(q_, r_);
+			var t_ = this.Medical_Reason();
+			var u_ = context?.Operators.ConceptsInValueSet(s_, t_);
+			var v_ = NoAntithromboticDischarge?.ReasonCode;
+			var w_ = (v_ as IEnumerable<CodeableConcept>);
+			var x_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
+			var y_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(w_, x_);
+			var z_ = this.Patient_Refusal();
+			var aa_ = context?.Operators.ConceptsInValueSet(y_, z_);
+			var ab_ = context?.Operators.Or(u_, aa_);
+			var ac_ = context?.Operators.And(o_, ab_);
+			var ad_ = NoAntithromboticDischarge?.Category;
+			var ae_ = (ad_ as IEnumerable<CodeableConcept>);
+			var af_ = (CodeableConcept C) =>
 			{
-				var a_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
-				var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
-				var c_ = context?.Operators.ConvertCodeToConcept(b_);
-				var d_ = (c_ as object);
-				var e_ = context?.Operators.Equivalent(a_, d_);
-				var f_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
-				var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
-				var h_ = context?.Operators.ConvertCodeToConcept(g_);
-				var i_ = (h_ as object);
-				var j_ = context?.Operators.Equivalent(f_, i_);
+				var a_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var b_ = (a_ as object);
+				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
+				var d_ = context?.Operators.ConvertCodeToConcept(c_);
+				var e_ = (d_ as object);
+				var f_ = context?.Operators.Equivalent(b_, e_);
+				var g_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var h_ = (g_ as object);
+				var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
+				var j_ = context?.Operators.ConvertCodeToConcept(i_);
+				var k_ = (j_ as object);
+				var l_ = context?.Operators.Equivalent(h_, k_);
 
-				return context?.Operators.Or(e_, j_);
+				return context?.Operators.Or(f_, l_);
 			};
-			var ab_ = context?.Operators.WhereOrNull<CodeableConcept>(z_, aa_);
-			var ac_ = context?.Operators.ExistsInList<CodeableConcept>(ab_);
-			var ad_ = context?.Operators.And(y_, ac_);
-			var ae_ = (NoAntithromboticDischarge?.StatusElement as object);
-			var af_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ae_);
-			var ag_ = "completed";
-			var ah_ = "cancelled";
-			var ai_ = new string[]
+			var ag_ = context?.Operators.WhereOrNull<CodeableConcept>(ae_, af_);
+			var ah_ = context?.Operators.ExistsInList<CodeableConcept>(ag_);
+			var ai_ = context?.Operators.And(ac_, ah_);
+			var aj_ = NoAntithromboticDischarge?.StatusElement;
+			var ak_ = (aj_ as object);
+			var al_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ak_);
+			var am_ = "completed";
+			var an_ = "cancelled";
+			var ao_ = new string[]
 			{
-				ag_,
-				ah_,
+				am_,
+				an_,
 			};
-			var aj_ = (ai_ as IEnumerable<string>);
-			var ak_ = context?.Operators.InList<string>(af_, aj_);
-			var al_ = context?.Operators.And(ad_, ak_);
-			var am_ = (NoAntithromboticDischarge?.IntentElement as object);
-			var an_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(am_);
-			var ao_ = (an_ as object);
-			var ap_ = context?.Operators.Equal(ao_, ("order" as object));
+			var ap_ = (ao_ as IEnumerable<string>);
+			var aq_ = context?.Operators.InList<string>(al_, ap_);
+			var ar_ = context?.Operators.And(ai_, aq_);
+			var as_ = NoAntithromboticDischarge?.IntentElement;
+			var at_ = (as_ as object);
+			var au_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(at_);
+			var av_ = (au_ as object);
+			var aw_ = context?.Operators.Equal(av_, ("order" as object));
 
-			return context?.Operators.And(al_, ap_);
+			return context?.Operators.And(ar_, aw_);
 		};
 
-		return context?.Operators.WhereOrNull<MedicationRequest>(ar_, as_);
+		return context?.Operators.WhereOrNull<MedicationRequest>(ay_, az_);
 	}
 
     [CqlDeclaration("Antithrombotic Not Given at Discharge")]
@@ -315,54 +326,59 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value()
 	{
-		var af_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
-		var ag_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(af_, null);
-		var ah_ = (MedicationRequest Pharmacological) =>
+		var ak_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
+		var al_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ak_, null);
+		var am_ = (MedicationRequest Pharmacological) =>
 		{
-			var k_ = Pharmacological?.DoNotPerformElement;
-			var l_ = FHIRHelpers_4_0_001.ToBoolean(k_);
-			var m_ = context?.Operators.IsTrue(l_);
-			var n_ = context?.Operators.Not(m_);
-			var o_ = (Pharmacological?.Category as IEnumerable<CodeableConcept>);
-			var p_ = (CodeableConcept C) =>
+			var m_ = Pharmacological?.DoNotPerformElement;
+			var n_ = FHIRHelpers_4_0_001.ToBoolean(m_);
+			var o_ = context?.Operators.IsTrue(n_);
+			var p_ = context?.Operators.Not(o_);
+			var q_ = Pharmacological?.Category;
+			var r_ = (q_ as IEnumerable<CodeableConcept>);
+			var s_ = (CodeableConcept C) =>
 			{
-				var a_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
-				var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
-				var c_ = context?.Operators.ConvertCodeToConcept(b_);
-				var d_ = (c_ as object);
-				var e_ = context?.Operators.Equivalent(a_, d_);
-				var f_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
-				var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
-				var h_ = context?.Operators.ConvertCodeToConcept(g_);
-				var i_ = (h_ as object);
-				var j_ = context?.Operators.Equivalent(f_, i_);
+				var a_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var b_ = (a_ as object);
+				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
+				var d_ = context?.Operators.ConvertCodeToConcept(c_);
+				var e_ = (d_ as object);
+				var f_ = context?.Operators.Equivalent(b_, e_);
+				var g_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var h_ = (g_ as object);
+				var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
+				var j_ = context?.Operators.ConvertCodeToConcept(i_);
+				var k_ = (j_ as object);
+				var l_ = context?.Operators.Equivalent(h_, k_);
 
-				return context?.Operators.Or(e_, j_);
+				return context?.Operators.Or(f_, l_);
 			};
-			var q_ = context?.Operators.WhereOrNull<CodeableConcept>(o_, p_);
-			var r_ = context?.Operators.ExistsInList<CodeableConcept>(q_);
-			var s_ = context?.Operators.And(n_, r_);
-			var t_ = (Pharmacological?.StatusElement as object);
-			var u_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(t_);
-			var v_ = "active";
-			var w_ = "completed";
-			var x_ = new string[]
+			var t_ = context?.Operators.WhereOrNull<CodeableConcept>(r_, s_);
+			var u_ = context?.Operators.ExistsInList<CodeableConcept>(t_);
+			var v_ = context?.Operators.And(p_, u_);
+			var w_ = Pharmacological?.StatusElement;
+			var x_ = (w_ as object);
+			var y_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(x_);
+			var z_ = "active";
+			var aa_ = "completed";
+			var ab_ = new string[]
 			{
-				v_,
-				w_,
+				z_,
+				aa_,
 			};
-			var y_ = (x_ as IEnumerable<string>);
-			var z_ = context?.Operators.InList<string>(u_, y_);
-			var aa_ = context?.Operators.And(s_, z_);
-			var ab_ = (Pharmacological?.IntentElement as object);
-			var ac_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ab_);
-			var ad_ = (ac_ as object);
-			var ae_ = context?.Operators.Equal(ad_, ("order" as object));
+			var ac_ = (ab_ as IEnumerable<string>);
+			var ad_ = context?.Operators.InList<string>(y_, ac_);
+			var ae_ = context?.Operators.And(v_, ad_);
+			var af_ = Pharmacological?.IntentElement;
+			var ag_ = (af_ as object);
+			var ah_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ag_);
+			var ai_ = (ah_ as object);
+			var aj_ = context?.Operators.Equal(ai_, ("order" as object));
 
-			return context?.Operators.And(aa_, ae_);
+			return context?.Operators.And(ae_, aj_);
 		};
 
-		return context?.Operators.WhereOrNull<MedicationRequest>(ag_, ah_);
+		return context?.Operators.WhereOrNull<MedicationRequest>(al_, am_);
 	}
 
     [CqlDeclaration("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
@@ -425,54 +441,59 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Value()
 	{
-		var af_ = this.Antithrombotic_Therapy();
-		var ag_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(af_, null);
-		var ah_ = (MedicationRequest Antithrombotic) =>
+		var ak_ = this.Antithrombotic_Therapy();
+		var al_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ak_, null);
+		var am_ = (MedicationRequest Antithrombotic) =>
 		{
-			var k_ = Antithrombotic?.DoNotPerformElement;
-			var l_ = FHIRHelpers_4_0_001.ToBoolean(k_);
-			var m_ = context?.Operators.IsTrue(l_);
-			var n_ = context?.Operators.Not(m_);
-			var o_ = (Antithrombotic?.Category as IEnumerable<CodeableConcept>);
-			var p_ = (CodeableConcept C) =>
+			var m_ = Antithrombotic?.DoNotPerformElement;
+			var n_ = FHIRHelpers_4_0_001.ToBoolean(m_);
+			var o_ = context?.Operators.IsTrue(n_);
+			var p_ = context?.Operators.Not(o_);
+			var q_ = Antithrombotic?.Category;
+			var r_ = (q_ as IEnumerable<CodeableConcept>);
+			var s_ = (CodeableConcept C) =>
 			{
-				var a_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
-				var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
-				var c_ = context?.Operators.ConvertCodeToConcept(b_);
-				var d_ = (c_ as object);
-				var e_ = context?.Operators.Equivalent(a_, d_);
-				var f_ = (FHIRHelpers_4_0_001.ToConcept(C) as object);
-				var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
-				var h_ = context?.Operators.ConvertCodeToConcept(g_);
-				var i_ = (h_ as object);
-				var j_ = context?.Operators.Equivalent(f_, i_);
+				var a_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var b_ = (a_ as object);
+				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
+				var d_ = context?.Operators.ConvertCodeToConcept(c_);
+				var e_ = (d_ as object);
+				var f_ = context?.Operators.Equivalent(b_, e_);
+				var g_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var h_ = (g_ as object);
+				var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
+				var j_ = context?.Operators.ConvertCodeToConcept(i_);
+				var k_ = (j_ as object);
+				var l_ = context?.Operators.Equivalent(h_, k_);
 
-				return context?.Operators.Or(e_, j_);
+				return context?.Operators.Or(f_, l_);
 			};
-			var q_ = context?.Operators.WhereOrNull<CodeableConcept>(o_, p_);
-			var r_ = context?.Operators.ExistsInList<CodeableConcept>(q_);
-			var s_ = context?.Operators.And(n_, r_);
-			var t_ = (Antithrombotic?.StatusElement as object);
-			var u_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(t_);
-			var v_ = "active";
-			var w_ = "completed";
-			var x_ = new string[]
+			var t_ = context?.Operators.WhereOrNull<CodeableConcept>(r_, s_);
+			var u_ = context?.Operators.ExistsInList<CodeableConcept>(t_);
+			var v_ = context?.Operators.And(p_, u_);
+			var w_ = Antithrombotic?.StatusElement;
+			var x_ = (w_ as object);
+			var y_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(x_);
+			var z_ = "active";
+			var aa_ = "completed";
+			var ab_ = new string[]
 			{
-				v_,
-				w_,
+				z_,
+				aa_,
 			};
-			var y_ = (x_ as IEnumerable<string>);
-			var z_ = context?.Operators.InList<string>(u_, y_);
-			var aa_ = context?.Operators.And(s_, z_);
-			var ab_ = (Antithrombotic?.IntentElement as object);
-			var ac_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ab_);
-			var ad_ = (ac_ as object);
-			var ae_ = context?.Operators.Equal(ad_, ("order" as object));
+			var ac_ = (ab_ as IEnumerable<string>);
+			var ad_ = context?.Operators.InList<string>(y_, ac_);
+			var ae_ = context?.Operators.And(v_, ad_);
+			var af_ = Antithrombotic?.IntentElement;
+			var ag_ = (af_ as object);
+			var ah_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ag_);
+			var ai_ = (ah_ as object);
+			var aj_ = context?.Operators.Equal(ai_, ("order" as object));
 
-			return context?.Operators.And(aa_, ae_);
+			return context?.Operators.And(ae_, aj_);
 		};
 
-		return context?.Operators.WhereOrNull<MedicationRequest>(ag_, ah_);
+		return context?.Operators.WhereOrNull<MedicationRequest>(al_, am_);
 	}
 
     [CqlDeclaration("Antithrombotic Therapy at Discharge")]

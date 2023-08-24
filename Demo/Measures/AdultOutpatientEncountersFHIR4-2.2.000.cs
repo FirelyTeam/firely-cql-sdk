@@ -87,8 +87,12 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => __Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Value() =>
-		(CqlInterval<CqlDateTime>)context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", null);
+    private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	{
+		var a_ = context.ResolveParameter("AdultOutpatientEncountersFHIR4-2.2.000", "Measurement Period", null);
+
+		return (CqlInterval<CqlDateTime>)a_;
+	}
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
@@ -105,35 +109,37 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 
     private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var i_ = this.Office_Visit();
-		var j_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = this.Annual_Wellness_Visit();
+		var k_ = this.Office_Visit();
 		var l_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(k_, null);
-		var m_ = context?.Operators.ListUnion<Encounter>(j_, l_);
-		var n_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-		var o_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(n_, null);
-		var p_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		var m_ = this.Annual_Wellness_Visit();
+		var n_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(m_, null);
+		var o_ = context?.Operators.ListUnion<Encounter>(l_, n_);
+		var p_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
 		var q_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(p_, null);
-		var r_ = context?.Operators.ListUnion<Encounter>(o_, q_);
-		var s_ = context?.Operators.ListUnion<Encounter>(m_, r_);
-		var t_ = this.Home_Healthcare_Services();
-		var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, null);
-		var v_ = context?.Operators.ListUnion<Encounter>(s_, u_);
-		var w_ = (Encounter ValidEncounter) =>
+		var r_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		var s_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(r_, null);
+		var t_ = context?.Operators.ListUnion<Encounter>(q_, s_);
+		var u_ = context?.Operators.ListUnion<Encounter>(o_, t_);
+		var v_ = this.Home_Healthcare_Services();
+		var w_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(v_, null);
+		var x_ = context?.Operators.ListUnion<Encounter>(u_, w_);
+		var y_ = (Encounter ValidEncounter) =>
 		{
-			var a_ = (ValidEncounter?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("finished" as object));
-			var e_ = this.Measurement_Period();
-			var f_ = (ValidEncounter?.Period as object);
-			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
-			var h_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, null);
+			var a_ = ValidEncounter?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("finished" as object));
+			var f_ = this.Measurement_Period();
+			var g_ = ValidEncounter?.Period;
+			var h_ = (g_ as object);
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
+			var j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, null);
 
-			return context?.Operators.And(d_, h_);
+			return context?.Operators.And(e_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(v_, w_);
+		return context?.Operators.WhereOrNull<Encounter>(x_, y_);
 	}
 
     [CqlDeclaration("Qualifying Encounters")]

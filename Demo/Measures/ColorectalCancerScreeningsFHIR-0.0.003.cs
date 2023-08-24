@@ -472,26 +472,28 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Encounter> Telehealth_Services_Value()
 	{
-		var i_ = this.Online_Assessments();
-		var j_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = this.Telephone_Visits();
+		var k_ = this.Online_Assessments();
 		var l_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(k_, null);
-		var m_ = context?.Operators.ListUnion<Encounter>(j_, l_);
-		var n_ = (Encounter TelehealthEncounter) =>
+		var m_ = this.Telephone_Visits();
+		var n_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(m_, null);
+		var o_ = context?.Operators.ListUnion<Encounter>(l_, n_);
+		var p_ = (Encounter TelehealthEncounter) =>
 		{
-			var a_ = (TelehealthEncounter?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("finished" as object));
-			var e_ = this.Measurement_Period();
-			var f_ = (TelehealthEncounter?.Period as object);
-			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
-			var h_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(e_, g_, null);
+			var a_ = TelehealthEncounter?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("finished" as object));
+			var f_ = this.Measurement_Period();
+			var g_ = TelehealthEncounter?.Period;
+			var h_ = (g_ as object);
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
+			var j_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(f_, i_, null);
 
-			return context?.Operators.And(d_, h_);
+			return context?.Operators.And(e_, j_);
 		};
 
-		return context?.Operators.WhereOrNull<Encounter>(m_, n_);
+		return context?.Operators.WhereOrNull<Encounter>(o_, p_);
 	}
 
     [CqlDeclaration("Telehealth Services")]
@@ -499,13 +501,16 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private int? Age_at_start_of_Measurement_Period_Value()
 	{
-		var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-		var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
-		var c_ = this.Measurement_Period();
-		var d_ = context?.Operators.Start(c_);
-		var e_ = context?.Operators.DateFrom(d_);
+		var a_ = this.Patient();
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
+		var d_ = (c_ as object);
+		var e_ = context?.Operators?.TypeConverter.Convert<CqlDate>(d_);
+		var f_ = this.Measurement_Period();
+		var g_ = context?.Operators.Start(f_);
+		var h_ = context?.Operators.DateFrom(g_);
 
-		return context?.Operators.CalculateAgeAt(b_, e_, "year");
+		return context?.Operators.CalculateAgeAt(e_, h_, "year");
 	}
 
     [CqlDeclaration("Age at start of Measurement Period")]
@@ -513,20 +518,23 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private bool? Initial_Population_Value()
 	{
-		var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-		var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
-		var c_ = this.Measurement_Period();
-		var d_ = context?.Operators.Start(c_);
-		var e_ = context?.Operators.DateFrom(d_);
-		var f_ = context?.Operators.CalculateAgeAt(b_, e_, "year");
-		var g_ = context?.Operators.Interval((int?)51, (int?)75, true, false);
-		var h_ = context?.Operators.ElementInInterval<int?>(f_, g_, null);
-		var i_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var j_ = this.Telehealth_Services();
-		var k_ = context?.Operators.ListUnion<Encounter>(i_, j_);
-		var l_ = context?.Operators.ExistsInList<Encounter>(k_);
+		var a_ = this.Patient();
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
+		var d_ = (c_ as object);
+		var e_ = context?.Operators?.TypeConverter.Convert<CqlDate>(d_);
+		var f_ = this.Measurement_Period();
+		var g_ = context?.Operators.Start(f_);
+		var h_ = context?.Operators.DateFrom(g_);
+		var i_ = context?.Operators.CalculateAgeAt(e_, h_, "year");
+		var j_ = context?.Operators.Interval((int?)51, (int?)75, true, false);
+		var k_ = context?.Operators.ElementInInterval<int?>(i_, j_, null);
+		var l_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var m_ = this.Telehealth_Services();
+		var n_ = context?.Operators.ListUnion<Encounter>(l_, m_);
+		var o_ = context?.Operators.ExistsInList<Encounter>(n_);
 
-		return context?.Operators.And(h_, l_);
+		return context?.Operators.And(k_, o_);
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -560,25 +568,27 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Procedure> Total_Colectomy_Performed_Value()
 	{
-		var k_ = this.Total_Colectomy();
-		var l_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(k_, null);
-		var m_ = (Procedure Colectomy) =>
+		var m_ = this.Total_Colectomy();
+		var n_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(m_, null);
+		var o_ = (Procedure Colectomy) =>
 		{
-			var a_ = (Colectomy?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("completed" as object));
-			var e_ = (Colectomy?.Performed as object);
-			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(e_);
-			var g_ = context?.Operators.End(f_);
-			var h_ = this.Measurement_Period();
+			var a_ = Colectomy?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("completed" as object));
+			var f_ = Colectomy?.Performed;
+			var g_ = (f_ as object);
+			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(g_);
 			var i_ = context?.Operators.End(h_);
-			var j_ = context?.Operators.SameOrBefore(g_, i_, null);
+			var j_ = this.Measurement_Period();
+			var k_ = context?.Operators.End(j_);
+			var l_ = context?.Operators.SameOrBefore(i_, k_, null);
 
-			return context?.Operators.And(d_, j_);
+			return context?.Operators.And(e_, l_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(l_, m_);
+		return context?.Operators.WhereOrNull<Procedure>(n_, o_);
 	}
 
     [CqlDeclaration("Total Colectomy Performed")]
@@ -618,21 +628,25 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 		var j_ = context?.Operators.Or(g_, i_);
 		var k_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var l_ = context?.Operators.Or(j_, k_);
-		var m_ = (this.Patient()?.BirthDateElement?.Value as object);
-		var n_ = context?.Operators?.TypeConverter.Convert<CqlDate>(m_);
-		var o_ = this.Measurement_Period();
-		var p_ = context?.Operators.Start(o_);
-		var q_ = context?.Operators.DateFrom(p_);
-		var r_ = context?.Operators.CalculateAgeAt(n_, q_, "year");
-		var s_ = (r_ as object);
-		var t_ = ((int?)65 as object);
-		var u_ = context?.Operators.GreaterOrEqual(s_, t_);
-		var v_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
-		var w_ = context?.Operators.And(u_, v_);
-		var x_ = context?.Operators.Or(l_, w_);
-		var y_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+		var m_ = this.Patient();
+		var n_ = m_?.BirthDateElement;
+		var o_ = n_?.Value;
+		var p_ = (o_ as object);
+		var q_ = context?.Operators?.TypeConverter.Convert<CqlDate>(p_);
+		var r_ = this.Measurement_Period();
+		var s_ = context?.Operators.Start(r_);
+		var t_ = context?.Operators.DateFrom(s_);
+		var u_ = context?.Operators.CalculateAgeAt(q_, t_, "year");
+		var v_ = u_;
+		var w_ = (int?)65;
+		var x_ = w_;
+		var y_ = context?.Operators.GreaterOrEqual(v_, x_);
+		var z_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
+		var aa_ = context?.Operators.And(y_, z_);
+		var ab_ = context?.Operators.Or(l_, aa_);
+		var ac_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
 
-		return context?.Operators.Or(x_, y_);
+		return context?.Operators.Or(ab_, ac_);
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -640,79 +654,91 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value()
 	{
-		var ak_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		var al_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ak_, null);
-		var am_ = (Observation FecalOccult) =>
+		var aw_ = this.Fecal_Occult_Blood_Test__FOBT_();
+		var ax_ = context?.DataRetriever.RetrieveByValueSet<Observation>(aw_, null);
+		var ay_ = (Observation FecalOccult) =>
 		{
-			var a_ = (FecalOccult?.Effective as object);
-			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(a_);
-			var c_ = this.Measurement_Period();
-			var d_ = context?.Operators.Start(c_);
-			var e_ = context?.Operators.Quantity(1m, "year");
-			var f_ = context?.Operators.Subtract(d_, e_);
-			var g_ = this.Measurement_Period();
-			var h_ = context?.Operators.End(g_);
-			var i_ = context?.Operators.Interval(f_, h_, false, false);
+			var a_ = FecalOccult?.Effective;
+			var b_ = (a_ as object);
+			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(b_);
+			var d_ = this.Measurement_Period();
+			var e_ = context?.Operators.Start(d_);
+			var f_ = context?.Operators.Quantity(1m, "year");
+			var g_ = context?.Operators.Subtract(e_, f_);
+			var h_ = this.Measurement_Period();
+			var i_ = context?.Operators.End(h_);
+			var j_ = context?.Operators.Interval(g_, i_, false, false);
 
-			return context?.Operators.ElementInInterval<CqlDateTime>(b_, i_, null);
+			return context?.Operators.ElementInInterval<CqlDateTime>(c_, j_, null);
 		};
-		var an_ = context?.Operators.WhereOrNull<Observation>(al_, am_);
-		var ao_ = (Observation FecalOccult) =>
+		var az_ = context?.Operators.WhereOrNull<Observation>(ax_, ay_);
+		var ba_ = (Observation FecalOccult) =>
 		{
-			var n_ = (FecalOccult?.Effective as object);
-			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(n_);
-			var p_ = (FecalOccult?.Value as object);
-			var q_ = context?.Operators.LateBoundProperty<IEnumerable<Coding>>(p_, "coding");
-			var r_ = (Coding @this) =>
+			var w_ = FecalOccult?.Effective;
+			var x_ = (w_ as object);
+			var y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(x_);
+			var z_ = FecalOccult?.Value;
+			var aa_ = (z_ as object);
+			var ab_ = context?.Operators.LateBoundProperty<IEnumerable<Coding>>(aa_, "coding");
+			var ac_ = (Coding @this) =>
 			{
-				var j_ = (bool?)(@this?.DisplayElement == null);
-
-				return context?.Operators.Not(j_);
-			};
-			var s_ = context?.Operators.WhereOrNull<Coding>(q_, r_);
-			var t_ = (Coding @this) => @this?.DisplayElement;
-			var u_ = context?.Operators.SelectOrNull<Coding, FhirString>(s_, t_);
-			var v_ = (FecalOccult?.Category as IEnumerable<CodeableConcept>);
-			var w_ = (CodeableConcept @this) =>
-			{
-				var k_ = (bool?)(@this?.Coding == null);
-
-				return context?.Operators.Not(k_);
-			};
-			var x_ = context?.Operators.WhereOrNull<CodeableConcept>(v_, w_);
-			var y_ = (CodeableConcept @this) => @this?.Coding;
-			var z_ = context?.Operators.SelectOrNull<CodeableConcept, List<Coding>>(x_, y_);
-			var aa_ = context?.Operators.FlattenList<Coding>(z_);
-			var ab_ = (Coding @this) =>
-			{
-				var l_ = (bool?)(@this?.CodeElement == null);
-
-				return context?.Operators.Not(l_);
-			};
-			var ac_ = context?.Operators.WhereOrNull<Coding>(aa_, ab_);
-			var ad_ = (Coding @this) => @this?.CodeElement;
-			var ae_ = context?.Operators.SelectOrNull<Coding, Code>(ac_, ad_);
-			var af_ = (Code @this) =>
-			{
-				var m_ = (bool?)(@this?.Value == null);
+				var k_ = @this?.DisplayElement;
+				var l_ = (k_ == null);
+				var m_ = (bool?)l_;
 
 				return context?.Operators.Not(m_);
 			};
-			var ag_ = context?.Operators.WhereOrNull<Code>(ae_, af_);
-			var ah_ = (Code @this) => @this?.Value;
-			var ai_ = context?.Operators.SelectOrNull<Code, string>(ag_, ah_);
-			var aj_ = FecalOccult?.StatusElement;
+			var ad_ = context?.Operators.WhereOrNull<Coding>(ab_, ac_);
+			var ae_ = (Coding @this) => @this?.DisplayElement;
+			var af_ = context?.Operators.SelectOrNull<Coding, FhirString>(ad_, ae_);
+			var ag_ = FecalOccult?.Category;
+			var ah_ = (ag_ as IEnumerable<CodeableConcept>);
+			var ai_ = (CodeableConcept @this) =>
+			{
+				var n_ = @this?.Coding;
+				var o_ = (n_ == null);
+				var p_ = (bool?)o_;
+
+				return context?.Operators.Not(p_);
+			};
+			var aj_ = context?.Operators.WhereOrNull<CodeableConcept>(ah_, ai_);
+			var ak_ = (CodeableConcept @this) => @this?.Coding;
+			var al_ = context?.Operators.SelectOrNull<CodeableConcept, List<Coding>>(aj_, ak_);
+			var am_ = context?.Operators.FlattenList<Coding>(al_);
+			var an_ = (Coding @this) =>
+			{
+				var q_ = @this?.CodeElement;
+				var r_ = (q_ == null);
+				var s_ = (bool?)r_;
+
+				return context?.Operators.Not(s_);
+			};
+			var ao_ = context?.Operators.WhereOrNull<Coding>(am_, an_);
+			var ap_ = (Coding @this) => @this?.CodeElement;
+			var aq_ = context?.Operators.SelectOrNull<Coding, Code>(ao_, ap_);
+			var ar_ = (Code @this) =>
+			{
+				var t_ = @this?.Value;
+				var u_ = (t_ == null);
+				var v_ = (bool?)u_;
+
+				return context?.Operators.Not(v_);
+			};
+			var as_ = context?.Operators.WhereOrNull<Code>(aq_, ar_);
+			var at_ = (Code @this) => @this?.Value;
+			var au_ = context?.Operators.SelectOrNull<Code, string>(as_, at_);
+			var av_ = FecalOccult?.StatusElement;
 
 			return new Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW
 			{
-				occultDate = o_,
-				occultResult = u_,
-				occultCategoryCode = ai_,
-				occultStatus = aj_,
+				occultDate = y_,
+				occultResult = af_,
+				occultCategoryCode = au_,
+				occultStatus = av_,
 			};
 		};
 
-		return context?.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(an_, ao_);
+		return context?.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(az_, ba_);
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Display Date, Result, Category, Status")]
@@ -720,69 +746,80 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Value()
 	{
-		var ai_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		var aj_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ai_, null);
-		var ak_ = (Observation FecalOccult) =>
+		var at_ = this.Fecal_Occult_Blood_Test__FOBT_();
+		var au_ = context?.DataRetriever.RetrieveByValueSet<Observation>(at_, null);
+		var av_ = (Observation FecalOccult) =>
 		{
-			var o_ = (FecalOccult?.StatusElement as object);
-			var p_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(o_);
-			var q_ = "final";
-			var r_ = "amended";
-			var s_ = "corrected";
-			var t_ = new string[]
+			var t_ = FecalOccult?.StatusElement;
+			var u_ = (t_ as object);
+			var v_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(u_);
+			var w_ = "final";
+			var x_ = "amended";
+			var y_ = "corrected";
+			var z_ = new string[]
 			{
-				q_,
-				r_,
-				s_,
+				w_,
+				x_,
+				y_,
 			};
-			var u_ = (t_ as IEnumerable<string>);
-			var v_ = context?.Operators.InList<string>(p_, u_);
-			var w_ = (FecalOccult?.Category as IEnumerable<CodeableConcept>);
-			var x_ = (CodeableConcept FecalOccultCategory) =>
+			var aa_ = (z_ as IEnumerable<string>);
+			var ab_ = context?.Operators.InList<string>(v_, aa_);
+			var ac_ = FecalOccult?.Category;
+			var ad_ = (ac_ as IEnumerable<CodeableConcept>);
+			var ae_ = (CodeableConcept FecalOccultCategory) =>
 			{
-				var c_ = (FecalOccultCategory?.Coding as IEnumerable<Coding>);
-				var d_ = (Coding @this) =>
+				var g_ = FecalOccultCategory?.Coding;
+				var h_ = (g_ as IEnumerable<Coding>);
+				var i_ = (Coding @this) =>
 				{
-					var a_ = (bool?)(@this?.CodeElement == null);
+					var a_ = @this?.CodeElement;
+					var b_ = (a_ == null);
+					var c_ = (bool?)b_;
 
-					return context?.Operators.Not(a_);
+					return context?.Operators.Not(c_);
 				};
-				var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-				var f_ = (Coding @this) => @this?.CodeElement;
-				var g_ = context?.Operators.SelectOrNull<Coding, Code>(e_, f_);
-				var h_ = (Code @this) =>
+				var j_ = context?.Operators.WhereOrNull<Coding>(h_, i_);
+				var k_ = (Coding @this) => @this?.CodeElement;
+				var l_ = context?.Operators.SelectOrNull<Coding, Code>(j_, k_);
+				var m_ = (Code @this) =>
 				{
-					var b_ = (bool?)(@this?.Value == null);
+					var d_ = @this?.Value;
+					var e_ = (d_ == null);
+					var f_ = (bool?)e_;
 
-					return context?.Operators.Not(b_);
+					return context?.Operators.Not(f_);
 				};
-				var i_ = context?.Operators.WhereOrNull<Code>(g_, h_);
-				var j_ = (Code @this) => @this?.Value;
-				var k_ = context?.Operators.SelectOrNull<Code, string>(i_, j_);
-				var l_ = "laboratory";
-				var m_ = new string[]
+				var n_ = context?.Operators.WhereOrNull<Code>(l_, m_);
+				var o_ = (Code @this) => @this?.Value;
+				var p_ = context?.Operators.SelectOrNull<Code, string>(n_, o_);
+				var q_ = "laboratory";
+				var r_ = new string[]
 				{
-					l_,
+					q_,
 				};
-				var n_ = (m_ as IEnumerable<string>);
+				var s_ = (r_ as IEnumerable<string>);
 
-				return context?.Operators.ListEquivalent<string>(k_, n_);
+				return context?.Operators.ListEquivalent<string>(p_, s_);
 			};
-			var y_ = context?.Operators.WhereOrNull<CodeableConcept>(w_, x_);
-			var z_ = context?.Operators.ExistsInList<CodeableConcept>(y_);
-			var aa_ = context?.Operators.And(v_, z_);
-			var ab_ = (bool?)((FecalOccult?.Value as object) == null);
-			var ac_ = context?.Operators.Not(ab_);
-			var ad_ = context?.Operators.And(aa_, ac_);
-			var ae_ = (FecalOccult?.Effective as object);
-			var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ae_);
-			var ag_ = this.Measurement_Period();
-			var ah_ = context?.Operators.ElementInInterval<CqlDateTime>(af_, ag_, null);
+			var af_ = context?.Operators.WhereOrNull<CodeableConcept>(ad_, ae_);
+			var ag_ = context?.Operators.ExistsInList<CodeableConcept>(af_);
+			var ah_ = context?.Operators.And(ab_, ag_);
+			var ai_ = FecalOccult?.Value;
+			var aj_ = (ai_ as object);
+			var ak_ = (aj_ == null);
+			var al_ = (bool?)ak_;
+			var am_ = context?.Operators.Not(al_);
+			var an_ = context?.Operators.And(ah_, am_);
+			var ao_ = FecalOccult?.Effective;
+			var ap_ = (ao_ as object);
+			var aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ap_);
+			var ar_ = this.Measurement_Period();
+			var as_ = context?.Operators.ElementInInterval<CqlDateTime>(aq_, ar_, null);
 
-			return context?.Operators.And(ad_, ah_);
+			return context?.Operators.And(an_, as_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(aj_, ak_);
+		return context?.Operators.WhereOrNull<Observation>(au_, av_);
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed")]
@@ -790,69 +827,80 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Value()
 	{
-		var ai_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		var aj_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ai_, null);
-		var ak_ = (Observation FecalOccult) =>
+		var at_ = this.Fecal_Occult_Blood_Test__FOBT_();
+		var au_ = context?.DataRetriever.RetrieveByValueSet<Observation>(at_, null);
+		var av_ = (Observation FecalOccult) =>
 		{
-			var o_ = (FecalOccult?.StatusElement as object);
-			var p_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(o_);
-			var q_ = "final";
-			var r_ = "amended";
-			var s_ = "corrected";
-			var t_ = new string[]
+			var t_ = FecalOccult?.StatusElement;
+			var u_ = (t_ as object);
+			var v_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(u_);
+			var w_ = "final";
+			var x_ = "amended";
+			var y_ = "corrected";
+			var z_ = new string[]
 			{
-				q_,
-				r_,
-				s_,
+				w_,
+				x_,
+				y_,
 			};
-			var u_ = (t_ as IEnumerable<string>);
-			var v_ = context?.Operators.InList<string>(p_, u_);
-			var w_ = (FecalOccult?.Category as IEnumerable<CodeableConcept>);
-			var x_ = (CodeableConcept FecalOccultCategory) =>
+			var aa_ = (z_ as IEnumerable<string>);
+			var ab_ = context?.Operators.InList<string>(v_, aa_);
+			var ac_ = FecalOccult?.Category;
+			var ad_ = (ac_ as IEnumerable<CodeableConcept>);
+			var ae_ = (CodeableConcept FecalOccultCategory) =>
 			{
-				var c_ = (FecalOccultCategory?.Coding as IEnumerable<Coding>);
-				var d_ = (Coding @this) =>
+				var g_ = FecalOccultCategory?.Coding;
+				var h_ = (g_ as IEnumerable<Coding>);
+				var i_ = (Coding @this) =>
 				{
-					var a_ = (bool?)(@this?.CodeElement == null);
+					var a_ = @this?.CodeElement;
+					var b_ = (a_ == null);
+					var c_ = (bool?)b_;
 
-					return context?.Operators.Not(a_);
+					return context?.Operators.Not(c_);
 				};
-				var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-				var f_ = (Coding @this) => @this?.CodeElement;
-				var g_ = context?.Operators.SelectOrNull<Coding, Code>(e_, f_);
-				var h_ = (Code @this) =>
+				var j_ = context?.Operators.WhereOrNull<Coding>(h_, i_);
+				var k_ = (Coding @this) => @this?.CodeElement;
+				var l_ = context?.Operators.SelectOrNull<Coding, Code>(j_, k_);
+				var m_ = (Code @this) =>
 				{
-					var b_ = (bool?)(@this?.Value == null);
+					var d_ = @this?.Value;
+					var e_ = (d_ == null);
+					var f_ = (bool?)e_;
 
-					return context?.Operators.Not(b_);
+					return context?.Operators.Not(f_);
 				};
-				var i_ = context?.Operators.WhereOrNull<Code>(g_, h_);
-				var j_ = (Code @this) => @this?.Value;
-				var k_ = context?.Operators.SelectOrNull<Code, string>(i_, j_);
-				var l_ = "laboratory";
-				var m_ = new string[]
+				var n_ = context?.Operators.WhereOrNull<Code>(l_, m_);
+				var o_ = (Code @this) => @this?.Value;
+				var p_ = context?.Operators.SelectOrNull<Code, string>(n_, o_);
+				var q_ = "laboratory";
+				var r_ = new string[]
 				{
-					l_,
+					q_,
 				};
-				var n_ = (m_ as IEnumerable<string>);
+				var s_ = (r_ as IEnumerable<string>);
 
-				return context?.Operators.ListEquivalent<string>(k_, n_);
+				return context?.Operators.ListEquivalent<string>(p_, s_);
 			};
-			var y_ = context?.Operators.WhereOrNull<CodeableConcept>(w_, x_);
-			var z_ = context?.Operators.ExistsInList<CodeableConcept>(y_);
-			var aa_ = context?.Operators.And(v_, z_);
-			var ab_ = (bool?)((FecalOccult?.Value as object) == null);
-			var ac_ = context?.Operators.Not(ab_);
-			var ad_ = context?.Operators.And(aa_, ac_);
-			var ae_ = (FecalOccult?.Effective as object);
-			var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ae_);
-			var ag_ = this.Measurement_Period();
-			var ah_ = context?.Operators.ElementInInterval<CqlDateTime>(af_, ag_, "day");
+			var af_ = context?.Operators.WhereOrNull<CodeableConcept>(ad_, ae_);
+			var ag_ = context?.Operators.ExistsInList<CodeableConcept>(af_);
+			var ah_ = context?.Operators.And(ab_, ag_);
+			var ai_ = FecalOccult?.Value;
+			var aj_ = (ai_ as object);
+			var ak_ = (aj_ == null);
+			var al_ = (bool?)ak_;
+			var am_ = context?.Operators.Not(al_);
+			var an_ = context?.Operators.And(ah_, am_);
+			var ao_ = FecalOccult?.Effective;
+			var ap_ = (ao_ as object);
+			var aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ap_);
+			var ar_ = this.Measurement_Period();
+			var as_ = context?.Operators.ElementInInterval<CqlDateTime>(aq_, ar_, "day");
 
-			return context?.Operators.And(ad_, ah_);
+			return context?.Operators.And(an_, as_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(aj_, ak_);
+		return context?.Operators.WhereOrNull<Observation>(au_, av_);
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed, day of TZoffset")]
@@ -860,56 +908,66 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
 	{
-		var aa_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		var ab_ = context?.DataRetriever.RetrieveByValueSet<Observation>(aa_, null);
-		var ac_ = (Observation FecalOccult) =>
+		var ak_ = this.Fecal_Occult_Blood_Test__FOBT_();
+		var al_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ak_, null);
+		var am_ = (Observation FecalOccult) =>
 		{
-			var p_ = (FecalOccult?.Category as IEnumerable<CodeableConcept>);
-			var q_ = (CodeableConcept FecalOccultCategory) =>
+			var u_ = FecalOccult?.Category;
+			var v_ = (u_ as IEnumerable<CodeableConcept>);
+			var w_ = (CodeableConcept FecalOccultCategory) =>
 			{
-				var c_ = (FecalOccultCategory?.Coding as IEnumerable<Coding>);
-				var d_ = (Coding @this) =>
+				var g_ = FecalOccultCategory?.Coding;
+				var h_ = (g_ as IEnumerable<Coding>);
+				var i_ = (Coding @this) =>
 				{
-					var a_ = (bool?)(@this?.CodeElement == null);
+					var a_ = @this?.CodeElement;
+					var b_ = (a_ == null);
+					var c_ = (bool?)b_;
 
-					return context?.Operators.Not(a_);
+					return context?.Operators.Not(c_);
 				};
-				var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-				var f_ = (Coding @this) => @this?.CodeElement;
-				var g_ = context?.Operators.SelectOrNull<Coding, Code>(e_, f_);
-				var h_ = (Code @this) =>
+				var j_ = context?.Operators.WhereOrNull<Coding>(h_, i_);
+				var k_ = (Coding @this) => @this?.CodeElement;
+				var l_ = context?.Operators.SelectOrNull<Coding, Code>(j_, k_);
+				var m_ = (Code @this) =>
 				{
-					var b_ = (bool?)(@this?.Value == null);
+					var d_ = @this?.Value;
+					var e_ = (d_ == null);
+					var f_ = (bool?)e_;
 
-					return context?.Operators.Not(b_);
+					return context?.Operators.Not(f_);
 				};
-				var i_ = context?.Operators.WhereOrNull<Code>(g_, h_);
-				var j_ = (Code @this) => @this?.Value;
-				var k_ = context?.Operators.SelectOrNull<Code, string>(i_, j_);
-				var l_ = "laboratory";
-				var m_ = new string[]
+				var n_ = context?.Operators.WhereOrNull<Code>(l_, m_);
+				var o_ = (Code @this) => @this?.Value;
+				var p_ = context?.Operators.SelectOrNull<Code, string>(n_, o_);
+				var q_ = "laboratory";
+				var r_ = new string[]
 				{
-					l_,
+					q_,
 				};
-				var n_ = (m_ as IEnumerable<string>);
-				var o_ = context?.Operators.ListEquivalent<string>(k_, n_);
+				var s_ = (r_ as IEnumerable<string>);
+				var t_ = context?.Operators.ListEquivalent<string>(p_, s_);
 
-				return context?.Operators.Not(o_);
+				return context?.Operators.Not(t_);
 			};
-			var r_ = context?.Operators.WhereOrNull<CodeableConcept>(p_, q_);
-			var s_ = context?.Operators.ExistsInList<CodeableConcept>(r_);
-			var t_ = (bool?)((FecalOccult?.Value as object) == null);
-			var u_ = context?.Operators.Not(t_);
-			var v_ = context?.Operators.And(s_, u_);
-			var w_ = (FecalOccult?.Effective as object);
-			var x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(w_);
-			var y_ = this.Measurement_Period();
-			var z_ = context?.Operators.ElementInInterval<CqlDateTime>(x_, y_, "day");
+			var x_ = context?.Operators.WhereOrNull<CodeableConcept>(v_, w_);
+			var y_ = context?.Operators.ExistsInList<CodeableConcept>(x_);
+			var z_ = FecalOccult?.Value;
+			var aa_ = (z_ as object);
+			var ab_ = (aa_ == null);
+			var ac_ = (bool?)ab_;
+			var ad_ = context?.Operators.Not(ac_);
+			var ae_ = context?.Operators.And(y_, ad_);
+			var af_ = FecalOccult?.Effective;
+			var ag_ = (af_ as object);
+			var ah_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ag_);
+			var ai_ = this.Measurement_Period();
+			var aj_ = context?.Operators.ElementInInterval<CqlDateTime>(ah_, ai_, "day");
 
-			return context?.Operators.And(v_, z_);
+			return context?.Operators.And(ae_, aj_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(ab_, ac_);
+		return context?.Operators.WhereOrNull<Observation>(al_, am_);
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate category, ignore status, day of TZoffset")]
@@ -917,36 +975,41 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
 	{
-		var q_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		var r_ = context?.DataRetriever.RetrieveByValueSet<Observation>(q_, null);
-		var s_ = (Observation FecalOccult) =>
+		var v_ = this.Fecal_Occult_Blood_Test__FOBT_();
+		var w_ = context?.DataRetriever.RetrieveByValueSet<Observation>(v_, null);
+		var x_ = (Observation FecalOccult) =>
 		{
-			var a_ = (FecalOccult?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = "final";
-			var d_ = "amended";
-			var e_ = "corrected";
-			var f_ = new string[]
+			var a_ = FecalOccult?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = "final";
+			var e_ = "amended";
+			var f_ = "corrected";
+			var g_ = new string[]
 			{
-				c_,
 				d_,
 				e_,
+				f_,
 			};
-			var g_ = (f_ as IEnumerable<string>);
-			var h_ = context?.Operators.InList<string>(b_, g_);
-			var i_ = context?.Operators.Not(h_);
-			var j_ = (bool?)((FecalOccult?.Value as object) == null);
-			var k_ = context?.Operators.Not(j_);
-			var l_ = context?.Operators.And(i_, k_);
-			var m_ = (FecalOccult?.Effective as object);
-			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context?.Operators.ElementInInterval<CqlDateTime>(n_, o_, "day");
+			var h_ = (g_ as IEnumerable<string>);
+			var i_ = context?.Operators.InList<string>(c_, h_);
+			var j_ = context?.Operators.Not(i_);
+			var k_ = FecalOccult?.Value;
+			var l_ = (k_ as object);
+			var m_ = (l_ == null);
+			var n_ = (bool?)m_;
+			var o_ = context?.Operators.Not(n_);
+			var p_ = context?.Operators.And(j_, o_);
+			var q_ = FecalOccult?.Effective;
+			var r_ = (q_ as object);
+			var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(r_);
+			var t_ = this.Measurement_Period();
+			var u_ = context?.Operators.ElementInInterval<CqlDateTime>(s_, t_, "day");
 
-			return context?.Operators.And(l_, p_);
+			return context?.Operators.And(p_, u_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(r_, s_);
+		return context?.Operators.WhereOrNull<Observation>(w_, x_);
 	}
 
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate status, ignore category, day of TZoffset")]
@@ -954,84 +1017,97 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value()
 	{
-		var ap_ = this.FIT_DNA();
-		var aq_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ap_, null);
-		var ar_ = (Observation FitDNA) =>
+		var bc_ = this.FIT_DNA();
+		var bd_ = context?.DataRetriever.RetrieveByValueSet<Observation>(bc_, null);
+		var be_ = (Observation FitDNA) =>
 		{
-			var a_ = (FitDNA?.Effective as object);
-			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(a_);
-			var c_ = this.Measurement_Period();
-			var d_ = context?.Operators.End(c_);
-			var e_ = context?.Operators.Quantity(4m, "years");
-			var f_ = context?.Operators.Subtract(d_, e_);
-			var g_ = this.Measurement_Period();
-			var h_ = context?.Operators.End(g_);
-			var i_ = context?.Operators.Interval(f_, h_, true, true);
-			var j_ = context?.Operators.ElementInInterval<CqlDateTime>(b_, i_, null);
-			var k_ = this.Measurement_Period();
-			var l_ = context?.Operators.End(k_);
-			var m_ = (bool?)(l_ == null);
-			var n_ = context?.Operators.Not(m_);
+			var a_ = FitDNA?.Effective;
+			var b_ = (a_ as object);
+			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(b_);
+			var d_ = this.Measurement_Period();
+			var e_ = context?.Operators.End(d_);
+			var f_ = context?.Operators.Quantity(4m, "years");
+			var g_ = context?.Operators.Subtract(e_, f_);
+			var h_ = this.Measurement_Period();
+			var i_ = context?.Operators.End(h_);
+			var j_ = context?.Operators.Interval(g_, i_, true, true);
+			var k_ = context?.Operators.ElementInInterval<CqlDateTime>(c_, j_, null);
+			var l_ = this.Measurement_Period();
+			var m_ = context?.Operators.End(l_);
+			var n_ = (m_ == null);
+			var o_ = (bool?)n_;
+			var p_ = context?.Operators.Not(o_);
 
-			return context?.Operators.And(j_, n_);
+			return context?.Operators.And(k_, p_);
 		};
-		var as_ = context?.Operators.WhereOrNull<Observation>(aq_, ar_);
-		var at_ = (Observation FitDNA) =>
+		var bf_ = context?.Operators.WhereOrNull<Observation>(bd_, be_);
+		var bg_ = (Observation FitDNA) =>
 		{
-			var s_ = (FitDNA?.Effective as object);
-			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(s_);
-			var u_ = (FitDNA?.Value as object);
-			var v_ = context?.Operators.LateBoundProperty<IEnumerable<Coding>>(u_, "coding");
-			var w_ = (Coding @this) =>
+			var ac_ = FitDNA?.Effective;
+			var ad_ = (ac_ as object);
+			var ae_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ad_);
+			var af_ = FitDNA?.Value;
+			var ag_ = (af_ as object);
+			var ah_ = context?.Operators.LateBoundProperty<IEnumerable<Coding>>(ag_, "coding");
+			var ai_ = (Coding @this) =>
 			{
-				var o_ = (bool?)(@this?.DisplayElement == null);
+				var q_ = @this?.DisplayElement;
+				var r_ = (q_ == null);
+				var s_ = (bool?)r_;
 
-				return context?.Operators.Not(o_);
+				return context?.Operators.Not(s_);
 			};
-			var x_ = context?.Operators.WhereOrNull<Coding>(v_, w_);
-			var y_ = (Coding @this) => @this?.DisplayElement;
-			var z_ = context?.Operators.SelectOrNull<Coding, FhirString>(x_, y_);
-			var aa_ = (FitDNA?.Category as IEnumerable<CodeableConcept>);
-			var ab_ = (CodeableConcept @this) =>
+			var aj_ = context?.Operators.WhereOrNull<Coding>(ah_, ai_);
+			var ak_ = (Coding @this) => @this?.DisplayElement;
+			var al_ = context?.Operators.SelectOrNull<Coding, FhirString>(aj_, ak_);
+			var am_ = FitDNA?.Category;
+			var an_ = (am_ as IEnumerable<CodeableConcept>);
+			var ao_ = (CodeableConcept @this) =>
 			{
-				var p_ = (bool?)(@this?.Coding == null);
+				var t_ = @this?.Coding;
+				var u_ = (t_ == null);
+				var v_ = (bool?)u_;
 
-				return context?.Operators.Not(p_);
+				return context?.Operators.Not(v_);
 			};
-			var ac_ = context?.Operators.WhereOrNull<CodeableConcept>(aa_, ab_);
-			var ad_ = (CodeableConcept @this) => @this?.Coding;
-			var ae_ = context?.Operators.SelectOrNull<CodeableConcept, List<Coding>>(ac_, ad_);
-			var af_ = context?.Operators.FlattenList<Coding>(ae_);
-			var ag_ = (Coding @this) =>
+			var ap_ = context?.Operators.WhereOrNull<CodeableConcept>(an_, ao_);
+			var aq_ = (CodeableConcept @this) => @this?.Coding;
+			var ar_ = context?.Operators.SelectOrNull<CodeableConcept, List<Coding>>(ap_, aq_);
+			var as_ = context?.Operators.FlattenList<Coding>(ar_);
+			var at_ = (Coding @this) =>
 			{
-				var q_ = (bool?)(@this?.CodeElement == null);
+				var w_ = @this?.CodeElement;
+				var x_ = (w_ == null);
+				var y_ = (bool?)x_;
 
-				return context?.Operators.Not(q_);
+				return context?.Operators.Not(y_);
 			};
-			var ah_ = context?.Operators.WhereOrNull<Coding>(af_, ag_);
-			var ai_ = (Coding @this) => @this?.CodeElement;
-			var aj_ = context?.Operators.SelectOrNull<Coding, Code>(ah_, ai_);
-			var ak_ = (Code @this) =>
+			var au_ = context?.Operators.WhereOrNull<Coding>(as_, at_);
+			var av_ = (Coding @this) => @this?.CodeElement;
+			var aw_ = context?.Operators.SelectOrNull<Coding, Code>(au_, av_);
+			var ax_ = (Code @this) =>
 			{
-				var r_ = (bool?)(@this?.Value == null);
+				var z_ = @this?.Value;
+				var aa_ = (z_ == null);
+				var ab_ = (bool?)aa_;
 
-				return context?.Operators.Not(r_);
+				return context?.Operators.Not(ab_);
 			};
-			var al_ = context?.Operators.WhereOrNull<Code>(aj_, ak_);
-			var am_ = (Code @this) => @this?.Value;
-			var an_ = context?.Operators.SelectOrNull<Code, string>(al_, am_);
-			var ao_ = FitDNA?.StatusElement;
+			var ay_ = context?.Operators.WhereOrNull<Code>(aw_, ax_);
+			var az_ = (Code @this) => @this?.Value;
+			var ba_ = context?.Operators.SelectOrNull<Code, string>(ay_, az_);
+			var bb_ = FitDNA?.StatusElement;
 
 			return new Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW
 			{
-				occultDate = t_,
-				occultResult = z_,
-				occultCategoryCode = an_,
-				occultStatus = ao_,
+				occultDate = ae_,
+				occultResult = al_,
+				occultCategoryCode = ba_,
+				occultStatus = bb_,
 			};
 		};
 
-		return context?.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(as_, at_);
+		return context?.Operators.SelectOrNull<Observation, Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW>(bf_, bg_);
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
@@ -1039,80 +1115,92 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_Value()
 	{
-		var at_ = this.FIT_DNA();
-		var au_ = context?.DataRetriever.RetrieveByValueSet<Observation>(at_, null);
-		var av_ = (Observation FitDNA) =>
+		var bf_ = this.FIT_DNA();
+		var bg_ = context?.DataRetriever.RetrieveByValueSet<Observation>(bf_, null);
+		var bh_ = (Observation FitDNA) =>
 		{
-			var o_ = (FitDNA?.StatusElement as object);
-			var p_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(o_);
-			var q_ = "final";
-			var r_ = "amended";
-			var s_ = "corrected";
-			var t_ = new string[]
+			var t_ = FitDNA?.StatusElement;
+			var u_ = (t_ as object);
+			var v_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(u_);
+			var w_ = "final";
+			var x_ = "amended";
+			var y_ = "corrected";
+			var z_ = new string[]
 			{
-				q_,
-				r_,
-				s_,
+				w_,
+				x_,
+				y_,
 			};
-			var u_ = (t_ as IEnumerable<string>);
-			var v_ = context?.Operators.InList<string>(p_, u_);
-			var w_ = (FitDNA?.Category as IEnumerable<CodeableConcept>);
-			var x_ = (CodeableConcept FitDNACategory) =>
+			var aa_ = (z_ as IEnumerable<string>);
+			var ab_ = context?.Operators.InList<string>(v_, aa_);
+			var ac_ = FitDNA?.Category;
+			var ad_ = (ac_ as IEnumerable<CodeableConcept>);
+			var ae_ = (CodeableConcept FitDNACategory) =>
 			{
-				var c_ = (FitDNACategory?.Coding as IEnumerable<Coding>);
-				var d_ = (Coding @this) =>
+				var g_ = FitDNACategory?.Coding;
+				var h_ = (g_ as IEnumerable<Coding>);
+				var i_ = (Coding @this) =>
 				{
-					var a_ = (bool?)(@this?.CodeElement == null);
+					var a_ = @this?.CodeElement;
+					var b_ = (a_ == null);
+					var c_ = (bool?)b_;
 
-					return context?.Operators.Not(a_);
+					return context?.Operators.Not(c_);
 				};
-				var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-				var f_ = (Coding @this) => @this?.CodeElement;
-				var g_ = context?.Operators.SelectOrNull<Coding, Code>(e_, f_);
-				var h_ = (Code @this) =>
+				var j_ = context?.Operators.WhereOrNull<Coding>(h_, i_);
+				var k_ = (Coding @this) => @this?.CodeElement;
+				var l_ = context?.Operators.SelectOrNull<Coding, Code>(j_, k_);
+				var m_ = (Code @this) =>
 				{
-					var b_ = (bool?)(@this?.Value == null);
+					var d_ = @this?.Value;
+					var e_ = (d_ == null);
+					var f_ = (bool?)e_;
 
-					return context?.Operators.Not(b_);
+					return context?.Operators.Not(f_);
 				};
-				var i_ = context?.Operators.WhereOrNull<Code>(g_, h_);
-				var j_ = (Code @this) => @this?.Value;
-				var k_ = context?.Operators.SelectOrNull<Code, string>(i_, j_);
-				var l_ = "laboratory";
-				var m_ = new string[]
+				var n_ = context?.Operators.WhereOrNull<Code>(l_, m_);
+				var o_ = (Code @this) => @this?.Value;
+				var p_ = context?.Operators.SelectOrNull<Code, string>(n_, o_);
+				var q_ = "laboratory";
+				var r_ = new string[]
 				{
-					l_,
+					q_,
 				};
-				var n_ = (m_ as IEnumerable<string>);
+				var s_ = (r_ as IEnumerable<string>);
 
-				return context?.Operators.ListEquivalent<string>(k_, n_);
+				return context?.Operators.ListEquivalent<string>(p_, s_);
 			};
-			var y_ = context?.Operators.WhereOrNull<CodeableConcept>(w_, x_);
-			var z_ = context?.Operators.ExistsInList<CodeableConcept>(y_);
-			var aa_ = context?.Operators.And(v_, z_);
-			var ab_ = (bool?)((FitDNA?.Value as object) == null);
-			var ac_ = context?.Operators.Not(ab_);
-			var ad_ = context?.Operators.And(aa_, ac_);
-			var ae_ = (FitDNA?.Effective as object);
-			var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ae_);
-			var ag_ = this.Measurement_Period();
-			var ah_ = context?.Operators.End(ag_);
-			var ai_ = context?.Operators.Quantity(3m, "years");
-			var aj_ = context?.Operators.Subtract(ah_, ai_);
-			var ak_ = this.Measurement_Period();
-			var al_ = context?.Operators.End(ak_);
-			var am_ = context?.Operators.Interval(aj_, al_, true, true);
-			var an_ = context?.Operators.ElementInInterval<CqlDateTime>(af_, am_, null);
-			var ao_ = this.Measurement_Period();
-			var ap_ = context?.Operators.End(ao_);
-			var aq_ = (bool?)(ap_ == null);
-			var ar_ = context?.Operators.Not(aq_);
-			var as_ = context?.Operators.And(an_, ar_);
+			var af_ = context?.Operators.WhereOrNull<CodeableConcept>(ad_, ae_);
+			var ag_ = context?.Operators.ExistsInList<CodeableConcept>(af_);
+			var ah_ = context?.Operators.And(ab_, ag_);
+			var ai_ = FitDNA?.Value;
+			var aj_ = (ai_ as object);
+			var ak_ = (aj_ == null);
+			var al_ = (bool?)ak_;
+			var am_ = context?.Operators.Not(al_);
+			var an_ = context?.Operators.And(ah_, am_);
+			var ao_ = FitDNA?.Effective;
+			var ap_ = (ao_ as object);
+			var aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ap_);
+			var ar_ = this.Measurement_Period();
+			var as_ = context?.Operators.End(ar_);
+			var at_ = context?.Operators.Quantity(3m, "years");
+			var au_ = context?.Operators.Subtract(as_, at_);
+			var av_ = this.Measurement_Period();
+			var aw_ = context?.Operators.End(av_);
+			var ax_ = context?.Operators.Interval(au_, aw_, true, true);
+			var ay_ = context?.Operators.ElementInInterval<CqlDateTime>(aq_, ax_, null);
+			var az_ = this.Measurement_Period();
+			var ba_ = context?.Operators.End(az_);
+			var bb_ = (ba_ == null);
+			var bc_ = (bool?)bb_;
+			var bd_ = context?.Operators.Not(bc_);
+			var be_ = context?.Operators.And(ay_, bd_);
 
-			return context?.Operators.And(ad_, as_);
+			return context?.Operators.And(an_, be_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(au_, av_);
+		return context?.Operators.WhereOrNull<Observation>(bg_, bh_);
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed")]
@@ -1120,80 +1208,92 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Value()
 	{
-		var at_ = this.FIT_DNA();
-		var au_ = context?.DataRetriever.RetrieveByValueSet<Observation>(at_, null);
-		var av_ = (Observation FitDNA) =>
+		var bf_ = this.FIT_DNA();
+		var bg_ = context?.DataRetriever.RetrieveByValueSet<Observation>(bf_, null);
+		var bh_ = (Observation FitDNA) =>
 		{
-			var o_ = (FitDNA?.StatusElement as object);
-			var p_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(o_);
-			var q_ = "final";
-			var r_ = "amended";
-			var s_ = "corrected";
-			var t_ = new string[]
+			var t_ = FitDNA?.StatusElement;
+			var u_ = (t_ as object);
+			var v_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(u_);
+			var w_ = "final";
+			var x_ = "amended";
+			var y_ = "corrected";
+			var z_ = new string[]
 			{
-				q_,
-				r_,
-				s_,
+				w_,
+				x_,
+				y_,
 			};
-			var u_ = (t_ as IEnumerable<string>);
-			var v_ = context?.Operators.InList<string>(p_, u_);
-			var w_ = (FitDNA?.Category as IEnumerable<CodeableConcept>);
-			var x_ = (CodeableConcept FitDNACategory) =>
+			var aa_ = (z_ as IEnumerable<string>);
+			var ab_ = context?.Operators.InList<string>(v_, aa_);
+			var ac_ = FitDNA?.Category;
+			var ad_ = (ac_ as IEnumerable<CodeableConcept>);
+			var ae_ = (CodeableConcept FitDNACategory) =>
 			{
-				var c_ = (FitDNACategory?.Coding as IEnumerable<Coding>);
-				var d_ = (Coding @this) =>
+				var g_ = FitDNACategory?.Coding;
+				var h_ = (g_ as IEnumerable<Coding>);
+				var i_ = (Coding @this) =>
 				{
-					var a_ = (bool?)(@this?.CodeElement == null);
+					var a_ = @this?.CodeElement;
+					var b_ = (a_ == null);
+					var c_ = (bool?)b_;
 
-					return context?.Operators.Not(a_);
+					return context?.Operators.Not(c_);
 				};
-				var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-				var f_ = (Coding @this) => @this?.CodeElement;
-				var g_ = context?.Operators.SelectOrNull<Coding, Code>(e_, f_);
-				var h_ = (Code @this) =>
+				var j_ = context?.Operators.WhereOrNull<Coding>(h_, i_);
+				var k_ = (Coding @this) => @this?.CodeElement;
+				var l_ = context?.Operators.SelectOrNull<Coding, Code>(j_, k_);
+				var m_ = (Code @this) =>
 				{
-					var b_ = (bool?)(@this?.Value == null);
+					var d_ = @this?.Value;
+					var e_ = (d_ == null);
+					var f_ = (bool?)e_;
 
-					return context?.Operators.Not(b_);
+					return context?.Operators.Not(f_);
 				};
-				var i_ = context?.Operators.WhereOrNull<Code>(g_, h_);
-				var j_ = (Code @this) => @this?.Value;
-				var k_ = context?.Operators.SelectOrNull<Code, string>(i_, j_);
-				var l_ = "laboratory";
-				var m_ = new string[]
+				var n_ = context?.Operators.WhereOrNull<Code>(l_, m_);
+				var o_ = (Code @this) => @this?.Value;
+				var p_ = context?.Operators.SelectOrNull<Code, string>(n_, o_);
+				var q_ = "laboratory";
+				var r_ = new string[]
 				{
-					l_,
+					q_,
 				};
-				var n_ = (m_ as IEnumerable<string>);
+				var s_ = (r_ as IEnumerable<string>);
 
-				return context?.Operators.ListEquivalent<string>(k_, n_);
+				return context?.Operators.ListEquivalent<string>(p_, s_);
 			};
-			var y_ = context?.Operators.WhereOrNull<CodeableConcept>(w_, x_);
-			var z_ = context?.Operators.ExistsInList<CodeableConcept>(y_);
-			var aa_ = context?.Operators.And(v_, z_);
-			var ab_ = (bool?)((FitDNA?.Value as object) == null);
-			var ac_ = context?.Operators.Not(ab_);
-			var ad_ = context?.Operators.And(aa_, ac_);
-			var ae_ = (FitDNA?.Effective as object);
-			var af_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ae_);
-			var ag_ = this.Measurement_Period();
-			var ah_ = context?.Operators.End(ag_);
-			var ai_ = context?.Operators.Quantity(3m, "years");
-			var aj_ = context?.Operators.Subtract(ah_, ai_);
-			var ak_ = this.Measurement_Period();
-			var al_ = context?.Operators.End(ak_);
-			var am_ = context?.Operators.Interval(aj_, al_, true, true);
-			var an_ = context?.Operators.ElementInInterval<CqlDateTime>(af_, am_, "day");
-			var ao_ = this.Measurement_Period();
-			var ap_ = context?.Operators.End(ao_);
-			var aq_ = (bool?)(ap_ == null);
-			var ar_ = context?.Operators.Not(aq_);
-			var as_ = context?.Operators.And(an_, ar_);
+			var af_ = context?.Operators.WhereOrNull<CodeableConcept>(ad_, ae_);
+			var ag_ = context?.Operators.ExistsInList<CodeableConcept>(af_);
+			var ah_ = context?.Operators.And(ab_, ag_);
+			var ai_ = FitDNA?.Value;
+			var aj_ = (ai_ as object);
+			var ak_ = (aj_ == null);
+			var al_ = (bool?)ak_;
+			var am_ = context?.Operators.Not(al_);
+			var an_ = context?.Operators.And(ah_, am_);
+			var ao_ = FitDNA?.Effective;
+			var ap_ = (ao_ as object);
+			var aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ap_);
+			var ar_ = this.Measurement_Period();
+			var as_ = context?.Operators.End(ar_);
+			var at_ = context?.Operators.Quantity(3m, "years");
+			var au_ = context?.Operators.Subtract(as_, at_);
+			var av_ = this.Measurement_Period();
+			var aw_ = context?.Operators.End(av_);
+			var ax_ = context?.Operators.Interval(au_, aw_, true, true);
+			var ay_ = context?.Operators.ElementInInterval<CqlDateTime>(aq_, ax_, "day");
+			var az_ = this.Measurement_Period();
+			var ba_ = context?.Operators.End(az_);
+			var bb_ = (ba_ == null);
+			var bc_ = (bool?)bb_;
+			var bd_ = context?.Operators.Not(bc_);
+			var be_ = context?.Operators.And(ay_, bd_);
 
-			return context?.Operators.And(ad_, as_);
+			return context?.Operators.And(an_, be_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(au_, av_);
+		return context?.Operators.WhereOrNull<Observation>(bg_, bh_);
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed, day of TZoffset")]
@@ -1201,67 +1301,78 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
 	{
-		var al_ = this.FIT_DNA();
-		var am_ = context?.DataRetriever.RetrieveByValueSet<Observation>(al_, null);
-		var an_ = (Observation FitDNA) =>
+		var aw_ = this.FIT_DNA();
+		var ax_ = context?.DataRetriever.RetrieveByValueSet<Observation>(aw_, null);
+		var ay_ = (Observation FitDNA) =>
 		{
-			var p_ = (FitDNA?.Category as IEnumerable<CodeableConcept>);
-			var q_ = (CodeableConcept FitDNACategory) =>
+			var u_ = FitDNA?.Category;
+			var v_ = (u_ as IEnumerable<CodeableConcept>);
+			var w_ = (CodeableConcept FitDNACategory) =>
 			{
-				var c_ = (FitDNACategory?.Coding as IEnumerable<Coding>);
-				var d_ = (Coding @this) =>
+				var g_ = FitDNACategory?.Coding;
+				var h_ = (g_ as IEnumerable<Coding>);
+				var i_ = (Coding @this) =>
 				{
-					var a_ = (bool?)(@this?.CodeElement == null);
+					var a_ = @this?.CodeElement;
+					var b_ = (a_ == null);
+					var c_ = (bool?)b_;
 
-					return context?.Operators.Not(a_);
+					return context?.Operators.Not(c_);
 				};
-				var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-				var f_ = (Coding @this) => @this?.CodeElement;
-				var g_ = context?.Operators.SelectOrNull<Coding, Code>(e_, f_);
-				var h_ = (Code @this) =>
+				var j_ = context?.Operators.WhereOrNull<Coding>(h_, i_);
+				var k_ = (Coding @this) => @this?.CodeElement;
+				var l_ = context?.Operators.SelectOrNull<Coding, Code>(j_, k_);
+				var m_ = (Code @this) =>
 				{
-					var b_ = (bool?)(@this?.Value == null);
+					var d_ = @this?.Value;
+					var e_ = (d_ == null);
+					var f_ = (bool?)e_;
 
-					return context?.Operators.Not(b_);
+					return context?.Operators.Not(f_);
 				};
-				var i_ = context?.Operators.WhereOrNull<Code>(g_, h_);
-				var j_ = (Code @this) => @this?.Value;
-				var k_ = context?.Operators.SelectOrNull<Code, string>(i_, j_);
-				var l_ = "laboratory";
-				var m_ = new string[]
+				var n_ = context?.Operators.WhereOrNull<Code>(l_, m_);
+				var o_ = (Code @this) => @this?.Value;
+				var p_ = context?.Operators.SelectOrNull<Code, string>(n_, o_);
+				var q_ = "laboratory";
+				var r_ = new string[]
 				{
-					l_,
+					q_,
 				};
-				var n_ = (m_ as IEnumerable<string>);
-				var o_ = context?.Operators.ListEquivalent<string>(k_, n_);
+				var s_ = (r_ as IEnumerable<string>);
+				var t_ = context?.Operators.ListEquivalent<string>(p_, s_);
 
-				return context?.Operators.Not(o_);
+				return context?.Operators.Not(t_);
 			};
-			var r_ = context?.Operators.WhereOrNull<CodeableConcept>(p_, q_);
-			var s_ = context?.Operators.ExistsInList<CodeableConcept>(r_);
-			var t_ = (bool?)((FitDNA?.Value as object) == null);
-			var u_ = context?.Operators.Not(t_);
-			var v_ = context?.Operators.And(s_, u_);
-			var w_ = (FitDNA?.Effective as object);
-			var x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(w_);
-			var y_ = this.Measurement_Period();
-			var z_ = context?.Operators.End(y_);
-			var aa_ = context?.Operators.Quantity(3m, "years");
-			var ab_ = context?.Operators.Subtract(z_, aa_);
-			var ac_ = this.Measurement_Period();
-			var ad_ = context?.Operators.End(ac_);
-			var ae_ = context?.Operators.Interval(ab_, ad_, true, true);
-			var af_ = context?.Operators.ElementInInterval<CqlDateTime>(x_, ae_, "day");
-			var ag_ = this.Measurement_Period();
-			var ah_ = context?.Operators.End(ag_);
-			var ai_ = (bool?)(ah_ == null);
-			var aj_ = context?.Operators.Not(ai_);
-			var ak_ = context?.Operators.And(af_, aj_);
+			var x_ = context?.Operators.WhereOrNull<CodeableConcept>(v_, w_);
+			var y_ = context?.Operators.ExistsInList<CodeableConcept>(x_);
+			var z_ = FitDNA?.Value;
+			var aa_ = (z_ as object);
+			var ab_ = (aa_ == null);
+			var ac_ = (bool?)ab_;
+			var ad_ = context?.Operators.Not(ac_);
+			var ae_ = context?.Operators.And(y_, ad_);
+			var af_ = FitDNA?.Effective;
+			var ag_ = (af_ as object);
+			var ah_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(ag_);
+			var ai_ = this.Measurement_Period();
+			var aj_ = context?.Operators.End(ai_);
+			var ak_ = context?.Operators.Quantity(3m, "years");
+			var al_ = context?.Operators.Subtract(aj_, ak_);
+			var am_ = this.Measurement_Period();
+			var an_ = context?.Operators.End(am_);
+			var ao_ = context?.Operators.Interval(al_, an_, true, true);
+			var ap_ = context?.Operators.ElementInInterval<CqlDateTime>(ah_, ao_, "day");
+			var aq_ = this.Measurement_Period();
+			var ar_ = context?.Operators.End(aq_);
+			var as_ = (ar_ == null);
+			var at_ = (bool?)as_;
+			var au_ = context?.Operators.Not(at_);
+			var av_ = context?.Operators.And(ap_, au_);
 
-			return context?.Operators.And(v_, ak_);
+			return context?.Operators.And(ae_, av_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(am_, an_);
+		return context?.Operators.WhereOrNull<Observation>(ax_, ay_);
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate category, ignore status, day of TZoffset")]
@@ -1269,47 +1380,53 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
 	{
-		var ab_ = this.FIT_DNA();
-		var ac_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ab_, null);
-		var ad_ = (Observation FitDNA) =>
+		var ah_ = this.FIT_DNA();
+		var ai_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ah_, null);
+		var aj_ = (Observation FitDNA) =>
 		{
-			var a_ = (FitDNA?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = "final";
-			var d_ = "amended";
-			var e_ = "corrected";
-			var f_ = new string[]
+			var a_ = FitDNA?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = "final";
+			var e_ = "amended";
+			var f_ = "corrected";
+			var g_ = new string[]
 			{
-				c_,
 				d_,
 				e_,
+				f_,
 			};
-			var g_ = (f_ as IEnumerable<string>);
-			var h_ = context?.Operators.InList<string>(b_, g_);
-			var i_ = context?.Operators.Not(h_);
-			var j_ = (bool?)((FitDNA?.Value as object) == null);
-			var k_ = context?.Operators.Not(j_);
-			var l_ = context?.Operators.And(i_, k_);
-			var m_ = (FitDNA?.Effective as object);
-			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context?.Operators.End(o_);
-			var q_ = context?.Operators.Quantity(3m, "years");
-			var r_ = context?.Operators.Subtract(p_, q_);
-			var s_ = this.Measurement_Period();
-			var t_ = context?.Operators.End(s_);
-			var u_ = context?.Operators.Interval(r_, t_, true, true);
-			var v_ = context?.Operators.ElementInInterval<CqlDateTime>(n_, u_, "day");
-			var w_ = this.Measurement_Period();
-			var x_ = context?.Operators.End(w_);
-			var y_ = (bool?)(x_ == null);
-			var z_ = context?.Operators.Not(y_);
-			var aa_ = context?.Operators.And(v_, z_);
+			var h_ = (g_ as IEnumerable<string>);
+			var i_ = context?.Operators.InList<string>(c_, h_);
+			var j_ = context?.Operators.Not(i_);
+			var k_ = FitDNA?.Value;
+			var l_ = (k_ as object);
+			var m_ = (l_ == null);
+			var n_ = (bool?)m_;
+			var o_ = context?.Operators.Not(n_);
+			var p_ = context?.Operators.And(j_, o_);
+			var q_ = FitDNA?.Effective;
+			var r_ = (q_ as object);
+			var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(r_);
+			var t_ = this.Measurement_Period();
+			var u_ = context?.Operators.End(t_);
+			var v_ = context?.Operators.Quantity(3m, "years");
+			var w_ = context?.Operators.Subtract(u_, v_);
+			var x_ = this.Measurement_Period();
+			var y_ = context?.Operators.End(x_);
+			var z_ = context?.Operators.Interval(w_, y_, true, true);
+			var aa_ = context?.Operators.ElementInInterval<CqlDateTime>(s_, z_, "day");
+			var ab_ = this.Measurement_Period();
+			var ac_ = context?.Operators.End(ab_);
+			var ad_ = (ac_ == null);
+			var ae_ = (bool?)ad_;
+			var af_ = context?.Operators.Not(ae_);
+			var ag_ = context?.Operators.And(aa_, af_);
 
-			return context?.Operators.And(l_, aa_);
+			return context?.Operators.And(p_, ag_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(ac_, ad_);
+		return context?.Operators.WhereOrNull<Observation>(ai_, aj_);
 	}
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate status, ignore category, day of TZoffset")]
@@ -1317,37 +1434,40 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<CqlDateTime> CT_Colonography_Display_Date_Value()
 	{
-		var q_ = this.CT_Colonography();
-		var r_ = context?.DataRetriever.RetrieveByValueSet<Observation>(q_, null);
-		var s_ = (Observation Colonography) =>
+		var t_ = this.CT_Colonography();
+		var u_ = context?.DataRetriever.RetrieveByValueSet<Observation>(t_, null);
+		var v_ = (Observation Colonography) =>
 		{
-			var a_ = (Colonography?.Effective as object);
-			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(a_);
-			var c_ = context?.Operators.End(b_);
-			var d_ = this.Measurement_Period();
-			var e_ = context?.Operators.End(d_);
-			var f_ = context?.Operators.Quantity(6m, "years");
-			var g_ = context?.Operators.Subtract(e_, f_);
-			var h_ = this.Measurement_Period();
-			var i_ = context?.Operators.End(h_);
-			var j_ = context?.Operators.Interval(g_, i_, true, true);
-			var k_ = context?.Operators.ElementInInterval<CqlDateTime>(c_, j_, null);
-			var l_ = this.Measurement_Period();
-			var m_ = context?.Operators.End(l_);
-			var n_ = (bool?)(m_ == null);
-			var o_ = context?.Operators.Not(n_);
+			var a_ = Colonography?.Effective;
+			var b_ = (a_ as object);
+			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(b_);
+			var d_ = context?.Operators.End(c_);
+			var e_ = this.Measurement_Period();
+			var f_ = context?.Operators.End(e_);
+			var g_ = context?.Operators.Quantity(6m, "years");
+			var h_ = context?.Operators.Subtract(f_, g_);
+			var i_ = this.Measurement_Period();
+			var j_ = context?.Operators.End(i_);
+			var k_ = context?.Operators.Interval(h_, j_, true, true);
+			var l_ = context?.Operators.ElementInInterval<CqlDateTime>(d_, k_, null);
+			var m_ = this.Measurement_Period();
+			var n_ = context?.Operators.End(m_);
+			var o_ = (n_ == null);
+			var p_ = (bool?)o_;
+			var q_ = context?.Operators.Not(p_);
 
-			return context?.Operators.And(k_, o_);
+			return context?.Operators.And(l_, q_);
 		};
-		var t_ = context?.Operators.WhereOrNull<Observation>(r_, s_);
-		var u_ = (Observation Colonography) =>
+		var w_ = context?.Operators.WhereOrNull<Observation>(u_, v_);
+		var x_ = (Observation Colonography) =>
 		{
-			var p_ = (Colonography?.Effective as object);
+			var r_ = Colonography?.Effective;
+			var s_ = (r_ as object);
 
-			return MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(p_);
+			return MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(s_);
 		};
 
-		return context?.Operators.SelectOrNull<Observation, CqlDateTime>(t_, u_);
+		return context?.Operators.SelectOrNull<Observation, CqlDateTime>(w_, x_);
 	}
 
     [CqlDeclaration("CT Colonography Display Date")]
@@ -1355,46 +1475,49 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> CT_Colonography_Performed_Value()
 	{
-		var z_ = this.CT_Colonography();
-		var aa_ = context?.DataRetriever.RetrieveByValueSet<Observation>(z_, null);
-		var ab_ = (Observation Colonography) =>
+		var ac_ = this.CT_Colonography();
+		var ad_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ac_, null);
+		var ae_ = (Observation Colonography) =>
 		{
-			var a_ = (Colonography?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = "final";
-			var d_ = "amended";
-			var e_ = "corrected";
-			var f_ = "appended";
-			var g_ = new string[]
+			var a_ = Colonography?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = "final";
+			var e_ = "amended";
+			var f_ = "corrected";
+			var g_ = "appended";
+			var h_ = new string[]
 			{
-				c_,
 				d_,
 				e_,
 				f_,
+				g_,
 			};
-			var h_ = (g_ as IEnumerable<string>);
-			var i_ = context?.Operators.InList<string>(b_, h_);
-			var j_ = (Colonography?.Effective as object);
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
-			var l_ = context?.Operators.End(k_);
-			var m_ = this.Measurement_Period();
+			var i_ = (h_ as IEnumerable<string>);
+			var j_ = context?.Operators.InList<string>(c_, i_);
+			var k_ = Colonography?.Effective;
+			var l_ = (k_ as object);
+			var m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(l_);
 			var n_ = context?.Operators.End(m_);
-			var o_ = context?.Operators.Quantity(5m, "years");
-			var p_ = context?.Operators.Subtract(n_, o_);
-			var q_ = this.Measurement_Period();
-			var r_ = context?.Operators.End(q_);
-			var s_ = context?.Operators.Interval(p_, r_, true, true);
-			var t_ = context?.Operators.ElementInInterval<CqlDateTime>(l_, s_, null);
-			var u_ = this.Measurement_Period();
-			var v_ = context?.Operators.End(u_);
-			var w_ = (bool?)(v_ == null);
-			var x_ = context?.Operators.Not(w_);
-			var y_ = context?.Operators.And(t_, x_);
+			var o_ = this.Measurement_Period();
+			var p_ = context?.Operators.End(o_);
+			var q_ = context?.Operators.Quantity(5m, "years");
+			var r_ = context?.Operators.Subtract(p_, q_);
+			var s_ = this.Measurement_Period();
+			var t_ = context?.Operators.End(s_);
+			var u_ = context?.Operators.Interval(r_, t_, true, true);
+			var v_ = context?.Operators.ElementInInterval<CqlDateTime>(n_, u_, null);
+			var w_ = this.Measurement_Period();
+			var x_ = context?.Operators.End(w_);
+			var y_ = (x_ == null);
+			var z_ = (bool?)y_;
+			var aa_ = context?.Operators.Not(z_);
+			var ab_ = context?.Operators.And(v_, aa_);
 
-			return context?.Operators.And(i_, y_);
+			return context?.Operators.And(j_, ab_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(aa_, ab_);
+		return context?.Operators.WhereOrNull<Observation>(ad_, ae_);
 	}
 
     [CqlDeclaration("CT Colonography Performed")]
@@ -1402,47 +1525,50 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status_Value()
 	{
-		var aa_ = this.CT_Colonography();
-		var ab_ = context?.DataRetriever.RetrieveByValueSet<Observation>(aa_, null);
-		var ac_ = (Observation Colonography) =>
+		var ad_ = this.CT_Colonography();
+		var ae_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ad_, null);
+		var af_ = (Observation Colonography) =>
 		{
-			var a_ = (Colonography?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = "final";
-			var d_ = "amended";
-			var e_ = "corrected";
-			var f_ = "appended";
-			var g_ = new string[]
+			var a_ = Colonography?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = "final";
+			var e_ = "amended";
+			var f_ = "corrected";
+			var g_ = "appended";
+			var h_ = new string[]
 			{
-				c_,
 				d_,
 				e_,
 				f_,
+				g_,
 			};
-			var h_ = (g_ as IEnumerable<string>);
-			var i_ = context?.Operators.InList<string>(b_, h_);
-			var j_ = context?.Operators.Not(i_);
-			var k_ = (Colonography?.Effective as object);
-			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(k_);
-			var m_ = context?.Operators.End(l_);
-			var n_ = this.Measurement_Period();
+			var i_ = (h_ as IEnumerable<string>);
+			var j_ = context?.Operators.InList<string>(c_, i_);
+			var k_ = context?.Operators.Not(j_);
+			var l_ = Colonography?.Effective;
+			var m_ = (l_ as object);
+			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(m_);
 			var o_ = context?.Operators.End(n_);
-			var p_ = context?.Operators.Quantity(5m, "years");
-			var q_ = context?.Operators.Subtract(o_, p_);
-			var r_ = this.Measurement_Period();
-			var s_ = context?.Operators.End(r_);
-			var t_ = context?.Operators.Interval(q_, s_, true, true);
-			var u_ = context?.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
-			var v_ = this.Measurement_Period();
-			var w_ = context?.Operators.End(v_);
-			var x_ = (bool?)(w_ == null);
-			var y_ = context?.Operators.Not(x_);
-			var z_ = context?.Operators.And(u_, y_);
+			var p_ = this.Measurement_Period();
+			var q_ = context?.Operators.End(p_);
+			var r_ = context?.Operators.Quantity(5m, "years");
+			var s_ = context?.Operators.Subtract(q_, r_);
+			var t_ = this.Measurement_Period();
+			var u_ = context?.Operators.End(t_);
+			var v_ = context?.Operators.Interval(s_, u_, true, true);
+			var w_ = context?.Operators.ElementInInterval<CqlDateTime>(o_, v_, null);
+			var x_ = this.Measurement_Period();
+			var y_ = context?.Operators.End(x_);
+			var z_ = (y_ == null);
+			var aa_ = (bool?)z_;
+			var ab_ = context?.Operators.Not(aa_);
+			var ac_ = context?.Operators.And(w_, ab_);
 
-			return context?.Operators.And(j_, z_);
+			return context?.Operators.And(k_, ac_);
 		};
 
-		return context?.Operators.WhereOrNull<Observation>(ab_, ac_);
+		return context?.Operators.WhereOrNull<Observation>(ae_, af_);
 	}
 
     [CqlDeclaration("CT Colonography Performed without appropriate status")]
@@ -1450,37 +1576,40 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date_Value()
 	{
-		var q_ = this.Flexible_Sigmoidoscopy();
-		var r_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(q_, null);
-		var s_ = (Procedure FlexibleSigmoidoscopy) =>
+		var t_ = this.Flexible_Sigmoidoscopy();
+		var u_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(t_, null);
+		var v_ = (Procedure FlexibleSigmoidoscopy) =>
 		{
-			var a_ = (FlexibleSigmoidoscopy?.Performed as object);
-			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(a_);
-			var c_ = context?.Operators.End(b_);
-			var d_ = this.Measurement_Period();
-			var e_ = context?.Operators.End(d_);
-			var f_ = context?.Operators.Quantity(6m, "years");
-			var g_ = context?.Operators.Subtract(e_, f_);
-			var h_ = this.Measurement_Period();
-			var i_ = context?.Operators.End(h_);
-			var j_ = context?.Operators.Interval(g_, i_, true, true);
-			var k_ = context?.Operators.ElementInInterval<CqlDateTime>(c_, j_, null);
-			var l_ = this.Measurement_Period();
-			var m_ = context?.Operators.End(l_);
-			var n_ = (bool?)(m_ == null);
-			var o_ = context?.Operators.Not(n_);
+			var a_ = FlexibleSigmoidoscopy?.Performed;
+			var b_ = (a_ as object);
+			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(b_);
+			var d_ = context?.Operators.End(c_);
+			var e_ = this.Measurement_Period();
+			var f_ = context?.Operators.End(e_);
+			var g_ = context?.Operators.Quantity(6m, "years");
+			var h_ = context?.Operators.Subtract(f_, g_);
+			var i_ = this.Measurement_Period();
+			var j_ = context?.Operators.End(i_);
+			var k_ = context?.Operators.Interval(h_, j_, true, true);
+			var l_ = context?.Operators.ElementInInterval<CqlDateTime>(d_, k_, null);
+			var m_ = this.Measurement_Period();
+			var n_ = context?.Operators.End(m_);
+			var o_ = (n_ == null);
+			var p_ = (bool?)o_;
+			var q_ = context?.Operators.Not(p_);
 
-			return context?.Operators.And(k_, o_);
+			return context?.Operators.And(l_, q_);
 		};
-		var t_ = context?.Operators.WhereOrNull<Procedure>(r_, s_);
-		var u_ = (Procedure FlexibleSigmoidoscopy) =>
+		var w_ = context?.Operators.WhereOrNull<Procedure>(u_, v_);
+		var x_ = (Procedure FlexibleSigmoidoscopy) =>
 		{
-			var p_ = (FlexibleSigmoidoscopy?.Performed as object);
+			var r_ = FlexibleSigmoidoscopy?.Performed;
+			var s_ = (r_ as object);
 
-			return MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(p_);
+			return MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(s_);
 		};
 
-		return context?.Operators.SelectOrNull<Procedure, CqlDateTime>(t_, u_);
+		return context?.Operators.SelectOrNull<Procedure, CqlDateTime>(w_, x_);
 	}
 
     [CqlDeclaration("Flexible Sigmoidoscopy Display Date")]
@@ -1488,35 +1617,38 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_Value()
 	{
-		var u_ = this.Flexible_Sigmoidoscopy();
-		var v_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(u_, null);
-		var w_ = (Procedure FlexibleSigmoidoscopy) =>
+		var x_ = this.Flexible_Sigmoidoscopy();
+		var y_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(x_, null);
+		var z_ = (Procedure FlexibleSigmoidoscopy) =>
 		{
-			var a_ = (FlexibleSigmoidoscopy?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("completed" as object));
-			var e_ = (FlexibleSigmoidoscopy?.Performed as object);
-			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(e_);
-			var g_ = context?.Operators.End(f_);
-			var h_ = this.Measurement_Period();
+			var a_ = FlexibleSigmoidoscopy?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("completed" as object));
+			var f_ = FlexibleSigmoidoscopy?.Performed;
+			var g_ = (f_ as object);
+			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(g_);
 			var i_ = context?.Operators.End(h_);
-			var j_ = context?.Operators.Quantity(5m, "years");
-			var k_ = context?.Operators.Subtract(i_, j_);
-			var l_ = this.Measurement_Period();
-			var m_ = context?.Operators.End(l_);
-			var n_ = context?.Operators.Interval(k_, m_, true, true);
-			var o_ = context?.Operators.ElementInInterval<CqlDateTime>(g_, n_, null);
-			var p_ = this.Measurement_Period();
-			var q_ = context?.Operators.End(p_);
-			var r_ = (bool?)(q_ == null);
-			var s_ = context?.Operators.Not(r_);
-			var t_ = context?.Operators.And(o_, s_);
+			var j_ = this.Measurement_Period();
+			var k_ = context?.Operators.End(j_);
+			var l_ = context?.Operators.Quantity(5m, "years");
+			var m_ = context?.Operators.Subtract(k_, l_);
+			var n_ = this.Measurement_Period();
+			var o_ = context?.Operators.End(n_);
+			var p_ = context?.Operators.Interval(m_, o_, true, true);
+			var q_ = context?.Operators.ElementInInterval<CqlDateTime>(i_, p_, null);
+			var r_ = this.Measurement_Period();
+			var s_ = context?.Operators.End(r_);
+			var t_ = (s_ == null);
+			var u_ = (bool?)t_;
+			var v_ = context?.Operators.Not(u_);
+			var w_ = context?.Operators.And(q_, v_);
 
-			return context?.Operators.And(d_, t_);
+			return context?.Operators.And(e_, w_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(v_, w_);
+		return context?.Operators.WhereOrNull<Procedure>(y_, z_);
 	}
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed")]
@@ -1524,36 +1656,39 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Value()
 	{
-		var v_ = this.Flexible_Sigmoidoscopy();
-		var w_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(v_, null);
-		var x_ = (Procedure FlexibleSigmoidoscopy) =>
+		var y_ = this.Flexible_Sigmoidoscopy();
+		var z_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(y_, null);
+		var aa_ = (Procedure FlexibleSigmoidoscopy) =>
 		{
-			var a_ = (FlexibleSigmoidoscopy?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("completed" as object));
-			var e_ = context?.Operators.Not(d_);
-			var f_ = (FlexibleSigmoidoscopy?.Performed as object);
-			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
-			var h_ = context?.Operators.End(g_);
-			var i_ = this.Measurement_Period();
+			var a_ = FlexibleSigmoidoscopy?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("completed" as object));
+			var f_ = context?.Operators.Not(e_);
+			var g_ = FlexibleSigmoidoscopy?.Performed;
+			var h_ = (g_ as object);
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
 			var j_ = context?.Operators.End(i_);
-			var k_ = context?.Operators.Quantity(5m, "years");
-			var l_ = context?.Operators.Subtract(j_, k_);
-			var m_ = this.Measurement_Period();
-			var n_ = context?.Operators.End(m_);
-			var o_ = context?.Operators.Interval(l_, n_, true, true);
-			var p_ = context?.Operators.ElementInInterval<CqlDateTime>(h_, o_, null);
-			var q_ = this.Measurement_Period();
-			var r_ = context?.Operators.End(q_);
-			var s_ = (bool?)(r_ == null);
-			var t_ = context?.Operators.Not(s_);
-			var u_ = context?.Operators.And(p_, t_);
+			var k_ = this.Measurement_Period();
+			var l_ = context?.Operators.End(k_);
+			var m_ = context?.Operators.Quantity(5m, "years");
+			var n_ = context?.Operators.Subtract(l_, m_);
+			var o_ = this.Measurement_Period();
+			var p_ = context?.Operators.End(o_);
+			var q_ = context?.Operators.Interval(n_, p_, true, true);
+			var r_ = context?.Operators.ElementInInterval<CqlDateTime>(j_, q_, null);
+			var s_ = this.Measurement_Period();
+			var t_ = context?.Operators.End(s_);
+			var u_ = (t_ == null);
+			var v_ = (bool?)u_;
+			var w_ = context?.Operators.Not(v_);
+			var x_ = context?.Operators.And(r_, w_);
 
-			return context?.Operators.And(e_, u_);
+			return context?.Operators.And(f_, x_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(w_, x_);
+		return context?.Operators.WhereOrNull<Procedure>(z_, aa_);
 	}
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed without appropriate status")]
@@ -1561,37 +1696,40 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<CqlDateTime> Colonoscopy_Display_Date_Value()
 	{
-		var q_ = this.Colonoscopy();
-		var r_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(q_, null);
-		var s_ = (Procedure Colonoscopy) =>
+		var t_ = this.Colonoscopy();
+		var u_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(t_, null);
+		var v_ = (Procedure Colonoscopy) =>
 		{
-			var a_ = (Colonoscopy?.Performed as object);
-			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(a_);
-			var c_ = context?.Operators.End(b_);
-			var d_ = this.Measurement_Period();
-			var e_ = context?.Operators.End(d_);
-			var f_ = context?.Operators.Quantity(11m, "years");
-			var g_ = context?.Operators.Subtract(e_, f_);
-			var h_ = this.Measurement_Period();
-			var i_ = context?.Operators.End(h_);
-			var j_ = context?.Operators.Interval(g_, i_, true, true);
-			var k_ = context?.Operators.ElementInInterval<CqlDateTime>(c_, j_, null);
-			var l_ = this.Measurement_Period();
-			var m_ = context?.Operators.End(l_);
-			var n_ = (bool?)(m_ == null);
-			var o_ = context?.Operators.Not(n_);
+			var a_ = Colonoscopy?.Performed;
+			var b_ = (a_ as object);
+			var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(b_);
+			var d_ = context?.Operators.End(c_);
+			var e_ = this.Measurement_Period();
+			var f_ = context?.Operators.End(e_);
+			var g_ = context?.Operators.Quantity(11m, "years");
+			var h_ = context?.Operators.Subtract(f_, g_);
+			var i_ = this.Measurement_Period();
+			var j_ = context?.Operators.End(i_);
+			var k_ = context?.Operators.Interval(h_, j_, true, true);
+			var l_ = context?.Operators.ElementInInterval<CqlDateTime>(d_, k_, null);
+			var m_ = this.Measurement_Period();
+			var n_ = context?.Operators.End(m_);
+			var o_ = (n_ == null);
+			var p_ = (bool?)o_;
+			var q_ = context?.Operators.Not(p_);
 
-			return context?.Operators.And(k_, o_);
+			return context?.Operators.And(l_, q_);
 		};
-		var t_ = context?.Operators.WhereOrNull<Procedure>(r_, s_);
-		var u_ = (Procedure Colonoscopy) =>
+		var w_ = context?.Operators.WhereOrNull<Procedure>(u_, v_);
+		var x_ = (Procedure Colonoscopy) =>
 		{
-			var p_ = (Colonoscopy?.Performed as object);
+			var r_ = Colonoscopy?.Performed;
+			var s_ = (r_ as object);
 
-			return MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(p_);
+			return MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(s_);
 		};
 
-		return context?.Operators.SelectOrNull<Procedure, CqlDateTime>(t_, u_);
+		return context?.Operators.SelectOrNull<Procedure, CqlDateTime>(w_, x_);
 	}
 
     [CqlDeclaration("Colonoscopy Display Date")]
@@ -1599,35 +1737,38 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Procedure> Colonoscopy_Performed_Value()
 	{
-		var u_ = this.Colonoscopy();
-		var v_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(u_, null);
-		var w_ = (Procedure Colonoscopy) =>
+		var x_ = this.Colonoscopy();
+		var y_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(x_, null);
+		var z_ = (Procedure Colonoscopy) =>
 		{
-			var a_ = (Colonoscopy?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("completed" as object));
-			var e_ = (Colonoscopy?.Performed as object);
-			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(e_);
-			var g_ = context?.Operators.End(f_);
-			var h_ = this.Measurement_Period();
+			var a_ = Colonoscopy?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("completed" as object));
+			var f_ = Colonoscopy?.Performed;
+			var g_ = (f_ as object);
+			var h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(g_);
 			var i_ = context?.Operators.End(h_);
-			var j_ = context?.Operators.Quantity(10m, "years");
-			var k_ = context?.Operators.Subtract(i_, j_);
-			var l_ = this.Measurement_Period();
-			var m_ = context?.Operators.End(l_);
-			var n_ = context?.Operators.Interval(k_, m_, true, true);
-			var o_ = context?.Operators.ElementInInterval<CqlDateTime>(g_, n_, null);
-			var p_ = this.Measurement_Period();
-			var q_ = context?.Operators.End(p_);
-			var r_ = (bool?)(q_ == null);
-			var s_ = context?.Operators.Not(r_);
-			var t_ = context?.Operators.And(o_, s_);
+			var j_ = this.Measurement_Period();
+			var k_ = context?.Operators.End(j_);
+			var l_ = context?.Operators.Quantity(10m, "years");
+			var m_ = context?.Operators.Subtract(k_, l_);
+			var n_ = this.Measurement_Period();
+			var o_ = context?.Operators.End(n_);
+			var p_ = context?.Operators.Interval(m_, o_, true, true);
+			var q_ = context?.Operators.ElementInInterval<CqlDateTime>(i_, p_, null);
+			var r_ = this.Measurement_Period();
+			var s_ = context?.Operators.End(r_);
+			var t_ = (s_ == null);
+			var u_ = (bool?)t_;
+			var v_ = context?.Operators.Not(u_);
+			var w_ = context?.Operators.And(q_, v_);
 
-			return context?.Operators.And(d_, t_);
+			return context?.Operators.And(e_, w_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(v_, w_);
+		return context?.Operators.WhereOrNull<Procedure>(y_, z_);
 	}
 
     [CqlDeclaration("Colonoscopy Performed")]
@@ -1635,36 +1776,39 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status_Value()
 	{
-		var v_ = this.Colonoscopy();
-		var w_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(v_, null);
-		var x_ = (Procedure Colonoscopy) =>
+		var y_ = this.Colonoscopy();
+		var z_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(y_, null);
+		var aa_ = (Procedure Colonoscopy) =>
 		{
-			var a_ = (Colonoscopy?.StatusElement as object);
-			var b_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(a_);
-			var c_ = (b_ as object);
-			var d_ = context?.Operators.Equal(c_, ("completed" as object));
-			var e_ = context?.Operators.Not(d_);
-			var f_ = (Colonoscopy?.Performed as object);
-			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(f_);
-			var h_ = context?.Operators.End(g_);
-			var i_ = this.Measurement_Period();
+			var a_ = Colonoscopy?.StatusElement;
+			var b_ = (a_ as object);
+			var c_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(b_);
+			var d_ = (c_ as object);
+			var e_ = context?.Operators.Equal(d_, ("completed" as object));
+			var f_ = context?.Operators.Not(e_);
+			var g_ = Colonoscopy?.Performed;
+			var h_ = (g_ as object);
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
 			var j_ = context?.Operators.End(i_);
-			var k_ = context?.Operators.Quantity(10m, "years");
-			var l_ = context?.Operators.Subtract(j_, k_);
-			var m_ = this.Measurement_Period();
-			var n_ = context?.Operators.End(m_);
-			var o_ = context?.Operators.Interval(l_, n_, true, true);
-			var p_ = context?.Operators.ElementInInterval<CqlDateTime>(h_, o_, null);
-			var q_ = this.Measurement_Period();
-			var r_ = context?.Operators.End(q_);
-			var s_ = (bool?)(r_ == null);
-			var t_ = context?.Operators.Not(s_);
-			var u_ = context?.Operators.And(p_, t_);
+			var k_ = this.Measurement_Period();
+			var l_ = context?.Operators.End(k_);
+			var m_ = context?.Operators.Quantity(10m, "years");
+			var n_ = context?.Operators.Subtract(l_, m_);
+			var o_ = this.Measurement_Period();
+			var p_ = context?.Operators.End(o_);
+			var q_ = context?.Operators.Interval(n_, p_, true, true);
+			var r_ = context?.Operators.ElementInInterval<CqlDateTime>(j_, q_, null);
+			var s_ = this.Measurement_Period();
+			var t_ = context?.Operators.End(s_);
+			var u_ = (t_ == null);
+			var v_ = (bool?)u_;
+			var w_ = context?.Operators.Not(v_);
+			var x_ = context?.Operators.And(r_, w_);
 
-			return context?.Operators.And(e_, u_);
+			return context?.Operators.And(f_, x_);
 		};
 
-		return context?.Operators.WhereOrNull<Procedure>(w_, x_);
+		return context?.Operators.WhereOrNull<Procedure>(z_, aa_);
 	}
 
     [CqlDeclaration("Colonoscopy Performed without appropriate status")]

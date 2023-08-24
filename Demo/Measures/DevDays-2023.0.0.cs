@@ -79,8 +79,12 @@ public class DevDays_2023_0_0
     [CqlDeclaration("ICD10")]
     public CqlCode[] ICD10() => __ICD10.Value;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Value() =>
-		(CqlInterval<CqlDateTime>)context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
+    private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	{
+		var a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
+
+		return (CqlInterval<CqlDateTime>)a_;
+	}
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
@@ -97,28 +101,34 @@ public class DevDays_2023_0_0
 
     private IEnumerable<Condition> Jet_engine_conditions_Value()
 	{
-		var k_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, null);
-		var l_ = (Condition c) =>
+		var q_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, null);
+		var r_ = (Condition c) =>
 		{
-			var c_ = (c?.Code?.Coding as IEnumerable<Coding>);
-			var d_ = (Coding coding) =>
+			var e_ = c?.Code;
+			var f_ = e_?.Coding;
+			var g_ = (f_ as IEnumerable<Coding>);
+			var h_ = (Coding coding) =>
 			{
-				var a_ = (FHIRHelpers_4_0_001.ToCode(coding) as object);
-				var b_ = (this.Sucked_into_jet_engine() as object);
+				var a_ = FHIRHelpers_4_0_001.ToCode(coding);
+				var b_ = (a_ as object);
+				var c_ = this.Sucked_into_jet_engine();
+				var d_ = (c_ as object);
 
-				return context?.Operators.Equivalent(a_, b_);
+				return context?.Operators.Equivalent(b_, d_);
 			};
-			var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-			var f_ = context?.Operators.ExistsInList<Coding>(e_);
-			var g_ = ((c?.Onset as object) as FhirDateTime);
-			var h_ = FHIRHelpers_4_0_001.ToDateTime(g_);
-			var i_ = this.Measurement_Period();
-			var j_ = context?.Operators.ElementInInterval<CqlDateTime>(h_, i_, null);
+			var i_ = context?.Operators.WhereOrNull<Coding>(g_, h_);
+			var j_ = context?.Operators.ExistsInList<Coding>(i_);
+			var k_ = c?.Onset;
+			var l_ = (k_ as object);
+			var m_ = (l_ as FhirDateTime);
+			var n_ = FHIRHelpers_4_0_001.ToDateTime(m_);
+			var o_ = this.Measurement_Period();
+			var p_ = context?.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
 
-			return context?.Operators.And(f_, j_);
+			return context?.Operators.And(j_, p_);
 		};
 
-		return context?.Operators.WhereOrNull<Condition>(k_, l_);
+		return context?.Operators.WhereOrNull<Condition>(q_, r_);
 	}
 
     [CqlDeclaration("Jet engine conditions")]
@@ -126,28 +136,34 @@ public class DevDays_2023_0_0
 
     private IEnumerable<Condition> Subsequent_encounters_Value()
 	{
-		var k_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, null);
-		var l_ = (Condition c) =>
+		var q_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, null);
+		var r_ = (Condition c) =>
 		{
-			var c_ = (c?.Code?.Coding as IEnumerable<Coding>);
-			var d_ = (Coding coding) =>
+			var e_ = c?.Code;
+			var f_ = e_?.Coding;
+			var g_ = (f_ as IEnumerable<Coding>);
+			var h_ = (Coding coding) =>
 			{
-				var a_ = (FHIRHelpers_4_0_001.ToCode(coding) as object);
-				var b_ = (this.Sucked_into_jet_engine__subsequent_encounter() as object);
+				var a_ = FHIRHelpers_4_0_001.ToCode(coding);
+				var b_ = (a_ as object);
+				var c_ = this.Sucked_into_jet_engine__subsequent_encounter();
+				var d_ = (c_ as object);
 
-				return context?.Operators.Equivalent(a_, b_);
+				return context?.Operators.Equivalent(b_, d_);
 			};
-			var e_ = context?.Operators.WhereOrNull<Coding>(c_, d_);
-			var f_ = context?.Operators.ExistsInList<Coding>(e_);
-			var g_ = ((c?.Onset as object) as FhirDateTime);
-			var h_ = FHIRHelpers_4_0_001.ToDateTime(g_);
-			var i_ = this.Measurement_Period();
-			var j_ = context?.Operators.ElementInInterval<CqlDateTime>(h_, i_, null);
+			var i_ = context?.Operators.WhereOrNull<Coding>(g_, h_);
+			var j_ = context?.Operators.ExistsInList<Coding>(i_);
+			var k_ = c?.Onset;
+			var l_ = (k_ as object);
+			var m_ = (l_ as FhirDateTime);
+			var n_ = FHIRHelpers_4_0_001.ToDateTime(m_);
+			var o_ = this.Measurement_Period();
+			var p_ = context?.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
 
-			return context?.Operators.And(f_, j_);
+			return context?.Operators.And(j_, p_);
 		};
 
-		return context?.Operators.WhereOrNull<Condition>(k_, l_);
+		return context?.Operators.WhereOrNull<Condition>(q_, r_);
 	}
 
     [CqlDeclaration("Subsequent encounters")]
