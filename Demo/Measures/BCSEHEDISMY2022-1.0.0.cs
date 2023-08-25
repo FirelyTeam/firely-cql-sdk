@@ -110,106 +110,166 @@ public class BCSEHEDISMY2022_1_0_0
 
     #endregion
 
-    private CqlValueSet Absence_of_Left_Breast_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329", null);
+    private CqlValueSet Absence_of_Left_Breast_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Absence of Left Breast")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329")]
     public CqlValueSet Absence_of_Left_Breast() => __Absence_of_Left_Breast.Value;
 
-    private CqlValueSet Absence_of_Right_Breast_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330", null);
+    private CqlValueSet Absence_of_Right_Breast_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Absence of Right Breast")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330")]
     public CqlValueSet Absence_of_Right_Breast() => __Absence_of_Right_Breast.Value;
 
-    private CqlValueSet Bilateral_Mastectomy_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042", null);
+    private CqlValueSet Bilateral_Mastectomy_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Bilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042")]
     public CqlValueSet Bilateral_Mastectomy() => __Bilateral_Mastectomy.Value;
 
-    private CqlValueSet Bilateral_Modifier_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043", null);
+    private CqlValueSet Bilateral_Modifier_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Bilateral Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043")]
     public CqlValueSet Bilateral_Modifier() => __Bilateral_Modifier.Value;
 
-    private CqlValueSet Clinical_Bilateral_Modifier_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951", null);
+    private CqlValueSet Clinical_Bilateral_Modifier_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Clinical Bilateral Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951")]
     public CqlValueSet Clinical_Bilateral_Modifier() => __Clinical_Bilateral_Modifier.Value;
 
-    private CqlValueSet Clinical_Left_Modifier_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949", null);
+    private CqlValueSet Clinical_Left_Modifier_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Clinical Left Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949")]
     public CqlValueSet Clinical_Left_Modifier() => __Clinical_Left_Modifier.Value;
 
-    private CqlValueSet Clinical_Right_Modifier_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950", null);
+    private CqlValueSet Clinical_Right_Modifier_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Clinical Right Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950")]
     public CqlValueSet Clinical_Right_Modifier() => __Clinical_Right_Modifier.Value;
 
-    private CqlValueSet Clinical_Unilateral_Mastectomy_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948", null);
+    private CqlValueSet Clinical_Unilateral_Mastectomy_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Clinical Unilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948")]
     public CqlValueSet Clinical_Unilateral_Mastectomy() => __Clinical_Unilateral_Mastectomy.Value;
 
-    private CqlValueSet History_of_Bilateral_Mastectomy_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331", null);
+    private CqlValueSet History_of_Bilateral_Mastectomy_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("History of Bilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331")]
     public CqlValueSet History_of_Bilateral_Mastectomy() => __History_of_Bilateral_Mastectomy.Value;
 
-    private CqlValueSet Left_Modifier_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148", null);
+    private CqlValueSet Left_Modifier_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Left Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148")]
     public CqlValueSet Left_Modifier() => __Left_Modifier.Value;
 
-    private CqlValueSet Mammography_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168", null);
+    private CqlValueSet Mammography_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Mammography")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168")]
     public CqlValueSet Mammography() => __Mammography.Value;
 
-    private CqlValueSet Right_Modifier_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230", null);
+    private CqlValueSet Right_Modifier_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Right Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230")]
     public CqlValueSet Right_Modifier() => __Right_Modifier.Value;
 
-    private CqlValueSet Unilateral_Mastectomy_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256", null);
+    private CqlValueSet Unilateral_Mastectomy_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Unilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256")]
     public CqlValueSet Unilateral_Mastectomy() => __Unilateral_Mastectomy.Value;
 
-    private CqlValueSet Unilateral_Mastectomy_Left_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334", null);
+    private CqlValueSet Unilateral_Mastectomy_Left_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Unilateral Mastectomy Left")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334")]
     public CqlValueSet Unilateral_Mastectomy_Left() => __Unilateral_Mastectomy_Left.Value;
 
-    private CqlValueSet Unilateral_Mastectomy_Right_Value() =>
-		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335", null);
+    private CqlValueSet Unilateral_Mastectomy_Right_Value()
+	{
+		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Unilateral Mastectomy Right")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335")]
@@ -218,8 +278,9 @@ public class BCSEHEDISMY2022_1_0_0
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("BCSEHEDISMY2022-1.0.0", "Measurement Period", null);
+		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return (CqlInterval<CqlDateTime>)a_;
+		return b_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -227,9 +288,12 @@ public class BCSEHEDISMY2022_1_0_0
 
     private Patient Patient_Value()
 	{
-		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+		var a_ = context.DataRetriever;
+		var b_ = a_.RetrieveByValueSet<Patient>(null, null);
+		var c_ = context.Operators;
+		var d_ = c_.SingleOrNull<Patient>(b_);
 
-		return context?.Operators.SingleOrNull<Patient>(a_);
+		return d_;
 	}
 
     [CqlDeclaration("Patient")]
@@ -238,12 +302,18 @@ public class BCSEHEDISMY2022_1_0_0
     private CqlDateTime October_1_Two_Years_Prior_to_the_Measurement_Period_Value()
 	{
 		var a_ = this.Measurement_Period();
-		var b_ = context?.Operators.Start(a_);
-		var c_ = context?.Operators.ComponentFrom(b_, "year");
-		var d_ = context?.Operators.Subtract(c_, (int?)2);
-		var e_ = context?.Operators.ConvertIntegerToDecimal((int?)0);
+		var b_ = context.Operators;
+		var c_ = b_.Start(a_);
+		var e_ = b_.ComponentFrom(c_, "year");
+		var f_ = (int?)2;
+		var h_ = b_.Subtract(e_, f_);
+		var i_ = (int?)10;
+		var j_ = (int?)1;
+		var k_ = (int?)0;
+		var q_ = b_.ConvertIntegerToDecimal(k_);
+		var s_ = b_.DateTime(h_, i_, j_, k_, k_, k_, k_, q_);
 
-		return context?.Operators.DateTime(d_, (int?)10, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, e_);
+		return s_;
 	}
 
     [CqlDeclaration("October 1 Two Years Prior to the Measurement Period")]
@@ -253,9 +323,11 @@ public class BCSEHEDISMY2022_1_0_0
 	{
 		var a_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period();
 		var b_ = this.Measurement_Period();
-		var c_ = context?.Operators.End(b_);
+		var c_ = context.Operators;
+		var d_ = c_.End(b_);
+		var f_ = c_.Interval(a_, d_, true, true);
 
-		return context?.Operators.Interval(a_, c_, true, true);
+		return f_;
 	}
 
     [CqlDeclaration("Participation Period")]
@@ -263,18 +335,22 @@ public class BCSEHEDISMY2022_1_0_0
 
     private IEnumerable<Coverage> Member_Coverage_Value()
 	{
-		var e_ = context?.DataRetriever.RetrieveByValueSet<Coverage>(null, null);
-		var f_ = (Coverage C) =>
+		var a_ = context.DataRetriever;
+		var b_ = a_.RetrieveByValueSet<Coverage>(null, null);
+		var c_ = (Coverage C) =>
 		{
-			var a_ = C?.Period;
-			var b_ = (a_ as object);
-			var c_ = NCQAFHIRBase_1_0_0.Normalize_Interval(b_);
-			var d_ = this.Participation_Period();
+			var f_ = C.Period;
+			var g_ = NCQAFHIRBase_1_0_0.Normalize_Interval(f_);
+			var h_ = this.Participation_Period();
+			var i_ = context.Operators;
+			var j_ = i_.Overlaps(g_, h_, null);
 
-			return context?.Operators.Overlaps(c_, d_, null);
+			return j_;
 		};
+		var d_ = context.Operators;
+		var e_ = d_.WhereOrNull<Coverage>(b_, c_);
 
-		return context?.Operators.WhereOrNull<Coverage>(e_, f_);
+		return e_;
 	}
 
     [CqlDeclaration("Member Coverage")]
@@ -284,48 +360,43 @@ public class BCSEHEDISMY2022_1_0_0
 	{
 		var a_ = this.Member_Coverage();
 		var b_ = this.Measurement_Period();
-		var c_ = context?.Operators.End(b_);
-		var d_ = context?.Operators.DateFrom(c_);
-		var e_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period();
-		var f_ = context?.Operators.DateFrom(e_);
-		var g_ = this.Measurement_Period();
-		var h_ = context?.Operators.End(g_);
-		var i_ = context?.Operators.DateFrom(h_);
-		var j_ = context?.Operators.Quantity(2m, "years");
-		var k_ = context?.Operators.Subtract(i_, j_);
-		var l_ = context?.Operators.Interval(f_, k_, true, true);
-		var m_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, d_, l_, (int?)0);
-		var n_ = this.Member_Coverage();
-		var o_ = this.Measurement_Period();
-		var p_ = context?.Operators.End(o_);
-		var q_ = context?.Operators.DateFrom(p_);
-		var r_ = this.Measurement_Period();
-		var s_ = context?.Operators.Start(r_);
-		var t_ = context?.Operators.DateFrom(s_);
-		var u_ = context?.Operators.Quantity(1m, "year");
-		var v_ = context?.Operators.Subtract(t_, u_);
-		var w_ = this.Measurement_Period();
-		var x_ = context?.Operators.End(w_);
-		var y_ = context?.Operators.DateFrom(x_);
-		var z_ = context?.Operators.Quantity(1m, "year");
-		var aa_ = context?.Operators.Subtract(y_, z_);
-		var ab_ = context?.Operators.Interval(v_, aa_, true, true);
-		var ac_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(n_, q_, ab_, (int?)45);
-		var ad_ = context?.Operators.And(m_, ac_);
-		var ae_ = this.Member_Coverage();
-		var af_ = this.Measurement_Period();
-		var ag_ = context?.Operators.End(af_);
-		var ah_ = context?.Operators.DateFrom(ag_);
-		var ai_ = this.Measurement_Period();
-		var aj_ = context?.Operators.Start(ai_);
-		var ak_ = context?.Operators.DateFrom(aj_);
-		var al_ = this.Measurement_Period();
-		var am_ = context?.Operators.End(al_);
-		var an_ = context?.Operators.DateFrom(am_);
-		var ao_ = context?.Operators.Interval(ak_, an_, true, true);
-		var ap_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(ae_, ah_, ao_, (int?)45);
+		var c_ = context.Operators;
+		var d_ = c_.End(b_);
+		var f_ = c_.DateFrom(d_);
+		var g_ = this.October_1_Two_Years_Prior_to_the_Measurement_Period();
+		var i_ = c_.DateFrom(g_);
+		var l_ = c_.End(b_);
+		var n_ = c_.DateFrom(l_);
+		var p_ = c_.Quantity(2m, "years");
+		var r_ = c_.Subtract(n_, p_);
+		var t_ = c_.Interval(i_, r_, true, true);
+		var u_ = (int?)0;
+		var v_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, f_, t_, u_);
+		var z_ = c_.End(b_);
+		var ab_ = c_.DateFrom(z_);
+		var ae_ = c_.Start(b_);
+		var ag_ = c_.DateFrom(ae_);
+		var ai_ = c_.Quantity(1m, "year");
+		var ak_ = c_.Subtract(ag_, ai_);
+		var an_ = c_.End(b_);
+		var ap_ = c_.DateFrom(an_);
+		var ar_ = c_.Quantity(1m, "year");
+		var at_ = c_.Subtract(ap_, ar_);
+		var av_ = c_.Interval(ak_, at_, true, true);
+		var aw_ = (int?)45;
+		var ax_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, ab_, av_, aw_);
+		var az_ = c_.And(v_, ax_);
+		var bd_ = c_.End(b_);
+		var bf_ = c_.DateFrom(bd_);
+		var bi_ = c_.Start(b_);
+		var bk_ = c_.DateFrom(bi_);
+		var bn_ = c_.End(b_);
+		var bp_ = c_.DateFrom(bn_);
+		var br_ = c_.Interval(bk_, bp_, true, true);
+		var bt_ = NCQAHealthPlanEnrollment_1_0_0.Health_Plan_Enrollment_Criteria(a_, bf_, br_, aw_);
+		var bv_ = c_.And(az_, bt_);
 
-		return context?.Operators.And(ad_, ap_);
+		return bv_;
 	}
 
     [CqlDeclaration("Enrolled During Participation Period")]
@@ -334,52 +405,64 @@ public class BCSEHEDISMY2022_1_0_0
     private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_?.BirthDateElement;
-		var c_ = b_?.Value;
-		var d_ = (c_ as object);
-		var e_ = context?.Operators?.TypeConverter.Convert<CqlDate>(d_);
-		var f_ = this.Measurement_Period();
-		var g_ = context?.Operators.End(f_);
-		var h_ = context?.Operators.DateFrom(g_);
-		var i_ = context?.Operators.CalculateAgeAt(e_, h_, "year");
-		var j_ = context?.Operators.Interval((int?)52, (int?)74, true, true);
-		var k_ = context?.Operators.ElementInInterval<int?>(i_, j_, null);
-		var l_ = this.Patient();
-		var m_ = l_?.GenderElement;
-		var n_ = m_?.Value;
-		var o_ = n_;
-		var p_ = context?.Operators.EnumEqualsString(o_, "female");
-		var q_ = context?.Operators.And(k_, p_);
-		var r_ = this.Enrolled_During_Participation_Period();
+		var b_ = a_.BirthDateElement;
+		var c_ = b_.Value;
+		var d_ = context.Operators;
+		var e_ = d_.TypeConverter;
+		var f_ = e_.Convert<CqlDate>(c_);
+		var g_ = this.Measurement_Period();
+		var i_ = d_.End(g_);
+		var k_ = d_.DateFrom(i_);
+		var m_ = d_.CalculateAgeAt(f_, k_, "year");
+		var n_ = (int?)52;
+		var o_ = (int?)74;
+		var q_ = d_.Interval(n_, o_, true, true);
+		var s_ = d_.ElementInInterval<int?>(m_, q_, null);
+		var u_ = a_.GenderElement;
+		var v_ = u_.Value;
+		var w_ = v_;
+		var y_ = d_.EnumEqualsString(w_, "female");
+		var aa_ = d_.And(s_, y_);
+		var ab_ = this.Enrolled_During_Participation_Period();
+		var ad_ = d_.And(aa_, ab_);
 
-		return context?.Operators.And(q_, r_);
+		return ad_;
 	}
 
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population() => __Initial_Population.Value;
 
-    private bool? Denominator_Value() =>
-		this.Initial_Population();
+    private bool? Denominator_Value()
+	{
+		var a_ = this.Initial_Population();
+
+		return a_;
+	}
 
     [CqlDeclaration("Denominator")]
     public bool? Denominator() => __Denominator.Value;
 
     private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Value()
 	{
-		var e_ = this.Absence_of_Right_Breast();
-		var f_ = context?.DataRetriever.RetrieveByValueSet<Condition>(e_, null);
-		var g_ = NCQAStatus_1_0_0.Active_Condition(f_);
-		var h_ = (Condition RightMastectomyDiagnosis) =>
+		var a_ = this.Absence_of_Right_Breast();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Condition>(a_, null);
+		var d_ = NCQAStatus_1_0_0.Active_Condition(c_);
+		var e_ = (Condition RightMastectomyDiagnosis) =>
 		{
-			var a_ = NCQAFHIRBase_1_0_0.Prevalence_Period(RightMastectomyDiagnosis);
-			var b_ = context?.Operators.Start(a_);
-			var c_ = this.Measurement_Period();
-			var d_ = context?.Operators.End(c_);
+			var h_ = NCQAFHIRBase_1_0_0.Prevalence_Period(RightMastectomyDiagnosis);
+			var i_ = context.Operators;
+			var j_ = i_.Start(h_);
+			var k_ = this.Measurement_Period();
+			var m_ = i_.End(k_);
+			var o_ = i_.SameOrBefore(j_, m_, null);
 
-			return context?.Operators.SameOrBefore(b_, d_, null);
+			return o_;
 		};
+		var f_ = context.Operators;
+		var g_ = f_.WhereOrNull<Condition>(d_, e_);
 
-		return context?.Operators.WhereOrNull<Condition>(g_, h_);
+		return g_;
 	}
 
     [CqlDeclaration("Right Mastectomy Diagnosis")]
@@ -387,52 +470,70 @@ public class BCSEHEDISMY2022_1_0_0
 
     private IEnumerable<Procedure> Right_Mastectomy_Procedure_Value()
 	{
-		var q_ = this.Unilateral_Mastectomy_Right();
-		var r_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(q_, null);
-		var s_ = NCQAStatus_1_0_0.Completed_Procedure(r_);
-		var t_ = this.Unilateral_Mastectomy();
-		var u_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(t_, null);
-		var v_ = NCQAStatus_1_0_0.Completed_Procedure(u_);
-		var w_ = (Procedure UnilateralMastectomyProcedure) =>
+		var a_ = this.Unilateral_Mastectomy_Right();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
+		var d_ = NCQAStatus_1_0_0.Completed_Procedure(c_);
+		var e_ = this.Unilateral_Mastectomy();
+		var g_ = b_.RetrieveByValueSet<Procedure>(e_, null);
+		var h_ = NCQAStatus_1_0_0.Completed_Procedure(g_);
+		var i_ = (Procedure UnilateralMastectomyProcedure) =>
 		{
-			var a_ = UnilateralMastectomyProcedure?.BodySite;
-			var b_ = (a_ as IEnumerable<CodeableConcept>);
-			var c_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var d_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(b_, c_);
-			var e_ = this.Right_Modifier();
+			var z_ = UnilateralMastectomyProcedure.BodySite;
+			var aa_ = (z_ as IEnumerable<CodeableConcept>);
+			var ab_ = (CodeableConcept X) =>
+			{
+				var ah_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.ConceptsInValueSet(d_, e_);
+				return ah_;
+			};
+			var ac_ = context.Operators;
+			var ad_ = ac_.SelectOrNull<CodeableConcept, CqlConcept>(aa_, ab_);
+			var ae_ = this.Right_Modifier();
+			var ag_ = ac_.ConceptsInValueSet(ad_, ae_);
+
+			return ag_;
 		};
-		var x_ = context?.Operators.WhereOrNull<Procedure>(v_, w_);
-		var y_ = context?.Operators.ListUnion<Procedure>(s_, x_);
-		var z_ = this.Clinical_Unilateral_Mastectomy();
-		var aa_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(z_, null);
-		var ab_ = NCQAStatus_1_0_0.Completed_Procedure(aa_);
-		var ac_ = (Procedure ClinicalUnilateralMastectomyProcedure) =>
+		var j_ = context.Operators;
+		var k_ = j_.WhereOrNull<Procedure>(h_, i_);
+		var m_ = j_.ListUnion<Procedure>(d_, k_);
+		var n_ = this.Clinical_Unilateral_Mastectomy();
+		var p_ = b_.RetrieveByValueSet<Procedure>(n_, null);
+		var q_ = NCQAStatus_1_0_0.Completed_Procedure(p_);
+		var r_ = (Procedure ClinicalUnilateralMastectomyProcedure) =>
 		{
-			var f_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
-			var g_ = (f_ as IEnumerable<CodeableConcept>);
-			var h_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var i_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(g_, h_);
-			var j_ = this.Clinical_Right_Modifier();
+			var ai_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			var aj_ = (ai_ as IEnumerable<CodeableConcept>);
+			var ak_ = (CodeableConcept X) =>
+			{
+				var aq_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.ConceptsInValueSet(i_, j_);
+				return aq_;
+			};
+			var al_ = context.Operators;
+			var am_ = al_.SelectOrNull<CodeableConcept, CqlConcept>(aj_, ak_);
+			var an_ = this.Clinical_Right_Modifier();
+			var ap_ = al_.ConceptsInValueSet(am_, an_);
+
+			return ap_;
 		};
-		var ad_ = context?.Operators.WhereOrNull<Procedure>(ab_, ac_);
-		var ae_ = context?.Operators.ListUnion<Procedure>(y_, ad_);
-		var af_ = (Procedure RightMastectomyProcedure) =>
+		var t_ = j_.WhereOrNull<Procedure>(q_, r_);
+		var v_ = j_.ListUnion<Procedure>(m_, t_);
+		var w_ = (Procedure RightMastectomyProcedure) =>
 		{
-			var k_ = RightMastectomyProcedure?.Performed;
-			var l_ = (k_ as object);
-			var m_ = NCQAFHIRBase_1_0_0.Normalize_Interval(l_);
-			var n_ = context?.Operators.End(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context?.Operators.End(o_);
+			var ar_ = RightMastectomyProcedure.Performed;
+			var as_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ar_);
+			var at_ = context.Operators;
+			var au_ = at_.End(as_);
+			var av_ = this.Measurement_Period();
+			var ax_ = at_.End(av_);
+			var az_ = at_.SameOrBefore(au_, ax_, null);
 
-			return context?.Operators.SameOrBefore(n_, p_, null);
+			return az_;
 		};
+		var y_ = j_.WhereOrNull<Procedure>(v_, w_);
 
-		return context?.Operators.WhereOrNull<Procedure>(ae_, af_);
+		return y_;
 	}
 
     [CqlDeclaration("Right Mastectomy Procedure")]
@@ -440,20 +541,25 @@ public class BCSEHEDISMY2022_1_0_0
 
     private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Value()
 	{
-		var e_ = this.Absence_of_Left_Breast();
-		var f_ = context?.DataRetriever.RetrieveByValueSet<Condition>(e_, null);
-		var g_ = NCQAStatus_1_0_0.Active_Condition(f_);
-		var h_ = (Condition LeftMastectomyDiagnosis) =>
+		var a_ = this.Absence_of_Left_Breast();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Condition>(a_, null);
+		var d_ = NCQAStatus_1_0_0.Active_Condition(c_);
+		var e_ = (Condition LeftMastectomyDiagnosis) =>
 		{
-			var a_ = NCQAFHIRBase_1_0_0.Prevalence_Period(LeftMastectomyDiagnosis);
-			var b_ = context?.Operators.Start(a_);
-			var c_ = this.Measurement_Period();
-			var d_ = context?.Operators.End(c_);
+			var h_ = NCQAFHIRBase_1_0_0.Prevalence_Period(LeftMastectomyDiagnosis);
+			var i_ = context.Operators;
+			var j_ = i_.Start(h_);
+			var k_ = this.Measurement_Period();
+			var m_ = i_.End(k_);
+			var o_ = i_.SameOrBefore(j_, m_, null);
 
-			return context?.Operators.SameOrBefore(b_, d_, null);
+			return o_;
 		};
+		var f_ = context.Operators;
+		var g_ = f_.WhereOrNull<Condition>(d_, e_);
 
-		return context?.Operators.WhereOrNull<Condition>(g_, h_);
+		return g_;
 	}
 
     [CqlDeclaration("Left Mastectomy Diagnosis")]
@@ -461,52 +567,70 @@ public class BCSEHEDISMY2022_1_0_0
 
     private IEnumerable<Procedure> Left_Mastectomy_Procedure_Value()
 	{
-		var q_ = this.Unilateral_Mastectomy_Left();
-		var r_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(q_, null);
-		var s_ = NCQAStatus_1_0_0.Completed_Procedure(r_);
-		var t_ = this.Unilateral_Mastectomy();
-		var u_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(t_, null);
-		var v_ = NCQAStatus_1_0_0.Completed_Procedure(u_);
-		var w_ = (Procedure UnilateralMastectomyProcedure) =>
+		var a_ = this.Unilateral_Mastectomy_Left();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
+		var d_ = NCQAStatus_1_0_0.Completed_Procedure(c_);
+		var e_ = this.Unilateral_Mastectomy();
+		var g_ = b_.RetrieveByValueSet<Procedure>(e_, null);
+		var h_ = NCQAStatus_1_0_0.Completed_Procedure(g_);
+		var i_ = (Procedure UnilateralMastectomyProcedure) =>
 		{
-			var a_ = UnilateralMastectomyProcedure?.BodySite;
-			var b_ = (a_ as IEnumerable<CodeableConcept>);
-			var c_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var d_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(b_, c_);
-			var e_ = this.Left_Modifier();
+			var z_ = UnilateralMastectomyProcedure.BodySite;
+			var aa_ = (z_ as IEnumerable<CodeableConcept>);
+			var ab_ = (CodeableConcept X) =>
+			{
+				var ah_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.ConceptsInValueSet(d_, e_);
+				return ah_;
+			};
+			var ac_ = context.Operators;
+			var ad_ = ac_.SelectOrNull<CodeableConcept, CqlConcept>(aa_, ab_);
+			var ae_ = this.Left_Modifier();
+			var ag_ = ac_.ConceptsInValueSet(ad_, ae_);
+
+			return ag_;
 		};
-		var x_ = context?.Operators.WhereOrNull<Procedure>(v_, w_);
-		var y_ = context?.Operators.ListUnion<Procedure>(s_, x_);
-		var z_ = this.Clinical_Unilateral_Mastectomy();
-		var aa_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(z_, null);
-		var ab_ = NCQAStatus_1_0_0.Completed_Procedure(aa_);
-		var ac_ = (Procedure ClinicalUnilateralMastectomyProcedure) =>
+		var j_ = context.Operators;
+		var k_ = j_.WhereOrNull<Procedure>(h_, i_);
+		var m_ = j_.ListUnion<Procedure>(d_, k_);
+		var n_ = this.Clinical_Unilateral_Mastectomy();
+		var p_ = b_.RetrieveByValueSet<Procedure>(n_, null);
+		var q_ = NCQAStatus_1_0_0.Completed_Procedure(p_);
+		var r_ = (Procedure ClinicalUnilateralMastectomyProcedure) =>
 		{
-			var f_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
-			var g_ = (f_ as IEnumerable<CodeableConcept>);
-			var h_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var i_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(g_, h_);
-			var j_ = this.Clinical_Left_Modifier();
+			var ai_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			var aj_ = (ai_ as IEnumerable<CodeableConcept>);
+			var ak_ = (CodeableConcept X) =>
+			{
+				var aq_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.ConceptsInValueSet(i_, j_);
+				return aq_;
+			};
+			var al_ = context.Operators;
+			var am_ = al_.SelectOrNull<CodeableConcept, CqlConcept>(aj_, ak_);
+			var an_ = this.Clinical_Left_Modifier();
+			var ap_ = al_.ConceptsInValueSet(am_, an_);
+
+			return ap_;
 		};
-		var ad_ = context?.Operators.WhereOrNull<Procedure>(ab_, ac_);
-		var ae_ = context?.Operators.ListUnion<Procedure>(y_, ad_);
-		var af_ = (Procedure LeftMastectomyProcedure) =>
+		var t_ = j_.WhereOrNull<Procedure>(q_, r_);
+		var v_ = j_.ListUnion<Procedure>(m_, t_);
+		var w_ = (Procedure LeftMastectomyProcedure) =>
 		{
-			var k_ = LeftMastectomyProcedure?.Performed;
-			var l_ = (k_ as object);
-			var m_ = NCQAFHIRBase_1_0_0.Normalize_Interval(l_);
-			var n_ = context?.Operators.End(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context?.Operators.End(o_);
+			var ar_ = LeftMastectomyProcedure.Performed;
+			var as_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ar_);
+			var at_ = context.Operators;
+			var au_ = at_.End(as_);
+			var av_ = this.Measurement_Period();
+			var ax_ = at_.End(av_);
+			var az_ = at_.SameOrBefore(au_, ax_, null);
 
-			return context?.Operators.SameOrBefore(n_, p_, null);
+			return az_;
 		};
+		var y_ = j_.WhereOrNull<Procedure>(v_, w_);
 
-		return context?.Operators.WhereOrNull<Procedure>(ae_, af_);
+		return y_;
 	}
 
     [CqlDeclaration("Left Mastectomy Procedure")]
@@ -514,20 +638,25 @@ public class BCSEHEDISMY2022_1_0_0
 
     private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Value()
 	{
-		var e_ = this.History_of_Bilateral_Mastectomy();
-		var f_ = context?.DataRetriever.RetrieveByValueSet<Condition>(e_, null);
-		var g_ = NCQAStatus_1_0_0.Active_Condition(f_);
-		var h_ = (Condition BilateralMastectomyHistory) =>
+		var a_ = this.History_of_Bilateral_Mastectomy();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Condition>(a_, null);
+		var d_ = NCQAStatus_1_0_0.Active_Condition(c_);
+		var e_ = (Condition BilateralMastectomyHistory) =>
 		{
-			var a_ = NCQAFHIRBase_1_0_0.Prevalence_Period(BilateralMastectomyHistory);
-			var b_ = context?.Operators.Start(a_);
-			var c_ = this.Measurement_Period();
-			var d_ = context?.Operators.End(c_);
+			var h_ = NCQAFHIRBase_1_0_0.Prevalence_Period(BilateralMastectomyHistory);
+			var i_ = context.Operators;
+			var j_ = i_.Start(h_);
+			var k_ = this.Measurement_Period();
+			var m_ = i_.End(k_);
+			var o_ = i_.SameOrBefore(j_, m_, null);
 
-			return context?.Operators.SameOrBefore(b_, d_, null);
+			return o_;
 		};
+		var f_ = context.Operators;
+		var g_ = f_.WhereOrNull<Condition>(d_, e_);
 
-		return context?.Operators.WhereOrNull<Condition>(g_, h_);
+		return g_;
 	}
 
     [CqlDeclaration("Bilateral Mastectomy Diagnosis")]
@@ -535,52 +664,70 @@ public class BCSEHEDISMY2022_1_0_0
 
     private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Value()
 	{
-		var q_ = this.Bilateral_Mastectomy();
-		var r_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(q_, null);
-		var s_ = NCQAStatus_1_0_0.Completed_Procedure(r_);
-		var t_ = this.Unilateral_Mastectomy();
-		var u_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(t_, null);
-		var v_ = NCQAStatus_1_0_0.Completed_Procedure(u_);
-		var w_ = (Procedure UnilateralMastectomyProcedure) =>
+		var a_ = this.Bilateral_Mastectomy();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
+		var d_ = NCQAStatus_1_0_0.Completed_Procedure(c_);
+		var e_ = this.Unilateral_Mastectomy();
+		var g_ = b_.RetrieveByValueSet<Procedure>(e_, null);
+		var h_ = NCQAStatus_1_0_0.Completed_Procedure(g_);
+		var i_ = (Procedure UnilateralMastectomyProcedure) =>
 		{
-			var a_ = UnilateralMastectomyProcedure?.BodySite;
-			var b_ = (a_ as IEnumerable<CodeableConcept>);
-			var c_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var d_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(b_, c_);
-			var e_ = this.Bilateral_Modifier();
+			var z_ = UnilateralMastectomyProcedure.BodySite;
+			var aa_ = (z_ as IEnumerable<CodeableConcept>);
+			var ab_ = (CodeableConcept X) =>
+			{
+				var ah_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.ConceptsInValueSet(d_, e_);
+				return ah_;
+			};
+			var ac_ = context.Operators;
+			var ad_ = ac_.SelectOrNull<CodeableConcept, CqlConcept>(aa_, ab_);
+			var ae_ = this.Bilateral_Modifier();
+			var ag_ = ac_.ConceptsInValueSet(ad_, ae_);
+
+			return ag_;
 		};
-		var x_ = context?.Operators.WhereOrNull<Procedure>(v_, w_);
-		var y_ = context?.Operators.ListUnion<Procedure>(s_, x_);
-		var z_ = this.Clinical_Unilateral_Mastectomy();
-		var aa_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(z_, null);
-		var ab_ = NCQAStatus_1_0_0.Completed_Procedure(aa_);
-		var ac_ = (Procedure ClinicalUnilateralMastectomyProcedure) =>
+		var j_ = context.Operators;
+		var k_ = j_.WhereOrNull<Procedure>(h_, i_);
+		var m_ = j_.ListUnion<Procedure>(d_, k_);
+		var n_ = this.Clinical_Unilateral_Mastectomy();
+		var p_ = b_.RetrieveByValueSet<Procedure>(n_, null);
+		var q_ = NCQAStatus_1_0_0.Completed_Procedure(p_);
+		var r_ = (Procedure ClinicalUnilateralMastectomyProcedure) =>
 		{
-			var f_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
-			var g_ = (f_ as IEnumerable<CodeableConcept>);
-			var h_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var i_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(g_, h_);
-			var j_ = this.Clinical_Bilateral_Modifier();
+			var ai_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			var aj_ = (ai_ as IEnumerable<CodeableConcept>);
+			var ak_ = (CodeableConcept X) =>
+			{
+				var aq_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.ConceptsInValueSet(i_, j_);
+				return aq_;
+			};
+			var al_ = context.Operators;
+			var am_ = al_.SelectOrNull<CodeableConcept, CqlConcept>(aj_, ak_);
+			var an_ = this.Clinical_Bilateral_Modifier();
+			var ap_ = al_.ConceptsInValueSet(am_, an_);
+
+			return ap_;
 		};
-		var ad_ = context?.Operators.WhereOrNull<Procedure>(ab_, ac_);
-		var ae_ = context?.Operators.ListUnion<Procedure>(y_, ad_);
-		var af_ = (Procedure BilateralMastectomyPerformed) =>
+		var t_ = j_.WhereOrNull<Procedure>(q_, r_);
+		var v_ = j_.ListUnion<Procedure>(m_, t_);
+		var w_ = (Procedure BilateralMastectomyPerformed) =>
 		{
-			var k_ = BilateralMastectomyPerformed?.Performed;
-			var l_ = (k_ as object);
-			var m_ = NCQAFHIRBase_1_0_0.Normalize_Interval(l_);
-			var n_ = context?.Operators.End(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context?.Operators.End(o_);
+			var ar_ = BilateralMastectomyPerformed.Performed;
+			var as_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ar_);
+			var at_ = context.Operators;
+			var au_ = at_.End(as_);
+			var av_ = this.Measurement_Period();
+			var ax_ = at_.End(av_);
+			var az_ = at_.SameOrBefore(au_, ax_, null);
 
-			return context?.Operators.SameOrBefore(n_, p_, null);
+			return az_;
 		};
+		var y_ = j_.WhereOrNull<Procedure>(v_, w_);
 
-		return context?.Operators.WhereOrNull<Procedure>(ae_, af_);
+		return y_;
 	}
 
     [CqlDeclaration("Bilateral Mastectomy Procedure")]
@@ -589,23 +736,25 @@ public class BCSEHEDISMY2022_1_0_0
     private bool? Mastectomy_Exclusion_Value()
 	{
 		var a_ = this.Right_Mastectomy_Diagnosis();
-		var b_ = context?.Operators.ExistsInList<Condition>(a_);
-		var c_ = this.Right_Mastectomy_Procedure();
-		var d_ = context?.Operators.ExistsInList<Procedure>(c_);
-		var e_ = context?.Operators.Or(b_, d_);
-		var f_ = this.Left_Mastectomy_Diagnosis();
-		var g_ = context?.Operators.ExistsInList<Condition>(f_);
-		var h_ = this.Left_Mastectomy_Procedure();
-		var i_ = context?.Operators.ExistsInList<Procedure>(h_);
-		var j_ = context?.Operators.Or(g_, i_);
-		var k_ = context?.Operators.And(e_, j_);
-		var l_ = this.Bilateral_Mastectomy_Diagnosis();
-		var m_ = context?.Operators.ExistsInList<Condition>(l_);
-		var n_ = context?.Operators.Or(k_, m_);
-		var o_ = this.Bilateral_Mastectomy_Procedure();
-		var p_ = context?.Operators.ExistsInList<Procedure>(o_);
+		var b_ = context.Operators;
+		var c_ = b_.ExistsInList<Condition>(a_);
+		var d_ = this.Right_Mastectomy_Procedure();
+		var f_ = b_.ExistsInList<Procedure>(d_);
+		var h_ = b_.Or(c_, f_);
+		var i_ = this.Left_Mastectomy_Diagnosis();
+		var k_ = b_.ExistsInList<Condition>(i_);
+		var l_ = this.Left_Mastectomy_Procedure();
+		var n_ = b_.ExistsInList<Procedure>(l_);
+		var p_ = b_.Or(k_, n_);
+		var r_ = b_.And(h_, p_);
+		var s_ = this.Bilateral_Mastectomy_Diagnosis();
+		var u_ = b_.ExistsInList<Condition>(s_);
+		var w_ = b_.Or(r_, u_);
+		var x_ = this.Bilateral_Mastectomy_Procedure();
+		var z_ = b_.ExistsInList<Procedure>(x_);
+		var ab_ = b_.Or(w_, z_);
 
-		return context?.Operators.Or(n_, p_);
+		return ab_;
 	}
 
     [CqlDeclaration("Mastectomy Exclusion")]
@@ -615,13 +764,15 @@ public class BCSEHEDISMY2022_1_0_0
 	{
 		var a_ = NCQAHospice_1_0_0.Hospice_Intervention_or_Encounter();
 		var b_ = this.Mastectomy_Exclusion();
-		var c_ = context?.Operators.Or(a_, b_);
-		var d_ = NCQAAdvancedIllnessandFrailty_1_0_0.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
-		var e_ = context?.Operators.Or(c_, d_);
-		var f_ = this.Measurement_Period();
-		var g_ = NCQAPalliativeCare_1_0_0.Palliative_Care_Overlapping_Period(f_);
+		var c_ = context.Operators;
+		var d_ = c_.Or(a_, b_);
+		var e_ = NCQAAdvancedIllnessandFrailty_1_0_0.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
+		var g_ = c_.Or(d_, e_);
+		var h_ = this.Measurement_Period();
+		var i_ = NCQAPalliativeCare_1_0_0.Palliative_Care_Overlapping_Period(h_);
+		var k_ = c_.Or(g_, i_);
 
-		return context?.Operators.Or(e_, g_);
+		return k_;
 	}
 
     [CqlDeclaration("Exclusions")]
@@ -629,21 +780,25 @@ public class BCSEHEDISMY2022_1_0_0
 
     private bool? Numerator_Value()
 	{
-		var f_ = this.Mammography();
-		var g_ = context?.DataRetriever.RetrieveByValueSet<Observation>(f_, null);
-		var h_ = (Observation Mammogram) =>
+		var a_ = this.Mammography();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
+		var d_ = (Observation Mammogram) =>
 		{
-			var a_ = Mammogram?.Effective;
-			var b_ = (a_ as object);
-			var c_ = NCQAFHIRBase_1_0_0.Normalize_Interval(b_);
-			var d_ = context?.Operators.End(c_);
-			var e_ = this.Participation_Period();
+			var i_ = Mammogram.Effective;
+			var j_ = NCQAFHIRBase_1_0_0.Normalize_Interval(i_);
+			var k_ = context.Operators;
+			var l_ = k_.End(j_);
+			var m_ = this.Participation_Period();
+			var o_ = k_.ElementInInterval<CqlDateTime>(l_, m_, null);
 
-			return context?.Operators.ElementInInterval<CqlDateTime>(d_, e_, null);
+			return o_;
 		};
-		var i_ = context?.Operators.WhereOrNull<Observation>(g_, h_);
+		var e_ = context.Operators;
+		var f_ = e_.WhereOrNull<Observation>(c_, d_);
+		var h_ = e_.ExistsInList<Observation>(f_);
 
-		return context?.Operators.ExistsInList<Observation>(i_);
+		return h_;
 	}
 
     [CqlDeclaration("Numerator")]

@@ -52,14 +52,22 @@ public class DevDays_2023_0_0
 
     #endregion
 
-    private CqlCode Sucked_into_jet_engine_Value() =>
-		new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", null, null);
+    private CqlCode Sucked_into_jet_engine_Value()
+	{
+		var a_ = new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", null, null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Sucked into jet engine")]
     public CqlCode Sucked_into_jet_engine() => __Sucked_into_jet_engine.Value;
 
-    private CqlCode Sucked_into_jet_engine__subsequent_encounter_Value() =>
-		new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", null, null);
+    private CqlCode Sucked_into_jet_engine__subsequent_encounter_Value()
+	{
+		var a_ = new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", null, null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Sucked into jet engine, subsequent encounter")]
     public CqlCode Sucked_into_jet_engine__subsequent_encounter() => __Sucked_into_jet_engine__subsequent_encounter.Value;
@@ -68,12 +76,13 @@ public class DevDays_2023_0_0
 	{
 		var a_ = new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", null, null);
 		var b_ = new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", null, null);
-
-		return new CqlCode[]
+		var c_ = new CqlCode[]
 		{
 			a_,
 			b_,
 		};
+
+		return c_;
 	}
 
     [CqlDeclaration("ICD10")]
@@ -82,8 +91,9 @@ public class DevDays_2023_0_0
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
+		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return (CqlInterval<CqlDateTime>)a_;
+		return b_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -91,9 +101,12 @@ public class DevDays_2023_0_0
 
     private Patient Patient_Value()
 	{
-		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+		var a_ = context.DataRetriever;
+		var b_ = a_.RetrieveByValueSet<Patient>(null, null);
+		var c_ = context.Operators;
+		var d_ = c_.SingleOrNull<Patient>(b_);
 
-		return context?.Operators.SingleOrNull<Patient>(a_);
+		return d_;
 	}
 
     [CqlDeclaration("Patient")]
@@ -101,34 +114,38 @@ public class DevDays_2023_0_0
 
     private IEnumerable<Condition> Jet_engine_conditions_Value()
 	{
-		var q_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, null);
-		var r_ = (Condition c) =>
+		var a_ = context.DataRetriever;
+		var b_ = a_.RetrieveByValueSet<Condition>(null, null);
+		var c_ = (Condition c) =>
 		{
-			var e_ = c?.Code;
-			var f_ = e_?.Coding;
-			var g_ = (f_ as IEnumerable<Coding>);
-			var h_ = (Coding coding) =>
+			var f_ = c.Code;
+			var g_ = f_.Coding;
+			var h_ = (g_ as IEnumerable<Coding>);
+			var i_ = (Coding coding) =>
 			{
-				var a_ = FHIRHelpers_4_0_001.ToCode(coding);
-				var b_ = (a_ as object);
-				var c_ = this.Sucked_into_jet_engine();
-				var d_ = (c_ as object);
+				var v_ = FHIRHelpers_4_0_001.ToCode(coding);
+				var w_ = this.Sucked_into_jet_engine();
+				var x_ = context.Operators;
+				var y_ = x_.Equivalent(v_, w_);
 
-				return context?.Operators.Equivalent(b_, d_);
+				return y_;
 			};
-			var i_ = context?.Operators.WhereOrNull<Coding>(g_, h_);
-			var j_ = context?.Operators.ExistsInList<Coding>(i_);
-			var k_ = c?.Onset;
-			var l_ = (k_ as object);
-			var m_ = (l_ as FhirDateTime);
-			var n_ = FHIRHelpers_4_0_001.ToDateTime(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context?.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+			var j_ = context.Operators;
+			var k_ = j_.WhereOrNull<Coding>(h_, i_);
+			var m_ = j_.ExistsInList<Coding>(k_);
+			var n_ = c.Onset;
+			var o_ = (n_ as FhirDateTime);
+			var p_ = FHIRHelpers_4_0_001.ToDateTime(o_);
+			var q_ = this.Measurement_Period();
+			var s_ = j_.ElementInInterval<CqlDateTime>(p_, q_, null);
+			var u_ = j_.And(m_, s_);
 
-			return context?.Operators.And(j_, p_);
+			return u_;
 		};
+		var d_ = context.Operators;
+		var e_ = d_.WhereOrNull<Condition>(b_, c_);
 
-		return context?.Operators.WhereOrNull<Condition>(q_, r_);
+		return e_;
 	}
 
     [CqlDeclaration("Jet engine conditions")]
@@ -136,34 +153,38 @@ public class DevDays_2023_0_0
 
     private IEnumerable<Condition> Subsequent_encounters_Value()
 	{
-		var q_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, null);
-		var r_ = (Condition c) =>
+		var a_ = context.DataRetriever;
+		var b_ = a_.RetrieveByValueSet<Condition>(null, null);
+		var c_ = (Condition c) =>
 		{
-			var e_ = c?.Code;
-			var f_ = e_?.Coding;
-			var g_ = (f_ as IEnumerable<Coding>);
-			var h_ = (Coding coding) =>
+			var f_ = c.Code;
+			var g_ = f_.Coding;
+			var h_ = (g_ as IEnumerable<Coding>);
+			var i_ = (Coding coding) =>
 			{
-				var a_ = FHIRHelpers_4_0_001.ToCode(coding);
-				var b_ = (a_ as object);
-				var c_ = this.Sucked_into_jet_engine__subsequent_encounter();
-				var d_ = (c_ as object);
+				var v_ = FHIRHelpers_4_0_001.ToCode(coding);
+				var w_ = this.Sucked_into_jet_engine__subsequent_encounter();
+				var x_ = context.Operators;
+				var y_ = x_.Equivalent(v_, w_);
 
-				return context?.Operators.Equivalent(b_, d_);
+				return y_;
 			};
-			var i_ = context?.Operators.WhereOrNull<Coding>(g_, h_);
-			var j_ = context?.Operators.ExistsInList<Coding>(i_);
-			var k_ = c?.Onset;
-			var l_ = (k_ as object);
-			var m_ = (l_ as FhirDateTime);
-			var n_ = FHIRHelpers_4_0_001.ToDateTime(m_);
-			var o_ = this.Measurement_Period();
-			var p_ = context?.Operators.ElementInInterval<CqlDateTime>(n_, o_, null);
+			var j_ = context.Operators;
+			var k_ = j_.WhereOrNull<Coding>(h_, i_);
+			var m_ = j_.ExistsInList<Coding>(k_);
+			var n_ = c.Onset;
+			var o_ = (n_ as FhirDateTime);
+			var p_ = FHIRHelpers_4_0_001.ToDateTime(o_);
+			var q_ = this.Measurement_Period();
+			var s_ = j_.ElementInInterval<CqlDateTime>(p_, q_, null);
+			var u_ = j_.And(m_, s_);
 
-			return context?.Operators.And(j_, p_);
+			return u_;
 		};
+		var d_ = context.Operators;
+		var e_ = d_.WhereOrNull<Condition>(b_, c_);
 
-		return context?.Operators.WhereOrNull<Condition>(q_, r_);
+		return e_;
 	}
 
     [CqlDeclaration("Subsequent encounters")]
@@ -172,8 +193,10 @@ public class DevDays_2023_0_0
     private bool? Initial_population_Value()
 	{
 		var a_ = this.Jet_engine_conditions();
+		var b_ = context.Operators;
+		var c_ = b_.ExistsInList<Condition>(a_);
 
-		return context?.Operators.ExistsInList<Condition>(a_);
+		return c_;
 	}
 
     [CqlDeclaration("Initial population")]
@@ -182,8 +205,10 @@ public class DevDays_2023_0_0
     private bool? Numerator_Value()
 	{
 		var a_ = this.Subsequent_encounters();
+		var b_ = context.Operators;
+		var c_ = b_.ExistsInList<Condition>(a_);
 
-		return context?.Operators.ExistsInList<Condition>(a_);
+		return c_;
 	}
 
     [CqlDeclaration("Numerator")]

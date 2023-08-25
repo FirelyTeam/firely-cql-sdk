@@ -28,18 +28,19 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitUnary(UnaryExpression node)
         {
-            if (node is { NodeType: ExpressionType.Convert } conversion)
+            if (node is { NodeType: ExpressionType.Convert or ExpressionType.TypeAs } conversion)
             {
                 var reducedOperand = Visit(conversion.Operand);
 
-                // (T)(T?)x::T => x
-                //else if (Nullable.GetUnderlyingType(nestedConversion.Type) == conversion.Type)
+                //// (T)(T?)x::T => x
+                //if (reducedOperand is UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.TypeAs } nested &&
+                //    Nullable.GetUnderlyingType(nested.Type) == conversion.Type)
                 //{
-                //    var reducedOperandOfNestedConversion = Visit(nestedConversion.Operand);
+                //    var reducedOperandOfNestedConversion = Visit(nested.Operand);
                 //    if (reducedOperandOfNestedConversion.Type == node.Type)
                 //        return reducedOperandOfNestedConversion;
                 //    else
-                //        return conversion.Update(nestedConversion.Update(reducedOperandOfNestedConversion));
+                //        return conversion.Update(nested.Update(reducedOperandOfNestedConversion));
                 //}
 
                 var removeCast = true;
@@ -51,6 +52,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 if (Nullable.GetUnderlyingType(conversion.Type) is not null)
                 {
                     removeCast = false;
+                    // This causes a RTE if enabled, and I couldn't find out why, so I disabled it.
                     //if (conversion.Operand.NodeType == ExpressionType.Constant
                     //    || conversion.Operand.NodeType == ExpressionType.Default)
                     //    removeCast = false;

@@ -100,99 +100,155 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     #endregion
 
-    private CqlValueSet Antithrombotic_Therapy_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201", null);
+    private CqlValueSet Antithrombotic_Therapy_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201")]
     public CqlValueSet Antithrombotic_Therapy() => __Antithrombotic_Therapy.Value;
 
-    private CqlValueSet Comfort_Measures_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", null);
+    private CqlValueSet Comfort_Measures_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Comfort Measures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45")]
     public CqlValueSet Comfort_Measures() => __Comfort_Measures.Value;
 
-    private CqlValueSet Discharge_To_Acute_Care_Facility_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
+    private CqlValueSet Discharge_To_Acute_Care_Facility_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
     public CqlValueSet Discharge_To_Acute_Care_Facility() => __Discharge_To_Acute_Care_Facility.Value;
 
-    private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
+    private CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
     public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care() => __Discharged_to_Health_Care_Facility_for_Hospice_Care.Value;
 
-    private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
+    private CqlValueSet Discharged_to_Home_for_Hospice_Care_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
     public CqlValueSet Discharged_to_Home_for_Hospice_Care() => __Discharged_to_Home_for_Hospice_Care.Value;
 
-    private CqlValueSet Emergency_Department_Visit_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+    private CqlValueSet Emergency_Department_Visit_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
     public CqlValueSet Emergency_Department_Visit() => __Emergency_Department_Visit.Value;
 
-    private CqlValueSet Hemorrhagic_Stroke_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212", null);
+    private CqlValueSet Hemorrhagic_Stroke_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Hemorrhagic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212")]
     public CqlValueSet Hemorrhagic_Stroke() => __Hemorrhagic_Stroke.Value;
 
-    private CqlValueSet Ischemic_Stroke_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", null);
+    private CqlValueSet Ischemic_Stroke_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247")]
     public CqlValueSet Ischemic_Stroke() => __Ischemic_Stroke.Value;
 
-    private CqlValueSet Left_Against_Medical_Advice_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
+    private CqlValueSet Left_Against_Medical_Advice_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
     public CqlValueSet Left_Against_Medical_Advice() => __Left_Against_Medical_Advice.Value;
 
-    private CqlValueSet Medical_Reason_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
+    private CqlValueSet Medical_Reason_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473")]
     public CqlValueSet Medical_Reason() => __Medical_Reason.Value;
 
-    private CqlValueSet Non_Elective_Inpatient_Encounter_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", null);
+    private CqlValueSet Non_Elective_Inpatient_Encounter_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Non-Elective Inpatient Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424")]
     public CqlValueSet Non_Elective_Inpatient_Encounter() => __Non_Elective_Inpatient_Encounter.Value;
 
-    private CqlValueSet Patient_Expired_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+    private CqlValueSet Patient_Expired_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
     public CqlValueSet Patient_Expired() => __Patient_Expired.Value;
 
-    private CqlValueSet Patient_Refusal_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
+    private CqlValueSet Patient_Refusal_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
     public CqlValueSet Patient_Refusal() => __Patient_Refusal.Value;
 
-    private CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", null);
+    private CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Pharmacological Contraindications For Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52")]
@@ -201,8 +257,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("DischargedonAntithromboticTherapyFHIR-0.0.010", "Measurement Period", null);
+		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return (CqlInterval<CqlDateTime>)a_;
+		return b_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -210,88 +267,108 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private Patient Patient_Value()
 	{
-		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+		var a_ = context.DataRetriever;
+		var b_ = a_.RetrieveByValueSet<Patient>(null, null);
+		var c_ = context.Operators;
+		var d_ = c_.SingleOrNull<Patient>(b_);
 
-		return context?.Operators.SingleOrNull<Patient>(a_);
+		return d_;
 	}
 
     [CqlDeclaration("Patient")]
     public Patient Patient() => __Patient.Value;
 
-    private IEnumerable<Encounter> Denominator_Value() =>
-		TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
+    private IEnumerable<Encounter> Denominator_Value()
+	{
+		var a_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
+
+		return a_;
+	}
 
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator() => __Denominator.Value;
 
     private IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge_Value()
 	{
-		var ax_ = this.Antithrombotic_Therapy();
-		var ay_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ax_, null);
-		var az_ = (MedicationRequest NoAntithromboticDischarge) =>
+		var a_ = this.Antithrombotic_Therapy();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = (MedicationRequest NoAntithromboticDischarge) =>
 		{
-			var m_ = NoAntithromboticDischarge?.DoNotPerformElement;
-			var n_ = FHIRHelpers_4_0_001.ToBoolean(m_);
-			var o_ = context?.Operators.IsTrue(n_);
-			var p_ = NoAntithromboticDischarge?.ReasonCode;
-			var q_ = (p_ as IEnumerable<CodeableConcept>);
-			var r_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var s_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(q_, r_);
-			var t_ = this.Medical_Reason();
-			var u_ = context?.Operators.ConceptsInValueSet(s_, t_);
-			var v_ = NoAntithromboticDischarge?.ReasonCode;
-			var w_ = (v_ as IEnumerable<CodeableConcept>);
-			var x_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var y_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(w_, x_);
-			var z_ = this.Patient_Refusal();
-			var aa_ = context?.Operators.ConceptsInValueSet(y_, z_);
-			var ab_ = context?.Operators.Or(u_, aa_);
-			var ac_ = context?.Operators.And(o_, ab_);
-			var ad_ = NoAntithromboticDischarge?.Category;
-			var ae_ = (ad_ as IEnumerable<CodeableConcept>);
-			var af_ = (CodeableConcept C) =>
+			var g_ = NoAntithromboticDischarge.DoNotPerformElement;
+			var h_ = FHIRHelpers_4_0_001.ToBoolean(g_);
+			var i_ = context.Operators;
+			var j_ = i_.IsTrue(h_);
+			var k_ = NoAntithromboticDischarge.ReasonCode;
+			var l_ = (k_ as IEnumerable<CodeableConcept>);
+			var m_ = (CodeableConcept X) =>
 			{
-				var a_ = FHIRHelpers_4_0_001.ToConcept(C);
-				var b_ = (a_ as object);
-				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
-				var d_ = context?.Operators.ConvertCodeToConcept(c_);
-				var e_ = (d_ as object);
-				var f_ = context?.Operators.Equivalent(b_, e_);
-				var g_ = FHIRHelpers_4_0_001.ToConcept(C);
-				var h_ = (g_ as object);
-				var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
-				var j_ = context?.Operators.ConvertCodeToConcept(i_);
-				var k_ = (j_ as object);
-				var l_ = context?.Operators.Equivalent(h_, k_);
+				var bj_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-				return context?.Operators.Or(f_, l_);
+				return bj_;
 			};
-			var ag_ = context?.Operators.WhereOrNull<CodeableConcept>(ae_, af_);
-			var ah_ = context?.Operators.ExistsInList<CodeableConcept>(ag_);
-			var ai_ = context?.Operators.And(ac_, ah_);
-			var aj_ = NoAntithromboticDischarge?.StatusElement;
-			var ak_ = (aj_ as object);
-			var al_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ak_);
-			var am_ = "completed";
-			var an_ = "cancelled";
-			var ao_ = new string[]
+			var o_ = i_.SelectOrNull<CodeableConcept, CqlConcept>(l_, m_);
+			var p_ = this.Medical_Reason();
+			var r_ = i_.ConceptsInValueSet(o_, p_);
+			var t_ = (k_ as IEnumerable<CodeableConcept>);
+			var u_ = (CodeableConcept X) =>
 			{
-				am_,
-				an_,
-			};
-			var ap_ = (ao_ as IEnumerable<string>);
-			var aq_ = context?.Operators.InList<string>(al_, ap_);
-			var ar_ = context?.Operators.And(ai_, aq_);
-			var as_ = NoAntithromboticDischarge?.IntentElement;
-			var at_ = (as_ as object);
-			var au_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(at_);
-			var av_ = (au_ as object);
-			var aw_ = context?.Operators.Equal(av_, ("order" as object));
+				var bk_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.And(ar_, aw_);
+				return bk_;
+			};
+			var w_ = i_.SelectOrNull<CodeableConcept, CqlConcept>(t_, u_);
+			var x_ = this.Patient_Refusal();
+			var z_ = i_.ConceptsInValueSet(w_, x_);
+			var ab_ = i_.Or(r_, z_);
+			var ad_ = i_.And(j_, ab_);
+			var ae_ = NoAntithromboticDischarge.Category;
+			var af_ = (ae_ as IEnumerable<CodeableConcept>);
+			var ag_ = (CodeableConcept C) =>
+			{
+				var bl_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var bm_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
+				var bn_ = context.Operators;
+				var bo_ = bn_.ConvertCodeToConcept(bm_);
+				var bq_ = bn_.Equivalent(bl_, bo_);
+				var bs_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
+				var bu_ = bn_.ConvertCodeToConcept(bs_);
+				var bw_ = bn_.Equivalent(bl_, bu_);
+				var by_ = bn_.Or(bq_, bw_);
+
+				return by_;
+			};
+			var ai_ = i_.WhereOrNull<CodeableConcept>(af_, ag_);
+			var ak_ = i_.ExistsInList<CodeableConcept>(ai_);
+			var am_ = i_.And(ad_, ak_);
+			var an_ = NoAntithromboticDischarge.StatusElement;
+			var ao_ = new CallStackEntry("ToString", null, null);
+			var ap_ = context.Deeper(ao_);
+			var aq_ = ap_.Operators;
+			var ar_ = aq_.TypeConverter;
+			var as_ = ar_.Convert<string>(an_);
+			var at_ = new string[]
+			{
+				"completed",
+				"cancelled",
+			};
+			var au_ = (at_ as IEnumerable<string>);
+			var aw_ = i_.InList<string>(as_, au_);
+			var ay_ = i_.And(am_, aw_);
+			var az_ = NoAntithromboticDischarge.IntentElement;
+			var bb_ = context.Deeper(ao_);
+			var bc_ = bb_.Operators;
+			var bd_ = bc_.TypeConverter;
+			var be_ = bd_.Convert<string>(az_);
+			var bg_ = i_.Equal(be_, "order");
+			var bi_ = i_.And(ay_, bg_);
+
+			return bi_;
 		};
+		var e_ = context.Operators;
+		var f_ = e_.WhereOrNull<MedicationRequest>(c_, d_);
 
-		return context?.Operators.WhereOrNull<MedicationRequest>(ay_, az_);
+		return f_;
 	}
 
     [CqlDeclaration("Antithrombotic Not Given at Discharge")]
@@ -299,26 +376,32 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge_Value()
 	{
-		var i_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
-		var j_ = (Encounter IschemicStrokeEncounter) =>
+		var a_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
+		var b_ = (Encounter IschemicStrokeEncounter) =>
 		{
 			var e_ = this.Antithrombotic_Not_Given_at_Discharge();
 			var f_ = (MedicationRequest NoDischargeAntithrombotic) =>
 			{
-				var a_ = NoDischargeAntithrombotic?.AuthoredOnElement;
-				var b_ = FHIRHelpers_4_0_001.ToDateTime(a_);
-				var c_ = IschemicStrokeEncounter?.Period;
-				var d_ = FHIRHelpers_4_0_001.ToInterval(c_);
+				var l_ = NoDischargeAntithrombotic.AuthoredOnElement;
+				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
+				var n_ = IschemicStrokeEncounter.Period;
+				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
+				var p_ = context.Operators;
+				var q_ = p_.ElementInInterval<CqlDateTime>(m_, o_, null);
 
-				return context?.Operators.ElementInInterval<CqlDateTime>(b_, d_, null);
+				return q_;
 			};
-			var g_ = context?.Operators.WhereOrNull<MedicationRequest>(e_, f_);
-			var h_ = (MedicationRequest NoDischargeAntithrombotic) => IschemicStrokeEncounter;
+			var g_ = context.Operators;
+			var h_ = g_.WhereOrNull<MedicationRequest>(e_, f_);
+			var i_ = (MedicationRequest NoDischargeAntithrombotic) => IschemicStrokeEncounter;
+			var k_ = g_.SelectOrNull<MedicationRequest, Encounter>(h_, i_);
 
-			return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(g_, h_);
+			return k_;
 		};
+		var c_ = context.Operators;
+		var d_ = c_.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
-		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(i_, j_);
+		return d_;
 	}
 
     [CqlDeclaration("Encounter With No Antithrombotic At Discharge")]
@@ -326,59 +409,63 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value()
 	{
-		var ak_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
-		var al_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ak_, null);
-		var am_ = (MedicationRequest Pharmacological) =>
+		var a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = (MedicationRequest Pharmacological) =>
 		{
-			var m_ = Pharmacological?.DoNotPerformElement;
-			var n_ = FHIRHelpers_4_0_001.ToBoolean(m_);
-			var o_ = context?.Operators.IsTrue(n_);
-			var p_ = context?.Operators.Not(o_);
-			var q_ = Pharmacological?.Category;
-			var r_ = (q_ as IEnumerable<CodeableConcept>);
-			var s_ = (CodeableConcept C) =>
+			var g_ = Pharmacological.DoNotPerformElement;
+			var h_ = FHIRHelpers_4_0_001.ToBoolean(g_);
+			var i_ = context.Operators;
+			var j_ = i_.IsTrue(h_);
+			var l_ = i_.Not(j_);
+			var m_ = Pharmacological.Category;
+			var n_ = (m_ as IEnumerable<CodeableConcept>);
+			var o_ = (CodeableConcept C) =>
 			{
-				var a_ = FHIRHelpers_4_0_001.ToConcept(C);
-				var b_ = (a_ as object);
-				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
-				var d_ = context?.Operators.ConvertCodeToConcept(c_);
-				var e_ = (d_ as object);
-				var f_ = context?.Operators.Equivalent(b_, e_);
-				var g_ = FHIRHelpers_4_0_001.ToConcept(C);
-				var h_ = (g_ as object);
-				var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
-				var j_ = context?.Operators.ConvertCodeToConcept(i_);
-				var k_ = (j_ as object);
-				var l_ = context?.Operators.Equivalent(h_, k_);
+				var ar_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var as_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
+				var at_ = context.Operators;
+				var au_ = at_.ConvertCodeToConcept(as_);
+				var aw_ = at_.Equivalent(ar_, au_);
+				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
+				var ba_ = at_.ConvertCodeToConcept(ay_);
+				var bc_ = at_.Equivalent(ar_, ba_);
+				var be_ = at_.Or(aw_, bc_);
 
-				return context?.Operators.Or(f_, l_);
+				return be_;
 			};
-			var t_ = context?.Operators.WhereOrNull<CodeableConcept>(r_, s_);
-			var u_ = context?.Operators.ExistsInList<CodeableConcept>(t_);
-			var v_ = context?.Operators.And(p_, u_);
-			var w_ = Pharmacological?.StatusElement;
-			var x_ = (w_ as object);
-			var y_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(x_);
-			var z_ = "active";
-			var aa_ = "completed";
+			var q_ = i_.WhereOrNull<CodeableConcept>(n_, o_);
+			var s_ = i_.ExistsInList<CodeableConcept>(q_);
+			var u_ = i_.And(l_, s_);
+			var v_ = Pharmacological.StatusElement;
+			var w_ = new CallStackEntry("ToString", null, null);
+			var x_ = context.Deeper(w_);
+			var y_ = x_.Operators;
+			var z_ = y_.TypeConverter;
+			var aa_ = z_.Convert<string>(v_);
 			var ab_ = new string[]
 			{
-				z_,
-				aa_,
+				"active",
+				"completed",
 			};
 			var ac_ = (ab_ as IEnumerable<string>);
-			var ad_ = context?.Operators.InList<string>(y_, ac_);
-			var ae_ = context?.Operators.And(v_, ad_);
-			var af_ = Pharmacological?.IntentElement;
-			var ag_ = (af_ as object);
-			var ah_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ag_);
-			var ai_ = (ah_ as object);
-			var aj_ = context?.Operators.Equal(ai_, ("order" as object));
+			var ae_ = i_.InList<string>(aa_, ac_);
+			var ag_ = i_.And(u_, ae_);
+			var ah_ = Pharmacological.IntentElement;
+			var aj_ = context.Deeper(w_);
+			var ak_ = aj_.Operators;
+			var al_ = ak_.TypeConverter;
+			var am_ = al_.Convert<string>(ah_);
+			var ao_ = i_.Equal(am_, "order");
+			var aq_ = i_.And(ag_, ao_);
 
-			return context?.Operators.And(ae_, aj_);
+			return aq_;
 		};
+		var e_ = context.Operators;
+		var f_ = e_.WhereOrNull<MedicationRequest>(c_, d_);
 
-		return context?.Operators.WhereOrNull<MedicationRequest>(al_, am_);
+		return f_;
 	}
 
     [CqlDeclaration("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
@@ -386,26 +473,32 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value()
 	{
-		var i_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
-		var j_ = (Encounter IschemicStrokeEncounter) =>
+		var a_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
+		var b_ = (Encounter IschemicStrokeEncounter) =>
 		{
 			var e_ = this.Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge();
 			var f_ = (MedicationRequest DischargePharmacological) =>
 			{
-				var a_ = DischargePharmacological?.AuthoredOnElement;
-				var b_ = FHIRHelpers_4_0_001.ToDateTime(a_);
-				var c_ = IschemicStrokeEncounter?.Period;
-				var d_ = FHIRHelpers_4_0_001.ToInterval(c_);
+				var l_ = DischargePharmacological.AuthoredOnElement;
+				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
+				var n_ = IschemicStrokeEncounter.Period;
+				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
+				var p_ = context.Operators;
+				var q_ = p_.ElementInInterval<CqlDateTime>(m_, o_, null);
 
-				return context?.Operators.ElementInInterval<CqlDateTime>(b_, d_, null);
+				return q_;
 			};
-			var g_ = context?.Operators.WhereOrNull<MedicationRequest>(e_, f_);
-			var h_ = (MedicationRequest DischargePharmacological) => IschemicStrokeEncounter;
+			var g_ = context.Operators;
+			var h_ = g_.WhereOrNull<MedicationRequest>(e_, f_);
+			var i_ = (MedicationRequest DischargePharmacological) => IschemicStrokeEncounter;
+			var k_ = g_.SelectOrNull<MedicationRequest, Encounter>(h_, i_);
 
-			return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(g_, h_);
+			return k_;
 		};
+		var c_ = context.Operators;
+		var d_ = c_.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
-		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(i_, j_);
+		return d_;
 	}
 
     [CqlDeclaration("Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
@@ -415,8 +508,10 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		var a_ = this.Encounter_With_No_Antithrombotic_At_Discharge();
 		var b_ = this.Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge();
+		var c_ = context.Operators;
+		var d_ = c_.ListUnion<Encounter>(a_, b_);
 
-		return context?.Operators.ListUnion<Encounter>(a_, b_);
+		return d_;
 	}
 
     [CqlDeclaration("Denominator Exceptions")]
@@ -426,74 +521,84 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	{
 		var a_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounters_with_Discharge_Disposition();
 		var b_ = TJCOverallFHIR_1_8_000.Encounter_with_Comfort_Measures_during_Hospitalization();
+		var c_ = context.Operators;
+		var d_ = c_.ListUnion<Encounter>(a_, b_);
 
-		return context?.Operators.ListUnion<Encounter>(a_, b_);
+		return d_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions() => __Denominator_Exclusions.Value;
 
-    private IEnumerable<Encounter> Initial_Population_Value() =>
-		TJCOverallFHIR_1_8_000.Encounter_with_Principal_Diagnosis_and_Age();
+    private IEnumerable<Encounter> Initial_Population_Value()
+	{
+		var a_ = TJCOverallFHIR_1_8_000.Encounter_with_Principal_Diagnosis_and_Age();
+
+		return a_;
+	}
 
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population() => __Initial_Population.Value;
 
     private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Value()
 	{
-		var ak_ = this.Antithrombotic_Therapy();
-		var al_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ak_, null);
-		var am_ = (MedicationRequest Antithrombotic) =>
+		var a_ = this.Antithrombotic_Therapy();
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<MedicationRequest>(a_, null);
+		var d_ = (MedicationRequest Antithrombotic) =>
 		{
-			var m_ = Antithrombotic?.DoNotPerformElement;
-			var n_ = FHIRHelpers_4_0_001.ToBoolean(m_);
-			var o_ = context?.Operators.IsTrue(n_);
-			var p_ = context?.Operators.Not(o_);
-			var q_ = Antithrombotic?.Category;
-			var r_ = (q_ as IEnumerable<CodeableConcept>);
-			var s_ = (CodeableConcept C) =>
+			var g_ = Antithrombotic.DoNotPerformElement;
+			var h_ = FHIRHelpers_4_0_001.ToBoolean(g_);
+			var i_ = context.Operators;
+			var j_ = i_.IsTrue(h_);
+			var l_ = i_.Not(j_);
+			var m_ = Antithrombotic.Category;
+			var n_ = (m_ as IEnumerable<CodeableConcept>);
+			var o_ = (CodeableConcept C) =>
 			{
-				var a_ = FHIRHelpers_4_0_001.ToConcept(C);
-				var b_ = (a_ as object);
-				var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
-				var d_ = context?.Operators.ConvertCodeToConcept(c_);
-				var e_ = (d_ as object);
-				var f_ = context?.Operators.Equivalent(b_, e_);
-				var g_ = FHIRHelpers_4_0_001.ToConcept(C);
-				var h_ = (g_ as object);
-				var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
-				var j_ = context?.Operators.ConvertCodeToConcept(i_);
-				var k_ = (j_ as object);
-				var l_ = context?.Operators.Equivalent(h_, k_);
+				var ar_ = FHIRHelpers_4_0_001.ToConcept(C);
+				var as_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Community();
+				var at_ = context.Operators;
+				var au_ = at_.ConvertCodeToConcept(as_);
+				var aw_ = at_.Equivalent(ar_, au_);
+				var ay_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Discharge();
+				var ba_ = at_.ConvertCodeToConcept(ay_);
+				var bc_ = at_.Equivalent(ar_, ba_);
+				var be_ = at_.Or(aw_, bc_);
 
-				return context?.Operators.Or(f_, l_);
+				return be_;
 			};
-			var t_ = context?.Operators.WhereOrNull<CodeableConcept>(r_, s_);
-			var u_ = context?.Operators.ExistsInList<CodeableConcept>(t_);
-			var v_ = context?.Operators.And(p_, u_);
-			var w_ = Antithrombotic?.StatusElement;
-			var x_ = (w_ as object);
-			var y_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(x_);
-			var z_ = "active";
-			var aa_ = "completed";
+			var q_ = i_.WhereOrNull<CodeableConcept>(n_, o_);
+			var s_ = i_.ExistsInList<CodeableConcept>(q_);
+			var u_ = i_.And(l_, s_);
+			var v_ = Antithrombotic.StatusElement;
+			var w_ = new CallStackEntry("ToString", null, null);
+			var x_ = context.Deeper(w_);
+			var y_ = x_.Operators;
+			var z_ = y_.TypeConverter;
+			var aa_ = z_.Convert<string>(v_);
 			var ab_ = new string[]
 			{
-				z_,
-				aa_,
+				"active",
+				"completed",
 			};
 			var ac_ = (ab_ as IEnumerable<string>);
-			var ad_ = context?.Operators.InList<string>(y_, ac_);
-			var ae_ = context?.Operators.And(v_, ad_);
-			var af_ = Antithrombotic?.IntentElement;
-			var ag_ = (af_ as object);
-			var ah_ = (context.Deeper(new CallStackEntry("ToString", null, null))?.Operators?.TypeConverter).Convert<string>(ag_);
-			var ai_ = (ah_ as object);
-			var aj_ = context?.Operators.Equal(ai_, ("order" as object));
+			var ae_ = i_.InList<string>(aa_, ac_);
+			var ag_ = i_.And(u_, ae_);
+			var ah_ = Antithrombotic.IntentElement;
+			var aj_ = context.Deeper(w_);
+			var ak_ = aj_.Operators;
+			var al_ = ak_.TypeConverter;
+			var am_ = al_.Convert<string>(ah_);
+			var ao_ = i_.Equal(am_, "order");
+			var aq_ = i_.And(ag_, ao_);
 
-			return context?.Operators.And(ae_, aj_);
+			return aq_;
 		};
+		var e_ = context.Operators;
+		var f_ = e_.WhereOrNull<MedicationRequest>(c_, d_);
 
-		return context?.Operators.WhereOrNull<MedicationRequest>(al_, am_);
+		return f_;
 	}
 
     [CqlDeclaration("Antithrombotic Therapy at Discharge")]
@@ -501,51 +606,73 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private IEnumerable<Encounter> Numerator_Value()
 	{
-		var i_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
-		var j_ = (Encounter IschemicStrokeEncounter) =>
+		var a_ = TJCOverallFHIR_1_8_000.Ischemic_Stroke_Encounter();
+		var b_ = (Encounter IschemicStrokeEncounter) =>
 		{
 			var e_ = this.Antithrombotic_Therapy_at_Discharge();
 			var f_ = (MedicationRequest DischargeAntithrombotic) =>
 			{
-				var a_ = DischargeAntithrombotic?.AuthoredOnElement;
-				var b_ = FHIRHelpers_4_0_001.ToDateTime(a_);
-				var c_ = IschemicStrokeEncounter?.Period;
-				var d_ = FHIRHelpers_4_0_001.ToInterval(c_);
+				var l_ = DischargeAntithrombotic.AuthoredOnElement;
+				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
+				var n_ = IschemicStrokeEncounter.Period;
+				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
+				var p_ = context.Operators;
+				var q_ = p_.ElementInInterval<CqlDateTime>(m_, o_, null);
 
-				return context?.Operators.ElementInInterval<CqlDateTime>(b_, d_, null);
+				return q_;
 			};
-			var g_ = context?.Operators.WhereOrNull<MedicationRequest>(e_, f_);
-			var h_ = (MedicationRequest DischargeAntithrombotic) => IschemicStrokeEncounter;
+			var g_ = context.Operators;
+			var h_ = g_.WhereOrNull<MedicationRequest>(e_, f_);
+			var i_ = (MedicationRequest DischargeAntithrombotic) => IschemicStrokeEncounter;
+			var k_ = g_.SelectOrNull<MedicationRequest, Encounter>(h_, i_);
 
-			return context?.Operators.SelectOrNull<MedicationRequest, Encounter>(g_, h_);
+			return k_;
 		};
+		var c_ = context.Operators;
+		var d_ = c_.SelectManyOrNull<Encounter, Encounter>(a_, b_);
 
-		return context?.Operators.SelectManyOrNull<Encounter, Encounter>(i_, j_);
+		return d_;
 	}
 
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator() => __Numerator.Value;
 
-    private IEnumerable<Coding> SDE_Ethnicity_Value() =>
-		SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
+    private IEnumerable<Coding> SDE_Ethnicity_Value()
+	{
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
+
+		return a_;
+	}
 
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
 
-    private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value() =>
-		SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+    private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	{
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
+
+		return a_;
+	}
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
 
-    private IEnumerable<Coding> SDE_Race_Value() =>
-		SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
+    private IEnumerable<Coding> SDE_Race_Value()
+	{
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
+
+		return a_;
+	}
 
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
-    private CqlCode SDE_Sex_Value() =>
-		SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
+    private CqlCode SDE_Sex_Value()
+	{
+		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
+
+		return a_;
+	}
 
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;

@@ -42,8 +42,12 @@ public class VTEFHIR4_4_8_000
 
     #endregion
 
-    private CqlValueSet Intensive_Care_Unit_Value() =>
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
+    private CqlValueSet Intensive_Care_Unit_Value()
+	{
+		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
+
+		return a_;
+	}
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
@@ -51,15 +55,20 @@ public class VTEFHIR4_4_8_000
 
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = context?.Operators.ConvertIntegerToDecimal(default);
-		var b_ = context?.Operators.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, a_);
-		var c_ = context?.Operators.ConvertIntegerToDecimal(default);
-		var d_ = context?.Operators.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, c_);
-		var e_ = context?.Operators.Interval(b_, d_, true, false);
-		var f_ = (e_ as object);
-		var g_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", f_);
+		var a_ = (int?)2019;
+		var b_ = (int?)1;
+		var d_ = (int?)0;
+		var h_ = context.Operators;
+		var i_ = h_.ConvertIntegerToDecimal(default);
+		var k_ = h_.DateTime(a_, b_, b_, d_, d_, d_, d_, i_);
+		var l_ = (int?)2020;
+		var t_ = h_.ConvertIntegerToDecimal(default);
+		var v_ = h_.DateTime(l_, b_, b_, d_, d_, d_, d_, t_);
+		var x_ = h_.Interval(k_, v_, true, false);
+		var y_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", x_);
+		var z_ = (CqlInterval<CqlDateTime>)y_;
 
-		return (CqlInterval<CqlDateTime>)g_;
+		return z_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -67,9 +76,12 @@ public class VTEFHIR4_4_8_000
 
     private Patient Patient_Value()
 	{
-		var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, null);
+		var a_ = context.DataRetriever;
+		var b_ = a_.RetrieveByValueSet<Patient>(null, null);
+		var c_ = context.Operators;
+		var d_ = c_.SingleOrNull<Patient>(b_);
 
-		return context?.Operators.SingleOrNull<Patient>(a_);
+		return d_;
 	}
 
     [CqlDeclaration("Patient")]
@@ -78,38 +90,48 @@ public class VTEFHIR4_4_8_000
     [CqlDeclaration("FirstInpatientIntensiveCareUnit")]
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
 	{
-		var q_ = Encounter?.Location;
-		var r_ = (q_ as IEnumerable<Encounter.LocationComponent>);
-		var s_ = (Encounter.LocationComponent HospitalLocation) =>
+		var a_ = Encounter.Location;
+		var b_ = (a_ as IEnumerable<Encounter.LocationComponent>);
+		var c_ = (Encounter.LocationComponent HospitalLocation) =>
 		{
-			var a_ = HospitalLocation?.Location;
-			var b_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(a_);
-			var c_ = b_?.Type;
-			var d_ = (c_ as IEnumerable<CodeableConcept>);
-			var e_ = (CodeableConcept X) => FHIRHelpers_4_0_001.ToConcept(X);
-			var f_ = context?.Operators.SelectOrNull<CodeableConcept, CqlConcept>(d_, e_);
-			var g_ = this.Intensive_Care_Unit();
-			var h_ = context?.Operators.ConceptsInValueSet(f_, g_);
-			var i_ = Encounter?.Period;
-			var j_ = FHIRHelpers_4_0_001.ToInterval(i_);
-			var k_ = HospitalLocation?.Period;
-			var l_ = FHIRHelpers_4_0_001.ToInterval(k_);
-			var m_ = context?.Operators.IntervalIncludesInterval<CqlDateTime>(j_, l_, null);
+			var k_ = HospitalLocation.Location;
+			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(k_);
+			var m_ = l_.Type;
+			var n_ = (m_ as IEnumerable<CodeableConcept>);
+			var o_ = (CodeableConcept X) =>
+			{
+				var ac_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-			return context?.Operators.And(h_, m_);
+				return ac_;
+			};
+			var p_ = context.Operators;
+			var q_ = p_.SelectOrNull<CodeableConcept, CqlConcept>(n_, o_);
+			var r_ = this.Intensive_Care_Unit();
+			var t_ = p_.ConceptsInValueSet(q_, r_);
+			var u_ = Encounter.Period;
+			var v_ = FHIRHelpers_4_0_001.ToInterval(u_);
+			var w_ = HospitalLocation.Period;
+			var x_ = FHIRHelpers_4_0_001.ToInterval(w_);
+			var z_ = p_.IntervalIncludesInterval<CqlDateTime>(v_, x_, null);
+			var ab_ = p_.And(t_, z_);
+
+			return ab_;
 		};
-		var t_ = context?.Operators.WhereOrNull<Encounter.LocationComponent>(r_, s_);
-		var u_ = (Encounter.LocationComponent @this) =>
+		var d_ = context.Operators;
+		var e_ = d_.WhereOrNull<Encounter.LocationComponent>(b_, c_);
+		var f_ = (Encounter.LocationComponent @this) =>
 		{
-			var n_ = @this?.Period;
-			var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
-			var p_ = context?.Operators.Start(o_);
+			var ad_ = @this.Period;
+			var ae_ = FHIRHelpers_4_0_001.ToInterval(ad_);
+			var af_ = context.Operators;
+			var ag_ = af_.Start(ae_);
 
-			return p_;
+			return ag_;
 		};
-		var v_ = context?.Operators.ListSortBy<Encounter.LocationComponent>(t_, u_, System.ComponentModel.ListSortDirection.Ascending);
+		var h_ = d_.ListSortBy<Encounter.LocationComponent>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+		var j_ = d_.FirstOfList<Encounter.LocationComponent>(h_);
 
-		return context?.Operators.FirstOfList<Encounter.LocationComponent>(v_);
+		return j_;
 	}
 
 
@@ -117,8 +139,9 @@ public class VTEFHIR4_4_8_000
     public Period FirstICULocationPeriod(Encounter Encounter)
 	{
 		var a_ = this.FirstInpatientIntensiveCareUnit(Encounter);
+		var b_ = a_.Period;
 
-		return a_?.Period;
+		return b_;
 	}
 
 
@@ -127,20 +150,24 @@ public class VTEFHIR4_4_8_000
 	{
 		var a_ = this.FirstICULocationPeriod(Encounter);
 		var b_ = FHIRHelpers_4_0_001.ToInterval(a_);
+		var c_ = context.Operators;
+		var d_ = c_.Start(b_);
 
-		return context?.Operators.Start(b_);
+		return d_;
 	}
 
 
     [CqlDeclaration("CalendarDayOfOrDayAfter")]
     public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlDateTime StartValue)
 	{
-		var a_ = context?.Operators.DateFrom(StartValue);
-		var b_ = context?.Operators.DateFrom(StartValue);
-		var c_ = context?.Operators.Quantity(1m, "day");
-		var d_ = context?.Operators.Add(b_, c_);
+		var a_ = context.Operators;
+		var b_ = a_.DateFrom(StartValue);
+		var d_ = a_.DateFrom(StartValue);
+		var f_ = a_.Quantity(1m, "day");
+		var h_ = a_.Add(d_, f_);
+		var j_ = a_.Interval(b_, h_, true, true);
 
-		return context?.Operators.Interval(a_, d_, true, true);
+		return j_;
 	}
 
 
@@ -148,16 +175,18 @@ public class VTEFHIR4_4_8_000
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(Encounter Encounter)
 	{
 		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(Encounter);
-		var b_ = context?.Operators.Start(a_);
-		var c_ = context?.Operators.DateFrom(b_);
-		var d_ = Encounter?.Period;
-		var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
-		var f_ = context?.Operators.Start(e_);
-		var g_ = context?.Operators.DateFrom(f_);
-		var h_ = context?.Operators.Quantity(1m, "day");
-		var i_ = context?.Operators.Add(g_, h_);
+		var b_ = context.Operators;
+		var c_ = b_.Start(a_);
+		var e_ = b_.DateFrom(c_);
+		var f_ = Encounter.Period;
+		var g_ = FHIRHelpers_4_0_001.ToInterval(f_);
+		var i_ = b_.Start(g_);
+		var k_ = b_.DateFrom(i_);
+		var m_ = b_.Quantity(1m, "day");
+		var o_ = b_.Add(k_, m_);
+		var q_ = b_.Interval(e_, o_, true, true);
 
-		return context?.Operators.Interval(c_, i_, true, true);
+		return q_;
 	}
 
 
@@ -165,14 +194,16 @@ public class VTEFHIR4_4_8_000
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(Encounter Encounter)
 	{
 		var a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.HospitalizationWithObservation(Encounter);
-		var b_ = context?.Operators.Start(a_);
-		var c_ = context?.Operators.DateFrom(b_);
-		var d_ = this.StartOfFirstICU(Encounter);
-		var e_ = context?.Operators.DateFrom(d_);
-		var f_ = context?.Operators.Quantity(1m, "day");
-		var g_ = context?.Operators.Add(e_, f_);
+		var b_ = context.Operators;
+		var c_ = b_.Start(a_);
+		var e_ = b_.DateFrom(c_);
+		var f_ = this.StartOfFirstICU(Encounter);
+		var h_ = b_.DateFrom(f_);
+		var j_ = b_.Quantity(1m, "day");
+		var l_ = b_.Add(h_, j_);
+		var n_ = b_.Interval(e_, l_, true, true);
 
-		return context?.Operators.Interval(c_, g_, true, true);
+		return n_;
 	}
 
 

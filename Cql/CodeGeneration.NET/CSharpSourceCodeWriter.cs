@@ -387,9 +387,12 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var visitedBody = Transform(overload.Item2.Body,
                 invocationsTransformer,
-                new ExtractLetExpressionTransformer(),
                 new RedundantCastsTransformer(),
-                new LetExpressionVisitor(vng)
+                new SimplifyExpressionsVisitor(),
+                new RenameVariablesVisitor(vng),
+                new LocalVariableDeduper()
+
+            //new LetExpressionVisitor(vng)
             );
 
             if (isDefinition(overload))
@@ -488,7 +491,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return indentLevel;
         }
 
-        private Expression Transform(Expression body, params ExpressionVisitor[] visitors)
+        private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
         {
             foreach (var visitor in visitors)
             {
@@ -797,9 +800,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string convertMemberExpression(string leadingIndentString, MemberExpression me)
         {
-            var @object = me.Expression is not null ? ToCode(0, me.Expression) + "?" : PrettyTypeName(me.Member.DeclaringType!);
+            var nullProp = me.Expression is not null && Nullable.GetUnderlyingType(me.Expression.Type) != null ? "?" : "";
+            var @object = me.Expression is not null ? ToCode(0, me.Expression) : PrettyTypeName(me.Member.DeclaringType!);
             var memberName = escapeKeywords(me.Member.Name);
-            var nullCoalesce = $"{@object}.{memberName}";
+            var nullCoalesce = $"{@object}{nullProp}.{memberName}";
             return $"{leadingIndentString}{nullCoalesce}";
         }
 
@@ -819,9 +823,35 @@ namespace Hl7.Cql.CodeGeneration.NET
             return lambdaSb.ToString();
         }
 
+
+        // Linq.Expressions needs an explicit conversion from a value type
+        // type to object, but the C# compiler will insert that boxing,
+        // so we can remove those casts. 
+        internal static Expression StripBoxing(Expression node)
+        {
+            // (x as object) => x
+            // ((object)x) => x
+            if (node is UnaryExpression
+                {
+                    NodeType: ExpressionType.ConvertChecked or
+                            ExpressionType.Convert or
+                            ExpressionType.TypeAs
+                } cast &&
+                cast.Type == typeof(object) &&
+                cast.Operand.Type.IsValueType)
+            {
+                return StripBoxing(cast.Operand);
+            }
+            else
+            {
+                return node;
+            }
+        }
+
         private static string convertUnaryExpression(int indent, string leadingIndentString, UnaryExpression unary)
         {
-            var stripped = ExtractLetExpressionTransformer.StripBoxing(unary);
+            //var stripped = unary;
+            var stripped = StripBoxing(unary);
 
             if (stripped is not UnaryExpression strippedUnary)
                 return ToCode(indent, stripped, false);
@@ -1015,8 +1045,12 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static void writeConditionalStatementBlock(TextWriter writer, int indentLevel, Expression conditionalActionBlock)
         {
-            var visitor = new ExtractLetExpressionTransformer();
-            conditionalActionBlock = new LetExpressionVisitor(new VariableNameGenerator(postfix: "__")).Visit(visitor.Visit(conditionalActionBlock));
+            var vng = new VariableNameGenerator(postfix: "__");
+            conditionalActionBlock = Transform(conditionalActionBlock,
+                new SimplifyExpressionsVisitor(),
+                new RenameVariablesVisitor(vng),
+                new LocalVariableDeduper()
+                );
 
             if (conditionalActionBlock is BlockExpression)
             {
