@@ -54,7 +54,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Active Allergy")]
     public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
 	{
-		var a_ = (AllergyIntolerance A) =>
+		bool? a_(AllergyIntolerance A)
 		{
 			var d_ = A.ClinicalStatus;
 			var e_ = FHIRHelpers_4_0_001.ToConcept(d_);
@@ -75,7 +75,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Active Condition")]
     public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
 	{
-		var a_ = (Condition C) =>
+		bool? a_(Condition C)
 		{
 			var d_ = C.ClinicalStatus;
 			var e_ = FHIRHelpers_4_0_001.ToConcept(d_);
@@ -96,7 +96,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Finished Encounter")]
     public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
 	{
-		var a_ = (Encounter E) =>
+		bool? a_(Encounter E)
 		{
 			var d_ = E.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
@@ -119,7 +119,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Completed Immunization")]
     public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
 	{
-		var a_ = (Immunization I) =>
+		bool? a_(Immunization I)
 		{
 			var d_ = I.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
@@ -142,7 +142,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Dispensed Medication")]
     public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
 	{
-		var a_ = (MedicationDispense M) =>
+		bool? a_(MedicationDispense M)
 		{
 			var d_ = M.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
@@ -165,7 +165,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Active Medication")]
     public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
 	{
-		var a_ = (MedicationRequest M) =>
+		bool? a_(MedicationRequest M)
 		{
 			var d_ = M.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
@@ -177,11 +177,10 @@ public class NCQAStatus_1_0_0
 			{
 				"completed",
 			};
-			var k_ = (j_ as IEnumerable<string>);
-			var l_ = context.Operators;
-			var m_ = l_.InList<string>(i_, k_);
+			var k_ = context.Operators;
+			var l_ = k_.InList<string>(i_, (j_ as IEnumerable<string>));
 
-			return m_;
+			return l_;
 		};
 		var b_ = context.Operators;
 		var c_ = b_.WhereOrNull<MedicationRequest>(Med, a_);
@@ -193,7 +192,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Completed Procedure")]
     public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
 	{
-		var a_ = (Procedure P) =>
+		bool? a_(Procedure P)
 		{
 			var d_ = P.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
@@ -216,7 +215,7 @@ public class NCQAStatus_1_0_0
     [CqlDeclaration("Completed or Ongoing Procedure")]
     public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
 	{
-		var a_ = (Procedure P) =>
+		bool? a_(Procedure P)
 		{
 			var d_ = P.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
@@ -229,11 +228,10 @@ public class NCQAStatus_1_0_0
 				"completed",
 				"in-progress",
 			};
-			var k_ = (j_ as IEnumerable<string>);
-			var l_ = context.Operators;
-			var m_ = l_.InList<string>(i_, k_);
+			var k_ = context.Operators;
+			var l_ = k_.InList<string>(i_, (j_ as IEnumerable<string>));
 
-			return m_;
+			return l_;
 		};
 		var b_ = context.Operators;
 		var c_ = b_.WhereOrNull<Procedure>(Proc, a_);

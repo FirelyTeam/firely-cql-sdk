@@ -52,23 +52,15 @@ public class HospiceFHIR4_2_3_000
 
     #endregion
 
-    private CqlValueSet Encounter_Inpatient_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
-
-		return a_;
-	}
+    private CqlValueSet Encounter_Inpatient_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", null);
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient() => __Encounter_Inpatient.Value;
 
-    private CqlValueSet Hospice_care_ambulatory_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", null);
-
-		return a_;
-	}
+    private CqlValueSet Hospice_care_ambulatory_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", null);
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
@@ -113,9 +105,8 @@ public class HospiceFHIR4_2_3_000
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("HospiceFHIR4-2.3.000", "Measurement Period", null);
-		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return b_;
+		return (CqlInterval<CqlDateTime>)a_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -139,7 +130,7 @@ public class HospiceFHIR4_2_3_000
 		var a_ = this.Encounter_Inpatient();
 		var b_ = context.DataRetriever;
 		var c_ = b_.RetrieveByValueSet<Encounter>(a_, null);
-		var d_ = (Encounter DischargeHospice) =>
+		bool? d_(Encounter DischargeHospice)
 		{
 			var ac_ = DischargeHospice.StatusElement;
 			var ad_ = new CallStackEntry("ToString", null, null);
@@ -176,7 +167,7 @@ public class HospiceFHIR4_2_3_000
 		var h_ = e_.ExistsInList<Encounter>(f_);
 		var i_ = this.Hospice_care_ambulatory();
 		var k_ = b_.RetrieveByValueSet<ServiceRequest>(i_, null);
-		var l_ = (ServiceRequest HospiceOrder) =>
+		bool? l_(ServiceRequest HospiceOrder)
 		{
 			var bn_ = HospiceOrder.StatusElement;
 			var bo_ = new CallStackEntry("ToString", null, null);
@@ -189,45 +180,44 @@ public class HospiceFHIR4_2_3_000
 				"active",
 				"completed",
 			};
-			var bu_ = (bt_ as IEnumerable<string>);
-			var bv_ = context.Operators;
-			var bw_ = bv_.InList<string>(bs_, bu_);
-			var bx_ = HospiceOrder.IntentElement;
-			var bz_ = context.Deeper(bo_);
-			var ca_ = bz_.Operators;
-			var cb_ = ca_.TypeConverter;
-			var cc_ = cb_.Convert<string>(bx_);
-			var ce_ = bv_.Equal(cc_, "order");
-			var cg_ = bv_.And(bw_, ce_);
-			var ch_ = this.Measurement_Period();
-			var ci_ = HospiceOrder.AuthoredOnElement;
-			var cj_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ci_);
-			var cl_ = bv_.IntervalIncludesInterval<CqlDateTime>(ch_, cj_, null);
-			var cn_ = bv_.And(cg_, cl_);
+			var bu_ = context.Operators;
+			var bv_ = bu_.InList<string>(bs_, (bt_ as IEnumerable<string>));
+			var bw_ = HospiceOrder.IntentElement;
+			var by_ = context.Deeper(bo_);
+			var bz_ = by_.Operators;
+			var ca_ = bz_.TypeConverter;
+			var cb_ = ca_.Convert<string>(bw_);
+			var cd_ = bu_.Equal(cb_, "order");
+			var cf_ = bu_.And(bv_, cd_);
+			var cg_ = this.Measurement_Period();
+			var ch_ = HospiceOrder.AuthoredOnElement;
+			var ci_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ch_);
+			var ck_ = bu_.IntervalIncludesInterval<CqlDateTime>(cg_, ci_, null);
+			var cm_ = bu_.And(cf_, ck_);
 
-			return cn_;
+			return cm_;
 		};
 		var n_ = e_.WhereOrNull<ServiceRequest>(k_, l_);
 		var p_ = e_.ExistsInList<ServiceRequest>(n_);
 		var r_ = e_.Or(h_, p_);
 		var u_ = b_.RetrieveByValueSet<Procedure>(i_, null);
-		var v_ = (Procedure HospicePerformed) =>
+		bool? v_(Procedure HospicePerformed)
 		{
-			var co_ = HospicePerformed.StatusElement;
-			var cp_ = new CallStackEntry("ToString", null, null);
-			var cq_ = context.Deeper(cp_);
-			var cr_ = cq_.Operators;
-			var cs_ = cr_.TypeConverter;
-			var ct_ = cs_.Convert<string>(co_);
-			var cu_ = context.Operators;
-			var cv_ = cu_.Equal(ct_, "completed");
-			var cw_ = HospicePerformed.Performed;
-			var cx_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cw_);
-			var cy_ = this.Measurement_Period();
-			var da_ = cu_.Overlaps(cx_, cy_, null);
-			var dc_ = cu_.And(cv_, da_);
+			var cn_ = HospicePerformed.StatusElement;
+			var co_ = new CallStackEntry("ToString", null, null);
+			var cp_ = context.Deeper(co_);
+			var cq_ = cp_.Operators;
+			var cr_ = cq_.TypeConverter;
+			var cs_ = cr_.Convert<string>(cn_);
+			var ct_ = context.Operators;
+			var cu_ = ct_.Equal(cs_, "completed");
+			var cv_ = HospicePerformed.Performed;
+			var cw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cv_);
+			var cx_ = this.Measurement_Period();
+			var cz_ = ct_.Overlaps(cw_, cx_, null);
+			var db_ = ct_.And(cu_, cz_);
 
-			return dc_;
+			return db_;
 		};
 		var x_ = e_.WhereOrNull<Procedure>(u_, v_);
 		var z_ = e_.ExistsInList<Procedure>(x_);

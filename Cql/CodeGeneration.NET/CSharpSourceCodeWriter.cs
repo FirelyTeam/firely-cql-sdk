@@ -807,20 +807,40 @@ namespace Hl7.Cql.CodeGeneration.NET
             return $"{leadingIndentString}{nullCoalesce}";
         }
 
-        private static string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda)
+        private static string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda, bool functionMode = false)
         {
             var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {p.Name}"))})";
             var lambdaBody = ToCode(indent, lambda.Body, lambda.Body is BlockExpression);
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
             lambdaSb.Append(lambdaParameters);
+
             if (lambda.Body is BlockExpression)
-                lambdaSb.AppendLine(" =>");
+            {
+                if (!functionMode)
+                    lambdaSb.AppendLine(" =>");
+                else
+                    lambdaSb.AppendLine();
+            }
             else
                 lambdaSb.Append(" => ");
 
             lambdaSb.Append(lambdaBody);
             return lambdaSb.ToString();
+        }
+
+        private static string convertFunctionDefinition(int indent, string leadingIndentString, LambdaExpression function, string name)
+        {
+            var funcSb = new StringBuilder();
+
+            funcSb.Append(leadingIndentString);
+            funcSb.Append(PrettyTypeName(function.ReturnType) + " ");
+            funcSb.Append(name);
+
+            var lambda = convertLambdaExpression(indent, "", function, functionMode: true);
+            funcSb.Append(lambda);
+
+            return funcSb.ToString();
         }
 
 
@@ -887,8 +907,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (binary.NodeType == ExpressionType.Assign &&
                 binary.Left is ParameterExpression parameter)
             {
+                if (binary.Right is LambdaExpression le)
+                    return convertFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
+
                 string typeDeclaration = "var";
                 if (binary.Right is DefaultExpression ||
+                    binary.Right is ConditionalExpression ||
                    (binary.Right is ConstantExpression ce && ce.Value == null))
                 {
                     typeDeclaration = PrettyTypeName(binary.Left.Type);

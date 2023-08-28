@@ -92,144 +92,92 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
     #endregion
 
-    private CqlValueSet Acute_Inpatient_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", null);
-
-		return a_;
-	}
+    private CqlValueSet Acute_Inpatient_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", null);
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
     public CqlValueSet Acute_Inpatient() => __Acute_Inpatient.Value;
 
-    private CqlValueSet Advanced_Illness_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
-
-		return a_;
-	}
+    private CqlValueSet Advanced_Illness_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", null);
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
     public CqlValueSet Advanced_Illness() => __Advanced_Illness.Value;
 
-    private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
-
-		return a_;
-	}
+    private CqlValueSet Care_Services_in_Long_Term_Residential_Facility_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", null);
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
     public CqlValueSet Care_Services_in_Long_Term_Residential_Facility() => __Care_Services_in_Long_Term_Residential_Facility.Value;
 
-    private CqlValueSet Dementia_Medications_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", null);
-
-		return a_;
-	}
+    private CqlValueSet Dementia_Medications_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", null);
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
     public CqlValueSet Dementia_Medications() => __Dementia_Medications.Value;
 
-    private CqlValueSet Emergency_Department_Visit_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", null);
-
-		return a_;
-	}
+    private CqlValueSet Emergency_Department_Visit_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", null);
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010")]
     public CqlValueSet Emergency_Department_Visit() => __Emergency_Department_Visit.Value;
 
-    private CqlValueSet Frailty_Device_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Device_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", null);
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
     public CqlValueSet Frailty_Device() => __Frailty_Device.Value;
 
-    private CqlValueSet Frailty_Diagnosis_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Diagnosis_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", null);
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
     public CqlValueSet Frailty_Diagnosis() => __Frailty_Diagnosis.Value;
 
-    private CqlValueSet Frailty_Encounter_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Encounter_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", null);
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
     public CqlValueSet Frailty_Encounter() => __Frailty_Encounter.Value;
 
-    private CqlValueSet Frailty_Symptom_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Symptom_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", null);
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
     public CqlValueSet Frailty_Symptom() => __Frailty_Symptom.Value;
 
-    private CqlValueSet Nonacute_Inpatient_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084", null);
-
-		return a_;
-	}
+    private CqlValueSet Nonacute_Inpatient_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084", null);
 
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084")]
     public CqlValueSet Nonacute_Inpatient() => __Nonacute_Inpatient.Value;
 
-    private CqlValueSet Nursing_Facility_Visit_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
-
-		return a_;
-	}
+    private CqlValueSet Nursing_Facility_Visit_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", null);
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
     public CqlValueSet Nursing_Facility_Visit() => __Nursing_Facility_Visit.Value;
 
-    private CqlValueSet Observation_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", null);
-
-		return a_;
-	}
+    private CqlValueSet Observation_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", null);
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086")]
     public CqlValueSet Observation() => __Observation.Value;
 
-    private CqlValueSet Outpatient_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", null);
-
-		return a_;
-	}
+    private CqlValueSet Outpatient_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", null);
 
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087")]
@@ -238,9 +186,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("AdvancedIllnessandFrailtyExclusionECQMFHIR4-5.17.000", "Measurement Period", null);
-		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return b_;
+		return (CqlInterval<CqlDateTime>)a_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -267,7 +214,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var f_ = b_.RetrieveByValueSet<MedicationRequest>(a_, null);
 		var g_ = context.Operators;
 		var h_ = g_.ListUnion<MedicationRequest>(c_, f_);
-		var i_ = (MedicationRequest DementiaMed) =>
+		bool? i_(MedicationRequest DementiaMed)
 		{
 			var l_ = DementiaMed.StatusElement;
 			var m_ = new CallStackEntry("ToString", null, null);
@@ -313,7 +260,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var f_ = b_.RetrieveByValueSet<Encounter>(d_, null);
 		var g_ = context.Operators;
 		var h_ = g_.ListUnion<Encounter>(c_, f_);
-		var i_ = (Encounter LongTermFacilityEncounter) =>
+		bool? i_(Encounter LongTermFacilityEncounter)
 		{
 			var o_ = LongTermFacilityEncounter.StatusElement;
 			var p_ = new CallStackEntry("ToString", null, null);
@@ -332,7 +279,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			return ac_;
 		};
 		var k_ = g_.WhereOrNull<Encounter>(h_, i_);
-		var l_ = (Encounter LongTermFacilityEncounter) =>
+		CqlInterval<CqlDateTime> l_(Encounter LongTermFacilityEncounter)
 		{
 			var ad_ = LongTermFacilityEncounter.Period;
 			var ae_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ad_);
@@ -365,7 +312,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var n_ = b_.RetrieveByValueSet<Encounter>(l_, null);
 		var p_ = g_.ListUnion<Encounter>(k_, n_);
 		var r_ = g_.ListUnion<Encounter>(h_, p_);
-		var s_ = (Encounter Outpatient) =>
+		bool? s_(Encounter Outpatient)
 		{
 			var y_ = Outpatient.StatusElement;
 			var z_ = new CallStackEntry("ToString", null, null);
@@ -379,12 +326,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			return af_;
 		};
 		var u_ = g_.WhereOrNull<Encounter>(r_, s_);
-		var v_ = (Encounter OutpatientEncounter) =>
+		IEnumerable<Encounter> v_(Encounter OutpatientEncounter)
 		{
 			var ag_ = this.Advanced_Illness();
 			var ah_ = context.DataRetriever;
 			var ai_ = ah_.RetrieveByValueSet<Condition>(ag_, null);
-			var aj_ = (Condition AdvancedIllnessDiagnosis) =>
+			bool? aj_(Condition AdvancedIllnessDiagnosis)
 			{
 				var ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(OutpatientEncounter);
 				var aq_ = context.Operators;
@@ -401,16 +348,15 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				var bj_ = aq_.ElementInInterval<CqlDateTime>(av_, bh_, null);
 				var bm_ = aq_.End(aw_);
 				var bn_ = (bm_ == null);
-				var bo_ = (bool?)bn_;
-				var bq_ = aq_.Not(bo_);
-				var bs_ = aq_.And(bj_, bq_);
-				var bu_ = aq_.And(ar_, bs_);
+				var bp_ = aq_.Not((bool?)bn_);
+				var br_ = aq_.And(bj_, bp_);
+				var bt_ = aq_.And(ar_, br_);
 
-				return bu_;
+				return bt_;
 			};
 			var ak_ = context.Operators;
 			var al_ = ak_.WhereOrNull<Condition>(ai_, aj_);
-			var am_ = (Condition AdvancedIllnessDiagnosis) => OutpatientEncounter;
+			Encounter am_(Condition AdvancedIllnessDiagnosis) => OutpatientEncounter;
 			var ao_ = ak_.SelectOrNull<Condition, Encounter>(al_, am_);
 
 			return ao_;
@@ -426,13 +372,13 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private IEnumerable<Encounter> Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service_Value()
 	{
 		var a_ = this.Outpatient_Encounters_with_Advanced_Illness();
-		var b_ = (Encounter _OutpatientEncounter1) =>
+		IEnumerable<Encounter> b_(Encounter _OutpatientEncounter1)
 		{
 			var l_ = this.Outpatient_Encounters_with_Advanced_Illness();
 
 			return l_;
 		};
-		var c_ = (Encounter _OutpatientEncounter1, Encounter _OutpatientEncounter2) =>
+		Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe c_(Encounter _OutpatientEncounter1, Encounter _OutpatientEncounter2)
 		{
 			var m_ = new Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe
 			{
@@ -444,7 +390,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		};
 		var d_ = context.Operators;
 		var e_ = d_.SelectManyResultsOrNull<Encounter, Encounter, Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(a_, b_, c_);
-		var f_ = (Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) =>
+		bool? f_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var n_ = tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter2;
 			var o_ = n_.Period;
@@ -462,7 +408,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			return ac_;
 		};
 		var h_ = d_.WhereOrNull<Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe>(e_, f_);
-		var i_ = (Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe) =>
+		Encounter i_(Tuples.Tuple_EYKUVMTUWTABihhEAdHIGbSFe tuple_eykuvmtuwtabihheadhigbsfe)
 		{
 			var ad_ = tuple_eykuvmtuwtabihheadhigbsfe.OutpatientEncounter1;
 
@@ -491,13 +437,13 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Adjacent_Periods_Value()
 	{
 		var a_ = this.Long_Term_Care_Overlapping_Periods();
-		var b_ = (CqlInterval<CqlDateTime> _LTCPeriod1) =>
+		IEnumerable<CqlInterval<CqlDateTime>> b_(CqlInterval<CqlDateTime> _LTCPeriod1)
 		{
 			var l_ = this.Long_Term_Care_Overlapping_Periods();
 
 			return l_;
 		};
-		var c_ = (CqlInterval<CqlDateTime> _LTCPeriod1, CqlInterval<CqlDateTime> _LTCPeriod2) =>
+		Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK c_(CqlInterval<CqlDateTime> _LTCPeriod1, CqlInterval<CqlDateTime> _LTCPeriod2)
 		{
 			var m_ = new Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK
 			{
@@ -509,7 +455,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		};
 		var d_ = context.Operators;
 		var e_ = d_.SelectManyResultsOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>, Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(a_, b_, c_);
-		var f_ = (Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk) =>
+		bool? f_(Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
 		{
 			var n_ = tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1;
 			var o_ = context.Operators;
@@ -525,23 +471,22 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			var ah_ = o_.ElementInInterval<CqlDateTime>(p_, af_, null);
 			var ak_ = o_.Start(q_);
 			var al_ = (ak_ == null);
-			var am_ = (bool?)al_;
-			var ao_ = o_.Not(am_);
-			var aq_ = o_.And(ah_, ao_);
+			var an_ = o_.Not((bool?)al_);
+			var ap_ = o_.And(ah_, an_);
 
-			return aq_;
+			return ap_;
 		};
 		var h_ = d_.WhereOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK>(e_, f_);
-		var i_ = (Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk) =>
+		CqlInterval<CqlDateTime> i_(Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK tuple_iwagvxgpwivbawdahpgivvbk)
 		{
-			var ar_ = tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1;
-			var as_ = context.Operators;
-			var at_ = as_.Start(ar_);
-			var au_ = tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod2;
-			var aw_ = as_.End(au_);
-			var ay_ = as_.Interval(at_, aw_, true, true);
+			var aq_ = tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod1;
+			var ar_ = context.Operators;
+			var as_ = ar_.Start(aq_);
+			var at_ = tuple_iwagvxgpwivbawdahpgivvbk.LTCPeriod2;
+			var av_ = ar_.End(at_);
+			var ax_ = ar_.Interval(as_, av_, true, true);
 
-			return ay_;
+			return ax_;
 		};
 		var k_ = d_.SelectOrNull<Tuples.Tuple_IWAGVXGPWIVBAWDaHPGIVVBK, CqlInterval<CqlDateTime>>(h_, i_);
 
@@ -558,7 +503,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var c_ = context.Operators;
 		var d_ = c_.ListUnion<CqlInterval<CqlDateTime>>(a_, b_);
 		var f_ = c_.Collapse(d_, null);
-		var g_ = (CqlInterval<CqlDateTime> LTCPeriods) =>
+		int? g_(CqlInterval<CqlDateTime> LTCPeriods)
 		{
 			var l_ = context.Operators;
 			var m_ = l_.Start(LTCPeriods);
@@ -581,7 +526,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var a_ = this.Acute_Inpatient();
 		var b_ = context.DataRetriever;
 		var c_ = b_.RetrieveByValueSet<Encounter>(a_, null);
-		var d_ = (Encounter AcuteInpatient) =>
+		bool? d_(Encounter AcuteInpatient)
 		{
 			var j_ = AcuteInpatient.StatusElement;
 			var k_ = new CallStackEntry("ToString", null, null);
@@ -596,12 +541,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<Encounter>(c_, d_);
-		var g_ = (Encounter InpatientEncounter) =>
+		IEnumerable<Encounter> g_(Encounter InpatientEncounter)
 		{
 			var r_ = this.Advanced_Illness();
 			var s_ = context.DataRetriever;
 			var t_ = s_.RetrieveByValueSet<Condition>(r_, null);
-			var u_ = (Condition AdvancedIllnessDiagnosis) =>
+			bool? u_(Condition AdvancedIllnessDiagnosis)
 			{
 				var aa_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(InpatientEncounter);
 				var ab_ = context.Operators;
@@ -618,16 +563,15 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				var au_ = ab_.ElementInInterval<CqlDateTime>(ag_, as_, null);
 				var ax_ = ab_.End(ah_);
 				var ay_ = (ax_ == null);
-				var az_ = (bool?)ay_;
-				var bb_ = ab_.Not(az_);
-				var bd_ = ab_.And(au_, bb_);
-				var bf_ = ab_.And(ac_, bd_);
+				var ba_ = ab_.Not((bool?)ay_);
+				var bc_ = ab_.And(au_, ba_);
+				var be_ = ab_.And(ac_, bc_);
 
-				return bf_;
+				return be_;
 			};
 			var v_ = context.Operators;
 			var w_ = v_.WhereOrNull<Condition>(t_, u_);
-			var x_ = (Condition AdvancedIllnessDiagnosis) => InpatientEncounter;
+			Encounter x_(Condition AdvancedIllnessDiagnosis) => InpatientEncounter;
 			var z_ = v_.SelectOrNull<Condition, Encounter>(w_, x_);
 
 			return z_;
@@ -648,7 +592,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var f_ = b_.RetrieveByValueSet<DeviceRequest>(a_, null);
 		var g_ = context.Operators;
 		var h_ = g_.ListUnion<DeviceRequest>(c_, f_);
-		var i_ = (DeviceRequest FrailtyDeviceOrder) =>
+		bool? i_(DeviceRequest FrailtyDeviceOrder)
 		{
 			var bb_ = FrailtyDeviceOrder.StatusElement;
 			var bc_ = new CallStackEntry("ToString", null, null);
@@ -662,119 +606,116 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 				"on-hold",
 				"completed",
 			};
-			var bi_ = (bh_ as IEnumerable<string>);
-			var bj_ = context.Operators;
-			var bk_ = bj_.InList<string>(bg_, bi_);
-			var bl_ = FrailtyDeviceOrder.IntentElement;
-			var bn_ = context.Deeper(bc_);
-			var bo_ = bn_.Operators;
-			var bp_ = bo_.TypeConverter;
-			var bq_ = bp_.Convert<string>(bl_);
-			var bs_ = bj_.Equal(bq_, "order");
-			var bu_ = bj_.And(bk_, bs_);
-			var bv_ = this.Measurement_Period();
-			var bw_ = FrailtyDeviceOrder.AuthoredOnElement;
-			var bx_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bw_);
-			var bz_ = bj_.IntervalIncludesInterval<CqlDateTime>(bv_, bx_, null);
-			var cb_ = bj_.And(bu_, bz_);
+			var bi_ = context.Operators;
+			var bj_ = bi_.InList<string>(bg_, (bh_ as IEnumerable<string>));
+			var bk_ = FrailtyDeviceOrder.IntentElement;
+			var bm_ = context.Deeper(bc_);
+			var bn_ = bm_.Operators;
+			var bo_ = bn_.TypeConverter;
+			var bp_ = bo_.Convert<string>(bk_);
+			var br_ = bi_.Equal(bp_, "order");
+			var bt_ = bi_.And(bj_, br_);
+			var bu_ = this.Measurement_Period();
+			var bv_ = FrailtyDeviceOrder.AuthoredOnElement;
+			var bw_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bv_);
+			var by_ = bi_.IntervalIncludesInterval<CqlDateTime>(bu_, bw_, null);
+			var ca_ = bi_.And(bt_, by_);
 
-			return cb_;
+			return ca_;
 		};
 		var k_ = g_.WhereOrNull<DeviceRequest>(h_, i_);
 		var m_ = g_.ExistsInList<DeviceRequest>(k_);
 		var p_ = b_.RetrieveByValueSet<Observation>(a_, null);
-		var q_ = (Observation FrailtyDeviceApplied) =>
+		bool? q_(Observation FrailtyDeviceApplied)
 		{
-			var cc_ = FrailtyDeviceApplied.StatusElement;
-			var cd_ = new CallStackEntry("ToString", null, null);
-			var ce_ = context.Deeper(cd_);
-			var cf_ = ce_.Operators;
-			var cg_ = cf_.TypeConverter;
-			var ch_ = cg_.Convert<string>(cc_);
-			var ci_ = new string[]
+			var cb_ = FrailtyDeviceApplied.StatusElement;
+			var cc_ = new CallStackEntry("ToString", null, null);
+			var cd_ = context.Deeper(cc_);
+			var ce_ = cd_.Operators;
+			var cf_ = ce_.TypeConverter;
+			var cg_ = cf_.Convert<string>(cb_);
+			var ch_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 			};
-			var cj_ = (ci_ as IEnumerable<string>);
-			var ck_ = context.Operators;
-			var cl_ = ck_.InList<string>(ch_, cj_);
-			var cm_ = FrailtyDeviceApplied.Effective;
-			var cn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(cm_);
-			var co_ = this.Measurement_Period();
-			var cq_ = ck_.Overlaps(cn_, co_, null);
-			var cs_ = ck_.And(cl_, cq_);
+			var ci_ = context.Operators;
+			var cj_ = ci_.InList<string>(cg_, (ch_ as IEnumerable<string>));
+			var ck_ = FrailtyDeviceApplied.Effective;
+			var cl_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ck_);
+			var cm_ = this.Measurement_Period();
+			var co_ = ci_.Overlaps(cl_, cm_, null);
+			var cq_ = ci_.And(cj_, co_);
 
-			return cs_;
+			return cq_;
 		};
 		var s_ = g_.WhereOrNull<Observation>(p_, q_);
 		var u_ = g_.ExistsInList<Observation>(s_);
 		var w_ = g_.Or(m_, u_);
 		var x_ = this.Frailty_Diagnosis();
 		var z_ = b_.RetrieveByValueSet<Condition>(x_, null);
-		var aa_ = (Condition FrailtyDiagnosis) =>
+		bool? aa_(Condition FrailtyDiagnosis)
 		{
-			var ct_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(FrailtyDiagnosis);
-			var cu_ = this.Measurement_Period();
-			var cv_ = context.Operators;
-			var cw_ = cv_.Overlaps(ct_, cu_, null);
+			var cr_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(FrailtyDiagnosis);
+			var cs_ = this.Measurement_Period();
+			var ct_ = context.Operators;
+			var cu_ = ct_.Overlaps(cr_, cs_, null);
 
-			return cw_;
+			return cu_;
 		};
 		var ac_ = g_.WhereOrNull<Condition>(z_, aa_);
 		var ae_ = g_.ExistsInList<Condition>(ac_);
 		var ag_ = g_.Or(w_, ae_);
 		var ah_ = this.Frailty_Encounter();
 		var aj_ = b_.RetrieveByValueSet<Encounter>(ah_, null);
-		var ak_ = (Encounter FrailtyEncounter) =>
+		bool? ak_(Encounter FrailtyEncounter)
 		{
-			var cx_ = FrailtyEncounter.StatusElement;
-			var cy_ = new CallStackEntry("ToString", null, null);
-			var cz_ = context.Deeper(cy_);
-			var da_ = cz_.Operators;
-			var db_ = da_.TypeConverter;
-			var dc_ = db_.Convert<string>(cx_);
-			var dd_ = context.Operators;
-			var de_ = dd_.Equal(dc_, "finished");
-			var df_ = FrailtyEncounter.Period;
-			var dg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(df_);
-			var dh_ = this.Measurement_Period();
-			var dj_ = dd_.Overlaps(dg_, dh_, null);
-			var dl_ = dd_.And(de_, dj_);
+			var cv_ = FrailtyEncounter.StatusElement;
+			var cw_ = new CallStackEntry("ToString", null, null);
+			var cx_ = context.Deeper(cw_);
+			var cy_ = cx_.Operators;
+			var cz_ = cy_.TypeConverter;
+			var da_ = cz_.Convert<string>(cv_);
+			var db_ = context.Operators;
+			var dc_ = db_.Equal(da_, "finished");
+			var dd_ = FrailtyEncounter.Period;
+			var de_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(dd_);
+			var df_ = this.Measurement_Period();
+			var dh_ = db_.Overlaps(de_, df_, null);
+			var dj_ = db_.And(dc_, dh_);
 
-			return dl_;
+			return dj_;
 		};
 		var am_ = g_.WhereOrNull<Encounter>(aj_, ak_);
 		var ao_ = g_.ExistsInList<Encounter>(am_);
 		var aq_ = g_.Or(ag_, ao_);
 		var ar_ = this.Frailty_Symptom();
 		var at_ = b_.RetrieveByValueSet<Observation>(ar_, null);
-		var au_ = (Observation FrailtySymptom) =>
+		bool? au_(Observation FrailtySymptom)
 		{
-			var dm_ = FrailtySymptom.StatusElement;
-			var dn_ = new CallStackEntry("ToString", null, null);
-			var do_ = context.Deeper(dn_);
-			var dp_ = do_.Operators;
-			var dq_ = dp_.TypeConverter;
-			var dr_ = dq_.Convert<string>(dm_);
-			var ds_ = new string[]
+			var dk_ = FrailtySymptom.StatusElement;
+			var dl_ = new CallStackEntry("ToString", null, null);
+			var dm_ = context.Deeper(dl_);
+			var dn_ = dm_.Operators;
+			var do_ = dn_.TypeConverter;
+			var dp_ = do_.Convert<string>(dk_);
+			var dq_ = new string[]
 			{
 				"preliminary",
 				"final",
 				"amended",
 				"corrected",
 			};
-			var dt_ = (ds_ as IEnumerable<string>);
-			var du_ = context.Operators;
-			var dv_ = du_.InList<string>(dr_, dt_);
-			var dw_ = FrailtySymptom.Effective;
-			var dx_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(dw_);
-			var dy_ = this.Measurement_Period();
-			var ea_ = du_.Overlaps(dx_, dy_, null);
-			var ec_ = du_.And(dv_, ea_);
+			var dr_ = context.Operators;
+			var ds_ = dr_.InList<string>(dp_, (dq_ as IEnumerable<string>));
+			var dt_ = FrailtySymptom.Effective;
+			var du_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(dt_);
+			var dv_ = this.Measurement_Period();
+			var dx_ = dr_.Overlaps(du_, dv_, null);
+			var dz_ = dr_.And(ds_, dx_);
 
-			return ec_;
+			return dz_;
 		};
 		var aw_ = g_.WhereOrNull<Observation>(at_, au_);
 		var ay_ = g_.ExistsInList<Observation>(aw_);
@@ -798,36 +739,31 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var i_ = d_.Start(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var n_ = (int?)65;
-		var o_ = (int?)79;
-		var q_ = d_.Interval(n_, o_, true, true);
-		var s_ = d_.ElementInInterval<int?>(m_, q_, null);
-		var t_ = this.Has_Criteria_Indicating_Frailty();
-		var v_ = d_.And(s_, t_);
-		var w_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
-		var y_ = d_.ExistsInList<Encounter>(w_);
-		var z_ = this.Inpatient_Encounter_with_Advanced_Illness();
-		var ab_ = d_.ExistsInList<Encounter>(z_);
-		var ad_ = d_.Or(y_, ab_);
-		var ae_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		var ag_ = d_.ExistsInList<MedicationRequest>(ae_);
-		var ai_ = d_.Or(ad_, ag_);
-		var ak_ = d_.And(v_, ai_);
-		var am_ = a_.BirthDateElement;
-		var an_ = am_.Value;
-		var ap_ = d_.TypeConverter;
-		var aq_ = ap_.Convert<CqlDate>(an_);
-		var at_ = d_.Start(g_);
-		var av_ = d_.DateFrom(at_);
-		var ax_ = d_.CalculateAgeAt(aq_, av_, "year");
-		var ay_ = ax_;
-		var az_ = (int?)80;
-		var ba_ = az_;
-		var bc_ = d_.GreaterOrEqual(ay_, ba_);
-		var bf_ = d_.And(bc_, t_);
-		var bh_ = d_.Or(ak_, bf_);
+		var o_ = d_.Interval((int?)65, (int?)79, true, true);
+		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
+		var r_ = this.Has_Criteria_Indicating_Frailty();
+		var t_ = d_.And(q_, r_);
+		var u_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var w_ = d_.ExistsInList<Encounter>(u_);
+		var x_ = this.Inpatient_Encounter_with_Advanced_Illness();
+		var z_ = d_.ExistsInList<Encounter>(x_);
+		var ab_ = d_.Or(w_, z_);
+		var ac_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
+		var ae_ = d_.ExistsInList<MedicationRequest>(ac_);
+		var ag_ = d_.Or(ab_, ae_);
+		var ai_ = d_.And(t_, ag_);
+		var ak_ = a_.BirthDateElement;
+		var al_ = ak_.Value;
+		var an_ = d_.TypeConverter;
+		var ao_ = an_.Convert<CqlDate>(al_);
+		var ar_ = d_.Start(g_);
+		var at_ = d_.DateFrom(ar_);
+		var av_ = d_.CalculateAgeAt(ao_, at_, "year");
+		var ax_ = d_.GreaterOrEqual(av_, (int?)80);
+		var ba_ = d_.And(ax_, r_);
+		var bc_ = d_.Or(ai_, ba_);
 
-		return bh_;
+		return bc_;
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
@@ -845,23 +781,20 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var i_ = d_.Start(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var n_ = m_;
-		var o_ = (int?)65;
-		var p_ = o_;
-		var r_ = d_.GreaterOrEqual(n_, p_);
-		var s_ = this.Has_Criteria_Indicating_Frailty();
-		var u_ = d_.And(r_, s_);
-		var v_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var o_ = d_.GreaterOrEqual(m_, (int?)65);
+		var p_ = this.Has_Criteria_Indicating_Frailty();
+		var r_ = d_.And(o_, p_);
+		var s_ = this.Two_Outpatient_Encounters_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var u_ = d_.ExistsInList<Encounter>(s_);
+		var v_ = this.Inpatient_Encounter_with_Advanced_Illness();
 		var x_ = d_.ExistsInList<Encounter>(v_);
-		var y_ = this.Inpatient_Encounter_with_Advanced_Illness();
-		var aa_ = d_.ExistsInList<Encounter>(y_);
-		var ac_ = d_.Or(x_, aa_);
-		var ad_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		var af_ = d_.ExistsInList<MedicationRequest>(ad_);
-		var ah_ = d_.Or(ac_, af_);
-		var aj_ = d_.And(u_, ah_);
+		var z_ = d_.Or(u_, x_);
+		var aa_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
+		var ac_ = d_.ExistsInList<MedicationRequest>(aa_);
+		var ae_ = d_.Or(z_, ac_);
+		var ag_ = d_.And(r_, ae_);
 
-		return aj_;
+		return ag_;
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
@@ -870,13 +803,10 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days_Value()
 	{
 		var a_ = this.Max_Long_Term_Care_Period_Length();
-		var b_ = a_;
-		var c_ = (int?)90;
-		var d_ = c_;
-		var e_ = context.Operators;
-		var f_ = e_.Greater(b_, d_);
+		var b_ = context.Operators;
+		var c_ = b_.Greater(a_, (int?)90);
 
-		return f_;
+		return c_;
 	}
 
     [CqlDeclaration("Has Long Term Care Periods Longer Than 90 Consecutive Days")]

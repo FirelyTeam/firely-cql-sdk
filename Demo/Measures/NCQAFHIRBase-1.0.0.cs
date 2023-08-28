@@ -54,13 +54,11 @@ public class NCQAFHIRBase_1_0_0
     {
         if (((onset is FhirDateTime as bool?) ?? false))
 		{
-			var a__ = (onset as FhirDateTime);
-			var b__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var d__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var e__ = context.Operators;
-			var f__ = e__.Interval(b__, d__, true, true);
+			var a__ = FHIRHelpers_4_0_001.ToDateTime((onset as FhirDateTime));
+			var c__ = context.Operators;
+			var d__ = c__.Interval(a__, a__, true, true);
 
-			return f__;
+			return d__;
 		}
         else if (((onset is Period as bool?) ?? false))
 		{
@@ -78,11 +76,10 @@ public class NCQAFHIRBase_1_0_0
         else if (((onset is FhirString as bool?) ?? false))
 		{
 			CqlInterval<CqlDateTime> a__ = null;
-			var b__ = (a__ as CqlInterval<CqlDateTime>);
-			var c__ = context.Operators;
-			var d__ = c__.Message<CqlInterval<CqlDateTime>>(b__, "1", "Error", "Cannot compute an interval from a String value");
+			var b__ = context.Operators;
+			var c__ = b__.Message<CqlInterval<CqlDateTime>>((a__ as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
 
-			return d__;
+			return c__;
 		}
         else
 		{
@@ -129,13 +126,11 @@ public class NCQAFHIRBase_1_0_0
     {
         if (((abatement is FhirDateTime as bool?) ?? false))
 		{
-			var a__ = (abatement as FhirDateTime);
-			var b__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var d__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var e__ = context.Operators;
-			var f__ = e__.Interval(b__, d__, true, true);
+			var a__ = FHIRHelpers_4_0_001.ToDateTime((abatement as FhirDateTime));
+			var c__ = context.Operators;
+			var d__ = c__.Interval(a__, a__, true, true);
 
-			return f__;
+			return d__;
 		}
         else if (((abatement is Period as bool?) ?? false))
 		{
@@ -153,11 +148,10 @@ public class NCQAFHIRBase_1_0_0
         else if (((abatement is FhirString as bool?) ?? false))
 		{
 			CqlInterval<CqlDateTime> a__ = null;
-			var b__ = (a__ as CqlInterval<CqlDateTime>);
-			var c__ = context.Operators;
-			var d__ = c__.Message<CqlInterval<CqlDateTime>>(b__, "1", "Error", "Cannot compute an interval from a String value");
+			var b__ = context.Operators;
+			var c__ = b__.Message<CqlInterval<CqlDateTime>>((a__ as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
 
-			return d__;
+			return c__;
 		}
         else
 		{
@@ -220,25 +214,21 @@ public class NCQAFHIRBase_1_0_0
     {
         if (((choice is FhirDateTime as bool?) ?? false))
 		{
-			var a__ = (choice as FhirDateTime);
-			var b__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var d__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var e__ = context.Operators;
-			var f__ = e__.Interval(b__, d__, true, true);
+			var a__ = FHIRHelpers_4_0_001.ToDateTime((choice as FhirDateTime));
+			var c__ = context.Operators;
+			var d__ = c__.Interval(a__, a__, true, true);
 
-			return f__;
+			return d__;
 		}
         else if (((choice is Date as bool?) ?? false))
 		{
-			var a__ = (choice as Date);
-			var b__ = FHIRHelpers_4_0_001.ToDate(a__);
-			var c__ = context.Operators;
-			var d__ = c__.ConvertDateToDateTime(b__);
-			var f__ = FHIRHelpers_4_0_001.ToDate(a__);
-			var h__ = c__.ConvertDateToDateTime(f__);
-			var j__ = c__.Interval(d__, h__, true, true);
+			var a__ = FHIRHelpers_4_0_001.ToDate((choice as Date));
+			var b__ = context.Operators;
+			var c__ = b__.ConvertDateToDateTime(a__);
+			var f__ = b__.ConvertDateToDateTime(a__);
+			var h__ = b__.Interval(c__, f__, true, true);
 
-			return j__;
+			return h__;
 		}
         else if (((choice is Period as bool?) ?? false))
 		{
@@ -255,172 +245,144 @@ public class NCQAFHIRBase_1_0_0
 		}
         else if (((choice is Instant as bool?) ?? false))
 		{
-			var a__ = (choice as Instant);
-			var b__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var d__ = FHIRHelpers_4_0_001.ToDateTime(a__);
-			var e__ = context.Operators;
-			var f__ = e__.Interval(b__, d__, true, true);
+			var a__ = FHIRHelpers_4_0_001.ToDateTime((choice as Instant));
+			var c__ = context.Operators;
+			var d__ = c__.Interval(a__, a__, true, true);
 
-			return f__;
+			return d__;
 		}
         else if (((choice is Age as bool?) ?? false))
 		{
 			var a__ = this.Patient();
 			var b__ = a__.BirthDateElement;
 			var c__ = FHIRHelpers_4_0_001.ToDate(b__);
-			var d__ = (choice as Age);
-			var e__ = (Quantity)d__;
-			var f__ = FHIRHelpers_4_0_001.ToQuantity(e__);
-			var g__ = context.Operators;
-			var h__ = g__.Add(c__, f__);
-			var j__ = a__.BirthDateElement;
-			var k__ = FHIRHelpers_4_0_001.ToDate(j__);
-			var m__ = (Quantity)d__;
-			var n__ = FHIRHelpers_4_0_001.ToQuantity(m__);
-			var p__ = g__.Add(k__, n__);
-			var r__ = g__.Quantity(1m, "year");
-			var t__ = g__.Add(p__, r__);
-			var v__ = g__.Interval(h__, t__, true, false);
-			var w__ = v__.low;
-			var y__ = g__.ConvertDateToDateTime(w__);
-			var aa__ = a__.BirthDateElement;
-			var ab__ = FHIRHelpers_4_0_001.ToDate(aa__);
-			var ad__ = (Quantity)d__;
-			var ae__ = FHIRHelpers_4_0_001.ToQuantity(ad__);
-			var ag__ = g__.Add(ab__, ae__);
-			var ai__ = a__.BirthDateElement;
-			var aj__ = FHIRHelpers_4_0_001.ToDate(ai__);
-			var al__ = (Quantity)d__;
-			var am__ = FHIRHelpers_4_0_001.ToQuantity(al__);
-			var ao__ = g__.Add(aj__, am__);
-			var aq__ = g__.Quantity(1m, "year");
-			var as__ = g__.Add(ao__, aq__);
-			var au__ = g__.Interval(ag__, as__, true, false);
-			var av__ = au__.high;
-			var ax__ = g__.ConvertDateToDateTime(av__);
-			var az__ = a__.BirthDateElement;
-			var ba__ = FHIRHelpers_4_0_001.ToDate(az__);
-			var bc__ = (Quantity)d__;
-			var bd__ = FHIRHelpers_4_0_001.ToQuantity(bc__);
-			var bf__ = g__.Add(ba__, bd__);
-			var bh__ = a__.BirthDateElement;
-			var bi__ = FHIRHelpers_4_0_001.ToDate(bh__);
-			var bk__ = (Quantity)d__;
-			var bl__ = FHIRHelpers_4_0_001.ToQuantity(bk__);
-			var bn__ = g__.Add(bi__, bl__);
-			var bp__ = g__.Quantity(1m, "year");
-			var br__ = g__.Add(bn__, bp__);
-			var bt__ = g__.Interval(bf__, br__, true, false);
-			var bu__ = bt__.lowClosed;
-			var bw__ = a__.BirthDateElement;
-			var bx__ = FHIRHelpers_4_0_001.ToDate(bw__);
-			var bz__ = (Quantity)d__;
-			var ca__ = FHIRHelpers_4_0_001.ToQuantity(bz__);
-			var cc__ = g__.Add(bx__, ca__);
-			var ce__ = a__.BirthDateElement;
-			var cf__ = FHIRHelpers_4_0_001.ToDate(ce__);
-			var ch__ = (Quantity)d__;
-			var ci__ = FHIRHelpers_4_0_001.ToQuantity(ch__);
-			var ck__ = g__.Add(cf__, ci__);
-			var cm__ = g__.Quantity(1m, "year");
-			var co__ = g__.Add(ck__, cm__);
-			var cq__ = g__.Interval(cc__, co__, true, false);
-			var cr__ = cq__.highClosed;
-			var ct__ = g__.Interval(y__, ax__, bu__, cr__);
+			var d__ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(choice as Age));
+			var e__ = context.Operators;
+			var f__ = e__.Add(c__, d__);
+			var h__ = a__.BirthDateElement;
+			var i__ = FHIRHelpers_4_0_001.ToDate(h__);
+			var l__ = e__.Add(i__, d__);
+			var n__ = e__.Quantity(1m, "year");
+			var p__ = e__.Add(l__, n__);
+			var r__ = e__.Interval(f__, p__, true, false);
+			var s__ = r__.low;
+			var u__ = e__.ConvertDateToDateTime(s__);
+			var w__ = a__.BirthDateElement;
+			var x__ = FHIRHelpers_4_0_001.ToDate(w__);
+			var aa__ = e__.Add(x__, d__);
+			var ac__ = a__.BirthDateElement;
+			var ad__ = FHIRHelpers_4_0_001.ToDate(ac__);
+			var ag__ = e__.Add(ad__, d__);
+			var ai__ = e__.Quantity(1m, "year");
+			var ak__ = e__.Add(ag__, ai__);
+			var am__ = e__.Interval(aa__, ak__, true, false);
+			var an__ = am__.high;
+			var ap__ = e__.ConvertDateToDateTime(an__);
+			var ar__ = a__.BirthDateElement;
+			var as__ = FHIRHelpers_4_0_001.ToDate(ar__);
+			var av__ = e__.Add(as__, d__);
+			var ax__ = a__.BirthDateElement;
+			var ay__ = FHIRHelpers_4_0_001.ToDate(ax__);
+			var bb__ = e__.Add(ay__, d__);
+			var bd__ = e__.Quantity(1m, "year");
+			var bf__ = e__.Add(bb__, bd__);
+			var bh__ = e__.Interval(av__, bf__, true, false);
+			var bi__ = bh__.lowClosed;
+			var bk__ = a__.BirthDateElement;
+			var bl__ = FHIRHelpers_4_0_001.ToDate(bk__);
+			var bo__ = e__.Add(bl__, d__);
+			var bq__ = a__.BirthDateElement;
+			var br__ = FHIRHelpers_4_0_001.ToDate(bq__);
+			var bu__ = e__.Add(br__, d__);
+			var bw__ = e__.Quantity(1m, "year");
+			var by__ = e__.Add(bu__, bw__);
+			var ca__ = e__.Interval(bo__, by__, true, false);
+			var cb__ = ca__.highClosed;
+			var cd__ = e__.Interval(u__, ap__, bi__, cb__);
 
-			return ct__;
+			return cd__;
 		}
         else if (((choice is Range as bool?) ?? false))
 		{
 			var a__ = this.Patient();
 			var b__ = a__.BirthDateElement;
 			var c__ = FHIRHelpers_4_0_001.ToDate(b__);
-			var d__ = (choice as Range);
-			var e__ = d__.Low;
-			var f__ = FHIRHelpers_4_0_001.ToQuantity(e__);
-			var g__ = context.Operators;
-			var h__ = g__.Add(c__, f__);
-			var j__ = a__.BirthDateElement;
-			var k__ = FHIRHelpers_4_0_001.ToDate(j__);
-			var m__ = d__.High;
-			var n__ = FHIRHelpers_4_0_001.ToQuantity(m__);
-			var p__ = g__.Add(k__, n__);
-			var r__ = g__.Quantity(1m, "year");
-			var t__ = g__.Add(p__, r__);
-			var v__ = g__.Interval(h__, t__, true, false);
-			var w__ = v__.low;
-			var y__ = g__.ConvertDateToDateTime(w__);
-			var aa__ = a__.BirthDateElement;
-			var ab__ = FHIRHelpers_4_0_001.ToDate(aa__);
-			var ad__ = d__.Low;
-			var ae__ = FHIRHelpers_4_0_001.ToQuantity(ad__);
-			var ag__ = g__.Add(ab__, ae__);
-			var ai__ = a__.BirthDateElement;
-			var aj__ = FHIRHelpers_4_0_001.ToDate(ai__);
-			var al__ = d__.High;
-			var am__ = FHIRHelpers_4_0_001.ToQuantity(al__);
-			var ao__ = g__.Add(aj__, am__);
-			var aq__ = g__.Quantity(1m, "year");
-			var as__ = g__.Add(ao__, aq__);
-			var au__ = g__.Interval(ag__, as__, true, false);
-			var av__ = au__.high;
-			var ax__ = g__.ConvertDateToDateTime(av__);
-			var az__ = a__.BirthDateElement;
-			var ba__ = FHIRHelpers_4_0_001.ToDate(az__);
-			var bc__ = d__.Low;
-			var bd__ = FHIRHelpers_4_0_001.ToQuantity(bc__);
-			var bf__ = g__.Add(ba__, bd__);
-			var bh__ = a__.BirthDateElement;
-			var bi__ = FHIRHelpers_4_0_001.ToDate(bh__);
-			var bk__ = d__.High;
-			var bl__ = FHIRHelpers_4_0_001.ToQuantity(bk__);
-			var bn__ = g__.Add(bi__, bl__);
-			var bp__ = g__.Quantity(1m, "year");
-			var br__ = g__.Add(bn__, bp__);
-			var bt__ = g__.Interval(bf__, br__, true, false);
-			var bu__ = bt__.lowClosed;
-			var bw__ = a__.BirthDateElement;
-			var bx__ = FHIRHelpers_4_0_001.ToDate(bw__);
-			var bz__ = d__.Low;
-			var ca__ = FHIRHelpers_4_0_001.ToQuantity(bz__);
-			var cc__ = g__.Add(bx__, ca__);
-			var ce__ = a__.BirthDateElement;
-			var cf__ = FHIRHelpers_4_0_001.ToDate(ce__);
-			var ch__ = d__.High;
-			var ci__ = FHIRHelpers_4_0_001.ToQuantity(ch__);
-			var ck__ = g__.Add(cf__, ci__);
-			var cm__ = g__.Quantity(1m, "year");
-			var co__ = g__.Add(ck__, cm__);
-			var cq__ = g__.Interval(cc__, co__, true, false);
-			var cr__ = cq__.highClosed;
-			var ct__ = g__.Interval(y__, ax__, bu__, cr__);
+			var d__ = (choice as Range).Low;
+			var e__ = FHIRHelpers_4_0_001.ToQuantity(d__);
+			var f__ = context.Operators;
+			var g__ = f__.Add(c__, e__);
+			var i__ = a__.BirthDateElement;
+			var j__ = FHIRHelpers_4_0_001.ToDate(i__);
+			var k__ = (choice as Range).High;
+			var l__ = FHIRHelpers_4_0_001.ToQuantity(k__);
+			var n__ = f__.Add(j__, l__);
+			var p__ = f__.Quantity(1m, "year");
+			var r__ = f__.Add(n__, p__);
+			var t__ = f__.Interval(g__, r__, true, false);
+			var u__ = t__.low;
+			var w__ = f__.ConvertDateToDateTime(u__);
+			var y__ = a__.BirthDateElement;
+			var z__ = FHIRHelpers_4_0_001.ToDate(y__);
+			var ab__ = FHIRHelpers_4_0_001.ToQuantity(d__);
+			var ad__ = f__.Add(z__, ab__);
+			var af__ = a__.BirthDateElement;
+			var ag__ = FHIRHelpers_4_0_001.ToDate(af__);
+			var ai__ = FHIRHelpers_4_0_001.ToQuantity(k__);
+			var ak__ = f__.Add(ag__, ai__);
+			var am__ = f__.Quantity(1m, "year");
+			var ao__ = f__.Add(ak__, am__);
+			var aq__ = f__.Interval(ad__, ao__, true, false);
+			var ar__ = aq__.high;
+			var at__ = f__.ConvertDateToDateTime(ar__);
+			var av__ = a__.BirthDateElement;
+			var aw__ = FHIRHelpers_4_0_001.ToDate(av__);
+			var ay__ = FHIRHelpers_4_0_001.ToQuantity(d__);
+			var ba__ = f__.Add(aw__, ay__);
+			var bc__ = a__.BirthDateElement;
+			var bd__ = FHIRHelpers_4_0_001.ToDate(bc__);
+			var bf__ = FHIRHelpers_4_0_001.ToQuantity(k__);
+			var bh__ = f__.Add(bd__, bf__);
+			var bj__ = f__.Quantity(1m, "year");
+			var bl__ = f__.Add(bh__, bj__);
+			var bn__ = f__.Interval(ba__, bl__, true, false);
+			var bo__ = bn__.lowClosed;
+			var bq__ = a__.BirthDateElement;
+			var br__ = FHIRHelpers_4_0_001.ToDate(bq__);
+			var bt__ = FHIRHelpers_4_0_001.ToQuantity(d__);
+			var bv__ = f__.Add(br__, bt__);
+			var bx__ = a__.BirthDateElement;
+			var by__ = FHIRHelpers_4_0_001.ToDate(bx__);
+			var ca__ = FHIRHelpers_4_0_001.ToQuantity(k__);
+			var cc__ = f__.Add(by__, ca__);
+			var ce__ = f__.Quantity(1m, "year");
+			var cg__ = f__.Add(cc__, ce__);
+			var ci__ = f__.Interval(bv__, cg__, true, false);
+			var cj__ = ci__.highClosed;
+			var cl__ = f__.Interval(w__, at__, bo__, cj__);
 
-			return ct__;
+			return cl__;
 		}
         else if (((choice is Timing as bool?) ?? false))
 		{
 			CqlInterval<CqlDateTime> a__ = null;
-			var b__ = (a__ as CqlInterval<CqlDateTime>);
-			var c__ = context.Operators;
-			var d__ = c__.Message<CqlInterval<CqlDateTime>>(b__, "1", "Error", "Cannot compute a single interval from a Timing type");
+			var b__ = context.Operators;
+			var c__ = b__.Message<CqlInterval<CqlDateTime>>((a__ as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute a single interval from a Timing type");
 
-			return d__;
+			return c__;
 		}
         else if (((choice is FhirString as bool?) ?? false))
 		{
 			CqlInterval<CqlDateTime> a__ = null;
-			var b__ = (a__ as CqlInterval<CqlDateTime>);
-			var c__ = context.Operators;
-			var d__ = c__.Message<CqlInterval<CqlDateTime>>(b__, "1", "Error", "Cannot compute an interval from a String value");
+			var b__ = context.Operators;
+			var c__ = b__.Message<CqlInterval<CqlDateTime>>((a__ as CqlInterval<CqlDateTime>), "1", "Error", "Cannot compute an interval from a String value");
 
-			return d__;
+			return c__;
 		}
         else
 		{
 			CqlInterval<CqlDateTime> a__ = null;
-			var b__ = (a__ as CqlInterval<CqlDateTime>);
 
-			return b__;
+			return (a__ as CqlInterval<CqlDateTime>);
 		}
     }
 
@@ -449,18 +411,17 @@ public class NCQAFHIRBase_1_0_0
     [CqlDeclaration("First Dates per 31 Day Periods")]
     public Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT First_Dates_per_31_Day_Periods(IEnumerable<CqlDate> DateList)
 	{
-		var a_ = (CqlDate d) => d;
+		CqlDate a_(CqlDate d) => d;
 		var b_ = context.Operators;
 		var c_ = b_.SelectOrNull<CqlDate, CqlDate>(DateList, a_);
 		var e_ = b_.ListSort<CqlDate>(c_, System.ComponentModel.ListSortDirection.Ascending);
-		var f_ = (CqlDate X) =>
+		bool? f_(CqlDate X)
 		{
 			var p_ = (X == null);
-			var q_ = (bool?)p_;
-			var r_ = context.Operators;
-			var s_ = r_.Not(q_);
+			var q_ = context.Operators;
+			var r_ = q_.Not((bool?)p_);
 
-			return s_;
+			return r_;
 		};
 		var h_ = b_.WhereOrNull<CqlDate>(e_, f_);
 		var i_ = new Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf
@@ -471,59 +432,54 @@ public class NCQAFHIRBase_1_0_0
 		{
 			i_,
 		};
-		var k_ = (Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf SortedDates) =>
+		Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT k_(Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf SortedDates)
 		{
-			var t_ = SortedDates.SortedDates;
-			var u_ = (int?)0;
-			var v_ = new Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd
+			var s_ = SortedDates.SortedDates;
+			var t_ = new Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd
 			{
-				SortedList = t_,
-				AnchorIndex = u_,
+				SortedList = s_,
+				AnchorIndex = (int?)0,
 			};
-			var w_ = new Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd[]
+			var u_ = new Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd[]
 			{
-				v_,
+				t_,
 			};
-			var x_ = (Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd AnchorList) =>
+			Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT v_(Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd AnchorList)
 			{
-				var ac_ = AnchorList.SortedList;
-				var ad_ = AnchorList.AnchorIndex;
-				var ae_ = context.Operators;
-				var af_ = ae_.ListElementAt<CqlDate>(ac_, ad_);
-				var ag_ = (af_ as CqlDate);
-				var ah_ = (CqlDate X) =>
+				var aa_ = AnchorList.SortedList;
+				var ab_ = AnchorList.AnchorIndex;
+				var ac_ = context.Operators;
+				var ad_ = ac_.ListElementAt<CqlDate>(aa_, ab_);
+				bool? ae_(CqlDate X)
 				{
-					var av_ = AnchorList.SortedList;
-					var aw_ = AnchorList.AnchorIndex;
-					var ax_ = context.Operators;
-					var ay_ = ax_.ListElementAt<CqlDate>(av_, aw_);
-					var az_ = (ay_ as CqlDate);
-					var bb_ = ax_.Quantity(1m, "day");
-					var bd_ = ax_.Add(az_, bb_);
-					var bh_ = ax_.ListElementAt<CqlDate>(av_, aw_);
-					var bi_ = (bh_ as CqlDate);
-					var bk_ = ax_.Quantity(30m, "days");
-					var bm_ = ax_.Add(bi_, bk_);
-					var bo_ = ax_.Interval(bd_, bm_, true, true);
-					var bq_ = ax_.ElementInInterval<CqlDate>(X, bo_, null);
-					var bs_ = ax_.Not(bq_);
+					var ar_ = AnchorList.SortedList;
+					var as_ = AnchorList.AnchorIndex;
+					var at_ = context.Operators;
+					var au_ = at_.ListElementAt<CqlDate>(ar_, as_);
+					var aw_ = at_.Quantity(1m, "day");
+					var ay_ = at_.Add((au_ as CqlDate), aw_);
+					var bc_ = at_.ListElementAt<CqlDate>(ar_, as_);
+					var be_ = at_.Quantity(30m, "days");
+					var bg_ = at_.Add((bc_ as CqlDate), be_);
+					var bi_ = at_.Interval(ay_, bg_, true, true);
+					var bk_ = at_.ElementInInterval<CqlDate>(X, bi_, null);
+					var bm_ = at_.Not(bk_);
 
-					return bs_;
+					return bm_;
 				};
-				var aj_ = ae_.WhereOrNull<CqlDate>(DateList, ah_);
-				var al_ = (int?)1;
-				var an_ = ae_.Add(ad_, al_);
-				var ao_ = new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
+				var ag_ = ac_.WhereOrNull<CqlDate>(DateList, ae_);
+				var aj_ = ac_.Add(ab_, (int?)1);
+				var ak_ = new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT
 				{
-					NextDate = ag_,
-					NewList = aj_,
-					IndexofNewDate = an_,
+					NextDate = (ad_ as CqlDate),
+					NewList = ag_,
+					IndexofNewDate = aj_,
 				};
-				var ap_ = new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
+				var al_ = new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 				{
-					ao_,
+					ak_,
 				};
-				var aq_ = (Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT FirstList) => (((context.Operators.ListElementAt<CqlDate>(FirstList.NewList, FirstList.IndexofNewDate) == null))
+				Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT am_(Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT FirstList) => (((context.Operators.ListElementAt<CqlDate>(FirstList.NewList, FirstList.IndexofNewDate) == null))
 					? (FirstList)
 					: (context.Operators.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(context.Operators.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(new Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT[]
 								{
@@ -642,16 +598,16 @@ public class NCQAFHIRBase_1_0_0
 ))))
 ))))
 ;
-				var as_ = ae_.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(ap_, aq_);
-				var au_ = ae_.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(as_);
+				var ao_ = ac_.SelectOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(al_, am_);
+				var aq_ = ac_.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(ao_);
 
-				return au_;
+				return aq_;
 			};
-			var y_ = context.Operators;
-			var z_ = y_.SelectOrNull<Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(w_, x_);
-			var ab_ = y_.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(z_);
+			var w_ = context.Operators;
+			var x_ = w_.SelectOrNull<Tuples.Tuple_GTiMeVaPZjPXLPBaGARAOCFd, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(u_, v_);
+			var z_ = w_.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(x_);
 
-			return ab_;
+			return z_;
 		};
 		var m_ = b_.SelectOrNull<Tuples.Tuple_GcLaDggiecCUAgUhQSXhADYJf, Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(j_, k_);
 		var o_ = b_.SingleOrNull<Tuples.Tuple_DUDddjZaCdFGjLXVHKdDKIRfT>(m_);

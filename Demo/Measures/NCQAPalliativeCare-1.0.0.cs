@@ -48,34 +48,22 @@ public class NCQAPalliativeCare_1_0_0
 
     #endregion
 
-    private CqlValueSet Palliative_Care_Assessment_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", null);
-
-		return a_;
-	}
+    private CqlValueSet Palliative_Care_Assessment_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", null);
 
     [CqlDeclaration("Palliative Care Assessment")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225")]
     public CqlValueSet Palliative_Care_Assessment() => __Palliative_Care_Assessment.Value;
 
-    private CqlValueSet Palliative_Care_Encounter_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", null);
-
-		return a_;
-	}
+    private CqlValueSet Palliative_Care_Encounter_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", null);
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450")]
     public CqlValueSet Palliative_Care_Encounter() => __Palliative_Care_Encounter.Value;
 
-    private CqlValueSet Palliative_Care_Intervention_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", null);
-
-		return a_;
-	}
+    private CqlValueSet Palliative_Care_Intervention_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", null);
 
     [CqlDeclaration("Palliative Care Intervention")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
@@ -111,7 +99,7 @@ public class NCQAPalliativeCare_1_0_0
 		var a_ = this.Palliative_Care_Assessment();
 		var b_ = context.DataRetriever;
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
-		var d_ = (Observation PalliativeAssessment) =>
+		bool? d_(Observation PalliativeAssessment)
 		{
 			var ar_ = PalliativeAssessment.Effective;
 			var as_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ar_);
@@ -137,7 +125,7 @@ public class NCQAPalliativeCare_1_0_0
 		var i_ = this.Palliative_Care_Encounter();
 		var k_ = b_.RetrieveByValueSet<Encounter>(i_, null);
 		var l_ = NCQAStatus_1_0_0.Finished_Encounter(k_);
-		var m_ = (Encounter PalliativeEncounter) =>
+		bool? m_(Encounter PalliativeEncounter)
 		{
 			var br_ = PalliativeEncounter.Period;
 			var bs_ = NCQAFHIRBase_1_0_0.Normalize_Interval(br_);
@@ -163,7 +151,7 @@ public class NCQAPalliativeCare_1_0_0
 		var t_ = this.Palliative_Care_Intervention();
 		var v_ = b_.RetrieveByValueSet<Procedure>(t_, null);
 		var w_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(v_);
-		var x_ = (Procedure PalliativeIntervention) =>
+		bool? x_(Procedure PalliativeIntervention)
 		{
 			var cr_ = PalliativeIntervention.Performed;
 			var cs_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cr_);
@@ -190,7 +178,7 @@ public class NCQAPalliativeCare_1_0_0
 		var ag_ = e_.ToList<CqlCode>(ae_);
 		var ai_ = b_.RetrieveByCodes<Condition>(ag_, null);
 		var aj_ = NCQAStatus_1_0_0.Active_Condition(ai_);
-		var ak_ = (Condition PalliativeDiagnosis) =>
+		bool? ak_(Condition PalliativeDiagnosis)
 		{
 			var dr_ = NCQAFHIRBase_1_0_0.Prevalence_Period(PalliativeDiagnosis);
 			var ds_ = context.Operators;

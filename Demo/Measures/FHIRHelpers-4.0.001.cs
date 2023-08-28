@@ -53,9 +53,8 @@ public class FHIRHelpers_4_0_001
         if ((period == null))
 		{
 			CqlInterval<CqlDateTime> a__ = null;
-			var b__ = (a__ as CqlInterval<CqlDateTime>);
 
-			return b__;
+			return (a__ as CqlInterval<CqlDateTime>);
 		}
         else
 		{
@@ -79,9 +78,8 @@ public class FHIRHelpers_4_0_001
         if ((range == null))
 		{
 			CqlInterval<CqlQuantity> a__ = null;
-			var b__ = (a__ as CqlInterval<CqlQuantity>);
 
-			return b__;
+			return (a__ as CqlInterval<CqlQuantity>);
 		}
         else
 		{
@@ -126,13 +124,9 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a__ = ratio.Numerator;
-			var b__ = this.ToQuantity(a__);
-			var c__ = ratio.Denominator;
-			var d__ = this.ToQuantity(c__);
-			var e__ = new CqlRatio(b__, d__);
+			var a__ = new CqlRatio(this.ToQuantity(ratio.Numerator), this.ToQuantity(ratio.Denominator));
 
-			return e__;
+			return a__;
 		}
     }
 
@@ -144,17 +138,9 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a__ = coding.CodeElement;
-			var b__ = a__.Value;
-			var c__ = coding.SystemElement;
-			var d__ = c__.Value;
-			var e__ = coding.VersionElement;
-			var f__ = e__.Value;
-			var g__ = coding.DisplayElement;
-			var h__ = g__.Value;
-			var i__ = new CqlCode(b__, d__, f__, h__);
+			var a__ = new CqlCode(coding.CodeElement.Value, coding.SystemElement.Value, coding.VersionElement.Value, coding.DisplayElement.Value);
 
-			return i__;
+			return a__;
 		}
     }
 
@@ -166,21 +152,9 @@ public class FHIRHelpers_4_0_001
             return null;
         else
 		{
-			var a__ = concept.Coding;
-			var b__ = (a__ as IEnumerable<Coding>);
-			var c__ = (Coding C) =>
-			{
-				var i__ = this.ToCode(C);
+			var a__ = new CqlConcept(context.Operators.SelectOrNull<Coding, CqlCode>((concept.Coding as IEnumerable<Coding>), (Coding C) => this.ToCode(C)), concept.TextElement.Value);
 
-				return i__;
-			};
-			var d__ = context.Operators;
-			var e__ = d__.SelectOrNull<Coding, CqlCode>(b__, c__);
-			var f__ = concept.TextElement;
-			var g__ = f__.Value;
-			var h__ = new CqlConcept(e__, g__);
-
-			return h__;
+			return a__;
 		}
     }
 
@@ -2185,12 +2159,11 @@ public class FHIRHelpers_4_0_001
     public CqlDateTime ToDateTime(Instant value)
 	{
 		var a_ = value.Value;
-		var b_ = a_;
-		var c_ = context.Operators;
-		var d_ = c_.TypeConverter;
-		var e_ = d_.Convert<CqlDateTime>(b_);
+		var b_ = context.Operators;
+		var c_ = b_.TypeConverter;
+		var d_ = c_.Convert<CqlDateTime>(a_);
 
-		return e_;
+		return d_;
 	}
 
 

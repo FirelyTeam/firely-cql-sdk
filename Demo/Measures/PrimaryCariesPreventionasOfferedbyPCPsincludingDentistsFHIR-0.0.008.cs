@@ -90,100 +90,64 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 
     #endregion
 
-    private CqlValueSet Clinical_Oral_Evaluation_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", null);
-
-		return a_;
-	}
+    private CqlValueSet Clinical_Oral_Evaluation_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", null);
 
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
     public CqlValueSet Clinical_Oral_Evaluation() => __Clinical_Oral_Evaluation.Value;
 
-    private CqlValueSet Fluoride_Varnish_Application_for_Children_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", null);
-
-		return a_;
-	}
+    private CqlValueSet Fluoride_Varnish_Application_for_Children_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", null);
 
     [CqlDeclaration("Fluoride Varnish Application for Children")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002")]
     public CqlValueSet Fluoride_Varnish_Application_for_Children() => __Fluoride_Varnish_Application_for_Children.Value;
 
-    private CqlValueSet Office_Visit_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
-
-		return a_;
-	}
+    private CqlValueSet Office_Visit_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit() => __Office_Visit.Value;
 
-    private CqlValueSet Online_Assessments_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
-
-		return a_;
-	}
+    private CqlValueSet Online_Assessments_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Online_Assessments() => __Online_Assessments.Value;
 
-    private CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", null);
-
-		return a_;
-	}
+    private CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", null);
 
     [CqlDeclaration("Preventive Care - Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
     public CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17() => __Preventive_Care___Established_Office_Visit__0_to_17.Value;
 
-    private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
-
-		return a_;
-	}
+    private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => __Preventive_Care_Services___Established_Office_Visit__18_and_Up.Value;
 
-    private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
-
-		return a_;
-	}
+    private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => __Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-    private CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", null);
-
-		return a_;
-	}
+    private CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", null);
 
     [CqlDeclaration("Preventive Care- Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
     public CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17() => __Preventive_Care__Initial_Office_Visit__0_to_17.Value;
 
-    private CqlValueSet Telephone_Visits_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
-
-		return a_;
-	}
+    private CqlValueSet Telephone_Visits_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
@@ -216,9 +180,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008", "Measurement Period", null);
-		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return b_;
+		return (CqlInterval<CqlDateTime>)a_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -304,7 +267,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var ah_ = b_.RetrieveByValueSet<Encounter>(af_, null);
 		var aj_ = g_.ListUnion<Encounter>(ae_, ah_);
 		var al_ = g_.ListUnion<Encounter>(ab_, aj_);
-		var am_ = (Encounter ValidEncounter) =>
+		bool? am_(Encounter ValidEncounter)
 		{
 			var ap_ = this.Measurement_Period();
 			var aq_ = ValidEncounter.Period;
@@ -342,27 +305,21 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var i_ = d_.Start(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "month");
-		var n_ = m_;
-		var o_ = (int?)6;
-		var p_ = o_;
-		var r_ = d_.GreaterOrEqual(n_, p_);
-		var t_ = a_.BirthDateElement;
-		var u_ = t_.Value;
-		var w_ = d_.TypeConverter;
-		var x_ = w_.Convert<CqlDate>(u_);
-		var aa_ = d_.Start(g_);
-		var ac_ = d_.DateFrom(aa_);
-		var ae_ = d_.CalculateAgeAt(x_, ac_, "year");
-		var af_ = ae_;
-		var ag_ = (int?)20;
-		var ah_ = ag_;
-		var aj_ = d_.Less(af_, ah_);
-		var al_ = d_.And(r_, aj_);
-		var am_ = this.Qualifying_Encounters();
-		var ao_ = d_.ExistsInList<Encounter>(am_);
-		var aq_ = d_.And(al_, ao_);
+		var o_ = d_.GreaterOrEqual(m_, (int?)6);
+		var q_ = a_.BirthDateElement;
+		var r_ = q_.Value;
+		var t_ = d_.TypeConverter;
+		var u_ = t_.Convert<CqlDate>(r_);
+		var x_ = d_.Start(g_);
+		var z_ = d_.DateFrom(x_);
+		var ab_ = d_.CalculateAgeAt(u_, z_, "year");
+		var ad_ = d_.Less(ab_, (int?)20);
+		var af_ = d_.And(o_, ad_);
+		var ag_ = this.Qualifying_Encounters();
+		var ai_ = d_.ExistsInList<Encounter>(ag_);
+		var ak_ = d_.And(af_, ai_);
 
-		return aq_;
+		return ak_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -400,24 +357,18 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var i_ = d_.Start(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "month");
-		var n_ = m_;
-		var o_ = (int?)6;
-		var p_ = o_;
-		var r_ = d_.GreaterOrEqual(n_, p_);
-		var t_ = a_.BirthDateElement;
-		var u_ = t_.Value;
-		var w_ = d_.TypeConverter;
-		var x_ = w_.Convert<CqlDate>(u_);
-		var aa_ = d_.Start(g_);
-		var ac_ = d_.DateFrom(aa_);
-		var ae_ = d_.CalculateAgeAt(x_, ac_, "year");
-		var af_ = ae_;
-		var ag_ = (int?)4;
-		var ah_ = ag_;
-		var aj_ = d_.LessOrEqual(af_, ah_);
-		var al_ = d_.And(r_, aj_);
+		var o_ = d_.GreaterOrEqual(m_, (int?)6);
+		var q_ = a_.BirthDateElement;
+		var r_ = q_.Value;
+		var t_ = d_.TypeConverter;
+		var u_ = t_.Convert<CqlDate>(r_);
+		var x_ = d_.Start(g_);
+		var z_ = d_.DateFrom(x_);
+		var ab_ = d_.CalculateAgeAt(u_, z_, "year");
+		var ad_ = d_.LessOrEqual(ab_, (int?)4);
+		var af_ = d_.And(o_, ad_);
 
-		return al_;
+		return af_;
 	}
 
     [CqlDeclaration("Stratification 1")]
@@ -435,12 +386,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var i_ = d_.Start(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var n_ = (int?)5;
-		var o_ = (int?)11;
-		var q_ = d_.Interval(n_, o_, true, true);
-		var s_ = d_.ElementInInterval<int?>(m_, q_, null);
+		var o_ = d_.Interval((int?)5, (int?)11, true, true);
+		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
 
-		return s_;
+		return q_;
 	}
 
     [CqlDeclaration("Stratification 2")]
@@ -458,12 +407,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var i_ = d_.Start(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var n_ = (int?)12;
-		var o_ = (int?)20;
-		var q_ = d_.Interval(n_, o_, true, false);
-		var s_ = d_.ElementInInterval<int?>(m_, q_, null);
+		var o_ = d_.Interval((int?)12, (int?)20, true, false);
+		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
 
-		return s_;
+		return q_;
 	}
 
     [CqlDeclaration("Stratification 3")]
@@ -474,7 +421,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var a_ = this.Fluoride_Varnish_Application_for_Children();
 		var b_ = context.DataRetriever;
 		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
-		var d_ = (Procedure FluorideApplication) =>
+		bool? d_(Procedure FluorideApplication)
 		{
 			var i_ = this.Measurement_Period();
 			var j_ = FluorideApplication.Performed;

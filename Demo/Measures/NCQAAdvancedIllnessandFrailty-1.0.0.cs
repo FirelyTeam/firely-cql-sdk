@@ -92,144 +92,92 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
     #endregion
 
-    private CqlValueSet Acute_Inpatient_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810", null);
-
-		return a_;
-	}
+    private CqlValueSet Acute_Inpatient_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810", null);
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810")]
     public CqlValueSet Acute_Inpatient() => __Acute_Inpatient.Value;
 
-    private CqlValueSet Advanced_Illness_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465", null);
-
-		return a_;
-	}
+    private CqlValueSet Advanced_Illness_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465", null);
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465")]
     public CqlValueSet Advanced_Illness() => __Advanced_Illness.Value;
 
-    private CqlValueSet Dementia_Medications_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729", null);
-
-		return a_;
-	}
+    private CqlValueSet Dementia_Medications_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729", null);
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729")]
     public CqlValueSet Dementia_Medications() => __Dementia_Medications.Value;
 
-    private CqlValueSet ED_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086", null);
-
-		return a_;
-	}
+    private CqlValueSet ED_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086", null);
 
     [CqlDeclaration("ED")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086")]
     public CqlValueSet ED() => __ED.Value;
 
-    private CqlValueSet Frailty_Device_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Device_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530", null);
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530")]
     public CqlValueSet Frailty_Device() => __Frailty_Device.Value;
 
-    private CqlValueSet Frailty_Diagnosis_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Diagnosis_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531", null);
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531")]
     public CqlValueSet Frailty_Diagnosis() => __Frailty_Diagnosis.Value;
 
-    private CqlValueSet Frailty_Encounter_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Encounter_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532", null);
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532")]
     public CqlValueSet Frailty_Encounter() => __Frailty_Encounter.Value;
 
-    private CqlValueSet Frailty_Symptom_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533", null);
-
-		return a_;
-	}
+    private CqlValueSet Frailty_Symptom_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533", null);
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533")]
     public CqlValueSet Frailty_Symptom() => __Frailty_Symptom.Value;
 
-    private CqlValueSet Nonacute_Inpatient_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189", null);
-
-		return a_;
-	}
+    private CqlValueSet Nonacute_Inpatient_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189", null);
 
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189")]
     public CqlValueSet Nonacute_Inpatient() => __Nonacute_Inpatient.Value;
 
-    private CqlValueSet Observation_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191", null);
-
-		return a_;
-	}
+    private CqlValueSet Observation_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191", null);
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191")]
     public CqlValueSet Observation() => __Observation.Value;
 
-    private CqlValueSet Online_Assessments_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446", null);
-
-		return a_;
-	}
+    private CqlValueSet Online_Assessments_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446", null);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446")]
     public CqlValueSet Online_Assessments() => __Online_Assessments.Value;
 
-    private CqlValueSet Outpatient_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202", null);
-
-		return a_;
-	}
+    private CqlValueSet Outpatient_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202", null);
 
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202")]
     public CqlValueSet Outpatient() => __Outpatient.Value;
 
-    private CqlValueSet Telephone_Visits_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246", null);
-
-		return a_;
-	}
+    private CqlValueSet Telephone_Visits_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246", null);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246")]
@@ -238,9 +186,8 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("NCQAAdvancedIllnessandFrailty-1.0.0", "Measurement Period", null);
-		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return b_;
+		return (CqlInterval<CqlDateTime>)a_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -264,7 +211,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var a_ = this.Frailty_Device();
 		var b_ = context.DataRetriever;
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
-		var d_ = (Observation FrailtyDeviceApplied) =>
+		bool? d_(Observation FrailtyDeviceApplied)
 		{
 			var ao_ = FrailtyDeviceApplied.Effective;
 			var ap_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ao_);
@@ -280,7 +227,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var i_ = this.Frailty_Diagnosis();
 		var k_ = b_.RetrieveByValueSet<Condition>(i_, null);
 		var l_ = NCQAStatus_1_0_0.Active_Condition(k_);
-		var m_ = (Condition FrailtyDiagnosis) =>
+		bool? m_(Condition FrailtyDiagnosis)
 		{
 			var at_ = NCQAFHIRBase_1_0_0.Prevalence_Period(FrailtyDiagnosis);
 			var au_ = this.Measurement_Period();
@@ -295,7 +242,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var t_ = this.Frailty_Encounter();
 		var v_ = b_.RetrieveByValueSet<Encounter>(t_, null);
 		var w_ = NCQAStatus_1_0_0.Finished_Encounter(v_);
-		var x_ = (Encounter FrailtyEncounter) =>
+		bool? x_(Encounter FrailtyEncounter)
 		{
 			var ax_ = FrailtyEncounter.Period;
 			var ay_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ax_);
@@ -310,7 +257,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var ad_ = e_.Or(s_, ab_);
 		var ae_ = this.Frailty_Symptom();
 		var ag_ = b_.RetrieveByValueSet<Observation>(ae_, null);
-		var ah_ = (Observation FrailtySymptom) =>
+		bool? ah_(Observation FrailtySymptom)
 		{
 			var bc_ = FrailtySymptom.Effective;
 			var bd_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bc_);
@@ -352,7 +299,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var z_ = g_.ListUnion<Encounter>(u_, x_);
 		var ab_ = g_.ListUnion<Encounter>(r_, z_);
 		var ac_ = NCQAStatus_1_0_0.Finished_Encounter(ab_);
-		var ad_ = (Encounter OutpatientEncounter) =>
+		bool? ad_(Encounter OutpatientEncounter)
 		{
 			var aj_ = this.Advanced_Illness();
 			var ak_ = context.DataRetriever;
@@ -377,7 +324,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			return bm_;
 		};
 		var af_ = g_.WhereOrNull<Encounter>(ac_, ad_);
-		var ag_ = (Encounter EncounterWithDiagnosis) =>
+		CqlDate ag_(Encounter EncounterWithDiagnosis)
 		{
 			var bn_ = EncounterWithDiagnosis.Period;
 			var bo_ = NCQAFHIRBase_1_0_0.Normalize_Interval(bn_);
@@ -404,38 +351,37 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var e_ = this.Advanced_Illness();
 		var f_ = context.Operators;
 		var g_ = f_.CreateValueSetFacade(e_);
-		var h_ = (IEnumerable<CqlCode>)g_;
-		var i_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(d_, h_);
-		var j_ = i_.ServicePeriod;
-		var k_ = (CqlInterval<CqlDateTime> DischargeWithDiagnosis) =>
+		var h_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(d_, (IEnumerable<CqlCode>)g_);
+		var i_ = h_.ServicePeriod;
+		bool? j_(CqlInterval<CqlDateTime> DischargeWithDiagnosis)
 		{
-			var q_ = context.Operators;
-			var r_ = q_.End(DischargeWithDiagnosis);
-			var t_ = q_.DateFrom(r_);
-			var u_ = this.Measurement_Period();
-			var w_ = q_.Start(u_);
-			var y_ = q_.DateFrom(w_);
-			var aa_ = q_.Quantity(1m, "year");
-			var ac_ = q_.Subtract(y_, aa_);
-			var af_ = q_.End(u_);
-			var ah_ = q_.DateFrom(af_);
-			var aj_ = q_.Interval(ac_, ah_, true, true);
-			var al_ = q_.ElementInInterval<CqlDate>(t_, aj_, null);
+			var p_ = context.Operators;
+			var q_ = p_.End(DischargeWithDiagnosis);
+			var s_ = p_.DateFrom(q_);
+			var t_ = this.Measurement_Period();
+			var v_ = p_.Start(t_);
+			var x_ = p_.DateFrom(v_);
+			var z_ = p_.Quantity(1m, "year");
+			var ab_ = p_.Subtract(x_, z_);
+			var ae_ = p_.End(t_);
+			var ag_ = p_.DateFrom(ae_);
+			var ai_ = p_.Interval(ab_, ag_, true, true);
+			var ak_ = p_.ElementInInterval<CqlDate>(s_, ai_, null);
 
-			return al_;
+			return ak_;
 		};
-		var m_ = f_.WhereOrNull<CqlInterval<CqlDateTime>>(j_, k_);
-		var n_ = (CqlInterval<CqlDateTime> InpatientDischarge) =>
+		var l_ = f_.WhereOrNull<CqlInterval<CqlDateTime>>(i_, j_);
+		CqlDate m_(CqlInterval<CqlDateTime> InpatientDischarge)
 		{
-			var am_ = context.Operators;
-			var an_ = am_.End(InpatientDischarge);
-			var ap_ = am_.DateFrom(an_);
+			var al_ = context.Operators;
+			var am_ = al_.End(InpatientDischarge);
+			var ao_ = al_.DateFrom(am_);
 
-			return ap_;
+			return ao_;
 		};
-		var p_ = f_.SelectOrNull<CqlInterval<CqlDateTime>, CqlDate>(m_, n_);
+		var o_ = f_.SelectOrNull<CqlInterval<CqlDateTime>, CqlDate>(l_, m_);
 
-		return p_;
+		return o_;
 	}
 
     [CqlDeclaration("Nonacute Inpatient Discharge with Advanced Illness")]
@@ -467,9 +413,8 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
         else
 		{
 			IEnumerable<CqlDate> a__ = null;
-			var b__ = (a__ as IEnumerable<CqlDate>);
 
-			return b__;
+			return (a__ as IEnumerable<CqlDate>);
 		}
     }
 
@@ -479,13 +424,13 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
     private bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service_Value()
 	{
 		var a_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness();
-		var b_ = (CqlDate _OutpatientVisit1) =>
+		IEnumerable<CqlDate> b_(CqlDate _OutpatientVisit1)
 		{
 			var n_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness();
 
 			return n_;
 		};
-		var c_ = (CqlDate _OutpatientVisit1, CqlDate _OutpatientVisit2) =>
+		Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR c_(CqlDate _OutpatientVisit1, CqlDate _OutpatientVisit2)
 		{
 			var o_ = new Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR
 			{
@@ -497,7 +442,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		};
 		var d_ = context.Operators;
 		var e_ = d_.SelectManyResultsOrNull<CqlDate, CqlDate, Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(a_, b_, c_);
-		var f_ = (Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur) =>
+		bool? f_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur)
 		{
 			var p_ = tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit2;
 			var q_ = tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit1;
@@ -509,7 +454,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			return w_;
 		};
 		var h_ = d_.WhereOrNull<Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR>(e_, f_);
-		var i_ = (Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur) =>
+		CqlDate i_(Tuples.Tuple_EaBFagdYTZfYEiNNhIYITEIUR tuple_eabfagdytzfyeinnhiyiteiur)
 		{
 			var x_ = tuple_eabfagdytzfyeinnhiyiteiur.OutpatientVisit1;
 
@@ -530,7 +475,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var b_ = context.DataRetriever;
 		var c_ = b_.RetrieveByValueSet<Encounter>(a_, null);
 		var d_ = NCQAStatus_1_0_0.Finished_Encounter(c_);
-		var e_ = (Encounter InpatientEncounter) =>
+		bool? e_(Encounter InpatientEncounter)
 		{
 			var j_ = this.Advanced_Illness();
 			var k_ = context.DataRetriever;
@@ -573,30 +518,29 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var e_ = this.Advanced_Illness();
 		var f_ = context.Operators;
 		var g_ = f_.CreateValueSetFacade(e_);
-		var h_ = (IEnumerable<CqlCode>)g_;
-		var i_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(d_, h_);
-		var j_ = i_.ServicePeriod;
-		var k_ = (CqlInterval<CqlDateTime> InpatientDischarge) =>
+		var h_ = NCQAClaims_1_0_0.Medical_Claims_With_Diagnosis(d_, (IEnumerable<CqlCode>)g_);
+		var i_ = h_.ServicePeriod;
+		bool? j_(CqlInterval<CqlDateTime> InpatientDischarge)
 		{
-			var p_ = context.Operators;
-			var q_ = p_.End(InpatientDischarge);
-			var s_ = p_.DateFrom(q_);
-			var t_ = this.Measurement_Period();
-			var v_ = p_.Start(t_);
-			var x_ = p_.DateFrom(v_);
-			var z_ = p_.Quantity(1m, "year");
-			var ab_ = p_.Subtract(x_, z_);
-			var ae_ = p_.End(t_);
-			var ag_ = p_.DateFrom(ae_);
-			var ai_ = p_.Interval(ab_, ag_, true, true);
-			var ak_ = p_.ElementInInterval<CqlDate>(s_, ai_, null);
+			var o_ = context.Operators;
+			var p_ = o_.End(InpatientDischarge);
+			var r_ = o_.DateFrom(p_);
+			var s_ = this.Measurement_Period();
+			var u_ = o_.Start(s_);
+			var w_ = o_.DateFrom(u_);
+			var y_ = o_.Quantity(1m, "year");
+			var aa_ = o_.Subtract(w_, y_);
+			var ad_ = o_.End(s_);
+			var af_ = o_.DateFrom(ad_);
+			var ah_ = o_.Interval(aa_, af_, true, true);
+			var aj_ = o_.ElementInInterval<CqlDate>(r_, ah_, null);
 
-			return ak_;
+			return aj_;
 		};
-		var m_ = f_.WhereOrNull<CqlInterval<CqlDateTime>>(j_, k_);
-		var o_ = f_.ExistsInList<CqlInterval<CqlDateTime>>(m_);
+		var l_ = f_.WhereOrNull<CqlInterval<CqlDateTime>>(i_, j_);
+		var n_ = f_.ExistsInList<CqlInterval<CqlDateTime>>(l_);
 
-		return o_;
+		return n_;
 	}
 
     [CqlDeclaration("Acute Inpatient Discharge with Advanced Illness")]
@@ -611,7 +555,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var g_ = context.Operators;
 		var h_ = g_.ListUnion<MedicationDispense>(c_, f_);
 		var i_ = NCQAStatus_1_0_0.Dispensed_Medication(h_);
-		var j_ = (MedicationDispense DementiaMedDispensed) =>
+		bool? j_(MedicationDispense DementiaMedDispensed)
 		{
 			var o_ = DementiaMedDispensed.WhenHandedOverElement;
 			var p_ = NCQAFHIRBase_1_0_0.Normalize_Interval(o_);
@@ -651,35 +595,30 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var i_ = d_.End(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var n_ = (int?)66;
-		var o_ = (int?)80;
-		var q_ = d_.Interval(n_, o_, true, true);
-		var s_ = d_.ElementInInterval<int?>(m_, q_, null);
-		var t_ = this.Has_Criteria_Indicating_Frailty();
-		var v_ = d_.And(s_, t_);
-		var w_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service();
-		var x_ = this.Acute_Inpatient_Encounter_with_Advanced_Illness();
-		var z_ = d_.Or(w_, x_);
-		var aa_ = this.Acute_Inpatient_Discharge_with_Advanced_Illness();
-		var ac_ = d_.Or(z_, aa_);
-		var ad_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		var af_ = d_.Or(ac_, ad_);
-		var ah_ = d_.And(v_, af_);
-		var aj_ = a_.BirthDateElement;
-		var ak_ = aj_.Value;
-		var am_ = d_.TypeConverter;
-		var an_ = am_.Convert<CqlDate>(ak_);
-		var aq_ = d_.End(g_);
-		var as_ = d_.DateFrom(aq_);
-		var au_ = d_.CalculateAgeAt(an_, as_, "year");
-		var av_ = au_;
-		var aw_ = (int?)81;
-		var ax_ = aw_;
-		var az_ = d_.GreaterOrEqual(av_, ax_);
-		var bc_ = d_.And(az_, t_);
-		var be_ = d_.Or(ah_, bc_);
+		var o_ = d_.Interval((int?)66, (int?)80, true, true);
+		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
+		var r_ = this.Has_Criteria_Indicating_Frailty();
+		var t_ = d_.And(q_, r_);
+		var u_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var v_ = this.Acute_Inpatient_Encounter_with_Advanced_Illness();
+		var x_ = d_.Or(u_, v_);
+		var y_ = this.Acute_Inpatient_Discharge_with_Advanced_Illness();
+		var aa_ = d_.Or(x_, y_);
+		var ab_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
+		var ad_ = d_.Or(aa_, ab_);
+		var af_ = d_.And(t_, ad_);
+		var ah_ = a_.BirthDateElement;
+		var ai_ = ah_.Value;
+		var ak_ = d_.TypeConverter;
+		var al_ = ak_.Convert<CqlDate>(ai_);
+		var ao_ = d_.End(g_);
+		var aq_ = d_.DateFrom(ao_);
+		var as_ = d_.CalculateAgeAt(al_, aq_, "year");
+		var au_ = d_.GreaterOrEqual(as_, (int?)81);
+		var ax_ = d_.And(au_, r_);
+		var az_ = d_.Or(af_, ax_);
 
-		return be_;
+		return az_;
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
@@ -697,22 +636,19 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var i_ = d_.End(g_);
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var n_ = m_;
-		var o_ = (int?)66;
-		var p_ = o_;
-		var r_ = d_.GreaterOrEqual(n_, p_);
-		var s_ = this.Has_Criteria_Indicating_Frailty();
-		var u_ = d_.And(r_, s_);
-		var v_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service();
-		var w_ = this.Acute_Inpatient_Encounter_with_Advanced_Illness();
+		var o_ = d_.GreaterOrEqual(m_, (int?)66);
+		var p_ = this.Has_Criteria_Indicating_Frailty();
+		var r_ = d_.And(o_, p_);
+		var s_ = this.Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service();
+		var t_ = this.Acute_Inpatient_Encounter_with_Advanced_Illness();
+		var v_ = d_.Or(s_, t_);
+		var w_ = this.Acute_Inpatient_Discharge_with_Advanced_Illness();
 		var y_ = d_.Or(v_, w_);
-		var z_ = this.Acute_Inpatient_Discharge_with_Advanced_Illness();
+		var z_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
 		var ab_ = d_.Or(y_, z_);
-		var ac_ = this.Dementia_Medications_In_Year_Before_or_During_Measurement_Period();
-		var ae_ = d_.Or(ab_, ac_);
-		var ag_ = d_.And(u_, ae_);
+		var ad_ = d_.And(r_, ab_);
 
-		return ag_;
+		return ad_;
 	}
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]

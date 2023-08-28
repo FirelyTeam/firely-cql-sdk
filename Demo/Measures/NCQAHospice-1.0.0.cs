@@ -48,23 +48,15 @@ public class NCQAHospice_1_0_0
 
     #endregion
 
-    private CqlValueSet Hospice_Encounter_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761", null);
-
-		return a_;
-	}
+    private CqlValueSet Hospice_Encounter_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761", null);
 
     [CqlDeclaration("Hospice Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1761")]
     public CqlValueSet Hospice_Encounter() => __Hospice_Encounter.Value;
 
-    private CqlValueSet Hospice_Intervention_Value()
-	{
-		var a_ = new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762", null);
-
-		return a_;
-	}
+    private CqlValueSet Hospice_Intervention_Value() =>
+		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762", null);
 
     [CqlDeclaration("Hospice Intervention")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1762")]
@@ -73,9 +65,8 @@ public class NCQAHospice_1_0_0
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("NCQAHospice-1.0.0", "Measurement Period", null);
-		var b_ = (CqlInterval<CqlDateTime>)a_;
 
-		return b_;
+		return (CqlInterval<CqlDateTime>)a_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -100,7 +91,7 @@ public class NCQAHospice_1_0_0
 		var b_ = context.DataRetriever;
 		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
 		var d_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(c_);
-		var e_ = (Procedure HospiceInt) =>
+		bool? e_(Procedure HospiceInt)
 		{
 			var u_ = HospiceInt.Performed;
 			var v_ = NCQAFHIRBase_1_0_0.Normalize_Interval(u_);
@@ -116,7 +107,7 @@ public class NCQAHospice_1_0_0
 		var j_ = this.Hospice_Encounter();
 		var l_ = b_.RetrieveByValueSet<Encounter>(j_, null);
 		var m_ = NCQAStatus_1_0_0.Finished_Encounter(l_);
-		var n_ = (Encounter HospiceEnc) =>
+		bool? n_(Encounter HospiceEnc)
 		{
 			var z_ = HospiceEnc.Period;
 			var aa_ = NCQAFHIRBase_1_0_0.Normalize_Interval(z_);

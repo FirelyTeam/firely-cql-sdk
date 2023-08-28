@@ -42,12 +42,8 @@ public class VTEFHIR4_4_8_000
 
     #endregion
 
-    private CqlValueSet Intensive_Care_Unit_Value()
-	{
-		var a_ = new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
-
-		return a_;
-	}
+    private CqlValueSet Intensive_Care_Unit_Value() =>
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", null);
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
@@ -55,20 +51,15 @@ public class VTEFHIR4_4_8_000
 
     private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
-		var a_ = (int?)2019;
-		var b_ = (int?)1;
-		var d_ = (int?)0;
-		var h_ = context.Operators;
-		var i_ = h_.ConvertIntegerToDecimal(default);
-		var k_ = h_.DateTime(a_, b_, b_, d_, d_, d_, d_, i_);
-		var l_ = (int?)2020;
-		var t_ = h_.ConvertIntegerToDecimal(default);
-		var v_ = h_.DateTime(l_, b_, b_, d_, d_, d_, d_, t_);
-		var x_ = h_.Interval(k_, v_, true, false);
-		var y_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", x_);
-		var z_ = (CqlInterval<CqlDateTime>)y_;
+		var a_ = context.Operators;
+		var b_ = a_.ConvertIntegerToDecimal(default);
+		var d_ = a_.DateTime((int?)2019, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, b_);
+		var f_ = a_.ConvertIntegerToDecimal(default);
+		var h_ = a_.DateTime((int?)2020, (int?)1, (int?)1, (int?)0, (int?)0, (int?)0, (int?)0, f_);
+		var j_ = a_.Interval(d_, h_, true, false);
+		var k_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", j_);
 
-		return z_;
+		return (CqlInterval<CqlDateTime>)k_;
 	}
 
     [CqlDeclaration("Measurement Period")]
@@ -91,47 +82,45 @@ public class VTEFHIR4_4_8_000
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
 	{
 		var a_ = Encounter.Location;
-		var b_ = (a_ as IEnumerable<Encounter.LocationComponent>);
-		var c_ = (Encounter.LocationComponent HospitalLocation) =>
+		bool? b_(Encounter.LocationComponent HospitalLocation)
 		{
-			var k_ = HospitalLocation.Location;
-			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(k_);
-			var m_ = l_.Type;
-			var n_ = (m_ as IEnumerable<CodeableConcept>);
-			var o_ = (CodeableConcept X) =>
+			var j_ = HospitalLocation.Location;
+			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(j_);
+			var l_ = k_.Type;
+			CqlConcept m_(CodeableConcept X)
 			{
-				var ac_ = FHIRHelpers_4_0_001.ToConcept(X);
+				var aa_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-				return ac_;
+				return aa_;
 			};
-			var p_ = context.Operators;
-			var q_ = p_.SelectOrNull<CodeableConcept, CqlConcept>(n_, o_);
-			var r_ = this.Intensive_Care_Unit();
-			var t_ = p_.ConceptsInValueSet(q_, r_);
-			var u_ = Encounter.Period;
+			var n_ = context.Operators;
+			var o_ = n_.SelectOrNull<CodeableConcept, CqlConcept>((l_ as IEnumerable<CodeableConcept>), m_);
+			var p_ = this.Intensive_Care_Unit();
+			var r_ = n_.ConceptsInValueSet(o_, p_);
+			var s_ = Encounter.Period;
+			var t_ = FHIRHelpers_4_0_001.ToInterval(s_);
+			var u_ = HospitalLocation.Period;
 			var v_ = FHIRHelpers_4_0_001.ToInterval(u_);
-			var w_ = HospitalLocation.Period;
-			var x_ = FHIRHelpers_4_0_001.ToInterval(w_);
-			var z_ = p_.IntervalIncludesInterval<CqlDateTime>(v_, x_, null);
-			var ab_ = p_.And(t_, z_);
+			var x_ = n_.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
+			var z_ = n_.And(r_, x_);
 
-			return ab_;
+			return z_;
 		};
-		var d_ = context.Operators;
-		var e_ = d_.WhereOrNull<Encounter.LocationComponent>(b_, c_);
-		var f_ = (Encounter.LocationComponent @this) =>
+		var c_ = context.Operators;
+		var d_ = c_.WhereOrNull<Encounter.LocationComponent>((a_ as IEnumerable<Encounter.LocationComponent>), b_);
+		object e_(Encounter.LocationComponent @this)
 		{
-			var ad_ = @this.Period;
-			var ae_ = FHIRHelpers_4_0_001.ToInterval(ad_);
-			var af_ = context.Operators;
-			var ag_ = af_.Start(ae_);
+			var ab_ = @this.Period;
+			var ac_ = FHIRHelpers_4_0_001.ToInterval(ab_);
+			var ad_ = context.Operators;
+			var ae_ = ad_.Start(ac_);
 
-			return ag_;
+			return ae_;
 		};
-		var h_ = d_.ListSortBy<Encounter.LocationComponent>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
-		var j_ = d_.FirstOfList<Encounter.LocationComponent>(h_);
+		var g_ = c_.ListSortBy<Encounter.LocationComponent>(d_, e_, System.ComponentModel.ListSortDirection.Ascending);
+		var i_ = c_.FirstOfList<Encounter.LocationComponent>(g_);
 
-		return j_;
+		return i_;
 	}
 
 

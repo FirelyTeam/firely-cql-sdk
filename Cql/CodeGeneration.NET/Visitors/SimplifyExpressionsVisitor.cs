@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -13,6 +14,16 @@ using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
+
+    /// <summary>
+    /// This Visitor will (in most cases) create a new variable for a nested expression, 
+    /// and assign the visited node's expression to that variable, thus unwinding the deeply nested
+    /// structure of Linq.Expression.
+    /// e.g. exprA(exprB(4)) will be turned into
+    ///     var b = exprB(4)
+    ///     var a = exprA(b)
+    ///     return a;
+    /// </summary>
     internal class SimplifyExpressionsVisitor : ExpressionVisitor
     {
         private bool _atRoot = true;
@@ -37,11 +48,18 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         private Expression doVisit(Expression node)
         {
+            // This visit will, by default, call `simplyfy()` on every
+            // type of node, which unwinds the nesting. Note that, even if you
+            // override a specific visitor, simplify() will still be called on it.
+            // If you do want to avoid a node to be simplified at all, you need
+            // to include a special case in the switch below.
             return node switch
             {
                 ConstantExpression newConstant => VisitConstant(newConstant),
                 ParameterExpression parameter => VisitParameter(parameter),
                 ConditionalExpression cond => VisitConditional(cond),
+                UnaryExpression unary => VisitUnary(unary),
+                NewExpression newe => VisitNew(newe),
                 _ => simplify(base.Visit(node))
             };
         }
@@ -56,6 +74,17 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return newLetVariable;
         }
 
+        protected override Expression VisitUnary(UnaryExpression node)
+        {
+            if (node.NodeType is ExpressionType.Convert or ExpressionType.TypeAs)
+            {
+                return base.VisitUnary(node);
+            }
+            else
+                return simplify(base.VisitUnary(node));
+
+        }
+
         protected override Expression VisitConditional(ConditionalExpression node)
         {
             // Skip this for now: extracting lets here is possible, but would also
@@ -66,9 +95,18 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             //          q = expensiveB(x),
             //      in if(something, p, q)
             // causing expensiveA and expensiveB to be run both regardless of the test.
+
+            // return simplify(node);
             return node;
         }
 
+        protected override Expression VisitNew(NewExpression node)
+        {
+            if (node.Type == typeof(CqlValueSet))
+                return node;
+            else
+                return simplify(node);
+        }
 
         protected override Expression VisitConstant(ConstantExpression node)
         {
