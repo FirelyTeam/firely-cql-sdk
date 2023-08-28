@@ -1449,27 +1449,35 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Tuple(elm.Tuple tuple, ExpressionBuilderContext ctx)
         {
-            if (tuple.resultTypeSpecifier is elm.TupleTypeSpecifier tupleTypeSpecifier)
+            Type tupleType;
+            if (tuple.resultTypeSpecifier != null)
             {
-                var tupleType = TypeManager.TupleTypeFor(tupleTypeSpecifier, ctx);
-                var @new = Expression.New(tupleType);
-                if (tuple.element?.Length > 0)
+                if (tuple.resultTypeSpecifier is elm.TupleTypeSpecifier tupleTypeSpecifier)
                 {
-                    var elementBindings = (tuple.element!)
-                                   .Select(element =>
-                                   {
-                                       var value = TranslateExpression(element.value!, ctx);
-                                       var memberInfo = GetProperty(tupleType, ExpressionBuilderContext.NormalizeIdentifier(element.name!)!);
-                                       var binding = Binding(value, memberInfo, ctx);
-                                       return binding;
-                                   })
-                                   .ToArray();
-                    var init = Expression.MemberInit(@new, elementBindings);
-                    return init;
+                    tupleType = TypeManager.TupleTypeFor(tupleTypeSpecifier, ctx);
                 }
-                else return @new;
+                else throw new InvalidOperationException($"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
             }
-            else throw new InvalidOperationException($"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
+            else
+            {
+                tupleType = TypeManager.TupleTypeFor(tuple, ctx);
+            }
+            var @new = Expression.New(tupleType);
+            if (tuple.element?.Length > 0)
+            {
+                var elementBindings = (tuple.element!)
+                               .Select(element =>
+                               {
+                                   var value = TranslateExpression(element.value!, ctx);
+                                   var memberInfo = GetProperty(tupleType, ExpressionBuilderContext.NormalizeIdentifier(element.name!)!);
+                                   var binding = Binding(value, memberInfo, ctx);
+                                   return binding;
+                               })
+                               .ToArray();
+                var init = Expression.MemberInit(@new, elementBindings);
+                return init;
+            }
+            else return @new;
         }
 
         protected Expression List(List list, ExpressionBuilderContext ctx)
