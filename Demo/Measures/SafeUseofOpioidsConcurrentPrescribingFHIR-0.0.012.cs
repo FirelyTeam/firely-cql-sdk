@@ -189,18 +189,18 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 		bool? b_(Encounter EncounterInpatient)
 		{
 			var e_ = this.Patient();
-			var f_ = e_.BirthDateElement;
-			var g_ = f_.Value;
+			var f_ = e_?.BirthDateElement;
+			var g_ = f_?.Value;
 			var h_ = context.Operators;
 			var i_ = h_.TypeConverter;
 			var j_ = i_.Convert<CqlDate>(g_);
-			var k_ = EncounterInpatient.Period;
+			var k_ = EncounterInpatient?.Period;
 			var l_ = FHIRHelpers_4_0_001.ToInterval(k_);
 			var n_ = h_.Start(l_);
 			var p_ = h_.DateFrom(n_);
 			var r_ = h_.CalculateAgeAt(j_, p_, "year");
 			var t_ = h_.GreaterOrEqual(r_, (int?)18);
-			var u_ = EncounterInpatient.StatusElement;
+			var u_ = EncounterInpatient?.StatusElement;
 			var v_ = new CallStackEntry("ToString", null, null);
 			var w_ = context.Deeper(v_);
 			var x_ = w_.Operators;
@@ -237,7 +237,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var t_ = k_.ListUnion<MedicationRequest>(o_, r_);
 			bool? u_(MedicationRequest Medications)
 			{
-				var af_ = Medications.Category;
+				var af_ = Medications?.Category;
 				bool? ag_(CodeableConcept C)
 				{
 					var al_ = FHIRHelpers_4_0_001.ToConcept(C);
@@ -258,13 +258,13 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var y_ = k_.ListUnion<MedicationRequest>(l_, w_);
 			bool? z_(MedicationRequest OpioidOrBenzodiazepineDischargeMedication)
 			{
-				var ar_ = OpioidOrBenzodiazepineDischargeMedication.AuthoredOnElement;
+				var ar_ = OpioidOrBenzodiazepineDischargeMedication?.AuthoredOnElement;
 				var as_ = FHIRHelpers_4_0_001.ToDateTime(ar_);
-				var at_ = InpatientEncounter.Period;
+				var at_ = InpatientEncounter?.Period;
 				var au_ = FHIRHelpers_4_0_001.ToInterval(at_);
 				var av_ = context.Operators;
 				var aw_ = av_.ElementInInterval<CqlDateTime>(as_, au_, null);
-				var ax_ = OpioidOrBenzodiazepineDischargeMedication.StatusElement;
+				var ax_ = OpioidOrBenzodiazepineDischargeMedication?.StatusElement;
 				var ay_ = new CallStackEntry("ToString", null, null);
 				var az_ = context.Deeper(ay_);
 				var ba_ = az_.Operators;
@@ -272,7 +272,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				var bc_ = bb_.Convert<string>(ax_);
 				var be_ = av_.Equal(bc_, "active");
 				var bg_ = av_.And(aw_, be_);
-				var bh_ = OpioidOrBenzodiazepineDischargeMedication.IntentElement;
+				var bh_ = OpioidOrBenzodiazepineDischargeMedication?.IntentElement;
 				var bj_ = context.Deeper(ay_);
 				var bk_ = bj_.Operators;
 				var bl_ = bk_.TypeConverter;
@@ -357,9 +357,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var p_ = o_.RetrieveByValueSet<MedicationRequest>(n_, null);
 			bool? q_(MedicationRequest Opioids)
 			{
-				var aa_ = Opioids.AuthoredOnElement;
+				var aa_ = Opioids?.AuthoredOnElement;
 				var ab_ = FHIRHelpers_4_0_001.ToDateTime(aa_);
-				var ac_ = InpatientEncounter.Period;
+				var ac_ = InpatientEncounter?.Period;
 				var ad_ = FHIRHelpers_4_0_001.ToInterval(ac_);
 				var ae_ = context.Operators;
 				var af_ = ae_.ElementInInterval<CqlDateTime>(ab_, ad_, null);
@@ -370,7 +370,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var s_ = r_.WhereOrNull<MedicationRequest>(p_, q_);
 			object t_(MedicationRequest Opioids)
 			{
-				var ag_ = Opioids.Medication;
+				var ag_ = Opioids?.Medication;
 
 				return ag_;
 			};
@@ -389,9 +389,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var aj_ = ai_.RetrieveByValueSet<MedicationRequest>(ah_, null);
 			bool? ak_(MedicationRequest OpioidsDischarge)
 			{
-				var aq_ = OpioidsDischarge.AuthoredOnElement;
+				var aq_ = OpioidsDischarge?.AuthoredOnElement;
 				var ar_ = FHIRHelpers_4_0_001.ToDateTime(aq_);
-				var as_ = InpatientEncounter.Period;
+				var as_ = InpatientEncounter?.Period;
 				var at_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				var au_ = context.Operators;
 				var av_ = au_.ElementInInterval<CqlDateTime>(ar_, at_, null);
@@ -413,9 +413,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var ay_ = ax_.RetrieveByValueSet<MedicationRequest>(aw_, null);
 			bool? az_(MedicationRequest BenzodiazepinesDischarge)
 			{
-				var bf_ = BenzodiazepinesDischarge.AuthoredOnElement;
+				var bf_ = BenzodiazepinesDischarge?.AuthoredOnElement;
 				var bg_ = FHIRHelpers_4_0_001.ToDateTime(bf_);
-				var bh_ = InpatientEncounter.Period;
+				var bh_ = InpatientEncounter?.Period;
 				var bi_ = FHIRHelpers_4_0_001.ToInterval(bh_);
 				var bj_ = context.Operators;
 				var bk_ = bj_.ElementInInterval<CqlDateTime>(bg_, bi_, null);
@@ -449,7 +449,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			bool? k_(Condition Cancer)
 			{
 				var ar_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Cancer);
-				var as_ = InpatientEncounter.Period;
+				var as_ = InpatientEncounter?.Period;
 				var at_ = FHIRHelpers_4_0_001.ToInterval(as_);
 				var au_ = context.Operators;
 				var av_ = au_.Overlaps(ar_, at_, null);
@@ -463,13 +463,13 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var r_ = i_.RetrieveByValueSet<ServiceRequest>(p_, null);
 			bool? s_(ServiceRequest PalliativeOrHospiceCareOrder)
 			{
-				var aw_ = PalliativeOrHospiceCareOrder.AuthoredOnElement;
+				var aw_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
 				var ax_ = FHIRHelpers_4_0_001.ToDateTime(aw_);
-				var ay_ = InpatientEncounter.Period;
+				var ay_ = InpatientEncounter?.Period;
 				var az_ = FHIRHelpers_4_0_001.ToInterval(ay_);
 				var ba_ = context.Operators;
 				var bb_ = ba_.ElementInInterval<CqlDateTime>(ax_, az_, null);
-				var bc_ = PalliativeOrHospiceCareOrder.IntentElement;
+				var bc_ = PalliativeOrHospiceCareOrder?.IntentElement;
 				var bd_ = new CallStackEntry("ToString", null, null);
 				var be_ = context.Deeper(bd_);
 				var bf_ = be_.Operators;
@@ -486,9 +486,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var ab_ = i_.RetrieveByValueSet<Procedure>(p_, null);
 			bool? ac_(Procedure PalliativeOrHospiceCarePerformed)
 			{
-				var bm_ = PalliativeOrHospiceCarePerformed.Performed;
+				var bm_ = PalliativeOrHospiceCarePerformed?.Performed;
 				var bn_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bm_);
-				var bo_ = InpatientEncounter.Period;
+				var bo_ = InpatientEncounter?.Period;
 				var bp_ = FHIRHelpers_4_0_001.ToInterval(bo_);
 				var bq_ = context.Operators;
 				var br_ = bq_.Overlaps(bn_, bp_, null);
@@ -501,18 +501,18 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 			var aj_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18();
 			bool? ak_(Encounter InpatientEncounter)
 			{
-				var bs_ = InpatientEncounter.Hospitalization;
-				var bt_ = bs_.DischargeDisposition;
+				var bs_ = InpatientEncounter?.Hospitalization;
+				var bt_ = bs_?.DischargeDisposition;
 				var bu_ = FHIRHelpers_4_0_001.ToConcept(bt_);
 				var bv_ = this.Discharge_To_Acute_Care_Facility();
 				var bw_ = context.Operators;
 				var bx_ = bw_.ConceptInValueSet(bu_, bv_);
-				var bz_ = bs_.DischargeDisposition;
+				var bz_ = bs_?.DischargeDisposition;
 				var ca_ = FHIRHelpers_4_0_001.ToConcept(bz_);
 				var cb_ = this.Hospice_Care_Referral_or_Admission();
 				var cd_ = bw_.ConceptInValueSet(ca_, cb_);
 				var cf_ = bw_.Or(bx_, cd_);
-				var ch_ = bs_.DischargeDisposition;
+				var ch_ = bs_?.DischargeDisposition;
 				var ci_ = FHIRHelpers_4_0_001.ToConcept(ch_);
 				var cj_ = this.Patient_Expired();
 				var cl_ = bw_.ConceptInValueSet(ci_, cj_);

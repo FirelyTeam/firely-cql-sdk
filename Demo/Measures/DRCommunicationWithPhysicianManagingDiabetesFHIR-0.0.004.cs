@@ -387,11 +387,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		bool? x_(Encounter QualifyingEncounter)
 		{
 			var aa_ = this.Measurement_Period();
-			var ab_ = QualifyingEncounter.Period;
+			var ab_ = QualifyingEncounter?.Period;
 			var ac_ = FHIRHelpers_4_0_001.ToInterval(ab_);
 			var ad_ = context.Operators;
 			var ae_ = ad_.IntervalIncludesInterval<CqlDateTime>(aa_, ac_, null);
-			var af_ = QualifyingEncounter.StatusElement;
+			var af_ = QualifyingEncounter?.StatusElement;
 			var ag_ = new CallStackEntry("ToString", null, null);
 			var ah_ = context.Deeper(ag_);
 			var ai_ = ah_.Operators;
@@ -420,14 +420,14 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var g_ = f_.RetrieveByValueSet<Condition>(e_, null);
 			bool? h_(Condition DiabeticRetinopathy)
 			{
-				var n_ = DiabeticRetinopathy.ClinicalStatus;
+				var n_ = DiabeticRetinopathy?.ClinicalStatus;
 				var o_ = FHIRHelpers_4_0_001.ToConcept(n_);
 				var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.active();
 				var q_ = context.Operators;
 				var r_ = q_.ConvertCodeToConcept(p_);
 				var t_ = q_.Equivalent(o_, r_);
 				var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(DiabeticRetinopathy);
-				var v_ = ValidQualifyingEncounter.Period;
+				var v_ = ValidQualifyingEncounter?.Period;
 				var w_ = FHIRHelpers_4_0_001.ToInterval(v_);
 				var y_ = q_.Overlaps(u_, w_, null);
 				var aa_ = q_.And(t_, y_);
@@ -453,10 +453,10 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     [CqlDeclaration("GetModifierExtensions")]
     public IEnumerable<Extension> GetModifierExtensions(DomainResource domainResource, string url)
 	{
-		var a_ = domainResource.ModifierExtension;
+		var a_ = domainResource?.ModifierExtension;
 		bool? b_(Extension E)
 		{
-			var h_ = E.Url;
+			var h_ = E?.Url;
 			var i_ = context.Operators;
 			var j_ = i_.TypeConverter;
 			var k_ = j_.Convert<FhirUri>(h_);
@@ -501,10 +501,10 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var k_ = this.Diabetic_Retinopathy_Encounter();
 			bool? l_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var r_ = EncounterDiabeticRetinopathy.Period;
+				var r_ = EncounterDiabeticRetinopathy?.Period;
 				var s_ = FHIRHelpers_4_0_001.ToInterval(r_);
 				var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)LevelOfSeverityNotCommunicated, "qicore-recorded");
-				var u_ = t_.Value;
+				var u_ = t_?.Value;
 				var v_ = FHIRHelpers_4_0_001.ToInterval((u_ as Period));
 				var w_ = context.Operators;
 				var x_ = w_.IntervalIncludesInterval<CqlDateTime>(s_, v_, null);
@@ -522,7 +522,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var g_ = f_.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? h_(Communication LevelOfSeverityNotCommunicated)
 		{
-			var y_ = LevelOfSeverityNotCommunicated.StatusElement;
+			var y_ = LevelOfSeverityNotCommunicated?.StatusElement;
 			var z_ = new CallStackEntry("ToString", null, null);
 			var aa_ = context.Deeper(z_);
 			var ab_ = aa_.Operators;
@@ -531,11 +531,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var ae_ = context.Operators;
 			var af_ = ae_.Equal(ad_, "not-done");
 			var ag_ = this.GetModifierExtension(LevelOfSeverityNotCommunicated, "qicore-notDone");
-			var ah_ = ag_.Value;
+			var ah_ = ag_?.Value;
 			var ai_ = FHIRHelpers_4_0_001.ToBoolean((ah_ as FhirBoolean));
 			var ak_ = ae_.IsTrue(ai_);
 			var am_ = ae_.And(af_, ak_);
-			var an_ = LevelOfSeverityNotCommunicated.StatusReason;
+			var an_ = LevelOfSeverityNotCommunicated?.StatusReason;
 			var ao_ = FHIRHelpers_4_0_001.ToConcept(an_);
 			var ap_ = this.Medical_Reason();
 			var ar_ = ae_.ConceptInValueSet(ao_, ap_);
@@ -568,10 +568,10 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var m_ = this.Diabetic_Retinopathy_Encounter();
 			bool? n_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var t_ = EncounterDiabeticRetinopathy.Period;
+				var t_ = EncounterDiabeticRetinopathy?.Period;
 				var u_ = FHIRHelpers_4_0_001.ToInterval(t_);
 				var v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)MacularEdemaAbsentNotCommunicated, "qicore-recorded");
-				var w_ = v_.Value;
+				var w_ = v_?.Value;
 				var x_ = FHIRHelpers_4_0_001.ToInterval((w_ as Period));
 				var y_ = context.Operators;
 				var z_ = y_.IntervalIncludesInterval<CqlDateTime>(u_, x_, null);
@@ -588,7 +588,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var i_ = b_.SelectManyOrNull<Communication, Communication>(f_, g_);
 		bool? j_(Communication MacularEdemaAbsentNotCommunicated)
 		{
-			var aa_ = MacularEdemaAbsentNotCommunicated.StatusElement;
+			var aa_ = MacularEdemaAbsentNotCommunicated?.StatusElement;
 			var ab_ = new CallStackEntry("ToString", null, null);
 			var ac_ = context.Deeper(ab_);
 			var ad_ = ac_.Operators;
@@ -597,11 +597,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var ag_ = context.Operators;
 			var ah_ = ag_.Equal(af_, "not-done");
 			var ai_ = this.GetModifierExtension(MacularEdemaAbsentNotCommunicated, "qicore-notDone");
-			var aj_ = ai_.Value;
+			var aj_ = ai_?.Value;
 			var ak_ = FHIRHelpers_4_0_001.ToBoolean((aj_ as FhirBoolean));
 			var am_ = ag_.IsTrue(ak_);
 			var ao_ = ag_.And(ah_, am_);
-			var ap_ = MacularEdemaAbsentNotCommunicated.StatusReason;
+			var ap_ = MacularEdemaAbsentNotCommunicated?.StatusReason;
 			var aq_ = FHIRHelpers_4_0_001.ToConcept(ap_);
 			var ar_ = this.Medical_Reason();
 			var at_ = ag_.ConceptInValueSet(aq_, ar_);
@@ -632,10 +632,10 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var k_ = this.Diabetic_Retinopathy_Encounter();
 			bool? l_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var r_ = EncounterDiabeticRetinopathy.Period;
+				var r_ = EncounterDiabeticRetinopathy?.Period;
 				var s_ = FHIRHelpers_4_0_001.ToInterval(r_);
 				var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)MacularEdemaPresentNotCommunicated, "qicore-recorded");
-				var u_ = t_.Value;
+				var u_ = t_?.Value;
 				var v_ = FHIRHelpers_4_0_001.ToInterval((u_ as Period));
 				var w_ = context.Operators;
 				var x_ = w_.IntervalIncludesInterval<CqlDateTime>(s_, v_, null);
@@ -653,7 +653,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var g_ = f_.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? h_(Communication MacularEdemaPresentNotCommunicated)
 		{
-			var y_ = MacularEdemaPresentNotCommunicated.StatusElement;
+			var y_ = MacularEdemaPresentNotCommunicated?.StatusElement;
 			var z_ = new CallStackEntry("ToString", null, null);
 			var aa_ = context.Deeper(z_);
 			var ab_ = aa_.Operators;
@@ -662,11 +662,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var ae_ = context.Operators;
 			var af_ = ae_.Equal(ad_, "not-done");
 			var ag_ = this.GetModifierExtension(MacularEdemaPresentNotCommunicated, "qicore-notDone");
-			var ah_ = ag_.Value;
+			var ah_ = ag_?.Value;
 			var ai_ = FHIRHelpers_4_0_001.ToBoolean((ah_ as FhirBoolean));
 			var ak_ = ae_.IsTrue(ai_);
 			var am_ = ae_.And(af_, ak_);
-			var an_ = MacularEdemaPresentNotCommunicated.StatusReason;
+			var an_ = MacularEdemaPresentNotCommunicated?.StatusReason;
 			var ao_ = FHIRHelpers_4_0_001.ToConcept(an_);
 			var ap_ = this.Medical_Reason();
 			var ar_ = ae_.ConceptInValueSet(ao_, ap_);
@@ -707,8 +707,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.ConvertStringToDateTime(c_);
 		var f_ = this.Measurement_Period();
@@ -735,9 +735,9 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var j_ = this.Diabetic_Retinopathy_Encounter();
 			bool? k_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var q_ = EncounterDiabeticRetinopathy.Period;
+				var q_ = EncounterDiabeticRetinopathy?.Period;
 				var r_ = FHIRHelpers_4_0_001.ToInterval(q_);
-				var s_ = MacularExam.Effective;
+				var s_ = MacularExam?.Effective;
 				var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(s_);
 				var u_ = context.Operators;
 				var v_ = u_.IntervalIncludesInterval<CqlDateTime>(r_, t_, null);
@@ -755,7 +755,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var f_ = e_.SelectManyOrNull<Observation, Observation>(c_, d_);
 		bool? g_(Observation MacularExam)
 		{
-			var w_ = MacularExam.StatusElement;
+			var w_ = MacularExam?.StatusElement;
 			var x_ = new CallStackEntry("ToString", null, null);
 			var y_ = context.Deeper(x_);
 			var z_ = y_.Operators;
@@ -769,12 +769,11 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			};
 			var ad_ = context.Operators;
 			var ae_ = ad_.InList<string>(ab_, (ac_ as IEnumerable<string>));
-			var af_ = MacularExam.Value;
-			var ag_ = (af_ == null);
-			var ai_ = ad_.Not((bool?)ag_);
-			var ak_ = ad_.And(ae_, ai_);
+			var af_ = MacularExam?.Value;
+			var ah_ = ad_.Not((bool?)(af_ is null));
+			var aj_ = ad_.And(ae_, ah_);
 
-			return ak_;
+			return aj_;
 		};
 		var i_ = e_.WhereOrNull<Observation>(f_, g_);
 
@@ -809,9 +808,9 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var k_ = this.Diabetic_Retinopathy_Encounter();
 			bool? l_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var r_ = LevelOfSeverityCommunicated.SentElement;
+				var r_ = LevelOfSeverityCommunicated?.SentElement;
 				var s_ = FHIRHelpers_4_0_001.ToDateTime(r_);
-				var t_ = EncounterDiabeticRetinopathy.Period;
+				var t_ = EncounterDiabeticRetinopathy?.Period;
 				var u_ = FHIRHelpers_4_0_001.ToInterval(t_);
 				var v_ = context.Operators;
 				var w_ = v_.Start(u_);
@@ -830,7 +829,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var g_ = f_.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? h_(Communication LevelOfSeverityCommunicated)
 		{
-			var z_ = LevelOfSeverityCommunicated.StatusElement;
+			var z_ = LevelOfSeverityCommunicated?.StatusElement;
 			var aa_ = new CallStackEntry("ToString", null, null);
 			var ab_ = context.Deeper(aa_);
 			var ac_ = ab_.Operators;
@@ -862,9 +861,9 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var m_ = this.Diabetic_Retinopathy_Encounter();
 			bool? n_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var t_ = MacularEdemaAbsentCommunicated.SentElement;
+				var t_ = MacularEdemaAbsentCommunicated?.SentElement;
 				var u_ = FHIRHelpers_4_0_001.ToDateTime(t_);
-				var v_ = EncounterDiabeticRetinopathy.Period;
+				var v_ = EncounterDiabeticRetinopathy?.Period;
 				var w_ = FHIRHelpers_4_0_001.ToInterval(v_);
 				var x_ = context.Operators;
 				var y_ = x_.Start(w_);
@@ -882,7 +881,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var i_ = b_.SelectManyOrNull<Communication, Communication>(f_, g_);
 		bool? j_(Communication MacularEdemaAbsentCommunicated)
 		{
-			var ab_ = MacularEdemaAbsentCommunicated.StatusElement;
+			var ab_ = MacularEdemaAbsentCommunicated?.StatusElement;
 			var ac_ = new CallStackEntry("ToString", null, null);
 			var ad_ = context.Deeper(ac_);
 			var ae_ = ad_.Operators;
@@ -912,9 +911,9 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			var k_ = this.Diabetic_Retinopathy_Encounter();
 			bool? l_(Encounter EncounterDiabeticRetinopathy)
 			{
-				var r_ = MacularEdemaPresentCommunicated.SentElement;
+				var r_ = MacularEdemaPresentCommunicated?.SentElement;
 				var s_ = FHIRHelpers_4_0_001.ToDateTime(r_);
-				var t_ = EncounterDiabeticRetinopathy.Period;
+				var t_ = EncounterDiabeticRetinopathy?.Period;
 				var u_ = FHIRHelpers_4_0_001.ToInterval(t_);
 				var v_ = context.Operators;
 				var w_ = v_.Start(u_);
@@ -933,7 +932,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 		var g_ = f_.SelectManyOrNull<Communication, Communication>(d_, e_);
 		bool? h_(Communication MacularEdemaPresentCommunicated)
 		{
-			var z_ = MacularEdemaPresentCommunicated.StatusElement;
+			var z_ = MacularEdemaPresentCommunicated?.StatusElement;
 			var aa_ = new CallStackEntry("ToString", null, null);
 			var ab_ = context.Deeper(aa_);
 			var ac_ = ab_.Operators;

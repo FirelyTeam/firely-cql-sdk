@@ -238,11 +238,11 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		var c_ = b_.RetrieveByValueSet<MedicationRequest>(a_, null);
 		bool? d_(MedicationRequest NoAntithromboticDischarge)
 		{
-			var g_ = NoAntithromboticDischarge.DoNotPerformElement;
+			var g_ = NoAntithromboticDischarge?.DoNotPerformElement;
 			var h_ = FHIRHelpers_4_0_001.ToBoolean(g_);
 			var i_ = context.Operators;
 			var j_ = i_.IsTrue(h_);
-			var k_ = NoAntithromboticDischarge.ReasonCode;
+			var k_ = NoAntithromboticDischarge?.ReasonCode;
 			CqlConcept l_(CodeableConcept X)
 			{
 				var bf_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -263,7 +263,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var x_ = i_.ConceptsInValueSet(u_, v_);
 			var z_ = i_.Or(q_, x_);
 			var ab_ = i_.And(j_, z_);
-			var ac_ = NoAntithromboticDischarge.Category;
+			var ac_ = NoAntithromboticDischarge?.Category;
 			bool? ad_(CodeableConcept C)
 			{
 				var bh_ = FHIRHelpers_4_0_001.ToConcept(C);
@@ -281,7 +281,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var af_ = i_.WhereOrNull<CodeableConcept>((ac_ as IEnumerable<CodeableConcept>), ad_);
 			var ah_ = i_.ExistsInList<CodeableConcept>(af_);
 			var aj_ = i_.And(ab_, ah_);
-			var ak_ = NoAntithromboticDischarge.StatusElement;
+			var ak_ = NoAntithromboticDischarge?.StatusElement;
 			var al_ = new CallStackEntry("ToString", null, null);
 			var am_ = context.Deeper(al_);
 			var an_ = am_.Operators;
@@ -294,7 +294,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			};
 			var as_ = i_.InList<string>(ap_, (aq_ as IEnumerable<string>));
 			var au_ = i_.And(aj_, as_);
-			var av_ = NoAntithromboticDischarge.IntentElement;
+			var av_ = NoAntithromboticDischarge?.IntentElement;
 			var ax_ = context.Deeper(al_);
 			var ay_ = ax_.Operators;
 			var az_ = ay_.TypeConverter;
@@ -321,9 +321,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var e_ = this.Antithrombotic_Not_Given_at_Discharge();
 			bool? f_(MedicationRequest NoDischargeAntithrombotic)
 			{
-				var l_ = NoDischargeAntithrombotic.AuthoredOnElement;
+				var l_ = NoDischargeAntithrombotic?.AuthoredOnElement;
 				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
-				var n_ = IschemicStrokeEncounter.Period;
+				var n_ = IschemicStrokeEncounter?.Period;
 				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
 				var p_ = context.Operators;
 				var q_ = p_.ElementInInterval<CqlDateTime>(m_, o_, null);
@@ -353,12 +353,12 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		var c_ = b_.RetrieveByValueSet<MedicationRequest>(a_, null);
 		bool? d_(MedicationRequest Pharmacological)
 		{
-			var g_ = Pharmacological.DoNotPerformElement;
+			var g_ = Pharmacological?.DoNotPerformElement;
 			var h_ = FHIRHelpers_4_0_001.ToBoolean(g_);
 			var i_ = context.Operators;
 			var j_ = i_.IsTrue(h_);
 			var l_ = i_.Not(j_);
-			var m_ = Pharmacological.Category;
+			var m_ = Pharmacological?.Category;
 			bool? n_(CodeableConcept C)
 			{
 				var ap_ = FHIRHelpers_4_0_001.ToConcept(C);
@@ -376,7 +376,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var p_ = i_.WhereOrNull<CodeableConcept>((m_ as IEnumerable<CodeableConcept>), n_);
 			var r_ = i_.ExistsInList<CodeableConcept>(p_);
 			var t_ = i_.And(l_, r_);
-			var u_ = Pharmacological.StatusElement;
+			var u_ = Pharmacological?.StatusElement;
 			var v_ = new CallStackEntry("ToString", null, null);
 			var w_ = context.Deeper(v_);
 			var x_ = w_.Operators;
@@ -389,7 +389,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			};
 			var ac_ = i_.InList<string>(z_, (aa_ as IEnumerable<string>));
 			var ae_ = i_.And(t_, ac_);
-			var af_ = Pharmacological.IntentElement;
+			var af_ = Pharmacological?.IntentElement;
 			var ah_ = context.Deeper(v_);
 			var ai_ = ah_.Operators;
 			var aj_ = ai_.TypeConverter;
@@ -416,9 +416,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var e_ = this.Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge();
 			bool? f_(MedicationRequest DischargePharmacological)
 			{
-				var l_ = DischargePharmacological.AuthoredOnElement;
+				var l_ = DischargePharmacological?.AuthoredOnElement;
 				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
-				var n_ = IschemicStrokeEncounter.Period;
+				var n_ = IschemicStrokeEncounter?.Period;
 				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
 				var p_ = context.Operators;
 				var q_ = p_.ElementInInterval<CqlDateTime>(m_, o_, null);
@@ -484,12 +484,12 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 		var c_ = b_.RetrieveByValueSet<MedicationRequest>(a_, null);
 		bool? d_(MedicationRequest Antithrombotic)
 		{
-			var g_ = Antithrombotic.DoNotPerformElement;
+			var g_ = Antithrombotic?.DoNotPerformElement;
 			var h_ = FHIRHelpers_4_0_001.ToBoolean(g_);
 			var i_ = context.Operators;
 			var j_ = i_.IsTrue(h_);
 			var l_ = i_.Not(j_);
-			var m_ = Antithrombotic.Category;
+			var m_ = Antithrombotic?.Category;
 			bool? n_(CodeableConcept C)
 			{
 				var ap_ = FHIRHelpers_4_0_001.ToConcept(C);
@@ -507,7 +507,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var p_ = i_.WhereOrNull<CodeableConcept>((m_ as IEnumerable<CodeableConcept>), n_);
 			var r_ = i_.ExistsInList<CodeableConcept>(p_);
 			var t_ = i_.And(l_, r_);
-			var u_ = Antithrombotic.StatusElement;
+			var u_ = Antithrombotic?.StatusElement;
 			var v_ = new CallStackEntry("ToString", null, null);
 			var w_ = context.Deeper(v_);
 			var x_ = w_.Operators;
@@ -520,7 +520,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			};
 			var ac_ = i_.InList<string>(z_, (aa_ as IEnumerable<string>));
 			var ae_ = i_.And(t_, ac_);
-			var af_ = Antithrombotic.IntentElement;
+			var af_ = Antithrombotic?.IntentElement;
 			var ah_ = context.Deeper(v_);
 			var ai_ = ah_.Operators;
 			var aj_ = ai_.TypeConverter;
@@ -547,9 +547,9 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 			var e_ = this.Antithrombotic_Therapy_at_Discharge();
 			bool? f_(MedicationRequest DischargeAntithrombotic)
 			{
-				var l_ = DischargeAntithrombotic.AuthoredOnElement;
+				var l_ = DischargeAntithrombotic?.AuthoredOnElement;
 				var m_ = FHIRHelpers_4_0_001.ToDateTime(l_);
-				var n_ = IschemicStrokeEncounter.Period;
+				var n_ = IschemicStrokeEncounter?.Period;
 				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
 				var p_ = context.Operators;
 				var q_ = p_.ElementInInterval<CqlDateTime>(m_, o_, null);

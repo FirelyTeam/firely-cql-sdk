@@ -509,14 +509,14 @@ public class FHIR347_0_1_021
 		var ar_ = g_.ListUnion<Procedure>(ah_, ap_);
 		bool? as_(Procedure ASCVDProcedure)
 		{
-			var bf_ = ASCVDProcedure.Performed;
+			var bf_ = ASCVDProcedure?.Performed;
 			var bg_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bf_);
 			var bh_ = context.Operators;
 			var bi_ = bh_.Start(bg_);
 			var bj_ = this.Measurement_Period();
 			var bl_ = bh_.End(bj_);
 			var bn_ = bh_.Before(bi_, bl_, null);
-			var bo_ = ASCVDProcedure.StatusElement;
+			var bo_ = ASCVDProcedure?.StatusElement;
 			var bp_ = new CallStackEntry("ToString", null, null);
 			var bq_ = context.Deeper(bp_);
 			var br_ = bq_.Operators;
@@ -566,11 +566,11 @@ public class FHIR347_0_1_021
 		bool? am_(Encounter ValidEncounter)
 		{
 			var ap_ = this.Measurement_Period();
-			var aq_ = ValidEncounter.Period;
+			var aq_ = ValidEncounter?.Period;
 			var ar_ = FHIRHelpers_4_0_001.ToInterval(aq_);
 			var as_ = context.Operators;
 			var at_ = as_.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, null);
-			var au_ = ValidEncounter.StatusElement;
+			var au_ = ValidEncounter?.StatusElement;
 			var av_ = new CallStackEntry("ToString", null, null);
 			var aw_ = context.Deeper(av_);
 			var ax_ = aw_.Operators;
@@ -617,8 +617,8 @@ public class FHIR347_0_1_021
     private bool? Patients_Age_20_or_Older_at_Start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.ConvertStringToDateTime(c_);
 		var f_ = this.Measurement_Period();
@@ -639,19 +639,19 @@ public class FHIR347_0_1_021
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
 		bool? d_(Observation LDL)
 		{
-			var g_ = LDL.Value;
+			var g_ = LDL?.Value;
 			var h_ = FHIRHelpers_4_0_001.ToQuantity((g_ as Quantity));
 			var i_ = context.Operators;
 			var j_ = i_.Quantity(190m, "mg/dL");
 			var l_ = i_.GreaterOrEqual(h_, j_);
-			var m_ = LDL.Effective;
+			var m_ = LDL?.Effective;
 			var n_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(m_);
 			var p_ = i_.Start(n_);
 			var q_ = this.Measurement_Period();
 			var s_ = i_.End(q_);
 			var u_ = i_.Before(p_, s_, null);
 			var w_ = i_.And(l_, u_);
-			var x_ = LDL.StatusElement;
+			var x_ = LDL?.StatusElement;
 			var y_ = new CallStackEntry("ToString", null, null);
 			var z_ = context.Deeper(y_);
 			var aa_ = z_.Operators;
@@ -774,8 +774,8 @@ public class FHIR347_0_1_021
     private bool? Patients_Age_40_to_75_Years_with_Diabetes_without_ASCVD_or_LDL_Greater_than_190_or_Hypercholesterolemia_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.ConvertStringToDateTime(c_);
 		var f_ = this.Measurement_Period();
@@ -875,7 +875,7 @@ public class FHIR347_0_1_021
 		var c_ = b_.RetrieveByValueSet<AllergyIntolerance>(a_, null);
 		bool? d_(AllergyIntolerance StatinAllergy)
 		{
-			var i_ = StatinAllergy.Onset;
+			var i_ = StatinAllergy?.Onset;
 			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(i_);
 			var k_ = context.Operators;
 			var l_ = k_.Start(j_);
@@ -906,13 +906,13 @@ public class FHIR347_0_1_021
 		var h_ = g_.ListUnion<ServiceRequest>(c_, f_);
 		bool? i_(ServiceRequest PalliativeOrHospiceCareOrder)
 		{
-			var ao_ = PalliativeOrHospiceCareOrder.AuthoredOnElement;
+			var ao_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
 			var ap_ = FHIRHelpers_4_0_001.ToDateTime(ao_);
 			var aq_ = this.Measurement_Period();
 			var ar_ = context.Operators;
 			var as_ = ar_.End(aq_);
 			var au_ = ar_.SameOrBefore(ap_, as_, null);
-			var av_ = PalliativeOrHospiceCareOrder.StatusElement;
+			var av_ = PalliativeOrHospiceCareOrder?.StatusElement;
 			var aw_ = new CallStackEntry("ToString", null, null);
 			var ax_ = context.Deeper(aw_);
 			var ay_ = ax_.Operators;
@@ -926,7 +926,7 @@ public class FHIR347_0_1_021
 			};
 			var bd_ = ar_.InList<string>(ba_, (bb_ as IEnumerable<string>));
 			var bf_ = ar_.And(au_, bd_);
-			var bg_ = PalliativeOrHospiceCareOrder.IntentElement;
+			var bg_ = PalliativeOrHospiceCareOrder?.IntentElement;
 			var bi_ = context.Deeper(aw_);
 			var bj_ = bi_.Operators;
 			var bk_ = bj_.TypeConverter;
@@ -943,14 +943,14 @@ public class FHIR347_0_1_021
 		var u_ = g_.ListUnion<Procedure>(p_, s_);
 		bool? v_(Procedure PalliativeOrHospiceCarePerformed)
 		{
-			var bq_ = PalliativeOrHospiceCarePerformed.Performed;
+			var bq_ = PalliativeOrHospiceCarePerformed?.Performed;
 			var br_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bq_);
 			var bs_ = context.Operators;
 			var bt_ = bs_.Start(br_);
 			var bu_ = this.Measurement_Period();
 			var bw_ = bs_.End(bu_);
 			var by_ = bs_.SameOrBefore(bt_, bw_, null);
-			var bz_ = PalliativeOrHospiceCarePerformed.StatusElement;
+			var bz_ = PalliativeOrHospiceCarePerformed?.StatusElement;
 			var ca_ = new CallStackEntry("ToString", null, null);
 			var cb_ = context.Deeper(ca_);
 			var cc_ = cb_.Operators;
@@ -969,14 +969,14 @@ public class FHIR347_0_1_021
 		var ag_ = b_.RetrieveByCodes<Encounter>(ae_, null);
 		bool? ah_(Encounter PalliativeEncounter)
 		{
-			var cj_ = PalliativeEncounter.Period;
+			var cj_ = PalliativeEncounter?.Period;
 			var ck_ = FHIRHelpers_4_0_001.ToInterval(cj_);
 			var cl_ = context.Operators;
 			var cm_ = cl_.Start(ck_);
 			var cn_ = this.Measurement_Period();
 			var cp_ = cl_.End(cn_);
 			var cr_ = cl_.SameOrBefore(cm_, cp_, null);
-			var cs_ = PalliativeEncounter.StatusElement;
+			var cs_ = PalliativeEncounter?.StatusElement;
 			var ct_ = new CallStackEntry("ToString", null, null);
 			var cu_ = context.Deeper(ct_);
 			var cv_ = cu_.Operators;
@@ -1084,7 +1084,7 @@ public class FHIR347_0_1_021
 		var c_ = b_.RetrieveByValueSet<AdverseEvent>(a_, null);
 		bool? d_(AdverseEvent StatinReaction)
 		{
-			var i_ = StatinReaction.DateElement;
+			var i_ = StatinReaction?.DateElement;
 			var j_ = FHIRHelpers_4_0_001.ToDateTime(i_);
 			var k_ = this.Measurement_Period();
 			var l_ = context.Operators;
@@ -1173,12 +1173,12 @@ public class FHIR347_0_1_021
 		var ab_ = g_.ListUnion<MedicationRequest>(r_, z_);
 		bool? ac_(MedicationRequest StatinOrdered)
 		{
-			var af_ = StatinOrdered.AuthoredOnElement;
+			var af_ = StatinOrdered?.AuthoredOnElement;
 			var ag_ = FHIRHelpers_4_0_001.ToDateTime(af_);
 			var ah_ = this.Measurement_Period();
 			var ai_ = context.Operators;
 			var aj_ = ai_.ElementInInterval<CqlDateTime>(ag_, ah_, null);
-			var ak_ = StatinOrdered.StatusElement;
+			var ak_ = StatinOrdered?.StatusElement;
 			var al_ = new CallStackEntry("ToString", null, null);
 			var am_ = context.Deeper(al_);
 			var an_ = am_.Operators;
@@ -1191,7 +1191,7 @@ public class FHIR347_0_1_021
 			};
 			var as_ = ai_.InList<string>(ap_, (aq_ as IEnumerable<string>));
 			var au_ = ai_.And(aj_, as_);
-			var av_ = StatinOrdered.IntentElement;
+			var av_ = StatinOrdered?.IntentElement;
 			var ax_ = context.Deeper(al_);
 			var ay_ = ax_.Operators;
 			var az_ = ay_.TypeConverter;
@@ -1229,34 +1229,48 @@ public class FHIR347_0_1_021
 		var ab_ = g_.ListUnion<MedicationRequest>(r_, z_);
 		bool? ac_(MedicationRequest ActiveStatin)
 		{
-			var af_ = ActiveStatin.DosageInstruction;
+			var af_ = ActiveStatin?.DosageInstruction;
 			bool? ag_(Dosage @this)
 			{
-				var bc_ = @this.Timing;
-				var bd_ = (bc_ == null);
-				var be_ = context.Operators;
-				var bf_ = be_.Not((bool?)bd_);
+				var bc_ = @this?.Timing;
+				var bd_ = context.Operators;
+				var be_ = bd_.Not((bool?)(bc_ is null));
 
-				return bf_;
+				return be_;
 			};
 			var ah_ = context.Operators;
 			var ai_ = ah_.WhereOrNull<Dosage>(af_, ag_);
 			Timing aj_(Dosage @this)
 			{
-				var bg_ = @this.Timing;
+				var bf_ = @this?.Timing;
 
-				return bg_;
+				return bf_;
 			};
 			var al_ = ah_.SelectOrNull<Dosage, Timing>(ai_, aj_);
 			bool? am_(Timing T)
 			{
-				var bh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(((((T.Repeat.Bounds is Range as bool?) ?? false))
-						? ((T.Repeat.Bounds as Range))
-						: (((((T.Repeat.Bounds is Period as bool?) ?? false))
-								? ((T.Repeat.Bounds as Period))
-								: (null))
-))
-);
+				object bg_()
+				{
+					if (((T?.Repeat?.Bounds is Range as bool?) ?? false))
+					{
+						var bl_ = T?.Repeat;
+						var bm_ = bl_?.Bounds;
+
+						return (bm_ as Range);
+					}
+					else if (((T?.Repeat?.Bounds is Period as bool?) ?? false))
+					{
+						var bn_ = T?.Repeat;
+						var bo_ = bn_?.Bounds;
+
+						return (bo_ as Period);
+					}
+					else
+						return null;
+
+;
+				};
+				var bh_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(bg_());
 				var bi_ = this.Measurement_Period();
 				var bj_ = context.Operators;
 				var bk_ = bj_.Overlaps(bh_, bi_, null);
@@ -1265,7 +1279,7 @@ public class FHIR347_0_1_021
 			};
 			var ao_ = ah_.WhereOrNull<Timing>(al_, am_);
 			var aq_ = ah_.ExistsInList<Timing>(ao_);
-			var ar_ = ActiveStatin.StatusElement;
+			var ar_ = ActiveStatin?.StatusElement;
 			var as_ = new CallStackEntry("ToString", null, null);
 			var at_ = context.Deeper(as_);
 			var au_ = at_.Operators;

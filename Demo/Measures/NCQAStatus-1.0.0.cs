@@ -56,7 +56,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(AllergyIntolerance A)
 		{
-			var d_ = A.ClinicalStatus;
+			var d_ = A?.ClinicalStatus;
 			var e_ = FHIRHelpers_4_0_001.ToConcept(d_);
 			var f_ = NCQATerminology_1_0_0.allergy_active();
 			var g_ = context.Operators;
@@ -77,7 +77,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Condition C)
 		{
-			var d_ = C.ClinicalStatus;
+			var d_ = C?.ClinicalStatus;
 			var e_ = FHIRHelpers_4_0_001.ToConcept(d_);
 			var f_ = NCQATerminology_1_0_0.active();
 			var g_ = context.Operators;
@@ -98,7 +98,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Encounter E)
 		{
-			var d_ = E.StatusElement;
+			var d_ = E?.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
 			var f_ = context.Deeper(e_);
 			var g_ = f_.Operators;
@@ -121,7 +121,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Immunization I)
 		{
-			var d_ = I.StatusElement;
+			var d_ = I?.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
 			var f_ = context.Deeper(e_);
 			var g_ = f_.Operators;
@@ -144,7 +144,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationDispense M)
 		{
-			var d_ = M.StatusElement;
+			var d_ = M?.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
 			var f_ = context.Deeper(e_);
 			var g_ = f_.Operators;
@@ -167,7 +167,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(MedicationRequest M)
 		{
-			var d_ = M.StatusElement;
+			var d_ = M?.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
 			var f_ = context.Deeper(e_);
 			var g_ = f_.Operators;
@@ -194,7 +194,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var d_ = P.StatusElement;
+			var d_ = P?.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
 			var f_ = context.Deeper(e_);
 			var g_ = f_.Operators;
@@ -217,7 +217,7 @@ public class NCQAStatus_1_0_0
 	{
 		bool? a_(Procedure P)
 		{
-			var d_ = P.StatusElement;
+			var d_ = P?.StatusElement;
 			var e_ = new CallStackEntry("ToString", null, null);
 			var f_ = context.Deeper(e_);
 			var g_ = f_.Operators;

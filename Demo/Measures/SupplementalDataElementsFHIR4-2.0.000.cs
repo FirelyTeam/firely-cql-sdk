@@ -97,7 +97,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	{
 		bool? a_(Extension Extension)
 		{
-			var o_ = Extension.Url;
+			var o_ = Extension?.Url;
 			var p_ = context.Operators;
 			var q_ = p_.TypeConverter;
 			var r_ = q_.Convert<FhirUri>(o_);
@@ -113,11 +113,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var b_ = context.Operators;
 		var c_ = b_.WhereOrNull<Extension>(((this.Patient() is DomainResource)
 				? (((this.Patient() as DomainResource).Extension as IEnumerable<Extension>))
-				: ((null as IEnumerable<Extension>)))
-, a_);
+				: ((null as IEnumerable<Extension>))), a_);
 		IEnumerable<Extension> d_(Extension Extension)
 		{
-			var z_ = Extension.Extension;
+			var z_ = Extension?.Extension;
 
 			return (z_ as IEnumerable<Extension>);
 		};
@@ -125,7 +124,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var h_ = b_.FlattenList<Extension>(f_);
 		bool? i_(Extension E)
 		{
-			var aa_ = E.Url;
+			var aa_ = E?.Url;
 			var ab_ = context.Operators;
 			var ac_ = ab_.TypeConverter;
 			var ad_ = ac_.Convert<FhirUri>(aa_);
@@ -149,7 +148,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var k_ = b_.WhereOrNull<Extension>(h_, i_);
 		Coding l_(Extension E)
 		{
-			var ay_ = E.Value;
+			var ay_ = E?.Value;
 
 			return (ay_ as Coding);
 		};
@@ -168,8 +167,8 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var c_ = b_.RetrieveByValueSet<Coverage>(a_, null);
 		Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG d_(Coverage Payer)
 		{
-			var g_ = Payer.Type;
-			var h_ = Payer.Period;
+			var g_ = Payer?.Type;
+			var h_ = Payer?.Period;
 			var i_ = new Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG
 			{
 				code = g_,
@@ -191,7 +190,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 	{
 		bool? a_(Extension Extension)
 		{
-			var o_ = Extension.Url;
+			var o_ = Extension?.Url;
 			var p_ = context.Operators;
 			var q_ = p_.TypeConverter;
 			var r_ = q_.Convert<FhirUri>(o_);
@@ -207,11 +206,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var b_ = context.Operators;
 		var c_ = b_.WhereOrNull<Extension>(((this.Patient() is DomainResource)
 				? (((this.Patient() as DomainResource).Extension as IEnumerable<Extension>))
-				: ((null as IEnumerable<Extension>)))
-, a_);
+				: ((null as IEnumerable<Extension>))), a_);
 		IEnumerable<Extension> d_(Extension Extension)
 		{
-			var z_ = Extension.Extension;
+			var z_ = Extension?.Extension;
 
 			return (z_ as IEnumerable<Extension>);
 		};
@@ -219,7 +217,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var h_ = b_.FlattenList<Extension>(f_);
 		bool? i_(Extension E)
 		{
-			var aa_ = E.Url;
+			var aa_ = E?.Url;
 			var ab_ = context.Operators;
 			var ac_ = ab_.TypeConverter;
 			var ad_ = ac_.Convert<FhirUri>(aa_);
@@ -243,7 +241,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var k_ = b_.WhereOrNull<Extension>(h_, i_);
 		Coding l_(Extension E)
 		{
-			var ay_ = E.Value;
+			var ay_ = E?.Value;
 
 			return (ay_ as Coding);
 		};
@@ -256,22 +254,29 @@ public class SupplementalDataElementsFHIR4_2_0_000
     public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
 
     private CqlCode SDE_Sex_Value()
-    {
-        if ((context.Operators.Equal((context.Deeper(new CallStackEntry("ToString", null, null)).Operators.TypeConverter).Convert<string>(this.Patient().GenderElement), "male") ?? false))
+	{
+		CqlCode a_()
 		{
-			var a__ = new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Male");
+			if ((context.Operators.Equal((context.Deeper(new CallStackEntry("ToString", null, null)).Operators.TypeConverter).Convert<string>(this.Patient()?.GenderElement), "male") ?? false))
+			{
+				var b_ = new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Male");
 
-			return a__;
-		}
-        else if ((context.Operators.Equal((context.Deeper(new CallStackEntry("ToString", null, null)).Operators.TypeConverter).Convert<string>(this.Patient().GenderElement), "female") ?? false))
-		{
-			var a__ = new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Female");
+				return b_;
+			}
+			else if ((context.Operators.Equal((context.Deeper(new CallStackEntry("ToString", null, null)).Operators.TypeConverter).Convert<string>(this.Patient()?.GenderElement), "female") ?? false))
+			{
+				var c_ = new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Female");
 
-			return a__;
-		}
-        else
-            return null;
-    }
+				return c_;
+			}
+			else
+				return null;
+
+;
+		};
+
+		return a_();
+	}
 
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex() => __SDE_Sex.Value;

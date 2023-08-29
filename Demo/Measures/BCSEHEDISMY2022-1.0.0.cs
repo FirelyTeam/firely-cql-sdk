@@ -274,7 +274,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var b_ = a_.RetrieveByValueSet<Coverage>(null, null);
 		bool? c_(Coverage C)
 		{
-			var f_ = C.Period;
+			var f_ = C?.Period;
 			var g_ = NCQAFHIRBase_1_0_0.Normalize_Interval(f_);
 			var h_ = this.Participation_Period();
 			var i_ = context.Operators;
@@ -338,8 +338,8 @@ public class BCSEHEDISMY2022_1_0_0
     private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -349,8 +349,8 @@ public class BCSEHEDISMY2022_1_0_0
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
 		var o_ = d_.Interval((int?)52, (int?)74, true, true);
 		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
-		var s_ = a_.GenderElement;
-		var t_ = s_.Value;
+		var s_ = a_?.GenderElement;
+		var t_ = s_?.Value;
 		var v_ = d_.EnumEqualsString(t_, "female");
 		var x_ = d_.And(q_, v_);
 		var y_ = this.Enrolled_During_Participation_Period();
@@ -409,7 +409,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var h_ = NCQAStatus_1_0_0.Completed_Procedure(g_);
 		bool? i_(Procedure UnilateralMastectomyProcedure)
 		{
-			var z_ = UnilateralMastectomyProcedure.BodySite;
+			var z_ = UnilateralMastectomyProcedure?.BodySite;
 			CqlConcept aa_(CodeableConcept X)
 			{
 				var ag_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -431,7 +431,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var q_ = NCQAStatus_1_0_0.Completed_Procedure(p_);
 		bool? r_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
-			var ah_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			var ah_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
 			CqlConcept ai_(CodeableConcept X)
 			{
 				var ao_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -449,7 +449,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var v_ = j_.ListUnion<Procedure>(m_, t_);
 		bool? w_(Procedure RightMastectomyProcedure)
 		{
-			var ap_ = RightMastectomyProcedure.Performed;
+			var ap_ = RightMastectomyProcedure?.Performed;
 			var aq_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ap_);
 			var ar_ = context.Operators;
 			var as_ = ar_.End(aq_);
@@ -504,7 +504,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var h_ = NCQAStatus_1_0_0.Completed_Procedure(g_);
 		bool? i_(Procedure UnilateralMastectomyProcedure)
 		{
-			var z_ = UnilateralMastectomyProcedure.BodySite;
+			var z_ = UnilateralMastectomyProcedure?.BodySite;
 			CqlConcept aa_(CodeableConcept X)
 			{
 				var ag_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -526,7 +526,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var q_ = NCQAStatus_1_0_0.Completed_Procedure(p_);
 		bool? r_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
-			var ah_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			var ah_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
 			CqlConcept ai_(CodeableConcept X)
 			{
 				var ao_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -544,7 +544,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var v_ = j_.ListUnion<Procedure>(m_, t_);
 		bool? w_(Procedure LeftMastectomyProcedure)
 		{
-			var ap_ = LeftMastectomyProcedure.Performed;
+			var ap_ = LeftMastectomyProcedure?.Performed;
 			var aq_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ap_);
 			var ar_ = context.Operators;
 			var as_ = ar_.End(aq_);
@@ -599,7 +599,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var h_ = NCQAStatus_1_0_0.Completed_Procedure(g_);
 		bool? i_(Procedure UnilateralMastectomyProcedure)
 		{
-			var z_ = UnilateralMastectomyProcedure.BodySite;
+			var z_ = UnilateralMastectomyProcedure?.BodySite;
 			CqlConcept aa_(CodeableConcept X)
 			{
 				var ag_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -621,7 +621,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var q_ = NCQAStatus_1_0_0.Completed_Procedure(p_);
 		bool? r_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
-			var ah_ = ClinicalUnilateralMastectomyProcedure.BodySite;
+			var ah_ = ClinicalUnilateralMastectomyProcedure?.BodySite;
 			CqlConcept ai_(CodeableConcept X)
 			{
 				var ao_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -639,7 +639,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var v_ = j_.ListUnion<Procedure>(m_, t_);
 		bool? w_(Procedure BilateralMastectomyPerformed)
 		{
-			var ap_ = BilateralMastectomyPerformed.Performed;
+			var ap_ = BilateralMastectomyPerformed?.Performed;
 			var aq_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ap_);
 			var ar_ = context.Operators;
 			var as_ = ar_.End(aq_);
@@ -709,7 +709,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
 		bool? d_(Observation Mammogram)
 		{
-			var i_ = Mammogram.Effective;
+			var i_ = Mammogram?.Effective;
 			var j_ = NCQAFHIRBase_1_0_0.Normalize_Interval(i_);
 			var k_ = context.Operators;
 			var l_ = k_.End(j_);

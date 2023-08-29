@@ -15,7 +15,6 @@ namespace Hl7.Cql.Compiler
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
     public class NullConditionalMemberExpression : Expression
-
     {
         public MemberExpression MemberExpression { get; private set; }
         private readonly Type resultType;
@@ -54,9 +53,20 @@ namespace Hl7.Cql.Compiler
         }
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
-            return visitor.Visit(MemberExpression);
+            var visited = visitor.Visit(MemberExpression.Expression);
+            return Update(visited);
         }
 
         public override Type Type => resultType;
+
+        public Expression Update(Expression? expression)
+        {
+            if (expression is null) return this;
+
+            if (expression != MemberExpression.Expression)
+                return new NullConditionalMemberExpression(MemberExpression.Update(expression));
+            else
+                return this;
+        }
     }
 }

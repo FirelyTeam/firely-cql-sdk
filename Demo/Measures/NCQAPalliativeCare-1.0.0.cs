@@ -101,7 +101,7 @@ public class NCQAPalliativeCare_1_0_0
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
 		bool? d_(Observation PalliativeAssessment)
 		{
-			var ar_ = PalliativeAssessment.Effective;
+			var ar_ = PalliativeAssessment?.Effective;
 			var as_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ar_);
 			var at_ = context.Operators;
 			var au_ = at_.Start(as_);
@@ -127,7 +127,7 @@ public class NCQAPalliativeCare_1_0_0
 		var l_ = NCQAStatus_1_0_0.Finished_Encounter(k_);
 		bool? m_(Encounter PalliativeEncounter)
 		{
-			var br_ = PalliativeEncounter.Period;
+			var br_ = PalliativeEncounter?.Period;
 			var bs_ = NCQAFHIRBase_1_0_0.Normalize_Interval(br_);
 			var bt_ = context.Operators;
 			var bu_ = bt_.Start(bs_);
@@ -153,7 +153,7 @@ public class NCQAPalliativeCare_1_0_0
 		var w_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(v_);
 		bool? x_(Procedure PalliativeIntervention)
 		{
-			var cr_ = PalliativeIntervention.Performed;
+			var cr_ = PalliativeIntervention?.Performed;
 			var cs_ = NCQAFHIRBase_1_0_0.Normalize_Interval(cr_);
 			var ct_ = context.Operators;
 			var cu_ = ct_.Start(cs_);

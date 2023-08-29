@@ -93,7 +93,7 @@ public class NCQAHospice_1_0_0
 		var d_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(c_);
 		bool? e_(Procedure HospiceInt)
 		{
-			var u_ = HospiceInt.Performed;
+			var u_ = HospiceInt?.Performed;
 			var v_ = NCQAFHIRBase_1_0_0.Normalize_Interval(u_);
 			var w_ = this.Measurement_Period();
 			var x_ = context.Operators;
@@ -109,7 +109,7 @@ public class NCQAHospice_1_0_0
 		var m_ = NCQAStatus_1_0_0.Finished_Encounter(l_);
 		bool? n_(Encounter HospiceEnc)
 		{
-			var z_ = HospiceEnc.Period;
+			var z_ = HospiceEnc?.Period;
 			var aa_ = NCQAFHIRBase_1_0_0.Normalize_Interval(z_);
 			var ab_ = this.Measurement_Period();
 			var ac_ = context.Operators;

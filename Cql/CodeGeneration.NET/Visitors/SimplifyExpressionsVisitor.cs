@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -14,7 +15,6 @@ using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
-
     /// <summary>
     /// This Visitor will (in most cases) create a new variable for a nested expression, 
     /// and assign the visited node's expression to that variable, thus unwinding the deeply nested
@@ -59,7 +59,9 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 ParameterExpression parameter => VisitParameter(parameter),
                 ConditionalExpression cond => VisitConditional(cond),
                 UnaryExpression unary => VisitUnary(unary),
+                BinaryExpression binary => VisitBinary(binary),
                 NewExpression newe => VisitNew(newe),
+                CaseWhenThenExpression cwt => VisitCaseWhenThenExpression(cwt),
                 _ => simplify(base.Visit(node))
             };
         }
@@ -74,6 +76,12 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return newLetVariable;
         }
 
+
+        protected override Expression VisitConditional(ConditionalExpression node)
+        {
+            return node;
+        }
+
         protected override Expression VisitUnary(UnaryExpression node)
         {
             if (node.NodeType is ExpressionType.Convert or ExpressionType.TypeAs)
@@ -85,19 +93,18 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         }
 
-        protected override Expression VisitConditional(ConditionalExpression node)
+        protected override Expression VisitBinary(BinaryExpression node)
         {
-            // Skip this for now: extracting lets here is possible, but would also
-            // leading to loss of performance, i.e. this would turn:
-            //      if(something, expensiveA(x), expensiveB(x));
-            // into:
-            //      let p = expensiveA(x),
-            //          q = expensiveB(x),
-            //      in if(something, p, q)
-            // causing expensiveA and expensiveB to be run both regardless of the test.
+            return node switch
+            {
+                // Simply comparing two values is something you can do by eye, we don't need to simplify that.
+                { NodeType: ExpressionType.Equal or ExpressionType.NotEqual } => base.VisitBinary(node),
 
-            // return simplify(node);
-            return node;
+                // The interim value of an assignment is clear, we don't need to simplify
+                { NodeType: ExpressionType.Assign } => base.VisitBinary(node),
+
+                _ => simplify(base.VisitBinary(node))
+            };
         }
 
         protected override Expression VisitNew(NewExpression node)
@@ -175,6 +182,26 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             // Continue visiting the children of NewExpression, but don't rewrite it to a parameter.
             NewExpression visitNewExpression(NewExpression node) => node.Update(Visit(node.Arguments));
+        }
+
+        protected Expression VisitCaseWhenThenExpression(CaseWhenThenExpression node)
+        {
+            CaseWhenThenExpression.WhenThenCase visitCase(CaseWhenThenExpression.WhenThenCase c)
+            {
+                var thenVisitor = new SimplifyExpressionsVisitor();
+                return c.Update(c.When, thenVisitor.Visit(c.Then));
+            }
+
+            var cases = node.WhenThenCases.Select(visitCase);
+            var elseVisitor = new SimplifyExpressionsVisitor();
+            var visitedElse = elseVisitor.Visit(node.ElseCase);
+
+            var newCTW = node.Update(cases.ToList().AsReadOnly(), visitedElse);
+
+            var func = Expression.Lambda(Expression.Block(newCTW));
+            var assign = simplify(func);
+
+            return Expression.Invoke(assign);
         }
     }
 }

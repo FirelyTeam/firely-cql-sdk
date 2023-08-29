@@ -282,7 +282,7 @@ public class Exam125FHIR_0_0_009
 		var h_ = g_.ListUnion<Encounter>(c_, f_);
 		bool? i_(Encounter TelehealthEncounter)
 		{
-			var l_ = TelehealthEncounter.StatusElement;
+			var l_ = TelehealthEncounter?.StatusElement;
 			var m_ = new CallStackEntry("ToString", null, null);
 			var n_ = context.Deeper(m_);
 			var o_ = n_.Operators;
@@ -291,7 +291,7 @@ public class Exam125FHIR_0_0_009
 			var r_ = context.Operators;
 			var s_ = r_.Equal(q_, "finished");
 			var t_ = this.Measurement_Period();
-			var u_ = TelehealthEncounter.Period;
+			var u_ = TelehealthEncounter?.Period;
 			var v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(u_);
 			var x_ = r_.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
 			var z_ = r_.And(s_, x_);
@@ -309,8 +309,8 @@ public class Exam125FHIR_0_0_009
     private int? Age_at_start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -328,8 +328,8 @@ public class Exam125FHIR_0_0_009
     private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -339,7 +339,7 @@ public class Exam125FHIR_0_0_009
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
 		var o_ = d_.Interval((int?)51, (int?)74, true, false);
 		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
-		var s_ = a_.GenderElement;
+		var s_ = a_?.GenderElement;
 		var t_ = new CallStackEntry("ToString", null, null);
 		var u_ = context.Deeper(t_);
 		var v_ = u_.Operators;
@@ -378,7 +378,7 @@ public class Exam125FHIR_0_0_009
 		var f_ = b_.RetrieveByValueSet<Condition>(d_, null);
 		bool? g_(Condition UnilateralMastectomyDiagnosis)
 		{
-			var o_ = UnilateralMastectomyDiagnosis.BodySite;
+			var o_ = UnilateralMastectomyDiagnosis?.BodySite;
 			CqlConcept p_(CodeableConcept X)
 			{
 				var v_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -421,7 +421,7 @@ public class Exam125FHIR_0_0_009
 		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
 		bool? d_(Procedure UnilateralMastectomyRightPerformed)
 		{
-			var g_ = UnilateralMastectomyRightPerformed.StatusElement;
+			var g_ = UnilateralMastectomyRightPerformed?.StatusElement;
 			var h_ = new CallStackEntry("ToString", null, null);
 			var i_ = context.Deeper(h_);
 			var j_ = i_.Operators;
@@ -429,7 +429,7 @@ public class Exam125FHIR_0_0_009
 			var l_ = k_.Convert<string>(g_);
 			var m_ = context.Operators;
 			var n_ = m_.Equal(l_, "completed");
-			var o_ = UnilateralMastectomyRightPerformed.Performed;
+			var o_ = UnilateralMastectomyRightPerformed?.Performed;
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(o_);
 			var r_ = m_.End(p_);
 			var s_ = this.Measurement_Period();
@@ -457,7 +457,7 @@ public class Exam125FHIR_0_0_009
 		var f_ = b_.RetrieveByValueSet<Condition>(d_, null);
 		bool? g_(Condition UnilateralMastectomyDiagnosis)
 		{
-			var o_ = UnilateralMastectomyDiagnosis.BodySite;
+			var o_ = UnilateralMastectomyDiagnosis?.BodySite;
 			CqlConcept p_(CodeableConcept X)
 			{
 				var v_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -500,7 +500,7 @@ public class Exam125FHIR_0_0_009
 		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
 		bool? d_(Procedure UnilateralMastectomyLeftPerformed)
 		{
-			var g_ = UnilateralMastectomyLeftPerformed.StatusElement;
+			var g_ = UnilateralMastectomyLeftPerformed?.StatusElement;
 			var h_ = new CallStackEntry("ToString", null, null);
 			var i_ = context.Deeper(h_);
 			var j_ = i_.Operators;
@@ -508,7 +508,7 @@ public class Exam125FHIR_0_0_009
 			var l_ = k_.Convert<string>(g_);
 			var m_ = context.Operators;
 			var n_ = m_.Equal(l_, "completed");
-			var o_ = UnilateralMastectomyLeftPerformed.Performed;
+			var o_ = UnilateralMastectomyLeftPerformed?.Performed;
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(o_);
 			var r_ = m_.End(p_);
 			var s_ = this.Measurement_Period();
@@ -559,7 +559,7 @@ public class Exam125FHIR_0_0_009
 		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
 		bool? d_(Procedure BilateralMastectomyPerformed)
 		{
-			var g_ = BilateralMastectomyPerformed.StatusElement;
+			var g_ = BilateralMastectomyPerformed?.StatusElement;
 			var h_ = new CallStackEntry("ToString", null, null);
 			var i_ = context.Deeper(h_);
 			var j_ = i_.Operators;
@@ -567,7 +567,7 @@ public class Exam125FHIR_0_0_009
 			var l_ = k_.Convert<string>(g_);
 			var m_ = context.Operators;
 			var n_ = m_.Equal(l_, "completed");
-			var o_ = BilateralMastectomyPerformed.Performed;
+			var o_ = BilateralMastectomyPerformed?.Performed;
 			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(o_);
 			var r_ = m_.End(p_);
 			var s_ = this.Measurement_Period();
@@ -611,8 +611,8 @@ public class Exam125FHIR_0_0_009
 		var af_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var ah_ = c_.Or(ae_, af_);
 		var ai_ = this.Patient();
-		var aj_ = ai_.BirthDateElement;
-		var ak_ = aj_.Value;
+		var aj_ = ai_?.BirthDateElement;
+		var ak_ = aj_?.Value;
 		var am_ = c_.TypeConverter;
 		var an_ = am_.Convert<CqlDate>(ak_);
 		var ao_ = this.Measurement_Period();
@@ -639,7 +639,7 @@ public class Exam125FHIR_0_0_009
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
 		bool? d_(Observation Mammogram)
 		{
-			var i_ = Mammogram.StatusElement;
+			var i_ = Mammogram?.StatusElement;
 			var j_ = new CallStackEntry("ToString", null, null);
 			var k_ = context.Deeper(j_);
 			var l_ = k_.Operators;
@@ -654,7 +654,7 @@ public class Exam125FHIR_0_0_009
 			};
 			var p_ = context.Operators;
 			var q_ = p_.InList<string>(n_, (o_ as IEnumerable<string>));
-			var r_ = Mammogram.Effective;
+			var r_ = Mammogram?.Effective;
 			var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
 			var u_ = p_.End(s_);
 			var v_ = this.Measurement_Period();
@@ -665,12 +665,11 @@ public class Exam125FHIR_0_0_009
 			var ag_ = p_.Interval(ab_, ae_, true, true);
 			var ai_ = p_.ElementInInterval<CqlDateTime>(u_, ag_, null);
 			var al_ = p_.End(v_);
-			var am_ = (al_ == null);
-			var ao_ = p_.Not((bool?)am_);
-			var aq_ = p_.And(ai_, ao_);
-			var as_ = p_.And(q_, aq_);
+			var an_ = p_.Not((bool?)(al_ is null));
+			var ap_ = p_.And(ai_, an_);
+			var ar_ = p_.And(q_, ap_);
 
-			return as_;
+			return ar_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<Observation>(c_, d_);
@@ -689,7 +688,7 @@ public class Exam125FHIR_0_0_009
 		var c_ = b_.RetrieveByValueSet<DiagnosticReport>(a_, null);
 		bool? d_(DiagnosticReport Mammogram)
 		{
-			var i_ = Mammogram.StatusElement;
+			var i_ = Mammogram?.StatusElement;
 			var j_ = new CallStackEntry("ToString", null, null);
 			var k_ = context.Deeper(j_);
 			var l_ = k_.Operators;
@@ -704,7 +703,7 @@ public class Exam125FHIR_0_0_009
 			};
 			var p_ = context.Operators;
 			var q_ = p_.InList<string>(n_, (o_ as IEnumerable<string>));
-			var r_ = Mammogram.Effective;
+			var r_ = Mammogram?.Effective;
 			var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(r_);
 			var u_ = p_.End(s_);
 			var v_ = this.Measurement_Period();
@@ -715,12 +714,11 @@ public class Exam125FHIR_0_0_009
 			var ag_ = p_.Interval(ab_, ae_, true, true);
 			var ai_ = p_.ElementInInterval<CqlDateTime>(u_, ag_, null);
 			var al_ = p_.End(v_);
-			var am_ = (al_ == null);
-			var ao_ = p_.Not((bool?)am_);
-			var aq_ = p_.And(ai_, ao_);
-			var as_ = p_.And(q_, aq_);
+			var an_ = p_.Not((bool?)(al_ is null));
+			var ap_ = p_.And(ai_, an_);
+			var ar_ = p_.And(q_, ap_);
 
-			return as_;
+			return ar_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<DiagnosticReport>(c_, d_);
@@ -770,7 +768,7 @@ public class Exam125FHIR_0_0_009
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
 		bool? d_(Observation Mammogram)
 		{
-			var i_ = Mammogram.StatusElement;
+			var i_ = Mammogram?.StatusElement;
 			var j_ = new CallStackEntry("ToString", null, null);
 			var k_ = context.Deeper(j_);
 			var l_ = k_.Operators;
@@ -786,7 +784,7 @@ public class Exam125FHIR_0_0_009
 			var p_ = context.Operators;
 			var q_ = p_.InList<string>(n_, (o_ as IEnumerable<string>));
 			var s_ = p_.Not(q_);
-			var t_ = Mammogram.Effective;
+			var t_ = Mammogram?.Effective;
 			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(t_);
 			var w_ = p_.End(u_);
 			var x_ = this.Measurement_Period();
@@ -797,12 +795,11 @@ public class Exam125FHIR_0_0_009
 			var ai_ = p_.Interval(ad_, ag_, true, true);
 			var ak_ = p_.ElementInInterval<CqlDateTime>(w_, ai_, null);
 			var an_ = p_.End(x_);
-			var ao_ = (an_ == null);
-			var aq_ = p_.Not((bool?)ao_);
-			var as_ = p_.And(ak_, aq_);
-			var au_ = p_.And(s_, as_);
+			var ap_ = p_.Not((bool?)(an_ is null));
+			var ar_ = p_.And(ak_, ap_);
+			var at_ = p_.And(s_, ar_);
 
-			return au_;
+			return at_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<Observation>(c_, d_);
@@ -821,7 +818,7 @@ public class Exam125FHIR_0_0_009
 		var c_ = b_.RetrieveByValueSet<DiagnosticReport>(a_, null);
 		bool? d_(DiagnosticReport Mammogram)
 		{
-			var i_ = Mammogram.StatusElement;
+			var i_ = Mammogram?.StatusElement;
 			var j_ = new CallStackEntry("ToString", null, null);
 			var k_ = context.Deeper(j_);
 			var l_ = k_.Operators;
@@ -837,7 +834,7 @@ public class Exam125FHIR_0_0_009
 			var p_ = context.Operators;
 			var q_ = p_.InList<string>(n_, (o_ as IEnumerable<string>));
 			var s_ = p_.Not(q_);
-			var t_ = Mammogram.Effective;
+			var t_ = Mammogram?.Effective;
 			var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(t_);
 			var w_ = p_.End(u_);
 			var x_ = this.Measurement_Period();
@@ -848,12 +845,11 @@ public class Exam125FHIR_0_0_009
 			var ai_ = p_.Interval(ad_, ag_, true, true);
 			var ak_ = p_.ElementInInterval<CqlDateTime>(w_, ai_, null);
 			var an_ = p_.End(x_);
-			var ao_ = (an_ == null);
-			var aq_ = p_.Not((bool?)ao_);
-			var as_ = p_.And(ak_, aq_);
-			var au_ = p_.And(s_, as_);
+			var ap_ = p_.Not((bool?)(an_ is null));
+			var ar_ = p_.And(ak_, ap_);
+			var at_ = p_.And(s_, ar_);
 
-			return au_;
+			return at_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<DiagnosticReport>(c_, d_);

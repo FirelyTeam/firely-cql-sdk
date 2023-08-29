@@ -237,7 +237,7 @@ public class TJCOverallFHIR_1_8_000
 		var c_ = b_.RetrieveByValueSet<Encounter>(a_, null);
 		bool? d_(Encounter NonElectiveEncounter)
 		{
-			var g_ = NonElectiveEncounter.Period;
+			var g_ = NonElectiveEncounter?.Period;
 			var h_ = FHIRHelpers_4_0_001.ToInterval(g_);
 			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(h_);
 			var j_ = context.Operators;
@@ -265,12 +265,12 @@ public class TJCOverallFHIR_1_8_000
 		bool? b_(Encounter NonElectiveEncounter)
 		{
 			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(NonElectiveEncounter);
-			var f_ = e_.Code;
+			var f_ = e_?.Code;
 			var g_ = FHIRHelpers_4_0_001.ToConcept(f_);
 			var h_ = this.Hemorrhagic_Stroke();
 			var i_ = context.Operators;
 			var j_ = i_.ConceptInValueSet(g_, h_);
-			var l_ = e_.Code;
+			var l_ = e_?.Code;
 			var m_ = FHIRHelpers_4_0_001.ToConcept(l_);
 			var n_ = this.Ischemic_Stroke();
 			var p_ = i_.ConceptInValueSet(m_, n_);
@@ -297,11 +297,11 @@ public class TJCOverallFHIR_1_8_000
 			bool? g_(Patient BirthDate)
 			{
 				var m_ = this.Patient();
-				var n_ = m_.BirthDateElement;
-				var o_ = n_.Value;
+				var n_ = m_?.BirthDateElement;
+				var o_ = n_?.Value;
 				var p_ = context.Operators;
 				var q_ = p_.ConvertStringToDateTime(o_);
-				var r_ = AllStrokeEncounter.Period;
+				var r_ = AllStrokeEncounter?.Period;
 				var s_ = FHIRHelpers_4_0_001.ToInterval(r_);
 				var u_ = p_.Start(s_);
 				var w_ = p_.CalculateAgeAt(q_, u_, "year");
@@ -331,7 +331,7 @@ public class TJCOverallFHIR_1_8_000
 		bool? b_(Encounter EncounterWithAge)
 		{
 			var e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(EncounterWithAge);
-			var f_ = e_.Code;
+			var f_ = e_?.Code;
 			var g_ = FHIRHelpers_4_0_001.ToConcept(f_);
 			var h_ = this.Ischemic_Stroke();
 			var i_ = context.Operators;
@@ -353,28 +353,28 @@ public class TJCOverallFHIR_1_8_000
 		var a_ = this.Ischemic_Stroke_Encounter();
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
-			var e_ = IschemicStrokeEncounter.Hospitalization;
-			var f_ = e_.DischargeDisposition;
+			var e_ = IschemicStrokeEncounter?.Hospitalization;
+			var f_ = e_?.DischargeDisposition;
 			var g_ = FHIRHelpers_4_0_001.ToConcept(f_);
 			var h_ = this.Discharge_To_Acute_Care_Facility();
 			var i_ = context.Operators;
 			var j_ = i_.ConceptInValueSet(g_, h_);
-			var l_ = e_.DischargeDisposition;
+			var l_ = e_?.DischargeDisposition;
 			var m_ = FHIRHelpers_4_0_001.ToConcept(l_);
 			var n_ = this.Left_Against_Medical_Advice();
 			var p_ = i_.ConceptInValueSet(m_, n_);
 			var r_ = i_.Or(j_, p_);
-			var t_ = e_.DischargeDisposition;
+			var t_ = e_?.DischargeDisposition;
 			var u_ = FHIRHelpers_4_0_001.ToConcept(t_);
 			var v_ = this.Patient_Expired();
 			var x_ = i_.ConceptInValueSet(u_, v_);
 			var z_ = i_.Or(r_, x_);
-			var ab_ = e_.DischargeDisposition;
+			var ab_ = e_?.DischargeDisposition;
 			var ac_ = FHIRHelpers_4_0_001.ToConcept(ab_);
 			var ad_ = this.Discharged_to_Home_for_Hospice_Care();
 			var af_ = i_.ConceptInValueSet(ac_, ad_);
 			var ah_ = i_.Or(z_, af_);
-			var aj_ = e_.DischargeDisposition;
+			var aj_ = e_?.DischargeDisposition;
 			var ak_ = FHIRHelpers_4_0_001.ToConcept(aj_);
 			var al_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
 			var an_ = i_.ConceptInValueSet(ak_, al_);
@@ -398,7 +398,7 @@ public class TJCOverallFHIR_1_8_000
 		var c_ = b_.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? d_(ServiceRequest P)
 		{
-			var o_ = P.IntentElement;
+			var o_ = P?.IntentElement;
 			var p_ = new CallStackEntry("ToString", null, null);
 			var q_ = context.Deeper(p_);
 			var r_ = q_.Operators;
@@ -414,7 +414,7 @@ public class TJCOverallFHIR_1_8_000
 		var i_ = b_.RetrieveByValueSet<Procedure>(a_, null);
 		bool? j_(Procedure InterventionPerformed)
 		{
-			var w_ = InterventionPerformed.StatusElement;
+			var w_ = InterventionPerformed?.StatusElement;
 			var x_ = new CallStackEntry("ToString", null, null);
 			var y_ = context.Deeper(x_);
 			var z_ = y_.Operators;

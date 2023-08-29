@@ -284,7 +284,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		var ab_ = g_.ListUnion<Encounter>(r_, z_);
 		bool? ac_(Encounter ValidEncounter)
 		{
-			var af_ = ValidEncounter.StatusElement;
+			var af_ = ValidEncounter?.StatusElement;
 			var ag_ = new CallStackEntry("ToString", null, null);
 			var ah_ = context.Deeper(ag_);
 			var ai_ = ah_.Operators;
@@ -293,7 +293,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var al_ = context.Operators;
 			var am_ = al_.Equal(ak_, "finished");
 			var an_ = this.Measurement_Period();
-			var ao_ = ValidEncounter.Period;
+			var ao_ = ValidEncounter?.Period;
 			var ap_ = FHIRHelpers_4_0_001.ToInterval(ao_);
 			var ar_ = al_.IntervalIncludesInterval<CqlDateTime>(an_, ap_, null);
 			var at_ = al_.And(am_, ar_);
@@ -311,8 +311,8 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -322,7 +322,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		var m_ = d_.CalculateAgeAt(f_, k_, "year");
 		var o_ = d_.Interval((int?)23, (int?)64, true, false);
 		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
-		var s_ = a_.GenderElement;
+		var s_ = a_?.GenderElement;
 		var t_ = new CallStackEntry("ToString", null, null);
 		var u_ = context.Deeper(t_);
 		var v_ = u_.Operators;
@@ -357,7 +357,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
 		bool? d_(Procedure NoCervixProcedure)
 		{
-			var o_ = NoCervixProcedure.StatusElement;
+			var o_ = NoCervixProcedure?.StatusElement;
 			var p_ = new CallStackEntry("ToString", null, null);
 			var q_ = context.Deeper(p_);
 			var r_ = q_.Operators;
@@ -365,7 +365,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var t_ = s_.Convert<string>(o_);
 			var u_ = context.Operators;
 			var v_ = u_.Equal(t_, "completed");
-			var w_ = NoCervixProcedure.Performed;
+			var w_ = NoCervixProcedure?.Performed;
 			var x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(w_);
 			var z_ = u_.End(x_);
 			var aa_ = this.Measurement_Period();
@@ -422,7 +422,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
 		bool? d_(Observation CervicalCytology)
 		{
-			var g_ = CervicalCytology.StatusElement;
+			var g_ = CervicalCytology?.StatusElement;
 			var h_ = new CallStackEntry("ToString", null, null);
 			var i_ = context.Deeper(h_);
 			var j_ = i_.Operators;
@@ -436,21 +436,21 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			};
 			var n_ = context.Operators;
 			var o_ = n_.InList<string>(l_, (m_ as IEnumerable<string>));
-			var p_ = CervicalCytology.Category;
+			var p_ = CervicalCytology?.Category;
 			bool? q_(CodeableConcept CervicalCytologyCategory)
 			{
-				var bd_ = this.laboratory();
-				var be_ = FHIRHelpers_4_0_001.ToConcept(CervicalCytologyCategory);
-				var bf_ = be_.codes;
-				var bg_ = context.Operators;
-				var bh_ = bg_.CodeInList(bd_, (bf_ as IEnumerable<CqlCode>));
+				var bb_ = this.laboratory();
+				var bc_ = FHIRHelpers_4_0_001.ToConcept(CervicalCytologyCategory);
+				var bd_ = bc_?.codes;
+				var be_ = context.Operators;
+				var bf_ = be_.CodeInList(bb_, (bd_ as IEnumerable<CqlCode>));
 
-				return bh_;
+				return bf_;
 			};
 			var s_ = n_.WhereOrNull<CodeableConcept>((p_ as IEnumerable<CodeableConcept>), q_);
 			var u_ = n_.ExistsInList<CodeableConcept>(s_);
 			var w_ = n_.And(o_, u_);
-			var x_ = CervicalCytology.Effective;
+			var x_ = CervicalCytology?.Effective;
 			var y_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Latest(x_);
 			var z_ = this.Measurement_Period();
 			var ab_ = n_.End(z_);
@@ -460,16 +460,14 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var ak_ = n_.Interval(af_, ai_, true, true);
 			var am_ = n_.ElementInInterval<CqlDateTime>(y_, ak_, null);
 			var ap_ = n_.End(z_);
-			var aq_ = (ap_ == null);
-			var as_ = n_.Not((bool?)aq_);
-			var au_ = n_.And(am_, as_);
-			var aw_ = n_.And(w_, au_);
-			var ax_ = CervicalCytology.Value;
-			var ay_ = (ax_ == null);
-			var ba_ = n_.Not((bool?)ay_);
-			var bc_ = n_.And(aw_, ba_);
+			var ar_ = n_.Not((bool?)(ap_ is null));
+			var at_ = n_.And(am_, ar_);
+			var av_ = n_.And(w_, at_);
+			var aw_ = CervicalCytology?.Value;
+			var ay_ = n_.Not((bool?)(aw_ is null));
+			var ba_ = n_.And(av_, ay_);
 
-			return bc_;
+			return ba_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<Observation>(c_, d_);
@@ -487,7 +485,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 		var c_ = b_.RetrieveByValueSet<Observation>(a_, null);
 		bool? d_(Observation HPVTest)
 		{
-			var g_ = HPVTest.StatusElement;
+			var g_ = HPVTest?.StatusElement;
 			var h_ = new CallStackEntry("ToString", null, null);
 			var i_ = context.Deeper(h_);
 			var j_ = i_.Operators;
@@ -501,26 +499,26 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			};
 			var n_ = context.Operators;
 			var o_ = n_.InList<string>(l_, (m_ as IEnumerable<string>));
-			var p_ = HPVTest.Category;
+			var p_ = HPVTest?.Category;
 			bool? q_(CodeableConcept HPVTestCategory)
 			{
-				var bv_ = this.laboratory();
-				var bw_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
-				var bx_ = bw_.codes;
-				var by_ = context.Operators;
-				var bz_ = by_.CodeInList(bv_, (bx_ as IEnumerable<CqlCode>));
+				var bt_ = this.laboratory();
+				var bu_ = FHIRHelpers_4_0_001.ToConcept(HPVTestCategory);
+				var bv_ = bu_?.codes;
+				var bw_ = context.Operators;
+				var bx_ = bw_.CodeInList(bt_, (bv_ as IEnumerable<CqlCode>));
 
-				return bz_;
+				return bx_;
 			};
 			var s_ = n_.WhereOrNull<CodeableConcept>((p_ as IEnumerable<CodeableConcept>), q_);
 			var u_ = n_.ExistsInList<CodeableConcept>(s_);
 			var w_ = n_.And(o_, u_);
 			var x_ = this.Patient();
-			var y_ = x_.BirthDateElement;
-			var z_ = y_.Value;
+			var y_ = x_?.BirthDateElement;
+			var z_ = y_?.Value;
 			var ab_ = n_.TypeConverter;
 			var ac_ = ab_.Convert<CqlDate>(z_);
-			var ad_ = HPVTest.Effective;
+			var ad_ = HPVTest?.Effective;
 			var ae_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ad_);
 			var ag_ = n_.Start(ae_);
 			var ai_ = n_.DateFrom(ag_);
@@ -536,16 +534,14 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var bc_ = n_.Interval(ax_, ba_, true, true);
 			var be_ = n_.ElementInInterval<CqlDateTime>(aq_, bc_, null);
 			var bh_ = n_.End(ar_);
-			var bi_ = (bh_ == null);
-			var bk_ = n_.Not((bool?)bi_);
-			var bm_ = n_.And(be_, bk_);
-			var bo_ = n_.And(ao_, bm_);
-			var bp_ = HPVTest.Value;
-			var bq_ = (bp_ == null);
-			var bs_ = n_.Not((bool?)bq_);
-			var bu_ = n_.And(bo_, bs_);
+			var bj_ = n_.Not((bool?)(bh_ is null));
+			var bl_ = n_.And(be_, bj_);
+			var bn_ = n_.And(ao_, bl_);
+			var bo_ = HPVTest?.Value;
+			var bq_ = n_.Not((bool?)(bo_ is null));
+			var bs_ = n_.And(bn_, bq_);
 
-			return bu_;
+			return bs_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<Observation>(c_, d_);
@@ -574,7 +570,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     [CqlDeclaration("isComplete")]
     public bool? isComplete(Observation observation)
 	{
-		var a_ = observation.StatusElement;
+		var a_ = observation?.StatusElement;
 		var b_ = new CallStackEntry("ToString", null, null);
 		var c_ = context.Deeper(b_);
 		var d_ = c_.Operators;
@@ -596,12 +592,12 @@ public class CervicalCancerScreeningFHIR_0_0_005
     [CqlDeclaration("isLaboratoryTest")]
     public bool? isLaboratoryTest(Observation observation)
 	{
-		var a_ = observation.Category;
+		var a_ = observation?.Category;
 		bool? b_(CodeableConcept category)
 		{
 			var g_ = this.laboratory();
 			var h_ = FHIRHelpers_4_0_001.ToConcept(category);
-			var i_ = h_.codes;
+			var i_ = h_?.codes;
 			var j_ = context.Operators;
 			var k_ = j_.CodeInList(g_, (i_ as IEnumerable<CqlCode>));
 
@@ -635,7 +631,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var h_ = this.isLaboratoryTest(CervicalCytology);
 			var i_ = context.Operators;
 			var j_ = i_.And(g_, h_);
-			var k_ = CervicalCytology.Effective;
+			var k_ = CervicalCytology?.Effective;
 			var l_ = this.latest(k_);
 			var m_ = this.Measurement_Period();
 			var o_ = i_.End(m_);
@@ -645,16 +641,14 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var x_ = i_.Interval(s_, v_, true, true);
 			var z_ = i_.ElementInInterval<CqlDateTime>(l_, x_, null);
 			var ac_ = i_.End(m_);
-			var ad_ = (ac_ == null);
-			var af_ = i_.Not((bool?)ad_);
-			var ah_ = i_.And(z_, af_);
-			var aj_ = i_.And(j_, ah_);
-			var ak_ = CervicalCytology.Value;
-			var al_ = (ak_ == null);
-			var an_ = i_.Not((bool?)al_);
-			var ap_ = i_.And(aj_, an_);
+			var ae_ = i_.Not((bool?)(ac_ is null));
+			var ag_ = i_.And(z_, ae_);
+			var ai_ = i_.And(j_, ag_);
+			var aj_ = CervicalCytology?.Value;
+			var al_ = i_.Not((bool?)(aj_ is null));
+			var an_ = i_.And(ai_, al_);
 
-			return ap_;
+			return an_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<Observation>(c_, d_);
@@ -686,11 +680,11 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var i_ = context.Operators;
 			var j_ = i_.And(g_, h_);
 			var k_ = this.Patient();
-			var l_ = k_.BirthDateElement;
-			var m_ = l_.Value;
+			var l_ = k_?.BirthDateElement;
+			var m_ = l_?.Value;
 			var o_ = i_.TypeConverter;
 			var p_ = o_.Convert<CqlDate>(m_);
-			var q_ = HPVTest.Effective;
+			var q_ = HPVTest?.Effective;
 			var r_ = this.toInterval(q_);
 			var t_ = i_.Start(r_);
 			var v_ = i_.DateFrom(t_);
@@ -706,16 +700,14 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			var ap_ = i_.Interval(ak_, an_, true, true);
 			var ar_ = i_.ElementInInterval<CqlDateTime>(ad_, ap_, null);
 			var au_ = i_.End(ae_);
-			var av_ = (au_ == null);
-			var ax_ = i_.Not((bool?)av_);
-			var az_ = i_.And(ar_, ax_);
-			var bb_ = i_.And(ab_, az_);
-			var bc_ = HPVTest.Value;
-			var bd_ = (bc_ == null);
-			var bf_ = i_.Not((bool?)bd_);
-			var bh_ = i_.And(bb_, bf_);
+			var aw_ = i_.Not((bool?)(au_ is null));
+			var ay_ = i_.And(ar_, aw_);
+			var ba_ = i_.And(ab_, ay_);
+			var bb_ = HPVTest?.Value;
+			var bd_ = i_.Not((bool?)(bb_ is null));
+			var bf_ = i_.And(ba_, bd_);
 
-			return bh_;
+			return bf_;
 		};
 		var e_ = context.Operators;
 		var f_ = e_.WhereOrNull<Observation>(c_, d_);

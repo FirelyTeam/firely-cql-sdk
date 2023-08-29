@@ -270,11 +270,11 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		bool? am_(Encounter ValidEncounter)
 		{
 			var ap_ = this.Measurement_Period();
-			var aq_ = ValidEncounter.Period;
+			var aq_ = ValidEncounter?.Period;
 			var ar_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aq_);
 			var as_ = context.Operators;
 			var at_ = as_.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, null);
-			var au_ = ValidEncounter.StatusElement;
+			var au_ = ValidEncounter?.StatusElement;
 			var av_ = new CallStackEntry("ToString", null, null);
 			var aw_ = context.Deeper(av_);
 			var ax_ = aw_.Operators;
@@ -296,8 +296,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -306,8 +306,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "month");
 		var o_ = d_.GreaterOrEqual(m_, (int?)6);
-		var q_ = a_.BirthDateElement;
-		var r_ = q_.Value;
+		var q_ = a_?.BirthDateElement;
+		var r_ = q_?.Value;
 		var t_ = d_.TypeConverter;
 		var u_ = t_.Convert<CqlDate>(r_);
 		var x_ = d_.Start(g_);
@@ -348,8 +348,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Stratification_1_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -358,8 +358,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		var k_ = d_.DateFrom(i_);
 		var m_ = d_.CalculateAgeAt(f_, k_, "month");
 		var o_ = d_.GreaterOrEqual(m_, (int?)6);
-		var q_ = a_.BirthDateElement;
-		var r_ = q_.Value;
+		var q_ = a_?.BirthDateElement;
+		var r_ = q_?.Value;
 		var t_ = d_.TypeConverter;
 		var u_ = t_.Convert<CqlDate>(r_);
 		var x_ = d_.Start(g_);
@@ -377,8 +377,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Stratification_2_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -398,8 +398,8 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Stratification_3_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_.BirthDateElement;
-		var c_ = b_.Value;
+		var b_ = a_?.BirthDateElement;
+		var c_ = b_?.Value;
 		var d_ = context.Operators;
 		var e_ = d_.TypeConverter;
 		var f_ = e_.Convert<CqlDate>(c_);
@@ -424,11 +424,11 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 		bool? d_(Procedure FluorideApplication)
 		{
 			var i_ = this.Measurement_Period();
-			var j_ = FluorideApplication.Performed;
+			var j_ = FluorideApplication?.Performed;
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
 			var l_ = context.Operators;
 			var m_ = l_.IntervalIncludesInterval<CqlDateTime>(i_, k_, null);
-			var n_ = FluorideApplication.StatusElement;
+			var n_ = FluorideApplication?.StatusElement;
 			var o_ = new CallStackEntry("ToString", null, null);
 			var p_ = context.Deeper(o_);
 			var q_ = p_.Operators;

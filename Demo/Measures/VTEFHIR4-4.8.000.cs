@@ -81,12 +81,12 @@ public class VTEFHIR4_4_8_000
     [CqlDeclaration("FirstInpatientIntensiveCareUnit")]
     public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(Encounter Encounter)
 	{
-		var a_ = Encounter.Location;
+		var a_ = Encounter?.Location;
 		bool? b_(Encounter.LocationComponent HospitalLocation)
 		{
-			var j_ = HospitalLocation.Location;
+			var j_ = HospitalLocation?.Location;
 			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetLocation(j_);
-			var l_ = k_.Type;
+			var l_ = k_?.Type;
 			CqlConcept m_(CodeableConcept X)
 			{
 				var aa_ = FHIRHelpers_4_0_001.ToConcept(X);
@@ -97,9 +97,9 @@ public class VTEFHIR4_4_8_000
 			var o_ = n_.SelectOrNull<CodeableConcept, CqlConcept>((l_ as IEnumerable<CodeableConcept>), m_);
 			var p_ = this.Intensive_Care_Unit();
 			var r_ = n_.ConceptsInValueSet(o_, p_);
-			var s_ = Encounter.Period;
+			var s_ = Encounter?.Period;
 			var t_ = FHIRHelpers_4_0_001.ToInterval(s_);
-			var u_ = HospitalLocation.Period;
+			var u_ = HospitalLocation?.Period;
 			var v_ = FHIRHelpers_4_0_001.ToInterval(u_);
 			var x_ = n_.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
 			var z_ = n_.And(r_, x_);
@@ -110,7 +110,7 @@ public class VTEFHIR4_4_8_000
 		var d_ = c_.WhereOrNull<Encounter.LocationComponent>((a_ as IEnumerable<Encounter.LocationComponent>), b_);
 		object e_(Encounter.LocationComponent @this)
 		{
-			var ab_ = @this.Period;
+			var ab_ = @this?.Period;
 			var ac_ = FHIRHelpers_4_0_001.ToInterval(ab_);
 			var ad_ = context.Operators;
 			var ae_ = ad_.Start(ac_);
@@ -128,7 +128,7 @@ public class VTEFHIR4_4_8_000
     public Period FirstICULocationPeriod(Encounter Encounter)
 	{
 		var a_ = this.FirstInpatientIntensiveCareUnit(Encounter);
-		var b_ = a_.Period;
+		var b_ = a_?.Period;
 
 		return b_;
 	}
@@ -167,7 +167,7 @@ public class VTEFHIR4_4_8_000
 		var b_ = context.Operators;
 		var c_ = b_.Start(a_);
 		var e_ = b_.DateFrom(c_);
-		var f_ = Encounter.Period;
+		var f_ = Encounter?.Period;
 		var g_ = FHIRHelpers_4_0_001.ToInterval(f_);
 		var i_ = b_.Start(g_);
 		var k_ = b_.DateFrom(i_);

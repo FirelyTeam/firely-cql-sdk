@@ -503,17 +503,9 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static void WriteExpression(
             TextWriter writer,
             int indentLevel,
-            Expression expression,
-            bool writeLeadingIndent = true)
+            Expression expression)
         {
-            if (expression is ConditionalExpression conditional)
-            {
-                writer.WriteLine();
-                writer.WriteLine(indentLevel, "{");
-                WriteConditional(writer, indentLevel + 1, conditional, writeLeadingIndent);
-                writer.WriteLine(indentLevel, "}");
-            }
-            else if (expression is BlockExpression)
+            if (expression is BlockExpression)
             {
                 writer.WriteLine();
                 var asString = ToCode(indentLevel, expression, false);
@@ -546,8 +538,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                 TypeBinaryExpression typeBinary => convertTypeBinaryExpression(indent, typeBinary),
                 ParameterExpression pe => convertParameterExpression(leadingIndentString, pe),
                 DefaultExpression de => convertDefaultExpression(leadingIndentString, de),
-                NullConditionalMemberExpression nullp => convertNullConditionalMemberExpression(indent, nullp),
+                NullConditionalMemberExpression nullp => convertNullConditionalMemberExpression(leadingIndentString, nullp),
                 BlockExpression block => convertBlockExpression(indent, block),
+                InvocationExpression invocation => convertInvocationExpression(leadingIndentString, invocation),
+                CaseWhenThenExpression cwt => convertCaseWhenThenExpression(indent, cwt),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
             };
         }
@@ -561,12 +555,14 @@ namespace Hl7.Cql.CodeGeneration.NET
             sb.AppendLine(indent, "{");
 
             var lastExpression = block.Expressions.LastOrDefault();
+            var isFirstStatement = true;
+
             foreach (var blockStatement in block.Expressions)
             {
                 if (ReferenceEquals(blockStatement, lastExpression))
                 {
-                    sb.AppendLine();
-                    sb.Append(indent + 1, "return ");
+                    if (!isFirstStatement) sb.AppendLine();
+                    if (blockStatement is not CaseWhenThenExpression) sb.Append(indent + 1, "return ");
                     sb.Append(ToCode(indent + 1, blockStatement, false));
                 }
                 else
@@ -575,6 +571,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
 
                 sb.AppendLine(";");
+                isFirstStatement = false;
             }
 
             sb.Append(indent, "}");
@@ -582,9 +579,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             return sb.ToString();
         }
 
-        private static string convertNullConditionalMemberExpression(int indent, NullConditionalMemberExpression nullp)
+        private static string convertNullConditionalMemberExpression(string indentString, NullConditionalMemberExpression nullp)
         {
-            return $"{ToCode(indent, nullp.MemberExpression.Expression!)})?.{nullp.MemberExpression.Member.Name}";
+            return $"{indentString}{Parenthesize(ToCode(0, nullp.MemberExpression.Expression!))}?.{nullp.MemberExpression.Member.Name}";
         }
 
         private static string convertConstantExpression(Type constantType, object? value, string? identString = "")
@@ -630,6 +627,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             return $"{leadingIndentString}{paramName(pe)}";
         }
 
+        private static string convertInvocationExpression(string leadingIndentString, InvocationExpression invoc)
+        {
+            if (invoc.Expression is ParameterExpression pe && !invoc.Arguments.Any())
+                return $"{leadingIndentString}{pe.Name}()";
+            else
+                throw new NotImplementedException();
+        }
         private static string convertMethodCallExpression(int indent, string leadingIndentString, MethodCallExpression call)
         {
             var sb = new StringBuilder();
@@ -693,17 +697,58 @@ namespace Hl7.Cql.CodeGeneration.NET
             var conditionalSb = new StringBuilder();
             conditionalSb.Append('(');
             var test = ToCode(indent, ce.Test, false);
-#pragma warning disable CA1305 // Specify IFormatProvider
-            conditionalSb.AppendLine($"({test})");
-#pragma warning restore CA1305 // Specify IFormatProvider
-            var ifTrue = $"({ToCode(indent + 2, ce.IfTrue, false)})";
+            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"({test})");
 
+            var ifTrue = $"({ToCode(indent + 2, ce.IfTrue, false)})";
             var ifFalse = $"({ToCode(indent + 2, ce.IfFalse, false)})";
-#pragma warning disable CA1305 // Specify IFormatProvider
-            conditionalSb.AppendLine($"{IndentString(indent + 1)}? {ifTrue}");
-            conditionalSb.AppendLine($"{IndentString(indent + 1)}: {ifFalse})");
-#pragma warning restore CA1305 // Specify IFormatProvider
-            return conditionalSb.ToString();
+            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{IndentString(indent + 1)}? {ifTrue}");
+            conditionalSb.Append(CultureInfo.InvariantCulture, $"{IndentString(indent + 1)}: {ifFalse})");
+
+            if (ce.IfTrue.Type != ce.Type || ce.IfFalse.Type != ce.Type)
+                return $"(({PrettyTypeName(ce.Type)}){conditionalSb})";
+            else
+                return conditionalSb.ToString();
+        }
+
+        private static string convertCaseWhenThenExpression(int indent, CaseWhenThenExpression conditional)
+        {
+            var sb = new StringBuilder();
+
+            bool firstCase = true;
+            foreach (var c in conditional.WhenThenCases)
+            {
+                if (firstCase)
+                    sb.Append(indent, "if (");
+                else
+                    sb.Append(indent, "else if (");
+
+                sb.Append(ToCode(indent + 1, c.When, false));
+                sb.AppendLine(")");
+                sb.AppendLine(convertConditionalStatementBlock(indent, c.Then));
+                firstCase = false;
+            }
+
+            sb.AppendLine(indent, "else");
+            sb.AppendLine(convertConditionalStatementBlock(indent, conditional.ElseCase));
+
+            return sb.ToString();
+        }
+
+        private static string convertConditionalStatementBlock(int indent, Expression conditionalActionBlock)
+        {
+            if (conditionalActionBlock is BlockExpression)
+            {
+                return ToCode(indent, conditionalActionBlock);
+            }
+            else
+            {
+                var sb = new StringBuilder();
+                sb.Append(indent + 1, "return ");
+                sb.Append(ToCode(indent + 1, conditionalActionBlock, false));
+                sb.AppendLine(";");
+
+                return sb.ToString();
+            }
         }
 
         private static string convertMemberInitExpression(int indent, string leadingIndentString, MemberInitExpression memberInit)
@@ -912,7 +957,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 string typeDeclaration = "var";
                 if (binary.Right is DefaultExpression ||
-                    binary.Right is ConditionalExpression ||
                    (binary.Right is ConstantExpression ce && ce.Value == null))
                 {
                     typeDeclaration = PrettyTypeName(binary.Left.Type);
@@ -923,7 +967,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else
             {
-                var @operator = BinaryOperatorFor(binary.NodeType);
+                var @operator = binary.NodeType == ExpressionType.Equal && binary.Right is ConstantExpression
+                    ? "is"
+                    : BinaryOperatorFor(binary.NodeType);
+
                 var left = ToCode(indent, binary.Left, false);
                 var right = ToCode(indent, binary.Right, false);
                 var binaryString = $"{leadingIndentString}({left} {@operator} {right})";
@@ -1032,60 +1079,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 return $"{PrettyTypeName(elementType)}[]";
             }
             else return typeName;
-        }
-
-        private static void WriteConditional(TextWriter writer, int indentLevel, ConditionalExpression conditional, bool indentLeadingIf)
-        {
-            writer.Write(indentLeadingIf ? indentLevel : 0, "if (");
-            writer.Write(ToCode(indentLevel + 1, conditional.Test, false));
-            writer.WriteLine(")");
-
-            if (conditional.IfTrue is BlockExpression)
-            {
-                writer.Write(ToCode(indentLevel, conditional.IfTrue));
-                writer.WriteLine();
-            }
-            else
-            {
-                writeConditionalStatementBlock(writer, indentLevel, conditional.IfTrue);
-            }
-
-            if (conditional.IfFalse is BlockExpression)
-            {
-                writer.WriteLine(indentLevel, "else");
-                writer.WriteLine(ToCode(indentLevel, conditional.IfFalse));
-            }
-            else if (conditional.IfFalse is ConditionalExpression elseIf)
-            {
-                writer.Write(indentLevel, "else ");
-                WriteConditional(writer, indentLevel, elseIf, false);
-            }
-            else if (conditional.IfFalse is not null)
-            {
-                writer.WriteLine(indentLevel, "else");
-                writeConditionalStatementBlock(writer, indentLevel, conditional.IfFalse);
-            }
-        }
-
-        private static void writeConditionalStatementBlock(TextWriter writer, int indentLevel, Expression conditionalActionBlock)
-        {
-            var vng = new VariableNameGenerator(postfix: "__");
-            conditionalActionBlock = Transform(conditionalActionBlock,
-                new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(vng),
-                new LocalVariableDeduper()
-                );
-
-            if (conditionalActionBlock is BlockExpression)
-            {
-                writer.WriteLine(ToCode(indentLevel, conditionalActionBlock));
-            }
-            else
-            {
-                writer.Write(indentLevel + 1, "return ");
-                writer.Write(ToCode(indentLevel + 1, conditionalActionBlock, false));
-                writer.WriteLine(";");
-            }
         }
 
         private static string Parenthesize(string term)

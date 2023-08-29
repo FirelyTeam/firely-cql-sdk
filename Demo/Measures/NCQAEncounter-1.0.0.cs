@@ -43,11 +43,11 @@ public class NCQAEncounter_1_0_0
     [CqlDeclaration("Encounter Has Diagnosis")]
     public bool? Encounter_Has_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
-		var a_ = Encounter.Diagnosis;
+		var a_ = Encounter?.Diagnosis;
 		FhirString b_(Encounter.DiagnosisComponent D)
 		{
-			var j_ = D.Condition;
-			var k_ = j_.ReferenceElement;
+			var j_ = D?.Condition;
+			var k_ = j_?.ReferenceElement;
 
 			return k_;
 		};
@@ -57,7 +57,7 @@ public class NCQAEncounter_1_0_0
 		{
 			bool? l_(Condition C)
 			{
-				var q_ = C.IdElement;
+				var q_ = C?.IdElement;
 				var r_ = new CallStackEntry("ToString", null, null);
 				var s_ = context.Deeper(r_);
 				var t_ = s_.Operators;
@@ -89,10 +89,10 @@ public class NCQAEncounter_1_0_0
     [CqlDeclaration("Encounter Has Principal Diagnosis")]
     public bool? Encounter_Has_Principal_Diagnosis(Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
-		var a_ = Encounter.Diagnosis;
+		var a_ = Encounter?.Diagnosis;
 		bool? b_(Encounter.DiagnosisComponent D)
 		{
-			var m_ = D.RankElement;
+			var m_ = D?.RankElement;
 			var n_ = context.Operators;
 			var o_ = n_.TypeConverter;
 			var p_ = o_.Convert<Integer>(m_);
@@ -112,14 +112,14 @@ public class NCQAEncounter_1_0_0
 		{
 			bool? t_(Condition C)
 			{
-				var y_ = C.IdElement;
+				var y_ = C?.IdElement;
 				var z_ = new CallStackEntry("ToString", null, null);
 				var aa_ = context.Deeper(z_);
 				var ab_ = aa_.Operators;
 				var ac_ = ab_.TypeConverter;
 				var ad_ = ac_.Convert<string>(y_);
-				var ae_ = PrincipalDiagnosis.Condition;
-				var af_ = ae_.ReferenceElement;
+				var ae_ = PrincipalDiagnosis?.Condition;
+				var af_ = ae_?.ReferenceElement;
 				var ah_ = context.Deeper(z_);
 				var ai_ = ah_.Operators;
 				var aj_ = ai_.TypeConverter;
@@ -149,7 +149,7 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Enc);
 		bool? b_(Encounter EncounterPeriod)
 		{
-			var g_ = EncounterPeriod.Period;
+			var g_ = EncounterPeriod?.Period;
 			var h_ = NCQAFHIRBase_1_0_0.Normalize_Interval(g_);
 			var i_ = context.Operators;
 			var j_ = i_.End(h_);
@@ -171,16 +171,15 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var e_ = E.Class;
-			var f_ = (e_ == null);
-			var g_ = context.Operators;
-			var h_ = g_.Not((bool?)f_);
-			var j_ = FHIRHelpers_4_0_001.ToCode(e_);
-			var k_ = NCQATerminology_1_0_0.@virtual();
-			var m_ = g_.Equivalent(j_, k_);
-			var o_ = g_.And(h_, m_);
+			var e_ = E?.Class;
+			var f_ = context.Operators;
+			var g_ = f_.Not((bool?)(e_ is null));
+			var i_ = FHIRHelpers_4_0_001.ToCode(e_);
+			var j_ = NCQATerminology_1_0_0.@virtual();
+			var l_ = f_.Equivalent(i_, j_);
+			var n_ = f_.And(g_, l_);
 
-			return o_;
+			return n_;
 		};
 		var c_ = context.Operators;
 		var d_ = c_.WhereOrNull<Encounter>(a_, b_);
@@ -195,20 +194,19 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var e_ = E.Class;
-			var f_ = (e_ == null);
-			var g_ = context.Operators;
-			var h_ = g_.Not((bool?)f_);
-			var j_ = FHIRHelpers_4_0_001.ToCode(e_);
-			var k_ = NCQATerminology_1_0_0.ambulatory();
-			var m_ = g_.Equivalent(j_, k_);
-			var o_ = FHIRHelpers_4_0_001.ToCode(e_);
-			var p_ = NCQATerminology_1_0_0.home_health();
-			var r_ = g_.Equivalent(o_, p_);
-			var t_ = g_.Or(m_, r_);
-			var v_ = g_.And(h_, t_);
+			var e_ = E?.Class;
+			var f_ = context.Operators;
+			var g_ = f_.Not((bool?)(e_ is null));
+			var i_ = FHIRHelpers_4_0_001.ToCode(e_);
+			var j_ = NCQATerminology_1_0_0.ambulatory();
+			var l_ = f_.Equivalent(i_, j_);
+			var n_ = FHIRHelpers_4_0_001.ToCode(e_);
+			var o_ = NCQATerminology_1_0_0.home_health();
+			var q_ = f_.Equivalent(n_, o_);
+			var s_ = f_.Or(l_, q_);
+			var u_ = f_.And(g_, s_);
 
-			return v_;
+			return u_;
 		};
 		var c_ = context.Operators;
 		var d_ = c_.WhereOrNull<Encounter>(a_, b_);
@@ -223,16 +221,15 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Encounter);
 		bool? b_(Encounter E)
 		{
-			var e_ = E.Class;
-			var f_ = (e_ == null);
-			var g_ = context.Operators;
-			var h_ = g_.Not((bool?)f_);
-			var j_ = FHIRHelpers_4_0_001.ToCode(e_);
-			var k_ = NCQATerminology_1_0_0.ambulatory();
-			var m_ = g_.Equivalent(j_, k_);
-			var o_ = g_.And(h_, m_);
+			var e_ = E?.Class;
+			var f_ = context.Operators;
+			var g_ = f_.Not((bool?)(e_ is null));
+			var i_ = FHIRHelpers_4_0_001.ToCode(e_);
+			var j_ = NCQATerminology_1_0_0.ambulatory();
+			var l_ = f_.Equivalent(i_, j_);
+			var n_ = f_.And(g_, l_);
 
-			return o_;
+			return n_;
 		};
 		var c_ = context.Operators;
 		var d_ = c_.WhereOrNull<Encounter>(a_, b_);

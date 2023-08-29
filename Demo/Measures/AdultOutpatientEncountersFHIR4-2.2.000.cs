@@ -130,7 +130,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 		var w_ = g_.ListUnion<Encounter>(r_, u_);
 		bool? x_(Encounter ValidEncounter)
 		{
-			var aa_ = ValidEncounter.StatusElement;
+			var aa_ = ValidEncounter?.StatusElement;
 			var ab_ = new CallStackEntry("ToString", null, null);
 			var ac_ = context.Deeper(ab_);
 			var ad_ = ac_.Operators;
@@ -139,7 +139,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 			var ag_ = context.Operators;
 			var ah_ = ag_.Equal(af_, "finished");
 			var ai_ = this.Measurement_Period();
-			var aj_ = ValidEncounter.Period;
+			var aj_ = ValidEncounter?.Period;
 			var ak_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aj_);
 			var am_ = ag_.IntervalIncludesInterval<CqlDateTime>(ai_, ak_, null);
 			var ao_ = ag_.And(ah_, am_);
