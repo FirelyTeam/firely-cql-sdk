@@ -14,6 +14,9 @@ namespace Hl7.Cql.Compiler
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+    /// <summary>
+    /// This custom expression represents the null conditional expression in CQL (which looks like a?.b in C#).
+    /// </summary>
     public class NullConditionalMemberExpression : Expression
     {
         public MemberExpression MemberExpression { get; private set; }
@@ -49,8 +52,10 @@ namespace Hl7.Cql.Compiler
             var block = Block(new[] { objectVariable },
                 Assign(objectVariable, MemberExpression.Expression!),
                 Condition(notNull(objectVariable), nullableMemberExpression, Default(resultType)));
+
             return block;
         }
+
         protected override Expression VisitChildren(ExpressionVisitor visitor)
         {
             var visited = visitor.Visit(MemberExpression.Expression);

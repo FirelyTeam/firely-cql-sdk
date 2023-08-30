@@ -1751,6 +1751,7 @@ namespace Hl7.Cql.Compiler
                 if (then.Type != @else.Type)
                     throw new InvalidOperationException($"The If expression at {@if.locator} produces two branches with different types.");
                 var ifThenElse = Expression.Condition(condition, then, @else);
+
                 return ifThenElse;
             }
             else

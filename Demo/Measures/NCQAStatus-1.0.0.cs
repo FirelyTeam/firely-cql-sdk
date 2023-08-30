@@ -38,206 +38,193 @@ public class NCQAStatus_1_0_0
 
     #endregion
 
-    private Patient Patient_Value()
+	private Patient Patient_Value()
 	{
-		var a_ = context.DataRetriever;
-		var b_ = a_.RetrieveByValueSet<Patient>(null, null);
-		var c_ = context.Operators;
-		var d_ = c_.SingleOrNull<Patient>(b_);
+		var a_ = context.Operators;
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Patient>(null, null);
+		var d_ = a_.SingleOrNull<Patient>(c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Patient")]
-    public Patient Patient() => __Patient.Value;
+	public Patient Patient() => 
+		__Patient.Value;
 
     [CqlDeclaration("Active Allergy")]
-    public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
+	public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
 	{
-		bool? a_(AllergyIntolerance A)
+		var a_ = context.Operators;
+		bool? b_(AllergyIntolerance A)
 		{
-			var d_ = A?.ClinicalStatus;
-			var e_ = FHIRHelpers_4_0_001.ToConcept(d_);
-			var f_ = NCQATerminology_1_0_0.allergy_active();
-			var g_ = context.Operators;
-			var h_ = g_.ConvertCodeToConcept(f_);
-			var j_ = g_.Equal(e_, h_);
+			var d_ = context.Operators;
+			var e_ = A?.ClinicalStatus;
+			var f_ = FHIRHelpers_4_0_001.ToConcept(e_);
+			var h_ = NCQATerminology_1_0_0.allergy_active();
+			var i_ = d_.ConvertCodeToConcept(h_);
+			var j_ = d_.Equal(f_, i_);
 
 			return j_;
 		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<AllergyIntolerance>(Allergy, a_);
+		var c_ = a_.WhereOrNull<AllergyIntolerance>(Allergy, b_);
 
 		return c_;
 	}
-
 
     [CqlDeclaration("Active Condition")]
-    public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
+	public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
 	{
-		bool? a_(Condition C)
+		var a_ = context.Operators;
+		bool? b_(Condition C)
 		{
-			var d_ = C?.ClinicalStatus;
-			var e_ = FHIRHelpers_4_0_001.ToConcept(d_);
-			var f_ = NCQATerminology_1_0_0.active();
-			var g_ = context.Operators;
-			var h_ = g_.ConvertCodeToConcept(f_);
-			var j_ = g_.Equal(e_, h_);
+			var d_ = context.Operators;
+			var e_ = C?.ClinicalStatus;
+			var f_ = FHIRHelpers_4_0_001.ToConcept(e_);
+			var h_ = NCQATerminology_1_0_0.active();
+			var i_ = d_.ConvertCodeToConcept(h_);
+			var j_ = d_.Equal(f_, i_);
 
 			return j_;
 		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<Condition>(Condition, a_);
+		var c_ = a_.WhereOrNull<Condition>(Condition, b_);
 
 		return c_;
 	}
-
 
     [CqlDeclaration("Finished Encounter")]
-    public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
+	public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
 	{
-		bool? a_(Encounter E)
+		var a_ = context.Operators;
+		bool? b_(Encounter E)
 		{
-			var d_ = E?.StatusElement;
-			var e_ = new CallStackEntry("ToString", null, null);
-			var f_ = context.Deeper(e_);
-			var g_ = f_.Operators;
-			var h_ = g_.TypeConverter;
-			var i_ = h_.Convert<string>(d_);
-			var j_ = context.Operators;
-			var k_ = j_.Equal(i_, "finished");
+			var d_ = context.Operators;
+			var e_ = context.Deeper(new CallStackEntry("ToString", null, null));
+			var f_ = e_.Operators;
+			var g_ = f_.TypeConverter;
+			var h_ = E?.StatusElement;
+			var i_ = g_.Convert<string>(h_);
+			var j_ = d_.Equal(i_, "finished");
 
-			return k_;
+			return j_;
 		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<Encounter>(Enc, a_);
+		var c_ = a_.WhereOrNull<Encounter>(Enc, b_);
 
 		return c_;
 	}
-
 
     [CqlDeclaration("Completed Immunization")]
-    public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
+	public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
 	{
-		bool? a_(Immunization I)
+		var a_ = context.Operators;
+		bool? b_(Immunization I)
 		{
-			var d_ = I?.StatusElement;
-			var e_ = new CallStackEntry("ToString", null, null);
-			var f_ = context.Deeper(e_);
-			var g_ = f_.Operators;
-			var h_ = g_.TypeConverter;
-			var i_ = h_.Convert<string>(d_);
-			var j_ = context.Operators;
-			var k_ = j_.Equal(i_, "completed");
+			var d_ = context.Operators;
+			var e_ = context.Deeper(new CallStackEntry("ToString", null, null));
+			var f_ = e_.Operators;
+			var g_ = f_.TypeConverter;
+			var h_ = I?.StatusElement;
+			var i_ = g_.Convert<string>(h_);
+			var j_ = d_.Equal(i_, "completed");
 
-			return k_;
+			return j_;
 		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<Immunization>(Immunization, a_);
+		var c_ = a_.WhereOrNull<Immunization>(Immunization, b_);
 
 		return c_;
 	}
-
 
     [CqlDeclaration("Dispensed Medication")]
-    public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
+	public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
 	{
-		bool? a_(MedicationDispense M)
+		var a_ = context.Operators;
+		bool? b_(MedicationDispense M)
 		{
-			var d_ = M?.StatusElement;
-			var e_ = new CallStackEntry("ToString", null, null);
-			var f_ = context.Deeper(e_);
-			var g_ = f_.Operators;
-			var h_ = g_.TypeConverter;
-			var i_ = h_.Convert<string>(d_);
-			var j_ = context.Operators;
-			var k_ = j_.Equal(i_, "completed");
+			var d_ = context.Operators;
+			var e_ = context.Deeper(new CallStackEntry("ToString", null, null));
+			var f_ = e_.Operators;
+			var g_ = f_.TypeConverter;
+			var h_ = M?.StatusElement;
+			var i_ = g_.Convert<string>(h_);
+			var j_ = d_.Equal(i_, "completed");
 
-			return k_;
+			return j_;
 		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<MedicationDispense>(Med, a_);
+		var c_ = a_.WhereOrNull<MedicationDispense>(Med, b_);
 
 		return c_;
 	}
 
-
     [CqlDeclaration("Active Medication")]
-    public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
+	public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
 	{
-		bool? a_(MedicationRequest M)
+		var a_ = context.Operators;
+		bool? b_(MedicationRequest M)
 		{
-			var d_ = M?.StatusElement;
-			var e_ = new CallStackEntry("ToString", null, null);
-			var f_ = context.Deeper(e_);
-			var g_ = f_.Operators;
-			var h_ = g_.TypeConverter;
-			var i_ = h_.Convert<string>(d_);
+			var d_ = context.Operators;
+			var e_ = context.Deeper(new CallStackEntry("ToString", null, null));
+			var f_ = e_.Operators;
+			var g_ = f_.TypeConverter;
+			var h_ = M?.StatusElement;
+			var i_ = g_.Convert<string>(h_);
 			var j_ = new string[]
 			{
 				"completed",
 			};
-			var k_ = context.Operators;
-			var l_ = k_.InList<string>(i_, (j_ as IEnumerable<string>));
-
-			return l_;
-		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<MedicationRequest>(Med, a_);
-
-		return c_;
-	}
-
-
-    [CqlDeclaration("Completed Procedure")]
-    public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
-	{
-		bool? a_(Procedure P)
-		{
-			var d_ = P?.StatusElement;
-			var e_ = new CallStackEntry("ToString", null, null);
-			var f_ = context.Deeper(e_);
-			var g_ = f_.Operators;
-			var h_ = g_.TypeConverter;
-			var i_ = h_.Convert<string>(d_);
-			var j_ = context.Operators;
-			var k_ = j_.Equal(i_, "completed");
+			var k_ = d_.InList<string>(i_, (j_ as IEnumerable<string>));
 
 			return k_;
 		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<Procedure>(Proc, a_);
+		var c_ = a_.WhereOrNull<MedicationRequest>(Med, b_);
 
 		return c_;
 	}
 
+    [CqlDeclaration("Completed Procedure")]
+	public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
+	{
+		var a_ = context.Operators;
+		bool? b_(Procedure P)
+		{
+			var d_ = context.Operators;
+			var e_ = context.Deeper(new CallStackEntry("ToString", null, null));
+			var f_ = e_.Operators;
+			var g_ = f_.TypeConverter;
+			var h_ = P?.StatusElement;
+			var i_ = g_.Convert<string>(h_);
+			var j_ = d_.Equal(i_, "completed");
+
+			return j_;
+		};
+		var c_ = a_.WhereOrNull<Procedure>(Proc, b_);
+
+		return c_;
+	}
 
     [CqlDeclaration("Completed or Ongoing Procedure")]
-    public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
+	public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
 	{
-		bool? a_(Procedure P)
+		var a_ = context.Operators;
+		bool? b_(Procedure P)
 		{
-			var d_ = P?.StatusElement;
-			var e_ = new CallStackEntry("ToString", null, null);
-			var f_ = context.Deeper(e_);
-			var g_ = f_.Operators;
-			var h_ = g_.TypeConverter;
-			var i_ = h_.Convert<string>(d_);
+			var d_ = context.Operators;
+			var e_ = context.Deeper(new CallStackEntry("ToString", null, null));
+			var f_ = e_.Operators;
+			var g_ = f_.TypeConverter;
+			var h_ = P?.StatusElement;
+			var i_ = g_.Convert<string>(h_);
 			var j_ = new string[]
 			{
 				"completed",
 				"in-progress",
 			};
-			var k_ = context.Operators;
-			var l_ = k_.InList<string>(i_, (j_ as IEnumerable<string>));
+			var k_ = d_.InList<string>(i_, (j_ as IEnumerable<string>));
 
-			return l_;
+			return k_;
 		};
-		var b_ = context.Operators;
-		var c_ = b_.WhereOrNull<Procedure>(Proc, a_);
+		var c_ = a_.WhereOrNull<Procedure>(Proc, b_);
 
 		return c_;
 	}
-
 
 }

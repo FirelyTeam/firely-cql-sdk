@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Primitives;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -28,6 +27,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
     {
         private bool _atRoot = true;
         private readonly List<BinaryExpression> _assignments = new();
+
+        public IReadOnlyCollection<BinaryExpression> Assignments => _assignments;
 
         [return: NotNullIfNotNull("node")]
         public override Expression? Visit(Expression? node)
@@ -62,6 +63,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 BinaryExpression binary => VisitBinary(binary),
                 NewExpression newe => VisitNew(newe),
                 CaseWhenThenExpression cwt => VisitCaseWhenThenExpression(cwt),
+
+                // Simplify all others.
                 _ => simplify(base.Visit(node))
             };
         }
@@ -76,14 +79,49 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return newLetVariable;
         }
 
-
         protected override Expression VisitConditional(ConditionalExpression node)
         {
-            return node;
+            // Turn every nested conditional except the most simple ones into a Case/when/then
+            if (isSimpleConditional(node))
+                return node;
+
+            var cwt = toCWT(node);
+            return Visit(cwt);
+
+            // simple a ? b : c, with simple b and c
+            bool isSimpleConditional(ConditionalExpression node)
+            {
+                if (node.IfFalse is ConditionalExpression) return false;
+
+                var testVisitor = new SimplifyExpressionsVisitor();
+                _ = testVisitor.Visit(node.IfTrue);
+                _ = testVisitor.Visit(node.IfFalse);
+                return !testVisitor.Assignments.Any();
+            }
         }
+
+        private CaseWhenThenExpression toCWT(ConditionalExpression ce)
+        {
+            var exprs = unwind(ce).ToList();
+            var cases = exprs
+                .SkipLast(1)
+                .Cast<ConditionalExpression>()
+                .Select(expr => new CaseWhenThenExpression.WhenThenCase(expr.Test, expr.IfTrue));
+            return new CaseWhenThenExpression(cases.ToList().AsReadOnly(), exprs.Last());
+
+            static IEnumerable<Expression> unwind(ConditionalExpression ce)
+            {
+                if (ce.IfFalse is ConditionalExpression nestedCe)
+                    return unwind(nestedCe).Prepend(ce);
+                else
+                    return new[] { ce, ce.IfFalse };
+            }
+        }
+
 
         protected override Expression VisitUnary(UnaryExpression node)
         {
+            // Don't simplify simple converts.
             if (node.NodeType is ExpressionType.Convert or ExpressionType.TypeAs)
             {
                 return base.VisitUnary(node);
@@ -109,10 +147,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitNew(NewExpression node)
         {
-            if (node.Type == typeof(CqlValueSet))
-                return node;
-            else
-                return simplify(node);
+            return node;
         }
 
         protected override Expression VisitConstant(ConstantExpression node)
@@ -125,22 +160,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return node;
         }
 
-        protected override Expression VisitMethodCall(MethodCallExpression node)
-        {
-            var newArguments = new List<Expression>();
-
-            // I am keeping this a foreach, to signal that
-            // the loop (specifically Visit()) has a side-effect
-            // of updating the _assignments field.
-            foreach (var argument in node.Arguments)
-            {
-                var visitedArgument = Visit(argument);
-                newArguments.Add(visitedArgument);
-            }
-
-            var visitedObject = Visit(node.Object);
-            return node.Update(visitedObject, newArguments);
-        }
 
         // This visitor builds up an expression (like any other), but also has a
         // set of Assignments, that cannot be seen in isolation from the expression. Therefore,
@@ -184,8 +203,17 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             NewExpression visitNewExpression(NewExpression node) => node.Update(Visit(node.Arguments));
         }
 
+        /// <summary>
+        /// CaseWhenThen expressions cannot be represented in C# as an expression
+        /// (well, as a switch expression, but that has its own limitations), so we need
+        /// to make sure they get translated to a lambda containing the if/then/else block
+        /// and then simplified to just a call to that lambda.
+        /// </summary>
         protected Expression VisitCaseWhenThenExpression(CaseWhenThenExpression node)
         {
+            // Each of the cases will be translated to blocks, which can hold their own
+            // local variables and lexical return, just like the body of a Lambda. So,
+            // we use a nested vistor here to create a nested block.
             CaseWhenThenExpression.WhenThenCase visitCase(CaseWhenThenExpression.WhenThenCase c)
             {
                 var thenVisitor = new SimplifyExpressionsVisitor();
@@ -193,14 +221,22 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             }
 
             var cases = node.WhenThenCases.Select(visitCase);
+
+            // The final else case is treated just like the when/then
             var elseVisitor = new SimplifyExpressionsVisitor();
             var visitedElse = elseVisitor.Visit(node.ElseCase);
 
             var newCTW = node.Update(cases.ToList().AsReadOnly(), visitedElse);
 
+            // To make sure the if block in C# (which is NOT an expression) can
+            // be used everywhere, we place the block inside its own lambda.
+            // This also ensures the lexical exits work correctly.
             var func = Expression.Lambda(Expression.Block(newCTW));
             var assign = simplify(func);
 
+            // Finally, replace the whole statement with just an invocation
+            // of the lambda we just created (which *is* an expression and can be
+            // used everywhere).
             return Expression.Invoke(assign);
         }
     }

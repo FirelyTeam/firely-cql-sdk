@@ -90,94 +90,100 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 
     #endregion
 
-    private CqlValueSet Clinical_Oral_Evaluation_Value() =>
+	private CqlValueSet Clinical_Oral_Evaluation_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", null);
 
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
-    public CqlValueSet Clinical_Oral_Evaluation() => __Clinical_Oral_Evaluation.Value;
+	public CqlValueSet Clinical_Oral_Evaluation() => 
+		__Clinical_Oral_Evaluation.Value;
 
-    private CqlValueSet Fluoride_Varnish_Application_for_Children_Value() =>
+	private CqlValueSet Fluoride_Varnish_Application_for_Children_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", null);
 
     [CqlDeclaration("Fluoride Varnish Application for Children")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002")]
-    public CqlValueSet Fluoride_Varnish_Application_for_Children() => __Fluoride_Varnish_Application_for_Children.Value;
+	public CqlValueSet Fluoride_Varnish_Application_for_Children() => 
+		__Fluoride_Varnish_Application_for_Children.Value;
 
-    private CqlValueSet Office_Visit_Value() =>
+	private CqlValueSet Office_Visit_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", null);
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit() => __Office_Visit.Value;
+	public CqlValueSet Office_Visit() => 
+		__Office_Visit.Value;
 
-    private CqlValueSet Online_Assessments_Value() =>
+	private CqlValueSet Online_Assessments_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", null);
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-    public CqlValueSet Online_Assessments() => __Online_Assessments.Value;
+	public CqlValueSet Online_Assessments() => 
+		__Online_Assessments.Value;
 
-    private CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17_Value() =>
+	private CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", null);
 
     [CqlDeclaration("Preventive Care - Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-    public CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17() => __Preventive_Care___Established_Office_Visit__0_to_17.Value;
+	public CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17() => 
+		__Preventive_Care___Established_Office_Visit__0_to_17.Value;
 
-    private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() =>
+	private CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", null);
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => __Preventive_Care_Services___Established_Office_Visit__18_and_Up.Value;
+	public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up() => 
+		__Preventive_Care_Services___Established_Office_Visit__18_and_Up.Value;
 
-    private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() =>
+	private CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", null);
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => __Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
+	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up() => 
+		__Preventive_Care_Services_Initial_Office_Visit__18_and_Up.Value;
 
-    private CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17_Value() =>
+	private CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", null);
 
     [CqlDeclaration("Preventive Care- Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-    public CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17() => __Preventive_Care__Initial_Office_Visit__0_to_17.Value;
+	public CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17() => 
+		__Preventive_Care__Initial_Office_Visit__0_to_17.Value;
 
-    private CqlValueSet Telephone_Visits_Value() =>
+	private CqlValueSet Telephone_Visits_Value() => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", null);
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits() => __Telephone_Visits.Value;
+	public CqlValueSet Telephone_Visits() => 
+		__Telephone_Visits.Value;
 
-    private CqlCode Birth_date_Value()
+	private CqlCode Birth_date_Value() => 
+		new CqlCode("21112-8", "http://loinc.org", null, null);
+
+    [CqlDeclaration("Birth date")]
+	public CqlCode Birth_date() => 
+		__Birth_date.Value;
+
+	private CqlCode[] LOINC_Value()
 	{
-		var a_ = new CqlCode("21112-8", "http://loinc.org", null, null);
+		var a_ = new CqlCode[]
+		{
+			new CqlCode("21112-8", "http://loinc.org", null, null),
+		};
 
 		return a_;
 	}
 
-    [CqlDeclaration("Birth date")]
-    public CqlCode Birth_date() => __Birth_date.Value;
-
-    private CqlCode[] LOINC_Value()
-	{
-		var a_ = new CqlCode("21112-8", "http://loinc.org", null, null);
-		var b_ = new CqlCode[]
-		{
-			a_,
-		};
-
-		return b_;
-	}
-
     [CqlDeclaration("LOINC")]
-    public CqlCode[] LOINC() => __LOINC.Value;
+	public CqlCode[] LOINC() => 
+		__LOINC.Value;
 
-    private CqlInterval<CqlDateTime> Measurement_Period_Value()
+	private CqlInterval<CqlDateTime> Measurement_Period_Value()
 	{
 		var a_ = context.ResolveParameter("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR-0.0.008", "Measurement Period", null);
 
@@ -185,22 +191,24 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	}
 
     [CqlDeclaration("Measurement Period")]
-    public CqlInterval<CqlDateTime> Measurement_Period() => __Measurement_Period.Value;
+	public CqlInterval<CqlDateTime> Measurement_Period() => 
+		__Measurement_Period.Value;
 
-    private Patient Patient_Value()
+	private Patient Patient_Value()
 	{
-		var a_ = context.DataRetriever;
-		var b_ = a_.RetrieveByValueSet<Patient>(null, null);
-		var c_ = context.Operators;
-		var d_ = c_.SingleOrNull<Patient>(b_);
+		var a_ = context.Operators;
+		var b_ = context.DataRetriever;
+		var c_ = b_.RetrieveByValueSet<Patient>(null, null);
+		var d_ = a_.SingleOrNull<Patient>(c_);
 
 		return d_;
 	}
 
     [CqlDeclaration("Patient")]
-    public Patient Patient() => __Patient.Value;
+	public Patient Patient() => 
+		__Patient.Value;
 
-    private IEnumerable<Coding> SDE_Ethnicity_Value()
+	private IEnumerable<Coding> SDE_Ethnicity_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Ethnicity();
 
@@ -208,9 +216,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	}
 
     [CqlDeclaration("SDE Ethnicity")]
-    public IEnumerable<Coding> SDE_Ethnicity() => __SDE_Ethnicity.Value;
+	public IEnumerable<Coding> SDE_Ethnicity() => 
+		__SDE_Ethnicity.Value;
 
-    private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
+	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Payer();
 
@@ -218,9 +227,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	}
 
     [CqlDeclaration("SDE Payer")]
-    public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => __SDE_Payer.Value;
+	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+		__SDE_Payer.Value;
 
-    private IEnumerable<Coding> SDE_Race_Value()
+	private IEnumerable<Coding> SDE_Race_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Race();
 
@@ -228,9 +238,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	}
 
     [CqlDeclaration("SDE Race")]
-    public IEnumerable<Coding> SDE_Race() => __SDE_Race.Value;
+	public IEnumerable<Coding> SDE_Race() => 
+		__SDE_Race.Value;
 
-    private CqlCode SDE_Sex_Value()
+	private CqlCode SDE_Sex_Value()
 	{
 		var a_ = SupplementalDataElementsFHIR4_2_0_000.SDE_Sex();
 
@@ -238,94 +249,96 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	}
 
     [CqlDeclaration("SDE Sex")]
-    public CqlCode SDE_Sex() => __SDE_Sex.Value;
+	public CqlCode SDE_Sex() => 
+		__SDE_Sex.Value;
 
-    private IEnumerable<Encounter> Qualifying_Encounters_Value()
+	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var a_ = this.Office_Visit();
-		var b_ = context.DataRetriever;
-		var c_ = b_.RetrieveByValueSet<Encounter>(a_, null);
-		var d_ = this.Preventive_Care___Established_Office_Visit__0_to_17();
-		var f_ = b_.RetrieveByValueSet<Encounter>(d_, null);
-		var g_ = context.Operators;
-		var h_ = g_.ListUnion<Encounter>(c_, f_);
-		var i_ = this.Preventive_Care__Initial_Office_Visit__0_to_17();
-		var k_ = b_.RetrieveByValueSet<Encounter>(i_, null);
-		var l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-		var n_ = b_.RetrieveByValueSet<Encounter>(l_, null);
-		var p_ = g_.ListUnion<Encounter>(k_, n_);
-		var r_ = g_.ListUnion<Encounter>(h_, p_);
-		var s_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var u_ = b_.RetrieveByValueSet<Encounter>(s_, null);
-		var v_ = this.Clinical_Oral_Evaluation();
-		var x_ = b_.RetrieveByValueSet<Encounter>(v_, null);
-		var z_ = g_.ListUnion<Encounter>(u_, x_);
-		var ab_ = g_.ListUnion<Encounter>(r_, z_);
-		var ac_ = this.Telephone_Visits();
-		var ae_ = b_.RetrieveByValueSet<Encounter>(ac_, null);
-		var af_ = this.Online_Assessments();
-		var ah_ = b_.RetrieveByValueSet<Encounter>(af_, null);
-		var aj_ = g_.ListUnion<Encounter>(ae_, ah_);
-		var al_ = g_.ListUnion<Encounter>(ab_, aj_);
-		bool? am_(Encounter ValidEncounter)
+		var a_ = context.Operators;
+		var f_ = context.DataRetriever;
+		var g_ = this.Office_Visit();
+		var h_ = f_.RetrieveByValueSet<Encounter>(g_, null);
+		var j_ = this.Preventive_Care___Established_Office_Visit__0_to_17();
+		var k_ = f_.RetrieveByValueSet<Encounter>(j_, null);
+		var l_ = a_.ListUnion<Encounter>(h_, k_);
+		var o_ = this.Preventive_Care__Initial_Office_Visit__0_to_17();
+		var p_ = f_.RetrieveByValueSet<Encounter>(o_, null);
+		var r_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+		var s_ = f_.RetrieveByValueSet<Encounter>(r_, null);
+		var t_ = a_.ListUnion<Encounter>(p_, s_);
+		var u_ = a_.ListUnion<Encounter>(l_, t_);
+		var x_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		var y_ = f_.RetrieveByValueSet<Encounter>(x_, null);
+		var aa_ = this.Clinical_Oral_Evaluation();
+		var ab_ = f_.RetrieveByValueSet<Encounter>(aa_, null);
+		var ac_ = a_.ListUnion<Encounter>(y_, ab_);
+		var ad_ = a_.ListUnion<Encounter>(u_, ac_);
+		var ag_ = this.Telephone_Visits();
+		var ah_ = f_.RetrieveByValueSet<Encounter>(ag_, null);
+		var aj_ = this.Online_Assessments();
+		var ak_ = f_.RetrieveByValueSet<Encounter>(aj_, null);
+		var al_ = a_.ListUnion<Encounter>(ah_, ak_);
+		var am_ = a_.ListUnion<Encounter>(ad_, al_);
+		bool? an_(Encounter ValidEncounter)
 		{
-			var ap_ = this.Measurement_Period();
-			var aq_ = ValidEncounter?.Period;
-			var ar_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(aq_);
-			var as_ = context.Operators;
-			var at_ = as_.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, null);
-			var au_ = ValidEncounter?.StatusElement;
-			var av_ = new CallStackEntry("ToString", null, null);
-			var aw_ = context.Deeper(av_);
+			var ap_ = context.Operators;
+			var ar_ = this.Measurement_Period();
+			var as_ = ValidEncounter?.Period;
+			var at_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(as_);
+			var au_ = ap_.IntervalIncludesInterval<CqlDateTime>(ar_, at_, null);
+			var aw_ = context.Deeper(new CallStackEntry("ToString", null, null));
 			var ax_ = aw_.Operators;
 			var ay_ = ax_.TypeConverter;
-			var az_ = ay_.Convert<string>(au_);
-			var bb_ = as_.Equal(az_, "finished");
-			var bd_ = as_.And(at_, bb_);
+			var az_ = ValidEncounter?.StatusElement;
+			var ba_ = ay_.Convert<string>(az_);
+			var bb_ = ap_.Equal(ba_, "finished");
+			var bc_ = ap_.And(au_, bb_);
 
-			return bd_;
+			return bc_;
 		};
-		var ao_ = g_.WhereOrNull<Encounter>(al_, am_);
+		var ao_ = a_.WhereOrNull<Encounter>(am_, an_);
 
 		return ao_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]
-    public IEnumerable<Encounter> Qualifying_Encounters() => __Qualifying_Encounters.Value;
+	public IEnumerable<Encounter> Qualifying_Encounters() => 
+		__Qualifying_Encounters.Value;
 
-    private bool? Initial_Population_Value()
+	private bool? Initial_Population_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = a_?.BirthDateElement;
-		var c_ = b_?.Value;
-		var d_ = context.Operators;
-		var e_ = d_.TypeConverter;
-		var f_ = e_.Convert<CqlDate>(c_);
-		var g_ = this.Measurement_Period();
-		var i_ = d_.Start(g_);
-		var k_ = d_.DateFrom(i_);
-		var m_ = d_.CalculateAgeAt(f_, k_, "month");
-		var o_ = d_.GreaterOrEqual(m_, (int?)6);
-		var q_ = a_?.BirthDateElement;
-		var r_ = q_?.Value;
-		var t_ = d_.TypeConverter;
-		var u_ = t_.Convert<CqlDate>(r_);
-		var x_ = d_.Start(g_);
-		var z_ = d_.DateFrom(x_);
-		var ab_ = d_.CalculateAgeAt(u_, z_, "year");
-		var ad_ = d_.Less(ab_, (int?)20);
-		var af_ = d_.And(o_, ad_);
-		var ag_ = this.Qualifying_Encounters();
-		var ai_ = d_.ExistsInList<Encounter>(ag_);
-		var ak_ = d_.And(af_, ai_);
+		var a_ = context.Operators;
+		var f_ = a_.TypeConverter;
+		var g_ = this.Patient();
+		var h_ = g_?.BirthDateElement;
+		var i_ = h_?.Value;
+		var j_ = f_.Convert<CqlDate>(i_);
+		var m_ = this.Measurement_Period();
+		var n_ = a_.Start(m_);
+		var o_ = a_.DateFrom(n_);
+		var p_ = a_.CalculateAgeAt(j_, o_, "month");
+		var q_ = a_.GreaterOrEqual(p_, (int?)6);
+		var u_ = a_.TypeConverter;
+		var w_ = g_?.BirthDateElement;
+		var x_ = w_?.Value;
+		var y_ = u_.Convert<CqlDate>(x_);
+		var ac_ = a_.Start(m_);
+		var ad_ = a_.DateFrom(ac_);
+		var ae_ = a_.CalculateAgeAt(y_, ad_, "year");
+		var af_ = a_.Less(ae_, (int?)20);
+		var ag_ = a_.And(q_, af_);
+		var ai_ = this.Qualifying_Encounters();
+		var aj_ = a_.ExistsInList<Encounter>(ai_);
+		var ak_ = a_.And(ag_, aj_);
 
 		return ak_;
 	}
 
     [CqlDeclaration("Initial Population")]
-    public bool? Initial_Population() => __Initial_Population.Value;
+	public bool? Initial_Population() => 
+		__Initial_Population.Value;
 
-    private bool? Denominator_Value()
+	private bool? Denominator_Value()
 	{
 		var a_ = this.Initial_Population();
 
@@ -333,9 +346,10 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	}
 
     [CqlDeclaration("Denominator")]
-    public bool? Denominator() => __Denominator.Value;
+	public bool? Denominator() => 
+		__Denominator.Value;
 
-    private bool? Denominator_Exclusions_Value()
+	private bool? Denominator_Exclusions_Value()
 	{
 		var a_ = HospiceFHIR4_2_3_000.Has_Hospice();
 
@@ -343,110 +357,114 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
-    public bool? Denominator_Exclusions() => __Denominator_Exclusions.Value;
+	public bool? Denominator_Exclusions() => 
+		__Denominator_Exclusions.Value;
 
-    private bool? Stratification_1_Value()
+	private bool? Stratification_1_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = a_?.BirthDateElement;
-		var c_ = b_?.Value;
-		var d_ = context.Operators;
-		var e_ = d_.TypeConverter;
-		var f_ = e_.Convert<CqlDate>(c_);
-		var g_ = this.Measurement_Period();
-		var i_ = d_.Start(g_);
-		var k_ = d_.DateFrom(i_);
-		var m_ = d_.CalculateAgeAt(f_, k_, "month");
-		var o_ = d_.GreaterOrEqual(m_, (int?)6);
-		var q_ = a_?.BirthDateElement;
-		var r_ = q_?.Value;
-		var t_ = d_.TypeConverter;
-		var u_ = t_.Convert<CqlDate>(r_);
-		var x_ = d_.Start(g_);
-		var z_ = d_.DateFrom(x_);
-		var ab_ = d_.CalculateAgeAt(u_, z_, "year");
-		var ad_ = d_.LessOrEqual(ab_, (int?)4);
-		var af_ = d_.And(o_, ad_);
+		var a_ = context.Operators;
+		var e_ = a_.TypeConverter;
+		var f_ = this.Patient();
+		var g_ = f_?.BirthDateElement;
+		var h_ = g_?.Value;
+		var i_ = e_.Convert<CqlDate>(h_);
+		var l_ = this.Measurement_Period();
+		var m_ = a_.Start(l_);
+		var n_ = a_.DateFrom(m_);
+		var o_ = a_.CalculateAgeAt(i_, n_, "month");
+		var p_ = a_.GreaterOrEqual(o_, (int?)6);
+		var t_ = a_.TypeConverter;
+		var v_ = f_?.BirthDateElement;
+		var w_ = v_?.Value;
+		var x_ = t_.Convert<CqlDate>(w_);
+		var ab_ = a_.Start(l_);
+		var ac_ = a_.DateFrom(ab_);
+		var ad_ = a_.CalculateAgeAt(x_, ac_, "year");
+		var ae_ = a_.LessOrEqual(ad_, (int?)4);
+		var af_ = a_.And(p_, ae_);
 
 		return af_;
 	}
 
     [CqlDeclaration("Stratification 1")]
-    public bool? Stratification_1() => __Stratification_1.Value;
+	public bool? Stratification_1() => 
+		__Stratification_1.Value;
 
-    private bool? Stratification_2_Value()
+	private bool? Stratification_2_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = a_?.BirthDateElement;
-		var c_ = b_?.Value;
-		var d_ = context.Operators;
-		var e_ = d_.TypeConverter;
-		var f_ = e_.Convert<CqlDate>(c_);
-		var g_ = this.Measurement_Period();
-		var i_ = d_.Start(g_);
-		var k_ = d_.DateFrom(i_);
-		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var o_ = d_.Interval((int?)5, (int?)11, true, true);
-		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
+		var a_ = context.Operators;
+		var d_ = a_.TypeConverter;
+		var e_ = this.Patient();
+		var f_ = e_?.BirthDateElement;
+		var g_ = f_?.Value;
+		var h_ = d_.Convert<CqlDate>(g_);
+		var k_ = this.Measurement_Period();
+		var l_ = a_.Start(k_);
+		var m_ = a_.DateFrom(l_);
+		var n_ = a_.CalculateAgeAt(h_, m_, "year");
+		var p_ = a_.Interval((int?)5, (int?)11, true, true);
+		var q_ = a_.ElementInInterval<int?>(n_, p_, null);
 
 		return q_;
 	}
 
     [CqlDeclaration("Stratification 2")]
-    public bool? Stratification_2() => __Stratification_2.Value;
+	public bool? Stratification_2() => 
+		__Stratification_2.Value;
 
-    private bool? Stratification_3_Value()
+	private bool? Stratification_3_Value()
 	{
-		var a_ = this.Patient();
-		var b_ = a_?.BirthDateElement;
-		var c_ = b_?.Value;
-		var d_ = context.Operators;
-		var e_ = d_.TypeConverter;
-		var f_ = e_.Convert<CqlDate>(c_);
-		var g_ = this.Measurement_Period();
-		var i_ = d_.Start(g_);
-		var k_ = d_.DateFrom(i_);
-		var m_ = d_.CalculateAgeAt(f_, k_, "year");
-		var o_ = d_.Interval((int?)12, (int?)20, true, false);
-		var q_ = d_.ElementInInterval<int?>(m_, o_, null);
+		var a_ = context.Operators;
+		var d_ = a_.TypeConverter;
+		var e_ = this.Patient();
+		var f_ = e_?.BirthDateElement;
+		var g_ = f_?.Value;
+		var h_ = d_.Convert<CqlDate>(g_);
+		var k_ = this.Measurement_Period();
+		var l_ = a_.Start(k_);
+		var m_ = a_.DateFrom(l_);
+		var n_ = a_.CalculateAgeAt(h_, m_, "year");
+		var p_ = a_.Interval((int?)12, (int?)20, true, false);
+		var q_ = a_.ElementInInterval<int?>(n_, p_, null);
 
 		return q_;
 	}
 
     [CqlDeclaration("Stratification 3")]
-    public bool? Stratification_3() => __Stratification_3.Value;
+	public bool? Stratification_3() => 
+		__Stratification_3.Value;
 
-    private bool? Numerator_Value()
+	private bool? Numerator_Value()
 	{
-		var a_ = this.Fluoride_Varnish_Application_for_Children();
-		var b_ = context.DataRetriever;
-		var c_ = b_.RetrieveByValueSet<Procedure>(a_, null);
-		bool? d_(Procedure FluorideApplication)
+		var a_ = context.Operators;
+		var c_ = context.DataRetriever;
+		var d_ = this.Fluoride_Varnish_Application_for_Children();
+		var e_ = c_.RetrieveByValueSet<Procedure>(d_, null);
+		bool? f_(Procedure FluorideApplication)
 		{
-			var i_ = this.Measurement_Period();
-			var j_ = FluorideApplication?.Performed;
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
-			var l_ = context.Operators;
-			var m_ = l_.IntervalIncludesInterval<CqlDateTime>(i_, k_, null);
-			var n_ = FluorideApplication?.StatusElement;
-			var o_ = new CallStackEntry("ToString", null, null);
-			var p_ = context.Deeper(o_);
+			var i_ = context.Operators;
+			var k_ = this.Measurement_Period();
+			var l_ = FluorideApplication?.Performed;
+			var m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(l_);
+			var n_ = i_.IntervalIncludesInterval<CqlDateTime>(k_, m_, null);
+			var p_ = context.Deeper(new CallStackEntry("ToString", null, null));
 			var q_ = p_.Operators;
 			var r_ = q_.TypeConverter;
-			var s_ = r_.Convert<string>(n_);
-			var u_ = l_.Equal(s_, "completed");
-			var w_ = l_.And(m_, u_);
+			var s_ = FluorideApplication?.StatusElement;
+			var t_ = r_.Convert<string>(s_);
+			var u_ = i_.Equal(t_, "completed");
+			var v_ = i_.And(n_, u_);
 
-			return w_;
+			return v_;
 		};
-		var e_ = context.Operators;
-		var f_ = e_.WhereOrNull<Procedure>(c_, d_);
-		var h_ = e_.ExistsInList<Procedure>(f_);
+		var g_ = a_.WhereOrNull<Procedure>(e_, f_);
+		var h_ = a_.ExistsInList<Procedure>(g_);
 
 		return h_;
 	}
 
     [CqlDeclaration("Numerator")]
-    public bool? Numerator() => __Numerator.Value;
+	public bool? Numerator() => 
+		__Numerator.Value;
 
 }

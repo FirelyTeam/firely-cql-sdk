@@ -32,16 +32,16 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             {
                 var reducedOperand = Visit(conversion.Operand);
 
-                //// (T)(T?)x::T => x
-                //if (reducedOperand is UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.TypeAs } nested &&
-                //    Nullable.GetUnderlyingType(nested.Type) == conversion.Type)
-                //{
-                //    var reducedOperandOfNestedConversion = Visit(nested.Operand);
-                //    if (reducedOperandOfNestedConversion.Type == node.Type)
-                //        return reducedOperandOfNestedConversion;
-                //    else
-                //        return conversion.Update(nested.Update(reducedOperandOfNestedConversion));
-                //}
+                // (T)(T?)x::T => x
+                if (reducedOperand is UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.TypeAs } nested &&
+                    Nullable.GetUnderlyingType(nested.Type) == conversion.Type)
+                {
+                    var reducedOperandOfNestedConversion = Visit(nested.Operand);
+                    if (reducedOperandOfNestedConversion.Type == node.Type)
+                        return reducedOperandOfNestedConversion;
+                    else
+                        return conversion.Update(nested.Update(reducedOperandOfNestedConversion));
+                }
 
                 var removeCast = true;
                 if (conversion.Type.IsAssignableFrom(conversion.Operand.Type) == false)
@@ -93,7 +93,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             if (node is
                 {
                     NodeType: ExpressionType.Coalesce,
-                    Left: UnaryExpression { NodeType: ExpressionType.Convert } conversion
+                    Left: UnaryExpression { NodeType: ExpressionType.Convert or ExpressionType.TypeAs } conversion
                 } && Nullable.GetUnderlyingType(conversion.Operand.Type) is null
                  && Nullable.GetUnderlyingType(conversion.Type) == conversion.Operand.Type
                 )

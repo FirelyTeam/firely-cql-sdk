@@ -30,19 +30,24 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitBlock(BlockExpression node)
         {
+            // Every nested block can introduce new named parameters that we should not rename, so 
+            // we'll start by creating a new generator with the blocks variables/parameters
             var localNameGenerator = useInitialGenerator ? initialNameGenerator : initialNameGenerator.ForNewScope(node.Variables);
             useInitialGenerator = false;
 
-            var parametersToName = node.Variables.Where(v => v.Name is null);
             var replacementDictionary = new Dictionary<ParameterExpression, ParameterExpression>();
 
-            foreach (var parameterToName in parametersToName)
+            // Go over the variables introduced in this block and assign them a name.
+            foreach (var parameterToName in node.Variables)
             {
                 var newName = localNameGenerator.Next();
                 var newParameter = Expression.Parameter(parameterToName.Type, newName);
                 replacementDictionary.Add(parameterToName, newParameter);
             }
 
+            // Since we are visiting the children to do a rename of these variables deeper down
+            // as well, push these renames on the stack, which will hold the renames for all nested
+            // blocks representing the lexical scopes.
             _replacementStack.Push(replacementDictionary);
             var visitedExpression = base.VisitBlock(node);
             _replacementStack.Pop();
@@ -50,6 +55,9 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return visitedExpression;
         }
 
+        /// <summary>
+        /// Replace the parameters in the replacements, looking up from our scope.
+        /// </summary>
         protected override Expression VisitParameter(ParameterExpression node) =>
             _replacementStack
                 .Select(s => s.GetValueOrDefault(node))

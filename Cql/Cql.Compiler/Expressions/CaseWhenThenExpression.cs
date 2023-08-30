@@ -15,6 +15,10 @@ namespace Hl7.Cql.Compiler
 {
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+    /// <summary>
+    /// This is a custom expression representing the Case/When/Then statement in CQL.
+    /// </summary>
+    /// <remarks>The expression reduces to nested ConditionalExpressions.</remarks>
     public class CaseWhenThenExpression : Expression
     {
         public record WhenThenCase(Expression When, Expression Then)
@@ -61,7 +65,7 @@ namespace Hl7.Cql.Compiler
                     if (then.Type.IsAssignableFrom(els.Type))
                         els = Convert(els, then.Type);
                     else if (els.Type.IsAssignableFrom(then.Type))
-                        then = Expression.Convert(then, els.Type);
+                        then = Convert(then, els.Type);
                     // Else: expect Condition factory below to fail.
                 }
 
