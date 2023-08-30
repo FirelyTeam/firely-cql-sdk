@@ -363,10 +363,14 @@ namespace Hl7.Cql.Runtime
                 // In other words, adjacent intervals within a sorted list are merged if they either overlap or meet.
                 if ((meets(x, y, precision) ?? false) || (OverlapsHelper(x, y, precision, toClosed) ?? false))
                 {
-                    var lowClosed = x.lowClosed;
-                    var highClosed = y.highClosed;
-
-                    return new CqlInterval<T?>(x.low, y.high, x.lowClosed, y.highClosed);
+                    if  (Context.Operators.IntervalIncludesInterval(x, y, precision!) ?? false)
+                    {
+                        return x;
+                    }
+                    else
+                    {
+                        return new CqlInterval<T?>(x.low, y.high, x.lowClosed, y.highClosed);
+                    }
                 }
                 else return null;
             };
