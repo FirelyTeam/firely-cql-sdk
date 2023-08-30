@@ -66,20 +66,20 @@ stages:
               source: https://nuget.pkg.github.com/FirelyTeam/index.json
               apiKey: $(GITHUB_PACKAGES_APIKEY)                
 
-# - stage: deployToNuget
-#   dependsOn: deployToGitHub
-#   displayName: Deploy packages to NuGet
-#   condition: and(succeeded(), startswith(variables['Build.SourceBranch'], 'refs/tags/v'))
-#   jobs:
-#   - deployment: NuGet    
-#     displayName: Publish to Nuget      
-#     environment: NuGet
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
-#           - template: push-nuget-package.yml@templates
-#             parameters:
-#               artifact: 'NuGetPackages'
-#               source: https://api.nuget.org/v3/index.json
-#               apiKey: $(NUGET_APIKEY)
+- stage: deployToNuget
+  dependsOn: deployToGitHub
+  displayName: Deploy packages to NuGet
+  condition: and(succeeded(), startswith(variables['Build.SourceBranch'], 'refs/tags/v'))
+  jobs:
+  - deployment: NuGet    
+    displayName: Deploy Packages to Nuget      
+    environment: NuGet
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - template: push-nuget-package.yml@templates
+            parameters:
+              artifact: 'NuGetPackages'
+              source: https://api.nuget.org/v3/index.json
+              apiKey: $(NUGET_APIKEY)
