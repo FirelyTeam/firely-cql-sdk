@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Elm
 {
-    public class LibraryJsonConverter : JsonConverter<Library>
+    internal class LibraryJsonConverter : JsonConverter<Library>
     {
         public override Library? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {

@@ -13,7 +13,7 @@ using System;
 
 namespace Hl7.Cql.MeasureCompiler
 {
-    public static class TypeConverterExtensions
+    internal static class TypeConverterExtensions
     {
         public static TypeConverter AddElmConversions(this TypeConverter converter)
         {

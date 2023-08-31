@@ -7,8 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Cql.Conversion;
-using Hl7.Cql.Primitives;
 using System;
 
 namespace Hl7.Cql.Comparers
@@ -17,7 +15,7 @@ namespace Hl7.Cql.Comparers
     /// A comparer that compares to <see cref="CqlQuantity"/> instances, possibly by normalizing their values 
     /// using the UCUM system.
     /// </summary>
-    public class CqlQuantityCqlComparer : ICqlComparer<CqlQuantity>, ICqlComparer
+    internal class CqlQuantityCqlComparer : ICqlComparer<CqlQuantity>, ICqlComparer
     {
         /// <summary>
         /// Create a comparer, passing in sub-comparers for the value and the unit.

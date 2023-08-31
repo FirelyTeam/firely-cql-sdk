@@ -3,19 +3,24 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<AssemblyName>Hl7.Cql.Runtime.Conversion</AssemblyName>
-		<RootNamespace>Hl7.Cql.Runtime.Conversion</RootNamespace>
+		<AssemblyName>Hl7.Cql.Conversion</AssemblyName>
+		<RootNamespace>Hl7.Cql.Conversion</RootNamespace>
 		<Product>CQL engine unit conversion</Product>
 		<Description>Unit conversion for CQL</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <PackageReference Include="Fhir.Metrics" Version="1.2.2" />
+		<PackageReference Include="Fhir.Metrics" Version="1.2.2" />
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-	</ItemGroup>
-
 </Project>

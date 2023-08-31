@@ -46,8 +46,10 @@ namespace Hl7.Cql.Firely
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
-            DefinitionDictionary<Delegate>? delegates = null)
+            DefinitionDictionary<Delegate>? delegates = null,
+            CqlOptions? options = null)
         {
+            options ??= CqlOptions.Default;
             valueSets ??= new HashValueSetDictionary();
             var unitConverter = new UnitConverter();
             var typeResolver = FirelyTypeResolver.Default;
@@ -65,6 +67,10 @@ namespace Hl7.Cql.Firely
             cqlComparers
                 .AddIntervalComparisons(operators)
                 .AddFirelyComparers();
+            if (options.ResourceIdComparer != null)
+                cqlComparers
+                    .CompareResourcesById(options.ResourceIdComparer);
+
             var ctx = new CqlContext(operators, delegates, parameters);
             return ctx;
         }

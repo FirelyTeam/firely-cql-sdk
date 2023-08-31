@@ -32,7 +32,7 @@ namespace Hl7.Cql.Packaging
                         {
                             var instance = Activator.CreateInstance(type, context)
                                 ?? throw new InvalidOperationException($"Unable to create an instance of {type.FullName}");
-                            return Run(instance, context);
+                            return run(instance, context);
                         }
                     }
                 }
@@ -56,7 +56,7 @@ namespace Hl7.Cql.Packaging
             return null;
         }
 
-        private static IDictionary<string, object?> Run(object instance, CqlContext context)
+        private static IDictionary<string, object?> run(object instance, CqlContext context)
         {
             var type = instance.GetType();
             var values = new Dictionary<string, object?>();

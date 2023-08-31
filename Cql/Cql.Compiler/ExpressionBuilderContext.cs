@@ -23,7 +23,7 @@ namespace Hl7.Cql.Compiler
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
-    public class ExpressionBuilderContext
+    internal class ExpressionBuilderContext
     {
         internal ExpressionBuilderContext(ExpressionBuilder builder,
             ParameterExpression contextParameter,

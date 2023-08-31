@@ -16,7 +16,7 @@ namespace Hl7.Cql
     /// <summary>
     /// Resolves the .NET type for the given ELM type specifier.
     /// </summary>
-    public abstract class TypeResolver
+    internal abstract class TypeResolver
     {
         #region CQL types defined in section 1
         /// <summary>

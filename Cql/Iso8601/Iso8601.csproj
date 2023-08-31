@@ -9,4 +9,8 @@
 		<Description>Contains implementations of ISO 8601 date, time, and datetime structures for use in the CQL engine.  These date structures have nullable values beyond the most significant (year for dates, hour for times), and have an understanding of precision.</Description>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+	</ItemGroup>
+
 </Project>

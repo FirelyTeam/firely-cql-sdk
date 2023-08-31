@@ -12,6 +12,11 @@ namespace CLI
 {
     internal static class LibraryRunner
     {
+        private static readonly JsonSerializerOptions Options = new JsonSerializerOptions()
+            .ForFhir(ModelInfo.ModelInspector);
+        public static T ParseFhir<T>(this Stream stream) => JsonSerializer.Deserialize<T>(stream, Options)
+            ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(T).Name}");
+
         internal static void Run(string library, Bundle bundle, TextWriter output)
         {
             var type = ResolveLibraryType(library);

@@ -16,7 +16,7 @@ using System.Linq;
 
 namespace Hl7.Cql.Runtime
 {
-    public partial class CqlOperators
+    internal partial class CqlOperators
     {
         #region Contains
         public bool? ListContains<T>(IEnumerable<T> list, T item)
