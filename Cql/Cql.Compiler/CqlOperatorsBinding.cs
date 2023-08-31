@@ -390,8 +390,6 @@ namespace Hl7.Cql.Compiler
                     return Retrieve(operators, Expression.Property(runtimeContext, DataRetrieverProperty), parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.LateBoundProperty:
                     return LateBoundProperty(operators, parameters[0], parameters[1], parameters[2]);
-                case CqlOperator.PropertyOrDefault:
-                    return PropertyOrDefault(operators, parameters[0], parameters[1], parameters[2], parameters[3]);
                 case CqlOperator.Equal:
                     return BindBinaryOperator(nameof(ICqlOperators.Equal), operators, parameters[0], parameters[1]);
                 case CqlOperator.CodeInValueSet:
@@ -592,24 +590,6 @@ namespace Hl7.Cql.Compiler
                 return call;
             }
             else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
-        }
-
-        private Expression PropertyOrDefault(MemberExpression operators, Expression sourceExpression, Expression lambdaExpression,
-            Expression sourceTypeExpression, Expression memberTypeExpression)
-        {
-            throw new NotImplementedException();
-
-            //if (sourceTypeExpression is ConstantExpression sourceTypeConstant
-            //    && sourceTypeConstant.Type == typeof(Type)
-            //    && memberTypeExpression is ConstantExpression memberTypeConstant
-            //    && memberTypeConstant.Type == typeof(Type))
-            //{
-            //    var method = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!
-            //        .MakeGenericMethod(new[] { (Type)sourceTypeConstant.Value!, (Type)memberTypeConstant.Value! });
-            //    var call = Expression.Call(method, sourceExpression, lambdaExpression);
-            //    return call;
-            //}
-            //else throw new ArgumentException("Improper usage of PropertyOrDefault");
         }
 
         private Expression Coalesce(MemberExpression operators, Expression operand)

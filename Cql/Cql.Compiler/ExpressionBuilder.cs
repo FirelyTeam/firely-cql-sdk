@@ -2629,18 +2629,6 @@ namespace Hl7.Cql.Compiler
             else
             {
                 return new NullConditionalMemberExpression(before, member);
-                //Type? memberType;
-                //if (member is PropertyInfo property)
-                //    memberType = property.PropertyType;
-                //else if (member is FieldInfo field)
-                //    memberType = field.FieldType;
-                //else throw new NotImplementedException();
-                //var parameter = Expression.Parameter(before.Type, TypeNameToIdentifier(before.Type, ctx));
-                //var body = Expression.MakeMemberAccess(parameter, member);
-                //var lambda = Expression.Lambda(body, parameter);
-                //var call = OperatorBinding.Bind(CqlOperator.PropertyOrDefault, ctx.RuntimeContextParameter,
-                //    before, lambda, Expression.Constant(before.Type, typeof(Type)), Expression.Constant(memberType, typeof(Type)));
-                //return call;
             }
         }
 
