@@ -401,7 +401,7 @@ namespace CoreTests
         public void Expand_Interval_Int()
         {
             var interval = new CqlInterval<int?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 2 };
+            var quantity = new CqlQuantity(2, null);
             var expected = new List<int?> { 1, 3, 5, 7, 9 };
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
@@ -418,8 +418,8 @@ namespace CoreTests
         public void Expand_Interval_Decimal()
         {
             var interval = new CqlInterval<decimal?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = (decimal)1.5 };
-            var expected = new List<decimal?> { 1, (decimal)2.5, 4, (decimal)5.5, 7, (decimal)8.5, 10 };
+            var quantity = new CqlQuantity(1.5m, null);
+            var expected = new List<decimal?> { 1, 2.5m, 4, 5.5m, 7, 8.5m, 10 };
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -435,7 +435,7 @@ namespace CoreTests
         public void Expand_Interval_Long()
         {
             var interval = new CqlInterval<long?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 4 };
+            var quantity = new CqlQuantity(4, null);
             var expected = new List<long?> { 1, 5, 9 };
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
@@ -452,7 +452,7 @@ namespace CoreTests
         public void Expand_Interval_Decimal_Quantity_Day()
         {
             var interval = new CqlInterval<decimal?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create();
 
@@ -470,7 +470,7 @@ namespace CoreTests
         public void Expand_Interval_Decimal_Quantity_Integer()
         {
             var interval = new CqlInterval<decimal?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new List<decimal?> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
@@ -487,7 +487,7 @@ namespace CoreTests
         public void Expand_Interval_Int_Quantity_Day()
         {
             var interval = new CqlInterval<int?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -503,7 +503,7 @@ namespace CoreTests
         public void Expand_Interval_Int_Quantity_Integer()
         {
             var interval = new CqlInterval<int?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new List<int?> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
@@ -520,7 +520,7 @@ namespace CoreTests
         public void Expand_Interval_Long_Quantity_Day()
         {
             var interval = new CqlInterval<long?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -536,7 +536,7 @@ namespace CoreTests
         public void Expand_Interval_Long_Quantity_Integer()
         {
             var interval = new CqlInterval<long?>(1, 10, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new List<long?> { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
@@ -598,7 +598,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Month_MonthQuantity()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, null), new CqlDate(2022, 2, 4), true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "month" };
+            var quantity = new CqlQuantity(1, "month");
             var expected = new List<CqlDate>
             {
                 new CqlDate(2022,1,null),
@@ -619,7 +619,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Day()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 4), true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
             var expected = new List<CqlDate>
             {
                 new CqlDate(2022,1,1),
@@ -642,7 +642,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Month()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 1), true, true);
-            var quantity = new CqlQuantity { value = 3, unit = "month" };
+            var quantity = new CqlQuantity(3, "month");
             var expected = new List<CqlDate>
             {
                 new CqlDate(2022,1,1)
@@ -683,7 +683,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Week()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 2, 1), true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "week" };
+            var quantity = new CqlQuantity(1, "week");
             var expected = new List<CqlDate>
             {
                 new CqlDate(2022,1,1),
@@ -707,7 +707,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Minute()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "minute" };
+            var quantity = new CqlQuantity(1, "minute");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -723,7 +723,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Hour()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -739,7 +739,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Second()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "second" };
+            var quantity = new CqlQuantity(1, "second");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -755,7 +755,7 @@ namespace CoreTests
         public void Expand_Interval_Date_Millisecond()
         {
             var interval = new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "millisecond" };
+            var quantity = new CqlQuantity(1, "millisecond");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -774,7 +774,7 @@ namespace CoreTests
             var end = new CqlDate(2022, 4, null);
 
             var interval = new CqlInterval<CqlDate>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "month" };
+            var quantity = new CqlQuantity(1, "month");
             var expected = new List<CqlDate>
             {
                 new CqlDate(2022,1,null),
@@ -800,7 +800,7 @@ namespace CoreTests
             var end = new CqlDate(2022, 4, null);
 
             var interval = new CqlInterval<CqlDate>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -819,7 +819,7 @@ namespace CoreTests
             var end = new CqlDate(2023, null, null);
 
             var interval = new CqlInterval<CqlDate>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -891,7 +891,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 1, 1, 12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "minute" };
+            var quantity = new CqlQuantity(1, "minute");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -910,7 +910,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 1, 4, 12, 0, 0, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
             var expected = new List<CqlDateTime>
             {
                 new CqlDateTime(2022,1,1,12,0,0,0,0,0),
@@ -936,7 +936,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 3, 1, 0, 0, 0, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 3, unit = "month" };
+            var quantity = new CqlQuantity(3, "month");
             var expected = new List<CqlDateTime>
             {
                 start
@@ -959,7 +959,7 @@ namespace CoreTests
             var end = new CqlDateTime(2024, 3, 1, 0, 0, 0, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 2, unit = "years" };
+            var quantity = new CqlQuantity(2, "years");
             var expected = new List<CqlDateTime>
             {
                 new CqlDateTime(2022, 1, 1, 12, 0, 0, 0, 0, 0),
@@ -983,7 +983,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 2, 1, 0, 0, 0, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "week" };
+            var quantity = new CqlQuantity(1, "week");
             var expected = new List<CqlDateTime>
             {
                 new CqlDateTime(2022,1,1,12,0,0,0,0,0),
@@ -1010,7 +1010,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 1, 1, 0, 5, 0, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 2, unit = "minutes" };
+            var quantity = new CqlQuantity(2, "minutes");
             var expected = new List<CqlDateTime>
             {
                 new CqlDateTime(2022,1,1,0,0,0,0,0,0),
@@ -1035,7 +1035,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 1, 1, 6, 0, 0, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 2, unit = "hours" };
+            var quantity = new CqlQuantity(2, "hours");
             var expected = new List<CqlDateTime>
             {
                 new CqlDateTime(2022,1,1,0,0,0,0,0,0),
@@ -1061,7 +1061,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 1, 1, 0, 0, 6, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 3, unit = "secondd" };
+            var quantity = new CqlQuantity(3, "secondd");
             var expected = new List<CqlDateTime>
             {
                 new CqlDateTime(2022,1,1,0,0,0,0,0,0),
@@ -1086,7 +1086,7 @@ namespace CoreTests
             var end = new CqlDateTime(2022, 1, 1, 0, 0, 3, 0, 0, 0);
 
             var interval = new CqlInterval<CqlDateTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 500, unit = "milliseconds" };
+            var quantity = new CqlQuantity(500, "milliseconds");
             var expected = new List<CqlDateTime>
             {
                 new CqlDateTime(2022,1,1,0,0,0,0,0,0),
@@ -1164,7 +1164,7 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1183,7 +1183,7 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 3, unit = "month" };
+            var quantity = new CqlQuantity(3, "month");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1202,7 +1202,7 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 2, unit = "years" };
+            var quantity = new CqlQuantity(2, "years");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1221,7 +1221,7 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "week" };
+            var quantity = new CqlQuantity(1, "week");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1240,7 +1240,7 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "minute" };
+            var quantity = new CqlQuantity(1, "minute");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1259,7 +1259,7 @@ namespace CoreTests
             var end = new CqlTime(12, 0, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 30, unit = "minutes" };
+            var quantity = new CqlQuantity(30, "minutes");
             var expected = new List<CqlTime>
             {
                 new CqlTime(10,0,null,null,null,null),
@@ -1286,7 +1286,7 @@ namespace CoreTests
             var end = new CqlTime(12, null, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
             var expected = new List<CqlTime>
             {
                 new CqlTime(10,null,null,null,null,null),
@@ -1311,7 +1311,7 @@ namespace CoreTests
             var end = new CqlTime(10, 0, 5, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 5, unit = "seconds" };
+            var quantity = new CqlQuantity(5, "seconds");
             var expected = new List<CqlTime>
             {
                 new CqlTime(10,0,0,null,null,null),
@@ -1335,7 +1335,7 @@ namespace CoreTests
             var end = new CqlTime(10, 0, 0, 10, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 5, unit = "millisecond" };
+            var quantity = new CqlQuantity(5, "millisecond");
             var expected = new List<CqlTime>
             {
                 new CqlTime(10,0,0,0,null,null),
@@ -1360,7 +1360,7 @@ namespace CoreTests
             var end = new CqlTime(11, 5, null, null, null, null);
 
             var interval = new CqlInterval<CqlTime>(start, end, true, true);
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
             var expected = new List<CqlTime>
             {
                 new CqlTime(10, null, null, null, null, null),
@@ -1426,7 +1426,7 @@ namespace CoreTests
             {
                 new CqlInterval<int?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 2 };
+            var quantity = new CqlQuantity(2m, null);
             var expected = new CqlInterval<int>[]
             {
                 new CqlInterval<int>(1,2, true, true),
@@ -1460,7 +1460,7 @@ namespace CoreTests
             {
                 new CqlInterval<decimal?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = (decimal)1.5 };
+            var quantity = new CqlQuantity(1.5m, null);
             var expected = new CqlInterval<decimal>[]
             {
                 new CqlInterval<decimal>(1,2.49999999m, true, true),
@@ -1496,7 +1496,7 @@ namespace CoreTests
             {
                 new CqlInterval<long?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 4 };
+            var quantity = new CqlQuantity(4m, null);
             var expected = new CqlInterval<decimal>[]
             {
                 new CqlInterval<decimal>(1,4, true, true),
@@ -1527,7 +1527,7 @@ namespace CoreTests
             {
                 new CqlInterval<decimal?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1546,7 +1546,7 @@ namespace CoreTests
             {
                 new CqlInterval<decimal?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new List<CqlInterval<decimal>>
             {
                 new CqlInterval<decimal>(1,1.99999999m, true, true),
@@ -1585,7 +1585,7 @@ namespace CoreTests
             {
                 new CqlInterval<int?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1604,7 +1604,7 @@ namespace CoreTests
             {
                 new CqlInterval<int?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<int>[]
             {
                 new CqlInterval<int>(1,1, true, true),
@@ -1643,7 +1643,7 @@ namespace CoreTests
             {
                 new CqlInterval<long?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -1662,7 +1662,7 @@ namespace CoreTests
             {
                 new CqlInterval<long?>(1, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<long>[]
             {
                 new CqlInterval<long>(1,1, true, true),
@@ -1702,7 +1702,7 @@ namespace CoreTests
                 new CqlInterval<int?>(1, 5, true, true),
                 new CqlInterval<int?>(5, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<int>[]
             {
                 new CqlInterval<int>(1,1, true, true),
@@ -1742,7 +1742,7 @@ namespace CoreTests
                 new CqlInterval<decimal?>(1, 5, true, true),
                 new CqlInterval<decimal?>(5, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<decimal>[]
             {
                 new CqlInterval<decimal>(1,1.99999999m, true, true),
@@ -1782,7 +1782,7 @@ namespace CoreTests
                 new CqlInterval<long?>(1, 5, true, true),
                 new CqlInterval<long?>(5, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<long>[]
             {
                 new CqlInterval<long>(1,1, true, true),
@@ -1822,7 +1822,7 @@ namespace CoreTests
                 new CqlInterval<int?>(1, 5, true, true),
                 new CqlInterval<int?>(7, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<int>[]
             {
                 new CqlInterval<int>(1,1, true, true),
@@ -1861,7 +1861,7 @@ namespace CoreTests
                 new CqlInterval<decimal?>(1, 5, true, true),
                 new CqlInterval<decimal?>(7, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<decimal>[]
             {
                 new CqlInterval<decimal>(1,1.99999999m, true, true),
@@ -1900,7 +1900,7 @@ namespace CoreTests
                 new CqlInterval<long?>(1, 5, true, true),
                 new CqlInterval<long?>(7, 10, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "1" };
+            var quantity = new CqlQuantity(1, "1");
             var expected = new CqlInterval<long>[]
             {
                 new CqlInterval<long>(1,1, true, true),
@@ -2007,7 +2007,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 4), true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 1), true, true),
@@ -2041,7 +2041,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 1), true, true)
             };
-            var quantity = new CqlQuantity { value = 3, unit = "month" };
+            var quantity = new CqlQuantity(3, "month");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 3, 31), true, true)
@@ -2072,7 +2072,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)
             };
-            var quantity = new CqlQuantity { value = 2, unit = "years" };
+            var quantity = new CqlQuantity(2, "years");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2023, 12, 31), true, true),
@@ -2104,7 +2104,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 2, 1), true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "week" };
+            var quantity = new CqlQuantity(1, "week");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2022, 1, 7), true, true),
@@ -2139,7 +2139,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "minute" };
+            var quantity = new CqlQuantity(1, "minute");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -2158,7 +2158,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -2177,7 +2177,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "second" };
+            var quantity = new CqlQuantity(1, "second");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -2196,7 +2196,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, 1), new CqlDate(2024, 3, 1), true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "millisecond" };
+            var quantity = new CqlQuantity(1, "millisecond");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -2218,7 +2218,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "month" };
+            var quantity = new CqlQuantity(1, "month");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022, 1, null), new CqlDate(2022, 1, null), true, true),
@@ -2256,7 +2256,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(start, end, true, true)
             };
 
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -2278,7 +2278,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -2304,7 +2304,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(aStart, aEnd, true, true),
                 new CqlInterval<CqlDate>(bStart, bEnd, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "month" };
+            var quantity = new CqlQuantity(1, "month");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
@@ -2353,7 +2353,7 @@ namespace CoreTests
                 new CqlInterval<CqlDate>(aStart, aEnd, true, true),
                 new CqlInterval<CqlDate>(bStart, bEnd, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "month" };
+            var quantity = new CqlQuantity(1, "month");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
@@ -2397,7 +2397,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDate>(aStart, aEnd, true, true)
             };
-            var quantity = new CqlQuantity { value = 31, unit = "days" };
+            var quantity = new CqlQuantity(31, "days");
             var expected = new CqlInterval<CqlDate>[]
             {
                 new CqlInterval<CqlDate>(new CqlDate(2022,1,1),new CqlDate(2022,1,31), true, true),
@@ -2519,7 +2519,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "minute" };
+            var quantity = new CqlQuantity(1, "minute");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -2541,7 +2541,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,2,11,59,59,999,0,0),true,true),
@@ -2578,7 +2578,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 3, unit = "month" };
+            var quantity = new CqlQuantity(3, "month");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,4,1,11,59,59,999,0,0),true,true)
@@ -2612,7 +2612,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 2, unit = "years" };
+            var quantity = new CqlQuantity(2, "years");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2024,1,1,11,59,59,999,0,0),true,true),
@@ -2647,7 +2647,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "week" };
+            var quantity = new CqlQuantity(1, "week");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,12,0,0,0,0,0),new CqlDateTime(2022,1,8,11,59,59,999,0,0),true,true),
@@ -2685,7 +2685,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 2, unit = "minutes" };
+            var quantity = new CqlQuantity(2, "minutes");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,1,59,999,0,0),true,true),
@@ -2721,7 +2721,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 2, unit = "hours" };
+            var quantity = new CqlQuantity(2, "hours");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,1,59,59,999,0,0),true,true),
@@ -2758,7 +2758,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 3, unit = "seconds" };
+            var quantity = new CqlQuantity(3, "seconds");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,2,999,0,0),true,true),
@@ -2794,7 +2794,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlDateTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 500, unit = "milliseconds" };
+            var quantity = new CqlQuantity(500, "milliseconds");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,1,0,0,0,499,0,0),true,true),
@@ -2838,7 +2838,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(aStart, aEnd, true, true),
                 new CqlInterval<CqlDateTime>(bStart, bEnd, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "month" };
+            var quantity = new CqlQuantity(1, "month");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
@@ -2887,7 +2887,7 @@ namespace CoreTests
                 new CqlInterval<CqlDateTime>(aStart, aEnd, true, true),
                 new CqlInterval<CqlDateTime>(bStart, bEnd, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "month" };
+            var quantity = new CqlQuantity(1, "month");
             var expected = new CqlInterval<CqlDateTime>[]
             {
                 new CqlInterval<CqlDateTime>(new CqlDateTime(2022,1,1,0,0,0,0,0,0),new CqlDateTime(2022,1,31,23,59,59,999,0,0), true, true),
@@ -3002,7 +3002,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
             var expected = new CqlInterval<CqlTime>[]
             {
                 new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
@@ -3037,7 +3037,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "day" };
+            var quantity = new CqlQuantity(1, "day");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -3059,7 +3059,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 3, unit = "month" };
+            var quantity = new CqlQuantity(3, "month");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -3081,7 +3081,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 2, unit = "years" };
+            var quantity = new CqlQuantity(2, "years");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -3103,7 +3103,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "week" };
+            var quantity = new CqlQuantity(1, "week");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -3125,7 +3125,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "minute" };
+            var quantity = new CqlQuantity(1, "minute");
 
             var rc = FirelyCqlContext.Create(); var fcq = rc.Operators;
 
@@ -3147,7 +3147,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 30, unit = "minutes" };
+            var quantity = new CqlQuantity(30, "minutes");
             var expected = new CqlInterval<CqlTime>[]
             {
                 new CqlInterval<CqlTime>(new CqlTime(10,0,null,null,null,null),new CqlTime(10,29,null,null,null,null),true,true),
@@ -3185,7 +3185,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
             var expected = new CqlInterval<CqlTime>[]
             {
                 new CqlInterval<CqlTime>(new CqlTime(10,null,null,null,null,null),new CqlTime(10,null,null,null,null,null),true,true),
@@ -3220,7 +3220,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 5, unit = "seconds" };
+            var quantity = new CqlQuantity(5, "seconds");
             var expected = new CqlInterval<CqlTime>[]
             {
                 new CqlInterval<CqlTime>(new CqlTime(10,0,0,null,null,null),new CqlTime(10,0,4,null,null,null),true,true),
@@ -3254,7 +3254,7 @@ namespace CoreTests
             {
                 new CqlInterval<CqlTime>(start, end, true, true)
             };
-            var quantity = new CqlQuantity { value = 5, unit = "millisecond" };
+            var quantity = new CqlQuantity(5, "millisecond");
             var expected = new CqlInterval<CqlTime>[]
             {
                 new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,0,0,4,null,null),true,true),
@@ -3293,7 +3293,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(aStart, aEnd, true, true),
                 new CqlInterval<CqlTime>(bStart, bEnd, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
             var expected = new CqlInterval<CqlTime>[]
             {
                 new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),
@@ -3336,7 +3336,7 @@ namespace CoreTests
                 new CqlInterval<CqlTime>(aStart, aEnd, true, true),
                 new CqlInterval<CqlTime>(bStart, bEnd, true, true)
             };
-            var quantity = new CqlQuantity { value = 1, unit = "hour" };
+            var quantity = new CqlQuantity(1, "hour");
             var expected = new CqlInterval<CqlTime>[]
             {
                 new CqlInterval<CqlTime>(new CqlTime(10,0,0,0,null,null),new CqlTime(10,59,59,999,null,null), true, true),

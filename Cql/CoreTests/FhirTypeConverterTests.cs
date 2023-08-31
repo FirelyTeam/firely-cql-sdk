@@ -515,17 +515,8 @@ namespace CoreTests
         public void ConvertCqlRatio_Ratio()
         {
             var quantityInterval = new CqlRatio(
-                new CqlQuantity()
-                {
-                    unit = "widgets",
-                    value = 1
-                },
-                new CqlQuantity()
-                {
-                    unit = "widgets",
-                    value = 10
-                }
-            );
+                new CqlQuantity(1, "widgets"),
+                new CqlQuantity(10, "widgets"));
             var converted = FhirTypeConverter.Convert<Ratio>(quantityInterval);
 
             Assert.IsNotNull(converted);
