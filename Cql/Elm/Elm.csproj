@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.Elm</AssemblyName>
 		<RootNamespace>Hl7.Cql.Elm</RootNamespace>
 		<Product>CQL ELM abstractions</Product>
-		<Description>Contains abstractions for the expression logical model (ELM) and utilities to deserialize an ELM library into classes.</Description>
+		<Description>Support package for Hl7.Cql. Contains abstractions for the expression logical model (ELM) and utilities to deserialize an ELM library into classes.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,7 +21,7 @@
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)"/>
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)"/>
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)"/>
-		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)"/>
 	</ItemGroup>
 
 </Project>

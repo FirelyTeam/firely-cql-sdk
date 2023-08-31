@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.CodeGeneration.NET</AssemblyName>
 		<RootNamespace>Hl7.Cql.CodeGeneration.NET</RootNamespace>
 		<Product>.NET Code Generation</Product>
-		<Description>Converts .NET lambda expressions into source code in .NET languages</Description>
+		<Description>Support package for Hl7.Cql. Converts .NET lambda expressions into C# source code.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

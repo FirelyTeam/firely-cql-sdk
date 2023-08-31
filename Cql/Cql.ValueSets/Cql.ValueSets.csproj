@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.ValueSets</AssemblyName>
 		<RootNamespace>Hl7.Cql.ValueSets</RootNamespace>
-		<Product>Assembly for working with CQL terminologies.</Product>
-		<Description>Assembly for working with CQL terminologies.</Description>
+		<Product>Terminology support for the CQL engine</Product>
+		<Description>Support package for Hl7.Cql. Assembly for working with CQL terminologies.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

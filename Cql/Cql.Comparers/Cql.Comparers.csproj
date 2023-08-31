@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.Comparers</AssemblyName>
 		<RootNamespace>Hl7.Cql.Comparers</RootNamespace>
 		<Product>CQL comparers</Product>
-		<Description>Contains CQL comparers</Description>
+		<Description>Support package for Hl7.Cql. Contains CQL comparers.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
