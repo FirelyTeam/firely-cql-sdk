@@ -7,13 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.ValueSets;
-
 namespace Hl7.Cql.ValueSetLoaders
 {
-    internal interface IValueSetLoader
-    {
-        IValueSetDictionary Load();
-        void Load(IValueSetDictionary dictionary);
-    }
+
 }

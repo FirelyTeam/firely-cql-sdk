@@ -454,11 +454,7 @@ namespace CoreTests
         [TestMethod]
         public void ConvertCqlQuantity_Quantity()
         {
-            var quantity = new CqlQuantity()
-            {
-                unit = "oranges",
-                value = 1
-            };
+            var quantity = new CqlQuantity(1, "oranges");
             var converted = FhirTypeConverter.Convert<Quantity>(quantity);
 
             Assert.IsNotNull(converted);
@@ -471,17 +467,9 @@ namespace CoreTests
         public void ConvertCqlQuantityInterval_Range()
         {
             var quantityInterval = new CqlInterval<CqlQuantity>(
-                new CqlQuantity()
-                {
-                    unit = "oranges",
-                    value = 1
-                },
-                new CqlQuantity()
-                {
-                    unit = "oranges",
-                    value = 10
-                }, true, true
-            );
+                new CqlQuantity(1, "oranges"),
+                new CqlQuantity(10, "oranges"),
+                true, true);
             var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(quantityInterval);
 
             Assert.IsNotNull(converted);

@@ -21,7 +21,7 @@ namespace Hl7.Cql.ValueSetLoaders
                 new ValueSetLoader(values, activeOnly, onInvalidValueSet).Load();
     }
 
-    internal class ValueSetLoader : IValueSetLoader
+    internal class ValueSetLoader
     {
 
         public ValueSetLoader(IEnumerable<ValueSet> valuesets,
@@ -43,7 +43,7 @@ namespace Hl7.Cql.ValueSetLoaders
             Load(vsd);
             return vsd;
         }
-        public void Load(IValueSetDictionary dictionary)
+        public void Load(HashValueSetDictionary dictionary)
         {
             foreach (var vs in ValueSets)
             {
@@ -51,7 +51,7 @@ namespace Hl7.Cql.ValueSetLoaders
             }
         }
 
-        private void Load(IValueSetDictionary dictionary, ValueSet vs, params string[] soFar)
+        private void Load(HashValueSetDictionary dictionary, ValueSet vs, params string[] soFar)
         {
             if ((ActiveOnly && vs.Status != PublicationStatus.Active) || string.IsNullOrWhiteSpace(vs.Url))
             {
