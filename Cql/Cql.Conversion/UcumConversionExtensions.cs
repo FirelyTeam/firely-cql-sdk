@@ -15,7 +15,7 @@ namespace Cql.Conversion
     /// <summary>
     /// Utility functions for working with Fireky's UCUM library, which allows full support for conversions within the UCUM unit system.
     /// </summary>
-    public static class Ucum
+    internal static class Ucum
     {
         private static readonly Lazy<M.SystemOfUnits> _system = new(M.UCUM.Load);
         private static readonly M.SystemOfUnits SYSTEM = _system.Value;
