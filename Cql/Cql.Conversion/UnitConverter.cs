@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Cql.Conversion;
 using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
@@ -74,7 +75,15 @@ namespace Hl7.Cql.Conversion
             var function = ConversionFunctionFor(fromUnit, toUnit);
             if (function != null)
                 return function(value);
-            else throw new ArgumentException($"Conversion for {fromUnit} to {toUnit} is not provided.  You can add your own using ${nameof(UseConversion)}");
+            else
+            {
+                // Fast built-in method failed, call the slower UCUM library
+                var q = new CqlQuantity(value, fromUnit);
+                if (q.TryConvert(toUnit, out var converted))
+                    return converted!.value!.Value;
+                else
+                    throw new ArgumentException($"Conversion for {fromUnit} to {toUnit} is not provided.  You can add your own using ${nameof(UseConversion)}");
+            }
         }
 
         /// <summary>

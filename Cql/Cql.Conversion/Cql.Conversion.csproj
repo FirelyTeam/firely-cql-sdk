@@ -11,7 +11,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="Fhir.Metrics" Version="1.2.2" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Comparers" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
