@@ -28,8 +28,8 @@ namespace Test
         public void BCSEHEDIS2022_Numerator()
         {
             var patientEverything = new Bundle();  // add some data
-            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023);
-            var bcs = new BCSEHEDISMY2022_1_0_0(cqlContext);
+            var cqlContext = FirelyEngineSetup.ForBundle(patientEverything, MY2023);
+            var bcs = new BCSEHEDISMY2022_1_0_0(cqlContext.NewContext());
             var numerator = bcs.Numerator();
             Assert.IsFalse(numerator);
         }
@@ -44,7 +44,7 @@ namespace Test
 
             var patientEverything = new Bundle();   // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
-            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023, valueSets);
+            var cqlContext = FirelyEngineSetup.ForBundle(patientEverything, MY2023, valueSets);
 
             var results = asmContext.Run(lib, version, cqlContext);
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
@@ -63,7 +63,7 @@ namespace Test
 
             var patientEverything = new Bundle();  // Add some data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
-            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023, valueSets);
+            var cqlContext = FirelyEngineSetup.ForBundle(patientEverything, MY2023, valueSets);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
@@ -79,7 +79,7 @@ namespace Test
 
             // Run a second time with a (presumably) different bundle.
             var bundle2 = new Bundle();
-            cqlContext = FirelyCqlContext.ForBundle(bundle2, MY2023, valueSets);
+            cqlContext = FirelyEngineSetup.ForBundle(bundle2, MY2023, valueSets);
             stopwatch.Restart();
             results = asmContext.Run(lib, version, cqlContext);
             elapsed = stopwatch.Elapsed;

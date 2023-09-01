@@ -13,6 +13,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Runtime
 {
+
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>
@@ -62,7 +63,7 @@ namespace Hl7.Cql.Runtime
         /// <param name="operators">The <see cref="ICqlOperators"/> implementation to use.</param>
         /// <param name="parameters">The input parameters, or <see langword="null"/>. </param>
         /// <param name="delegates">The delegates, or <see langword="null"/>.  If <see langword="null"/>, runtime errors will occur when CQL expressions attempt to reference other definitions.</param>
-        public CqlContext(ICqlOperators operators,
+        internal CqlContext(ICqlOperators operators,
             DefinitionDictionary<Delegate>? delegates = null,
             IDictionary<string, object>? parameters = null) : this()
         {

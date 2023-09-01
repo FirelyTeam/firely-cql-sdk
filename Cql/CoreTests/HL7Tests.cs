@@ -77,7 +77,7 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            Context = FirelyCqlContext.Create(delegates: allDelegates);
+            Context = FirelyEngineSetup.WithRetriever(delegates: allDelegates).NewContext();
         }
 
         internal static CqlContext Context;

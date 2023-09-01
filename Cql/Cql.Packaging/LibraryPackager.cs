@@ -487,7 +487,8 @@ namespace Hl7.Cql.Packaging
                 }
             }
         };
-        private static CqlContext CqlContext => FirelyCqlContext.Create();
+        
+        private static CqlContext GetNewCqlContext() => FirelyEngineSetup.WithRetriever().NewContext();
 
         internal TypeConverter TypeConverter { get; }
 
@@ -528,7 +529,7 @@ namespace Hl7.Cql.Packaging
                 {
                     var lambda = builder.Lambda(elmParameter.@default);
                     var func = lambda.Compile();
-                    var value = func.DynamicInvoke(CqlContext);
+                    var value = func.DynamicInvoke(GetNewCqlContext());
                     AddDefaultValueToExtensions(cqlTypeExtensions, value, typeEntry);
                 }
             }
