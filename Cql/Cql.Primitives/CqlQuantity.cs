@@ -29,7 +29,7 @@ namespace Hl7.Cql.Primitives
         public CqlQuantity(decimal? value, string? unit)
         {
             this.value = value;
-            this.unit = unit != null && Units.CqlUnitsToUCUM.TryGetValue(unit, out var ucumUnits) ? ucumUnits : unit;
+            this.unit = unit != null && Units.CqlUnitsToUCUM.TryGetValue(unit, out var ucumUnits) ? ucumUnits : null;
         }
 
         /// <summary>
