@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.Iso8601</AssemblyName>
 		<RootNamespace>Hl7.Cql.Iso8601</RootNamespace>
 		<Product>ISO 8601 datetime abstractions</Product>
-		<Description>Contains implementations of ISO 8601 date, time, and datetime structures for use in the CQL engine.  These date structures have nullable values beyond the most significant (year for dates, hour for times), and have an understanding of precision.</Description>
+		<Description>Support package for Hl7.Cql. Contains implementations of ISO 8601 date, time, and datetime structures for use in the CQL engine.  These date structures have nullable values beyond the most significant (year for dates, hour for times), and have an understanding of precision.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

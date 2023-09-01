@@ -6,6 +6,8 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Logging</AssemblyName>
 		<RootNamespace>Hl7.Cql.Logging</RootNamespace>
+		<Product>Logging extensions for the CQL engine</Product>
+		<Description>Support package for Hl7.Cql. Contains extension methods to initialize logging for the CQL Engine.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>

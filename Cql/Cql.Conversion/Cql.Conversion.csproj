@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.Conversion</AssemblyName>
 		<RootNamespace>Hl7.Cql.Conversion</RootNamespace>
 		<Product>CQL engine unit conversion</Product>
-		<Description>Unit conversion for CQL</Description>
+		<Description>Support package for Hl7.Cql. Unit conversion for CQL.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
@@ -21,7 +21,7 @@
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 </Project>
