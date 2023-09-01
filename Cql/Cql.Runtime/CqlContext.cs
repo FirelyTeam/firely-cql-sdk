@@ -126,7 +126,7 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Defines the delimiter separating library names from parameter names.
         /// </summary>
-        public const string ParameterDelimiter = ".";
+        private const string ParameterDelimiter = ".";
 
         /// <summary>
         /// Gets the value of the parameter in <see cref="Parameters"/> given the library and parameter name.

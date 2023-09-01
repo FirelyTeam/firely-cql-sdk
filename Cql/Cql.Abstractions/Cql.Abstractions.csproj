@@ -4,9 +4,9 @@
 
 	<PropertyGroup>
 		<AssemblyName>HL7.Cql.Abstractions</AssemblyName>
-		<RootNamespace>HL7.Cql.Abstractions</RootNamespace>
+		<RootNamespace>Hl7.Cql.Abstractions</RootNamespace>
 		<Product>CQL</Product>
-		<Description>Contains shared interfaces and abstraction for CQL</Description>
+		<Description>Support package for Hl7.Cql. Contains shared interfaces and abstractions for CQL.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 

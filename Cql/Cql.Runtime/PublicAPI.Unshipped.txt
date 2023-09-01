@@ -1,5 +1,4 @@
 ﻿#nullable enable
-const Hl7.Cql.Runtime.CqlContext.ParameterDelimiter = "." -> string!
 Hl7.Cql.Runtime.CqlContext
 Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null) -> void
 Hl7.Cql.Runtime.CqlContext.Definitions.get -> Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>!

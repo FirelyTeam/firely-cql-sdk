@@ -1,9 +1,7 @@
 ﻿#nullable enable
 Hl7.Cql.ValueSets.IValueSetDictionary
-Hl7.Cql.ValueSets.IValueSetDictionary.Add(string! valueSetUri, Hl7.Cql.Primitives.CqlCode! code) -> void
 Hl7.Cql.ValueSets.IValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code) -> bool
 Hl7.Cql.ValueSets.IValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code, string! systemUriOrOid) -> bool
-Hl7.Cql.ValueSets.IValueSetDictionary.Set(string! valueSetUri, Hl7.Cql.Primitives.CqlCode! code) -> void
 Hl7.Cql.ValueSets.IValueSetDictionary.TryGetCodesInValueSet(string! valueSetUri, out System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Primitives.CqlCode!>? codes) -> bool
 Hl7.Cql.ValueSets.IValueSetFacade
 Hl7.Cql.ValueSets.IValueSetFacade.IsCodeInValueSet(Hl7.Cql.Primitives.CqlCode? code) -> bool?

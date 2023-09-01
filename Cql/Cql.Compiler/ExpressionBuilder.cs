@@ -1585,6 +1585,29 @@ namespace Hl7.Cql.Compiler
                     denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
                 return @new;
             }
+            else if (instanceType == typeof(CqlQuantity))
+            {
+                Expression? valueExpr = null;
+                Expression? unitExpr = null;
+
+                foreach (var tuple in tuples)
+                {
+                    if (tuple.Item1 == "value")
+                        valueExpr = tuple.Item2;
+                    else if (tuple.Item1 == "unit")
+                        unitExpr = tuple.Item2;
+                    else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
+                }
+                var ctor = typeof(CqlQuantity).GetConstructor(new[] { typeof(decimal?), typeof(string) })!;
+
+                if (unitExpr is not null)
+                    unitExpr = ChangeType(unitExpr, typeof(string), ctx);
+
+                var @new = Expression.New(ctor,
+                    valueExpr ?? Expression.Default(typeof(decimal?)),
+                    unitExpr ?? Expression.Default(typeof(string)));
+                return @new;
+            }
             else if (instanceType == typeof(CqlCode))
             {
                 Expression? codeExpr = null;
