@@ -11,7 +11,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
@@ -31,12 +31,12 @@ namespace Hl7.Cql.Packaging
     {
         internal LibraryPackager()
         {
-            TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
         internal LibraryPackager(TypeConverter? typeConverter)
         {
-            TypeConverter = typeConverter ?? FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
@@ -112,8 +112,8 @@ namespace Hl7.Cql.Packaging
                 .Packages()
                 .ToArray();
 
-            var typeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-            var typeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
             var typeManager = new TypeManager(typeResolver);
             var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
@@ -348,7 +348,7 @@ namespace Hl7.Cql.Packaging
                                 ElementId = pop,
                                 Code = CodeableConcept((tuple.Population, Constants.MeasureGroupCodeSystem)),
                                 Description = Populations[tuple.Population],
-                                Criteria = new Fhir.Model.Expression
+                                Criteria = new Hl7.Fhir.Model.Expression
                                 {
                                     Language = "text/cql-identifier"!,
                                     ExpressionElement = new FhirString(def.name)
@@ -392,7 +392,7 @@ namespace Hl7.Cql.Packaging
                     ContentType = elm.Library.JsonMimeType,
                     Data = bytes,
                 };
-                var library = new Fhir.Model.Library();
+                var library = new Hl7.Fhir.Model.Library();
                 library.Content.Add(attachment);
                 library.Type = LogicLibraryCodeableConcept;
                 string libraryId = $"{elmLibrary!.NameAndVersion}";
@@ -488,7 +488,7 @@ namespace Hl7.Cql.Packaging
             }
         };
         
-        private static CqlContext GetNewCqlContext() => FirelyEngineSetup.WithRetriever().NewContext();
+        private static CqlContext GetNewCqlContext() => FhirEngineSetup.WithRetriever().NewContext();
 
         internal TypeConverter TypeConverter { get; }
 
@@ -653,7 +653,7 @@ namespace Hl7.Cql.Packaging
                     ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Quantity>(value);
                     break;
                 case FHIRAllTypes.Range:
-                    ext.Value = TypeConverter.Convert<Fhir.Model.Range>(value);
+                    ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Range>(value);
                     break;
                 case FHIRAllTypes.Ratio:
                     ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Ratio>(value);
@@ -702,7 +702,7 @@ namespace Hl7.Cql.Packaging
             {
                 parameterDefinition.Extension.Add(new Extension
                 {
-                    Value = new Fhir.Model.Code("private"),
+                    Value = new Hl7.Fhir.Model.Code("private"),
                     Url = Constants.ParameterAccessLevel,
                 });
             }

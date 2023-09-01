@@ -1,5 +1,5 @@
 ﻿using Hl7.Cql.Compiler;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
@@ -44,8 +44,8 @@ namespace CoreTests
         public static void ClassInitialize(TestContext context)
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
-            var resolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-            var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
+            var resolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+            var binding = new CqlOperatorsBinding(resolver, FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
             var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
@@ -77,7 +77,7 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            Context = FirelyEngineSetup.WithRetriever(delegates: allDelegates).NewContext();
+            Context = FhirEngineSetup.WithRetriever(delegates: allDelegates).NewContext();
         }
 
         internal static CqlContext Context;

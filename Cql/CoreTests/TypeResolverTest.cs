@@ -1,5 +1,5 @@
 ﻿using Hl7.Cql;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -51,7 +51,7 @@ namespace CoreTests
 
         public static IEnumerable<object[]> GetData()
         {
-            yield return new object[] { new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector) };
+            yield return new object[] { new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector) };
         }
     }
 }

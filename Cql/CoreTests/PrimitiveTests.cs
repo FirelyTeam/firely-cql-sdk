@@ -1,7 +1,7 @@
 ﻿using Hl7.Cql;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -24,8 +24,8 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-        private static readonly Hl7.Cql.Conversion.TypeConverter TypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        private static readonly Hl7.Cql.Conversion.TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
 
         private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
@@ -126,7 +126,7 @@ namespace CoreTests
 
         }
 
-        private CqlContext GetNewContext() => FirelyEngineSetup.WithRetriever().NewContext();
+        private CqlContext GetNewContext() => FhirEngineSetup.WithRetriever().NewContext();
 
         [TestMethod]
         public void CqlDateTime_Subtract_Day_and_Days()

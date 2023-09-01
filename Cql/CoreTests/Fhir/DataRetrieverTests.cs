@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 
-namespace CoreTests.Firely
+namespace CoreTests.Fhir
 {
     [TestClass]
     public class DataRetrieverTests
@@ -46,7 +46,7 @@ namespace CoreTests.Firely
         public void FiltersOnSpecificProp()
         {
             var dr = buildRetriever();
-            var model = new FirelyTypeResolver(ModelInfo.ModelInspector);
+            var model = new FhirTypeResolver(ModelInfo.ModelInspector);
             var genderProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient"), "gender");
             genderProp.Should().NotBeNull();
 

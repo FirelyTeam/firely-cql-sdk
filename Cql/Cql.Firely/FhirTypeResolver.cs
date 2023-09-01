@@ -13,14 +13,14 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
 using System.Reflection;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
 
-    internal class FirelyTypeResolver : BaseTypeResolver
+    internal class FhirTypeResolver : BaseTypeResolver
     {
-        public static readonly FirelyTypeResolver Default = new FirelyTypeResolver(ModelInfo.ModelInspector);
+        public static readonly FhirTypeResolver Default = new FhirTypeResolver(ModelInfo.ModelInspector);
 
-        public FirelyTypeResolver(ModelInspector inspector)
+        public FhirTypeResolver(ModelInspector inspector)
         {
             Inspector = inspector;
 
@@ -63,7 +63,7 @@ namespace Hl7.Cql.Firely
                     {
                         var propMapping = cm.FindMappedElementByName(propertyName);
                         if (propMapping is not null)
-                            result = new PocoModelPropertyInfo(propMapping.NativeProperty, propMapping);
+                            result = new FhirModelPropertyInfo(propMapping.NativeProperty, propMapping);
                     }
                 }
                 else

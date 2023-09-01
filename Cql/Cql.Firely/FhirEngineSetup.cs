@@ -11,14 +11,13 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
-
     /// <summary>
     /// Factory methods to initialize an <see cref="CqlEngineSetup"/> that uses the SDK POCO model
     /// as binding for the Cql engine, supplying data using POCO instances.
     /// </summary>
-    public static class FirelyEngineSetup
+    public static class FhirEngineSetup
     {
         /// <summary>
         /// Factory method for creating a setup of the engine with the given <see cref="Bundle"/>.
@@ -28,7 +27,7 @@ namespace Hl7.Cql.Firely
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            ModelBindingOptions? options = null)
+            FhirModelBindingOptions? options = null)
         {
             IDataRetriever retriever = bundle is not null ?
               new BundleDataRetriever(bundle, valueSets ?? new HashValueSetDictionary()) :
@@ -45,11 +44,11 @@ namespace Hl7.Cql.Firely
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            ModelBindingOptions? options = null) =>
+            FhirModelBindingOptions? options = null) =>
                 new(
                     options is not null ?
-                        new FirelyModelBindingProvider(options) :
-                        FirelyModelBindingProvider.Default,
+                        new FhirModelBindingProvider(options) :
+                        FhirModelBindingProvider.Default,
                     retriever,
                     parameters,
                     valueSets,

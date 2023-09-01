@@ -15,7 +15,7 @@ using System.Reflection;
 
 #nullable enable
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
     /// <summary>
     /// A IDataRetriever that uses POCO Bundles as a source of information.

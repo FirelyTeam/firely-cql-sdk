@@ -1,16 +1,16 @@
 ﻿using Hl7.Fhir.Model;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
     /// <summary>
     /// Defines behavior options to configure the Firely CQL model binding.
     /// </summary>
-    public class ModelBindingOptions
+    public class FhirModelBindingOptions
     {
         /// <summary>
         /// Gets the default CQL options.
         /// </summary>
-        public static readonly ModelBindingOptions Default = new();
+        public static readonly FhirModelBindingOptions Default = new();
 
         /// <summary>
         /// When not <see langword="null"/>, all FHIR resource types will be compared only by their <see cref="Resource.Id"/> property

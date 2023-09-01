@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Configuration;
@@ -108,7 +108,7 @@ namespace Hl7.Cql.Packaging.CLI
             var packagerLogger = logFactory.CreateLogger<LibraryPackager>();
             var packages = LibraryPackager.LoadLibraries(elmDir);
             var graph = Hl7.Cql.Elm.Library.GetIncludedLibraries(packages.Values);
-            var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+            var typeResolver = new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
             var cliLogger = logFactory.CreateLogger("CLI");
 
             var packager = new LibraryPackager();
@@ -116,7 +116,7 @@ namespace Hl7.Cql.Packaging.CLI
                 cqlDir,
                 graph,
                 typeResolver,
-                new CqlOperatorsBinding(typeResolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)),
+                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
                 CanonicalUri,
                 logFactory);

@@ -4,10 +4,10 @@
 
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<RootNamespace>Hl7.Cql.Firely</RootNamespace>
-		<AssemblyName>Hl7.Cql.Firely</AssemblyName>
+		<RootNamespace>Hl7.Cql.Fhir</RootNamespace>
+		<AssemblyName>Hl7.Cql.Fhir</AssemblyName>
 		<Product>CQL engine binding for POCOs</Product>
-		<Description>Support package for Hl7.Cql. Contains the bindings to use Firely's .NET SDK Pocos.</Description>
+		<Description>Support package for Hl7.Cql. Contains the bindings to use Firely's .NET SDK Pocos for FHIR.</Description>
 	</PropertyGroup>
 
 

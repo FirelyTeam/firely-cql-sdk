@@ -1,7 +1,7 @@
 ﻿using Hl7.Cql;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -18,8 +18,8 @@ namespace CoreTests
     [TestClass]
     public class QueriesTest
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+        private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
 
         [ClassInitialize]
         public static void Initialize(TestContext context)
@@ -65,7 +65,7 @@ namespace CoreTests
 
         };
 
-        private CqlContext GetNewContext(Bundle bundle) => FirelyEngineSetup.ForBundle(
+        private CqlContext GetNewContext(Bundle bundle) => FhirEngineSetup.ForBundle(
             bundle: bundle,
             valueSets: ValueSets,
             delegates: QueriesDefinitions).NewContext();
