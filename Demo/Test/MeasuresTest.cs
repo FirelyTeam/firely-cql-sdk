@@ -28,8 +28,8 @@ namespace Test
         public void BCSEHEDIS2022_Numerator()
         {
             var patientEverything = new Bundle();  // add some data
-            var cqlContext = FirelyEngineSetup.ForBundle(patientEverything, MY2023);
-            var bcs = new BCSEHEDISMY2022_1_0_0(cqlContext.NewContext());
+            var engineSetup = FirelyEngineSetup.ForBundle(patientEverything, MY2023);
+            var bcs = new BCSEHEDISMY2022_1_0_0(engineSetup.NewContext());
             var numerator = bcs.Numerator();
             Assert.IsFalse(numerator);
         }
