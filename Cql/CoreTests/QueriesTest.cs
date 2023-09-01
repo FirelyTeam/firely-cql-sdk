@@ -65,7 +65,7 @@ namespace CoreTests
 
         };
 
-        private CqlContext GetNewContext(Bundle bundle) => FhirEngineSetup.ForBundle(
+        private CqlContext GetNewContext(Bundle bundle) => FhirCqlEngineSetup.ForBundle(
             bundle: bundle,
             valueSets: ValueSets,
             delegates: QueriesDefinitions).NewContext();

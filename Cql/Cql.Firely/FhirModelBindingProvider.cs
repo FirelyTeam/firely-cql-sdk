@@ -43,7 +43,7 @@ namespace Hl7.Cql.Fhir
             // Nothing
         }
 
-        public CqlOperators NewOperators(
+        public ICqlOperators NewOperators(
             IDataRetriever? retriever,
             IValueSetDictionary? valuesets,
             DateTimeOffset? now)

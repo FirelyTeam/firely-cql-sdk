@@ -488,7 +488,7 @@ namespace Hl7.Cql.Packaging
             }
         };
         
-        private static CqlContext GetNewCqlContext() => FhirEngineSetup.WithRetriever().NewContext();
+        private static CqlContext GetNewCqlContext() => FhirCqlEngineSetup.WithRetriever().NewContext();
 
         internal TypeConverter TypeConverter { get; }
 

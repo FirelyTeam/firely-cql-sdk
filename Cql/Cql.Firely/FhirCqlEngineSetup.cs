@@ -17,7 +17,7 @@ namespace Hl7.Cql.Fhir
     /// Factory methods to initialize an <see cref="CqlEngineSetup"/> that uses the SDK POCO model
     /// as binding for the Cql engine, supplying data using POCO instances.
     /// </summary>
-    public static class FhirEngineSetup
+    public static class FhirCqlEngineSetup
     {
         /// <summary>
         /// Factory method for creating a setup of the engine with the given <see cref="Bundle"/>.

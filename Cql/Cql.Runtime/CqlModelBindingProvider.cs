@@ -1,8 +1,8 @@
-﻿using Hl7.Cql.Runtime;
+﻿using Hl7.Cql.Operators;
 using Hl7.Cql.ValueSets;
 using System;
 
-namespace Hl7.Cql.Operators
+namespace Hl7.Cql.Runtime
 {
     /// <summary>
     /// Provides the necessary binding information to enable the CQL engine to use
@@ -10,7 +10,7 @@ namespace Hl7.Cql.Operators
     /// </summary>
     internal interface ICqlModelBindingProvider
     {
-        CqlOperators NewOperators(
+        ICqlOperators NewOperators(
             IDataRetriever? retriever,
             IValueSetDictionary? valuesets,
             DateTimeOffset? now);
