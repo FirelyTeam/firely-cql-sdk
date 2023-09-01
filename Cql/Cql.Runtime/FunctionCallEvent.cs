@@ -6,32 +6,20 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-#if WE_STILL_NEED_THE_STACK
-
 namespace Hl7.Cql.Runtime
 {
     /// <summary>
-    /// Stores an entry in an ELM call stack.
+    /// Information about a call to a function.
     /// </summary>
-    public class CallStackEntry
+    public class FunctionCallEvent
     {
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        public CallStackEntry()
-        {
-            Name = null;
-            Locator = null;
-            LocalId = null;
-        }
-
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="name">The name of the definition or function.</param>
         /// <param name="locator">The location in the source code.</param>
         /// <param name="localId">The local ID for this ELM node.</param>
-        public CallStackEntry(string? name, string? locator, string? localId)
+        public FunctionCallEvent(string? name, string? locator, string? localId)
         {
             Name = name;
             Locator = locator;
@@ -41,16 +29,14 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// The name of the definition or function.
         /// </summary>
-        public string? Name { get; set; } = null;
+        public string? Name { get; }
         /// <summary>
         /// The location in the source code.
         /// </summary>
-        public string? Locator { get; set; } = null;
+        public string? Locator { get; }
         /// <summary>
         /// The local ID for this ELM node.
         /// </summary>
-        public string? LocalId { get; set; } = null;
+        public string? LocalId { get; }
     }
 }
-
-#endif

@@ -2229,15 +2229,15 @@ namespace Hl7.Cql.Compiler
                 .ToArray();
 
             var funcType = GetFuncType(funcTypeParameters);
-#if WE_STILL_NEED_THE_STACK
-            var callStackCtor = typeof(CallStackEntry).GetConstructor(new[] { typeof(string), typeof(string), typeof(string) })!;
+
+            var callStackCtor = typeof(FunctionCallEvent).GetConstructor(new[] { typeof(string), typeof(string), typeof(string) })!;
             var newCallStack = Expression.New(callStackCtor,
                 Expression.Constant(op.name, typeof(string)),
                 Expression.Constant(op.locator, typeof(string)),
                 Expression.Constant(op.localId, typeof(string)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!, newCallStack);
-#endif
+            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.OnFunctionCalled), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!, newCallStack);
+
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
@@ -2251,11 +2251,8 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
-#if WE_STILL_NEED_THE_STACK
                         var bind = OperatorBinding.Bind(CqlOperator.Convert, deeper,
-#else
-                        var bind = OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter,
-#endif
+
                             new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                         return bind;
                     }
@@ -2263,16 +2260,7 @@ namespace Hl7.Cql.Compiler
             }
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
-            operands = new[]
-            {
-#if WE_STILL_NEED_THE_STACK
-                 deeper
-#else
-                    ctx.RuntimeContextParameter
-#endif
-            }
-            .Concat(operands)
-            .ToArray();
+            operands = operands.Prepend(deeper).ToArray();
 
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands, ctx);
             return invoke;
