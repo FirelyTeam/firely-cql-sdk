@@ -54,7 +54,7 @@ namespace Hl7.Cql.Elm
             JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
                 throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
 
-        public static DirectedGraph GetIncludedLibraries(IEnumerable<Library> libraries)
+        internal static DirectedGraph GetIncludedLibraries(IEnumerable<Library> libraries)
         {
             var buildOrder = new DirectedGraph();
             foreach (var library in libraries)
@@ -75,10 +75,10 @@ namespace Hl7.Cql.Elm
         }
 
 
-        public static DirectedGraph GetIncludedLibraries(Library library, Func<string, string, Library> locateLibrary) =>
+        internal static DirectedGraph GetIncludedLibraries(Library library, Func<string, string, Library> locateLibrary) =>
             SanitizeDependencyGraph(GetDependencySubgraph(library, locateLibrary));
 
-        public static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, DirectoryInfo libraryPath) =>
+        internal static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, DirectoryInfo libraryPath) =>
             GetIncludedLibraries(elmLocation, (name, version) =>
             {
                 var stream = OpenLibrary(libraryPath, name, version);
@@ -86,7 +86,7 @@ namespace Hl7.Cql.Elm
                 return library;
             });
 
-        public static DirectedGraph GetIncludedLibraries(Library library, DirectoryInfo libraryPath) =>
+        internal static DirectedGraph GetIncludedLibraries(Library library, DirectoryInfo libraryPath) =>
             SanitizeDependencyGraph(GetDependencySubgraph(library, (name, version) =>
             {
                 var stream = OpenLibrary(libraryPath, name, version);
@@ -94,7 +94,7 @@ namespace Hl7.Cql.Elm
                 return dependentLibrary;
             }));
 
-        public static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, Func<string, string, Library>? locateLibrary = null)
+        internal static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, Func<string, string, Library>? locateLibrary = null)
         {
             if (locateLibrary == null)
             {
@@ -114,7 +114,7 @@ namespace Hl7.Cql.Elm
             return sanitized;
         }
 
-        public DirectedGraph GetIncludedLibraries(DirectoryInfo libraryPath) =>
+        internal DirectedGraph GetIncludedLibraries(DirectoryInfo libraryPath) =>
             SanitizeDependencyGraph(GetDependencySubgraph((name, version) =>
             {
                 var stream = OpenLibrary(libraryPath, name, version);
@@ -122,7 +122,7 @@ namespace Hl7.Cql.Elm
                 return library;
             }));
 
-        private static Stream OpenLibrary(DirectoryInfo libraryPath, string name, string version)
+        internal static Stream OpenLibrary(DirectoryInfo libraryPath, string name, string version)
         {
             var path = Path.Combine(libraryPath.FullName, $"{name}-{version}.json");
             if (!File.Exists(path))

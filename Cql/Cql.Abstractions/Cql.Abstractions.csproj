@@ -1,17 +1,27 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<AssemblyName>Ncqa.Cql</AssemblyName>
-		<RootNamespace>Ncqa.Cql</RootNamespace>
+		<AssemblyName>HL7.Cql.Abstractions</AssemblyName>
+		<RootNamespace>Hl7.Cql.Abstractions</RootNamespace>
 		<Product>CQL</Product>
-		<Description>Contains shared interfaces and abstraction for CQL</Description>
+		<Description>Support package for Hl7.Cql. Contains shared interfaces and abstractions for CQL.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Model" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>

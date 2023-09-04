@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("NCQAPalliativeCare", "1.0.0")]
 public class NCQAPalliativeCare_1_0_0
 {
@@ -107,7 +107,7 @@ public class NCQAPalliativeCare_1_0_0
     public bool? Palliative_Care_Overlapping_Period(CqlInterval<CqlDateTime> Period)
     {
         var a_ = this.Palliative_Care_Assessment();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> q_ = (PalliativeAssessment) => 
         {
@@ -137,7 +137,7 @@ public class NCQAPalliativeCare_1_0_0
 			q_);
         var s_ = context?.Operators.ExistsInList<Observation>(r_);
         var t_ = this.Palliative_Care_Encounter();
-        var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
+        var u_ = context?.Operators.RetrieveByValueSet<Encounter>(t_, 
 			typeof(Encounter).GetProperty("Type"));
         var v_ = NCQAStatus_1_0_0.Finished_Encounter(u_);
         Func<Encounter,bool?> ak_ = (PalliativeEncounter) => 
@@ -170,7 +170,7 @@ public class NCQAPalliativeCare_1_0_0
         var an_ = context?.Operators.Or(s_, 
 			am_);
         var ao_ = this.Palliative_Care_Intervention();
-        var ap_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(ao_, 
+        var ap_ = context?.Operators.RetrieveByValueSet<Procedure>(ao_, 
 			typeof(Procedure).GetProperty("Code"));
         var aq_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(ap_);
         Func<Procedure,bool?> bf_ = (PalliativeIntervention) => 
@@ -204,7 +204,7 @@ public class NCQAPalliativeCare_1_0_0
 			bh_);
         var bj_ = this.Encounter_for_palliative_care();
         var bk_ = context?.Operators.ToList<CqlCode>(bj_);
-        var bl_ = context?.DataRetriever.RetrieveByCodes<Condition>(bk_, 
+        var bl_ = context?.Operators.RetrieveByCodes<Condition>(bk_, 
 			typeof(Condition).GetProperty("Code"));
         var bm_ = NCQAStatus_1_0_0.Active_Condition(bl_);
         Func<Condition,bool?> bz_ = (PalliativeDiagnosis) => 

@@ -1,11 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<ImplicitUsings>enable</ImplicitUsings>
+		<PackAsTool>true</PackAsTool>
+		<ToolCommandName>cql-package</ToolCommandName>
+		<RootNamespace>Hl7.Cql.Packager</RootNamespace>
+		<AssemblyName>Hl7.Cql.Packager</AssemblyName>
+		<Product>dotnet tool for packaging CQL artifacts</Product>
+		<Description>.NET tool that packages CQL, ELM and build outputs into a FHIR Library resource.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +26,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
+		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 	</ItemGroup>
 
 </Project>

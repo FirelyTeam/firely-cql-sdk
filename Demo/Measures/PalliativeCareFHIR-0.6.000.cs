@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public class PalliativeCareFHIR_0_6_000
 {
@@ -136,7 +136,7 @@ public class PalliativeCareFHIR_0_6_000
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -147,14 +147,12 @@ public class PalliativeCareFHIR_0_6_000
     {
         var a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_();
         var b_ = context?.Operators.ToList<CqlCode>(a_);
-        var c_ = context?.DataRetriever.RetrieveByCodes<Observation>(b_, 
+        var c_ = context?.Operators.RetrieveByCodes<Observation>(b_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> v_ = (PalliativeAssessment) => 
         {
             var d_ = (PalliativeAssessment?.StatusElement as object);
-            var e_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_);
+            var e_ = context?.Operators.Convert<string>(d_);
             var g_ = "final";
             var h_ = "amended";
             var i_ = "corrected";
@@ -192,14 +190,12 @@ public class PalliativeCareFHIR_0_6_000
 			v_);
         var x_ = context?.Operators.ExistsInList<Observation>(w_);
         var y_ = this.Palliative_Care_Encounter();
-        var z_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(y_, 
+        var z_ = context?.Operators.RetrieveByValueSet<Encounter>(y_, 
 			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> ai_ = (PalliativeEncounter) => 
         {
             var ab_ = (PalliativeEncounter?.StatusElement as object);
-            var aa_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ab_) as object);
+            var aa_ = (context?.Operators.Convert<string>(ab_) as object);
             var ac_ = ("finished" as object);
             var ad_ = context?.Operators.Equal(aa_, 
 				ac_);
@@ -218,14 +214,12 @@ public class PalliativeCareFHIR_0_6_000
         var al_ = context?.Operators.Or(x_, 
 			ak_);
         var am_ = this.Palliative_Care_Intervention();
-        var an_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(am_, 
+        var an_ = context?.Operators.RetrieveByValueSet<Procedure>(am_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> ay_ = (PalliativeIntervention) => 
         {
             var ao_ = (PalliativeIntervention?.StatusElement as object);
-            var ap_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ao_);
+            var ap_ = context?.Operators.Convert<string>(ao_);
             var ar_ = "completed";
             var as_ = "in-progress";
             var aq_ = (new string[]

@@ -13,7 +13,7 @@ using System.Text.Json;
 
 namespace Hl7.Cql.Firely
 {
-    public static class StreamExtensions
+    internal static class StreamExtensions
     {
         private static readonly JsonSerializerOptions Options = new JsonSerializerOptions()
             .ForFhir(ModelInfo.ModelInspector);

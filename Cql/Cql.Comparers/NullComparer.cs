@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Comparers
 {
-    public class NullComparer<T> : IComparer<T>, IComparer
+    internal class NullComparer<T> : IComparer<T>, IComparer
     {
 
         private readonly IComparer<T> through;
@@ -38,7 +38,7 @@ namespace Hl7.Cql.Comparers
         public int Compare(object? x, object? y) => Compare((T?)x, (T?)y);
     }
 
-    public class NullValueTypeComparer<T> : IComparer<T?>, IComparer
+    internal class NullValueTypeComparer<T> : IComparer<T?>, IComparer
         where T : struct
     {
 

@@ -1,0 +1,26 @@
+﻿#nullable enable
+Hl7.Cql.Runtime.CqlContext
+Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null, System.Collections.Generic.IDictionary<string!, object!>? parameters = null) -> void
+Hl7.Cql.Runtime.CqlContext.Definitions.get -> Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>!
+Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
+Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
+Hl7.Cql.Runtime.CqlContext.ResolveExtension(string! key, object? defaultValue) -> object?
+Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryNameAndVersion, string! parameterName, object? defaultValue) -> object?
+Hl7.Cql.Runtime.DefinitionDictionary<T>
+Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, System.Type![]! signature, T! expression) -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, T! expression) -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.AddTag(string! library, string! definition, System.Type![]! signature, string! name, params string![]! values) -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsKey(string? libraryName, string! definition) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsKey(string? libraryName, string! definition, System.Type![]! signature) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.ContainsLibrary(string! libraryName) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionDictionary() -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionsForLibrary(string? libraryName) -> System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.Collections.Generic.List<(System.Type![]! Signature, T! T)>!>>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.Libraries.get -> System.Collections.Generic.IEnumerable<string!>!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.Merge(params Hl7.Cql.Runtime.DefinitionDictionary<T!>![]! dictionaries) -> void
+Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, string! definition, params System.Type![]! signature].get -> T!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, string! definition].get -> T!
+Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinesForLibrary(string? libraryName, out System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, T!>>? definitions) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinitionsForLibrary(string? libraryName, out System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.Collections.Generic.List<(System.Type![]!, T!)>!>>? definitions) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetTags(string! library, string! definition, System.Type![]! signature, out System.Linq.ILookup<string!, string!>? tags) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, out T? expression) -> bool
+Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, System.Type![]! signature, out T? expression) -> bool

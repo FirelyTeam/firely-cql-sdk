@@ -20,6 +20,7 @@ using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
+using System.Runtime.Loader;
 using System.Text;
 using elm = Hl7.Cql.Elm;
 using Library = Hl7.Fhir.Model.Library;
@@ -28,12 +29,17 @@ namespace Hl7.Cql.Packaging
 {
     public class LibraryPackager
     {
-        public LibraryPackager(TypeConverter? typeConverter = null)
+        internal LibraryPackager()
+        {
+            TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+        }
+
+        internal LibraryPackager(TypeConverter? typeConverter)
         {
             TypeConverter = typeConverter ?? FirelyTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
-        public IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
+        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
         {
             var dict = new ConcurrentDictionary<string, elm.Library>();
             var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
@@ -48,16 +54,95 @@ namespace Hl7.Cql.Packaging
             return dict;
         }
 
-        public IEnumerable<Resource> PackageResources(DirectoryInfo elmDirectory,
+        public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
+        {
+            var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
+            using var fs = libFile.OpenRead();
+            var library = fs.ParseFhir<Library>();
+            var dependencies = library.GetDependencies(dir);
+            var allLibs = dependencies.AllLibraries();
+            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+            allLibs.LoadAssemblies(asmContext);
+
+            var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
+            using var tupleFs = tupleTypes.OpenRead();
+            var binaries = new[]
+            {
+                tupleFs.ParseFhir<Binary>()
+            };
+
+            binaries.LoadAssembles(asmContext);
+            return asmContext;
+        }
+
+#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
+        public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
+#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
+          string lib,
+          string version,
+          LogLevel logLevel = LogLevel.Error)
+        {
+            var logFactory = LoggerFactory
+                          .Create(logging =>
+                          {
+                              logging.AddFilter(level => level >= logLevel);
+                              logging.AddConsole(console =>
+                              {
+                                  console.LogToStandardErrorThreshold = LogLevel.Error;
+                              });
+                          });
+
+            return LoadElm(elmDirectory, lib, version, logFactory);
+        }
+
+        public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
+            string lib,
+            string version,
+            ILoggerFactory logFactory)
+        {
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
+            if (!elmFile.Exists)
+                elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
+            if (!elmFile.Exists)
+                throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
+            var library = Elm.Library.LoadFromJson(elmFile)
+                ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
+            var dependencies = Elm.Library
+                .GetIncludedLibraries(library, elmDirectory)
+                .Packages()
+                .ToArray();
+
+            var typeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
+            var typeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            var typeManager = new TypeManager(typeResolver);
+            var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
+            var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
+
+            var assemblyData = compiler.Compile(dependencies,
+                logFactory);
+
+            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+            foreach (var kvp in assemblyData)
+            {
+                var assemblyBytes = kvp.Value.Binary;
+                using var ms = new MemoryStream(assemblyBytes);
+                asmContext.LoadFromStream(ms);
+            }
+            return asmContext;
+        }
+
+        internal IEnumerable<Resource> PackageResources(DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
             DirectedGraph packageGraph,
             TypeResolver typeResolver,
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             Func<Resource, string> canon,
-            ILogger<ExpressionBuilder> builderLogger,
-            ILogger<CSharpSourceCodeWriter> writerLogger)
+            ILoggerFactory logFactory)
         {
+            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
+            var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
+
             var elmLibraries = packageGraph.Nodes.Values
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
                 .Where(p => p is not null)
@@ -72,7 +157,7 @@ namespace Hl7.Cql.Packaging
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
-            var scw = new CSharpSourceCodeWriter(writerLogger);
+            var scw = new CSharpSourceCodeWriter(codeWriterLogger);
             foreach (var @using in typeResolver.ModelNamespaces)
                 scw.Usings.Add(@using);
             foreach (var alias in typeResolver.Aliases)
@@ -80,7 +165,7 @@ namespace Hl7.Cql.Packaging
 
             var navToLibraryStream = new Dictionary<string, Stream>();
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
-            var assemblies = compiler.Compile(elmLibraries, builderLogger, writerLogger);
+            var assemblies = compiler.Compile(elmLibraries, logFactory);
             var libraries = new Dictionary<string, Library>();
             var typeCrosswalk = new CqlCrosswalk(typeResolver);
             foreach (var library in elmLibraries)
@@ -105,7 +190,7 @@ namespace Hl7.Cql.Packaging
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger);
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
+                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -284,7 +369,7 @@ namespace Hl7.Cql.Packaging
                     .Select(t => new Coding { Code = t.code!, System = t.system! })
                     .ToList(),
             };
-        private Hl7.Fhir.Model.Library CreateLibraryResource(FileInfo elmFile,
+        private Hl7.Fhir.Model.Library createLibraryResource(FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlCrosswalk typeCrosswalk,
@@ -404,7 +489,7 @@ namespace Hl7.Cql.Packaging
         };
         private static CqlContext CqlContext => FirelyCqlContext.Create();
 
-        public TypeConverter TypeConverter { get; }
+        internal TypeConverter TypeConverter { get; }
 
         //new CqlContext(new CqlOperators(null));
 

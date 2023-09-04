@@ -14,7 +14,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Comparers
 {
-    public class CqlCodeCqlComparer : ICqlComparer<CqlCode>, ICqlComparer
+    internal class CqlCodeCqlComparer : ICqlComparer<CqlCode>, ICqlComparer
     {
         public CqlCodeCqlComparer(IComparer<string> codeComparer)
         {

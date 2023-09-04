@@ -18,7 +18,7 @@ using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely
 {
-    public static class FirelyTypeConverter
+    internal static class FirelyTypeConverter
     {
         public static TypeConverter Create(ModelInspector model) =>
             TypeConverter

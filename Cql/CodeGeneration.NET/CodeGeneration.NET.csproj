@@ -6,16 +6,17 @@
 		<AssemblyName>Hl7.Cql.CodeGeneration.NET</AssemblyName>
 		<RootNamespace>Hl7.Cql.CodeGeneration.NET</RootNamespace>
 		<Product>.NET Code Generation</Product>
-		<Description>Converts .NET lambda expressions into source code in .NET languages</Description>
+		<Description>Support package for Hl7.Cql. Converts .NET lambda expressions into C# source code.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="AgileObjects.ReadableExpressions" Version="2.6.0" />
-		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.6.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	
@@ -24,6 +25,8 @@
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 
