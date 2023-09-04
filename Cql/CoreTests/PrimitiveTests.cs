@@ -126,7 +126,7 @@ namespace CoreTests
 
         }
 
-        private CqlContext GetNewContext() => FhirCqlContext.WithRetriever();
+        private CqlContext GetNewContext() => FhirCqlContext.WithDataSource();
 
         [TestMethod]
         public void CqlDateTime_Subtract_Day_and_Days()

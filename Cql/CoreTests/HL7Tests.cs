@@ -77,7 +77,7 @@ namespace CoreTests
                 });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
-            Context = FhirCqlContext.WithRetriever(delegates: allDelegates);
+            Context = FhirCqlContext.WithDataSource(delegates: allDelegates);
         }
 
         internal static CqlContext Context;

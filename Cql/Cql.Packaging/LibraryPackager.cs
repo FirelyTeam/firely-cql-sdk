@@ -489,7 +489,7 @@ namespace Hl7.Cql.Packaging
             }
         };
 
-        private static CqlContext GetNewCqlContext() => FhirCqlContext.WithRetriever();
+        private static CqlContext GetNewCqlContext() => FhirCqlContext.WithDataSource();
 
         internal TypeConverter TypeConverter { get; }
 

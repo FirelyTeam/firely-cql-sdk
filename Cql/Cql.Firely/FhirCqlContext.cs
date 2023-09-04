@@ -19,14 +19,14 @@ namespace Hl7.Cql.Fhir
     /// </summary>
     public class FhirCqlContext : CqlContext
     {
-        internal FhirCqlContext(IDataRetriever? retriever = null,
+        internal FhirCqlContext(IDataSource? dataSource = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null) :
             base(
-                new FhirModelBindingSetup(retriever, valueSets, now, options).Operators,
+                new FhirModelBindingSetup(dataSource, valueSets, now, options).Operators,
                 parameters,
                 delegates,
                 extensionState: null)
@@ -44,24 +44,24 @@ namespace Hl7.Cql.Fhir
             DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null)
         {
-            IDataRetriever retriever = bundle is not null ?
-              new BundleDataRetriever(bundle, valueSets ?? new HashValueSetDictionary()) :
-              new CompositeDataRetriever();
+            IDataSource source = bundle is not null ?
+              new BundleDataSource(bundle, valueSets ?? new HashValueSetDictionary()) :
+              new CompositeDataSource();
 
-            return WithRetriever(retriever, parameters, valueSets, now, delegates, options);
+            return WithDataSource(source, parameters, valueSets, now, delegates, options);
         }
 
         /// <summary>
-        /// Factory method for creating a setup of the engine with the given <see cref="IDataRetriever"/>.
+        /// Factory method for creating a setup of the engine with the given <see cref="IDataSource"/>.
         /// </summary>
-        public static FhirCqlContext WithRetriever(IDataRetriever? retriever = null,
+        public static FhirCqlContext WithDataSource(IDataSource? source = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null)
         {
-            return new(retriever, parameters, valueSets, now, delegates, options);
+            return new(source, parameters, valueSets, now, delegates, options);
         }
     }
 }

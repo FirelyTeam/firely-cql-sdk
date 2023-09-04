@@ -19,21 +19,21 @@ using System.Reflection;
 namespace Hl7.Cql.Fhir
 {
     /// <summary>
-    /// A IDataRetriever that uses POCO Bundles as a source of information.
+    /// A <see cref="IDataSource"/> that uses POCO Bundles as a source of information.
     /// </summary>
     /// <remarks>A simple model that assumes the Bundles contain all the information about a
     /// patient, e.g. as the result of a $everything operation.</remarks>
-    internal class BundleDataRetriever : IDataRetriever
+    internal class BundleDataSource : IDataSource
     {
         /// <summary>
-        /// Construct a new IDataRetriever passing in the necessary terminology information
+        /// Construct a new source passing in the necessary terminology information
         /// </summary>
         /// <param name="bundle"></param>
         /// <param name="valueSets"></param>
         /// <param name="codeComparer"></param>
         /// <param name="systemComparer"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public BundleDataRetriever(Bundle bundle,
+        public BundleDataSource(Bundle bundle,
             IValueSetDictionary valueSets,
             ICqlComparer? codeComparer = null, ICqlComparer? systemComparer = null)
         {
@@ -51,6 +51,13 @@ namespace Hl7.Cql.Fhir
 
         private readonly ICqlComparer _codeComparer;
         private readonly ICqlComparer _systemComparer;
+
+        /// <inheritdoc/>
+        /// <remarks>Since it is not possible to monitor changes in a FHIR POCO, this source will not trigger when
+        /// external changes are made to the Bundle.</remarks>
+#pragma warning disable CS0067 // The event 'BundleDataSource.DataChanged' is never used
+        public event EventHandler? DataChanged;
+#pragma warning restore CS0067 // The event 'BundleDataSource.DataChanged' is never used
 
         /// <inheritdoc/>
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? allowedCodes = null, PropertyInfo? codeProperty = null) where T : class

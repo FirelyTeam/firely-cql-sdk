@@ -1,9 +1,10 @@
 ﻿#nullable enable
-Hl7.Cql.Operators.CompositeDataRetriever
-Hl7.Cql.Operators.CompositeDataRetriever.CompositeDataRetriever(params Hl7.Cql.Operators.IDataRetriever![]! retrievers) -> void
-Hl7.Cql.Operators.CompositeDataRetriever.RetrieveByCodes<T>(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? codes = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
-Hl7.Cql.Operators.CompositeDataRetriever.RetrieveByValueSet<T>(Hl7.Cql.Primitives.CqlValueSet? valueSet = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
-Hl7.Cql.Operators.CompositeDataRetriever.Retrievers.get -> Hl7.Cql.Operators.IDataRetriever![]!
+Hl7.Cql.Operators.CompositeDataSource
+Hl7.Cql.Operators.CompositeDataSource.CompositeDataSource(params Hl7.Cql.Operators.IDataSource![]! sources) -> void
+Hl7.Cql.Operators.CompositeDataSource.DataChanged -> System.EventHandler?
+Hl7.Cql.Operators.CompositeDataSource.DataSources.get -> Hl7.Cql.Operators.IDataSource![]!
+Hl7.Cql.Operators.CompositeDataSource.RetrieveByCodes<T>(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? codes = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
+Hl7.Cql.Operators.CompositeDataSource.RetrieveByValueSet<T>(Hl7.Cql.Primitives.CqlValueSet? valueSet = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
 Hl7.Cql.Operators.ICqlOperators
 Hl7.Cql.Operators.ICqlOperators.Abs(decimal? argument) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Abs(Hl7.Cql.Primitives.CqlQuantity? argument) -> Hl7.Cql.Primitives.CqlQuantity?
@@ -502,9 +503,10 @@ Hl7.Cql.Operators.ICqlOperators.Width(Hl7.Cql.Primitives.CqlInterval<int?>? this
 Hl7.Cql.Operators.ICqlOperators.Width(Hl7.Cql.Primitives.CqlInterval<long?>? this) -> long?
 Hl7.Cql.Operators.ICqlOperators.Xor(bool? left, bool? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Xor(System.Lazy<bool?>! left, System.Lazy<bool?>! right) -> bool?
-Hl7.Cql.Operators.IDataRetriever
-Hl7.Cql.Operators.IDataRetriever.RetrieveByCodes<T>(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? codes = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
-Hl7.Cql.Operators.IDataRetriever.RetrieveByValueSet<T>(Hl7.Cql.Primitives.CqlValueSet? valueSet = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
+Hl7.Cql.Operators.IDataSource
+Hl7.Cql.Operators.IDataSource.DataChanged -> System.EventHandler?
+Hl7.Cql.Operators.IDataSource.RetrieveByCodes<T>(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? codes = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
+Hl7.Cql.Operators.IDataSource.RetrieveByValueSet<T>(Hl7.Cql.Primitives.CqlValueSet? valueSet = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
 Hl7.Cql.Operators.MessageEventArgs
 Hl7.Cql.Operators.MessageEventArgs.Code.get -> string?
 Hl7.Cql.Operators.MessageEventArgs.Message.get -> string?

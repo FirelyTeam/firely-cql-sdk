@@ -24,14 +24,14 @@ namespace CoreTests
         [TestMethod]
         public void Age()
         {
-            var dataRetriever = new UnitTestDataRetriever(new[] {
+            var dataSource = new UnitTestDataSource(new[] {
                 new UnitTestPatient {
                     birthDate = new DateIso8601(1983, 4, 4)
                 }
             });
 
             var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
-                dataRetriever: dataRetriever,
+                dataSource: dataSource,
                 now: new DateTimeIso8601(2023, 3, 28, null, null, null, null, null, null)));
             var age = ctx.Operators.Age("a");
             Assert.AreEqual(age, 39);
@@ -40,13 +40,13 @@ namespace CoreTests
         [TestMethod]
         public void AgeAt()
         {
-            var dataRetriever = new UnitTestDataRetriever(new[] {
+            var dataSource = new UnitTestDataSource(new[] {
                 new UnitTestPatient {
                     birthDate = new DateIso8601(1983, 4, 4)
                 }
             });
             var ctx = new CqlContext(CqlOperators.Create(new UnitTestTypeResolver(),
-                dataRetriever: dataRetriever,
+                dataSource: dataSource,
                 now: new DateTimeIso8601(2023, 3, 28, null, null, null, null, null, null)));
             var age = ctx.Operators.AgeAt(new CqlDate(2013, 3, 28), "a");
             Assert.AreEqual(age, 29);
@@ -57,14 +57,18 @@ namespace CoreTests
             public DateIso8601 birthDate { get; set; }
         }
 
-        private class UnitTestDataRetriever : IDataRetriever
+        private class UnitTestDataSource : IDataSource
         {
-            public UnitTestDataRetriever(IEnumerable<object> data)
+            public UnitTestDataSource(IEnumerable<object> data)
             {
                 Data = data?.ToList() ?? new List<object>();
             }
 
             public IList<object> Data { get; }
+
+#pragma warning disable CS0067 // The event 'ModelTest.UnitTestDataSource.DataChanged' is never used
+            public event EventHandler DataChanged;
+#pragma warning restore CS0067 // The event 'ModelTest.UnitTestDataSource.DataChanged' is never used
 
             public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode> codes = null, PropertyInfo _ = null) where T : class =>
                 Data.OfType<T>();

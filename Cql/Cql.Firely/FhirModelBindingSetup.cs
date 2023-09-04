@@ -28,7 +28,7 @@ namespace Hl7.Cql.Fhir
         /// <see cref="FhirModelBindingOptions"/>.
         /// </summary>
         public FhirModelBindingSetup(
-            IDataRetriever? retriever,
+            IDataSource? dataSource,
             IValueSetDictionary? valuesets,
             DateTimeOffset? now,
             FhirModelBindingOptions? options)
@@ -39,7 +39,7 @@ namespace Hl7.Cql.Fhir
             Operators = CqlOperators.Create(
                     TypeResolver,
                     FhirTypeConverter.Default,
-                    retriever,
+                    dataSource,
                     Comparers,
                     valuesets,
                     UnitConverter,
@@ -61,9 +61,9 @@ namespace Hl7.Cql.Fhir
         /// <see cref="FhirModelBindingOptions"/>.
         /// </summary>
         public FhirModelBindingSetup(
-            IDataRetriever? retriever,
+            IDataSource? dataSource,
             IValueSetDictionary? valuesets,
-            DateTimeOffset? now) : this(retriever, valuesets, now, FhirModelBindingOptions.Default)
+            DateTimeOffset? now) : this(dataSource, valuesets, now, FhirModelBindingOptions.Default)
         {
             // Nothing
         }

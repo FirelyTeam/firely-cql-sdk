@@ -78,7 +78,7 @@ namespace Hl7.Cql.Fhir
 
         public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
-            // This is not used by the Firely BundleRetriever, but we'll implement it nonetheless.
+            // This is not used by the data source, but we'll implement it nonetheless.
             var specifiedType = ResolveType(typeSpecifier);
             if (specifiedType == null) return null;
 
