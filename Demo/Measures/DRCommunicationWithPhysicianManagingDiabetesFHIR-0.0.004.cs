@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 {
@@ -370,7 +370,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -408,25 +408,25 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     private IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period_Value()
     {
         var a_ = this.Office_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Ophthalmological_Services();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
 			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Outpatient_Consultation();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
 			typeof(Encounter).GetProperty("Type"));
         var h_ = this.Care_Services_in_Long_Term_Residential_Facility();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+        var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
 			typeof(Encounter).GetProperty("Type"));
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Nursing_Facility_Visit();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
+        var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
 			typeof(Encounter).GetProperty("Type"));
         var n_ = context?.Operators.ListUnion<Encounter>(k_, 
 			m_);
@@ -439,9 +439,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				q_, 
 				null);
             var t_ = (QualifyingEncounter?.StatusElement as object);
-            var s_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(t_) as object);
+            var s_ = (context?.Operators.Convert<string>(t_) as object);
             var u_ = ("finished" as object);
             var v_ = context?.Operators.Equal(s_, 
 				u_);
@@ -460,7 +458,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Encounter,IEnumerable<Encounter>> p_ = (ValidQualifyingEncounter) => 
         {
             var b_ = this.Diabetic_Retinopathy();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
+            var c_ = context?.Operators.RetrieveByValueSet<Condition>(b_, 
 				typeof(Condition).GetProperty("Code"));
             Func<Condition,bool?> m_ = (DiabeticRetinopathy) => 
             {
@@ -498,10 +496,8 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Extension,bool?> f_ = (E) => 
         {
             var d_ = (E?.Url as object);
-            var c_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+            var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", 
 				url) as object);
             return context?.Operators.Equal(b_, 
@@ -525,7 +521,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy_Value()
     {
         var a_ = this.Level_of_Severity_of_Retinopathy_Findings();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Communication>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Communication>(a_, 
 			typeof(Communication).GetProperty("ReasonCode"));
         Func<Communication,IEnumerable<Communication>> k_ = (LevelOfSeverityNotCommunicated) => 
         {
@@ -552,9 +548,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> ad_ = (LevelOfSeverityNotCommunicated) => 
         {
             var n_ = (LevelOfSeverityNotCommunicated?.StatusElement as object);
-            var m_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(n_) as object);
+            var m_ = (context?.Operators.Convert<string>(n_) as object);
             var o_ = ("not-done" as object);
             var p_ = context?.Operators.Equal(m_, 
 				o_);
@@ -587,7 +581,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     {
         var a_ = this.Macular_edema_absent__situation_();
         var b_ = context?.Operators.ToList<CqlCode>(a_);
-        var c_ = context?.DataRetriever.RetrieveByCodes<Communication>(b_, 
+        var c_ = context?.Operators.RetrieveByCodes<Communication>(b_, 
 			typeof(Communication).GetProperty("ReasonCode"));
         Func<Communication,IEnumerable<Communication>> l_ = (MacularEdemaAbsentNotCommunicated) => 
         {
@@ -614,9 +608,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> ae_ = (MacularEdemaAbsentNotCommunicated) => 
         {
             var o_ = (MacularEdemaAbsentNotCommunicated?.StatusElement as object);
-            var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
+            var n_ = (context?.Operators.Convert<string>(o_) as object);
             var p_ = ("not-done" as object);
             var q_ = context?.Operators.Equal(n_, 
 				p_);
@@ -648,7 +640,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     private IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema_Value()
     {
         var a_ = this.Macular_Edema_Findings_Present();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Communication>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Communication>(a_, 
 			typeof(Communication).GetProperty("ReasonCode"));
         Func<Communication,IEnumerable<Communication>> k_ = (MacularEdemaPresentNotCommunicated) => 
         {
@@ -675,9 +667,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> ad_ = (MacularEdemaPresentNotCommunicated) => 
         {
             var n_ = (MacularEdemaPresentNotCommunicated?.StatusElement as object);
-            var m_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(n_) as object);
+            var m_ = (context?.Operators.Convert<string>(n_) as object);
             var o_ = ("not-done" as object);
             var p_ = context?.Operators.Equal(m_, 
 				o_);
@@ -745,7 +735,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     private IEnumerable<Observation> Macular_Exam_Performed_Value()
     {
         var a_ = this.Macular_Exam();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,IEnumerable<Observation>> k_ = (MacularExam) => 
         {
@@ -771,9 +761,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Observation,bool?> v_ = (MacularExam) => 
         {
             var m_ = (MacularExam?.StatusElement as object);
-            var n_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(m_);
+            var n_ = context?.Operators.Convert<string>(m_);
             var p_ = "final";
             var q_ = "amended";
             var r_ = "corrected";
@@ -810,7 +798,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     private IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated_Value()
     {
         var a_ = this.Level_of_Severity_of_Retinopathy_Findings();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Communication>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Communication>(a_, 
 			typeof(Communication).GetProperty("ReasonCode"));
         Func<Communication,IEnumerable<Communication>> l_ = (LevelOfSeverityCommunicated) => 
         {
@@ -837,9 +825,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> q_ = (LevelOfSeverityCommunicated) => 
         {
             var o_ = (LevelOfSeverityCommunicated?.StatusElement as object);
-            var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
+            var n_ = (context?.Operators.Convert<string>(o_) as object);
             var p_ = ("completed" as object);
             return context?.Operators.Equal(n_, 
 				p_);
@@ -854,7 +840,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     {
         var a_ = this.Macular_edema_absent__situation_();
         var b_ = context?.Operators.ToList<CqlCode>(a_);
-        var c_ = context?.DataRetriever.RetrieveByCodes<Communication>(b_, 
+        var c_ = context?.Operators.RetrieveByCodes<Communication>(b_, 
 			typeof(Communication).GetProperty("ReasonCode"));
         Func<Communication,IEnumerable<Communication>> m_ = (MacularEdemaAbsentCommunicated) => 
         {
@@ -881,9 +867,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> r_ = (MacularEdemaAbsentCommunicated) => 
         {
             var p_ = (MacularEdemaAbsentCommunicated?.StatusElement as object);
-            var o_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(p_) as object);
+            var o_ = (context?.Operators.Convert<string>(p_) as object);
             var q_ = ("completed" as object);
             return context?.Operators.Equal(o_, 
 				q_);
@@ -897,7 +881,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
     private IEnumerable<Communication> Macular_Edema_Presence_Communicated_Value()
     {
         var a_ = this.Macular_Edema_Findings_Present();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Communication>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Communication>(a_, 
 			typeof(Communication).GetProperty("ReasonCode"));
         Func<Communication,IEnumerable<Communication>> l_ = (MacularEdemaPresentCommunicated) => 
         {
@@ -924,9 +908,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> q_ = (MacularEdemaPresentCommunicated) => 
         {
             var o_ = (MacularEdemaPresentCommunicated?.StatusElement as object);
-            var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
+            var n_ = (context?.Operators.Convert<string>(o_) as object);
             var p_ = ("completed" as object);
             return context?.Operators.Equal(n_, 
 				p_);

@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public class MATGlobalCommonFunctionsFHIR4_6_1_000
 {
@@ -666,7 +666,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -686,14 +686,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     private IEnumerable<Encounter> Inpatient_Encounter_Value()
     {
         var a_ = this.Encounter_Inpatient();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> r_ = (EncounterInpatient) => 
         {
             var d_ = (EncounterInpatient?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -723,14 +721,12 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     public Encounter ED_Visit(Encounter TheEncounter)
     {
         var a_ = this.Emergency_Department_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> y_ = (EDVisit) => 
         {
             var d_ = (EDVisit?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -850,10 +846,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		};
         Func<Encounter,CqlInterval<CqlDateTime>> m_ = (Visit) => 
         {
-            var d_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Emergency_Department_Visit(), 
+            var d_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Emergency_Department_Visit(), 
 								typeof(Encounter).GetProperty("Type")), 
 							(LastED) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastED?.Period)), 
-										context?.Operators.Interval(context?.Operators.Subtract((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+										context?.Operators.Interval(context?.Operators.Subtract((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
 																			typeof(Encounter).GetProperty("Type")), 
 																		(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																					context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
@@ -868,7 +864,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 																	System.ComponentModel.ListSortDirection.Ascending)))?.Period)) ?? context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period))), 
 												context?.Operators.Quantity(1m, 
 													"hour")), 
-(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
 																		typeof(Encounter).GetProperty("Type")), 
 																	(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																				context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
@@ -884,7 +880,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 											true, 
 											true), 
 										null), 
-									context?.Operators.Not(((bool?)((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+									context?.Operators.Not(((bool?)((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
 																	typeof(Encounter).GetProperty("Type")), 
 																(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																			context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
@@ -900,7 +896,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 						(@this) => context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(@this?.Period)), 
 						System.ComponentModel.ListSortDirection.Ascending)))?.Period;
             var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
-            var f_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+            var f_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
 								typeof(Encounter).GetProperty("Type")), 
 							(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 										context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
@@ -1247,18 +1243,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         var a_ = (Encounter?.Diagnosis as IEnumerable<Encounter.DiagnosisComponent>);
         Func<Encounter.DiagnosisComponent,Condition> j_ = (D) => 
         {
-            var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, 
+            var b_ = context?.Operators.RetrieveByValueSet<Condition>(null, 
 				null);
             Func<Condition,bool?> h_ = (C) => 
             {
                 var d_ = (C?.IdElement as object);
-                var c_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+                var c_ = (context?.Operators.Convert<string>(d_) as object);
                 var f_ = (D?.Condition?.ReferenceElement as object);
-                var g_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(f_);
+                var g_ = context?.Operators.Convert<string>(f_);
                 var e_ = (this.GetId(g_) as object);
                 return context?.Operators.Equal(c_, 
 					e_);
@@ -1274,18 +1266,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("GetCondition")]
     public Condition GetCondition(ResourceReference reference)
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Condition>(null, 
 			null);
         Func<Condition,bool?> g_ = (C) => 
         {
             var c_ = (C?.IdElement as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (reference?.ReferenceElement as object);
-            var f_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_);
+            var f_ = context?.Operators.Convert<string>(e_);
             var d_ = (this.GetId(f_) as object);
             return context?.Operators.Equal(b_, 
 				d_);
@@ -1302,10 +1290,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Extension,bool?> f_ = (E) => 
         {
             var d_ = (E?.Url as object);
-            var c_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+            var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", 
 				url) as object);
             return context?.Operators.Equal(b_, 
@@ -1325,10 +1311,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Extension,bool?> f_ = (E) => 
         {
             var d_ = (E?.Url as object);
-            var c_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+            var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (url as object);
             return context?.Operators.Equal(b_, 
 				e_);
@@ -1371,7 +1355,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Encounter.DiagnosisComponent,bool?> h_ = (D) => 
         {
             var e_ = (D?.RankElement as object);
-            var f_ = context?.Operators?.TypeConverter.Convert<Integer>(e_);
+            var f_ = context?.Operators.Convert<Integer>(e_);
             var d_ = (FHIRHelpers_4_0_001.ToInteger(f_) as object);
             var g_ = (((int?)1) as object);
             return context?.Operators.Equal(d_, 
@@ -1386,18 +1370,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		};
         Func<Encounter.DiagnosisComponent,Condition> r_ = (PD) => 
         {
-            var j_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, 
+            var j_ = context?.Operators.RetrieveByValueSet<Condition>(null, 
 				null);
             Func<Condition,bool?> p_ = (C) => 
             {
                 var l_ = (C?.IdElement as object);
-                var k_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
+                var k_ = (context?.Operators.Convert<string>(l_) as object);
                 var n_ = (PD?.Condition?.ReferenceElement as object);
-                var o_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(n_);
+                var o_ = context?.Operators.Convert<string>(n_);
                 var m_ = (this.GetId(o_) as object);
                 return context?.Operators.Equal(k_, 
 					m_);
@@ -1414,18 +1394,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("GetLocation")]
     public Location GetLocation(ResourceReference reference)
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Location>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Location>(null, 
 			null);
         Func<Location,bool?> g_ = (L) => 
         {
             var c_ = (L?.IdElement as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (reference?.ReferenceElement as object);
-            var f_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_);
+            var f_ = context?.Operators.Convert<string>(e_);
             var d_ = (this.GetId(f_) as object);
             return context?.Operators.Equal(b_, 
 				d_);
@@ -1442,10 +1418,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Extension,bool?> f_ = (E) => 
         {
             var d_ = (E?.Url as object);
-            var c_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+            var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", 
 				url) as object);
             return context?.Operators.Equal(b_, 
@@ -1473,10 +1447,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Extension,bool?> f_ = (E) => 
         {
             var d_ = (E?.Url as object);
-            var c_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+            var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", 
 				id) as object);
             return context?.Operators.Equal(b_, 
@@ -1505,14 +1477,10 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
         else 
             {
-                return (context?.Operators.SingleOrNull<Medication>(context?.Operators.WhereOrNull<Medication>(context?.DataRetriever.RetrieveByValueSet<Medication>(null, 
+                return (context?.Operators.SingleOrNull<Medication>(context?.Operators.WhereOrNull<Medication>(context?.Operators.RetrieveByValueSet<Medication>(null, 
 								null), 
-							(M) => context?.Operators.Equal(((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((M?.IdElement as object)) as object), 
-(this.GetId((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(((((request?.Medication as object) as ResourceReference))?.ReferenceElement as object))) as object)))))?.Code;
+							(M) => context?.Operators.Equal((context?.Operators.Convert<string>((M?.IdElement as object)) as object), 
+(this.GetId(context?.Operators.Convert<string>(((((request?.Medication as object) as ResourceReference))?.ReferenceElement as object))) as object)))))?.Code;
             }
     }
 
