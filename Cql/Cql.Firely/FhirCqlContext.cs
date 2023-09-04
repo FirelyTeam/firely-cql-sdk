@@ -23,11 +23,12 @@ namespace Hl7.Cql.Fhir
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
+            DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null) :
             base(
                 new FhirModelBindingSetup(retriever, valueSets, now, options).Operators,
                 parameters,
-                delegates: null,
+                delegates,
                 extensionState: null)
         {
             // Nothing
@@ -60,7 +61,7 @@ namespace Hl7.Cql.Fhir
             DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null)
         {
-            return new(retriever, parameters, valueSets, now);
+            return new(retriever, parameters, valueSets, now, delegates, options);
         }
     }
 }

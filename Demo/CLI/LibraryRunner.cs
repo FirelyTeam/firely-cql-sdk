@@ -19,7 +19,7 @@ namespace CLI
         internal static void Run(string library, Bundle bundle, TextWriter output)
         {
             var type = ResolveLibraryType(library) ?? throw new ArgumentException($"Uknown library: {library}");
-            var setup = FhirCqlEngineSetup.ForBundle(bundle, MY2023, ValueSets.Value,
+            var setup = FhirCqlContext.ForBundle(bundle, MY2023, ValueSets.Value,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));
             var instance = Activator.CreateInstance(type, setup);
             var values = new Dictionary<string, object>();
