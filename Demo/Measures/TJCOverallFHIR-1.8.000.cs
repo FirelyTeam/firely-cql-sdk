@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public class TJCOverallFHIR_1_8_000
 {
@@ -270,7 +271,7 @@ public class TJCOverallFHIR_1_8_000
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -280,7 +281,7 @@ public class TJCOverallFHIR_1_8_000
     private IEnumerable<Encounter> Non_Elective_Inpatient_Encounter_Value()
     {
         var a_ = this.Non_Elective_Inpatient();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> m_ = (NonElectiveEncounter) => 
         {
@@ -331,7 +332,7 @@ public class TJCOverallFHIR_1_8_000
         var a_ = this.All_Stroke_Encounter();
         Func<Encounter,IEnumerable<Encounter>> m_ = (AllStrokeEncounter) => 
         {
-            var b_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+            var b_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 				null);
             Func<Patient,bool?> j_ = (BirthDate) => 
             {
@@ -416,28 +417,28 @@ public class TJCOverallFHIR_1_8_000
     private IEnumerable<object> Intervention_Comfort_Measures_Value()
     {
         var b_ = this.Comfort_Measures();
-        var c_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(b_, 
+        var c_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(b_, 
 			typeof(ServiceRequest).GetProperty("Code"));
         Func<ServiceRequest,bool?> g_ = (P) => 
         {
             var e_ = (P?.IntentElement as object);
-            var d_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var d_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_) as object);
+		null))?.Operators).Convert<string>(e_) as object);
             var f_ = ("order" as object);
             return context?.Operators.Equal(d_, 
 				f_);
         };
         var a_ = (context?.Operators.WhereOrNull<ServiceRequest>(c_, 
 			g_) as IEnumerable<object>);
-        var j_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(b_, 
+        var j_ = context?.Operators.RetrieveByValueSet<Procedure>(b_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> p_ = (InterventionPerformed) => 
         {
             var k_ = (InterventionPerformed?.StatusElement as object);
-            var l_ = (context.Deeper(new CallStackEntry("ToString", 
+            var l_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(k_);
+		null))?.Operators).Convert<string>(k_);
             var n_ = "completed";
             var o_ = "in-progress";
             var m_ = (new string[]

@@ -140,6 +140,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var writer = new StreamWriter(tupleTypeStream);
                         WriteUsings(writer);
                         var indentLevel = 0;
+                        writer.WriteLine();
                         writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
                         writer.WriteLine(indentLevel, "{");
                         indentLevel += 1;
@@ -178,11 +179,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                     using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                     int indentLevel = 0;
                     WriteUsings(writer);
+                    writer.WriteLine();
+
                     if (!string.IsNullOrWhiteSpace(Namespace))
                     {
                         writer.WriteLine(indentLevel, $"namespace {Namespace}");
                         writer.WriteLine(indentLevel, "{");
-                        writer.WriteLine();
                         indentLevel += 1;
                     }
                     // Namespace
@@ -481,7 +483,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private int WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
-            writer.WriteLine();
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{Tool}\", \"{Version}\")]");
             writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {PrettyTypeName(tupleType.BaseType!)}");
             writer.WriteLine(indentLevel, "{");

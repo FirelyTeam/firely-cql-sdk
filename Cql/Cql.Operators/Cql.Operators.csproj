@@ -23,6 +23,7 @@
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />

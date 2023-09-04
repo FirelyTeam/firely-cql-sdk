@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("BreastCancerScreeningsFHIR", "0.0.009")]
 public class BreastCancerScreeningsFHIR_0_0_009
 {
@@ -267,7 +268,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -305,19 +306,19 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private IEnumerable<Encounter> Telehealth_Services_Value()
     {
         var a_ = this.Online_Assessments();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Telephone_Visits();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
 			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         Func<Encounter,bool?> n_ = (TelehealthEncounter) => 
         {
             var g_ = (TelehealthEncounter?.StatusElement as object);
-            var f_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var f_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(g_) as object);
+		null))?.Operators).Convert<string>(g_) as object);
             var h_ = ("finished" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -339,7 +340,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private int? Age_at_start_of_Measurement_Period_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -353,7 +354,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private bool? Initial_Population_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -368,9 +369,9 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			g_, 
 			null);
         var j_ = (this.Patient()?.GenderElement as object);
-        var i_ = ((context.Deeper(new CallStackEntry("ToString", 
+        var i_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(j_) as object);
+		null))?.Operators).Convert<string>(j_) as object);
         var k_ = ("female" as object);
         var l_ = context?.Operators.Equal(i_, 
 			k_);
@@ -397,10 +398,10 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Value()
     {
         var a_ = this.Status_Post_Right_Mastectomy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         var c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> i_ = (UnilateralMastectomyDiagnosis) => 
         {
@@ -438,14 +439,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private IEnumerable<Procedure> Right_Mastectomy_Procedure_Value()
     {
         var a_ = this.Unilateral_Mastectomy_Right();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> m_ = (UnilateralMastectomyRightPerformed) => 
         {
             var d_ = (UnilateralMastectomyRightPerformed?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -469,10 +470,10 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Value()
     {
         var a_ = this.Status_Post_Left_Mastectomy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         var c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> i_ = (UnilateralMastectomyDiagnosis) => 
         {
@@ -510,14 +511,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private IEnumerable<Procedure> Left_Mastectomy_Procedure_Value()
     {
         var a_ = this.Unilateral_Mastectomy_Left();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> m_ = (UnilateralMastectomyLeftPerformed) => 
         {
             var d_ = (UnilateralMastectomyLeftPerformed?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -541,7 +542,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Value()
     {
         var a_ = this.History_of_bilateral_mastectomy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> g_ = (BilateralMastectomyHistory) => 
         {
@@ -562,14 +563,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Value()
     {
         var a_ = this.Bilateral_Mastectomy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> m_ = (BilateralMastectomyPerformed) => 
         {
             var d_ = (BilateralMastectomyPerformed?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -621,7 +622,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
         var u_ = context?.Operators.Or(s_, 
 			t_);
         var w_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var x_ = context?.Operators?.TypeConverter.Convert<CqlDate>(w_);
+        var x_ = context?.Operators.Convert<CqlDate>(w_);
         var y_ = this.Measurement_Period();
         var z_ = context?.Operators.Start(y_);
         var aa_ = context?.Operators.DateFrom(z_);
@@ -646,14 +647,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private bool? Observation_with_status_Value()
     {
         var a_ = this.Mammography();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> z_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -700,14 +701,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private bool? Diagnostic_Report_with_status_Value()
     {
         var a_ = this.Mammography();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<DiagnosticReport>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<DiagnosticReport>(a_, 
 			typeof(DiagnosticReport).GetProperty("Code"));
         Func<DiagnosticReport,bool?> z_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -781,14 +782,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private bool? Observation_without_appropriate_status_Value()
     {
         var a_ = this.Mammography();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> aa_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -836,14 +837,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
     private bool? Diagnostic_Report_without_appropriate_status_Value()
     {
         var a_ = this.Mammography();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<DiagnosticReport>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<DiagnosticReport>(a_, 
 			typeof(DiagnosticReport).GetProperty("Code"));
         Func<DiagnosticReport,bool?> aa_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";

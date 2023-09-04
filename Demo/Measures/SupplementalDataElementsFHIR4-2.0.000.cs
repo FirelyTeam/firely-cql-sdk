@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public class SupplementalDataElementsFHIR4_2_0_000
 {
@@ -94,7 +95,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -110,10 +111,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
         Func<Extension,bool?> f_ = (Extension) => 
         {
             var d_ = (Extension?.Url as object);
-            var c_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
+            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+		null))?.Operators).Convert<string>(c_) as object);
             var e_ = ("http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity" as object);
             return context?.Operators.Equal(b_, 
 				e_);
@@ -127,10 +128,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
         Func<Extension,bool?> u_ = (E) => 
         {
             var m_ = (E?.Url as object);
-            var l_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(m_) as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var l_ = (context?.Operators.Convert<FhirUri>(m_) as object);
+            var k_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
+		null))?.Operators).Convert<string>(l_) as object);
             var n_ = ("ombCategory" as object);
             var o_ = context?.Operators.Equal(k_, 
 				n_);
@@ -152,7 +153,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value()
     {
         var a_ = this.Payer();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Coverage>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Coverage>(a_, 
 			typeof(Coverage).GetProperty("Type"));
         Func<Coverage,Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> e_ = (Payer) => 
         {
@@ -179,10 +180,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
         Func<Extension,bool?> f_ = (Extension) => 
         {
             var d_ = (Extension?.Url as object);
-            var c_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
+            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+		null))?.Operators).Convert<string>(c_) as object);
             var e_ = ("http://hl7.org/fhir/us/core/StructureDefinition/us-core-race" as object);
             return context?.Operators.Equal(b_, 
 				e_);
@@ -196,10 +197,10 @@ public class SupplementalDataElementsFHIR4_2_0_000
         Func<Extension,bool?> u_ = (E) => 
         {
             var m_ = (E?.Url as object);
-            var l_ = (context?.Operators?.TypeConverter.Convert<FhirUri>(m_) as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var l_ = (context?.Operators.Convert<FhirUri>(m_) as object);
+            var k_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
+		null))?.Operators).Convert<string>(l_) as object);
             var n_ = ("ombCategory" as object);
             var o_ = context?.Operators.Equal(k_, 
 				n_);
@@ -220,18 +221,18 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
     private CqlCode SDE_Sex_Value()
     {
-        if ((context?.Operators.Equal(((context.Deeper(new CallStackEntry("ToString", 
+        if ((context?.Operators.Equal(((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((this.Patient()?.GenderElement as object)) as object), 
+		null))?.Operators).Convert<string>((this.Patient()?.GenderElement as object)) as object), 
 ("male" as object)) ?? false))
             return new CqlCode("M", 
 				"http://hl7.org/fhir/v3/AdministrativeGender", 
 				null, 
 				"Male");
 
-        else if ((context?.Operators.Equal(((context.Deeper(new CallStackEntry("ToString", 
+        else if ((context?.Operators.Equal(((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((this.Patient()?.GenderElement as object)) as object), 
+		null))?.Operators).Convert<string>((this.Patient()?.GenderElement as object)) as object), 
 ("female" as object)) ?? false))
             return new CqlCode("F", 
 				"http://hl7.org/fhir/v3/AdministrativeGender", 

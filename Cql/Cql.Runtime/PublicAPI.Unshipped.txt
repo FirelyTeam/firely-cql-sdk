@@ -1,5 +1,6 @@
 ﻿#nullable enable
 Hl7.Cql.Runtime.CqlContext
+Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null, System.Collections.Concurrent.ConcurrentDictionary<string!, object!>? extensionState = null) -> void
 Hl7.Cql.Runtime.CqlContext.Definitions.get -> Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>!
 Hl7.Cql.Runtime.CqlContext.FunctionCalled -> System.EventHandler<Hl7.Cql.Runtime.FunctionCallEvent!>?
 Hl7.Cql.Runtime.CqlContext.OnFunctionCalled(Hl7.Cql.Runtime.FunctionCallEvent! eventData) -> Hl7.Cql.Runtime.CqlContext!
@@ -7,9 +8,6 @@ Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
 Hl7.Cql.Runtime.CqlContext.ResolveExtension(string! key, object? defaultValue) -> object?
 Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryNameAndVersion, string! parameterName, object? defaultValue) -> object?
-Hl7.Cql.Runtime.CqlEngineSetup
-Hl7.Cql.Runtime.CqlEngineSetup.NewContext() -> Hl7.Cql.Runtime.CqlContext!
-Hl7.Cql.Runtime.CqlEngineSetup.NewOperators() -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.DefinitionDictionary<T>
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, System.Type![]! signature, T! expression) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, T! expression) -> void

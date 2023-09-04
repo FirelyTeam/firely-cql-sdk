@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
 public class DevDays_2023_0_0
 {
@@ -105,7 +106,7 @@ public class DevDays_2023_0_0
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -114,7 +115,7 @@ public class DevDays_2023_0_0
 
     private IEnumerable<Condition> Jet_engine_conditions_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Condition>(null, 
 			null);
         Func<Condition,bool?> l_ = (c) => 
         {
@@ -146,7 +147,7 @@ public class DevDays_2023_0_0
 
     private IEnumerable<Condition> Subsequent_encounters_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Condition>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Condition>(null, 
 			null);
         Func<Condition,bool?> l_ = (c) => 
         {

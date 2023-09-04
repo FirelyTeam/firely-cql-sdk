@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 {
@@ -217,7 +218,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -255,38 +256,38 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private IEnumerable<Encounter> Qualifying_Encounters_Value()
     {
         var a_ = this.Office_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Preventive_Care___Established_Office_Visit__0_to_17();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
 			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Preventive_Care__Initial_Office_Visit__0_to_17();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
 			typeof(Encounter).GetProperty("Type"));
         var h_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+        var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
 			typeof(Encounter).GetProperty("Type"));
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
+        var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
 			typeof(Encounter).GetProperty("Type"));
         var n_ = this.Clinical_Oral_Evaluation();
-        var o_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(n_, 
+        var o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, 
 			typeof(Encounter).GetProperty("Type"));
         var p_ = context?.Operators.ListUnion<Encounter>(m_, 
 			o_);
         var q_ = context?.Operators.ListUnion<Encounter>(k_, 
 			p_);
         var r_ = this.Telephone_Visits();
-        var s_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(r_, 
+        var s_ = context?.Operators.RetrieveByValueSet<Encounter>(r_, 
 			typeof(Encounter).GetProperty("Type"));
         var t_ = this.Online_Assessments();
-        var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
+        var u_ = context?.Operators.RetrieveByValueSet<Encounter>(t_, 
 			typeof(Encounter).GetProperty("Type"));
         var v_ = context?.Operators.ListUnion<Encounter>(s_, 
 			u_);
@@ -301,9 +302,9 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 				z_, 
 				null);
             var ac_ = (ValidEncounter?.StatusElement as object);
-            var ab_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var ab_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ac_) as object);
+		null))?.Operators).Convert<string>(ac_) as object);
             var ad_ = ("finished" as object);
             var ae_ = context?.Operators.Equal(ab_, 
 				ad_);
@@ -319,7 +320,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Initial_Population_Value()
     {
         var b_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var c_ = context?.Operators?.TypeConverter.Convert<CqlDate>(b_);
+        var c_ = context?.Operators.Convert<CqlDate>(b_);
         var d_ = this.Measurement_Period();
         var e_ = context?.Operators.Start(d_);
         var f_ = context?.Operators.DateFrom(e_);
@@ -362,7 +363,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Stratification_1_Value()
     {
         var b_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var c_ = context?.Operators?.TypeConverter.Convert<CqlDate>(b_);
+        var c_ = context?.Operators.Convert<CqlDate>(b_);
         var d_ = this.Measurement_Period();
         var e_ = context?.Operators.Start(d_);
         var f_ = context?.Operators.DateFrom(e_);
@@ -387,7 +388,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Stratification_2_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -408,7 +409,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Stratification_3_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -429,7 +430,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
     private bool? Numerator_Value()
     {
         var a_ = this.Fluoride_Varnish_Application_for_Children();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> k_ = (FluorideApplication) => 
         {
@@ -440,9 +441,9 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 				e_, 
 				null);
             var h_ = (FluorideApplication?.StatusElement as object);
-            var g_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var g_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(h_) as object);
+		null))?.Operators).Convert<string>(h_) as object);
             var i_ = ("completed" as object);
             var j_ = context?.Operators.Equal(g_, 
 				i_);

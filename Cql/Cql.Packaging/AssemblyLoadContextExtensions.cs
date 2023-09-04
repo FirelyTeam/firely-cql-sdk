@@ -20,15 +20,11 @@ namespace Hl7.Cql.Packaging
         /// <summary>
         /// Run the definitions in a CQL library that is loaded into an AssemblyLoadContext.
         /// </summary>
-        /// <param name="assemblyContext"></param>
-        /// <param name="library"></param>
-        /// <param name="version"></param>
-        /// <param name="setup"></param>
         /// <returns></returns>
         /// <exception cref="InvalidOperationException"></exception>
         /// <exception cref="ArgumentException"></exception>
         public static IDictionary<string, object?> Run(this AssemblyLoadContext assemblyContext,
-            string library, string version, CqlEngineSetup setup)
+            string library, string version, CqlContext ctx)
         {
             using (var scope = assemblyContext.EnterContextualReflection())
             {
@@ -42,8 +38,7 @@ namespace Hl7.Cql.Packaging
                             && typeLibAttribute.Identifier == library
                             && typeLibAttribute.Version == version)
                         {
-                            var newContext = setup.NewContext();
-                            var instance = Activator.CreateInstance(type, newContext)
+                            var instance = Activator.CreateInstance(type, ctx)
                                 ?? throw new InvalidOperationException($"Unable to create an instance of {type.FullName}");
                             return run(instance);
                         }

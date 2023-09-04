@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public class FHIR347_0_1_021
 {
@@ -561,7 +562,7 @@ public class FHIR347_0_1_021
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -571,25 +572,25 @@ public class FHIR347_0_1_021
     private IEnumerable<object> ASCVD_Diagnosis_or_Procedure_before_End_of_Measurement_Period_Value()
     {
         var b_ = this.Myocardial_Infarction();
-        var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
+        var c_ = context?.Operators.RetrieveByValueSet<Condition>(b_, 
 			typeof(Condition).GetProperty("Code"));
         var d_ = this.Cerebrovascular_Disease__Stroke__TIA();
-        var e_ = context?.DataRetriever.RetrieveByValueSet<Condition>(d_, 
+        var e_ = context?.Operators.RetrieveByValueSet<Condition>(d_, 
 			typeof(Condition).GetProperty("Code"));
         var f_ = context?.Operators.ListUnion<Condition>(c_, 
 			e_);
         var g_ = this.Atherosclerosis_and_Peripheral_Arterial_Disease();
-        var h_ = context?.DataRetriever.RetrieveByValueSet<Condition>(g_, 
+        var h_ = context?.Operators.RetrieveByValueSet<Condition>(g_, 
 			typeof(Condition).GetProperty("Code"));
         var i_ = this.Ischemic_Heart_Disease_or_Other_Related_Diagnoses();
-        var j_ = context?.DataRetriever.RetrieveByValueSet<Condition>(i_, 
+        var j_ = context?.Operators.RetrieveByValueSet<Condition>(i_, 
 			typeof(Condition).GetProperty("Code"));
         var k_ = context?.Operators.ListUnion<Condition>(h_, 
 			j_);
         var l_ = context?.Operators.ListUnion<Condition>(f_, 
 			k_);
         var m_ = this.Stable_and_Unstable_Angina();
-        var n_ = context?.DataRetriever.RetrieveByValueSet<Condition>(m_, 
+        var n_ = context?.Operators.RetrieveByValueSet<Condition>(m_, 
 			typeof(Condition).GetProperty("Code"));
         var o_ = context?.Operators.ListUnion<Condition>(l_, 
 			n_);
@@ -606,18 +607,18 @@ public class FHIR347_0_1_021
         var a_ = (context?.Operators.WhereOrNull<Condition>(o_, 
 			t_) as IEnumerable<object>);
         var v_ = this.PCI();
-        var w_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(v_, 
+        var w_ = context?.Operators.RetrieveByValueSet<Procedure>(v_, 
 			typeof(Procedure).GetProperty("Code"));
         var x_ = this.CABG_Surgeries();
-        var y_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(x_, 
+        var y_ = context?.Operators.RetrieveByValueSet<Procedure>(x_, 
 			typeof(Procedure).GetProperty("Code"));
         var z_ = context?.Operators.ListUnion<Procedure>(w_, 
 			y_);
         var aa_ = this.Carotid_Intervention();
-        var ab_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(aa_, 
+        var ab_ = context?.Operators.RetrieveByValueSet<Procedure>(aa_, 
 			typeof(Procedure).GetProperty("Code"));
         var ac_ = this.CABG__PCI_Procedure();
-        var ad_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(ac_, 
+        var ad_ = context?.Operators.RetrieveByValueSet<Procedure>(ac_, 
 			typeof(Procedure).GetProperty("Code"));
         var ae_ = context?.Operators.ListUnion<Procedure>(ab_, 
 			ad_);
@@ -634,9 +635,9 @@ public class FHIR347_0_1_021
 				aj_, 
 				null);
             var an_ = (ASCVDProcedure?.StatusElement as object);
-            var am_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var am_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(an_) as object);
+		null))?.Operators).Convert<string>(an_) as object);
             var ao_ = ("completed" as object);
             var ap_ = context?.Operators.Equal(am_, 
 				ao_);
@@ -654,38 +655,38 @@ public class FHIR347_0_1_021
     private IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Value()
     {
         var a_ = this.Annual_Wellness_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Office_Visit();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
 			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Outpatient_Consultation();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
 			typeof(Encounter).GetProperty("Type"));
         var h_ = this.Outpatient_Encounters_for_Preventive_Care();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+        var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
 			typeof(Encounter).GetProperty("Type"));
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
+        var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
 			typeof(Encounter).GetProperty("Type"));
         var n_ = this.Preventive_Care_Services___Other();
-        var o_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(n_, 
+        var o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, 
 			typeof(Encounter).GetProperty("Type"));
         var p_ = context?.Operators.ListUnion<Encounter>(m_, 
 			o_);
         var q_ = context?.Operators.ListUnion<Encounter>(k_, 
 			p_);
         var r_ = this.Preventive_Care_Services_Individual_Counseling();
-        var s_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(r_, 
+        var s_ = context?.Operators.RetrieveByValueSet<Encounter>(r_, 
 			typeof(Encounter).GetProperty("Type"));
         var t_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var u_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(t_, 
+        var u_ = context?.Operators.RetrieveByValueSet<Encounter>(t_, 
 			typeof(Encounter).GetProperty("Type"));
         var v_ = context?.Operators.ListUnion<Encounter>(s_, 
 			u_);
@@ -700,9 +701,9 @@ public class FHIR347_0_1_021
 				z_, 
 				null);
             var ac_ = (ValidEncounter?.StatusElement as object);
-            var ab_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var ab_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ac_) as object);
+		null))?.Operators).Convert<string>(ac_) as object);
             var ad_ = ("finished" as object);
             var ae_ = context?.Operators.Equal(ab_, 
 				ad_);
@@ -753,7 +754,7 @@ public class FHIR347_0_1_021
     private IEnumerable<Observation> LDL_Result_Greater_Than_or_Equal_To_190_Value()
     {
         var a_ = this.LDL_Cholesterol();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> v_ = (LDL) => 
         {
@@ -774,9 +775,9 @@ public class FHIR347_0_1_021
             var m_ = context?.Operators.And(f_, 
 				l_);
             var n_ = (LDL?.StatusElement as object);
-            var o_ = (context.Deeper(new CallStackEntry("ToString", 
+            var o_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(n_);
+		null))?.Operators).Convert<string>(n_);
             var q_ = "final";
             var r_ = "amended";
             var s_ = "corrected";
@@ -802,7 +803,7 @@ public class FHIR347_0_1_021
     private IEnumerable<Condition> Hypercholesterolemia_Diagnosis_Value()
     {
         var a_ = this.Hypercholesterolemia();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> g_ = (Hypercholesterolemia) => 
         {
@@ -860,7 +861,7 @@ public class FHIR347_0_1_021
     private bool? Has_Diabetes_Diagnosis_Value()
     {
         var a_ = this.Diabetes();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> e_ = (Diabetes) => 
         {
@@ -964,7 +965,7 @@ public class FHIR347_0_1_021
     private bool? Has_Allergy_to_Statin_Value()
     {
         var a_ = this.Statin_Allergen();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<AllergyIntolerance>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<AllergyIntolerance>(a_, 
 			typeof(AllergyIntolerance).GetProperty("Code"));
         Func<AllergyIntolerance,bool?> h_ = (StatinAllergy) => 
         {
@@ -987,10 +988,10 @@ public class FHIR347_0_1_021
     private bool? Has_Order_or_Receiving_Hospice_Care_or_Palliative_Care_Value()
     {
         var a_ = this.Hospice_Care_Ambulatory();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(a_, 
 			typeof(ServiceRequest).GetProperty("Code"));
         var c_ = this.Palliative_or_Hospice_Care();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(c_, 
 			typeof(ServiceRequest).GetProperty("Code"));
         var e_ = context?.Operators.ListUnion<ServiceRequest>(b_, 
 			d_);
@@ -1004,9 +1005,9 @@ public class FHIR347_0_1_021
 				i_, 
 				null);
             var k_ = (PalliativeOrHospiceCareOrder?.StatusElement as object);
-            var l_ = (context.Deeper(new CallStackEntry("ToString", 
+            var l_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(k_);
+		null))?.Operators).Convert<string>(k_);
             var n_ = "active";
             var o_ = "on-hold";
             var p_ = "completed";
@@ -1021,9 +1022,9 @@ public class FHIR347_0_1_021
             var r_ = context?.Operators.And(j_, 
 				q_);
             var t_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
-            var s_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var s_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(t_) as object);
+		null))?.Operators).Convert<string>(t_) as object);
             var u_ = ("order" as object);
             var v_ = context?.Operators.Equal(s_, 
 				u_);
@@ -1033,9 +1034,9 @@ public class FHIR347_0_1_021
         var x_ = context?.Operators.WhereOrNull<ServiceRequest>(e_, 
 			w_);
         var y_ = context?.Operators.ExistsInList<ServiceRequest>(x_);
-        var aa_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var aa_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
-        var ac_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(c_, 
+        var ac_ = context?.Operators.RetrieveByValueSet<Procedure>(c_, 
 			typeof(Procedure).GetProperty("Code"));
         var ad_ = context?.Operators.ListUnion<Procedure>(aa_, 
 			ac_);
@@ -1050,9 +1051,9 @@ public class FHIR347_0_1_021
 				ai_, 
 				null);
             var al_ = (PalliativeOrHospiceCarePerformed?.StatusElement as object);
-            var ak_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var ak_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(al_) as object);
+		null))?.Operators).Convert<string>(al_) as object);
             var am_ = ("completed" as object);
             var an_ = context?.Operators.Equal(ak_, 
 				am_);
@@ -1066,7 +1067,7 @@ public class FHIR347_0_1_021
 			aq_);
         var as_ = this.Encounter_for_palliative_care();
         var at_ = context?.Operators.ToList<CqlCode>(as_);
-        var au_ = context?.DataRetriever.RetrieveByCodes<Encounter>(at_, 
+        var au_ = context?.Operators.RetrieveByCodes<Encounter>(at_, 
 			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> bf_ = (PalliativeEncounter) => 
         {
@@ -1079,9 +1080,9 @@ public class FHIR347_0_1_021
 				az_, 
 				null);
             var bc_ = (PalliativeEncounter?.StatusElement as object);
-            var bb_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var bb_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(bc_) as object);
+		null))?.Operators).Convert<string>(bc_) as object);
             var bd_ = ("finished" as object);
             var be_ = context?.Operators.Equal(bb_, 
 				bd_);
@@ -1100,15 +1101,15 @@ public class FHIR347_0_1_021
     private bool? Has_Hepatitis_or_Liver_Disease_Diagnosis_Value()
     {
         var a_ = this.Hepatitis_A();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         var c_ = this.Hepatitis_B();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
 			typeof(Condition).GetProperty("Code"));
         var e_ = context?.Operators.ListUnion<Condition>(b_, 
 			d_);
         var f_ = this.Liver_Disease();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Condition>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<Condition>(f_, 
 			typeof(Condition).GetProperty("Code"));
         var h_ = context?.Operators.ListUnion<Condition>(e_, 
 			g_);
@@ -1130,7 +1131,7 @@ public class FHIR347_0_1_021
     private bool? Has_Statin_Associated_Muscle_Symptoms_Value()
     {
         var a_ = this.Statin_Associated_Muscle_Symptoms();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> g_ = (StatinMuscleSymptom) => 
         {
@@ -1152,7 +1153,7 @@ public class FHIR347_0_1_021
     private bool? Has_ESRD_Diagnosis_Value()
     {
         var a_ = this.End_Stage_Renal_Disease();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> e_ = (ESRD) => 
         {
@@ -1172,7 +1173,7 @@ public class FHIR347_0_1_021
     private bool? Has_Adverse_Reaction_to_Statin_Value()
     {
         var a_ = this.Statin_Allergen();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<AdverseEvent>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<AdverseEvent>(a_, 
 			typeof(AdverseEvent).GetProperty("Event"));
         Func<AdverseEvent,bool?> f_ = (StatinReaction) => 
         {
@@ -1215,15 +1216,15 @@ public class FHIR347_0_1_021
     private bool? Denominator_Exclusions_Value()
     {
         var a_ = this.Pregnancy_or_Other_Related_Diagnoses();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         var c_ = this.Breastfeeding();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Condition>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
 			typeof(Condition).GetProperty("Code"));
         var e_ = context?.Operators.ListUnion<Condition>(b_, 
 			d_);
         var f_ = this.Rhabdomyolysis();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Condition>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<Condition>(f_, 
 			typeof(Condition).GetProperty("Code"));
         var h_ = context?.Operators.ListUnion<Condition>(e_, 
 			g_);
@@ -1245,19 +1246,19 @@ public class FHIR347_0_1_021
     private IEnumerable<MedicationRequest> Statin_Therapy_Ordered_during_Measurement_Period_Value()
     {
         var a_ = this.Low_Intensity_Statin_Therapy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
 			typeof(MedicationRequest).GetProperty("Medication"));
         var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
 			b_);
         var f_ = this.Moderate_Intensity_Statin_Therapy();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, 
 			typeof(MedicationRequest).GetProperty("Medication"));
         var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
 			g_);
         var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
 			j_);
         var l_ = this.High_Intensity_Statin_Therapy();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(l_, 
+        var m_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, 
 			typeof(MedicationRequest).GetProperty("Medication"));
         var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
 			m_);
@@ -1272,9 +1273,9 @@ public class FHIR347_0_1_021
 				t_, 
 				null);
             var v_ = (StatinOrdered?.StatusElement as object);
-            var w_ = (context.Deeper(new CallStackEntry("ToString", 
+            var w_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(v_);
+		null))?.Operators).Convert<string>(v_);
             var y_ = "active";
             var z_ = "completed";
             var x_ = (new string[]
@@ -1287,9 +1288,9 @@ public class FHIR347_0_1_021
             var ab_ = context?.Operators.And(u_, 
 				aa_);
             var ad_ = (StatinOrdered?.IntentElement as object);
-            var ac_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var ac_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ad_) as object);
+		null))?.Operators).Convert<string>(ad_) as object);
             var ae_ = ("order" as object);
             var af_ = context?.Operators.Equal(ac_, 
 				ae_);
@@ -1305,19 +1306,19 @@ public class FHIR347_0_1_021
     private IEnumerable<MedicationRequest> Prescribed_Statin_Therapy_Any_Time_during_Measurement_Period_Value()
     {
         var a_ = this.Low_Intensity_Statin_Therapy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
 			typeof(MedicationRequest).GetProperty("Medication"));
         var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
 			b_);
         var f_ = this.Moderate_Intensity_Statin_Therapy();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, 
 			typeof(MedicationRequest).GetProperty("Medication"));
         var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
 			g_);
         var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
 			j_);
         var l_ = this.High_Intensity_Statin_Therapy();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(l_, 
+        var m_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, 
 			typeof(MedicationRequest).GetProperty("Medication"));
         var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
 			m_);
@@ -1358,9 +1359,9 @@ public class FHIR347_0_1_021
 				aa_);
             var ac_ = context?.Operators.ExistsInList<Timing>(ab_);
             var ad_ = (ActiveStatin?.StatusElement as object);
-            var ae_ = (context.Deeper(new CallStackEntry("ToString", 
+            var ae_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ad_);
+		null))?.Operators).Convert<string>(ad_);
             var ag_ = "active";
             var ah_ = "completed";
             var af_ = (new string[]

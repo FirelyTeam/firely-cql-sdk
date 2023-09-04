@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("NCQAHospice", "1.0.0")]
 public class NCQAHospice_1_0_0
 {
@@ -80,7 +81,7 @@ public class NCQAHospice_1_0_0
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -90,7 +91,7 @@ public class NCQAHospice_1_0_0
     private bool? Hospice_Intervention_or_Encounter_Value()
     {
         var a_ = this.Hospice_Intervention();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         var c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
         Func<Procedure,bool?> g_ = (HospiceInt) => 
@@ -106,7 +107,7 @@ public class NCQAHospice_1_0_0
 			g_);
         var i_ = context?.Operators.ExistsInList<Procedure>(h_);
         var j_ = this.Hospice_Encounter();
-        var k_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(j_, 
+        var k_ = context?.Operators.RetrieveByValueSet<Encounter>(j_, 
 			typeof(Encounter).GetProperty("Type"));
         var l_ = NCQAStatus_1_0_0.Finished_Encounter(k_);
         Func<Encounter,bool?> p_ = (HospiceEnc) => 

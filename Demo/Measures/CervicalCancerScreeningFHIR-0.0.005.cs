@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.005")]
 public class CervicalCancerScreeningFHIR_0_0_005
 {
@@ -252,7 +253,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -290,28 +291,28 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private IEnumerable<Encounter> Qualifying_Encounters_Value()
     {
         var a_ = this.Office_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
 			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
+        var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
 			typeof(Encounter).GetProperty("Type"));
         var h_ = this.Home_Healthcare_Services();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
+        var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
 			typeof(Encounter).GetProperty("Type"));
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Telephone_Visits();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
+        var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
 			typeof(Encounter).GetProperty("Type"));
         var n_ = this.Online_Assessments();
-        var o_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(n_, 
+        var o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, 
 			typeof(Encounter).GetProperty("Type"));
         var p_ = context?.Operators.ListUnion<Encounter>(m_, 
 			o_);
@@ -320,9 +321,9 @@ public class CervicalCancerScreeningFHIR_0_0_005
         Func<Encounter,bool?> z_ = (ValidEncounter) => 
         {
             var s_ = (ValidEncounter?.StatusElement as object);
-            var r_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var r_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(s_) as object);
+		null))?.Operators).Convert<string>(s_) as object);
             var t_ = ("finished" as object);
             var u_ = context?.Operators.Equal(r_, 
 				t_);
@@ -344,7 +345,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private bool? Initial_Population_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -359,9 +360,9 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			g_, 
 			null);
         var j_ = (this.Patient()?.GenderElement as object);
-        var i_ = ((context.Deeper(new CallStackEntry("ToString", 
+        var i_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(j_) as object);
+		null))?.Operators).Convert<string>(j_) as object);
         var k_ = ("female" as object);
         var l_ = context?.Operators.Equal(i_, 
 			k_);
@@ -385,14 +386,14 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private IEnumerable<object> Absence_of_Cervix_Value()
     {
         var b_ = this.Hysterectomy_with_No_Residual_Cervix();
-        var c_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(b_, 
+        var c_ = context?.Operators.RetrieveByValueSet<Procedure>(b_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> n_ = (NoCervixProcedure) => 
         {
             var e_ = (NoCervixProcedure?.StatusElement as object);
-            var d_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var d_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_) as object);
+		null))?.Operators).Convert<string>(e_) as object);
             var f_ = ("completed" as object);
             var g_ = context?.Operators.Equal(d_, 
 				f_);
@@ -410,7 +411,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
         var a_ = (context?.Operators.WhereOrNull<Procedure>(c_, 
 			n_) as IEnumerable<object>);
         var p_ = this.Congenital_or_Acquired_Absence_of_Cervix();
-        var q_ = context?.DataRetriever.RetrieveByValueSet<Condition>(p_, 
+        var q_ = context?.Operators.RetrieveByValueSet<Condition>(p_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> v_ = (NoCervixDiagnosis) => 
         {
@@ -447,14 +448,14 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private IEnumerable<Observation> Cervical_Cytology_Within_3_Years_Value()
     {
         var a_ = this.Pap_Test();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> ah_ = (CervicalCytology) => 
         {
             var c_ = (CervicalCytology?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -514,14 +515,14 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older_Value()
     {
         var a_ = this.HPV_Test();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> ar_ = (HPVTest) => 
         {
             var c_ = (HPVTest?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -547,7 +548,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
             var p_ = context?.Operators.And(i_, 
 				o_);
             var r_ = (this.Patient()?.BirthDateElement?.Value as object);
-            var s_ = context?.Operators?.TypeConverter.Convert<CqlDate>(r_);
+            var s_ = context?.Operators.Convert<CqlDate>(r_);
             var t_ = (HPVTest?.Effective as object);
             var u_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(t_);
             var v_ = context?.Operators.Start(u_);
@@ -607,9 +608,9 @@ public class CervicalCancerScreeningFHIR_0_0_005
     public bool? isComplete(Observation observation)
     {
         var a_ = (observation?.StatusElement as object);
-        var b_ = (context.Deeper(new CallStackEntry("ToString", 
+        var b_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+		null))?.Operators).Convert<string>(a_);
         var d_ = "final";
         var e_ = "amended";
         var f_ = "corrected";
@@ -648,7 +649,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private IEnumerable<Observation> Cervical_Cytology_Within_3_Years__2__Value()
     {
         var a_ = this.Pap_Test();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> w_ = (CervicalCytology) => 
         {
@@ -697,7 +698,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     private IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older__2__Value()
     {
         var a_ = this.HPV_Test();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> ag_ = (HPVTest) => 
         {
@@ -706,7 +707,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
             var e_ = context?.Operators.And(c_, 
 				d_);
             var g_ = (this.Patient()?.BirthDateElement?.Value as object);
-            var h_ = context?.Operators?.TypeConverter.Convert<CqlDate>(g_);
+            var h_ = context?.Operators.Convert<CqlDate>(g_);
             var i_ = (HPVTest?.Effective as object);
             var j_ = this.toInterval(i_);
             var k_ = context?.Operators.Start(j_);

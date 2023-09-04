@@ -17,7 +17,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>
-    public sealed class CqlContext
+    public class CqlContext
     {
         /// <summary>
         /// Contains all definitions required during execution.
@@ -57,9 +57,9 @@ namespace Hl7.Cql.Runtime
         /// <param name="parameters">The input parameters, or <see langword="null"/>. </param>
         /// <param name="extensionState">A dictionary that will keep state used by extensions.</param>
         /// <param name="delegates">The delegates, or <see langword="null"/>.  If <see langword="null"/>, runtime errors will occur when CQL expressions attempt to reference other definitions.</param>
-        internal CqlContext(ICqlOperators operators,
-            DefinitionDictionary<Delegate>? delegates = null,
+        protected internal CqlContext(ICqlOperators operators,
             IDictionary<string, object>? parameters = null,
+            DefinitionDictionary<Delegate>? delegates = null,
             ConcurrentDictionary<string, object>? extensionState = null)
         {
             Operators = operators;

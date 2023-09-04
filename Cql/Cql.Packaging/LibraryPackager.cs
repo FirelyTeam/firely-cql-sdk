@@ -487,12 +487,10 @@ namespace Hl7.Cql.Packaging
                 }
             }
         };
-        
-        private static CqlContext GetNewCqlContext() => FhirCqlEngineSetup.WithRetriever().NewContext();
+
+        private static CqlContext GetNewCqlContext() => FhirCqlContext.WithRetriever();
 
         internal TypeConverter TypeConverter { get; }
-
-        //new CqlContext(new CqlOperators(null));
 
         private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.ParameterDef elmParameter,
             CqlCrosswalk typeCrosswalk,

@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("NCQAStatus", "1.0.0")]
 public class NCQAStatus_1_0_0
 {
@@ -40,7 +41,7 @@ public class NCQAStatus_1_0_0
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -85,9 +86,9 @@ public class NCQAStatus_1_0_0
         Func<Encounter,bool?> d_ = (E) => 
         {
             var b_ = (E?.StatusElement as object);
-            var a_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var a_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(b_) as object);
+		null))?.Operators).Convert<string>(b_) as object);
             var c_ = ("finished" as object);
             return context?.Operators.Equal(a_, 
 				c_);
@@ -102,9 +103,9 @@ public class NCQAStatus_1_0_0
         Func<Immunization,bool?> d_ = (I) => 
         {
             var b_ = (I?.StatusElement as object);
-            var a_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var a_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(b_) as object);
+		null))?.Operators).Convert<string>(b_) as object);
             var c_ = ("completed" as object);
             return context?.Operators.Equal(a_, 
 				c_);
@@ -119,9 +120,9 @@ public class NCQAStatus_1_0_0
         Func<MedicationDispense,bool?> d_ = (M) => 
         {
             var b_ = (M?.StatusElement as object);
-            var a_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var a_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(b_) as object);
+		null))?.Operators).Convert<string>(b_) as object);
             var c_ = ("completed" as object);
             return context?.Operators.Equal(a_, 
 				c_);
@@ -136,9 +137,9 @@ public class NCQAStatus_1_0_0
         Func<MedicationRequest,bool?> e_ = (M) => 
         {
             var a_ = (M?.StatusElement as object);
-            var b_ = (context.Deeper(new CallStackEntry("ToString", 
+            var b_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+		null))?.Operators).Convert<string>(a_);
             var d_ = "completed";
             var c_ = (new string[]
 			{
@@ -157,9 +158,9 @@ public class NCQAStatus_1_0_0
         Func<Procedure,bool?> d_ = (P) => 
         {
             var b_ = (P?.StatusElement as object);
-            var a_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var a_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(b_) as object);
+		null))?.Operators).Convert<string>(b_) as object);
             var c_ = ("completed" as object);
             return context?.Operators.Equal(a_, 
 				c_);
@@ -174,9 +175,9 @@ public class NCQAStatus_1_0_0
         Func<Procedure,bool?> f_ = (P) => 
         {
             var a_ = (P?.StatusElement as object);
-            var b_ = (context.Deeper(new CallStackEntry("ToString", 
+            var b_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(a_);
+		null))?.Operators).Convert<string>(a_);
             var d_ = "completed";
             var e_ = "in-progress";
             var c_ = (new string[]

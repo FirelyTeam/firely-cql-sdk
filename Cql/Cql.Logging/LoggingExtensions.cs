@@ -13,22 +13,22 @@ using Microsoft.Extensions.Logging;
 namespace Hl7.Cql.Logging
 {
     /// <summary>
-    /// An extension class for adding logging on a <see cref="CqlEngineSetup"/>
+    /// An extension class for adding logging on a <see cref="CqlContext"/>
     /// </summary>
     public static class LoggingExtensions
     {
         /// <summary>
         /// Adds functionality to a context to direct log messages to the given logger.
         /// </summary>
-        public static CqlEngineSetup AddMessageLogging(this CqlEngineSetup setup, ILogger logger)
+        public static CqlContext AddMessageLogging(this CqlContext ctx, ILogger logger)
         {
-            setup.MessageReceived = (sender, args) =>
+            ctx.Operators.MessageReceived += (sender, args) =>
             {
                 var level = Level(args);
                 logger.Log(level, new EventId(default, args.Code), args.Message, args.Source);
             };
 
-            return setup;
+            return ctx;
         }
 
         private static LogLevel Level(MessageEventArgs args) =>

@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("ColorectalCancerScreeningsFHIR", "0.0.003")]
 public class ColorectalCancerScreeningsFHIR_0_0_003
 {
@@ -548,7 +549,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -586,19 +587,19 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Encounter> Telehealth_Services_Value()
     {
         var a_ = this.Online_Assessments();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Telephone_Visits();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
 			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         Func<Encounter,bool?> n_ = (TelehealthEncounter) => 
         {
             var g_ = (TelehealthEncounter?.StatusElement as object);
-            var f_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var f_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(g_) as object);
+		null))?.Operators).Convert<string>(g_) as object);
             var h_ = ("finished" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -620,7 +621,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private int? Age_at_start_of_Measurement_Period_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -634,7 +635,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private bool? Initial_Population_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -669,7 +670,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Condition> Malignant_Neoplasm_Value()
     {
         var a_ = this.Malignant_Neoplasm_of_Colon();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> g_ = (ColorectalCancer) => 
         {
@@ -690,14 +691,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Procedure> Total_Colectomy_Performed_Value()
     {
         var a_ = this.Total_Colectomy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> m_ = (Colectomy) => 
         {
             var d_ = (Colectomy?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -721,7 +722,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Condition> Total_Colectomy_Condition_Value()
     {
         var a_ = this.Total_Colectomy_ICD9();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Condition>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> g_ = (ColectomyDx) => 
         {
@@ -758,7 +759,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         var l_ = context?.Operators.Or(j_, 
 			k_);
         var n_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var o_ = context?.Operators?.TypeConverter.Convert<CqlDate>(n_);
+        var o_ = context?.Operators.Convert<CqlDate>(n_);
         var p_ = this.Measurement_Period();
         var q_ = context?.Operators.Start(p_);
         var r_ = context?.Operators.DateFrom(q_);
@@ -783,7 +784,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value()
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> l_ = (FecalOccult) => 
         {
@@ -885,14 +886,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Value()
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> ai_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -969,14 +970,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Value()
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> ai_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1053,7 +1054,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> ab_ = (FecalOccult) => 
         {
@@ -1121,14 +1122,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> r_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1163,7 +1164,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Tuples.Tuple_GHYDcaRJOeEdWbTSSCjjBhBFW> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value()
     {
         var a_ = this.FIT_DNA();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> p_ = (FitDNA) => 
         {
@@ -1268,14 +1269,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_Value()
     {
         var a_ = this.FIT_DNA();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> as_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1365,14 +1366,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Value()
     {
         var a_ = this.FIT_DNA();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> as_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1462,7 +1463,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
     {
         var a_ = this.FIT_DNA();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> al_ = (FitDNA) => 
         {
@@ -1543,14 +1544,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
     {
         var a_ = this.FIT_DNA();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> ab_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1598,7 +1599,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<CqlDateTime> CT_Colonography_Display_Date_Value()
     {
         var a_ = this.CT_Colonography();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> q_ = (Colonography) => 
         {
@@ -1639,14 +1640,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> CT_Colonography_Performed_Value()
     {
         var a_ = this.CT_Colonography();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> z_ = (Colonography) => 
         {
             var c_ = (Colonography?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1692,14 +1693,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status_Value()
     {
         var a_ = this.CT_Colonography();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> aa_ = (Colonography) => 
         {
             var c_ = (Colonography?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
+            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+		null))?.Operators).Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1746,7 +1747,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date_Value()
     {
         var a_ = this.Flexible_Sigmoidoscopy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> q_ = (FlexibleSigmoidoscopy) => 
         {
@@ -1787,14 +1788,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_Value()
     {
         var a_ = this.Flexible_Sigmoidoscopy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> v_ = (FlexibleSigmoidoscopy) => 
         {
             var d_ = (FlexibleSigmoidoscopy?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -1830,14 +1831,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Value()
     {
         var a_ = this.Flexible_Sigmoidoscopy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> w_ = (FlexibleSigmoidoscopy) => 
         {
             var d_ = (FlexibleSigmoidoscopy?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -1874,7 +1875,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<CqlDateTime> Colonoscopy_Display_Date_Value()
     {
         var a_ = this.Colonoscopy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> q_ = (Colonoscopy) => 
         {
@@ -1915,14 +1916,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Procedure> Colonoscopy_Performed_Value()
     {
         var a_ = this.Colonoscopy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> v_ = (Colonoscopy) => 
         {
             var d_ = (Colonoscopy?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -1958,14 +1959,14 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
     private IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status_Value()
     {
         var a_ = this.Colonoscopy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
 			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> w_ = (Colonoscopy) => 
         {
             var d_ = (Colonoscopy?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+		null))?.Operators).Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);

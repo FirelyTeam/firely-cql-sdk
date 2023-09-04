@@ -9,7 +9,8 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 {
@@ -197,7 +198,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -210,7 +211,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         Func<Encounter,bool?> o_ = (EncounterInpatient) => 
         {
             var c_ = (this.Patient()?.BirthDateElement?.Value as object);
-            var d_ = context?.Operators?.TypeConverter.Convert<CqlDate>(c_);
+            var d_ = context?.Operators.Convert<CqlDate>(c_);
             var e_ = EncounterInpatient?.Period;
             var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
             var g_ = context?.Operators.Start(f_);
@@ -222,9 +223,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
             var j_ = context?.Operators.GreaterOrEqual(b_, 
 				i_);
             var l_ = (EncounterInpatient?.StatusElement as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
+            var k_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
+		null))?.Operators).Convert<string>(l_) as object);
             var m_ = ("finished" as object);
             var n_ = context?.Operators.Equal(k_, 
 				m_);
@@ -243,12 +244,12 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         Func<Encounter,IEnumerable<Encounter>> al_ = (InpatientEncounter) => 
         {
             var b_ = this.Schedule_II_and_III_Opioid_Medications();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(b_, 
+            var c_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(b_, 
 				typeof(MedicationRequest).GetProperty("Medication"));
             var f_ = context?.Operators.ListUnion<MedicationRequest>(c_, 
 				c_);
             var g_ = this.Schedule_IV_Benzodiazepines();
-            var h_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(g_, 
+            var h_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(g_, 
 				typeof(MedicationRequest).GetProperty("Medication"));
             var k_ = context?.Operators.ListUnion<MedicationRequest>(h_, 
 				h_);
@@ -281,18 +282,18 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 					x_, 
 					null);
                 var aa_ = (OpioidOrBenzodiazepineDischargeMedication?.StatusElement as object);
-                var z_ = ((context.Deeper(new CallStackEntry("ToString", 
+                var z_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(aa_) as object);
+		null))?.Operators).Convert<string>(aa_) as object);
                 var ab_ = ("active" as object);
                 var ac_ = context?.Operators.Equal(z_, 
 					ab_);
                 var ad_ = context?.Operators.And(y_, 
 					ac_);
                 var af_ = (OpioidOrBenzodiazepineDischargeMedication?.IntentElement as object);
-                var ae_ = ((context.Deeper(new CallStackEntry("ToString", 
+                var ae_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(af_) as object);
+		null))?.Operators).Convert<string>(af_) as object);
                 var ag_ = ("plan" as object);
                 var ah_ = context?.Operators.Equal(ae_, 
 					ag_);
@@ -352,7 +353,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         Func<Encounter,bool?> n_ = (InpatientEncounter) => 
         {
             var c_ = this.Schedule_II_and_III_Opioid_Medications();
-            var d_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(c_, 
+            var d_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(c_, 
 				typeof(MedicationRequest).GetProperty("Medication"));
             Func<MedicationRequest,bool?> i_ = (Opioids) => 
             {
@@ -379,7 +380,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         Func<Encounter,IEnumerable<Encounter>> z_ = (InpatientEncounter) => 
         {
             var q_ = this.Schedule_II_and_III_Opioid_Medications();
-            var r_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(q_, 
+            var r_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(q_, 
 				typeof(MedicationRequest).GetProperty("Medication"));
             Func<MedicationRequest,bool?> w_ = (OpioidsDischarge) => 
             {
@@ -402,7 +403,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         Func<Encounter,IEnumerable<Encounter>> ak_ = (InpatientEncounter) => 
         {
             var ab_ = this.Schedule_IV_Benzodiazepines();
-            var ac_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(ab_, 
+            var ac_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(ab_, 
 				typeof(MedicationRequest).GetProperty("Medication"));
             Func<MedicationRequest,bool?> ah_ = (BenzodiazepinesDischarge) => 
             {
@@ -434,7 +435,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         Func<Encounter,bool?> az_ = (InpatientEncounter) => 
         {
             var b_ = this.All_Primary_and_Secondary_Cancer();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
+            var c_ = context?.Operators.RetrieveByValueSet<Condition>(b_, 
 				typeof(Condition).GetProperty("Code"));
             Func<Condition,bool?> g_ = (Cancer) => 
             {
@@ -449,7 +450,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 				g_);
             var i_ = context?.Operators.ExistsInList<Condition>(h_);
             var j_ = this.Palliative_or_Hospice_Care();
-            var k_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(j_, 
+            var k_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(j_, 
 				typeof(ServiceRequest).GetProperty("Code"));
             Func<ServiceRequest,bool?> u_ = (PalliativeOrHospiceCareOrder) => 
             {
@@ -461,9 +462,9 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 					o_, 
 					null);
                 var r_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
-                var q_ = ((context.Deeper(new CallStackEntry("ToString", 
+                var q_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
 		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(r_) as object);
+		null))?.Operators).Convert<string>(r_) as object);
                 var s_ = ("order" as object);
                 var t_ = context?.Operators.Equal(q_, 
 					s_);
@@ -475,7 +476,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
             var w_ = context?.Operators.ExistsInList<ServiceRequest>(v_);
             var x_ = context?.Operators.Or(i_, 
 				w_);
-            var z_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(j_, 
+            var z_ = context?.Operators.RetrieveByValueSet<Procedure>(j_, 
 				typeof(Procedure).GetProperty("Code"));
             Func<Procedure,bool?> ae_ = (PalliativeOrHospiceCarePerformed) => 
             {

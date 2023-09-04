@@ -14,15 +14,29 @@ using Hl7.Fhir.Model;
 namespace Hl7.Cql.Fhir
 {
     /// <summary>
-    /// Factory methods to initialize an <see cref="CqlEngineSetup"/> that uses the SDK POCO model
+    /// Factory methods to initialize an <see cref="CqlContext"/> that uses the SDK POCO model
     /// as binding for the Cql engine, supplying data using POCO instances.
     /// </summary>
-    public static class FhirCqlEngineSetup
+    public class FhirCqlContext : CqlContext
     {
+        internal FhirCqlContext(IDataRetriever? retriever = null,
+            IDictionary<string, object>? parameters = null,
+            IValueSetDictionary? valueSets = null,
+            DateTimeOffset? now = null,
+            FhirModelBindingOptions? options = null) :
+            base(
+                new FhirModelBindingSetup(retriever, valueSets, now, options).Operators,
+                parameters,
+                delegates: null,
+                extensionState: null)
+        {
+            // Nothing
+        }
+
         /// <summary>
         /// Factory method for creating a setup of the engine with the given <see cref="Bundle"/>.
         /// </summary>
-        public static CqlEngineSetup ForBundle(Bundle? bundle = null,
+        public static FhirCqlContext ForBundle(Bundle? bundle = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
@@ -39,21 +53,14 @@ namespace Hl7.Cql.Fhir
         /// <summary>
         /// Factory method for creating a setup of the engine with the given <see cref="IDataRetriever"/>.
         /// </summary>
-        public static CqlEngineSetup WithRetriever(IDataRetriever? retriever = null,
+        public static FhirCqlContext WithRetriever(IDataRetriever? retriever = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null) =>
-                new(
-                    options is not null ?
-                        new FhirModelBindingProvider(options) :
-                        FhirModelBindingProvider.Default,
-                    retriever,
-                    parameters,
-                    valueSets,
-                    now,
-                    delegates
-                );
+            FhirModelBindingOptions? options = null)
+        {
+            return new(retriever, parameters, valueSets, now);
+        }
     }
 }
