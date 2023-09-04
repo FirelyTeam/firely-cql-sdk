@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
 public class NCQAClaims_1_0_0
 {
@@ -519,10 +519,10 @@ public class NCQAClaims_1_0_0
 		{
 			b_,
 		};
-        Func<Tuples.Tuple_BAGeQidBiLhNHVFiERZPAUdCY,IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>> bk_ = (ClaimWithMedication) => 
+        Func<Tuples.Tuple_BAGeQidBiLhNHVFiERZPAUdCY,IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>> bi_ = (ClaimWithMedication) => 
         {
             var f_ = ClaimWithMedication?.PharmacyClaim;
-            Func<Claim,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> bg_ = (Pharmacy) => 
+            Func<Claim,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> be_ = (Pharmacy) => 
             {
                 var i_ = Pharmacy;
                 var k_ = (Pharmacy?.Item as IEnumerable<Claim.ItemComponent>);
@@ -551,14 +551,14 @@ public class NCQAClaims_1_0_0
 				{
 					h_,
 				};
-                Func<Tuples.Tuple_CNibCQZPIWCUUGeAXcXWGiTgj,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> be_ = (LineItemDefinition) => 
+                Func<Tuples.Tuple_CNibCQZPIWCUUGeAXcXWGiTgj,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> bc_ = (LineItemDefinition) => 
                 {
                     var s_ = LineItemDefinition?.Claim;
                     var r_ = new Claim[]
 					{
 						s_,
 					};
-                    Func<Claim,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> bc_ = (ClaimLines) => 
+                    Func<Claim,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> ba_ = (ClaimLines) => 
                     {
                         var w_ = (ClaimLines?.Item as IEnumerable<Claim.ItemComponent>);
                         Func<Claim.ItemComponent,bool?> ac_ = (i) => 
@@ -577,68 +577,51 @@ public class NCQAClaims_1_0_0
                         };
                         var ad_ = context?.Operators.WhereOrNull<Claim.ItemComponent>(w_, 
 							ac_);
-                        Func<Claim.ItemComponent,Tuples.Tuple_DadNQNcGichTGjKhdjJicQeTP> az_ = (i) => 
+                        Func<Claim.ItemComponent,Tuples.Tuple_DadNQNcGichTGjKhdjJicQeTP> ax_ = (i) => 
                         {
                             bool? af_ = ((bool?)(i?.Quantity == null));
                             var ag_ = (i?.Serviced as object);
                             var ah_ = NCQAFHIRBase_1_0_0.Normalize_Interval(ag_);
                             var ai_ = context?.Operators.Start(ah_);
-                            var ao_ = i?.Quantity?.ValueElement;
-                            var an_ = FHIRHelpers_4_0_001.ToDecimal(ao_);
-                            var ap_ = "day";
-                            var am_ = new CqlQuantity
-							{
-								value = an_,
-								unit = ap_,
-							};
-                            var aq_ = context?.Operators.Add(ai_, 
-								am_);
-                            var ar_ = context?.Operators.Quantity(1m, 
+                            var an_ = i?.Quantity?.ValueElement;
+                            var am_ = new CqlQuantity(FHIRHelpers_4_0_001.ToDecimal(an_), 
 								"day");
-                            var as_ = context?.Operators.Subtract(aq_, 
-								ar_);
-                            var at_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
+                            var ao_ = context?.Operators.Add(ai_, 
+								am_);
+                            var ap_ = context?.Operators.Quantity(1m, 
+								"day");
+                            var aq_ = context?.Operators.Subtract(ao_, 
+								ap_);
+                            var ar_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
 									context?.Operators.Subtract(context?.Operators.Add(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
-											new CqlQuantity
-											{
-												value = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement),
-												unit = "day",
-											}), 
+											new CqlQuantity(FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement), 
+												"day")), 
 										context?.Operators.Quantity(1m, 
 											"day")), 
 									true, 
 									true))?.low;
-                            var au_ = context?.Operators.ConvertDateToDateTime(at_);
-                            var av_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
+                            var as_ = context?.Operators.ConvertDateToDateTime(ar_);
+                            var at_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
 									context?.Operators.Subtract(context?.Operators.Add(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
-											new CqlQuantity
-											{
-												value = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement),
-												unit = "day",
-											}), 
+											new CqlQuantity(FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement), 
+												"day")), 
 										context?.Operators.Quantity(1m, 
 											"day")), 
 									true, 
 									true))?.high;
-                            var aw_ = context?.Operators.ConvertDateToDateTime(av_);
-                            var ax_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
+                            var au_ = context?.Operators.ConvertDateToDateTime(at_);
+                            var av_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
 									context?.Operators.Subtract(context?.Operators.Add(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
-											new CqlQuantity
-											{
-												value = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement),
-												unit = "day",
-											}), 
+											new CqlQuantity(FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement), 
+												"day")), 
 										context?.Operators.Quantity(1m, 
 											"day")), 
 									true, 
 									true))?.lowClosed;
-                            var ay_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
+                            var aw_ = (context?.Operators.Interval(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
 									context?.Operators.Subtract(context?.Operators.Add(FHIRHelpers_4_0_001.ToDate(((i?.Serviced as object) as Date)), 
-											new CqlQuantity
-											{
-												value = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement),
-												unit = "day",
-											}), 
+											new CqlQuantity(FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement), 
+												"day")), 
 										context?.Operators.Quantity(1m, 
 											"day")), 
 									true, 
@@ -646,13 +629,13 @@ public class NCQAClaims_1_0_0
                             var ae_ = (((context?.Operators.Not(af_) ?? false))
 								? ((((((i?.Serviced as object) is Period as bool?) ?? false))
 										? (context?.Operators.Interval(ai_, 
-												as_, 
+												aq_, 
 												true, 
 												true))
-										: (context?.Operators.Interval(au_, 
-												aw_, 
-												ax_, 
-												ay_)))
+										: (context?.Operators.Interval(as_, 
+												au_, 
+												av_, 
+												aw_)))
 )
 								: ((null as CqlInterval<CqlDateTime>)))
 ;
@@ -662,7 +645,7 @@ public class NCQAClaims_1_0_0
 							};
                         };
                         var v_ = context?.Operators.SelectOrNull<Claim.ItemComponent, Tuples.Tuple_DadNQNcGichTGjKhdjJicQeTP>(ad_, 
-							az_);
+							ax_);
                         var u_ = new Tuples.Tuple_BYGeMjQEUUIJcKZHQOCRZhZCU
 						{
 							CoveredDays = v_,
@@ -671,7 +654,7 @@ public class NCQAClaims_1_0_0
 						{
 							u_,
 						};
-                        Func<Tuples.Tuple_BYGeMjQEUUIJcKZHQOCRZhZCU,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> ba_ = (ItemCalculation) => (((context?.Operators.ExistsInList<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
+                        Func<Tuples.Tuple_BYGeMjQEUUIJcKZHQOCRZhZCU,Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC> ay_ = (ItemCalculation) => (((context?.Operators.ExistsInList<Claim.ItemComponent>(LineItemDefinition?.LineItems) ?? false))
 								? (new Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC
 									{
 										Claim = LineItemDefinition?.Claim,
@@ -685,31 +668,31 @@ public class NCQAClaims_1_0_0
 									})
 								: ((null as Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC)))
 ;
-                        var bb_ = context?.Operators.SelectOrNull<Tuples.Tuple_BYGeMjQEUUIJcKZHQOCRZhZCU, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(t_, 
-							ba_);
-                        return context?.Operators.SingleOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(bb_);
+                        var az_ = context?.Operators.SelectOrNull<Tuples.Tuple_BYGeMjQEUUIJcKZHQOCRZhZCU, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(t_, 
+							ay_);
+                        return context?.Operators.SingleOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(az_);
                     };
-                    var bd_ = context?.Operators.SelectOrNull<Claim, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(r_, 
-						bc_);
-                    return context?.Operators.SingleOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(bd_);
+                    var bb_ = context?.Operators.SelectOrNull<Claim, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(r_, 
+						ba_);
+                    return context?.Operators.SingleOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(bb_);
                 };
-                var bf_ = context?.Operators.SelectOrNull<Tuples.Tuple_CNibCQZPIWCUUGeAXcXWGiTgj, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(g_, 
-					be_);
-                return context?.Operators.SingleOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(bf_);
+                var bd_ = context?.Operators.SelectOrNull<Tuples.Tuple_CNibCQZPIWCUUGeAXcXWGiTgj, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(g_, 
+					bc_);
+                return context?.Operators.SingleOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(bd_);
             };
-            var bh_ = context?.Operators.SelectOrNull<Claim, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(f_, 
-				bg_);
-            Func<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC,bool?> bj_ = (FinalList) => 
+            var bf_ = context?.Operators.SelectOrNull<Claim, Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(f_, 
+				be_);
+            Func<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC,bool?> bh_ = (FinalList) => 
             {
-                bool? bi_ = ((bool?)(FinalList == null));
-                return context?.Operators.Not(bi_);
+                bool? bg_ = ((bool?)(FinalList == null));
+                return context?.Operators.Not(bg_);
             };
-            return context?.Operators.WhereOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(bh_, 
-				bj_);
+            return context?.Operators.WhereOrNull<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>(bf_, 
+				bh_);
         };
-        var bl_ = context?.Operators.SelectOrNull<Tuples.Tuple_BAGeQidBiLhNHVFiERZPAUdCY, IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>>(a_, 
-			bk_);
-        return context?.Operators.SingleOrNull<IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>>(bl_);
+        var bj_ = context?.Operators.SelectOrNull<Tuples.Tuple_BAGeQidBiLhNHVFiERZPAUdCY, IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>>(a_, 
+			bi_);
+        return context?.Operators.SingleOrNull<IEnumerable<Tuples.Tuple_FOLKddIQBPRMYYfjeMUjEIBhC>>(bj_);
     }
 
     [CqlDeclaration("Medical Claims With Diagnosis and Procedure")]
@@ -1106,7 +1089,7 @@ public class NCQAClaims_1_0_0
                             Func<Claim.DiagnosisComponent,bool?> bx_ = (RightDiagnosis) => 
                             {
                                 var bm_ = (RightDiagnosis?.SequenceElement as object);
-                                var bn_ = context?.Operators?.TypeConverter.Convert<Integer>(bm_);
+                                var bn_ = context?.Operators.Convert<Integer>(bm_);
                                 var bl_ = (FHIRHelpers_4_0_001.ToInteger(bn_) as object);
                                 var bo_ = (((int?)1) as object);
                                 var bp_ = context?.Operators.Equal(bl_, 
@@ -1211,7 +1194,7 @@ public class NCQAClaims_1_0_0
                 Func<Claim.DiagnosisComponent,bool?> w_ = (RightDiagnosis) => 
                 {
                     var l_ = (RightDiagnosis?.SequenceElement as object);
-                    var m_ = context?.Operators?.TypeConverter.Convert<Integer>(l_);
+                    var m_ = context?.Operators.Convert<Integer>(l_);
                     var k_ = (FHIRHelpers_4_0_001.ToInteger(m_) as object);
                     var n_ = (((int?)1) as object);
                     var o_ = context?.Operators.Equal(k_, 
@@ -1300,9 +1283,7 @@ public class NCQAClaims_1_0_0
         Func<ClaimResponse,bool?> i_ = (ResponseItem) => 
         {
             var d_ = (ResponseItem?.OutcomeElement as object);
-            var e_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_);
+            var e_ = context?.Operators.Convert<string>(d_);
             var g_ = "complete";
             var h_ = "partial";
             var f_ = (new string[]
@@ -1330,9 +1311,7 @@ public class NCQAClaims_1_0_0
             {
                 var k_ = ClmResp;
                 var m_ = (ClmResp?.Request?.ReferenceElement as object);
-                var n_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(m_);
+                var n_ = context?.Operators.Convert<string>(m_);
                 var l_ = NCQAFHIRBase_1_0_0.GetId(n_);
                 var p_ = (ClmResp?.Item as IEnumerable<ClaimResponse.ItemComponent>);
                 Func<ClaimResponse.ItemComponent,bool?> at_ = (ResponseItem) => 
@@ -1576,20 +1555,16 @@ public class NCQAClaims_1_0_0
 								? ((medClaim?.ClaimofInterest as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
                             var u_ = (medClaimLineItem?.SequenceElement as object);
-                            var t_ = (context?.Operators?.TypeConverter.Convert<Integer>(u_) as object);
+                            var t_ = (context?.Operators.Convert<Integer>(u_) as object);
                             var w_ = (pClaimLineItem?.ItemSequenceElement as object);
-                            var v_ = (context?.Operators?.TypeConverter.Convert<Integer>(w_) as object);
+                            var v_ = (context?.Operators.Convert<Integer>(w_) as object);
                             var x_ = context?.Operators.Equal(t_, 
 								v_);
                             return context?.Operators.And(s_, 
@@ -1843,7 +1818,7 @@ MedicalClaimAndResponse?.MedicalClaim,
 						ClaimofInterest = ProcedureClaims,
 						ClaimID = ProcedureClaims?.IdElement,
 						LineItems = context?.Operators.WhereOrNull<Claim.ItemComponent>((ProcedureClaims?.Item as IEnumerable<Claim.ItemComponent>), 
-							(ResponseItem) => context?.Operators.Equal(((context?.Operators?.TypeConverter.Convert<Integer>((ResponseItem?.SequenceElement as object)))?.Value as object), 
+							(ResponseItem) => context?.Operators.Equal(((context?.Operators.Convert<Integer>((ResponseItem?.SequenceElement as object)))?.Value as object), 
 (((int?)1) as object))),
 					}))
 ;
@@ -1886,20 +1861,16 @@ MedicalClaimAndResponse?.MedicalClaim,
 								? ((medClaim?.ClaimofInterest as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
                             var u_ = (medClaimLineItem?.SequenceElement as object);
-                            var t_ = (context?.Operators?.TypeConverter.Convert<Integer>(u_) as object);
+                            var t_ = (context?.Operators.Convert<Integer>(u_) as object);
                             var w_ = (pClaimLineItem?.ItemSequenceElement as object);
-                            var v_ = (context?.Operators?.TypeConverter.Convert<Integer>(w_) as object);
+                            var v_ = (context?.Operators.Convert<Integer>(w_) as object);
                             var x_ = context?.Operators.Equal(t_, 
 								v_);
                             return context?.Operators.And(s_, 
@@ -2142,20 +2113,16 @@ MedicalClaimAndResponse?.MedicalClaim,
 								? ((medClaim?.ClaimofInterest as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
                             var u_ = (medClaimLineItem?.SequenceElement as object);
-                            var t_ = (context?.Operators?.TypeConverter.Convert<Integer>(u_) as object);
+                            var t_ = (context?.Operators.Convert<Integer>(u_) as object);
                             var w_ = (pClaimLineItem?.ItemSequenceElement as object);
-                            var v_ = (context?.Operators?.TypeConverter.Convert<Integer>(w_) as object);
+                            var v_ = (context?.Operators.Convert<Integer>(w_) as object);
                             var x_ = context?.Operators.Equal(t_, 
 								v_);
                             return context?.Operators.And(s_, 
@@ -2333,20 +2300,16 @@ MedicalClaimAndResponse?.MedicalClaim,
 								? ((medClaim?.Claim as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
                             var u_ = (medClaimLineItem?.SequenceElement as object);
-                            var t_ = (context?.Operators?.TypeConverter.Convert<Integer>(u_) as object);
+                            var t_ = (context?.Operators.Convert<Integer>(u_) as object);
                             var w_ = (pClaimLineItem?.ItemSequenceElement as object);
-                            var v_ = (context?.Operators?.TypeConverter.Convert<Integer>(w_) as object);
+                            var v_ = (context?.Operators.Convert<Integer>(w_) as object);
                             var x_ = context?.Operators.Equal(t_, 
 								v_);
                             return context?.Operators.And(s_, 
@@ -2440,11 +2403,8 @@ MedicalClaimAndResponse?.MedicalClaim,
                 Func<Claim.ItemComponent,CqlInterval<CqlDate>> bm_ = (i) => (((context?.Operators.Not(((bool?)(i?.Quantity == null))) ?? false))
 						? (context?.Operators.Interval(context?.Operators.ConvertDateTimeToDate(context?.Operators.Start(NCQAFHIRBase_1_0_0.Normalize_Interval((i?.Serviced as object)))), 
 								context?.Operators.ConvertDateTimeToDate(context?.Operators.Subtract(context?.Operators.Add(context?.Operators.Start(NCQAFHIRBase_1_0_0.Normalize_Interval((i?.Serviced as object))), 
-											new CqlQuantity
-											{
-												value = FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement),
-												unit = "day",
-											}), 
+											new CqlQuantity(FHIRHelpers_4_0_001.ToDecimal(i?.Quantity?.ValueElement), 
+												"day")), 
 										context?.Operators.Quantity(1m, 
 											"day"))), 
 								true, 
@@ -2513,13 +2473,9 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<ClaimResponse,bool?> g_ = (CR) => 
             {
                 var c_ = (Claim?.IdElement as object);
-                var b_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_) as object);
+                var b_ = (context?.Operators.Convert<string>(c_) as object);
                 var e_ = (CR?.Request?.ReferenceElement as object);
-                var f_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(e_);
+                var f_ = context?.Operators.Convert<string>(e_);
                 var d_ = (NCQAFHIRBase_1_0_0.GetId(f_) as object);
                 return context?.Operators.Equal(b_, 
 					d_);
@@ -2529,19 +2485,13 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Claim,bool?> ae_ = (C) => 
             {
                 var j_ = (Claim?.IdElement as object);
-                var i_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(j_) as object);
+                var i_ = (context?.Operators.Convert<string>(j_) as object);
                 Func<ClaimResponse,bool?> r_ = (CR) => 
                 {
                     var n_ = (Claim?.IdElement as object);
-                    var m_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(n_) as object);
+                    var m_ = (context?.Operators.Convert<string>(n_) as object);
                     var p_ = (CR?.Request?.ReferenceElement as object);
-                    var q_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(p_);
+                    var q_ = context?.Operators.Convert<string>(p_);
                     var o_ = (NCQAFHIRBase_1_0_0.GetId(q_) as object);
                     return context?.Operators.Equal(m_, 
 						o_);
@@ -2575,9 +2525,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
                 var ac_ = context?.Operators.SelectOrNull<ResourceReference, FhirString>(aa_, 
 					ab_);
                 var l_ = (context?.Operators.SingleOrNull<FhirString>(ac_) as object);
-                var ad_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_);
+                var ad_ = context?.Operators.Convert<string>(l_);
                 var k_ = (NCQAFHIRBase_1_0_0.GetId(ad_) as object);
                 return context?.Operators.Equal(i_, 
 					k_);
@@ -2751,7 +2699,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Claim.CareTeamComponent,bool?> k_ = (ct) => 
             {
                 var h_ = (ct?.SequenceElement as object);
-                var i_ = context?.Operators?.TypeConverter.Convert<Integer>(h_);
+                var i_ = context?.Operators.Convert<Integer>(h_);
                 var g_ = (FHIRHelpers_4_0_001.ToInteger(i_) as object);
                 var j_ = (((int?)1) as object);
                 return context?.Operators.Equal(g_, 
@@ -2775,7 +2723,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Claim.CareTeamComponent,bool?> w_ = (ct) => 
             {
                 var t_ = (ct?.SequenceElement as object);
-                var u_ = context?.Operators?.TypeConverter.Convert<Integer>(t_);
+                var u_ = context?.Operators.Convert<Integer>(t_);
                 var s_ = (FHIRHelpers_4_0_001.ToInteger(u_) as object);
                 var v_ = (((int?)1) as object);
                 return context?.Operators.Equal(s_, 
@@ -2802,9 +2750,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
                 Func<FhirString,string> ah_ = (r) => 
                 {
                     var af_ = (r as object);
-                    var ag_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(af_);
+                    var ag_ = context?.Operators.Convert<string>(af_);
                     return NCQAFHIRBase_1_0_0.GetId(ag_);
                 };
                 var ai_ = context?.Operators.SelectOrNull<FhirString, string>(ad_, 
@@ -2832,14 +2778,12 @@ PharmacyClaimAndResponse?.PharmacyClaim,
 		};
         Func<Tuples.Tuple_GMJgYefQcULgUcRJJAbTfRThR,Tuples.Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY> dt_ = (ClaimProperties) => 
         {
-            var ao_ = context?.DataRetriever.RetrieveByValueSet<Practitioner>(null, 
+            var ao_ = context?.Operators.RetrieveByValueSet<Practitioner>(null, 
 				null);
             Func<Practitioner,bool?> ay_ = (p) => 
             {
                 var ap_ = (p?.IdElement as object);
-                var aq_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ap_);
+                var aq_ = context?.Operators.Convert<string>(ap_);
                 var ar_ = ClaimProperties?.CareTeams;
                 Func<Tuples.Tuple_GIfhUVACThMQNGPGjYhYHEfGS,bool?> at_ = (@this) => 
                 {
@@ -3030,7 +2974,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Claim.ItemComponent,bool?> k_ = (i) => 
             {
                 var h_ = (i?.SequenceElement as object);
-                var i_ = context?.Operators?.TypeConverter.Convert<Integer>(h_);
+                var i_ = context?.Operators.Convert<Integer>(h_);
                 var g_ = (FHIRHelpers_4_0_001.ToInteger(i_) as object);
                 var j_ = (((int?)1) as object);
                 return context?.Operators.Equal(g_, 
@@ -3057,7 +3001,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Claim.ItemComponent,bool?> y_ = (i) => 
             {
                 var v_ = (i?.SequenceElement as object);
-                var w_ = context?.Operators?.TypeConverter.Convert<Integer>(v_);
+                var w_ = context?.Operators.Convert<Integer>(v_);
                 var u_ = (FHIRHelpers_4_0_001.ToInteger(w_) as object);
                 var x_ = (((int?)1) as object);
                 return context?.Operators.Equal(u_, 
@@ -3084,9 +3028,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
                 Func<FhirString,string> aj_ = (r) => 
                 {
                     var ah_ = (r as object);
-                    var ai_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ah_);
+                    var ai_ = context?.Operators.Convert<string>(ah_);
                     return NCQAFHIRBase_1_0_0.GetId(ai_);
                 };
                 var ak_ = context?.Operators.SelectOrNull<FhirString, string>(af_, 
@@ -3114,14 +3056,12 @@ PharmacyClaimAndResponse?.PharmacyClaim,
 		};
         Func<Tuples.Tuple_FbiEbRAPBSZAgWUQOLFeLJQTa,Tuples.Tuple_CEXhgaFKbhdeeAYTYBhHTGXUY> dx_ = (ClaimProperties) => 
         {
-            var aq_ = context?.DataRetriever.RetrieveByValueSet<Location>(null, 
+            var aq_ = context?.Operators.RetrieveByValueSet<Location>(null, 
 				null);
             Func<Location,bool?> ba_ = (l) => 
             {
                 var ar_ = (l?.IdElement as object);
-                var as_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ar_);
+                var as_ = context?.Operators.Convert<string>(ar_);
                 var at_ = ClaimProperties?.ItemsLocationReferences;
                 Func<Tuples.Tuple_FPCXihcEeChSjIUJHVXRcEXMI,bool?> av_ = (@this) => 
                 {

@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("FHIRHelpers", "4.0.001")]
 public class FHIRHelpers_4_0_001
 {
@@ -36,7 +36,7 @@ public class FHIRHelpers_4_0_001
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -90,15 +90,9 @@ public class FHIRHelpers_4_0_001
             return null;
 
         else 
-            {
-                var a__ = quantity?.ValueElement?.Value;
-                var b__ = quantity?.UnitElement?.Value;
-                return new CqlQuantity
-				{
-					value = a__,
-					unit = b__,
-				};
-            }
+            return new CqlQuantity(quantity?.ValueElement?.Value, 
+quantity?.UnitElement?.Value);
+
     }
 
 
@@ -1426,7 +1420,7 @@ concept?.TextElement?.Value);
     public string ToString(Base64Binary value)
     {
         var a_ = (value?.Value as object);
-        return context?.Operators?.TypeConverter.Convert<string>(a_);
+        return context?.Operators.Convert<string>(a_);
     }
 
     [CqlDeclaration("ToString")]
@@ -1477,7 +1471,7 @@ concept?.TextElement?.Value);
     public CqlDateTime ToDateTime(Instant value)
     {
         var a_ = (value?.Value as object);
-        return context?.Operators?.TypeConverter.Convert<CqlDateTime>(a_);
+        return context?.Operators.Convert<CqlDateTime>(a_);
     }
 
     [CqlDeclaration("ToDecimal")]
