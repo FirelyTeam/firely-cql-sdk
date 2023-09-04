@@ -25,11 +25,15 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
+    internal record ExpressionBuilderOptions(bool EmitStackTraces);
+
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
     internal partial class ExpressionBuilder
     {
+        private readonly ExpressionBuilderOptions options;
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
@@ -37,17 +41,20 @@ namespace Hl7.Cql.Compiler
         /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="elm"/>.</param>
         /// <param name="elm">The <see cref="Library"/> this builder will build.</param>
         /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="Build"/>.</param>
+        /// <param name="options">Optional features for the codegenerator.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         /// <exception cref="ArgumentException">If the <paramref name="elm"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(OperatorBinding operatorBinding,
             TypeManager typeManager,
             Library elm,
-            ILogger<ExpressionBuilder> logger)
+            ILogger<ExpressionBuilder> logger,
+            ExpressionBuilderOptions options)
         {
             OperatorBinding = operatorBinding;
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
             Library = elm ?? throw new ArgumentNullException(nameof(elm));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.options = options;
             if (Library.identifier == null)
                 throw new ArgumentException("Package is missing a library identifier", nameof(elm));
 
@@ -2237,7 +2244,12 @@ namespace Hl7.Cql.Compiler
                 Expression.Constant(op.locator, typeof(string)),
                 Expression.Constant(op.localId, typeof(string)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.OnFunctionCalled), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!, newCallStack);
+            Expression deeper = options.EmitStackTraces
+                ? Expression.Call(
+                    ctx.RuntimeContextParameter,
+                    typeof(CqlContext).GetMethod(nameof(CqlContext.OnFunctionCalled), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!,
+                    newCallStack)
+                : ctx.RuntimeContextParameter;
 
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.

@@ -154,7 +154,7 @@ namespace Hl7.Cql.Packaging
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger);
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger, new(false));
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
@@ -190,7 +190,7 @@ namespace Hl7.Cql.Packaging
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger);
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }

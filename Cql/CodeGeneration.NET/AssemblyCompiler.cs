@@ -86,7 +86,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger);
+                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new(false));
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
@@ -241,7 +241,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             string version = string.Empty;
             if (parts.Length > 1)
                 version = parts[1];
-            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
+            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
             var compilation = CSharpCompilation.Create($"{node.NodeId}")
