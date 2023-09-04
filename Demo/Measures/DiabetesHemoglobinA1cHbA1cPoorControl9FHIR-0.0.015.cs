@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
@@ -307,9 +306,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
         Func<Encounter,bool?> k_ = (TelehealthEncounter) => 
         {
             var d_ = (TelehealthEncounter?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -387,9 +384,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
         Func<Observation,bool?> n_ = (RecentHbA1c) => 
         {
             var c_ = (RecentHbA1c?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -452,9 +447,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
         Func<Observation,bool?> n_ = (NoHbA1c) => 
         {
             var c_ = (NoHbA1c?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";

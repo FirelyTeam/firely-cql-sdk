@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
@@ -440,9 +439,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 				q_, 
 				null);
             var t_ = (QualifyingEncounter?.StatusElement as object);
-            var s_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(t_) as object);
+            var s_ = (context?.Operators.Convert<string>(t_) as object);
             var u_ = ("finished" as object);
             var v_ = context?.Operators.Equal(s_, 
 				u_);
@@ -500,9 +497,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         {
             var d_ = (E?.Url as object);
             var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", 
 				url) as object);
             return context?.Operators.Equal(b_, 
@@ -553,9 +548,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> ad_ = (LevelOfSeverityNotCommunicated) => 
         {
             var n_ = (LevelOfSeverityNotCommunicated?.StatusElement as object);
-            var m_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(n_) as object);
+            var m_ = (context?.Operators.Convert<string>(n_) as object);
             var o_ = ("not-done" as object);
             var p_ = context?.Operators.Equal(m_, 
 				o_);
@@ -615,9 +608,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> ae_ = (MacularEdemaAbsentNotCommunicated) => 
         {
             var o_ = (MacularEdemaAbsentNotCommunicated?.StatusElement as object);
-            var n_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(o_) as object);
+            var n_ = (context?.Operators.Convert<string>(o_) as object);
             var p_ = ("not-done" as object);
             var q_ = context?.Operators.Equal(n_, 
 				p_);
@@ -676,9 +667,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> ad_ = (MacularEdemaPresentNotCommunicated) => 
         {
             var n_ = (MacularEdemaPresentNotCommunicated?.StatusElement as object);
-            var m_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(n_) as object);
+            var m_ = (context?.Operators.Convert<string>(n_) as object);
             var o_ = ("not-done" as object);
             var p_ = context?.Operators.Equal(m_, 
 				o_);
@@ -772,9 +761,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Observation,bool?> v_ = (MacularExam) => 
         {
             var m_ = (MacularExam?.StatusElement as object);
-            var n_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(m_);
+            var n_ = context?.Operators.Convert<string>(m_);
             var p_ = "final";
             var q_ = "amended";
             var r_ = "corrected";
@@ -838,9 +825,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> q_ = (LevelOfSeverityCommunicated) => 
         {
             var o_ = (LevelOfSeverityCommunicated?.StatusElement as object);
-            var n_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(o_) as object);
+            var n_ = (context?.Operators.Convert<string>(o_) as object);
             var p_ = ("completed" as object);
             return context?.Operators.Equal(n_, 
 				p_);
@@ -882,9 +867,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> r_ = (MacularEdemaAbsentCommunicated) => 
         {
             var p_ = (MacularEdemaAbsentCommunicated?.StatusElement as object);
-            var o_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(p_) as object);
+            var o_ = (context?.Operators.Convert<string>(p_) as object);
             var q_ = ("completed" as object);
             return context?.Operators.Equal(o_, 
 				q_);
@@ -925,9 +908,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
         Func<Communication,bool?> q_ = (MacularEdemaPresentCommunicated) => 
         {
             var o_ = (MacularEdemaPresentCommunicated?.StatusElement as object);
-            var n_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(o_) as object);
+            var n_ = (context?.Operators.Convert<string>(o_) as object);
             var p_ = ("completed" as object);
             return context?.Operators.Equal(n_, 
 				p_);

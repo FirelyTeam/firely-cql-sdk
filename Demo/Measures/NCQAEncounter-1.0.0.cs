@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public class NCQAEncounter_1_0_0
@@ -56,13 +55,9 @@ public class NCQAEncounter_1_0_0
             Func<Condition,bool?> i_ = (C) => 
             {
                 var e_ = (C?.IdElement as object);
-                var d_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(e_) as object);
+                var d_ = (context?.Operators.Convert<string>(e_) as object);
                 var g_ = (CRef as object);
-                var h_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(g_);
+                var h_ = context?.Operators.Convert<string>(g_);
                 var f_ = (NCQAFHIRBase_1_0_0.GetId(h_) as object);
                 return context?.Operators.Equal(d_, 
 					f_);
@@ -101,13 +96,9 @@ public class NCQAEncounter_1_0_0
             Func<Condition,bool?> o_ = (C) => 
             {
                 var k_ = (C?.IdElement as object);
-                var j_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(k_) as object);
+                var j_ = (context?.Operators.Convert<string>(k_) as object);
                 var m_ = (PrincipalDiagnosis?.Condition?.ReferenceElement as object);
-                var n_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(m_);
+                var n_ = context?.Operators.Convert<string>(m_);
                 var l_ = (NCQAFHIRBase_1_0_0.GetId(n_) as object);
                 return context?.Operators.Equal(j_, 
 					l_);

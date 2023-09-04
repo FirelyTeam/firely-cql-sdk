@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.005")]
 public class CervicalCancerScreeningFHIR_0_0_005
@@ -321,9 +320,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
         Func<Encounter,bool?> z_ = (ValidEncounter) => 
         {
             var s_ = (ValidEncounter?.StatusElement as object);
-            var r_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(s_) as object);
+            var r_ = (context?.Operators.Convert<string>(s_) as object);
             var t_ = ("finished" as object);
             var u_ = context?.Operators.Equal(r_, 
 				t_);
@@ -360,9 +357,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			g_, 
 			null);
         var j_ = (this.Patient()?.GenderElement as object);
-        var i_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(j_) as object);
+        var i_ = (context?.Operators.Convert<string>(j_) as object);
         var k_ = ("female" as object);
         var l_ = context?.Operators.Equal(i_, 
 			k_);
@@ -391,9 +386,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
         Func<Procedure,bool?> n_ = (NoCervixProcedure) => 
         {
             var e_ = (NoCervixProcedure?.StatusElement as object);
-            var d_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(e_) as object);
+            var d_ = (context?.Operators.Convert<string>(e_) as object);
             var f_ = ("completed" as object);
             var g_ = context?.Operators.Equal(d_, 
 				f_);
@@ -453,9 +446,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
         Func<Observation,bool?> ah_ = (CervicalCytology) => 
         {
             var c_ = (CervicalCytology?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -520,9 +511,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
         Func<Observation,bool?> ar_ = (HPVTest) => 
         {
             var c_ = (HPVTest?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -608,9 +597,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     public bool? isComplete(Observation observation)
     {
         var a_ = (observation?.StatusElement as object);
-        var b_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(a_);
+        var b_ = context?.Operators.Convert<string>(a_);
         var d_ = "final";
         var e_ = "amended";
         var f_ = "corrected";

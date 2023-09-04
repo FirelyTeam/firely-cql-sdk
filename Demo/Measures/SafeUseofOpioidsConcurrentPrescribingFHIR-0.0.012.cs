@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
@@ -223,9 +222,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
             var j_ = context?.Operators.GreaterOrEqual(b_, 
 				i_);
             var l_ = (EncounterInpatient?.StatusElement as object);
-            var k_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(l_) as object);
+            var k_ = (context?.Operators.Convert<string>(l_) as object);
             var m_ = ("finished" as object);
             var n_ = context?.Operators.Equal(k_, 
 				m_);
@@ -282,18 +279,14 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 					x_, 
 					null);
                 var aa_ = (OpioidOrBenzodiazepineDischargeMedication?.StatusElement as object);
-                var z_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(aa_) as object);
+                var z_ = (context?.Operators.Convert<string>(aa_) as object);
                 var ab_ = ("active" as object);
                 var ac_ = context?.Operators.Equal(z_, 
 					ab_);
                 var ad_ = context?.Operators.And(y_, 
 					ac_);
                 var af_ = (OpioidOrBenzodiazepineDischargeMedication?.IntentElement as object);
-                var ae_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(af_) as object);
+                var ae_ = (context?.Operators.Convert<string>(af_) as object);
                 var ag_ = ("plan" as object);
                 var ah_ = context?.Operators.Equal(ae_, 
 					ag_);
@@ -462,9 +455,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
 					o_, 
 					null);
                 var r_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
-                var q_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(r_) as object);
+                var q_ = (context?.Operators.Convert<string>(r_) as object);
                 var s_ = ("order" as object);
                 var t_ = context?.Operators.Equal(q_, 
 					s_);

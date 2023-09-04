@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("HospiceFHIR4", "2.3.000")]
 public class HospiceFHIR4_2_3_000
@@ -141,9 +140,7 @@ public class HospiceFHIR4_2_3_000
         Func<Encounter,bool?> x_ = (DischargeHospice) => 
         {
             var d_ = (DischargeHospice?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -180,9 +177,7 @@ public class HospiceFHIR4_2_3_000
         Func<ServiceRequest,bool?> ar_ = (HospiceOrder) => 
         {
             var ac_ = (HospiceOrder?.StatusElement as object);
-            var ad_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ac_);
+            var ad_ = context?.Operators.Convert<string>(ac_);
             var af_ = "active";
             var ag_ = "completed";
             var ae_ = (new string[]
@@ -193,9 +188,7 @@ public class HospiceFHIR4_2_3_000
             var ah_ = context?.Operators.InList<string>(ad_, 
 				ae_);
             var aj_ = (HospiceOrder?.IntentElement as object);
-            var ai_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(aj_) as object);
+            var ai_ = (context?.Operators.Convert<string>(aj_) as object);
             var ak_ = ("order" as object);
             var al_ = context?.Operators.Equal(ai_, 
 				ak_);
@@ -220,9 +213,7 @@ public class HospiceFHIR4_2_3_000
         Func<Procedure,bool?> bf_ = (HospicePerformed) => 
         {
             var ay_ = (HospicePerformed?.StatusElement as object);
-            var ax_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ay_) as object);
+            var ax_ = (context?.Operators.Convert<string>(ay_) as object);
             var az_ = ("completed" as object);
             var ba_ = context?.Operators.Equal(ax_, 
 				az_);

@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public class FHIR347_0_1_021
@@ -635,9 +634,7 @@ public class FHIR347_0_1_021
 				aj_, 
 				null);
             var an_ = (ASCVDProcedure?.StatusElement as object);
-            var am_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(an_) as object);
+            var am_ = (context?.Operators.Convert<string>(an_) as object);
             var ao_ = ("completed" as object);
             var ap_ = context?.Operators.Equal(am_, 
 				ao_);
@@ -701,9 +698,7 @@ public class FHIR347_0_1_021
 				z_, 
 				null);
             var ac_ = (ValidEncounter?.StatusElement as object);
-            var ab_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ac_) as object);
+            var ab_ = (context?.Operators.Convert<string>(ac_) as object);
             var ad_ = ("finished" as object);
             var ae_ = context?.Operators.Equal(ab_, 
 				ad_);
@@ -775,9 +770,7 @@ public class FHIR347_0_1_021
             var m_ = context?.Operators.And(f_, 
 				l_);
             var n_ = (LDL?.StatusElement as object);
-            var o_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(n_);
+            var o_ = context?.Operators.Convert<string>(n_);
             var q_ = "final";
             var r_ = "amended";
             var s_ = "corrected";
@@ -1005,9 +998,7 @@ public class FHIR347_0_1_021
 				i_, 
 				null);
             var k_ = (PalliativeOrHospiceCareOrder?.StatusElement as object);
-            var l_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(k_);
+            var l_ = context?.Operators.Convert<string>(k_);
             var n_ = "active";
             var o_ = "on-hold";
             var p_ = "completed";
@@ -1022,9 +1013,7 @@ public class FHIR347_0_1_021
             var r_ = context?.Operators.And(j_, 
 				q_);
             var t_ = (PalliativeOrHospiceCareOrder?.IntentElement as object);
-            var s_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(t_) as object);
+            var s_ = (context?.Operators.Convert<string>(t_) as object);
             var u_ = ("order" as object);
             var v_ = context?.Operators.Equal(s_, 
 				u_);
@@ -1051,9 +1040,7 @@ public class FHIR347_0_1_021
 				ai_, 
 				null);
             var al_ = (PalliativeOrHospiceCarePerformed?.StatusElement as object);
-            var ak_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(al_) as object);
+            var ak_ = (context?.Operators.Convert<string>(al_) as object);
             var am_ = ("completed" as object);
             var an_ = context?.Operators.Equal(ak_, 
 				am_);
@@ -1080,9 +1067,7 @@ public class FHIR347_0_1_021
 				az_, 
 				null);
             var bc_ = (PalliativeEncounter?.StatusElement as object);
-            var bb_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(bc_) as object);
+            var bb_ = (context?.Operators.Convert<string>(bc_) as object);
             var bd_ = ("finished" as object);
             var be_ = context?.Operators.Equal(bb_, 
 				bd_);
@@ -1273,9 +1258,7 @@ public class FHIR347_0_1_021
 				t_, 
 				null);
             var v_ = (StatinOrdered?.StatusElement as object);
-            var w_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(v_);
+            var w_ = context?.Operators.Convert<string>(v_);
             var y_ = "active";
             var z_ = "completed";
             var x_ = (new string[]
@@ -1288,9 +1271,7 @@ public class FHIR347_0_1_021
             var ab_ = context?.Operators.And(u_, 
 				aa_);
             var ad_ = (StatinOrdered?.IntentElement as object);
-            var ac_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ad_) as object);
+            var ac_ = (context?.Operators.Convert<string>(ad_) as object);
             var ae_ = ("order" as object);
             var af_ = context?.Operators.Equal(ac_, 
 				ae_);
@@ -1359,9 +1340,7 @@ public class FHIR347_0_1_021
 				aa_);
             var ac_ = context?.Operators.ExistsInList<Timing>(ab_);
             var ad_ = (ActiveStatin?.StatusElement as object);
-            var ae_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ad_);
+            var ae_ = context?.Operators.Convert<string>(ad_);
             var ag_ = "active";
             var ah_ = "completed";
             var af_ = (new string[]

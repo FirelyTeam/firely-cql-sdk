@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public class PalliativeCareFHIR_0_6_000
@@ -153,9 +152,7 @@ public class PalliativeCareFHIR_0_6_000
         Func<Observation,bool?> v_ = (PalliativeAssessment) => 
         {
             var d_ = (PalliativeAssessment?.StatusElement as object);
-            var e_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_);
+            var e_ = context?.Operators.Convert<string>(d_);
             var g_ = "final";
             var h_ = "amended";
             var i_ = "corrected";
@@ -198,9 +195,7 @@ public class PalliativeCareFHIR_0_6_000
         Func<Encounter,bool?> ai_ = (PalliativeEncounter) => 
         {
             var ab_ = (PalliativeEncounter?.StatusElement as object);
-            var aa_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ab_) as object);
+            var aa_ = (context?.Operators.Convert<string>(ab_) as object);
             var ac_ = ("finished" as object);
             var ad_ = context?.Operators.Equal(aa_, 
 				ac_);
@@ -224,9 +219,7 @@ public class PalliativeCareFHIR_0_6_000
         Func<Procedure,bool?> ay_ = (PalliativeIntervention) => 
         {
             var ao_ = (PalliativeIntervention?.StatusElement as object);
-            var ap_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ao_);
+            var ap_ = context?.Operators.Convert<string>(ao_);
             var ar_ = "completed";
             var as_ = "in-progress";
             var aq_ = (new string[]

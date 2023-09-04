@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("NCQAClaims", "1.0.0")]
 public class NCQAClaims_1_0_0
@@ -1284,9 +1283,7 @@ public class NCQAClaims_1_0_0
         Func<ClaimResponse,bool?> i_ = (ResponseItem) => 
         {
             var d_ = (ResponseItem?.OutcomeElement as object);
-            var e_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_);
+            var e_ = context?.Operators.Convert<string>(d_);
             var g_ = "complete";
             var h_ = "partial";
             var f_ = (new string[]
@@ -1314,9 +1311,7 @@ public class NCQAClaims_1_0_0
             {
                 var k_ = ClmResp;
                 var m_ = (ClmResp?.Request?.ReferenceElement as object);
-                var n_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(m_);
+                var n_ = context?.Operators.Convert<string>(m_);
                 var l_ = NCQAFHIRBase_1_0_0.GetId(n_);
                 var p_ = (ClmResp?.Item as IEnumerable<ClaimResponse.ItemComponent>);
                 Func<ClaimResponse.ItemComponent,bool?> at_ = (ResponseItem) => 
@@ -1560,13 +1555,9 @@ public class NCQAClaims_1_0_0
 								? ((medClaim?.ClaimofInterest as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
@@ -1870,13 +1861,9 @@ MedicalClaimAndResponse?.MedicalClaim,
 								? ((medClaim?.ClaimofInterest as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
@@ -2126,13 +2113,9 @@ MedicalClaimAndResponse?.MedicalClaim,
 								? ((medClaim?.ClaimofInterest as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
@@ -2317,13 +2300,9 @@ MedicalClaimAndResponse?.MedicalClaim,
 								? ((medClaim?.Claim as Resource)?.IdElement)
 								: (null))
  as object);
-                            var n_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(o_) as object);
+                            var n_ = (context?.Operators.Convert<string>(o_) as object);
                             var q_ = (pClaim?.Response?.Request?.ReferenceElement as object);
-                            var r_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(q_);
+                            var r_ = context?.Operators.Convert<string>(q_);
                             var p_ = (NCQAFHIRBase_1_0_0.GetId(r_) as object);
                             var s_ = context?.Operators.Equal(n_, 
 								p_);
@@ -2494,13 +2473,9 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<ClaimResponse,bool?> g_ = (CR) => 
             {
                 var c_ = (Claim?.IdElement as object);
-                var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+                var b_ = (context?.Operators.Convert<string>(c_) as object);
                 var e_ = (CR?.Request?.ReferenceElement as object);
-                var f_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(e_);
+                var f_ = context?.Operators.Convert<string>(e_);
                 var d_ = (NCQAFHIRBase_1_0_0.GetId(f_) as object);
                 return context?.Operators.Equal(b_, 
 					d_);
@@ -2510,19 +2485,13 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Claim,bool?> ae_ = (C) => 
             {
                 var j_ = (Claim?.IdElement as object);
-                var i_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(j_) as object);
+                var i_ = (context?.Operators.Convert<string>(j_) as object);
                 Func<ClaimResponse,bool?> r_ = (CR) => 
                 {
                     var n_ = (Claim?.IdElement as object);
-                    var m_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(n_) as object);
+                    var m_ = (context?.Operators.Convert<string>(n_) as object);
                     var p_ = (CR?.Request?.ReferenceElement as object);
-                    var q_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(p_);
+                    var q_ = context?.Operators.Convert<string>(p_);
                     var o_ = (NCQAFHIRBase_1_0_0.GetId(q_) as object);
                     return context?.Operators.Equal(m_, 
 						o_);
@@ -2556,9 +2525,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
                 var ac_ = context?.Operators.SelectOrNull<ResourceReference, FhirString>(aa_, 
 					ab_);
                 var l_ = (context?.Operators.SingleOrNull<FhirString>(ac_) as object);
-                var ad_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(l_);
+                var ad_ = context?.Operators.Convert<string>(l_);
                 var k_ = (NCQAFHIRBase_1_0_0.GetId(ad_) as object);
                 return context?.Operators.Equal(i_, 
 					k_);
@@ -2783,9 +2750,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
                 Func<FhirString,string> ah_ = (r) => 
                 {
                     var af_ = (r as object);
-                    var ag_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(af_);
+                    var ag_ = context?.Operators.Convert<string>(af_);
                     return NCQAFHIRBase_1_0_0.GetId(ag_);
                 };
                 var ai_ = context?.Operators.SelectOrNull<FhirString, string>(ad_, 
@@ -2818,9 +2783,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Practitioner,bool?> ay_ = (p) => 
             {
                 var ap_ = (p?.IdElement as object);
-                var aq_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ap_);
+                var aq_ = context?.Operators.Convert<string>(ap_);
                 var ar_ = ClaimProperties?.CareTeams;
                 Func<Tuples.Tuple_GIfhUVACThMQNGPGjYhYHEfGS,bool?> at_ = (@this) => 
                 {
@@ -3065,9 +3028,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
                 Func<FhirString,string> aj_ = (r) => 
                 {
                     var ah_ = (r as object);
-                    var ai_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ah_);
+                    var ai_ = context?.Operators.Convert<string>(ah_);
                     return NCQAFHIRBase_1_0_0.GetId(ai_);
                 };
                 var ak_ = context?.Operators.SelectOrNull<FhirString, string>(af_, 
@@ -3100,9 +3061,7 @@ PharmacyClaimAndResponse?.PharmacyClaim,
             Func<Location,bool?> ba_ = (l) => 
             {
                 var ar_ = (l?.IdElement as object);
-                var as_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ar_);
+                var as_ = context?.Operators.Convert<string>(ar_);
                 var at_ = ClaimProperties?.ItemsLocationReferences;
                 Func<Tuples.Tuple_FPCXihcEeChSjIUJHVXRcEXMI,bool?> av_ = (@this) => 
                 {

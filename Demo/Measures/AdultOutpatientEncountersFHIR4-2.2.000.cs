@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public class AdultOutpatientEncountersFHIR4_2_2_000
@@ -150,9 +149,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
         Func<Encounter,bool?> w_ = (ValidEncounter) => 
         {
             var p_ = (ValidEncounter?.StatusElement as object);
-            var o_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(p_) as object);
+            var o_ = (context?.Operators.Convert<string>(p_) as object);
             var q_ = ("finished" as object);
             var r_ = context?.Operators.Equal(o_, 
 				q_);

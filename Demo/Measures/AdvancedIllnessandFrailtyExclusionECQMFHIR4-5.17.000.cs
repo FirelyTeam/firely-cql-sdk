@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
@@ -252,16 +251,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<MedicationRequest,bool?> y_ = (DementiaMed) => 
         {
             var g_ = (DementiaMed?.StatusElement as object);
-            var f_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("active" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
             var k_ = (DementiaMed?.IntentElement as object);
-            var j_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(k_) as object);
+            var j_ = (context?.Operators.Convert<string>(k_) as object);
             var l_ = ("order" as object);
             var m_ = context?.Operators.Equal(j_, 
 				l_);
@@ -305,9 +300,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Encounter,bool?> n_ = (LongTermFacilityEncounter) => 
         {
             var g_ = (LongTermFacilityEncounter?.StatusElement as object);
-            var f_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("finished" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -359,9 +352,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Encounter,bool?> o_ = (Outpatient) => 
         {
             var m_ = (Outpatient?.StatusElement as object);
-            var l_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(m_) as object);
+            var l_ = (context?.Operators.Convert<string>(m_) as object);
             var n_ = ("finished" as object);
             return context?.Operators.Equal(l_, 
 				n_);
@@ -557,9 +548,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Encounter,bool?> f_ = (AcuteInpatient) => 
         {
             var d_ = (AcuteInpatient?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             return context?.Operators.Equal(c_, 
 				e_);
@@ -621,9 +610,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<DeviceRequest,bool?> v_ = (FrailtyDeviceOrder) => 
         {
             var f_ = (FrailtyDeviceOrder?.StatusElement as object);
-            var g_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(f_);
+            var g_ = context?.Operators.Convert<string>(f_);
             var i_ = "active";
             var j_ = "on-hold";
             var k_ = "completed";
@@ -636,9 +623,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
             var l_ = context?.Operators.InList<string>(g_, 
 				h_);
             var n_ = (FrailtyDeviceOrder?.IntentElement as object);
-            var m_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(n_) as object);
+            var m_ = (context?.Operators.Convert<string>(n_) as object);
             var o_ = ("order" as object);
             var p_ = context?.Operators.Equal(m_, 
 				o_);
@@ -661,9 +646,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Observation,bool?> al_ = (FrailtyDeviceApplied) => 
         {
             var aa_ = (FrailtyDeviceApplied?.StatusElement as object);
-            var ab_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(aa_);
+            var ab_ = context?.Operators.Convert<string>(aa_);
             var ad_ = "final";
             var ae_ = "amended";
             var af_ = "corrected";
@@ -711,9 +694,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Encounter,bool?> bh_ = (FrailtyEncounter) => 
         {
             var ba_ = (FrailtyEncounter?.StatusElement as object);
-            var az_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ba_) as object);
+            var az_ = (context?.Operators.Convert<string>(ba_) as object);
             var bb_ = ("finished" as object);
             var bc_ = context?.Operators.Equal(az_, 
 				bb_);
@@ -737,9 +718,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Observation,bool?> bz_ = (FrailtySymptom) => 
         {
             var bn_ = (FrailtySymptom?.StatusElement as object);
-            var bo_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(bn_);
+            var bo_ = context?.Operators.Convert<string>(bn_);
             var bq_ = "preliminary";
             var br_ = "final";
             var bs_ = "amended";

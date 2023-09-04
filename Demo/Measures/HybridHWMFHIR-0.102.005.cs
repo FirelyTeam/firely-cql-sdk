@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("HybridHWMFHIR", "0.102.005")]
 public class HybridHWMFHIR_0_102_005
@@ -421,9 +420,7 @@ public class HybridHWMFHIR_0_102_005
         Func<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV,bool?> ag_ = (tuple_czdryxljaejapsirauhdxvhpv) => 
         {
             var j_ = (tuple_czdryxljaejapsirauhdxvhpv?.InpatientEncounter?.StatusElement as object);
-            var i_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(j_) as object);
+            var i_ = (context?.Operators.Convert<string>(j_) as object);
             var k_ = ("finished" as object);
             var l_ = context?.Operators.Equal(i_, 
 				k_);
@@ -490,9 +487,7 @@ public class HybridHWMFHIR_0_102_005
             var f_ = (context?.Operators.Concatenate(g_, 
 				j_) ?? "");
             var l_ = (Encounter?.IdElement as object);
-            var k_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(l_) ?? "");
+            var k_ = (context?.Operators.Convert<string>(l_) ?? "");
             var e_ = (context?.Operators.Concatenate(f_, 
 				k_) ?? "");
             var m_ = (" , " ?? "");
@@ -510,9 +505,7 @@ public class HybridHWMFHIR_0_102_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>((Exam?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
 (new string[]
 											{
 												"final",
@@ -540,9 +533,7 @@ public class HybridHWMFHIR_0_102_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>((Exam?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
 (new string[]
 											{
 												"final",
@@ -576,9 +567,7 @@ public class HybridHWMFHIR_0_102_005
             var f_ = (context?.Operators.Concatenate(g_, 
 				j_) ?? "");
             var l_ = (Encounter?.IdElement as object);
-            var k_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(l_) ?? "");
+            var k_ = (context?.Operators.Convert<string>(l_) ?? "");
             var e_ = (context?.Operators.Concatenate(f_, 
 				k_) ?? "");
             var d_ = (context?.Operators.Concatenate(e_, 
@@ -595,9 +584,7 @@ public class HybridHWMFHIR_0_102_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>((Lab?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Lab?.StatusElement as object)), 
 (new string[]
 											{
 												"final",
@@ -625,9 +612,7 @@ public class HybridHWMFHIR_0_102_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>((Lab?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Lab?.StatusElement as object)), 
 (new string[]
 											{
 												"final",

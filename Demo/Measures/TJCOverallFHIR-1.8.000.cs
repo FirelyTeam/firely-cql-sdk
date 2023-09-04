@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("TJCOverallFHIR", "1.8.000")]
 public class TJCOverallFHIR_1_8_000
@@ -422,9 +421,7 @@ public class TJCOverallFHIR_1_8_000
         Func<ServiceRequest,bool?> g_ = (P) => 
         {
             var e_ = (P?.IntentElement as object);
-            var d_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(e_) as object);
+            var d_ = (context?.Operators.Convert<string>(e_) as object);
             var f_ = ("order" as object);
             return context?.Operators.Equal(d_, 
 				f_);
@@ -436,9 +433,7 @@ public class TJCOverallFHIR_1_8_000
         Func<Procedure,bool?> p_ = (InterventionPerformed) => 
         {
             var k_ = (InterventionPerformed?.StatusElement as object);
-            var l_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(k_);
+            var l_ = context?.Operators.Convert<string>(k_);
             var n_ = "completed";
             var o_ = "in-progress";
             var m_ = (new string[]

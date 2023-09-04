@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
@@ -245,9 +244,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
         Func<Encounter,bool?> l_ = (EncounterInpatient) => 
         {
             var d_ = (EncounterInpatient?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -299,9 +296,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
         Func<MedicationAdministration,bool?> o_ = (HypoMedication) => 
         {
             var g_ = (HypoMedication?.StatusElement as object);
-            var f_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("completed" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -395,9 +390,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
                     var v_ = context?.Operators.And(q_, 
 						u_);
                     var x_ = (BloodGlucoseLab?.StatusElement as object);
-                    var w_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(x_) as object);
+                    var w_ = (context?.Operators.Convert<string>(x_) as object);
                     var y_ = ("final" as object);
                     var z_ = context?.Operators.Equal(w_, 
 						y_);
@@ -451,9 +444,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
                     var bl_ = context?.Operators.And(bg_, 
 						bk_);
                     var bn_ = (BloodGlucoseLab?.StatusElement as object);
-                    var bm_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(bn_) as object);
+                    var bm_ = (context?.Operators.Convert<string>(bn_) as object);
                     var bo_ = ("final" as object);
                     var bp_ = context?.Operators.Equal(bm_, 
 						bo_);
@@ -515,9 +506,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
                     var dg_ = context?.Operators.And(cn_, 
 						df_);
                     var di_ = (FollowupBloodGlucoseLab?.StatusElement as object);
-                    var dh_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(di_) as object);
+                    var dh_ = (context?.Operators.Convert<string>(di_) as object);
                     var dj_ = ("final" as object);
                     var dk_ = context?.Operators.Equal(dh_, 
 						dj_);

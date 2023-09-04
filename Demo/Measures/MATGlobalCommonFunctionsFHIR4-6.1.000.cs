@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public class MATGlobalCommonFunctionsFHIR4_6_1_000
@@ -692,9 +691,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Encounter,bool?> r_ = (EncounterInpatient) => 
         {
             var d_ = (EncounterInpatient?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -729,9 +726,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Encounter,bool?> y_ = (EDVisit) => 
         {
             var d_ = (EDVisit?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -1253,13 +1248,9 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
             Func<Condition,bool?> h_ = (C) => 
             {
                 var d_ = (C?.IdElement as object);
-                var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+                var c_ = (context?.Operators.Convert<string>(d_) as object);
                 var f_ = (D?.Condition?.ReferenceElement as object);
-                var g_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(f_);
+                var g_ = context?.Operators.Convert<string>(f_);
                 var e_ = (this.GetId(g_) as object);
                 return context?.Operators.Equal(c_, 
 					e_);
@@ -1280,13 +1271,9 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Condition,bool?> g_ = (C) => 
         {
             var c_ = (C?.IdElement as object);
-            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (reference?.ReferenceElement as object);
-            var f_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(e_);
+            var f_ = context?.Operators.Convert<string>(e_);
             var d_ = (this.GetId(f_) as object);
             return context?.Operators.Equal(b_, 
 				d_);
@@ -1304,9 +1291,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         {
             var d_ = (E?.Url as object);
             var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", 
 				url) as object);
             return context?.Operators.Equal(b_, 
@@ -1327,9 +1312,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         {
             var d_ = (E?.Url as object);
             var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (url as object);
             return context?.Operators.Equal(b_, 
 				e_);
@@ -1392,13 +1375,9 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
             Func<Condition,bool?> p_ = (C) => 
             {
                 var l_ = (C?.IdElement as object);
-                var k_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(l_) as object);
+                var k_ = (context?.Operators.Convert<string>(l_) as object);
                 var n_ = (PD?.Condition?.ReferenceElement as object);
-                var o_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(n_);
+                var o_ = context?.Operators.Convert<string>(n_);
                 var m_ = (this.GetId(o_) as object);
                 return context?.Operators.Equal(k_, 
 					m_);
@@ -1420,13 +1399,9 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         Func<Location,bool?> g_ = (L) => 
         {
             var c_ = (L?.IdElement as object);
-            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (reference?.ReferenceElement as object);
-            var f_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(e_);
+            var f_ = context?.Operators.Convert<string>(e_);
             var d_ = (this.GetId(f_) as object);
             return context?.Operators.Equal(b_, 
 				d_);
@@ -1444,9 +1419,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         {
             var d_ = (E?.Url as object);
             var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", 
 				url) as object);
             return context?.Operators.Equal(b_, 
@@ -1475,9 +1448,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
         {
             var d_ = (E?.Url as object);
             var c_ = (context?.Operators.Convert<FhirUri>(d_) as object);
-            var b_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_) as object);
+            var b_ = (context?.Operators.Convert<string>(c_) as object);
             var e_ = (context?.Operators.Concatenate("http://hl7.org/fhir/StructureDefinition/", 
 				id) as object);
             return context?.Operators.Equal(b_, 
@@ -1508,12 +1479,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
             {
                 return (context?.Operators.SingleOrNull<Medication>(context?.Operators.WhereOrNull<Medication>(context?.Operators.RetrieveByValueSet<Medication>(null, 
 								null), 
-							(M) => context?.Operators.Equal(((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>((M?.IdElement as object)) as object), 
-(this.GetId((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(((((request?.Medication as object) as ResourceReference))?.ReferenceElement as object))) as object)))))?.Code;
+							(M) => context?.Operators.Equal((context?.Operators.Convert<string>((M?.IdElement as object)) as object), 
+(this.GetId(context?.Operators.Convert<string>(((((request?.Medication as object) as ResourceReference))?.ReferenceElement as object))) as object)))))?.Code;
             }
     }
 

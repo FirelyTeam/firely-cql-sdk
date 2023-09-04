@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("Exam125FHIR", "0.0.009")]
 public class Exam125FHIR_0_0_009
@@ -316,9 +315,7 @@ public class Exam125FHIR_0_0_009
         Func<Encounter,bool?> n_ = (TelehealthEncounter) => 
         {
             var g_ = (TelehealthEncounter?.StatusElement as object);
-            var f_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("finished" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -369,9 +366,7 @@ public class Exam125FHIR_0_0_009
 			g_, 
 			null);
         var j_ = (this.Patient()?.GenderElement as object);
-        var i_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(j_) as object);
+        var i_ = (context?.Operators.Convert<string>(j_) as object);
         var k_ = ("female" as object);
         var l_ = context?.Operators.Equal(i_, 
 			k_);
@@ -444,9 +439,7 @@ public class Exam125FHIR_0_0_009
         Func<Procedure,bool?> m_ = (UnilateralMastectomyRightPerformed) => 
         {
             var d_ = (UnilateralMastectomyRightPerformed?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -516,9 +509,7 @@ public class Exam125FHIR_0_0_009
         Func<Procedure,bool?> m_ = (UnilateralMastectomyLeftPerformed) => 
         {
             var d_ = (UnilateralMastectomyLeftPerformed?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -568,9 +559,7 @@ public class Exam125FHIR_0_0_009
         Func<Procedure,bool?> m_ = (BilateralMastectomyPerformed) => 
         {
             var d_ = (BilateralMastectomyPerformed?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -652,9 +641,7 @@ public class Exam125FHIR_0_0_009
         Func<Observation,bool?> z_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -706,9 +693,7 @@ public class Exam125FHIR_0_0_009
         Func<DiagnosticReport,bool?> z_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -787,9 +772,7 @@ public class Exam125FHIR_0_0_009
         Func<Observation,bool?> aa_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -842,9 +825,7 @@ public class Exam125FHIR_0_0_009
         Func<DiagnosticReport,bool?> aa_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";

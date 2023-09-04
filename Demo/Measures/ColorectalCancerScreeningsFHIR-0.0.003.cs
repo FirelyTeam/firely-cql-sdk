@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("ColorectalCancerScreeningsFHIR", "0.0.003")]
 public class ColorectalCancerScreeningsFHIR_0_0_003
@@ -597,9 +596,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Encounter,bool?> n_ = (TelehealthEncounter) => 
         {
             var g_ = (TelehealthEncounter?.StatusElement as object);
-            var f_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("finished" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -696,9 +693,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Procedure,bool?> m_ = (Colectomy) => 
         {
             var d_ = (Colectomy?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -891,9 +886,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> ai_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -975,9 +968,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> ai_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1127,9 +1118,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> r_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1274,9 +1263,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> as_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1371,9 +1358,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> as_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1549,9 +1534,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> ab_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1645,9 +1628,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> z_ = (Colonography) => 
         {
             var c_ = (Colonography?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1698,9 +1679,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Observation,bool?> aa_ = (Colonography) => 
         {
             var c_ = (Colonography?.StatusElement as object);
-            var d_ = (context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -1793,9 +1772,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Procedure,bool?> v_ = (FlexibleSigmoidoscopy) => 
         {
             var d_ = (FlexibleSigmoidoscopy?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -1836,9 +1813,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Procedure,bool?> w_ = (FlexibleSigmoidoscopy) => 
         {
             var d_ = (FlexibleSigmoidoscopy?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -1921,9 +1896,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Procedure,bool?> v_ = (Colonoscopy) => 
         {
             var d_ = (Colonoscopy?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -1964,9 +1937,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
         Func<Procedure,bool?> w_ = (Colonoscopy) => 
         {
             var d_ = (Colonoscopy?.StatusElement as object);
-            var c_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("completed" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);

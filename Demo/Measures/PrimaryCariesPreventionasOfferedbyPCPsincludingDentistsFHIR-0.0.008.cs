@@ -9,7 +9,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR", "0.0.008")]
 public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
@@ -302,9 +301,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 				z_, 
 				null);
             var ac_ = (ValidEncounter?.StatusElement as object);
-            var ab_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(ac_) as object);
+            var ab_ = (context?.Operators.Convert<string>(ac_) as object);
             var ad_ = ("finished" as object);
             var ae_ = context?.Operators.Equal(ab_, 
 				ad_);
@@ -441,9 +438,7 @@ public class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008
 				e_, 
 				null);
             var h_ = (FluorideApplication?.StatusElement as object);
-            var g_ = ((context.OnFunctionCalled(new FunctionCallEvent("ToString", 
-		null, 
-		null))?.Operators).Convert<string>(h_) as object);
+            var g_ = (context?.Operators.Convert<string>(h_) as object);
             var i_ = ("completed" as object);
             var j_ = context?.Operators.Equal(g_, 
 				i_);
