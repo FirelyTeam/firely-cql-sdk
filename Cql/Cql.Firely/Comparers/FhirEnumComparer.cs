@@ -1,4 +1,5 @@
-﻿using Hl7.Fhir.Utility;
+﻿using Hl7.Cql.Abstractions;
+using Hl7.Fhir.Utility;
 using System.Reflection;
 
 namespace Hl7.Cql.Fhir.Comparers

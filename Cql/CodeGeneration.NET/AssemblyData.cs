@@ -9,7 +9,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.CodeGeneration.NET
 {
     /// <summary>
     /// Stores information about a dynamically generated assembly.

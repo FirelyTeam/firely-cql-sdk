@@ -6,11 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Operators;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Operators
 {
     /// <summary>
     /// Defines the implementations that a model binding provides to the SDK.

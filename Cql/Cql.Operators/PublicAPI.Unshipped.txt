@@ -66,7 +66,7 @@ Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<
 Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<int?>?>? intervals, string? precision) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<int?>?>?
 Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>? intervals, string? precision) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>?
 Hl7.Cql.Operators.ICqlOperators.Combine(System.Collections.Generic.IEnumerable<string!>! source, string? separator) -> string?
-Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.ICqlComparer!
+Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.Abstractions.ICqlComparer!
 Hl7.Cql.Operators.ICqlOperators.ComponentFrom(Hl7.Cql.Primitives.CqlDate? argument, string? precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.ComponentFrom(Hl7.Cql.Primitives.CqlDateTime? argument, string? precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.ComponentFrom(Hl7.Cql.Primitives.CqlTime? argument, string? precision) -> int?

@@ -1,4 +1,5 @@
-﻿using System.Linq.Expressions;
+﻿using Hl7.Cql.Abstractions;
+using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler

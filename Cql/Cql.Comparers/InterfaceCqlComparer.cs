@@ -7,6 +7,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+
 namespace Hl7.Cql.Comparers
 {
     internal class InterfaceCqlComparer<T> : ICqlComparer<T>, ICqlComparer

@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
     /// <summary>
     /// <para>Defines a generalized type-specific comparison method that a value type or class implements to order or sort its instances.</para>

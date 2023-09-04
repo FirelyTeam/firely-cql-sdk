@@ -7,6 +7,7 @@
  */
 
 using AgileObjects.ReadableExpressions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Primitives;
