@@ -48,13 +48,13 @@ namespace Hl7.Cql.Compiler
             TypeManager typeManager,
             Library elm,
             ILogger<ExpressionBuilder> logger,
-            ExpressionBuilderOptions options)
+            ExpressionBuilderOptions? options = null)
         {
             OperatorBinding = operatorBinding;
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
             Library = elm ?? throw new ArgumentNullException(nameof(elm));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.options = options;
+            this.options = options ?? new(EmitStackTraces: false);
             if (Library.identifier == null)
                 throw new ArgumentException("Package is missing a library identifier", nameof(elm));
 
