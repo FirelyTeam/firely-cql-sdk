@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -57,10 +56,12 @@ namespace Hl7.Cql.Operators
         /// <returns>Resources of type <typeparamref name="T"/> matching the parameter criteria.</returns>
         IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class;
 
+#if VNEXT
         /// <summary>
         /// Will be triggered when the data in the source has changed, e.g. because of updates or because different 
         /// data was loaded altogether.
         /// </summary>
         event EventHandler? DataChanged;
+#endif
     }
 }

@@ -66,9 +66,9 @@ namespace CoreTests
 
             public IList<object> Data { get; }
 
-#pragma warning disable CS0067 // The event 'ModelTest.UnitTestDataSource.DataChanged' is never used
+#if VNEXT
             public event EventHandler DataChanged;
-#pragma warning restore CS0067 // The event 'ModelTest.UnitTestDataSource.DataChanged' is never used
+#endif
 
             public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode> codes = null, PropertyInfo _ = null) where T : class =>
                 Data.OfType<T>();

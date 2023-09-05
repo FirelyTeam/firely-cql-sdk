@@ -17,27 +17,23 @@ namespace Hl7.Cql.Fhir
     /// Factory methods to initialize an <see cref="CqlContext"/> that uses the SDK POCO model
     /// as binding for the Cql engine, supplying data using POCO instances.
     /// </summary>
-    public class FhirCqlContext : CqlContext
+    public static class FhirCqlContext
     {
-        internal FhirCqlContext(IDataSource? dataSource = null,
+        internal static CqlContext createContext(IDataSource? dataSource = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
-            FhirModelBindingOptions? options = null) :
-            base(
+            FhirModelBindingOptions? options = null) =>
+            new CqlContext(
                 new FhirModelBindingSetup(dataSource, valueSets, now, options).Operators,
                 parameters,
-                delegates,
-                extensionState: null)
-        {
-            // Nothing
-        }
+                delegates);
 
         /// <summary>
         /// Factory method for creating a setup of the engine with the given <see cref="Bundle"/>.
         /// </summary>
-        public static FhirCqlContext ForBundle(Bundle? bundle = null,
+        public static CqlContext ForBundle(Bundle? bundle = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
@@ -54,14 +50,14 @@ namespace Hl7.Cql.Fhir
         /// <summary>
         /// Factory method for creating a setup of the engine with the given <see cref="IDataSource"/>.
         /// </summary>
-        public static FhirCqlContext WithDataSource(IDataSource? source = null,
+        public static CqlContext WithDataSource(IDataSource? source = null,
             IDictionary<string, object>? parameters = null,
             IValueSetDictionary? valueSets = null,
             DateTimeOffset? now = null,
             DefinitionDictionary<Delegate>? delegates = null,
             FhirModelBindingOptions? options = null)
         {
-            return new(source, parameters, valueSets, now, delegates, options);
+            return createContext(source, parameters, valueSets, now, delegates, options);
         }
     }
 }

@@ -52,12 +52,12 @@ namespace Hl7.Cql.Fhir
         private readonly ICqlComparer _codeComparer;
         private readonly ICqlComparer _systemComparer;
 
+#if VNEXT
         /// <inheritdoc/>
         /// <remarks>Since it is not possible to monitor changes in a FHIR POCO, this source will not trigger when
         /// external changes are made to the Bundle.</remarks>
-#pragma warning disable CS0067 // The event 'BundleDataSource.DataChanged' is never used
         public event EventHandler? DataChanged;
-#pragma warning restore CS0067 // The event 'BundleDataSource.DataChanged' is never used
+#endif
 
         /// <inheritdoc/>
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? allowedCodes = null, PropertyInfo? codeProperty = null) where T : class

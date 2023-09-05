@@ -8,12 +8,10 @@
 
 using Hl7.Cql.Operators;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Hl7.Cql.Runtime
 {
-
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>
@@ -28,16 +26,6 @@ namespace Hl7.Cql.Runtime
         /// Gets the implementation of <see cref="ICqlOperators"/> this execution uses.
         /// </summary>
         public ICqlOperators Operators { get; }
-
-        /// <summary>
-        /// An external dictionary that contains the runtime state for extensions.
-        /// </summary>
-        /// <remarks>
-        /// Runtime extensions can provide functionality like logging and timing by altering how the translation
-        /// between ELM and .NET expressions is done.  For implementations that need to hold state, they can use
-        /// keys in this dictionary to store any kind of state they need.
-        /// </remarks>
-        internal ConcurrentDictionary<string, object> Extensions { get; }
 
         /// <summary>
         /// Gets the values of library parameters for this execution.
@@ -55,31 +43,36 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         /// <param name="operators">The <see cref="ICqlOperators"/> implementation to use.</param>
         /// <param name="parameters">The input parameters, or <see langword="null"/>. </param>
-        /// <param name="extensionState">A dictionary that will keep state used by extensions.</param>
         /// <param name="delegates">The delegates, or <see langword="null"/>.  If <see langword="null"/>, runtime errors will occur when CQL expressions attempt to reference other definitions.</param>
         protected internal CqlContext(ICqlOperators operators,
             IDictionary<string, object>? parameters = null,
-            DefinitionDictionary<Delegate>? delegates = null,
-            ConcurrentDictionary<string, object>? extensionState = null)
+            DefinitionDictionary<Delegate>? delegates = null)
         {
             Operators = operators;
             Definitions = delegates ?? new DefinitionDictionary<Delegate>();
-            Extensions = extensionState ?? new();
             Parameters = parameters ?? new Dictionary<string, object>();
         }
 
         /// <summary>
-        /// Notifies subscribers when a function is called.
+        /// Notifies subscribers when a CQL Message has been dispatched.
         /// </summary>
-        public event EventHandler<FunctionCallEvent>? FunctionCalled;
+        public event EventHandler<MessageEventArgs>? MessageReceived
+        {
+            add => Operators.MessageReceived += value;
+            remove => Operators.MessageReceived -= value;
+        }
 
         /// <summary>
-        /// Raise the <see cref="FunctionCalled"/> event.
+        /// Notifies subscribers when a generic event is raised in the engine.
         /// </summary>
-        /// <param name="eventData"></param>
-        public CqlContext OnFunctionCalled(FunctionCallEvent eventData)
+        public event EventHandler<ContextEventArgs>? ContextEvent;
+
+        /// <summary>
+        /// Raise the <see cref="ContextEvent"/> event.
+        /// </summary>
+        public CqlContext RaiseContextEvent(ContextEventArgs eventData)
         {
-            FunctionCalled?.Invoke(this, eventData);
+            ContextEvent?.Invoke(this, eventData);
             return this;
         }
 
@@ -105,23 +98,6 @@ namespace Hl7.Cql.Runtime
                 return Parameters[parameterName];
 
             return defaultValue;
-        }
-
-        /// <summary>
-        /// Gets the value of the extension in <see cref="Extensions"/> given key.
-        /// </summary>
-        /// <param name="key">The extension key.</param>
-        /// <param name="defaultValue">The default value to use if the extension isn't found.</param>
-        /// <returns>The value of the parameter or <paramref name="defaultValue"/> if not defined.</returns>
-        public object? ResolveExtension(string key, object? defaultValue)
-        {
-            if (!Extensions.TryGetValue(key, out var value))
-            {
-                Extensions[key] = defaultValue;
-                return defaultValue;
-            }
-
-            return value;
         }
     }
 }

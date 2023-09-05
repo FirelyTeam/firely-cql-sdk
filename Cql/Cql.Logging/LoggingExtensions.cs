@@ -22,7 +22,7 @@ namespace Hl7.Cql.Logging
         /// </summary>
         public static CqlContext AddMessageLogging(this CqlContext ctx, ILogger logger)
         {
-            ctx.Operators.MessageReceived += (sender, args) =>
+            ctx.MessageReceived += (sender, args) =>
             {
                 var level = Level(args);
                 logger.Log(level, new EventId(default, args.Code), args.Message, args.Source);

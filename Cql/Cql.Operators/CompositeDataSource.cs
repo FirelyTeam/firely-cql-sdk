@@ -30,11 +30,13 @@ namespace Hl7.Cql.Operators
             DataSources = sources ?? throw new ArgumentNullException(nameof(sources));
             if (sources.Any(r => r is null))
                 throw new ArgumentNullException(nameof(sources), "At least one data source supplied is null.");
-
+#if VNEXT
             foreach (var r in sources)
                 r.DataChanged += triggerDataChanged;
+#endif
         }
 
+#if VNEXT
         /// <inheritdoc/>
         public event EventHandler? DataChanged;
 
@@ -42,6 +44,7 @@ namespace Hl7.Cql.Operators
         {
             DataChanged?.Invoke(sender, e);
         }
+#endif
 
         /// <summary>
         /// The data sources whose data is composed.
