@@ -213,14 +213,14 @@ public class SupplementalDataElementsFHIR4_2_0_000
     private CqlCode SDE_Sex_Value()
     {
         if ((context?.Operators.Equal((context?.Operators.Convert<string>((this.Patient()?.GenderElement as object)) as object), 
-("male" as object)) ?? false))
+				("male" as object)) ?? false))
             return new CqlCode("M", 
 				"http://hl7.org/fhir/v3/AdministrativeGender", 
 				null, 
 				"Male");
 
         else if ((context?.Operators.Equal((context?.Operators.Convert<string>((this.Patient()?.GenderElement as object)) as object), 
-("female" as object)) ?? false))
+				("female" as object)) ?? false))
             return new CqlCode("F", 
 				"http://hl7.org/fhir/v3/AdministrativeGender", 
 				null, 

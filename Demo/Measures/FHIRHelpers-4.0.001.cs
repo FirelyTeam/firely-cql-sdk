@@ -91,7 +91,7 @@ public class FHIRHelpers_4_0_001
 
         else 
             return new CqlQuantity(quantity?.ValueElement?.Value, 
-quantity?.UnitElement?.Value);
+				quantity?.UnitElement?.Value);
 
     }
 
