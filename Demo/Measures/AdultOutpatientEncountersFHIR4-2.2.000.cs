@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public class AdultOutpatientEncountersFHIR4_2_2_000
 {
@@ -114,7 +114,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -124,34 +124,32 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     private IEnumerable<Encounter> Qualifying_Encounters_Value()
     {
         var a_ = this.Office_Visit();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Annual_Wellness_Visit();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
-			null);
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
+			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
-			null);
+        var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
+			typeof(Encounter).GetProperty("Type"));
         var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
-			null);
+        var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
+			typeof(Encounter).GetProperty("Type"));
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Home_Healthcare_Services();
-        var m_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(l_, 
-			null);
+        var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
+			typeof(Encounter).GetProperty("Type"));
         var n_ = context?.Operators.ListUnion<Encounter>(k_, 
 			m_);
         Func<Encounter,bool?> w_ = (ValidEncounter) => 
         {
             var p_ = (ValidEncounter?.StatusElement as object);
-            var o_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(p_) as object);
+            var o_ = (context?.Operators.Convert<string>(p_) as object);
             var q_ = ("finished" as object);
             var r_ = context?.Operators.Equal(o_, 
 				q_);

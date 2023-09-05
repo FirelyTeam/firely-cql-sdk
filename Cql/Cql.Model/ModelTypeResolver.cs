@@ -17,7 +17,7 @@ namespace Hl7.Cql.Model
     /// <summary>
     /// This class implements <see cref="GetPrimaryCodePath"/> through the provided <see cref="ModelInfo"/>
     /// </summary>
-    public abstract class ModelTypeResolver : BaseTypeResolver
+    internal abstract class ModelTypeResolver : BaseTypeResolver
     {
         protected ModelTypeResolver(ModelInfo model)
         {

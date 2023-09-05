@@ -34,7 +34,7 @@ namespace Hl7.Cql.Elm
             _ => throw new ArgumentException($"Unrecognized sort direction {Enum.GetName(typeof(SortDirection), direction)}")
         };
 
-        public static IEnumerable<Library> Packages(this DirectedGraph graph)
+        internal static IEnumerable<Library> Packages(this DirectedGraph graph)
         {
             foreach (var node in graph.Nodes)
             {

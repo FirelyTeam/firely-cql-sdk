@@ -9,7 +9,7 @@
 
 namespace Hl7.Cql.Comparers
 {
-    public class InterfaceCqlComparer<T> : ICqlComparer<T>, ICqlComparer
+    internal class InterfaceCqlComparer<T> : ICqlComparer<T>, ICqlComparer
         where T : class, ICqlComparable<T>, IEquivalentable<T>
     {
         public int? Compare(T? x, T? y, string? precision)

@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
 public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 {
@@ -175,7 +175,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -213,8 +213,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     private IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period_Value()
     {
         var a_ = this.Encounter_Inpatient();
-        return context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        return context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
     }
     [CqlDeclaration("Inpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period() => __Inpatient_Encounter_During_Measurement_Period.Value;
@@ -266,8 +266,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         Func<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW,IEnumerable<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>> q_ = (EncounterWithHospitalization) => 
         {
             var b_ = this.Diabetes();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<Condition>(b_, 
-				null);
+            var c_ = context?.Operators.RetrieveByValueSet<Condition>(b_, 
+				typeof(Condition).GetProperty("Code"));
             Func<Condition,bool?> n_ = (DiabetesDiagnosis) => 
             {
                 var e_ = DiabetesDiagnosis?.VerificationStatus;
@@ -310,8 +310,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         Func<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW,IEnumerable<MedicationAdministration>> f_ = (_EncounterWithHospitalization) => 
         {
             var b_ = this.Hypoglycemics_Treatment_Medications();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<MedicationAdministration>(b_, 
-				null);
+            var c_ = context?.Operators.RetrieveByValueSet<MedicationAdministration>(b_, 
+				typeof(MedicationAdministration).GetProperty("Medication"));
             return context?.Operators.ListUnion<MedicationAdministration>(c_, 
 				c_);
         };
@@ -331,9 +331,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         Func<Tuples.Tuple_EBCeiDEEJUjLQKCDbhKCQVIHW,bool?> s_ = (tuple_ebceideejujlqkcdbhkcqvihw) => 
         {
             var l_ = (tuple_ebceideejujlqkcdbhkcqvihw?.HypoglycemicMedication?.StatusElement as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
+            var k_ = (context?.Operators.Convert<string>(l_) as object);
             var m_ = ("completed" as object);
             var n_ = context?.Operators.Equal(k_, 
 				m_);
@@ -364,8 +362,8 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         Func<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW,IEnumerable<Tuples.Tuple_CXAFdKaHNVUHbTOBaaLVHDiaW>> t_ = (EncounterWithHospitalization) => 
         {
             var b_ = this.Glucose_lab_test();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<Observation>(b_, 
-				null);
+            var c_ = context?.Operators.RetrieveByValueSet<Observation>(b_, 
+				typeof(Observation).GetProperty("Code"));
             Func<Observation,bool?> q_ = (BloodGlucoseLab) => 
             {
                 var d_ = ((BloodGlucoseLab?.Effective as object) as FhirDateTime);
@@ -375,9 +373,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 					f_, 
 					null);
                 var i_ = (BloodGlucoseLab?.StatusElement as object);
-                var h_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(i_) as object);
+                var h_ = (context?.Operators.Convert<string>(i_) as object);
                 var j_ = ("final" as object);
                 var k_ = context?.Operators.Equal(h_, 
 					j_);
@@ -559,14 +555,12 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 var f_ = EncounterDay?.dayIndex;
                 var g_ = EncounterDay?.dayPeriod;
                 var i_ = this.Glucose_lab_test();
-                var j_ = context?.DataRetriever.RetrieveByValueSet<Observation>(i_, 
-					null);
+                var j_ = context?.Operators.RetrieveByValueSet<Observation>(i_, 
+					typeof(Observation).GetProperty("Code"));
                 Func<Observation,bool?> x_ = (BloodGlucoseLab1) => 
                 {
                     var l_ = (BloodGlucoseLab1?.StatusElement as object);
-                    var k_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) as object);
+                    var k_ = (context?.Operators.Convert<string>(l_) as object);
                     var m_ = ("final" as object);
                     var n_ = context?.Operators.Equal(k_, 
 						m_);
@@ -593,9 +587,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 Func<Observation,bool?> ap_ = (BloodGlucoseLab2) => 
                 {
                     var ad_ = (BloodGlucoseLab2?.StatusElement as object);
-                    var ac_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ad_) as object);
+                    var ac_ = (context?.Operators.Convert<string>(ad_) as object);
                     var ae_ = ("final" as object);
                     var af_ = context?.Operators.Equal(ac_, 
 						ae_);
@@ -622,9 +614,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 Func<Observation,bool?> bc_ = (BloodGlucoseLab3) => 
                 {
                     var av_ = (BloodGlucoseLab3?.StatusElement as object);
-                    var au_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(av_) as object);
+                    var au_ = (context?.Operators.Convert<string>(av_) as object);
                     var aw_ = ("final" as object);
                     var ax_ = context?.Operators.Equal(au_, 
 						aw_);

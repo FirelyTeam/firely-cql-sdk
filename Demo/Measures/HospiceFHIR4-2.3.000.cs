@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("HospiceFHIR4", "2.3.000")]
 public class HospiceFHIR4_2_3_000
 {
@@ -125,7 +125,7 @@ public class HospiceFHIR4_2_3_000
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -135,14 +135,12 @@ public class HospiceFHIR4_2_3_000
     private bool? Has_Hospice_Value()
     {
         var a_ = this.Encounter_Inpatient();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> x_ = (DischargeHospice) => 
         {
             var d_ = (DischargeHospice?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -174,14 +172,12 @@ public class HospiceFHIR4_2_3_000
 			x_);
         var z_ = context?.Operators.ExistsInList<Encounter>(y_);
         var aa_ = this.Hospice_care_ambulatory();
-        var ab_ = context?.DataRetriever.RetrieveByValueSet<ServiceRequest>(aa_, 
-			null);
+        var ab_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(aa_, 
+			typeof(ServiceRequest).GetProperty("Code"));
         Func<ServiceRequest,bool?> ar_ = (HospiceOrder) => 
         {
             var ac_ = (HospiceOrder?.StatusElement as object);
-            var ad_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ac_);
+            var ad_ = context?.Operators.Convert<string>(ac_);
             var af_ = "active";
             var ag_ = "completed";
             var ae_ = (new string[]
@@ -192,9 +188,7 @@ public class HospiceFHIR4_2_3_000
             var ah_ = context?.Operators.InList<string>(ad_, 
 				ae_);
             var aj_ = (HospiceOrder?.IntentElement as object);
-            var ai_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(aj_) as object);
+            var ai_ = (context?.Operators.Convert<string>(aj_) as object);
             var ak_ = ("order" as object);
             var al_ = context?.Operators.Equal(ai_, 
 				ak_);
@@ -214,14 +208,12 @@ public class HospiceFHIR4_2_3_000
         var at_ = context?.Operators.ExistsInList<ServiceRequest>(as_);
         var au_ = context?.Operators.Or(z_, 
 			at_);
-        var aw_ = context?.DataRetriever.RetrieveByValueSet<Procedure>(aa_, 
-			null);
+        var aw_ = context?.Operators.RetrieveByValueSet<Procedure>(aa_, 
+			typeof(Procedure).GetProperty("Code"));
         Func<Procedure,bool?> bf_ = (HospicePerformed) => 
         {
             var ay_ = (HospicePerformed?.StatusElement as object);
-            var ax_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ay_) as object);
+            var ax_ = (context?.Operators.Convert<string>(ay_) as object);
             var az_ = ("completed" as object);
             var ba_ = context?.Operators.Equal(ax_, 
 				az_);

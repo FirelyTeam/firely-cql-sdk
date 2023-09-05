@@ -35,7 +35,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// <summary>
     /// Writes <see cref="LambdaExpression"/>s as members of a .NET class.
     /// </summary>
-    public class CSharpSourceCodeWriter
+    internal class CSharpSourceCodeWriter
     {
         /// <summary>
         /// Creates an instance.

@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("HybridHWRFHIR", "1.3.005")]
 public class HybridHWRFHIR_1_3_005
 {
@@ -390,7 +390,7 @@ public class HybridHWRFHIR_1_3_005
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -435,11 +435,11 @@ public class HybridHWRFHIR_1_3_005
 		};
         Func<Encounter,CqlInterval<CqlDateTime>> m_ = (Visit) => 
         {
-            var d_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Emergency_Department_Visit(), 
-								null), 
+            var d_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Emergency_Department_Visit(), 
+								typeof(Encounter).GetProperty("Type")), 
 							(LastED) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastED?.Period)), 
-										context?.Operators.Interval(context?.Operators.Subtract((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																			null), 
+										context?.Operators.Interval(context?.Operators.Subtract((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+																			typeof(Encounter).GetProperty("Type")), 
 																		(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																					context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																							context?.Operators.Quantity(1m, 
@@ -453,8 +453,8 @@ public class HybridHWRFHIR_1_3_005
 																	System.ComponentModel.ListSortDirection.Ascending)))?.Period)) ?? context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period))), 
 												context?.Operators.Quantity(1m, 
 													"hour")), 
-											(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																		null), 
+											(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+																		typeof(Encounter).GetProperty("Type")), 
 																	(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																				context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																						context?.Operators.Quantity(1m, 
@@ -469,8 +469,8 @@ public class HybridHWRFHIR_1_3_005
 											true, 
 											true), 
 										null), 
-									context?.Operators.Not(((bool?)((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																	null), 
+									context?.Operators.Not(((bool?)((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+																	typeof(Encounter).GetProperty("Type")), 
 																(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																			context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																					context?.Operators.Quantity(1m, 
@@ -485,8 +485,8 @@ public class HybridHWRFHIR_1_3_005
 						(@this) => context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(@this?.Period)), 
 						System.ComponentModel.ListSortDirection.Ascending)))?.Period;
             var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
-            var f_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.DataRetriever.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-								null), 
+            var f_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+								typeof(Encounter).GetProperty("Type")), 
 							(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 										context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 												context?.Operators.Quantity(1m, 
@@ -526,13 +526,13 @@ public class HybridHWRFHIR_1_3_005
     private IEnumerable<Encounter> Inpatient_Encounters_Value()
     {
         var a_ = this.Encounter_Inpatient();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,IEnumerable<Coverage>> d_ = (_InpatientEncounter) => 
         {
             var c_ = this.Medicare_payer();
-            return context?.DataRetriever.RetrieveByValueSet<Coverage>(c_, 
-				null);
+            return context?.Operators.RetrieveByValueSet<Coverage>(c_, 
+				typeof(Coverage).GetProperty("Type"));
         };
         Func<Encounter,Coverage,Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV> g_ = (_InpatientEncounter, _Payer) => 
         {
@@ -550,9 +550,7 @@ public class HybridHWRFHIR_1_3_005
         Func<Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV,bool?> ag_ = (tuple_czdryxljaejapsirauhdxvhpv) => 
         {
             var j_ = (tuple_czdryxljaejapsirauhdxvhpv?.InpatientEncounter?.StatusElement as object);
-            var i_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(j_) as object);
+            var i_ = (context?.Operators.Convert<string>(j_) as object);
             var k_ = ("finished" as object);
             var l_ = context?.Operators.Equal(i_, 
 				k_);
@@ -573,7 +571,7 @@ public class HybridHWRFHIR_1_3_005
             var w_ = context?.Operators.And(q_, 
 				v_);
             var y_ = (this.Patient()?.BirthDateElement?.Value as object);
-            var z_ = context?.Operators?.TypeConverter.Convert<CqlDate>(y_);
+            var z_ = context?.Operators.Convert<CqlDate>(y_);
             var ac_ = context?.Operators.Start(s_);
             var ad_ = context?.Operators.DateFrom(ac_);
             var x_ = (context?.Operators.CalculateAgeAt(z_, 
@@ -615,9 +613,7 @@ public class HybridHWRFHIR_1_3_005
             var f_ = (context?.Operators.Concatenate(g_, 
 				j_) ?? "");
             var l_ = (Encounter?.IdElement as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) ?? "");
+            var k_ = (context?.Operators.Convert<string>(l_) ?? "");
             var e_ = (context?.Operators.Concatenate(f_, 
 				k_) ?? "");
             var d_ = (context?.Operators.Concatenate(e_, 
@@ -634,9 +630,7 @@ public class HybridHWRFHIR_1_3_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((Exam?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
 											(new string[]
 											{
 												"final",
@@ -664,9 +658,7 @@ public class HybridHWRFHIR_1_3_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((Exam?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
 											(new string[]
 											{
 												"final",
@@ -700,9 +692,7 @@ public class HybridHWRFHIR_1_3_005
             var f_ = (context?.Operators.Concatenate(g_, 
 				j_) ?? "");
             var l_ = (Encounter?.IdElement as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) ?? "");
+            var k_ = (context?.Operators.Convert<string>(l_) ?? "");
             var e_ = (context?.Operators.Concatenate(f_, 
 				k_) ?? "");
             var d_ = (context?.Operators.Concatenate(e_, 
@@ -719,9 +709,7 @@ public class HybridHWRFHIR_1_3_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((Exam?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
 											(new string[]
 											{
 												"final",
@@ -749,9 +737,7 @@ public class HybridHWRFHIR_1_3_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((Exam?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
 											(new string[]
 											{
 												"final",
@@ -785,9 +771,7 @@ public class HybridHWRFHIR_1_3_005
             var f_ = (context?.Operators.Concatenate(g_, 
 				j_) ?? "");
             var l_ = (Encounter?.IdElement as object);
-            var k_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(l_) ?? "");
+            var k_ = (context?.Operators.Convert<string>(l_) ?? "");
             var e_ = (context?.Operators.Concatenate(f_, 
 				k_) ?? "");
             var d_ = (context?.Operators.Concatenate(e_, 
@@ -804,9 +788,7 @@ public class HybridHWRFHIR_1_3_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((Lab?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Lab?.StatusElement as object)), 
 											(new string[]
 											{
 												"final",
@@ -834,9 +816,7 @@ public class HybridHWRFHIR_1_3_005
 													true, 
 													true), 
 												null)), 
-										context?.Operators.InList<string>((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>((Lab?.StatusElement as object)), 
+										context?.Operators.InList<string>(context?.Operators.Convert<string>((Lab?.StatusElement as object)), 
 											(new string[]
 											{
 												"final",
@@ -859,71 +839,71 @@ public class HybridHWRFHIR_1_3_005
     {
         var c_ = this.Heart_rate();
         var d_ = context?.Operators.ToList<CqlCode>(c_);
-        var e_ = context?.DataRetriever.RetrieveByCodes<Observation>(d_, 
-			null);
+        var e_ = context?.Operators.RetrieveByCodes<Observation>(d_, 
+			typeof(Observation).GetProperty("Code"));
         var b_ = this.FirstPhysicalExamWithEncounterId(e_, 
 			"FirstHeartRate");
         var g_ = this.Systolic_blood_pressure();
         var h_ = context?.Operators.ToList<CqlCode>(g_);
-        var i_ = context?.DataRetriever.RetrieveByCodes<Observation>(h_, 
-			null);
+        var i_ = context?.Operators.RetrieveByCodes<Observation>(h_, 
+			typeof(Observation).GetProperty("Code"));
         var f_ = this.FirstPhysicalExamWithEncounterId(i_, 
 			"FirstSystolicBP");
         var k_ = this.Respiratory_rate();
         var l_ = context?.Operators.ToList<CqlCode>(k_);
-        var m_ = context?.DataRetriever.RetrieveByCodes<Observation>(l_, 
-			null);
+        var m_ = context?.Operators.RetrieveByCodes<Observation>(l_, 
+			typeof(Observation).GetProperty("Code"));
         var j_ = this.FirstPhysicalExamWithEncounterId(m_, 
 			"FirstRespRate");
         var o_ = this.Body_temperature();
-        var p_ = context?.DataRetriever.RetrieveByValueSet<Observation>(o_, 
-			null);
+        var p_ = context?.Operators.RetrieveByValueSet<Observation>(o_, 
+			typeof(Observation).GetProperty("Code"));
         var n_ = this.FirstPhysicalExamWithEncounterId(p_, 
 			"FirstTemperature");
         var r_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry();
         var s_ = context?.Operators.ToList<CqlCode>(r_);
-        var t_ = context?.DataRetriever.RetrieveByCodes<Observation>(s_, 
-			null);
+        var t_ = context?.Operators.RetrieveByCodes<Observation>(s_, 
+			typeof(Observation).GetProperty("Code"));
         var q_ = this.FirstPhysicalExamWithEncounterId(t_, 
 			"FirstO2Saturation");
         var v_ = this.Body_weight();
-        var w_ = context?.DataRetriever.RetrieveByValueSet<Observation>(v_, 
-			null);
+        var w_ = context?.Operators.RetrieveByValueSet<Observation>(v_, 
+			typeof(Observation).GetProperty("Code"));
         var u_ = this.FirstPhysicalExamWithEncounterIdUsingLabTiming(w_, 
 			"FirstWeight");
         var y_ = this.Hematocrit_lab_test();
-        var z_ = context?.DataRetriever.RetrieveByValueSet<Observation>(y_, 
-			null);
+        var z_ = context?.Operators.RetrieveByValueSet<Observation>(y_, 
+			typeof(Observation).GetProperty("Code"));
         var x_ = this.FirstLabTestWithEncounterId(z_, 
 			"FirstHematocrit");
         var ab_ = this.White_blood_cells_count_lab_test();
-        var ac_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ab_, 
-			null);
+        var ac_ = context?.Operators.RetrieveByValueSet<Observation>(ab_, 
+			typeof(Observation).GetProperty("Code"));
         var aa_ = this.FirstLabTestWithEncounterId(ac_, 
 			"FirstWhiteBloodCell");
         var ae_ = this.Potassium_lab_test();
-        var af_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ae_, 
-			null);
+        var af_ = context?.Operators.RetrieveByValueSet<Observation>(ae_, 
+			typeof(Observation).GetProperty("Code"));
         var ad_ = this.FirstLabTestWithEncounterId(af_, 
 			"FirstPotassium");
         var ah_ = this.Sodium_lab_test();
-        var ai_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ah_, 
-			null);
+        var ai_ = context?.Operators.RetrieveByValueSet<Observation>(ah_, 
+			typeof(Observation).GetProperty("Code"));
         var ag_ = this.FirstLabTestWithEncounterId(ai_, 
 			"FirstSodium");
         var ak_ = this.Bicarbonate_lab_test();
-        var al_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ak_, 
-			null);
+        var al_ = context?.Operators.RetrieveByValueSet<Observation>(ak_, 
+			typeof(Observation).GetProperty("Code"));
         var aj_ = this.FirstLabTestWithEncounterId(al_, 
 			"FirstBicarbonate");
         var an_ = this.Creatinine_lab_test();
-        var ao_ = context?.DataRetriever.RetrieveByValueSet<Observation>(an_, 
-			null);
+        var ao_ = context?.Operators.RetrieveByValueSet<Observation>(an_, 
+			typeof(Observation).GetProperty("Code"));
         var am_ = this.FirstLabTestWithEncounterId(ao_, 
 			"FirstCreatinine");
         var aq_ = this.Glucose_lab_test();
-        var ar_ = context?.DataRetriever.RetrieveByValueSet<Observation>(aq_, 
-			null);
+        var ar_ = context?.Operators.RetrieveByValueSet<Observation>(aq_, 
+			typeof(Observation).GetProperty("Code"));
         var ap_ = this.FirstLabTestWithEncounterId(ar_, 
 			"FirstGlucose");
         var a_ = (new IEnumerable<string>[]

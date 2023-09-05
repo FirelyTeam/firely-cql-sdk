@@ -1,9 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <Import Project="..\..\cql-sdk.props" />
-  
-  <ItemGroup>
-    <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-  </ItemGroup>
+	<Import Project="..\..\cql-sdk.props" />
+
+	<PropertyGroup>
+		<AssemblyName>Hl7.Cql.ValueSets</AssemblyName>
+		<RootNamespace>Hl7.Cql.ValueSets</RootNamespace>
+		<Product>Terminology support for the CQL engine</Product>
+		<Description>Support package for Hl7.Cql. Assembly for working with CQL terminologies.</Description>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="PublicAPI.Shipped.txt" />
+	  <None Remove="PublicAPI.Unshipped.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+	  <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+	</ItemGroup>
 
 </Project>

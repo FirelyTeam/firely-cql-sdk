@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 {
@@ -208,7 +208,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -239,14 +239,12 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     private IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period_Value()
     {
         var a_ = this.Encounter_Inpatient();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> l_ = (EncounterInpatient) => 
         {
             var d_ = (EncounterInpatient?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -291,16 +289,14 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     private IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration_Value()
     {
         var a_ = this.Hypoglycemics_Severe_Hypoglycemia();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationAdministration>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<MedicationAdministration>(a_, 
+			typeof(MedicationAdministration).GetProperty("Medication"));
         var e_ = context?.Operators.ListUnion<MedicationAdministration>(b_, 
 			b_);
         Func<MedicationAdministration,bool?> o_ = (HypoMedication) => 
         {
             var g_ = (HypoMedication?.StatusElement as object);
-            var f_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("completed" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -365,8 +361,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
         Func<Encounter,bool?> en_ = (QualifyingEncounter) => 
         {
             var b_ = this.Glucose_lab_test();
-            var c_ = context?.DataRetriever.RetrieveByValueSet<Observation>(b_, 
-				null);
+            var c_ = context?.Operators.RetrieveByValueSet<Observation>(b_, 
+				typeof(Observation).GetProperty("Code"));
             Func<Observation,IEnumerable<Observation>> ap_ = (BloodGlucoseLab) => 
             {
                 var d_ = this.Hypoglycemic_Medication_Administration();
@@ -394,9 +390,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
                     var v_ = context?.Operators.And(q_, 
 						u_);
                     var x_ = (BloodGlucoseLab?.StatusElement as object);
-                    var w_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(x_) as object);
+                    var w_ = (context?.Operators.Convert<string>(x_) as object);
                     var y_ = ("final" as object);
                     var z_ = context?.Operators.Equal(w_, 
 						y_);
@@ -450,9 +444,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
                     var bl_ = context?.Operators.And(bg_, 
 						bk_);
                     var bn_ = (BloodGlucoseLab?.StatusElement as object);
-                    var bm_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(bn_) as object);
+                    var bm_ = (context?.Operators.Convert<string>(bn_) as object);
                     var bo_ = ("final" as object);
                     var bp_ = context?.Operators.Equal(bm_, 
 						bo_);
@@ -482,8 +474,8 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
             Func<Observation,IEnumerable<Observation>> dz_ = (BloodGlucoseLab) => 
             {
                 var ch_ = this.Glucose_lab_test();
-                var ci_ = context?.DataRetriever.RetrieveByValueSet<Observation>(ch_, 
-					null);
+                var ci_ = context?.Operators.RetrieveByValueSet<Observation>(ch_, 
+					typeof(Observation).GetProperty("Code"));
                 Func<Observation,bool?> dw_ = (FollowupBloodGlucoseLab) => 
                 {
                     var cj_ = (FollowupBloodGlucoseLab?.Effective as object);
@@ -514,9 +506,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
                     var dg_ = context?.Operators.And(cn_, 
 						df_);
                     var di_ = (FollowupBloodGlucoseLab?.StatusElement as object);
-                    var dh_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(di_) as object);
+                    var dh_ = (context?.Operators.Convert<string>(di_) as object);
                     var dj_ = ("final" as object);
                     var dk_ = context?.Operators.Equal(dh_, 
 						dj_);

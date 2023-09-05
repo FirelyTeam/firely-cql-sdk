@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public class DischargedonAntithromboticTherapyFHIR_0_0_010
 {
@@ -252,7 +252,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -269,8 +269,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     private IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge_Value()
     {
         var a_ = this.Antithrombotic_Therapy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
+			typeof(MedicationRequest).GetProperty("Medication"));
         Func<MedicationRequest,bool?> ap_ = (NoAntithromboticDischarge) => 
         {
             var c_ = NoAntithromboticDischarge?.DoNotPerformElement;
@@ -314,9 +314,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
             var ad_ = context?.Operators.And(q_, 
 				ac_);
             var ae_ = (NoAntithromboticDischarge?.StatusElement as object);
-            var af_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ae_);
+            var af_ = context?.Operators.Convert<string>(ae_);
             var ah_ = "completed";
             var ai_ = "cancelled";
             var ag_ = (new string[]
@@ -329,9 +327,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
             var ak_ = context?.Operators.And(ad_, 
 				aj_);
             var am_ = (NoAntithromboticDischarge?.IntentElement as object);
-            var al_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(am_) as object);
+            var al_ = (context?.Operators.Convert<string>(am_) as object);
             var an_ = ("order" as object);
             var ao_ = context?.Operators.Equal(al_, 
 				an_);
@@ -375,8 +371,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value()
     {
         var a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
+			typeof(MedicationRequest).GetProperty("Medication"));
         Func<MedicationRequest,bool?> ae_ = (Pharmacological) => 
         {
             var c_ = Pharmacological?.DoNotPerformElement;
@@ -404,9 +400,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
             var s_ = context?.Operators.And(f_, 
 				r_);
             var t_ = (Pharmacological?.StatusElement as object);
-            var u_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(t_);
+            var u_ = context?.Operators.Convert<string>(t_);
             var w_ = "active";
             var x_ = "completed";
             var v_ = (new string[]
@@ -419,9 +413,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
             var z_ = context?.Operators.And(s_, 
 				y_);
             var ab_ = (Pharmacological?.IntentElement as object);
-            var aa_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ab_) as object);
+            var aa_ = (context?.Operators.Convert<string>(ab_) as object);
             var ac_ = ("order" as object);
             var ad_ = context?.Operators.Equal(aa_, 
 				ac_);
@@ -492,8 +484,8 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Value()
     {
         var a_ = this.Antithrombotic_Therapy();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
+			typeof(MedicationRequest).GetProperty("Medication"));
         Func<MedicationRequest,bool?> ae_ = (Antithrombotic) => 
         {
             var c_ = Antithrombotic?.DoNotPerformElement;
@@ -521,9 +513,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
             var s_ = context?.Operators.And(f_, 
 				r_);
             var t_ = (Antithrombotic?.StatusElement as object);
-            var u_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(t_);
+            var u_ = context?.Operators.Convert<string>(t_);
             var w_ = "active";
             var x_ = "completed";
             var v_ = (new string[]
@@ -536,9 +526,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
             var z_ = context?.Operators.And(s_, 
 				y_);
             var ab_ = (Antithrombotic?.IntentElement as object);
-            var aa_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ab_) as object);
+            var aa_ = (context?.Operators.Convert<string>(ab_) as object);
             var ac_ = ("order" as object);
             var ad_ = context?.Operators.Equal(aa_, 
 				ac_);

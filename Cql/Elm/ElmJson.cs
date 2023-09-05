@@ -11,7 +11,7 @@ using System.Xml.Serialization;
 
 namespace Hl7.Cql.Elm
 {
-    public class ElmJson
+    internal class ElmJson
     {
         public static T Deserialize<T>(string json, JsonReaderOptions options = default)
         {

@@ -15,7 +15,7 @@ using System.Text.Json;
 
 namespace Hl7.Cql.Graph
 {
-    public class DirectedGraph
+    internal class DirectedGraph
     {
 
         public DirectedGraphNode StartNode { get; set; } = new DirectedGraphNode { NodeId = DirectedGraphNode.StartId };

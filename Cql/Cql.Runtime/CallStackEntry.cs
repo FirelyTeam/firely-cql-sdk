@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+#if WE_STILL_NEED_THE_STACK
+
 namespace Hl7.Cql.Runtime
 {
     /// <summary>
@@ -36,7 +38,6 @@ namespace Hl7.Cql.Runtime
             LocalId = localId;
         }
 
-
         /// <summary>
         /// The name of the definition or function.
         /// </summary>
@@ -51,3 +52,5 @@ namespace Hl7.Cql.Runtime
         public string? LocalId { get; set; } = null;
     }
 }
+
+#endif

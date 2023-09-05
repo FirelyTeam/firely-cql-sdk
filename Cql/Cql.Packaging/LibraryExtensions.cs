@@ -14,7 +14,7 @@ using System.Runtime.Loader;
 
 namespace Hl7.Cql.Packaging
 {
-    public static class LibraryExtensions
+    internal static class LibraryExtensions
     {
 
         public static DirectedGraph GetDependencies(this Library library,

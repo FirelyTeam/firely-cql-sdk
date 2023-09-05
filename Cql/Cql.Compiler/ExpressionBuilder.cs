@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
-    public partial class ExpressionBuilder
+    internal partial class ExpressionBuilder
     {
         /// <summary>
         /// Creates an instance.
@@ -1586,6 +1586,29 @@ namespace Hl7.Cql.Compiler
                     denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
                 return @new;
             }
+            else if (instanceType == typeof(CqlQuantity))
+            {
+                Expression? valueExpr = null;
+                Expression? unitExpr = null;
+
+                foreach (var tuple in tuples)
+                {
+                    if (tuple.Item1 == "value")
+                        valueExpr = tuple.Item2;
+                    else if (tuple.Item1 == "unit")
+                        unitExpr = tuple.Item2;
+                    else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
+                }
+                var ctor = typeof(CqlQuantity).GetConstructor(new[] { typeof(decimal?), typeof(string) })!;
+
+                if (unitExpr is not null)
+                    unitExpr = ChangeType(unitExpr, typeof(string), ctx);
+
+                var @new = Expression.New(ctor,
+                    valueExpr ?? Expression.Default(typeof(decimal?)),
+                    unitExpr ?? Expression.Default(typeof(string)));
+                return @new;
+            }
             else if (instanceType == typeof(CqlCode))
             {
                 Expression? codeExpr = null;
@@ -2019,7 +2042,6 @@ namespace Hl7.Cql.Compiler
         // Yeah, hardwired to FHIR 4.0.1 for now.
         private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
 
-
         protected Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
         {
             Type? sourceElementType;
@@ -2222,14 +2244,15 @@ namespace Hl7.Cql.Compiler
                 .ToArray();
 
             var funcType = GetFuncType(funcTypeParameters);
+#if WE_STILL_NEED_THE_STACK
             var callStackCtor = typeof(CallStackEntry).GetConstructor(new[] { typeof(string), typeof(string), typeof(string) })!;
             var newCallStack = Expression.New(callStackCtor,
                 Expression.Constant(op.name, typeof(string)),
                 Expression.Constant(op.locator, typeof(string)),
                 Expression.Constant(op.localId, typeof(string)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper))!, newCallStack);
-
+            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!, newCallStack);
+#endif
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
@@ -2243,7 +2266,11 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
+#if WE_STILL_NEED_THE_STACK
                         var bind = OperatorBinding.Bind(CqlOperator.Convert, deeper,
+#else
+                        var bind = OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter,
+#endif
                             new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                         return bind;
                     }
@@ -2253,7 +2280,11 @@ namespace Hl7.Cql.Compiler
             // to the actual function are.
             operands = new[]
             {
-                    deeper
+#if WE_STILL_NEED_THE_STACK
+                 deeper
+#else
+                    ctx.RuntimeContextParameter
+#endif
             }
             .Concat(operands)
             .ToArray();

@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 {
@@ -234,7 +234,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -244,23 +244,19 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private IEnumerable<MedicationRequest> Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Value()
     {
         var a_ = this.Dementia_Medications();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<MedicationRequest>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
+			typeof(MedicationRequest).GetProperty("Medication"));
         var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
 			b_);
         Func<MedicationRequest,bool?> y_ = (DementiaMed) => 
         {
             var g_ = (DementiaMed?.StatusElement as object);
-            var f_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("active" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
             var k_ = (DementiaMed?.IntentElement as object);
-            var j_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(k_) as object);
+            var j_ = (context?.Operators.Convert<string>(k_) as object);
             var l_ = ("order" as object);
             var m_ = context?.Operators.Equal(j_, 
 				l_);
@@ -294,19 +290,17 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private IEnumerable<CqlInterval<CqlDateTime>> Long_Term_Care_Periods_During_Measurement_Period_Value()
     {
         var a_ = this.Care_Services_in_Long_Term_Residential_Facility();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Nursing_Facility_Visit();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
-			null);
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
+			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         Func<Encounter,bool?> n_ = (LongTermFacilityEncounter) => 
         {
             var g_ = (LongTermFacilityEncounter?.StatusElement as object);
-            var f_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(g_) as object);
+            var f_ = (context?.Operators.Convert<string>(g_) as object);
             var h_ = ("finished" as object);
             var i_ = context?.Operators.Equal(f_, 
 				h_);
@@ -338,19 +332,19 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private IEnumerable<Encounter> Outpatient_Encounters_with_Advanced_Illness_Value()
     {
         var a_ = this.Outpatient();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
         var c_ = this.Observation();
-        var d_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(c_, 
-			null);
+        var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
+			typeof(Encounter).GetProperty("Type"));
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Emergency_Department_Visit();
-        var g_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(f_, 
-			null);
+        var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
+			typeof(Encounter).GetProperty("Type"));
         var h_ = this.Nonacute_Inpatient();
-        var i_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(h_, 
-			null);
+        var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
+			typeof(Encounter).GetProperty("Type"));
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
@@ -358,9 +352,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Encounter,bool?> o_ = (Outpatient) => 
         {
             var m_ = (Outpatient?.StatusElement as object);
-            var l_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(m_) as object);
+            var l_ = (context?.Operators.Convert<string>(m_) as object);
             var n_ = ("finished" as object);
             return context?.Operators.Equal(l_, 
 				n_);
@@ -370,8 +362,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Encounter,IEnumerable<Encounter>> am_ = (OutpatientEncounter) => 
         {
             var q_ = this.Advanced_Illness();
-            var r_ = context?.DataRetriever.RetrieveByValueSet<Condition>(q_, 
-				null);
+            var r_ = context?.Operators.RetrieveByValueSet<Condition>(q_, 
+				typeof(Condition).GetProperty("Code"));
             Func<Condition,bool?> aj_ = (AdvancedIllnessDiagnosis) => 
             {
                 var s_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(OutpatientEncounter);
@@ -551,14 +543,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private IEnumerable<Encounter> Inpatient_Encounter_with_Advanced_Illness_Value()
     {
         var a_ = this.Acute_Inpatient();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
+			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> f_ = (AcuteInpatient) => 
         {
             var d_ = (AcuteInpatient?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             return context?.Operators.Equal(c_, 
 				e_);
@@ -568,8 +558,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         Func<Encounter,IEnumerable<Encounter>> ad_ = (InpatientEncounter) => 
         {
             var h_ = this.Advanced_Illness();
-            var i_ = context?.DataRetriever.RetrieveByValueSet<Condition>(h_, 
-				null);
+            var i_ = context?.Operators.RetrieveByValueSet<Condition>(h_, 
+				typeof(Condition).GetProperty("Code"));
             Func<Condition,bool?> aa_ = (AdvancedIllnessDiagnosis) => 
             {
                 var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(InpatientEncounter);
@@ -613,16 +603,14 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private bool? Has_Criteria_Indicating_Frailty_Value()
     {
         var a_ = this.Frailty_Device();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<DeviceRequest>(a_, 
-			null);
+        var b_ = context?.Operators.RetrieveByValueSet<DeviceRequest>(a_, 
+			typeof(DeviceRequest).GetProperty("Code"));
         var e_ = context?.Operators.ListUnion<DeviceRequest>(b_, 
 			b_);
         Func<DeviceRequest,bool?> v_ = (FrailtyDeviceOrder) => 
         {
             var f_ = (FrailtyDeviceOrder?.StatusElement as object);
-            var g_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(f_);
+            var g_ = context?.Operators.Convert<string>(f_);
             var i_ = "active";
             var j_ = "on-hold";
             var k_ = "completed";
@@ -635,9 +623,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
             var l_ = context?.Operators.InList<string>(g_, 
 				h_);
             var n_ = (FrailtyDeviceOrder?.IntentElement as object);
-            var m_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(n_) as object);
+            var m_ = (context?.Operators.Convert<string>(n_) as object);
             var o_ = ("order" as object);
             var p_ = context?.Operators.Equal(m_, 
 				o_);
@@ -655,14 +641,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         var w_ = context?.Operators.WhereOrNull<DeviceRequest>(e_, 
 			v_);
         var x_ = context?.Operators.ExistsInList<DeviceRequest>(w_);
-        var z_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
-			null);
+        var z_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
+			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> al_ = (FrailtyDeviceApplied) => 
         {
             var aa_ = (FrailtyDeviceApplied?.StatusElement as object);
-            var ab_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(aa_);
+            var ab_ = context?.Operators.Convert<string>(aa_);
             var ad_ = "final";
             var ae_ = "amended";
             var af_ = "corrected";
@@ -689,8 +673,8 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         var ao_ = context?.Operators.Or(x_, 
 			an_);
         var ap_ = this.Frailty_Diagnosis();
-        var aq_ = context?.DataRetriever.RetrieveByValueSet<Condition>(ap_, 
-			null);
+        var aq_ = context?.Operators.RetrieveByValueSet<Condition>(ap_, 
+			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> at_ = (FrailtyDiagnosis) => 
         {
             var ar_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(FrailtyDiagnosis);
@@ -705,14 +689,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         var aw_ = context?.Operators.Or(ao_, 
 			av_);
         var ax_ = this.Frailty_Encounter();
-        var ay_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(ax_, 
-			null);
+        var ay_ = context?.Operators.RetrieveByValueSet<Encounter>(ax_, 
+			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> bh_ = (FrailtyEncounter) => 
         {
             var ba_ = (FrailtyEncounter?.StatusElement as object);
-            var az_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(ba_) as object);
+            var az_ = (context?.Operators.Convert<string>(ba_) as object);
             var bb_ = ("finished" as object);
             var bc_ = context?.Operators.Equal(az_, 
 				bb_);
@@ -731,14 +713,12 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
         var bk_ = context?.Operators.Or(aw_, 
 			bj_);
         var bl_ = this.Frailty_Symptom();
-        var bm_ = context?.DataRetriever.RetrieveByValueSet<Observation>(bl_, 
-			null);
+        var bm_ = context?.Operators.RetrieveByValueSet<Observation>(bl_, 
+			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> bz_ = (FrailtySymptom) => 
         {
             var bn_ = (FrailtySymptom?.StatusElement as object);
-            var bo_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(bn_);
+            var bo_ = context?.Operators.Convert<string>(bn_);
             var bq_ = "preliminary";
             var br_ = "final";
             var bs_ = "amended";
@@ -773,7 +753,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -819,7 +799,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
     private bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80_Value()
     {
         var b_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var c_ = context?.Operators?.TypeConverter.Convert<CqlDate>(b_);
+        var c_ = context?.Operators.Convert<CqlDate>(b_);
         var d_ = this.Measurement_Period();
         var e_ = context?.Operators.Start(d_);
         var f_ = context?.Operators.DateFrom(e_);

@@ -6,7 +6,7 @@ namespace Hl7.Cql.Comparers
     /// <summary>
     /// Compares enum values against strings and each other.
     /// </summary>
-    public class EnumComparer : ICqlComparer
+    internal class EnumComparer : ICqlComparer
     {
         /// <summary>
         /// Gets the default instance of this comparer.

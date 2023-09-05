@@ -9,11 +9,11 @@
 
 namespace Hl7.Cql.Graph
 {
-    public abstract class EdgeAction
+    internal abstract class EdgeAction
     {
     }
 
-    public abstract class EdgeAction<TContext> : EdgeAction
+    internal abstract class EdgeAction<TContext> : EdgeAction
         where TContext : ExecutionContext
     {
         public abstract string Action { get; }

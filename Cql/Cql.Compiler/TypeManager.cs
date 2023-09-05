@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
     /// The TypeManager class maps ELM types to .NET types usually through its <see cref="Resolver"/>, and
     /// also creates new types (e.g. for Tuples) as needed.
     /// </summary>
-    public class TypeManager
+    internal class TypeManager
     {
         /// <summary>
         /// Gets the assembly name for any generated types created by this type manager.

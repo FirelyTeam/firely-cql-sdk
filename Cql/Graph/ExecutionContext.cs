@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Graph
 {
-    public abstract class ExecutionContext
+    internal abstract class ExecutionContext
     {
         protected ExecutionContext(ExecutionLog log, Random random)
         {

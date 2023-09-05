@@ -1,0 +1,75 @@
+﻿#nullable enable
+Hl7.Cql.Iso8601.DateIso8601
+Hl7.Cql.Iso8601.DateIso8601.DateIso8601(int year, int? month, int? day, bool strict = false) -> void
+Hl7.Cql.Iso8601.DateIso8601.DateIso8601(System.DateTimeOffset dto, Hl7.Cql.Iso8601.DateTimePrecision precision, bool strict = false) -> void
+Hl7.Cql.Iso8601.DateIso8601.DateTimeOffset.get -> System.DateTimeOffset
+Hl7.Cql.Iso8601.DateIso8601.Day.get -> int?
+Hl7.Cql.Iso8601.DateIso8601.Month.get -> int?
+Hl7.Cql.Iso8601.DateIso8601.Precision.get -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateIso8601.Year.get -> int
+Hl7.Cql.Iso8601.DateTimeIso8601
+Hl7.Cql.Iso8601.DateTimeIso8601.DateTimeIso8601(Hl7.Cql.Iso8601.DateIso8601! date, Hl7.Cql.Iso8601.TimeIso8601? time = null, bool strict = false) -> void
+Hl7.Cql.Iso8601.DateTimeIso8601.DateTimeIso8601(int year, int? month, int? day, int? hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, bool strict = false) -> void
+Hl7.Cql.Iso8601.DateTimeIso8601.DateTimeIso8601(System.DateTimeOffset dto, Hl7.Cql.Iso8601.DateTimePrecision precision, bool strict = false) -> void
+Hl7.Cql.Iso8601.DateTimeIso8601.DateTimeOffset.get -> System.DateTimeOffset
+Hl7.Cql.Iso8601.DateTimeIso8601.DateTimeOffsetUtc.get -> System.DateTimeOffset
+Hl7.Cql.Iso8601.DateTimeIso8601.DateTimeOffsetUtc.set -> void
+Hl7.Cql.Iso8601.DateTimeIso8601.Day.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.Hour.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.Millisecond.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.Minute.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.Month.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.OffsetHour.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.OffsetMinute.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.Precision.get -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimeIso8601.RationalOffset.get -> decimal?
+Hl7.Cql.Iso8601.DateTimeIso8601.Second.get -> int?
+Hl7.Cql.Iso8601.DateTimeIso8601.Year.get -> int
+Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Day = 3 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Hour = 4 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Millisecond = 7 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Minute = 5 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Month = 2 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Second = 6 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Unknown = 0 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecision.Year = 1 -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.DateTimePrecisionExtensions
+Hl7.Cql.Iso8601.TimeIso8601
+Hl7.Cql.Iso8601.TimeIso8601.BaseDateTime.get -> System.DateTimeOffset
+Hl7.Cql.Iso8601.TimeIso8601.DateTimeOffset.get -> System.DateTimeOffset
+Hl7.Cql.Iso8601.TimeIso8601.DateTimeOffsetUtc.get -> System.DateTimeOffset
+Hl7.Cql.Iso8601.TimeIso8601.DateTimeOffsetUtc.set -> void
+Hl7.Cql.Iso8601.TimeIso8601.Hour.get -> int
+Hl7.Cql.Iso8601.TimeIso8601.Millisecond.get -> int?
+Hl7.Cql.Iso8601.TimeIso8601.Minute.get -> int?
+Hl7.Cql.Iso8601.TimeIso8601.Offset.get -> System.TimeSpan
+Hl7.Cql.Iso8601.TimeIso8601.OffsetHour.get -> int?
+Hl7.Cql.Iso8601.TimeIso8601.OffsetMinute.get -> int?
+Hl7.Cql.Iso8601.TimeIso8601.Precision.get -> Hl7.Cql.Iso8601.DateTimePrecision
+Hl7.Cql.Iso8601.TimeIso8601.RationalOffset.get -> decimal?
+Hl7.Cql.Iso8601.TimeIso8601.Second.get -> int?
+Hl7.Cql.Iso8601.TimeIso8601.TimeIso8601(int hour, int? minute, int? second, int? ms, int? osHours, int? osMinutes, bool strict = false) -> void
+Hl7.Cql.Iso8601.TimeIso8601.TimeIso8601(System.TimeSpan span, int? offsetHours, int? offsetMinutes, Hl7.Cql.Iso8601.DateTimePrecision precision, bool strict = false) -> void
+Hl7.Cql.Iso8601.TimeIso8601.TimeSpan.get -> System.TimeSpan
+override Hl7.Cql.Iso8601.DateIso8601.Equals(object? obj) -> bool
+override Hl7.Cql.Iso8601.DateIso8601.GetHashCode() -> int
+override Hl7.Cql.Iso8601.DateIso8601.ToString() -> string!
+override Hl7.Cql.Iso8601.DateTimeIso8601.Equals(object? obj) -> bool
+override Hl7.Cql.Iso8601.DateTimeIso8601.GetHashCode() -> int
+override Hl7.Cql.Iso8601.DateTimeIso8601.ToString() -> string!
+override Hl7.Cql.Iso8601.TimeIso8601.Equals(object? obj) -> bool
+override Hl7.Cql.Iso8601.TimeIso8601.GetHashCode() -> int
+override Hl7.Cql.Iso8601.TimeIso8601.ToString() -> string!
+static Hl7.Cql.Iso8601.DateIso8601.implicit operator Hl7.Cql.Iso8601.DateIso8601!(string! stringValue) -> Hl7.Cql.Iso8601.DateIso8601!
+static Hl7.Cql.Iso8601.DateIso8601.TryParse(string! stringValue, out Hl7.Cql.Iso8601.DateIso8601? dateValue) -> bool
+static Hl7.Cql.Iso8601.DateTimeIso8601.implicit operator Hl7.Cql.Iso8601.DateTimeIso8601!(string! stringValue) -> Hl7.Cql.Iso8601.DateTimeIso8601!
+static Hl7.Cql.Iso8601.DateTimeIso8601.Now.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
+static Hl7.Cql.Iso8601.DateTimeIso8601.TryParse(string! stringValue, out Hl7.Cql.Iso8601.DateTimeIso8601? dateTimeValue) -> bool
+static Hl7.Cql.Iso8601.DateTimeIso8601.UtcNow.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
+static Hl7.Cql.Iso8601.DateTimePrecisionExtensions.ToDateTimePrecision(this string? ucumUnit) -> Hl7.Cql.Iso8601.DateTimePrecision?
+static Hl7.Cql.Iso8601.TimeIso8601.implicit operator Hl7.Cql.Iso8601.TimeIso8601!(string! stringValue) -> Hl7.Cql.Iso8601.TimeIso8601!
+static Hl7.Cql.Iso8601.TimeIso8601.TryParse(string! stringValue, out Hl7.Cql.Iso8601.TimeIso8601? timeValue) -> bool
+static readonly Hl7.Cql.Iso8601.DateIso8601.Expression -> System.Text.RegularExpressions.Regex!
+static readonly Hl7.Cql.Iso8601.DateTimeIso8601.Expression -> System.Text.RegularExpressions.Regex!
+static readonly Hl7.Cql.Iso8601.TimeIso8601.Expression -> System.Text.RegularExpressions.Regex!
