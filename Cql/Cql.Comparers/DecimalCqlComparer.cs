@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Comparers
 {
-    public class DecimalCqlComparer : ICqlComparer, ICqlComparer<decimal?>
+    internal class DecimalCqlComparer : ICqlComparer, ICqlComparer<decimal?>
     {
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;

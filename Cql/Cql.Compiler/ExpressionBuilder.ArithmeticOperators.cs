@@ -14,7 +14,7 @@ using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
-    public partial class ExpressionBuilder
+    internal partial class ExpressionBuilder
     {
 
         protected Expression Abs(elm.Abs e, ExpressionBuilderContext ctx) =>

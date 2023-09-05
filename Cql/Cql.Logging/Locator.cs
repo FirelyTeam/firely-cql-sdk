@@ -11,7 +11,7 @@ using System;
 
 namespace Hl7.Cql.Logging
 {
-    public class Locator
+    internal class Locator
     {
         public Locator()
         {
@@ -117,7 +117,7 @@ namespace Hl7.Cql.Logging
         }
     }
 
-    public enum RangeComparisonResult
+    internal enum RangeComparisonResult
     {
         Before,
         Contains,

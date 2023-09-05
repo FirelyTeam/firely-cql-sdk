@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Primitives;
-using System;
 using System.Collections.Generic;
 
 namespace Hl7.Cql.ValueSets
@@ -17,21 +16,6 @@ namespace Hl7.Cql.ValueSets
     /// </summary>
     public interface IValueSetDictionary
     {
-        /// <summary>
-        /// Adds the code to the given value set by its canonical URI.
-        /// </summary>
-        /// <param name="valueSetUri">The value set's canonical URI.</param>
-        /// <param name="code">The code to add.</param>
-        /// <exception cref="ArgumentException">If <paramref name="code"/> already exists in the specified value set.</exception>
-        /// <exception cref="NotSupportedException">If this implementation does not support adding new codes to a value set.</exception>
-        void Add(string valueSetUri, CqlCode code);
-        /// <summary>
-        /// Adds or overwrites the code to the given value set by its canonical URI, and will not throw if the code exists already.
-        /// </summary>
-        /// <param name="valueSetUri">The value set's canonical URI.</param>
-        /// <param name="code">The code to add.</param>
-        /// <exception cref="NotSupportedException">If this implementation does not support adding new codes to a value set.</exception>
-        void Set(string valueSetUri, CqlCode code);
         /// <summary>
         /// Returns <see langword="true"/> if the given code is present in the given value set.
         /// This method ignores the code system of the codes present in <paramref name="valueSetUri"/>.

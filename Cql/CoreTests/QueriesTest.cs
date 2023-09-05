@@ -55,7 +55,7 @@ namespace CoreTests
         private const string QueriesLibrary = "QueriesTest-1.0.0";
         private const string AggregatesLibrary = "Aggregates-1.0.0";
 
-        private static IValueSetDictionary ValueSets;
+        private static HashValueSetDictionary ValueSets;
         private const string TestCodeSystem = "https://www.ncqa.org/fhir/codesystem/test-cs";
         private static readonly CqlCode[] TestCodes = new CqlCode[]
         {

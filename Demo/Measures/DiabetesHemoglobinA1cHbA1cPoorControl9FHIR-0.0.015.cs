@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.0.015")]
 public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 {
@@ -263,7 +263,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 
     private Patient Patient_Value()
     {
-        var a_ = context?.DataRetriever.RetrieveByValueSet<Patient>(null, 
+        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
 			null);
         return context?.Operators.SingleOrNull<Patient>(a_);
     }
@@ -301,14 +301,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     private IEnumerable<Encounter> Telehealth_Services_Value()
     {
         var a_ = this.Telephone_Visits();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Encounter>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
 			typeof(Encounter).GetProperty("Type"));
         Func<Encounter,bool?> k_ = (TelehealthEncounter) => 
         {
             var d_ = (TelehealthEncounter?.StatusElement as object);
-            var c_ = ((context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(d_) as object);
+            var c_ = (context?.Operators.Convert<string>(d_) as object);
             var e_ = ("finished" as object);
             var f_ = context?.Operators.Equal(c_, 
 				e_);
@@ -330,7 +328,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     private bool? Initial_Population_Value()
     {
         var a_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var b_ = context?.Operators?.TypeConverter.Convert<CqlDate>(a_);
+        var b_ = context?.Operators.Convert<CqlDate>(a_);
         var c_ = this.Measurement_Period();
         var d_ = context?.Operators.Start(c_);
         var e_ = context?.Operators.DateFrom(d_);
@@ -352,7 +350,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
         var m_ = context?.Operators.And(h_, 
 			l_);
         var n_ = this.Diabetes();
-        var o_ = context?.DataRetriever.RetrieveByValueSet<Condition>(n_, 
+        var o_ = context?.Operators.RetrieveByValueSet<Condition>(n_, 
 			typeof(Condition).GetProperty("Code"));
         Func<Condition,bool?> r_ = (Diabetes) => 
         {
@@ -381,14 +379,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     private Observation Most_Recent_HbA1c_Value()
     {
         var a_ = this.HbA1c_Laboratory_Test();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> n_ = (RecentHbA1c) => 
         {
             var c_ = (RecentHbA1c?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -446,14 +442,12 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     private bool? Has_No_Record_Of_HbA1c_Value()
     {
         var a_ = this.HbA1c_Laboratory_Test();
-        var b_ = context?.DataRetriever.RetrieveByValueSet<Observation>(a_, 
+        var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
 			typeof(Observation).GetProperty("Code"));
         Func<Observation,bool?> n_ = (NoHbA1c) => 
         {
             var c_ = (NoHbA1c?.StatusElement as object);
-            var d_ = (context.Deeper(new CallStackEntry("ToString", 
-		null, 
-		null))?.Operators?.TypeConverter).Convert<string>(c_);
+            var d_ = context?.Operators.Convert<string>(c_);
             var f_ = "final";
             var g_ = "amended";
             var h_ = "corrected";
@@ -502,7 +496,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
         var c_ = context?.Operators.Or(a_, 
 			b_);
         var e_ = (this.Patient()?.BirthDateElement?.Value as object);
-        var f_ = context?.Operators?.TypeConverter.Convert<CqlDate>(e_);
+        var f_ = context?.Operators.Convert<CqlDate>(e_);
         var g_ = this.Measurement_Period();
         var h_ = context?.Operators.Start(g_);
         var i_ = context?.Operators.DateFrom(h_);

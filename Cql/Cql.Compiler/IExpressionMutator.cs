@@ -14,7 +14,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Provides a method for altering an expression, e.g., translating a Conditional to an if/else block, or adding a call to a logging method.
     /// </summary>
-    public interface IExpressionMutator
+    internal interface IExpressionMutator
     {
         /// <summary>
         /// Gets the keys that are required by this interceptor.

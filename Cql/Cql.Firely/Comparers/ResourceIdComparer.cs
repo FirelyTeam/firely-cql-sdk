@@ -13,7 +13,7 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Firely.Comparers
 {
-    public class ResourceIdCqlComparer : CqlComparerBase<Resource>
+    internal class ResourceIdCqlComparer : CqlComparerBase<Resource>
     {
 
         public ResourceIdCqlComparer(ICqlComparer idComparer)

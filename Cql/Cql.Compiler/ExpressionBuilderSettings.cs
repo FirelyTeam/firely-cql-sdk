@@ -13,7 +13,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Describes settings to control the behavior of <see cref="ExpressionBuilder"/>
     /// </summary>
-    public class ExpressionBuilderSettings
+    internal class ExpressionBuilderSettings
     {
         /// <summary>
         /// Allows a child scope to redefine an existing parent scope.  Default is <see langword="true" />

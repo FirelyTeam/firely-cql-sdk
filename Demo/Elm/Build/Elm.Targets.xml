@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project>
 	<ItemGroup>
 		<CSharpFiles Include="$(MSBuildProjectDirectory)\..\Measures\*.cs" />
 	</ItemGroup>
@@ -7,7 +7,7 @@
 	<Target Name="ELM to C#"
 			BeforeTargets="Compile">
 		<Message Text="Converting ELM to C#"/>
-		<Exec Command="$(MSBuildProjectDirectory)/../../Cql/PackagerCLI/bin/debug/net6.0/PackagerCLI --elm $(MSBuildProjectDirectory)/Json --cql $(MSBuildProjectDirectory)/../Cql/input --cs $(MSBuildProjectDirectory)/../Measures --fhir $(MSBuildProjectDirectory)/../Test/Resources" />
+		<Exec Command="$(MSBuildProjectDirectory)/../../Cql/PackagerCLI/bin/debug/net6.0/Hl7.Cql.Packager.exe --elm $(MSBuildProjectDirectory)/Json --cql $(MSBuildProjectDirectory)/../Cql/input --cs $(MSBuildProjectDirectory)/../Measures --fhir $(MSBuildProjectDirectory)/../Test/Resources" />
 	</Target>
 	<Target Name="Delete C#" AfterTargets="Clean">
 		<Message Text="Deleting C# files...$(MSBuildProjectDirectory)\..\Measures\*.cs"></Message>

@@ -1,16 +1,13 @@
 ﻿using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Firely;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Runtime;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text.Json;
 
 namespace CoreTests
 {
@@ -51,7 +48,7 @@ namespace CoreTests
             var binding = new CqlOperatorsBinding(resolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
             var typeManager = new TypeManager(resolver);
 
-            var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));            
+            var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
             var fhirHelpersBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
             var fhirHelpersLambdas = fhirHelpersBuilder.Build();
             LambdasByTestName.Lambdas.Merge(fhirHelpersLambdas);
@@ -83,7 +80,7 @@ namespace CoreTests
             Context = FirelyCqlContext.Create(delegates: allDelegates);
         }
 
-        public static CqlContext Context;
+        internal static CqlContext Context;
 
 
         private static void MergeAllCqlInto(DirectoryInfo libsDirectory, DirectedGraph buildOrder)
