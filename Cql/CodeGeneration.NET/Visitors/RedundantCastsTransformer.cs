@@ -100,6 +100,22 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             {
                 return Visit(conversion.Operand);
             }
+            else if (node is { NodeType: ExpressionType.Coalesce } coalesce)
+            {
+                var left = Visit(coalesce.Left);
+                var right = Visit(coalesce.Right);
+
+                // a (not null) ?? x => a
+                if (left is ConstantExpression ce && ce.Value is not null)
+                    return left;
+
+                var isNullableType = !left.Type.IsValueType || Nullable.GetUnderlyingType(left.Type) is not null;
+
+                if (left is DefaultExpression && isNullableType)
+                    return right;
+
+                return coalesce.Update(left, coalesce.Conversion, right);
+            }
 
             return base.VisitBinary(node);
         }

@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// This custom expression represents the null conditional expression in CQL (which looks like a?.b in C#).
     /// </summary>
-    public class NullConditionalMemberExpression : Expression
+    internal class NullConditionalMemberExpression : Expression
     {
         public MemberExpression MemberExpression { get; private set; }
         private readonly Type resultType;

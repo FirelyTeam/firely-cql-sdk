@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -6,22 +6,26 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AssemblyName>Hl7.Cql</AssemblyName>
 		<RootNamespace>Hl7.Cql</RootNamespace>
-	</PropertyGroup>	
-	
+		<Product>HL7 CQL Engine</Product>
+		<Description>A platform for evaluating logic in the HL7 CQL language.</Description>
+	</PropertyGroup>
+
 	<ItemGroup>
-	  <ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
-	  <ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
-	  <ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
-	  <ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
-	  <ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
-	  <ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
-	  <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
-	  <ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
-	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-	  <ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-	  <ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
-	  <ProjectReference Include="..\Elm\Elm.csproj" />
-	  <ProjectReference Include="..\Graph\Graph.csproj" />
-	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
+		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
+		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
+		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
+		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+		<ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
+		<ProjectReference Include="..\Elm\Elm.csproj" />
+		<ProjectReference Include="..\Graph\Graph.csproj" />
+		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 </Project>

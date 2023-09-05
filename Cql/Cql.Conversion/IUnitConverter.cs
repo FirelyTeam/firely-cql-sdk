@@ -13,7 +13,7 @@ namespace Hl7.Cql.Conversion
     /// <summary>
     /// Defines a method to convert a <see cref="CqlQuantity"/> to a new quantity with different units.
     /// </summary>
-    public interface IUnitConverter
+    internal interface IUnitConverter
     {
         /// <summary>
         /// Converts <paramref name="source"/> to <paramref name="ucumUnits"/>.

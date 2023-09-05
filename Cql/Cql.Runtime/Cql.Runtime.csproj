@@ -6,15 +6,32 @@
 		<AssemblyName>Hl7.Cql.Runtime</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime</RootNamespace>
 		<Product>CQL engine runtime</Product>
-		<Description>Contains the required runtime components for CQL execution.</Description>
+		<Description>Support package for Hl7.Cql. Contains the required runtime components for CQL execution.</Description>
 		<NoWarn>CS8601</NoWarn>
-	</PropertyGroup>	
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <None Remove="PublicAPI.Shipped.txt" />
+	  <None Remove="PublicAPI.Unshipped.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <AdditionalFiles Include="PublicAPI.Shipped.txt" />
+	  <AdditionalFiles Include="PublicAPI.Unshipped.txt" />
+	</ItemGroup>	
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Logging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Model" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 	
 	<ItemGroup>

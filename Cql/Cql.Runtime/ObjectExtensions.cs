@@ -13,7 +13,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Provides extension methods.
     /// </summary>
-    public static class ObjectExtensions
+    internal static class ObjectExtensions
     {
         /// <summary>
         /// Uses <paramref name="access"/> to retrieve a property on <paramref name="object"/>.

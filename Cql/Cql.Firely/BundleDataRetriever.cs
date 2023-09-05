@@ -22,7 +22,7 @@ namespace Hl7.Cql.Firely
     /// </summary>
     /// <remarks>A simple model that assumes the Bundles contain all the information about a
     /// patient, e.g. as the result of a $everything operation.</remarks>
-    public class BundleDataRetriever : IDataRetriever
+    internal class BundleDataRetriever : IDataRetriever
     {
         /// <summary>
         /// Construct a new IDataRetriever passing in the necessary terminology information

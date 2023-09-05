@@ -3,10 +3,10 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
-		<AssemblyName>Hl7.Cql.Runtime.Model</AssemblyName>
-		<RootNamespace>Hl7.Cql.Runtime.Model</RootNamespace>
+		<AssemblyName>Hl7.Cql.Model</AssemblyName>
+		<RootNamespace>Hl7.Cql.Model</RootNamespace>
 		<Product>CQL engine runtime model binding</Product>
-		<Description>Incorporates CQL model information into the runtime</Description>
+		<Description>Support package for Hl7.Cql. Incorporates CQL model information into the runtime.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -21,6 +21,9 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

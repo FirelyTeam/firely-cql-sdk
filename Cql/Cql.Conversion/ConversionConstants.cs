@@ -17,7 +17,7 @@ namespace Hl7.Cql.Conversion
     /// 1 minute = 60 seconds
     /// 1 second = 1000 milliseconds
     /// </summary>
-    public static class ConversionConstants
+    internal static class ConversionConstants
     {
         /// <summary>
         /// Defines 365 days per year in <see cref="System.Decimal"/> precision.

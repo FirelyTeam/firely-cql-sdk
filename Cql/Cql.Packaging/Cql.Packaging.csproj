@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -7,6 +7,8 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<AssemblyName>Hl7.Cql.Packaging</AssemblyName>
 		<RootNamespace>Hl7.Cql.Packaging</RootNamespace>
+		<Product>FHIR Library export for CQL artifacts.</Product>
+		<Description>Support package for Hl7.Cql. Contains support for packaging CQL artifacts as a FHIR Library resource.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -14,11 +16,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
-	  <ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
-	  <ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
-	  <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-	  <ProjectReference Include="..\Graph\Graph.csproj" />
+		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
+		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<ProjectReference Include="..\Graph\Graph.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>

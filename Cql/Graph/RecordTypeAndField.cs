@@ -9,7 +9,7 @@
 
 namespace Hl7.Cql.Graph
 {
-    public class RecordTypeAndField
+    internal class RecordTypeAndField
     {
         public string RecordType { get; set; } = string.Empty;
         public string Field { get; set; } = string.Empty;

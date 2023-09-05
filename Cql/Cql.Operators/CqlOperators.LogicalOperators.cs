@@ -11,7 +11,7 @@ using System;
 
 namespace Hl7.Cql.Runtime
 {
-    public partial class CqlOperators
+    internal partial class CqlOperators
     {
         public bool? And(bool? left, bool? right)
         {

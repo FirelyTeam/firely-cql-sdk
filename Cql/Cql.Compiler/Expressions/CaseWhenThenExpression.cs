@@ -19,7 +19,7 @@ namespace Hl7.Cql.Compiler
     /// This is a custom expression representing the Case/When/Then statement in CQL.
     /// </summary>
     /// <remarks>The expression reduces to nested ConditionalExpressions.</remarks>
-    public class CaseWhenThenExpression : Expression
+    internal class CaseWhenThenExpression : Expression
     {
         public record WhenThenCase(Expression When, Expression Then)
         {

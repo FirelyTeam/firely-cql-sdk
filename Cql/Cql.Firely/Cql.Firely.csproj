@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -6,16 +6,22 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<RootNamespace>Hl7.Cql.Firely</RootNamespace>
 		<AssemblyName>Hl7.Cql.Firely</AssemblyName>
+		<Product>CQL engine binding for POCOs</Product>
+		<Description>Support package for Hl7.Cql. Contains the bindings to use Firely's .NET SDK Pocos.</Description>
 	</PropertyGroup>
 
 
 	<ItemGroup>
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)"/>
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

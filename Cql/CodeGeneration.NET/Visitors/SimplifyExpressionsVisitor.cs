@@ -63,6 +63,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 BinaryExpression binary => VisitBinary(binary),
                 NewExpression newe => VisitNew(newe),
                 CaseWhenThenExpression cwt => VisitCaseWhenThenExpression(cwt),
+                MemberExpression member => VisitMember(member),
 
                 // Simplify all others.
                 _ => simplify(base.Visit(node))
@@ -77,6 +78,14 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             _assignments.Add(newAssign);
 
             return newLetVariable;
+        }
+
+        protected override Expression VisitMember(MemberExpression node)
+        {
+            if (node.Expression is not null && node.Expression is ConstantExpression or ParameterExpression)
+                return node;
+            else
+                return base.VisitMember(node);
         }
 
         protected override Expression VisitConditional(ConditionalExpression node)
@@ -137,6 +146,9 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             {
                 // Simply comparing two values is something you can do by eye, we don't need to simplify that.
                 { NodeType: ExpressionType.Equal or ExpressionType.NotEqual } => base.VisitBinary(node),
+
+                // A null coalesce of two inspectable things is still inspectable.
+                { NodeType: ExpressionType.Coalesce } => base.VisitBinary(node),
 
                 // The interim value of an assignment is clear, we don't need to simplify
                 { NodeType: ExpressionType.Assign } => base.VisitBinary(node),

@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("FHIRHelpers", "4.0.001")]
 public class FHIRHelpers_4_0_001
 {
@@ -36,12 +36,10 @@ public class FHIRHelpers_4_0_001
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators;
-		var b_ = context.DataRetriever;
-		var c_ = b_.RetrieveByValueSet<Patient>(null, null);
-		var d_ = a_.SingleOrNull<Patient>(c_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
-		return d_;
+		return b_;
 	}
 
     [CqlDeclaration("Patient")]
@@ -61,16 +59,15 @@ public class FHIRHelpers_4_0_001
 			}
 			else
 			{
-				var c_ = context.Operators;
-				var e_ = period?.StartElement;
-				var f_ = e_?.Value;
-				var g_ = c_.ConvertStringToDateTime(f_);
-				var i_ = period?.EndElement;
-				var j_ = i_?.Value;
-				var k_ = c_.ConvertStringToDateTime(j_);
-				var l_ = c_.Interval(g_, k_, true, true);
+				var c_ = period?.StartElement;
+				var d_ = c_?.Value;
+				var e_ = context.Operators.ConvertStringToDateTime(d_);
+				var f_ = period?.EndElement;
+				var g_ = f_?.Value;
+				var h_ = context.Operators.ConvertStringToDateTime(g_);
+				var i_ = context.Operators.Interval(e_, h_, true, true);
 
-				return l_;
+				return i_;
 			};
 		};
 
@@ -90,14 +87,13 @@ public class FHIRHelpers_4_0_001
 			}
 			else
 			{
-				var c_ = context.Operators;
-				var d_ = range?.Low;
-				var e_ = this.ToQuantity(d_);
-				var f_ = range?.High;
-				var g_ = this.ToQuantity(f_);
-				var h_ = c_.Interval(e_, g_, true, true);
+				var c_ = range?.Low;
+				var d_ = this.ToQuantity(c_);
+				var e_ = range?.High;
+				var f_ = this.ToQuantity(e_);
+				var g_ = context.Operators.Interval(d_, f_, true, true);
 
-				return h_;
+				return g_;
 			};
 		};
 
@@ -105,32 +101,10 @@ public class FHIRHelpers_4_0_001
 	}
 
     [CqlDeclaration("ToQuantity")]
-	public CqlQuantity ToQuantity(Quantity quantity)
-	{
-		CqlQuantity a_()
-		{
-			if ((quantity is null))
-			{
-				return null;
-			}
-			else
-			{
-				var b_ = quantity?.ValueElement;
-				var c_ = b_?.Value;
-				var d_ = quantity?.UnitElement;
-				var e_ = d_?.Value;
-				var f_ = new CqlQuantity
-				{
-					value = c_,
-					unit = e_,
-				};
-
-				return f_;
-			};
-		};
-
-		return a_();
-	}
+	public CqlQuantity ToQuantity(Quantity quantity) => 
+		((quantity is null)
+			? null
+			: (new CqlQuantity(quantity?.ValueElement?.Value, quantity?.UnitElement?.Value)));
 
     [CqlDeclaration("ToRatio")]
 	public CqlRatio ToRatio(Ratio ratio) => 
@@ -1858,12 +1832,10 @@ public class FHIRHelpers_4_0_001
     [CqlDeclaration("ToString")]
 	public string ToString(Base64Binary value)
 	{
-		var a_ = context.Operators;
-		var b_ = a_.TypeConverter;
-		var c_ = value?.Value;
-		var d_ = b_.Convert<string>(c_);
+		var a_ = value?.Value;
+		var b_ = context.Operators.Convert<string>(a_);
 
-		return d_;
+		return b_;
 	}
 
     [CqlDeclaration("ToString")]
@@ -1909,32 +1881,28 @@ public class FHIRHelpers_4_0_001
     [CqlDeclaration("ToDate")]
 	public CqlDate ToDate(Date value)
 	{
-		var a_ = context.Operators;
-		var b_ = value?.Value;
-		var c_ = a_.ConvertStringToDate(b_);
+		var a_ = value?.Value;
+		var b_ = context.Operators.ConvertStringToDate(a_);
 
-		return c_;
+		return b_;
 	}
 
     [CqlDeclaration("ToDateTime")]
 	public CqlDateTime ToDateTime(FhirDateTime value)
 	{
-		var a_ = context.Operators;
-		var b_ = value?.Value;
-		var c_ = a_.ConvertStringToDateTime(b_);
+		var a_ = value?.Value;
+		var b_ = context.Operators.ConvertStringToDateTime(a_);
 
-		return c_;
+		return b_;
 	}
 
     [CqlDeclaration("ToDateTime")]
 	public CqlDateTime ToDateTime(Instant value)
 	{
-		var a_ = context.Operators;
-		var b_ = a_.TypeConverter;
-		var c_ = value?.Value;
-		var d_ = b_.Convert<CqlDateTime>(c_);
+		var a_ = value?.Value;
+		var b_ = context.Operators.Convert<CqlDateTime>(a_);
 
-		return d_;
+		return b_;
 	}
 
     [CqlDeclaration("ToDecimal")]
@@ -1956,11 +1924,10 @@ public class FHIRHelpers_4_0_001
     [CqlDeclaration("ToTime")]
 	public CqlTime ToTime(Time value)
 	{
-		var a_ = context.Operators;
-		var b_ = value?.Value;
-		var c_ = a_.ConvertStringToTime(b_);
+		var a_ = value?.Value;
+		var b_ = context.Operators.ConvertStringToTime(a_);
 
-		return c_;
+		return b_;
 	}
 
 }

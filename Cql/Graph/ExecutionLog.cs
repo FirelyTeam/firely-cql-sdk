@@ -16,14 +16,14 @@ using System.Text;
 
 namespace Hl7.Cql.Graph
 {
-    public abstract class ExecutionLog
+    internal abstract class ExecutionLog
     {
         public abstract void Write(string message);
         public abstract void WriteLine(string message);
 
     }
 
-    public class CompoundExecutionLog : ExecutionLog
+    internal class CompoundExecutionLog : ExecutionLog
     {
         private readonly ExecutionLog[] logs;
 
@@ -46,7 +46,7 @@ namespace Hl7.Cql.Graph
 
     }
 
-    public class DebugExecutionLog : ExecutionLog
+    internal class DebugExecutionLog : ExecutionLog
     {
         public static readonly DebugExecutionLog Instance = new DebugExecutionLog();
         private DebugExecutionLog() { }
@@ -55,7 +55,7 @@ namespace Hl7.Cql.Graph
         public override void WriteLine(string message) => System.Diagnostics.Debug.WriteLine(message);
     }
 
-    public class MemoryExecutionLog : ExecutionLog
+    internal class MemoryExecutionLog : ExecutionLog
     {
         private readonly StringBuilder currentLine = new StringBuilder();
 
@@ -70,7 +70,7 @@ namespace Hl7.Cql.Graph
         }
     }
 
-    public class FlatFileExecutionLog : ExecutionLog
+    internal class FlatFileExecutionLog : ExecutionLog
     {
         private static readonly char[] DenormalCharacters = Path.GetInvalidPathChars()
             .Concat(new[] { '/' })

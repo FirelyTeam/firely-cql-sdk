@@ -1,0 +1,47 @@
+﻿#nullable enable
+const Hl7.Cql.UCUMUnits.Centimeter = "cm" -> string!
+const Hl7.Cql.UCUMUnits.Day = "d" -> string!
+const Hl7.Cql.UCUMUnits.Default = "1" -> string!
+const Hl7.Cql.UCUMUnits.Foot = "[ft_i]" -> string!
+const Hl7.Cql.UCUMUnits.Hour = "h" -> string!
+const Hl7.Cql.UCUMUnits.Inch = "[in_i]" -> string!
+const Hl7.Cql.UCUMUnits.Meter = "m" -> string!
+const Hl7.Cql.UCUMUnits.Millisecond = "ms" -> string!
+const Hl7.Cql.UCUMUnits.Minute = "min" -> string!
+const Hl7.Cql.UCUMUnits.Month = "mo" -> string!
+const Hl7.Cql.UCUMUnits.Second = "s" -> string!
+const Hl7.Cql.UCUMUnits.Unary = "1" -> string!
+const Hl7.Cql.UCUMUnits.Week = "wk" -> string!
+const Hl7.Cql.UCUMUnits.Yard = "[yd_i]" -> string!
+const Hl7.Cql.UCUMUnits.Year = "a" -> string!
+Hl7.Cql.CqlDeclarationAttribute
+Hl7.Cql.CqlDeclarationAttribute.CqlDeclarationAttribute(string! Name) -> void
+Hl7.Cql.CqlDeclarationAttribute.Name.get -> string!
+Hl7.Cql.CqlLibraryAttribute
+Hl7.Cql.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string! Version) -> void
+Hl7.Cql.CqlLibraryAttribute.Identifier.get -> string!
+Hl7.Cql.CqlLibraryAttribute.Version.get -> string!
+Hl7.Cql.CqlValueSetAttribute
+Hl7.Cql.CqlValueSetAttribute.CqlValueSetAttribute(string! Id) -> void
+Hl7.Cql.CqlValueSetAttribute.Id.get -> string!
+Hl7.Cql.ICqlComparable<T>
+Hl7.Cql.ICqlComparable<T>.CompareTo(T? other, string? precision = null) -> int?
+Hl7.Cql.ICqlComparer
+Hl7.Cql.ICqlComparer.Compare(object? x, object? y, string? precision) -> int?
+Hl7.Cql.ICqlComparer.Equals(object? x, object? y, string? precision) -> bool?
+Hl7.Cql.ICqlComparer.GetHashCode(object! x) -> int
+Hl7.Cql.ICqlComparer<T>
+Hl7.Cql.ICqlComparer<T>.Compare(T? x, T? y, string? precision) -> int?
+Hl7.Cql.ICqlComparer<T>.Equals(T? x, T? y, string? precision) -> bool?
+Hl7.Cql.ICqlComparer<T>.GetHashCode(T x) -> int
+Hl7.Cql.IEquivalenceComparer
+Hl7.Cql.IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) -> bool
+Hl7.Cql.IEquivalenceComparer<T>
+Hl7.Cql.IEquivalenceComparer<T>.Equivalent(T x, T y, string? precision) -> bool
+Hl7.Cql.IEquivalentable<T>
+Hl7.Cql.IEquivalentable<T>.Equivalent(T? other, string? precision) -> bool
+Hl7.Cql.UCUMUnits
+Hl7.Cql.Units
+static Hl7.Cql.UCUMUnits.FromDateTimePrecision(Hl7.Cql.Iso8601.DateTimePrecision dtp) -> string?
+static readonly Hl7.Cql.Units.CqlUnitsToUCUM -> System.Collections.Generic.IDictionary<string!, string!>!
+static readonly Hl7.Cql.Units.UCUMUnitsToCql -> System.Collections.Generic.IDictionary<string!, string!>!

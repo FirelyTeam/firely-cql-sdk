@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Graph
 {
-    public class DirectedGraphEdge
+    internal class DirectedGraphEdge
     {
         public DirectedGraphEdge() { }
 

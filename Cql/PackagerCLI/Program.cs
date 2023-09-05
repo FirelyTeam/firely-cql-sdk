@@ -1,5 +1,4 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Firely;
 using Hl7.Fhir.Model;
@@ -80,11 +79,11 @@ namespace Hl7.Cql.Packaging.CLI
                     EnsureDirectory(fhirDir);
                 }
             }
-            Package(elmDir, cqlDir, csDir, fhirDir);
+            package(elmDir, cqlDir, csDir, fhirDir);
             return 0;
         }
 
-        public static void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir)
+        private static void package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir)
         {
             var logLevel = LogLevel.Trace;
             var logFactory = LoggerFactory
@@ -105,15 +104,14 @@ namespace Hl7.Cql.Packaging.CLI
 #pragma warning restore CA1305 // Specify IFormatProvider
                     logging.AddSerilog();
                 });
-            var packager = new LibraryPackager();
+
             var packagerLogger = logFactory.CreateLogger<LibraryPackager>();
-            var packages = packager.LoadLibraries(elmDir);
+            var packages = LibraryPackager.LoadLibraries(elmDir);
             var graph = Hl7.Cql.Elm.Library.GetIncludedLibraries(packages.Values);
             var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
-            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-            var writerLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
             var cliLogger = logFactory.CreateLogger("CLI");
 
+            var packager = new LibraryPackager();
             var resources = packager.PackageResources(elmDir,
                 cqlDir,
                 graph,
@@ -121,8 +119,7 @@ namespace Hl7.Cql.Packaging.CLI
                 new CqlOperatorsBinding(typeResolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
                 CanonicalUri,
-                builderLogger,
-                writerLogger);
+                logFactory);
 
             var options = new JsonSerializerOptions()
                 .ForFhir(typeof(Resource).Assembly)

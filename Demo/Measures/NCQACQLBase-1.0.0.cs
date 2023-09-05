@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("NCQACQLBase", "1.0.0")]
 public class NCQACQLBase_1_0_0
 {
@@ -53,51 +53,48 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var d_ = context.Operators;
-				Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA g_(CqlInterval<CqlDate> I)
+				Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA d_(CqlInterval<CqlDate> I)
 				{
-					CqlDate m_()
+					CqlDate j_()
 					{
 						if ((context.Operators.Start(I) is null))
 						{
-							var o_ = context.Operators;
-							var p_ = o_.Minimum<CqlDate>();
+							var l_ = context.Operators.Minimum<CqlDate>();
 
-							return p_;
+							return l_;
 						}
 						else
 						{
-							var q_ = context.Operators;
-							var r_ = q_.Start(I);
+							var m_ = context.Operators.Start(I);
 
-							return r_;
+							return m_;
 						};
 					};
-					var n_ = new Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA
+					var k_ = new Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA
 					{
 						interval = I,
-						startOfInterval = m_(),
+						startOfInterval = j_(),
 					};
+
+					return k_;
+				};
+				var e_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA>(intervals, d_);
+				object f_(Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA @this)
+				{
+					var n_ = @this?.startOfInterval;
 
 					return n_;
 				};
-				var h_ = d_.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA>(intervals, g_);
-				object i_(Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA @this)
+				var g_ = context.Operators.ListSortBy<Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+				CqlInterval<CqlDate> h_(Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA sortedIntervals)
 				{
-					var s_ = @this?.startOfInterval;
+					var o_ = sortedIntervals?.interval;
 
-					return s_;
+					return o_;
 				};
-				var j_ = d_.ListSortBy<Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-				CqlInterval<CqlDate> k_(Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA sortedIntervals)
-				{
-					var t_ = sortedIntervals?.interval;
+				var i_ = context.Operators.SelectOrNull<Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA, CqlInterval<CqlDate>>(g_, h_);
 
-					return t_;
-				};
-				var l_ = d_.SelectOrNull<Tuples.Tuple_DXgGhLJSUaCHQXWCIGhOfjCeA, CqlInterval<CqlDate>>(j_, k_);
-
-				return l_;
+				return i_;
 			};
 		};
 
@@ -125,51 +122,48 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var d_ = context.Operators;
-				Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ g_(CqlInterval<CqlDateTime> I)
+				Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ d_(CqlInterval<CqlDateTime> I)
 				{
-					CqlDateTime m_()
+					CqlDateTime j_()
 					{
 						if ((context.Operators.Start(I) is null))
 						{
-							var o_ = context.Operators;
-							var p_ = o_.Minimum<CqlDateTime>();
+							var l_ = context.Operators.Minimum<CqlDateTime>();
 
-							return p_;
+							return l_;
 						}
 						else
 						{
-							var q_ = context.Operators;
-							var r_ = q_.Start(I);
+							var m_ = context.Operators.Start(I);
 
-							return r_;
+							return m_;
 						};
 					};
-					var n_ = new Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ
+					var k_ = new Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ
 					{
 						interval = I,
-						startOfInterval = m_(),
+						startOfInterval = j_(),
 					};
+
+					return k_;
+				};
+				var e_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ>(intervals, d_);
+				object f_(Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ @this)
+				{
+					var n_ = @this?.startOfInterval;
 
 					return n_;
 				};
-				var h_ = d_.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ>(intervals, g_);
-				object i_(Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ @this)
+				var g_ = context.Operators.ListSortBy<Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ>(e_, f_, System.ComponentModel.ListSortDirection.Ascending);
+				CqlInterval<CqlDateTime> h_(Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ sortedIntervals)
 				{
-					var s_ = @this?.startOfInterval;
+					var o_ = sortedIntervals?.interval;
 
-					return s_;
+					return o_;
 				};
-				var j_ = d_.ListSortBy<Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ>(h_, i_, System.ComponentModel.ListSortDirection.Ascending);
-				CqlInterval<CqlDateTime> k_(Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ sortedIntervals)
-				{
-					var t_ = sortedIntervals?.interval;
+				var i_ = context.Operators.SelectOrNull<Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ, CqlInterval<CqlDateTime>>(g_, h_);
 
-					return t_;
-				};
-				var l_ = d_.SelectOrNull<Tuples.Tuple_UKiMhSTCRNIPefSbODPWDGLQ, CqlInterval<CqlDateTime>>(j_, k_);
-
-				return l_;
+				return i_;
 			};
 		};
 
@@ -197,27 +191,24 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var d_ = context.Operators;
-				bool? f_(CqlInterval<CqlDate> I)
+				bool? d_(CqlInterval<CqlDate> I)
 				{
-					var i_ = context.Operators;
-					bool? l_(CqlInterval<CqlDate> J)
+					bool? g_(CqlInterval<CqlDate> J)
 					{
-						var p_ = context.Operators;
-						var q_ = p_.IntervalProperlyIncludesInterval<CqlDate>(J, I, null);
+						var k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDate>(J, I, null);
 
-						return q_;
+						return k_;
 					};
-					var m_ = i_.SelectOrNull<CqlInterval<CqlDate>, bool?>(intervals, l_);
-					var n_ = i_.AnyTrue(m_);
-					var o_ = i_.Not(n_);
+					var h_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, bool?>(intervals, g_);
+					var i_ = context.Operators.AnyTrue(h_);
+					var j_ = context.Operators.Not(i_);
 
-					return o_;
+					return j_;
 				};
-				var g_ = d_.WhereOrNull<CqlInterval<CqlDate>>(intervals, f_);
-				var h_ = d_.Collapse(g_, "day");
+				var e_ = context.Operators.WhereOrNull<CqlInterval<CqlDate>>(intervals, d_);
+				var f_ = context.Operators.Collapse(e_, "day");
 
-				return h_;
+				return f_;
 			};
 		};
 
@@ -245,27 +236,24 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var d_ = context.Operators;
-				bool? f_(CqlInterval<CqlDateTime> I)
+				bool? d_(CqlInterval<CqlDateTime> I)
 				{
-					var i_ = context.Operators;
-					bool? l_(CqlInterval<CqlDateTime> J)
+					bool? g_(CqlInterval<CqlDateTime> J)
 					{
-						var p_ = context.Operators;
-						var q_ = p_.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, null);
+						var k_ = context.Operators.IntervalProperlyIncludesInterval<CqlDateTime>(J, I, null);
 
-						return q_;
+						return k_;
 					};
-					var m_ = i_.SelectOrNull<CqlInterval<CqlDateTime>, bool?>(intervals, l_);
-					var n_ = i_.AnyTrue(m_);
-					var o_ = i_.Not(n_);
+					var h_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, bool?>(intervals, g_);
+					var i_ = context.Operators.AnyTrue(h_);
+					var j_ = context.Operators.Not(i_);
 
-					return o_;
+					return j_;
 				};
-				var g_ = d_.WhereOrNull<CqlInterval<CqlDateTime>>(intervals, f_);
-				var h_ = d_.Collapse(g_, null);
+				var e_ = context.Operators.WhereOrNull<CqlInterval<CqlDateTime>>(intervals, d_);
+				var f_ = context.Operators.Collapse(e_, null);
 
-				return h_;
+				return f_;
 			};
 		};
 
@@ -275,307 +263,288 @@ public class NCQACQLBase_1_0_0
     [CqlDeclaration("Date Interval Covering Relative to Base Interval")]
 	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var b_ = this.Sort_Date_Intervals(coveringIntervals);
-		CqlInterval<CqlDate> c_(CqlInterval<CqlDate> sortedInterval)
+		var a_ = this.Sort_Date_Intervals(coveringIntervals);
+		CqlInterval<CqlDate> b_(CqlInterval<CqlDate> sortedInterval)
 		{
-			var f_ = context.Operators;
-			var g_ = f_.IntervalIntersectsInterval<CqlDate>(baseInterval, sortedInterval);
+			var e_ = context.Operators.IntervalIntersectsInterval<CqlDate>(baseInterval, sortedInterval);
 
-			return g_;
+			return e_;
 		};
-		var d_ = a_.SelectOrNull<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(b_, c_);
-		var e_ = this.Collapse_Date_Interval_Workaround(d_);
+		var c_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(a_, b_);
+		var d_ = this.Collapse_Date_Interval_Workaround(c_);
 
-		return e_;
+		return d_;
 	}
 
     [CqlDeclaration("DateTime Interval Covering Relative to Base Interval")]
 	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Covering_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var b_ = this.Sort_DateTime_Intervals(coveringIntervals);
-		CqlInterval<CqlDateTime> c_(CqlInterval<CqlDateTime> sortedInterval)
+		var a_ = this.Sort_DateTime_Intervals(coveringIntervals);
+		CqlInterval<CqlDateTime> b_(CqlInterval<CqlDateTime> sortedInterval)
 		{
-			var f_ = context.Operators;
-			var g_ = f_.IntervalIntersectsInterval<CqlDateTime>(baseInterval, sortedInterval);
+			var e_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(baseInterval, sortedInterval);
 
-			return g_;
+			return e_;
 		};
-		var d_ = a_.SelectOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(b_, c_);
-		var e_ = this.Collapse_DateTime_Interval_Workaround(d_);
+		var c_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(a_, b_);
+		var d_ = this.Collapse_DateTime_Interval_Workaround(c_);
 
-		return e_;
+		return d_;
 	}
 
     [CqlDeclaration("Date Interval Gaps Relative to Base Interval")]
 	public IEnumerable<CqlInterval<CqlDate>> Date_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var c_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
-		var d_ = new Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS
+		var a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var b_ = new Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS
 		{
-			sortedCoverings = c_,
+			sortedCoverings = a_,
 		};
-		var e_ = new Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS[]
+		var c_ = new Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS[]
 		{
-			d_,
+			b_,
 		};
-		IEnumerable<CqlInterval<CqlDate>> f_(Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS variableDeclarations)
+		IEnumerable<CqlInterval<CqlDate>> d_(Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS variableDeclarations)
 		{
-			var i_ = context.Operators;
-			IEnumerable<CqlInterval<CqlDate>> k_()
+			IEnumerable<CqlInterval<CqlDate>> g_()
 			{
 				if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings), (int?)0) ?? false))
 				{
-					var r_ = new CqlInterval<CqlDate>[]
+					var n_ = new CqlInterval<CqlDate>[]
 					{
 						baseInterval,
 					};
 
-					return (r_ as IEnumerable<CqlInterval<CqlDate>>);
+					return (n_ as IEnumerable<CqlInterval<CqlDate>>);
 				}
 				else
 				{
-					var s_ = context.Operators;
-					var t_ = variableDeclarations?.sortedCoverings;
-					CqlInterval<CqlDate> u_(CqlInterval<CqlDate> sortedCovering)
+					var o_ = variableDeclarations?.sortedCoverings;
+					CqlInterval<CqlDate> p_(CqlInterval<CqlDate> sortedCovering)
 					{
-						CqlInterval<CqlDate> w_()
+						CqlInterval<CqlDate> r_()
 						{
 							if ((context.Operators.Equal(context.Operators.ListIndex<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings, sortedCovering), (int?)0) ?? false))
 							{
-								var x_ = context.Operators;
-								var ab_ = x_.Start(baseInterval);
-								var ad_ = x_.Start(sortedCovering);
-								var ae_ = x_.Interval(ab_, ad_, true, true);
-								var af_ = x_.IntervalIntersectsInterval<CqlDate>(ae_, baseInterval);
-								var ag_ = x_.IntervalExcept(af_, sortedCovering);
+								var s_ = context.Operators.Start(baseInterval);
+								var t_ = context.Operators.Start(sortedCovering);
+								var u_ = context.Operators.Interval(s_, t_, true, true);
+								var v_ = context.Operators.IntervalIntersectsInterval<CqlDate>(u_, baseInterval);
+								var w_ = context.Operators.IntervalExcept(v_, sortedCovering);
 
-								return ag_;
+								return w_;
 							}
 							else
 							{
-								var ah_ = context.Operators;
-								var am_ = variableDeclarations?.sortedCoverings;
-								var aq_ = ah_.ListIndex<CqlInterval<CqlDate>>(am_, sortedCovering);
-								var ar_ = ah_.Subtract(aq_, (int?)1);
-								var as_ = ah_.ListElementAt<CqlInterval<CqlDate>>(am_, ar_);
-								var at_ = ah_.Start(as_);
-								var av_ = ah_.End(sortedCovering);
-								var aw_ = ah_.Interval(at_, av_, false, false);
-								var bc_ = ah_.ListIndex<CqlInterval<CqlDate>>(am_, sortedCovering);
-								var bd_ = ah_.Subtract(bc_, (int?)1);
-								var be_ = ah_.ListElementAt<CqlInterval<CqlDate>>(am_, bd_);
-								var bf_ = ah_.IntervalExcept(aw_, be_);
-								var bg_ = ah_.IntervalExcept(bf_, sortedCovering);
+								var x_ = variableDeclarations?.sortedCoverings;
+								var z_ = context.Operators.ListIndex<CqlInterval<CqlDate>>(x_, sortedCovering);
+								var aa_ = context.Operators.Subtract(z_, (int?)1);
+								var ab_ = context.Operators.ListElementAt<CqlInterval<CqlDate>>(x_, aa_);
+								var ac_ = context.Operators.Start(ab_);
+								var ad_ = context.Operators.End(sortedCovering);
+								var ae_ = context.Operators.Interval(ac_, ad_, false, false);
+								var ah_ = context.Operators.ListIndex<CqlInterval<CqlDate>>(x_, sortedCovering);
+								var ai_ = context.Operators.Subtract(ah_, (int?)1);
+								var aj_ = context.Operators.ListElementAt<CqlInterval<CqlDate>>(x_, ai_);
+								var ak_ = context.Operators.IntervalExcept(ae_, aj_);
+								var al_ = context.Operators.IntervalExcept(ak_, sortedCovering);
 
-								return bg_;
+								return al_;
 							};
 						};
 
-						return w_();
+						return r_();
 					};
-					var v_ = s_.SelectOrNull<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(t_, u_);
+					var q_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(o_, p_);
 
-					return v_;
+					return q_;
 				};
 			};
-			IEnumerable<CqlInterval<CqlDate>> l_()
+			IEnumerable<CqlInterval<CqlDate>> h_()
 			{
 				if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDate>>(variableDeclarations?.sortedCoverings), (int?)0) ?? false))
 				{
-					var bh_ = new CqlInterval<CqlDate>[0]
+					var am_ = new CqlInterval<CqlDate>[0]
 ;
 
-					return (bh_ as IEnumerable<CqlInterval<CqlDate>>);
+					return (am_ as IEnumerable<CqlInterval<CqlDate>>);
 				}
 				else
 				{
-					var bi_ = context.Operators;
-					var bn_ = variableDeclarations?.sortedCoverings;
-					var bo_ = bi_.LastOfList<CqlInterval<CqlDate>>(bn_);
-					var bp_ = bi_.Start(bo_);
-					var br_ = bi_.End(baseInterval);
-					var bs_ = bi_.Interval(bp_, br_, false, true);
-					var bv_ = bi_.LastOfList<CqlInterval<CqlDate>>(bn_);
-					var bw_ = bi_.IntervalExcept(bs_, bv_);
-					var bx_ = bi_.IntervalIntersectsInterval<CqlDate>(bw_, baseInterval);
-					var by_ = new CqlInterval<CqlDate>[]
+					var an_ = variableDeclarations?.sortedCoverings;
+					var ao_ = context.Operators.LastOfList<CqlInterval<CqlDate>>(an_);
+					var ap_ = context.Operators.Start(ao_);
+					var aq_ = context.Operators.End(baseInterval);
+					var ar_ = context.Operators.Interval(ap_, aq_, false, true);
+					var at_ = context.Operators.LastOfList<CqlInterval<CqlDate>>(an_);
+					var au_ = context.Operators.IntervalExcept(ar_, at_);
+					var av_ = context.Operators.IntervalIntersectsInterval<CqlDate>(au_, baseInterval);
+					var aw_ = new CqlInterval<CqlDate>[]
 					{
-						bx_,
+						av_,
 					};
 
-					return (by_ as IEnumerable<CqlInterval<CqlDate>>);
+					return (aw_ as IEnumerable<CqlInterval<CqlDate>>);
 				};
 			};
-			var m_ = new Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR
+			var i_ = new Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR
 			{
-				frontgaps = k_(),
-				endgap = l_(),
+				frontgaps = g_(),
+				endgap = h_(),
 			};
-			var n_ = new Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR[]
+			var j_ = new Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR[]
 			{
-				m_,
+				i_,
 			};
-			IEnumerable<CqlInterval<CqlDate>> o_(Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR calculations)
+			IEnumerable<CqlInterval<CqlDate>> k_(Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR calculations)
 			{
-				var bz_ = context.Operators;
-				var ca_ = calculations?.frontgaps;
-				var cb_ = calculations?.endgap;
-				var cc_ = bz_.ListUnion<CqlInterval<CqlDate>>(ca_, cb_);
-				var cd_ = this.Collapse_Date_Interval_Workaround(cc_);
+				var ax_ = calculations?.frontgaps;
+				var ay_ = calculations?.endgap;
+				var az_ = context.Operators.ListUnion<CqlInterval<CqlDate>>(ax_, ay_);
+				var ba_ = this.Collapse_Date_Interval_Workaround(az_);
 
-				return cd_;
+				return ba_;
 			};
-			var p_ = i_.SelectOrNull<Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR, IEnumerable<CqlInterval<CqlDate>>>(n_, o_);
-			var q_ = i_.SingleOrNull<IEnumerable<CqlInterval<CqlDate>>>(p_);
+			var l_ = context.Operators.SelectOrNull<Tuples.Tuple_FXGMiYhHaiIMEGdRUYMPEAHCR, IEnumerable<CqlInterval<CqlDate>>>(j_, k_);
+			var m_ = context.Operators.SingleOrNull<IEnumerable<CqlInterval<CqlDate>>>(l_);
 
-			return q_;
+			return m_;
 		};
-		var g_ = a_.SelectOrNull<Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS, IEnumerable<CqlInterval<CqlDate>>>(e_, f_);
-		var h_ = a_.SingleOrNull<IEnumerable<CqlInterval<CqlDate>>>(g_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_EHUBiUYZGHNGdhCYfLiYVfUdS, IEnumerable<CqlInterval<CqlDate>>>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<IEnumerable<CqlInterval<CqlDate>>>(e_);
 
-		return h_;
+		return f_;
 	}
 
     [CqlDeclaration("DateTime Interval Gaps Relative to Base Interval")]
 	public IEnumerable<CqlInterval<CqlDateTime>> DateTime_Interval_Gaps_Relative_to_Base_Interval(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var c_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
-		var d_ = new Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ
+		var a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var b_ = new Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ
 		{
-			sortedCoverings = c_,
+			sortedCoverings = a_,
 		};
-		var e_ = new Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ[]
+		var c_ = new Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ[]
 		{
-			d_,
+			b_,
 		};
-		IEnumerable<CqlInterval<CqlDateTime>> f_(Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ variableDeclarations)
+		IEnumerable<CqlInterval<CqlDateTime>> d_(Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ variableDeclarations)
 		{
-			var i_ = context.Operators;
-			IEnumerable<CqlInterval<CqlDateTime>> k_()
+			IEnumerable<CqlInterval<CqlDateTime>> g_()
 			{
 				if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings), (int?)0) ?? false))
 				{
-					var r_ = new CqlInterval<CqlDateTime>[]
+					var n_ = new CqlInterval<CqlDateTime>[]
 					{
 						baseInterval,
 					};
 
-					return (r_ as IEnumerable<CqlInterval<CqlDateTime>>);
+					return (n_ as IEnumerable<CqlInterval<CqlDateTime>>);
 				}
 				else
 				{
-					var s_ = context.Operators;
-					var t_ = variableDeclarations?.sortedCoverings;
-					CqlInterval<CqlDateTime> u_(CqlInterval<CqlDateTime> sortedCovering)
+					var o_ = variableDeclarations?.sortedCoverings;
+					CqlInterval<CqlDateTime> p_(CqlInterval<CqlDateTime> sortedCovering)
 					{
-						CqlInterval<CqlDateTime> w_()
+						CqlInterval<CqlDateTime> r_()
 						{
 							if ((context.Operators.Equal(context.Operators.ListIndex<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings, sortedCovering), (int?)0) ?? false))
 							{
-								var x_ = context.Operators;
-								var ab_ = x_.Start(baseInterval);
-								var ad_ = x_.Start(sortedCovering);
-								var ae_ = x_.Interval(ab_, ad_, true, true);
-								var af_ = x_.IntervalIntersectsInterval<CqlDateTime>(ae_, baseInterval);
-								var ag_ = x_.IntervalExcept(af_, sortedCovering);
+								var s_ = context.Operators.Start(baseInterval);
+								var t_ = context.Operators.Start(sortedCovering);
+								var u_ = context.Operators.Interval(s_, t_, true, true);
+								var v_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(u_, baseInterval);
+								var w_ = context.Operators.IntervalExcept(v_, sortedCovering);
 
-								return ag_;
+								return w_;
 							}
 							else
 							{
-								var ah_ = context.Operators;
-								var am_ = variableDeclarations?.sortedCoverings;
-								var aq_ = ah_.ListIndex<CqlInterval<CqlDateTime>>(am_, sortedCovering);
-								var ar_ = ah_.Subtract(aq_, (int?)1);
-								var as_ = ah_.ListElementAt<CqlInterval<CqlDateTime>>(am_, ar_);
-								var at_ = ah_.Start(as_);
-								var av_ = ah_.End(sortedCovering);
-								var aw_ = ah_.Interval(at_, av_, false, false);
-								var bc_ = ah_.ListIndex<CqlInterval<CqlDateTime>>(am_, sortedCovering);
-								var bd_ = ah_.Subtract(bc_, (int?)1);
-								var be_ = ah_.ListElementAt<CqlInterval<CqlDateTime>>(am_, bd_);
-								var bf_ = ah_.IntervalExcept(aw_, be_);
-								var bg_ = ah_.IntervalExcept(bf_, sortedCovering);
+								var x_ = variableDeclarations?.sortedCoverings;
+								var z_ = context.Operators.ListIndex<CqlInterval<CqlDateTime>>(x_, sortedCovering);
+								var aa_ = context.Operators.Subtract(z_, (int?)1);
+								var ab_ = context.Operators.ListElementAt<CqlInterval<CqlDateTime>>(x_, aa_);
+								var ac_ = context.Operators.Start(ab_);
+								var ad_ = context.Operators.End(sortedCovering);
+								var ae_ = context.Operators.Interval(ac_, ad_, false, false);
+								var ah_ = context.Operators.ListIndex<CqlInterval<CqlDateTime>>(x_, sortedCovering);
+								var ai_ = context.Operators.Subtract(ah_, (int?)1);
+								var aj_ = context.Operators.ListElementAt<CqlInterval<CqlDateTime>>(x_, ai_);
+								var ak_ = context.Operators.IntervalExcept(ae_, aj_);
+								var al_ = context.Operators.IntervalExcept(ak_, sortedCovering);
 
-								return bg_;
+								return al_;
 							};
 						};
 
-						return w_();
+						return r_();
 					};
-					var v_ = s_.SelectOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(t_, u_);
+					var q_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(o_, p_);
 
-					return v_;
+					return q_;
 				};
 			};
-			IEnumerable<CqlInterval<CqlDateTime>> l_()
+			IEnumerable<CqlInterval<CqlDateTime>> h_()
 			{
 				if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDateTime>>(variableDeclarations?.sortedCoverings), (int?)0) ?? false))
 				{
-					var bh_ = new CqlInterval<CqlDateTime>[0]
+					var am_ = new CqlInterval<CqlDateTime>[0]
 ;
 
-					return (bh_ as IEnumerable<CqlInterval<CqlDateTime>>);
+					return (am_ as IEnumerable<CqlInterval<CqlDateTime>>);
 				}
 				else
 				{
-					var bi_ = context.Operators;
-					var bn_ = variableDeclarations?.sortedCoverings;
-					var bo_ = bi_.LastOfList<CqlInterval<CqlDateTime>>(bn_);
-					var bp_ = bi_.Start(bo_);
-					var br_ = bi_.End(baseInterval);
-					var bs_ = bi_.Interval(bp_, br_, false, true);
-					var bv_ = bi_.LastOfList<CqlInterval<CqlDateTime>>(bn_);
-					var bw_ = bi_.IntervalExcept(bs_, bv_);
-					var bx_ = bi_.IntervalIntersectsInterval<CqlDateTime>(bw_, baseInterval);
-					var by_ = new CqlInterval<CqlDateTime>[]
+					var an_ = variableDeclarations?.sortedCoverings;
+					var ao_ = context.Operators.LastOfList<CqlInterval<CqlDateTime>>(an_);
+					var ap_ = context.Operators.Start(ao_);
+					var aq_ = context.Operators.End(baseInterval);
+					var ar_ = context.Operators.Interval(ap_, aq_, false, true);
+					var at_ = context.Operators.LastOfList<CqlInterval<CqlDateTime>>(an_);
+					var au_ = context.Operators.IntervalExcept(ar_, at_);
+					var av_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(au_, baseInterval);
+					var aw_ = new CqlInterval<CqlDateTime>[]
 					{
-						bx_,
+						av_,
 					};
 
-					return (by_ as IEnumerable<CqlInterval<CqlDateTime>>);
+					return (aw_ as IEnumerable<CqlInterval<CqlDateTime>>);
 				};
 			};
-			var m_ = new Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA
+			var i_ = new Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA
 			{
-				frontgaps = k_(),
-				endgap = l_(),
+				frontgaps = g_(),
+				endgap = h_(),
 			};
-			var n_ = new Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA[]
+			var j_ = new Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA[]
 			{
-				m_,
+				i_,
 			};
-			IEnumerable<CqlInterval<CqlDateTime>> o_(Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA calculations)
+			IEnumerable<CqlInterval<CqlDateTime>> k_(Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA calculations)
 			{
-				var bz_ = context.Operators;
-				var ca_ = calculations?.frontgaps;
-				var cb_ = calculations?.endgap;
-				var cc_ = bz_.ListUnion<CqlInterval<CqlDateTime>>(ca_, cb_);
-				var cd_ = this.Collapse_DateTime_Interval_Workaround(cc_);
+				var ax_ = calculations?.frontgaps;
+				var ay_ = calculations?.endgap;
+				var az_ = context.Operators.ListUnion<CqlInterval<CqlDateTime>>(ax_, ay_);
+				var ba_ = this.Collapse_DateTime_Interval_Workaround(az_);
 
-				return cd_;
+				return ba_;
 			};
-			var p_ = i_.SelectOrNull<Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA, IEnumerable<CqlInterval<CqlDateTime>>>(n_, o_);
-			var q_ = i_.SingleOrNull<IEnumerable<CqlInterval<CqlDateTime>>>(p_);
+			var l_ = context.Operators.SelectOrNull<Tuples.Tuple_HAejSJNFdWPBCHgSSZUeVRIHA, IEnumerable<CqlInterval<CqlDateTime>>>(j_, k_);
+			var m_ = context.Operators.SingleOrNull<IEnumerable<CqlInterval<CqlDateTime>>>(l_);
 
-			return q_;
+			return m_;
 		};
-		var g_ = a_.SelectOrNull<Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ, IEnumerable<CqlInterval<CqlDateTime>>>(e_, f_);
-		var h_ = a_.SingleOrNull<IEnumerable<CqlInterval<CqlDateTime>>>(g_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_CUJFCVgQUNRcdHdTeVDjJcYaZ, IEnumerable<CqlInterval<CqlDateTime>>>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<IEnumerable<CqlInterval<CqlDateTime>>>(e_);
 
-		return h_;
+		return f_;
 	}
 
     [CqlDeclaration("Collapsed Date Interval Stats")]
 	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Collapsed_Date_Interval_Stats(IEnumerable<CqlInterval<CqlDate>> collapsedIntervals)
 	{
-		var a_ = context.Operators;
-		var b_ = a_.CountOrNull<CqlInterval<CqlDate>>(collapsedIntervals);
-		int? c_()
+		var a_ = context.Operators.CountOrNull<CqlInterval<CqlDate>>(collapsedIntervals);
+		int? b_()
 		{
 			if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDate>>(collapsedIntervals), (int?)0) ?? false))
 			{
@@ -583,76 +552,72 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var g_ = context.Operators;
-				int? i_(CqlInterval<CqlDate> I)
+				int? f_(CqlInterval<CqlDate> I)
 				{
-					var l_ = context.Operators;
-					var p_ = l_.Start(I);
-					var r_ = l_.End(I);
-					var s_ = l_.DurationBetween(p_, r_, "day");
-					var t_ = l_.Add(s_, (int?)1);
-					var u_ = new int?[]
+					var i_ = context.Operators.Start(I);
+					var j_ = context.Operators.End(I);
+					var k_ = context.Operators.DurationBetween(i_, j_, "day");
+					var l_ = context.Operators.Add(k_, (int?)1);
+					var m_ = new int?[]
 					{
-						t_,
+						l_,
 						(int?)0,
 					};
-					var v_ = l_.MaxOrNull<int?>((u_ as IEnumerable<int?>));
+					var n_ = context.Operators.MaxOrNull<int?>((m_ as IEnumerable<int?>));
 
-					return v_;
+					return n_;
 				};
-				var j_ = g_.SelectOrNull<CqlInterval<CqlDate>, int?>(collapsedIntervals, i_);
-				var k_ = g_.Sum(j_);
+				var g_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, int?>(collapsedIntervals, f_);
+				var h_ = context.Operators.Sum(g_);
 
-				return k_;
+				return h_;
 			};
 		};
-		CqlInterval<CqlDate> d_()
+		CqlInterval<CqlDate> c_()
 		{
 			if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDate>>(collapsedIntervals), (int?)0) ?? false))
 			{
-				CqlInterval<CqlDate> w_ = null;
+				CqlInterval<CqlDate> o_ = null;
 
-				return (w_ as CqlInterval<CqlDate>);
+				return (o_ as CqlInterval<CqlDate>);
 			}
 			else
 			{
-				var x_ = context.Operators;
-				Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU aa_(CqlInterval<CqlDate> I)
+				Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU p_(CqlInterval<CqlDate> I)
 				{
-					var ag_ = context.Operators;
-					var ak_ = ag_.Start(I);
-					var am_ = ag_.End(I);
-					var an_ = ag_.DurationBetween(ak_, am_, "day");
-					var ao_ = ag_.Add(an_, (int?)1);
-					var ap_ = new int?[]
+					var v_ = context.Operators.Start(I);
+					var w_ = context.Operators.End(I);
+					var x_ = context.Operators.DurationBetween(v_, w_, "day");
+					var y_ = context.Operators.Add(x_, (int?)1);
+					var z_ = new int?[]
 					{
-						ao_,
+						y_,
 						(int?)0,
 					};
-					var aq_ = ag_.MaxOrNull<int?>((ap_ as IEnumerable<int?>));
-					var ar_ = new Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU
+					var aa_ = context.Operators.MaxOrNull<int?>((z_ as IEnumerable<int?>));
+					var ab_ = new Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU
 					{
 						interval = I,
-						days = aq_,
+						days = aa_,
 					};
 
-					return ar_;
+					return ab_;
 				};
-				var ab_ = x_.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(collapsedIntervals, aa_);
-				object ac_(Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU @this)
+				var q_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(collapsedIntervals, p_);
+				object r_(Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU @this)
 				{
-					var as_ = @this?.days;
+					var ac_ = @this?.days;
 
-					return as_;
+					return ac_;
 				};
-				var ad_ = x_.ListSortBy<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(ab_, ac_, System.ComponentModel.ListSortDirection.Descending);
-				var ae_ = x_.FirstOfList<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(ad_);
-				var af_ = ae_?.interval;
+				var s_ = context.Operators.ListSortBy<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(q_, r_, System.ComponentModel.ListSortDirection.Descending);
+				var t_ = context.Operators.FirstOfList<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(s_);
+				var u_ = t_?.interval;
 
-				return af_;
+				return u_;
 			};
 		};
-		int? e_()
+		int? d_()
 		{
 			if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDate>>(collapsedIntervals), (int?)0) ?? false))
 			{
@@ -660,154 +625,148 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var at_ = context.Operators;
-				Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU ba_(CqlInterval<CqlDate> I)
+				Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU ad_(CqlInterval<CqlDate> I)
 				{
-					var bw_ = context.Operators;
-					var ca_ = bw_.Start(I);
-					var cc_ = bw_.End(I);
-					var cd_ = bw_.DurationBetween(ca_, cc_, "day");
-					var ce_ = bw_.Add(cd_, (int?)1);
-					var cf_ = new int?[]
+					var av_ = context.Operators.Start(I);
+					var aw_ = context.Operators.End(I);
+					var ax_ = context.Operators.DurationBetween(av_, aw_, "day");
+					var ay_ = context.Operators.Add(ax_, (int?)1);
+					var az_ = new int?[]
 					{
-						ce_,
+						ay_,
 						(int?)0,
 					};
-					var cg_ = bw_.MaxOrNull<int?>((cf_ as IEnumerable<int?>));
-					var ch_ = new Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU
+					var ba_ = context.Operators.MaxOrNull<int?>((az_ as IEnumerable<int?>));
+					var bb_ = new Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU
 					{
 						interval = I,
-						days = cg_,
+						days = ba_,
 					};
 
-					return ch_;
+					return bb_;
 				};
-				var bb_ = at_.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(collapsedIntervals, ba_);
-				object bc_(Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU @this)
+				var ae_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(collapsedIntervals, ad_);
+				object af_(Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU @this)
 				{
-					var ci_ = @this?.days;
+					var bc_ = @this?.days;
 
-					return ci_;
+					return bc_;
 				};
-				var bd_ = at_.ListSortBy<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(bb_, bc_, System.ComponentModel.ListSortDirection.Descending);
-				var be_ = at_.FirstOfList<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(bd_);
-				var bf_ = be_?.interval;
-				var bg_ = at_.Start(bf_);
-				Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU bl_(CqlInterval<CqlDate> I)
+				var ag_ = context.Operators.ListSortBy<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(ae_, af_, System.ComponentModel.ListSortDirection.Descending);
+				var ah_ = context.Operators.FirstOfList<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(ag_);
+				var ai_ = ah_?.interval;
+				var aj_ = context.Operators.Start(ai_);
+				Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU ak_(CqlInterval<CqlDate> I)
 				{
-					var cj_ = context.Operators;
-					var cn_ = cj_.Start(I);
-					var cp_ = cj_.End(I);
-					var cq_ = cj_.DurationBetween(cn_, cp_, "day");
-					var cr_ = cj_.Add(cq_, (int?)1);
-					var cs_ = new int?[]
+					var bd_ = context.Operators.Start(I);
+					var be_ = context.Operators.End(I);
+					var bf_ = context.Operators.DurationBetween(bd_, be_, "day");
+					var bg_ = context.Operators.Add(bf_, (int?)1);
+					var bh_ = new int?[]
 					{
-						cr_,
+						bg_,
 						(int?)0,
 					};
-					var ct_ = cj_.MaxOrNull<int?>((cs_ as IEnumerable<int?>));
-					var cu_ = new Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU
+					var bi_ = context.Operators.MaxOrNull<int?>((bh_ as IEnumerable<int?>));
+					var bj_ = new Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU
 					{
 						interval = I,
-						days = ct_,
+						days = bi_,
 					};
 
-					return cu_;
+					return bj_;
 				};
-				var bm_ = at_.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(collapsedIntervals, bl_);
-				object bn_(Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU @this)
+				var al_ = context.Operators.SelectOrNull<CqlInterval<CqlDate>, Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(collapsedIntervals, ak_);
+				object am_(Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU @this)
 				{
-					var cv_ = @this?.days;
+					var bk_ = @this?.days;
 
-					return cv_;
+					return bk_;
 				};
-				var bo_ = at_.ListSortBy<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(bm_, bn_, System.ComponentModel.ListSortDirection.Descending);
-				var bp_ = at_.FirstOfList<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(bo_);
-				var bq_ = bp_?.interval;
-				var br_ = at_.End(bq_);
-				var bs_ = at_.DurationBetween(bg_, br_, "day");
-				var bt_ = at_.Add(bs_, (int?)1);
-				var bu_ = new int?[]
+				var an_ = context.Operators.ListSortBy<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(al_, am_, System.ComponentModel.ListSortDirection.Descending);
+				var ao_ = context.Operators.FirstOfList<Tuples.Tuple_ECVjLWJcUFIRQXFBcGfYDAJeU>(an_);
+				var ap_ = ao_?.interval;
+				var aq_ = context.Operators.End(ap_);
+				var ar_ = context.Operators.DurationBetween(aj_, aq_, "day");
+				var as_ = context.Operators.Add(ar_, (int?)1);
+				var at_ = new int?[]
 				{
-					bt_,
+					as_,
 					(int?)0,
 				};
-				var bv_ = at_.MaxOrNull<int?>((bu_ as IEnumerable<int?>));
+				var au_ = context.Operators.MaxOrNull<int?>((at_ as IEnumerable<int?>));
 
-				return bv_;
+				return au_;
 			};
 		};
-		var f_ = new Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD
+		var e_ = new Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD
 		{
 			Intervals = collapsedIntervals,
-			Interval_Count = b_,
-			Total_Days_In_Intervals = c_(),
-			Longest_Interval = d_(),
-			Total_Days_In_Longest_Interval = e_(),
+			Interval_Count = a_,
+			Total_Days_In_Intervals = b_(),
+			Longest_Interval = c_(),
+			Total_Days_In_Longest_Interval = d_(),
 		};
 
-		return f_;
+		return e_;
 	}
 
     [CqlDeclaration("Date Interval Covering Relative to Base Interval Stats")]
 	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Date_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var c_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
-		var d_ = new Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU
+		var a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var b_ = new Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU
 		{
-			Covering_Intervals = c_,
+			Covering_Intervals = a_,
 		};
-		var e_ = new Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU[]
+		var c_ = new Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU[]
 		{
-			d_,
+			b_,
 		};
-		Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD f_(Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU variableDeclarations)
+		Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD d_(Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU variableDeclarations)
 		{
-			var i_ = variableDeclarations?.Covering_Intervals;
-			var j_ = this.Collapsed_Date_Interval_Stats(i_);
+			var g_ = variableDeclarations?.Covering_Intervals;
+			var h_ = this.Collapsed_Date_Interval_Stats(g_);
 
-			return j_;
+			return h_;
 		};
-		var g_ = a_.SelectOrNull<Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU, Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(e_, f_);
-		var h_ = a_.SingleOrNull<Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(g_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_BiacLIDOWQWTUEhhUVDjWHeBU, Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(e_);
 
-		return h_;
+		return f_;
 	}
 
     [CqlDeclaration("Date Interval Gaps Relative to Base Interval Stats")]
 	public Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD Date_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var c_ = this.Date_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
-		var d_ = new Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG
+		var a_ = this.Date_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var b_ = new Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG
 		{
-			Gap_Intervals = c_,
+			Gap_Intervals = a_,
 		};
-		var e_ = new Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG[]
+		var c_ = new Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG[]
 		{
-			d_,
+			b_,
 		};
-		Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD f_(Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG variableDeclarations)
+		Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD d_(Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG variableDeclarations)
 		{
-			var i_ = variableDeclarations?.Gap_Intervals;
-			var j_ = this.Collapsed_Date_Interval_Stats(i_);
+			var g_ = variableDeclarations?.Gap_Intervals;
+			var h_ = this.Collapsed_Date_Interval_Stats(g_);
 
-			return j_;
+			return h_;
 		};
-		var g_ = a_.SelectOrNull<Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG, Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(e_, f_);
-		var h_ = a_.SingleOrNull<Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(g_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_EcPDQKeCFLjSYgUXJScRcgbKG, Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<Tuples.Tuple_DMLKdYCdQIGCNZIeiaWHeZXaD>(e_);
 
-		return h_;
+		return f_;
 	}
 
     [CqlDeclaration("DateTime Interval Set Nulls to Zero")]
 	public CqlInterval<CqlDateTime> DateTime_Interval_Set_Nulls_to_Zero(CqlInterval<CqlDateTime> interval)
 	{
-		var a_ = context.Operators;
-		var e_ = a_.Start(interval);
-		var f_ = a_.ComponentFrom(e_, "year");
-		int? g_()
+		var a_ = context.Operators.Start(interval);
+		var b_ = context.Operators.ComponentFrom(a_, "year");
+		int? c_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.Start(interval), "month") is null))
 			{
@@ -815,14 +774,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var ab_ = context.Operators;
-				var ad_ = ab_.Start(interval);
-				var ae_ = ab_.ComponentFrom(ad_, "month");
+				var v_ = context.Operators.Start(interval);
+				var w_ = context.Operators.ComponentFrom(v_, "month");
 
-				return ae_;
+				return w_;
 			};
 		};
-		int? h_()
+		int? d_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.Start(interval), "day") is null))
 			{
@@ -830,14 +788,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var af_ = context.Operators;
-				var ah_ = af_.Start(interval);
-				var ai_ = af_.ComponentFrom(ah_, "day");
+				var x_ = context.Operators.Start(interval);
+				var y_ = context.Operators.ComponentFrom(x_, "day");
 
-				return ai_;
+				return y_;
 			};
 		};
-		int? i_()
+		int? e_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.Start(interval), "hour") is null))
 			{
@@ -845,14 +802,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var aj_ = context.Operators;
-				var al_ = aj_.Start(interval);
-				var am_ = aj_.ComponentFrom(al_, "hour");
+				var z_ = context.Operators.Start(interval);
+				var aa_ = context.Operators.ComponentFrom(z_, "hour");
 
-				return am_;
+				return aa_;
 			};
 		};
-		int? j_()
+		int? f_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.Start(interval), "minute") is null))
 			{
@@ -860,14 +816,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var an_ = context.Operators;
-				var ap_ = an_.Start(interval);
-				var aq_ = an_.ComponentFrom(ap_, "minute");
+				var ab_ = context.Operators.Start(interval);
+				var ac_ = context.Operators.ComponentFrom(ab_, "minute");
 
-				return aq_;
+				return ac_;
 			};
 		};
-		int? k_()
+		int? g_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.Start(interval), "second") is null))
 			{
@@ -875,14 +830,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var ar_ = context.Operators;
-				var at_ = ar_.Start(interval);
-				var au_ = ar_.ComponentFrom(at_, "second");
+				var ad_ = context.Operators.Start(interval);
+				var ae_ = context.Operators.ComponentFrom(ad_, "second");
 
-				return au_;
+				return ae_;
 			};
 		};
-		int? l_()
+		int? h_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.Start(interval), "millisecond") is null))
 			{
@@ -890,16 +844,15 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var av_ = context.Operators;
-				var ax_ = av_.Start(interval);
-				var ay_ = av_.ComponentFrom(ax_, "millisecond");
+				var af_ = context.Operators.Start(interval);
+				var ag_ = context.Operators.ComponentFrom(af_, "millisecond");
 
-				return ay_;
+				return ag_;
 			};
 		};
-		var o_ = a_.End(interval);
-		var p_ = a_.ComponentFrom(o_, "year");
-		int? q_()
+		var i_ = context.Operators.End(interval);
+		var j_ = context.Operators.ComponentFrom(i_, "year");
+		int? k_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.End(interval), "month") is null))
 			{
@@ -907,14 +860,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var az_ = context.Operators;
-				var bb_ = az_.End(interval);
-				var bc_ = az_.ComponentFrom(bb_, "month");
+				var ah_ = context.Operators.End(interval);
+				var ai_ = context.Operators.ComponentFrom(ah_, "month");
 
-				return bc_;
+				return ai_;
 			};
 		};
-		int? r_()
+		int? l_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.End(interval), "day") is null))
 			{
@@ -922,14 +874,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var bd_ = context.Operators;
-				var bf_ = bd_.End(interval);
-				var bg_ = bd_.ComponentFrom(bf_, "day");
+				var aj_ = context.Operators.End(interval);
+				var ak_ = context.Operators.ComponentFrom(aj_, "day");
 
-				return bg_;
+				return ak_;
 			};
 		};
-		int? s_()
+		int? m_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.End(interval), "hour") is null))
 			{
@@ -937,14 +888,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var bh_ = context.Operators;
-				var bj_ = bh_.End(interval);
-				var bk_ = bh_.ComponentFrom(bj_, "hour");
+				var al_ = context.Operators.End(interval);
+				var am_ = context.Operators.ComponentFrom(al_, "hour");
 
-				return bk_;
+				return am_;
 			};
 		};
-		int? t_()
+		int? n_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.End(interval), "minute") is null))
 			{
@@ -952,14 +902,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var bl_ = context.Operators;
-				var bn_ = bl_.End(interval);
-				var bo_ = bl_.ComponentFrom(bn_, "minute");
+				var an_ = context.Operators.End(interval);
+				var ao_ = context.Operators.ComponentFrom(an_, "minute");
 
-				return bo_;
+				return ao_;
 			};
 		};
-		int? u_()
+		int? o_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.End(interval), "second") is null))
 			{
@@ -967,14 +916,13 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var bp_ = context.Operators;
-				var br_ = bp_.End(interval);
-				var bs_ = bp_.ComponentFrom(br_, "second");
+				var ap_ = context.Operators.End(interval);
+				var aq_ = context.Operators.ComponentFrom(ap_, "second");
 
-				return bs_;
+				return aq_;
 			};
 		};
-		int? v_()
+		int? p_()
 		{
 			if ((context.Operators.ComponentFrom(context.Operators.End(interval), "millisecond") is null))
 			{
@@ -982,71 +930,67 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var bt_ = context.Operators;
-				var bv_ = bt_.End(interval);
-				var bw_ = bt_.ComponentFrom(bv_, "millisecond");
+				var ar_ = context.Operators.End(interval);
+				var as_ = context.Operators.ComponentFrom(ar_, "millisecond");
 
-				return bw_;
+				return as_;
 			};
 		};
-		var w_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf
+		var q_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf
 		{
-			StartYear = f_,
-			StartMonth = g_(),
-			StartDay = h_(),
-			StartHour = i_(),
-			StartMinute = j_(),
-			StartSecond = k_(),
-			StartMillisecond = l_(),
-			EndYear = p_,
-			EndMonth = q_(),
-			EndDay = r_(),
-			EndHour = s_(),
-			EndMinute = t_(),
-			EndSecond = u_(),
-			EndMillisecond = v_(),
+			StartYear = b_,
+			StartMonth = c_(),
+			StartDay = d_(),
+			StartHour = e_(),
+			StartMinute = f_(),
+			StartSecond = g_(),
+			StartMillisecond = h_(),
+			EndYear = j_,
+			EndMonth = k_(),
+			EndDay = l_(),
+			EndHour = m_(),
+			EndMinute = n_(),
+			EndSecond = o_(),
+			EndMillisecond = p_(),
 		};
-		var x_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf[]
+		var r_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf[]
 		{
-			w_,
+			q_,
 		};
-		CqlInterval<CqlDateTime> y_(Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf i)
+		CqlInterval<CqlDateTime> s_(Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf i)
 		{
-			var bx_ = context.Operators;
-			var bz_ = i?.StartYear;
-			var ca_ = i?.StartMonth;
-			var cb_ = i?.StartDay;
-			var cc_ = i?.StartHour;
-			var cd_ = i?.StartMinute;
-			var ce_ = i?.StartSecond;
-			var cf_ = i?.StartMillisecond;
-			var ch_ = bx_.ConvertIntegerToDecimal(default);
-			var ci_ = bx_.DateTime(bz_, ca_, cb_, cc_, cd_, ce_, cf_, ch_);
-			var ck_ = i?.EndYear;
-			var cl_ = i?.EndMonth;
-			var cm_ = i?.EndDay;
-			var cn_ = i?.EndHour;
-			var co_ = i?.EndMinute;
-			var cp_ = i?.EndSecond;
-			var cq_ = i?.EndMillisecond;
-			var cs_ = bx_.ConvertIntegerToDecimal(default);
-			var ct_ = bx_.DateTime(ck_, cl_, cm_, cn_, co_, cp_, cq_, cs_);
-			var cu_ = bx_.Interval(ci_, ct_, true, true);
+			var at_ = i?.StartYear;
+			var au_ = i?.StartMonth;
+			var av_ = i?.StartDay;
+			var aw_ = i?.StartHour;
+			var ax_ = i?.StartMinute;
+			var ay_ = i?.StartSecond;
+			var az_ = i?.StartMillisecond;
+			var ba_ = context.Operators.ConvertIntegerToDecimal(default);
+			var bb_ = context.Operators.DateTime(at_, au_, av_, aw_, ax_, ay_, az_, ba_);
+			var bc_ = i?.EndYear;
+			var bd_ = i?.EndMonth;
+			var be_ = i?.EndDay;
+			var bf_ = i?.EndHour;
+			var bg_ = i?.EndMinute;
+			var bh_ = i?.EndSecond;
+			var bi_ = i?.EndMillisecond;
+			var bk_ = context.Operators.DateTime(bc_, bd_, be_, bf_, bg_, bh_, bi_, ba_);
+			var bl_ = context.Operators.Interval(bb_, bk_, true, true);
 
-			return cu_;
+			return bl_;
 		};
-		var z_ = a_.SelectOrNull<Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf, CqlInterval<CqlDateTime>>(x_, y_);
-		var aa_ = a_.SingleOrNull<CqlInterval<CqlDateTime>>(z_);
+		var t_ = context.Operators.SelectOrNull<Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf, CqlInterval<CqlDateTime>>(r_, s_);
+		var u_ = context.Operators.SingleOrNull<CqlInterval<CqlDateTime>>(t_);
 
-		return aa_;
+		return u_;
 	}
 
     [CqlDeclaration("Collapsed DateTime Interval Stats")]
 	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO Collapsed_DateTime_Interval_Stats(IEnumerable<CqlInterval<CqlDateTime>> collapsedIntervals)
 	{
-		var a_ = context.Operators;
-		var b_ = a_.CountOrNull<CqlInterval<CqlDateTime>>(collapsedIntervals);
-		int? c_()
+		var a_ = context.Operators.CountOrNull<CqlInterval<CqlDateTime>>(collapsedIntervals);
+		int? b_()
 		{
 			if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDateTime>>(collapsedIntervals), (int?)0) ?? false))
 			{
@@ -1054,78 +998,74 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var g_ = context.Operators;
-				int? i_(CqlInterval<CqlDateTime> I)
+				int? f_(CqlInterval<CqlDateTime> I)
 				{
-					var l_ = context.Operators;
-					var p_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
-					var q_ = l_.Start(p_);
-					var t_ = l_.End(p_);
-					var u_ = l_.DurationBetween(q_, t_, "day");
-					var v_ = l_.Add(u_, (int?)1);
-					var w_ = new int?[]
+					var i_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var j_ = context.Operators.Start(i_);
+					var l_ = context.Operators.End(i_);
+					var m_ = context.Operators.DurationBetween(j_, l_, "day");
+					var n_ = context.Operators.Add(m_, (int?)1);
+					var o_ = new int?[]
 					{
-						v_,
+						n_,
 						(int?)0,
 					};
-					var x_ = l_.MaxOrNull<int?>((w_ as IEnumerable<int?>));
+					var p_ = context.Operators.MaxOrNull<int?>((o_ as IEnumerable<int?>));
 
-					return x_;
+					return p_;
 				};
-				var j_ = g_.SelectOrNull<CqlInterval<CqlDateTime>, int?>(collapsedIntervals, i_);
-				var k_ = g_.Sum(j_);
+				var g_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, int?>(collapsedIntervals, f_);
+				var h_ = context.Operators.Sum(g_);
 
-				return k_;
+				return h_;
 			};
 		};
-		CqlInterval<CqlDateTime> d_()
+		CqlInterval<CqlDateTime> c_()
 		{
 			if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDateTime>>(collapsedIntervals), (int?)0) ?? false))
 			{
-				CqlInterval<CqlDateTime> y_ = null;
+				CqlInterval<CqlDateTime> q_ = null;
 
-				return (y_ as CqlInterval<CqlDateTime>);
+				return (q_ as CqlInterval<CqlDateTime>);
 			}
 			else
 			{
-				var z_ = context.Operators;
-				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW ac_(CqlInterval<CqlDateTime> I)
+				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW r_(CqlInterval<CqlDateTime> I)
 				{
-					var ai_ = context.Operators;
-					var am_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
-					var an_ = ai_.Start(am_);
-					var aq_ = ai_.End(am_);
-					var ar_ = ai_.DurationBetween(an_, aq_, "day");
-					var as_ = ai_.Add(ar_, (int?)1);
-					var at_ = new int?[]
+					var x_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var y_ = context.Operators.Start(x_);
+					var aa_ = context.Operators.End(x_);
+					var ab_ = context.Operators.DurationBetween(y_, aa_, "day");
+					var ac_ = context.Operators.Add(ab_, (int?)1);
+					var ad_ = new int?[]
 					{
-						as_,
+						ac_,
 						(int?)0,
 					};
-					var au_ = ai_.MaxOrNull<int?>((at_ as IEnumerable<int?>));
-					var av_ = new Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW
+					var ae_ = context.Operators.MaxOrNull<int?>((ad_ as IEnumerable<int?>));
+					var af_ = new Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW
 					{
 						interval = I,
-						days = au_,
+						days = ae_,
 					};
 
-					return av_;
+					return af_;
 				};
-				var ad_ = z_.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(collapsedIntervals, ac_);
-				object ae_(Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW @this)
+				var s_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(collapsedIntervals, r_);
+				object t_(Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW @this)
 				{
-					var aw_ = @this?.days;
+					var ag_ = @this?.days;
 
-					return aw_;
+					return ag_;
 				};
-				var af_ = z_.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(ad_, ae_, System.ComponentModel.ListSortDirection.Descending);
-				var ag_ = z_.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(af_);
-				var ah_ = ag_?.interval;
+				var u_ = context.Operators.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(s_, t_, System.ComponentModel.ListSortDirection.Descending);
+				var v_ = context.Operators.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(u_);
+				var w_ = v_?.interval;
 
-				return ah_;
+				return w_;
 			};
 		};
-		int? e_()
+		int? d_()
 		{
 			if ((context.Operators.Equal(context.Operators.CountOrNull<CqlInterval<CqlDateTime>>(collapsedIntervals), (int?)0) ?? false))
 			{
@@ -1133,157 +1073,151 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var ax_ = context.Operators;
-				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW be_(CqlInterval<CqlDateTime> I)
+				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW ah_(CqlInterval<CqlDateTime> I)
 				{
-					var cc_ = context.Operators;
-					var cg_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
-					var ch_ = cc_.Start(cg_);
-					var ck_ = cc_.End(cg_);
-					var cl_ = cc_.DurationBetween(ch_, ck_, "day");
-					var cm_ = cc_.Add(cl_, (int?)1);
-					var cn_ = new int?[]
+					var bb_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var bc_ = context.Operators.Start(bb_);
+					var be_ = context.Operators.End(bb_);
+					var bf_ = context.Operators.DurationBetween(bc_, be_, "day");
+					var bg_ = context.Operators.Add(bf_, (int?)1);
+					var bh_ = new int?[]
 					{
-						cm_,
+						bg_,
 						(int?)0,
 					};
-					var co_ = cc_.MaxOrNull<int?>((cn_ as IEnumerable<int?>));
-					var cp_ = new Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW
+					var bi_ = context.Operators.MaxOrNull<int?>((bh_ as IEnumerable<int?>));
+					var bj_ = new Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW
 					{
 						interval = I,
-						days = co_,
+						days = bi_,
 					};
 
-					return cp_;
+					return bj_;
 				};
-				var bf_ = ax_.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(collapsedIntervals, be_);
-				object bg_(Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW @this)
+				var ai_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(collapsedIntervals, ah_);
+				object aj_(Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW @this)
 				{
-					var cq_ = @this?.days;
+					var bk_ = @this?.days;
 
-					return cq_;
+					return bk_;
 				};
-				var bh_ = ax_.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(bf_, bg_, System.ComponentModel.ListSortDirection.Descending);
-				var bi_ = ax_.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(bh_);
-				var bj_ = bi_?.interval;
-				var bk_ = this.DateTime_Interval_Set_Nulls_to_Zero(bj_);
-				var bl_ = ax_.Start(bk_);
-				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW bq_(CqlInterval<CqlDateTime> I)
+				var ak_ = context.Operators.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(ai_, aj_, System.ComponentModel.ListSortDirection.Descending);
+				var al_ = context.Operators.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(ak_);
+				var am_ = al_?.interval;
+				var an_ = this.DateTime_Interval_Set_Nulls_to_Zero(am_);
+				var ao_ = context.Operators.Start(an_);
+				Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW ap_(CqlInterval<CqlDateTime> I)
 				{
-					var cr_ = context.Operators;
-					var cv_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
-					var cw_ = cr_.Start(cv_);
-					var cz_ = cr_.End(cv_);
-					var da_ = cr_.DurationBetween(cw_, cz_, "day");
-					var db_ = cr_.Add(da_, (int?)1);
-					var dc_ = new int?[]
+					var bl_ = this.DateTime_Interval_Set_Nulls_to_Zero(I);
+					var bm_ = context.Operators.Start(bl_);
+					var bo_ = context.Operators.End(bl_);
+					var bp_ = context.Operators.DurationBetween(bm_, bo_, "day");
+					var bq_ = context.Operators.Add(bp_, (int?)1);
+					var br_ = new int?[]
 					{
-						db_,
+						bq_,
 						(int?)0,
 					};
-					var dd_ = cr_.MaxOrNull<int?>((dc_ as IEnumerable<int?>));
-					var de_ = new Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW
+					var bs_ = context.Operators.MaxOrNull<int?>((br_ as IEnumerable<int?>));
+					var bt_ = new Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW
 					{
 						interval = I,
-						days = dd_,
+						days = bs_,
 					};
 
-					return de_;
+					return bt_;
 				};
-				var br_ = ax_.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(collapsedIntervals, bq_);
-				object bs_(Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW @this)
+				var aq_ = context.Operators.SelectOrNull<CqlInterval<CqlDateTime>, Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(collapsedIntervals, ap_);
+				object ar_(Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW @this)
 				{
-					var df_ = @this?.days;
+					var bu_ = @this?.days;
 
-					return df_;
+					return bu_;
 				};
-				var bt_ = ax_.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(br_, bs_, System.ComponentModel.ListSortDirection.Descending);
-				var bu_ = ax_.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(bt_);
-				var bv_ = bu_?.interval;
-				var bw_ = this.DateTime_Interval_Set_Nulls_to_Zero(bv_);
-				var bx_ = ax_.End(bw_);
-				var by_ = ax_.DurationBetween(bl_, bx_, "day");
-				var bz_ = ax_.Add(by_, (int?)1);
-				var ca_ = new int?[]
+				var as_ = context.Operators.ListSortBy<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(aq_, ar_, System.ComponentModel.ListSortDirection.Descending);
+				var at_ = context.Operators.FirstOfList<Tuples.Tuple_GBYTHaefaUNajDZadEXbadOFW>(as_);
+				var au_ = at_?.interval;
+				var av_ = this.DateTime_Interval_Set_Nulls_to_Zero(au_);
+				var aw_ = context.Operators.End(av_);
+				var ax_ = context.Operators.DurationBetween(ao_, aw_, "day");
+				var ay_ = context.Operators.Add(ax_, (int?)1);
+				var az_ = new int?[]
 				{
-					bz_,
+					ay_,
 					(int?)0,
 				};
-				var cb_ = ax_.MaxOrNull<int?>((ca_ as IEnumerable<int?>));
+				var ba_ = context.Operators.MaxOrNull<int?>((az_ as IEnumerable<int?>));
 
-				return cb_;
+				return ba_;
 			};
 		};
-		var f_ = new Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO
+		var e_ = new Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO
 		{
 			Intervals = collapsedIntervals,
-			Interval_Count = b_,
-			Total_Days_In_Intervals = c_(),
-			Longest_Interval = d_(),
-			Total_Days_In_Longest_Interval = e_(),
+			Interval_Count = a_,
+			Total_Days_In_Intervals = b_(),
+			Longest_Interval = c_(),
+			Total_Days_In_Longest_Interval = d_(),
 		};
 
-		return f_;
+		return e_;
 	}
 
     [CqlDeclaration("DateTime Interval Covering Relative to Base Interval Stats")]
 	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO DateTime_Interval_Covering_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var c_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
-		var d_ = new Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY
+		var a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var b_ = new Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY
 		{
-			Covering_Intervals = c_,
+			Covering_Intervals = a_,
 		};
-		var e_ = new Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY[]
+		var c_ = new Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY[]
 		{
-			d_,
+			b_,
 		};
-		Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO f_(Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY variableDeclarations)
+		Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO d_(Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY variableDeclarations)
 		{
-			var i_ = variableDeclarations?.Covering_Intervals;
-			var j_ = this.Collapsed_DateTime_Interval_Stats(i_);
+			var g_ = variableDeclarations?.Covering_Intervals;
+			var h_ = this.Collapsed_DateTime_Interval_Stats(g_);
 
-			return j_;
+			return h_;
 		};
-		var g_ = a_.SelectOrNull<Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY, Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(e_, f_);
-		var h_ = a_.SingleOrNull<Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(g_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_CbDWBMGYObPdSJUZaIQTNfFXY, Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(e_);
 
-		return h_;
+		return f_;
 	}
 
     [CqlDeclaration("DateTime Interval Gaps Relative to Base Interval Stats")]
 	public Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO DateTime_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
 	{
-		var a_ = context.Operators;
-		var c_ = this.DateTime_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
-		var d_ = new Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB
+		var a_ = this.DateTime_Interval_Gaps_Relative_to_Base_Interval(baseInterval, coveringIntervals);
+		var b_ = new Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB
 		{
-			Gap_Intervals = c_,
+			Gap_Intervals = a_,
 		};
-		var e_ = new Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB[]
+		var c_ = new Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB[]
 		{
-			d_,
+			b_,
 		};
-		Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO f_(Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB variableDeclarations)
+		Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO d_(Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB variableDeclarations)
 		{
-			var i_ = variableDeclarations?.Gap_Intervals;
-			var j_ = this.Collapsed_DateTime_Interval_Stats(i_);
+			var g_ = variableDeclarations?.Gap_Intervals;
+			var h_ = this.Collapsed_DateTime_Interval_Stats(g_);
 
-			return j_;
+			return h_;
 		};
-		var g_ = a_.SelectOrNull<Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB, Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(e_, f_);
-		var h_ = a_.SingleOrNull<Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(g_);
+		var e_ = context.Operators.SelectOrNull<Tuples.Tuple_BdbDhEjXOINLgCRGiAFGdHJIB, Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(c_, d_);
+		var f_ = context.Operators.SingleOrNull<Tuples.Tuple_BhaRdDVNNUEZDBgSheMGTUMHO>(e_);
 
-		return h_;
+		return f_;
 	}
 
     [CqlDeclaration("Convert To UTC DateTime")]
 	public CqlDateTime Convert_To_UTC_DateTime(CqlDate d)
 	{
-		var a_ = context.Operators;
-		var d_ = a_.ComponentFrom(d, "year");
-		int? e_()
+		var a_ = context.Operators.ComponentFrom(d, "year");
+		int? b_()
 		{
 			if ((context.Operators.ComponentFrom(d, "month") is null))
 			{
@@ -1291,13 +1225,12 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var l_ = context.Operators;
-				var m_ = l_.ComponentFrom(d, "month");
+				var i_ = context.Operators.ComponentFrom(d, "month");
 
-				return m_;
+				return i_;
 			};
 		};
-		int? f_()
+		int? c_()
 		{
 			if ((context.Operators.ComponentFrom(d, "day") is null))
 			{
@@ -1305,50 +1238,47 @@ public class NCQACQLBase_1_0_0
 			}
 			else
 			{
-				var n_ = context.Operators;
-				var o_ = n_.ComponentFrom(d, "day");
+				var j_ = context.Operators.ComponentFrom(d, "day");
 
-				return o_;
+				return j_;
 			};
 		};
-		var g_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf
+		var d_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf
 		{
-			StartYear = d_,
-			StartMonth = e_(),
-			StartDay = f_(),
+			StartYear = a_,
+			StartMonth = b_(),
+			StartDay = c_(),
 		};
-		var h_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf[]
+		var e_ = new Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf[]
 		{
-			g_,
+			d_,
 		};
-		CqlDateTime i_(Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf i)
+		CqlDateTime f_(Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf i)
 		{
-			var p_ = context.Operators;
-			var q_ = i?.StartYear;
-			var r_ = i?.StartMonth;
-			var s_ = i?.StartDay;
-			var u_ = p_.ConvertIntegerToDecimal((int?)0);
-			var v_ = p_.DateTime(q_, r_, s_, (int?)0, (int?)0, (int?)0, (int?)0, u_);
+			var k_ = i?.StartYear;
+			var l_ = i?.StartMonth;
+			var m_ = i?.StartDay;
+			var n_ = context.Operators.ConvertIntegerToDecimal((int?)0);
+			var o_ = context.Operators.DateTime(k_, l_, m_, (int?)0, (int?)0, (int?)0, (int?)0, n_);
 
-			return v_;
+			return o_;
 		};
-		var j_ = a_.SelectOrNull<Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf, CqlDateTime>(h_, i_);
-		var k_ = a_.SingleOrNull<CqlDateTime>(j_);
+		var g_ = context.Operators.SelectOrNull<Tuples.Tuple_GXTFGWGiVAGFGKWKdcWVdAEBf, CqlDateTime>(e_, f_);
+		var h_ = context.Operators.SingleOrNull<CqlDateTime>(g_);
 
-		return k_;
+		return h_;
 	}
 
     [CqlDeclaration("Convert Interval Date to UTC Interval DateTime")]
 	public CqlInterval<CqlDateTime> Convert_Interval_Date_to_UTC_Interval_DateTime(CqlInterval<CqlDate> interval)
 	{
-		var a_ = context.Operators;
-		var c_ = a_.Start(interval);
+		var a_ = context.Operators.Start(interval);
+		var b_ = this.Convert_To_UTC_DateTime(a_);
+		var c_ = context.Operators.End(interval);
 		var d_ = this.Convert_To_UTC_DateTime(c_);
-		var f_ = a_.End(interval);
-		var g_ = this.Convert_To_UTC_DateTime(f_);
-		var h_ = a_.Interval(d_, g_, true, true);
+		var e_ = context.Operators.Interval(b_, d_, true, true);
 
-		return h_;
+		return e_;
 	}
 
 }

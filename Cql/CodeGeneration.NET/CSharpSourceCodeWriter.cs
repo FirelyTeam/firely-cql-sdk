@@ -37,7 +37,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// <summary>
     /// Writes <see cref="LambdaExpression"/>s as members of a .NET class.
     /// </summary>
-    public class CSharpSourceCodeWriter
+    internal class CSharpSourceCodeWriter
     {
         /// <summary>
         /// Creates an instance.
@@ -963,31 +963,34 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string convertBinaryExpression(int indent, string leadingIndentString, BinaryExpression binary)
         {
+            var left = StripBoxing(binary.Left);
+            var right = StripBoxing(binary.Right);
+
             if (binary.NodeType == ExpressionType.Assign &&
-                binary.Left is ParameterExpression parameter)
+                left is ParameterExpression parameter)
             {
-                if (binary.Right is LambdaExpression le)
+                if (right is LambdaExpression le)
                     return convertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
                 string typeDeclaration = "var";
-                if (binary.Right is DefaultExpression ||
-                   (binary.Right is ConstantExpression ce && ce.Value == null))
+                if (right is DefaultExpression ||
+                   (right is ConstantExpression ce && ce.Value == null))
                 {
-                    typeDeclaration = PrettyTypeName(binary.Left.Type);
+                    typeDeclaration = PrettyTypeName(left.Type);
                 }
-                var right = ToCode(indent, binary.Right, false);
-                var assignment = $"{leadingIndentString}{typeDeclaration} {paramName(parameter)} = {right}";
+                var rightCode = ToCode(indent, right, false);
+                var assignment = $"{leadingIndentString}{typeDeclaration} {paramName(parameter)} = {rightCode}";
                 return assignment;
             }
             else
             {
-                var @operator = binary.NodeType == ExpressionType.Equal && binary.Right is ConstantExpression
+                var @operator = binary.NodeType == ExpressionType.Equal && right is ConstantExpression
                     ? "is"
                     : BinaryOperatorFor(binary.NodeType);
 
-                var left = ToCode(indent, binary.Left, false);
-                var right = ToCode(indent, binary.Right, false);
-                var binaryString = $"{leadingIndentString}({left} {@operator} {right})";
+                var leftCode = ToCode(indent, left, false);
+                var rightCode = ToCode(indent, right, false);
+                var binaryString = $"{leadingIndentString}({leftCode} {@operator} {rightCode})";
                 return binaryString;
             }
         }
@@ -1102,6 +1105,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             return term.ToCharArray().Any(char.IsWhiteSpace) ? $"({term})" : term;
         }
+
 
         private static string escapeKeywords(string symbol)
         {

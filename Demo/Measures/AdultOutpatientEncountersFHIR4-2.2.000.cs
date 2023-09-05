@@ -9,7 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.0.1.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public class AdultOutpatientEncountersFHIR4_2_2_000
 {
@@ -105,12 +105,10 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 
 	private Patient Patient_Value()
 	{
-		var a_ = context.Operators;
-		var b_ = context.DataRetriever;
-		var c_ = b_.RetrieveByValueSet<Patient>(null, null);
-		var d_ = a_.SingleOrNull<Patient>(c_);
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
 
-		return d_;
+		return b_;
 	}
 
     [CqlDeclaration("Patient")]
@@ -119,42 +117,36 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
-		var a_ = context.Operators;
-		var e_ = context.DataRetriever;
-		var f_ = this.Office_Visit();
-		var g_ = e_.RetrieveByValueSet<Encounter>(f_, null);
-		var i_ = this.Annual_Wellness_Visit();
-		var j_ = e_.RetrieveByValueSet<Encounter>(i_, null);
-		var k_ = a_.ListUnion<Encounter>(g_, j_);
-		var n_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
-		var o_ = e_.RetrieveByValueSet<Encounter>(n_, null);
-		var q_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		var r_ = e_.RetrieveByValueSet<Encounter>(q_, null);
-		var s_ = a_.ListUnion<Encounter>(o_, r_);
-		var t_ = a_.ListUnion<Encounter>(k_, s_);
-		var v_ = this.Home_Healthcare_Services();
-		var w_ = e_.RetrieveByValueSet<Encounter>(v_, null);
-		var x_ = a_.ListUnion<Encounter>(t_, w_);
-		bool? y_(Encounter ValidEncounter)
+		var a_ = this.Office_Visit();
+		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
+		var c_ = this.Annual_Wellness_Visit();
+		var d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, null);
+		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
+		var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
+		var g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, null);
+		var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
+		var i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, null);
+		var j_ = context.Operators.ListUnion<Encounter>(g_, i_);
+		var k_ = context.Operators.ListUnion<Encounter>(e_, j_);
+		var l_ = this.Home_Healthcare_Services();
+		var m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, null);
+		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
+		bool? o_(Encounter ValidEncounter)
 		{
-			var aa_ = context.Operators;
-			var ac_ = context.Deeper(new CallStackEntry("ToString", null, null));
-			var ad_ = ac_.Operators;
-			var ae_ = ad_.TypeConverter;
-			var af_ = ValidEncounter?.StatusElement;
-			var ag_ = ae_.Convert<string>(af_);
-			var ah_ = aa_.Equal(ag_, "finished");
-			var aj_ = this.Measurement_Period();
-			var ak_ = ValidEncounter?.Period;
-			var al_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ak_);
-			var am_ = aa_.IntervalIncludesInterval<CqlDateTime>(aj_, al_, null);
-			var an_ = aa_.And(ah_, am_);
+			var q_ = ValidEncounter?.StatusElement;
+			var r_ = context.Operators.Convert<string>(q_);
+			var s_ = context.Operators.Equal(r_, "finished");
+			var t_ = this.Measurement_Period();
+			var u_ = ValidEncounter?.Period;
+			var v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(u_);
+			var w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
+			var x_ = context.Operators.And(s_, w_);
 
-			return an_;
+			return x_;
 		};
-		var z_ = a_.WhereOrNull<Encounter>(x_, y_);
+		var p_ = context.Operators.WhereOrNull<Encounter>(n_, o_);
 
-		return z_;
+		return p_;
 	}
 
     [CqlDeclaration("Qualifying Encounters")]

@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace Hl7.Cql.Graph
 {
 
-    public class CompoundRecordWriter<TContext> : IRecordWriter<TContext>
+    internal class CompoundRecordWriter<TContext> : IRecordWriter<TContext>
         where TContext : ExecutionContext
     {
 
