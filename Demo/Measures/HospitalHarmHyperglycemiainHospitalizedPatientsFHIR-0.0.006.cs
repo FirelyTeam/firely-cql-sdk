@@ -214,7 +214,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     {
         var a_ = this.Encounter_Inpatient();
         return context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
     }
     [CqlDeclaration("Inpatient Encounter During Measurement Period")]
     public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period() => __Inpatient_Encounter_During_Measurement_Period.Value;
@@ -267,7 +267,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         {
             var b_ = this.Diabetes();
             var c_ = context?.Operators.RetrieveByValueSet<Condition>(b_, 
-				typeof(Condition).GetProperty("Code"));
+				null);
             Func<Condition,bool?> n_ = (DiabetesDiagnosis) => 
             {
                 var e_ = DiabetesDiagnosis?.VerificationStatus;
@@ -311,7 +311,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         {
             var b_ = this.Hypoglycemics_Treatment_Medications();
             var c_ = context?.Operators.RetrieveByValueSet<MedicationAdministration>(b_, 
-				typeof(MedicationAdministration).GetProperty("Medication"));
+				null);
             return context?.Operators.ListUnion<MedicationAdministration>(c_, 
 				c_);
         };
@@ -363,7 +363,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
         {
             var b_ = this.Glucose_lab_test();
             var c_ = context?.Operators.RetrieveByValueSet<Observation>(b_, 
-				typeof(Observation).GetProperty("Code"));
+				null);
             Func<Observation,bool?> q_ = (BloodGlucoseLab) => 
             {
                 var d_ = ((BloodGlucoseLab?.Effective as object) as FhirDateTime);
@@ -556,7 +556,7 @@ public class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
                 var g_ = EncounterDay?.dayPeriod;
                 var i_ = this.Glucose_lab_test();
                 var j_ = context?.Operators.RetrieveByValueSet<Observation>(i_, 
-					typeof(Observation).GetProperty("Code"));
+					null);
                 Func<Observation,bool?> x_ = (BloodGlucoseLab1) => 
                 {
                     var l_ = (BloodGlucoseLab1?.StatusElement as object);

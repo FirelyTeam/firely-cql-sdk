@@ -125,25 +125,25 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
     {
         var a_ = this.Office_Visit();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var c_ = this.Annual_Wellness_Visit();
         var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
         var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var h_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
         var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Home_Healthcare_Services();
         var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var n_ = context?.Operators.ListUnion<Encounter>(k_, 
 			m_);
         Func<Encounter,bool?> w_ = (ValidEncounter) => 

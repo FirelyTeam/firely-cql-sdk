@@ -424,7 +424,7 @@ public class BCSEHEDISMY2022_1_0_0
     {
         var a_ = this.Absence_of_Right_Breast();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var c_ = NCQAStatus_1_0_0.Active_Condition(b_);
         Func<Condition,bool?> h_ = (RightMastectomyDiagnosis) => 
         {
@@ -446,11 +446,11 @@ public class BCSEHEDISMY2022_1_0_0
     {
         var a_ = this.Unilateral_Mastectomy_Right();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var c_ = NCQAStatus_1_0_0.Completed_Procedure(b_);
         var d_ = this.Unilateral_Mastectomy();
         var e_ = context?.Operators.RetrieveByValueSet<Procedure>(d_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var f_ = NCQAStatus_1_0_0.Completed_Procedure(e_);
         Func<Procedure,bool?> k_ = (UnilateralMastectomyProcedure) => 
         {
@@ -471,7 +471,7 @@ public class BCSEHEDISMY2022_1_0_0
 			l_);
         var n_ = this.Clinical_Unilateral_Mastectomy();
         var o_ = context?.Operators.RetrieveByValueSet<Procedure>(n_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var p_ = NCQAStatus_1_0_0.Completed_Procedure(o_);
         Func<Procedure,bool?> u_ = (ClinicalUnilateralMastectomyProcedure) => 
         {
@@ -511,7 +511,7 @@ public class BCSEHEDISMY2022_1_0_0
     {
         var a_ = this.Absence_of_Left_Breast();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var c_ = NCQAStatus_1_0_0.Active_Condition(b_);
         Func<Condition,bool?> h_ = (LeftMastectomyDiagnosis) => 
         {
@@ -533,11 +533,11 @@ public class BCSEHEDISMY2022_1_0_0
     {
         var a_ = this.Unilateral_Mastectomy_Left();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var c_ = NCQAStatus_1_0_0.Completed_Procedure(b_);
         var d_ = this.Unilateral_Mastectomy();
         var e_ = context?.Operators.RetrieveByValueSet<Procedure>(d_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var f_ = NCQAStatus_1_0_0.Completed_Procedure(e_);
         Func<Procedure,bool?> k_ = (UnilateralMastectomyProcedure) => 
         {
@@ -558,7 +558,7 @@ public class BCSEHEDISMY2022_1_0_0
 			l_);
         var n_ = this.Clinical_Unilateral_Mastectomy();
         var o_ = context?.Operators.RetrieveByValueSet<Procedure>(n_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var p_ = NCQAStatus_1_0_0.Completed_Procedure(o_);
         Func<Procedure,bool?> u_ = (ClinicalUnilateralMastectomyProcedure) => 
         {
@@ -598,7 +598,7 @@ public class BCSEHEDISMY2022_1_0_0
     {
         var a_ = this.History_of_Bilateral_Mastectomy();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var c_ = NCQAStatus_1_0_0.Active_Condition(b_);
         Func<Condition,bool?> h_ = (BilateralMastectomyHistory) => 
         {
@@ -620,11 +620,11 @@ public class BCSEHEDISMY2022_1_0_0
     {
         var a_ = this.Bilateral_Mastectomy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var c_ = NCQAStatus_1_0_0.Completed_Procedure(b_);
         var d_ = this.Unilateral_Mastectomy();
         var e_ = context?.Operators.RetrieveByValueSet<Procedure>(d_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var f_ = NCQAStatus_1_0_0.Completed_Procedure(e_);
         Func<Procedure,bool?> k_ = (UnilateralMastectomyProcedure) => 
         {
@@ -645,7 +645,7 @@ public class BCSEHEDISMY2022_1_0_0
 			l_);
         var n_ = this.Clinical_Unilateral_Mastectomy();
         var o_ = context?.Operators.RetrieveByValueSet<Procedure>(n_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var p_ = NCQAStatus_1_0_0.Completed_Procedure(o_);
         Func<Procedure,bool?> u_ = (ClinicalUnilateralMastectomyProcedure) => 
         {
@@ -730,7 +730,7 @@ public class BCSEHEDISMY2022_1_0_0
     {
         var a_ = this.Mammography();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> g_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.Effective as object);

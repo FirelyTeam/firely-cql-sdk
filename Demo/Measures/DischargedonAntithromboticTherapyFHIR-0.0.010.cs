@@ -270,7 +270,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     {
         var a_ = this.Antithrombotic_Therapy();
         var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         Func<MedicationRequest,bool?> ap_ = (NoAntithromboticDischarge) => 
         {
             var c_ = NoAntithromboticDischarge?.DoNotPerformElement;
@@ -372,7 +372,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     {
         var a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
         var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         Func<MedicationRequest,bool?> ae_ = (Pharmacological) => 
         {
             var c_ = Pharmacological?.DoNotPerformElement;
@@ -485,7 +485,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
     {
         var a_ = this.Antithrombotic_Therapy();
         var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         Func<MedicationRequest,bool?> ae_ = (Antithrombotic) => 
         {
             var c_ = Antithrombotic?.DoNotPerformElement;

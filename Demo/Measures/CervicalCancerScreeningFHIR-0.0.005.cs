@@ -291,28 +291,28 @@ public class CervicalCancerScreeningFHIR_0_0_005
     {
         var a_ = this.Office_Visit();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var c_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
         var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
         var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var h_ = this.Home_Healthcare_Services();
         var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Telephone_Visits();
         var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var n_ = this.Online_Assessments();
         var o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var p_ = context?.Operators.ListUnion<Encounter>(m_, 
 			o_);
         var q_ = context?.Operators.ListUnion<Encounter>(k_, 
@@ -382,7 +382,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     {
         var b_ = this.Hysterectomy_with_No_Residual_Cervix();
         var c_ = context?.Operators.RetrieveByValueSet<Procedure>(b_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> n_ = (NoCervixProcedure) => 
         {
             var e_ = (NoCervixProcedure?.StatusElement as object);
@@ -405,7 +405,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
 			n_) as IEnumerable<object>);
         var p_ = this.Congenital_or_Acquired_Absence_of_Cervix();
         var q_ = context?.Operators.RetrieveByValueSet<Condition>(p_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> v_ = (NoCervixDiagnosis) => 
         {
             var r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(NoCervixDiagnosis);
@@ -442,7 +442,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     {
         var a_ = this.Pap_Test();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ah_ = (CervicalCytology) => 
         {
             var c_ = (CervicalCytology?.StatusElement as object);
@@ -507,7 +507,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     {
         var a_ = this.HPV_Test();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ar_ = (HPVTest) => 
         {
             var c_ = (HPVTest?.StatusElement as object);
@@ -637,7 +637,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     {
         var a_ = this.Pap_Test();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> w_ = (CervicalCytology) => 
         {
             var c_ = this.isComplete(CervicalCytology);
@@ -686,7 +686,7 @@ public class CervicalCancerScreeningFHIR_0_0_005
     {
         var a_ = this.HPV_Test();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ag_ = (HPVTest) => 
         {
             var c_ = this.isComplete(HPVTest);

@@ -302,7 +302,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     {
         var a_ = this.Telephone_Visits();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         Func<Encounter,bool?> k_ = (TelehealthEncounter) => 
         {
             var d_ = (TelehealthEncounter?.StatusElement as object);
@@ -351,7 +351,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
 			l_);
         var n_ = this.Diabetes();
         var o_ = context?.Operators.RetrieveByValueSet<Condition>(n_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> r_ = (Diabetes) => 
         {
             var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
@@ -380,7 +380,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     {
         var a_ = this.HbA1c_Laboratory_Test();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> n_ = (RecentHbA1c) => 
         {
             var c_ = (RecentHbA1c?.StatusElement as object);
@@ -443,7 +443,7 @@ public class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015
     {
         var a_ = this.HbA1c_Laboratory_Test();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> n_ = (NoHbA1c) => 
         {
             var c_ = (NoHbA1c?.StatusElement as object);

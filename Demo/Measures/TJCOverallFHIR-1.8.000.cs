@@ -281,7 +281,7 @@ public class TJCOverallFHIR_1_8_000
     {
         var a_ = this.Non_Elective_Inpatient();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         Func<Encounter,bool?> m_ = (NonElectiveEncounter) => 
         {
             var d_ = NonElectiveEncounter?.Period;
@@ -417,7 +417,7 @@ public class TJCOverallFHIR_1_8_000
     {
         var b_ = this.Comfort_Measures();
         var c_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(b_, 
-			typeof(ServiceRequest).GetProperty("Code"));
+			null);
         Func<ServiceRequest,bool?> g_ = (P) => 
         {
             var e_ = (P?.IntentElement as object);
@@ -429,7 +429,7 @@ public class TJCOverallFHIR_1_8_000
         var a_ = (context?.Operators.WhereOrNull<ServiceRequest>(c_, 
 			g_) as IEnumerable<object>);
         var j_ = context?.Operators.RetrieveByValueSet<Procedure>(b_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> p_ = (InterventionPerformed) => 
         {
             var k_ = (InterventionPerformed?.StatusElement as object);

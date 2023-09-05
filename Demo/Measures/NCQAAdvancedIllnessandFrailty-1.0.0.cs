@@ -245,7 +245,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
     {
         var a_ = this.Frailty_Device();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> f_ = (FrailtyDeviceApplied) => 
         {
             var c_ = (FrailtyDeviceApplied?.Effective as object);
@@ -260,7 +260,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
         var h_ = context?.Operators.ExistsInList<Observation>(g_);
         var i_ = this.Frailty_Diagnosis();
         var j_ = context?.Operators.RetrieveByValueSet<Condition>(i_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var k_ = NCQAStatus_1_0_0.Active_Condition(j_);
         Func<Condition,bool?> n_ = (FrailtyDiagnosis) => 
         {
@@ -277,7 +277,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			p_);
         var r_ = this.Frailty_Encounter();
         var s_ = context?.Operators.RetrieveByValueSet<Encounter>(r_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var t_ = NCQAStatus_1_0_0.Finished_Encounter(s_);
         Func<Encounter,bool?> x_ = (FrailtyEncounter) => 
         {
@@ -295,7 +295,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			z_);
         var ab_ = this.Frailty_Symptom();
         var ac_ = context?.Operators.RetrieveByValueSet<Observation>(ab_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ag_ = (FrailtySymptom) => 
         {
             var ad_ = (FrailtySymptom?.Effective as object);
@@ -318,28 +318,28 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
     {
         var a_ = this.Outpatient();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var c_ = this.Observation();
         var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.ED();
         var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var h_ = this.Telephone_Visits();
         var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Online_Assessments();
         var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var n_ = this.Nonacute_Inpatient();
         var o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var p_ = context?.Operators.ListUnion<Encounter>(m_, 
 			o_);
         var q_ = context?.Operators.ListUnion<Encounter>(k_, 
@@ -349,7 +349,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
         {
             var s_ = this.Advanced_Illness();
             var t_ = context?.Operators.RetrieveByValueSet<Condition>(s_, 
-				typeof(Condition).GetProperty("Code"));
+				null);
             var u_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(OutpatientEncounter, 
 				t_);
             var v_ = (OutpatientEncounter?.Period as object);
@@ -499,13 +499,13 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
     {
         var a_ = this.Acute_Inpatient();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var c_ = NCQAStatus_1_0_0.Finished_Encounter(b_);
         Func<Encounter,bool?> u_ = (InpatientEncounter) => 
         {
             var d_ = this.Advanced_Illness();
             var e_ = context?.Operators.RetrieveByValueSet<Condition>(d_, 
-				typeof(Condition).GetProperty("Code"));
+				null);
             var f_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(InpatientEncounter, 
 				e_);
             var g_ = (InpatientEncounter?.Period as object);
@@ -575,7 +575,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
     {
         var a_ = this.Dementia_Medications();
         var b_ = context?.Operators.RetrieveByValueSet<MedicationDispense>(a_, 
-			typeof(MedicationDispense).GetProperty("Medication"));
+			null);
         var e_ = context?.Operators.ListUnion<MedicationDispense>(b_, 
 			b_);
         var f_ = NCQAStatus_1_0_0.Dispensed_Medication(e_);

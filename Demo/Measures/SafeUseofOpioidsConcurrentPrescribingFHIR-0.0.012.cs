@@ -242,12 +242,12 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         {
             var b_ = this.Schedule_II_and_III_Opioid_Medications();
             var c_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(b_, 
-				typeof(MedicationRequest).GetProperty("Medication"));
+				null);
             var f_ = context?.Operators.ListUnion<MedicationRequest>(c_, 
 				c_);
             var g_ = this.Schedule_IV_Benzodiazepines();
             var h_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(g_, 
-				typeof(MedicationRequest).GetProperty("Medication"));
+				null);
             var k_ = context?.Operators.ListUnion<MedicationRequest>(h_, 
 				h_);
             Func<MedicationRequest,bool?> r_ = (Medications) => 
@@ -347,7 +347,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         {
             var c_ = this.Schedule_II_and_III_Opioid_Medications();
             var d_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(c_, 
-				typeof(MedicationRequest).GetProperty("Medication"));
+				null);
             Func<MedicationRequest,bool?> i_ = (Opioids) => 
             {
                 var e_ = Opioids?.AuthoredOnElement;
@@ -374,7 +374,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         {
             var q_ = this.Schedule_II_and_III_Opioid_Medications();
             var r_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(q_, 
-				typeof(MedicationRequest).GetProperty("Medication"));
+				null);
             Func<MedicationRequest,bool?> w_ = (OpioidsDischarge) => 
             {
                 var s_ = OpioidsDischarge?.AuthoredOnElement;
@@ -397,7 +397,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         {
             var ab_ = this.Schedule_IV_Benzodiazepines();
             var ac_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(ab_, 
-				typeof(MedicationRequest).GetProperty("Medication"));
+				null);
             Func<MedicationRequest,bool?> ah_ = (BenzodiazepinesDischarge) => 
             {
                 var ad_ = BenzodiazepinesDischarge?.AuthoredOnElement;
@@ -429,7 +429,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
         {
             var b_ = this.All_Primary_and_Secondary_Cancer();
             var c_ = context?.Operators.RetrieveByValueSet<Condition>(b_, 
-				typeof(Condition).GetProperty("Code"));
+				null);
             Func<Condition,bool?> g_ = (Cancer) => 
             {
                 var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Cancer);
@@ -444,7 +444,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
             var i_ = context?.Operators.ExistsInList<Condition>(h_);
             var j_ = this.Palliative_or_Hospice_Care();
             var k_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(j_, 
-				typeof(ServiceRequest).GetProperty("Code"));
+				null);
             Func<ServiceRequest,bool?> u_ = (PalliativeOrHospiceCareOrder) => 
             {
                 var l_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
@@ -468,7 +468,7 @@ public class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012
             var x_ = context?.Operators.Or(i_, 
 				w_);
             var z_ = context?.Operators.RetrieveByValueSet<Procedure>(j_, 
-				typeof(Procedure).GetProperty("Code"));
+				null);
             Func<Procedure,bool?> ae_ = (PalliativeOrHospiceCarePerformed) => 
             {
                 var aa_ = (PalliativeOrHospiceCarePerformed?.Performed as object);

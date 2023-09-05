@@ -136,7 +136,7 @@ public class HospiceFHIR4_2_3_000
     {
         var a_ = this.Encounter_Inpatient();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         Func<Encounter,bool?> x_ = (DischargeHospice) => 
         {
             var d_ = (DischargeHospice?.StatusElement as object);
@@ -173,7 +173,7 @@ public class HospiceFHIR4_2_3_000
         var z_ = context?.Operators.ExistsInList<Encounter>(y_);
         var aa_ = this.Hospice_care_ambulatory();
         var ab_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(aa_, 
-			typeof(ServiceRequest).GetProperty("Code"));
+			null);
         Func<ServiceRequest,bool?> ar_ = (HospiceOrder) => 
         {
             var ac_ = (HospiceOrder?.StatusElement as object);
@@ -209,7 +209,7 @@ public class HospiceFHIR4_2_3_000
         var au_ = context?.Operators.Or(z_, 
 			at_);
         var aw_ = context?.Operators.RetrieveByValueSet<Procedure>(aa_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> bf_ = (HospicePerformed) => 
         {
             var ay_ = (HospicePerformed?.StatusElement as object);
