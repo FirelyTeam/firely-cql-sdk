@@ -345,10 +345,14 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsInterval(left.Type, out var leftPointType))
             {
+                var precision = Precision(e.precision, e.precisionSpecified);
                 if (IsInterval(right.Type, out var rightPointType))
                 {
-                    var precision = Precision(e.precision, e.precisionSpecified);
                     return OperatorBinding.Bind(CqlOperator.IntervalProperlyIncludesInterval, ctx.RuntimeContextParameter, left, right, precision);
+                }
+                else
+                {
+                    return OperatorBinding.Bind(CqlOperator.IntervalProperlyIncludesElement, ctx.RuntimeContextParameter, left, right, precision);
                 }
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
@@ -358,6 +362,10 @@ namespace Hl7.Cql.Compiler
                 {
                     var rightElementType = TypeResolver.GetListElementType(right.Type);
                     return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
+                }
+                else
+                {
+                    return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesElement, ctx.RuntimeContextParameter, left, right);
                 }
             }
             throw new NotImplementedException();
