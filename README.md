@@ -5,7 +5,7 @@
 This is NCQA's and Firely's official support SDK for working with [CQL][cql-spec] on the Microsoft .NET (dotnet) platform. It contains an engine for executing ELM, and/or turning the contents of an ELM file into a .NET assembly so it can be called statically.
 
 ## Release notes ##
-We are preparing to release version 1.0 of the engine. The engine has been tested by running it against the current NCQA HEDIS measures. There is quite some variation in how CQL is written and interpreted, so it is likely at this early stage that there will be deviations from other engines currently available. As well, we expect parts of the public interface can to change. 
+This is release version 1.0 (release candidate) of the engine. The engine has been tested by running it against the current NCQA HEDIS measures. There is quite some variation in how CQL is written and interpreted, so it is likely at this early stage that there will be deviations from other engines currently available. As well, we expect parts of the public interface can to change. 
 
 The releases notes 
 at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releases) for each major version will document these changes and (major) issues we have encountered.
@@ -13,7 +13,11 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 ## Getting Started ##
 
 * Read how to [get started with the Demo solution](docs/getting-started.md) included in the repository.
-* There is a great presentation on the engine from DevDays 2023 (TODO: need approval to publish link)
+* There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
+* A [word document](cql/CQL%20Engine%20Architecture.docx) with background documentation on the design. May be somewhat outdated.
+* A [graphic](docs/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
+
+The presentation is a good place to start, but note that we have made some minor changes to the public surface, so the names of the classes in the presentation will differ from the examples in the Demo project itself.
 
 ## Dev Start
 During development, new alpha releases will appear on Firely's Github Package feed, to be able to use pre-release packages within the cql solution. To use theses packages you must add ```https://nuget.pkg.github.com/FirelyTeam/index.json``` to your NuGet sources:

@@ -208,9 +208,9 @@ namespace Hl7.Cql.Packager
             Console.WriteLine();
             Console.WriteLine($"\t--elm <directory>\tLibrary root path");
             Console.WriteLine($"\t--cql <directory>\tCQL root path");
-            Console.WriteLine($"\t--fhir <file>\tResource location, either file name or directory");
+            Console.WriteLine($"\t[--fhir] <file>\tResource location, either file name or directory");
             Console.WriteLine($"\t[--cs] <file>\tC# output location, either file name or directory");
-            Console.WriteLine($"\t[--d] true|false\t\tProduce as a debug assmebly");
+            Console.WriteLine($"\t[--d] true|false\t\tProduce as a debug assembly");
             Console.WriteLine($"\t[--f] true|false\tIf output file already exists, overwrite");
             Console.WriteLine();
             return -1;
