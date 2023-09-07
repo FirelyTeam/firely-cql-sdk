@@ -7,7 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Fhir.Model;
 using System.Runtime.Loader;

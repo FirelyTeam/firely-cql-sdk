@@ -22,7 +22,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />

@@ -10,7 +10,7 @@ using Hl7.Cql.Primitives;
 using System;
 using M = Fhir.Metrics;
 
-namespace Cql.Conversion
+namespace Hl7.Cql.Conversion
 {
     /// <summary>
     /// Utility functions for working with Fireky's UCUM library, which allows full support for conversions within the UCUM unit system.

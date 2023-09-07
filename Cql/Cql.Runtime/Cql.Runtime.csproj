@@ -27,7 +27,7 @@
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Logging" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Model" Key="$(LibraryPKHash)" />

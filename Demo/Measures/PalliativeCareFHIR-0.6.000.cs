@@ -3,12 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
 [CqlLibrary("PalliativeCareFHIR", "0.6.000")]
 public class PalliativeCareFHIR_0_6_000
