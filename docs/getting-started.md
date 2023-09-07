@@ -44,12 +44,12 @@ With the measures generated, we can now build the other projects: two sample pro
 ## Evaluating measures
 The demo project showcases four ways to use the CQL SDK to execute measures in `MeasuresTest.cs`. No matter how the CQL expressions in each CQL file are invoked, you need to create an instance of a `CqlContext` first,
 which holds the basic external inputs to the function call: 
-* The data to run the function on, either as a `Bundle` FHIR resource, or an implementation of `IDataRetriever`. (default: empty data)
+* The data to run the function on, either as a `Bundle` FHIR resource, or an implementation of `IDataSource`. (default: empty data)
 * The parameters passed to the measure (default: none).
 * A set of external valuesets (default: no valuesets).
 * The date to server as "today" (default: today)
 
-This is most easily done by calling one of the overloads of the factory method `FirelyCqlContext.Create()`. When the `CqlContext` is created,
+This is most easily done by calling one of the overloads of the factory method `FhirCqlContext.Create()`. When the `CqlContext` is created,
 we can now invoke the defined functions in the measure:
 
 1. Directly call the generated measure. This is shown in `BCSEHEDIS2022_Numerator`. Calling a CQL expression directly requires the measures to be known in advance as a pre-compiled assembly.
