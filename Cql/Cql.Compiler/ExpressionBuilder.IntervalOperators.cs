@@ -395,6 +395,11 @@ namespace Hl7.Cql.Compiler
                     return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, right, left);
                 }
             }
+            else if (IsInterval(right.Type, out var rightPointType))
+            {
+                var precision = Precision(e.precision, e.precisionSpecified);
+                return OperatorBinding.Bind(CqlOperator.IntervalProperlyIncludesElement, ctx.RuntimeContextParameter, right, left, precision);
+            }
             throw new NotImplementedException();
         }
 
