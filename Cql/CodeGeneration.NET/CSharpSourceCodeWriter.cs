@@ -25,15 +25,6 @@ using System.Text;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal static class DebugViewHelper
-    {
-        public static string GetDebugView(this Expression exp)
-        {
-            var propertyInfo = typeof(Expression).GetProperty("DebugView", BindingFlags.Instance | BindingFlags.NonPublic)!;
-            return (string)propertyInfo.GetValue(exp)!;
-        }
-    }
-
     /// <summary>
     /// Writes <see cref="LambdaExpression"/>s as members of a .NET class.
     /// </summary>
@@ -289,7 +280,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 foreach (var overload in kvp.Value)
                                 {
                                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
+
                                     WriteMemoizedInstanceMethod(writer, indentLevel, invocationsTransformer, kvp.Key, overload.T, tags);
+
                                     writer.WriteLine();
                                 }
                             }
@@ -378,7 +371,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
             var visitedBody = Transform(overload.Body,
-                invocationsTransformer,
+                //     invocationsTransformer,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(vng),
@@ -428,14 +421,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                     lazyType.GetMember("Value").Single()));
 
                 writer.Write(convertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!, "public"));
-                //     writer.WriteLine();
             }
             else
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
                 writer.Write(convertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
-                //      writer.WriteLine();
             }
         }
 
@@ -523,8 +514,37 @@ namespace Hl7.Cql.CodeGeneration.NET
                 BlockExpression block => convertBlockExpression(indent, block),
                 InvocationExpression invocation => convertInvocationExpression(leadingIndentString, invocation),
                 CaseWhenThenExpression cwt => convertCaseWhenThenExpression(indent, cwt),
+                FunctionCallExpression fce => convertFunctionCallExpression(indent, leadingIndentString, fce),
+                DefinitionCallExpression dce => convertDefinitionCallExpression(indent, leadingIndentString, dce),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
             };
+        }
+
+        private static string convertDefinitionCallExpression(int indent, string leadingIndentString, DefinitionCallExpression dce)
+        {
+            var sb = new StringBuilder();
+            sb.Append(leadingIndentString);
+
+            var target = VariableNameGenerator.NormalizeIdentifier(dce.LibraryName) ?? "this";
+            var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
+
+            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
+
+            return sb.ToString();
+        }
+
+        private static string convertFunctionCallExpression(int indent, string leadingIndentString, FunctionCallExpression fce)
+        {
+            var sb = new StringBuilder();
+            sb.Append(leadingIndentString);
+
+            var target = VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
+            var csFunctionName = VariableNameGenerator.NormalizeIdentifier(fce.FunctionName);
+
+            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}");
+            sb.Append(convertArguments(indent, fce.Arguments.Skip(1)));  // skip cqlContext
+
+            return sb.ToString();
         }
 
         private static readonly ObjectIDGenerator gen = new();
@@ -633,9 +653,18 @@ namespace Hl7.Cql.CodeGeneration.NET
                 _ => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
 
-            sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}(");
+            sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}");
 
             var paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1) : call.Arguments;
+
+            sb.Append(convertArguments(indent, paramList));
+            return sb.ToString();
+        }
+
+        private static string convertArguments(int indent, IEnumerable<Expression> paramList)
+        {
+            var sb = new StringBuilder();
+            sb.Append("(");
 
             bool firstArg = true;
             foreach (var argument in paramList)
@@ -654,6 +683,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
 
             sb.Append(')');
+
             return sb.ToString();
         }
 
