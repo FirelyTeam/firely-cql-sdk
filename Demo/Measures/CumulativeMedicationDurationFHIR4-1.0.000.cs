@@ -692,7 +692,7 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					var ax_ = context.Operators.Start(aw_);
 					var az_ = FHIRHelpers_4_0_001.ToDateTime(al_);
 					var bb_ = ah_?.ExpectedSupplyDuration;
-					var bc_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)bb_);
+					var bc_ = FHIRHelpers_4_0_001.ToQuantity(bb_);
 					var be_ = ah_?.Quantity;
 					var bf_ = FHIRHelpers_4_0_001.ToQuantity(be_);
 					var bh_ = context.Operators.SingleOrNull<Dosage>((aa_ as IEnumerable<Dosage>));

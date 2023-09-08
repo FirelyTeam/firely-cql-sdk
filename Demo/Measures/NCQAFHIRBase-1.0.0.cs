@@ -88,7 +88,7 @@ public class NCQAFHIRBase_1_0_0
 						var y_ = this.Patient();
 						var z_ = y_?.BirthDateElement;
 						var aa_ = FHIRHelpers_4_0_001.ToDate(z_);
-						var ab_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
+						var ab_ = FHIRHelpers_4_0_001.ToQuantity((onset as Age));
 						var ac_ = context.Operators.Add(aa_, ab_);
 						var ae_ = y_?.BirthDateElement;
 						var af_ = FHIRHelpers_4_0_001.ToDate(ae_);
@@ -134,7 +134,7 @@ public class NCQAFHIRBase_1_0_0
 						var bb_ = this.Patient();
 						var bc_ = bb_?.BirthDateElement;
 						var bd_ = FHIRHelpers_4_0_001.ToDate(bc_);
-						var be_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
+						var be_ = FHIRHelpers_4_0_001.ToQuantity((onset as Age));
 						var bf_ = context.Operators.Add(bd_, be_);
 						var bh_ = bb_?.BirthDateElement;
 						var bi_ = FHIRHelpers_4_0_001.ToDate(bh_);
@@ -180,7 +180,7 @@ public class NCQAFHIRBase_1_0_0
 						var ce_ = this.Patient();
 						var cf_ = ce_?.BirthDateElement;
 						var cg_ = FHIRHelpers_4_0_001.ToDate(cf_);
-						var ch_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
+						var ch_ = FHIRHelpers_4_0_001.ToQuantity((onset as Age));
 						var ci_ = context.Operators.Add(cg_, ch_);
 						var ck_ = ce_?.BirthDateElement;
 						var cl_ = FHIRHelpers_4_0_001.ToDate(ck_);
@@ -225,7 +225,7 @@ public class NCQAFHIRBase_1_0_0
 						var dh_ = this.Patient();
 						var di_ = dh_?.BirthDateElement;
 						var dj_ = FHIRHelpers_4_0_001.ToDate(di_);
-						var dk_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(onset as Age));
+						var dk_ = FHIRHelpers_4_0_001.ToQuantity((onset as Age));
 						var dl_ = context.Operators.Add(dj_, dk_);
 						var dn_ = dh_?.BirthDateElement;
 						var do_ = FHIRHelpers_4_0_001.ToDate(dn_);
@@ -312,7 +312,7 @@ public class NCQAFHIRBase_1_0_0
 						var y_ = this.Patient();
 						var z_ = y_?.BirthDateElement;
 						var aa_ = FHIRHelpers_4_0_001.ToDate(z_);
-						var ab_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
+						var ab_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Age));
 						var ac_ = context.Operators.Add(aa_, ab_);
 						var ae_ = y_?.BirthDateElement;
 						var af_ = FHIRHelpers_4_0_001.ToDate(ae_);
@@ -358,7 +358,7 @@ public class NCQAFHIRBase_1_0_0
 						var bb_ = this.Patient();
 						var bc_ = bb_?.BirthDateElement;
 						var bd_ = FHIRHelpers_4_0_001.ToDate(bc_);
-						var be_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
+						var be_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Age));
 						var bf_ = context.Operators.Add(bd_, be_);
 						var bh_ = bb_?.BirthDateElement;
 						var bi_ = FHIRHelpers_4_0_001.ToDate(bh_);
@@ -404,7 +404,7 @@ public class NCQAFHIRBase_1_0_0
 						var ce_ = this.Patient();
 						var cf_ = ce_?.BirthDateElement;
 						var cg_ = FHIRHelpers_4_0_001.ToDate(cf_);
-						var ch_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
+						var ch_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Age));
 						var ci_ = context.Operators.Add(cg_, ch_);
 						var ck_ = ce_?.BirthDateElement;
 						var cl_ = FHIRHelpers_4_0_001.ToDate(ck_);
@@ -449,7 +449,7 @@ public class NCQAFHIRBase_1_0_0
 						var dh_ = this.Patient();
 						var di_ = dh_?.BirthDateElement;
 						var dj_ = FHIRHelpers_4_0_001.ToDate(di_);
-						var dk_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(abatement as Age));
+						var dk_ = FHIRHelpers_4_0_001.ToQuantity((abatement as Age));
 						var dl_ = context.Operators.Add(dj_, dk_);
 						var dn_ = dh_?.BirthDateElement;
 						var do_ = FHIRHelpers_4_0_001.ToDate(dn_);
@@ -555,7 +555,7 @@ public class NCQAFHIRBase_1_0_0
 				var t_ = this.Patient();
 				var u_ = t_?.BirthDateElement;
 				var v_ = FHIRHelpers_4_0_001.ToDate(u_);
-				var w_ = FHIRHelpers_4_0_001.ToQuantity((Quantity)(choice as Age));
+				var w_ = FHIRHelpers_4_0_001.ToQuantity((choice as Age));
 				var x_ = context.Operators.Add(v_, w_);
 				var z_ = t_?.BirthDateElement;
 				var aa_ = FHIRHelpers_4_0_001.ToDate(z_);

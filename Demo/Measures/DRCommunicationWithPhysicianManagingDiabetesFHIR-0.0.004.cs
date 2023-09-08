@@ -474,7 +474,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			{
 				var m_ = EncounterDiabeticRetinopathy?.Period;
 				var n_ = FHIRHelpers_4_0_001.ToInterval(m_);
-				var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)LevelOfSeverityNotCommunicated, "qicore-recorded");
+				var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(LevelOfSeverityNotCommunicated, "qicore-recorded");
 				var p_ = o_?.Value;
 				var q_ = FHIRHelpers_4_0_001.ToInterval((p_ as Period));
 				var r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, null);
@@ -533,7 +533,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			{
 				var n_ = EncounterDiabeticRetinopathy?.Period;
 				var o_ = FHIRHelpers_4_0_001.ToInterval(n_);
-				var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)MacularEdemaAbsentNotCommunicated, "qicore-recorded");
+				var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaAbsentNotCommunicated, "qicore-recorded");
 				var q_ = p_?.Value;
 				var r_ = FHIRHelpers_4_0_001.ToInterval((q_ as Period));
 				var s_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, r_, null);
@@ -591,7 +591,7 @@ public class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004
 			{
 				var m_ = EncounterDiabeticRetinopathy?.Period;
 				var n_ = FHIRHelpers_4_0_001.ToInterval(m_);
-				var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension((DomainResource)MacularEdemaPresentNotCommunicated, "qicore-recorded");
+				var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.GetExtension(MacularEdemaPresentNotCommunicated, "qicore-recorded");
 				var p_ = o_?.Value;
 				var q_ = FHIRHelpers_4_0_001.ToInterval((p_ as Period));
 				var r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(n_, q_, null);
