@@ -35,8 +35,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             Log = log;
         }
 
-        internal MethodBuilder MethodBuilder { get; } = new MethodBuilder();
-
         /// <summary>
         /// Gets or sets the namespace for generated .NET types.
         /// </summary>
@@ -126,9 +124,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             Func<string, Stream> libraryNameToStream,
             bool closeStream, Predicate<string> writeFile, Func<string?, string?> libraryNameToClassName)
         {
-            var typesAndMethods = MethodBuilder.CreateMethodsFor(definitions);
-            var methods = typesAndMethods.Item1;
-            var interfaceTypes = typesAndMethods.Item2;
             var buildOrder = DetermineBuildOrder(dependencyGraph);
 
             foreach (var library in buildOrder)
@@ -161,7 +156,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         indentLevel += 1;
                     }
 
-                    writeClass(definitions, dependencyGraph, libraryNameToClassName, methods, interfaceTypes, libraryName, writer, indentLevel);
+                    writeClass(definitions, dependencyGraph, libraryNameToClassName, libraryName, writer, indentLevel);
 
                     if (!string.IsNullOrWhiteSpace(Namespace))
                     {
@@ -182,8 +177,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         private void writeClass(DefinitionDictionary<LambdaExpression> definitions,
             DirectedGraph dependencyGraph,
             Func<string?, string?> libraryNameToClassName,
-            DefinitionDictionary<MethodInfo> methods,
-            IDictionary<string, Type> interfaceTypes,
             string libraryName, StreamWriter writer,
             int indentLevel)
         {
@@ -234,22 +227,21 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
                 writer.WriteLine(indentLevel, "}");
 
-                var libraryToMemberNames = WriteLibraryMembers(writer, dependencyGraph, libraryName, libraryNameToClassName!, indentLevel);
-                var invocationsTransformer = new InvocationsToMethodCallsTransformer(definitions, methods, interfaceTypes, libraryToMemberNames, libraryName);
-                writeMemoizedInstanceMethods(definitions, libraryName, writer, indentLevel, invocationsTransformer);
+                WriteLibraryMembers(writer, dependencyGraph, libraryName, libraryNameToClassName!, indentLevel);
+                writeMemoizedInstanceMethods(definitions, libraryName, writer, indentLevel);
                 indentLevel -= 1;
                 writer.WriteLine(indentLevel, "}");
             }
         }
 
-        private void writeMemoizedInstanceMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel, InvocationsToMethodCallsTransformer invocationsTransformer)
+        private void writeMemoizedInstanceMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
                 foreach (var overload in kvp.Value)
                 {
                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
-                    WriteMemoizedInstanceMethod(libraryName, writer, indentLevel, invocationsTransformer, kvp.Key, overload.T, tags);
+                    WriteMemoizedInstanceMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
                     writer.WriteLine();
                 }
             }
@@ -352,13 +344,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             overload.Parameters.Count == 1
                 && overload.Parameters[0].Type == typeof(CqlContext);
 
-        private Dictionary<string, string> WriteLibraryMembers(TextWriter writer,
+        private void WriteLibraryMembers(TextWriter writer,
             DirectedGraph dependencyGraph,
             string libraryName,
             Func<string, string> libraryNameToClassName,
             int indent)
         {
-            var libToMemberNames = new Dictionary<string, string>();
             var node = dependencyGraph.Nodes[libraryName];
             var requiredLibraries = node.ForwardEdges?
                 .Select(edge => edge.ToId)
@@ -374,14 +365,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 {
                     var typeName = libraryNameToClassName(dependentLibrary);
                     var memberName = typeName;
-                    libToMemberNames.Add(dependentLibrary, memberName);
                     writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
                 }
+
                 writer.WriteLine();
                 writer.WriteLine(indent, "#endregion");
                 writer.WriteLine();
             }
-            return libToMemberNames;
         }
 
         private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
@@ -401,7 +391,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
         private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
 
-        private void WriteMemoizedInstanceMethod(string libraryName, TextWriter writer, int indentLevel, InvocationsToMethodCallsTransformer invocationsTransformer,
+        private void WriteMemoizedInstanceMethod(string libraryName, TextWriter writer, int indentLevel,
             string cqlName,
             LambdaExpression overload,
             ILookup<string, string>? tags)
@@ -412,7 +402,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
             var visitedBody = Transform(overload.Body,
-                //     invocationsTransformer,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(vng),
