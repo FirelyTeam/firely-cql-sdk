@@ -27,10 +27,10 @@ namespace Hl7.Cql.Runtime
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
-            var method = typeof(IDataRetriever)
-                .GetMethod(nameof(IDataRetriever.RetrieveByValueSet))!
+            var method = typeof(IDataSource)
+                .GetMethod(nameof(IDataSource.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
+            var patients = method.Invoke(DataSource, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {
@@ -51,10 +51,10 @@ namespace Hl7.Cql.Runtime
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientType)}");
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
-            var method = typeof(IDataRetriever)
-                .GetMethod(nameof(IDataRetriever.RetrieveByValueSet))!
+            var method = typeof(IDataSource)
+                .GetMethod(nameof(IDataSource.RetrieveByValueSet))!
                 .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataRetriever, new object?[] { null, null }) as IEnumerable<object>;
+            var patients = method.Invoke(DataSource, new object?[] { null, null }) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {

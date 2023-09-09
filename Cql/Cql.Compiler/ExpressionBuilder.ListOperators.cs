@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;

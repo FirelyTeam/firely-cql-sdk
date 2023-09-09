@@ -9,7 +9,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
     /// <summary>
     /// Utilities for converting between CQL and UCUM units.

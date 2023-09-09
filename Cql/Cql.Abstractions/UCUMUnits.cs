@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Iso8601;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
     /// <summary>
     /// Defines UCUM unit constants.

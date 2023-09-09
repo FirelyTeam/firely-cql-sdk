@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -7,16 +6,26 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 using System.Reflection;
 using System.Runtime.Loader;
 
 namespace Hl7.Cql.Packaging
 {
+    /// <summary>
+    /// Extension methods for running CQL logic loaded into an AssemblyLoadContext.
+    /// </summary>
     public static class AssemblyLoadContextExtensions
     {
+        /// <summary>
+        /// Run the definitions in a CQL library that is loaded into an AssemblyLoadContext.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="ArgumentException"></exception>
         public static IDictionary<string, object?> Run(this AssemblyLoadContext assemblyContext,
-            string library, string version, CqlContext context)
+            string library, string version, CqlContext ctx)
         {
             using (var scope = assemblyContext.EnterContextualReflection())
             {
@@ -30,9 +39,9 @@ namespace Hl7.Cql.Packaging
                             && typeLibAttribute.Identifier == library
                             && typeLibAttribute.Version == version)
                         {
-                            var instance = Activator.CreateInstance(type, context)
+                            var instance = Activator.CreateInstance(type, ctx)
                                 ?? throw new InvalidOperationException($"Unable to create an instance of {type.FullName}");
-                            return run(instance, context);
+                            return run(instance);
                         }
                     }
                 }
@@ -40,7 +49,7 @@ namespace Hl7.Cql.Packaging
             throw new ArgumentException($"Cannot find type for library {library}, version {version}");
         }
 
-        public static Assembly? AssemblyFor(this AssemblyLoadContext assemblyContext,
+        internal static Assembly? AssemblyFor(this AssemblyLoadContext assemblyContext,
             string library, string version)
         {
             foreach (var asm in assemblyContext.Assemblies)
@@ -56,7 +65,7 @@ namespace Hl7.Cql.Packaging
             return null;
         }
 
-        private static IDictionary<string, object?> run(object instance, CqlContext context)
+        private static IDictionary<string, object?> run(object instance)
         {
             var type = instance.GetType();
             var values = new Dictionary<string, object?>();
@@ -78,4 +87,3 @@ namespace Hl7.Cql.Packaging
 
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

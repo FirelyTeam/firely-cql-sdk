@@ -1,5 +1,5 @@
 ﻿using Hl7.Cql.Conversion;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -12,7 +12,7 @@ namespace CoreTests
     [TestClass]
     public class FhirTypeConverterTests
     {
-        internal static readonly TypeConverter FhirTypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        internal static readonly TypeConverter FhirTypeConverter = Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
         [TestMethod]
         public void ConvertParameters_Integer()

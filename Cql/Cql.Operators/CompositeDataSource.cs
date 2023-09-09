@@ -15,26 +15,41 @@ using System.Reflection;
 namespace Hl7.Cql.Operators
 {
     /// <summary>
-    /// Composes zero or more <see cref="IDataRetriever"/> instances by concatenating the results of the retrieve methods.
+    /// Composes zero or more <see cref="IDataSource"/> instances by concatenating the results of the retrieve methods.
     /// </summary>
-    public class CompositeDataRetriever : IDataRetriever
+    public class CompositeDataSource : IDataSource
     {
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="retrievers">The retrievers to combine.  If none are provided, <see cref="Enumerable.Empty{TResult}"/> will be returned by the treive methods.</param>
-        /// <exception cref="ArgumentNullException">If <paramref name="retrievers"/> is <see langword="null"/></exception>
-        public CompositeDataRetriever(params IDataRetriever[] retrievers)
+        /// <param name="sources">The data sources to combine.
+        /// If none are provided, <see cref="Enumerable.Empty{TResult}"/> will be returned by the retrieve methods.</param>
+        /// <exception cref="ArgumentNullException">If <paramref name="sources"/> is <see langword="null"/></exception>
+        public CompositeDataSource(params IDataSource[] sources)
         {
-            Retrievers = retrievers ?? throw new ArgumentNullException(nameof(retrievers));
-            if (retrievers.Any(r => r is null))
-                throw new ArgumentNullException(nameof(retrievers), "At least one retriever supplied is null.");
+            DataSources = sources ?? throw new ArgumentNullException(nameof(sources));
+            if (sources.Any(r => r is null))
+                throw new ArgumentNullException(nameof(sources), "At least one data source supplied is null.");
+#if VNEXT
+            foreach (var r in sources)
+                r.DataChanged += triggerDataChanged;
+#endif
         }
 
+#if VNEXT
+        /// <inheritdoc/>
+        public event EventHandler? DataChanged;
+
+        private void triggerDataChanged(object? sender, EventArgs e)
+        {
+            DataChanged?.Invoke(sender, e);
+        }
+#endif
+
         /// <summary>
-        /// The retrievers whose data is composed.
+        /// The data sources whose data is composed.
         /// </summary>
-        public IDataRetriever[] Retrievers { get; }
+        public IDataSource[] DataSources { get; }
 
         /// <summary>
         /// Retrieves resources whose code path contains a code from the <paramref name="codes"/> if specified.
@@ -47,9 +62,9 @@ namespace Hl7.Cql.Operators
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class
         {
             IEnumerable<T> result = Enumerable.Empty<T>();
-            foreach (var retriever in Retrievers)
+            foreach (var source in DataSources)
             {
-                result = result.Concat(retriever.RetrieveByCodes<T>(codes, codeProperty));
+                result = result.Concat(source.RetrieveByCodes<T>(codes, codeProperty));
             }
             return result;
         }
@@ -65,9 +80,9 @@ namespace Hl7.Cql.Operators
         public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class
         {
             IEnumerable<T> result = Enumerable.Empty<T>();
-            foreach (var retriever in Retrievers)
+            foreach (var source in DataSources)
             {
-                result = result.Concat(retriever.RetrieveByValueSet<T>(valueSet, codeProperty));
+                result = result.Concat(source.RetrieveByValueSet<T>(valueSet, codeProperty));
             }
             return result;
         }
