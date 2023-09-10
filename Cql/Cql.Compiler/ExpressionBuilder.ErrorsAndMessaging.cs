@@ -23,8 +23,8 @@ namespace Hl7.Cql.Compiler
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));
             }
-            var conditional = Expression.Condition(condition, call, source);
-            return conditional;
+
+            return Expression.Condition(condition, call, source);
         }
     }
 }

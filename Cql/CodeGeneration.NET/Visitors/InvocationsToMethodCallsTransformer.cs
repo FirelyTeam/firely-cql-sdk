@@ -17,7 +17,7 @@ using Expression = System.Linq.Expressions.Expression;
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
 
-    internal class InvocationsToMethodCallsTransformer : TransformerBase
+    internal class InvocationsToMethodCallsTransformer : ExpressionVisitor
     {
         public DefinitionDictionary<MethodInfo> Methods { get; }
         public IDictionary<string, Type> Types { get; }

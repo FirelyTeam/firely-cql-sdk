@@ -840,14 +840,11 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
 					f__);
             }
         else 
-            return ((decimal?)((true)
-				? (context?.Operators.Message<object>((null as object), 
-						"CMDLogic.ToDaily.UnknownUnit", 
-						this.ErrorLevel(), 
-						context?.Operators.Concatenate(("Unknown unit " ?? ""), 
-(period?.unit ?? ""))))
-				: ((null as object)))
-);
+            return ((decimal?)context?.Operators.Message<object>((null as object), 
+				"CMDLogic.ToDaily.UnknownUnit", 
+				this.ErrorLevel(), 
+				context?.Operators.Concatenate(("Unknown unit " ?? ""), 
+(period?.unit ?? ""))));
 
     }
 
@@ -860,14 +857,11 @@ public class CumulativeMedicationDurationFHIR4_1_0_000
             return ((decimal?)3.0m);
 
         else 
-            return ((decimal?)((true)
-				? (context?.Operators.Message<object>((null as object), 
-						"CMDLogic.ToDaily.UnknownFrequencyCode", 
-						this.ErrorLevel(), 
-						context?.Operators.Concatenate(("Unknown frequency code " ?? ""), 
-(frequency?.code ?? ""))))
-				: ((null as object)))
-);
+            return ((decimal?)context?.Operators.Message<object>((null as object), 
+				"CMDLogic.ToDaily.UnknownFrequencyCode", 
+				this.ErrorLevel(), 
+				context?.Operators.Concatenate(("Unknown frequency code " ?? ""), 
+(frequency?.code ?? ""))));
 
     }
 

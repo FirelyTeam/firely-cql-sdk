@@ -398,7 +398,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             var vng = new VariableNameGenerator(parameters.Concat(parametersInBody), "_");
             var visitedBody = Transform(overload.Item2.Body,
                 invocationsTransformer,
-                new RedundantCastsTransformer(),
                 new BlockTransformer(vng, parameters)
             );
 
@@ -609,8 +608,18 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
 
-        private void WriteExpression(string className, string methodName, TextWriter writer, int indentLevel, System.Linq.Expressions.Expression expression, bool @return)
+        private void WriteExpression(
+            string className,
+            string methodName,
+            TextWriter writer,
+            int indentLevel,
+            Expression expression,
+            bool @return,
+            bool writeLeadingIndent = true)
         {
+
+            expression = new RedundantCastsTransformer().Visit(expression);
+
             if (expression is BlockExpression block)
             {
                 writer.WriteLine(indentLevel, "{");
@@ -647,7 +656,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else if (expression is ConditionalExpression conditional)
             {
-                WriteConditional(className, methodName, writer, indentLevel, conditional, true, @return);
+                WriteConditional(className, methodName, writer, indentLevel, conditional, writeLeadingIndent, @return);
             }
             else if (expression is UnaryExpression unary && unary.NodeType == ExpressionType.Throw)
             {
@@ -668,11 +677,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private readonly MethodInfo PropertyOrDefaultMethod = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!;
 
-        private string ToCode(int indent, System.Linq.Expressions.Expression expression, bool leadingIndent = true)
+        private string ToCode(int indent, Expression expression, bool leadingIndent = true)
         {
-            var leadingIndentString = string.Empty;
-            if (leadingIndent)
-                leadingIndentString = IndentString(indent);
+            var leadingIndentString = leadingIndent ? IndentString(indent) : string.Empty;
+
             switch (expression)
             {
                 case ConstantExpression constant:
@@ -1125,7 +1133,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static string IndentString(int indent)
         {
-            return string.Join(string.Empty, Enumerable.Range(0, indent).Select(i => "\t"));
+            return new string(Enumerable.Repeat('\t', indent).ToArray());
         }
 
         private string PrettyMethodName(MethodInfo method)
@@ -1144,9 +1152,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.Write(indentLevel, "if (");
             else
                 writer.Write(0, "if (");
+
             var test = ToCode(indentLevel + 1, conditional.Test, false);
+
             writer.Write(test);
             writer.WriteLine(0, ")");
+
             if (conditional.IfTrue is BlockExpression)
             {
                 WriteExpression(className, methodName, writer, indentLevel, conditional.IfTrue, @return);
@@ -1158,7 +1169,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var parametersInBody = parameterFinder.Names;
                 var vng = new VariableNameGenerator(parametersInBody, "__");
                 var newBlock = Transform(conditional.IfTrue,
-                    new RedundantCastsTransformer(),
                     new BlockTransformer(vng, parametersInBody));
                 WriteExpression(className, methodName, writer, indentLevel + 1, newBlock, @return);
                 writer.WriteLine();
@@ -1173,7 +1183,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             if (conditional.IfFalse is ConditionalExpression elseIf)
             {
-                WriteConditional(className, methodName, writer, indentLevel, elseIf, false, @return);
+                WriteExpression(className, methodName, writer, indentLevel, elseIf, @return, false);
             }
             else
             {
@@ -1189,7 +1199,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                     var parametersInBody = parameterFinder.Names;
                     var vng = new VariableNameGenerator(parametersInBody, "__");
                     var newBlock = Transform(conditional.IfFalse,
-                        new RedundantCastsTransformer(),
                         new BlockTransformer(vng, parametersInBody));
                     WriteExpression(className, methodName, writer, indentLevel + 1, newBlock, @return);
                     writer.WriteLine();
