@@ -294,16 +294,14 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var e_ = context.Operators.ListUnion<Encounter>(b_, d_);
 		bool? f_(Encounter TelehealthEncounter)
 		{
-			var h_ = TelehealthEncounter?.StatusElement;
-			var i_ = context.Operators.Convert<string>(h_);
-			var j_ = context.Operators.Equal(i_, "finished");
-			var k_ = this.Measurement_Period();
-			var l_ = TelehealthEncounter?.Period;
-			var m_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(l_);
-			var n_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(k_, m_, null);
-			var o_ = context.Operators.And(j_, n_);
+			var h_ = context.Operators.Convert<string>(TelehealthEncounter?.StatusElement);
+			var i_ = context.Operators.Equal(h_, "finished");
+			var j_ = this.Measurement_Period();
+			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(TelehealthEncounter?.Period);
+			var l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, k_, null);
+			var m_ = context.Operators.And(i_, l_);
 
-			return o_;
+			return m_;
 		};
 		var g_ = context.Operators.WhereOrNull<Encounter>(e_, f_);
 
@@ -317,15 +315,13 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	private int? Age_at_start_of_Measurement_Period_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_?.BirthDateElement;
-		var c_ = b_?.Value;
-		var d_ = context.Operators.Convert<CqlDate>(c_);
-		var e_ = this.Measurement_Period();
-		var f_ = context.Operators.Start(e_);
-		var g_ = context.Operators.DateFrom(f_);
-		var h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
 
-		return h_;
+		return f_;
 	}
 
     [CqlDeclaration("Age at start of Measurement Period")]
@@ -335,26 +331,23 @@ public class BreastCancerScreeningsFHIR_0_0_009
 	private bool? Initial_Population_Value()
 	{
 		var a_ = this.Patient();
-		var b_ = a_?.BirthDateElement;
-		var c_ = b_?.Value;
-		var d_ = context.Operators.Convert<CqlDate>(c_);
-		var e_ = this.Measurement_Period();
-		var f_ = context.Operators.Start(e_);
-		var g_ = context.Operators.DateFrom(f_);
-		var h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
-		var i_ = context.Operators.Interval((int?)51, (int?)74, true, false);
-		var j_ = context.Operators.ElementInInterval<int?>(h_, i_, null);
-		var l_ = a_?.GenderElement;
-		var m_ = context.Operators.Convert<string>(l_);
-		var n_ = context.Operators.Equal(m_, "female");
-		var o_ = context.Operators.And(j_, n_);
-		var p_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
-		var q_ = this.Telehealth_Services();
-		var r_ = context.Operators.ListUnion<Encounter>(p_, q_);
-		var s_ = context.Operators.ExistsInList<Encounter>(r_);
-		var t_ = context.Operators.And(o_, s_);
+		var b_ = context.Operators.Convert<CqlDate>(a_?.BirthDateElement?.Value);
+		var c_ = this.Measurement_Period();
+		var d_ = context.Operators.Start(c_);
+		var e_ = context.Operators.DateFrom(d_);
+		var f_ = context.Operators.CalculateAgeAt(b_, e_, "year");
+		var g_ = context.Operators.Interval((int?)51, (int?)74, true, false);
+		var h_ = context.Operators.ElementInInterval<int?>(f_, g_, null);
+		var j_ = context.Operators.Convert<string>(a_?.GenderElement);
+		var k_ = context.Operators.Equal(j_, "female");
+		var l_ = context.Operators.And(h_, k_);
+		var m_ = AdultOutpatientEncountersFHIR4_2_2_000.Qualifying_Encounters();
+		var n_ = this.Telehealth_Services();
+		var o_ = context.Operators.ListUnion<Encounter>(m_, n_);
+		var p_ = context.Operators.ExistsInList<Encounter>(o_);
+		var q_ = context.Operators.And(l_, p_);
 
-		return t_;
+		return q_;
 	}
 
     [CqlDeclaration("Initial Population")]
@@ -380,30 +373,29 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
 		bool? e_(Condition UnilateralMastectomyDiagnosis)
 		{
-			var j_ = UnilateralMastectomyDiagnosis?.BodySite;
-			CqlConcept k_(CodeableConcept X)
+			CqlConcept j_(CodeableConcept X)
 			{
-				var o_ = FHIRHelpers_4_0_001.ToConcept(X);
+				var n_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-				return o_;
+				return n_;
 			};
-			var l_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((j_ as IEnumerable<CodeableConcept>), k_);
-			var m_ = this.Right();
-			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
+			var k_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var l_ = this.Right();
+			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
-			return n_;
+			return m_;
 		};
 		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
 		var g_ = context.Operators.ListUnion<Condition>(b_, f_);
 		bool? h_(Condition RightMastectomy)
 		{
-			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(RightMastectomy);
-			var q_ = context.Operators.Start(p_);
-			var r_ = this.Measurement_Period();
-			var s_ = context.Operators.End(r_);
-			var t_ = context.Operators.SameOrBefore(q_, s_, null);
+			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(RightMastectomy);
+			var p_ = context.Operators.Start(o_);
+			var q_ = this.Measurement_Period();
+			var r_ = context.Operators.End(q_);
+			var s_ = context.Operators.SameOrBefore(p_, r_, null);
 
-			return t_;
+			return s_;
 		};
 		var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
 
@@ -420,18 +412,16 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? c_(Procedure UnilateralMastectomyRightPerformed)
 		{
-			var e_ = UnilateralMastectomyRightPerformed?.StatusElement;
-			var f_ = context.Operators.Convert<string>(e_);
-			var g_ = context.Operators.Equal(f_, "completed");
-			var h_ = UnilateralMastectomyRightPerformed?.Performed;
-			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
+			var e_ = context.Operators.Convert<string>(UnilateralMastectomyRightPerformed?.StatusElement);
+			var f_ = context.Operators.Equal(e_, "completed");
+			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(UnilateralMastectomyRightPerformed?.Performed);
+			var h_ = context.Operators.End(g_);
+			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.SameOrBefore(j_, l_, null);
-			var n_ = context.Operators.And(g_, m_);
+			var k_ = context.Operators.SameOrBefore(h_, j_, null);
+			var l_ = context.Operators.And(f_, k_);
 
-			return n_;
+			return l_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
 
@@ -450,30 +440,29 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var d_ = context.Operators.RetrieveByValueSet<Condition>(c_, null);
 		bool? e_(Condition UnilateralMastectomyDiagnosis)
 		{
-			var j_ = UnilateralMastectomyDiagnosis?.BodySite;
-			CqlConcept k_(CodeableConcept X)
+			CqlConcept j_(CodeableConcept X)
 			{
-				var o_ = FHIRHelpers_4_0_001.ToConcept(X);
+				var n_ = FHIRHelpers_4_0_001.ToConcept(X);
 
-				return o_;
+				return n_;
 			};
-			var l_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((j_ as IEnumerable<CodeableConcept>), k_);
-			var m_ = this.Left();
-			var n_ = context.Operators.ConceptsInValueSet(l_, m_);
+			var k_ = context.Operators.SelectOrNull<CodeableConcept, CqlConcept>((UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>), j_);
+			var l_ = this.Left();
+			var m_ = context.Operators.ConceptsInValueSet(k_, l_);
 
-			return n_;
+			return m_;
 		};
 		var f_ = context.Operators.WhereOrNull<Condition>(d_, e_);
 		var g_ = context.Operators.ListUnion<Condition>(b_, f_);
 		bool? h_(Condition LeftMastectomy)
 		{
-			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(LeftMastectomy);
-			var q_ = context.Operators.Start(p_);
-			var r_ = this.Measurement_Period();
-			var s_ = context.Operators.End(r_);
-			var t_ = context.Operators.SameOrBefore(q_, s_, null);
+			var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(LeftMastectomy);
+			var p_ = context.Operators.Start(o_);
+			var q_ = this.Measurement_Period();
+			var r_ = context.Operators.End(q_);
+			var s_ = context.Operators.SameOrBefore(p_, r_, null);
 
-			return t_;
+			return s_;
 		};
 		var i_ = context.Operators.WhereOrNull<Condition>(g_, h_);
 
@@ -490,18 +479,16 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? c_(Procedure UnilateralMastectomyLeftPerformed)
 		{
-			var e_ = UnilateralMastectomyLeftPerformed?.StatusElement;
-			var f_ = context.Operators.Convert<string>(e_);
-			var g_ = context.Operators.Equal(f_, "completed");
-			var h_ = UnilateralMastectomyLeftPerformed?.Performed;
-			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
+			var e_ = context.Operators.Convert<string>(UnilateralMastectomyLeftPerformed?.StatusElement);
+			var f_ = context.Operators.Equal(e_, "completed");
+			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(UnilateralMastectomyLeftPerformed?.Performed);
+			var h_ = context.Operators.End(g_);
+			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.SameOrBefore(j_, l_, null);
-			var n_ = context.Operators.And(g_, m_);
+			var k_ = context.Operators.SameOrBefore(h_, j_, null);
+			var l_ = context.Operators.And(f_, k_);
 
-			return n_;
+			return l_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
 
@@ -541,18 +528,16 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? c_(Procedure BilateralMastectomyPerformed)
 		{
-			var e_ = BilateralMastectomyPerformed?.StatusElement;
-			var f_ = context.Operators.Convert<string>(e_);
-			var g_ = context.Operators.Equal(f_, "completed");
-			var h_ = BilateralMastectomyPerformed?.Performed;
-			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(h_);
+			var e_ = context.Operators.Convert<string>(BilateralMastectomyPerformed?.StatusElement);
+			var f_ = context.Operators.Equal(e_, "completed");
+			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(BilateralMastectomyPerformed?.Performed);
+			var h_ = context.Operators.End(g_);
+			var i_ = this.Measurement_Period();
 			var j_ = context.Operators.End(i_);
-			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.End(k_);
-			var m_ = context.Operators.SameOrBefore(j_, l_, null);
-			var n_ = context.Operators.And(g_, m_);
+			var k_ = context.Operators.SameOrBefore(h_, j_, null);
+			var l_ = context.Operators.And(f_, k_);
 
-			return n_;
+			return l_;
 		};
 		var d_ = context.Operators.WhereOrNull<Procedure>(b_, c_);
 
@@ -587,21 +572,19 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var t_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80();
 		var u_ = context.Operators.Or(s_, t_);
 		var v_ = this.Patient();
-		var w_ = v_?.BirthDateElement;
-		var x_ = w_?.Value;
-		var y_ = context.Operators.Convert<CqlDate>(x_);
-		var z_ = this.Measurement_Period();
-		var aa_ = context.Operators.Start(z_);
-		var ab_ = context.Operators.DateFrom(aa_);
-		var ac_ = context.Operators.CalculateAgeAt(y_, ab_, "year");
-		var ad_ = context.Operators.GreaterOrEqual(ac_, (int?)65);
-		var ae_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
-		var af_ = context.Operators.And(ad_, ae_);
-		var ag_ = context.Operators.Or(u_, af_);
-		var ah_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
-		var ai_ = context.Operators.Or(ag_, ah_);
+		var w_ = context.Operators.Convert<CqlDate>(v_?.BirthDateElement?.Value);
+		var x_ = this.Measurement_Period();
+		var y_ = context.Operators.Start(x_);
+		var z_ = context.Operators.DateFrom(y_);
+		var aa_ = context.Operators.CalculateAgeAt(w_, z_, "year");
+		var ab_ = context.Operators.GreaterOrEqual(aa_, (int?)65);
+		var ac_ = AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000.Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days();
+		var ad_ = context.Operators.And(ab_, ac_);
+		var ae_ = context.Operators.Or(u_, ad_);
+		var af_ = PalliativeCareFHIR_0_6_000.Palliative_Care_in_the_Measurement_Period();
+		var ag_ = context.Operators.Or(ae_, af_);
 
-		return ai_;
+		return ag_;
 	}
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -614,32 +597,30 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation Mammogram)
 		{
-			var f_ = Mammogram?.StatusElement;
-			var g_ = context.Operators.Convert<string>(f_);
-			var h_ = new string[]
+			var f_ = context.Operators.Convert<string>(Mammogram?.StatusElement);
+			var g_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"appended",
 			};
-			var i_ = context.Operators.InList<string>(g_, (h_ as IEnumerable<string>));
-			var j_ = Mammogram?.Effective;
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
+			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
+			var j_ = context.Operators.End(i_);
+			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.End(m_);
-			var o_ = context.Operators.Quantity(27m, "months");
-			var p_ = context.Operators.Subtract(n_, o_);
-			var r_ = context.Operators.End(m_);
-			var s_ = context.Operators.Interval(p_, r_, true, true);
-			var t_ = context.Operators.ElementInInterval<CqlDateTime>(l_, s_, null);
-			var v_ = context.Operators.End(m_);
-			var w_ = context.Operators.Not((bool?)(v_ is null));
-			var x_ = context.Operators.And(t_, w_);
-			var y_ = context.Operators.And(i_, x_);
+			var m_ = context.Operators.Quantity(27m, "months");
+			var n_ = context.Operators.Subtract(l_, m_);
+			var p_ = context.Operators.End(k_);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
+			var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, null);
+			var t_ = context.Operators.End(k_);
+			var u_ = context.Operators.Not((bool?)(t_ is null));
+			var v_ = context.Operators.And(r_, u_);
+			var w_ = context.Operators.And(h_, v_);
 
-			return y_;
+			return w_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 		var e_ = context.Operators.ExistsInList<Observation>(d_);
@@ -657,32 +638,30 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<DiagnosticReport>(a_, null);
 		bool? c_(DiagnosticReport Mammogram)
 		{
-			var f_ = Mammogram?.StatusElement;
-			var g_ = context.Operators.Convert<string>(f_);
-			var h_ = new string[]
+			var f_ = context.Operators.Convert<string>(Mammogram?.StatusElement);
+			var g_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"appended",
 			};
-			var i_ = context.Operators.InList<string>(g_, (h_ as IEnumerable<string>));
-			var j_ = Mammogram?.Effective;
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(j_);
+			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var i_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
+			var j_ = context.Operators.End(i_);
+			var k_ = this.Measurement_Period();
 			var l_ = context.Operators.End(k_);
-			var m_ = this.Measurement_Period();
-			var n_ = context.Operators.End(m_);
-			var o_ = context.Operators.Quantity(27m, "months");
-			var p_ = context.Operators.Subtract(n_, o_);
-			var r_ = context.Operators.End(m_);
-			var s_ = context.Operators.Interval(p_, r_, true, true);
-			var t_ = context.Operators.ElementInInterval<CqlDateTime>(l_, s_, null);
-			var v_ = context.Operators.End(m_);
-			var w_ = context.Operators.Not((bool?)(v_ is null));
-			var x_ = context.Operators.And(t_, w_);
-			var y_ = context.Operators.And(i_, x_);
+			var m_ = context.Operators.Quantity(27m, "months");
+			var n_ = context.Operators.Subtract(l_, m_);
+			var p_ = context.Operators.End(k_);
+			var q_ = context.Operators.Interval(n_, p_, true, true);
+			var r_ = context.Operators.ElementInInterval<CqlDateTime>(j_, q_, null);
+			var t_ = context.Operators.End(k_);
+			var u_ = context.Operators.Not((bool?)(t_ is null));
+			var v_ = context.Operators.And(r_, u_);
+			var w_ = context.Operators.And(h_, v_);
 
-			return y_;
+			return w_;
 		};
 		var d_ = context.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
 		var e_ = context.Operators.ExistsInList<DiagnosticReport>(d_);
@@ -731,33 +710,31 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<Observation>(a_, null);
 		bool? c_(Observation Mammogram)
 		{
-			var f_ = Mammogram?.StatusElement;
-			var g_ = context.Operators.Convert<string>(f_);
-			var h_ = new string[]
+			var f_ = context.Operators.Convert<string>(Mammogram?.StatusElement);
+			var g_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"appended",
 			};
-			var i_ = context.Operators.InList<string>(g_, (h_ as IEnumerable<string>));
-			var j_ = context.Operators.Not(i_);
-			var k_ = Mammogram?.Effective;
-			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(k_);
+			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var i_ = context.Operators.Not(h_);
+			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
+			var k_ = context.Operators.End(j_);
+			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity(27m, "months");
-			var q_ = context.Operators.Subtract(o_, p_);
-			var s_ = context.Operators.End(n_);
-			var t_ = context.Operators.Interval(q_, s_, true, true);
-			var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
-			var w_ = context.Operators.End(n_);
-			var x_ = context.Operators.Not((bool?)(w_ is null));
-			var y_ = context.Operators.And(u_, x_);
-			var z_ = context.Operators.And(j_, y_);
+			var n_ = context.Operators.Quantity(27m, "months");
+			var o_ = context.Operators.Subtract(m_, n_);
+			var q_ = context.Operators.End(l_);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
+			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
+			var u_ = context.Operators.End(l_);
+			var v_ = context.Operators.Not((bool?)(u_ is null));
+			var w_ = context.Operators.And(s_, v_);
+			var x_ = context.Operators.And(i_, w_);
 
-			return z_;
+			return x_;
 		};
 		var d_ = context.Operators.WhereOrNull<Observation>(b_, c_);
 		var e_ = context.Operators.ExistsInList<Observation>(d_);
@@ -775,33 +752,31 @@ public class BreastCancerScreeningsFHIR_0_0_009
 		var b_ = context.Operators.RetrieveByValueSet<DiagnosticReport>(a_, null);
 		bool? c_(DiagnosticReport Mammogram)
 		{
-			var f_ = Mammogram?.StatusElement;
-			var g_ = context.Operators.Convert<string>(f_);
-			var h_ = new string[]
+			var f_ = context.Operators.Convert<string>(Mammogram?.StatusElement);
+			var g_ = new string[]
 			{
 				"final",
 				"amended",
 				"corrected",
 				"appended",
 			};
-			var i_ = context.Operators.InList<string>(g_, (h_ as IEnumerable<string>));
-			var j_ = context.Operators.Not(i_);
-			var k_ = Mammogram?.Effective;
-			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(k_);
+			var h_ = context.Operators.InList<string>(f_, (g_ as IEnumerable<string>));
+			var i_ = context.Operators.Not(h_);
+			var j_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(Mammogram?.Effective);
+			var k_ = context.Operators.End(j_);
+			var l_ = this.Measurement_Period();
 			var m_ = context.Operators.End(l_);
-			var n_ = this.Measurement_Period();
-			var o_ = context.Operators.End(n_);
-			var p_ = context.Operators.Quantity(27m, "months");
-			var q_ = context.Operators.Subtract(o_, p_);
-			var s_ = context.Operators.End(n_);
-			var t_ = context.Operators.Interval(q_, s_, true, true);
-			var u_ = context.Operators.ElementInInterval<CqlDateTime>(m_, t_, null);
-			var w_ = context.Operators.End(n_);
-			var x_ = context.Operators.Not((bool?)(w_ is null));
-			var y_ = context.Operators.And(u_, x_);
-			var z_ = context.Operators.And(j_, y_);
+			var n_ = context.Operators.Quantity(27m, "months");
+			var o_ = context.Operators.Subtract(m_, n_);
+			var q_ = context.Operators.End(l_);
+			var r_ = context.Operators.Interval(o_, q_, true, true);
+			var s_ = context.Operators.ElementInInterval<CqlDateTime>(k_, r_, null);
+			var u_ = context.Operators.End(l_);
+			var v_ = context.Operators.Not((bool?)(u_ is null));
+			var w_ = context.Operators.And(s_, v_);
+			var x_ = context.Operators.And(i_, w_);
 
-			return z_;
+			return x_;
 		};
 		var d_ = context.Operators.WhereOrNull<DiagnosticReport>(b_, c_);
 		var e_ = context.Operators.ExistsInList<DiagnosticReport>(d_);

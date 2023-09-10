@@ -90,12 +90,10 @@ namespace Hl7.Cql.Compiler
                 all.Merge(expressions);
             }
 
-            var navToLibraryStream = new Dictionary<string, Stream>();
             var assemblies = generate(all,
                 TypeManager,
                 graph,
                 scw,
-                navToLibraryStream,
                 references);
             return assemblies;
         }
@@ -104,9 +102,10 @@ namespace Hl7.Cql.Compiler
            TypeManager typeManager,
            DirectedGraph dependencies,
            CSharpSourceCodeWriter writer,
-           Dictionary<string, Stream> navToLibraryStream,
            IEnumerable<Assembly> references)
         {
+            Dictionary<string, Stream> navToLibraryStream = new();
+
             Stream getStreamForLibrary(string nav)
             {
                 if (!navToLibraryStream.TryGetValue(nav, out var stream))
@@ -116,6 +115,7 @@ namespace Hl7.Cql.Compiler
                 }
                 return stream;
             }
+
             writer.Write(expressions,
                 typeManager.TupleTypes,
                 dependencies,
@@ -124,7 +124,7 @@ namespace Hl7.Cql.Compiler
 
             var assemblies = new Dictionary<string, AssemblyData>();
             var tupleStreams = navToLibraryStream
-                .Where(kvp => kvp.Key.StartsWith("Tuples\\"));
+                .Where(kvp => kvp.Key.StartsWith("Tuples" + Path.DirectorySeparatorChar));
             var tupleAssembly = CompileTuples(tupleStreams, references);
             var additionalReferences = new[]
             {

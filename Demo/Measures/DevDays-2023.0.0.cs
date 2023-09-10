@@ -109,25 +109,22 @@ public class DevDays_2023_0_0
 		var a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
-			var d_ = c?.Code;
-			var e_ = d_?.Coding;
-			bool? f_(Coding coding)
+			bool? d_(Coding coding)
 			{
-				var n_ = FHIRHelpers_4_0_001.ToCode(coding);
-				var o_ = this.Sucked_into_jet_engine();
-				var p_ = context.Operators.Equivalent(n_, o_);
+				var k_ = FHIRHelpers_4_0_001.ToCode(coding);
+				var l_ = this.Sucked_into_jet_engine();
+				var m_ = context.Operators.Equivalent(k_, l_);
 
-				return p_;
+				return m_;
 			};
-			var g_ = context.Operators.WhereOrNull<Coding>((e_ as IEnumerable<Coding>), f_);
-			var h_ = context.Operators.ExistsInList<Coding>(g_);
-			var i_ = c?.Onset;
-			var j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
-			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, null);
-			var m_ = context.Operators.And(h_, l_);
+			var e_ = context.Operators.WhereOrNull<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
+			var f_ = context.Operators.ExistsInList<Coding>(e_);
+			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
+			var h_ = this.Measurement_Period();
+			var i_ = context.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var j_ = context.Operators.And(f_, i_);
 
-			return m_;
+			return j_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
 
@@ -143,25 +140,22 @@ public class DevDays_2023_0_0
 		var a_ = context.Operators.RetrieveByValueSet<Condition>(null, null);
 		bool? b_(Condition c)
 		{
-			var d_ = c?.Code;
-			var e_ = d_?.Coding;
-			bool? f_(Coding coding)
+			bool? d_(Coding coding)
 			{
-				var n_ = FHIRHelpers_4_0_001.ToCode(coding);
-				var o_ = this.Sucked_into_jet_engine__subsequent_encounter();
-				var p_ = context.Operators.Equivalent(n_, o_);
+				var k_ = FHIRHelpers_4_0_001.ToCode(coding);
+				var l_ = this.Sucked_into_jet_engine__subsequent_encounter();
+				var m_ = context.Operators.Equivalent(k_, l_);
 
-				return p_;
+				return m_;
 			};
-			var g_ = context.Operators.WhereOrNull<Coding>((e_ as IEnumerable<Coding>), f_);
-			var h_ = context.Operators.ExistsInList<Coding>(g_);
-			var i_ = c?.Onset;
-			var j_ = FHIRHelpers_4_0_001.ToDateTime((i_ as FhirDateTime));
-			var k_ = this.Measurement_Period();
-			var l_ = context.Operators.ElementInInterval<CqlDateTime>(j_, k_, null);
-			var m_ = context.Operators.And(h_, l_);
+			var e_ = context.Operators.WhereOrNull<Coding>((c?.Code?.Coding as IEnumerable<Coding>), d_);
+			var f_ = context.Operators.ExistsInList<Coding>(e_);
+			var g_ = FHIRHelpers_4_0_001.ToDateTime((c?.Onset as FhirDateTime));
+			var h_ = this.Measurement_Period();
+			var i_ = context.Operators.ElementInInterval<CqlDateTime>(g_, h_, null);
+			var j_ = context.Operators.And(f_, i_);
 
-			return m_;
+			return j_;
 		};
 		var c_ = context.Operators.WhereOrNull<Condition>(a_, b_);
 

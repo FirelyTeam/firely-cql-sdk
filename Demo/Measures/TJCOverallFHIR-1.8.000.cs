@@ -244,17 +244,15 @@ public class TJCOverallFHIR_1_8_000
 		var b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, null);
 		bool? c_(Encounter NonElectiveEncounter)
 		{
-			var e_ = NonElectiveEncounter?.Period;
-			var f_ = FHIRHelpers_4_0_001.ToInterval(e_);
-			var g_ = MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(f_);
-			var h_ = context.Operators.LessOrEqual(g_, (int?)120);
-			var j_ = FHIRHelpers_4_0_001.ToInterval(e_);
-			var k_ = context.Operators.End(j_);
-			var l_ = this.Measurement_Period();
-			var m_ = context.Operators.ElementInInterval<CqlDateTime>(k_, l_, "day");
-			var n_ = context.Operators.And(h_, m_);
+			var e_ = FHIRHelpers_4_0_001.ToInterval(NonElectiveEncounter?.Period);
+			var f_ = MATGlobalCommonFunctionsFHIR4_6_1_000.LengthInDays(e_);
+			var g_ = context.Operators.LessOrEqual(f_, (int?)120);
+			var i_ = context.Operators.End(e_);
+			var j_ = this.Measurement_Period();
+			var k_ = context.Operators.ElementInInterval<CqlDateTime>(i_, j_, "day");
+			var l_ = context.Operators.And(g_, k_);
 
-			return n_;
+			return l_;
 		};
 		var d_ = context.Operators.WhereOrNull<Encounter>(b_, c_);
 
@@ -271,17 +269,15 @@ public class TJCOverallFHIR_1_8_000
 		bool? b_(Encounter NonElectiveEncounter)
 		{
 			var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(NonElectiveEncounter);
-			var e_ = d_?.Code;
-			var f_ = FHIRHelpers_4_0_001.ToConcept(e_);
-			var g_ = this.Hemorrhagic_Stroke();
-			var h_ = context.Operators.ConceptInValueSet(f_, g_);
-			var j_ = d_?.Code;
-			var k_ = FHIRHelpers_4_0_001.ToConcept(j_);
-			var l_ = this.Ischemic_Stroke();
-			var m_ = context.Operators.ConceptInValueSet(k_, l_);
-			var n_ = context.Operators.Or(h_, m_);
+			var e_ = FHIRHelpers_4_0_001.ToConcept(d_?.Code);
+			var f_ = this.Hemorrhagic_Stroke();
+			var g_ = context.Operators.ConceptInValueSet(e_, f_);
+			var i_ = FHIRHelpers_4_0_001.ToConcept(d_?.Code);
+			var j_ = this.Ischemic_Stroke();
+			var k_ = context.Operators.ConceptInValueSet(i_, j_);
+			var l_ = context.Operators.Or(g_, k_);
 
-			return n_;
+			return l_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 
@@ -301,16 +297,13 @@ public class TJCOverallFHIR_1_8_000
 			bool? e_(Patient BirthDate)
 			{
 				var i_ = this.Patient();
-				var j_ = i_?.BirthDateElement;
-				var k_ = j_?.Value;
-				var l_ = context.Operators.ConvertStringToDateTime(k_);
-				var m_ = AllStrokeEncounter?.Period;
-				var n_ = FHIRHelpers_4_0_001.ToInterval(m_);
-				var o_ = context.Operators.Start(n_);
-				var p_ = context.Operators.CalculateAgeAt(l_, o_, "year");
-				var q_ = context.Operators.GreaterOrEqual(p_, (int?)18);
+				var j_ = context.Operators.ConvertStringToDateTime(i_?.BirthDateElement?.Value);
+				var k_ = FHIRHelpers_4_0_001.ToInterval(AllStrokeEncounter?.Period);
+				var l_ = context.Operators.Start(k_);
+				var m_ = context.Operators.CalculateAgeAt(j_, l_, "year");
+				var n_ = context.Operators.GreaterOrEqual(m_, (int?)18);
 
-				return q_;
+				return n_;
 			};
 			var f_ = context.Operators.WhereOrNull<Patient>(d_, e_);
 			Encounter g_(Patient BirthDate) => 
@@ -334,12 +327,11 @@ public class TJCOverallFHIR_1_8_000
 		bool? b_(Encounter EncounterWithAge)
 		{
 			var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.PrincipalDiagnosis(EncounterWithAge);
-			var e_ = d_?.Code;
-			var f_ = FHIRHelpers_4_0_001.ToConcept(e_);
-			var g_ = this.Ischemic_Stroke();
-			var h_ = context.Operators.ConceptInValueSet(f_, g_);
+			var e_ = FHIRHelpers_4_0_001.ToConcept(d_?.Code);
+			var f_ = this.Ischemic_Stroke();
+			var g_ = context.Operators.ConceptInValueSet(e_, f_);
 
-			return h_;
+			return g_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 
@@ -355,33 +347,23 @@ public class TJCOverallFHIR_1_8_000
 		var a_ = this.Ischemic_Stroke_Encounter();
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
-			var d_ = IschemicStrokeEncounter?.Hospitalization;
-			var e_ = d_?.DischargeDisposition;
-			var f_ = FHIRHelpers_4_0_001.ToConcept(e_);
-			var g_ = this.Discharge_To_Acute_Care_Facility();
-			var h_ = context.Operators.ConceptInValueSet(f_, g_);
-			var j_ = d_?.DischargeDisposition;
-			var k_ = FHIRHelpers_4_0_001.ToConcept(j_);
-			var l_ = this.Left_Against_Medical_Advice();
-			var m_ = context.Operators.ConceptInValueSet(k_, l_);
-			var n_ = context.Operators.Or(h_, m_);
-			var p_ = d_?.DischargeDisposition;
-			var q_ = FHIRHelpers_4_0_001.ToConcept(p_);
-			var r_ = this.Patient_Expired();
-			var s_ = context.Operators.ConceptInValueSet(q_, r_);
-			var t_ = context.Operators.Or(n_, s_);
-			var v_ = d_?.DischargeDisposition;
-			var w_ = FHIRHelpers_4_0_001.ToConcept(v_);
-			var x_ = this.Discharged_to_Home_for_Hospice_Care();
-			var y_ = context.Operators.ConceptInValueSet(w_, x_);
-			var z_ = context.Operators.Or(t_, y_);
-			var ab_ = d_?.DischargeDisposition;
-			var ac_ = FHIRHelpers_4_0_001.ToConcept(ab_);
-			var ad_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
-			var ae_ = context.Operators.ConceptInValueSet(ac_, ad_);
-			var af_ = context.Operators.Or(z_, ae_);
+			var d_ = FHIRHelpers_4_0_001.ToConcept(IschemicStrokeEncounter?.Hospitalization?.DischargeDisposition);
+			var e_ = this.Discharge_To_Acute_Care_Facility();
+			var f_ = context.Operators.ConceptInValueSet(d_, e_);
+			var h_ = this.Left_Against_Medical_Advice();
+			var i_ = context.Operators.ConceptInValueSet(d_, h_);
+			var j_ = context.Operators.Or(f_, i_);
+			var l_ = this.Patient_Expired();
+			var m_ = context.Operators.ConceptInValueSet(d_, l_);
+			var n_ = context.Operators.Or(j_, m_);
+			var p_ = this.Discharged_to_Home_for_Hospice_Care();
+			var q_ = context.Operators.ConceptInValueSet(d_, p_);
+			var r_ = context.Operators.Or(n_, q_);
+			var t_ = this.Discharged_to_Health_Care_Facility_for_Hospice_Care();
+			var u_ = context.Operators.ConceptInValueSet(d_, t_);
+			var v_ = context.Operators.Or(r_, u_);
 
-			return af_;
+			return v_;
 		};
 		var c_ = context.Operators.WhereOrNull<Encounter>(a_, b_);
 
@@ -398,26 +380,24 @@ public class TJCOverallFHIR_1_8_000
 		var b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, null);
 		bool? c_(ServiceRequest P)
 		{
-			var j_ = P?.IntentElement;
-			var k_ = context.Operators.Convert<string>(j_);
-			var l_ = context.Operators.Equal(k_, "order");
+			var j_ = context.Operators.Convert<string>(P?.IntentElement);
+			var k_ = context.Operators.Equal(j_, "order");
 
-			return l_;
+			return k_;
 		};
 		var d_ = context.Operators.WhereOrNull<ServiceRequest>(b_, c_);
 		var f_ = context.Operators.RetrieveByValueSet<Procedure>(a_, null);
 		bool? g_(Procedure InterventionPerformed)
 		{
-			var m_ = InterventionPerformed?.StatusElement;
-			var n_ = context.Operators.Convert<string>(m_);
-			var o_ = new string[]
+			var l_ = context.Operators.Convert<string>(InterventionPerformed?.StatusElement);
+			var m_ = new string[]
 			{
 				"completed",
 				"in-progress",
 			};
-			var p_ = context.Operators.InList<string>(n_, (o_ as IEnumerable<string>));
+			var n_ = context.Operators.InList<string>(l_, (m_ as IEnumerable<string>));
 
-			return p_;
+			return n_;
 		};
 		var h_ = context.Operators.WhereOrNull<Procedure>(f_, g_);
 		var i_ = context.Operators.ListUnion<object>((d_ as IEnumerable<object>), (h_ as IEnumerable<object>));

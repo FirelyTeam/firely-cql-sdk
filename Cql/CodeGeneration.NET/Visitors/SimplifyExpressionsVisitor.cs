@@ -49,21 +49,25 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         private Expression doVisit(Expression node)
         {
-            // This visit will, by default, call `simplyfy()` on every
+            // This visit will, by default, call `simplify()` on every
             // type of node, which unwinds the nesting. Note that, even if you
             // override a specific visitor, simplify() will still be called on it.
             // If you do want to avoid a node to be simplified at all, you need
             // to include a special case in the switch below.
             return node switch
             {
-                ConstantExpression newConstant => VisitConstant(newConstant),
-                ParameterExpression parameter => VisitParameter(parameter),
+                // Pass these expressions straight through
+                ConstantExpression or
+                ParameterExpression or
+                NewExpression or
+                MemberExpression or
+                NullConditionalMemberExpression => base.Visit(node),
+
+                // These expressions require special handling
                 ConditionalExpression cond => VisitConditional(cond),
                 UnaryExpression unary => VisitUnary(unary),
                 BinaryExpression binary => VisitBinary(binary),
-                NewExpression newe => VisitNew(newe),
                 CaseWhenThenExpression cwt => VisitCaseWhenThenExpression(cwt),
-                MemberExpression member => VisitMember(member),
 
                 // Simplify all others.
                 _ => simplify(base.Visit(node))
@@ -80,13 +84,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return newLetVariable;
         }
 
-        protected override Expression VisitMember(MemberExpression node)
-        {
-            if (node.Expression is not null && node.Expression is ConstantExpression or ParameterExpression)
-                return node;
-            else
-                return base.VisitMember(node);
-        }
 
         protected override Expression VisitConditional(ConditionalExpression node)
         {
@@ -156,22 +153,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 _ => simplify(base.VisitBinary(node))
             };
         }
-
-        protected override Expression VisitNew(NewExpression node)
-        {
-            return node;
-        }
-
-        protected override Expression VisitConstant(ConstantExpression node)
-        {
-            return node;
-        }
-
-        protected override Expression VisitParameter(ParameterExpression node)
-        {
-            return node;
-        }
-
 
         // This visitor builds up an expression (like any other), but also has a
         // set of Assignments, that cannot be seen in isolation from the expression. Therefore,
@@ -251,6 +232,8 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             // used everywhere).
             return Expression.Invoke(assign);
         }
+
+
     }
 }
 
