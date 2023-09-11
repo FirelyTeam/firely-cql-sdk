@@ -92,7 +92,7 @@ public class FHIRHelpers_4_0_001
 
         else 
             return new CqlQuantity(quantity?.ValueElement?.Value, 
-quantity?.UnitElement?.Value);
+				quantity?.UnitElement?.Value);
 
     }
 
@@ -118,9 +118,9 @@ quantity?.UnitElement?.Value);
 
         else 
             return new CqlCode(coding?.CodeElement?.Value, 
-coding?.SystemElement?.Value, 
-coding?.VersionElement?.Value, 
-coding?.DisplayElement?.Value);
+				coding?.SystemElement?.Value, 
+				coding?.VersionElement?.Value, 
+				coding?.DisplayElement?.Value);
 
     }
 
@@ -134,7 +134,7 @@ coding?.DisplayElement?.Value);
         else 
             return new CqlConcept(context?.Operators.SelectOrNull<Coding, CqlCode>((concept?.Coding as IEnumerable<Coding>), 
 					(C) => this.ToCode(C)), 
-concept?.TextElement?.Value);
+				concept?.TextElement?.Value);
 
     }
 

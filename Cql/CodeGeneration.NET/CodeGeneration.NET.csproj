@@ -10,7 +10,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="AgileObjects.ReadableExpressions" Version="2.6.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.7.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
@@ -18,8 +17,6 @@
 		<PackageReference Include="Microsoft.Extensions.Logging" Version="7.0.0" />
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 	</ItemGroup>
-
-	
 	
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
@@ -28,6 +25,5 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
-
 
 </Project>
