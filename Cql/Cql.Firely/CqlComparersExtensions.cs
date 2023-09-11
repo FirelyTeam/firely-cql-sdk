@@ -6,11 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
-using Hl7.Cql.Firely.Comparers;
+using Hl7.Cql.Fhir.Comparers;
 using Hl7.Fhir.Model;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
     /// <summary>
     /// Extension class for configuring comparers for the Firely SDK.
@@ -22,7 +23,7 @@ namespace Hl7.Cql.Firely
         /// </summary>
         /// <param name="comparers"></param>
         /// <returns></returns>
-        public static CqlComparers AddFirelyComparers(this CqlComparers comparers)
+        public static CqlComparers AddFhirComparers(this CqlComparers comparers)
         {
             comparers.Register(typeof(Canonical), new IValueComparer<string?>());
             comparers.Register(typeof(Code), new IValueComparer<string?>());

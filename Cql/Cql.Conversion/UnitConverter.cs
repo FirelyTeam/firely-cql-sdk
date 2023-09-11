@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Cql.Conversion;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;

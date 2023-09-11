@@ -1,8 +1,7 @@
 ﻿#nullable enable
 Hl7.Cql.Packaging.AssemblyLoadContextExtensions
 Hl7.Cql.Packaging.LibraryPackager
-static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.AssemblyFor(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version) -> System.Reflection.Assembly?
-static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! context) -> System.Collections.Generic.IDictionary<string!, object?>!
+static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! ctx) -> System.Collections.Generic.IDictionary<string!, object?>!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.LogLevel logLevel = Microsoft.Extensions.Logging.LogLevel.Error) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> System.Collections.Generic.IDictionary<string!, Hl7.Cql.Elm.Library!>!

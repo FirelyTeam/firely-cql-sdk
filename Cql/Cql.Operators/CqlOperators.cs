@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Iso8601;
@@ -30,7 +31,7 @@ namespace Hl7.Cql.Runtime
         /// </summary>
         /// <param name="resolver">The type resolver to use.</param>
         /// <param name="converter">The type converter to use, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="TypeConverter.Create"/> is used.</param>
-        /// <param name="dataRetriever">The data retriever to use, or <see langword="null" />.  When <see langword="null" />, no data will be returned by any retrieve expression.</param>
+        /// <param name="dataSource">The data source to use, or <see langword="null" />.  When <see langword="null" />, no data will be returned by any retrieve expression.</param>
         /// <param name="comparer">The comparer to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="CqlComparers"/> is used.</param>
         /// <param name="valueSets">The value set dictionary to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="HashValueSetDictionary"/> is used.</param>
         /// <param name="unitConverter">The unit converters to use, or <see langword="null" />.  When <see langword="null" />, a new <see cref="UnitConverter"/> is used.</param>
@@ -39,7 +40,7 @@ namespace Hl7.Cql.Runtime
         /// <returns></returns>
         public static CqlOperators Create(TypeResolver resolver,
             TypeConverter? converter = null,
-            IDataRetriever? dataRetriever = null,
+            IDataSource? dataSource = null,
             ICqlComparer? comparer = null,
             IValueSetDictionary? valueSets = null,
             IUnitConverter? unitConverter = null,
@@ -48,7 +49,7 @@ namespace Hl7.Cql.Runtime
         {
             var operators = new CqlOperators(resolver,
                 converter ?? TypeConverter.Create(),
-                dataRetriever ?? new CompositeDataRetriever(),
+                dataSource ?? new CompositeDataSource(),
                 comparer ?? new CqlComparers(),
                 valueSets ?? new HashValueSetDictionary(),
                 unitConverter ?? new UnitConverter(),
@@ -60,7 +61,7 @@ namespace Hl7.Cql.Runtime
         protected CqlOperators(
             TypeResolver typeResolver,
             TypeConverter typeConverter,
-            IDataRetriever dataRetriever,
+            IDataSource dataSource,
             ICqlComparer comparer,
             IValueSetDictionary valueSets,
             IUnitConverter unitConverter,
@@ -74,7 +75,7 @@ namespace Hl7.Cql.Runtime
             NowValue = new CqlDateTime(now);
             TypeResolver = typeResolver ?? throw new ArgumentNullException(nameof(typeResolver));
             TypeConverter = typeConverter ?? throw new ArgumentNullException(nameof(typeConverter));
-            DataRetriever = dataRetriever;
+            DataSource = dataSource;
             var bridge = new CqlComparerBridge<object>(this);
             IComparer = bridge;
             IEqualityComparer = bridge;
@@ -97,9 +98,9 @@ namespace Hl7.Cql.Runtime
         public TypeResolver TypeResolver { get; }
         public TypeConverter TypeConverter { get; }
         /// <summary>
-        /// Gets the implementation of <see cref="IDataRetriever"/> used to implement retrieve methods.
+        /// Gets the implementation of <see cref="IDataSource"/> used to implement retrieve methods.
         /// </summary>
-        public IDataRetriever DataRetriever { get; }
+        public IDataSource DataSource { get; }
         public CqlDateTime NowValue { get; }
 
         internal IEqualityComparer<object> IEqualityComparer { get; private set; }
@@ -190,10 +191,10 @@ namespace Hl7.Cql.Runtime
         public T Convert<T>(object? from) => TypeConverter.Convert<T>(from);
 
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class =>
-            DataRetriever.RetrieveByCodes<T>(codes, codeProperty);
+            DataSource.RetrieveByCodes<T>(codes, codeProperty);
 
         public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class =>
-            DataRetriever.RetrieveByValueSet<T>(valueSet, codeProperty);
+            DataSource.RetrieveByValueSet<T>(valueSet, codeProperty);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

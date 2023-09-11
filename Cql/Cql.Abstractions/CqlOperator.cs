@@ -8,7 +8,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
     /// <summary>
     /// Enumerates the operators in the CQL specification.

@@ -7,11 +7,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
@@ -31,12 +32,12 @@ namespace Hl7.Cql.Packaging
     {
         internal LibraryPackager()
         {
-            TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
         internal LibraryPackager(TypeConverter? typeConverter)
         {
-            TypeConverter = typeConverter ?? FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
@@ -112,8 +113,8 @@ namespace Hl7.Cql.Packaging
                 .Packages()
                 .ToArray();
 
-            var typeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-            var typeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
             var typeManager = new TypeManager(typeResolver);
             var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
@@ -153,7 +154,7 @@ namespace Hl7.Cql.Packaging
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger);
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger, new(false));
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
@@ -189,7 +190,7 @@ namespace Hl7.Cql.Packaging
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger);
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
@@ -348,7 +349,7 @@ namespace Hl7.Cql.Packaging
                                 ElementId = pop,
                                 Code = CodeableConcept((tuple.Population, Constants.MeasureGroupCodeSystem)),
                                 Description = Populations[tuple.Population],
-                                Criteria = new Fhir.Model.Expression
+                                Criteria = new Hl7.Fhir.Model.Expression
                                 {
                                     Language = "text/cql-identifier"!,
                                     ExpressionElement = new FhirString(def.name)
@@ -392,7 +393,7 @@ namespace Hl7.Cql.Packaging
                     ContentType = elm.Library.JsonMimeType,
                     Data = bytes,
                 };
-                var library = new Fhir.Model.Library();
+                var library = new Hl7.Fhir.Model.Library();
                 library.Content.Add(attachment);
                 library.Type = LogicLibraryCodeableConcept;
                 string libraryId = $"{elmLibrary!.NameAndVersion}";
@@ -487,11 +488,10 @@ namespace Hl7.Cql.Packaging
                 }
             }
         };
-        private static CqlContext CqlContext => FirelyCqlContext.Create();
+
+        private static CqlContext GetNewCqlContext() => FhirCqlContext.WithDataSource();
 
         internal TypeConverter TypeConverter { get; }
-
-        //new CqlContext(new CqlOperators(null));
 
         private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.ParameterDef elmParameter,
             CqlCrosswalk typeCrosswalk,
@@ -528,7 +528,7 @@ namespace Hl7.Cql.Packaging
                 {
                     var lambda = builder.Lambda(elmParameter.@default);
                     var func = lambda.Compile();
-                    var value = func.DynamicInvoke(CqlContext);
+                    var value = func.DynamicInvoke(GetNewCqlContext());
                     AddDefaultValueToExtensions(cqlTypeExtensions, value, typeEntry);
                 }
             }
@@ -652,7 +652,7 @@ namespace Hl7.Cql.Packaging
                     ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Quantity>(value);
                     break;
                 case FHIRAllTypes.Range:
-                    ext.Value = TypeConverter.Convert<Fhir.Model.Range>(value);
+                    ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Range>(value);
                     break;
                 case FHIRAllTypes.Ratio:
                     ext.Value = TypeConverter.Convert<Hl7.Fhir.Model.Ratio>(value);
@@ -701,7 +701,7 @@ namespace Hl7.Cql.Packaging
             {
                 parameterDefinition.Extension.Add(new Extension
                 {
-                    Value = new Fhir.Model.Code("private"),
+                    Value = new Hl7.Fhir.Model.Code("private"),
                     Url = Constants.ParameterAccessLevel,
                 });
             }

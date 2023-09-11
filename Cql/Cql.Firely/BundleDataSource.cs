@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -15,24 +16,24 @@ using System.Reflection;
 
 #nullable enable
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
     /// <summary>
-    /// A IDataRetriever that uses POCO Bundles as a source of information.
+    /// A <see cref="IDataSource"/> that uses POCO Bundles as a source of information.
     /// </summary>
     /// <remarks>A simple model that assumes the Bundles contain all the information about a
     /// patient, e.g. as the result of a $everything operation.</remarks>
-    internal class BundleDataRetriever : IDataRetriever
+    internal class BundleDataSource : IDataSource
     {
         /// <summary>
-        /// Construct a new IDataRetriever passing in the necessary terminology information
+        /// Construct a new source passing in the necessary terminology information
         /// </summary>
         /// <param name="bundle"></param>
         /// <param name="valueSets"></param>
         /// <param name="codeComparer"></param>
         /// <param name="systemComparer"></param>
         /// <exception cref="ArgumentNullException"></exception>
-        public BundleDataRetriever(Bundle bundle,
+        public BundleDataSource(Bundle bundle,
             IValueSetDictionary valueSets,
             ICqlComparer? codeComparer = null, ICqlComparer? systemComparer = null)
         {
@@ -50,6 +51,13 @@ namespace Hl7.Cql.Firely
 
         private readonly ICqlComparer _codeComparer;
         private readonly ICqlComparer _systemComparer;
+
+#if VNEXT
+        /// <inheritdoc/>
+        /// <remarks>Since it is not possible to monitor changes in a FHIR POCO, this source will not trigger when
+        /// external changes are made to the Bundle.</remarks>
+        public event EventHandler? DataChanged;
+#endif
 
         /// <inheritdoc/>
         public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? allowedCodes = null, PropertyInfo? codeProperty = null) where T : class

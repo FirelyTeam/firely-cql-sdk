@@ -11,7 +11,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using System.Text.Json;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
     internal static class StreamExtensions
     {
