@@ -8,6 +8,7 @@
 
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -381,8 +382,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 invocationsTransformer,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
-                new RenameVariablesVisitor(vng),
-                new LocalVariableDeduper()
+                new RenameVariablesVisitor(vng)
+            //    new LocalVariableDeduper()
             );
 
             // Skip CqlContext
@@ -523,6 +524,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 BlockExpression block => convertBlockExpression(indent, block),
                 InvocationExpression invocation => convertInvocationExpression(leadingIndentString, invocation),
                 CaseWhenThenExpression cwt => convertCaseWhenThenExpression(indent, cwt),
+                ElmAsExpression ea => ToCode(indent, ea.Reduce(), leadingIndent),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
             };
         }
@@ -972,13 +974,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (right is LambdaExpression le)
                     return convertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
-                string typeDeclaration = "var";
-                if (right is DefaultExpression ||
-                   (right is ConstantExpression ce && ce.Value == null))
-                {
-                    typeDeclaration = PrettyTypeName(left.Type);
-                }
                 var rightCode = ToCode(indent, right, false);
+                string typeDeclaration = "var";
+                if (rightCode == "null" || rightCode == "default")
+                    typeDeclaration = PrettyTypeName(left.Type);
                 var assignment = $"{leadingIndentString}{typeDeclaration} {paramName(parameter)} = {rightCode}";
                 return assignment;
             }
