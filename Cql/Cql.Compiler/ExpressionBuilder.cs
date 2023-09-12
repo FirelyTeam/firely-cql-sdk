@@ -152,7 +152,7 @@ namespace Hl7.Cql.Compiler
                     typeof(string),
                     typeof(string)
                 })!;
-                var codeSystemUrls = Library.codeSystems!
+                var codeSystemUrls = Library.codeSystems?
                     .ToDictionary(cs => cs.name, cs => cs.id) ?? new Dictionary<string, string>();
                 var codesByName = new Dictionary<string, CqlCode>();
                 var codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
