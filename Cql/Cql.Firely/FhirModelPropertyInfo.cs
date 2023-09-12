@@ -10,13 +10,13 @@ using Hl7.Fhir.Introspection;
 using System.Globalization;
 using System.Reflection;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
-    internal class PocoModelPropertyInfo : PropertyInfo
+    internal class FhirModelPropertyInfo : PropertyInfo
     {
         private readonly PropertyInfo propertyInfo;
 
-        public PocoModelPropertyInfo(PropertyInfo propertyInfo, PropertyMapping mapping)
+        public FhirModelPropertyInfo(PropertyInfo propertyInfo, PropertyMapping mapping)
         {
             this.propertyInfo = propertyInfo;
             Mapping = mapping;

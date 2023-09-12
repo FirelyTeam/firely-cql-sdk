@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Operators;
 using System;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace Hl7.Cql.Runtime
@@ -16,34 +15,17 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Contains information required to execute CQL.
     /// </summary>
-    public sealed class CqlContext
+    public class CqlContext
     {
         /// <summary>
         /// Contains all definitions required during execution.
         /// </summary>
-        public DefinitionDictionary<Delegate> Definitions { get; private set; }
+        public DefinitionDictionary<Delegate> Definitions { get; }
 
         /// <summary>
         /// Gets the implementation of <see cref="ICqlOperators"/> this execution uses.
         /// </summary>
-        public ICqlOperators Operators { get; private set; }
-
-        /// <summary>
-        /// Manages state of runtime extensions this execution uses.
-        /// </summary>
-        /// <remarks>
-        /// Runtime extensions can provide functionality like logging and timing by altering how the translation
-        /// between ELM and .NET expressions is done.  For implementations that need to hold state, they can use
-        /// keys in this dictionary to store any kind of state they need.
-        /// </remarks>
-        internal ConcurrentDictionary<string, object> Extensions { get; set; } = new ConcurrentDictionary<string, object>();
-
-#if WE_STILL_NEED_THE_STACK
-        /// <summary>
-        /// Stores information about the current execution state of this CqlContext.
-        /// </summary>
-        public Stack<CallStackEntry> CallStack { get; private set; }
-#endif
+        public ICqlOperators Operators { get; }
 
         /// <summary>
         /// Gets the values of library parameters for this execution.
@@ -54,7 +36,7 @@ namespace Hl7.Cql.Runtime
         /// To scope a parameter globally, omit the library name and version.  If two libraries define the same parameter name but use different types, runtime errors will occur.
         /// If the value provided for a given parameter name is the incorrect type, a runtime error will occur.
         /// </remarks>
-        public IDictionary<string, object> Parameters { get; private set; } = new Dictionary<string, object>();
+        public IDictionary<string, object> Parameters { get; }
 
         /// <summary>
         /// Creates an instance.
@@ -62,66 +44,37 @@ namespace Hl7.Cql.Runtime
         /// <param name="operators">The <see cref="ICqlOperators"/> implementation to use.</param>
         /// <param name="parameters">The input parameters, or <see langword="null"/>. </param>
         /// <param name="delegates">The delegates, or <see langword="null"/>.  If <see langword="null"/>, runtime errors will occur when CQL expressions attempt to reference other definitions.</param>
-        public CqlContext(ICqlOperators operators,
-            DefinitionDictionary<Delegate>? delegates = null,
-            IDictionary<string, object>? parameters = null) : this()
+        protected internal CqlContext(ICqlOperators operators,
+            IDictionary<string, object>? parameters = null,
+            DefinitionDictionary<Delegate>? delegates = null)
         {
             Operators = operators;
             Definitions = delegates ?? new DefinitionDictionary<Delegate>();
-            if (parameters != null)
-                Parameters = parameters;
+            Parameters = parameters ?? new Dictionary<string, object>();
         }
 
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         /// <summary>
-        /// Construct a new instance of a CqlContext with just the call stack initialized.
+        /// Notifies subscribers when a CQL Message has been dispatched.
         /// </summary>
-        internal CqlContext()
+        public event EventHandler<MessageEventArgs>? MessageReceived
         {
-#if WE_STILL_NEED_THE_STACK
-            CallStack = new Stack<CallStackEntry>();
-#endif
-        }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-
-#if WE_STILL_NEED_THE_STACK
-        /// <summary>
-        /// Deepclones the CqlContext.
-        /// </summary>        
-        internal CqlContext Clone()
-        {
-            var clone = new CqlContext();
-            PopulateClone(clone);
-            return clone;
+            add => Operators.MessageReceived += value;
+            remove => Operators.MessageReceived -= value;
         }
 
         /// <summary>
-        /// Copies the operators, extensions and parameters from a source CqlContext to a target CqlContext.
+        /// Notifies subscribers when a generic event is raised in the engine.
         /// </summary>
-        internal void PopulateClone(CqlContext clone)
-        {
-            clone.Operators = Operators;
-            clone.Extensions = Extensions;
-            clone.Parameters = Parameters;
-        }
+        public event EventHandler<ContextEventArgs>? ContextEvent;
 
         /// <summary>
-        /// Creates a clone of this context with a deeper call stack.
+        /// Raise the <see cref="ContextEvent"/> event.
         /// </summary>
-        /// <param name="callStack">The new call stack entry to add.</param>
-        /// <returns>A clone of this context with a deeper call stack.</returns>
-        /// TODO: Make this behavior optional in ExpressionBuilder
-        public CqlContext Deeper(CallStackEntry callStack)
+        public CqlContext RaiseContextEvent(ContextEventArgs eventData)
         {
-            var existingStack = CallStack ?? new Stack<CallStackEntry>();
-            var newStack = new Stack<CallStackEntry>(existingStack);
-            newStack.Push(callStack);
-
-            var clone = Clone();
-            clone.CallStack = newStack;
-            return clone;
+            ContextEvent?.Invoke(this, eventData);
+            return this;
         }
-#endif
 
         /// <summary>
         /// Defines the delimiter separating library names from parameter names.
@@ -145,24 +98,6 @@ namespace Hl7.Cql.Runtime
                 return Parameters[parameterName];
 
             return defaultValue;
-
-        }
-
-        /// <summary>
-        /// Gets the value of the extension in <see cref="Extensions"/> given key.
-        /// </summary>
-        /// <param name="key">The extension key.</param>
-        /// <param name="defaultValue">The default value to use if the extension isn't found.</param>
-        /// <returns>The value of the parameter or <paramref name="defaultValue"/> if not defined.</returns>
-        public object? ResolveExtension(string key, object? defaultValue)
-        {
-            if (!Extensions.TryGetValue(key, out var value))
-            {
-                Extensions[key] = defaultValue;
-                return defaultValue;
-            }
-
-            return value;
         }
     }
 }

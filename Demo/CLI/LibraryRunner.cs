@@ -1,7 +1,6 @@
-﻿using Hl7.Cql;
-using Hl7.Cql.Firely;
+﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.ValueSetLoaders;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
@@ -19,14 +18,10 @@ namespace CLI
 
         internal static void Run(string library, Bundle bundle, TextWriter output)
         {
-            var type = ResolveLibraryType(library);
-            if (type == null)
-            {
-                throw new ArgumentException($"Uknown library: {library}");
-            }
-            var context = FirelyCqlContext.ForBundle(bundle, MY2023, ValueSets.Value,
+            var type = ResolveLibraryType(library) ?? throw new ArgumentException($"Uknown library: {library}");
+            var setup = FhirCqlContext.ForBundle(bundle, MY2023, ValueSets.Value,
                 new DateTimeOffset(2023, 12, 31, 23, 59, 59, default));
-            var instance = Activator.CreateInstance(type, context);
+            var instance = Activator.CreateInstance(type, setup);
             var values = new Dictionary<string, object>();
             foreach (var method in type.GetMethods())
             {
@@ -82,7 +77,7 @@ namespace CLI
             return type;
         }
 
-        internal static Lazy<IValueSetDictionary> ValueSets => new Lazy<IValueSetDictionary>(() =>
+        internal static Lazy<IValueSetDictionary> ValueSets => new(() =>
         {
             var asm = typeof(LibraryRunner).Assembly;
             var names = asm.GetManifestResourceNames();

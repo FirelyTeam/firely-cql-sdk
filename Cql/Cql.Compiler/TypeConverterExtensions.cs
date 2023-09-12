@@ -11,7 +11,7 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using System;
 
-namespace Hl7.Cql.MeasureCompiler
+namespace Hl7.Cql.Compiler
 {
     internal static class TypeConverterExtensions
     {

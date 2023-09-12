@@ -1,22 +1,22 @@
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Elm;
 using System.IO;
-using Hl7.Cql;
 using Hl7.Cql.Model;
 using Hl7.Cql.Conversion;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
+using Hl7.Cql.Abstractions;
 
 namespace CoreTests
 {
     [TestClass]
     public class ExpressionBuilderTests
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        private static readonly TypeResolver TypeResolver = new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
         private ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
             .Create(logging => logging.AddDebug())

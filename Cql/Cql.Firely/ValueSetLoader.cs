@@ -11,7 +11,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 
-namespace Hl7.Cql.ValueSetLoaders
+namespace Hl7.Cql.Fhir
 {
     public static class ValueSetExtensions
     {

@@ -8,7 +8,7 @@
 
 using System;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
 
     /// <summary>

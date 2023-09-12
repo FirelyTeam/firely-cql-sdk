@@ -2,7 +2,7 @@
 
 #nullable enable
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
     internal class IndexedBundle
     {
@@ -10,7 +10,7 @@ namespace Hl7.Cql.Firely
         {
             Entries = entries;
 
-            foreach(var entry in entries)
+            foreach (var entry in entries)
             {
                 var type = entry.Resource.GetType();
                 while (type != typeof(object) && type != null)
