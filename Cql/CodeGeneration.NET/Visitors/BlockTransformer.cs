@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using AgileObjects.ReadableExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -91,27 +90,27 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         }
 
         // Not used currently.  Generates too many confusing locals
-        protected override Expression VisitConditional(ConditionalExpression node)
-        {
-            var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
-            var newNode = elvTransformer.Visit(node);
-            LabelTarget returnLabelTarget = Expression.Label(newNode.Type);
-            LabelExpression @return = Expression.Label(returnLabelTarget, newNode);
-            if (elvTransformer.LocalAssignments.Any())
-            {
-                foreach (var assignment in elvTransformer.LocalAssignments)
-                {
-                    var asString = assignment.ToReadableString();
-                }
+        //protected override Expression VisitConditional(ConditionalExpression node)
+        //{
+        //    var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
+        //    var newNode = elvTransformer.Visit(node);
+        //    LabelTarget returnLabelTarget = Expression.Label(newNode.Type);
+        //    LabelExpression @return = Expression.Label(returnLabelTarget, newNode);
+        //    if (elvTransformer.LocalAssignments.Any())
+        //    {
+        //        foreach (var assignment in elvTransformer.LocalAssignments)
+        //        {
+        //            var asString = assignment.ToReadableString();
+        //        }
 
-                var parameters = elvTransformer.LocalAssignments
-                    .Select(b => (ParameterExpression)b.Left);
-                var all = elvTransformer.LocalAssignments.Concat(new Expression[] { @return });
-                var newBlock = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
-                return newBlock;
-            }
-            else return Expression.Block(@return);
-        }
+        //        var parameters = elvTransformer.LocalAssignments
+        //            .Select(b => (ParameterExpression)b.Left);
+        //        var all = elvTransformer.LocalAssignments.Concat(new Expression[] { @return });
+        //        var newBlock = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
+        //        return newBlock;
+        //    }
+        //    else return Expression.Block(@return);
+        //}
 
         protected override Expression VisitMemberInit(MemberInitExpression node)
         {

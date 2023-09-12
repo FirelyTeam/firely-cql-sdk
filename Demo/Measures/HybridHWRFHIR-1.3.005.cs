@@ -366,21 +366,21 @@ public class HybridHWRFHIR_1_3_005
     {
         return ((CqlInterval<CqlDateTime>)context.ResolveParameter("HybridHWRFHIR-1.3.005", 
 			"Measurement Period", 
-(context?.Operators.Interval(context?.Operators.DateTime(((int?)2019), 
-((int?)1), 
-((int?)1), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
+			(context?.Operators.Interval(context?.Operators.DateTime(((int?)2019), 
+					((int?)1), 
+					((int?)1), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
 					context?.Operators.ConvertIntegerToDecimal(default)), 
 				context?.Operators.DateTime(((int?)2020), 
-((int?)1), 
-((int?)1), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
+					((int?)1), 
+					((int?)1), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
+					((int?)0), 
 					context?.Operators.ConvertIntegerToDecimal(default)), 
 				true, 
 				false) as object)));
@@ -454,7 +454,7 @@ public class HybridHWRFHIR_1_3_005
 																	System.ComponentModel.ListSortDirection.Ascending)))?.Period)) ?? context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period))), 
 												context?.Operators.Quantity(1m, 
 													"hour")), 
-(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
+											(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
 																		typeof(Encounter).GetProperty("Type")), 
 																	(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																				context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
@@ -632,7 +632,7 @@ public class HybridHWRFHIR_1_3_005
 													true), 
 												null)), 
 										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
-(new string[]
+											(new string[]
 											{
 												"final",
 												"amended",
@@ -660,7 +660,7 @@ public class HybridHWRFHIR_1_3_005
 													true), 
 												null)), 
 										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
-(new string[]
+											(new string[]
 											{
 												"final",
 												"amended",
@@ -711,7 +711,7 @@ public class HybridHWRFHIR_1_3_005
 													true), 
 												null)), 
 										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
-(new string[]
+											(new string[]
 											{
 												"final",
 												"amended",
@@ -739,7 +739,7 @@ public class HybridHWRFHIR_1_3_005
 													true), 
 												null)), 
 										context?.Operators.InList<string>(context?.Operators.Convert<string>((Exam?.StatusElement as object)), 
-(new string[]
+											(new string[]
 											{
 												"final",
 												"amended",
@@ -790,7 +790,7 @@ public class HybridHWRFHIR_1_3_005
 													true), 
 												null)), 
 										context?.Operators.InList<string>(context?.Operators.Convert<string>((Lab?.StatusElement as object)), 
-(new string[]
+											(new string[]
 											{
 												"final",
 												"amended",
@@ -818,7 +818,7 @@ public class HybridHWRFHIR_1_3_005
 													true), 
 												null)), 
 										context?.Operators.InList<string>(context?.Operators.Convert<string>((Lab?.StatusElement as object)), 
-(new string[]
+											(new string[]
 											{
 												"final",
 												"amended",
@@ -951,10 +951,10 @@ public class HybridHWRFHIR_1_3_005
         return context?.Operators.DateTime(a_, 
 			b_, 
 			c_, 
-((int?)0), 
-((int?)0), 
-((int?)0), 
-((int?)0), 
+			((int?)0), 
+			((int?)0), 
+			((int?)0), 
+			((int?)0), 
 			d_);
     }
 

@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using AgileObjects.ReadableExpressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Graph;
@@ -25,6 +24,15 @@ using System.Text;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
+    internal static class DebugViewHelper
+    {
+        public static string GetDebugView(this Expression exp)
+        {
+            var propertyInfo = typeof(Expression).GetProperty("DebugView", BindingFlags.Instance | BindingFlags.NonPublic)!;
+            return (string)propertyInfo.GetValue(exp)!;
+        }
+    }
+
     /// <summary>
     /// Writes <see cref="LambdaExpression"/>s as members of a .NET class.
     /// </summary>
@@ -356,18 +364,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             return sorted;
         }
 
-        private TranslationSettings Settings(TranslationSettings c) => Settings(c, 0);
+        //private TranslationSettings Settings(TranslationSettings c) => Settings(c, 0);
 
-        private TranslationSettings Settings(TranslationSettings c, int indent)
-        {
-            return c
-                .UseFullyQualifiedTypeNames
-                .TranslateConstantsUsing((type, @object) =>
-                {
-                    return WriteConstantValue(type, @object);
-                })
-                .IndentUsing(TextWriterExtensions.Indent);
-        }
+        //private TranslationSettings Settings(TranslationSettings c, int indent)
+        //{
+        //    return c
+        //        .UseFullyQualifiedTypeNames
+        //        .TranslateConstantsUsing((type, @object) =>
+        //        {
+        //            return WriteConstantValue(type, @object);
+        //        })
+        //        .IndentUsing(TextWriterExtensions.Indent);
+        //}
         private string DefinitionCacheKeyForMethod(string methodName)
         {
             if (methodName[0] == '@')
@@ -504,41 +512,46 @@ namespace Hl7.Cql.CodeGeneration.NET
             return indentLevel;
         }
 
-        private string WriteConstantValue(Type constantType, object value)
+        private string WriteConstantValue(Type constantType, object? value, string? identString = "")
         {
-            if (value == default)
+            return $"{identString}{formatValue(constantType, value)}";
+
+            string formatValue(Type constantType, object? value)
             {
-                if (constantType.IsValueType)
-                    return "default";
-                else return "null";
-            }
-            else
-            {
-                if (constantType.IsEnum)
-                    return $"{constantType.Namespace}.{constantType.Name}.{value}";
-                if (constantType == typeof(string))
-                    return $"\"{value!}\"";
-                else if (constantType == typeof(bool))
-                    return value.ToString()!.ToLowerInvariant();
-                else if (constantType == typeof(bool?))
-                    return value?.ToString()!.ToLowerInvariant() ?? "null";
-                else if (constantType == typeof(Uri))
-                    return $"new Uri(\"{value!}\")";
-                else if (constantType == typeof(decimal))
-                    return ((decimal)value).ToString(CultureInfo.InvariantCulture);
-                else if (constantType == typeof(decimal?))
+                if (value == default)
                 {
-                    var dv = (decimal?)value;
-                    return dv.HasValue ? dv.Value.ToString(CultureInfo.InvariantCulture) : "null";
+                    if (constantType.IsValueType)
+                        return "default";
+                    else return "null";
                 }
-                else if (typeof(Type).IsAssignableFrom(constantType))
-                    return $"typeof({PrettyTypeName((Type)value)})";
                 else
                 {
-                    var str = value.ToString()!;
-                    return str;
-                }
+                    if (constantType.IsEnum)
+                        return $"{constantType.Namespace}.{constantType.Name}.{value}";
+                    if (constantType == typeof(string))
+                        return $"\"{value!}\"";
+                    else if (constantType == typeof(bool))
+                        return value.ToString()!.ToLowerInvariant();
+                    else if (constantType == typeof(bool?))
+                        return value?.ToString()!.ToLowerInvariant() ?? "null";
+                    else if (constantType == typeof(Uri))
+                        return $"new Uri(\"{value!}\")";
+                    else if (constantType == typeof(decimal))
+                        return ((decimal)value).ToString(CultureInfo.InvariantCulture);
+                    else if (constantType == typeof(decimal?))
+                    {
+                        var dv = (decimal?)value;
+                        return dv.HasValue ? dv.Value.ToString(CultureInfo.InvariantCulture) : "null";
+                    }
+                    else if (typeof(Type).IsAssignableFrom(constantType))
+                        return $"typeof({PrettyTypeName((Type)value)})";
+                    else
+                    {
+                        var str = value.ToString()!;
+                        return str;
+                    }
 
+                }
             }
 
         }
@@ -708,6 +721,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                             var code = $"{leadingIndentString}typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
                             return code;
                         }
+                        else
+                            return $"{leadingIndentString}null";
                     }
                     else if (constant.Type == typeof(string))
                     {
@@ -718,7 +733,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         else
                             throw new InvalidOperationException("Constant claims to be a string, but its Value property is not one.");
                     }
-                    break;
+                    else
+                        return WriteConstantValue(constant.Type, constant.Value, leadingIndentString);
+
                 case NewExpression @new:
                     if (@new.Arguments.Count > 0)
                     {
@@ -752,7 +769,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             {
                                 var memberName = PrefixKeywords(memberAccess.Member.Name);
                                 var nullCoalesce = $"{@object}?.{memberName}";
-                                return nullCoalesce;
+                                return $"{leadingIndentString}{nullCoalesce}";
                             }
                             else throw new InvalidOperationException("Expected lambda argument with a member expression body");
                         }
@@ -785,7 +802,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             }
                         }
                     }
-                    else if (call.Arguments.Count > 0)
+                    else
                     {
                         var sb = new StringBuilder();
                         sb.Append(leadingIndentString);
@@ -798,12 +815,21 @@ namespace Hl7.Cql.CodeGeneration.NET
                         {
                             @object = $"{PrettyTypeName(call.Method.DeclaringType!)}.";
                         }
-                        var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
+
 #pragma warning disable CA1305 // Specify IFormatProvider
-                        sb.Append($"{@object}{PrettyMethodName(call.Method)}({firstArgument}");
+
+                        sb.Append($"{@object}{PrettyMethodName(call.Method)}(");
+
+                        if (call.Arguments.Count > 0)
+                        {
+                            var firstArgument = ToCode(indent + 1, call.Arguments[0], false);
+                            sb.Append(firstArgument);
+                        }
+
 #pragma warning restore CA1305 // Specify IFormatProvider
                         if (call.Arguments.Count > 1)
                         {
+
                             sb.AppendLine(", ");
                             for (int i = 1; i < call.Arguments.Count - 1; i++)
                             {
@@ -817,8 +843,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                         sb.Append(")");
                         return sb.ToString();
                     }
-                    else
-                        break;
                 case LambdaExpression lambda:
                     var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => p.Name))})";
                     var lambdaBody = ToCode(indent + 1, lambda.Body, lambda.Body is BlockExpression);
@@ -846,7 +870,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                     typeDeclaration = PrettyTypeName(binary.Left.Type);
                                 }
                                 var right = ToCode(indent, binary.Right, false);
-                                var assignment = $"{typeDeclaration} {parameter.Name} = {right};";
+                                var assignment = $"{leadingIndentString}{typeDeclaration} {parameter.Name} = {right};";
                                 return assignment;
                             }
                             else if (binary.NodeType == ExpressionType.Coalesce &&
@@ -867,7 +891,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             {
                                 var left = ToCode(indent, binary.Left, false);
                                 var right = ToCode(indent, binary.Right, false);
-                                var binaryString = $"({left} {@operator} {right})";
+                                var binaryString = $"{leadingIndentString}({left} {@operator} {right})";
                                 return binaryString;
                             }
                         }
@@ -912,7 +936,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                     else
                                     {
                                         var typeName = PrettyTypeName(unary.Type);
-                                        var code = $"(({typeName}){operand})";
+                                        var code = $"{leadingIndentString}(({typeName}){operand})";
                                         return code;
                                     }
                                 }
@@ -920,7 +944,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                 {
                                     var operand = ToCode(indent, unary.Operand, false);
                                     var typeName = PrettyTypeName(unary.Type);
-                                    var code = $"({operand} as {typeName})";
+                                    var code = $"{leadingIndentString}({operand} as {typeName})";
                                     return code;
                                 }
 
@@ -973,7 +997,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                             var @object = ToCode(0, me.Expression);
                             var memberName = PrefixKeywords(me.Member.Name);
                             var nullCoalesce = $"{@object}?.{memberName}";
-                            return nullCoalesce;
+                            return $"{leadingIndentString}{nullCoalesce}";
                         }
                         else
                         {
@@ -1018,7 +1042,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return @return;
                 case ConditionalExpression ce:
 #if DEBUG
-                    var original = $"{leadingIndentString}({expression.ToReadableString(Settings)})";
+                    //var original = $"{leadingIndentString}({expression.ToReadableString(Settings)})";
+                    var debug = expression.GetDebugView();
 #endif
                     var conditionalSb = new StringBuilder();
                     conditionalSb.Append("(");
@@ -1043,13 +1068,19 @@ namespace Hl7.Cql.CodeGeneration.NET
                         return @is;
                     }
                     break;
+                case ParameterExpression pe:
+                    return $"{leadingIndentString}{pe.Name!}";
+                case DefaultExpression de:
+                    {
+                        var isNullableType = !de.Type.IsValueType || Nullable.GetUnderlyingType(de.Type) is not null;
+                        var defaultExpression = isNullableType ? "null" : $"default({PrettyTypeName(de.Type)})";
+                        return $"{leadingIndentString}{defaultExpression}";
+                    }
                 default:
                     break;
             }
 
-            var defaultValue = $"{leadingIndentString}{expression.ToReadableString(Settings)}";
-            return defaultValue;
-
+            throw new NotImplementedException($"Do not know how to convert {expression.NodeType} or type {expression.GetType()}.");
         }
 
         private string? BinaryOperatorFor(ExpressionType nodeType)
