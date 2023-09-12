@@ -1,5 +1,5 @@
 ﻿using FluentAssertions;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
@@ -7,15 +7,15 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
 
-namespace CoreTests.Firely
+namespace CoreTests.Fhir
 {
     [TestClass]
-    public class DataRetrieverTests
+    public class DataSourceTests
     {
         [TestMethod]
         public void FiltersOnResourceType()
         {
-            var dr = buildRetriever();
+            var dr = buildDataSource();
 
             var results = dr.RetrieveByCodes<Patient>();
             results.Should().HaveCount(2);
@@ -25,7 +25,7 @@ namespace CoreTests.Firely
         [TestMethod]
         public void FiltersOnDefaultProp()
         {
-            var dr = buildRetriever();
+            var dr = buildDataSource();
 
             var results = dr.RetrieveByCodes<Observation>(new[] { new CqlCode("x", "http://nu.nl", null, null) });
             results.Should().HaveCount(1);
@@ -45,8 +45,8 @@ namespace CoreTests.Firely
         [TestMethod]
         public void FiltersOnSpecificProp()
         {
-            var dr = buildRetriever();
-            var model = new FirelyTypeResolver(ModelInfo.ModelInspector);
+            var dr = buildDataSource();
+            var model = new FhirTypeResolver(ModelInfo.ModelInspector);
             var genderProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient"), "gender");
             genderProp.Should().NotBeNull();
 
@@ -59,7 +59,7 @@ namespace CoreTests.Firely
                 dr.RetrieveByCodes<Patient>(new[] { new CqlCode("male", "http://hl7.org/fhir/administrative-gender", null, null) }, activeProp).ToList());
         }
 
-        private BundleDataRetriever buildRetriever()
+        private BundleDataSource buildDataSource()
         {
             var resources = new Resource[]
             {
@@ -72,7 +72,7 @@ namespace CoreTests.Firely
             var bundle = new Bundle();
             foreach (var r in resources) { bundle.AddResourceEntry(r, $"http://someresource/{r.GetHashCode()}"); }
 
-            return new BundleDataRetriever(bundle, new HashValueSetDictionary());  // we're not calling IsInValueSet, so we can pass an empty dict
+            return new BundleDataSource(bundle, new HashValueSetDictionary());  // we're not calling IsInValueSet, so we can pass an empty dict
         }
     }
 }

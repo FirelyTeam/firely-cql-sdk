@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.Firely;
-using Hl7.Fhir.Model;
+﻿using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 
 namespace CLI

@@ -3,7 +3,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using Hl7.Cql.Operators;
@@ -13,22 +13,22 @@ using Microsoft.Extensions.Logging;
 namespace Hl7.Cql.Logging
 {
     /// <summary>
-    /// An extension class for controlling logging on a <see cref="CqlContext"/>
+    /// An extension class for adding logging on a <see cref="CqlContext"/>
     /// </summary>
-    public static class CqlContextExtensions
+    public static class LoggingExtensions
     {
         /// <summary>
         /// Adds functionality to a context to direct log messages to the given logger.
         /// </summary>
-        public static CqlContext AddMessageLogging(this CqlContext context,
-            ILogger<CqlContext> logger)
+        public static CqlContext AddMessageLogging(this CqlContext ctx, ILogger logger)
         {
-            context.Operators.MessageReceived += (sender, args) =>
+            ctx.MessageReceived += (sender, args) =>
             {
                 var level = Level(args);
                 logger.Log(level, new EventId(default, args.Code), args.Message, args.Source);
             };
-            return context;
+
+            return ctx;
         }
 
         private static LogLevel Level(MessageEventArgs args) =>

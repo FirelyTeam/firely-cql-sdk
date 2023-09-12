@@ -1,11 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hl7.Cql.ValueSetLoaders;
+﻿using Hl7.Cql.Fhir;
+using Hl7.Fhir.Model;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using System.Linq;
-using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
-using Hl7.Cql.Firely;
 
 namespace CoreTests
 {
@@ -72,7 +70,7 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Intensional_Value_Set_Cycle() 
+        public void Intensional_Value_Set_Cycle()
         {
             var files = new[]
 {

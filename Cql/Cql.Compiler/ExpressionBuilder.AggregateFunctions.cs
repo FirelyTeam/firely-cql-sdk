@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
