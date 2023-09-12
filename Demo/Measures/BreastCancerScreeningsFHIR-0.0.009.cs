@@ -307,10 +307,10 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Online_Assessments();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var c_ = this.Telephone_Visits();
         var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         Func<Encounter,bool?> n_ = (TelehealthEncounter) => 
@@ -395,10 +395,10 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Status_Post_Right_Mastectomy();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
         var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> i_ = (UnilateralMastectomyDiagnosis) => 
         {
             var e_ = (UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>);
@@ -436,7 +436,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Unilateral_Mastectomy_Right();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> m_ = (UnilateralMastectomyRightPerformed) => 
         {
             var d_ = (UnilateralMastectomyRightPerformed?.StatusElement as object);
@@ -465,10 +465,10 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Status_Post_Left_Mastectomy();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
         var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> i_ = (UnilateralMastectomyDiagnosis) => 
         {
             var e_ = (UnilateralMastectomyDiagnosis?.BodySite as IEnumerable<CodeableConcept>);
@@ -506,7 +506,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Unilateral_Mastectomy_Left();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> m_ = (UnilateralMastectomyLeftPerformed) => 
         {
             var d_ = (UnilateralMastectomyLeftPerformed?.StatusElement as object);
@@ -535,7 +535,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.History_of_bilateral_mastectomy();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> g_ = (BilateralMastectomyHistory) => 
         {
             var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(BilateralMastectomyHistory);
@@ -556,7 +556,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Bilateral_Mastectomy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> m_ = (BilateralMastectomyPerformed) => 
         {
             var d_ = (BilateralMastectomyPerformed?.StatusElement as object);
@@ -638,7 +638,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Mammography();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> z_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
@@ -690,7 +690,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Mammography();
         var b_ = context?.Operators.RetrieveByValueSet<DiagnosticReport>(a_, 
-			typeof(DiagnosticReport).GetProperty("Code"));
+			null);
         Func<DiagnosticReport,bool?> z_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
@@ -769,7 +769,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Mammography();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> aa_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);
@@ -822,7 +822,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
     {
         var a_ = this.Mammography();
         var b_ = context?.Operators.RetrieveByValueSet<DiagnosticReport>(a_, 
-			typeof(DiagnosticReport).GetProperty("Code"));
+			null);
         Func<DiagnosticReport,bool?> aa_ = (Mammogram) => 
         {
             var c_ = (Mammogram?.StatusElement as object);

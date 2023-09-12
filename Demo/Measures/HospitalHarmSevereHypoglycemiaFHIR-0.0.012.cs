@@ -241,7 +241,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     {
         var a_ = this.Encounter_Inpatient();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         Func<Encounter,bool?> l_ = (EncounterInpatient) => 
         {
             var d_ = (EncounterInpatient?.StatusElement as object);
@@ -291,7 +291,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
     {
         var a_ = this.Hypoglycemics_Severe_Hypoglycemia();
         var b_ = context?.Operators.RetrieveByValueSet<MedicationAdministration>(a_, 
-			typeof(MedicationAdministration).GetProperty("Medication"));
+			null);
         var e_ = context?.Operators.ListUnion<MedicationAdministration>(b_, 
 			b_);
         Func<MedicationAdministration,bool?> o_ = (HypoMedication) => 
@@ -363,7 +363,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
         {
             var b_ = this.Glucose_lab_test();
             var c_ = context?.Operators.RetrieveByValueSet<Observation>(b_, 
-				typeof(Observation).GetProperty("Code"));
+				null);
             Func<Observation,IEnumerable<Observation>> ap_ = (BloodGlucoseLab) => 
             {
                 var d_ = this.Hypoglycemic_Medication_Administration();
@@ -476,7 +476,7 @@ public class HospitalHarmSevereHypoglycemiaFHIR_0_0_012
             {
                 var ch_ = this.Glucose_lab_test();
                 var ci_ = context?.Operators.RetrieveByValueSet<Observation>(ch_, 
-					typeof(Observation).GetProperty("Code"));
+					null);
                 Func<Observation,bool?> dw_ = (FollowupBloodGlucoseLab) => 
                 {
                     var cj_ = (FollowupBloodGlucoseLab?.Effective as object);

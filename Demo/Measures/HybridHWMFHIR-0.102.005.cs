@@ -398,12 +398,12 @@ public class HybridHWMFHIR_0_102_005
     {
         var a_ = this.Encounter_Inpatient();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         Func<Encounter,IEnumerable<Coverage>> d_ = (_InpatientEncounter) => 
         {
             var c_ = this.Medicare_payer();
             return context?.Operators.RetrieveByValueSet<Coverage>(c_, 
-				typeof(Coverage).GetProperty("Type"));
+				null);
         };
         Func<Encounter,Coverage,Tuples.Tuple_CZdRYXLJAeJaPSIRaUHDXVHPV> g_ = (_InpatientEncounter, _Payer) => 
         {
@@ -637,54 +637,54 @@ public class HybridHWMFHIR_0_102_005
         var c_ = this.Heart_rate();
         var d_ = context?.Operators.ToList<CqlCode>(c_);
         var e_ = context?.Operators.RetrieveByCodes<Observation>(d_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var b_ = this.FirstPhysicalExamWithEncounterId(e_, 
 			"FirstHeartRate");
         var g_ = this.Systolic_blood_pressure();
         var h_ = context?.Operators.ToList<CqlCode>(g_);
         var i_ = context?.Operators.RetrieveByCodes<Observation>(h_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var f_ = this.FirstPhysicalExamWithEncounterId(i_, 
 			"FirstSystolicBP");
         var k_ = this.Body_temperature();
         var l_ = context?.Operators.RetrieveByValueSet<Observation>(k_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var j_ = this.FirstPhysicalExamWithEncounterId(l_, 
 			"FirstTemperature");
         var n_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry();
         var o_ = context?.Operators.ToList<CqlCode>(n_);
         var p_ = context?.Operators.RetrieveByCodes<Observation>(o_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var m_ = this.FirstPhysicalExamWithEncounterId(p_, 
 			"FirstO2Saturation");
         var r_ = this.Hematocrit_lab_test();
         var s_ = context?.Operators.RetrieveByValueSet<Observation>(r_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var q_ = this.FirstLabTestWithEncounterId(s_, 
 			"FirstHematocrit");
         var u_ = this.Platelet_count_lab_test();
         var v_ = context?.Operators.RetrieveByValueSet<Observation>(u_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var t_ = this.FirstLabTestWithEncounterId(v_, 
 			"FirstPlateletCount");
         var x_ = this.White_blood_cells_count_lab_test();
         var y_ = context?.Operators.RetrieveByValueSet<Observation>(x_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var w_ = this.FirstLabTestWithEncounterId(y_, 
 			"FirstWhiteBloodCell");
         var aa_ = this.Sodium_lab_test();
         var ab_ = context?.Operators.RetrieveByValueSet<Observation>(aa_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var z_ = this.FirstLabTestWithEncounterId(ab_, 
 			"FirstSodium");
         var ad_ = this.Bicarbonate_lab_test();
         var ae_ = context?.Operators.RetrieveByValueSet<Observation>(ad_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var ac_ = this.FirstLabTestWithEncounterId(ae_, 
 			"FirstBicarbonate");
         var ag_ = this.Creatinine_lab_test();
         var ah_ = context?.Operators.RetrieveByValueSet<Observation>(ag_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         var af_ = this.FirstLabTestWithEncounterId(ah_, 
 			"FirstCreatinine");
         var a_ = (new IEnumerable<string>[]
@@ -756,10 +756,10 @@ public class HybridHWMFHIR_0_102_005
         Func<Encounter,CqlInterval<CqlDateTime>> m_ = (Visit) => 
         {
             var d_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Emergency_Department_Visit(), 
-								typeof(Encounter).GetProperty("Type")), 
+								null), 
 							(LastED) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastED?.Period)), 
 										context?.Operators.Interval(context?.Operators.Subtract((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																			typeof(Encounter).GetProperty("Type")), 
+																			null), 
 																		(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																					context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																							context?.Operators.Quantity(1m, 
@@ -774,7 +774,7 @@ public class HybridHWMFHIR_0_102_005
 												context?.Operators.Quantity(1m, 
 													"hour")), 
 											(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																		typeof(Encounter).GetProperty("Type")), 
+																		null), 
 																	(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																				context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																						context?.Operators.Quantity(1m, 
@@ -790,7 +790,7 @@ public class HybridHWMFHIR_0_102_005
 											true), 
 										null), 
 									context?.Operators.Not(((bool?)((context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval((context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-																	typeof(Encounter).GetProperty("Type")), 
+																	null), 
 																(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 																			context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 																					context?.Operators.Quantity(1m, 
@@ -806,7 +806,7 @@ public class HybridHWMFHIR_0_102_005
 						System.ComponentModel.ListSortDirection.Ascending)))?.Period;
             var e_ = FHIRHelpers_4_0_001.ToInterval(d_);
             var f_ = (context?.Operators.LastOfList<Encounter>(context?.Operators.ListSortBy<Encounter>(context?.Operators.WhereOrNull<Encounter>(context?.Operators.RetrieveByValueSet<Encounter>(this.Observation_Services(), 
-								typeof(Encounter).GetProperty("Type")), 
+								null), 
 							(LastObs) => context?.Operators.And(context?.Operators.ElementInInterval<CqlDateTime>(context?.Operators.End(FHIRHelpers_4_0_001.ToInterval(LastObs?.Period)), 
 										context?.Operators.Interval(context?.Operators.Subtract(context?.Operators.Start(FHIRHelpers_4_0_001.ToInterval(Visit?.Period)), 
 												context?.Operators.Quantity(1m, 

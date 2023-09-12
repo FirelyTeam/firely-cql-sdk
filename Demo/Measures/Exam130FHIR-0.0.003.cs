@@ -588,10 +588,10 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Online_Assessments();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var c_ = this.Telephone_Visits();
         var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         Func<Encounter,bool?> n_ = (TelehealthEncounter) => 
@@ -669,7 +669,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Malignant_Neoplasm_of_Colon();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> g_ = (ColorectalCancer) => 
         {
             var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ColorectalCancer);
@@ -690,7 +690,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Total_Colectomy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> m_ = (Colectomy) => 
         {
             var d_ = (Colectomy?.StatusElement as object);
@@ -719,7 +719,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Total_Colectomy_ICD9();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> g_ = (ColectomyDx) => 
         {
             var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ColectomyDx);
@@ -781,7 +781,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> l_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.Effective as object);
@@ -883,7 +883,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ai_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
@@ -965,7 +965,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ai_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
@@ -1047,7 +1047,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ab_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.Category as IEnumerable<CodeableConcept>);
@@ -1115,7 +1115,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Fecal_Occult_Blood_Test__FOBT_();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> r_ = (FecalOccult) => 
         {
             var c_ = (FecalOccult?.StatusElement as object);
@@ -1155,7 +1155,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.FIT_DNA();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> p_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.Effective as object);
@@ -1260,7 +1260,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.FIT_DNA();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> as_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
@@ -1355,7 +1355,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.FIT_DNA();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> as_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
@@ -1450,7 +1450,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.FIT_DNA();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> al_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.Category as IEnumerable<CodeableConcept>);
@@ -1531,7 +1531,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.FIT_DNA();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> ab_ = (FitDNA) => 
         {
             var c_ = (FitDNA?.StatusElement as object);
@@ -1584,7 +1584,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.CT_Colonography();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> q_ = (Colonography) => 
         {
             var c_ = (Colonography?.Effective as object);
@@ -1625,7 +1625,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.CT_Colonography();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> z_ = (Colonography) => 
         {
             var c_ = (Colonography?.StatusElement as object);
@@ -1676,7 +1676,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.CT_Colonography();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> aa_ = (Colonography) => 
         {
             var c_ = (Colonography?.StatusElement as object);
@@ -1728,7 +1728,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Flexible_Sigmoidoscopy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> q_ = (FlexibleSigmoidoscopy) => 
         {
             var c_ = (FlexibleSigmoidoscopy?.Performed as object);
@@ -1769,7 +1769,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Flexible_Sigmoidoscopy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> v_ = (FlexibleSigmoidoscopy) => 
         {
             var d_ = (FlexibleSigmoidoscopy?.StatusElement as object);
@@ -1810,7 +1810,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Flexible_Sigmoidoscopy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> w_ = (FlexibleSigmoidoscopy) => 
         {
             var d_ = (FlexibleSigmoidoscopy?.StatusElement as object);
@@ -1852,7 +1852,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Colonoscopy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> q_ = (Colonoscopy) => 
         {
             var c_ = (Colonoscopy?.Performed as object);
@@ -1893,7 +1893,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Colonoscopy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> v_ = (Colonoscopy) => 
         {
             var d_ = (Colonoscopy?.StatusElement as object);
@@ -1934,7 +1934,7 @@ public class Exam130FHIR_0_0_003
     {
         var a_ = this.Colonoscopy();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> w_ = (Colonoscopy) => 
         {
             var d_ = (Colonoscopy?.StatusElement as object);

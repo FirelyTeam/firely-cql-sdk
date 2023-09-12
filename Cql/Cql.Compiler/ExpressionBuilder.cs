@@ -9,6 +9,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -2045,30 +2046,44 @@ namespace Hl7.Cql.Compiler
             return selectManyLambda;
         }
 
+        // Yeah, hardwired to FHIR 4.0.1 for now.
+        private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
+
         protected Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
         {
             Type? sourceElementType;
+            string? cqlRetrieveResultType;
+
             // SingletonFrom does not have this specified; in this case use DataType instead
             if (retrieve.resultTypeSpecifier == null)
             {
                 if (string.IsNullOrWhiteSpace(retrieve.dataType.Name))
                     throw new ArgumentException("If a Retrieve lacks a ResultTypeSpecifier it must have a DataType", nameof(retrieve));
-                var dataType = retrieve.dataType;
-                sourceElementType = TypeResolver.ResolveType(dataType.Name);
+                cqlRetrieveResultType = retrieve.dataType.Name;
+
+                sourceElementType = TypeResolver.ResolveType(cqlRetrieveResultType);
             }
             else
             {
                 if (retrieve.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
                 {
+                    cqlRetrieveResultType = listTypeSpecifier.elementType is elm.NamedTypeSpecifier nts ? nts.name.Name : null;
                     sourceElementType = TypeManager.TypeFor(listTypeSpecifier.elementType, ctx);
                 }
                 else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.");
             }
 
             Expression? codeProperty;
-            if (sourceElementType != null && retrieve.codeProperty != null)
+
+            var hasCodePropertySpecified = sourceElementType != null && retrieve.codeProperty != null;
+            var isDefaultCodeProperty = retrieve.codeProperty is null ||
+                (cqlRetrieveResultType is not null &&
+                 modelMapping.TryGetValue(cqlRetrieveResultType, out ClassInfo? classInfo) &&
+                 classInfo.primaryCodePath == retrieve.codeProperty);
+
+            if (hasCodePropertySpecified && !isDefaultCodeProperty)
             {
-                var codePropertyInfo = TypeResolver.GetProperty(sourceElementType!, retrieve.codeProperty);
+                var codePropertyInfo = TypeResolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
                 codeProperty = Expression.Constant(codePropertyInfo, typeof(PropertyInfo));
             }
             else

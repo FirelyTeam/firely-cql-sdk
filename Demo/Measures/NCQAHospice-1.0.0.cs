@@ -92,7 +92,7 @@ public class NCQAHospice_1_0_0
     {
         var a_ = this.Hospice_Intervention();
         var b_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
         Func<Procedure,bool?> g_ = (HospiceInt) => 
         {
@@ -108,7 +108,7 @@ public class NCQAHospice_1_0_0
         var i_ = context?.Operators.ExistsInList<Procedure>(h_);
         var j_ = this.Hospice_Encounter();
         var k_ = context?.Operators.RetrieveByValueSet<Encounter>(j_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var l_ = NCQAStatus_1_0_0.Finished_Encounter(k_);
         Func<Encounter,bool?> p_ = (HospiceEnc) => 
         {

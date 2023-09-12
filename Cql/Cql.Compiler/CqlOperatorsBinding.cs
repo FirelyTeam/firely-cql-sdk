@@ -1064,6 +1064,15 @@ namespace Hl7.Cql.Compiler
                     && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
+                    if (cpe.Value is PropertyInfo pi)
+                    {
+                        var declaringType = pi!.DeclaringType;
+                        var propName = pi.Name;
+                        var method = typeof(Type).GetMethod(nameof(Type.GetProperty), new[] { typeof(string) })!;
+                        var typeOf = Expression.Constant(declaringType);
+                        codePropertyExpression = Expression.Call(typeOf, method, Expression.Constant(propName));
+                    }
+
                     return Retrieve(operators, type, valueSetOrCodes, codePropertyExpression);
                 }
                 else throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));

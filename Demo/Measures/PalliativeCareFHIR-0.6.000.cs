@@ -149,7 +149,7 @@ public class PalliativeCareFHIR_0_6_000
         var a_ = this.Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_();
         var b_ = context?.Operators.ToList<CqlCode>(a_);
         var c_ = context?.Operators.RetrieveByCodes<Observation>(b_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> v_ = (PalliativeAssessment) => 
         {
             var d_ = (PalliativeAssessment?.StatusElement as object);
@@ -192,7 +192,7 @@ public class PalliativeCareFHIR_0_6_000
         var x_ = context?.Operators.ExistsInList<Observation>(w_);
         var y_ = this.Palliative_Care_Encounter();
         var z_ = context?.Operators.RetrieveByValueSet<Encounter>(y_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         Func<Encounter,bool?> ai_ = (PalliativeEncounter) => 
         {
             var ab_ = (PalliativeEncounter?.StatusElement as object);
@@ -216,7 +216,7 @@ public class PalliativeCareFHIR_0_6_000
 			ak_);
         var am_ = this.Palliative_Care_Intervention();
         var an_ = context?.Operators.RetrieveByValueSet<Procedure>(am_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         Func<Procedure,bool?> ay_ = (PalliativeIntervention) => 
         {
             var ao_ = (PalliativeIntervention?.StatusElement as object);

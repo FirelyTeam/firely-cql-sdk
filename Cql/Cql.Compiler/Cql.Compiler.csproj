@@ -16,6 +16,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />

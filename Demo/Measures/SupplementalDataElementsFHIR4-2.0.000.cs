@@ -150,7 +150,7 @@ public class SupplementalDataElementsFHIR4_2_0_000
     {
         var a_ = this.Payer();
         var b_ = context?.Operators.RetrieveByValueSet<Coverage>(a_, 
-			typeof(Coverage).GetProperty("Type"));
+			null);
         Func<Coverage,Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> e_ = (Payer) => 
         {
             var c_ = Payer?.Type;

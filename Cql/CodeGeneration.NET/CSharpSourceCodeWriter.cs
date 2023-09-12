@@ -712,18 +712,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                             return code;
                         }
                     }
-                    else if (constant.Type == typeof(PropertyInfo))
-                    {
-                        if (constant.Value != null && constant.Value is PropertyInfo propertyInfo)
-                        {
-                            var declaringType = PrettyTypeName(propertyInfo.DeclaringType ??
-                                throw new InvalidOperationException($"PropertyInfo.DeclaringType is null"));
-                            var code = $"{leadingIndentString}typeof({declaringType}).GetProperty(\"{propertyInfo.Name}\")";
-                            return code;
-                        }
-                        else
-                            return $"{leadingIndentString}null";
-                    }
                     else if (constant.Type == typeof(string))
                     {
                         if (constant.Value == null)

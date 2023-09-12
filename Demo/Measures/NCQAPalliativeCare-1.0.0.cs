@@ -109,7 +109,7 @@ public class NCQAPalliativeCare_1_0_0
     {
         var a_ = this.Palliative_Care_Assessment();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> q_ = (PalliativeAssessment) => 
         {
             var c_ = (PalliativeAssessment?.Effective as object);
@@ -139,7 +139,7 @@ public class NCQAPalliativeCare_1_0_0
         var s_ = context?.Operators.ExistsInList<Observation>(r_);
         var t_ = this.Palliative_Care_Encounter();
         var u_ = context?.Operators.RetrieveByValueSet<Encounter>(t_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var v_ = NCQAStatus_1_0_0.Finished_Encounter(u_);
         Func<Encounter,bool?> ak_ = (PalliativeEncounter) => 
         {
@@ -172,7 +172,7 @@ public class NCQAPalliativeCare_1_0_0
 			am_);
         var ao_ = this.Palliative_Care_Intervention();
         var ap_ = context?.Operators.RetrieveByValueSet<Procedure>(ao_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var aq_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(ap_);
         Func<Procedure,bool?> bf_ = (PalliativeIntervention) => 
         {
@@ -206,7 +206,7 @@ public class NCQAPalliativeCare_1_0_0
         var bj_ = this.Encounter_for_palliative_care();
         var bk_ = context?.Operators.ToList<CqlCode>(bj_);
         var bl_ = context?.Operators.RetrieveByCodes<Condition>(bk_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var bm_ = NCQAStatus_1_0_0.Active_Condition(bl_);
         Func<Condition,bool?> bz_ = (PalliativeDiagnosis) => 
         {

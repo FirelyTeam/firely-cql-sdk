@@ -573,25 +573,25 @@ public class FHIR347_0_1_021
     {
         var b_ = this.Myocardial_Infarction();
         var c_ = context?.Operators.RetrieveByValueSet<Condition>(b_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var d_ = this.Cerebrovascular_Disease__Stroke__TIA();
         var e_ = context?.Operators.RetrieveByValueSet<Condition>(d_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var f_ = context?.Operators.ListUnion<Condition>(c_, 
 			e_);
         var g_ = this.Atherosclerosis_and_Peripheral_Arterial_Disease();
         var h_ = context?.Operators.RetrieveByValueSet<Condition>(g_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var i_ = this.Ischemic_Heart_Disease_or_Other_Related_Diagnoses();
         var j_ = context?.Operators.RetrieveByValueSet<Condition>(i_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var k_ = context?.Operators.ListUnion<Condition>(h_, 
 			j_);
         var l_ = context?.Operators.ListUnion<Condition>(f_, 
 			k_);
         var m_ = this.Stable_and_Unstable_Angina();
         var n_ = context?.Operators.RetrieveByValueSet<Condition>(m_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var o_ = context?.Operators.ListUnion<Condition>(l_, 
 			n_);
         Func<Condition,bool?> t_ = (ASCVDDiagnosis) => 
@@ -608,18 +608,18 @@ public class FHIR347_0_1_021
 			t_) as IEnumerable<object>);
         var v_ = this.PCI();
         var w_ = context?.Operators.RetrieveByValueSet<Procedure>(v_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var x_ = this.CABG_Surgeries();
         var y_ = context?.Operators.RetrieveByValueSet<Procedure>(x_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var z_ = context?.Operators.ListUnion<Procedure>(w_, 
 			y_);
         var aa_ = this.Carotid_Intervention();
         var ab_ = context?.Operators.RetrieveByValueSet<Procedure>(aa_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var ac_ = this.CABG__PCI_Procedure();
         var ad_ = context?.Operators.RetrieveByValueSet<Procedure>(ac_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var ae_ = context?.Operators.ListUnion<Procedure>(ab_, 
 			ad_);
         var af_ = context?.Operators.ListUnion<Procedure>(z_, 
@@ -654,38 +654,38 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Annual_Wellness_Visit();
         var b_ = context?.Operators.RetrieveByValueSet<Encounter>(a_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var c_ = this.Office_Visit();
         var d_ = context?.Operators.RetrieveByValueSet<Encounter>(c_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var e_ = context?.Operators.ListUnion<Encounter>(b_, 
 			d_);
         var f_ = this.Outpatient_Consultation();
         var g_ = context?.Operators.RetrieveByValueSet<Encounter>(f_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var h_ = this.Outpatient_Encounters_for_Preventive_Care();
         var i_ = context?.Operators.RetrieveByValueSet<Encounter>(h_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var j_ = context?.Operators.ListUnion<Encounter>(g_, 
 			i_);
         var k_ = context?.Operators.ListUnion<Encounter>(e_, 
 			j_);
         var l_ = this.Preventive_Care_Services___Established_Office_Visit__18_and_Up();
         var m_ = context?.Operators.RetrieveByValueSet<Encounter>(l_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var n_ = this.Preventive_Care_Services___Other();
         var o_ = context?.Operators.RetrieveByValueSet<Encounter>(n_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var p_ = context?.Operators.ListUnion<Encounter>(m_, 
 			o_);
         var q_ = context?.Operators.ListUnion<Encounter>(k_, 
 			p_);
         var r_ = this.Preventive_Care_Services_Individual_Counseling();
         var s_ = context?.Operators.RetrieveByValueSet<Encounter>(r_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var t_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
         var u_ = context?.Operators.RetrieveByValueSet<Encounter>(t_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         var v_ = context?.Operators.ListUnion<Encounter>(s_, 
 			u_);
         var w_ = context?.Operators.ListUnion<Encounter>(q_, 
@@ -751,7 +751,7 @@ public class FHIR347_0_1_021
     {
         var a_ = this.LDL_Cholesterol();
         var b_ = context?.Operators.RetrieveByValueSet<Observation>(a_, 
-			typeof(Observation).GetProperty("Code"));
+			null);
         Func<Observation,bool?> v_ = (LDL) => 
         {
             var d_ = ((LDL?.Value as object) as Quantity);
@@ -798,7 +798,7 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Hypercholesterolemia();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> g_ = (Hypercholesterolemia) => 
         {
             var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Hypercholesterolemia);
@@ -856,7 +856,7 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Diabetes();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> e_ = (Diabetes) => 
         {
             var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(Diabetes);
@@ -960,7 +960,7 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Statin_Allergen();
         var b_ = context?.Operators.RetrieveByValueSet<AllergyIntolerance>(a_, 
-			typeof(AllergyIntolerance).GetProperty("Code"));
+			null);
         Func<AllergyIntolerance,bool?> h_ = (StatinAllergy) => 
         {
             var d_ = (StatinAllergy?.Onset as object);
@@ -983,10 +983,10 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Hospice_Care_Ambulatory();
         var b_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(a_, 
-			typeof(ServiceRequest).GetProperty("Code"));
+			null);
         var c_ = this.Palliative_or_Hospice_Care();
         var d_ = context?.Operators.RetrieveByValueSet<ServiceRequest>(c_, 
-			typeof(ServiceRequest).GetProperty("Code"));
+			null);
         var e_ = context?.Operators.ListUnion<ServiceRequest>(b_, 
 			d_);
         Func<ServiceRequest,bool?> w_ = (PalliativeOrHospiceCareOrder) => 
@@ -1025,9 +1025,9 @@ public class FHIR347_0_1_021
 			w_);
         var y_ = context?.Operators.ExistsInList<ServiceRequest>(x_);
         var aa_ = context?.Operators.RetrieveByValueSet<Procedure>(a_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var ac_ = context?.Operators.RetrieveByValueSet<Procedure>(c_, 
-			typeof(Procedure).GetProperty("Code"));
+			null);
         var ad_ = context?.Operators.ListUnion<Procedure>(aa_, 
 			ac_);
         Func<Procedure,bool?> ao_ = (PalliativeOrHospiceCarePerformed) => 
@@ -1056,7 +1056,7 @@ public class FHIR347_0_1_021
         var as_ = this.Encounter_for_palliative_care();
         var at_ = context?.Operators.ToList<CqlCode>(as_);
         var au_ = context?.Operators.RetrieveByCodes<Encounter>(at_, 
-			typeof(Encounter).GetProperty("Type"));
+			null);
         Func<Encounter,bool?> bf_ = (PalliativeEncounter) => 
         {
             var av_ = PalliativeEncounter?.Period;
@@ -1088,15 +1088,15 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Hepatitis_A();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var c_ = this.Hepatitis_B();
         var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var e_ = context?.Operators.ListUnion<Condition>(b_, 
 			d_);
         var f_ = this.Liver_Disease();
         var g_ = context?.Operators.RetrieveByValueSet<Condition>(f_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var h_ = context?.Operators.ListUnion<Condition>(e_, 
 			g_);
         Func<Condition,bool?> k_ = (HepatitisLiverDisease) => 
@@ -1118,7 +1118,7 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Statin_Associated_Muscle_Symptoms();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> g_ = (StatinMuscleSymptom) => 
         {
             var d_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(StatinMuscleSymptom);
@@ -1140,7 +1140,7 @@ public class FHIR347_0_1_021
     {
         var a_ = this.End_Stage_Renal_Disease();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         Func<Condition,bool?> e_ = (ESRD) => 
         {
             var c_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ESRD);
@@ -1160,7 +1160,7 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Statin_Allergen();
         var b_ = context?.Operators.RetrieveByValueSet<AdverseEvent>(a_, 
-			typeof(AdverseEvent).GetProperty("Event"));
+			null);
         Func<AdverseEvent,bool?> f_ = (StatinReaction) => 
         {
             var c_ = StatinReaction?.DateElement;
@@ -1203,15 +1203,15 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Pregnancy_or_Other_Related_Diagnoses();
         var b_ = context?.Operators.RetrieveByValueSet<Condition>(a_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var c_ = this.Breastfeeding();
         var d_ = context?.Operators.RetrieveByValueSet<Condition>(c_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var e_ = context?.Operators.ListUnion<Condition>(b_, 
 			d_);
         var f_ = this.Rhabdomyolysis();
         var g_ = context?.Operators.RetrieveByValueSet<Condition>(f_, 
-			typeof(Condition).GetProperty("Code"));
+			null);
         var h_ = context?.Operators.ListUnion<Condition>(e_, 
 			g_);
         Func<Condition,bool?> k_ = (ExclusionDiagnosis) => 
@@ -1233,19 +1233,19 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Low_Intensity_Statin_Therapy();
         var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
 			b_);
         var f_ = this.Moderate_Intensity_Statin_Therapy();
         var g_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
 			g_);
         var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
 			j_);
         var l_ = this.High_Intensity_Statin_Therapy();
         var m_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
 			m_);
         var q_ = context?.Operators.ListUnion<MedicationRequest>(k_, 
@@ -1289,19 +1289,19 @@ public class FHIR347_0_1_021
     {
         var a_ = this.Low_Intensity_Statin_Therapy();
         var b_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(a_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         var e_ = context?.Operators.ListUnion<MedicationRequest>(b_, 
 			b_);
         var f_ = this.Moderate_Intensity_Statin_Therapy();
         var g_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(f_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         var j_ = context?.Operators.ListUnion<MedicationRequest>(g_, 
 			g_);
         var k_ = context?.Operators.ListUnion<MedicationRequest>(e_, 
 			j_);
         var l_ = this.High_Intensity_Statin_Therapy();
         var m_ = context?.Operators.RetrieveByValueSet<MedicationRequest>(l_, 
-			typeof(MedicationRequest).GetProperty("Medication"));
+			null);
         var p_ = context?.Operators.ListUnion<MedicationRequest>(m_, 
 			m_);
         var q_ = context?.Operators.ListUnion<MedicationRequest>(k_, 
