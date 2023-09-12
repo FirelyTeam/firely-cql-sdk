@@ -1,18 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.Compiler.Expressions
 {
-    internal class ElmAsExpression: Expression
+    internal class ElmAsExpression : Expression
     {
-        public ElmAsExpression(Expression expression, Type result)
+        public ElmAsExpression(Expression expression, Type asType)
         {
             Expression = expression;
-            AsType = result;
+            AsType = asType;
         }
 
         public override bool CanReduce => true;
@@ -30,7 +26,11 @@ namespace Hl7.Cql.Compiler.Expressions
                 return TypeAs(Expression, AsType);
         }
         protected override Expression VisitChildren(ExpressionVisitor visitor) =>
-            new ElmAsExpression(visitor.Visit(Expression), Type);
-     
+            Update(visitor.Visit(Expression));
+
+        public Expression Update(Expression expression) =>
+            expression != Expression
+                ? new ElmAsExpression(expression, AsType)
+                : this;
     }
 }
