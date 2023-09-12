@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Configuration;
@@ -8,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Serilog;
 using System.Text.Json;
 
-namespace Hl7.Cql.Packaging.CLI
+namespace Hl7.Cql.Packager
 {
     public static class Program
     {
@@ -107,8 +108,8 @@ namespace Hl7.Cql.Packaging.CLI
 
             var packagerLogger = logFactory.CreateLogger<LibraryPackager>();
             var packages = LibraryPackager.LoadLibraries(elmDir);
-            var graph = Hl7.Cql.Elm.Library.GetIncludedLibraries(packages.Values);
-            var typeResolver = new FirelyTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+            var graph = Elm.Library.GetIncludedLibraries(packages.Values);
+            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
             var cliLogger = logFactory.CreateLogger("CLI");
 
             var packager = new LibraryPackager();
@@ -116,7 +117,7 @@ namespace Hl7.Cql.Packaging.CLI
                 cqlDir,
                 graph,
                 typeResolver,
-                new CqlOperatorsBinding(typeResolver, FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector)),
+                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
                 CanonicalUri,
                 logFactory);
@@ -207,9 +208,9 @@ namespace Hl7.Cql.Packaging.CLI
             Console.WriteLine();
             Console.WriteLine($"\t--elm <directory>\tLibrary root path");
             Console.WriteLine($"\t--cql <directory>\tCQL root path");
-            Console.WriteLine($"\t--fhir <file>\tResource location, either file name or directory");
+            Console.WriteLine($"\t[--fhir] <file>\tResource location, either file name or directory");
             Console.WriteLine($"\t[--cs] <file>\tC# output location, either file name or directory");
-            Console.WriteLine($"\t[--d] true|false\t\tProduce as a debug assmebly");
+            Console.WriteLine($"\t[--d] true|false\t\tProduce as a debug assembly");
             Console.WriteLine($"\t[--f] true|false\tIf output file already exists, overwrite");
             Console.WriteLine();
             return -1;

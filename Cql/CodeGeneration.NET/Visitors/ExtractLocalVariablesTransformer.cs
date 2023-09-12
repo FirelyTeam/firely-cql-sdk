@@ -3,7 +3,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using Hl7.Cql.Runtime;
@@ -127,25 +127,32 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
         protected override Expression VisitNewArray(NewArrayExpression node)
         {
+            // replaces
+            //    var x = new T[] { exprA, exprB, exprC }};
+            // with
+            //    var p = exprA;
+            //    var q = exprB;
+            //    var r = exprC;
+            //    var x = new T[] { p,q,r };
+
             if (node.NodeType == ExpressionType.NewArrayInit)
             {
-                var newExpressions = new Expression[node.Expressions.Count];
-                for (int i = 0; i < node.Expressions.Count; i++)
-                {
-                    var expression = node.Expressions[i];
-                    var vn = NameGenerator.Next();
-                    var newLocal = Expression.Parameter(expression.Type, vn);
-                    var visitedExpression = Visit(expression);
-                    var localAssignment = Expression.Assign(newLocal, visitedExpression);
-                    Locals.Add(localAssignment);
-                    newExpressions[i] = newLocal;
-                }
-                var elementType = node.Type.GetElementType()
-                    ?? throw new InvalidOperationException($"Unable to determine array element type for {node.Type.FullName}");
-                var newInit = Expression.NewArrayInit(elementType, newExpressions);
-                return newInit;
+                var newLocalVariables = node.Expressions.Select(makeLocalAssignment);
+                var elementType = node.Type.GetElementType()!;
+                return Expression.NewArrayInit(elementType, newLocalVariables);
             }
-            else return node;
+            else
+                return node;
+
+            ParameterExpression makeLocalAssignment(Expression valueExpr)
+            {
+                var vn = NameGenerator.Next();
+                var newLocal = Expression.Parameter(valueExpr.Type, vn);
+                var visitedExpression = Visit(valueExpr);
+                var assignment = Expression.Assign(newLocal, visitedExpression);
+                Locals.Add(assignment);  // note: side-effect on Locals
+                return newLocal;
+            }
         }
 
 

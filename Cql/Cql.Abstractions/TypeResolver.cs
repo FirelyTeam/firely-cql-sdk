@@ -3,7 +3,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using System;
@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
     /// <summary>
     /// Resolves the .NET type for the given ELM type specifier.
@@ -122,7 +122,7 @@ namespace Hl7.Cql
         /// </summary>
         /// <remarks>
         /// This is typically used in conjunction with <see cref="GetListElementType(Type, bool)"/>, where
-        /// <paramref name="genericInterfaceTypeDefinition"/> is <see cref="System.Collections.Generic.IEnumerable{T}"/>.
+        /// <paramref name="genericInterfaceTypeDefinition"/> is <see cref="IEnumerable{T}"/>.
         /// </remarks>
         /// <param name="type">The type to check.</param>
         /// <param name="genericInterfaceTypeDefinition">The generic type definition.</param>
@@ -172,8 +172,8 @@ namespace Hl7.Cql
         /// </summary>
         /// <remarks>
         /// The base implementation aliases the FHIR Range type to whatever type
-        /// <see cref="TypeResolver.ResolveType(string)"/> returns when passed "{http://hl7.org/fhir}"
-        /// to avoid conflicts with <see cref="System.Range"/>.
+        /// <see cref="ResolveType(string)"/> returns when passed "{http://hl7.org/fhir}"
+        /// to avoid conflicts with <see cref="Range"/>.
         /// </remarks>
         public virtual IEnumerable<(string alias, string type)> Aliases =>
             Enumerable.Empty<(string alias, string type)>();

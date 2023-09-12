@@ -4,15 +4,15 @@
 
 	<PropertyGroup>
 		<AssemblyName>HL7.Cql.Abstractions</AssemblyName>
-		<RootNamespace>HL7.Cql.Abstractions</RootNamespace>
+		<RootNamespace>Hl7.Cql.Abstractions</RootNamespace>
 		<Product>CQL</Product>
-		<Description>Contains shared interfaces and abstraction for CQL</Description>
+		<Description>Support package for Hl7.Cql. Contains shared interfaces and abstractions for CQL.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Iso8601\Iso8601.csproj" />
-		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Model" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />

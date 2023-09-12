@@ -5,8 +5,8 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.ValueSets</AssemblyName>
 		<RootNamespace>Hl7.Cql.ValueSets</RootNamespace>
-		<Product>Assembly for working with CQL terminologies.</Product>
-		<Description>Assembly for working with CQL terminologies.</Description>
+		<Product>Terminology support for the CQL engine</Product>
+		<Description>Support package for Hl7.Cql. Assembly for working with CQL terminologies.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -22,7 +22,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />

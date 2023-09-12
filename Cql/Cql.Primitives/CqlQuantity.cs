@@ -3,9 +3,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using System.Globalization;
 
 namespace Hl7.Cql.Primitives
@@ -29,29 +30,18 @@ namespace Hl7.Cql.Primitives
         public CqlQuantity(decimal? value, string? unit)
         {
             this.value = value;
-            this.unit = unit;
+            this.unit = unit != null && Units.CqlUnitsToUCUM.TryGetValue(unit, out var ucumUnits) ? ucumUnits : unit;
         }
 
         /// <summary>
         /// The value of this quantity.
         /// </summary>
-        public decimal? value { get; set; }
+        public decimal? value { get; }
+
         /// <summary>
         /// The UCUM units of this quantity.
         /// </summary>
-        public string? unit
-        {
-            get => _unit;
-            set
-            {
-                if (value != null && Units.CqlUnitsToUCUM.TryGetValue(value, out var ucumUnits))
-                {
-                    _unit = ucumUnits;
-                }
-                else _unit = value;
-            }
-        }
-        private string? _unit;
+        public string? unit { get; }
 
         /// <summary>
         /// Gets a string representation of this quantity.

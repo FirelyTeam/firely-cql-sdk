@@ -4,10 +4,12 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -24,11 +26,15 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler
 {
+    internal record ExpressionBuilderOptions(bool EmitStackTraces);
+
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
     internal partial class ExpressionBuilder
     {
+        private readonly ExpressionBuilderOptions options;
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
@@ -36,20 +42,22 @@ namespace Hl7.Cql.Compiler
         /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="elm"/>.</param>
         /// <param name="elm">The <see cref="Library"/> this builder will build.</param>
         /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="Build"/>.</param>
+        /// <param name="options">Optional features for the codegenerator.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         /// <exception cref="ArgumentException">If the <paramref name="elm"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(OperatorBinding operatorBinding,
             TypeManager typeManager,
             Library elm,
-            ILogger<ExpressionBuilder> logger)
+            ILogger<ExpressionBuilder> logger,
+            ExpressionBuilderOptions? options = null)
         {
             OperatorBinding = operatorBinding;
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
             Library = elm ?? throw new ArgumentNullException(nameof(elm));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
+            this.options = options ?? new(EmitStackTraces: false);
             if (Library.identifier == null)
                 throw new ArgumentException("Package is missing a library identifier", nameof(elm));
-
         }
 
         /// <summary>
@@ -1675,6 +1683,29 @@ namespace Hl7.Cql.Compiler
                     denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
                 return @new;
             }
+            else if (instanceType == typeof(CqlQuantity))
+            {
+                Expression? valueExpr = null;
+                Expression? unitExpr = null;
+
+                foreach (var tuple in tuples)
+                {
+                    if (tuple.Item1 == "value")
+                        valueExpr = tuple.Item2;
+                    else if (tuple.Item1 == "unit")
+                        unitExpr = tuple.Item2;
+                    else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
+                }
+                var ctor = typeof(CqlQuantity).GetConstructor(new[] { typeof(decimal?), typeof(string) })!;
+
+                if (unitExpr is not null)
+                    unitExpr = ChangeType(unitExpr, typeof(string), ctx);
+
+                var @new = Expression.New(ctor,
+                    valueExpr ?? Expression.Default(typeof(decimal?)),
+                    unitExpr ?? Expression.Default(typeof(string)));
+                return @new;
+            }
             else if (instanceType == typeof(CqlCode))
             {
                 Expression? codeExpr = null;
@@ -2105,30 +2136,44 @@ namespace Hl7.Cql.Compiler
             return selectManyLambda;
         }
 
+        // Yeah, hardwired to FHIR 4.0.1 for now.
+        private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
+
         protected Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
         {
             Type? sourceElementType;
+            string? cqlRetrieveResultType;
+
             // SingletonFrom does not have this specified; in this case use DataType instead
             if (retrieve.resultTypeSpecifier == null)
             {
                 if (string.IsNullOrWhiteSpace(retrieve.dataType.Name))
                     throw new ArgumentException("If a Retrieve lacks a ResultTypeSpecifier it must have a DataType", nameof(retrieve));
-                var dataType = retrieve.dataType;
-                sourceElementType = TypeResolver.ResolveType(dataType.Name);
+                cqlRetrieveResultType = retrieve.dataType.Name;
+
+                sourceElementType = TypeResolver.ResolveType(cqlRetrieveResultType);
             }
             else
             {
                 if (retrieve.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
                 {
+                    cqlRetrieveResultType = listTypeSpecifier.elementType is elm.NamedTypeSpecifier nts ? nts.name.Name : null;
                     sourceElementType = TypeManager.TypeFor(listTypeSpecifier.elementType, ctx);
                 }
                 else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.");
             }
 
             Expression? codeProperty;
-            if (sourceElementType != null && retrieve.codeProperty != null)
+
+            var hasCodePropertySpecified = sourceElementType != null && retrieve.codeProperty != null;
+            var isDefaultCodeProperty = retrieve.codeProperty is null ||
+                (cqlRetrieveResultType is not null &&
+                 modelMapping.TryGetValue(cqlRetrieveResultType, out ClassInfo? classInfo) &&
+                 classInfo.primaryCodePath == retrieve.codeProperty);
+
+            if (hasCodePropertySpecified && !isDefaultCodeProperty)
             {
-                var codePropertyInfo = TypeResolver.GetProperty(sourceElementType!, retrieve.codeProperty);
+                var codePropertyInfo = TypeResolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
                 codeProperty = Expression.Constant(codePropertyInfo, typeof(PropertyInfo));
             }
             else
@@ -2296,15 +2341,7 @@ namespace Hl7.Cql.Compiler
                 .ToArray();
 
             var funcType = GetFuncType(funcTypeParameters);
-#if WE_STILL_NEED_THE_STACK
-            var callStackCtor = typeof(CallStackEntry).GetConstructor(new[] { typeof(string), typeof(string), typeof(string) })!;
-            var newCallStack = Expression.New(callStackCtor,
-                Expression.Constant(op.name, typeof(string)),
-                Expression.Constant(op.locator, typeof(string)),
-                Expression.Constant(op.localId, typeof(string)));
 
-            var deeper = Expression.Call(ctx.RuntimeContextParameter, typeof(CqlContext).GetMethod(nameof(CqlContext.Deeper), BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)!, newCallStack);
-#endif
             // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
             // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
             // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
@@ -2318,11 +2355,8 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
-#if WE_STILL_NEED_THE_STACK
-                        var bind = OperatorBinding.Bind(CqlOperator.Convert, deeper,
-#else
                         var bind = OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter,
-#endif
+
                             new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                         return bind;
                     }
@@ -2330,16 +2364,7 @@ namespace Hl7.Cql.Compiler
             }
             // all functions still take the bundle and context parameters, plus whatver the operands
             // to the actual function are.
-            operands = new[]
-            {
-#if WE_STILL_NEED_THE_STACK
-                 deeper
-#else
-                    ctx.RuntimeContextParameter
-#endif
-            }
-            .Concat(operands)
-            .ToArray();
+            operands = operands.Prepend(ctx.RuntimeContextParameter).ToArray();
 
             var invoke = InvokeDefinedFunctionThroughRuntimeContext(op.name!, op.libraryName!, funcType, operands, ctx);
             return invoke;

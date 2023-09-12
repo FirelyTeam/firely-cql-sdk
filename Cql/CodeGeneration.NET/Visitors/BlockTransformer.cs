@@ -3,10 +3,9 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using AgileObjects.ReadableExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -35,27 +34,13 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             UseLazyBools = useLazyBools;
         }
 
-        public override Expression? Visit(Expression? node)
-        {
-            if (node == null)
-                return node;
-            switch (node.NodeType)
+        public override Expression? Visit(Expression? node) =>
+            node switch
             {
-                case ExpressionType.Call:
-                case ExpressionType.NewArrayInit:
-                case ExpressionType.MemberInit:
-                case ExpressionType.Lambda:
-                    return base.Visit(node);
-                default:
-                    return node;
-            }
-        }
-
-        protected override Expression VisitMethodCall(MethodCallExpression node)
-        {
-            return ToBlock(node);
-
-        }
+                { NodeType: ExpressionType.Call or ExpressionType.NewArrayInit or ExpressionType.MemberInit } =>
+                            ToBlock(node),
+                _ => node,
+            };
 
         private Expression ToBlock(Expression node)
         {
@@ -91,44 +76,27 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
         }
 
         // Not used currently.  Generates too many confusing locals
-        protected override Expression VisitConditional(ConditionalExpression node)
-        {
-            var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
-            var newNode = elvTransformer.Visit(node);
-            LabelTarget returnLabelTarget = Expression.Label(newNode.Type);
-            LabelExpression @return = Expression.Label(returnLabelTarget, newNode);
-            if (elvTransformer.LocalAssignments.Any())
-            {
-                foreach (var assignment in elvTransformer.LocalAssignments)
-                {
-                    var asString = assignment.ToReadableString();
-                }
+        //protected override Expression VisitConditional(ConditionalExpression node)
+        //{
+        //    var elvTransformer = new ExtractLocalVariablesTransformer(NameGenerator);
+        //    var newNode = elvTransformer.Visit(node);
+        //    LabelTarget returnLabelTarget = Expression.Label(newNode.Type);
+        //    LabelExpression @return = Expression.Label(returnLabelTarget, newNode);
+        //    if (elvTransformer.LocalAssignments.Any())
+        //    {
+        //        foreach (var assignment in elvTransformer.LocalAssignments)
+        //        {
+        //            var asString = assignment.ToReadableString();
+        //        }
 
-                var parameters = elvTransformer.LocalAssignments
-                    .Select(b => (ParameterExpression)b.Left);
-                var all = elvTransformer.LocalAssignments.Concat(new Expression[] { @return });
-                var newBlock = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
-                return newBlock;
-            }
-            else return Expression.Block(@return);
-        }
+        //        var parameters = elvTransformer.LocalAssignments
+        //            .Select(b => (ParameterExpression)b.Left);
+        //        var all = elvTransformer.LocalAssignments.Concat(new Expression[] { @return });
+        //        var newBlock = DeclareLocals ? Expression.Block(parameters, all) : Expression.Block(all);
+        //        return newBlock;
+        //    }
+        //    else return Expression.Block(@return);
+        //}
 
-        protected override Expression VisitMemberInit(MemberInitExpression node)
-        {
-            return ToBlock(node);
-        }
-
-        protected override Expression VisitNewArray(NewArrayExpression node)
-        {
-            return ToBlock(node);
-        }
-
-        protected override Expression VisitLambda<T>(Expression<T> node)
-        {
-            var newBody = Visit(node.Body) ??
-                throw new InvalidOperationException("Visit returned null");
-            var newLambda = Expression.Lambda(newBody, node.Parameters);
-            return newLambda;
-        }
     }
 }

@@ -3,10 +3,9 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using AgileObjects.ReadableExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,7 +67,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             while (replacementsFound)
             {
-                foreach (var likeVariables in variableExpressions.GroupBy(expr => expr.Right.ToReadableString()))
+                foreach (var likeVariables in variableExpressions.GroupBy(expr => expr.Right.GetDebugView()))
                 {
                     if (likeVariables.Count() > 1)
                     {
@@ -125,18 +124,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 }
             }
             return newBody;
-        }
-
-        protected override Expression VisitLambda<T>(Expression<T> node)
-        {
-            if (node is LambdaExpression lambda)
-            {
-                var newLambdaBody = Visit(lambda.Body)
-                    ?? throw new InvalidOperationException("Visit returned null");
-                var newLambda = Expression.Lambda(newLambdaBody, lambda.Parameters);
-                return newLambda;
-            }
-            return base.VisitLambda(node);
         }
     }
 }

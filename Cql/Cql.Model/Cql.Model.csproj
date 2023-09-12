@@ -6,19 +6,14 @@
 		<AssemblyName>Hl7.Cql.Model</AssemblyName>
 		<RootNamespace>Hl7.Cql.Model</RootNamespace>
 		<Product>CQL engine runtime model binding</Product>
-		<Description>Incorporates CQL model information into the runtime</Description>
+		<Description>Support package for Hl7.Cql. Incorporates CQL model information into the runtime.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Models\elm-modelinfo-r1.xml" />
 	  <None Remove="Models\fhir-modelinfo-4.0.1.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Models\elm-modelinfo-r1.xml">
-			<LogicalName>ElmR1</LogicalName>
-
-		</EmbeddedResource>
 	  <EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
 	    <LogicalName>Fhir401</LogicalName>
 	  </EmbeddedResource>
@@ -28,7 +23,7 @@
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" />
+		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

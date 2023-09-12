@@ -4,9 +4,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
@@ -667,19 +668,19 @@ namespace Hl7.Cql.Runtime
                 if (interval.low!.Precision == interval.high!.Precision)
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
                 }
                 else if (interval.low.Precision < interval.high.Precision)
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
 
                     setHighPrecisionToPer = true;
                 }
                 else
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.high.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
 
                     setLowPrecisionToPer = true;
                 }
@@ -793,19 +794,19 @@ namespace Hl7.Cql.Runtime
                 if (interval.low!.Precision == interval.high!.Precision)
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
                 }
                 else if (interval.low.Precision < interval.high.Precision)
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
 
                     setHighPrecisionToPer = true;
                 }
                 else
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.high.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
 
                     setLowPrecisionToPer = true;
                 }
@@ -968,19 +969,19 @@ namespace Hl7.Cql.Runtime
                 if (interval.low!.Precision == interval.high!.Precision)
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
                 }
                 else if (interval.low.Precision < interval.high.Precision)
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.low.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
 
                     setHighPrecisionToPer = true;
                 }
                 else
                 {
                     Units.CqlUnitsToUCUM.TryGetValue(interval.high.Precision.ToString(), out var ucmunits);
-                    per = new CqlQuantity { unit = ucmunits, value = 1 };
+                    per = new CqlQuantity(1, ucmunits);
 
                     setLowPrecisionToPer = true;
                 }
@@ -1102,7 +1103,7 @@ namespace Hl7.Cql.Runtime
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
             if (per == null)
-                per = new CqlQuantity { unit = "1", value = 1 };
+                per = new CqlQuantity(1, "1");
             else
             {
                 Units.UCUMUnitsToCql.TryGetValue(per.unit ?? "", out var ucumUnits);
@@ -1138,7 +1139,7 @@ namespace Hl7.Cql.Runtime
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
             if (per == null)
-                per = new CqlQuantity { unit = "1", value = 1 };
+                per = new CqlQuantity(1, "1");
             else
             {
                 Units.UCUMUnitsToCql.TryGetValue(per.unit ?? "", out var ucumUnits);
@@ -1176,7 +1177,7 @@ namespace Hl7.Cql.Runtime
 
             // If the per argument is null, a per value will be constructed based on the coarsest precision of the boundaries of the intervals in the input set.
             if (per == null)
-                per = new CqlQuantity { unit = "1", value = 1 };
+                per = new CqlQuantity(1, "1");
             else
             {
                 Units.UCUMUnitsToCql.TryGetValue(per.unit ?? "", out var ucumUnits);

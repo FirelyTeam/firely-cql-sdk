@@ -6,13 +6,14 @@
 		<AssemblyName>Hl7.Cql.Comparers</AssemblyName>
 		<RootNamespace>Hl7.Cql.Comparers</RootNamespace>
 		<Product>CQL comparers</Product>
-		<Description>Contains CQL comparers</Description>
+		<Description>Support package for Hl7.Cql. Contains CQL comparers.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />

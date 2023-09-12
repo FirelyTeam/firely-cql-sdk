@@ -4,9 +4,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -1065,6 +1066,15 @@ namespace Hl7.Cql.Compiler
                     && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
+                    if (cpe.Value is PropertyInfo pi)
+                    {
+                        var declaringType = pi!.DeclaringType;
+                        var propName = pi.Name;
+                        var method = typeof(Type).GetMethod(nameof(Type.GetProperty), new[] { typeof(string) })!;
+                        var typeOf = Expression.Constant(declaringType);
+                        codePropertyExpression = Expression.Call(typeOf, method, Expression.Constant(propName));
+                    }
+
                     return Retrieve(operators, type, valueSetOrCodes, codePropertyExpression);
                 }
                 else throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));

@@ -4,14 +4,14 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 
-namespace Hl7.Cql.ValueSetLoaders
+namespace Hl7.Cql.Fhir
 {
     public static class ValueSetExtensions
     {
@@ -21,7 +21,7 @@ namespace Hl7.Cql.ValueSetLoaders
                 new ValueSetLoader(values, activeOnly, onInvalidValueSet).Load();
     }
 
-    internal class ValueSetLoader : IValueSetLoader
+    internal class ValueSetLoader
     {
 
         public ValueSetLoader(IEnumerable<ValueSet> valuesets,
@@ -43,7 +43,7 @@ namespace Hl7.Cql.ValueSetLoaders
             Load(vsd);
             return vsd;
         }
-        public void Load(IValueSetDictionary dictionary)
+        public void Load(HashValueSetDictionary dictionary)
         {
             foreach (var vs in ValueSets)
             {
@@ -51,7 +51,7 @@ namespace Hl7.Cql.ValueSetLoaders
             }
         }
 
-        private void Load(IValueSetDictionary dictionary, ValueSet vs, params string[] soFar)
+        private void Load(HashValueSetDictionary dictionary, ValueSet vs, params string[] soFar)
         {
             if ((ActiveOnly && vs.Status != PublicationStatus.Active) || string.IsNullOrWhiteSpace(vs.Url))
             {
