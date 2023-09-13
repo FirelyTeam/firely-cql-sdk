@@ -443,6 +443,8 @@ namespace Hl7.Cql.Compiler
                     return SortBy(operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Aggregate:
                     return Aggregate(operators, parameters[0], parameters[1], parameters[2]);
+                case CqlOperator.Implies:
+                    return BindBinaryOperator(nameof(ICqlOperators.Implies), operators, parameters[0], parameters[1]);
                 default:
                     break;
             }

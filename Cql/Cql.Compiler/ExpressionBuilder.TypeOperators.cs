@@ -75,17 +75,35 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Is(elm.Is @is, ExpressionBuilderContext ctx)
         {
-
-            string? typeName = null;
-            if (@is.isTypeSpecifier?.resultTypeName != null)
-                typeName = @is.isTypeSpecifier!.resultTypeName.Name!;
-            else if (@is.isType != null)
-                typeName = @is.isType.Name;
-            if (string.IsNullOrWhiteSpace(typeName))
-                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
-            var type = TypeResolver.ResolveType(typeName)
-                ?? throw new InvalidOperationException($"Could not resolve type {typeName}");
             var op = TranslateExpression(@is.operand!, ctx);
+            Type? type = null;
+            if (@is.isTypeSpecifier != null) 
+            {
+                if (@is.isTypeSpecifier is elm.ChoiceTypeSpecifier choice)
+                {
+                    var firstChoiceType = TypeManager.TypeFor(choice.choice[0], ctx)
+                            ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+                    Expression result = Expression.TypeIs(op, firstChoiceType);
+                    for (int i = 1; i < choice.choice.Length; i++)
+                    {
+                        var cti = TypeManager.TypeFor(choice.choice[i], ctx)
+                            ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+                        var ie = Expression.TypeIs(op, cti);
+                        result = Expression.Or(result, ie);
+                    }
+                    var ta = Expression.TypeAs(result, typeof(bool?));
+                    return ta;
+                }
+                type = TypeManager.TypeFor(@is.isTypeSpecifier, ctx)
+                    ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+            }
+            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name)) 
+            {
+                type = TypeResolver.ResolveType(@is.isType.Name)
+                    ?? throw new InvalidOperationException($"Could not resolve type {@is.isType.Name}");
+            }
+            if (type == null)
+                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
             var isExpression = Expression.TypeIs(op, type);
             var nullable = Expression.TypeAs(isExpression, typeof(bool?));
             return nullable;
@@ -181,7 +199,7 @@ namespace Hl7.Cql.Compiler
         protected Expression ToLong(elm.ToLong e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            return ChangeType(operand, typeof(decimal?), ctx);
+            return ChangeType(operand, typeof(long?), ctx);
         }
 
         protected Expression? ToInteger(elm.ToInteger e, ExpressionBuilderContext ctx)

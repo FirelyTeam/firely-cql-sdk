@@ -251,6 +251,7 @@ namespace Hl7.Cql.Compiler
             Builder.Logger.LogError(FormatMessage(message, element));
         }
 
+
         internal string FormatMessage(string message, elm.Element? element)
         {
             var locator = element?.locator;
