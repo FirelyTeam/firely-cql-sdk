@@ -82,7 +82,13 @@ namespace Hl7.Cql.Comparers
             if (y == null)
                 throw new ArgumentNullException(nameof(y));
 
-            return x.value == y.value && x.unit == y.unit;
+            var unitCompare = UnitComparer.Equivalent(x.unit!, y.unit!, precision);
+            if (unitCompare || x.unit == "1" || y.unit == "1")
+            {
+                var valueComparison = ValueComparer.Equivalent(x.value!, y.value!, precision);
+                return valueComparison;
+            }
+            else return false;
         }
 
         /// <inheritdoc />
