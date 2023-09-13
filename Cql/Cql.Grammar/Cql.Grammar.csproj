@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Hl7.Cql.CqlToElm.Grammar</AssemblyName>
+		<RootNamespace>Hl7.Cql.CqlToElm.Grammar</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.11.1" />
+		<PackageReference Include="Antlr4BuildTasks" Version="12.2.0" PrivateAssets="all" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Antlr4 Include="cql.g4">
+			<Visitor>true</Visitor>
+			<Package>Hl7.Cql.CqlToElm.Grammar</Package>
+		</Antlr4>
+	</ItemGroup>
+
+</Project>

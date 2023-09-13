@@ -1612,7 +1612,7 @@ namespace Hl7.Cql.Compiler
         {
             if (!string.IsNullOrWhiteSpace(cr.name))
             {
-                var type = TypeResolver.CodeType.MakeArrayType();
+                var type = TypeResolver.ConceptType;
                 return InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, type!, ctx);
             }
             else throw new InvalidOperationException($"CodeSystemRef {cr.name} is null");

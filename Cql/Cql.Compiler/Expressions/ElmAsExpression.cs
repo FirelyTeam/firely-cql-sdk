@@ -18,9 +18,7 @@ namespace Hl7.Cql.Compiler.Expressions
         public override Type Type => AsType;
         public override Expression Reduce()
         {
-            if (AsType!.IsValueType)
-                return Convert(Expression, AsType);
-            else if (Expression is ConstantExpression ce && ce.Value == null)
+            if (Expression is ConstantExpression ce && ce.Value == null)
                 return Constant(null, AsType);
             else
                 return TypeAs(Expression, AsType);

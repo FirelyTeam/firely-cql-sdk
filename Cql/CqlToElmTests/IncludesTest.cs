@@ -1,0 +1,244 @@
+﻿using Hl7.Cql.Elm;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Hl7.Cql.CqlToElm.Test
+{
+    [TestClass]
+    public class IncludesTest : Base
+    {
+        [ClassInitialize]
+#pragma warning disable IDE0060 // Remove unused parameter
+        public static void Initialize(TestContext context) => ClassInitialize();
+#pragma warning restore IDE0060 // Remove unused parameter
+
+
+        [TestMethod]
+        public void Proper_Includes_Day_Start()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Proper_Includes_Day_Start: Interval[@2023-01-01, @2023-06-30] properly includes day of start Interval[@2023-04-01, @2023-04-30]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludes));
+            {
+                var same = (ProperIncludes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(Start));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Proper_Includes_Day_End()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Proper_Includes_Day_End: Interval[@2023-01-01, @2023-06-30] properly includes day of end Interval[@2023-04-01, @2023-04-30]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludes));
+            {
+                var same = (ProperIncludes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(End));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Proper_Includes_Year()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Proper_Includes_Day_Start: Interval[@2023, @2023] properly includes year of Interval[@2023, @2023]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludes));
+            {
+                var same = (ProperIncludes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(false, result);
+            }
+        }
+
+        [TestMethod]
+        public void Proper_Includes()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Proper_Includes: Interval[@2023, @2023] properly includes Interval[@2023, @2023]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludes));
+            {
+                var same = (ProperIncludes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(false, result);
+            }
+        }
+
+        [TestMethod]
+        public void Includes_Day_Start()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Includes_Day_Start: Interval[@2023-01-01, @2023-06-30] includes day of start Interval[@2023-04-01, @2023-04-30]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Includes));
+            {
+                var same = (Includes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(Start));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Includes_Day_End()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Includes_Day_End: Interval[@2023-01-01, @2023-06-30] includes day of end Interval[@2023-04-01, @2023-04-30]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Includes));
+            {
+                var same = (Includes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(End));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Includes_Year()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Proper_Includes_Day_Start: Interval[@2023, @2023] includes year of Interval[@2023, @2023]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Includes));
+            {
+                var same = (Includes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Includes()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library ConcurrentWithTest version '1.0.0'
+
+                define private Includes: Interval[@2023, @2023] includes Interval[@2023, @2023]
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Includes));
+            {
+                var same = (Includes)library.statements[0].expression;
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", same.resultTypeName.Name);
+                Assert.IsInstanceOfType(same.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)same.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(same.operand);
+                Assert.AreEqual(2, same.operand.Length);
+                Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
+                var result = Run(same);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+    }
+}
