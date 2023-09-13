@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("NCQAPalliativeCare", "1.0.0")]
 public class NCQAPalliativeCare_1_0_0
 {
@@ -122,7 +122,7 @@ public class NCQAPalliativeCare_1_0_0
 		var h_ = NCQAStatus_1_0_0.Finished_Encounter(g_);
 		bool? i_(Encounter PalliativeEncounter)
 		{
-			var ao_ = NCQAFHIRBase_1_0_0.Normalize_Interval(PalliativeEncounter?.Period);
+			var ao_ = NCQAFHIRBase_1_0_0.Normalize_Interval((PalliativeEncounter?.Period as object));
 			var ap_ = context.Operators.Start(ao_);
 			var aq_ = context.Operators.DateFrom(ap_);
 			var as_ = context.Operators.End(ao_);

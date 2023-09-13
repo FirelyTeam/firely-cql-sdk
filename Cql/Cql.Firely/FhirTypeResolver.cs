@@ -4,7 +4,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using Hl7.Cql.Runtime;
@@ -13,14 +13,14 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
 using System.Reflection;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
 
-    internal class FirelyTypeResolver : BaseTypeResolver
+    internal class FhirTypeResolver : BaseTypeResolver
     {
-        public static readonly FirelyTypeResolver Default = new FirelyTypeResolver(ModelInfo.ModelInspector);
+        public static readonly FhirTypeResolver Default = new FhirTypeResolver(ModelInfo.ModelInspector);
 
-        public FirelyTypeResolver(ModelInspector inspector)
+        public FhirTypeResolver(ModelInspector inspector)
         {
             Inspector = inspector;
 
@@ -63,7 +63,7 @@ namespace Hl7.Cql.Firely
                     {
                         var propMapping = cm.FindMappedElementByName(propertyName);
                         if (propMapping is not null)
-                            result = new PocoModelPropertyInfo(propMapping.NativeProperty, propMapping);
+                            result = new FhirModelPropertyInfo(propMapping.NativeProperty, propMapping);
                     }
                 }
                 else
@@ -78,7 +78,7 @@ namespace Hl7.Cql.Firely
 
         public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
-            // This is not used by the Firely BundleRetriever, but we'll implement it nonetheless.
+            // This is not used by the data source, but we'll implement it nonetheless.
             var specifiedType = ResolveType(typeSpecifier);
             if (specifiedType == null) return null;
 

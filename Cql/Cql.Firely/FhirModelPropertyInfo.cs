@@ -3,20 +3,20 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using Hl7.Fhir.Introspection;
 using System.Globalization;
 using System.Reflection;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
-    internal class PocoModelPropertyInfo : PropertyInfo
+    internal class FhirModelPropertyInfo : PropertyInfo
     {
         private readonly PropertyInfo propertyInfo;
 
-        public PocoModelPropertyInfo(PropertyInfo propertyInfo, PropertyMapping mapping)
+        public FhirModelPropertyInfo(PropertyInfo propertyInfo, PropertyMapping mapping)
         {
             this.propertyInfo = propertyInfo;
             Mapping = mapping;

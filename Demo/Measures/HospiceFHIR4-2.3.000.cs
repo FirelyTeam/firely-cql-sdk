@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("HospiceFHIR4", "2.3.000")]
 public class HospiceFHIR4_2_3_000
 {
@@ -137,7 +137,7 @@ public class HospiceFHIR4_2_3_000
 			var aa_ = context.Operators.Equivalent(t_, z_);
 			var ab_ = context.Operators.Or(w_, aa_);
 			var ac_ = context.Operators.And(s_, ab_);
-			var ad_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(DischargeHospice?.Period);
+			var ad_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((DischargeHospice?.Period as object));
 			var ae_ = context.Operators.End(ad_);
 			var af_ = this.Measurement_Period();
 			var ag_ = context.Operators.ElementInInterval<CqlDateTime>(ae_, af_, null);
@@ -162,7 +162,7 @@ public class HospiceFHIR4_2_3_000
 			var am_ = context.Operators.Equal(al_, "order");
 			var an_ = context.Operators.And(ak_, am_);
 			var ao_ = this.Measurement_Period();
-			var ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(HospiceOrder?.AuthoredOnElement);
+			var ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((HospiceOrder?.AuthoredOnElement as object));
 			var aq_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ao_, ap_, null);
 			var ar_ = context.Operators.And(an_, aq_);
 

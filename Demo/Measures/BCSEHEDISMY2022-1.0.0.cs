@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public class BCSEHEDISMY2022_1_0_0
 {
@@ -288,7 +288,7 @@ public class BCSEHEDISMY2022_1_0_0
 		var a_ = context.Operators.RetrieveByValueSet<Coverage>(null, null);
 		bool? b_(Coverage C)
 		{
-			var d_ = NCQAFHIRBase_1_0_0.Normalize_Interval(C?.Period);
+			var d_ = NCQAFHIRBase_1_0_0.Normalize_Interval((C?.Period as object));
 			var e_ = this.Participation_Period();
 			var f_ = context.Operators.Overlaps(d_, e_, null);
 

@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("FHIR347", "0.1.021")]
 public class FHIR347_0_1_021
 {
@@ -1196,11 +1196,11 @@ public class FHIR347_0_1_021
 				{
 					if (T?.Repeat?.Bounds is Range)
 					{
-						return (T?.Repeat?.Bounds as Range);
+						return ((T?.Repeat?.Bounds as Range) as object);
 					}
 					else if (T?.Repeat?.Bounds is Period)
 					{
-						return (T?.Repeat?.Bounds as Period);
+						return ((T?.Repeat?.Bounds as Period) as object);
 					}
 					else
 					{

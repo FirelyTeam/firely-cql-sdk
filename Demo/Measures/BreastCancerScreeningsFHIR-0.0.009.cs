@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("BreastCancerScreeningsFHIR", "0.0.009")]
 public class BreastCancerScreeningsFHIR_0_0_009
 {
@@ -297,7 +297,7 @@ public class BreastCancerScreeningsFHIR_0_0_009
 			var h_ = context.Operators.Convert<string>(TelehealthEncounter?.StatusElement);
 			var i_ = context.Operators.Equal(h_, "finished");
 			var j_ = this.Measurement_Period();
-			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(TelehealthEncounter?.Period);
+			var k_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((TelehealthEncounter?.Period as object));
 			var l_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(j_, k_, null);
 			var m_ = context.Operators.And(i_, l_);
 

@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Expressions;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
@@ -51,6 +52,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 CaseWhenThenExpression cwt => convertCaseWhenThenExpression(indent, cwt),
                 FunctionCallExpression fce => convertFunctionCallExpression(indent, leadingIndentString, fce),
                 DefinitionCallExpression dce => convertDefinitionCallExpression(indent, leadingIndentString, dce),
+                ElmAsExpression ea => ConvertExpression(indent, ea.Reduce(), leadingIndent),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
             };
         }
@@ -540,13 +542,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (right is LambdaExpression le)
                     return convertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
-                string typeDeclaration = "var";
-                if (right is DefaultExpression ||
-                   (right is ConstantExpression ce && ce.Value == null))
-                {
-                    typeDeclaration = PrettyTypeName(left.Type);
-                }
                 var rightCode = ConvertExpression(indent, right, false);
+                string typeDeclaration = "var";
+                if (rightCode == "null" || rightCode == "default")
+                    typeDeclaration = PrettyTypeName(left.Type);
+
                 var assignment = $"{leadingIndentString}{typeDeclaration} {paramName(parameter)} = {rightCode}";
                 return assignment;
             }

@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("NCQAHealthPlanEnrollment", "1.0.0")]
 public class NCQAHealthPlanEnrollment_1_0_0
 {
@@ -45,7 +45,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 	{
 		CqlInterval<CqlDate> a_(Coverage C)
 		{
-			var c_ = NCQAFHIRBase_1_0_0.Normalize_Interval(C?.Period);
+			var c_ = NCQAFHIRBase_1_0_0.Normalize_Interval((C?.Period as object));
 			var d_ = context.Operators.Start(c_);
 			var e_ = context.Operators.DateFrom(d_);
 			var g_ = context.Operators.End(c_);
@@ -234,7 +234,7 @@ public class NCQAHealthPlanEnrollment_1_0_0
 				var p_ = context.Operators.SelectOrNull<Coverage, Period>(n_, o_);
 				bool? q_(Period Cperiod)
 				{
-					var u_ = NCQAFHIRBase_1_0_0.Normalize_Interval(Cperiod);
+					var u_ = NCQAFHIRBase_1_0_0.Normalize_Interval((Cperiod as object));
 					var v_ = context.Operators.Start(u_);
 					var w_ = context.Operators.DateFrom(v_);
 					var y_ = context.Operators.End(u_);

@@ -1,7 +1,6 @@
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.ValueSetLoaders;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
 
@@ -10,7 +9,6 @@ namespace Test
     [TestClass]
     public class MeasuresTest
     {
-
         private readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
             {
@@ -28,8 +26,8 @@ namespace Test
         public void BCSEHEDIS2022_Numerator()
         {
             var patientEverything = new Bundle();  // add some data
-            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023);
-            var bcs = new BCSEHEDISMY2022_1_0_0(cqlContext);
+            var context = FhirCqlContext.ForBundle(patientEverything, MY2023);
+            var bcs = new BCSEHEDISMY2022_1_0_0(context);
             var numerator = bcs.Numerator();
             Assert.IsFalse(numerator);
         }
@@ -44,9 +42,9 @@ namespace Test
 
             var patientEverything = new Bundle();   // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
-            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023, valueSets);
+            var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
-            var results = asmContext.Run(lib, version, cqlContext);
+            var results = asmContext.Run(lib, version, context);
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
@@ -63,12 +61,12 @@ namespace Test
 
             var patientEverything = new Bundle();  // Add some data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
-            var cqlContext = FirelyCqlContext.ForBundle(patientEverything, MY2023, valueSets);
+            var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
             var asmContext = LibraryPackager.LoadElm(elmDir, lib, version);
-            var results = asmContext.Run(lib, version, cqlContext);
+            var results = asmContext.Run(lib, version, context);
             var elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
             Console.WriteLine($"Run 1: {elapsed}");
@@ -79,16 +77,15 @@ namespace Test
 
             // Run a second time with a (presumably) different bundle.
             var bundle2 = new Bundle();
-            cqlContext = FirelyCqlContext.ForBundle(bundle2, MY2023, valueSets);
+            context = FhirCqlContext.ForBundle(bundle2, MY2023, valueSets);
             stopwatch.Restart();
-            results = asmContext.Run(lib, version, cqlContext);
+            results = asmContext.Run(lib, version, context);
             elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
             Console.WriteLine($"Run 2: {elapsed}");
             Assert.IsTrue(results.TryGetValue("Numerator", out numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
-
         }
 
     }

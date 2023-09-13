@@ -3,9 +3,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Primitives;
@@ -316,6 +317,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var writer = new StreamWriter(tupleTypeStream);
                         WriteUsings(writer);
                         var indentLevel = 0;
+                        writer.WriteLine();
                         writer.WriteLine(indentLevel, $"namespace {tupleType.Namespace}");
                         writer.WriteLine(indentLevel, "{");
                         indentLevel += 1;
@@ -491,7 +493,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private int WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
-            writer.WriteLine();
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{Tool}\", \"{Version}\")]");
             writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {ExpressionConverter.PrettyTypeName(tupleType.BaseType!)}");
             writer.WriteLine(indentLevel, "{");

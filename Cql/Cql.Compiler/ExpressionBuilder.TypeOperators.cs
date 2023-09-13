@@ -4,9 +4,11 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -28,8 +30,8 @@ namespace Hl7.Cql.Compiler
                     {
                         var listElementType = TypeResolver.GetListElementType(type) ?? throw new InvalidOperationException($"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
-                        var typeAs = Expression.TypeAs(newArray, type);
-                        return typeAs;
+                        var elmAs = new ElmAsExpression(newArray, type);
+                        return elmAs;
                     }
                     else
                     {
@@ -45,13 +47,13 @@ namespace Hl7.Cql.Compiler
                 {
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     var defaultExpression = Expression.Default(type);
-                    return Expression.TypeAs(defaultExpression, type);
+                    return new ElmAsExpression(defaultExpression, type);
                 }
                 else
                 {
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     var operand = TranslateExpression(@as.operand!, ctx);
-                    return Expression.TypeAs(operand, type);
+                    return new ElmAsExpression(operand, type);
                 }
             }
             else
@@ -60,18 +62,12 @@ namespace Hl7.Cql.Compiler
                     throw new ArgumentException("asType cannot be null", nameof(@as));
                 if (@as.operand == null)
                     throw new ArgumentException("operand cannot be null", nameof(@as));
-                var type = TypeResolver.ResolveType(@as.asType.Name!);
+                var type = TypeResolver.ResolveType(@as.asType.Name!)
+                    ?? throw new InvalidOperationException($"Cannot resolve type {@as.asType.Name}");
                 var operand = TranslateExpression(@as.operand, ctx);
-                if (type!.IsValueType)
-                    return Expression.Convert(operand, type);
-                else if (operand is ConstantExpression ce && ce.Value == null)
-                    return Expression.Constant(null, type);
-                else
-                {
-                    if (!type.IsAssignableFrom(operand.Type))
-                        ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
-                    return Expression.TypeAs(operand, type);
-                }
+                if (!type.IsAssignableFrom(operand.Type))
+                    ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
+                return new ElmAsExpression(operand, type);
             }
         }
 

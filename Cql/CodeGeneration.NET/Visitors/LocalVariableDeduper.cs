@@ -3,7 +3,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             // Find assignments where the right side is exactly the same.
             var duplicateAssignments = localAssignments
-                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{ass.Right.Type.Name}")
+                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{ExpressionConverter.PrettyTypeName(ass.Right.Type)}")
                 .Where(g => g.Count() > 1) // && !g.Key.Contains("Deeper")
                 .ToList();
 

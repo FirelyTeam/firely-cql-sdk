@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 {
@@ -232,7 +232,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			var j_ = context.Operators.Convert<string>(DementiaMed?.IntentElement);
 			var k_ = context.Operators.Equal(j_, "order");
 			var l_ = context.Operators.And(i_, k_);
-			var m_ = CumulativeMedicationDurationFHIR4_1_0_000.MedicationPeriod(DementiaMed);
+			var m_ = CumulativeMedicationDurationFHIR4_1_0_000.MedicationPeriod((DementiaMed as object));
 			var n_ = this.Measurement_Period();
 			var o_ = context.Operators.Start(n_);
 			var p_ = context.Operators.Quantity(1m, "year");
@@ -264,7 +264,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			var j_ = context.Operators.Convert<string>(LongTermFacilityEncounter?.StatusElement);
 			var k_ = context.Operators.Equal(j_, "finished");
-			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(LongTermFacilityEncounter?.Period);
+			var l_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((LongTermFacilityEncounter?.Period as object));
 			var m_ = this.Measurement_Period();
 			var n_ = context.Operators.Overlaps(l_, m_, null);
 			var o_ = context.Operators.And(k_, n_);
@@ -274,7 +274,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		var g_ = context.Operators.WhereOrNull<Encounter>(e_, f_);
 		CqlInterval<CqlDateTime> h_(Encounter LongTermFacilityEncounter)
 		{
-			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(LongTermFacilityEncounter?.Period);
+			var p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((LongTermFacilityEncounter?.Period as object));
 			var q_ = this.Measurement_Period();
 			var r_ = context.Operators.IntervalIntersectsInterval<CqlDateTime>(p_, q_);
 
@@ -318,7 +318,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			{
 				var x_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(OutpatientEncounter);
 				var y_ = context.Operators.InList<Condition>(AdvancedIllnessDiagnosis, x_);
-				var z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(OutpatientEncounter?.Period);
+				var z_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((OutpatientEncounter?.Period as object));
 				var aa_ = context.Operators.Start(z_);
 				var ab_ = this.Measurement_Period();
 				var ac_ = context.Operators.End(ab_);
@@ -502,7 +502,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			{
 				var o_ = MATGlobalCommonFunctionsFHIR4_6_1_000.EncounterDiagnosis(InpatientEncounter);
 				var p_ = context.Operators.InList<Condition>(AdvancedIllnessDiagnosis, o_);
-				var q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(InpatientEncounter?.Period);
+				var q_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((InpatientEncounter?.Period as object));
 				var r_ = context.Operators.Start(q_);
 				var s_ = this.Measurement_Period();
 				var t_ = context.Operators.End(s_);
@@ -554,7 +554,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 			var ak_ = context.Operators.Equal(aj_, "order");
 			var al_ = context.Operators.And(ai_, ak_);
 			var am_ = this.Measurement_Period();
-			var an_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(FrailtyDeviceOrder?.AuthoredOnElement);
+			var an_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((FrailtyDeviceOrder?.AuthoredOnElement as object));
 			var ao_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(am_, an_, null);
 			var ap_ = context.Operators.And(al_, ao_);
 
@@ -602,7 +602,7 @@ public class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000
 		{
 			var ba_ = context.Operators.Convert<string>(FrailtyEncounter?.StatusElement);
 			var bb_ = context.Operators.Equal(ba_, "finished");
-			var bc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(FrailtyEncounter?.Period);
+			var bc_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((FrailtyEncounter?.Period as object));
 			var bd_ = this.Measurement_Period();
 			var be_ = context.Operators.Overlaps(bc_, bd_, null);
 			var bf_ = context.Operators.And(bb_, be_);

@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public class NCQAAdvancedIllnessandFrailty_1_0_0
 {
@@ -252,7 +252,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var o_ = NCQAStatus_1_0_0.Finished_Encounter(n_);
 		bool? p_(Encounter FrailtyEncounter)
 		{
-			var af_ = NCQAFHIRBase_1_0_0.Normalize_Interval(FrailtyEncounter?.Period);
+			var af_ = NCQAFHIRBase_1_0_0.Normalize_Interval((FrailtyEncounter?.Period as object));
 			var ag_ = this.Measurement_Period();
 			var ah_ = context.Operators.Overlaps(af_, ag_, null);
 
@@ -307,7 +307,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			var w_ = this.Advanced_Illness();
 			var x_ = context.Operators.RetrieveByValueSet<Condition>(w_, null);
 			var y_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(OutpatientEncounter, x_);
-			var z_ = NCQAFHIRBase_1_0_0.Normalize_Interval(OutpatientEncounter?.Period);
+			var z_ = NCQAFHIRBase_1_0_0.Normalize_Interval((OutpatientEncounter?.Period as object));
 			var aa_ = context.Operators.Start(z_);
 			var ab_ = context.Operators.DateFrom(aa_);
 			var ac_ = this.Measurement_Period();
@@ -326,7 +326,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var t_ = context.Operators.WhereOrNull<Encounter>(r_, s_);
 		CqlDate u_(Encounter EncounterWithDiagnosis)
 		{
-			var an_ = NCQAFHIRBase_1_0_0.Normalize_Interval(EncounterWithDiagnosis?.Period);
+			var an_ = NCQAFHIRBase_1_0_0.Normalize_Interval((EncounterWithDiagnosis?.Period as object));
 			var ao_ = context.Operators.End(an_);
 			var ap_ = context.Operators.DateFrom(ao_);
 
@@ -471,7 +471,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 			var g_ = this.Advanced_Illness();
 			var h_ = context.Operators.RetrieveByValueSet<Condition>(g_, null);
 			var i_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(InpatientEncounter, h_);
-			var j_ = NCQAFHIRBase_1_0_0.Normalize_Interval(InpatientEncounter?.Period);
+			var j_ = NCQAFHIRBase_1_0_0.Normalize_Interval((InpatientEncounter?.Period as object));
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.Measurement_Period();
@@ -539,7 +539,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		var f_ = NCQAStatus_1_0_0.Dispensed_Medication(e_);
 		bool? g_(MedicationDispense DementiaMedDispensed)
 		{
-			var j_ = NCQAFHIRBase_1_0_0.Normalize_Interval(DementiaMedDispensed?.WhenHandedOverElement);
+			var j_ = NCQAFHIRBase_1_0_0.Normalize_Interval((DementiaMedDispensed?.WhenHandedOverElement as object));
 			var k_ = context.Operators.Start(j_);
 			var l_ = context.Operators.DateFrom(k_);
 			var m_ = this.Measurement_Period();

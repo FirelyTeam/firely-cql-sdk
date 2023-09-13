@@ -1,4 +1,5 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using System;

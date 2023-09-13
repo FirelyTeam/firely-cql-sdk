@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
 public class NCQAEncounter_1_0_0
 {
@@ -113,7 +113,7 @@ public class NCQAEncounter_1_0_0
 		var a_ = NCQAStatus_1_0_0.Finished_Encounter(Enc);
 		bool? b_(Encounter EncounterPeriod)
 		{
-			var e_ = NCQAFHIRBase_1_0_0.Normalize_Interval(EncounterPeriod?.Period);
+			var e_ = NCQAFHIRBase_1_0_0.Normalize_Interval((EncounterPeriod?.Period as object));
 			var f_ = context.Operators.End(e_);
 			var g_ = context.Operators.ElementInInterval<CqlDateTime>(f_, timeperiod, null);
 

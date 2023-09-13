@@ -3,13 +3,13 @@ using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Primitives;
-using Hl7.Cql;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public class AdultOutpatientEncountersFHIR4_2_2_000
 {
@@ -136,7 +136,7 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 			var q_ = context.Operators.Convert<string>(ValidEncounter?.StatusElement);
 			var r_ = context.Operators.Equal(q_, "finished");
 			var s_ = this.Measurement_Period();
-			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(ValidEncounter?.Period);
+			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ValidEncounter?.Period as object));
 			var u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, t_, null);
 			var v_ = context.Operators.And(r_, u_);
 
