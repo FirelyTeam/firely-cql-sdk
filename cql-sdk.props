@@ -7,7 +7,7 @@
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
 		<VersionPrefix>1.0.0</VersionPrefix>
-		<VersionSuffix>rc1</VersionSuffix>
+		<VersionSuffix>rc2</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2023 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
 		<PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl>

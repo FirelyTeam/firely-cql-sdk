@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -10,20 +10,25 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <None Remove="Models\fhir-modelinfo-4.0.1.xml" />
+		<None Remove="Models\elm-modelinfo-r1.xml" />
+		<None Remove="Models\fhir-modelinfo-4.0.1.xml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
-	    <LogicalName>Fhir401</LogicalName>
-	  </EmbeddedResource>
+		<EmbeddedResource Include="Models\elm-modelinfo-r1.xml">
+			<LogicalName>ElmR1</LogicalName>
+		</EmbeddedResource>
+		<EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
+			<LogicalName>Fhir401</LogicalName>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23420.2" PrivateAssets="All" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

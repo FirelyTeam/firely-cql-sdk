@@ -186,7 +186,8 @@ namespace Hl7.Cql.Abstractions
         MinimumValue,
         MaximumValue,
         ResolveValueSet,
-        Aggregate
+        Aggregate,
+        Implies
     }
 }
 

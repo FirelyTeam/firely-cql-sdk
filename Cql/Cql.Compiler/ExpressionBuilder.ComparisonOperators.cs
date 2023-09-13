@@ -23,6 +23,15 @@ namespace Hl7.Cql.Compiler
             return Equal(lhsExpression, rhsExpression, ctx);
         }
 
+        protected Expression NotEqual(elm.NotEqual eq, ExpressionBuilderContext ctx)
+        {
+            var lhsExpression = TranslateExpression(eq.operand![0], ctx);
+            var rhsExpression = TranslateExpression(eq.operand![1], ctx);
+            var equal = Equal(lhsExpression, rhsExpression, ctx);
+            var not = OperatorBinding.Bind(CqlOperator.Not, ctx.RuntimeContextParameter, equal);
+            return not;
+        }
+
         protected Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)
         {
             if (IsEnum(left.Type))
