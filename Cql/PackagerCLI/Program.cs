@@ -80,11 +80,11 @@ namespace Hl7.Cql.Packager
                     EnsureDirectory(fhirDir);
                 }
             }
-            package(elmDir, cqlDir, csDir, fhirDir);
+            Package(elmDir, cqlDir, csDir, fhirDir);
             return 0;
         }
 
-        private static void package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir)
+        public static void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir)
         {
             var logLevel = LogLevel.Trace;
             var logFactory = LoggerFactory
