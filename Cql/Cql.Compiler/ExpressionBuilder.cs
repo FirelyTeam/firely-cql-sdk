@@ -220,6 +220,7 @@ namespace Hl7.Cql.Compiler
 
                 if (Library.concepts != null)
                 {
+                    var conceptCtor = typeof(CqlConcept).GetConstructor(new[] { typeof(IEnumerable<CqlCode>), typeof(string) });
                     foreach (var concept in Library.concepts)
                     {
                         if (concept.code.Length > 0)
@@ -238,8 +239,11 @@ namespace Hl7.Cql.Compiler
                                 );
                             }
                             var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
+                            var asEnumerable = Expression.TypeAs(arrayOfCodesInitializer, typeof(IEnumerable<CqlCode>));
+                            var display = Expression.Constant(concept.display, typeof(string));
+                            var newConcept = Expression.New(conceptCtor!, asEnumerable, display);
                             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                            var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
+                            var lambda = Expression.Lambda(newConcept, contextParameter);
                             definitions.Add(ThisLibraryKey, concept.name, lambda);
                         }
                         else
