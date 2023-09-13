@@ -6,136 +6,66 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
+    /// <summary>
+    /// Finds assignments with duplicate rhs, and then de-duplicates those variables.
+    /// </summary>
+    /// <remarks>Note that it is not trivial to determine whether expressions are duplicates, so we
+    /// turn the expressions into strings using the (internal) DebugView visitor provided by Microsoft.
+    /// This requires a full reduction and visit of the tree, so is quite expensive.</remarks>
     internal class LocalVariableDeduper : ExpressionVisitor
     {
-        public LocalVariableDeduper(IEnumerable<string> scopeReservedVariables)
-        {
-            ScopeReservedVariables = scopeReservedVariables;
-        }
-
-        public IEnumerable<string> ScopeReservedVariables { get; }
-
-        public override Expression? Visit(Expression? node)
-        {
-            if (node == null)
-                return null;
-            switch (node.NodeType)
-            {
-                case ExpressionType.Block:
-                    return base.Visit(node);
-                default:
-                    return node;
-            }
-        }
+        private readonly Stack<Dictionary<ParameterExpression, ParameterExpression>> _replacementStack = new();
 
         protected override Expression VisitBlock(BlockExpression node)
         {
-            var replacements = new Dictionary<string, ParameterExpression>();
-            var replacementsFound = true;
-
-            //var variableExpressions = node.Expressions
-            //    .OfType<BinaryExpression>()
-            //    .Where(be => be.Left is ParameterExpression)
-            //    .ToArray();
-            var newExpressions = new Expression[node.Expressions.Count];
-            var variableExpressions = new List<BinaryExpression>();
-            for (int i = 0; i < node.Expressions.Count; i++)
-            {
-                var expression = node.Expressions[i];
-                if (expression is BinaryExpression be && be.Left is ParameterExpression)
-                {
-                    var right = Visit(be.Right) ??
-                        throw new InvalidOperationException("Visit returned a null expression");
-                    var newExpression = Expression.Assign(be.Left, right);
-                    variableExpressions.Add(newExpression);
-                    newExpressions[i] = newExpression;
-                }
-                else
-                {
-                    newExpressions[i] = expression;
-                }
-            }
-
-            Expression newBody = Expression.Block(node.Variables, newExpressions);
-
-            while (replacementsFound)
-            {
-                foreach (var likeVariables in variableExpressions.GroupBy(expr => expr.Right.GetDebugView()))
-                {
-                    if (likeVariables.Count() > 1)
-                    {
-                        var keep = (ParameterExpression)likeVariables.First().Left;
-                        foreach (var toReplace in likeVariables.Skip(1))
-                        {
-                            // if they are not the same type, don't try replacing them.
-                            if (toReplace.Left is ParameterExpression replaceParameter)
-                            {
-                                if (ScopeReservedVariables.Contains(replaceParameter.Name) == false)
-                                {
-                                    var typesSame = replaceParameter.Type == keep.Type;
-                                    if (typesSame)
-                                    {
-                                        var replace = replaceParameter.Name!;
-                                        if (replacements.TryGetValue(replace, out var existingReplacement))
-                                        {
-                                            if (existingReplacement.Name != keep.Name)
-                                                continue; // don't attempt to replace this variable
-                                        }
-                                        else
-                                        {
-                                            if (replace == "p")
-                                            {
-                                            }
-                                            replacements.Add(replace, keep);
-                                        }
-                                    }
-                                }
-                                else
-                                {
-                                }
-                            }
-                        }
-                    }
-                }
-                if (replacements.Count > 0)
-                {
-                    newBody = new ParameterReplacer(replacements).Visit(newBody);
-                    replacements.Clear();
-                    variableExpressions.Clear();
-                    if (newBody is BlockExpression be)
-                    {
-                        variableExpressions.AddRange(be.Expressions
+            var localAssignments = node.Expressions
                             .OfType<BinaryExpression>()
-                            .Where(be => be.Left is ParameterExpression));
-                    }
+                            .Where(be => be.Left is ParameterExpression pe && node.Variables.Contains(pe));
 
-                }
-                else
-                {
-                    replacementsFound = false;
+            // Find assignments where the right side is exactly the same.
+            var duplicateAssignments = localAssignments
+                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{ass.Right.Type.Name}")
+                .Where(g => g.Count() > 1) // && !g.Key.Contains("Deeper")
+                .ToList();
 
-                }
-            }
-            return newBody;
+            // Select the first of each group which duplicates to remain, and remove the others
+            // from the block's local variables
+            var assignmentsToRemove = duplicateAssignments.SelectMany(ga => ga.Skip(1));
+            var strippedNode = node.Update(node.Variables, node.Expressions.Except(assignmentsToRemove));
+
+            // Now, replace the "others" by the selected candidate.
+            var replacements =
+                    from likeVariables in from g in duplicateAssignments
+                                          select g.Select(g => (ParameterExpression)g.Left)
+                    let first = likeVariables.First()
+                    from variable in likeVariables.Skip(1)
+                    select KeyValuePair.Create(variable, first);
+
+            var replacementDictionary = new Dictionary<ParameterExpression, ParameterExpression>(replacements);
+
+            // Since the variables can be nested deeply, we'll go deeper using this visitor. In the mean time,
+            // when we encounter new Blocks with new duplicates, we'll gather those too, resulting in a 
+            // stack of replacements that are only applicable to the current syntactical scope and deeper.
+            _replacementStack.Push(replacementDictionary);
+            var visitedLocals = node.Variables.Select(v => (ParameterExpression)Visit(v)).Distinct();
+            var visitedExpressions = Visit(strippedNode.Expressions);
+            var visitedExpression = node.Update(visitedLocals, visitedExpressions);
+            _replacementStack.Pop();
+
+            return visitedExpression;
         }
 
-        protected override Expression VisitLambda<T>(Expression<T> node)
-        {
-            if (node is LambdaExpression lambda)
-            {
-                var newLambdaBody = Visit(lambda.Body)
-                    ?? throw new InvalidOperationException("Visit returned null");
-                var newLambda = Expression.Lambda(newLambdaBody, lambda.Parameters);
-                return newLambda;
-            }
-            return base.VisitLambda(node);
-        }
+        // Visit the replacements from nearest lexical scope up, and see if we need to replace the
+        // parameter we have encountered.
+        protected override Expression VisitParameter(ParameterExpression node) =>
+            _replacementStack
+                .Select(s => s.GetValueOrDefault(node))
+                .FirstOrDefault(n => n is not null) ?? node;
     }
 }

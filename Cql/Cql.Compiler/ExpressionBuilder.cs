@@ -9,6 +9,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -1780,6 +1781,7 @@ namespace Hl7.Cql.Compiler
                 if (then.Type != @else.Type)
                     throw new InvalidOperationException($"The If expression at {@if.locator} produces two branches with different types.");
                 var ifThenElse = Expression.Condition(condition, then, @else);
+
                 return ifThenElse;
             }
             else
@@ -1864,60 +1866,45 @@ namespace Hl7.Cql.Compiler
             // when1 ? then 1 : (when2 ? then 2 : (when3 ? then 3 : else }
             if (ce.caseItem?.Length > 0 && ce.@else != null)
             {
+                var elseThen = TranslateExpression(ce.@else!, ctx);
+                var cases = new List<CaseWhenThenExpression.WhenThenCase>();
+
                 if (ce.comparand != null)
                 {
                     var comparand = TranslateExpression(ce.comparand, ctx);
 
-                    var elseThen = TranslateExpression(ce.@else!, ctx);
-                    var lastItem = ce.caseItem[^1];
-                    var lastItemWhen = TranslateExpression(lastItem.when!, ctx);
-                    var lastItemWhenEquality = Expression.Coalesce(Equal(comparand, lastItemWhen, ctx), Expression.Constant(false));
-                    var lastItemThen = TranslateExpression(lastItem.then!, ctx);
-
-                    if (lastItemThen.Type != elseThen.Type)
-                        throw new InvalidOperationException("Both conditional outcomes must have the same type.");
-
-                    elseThen = Expression.Condition(lastItemWhenEquality, lastItemThen, elseThen);
-
-                    for (int i = ce.caseItem.Length - 2; i > -1; i--)
+                    foreach (var caseItem in ce.caseItem)
                     {
-                        var caseWhen = TranslateExpression(ce.caseItem[i].when!, ctx);
+                        var caseWhen = TranslateExpression(caseItem.when!, ctx);
                         var caseWhenEquality = Expression.Coalesce(Equal(comparand, caseWhen, ctx), Expression.Constant(false));
-                        var caseThen = TranslateExpression(ce.caseItem[i].then!, ctx);
-                        if (elseThen.Type != caseThen.Type)
-                            throw new InvalidOperationException("Case return types are not consistent.");
-                        elseThen = Expression.Condition(caseWhenEquality, caseThen, elseThen);
+                        var caseThen = TranslateExpression(caseItem.then!, ctx);
+
+                        if (caseThen.Type != elseThen.Type)
+                            caseThen = Expression.Convert(caseThen, elseThen.Type);
+
+                        cases.Add(new(caseWhenEquality, caseThen));
                     }
-                    return elseThen;
                 }
                 else
                 {
-                    var elseThen = TranslateExpression(ce.@else!, ctx);
-                    var lastItem = ce.caseItem[^1];
-                    var lastItemWhen = TranslateExpression(lastItem.when!, ctx);
-                    var lastItemThen = TranslateExpression(lastItem.then!, ctx);
-
-                    if (IsNullable(lastItemWhen.Type))
+                    foreach (var caseItem in ce.caseItem)
                     {
-                        lastItemWhen = Expression.Coalesce(lastItemWhen, Expression.Constant(false));
-                    }
+                        var caseWhen = TranslateExpression(caseItem.when!, ctx);
+                        var caseThen = TranslateExpression(caseItem.then!, ctx);
 
-                    elseThen = Expression.Condition(lastItemWhen, lastItemThen, elseThen);
+                        if (caseThen.Type != elseThen.Type)
+                            caseThen = Expression.Convert(caseThen, elseThen.Type);
 
-                    for (int i = ce.caseItem.Length - 2; i > -1; i--)
-                    {
-                        var caseWhen = TranslateExpression(ce.caseItem[i].when!, ctx);
-                        var caseThen = TranslateExpression(ce.caseItem[i].then!, ctx);
-                        if (elseThen.Type != caseThen.Type)
-                            throw new InvalidOperationException("Case return types are not consistent.");
                         if (IsNullable(caseWhen.Type))
                         {
                             caseWhen = Expression.Coalesce(caseWhen, Expression.Constant(false));
                         }
-                        elseThen = Expression.Condition(caseWhen, caseThen, elseThen);
+
+                        cases.Add(new(caseWhen, caseThen));
                     }
-                    return elseThen;
                 }
+
+                return new CaseWhenThenExpression(cases, elseThen);
             }
 
             else throw new ArgumentException("Invalid case expression.  At least 1 case and an else must be present.", nameof(ce));
@@ -2045,30 +2032,44 @@ namespace Hl7.Cql.Compiler
             return selectManyLambda;
         }
 
+        // Yeah, hardwired to FHIR 4.0.1 for now.
+        private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
+
         protected Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
         {
             Type? sourceElementType;
+            string? cqlRetrieveResultType;
+
             // SingletonFrom does not have this specified; in this case use DataType instead
             if (retrieve.resultTypeSpecifier == null)
             {
                 if (string.IsNullOrWhiteSpace(retrieve.dataType.Name))
                     throw new ArgumentException("If a Retrieve lacks a ResultTypeSpecifier it must have a DataType", nameof(retrieve));
-                var dataType = retrieve.dataType;
-                sourceElementType = TypeResolver.ResolveType(dataType.Name);
+                cqlRetrieveResultType = retrieve.dataType.Name;
+
+                sourceElementType = TypeResolver.ResolveType(cqlRetrieveResultType);
             }
             else
             {
                 if (retrieve.resultTypeSpecifier is elm.ListTypeSpecifier listTypeSpecifier)
                 {
+                    cqlRetrieveResultType = listTypeSpecifier.elementType is elm.NamedTypeSpecifier nts ? nts.name.Name : null;
                     sourceElementType = TypeManager.TypeFor(listTypeSpecifier.elementType, ctx);
                 }
                 else throw new NotImplementedException($"Sources with type {retrieve.resultTypeSpecifier.GetType().Name} are not implemented.");
             }
 
             Expression? codeProperty;
-            if (sourceElementType != null && retrieve.codeProperty != null)
+
+            var hasCodePropertySpecified = sourceElementType != null && retrieve.codeProperty != null;
+            var isDefaultCodeProperty = retrieve.codeProperty is null ||
+                (cqlRetrieveResultType is not null &&
+                 modelMapping.TryGetValue(cqlRetrieveResultType, out ClassInfo? classInfo) &&
+                 classInfo.primaryCodePath == retrieve.codeProperty);
+
+            if (hasCodePropertySpecified && !isDefaultCodeProperty)
             {
-                var codePropertyInfo = TypeResolver.GetProperty(sourceElementType!, retrieve.codeProperty);
+                var codePropertyInfo = TypeResolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
                 codeProperty = Expression.Constant(codePropertyInfo, typeof(PropertyInfo));
             }
             else
@@ -2645,18 +2646,7 @@ namespace Hl7.Cql.Compiler
                 return before;
             else
             {
-                Type? memberType;
-                if (member is PropertyInfo property)
-                    memberType = property.PropertyType;
-                else if (member is FieldInfo field)
-                    memberType = field.FieldType;
-                else throw new NotImplementedException();
-                var parameter = Expression.Parameter(before.Type, TypeNameToIdentifier(before.Type, ctx));
-                var body = Expression.MakeMemberAccess(parameter, member);
-                var lambda = Expression.Lambda(body, parameter);
-                var call = OperatorBinding.Bind(CqlOperator.PropertyOrDefault, ctx.RuntimeContextParameter,
-                    before, lambda, Expression.Constant(before.Type, typeof(Type)), Expression.Constant(memberType, typeof(Type)));
-                return call;
+                return new NullConditionalMemberExpression(before, member);
             }
         }
 

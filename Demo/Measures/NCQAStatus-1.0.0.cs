@@ -39,145 +39,157 @@ public class NCQAStatus_1_0_0
 
     #endregion
 
-    private Patient Patient_Value()
-    {
-        var a_ = context?.Operators.RetrieveByValueSet<Patient>(null, 
-			null);
-        return context?.Operators.SingleOrNull<Patient>(a_);
-    }
+	private Patient Patient_Value()
+	{
+		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
+		var b_ = context.Operators.SingleOrNull<Patient>(a_);
+
+		return b_;
+	}
+
     [CqlDeclaration("Patient")]
-    public Patient Patient() => __Patient.Value;
+	public Patient Patient() => 
+		__Patient.Value;
 
     [CqlDeclaration("Active Allergy")]
-    public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
-    {
-        Func<AllergyIntolerance,bool?> e_ = (A) => 
-        {
-            var b_ = A?.ClinicalStatus;
-            var a_ = (FHIRHelpers_4_0_001.ToConcept(b_) as object);
-            var d_ = NCQATerminology_1_0_0.allergy_active();
-            var c_ = (context?.Operators.ConvertCodeToConcept(d_) as object);
-            return context?.Operators.Equal(a_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<AllergyIntolerance>(Allergy, 
-			e_);
-    }
+	public IEnumerable<AllergyIntolerance> Active_Allergy(IEnumerable<AllergyIntolerance> Allergy)
+	{
+		bool? a_(AllergyIntolerance A)
+		{
+			var c_ = A?.ClinicalStatus;
+			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			var e_ = NCQATerminology_1_0_0.allergy_active();
+			var f_ = context.Operators.ConvertCodeToConcept(e_);
+			var g_ = context.Operators.Equal(d_, f_);
+
+			return g_;
+		};
+		var b_ = context.Operators.WhereOrNull<AllergyIntolerance>(Allergy, a_);
+
+		return b_;
+	}
 
     [CqlDeclaration("Active Condition")]
-    public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
-    {
-        Func<Condition,bool?> e_ = (C) => 
-        {
-            var b_ = C?.ClinicalStatus;
-            var a_ = (FHIRHelpers_4_0_001.ToConcept(b_) as object);
-            var d_ = NCQATerminology_1_0_0.active();
-            var c_ = (context?.Operators.ConvertCodeToConcept(d_) as object);
-            return context?.Operators.Equal(a_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<Condition>(Condition, 
-			e_);
-    }
+	public IEnumerable<Condition> Active_Condition(IEnumerable<Condition> Condition)
+	{
+		bool? a_(Condition C)
+		{
+			var c_ = C?.ClinicalStatus;
+			var d_ = FHIRHelpers_4_0_001.ToConcept(c_);
+			var e_ = NCQATerminology_1_0_0.active();
+			var f_ = context.Operators.ConvertCodeToConcept(e_);
+			var g_ = context.Operators.Equal(d_, f_);
+
+			return g_;
+		};
+		var b_ = context.Operators.WhereOrNull<Condition>(Condition, a_);
+
+		return b_;
+	}
 
     [CqlDeclaration("Finished Encounter")]
-    public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
-    {
-        Func<Encounter,bool?> d_ = (E) => 
-        {
-            var b_ = (E?.StatusElement as object);
-            var a_ = (context?.Operators.Convert<string>(b_) as object);
-            var c_ = ("finished" as object);
-            return context?.Operators.Equal(a_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<Encounter>(Enc, 
-			d_);
-    }
+	public IEnumerable<Encounter> Finished_Encounter(IEnumerable<Encounter> Enc)
+	{
+		bool? a_(Encounter E)
+		{
+			var c_ = E?.StatusElement;
+			var d_ = context.Operators.Convert<string>(c_);
+			var e_ = context.Operators.Equal(d_, "finished");
+
+			return e_;
+		};
+		var b_ = context.Operators.WhereOrNull<Encounter>(Enc, a_);
+
+		return b_;
+	}
 
     [CqlDeclaration("Completed Immunization")]
-    public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
-    {
-        Func<Immunization,bool?> d_ = (I) => 
-        {
-            var b_ = (I?.StatusElement as object);
-            var a_ = (context?.Operators.Convert<string>(b_) as object);
-            var c_ = ("completed" as object);
-            return context?.Operators.Equal(a_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<Immunization>(Immunization, 
-			d_);
-    }
+	public IEnumerable<Immunization> Completed_Immunization(IEnumerable<Immunization> Immunization)
+	{
+		bool? a_(Immunization I)
+		{
+			var c_ = I?.StatusElement;
+			var d_ = context.Operators.Convert<string>(c_);
+			var e_ = context.Operators.Equal(d_, "completed");
+
+			return e_;
+		};
+		var b_ = context.Operators.WhereOrNull<Immunization>(Immunization, a_);
+
+		return b_;
+	}
 
     [CqlDeclaration("Dispensed Medication")]
-    public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
-    {
-        Func<MedicationDispense,bool?> d_ = (M) => 
-        {
-            var b_ = (M?.StatusElement as object);
-            var a_ = (context?.Operators.Convert<string>(b_) as object);
-            var c_ = ("completed" as object);
-            return context?.Operators.Equal(a_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<MedicationDispense>(Med, 
-			d_);
-    }
+	public IEnumerable<MedicationDispense> Dispensed_Medication(IEnumerable<MedicationDispense> Med)
+	{
+		bool? a_(MedicationDispense M)
+		{
+			var c_ = M?.StatusElement;
+			var d_ = context.Operators.Convert<string>(c_);
+			var e_ = context.Operators.Equal(d_, "completed");
+
+			return e_;
+		};
+		var b_ = context.Operators.WhereOrNull<MedicationDispense>(Med, a_);
+
+		return b_;
+	}
 
     [CqlDeclaration("Active Medication")]
-    public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
-    {
-        Func<MedicationRequest,bool?> e_ = (M) => 
-        {
-            var a_ = (M?.StatusElement as object);
-            var b_ = context?.Operators.Convert<string>(a_);
-            var d_ = "completed";
-            var c_ = (new string[]
+	public IEnumerable<MedicationRequest> Active_Medication(IEnumerable<MedicationRequest> Med)
+	{
+		bool? a_(MedicationRequest M)
+		{
+			var c_ = M?.StatusElement;
+			var d_ = context.Operators.Convert<string>(c_);
+			var e_ = new string[]
 			{
-				d_,
-			} as IEnumerable<string>);
-            return context?.Operators.InList<string>(b_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<MedicationRequest>(Med, 
-			e_);
-    }
+				"completed",
+			};
+			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+
+			return f_;
+		};
+		var b_ = context.Operators.WhereOrNull<MedicationRequest>(Med, a_);
+
+		return b_;
+	}
 
     [CqlDeclaration("Completed Procedure")]
-    public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
-    {
-        Func<Procedure,bool?> d_ = (P) => 
-        {
-            var b_ = (P?.StatusElement as object);
-            var a_ = (context?.Operators.Convert<string>(b_) as object);
-            var c_ = ("completed" as object);
-            return context?.Operators.Equal(a_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<Procedure>(Proc, 
-			d_);
-    }
+	public IEnumerable<Procedure> Completed_Procedure(IEnumerable<Procedure> Proc)
+	{
+		bool? a_(Procedure P)
+		{
+			var c_ = P?.StatusElement;
+			var d_ = context.Operators.Convert<string>(c_);
+			var e_ = context.Operators.Equal(d_, "completed");
+
+			return e_;
+		};
+		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
+
+		return b_;
+	}
 
     [CqlDeclaration("Completed or Ongoing Procedure")]
-    public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
-    {
-        Func<Procedure,bool?> f_ = (P) => 
-        {
-            var a_ = (P?.StatusElement as object);
-            var b_ = context?.Operators.Convert<string>(a_);
-            var d_ = "completed";
-            var e_ = "in-progress";
-            var c_ = (new string[]
+	public IEnumerable<Procedure> Completed_or_Ongoing_Procedure(IEnumerable<Procedure> Proc)
+	{
+		bool? a_(Procedure P)
+		{
+			var c_ = P?.StatusElement;
+			var d_ = context.Operators.Convert<string>(c_);
+			var e_ = new string[]
 			{
-				d_,
-				e_,
-			} as IEnumerable<string>);
-            return context?.Operators.InList<string>(b_, 
-				c_);
-        };
-        return context?.Operators.WhereOrNull<Procedure>(Proc, 
-			f_);
-    }
+				"completed",
+				"in-progress",
+			};
+			var f_ = context.Operators.InList<string>(d_, (e_ as IEnumerable<string>));
+
+			return f_;
+		};
+		var b_ = context.Operators.WhereOrNull<Procedure>(Proc, a_);
+
+		return b_;
+	}
 
 }
