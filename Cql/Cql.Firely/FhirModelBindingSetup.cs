@@ -33,7 +33,7 @@ namespace Hl7.Cql.Fhir
             DateTimeOffset? now,
             FhirModelBindingOptions? options)
         {
-            _options = options;
+            _options = options ?? FhirModelBindingOptions.Default;
 
             Comparers = new CqlComparers();
             Operators = CqlOperators.Create(
