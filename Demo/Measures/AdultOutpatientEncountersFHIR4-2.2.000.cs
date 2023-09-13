@@ -9,8 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("AdultOutpatientEncountersFHIR4", "2.2.000")]
 public class AdultOutpatientEncountersFHIR4_2_2_000
 {
@@ -134,16 +133,14 @@ public class AdultOutpatientEncountersFHIR4_2_2_000
 		var n_ = context.Operators.ListUnion<Encounter>(k_, m_);
 		bool? o_(Encounter ValidEncounter)
 		{
-			var q_ = ValidEncounter?.StatusElement;
-			var r_ = context.Operators.Convert<string>(q_);
-			var s_ = context.Operators.Equal(r_, "finished");
-			var t_ = this.Measurement_Period();
-			var u_ = ValidEncounter?.Period;
-			var v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval(u_);
-			var w_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(t_, v_, null);
-			var x_ = context.Operators.And(s_, w_);
+			var q_ = context.Operators.Convert<string>(ValidEncounter?.StatusElement);
+			var r_ = context.Operators.Equal(q_, "finished");
+			var s_ = this.Measurement_Period();
+			var t_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Normalize_Interval((ValidEncounter?.Period as object));
+			var u_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(s_, t_, null);
+			var v_ = context.Operators.And(r_, u_);
 
-			return x_;
+			return v_;
 		};
 		var p_ = context.Operators.WhereOrNull<Encounter>(n_, o_);
 

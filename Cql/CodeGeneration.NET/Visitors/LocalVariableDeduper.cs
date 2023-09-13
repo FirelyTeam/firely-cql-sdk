@@ -30,7 +30,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 
             // Find assignments where the right side is exactly the same.
             var duplicateAssignments = localAssignments
-                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{ass.Right.Type.Name}")
+                .GroupBy(ass => $"{ass.Right.GetDebugView()}::{ExpressionConverter.PrettyTypeName(ass.Right.Type)}")
                 .Where(g => g.Count() > 1) // && !g.Key.Contains("Deeper")
                 .ToList();
 

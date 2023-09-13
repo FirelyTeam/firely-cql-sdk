@@ -9,8 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
 public class SupplementalDataElementsFHIR4_2_0_000
 {
@@ -114,42 +113,31 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		};
 		bool? b_(Extension Extension)
 		{
-			var l_ = Extension?.Url;
-			var m_ = context.Operators.Convert<FhirUri>(l_);
-			var n_ = context.Operators.Convert<string>(m_);
-			var o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
+			var l_ = context.Operators.Convert<FhirUri>(Extension?.Url);
+			var m_ = context.Operators.Convert<string>(l_);
+			var n_ = context.Operators.Equal(m_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-ethnicity");
 
-			return o_;
+			return n_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		IEnumerable<Extension> d_(Extension Extension)
-		{
-			var p_ = Extension?.Extension;
-
-			return (p_ as IEnumerable<Extension>);
-		};
+		IEnumerable<Extension> d_(Extension Extension) => 
+			(Extension?.Extension as IEnumerable<Extension>);
 		var e_ = context.Operators.SelectOrNull<Extension, IEnumerable<Extension>>(c_, d_);
 		var f_ = context.Operators.FlattenList<Extension>(e_);
 		bool? g_(Extension E)
 		{
-			var q_ = E?.Url;
-			var r_ = context.Operators.Convert<FhirUri>(q_);
-			var s_ = context.Operators.Convert<string>(r_);
-			var t_ = context.Operators.Equal(s_, "ombCategory");
-			var v_ = context.Operators.Convert<FhirUri>(q_);
-			var w_ = context.Operators.Convert<string>(v_);
-			var x_ = context.Operators.Equal(w_, "detailed");
-			var y_ = context.Operators.Or(t_, x_);
+			var o_ = context.Operators.Convert<FhirUri>(E?.Url);
+			var p_ = context.Operators.Convert<string>(o_);
+			var q_ = context.Operators.Equal(p_, "ombCategory");
+			var s_ = context.Operators.Convert<string>(o_);
+			var t_ = context.Operators.Equal(s_, "detailed");
+			var u_ = context.Operators.Or(q_, t_);
 
-			return y_;
+			return u_;
 		};
 		var h_ = context.Operators.WhereOrNull<Extension>(f_, g_);
-		Coding i_(Extension E)
-		{
-			var z_ = E?.Value;
-
-			return (z_ as Coding);
-		};
+		Coding i_(Extension E) => 
+			(E?.Value as Coding);
 		var j_ = context.Operators.SelectOrNull<Extension, Coding>(h_, i_);
 
 		return j_;
@@ -165,15 +153,13 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		var b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
 		Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG c_(Coverage Payer)
 		{
-			var e_ = Payer?.Type;
-			var f_ = Payer?.Period;
-			var g_ = new Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG
+			var e_ = new Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG
 			{
-				code = e_,
-				period = f_,
+				code = Payer?.Type,
+				period = Payer?.Period,
 			};
 
-			return g_;
+			return e_;
 		};
 		var d_ = context.Operators.SelectOrNull<Coverage, Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>(b_, c_);
 
@@ -201,42 +187,31 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		};
 		bool? b_(Extension Extension)
 		{
-			var l_ = Extension?.Url;
-			var m_ = context.Operators.Convert<FhirUri>(l_);
-			var n_ = context.Operators.Convert<string>(m_);
-			var o_ = context.Operators.Equal(n_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
+			var l_ = context.Operators.Convert<FhirUri>(Extension?.Url);
+			var m_ = context.Operators.Convert<string>(l_);
+			var n_ = context.Operators.Equal(m_, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-race");
 
-			return o_;
+			return n_;
 		};
 		var c_ = context.Operators.WhereOrNull<Extension>(a_(), b_);
-		IEnumerable<Extension> d_(Extension Extension)
-		{
-			var p_ = Extension?.Extension;
-
-			return (p_ as IEnumerable<Extension>);
-		};
+		IEnumerable<Extension> d_(Extension Extension) => 
+			(Extension?.Extension as IEnumerable<Extension>);
 		var e_ = context.Operators.SelectOrNull<Extension, IEnumerable<Extension>>(c_, d_);
 		var f_ = context.Operators.FlattenList<Extension>(e_);
 		bool? g_(Extension E)
 		{
-			var q_ = E?.Url;
-			var r_ = context.Operators.Convert<FhirUri>(q_);
-			var s_ = context.Operators.Convert<string>(r_);
-			var t_ = context.Operators.Equal(s_, "ombCategory");
-			var v_ = context.Operators.Convert<FhirUri>(q_);
-			var w_ = context.Operators.Convert<string>(v_);
-			var x_ = context.Operators.Equal(w_, "detailed");
-			var y_ = context.Operators.Or(t_, x_);
+			var o_ = context.Operators.Convert<FhirUri>(E?.Url);
+			var p_ = context.Operators.Convert<string>(o_);
+			var q_ = context.Operators.Equal(p_, "ombCategory");
+			var s_ = context.Operators.Convert<string>(o_);
+			var t_ = context.Operators.Equal(s_, "detailed");
+			var u_ = context.Operators.Or(q_, t_);
 
-			return y_;
+			return u_;
 		};
 		var h_ = context.Operators.WhereOrNull<Extension>(f_, g_);
-		Coding i_(Extension E)
-		{
-			var z_ = E?.Value;
-
-			return (z_ as Coding);
-		};
+		Coding i_(Extension E) => 
+			(E?.Value as Coding);
 		var j_ = context.Operators.SelectOrNull<Extension, Coding>(h_, i_);
 
 		return j_;
@@ -252,11 +227,15 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		{
 			if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient()?.GenderElement), "male") ?? false))
 			{
-				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Male");
+				string b_ = null;
+
+				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", b_, "Male");
 			}
 			else if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient()?.GenderElement), "female") ?? false))
 			{
-				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", null, "Female");
+				string c_ = null;
+
+				return new CqlCode("F", "http://hl7.org/fhir/v3/AdministrativeGender", c_, "Female");
 			}
 			else
 			{

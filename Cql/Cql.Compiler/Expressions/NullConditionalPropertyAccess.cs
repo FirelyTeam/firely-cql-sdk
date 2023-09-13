@@ -64,7 +64,7 @@ namespace Hl7.Cql.Compiler
 
         public override Type Type => resultType;
 
-        public Expression Update(Expression? expression)
+        public NullConditionalMemberExpression Update(Expression? expression)
         {
             if (expression is null) return this;
 

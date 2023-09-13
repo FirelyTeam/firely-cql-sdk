@@ -2561,28 +2561,16 @@ namespace Hl7.Cql.Compiler
             ExpressionBuilderContext ctx)
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
-            var itemProperty = typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string), typeof(Type[]) });
-            var argumentTypes = arguments
-                .Skip(1) // skip runtimecontext
-                .Select(arg => arg.Type)
-                .ToArray();
-            string? libraryName = null;
+
+            string? libraryName;
             if (!string.IsNullOrWhiteSpace(libraryAlias))
             {
                 if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
                     throw new InvalidOperationException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
             }
             else libraryName = ThisLibraryKey;
-            var typeArrayInitializer = Expression.NewArrayInit(typeof(Type),
-                argumentTypes
-                .Select(type => Expression.Constant(type))
-                .ToArray());
 
-            var indices = new Expression[] { Expression.Constant(libraryName, typeof(string)), Expression.Constant(name), typeArrayInitializer };
-            var index = Expression.MakeIndex(definitionsProperty, itemProperty, indices);
-            var asFunc = Expression.TypeAs(index, definitionType);
-            var invoke = Expression.Invoke(asFunc, arguments);
-            return invoke;
+            return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
         }
 
         protected Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
@@ -2605,24 +2593,17 @@ namespace Hl7.Cql.Compiler
         ExpressionBuilderContext ctx)
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
-            // gets indexer that takes two strings - lib name and def name
-            var itemProperty = typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string) });
-            Expression[]? indices;
-            if (string.IsNullOrWhiteSpace(libraryAlias))
+
+            string? libraryName;
+            if (!string.IsNullOrWhiteSpace(libraryAlias))
             {
-                indices = new[] { Expression.Constant(ThisLibraryKey, typeof(string)), Expression.Constant(name) };
-            }
-            else
-            {
-                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out string? libraryName))
+                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
                     throw new InvalidOperationException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
-                indices = new[] { Expression.Constant(libraryName), Expression.Constant(name) };
             }
-            var index = Expression.MakeIndex(definitionsProperty, itemProperty, indices);
+            else libraryName = ThisLibraryKey;
+
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
-            var asFunc = Expression.TypeAs(index, funcType);
-            var invoke = Expression.Invoke(asFunc, new[] { ctx.RuntimeContextParameter });
-            return invoke;
+            return new DefinitionCallExpression(definitionsProperty, libraryName, name, ctx.RuntimeContextParameter, funcType);
         }
 
         protected Expression CoalesceNullableValueType(Expression nullable)

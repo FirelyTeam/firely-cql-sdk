@@ -9,8 +9,7 @@ using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "0.9.0.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
 [CqlLibrary("NCQAHospice", "1.0.0")]
 public class NCQAHospice_1_0_0
 {
@@ -95,12 +94,11 @@ public class NCQAHospice_1_0_0
 		var c_ = NCQAStatus_1_0_0.Completed_or_Ongoing_Procedure(b_);
 		bool? d_(Procedure HospiceInt)
 		{
-			var n_ = HospiceInt?.Performed;
-			var o_ = NCQAFHIRBase_1_0_0.Normalize_Interval(n_);
-			var p_ = this.Measurement_Period();
-			var q_ = context.Operators.Overlaps(o_, p_, null);
+			var n_ = NCQAFHIRBase_1_0_0.Normalize_Interval(HospiceInt?.Performed);
+			var o_ = this.Measurement_Period();
+			var p_ = context.Operators.Overlaps(n_, o_, null);
 
-			return q_;
+			return p_;
 		};
 		var e_ = context.Operators.WhereOrNull<Procedure>(c_, d_);
 		var f_ = context.Operators.ExistsInList<Procedure>(e_);
@@ -109,12 +107,11 @@ public class NCQAHospice_1_0_0
 		var i_ = NCQAStatus_1_0_0.Finished_Encounter(h_);
 		bool? j_(Encounter HospiceEnc)
 		{
-			var r_ = HospiceEnc?.Period;
-			var s_ = NCQAFHIRBase_1_0_0.Normalize_Interval(r_);
-			var t_ = this.Measurement_Period();
-			var u_ = context.Operators.Overlaps(s_, t_, null);
+			var q_ = NCQAFHIRBase_1_0_0.Normalize_Interval((HospiceEnc?.Period as object));
+			var r_ = this.Measurement_Period();
+			var s_ = context.Operators.Overlaps(q_, r_, null);
 
-			return u_;
+			return s_;
 		};
 		var k_ = context.Operators.WhereOrNull<Encounter>(i_, j_);
 		var l_ = context.Operators.ExistsInList<Encounter>(k_);
