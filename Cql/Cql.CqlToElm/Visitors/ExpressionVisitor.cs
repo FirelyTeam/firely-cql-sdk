@@ -282,58 +282,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitRetrieve([NotNull] cqlParser.RetrieveContext context)
         {
-            //: '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
-            //[0]: "TerminalNodeImpl"
-            //[1]: "ContextIdentifierContext"
-            //[2]: "TerminalNodeImpl"
-            //[3]: "NamedTypeSpecifierContext"
-            //[4]: "TerminalNodeImpl"
-            //[5]: "CodePathContext"
-            //[6]: "CodeComparatorContext"
-            //[7]: "TerminologyContext"
-            //[8]: "TerminalNodeImpl"
-            string? contextName = null;
-            string? codePath = null;
-            string? codeComparator = null;
-            Expression? terminlogy = null;
-            string? rawTypeName = null;
-            NamedTypeSpecifier? type = null;
-            var index = 1;
-            var child = context.GetChild(index);
-            if (child is cqlParser.ContextIdentifierContext contextIdentifier)
-            {
-                contextName = contextIdentifier.GetText();
-                index += 2;
-            }
-            else if (child is cqlParser.NamedTypeSpecifierContext)
-            {
-                rawTypeName = child.GetText();
-                type = TypeSpecifierVisitor.Visit(child) as NamedTypeSpecifier
-                    ?? throw Critical("Retrieve type specifier is not a NamedTypeSpecifier");
-                index += 1;
-            }
-            child = context.GetChild(index);
-            if (child is cqlParser.NamedTypeSpecifierContext)
-            {
-                rawTypeName = child.GetText();
-                type = TypeSpecifierVisitor.Visit(child) as NamedTypeSpecifier
-                    ?? throw Critical("Retrieve type specifier is not a NamedTypeSpecifier");
-                index += 2;
-            }
-            child = context.GetChild(index);
-            if (child is cqlParser.CodePathContext)
-            {
-                codePath = child.GetText();
-                index += 1;
-                var ccChild = context.GetChild(index);
-                codeComparator = ccChild.GetText();
-                index += 1;
-                child = context.GetChild(index);
-            }
-            if (child is cqlParser.TerminologyContext)
-            {
-                terminlogy = Visit(child);
-            }
+            var contextName = context.contextIdentifier().GetText();
+            var codePath = context.codePath().GetText();
+            var codeComparator = context.codeComparator().GetText();
+            var terminology = Visit(context.terminology());
+            var rawTypeName = context.namedTypeSpecifier().GetText();
+            var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
+
             var typeInfo = LibraryContext.UnambiguousType(rawTypeName ?? throw Critical("Unable to resolve retrieve type"));
             var model = ModelProvider.ModelFromQualifiedTypeName(type?.name?.Name
                 ?? throw Critical("Retrieve type is not specified correctly"))
@@ -351,7 +306,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 templateId = typeInfo.templateName,
                 context = contextExpressionRef,
                 codeComparator = codeComparator,
-                codes = terminlogy,
+                codes = terminology,
                 codeProperty = codePath,
                 resultTypeSpecifier = ListType(type, context)
             };
