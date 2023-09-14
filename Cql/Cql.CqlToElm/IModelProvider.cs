@@ -64,5 +64,11 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>The system model.</returns>
         ModelInfo GetSystemModel(Elm.Library library);
 
+        /// <summary>
+        /// Gets the model for the type specified by <paramref name="qualifiedTypeName"/>.
+        /// </summary>
+        /// <param name="qualifiedTypeName">The qualified type name in the form {uri}type</param>
+        /// <returns>The corresponding model if it can be identified; otherwise, <see langword="null"/>.</returns>
+        ModelInfo? ModelFromQualifiedTypeName(string qualifiedTypeName);
     }
 }

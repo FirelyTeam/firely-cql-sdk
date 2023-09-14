@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
@@ -72,8 +73,6 @@ namespace Hl7.Cql.CqlToElm
 
         public TypeInfo? TypeInfoFor(ModelInfo model, string name)
         {
-            if (!name.StartsWith($"{model.name}."))
-                name = $"{model.name}.{name}";
             var typeInfo = model.typeInfo.FirstOrDefault(ti => ti switch
             {
                 SimpleTypeInfo sti => sti.name == name,
@@ -101,6 +100,25 @@ namespace Hl7.Cql.CqlToElm
                 }
             }
             throw new ArgumentException("No model in this library has a local identifier of System.", nameof(library));
+        }
+
+        private static Regex QualifiedNameExpression = new("{(?'uri'.*)}.*", RegexOptions.Compiled);
+        public ModelInfo? ModelFromQualifiedTypeName(string qualifiedTypeName)
+        {
+            var match = QualifiedNameExpression.Match(qualifiedTypeName);
+            if (match.Success)
+            {
+                var uri = match.Groups["uri"];
+                if (uri != null)
+                {
+                    var model = ModelFromUri(uri.Value);
+                    if (model != null)
+                    {
+                        return model;
+                    }
+                }
+            }
+            return null;
         }
     }
 }

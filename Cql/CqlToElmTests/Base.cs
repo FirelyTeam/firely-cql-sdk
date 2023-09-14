@@ -56,6 +56,20 @@ namespace Hl7.Cql.CqlToElm.Test
             return result;
         }
 
+        internal static object? Run(Library library,
+            Func<DefinitionDictionary<Delegate>, CqlContext> ctxFactory,
+            string definition,
+            params object[] args)
+        {
+            var eb = ExpressionBuilderFor(library);
+            var lambdas = eb.Build();
+            var delegates = lambdas.CompileAll();
+            var dg = delegates[library.NameAndVersion, definition];
+            var ctx = ctxFactory(delegates);
+            var result = dg.DynamicInvoke(new[] { ctx }.Concat(args).ToArray());
+            return result;
+        }
+
         internal static ExpressionBuilder ExpressionBuilderFor(Elm.Library lib)
         {
             var tr = FhirTypeResolver.Default;

@@ -78,21 +78,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         #endregion
 
-        public override Expression VisitContextDefinition([NotNull] cqlParser.ContextDefinitionContext context)
-        {
-            var child = context.GetChild(1);
-            if (child is cqlParser.IdentifierContext identifier)
-            {
-
-            }
-            else if (child is cqlParser.QualifiedIdentifierContext qualifiedIdentifier)
-            {
-
-            }
-            //var typeName = TypeSpecifierVisitor.Visit(context.GetChild(1));
-            throw Critical("Invalid context declaration");
-        }
-
         public override Expression VisitIntervalSelector([NotNull] cqlParser.IntervalSelectorContext context)
         {
             bool? lowClosed = context.GetChild(1).GetText() switch
@@ -298,9 +283,80 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitRetrieve([NotNull] cqlParser.RetrieveContext context)
         {
             //: '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
-            throw Critical("Malformed retrieve");
+            //[0]: "TerminalNodeImpl"
+            //[1]: "ContextIdentifierContext"
+            //[2]: "TerminalNodeImpl"
+            //[3]: "NamedTypeSpecifierContext"
+            //[4]: "TerminalNodeImpl"
+            //[5]: "CodePathContext"
+            //[6]: "CodeComparatorContext"
+            //[7]: "TerminologyContext"
+            //[8]: "TerminalNodeImpl"
+            string? contextName = null;
+            string? codePath = null;
+            string? codeComparator = null;
+            Expression? terminlogy = null;
+            string? rawTypeName = null;
+            NamedTypeSpecifier? type = null;
+            var index = 1;
+            var child = context.GetChild(index);
+            if (child is cqlParser.ContextIdentifierContext contextIdentifier)
+            {
+                contextName = contextIdentifier.GetText();
+                index += 2;
+            }
+            else if (child is cqlParser.NamedTypeSpecifierContext)
+            {
+                rawTypeName = child.GetText();
+                type = TypeSpecifierVisitor.Visit(child) as NamedTypeSpecifier
+                    ?? throw Critical("Retrieve type specifier is not a NamedTypeSpecifier");
+                index += 1;
+            }
+            child = context.GetChild(index);
+            if (child is cqlParser.NamedTypeSpecifierContext)
+            {
+                rawTypeName = child.GetText();
+                type = TypeSpecifierVisitor.Visit(child) as NamedTypeSpecifier
+                    ?? throw Critical("Retrieve type specifier is not a NamedTypeSpecifier");
+                index += 2;
+            }
+            child = context.GetChild(index);
+            if (child is cqlParser.CodePathContext)
+            {
+                codePath = child.GetText();
+                index += 1;
+                var ccChild = context.GetChild(index);
+                codeComparator = ccChild.GetText();
+                index += 1;
+                child = context.GetChild(index);
+            }
+            if (child is cqlParser.TerminologyContext)
+            {
+                terminlogy = Visit(child);
+            }
+            var typeInfo = LibraryContext.UnambiguousType(rawTypeName ?? throw Critical("Unable to resolve retrieve type"));
+            var model = ModelProvider.ModelFromQualifiedTypeName(type?.name?.Name
+                ?? throw Critical("Retrieve type is not specified correctly"))
+                ?? throw Critical($"Can't resolve model for type {type!.name!.Name}");
+            var dataType = new XmlQualifiedName($"{model.targetQualifier}:{rawTypeName}");
+            var contextExpressionRef = new ExpressionRef
+            {
+                name = contextName,
+            };
+            var retrieve = new Retrieve
+            {
+                localId = NextId(),
+                locator = context.Locator(),
+                dataType = dataType,
+                templateId = typeInfo.templateName,
+                context = contextExpressionRef,
+                codeComparator = codeComparator,
+                codes = terminlogy,
+                codeProperty = codePath,
+                resultTypeSpecifier = ListType(type, context)
+            };
+            return retrieve;
         }
-
 
         private enum ListElementPromotion
         {
