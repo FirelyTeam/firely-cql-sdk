@@ -4,9 +4,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
@@ -20,6 +21,15 @@ namespace Hl7.Cql.Compiler
             var lhsExpression = TranslateExpression(eq.operand![0], ctx);
             var rhsExpression = TranslateExpression(eq.operand![1], ctx);
             return Equal(lhsExpression, rhsExpression, ctx);
+        }
+
+        protected Expression NotEqual(elm.NotEqual eq, ExpressionBuilderContext ctx)
+        {
+            var lhsExpression = TranslateExpression(eq.operand![0], ctx);
+            var rhsExpression = TranslateExpression(eq.operand![1], ctx);
+            var equal = Equal(lhsExpression, rhsExpression, ctx);
+            var not = OperatorBinding.Bind(CqlOperator.Not, ctx.RuntimeContextParameter, equal);
+            return not;
         }
 
         protected Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)

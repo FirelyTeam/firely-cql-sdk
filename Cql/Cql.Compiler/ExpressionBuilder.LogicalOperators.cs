@@ -4,9 +4,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
@@ -21,7 +22,12 @@ namespace Hl7.Cql.Compiler
         /// <remarks>See https://cql.hl7.org/09-b-cqlreference.html#and</remarks>
         protected Expression And(elm.And e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.And, e, ctx);
-
+        /// <summary>
+        /// The implies operator returns the logical implication of its arguments. This means that if the left operand evaluates to true, this operator returns the boolean evaluation of the right operand. If the left operand evaluates to false, this operator returns true. Otherwise, this operator returns true if the right operand evaluates to true, and null otherwise.
+        /// </summary>
+        /// <remarks>See https://cql.hl7.org/09-b-cqlreference.html#implies</remarks>
+        protected Expression Implies(elm.Implies e, ExpressionBuilderContext ctx) =>
+            BinaryOperator(CqlOperator.Implies, e, ctx);
         /// <summary>
         /// The or operator returns true if either of its arguments are true. If both arguments are false, the result is false. Otherwise, the result is null.
         /// </summary>

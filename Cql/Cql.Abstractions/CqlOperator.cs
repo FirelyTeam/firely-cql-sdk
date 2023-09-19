@@ -5,15 +5,15 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
     /// <summary>
     /// Enumerates the operators in the CQL specification.
     /// </summary>
-    public enum CqlOperator
+    internal enum CqlOperator
     {
         And,
         Or,
@@ -186,7 +186,8 @@ namespace Hl7.Cql
         MinimumValue,
         MaximumValue,
         ResolveValueSet,
-        Aggregate
+        Aggregate,
+        Implies
     }
 }
 

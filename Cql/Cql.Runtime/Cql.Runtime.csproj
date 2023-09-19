@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.Runtime</AssemblyName>
 		<RootNamespace>Hl7.Cql.Runtime</RootNamespace>
 		<Product>CQL engine runtime</Product>
-		<Description>Contains the required runtime components for CQL execution.</Description>
+		<Description>Support package for Hl7.Cql. Contains the required runtime components for CQL execution.</Description>
 		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
@@ -27,11 +27,12 @@
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Logging" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Model" Key="$(LibraryPKHash)" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+    <InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" Key="$(LibraryPKHash)"/>
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23420.2" PrivateAssets="All" />
 	</ItemGroup>
 	
 	<ItemGroup>

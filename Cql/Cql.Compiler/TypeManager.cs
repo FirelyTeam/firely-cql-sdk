@@ -3,9 +3,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using System;
@@ -206,64 +207,89 @@ namespace Hl7.Cql.Compiler
             return typeName;
         }
 
-        internal Type TupleTypeFor(elm.TupleTypeSpecifier tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
         {
-            if (tuple.element?.Length == 0)
+            var elements = tuple.element;
+
+            if (elements?.Length == 0)
                 return typeof(object);
             else
             {
-                var elementInfo = tuple.element!
-                    .ToDictionary(el => el.name, el =>
-                    {
-                        Type? type;
-                        if (el.elementType != null)
-                            type = TypeFor(el.elementType!, context);
-                        else
-                        {
-                            var msg = $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.";
-                            context.LogError(msg, tuple);
-                            throw new InvalidOperationException(msg);
-                        }
-                        if (changeType != null)
-                            type = changeType(type);
-                        return type;
-                    });
-                var allTypes = TupleTypes;
-                foreach (var type in allTypes)
-                {
-                    var typeIsMatch = true;
-                    foreach (var kvp in elementInfo)
-                    {
-                        var normalizedKey = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
-                        var typeProperty = type.GetProperty(normalizedKey!);
-                        if (typeProperty == null || typeProperty.PropertyType != kvp.Value)
-                        {
-                            typeIsMatch = false;
-                            break;
-                        }
-                    }
-                    if (typeIsMatch)
-                        return type;
-                }
+                var elementTuples = elements!
+                    .Select(e => (e.name, e.elementType))
+                    .ToArray();
+                return TupleTypeFor(elementTuples, context, changeType);
+            }
+        }
 
-                var typeName = $"{TupleTypeNamespace}.{TupleTypeNameFor(elementInfo)}";
+        internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
+        {
+            var elements = tuple.element;
 
-                var myTypeBuilder = ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
+            if (elements?.Length == 0)
+                return typeof(object);
+            else
+            {
+                var elementTuples = elements!
+                    .Select(e => (e.name, e.value.resultTypeSpecifier ??
+                        throw new InvalidOperationException("Tuple element value does not have a resultTypeSpecifier")))
+                    .ToArray();
+                return TupleTypeFor(elementTuples, context, changeType);
+            }
+        }
 
+        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext context, Func<Type, Type>? changeType)
+        {
+            var elementInfo = elements!
+                                .ToDictionary(el => el.name, el =>
+                                {
+                                    Type? type;
+                                    if (el.elementType != null)
+                                        type = TypeFor(el.elementType!, context);
+                                    else
+                                    {
+                                        var msg = $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.";
+                                        context.LogError(msg);
+                                        throw new InvalidOperationException(msg);
+                                    }
+                                    if (changeType != null)
+                                        type = changeType(type);
+                                    return type;
+                                });
+            var allTypes = TupleTypes;
+            foreach (var type in allTypes)
+            {
+                var typeIsMatch = true;
                 foreach (var kvp in elementInfo)
                 {
-                    if (kvp.Key != null)
+                    var normalizedKey = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
+                    var typeProperty = type.GetProperty(normalizedKey!);
+                    if (typeProperty == null || typeProperty.PropertyType != kvp.Value)
                     {
-                        var name = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
-                        var type = kvp.Value;
-                        DefineProperty(myTypeBuilder, name!, kvp.Key, type);
+                        typeIsMatch = false;
+                        break;
                     }
                 }
-                var typeInfo = myTypeBuilder.CreateTypeInfo();
-                AddTupleType(typeInfo!);
-                return typeInfo!;
+                if (typeIsMatch)
+                    return type;
             }
 
+            var typeName = $"{TupleTypeNamespace}.{TupleTypeNameFor(elementInfo)}";
+
+            var myTypeBuilder = ModuleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
+
+            foreach (var kvp in elementInfo)
+            {
+                if (kvp.Key != null)
+                {
+                    var name = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
+                    var type = kvp.Value;
+                    DefineProperty(myTypeBuilder, name!, kvp.Key, type);
+                }
+            }
+            var typeInfo = myTypeBuilder.CreateTypeInfo();
+            AddTupleType(typeInfo!);
+            return typeInfo!;
         }
 
         /// <summary>

@@ -4,10 +4,11 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Runtime;
@@ -24,7 +25,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 
-namespace Hl7.Cql.Compiler
+namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
@@ -51,14 +52,14 @@ namespace Hl7.Cql.Compiler
             var references = new[]
             {
             // Core engine references
-                typeof(Hl7.Cql.CqlDeclarationAttribute).Assembly, // Cql.Abstractions
-                typeof(Hl7.Cql.Comparers.CqlComparers).Assembly, // Cql.Comparers
-                typeof(Hl7.Cql.Conversion.IUnitConverter).Assembly, // Cql.Conversion
-                typeof(Hl7.Cql.Operators.ICqlOperators).Assembly, // Cql.Operators
-                typeof(Hl7.Cql.Primitives.CqlPrimitiveType).Assembly, // Cql.Primitives
-                typeof(Hl7.Cql.Runtime.CqlContext).Assembly, // Cql.Runtime
-                typeof(Hl7.Cql.ValueSets.IValueSetDictionary).Assembly, // Cql.ValueSets
-                typeof(Hl7.Cql.Iso8601.DateIso8601).Assembly, // Iso8601
+                typeof(CqlDeclarationAttribute).Assembly, // Cql.Abstractions
+                typeof(Comparers.CqlComparers).Assembly, // Cql.Comparers
+                typeof(Conversion.IUnitConverter).Assembly, // Cql.Conversion
+                typeof(Operators.ICqlOperators).Assembly, // Cql.Operators
+                typeof(Primitives.CqlPrimitiveType).Assembly, // Cql.Primitives
+                typeof(CqlContext).Assembly, // Cql.Runtime
+                typeof(IValueSetDictionary).Assembly, // Cql.ValueSets
+                typeof(Iso8601.DateIso8601).Assembly, // Iso8601
             }
             .Concat(TypeResolver.ModelAssemblies)
             .Distinct()
@@ -85,17 +86,15 @@ namespace Hl7.Cql.Compiler
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger);
+                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new(false));
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }
 
-            var navToLibraryStream = new Dictionary<string, Stream>();
             var assemblies = generate(all,
                 TypeManager,
                 graph,
                 scw,
-                navToLibraryStream,
                 references);
             return assemblies;
         }
@@ -104,9 +103,10 @@ namespace Hl7.Cql.Compiler
            TypeManager typeManager,
            DirectedGraph dependencies,
            CSharpSourceCodeWriter writer,
-           Dictionary<string, Stream> navToLibraryStream,
            IEnumerable<Assembly> references)
         {
+            Dictionary<string, Stream> navToLibraryStream = new();
+
             Stream getStreamForLibrary(string nav)
             {
                 if (!navToLibraryStream.TryGetValue(nav, out var stream))
@@ -116,6 +116,7 @@ namespace Hl7.Cql.Compiler
                 }
                 return stream;
             }
+
             writer.Write(expressions,
                 typeManager.TupleTypes,
                 dependencies,
@@ -124,7 +125,7 @@ namespace Hl7.Cql.Compiler
 
             var assemblies = new Dictionary<string, AssemblyData>();
             var tupleStreams = navToLibraryStream
-                .Where(kvp => kvp.Key.StartsWith("Tuples\\"));
+                .Where(kvp => kvp.Key.StartsWith("Tuples" + Path.DirectorySeparatorChar));
             var tupleAssembly = CompileTuples(tupleStreams, references);
             var additionalReferences = new[]
             {
@@ -240,7 +241,7 @@ namespace Hl7.Cql.Compiler
             string version = string.Empty;
             if (parts.Length > 1)
                 version = parts[1];
-            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
+            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
             var compilation = CSharpCompilation.Create($"{node.NodeId}")

@@ -1,5 +1,5 @@
 ﻿using Hl7.Cql.Conversion;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -12,7 +12,7 @@ namespace CoreTests
     [TestClass]
     public class FhirTypeConverterTests
     {
-        internal static readonly TypeConverter FhirTypeConverter = FirelyTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        internal static readonly TypeConverter FhirTypeConverter = Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
         [TestMethod]
         public void ConvertParameters_Integer()
@@ -454,11 +454,7 @@ namespace CoreTests
         [TestMethod]
         public void ConvertCqlQuantity_Quantity()
         {
-            var quantity = new CqlQuantity()
-            {
-                unit = "oranges",
-                value = 1
-            };
+            var quantity = new CqlQuantity(1, "oranges");
             var converted = FhirTypeConverter.Convert<Quantity>(quantity);
 
             Assert.IsNotNull(converted);
@@ -471,17 +467,9 @@ namespace CoreTests
         public void ConvertCqlQuantityInterval_Range()
         {
             var quantityInterval = new CqlInterval<CqlQuantity>(
-                new CqlQuantity()
-                {
-                    unit = "oranges",
-                    value = 1
-                },
-                new CqlQuantity()
-                {
-                    unit = "oranges",
-                    value = 10
-                }, true, true
-            );
+                new CqlQuantity(1, "oranges"),
+                new CqlQuantity(10, "oranges"),
+                true, true);
             var converted = FhirTypeConverter.Convert<Hl7.Fhir.Model.Range>(quantityInterval);
 
             Assert.IsNotNull(converted);
@@ -527,17 +515,8 @@ namespace CoreTests
         public void ConvertCqlRatio_Ratio()
         {
             var quantityInterval = new CqlRatio(
-                new CqlQuantity()
-                {
-                    unit = "widgets",
-                    value = 1
-                },
-                new CqlQuantity()
-                {
-                    unit = "widgets",
-                    value = 10
-                }
-            );
+                new CqlQuantity(1, "widgets"),
+                new CqlQuantity(10, "widgets"));
             var converted = FhirTypeConverter.Convert<Ratio>(quantityInterval);
 
             Assert.IsNotNull(converted);

@@ -4,7 +4,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using System;
@@ -18,8 +18,10 @@ namespace Hl7.Cql.Model
     {
         private static readonly XmlSerializer xmlSerializer = new(typeof(ModelInfo));
         private static readonly Lazy<ModelInfo> _Fhir401 = new(() => LoadEmbeddedResource("Fhir401"), true);
+        private static readonly Lazy<ModelInfo> _ElmR1 = new(() => LoadEmbeddedResource("ElmR1"), true);
 
         public static ModelInfo Fhir401 => _Fhir401.Value;
+        public static ModelInfo ElmR1 => _ElmR1.Value;
 
         public static IDictionary<string, ClassInfo> ClassesById(ModelInfo model)
         {

@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -6,6 +6,8 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AssemblyName>Hl7.Cql</AssemblyName>
 		<RootNamespace>Hl7.Cql</RootNamespace>
+		<Product>HL7 CQL Engine</Product>
+		<Description>A platform for evaluating logic in the HL7 CQL language.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -14,6 +16,7 @@
 		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
+		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
@@ -23,6 +26,6 @@
 		<ProjectReference Include="..\Elm\Elm.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23420.2" PrivateAssets="All" />
 	</ItemGroup>
 </Project>

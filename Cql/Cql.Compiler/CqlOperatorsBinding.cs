@@ -4,9 +4,10 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
@@ -384,8 +385,6 @@ namespace Hl7.Cql.Compiler
                     return Retrieve(operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.LateBoundProperty:
                     return LateBoundProperty(operators, parameters[0], parameters[1], parameters[2]);
-                case CqlOperator.PropertyOrDefault:
-                    return PropertyOrDefault(operators, parameters[0], parameters[1], parameters[2], parameters[3]);
                 case CqlOperator.Equal:
                     return BindBinaryOperator(nameof(ICqlOperators.Equal), operators, parameters[0], parameters[1]);
                 case CqlOperator.CodeInValueSet:
@@ -444,6 +443,8 @@ namespace Hl7.Cql.Compiler
                     return SortBy(operators, parameters[0], parameters[1], parameters[2]);
                 case CqlOperator.Aggregate:
                     return Aggregate(operators, parameters[0], parameters[1], parameters[2]);
+                case CqlOperator.Implies:
+                    return BindBinaryOperator(nameof(ICqlOperators.Implies), operators, parameters[0], parameters[1]);
                 default:
                     break;
             }
@@ -586,22 +587,6 @@ namespace Hl7.Cql.Compiler
                 return call;
             }
             else throw new ArgumentException("Expression should be a constant expression whose type is Type", nameof(typeConstant));
-        }
-
-        private Expression PropertyOrDefault(MemberExpression operators, Expression sourceExpression, Expression lambdaExpression,
-            Expression sourceTypeExpression, Expression memberTypeExpression)
-        {
-            if (sourceTypeExpression is ConstantExpression sourceTypeConstant
-                && sourceTypeConstant.Type == typeof(Type)
-                && memberTypeExpression is ConstantExpression memberTypeConstant
-                && memberTypeConstant.Type == typeof(Type))
-            {
-                var method = typeof(ObjectExtensions).GetMethod(nameof(ObjectExtensions.PropertyOrDefault))!
-                    .MakeGenericMethod(new[] { (Type)sourceTypeConstant.Value!, (Type)memberTypeConstant.Value! });
-                var call = Expression.Call(method, sourceExpression, lambdaExpression);
-                return call;
-            }
-            else throw new ArgumentException("Improper usage of PropertyOrDefault");
         }
 
         private Expression Coalesce(MemberExpression operators, Expression operand)
@@ -1063,6 +1048,15 @@ namespace Hl7.Cql.Compiler
                     && codePropertyExpression is ConstantExpression cpe
                     && cpe.Type == typeof(PropertyInfo))
                 {
+                    if (cpe.Value is PropertyInfo pi)
+                    {
+                        var declaringType = pi!.DeclaringType;
+                        var propName = pi.Name;
+                        var method = typeof(Type).GetMethod(nameof(Type.GetProperty), new[] { typeof(string) })!;
+                        var typeOf = Expression.Constant(declaringType);
+                        codePropertyExpression = Expression.Call(typeOf, method, Expression.Constant(propName));
+                    }
+
                     return Retrieve(operators, type, valueSetOrCodes, codePropertyExpression);
                 }
                 else throw new ArgumentException("Second parameter to Retrieve is expected to be a constant PropertyInfo", nameof(codePropertyExpression));

@@ -31,7 +31,9 @@ namespace Hl7.Cql.Elm
             }
             else
             {
+#if DEBUG_SERIALIZATION
                 System.Diagnostics.Debug.WriteLine($"Skipping token {Encoding.UTF8.GetString(reader.ValueSpan)} at position {reader.TokenStartIndex}; not an object.");
+#endif
                 return default;
             }
         }

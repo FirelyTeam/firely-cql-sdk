@@ -80,9 +80,7 @@ Hl7.Cql.Primitives.CqlQuantity
 Hl7.Cql.Primitives.CqlQuantity.CqlQuantity() -> void
 Hl7.Cql.Primitives.CqlQuantity.CqlQuantity(decimal? value, string? unit) -> void
 Hl7.Cql.Primitives.CqlQuantity.unit.get -> string?
-Hl7.Cql.Primitives.CqlQuantity.unit.set -> void
 Hl7.Cql.Primitives.CqlQuantity.value.get -> decimal?
-Hl7.Cql.Primitives.CqlQuantity.value.set -> void
 Hl7.Cql.Primitives.CqlRatio
 Hl7.Cql.Primitives.CqlRatio.CqlRatio() -> void
 Hl7.Cql.Primitives.CqlRatio.CqlRatio(Hl7.Cql.Primitives.CqlQuantity? numerator, Hl7.Cql.Primitives.CqlQuantity? denominator) -> void

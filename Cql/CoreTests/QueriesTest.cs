@@ -1,7 +1,7 @@
-﻿using Hl7.Cql;
+﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
-using Hl7.Cql.Firely;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -18,8 +18,8 @@ namespace CoreTests
     [TestClass]
     public class QueriesTest
     {
-        private static readonly TypeResolver TypeResolver = new FirelyTypeResolver(ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FirelyTypeConverter.Create(ModelInfo.ModelInspector);
+        private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
 
         [ClassInitialize]
         public static void Initialize(TestContext context)
@@ -55,7 +55,7 @@ namespace CoreTests
         private const string QueriesLibrary = "QueriesTest-1.0.0";
         private const string AggregatesLibrary = "Aggregates-1.0.0";
 
-        private static IValueSetDictionary ValueSets;
+        private static HashValueSetDictionary ValueSets;
         private const string TestCodeSystem = "https://www.ncqa.org/fhir/codesystem/test-cs";
         private static readonly CqlCode[] TestCodes = new CqlCode[]
         {
@@ -65,7 +65,7 @@ namespace CoreTests
 
         };
 
-        private CqlContext Context(Bundle bundle) => FirelyCqlContext.ForBundle(
+        private CqlContext GetNewContext(Bundle bundle) => FhirCqlContext.ForBundle(
             bundle: bundle,
             valueSets: ValueSets,
             delegates: QueriesDefinitions);
@@ -75,7 +75,7 @@ namespace CoreTests
         public void Simple_Retrieve()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Simple retrieve", ctx);
             Assert.AreEqual(0, result.Count());
@@ -84,7 +84,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Simple retrieve", ctx);
             Assert.AreEqual(1, result.Count());
 
@@ -97,7 +97,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Simple retrieve", ctx);
             Assert.AreEqual(2, result.Count());
         }
@@ -106,7 +106,7 @@ namespace CoreTests
         public void Simple_Retrieve_with_ValueSet()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with ValueSet", ctx);
             Assert.AreEqual(0, result.Count());
@@ -115,7 +115,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with ValueSet", ctx);
             Assert.AreEqual(0, result.Count());
 
@@ -161,7 +161,7 @@ namespace CoreTests
                     }
                 }
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             var resultArray = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with ValueSet", ctx)
                 .ToArray();
 
@@ -174,7 +174,7 @@ namespace CoreTests
         public void Query_source_using_define()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
             Assert.AreEqual(0, result.Count());
@@ -183,7 +183,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
             Assert.AreEqual(1, result.Count());
 
@@ -196,7 +196,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
             Assert.AreEqual(2, result.Count());
         }
@@ -205,7 +205,7 @@ namespace CoreTests
         public void Retrieve_with_inline_list_of_codes()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes", ctx);
             Assert.AreEqual(0, result.Count());
@@ -213,7 +213,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes", ctx);
             Assert.AreEqual(0, result.Count());
             bundle.Entry.Add(new Bundle.EntryComponent
@@ -258,7 +258,7 @@ namespace CoreTests
                     }
                 }
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             var resultArray = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes", ctx)
                 .ToArray();
 
@@ -270,7 +270,7 @@ namespace CoreTests
         public void Retrieve_with_list_of_codes_and_code_path()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
@@ -278,7 +278,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
 
@@ -324,7 +324,7 @@ namespace CoreTests
                     }
                 }
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             var resultArray = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with list of codes and code path", ctx)
                 .ToArray();
 
@@ -336,7 +336,7 @@ namespace CoreTests
         public void Retrieve_with_inline_list_of_codes_and_code_path()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
 
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
@@ -344,7 +344,7 @@ namespace CoreTests
             {
                 Resource = new Observation()
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes and code path", ctx);
             Assert.AreEqual(0, result.Count());
 
@@ -390,7 +390,7 @@ namespace CoreTests
                     }
                 }
             });
-            ctx = Context(bundle);
+            ctx = GetNewContext(bundle);
             var resultArray = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with inline list of codes and code path", ctx)
                 .ToArray();
 
@@ -402,7 +402,7 @@ namespace CoreTests
         public void Retrieve_with_null_query_source()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             var result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Retrieve with null query source", ctx);
             Assert.IsNull(result);
         }
@@ -411,7 +411,7 @@ namespace CoreTests
         public void Retrieve_with_empty_query_source()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             // type of the query source is List<Any>
             var result = QueriesDefinitions.Invoke<IEnumerable<object>>(QueriesLibrary, "Retrieve with empty query source", ctx);
             Assert.AreEqual(0, result.Count());
@@ -421,7 +421,7 @@ namespace CoreTests
         public void Retrieve_with_all_null_query_source()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             // type of the query source is List<Any>
             var result = QueriesDefinitions.Invoke<IEnumerable<object>>(QueriesLibrary, "Retrieve with all null query source", ctx);
             Assert.AreEqual(3, result.Count());
@@ -431,7 +431,7 @@ namespace CoreTests
         public void Aggregates_FactorialOfFive()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             var result = AggregatesDefinitions.Invoke<int?>(AggregatesLibrary, "FactorialOfFive", ctx);
             Assert.AreEqual(120, result.Value);
         }
@@ -440,7 +440,7 @@ namespace CoreTests
         public void Aggregates_With_where()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             var result = AggregatesDefinitions.Invoke<int?>(AggregatesLibrary, "With where", ctx);
             Assert.IsNotNull(result);
             Assert.AreEqual(6 * 4 * 2, result.Value);
@@ -451,7 +451,7 @@ namespace CoreTests
         public void Aggregates_With_where_and_let()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             var result = AggregatesDefinitions.Invoke<int?>(AggregatesLibrary, "With where and let", ctx);
             Assert.IsNotNull(result);
             var expected = (6 + 1 + 2) * (4 + 1 + 2) * (2 + 1 + 2); // 315
@@ -462,7 +462,7 @@ namespace CoreTests
         public void Aggregates_With_such_that()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             var result = AggregatesDefinitions.Invoke<int?>(AggregatesLibrary, "With such that", ctx);
             Assert.IsNotNull(result);
             Assert.AreEqual(24, result.Value);
@@ -473,7 +473,7 @@ namespace CoreTests
         public void Aggregates_Multisource_query()
         {
             var bundle = new Bundle();
-            var ctx = Context(bundle);
+            var ctx = GetNewContext(bundle);
             var result = AggregatesDefinitions.Invoke<int?>(AggregatesLibrary, "Multisource query", ctx);
             Assert.AreEqual(12, result);
         }

@@ -1,16 +1,16 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\..\cql-sdk.props" />
+	<Import Project="$(ProjectPath)..\..\cql-sdk.props" />
 
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Iso8601</AssemblyName>
 		<RootNamespace>Hl7.Cql.Iso8601</RootNamespace>
 		<Product>ISO 8601 datetime abstractions</Product>
-		<Description>Contains implementations of ISO 8601 date, time, and datetime structures for use in the CQL engine.  These date structures have nullable values beyond the most significant (year for dates, hour for times), and have an understanding of precision.</Description>
+		<Description>Support package for Hl7.Cql. Contains implementations of ISO 8601 date, time, and datetime structures for use in the CQL engine.  These date structures have nullable values beyond the most significant (year for dates, hour for times), and have an understanding of precision.</Description>
 	</PropertyGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23420.2" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>

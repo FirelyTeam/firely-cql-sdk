@@ -3,7 +3,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using System.Collections.Generic;
@@ -13,13 +13,12 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class ParameterFinder : ExpressionVisitor
     {
-        public IList<string> Names { get; } = new List<string>();
-
+        private readonly HashSet<ParameterExpression> _parameters = new();
+        public IEnumerable<ParameterExpression> Parameters => _parameters;
 
         protected override Expression VisitParameter(ParameterExpression node)
         {
-            if (node.Name != null && !Names.Contains(node.Name))
-                Names.Add(node.Name);
+            _parameters.Add(node);
             return base.VisitParameter(node);
         }
     }

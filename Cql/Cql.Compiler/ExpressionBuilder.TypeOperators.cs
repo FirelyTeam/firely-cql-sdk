@@ -4,9 +4,11 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
@@ -28,8 +30,8 @@ namespace Hl7.Cql.Compiler
                     {
                         var listElementType = TypeResolver.GetListElementType(type) ?? throw new InvalidOperationException($"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
-                        var typeAs = Expression.TypeAs(newArray, type);
-                        return typeAs;
+                        var elmAs = new ElmAsExpression(newArray, type);
+                        return elmAs;
                     }
                     else
                     {
@@ -45,13 +47,13 @@ namespace Hl7.Cql.Compiler
                 {
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     var defaultExpression = Expression.Default(type);
-                    return Expression.TypeAs(defaultExpression, type);
+                    return new ElmAsExpression(defaultExpression, type);
                 }
                 else
                 {
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     var operand = TranslateExpression(@as.operand!, ctx);
-                    return Expression.TypeAs(operand, type);
+                    return new ElmAsExpression(operand, type);
                 }
             }
             else
@@ -60,18 +62,12 @@ namespace Hl7.Cql.Compiler
                     throw new ArgumentException("asType cannot be null", nameof(@as));
                 if (@as.operand == null)
                     throw new ArgumentException("operand cannot be null", nameof(@as));
-                var type = TypeResolver.ResolveType(@as.asType.Name!);
+                var type = TypeResolver.ResolveType(@as.asType.Name!)
+                    ?? throw new InvalidOperationException($"Cannot resolve type {@as.asType.Name}");
                 var operand = TranslateExpression(@as.operand, ctx);
-                if (type!.IsValueType)
-                    return Expression.Convert(operand, type);
-                else if (operand is ConstantExpression ce && ce.Value == null)
-                    return Expression.Constant(null, type);
-                else
-                {
-                    if (!type.IsAssignableFrom(operand.Type))
-                        ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
-                    return Expression.TypeAs(operand, type);
-                }
+                if (!type.IsAssignableFrom(operand.Type))
+                    ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
+                return new ElmAsExpression(operand, type);
             }
         }
 
@@ -79,17 +75,35 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Is(elm.Is @is, ExpressionBuilderContext ctx)
         {
-
-            string? typeName = null;
-            if (@is.isTypeSpecifier?.resultTypeName != null)
-                typeName = @is.isTypeSpecifier!.resultTypeName.Name!;
-            else if (@is.isType != null)
-                typeName = @is.isType.Name;
-            if (string.IsNullOrWhiteSpace(typeName))
-                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
-            var type = TypeResolver.ResolveType(typeName)
-                ?? throw new InvalidOperationException($"Could not resolve type {typeName}");
             var op = TranslateExpression(@is.operand!, ctx);
+            Type? type = null;
+            if (@is.isTypeSpecifier != null) 
+            {
+                if (@is.isTypeSpecifier is elm.ChoiceTypeSpecifier choice)
+                {
+                    var firstChoiceType = TypeManager.TypeFor(choice.choice[0], ctx)
+                            ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+                    Expression result = Expression.TypeIs(op, firstChoiceType);
+                    for (int i = 1; i < choice.choice.Length; i++)
+                    {
+                        var cti = TypeManager.TypeFor(choice.choice[i], ctx)
+                            ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+                        var ie = Expression.TypeIs(op, cti);
+                        result = Expression.Or(result, ie);
+                    }
+                    var ta = Expression.TypeAs(result, typeof(bool?));
+                    return ta;
+                }
+                type = TypeManager.TypeFor(@is.isTypeSpecifier, ctx)
+                    ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+            }
+            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name)) 
+            {
+                type = TypeResolver.ResolveType(@is.isType.Name)
+                    ?? throw new InvalidOperationException($"Could not resolve type {@is.isType.Name}");
+            }
+            if (type == null)
+                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
             var isExpression = Expression.TypeIs(op, type);
             var nullable = Expression.TypeAs(isExpression, typeof(bool?));
             return nullable;
@@ -185,7 +199,7 @@ namespace Hl7.Cql.Compiler
         protected Expression ToLong(elm.ToLong e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            return ChangeType(operand, typeof(decimal?), ctx);
+            return ChangeType(operand, typeof(long?), ctx);
         }
 
         protected Expression? ToInteger(elm.ToInteger e, ExpressionBuilderContext ctx)

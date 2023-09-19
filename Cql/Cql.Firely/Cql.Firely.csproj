@@ -1,25 +1,28 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
-		<RootNamespace>Hl7.Cql.Firely</RootNamespace>
-		<AssemblyName>Hl7.Cql.Firely</AssemblyName>
+		<RootNamespace>Hl7.Cql.Fhir</RootNamespace>
+		<AssemblyName>Hl7.Cql.Fhir</AssemblyName>
+		<Product>CQL engine binding for POCOs</Product>
+		<Description>Support package for Hl7.Cql. Contains the bindings to use Firely's .NET SDK Pocos for FHIR.</Description>
 	</PropertyGroup>
 
 
 	<ItemGroup>
 		<PackageReference Include="Hl7.Fhir.Base" Version="$(FirelySdkVersion)" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23420.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
-		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)"/>
+		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="PackagerCLI" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" Key="$(LibraryPKHash)"/>
 	</ItemGroup>
 
 </Project>

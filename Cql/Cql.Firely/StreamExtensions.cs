@@ -4,14 +4,14 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using System.Text.Json;
 
-namespace Hl7.Cql.Firely
+namespace Hl7.Cql.Fhir
 {
     internal static class StreamExtensions
     {

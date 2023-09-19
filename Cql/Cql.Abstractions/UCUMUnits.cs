@@ -3,12 +3,12 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
 using Hl7.Cql.Iso8601;
 
-namespace Hl7.Cql
+namespace Hl7.Cql.Abstractions
 {
     /// <summary>
     /// Defines UCUM unit constants.
@@ -87,27 +87,17 @@ namespace Hl7.Cql
         /// <returns>The corresponding UCUM units, or <see langword="null"/> if no mapping is defined.</returns>
         public static string? FromDateTimePrecision(DateTimePrecision dtp)
         {
-            switch (dtp)
+            return dtp switch
             {
-
-                case DateTimePrecision.Year:
-                    return Year;
-                case DateTimePrecision.Month:
-                    return Month;
-                case DateTimePrecision.Day:
-                    return Day;
-                case DateTimePrecision.Hour:
-                    return Hour;
-                case DateTimePrecision.Minute:
-                    return Minute;
-                case DateTimePrecision.Second:
-                    return Second;
-                case DateTimePrecision.Millisecond:
-                    return Millisecond;
-                case DateTimePrecision.Unknown:
-                default:
-                    return null;
-            }
+                DateTimePrecision.Year => Year,
+                DateTimePrecision.Month => Month,
+                DateTimePrecision.Day => Day,
+                DateTimePrecision.Hour => Hour,
+                DateTimePrecision.Minute => Minute,
+                DateTimePrecision.Second => Second,
+                DateTimePrecision.Millisecond => Millisecond,
+                _ => null,
+            };
         }
     }
 

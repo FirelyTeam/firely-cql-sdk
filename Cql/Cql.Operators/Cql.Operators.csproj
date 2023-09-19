@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -6,7 +6,7 @@
 		<AssemblyName>Hl7.Cql.Operators</AssemblyName>
 		<RootNamespace>Hl7.Cql.Operators</RootNamespace>
 		<Product>CQL operators implementation</Product>
-		<Description>Implementation of the various operators and methods in the Cql spec.</Description>
+		<Description>Support package for Hl7.Cql. Implementation of the various operators and methods in the Cql spec.</Description>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -19,16 +19,18 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
+		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
+		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.Firely" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Logging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23364.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23420.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
