@@ -1,9 +1,5 @@
-using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
@@ -11,7 +7,7 @@ using System.IO;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class LibraryTest: Base
+    public class LibraryTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -235,7 +231,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Using_Duplciate_System_NoLocalAlias()
+        public void Using_Duplicate_System_NoLocalAlias()
         {
             var services = new ServiceCollection()
                 .AddVisitors()

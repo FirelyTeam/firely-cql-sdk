@@ -2,6 +2,7 @@
 using Hl7.Cql.Elm;
 using System;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.Serialization;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -12,6 +13,72 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public static string NextId(object context) => _idGenerator.GetId(context, out _)
                 .ToString(CultureInfo.InvariantCulture);
+
+        // : (qualifier '.')* identifier
+        public static (string qualifier, string id) Parse(this cqlParser.QualifiedIdentifierContext context)
+        {
+            var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
+
+            if (qualifiers.Any())
+            {
+                if (qualifiers.Length > 1)
+                    throw new InvalidOperationException($"Multiple qualifiers not supported");
+
+                return (qualifiers.Single(), context.identifier().Parse()!);
+            }
+            else
+                return (string.Empty, context.identifier().Parse()!);
+        }
+
+        //   : 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond'
+        public static DateTimePrecision Parse(this cqlParser.DateTimePrecisionContext context) =>
+              context?.GetText() switch
+              {
+                  "year" => DateTimePrecision.Year,
+                  "month" => DateTimePrecision.Month,
+                  "week" => DateTimePrecision.Week,
+                  "day" => DateTimePrecision.Day,
+                  "hour" => DateTimePrecision.Hour,
+                  "minute" => DateTimePrecision.Minute,
+                  "second" => DateTimePrecision.Second,
+                  "millisecond" => DateTimePrecision.Millisecond,
+                  var other => throw new InvalidOperationException($"Unknown precision '{other}'")
+              };
+
+        //: accessModifier? 'concept' identifier ':' '{' codeIdentifier(',' codeIdentifier)* '}' displayClause?
+        public static ConceptDef Parse(this cqlParser.ConceptDefinitionContext context)
+        {
+            var conceptDef = new ConceptDef
+            {
+                accessLevel = context.accessModifier().Parse(),
+                name = context.identifier().Parse(),
+                code = context.codeIdentifier().Select(ci => ci.Parse()).ToArray(),
+                display = context.displayClause()?.STRING().ParseString(),
+
+                localId = NextId(context),
+                locator = context.Locator()
+            };
+            return conceptDef;
+        }
+
+
+        //accessModifier? 'codesystem' identifier ':' codesystemId('version' versionSpecifier)?
+        public static CodeSystemDef Parse(this cqlParser.CodesystemDefinitionContext context)
+        {
+            var codeSystemDef = new CodeSystemDef
+            {
+                accessLevel = context.accessModifier().Parse(),
+                name = context.identifier().Parse(),
+                id = context.codesystemId().STRING().ParseString(),
+                version = context.versionSpecifier()?.STRING().ParseString(),
+
+                localId = NextId(context),
+                locator = context.Locator()
+            };
+
+            return codeSystemDef;
+        }
+
 
         // : (libraryIdentifier '.')? identifier
         public static CodeRef Parse(this cqlParser.CodeIdentifierContext context)

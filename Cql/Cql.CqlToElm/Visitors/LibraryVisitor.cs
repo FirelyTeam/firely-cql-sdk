@@ -24,9 +24,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private VersionedIdentifierVisitor VersionedIdentifierVisitor => Services.GetRequiredService<VersionedIdentifierVisitor>();
         private UsingDefinitionVisitor UsingDefinitionVisitor => Services.GetRequiredService<UsingDefinitionVisitor>();
         private IncludeDefinitionVisitor IncludeDefinitionVisitor => Services.GetRequiredService<IncludeDefinitionVisitor>();
-        private CodeSystemDefinitionVisitor CodeSystemDefinitionVisitor => Services.GetRequiredService<CodeSystemDefinitionVisitor>();
         private ValueSetDefinitionVisitor ValueSetDefinitionVisitor => Services.GetRequiredService<ValueSetDefinitionVisitor>();
-        private ConceptDefinitionVisitor ConceptDefinitionVisitor => Services.GetRequiredService<ConceptDefinitionVisitor>();
         private ParameterDefinitionVisitor ParameterDefinitionVisitor => Services.GetRequiredService<ParameterDefinitionVisitor>();
         private ExpressionDefinitionVisitor ExpressionDefinitionVisitor => Services.GetRequiredService<ExpressionDefinitionVisitor>();
         private ExpressionVisitor ExpressionVisitor => Services.GetRequiredService<ExpressionVisitor>();
@@ -103,7 +101,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     break;
                                 case cqlParser.CodesystemDefinitionContext codeSystem:
                                     {
-                                        var codeSystemDef = CodeSystemDefinitionVisitor.Visit(codeSystem);
+                                        var codeSystemDef = codeSystem.Parse();
                                         codeSystems.AddLast(codeSystemDef);
                                     }
                                     break;
@@ -121,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     break;
                                 case cqlParser.ConceptDefinitionContext concept:
                                     {
-                                        var conceptDef = ConceptDefinitionVisitor.Visit(concept);
+                                        var conceptDef = concept.Parse();
                                         concepts.AddLast(conceptDef);
                                     }
                                     break;

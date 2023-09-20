@@ -29,7 +29,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         #region Privates
         private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
-        private DateTimePrecisionVisitor DateTimePrecisionVisitor => Services.GetRequiredService<DateTimePrecisionVisitor>();
         private LibraryContext LibraryContext => Services.GetRequiredService<LibraryContext>();
         private TypeSpecifierVisitor TypeSpecifierVisitor => Services.GetRequiredService<TypeSpecifierVisitor>();
         private KeywordVisitor KeywordVisitor => Services.GetRequiredService<KeywordVisitor>();

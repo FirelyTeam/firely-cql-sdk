@@ -11,6 +11,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
         }
 
+        //    : 'context' (modelIdentifier '.')? identifier
         public override ContextDef VisitContextDefinition([NotNull] cqlParser.ContextDefinitionContext context)
         {
             var child = context.GetChild(1);

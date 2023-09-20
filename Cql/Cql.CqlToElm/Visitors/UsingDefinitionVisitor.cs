@@ -11,7 +11,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public UsingDefinitionVisitor(IServiceProvider services) : base(services)
         {
         }
-        public QualifiedIdentifierVisitor QualifiedIdentifierVisitor => Services.GetRequiredService<QualifiedIdentifierVisitor>();
         public IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
 
         // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
@@ -19,23 +18,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var usingDef = new UsingDef();
 
-            var nameChild = context.GetChild(1);
-            var (ns, id) = QualifiedIdentifierVisitor.Visit(nameChild);
-            var versionChild = context.versionSpecifier();
-            if (versionChild is not null)
-                usingDef.version = context.versionSpecifier()?.STRING().ParseString();
-            if (string.IsNullOrWhiteSpace(ns))
-                usingDef.localIdentifier = $"{id}";
-            else
-                usingDef.localIdentifier = $"{ns}.{id}";
+            var (ns, id) = context.qualifiedIdentifier().Parse();
+
+            usingDef.version = context.versionSpecifier()?.STRING().ParseString();
+            usingDef.localIdentifier = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
             var model = ModelProvider.ModelFromName(usingDef.localIdentifier, usingDef.version)
                 ?? throw new InvalidOperationException($"Model {usingDef.localIdentifier} version {usingDef.version ?? "<unspecified>"} is not available.");
             usingDef.uri = model.url;
-            var lastChild = context.GetChild(context.ChildCount - 1);
-            if (lastChild is cqlParser.LocalIdentifierContext localIdentifierContext)
-            {
-                usingDef.localIdentifier = localIdentifierContext.GetText();
-            }
+
+            if (context.localIdentifier() is { } localId)
+                usingDef.localIdentifier = localId.identifier().Parse();
             usingDef.localId = NextId();
             usingDef.locator = context.Locator();
 

@@ -1,14 +1,11 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class KeywordVisitor: Visitor<CqlKeyword[]>
+    internal class KeywordVisitor : Visitor<CqlKeyword[]>
     {
         public KeywordVisitor(IServiceProvider services) : base(services)
         {

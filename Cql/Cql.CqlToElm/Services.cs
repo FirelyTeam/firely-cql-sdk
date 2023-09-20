@@ -29,10 +29,7 @@ namespace Hl7.Cql.CqlToElm
 
         public static IServiceCollection AddVisitors(this IServiceCollection services)
         {
-            services.AddScoped<CodeSystemDefinitionVisitor>();
-            services.AddScoped<ConceptDefinitionVisitor>();
             services.AddScoped<ContextDefVisitor>();
-            services.AddScoped<DateTimePrecisionVisitor>();
             services.AddScoped<ExpressionVisitor>();
             services.AddScoped<ExpressionDefinitionVisitor>();
             services.AddScoped<IncludeDefinitionVisitor>();
@@ -40,7 +37,6 @@ namespace Hl7.Cql.CqlToElm
             services.AddScoped<LibraryVisitor>();
             services.AddScoped<ParameterDefinitionVisitor>();
             services.AddScoped<PluralDateTimePrecisionVisitor>();
-            services.AddScoped<QualifiedIdentifierVisitor>();
             services.AddScoped<QuantityVisitor>();
             services.AddScoped<TupleElementVisitor>();
             services.AddScoped<TupleElementDefinitionVisitor>();

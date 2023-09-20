@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -12,15 +11,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
         }
 
-        public QualifiedIdentifierVisitor QualifiedIdentifierVisitor => Services.GetRequiredService<QualifiedIdentifierVisitor>();
-
-
         //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
         public override IncludeDef VisitIncludeDefinition([NotNull] cqlParser.IncludeDefinitionContext context)
         {
             var includeDef = new IncludeDef();
 
-            var qualifiedId = QualifiedIdentifierVisitor.Visit(context.GetChild(1));
+            var qualifiedId = context.qualifiedIdentifier().Parse();
             if (string.IsNullOrWhiteSpace(qualifiedId.qualifier))
                 includeDef.path = qualifiedId.id;
             else includeDef.path = $"{qualifiedId.qualifier}.{qualifiedId.id}";
