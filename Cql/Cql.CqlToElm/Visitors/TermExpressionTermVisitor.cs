@@ -1,19 +1,10 @@
-﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -297,7 +288,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitQuantityLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityLiteralContext context)
         {
             var (decimalValue, unit) = QuantityVisitor.Visit(context.GetChild(0));
-            var quantityType = NamedType(QuantityTypeName, context); 
+            var quantityType = NamedType(QuantityTypeName, context);
             var quantity = new Quantity
             {
                 localId = NextId(),
@@ -314,7 +305,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitRatioLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.RatioLiteralContext context)
         {
             var ratioType = NamedType(ModelProvider.QualifiedTypeName(SystemModel, "Ratio"), context);
-            var quantityType = NamedType(QuantityTypeName, context); 
+            var quantityType = NamedType(QuantityTypeName, context);
             var rc = context.GetChild(0);
 
             var numChild = rc.GetChild(0) as cqlParser.QuantityContext;
@@ -354,7 +345,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitStringLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.StringLiteralContext context)
         {
-            var value = context.GetText().AsSpan().Detick().ToString();
+            var value = context.STRING().ParseString();
             var typeSpecifier = NamedType(StringTypeName, context);
 
             var literal = new Literal

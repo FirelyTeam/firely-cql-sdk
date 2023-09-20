@@ -14,9 +14,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         private CodeSystemIdentifierVisitor CodeSystemIdentifierVisitor => Services.GetRequiredService<CodeSystemIdentifierVisitor>();
-        private IdentifierVisitor IdentifierVisitor => Services.GetRequiredService<IdentifierVisitor>();
 
-
+        //  : accessModifier? 'valueset' identifier ':' valuesetId ('version' versionSpecifier)? codesystems?
         public override ValueSetDef VisitValuesetDefinition([NotNull] cqlParser.ValuesetDefinitionContext context)
         {
             var valueSetDef = new ValueSetDef();
@@ -28,9 +27,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else valueSetDef.accessLevel = AccessModifier.Public;
 
-            valueSetDef.name = IdentifierVisitor.Visit(context.GetChild(index));
+            valueSetDef.name = context.identifier().Parse();
             index += 2;
-            valueSetDef.id = context.GetChild(index).GetText().AsSpan().Detick().ToString();
+            valueSetDef.id = context.valuesetId().STRING().ParseString();
             index += 1;
             if (context.ChildCount > index)
             {
@@ -38,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (versionOrCs is TerminalNodeImpl)
                 {
                     index += 1;
-                    valueSetDef.version = context.GetChild(index).GetText().AsSpan().Detick().ToString();
+                    valueSetDef.version = context.versionSpecifier().STRING().ParseString();
                     index += 1;
                 }
                 if (context.ChildCount > index)

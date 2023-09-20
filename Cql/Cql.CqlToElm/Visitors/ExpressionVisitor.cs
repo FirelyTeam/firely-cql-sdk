@@ -1,18 +1,11 @@
 ﻿using Antlr4.Runtime.Misc;
-using Antlr4.Runtime.Tree;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
-using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -39,10 +32,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private DateTimePrecisionVisitor DateTimePrecisionVisitor => Services.GetRequiredService<DateTimePrecisionVisitor>();
         private LibraryContext LibraryContext => Services.GetRequiredService<LibraryContext>();
         private TypeSpecifierVisitor TypeSpecifierVisitor => Services.GetRequiredService<TypeSpecifierVisitor>();
-        private IdentifierVisitor IdentifierVisitor => Services.GetRequiredService<IdentifierVisitor>();
         private KeywordVisitor KeywordVisitor => Services.GetRequiredService<KeywordVisitor>();
         private PluralDateTimePrecisionVisitor PluralDateTimePrecisionVisitor => Services.GetRequiredService<PluralDateTimePrecisionVisitor>();
-        
+
         private readonly Model.ModelInfo SystemModel;
 
 
@@ -74,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             ValidIntervalPointTypeNames.Contains(typeName, StringComparer.Ordinal);
 
         private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
-            throw Critical( $"Could not resolve call to operator {@operator} with signature ({string.Join(", ", operands.Select(o => o.resultTypeName?.Name ?? "unknown"))}");
+            throw Critical($"Could not resolve call to operator {@operator} with signature ({string.Join(", ", operands.Select(o => o.resultTypeName?.Name ?? "unknown"))}");
 
         #endregion
 

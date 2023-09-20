@@ -2,21 +2,23 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    partial class ExpressionVisitor
+    internal partial class ExpressionVisitor
     {
+        /*
+         * referentialIdentifier
+                : identifier
+                | keywordIdentifier
+                ;      
+        */
         public override Expression VisitReferentialIdentifier([NotNull] cqlParser.ReferentialIdentifierContext context)
         {
             var child = context.GetChild(0);
             if (child is cqlParser.IdentifierContext identifierContext)
             {
-                var identifier = IdentifierVisitor.Visit(child)
+                var identifier = identifierContext.Parse()
                     ?? throw new InvalidOperationException($"Expecting non-null identifer");
                 var @ref = LibraryContext.Ref(null, identifier, identifierContext);
                 if (@ref != null)

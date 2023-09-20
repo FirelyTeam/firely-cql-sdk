@@ -21,9 +21,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var nameChild = context.GetChild(1);
             var (ns, id) = QualifiedIdentifierVisitor.Visit(nameChild);
-            var versionChild = context.GetChild(3);
-            if (versionChild is cqlParser.VersionSpecifierContext)
-                usingDef.version = versionChild.GetStringLiteral();
+            var versionChild = context.versionSpecifier();
+            if (versionChild is not null)
+                usingDef.version = context.versionSpecifier()?.STRING().ParseString();
             if (string.IsNullOrWhiteSpace(ns))
                 usingDef.localIdentifier = $"{id}";
             else

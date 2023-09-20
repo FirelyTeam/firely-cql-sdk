@@ -25,14 +25,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 index = 2;
             }
             else conceptDef.accessLevel = AccessModifier.Public;
-            conceptDef.name = context.GetChild(index).GetText().AsSpan().Detick().ToString();
+            conceptDef.name = context.identifier().Parse();
             var firstCodeIndex = index += 3;
             var closingBraceIndex = context.ChildCount - 1;
             var last = context.GetChild(closingBraceIndex);
-            if (last is cqlParser.DisplayClauseContext)
+            if (last is cqlParser.DisplayClauseContext cdc)
             {
                 closingBraceIndex -= 1;
-                conceptDef.display = last.GetChild(1).GetText().AsSpan().Detick().ToString();
+                conceptDef.display = cdc.STRING().ParseString();
             }
             var codeCount = closingBraceIndex - firstCodeIndex;
             if ((codeCount & 0x1) == 1)

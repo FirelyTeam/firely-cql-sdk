@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private ExpressionVisitor ExpressionVisitor => Services.GetRequiredService<ExpressionVisitor>();
 
 
-        //: accessModifier? 'parameter' identifier(typeSpecifier)? ('default' expression)?
+        //: accessModifier? 'parameter' identifier (typeSpecifier)? ('default' expression)?
         public override ParameterDef VisitParameterDefinition([NotNull] cqlParser.ParameterDefinitionContext context)
         {
             var paramDef = new ParameterDef();
@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else paramDef.accessLevel = AccessModifier.Public;
 
-            paramDef.name = context.GetChild(index).GetText().AsSpan().Dequote().ToString();
+            paramDef.name = context.identifier().Parse();
             index += 1;
             IParseTree? defaultValue = null;
             if (index < context.ChildCount)
