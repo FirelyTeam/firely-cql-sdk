@@ -3,15 +3,10 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class TupleElementDefinitionVisitor: Visitor<TupleElementDefinition>
+    internal class TupleElementDefinitionVisitor : Visitor<TupleElementDefinition>
     {
         public TupleElementDefinitionVisitor(IServiceProvider services) : base(services)
         {

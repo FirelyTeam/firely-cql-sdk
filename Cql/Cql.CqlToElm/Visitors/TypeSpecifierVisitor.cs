@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Linq;
 
@@ -9,41 +8,43 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class TypeSpecifierVisitor : Visitor<TypeSpecifier>
     {
-        public TypeSpecifierVisitor(IServiceProvider services) : base(services)
+        public TypeSpecifierVisitor(
+            IServiceProvider services,
+            IModelProvider modelProvider,
+            LibraryContext libraryContext,
+            TupleElementDefinitionVisitor tedVisitor) : base(services)
         {
-            SystemModel = ModelProvider.GetSystemModel(LibraryContext.Library
+            SystemModel = modelProvider.GetSystemModel(libraryContext.Library
                 ?? throw new InvalidOperationException($"No library is in context"));
+
+            ModelProvider = modelProvider;
+            LibraryContext = libraryContext;
+            TupleElementDefinitionVisitor = tedVisitor;
         }
 
-        private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
-        private LibraryContext LibraryContext => Services.GetRequiredService<LibraryContext>();
-        private TupleElementDefinitionVisitor TupleElementDefinitionVisitor => Services.GetRequiredService<TupleElementDefinitionVisitor>();
+        private IModelProvider ModelProvider { get; }
+        private LibraryContext LibraryContext { get; }
+        private TupleElementDefinitionVisitor TupleElementDefinitionVisitor { get; }
+
         private readonly Model.ModelInfo SystemModel;
 
+        //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
         public override TypeSpecifier VisitChoiceTypeSpecifier([NotNull] cqlParser.ChoiceTypeSpecifierContext context)
         {
-            var elementCount = context.ChildCount - 3;
-            if ((elementCount & 0x1) == 1)
-                elementCount = (elementCount >> 1) + 1;
-            else
-                elementCount >>= 1;
             var choice = new ChoiceTypeSpecifier
             {
-                choice = new TypeSpecifier[elementCount],
+                choice = context.typeSpecifier().Select(Visit).ToArray(),
                 localId = NextId(),
                 locator = context.Locator(),
             };
-            for (int i = 2, j = 0; i < context.ChildCount; i += 2)
-            {
-                choice.choice[j] = Visit(context.GetChild(i));
-                j++;
-            }
+
             return choice;
         }
 
+        //    : 'Interval' '<' typeSpecifier '>'
         public override TypeSpecifier VisitIntervalTypeSpecifier([NotNull] cqlParser.IntervalTypeSpecifierContext context)
         {
-            var pointType = Visit(context.GetChild(2));
+            var pointType = Visit(context.typeSpecifier());
             var its = new IntervalTypeSpecifier
             {
                 pointType = pointType,
@@ -53,9 +54,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return its;
         }
 
+        //    : 'List' '<' typeSpecifier '>'
         public override TypeSpecifier VisitListTypeSpecifier([NotNull] cqlParser.ListTypeSpecifierContext context)
         {
-            var elementType = Visit(context.GetChild(2));
+            var elementType = Visit(context.typeSpecifier());
             var lts = new ListTypeSpecifier
             {
                 elementType = elementType,
@@ -128,24 +130,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
         }
 
+        // : 'Tuple' '{' tupleElementDefinition (',' tupleElementDefinition)* '}'
         public override TypeSpecifier VisitTupleTypeSpecifier([NotNull] cqlParser.TupleTypeSpecifierContext context)
         {
-            var elementCount = context.ChildCount - 3;
-            if ((elementCount & 0x1) == 1)
-                elementCount = (elementCount >> 1) + 1;
-            else
-                elementCount >>= 1;
             var tuple = new TupleTypeSpecifier
             {
-                element = new TupleElementDefinition[elementCount],
+                element = context.tupleElementDefinition().Select(TupleElementDefinitionVisitor.Visit).ToArray(),
                 localId = NextId(),
                 locator = context.Locator(),
             };
-            for (int i = 2, j = 0; i < context.ChildCount; i += 2)
-            {
-                tuple.element[j] = TupleElementDefinitionVisitor.Visit(context.GetChild(i));
-                j++;
-            }
+
             return tuple;
         }
 
