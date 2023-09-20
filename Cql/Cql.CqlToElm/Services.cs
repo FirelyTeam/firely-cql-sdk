@@ -1,13 +1,9 @@
 ﻿using Hl7.Cql.CqlToElm.Visitors;
-using Hl7.Cql.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -33,7 +29,6 @@ namespace Hl7.Cql.CqlToElm
 
         public static IServiceCollection AddVisitors(this IServiceCollection services)
         {
-            services.AddScoped<AccessModifierVisitor>();
             services.AddScoped<CodeDefinitionVisitor>();
             services.AddScoped<CodeIdentifierVisitor>();
             services.AddScoped<CodeSystemDefinitionVisitor>();

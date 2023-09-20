@@ -4,10 +4,6 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -16,7 +12,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public ParameterDefinitionVisitor(IServiceProvider services) : base(services)
         {
         }
-        private AccessModifierVisitor AccessModifierVisitor => Services.GetRequiredService<AccessModifierVisitor>();
         private TypeSpecifierVisitor TypeSpecifierVisitor => Services.GetRequiredService<TypeSpecifierVisitor>();
         private ExpressionVisitor ExpressionVisitor => Services.GetRequiredService<ExpressionVisitor>();
 
@@ -28,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var index = 1;
             if (context.GetChild(0) is cqlParser.AccessModifierContext amc)
             {
-                paramDef.accessLevel = AccessModifierVisitor.Visit(amc);
+                paramDef.accessLevel = amc.Parse();
                 index = 2;
             }
             else paramDef.accessLevel = AccessModifier.Public;

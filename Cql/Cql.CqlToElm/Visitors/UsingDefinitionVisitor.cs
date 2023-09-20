@@ -3,10 +3,6 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -27,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var (ns, id) = QualifiedIdentifierVisitor.Visit(nameChild);
             var versionChild = context.GetChild(3);
             if (versionChild is cqlParser.VersionSpecifierContext)
-                usingDef.version = versionChild.GetText().AsSpan().Detick().ToString();
+                usingDef.version = versionChild.GetStringLiteral();
             if (string.IsNullOrWhiteSpace(ns))
                 usingDef.localIdentifier = $"{id}";
             else

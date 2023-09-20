@@ -4,10 +4,6 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -17,7 +13,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
         }
 
-        private AccessModifierVisitor AccessModifierVisitor => Services.GetRequiredService<AccessModifierVisitor>();
         private CodeSystemIdentifierVisitor CodeSystemIdentifierVisitor => Services.GetRequiredService<CodeSystemIdentifierVisitor>();
         private IdentifierVisitor IdentifierVisitor => Services.GetRequiredService<IdentifierVisitor>();
 
@@ -28,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var index = 1;
             if (context.GetChild(0) is cqlParser.AccessModifierContext amc)
             {
-                valueSetDef.accessLevel = AccessModifierVisitor.Visit(amc);
+                valueSetDef.accessLevel = amc.Parse();
                 index = 2;
             }
             else valueSetDef.accessLevel = AccessModifier.Public;
@@ -51,13 +46,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     var codeSystems = context.GetChild(index);
                     // skip codesystems and the { and don't go to }
                     var csCount = codeSystems.ChildCount - 3;
-                    if ((csCount & 0x1) == 1) 
+                    if ((csCount & 0x1) == 1)
                         csCount = (csCount >> 1) + 1;
-                    else 
+                    else
                         csCount = (csCount >> 1);
                     valueSetDef.codeSystem = new CodeSystemRef[csCount];
                     var c = 0;
-                    for(int i = 2; i < codeSystems.ChildCount - 1; i+=2)
+                    for (int i = 2; i < codeSystems.ChildCount - 1; i += 2)
                     {
                         var csRef = CodeSystemIdentifierVisitor.Visit(codeSystems.GetChild(i));
                         valueSetDef.codeSystem[c++] = csRef;
