@@ -70,21 +70,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         #endregion
 
-        public override Expression VisitContextDefinition([NotNull] cqlParser.ContextDefinitionContext context)
-        {
-            var child = context.GetChild(1);
-            if (child is cqlParser.IdentifierContext identifier)
-            {
-
-            }
-            else if (child is cqlParser.QualifiedIdentifierContext qualifiedIdentifier)
-            {
-
-            }
-            //var typeName = TypeSpecifierVisitor.Visit(context.GetChild(1));
-            throw Critical("Invalid context declaration");
-        }
-
         public override Expression VisitIntervalSelector([NotNull] cqlParser.IntervalSelectorContext context)
         {
             bool? lowClosed = context.GetChild(1).GetText() switch
@@ -289,10 +274,36 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitRetrieve([NotNull] cqlParser.RetrieveContext context)
         {
-            //: '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
-            throw Critical("Malformed retrieve");
-        }
+            var contextName = context.contextIdentifier().GetText();
+            var codePath = context.codePath().GetText();
+            var codeComparator = context.codeComparator().GetText();
+            var terminology = Visit(context.terminology());
+            var rawTypeName = context.namedTypeSpecifier().GetText();
+            var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
+            var typeInfo = LibraryContext.UnambiguousType(rawTypeName ?? throw Critical("Unable to resolve retrieve type"));
+            var model = ModelProvider.ModelFromQualifiedTypeName(type?.name?.Name
+                ?? throw Critical("Retrieve type is not specified correctly"))
+                ?? throw Critical($"Can't resolve model for type {type!.name!.Name}");
+            var dataType = new XmlQualifiedName($"{model.targetQualifier}:{rawTypeName}");
+            var contextExpressionRef = new ExpressionRef
+            {
+                name = contextName,
+            };
+            var retrieve = new Retrieve
+            {
+                localId = NextId(),
+                locator = context.Locator(),
+                dataType = dataType,
+                templateId = typeInfo.templateName,
+                context = contextExpressionRef,
+                codeComparator = codeComparator,
+                codes = terminology,
+                codeProperty = codePath,
+                resultTypeSpecifier = ListType(type, context)
+            };
+            return retrieve;
+        }
 
         private enum ListElementPromotion
         {

@@ -31,6 +31,7 @@ namespace Hl7.Cql.CqlToElm
         {
             services.AddScoped<CodeSystemDefinitionVisitor>();
             services.AddScoped<ConceptDefinitionVisitor>();
+            services.AddScoped<ContextDefVisitor>();
             services.AddScoped<DateTimePrecisionVisitor>();
             services.AddScoped<ExpressionVisitor>();
             services.AddScoped<ExpressionDefinitionVisitor>();

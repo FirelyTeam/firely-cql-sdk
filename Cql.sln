@@ -56,6 +56,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql.Grammar", "Cql\Cql.Gram
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CqlToElmTests", "Cql\CqlToElmTests\CqlToElmTests.csproj", "{E03D77CB-2EAB-45C8-A44D-373592BAC31C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{15A9F487-253C-400C-8016-EE865D502750}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -198,6 +200,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{50122051-F0BF-4683-BCA1-6965F5AF7BE1} = {15A9F487-253C-400C-8016-EE865D502750}
+		{E03D77CB-2EAB-45C8-A44D-373592BAC31C} = {15A9F487-253C-400C-8016-EE865D502750}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A0BE2CF9-BA74-4860-A54C-6AB1B33DB549}

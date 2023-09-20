@@ -71,19 +71,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)
         {
-            string? name = null;
+            System.Xml.XmlQualifiedName? name = null;
             if (context.ChildCount == 3)
             {
-                var modelName = context.GetChild(0).GetText();
+                var modelName = context.GetChild(0).GetText().AsSpan().Dequote().ToString();
                 var model = ModelProvider.ModelFromName(modelName)
                     ?? throw Critical($"Unknown model {modelName}");
-                name = ModelProvider.QualifiedTypeName(model, context.GetChild(2).GetText());
+                var typeName = context.GetChild(2).GetText().AsSpan().Dequote().ToString();
+                var qtn = ModelProvider.QualifiedTypeName(model, typeName)
+                    ?? throw Critical($"Unable to resolve type {typeName} in model {model.name}");
+                name = new System.Xml.XmlQualifiedName(qtn);
             }
             else
-                name = ModelProvider.QualifiedTypeName(SystemModel, context.GetChild(0).GetText());
-
+            {
+                var typeName = context.GetChild(0).GetText().AsSpan().Dequote().ToString();
+                var (qtn, templateId) = LibraryContext.UnambiguousType(typeName);
+                name = qtn;
+            }
             var nts = new NamedTypeSpecifier();
-            nts.name = new System.Xml.XmlQualifiedName(name);
+            nts.name = name;
             nts.localId = NextId();
             nts.locator = context.Locator();
             return nts;

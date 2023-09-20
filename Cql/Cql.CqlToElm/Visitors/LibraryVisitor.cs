@@ -30,6 +30,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private ParameterDefinitionVisitor ParameterDefinitionVisitor => Services.GetRequiredService<ParameterDefinitionVisitor>();
         private ExpressionDefinitionVisitor ExpressionDefinitionVisitor => Services.GetRequiredService<ExpressionDefinitionVisitor>();
         private ExpressionVisitor ExpressionVisitor => Services.GetRequiredService<ExpressionVisitor>();
+        private ContextDefVisitor ContextDefVisitor => Services.GetRequiredService<ContextDefVisitor>();
+
 
         #endregion
         public override Library VisitLibrary([NotNull] cqlParser.LibraryContext context)
@@ -51,6 +53,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var concepts = new LinkedList<ConceptDef>();
             var parameters = new LinkedList<ParameterDef>();
             var statements = new LinkedList<ExpressionDef>();
+            var contextStatements = new Dictionary<string,ExpressionDef>();
 
             var defaultSystemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
             var defaultSystemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)];
@@ -160,12 +163,46 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 case cqlParser.ExpressionDefinitionContext expression:
                                     {
                                         var expressionDef = ExpressionDefinitionVisitor.Visit(expression);
+                                        if (LibraryContext.ActiveContext != null)
+                                            expressionDef.context = LibraryContext.ActiveContext.name;
                                         statements.AddLast(expressionDef);
                                     }
                                     break;
                                 case cqlParser.ContextDefinitionContext ctx:
                                     {
-                                        var expressionDef = ExpressionVisitor.Visit(ctx);
+                                        var contextDef = ContextDefVisitor.Visit(ctx);
+                                        LibraryContext.ActiveContext = contextDef;
+                                        if (!contextStatements.ContainsKey(contextDef.name))
+                                        {
+                                            var (dataType, templateId) = LibraryContext.UnambiguousType(contextDef.name);
+                                            var elementType = NamedType(dataType.Name, ctx);
+                                            var retrieve = new Retrieve
+                                            {
+                                                localId = NextId(),
+                                                locator = ctx.Locator(),
+                                                dataType = dataType,
+                                                templateId = templateId,
+                                                resultTypeSpecifier = ListType(elementType, ctx),
+                                            };
+                                            var singleton = new SingletonFrom
+                                            {
+                                                localId = NextId(),
+                                                locator = ctx.Locator(),
+                                                operand = retrieve,
+                                                resultTypeSpecifier = elementType,
+                                                resultTypeName = elementType.name,
+                                            };
+                                            var exprDef = new ExpressionDef
+                                            {
+                                                localId = NextId(),
+                                                locator = ctx.Locator(),
+                                                name = contextDef.name,
+                                                expression = singleton,
+                                                resultTypeSpecifier = elementType,
+                                                resultTypeName = elementType.name,
+                                            };
+                                            contextStatements.Add(contextDef.name, exprDef);
+                                        }
                                     }
                                     break;
                                 default:
