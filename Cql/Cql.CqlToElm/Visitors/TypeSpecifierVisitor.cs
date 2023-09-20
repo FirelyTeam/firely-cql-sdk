@@ -3,11 +3,7 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -37,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 localId = NextId(),
                 locator = context.Locator(),
             };
-            for(int i = 2, j = 0; i < context.ChildCount; i+=2)
+            for (int i = 2, j = 0; i < context.ChildCount; i += 2)
             {
                 choice.choice[j] = Visit(context.GetChild(i));
                 j++;
@@ -69,30 +65,67 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return lts;
         }
 
+
+        //    : (qualifier '.')* referentialOrTypeNameIdentifier
         public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)
         {
+            var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
+            var typeSpec = (NamedTypeSpecifier)Visit(context.referentialOrTypeNameIdentifier());
+
             System.Xml.XmlQualifiedName? name = null;
-            if (context.ChildCount == 3)
+
+            if (qualifiers.Any())
             {
-                var modelName = context.GetChild(0).GetText().AsSpan().Dequote().ToString();
+                if (qualifiers.Length > 1)
+                    throw Critical($"Multiple qualifiers not supported");
+
+                var modelName = qualifiers.Single();
                 var model = ModelProvider.ModelFromName(modelName)
                     ?? throw Critical($"Unknown model {modelName}");
-                var typeName = context.GetChild(2).GetText().AsSpan().Dequote().ToString();
+
+                var typeName = typeSpec.name.Name;
                 var qtn = ModelProvider.QualifiedTypeName(model, typeName)
                     ?? throw Critical($"Unable to resolve type {typeName} in model {model.name}");
                 name = new System.Xml.XmlQualifiedName(qtn);
             }
             else
             {
-                var typeName = context.GetChild(0).GetText().AsSpan().Dequote().ToString();
-                var (qtn, templateId) = LibraryContext.UnambiguousType(typeName);
-                name = qtn;
+                var typeName = typeSpec.name.Name;
+                (name, _) = LibraryContext.UnambiguousType(typeName);
             }
-            var nts = new NamedTypeSpecifier();
-            nts.name = name;
-            nts.localId = NextId();
-            nts.locator = context.Locator();
-            return nts;
+
+            return new NamedTypeSpecifier
+            {
+                name = name,
+                localId = NextId(),
+                locator = context.Locator()
+            };
+        }
+
+        // : identifier | keywordIdentifier;
+        public override TypeSpecifier VisitReferentialIdentifier([NotNull] cqlParser.ReferentialIdentifierContext context)
+        {
+            string typeName = context.keywordIdentifier()?.GetText() ??
+                context.identifier().Parse()!;
+
+            return new NamedTypeSpecifier()
+            {
+                name = new System.Xml.XmlQualifiedName(typeName),
+                localId = NextId(),
+                locator = context.Locator()
+            };
+        }
+
+        public override TypeSpecifier VisitTypeNameIdentifier([NotNull] cqlParser.TypeNameIdentifierContext context)
+        {
+            string typeName = context.GetText();
+
+            return new NamedTypeSpecifier()
+            {
+                name = new System.Xml.XmlQualifiedName(typeName),
+                localId = NextId(),
+                locator = context.Locator()
+            };
         }
 
         public override TypeSpecifier VisitTupleTypeSpecifier([NotNull] cqlParser.TupleTypeSpecifierContext context)
