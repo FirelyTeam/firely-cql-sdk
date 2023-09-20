@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Antlr4.Runtime.Misc;
-using Antlr4.Runtime.Tree;
+﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -30,7 +26,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private IncludeDefinitionVisitor IncludeDefinitionVisitor => Services.GetRequiredService<IncludeDefinitionVisitor>();
         private CodeSystemDefinitionVisitor CodeSystemDefinitionVisitor => Services.GetRequiredService<CodeSystemDefinitionVisitor>();
         private ValueSetDefinitionVisitor ValueSetDefinitionVisitor => Services.GetRequiredService<ValueSetDefinitionVisitor>();
-        private CodeDefinitionVisitor CodeDefinitionVisitor => Services.GetRequiredService<CodeDefinitionVisitor>();
         private ConceptDefinitionVisitor ConceptDefinitionVisitor => Services.GetRequiredService<ConceptDefinitionVisitor>();
         private ParameterDefinitionVisitor ParameterDefinitionVisitor => Services.GetRequiredService<ParameterDefinitionVisitor>();
         private ExpressionDefinitionVisitor ExpressionDefinitionVisitor => Services.GetRequiredService<ExpressionDefinitionVisitor>();
@@ -75,7 +70,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else throw new InvalidOperationException($"Model {defaultSystemUri} version {defaultSystemVersion} is not available.");
             }
             // visit usings first so parameters can refer to models
-            foreach(var child in context.children.OfType<cqlParser.DefinitionContext>())
+            foreach (var child in context.children.OfType<cqlParser.DefinitionContext>())
             {
                 if (child.GetChild(0) is cqlParser.UsingDefinitionContext udc)
                 {
@@ -87,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             int i = 1;
             bool declarations = true;
-            while(declarations && i < context.ChildCount)
+            while (declarations && i < context.ChildCount)
             {
                 var child = context.GetChild(i);
                 switch (child)
@@ -117,7 +112,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     break;
                                 case cqlParser.CodeDefinitionContext code:
                                     {
-                                        var codeDef = CodeDefinitionVisitor.Visit(code);
+                                        var codeDef = code.Parse();
                                         codes.AddLast(codeDef);
                                     }
                                     break;
@@ -152,7 +147,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             library.concepts = concepts.ToArray();
             library.parameters = parameters.ToArray();
 
-            for (; i < context.ChildCount-1; i++)
+            for (; i < context.ChildCount - 1; i++)
             {
                 var child = context.GetChild(i);
                 switch (child)

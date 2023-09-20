@@ -1,8 +1,8 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -12,40 +12,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
         }
 
-        private CodeIdentifierVisitor CodeIdentifierVisitor => Services.GetRequiredService<CodeIdentifierVisitor>();
-
         //: accessModifier? 'concept' identifier ':' '{' codeIdentifier(',' codeIdentifier)* '}' displayClause?
         public override ConceptDef VisitConceptDefinition([NotNull] cqlParser.ConceptDefinitionContext context)
         {
             var conceptDef = new ConceptDef();
-            var index = 1;
-            if (context.GetChild(0) is cqlParser.AccessModifierContext amc)
-            {
-                conceptDef.accessLevel = amc.Parse();
-                index = 2;
-            }
-            else conceptDef.accessLevel = AccessModifier.Public;
-            conceptDef.name = context.identifier().Parse();
-            var firstCodeIndex = index += 3;
-            var closingBraceIndex = context.ChildCount - 1;
-            var last = context.GetChild(closingBraceIndex);
-            if (last is cqlParser.DisplayClauseContext cdc)
-            {
-                closingBraceIndex -= 1;
-                conceptDef.display = cdc.STRING().ParseString();
-            }
-            var codeCount = closingBraceIndex - firstCodeIndex;
-            if ((codeCount & 0x1) == 1)
-                codeCount = (codeCount >> 1) + 1;
-            else
-                codeCount >>= 1;
 
-            conceptDef.code = new CodeRef[codeCount];
-            int c = 0;
-            for (int i = firstCodeIndex; i < closingBraceIndex; i += 2)
-            {
-                conceptDef.code[c++] = CodeIdentifierVisitor.Visit(context.GetChild(i));
-            }
+            conceptDef.accessLevel = context.accessModifier().Parse();
+            conceptDef.name = context.identifier().Parse();
+            conceptDef.code = context.codeIdentifier().Select(ci => ci.Parse()).ToArray();
+            conceptDef.display = context.displayClause()?.STRING()?.ParseString();
 
             conceptDef.localId = NextId();
             conceptDef.locator = context.Locator();

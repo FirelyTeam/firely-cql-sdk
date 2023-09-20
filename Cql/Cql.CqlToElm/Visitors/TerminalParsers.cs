@@ -1,6 +1,5 @@
 ﻿using Antlr4.Runtime.Tree;
 using Hl7.Cql.CqlToElm.Grammar;
-using Hl7.Cql.Elm;
 using System;
 using System.Text.RegularExpressions;
 
@@ -60,35 +59,5 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return Regex.Unescape(str);
         }
-
-
-        public static string? Parse(this cqlParser.IdentifierContext? context)
-        {
-            if (context is null) return null;
-
-            if (context.IDENTIFIER() is { } identifier)
-                return identifier.ParseIdentifier();
-            else if (context.QUOTEDIDENTIFIER() is { } quotedIdentifier)
-                return quotedIdentifier.ParseQuotedIdentifier();
-            else if (context.DELIMITEDIDENTIFIER() is { } delimitedIdentifier)
-                return delimitedIdentifier.ParseDelimitedIdentifier();
-            else
-                throw new InvalidOperationException($"Identifier {context.GetText()} is not supported.");
-        }
-
-        public static AccessModifier Parse(this cqlParser.AccessModifierContext? context,
-            AccessModifier @default = AccessModifier.Public)
-        {
-            if (context is null) return @default;
-
-            return context.GetText().ToLower() switch
-            {
-                "public" => AccessModifier.Public,
-                "private" => AccessModifier.Private,
-                _ => throw new InvalidOperationException($"Access modifier {context.GetText()} is not supported")
-            };
-        }
     }
-
-
 }

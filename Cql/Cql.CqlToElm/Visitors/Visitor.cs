@@ -6,14 +6,11 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal abstract class Visitor<T>: cqlBaseVisitor<T>
+    internal abstract class Visitor<T> : cqlBaseVisitor<T>
     {
         protected Visitor(IServiceProvider services) : base()
         {
@@ -28,6 +25,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
 
         protected string NextId() => Services.GetRequiredService<LocalIdentifierProvider>().Next();
+
 
         [DebuggerStepThrough]
         protected InvalidOperationException Critical(string message)
