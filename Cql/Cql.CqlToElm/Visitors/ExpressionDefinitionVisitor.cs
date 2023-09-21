@@ -18,21 +18,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // 'define' accessModifier? identifier ':' expression
         public override ExpressionDef VisitExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context)
         {
-            var def = new ExpressionDef();
-
-            if (context.GetChild(1) is cqlParser.AccessModifierContext amc)
+            var def = new ExpressionDef
             {
-                def.accessLevel = amc.Parse();
-                def.name = context.GetChild(2).GetText();
-            }
-            else
-                def.name = context.GetChild(1).GetText();
-
-            var ec = context.GetChild(context.ChildCount - 1);
-            def.expression = ExpressionVisitor.Visit(ec);
-
-            def.localId = NextId();
-            def.locator = context.Locator();
+                accessLevel = context.accessModifier().Parse(),
+                name = context.identifier().Parse(),
+                expression = ExpressionVisitor.Visit(context.expression()),
+                localId = NextId(),
+                locator = context.Locator()
+            };
             return def;
         }
     }

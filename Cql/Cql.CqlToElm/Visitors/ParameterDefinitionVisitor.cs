@@ -12,31 +12,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifierVisitor typeSpecVisitor,
             ExpressionVisitor expressionVisitor) : base(services)
         {
-            TypeSpecifierVisitor = typeSpecVisitor;
-            ExpressionVisitor = expressionVisitor;
+            typeSpecifierVisitor = typeSpecVisitor;
+            this.expressionVisitor = expressionVisitor;
         }
-        private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
-        private ExpressionVisitor ExpressionVisitor { get; }
 
+        private readonly TypeSpecifierVisitor typeSpecifierVisitor;
+        private readonly ExpressionVisitor expressionVisitor;
 
         //: accessModifier? 'parameter' identifier (typeSpecifier)? ('default' expression)?
         public override ParameterDef VisitParameterDefinition([NotNull] cqlParser.ParameterDefinitionContext context)
         {
-            var paramDef = new ParameterDef();
-            paramDef.accessLevel = context.accessModifier().Parse();
-            paramDef.name = context.identifier().Parse();
+            var paramDef = new ParameterDef
+            {
+                accessLevel = context.accessModifier().Parse(),
+                name = context.identifier().Parse(),
+                @default = expressionVisitor.Visit(context.expression()),
+                localId = NextId(),
+                locator = context.Locator()
+            };
 
             if (context.typeSpecifier() is { } typeSpec)
             {
-                paramDef.parameterTypeSpecifier = TypeSpecifierVisitor.Visit(typeSpec);
+                paramDef.parameterTypeSpecifier = typeSpecifierVisitor.Visit(typeSpec);
 
                 if (paramDef.parameterTypeSpecifier is NamedTypeSpecifier nts && nts.name?.Name != null)
                     paramDef.parameterType = new System.Xml.XmlQualifiedName(nts.name.Name);
             }
-
-            paramDef.@default = ExpressionVisitor.Visit(context.expression());
-            paramDef.localId = NextId();
-            paramDef.locator = context.Locator();
 
             return paramDef;
         }

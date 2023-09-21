@@ -25,14 +25,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TimeTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Time");
             DateTimeTypeName = ModelProvider.QualifiedTypeName(SystemModel, "DateTime");
             BooleanTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Boolean");
+            RatioTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Ratio");
         }
 
         #region Privates
         private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
         private LibraryContext LibraryContext => Services.GetRequiredService<LibraryContext>();
         private TypeSpecifierVisitor TypeSpecifierVisitor => Services.GetRequiredService<TypeSpecifierVisitor>();
-        private KeywordVisitor KeywordVisitor => Services.GetRequiredService<KeywordVisitor>();
-        private PluralDateTimePrecisionVisitor PluralDateTimePrecisionVisitor => Services.GetRequiredService<PluralDateTimePrecisionVisitor>();
 
         private readonly Model.ModelInfo SystemModel;
 
@@ -47,6 +46,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private readonly string TimeTypeName;
         private readonly string DateTimeTypeName;
         private readonly string BooleanTypeName;
+        private readonly string RatioTypeName;
 
         private IEnumerable<string> ValidIntervalPointTypeNames
         {

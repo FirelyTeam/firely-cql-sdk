@@ -1,11 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -150,9 +145,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return successor;
         }
 
+        //   | ('start' | 'end') 'of' expressionTerm                                         #timeBoundaryExpressionTerm
         public override Expression VisitTimeBoundaryExpressionTerm([NotNull] cqlParser.TimeBoundaryExpressionTermContext context)
         {
-            var kw = KeywordVisitor.Parse(context.GetChild(0).GetText());
+            var kw = Keyword.Parse(context.GetChild(0).GetText());
             if (kw?.Length == 1)
             {
                 var operand = Visit(context.GetChild(2))

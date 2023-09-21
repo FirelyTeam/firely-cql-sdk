@@ -310,11 +310,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         }
 
+        //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
         public override Expression VisitDifferenceBetweenExpression([NotNull] cqlParser.DifferenceBetweenExpressionContext context)
         {
-            var precision = PluralDateTimePrecisionVisitor.Visit(context.GetChild(2));
-            if (precision == null)
-                throw Critical($"Unsupported precision {context.GetChild(2).GetText()}");
+            var precision = context.pluralDateTimePrecision().Parse();
 
             var lhs = Visit(context.GetChild(4));
             var rhs = Visit(context.GetChild(6));
@@ -365,7 +364,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     return new DifferenceBetween
                     {
-                        precision = precision.Value,
+                        precision = precision,
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
@@ -385,7 +384,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     return new DifferenceBetween
                     {
-                        precision = precision.Value,
+                        precision = precision,
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
@@ -401,7 +400,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 return new DifferenceBetween
                 {
-                    precision = precision.Value,
+                    precision = precision,
                     localId = NextId(),
                     locator = context.Locator(),
                     operand = new[] { lhs, rhs },
@@ -413,25 +412,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else throw UnresolvedSignature("Difference", lhs, rhs);
         }
 
+        //     | ('duration' 'in')? pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm      #durationBetweenExpression
         public override Expression VisitDurationBetweenExpression([NotNull] cqlParser.DurationBetweenExpressionContext context)
         {
-            int precisionIndex, lhsIndex, rhsIndex;
+            int lhsIndex, rhsIndex;
             if (context.ChildCount == 7)
             {
-                precisionIndex = 2;
                 lhsIndex = 4;
                 rhsIndex = 6;
             }
             else
             {
-                precisionIndex = 0;
                 lhsIndex = 2;
                 rhsIndex = 4;
             }
 
-            var precision = PluralDateTimePrecisionVisitor.Visit(context.GetChild(precisionIndex));
-            if (precision == null)
-                throw Critical($"Unsupported precision {context.GetChild(precisionIndex).GetText()}");
+            var precision = context.pluralDateTimePrecision().Parse();
 
             var lhs = Visit(context.GetChild(lhsIndex));
             var rhs = Visit(context.GetChild(rhsIndex));
@@ -482,7 +478,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     return new DurationBetween
                     {
-                        precision = precision.Value,
+                        precision = precision,
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
@@ -502,7 +498,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     return new DurationBetween
                     {
-                        precision = precision.Value,
+                        precision = precision,
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
@@ -518,7 +514,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 return new DurationBetween
                 {
-                    precision = precision.Value,
+                    precision = precision,
                     localId = NextId(),
                     locator = context.Locator(),
                     operand = new[] { lhs, rhs },
@@ -1546,7 +1542,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 var child = context.GetChild(index);
 
-                var kw0 = KeywordVisitor.Parse(child.GetText());
+                var kw0 = Keyword.Parse(child.GetText());
                 if (kw0.Length == 1)
                 {
                     var keyword = kw0[0];
@@ -1581,7 +1577,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 index++;
                 child = context.GetChild(index);
-                var kw1 = KeywordVisitor.Parse(child.GetText());
+                var kw1 = Keyword.Parse(child.GetText());
                 if (kw1.Length == 1)
                 {
                     var keyword = kw1[0];
@@ -1595,7 +1591,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (child is not cqlParser.QuantityContext)
                     index++;
                 child = context.GetChild(index);
-                var quantityTuple = QuantityVisitor.Visit(child);
+                var quantityTuple = context.quantity().Parse();
                 var quantity = new Quantity
                 {
                     localId = NextId(),
@@ -1610,7 +1606,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (index < context.ChildCount)
                 {
                     child = context.GetChild(index);
-                    var kwi = KeywordVisitor.Parse(child.GetText());
+                    var kwi = Keyword.Parse(child.GetText());
                     if (kwi.Length == 1)
                     {
                         var keyword = kwi[0];
@@ -1702,7 +1698,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 DateTimePrecision? dtp = null;
 
                 var index = 0;
-                var kw0 = KeywordVisitor.Parse(context.GetChild(index).GetText());
+                var kw0 = Keyword.Parse(context.GetChild(index).GetText());
                 if (kw0.Length == 1)
                 {
                     var keyword = kw0[0];
@@ -1745,7 +1741,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                     else
                     {
-                        var kw1 = KeywordVisitor.Parse(child.GetText());
+                        var kw1 = Keyword.Parse(child.GetText());
                         if (kw1.Length == 1)
                         {
                             var keyword = kw1[0];
@@ -1810,7 +1806,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         p.dateTimePrecision().Parse() : null;
 
                 CqlKeyword? boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
-                    KeywordVisitor.Parse(term.GetText())[0] : null;
+                    Keyword.Parse(term.GetText())[0] : null;
 
                 BinaryExpression result = boa switch
                 {
@@ -1851,7 +1847,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
 
             CqlKeyword? boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
-                KeywordVisitor.Parse(term.GetText())[0] : null;
+                Keyword.Parse(term.GetText())[0] : null;
 
             BinaryExpression result = boa switch
             {
@@ -1927,7 +1923,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 Expression lhs,
                 Expression rhs)
         {
-            var firstKeyword = KeywordVisitor.Parse(context.GetChild(0).GetText());
+            var firstKeyword = Keyword.Parse(context.GetChild(0).GetText());
             if (firstKeyword.Length != 1)
                 throw UnresolvedSignature("Includes", lhs, rhs);
             bool properly;
@@ -1957,7 +1953,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (index < context.ChildCount)
             {
-                var rightPoint = KeywordVisitor.Parse(context.GetChild(index).GetText());
+                var rightPoint = Keyword.Parse(context.GetChild(index).GetText());
                 var rhsPointLocator = (context.GetChild(index) as ParserRuleContext)?.Locator();
                 if (rightPoint.Length == 1)
                 {
@@ -2008,7 +2004,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             if (context.ChildCount > 3)
             {
-                var firstKeyword = KeywordVisitor.Parse(context.GetChild(0).GetText());
+                var firstKeyword = Keyword.Parse(context.GetChild(0).GetText());
                 int index;
                 CqlKeyword[] lhsPoint;
                 string? lhsPointLocator;
@@ -2027,14 +2023,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 var precision = context.dateTimePrecision().Parse();
                 index += 1;
-                var qualifier = KeywordVisitor.Parse(context.GetChild(index).GetText());
+                var qualifier = Keyword.Parse(context.GetChild(index).GetText());
                 index += 1;
 
                 CqlKeyword[] rhsPoint;
                 string? rhsPointLocator;
                 if (index < context.ChildCount)
                 {
-                    rhsPoint = KeywordVisitor.Parse(context.GetChild(index).GetText());
+                    rhsPoint = Keyword.Parse(context.GetChild(index).GetText());
                     rhsPointLocator = (context.GetChild(index) as ParserRuleContext)?.Locator();
                 }
                 else
@@ -2170,7 +2166,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else if (context.ChildCount == 3)
             {
                 var precision = context.dateTimePrecision().Parse();
-                var qualifier = KeywordVisitor.Parse(context.GetChild(2).GetText());
+                var qualifier = Keyword.Parse(context.GetChild(2).GetText());
                 if (qualifier.Length == 2)
                 {
                     if (qualifier[1] == CqlKeyword.Before)

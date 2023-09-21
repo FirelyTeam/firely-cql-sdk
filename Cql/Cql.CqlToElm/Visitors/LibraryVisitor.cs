@@ -22,9 +22,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private IConfiguration Configuration => Services.GetRequiredService<IConfiguration>();
         private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
         private VersionedIdentifierVisitor VersionedIdentifierVisitor => Services.GetRequiredService<VersionedIdentifierVisitor>();
-        private UsingDefinitionVisitor UsingDefinitionVisitor => Services.GetRequiredService<UsingDefinitionVisitor>();
-        private IncludeDefinitionVisitor IncludeDefinitionVisitor => Services.GetRequiredService<IncludeDefinitionVisitor>();
-        private ValueSetDefinitionVisitor ValueSetDefinitionVisitor => Services.GetRequiredService<ValueSetDefinitionVisitor>();
         private ParameterDefinitionVisitor ParameterDefinitionVisitor => Services.GetRequiredService<ParameterDefinitionVisitor>();
         private ExpressionDefinitionVisitor ExpressionDefinitionVisitor => Services.GetRequiredService<ExpressionDefinitionVisitor>();
         private ExpressionVisitor ExpressionVisitor => Services.GetRequiredService<ExpressionVisitor>();
@@ -51,7 +48,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var concepts = new LinkedList<ConceptDef>();
             var parameters = new LinkedList<ParameterDef>();
             var statements = new LinkedList<ExpressionDef>();
-            var contextStatements = new Dictionary<string,ExpressionDef>();
+            var contextStatements = new Dictionary<string, ExpressionDef>();
 
             var defaultSystemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
             var defaultSystemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)];
@@ -75,7 +72,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 if (child.GetChild(0) is cqlParser.UsingDefinitionContext udc)
                 {
-                    var usingDef = UsingDefinitionVisitor.Visit(udc);
+                    var usingDef = udc.Parse(ModelProvider);
                     usings.AddLast(usingDef);
                 }
             }
@@ -95,7 +92,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             {
                                 case cqlParser.IncludeDefinitionContext include:
                                     {
-                                        var includeDef = IncludeDefinitionVisitor.Visit(include);
+                                        var includeDef = include.Parse();
                                         includes.AddLast(includeDef);
                                     }
                                     break;
@@ -107,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     break;
                                 case cqlParser.ValuesetDefinitionContext valueSet:
                                     {
-                                        var valueSetDef = ValueSetDefinitionVisitor.Visit(valueSet);
+                                        var valueSetDef = valueSet.Parse();
                                         valueSets.AddLast(valueSetDef);
                                     }
                                     break;

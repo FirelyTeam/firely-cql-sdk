@@ -32,17 +32,11 @@ namespace Hl7.Cql.CqlToElm
             services.AddScoped<ContextDefVisitor>();
             services.AddScoped<ExpressionVisitor>();
             services.AddScoped<ExpressionDefinitionVisitor>();
-            services.AddScoped<IncludeDefinitionVisitor>();
-            services.AddScoped<KeywordVisitor>();
             services.AddScoped<LibraryVisitor>();
             services.AddScoped<ParameterDefinitionVisitor>();
-            services.AddScoped<PluralDateTimePrecisionVisitor>();
-            services.AddScoped<QuantityVisitor>();
             services.AddScoped<TupleElementVisitor>();
             services.AddScoped<TupleElementDefinitionVisitor>();
             services.AddScoped<TypeSpecifierVisitor>();
-            services.AddScoped<UsingDefinitionVisitor>();
-            services.AddScoped<ValueSetDefinitionVisitor>();
             services.AddScoped<VersionedIdentifierVisitor>();
             return services;
         }

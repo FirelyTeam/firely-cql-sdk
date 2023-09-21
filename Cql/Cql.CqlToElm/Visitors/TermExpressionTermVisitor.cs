@@ -10,7 +10,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
-        private QuantityVisitor QuantityVisitor => Services.GetRequiredService<QuantityVisitor>();
         private TupleElementVisitor TupleElementVisitor => Services.GetRequiredService<TupleElementVisitor>();
 
         private readonly Regex DecimalExpression = new Regex(@"^-?\d*(\.\d+)$", RegexOptions.Compiled);
@@ -287,7 +286,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitQuantityLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityLiteralContext context)
         {
-            var (decimalValue, unit) = QuantityVisitor.Visit(context.GetChild(0));
+            var (decimalValue, unit) = context.quantity().Parse();
             var quantityType = NamedType(QuantityTypeName, context);
             var quantity = new Quantity
             {
@@ -304,14 +303,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitRatioLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.RatioLiteralContext context)
         {
-            var ratioType = NamedType(ModelProvider.QualifiedTypeName(SystemModel, "Ratio"), context);
+            var ratioType = NamedType(RatioTypeName, context);
             var quantityType = NamedType(QuantityTypeName, context);
-            var rc = context.GetChild(0);
+            var quantities = context.ratio().quantity();
 
-            var numChild = rc.GetChild(0) as cqlParser.QuantityContext;
-            var denomChild = rc.GetChild(2) as cqlParser.QuantityContext;
-            var (numValue, numUnit) = QuantityVisitor.Visit(numChild);
-            var (denomValue, denomUnit) = QuantityVisitor.Visit(denomChild);
+            var (numValue, numUnit) = quantities[0].Parse();
+            var (denomValue, denomUnit) = quantities[1].Parse();
 
             var ratio = new Ratio
             {
@@ -322,7 +319,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 numerator = new Quantity
                 {
                     localId = NextId(),
-                    locator = numChild!.Locator(),
+                    locator = quantities[0].Locator(),
                     value = numValue,
                     unit = numUnit,
                     resultTypeName = quantityType.name,
@@ -332,7 +329,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 denominator = new Quantity
                 {
                     localId = NextId(),
-                    locator = denomChild!.Locator(),
+                    locator = quantities[1].Locator(),
                     value = denomValue,
                     unit = denomUnit,
                     resultTypeName = quantityType.name,

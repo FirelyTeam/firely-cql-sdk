@@ -14,6 +14,104 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public static string NextId(object context) => _idGenerator.GetId(context, out _)
                 .ToString(CultureInfo.InvariantCulture);
 
+
+        // quantity: NUMBER unit?;
+        public static (decimal value, string unit) Parse(this cqlParser.QuantityContext context)
+        {
+            var value = context.NUMBER().GetText();
+            if (!decimal.TryParse(value, NumberStyles.Number, CultureInfo.InvariantCulture, out var decimalValue))
+                throw new InvalidOperationException($"Value {value} is not a valid decimal.");
+
+            // This is either a unit, or a datetimeprecision (which we parse as text here)
+            var unitText = context.unit().STRING().ParseString() ?? context.unit().GetText();
+            var unit = translateUnit(unitText);
+
+            return (decimalValue, unit!);
+
+            static string translateUnit(string u) => u switch
+            {
+                "year" or "years" => "a",
+                "month" or "months" => "mo",
+                "week" or "weeks" => "wk",
+                "day" or "days" => "d",
+                "hour" or "hours" => "h",
+                "minute" or "minutes" => "min",
+                "second" or "seconds" => "s",
+                "millisecond" or "milliseconds" => "ms",
+                _ => u
+            };
+        }
+
+
+        // pluralDateTimePrecision: 'years' | 'months' | 'weeks' | 'days' | 'hours' | 'minutes' | 'seconds' | 'milliseconds'
+        public static DateTimePrecision Parse(this cqlParser.PluralDateTimePrecisionContext context) =>
+           context.GetText() switch
+           {
+               "years" => DateTimePrecision.Year,
+               "months" => DateTimePrecision.Month,
+               "weeks" => DateTimePrecision.Week,
+               "days" => DateTimePrecision.Day,
+               "hours" => DateTimePrecision.Hour,
+               "minutes" => DateTimePrecision.Minute,
+               "seconds" => DateTimePrecision.Second,
+               "milliseconds" => DateTimePrecision.Millisecond,
+               _ => throw new InvalidOperationException($"Encountered invalid plural date time precision {context.GetText()}.")
+           };
+
+        // pluralDateTimePrecision: 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond'
+        public static DateTimePrecision Parse(this cqlParser.DateTimePrecisionContext context) =>
+           context.GetText() switch
+           {
+               "year" => DateTimePrecision.Year,
+               "month" => DateTimePrecision.Month,
+               "week" => DateTimePrecision.Week,
+               "day" => DateTimePrecision.Day,
+               "hour" => DateTimePrecision.Hour,
+               "minute" => DateTimePrecision.Minute,
+               "second" => DateTimePrecision.Second,
+               "millisecond" => DateTimePrecision.Millisecond,
+               _ => throw new InvalidOperationException($"Encountered invalid date time precision {context.GetText()}.")
+           };
+
+        // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
+        public static UsingDef Parse(this cqlParser.UsingDefinitionContext context, IModelProvider provider)
+        {
+            var usingDef = new UsingDef();
+
+            var (ns, id) = context.qualifiedIdentifier().Parse();
+
+            usingDef.version = context.versionSpecifier()?.STRING().ParseString();
+            usingDef.localIdentifier = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
+            var model = provider.ModelFromName(usingDef.localIdentifier, usingDef.version)
+                ?? throw new InvalidOperationException($"Model {usingDef.localIdentifier} version {usingDef.version ?? "<unspecified>"} is not available.");
+            usingDef.uri = model.url;
+
+            if (context.localIdentifier() is { } localId)
+                usingDef.localIdentifier = localId.identifier().Parse();
+            usingDef.localId = NextId(context);
+            usingDef.locator = context.Locator();
+
+            return usingDef;
+        }
+
+        //  : accessModifier? 'valueset' identifier ':' valuesetId ('version' versionSpecifier)? codesystems?
+        public static ValueSetDef Parse(this cqlParser.ValuesetDefinitionContext context)
+        {
+            var valueSetDef = new ValueSetDef
+            {
+                accessLevel = context.accessModifier().Parse(),
+                name = context.identifier().Parse(),
+                id = context.valuesetId().STRING().ParseString(),
+                version = context.versionSpecifier()?.STRING().ParseString(),
+                codeSystem = context.codesystems()?.codesystemIdentifier().Select(csi =>
+                    csi.Parse()).ToArray(),
+                localId = NextId(context),
+                locator = context.Locator()
+            };
+
+            return valueSetDef;
+        }
+
         // : (qualifier '.')* identifier
         public static (string qualifier, string id) Parse(this cqlParser.QualifiedIdentifierContext context)
         {
@@ -30,20 +128,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return (string.Empty, context.identifier().Parse()!);
         }
 
-        //   : 'year' | 'month' | 'week' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond'
-        public static DateTimePrecision Parse(this cqlParser.DateTimePrecisionContext context) =>
-              context?.GetText() switch
-              {
-                  "year" => DateTimePrecision.Year,
-                  "month" => DateTimePrecision.Month,
-                  "week" => DateTimePrecision.Week,
-                  "day" => DateTimePrecision.Day,
-                  "hour" => DateTimePrecision.Hour,
-                  "minute" => DateTimePrecision.Minute,
-                  "second" => DateTimePrecision.Second,
-                  "millisecond" => DateTimePrecision.Millisecond,
-                  var other => throw new InvalidOperationException($"Unknown precision '{other}'")
-              };
+        //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
+        public static IncludeDef Parse(this cqlParser.IncludeDefinitionContext context)
+        {
+            var qualifiedId = context.qualifiedIdentifier().Parse();
+
+            var includeDef = new IncludeDef
+            {
+                path = string.IsNullOrWhiteSpace(qualifiedId.qualifier) ? qualifiedId.id : $"{qualifiedId.qualifier}.{qualifiedId.id}",
+                localIdentifier = context.localIdentifier()?.identifier().Parse(),
+                version = context.versionSpecifier()?.STRING().ParseString(),
+                localId = NextId(context),
+                locator = context.Locator()
+            };
+
+            return includeDef;
+        }
 
         //: accessModifier? 'concept' identifier ':' '{' codeIdentifier(',' codeIdentifier)* '}' displayClause?
         public static ConceptDef Parse(this cqlParser.ConceptDefinitionContext context)

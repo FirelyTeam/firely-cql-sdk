@@ -1,23 +1,18 @@
-﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
 using System;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class KeywordVisitor : Visitor<CqlKeyword[]>
+    internal static class Keyword
     {
-        public KeywordVisitor(IServiceProvider services) : base(services)
-        {
-        }
-
-        public override CqlKeyword[] VisitKeyword([NotNull] cqlParser.KeywordContext context)
+        public static CqlKeyword[] Parse(this cqlParser.KeywordContext context)
         {
             var text = context.GetText();
             return Parse(text);
         }
 
-        public CqlKeyword[] Parse(string text)
+        public static CqlKeyword[] Parse(string text)
         {
             var parts = text.Split(' ');
             var keywords = parts
@@ -25,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     if (Enum.TryParse<CqlKeyword>(part, true, out var keyword))
                         return keyword;
-                    else throw Critical($"Keyword {part} is not understood");
+                    else throw new NotImplementedException($"Keyword {part} is not understood");
                 })
                 .ToArray();
             return keywords;
