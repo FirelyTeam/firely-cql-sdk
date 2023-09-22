@@ -269,18 +269,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         public override Expression VisitParenthesizedTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.ParenthesizedTermContext context) =>
-            base.Visit(context.GetChild(1));
+            Visit(context.expression());
 
+        //   | ('+' | '-') expressionTerm                                                    #polarityExpressionTerm
         public override Expression VisitPolarityExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.PolarityExpressionTermContext context)
         {
             var sign = context.GetChild(0).GetText();
-            var expression = Visit(context.GetChild(1));
+            var expression = Visit(context.expressionTerm());
+
             if (expression is Literal literal)
                 literal.value = $"{sign}{literal.value}";
             else if (expression is Quantity quantity && sign == "-")
                 quantity.value = -1 * quantity.value;
             else
                 throw Critical("Expected result of polarity expression to be a literal");
+
             return expression;
         }
 

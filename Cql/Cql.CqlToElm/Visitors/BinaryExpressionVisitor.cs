@@ -373,7 +373,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         resultTypeSpecifier = NamedType(IntegerTypeName, context)
                     };
                 }
-                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeName}");
+                else throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeName}");
             }
             else if (lhs.resultTypeName!.Name == TimeTypeName)
             {

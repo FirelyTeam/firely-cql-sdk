@@ -3,18 +3,11 @@ using Hl7.Cql.Elm;
 using System;
 using System.Globalization;
 using System.Linq;
-using System.Runtime.Serialization;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal static class ContextualParserExtensions
     {
-        private static readonly ObjectIDGenerator _idGenerator = new ObjectIDGenerator();
-
-        public static string NextId(object context) => _idGenerator.GetId(context, out _)
-                .ToString(CultureInfo.InvariantCulture);
-
-
         // quantity: NUMBER unit?;
         public static (decimal value, string unit) Parse(this cqlParser.QuantityContext context)
         {
@@ -88,10 +81,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (context.localIdentifier() is { } localId)
                 usingDef.localIdentifier = localId.identifier().Parse();
-            usingDef.localId = NextId(context);
-            usingDef.locator = context.Locator();
 
-            return usingDef;
+            return usingDef.WithLocator(context);
         }
 
         //  : accessModifier? 'valueset' identifier ':' valuesetId ('version' versionSpecifier)? codesystems?
@@ -105,9 +96,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 version = context.versionSpecifier()?.STRING().ParseString(),
                 codeSystem = context.codesystems()?.codesystemIdentifier().Select(csi =>
                     csi.Parse()).ToArray(),
-                localId = NextId(context),
-                locator = context.Locator()
-            };
+            }.WithLocator(context);
 
             return valueSetDef;
         }
@@ -138,9 +127,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 path = string.IsNullOrWhiteSpace(qualifiedId.qualifier) ? qualifiedId.id : $"{qualifiedId.qualifier}.{qualifiedId.id}",
                 localIdentifier = context.localIdentifier()?.identifier().Parse(),
                 version = context.versionSpecifier()?.STRING().ParseString(),
-                localId = NextId(context),
-                locator = context.Locator()
-            };
+            }.WithLocator(context);
 
             return includeDef;
         }
@@ -154,10 +141,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = context.identifier().Parse(),
                 code = context.codeIdentifier().Select(ci => ci.Parse()).ToArray(),
                 display = context.displayClause()?.STRING().ParseString(),
+            }.WithLocator(context);
 
-                localId = NextId(context),
-                locator = context.Locator()
-            };
             return conceptDef;
         }
 
@@ -171,10 +156,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = context.identifier().Parse(),
                 id = context.codesystemId().STRING().ParseString(),
                 version = context.versionSpecifier()?.STRING().ParseString(),
-
-                localId = NextId(context),
-                locator = context.Locator()
-            };
+            }.WithLocator(context);
 
             return codeSystemDef;
         }
@@ -187,26 +169,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 libraryName = context.libraryIdentifier()?.identifier().Parse(),
                 name = context.identifier().Parse(),
-                localId = NextId(context),
-                locator = context.Locator()
-            };
+            }.WithLocator(context);
             return codeRef;
         }
 
         //: accessModifier? 'code' identifier ':' codeId 'from' codesystemIdentifier displayClause?
         public static CodeDef Parse(this cqlParser.CodeDefinitionContext context)
         {
-            return new()
+            var codeDef = new CodeDef()
             {
                 accessLevel = context.accessModifier().Parse(),
                 name = context.identifier().Parse(),
                 id = context.codeId().STRING().ParseString(),
                 codeSystem = context.codesystemIdentifier().Parse(),
                 display = context.displayClause()?.STRING()?.ParseString(),
+            }.WithLocator(context);
 
-                localId = NextId(context),
-                locator = context.Locator()
-            };
+            return codeDef;
         }
 
         // : (libraryIdentifier '.')? identifier
@@ -218,9 +197,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 libraryName = context.libraryIdentifier()?.identifier().Parse(),
                 name = context.identifier().Parse(),
-                localId = NextId(context),
-                locator = context.Locator()
-            };
+            }.WithLocator(context);
+
             return csRef;
         }
 

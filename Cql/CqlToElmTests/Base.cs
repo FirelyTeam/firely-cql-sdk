@@ -8,8 +8,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -81,6 +79,17 @@ namespace Hl7.Cql.CqlToElm.Test
             return expressionBuilder;
         }
 
+        public void AssertResult<T>(Expression be, T expected)
+        {
+            var lambda = ExpressionBuilder.Lambda(@be);
+            var dg = lambda.Compile();
+            var ctx = FhirCqlContext.ForBundle();
+            var result = dg.DynamicInvoke(ctx);
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(T));
+            Assert.AreEqual(expected, result);
+        }
+
         protected void AssertIntervalType(TypeSpecifier specifier, string pointTypeName)
         {
             Assert.IsInstanceOfType(specifier, typeof(IntervalTypeSpecifier));
@@ -111,7 +120,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var tts = (TupleTypeSpecifier)specifier;
             Assert.AreEqual(namedTypes?.Length, tts.element?.Length);
             Assert.IsNotNull(tts.element);
-            for(int i = 0; i < namedTypes?.Length; i++)
+            for (int i = 0; i < namedTypes?.Length; i++)
             {
                 Assert.AreEqual(namedTypes[i].name, tts.element[i].name);
                 Assert.IsInstanceOfType(tts.element[i].elementType, typeof(NamedTypeSpecifier));
@@ -136,7 +145,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             Assert.IsNotNull(list.element);
             Assert.AreEqual(expectedValues.Length, list.element.Length);
-            
+
             var lambda = ExpressionBuilder.Lambda(list);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();

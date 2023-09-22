@@ -1,12 +1,41 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
+using System;
 using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
+        // | expression 'is' 'not'? ('null' | 'true' | 'false')                                            #booleanExpression
+        public override Expression VisitBooleanExpression([NotNull] cqlParser.BooleanExpressionContext context)
+        {
+            var lastChild = context.children[^1].GetText();
+            var isNot = context.children[^2].GetText() == "not";
+            var operand = Visit(context.expression());
+
+            UnaryExpression unary = lastChild switch
+            {
+                "null" => new IsNull() { operand = operand },
+                "true" => new IsTrue() { operand = operand.CastNull(BooleanTypeName) },
+                "false" => new IsFalse() { operand = operand.CastNull(BooleanTypeName) },
+                _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
+            };
+
+            unary = unary.WithLocator(context).WithNamedType(BooleanTypeName);
+
+            if (isNot)
+            {
+                unary = new Not
+                {
+                    operand = unary,
+                }.WithLocator(context).WithNamedType(BooleanTypeName);
+            }
+
+            return unary;
+        }
+
         // singleton from
         public override Expression VisitElementExtractorExpressionTerm([NotNull] cqlParser.ElementExtractorExpressionTermContext context)
         {
