@@ -64,6 +64,7 @@ namespace Hl7.Cql.CqlToElm
 
         public static IServiceCollection AddContext(this IServiceCollection services) =>
             services
+                .AddScoped<SystemLibrary>()
                 .AddScoped<ConverterContext>()
                 .AddScoped<LibraryContext>();
 

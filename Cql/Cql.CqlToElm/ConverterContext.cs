@@ -1,11 +1,7 @@
 ﻿using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -32,6 +28,6 @@ namespace Hl7.Cql.CqlToElm
                 Libraries.Add(library);
             else throw new ArgumentException($"Library already exists", nameof(library));
         }
-    
+
     }
 }

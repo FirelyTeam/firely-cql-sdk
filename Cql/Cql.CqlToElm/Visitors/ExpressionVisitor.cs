@@ -1,8 +1,8 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 
@@ -10,58 +10,44 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor : Visitor<Expression>
     {
-        public ExpressionVisitor(IServiceProvider services) : base(services)
+        public ExpressionVisitor(
+            IModelProvider provider,
+            LibraryContext libraryContext,
+            TypeSpecifierVisitor typeSpecifierVisitor,
+            IServiceProvider services,
+            IEqualityComparer<TypeSpecifier> typeComparer,
+            SystemLibrary system) : base(services)
         {
-            SystemModel = ModelProvider.GetSystemModel(LibraryContext.ActiveLibrary
-                ?? throw new InvalidOperationException($"No library is in context"));
-
-            AnyTypeQName = SystemModel.ToQualifiedTypeName("Any");
-            IntegerTypeQName = SystemModel.ToQualifiedTypeName("Integer");
-            LongTypeQName = SystemModel.ToQualifiedTypeName("Long");
-            DecimalTypeQName = SystemModel.ToQualifiedTypeName("Decimal");
-            QuantityTypeQName = SystemModel.ToQualifiedTypeName("Quantity");
-            StringTypeQName = SystemModel.ToQualifiedTypeName("String");
-            DateTypeQName = SystemModel.ToQualifiedTypeName("Date");
-            TimeTypeQName = SystemModel.ToQualifiedTypeName("Time");
-            DateTimeTypeQName = SystemModel.ToQualifiedTypeName("DateTime");
-            BooleanTypeQName = SystemModel.ToQualifiedTypeName("Boolean");
-            RatioTypeQName = SystemModel.ToQualifiedTypeName("Ratio");
-
-            ValidIntervalPointTypeNames = new XmlQualifiedName[]
-            {
-                IntegerTypeQName,
-                LongTypeQName,
-                DecimalTypeQName,
-                QuantityTypeQName,
-                DateTypeQName,
-                TimeTypeQName,
-                DateTimeTypeQName,
-            };
+            ModelProvider = provider;
+            LibraryContext = libraryContext;
+            TypeSpecifierVisitor = typeSpecifierVisitor;
+            System = system;
         }
 
         #region Privates
-        private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
-        private LibraryContext LibraryContext => Services.GetRequiredService<LibraryContext>();
-        private TypeSpecifierVisitor TypeSpecifierVisitor => Services.GetRequiredService<TypeSpecifierVisitor>();
+        private readonly IModelProvider ModelProvider;
+        private readonly LibraryContext LibraryContext;
+        private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
 
-        private readonly Model.ModelInfo SystemModel;
+        private XmlQualifiedName AnyTypeQName => System.AnyTypeQName;
+        private XmlQualifiedName IntegerTypeQName => System.IntegerTypeQName;
+        private XmlQualifiedName LongTypeQName => System.LongTypeQName;
+        private XmlQualifiedName DecimalTypeQName => System.DecimalTypeQName;
+        private XmlQualifiedName QuantityTypeQName => System.QuantityTypeQName;
+        private XmlQualifiedName StringTypeQName => System.StringTypeQName;
+        private XmlQualifiedName DateTypeQName => System.DateTypeQName;
+        private XmlQualifiedName TimeTypeQName => System.TimeTypeQName;
+        private XmlQualifiedName DateTimeTypeQName => System.DateTimeTypeQName;
+        private XmlQualifiedName BooleanTypeQName => System.BooleanTypeQName;
+        private XmlQualifiedName RatioTypeQName => System.RatioTypeQName;
 
-        private readonly XmlQualifiedName AnyTypeQName;
-        private readonly XmlQualifiedName IntegerTypeQName;
-        private readonly XmlQualifiedName LongTypeQName;
-        private readonly XmlQualifiedName DecimalTypeQName;
-        private readonly XmlQualifiedName QuantityTypeQName;
-        private readonly XmlQualifiedName StringTypeQName;
-        private readonly XmlQualifiedName DateTypeQName;
-        private readonly XmlQualifiedName TimeTypeQName;
-        private readonly XmlQualifiedName DateTimeTypeQName;
-        private readonly XmlQualifiedName BooleanTypeQName;
-        private readonly XmlQualifiedName RatioTypeQName;
+        private readonly SystemLibrary System;
 
-        private readonly XmlQualifiedName[] ValidIntervalPointTypeNames;
-
-        private bool IsValidIntervalPointType(XmlQualifiedName typeName) =>
-            ValidIntervalPointTypeNames.Any(t => string.Equals(t.Name, typeName.Name, StringComparison.Ordinal));
+        private bool IsValidIntervalPointType(XmlQualifiedName typeName)
+        {
+            var typeSpec = typeName.ToNamedType();
+            return System.ValidIntervalPointTypes.Any(t => TypeComparer.Equals(typeSpec, t));
+        }
 
         private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
             throw Critical($"Could not resolve call to operator {@operator} with signature ({string.Join(", ", operands.Select(o => o.resultTypeName?.Name ?? "unknown"))}");

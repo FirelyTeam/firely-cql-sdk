@@ -3,10 +3,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -20,6 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
         {
             var services = new ServiceCollection()
+                .AddTypeSpecifierComparer()
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()

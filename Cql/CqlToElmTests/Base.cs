@@ -27,6 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
         protected static void ClassInitialize()
         {
             var services = new ServiceCollection()
+                .AddTypeSpecifierComparer()
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
@@ -35,7 +36,6 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddLogging(builder => builder
                     .AddConsole()
                     .ThrowOn(LogLevel.Error))
-                .AddTypeSpecifierComparer()
                 .AddScoped<CqlToElmConverter>();
             Services = services.BuildServiceProvider();
 

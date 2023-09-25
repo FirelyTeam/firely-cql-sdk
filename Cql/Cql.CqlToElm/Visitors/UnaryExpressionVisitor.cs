@@ -214,7 +214,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var extent = context.GetChild(0).GetText().ToLower();
             var dataType = context.GetChild(1).GetText();
-            var typeName = SystemModel.ToQualifiedTypeName(dataType);
+            var typeName = System.SystemModel.ToQualifiedTypeName(dataType);
 
             if (extent == "minimum")
             {
