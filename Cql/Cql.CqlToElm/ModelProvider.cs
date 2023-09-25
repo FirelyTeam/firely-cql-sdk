@@ -1,15 +1,11 @@
-﻿using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
 namespace Hl7.Cql.CqlToElm
 {
+
     internal class ModelProvider : IModelProvider
     {
         public ModelProvider(params ModelInfo[] models)
@@ -45,7 +41,7 @@ namespace Hl7.Cql.CqlToElm
                 }
                 else if (modelsByVersion.Count == 1)
                     return modelsByVersion.Values.Single();
-                else 
+                else
                     throw new ArgumentException($"More than one version of model {uri} is available.  In this case, {nameof(version)} must be specified.", nameof(version));
             }
             return null;
@@ -69,56 +65,6 @@ namespace Hl7.Cql.CqlToElm
                 }
             }
             else return eligibleModels.First();
-        }
-
-        public TypeInfo? TypeInfoFor(ModelInfo model, string name)
-        {
-            var typeInfo = model.typeInfo.FirstOrDefault(ti => ti switch
-            {
-                SimpleTypeInfo sti => sti.name == name,
-                ClassInfo c => c.name == name,
-                _ => false
-            });
-            return typeInfo;
-        }
-
-        public string QualifiedTypeName(ModelInfo model, string typeName) =>
-              $"{{{model.url}}}{typeName}";
-
-        public ModelInfo GetSystemModel(Library library)
-        {
-            if (library != null)
-            {
-                if (library.usings != null)
-                {
-                    foreach (var ud in library.usings)
-                    {
-                        if (ud.localIdentifier == "System")
-                            return ModelFromUri(ud.uri, ud.version)
-                                ?? throw new InvalidOperationException($"Model {ud.uri} version {ud.version} is not available.");
-                    }
-                }
-            }
-            throw new ArgumentException("No model in this library has a local identifier of System.", nameof(library));
-        }
-
-        private static Regex QualifiedNameExpression = new("{(?'uri'.*)}.*", RegexOptions.Compiled);
-        public ModelInfo? ModelFromQualifiedTypeName(string qualifiedTypeName)
-        {
-            var match = QualifiedNameExpression.Match(qualifiedTypeName);
-            if (match.Success)
-            {
-                var uri = match.Groups["uri"];
-                if (uri != null)
-                {
-                    var model = ModelFromUri(uri.Value);
-                    if (model != null)
-                    {
-                        return model;
-                    }
-                }
-            }
-            return null;
         }
     }
 }

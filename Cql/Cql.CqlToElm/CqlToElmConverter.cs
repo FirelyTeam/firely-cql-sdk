@@ -2,7 +2,6 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.IO;
@@ -38,7 +37,7 @@ namespace Hl7.Cql.CqlToElm
 
             var lexerListener = new ThrowingErrorListener();
             var parserListener = lexerListener;
-            
+
             var antlStream = new AntlrInputStream(cqlLibrary);
             var lexer = new cqlLexer(antlStream);
             lexer.RemoveErrorListeners();

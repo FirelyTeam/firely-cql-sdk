@@ -1,110 +1,89 @@
 ﻿using Antlr4.Runtime;
-using Antlr4.Runtime.Tree;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Xml;
 
 namespace Hl7.Cql.CqlToElm
 {
     internal class LibraryContext
     {
-        public LibraryContext(IServiceProvider services)
+        public LibraryContext(IModelProvider modelProvider, ILogger<LibraryContext> logger)
         {
-            Services = services;
+            ModelProvider = modelProvider;
+            Log = logger;
         }
 
-        private LocalIdentifierProvider LocalIdentifierProvider => Services.GetRequiredService<LocalIdentifierProvider>();
-        private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
+        private readonly ILogger<LibraryContext> Log;
+        private readonly IModelProvider ModelProvider;
 
-        public Library? Library { get; set; }
+        public Library ActiveLibrary { get; set; } = new Library();
         public ContextDef? ActiveContext { get; set; }
-        internal IServiceProvider Services { get; }
-        internal ILogger<LibraryContext> Log => Services.GetRequiredService<ILogger<LibraryContext>>();
+
         internal Expression? Ref(string? qualifier, string identifier, ParserRuleContext context)
         {
             Library library;
+
             if (string.IsNullOrWhiteSpace(qualifier))
-                library = Library ?? throw new InvalidOperationException($"Unqualified identifier applied without a Library in context");
+                library = ActiveLibrary ?? throw new InvalidOperationException($"Unqualified identifier applied without a Library in context");
             else
                 throw new NotImplementedException();
 
-            var model = ModelProvider.GetSystemModel(library);
+            var systemModel = ModelProvider.GetSystemModel(library);
+
             if (library.valueSets?.Any(vs => vs.name == identifier) ?? false)
             {
-                var vsName = ModelProvider.QualifiedTypeName(model, "ValueSet");
+                var vsName = systemModel.ToQualifiedTypeName("ValueSet")!;
+
                 return new ValueSetRef
                 {
                     libraryName = qualifier,
-                    localId = LocalIdentifierProvider.Next(),
-                    locator = context.Locator(),
                     name = identifier,
-                    resultTypeName = new XmlQualifiedName(vsName),
-                    resultTypeSpecifier = new NamedTypeSpecifier
-                    {
-                        name = new XmlQualifiedName(vsName)
-                    }
-                };
+                    resultTypeName = vsName,
+                    resultTypeSpecifier = vsName.ToNamedType()
+                }.WithLocator(context);
             }
             else if (library.concepts?.Any(c => c.name == identifier) ?? false)
             {
-                var conceptName = ModelProvider.QualifiedTypeName(model, "Concept");
+                var conceptName = systemModel.ToQualifiedTypeName("Concept");
                 return new ConceptRef
                 {
                     libraryName = qualifier,
-                    localId = LocalIdentifierProvider.Next(),
-                    locator = context.Locator(),
                     name = identifier,
-                    resultTypeName = new XmlQualifiedName(conceptName),
-                    resultTypeSpecifier = new NamedTypeSpecifier
-                    {
-                        name = new XmlQualifiedName(conceptName)
-                    }
-                };
+                    resultTypeName = conceptName,
+                    resultTypeSpecifier = conceptName.ToNamedType()
+                }.WithLocator(context);
             }
             else if (library.codeSystems?.Any(c => c.name == identifier) ?? false)
             {
-                var csName = ModelProvider.QualifiedTypeName(model, "CodeSystem");
+                var csName = systemModel.ToQualifiedTypeName("CodeSystem");
                 return new CodeSystemRef
                 {
                     libraryName = qualifier,
-                    localId = LocalIdentifierProvider.Next(),
-                    locator = context.Locator(),
                     name = identifier,
-                    resultTypeName = new XmlQualifiedName(csName),
-                    resultTypeSpecifier = new NamedTypeSpecifier
-                    {
-                        name = new XmlQualifiedName(csName)
-                    }
-                };
+                    resultTypeName = csName,
+                    resultTypeSpecifier = csName.ToNamedType()
+                }.WithLocator(context);
             }
             else if (library.codes?.Any(c => c.name == identifier) ?? false)
             {
-                var codeName = ModelProvider.QualifiedTypeName(model, "Code");
+                var codeName = systemModel.ToQualifiedTypeName("Code");
                 return new CodeRef
                 {
                     libraryName = qualifier,
-                    localId = LocalIdentifierProvider.Next(),
-                    locator = context.Locator(),
                     name = identifier,
-                    resultTypeName = new XmlQualifiedName(codeName),
-                    resultTypeSpecifier = new NamedTypeSpecifier
-                    {
-                        name = new XmlQualifiedName(codeName)
-                    }
-                };
+                    resultTypeName = codeName,
+                    resultTypeSpecifier = codeName.ToNamedType()
+                }.WithLocator(context);
             }
             else
             {
                 var param = library.parameters?
                     .Where(p => p.name == identifier)
                     .ToArray() ?? Array.Empty<ParameterDef>();
+
                 if (param.Length > 1)
                     Log.LogCritical($"The parameter name {identifier} exists more than once in {library.identifier.id}.");
 
@@ -113,74 +92,62 @@ namespace Hl7.Cql.CqlToElm
                     return new ParameterRef
                     {
                         libraryName = qualifier,
-                        localId = LocalIdentifierProvider.Next(),
-                        locator = context.Locator(),
                         name = identifier,
                         resultTypeName = param[0].parameterType,
                         resultTypeSpecifier = param[0].parameterTypeSpecifier
-                    };
+                    }.WithLocator(context);
                 }
             }
             return null;
         }
-        internal IEnumerable<(XmlQualifiedName qualifiedTypeName, string? templateName)> MatchingQualifiedTypeNames(string dotSeparatedId)
+
+        internal IEnumerable<(XmlQualifiedName qualifiedTypeName, string? templateName)> MatchDottedTypeName(string dotSeparatedId)
         {
             var parts = dotSeparatedId.Split(".");
-            if (parts.Length == 2)
+            var usings = parts.Length == 2 ?
+                ActiveLibrary.usings.Where(u => u.localIdentifier == parts[0]) :
+                ActiveLibrary.usings;
+            var name = parts.Length == 2 ? parts[1] : parts[0];
+
+            foreach (var @using in usings)
             {
-                var @using = Library?.usings?.First(u => u.localIdentifier == parts[0]);
-                if (@using != null)
+                if (ModelProvider.ModelFromUri(@using.uri) is { } model)
                 {
-                    var uri = @using.uri;
-                    var model = ModelProvider.ModelFromUri(uri);
-                    if (model != null)
+                    if (model.TypeInfoFor(name) is { } type)
                     {
-                        var type = ModelProvider.TypeInfoFor(model, parts[1]);
-                        if (type != null)
-                        {
-                            var qtn = ModelProvider.QualifiedTypeName(model, parts[1]);
-                            var templateId = IdentifierFor(type);
-                            yield return (new XmlQualifiedName(qtn), templateId);
-                        }
-                    }
-                }
-            }
-            else
-            {
-                foreach (var @using in Library?.usings ?? Enumerable.Empty<UsingDef>())
-                {
-                    var uri = @using.uri;
-                    var model = ModelProvider.ModelFromUri(uri);
-                    if (model != null)
-                    {
-                        var type = ModelProvider.TypeInfoFor(model, parts[0])
-                            ?? ModelProvider.TypeInfoFor(model, $"{model.name}.{parts[0]}");
-                        if (type != null)
-                        {
-                            var qtn = ModelProvider.QualifiedTypeName(model, parts[0]);
-                            var templateId = IdentifierFor(type);
-                            yield return (new XmlQualifiedName(qtn), templateId);
-                        }
+                        var qtn = model.ToQualifiedTypeName(name);
+                        var templateId = identifierFor(type);
+                        yield return (qtn, templateId);
                     }
                 }
             }
         }
-        internal (XmlQualifiedName qualifiedTypeName, string? templateName) UnambiguousType(string qualifiedName)
+
+        internal (XmlQualifiedName qualifiedTypeName, string? templateName) ResolveDottedTypeName(string dottedName)
         {
-            var types = MatchingQualifiedTypeNames(qualifiedName)
-                .ToArray();
+            var types = MatchDottedTypeName(dottedName).ToArray();
+
             if (types.Length == 1)
             {
                 return types[0];
             }
-            var message = $"Unambigous type name {qualifiedName}";
-            var ex = new InvalidOperationException(message);
-            Log.LogCritical(ex, ex.Message);
-            throw ex;
+            else if (types.Length == 0)
+            {
+                var message = $"No type named {dottedName} found in any model.";
+                var ex = new InvalidOperationException(message);
+                Log.LogCritical(ex, ex.Message);
+                throw ex;
+            }
+            else
+            {
+                var message = $"Ambiguous type name {dottedName}.";
+                var ex = new InvalidOperationException(message);
+                Log.LogCritical(ex, ex.Message);
+                throw ex;
+            }
         }
 
-
-        internal string? IdentifierFor(Model.TypeInfo type) =>
+        private static string? identifierFor(Model.TypeInfo type) =>
             type switch
             {
                 Model.ClassInfo cti => cti.identifier,

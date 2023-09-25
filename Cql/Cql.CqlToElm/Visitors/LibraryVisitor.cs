@@ -35,10 +35,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 identifier = VersionedIdentifierVisitor.Visit(context.GetChild(0))
             };
+
             ConverterContext.AddLibrary(library);
-            if (LibraryContext.Library == null)
-                LibraryContext.Library = library;
-            else throw new InvalidOperationException($"This scope already contains a library");
+            LibraryContext.ActiveLibrary = library;
 
             var usings = new LinkedList<UsingDef>();
             var includes = new LinkedList<IncludeDef>();
@@ -169,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                         LibraryContext.ActiveContext = contextDef;
                                         if (!contextStatements.ContainsKey(contextDef.name))
                                         {
-                                            var (dataType, templateId) = LibraryContext.UnambiguousType(contextDef.name);
+                                            var (dataType, templateId) = LibraryContext.ResolveDottedTypeName(contextDef.name);
                                             var elementType = NamedType(dataType.Name, ctx);
                                             var retrieve = new Retrieve
                                             {

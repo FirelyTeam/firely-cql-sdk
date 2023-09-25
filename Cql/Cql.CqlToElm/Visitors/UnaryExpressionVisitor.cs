@@ -18,19 +18,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
             UnaryExpression unary = lastChild switch
             {
                 "null" => new IsNull() { operand = operand },
-                "true" => new IsTrue() { operand = operand.CastNull(BooleanTypeName) },
-                "false" => new IsFalse() { operand = operand.CastNull(BooleanTypeName) },
+                "true" => new IsTrue() { operand = operand.CastNull(BooleanTypeQName) },
+                "false" => new IsFalse() { operand = operand.CastNull(BooleanTypeQName) },
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
             };
 
-            unary = unary.WithLocator(context).WithNamedType(BooleanTypeName);
+            unary = unary.WithLocator(context).WithResultType(BooleanTypeQName);
 
             if (isNot)
             {
                 unary = new Not
                 {
                     operand = unary,
-                }.WithLocator(context).WithNamedType(BooleanTypeName);
+                }.WithLocator(context).WithResultType(BooleanTypeQName);
             }
 
             return unary;
@@ -64,31 +64,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
         }
 
+        //     | 'exists' expression                                                                           #existenceExpression
         public override Expression VisitExistenceExpression([NotNull] cqlParser.ExistenceExpressionContext context)
         {
-            var operand = Visit(context.GetChild(1));
-            if (operand is Null)
-            {
-                var listAnyType = ListType(NamedType(AnyTypeName, context), context);
-                operand = new As
-                {
-                    operand = operand,
-                    localId = NextId(),
-                    locator = operand.locator,
-                    asTypeSpecifier = listAnyType,
-                    resultTypeSpecifier = listAnyType,
-                };
-            }
+            var operand = Visit(context.expression())
+                .CastNull(AnyTypeQName.ToNamedType().ToListType());
+
             if (operand.resultTypeSpecifier is not ListTypeSpecifier)
                 UnresolvedSignature("Exists", operand);
+
             var exists = new Exists
             {
-                localId = NextId(),
-                locator = context.Locator(),
                 operand = operand,
-                resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                resultTypeSpecifier = NamedType(BooleanTypeName, context),
-            };
+            }.WithLocator(context).WithResultType(BooleanTypeQName);
+
             return exists;
         }
 
@@ -219,33 +208,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
             throw UnresolvedSignature("Start");
         }
 
+
+        //     | ('minimum' | 'maximum') namedTypeSpecifier                                    #typeExtentExpressionTerm
         public override Expression VisitTypeExtentExpressionTerm([NotNull] cqlParser.TypeExtentExpressionTermContext context)
         {
             var extent = context.GetChild(0).GetText().ToLower();
             var dataType = context.GetChild(1).GetText();
-            var typeName = ModelProvider.QualifiedTypeName(SystemModel, dataType);
+            var typeName = SystemModel.ToQualifiedTypeName(dataType);
+
             if (extent == "minimum")
             {
                 var min = new MinValue
                 {
-                    resultTypeName = new XmlQualifiedName(typeName),
-                    resultTypeSpecifier = NamedType(typeName, context),
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    valueType = new XmlQualifiedName(typeName)
-                };
+                    valueType = typeName
+                }.WithLocator(context).WithResultType(typeName);
+
                 return min;
             }
             else if (extent == "maximum")
             {
                 var max = new MaxValue
                 {
-                    resultTypeName = new XmlQualifiedName(typeName),
-                    resultTypeSpecifier = NamedType(typeName, context),
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    valueType = new XmlQualifiedName(typeName)
-                };
+                    valueType = typeName
+                }.WithResultType(typeName).WithLocator(context);
                 return max;
             }
             else

@@ -1,5 +1,7 @@
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
@@ -76,13 +78,18 @@ namespace Hl7.Cql.CqlToElm.Test
 
         #region Using
 
-        [TestMethod]
-        public void Using_AllTerms()
-        {
-            var services = new ServiceCollection()
+        private IServiceCollection makeServiceCollection() =>
+             new ServiceCollection()
+                .AddLogging(b => b.AddDebug())
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
+                .AddConfiguration(cb => { });
+
+        [TestMethod]
+        public void Using_AllTerms()
+        {
+            var services = makeServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -91,8 +98,11 @@ namespace Hl7.Cql.CqlToElm.Test
                         url = "http://test.org",
                         version = "1.0.0"
                     });
-                })
-                .AddConfiguration(cb => { });
+                });
+
+            var x = services.BuildServiceProvider();
+            x.GetRequiredService<ILogger<LibraryContext>>().Should().NotBeNull();
+
             var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
@@ -109,10 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms_WithNamespace()
         {
-            var services = new ServiceCollection()
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
+            var services = makeServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -121,8 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         url = "http://test.org",
                         version = "1.0.0"
                     });
-                })
-                .AddConfiguration(cb => { });
+                });
             var converter = new CqlToElmConverter(services.BuildServiceProvider());
             var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
@@ -141,10 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_LocalIdentifier()
         {
-            var services = new ServiceCollection()
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
+            var services = makeServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -153,8 +156,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         url = "http://test.org",
                         version = "1.0.0"
                     });
-                })
-                .AddConfiguration(cb => { });
+                });
             var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
@@ -172,10 +174,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Version_NoIdentifier()
         {
-            var services = new ServiceCollection()
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
+            var services = makeServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -184,8 +183,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         url = "http://test.org",
                         version = "1.0.0"
                     });
-                })
-                .AddConfiguration(cb => { });
+                });
             var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
@@ -202,10 +200,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_NoIdentifier()
         {
-            var services = new ServiceCollection()
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
+            var services = makeServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -214,8 +209,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         url = "http://test.org",
                         version = "1.0.0"
                     });
-                })
-                .AddConfiguration(cb => { });
+                });
 
             var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
                 library UsingTest version '1.0.0'
@@ -233,10 +227,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Duplicate_System_NoLocalAlias()
         {
-            var services = new ServiceCollection()
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
+            var services = makeServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -245,8 +236,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         url = "urn:hl7-org:elm-types:r1",
                         version = "1.0.0"
                     });
-                })
-                .AddConfiguration(cb => { });
+                });
 
             var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
                 library UsingTest version '1.0.0'

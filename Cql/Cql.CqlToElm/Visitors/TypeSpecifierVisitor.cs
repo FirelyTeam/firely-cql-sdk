@@ -8,25 +8,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class TypeSpecifierVisitor : Visitor<TypeSpecifier>
     {
+        private class UnqualifiedTypeNameSpecifier : TypeSpecifier
+        {
+            public UnqualifiedTypeNameSpecifier(string unqualifiedName)
+            {
+                UnqualifiedName = unqualifiedName;
+            }
+
+            public string UnqualifiedName { get; set; }
+        }
+
         public TypeSpecifierVisitor(
             IServiceProvider services,
-            IModelProvider modelProvider,
             LibraryContext libraryContext,
             TupleElementDefinitionVisitor tedVisitor) : base(services)
         {
-            SystemModel = modelProvider.GetSystemModel(libraryContext.Library
-                ?? throw new InvalidOperationException($"No library is in context"));
-
-            ModelProvider = modelProvider;
             LibraryContext = libraryContext;
             TupleElementDefinitionVisitor = tedVisitor;
         }
 
-        private IModelProvider ModelProvider { get; }
-        private LibraryContext LibraryContext { get; }
+        private readonly LibraryContext LibraryContext;
         private TupleElementDefinitionVisitor TupleElementDefinitionVisitor { get; }
 
-        private readonly Model.ModelInfo SystemModel;
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
         public override TypeSpecifier VisitChoiceTypeSpecifier([NotNull] cqlParser.ChoiceTypeSpecifierContext context)
@@ -34,9 +37,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var choice = new ChoiceTypeSpecifier
             {
                 choice = context.typeSpecifier().Select(Visit).ToArray(),
-                localId = NextId(),
-                locator = context.Locator(),
-            };
+            }.WithLocator(context);
 
             return choice;
         }
@@ -48,9 +49,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var its = new IntervalTypeSpecifier
             {
                 pointType = pointType,
-                localId = NextId(),
-                locator = context.Locator(),
-            };
+            }.WithLocator(context);
+
             return its;
         }
 
@@ -61,73 +61,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lts = new ListTypeSpecifier
             {
                 elementType = elementType,
-                localId = NextId(),
-                locator = context.Locator(),
-            };
+            }.WithLocator(context);
+
             return lts;
-        }
-
-
-        //    : (qualifier '.')* referentialOrTypeNameIdentifier
-        public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)
-        {
-            var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
-            var typeSpec = (NamedTypeSpecifier)Visit(context.referentialOrTypeNameIdentifier());
-
-            System.Xml.XmlQualifiedName? name = null;
-
-            if (qualifiers.Any())
-            {
-                if (qualifiers.Length > 1)
-                    throw Critical($"Multiple qualifiers not supported");
-
-                var modelName = qualifiers.Single();
-                var model = ModelProvider.ModelFromName(modelName)
-                    ?? throw Critical($"Unknown model {modelName}");
-
-                var typeName = typeSpec.name.Name;
-                var qtn = ModelProvider.QualifiedTypeName(model, typeName)
-                    ?? throw Critical($"Unable to resolve type {typeName} in model {model.name}");
-                name = new System.Xml.XmlQualifiedName(qtn);
-            }
-            else
-            {
-                var typeName = typeSpec.name.Name;
-                (name, _) = LibraryContext.UnambiguousType(typeName);
-            }
-
-            return new NamedTypeSpecifier
-            {
-                name = name,
-                localId = NextId(),
-                locator = context.Locator()
-            };
-        }
-
-        // : identifier | keywordIdentifier;
-        public override TypeSpecifier VisitReferentialIdentifier([NotNull] cqlParser.ReferentialIdentifierContext context)
-        {
-            string typeName = context.keywordIdentifier()?.GetText() ??
-                context.identifier().Parse()!;
-
-            return new NamedTypeSpecifier()
-            {
-                name = new System.Xml.XmlQualifiedName(typeName),
-                localId = NextId(),
-                locator = context.Locator()
-            };
-        }
-
-        public override TypeSpecifier VisitTypeNameIdentifier([NotNull] cqlParser.TypeNameIdentifierContext context)
-        {
-            string typeName = context.GetText();
-
-            return new NamedTypeSpecifier()
-            {
-                name = new System.Xml.XmlQualifiedName(typeName),
-                localId = NextId(),
-                locator = context.Locator()
-            };
         }
 
         // : 'Tuple' '{' tupleElementDefinition (',' tupleElementDefinition)* '}'
@@ -136,12 +72,41 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var tuple = new TupleTypeSpecifier
             {
                 element = context.tupleElementDefinition().Select(TupleElementDefinitionVisitor.Visit).ToArray(),
-                localId = NextId(),
-                locator = context.Locator(),
-            };
+            }.WithLocator(context);
 
             return tuple;
         }
 
+
+        //    : (qualifier '.')* referentialOrTypeNameIdentifier
+        public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)
+        {
+            var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
+            var unqualified = (UnqualifiedTypeNameSpecifier)Visit(context.referentialOrTypeNameIdentifier());
+
+            var typeName = string.Join('.', qualifiers.Append(unqualified.UnqualifiedName));
+            var (qtn, _) = LibraryContext.ResolveDottedTypeName(typeName);
+
+            return new NamedTypeSpecifier
+            {
+                name = qtn,
+            }.WithLocator(context);
+        }
+
+        // : identifier | keywordIdentifier;
+        public override TypeSpecifier VisitReferentialIdentifier([NotNull] cqlParser.ReferentialIdentifierContext context)
+        {
+            string typeName = context.keywordIdentifier()?.GetText() ??
+                context.identifier().Parse()!;
+
+            return new UnqualifiedTypeNameSpecifier(typeName).WithLocator(context);
+        }
+
+        // typeNameIdentifier: 'Code' | 'Concept' | 'date'| 'time';
+        public override TypeSpecifier VisitTypeNameIdentifier([NotNull] cqlParser.TypeNameIdentifierContext context)
+        {
+            // These are reserved words that are also valid type names
+            return new UnqualifiedTypeNameSpecifier(context.GetText()).WithLocator(context);
+        }
     }
 }

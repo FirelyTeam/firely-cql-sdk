@@ -13,19 +13,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public ExpressionVisitor(IServiceProvider services) : base(services)
         {
-            SystemModel = ModelProvider.GetSystemModel(LibraryContext.Library
+            SystemModel = ModelProvider.GetSystemModel(LibraryContext.ActiveLibrary
                 ?? throw new InvalidOperationException($"No library is in context"));
-            AnyTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Any");
-            IntegerTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Integer");
-            LongTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Long");
-            DecimalTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Decimal");
-            QuantityTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Quantity");
-            StringTypeName = ModelProvider.QualifiedTypeName(SystemModel, "String");
-            DateTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Date");
-            TimeTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Time");
-            DateTimeTypeName = ModelProvider.QualifiedTypeName(SystemModel, "DateTime");
-            BooleanTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Boolean");
-            RatioTypeName = ModelProvider.QualifiedTypeName(SystemModel, "Ratio");
+
+            AnyTypeQName = SystemModel.ToQualifiedTypeName("Any");
+            IntegerTypeQName = SystemModel.ToQualifiedTypeName("Integer");
+            LongTypeQName = SystemModel.ToQualifiedTypeName("Long");
+            DecimalTypeQName = SystemModel.ToQualifiedTypeName("Decimal");
+            QuantityTypeQName = SystemModel.ToQualifiedTypeName("Quantity");
+            StringTypeQName = SystemModel.ToQualifiedTypeName("String");
+            DateTypeQName = SystemModel.ToQualifiedTypeName("Date");
+            TimeTypeQName = SystemModel.ToQualifiedTypeName("Time");
+            DateTimeTypeQName = SystemModel.ToQualifiedTypeName("DateTime");
+            BooleanTypeQName = SystemModel.ToQualifiedTypeName("Boolean");
+            RatioTypeQName = SystemModel.ToQualifiedTypeName("Ratio");
+
+            AnyTypeName = AnyTypeQName.Name;
+            IntegerTypeName = IntegerTypeQName.Name;
+            LongTypeName = LongTypeQName.Name;
+            DecimalTypeName = DecimalTypeQName.Name;
+            QuantityTypeName = QuantityTypeQName.Name;
+            StringTypeName = StringTypeQName.Name;
+            DateTypeName = DateTypeQName.Name;
+            TimeTypeName = TimeTypeQName.Name;
+            DateTimeTypeName = DateTimeTypeQName.Name;
+            BooleanTypeName = BooleanTypeQName.Name;
+            RatioTypeName = RatioTypeQName.Name;
         }
 
         #region Privates
@@ -47,6 +60,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private readonly string DateTimeTypeName;
         private readonly string BooleanTypeName;
         private readonly string RatioTypeName;
+        private readonly XmlQualifiedName AnyTypeQName;
+        private readonly XmlQualifiedName IntegerTypeQName;
+        private readonly XmlQualifiedName LongTypeQName;
+        private readonly XmlQualifiedName DecimalTypeQName;
+        private readonly XmlQualifiedName QuantityTypeQName;
+        private readonly XmlQualifiedName StringTypeQName;
+        private readonly XmlQualifiedName DateTypeQName;
+        private readonly XmlQualifiedName TimeTypeQName;
+        private readonly XmlQualifiedName DateTimeTypeQName;
+        private readonly XmlQualifiedName BooleanTypeQName;
+        private readonly XmlQualifiedName RatioTypeQName;
 
         private IEnumerable<string> ValidIntervalPointTypeNames
         {
@@ -280,8 +304,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var rawTypeName = context.namedTypeSpecifier().GetText();
             var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
-            var typeInfo = LibraryContext.UnambiguousType(rawTypeName ?? throw Critical("Unable to resolve retrieve type"));
-            var model = ModelProvider.ModelFromQualifiedTypeName(type?.name?.Name
+            var typeInfo = LibraryContext.ResolveDottedTypeName(rawTypeName ?? throw Critical("Unable to resolve retrieve type"));
+            var model = ModelProvider.ModelFromQualifiedTypeName(type?.name
                 ?? throw Critical("Retrieve type is not specified correctly"))
                 ?? throw Critical($"Can't resolve model for type {type!.name!.Name}");
             var dataType = new XmlQualifiedName($"{model.targetQualifier}:{rawTypeName}");
