@@ -29,7 +29,7 @@ namespace Hl7.Cql.CqlToElm
             if (string.IsNullOrWhiteSpace(qualifier))
                 library = ActiveLibrary ?? throw new InvalidOperationException($"Unqualified identifier applied without a Library in context");
             else
-                throw new NotImplementedException();
+                throw new NotImplementedException("Cannot refer using non-local identifiers yet.");
 
             var systemModel = ModelProvider.GetSystemModel(library);
 

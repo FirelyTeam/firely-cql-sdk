@@ -90,20 +90,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = operand,
                     localId = NextId(),
                     locator = operand.locator,
-                    asType = new XmlQualifiedName(BooleanTypeName),
-                    asTypeSpecifier = NamedType(BooleanTypeName, context),
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    asType = BooleanTypeQName,
+                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 };
-            if (operand.resultTypeName?.Name != BooleanTypeName)
+            if (operand.resultTypeName != BooleanTypeQName)
                 UnresolvedSignature("Not", operand);
             var not = new Not
             {
                 localId = NextId(),
                 locator = context.Locator(),
                 operand = operand,
-                resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                resultTypeName = BooleanTypeQName,
+                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
             };
             return not;
         }

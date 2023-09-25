@@ -22,10 +22,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = lhs,
                     localId = NextId(),
                     locator = lhs.locator,
-                    asType = new XmlQualifiedName(BooleanTypeName),
-                    asTypeSpecifier = NamedType(BooleanTypeName, context),
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    asType = BooleanTypeQName,
+                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 };
             if (rhs is Null)
                 rhs = new As
@@ -33,23 +33,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = rhs,
                     localId = NextId(),
                     locator = rhs.locator,
-                    asType = new XmlQualifiedName(BooleanTypeName),
-                    asTypeSpecifier = NamedType(BooleanTypeName, context),
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    asType = BooleanTypeQName,
+                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 };
 
 
-            if (lhs.resultTypeName?.Name != BooleanTypeName
-                || rhs.resultTypeName?.Name != BooleanTypeName)
+            if (lhs.resultTypeName != BooleanTypeQName
+                || rhs.resultTypeName != BooleanTypeQName)
                 UnresolvedSignature("And", lhs, rhs);
             var and = new And
             {
                 localId = NextId(),
                 locator = context.Locator(),
                 operand = new[] { lhs, rhs },
-                resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                resultTypeName = BooleanTypeQName,
+                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
             };
             return and;
         }
@@ -78,25 +78,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        asType = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        asType = rhs!.resultTypeName,
+                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                         resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                     };
                 }
             }
             else if (rhs is Null)
             {
                 NamedTypeSpecifier? asType = null;
-                if (lhs.resultTypeName.Name == DateTypeName
-                    || lhs.resultTypeName.Name == DateTimeTypeName
-                    || lhs.resultTypeName.Name == TimeTypeName)
+                if (lhs.resultTypeName == DateTypeQName
+                    || lhs.resultTypeName == DateTimeTypeQName
+                    || lhs.resultTypeName == TimeTypeQName)
                 {
-                    asType = NamedType(QuantityTypeName, context);
+                    asType = NamedType(QuantityTypeQName, context);
                 }
                 else
                 {
-                    asType = NamedType(lhs!.resultTypeName.Name, context);
+                    asType = NamedType(lhs!.resultTypeName, context);
                 }
                 rhs = new As
                 {
@@ -106,30 +106,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     asType = new XmlQualifiedName(asType.name.Name),
                     asTypeSpecifier = asType,
                     resultTypeName = new XmlQualifiedName(asType.name.Name),
-                    resultTypeSpecifier = NamedType(asType.name.Name, context),
+                    resultTypeSpecifier = NamedType(asType.name, context),
                 };
             }
-            else if (lhs.resultTypeName.Name == IntegerTypeName)
+            else if (lhs.resultTypeName == IntegerTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == LongTypeName)
+                else if (rhs.resultTypeName == LongTypeQName)
                     lhs = new ToLong
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -137,36 +137,36 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == LongTypeName)
+            else if (lhs.resultTypeName == LongTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToLong
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -174,48 +174,48 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == DecimalTypeName)
+            else if (lhs.resultTypeName == DecimalTypeQName)
             {
-                if (rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == LongTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == QuantityTypeName)
+            else if (lhs.resultTypeName == QuantityTypeQName)
             {
-                if (rhs.resultTypeName.Name == IntegerTypeName || rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == IntegerTypeQName || rhs.resultTypeName == LongTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -223,39 +223,39 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = rhs,
                             localId = NextId(),
                             locator = rhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == DecimalTypeName)
+                else if (rhs.resultTypeName == DecimalTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name != QuantityTypeName)
+                else if (rhs.resultTypeName != QuantityTypeQName)
                     throw Critical($"Quantity can only be added to numeric types (Integer, Long, Decimal) and Quantity types.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == DateTypeName)
+            else if (lhs.resultTypeName == DateTypeQName)
             {
-                if (rhs.resultTypeName.Name != QuantityTypeName)
+                if (rhs.resultTypeName != QuantityTypeQName)
                     throw Critical($"Only Quantity values can be added to Date values.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == DateTimeTypeName)
+            else if (lhs.resultTypeName == DateTimeTypeQName)
             {
-                if (rhs.resultTypeName.Name != QuantityTypeName)
+                if (rhs.resultTypeName != QuantityTypeQName)
                     throw Critical($"Only Quantity values can be added to DateTime values.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == TimeTypeName)
+            else if (lhs.resultTypeName == TimeTypeQName)
             {
-                if (rhs.resultTypeName.Name != QuantityTypeName)
+                if (rhs.resultTypeName != QuantityTypeQName)
                     throw Critical($"Only Quantity values can be added to Time values.  The type of the second operand is {rhs.resultTypeName}.");
             }
 
@@ -270,7 +270,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         operand = new[] { lhs, rhs },
                         resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context)
+                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
                     };
                     break;
                 case "-":
@@ -278,19 +278,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         operand = new[] { lhs, rhs },
                         resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context)
+                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
                     };
-                    if (lhs.resultTypeName.Name == QuantityTypeName)
+                    if (lhs.resultTypeName == QuantityTypeQName)
                     {
-                        if (rhs.resultTypeName.Name == DateTypeName
-                            || rhs.resultTypeName.Name == DateTimeTypeName
-                            || rhs.resultTypeName.Name == TimeTypeName)
+                        if (rhs.resultTypeName == DateTypeQName
+                            || rhs.resultTypeName == DateTimeTypeQName
+                            || rhs.resultTypeName == TimeTypeQName)
                             throw Critical($"Date, DateTime, and Time values cannot be subtracted from Quantity values.");
                     }
                     break;
                 case "&":
-                    if (lhs.resultTypeName.Name != StringTypeName
-                        && rhs.resultTypeName.Name != StringTypeName)
+                    if (lhs.resultTypeName != StringTypeQName
+                        && rhs.resultTypeName != StringTypeQName)
                     {
                         throw Critical($"Operator & is only defined for string types, not {lhs.resultTypeName} and {rhs.resultTypeName}");
                     }
@@ -298,7 +298,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         operand = new[] { lhs, rhs },
                         resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context)
+                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
                     };
                     break;
                 default:
@@ -327,16 +327,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        asType = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
-                        resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        asType = rhs!.resultTypeName,
+                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
+                        resultTypeName = rhs!.resultTypeName,
+                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                     };
                 }
             }
             else if (rhs is Null)
             {
-                var asType = NamedType(lhs!.resultTypeName.Name, context);
+                var asType = NamedType(lhs!.resultTypeName, context);
                 rhs = new As
                 {
                     operand = rhs,
@@ -345,7 +345,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     asType = new XmlQualifiedName(asType.name.Name),
                     asTypeSpecifier = asType,
                     resultTypeName = new XmlQualifiedName(asType.name.Name),
-                    resultTypeSpecifier = NamedType(asType.name.Name, context),
+                    resultTypeSpecifier = NamedType(asType.name, context),
                 };
             }
 
@@ -355,7 +355,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 UnresolvedSignature("Difference", lhs, rhs);
             }
-            if (lhs.resultTypeName!.Name == DateTypeName)
+            if (lhs.resultTypeName == DateTypeQName)
             {
                 if (precision == DateTimePrecision.Year
                     || precision == DateTimePrecision.Month
@@ -369,13 +369,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
                         precisionSpecified = true,
-                        resultTypeName = new XmlQualifiedName(IntegerTypeName),
-                        resultTypeSpecifier = NamedType(IntegerTypeName, context)
+                        resultTypeName = IntegerTypeQName,
+                        resultTypeSpecifier = NamedType(IntegerTypeQName, context)
                     };
                 }
-                else throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeName}");
+                else throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
             }
-            else if (lhs.resultTypeName!.Name == TimeTypeName)
+            else if (lhs.resultTypeName == TimeTypeQName)
             {
                 if (precision == DateTimePrecision.Hour
                     || precision == DateTimePrecision.Minute
@@ -389,14 +389,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
                         precisionSpecified = true,
-                        resultTypeName = new XmlQualifiedName(IntegerTypeName),
-                        resultTypeSpecifier = NamedType(IntegerTypeName, context)
+                        resultTypeName = IntegerTypeQName,
+                        resultTypeSpecifier = NamedType(IntegerTypeQName, context)
                     };
                 }
-                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeName}");
+                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeQName}");
 
             }
-            else if (lhs.resultTypeName!.Name == DateTimeTypeName)
+            else if (lhs.resultTypeName == DateTimeTypeQName)
             {
                 return new DifferenceBetween
                 {
@@ -405,8 +405,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     locator = context.Locator(),
                     operand = new[] { lhs, rhs },
                     precisionSpecified = true,
-                    resultTypeName = new XmlQualifiedName(IntegerTypeName),
-                    resultTypeSpecifier = NamedType(IntegerTypeName, context)
+                    resultTypeName = IntegerTypeQName,
+                    resultTypeSpecifier = NamedType(IntegerTypeQName, context)
                 };
             }
             else throw UnresolvedSignature("Difference", lhs, rhs);
@@ -441,25 +441,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        asType = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
-                        resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        asType = rhs!.resultTypeName,
+                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
+                        resultTypeName = rhs!.resultTypeName,
+                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                     };
                 }
             }
             else if (rhs is Null)
             {
-                var asType = NamedType(lhs!.resultTypeName.Name, context);
+                var asType = NamedType(lhs!.resultTypeName, context);
                 rhs = new As
                 {
                     operand = rhs,
                     localId = NextId(),
                     locator = rhs.locator,
-                    asType = new XmlQualifiedName(asType.name.Name),
+                    asType = asType.name,
                     asTypeSpecifier = asType,
-                    resultTypeName = new XmlQualifiedName(asType.name.Name),
-                    resultTypeSpecifier = NamedType(asType.name.Name, context),
+                    resultTypeName = asType.name,
+                    resultTypeSpecifier = NamedType(asType.name, context),
                 };
             }
 
@@ -469,7 +469,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 UnresolvedSignature("Duration", lhs, rhs);
             }
-            if (lhs.resultTypeName!.Name == DateTypeName)
+            if (lhs.resultTypeName == DateTypeQName)
             {
                 if (precision == DateTimePrecision.Year
                     || precision == DateTimePrecision.Month
@@ -483,13 +483,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
                         precisionSpecified = true,
-                        resultTypeName = new XmlQualifiedName(IntegerTypeName),
-                        resultTypeSpecifier = NamedType(IntegerTypeName, context)
+                        resultTypeName = IntegerTypeQName,
+                        resultTypeSpecifier = NamedType(IntegerTypeQName, context)
                     };
                 }
-                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeName}");
+                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeQName}");
             }
-            else if (lhs.resultTypeName!.Name == TimeTypeName)
+            else if (lhs.resultTypeName == TimeTypeQName)
             {
                 if (precision == DateTimePrecision.Hour
                     || precision == DateTimePrecision.Minute
@@ -503,14 +503,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
                         precisionSpecified = true,
-                        resultTypeName = new XmlQualifiedName(IntegerTypeName),
-                        resultTypeSpecifier = NamedType(IntegerTypeName, context)
+                        resultTypeName = IntegerTypeQName,
+                        resultTypeSpecifier = NamedType(IntegerTypeQName, context)
                     };
                 }
-                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeName}");
+                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeQName}");
 
             }
-            else if (lhs.resultTypeName!.Name == DateTimeTypeName)
+            else if (lhs.resultTypeName == DateTimeTypeQName)
             {
                 return new DurationBetween
                 {
@@ -519,8 +519,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     locator = context.Locator(),
                     operand = new[] { lhs, rhs },
                     precisionSpecified = true,
-                    resultTypeName = new XmlQualifiedName(IntegerTypeName),
-                    resultTypeSpecifier = NamedType(IntegerTypeName, context)
+                    resultTypeName = IntegerTypeQName,
+                    resultTypeSpecifier = NamedType(IntegerTypeQName, context)
                 };
             }
             else throw UnresolvedSignature("Duration", lhs, rhs);
@@ -546,16 +546,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        asType = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
-                        resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        asType = rhs!.resultTypeName,
+                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
+                        resultTypeName = rhs!.resultTypeName,
+                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                     };
                 }
             }
             else if (rhs is Null)
             {
-                var asType = NamedType(lhs!.resultTypeName.Name, context);
+                var asType = NamedType(lhs!.resultTypeName, context);
                 rhs = new As
                 {
                     operand = rhs,
@@ -564,30 +564,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     asType = new XmlQualifiedName(asType.name.Name),
                     asTypeSpecifier = asType,
                     resultTypeName = new XmlQualifiedName(asType.name.Name),
-                    resultTypeSpecifier = NamedType(asType.name.Name, context),
+                    resultTypeSpecifier = NamedType(asType.name, context),
                 };
             }
-            else if (lhs.resultTypeName.Name == IntegerTypeName)
+            else if (lhs.resultTypeName == IntegerTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == LongTypeName)
+                else if (rhs.resultTypeName == LongTypeQName)
                     lhs = new ToLong
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -595,36 +595,36 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == LongTypeName)
+            else if (lhs.resultTypeName == LongTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToLong
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -632,48 +632,48 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == DecimalTypeName)
+            else if (lhs.resultTypeName == DecimalTypeQName)
             {
-                if (rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == LongTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == QuantityTypeName)
+            else if (lhs.resultTypeName == QuantityTypeQName)
             {
-                if (rhs.resultTypeName.Name == IntegerTypeName || rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == IntegerTypeQName || rhs.resultTypeName == LongTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -681,39 +681,39 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = rhs,
                             localId = NextId(),
                             locator = rhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == DecimalTypeName)
+                else if (rhs.resultTypeName == DecimalTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name != QuantityTypeName)
+                else if (rhs.resultTypeName != QuantityTypeQName)
                     throw Critical($"Quantity can only be compared to numeric types (Integer, Long, Decimal) and Quantity types.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == DateTypeName)
+            else if (lhs.resultTypeName == DateTypeQName)
             {
-                if (rhs.resultTypeName.Name != DateTypeName)
+                if (rhs.resultTypeName != DateTypeQName)
                     throw Critical($"Only Date values can be compared to Date values.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == DateTimeTypeName)
+            else if (lhs.resultTypeName == DateTimeTypeQName)
             {
-                if (rhs.resultTypeName.Name != DateTimeTypeName)
+                if (rhs.resultTypeName != DateTimeTypeQName)
                     throw Critical($"Only DateTime values can be added to DateTime values.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == TimeTypeName)
+            else if (lhs.resultTypeName == TimeTypeQName)
             {
-                if (rhs.resultTypeName.Name != TimeTypeName)
+                if (rhs.resultTypeName != TimeTypeQName)
                     throw Critical($"Only Time values can be added to Time values.  The type of the second operand is {rhs.resultTypeName}.");
             }
 
@@ -727,24 +727,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     expression = new Equal
                     {
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 case "!=":
                     expression = new NotEqual
                     {
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 case "~":
                     expression = new Equivalent
                     {
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 case "!~":
@@ -753,13 +753,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = new Equivalent
                         {
                             operand = new[] { lhs, rhs },
-                            resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                            resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                            resultTypeName = BooleanTypeQName,
+                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                             localId = NextId(),
                             locator = context.Locator(),
                         },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 default:
@@ -782,10 +782,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = lhs,
                     localId = NextId(),
                     locator = lhs.locator,
-                    asType = new XmlQualifiedName(BooleanTypeName),
-                    asTypeSpecifier = NamedType(BooleanTypeName, context),
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    asType = BooleanTypeQName,
+                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 };
             if (rhs is Null)
                 rhs = new As
@@ -793,23 +793,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = rhs,
                     localId = NextId(),
                     locator = rhs.locator,
-                    asType = new XmlQualifiedName(BooleanTypeName),
-                    asTypeSpecifier = NamedType(BooleanTypeName, context),
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    asType = BooleanTypeQName,
+                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 };
 
 
-            if (lhs.resultTypeName?.Name != BooleanTypeName
-                || rhs.resultTypeName?.Name != BooleanTypeName)
+            if (lhs.resultTypeName != BooleanTypeQName
+                || rhs.resultTypeName != BooleanTypeQName)
                 UnresolvedSignature("Implies", lhs, rhs);
             var implies = new Implies
             {
                 localId = NextId(),
                 locator = context.Locator(),
                 operand = new[] { lhs, rhs },
-                resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                resultTypeName = BooleanTypeQName,
+                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
             };
             return implies;
         }
@@ -834,16 +834,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        asType = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
-                        resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        asType = rhs!.resultTypeName,
+                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
+                        resultTypeName = rhs!.resultTypeName,
+                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                     };
                 }
             }
             else if (rhs is Null)
             {
-                var asType = NamedType(lhs!.resultTypeName.Name, context);
+                var asType = NamedType(lhs!.resultTypeName, context);
                 rhs = new As
                 {
                     operand = rhs,
@@ -852,30 +852,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     asType = new XmlQualifiedName(asType.name.Name),
                     asTypeSpecifier = asType,
                     resultTypeName = new XmlQualifiedName(asType.name.Name),
-                    resultTypeSpecifier = NamedType(asType.name.Name, context),
+                    resultTypeSpecifier = NamedType(asType.name, context),
                 };
             }
-            else if (lhs.resultTypeName.Name == IntegerTypeName)
+            else if (lhs.resultTypeName == IntegerTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == LongTypeName)
+                else if (rhs.resultTypeName == LongTypeQName)
                     lhs = new ToLong
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -883,36 +883,36 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == LongTypeName)
+            else if (lhs.resultTypeName == LongTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToLong
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -920,48 +920,48 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == DecimalTypeName)
+            else if (lhs.resultTypeName == DecimalTypeQName)
             {
-                if (rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == LongTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == QuantityTypeName)
+            else if (lhs.resultTypeName == QuantityTypeQName)
             {
-                if (rhs.resultTypeName.Name == IntegerTypeName || rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == IntegerTypeQName || rhs.resultTypeName == LongTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -969,39 +969,39 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = rhs,
                             localId = NextId(),
                             locator = rhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == DecimalTypeName)
+                else if (rhs.resultTypeName == DecimalTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name != QuantityTypeName)
+                else if (rhs.resultTypeName != QuantityTypeQName)
                     throw Critical($"Quantity can only be compared to numeric types (Integer, Long, Decimal) and Quantity types.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == DateTypeName)
+            else if (lhs.resultTypeName == DateTypeQName)
             {
-                if (rhs.resultTypeName.Name != DateTypeName)
+                if (rhs.resultTypeName != DateTypeQName)
                     throw Critical($"Only Date values can be compared to Date values.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == DateTimeTypeName)
+            else if (lhs.resultTypeName == DateTimeTypeQName)
             {
-                if (rhs.resultTypeName.Name != DateTimeTypeName)
+                if (rhs.resultTypeName != DateTimeTypeQName)
                     throw Critical($"Only DateTime values can be added to DateTime values.  The type of the second operand is {rhs.resultTypeName}.");
             }
-            else if (lhs.resultTypeName.Name == TimeTypeName)
+            else if (lhs.resultTypeName == TimeTypeQName)
             {
-                if (rhs.resultTypeName.Name != TimeTypeName)
+                if (rhs.resultTypeName != TimeTypeQName)
                     throw Critical($"Only Time values can be added to Time values.  The type of the second operand is {rhs.resultTypeName}.");
             }
 
@@ -1015,32 +1015,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     expression = new Greater
                     {
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 case ">=":
                     expression = new GreaterOrEqual
                     {
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 case "<":
                     expression = new Less
                     {
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 case "<=":
                     expression = new LessOrEqual
                     {
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     break;
                 default:
@@ -1075,10 +1075,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        asType = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
-                        resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        asType = rhs!.resultTypeName,
+                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
+                        resultTypeName = rhs!.resultTypeName,
+                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                     };
                 }
             }
@@ -1089,33 +1089,33 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = rhs,
                     localId = NextId(),
                     locator = rhs.locator,
-                    asType = new XmlQualifiedName(lhs!.resultTypeName.Name),
-                    asTypeSpecifier = NamedType(lhs!.resultTypeName.Name, context),
-                    resultTypeName = new XmlQualifiedName(lhs!.resultTypeName.Name),
-                    resultTypeSpecifier = NamedType(lhs!.resultTypeName.Name, context),
+                    asType = lhs!.resultTypeName,
+                    asTypeSpecifier = NamedType(lhs!.resultTypeName, context),
+                    resultTypeName = lhs!.resultTypeName,
+                    resultTypeSpecifier = NamedType(lhs!.resultTypeName, context),
                 };
             }
-            else if (lhs.resultTypeName.Name == IntegerTypeName)
+            else if (lhs.resultTypeName == IntegerTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == LongTypeName)
+                else if (rhs.resultTypeName == LongTypeQName)
                     lhs = new ToLong
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -1123,36 +1123,36 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == LongTypeName)
+            else if (lhs.resultTypeName == LongTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToLong
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -1160,48 +1160,48 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = lhs,
                             localId = NextId(),
                             locator = lhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == DecimalTypeName)
+            else if (lhs.resultTypeName == DecimalTypeQName)
             {
-                if (rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == LongTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == QuantityTypeName)
+                else if (rhs.resultTypeName == QuantityTypeQName)
                     lhs = new ToQuantity
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == QuantityTypeName)
+            else if (lhs.resultTypeName == QuantityTypeQName)
             {
-                if (rhs.resultTypeName.Name == IntegerTypeName || rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == IntegerTypeQName || rhs.resultTypeName == LongTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = new ToDecimal
@@ -1209,24 +1209,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             operand = rhs,
                             localId = NextId(),
                             locator = rhs.locator,
-                            resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                            resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                            resultTypeName = DecimalTypeQName,
+                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                         },
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == DecimalTypeName)
+                else if (rhs.resultTypeName == DecimalTypeQName)
                     rhs = new ToQuantity
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                        resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                        resultTypeName = QuantityTypeQName,
+                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name != QuantityTypeName)
+                else if (rhs.resultTypeName != QuantityTypeQName)
                     throw Critical($"Quantity can only be added to numeric types (Integer, Long, Decimal) and Quantity types.  The type of the second operand is {rhs.resultTypeName}.");
             }
             else
@@ -1243,20 +1243,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         operand = new[] { lhs, rhs },
                         resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context)
+                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
                     };
                     break;
                 case "/":
                     // When invoked with Integer or Long arguments, the arguments will be implicitly converted to Decimal.
-                    if (lhs.resultTypeName.Name == IntegerTypeName
-                        || lhs.resultTypeName.Name == LongTypeName)
+                    if (lhs.resultTypeName == IntegerTypeQName
+                        || lhs.resultTypeName == LongTypeQName)
                     {
                         if (lhs is As @as)
                         {
-                            @as.asType = new XmlQualifiedName(DecimalTypeName);
-                            @as.asTypeSpecifier = NamedType(DecimalTypeName, context);
-                            @as.resultTypeName = new XmlQualifiedName(DecimalTypeName);
-                            @as.resultTypeSpecifier = NamedType(DecimalTypeName, context);
+                            @as.asType = DecimalTypeQName;
+                            @as.asTypeSpecifier = NamedType(DecimalTypeQName, context);
+                            @as.resultTypeName = DecimalTypeQName;
+                            @as.resultTypeSpecifier = NamedType(DecimalTypeQName, context);
                         }
                         else
                         {
@@ -1265,20 +1265,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 operand = lhs,
                                 localId = NextId(),
                                 locator = lhs.locator,
-                                resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                                resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                                resultTypeName = DecimalTypeQName,
+                                resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                             };
                         }
                     }
-                    if (rhs.resultTypeName.Name == IntegerTypeName
-                        || rhs.resultTypeName.Name == LongTypeName)
+                    if (rhs.resultTypeName == IntegerTypeQName
+                        || rhs.resultTypeName == LongTypeQName)
                     {
                         if (rhs is As @as)
                         {
-                            @as.asType = new XmlQualifiedName(DecimalTypeName);
-                            @as.asTypeSpecifier = NamedType(DecimalTypeName, context);
-                            @as.resultTypeName = new XmlQualifiedName(DecimalTypeName);
-                            @as.resultTypeSpecifier = NamedType(DecimalTypeName, context);
+                            @as.asType = DecimalTypeQName;
+                            @as.asTypeSpecifier = NamedType(DecimalTypeQName, context);
+                            @as.resultTypeName = DecimalTypeQName;
+                            @as.resultTypeSpecifier = NamedType(DecimalTypeQName, context);
                         }
                         else
                         {
@@ -1287,8 +1287,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                 operand = rhs,
                                 localId = NextId(),
                                 locator = rhs.locator,
-                                resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                                resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                                resultTypeName = DecimalTypeQName,
+                                resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                             };
                         }
                     }
@@ -1296,7 +1296,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         operand = new[] { lhs, rhs },
                         resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context)
+                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
                     };
                     break;
                 case "div":
@@ -1304,7 +1304,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         operand = new[] { lhs, rhs },
                         resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context)
+                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
                     };
                     break;
                 case "mod":
@@ -1312,7 +1312,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         operand = new[] { lhs, rhs },
                         resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context)
+                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
                     };
                     break;
                 default:
@@ -1336,10 +1336,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = lhs,
                     localId = NextId(),
                     locator = lhs.locator,
-                    asType = new XmlQualifiedName(BooleanTypeName),
-                    asTypeSpecifier = NamedType(BooleanTypeName, context),
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    asType = BooleanTypeQName,
+                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 };
             if (rhs is Null)
                 rhs = new As
@@ -1347,14 +1347,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = rhs,
                     localId = NextId(),
                     locator = rhs.locator,
-                    asType = new XmlQualifiedName(BooleanTypeName),
-                    asTypeSpecifier = NamedType(BooleanTypeName, context),
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    asType = BooleanTypeQName,
+                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 };
 
-            if (lhs.resultTypeName?.Name != BooleanTypeName
-                || rhs.resultTypeName?.Name != BooleanTypeName)
+            if (lhs.resultTypeName != BooleanTypeQName
+                || rhs.resultTypeName != BooleanTypeQName)
                 UnresolvedSignature(CultureInfo.InvariantCulture.TextInfo.ToTitleCase(@operator), lhs, rhs);
             switch (@operator)
             {
@@ -1364,8 +1364,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                     };
                     return or;
                 case "xor":
@@ -1374,8 +1374,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                     };
                     return xor;
                 default:
@@ -1407,10 +1407,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        asType = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
-                        resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName.Name, context),
+                        asType = rhs!.resultTypeName,
+                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
+                        resultTypeName = rhs!.resultTypeName,
+                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
                     };
                 }
             }
@@ -1421,73 +1421,73 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = rhs,
                     localId = NextId(),
                     locator = rhs.locator,
-                    asType = new XmlQualifiedName(lhs!.resultTypeName.Name),
-                    asTypeSpecifier = NamedType(lhs!.resultTypeName.Name, context),
-                    resultTypeName = new XmlQualifiedName(lhs!.resultTypeName.Name),
-                    resultTypeSpecifier = NamedType(lhs!.resultTypeName.Name, context),
+                    asType = lhs!.resultTypeName,
+                    asTypeSpecifier = NamedType(lhs!.resultTypeName, context),
+                    resultTypeName = lhs!.resultTypeName,
+                    resultTypeSpecifier = NamedType(lhs!.resultTypeName, context),
                 };
             }
-            else if (lhs.resultTypeName.Name == IntegerTypeName)
+            else if (lhs.resultTypeName == IntegerTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == LongTypeName)
+                else if (rhs.resultTypeName == LongTypeQName)
                     lhs = new ToLong
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == LongTypeName)
+            else if (lhs.resultTypeName == LongTypeQName)
             {
-                if (rhs.resultTypeName.Name == DecimalTypeName)
+                if (rhs.resultTypeName == DecimalTypeQName)
                     lhs = new ToDecimal
                     {
                         operand = lhs,
                         localId = NextId(),
                         locator = lhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToLong
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(LongTypeName),
-                        resultTypeSpecifier = NamedType(LongTypeName, context),
+                        resultTypeName = LongTypeQName,
+                        resultTypeSpecifier = NamedType(LongTypeQName, context),
                     };
             }
-            else if (lhs.resultTypeName.Name == DecimalTypeName)
+            else if (lhs.resultTypeName == DecimalTypeQName)
             {
-                if (rhs.resultTypeName.Name == LongTypeName)
+                if (rhs.resultTypeName == LongTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
-                else if (rhs.resultTypeName.Name == IntegerTypeName)
+                else if (rhs.resultTypeName == IntegerTypeQName)
                     rhs = new ToDecimal
                     {
                         operand = rhs,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                        resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                        resultTypeName = DecimalTypeQName,
+                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                     };
             }
             else
@@ -1499,7 +1499,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 operand = new[] { lhs, rhs },
                 resultTypeName = lhs.resultTypeName,
-                resultTypeSpecifier = NamedType(lhs.resultTypeName.Name, context),
+                resultTypeSpecifier = NamedType(lhs.resultTypeName, context),
                 localId = NextId(),
                 locator = context.Locator(),
             };
@@ -1596,8 +1596,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     localId = NextId(),
                     locator = child.Locator(),
-                    resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                    resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                    resultTypeName = QuantityTypeQName,
+                    resultTypeSpecifier = NamedType(QuantityTypeQName, context),
                     value = quantityTuple.value,
                     valueSpecified = true,
                     unit = quantityTuple.unit,
@@ -1679,8 +1679,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context)
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
                     };
                     return @in;
                 }
@@ -1780,8 +1780,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = new[] { lhs, rhs },
                         precision = dtp ?? default,
                         precisionSpecified = dtp.HasValue,
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                     },
                     _ => new IncludedIn
                     {
@@ -1790,8 +1790,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = new[] { lhs, rhs },
                         precision = dtp ?? default,
                         precisionSpecified = dtp.HasValue,
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                     }
                 };
             }
@@ -1830,8 +1830,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 };
 
                 result.operand = new[] { lhs, rhs };
-                result.resultTypeName = new XmlQualifiedName(BooleanTypeName);
-                result.resultTypeSpecifier = NamedType(BooleanTypeName, context);
+                result.resultTypeName = BooleanTypeQName;
+                result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
                 result.localId = NextId();
                 result.locator = context.Locator();
 
@@ -1870,8 +1870,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
 
             result.operand = new[] { lhs, rhs };
-            result.resultTypeName = new XmlQualifiedName(BooleanTypeName);
-            result.resultTypeSpecifier = NamedType(BooleanTypeName, context);
+            result.resultTypeName = BooleanTypeQName;
+            result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
             result.localId = NextId();
             result.locator = context.Locator();
 
@@ -1893,8 +1893,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 operand = new[] { lhs, rhs },
                 precisionSpecified = dtPrecision is not null,
                 precision = dtPrecision ?? default,
-                resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                resultTypeName = BooleanTypeQName,
+                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
             };
         }
 
@@ -1913,8 +1913,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 operand = new[] { lhs, rhs },
                 precisionSpecified = dtPrecision is not null,
                 precision = dtPrecision ?? default,
-                resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                resultTypeName = BooleanTypeQName,
+                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
             };
         }
 
@@ -1991,8 +1991,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             includes.localId = NextId();
             includes.locator = context.Locator();
             includes.operand = new[] { lhs, rhs };
-            includes.resultTypeName = new XmlQualifiedName(BooleanTypeName);
-            includes.resultTypeSpecifier = NamedType(BooleanTypeName, context);
+            includes.resultTypeName = BooleanTypeQName;
+            includes.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
             return includes;
 
         }
@@ -2126,8 +2126,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                            resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                            resultTypeName = BooleanTypeQName,
+                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                         };
                         return sameOrBefore;
                     }
@@ -2140,8 +2140,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                            resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                            resultTypeName = BooleanTypeQName,
+                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                         };
                         return sameOrAfter;
                     }
@@ -2156,8 +2156,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         precision = precision,
                         precisionSpecified = true,
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                     };
                     return same;
                 }
@@ -2178,8 +2178,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                            resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                            resultTypeName = BooleanTypeQName,
+                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                         };
                         return sameOrBefore;
                     }
@@ -2192,8 +2192,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                            resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                            resultTypeName = BooleanTypeQName,
+                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                         };
                         return sameOrAfter;
                     }
@@ -2208,8 +2208,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         precision = precision,
                         precisionSpecified = true,
                         operand = new[] { lhs, rhs },
-                        resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                        resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                        resultTypeName = BooleanTypeQName,
+                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                     };
                     return same;
                 }
@@ -2239,8 +2239,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     localId = NextId(),
                     locator = context.Locator(),
                     operand = lhs,
-                    resultTypeName = new XmlQualifiedName(BooleanTypeName),
-                    resultTypeSpecifier = NamedType(BooleanTypeName, context),
+                    resultTypeName = BooleanTypeQName,
+                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
                 },
                 "as" => new As
                 {

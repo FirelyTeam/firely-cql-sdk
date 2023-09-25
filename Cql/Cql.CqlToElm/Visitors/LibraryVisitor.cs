@@ -169,7 +169,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                         if (!contextStatements.ContainsKey(contextDef.name))
                                         {
                                             var (dataType, templateId) = LibraryContext.ResolveDottedTypeName(contextDef.name);
-                                            var elementType = NamedType(dataType.Name, ctx);
+                                            var elementType = NamedType(dataType, ctx);
                                             var retrieve = new Retrieve
                                             {
                                                 localId = NextId(),

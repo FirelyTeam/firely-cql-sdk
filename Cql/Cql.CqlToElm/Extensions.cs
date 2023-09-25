@@ -82,6 +82,9 @@ namespace Hl7.Cql.CqlToElm
         public static ListTypeSpecifier ToListType(this TypeSpecifier name) =>
             new() { elementType = name };
 
+        public static IntervalTypeSpecifier ToIntervalType(this TypeSpecifier name) =>
+          new() { pointType = name };
+
     }
 
 }

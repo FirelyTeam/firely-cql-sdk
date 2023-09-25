@@ -3,7 +3,6 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 
@@ -28,17 +27,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             BooleanTypeQName = SystemModel.ToQualifiedTypeName("Boolean");
             RatioTypeQName = SystemModel.ToQualifiedTypeName("Ratio");
 
-            AnyTypeName = AnyTypeQName.Name;
-            IntegerTypeName = IntegerTypeQName.Name;
-            LongTypeName = LongTypeQName.Name;
-            DecimalTypeName = DecimalTypeQName.Name;
-            QuantityTypeName = QuantityTypeQName.Name;
-            StringTypeName = StringTypeQName.Name;
-            DateTypeName = DateTypeQName.Name;
-            TimeTypeName = TimeTypeQName.Name;
-            DateTimeTypeName = DateTimeTypeQName.Name;
-            BooleanTypeName = BooleanTypeQName.Name;
-            RatioTypeName = RatioTypeQName.Name;
+            ValidIntervalPointTypeNames = new XmlQualifiedName[]
+            {
+                IntegerTypeQName,
+                LongTypeQName,
+                DecimalTypeQName,
+                QuantityTypeQName,
+                DateTypeQName,
+                TimeTypeQName,
+                DateTimeTypeQName,
+            };
         }
 
         #region Privates
@@ -48,18 +46,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private readonly Model.ModelInfo SystemModel;
 
-
-        private readonly string AnyTypeName;
-        private readonly string IntegerTypeName;
-        private readonly string LongTypeName;
-        private readonly string DecimalTypeName;
-        private readonly string QuantityTypeName;
-        private readonly string StringTypeName;
-        private readonly string DateTypeName;
-        private readonly string TimeTypeName;
-        private readonly string DateTimeTypeName;
-        private readonly string BooleanTypeName;
-        private readonly string RatioTypeName;
         private readonly XmlQualifiedName AnyTypeQName;
         private readonly XmlQualifiedName IntegerTypeQName;
         private readonly XmlQualifiedName LongTypeQName;
@@ -72,21 +58,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private readonly XmlQualifiedName BooleanTypeQName;
         private readonly XmlQualifiedName RatioTypeQName;
 
-        private IEnumerable<string> ValidIntervalPointTypeNames
-        {
-            get
-            {
-                yield return IntegerTypeName;
-                yield return LongTypeName;
-                yield return DecimalTypeName;
-                yield return QuantityTypeName;
-                yield return DateTypeName;
-                yield return TimeTypeName;
-                yield return DateTimeTypeName;
-            }
-        }
-        private bool IsValidIntervalPointType(string typeName) =>
-            ValidIntervalPointTypeNames.Contains(typeName, StringComparer.Ordinal);
+        private readonly XmlQualifiedName[] ValidIntervalPointTypeNames;
+
+        private bool IsValidIntervalPointType(XmlQualifiedName typeName) =>
+            ValidIntervalPointTypeNames.Any(t => string.Equals(t.Name, typeName.Name, StringComparison.Ordinal));
 
         private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
             throw Critical($"Could not resolve call to operator {@operator} with signature ({string.Join(", ", operands.Select(o => o.resultTypeName?.Name ?? "unknown"))}");
@@ -146,7 +121,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifier? resultTypeSpecifier = null;
             if (TypeComparer.Equals(low.resultTypeSpecifier, high.resultTypeSpecifier))
             {
-                if (IsValidIntervalPointType(low.resultTypeName.Name))
+                if (IsValidIntervalPointType(low.resultTypeName))
                 {
                     if (low is Quantity lowQuantity && high is Quantity highQuantity
                         && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
@@ -186,7 +161,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     localId = NextId(),
                     locator = context.Locator(),
                     element = Array.Empty<Expression>(),
-                    resultTypeSpecifier = ListType(NamedType(AnyTypeName, context), context),
+                    resultTypeSpecifier = ListType(NamedType(AnyTypeQName, context), context),
                 };
 
             var elements = new Expression[elementCount];
@@ -196,22 +171,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var element = Visit(context.GetChild(i));
                 elements[j] = element;
-                if (element.resultTypeName?.Name == QuantityTypeName)
+                if (element.resultTypeName == QuantityTypeQName)
                 {
                     elementTypes[j] = ListElementPromotion.Quantity;
                     maximalElementType = ListElementPromotion.Quantity;
                 }
-                else if (element.resultTypeName?.Name == DecimalTypeName)
+                else if (element.resultTypeName == DecimalTypeQName)
                 {
                     elementTypes[j] = ListElementPromotion.Decimal;
                     maximalElementType = (ListElementPromotion)Math.Max((int)maximalElementType, (int)ListElementPromotion.Decimal);
                 }
-                else if (element.resultTypeName?.Name == LongTypeName)
+                else if (element.resultTypeName == LongTypeQName)
                 {
                     elementTypes[j] = ListElementPromotion.Long;
                     maximalElementType = (ListElementPromotion)Math.Max((int)maximalElementType, (int)ListElementPromotion.Long);
                 }
-                else if (element.resultTypeName?.Name == IntegerTypeName)
+                else if (element.resultTypeName == IntegerTypeQName)
                 {
                     elementTypes[j] = ListElementPromotion.Integer;
                 }
@@ -250,29 +225,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = ex,
                     localId = NextId(),
                     locator = ex.locator,
-                    resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                    resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                    resultTypeName = DecimalTypeQName,
+                    resultTypeSpecifier = NamedType(DecimalTypeQName, context),
                 },
                 localId = NextId(),
                 locator = ex.locator,
-                resultTypeName = new XmlQualifiedName(QuantityTypeName),
-                resultTypeSpecifier = NamedType(QuantityTypeName, context),
+                resultTypeName = QuantityTypeQName,
+                resultTypeSpecifier = NamedType(QuantityTypeQName, context),
             };
             Expression toDecimal(Expression ex) => new ToDecimal
             {
                 operand = ex,
                 localId = NextId(),
                 locator = ex.locator,
-                resultTypeName = new XmlQualifiedName(DecimalTypeName),
-                resultTypeSpecifier = NamedType(DecimalTypeName, context),
+                resultTypeName = DecimalTypeQName,
+                resultTypeSpecifier = NamedType(DecimalTypeQName, context),
             };
             Expression toLong(Expression ex) => new ToLong
             {
                 operand = ex,
                 localId = NextId(),
                 locator = ex.locator,
-                resultTypeName = new XmlQualifiedName(LongTypeName),
-                resultTypeSpecifier = NamedType(LongTypeName, context),
+                resultTypeName = LongTypeQName,
+                resultTypeSpecifier = NamedType(LongTypeQName, context),
             };
 
             TypeSpecifier? listElementType = null;
@@ -283,7 +258,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (typeCount == 1)
                 listElementType = elements[0].resultTypeSpecifier;
             else
-                listElementType = NamedType(AnyTypeName, context);
+                listElementType = NamedType(AnyTypeQName, context);
 
             var list = new List
             {

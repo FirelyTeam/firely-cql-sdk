@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitBooleanLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.BooleanLiteralContext context)
         {
             var value = context.GetText();
-            var typeSpecifier = NamedType(BooleanTypeName, context);
+            var typeSpecifier = NamedType(BooleanTypeQName, context);
             var literal = new Literal
             {
                 value = value,
@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitDateLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.DateLiteralContext context)
         {
-            var dateType = NamedType(DateTypeName, context);
+            var dateType = NamedType(DateTypeQName, context);
             var dateLiteral = new Date
             {
                 localId = NextId(),
@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
             if (DateIso8601.TryParse(context.GetText()[1..], out var date))
             {
-                var integerType = NamedType(IntegerTypeName, context);
+                var integerType = NamedType(IntegerTypeQName, context);
                 var startLine = context.Start.Line;
                 int startCol = context.Start.Column;
                 dateLiteral.year = new Literal
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitDateTimeLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.DateTimeLiteralContext context)
         {
-            var dateTimeType = NamedType(DateTimeTypeName, context);
+            var dateTimeType = NamedType(DateTimeTypeQName, context);
             var dateTimeLiteral = new Elm.DateTime
             {
                 localId = NextId(),
@@ -94,7 +94,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
             if (DateTimeIso8601.TryParse(context.GetText()[1..], out var dateTime))
             {
-                var integerType = NamedType(IntegerTypeName, context);
+                var integerType = NamedType(IntegerTypeQName, context);
                 var startLine = context.Start.Line;
                 int startCol = context.Start.Column;
                 dateTimeLiteral.year = new Literal
@@ -168,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     };
                 if (dateTime.RationalOffset.HasValue)
                 {
-                    var decimalType = NamedType(DecimalTypeName, context);
+                    var decimalType = NamedType(DecimalTypeQName, context);
                     dateTimeLiteral.timezoneOffset = new Literal
                     {
                         value = dateTime.RationalOffset.Value.ToString(CultureInfo.InvariantCulture),
@@ -196,7 +196,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             NamedTypeSpecifier? typeSpecifier = null;
             if (long.TryParse(value, out long l))
             {
-                typeSpecifier = NamedType(LongTypeName, context);
+                typeSpecifier = NamedType(LongTypeQName, context);
             }
             else
             {
@@ -216,7 +216,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitNullLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.NullLiteralContext context)
         {
-            var typeSpecifier = NamedType(AnyTypeName, context);
+            var typeSpecifier = NamedType(AnyTypeQName, context);
             var @null = new Null
             {
                 resultTypeSpecifier = typeSpecifier,
@@ -246,11 +246,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     throw Critical("Decimal literals cannot have a mantissa longer than 8 digits");
                 }
-                typeSpecifier = NamedType(DecimalTypeName, context);
+                typeSpecifier = NamedType(DecimalTypeQName, context);
             }
             else if (int.TryParse(value, out var i))
             {
-                typeSpecifier = NamedType(IntegerTypeName, context);
+                typeSpecifier = NamedType(IntegerTypeQName, context);
             }
             else
             {
@@ -290,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitQuantityLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityLiteralContext context)
         {
             var (decimalValue, unit) = context.quantity().Parse();
-            var quantityType = NamedType(QuantityTypeName, context);
+            var quantityType = NamedType(QuantityTypeQName, context);
             var quantity = new Quantity
             {
                 localId = NextId(),
@@ -306,8 +306,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitRatioLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.RatioLiteralContext context)
         {
-            var ratioType = NamedType(RatioTypeName, context);
-            var quantityType = NamedType(QuantityTypeName, context);
+            var ratioType = NamedType(RatioTypeQName, context);
+            var quantityType = NamedType(QuantityTypeQName, context);
             var quantities = context.ratio().quantity();
 
             var (numValue, numUnit) = quantities[0].Parse();
@@ -346,7 +346,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitStringLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.StringLiteralContext context)
         {
             var value = context.STRING().ParseString();
-            var typeSpecifier = NamedType(StringTypeName, context);
+            var typeSpecifier = NamedType(StringTypeQName, context);
 
             var literal = new Literal
             {
@@ -362,7 +362,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitTimeLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.TimeLiteralContext context)
         {
-            var timeType = NamedType(TimeTypeName, context);
+            var timeType = NamedType(TimeTypeQName, context);
             var timeLiteral = new Time
             {
                 localId = NextId(),
@@ -372,7 +372,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
             if (TimeIso8601.TryParse(context.GetText()[2..], out var time))
             {
-                var integerType = NamedType(IntegerTypeName, context);
+                var integerType = NamedType(IntegerTypeQName, context);
                 var startLine = context.Start.Line;
                 int startCol = context.Start.Column;
                 timeLiteral.hour = new Literal
