@@ -27,11 +27,10 @@ namespace Hl7.Cql.CqlToElm.Test
         protected static void ClassInitialize()
         {
             var services = new ServiceCollection()
-                .AddTypeSpecifierComparer()
+                .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
-                .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
                 .AddConfiguration(cb => cb.WithDefaultOptions())
                 .AddLogging(builder => builder
                     .AddConsole()

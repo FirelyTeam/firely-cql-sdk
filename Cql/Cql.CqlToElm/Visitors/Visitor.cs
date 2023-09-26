@@ -4,7 +4,6 @@ using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Xml;
 
@@ -20,9 +19,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public IServiceProvider Services { get; }
 
         public ILogger<Visitor<T>> Log => Services.GetRequiredService<ILogger<Visitor<T>>>();
-
-        protected IEqualityComparer<TypeSpecifier> TypeComparer => Services.GetRequiredService<IEqualityComparer<TypeSpecifier>>();
-
 
         protected string NextId() => Services.GetRequiredService<LocalIdentifierProvider>().Next();
 

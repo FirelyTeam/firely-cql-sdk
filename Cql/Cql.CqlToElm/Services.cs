@@ -47,9 +47,13 @@ namespace Hl7.Cql.CqlToElm
         public static IServiceCollection AddModels(this IServiceCollection services,
             Action<IModelProvider> builder)
         {
-            var provider = new ModelProvider();
-            builder(provider);
-            services.AddScoped<IModelProvider>(isp => provider);
+            services.AddSingleton<IModelProvider>(isp =>
+            {
+                var provider = new ModelProvider();
+                builder(provider);
+                return provider;
+            });
+
             return services;
         }
 
@@ -70,8 +74,5 @@ namespace Hl7.Cql.CqlToElm
 
         public static ILoggingBuilder ThrowOn(this ILoggingBuilder builder, LogLevel threshold) =>
             builder.AddProvider(new ThrowingLoggerProvider(threshold));
-
-        public static IServiceCollection AddTypeSpecifierComparer(this IServiceCollection services, StringComparer? nameComparer = null) =>
-            services.AddScoped<IEqualityComparer<Elm.TypeSpecifier>>(isp => new TypeSpecifierEqualityComparer(nameComparer));
     }
 }

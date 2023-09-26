@@ -78,9 +78,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
         #region Using
 
-        private IServiceCollection makeServiceCollection() =>
+        private IServiceCollection makeMinimalServiceCollection() =>
              new ServiceCollection()
-                .AddLogging(b => b.AddDebug())
+                .AddLogging(b => b.AddDebug().ThrowOn(LogLevel.Error))
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms()
         {
-            var services = makeServiceCollection()
+            var services = makeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -119,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms_WithNamespace()
         {
-            var services = makeServiceCollection()
+            var services = makeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -147,7 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_LocalIdentifier()
         {
-            var services = makeServiceCollection()
+            var services = makeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -174,7 +174,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Version_NoIdentifier()
         {
-            var services = makeServiceCollection()
+            var services = makeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -200,7 +200,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_NoIdentifier()
         {
-            var services = makeServiceCollection()
+            var services = makeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -227,7 +227,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Duplicate_System_NoLocalAlias()
         {
-            var services = makeServiceCollection()
+            var services = makeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo

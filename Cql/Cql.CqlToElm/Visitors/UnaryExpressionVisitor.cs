@@ -17,21 +17,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             UnaryExpression unary = lastChild switch
             {
-                "null" => new IsNull() { operand = operand },
-                "true" => new IsTrue() { operand = operand.CastNull(BooleanTypeQName) },
-                "false" => new IsFalse() { operand = operand.CastNull(BooleanTypeQName) },
+                "null" => SystemLibrary.IsNull.Build(ModelProvider, operand),
+                "true" => SystemLibrary.IsTrue.Build(ModelProvider, operand),
+                "false" => SystemLibrary.IsFalse.Build(ModelProvider, operand),
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
             };
 
-            unary = unary.WithLocator(context).WithResultType(BooleanTypeQName);
+            unary = unary.WithLocator(context);
 
             if (isNot)
-            {
-                unary = new Not
-                {
-                    operand = unary,
-                }.WithLocator(context).WithResultType(BooleanTypeQName);
-            }
+                unary = SystemLibrary.Not.Build(ModelProvider, unary).WithLocator(context);
 
             return unary;
         }
@@ -214,7 +209,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var extent = context.GetChild(0).GetText().ToLower();
             var dataType = context.GetChild(1).GetText();
-            var typeName = System.SystemModel.ToQualifiedTypeName(dataType);
+            var (typeName, _) = LibraryContext.ResolveDottedTypeName(dataType);
 
             if (extent == "minimum")
             {

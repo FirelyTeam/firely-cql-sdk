@@ -709,10 +709,35 @@ Hl7.Cql.Elm.Without
 Hl7.Cql.Elm.Without.Without() -> void
 Hl7.Cql.Elm.Xor
 Hl7.Cql.Elm.Xor.Xor() -> void
+override Hl7.Cql.Elm.ChoiceTypeSpecifier.Equals(object? other) -> bool
+override Hl7.Cql.Elm.ChoiceTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.ChoiceTypeSpecifier.ToString() -> string!
+override Hl7.Cql.Elm.IntervalTypeSpecifier.Equals(object? other) -> bool
+override Hl7.Cql.Elm.IntervalTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.IntervalTypeSpecifier.ToString() -> string!
+override Hl7.Cql.Elm.ListTypeSpecifier.Equals(object? other) -> bool
+override Hl7.Cql.Elm.ListTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.ListTypeSpecifier.ToString() -> string!
+override Hl7.Cql.Elm.NamedTypeSpecifier.Equals(object? other) -> bool
+override Hl7.Cql.Elm.NamedTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.NamedTypeSpecifier.ToString() -> string!
+override Hl7.Cql.Elm.ParameterTypeSpecifier.Equals(object? other) -> bool
+override Hl7.Cql.Elm.ParameterTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.ParameterTypeSpecifier.ToString() -> string!
+override Hl7.Cql.Elm.TupleElementDefinition.Equals(object? other) -> bool
+override Hl7.Cql.Elm.TupleElementDefinition.GetHashCode() -> int
+override Hl7.Cql.Elm.TupleElementDefinition.ToString() -> string!
+override Hl7.Cql.Elm.TupleTypeSpecifier.Equals(object? other) -> bool
+override Hl7.Cql.Elm.TupleTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.TupleTypeSpecifier.ToString() -> string!
+override Hl7.Cql.Elm.TypeSpecifier.Equals(object? obj) -> bool
+override Hl7.Cql.Elm.TypeSpecifier.GetHashCode() -> int
 static Hl7.Cql.Elm.ExtensionMethods.ListSortOrder(this Hl7.Cql.Elm.SortDirection direction) -> System.ComponentModel.ListSortDirection
 static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! include) -> string?
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.TypeSpecifier.operator !=(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
+static Hl7.Cql.Elm.TypeSpecifier.operator ==(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
 static readonly Hl7.Cql.Elm.Library.JsonSerializerOptions -> System.Text.Json.JsonSerializerOptions!
 static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.Json.JsonSerializerOptions!
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression

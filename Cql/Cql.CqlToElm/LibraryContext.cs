@@ -31,51 +31,44 @@ namespace Hl7.Cql.CqlToElm
             else
                 throw new NotImplementedException("Cannot refer using non-local identifiers yet.");
 
-            var systemModel = ModelProvider.GetSystemModel(library);
-
             if (library.valueSets?.Any(vs => vs.name == identifier) ?? false)
             {
-                var vsName = systemModel.ToQualifiedTypeName("ValueSet")!;
-
                 return new ValueSetRef
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = vsName,
-                    resultTypeSpecifier = vsName.ToNamedType()
+                    resultTypeName = SystemTypes.ValueSetTypeQName,
+                    resultTypeSpecifier = SystemTypes.ValueSetType,
                 }.WithLocator(context);
             }
             else if (library.concepts?.Any(c => c.name == identifier) ?? false)
             {
-                var conceptName = systemModel.ToQualifiedTypeName("Concept");
                 return new ConceptRef
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = conceptName,
-                    resultTypeSpecifier = conceptName.ToNamedType()
+                    resultTypeName = SystemTypes.ConceptTypeQName,
+                    resultTypeSpecifier = SystemTypes.ConceptType
                 }.WithLocator(context);
             }
             else if (library.codeSystems?.Any(c => c.name == identifier) ?? false)
             {
-                var csName = systemModel.ToQualifiedTypeName("CodeSystem");
                 return new CodeSystemRef
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = csName,
-                    resultTypeSpecifier = csName.ToNamedType()
+                    resultTypeName = SystemTypes.CodeSystemTypeQName,
+                    resultTypeSpecifier = SystemTypes.CodeSystemType
                 }.WithLocator(context);
             }
             else if (library.codes?.Any(c => c.name == identifier) ?? false)
             {
-                var codeName = systemModel.ToQualifiedTypeName("Code");
                 return new CodeRef
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = codeName,
-                    resultTypeSpecifier = codeName.ToNamedType()
+                    resultTypeName = SystemTypes.CodeTypeQName,
+                    resultTypeSpecifier = SystemTypes.CodeType
                 }.WithLocator(context);
             }
             else

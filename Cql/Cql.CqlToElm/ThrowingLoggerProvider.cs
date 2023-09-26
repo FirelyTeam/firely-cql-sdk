@@ -1,9 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -23,7 +19,7 @@ namespace Hl7.Cql.CqlToElm
         }
     }
 
-    internal class ThrowingLogger: ILogger
+    internal class ThrowingLogger : ILogger
     {
         private readonly string category;
         private readonly LogLevel threshold;

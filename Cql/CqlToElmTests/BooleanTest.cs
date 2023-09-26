@@ -2,6 +2,7 @@
 using FluentAssertions.Primitives;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -141,5 +142,18 @@ namespace Hl7.Cql.CqlToElm.Test
             @as.operand.Should().BeNullLiteral();
             AssertResult(isNot, true);
         }
+
+        [TestMethod]
+        public void TrueList_Is_True()
+        {
+            var library = createLibraryForExpression("{true} is true");
+            var isTrue = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<IsTrue>();
+            var singleton = isTrue.operand.Should().BeOfType<SingletonFrom>().Subject;
+            singleton.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            var list = singleton.operand.Should().BeOfType<List>().Subject;
+            list.element.Single().Should().BeLiteralBool(true);
+            AssertResult(isTrue, true);
+        }
+
     }
 }

@@ -2,7 +2,6 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Xml;
 
@@ -15,7 +14,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryContext libraryContext,
             TypeSpecifierVisitor typeSpecifierVisitor,
             IServiceProvider services,
-            IEqualityComparer<TypeSpecifier> typeComparer,
             SystemLibrary system) : base(services)
         {
             ModelProvider = provider;
@@ -29,24 +27,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private readonly LibraryContext LibraryContext;
         private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
 
-        private XmlQualifiedName AnyTypeQName => System.AnyTypeQName;
-        private XmlQualifiedName IntegerTypeQName => System.IntegerTypeQName;
-        private XmlQualifiedName LongTypeQName => System.LongTypeQName;
-        private XmlQualifiedName DecimalTypeQName => System.DecimalTypeQName;
-        private XmlQualifiedName QuantityTypeQName => System.QuantityTypeQName;
-        private XmlQualifiedName StringTypeQName => System.StringTypeQName;
-        private XmlQualifiedName DateTypeQName => System.DateTypeQName;
-        private XmlQualifiedName TimeTypeQName => System.TimeTypeQName;
-        private XmlQualifiedName DateTimeTypeQName => System.DateTimeTypeQName;
-        private XmlQualifiedName BooleanTypeQName => System.BooleanTypeQName;
-        private XmlQualifiedName RatioTypeQName => System.RatioTypeQName;
+        private XmlQualifiedName AnyTypeQName => SystemTypes.AnyTypeQName;
+        private XmlQualifiedName IntegerTypeQName => SystemTypes.IntegerTypeQName;
+        private XmlQualifiedName LongTypeQName => SystemTypes.LongTypeQName;
+        private XmlQualifiedName DecimalTypeQName => SystemTypes.DecimalTypeQName;
+        private XmlQualifiedName QuantityTypeQName => SystemTypes.QuantityTypeQName;
+        private XmlQualifiedName StringTypeQName => SystemTypes.StringTypeQName;
+        private XmlQualifiedName DateTypeQName => SystemTypes.DateTypeQName;
+        private XmlQualifiedName TimeTypeQName => SystemTypes.TimeTypeQName;
+        private XmlQualifiedName DateTimeTypeQName => SystemTypes.DateTimeTypeQName;
+        private XmlQualifiedName BooleanTypeQName => SystemTypes.BooleanTypeQName;
+        private XmlQualifiedName RatioTypeQName => SystemTypes.RatioTypeQName;
 
         private readonly SystemLibrary System;
 
         private bool IsValidIntervalPointType(XmlQualifiedName typeName)
         {
             var typeSpec = typeName.ToNamedType();
-            return System.ValidIntervalPointTypes.Any(t => TypeComparer.Equals(typeSpec, t));
+            return SystemTypes.ValidIntervalPointTypes.Any(t => t == typeSpec);
         }
 
         private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
@@ -105,7 +103,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => throw Critical($"Invalid interval; expecting either ] or )")
             };
             TypeSpecifier? resultTypeSpecifier = null;
-            if (TypeComparer.Equals(low.resultTypeSpecifier, high.resultTypeSpecifier))
+            if (low.resultTypeSpecifier == high.resultTypeSpecifier)
             {
                 if (IsValidIntervalPointType(low.resultTypeName))
                 {

@@ -24,7 +24,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private VersionedIdentifierVisitor VersionedIdentifierVisitor => Services.GetRequiredService<VersionedIdentifierVisitor>();
         private ParameterDefinitionVisitor ParameterDefinitionVisitor => Services.GetRequiredService<ParameterDefinitionVisitor>();
         private ExpressionDefinitionVisitor ExpressionDefinitionVisitor => Services.GetRequiredService<ExpressionDefinitionVisitor>();
-        private ExpressionVisitor ExpressionVisitor => Services.GetRequiredService<ExpressionVisitor>();
         private ContextDefVisitor ContextDefVisitor => Services.GetRequiredService<ContextDefVisitor>();
 
 
