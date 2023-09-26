@@ -19,10 +19,10 @@ namespace Hl7.Cql.CqlToElm
             name = SystemModelPrefix
         };
 
-        private static readonly ConcurrentDictionary<string, GenericTypeParameterTypeSpecifier> gtpTsSingletons = new();
+        private static readonly ConcurrentDictionary<string, ParameterTypeSpecifier> gtpTsSingletons = new();
 
-        public static GenericTypeParameterTypeSpecifier Generic(string name) =>
-            gtpTsSingletons.GetOrAdd(name, n => new GenericTypeParameterTypeSpecifier(n));
+        public static ParameterTypeSpecifier Generic(string name) =>
+            gtpTsSingletons.GetOrAdd(name, n => new ParameterTypeSpecifier { parameterName = n });
 
         public static XmlQualifiedName QualifiedNameForSystemType(string name)
         {

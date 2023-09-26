@@ -48,7 +48,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
-            throw Critical($"Could not resolve call to operator {@operator} with signature ({string.Join(", ", operands.Select(o => o.resultTypeName?.Name ?? "unknown"))}");
+            throw Critical($"Could not resolve call to operator {@operator} with signature " +
+                $"({string.Join(", ", operands.Select(o => o.resultTypeSpecifier?.ToString() ?? "unknown"))}");
 
         #endregion
 

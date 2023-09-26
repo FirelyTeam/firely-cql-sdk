@@ -15,6 +15,8 @@ namespace Hl7.Cql.Elm
 {
     public partial class TypeSpecifier
     {
+        public abstract TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments);
+
         public override bool Equals(object? obj) => base.Equals(obj);
 
         public override int GetHashCode() => base.GetHashCode();
@@ -39,6 +41,16 @@ namespace Hl7.Cql.Elm
         }
 
         public override int GetHashCode() => HashCode.Combine(typeof(ChoiceTypeSpecifier), choice.Length, choice.FirstOrDefault());
+
+        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        {
+            if (!assignments.Any()) return this;
+
+            return new ChoiceTypeSpecifier
+            {
+                choice = choice.Select(c => c.ReplaceGenericParameters(assignments)).ToArray()
+            };
+        }
     }
 
     public partial class ParameterTypeSpecifier
@@ -56,6 +68,9 @@ namespace Hl7.Cql.Elm
         }
 
         public override int GetHashCode() => parameterName.GetHashCode();
+
+        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) =>
+            assignments.TryGetValue(this, out var replacement) ? replacement : this;
     }
 
     public partial class TupleElementDefinition
@@ -73,8 +88,18 @@ namespace Hl7.Cql.Elm
         }
 
         public override int GetHashCode() => HashCode.Combine(name, type);
-    }
 
+        public TupleElementDefinition ReplaceGenericParameters(GenericParameterAssignments assignments)
+        {
+            if (!assignments.Any()) return this;
+
+            return new TupleElementDefinition
+            {
+                name = name,
+                type = type.ReplaceGenericParameters(assignments)
+            };
+        }
+    }
 
     public partial class TupleTypeSpecifier
     {
@@ -92,6 +117,16 @@ namespace Hl7.Cql.Elm
         }
 
         public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), element.Length, element.FirstOrDefault());
+
+        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        {
+            if (!assignments.Any()) return this;
+
+            return new TupleTypeSpecifier()
+            {
+                element = element.Select(e => e.ReplaceGenericParameters(assignments)).ToArray()
+            };
+        }
     }
 
     public partial class IntervalTypeSpecifier
@@ -110,6 +145,16 @@ namespace Hl7.Cql.Elm
         }
 
         public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), pointType);
+
+        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        {
+            if (!assignments.Any()) return this;
+
+            return new IntervalTypeSpecifier
+            {
+                pointType = pointType.ReplaceGenericParameters(assignments)
+            };
+        }
     }
 
     public partial class NamedTypeSpecifier
@@ -128,6 +173,8 @@ namespace Hl7.Cql.Elm
         }
 
         public override int GetHashCode() => name.GetHashCode();
+
+        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
     }
 
     public partial class ListTypeSpecifier
@@ -146,5 +193,15 @@ namespace Hl7.Cql.Elm
         }
 
         public override int GetHashCode() => HashCode.Combine(typeof(ListTypeSpecifier), elementType);
+
+        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        {
+            if (!assignments.Any()) return this;
+
+            return new ListTypeSpecifier
+            {
+                elementType = elementType.ReplaceGenericParameters(assignments)
+            };
+        }
     }
 }

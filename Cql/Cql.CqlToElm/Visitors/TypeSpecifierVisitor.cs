@@ -16,6 +16,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
 
             public string UnqualifiedName { get; set; }
+
+            public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         public TypeSpecifierVisitor(

@@ -1,4 +1,5 @@
 ﻿#nullable enable
+abstract Hl7.Cql.Elm.TypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 const Hl7.Cql.Elm.Library.JsonMimeType = "application/elm+json" -> string!
 const Hl7.Cql.Elm.Library.LibraryNodeProperty = "Library" -> string!
 const Hl7.Cql.Elm.Library.XmlMimeType = "application/elm+xml" -> string!
@@ -273,6 +274,8 @@ Hl7.Cql.Elm.FunctionDef.fluentSpecified.set -> void
 Hl7.Cql.Elm.FunctionDef.FunctionDef() -> void
 Hl7.Cql.Elm.FunctionRef
 Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
+Hl7.Cql.Elm.GenericParameterAssignments
+Hl7.Cql.Elm.GenericParameterAssignments.GenericParameterAssignments() -> void
 Hl7.Cql.Elm.GeometricMean
 Hl7.Cql.Elm.GeometricMean.GeometricMean() -> void
 Hl7.Cql.Elm.Greater
@@ -674,6 +677,7 @@ Hl7.Cql.Elm.Tuple.Tuple() -> void
 Hl7.Cql.Elm.TupleElement
 Hl7.Cql.Elm.TupleElement.TupleElement() -> void
 Hl7.Cql.Elm.TupleElementDefinition
+Hl7.Cql.Elm.TupleElementDefinition.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TupleElementDefinition!
 Hl7.Cql.Elm.TupleElementDefinition.TupleElementDefinition() -> void
 Hl7.Cql.Elm.TupleTypeSpecifier
 Hl7.Cql.Elm.TupleTypeSpecifier.TupleTypeSpecifier() -> void
@@ -711,24 +715,30 @@ Hl7.Cql.Elm.Xor
 Hl7.Cql.Elm.Xor.Xor() -> void
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.ChoiceTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.IntervalTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.IntervalTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.IntervalTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.IntervalTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.ListTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ListTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.ListTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.ListTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.NamedTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.NamedTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.NamedTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.NamedTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.ParameterTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ParameterTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.ParameterTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.ParameterTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.TupleElementDefinition.Equals(object? other) -> bool
 override Hl7.Cql.Elm.TupleElementDefinition.GetHashCode() -> int
 override Hl7.Cql.Elm.TupleElementDefinition.ToString() -> string!
 override Hl7.Cql.Elm.TupleTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.TupleTypeSpecifier.GetHashCode() -> int
+override Hl7.Cql.Elm.TupleTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.TupleTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.TypeSpecifier.Equals(object? obj) -> bool
 override Hl7.Cql.Elm.TypeSpecifier.GetHashCode() -> int
