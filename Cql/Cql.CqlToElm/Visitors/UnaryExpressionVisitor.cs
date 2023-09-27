@@ -126,8 +126,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 return extent switch
                 {
-                    CqlKeyword.Minimum => SystemLibrary.MinValue(typeSpecifier).WithLocator(context),
-                    CqlKeyword.Maximum => SystemLibrary.MaxValue(typeSpecifier).WithLocator(context),
+                    CqlKeyword.Minimum => SystemLibrary.MinValue.Build(typeSpecifier).WithLocator(context),
+                    CqlKeyword.Maximum => SystemLibrary.MaxValue.Build(typeSpecifier).WithLocator(context),
                     _ => throw Critical($"Unexpected extent: {extent}")
                 };
             }

@@ -19,9 +19,9 @@ namespace Hl7.Cql.CqlToElm
             Not,
             Exists, SingletonFrom, ToList,
             Start, End, PointFrom, Width,
-            Predecessor, Successor
-
-            //TODO: turn As and MinValue/MaxValue into functions
+            Predecessor, Successor,
+            As, Cast,
+            MinValue, MaxValue
         };
 
         public static BuiltInUnaryFunctionDef<End> End = new(nameof(End), SystemTypes.Generic("T").ToIntervalType(), SystemTypes.Generic("T"));
@@ -37,28 +37,14 @@ namespace Hl7.Cql.CqlToElm
         public static BuiltInUnaryFunctionDef<Width> Width = new(nameof(Width), SystemTypes.Generic("T").ToIntervalType(), SystemTypes.Generic("T"));
         public static BuiltInUnaryFunctionDef<Predecessor> Predecessor = new(nameof(Predecessor), SystemTypes.Generic("T"), SystemTypes.Generic("T"));
         public static BuiltInUnaryFunctionDef<Successor> Successor = new(nameof(Successor), SystemTypes.Generic("T"), SystemTypes.Generic("T"));
-
-        // As in most languages, As is a bit of a special case, since it's signature is hard to pin down, its argument being
-        // "a type specifier" instead of a type.
-        public static As As(Expression operand, TypeSpecifier targetType) => new As
-        {
-            operand = operand,
-            asTypeSpecifier = targetType
-        }.WithResultType(targetType);
-
-        public static MinValue MinValue(NamedTypeSpecifier type) => new MinValue
-        {
-            valueType = type.name
-        }.WithResultType(type);
-
-        public static MaxValue MaxValue(NamedTypeSpecifier type) => new MaxValue
-        {
-            valueType = type.name
-        }.WithResultType(type);
-
+        public static AsFunctionDef As = new(strict: false);
+        public static AsFunctionDef Cast = new(strict: true);
+        public static MinValueFunctionDef MinValue = new();
+        public static MinValueFunctionDef MaxValue = new();
     }
 
-    internal abstract class BuiltInFunctionDef<T> : FunctionDef where T : Expression, new()
+    //TODO: Subtypes for functions that only take ordered types?  The checking of the argument should really be done in the Build() method....
+    internal class BuiltInFunctionDef : FunctionDef
     {
         public BuiltInFunctionDef(string name, TypeSpecifier resultType)
         {
@@ -75,7 +61,7 @@ namespace Hl7.Cql.CqlToElm
         }
     }
 
-    internal class BuiltInUnaryFunctionDef<E> : BuiltInFunctionDef<E> where E : UnaryExpression, new()
+    internal class BuiltInUnaryFunctionDef<E> : BuiltInFunctionDef where E : UnaryExpression, new()
     {
         public BuiltInUnaryFunctionDef(string name, TypeSpecifier operandType, TypeSpecifier resultType)
             : base(name, resultType)
@@ -83,16 +69,15 @@ namespace Hl7.Cql.CqlToElm
             operand = new[] { new OperandDef { name = $"operand", operandTypeSpecifier = operandType }.WithResultType(operandType) };
         }
 
-        public UnaryExpression Build(IModelProvider provider, Expression argument)
+        public virtual UnaryExpression Build(IModelProvider provider, Expression argument)
         {
             var castBuilder = new CastBuilder(provider);
-            var from = argument.resultTypeSpecifier;
             var to = operand[0].operandTypeSpecifier;
             var success = castBuilder.TryBuildCast(argument, to, out var cast);
 
             if (!success)
                 throw new InvalidOperationException($"Failed to bind to unary operator '{name}' - the operand has type {to} which is not " +
-                    $"compatible with an argument of type {from}.");
+                    $"compatible with an argument of type {argument.resultTypeSpecifier}.");
 
             var result = new E()
             {
@@ -100,6 +85,78 @@ namespace Hl7.Cql.CqlToElm
             }.WithResultType(resultTypeSpecifier.ReplaceGenericParameters(castBuilder.GenericAssignments));
 
             return result;
+        }
+    }
+
+    internal class AsFunctionDef : BuiltInFunctionDef
+    {
+        public AsFunctionDef(bool strict)
+          : base(nameof(As), SystemTypes.Generic("T"))
+        {
+            operand = new[] { new OperandDef { name = $"operand", operandTypeSpecifier = SystemTypes.AnyType }.WithResultType(SystemTypes.AnyType) };
+            Strict = strict;
+        }
+
+        public bool Strict { get; }
+
+        // TODO: Test this by replacing the the current implementation of cast/as and run tests in Cql/Cql.CqlToElmTests/AsTest.cs
+        public UnaryExpression Build(IModelProvider provider, TypeSpecifier typeArgument, Expression argument)
+        {
+            var castBuilder = new CastBuilder(provider);
+
+            // Note how the official operand type is ignored, but we check against the given type argument now.
+            var success = castBuilder.TryBuildCast(argument, typeArgument, out var cast);
+
+            if (!success)
+                throw new InvalidOperationException($"Failed to bind 'as' operator - the operand has type {typeArgument} which is not " +
+                    $"compatible with an argument of type {argument.resultTypeSpecifier}.");
+
+            var asTypeSpec = typeArgument.ReplaceGenericParameters(castBuilder.GenericAssignments);
+            return Create(asTypeSpec, cast!);
+        }
+
+        internal UnaryExpression Create(TypeSpecifier typeArgument, Expression argument)
+        {
+            return new As()
+            {
+                strict = Strict,
+                operand = argument,
+                asTypeSpecifier = typeArgument
+            }.WithResultType(typeArgument);
+        }
+    }
+
+    internal class MinValueFunctionDef : BuiltInFunctionDef
+    {
+        public MinValueFunctionDef()
+            : base(nameof(MinValue), SystemTypes.Generic("T"))
+        {
+            operand = Array.Empty<OperandDef>();
+        }
+
+        public Expression Build(NamedTypeSpecifier typeArgument)
+        {
+            return new MinValue()
+            {
+                valueType = typeArgument.name,
+            }.WithResultType(typeArgument);
+        }
+    }
+
+    internal class MaxValueFunctionDef : BuiltInFunctionDef
+    {
+        public MaxValueFunctionDef()
+            : base(nameof(MaxValue), SystemTypes.Generic("T"))
+        {
+            operand = Array.Empty<OperandDef>();
+        }
+
+        public Expression Build(NamedTypeSpecifier typeArgument)
+        {
+            return new MaxValue()
+            {
+                valueType = typeArgument.name,
+            }.WithResultType(typeArgument);
         }
     }
 }

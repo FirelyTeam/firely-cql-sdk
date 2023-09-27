@@ -22,6 +22,9 @@ namespace Hl7.Cql.CqlToElm
 
         public TypeSpecifier Replace(TypeSpecifier ts) => ts.ReplaceGenericParameters(GenericAssignments);
 
+        public bool TryBuildCast(Expression fromExpr, OperandDef to, out Expression? result) =>
+            TryBuildCast(fromExpr, to.operandTypeSpecifier, out result);
+
         public bool TryBuildCast(Expression fromExpr, TypeSpecifier to, out Expression? result)
         {
             var from = fromExpr.resultTypeSpecifier;
@@ -35,7 +38,7 @@ namespace Hl7.Cql.CqlToElm
 
             // if parameter type is any, then any argument type is ok.
             // This is really a poor-mans subtype test, but it will do for now.
-            if (to is NamedTypeSpecifier nts && nts.name == SystemTypes.AnyTypeQName)
+            if (to == SystemTypes.AnyType)
             {
                 result = fromExpr;
                 return true;
@@ -67,7 +70,8 @@ namespace Hl7.Cql.CqlToElm
                         GenericAssignments.Add(u, SystemTypes.AnyType);
                     to = to.ReplaceGenericParameters(GenericAssignments);
                 }
-                result = SystemLibrary.As(n, to);
+
+                result = SystemLibrary.As.Create(to, n);
                 return true;
             }
 
