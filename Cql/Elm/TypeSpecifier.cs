@@ -8,6 +8,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -15,7 +16,15 @@ namespace Hl7.Cql.Elm
 {
     public partial class TypeSpecifier
     {
-        public abstract TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments);
+        /// <summary>
+        /// Enumerates the open generic parameters present in the type, e.g. 'T' in List{T}.
+        /// </summary>
+        internal abstract IEnumerable<ParameterTypeSpecifier> GetGenericParameters();
+
+        /// <summary>
+        /// Returns a clone of the type with the generic parameters replaced with the given assignments.
+        /// </summary>
+        internal abstract TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments);
 
         public override bool Equals(object? obj) => base.Equals(obj);
 
@@ -42,7 +51,7 @@ namespace Hl7.Cql.Elm
 
         public override int GetHashCode() => HashCode.Combine(typeof(ChoiceTypeSpecifier), choice.Length, choice.FirstOrDefault());
 
-        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
             if (!assignments.Any()) return this;
 
@@ -51,6 +60,8 @@ namespace Hl7.Cql.Elm
                 choice = choice.Select(c => c.ReplaceGenericParameters(assignments)).ToArray()
             };
         }
+
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => choice.SelectMany(c => c.GetGenericParameters());
     }
 
     public partial class ParameterTypeSpecifier
@@ -69,8 +80,10 @@ namespace Hl7.Cql.Elm
 
         public override int GetHashCode() => parameterName.GetHashCode();
 
-        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) =>
+        internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) =>
             assignments.TryGetValue(this, out var replacement) ? replacement : this;
+
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => new[] { this };
     }
 
     public partial class TupleElementDefinition
@@ -89,7 +102,7 @@ namespace Hl7.Cql.Elm
 
         public override int GetHashCode() => HashCode.Combine(name, type);
 
-        public TupleElementDefinition ReplaceGenericParameters(GenericParameterAssignments assignments)
+        internal TupleElementDefinition ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
             if (!assignments.Any()) return this;
 
@@ -99,6 +112,8 @@ namespace Hl7.Cql.Elm
                 type = type.ReplaceGenericParameters(assignments)
             };
         }
+
+        internal IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => type.GetGenericParameters();
     }
 
     public partial class TupleTypeSpecifier
@@ -118,7 +133,7 @@ namespace Hl7.Cql.Elm
 
         public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), element.Length, element.FirstOrDefault());
 
-        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
             if (!assignments.Any()) return this;
 
@@ -127,6 +142,8 @@ namespace Hl7.Cql.Elm
                 element = element.Select(e => e.ReplaceGenericParameters(assignments)).ToArray()
             };
         }
+
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => element.SelectMany(e => e.GetGenericParameters());
     }
 
     public partial class IntervalTypeSpecifier
@@ -146,7 +163,7 @@ namespace Hl7.Cql.Elm
 
         public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), pointType);
 
-        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
             if (!assignments.Any()) return this;
 
@@ -155,6 +172,8 @@ namespace Hl7.Cql.Elm
                 pointType = pointType.ReplaceGenericParameters(assignments)
             };
         }
+
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => pointType.GetGenericParameters();
     }
 
     public partial class NamedTypeSpecifier
@@ -174,7 +193,9 @@ namespace Hl7.Cql.Elm
 
         public override int GetHashCode() => name.GetHashCode();
 
-        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
+        internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
+
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => Enumerable.Empty<ParameterTypeSpecifier>();
     }
 
     public partial class ListTypeSpecifier
@@ -194,7 +215,7 @@ namespace Hl7.Cql.Elm
 
         public override int GetHashCode() => HashCode.Combine(typeof(ListTypeSpecifier), elementType);
 
-        public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
+        internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
             if (!assignments.Any()) return this;
 
@@ -203,5 +224,7 @@ namespace Hl7.Cql.Elm
                 elementType = elementType.ReplaceGenericParameters(assignments)
             };
         }
+
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => elementType.GetGenericParameters();
     }
 }

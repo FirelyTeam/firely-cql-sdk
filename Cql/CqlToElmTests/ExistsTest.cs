@@ -1,16 +1,13 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class ExistsTest: Base
+    public class ExistsTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -49,17 +46,13 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private Empty_List: exists { }
             ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Exists));
+
+            var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
-                var exists = (Exists)library.statements[0].expression;
                 Assert.IsNotNull(exists.operand);
                 Assert.IsInstanceOfType(exists.operand, typeof(List));
                 var list = (List)exists.operand;
-                AssertListType(list.resultTypeSpecifier, $"{{{SystemUri}}}Any");
+                list.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());
                 AssertList(list, Array.Empty<object>());
                 AssertExists(exists, false);
             }
@@ -73,13 +66,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private Empty_List: exists null
             ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Exists));
+
+            var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
-                var exists = (Exists)library.statements[0].expression;
                 Assert.IsNotNull(exists.operand);
                 Assert.IsInstanceOfType(exists.operand, typeof(As));
                 var @as = (As)exists.operand;

@@ -2,10 +2,6 @@
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -53,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", lhsnts.name.Name);
                 }
-              
+
 
                 var lambda = ExpressionBuilder.Lambda(not);
                 var dg = lambda.Compile();
@@ -154,7 +150,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-             Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+             Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1

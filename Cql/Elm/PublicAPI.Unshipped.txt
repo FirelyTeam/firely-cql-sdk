@@ -1,5 +1,4 @@
 ﻿#nullable enable
-abstract Hl7.Cql.Elm.TypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 const Hl7.Cql.Elm.Library.JsonMimeType = "application/elm+json" -> string!
 const Hl7.Cql.Elm.Library.LibraryNodeProperty = "Library" -> string!
 const Hl7.Cql.Elm.Library.XmlMimeType = "application/elm+xml" -> string!
@@ -622,6 +621,7 @@ Hl7.Cql.Elm.Successor
 Hl7.Cql.Elm.Successor.Successor() -> void
 Hl7.Cql.Elm.Sum
 Hl7.Cql.Elm.Sum.Sum() -> void
+Hl7.Cql.Elm.SystemTypes
 Hl7.Cql.Elm.Tag
 Hl7.Cql.Elm.Tag.Tag() -> void
 Hl7.Cql.Elm.TernaryExpression
@@ -677,12 +677,12 @@ Hl7.Cql.Elm.Tuple.Tuple() -> void
 Hl7.Cql.Elm.TupleElement
 Hl7.Cql.Elm.TupleElement.TupleElement() -> void
 Hl7.Cql.Elm.TupleElementDefinition
-Hl7.Cql.Elm.TupleElementDefinition.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TupleElementDefinition!
 Hl7.Cql.Elm.TupleElementDefinition.TupleElementDefinition() -> void
 Hl7.Cql.Elm.TupleTypeSpecifier
 Hl7.Cql.Elm.TupleTypeSpecifier.TupleTypeSpecifier() -> void
 Hl7.Cql.Elm.TypeSpecifier
 Hl7.Cql.Elm.TypeSpecifier.TypeSpecifier() -> void
+Hl7.Cql.Elm.TypeSpecifierExtensions
 Hl7.Cql.Elm.UnaryExpression
 Hl7.Cql.Elm.UnaryExpression.UnaryExpression() -> void
 Hl7.Cql.Elm.Union
@@ -715,30 +715,24 @@ Hl7.Cql.Elm.Xor
 Hl7.Cql.Elm.Xor.Xor() -> void
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.GetHashCode() -> int
-override Hl7.Cql.Elm.ChoiceTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.IntervalTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.IntervalTypeSpecifier.GetHashCode() -> int
-override Hl7.Cql.Elm.IntervalTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.IntervalTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.ListTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ListTypeSpecifier.GetHashCode() -> int
-override Hl7.Cql.Elm.ListTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.ListTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.NamedTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.NamedTypeSpecifier.GetHashCode() -> int
-override Hl7.Cql.Elm.NamedTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.NamedTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.ParameterTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ParameterTypeSpecifier.GetHashCode() -> int
-override Hl7.Cql.Elm.ParameterTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.ParameterTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.TupleElementDefinition.Equals(object? other) -> bool
 override Hl7.Cql.Elm.TupleElementDefinition.GetHashCode() -> int
 override Hl7.Cql.Elm.TupleElementDefinition.ToString() -> string!
 override Hl7.Cql.Elm.TupleTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.TupleTypeSpecifier.GetHashCode() -> int
-override Hl7.Cql.Elm.TupleTypeSpecifier.ReplaceGenericParameters(Hl7.Cql.Elm.GenericParameterAssignments! assignments) -> Hl7.Cql.Elm.TypeSpecifier!
 override Hl7.Cql.Elm.TupleTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.TypeSpecifier.Equals(object? obj) -> bool
 override Hl7.Cql.Elm.TypeSpecifier.GetHashCode() -> int
@@ -746,8 +740,47 @@ static Hl7.Cql.Elm.ExtensionMethods.ListSortOrder(this Hl7.Cql.Elm.SortDirection
 static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! include) -> string?
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.AnyTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.BooleanTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.CodeSystemTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.CodeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.CodeTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.ConceptType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.ConceptTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.DateTimeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.DateTimeTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.DateType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.DateTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.DecimalType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.DecimalTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.IntegerType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.IntegerTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.LongType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.LongTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.QuantityType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.QuantityTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.RatioType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.RatioTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.StringType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.StringTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.SystemModelPrefix -> string!
+static Hl7.Cql.Elm.SystemTypes.SystemModelUri -> string!
+static Hl7.Cql.Elm.SystemTypes.SystemModelVersion -> string!
+static Hl7.Cql.Elm.SystemTypes.TimeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.TimeTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.ValueSetType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.ValueSetTypeQName -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Elm.SystemTypes.VocabularyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.VocabularyTypeQName -> System.Xml.XmlQualifiedName!
 static Hl7.Cql.Elm.TypeSpecifier.operator !=(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
 static Hl7.Cql.Elm.TypeSpecifier.operator ==(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
+static Hl7.Cql.Elm.TypeSpecifierExtensions.IsValidOrderedType(this Hl7.Cql.Elm.TypeSpecifier! type) -> bool
+static Hl7.Cql.Elm.TypeSpecifierExtensions.ToIntervalType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
+static Hl7.Cql.Elm.TypeSpecifierExtensions.ToListType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.ListTypeSpecifier!
+static Hl7.Cql.Elm.TypeSpecifierExtensions.ToNamedType(this System.Xml.XmlQualifiedName! qname) -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static readonly Hl7.Cql.Elm.Library.JsonSerializerOptions -> System.Text.Json.JsonSerializerOptions!
 static readonly Hl7.Cql.Elm.Library.JsonSerializerOptionsStrict -> System.Text.Json.JsonSerializerOptions!
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression

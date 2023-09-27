@@ -1,18 +1,40 @@
-﻿using Hl7.Cql.Elm;
+﻿/* 
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ * 
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Model;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Xml;
-using M = Hl7.Cql.Model;
 
-namespace Hl7.Cql.CqlToElm
+namespace Hl7.Cql.Elm
 {
-    internal static class SystemTypes
+    /// <summary>
+    /// Represents the list of types defined in the CQL System model.
+    /// </summary>
+    public static class SystemTypes
     {
+        /// <summary>
+        /// The URI used to as the namespace for the CQL System model types.
+        /// </summary>
         public static string SystemModelUri = "urn:hl7-org:elm-types:r1";
+
+        /// <summary>
+        /// The shorthand prefix (System) used for the System model types.
+        /// </summary>
         public static string SystemModelPrefix = "System";
+
+
+        /// <summary>
+        /// The version of the CQL System model containing these types.
+        /// </summary>
         public static string SystemModelVersion = "1.0.0";
 
-        private static readonly M.ModelInfo bootstrapSystemModel = new()
+        private static readonly ModelInfo bootstrapSystemModel = new()
         {
             url = SystemModelUri,
             version = SystemModelVersion,
@@ -21,15 +43,16 @@ namespace Hl7.Cql.CqlToElm
 
         private static readonly ConcurrentDictionary<string, ParameterTypeSpecifier> gtpTsSingletons = new();
 
-        public static ParameterTypeSpecifier Generic(string name) =>
+        internal static ParameterTypeSpecifier Generic(string name) =>
             gtpTsSingletons.GetOrAdd(name, n => new ParameterTypeSpecifier { parameterName = n });
 
-        public static XmlQualifiedName QualifiedNameForSystemType(string name)
+        internal static XmlQualifiedName QualifiedNameForSystemType(string name)
         {
             var nameWithoutPrefix = name.StartsWith(SystemModelPrefix) ? name[SystemModelPrefix.Length..] : name;
             return bootstrapSystemModel.ToQualifiedTypeName(nameWithoutPrefix);
         }
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static XmlQualifiedName AnyTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Any");
         public static XmlQualifiedName IntegerTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Integer");
         public static XmlQualifiedName LongTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Long");
@@ -63,8 +86,12 @@ namespace Hl7.Cql.CqlToElm
         public static NamedTypeSpecifier VocabularyType = VocabularyTypeQName.ToNamedType();
         public static NamedTypeSpecifier ValueSetType = ValueSetTypeQName.ToNamedType();
         public static NamedTypeSpecifier CodeSystemType = CodeSystemTypeQName.ToNamedType();
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
-        public static IReadOnlyCollection<NamedTypeSpecifier> ValidIntervalPointTypes = new[]
+        /// <summary>
+        /// The types that can be used as the point type for an interval, and have a successor and predecessor
+        /// </summary>
+        internal static IReadOnlyCollection<NamedTypeSpecifier> ValidOrderedTypes = new[]
             {
                 IntegerType,
                 LongType,

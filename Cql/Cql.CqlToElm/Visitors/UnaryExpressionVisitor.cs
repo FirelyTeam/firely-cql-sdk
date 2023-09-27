@@ -2,7 +2,7 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
-using System.Xml;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -11,19 +11,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // | expression 'is' 'not'? ('null' | 'true' | 'false')                                            #booleanExpression
         public override Expression VisitBooleanExpression([NotNull] cqlParser.BooleanExpressionContext context)
         {
-            var lastChild = context.children[^1].GetText();
-            var isNot = context.children[^2].GetText() == "not";
+            var lastChild = Keyword.Parse(context.children[^1]).Single();
+            var isNot = Keyword.Parse(context.children[^2]).Single() == CqlKeyword.Not;
             var operand = Visit(context.expression());
 
-            UnaryExpression unary = lastChild switch
+            UnaryExpression unary = (lastChild switch
             {
-                "null" => SystemLibrary.IsNull.Build(ModelProvider, operand),
-                "true" => SystemLibrary.IsTrue.Build(ModelProvider, operand),
-                "false" => SystemLibrary.IsFalse.Build(ModelProvider, operand),
+                CqlKeyword.Null => SystemLibrary.IsNull.Build(ModelProvider, operand),
+                CqlKeyword.True => SystemLibrary.IsTrue.Build(ModelProvider, operand),
+                CqlKeyword.False => SystemLibrary.IsFalse.Build(ModelProvider, operand),
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
-            };
-
-            unary = unary.WithLocator(context);
+            }).WithLocator(context);
 
             if (isNot)
                 unary = SystemLibrary.Not.Build(ModelProvider, unary).WithLocator(context);
@@ -31,234 +29,123 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return unary;
         }
 
-        // singleton from
+        //     | 'singleton' 'from' expressionTerm                                             #elementExtractorExpressionTerm
         public override Expression VisitElementExtractorExpressionTerm([NotNull] cqlParser.ElementExtractorExpressionTermContext context)
         {
-            var operand = Visit(context.GetChild(2));
-            if (operand.resultTypeSpecifier is ListTypeSpecifier lts)
-            {
-                var elementType = lts.elementType;
-                XmlQualifiedName? typeName;
-                if (elementType is NamedTypeSpecifier nts)
-                    typeName = nts.name;
-                else typeName = null;
-                var singleton = new SingletonFrom
-                {
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    operand = operand,
-                    resultTypeName = typeName,
-                    resultTypeSpecifier = elementType
-                };
-                return singleton;
-            }
-            else
-            {
-                UnresolvedSignature("Singleton", operand);
-                return base.VisitElementExtractorExpressionTerm(context);
-            }
+            var operand = Visit(context.expressionTerm());
+
+            return SystemLibrary.SingletonFrom.Build(ModelProvider, operand)
+                .WithLocator(context);
         }
 
         //     | 'exists' expression                                                                           #existenceExpression
         public override Expression VisitExistenceExpression([NotNull] cqlParser.ExistenceExpressionContext context)
         {
-            var operand = Visit(context.expression())
-                .CastNull(AnyTypeQName.ToNamedType().ToListType());
+            var operand = Visit(context.expression());
 
-            if (operand.resultTypeSpecifier is not ListTypeSpecifier)
-                UnresolvedSignature("Exists", operand);
-
-            var exists = new Exists
-            {
-                operand = operand,
-            }.WithLocator(context).WithResultType(BooleanTypeQName);
-
-            return exists;
+            return SystemLibrary.Exists.Build(ModelProvider, operand).WithLocator(context);
         }
 
+        // | 'not' expression                                                                              #notExpression
         public override Expression VisitNotExpression([NotNull] cqlParser.NotExpressionContext context)
         {
-            var operand = Visit(context.GetChild(1));
-            if (operand is Null)
-                operand = new As
-                {
-                    operand = operand,
-                    localId = NextId(),
-                    locator = operand.locator,
-                    asType = BooleanTypeQName,
-                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
-                    resultTypeName = BooleanTypeQName,
-                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                };
-            if (operand.resultTypeName != BooleanTypeQName)
-                UnresolvedSignature("Not", operand);
-            var not = new Not
-            {
-                localId = NextId(),
-                locator = context.Locator(),
-                operand = operand,
-                resultTypeName = BooleanTypeQName,
-                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-            };
-            return not;
+            var operand = Visit(context.expression());
+
+            return SystemLibrary.Not.Build(ModelProvider, operand).WithLocator(context);
         }
 
+        //    | 'point' 'from' expressionTerm                                                 #pointExtractorExpressionTerm
         public override Expression VisitPointExtractorExpressionTerm([NotNull] cqlParser.PointExtractorExpressionTermContext context)
         {
-            var operand = Visit(context.GetChild(2));
-            if (operand.resultTypeSpecifier is IntervalTypeSpecifier its)
+            var operand = Visit(context.expressionTerm());
+
+            return operand.resultTypeSpecifier switch
             {
-                var pointType = its.pointType;
-                XmlQualifiedName? typeName;
-                if (pointType is NamedTypeSpecifier nts)
-                    typeName = nts.name;
-                else typeName = null;
-                var point = new PointFrom
-                {
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    operand = operand,
-                    resultTypeName = typeName,
-                    resultTypeSpecifier = pointType
-                };
-                return point;
-            }
-            else
-            {
-                UnresolvedSignature("Point", operand);
-                return base.VisitPointExtractorExpressionTerm(context);
-            }
+                IntervalTypeSpecifier => SystemLibrary.PointFrom.Build(ModelProvider, operand)
+                    .WithLocator(context),
+                _ => throw UnresolvedSignature(nameof(PointFrom), operand)
+            };
         }
 
+        //    | 'predecessor' 'of' expressionTerm                                             #predecessorExpressionTerm
         public override Expression VisitPredecessorExpressionTerm([NotNull] cqlParser.PredecessorExpressionTermContext context)
         {
-            var operand = Visit(context.GetChild(2));
-            var predecessor = new Predecessor
+            var operand = Visit(context.expressionTerm());
+
+            if (operand.resultTypeSpecifier.IsValidOrderedType())
             {
-                localId = NextId(),
-                locator = context.Locator(),
-                operand = operand,
-                resultTypeName = operand.resultTypeName,
-                resultTypeSpecifier = operand.resultTypeSpecifier
-            };
-            return predecessor;
+                return SystemLibrary.Predecessor.Build(ModelProvider, operand)
+                    .WithLocator(context);
+            }
+            else
+                throw UnresolvedSignature(nameof(Predecessor), operand);
         }
 
+        //     | 'successor' 'of' expressionTerm                                               #successorExpressionTerm
         public override Expression VisitSuccessorExpressionTerm([NotNull] cqlParser.SuccessorExpressionTermContext context)
         {
-            var operand = Visit(context.GetChild(2));
-            var successor = new Successor
+            var operand = Visit(context.expressionTerm());
+
+            if (operand.resultTypeSpecifier.IsValidOrderedType())
             {
-                localId = NextId(),
-                locator = context.Locator(),
-                operand = operand,
-                resultTypeName = operand.resultTypeName,
-                resultTypeSpecifier = operand.resultTypeSpecifier
-            };
-            return successor;
+                return SystemLibrary.Successor.Build(ModelProvider, operand)
+                    .WithLocator(context);
+            }
+            else
+                throw UnresolvedSignature(nameof(Successor), operand);
         }
 
         //   | ('start' | 'end') 'of' expressionTerm                                         #timeBoundaryExpressionTerm
         public override Expression VisitTimeBoundaryExpressionTerm([NotNull] cqlParser.TimeBoundaryExpressionTermContext context)
         {
-            var kw = Keyword.Parse(context.GetChild(0).GetText());
-            if (kw?.Length == 1)
+            var startOrEnd = Keyword.Parse(context.GetChild(0)).Single();
+            var operand = Visit(context.expressionTerm());
+
+            if (operand.resultTypeSpecifier is IntervalTypeSpecifier)
             {
-                var operand = Visit(context.GetChild(2))
-                    ?? throw UnresolvedSignature(context.GetChild(0).GetText());
-                if (operand.resultTypeSpecifier is IntervalTypeSpecifier its)
+                return startOrEnd switch
                 {
-                    var pointType = PointType(its);
-                    if (kw[0] == CqlKeyword.Start)
-                    {
-
-                        var start = new Start
-                        {
-                            resultTypeSpecifier = pointType,
-                            localId = NextId(),
-                            locator = context.Locator(),
-                            operand = operand,
-                        };
-                        if (start.resultTypeSpecifier is NamedTypeSpecifier nts)
-                            start.resultTypeName = nts.name;
-                        return start;
-                    }
-                    else if (kw[0] == CqlKeyword.End)
-                    {
-                        var end = new End
-                        {
-                            resultTypeSpecifier = pointType,
-                            localId = NextId(),
-                            locator = context.Locator(),
-                            operand = operand,
-                        };
-                        if (end.resultTypeSpecifier is NamedTypeSpecifier nts)
-                            end.resultTypeName = nts.name;
-                        return end;
-                    }
-                    throw UnresolvedSignature("Start", operand);
-
-                }
+                    CqlKeyword.Start => SystemLibrary.Start.Build(ModelProvider, operand)
+                             .WithLocator(context),
+                    CqlKeyword.End => SystemLibrary.End.Build(ModelProvider, operand)
+                            .WithLocator(context),
+                    _ => throw UnresolvedSignature("Start", operand)
+                };
             }
-            throw UnresolvedSignature("Start");
+            else
+                throw UnresolvedSignature("Start", operand);
         }
-
 
         //     | ('minimum' | 'maximum') namedTypeSpecifier                                    #typeExtentExpressionTerm
         public override Expression VisitTypeExtentExpressionTerm([NotNull] cqlParser.TypeExtentExpressionTermContext context)
         {
-            var extent = context.GetChild(0).GetText().ToLower();
-            var dataType = context.GetChild(1).GetText();
-            var (typeName, _) = LibraryContext.ResolveDottedTypeName(dataType);
+            var extent = Keyword.Parse(context.GetChild(0)).Single();
+            var typeSpecifier = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
-            if (extent == "minimum")
+            if (typeSpecifier.IsValidOrderedType())
             {
-                var min = new MinValue
+                return extent switch
                 {
-                    valueType = typeName
-                }.WithLocator(context).WithResultType(typeName);
-
-                return min;
-            }
-            else if (extent == "maximum")
-            {
-                var max = new MaxValue
-                {
-                    valueType = typeName
-                }.WithResultType(typeName).WithLocator(context);
-                return max;
+                    CqlKeyword.Minimum => SystemLibrary.MinValue(typeSpecifier).WithLocator(context),
+                    CqlKeyword.Maximum => SystemLibrary.MaxValue(typeSpecifier).WithLocator(context),
+                    _ => throw Critical($"Unexpected extent: {extent}")
+                };
             }
             else
-            {
-                throw Critical($"Unexpected extent: {extent}");
-            }
+                throw UnresolvedSignature(extent.ToString(), new Null().WithResultType(typeSpecifier));
         }
 
+        //     | 'width' expressionTerm                                                          #widthExpressionTerm
         public override Expression VisitWidthExpressionTerm([NotNull] cqlParser.WidthExpressionTermContext context)
         {
-            var operand = Visit(context.GetChild(2));
-            if (operand.resultTypeSpecifier is IntervalTypeSpecifier its)
+            var operand = Visit(context.expressionTerm());
+
+            return operand.resultTypeSpecifier switch
             {
-                var pointType = its.pointType;
-                XmlQualifiedName? typeName;
-                if (pointType is NamedTypeSpecifier nts)
-                    typeName = nts.name;
-                else typeName = null;
-                var width = new Width
-                {
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    operand = operand,
-                    resultTypeName = typeName,
-                    resultTypeSpecifier = pointType
-                };
-                return width;
-            }
-            else
-            {
-                UnresolvedSignature("Width", operand);
-                return base.VisitWidthExpressionTerm(context);
-            }
+                IntervalTypeSpecifier => SystemLibrary.Width.Build(ModelProvider, operand)
+                    .WithLocator(context),
+                _ => throw UnresolvedSignature("Width", operand)
+            };
         }
     }
 }

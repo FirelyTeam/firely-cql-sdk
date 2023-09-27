@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Elm;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -55,14 +56,22 @@ namespace Hl7.Cql.CqlToElm
                 }
             }
 
-            // Nulls get promoted to any type necessary
+            // Nulls get promoted to any type necessary. If the target type has unbound
+            // generic parameters, we will default those to System.Any.
             if (fromExpr is Null n)
             {
+                var unbound = to.GetGenericParameters().ToList();
+                if (unbound.Any())
+                {
+                    foreach (var u in unbound)
+                        GenericAssignments.Add(u, SystemTypes.AnyType);
+                    to = to.ReplaceGenericParameters(GenericAssignments);
+                }
                 result = SystemLibrary.As(n, to);
                 return true;
             }
 
-            // Casting a list of X to a list of Y
+            // Casting a List<X> to a List<Y>
             if (from is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
                 var prototypeInstance = new Null { resultTypeSpecifier = fromList.elementType };
@@ -81,6 +90,27 @@ namespace Hl7.Cql.CqlToElm
                     return false;
                 }
             }
+
+            // Casting a List<X> to a List<Y>
+            if (from is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
+            {
+                var prototypeInstance = new Null { resultTypeSpecifier = fromInterval.pointType };
+                var elementCastSuccess = TryBuildCast(prototypeInstance, toInterval.pointType, out var elementCast);
+
+                // For now, we assume that we have no co- or contravariance, so only the "identity" cast is allowed
+                // (note that this may mean we have assigned a type to a generic type parameter.)
+                if (elementCastSuccess && elementCast == prototypeInstance)
+                {
+                    result = fromExpr;
+                    return true;
+                }
+                else
+                {
+                    result = default;
+                    return false;
+                }
+            }
+
 
             // TODO: choice
 
@@ -105,7 +135,21 @@ namespace Hl7.Cql.CqlToElm
 
             // TODO: interval demotion
 
-            // TODO: interval promotion
+            // List promotion
+            if (from is not ListTypeSpecifier && to is ListTypeSpecifier)
+            {
+                try
+                {
+                    var nested = SystemLibrary.ToList.Build(Provider, fromExpr);
+                    return TryBuildCast(nested, to, out result);
+                }
+                catch
+                {
+                    result = default;
+                    return false;
+                }
+            }
+
 
             // No cast found
             result = fromExpr;

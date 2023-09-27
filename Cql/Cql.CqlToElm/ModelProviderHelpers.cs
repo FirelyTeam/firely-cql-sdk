@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Model;
-using System;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -42,19 +41,6 @@ namespace Hl7.Cql.CqlToElm
         }
 
         /// <summary>
-        /// Gets the <see cref="TypeInfo"/> named <paramref name="qualifiedName"/>.
-        /// </summary>
-        /// <param name="provider">The <see cref="IModelProvider"/> supplfying the models.</param>
-        /// <param name="qualifiedName">The qname of the type, which includes the model uri.</param>
-        /// <returns>The <see cref="TypeInfo"/> for this named type if it exists; otherwise, <see langword="null"/></returns>
-        public static TypeInfo? TypeInfoFor(this IModelProvider provider, XmlQualifiedName qualifiedName)
-        {
-            var model = provider.ModelFromQualifiedTypeName(qualifiedName) ?? throw new ArgumentException($"Unknown model {GetModelUriFromQualifiedName(qualifiedName)}.");
-            return model.TypeInfoFor(qualifiedName.Name);
-        }
-
-
-        /// <summary>
         /// Gets the model uri for the type specified by <paramref name="qName"/>.
         /// </summary>
         /// <param name="qName">The qualified type name in the form {uri}type</param>
@@ -77,13 +63,6 @@ namespace Hl7.Cql.CqlToElm
 
         //}
 
-        /// <summary>
-        /// Qualifies <paramref name="typeName"/> with the namespace in <paramref name="model"/>.
-        /// </summary>
-        /// <param name="model">The model containing <paramref name="typeName"/>.</param>
-        /// <param name="typeName">The name to qualify.</param>
-        /// <returns>A string in the form {<see cref="ModelInfo.url"/>}<paramref name="typeName"/></returns>
-        public static XmlQualifiedName ToQualifiedTypeName(this ModelInfo model, string typeName) => new($"{{{model.url}}}{typeName}");
 
 
         /// <summary>

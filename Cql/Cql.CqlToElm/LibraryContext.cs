@@ -1,5 +1,6 @@
 ﻿using Antlr4.Runtime;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -100,6 +101,7 @@ namespace Hl7.Cql.CqlToElm
             var usings = parts.Length == 2 ?
                 ActiveLibrary.usings.Where(u => u.localIdentifier == parts[0]) :
                 ActiveLibrary.usings;
+
             var name = parts.Length == 2 ? parts[1] : parts[0];
 
             foreach (var @using in usings)

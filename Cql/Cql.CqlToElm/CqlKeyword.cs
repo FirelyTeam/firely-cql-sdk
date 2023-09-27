@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hl7.Cql.CqlToElm
+﻿namespace Hl7.Cql.CqlToElm
 {
-    internal enum CqlKeyword        
+    internal enum CqlKeyword
     {
         Unknown,
         After,
@@ -22,9 +16,12 @@ namespace Hl7.Cql.CqlToElm
         In,
         Included,
         Includes,
+        Is,
         Meets,
+        Maximum,
         Millisecond,
         Milliseconds,
+        Minimum,
         Minute,
         Minutes,
         Month,
@@ -42,6 +39,9 @@ namespace Hl7.Cql.CqlToElm
         Within,
         Year,
         Years,
-
+        Not,
+        Null,
+        True,
+        False,
     }
 }

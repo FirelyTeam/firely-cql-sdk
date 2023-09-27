@@ -2,6 +2,7 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -17,10 +18,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             public string UnqualifiedName { get; set; }
 
-            public override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
-            {
-                throw new NotImplementedException();
-            }
+            internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
+
+            internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => Enumerable.Empty<ParameterTypeSpecifier>();
         }
 
         public TypeSpecifierVisitor(

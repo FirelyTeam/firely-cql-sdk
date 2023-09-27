@@ -1,7 +1,7 @@
-﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Xml;
 
@@ -40,12 +40,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private XmlQualifiedName RatioTypeQName => SystemTypes.RatioTypeQName;
 
         private readonly SystemLibrary System;
-
-        private bool IsValidIntervalPointType(XmlQualifiedName typeName)
-        {
-            var typeSpec = typeName.ToNamedType();
-            return SystemTypes.ValidIntervalPointTypes.Any(t => t == typeSpec);
-        }
 
         private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
             throw Critical($"Could not resolve call to operator {@operator} with signature " +
@@ -106,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifier? resultTypeSpecifier = null;
             if (low.resultTypeSpecifier == high.resultTypeSpecifier)
             {
-                if (IsValidIntervalPointType(low.resultTypeName))
+                if (low.resultTypeSpecifier.IsValidOrderedType())
                 {
                     if (low is Quantity lowQuantity && high is Quantity highQuantity
                         && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))

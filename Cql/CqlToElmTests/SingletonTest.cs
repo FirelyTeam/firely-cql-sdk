@@ -1,12 +1,9 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -143,7 +140,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(singletonFrom.operand, typeof(List));
                 var list = (List)singletonFrom.operand;
                 AssertListType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
-                AssertList(list, new int?[] { 1,2,3 });
+                AssertList(list, new int?[] { 1, 2, 3 });
 
                 var lambda = ExpressionBuilder.Lambda(singletonFrom);
                 var dg = lambda.Compile();
@@ -152,5 +149,21 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void Singleton_From_Integer_With_List_Promotion()
+        {
+            var library = DefaultConverter.ConvertLibrary(@"
+                library SingletonTest version '1.0.0'
+
+                define private Singleton_From_Integer_With_List_Promotion: singleton from 1
+            ");
+
+            var singletonFrom = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SingletonFrom>();
+            var toList = singletonFrom.operand.Should().BeOfType<ToList>().Subject;
+            toList.operand.Should().BeLiteralInteger(1);
+
+            AssertResult(singletonFrom, 1);
+        }
     }
 }
+

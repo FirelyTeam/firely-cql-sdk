@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.CqlToElm.Grammar;
+﻿using Antlr4.Runtime.Tree;
+using Hl7.Cql.CqlToElm.Grammar;
 using System;
 using System.Linq;
 
@@ -12,6 +13,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return Parse(text);
         }
 
+        public static CqlKeyword[] Parse(IParseTree tree) => Parse(tree.GetText());
+
         public static CqlKeyword[] Parse(string text)
         {
             var parts = text.Split(' ');
@@ -20,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     if (Enum.TryParse<CqlKeyword>(part, true, out var keyword))
                         return keyword;
-                    else throw new NotImplementedException($"Keyword {part} is not understood");
+                    else throw new NotImplementedException($"Keyword '{part}' is not understood");
                 })
                 .ToArray();
             return keywords;
