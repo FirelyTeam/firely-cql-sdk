@@ -210,10 +210,10 @@ namespace Hl7.Cql.Packaging
                     int prefixLength = "{http://hl7.org/fhir}".Length;
                     var remainder = name.Substring(prefixLength);
                     var split = remainder.Split('.');
-                    if (Enum.TryParse<FHIRAllTypes>(split[0], true, out var fhirType))
-                        return TypeEntryFor(fhirType);
-                    else
-                        return null;
+                    if (ModelInfo.FhirTypeNameToFhirType(split[0]) is FHIRAllTypes primitiveType)
+                        return TypeEntryFor(primitiveType);
+
+                    return null;
                 }
                 else
                     return null;
