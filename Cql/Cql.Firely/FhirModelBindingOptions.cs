@@ -23,7 +23,7 @@ namespace Hl7.Cql.Fhir
         /// <summary>
         /// Defines the behavior when checking if a code exists in a collection of codes.
         /// </summary>
-        public CodeInOperatorSemantics CodeInOperatorType { get; init; } = CodeInOperatorSemantics.Equals;
+        public CodeInOperatorSemantics CodeInOperatorType { get; init; } = CodeInOperatorSemantics.Equivalent;
 
         /// <summary>
         /// Enum to house the options for checking if a <see cref="Code"/> exists in a list of <see cref="Code"/>
