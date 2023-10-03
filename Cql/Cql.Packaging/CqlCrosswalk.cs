@@ -200,7 +200,7 @@ namespace Hl7.Cql.Packaging
                 {
                     int prefixLength = "{urn:hl7-org:elm-types:r1}".Length;
                     var remainder = name.Substring(prefixLength);
-                    if (Enum.TryParse<CqlPrimitiveType>(remainder, out var primitiveType))
+                    if (Enum.TryParse<CqlPrimitiveType>(remainder, true, out var primitiveType))
                         return TypeEntryFor(primitiveType);
                     else
                         return null;
@@ -210,10 +210,10 @@ namespace Hl7.Cql.Packaging
                     int prefixLength = "{http://hl7.org/fhir}".Length;
                     var remainder = name.Substring(prefixLength);
                     var split = remainder.Split('.');
-                    if (Enum.TryParse<FHIRAllTypes>(split[0], out var fhirType))
-                        return TypeEntryFor(fhirType);
-                    else
-                        return null;
+                    if (ModelInfo.FhirTypeNameToFhirType(split[0]) is FHIRAllTypes primitiveType)
+                        return TypeEntryFor(primitiveType);
+
+                    return null;
                 }
                 else
                     return null;
