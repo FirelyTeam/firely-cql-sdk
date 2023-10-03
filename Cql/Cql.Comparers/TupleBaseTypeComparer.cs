@@ -46,7 +46,11 @@ namespace Hl7.Cql.Comparers
                 var compare = MemberComparer.Compare(prop.XValue, prop.YValue, precision);
                 if (compare == null)
                     return null;
-                result += compare.Value;
+                if (compare.Value != 0)
+                {
+                    result += compare.Value;
+                    break;
+                }
             }
             return result;
         }
