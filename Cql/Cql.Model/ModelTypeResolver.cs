@@ -28,7 +28,7 @@ namespace Hl7.Cql.Model
 
         public ModelInfo Model { get; }
 
-        internal override Type? PatientType => patientType.Value;
+        public override Type? PatientType => patientType.Value;
         private readonly Lazy<Type?> patientType;
         private Type? GetPatientType()
         {
@@ -54,7 +54,7 @@ namespace Hl7.Cql.Model
         private readonly IDictionary<string, ClassInfo> ClassInfo = new Dictionary<string, ClassInfo>();
         private readonly IDictionary<string, PropertyInfo?> Properties = new Dictionary<string, PropertyInfo?>();
 
-        internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
+        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
             PropertyInfo? propertyInfo = null;
             if (Properties.TryGetValue(typeSpecifier, out propertyInfo))
@@ -74,7 +74,7 @@ namespace Hl7.Cql.Model
             }
         }
 
-        internal override PropertyInfo? PatientBirthDateProperty => patientBirthDate.Value;
+        public override PropertyInfo? PatientBirthDateProperty => patientBirthDate.Value;
         private readonly Lazy<PropertyInfo?> patientBirthDate;
         private PropertyInfo? GetPatientBirthdate()
         {

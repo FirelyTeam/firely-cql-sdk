@@ -16,7 +16,7 @@ namespace Hl7.Cql.Conversion
     /// <summary>
     /// Converts CQL model types to .NET types, and vice versa.
     /// </summary>
-    public class TypeConverter
+    internal class TypeConverter
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> Converters
             = new();
@@ -32,7 +32,7 @@ namespace Hl7.Cql.Conversion
         /// <summary>
         /// Creates a TypeConverter with an empty set of conversions.
         /// </summary>
-        internal TypeConverter()
+        protected TypeConverter()
         {
         }
 
@@ -40,7 +40,7 @@ namespace Hl7.Cql.Conversion
         /// Provides utility for converting common .NET types that don't have implicit conversions defined, e.g. <see cref="string"/> and <see cref="Uri"/>.
         /// </summary>
         /// <returns>This instance.</returns>
-        internal TypeConverter ConvertNetTypes()
+        public TypeConverter ConvertNetTypes()
         {
             AddConversion<Uri, string>(uri => uri.AbsoluteUri);
             AddConversion<string, Uri>(@string => new Uri(@string));
@@ -52,7 +52,7 @@ namespace Hl7.Cql.Conversion
         /// Provides conversion between types in the <see cref="Hl7.Cql.Primitives"/> namespace to equivalent <see cref="Iso8601"/> types.
         /// </summary>
         /// <returns>This instance.</returns>
-        internal TypeConverter ConvertsIsoToCqlPrimitives()
+        public TypeConverter ConvertsIsoToCqlPrimitives()
         {
             AddConversion<DateIso8601, CqlDate>(isoDate => new CqlDate(isoDate));
             AddConversion<DateIso8601, CqlDateTime>(isoDate => new CqlDateTime(isoDate.Year, isoDate.Month, isoDate.Day, null, null, null, null, null, null));
@@ -73,7 +73,7 @@ namespace Hl7.Cql.Conversion
         /// <param name="to">The desired type.</param>
         /// <param name="conversion">The function which implements the conversion.</param>
         /// <exception cref="ArgumentException">If this conversion is already defined.</exception>
-        internal void AddConversion(Type from, Type to, Func<object, object> conversion)
+        public void AddConversion(Type from, Type to, Func<object, object> conversion)
         {
             if (!Converters.TryGetValue(from, out var toDictionary))
             {
@@ -92,7 +92,7 @@ namespace Hl7.Cql.Conversion
         /// <typeparam name="TTo">The desired type.</typeparam>
         /// <param name="conversion">The function which implements the conversion.</param>
         /// <exception cref="ArgumentException">If this conversion is already defined.</exception>
-        internal void AddConversion<TFrom, TTo>(Func<TFrom, TTo> conversion)
+        public void AddConversion<TFrom, TTo>(Func<TFrom, TTo> conversion)
         {
             if (!Converters.TryGetValue(typeof(TFrom), out var toDictionary))
             {
@@ -112,7 +112,7 @@ namespace Hl7.Cql.Conversion
         /// <typeparam name="TTo">The desired type.</typeparam>
         /// <param name="conversion">The function which implements the conversion.</param>
         /// <returns> <see langword="true"/> if this conversion was not previously defined; otherwise, <see langword="false"/></returns>
-        internal bool TryAddConversion<TFrom, TTo>(Func<TFrom, TTo> conversion)
+        public bool TryAddConversion<TFrom, TTo>(Func<TFrom, TTo> conversion)
         {
             if (!Converters.TryGetValue(typeof(TFrom), out var toDictionary))
             {
@@ -135,10 +135,10 @@ namespace Hl7.Cql.Conversion
         /// <typeparam name="T">The desired type.</typeparam>
         /// <param name="from">The object to convert.</param>
         /// <returns>The result of the conversion.</returns>
-        internal T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
+        public T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
 
         /// <inheritdoc cref="Convert{T}(object?)"/>
-        internal object? ConvertHelper(object? from, Type to)
+        public object? ConvertHelper(object? from, Type to)
         {
             if (from == null)
                 return null;
@@ -155,12 +155,14 @@ namespace Hl7.Cql.Conversion
         /// <param name="from">The source type.</param>
         /// <param name="to">The desired type.</param>
         /// <returns><see langword="true"/> if this converter is able to convert <paramref name="from"/> to <paramref name="to"/>.</returns>
-        internal bool CanConvert(Type from, Type to)
+        public bool CanConvert(Type from, Type to)
         {
             if (Converters.TryGetValue(from, out var toDictionary))
                 if (toDictionary.TryGetValue(to, out Func<object, object>? existing))
                     return true;
             return false;
         }
+
+
     }
 }

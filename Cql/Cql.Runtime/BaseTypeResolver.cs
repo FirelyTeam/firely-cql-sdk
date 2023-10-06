@@ -18,7 +18,7 @@ namespace Hl7.Cql.Runtime
     /// <summary>
     /// Provides default resolution of CQL System types to .NET types.
     /// </summary>
-    public abstract class BaseTypeResolver : TypeResolver
+    internal abstract class BaseTypeResolver : TypeResolver
     {
         /// <summary>
         /// Mapping from CQL typerefs to .NET types.
@@ -43,61 +43,61 @@ namespace Hl7.Cql.Runtime
         };
 
         /// <inheritdoc/>
-        internal override Type AnyType => Types["{urn:hl7-org:elm-types:r1}Any"];
+        public override Type AnyType => Types["{urn:hl7-org:elm-types:r1}Any"];
 
         /// <inheritdoc/>
-        internal override Type BooleanType => Types["{urn:hl7-org:elm-types:r1}Boolean"];
+        public override Type BooleanType => Types["{urn:hl7-org:elm-types:r1}Boolean"];
 
         /// <inheritdoc/>
-        internal override Type CodeType => Types["{urn:hl7-org:elm-types:r1}Code"];
+        public override Type CodeType => Types["{urn:hl7-org:elm-types:r1}Code"];
 
         /// <inheritdoc/>
-        internal override Type CodeSystemType => Types["{urn:hl7-org:elm-types:r1}CodeSystem"];
+        public override Type CodeSystemType => Types["{urn:hl7-org:elm-types:r1}CodeSystem"];
 
         /// <inheritdoc/>
-        internal override Type ConceptType => Types["{urn:hl7-org:elm-types:r1}Concept"];
+        public override Type ConceptType => Types["{urn:hl7-org:elm-types:r1}Concept"];
 
         /// <inheritdoc/>
-        internal override Type DateType => Types["{urn:hl7-org:elm-types:r1}Date"];
+        public override Type DateType => Types["{urn:hl7-org:elm-types:r1}Date"];
 
         /// <inheritdoc/>
-        internal override Type DateTimeType => Types["{urn:hl7-org:elm-types:r1}DateTime"];
+        public override Type DateTimeType => Types["{urn:hl7-org:elm-types:r1}DateTime"];
 
         /// <inheritdoc/>
-        internal override Type DecimalType => Types["{urn:hl7-org:elm-types:r1}Decimal"];
+        public override Type DecimalType => Types["{urn:hl7-org:elm-types:r1}Decimal"];
 
         /// <inheritdoc/>
-        internal override Type LongType => Types["{urn:hl7-org:elm-types:r1}Long"];
+        public override Type LongType => Types["{urn:hl7-org:elm-types:r1}Long"];
 
         /// <inheritdoc/>
-        internal override Type IntegerType => Types["{urn:hl7-org:elm-types:r1}Integer"];
+        public override Type IntegerType => Types["{urn:hl7-org:elm-types:r1}Integer"];
 
         /// <inheritdoc/>
-        internal override Type IntervalType(Type pointType) =>
+        public override Type IntervalType(Type pointType) =>
             pointType is not null
             ? typeof(CqlInterval<>).MakeGenericType(pointType)
             : throw new ArgumentNullException(nameof(pointType));
 
         /// <inheritdoc/>
-        internal override Type QuantityType => Types["{urn:hl7-org:elm-types:r1}Quantity"];
+        public override Type QuantityType => Types["{urn:hl7-org:elm-types:r1}Quantity"];
 
         /// <inheritdoc/>
-        internal override Type RatioType => Types["{urn:hl7-org:elm-types:r1}Ratio"];
+        public override Type RatioType => Types["{urn:hl7-org:elm-types:r1}Ratio"];
 
         /// <inheritdoc/>
-        internal override Type StringType => Types["{urn:hl7-org:elm-types:r1}String"];
+        public override Type StringType => Types["{urn:hl7-org:elm-types:r1}String"];
 
         /// <inheritdoc/>
-        internal override Type TimeType => Types["{urn:hl7-org:elm-types:r1}Time"];
+        public override Type TimeType => Types["{urn:hl7-org:elm-types:r1}Time"];
 
         /// <inheritdoc/>
-        internal override Type ValueSetType => Types["{urn:hl7-org:elm-types:r1}ValueSet"];
+        public override Type ValueSetType => Types["{urn:hl7-org:elm-types:r1}ValueSet"];
 
         /// <inheritdoc/>
-        internal override Type VocabularyType => Types["{urn:hl7-org:elm-types:r1}Vocabulary"];
+        public override Type VocabularyType => Types["{urn:hl7-org:elm-types:r1}Vocabulary"];
 
         /// <inheritdoc/>
-        internal sealed override PropertyInfo? GetProperty(Type type, string propertyName)
+        public sealed override PropertyInfo? GetProperty(Type type, string propertyName)
         {
             if (typeof(TupleBaseType).IsAssignableFrom(type))
             {

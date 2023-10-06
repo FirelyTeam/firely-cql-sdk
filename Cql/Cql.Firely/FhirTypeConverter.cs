@@ -18,10 +18,8 @@ using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
 {
-    public static class FhirTypeConverter
+    internal static class FhirTypeConverter
     {
-        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
-
         public static TypeConverter Create(ModelInspector model) =>
             TypeConverter
                 .Create()
@@ -30,7 +28,10 @@ namespace Hl7.Cql.Fhir
                 .ConvertCqlPrimitivesToFhir()
                 .ConvertCodeTypes(model);
 
-        internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
+        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
+
+
+        public static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
             HashSet<Type> toTypes = new();
 
@@ -73,7 +74,7 @@ namespace Hl7.Cql.Fhir
             }
         }
 
-        internal static TypeConverter ConvertCqlPrimitivesToFhir(this TypeConverter converter)
+        public static TypeConverter ConvertCqlPrimitivesToFhir(this TypeConverter converter)
         {
             converter.AddConversion((CqlDate f) => new M.Date(f.ToString()));
             converter.AddConversion((CqlDateTime f) => new M.FhirDateTime(f.ToString()));
@@ -180,7 +181,7 @@ namespace Hl7.Cql.Fhir
         }
 
 
-        internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
+        public static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
             converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
@@ -220,7 +221,7 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
-        internal static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
+        public static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
         {
             var enumTypes = model.EnumMappings
                 .Select(map => map.NativeType)

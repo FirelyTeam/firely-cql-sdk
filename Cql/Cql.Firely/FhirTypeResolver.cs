@@ -15,11 +15,12 @@ using System.Reflection;
 
 namespace Hl7.Cql.Fhir
 {
-    public class FhirTypeResolver : BaseTypeResolver
+
+    internal class FhirTypeResolver : BaseTypeResolver
     {
         public static readonly FhirTypeResolver Default = new FhirTypeResolver(ModelInfo.ModelInspector);
 
-        internal FhirTypeResolver(ModelInspector inspector)
+        public FhirTypeResolver(ModelInspector inspector)
         {
             Inspector = inspector;
 
@@ -28,19 +29,10 @@ namespace Hl7.Cql.Fhir
             adjust();
         }
 
-        public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
-        {
-            if (genericInterfaceTypeDefinition == typeof(IEnumerable<>)
-                && type.GetCustomAttribute<FhirTypeAttribute>() != null)
-                return false;
-            return base.ImplementsGenericInterface(type, genericInterfaceTypeDefinition);
-        }
+        public override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
+        public override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
 
-
-        internal override IEnumerable<Assembly> ModelAssemblies => Inspector.ClassMappings.Select(cm => cm.NativeType.Assembly).Distinct();
-        internal override IEnumerable<string> ModelNamespaces => new[] { "Hl7.Fhir.Model" };
-
-        internal override IEnumerable<(string alias, string type)> Aliases => base.Aliases
+        public override IEnumerable<(string alias, string type)> Aliases => base.Aliases
             .Concat(new[]
             {
                 ("Range", typeof(Hl7.Fhir.Model.Range).FullName!),
@@ -84,7 +76,7 @@ namespace Hl7.Cql.Fhir
             return result;
         }
 
-        internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
+        public override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
         {
             // This is not used by the data source, but we'll implement it nonetheless.
             var specifiedType = ResolveType(typeSpecifier);
@@ -96,11 +88,19 @@ namespace Hl7.Cql.Fhir
             return codeProperty;
         }
 
-        internal override Type? PatientType => Inspector.PatientMapping?.NativeType;
+        public override Type? PatientType => Inspector.PatientMapping?.NativeType;
 
-        internal override PropertyInfo? PatientBirthDateProperty => typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
+        public override PropertyInfo? PatientBirthDateProperty => typeof(IPatient).GetProperty(nameof(IPatient.BirthDate));
 
-        internal ModelInspector Inspector { get; }
+        public override bool ImplementsGenericInterface(Type type, Type genericInterfaceTypeDefinition)
+        {
+            if (genericInterfaceTypeDefinition == typeof(IEnumerable<>)
+                && type.GetCustomAttribute<FhirTypeAttribute>() != null)
+                return false;
+            return base.ImplementsGenericInterface(type, genericInterfaceTypeDefinition);
+        }
+
+        public ModelInspector Inspector { get; }
 
         internal IDictionary<Type, string> TypeSpecifiers { get; } = new Dictionary<Type, string>();
 
