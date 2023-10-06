@@ -3450,6 +3450,30 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void Collapse_Properly_Included()
+        {
+            var rtx = GetNewContext();
+
+            var expected = new[] {
+                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 20), new CqlDate(2023, 1, 28),true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2023, 2, 18), new CqlDate(2023, 2, 28),true, true),
+            };
+
+            var intervals = new[]
+            {
+                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 20), new CqlDate(2023, 1, 28), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2023, 1, 22), new CqlDate(2023, 1, 25), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2023, 2, 20), new CqlDate(2023, 2, 25), true, true),
+                new CqlInterval<CqlDate>(new CqlDate(2023, 2, 18), new CqlDate(2023, 2, 28), true, true)
+            };
+
+            var collapsed = rtx.Operators.Collapse(intervals, null).ToArray();
+            var result = rtx.Operators.Comparer.Compare(expected!, collapsed!, null);
+            if (result != 0)
+                throw new AssertFailedException($"Expected {expected}; actual {collapsed}");
+        }
+
+        [TestMethod]
         public void Collapse_Containing_Null()
         {
             var rtx = GetNewContext();
