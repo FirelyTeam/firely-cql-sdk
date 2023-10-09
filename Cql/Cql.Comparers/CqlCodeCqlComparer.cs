@@ -83,7 +83,7 @@ namespace Hl7.Cql.Comparers
                 var cc = CodeComparer.Compare(x.code, y.code);
                 if (cc == 0)
                 {
-                    if (x.system == null || y.system == null)
+                    if ((x.system == null) ^ (y.system == null))
                         return false;
                     var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
                     return sc == 0;
