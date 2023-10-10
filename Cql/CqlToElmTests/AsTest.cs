@@ -1,19 +1,24 @@
-﻿using Hl7.Cql.Compiler;
+﻿using FluentAssertions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
     public class AsTest : Base
     {
+        private Library createLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        {
+            return DefaultConverter.ConvertLibrary($@"
+                library AsTest version '1.0.0'
+
+                define private ""{memberName}"": {expression}");
+        }
+
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize();
@@ -106,6 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsInstanceOfType(@as.operand, typeof(Literal));
             var operand = (Literal)@as.operand;
             Assert.AreEqual(literalTypeName, operand.resultTypeName?.Name);
+            @as.strict.Should().BeFalse();
 
             Assert.IsInstanceOfType(@as.asTypeSpecifier, typeof(NamedTypeSpecifier));
             var nts = (NamedTypeSpecifier)@as.asTypeSpecifier;
@@ -113,16 +119,6 @@ namespace Hl7.Cql.CqlToElm.Test
             return @as;
         }
 
-        private void AssertAs<T>(As @as, T expected)
-        {
-            var lambda = ExpressionBuilder.Lambda(@as);
-            var dg = lambda.Compile();
-            var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke(ctx);
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(T));
-            Assert.AreEqual(expected, result);
-        }
         private void AssertAsNull(As @as)
         {
             var lambda = ExpressionBuilder.Lambda(@as);
@@ -130,6 +126,28 @@ namespace Hl7.Cql.CqlToElm.Test
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
             Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void DecimalLiteral_CastAs_Decimal()
+        {
+            var library = createLibraryForExpression("cast (1.0 as System.Any) as System.Decimal");
+            var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
+
+            castAs.strict.Should().BeTrue();
+            castAs.asTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            AssertResult(castAs, 1.0m);
+        }
+
+        [TestMethod]
+        public void BooleanLiteral_CastAs_Decimal()
+        {
+            var library = createLibraryForExpression("cast (true as System.Any) as System.Decimal");
+            var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
+
+            castAs.strict.Should().BeTrue();
+            castAs.asTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            Assert.ThrowsException<InvalidCastException>(() => AssertResult(castAs, 1.0m));
         }
     }
 }

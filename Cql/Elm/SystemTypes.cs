@@ -43,6 +43,8 @@ namespace Hl7.Cql.Elm
 
         private static readonly ConcurrentDictionary<string, ParameterTypeSpecifier> gtpTsSingletons = new();
 
+        internal static readonly ParameterTypeSpecifier T = Generic("T");
+
         internal static ParameterTypeSpecifier Generic(string name) =>
             gtpTsSingletons.GetOrAdd(name, n => new ParameterTypeSpecifier { parameterName = n });
 

@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 throw UnresolvedSignature("Start", operand);
         }
 
-        //     | ('minimum' | 'maximum') namedTypeSpecifier                                    #typeExtentExpressionTerm
+        //    ('minimum' | 'maximum') namedTypeSpecifier                                    #typeExtentExpressionTerm
         public override Expression VisitTypeExtentExpressionTerm([NotNull] cqlParser.TypeExtentExpressionTermContext context)
         {
             var extent = Keyword.Parse(context.GetChild(0)).Single();
@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 throw UnresolvedSignature(extent.ToString(), new Null().WithResultType(typeSpecifier));
         }
 
-        //     | 'width' expressionTerm                                                          #widthExpressionTerm
+        //   'width' expressionTerm                                                          #widthExpressionTerm
         public override Expression VisitWidthExpressionTerm([NotNull] cqlParser.WidthExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
@@ -146,6 +146,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithLocator(context),
                 _ => throw UnresolvedSignature("Width", operand)
             };
+        }
+
+        //   expression ('is' | 'as') typeSpecifier  
+        public override Expression VisitTypeExpression([NotNull] cqlParser.TypeExpressionContext context)
+        {
+            var lhs = Visit(context.expression());
+            var @operator = Keyword.Parse(context.GetChild(1)).Single();
+            var typeSpec = TypeSpecifierVisitor.Visit(context.typeSpecifier());
+
+            Expression? expression = @operator switch
+            {
+                CqlKeyword.Is => SystemLibrary.Is.Create(typeSpec, lhs).WithLocator(context),
+                CqlKeyword.As => SystemLibrary.As.Create(typeSpec, lhs).WithLocator(context),
+                _ => throw Critical($"Unexpected operator {@operator}")
+            };
+
+            return expression;
+        }
+
+        // 'cast' expression 'as' typeSpecifier                                                          #castExpression
+        public override Expression VisitCastExpression([NotNull] cqlParser.CastExpressionContext context)
+        {
+            var operand = Visit(context.expression());
+            var typeSpecifier = TypeSpecifierVisitor.Visit(context.typeSpecifier());
+
+            return SystemLibrary.Cast.Create(typeSpecifier, operand).WithLocator(context);
         }
     }
 }
