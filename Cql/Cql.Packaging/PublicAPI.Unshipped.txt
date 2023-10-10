@@ -1,6 +1,21 @@
 ﻿#nullable enable
 Hl7.Cql.Packaging.AssemblyLoadContextExtensions
+Hl7.Cql.Packaging.CqlCrosswalk
+Hl7.Cql.Packaging.CqlCrosswalk.CqlCrosswalk(Hl7.Cql.Abstractions.TypeResolver! typeResolver) -> void
+Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Cql.Elm.Element! element) -> Hl7.Cql.Packaging.TypeEntry?
+Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Cql.Elm.TypeSpecifier? resultTypeSpecifier) -> Hl7.Cql.Packaging.TypeEntry?
+Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Cql.Primitives.CqlPrimitiveType cqlType, Hl7.Cql.Packaging.TypeEntry? elementType = null) -> Hl7.Cql.Packaging.TypeEntry?
+Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.TypeEntry?
+Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.TypeEntry?
 Hl7.Cql.Packaging.LibraryPackager
+Hl7.Cql.Packaging.TypeEntry
+Hl7.Cql.Packaging.TypeEntry.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
+Hl7.Cql.Packaging.TypeEntry.CqlType.set -> void
+Hl7.Cql.Packaging.TypeEntry.ElementType.get -> Hl7.Cql.Packaging.TypeEntry?
+Hl7.Cql.Packaging.TypeEntry.ElementType.set -> void
+Hl7.Cql.Packaging.TypeEntry.FhirType.get -> Hl7.Fhir.Model.FHIRAllTypes?
+Hl7.Cql.Packaging.TypeEntry.FhirType.set -> void
+Hl7.Cql.Packaging.TypeEntry.TypeEntry(Hl7.Fhir.Model.FHIRAllTypes fhirType, Hl7.Cql.Primitives.CqlPrimitiveType cqlType, Hl7.Cql.Packaging.TypeEntry? elementType = null) -> void
 static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! ctx) -> System.Collections.Generic.IDictionary<string!, object?>!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.LogLevel logLevel = Microsoft.Extensions.Logging.LogLevel.Error) -> System.Runtime.Loader.AssemblyLoadContext!

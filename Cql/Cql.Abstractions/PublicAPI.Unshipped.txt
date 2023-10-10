@@ -1,4 +1,7 @@
 ﻿#nullable enable
+abstract Hl7.Cql.Abstractions.TypeResolver.GetListElementType(System.Type! type, bool throw = false) -> System.Type?
+abstract Hl7.Cql.Abstractions.TypeResolver.ImplementsGenericInterface(System.Type! type, System.Type! genericInterfaceTypeDefinition) -> bool
+abstract Hl7.Cql.Abstractions.TypeResolver.ResolveType(string! typeSpecifier) -> System.Type?
 const Hl7.Cql.Abstractions.UCUMUnits.Centimeter = "cm" -> string!
 const Hl7.Cql.Abstractions.UCUMUnits.Day = "d" -> string!
 const Hl7.Cql.Abstractions.UCUMUnits.Default = "1" -> string!
@@ -44,6 +47,8 @@ Hl7.Cql.Abstractions.IEquivalenceComparer<T>
 Hl7.Cql.Abstractions.IEquivalenceComparer<T>.Equivalent(T x, T y, string? precision) -> bool
 Hl7.Cql.Abstractions.IEquivalentable<T>
 Hl7.Cql.Abstractions.IEquivalentable<T>.Equivalent(T? other, string? precision) -> bool
+Hl7.Cql.Abstractions.TypeResolver
+Hl7.Cql.Abstractions.TypeResolver.TypeResolver() -> void
 Hl7.Cql.Abstractions.UCUMUnits
 Hl7.Cql.Abstractions.Units
 static Hl7.Cql.Abstractions.UCUMUnits.FromDateTimePrecision(Hl7.Cql.Iso8601.DateTimePrecision dtp) -> string?

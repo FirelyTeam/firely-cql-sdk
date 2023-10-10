@@ -1,1 +1,3 @@
 ﻿#nullable enable
+Hl7.Cql.Conversion.TypeConverter
+static Hl7.Cql.Conversion.TypeConverter.Create() -> Hl7.Cql.Conversion.TypeConverter!
