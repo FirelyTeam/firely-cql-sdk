@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (context.localIdentifier() is { } localId)
                 usingDef.localIdentifier = localId.identifier().Parse();
 
-            return usingDef.WithLocator(context);
+            return usingDef.WithLocator(context.Locator());
         }
 
         //  : accessModifier? 'valueset' identifier ':' valuesetId ('version' versionSpecifier)? codesystems?
@@ -96,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 version = context.versionSpecifier()?.STRING().ParseString(),
                 codeSystem = context.codesystems()?.codesystemIdentifier().Select(csi =>
                     csi.Parse()).ToArray(),
-            }.WithLocator(context);
+            }.WithLocator(context.Locator());
 
             return valueSetDef;
         }
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 path = string.IsNullOrWhiteSpace(qualifiedId.qualifier) ? qualifiedId.id : $"{qualifiedId.qualifier}.{qualifiedId.id}",
                 localIdentifier = context.localIdentifier()?.identifier().Parse(),
                 version = context.versionSpecifier()?.STRING().ParseString(),
-            }.WithLocator(context);
+            }.WithLocator(context.Locator());
 
             return includeDef;
         }
@@ -141,7 +141,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = context.identifier().Parse(),
                 code = context.codeIdentifier().Select(ci => ci.Parse()).ToArray(),
                 display = context.displayClause()?.STRING().ParseString(),
-            }.WithLocator(context);
+            }.WithLocator(context.Locator());
 
             return conceptDef;
         }
@@ -156,7 +156,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = context.identifier().Parse(),
                 id = context.codesystemId().STRING().ParseString(),
                 version = context.versionSpecifier()?.STRING().ParseString(),
-            }.WithLocator(context);
+            }.WithLocator(context.Locator());
 
             return codeSystemDef;
         }
@@ -169,7 +169,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 libraryName = context.libraryIdentifier()?.identifier().Parse(),
                 name = context.identifier().Parse(),
-            }.WithLocator(context);
+            }.WithLocator(context.Locator());
             return codeRef;
         }
 
@@ -183,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 id = context.codeId().STRING().ParseString(),
                 codeSystem = context.codesystemIdentifier().Parse(),
                 display = context.displayClause()?.STRING()?.ParseString(),
-            }.WithLocator(context);
+            }.WithLocator(context.Locator());
 
             return codeDef;
         }
@@ -197,7 +197,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 libraryName = context.libraryIdentifier()?.identifier().Parse(),
                 name = context.identifier().Parse(),
-            }.WithLocator(context);
+            }.WithLocator(context.Locator());
 
             return csRef;
         }

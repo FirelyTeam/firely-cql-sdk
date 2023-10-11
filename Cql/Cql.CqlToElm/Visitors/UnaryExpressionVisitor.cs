@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
@@ -15,18 +16,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var isNot = Keyword.Parse(context.children[^2]).Single() == CqlKeyword.Not;
             var operand = Visit(context.expression());
 
-            UnaryExpression unary = (lastChild switch
+            OperatorExpression boolean = lastChild switch
             {
-                CqlKeyword.Null => SystemLibrary.IsNull.Build(ModelProvider, operand),
-                CqlKeyword.True => SystemLibrary.IsTrue.Build(ModelProvider, operand),
-                CqlKeyword.False => SystemLibrary.IsFalse.Build(ModelProvider, operand),
+                CqlKeyword.Null => SystemLibrary.IsNull.Build(ModelProvider, context, operand),
+                CqlKeyword.True => SystemLibrary.IsTrue.Build(ModelProvider, context, operand),
+                CqlKeyword.False => SystemLibrary.IsFalse.Build(ModelProvider, context, operand),
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
-            }).WithLocator(context);
+            };
 
             if (isNot)
-                unary = SystemLibrary.Not.Build(ModelProvider, unary).WithLocator(context);
+                boolean = SystemLibrary.Not.Build(ModelProvider, context, boolean);
 
-            return unary;
+            return boolean;
         }
 
         //     | 'singleton' 'from' expressionTerm                                             #elementExtractorExpressionTerm
@@ -34,8 +35,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return SystemLibrary.SingletonFrom.Build(ModelProvider, operand)
-                .WithLocator(context);
+            return SystemLibrary.SingletonFrom.Build(ModelProvider, context, operand);
         }
 
         //     | 'exists' expression                                                                           #existenceExpression
@@ -43,7 +43,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
 
-            return SystemLibrary.Exists.Build(ModelProvider, operand).WithLocator(context);
+            return SystemLibrary.Exists.Build(ModelProvider, context, operand);
         }
 
         // | 'not' expression                                                                              #notExpression
@@ -51,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
 
-            return SystemLibrary.Not.Build(ModelProvider, operand).WithLocator(context);
+            return SystemLibrary.Not.Build(ModelProvider, context, operand);
         }
 
         //    | 'point' 'from' expressionTerm                                                 #pointExtractorExpressionTerm
@@ -61,8 +61,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return operand.resultTypeSpecifier switch
             {
-                IntervalTypeSpecifier => SystemLibrary.PointFrom.Build(ModelProvider, operand)
-                    .WithLocator(context),
+                IntervalTypeSpecifier => SystemLibrary.PointFrom.Build(ModelProvider, context, operand),
                 _ => throw UnresolvedSignature(nameof(PointFrom), operand)
             };
         }
@@ -74,8 +73,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (operand.resultTypeSpecifier.IsValidOrderedType())
             {
-                return SystemLibrary.Predecessor.Build(ModelProvider, operand)
-                    .WithLocator(context);
+                return SystemLibrary.Predecessor.Build(ModelProvider, context, operand);
             }
             else
                 throw UnresolvedSignature(nameof(Predecessor), operand);
@@ -88,8 +86,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (operand.resultTypeSpecifier.IsValidOrderedType())
             {
-                return SystemLibrary.Successor.Build(ModelProvider, operand)
-                    .WithLocator(context);
+                return SystemLibrary.Successor.Build(ModelProvider, context, operand);
             }
             else
                 throw UnresolvedSignature(nameof(Successor), operand);
@@ -105,10 +102,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 return startOrEnd switch
                 {
-                    CqlKeyword.Start => SystemLibrary.Start.Build(ModelProvider, operand)
-                             .WithLocator(context),
-                    CqlKeyword.End => SystemLibrary.End.Build(ModelProvider, operand)
-                            .WithLocator(context),
+                    CqlKeyword.Start => SystemLibrary.Start.Build(ModelProvider, context, operand),
+                    CqlKeyword.End => SystemLibrary.End.Build(ModelProvider, context, operand),
                     _ => throw UnresolvedSignature("Start", operand)
                 };
             }
@@ -126,8 +121,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 return extent switch
                 {
-                    CqlKeyword.Minimum => SystemLibrary.MinValue.Build(typeSpecifier).WithLocator(context),
-                    CqlKeyword.Maximum => SystemLibrary.MaxValue.Build(typeSpecifier).WithLocator(context),
+                    CqlKeyword.Minimum => SystemLibrary.MinValue.Build(typeSpecifier, context),
+                    CqlKeyword.Maximum => SystemLibrary.MaxValue.Build(typeSpecifier, context),
                     _ => throw Critical($"Unexpected extent: {extent}")
                 };
             }
@@ -142,8 +137,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return operand.resultTypeSpecifier switch
             {
-                IntervalTypeSpecifier => SystemLibrary.Width.Build(ModelProvider, operand)
-                    .WithLocator(context),
+                IntervalTypeSpecifier => SystemLibrary.Width.Build(ModelProvider, context, operand),
                 _ => throw UnresolvedSignature("Width", operand)
             };
         }
@@ -157,8 +151,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression? expression = @operator switch
             {
-                CqlKeyword.Is => SystemLibrary.Is.Create(typeSpec, lhs).WithLocator(context),
-                CqlKeyword.As => SystemLibrary.As.Create(typeSpec, lhs).WithLocator(context),
+                CqlKeyword.Is => SystemLibrary.Is.Build(typeSpec, lhs, context),
+                CqlKeyword.As => SystemLibrary.As.Build(false, typeSpec, lhs, context),
                 _ => throw Critical($"Unexpected operator {@operator}")
             };
 
@@ -171,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var operand = Visit(context.expression());
             var typeSpecifier = TypeSpecifierVisitor.Visit(context.typeSpecifier());
 
-            return SystemLibrary.Cast.Create(typeSpecifier, operand).WithLocator(context);
+            return SystemLibrary.As.Build(true, typeSpecifier, operand, context);
         }
     }
 }

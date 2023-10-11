@@ -274,7 +274,9 @@ Hl7.Cql.Elm.FunctionDef.FunctionDef() -> void
 Hl7.Cql.Elm.FunctionRef
 Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
 Hl7.Cql.Elm.GenericParameterAssignments
+Hl7.Cql.Elm.GenericParameterAssignments.AddRange(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Hl7.Cql.Elm.ParameterTypeSpecifier!, Hl7.Cql.Elm.TypeSpecifier!>>! items) -> void
 Hl7.Cql.Elm.GenericParameterAssignments.GenericParameterAssignments() -> void
+Hl7.Cql.Elm.GenericParameterAssignments.GenericParameterAssignments(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<Hl7.Cql.Elm.ParameterTypeSpecifier!, Hl7.Cql.Elm.TypeSpecifier!>>! collection) -> void
 Hl7.Cql.Elm.GeometricMean
 Hl7.Cql.Elm.GeometricMean.GeometricMean() -> void
 Hl7.Cql.Elm.Greater

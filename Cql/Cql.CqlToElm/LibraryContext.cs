@@ -40,7 +40,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.ValueSetTypeQName,
                     resultTypeSpecifier = SystemTypes.ValueSetType,
-                }.WithLocator(context);
+                }.WithLocator(context.Locator());
             }
             else if (library.concepts?.Any(c => c.name == identifier) ?? false)
             {
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.ConceptTypeQName,
                     resultTypeSpecifier = SystemTypes.ConceptType
-                }.WithLocator(context);
+                }.WithLocator(context.Locator());
             }
             else if (library.codeSystems?.Any(c => c.name == identifier) ?? false)
             {
@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.CodeSystemTypeQName,
                     resultTypeSpecifier = SystemTypes.CodeSystemType
-                }.WithLocator(context);
+                }.WithLocator(context.Locator());
             }
             else if (library.codes?.Any(c => c.name == identifier) ?? false)
             {
@@ -70,7 +70,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.CodeTypeQName,
                     resultTypeSpecifier = SystemTypes.CodeType
-                }.WithLocator(context);
+                }.WithLocator(context.Locator());
             }
             else
             {
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm
                         name = identifier,
                         resultTypeName = param[0].parameterType,
                         resultTypeSpecifier = param[0].parameterTypeSpecifier
-                    }.WithLocator(context);
+                    }.WithLocator(context.Locator());
                 }
             }
             return null;
