@@ -1,27 +1,37 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 namespace Hl7.Cql.Packaging
 {
+    /// <summary>
+    /// Defines the type mapping between Cql, ELM, and FHIR types
+    /// </summary>
     public class CqlCrosswalk
     {
         internal TypeResolver TypeResolver { get; private set; }
 
+        /// <summary>
+        /// Creates a new instance with the specified type resovler
+        /// </summary>
+        /// <param name="typeResolver">the type resolver</param>
         public CqlCrosswalk(TypeResolver typeResolver)
         {
             TypeResolver = typeResolver;
         }
 
+        /// <summary>
+        /// Given a static FHIR type, returns the corresponding CQL type (if any)
+        /// </summary>
+        /// <param name="fhirType">the static FHIR type</param>
+        /// <returns>the CQL type, or null</returns>
         public TypeEntry? TypeEntryFor(FHIRAllTypes fhirType)
         {
             switch (fhirType)
@@ -80,6 +90,13 @@ namespace Hl7.Cql.Packaging
             }
         }
 
+        /// <summary>
+        /// Given a CQL type, returns the corresponding FHIR type (if any)
+        /// </summary>
+        /// <param name="cqlType">the base CQL type</param>
+        /// <param name="elementType">an element CQL type, used if <paramref name="cqlType"/> is a collection</param>
+        /// <returns>the corresponding FHIR type, or null</returns>
+        /// <exception cref="ArgumentNullException">throws if <paramref name="cqlType"/> is a collection, but <paramref name="elementType"/> was not provided.</exception>
         public TypeEntry? TypeEntryFor(CqlPrimitiveType cqlType, TypeEntry? elementType = null)
         {
             switch (cqlType)
@@ -158,6 +175,11 @@ namespace Hl7.Cql.Packaging
             }
         }
 
+        /// <summary>
+        /// Given an ELM type specifier, returns the corresponding CQL type
+        /// </summary>
+        /// <param name="resultTypeSpecifier">the ELM type</param>
+        /// <returns>the CQL type, if any</returns>
         public TypeEntry? TypeEntryFor(Elm.TypeSpecifier? resultTypeSpecifier)
         {
             if (resultTypeSpecifier is null)
@@ -189,6 +211,11 @@ namespace Hl7.Cql.Packaging
             return null;
         }
 
+        /// <summary>
+        /// Given a type by name, reutrn the corresponding type info
+        /// </summary>
+        /// <param name="name">the name of the type</param>
+        /// <returns>the type info</returns>
         public TypeEntry? TypeEntryFor(string? name)
         {
             if (!string.IsNullOrWhiteSpace(name))
@@ -221,6 +248,11 @@ namespace Hl7.Cql.Packaging
             else return null;
         }
 
+        /// <summary>
+        /// Given an ELM element, return the CQL type info
+        /// </summary>
+        /// <param name="element">the ELM element</param>
+        /// <returns>the CQL type, or null</returns>
         public TypeEntry? TypeEntryFor(Elm.Element element) =>
             TypeEntryFor(element.resultTypeSpecifier);
 
@@ -247,18 +279,15 @@ namespace Hl7.Cql.Packaging
         }
     }
 
-    public class TypeEntry
-    {
-        public TypeEntry(FHIRAllTypes fhirType, CqlPrimitiveType cqlType, TypeEntry? elementType = null)
-        {
-            FhirType = fhirType;
-            CqlType = cqlType;
-            ElementType = elementType;
-        }
-
-        public FHIRAllTypes? FhirType { get; set; }
-        public CqlPrimitiveType? CqlType { get; set; }
-        public TypeEntry? ElementType { get; set; } = null;
-    }
+    /// <summary>
+    /// Contains information about type mappings between CQL and FHIR type
+    /// </summary>
+    /// <param name="FhirType">the FHIR type</param>
+    /// <param name="CqlType">the CQL type</param>
+    /// <param name="ElementType">the element type, if the base type is a collection</param>
+    public record TypeEntry(
+      FHIRAllTypes? FhirType,
+      CqlPrimitiveType? CqlType,
+      TypeEntry? ElementType = null
+    );
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

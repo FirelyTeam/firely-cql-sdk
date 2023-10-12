@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -18,10 +17,21 @@ using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
 {
+    /// <summary>
+    /// Defines conversions between Cql and FHIR data models
+    /// </summary>
     public static class FhirTypeConverter
     {
+        /// <summary>
+        /// Singleton for the default configuration of this TypeConverter
+        /// </summary>
         public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
 
+        /// <summary>
+        /// Allows for the creation of a converter with the specified model 
+        /// </summary>
+        /// <param name="model">the model</param>
+        /// <returns>the type converter</returns>
         public static TypeConverter Create(ModelInspector model) =>
             TypeConverter
                 .Create()
