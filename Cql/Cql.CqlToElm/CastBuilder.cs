@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm
             Provider = provider;
         }
 
-        public FunctionMatchResult TryBuildCast(FunctionDef candidate, Expression[] arguments)
+        public FunctionMatchResult Build(FunctionDef candidate, Expression[] arguments)
         {
             var genericReplacements = new GenericParameterAssignments();
 
@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm
                 if (map is not null)
                     to = to.ReplaceGenericParameters(map);
 
-                var @as = SystemLibrary.As.Build(false, to, n, locatorContext);
+                var @as = SystemLibrary.As.Call(false, to, n, locatorContext);
 
                 return new(@as, 1, map, null);
             }
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 try
                 {
-                    var nested = SystemLibrary.SingletonFrom.Build(Provider, locatorContext, argument);
+                    var nested = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
                     var intermediate = build(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }
@@ -183,7 +183,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 try
                 {
-                    var nested = SystemLibrary.ToList.Build(Provider, locatorContext, argument);
+                    var nested = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
                     var intermediate = build(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }

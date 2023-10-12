@@ -33,23 +33,27 @@ namespace Hl7.Cql.Elm
         public static bool operator ==(TypeSpecifier? a, TypeSpecifier? b) => a?.Equals(b) ?? b is null;
 
         public static bool operator !=(TypeSpecifier? a, TypeSpecifier? b) => !(a == b);
+
+        internal static bool SequenceEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b) => EmptyIfNull(a).SequenceEqual(EmptyIfNull(b));
+
+        internal static IEnumerable<T> EmptyIfNull<T>(IEnumerable<T>? a) => a ?? Enumerable.Empty<T>();
     }
 
     public partial class ChoiceTypeSpecifier
     {
-        public override string ToString() => $"Choice<{string.Join(", ", choice.AsEnumerable())}>";
+        public override string ToString() => $"Choice<{string.Join(", ", EmptyIfNull(choice))}>";
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
                 return true;
 
             if (other is ChoiceTypeSpecifier c)
-                return Enumerable.SequenceEqual(c.choice, choice);
+                return SequenceEquals(c.choice, choice);
 
             return false;
         }
 
-        public override int GetHashCode() => HashCode.Combine(typeof(ChoiceTypeSpecifier), choice.Length, choice.FirstOrDefault());
+        public override int GetHashCode() => HashCode.Combine(typeof(ChoiceTypeSpecifier), choice?.Length, choice?.FirstOrDefault());
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
@@ -57,16 +61,16 @@ namespace Hl7.Cql.Elm
 
             return new ChoiceTypeSpecifier
             {
-                choice = choice.Select(c => c.ReplaceGenericParameters(assignments)).ToArray()
+                choice = choice?.Select(c => c.ReplaceGenericParameters(assignments)).ToArray()
             };
         }
 
-        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => choice.SelectMany(c => c.GetGenericParameters());
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => EmptyIfNull(choice?.SelectMany(c => c.GetGenericParameters()));
     }
 
     public partial class ParameterTypeSpecifier
     {
-        public override string ToString() => parameterName;
+        public override string ToString() => parameterName ?? "Null";
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -78,7 +82,9 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
-        public override int GetHashCode() => parameterName.GetHashCode();
+        public override int GetHashCode() => parameterName?.GetHashCode() ?? typeof(ParameterTypeSpecifier).GetHashCode();
+
+        public static implicit operator ParameterTypeSpecifier(string parameterName) => new() { parameterName = parameterName };
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) =>
             assignments.TryGetValue(this, out var replacement) ? replacement : this;
@@ -88,14 +94,14 @@ namespace Hl7.Cql.Elm
 
     public partial class TupleElementDefinition
     {
-        public override string ToString() => $"{name} {type}";
+        public override string ToString() => $"{name ?? "null"} {elementType?.ToString() ?? "Null"}";
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
                 return true;
 
             if (other is TupleElementDefinition tuple)
-                return tuple.name == name && tuple.type == type;
+                return tuple.name == name && tuple.elementType == tuple.elementType;
 
             return false;
         }
@@ -109,16 +115,16 @@ namespace Hl7.Cql.Elm
             return new TupleElementDefinition
             {
                 name = name,
-                type = type.ReplaceGenericParameters(assignments)
+                elementType = elementType?.ReplaceGenericParameters(assignments)
             };
         }
 
-        internal IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => type.GetGenericParameters();
+        internal IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => TypeSpecifier.EmptyIfNull(elementType?.GetGenericParameters());
     }
 
     public partial class TupleTypeSpecifier
     {
-        public override string ToString() => $"Tuple {{ {string.Join(", ", element.AsEnumerable())} }}";
+        public override string ToString() => $"Tuple {{ {string.Join(", ", EmptyIfNull(element))} }}";
 
         public override bool Equals([NotNullWhen(true)] object? other)
         {
@@ -126,12 +132,12 @@ namespace Hl7.Cql.Elm
                 return true;
 
             if (other is TupleTypeSpecifier tuple)
-                return Enumerable.SequenceEqual(element, tuple.element);
+                return SequenceEquals(element, tuple.element);
 
             return false;
         }
 
-        public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), element.Length, element.FirstOrDefault());
+        public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), element?.Length, element?.FirstOrDefault());
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
@@ -139,11 +145,12 @@ namespace Hl7.Cql.Elm
 
             return new TupleTypeSpecifier()
             {
-                element = element.Select(e => e.ReplaceGenericParameters(assignments)).ToArray()
+                element = element?.Select(e => e.ReplaceGenericParameters(assignments)).ToArray()
             };
         }
 
-        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => element.SelectMany(e => e.GetGenericParameters());
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() =>
+            EmptyIfNull(element?.SelectMany(e => e.GetGenericParameters()).Distinct());
     }
 
     public partial class IntervalTypeSpecifier
@@ -169,16 +176,16 @@ namespace Hl7.Cql.Elm
 
             return new IntervalTypeSpecifier
             {
-                pointType = pointType.ReplaceGenericParameters(assignments)
+                pointType = pointType?.ReplaceGenericParameters(assignments)
             };
         }
 
-        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => pointType.GetGenericParameters();
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => EmptyIfNull(pointType?.GetGenericParameters());
     }
 
     public partial class NamedTypeSpecifier
     {
-        public override string ToString() => name.ToString();
+        public override string ToString() => name?.ToString() ?? "null";
 
         public override bool Equals([NotNullWhen(true)] object? other)
         {
@@ -191,7 +198,7 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
-        public override int GetHashCode() => name.GetHashCode();
+        public override int GetHashCode() => name?.GetHashCode() ?? typeof(NamedTypeSpecifier).GetHashCode();
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
 
@@ -221,10 +228,10 @@ namespace Hl7.Cql.Elm
 
             return new ListTypeSpecifier
             {
-                elementType = elementType.ReplaceGenericParameters(assignments)
+                elementType = elementType?.ReplaceGenericParameters(assignments)
             };
         }
 
-        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => elementType.GetGenericParameters();
+        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => EmptyIfNull(elementType?.GetGenericParameters());
     }
 }

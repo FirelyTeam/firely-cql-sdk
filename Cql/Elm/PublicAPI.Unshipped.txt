@@ -742,6 +742,7 @@ static Hl7.Cql.Elm.ExtensionMethods.ListSortOrder(this Hl7.Cql.Elm.SortDirection
 static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! include) -> string?
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.ParameterTypeSpecifier.implicit operator Hl7.Cql.Elm.ParameterTypeSpecifier!(string! parameterName) -> Hl7.Cql.Elm.ParameterTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.AnyTypeQName -> System.Xml.XmlQualifiedName!
 static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
