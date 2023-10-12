@@ -29,6 +29,15 @@ namespace Hl7.Cql.Conversion
                 .ConvertNetTypes()
                 .ConvertsIsoToCqlPrimitives();
 
+
+        /// <summary>
+        /// Performs the conversion of <paramref name="from"/> to <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">The desired type.</typeparam>
+        /// <param name="from">The object to convert.</param>
+        /// <returns>The result of the conversion.</returns>
+        public T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
+
         /// <summary>
         /// Creates a TypeConverter with an empty set of conversions.
         /// </summary>
@@ -127,15 +136,6 @@ namespace Hl7.Cql.Conversion
                 return true;
             }
         }
-
-
-        /// <summary>
-        /// Performs the conversion of <paramref name="from"/> to <typeparamref name="T"/>.
-        /// </summary>
-        /// <typeparam name="T">The desired type.</typeparam>
-        /// <param name="from">The object to convert.</param>
-        /// <returns>The result of the conversion.</returns>
-        internal T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
 
         /// <inheritdoc cref="Convert{T}(object?)"/>
         internal object? ConvertHelper(object? from, Type to)

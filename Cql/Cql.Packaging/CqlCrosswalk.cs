@@ -8,7 +8,10 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
+using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
+using System.Reflection;
+
 namespace Hl7.Cql.Packaging
 {
     /// <summary>
@@ -17,21 +20,32 @@ namespace Hl7.Cql.Packaging
     public class CqlCrosswalk
     {
         internal TypeResolver TypeResolver { get; private set; }
+        internal ModelInspector ModelInspector { get; private set; }
+
+        /// <summary>
+        /// Creates a new instance with the specified type resovler and the default model inspector
+        /// </summary>
+        /// <param name="typeResolver">the type resolver</param>
+        public CqlCrosswalk(TypeResolver typeResolver) : this(typeResolver, ModelInfo.ModelInspector)
+        {
+        }
 
         /// <summary>
         /// Creates a new instance with the specified type resovler
         /// </summary>
         /// <param name="typeResolver">the type resolver</param>
-        public CqlCrosswalk(TypeResolver typeResolver)
+        /// <param name="modelInspector">the model inspector</param>
+        public CqlCrosswalk(TypeResolver typeResolver, ModelInspector modelInspector)
         {
             TypeResolver = typeResolver;
+            ModelInspector = modelInspector;
         }
 
         /// <summary>
-        /// Given a static FHIR type, returns the corresponding CQL type (if any)
+        /// Given a static FHIR type, returns the corresponding Type mapping (if any)
         /// </summary>
         /// <param name="fhirType">the static FHIR type</param>
-        /// <returns>the CQL type, or null</returns>
+        /// <returns>the Type mapping, or null</returns>
         public TypeEntry? TypeEntryFor(FHIRAllTypes fhirType)
         {
             switch (fhirType)
@@ -95,7 +109,7 @@ namespace Hl7.Cql.Packaging
         /// </summary>
         /// <param name="cqlType">the base CQL type</param>
         /// <param name="elementType">an element CQL type, used if <paramref name="cqlType"/> is a collection</param>
-        /// <returns>the corresponding FHIR type, or null</returns>
+        /// <returns>the corresponding Type mapping, or null</returns>
         /// <exception cref="ArgumentNullException">throws if <paramref name="cqlType"/> is a collection, but <paramref name="elementType"/> was not provided.</exception>
         public TypeEntry? TypeEntryFor(CqlPrimitiveType cqlType, TypeEntry? elementType = null)
         {
@@ -176,10 +190,63 @@ namespace Hl7.Cql.Packaging
         }
 
         /// <summary>
-        /// Given an ELM type specifier, returns the corresponding CQL type
+        /// Given a type, return the Type mapping (if any).
+        /// </summary>
+        /// <param name="type">the type</param>
+        /// <returns>the Type mapping, or null</returns>
+        public TypeEntry? TypeEntryFor(Type type)
+        {
+            var fhirTypeName = ModelInspector.GetFhirTypeNameForType(type);
+            if (fhirTypeName is not null)
+            {
+                return TypeEntryFor(fhirTypeName);
+            }
+            var cqlPrimitiveAttribute = type.GetCustomAttribute<CqlPrimitiveTypeAttribute>(true);
+            if (cqlPrimitiveAttribute is not null)
+            {
+                if (cqlPrimitiveAttribute.Type == CqlPrimitiveType.Interval)
+                {
+                    if (type.IsGenericType)
+                    {
+                        var gtd = type.GetGenericTypeDefinition();
+                        if (gtd == typeof(CqlInterval<>))
+                        {
+                            var genericArg = type.GetGenericArguments().Single();
+                            var pointType = TypeEntryFor(genericArg);
+                            if (pointType is not null)
+                            {
+                                return TypeEntryFor(cqlPrimitiveAttribute.Type, pointType!);
+                            }
+                        }
+                    }
+                    return null;
+                }
+                return TypeEntryFor(cqlPrimitiveAttribute.Type);
+            }
+            if (IsOrImplementsIEnumerableOfT(type))
+            {
+                var elementType = TypeResolver.GetListElementType(type);
+                var elementEntry = TypeEntryFor(elementType!);
+                if (elementEntry is null)
+                    return null;
+                return TypeEntryFor(CqlPrimitiveType.List, elementEntry);
+            }
+            if (type.IsPrimitive || type.IsValueType || type == typeof(string))
+            {
+                var fhirType = PrimitiveToFhir(type);
+                if (fhirType == null) return null;
+
+                return TypeEntryFor(fhirType.Value);
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Given an ELM type specifier, returns the corresponding Type mapping
         /// </summary>
         /// <param name="resultTypeSpecifier">the ELM type</param>
-        /// <returns>the CQL type, if any</returns>
+        /// <returns>the Type mapping, if any</returns>
         public TypeEntry? TypeEntryFor(Elm.TypeSpecifier? resultTypeSpecifier)
         {
             if (resultTypeSpecifier is null)
@@ -249,12 +316,14 @@ namespace Hl7.Cql.Packaging
         }
 
         /// <summary>
-        /// Given an ELM element, return the CQL type info
+        /// Given an ELM element, return the Type mapping info
         /// </summary>
         /// <param name="element">the ELM element</param>
-        /// <returns>the CQL type, or null</returns>
+        /// <returns>the Type mapping, or null</returns>
         public TypeEntry? TypeEntryFor(Elm.Element element) =>
             TypeEntryFor(element.resultTypeSpecifier);
+
+        private bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)
         {
