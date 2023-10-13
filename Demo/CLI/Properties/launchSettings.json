@@ -1,8 +1,12 @@
 {
   "profiles": {
-    "CLI": {
+    "BCSE": {
       "commandName": "Project",
       "commandLineArgs": "--l BCSEHEDISMY2022-1.0.0 --d Data\\95085.json"
+    },
+    "AdultOE": {
+      "commandName": "Project",
+      "commandLineArgs": "--l AdultOutpatientEncountersFHIR4-2.2.000 --d Data\\encounter.json"
     }
   }
 }
