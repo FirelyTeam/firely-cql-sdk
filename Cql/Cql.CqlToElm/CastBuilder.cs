@@ -16,13 +16,6 @@ namespace Hl7.Cql.CqlToElm
         public bool Success => Error is null;
     }
 
-    //internal record Signature(TypeSpecifier[] Parameters, TypeSpecifier Result)
-    //{
-    //    public Signature(FunctionDef def) : this(def.operand.Select(o => o.operandTypeSpecifier).ToArray(), def.resultTypeSpecifier)
-    //    {
-    //    }
-    //}
-
     /// <summary>
     /// Builds the implicit casts described in the CQL spec. Given the type of the parameter and an expression 
     /// representing the argument at the call site, this class will the necessary chain of nested expressions
@@ -87,10 +80,10 @@ namespace Hl7.Cql.CqlToElm
             if (to is ParameterTypeSpecifier gtp)
                 return new(argument, 0, new() { { gtp, argumentType } }, null);
 
-            // Nulls get promoted to any type necessary. If the target type has unbound
+            // Untyped Nulls get promoted to any type necessary. If the target type has unbound
             // generic parameters, we will default those to System.Any.
             // See https://cql.hl7.org/03-developersguide.html#implicit-casting
-            if (argument is Null n)
+            if (argument is Null n && n.resultTypeSpecifier is null)
             {
                 var unbound = to.GetGenericParameters().ToList();
                 var map = unbound.Any()
@@ -106,36 +99,32 @@ namespace Hl7.Cql.CqlToElm
             }
 
             // Casting a List<X> to a List<Y> is not possible in general(?), but it is
-            // when Y is an unbound generic type for now.
+            // when Y is an unbound generic type or a direct (covariant) cast is possible.
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
                 var prototypeInstance = new Null { resultTypeSpecifier = fromList.elementType };
                 var elementCast = Build(prototypeInstance, toList.elementType);
 
-                // For now, we assume that we have no co- or contravariance, so only the "identity" cast is allowed
-                // (note that this may mean we have assigned a type to a generic type parameter.)
                 if (elementCast.Success && elementCast.Caster == prototypeInstance)
                     return new(argument, elementCast.Cost, elementCast.Assignments, null);
                 else
                 {
-                    return elementCast;
+                    return new(argument, int.MaxValue, null, $"cannot implicitly be cast from {argumentType} to {to}");
                 }
             }
 
             // Casting an Interval<X> to an Interval<Y> is not possible in general(?), but it is
-            // when Y is an unbound generic type for now.
+            // when Y is an unbound generic type or a direct (covariant) cast is possible.
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
             {
                 var prototypeInstance = new Null { resultTypeSpecifier = fromInterval.pointType };
                 var elementCast = Build(prototypeInstance, toInterval.pointType);
 
-                // For now, we assume that we have no co- or contravariance, so only the "identity" cast is allowed
-                // (note that this may mean we have assigned a type to a generic type parameter.)
                 if (elementCast.Success && elementCast.Caster == prototypeInstance)
                     return new(argument, elementCast.Cost, elementCast.Assignments, null);
                 else
                 {
-                    return elementCast;
+                    return new(argument, int.MaxValue, null, $"cannot implicitly be cast from {argumentType} to {to}");
                 }
             }
 
