@@ -37,6 +37,34 @@ namespace CoreTests.Elm
             }
         };
 
+        private static void eq<T>(T a, T b) where T : TypeSpecifier
+        {
+            a.Should().Be(b);
+            (a == b).Should().BeTrue();
+            (a != b).Should().BeFalse();
+            a.GetHashCode().Should().Be(b.GetHashCode());
+
+            TypeSpecifier at = a;
+            TypeSpecifier bt = b;
+            at.Should().Be(bt);
+            (at == bt).Should().BeTrue();
+            (at != bt).Should().BeFalse();
+            at.GetHashCode().Should().Be(bt.GetHashCode());
+        }
+
+        private static void neq<T>(T a, T b) where T : TypeSpecifier
+        {
+            a.Should().NotBe(b);
+            (a == b).Should().BeFalse();
+            (a != b).Should().BeTrue();
+
+            TypeSpecifier at = a;
+            TypeSpecifier bt = b;
+            at.Should().NotBe(bt);
+            (at == bt).Should().BeFalse();
+            (at != bt).Should().BeTrue();
+        }
+
         [TestMethod]
         public void TestNamedTypeSpecifierEquals()
         {
@@ -45,9 +73,9 @@ namespace CoreTests.Elm
             var ns3 = new NamedTypeSpecifier() { name = new System.Xml.XmlQualifiedName("NotFoo") };
             var ns4 = new NamedTypeSpecifier();
 
-            ns1.Should().Be(ns2);
-            ns1.Should().NotBe(ns3);
-            ns1.Should().NotBe(ns4);
+            eq(ns1, ns2);
+            neq(ns1, ns3);
+            neq(ns1, ns4);
         }
 
         [TestMethod]
@@ -58,9 +86,9 @@ namespace CoreTests.Elm
             var its3 = new IntervalTypeSpecifier() { pointType = SystemTypes.StringType };
             var its4 = new IntervalTypeSpecifier() { };
 
-            its1.Should().Be(its2);
-            its1.Should().NotBe(its3);
-            its1.Should().NotBe(its4);
+            eq(its1, its2);
+            neq(its1, its3);
+            neq(its1, its4);
         }
 
         [TestMethod]
@@ -71,9 +99,9 @@ namespace CoreTests.Elm
             var lts3 = new ListTypeSpecifier() { elementType = SystemTypes.StringType };
             var lts4 = new ListTypeSpecifier() { };
 
-            lts1.Should().Be(lts2);
-            lts1.Should().NotBe(lts3);
-            lts1.Should().NotBe(lts4);
+            eq(lts1, lts2);
+            neq(lts1, lts3);
+            neq(lts1, lts4);
         }
 
         [TestMethod]
@@ -82,14 +110,17 @@ namespace CoreTests.Elm
             var tts1 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.LongType } } };
             var tts2 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.LongType } } };
             var tts3 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Bar", elementType = SystemTypes.LongType } } };
-            var tts4 = new TupleTypeSpecifier();
+            var tts4 = new TupleTypeSpecifier() { element = new[] { new TupleElementDefinition() { name = "Foo", elementType = SystemTypes.BooleanType } } };
+            var tts5 = new TupleTypeSpecifier();
 
-            tts1.Should().Be(tts2);
-            tts1.Should().NotBe(tts3);
-            tts1.Should().NotBe(tts4);
-
-            FullTT.Should().Be(FullTT);
-            EmptyTT.Should().Be(EmptyTT);
+            eq(tts1, tts2);
+            neq(tts1, tts3);
+            neq(tts1, tts4);
+            neq(tts1, tts5);
+            eq(FullTT, FullTT);
+            eq(EmptyTT, EmptyTT);
+            neq(FullTT, EmptyTT);
+            neq(EmptyTT, FullTT);
         }
 
         [TestMethod]
@@ -100,9 +131,9 @@ namespace CoreTests.Elm
             var cts3 = new ChoiceTypeSpecifier() { choice = new[] { SystemTypes.LongType, SystemTypes.BooleanType } };
             var cts4 = new ChoiceTypeSpecifier();
 
-            cts1.Should().Be(cts2);
-            cts1.Should().NotBe(cts3);
-            cts1.Should().NotBe(cts4);
+            eq(cts1, cts2);
+            neq(cts1, cts3);
+            neq(cts1, cts4);
         }
 
         [TestMethod]
@@ -113,9 +144,9 @@ namespace CoreTests.Elm
             var pts3 = new ParameterTypeSpecifier() { parameterName = "Bar" };
             var pts4 = new ParameterTypeSpecifier();
 
-            pts1.Should().Be(pts2);
-            pts1.Should().NotBe(pts3);
-            pts1.Should().NotBe(pts4);
+            eq(pts1, pts2);
+            neq(pts1, pts3);
+            neq(pts1, pts4);
         }
     }
 }

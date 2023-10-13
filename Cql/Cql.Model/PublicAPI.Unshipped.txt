@@ -99,7 +99,7 @@ Hl7.Cql.Model.TypeParameterInfo
 Hl7.Cql.Model.TypeParameterInfo.TypeParameterInfo() -> void
 Hl7.Cql.Model.TypeSpecifier
 Hl7.Cql.Model.TypeSpecifier.TypeSpecifier() -> void
-static Hl7.Cql.Model.ModelInfoExtensions.ToQualifiedTypeName(this Hl7.Cql.Model.ModelInfo! model, string! typeName) -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Model.ModelInfoExtensions.MakeQualifiedTypeName(this Hl7.Cql.Model.ModelInfo! model, string! typeName) -> System.Xml.XmlQualifiedName!
 ~Hl7.Cql.Model.BindingInfo.description.get -> string
 ~Hl7.Cql.Model.BindingInfo.description.set -> void
 ~Hl7.Cql.Model.BindingInfo.name.get -> string

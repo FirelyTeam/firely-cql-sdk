@@ -51,7 +51,7 @@ namespace Hl7.Cql.CqlToElm
             for (int ix = 0; ix < candidate.operand.Length; ix++)
             {
                 var targetType = candidate.operand[ix].operandTypeSpecifier.ReplaceGenericParameters(genericReplacements);
-                var argumentResult = build(arguments[ix], targetType);
+                var argumentResult = Build(arguments[ix], targetType);
 
                 if (!argumentResult.Success)
                 {
@@ -72,30 +72,13 @@ namespace Hl7.Cql.CqlToElm
                 Error: error);
         }
 
-        /// <summary>
-        /// Update a signature with new assignments of an open generic parameter.
-        /// </summary>
-        //private static Signature replaceGeneric(Signature sig, GenericParameterAssignments map)
-        //{
-        //    return sig with
-        //    {
-        //        Parameters = sig.Parameters.Select(a => a.ReplaceGenericParameters(map)).ToArray(),
-        //        Result = sig.Result.ReplaceGenericParameters(map)
-        //    };
-        //}
-
-        private ArgumentCaster build(Expression argument, TypeSpecifier to)
+        public ArgumentCaster Build(Expression argument, TypeSpecifier to)
         {
             var argumentType = argument.resultTypeSpecifier;
             var locatorContext = new StringLocatorRuleContext(argument.locator);
 
-            // The trivial case, equal types
-            if (argumentType == to)
-                return new(argument, 0, null, null);
-
-            // if parameter type is any, then any argument type is ok.
-            // This is really a poor-mans subtype test, but it will do for now.
-            if (to == SystemTypes.AnyType)
+            // Types are equal, or the argument is a subtype of the parameter type.
+            if (argumentType.IsSubtypeOf(to, Provider))
                 return new(argument, 0, null, null);
 
             // If the parameter type is a generic type parameter, then we can assign any type to it,
@@ -106,6 +89,7 @@ namespace Hl7.Cql.CqlToElm
 
             // Nulls get promoted to any type necessary. If the target type has unbound
             // generic parameters, we will default those to System.Any.
+            // See https://cql.hl7.org/03-developersguide.html#implicit-casting
             if (argument is Null n)
             {
                 var unbound = to.GetGenericParameters().ToList();
@@ -126,7 +110,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
                 var prototypeInstance = new Null { resultTypeSpecifier = fromList.elementType };
-                var elementCast = build(prototypeInstance, toList.elementType);
+                var elementCast = Build(prototypeInstance, toList.elementType);
 
                 // For now, we assume that we have no co- or contravariance, so only the "identity" cast is allowed
                 // (note that this may mean we have assigned a type to a generic type parameter.)
@@ -143,7 +127,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
             {
                 var prototypeInstance = new Null { resultTypeSpecifier = fromInterval.pointType };
-                var elementCast = build(prototypeInstance, toInterval.pointType);
+                var elementCast = Build(prototypeInstance, toInterval.pointType);
 
                 // For now, we assume that we have no co- or contravariance, so only the "identity" cast is allowed
                 // (note that this may mean we have assigned a type to a generic type parameter.)
@@ -155,19 +139,20 @@ namespace Hl7.Cql.CqlToElm
                 }
             }
 
-            // TODO: choice
+            // TODO: choice, https://cql.hl7.org/03-developersguide.html#choice-types
 
-            // TODO: decimal/int etc implicits
+            // TODO: decimal/int etc implicits, https://cql.hl7.org/03-developersguide.html#implicit-conversions
+            // (note table is skewed, move first row 1 to the left, move row 2 2 to the left, etc)
 
-            // TODO: interval promotion
+            // TODO: interval promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
 
-            // List demotion
+            // List demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
             if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
             {
                 try
                 {
                     var nested = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
-                    var intermediate = build(nested, to);
+                    var intermediate = Build(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }
                 catch (Exception e)
@@ -176,15 +161,15 @@ namespace Hl7.Cql.CqlToElm
                 }
             }
 
-            // TODO: interval demotion
+            // TODO: interval demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
 
-            // List promotion
+            // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
             if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
             {
                 try
                 {
                     var nested = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
-                    var intermediate = build(nested, to);
+                    var intermediate = Build(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }
                 catch (Exception e)

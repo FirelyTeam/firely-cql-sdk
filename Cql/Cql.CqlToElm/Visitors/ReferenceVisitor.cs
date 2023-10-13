@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var identifier = identifierContext.Parse()
                     ?? throw new InvalidOperationException($"Expecting non-null identifer");
-                var @ref = LibraryContext.Ref(null, identifier, identifierContext);
+                var @ref = LibraryContext.Ref(null, identifier)?.WithLocator(context.Locator());
                 if (@ref != null)
                     return @ref;
                 else

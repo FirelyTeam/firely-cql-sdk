@@ -90,12 +90,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var unqualified = (UnqualifiedTypeNameSpecifier)Visit(context.referentialOrTypeNameIdentifier());
 
             var typeName = string.Join('.', qualifiers.Append(unqualified.UnqualifiedName));
-            var (qtn, _) = LibraryContext.ResolveDottedTypeName(typeName);
-
-            return new NamedTypeSpecifier
-            {
-                name = qtn,
-            }.WithLocator(context.Locator());
+            var ts = LibraryContext.ResolveDottedTypeName(typeName);
+            return ts.WithLocator(context.Locator());
         }
 
         // : identifier | keywordIdentifier;

@@ -101,7 +101,7 @@ namespace Hl7.Cql.Elm
                 return true;
 
             if (other is TupleElementDefinition tuple)
-                return tuple.name == name && tuple.elementType == tuple.elementType;
+                return tuple.name == name && tuple.elementType == elementType;
 
             return false;
         }

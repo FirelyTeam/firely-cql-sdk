@@ -51,26 +51,26 @@ namespace Hl7.Cql.Elm
         internal static XmlQualifiedName QualifiedNameForSystemType(string name)
         {
             var nameWithoutPrefix = name.StartsWith(SystemModelPrefix) ? name[SystemModelPrefix.Length..] : name;
-            return bootstrapSystemModel.ToQualifiedTypeName(nameWithoutPrefix);
+            return bootstrapSystemModel.MakeQualifiedTypeName(nameWithoutPrefix);
         }
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        public static XmlQualifiedName AnyTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Any");
-        public static XmlQualifiedName IntegerTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Integer");
-        public static XmlQualifiedName LongTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Long");
-        public static XmlQualifiedName DecimalTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Decimal");
-        public static XmlQualifiedName QuantityTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Quantity");
-        public static XmlQualifiedName StringTypeQName = bootstrapSystemModel.ToQualifiedTypeName("String");
-        public static XmlQualifiedName DateTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Date");
-        public static XmlQualifiedName TimeTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Time");
-        public static XmlQualifiedName DateTimeTypeQName = bootstrapSystemModel.ToQualifiedTypeName("DateTime");
-        public static XmlQualifiedName BooleanTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Boolean");
-        public static XmlQualifiedName RatioTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Ratio");
-        public static XmlQualifiedName CodeTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Code");
-        public static XmlQualifiedName ConceptTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Concept");
-        public static XmlQualifiedName VocabularyTypeQName = bootstrapSystemModel.ToQualifiedTypeName("Vocabulary");
-        public static XmlQualifiedName ValueSetTypeQName = bootstrapSystemModel.ToQualifiedTypeName("ValueSet");
-        public static XmlQualifiedName CodeSystemTypeQName = bootstrapSystemModel.ToQualifiedTypeName("CodeSystem");
+        public static XmlQualifiedName AnyTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Any");
+        public static XmlQualifiedName IntegerTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Integer");
+        public static XmlQualifiedName LongTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Long");
+        public static XmlQualifiedName DecimalTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Decimal");
+        public static XmlQualifiedName QuantityTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Quantity");
+        public static XmlQualifiedName StringTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("String");
+        public static XmlQualifiedName DateTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Date");
+        public static XmlQualifiedName TimeTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Time");
+        public static XmlQualifiedName DateTimeTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("DateTime");
+        public static XmlQualifiedName BooleanTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Boolean");
+        public static XmlQualifiedName RatioTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Ratio");
+        public static XmlQualifiedName CodeTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Code");
+        public static XmlQualifiedName ConceptTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Concept");
+        public static XmlQualifiedName VocabularyTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Vocabulary");
+        public static XmlQualifiedName ValueSetTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("ValueSet");
+        public static XmlQualifiedName CodeSystemTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("CodeSystem");
 
         public static NamedTypeSpecifier AnyType = AnyTypeQName.ToNamedType();
         public static NamedTypeSpecifier IntegerType = IntegerTypeQName.ToNamedType();

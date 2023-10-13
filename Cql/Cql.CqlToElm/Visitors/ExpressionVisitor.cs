@@ -250,36 +250,33 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return list;
         }
 
+        //  '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
         public override Expression VisitRetrieve([NotNull] cqlParser.RetrieveContext context)
         {
             var contextName = context.contextIdentifier().GetText();
             var codePath = context.codePath().GetText();
             var codeComparator = context.codeComparator().GetText();
             var terminology = Visit(context.terminology());
-            var rawTypeName = context.namedTypeSpecifier().GetText();
             var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
-            var typeInfo = LibraryContext.ResolveDottedTypeName(rawTypeName ?? throw Critical("Unable to resolve retrieve type"));
-            var model = ModelProvider.ModelFromQualifiedTypeName(type?.name
-                ?? throw Critical("Retrieve type is not specified correctly"))
-                ?? throw Critical($"Can't resolve model for type {type!.name!.Name}");
-            var dataType = new XmlQualifiedName($"{model.targetQualifier}:{rawTypeName}");
             var contextExpressionRef = new ExpressionRef
             {
                 name = contextName,
             };
+
             var retrieve = new Retrieve
             {
                 localId = NextId(),
                 locator = context.Locator(),
-                dataType = dataType,
-                templateId = typeInfo.templateName,
+                dataType = type.name,
+                templateId = ModelProvider.GetDefaultProfileUriForType(type),
                 context = contextExpressionRef,
                 codeComparator = codeComparator,
                 codes = terminology,
                 codeProperty = codePath,
                 resultTypeSpecifier = ListType(type, context)
             };
+
             return retrieve;
         }
 

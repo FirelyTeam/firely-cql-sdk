@@ -1,11 +1,9 @@
-﻿using Antlr4.Runtime;
-using Hl7.Cql.Elm;
+﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Xml;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -23,7 +21,7 @@ namespace Hl7.Cql.CqlToElm
         public Library ActiveLibrary { get; set; } = new Library();
         public ContextDef? ActiveContext { get; set; }
 
-        internal Expression? Ref(string? qualifier, string identifier, ParserRuleContext context)
+        internal Expression? Ref(string? qualifier, string identifier)
         {
             Library library;
 
@@ -40,7 +38,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.ValueSetTypeQName,
                     resultTypeSpecifier = SystemTypes.ValueSetType,
-                }.WithLocator(context.Locator());
+                };
             }
             else if (library.concepts?.Any(c => c.name == identifier) ?? false)
             {
@@ -50,7 +48,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.ConceptTypeQName,
                     resultTypeSpecifier = SystemTypes.ConceptType
-                }.WithLocator(context.Locator());
+                };
             }
             else if (library.codeSystems?.Any(c => c.name == identifier) ?? false)
             {
@@ -60,7 +58,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.CodeSystemTypeQName,
                     resultTypeSpecifier = SystemTypes.CodeSystemType
-                }.WithLocator(context.Locator());
+                };
             }
             else if (library.codes?.Any(c => c.name == identifier) ?? false)
             {
@@ -70,7 +68,7 @@ namespace Hl7.Cql.CqlToElm
                     name = identifier,
                     resultTypeName = SystemTypes.CodeTypeQName,
                     resultTypeSpecifier = SystemTypes.CodeType
-                }.WithLocator(context.Locator());
+                };
             }
             else
             {
@@ -89,15 +87,21 @@ namespace Hl7.Cql.CqlToElm
                         name = identifier,
                         resultTypeName = param[0].parameterType,
                         resultTypeSpecifier = param[0].parameterTypeSpecifier
-                    }.WithLocator(context.Locator());
+                    };
                 }
             }
             return null;
         }
 
-        internal IEnumerable<(XmlQualifiedName qualifiedTypeName, string? templateName)> MatchDottedTypeName(string dotSeparatedId)
+
+        /// <summary>
+        /// Given the literal (qualified) identifier for a type, returns 0 or more NamedTypeSpecifiers that represent matches
+        /// for that identifier.
+        /// </summary>
+        /// <param name="dottedName">A (possibly) qualified identifier for a type.</param>
+        internal IEnumerable<Elm.NamedTypeSpecifier> MatchDottedTypeName(string dottedName)
         {
-            var parts = dotSeparatedId.Split(".");
+            var parts = dottedName.Split(".");
             var usings = parts.Length == 2 ?
                 ActiveLibrary.usings.Where(u => u.localIdentifier == parts[0]) :
                 ActiveLibrary.usings;
@@ -108,17 +112,21 @@ namespace Hl7.Cql.CqlToElm
             {
                 if (ModelProvider.ModelFromUri(@using.uri) is { } model)
                 {
-                    if (model.TypeInfoFor(name) is { } type)
+                    if (model.TryGetTypeInfoFor(name, out _))
                     {
-                        var qtn = model.ToQualifiedTypeName(name);
-                        var templateId = identifierFor(type);
-                        yield return (qtn, templateId);
+                        yield return model.MakeQualifiedTypeName(name).ToNamedType();
                     }
                 }
             }
         }
 
-        internal (XmlQualifiedName qualifiedTypeName, string? templateName) ResolveDottedTypeName(string dottedName)
+        /// <summary>
+        /// Given the literal (qualified) identifier for a type, returns the NamedTypeSpecifier for the type, 
+        /// or throws an exception if the type is not found or is ambiguous.
+        /// </summary>
+        /// <param name="dottedName">A (possibly) qualified identifier for a type.</param>
+        /// <returns></returns>
+        internal Elm.NamedTypeSpecifier ResolveDottedTypeName(string dottedName)
         {
             var types = MatchDottedTypeName(dottedName).ToArray();
 
@@ -141,12 +149,5 @@ namespace Hl7.Cql.CqlToElm
                 throw ex;
             }
         }
-
-        private static string? identifierFor(Model.TypeInfo type) =>
-            type switch
-            {
-                Model.ClassInfo cti => cti.identifier,
-                _ => null
-            };
     }
 }

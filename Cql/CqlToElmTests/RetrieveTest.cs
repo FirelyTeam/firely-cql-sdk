@@ -2,12 +2,8 @@
 using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.XPath;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -46,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     var contextRef = (ExpressionRef)retrieve.context;
                     Assert.AreEqual("Patient", contextRef.name);
                 }
-                Assert.AreEqual("fhir:Condition", retrieve.dataType?.Name);
+                Assert.AreEqual("{http://hl7.org/fhir}Condition", retrieve.dataType?.Name);
                 Assert.AreEqual("http://hl7.org/fhir/StructureDefinition/Condition", retrieve.templateId);
                 Assert.AreEqual("code", retrieve.codeProperty);
                 Assert.AreEqual("in", retrieve.codeComparator);
@@ -80,17 +76,17 @@ namespace Hl7.Cql.CqlToElm.Test
                 {
                     Entry = new List<Bundle.EntryComponent>
                     {
-                        new Bundle.EntryComponent 
-                        { 
-                            Resource = new Condition 
-                            { 
-                                Id = "1" 
-                            } 
+                        new Bundle.EntryComponent
+                        {
+                            Resource = new Condition
+                            {
+                                Id = "1"
+                            }
                         },
-                        new Bundle.EntryComponent 
-                        { 
-                            Resource = new Condition 
-                            { 
+                        new Bundle.EntryComponent
+                        {
+                            Resource = new Condition
+                            {
                                 Id = "2",
                                 Code = new CodeableConcept
                                 {
@@ -103,7 +99,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         }
                     }
                 };
-                var result = Run(library, 
+                var result = Run(library,
                     (delegates) => FhirCqlContext.ForBundle(bundle, valueSets: valueSets, delegates: delegates),
                     "Retrieve_AllTerms");
                 var conditions = result as IEnumerable<Condition>;
