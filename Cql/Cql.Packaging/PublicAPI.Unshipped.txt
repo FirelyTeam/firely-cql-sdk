@@ -1,36 +1,36 @@
 ﻿#nullable enable
 Hl7.Cql.Packaging.AssemblyLoadContextExtensions
-Hl7.Cql.Packaging.CqlCrosswalk
-Hl7.Cql.Packaging.CqlCrosswalk.CqlCrosswalk(Hl7.Cql.Abstractions.TypeResolver! typeResolver) -> void
-Hl7.Cql.Packaging.CqlCrosswalk.CqlCrosswalk(Hl7.Cql.Abstractions.TypeResolver! typeResolver, Hl7.Fhir.Introspection.ModelInspector! modelInspector) -> void
-Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Cql.Elm.Element! element) -> Hl7.Cql.Packaging.TypeEntry?
-Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Cql.Elm.TypeSpecifier? resultTypeSpecifier) -> Hl7.Cql.Packaging.TypeEntry?
-Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Cql.Primitives.CqlPrimitiveType cqlType, Hl7.Cql.Packaging.TypeEntry? elementType = null) -> Hl7.Cql.Packaging.TypeEntry?
-Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.TypeEntry?
-Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.TypeEntry?
-Hl7.Cql.Packaging.CqlCrosswalk.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.TypeEntry?
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.CqlTypeToFhirTypeMapper(Hl7.Cql.Abstractions.TypeResolver! typeResolver) -> void
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.CqlTypeToFhirTypeMapper(Hl7.Cql.Abstractions.TypeResolver! typeResolver, Hl7.Fhir.Introspection.ModelInspector! modelInspector) -> void
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Elm.Element! element) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Elm.TypeSpecifier? resultTypeSpecifier) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Primitives.CqlPrimitiveType cqlType, Hl7.Cql.Packaging.CqlTypeToFhirMapping? elementType = null) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.LibraryPackager
-Hl7.Cql.Packaging.TypeEntry
-Hl7.Cql.Packaging.TypeEntry.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
-Hl7.Cql.Packaging.TypeEntry.CqlType.init -> void
-Hl7.Cql.Packaging.TypeEntry.ElementType.get -> Hl7.Cql.Packaging.TypeEntry?
-Hl7.Cql.Packaging.TypeEntry.ElementType.init -> void
-Hl7.Cql.Packaging.TypeEntry.FhirType.get -> Hl7.Fhir.Model.FHIRAllTypes?
-Hl7.Cql.Packaging.TypeEntry.FhirType.init -> void
-Hl7.Cql.Packaging.TypeEntry.TypeEntry(Hl7.Cql.Packaging.TypeEntry! original) -> void
-Hl7.Cql.Packaging.TypeEntry.TypeEntry(Hl7.Fhir.Model.FHIRAllTypes? FhirType, Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, Hl7.Cql.Packaging.TypeEntry? ElementType = null) -> void
-Hl7.Cql.Packaging.TypeEntry.Deconstruct(out Hl7.Fhir.Model.FHIRAllTypes? FhirType, out Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, out Hl7.Cql.Packaging.TypeEntry? ElementType) -> void
-override Hl7.Cql.Packaging.TypeEntry.ToString() -> string!
-override Hl7.Cql.Packaging.TypeEntry.GetHashCode() -> int
-override Hl7.Cql.Packaging.TypeEntry.Equals(object? obj) -> bool
+Hl7.Cql.Packaging.CqlTypeToFhirMapping
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.init -> void
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.ElementType.get -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.ElementType.init -> void
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.FhirType.get -> Hl7.Fhir.Model.FHIRAllTypes?
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.FhirType.init -> void
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Cql.Packaging.CqlTypeToFhirMapping! original) -> void
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Fhir.Model.FHIRAllTypes? FhirType, Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType = null) -> void
+Hl7.Cql.Packaging.CqlTypeToFhirMapping.Deconstruct(out Hl7.Fhir.Model.FHIRAllTypes? FhirType, out Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, out Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType) -> void
+override Hl7.Cql.Packaging.CqlTypeToFhirMapping.ToString() -> string!
+override Hl7.Cql.Packaging.CqlTypeToFhirMapping.GetHashCode() -> int
+override Hl7.Cql.Packaging.CqlTypeToFhirMapping.Equals(object? obj) -> bool
 static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! ctx) -> System.Collections.Generic.IDictionary<string!, object?>!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.LogLevel logLevel = Microsoft.Extensions.Logging.LogLevel.Error) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> System.Collections.Generic.IDictionary<string!, Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Packaging.LibraryPackager.LoadResources(System.IO.DirectoryInfo! dir, string! lib, string! version) -> System.Runtime.Loader.AssemblyLoadContext!
-static Hl7.Cql.Packaging.TypeEntry.operator !=(Hl7.Cql.Packaging.TypeEntry? left, Hl7.Cql.Packaging.TypeEntry? right) -> bool
-static Hl7.Cql.Packaging.TypeEntry.operator ==(Hl7.Cql.Packaging.TypeEntry? left, Hl7.Cql.Packaging.TypeEntry? right) -> bool
-virtual Hl7.Cql.Packaging.TypeEntry.EqualityContract.get -> System.Type!
-virtual Hl7.Cql.Packaging.TypeEntry.PrintMembers(System.Text.StringBuilder! builder) -> bool
-virtual Hl7.Cql.Packaging.TypeEntry.Equals(Hl7.Cql.Packaging.TypeEntry? other) -> bool
-virtual Hl7.Cql.Packaging.TypeEntry.<Clone>$() -> Hl7.Cql.Packaging.TypeEntry!
+static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator !=(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
+static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator ==(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
+virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.PrintMembers(System.Text.StringBuilder! builder) -> bool
+virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.Equals(Hl7.Cql.Packaging.CqlTypeToFhirMapping? other) -> bool
+virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.<Clone>$() -> Hl7.Cql.Packaging.CqlTypeToFhirMapping!
