@@ -142,7 +142,7 @@ namespace Hl7.Cql.Runtime
                 return null;
             if (!string.IsNullOrWhiteSpace(code.system))
             {
-                var result = ValueSets.IsCodeInValueSet(valueSet.id, code.code, code.system);
+                var result = ValueSets.IsCodeInValueSet(valueSet.id, code.code, code.system!);
                 return result;
             }
             else

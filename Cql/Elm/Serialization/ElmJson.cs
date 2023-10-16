@@ -80,7 +80,7 @@ namespace Hl7.Cql.Elm.Serialization
                         var propertyName = reader.GetString();
                         reader.Read(); // propertyName
                         if (!string.IsNullOrWhiteSpace(propertyName)
-                            && properties.TryGetValue(propertyName, out var property))
+                            && properties.TryGetValue(propertyName!, out var property))
                         {
                             if (reader.TokenType == JsonTokenType.StartObject)
                             {

@@ -130,8 +130,16 @@ namespace Hl7.Cql.Fhir
             // Ignore the valuesets, we have to resolve via bindings for now.
             foreach (var (name, type) in classes)
             {
-                Types.TryAdd(name, type);
-                TypeSpecifiers.TryAdd(type, name);
+                lock(Types)
+                {
+                    if (!Types.ContainsKey(name))
+                        Types.Add(name, type);
+                }
+                lock(TypeSpecifiers)
+                {
+                    if (!TypeSpecifiers.ContainsKey(type))
+                        TypeSpecifiers.Add(type, name);
+                }
             }
 
             var bindings = from cm in Inspector.ClassMappings
@@ -146,8 +154,16 @@ namespace Hl7.Cql.Fhir
                 var bindingName = "{http://hl7.org/fhir}" +
                     binding.Name.Replace("-", "_");
 
-                Types.TryAdd(bindingName, binding.Type);
-                TypeSpecifiers.TryAdd(binding.Type, bindingName);
+                lock(Types) 
+                {
+                    if (!Types.ContainsKey(bindingName))
+                        Types.Add(bindingName, binding.Type);
+                }
+                lock(TypeSpecifiers)
+                {
+                    if (!TypeSpecifiers.ContainsKey(binding.Type))
+                        TypeSpecifiers.Add(binding.Type, bindingName);
+                }
 
             }
         }

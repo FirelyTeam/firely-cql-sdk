@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
             var unqualified = (UnqualifiedTypeNameSpecifier)Visit(context.referentialOrTypeNameIdentifier());
 
-            var typeName = string.Join('.', qualifiers.Append(unqualified.UnqualifiedName));
+            var typeName = string.Join(".", qualifiers.Append(unqualified.UnqualifiedName));
             var ts = LibraryContext.ResolveDottedTypeName(typeName);
             return ts.WithLocator(context.Locator());
         }

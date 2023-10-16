@@ -45,7 +45,7 @@ namespace Hl7.Cql.Elm.Serialization
             }
             else if (Strict)
             {
-                throw new JsonException($"Invalid token {Encoding.UTF8.GetString(reader.ValueSpan)} at position {reader.TokenStartIndex}; not an object.");
+                throw new JsonException($"Invalid token {Encoding.UTF8.GetString(reader.ValueSpan.ToArray())} at position {reader.TokenStartIndex}; not an object.");
             }
             else
             {

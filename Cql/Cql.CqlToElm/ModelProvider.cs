@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 if (!string.IsNullOrWhiteSpace(version))
                 {
-                    if (modelsByVersion!.TryGetValue(version, out var modelInfo))
+                    if (modelsByVersion!.TryGetValue(version!, out var modelInfo))
                         return modelInfo;
                     else
                         return null;

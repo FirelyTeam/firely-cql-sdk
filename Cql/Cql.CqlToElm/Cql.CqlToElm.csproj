@@ -5,6 +5,7 @@
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.CqlToElm</AssemblyName>
 		<RootNamespace>Hl7.Cql.CqlToElm</RootNamespace>
+		<LangVersion>9.0</LangVersion>
 		<Product>CQL to ELM converter</Product>
 		<Description>Support package for Hl7.Cql. Unit conversion for CQL. Contains functionality to convert CQL to ELM.</Description>
 	</PropertyGroup>

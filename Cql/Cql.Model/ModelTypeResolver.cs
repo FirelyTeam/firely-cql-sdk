@@ -36,7 +36,7 @@ namespace Hl7.Cql.Model
             if (!string.IsNullOrWhiteSpace(Model.patientClassName))
             {
                 var ns = Model.name;
-                var unprefixedClassName = Model.patientClassName[(ns.Length + 2)..];
+                var unprefixedClassName = Model.patientClassName.Substring(ns.Length + 2);
                 var typeSpecifier = $"{{{Model.url}}}{unprefixedClassName}";
                 var type = ResolveType(typeSpecifier);
                 return type;
@@ -44,7 +44,7 @@ namespace Hl7.Cql.Model
             else if (!string.IsNullOrWhiteSpace(Model.patientClassIdentifier))
             {
                 var ns = Model.name;
-                var unprefixedClassName = Model.patientClassIdentifier[(ns.Length + 2)..];
+                var unprefixedClassName = Model.patientClassIdentifier.Substring(ns.Length + 2);
                 var typeSpecifier = $"{{{Model.url}}}{unprefixedClassName}";
                 var type = ResolveType(typeSpecifier);
                 return type;

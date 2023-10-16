@@ -383,7 +383,7 @@ namespace Hl7.Cql.Runtime
                 queue.RemoveAt(0);
                 if (result.Count > 0)
                 {
-                    var lastResult = result[^1];
+                    var lastResult = result[result.Count -1];
                     var combined = TryCombine(lastResult, firstInQueue);
                     if (combined == null)
                     {
@@ -391,7 +391,7 @@ namespace Hl7.Cql.Runtime
                     }
                     else
                     {
-                        result[^1] = combined;
+                        result[result.Count - 1] = combined;
                     }
                 }
                 else

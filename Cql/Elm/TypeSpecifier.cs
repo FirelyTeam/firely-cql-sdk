@@ -42,7 +42,7 @@ namespace Hl7.Cql.Elm
     public partial class ChoiceTypeSpecifier
     {
         public override string ToString() => $"Choice<{string.Join(", ", EmptyIfNull(choice))}>";
-        public override bool Equals([NotNullWhen(true)] object? other)
+        public override bool Equals(object? other)
         {
             if (base.Equals(other))
                 return true;
@@ -71,7 +71,7 @@ namespace Hl7.Cql.Elm
     public partial class ParameterTypeSpecifier
     {
         public override string ToString() => parameterName ?? "Null";
-        public override bool Equals([NotNullWhen(true)] object? other)
+        public override bool Equals(object? other)
         {
             if (base.Equals(other))
                 return true;
@@ -95,7 +95,7 @@ namespace Hl7.Cql.Elm
     public partial class TupleElementDefinition
     {
         public override string ToString() => $"{name ?? "null"} {elementType?.ToString() ?? "Null"}";
-        public override bool Equals([NotNullWhen(true)] object? other)
+        public override bool Equals(object? other)
         {
             if (base.Equals(other))
                 return true;
@@ -126,7 +126,7 @@ namespace Hl7.Cql.Elm
     {
         public override string ToString() => $"Tuple {{ {string.Join(", ", EmptyIfNull(element))} }}";
 
-        public override bool Equals([NotNullWhen(true)] object? other)
+        public override bool Equals(object? other)
         {
             if (base.Equals(other))
                 return true;
@@ -157,7 +157,7 @@ namespace Hl7.Cql.Elm
     {
         public override string ToString() => $"Interval<{pointType}>";
 
-        public override bool Equals([NotNullWhen(true)] object? other)
+        public override bool Equals(object? other)
         {
             if (base.Equals(other))
                 return true;
@@ -187,7 +187,7 @@ namespace Hl7.Cql.Elm
     {
         public override string ToString() => name?.ToString() ?? "null";
 
-        public override bool Equals([NotNullWhen(true)] object? other)
+        public override bool Equals(object? other)
         {
             if (base.Equals(other))
                 return true;
@@ -209,7 +209,7 @@ namespace Hl7.Cql.Elm
     {
         public override string ToString() => $"List<{elementType}>";
 
-        public override bool Equals([NotNullWhen(true)] object? other)
+        public override bool Equals(object? other)
         {
             if (base.Equals(other))
                 return true;

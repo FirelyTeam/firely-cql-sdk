@@ -3,6 +3,7 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<TargetFrameworks>net6.0;netstandard2.1</TargetFrameworks>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AssemblyName>Hl7.Cql</AssemblyName>
 		<RootNamespace>Hl7.Cql</RootNamespace>

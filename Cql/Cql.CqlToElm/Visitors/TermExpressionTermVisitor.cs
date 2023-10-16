@@ -235,7 +235,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (DecimalExpression.IsMatch(value))
             {
                 var abs = value;
-                if (abs.StartsWith('-'))
+                if (abs.StartsWith("-"))
                     abs = abs[1..];
                 var parts = abs.Split('.');
                 if (parts.Sum(p => p.Length) > 28)

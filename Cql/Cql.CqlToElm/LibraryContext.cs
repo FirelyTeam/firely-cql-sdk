@@ -101,7 +101,7 @@ namespace Hl7.Cql.CqlToElm
         /// <param name="dottedName">A (possibly) qualified identifier for a type.</param>
         internal IEnumerable<Elm.NamedTypeSpecifier> MatchDottedTypeName(string dottedName)
         {
-            var parts = dottedName.Split(".");
+            var parts = dottedName.Split('.');
             var usings = parts.Length == 2 ?
                 ActiveLibrary.usings.Where(u => u.localIdentifier == parts[0]) :
                 ActiveLibrary.usings;

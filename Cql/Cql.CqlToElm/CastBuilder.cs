@@ -87,7 +87,8 @@ namespace Hl7.Cql.CqlToElm
             {
                 var unbound = to.GetGenericParameters().ToList();
                 var map = unbound.Any()
-                    ? new GenericParameterAssignments(unbound.Select(gp => KeyValuePair.Create(gp, (TypeSpecifier)SystemTypes.AnyType)))
+                    ? new GenericParameterAssignments(unbound.Select(gp => 
+                        new KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>(gp, SystemTypes.AnyType)))
                     : null;
 
                 if (map is not null)

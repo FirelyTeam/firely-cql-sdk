@@ -50,7 +50,7 @@ namespace Hl7.Cql.Elm
 
         internal static XmlQualifiedName QualifiedNameForSystemType(string name)
         {
-            var nameWithoutPrefix = name.StartsWith(SystemModelPrefix) ? name[SystemModelPrefix.Length..] : name;
+            var nameWithoutPrefix = name.StartsWith(SystemModelPrefix) ? name.Substring(SystemModelPrefix.Length) : name;
             return bootstrapSystemModel.MakeQualifiedTypeName(nameWithoutPrefix);
         }
 

@@ -264,7 +264,7 @@ namespace Hl7.Cql.Runtime
         /// <returns><see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.</returns>
         public bool TryGetDefinitionsForLibrary(string? libraryName, out IEnumerable<KeyValuePair<string, List<(Type[], T)>>>? definitions)
         {
-            if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName, out var library))
+            if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName!, out var library))
             {
                 definitions = library;
                 return true;
@@ -285,13 +285,15 @@ namespace Hl7.Cql.Runtime
         /// <returns><see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.</returns>
         public bool TryGetDefinesForLibrary(string? libraryName, out IEnumerable<KeyValuePair<string, T>>? definitions)
         {
-            if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName, out var library))
+            if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName!, out var library))
             {
                 var allDefinitions = library;
                 var defines = new Dictionary<string, T>();
 
-                foreach (var (defName, overloads) in allDefinitions)
+                foreach (var kvp in allDefinitions)
                 {
+                    var defName = kvp.Key;
+                    var overloads = kvp.Value;
                     foreach (var (paramTypes, del) in overloads)
                     {
                         if (paramTypes.Length == 0)

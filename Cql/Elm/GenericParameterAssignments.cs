@@ -7,6 +7,7 @@
  */
 
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Hl7.Cql.Elm
 {
@@ -21,8 +22,10 @@ namespace Hl7.Cql.Elm
         }
 
         /// <inheritdoc/>
-        public GenericParameterAssignments(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> collection) : base(collection)
+        public GenericParameterAssignments(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> collection)            
         {
+            foreach (var kvp in collection)
+                Add(kvp.Key, kvp.Value);
         }
 
         /// <summary>

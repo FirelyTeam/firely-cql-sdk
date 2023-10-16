@@ -3,6 +3,7 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<TargetFrameworks>net6.0;netstandard2.1</TargetFrameworks>
 		<AssemblyName>Hl7.Cql.CodeGeneration.NET</AssemblyName>
 		<RootNamespace>Hl7.Cql.CodeGeneration.NET</RootNamespace>
 		<Product>.NET Code Generation</Product>

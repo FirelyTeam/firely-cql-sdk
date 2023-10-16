@@ -129,9 +129,11 @@ namespace Hl7.Cql.Fhir
                             }
                             foreach (var code in cvsCodes!)
                             {
-                                if (!string.IsNullOrWhiteSpace(code.code) && !string.IsNullOrWhiteSpace(code.system))
+                                if (code != null 
+                                    && !string.IsNullOrWhiteSpace(code.code) 
+                                    && !string.IsNullOrWhiteSpace(code.system))
                                 {
-                                    if (!dictionary.IsCodeInValueSet(vs.Url, code.code!, code.system))
+                                    if (!dictionary.IsCodeInValueSet(vs.Url, code.code!, code.system!))
                                     {
                                         dictionary.Add(vs.Url, new CqlCode(code.code, code.system, code.version, code.display));
                                     }

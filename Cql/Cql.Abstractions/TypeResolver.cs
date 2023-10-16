@@ -173,7 +173,7 @@ namespace Hl7.Cql.Abstractions
         /// <remarks>
         /// The base implementation aliases the FHIR Range type to whatever type
         /// <see cref="ResolveType(string)"/> returns when passed "{http://hl7.org/fhir}"
-        /// to avoid conflicts with <see cref="Range"/>.
+        /// to avoid conflicts with the .NET base class libraries.
         /// </remarks>
         public virtual IEnumerable<(string alias, string type)> Aliases =>
             Enumerable.Empty<(string alias, string type)>();

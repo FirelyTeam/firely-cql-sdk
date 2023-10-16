@@ -53,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (!string.IsNullOrWhiteSpace(defaultSystemUri)
                 && !string.IsNullOrWhiteSpace(defaultSystemVersion))
             {
-                var model = ModelProvider.ModelFromUri(defaultSystemUri, defaultSystemVersion);
+                var model = ModelProvider.ModelFromUri(defaultSystemUri!, defaultSystemVersion!);
                 if (model != null)
                 {
                     usings.AddFirst(new UsingDef

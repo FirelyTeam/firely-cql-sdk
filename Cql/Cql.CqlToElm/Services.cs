@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm
             for (int i = 0; i < props.Length; i++)
             {
                 var prop = props[i];
-                kvps[i] = KeyValuePair.Create(prop.Name, prop.GetValue(opt)?.ToString());
+                kvps[i] = new KeyValuePair<string, string?>(prop.Name, prop.GetValue(opt)?.ToString());
             }
             builder.AddInMemoryCollection(kvps);
             return builder;

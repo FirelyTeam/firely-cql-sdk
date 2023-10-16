@@ -2,6 +2,7 @@
 	<Import Project="$(ProjectPath)..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<TargetFrameworks>net6.0;netstandard2.1</TargetFrameworks>
 		<AssemblyName>Hl7.Cql.Compiler</AssemblyName>
 		<RootNamespace>Hl7.Cql.Compiler</RootNamespace>
 		<Product>CQL measure compiler</Product>
