@@ -70,7 +70,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 VariableNameGenerator.NormalizeIdentifier(dce.LibraryName);
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
 
-            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
+            sb.Append(string.Format(CultureInfo.InvariantCulture, "{0}.{1}()", target, csFunctionName));
+
 
             return sb.ToString();
         }
@@ -84,7 +85,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(fce.FunctionName);
 
-            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}");
+            sb.Append(string.Format(CultureInfo.InvariantCulture, "{0}.{1}", target, csFunctionName));
             sb.Append(convertArguments(indent, fce.Arguments.Skip(1)));  // skip cqlContext
 
             return sb.ToString();
@@ -194,7 +195,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 _ => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
 
-            sb.Append(CultureInfo.InvariantCulture, $"{@object}{PrettyMethodName(call.Method)}");
+            sb.Append(string.Format(CultureInfo.InvariantCulture, "{0}{1}", @object, PrettyMethodName(call.Method)));
 
             var paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1) : call.Arguments;
 
@@ -254,12 +255,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             conditionalSb.Append(leadingIndentString);
             conditionalSb.Append('(');
             var test = ConvertExpression(indent, ce.Test, false);
-            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{Parenthesize(test)}");
+            conditionalSb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}", Parenthesize(test)));
 
             var ifTrue = $"{Parenthesize(ConvertExpression(indent + 2, ce.IfTrue, false))}";
             var ifFalse = $"{Parenthesize(ConvertExpression(indent + 2, ce.IfFalse, false))}";
-            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{IndentString(indent + 1)}? {ifTrue}");
-            conditionalSb.Append(CultureInfo.InvariantCulture, $"{IndentString(indent + 1)}: {ifFalse})");
+            conditionalSb.AppendLine(string.Format(CultureInfo.InvariantCulture, "{0}? {1}", IndentString(indent + 1), ifTrue));
+            conditionalSb.Append(string.Format(CultureInfo.InvariantCulture, "{0}: {1}", IndentString(indent + 1), ifFalse));
 
             if (ce.IfTrue.Type != ce.Type || ce.IfFalse.Type != ce.Type)
                 return $"(({PrettyTypeName(ce.Type)}){conditionalSb})";
@@ -397,8 +398,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             var argString = string.Join(", ", arguments);
 
             var newSb = new StringBuilder();
-            newSb.Append(CultureInfo.InvariantCulture, $"{leadingIndentString}new {PrettyTypeName(@new.Type)}");
-            newSb.Append(CultureInfo.InvariantCulture, $"({argString})");
+            newSb.Append(string.Format(CultureInfo.InvariantCulture, "{0}new {1}", leadingIndentString, PrettyTypeName(@new.Type)));
+            newSb.Append(string.Format(CultureInfo.InvariantCulture, "({0})", argString));
             return newSb.ToString();
         }
 

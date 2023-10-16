@@ -30,14 +30,15 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc />
-        public int? Compare(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y);
+        // Comparer.Compare doesn't have nullable annotations in netstandard21
+        public int? Compare(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x!, y!); 
 
         /// <inheritdoc />
         public bool? Equals(object? x, object? y, string? precision = null) =>
             Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
-        public bool? Equals(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y) == 0;
+        public bool? Equals(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x!, y!) == 0;
 
         /// <inheritdoc />
         public bool Equivalent(object? x, object? y, string? precision = null) =>

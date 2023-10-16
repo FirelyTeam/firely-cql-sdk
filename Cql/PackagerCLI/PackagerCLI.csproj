@@ -3,6 +3,7 @@
 	<Import Project="..\..\cql-sdk.props" />
 
 	<PropertyGroup>
+		<TargetFrameworks>net6.0</TargetFrameworks>
 		<OutputType>Exe</OutputType>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<PackAsTool>true</PackAsTool>

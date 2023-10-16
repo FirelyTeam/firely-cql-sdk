@@ -241,7 +241,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             string version = string.Empty;
             if (parts.Length > 1)
                 version = parts[1];
-            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
+            asmInfo.AppendLine(string.Format(CultureInfo.InvariantCulture, "[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{0}\", \"{1}\")]", name, version));
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
             var compilation = CSharpCompilation.Create($"{node.NodeId}")

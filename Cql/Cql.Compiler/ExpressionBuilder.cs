@@ -983,7 +983,7 @@ namespace Hl7.Cql.Compiler
         {
             if (precisionSpecified)
             {
-                var name = Enum.GetName(elmPrecision)!.ToLowerInvariant();
+                var name = Enum.GetName(typeof(DateTimePrecision), elmPrecision)!.ToLowerInvariant();
                 var ce = Expression.Constant(name, typeof(string));
                 return ce;
             }

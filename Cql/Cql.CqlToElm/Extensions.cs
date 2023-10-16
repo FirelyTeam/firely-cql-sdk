@@ -14,7 +14,17 @@ namespace Hl7.Cql.CqlToElm
         public static string NextId(object context) => _idGenerator.GetId(context, out _)
                 .ToString(CultureInfo.InvariantCulture);
 
-        public static string NextId() => NextId(Random.Shared.Next());
+        private static readonly Random Random = new Random();
+
+        public static string NextId()
+        {
+            lock (Random) 
+            {
+                var next = Random.Next();
+                var id = NextId(next);
+                return id;
+            }
+        }
 
         public static string Locator(this ParserRuleContext ctx) =>
             $"{ctx.Start.Line}:{ctx.Start.Column}-{ctx.Stop.Line}:{ctx.Stop.Column}";

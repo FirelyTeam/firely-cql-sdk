@@ -38,7 +38,12 @@ namespace Hl7.Cql.Primitives
             this.lowClosed = lowClosed;
             this.highClosed = highClosed;
             String = new Lazy<string>(() =>
-            string.Create(CultureInfo.InvariantCulture, $"{(this.lowClosed ?? false ? "[" : "(")}{this.low}, {this.high}{(this.highClosed ?? false ? "]" : ")")}"));
+                string.Format(CultureInfo.InvariantCulture,
+                    "{0}{1}, {2}{3}",
+                    this.lowClosed ?? false ? "[" : "(",
+                    this.low,
+                    this.high,
+                    this.highClosed ?? false ? "]" : ")"));
         }
 
         /// <summary>
@@ -60,7 +65,12 @@ namespace Hl7.Cql.Primitives
             this.lowClosed = lowClosed ?? false;
             this.highClosed = highClosed ?? false;
             String = new Lazy<string>(() =>
-                string.Create(CultureInfo.InvariantCulture, $"{(this.lowClosed ?? false ? "[" : "(")}{this.low}, {this.high}{(this.highClosed ?? false ? "]" : ")")}"));
+                string.Format(CultureInfo.InvariantCulture,
+                    "{0}{1}, {2}{3}",
+                    this.lowClosed ?? false ? "[" : "(",
+                    this.low,
+                    this.high,
+                    this.highClosed ?? false ? "]" : ")"));
         }
 
 

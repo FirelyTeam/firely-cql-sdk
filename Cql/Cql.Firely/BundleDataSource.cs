@@ -98,7 +98,7 @@ namespace Hl7.Cql.Fhir
         {
             if (codeProperty is null)
             {
-                if (!typeof(T).IsAssignableTo(typeof(ICoded)))
+                if (!typeof(ICoded).IsAssignableFrom(typeof(T)))
                     throw new InvalidOperationException($"When retrieving with a code filter, a primary code path must exist for {typeof(T)}. None is defined.");
 
                 return Bundle.FilterByType<T>(filter);

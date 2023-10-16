@@ -17,7 +17,7 @@ namespace Hl7.Cql.Compiler
     {
         public static TypeConverter AddElmConversions(this TypeConverter converter)
         {
-            converter.AddConversion<DateTimePrecision, string?>(dtp => Enum.GetName(dtp));
+            converter.AddConversion<DateTimePrecision, string?>(dtp => Enum.GetName(typeof(DateTimePrecision), dtp));
             converter.AddConversion<string, DateTimePrecision>(Enum.Parse<DateTimePrecision>);
             return converter;
         }

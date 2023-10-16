@@ -25,7 +25,7 @@ namespace Hl7.Cql.Elm.Serialization
                 if (typeof(JsonConverter<>).IsAssignableFrom(gtd))
                 {
                     var readMethod = converterType.GetMethod(nameof(Read))!;
-                    var @delegate = readMethod.CreateDelegate<ReadDelegate>(converter);
+                    var @delegate = (ReadDelegate)readMethod.CreateDelegate(typeof(ReadDelegate), converter);
                     var result = @delegate(ref reader, typeToConvert, options);
                     return result;
                 }

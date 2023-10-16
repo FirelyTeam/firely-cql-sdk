@@ -37,7 +37,7 @@ namespace Hl7.Cql.Compiler
                 throw new ArgumentException($"Argument should be of type {nameof(DefinitionDictionary<Delegate>)}",
                     nameof(definitions));
 
-            if (!functionType.IsAssignableTo(typeof(MulticastDelegate)))
+            if (!typeof(MulticastDelegate).IsAssignableFrom(functionType))
                 throw new ArgumentException("Argument should be a delegate type", nameof(functionType));
 
             Definitions = definitions;
