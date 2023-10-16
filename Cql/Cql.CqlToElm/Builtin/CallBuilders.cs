@@ -13,28 +13,83 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal static class CallBuilders
+    internal record CallBuilderResult(FunctionDef Def, OperatorExpression Result, int Cost, string? Error)
     {
-        public static U Call<U>(this BuiltInUnaryFunctionDef<U> def, IModelProvider provider, ParserRuleContext context, Expression argument)
-             where U : UnaryExpression, new()
-        {
-            var (operands, resultType) = autoCastParams(def, new Expression[] { argument }, provider);
+        public bool Success => Error is null;
 
-            return new U
+        public static implicit operator OperatorExpression(CallBuilderResult result) =>
+        result.Success ?
+            result.Result
+            : throw new InvalidOperationException($"Failed to bind to {operatorType(result.Def.operand.Length)} '{result.Def.name}' - {result.Error}");
+
+        private static string operatorType(int numArgs)
+        {
+            return numArgs switch
             {
-                operand = operands.Single()
-            }.WithResultType(resultType).WithLocator(context.Locator());
+                0 => "definition",
+                1 => "unary operator",
+                2 => "binary operator",
+                3 => "ternary operator",
+                _ => "function"
+            };
         }
 
-        public static N Call<N>(this BuiltinNaryFunctionDef<N> def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        public CallBuilderResult Or(CallBuilderResult other)
+        {
+            if (!Success && other.Success)
+                return other;
+            else if (Success && !other.Success)
+                return this;
+
+            return Cost <= other.Cost ? this : other;
+        }
+    }
+
+    internal static class CallBuilders
+    {
+        public static CallBuilderResult Call<U>(this BuiltInUnaryFunctionDef<U> def, IModelProvider provider, ParserRuleContext context, Expression argument)
+             where U : UnaryExpression, new()
+        {
+            var castResult = autoCastParams(def, new Expression[] { argument }, provider);
+            var expr = new U
+            {
+                operand = castResult.Casters.Single()
+            }.WithResultType(castResult.ReturnType).WithLocator(context.Locator());
+
+            return new CallBuilderResult(def, expr, castResult.Cost, castResult.Error);
+        }
+
+        public static CallBuilderResult Call<B>(this BuiltInBinaryFunctionDef<B> def, IModelProvider provider, ParserRuleContext context, Expression left, Expression right)
+           where B : BinaryExpression, new()
+        {
+            var castResult = autoCastParams(def, new Expression[] { left, right }, provider);
+            var expr = new B
+            {
+                operand = castResult.Casters
+            }.WithResultType(castResult.ReturnType).WithLocator(context.Locator());
+
+            return new CallBuilderResult(def, expr, castResult.Cost, castResult.Error);
+        }
+
+        public static CallBuilderResult Call<N>(this BuiltInNaryFunctionDef<N> def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
             where N : NaryExpression, new()
         {
-            var (operands, resultType) = autoCastParams(def, arguments, provider);
-
-            return new N
+            var castResult = autoCastParams(def, arguments, provider);
+            var expr = new N
             {
-                operand = operands
-            }.WithResultType(resultType).WithLocator(context.Locator());
+                operand = castResult.Casters
+            }.WithResultType(castResult.ReturnType).WithLocator(context.Locator());
+
+            return new CallBuilderResult(def, expr, castResult.Cost, castResult.Error);
+        }
+
+        public static U Call<U>(this BuiltInConversionFunctionDef<U> def, ParserRuleContext context, Expression argument)
+            where U : UnaryExpression, new()
+        {
+            return new U
+            {
+                operand = argument
+            }.WithResultType(def.resultTypeSpecifier).WithLocator(context.Locator());
         }
 
         public static As Call(this AsFunctionDef _, bool strict, TypeSpecifier typeArgument, Expression argument, ParserRuleContext context)
@@ -82,28 +137,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }.WithResultType(typeArgument).WithLocator(context.Locator());
         }
 
-        private static (Expression[] operands, TypeSpecifier resultType) autoCastParams(FunctionDef def, Expression[] arguments, IModelProvider provider)
+        private static FunctionMatchResult autoCastParams(FunctionDef def, Expression[] arguments, IModelProvider provider)
         {
             var castBuilder = new CastBuilder(provider);
-            var result = castBuilder.Build(def, arguments);
-
-            if (!result.Success)
-                throw new InvalidOperationException($"Failed to bind to {operatorType(def.operand.Length)} '{def.name}' - {result.Error}");
-
-            return (result.Casters, result.ReturnType);
+            return castBuilder.Build(def, arguments);
         }
-
-        private static string operatorType(int numArgs)
-        {
-            return numArgs switch
-            {
-                0 => "definition",
-                1 => "unary operator",
-                2 => "binary operator",
-                3 => "ternary operator",
-                _ => "function"
-            };
-        }
-
     }
 }

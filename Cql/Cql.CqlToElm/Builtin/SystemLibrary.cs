@@ -32,7 +32,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
             Predecessor, Successor,
             Is, As,
             MinValue, MaxValue,
-            UnionInterval, UnionList
+            UnionInterval, UnionList,
+            And,
+            IntegerToDecimal, LongToDecimal, IntegerToLong, IntegerToQuantity, DecimalToQuantity, DateToDateTime, CodeToConcept
         };
 
         public static BuiltInUnaryFunctionDef<End> End = new(nameof(End), T.ToIntervalType(), T);
@@ -48,13 +50,53 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static BuiltInUnaryFunctionDef<Width> Width = new(nameof(Width), T.ToIntervalType(), T);
         public static BuiltInUnaryFunctionDef<Predecessor> Predecessor = new(nameof(Predecessor), T, T);
         public static BuiltInUnaryFunctionDef<Successor> Successor = new(nameof(Successor), T, T);
+
         public static AsFunctionDef As = new();
         public static IsFunctionDef Is = new();
         public static MinValueFunctionDef MinValue = new();
         public static MaxValueFunctionDef MaxValue = new();
-        public static BuiltinNaryFunctionDef<Union> UnionInterval = new(nameof(UnionInterval), T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType());
-        public static BuiltinNaryFunctionDef<Union> UnionList = new(nameof(UnionList), T.ToListType(), T.ToListType(), T.ToListType());
+
+        public static BuiltInNaryFunctionDef<Union> UnionInterval = new(nameof(Union), T.ToIntervalType(), T.ToIntervalType(), T.ToIntervalType());
+        public static BuiltInNaryFunctionDef<Union> UnionList = new(nameof(Union), T.ToListType(), T.ToListType(), T.ToListType());
+
+        public static BuiltInBinaryFunctionDef<And> And = new(nameof(And), BooleanType, BooleanType, BooleanType);
+
+        public static BuiltInConversionFunctionDef<ToDecimal> IntegerToDecimal = new(nameof(ToDecimal), IntegerType, DecimalType);
+        public static BuiltInConversionFunctionDef<ToDecimal> LongToDecimal = new(nameof(ToDecimal), LongType, DecimalType);
+        public static BuiltInConversionFunctionDef<ToLong> IntegerToLong = new(nameof(ToLong), IntegerType, LongType);
+        public static BuiltInConversionFunctionDef<ToQuantity> IntegerToQuantity = new(nameof(ToQuantity), IntegerType, QuantityType);
+        public static BuiltInConversionFunctionDef<ToQuantity> LongToQuantity = new(nameof(ToQuantity), LongType, QuantityType);
+        public static BuiltInConversionFunctionDef<ToQuantity> DecimalToQuantity = new(nameof(ToQuantity), DecimalType, QuantityType);
+        public static BuiltInConversionFunctionDef<ToDateTime> DateToDateTime = new(nameof(ToDateTime), DateType, DateTimeType);
+        public static BuiltInConversionFunctionDef<ToConcept> CodeToConcept = new(nameof(ToConcept), CodeType, ConceptType);
+
+        public static BuiltInBinaryFunctionDef<Add> AddInteger = new(nameof(Add), IntegerType, IntegerType, IntegerType);
+        public static BuiltInBinaryFunctionDef<Add> AddLong = new(nameof(Add), LongType, LongType, LongType);
+        public static BuiltInBinaryFunctionDef<Add> AddDecimal = new(nameof(Add), DecimalType, DecimalType, DecimalType);
+        public static BuiltInBinaryFunctionDef<Add> AddQuantity = new(nameof(Add), QuantityType, QuantityType, QuantityType);
+        public static BuiltInBinaryFunctionDef<Add> AddDate = new(nameof(Add), DateType, QuantityType, DateType);
+        public static BuiltInBinaryFunctionDef<Add> AddDateTime = new(nameof(Add), DateTimeType, QuantityType, DateTimeType);
+        public static BuiltInBinaryFunctionDef<Add> AddTime = new(nameof(Add), TimeType, QuantityType, TimeType);
+
+        public static BuiltInBinaryFunctionDef<Subtract> SubtractInteger = new(nameof(Add), IntegerType, IntegerType, IntegerType);
+        public static BuiltInBinaryFunctionDef<Subtract> SubtractLong = new(nameof(Add), LongType, LongType, LongType);
+        public static BuiltInBinaryFunctionDef<Subtract> SubtractDecimal = new(nameof(Add), DecimalType, DecimalType, DecimalType);
+        public static BuiltInBinaryFunctionDef<Subtract> SubtractQuantity = new(nameof(Add), QuantityType, QuantityType, QuantityType);
+        public static BuiltInBinaryFunctionDef<Subtract> SubtractDate = new(nameof(Add), DateType, QuantityType, DateType);
+        public static BuiltInBinaryFunctionDef<Subtract> SubtractDateTime = new(nameof(Add), DateTimeType, QuantityType, DateTimeType);
+        public static BuiltInBinaryFunctionDef<Subtract> SubtractTime = new(nameof(Add), TimeType, QuantityType, TimeType);
+
+        public static BuiltInNaryFunctionDef<Concatenate> Concatenate = new(nameof(Concatenate), StringType, StringType, StringType);
     }
+
+
+    internal class BuiltInConversionFunctionDef<U> : BuiltInFunctionDef where U : UnaryExpression, new()
+    {
+        public BuiltInConversionFunctionDef(string name, TypeSpecifier operand, TypeSpecifier resultType) : base(name, new[] { operand }, resultType)
+        {
+        }
+    }
+
 
     internal class BuiltInUnaryFunctionDef<E> : BuiltInFunctionDef where E : UnaryExpression, new()
     {
@@ -63,11 +105,18 @@ namespace Hl7.Cql.CqlToElm.Builtin
         }
     }
 
-    internal class BuiltinNaryFunctionDef<E> : BuiltInFunctionDef where E : NaryExpression, new()
+    internal class BuiltInBinaryFunctionDef<E> : BuiltInFunctionDef where E : BinaryExpression, new()
+    {
+        public BuiltInBinaryFunctionDef(string name, TypeSpecifier left, TypeSpecifier right, TypeSpecifier resultType) : base(name, new[] { left, right }, resultType)
+        {
+        }
+    }
+
+    internal class BuiltInNaryFunctionDef<E> : BuiltInFunctionDef where E : NaryExpression, new()
     {
         // Convenience constructor for Nary functions having just two operands.
         // (don't want to have to specify the array for the common case)
-        public BuiltinNaryFunctionDef(string name, TypeSpecifier lhs, TypeSpecifier rhs, TypeSpecifier resultType)
+        public BuiltInNaryFunctionDef(string name, TypeSpecifier lhs, TypeSpecifier rhs, TypeSpecifier resultType)
             : base(name, new[] { lhs, rhs }, resultType)
         {
         }

@@ -2,15 +2,11 @@
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class AndTest: Base
+    public class AndTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -354,7 +350,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_1()
         {
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private True_And_1: true and 1

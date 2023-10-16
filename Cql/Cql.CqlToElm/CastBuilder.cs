@@ -6,11 +6,6 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal record ArgumentCaster(Expression Caster, int Cost, GenericParameterAssignments? Assignments, string? Error)
-    {
-        public bool Success => Error is null;
-    }
-
     internal record FunctionMatchResult(Expression[] Casters, int Cost, TypeSpecifier ReturnType, string? Error)
     {
         public bool Success => Error is null;
@@ -25,6 +20,11 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class CastBuilder
     {
+        private record ArgumentCaster(Expression Caster, int Cost, GenericParameterAssignments? Assignments, string? Error)
+        {
+            public bool Success => Error is null;
+        }
+
         public IModelProvider Provider { get; }
         public CastBuilder(IModelProvider provider)
         {
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm
             for (int ix = 0; ix < candidate.operand.Length; ix++)
             {
                 var targetType = candidate.operand[ix].operandTypeSpecifier.ReplaceGenericParameters(genericReplacements);
-                var argumentResult = Build(arguments[ix], targetType);
+                var argumentResult = buildArgumentCast(arguments[ix], targetType);
 
                 if (!argumentResult.Success)
                 {
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CqlToElm
                 Error: error);
         }
 
-        public ArgumentCaster Build(Expression argument, TypeSpecifier to)
+        private ArgumentCaster buildArgumentCast(Expression argument, TypeSpecifier to)
         {
             var argumentType = argument.resultTypeSpecifier;
             var locatorContext = new StringLocatorRuleContext(argument.locator);
@@ -83,7 +83,7 @@ namespace Hl7.Cql.CqlToElm
             // Untyped Nulls get promoted to any type necessary. If the target type has unbound
             // generic parameters, we will default those to System.Any.
             // See https://cql.hl7.org/03-developersguide.html#implicit-casting
-            if (argument is Null n && n.resultTypeSpecifier is null)
+            if (argument is Null n && (n.resultTypeSpecifier is null || to.IsSubtypeOf(n.resultTypeSpecifier, Provider)))
             {
                 var unbound = to.GetGenericParameters().ToList();
                 var map = unbound.Any()
@@ -103,14 +103,10 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
                 var prototypeInstance = new Null { resultTypeSpecifier = fromList.elementType };
-                var elementCast = Build(prototypeInstance, toList.elementType);
+                var elementCast = buildArgumentCast(prototypeInstance, toList.elementType);
 
                 if (elementCast.Success && elementCast.Caster == prototypeInstance)
                     return new(argument, elementCast.Cost, elementCast.Assignments, null);
-                else
-                {
-                    return new(argument, int.MaxValue, null, $"cannot implicitly be cast from {argumentType} to {to}");
-                }
             }
 
             // Casting an Interval<X> to an Interval<Y> is not possible in general(?), but it is
@@ -118,20 +114,35 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
             {
                 var prototypeInstance = new Null { resultTypeSpecifier = fromInterval.pointType };
-                var elementCast = Build(prototypeInstance, toInterval.pointType);
+                var elementCast = buildArgumentCast(prototypeInstance, toInterval.pointType);
 
                 if (elementCast.Success && elementCast.Caster == prototypeInstance)
                     return new(argument, elementCast.Cost, elementCast.Assignments, null);
-                else
-                {
-                    return new(argument, int.MaxValue, null, $"cannot implicitly be cast from {argumentType} to {to}");
-                }
             }
 
             // TODO: choice, https://cql.hl7.org/03-developersguide.html#choice-types
 
-            // TODO: decimal/int etc implicits, https://cql.hl7.org/03-developersguide.html#implicit-conversions
+            // Implicit casts, see https://cql.hl7.org/03-developersguide.html#implicit-conversions
             // (note table is skewed, move first row 1 to the left, move row 2 2 to the left, etc)
+            if (argumentType == SystemTypes.IntegerType && to == SystemTypes.LongType)
+                return new(SystemLibrary.IntegerToLong.Call(locatorContext, argument), 1, null, null);
+            if (argumentType == SystemTypes.IntegerType && to == SystemTypes.DecimalType)
+                return new(SystemLibrary.IntegerToDecimal.Call(locatorContext, argument), 1, null, null);
+            if (argumentType == SystemTypes.LongType && to == SystemTypes.DecimalType)
+                return new(SystemLibrary.LongToDecimal.Call(locatorContext, argument), 1, null, null);
+            if (argumentType == SystemTypes.IntegerType && to == SystemTypes.QuantityType)
+                return new(SystemLibrary.IntegerToQuantity.Call(locatorContext, argument), 1, null, null);
+            if (argumentType == SystemTypes.LongType && to == SystemTypes.QuantityType)
+                return new(SystemLibrary.LongToQuantity.Call(locatorContext, argument), 1, null, null);
+            if (argumentType == SystemTypes.DecimalType && to == SystemTypes.QuantityType)
+                return new(SystemLibrary.DecimalToQuantity.Call(locatorContext, argument), 1, null, null);
+            if (argumentType == SystemTypes.DateType && to == SystemTypes.DateTimeType)
+                return new(SystemLibrary.DateToDateTime.Call(locatorContext, argument), 1, null, null);
+            if (argumentType == SystemTypes.CodeType && to == SystemTypes.ConceptType)
+                return new(SystemLibrary.CodeToConcept.Call(locatorContext, argument), 1, null, null);
+            // TODO: There is still ValueSet to List, but it's not clear which function to call,
+            // ToList<T>(T) would probably create a list with a single element, the valueset, but
+            // that is not the intent.
 
             // TODO: interval promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
 
@@ -141,7 +152,7 @@ namespace Hl7.Cql.CqlToElm
                 try
                 {
                     var nested = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
-                    var intermediate = Build(nested, to);
+                    var intermediate = buildArgumentCast(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }
                 catch (Exception e)
@@ -158,7 +169,7 @@ namespace Hl7.Cql.CqlToElm
                 try
                 {
                     var nested = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
-                    var intermediate = Build(nested, to);
+                    var intermediate = buildArgumentCast(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }
                 catch (Exception e)

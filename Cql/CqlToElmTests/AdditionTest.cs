@@ -1451,17 +1451,17 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_DateTypes_to_Quantity()
         {
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library Add_Date_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @2023-01-01
             "));
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library Add_Time_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @T01:23:45
             "));
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library Add_DateTime_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @2023-01-01T01:23:45.300+01:30

@@ -58,12 +58,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitPointExtractorExpressionTerm([NotNull] cqlParser.PointExtractorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-
-            return operand.resultTypeSpecifier switch
-            {
-                IntervalTypeSpecifier => SystemLibrary.PointFrom.Call(ModelProvider, context, operand),
-                _ => throw UnresolvedSignature(nameof(PointFrom), operand)
-            };
+            return SystemLibrary.PointFrom.Call(ModelProvider, context, operand);
         }
 
         //    | 'predecessor' 'of' expressionTerm                                             #predecessorExpressionTerm
@@ -98,17 +93,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var startOrEnd = Keyword.Parse(context.GetChild(0)).Single();
             var operand = Visit(context.expressionTerm());
 
-            if (operand.resultTypeSpecifier is IntervalTypeSpecifier)
+            return startOrEnd switch
             {
-                return startOrEnd switch
-                {
-                    CqlKeyword.Start => SystemLibrary.Start.Call(ModelProvider, context, operand),
-                    CqlKeyword.End => SystemLibrary.End.Call(ModelProvider, context, operand),
-                    _ => throw UnresolvedSignature("Start", operand)
-                };
-            }
-            else
-                throw UnresolvedSignature("Start", operand);
+                CqlKeyword.Start => SystemLibrary.Start.Call(ModelProvider, context, operand),
+                CqlKeyword.End => SystemLibrary.End.Call(ModelProvider, context, operand),
+                _ => throw UnresolvedSignature("Start", operand)
+            };
         }
 
         //    ('minimum' | 'maximum') namedTypeSpecifier                                    #typeExtentExpressionTerm
@@ -135,11 +125,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return operand.resultTypeSpecifier switch
-            {
-                IntervalTypeSpecifier => SystemLibrary.Width.Call(ModelProvider, context, operand),
-                _ => throw UnresolvedSignature("Width", operand)
-            };
+            return SystemLibrary.Width.Call(ModelProvider, context, operand);
         }
 
         //   expression ('is' | 'as') typeSpecifier  
@@ -153,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 CqlKeyword.Is => SystemLibrary.Is.Call(typeSpec, lhs, context),
                 CqlKeyword.As => SystemLibrary.As.Call(false, typeSpec, lhs, context),
-                _ => throw Critical($"Unexpected operator {@operator}")
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in a type expression.")
             };
 
             return expression;

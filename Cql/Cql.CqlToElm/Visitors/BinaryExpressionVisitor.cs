@@ -1,6 +1,7 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
@@ -11,303 +12,48 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
+        //   expression 'and' expression                                                                   #andExpression
         public override Expression VisitAndExpression([NotNull] cqlParser.AndExpressionContext context)
         {
-            var lhs = Visit(context.GetChild(0)!)!;
-            var rhs = Visit(context.GetChild(2)!)!;
+            var expressions = context.expression();
+            var lhs = Visit(expressions[0]);
+            var rhs = Visit(expressions[1]);
 
-            if (lhs is Null)
-                lhs = new As
-                {
-                    operand = lhs,
-                    localId = NextId(),
-                    locator = lhs.locator,
-                    asType = BooleanTypeQName,
-                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
-                    resultTypeName = BooleanTypeQName,
-                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                };
-            if (rhs is Null)
-                rhs = new As
-                {
-                    operand = rhs,
-                    localId = NextId(),
-                    locator = rhs.locator,
-                    asType = BooleanTypeQName,
-                    asTypeSpecifier = NamedType(BooleanTypeQName, context),
-                    resultTypeName = BooleanTypeQName,
-                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                };
-
-
-            if (lhs.resultTypeName != BooleanTypeQName
-                || rhs.resultTypeName != BooleanTypeQName)
-                UnresolvedSignature("And", lhs, rhs);
-            var and = new And
-            {
-                localId = NextId(),
-                locator = context.Locator(),
-                operand = new[] { lhs, rhs },
-                resultTypeName = BooleanTypeQName,
-                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-            };
+            var and = SystemLibrary.And.Call(ModelProvider, context, lhs, rhs);
             return and;
         }
 
+        // expressionTerm('+' | '-' | '&') expressionTerm                               #additionExpressionTerm
         public override Expression VisitAdditionExpressionTerm([NotNull] cqlParser.AdditionExpressionTermContext context)
         {
-            var lhsChild = context.GetChild(0) as cqlParser.ExpressionTermContext;
-            var rhsChild = context.GetChild(2) as cqlParser.ExpressionTermContext;
-
-            var lhs = Visit(lhsChild!)!;
+            var terms = context.expressionTerm();
+            var lhs = Visit(terms[0]);
             var @operator = context.GetChild(1).GetText();
-            var rhs = Visit(rhsChild!)!;
-
-            #region Operand conversions
-
-            if (lhs is Null)
-            {
-                if (rhs is Null)
-                {
-                    throw Critical($"Cannot add null to null");
-                }
-                else
-                {
-                    lhs = new As
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        asType = rhs!.resultTypeName,
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
-                        resultTypeName = new XmlQualifiedName(rhs!.resultTypeName.Name),
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
-                    };
-                }
-            }
-            else if (rhs is Null)
-            {
-                NamedTypeSpecifier? asType = null;
-                if (lhs.resultTypeName == DateTypeQName
-                    || lhs.resultTypeName == DateTimeTypeQName
-                    || lhs.resultTypeName == TimeTypeQName)
-                {
-                    asType = NamedType(QuantityTypeQName, context);
-                }
-                else
-                {
-                    asType = NamedType(lhs!.resultTypeName, context);
-                }
-                rhs = new As
-                {
-                    operand = rhs,
-                    localId = NextId(),
-                    locator = rhs.locator,
-                    asType = new XmlQualifiedName(asType.name.Name),
-                    asTypeSpecifier = asType,
-                    resultTypeName = new XmlQualifiedName(asType.name.Name),
-                    resultTypeSpecifier = NamedType(asType.name, context),
-                };
-            }
-            else if (lhs.resultTypeName == IntegerTypeQName)
-            {
-                if (rhs.resultTypeName == DecimalTypeQName)
-                    lhs = new ToDecimal
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        resultTypeName = DecimalTypeQName,
-                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
-                    };
-                else if (rhs.resultTypeName == LongTypeQName)
-                    lhs = new ToLong
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        resultTypeName = LongTypeQName,
-                        resultTypeSpecifier = NamedType(LongTypeQName, context),
-                    };
-                else if (rhs.resultTypeName == QuantityTypeQName)
-                    lhs = new ToQuantity
-                    {
-                        operand = new ToDecimal
-                        {
-                            operand = lhs,
-                            localId = NextId(),
-                            locator = lhs.locator,
-                            resultTypeName = DecimalTypeQName,
-                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
-                        },
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        resultTypeName = QuantityTypeQName,
-                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
-                    };
-            }
-            else if (lhs.resultTypeName == LongTypeQName)
-            {
-                if (rhs.resultTypeName == DecimalTypeQName)
-                    lhs = new ToDecimal
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        resultTypeName = DecimalTypeQName,
-                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
-                    };
-                else if (rhs.resultTypeName == IntegerTypeQName)
-                    rhs = new ToLong
-                    {
-                        operand = rhs,
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeName = LongTypeQName,
-                        resultTypeSpecifier = NamedType(LongTypeQName, context),
-                    };
-                else if (rhs.resultTypeName == QuantityTypeQName)
-                    lhs = new ToQuantity
-                    {
-                        operand = new ToDecimal
-                        {
-                            operand = lhs,
-                            localId = NextId(),
-                            locator = lhs.locator,
-                            resultTypeName = DecimalTypeQName,
-                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
-                        },
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        resultTypeName = QuantityTypeQName,
-                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
-                    };
-            }
-            else if (lhs.resultTypeName == DecimalTypeQName)
-            {
-                if (rhs.resultTypeName == LongTypeQName)
-                    rhs = new ToDecimal
-                    {
-                        operand = rhs,
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeName = DecimalTypeQName,
-                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
-                    };
-                else if (rhs.resultTypeName == IntegerTypeQName)
-                    rhs = new ToDecimal
-                    {
-                        operand = rhs,
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeName = DecimalTypeQName,
-                        resultTypeSpecifier = NamedType(DecimalTypeQName, context),
-                    };
-                else if (rhs.resultTypeName == QuantityTypeQName)
-                    lhs = new ToQuantity
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        resultTypeName = QuantityTypeQName,
-                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
-                    };
-            }
-            else if (lhs.resultTypeName == QuantityTypeQName)
-            {
-                if (rhs.resultTypeName == IntegerTypeQName || rhs.resultTypeName == LongTypeQName)
-                    rhs = new ToQuantity
-                    {
-                        operand = new ToDecimal
-                        {
-                            operand = rhs,
-                            localId = NextId(),
-                            locator = rhs.locator,
-                            resultTypeName = DecimalTypeQName,
-                            resultTypeSpecifier = NamedType(DecimalTypeQName, context),
-                        },
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeName = QuantityTypeQName,
-                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
-                    };
-                else if (rhs.resultTypeName == DecimalTypeQName)
-                    rhs = new ToQuantity
-                    {
-                        operand = rhs,
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeName = QuantityTypeQName,
-                        resultTypeSpecifier = NamedType(QuantityTypeQName, context),
-                    };
-                else if (rhs.resultTypeName != QuantityTypeQName)
-                    throw Critical($"Quantity can only be added to numeric types (Integer, Long, Decimal) and Quantity types.  The type of the second operand is {rhs.resultTypeName}.");
-            }
-            else if (lhs.resultTypeName == DateTypeQName)
-            {
-                if (rhs.resultTypeName != QuantityTypeQName)
-                    throw Critical($"Only Quantity values can be added to Date values.  The type of the second operand is {rhs.resultTypeName}.");
-            }
-            else if (lhs.resultTypeName == DateTimeTypeQName)
-            {
-                if (rhs.resultTypeName != QuantityTypeQName)
-                    throw Critical($"Only Quantity values can be added to DateTime values.  The type of the second operand is {rhs.resultTypeName}.");
-            }
-            else if (lhs.resultTypeName == TimeTypeQName)
-            {
-                if (rhs.resultTypeName != QuantityTypeQName)
-                    throw Critical($"Only Quantity values can be added to Time values.  The type of the second operand is {rhs.resultTypeName}.");
-            }
-
-            #endregion
-
-            Expression? expression = null;
+            var rhs = Visit(terms[1]);
 
             switch (@operator)
             {
                 case "+":
-                    expression = new Add
-                    {
-                        operand = new[] { lhs, rhs },
-                        resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
-                    };
-                    break;
+                    return SystemLibrary.AddDate.Call(ModelProvider, context, lhs, rhs)
+                        .Or(SystemLibrary.AddDateTime.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.AddTime.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.AddDecimal.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.AddInteger.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.AddLong.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.AddQuantity.Call(ModelProvider, context, lhs, rhs));
                 case "-":
-                    expression = new Subtract
-                    {
-                        operand = new[] { lhs, rhs },
-                        resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
-                    };
-                    if (lhs.resultTypeName == QuantityTypeQName)
-                    {
-                        if (rhs.resultTypeName == DateTypeQName
-                            || rhs.resultTypeName == DateTimeTypeQName
-                            || rhs.resultTypeName == TimeTypeQName)
-                            throw Critical($"Date, DateTime, and Time values cannot be subtracted from Quantity values.");
-                    }
-                    break;
+                    return SystemLibrary.SubtractDate.Call(ModelProvider, context, lhs, rhs)
+                        .Or(SystemLibrary.SubtractDateTime.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.SubtractTime.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.SubtractDecimal.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.SubtractInteger.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.SubtractLong.Call(ModelProvider, context, lhs, rhs))
+                        .Or(SystemLibrary.SubtractQuantity.Call(ModelProvider, context, lhs, rhs));
                 case "&":
-                    if (lhs.resultTypeName != StringTypeQName
-                        && rhs.resultTypeName != StringTypeQName)
-                    {
-                        throw Critical($"Operator & is only defined for string types, not {lhs.resultTypeName} and {rhs.resultTypeName}");
-                    }
-                    expression = new Concatenate
-                    {
-                        operand = new[] { lhs, rhs },
-                        resultTypeName = lhs.resultTypeName,
-                        resultTypeSpecifier = NamedType(lhs.resultTypeName, context)
-                    };
-                    break;
+                    return SystemLibrary.Concatenate.Call(ModelProvider, context, lhs, rhs);
                 default:
-                    throw Critical($"Unexpected arithmetic operator {@operator}");
+                    throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression.");
             }
-            expression!.localId = NextId();
-            expression.locator = context.Locator();
-            return expression;
-
         }
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
@@ -315,8 +61,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var precision = context.pluralDateTimePrecision().Parse();
 
-            var lhs = Visit(context.GetChild(4));
-            var rhs = Visit(context.GetChild(6));
+            var expressionTerms = context.expressionTerm();
+            var lhs = Visit(expressionTerms[0]);
+            var rhs = Visit(expressionTerms[1]);
 
             if (lhs is Null)
             {
@@ -355,6 +102,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 UnresolvedSignature("Difference", lhs, rhs);
             }
+
+
             if (lhs.resultTypeName == DateTypeQName)
             {
                 if (precision == DateTimePrecision.Year

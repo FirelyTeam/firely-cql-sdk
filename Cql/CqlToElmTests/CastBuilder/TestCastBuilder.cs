@@ -169,8 +169,5 @@ namespace Hl7.Cql.CqlToElm.Test
             var args5 = buildA(Patient, Observation.ToListType());
             f4.Cast(args5).ShouldBe(cost: 0, args5).Assigned(Patient, Observation);
         }
-
-
-
     }
 }
