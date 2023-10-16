@@ -168,7 +168,7 @@ namespace Hl7.Cql.Packaging
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
             var assemblies = compiler.Compile(elmLibraries, logFactory);
             var libraries = new Dictionary<string, Library>();
-            var typeCrosswalk = new CqlCrosswalk(typeResolver);
+            var typeCrosswalk = new CqlTypeToFhirTypeMapper(typeResolver);
             foreach (var library in elmLibraries)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
@@ -373,7 +373,7 @@ namespace Hl7.Cql.Packaging
         private Hl7.Fhir.Model.Library createLibraryResource(FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
-            CqlCrosswalk typeCrosswalk,
+            CqlTypeToFhirTypeMapper typeCrosswalk,
             ExpressionBuilder builder,
             Func<Resource, string> canon,
             elm.Library? elmLibrary = null)
@@ -494,7 +494,7 @@ namespace Hl7.Cql.Packaging
         internal TypeConverter TypeConverter { get; }
 
         private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.ParameterDef elmParameter,
-            CqlCrosswalk typeCrosswalk,
+            CqlTypeToFhirTypeMapper typeCrosswalk,
             ExpressionBuilder builder)
         {
             var typeSpecifier = elmParameter.resultTypeSpecifier ?? elmParameter.parameterTypeSpecifier;
@@ -604,7 +604,7 @@ namespace Hl7.Cql.Packaging
         }
 
 
-        private void AddDefaultValueToExtensions(List<Extension> cqlTypeExtensions, object? value, TypeEntry defaultType)
+        private void AddDefaultValueToExtensions(List<Extension> cqlTypeExtensions, object? value, CqlTypeToFhirMapping defaultType)
         {
             if (defaultType.FhirType != null)
             {
@@ -623,7 +623,7 @@ namespace Hl7.Cql.Packaging
             }
         }
 
-        private void MapValueToExtension(Extension ext, object? value, TypeEntry mappedType)
+        private void MapValueToExtension(Extension ext, object? value, CqlTypeToFhirMapping mappedType)
         {
             switch (mappedType.FhirType)
             {
@@ -666,7 +666,7 @@ namespace Hl7.Cql.Packaging
         }
 
         private ParameterDefinition ElmDefinitionToParameter(Hl7.Cql.Elm.ExpressionDef definition,
-            CqlCrosswalk typeCrosswalk)
+            CqlTypeToFhirTypeMapper typeCrosswalk)
         {
             var resultTypeSpecifier = definition.resultTypeSpecifier;
             if (resultTypeSpecifier is null && !string.IsNullOrWhiteSpace(definition.resultTypeName.Name))

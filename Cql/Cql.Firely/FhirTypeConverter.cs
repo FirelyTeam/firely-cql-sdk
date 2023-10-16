@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -18,8 +17,21 @@ using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
 {
-    internal static class FhirTypeConverter
+    /// <summary>
+    /// Defines conversions between Cql and FHIR data models
+    /// </summary>
+    public static class FhirTypeConverter
     {
+        /// <summary>
+        /// Singleton for the default configuration of this TypeConverter
+        /// </summary>
+        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
+
+        /// <summary>
+        /// Allows for the creation of a converter with the specified model 
+        /// </summary>
+        /// <param name="model">the model</param>
+        /// <returns>the type converter</returns>
         public static TypeConverter Create(ModelInspector model) =>
             TypeConverter
                 .Create()
@@ -28,10 +40,7 @@ namespace Hl7.Cql.Fhir
                 .ConvertCqlPrimitivesToFhir()
                 .ConvertCodeTypes(model);
 
-        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
-
-
-        public static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
+        internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
             HashSet<Type> toTypes = new();
 
@@ -74,7 +83,7 @@ namespace Hl7.Cql.Fhir
             }
         }
 
-        public static TypeConverter ConvertCqlPrimitivesToFhir(this TypeConverter converter)
+        internal static TypeConverter ConvertCqlPrimitivesToFhir(this TypeConverter converter)
         {
             converter.AddConversion((CqlDate f) => new M.Date(f.ToString()));
             converter.AddConversion((CqlDateTime f) => new M.FhirDateTime(f.ToString()));
@@ -181,7 +190,7 @@ namespace Hl7.Cql.Fhir
         }
 
 
-        public static TypeConverter ConvertSystemTypes(this TypeConverter converter)
+        internal static TypeConverter ConvertSystemTypes(this TypeConverter converter)
         {
             converter.AddConversion<byte[], string>(binary => Encoding.UTF8.GetString(binary));
             converter.AddConversion<DateTimeOffset?, CqlDateTime?>(dto => dto == null ? null : new CqlDateTime(dto.Value, Iso8601.DateTimePrecision.Millisecond));
@@ -221,7 +230,7 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
-        public static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
+        internal static TypeConverter ConvertCodeTypes(this TypeConverter converter, ModelInspector model)
         {
             var enumTypes = model.EnumMappings
                 .Select(map => map.NativeType)
