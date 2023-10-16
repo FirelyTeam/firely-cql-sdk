@@ -1,0 +1,50 @@
+{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.526.2.1363",
+  "meta": {
+    "versionId": "19",
+    "lastUpdated": "2021-01-20T10:03:57.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-author",
+    "valueString": "NCQA PHEMUR Author"
+  }, {
+    "url": "http://hl7.org/fhir/StructureDefinition/resource-lastReviewDate",
+    "valueDate": "2022-12-15"
+  }, {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2021-01-20"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1363",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113883.3.526.2.1363"
+  } ],
+  "version": "20170504",
+  "name": "Annual Wellness Visit",
+  "title": "Annual Wellness Visit",
+  "status": "active",
+  "experimental": false,
+  "date": "2017-05-04T01:00:13-04:00",
+  "publisher": "NCQA PHEMUR",
+  "jurisdiction": [ {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+      "valueString": "UNKNOWN"
+    } ]
+  } ],
+  "purpose": "(Clinical Focus: The purpose of this value set is to represent concepts for encounters for annual wellness visits.),(Data Element Scope: This value set may use a model element related to Encounter.),(Inclusion Criteria: Includes concepts that represent an encounter for a Medicare annual wellness visit.),(Exclusion Criteria: No exclusions.)",
+  "compose": {
+    "include": [ {
+      "system": "http://www.nlm.nih.gov/research/umls/hcpcs",
+      "concept": [ {
+        "code": "G0438",
+        "display": "Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit"
+      }, {
+        "code": "G0439",
+        "display": "Annual wellness visit, includes a personalized prevention plan of service (pps), subsequent visit"
+      } ]
+    } ]
+  }
+}

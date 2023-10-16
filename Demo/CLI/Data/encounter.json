@@ -1,0 +1,50 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "fullUrl": "https://server.fire.ly/example-encounter",
+      "resource": {
+        "resourceType": "Encounter",
+        "id": "example-encounter",
+        "status": "finished",
+        "class": {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "AMB"
+        },
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://www.nlm.nih.gov/research/umls/hcpcs",
+                "code": "G0438",
+                "display": "Annual wellness visit; includes a personalized prevention plan of service (pps), initial visit"
+              }
+            ]
+          }
+        ],
+        "subject": {
+          "reference": "Patient/example-patient"
+        },
+        "period": {
+          "start": "2023-09-09T09:00:00Z",
+          "end": "2023-09-09T10:00:00Z"
+        }
+      }
+    },
+    {
+      "fullUrl": "https://server.fire.ly/example-patient",
+      "resource": {
+        "resourceType": "Patient",
+        "id": "example-patient",
+        "active": true,
+        "name": [
+          {
+            "family": "Doe",
+            "given": [ "John" ]
+          }
+        ]
+      }
+    }
+  ]
+}

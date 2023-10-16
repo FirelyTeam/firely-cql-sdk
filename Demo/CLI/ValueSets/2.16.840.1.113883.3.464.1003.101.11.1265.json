@@ -1,0 +1,77 @@
+﻿{
+  "resourceType": "ValueSet",
+  "id": "2.16.840.1.113883.3.464.1003.101.11.1265",
+  "meta": {
+    "versionId": "11",
+    "lastUpdated": "2021-02-20T01:00:45.000-05:00",
+    "profile": [ "http://hl7.org/fhir/StructureDefinition/shareablevalueset", "http://hl7.org/fhir/us/cqfmeasures/StructureDefinition/publishable-valueset-cqfm" ]
+  },
+  "extension": [ {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-author",
+    "valueString": "NCQA PHEMUR Author"
+  }, {
+    "url": "http://hl7.org/fhir/StructureDefinition/resource-lastReviewDate",
+    "valueDate": "2022-12-15"
+  }, {
+    "url": "http://hl7.org/fhir/StructureDefinition/valueset-effectiveDate",
+    "valueDate": "2021-02-20"
+  } ],
+  "url": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1265",
+  "identifier": [ {
+    "system": "urn:ietf:rfc:3986",
+    "value": "urn:oid:2.16.840.1.113883.3.464.1003.101.11.1265"
+  } ],
+  "version": "20210220",
+  "name": "Home Healthcare Services",
+  "title": "Home Healthcare Services",
+  "status": "active",
+  "experimental": false,
+  "date": "2021-02-20T01:00:45-05:00",
+  "publisher": "NCQA PHEMUR",
+  "jurisdiction": [ {
+    "extension": [ {
+      "url": "http://hl7.org/fhir/StructureDefinition/data-absent-reason",
+      "valueString": "UNKNOWN"
+    } ]
+  } ],
+  "purpose": "(Clinical Focus: The purpose of this value set is to represent concepts for encounters for home health visits.),(Data Element Scope: This value set may use a model element related to Encounter.),(Inclusion Criteria: Includes concepts that represent an encounter for a home health visit for the evaluation and management of a new or established patient.),(Exclusion Criteria: No exclusions.)",
+  "compose": {
+    "include": [ {
+      "system": "http://snomed.info/sct",
+      "concept": [ {
+        "code": "185460008",
+        "display": "Home visit request by patient (procedure)"
+      }, {
+        "code": "185462000",
+        "display": "Home visit request by relative (procedure)"
+      }, {
+        "code": "185466002",
+        "display": "Home visit for urgent condition (procedure)"
+      }, {
+        "code": "185467006",
+        "display": "Home visit for acute condition (procedure)"
+      }, {
+        "code": "185468001",
+        "display": "Home visit for chronic condition (procedure)"
+      }, {
+        "code": "185470005",
+        "display": "Home visit elderly assessment (procedure)"
+      }, {
+        "code": "225929007",
+        "display": "Joint home visit (procedure)"
+      }, {
+        "code": "315205008",
+        "display": "Bank holiday home visit (procedure)"
+      }, {
+        "code": "439708006",
+        "display": "Home visit (procedure)"
+      }, {
+        "code": "698704008",
+        "display": "Home visit for rheumatology service (procedure)"
+      }, {
+        "code": "704126008",
+        "display": "Home visit for anticoagulant drug monitoring (procedure)"
+      } ]
+    } ]
+  }
+}

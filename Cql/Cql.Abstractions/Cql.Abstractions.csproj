@@ -21,7 +21,7 @@
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23420.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23472.1" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>
