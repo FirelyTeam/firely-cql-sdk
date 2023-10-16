@@ -12,6 +12,7 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir.Comparers;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 
@@ -54,6 +55,8 @@ namespace Hl7.Cql.Fhir
             if (_options?.ResourceIdComparer != null)
                 Comparers.CompareResourcesById(_options.ResourceIdComparer);
 
+            if (_options?.CodeInOperatorType == FhirModelBindingOptions.CodeInOperatorSemantics.Equivalent)
+                Comparers.Register(typeof(CqlCode), new CqlCodeCqlEquivalentComparer(StringComparer.OrdinalIgnoreCase));
         }
 
         /// <summary>

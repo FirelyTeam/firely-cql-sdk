@@ -23,7 +23,13 @@ The demo project showcases the process of turning a measure written in CQL into 
 Just like with the CQL, building the solution should be a simple matter of hitting build, or `dotnet build`, but in this case, it is more instructive to break the build process into pieces to get a sense of what is going on. Basically, there are three steps:
 
 ### 1. Turning CQL into ELM
-Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. Unfortunately, there is no .NET tool for doing this yet, so this step involves running the existing CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java). To make this easier, the solution contains a full install of Maven, plus the necessary build targets to run them. The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
+
+Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. Unfortunately, there is no .NET tool for doing this yet, so this step involves running the existing CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java).  The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
+
+Prequisites:
+1. Install JDK
+2. Install [Maven](https://maven.apache.org/install.html). Be sure to set the PATH variable mentioned in the link.
+3. At the time of this documentation JDK 21 and Maven 3.9.5 are working - Oct 13 2023.
 
 Take a look at the `Cql` project in the Demo solution folder. Its `Build` directory contains the build target (including the Maven configuration files) and the `input` folder contains a set of demo CQL files. Running the build (manually) for this project turns these CQL files into ELM, and puts the files into the source directory of the next step (which is the `Json` folder under the `Elm` project).
 

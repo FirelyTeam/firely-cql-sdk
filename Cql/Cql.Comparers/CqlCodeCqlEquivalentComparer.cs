@@ -15,9 +15,9 @@ using System.Collections.Generic;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class CqlCodeCqlComparer : ICqlComparer<CqlCode>, ICqlComparer
+    internal class CqlCodeCqlEquivalentComparer : ICqlComparer<CqlCode>, ICqlComparer
     {
-        public CqlCodeCqlComparer(IComparer<string> codeComparer)
+        public CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer)
         {
             CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
         }
@@ -37,24 +37,12 @@ namespace Hl7.Cql.Comparers
                 {
                     if ((x.system == null) ^ (y.system == null))
                         return null;
+
                     var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
-                    if (sc == 0)
-                    {
-                        if ((x.version == null) ^ (y.version == null))
-                            return null;
-                        var vc = StringComparer.OrdinalIgnoreCase.Compare(x.version, y.version);
-                        if (vc == 0)
-                        {
-                            if ((x.display == null) ^ (y.display == null))
-                                return null;
-                            var dc = StringComparer.OrdinalIgnoreCase.Compare(x.display, y.display);
-                            return dc;
-                        }
-                        else return vc;
-                    }
-                    else return sc;
+                    return sc;
                 }
-                else return cc;
+                
+                return cc;
             }
         }
 
