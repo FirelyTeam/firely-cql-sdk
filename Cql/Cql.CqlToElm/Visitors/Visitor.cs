@@ -34,11 +34,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         protected string FormatLocator(int startLine, int startCol, int endLine, int endCol) =>
             $"{startLine}:{startCol}-{endLine}:{endCol}";
 
-        protected NamedTypeSpecifier NamedType(XmlQualifiedName name, ParserRuleContext ctx) => name.ToNamedType();
+        protected NamedTypeSpecifier NamedType(XmlQualifiedName name, ParserRuleContext _) => name.ToNamedType();
 
-        protected IntervalTypeSpecifier IntervalType(TypeSpecifier pointType, ParserRuleContext ctx) => pointType.ToIntervalType();
+        protected IntervalTypeSpecifier IntervalType(TypeSpecifier pointType, ParserRuleContext _) => pointType.ToIntervalType();
 
-        protected ListTypeSpecifier ListType(TypeSpecifier elementType, ParserRuleContext ctx) => elementType.ToListType();
+        protected ListTypeSpecifier ListType(TypeSpecifier elementType, ParserRuleContext _) => elementType.ToListType();
 
         protected bool UnitsAreCompatible(string unitsX, string unitsY) => unitsX == unitsY;
 

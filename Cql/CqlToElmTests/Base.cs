@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -83,10 +84,18 @@ namespace Hl7.Cql.CqlToElm.Test
             var lambda = ExpressionBuilder.Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke(ctx);
-            Assert.IsNotNull(result);
-            Assert.IsInstanceOfType(result, typeof(T));
-            Assert.AreEqual(expected, result);
+
+            try
+            {
+                var result = dg.DynamicInvoke(ctx);
+                Assert.IsNotNull(result);
+                Assert.IsInstanceOfType(result, typeof(T));
+                Assert.AreEqual(expected, result);
+            }
+            catch (TargetInvocationException ex)
+            {
+                throw ex.InnerException!;
+            }
         }
 
         protected void AssertIntervalType(TypeSpecifier specifier, string pointTypeName)

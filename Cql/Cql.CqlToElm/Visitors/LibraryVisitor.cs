@@ -167,15 +167,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                         LibraryContext.ActiveContext = contextDef;
                                         if (!contextStatements.ContainsKey(contextDef.name))
                                         {
-                                            var (dataType, templateId) = LibraryContext.ResolveDottedTypeName(contextDef.name);
-                                            var elementType = NamedType(dataType, ctx);
+                                            var elementType = LibraryContext.ResolveDottedTypeName(contextDef.name);
+
                                             var retrieve = new Retrieve
                                             {
                                                 localId = NextId(),
                                                 locator = ctx.Locator(),
-                                                dataType = dataType,
-                                                templateId = templateId,
-                                                resultTypeSpecifier = ListType(elementType, ctx),
+                                                dataType = elementType.name,
+                                                templateId = ModelProvider.GetDefaultProfileUriForType(elementType),
+                                                resultTypeSpecifier = elementType.ToListType(),
                                             };
                                             var singleton = new SingletonFrom
                                             {

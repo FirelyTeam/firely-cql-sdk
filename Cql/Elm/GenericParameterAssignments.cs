@@ -15,7 +15,24 @@ namespace Hl7.Cql.Elm
     /// </summary>
     public class GenericParameterAssignments : Dictionary<ParameterTypeSpecifier, TypeSpecifier>
     {
-        // nothing
+        /// <inheritdoc/>
+        public GenericParameterAssignments()
+        {
+        }
+
+        /// <inheritdoc/>
+        public GenericParameterAssignments(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> collection) : base(collection)
+        {
+        }
+
+        /// <summary>
+        /// Adds a range of assignments to the list.    
+        /// </summary>
+        public void AddRange(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> items)
+        {
+            foreach (var item in items)
+                Add(item.Key, item.Value);
+        }
     }
 
 }

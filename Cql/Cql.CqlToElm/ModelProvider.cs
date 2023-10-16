@@ -18,6 +18,9 @@ namespace Hl7.Cql.CqlToElm
 
         public IModelProvider Add(ModelInfo model)
         {
+            if (model.requiredModelInfo is not null)
+                checkRequiredModels(model.name, model.requiredModelInfo);
+
             if (!ModelsByUriAndVersion.TryGetValue(model.url, out var modelsByVersion))
             {
                 modelsByVersion = new Dictionary<string, ModelInfo>();
@@ -25,6 +28,15 @@ namespace Hl7.Cql.CqlToElm
             }
             modelsByVersion!.Add(model.version, model);
             return this;
+        }
+
+        private void checkRequiredModels(string name, Model.ModelSpecifier[] requiredModelInfo)
+        {
+            foreach (var requiredModel in requiredModelInfo)
+            {
+                if (ModelFromName(requiredModel.name, requiredModel.version) is null)
+                    throw new ArgumentException($"Model {name} depends on model {requiredModel.name} which has not yet been added to the provider.");
+            }
         }
 
         public ModelInfo? ModelFromUri(string uri, string? version = null)

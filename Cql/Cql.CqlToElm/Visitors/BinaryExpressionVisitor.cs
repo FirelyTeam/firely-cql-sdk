@@ -2219,45 +2219,5 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
 
         }
-
-        //   expression ('is' | 'as') typeSpecifier  
-        public override Expression VisitTypeExpression([NotNull] cqlParser.TypeExpressionContext context)
-        {
-            var lhs = Visit(context.GetChild(0)!)!;
-            var @operator = context.GetChild(1)!.GetText();
-            var rhs = TypeSpecifierVisitor.Visit(context.GetChild(2)!)!;
-
-            XmlQualifiedName? rhsName = null;
-            if (rhs is NamedTypeSpecifier nts && nts.name != null)
-                rhsName = nts.name;
-            Expression? expression = @operator switch
-            {
-                "is" => new Is
-                {
-                    isType = rhsName,
-                    isTypeSpecifier = rhs,
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    operand = lhs,
-                    resultTypeName = BooleanTypeQName,
-                    resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                },
-                "as" => new As
-                {
-                    asType = rhsName,
-                    asTypeSpecifier = rhs,
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    operand = lhs,
-                    resultTypeName = rhsName,
-                    resultTypeSpecifier = rhs,
-                },
-                _ => null
-            };
-            if (expression == null)
-                throw Critical($"Unexpected operator {@operator}");
-            else
-                return expression;
-        }
     }
 }

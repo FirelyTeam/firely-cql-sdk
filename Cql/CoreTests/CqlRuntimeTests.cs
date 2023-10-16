@@ -1,10 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hl7.Cql.Runtime;
-using System.Linq;
+﻿using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Linq;
 
 namespace CoreTests
 {
+
     [TestClass]
     public class CqlRuntimeTests
     {

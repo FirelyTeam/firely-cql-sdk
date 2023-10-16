@@ -21,6 +21,10 @@ Hl7.Cql.Abstractions.CqlLibraryAttribute
 Hl7.Cql.Abstractions.CqlLibraryAttribute.CqlLibraryAttribute(string! Identifier, string! Version) -> void
 Hl7.Cql.Abstractions.CqlLibraryAttribute.Identifier.get -> string!
 Hl7.Cql.Abstractions.CqlLibraryAttribute.Version.get -> string!
+Hl7.Cql.Abstractions.CqlTagAttribute
+Hl7.Cql.Abstractions.CqlTagAttribute.CqlTagAttribute(string! Name, string! Value) -> void
+Hl7.Cql.Abstractions.CqlTagAttribute.Name.get -> string!
+Hl7.Cql.Abstractions.CqlTagAttribute.Value.get -> string!
 Hl7.Cql.Abstractions.CqlValueSetAttribute
 Hl7.Cql.Abstractions.CqlValueSetAttribute.CqlValueSetAttribute(string! Id) -> void
 Hl7.Cql.Abstractions.CqlValueSetAttribute.Id.get -> string!
