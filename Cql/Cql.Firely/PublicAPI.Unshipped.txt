@@ -1,6 +1,11 @@
 ﻿#nullable enable
 Hl7.Cql.Fhir.FhirCqlContext
 Hl7.Cql.Fhir.FhirModelBindingOptions
+Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorSemantics
+Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorSemantics.Equals = 0 -> Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorSemantics
+Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorSemantics.Equivalent = 1 -> Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorSemantics
+Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorType.get -> Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorSemantics
+Hl7.Cql.Fhir.FhirModelBindingOptions.CodeInOperatorType.init -> void
 Hl7.Cql.Fhir.FhirModelBindingOptions.FhirModelBindingOptions() -> void
 Hl7.Cql.Fhir.FhirModelBindingOptions.ResourceIdComparer.get -> System.StringComparer?
 Hl7.Cql.Fhir.FhirModelBindingOptions.ResourceIdComparer.init -> void
