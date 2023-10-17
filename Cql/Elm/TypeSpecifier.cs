@@ -59,9 +59,16 @@ namespace Hl7.Cql.Elm
         {
             if (!assignments.Any()) return this;
 
-            return new ChoiceTypeSpecifier
+            var choices = choice?.Select(c => c.ReplaceGenericParameters(assignments))
+                    .Distinct()
+                    .ToArray();
+
+            return choices switch
             {
-                choice = choice?.Select(c => c.ReplaceGenericParameters(assignments)).ToArray()
+                null => this,
+                { Length: 0 } => new ChoiceTypeSpecifier(),
+                { Length: 1 } => choices[0],
+                _ => new ChoiceTypeSpecifier { choice = choices }
             };
         }
 

@@ -354,7 +354,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Xor_1()
         {
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library XorTest version '1.0.0'
 
                 define private True_Xor_1: true xor 1

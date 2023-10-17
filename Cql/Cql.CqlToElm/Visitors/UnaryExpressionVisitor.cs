@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var isNot = Keyword.Parse(context.children[^2]).Single() == CqlKeyword.Not;
             var operand = Visit(context.expression());
 
-            OperatorExpression boolean = lastChild switch
+            Expression boolean = lastChild switch
             {
                 CqlKeyword.Null => SystemLibrary.IsNull.Call(ModelProvider, context, operand),
                 CqlKeyword.True => SystemLibrary.IsTrue.Call(ModelProvider, context, operand),

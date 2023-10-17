@@ -13,6 +13,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
 {
     internal class MaxValueFunctionDef : BuiltInFunctionDef
     {
-        public MaxValueFunctionDef() : base(nameof(MaxValue), EmptyOperands, T) { }
+        public MaxValueFunctionDef() : base(nameof(MaxValue), EmptyOperands, T, typeof(Max)) { }
     }
 }

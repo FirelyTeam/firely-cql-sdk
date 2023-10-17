@@ -39,7 +39,6 @@ namespace Hl7.Cql.CqlToElm
                 return new(arguments, int.MaxValue, candidate.resultTypeSpecifier, $"Number or arguments should be the same as the number of parameters in the FunctionDef.");
 
             var argumentResults = new List<ArgumentCaster>();
-            string? error = null;
 
             for (int ix = 0; ix < candidate.operand.Length; ix++)
             {
@@ -47,20 +46,22 @@ namespace Hl7.Cql.CqlToElm
                 var argumentResult = buildArgumentCast(arguments[ix], targetType);
 
                 if (!argumentResult.Success)
+                    argumentResult = argumentResult with { Error = $"The {BuiltInFunctionDef.GetArgumentName(ix)} argument {argumentResult.Error}." };
+                else
                 {
-                    error = $"The {BuiltInFunctionDef.GetArgumentName(ix)} argument {argumentResult.Error}.";
-                    break;
+                    if (argumentResult.Assignments is not null)
+                        genericReplacements.AddRange(argumentResult.Assignments);
                 }
-
-                if (argumentResult.Assignments is not null)
-                    genericReplacements.AddRange(argumentResult.Assignments);
 
                 argumentResults.Add(argumentResult);
             }
 
+            var error = argumentResults.FirstOrDefault(a => !a.Success)?.Error;
+            var cost = argumentResults.Where(a => a.Success).Sum(a => a.Cost);
+
             return new(
                 Casters: argumentResults.Select(a => a.Caster).ToArray(),
-                Cost: argumentResults.Sum(a => a.Cost),
+                Cost: cost,
                 ReturnType: candidate.resultTypeSpecifier.ReplaceGenericParameters(genericReplacements),
                 Error: error);
         }
@@ -125,21 +126,22 @@ namespace Hl7.Cql.CqlToElm
             // Implicit casts, see https://cql.hl7.org/03-developersguide.html#implicit-conversions
             // (note table is skewed, move first row 1 to the left, move row 2 2 to the left, etc)
             if (argumentType == SystemTypes.IntegerType && to == SystemTypes.LongType)
-                return new(SystemLibrary.IntegerToLong.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.IntegerToLong.Build(locatorContext, argument), 1, null, null);
             if (argumentType == SystemTypes.IntegerType && to == SystemTypes.DecimalType)
-                return new(SystemLibrary.IntegerToDecimal.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.IntegerToDecimal.Build(locatorContext, argument), 1, null, null);
             if (argumentType == SystemTypes.LongType && to == SystemTypes.DecimalType)
-                return new(SystemLibrary.LongToDecimal.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.LongToDecimal.Build(locatorContext, argument), 1, null, null);
             if (argumentType == SystemTypes.IntegerType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.IntegerToQuantity.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.IntegerToQuantity.Build(locatorContext, argument), 1, null, null);
             if (argumentType == SystemTypes.LongType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.LongToQuantity.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.LongToQuantity.Build(locatorContext, argument), 1, null, null);
             if (argumentType == SystemTypes.DecimalType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.DecimalToQuantity.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.DecimalToQuantity.Build(locatorContext, argument), 1, null, null);
             if (argumentType == SystemTypes.DateType && to == SystemTypes.DateTimeType)
-                return new(SystemLibrary.DateToDateTime.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.DateToDateTime.Build(locatorContext, argument), 1, null, null);
             if (argumentType == SystemTypes.CodeType && to == SystemTypes.ConceptType)
-                return new(SystemLibrary.CodeToConcept.Call(locatorContext, argument), 1, null, null);
+                return new(SystemLibrary.CodeToConcept.Build(locatorContext, argument), 1, null, null);
+
             // TODO: There is still ValueSet to List, but it's not clear which function to call,
             // ToList<T>(T) would probably create a list with a single element, the valueset, but
             // that is not the intent.
@@ -149,16 +151,14 @@ namespace Hl7.Cql.CqlToElm
             // List demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
             if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
             {
-                try
+                var nested = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
+                if (nested.Success)
                 {
-                    var nested = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
                     var intermediate = buildArgumentCast(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }
-                catch (Exception e)
-                {
-                    return new(argument, int.MaxValue, null, e.Message);
-                }
+                else
+                    return new(argument, int.MaxValue, null, nested.Error);
             }
 
             // TODO: interval demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
@@ -166,16 +166,14 @@ namespace Hl7.Cql.CqlToElm
             // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
             if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
             {
-                try
+                var nested = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
+                if (nested.Success)
                 {
-                    var nested = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
                     var intermediate = buildArgumentCast(nested, to);
                     return intermediate with { Cost = intermediate.Cost + 1 };
                 }
-                catch (Exception e)
-                {
-                    return new(argument, int.MaxValue, null, e.Message);
-                }
+                else
+                    return new(argument, int.MaxValue, null, nested.Error);
             }
 
             // No cast found

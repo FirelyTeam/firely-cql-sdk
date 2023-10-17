@@ -13,6 +13,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
 {
     internal class MinValueFunctionDef : BuiltInFunctionDef
     {
-        public MinValueFunctionDef() : base(nameof(MinValue), EmptyOperands, T) { }
+        public MinValueFunctionDef() : base(nameof(MinValue), EmptyOperands, T, typeof(Min)) { }
     }
 }

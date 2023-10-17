@@ -101,6 +101,14 @@ namespace CoreTests.Elm
                 }
             };
             var ct2 = new ChoiceTypeSpecifier();
+            var ct3 = new ChoiceTypeSpecifier()
+            {
+                choice = new TypeSpecifier[]
+                {
+                    SystemTypes.Generic("A"),
+                    SystemTypes.IntegerType
+                }
+            };
 
             ct1.ReplaceGenericParameters(testMap).Should()
                 .BeEquivalentTo(new ChoiceTypeSpecifier()
@@ -115,6 +123,8 @@ namespace CoreTests.Elm
                 .And.NotBeSameAs(ct1);
 
             ct2.ReplaceGenericParameters(testMap).Should().BeEquivalentTo(ct2, "no replacement, no change");
+
+            ct3.ReplaceGenericParameters(testMap).Should().Be(SystemTypes.IntegerType);
         }
 
         [TestMethod]
@@ -130,7 +140,7 @@ namespace CoreTests.Elm
                         new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier { elementType = SystemTypes.StringType } },
                         new TupleElementDefinition { name = "interval", elementType = new IntervalTypeSpecifier { pointType = SystemTypes.BooleanType } },
                         new TupleElementDefinition { name = "interval2", elementType = new IntervalTypeSpecifier { pointType = SystemTypes.BooleanType } },
-                        new TupleElementDefinition { name = "choice", elementType = new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { SystemTypes.IntegerType, SystemTypes.IntegerType, SystemTypes.StringType } } },
+                        new TupleElementDefinition { name = "choice", elementType = new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { SystemTypes.IntegerType, SystemTypes.StringType } } },
                         new TupleElementDefinition { name = "named", elementType = SystemTypes.StringType },
                     }
                 })

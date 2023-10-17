@@ -9,18 +9,20 @@
 using Antlr4.Runtime;
 using Hl7.Cql.Elm;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal record CallBuilderResult(FunctionDef Def, OperatorExpression Result, int Cost, string? Error)
+    internal record CallBuilderResult(FunctionDef Def, Expression Result, int Cost, string? Error)
     {
         public bool Success => Error is null;
 
-        public static implicit operator OperatorExpression(CallBuilderResult result) =>
-        result.Success ?
-            result.Result
-            : throw new InvalidOperationException($"Failed to bind to {operatorType(result.Def.operand.Length)} '{result.Def.name}' - {result.Error}");
+        public static implicit operator Expression(CallBuilderResult result) =>
+            result.Success ?
+                result.Result
+                : throw new InvalidOperationException($"Failed to bind to {operatorType(result.Def.operand.Length)} '{result.Def.name}' - {result.Error}");
 
         private static string operatorType(int numArgs)
         {
@@ -43,53 +45,86 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
             return Cost <= other.Cost ? this : other;
         }
+
+        public static CallBuilderResult Combine(IEnumerable<CallBuilderResult> results)
+        {
+            var first = results.FirstOrDefault() ?? throw new InvalidOperationException("Combine should be called with at least one result.");
+
+            var bestCandidates = results.Where(r => r.Success).OrderBy(r => r.Cost).GroupBy(r => r.Cost).FirstOrDefault()?.AsEnumerable().ToList();
+
+            return bestCandidates switch
+            {
+                null => first with { Error = $"No matching overload found." },
+                [var one] => one,
+                var many => new(first.Def, first.Result, 0, $"Ambiguous call to {first.Def.name}.")
+            };
+        }
     }
 
     internal static class CallBuilders
     {
-        public static CallBuilderResult Call<U>(this BuiltInUnaryFunctionDef<U> def, IModelProvider provider, ParserRuleContext context, Expression argument)
-             where U : UnaryExpression, new()
+        internal static Expression CreateElmNode(this FunctionDef def, Expression[] arguments)
         {
-            var castResult = autoCastParams(def, new Expression[] { argument }, provider);
-            var expr = new U
+            var nodeType = def is BuiltInFunctionDef b ? b.ElmNodeType : typeof(FunctionRef);
+            var result = Activator.CreateInstance(nodeType)!;
+
+            if(result is BinaryExpression be)
             {
-                operand = castResult.Casters.Single()
-            }.WithResultType(castResult.ReturnType).WithLocator(context.Locator());
-
-            return new CallBuilderResult(def, expr, castResult.Cost, castResult.Error);
-        }
-
-        public static CallBuilderResult Call<B>(this BuiltInBinaryFunctionDef<B> def, IModelProvider provider, ParserRuleContext context, Expression left, Expression right)
-           where B : BinaryExpression, new()
-        {
-            var castResult = autoCastParams(def, new Expression[] { left, right }, provider);
-            var expr = new B
+                if(arguments.Length != 2)
+                    throw new ArgumentException($"Expected 2 arguments, but got {arguments.Length}", nameof(arguments));
+                be.operand = arguments;
+                return be;
+            }
+            else if(result is UnaryExpression ue)
             {
-                operand = castResult.Casters
-            }.WithResultType(castResult.ReturnType).WithLocator(context.Locator());
+                if(arguments.Length != 1)
+                    throw new ArgumentException($"Expected 1 argument, but got {arguments.Length}", nameof(arguments));
+                ue.operand = arguments[0];
+                return ue;
+            }
+            else if(result is TernaryExpression te)
+            {
+                if(arguments.Length != 3)
+                    throw new ArgumentException($"Expected 3 arguments, but got {arguments.Length}", nameof(arguments));
+                te.operand = arguments;
+                return te;
+            }
+            else if(result is NaryExpression ne)
+            {
+                ne.operand = arguments;
+                return ne;
+            }
+            else if(result is FunctionRef fr)
+            {
+                fr.operand = arguments;
+                return fr;
+            }
+            else if(result is Expression e && arguments.Length == 0)
+            {
+                return e;
+            }
+            else
+                throw new InvalidOperationException($"Don't know how to initialize an instance of {nodeType}.");
+        }        
 
-            return new CallBuilderResult(def, expr, castResult.Cost, castResult.Error);
-        }
-
-        public static CallBuilderResult Call<N>(this BuiltInNaryFunctionDef<N> def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
-            where N : NaryExpression, new()
+        public static CallBuilderResult Call(this BuiltInFunctionDef def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
         {
             var castResult = autoCastParams(def, arguments, provider);
-            var expr = new N
-            {
-                operand = castResult.Casters
-            }.WithResultType(castResult.ReturnType).WithLocator(context.Locator());
+            var expr = def.CreateElmNode(castResult.Casters)
+                    .WithResultType(castResult.ReturnType).WithLocator(context.Locator());
 
             return new CallBuilderResult(def, expr, castResult.Cost, castResult.Error);
         }
 
-        public static U Call<U>(this BuiltInConversionFunctionDef<U> def, ParserRuleContext context, Expression argument)
-            where U : UnaryExpression, new()
+        public static CallBuilderResult Call(this BuiltInFunctionDef[] def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
         {
-            return new U
-            {
-                operand = argument
-            }.WithResultType(def.resultTypeSpecifier).WithLocator(context.Locator());
+            return CallBuilderResult.Combine(def.Select(d => d.Call(provider, context, arguments)));            
+        }
+
+        public static Expression Build(this BuiltInFunctionDef def, ParserRuleContext context, params Expression[] arguments)
+        {
+            return def.CreateElmNode(arguments)
+                    .WithResultType(def.resultTypeSpecifier).WithLocator(context.Locator());
         }
 
         public static As Call(this AsFunctionDef _, bool strict, TypeSpecifier typeArgument, Expression argument, ParserRuleContext context)

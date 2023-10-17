@@ -257,7 +257,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Difference_Between_Null_Null() =>
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Months: difference in weeks between null and null

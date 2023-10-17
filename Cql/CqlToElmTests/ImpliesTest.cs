@@ -353,7 +353,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_1()
         {
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_1: true implies 1

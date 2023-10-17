@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Elm;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Builtin
@@ -15,11 +16,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
     /// <summary>
     /// A kind of FunctionDef that represents a built-in CQL function.
     /// </summary>
-    internal abstract class BuiltInFunctionDef : FunctionDef
+    internal class BuiltInFunctionDef : FunctionDef
     {
         public static readonly TypeSpecifier[] EmptyOperands = Array.Empty<TypeSpecifier>();
 
-        public BuiltInFunctionDef(string name, TypeSpecifier[] operands, TypeSpecifier resultType)
+        public Type ElmNodeType { get; }
+
+        public BuiltInFunctionDef(string name, IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, Type elmNodeType)
         {
             this.name = name;
             expression = null;
@@ -38,6 +41,22 @@ namespace Hl7.Cql.CqlToElm.Builtin
                         operandType = o.TryToQualifiedName()
                     }.WithResultType(o))
                 .ToArray();
+           
+            ElmNodeType = elmNodeType;
+        }
+
+        public BuiltInFunctionDef ReplaceGenericParameters(GenericParameterAssignments replacements)
+        {
+            var newOperands = operand.Select(o => 
+                new OperandDef 
+                { 
+                    name = o.name, 
+                    operandTypeSpecifier =  o.operandTypeSpecifier.ReplaceGenericParameters(replacements), 
+                    operandType = o.operandTypeSpecifier.ReplaceGenericParameters(replacements).TryToQualifiedName() 
+                });
+
+            var newResultType = resultTypeSpecifier.ReplaceGenericParameters(replacements);
+            return new BuiltInFunctionDef(name, newOperands.Select(o => o.operandTypeSpecifier), newResultType, ElmNodeType);
         }
 
         /// <summary>

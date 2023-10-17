@@ -13,6 +13,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
 {
     internal class AsFunctionDef : BuiltInFunctionDef
     {
-        public AsFunctionDef() : base(nameof(As), new[] { AnyType }, T) { }
+        public AsFunctionDef() : base(nameof(As), new[] { AnyType }, T, typeof(As)) { }
     }
 }
