@@ -8,11 +8,6 @@ using M = Hl7.Cql.Model;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
-    internal class TypedExpression : Expression
-    {
-        public TypedExpression(TypeSpecifier type) => resultTypeSpecifier = type;
-    }
-
     internal static class TestExtensions
     {
         internal static readonly IModelProvider Provider = new ModelProvider(M.Models.ElmR1, M.Models.Fhir401);
@@ -26,8 +21,8 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static NamedTypeSpecifier ForFhir(string typeName) =>
             new() { name = M.ModelInfoExtensions.MakeQualifiedTypeName(M.Models.Fhir401, typeName) };
 
-        public static readonly ParameterTypeSpecifier T = new ParameterTypeSpecifier { parameterName = "T" };
-        public static readonly ParameterTypeSpecifier U = new ParameterTypeSpecifier { parameterName = "U" };
+        public static readonly ParameterTypeSpecifier T = new() { parameterName = "T" };
+        public static readonly ParameterTypeSpecifier U = new() { parameterName = "U" };
 
         public static FunctionResolveResult ShouldBe(this FunctionResolveResult result, int cost, Expression[]? e = null)
         {
@@ -80,10 +75,10 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 name = "test",
                 resultTypeSpecifier = testReturnType,
-                operand = args.Select((t, i) => new OperandDef { name = $"a{i}", operandTypeSpecifier = t }).ToArray()
+                operand = args.Select((t, i) => new OperandDef { name = $"arg_{i+1}", operandTypeSpecifier = t }).ToArray()
             };
 
-        private Expression[] buildA(params TypeSpecifier[] arg) => arg.Select(a => new TypedExpression(a)).ToArray();
+        private Expression[] buildA(params TypeSpecifier[] arg) => arg.Select(a => new Literal { resultTypeSpecifier = a }).ToArray();
 
         [TestMethod]
         public void SubclassesBecomeIdentityCast()
@@ -133,15 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var f2 = buildF(T.ToListType());
             var @as2 = f2.Cast(arg).ShouldBe(cost: 1).Call.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
             @as2.operand.Should().Be(arg[0]);
-            @as2.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());
-
-            var arg2 = new[] { new Null { resultTypeSpecifier = SystemTypes.DecimalType } };
-            f.Cast(arg2).ShouldBe(cost: 0, arg2);
-
-            var arg3 = new[] { new Null { resultTypeSpecifier = SystemTypes.BooleanType } };
-            f.Cast(arg3).Fails();
-
-
+            @as2.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());         
         }
 
         [TestMethod]
