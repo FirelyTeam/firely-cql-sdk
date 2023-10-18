@@ -13,6 +13,7 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
+
     /// <summary>
     /// A kind of FunctionDef that represents a built-in CQL function.
     /// </summary>

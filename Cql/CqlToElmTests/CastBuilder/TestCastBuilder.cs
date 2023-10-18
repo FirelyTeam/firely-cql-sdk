@@ -29,19 +29,19 @@ namespace Hl7.Cql.CqlToElm.Test
         public static readonly ParameterTypeSpecifier T = new ParameterTypeSpecifier { parameterName = "T" };
         public static readonly ParameterTypeSpecifier U = new ParameterTypeSpecifier { parameterName = "U" };
 
-        public static FunctionMatchResult ShouldBe(this FunctionMatchResult result, int cost, Expression[]? e = null)
+        public static FunctionResolveResult ShouldBe(this FunctionResolveResult result, int cost, Expression[]? e = null)
         {
             result.Success.Should().BeTrue();
             result.Error.Should().BeNull();
             result.Cost.Should().Be(cost);
 
             if (e is not null)
-                result.Casters.Should().BeEquivalentTo(e);
+                result.Call.Should().BeOfType<FunctionRef>().Subject.operand.Should().BeEquivalentTo(e);
 
             return result;
         }
 
-        public static FunctionMatchResult Fails(this FunctionMatchResult result)
+        public static FunctionResolveResult Fails(this FunctionResolveResult result)
         {
             result.Success.Should().BeFalse();
             result.Error.Should().NotBeNull();
@@ -49,19 +49,19 @@ namespace Hl7.Cql.CqlToElm.Test
             return result;
         }
 
-        public static FunctionMatchResult Cast(this FunctionDef def, Expression[] arguments)
+        public static FunctionResolveResult Cast(this FunctionDef def, Expression[] arguments)
         {
-            var builder = new CastBuilder(Provider);
+            var builder = new InvocationBuilder(Provider);
             var result = builder.Build(def, arguments);
             return result;
         }
 
-        public static FunctionMatchResult Assigned(this FunctionMatchResult result, TypeSpecifier t, TypeSpecifier? u = null)
+        public static FunctionResolveResult Assigned(this FunctionResolveResult result, TypeSpecifier t, TypeSpecifier? u = null)
         {
             if (u is null)
-                result.ReturnType.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, U, SystemTypes.BooleanType } });
+                result.Call.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, U, SystemTypes.BooleanType } });
             else
-                result.ReturnType.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, u, SystemTypes.BooleanType } });
+                result.Call.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, u, SystemTypes.BooleanType } });
 
             return result;
         }
@@ -126,12 +126,12 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var f = buildF(SystemTypes.DecimalType);
             var arg = new[] { new Null { } }; // untyped null
-            var @as = f.Cast(arg).ShouldBe(cost: 1).Casters.Should().ContainSingleOfType<As>();
+            var @as = f.Cast(arg).ShouldBe(cost: 1).Call.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
             @as.operand.Should().Be(arg[0]);
             @as.resultTypeSpecifier.Should().Be(SystemTypes.DecimalType);
 
             var f2 = buildF(T.ToListType());
-            var @as2 = f2.Cast(arg).ShouldBe(cost: 1).Casters.Should().ContainSingleOfType<As>();
+            var @as2 = f2.Cast(arg).ShouldBe(cost: 1).Call.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
             @as2.operand.Should().Be(arg[0]);
             @as2.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());
 
@@ -140,6 +140,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var arg3 = new[] { new Null { resultTypeSpecifier = SystemTypes.BooleanType } };
             f.Cast(arg3).Fails();
+
+
         }
 
         [TestMethod]

@@ -7,9 +7,7 @@
  */
 
 using Hl7.Cql.Elm;
-using System;
 using System.Linq;
-using System.Xml;
 using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
@@ -52,46 +50,47 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static BuiltInFunctionDef binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result) where T : OperatorExpression =>
             new(typeof(T).Name, new[] { first, second }, result, typeof(T));
 
-        public static BuiltInFunctionDef End = unary<End>(T.ToIntervalType(), T);
-        public static BuiltInFunctionDef Exists = unary<Exists>(T.ToListType(), BooleanType);
-        public static BuiltInFunctionDef IsFalse = unary<IsFalse>(BooleanType, BooleanType);
-        public static BuiltInFunctionDef IsNull = unary<IsNull>(AnyType, BooleanType);
-        public static BuiltInFunctionDef IsTrue = unary<IsTrue>(BooleanType, BooleanType);
-        public static BuiltInFunctionDef ToList = unary<ToList>(T, T.ToListType());
-        public static BuiltInFunctionDef Not = unary<Not>(BooleanType, BooleanType);
-        public static BuiltInFunctionDef SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
-        public static BuiltInFunctionDef Start = unary<Start>(T.ToIntervalType(), T);
-        public static BuiltInFunctionDef PointFrom = unary<PointFrom>(T.ToIntervalType(), T);
-        public static BuiltInFunctionDef Width = unary<Width>(T.ToIntervalType(), T);
-        public static BuiltInFunctionDef Predecessor = unary<Predecessor>(T, T);
-        public static BuiltInFunctionDef Successor = unary<Successor>(T, T);
+        public static FunctionDef End = unary<End>(T.ToIntervalType(), T);
+        public static FunctionDef Exists = unary<Exists>(T.ToListType(), BooleanType);
+        public static FunctionDef IsFalse = unary<IsFalse>(BooleanType, BooleanType);
+        public static FunctionDef IsNull = unary<IsNull>(AnyType, BooleanType);
+        public static FunctionDef IsTrue = unary<IsTrue>(BooleanType, BooleanType);
+        public static FunctionDef ToList = unary<ToList>(T, T.ToListType());
+        public static FunctionDef Not = unary<Not>(BooleanType, BooleanType);
+        public static FunctionDef SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
+        public static FunctionDef Start = unary<Start>(T.ToIntervalType(), T);
+        public static FunctionDef PointFrom = unary<PointFrom>(T.ToIntervalType(), T);
+        public static FunctionDef Width = unary<Width>(T.ToIntervalType(), T);
+        public static FunctionDef Predecessor = unary<Predecessor>(T, T);
+        public static FunctionDef Successor = unary<Successor>(T, T);
 
         public static AsFunctionDef As = new();
         public static IsFunctionDef Is = new();
         public static MinValueFunctionDef MinValue = new();
         public static MaxValueFunctionDef MaxValue = new();
 
-        public static BuiltInFunctionDef And = binary<And>(BooleanType, BooleanType, BooleanType);
+        public static FunctionDef And = binary<And>(BooleanType, BooleanType, BooleanType);
 
-        public static BuiltInFunctionDef IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
-        public static BuiltInFunctionDef LongToDecimal = unary<ToDecimal>(LongType, DecimalType);
-        public static BuiltInFunctionDef IntegerToLong = unary<ToLong>(IntegerType, LongType);
-        public static BuiltInFunctionDef IntegerToQuantity = unary<ToQuantity>(IntegerType, QuantityType);
-        public static BuiltInFunctionDef LongToQuantity = unary<ToQuantity>(LongType, QuantityType);
-        public static BuiltInFunctionDef DecimalToQuantity = unary<ToQuantity>(DecimalType, QuantityType);
-        public static BuiltInFunctionDef DateToDateTime = unary<ToDateTime>(DateType, DateTimeType);
-        public static BuiltInFunctionDef CodeToConcept = unary<ToConcept>(CodeType, ConceptType);
+        public static FunctionDef IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
+        public static FunctionDef LongToDecimal = unary<ToDecimal>(LongType, DecimalType);
+        public static FunctionDef IntegerToLong = unary<ToLong>(IntegerType, LongType);
+        public static FunctionDef IntegerToQuantity = unary<ToQuantity>(IntegerType, QuantityType);
+        public static FunctionDef LongToQuantity = unary<ToQuantity>(LongType, QuantityType);
+        public static FunctionDef DecimalToQuantity = unary<ToQuantity>(DecimalType, QuantityType);
+        public static FunctionDef DateToDateTime = unary<ToDateTime>(DateType, DateTimeType);
+        public static FunctionDef CodeToConcept = unary<ToConcept>(CodeType, ConceptType);
 
-        public static BuiltInFunctionDef[] Add = binary<Add>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
-        public static BuiltInFunctionDef[] AddDateTime = binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
+        public static FunctionDef[] Add = binary<Add>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static FunctionDef[] AddDateTime = binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
 
-        public static BuiltInFunctionDef[] Subtract = binary<Subtract>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
-        public static BuiltInFunctionDef[] SubtractDateTime = binary<Subtract>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
+        public static FunctionDef[] Subtract = binary<Subtract>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static FunctionDef[] SubtractDateTime = binary<Subtract>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
 
-        public static BuiltInFunctionDef Concatenate = binary<Concatenate>(StringType, StringType, StringType);
-        public static BuiltInFunctionDef[] DifferenceBetween = binary<DifferenceBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
-        public static BuiltInFunctionDef Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
-        public static BuiltInFunctionDef Or = binary<Or>(BooleanType, BooleanType, BooleanType);
-        public static BuiltInFunctionDef Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);
+        public static FunctionDef Concatenate = binary<Concatenate>(StringType, StringType, StringType);
+        public static FunctionDef[] DifferenceBetween = binary<DifferenceBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
+        public static FunctionDef[] DurationBetween = binary<DurationBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
+        public static FunctionDef Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
+        public static FunctionDef Or = binary<Or>(BooleanType, BooleanType, BooleanType);
+        public static FunctionDef Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);
     }
 }

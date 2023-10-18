@@ -111,8 +111,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 return extent switch
                 {
-                    CqlKeyword.Minimum => SystemLibrary.MinValue.Call(typeSpecifier, context),
-                    CqlKeyword.Maximum => SystemLibrary.MaxValue.Call(typeSpecifier, context),
+                    CqlKeyword.Minimum => SystemLibrary.MinValue.Build(typeSpecifier, context),
+                    CqlKeyword.Maximum => SystemLibrary.MaxValue.Build(typeSpecifier, context),
                     _ => throw Critical($"Unexpected extent: {extent}")
                 };
             }
@@ -137,8 +137,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression? expression = @operator switch
             {
-                CqlKeyword.Is => SystemLibrary.Is.Call(typeSpec, lhs, context),
-                CqlKeyword.As => SystemLibrary.As.Call(false, typeSpec, lhs, context),
+                CqlKeyword.Is => SystemLibrary.Is.Build(typeSpec, lhs, context),
+                CqlKeyword.As => SystemLibrary.As.Build(false, typeSpec, lhs, context),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in a type expression.")
             };
 
@@ -151,7 +151,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var operand = Visit(context.expression());
             var typeSpecifier = TypeSpecifierVisitor.Visit(context.typeSpecifier());
 
-            return SystemLibrary.As.Call(true, typeSpecifier, operand, context);
+            return SystemLibrary.As.Build(true, typeSpecifier, operand, context);
         }
     }
 }

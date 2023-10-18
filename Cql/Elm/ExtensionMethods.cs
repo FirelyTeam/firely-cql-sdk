@@ -11,11 +11,21 @@ using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace Hl7.Cql.Elm
 {
     public static class ExtensionMethods
     {
+        /// <summary>
+        /// Creates a string describing the signature of the given function.
+        /// </summary>
+        public static string Signature(this FunctionDef def)
+        {
+            var signature = string.Join(", ", def.operand.Select(o => (o.operandTypeSpecifier ?? o.resultTypeSpecifier).ToString()));
+            return $"{def.name}({signature})";
+        }
+
         public static string? NameAndVersion(this IncludeDef include)
         {
             if (include.path == null)

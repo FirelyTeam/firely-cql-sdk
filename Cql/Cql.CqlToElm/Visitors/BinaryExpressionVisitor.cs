@@ -3,6 +3,7 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Linq;
 using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -28,15 +29,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(terms[1]);
 
-            return @operator switch
-            {
-                "+" => (Expression)SystemLibrary.Add.Call(ModelProvider, context, lhs, rhs)
-                                        .Or(SystemLibrary.AddDateTime.Call(ModelProvider, context, lhs, rhs)),
-                "-" => (Expression)SystemLibrary.Subtract.Call(ModelProvider, context, lhs, rhs)
-                                        .Or(SystemLibrary.SubtractDateTime.Call(ModelProvider, context, lhs, rhs)),
-                "&" => (Expression)SystemLibrary.Concatenate.Call(ModelProvider, context, lhs, rhs),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
-            };
+            Expression result = 
+                @operator switch
+                {
+                    "+" => SystemLibrary.Add.Concat(SystemLibrary.AddDateTime).Call(ModelProvider, context, lhs, rhs),
+                    "-" => SystemLibrary.Subtract.Concat(SystemLibrary.SubtractDateTime).Call(ModelProvider, context, lhs, rhs),
+                    "&" => SystemLibrary.Concatenate.Call(ModelProvider, context, lhs, rhs),
+                    _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
+                };
+
+            return result;
         }
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
@@ -48,171 +50,63 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressionTerms[0]);
             var rhs = Visit(expressionTerms[1]);
 
-            var call = SystemLibrary.DifferenceBetween.Call(ModelProvider, context, lhs, rhs);
+            var call = (DifferenceBetween)SystemLibrary.DifferenceBetween.Call(ModelProvider, context, lhs, rhs);
+            call.precision = precision;
+            call.precisionSpecified = true;
 
-            var result = (DifferenceBetween)call;
-            var selectedType = call.Def.operand[0].resultTypeName;
+            var selectedType = call.operand[0].resultTypeName;
 
             if (selectedType == DateTypeQName)
             {
-                if (precision == DateTimePrecision.Year
-                    || precision == DateTimePrecision.Month
-                    || precision == DateTimePrecision.Week
-                    || precision == DateTimePrecision.Day)
-                {
-                    result.precision = precision;
-                    result.precisionSpecified = true;
-                    return result;
-                }
-                else
+                if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
                     throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
             }
             else if (selectedType == TimeTypeQName)
             {
-                if (precision == DateTimePrecision.Hour
-                    || precision == DateTimePrecision.Minute
-                    || precision == DateTimePrecision.Second
-                    || precision == DateTimePrecision.Millisecond)
-                {
-                    result.precision = precision;
-                    result.precisionSpecified = true;
-                    return result;
-                }
-                else
+                if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
                     throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
             }
-            else if (selectedType == DateTimeTypeQName)
-            {
-                result.precision = precision;
-                result.precisionSpecified = true;
-                return result;
-            }
-            else
-                throw UnresolvedSignature("Difference", lhs, rhs);
+
+            return call;        
         }
 
         //     | ('duration' 'in')? pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm      #durationBetweenExpression
         public override Expression VisitDurationBetweenExpression([NotNull] cqlParser.DurationBetweenExpressionContext context)
         {
-            int lhsIndex, rhsIndex;
-            if (context.ChildCount == 7)
-            {
-                lhsIndex = 4;
-                rhsIndex = 6;
-            }
-            else
-            {
-                lhsIndex = 2;
-                rhsIndex = 4;
-            }
-
             var precision = context.pluralDateTimePrecision().Parse();
 
-            var lhs = Visit(context.GetChild(lhsIndex));
-            var rhs = Visit(context.GetChild(rhsIndex));
+            var terms = context.expressionTerm();
+            var lhs = Visit(terms[0]);
+            var rhs = Visit(terms[1]);
 
-            if (lhs is Null)
-            {
-                if (rhs is not Null)
-                {
-                    lhs = new As
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = lhs.locator,
-                        asType = rhs!.resultTypeName,
-                        asTypeSpecifier = NamedType(rhs!.resultTypeName, context),
-                        resultTypeName = rhs!.resultTypeName,
-                        resultTypeSpecifier = NamedType(rhs!.resultTypeName, context),
-                    };
-                }
-            }
-            else if (rhs is Null)
-            {
-                var asType = NamedType(lhs!.resultTypeName, context);
-                rhs = new As
-                {
-                    operand = rhs,
-                    localId = NextId(),
-                    locator = rhs.locator,
-                    asType = asType.name,
-                    asTypeSpecifier = asType,
-                    resultTypeName = asType.name,
-                    resultTypeSpecifier = NamedType(asType.name, context),
-                };
-            }
+            var call = (DurationBetween)SystemLibrary.DurationBetween.Call(ModelProvider, context, lhs, rhs);
+            call.precision = precision;
+            call.precisionSpecified = true;
 
-            if (lhs.resultTypeName?.Name == null
-                || rhs.resultTypeName?.Name == null
-                || lhs.resultTypeName!.Name != rhs.resultTypeName!.Name)
+            var selectedType = call.operand[0].resultTypeName;
+
+            if (selectedType == DateTypeQName)
             {
-                UnresolvedSignature("Duration", lhs, rhs);
-            }
-            if (lhs.resultTypeName == DateTypeQName)
-            {
-                if (precision == DateTimePrecision.Year
-                    || precision == DateTimePrecision.Month
-                    || precision == DateTimePrecision.Week
-                    || precision == DateTimePrecision.Day)
-                {
-                    return new DurationBetween
-                    {
-                        precision = precision,
-                        localId = NextId(),
-                        locator = context.Locator(),
-                        operand = new[] { lhs, rhs },
-                        precisionSpecified = true,
-                        resultTypeName = IntegerTypeQName,
-                        resultTypeSpecifier = NamedType(IntegerTypeQName, context)
-                    };
-                }
-                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeQName}");
+                if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
+                    throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
             }
             else if (lhs.resultTypeName == TimeTypeQName)
             {
-                if (precision == DateTimePrecision.Hour
-                    || precision == DateTimePrecision.Minute
-                    || precision == DateTimePrecision.Second
-                    || precision == DateTimePrecision.Millisecond)
-                {
-                    return new DurationBetween
-                    {
-                        precision = precision,
-                        localId = NextId(),
-                        locator = context.Locator(),
-                        operand = new[] { lhs, rhs },
-                        precisionSpecified = true,
-                        resultTypeName = IntegerTypeQName,
-                        resultTypeSpecifier = NamedType(IntegerTypeQName, context)
-                    };
-                }
-                else throw Critical($"Unit {precision.ToString()} is not allowed for operands of type {DateTypeQName}");
+                if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
+                throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
 
             }
-            else if (lhs.resultTypeName == DateTimeTypeQName)
-            {
-                return new DurationBetween
-                {
-                    precision = precision,
-                    localId = NextId(),
-                    locator = context.Locator(),
-                    operand = new[] { lhs, rhs },
-                    precisionSpecified = true,
-                    resultTypeName = IntegerTypeQName,
-                    resultTypeSpecifier = NamedType(IntegerTypeQName, context)
-                };
-            }
-            else throw UnresolvedSignature("Duration", lhs, rhs);
+
+            return call;
         }
 
+        // | expression ('=' | '!=' | '~' | '!~') expression                                               #equalityExpression
         public override Expression VisitEqualityExpression([NotNull] cqlParser.EqualityExpressionContext context)
         {
-            var lhsChild = context.GetChild(0);
-            var rhsChild = context.GetChild(2);
-
-            var lhs = Visit(lhsChild!)!;
+            var expressions = context.expression();
+            var lhs = Visit(expressions[0]);
             var @operator = context.GetChild(1).GetText();
-            var rhs = Visit(rhsChild!)!;
+            var rhs = Visit(expressions[1]);
 
             #region Operand conversions
 

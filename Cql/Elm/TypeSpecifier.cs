@@ -14,6 +14,7 @@ using System.Linq;
 
 namespace Hl7.Cql.Elm
 {
+
     public partial class TypeSpecifier
     {
         /// <summary>
