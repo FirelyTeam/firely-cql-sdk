@@ -1,4 +1,5 @@
-﻿using Hl7.Fhir.Model;
+﻿using Hl7.Cql.Comparers;
+using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
 {
@@ -19,5 +20,24 @@ namespace Hl7.Cql.Fhir
         /// </summary>
         public StringComparer? ResourceIdComparer { get; init; } = StringComparer.OrdinalIgnoreCase;
 
+        /// <summary>
+        /// Defines the behavior when checking if a code exists in a collection of codes.
+        /// </summary>
+        public CodeInOperatorSemantics CodeInOperatorType { get; init; } = CodeInOperatorSemantics.Equivalent;
+
+        /// <summary>
+        /// Enum to house the options for checking if a <see cref="Code"/> exists in a list of <see cref="Code"/>
+        /// </summary>
+        public enum CodeInOperatorSemantics
+        {
+            /// <summary>
+            /// Forces the use of the <see cref="CqlCodeCqlComparer"/>
+            /// </summary>
+            Equals,
+            /// <summary>
+            /// Forces the use of the <see cref="CqlCodeCqlEquivalentComparer"/>
+            /// </summary>
+            Equivalent
+        }
     }
 }

@@ -5,7 +5,7 @@
 	</ItemGroup>
 
 	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-2.11.0.jar">
-		<Exec Command="Build\apache-maven-3.8.8\bin\mvn -f Build\pom.xml dependency:copy-dependencies"></Exec>
+		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies"></Exec>
 	</Target>
 	<Target Name="CQL to ELM"
 			DependsOnTargets="Download CQL to ELM CLI via Maven"
