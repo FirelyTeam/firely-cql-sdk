@@ -94,16 +94,17 @@ namespace Hl7.Cql.CqlToElm
                 }
                 else
                 {
-                    // Stop at the first error.
-                    var errorCandidate = BuiltInFunctionDef.ReplaceGenericParameters(candidate, newReplacements.WithNullAsAny());
-                    var errorTo = to.ReplaceGenericParameters(newReplacements);
+                    var cleanedReplacements = newReplacements.WithNullAsAny();
+                    var errorCandidate = BuiltInFunctionDef.ReplaceGenericParameters(candidate, cleanedReplacements);
+                    var errorTo = to.ReplaceGenericParameters(cleanedReplacements);
                     error = $"Cannot resolve call to {errorCandidate.Signature()}, " + 
                         $"the {BuiltInFunctionDef.GetArgumentName(argumentIndex)} argument is of type {argument.resultTypeSpecifier} " +
                         $"which cannot implicitly be cast to type {errorTo}";
                     
                     if(argumentResult.Assignments?.Any() == true)
                         hypothesis.Replace(argumentResult.Assignments);
-                    
+
+                    // Stop at the first error.                    
                     break;
                 }
 
@@ -199,11 +200,11 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType == SystemTypes.LongType && to == SystemTypes.DecimalType)
                 return new(SystemLibrary.LongToDecimal.Build(locatorContext, argument), 1, null, true);
             if (argumentType == SystemTypes.IntegerType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.IntegerToQuantity.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.IntegerToQuantity.Build(locatorContext, argument), 2, null, true);
             if (argumentType == SystemTypes.LongType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.LongToQuantity.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.LongToQuantity.Build(locatorContext, argument), 2, null, true);
             if (argumentType == SystemTypes.DecimalType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.DecimalToQuantity.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.DecimalToQuantity.Build(locatorContext, argument), 2, null, true);
             if (argumentType == SystemTypes.DateType && to == SystemTypes.DateTimeType)
                 return new(SystemLibrary.DateToDateTime.Build(locatorContext, argument), 1, null, true);
             if (argumentType == SystemTypes.CodeType && to == SystemTypes.ConceptType)
@@ -220,7 +221,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 var singleton = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
                 var intermediate = buildImplicitCast(singleton, to, genericReplacements);
-                return intermediate with { Cost = intermediate.Cost + 1 };
+                return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
             // TODO: interval demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
@@ -230,7 +231,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 var list = SystemLibrary.ToList.Call(Provider,locatorContext, argument);
                 var intermediate = buildImplicitCast(list, to, genericReplacements);
-                return intermediate with { Cost = intermediate.Cost + 1 };
+                return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
             // No implicit cast found
