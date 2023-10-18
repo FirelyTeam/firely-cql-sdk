@@ -30,15 +30,10 @@ namespace Hl7.Cql.CqlToElm
 
         public static IServiceCollection AddVisitors(this IServiceCollection services)
         {
-            services.AddScoped<ContextDefVisitor>();
             services.AddScoped<ExpressionVisitor>();
-            services.AddScoped<ExpressionDefinitionVisitor>();
             services.AddScoped<LibraryVisitor>();
             services.AddScoped<ParameterDefinitionVisitor>();
-            services.AddScoped<TupleElementVisitor>();
-            services.AddScoped<TupleElementDefinitionVisitor>();
             services.AddScoped<TypeSpecifierVisitor>();
-            services.AddScoped<VersionedIdentifierVisitor>();
             return services;
         }
 

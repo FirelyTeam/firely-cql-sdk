@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static readonly NamedTypeSpecifier Element = ForFhir("Element");
 
         internal static NamedTypeSpecifier ForFhir(string typeName) =>
-            new() { name = M.ModelInfoExtensions.MakeQualifiedTypeName(M.Models.Fhir401, typeName) };
+            new() { name = M.QualifiedName.MakeQualifiedTypeName(M.Models.Fhir401, typeName) };
 
         public static readonly ParameterTypeSpecifier T = new() { parameterName = "T" };
         public static readonly ParameterTypeSpecifier U = new() { parameterName = "U" };

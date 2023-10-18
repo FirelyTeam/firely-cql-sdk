@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         private readonly NamedTypeSpecifier Element = forFhir("Element");
 
         private static NamedTypeSpecifier forFhir(string typeName) =>
-           new() { name = M.ModelInfoExtensions.MakeQualifiedTypeName(M.Models.Fhir401, typeName) };
+           new() { name = M.QualifiedName.MakeQualifiedTypeName(M.Models.Fhir401, typeName) };
 
         private void yes(TypeSpecifier sub, TypeSpecifier super) =>
             sub.IsSubtypeOf(super, provider).Should().BeTrue();

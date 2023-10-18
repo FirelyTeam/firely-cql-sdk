@@ -41,9 +41,16 @@ namespace Hl7.Cql.CqlToElm
 
         public static string? Locator(this IParseTree pt) => pt is ParserRuleContext ctx ? ctx.Locator() : null;
 
-        public static T WithLocator<T>(this T t, string locator) where T : Element
+        public static T WithId<T>(this T t) where T : Element
         {
             t.localId = NextId(t);
+
+            return t;
+        }
+
+        public static T WithLocator<T>(this T t, string locator) where T : Element
+        {
+            t.WithId();
             t.locator = locator;
 
             return t;

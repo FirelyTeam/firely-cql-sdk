@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
 
@@ -202,7 +203,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return csRef;
         }
 
-        public static string? Parse(this cqlParser.IdentifierContext? context)
+        public static string? Parse([NotNullIfNotNull(nameof(context))] this cqlParser.IdentifierContext? context)
         {
             if (context is null) return null;
 
@@ -228,5 +229,80 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => throw new InvalidOperationException($"Access modifier {context.GetText()} is not supported")
             };
         }
+
+        //    : 'context' (modelIdentifier '.')? identifier
+        public static ContextDef Parse(this cqlParser.ContextDefinitionContext context)
+        {
+            var identifier = context.identifier().Parse();
+
+            if(context.modelIdentifier() is {} mic)
+                identifier = $"{mic.identifier().Parse()}.{identifier}";
+                
+            return new ContextDef
+            {
+                name =  identifier
+            };
+        }
+
+        // 'define' accessModifier? identifier ':' expression
+        public static ExpressionDef Parse(this cqlParser.ExpressionDefinitionContext context, ExpressionVisitor expressionVisitor)
+        {
+            var expression = expressionVisitor.Visit(context.expression());
+
+            var def = new ExpressionDef
+            {
+                accessLevel = context.accessModifier().Parse(),
+                name = context.identifier().Parse(),
+                expression = expression,
+            }.WithResultType(expression.resultTypeSpecifier).WithLocator(context.Locator());
+
+            return def;
+        }
+
+        // : referentialIdentifier typeSpecifier
+        public static TupleElementDefinition Parse(this cqlParser.TupleElementDefinitionContext context, TypeSpecifierVisitor typeSpecVisitor)
+        {
+            var name = context.referentialIdentifier().GetText();
+            var type = typeSpecVisitor.Visit(context.typeSpecifier());
+
+            var ted = new TupleElementDefinition
+            {
+                name = name,
+                elementType = type,
+            }.WithLocator(context.Locator());
+
+            return ted;
+        }
+
+        //  referentialIdentifier ':' expression
+        public static TupleElement Parse(this cqlParser.TupleElementSelectorContext context, ExpressionVisitor expressionVisitor)
+        {
+            var name = context.referentialIdentifier().GetText();
+            var expression = expressionVisitor.Visit(context.expression());
+
+            var te = new TupleElement
+            {
+                name = name,
+                value = expression,                
+            };
+
+            return te;
+        }
+
+        //    : 'library' qualifiedIdentifier ('version' versionSpecifier)?
+        public static VersionedIdentifier Parse(this cqlParser.LibraryDefinitionContext context)
+        {
+            var id = context.qualifiedIdentifier().Parse();
+
+            var versionedIdentifier = new VersionedIdentifier
+            {
+                id = id.id,
+                system = id.qualifier,
+                version = context.versionSpecifier()?.STRING().ParseString()
+            };
+            
+            return versionedIdentifier;
+        }
+
     }
 }

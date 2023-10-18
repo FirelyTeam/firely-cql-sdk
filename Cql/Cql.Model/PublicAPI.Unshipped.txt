@@ -62,7 +62,6 @@ Hl7.Cql.Model.ModelInfo.strictRetrieveTyping.get -> bool
 Hl7.Cql.Model.ModelInfo.strictRetrieveTyping.set -> void
 Hl7.Cql.Model.ModelInfo.strictRetrieveTypingSpecified.get -> bool
 Hl7.Cql.Model.ModelInfo.strictRetrieveTypingSpecified.set -> void
-Hl7.Cql.Model.ModelInfoExtensions
 Hl7.Cql.Model.ModelSpecifier
 Hl7.Cql.Model.ModelSpecifier.ModelSpecifier() -> void
 Hl7.Cql.Model.NamedTypeSpecifier
@@ -71,6 +70,7 @@ Hl7.Cql.Model.ParameterTypeSpecifier
 Hl7.Cql.Model.ParameterTypeSpecifier.ParameterTypeSpecifier() -> void
 Hl7.Cql.Model.ProfileInfo
 Hl7.Cql.Model.ProfileInfo.ProfileInfo() -> void
+Hl7.Cql.Model.QualifiedName
 Hl7.Cql.Model.RelationshipInfo
 Hl7.Cql.Model.RelationshipInfo.RelationshipInfo() -> void
 Hl7.Cql.Model.SearchInfo
@@ -99,7 +99,8 @@ Hl7.Cql.Model.TypeParameterInfo
 Hl7.Cql.Model.TypeParameterInfo.TypeParameterInfo() -> void
 Hl7.Cql.Model.TypeSpecifier
 Hl7.Cql.Model.TypeSpecifier.TypeSpecifier() -> void
-static Hl7.Cql.Model.ModelInfoExtensions.MakeQualifiedTypeName(this Hl7.Cql.Model.ModelInfo! model, string! typeName) -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(string! url, string! typeName) -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(this Hl7.Cql.Model.ModelInfo! model, string! typeName) -> System.Xml.XmlQualifiedName!
 ~Hl7.Cql.Model.BindingInfo.description.get -> string
 ~Hl7.Cql.Model.BindingInfo.description.set -> void
 ~Hl7.Cql.Model.BindingInfo.name.get -> string

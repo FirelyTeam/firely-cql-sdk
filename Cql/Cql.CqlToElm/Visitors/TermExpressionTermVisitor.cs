@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.CqlToElm.Grammar;
+﻿using Antlr4.Runtime.Misc;
+using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,70 +11,57 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
-        private TupleElementVisitor TupleElementVisitor => Services.GetRequiredService<TupleElementVisitor>();
-
         private readonly Regex DecimalExpression = new Regex(@"^-?\d*(\.\d+)$", RegexOptions.Compiled);
 
         public override Expression VisitBooleanLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.BooleanLiteralContext context)
         {
             var value = context.GetText();
-            var typeSpecifier = NamedType(BooleanTypeQName, context);
             var literal = new Literal
             {
                 value = value,
-                resultTypeSpecifier = typeSpecifier,
-                resultTypeName = typeSpecifier.name,
-                valueType = typeSpecifier.name,
-                localId = NextId(),
-                locator = context.Locator()
-            };
+                valueType = SystemTypes.BooleanType.name,
+            }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator());
+
             return literal;
         }
 
         public override Expression VisitDateLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.DateLiteralContext context)
         {
-            var dateType = NamedType(DateTypeQName, context);
             var dateLiteral = new Date
             {
-                localId = NextId(),
-                locator = context.Locator(),
-                resultTypeName = dateType.name,
-                resultTypeSpecifier = dateType,
-            };
+            }.WithResultType(SystemTypes.DateType).WithLocator(context.Locator());
+            
             if (DateIso8601.TryParse(context.GetText()[1..], out var date))
-            {
-                var integerType = NamedType(IntegerTypeQName, context);
+            {                
                 var startLine = context.Start.Line;
                 int startCol = context.Start.Column;
+
                 dateLiteral.year = new Literal
                 {
                     value = date!.Year.ToString(CultureInfo.InvariantCulture),
-                    localId = NextId(),
-                    locator = FormatLocator(startLine, startCol, startLine, startCol + 4),
-                    resultTypeName = integerType.name,
-                    valueType = integerType.name,
-                    resultTypeSpecifier = integerType,
-                };
+                    valueType = SystemTypes.IntegerType.name,
+                }.WithLocator(FormatLocator(startLine, startCol, startLine, startCol + 4))
+                    .WithResultType(SystemTypes.IntegerType);
+
                 if (date.Precision > Iso8601.DateTimePrecision.Year)
+                {
                     dateLiteral.month = new Literal
                     {
                         value = date.Month.ToString(),
-                        localId = NextId(),
-                        locator = FormatLocator(startLine + 5, startCol, startLine, startCol + 7),
-                        resultTypeName = integerType.name,
-                        valueType = integerType.name,
-                        resultTypeSpecifier = integerType,
-                    };
+                        valueType = SystemTypes.IntegerType.name,
+                    }.WithLocator(FormatLocator(startLine + 5, startCol, startLine, startCol + 7))
+                        .WithResultType(SystemTypes.IntegerType);
+                }
+
                 if (date.Precision > Iso8601.DateTimePrecision.Month)
+                {
                     dateLiteral.day = new Literal
                     {
                         value = date.Day.ToString(),
-                        localId = NextId(),
-                        locator = FormatLocator(startLine + 8, startCol, startLine, startCol + 10),
-                        resultTypeName = integerType.name,
-                        valueType = integerType.name,
-                        resultTypeSpecifier = integerType,
-                    };
+                        valueType = SystemTypes.IntegerType.name,
+                    }.WithLocator(FormatLocator(startLine + 8, startCol, startLine, startCol + 10))
+                        .WithResultType(SystemTypes.IntegerType);
+                }
             }
             else
             {
@@ -422,46 +410,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return timeLiteral;
         }
 
+        //    : 'Tuple'? '{' (':' | (tupleElementSelector (',' tupleElementSelector)*)) '}'
         public override Expression VisitTupleSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.TupleSelectorContext context)
         {
-            int terminalCount, i;
-            if (context.GetChild(0).GetText() == "Tuple")
-            {
-                terminalCount = 3;
-                i = 2;
-            }
-            else
-            {
-                terminalCount = 2;
-                i = 1;
-            }
+            var tupleElementContexts = context.tupleElementSelector();
+            var tupleElements = tupleElementContexts.Select(tec => tec.Parse(this)).ToArray(); 
 
-            var elementCount = context.ChildCount - terminalCount;
-            if ((elementCount & 0x1) == 1)
-                elementCount = (elementCount >> 1) + 1;
-            else
-                elementCount >>= 1;
+            var tupleTypeElementDefs = tupleElements.Select(te => new TupleElementDefinition
+            {
+                name = te.name,
+                elementType = te.value.resultTypeSpecifier,
+            }).ToArray();
+
             var resultType = new TupleTypeSpecifier
             {
-                element = new TupleElementDefinition[elementCount],
+                element = tupleTypeElementDefs
             };
-            var tuple = new Elm.Tuple
+
+            var tuple = new Tuple
             {
-                element = new TupleElement[elementCount],
-                localId = NextId(),
-                locator = context.Locator(),
-                resultTypeSpecifier = resultType,
-            };
-            for (int j = 0; i < context.ChildCount; i += 2)
-            {
-                tuple.element[j] = TupleElementVisitor.Visit(context.GetChild(i));
-                resultType.element[j] = new TupleElementDefinition
-                {
-                    name = tuple.element[j].name,
-                    elementType = tuple.element[j].value.resultTypeSpecifier,
-                };
-                j++;
-            }
+                element = tupleElements,
+            }.WithLocator(context.Locator()).WithResultType(resultType);
+
             return tuple;
         }
 

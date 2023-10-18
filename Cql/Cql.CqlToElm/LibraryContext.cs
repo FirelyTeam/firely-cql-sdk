@@ -36,9 +36,7 @@ namespace Hl7.Cql.CqlToElm
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = SystemTypes.ValueSetTypeQName,
-                    resultTypeSpecifier = SystemTypes.ValueSetType,
-                };
+                }.WithResultType(SystemTypes.ValueSetType);
             }
             else if (library.concepts?.Any(c => c.name == identifier) ?? false)
             {
@@ -46,9 +44,7 @@ namespace Hl7.Cql.CqlToElm
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = SystemTypes.ConceptTypeQName,
-                    resultTypeSpecifier = SystemTypes.ConceptType
-                };
+                }.WithResultType(SystemTypes.ConceptType);
             }
             else if (library.codeSystems?.Any(c => c.name == identifier) ?? false)
             {
@@ -56,9 +52,7 @@ namespace Hl7.Cql.CqlToElm
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = SystemTypes.CodeSystemTypeQName,
-                    resultTypeSpecifier = SystemTypes.CodeSystemType
-                };
+                }.WithResultType(SystemTypes.CodeSystemType);
             }
             else if (library.codes?.Any(c => c.name == identifier) ?? false)
             {
@@ -66,9 +60,7 @@ namespace Hl7.Cql.CqlToElm
                 {
                     libraryName = qualifier,
                     name = identifier,
-                    resultTypeName = SystemTypes.CodeTypeQName,
-                    resultTypeSpecifier = SystemTypes.CodeType
-                };
+                }.WithResultType(SystemTypes.CodeType);
             }
             else
             {
@@ -76,30 +68,23 @@ namespace Hl7.Cql.CqlToElm
                     .Where(p => p.name == identifier)
                     .ToArray() ?? Array.Empty<ParameterDef>();
 
-                if (param.Length > 1)
-                    Log.LogCritical($"The parameter name {identifier} exists more than once in {library.identifier.id}.");
-
                 if (param.Length > 0)
                 {
+                    if (param.Length > 1)
+                        Log.LogCritical($"The parameter name {identifier} exists more than once in {library.identifier.id}.");
+
                     return new ParameterRef
                     {
                         libraryName = qualifier,
                         name = identifier,
-                        resultTypeName = param[0].parameterType,
-                        resultTypeSpecifier = param[0].parameterTypeSpecifier
-                    };
+                    }.WithResultType(param[0].parameterTypeSpecifier);
                 }
+                else
+                    return null;
             }
-            return null;
         }
 
-
-        /// <summary>
-        /// Given the literal (qualified) identifier for a type, returns 0 or more NamedTypeSpecifiers that represent matches
-        /// for that identifier.
-        /// </summary>
-        /// <param name="dottedName">A (possibly) qualified identifier for a type.</param>
-        internal IEnumerable<Elm.NamedTypeSpecifier> MatchDottedTypeName(string dottedName)
+        private IEnumerable<ModelResolveResult> matchDottedTypeName(string dottedName)
         {
             var parts = dottedName.Split(".");
             var usings = parts.Length == 2 ?
@@ -110,15 +95,12 @@ namespace Hl7.Cql.CqlToElm
 
             foreach (var @using in usings)
             {
-                if (ModelProvider.ModelFromUri(@using.uri) is { } model)
-                {
-                    if (model.TryGetTypeInfoFor(name, out _))
-                    {
-                        yield return model.MakeQualifiedTypeName(name).ToNamedType();
-                    }
-                }
+                var namedType = QualifiedName.MakeQualifiedTypeName(@using.uri, name).ToNamedType();
+                if(ModelProvider.TryResolveFromNamedType(namedType, out var result))
+                    yield return result!;
             }
         }
+
 
         /// <summary>
         /// Given the literal (qualified) identifier for a type, returns the NamedTypeSpecifier for the type, 
@@ -126,9 +108,9 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         /// <param name="dottedName">A (possibly) qualified identifier for a type.</param>
         /// <returns></returns>
-        internal Elm.NamedTypeSpecifier ResolveDottedTypeName(string dottedName)
+        internal ModelResolveResult ResolveDottedTypeName(string dottedName)
         {
-            var types = MatchDottedTypeName(dottedName).ToArray();
+            var types = matchDottedTypeName(dottedName).ToArray();
 
             if (types.Length == 1)
             {

@@ -266,16 +266,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var retrieve = new Retrieve
             {
-                localId = NextId(),
-                locator = context.Locator(),
                 dataType = type.name,
                 templateId = ModelProvider.GetDefaultProfileUriForType(type),
                 context = contextExpressionRef,
                 codeComparator = codeComparator,
                 codes = terminology,
                 codeProperty = codePath,
-                resultTypeSpecifier = ListType(type, context)
-            };
+            }.WithResultType(type.ToListType()).WithLocator(context.Locator());
 
             return retrieve;
         }
