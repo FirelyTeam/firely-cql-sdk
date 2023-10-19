@@ -20,9 +20,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that
         /// function with the given arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
-        public static FunctionResolveResult Call(this FunctionDef def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        public static FunctionResolveResult Call(this FunctionDef def, IModelProvider provider, SystemLibrary library, ParserRuleContext context, params Expression[] arguments)
         {
-            var castResult = buildInvocation(def, arguments, provider);
+            var castResult = buildInvocation(def, arguments, provider, library);
             
             return castResult with 
             { 
@@ -34,9 +34,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// Choses the best matching overload of a set of <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the 
         /// invocation, given the types of the arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
-        public static FunctionResolveResult Call(this IEnumerable<FunctionDef> defs, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        public static FunctionResolveResult Call(this IEnumerable<FunctionDef> defs, IModelProvider provider, SystemLibrary library, ParserRuleContext context, params Expression[] arguments)
         {
-            var results = defs.Select(d => (def: d, call: Call(d,provider, context, arguments))).ToList();            
+            var results = defs.Select(d => (def: d, call: Call(d,provider, library, context, arguments))).ToList();            
             if(!results.Any()) throw new ArgumentException("Should be called with at least one overload.", nameof(defs));
 
             var bestCandidates = results
@@ -122,9 +122,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }.WithResultType(typeArgument).WithLocator(context.Locator());
         }
 
-        private static FunctionResolveResult buildInvocation(FunctionDef def, Expression[] arguments, IModelProvider provider)
+        private static FunctionResolveResult buildInvocation(FunctionDef def, Expression[] arguments, IModelProvider provider, SystemLibrary library)
         {
-            var castBuilder = new InvocationBuilder(provider);
+            var castBuilder = new InvocationBuilder(provider, library);
             return castBuilder.Build(def, arguments);
         }
 

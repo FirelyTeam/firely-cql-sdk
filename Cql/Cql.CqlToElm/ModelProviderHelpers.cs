@@ -65,11 +65,20 @@ namespace Hl7.Cql.CqlToElm
         /// <param name="nt">A <see cref="Elm.NamedTypeSpecifier"/> with a name in the form <c>{uri}type</c>.</param>
         /// <returns>The uri and the type parts of the name in the specifier.</returns>
         /// <exception cref="ArgumentException">If the name does not match the expected pattern.</exception>
-        public static (string uri, string name) GetNamedTypeComponents(this Elm.NamedTypeSpecifier nt)
+        public static (string uri, string name) GetNamedTypeComponents(this Elm.NamedTypeSpecifier nt) =>
+            GetNamedTypeComponents(nt.name.Name);
+
+        /// <summary>
+        /// Gets the model uri and name for the type specified by <paramref name="qualifiedName"/>.
+        /// </summary>
+        /// <param name="qualifiedName">A qualified type name string n the form <c>{uri}type</c>.</param>
+        /// <returns>The uri and the type parts of the name in the specifier.</returns>
+        /// <exception cref="ArgumentException">If the name does not match the expected pattern.</exception>
+        public static (string uri, string name) GetNamedTypeComponents(this string qualifiedName)
         {
-            var match = QualifiedNameExpression.Match(nt.name.Name);
+            var match = QualifiedNameExpression.Match(qualifiedName);
             return match.Success ? (match.Groups["uri"].Value, match.Groups["name"].Value) :
-                throw new ArgumentException("NamedTypeSpecifier name does not match the expected pattern {uri}name.", nameof(nt));
+                throw new ArgumentException("NamedTypeSpecifier name does not match the expected pattern {uri}name.", nameof(qualifiedName));
         }
 
         /// <summary>
@@ -86,6 +95,21 @@ namespace Hl7.Cql.CqlToElm
             else
                 throw new InvalidOperationException($"Type {nt} uses unknown model {uri}.");
         }
+
+        /// <summary>
+        /// Gets the model for the type specified by <paramref name="qualifiedTypeName"/>.
+        /// </summary>
+        /// <param name="provider">The <see cref="IModelProvider"/> supplfying the models.</param>
+        /// <param name="qualifiedTypeName">The type's URI.</param>
+        public static ModelInfo ModelFromUri(this IModelProvider provider, string qualifiedTypeName)
+        {
+            var (uri, _) = qualifiedTypeName.GetNamedTypeComponents();
+            if (provider.ModelFromUri(uri) is ModelInfo model)
+                return model;
+            else
+                throw new InvalidOperationException($"Type {qualifiedTypeName} uses unknown model {uri}.");
+        }
+
 
         /// <summary>
         /// Returns the <see cref="TypeInfo"/> for the type specified by <paramref name="nt"/>.

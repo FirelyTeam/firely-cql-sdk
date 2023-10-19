@@ -190,8 +190,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     return @in;
                 }
                 if (properly || !properly)
-                    throw UnresolvedSignature("Within", lhs, rhs);
-                throw UnresolvedSignature("Within", lhs, rhs);
+                    return UnresolvedSignature(context, "Within", lhs, rhs);
+                return UnresolvedSignature(context, "Within", lhs, rhs);
             }
 
             //| ('starts' | 'ends' | 'occurs')? 'properly'? ('during' | 'included in') dateTimePrecisionSpecifier?                    #includedInIntervalOperatorPhrase
@@ -313,7 +313,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 CqlKeyword? boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
                     Keyword.Parse(term.GetText())[0] : null;
 
-                BinaryExpression result = boa switch
+                BinaryExpression? result = boa switch
                 {
                     null => new Overlaps
                     {
@@ -331,16 +331,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         precisionSpecified = dtPrecision is not null,
                         precision = dtPrecision ?? default,
                     },
-                    _ => throw UnresolvedSignature("Overlaps", lhs, rhs)
+                    _ => null
                 };
-
-                result.operand = new[] { lhs, rhs };
-                result.resultTypeName = BooleanTypeQName;
-                result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
-                result.localId = NextId();
-                result.locator = context.Locator();
-
-                return result;
+                if (result == null)
+                    return UnresolvedSignature(context, "Overlaps", lhs, rhs);
+                else
+                {
+                    result.operand = new[] { lhs, rhs };
+                    result.resultTypeName = BooleanTypeQName;
+                    result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
+                    result.localId = NextId();
+                    result.locator = context.Locator();
+                    return result;
+                }
             }
         }
 
@@ -354,7 +357,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             CqlKeyword? boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
                 Keyword.Parse(term.GetText())[0] : null;
 
-            BinaryExpression result = boa switch
+            BinaryExpression? result = boa switch
             {
                 null => new Meets
                 {
@@ -371,16 +374,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     precisionSpecified = precision is not null,
                     precision = precision ?? default,
                 },
-                _ => throw UnresolvedSignature("Meets", lhs, rhs)
+                _ => null
             };
-
-            result.operand = new[] { lhs, rhs };
-            result.resultTypeName = BooleanTypeQName;
-            result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
-            result.localId = NextId();
-            result.locator = context.Locator();
-
-            return result;
+            if (result == null)
+                return UnresolvedSignature(context, "Meets", lhs, rhs);
+            else
+            {
+                result.operand = new[] { lhs, rhs };
+                result.resultTypeName = BooleanTypeQName;
+                result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
+                result.localId = NextId();
+                result.locator = context.Locator();
+                return result;
+            }
         }
 
         //| 'starts' dateTimePrecisionSpecifier?                                                                                  #startsIntervalOperatorPhrase
@@ -430,7 +436,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var firstKeyword = Keyword.Parse(context.GetChild(0).GetText());
             if (firstKeyword.Length != 1)
-                throw UnresolvedSignature("Includes", lhs, rhs);
+               return UnresolvedSignature(context, "Includes", lhs, rhs);
             bool properly;
             int index;
             if (firstKeyword[0] == CqlKeyword.Properly)
@@ -444,7 +450,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 index = 1;
             }
             else
-                throw UnresolvedSignature("Includes", lhs, rhs);
+               return UnresolvedSignature(context, "Includes", lhs, rhs);
 
             var next = context.GetChild(index);
             DateTimePrecision? precision;
@@ -485,9 +491,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             resultTypeName = rhsPointType?.resultTypeName
                         };
                     }
-                    else throw UnresolvedSignature("Includes", lhs, rhs);
+                    else return UnresolvedSignature(context, "Includes", lhs, rhs);
                 }
-                else throw UnresolvedSignature("Includes", lhs, rhs);
+                else return UnresolvedSignature(context, "Includes", lhs, rhs);
             }
 
             BinaryExpression includes = properly
@@ -650,7 +656,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         };
                         return sameOrAfter;
                     }
-                    else throw UnresolvedSignature("SameAs", lhs, rhs);
+                    else return UnresolvedSignature(context, "SameAs", lhs, rhs);
                 }
                 else if (qualifier.Length == 1 && qualifier[0] == CqlKeyword.As)
                 {
@@ -666,7 +672,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     };
                     return same;
                 }
-                else throw UnresolvedSignature("SameAs", lhs, rhs);
+                else return UnresolvedSignature(context, "SameAs", lhs, rhs);
             }
             else if (context.ChildCount == 3)
             {
@@ -702,7 +708,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         };
                         return sameOrAfter;
                     }
-                    else throw UnresolvedSignature("SameAs", lhs, rhs);
+                    else return UnresolvedSignature(context, "SameAs", lhs, rhs);
                 }
                 else if (qualifier.Length == 1 && qualifier[0] == CqlKeyword.As)
                 {
@@ -718,9 +724,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     };
                     return same;
                 }
-                else throw UnresolvedSignature("SameAs", lhs, rhs);
+                else return UnresolvedSignature(context, "SameAs", lhs, rhs);
             }
-            else throw UnresolvedSignature("SameAs", lhs, rhs);
+            else return UnresolvedSignature(context, "SameAs", lhs, rhs);
 
 
         }

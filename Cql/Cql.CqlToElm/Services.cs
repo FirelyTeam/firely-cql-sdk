@@ -1,5 +1,7 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Visitors;
+using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -72,6 +74,10 @@ namespace Hl7.Cql.CqlToElm
                 .AddScoped<SystemLibrary>()
                 .AddScoped<ConverterContext>()
                 .AddScoped<LibraryContext>();
+
+        public static IServiceCollection AddSystemLibrary(this IServiceCollection services, SystemLibrary? systemLibrary = null) =>
+            services.AddSingleton(systemLibrary ?? new SystemLibrary());
+
 
         public static ILoggingBuilder ThrowOn(this ILoggingBuilder builder, LogLevel threshold) =>
             builder.AddProvider(new ThrowingLoggerProvider(threshold));

@@ -18,14 +18,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression boolean = lastChild switch
             {
-                CqlKeyword.Null => SystemLibrary.IsNull.Call(ModelProvider, context, operand),
-                CqlKeyword.True => SystemLibrary.IsTrue.Call(ModelProvider, context, operand),
-                CqlKeyword.False => SystemLibrary.IsFalse.Call(ModelProvider, context, operand),
+                CqlKeyword.Null => SystemLibrary.IsNull.Call(ModelProvider, SystemLibrary, context, operand),
+                CqlKeyword.True => SystemLibrary.IsTrue.Call(ModelProvider, SystemLibrary, context, operand),
+                CqlKeyword.False => SystemLibrary.IsFalse.Call(ModelProvider, SystemLibrary, context, operand),
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
             };
 
             if (isNot)
-                boolean = SystemLibrary.Not.Call(ModelProvider, context, boolean);
+                boolean = SystemLibrary.Not.Call(ModelProvider, SystemLibrary, context, boolean);
 
             return boolean;
         }
@@ -35,7 +35,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return SystemLibrary.SingletonFrom.Call(ModelProvider, context, operand);
+            return SystemLibrary.SingletonFrom.Call(ModelProvider, SystemLibrary, context, operand);
         }
 
         //     | 'exists' expression                                                                           #existenceExpression
@@ -43,7 +43,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
 
-            return SystemLibrary.Exists.Call(ModelProvider, context, operand);
+            return SystemLibrary.Exists.Call(ModelProvider, SystemLibrary, context, operand);
         }
 
         // | 'not' expression                                                                              #notExpression
@@ -51,14 +51,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
 
-            return SystemLibrary.Not.Call(ModelProvider, context, operand);
+            return SystemLibrary.Not.Call(ModelProvider, SystemLibrary, context, operand);
         }
 
         //    | 'point' 'from' expressionTerm                                                 #pointExtractorExpressionTerm
         public override Expression VisitPointExtractorExpressionTerm([NotNull] cqlParser.PointExtractorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-            return SystemLibrary.PointFrom.Call(ModelProvider, context, operand);
+            return SystemLibrary.PointFrom.Call(ModelProvider, SystemLibrary, context, operand);
         }
 
         //    | 'predecessor' 'of' expressionTerm                                             #predecessorExpressionTerm
@@ -68,10 +68,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (operand.resultTypeSpecifier.IsValidOrderedType())
             {
-                return SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
+                return SystemLibrary.Predecessor.Call(ModelProvider, SystemLibrary, context, operand);
             }
             else
-                throw UnresolvedSignature(nameof(Predecessor), operand);
+               return UnresolvedSignature(context, nameof(Predecessor), operand);
         }
 
         //     | 'successor' 'of' expressionTerm                                               #successorExpressionTerm
@@ -81,10 +81,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (operand.resultTypeSpecifier.IsValidOrderedType())
             {
-                return SystemLibrary.Successor.Call(ModelProvider, context, operand);
+                return SystemLibrary.Successor.Call(ModelProvider, SystemLibrary, context, operand);
             }
             else
-                throw UnresolvedSignature(nameof(Successor), operand);
+               return UnresolvedSignature(context, nameof(Successor), operand);
         }
 
         //   | ('start' | 'end') 'of' expressionTerm                                         #timeBoundaryExpressionTerm
@@ -95,9 +95,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return startOrEnd switch
             {
-                CqlKeyword.Start => SystemLibrary.Start.Call(ModelProvider, context, operand),
-                CqlKeyword.End => SystemLibrary.End.Call(ModelProvider, context, operand),
-                _ => throw UnresolvedSignature("Start", operand)
+                CqlKeyword.Start => SystemLibrary.Start.Call(ModelProvider, SystemLibrary, context, operand),
+                CqlKeyword.End => SystemLibrary.End.Call(ModelProvider, SystemLibrary, context, operand),
+                _ => UnresolvedSignature(context, "Start", operand)
             };
         }
 
@@ -117,7 +117,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 };
             }
             else
-                throw UnresolvedSignature(extent.ToString(), new Null().WithResultType(typeSpecifier));
+               return UnresolvedSignature(context, extent.ToString(), new Null().WithResultType(typeSpecifier));
         }
 
         //   'width' expressionTerm                                                          #widthExpressionTerm
@@ -125,7 +125,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return SystemLibrary.Width.Call(ModelProvider, context, operand);
+            return SystemLibrary.Width.Call(ModelProvider, SystemLibrary, context, operand);
         }
 
         //   expression ('is' | 'as') typeSpecifier  
