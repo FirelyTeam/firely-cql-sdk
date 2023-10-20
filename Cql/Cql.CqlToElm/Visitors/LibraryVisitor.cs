@@ -28,6 +28,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
         #endregion
 
 
+        private UsingDef getDefaultSystemUsingDef()
+        {
+            var systemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
+            var systemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)] ?? SystemTypes.SystemModelVersion;
+
+            if(string.IsNullOrWhiteSpace(systemUri))
+                systemUri = SystemTypes.SystemModelUri;
+
+            if(string.IsNullOrWhiteSpace(systemVersion))            
+                systemVersion = SystemTypes.SystemModelVersion;
+            
+            if(ModelProvider.ModelFromUri(systemUri, systemVersion) is {} model)
+            {
+                return new UsingDef
+                {
+                    uri = model.url,
+                    localIdentifier = "System",
+                }.WithId();
+            }
+            else 
+            throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
+        }
+
         // libraryDefinition? definition* statement* EOF;
         public override Library VisitLibrary([NotNull] cqlParser.LibraryContext context)
         {
@@ -50,23 +73,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var contextDefs = new LinkedList<ContextDef>();
             var contextStatements = new Dictionary<string, ExpressionDef>();
 
-            var defaultSystemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
-            var defaultSystemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)];
 
-            if (!string.IsNullOrWhiteSpace(defaultSystemUri)
-                && !string.IsNullOrWhiteSpace(defaultSystemVersion))
-            {
-                var model = ModelProvider.ModelFromUri(defaultSystemUri, defaultSystemVersion);
-                if (model != null)
-                {
-                    usings.AddFirst(new UsingDef
-                    {
-                        uri = model.url,
-                        localIdentifier = "System",
-                    }.WithId());
-                }
-                else throw new InvalidOperationException($"Model {defaultSystemUri} version {defaultSystemVersion} is not available.");
-            }
+            var systemUsing = getDefaultSystemUsingDef();
+            usings.AddLast(systemUsing);
 
             // visit usings first so parameters can refer to models
             foreach (var child in context.definition())
