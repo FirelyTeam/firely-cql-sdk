@@ -122,25 +122,25 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Errors()
         {
-            Assert.ThrowsException<AggregateException>(() =>
-                DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Decimal_Literal: 0.123456789
-                "));
+                ").ShouldReportError("Decimal literals cannot have a mantissa longer than 8 digits.");
+
             // exactly 28 digits
-            var lib = DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                     library Decimal_Errors_2 version '1.0.0'
 
                     define private Decimal_Literal: -12345678901234567890.12345678
-                ");
+                ").ShouldSucceed();
+
             // 29 digits
-            Assert.ThrowsException<AggregateException>(() =>
-                DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                     library Decimal_Errors_3 version '1.0.0'
 
                     define private Decimal_Literal: -123456789012345678901.12345678
-                "));
+                ").ShouldReportError("Decimal literals cannot be longer than 28 digits.");
         }
 
         #endregion
@@ -206,18 +206,17 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_Overflows()
         {
             // minimum long is -9,223,372,036,854,775,808
-            Assert.ThrowsException<AggregateException>(() =>
-             DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: -9223372036854775809
-                "));
-            Assert.ThrowsException<AggregateException>(() =>
-             DefaultConverter.ConvertLibrary(@"
+                ").ShouldReportError("Unparseable numeric literal*.");
+
+            DefaultConverter.ConvertLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: 9223372036854775808
-                "));
+                ").ShouldReportError("Unparseable numeric literal*.");
         }
 
         #endregion

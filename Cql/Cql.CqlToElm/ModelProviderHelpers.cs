@@ -19,16 +19,19 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>The name for a <see cref="SimpleTypeInfo"/> or <see cref="ClassInfo"/> or null otherwise.</returns>
         public static string? GetNameFromTypeInfo(this TypeInfo ti)
         {
-            var name = ti switch
+            var (ns, name) = ti switch
             {
-                SimpleTypeInfo sti => sti.name,
-                ClassInfo c => c.name,
-                _ => null
+                SimpleTypeInfo sti => (sti.@namespace, sti.name),
+                ClassInfo c => (c.@namespace, c.name),
+                _ => (null, null)
             };
 
-            // Unfortunately, the typeInfo.name property will sometimes be qualified with the model
-            // prefix, but most often not. Remove the it to remain predictable.
-            return name?.Split('.').LastOrDefault();
+            if (ns is null && name is null)
+                return null;
+            else if (ns is null) // if there is no namespace, it is part of the name
+                return name?.Split('.', 2).LastOrDefault();
+            else
+                return name;
         }
 
         /// <summary>
@@ -49,7 +52,7 @@ namespace Hl7.Cql.CqlToElm
                            select ti;
 
             result = typeInfo.FirstOrDefault();
-            return result is not null;           
+            return result is not null;
         }
 
         /// <summary>
@@ -77,7 +80,7 @@ namespace Hl7.Cql.CqlToElm
             var (uri, name) = nt.GetNameComponents();
             if (provider.ModelFromUri(uri) is ModelInfo model &&
                 model.tryGetTypeInfoFor(name, out var ti))
-                result = new(model,ti!);
+                result = new(model, ti!);
             else
                 result = null;
 
@@ -113,7 +116,7 @@ namespace Hl7.Cql.CqlToElm
         /// may return null.</remarks>
         public static string? GetDefaultProfileUriForType(this IModelProvider provider, Elm.NamedTypeSpecifier type)
         {
-            if(!provider.TryResolveFromNamedType(type, out var result)) return null;
+            if (!provider.TryResolveFromNamedType(type, out var result)) return null;
 
             // this lookup isn't even necessary, but it's what we would do in a "real" implementation, if it ever exists.
             if (result!.Model.url == "http://hl7.org/fhir")

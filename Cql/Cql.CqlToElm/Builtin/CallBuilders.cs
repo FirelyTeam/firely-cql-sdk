@@ -20,51 +20,62 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that
         /// function with the given arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
-        public static FunctionResolveResult Call(this FunctionDef def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        public static Expression Call(this FunctionDef def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
         {
-            var castResult = buildInvocation(def, arguments, provider);
-            
-            return castResult with 
-            { 
-                Call = castResult.Call.WithLocator(context.Locator()) 
+            var callResult = buildCall(def, provider, context, arguments);
+
+            return callResult switch
+            {
+                { Error: null, Result: var e } => e.expr,
+                { Error: not null, Result: var e } => e.expr.AddError(callResult.Error, ErrorType.semantic),
             };
         }
+
+        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this FunctionDef def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        {
+            var castResult = buildInvocation(def, arguments, provider);
+            return new((castResult.Result.WithLocator(context.Locator()), def), castResult.Cost, castResult.Error);
+        }
+
 
         /// <summary>
         /// Choses the best matching overload of a set of <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the 
         /// invocation, given the types of the arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
-        public static FunctionResolveResult Call(this IEnumerable<FunctionDef> defs, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        public static Expression Call(this IEnumerable<FunctionDef> defs, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
         {
-            var results = defs.Select(d => (def: d, call: Call(d,provider, context, arguments))).ToList();            
-            if(!results.Any()) throw new ArgumentException("Should be called with at least one overload.", nameof(defs));
+            var results = defs.Select(d => buildCall(d, provider, context, arguments)).ToList();
+            if (!results.Any()) throw new ArgumentException("Should be called with at least one overload.", nameof(defs));
+
+            var success = results.Any(r => r.Success);
 
             var bestCandidates = results
-                .Where(r => r.call.Success)
-                .OrderBy(r => r.call.Cost)
-                .GroupBy(r => r.call.Cost)
-                .FirstOrDefault()
-                ?.AsEnumerable()
+                .OrderBy(r => r.Cost)
+                .GroupBy(r => r.Cost)
+                .First()
+                .AsEnumerable()
                 .ToList();
 
             return bestCandidates switch
             {
-                null => new(results.First().call.Call, int.MaxValue, listErrors(results.Select(r => r.call).ToList())),
-                [var one] => one.call,
-                var many => new(many.First().call.Call, int.MaxValue, $"Ambiguous call between {listSignatures(many.Select(m => m.def))}.")
+                [var one] when success => one.Result.expr,
+                [var one] when !success => one.Result.expr.AddError(one.Error!, ErrorType.semantic),
+                var many when success => many.First().Result.expr.AddError($"Ambiguous call between {listSignatures(many.Select(m => m.Result.def))}.", ErrorType.semantic),
+                var many when !success => many.First().Result.expr.AddError($"No matching overload found between {listSignatures(many.Select(m => m.Result.def))}.", ErrorType.semantic),
+                _ => throw new InvalidOperationException("Should not be possible.")
             };
 
             static string listSignatures(IEnumerable<FunctionDef> defs) =>
                 string.Join(", ", defs.Select(def => def.Signature()));
 
-            static string listErrors(List<FunctionResolveResult> errorResults)
-            {
-                if(errorResults.Count == 1) 
-                    return errorResults[0].Error!;
-                else
-                    return "No matching overload found: " + 
-                        string.Join(Environment.NewLine, errorResults.Select(e => $"  {e.Error!}"));
-            }
+            //static string listErrors(List<ResolveResult<Expression>> errorResults)
+            //{
+            //    if (errorResults.Count == 1)
+            //        return errorResults[0].Error!;
+            //    else
+            //        return "No matching overload found: " +
+            //            string.Join(Environment.NewLine, errorResults.Select(e => $"  {e.Error!}"));
+            //}
         }
 
         /// <summary>
@@ -122,13 +133,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }.WithResultType(typeArgument).WithLocator(context.Locator());
         }
 
-        private static FunctionResolveResult buildInvocation(FunctionDef def, Expression[] arguments, IModelProvider provider)
+        private static ResolveResult<Expression> buildInvocation(FunctionDef def, Expression[] arguments, IModelProvider provider)
         {
             var castBuilder = new InvocationBuilder(provider);
             return castBuilder.Build(def, arguments);
         }
 
-                /// <summary>
+        /// <summary>
         /// Given a <see cref="FunctionDef"/>, creates an <see cref="Expression"/> for the invocation with the
         /// operands initialized to the arguments given.
         /// </summary>
@@ -137,43 +148,43 @@ namespace Hl7.Cql.CqlToElm.Builtin
             var nodeType = def is BuiltInFunctionDef b ? b.ElmNodeType : typeof(FunctionRef);
             var result = Activator.CreateInstance(nodeType)!;
 
-            if(result is BinaryExpression be)
+            if (result is BinaryExpression be)
             {
-                if(arguments.Length != 2)
+                if (arguments.Length != 2)
                     throw new ArgumentException($"Expected 2 arguments, but got {arguments.Length}", nameof(arguments));
                 be.operand = arguments;
                 return be;
             }
-            else if(result is UnaryExpression ue)
+            else if (result is UnaryExpression ue)
             {
-                if(arguments.Length != 1)
+                if (arguments.Length != 1)
                     throw new ArgumentException($"Expected 1 argument, but got {arguments.Length}", nameof(arguments));
                 ue.operand = arguments[0];
                 return ue;
             }
-            else if(result is TernaryExpression te)
+            else if (result is TernaryExpression te)
             {
-                if(arguments.Length != 3)
+                if (arguments.Length != 3)
                     throw new ArgumentException($"Expected 3 arguments, but got {arguments.Length}", nameof(arguments));
                 te.operand = arguments;
                 return te;
             }
-            else if(result is NaryExpression ne)
+            else if (result is NaryExpression ne)
             {
                 ne.operand = arguments;
                 return ne;
             }
-            else if(result is FunctionRef fr)
+            else if (result is FunctionRef fr)
             {
                 fr.operand = arguments;
                 return fr;
             }
-            else if(result is Expression e && arguments.Length == 0)
+            else if (result is Expression e && arguments.Length == 0)
             {
                 return e;
             }
             else
                 throw new InvalidOperationException($"Don't know how to initialize an instance of {nodeType}.");
-        }        
+        }
     }
 }

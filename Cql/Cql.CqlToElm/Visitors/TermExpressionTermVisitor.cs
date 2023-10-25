@@ -1,8 +1,6 @@
-﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
-using Microsoft.Extensions.DependencyInjection;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -30,9 +28,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var dateLiteral = new Date
             {
             }.WithResultType(SystemTypes.DateType).WithLocator(context.Locator());
-            
-            if (DateIso8601.TryParse(context.GetText()[1..], out var date))
-            {                
+
+            var dateText = context.GetText()[1..];
+
+            if (DateIso8601.TryParse(dateText, out var date))
+            {
                 var startLine = context.Start.Line;
                 int startCol = context.Start.Column;
 
@@ -62,25 +62,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }.WithLocator(FormatLocator(startLine + 8, startCol, startLine, startCol + 10))
                         .WithResultType(SystemTypes.IntegerType);
                 }
+
+                return dateLiteral;
             }
             else
             {
-                throw Critical($"Invalid date {date}");
+                return dateLiteral.AddError($"Unparseable date literal '{dateText}'.", ErrorType.syntax);
             }
-            return dateLiteral;
         }
 
         public override Expression VisitDateTimeLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.DateTimeLiteralContext context)
         {
-            var dateTimeType = NamedType(DateTimeTypeQName, context);
             var dateTimeLiteral = new Elm.DateTime
             {
-                localId = NextId(),
-                locator = context.Locator(),
-                resultTypeName = dateTimeType.name,
-                resultTypeSpecifier = dateTimeType,
-            };
-            if (DateTimeIso8601.TryParse(context.GetText()[1..], out var dateTime))
+            }.WithLocator(context.Locator()).WithResultType(SystemTypes.DateTimeType);
+
+            var dateText = context.GetText()[1..];
+
+            if (DateTimeIso8601.TryParse(dateText, out var dateTime))
             {
                 var integerType = NamedType(IntegerTypeQName, context);
                 var startLine = context.Start.Line;
@@ -167,12 +166,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         resultTypeSpecifier = decimalType,
                     };
                 }
+
+                return dateTimeLiteral;
             }
             else
             {
-                throw Critical($"Invalid date {dateTime}");
+                return dateTimeLiteral.AddError($"Unparseable date/time literal '{dateText}'.", ErrorType.syntax);
             }
-            return dateTimeLiteral;
+
         }
 
         public override Expression VisitInvocationTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.InvocationTermContext context) =>
@@ -180,25 +181,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitLongNumberLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.LongNumberLiteralContext context)
         {
-            var value = context.GetText()[..^1];
-            NamedTypeSpecifier? typeSpecifier = null;
-            if (long.TryParse(value, out long l))
-            {
-                typeSpecifier = NamedType(LongTypeQName, context);
-            }
-            else
-            {
-                throw Critical($"The long value {value} is not valid.");
-            }
             var literal = new Literal
             {
-                value = value,
-                resultTypeSpecifier = typeSpecifier,
-                resultTypeName = typeSpecifier!.name,
-                valueType = typeSpecifier.name,
-                localId = NextId(),
-                locator = context.Locator()
-            };
+                valueType = SystemTypes.LongType.name
+            }.WithResultType(SystemTypes.LongType).WithLocator(context.Locator());
+
+            var valueText = context.GetText()[..^1];
+            literal.value = valueText;
+
+            if (!long.TryParse(valueText, out long _))
+            {
+                literal.AddError($"Unparseable long literal {valueText}.", ErrorType.syntax);
+            }
+
             return literal;
         }
 
@@ -219,40 +214,42 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitNumberLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.NumberLiteralContext context)
         {
             var value = context.GetText();
+            var literal = new Literal
+            {
+                value = value,
+            };
+
             NamedTypeSpecifier? typeSpecifier = null;
+
             if (DecimalExpression.IsMatch(value))
             {
                 var abs = value;
                 if (abs.StartsWith('-'))
                     abs = abs[1..];
                 var parts = abs.Split('.');
+
                 if (parts.Sum(p => p.Length) > 28)
                 {
-                    throw Critical("Decimal literals cannot be longer than 28 digits.");
+                    literal.AddError("Decimal literals cannot be longer than 28 digits.", ErrorType.syntax);
                 }
                 else if (parts.Length > 1 && parts[1].Length > 8)
                 {
-                    throw Critical("Decimal literals cannot have a mantissa longer than 8 digits");
+                    literal.AddError("Decimal literals cannot have a mantissa longer than 8 digits.", ErrorType.syntax);
                 }
-                typeSpecifier = NamedType(DecimalTypeQName, context);
+
+                typeSpecifier = SystemTypes.DecimalType;
             }
             else if (int.TryParse(value, out var i))
             {
-                typeSpecifier = NamedType(IntegerTypeQName, context);
+                typeSpecifier = SystemTypes.IntegerType;
             }
             else
             {
-                throw Critical($"Unexpected literal value {value}");
+                return literal.AddError($"Unparseable numeric literal '{value}'.", ErrorType.syntax);
             }
-            var literal = new Literal
-            {
-                value = value,
-                resultTypeSpecifier = typeSpecifier,
-                resultTypeName = typeSpecifier!.name,
-                valueType = typeSpecifier.name,
-                localId = NextId(),
-                locator = context.Locator(),
-            };
+
+            literal.valueType = typeSpecifier.name;
+            literal = literal.WithResultType(typeSpecifier).WithLocator(context.Locator());
             return literal;
         }
 
@@ -270,7 +267,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else if (expression is Quantity quantity && sign == "-")
                 quantity.value = -1 * quantity.value;
             else
-                throw Critical("Expected result of polarity expression to be a literal");
+                expression.AddError("Expected result of polarity expression to be a literal", ErrorType.syntax);
 
             return expression;
         }
@@ -350,15 +347,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitTimeLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.TimeLiteralContext context)
         {
-            var timeType = NamedType(TimeTypeQName, context);
+            var literalText = context.GetText()[2..];
+
             var timeLiteral = new Time
             {
                 localId = NextId(),
                 locator = context.Locator(),
-                resultTypeName = timeType.name,
-                resultTypeSpecifier = timeType,
-            };
-            if (TimeIso8601.TryParse(context.GetText()[2..], out var time))
+            }.WithLocator(context.Locator()).WithResultType(SystemTypes.TimeType);
+
+            if (TimeIso8601.TryParse(literalText, out var time))
             {
                 var integerType = NamedType(IntegerTypeQName, context);
                 var startLine = context.Start.Line;
@@ -402,19 +399,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
+
+                return timeLiteral;
             }
             else
             {
-                throw Critical($"Invalid date {time}");
+                return timeLiteral.AddError($"Unparseable time literal '{literalText}'.", ErrorType.syntax);
             }
-            return timeLiteral;
+
         }
 
         //    : 'Tuple'? '{' (':' | (tupleElementSelector (',' tupleElementSelector)*)) '}'
         public override Expression VisitTupleSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.TupleSelectorContext context)
         {
             var tupleElementContexts = context.tupleElementSelector();
-            var tupleElements = tupleElementContexts.Select(tec => tec.Parse(this)).ToArray(); 
+            var tupleElements = tupleElementContexts.Select(tec => tec.Parse(this)).ToArray();
 
             var tupleTypeElementDefs = tupleElements.Select(te => new TupleElementDefinition
             {
@@ -427,7 +426,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 element = tupleTypeElementDefs
             };
 
-            var tuple = new Tuple
+            var tuple = new Elm.Tuple
             {
                 element = tupleElements,
             }.WithLocator(context.Locator()).WithResultType(resultType);

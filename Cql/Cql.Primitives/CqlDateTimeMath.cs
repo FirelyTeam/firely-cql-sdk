@@ -116,7 +116,7 @@ namespace Hl7.Cql.Primitives
                         }
                         else return asInt;
                     }
-                default: throw new ArgumentException($"Unit {precision} is not supported");
+                default: throw new ArgumentException($"Unit '{precision}' is not supported.");
             };
         }
 
@@ -163,7 +163,7 @@ namespace Hl7.Cql.Primitives
                 case "min": return (int)secondDto.Subtract(firstDto).TotalMinutes;
                 case "s": return (int)secondDto.Subtract(firstDto).TotalSeconds;
                 case "ms": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
-                default: throw new ArgumentException($"Unit {precision} is not supported");
+                default: throw new ArgumentException($"Unit '{precision}' is not supported.");
             };
         }
 

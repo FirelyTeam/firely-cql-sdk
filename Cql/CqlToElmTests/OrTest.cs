@@ -1,16 +1,11 @@
 ﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class OrTest: Base
+    public class OrTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -355,11 +350,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_1()
         {
-            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                 library OrTest version '1.0.0'
 
                 define private True_Or_1: true or 1
-            "));
+            ").ShouldReportError("Cannot resolve call*second argument*Integer*cannot implicitly be cast*Boolean.");
         }
     }
 }

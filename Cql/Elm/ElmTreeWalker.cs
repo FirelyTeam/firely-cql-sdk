@@ -1,4 +1,3 @@
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 /* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
@@ -15,8 +14,17 @@ using System.Reflection;
 
 namespace Hl7.Cql.Elm
 {
+    /// <summary>
+    /// A walker that does a depth-first traversal of a tree and calls a visitor function for each node.
+    /// </summary>
     public class ElmTreeWalker
     {
+        /// <summary>
+        /// Construct a walker.
+        /// </summary>
+        /// <param name="visitor">A function that is passed the nodes in the tree. It should return <c>false</c> if this function
+        /// handles the children of the nodes by itself, or <c>true</c> if the walker should visit the children automatically.</param>
+        /// <param name="additionalTypes"></param>
         public ElmTreeWalker(Func<object, bool> visitor, params Type[] additionalTypes)
         {
             this.visitor = visitor;
@@ -37,6 +45,10 @@ namespace Hl7.Cql.Elm
 
         internal IReadOnlyCollection<Type> TypesToVisit { get; private set; }
 
+        /// <summary>
+        /// Perform the walk.
+        /// </summary>
+        /// <param name="root"></param>
         public void Walk(object? root)
         {
             if (root is null) return;

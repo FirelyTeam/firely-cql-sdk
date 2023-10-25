@@ -28,18 +28,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
         #endregion
 
 
-        private UsingDef getDefaultSystemUsingDef()
+        private UsingDef? getDefaultSystemUsingDef()
         {
             var systemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
             var systemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)] ?? SystemTypes.SystemModelVersion;
 
-            if(string.IsNullOrWhiteSpace(systemUri))
-                systemUri = SystemTypes.SystemModelUri;
+            if (string.IsNullOrWhiteSpace(systemUri))
+                return null;
 
-            if(string.IsNullOrWhiteSpace(systemVersion))            
-                systemVersion = SystemTypes.SystemModelVersion;
-            
-            if(ModelProvider.ModelFromUri(systemUri, systemVersion) is {} model)
+            if (ModelProvider.ModelFromUri(systemUri, systemVersion) is { } model)
             {
                 return new UsingDef
                 {
@@ -47,8 +44,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     localIdentifier = "System",
                 }.WithId();
             }
-            else 
-            throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
+            else
+                throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
         }
 
         // libraryDefinition? definition* statement* EOF;
@@ -75,12 +72,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
 
             var systemUsing = getDefaultSystemUsingDef();
-            usings.AddLast(systemUsing);
+            if (systemUsing is not null) usings.AddLast(systemUsing);
 
             // visit usings first so parameters can refer to models
             foreach (var child in context.definition())
             {
-                if (child.usingDefinition() is {} udc)
+                if (child.usingDefinition() is { } udc)
                 {
                     var usingDef = udc.Parse(ModelProvider);
                     usings.AddLast(usingDef);
@@ -181,9 +178,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                                         if (!contextStatements.ContainsKey(contextDef.name))
                                         {
-                                            var resolveResult = LibraryContext.ResolveDottedTypeName(contextDef.name) 
+                                            var resolveResult = LibraryContext.ResolveDottedTypeName(contextDef.name)
                                                 ?? throw new InvalidOperationException($"Could not resolve context type {contextDef.name}");
-                                            
+
                                             var typeName = resolveResult.ToNamedType();
                                             var exprName = contextDef.name.Split('.').Last();
 

@@ -1,7 +1,6 @@
 ﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -150,10 +149,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-             Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
+             DefaultConverter.ConvertLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1
-            "));
+            ").ShouldReportError("Cannot resolve call*first argument*Integer*cannot implicitly be cast*Boolean.");
     }
 }

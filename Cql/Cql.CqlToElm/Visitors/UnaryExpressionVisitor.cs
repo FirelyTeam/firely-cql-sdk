@@ -65,26 +65,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitPredecessorExpressionTerm([NotNull] cqlParser.PredecessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
+            var call = SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
 
-            if (operand.resultTypeSpecifier.IsValidOrderedType())
-            {
-                return SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
-            }
-            else
-                throw UnresolvedSignature(nameof(Predecessor), operand);
+            if (!operand.resultTypeSpecifier.IsValidOrderedType())
+                call.AddError("Predecessor can only be applied to types that are ordered.", ErrorType.semantic);
+
+            return call;
         }
 
         //     | 'successor' 'of' expressionTerm                                               #successorExpressionTerm
         public override Expression VisitSuccessorExpressionTerm([NotNull] cqlParser.SuccessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
+            var call = SystemLibrary.Successor.Call(ModelProvider, context, operand);
 
-            if (operand.resultTypeSpecifier.IsValidOrderedType())
-            {
-                return SystemLibrary.Successor.Call(ModelProvider, context, operand);
-            }
-            else
-                throw UnresolvedSignature(nameof(Successor), operand);
+            if (!operand.resultTypeSpecifier.IsValidOrderedType())
+                call.AddError("Successor can only be applied to types that are ordered.", ErrorType.semantic);
+
+            return call;
         }
 
         //   | ('start' | 'end') 'of' expressionTerm                                         #timeBoundaryExpressionTerm
@@ -97,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 CqlKeyword.Start => SystemLibrary.Start.Call(ModelProvider, context, operand),
                 CqlKeyword.End => SystemLibrary.End.Call(ModelProvider, context, operand),
-                _ => throw UnresolvedSignature("Start", operand)
+                _ => throw new InvalidOperationException($"Parser returned unknown start or end keyword '{startOrEnd}' in a time boundary expression.")
             };
         }
 
@@ -107,17 +105,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var extent = Keyword.Parse(context.GetChild(0)).Single();
             var typeSpecifier = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
-            if (typeSpecifier.IsValidOrderedType())
+            Expression call = extent switch
             {
-                return extent switch
-                {
-                    CqlKeyword.Minimum => SystemLibrary.MinValue.Build(typeSpecifier, context),
-                    CqlKeyword.Maximum => SystemLibrary.MaxValue.Build(typeSpecifier, context),
-                    _ => throw Critical($"Unexpected extent: {extent}")
-                };
-            }
-            else
-                throw UnresolvedSignature(extent.ToString(), new Null().WithResultType(typeSpecifier));
+                CqlKeyword.Minimum => SystemLibrary.MinValue.Build(typeSpecifier, context),
+                CqlKeyword.Maximum => SystemLibrary.MaxValue.Build(typeSpecifier, context),
+                _ => throw new InvalidOperationException($"Parser returned unknown extent '{extent}' in a type extent expression.")
+            };
+
+            if (!typeSpecifier.IsValidOrderedType())
+                call.AddError($"Can only determine {extent} for types that are ordered.", ErrorType.semantic);
+
+            return call;
         }
 
         //   'width' expressionTerm                                                          #widthExpressionTerm

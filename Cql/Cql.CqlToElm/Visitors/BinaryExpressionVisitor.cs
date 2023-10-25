@@ -4,7 +4,6 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
 using System.Linq;
-using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -29,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(terms[1]);
 
-            Expression result = 
+            Expression result =
                 @operator switch
                 {
                     "+" => SystemLibrary.Add.Concat(SystemLibrary.AddDateTime).Call(ModelProvider, context, lhs, rhs),
@@ -59,15 +58,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (selectedType == DateTypeQName)
             {
                 if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
-                    throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.", ErrorType.semantic);
             }
             else if (selectedType == TimeTypeQName)
             {
                 if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
-                    throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.", ErrorType.semantic);
             }
 
-            return call;        
+            return call;
         }
 
         //     | ('duration' 'in')? pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm      #durationBetweenExpression
@@ -88,12 +87,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (selectedType == DateTypeQName)
             {
                 if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
-                    throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.", ErrorType.semantic);
             }
-            else if (lhs.resultTypeName == TimeTypeQName)
+            else if (selectedType == TimeTypeQName)
             {
                 if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
-                throw Critical($"Unit {precision} is not allowed for operands of type {DateTypeQName}");
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.", ErrorType.semantic);
 
             }
 

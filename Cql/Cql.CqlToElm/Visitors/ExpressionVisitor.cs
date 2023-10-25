@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 "[" => true,
                 "(" => false,
-                _ => throw Critical($"Invalid interval; expecting either [ or (") // this really can't happen
+                var c => throw new InvalidOperationException($"Parser returned unexpected character '{c}' in interval selector.") // this really can't happen
             };
             var low = Visit(context.GetChild(2));
             var high = Visit(context.GetChild(4));
@@ -96,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 "]" => true,
                 ")" => false,
-                _ => throw Critical($"Invalid interval; expecting either ] or )")
+                var c => throw new InvalidOperationException($"Parser returned unexpected character '{c}' in interval selector.") // this really can't happen
             };
             TypeSpecifier? resultTypeSpecifier = null;
             if (low.resultTypeSpecifier == high.resultTypeSpecifier)
