@@ -12,11 +12,10 @@ namespace Hl7.Cql.CqlToElm
 
         public static ResolveResult<T>[] SelectBestCandidate(IEnumerable<ResolveResult<T>> candidates) =>
             candidates
-              .Where(r => r.Success)
               .OrderBy(r => r.Cost)
               .GroupBy(r => r.Cost)
-              .FirstOrDefault()
-              ?.AsEnumerable().ToArray() ?? Array.Empty<ResolveResult<T>>();
+              .First()
+              .AsEnumerable().ToArray() ?? Array.Empty<ResolveResult<T>>();
     }
 
     /// <summary>
@@ -30,106 +29,65 @@ namespace Hl7.Cql.CqlToElm
     {
         private static readonly int ERROR_COST = 1000;  // Cost for a cast that is not possible.
 
-        private static readonly GenericParameterAssignments EmptyAssignments = new();
-
         public IModelProvider Provider { get; }
         public InvocationBuilder(IModelProvider provider)
         {
             Provider = provider;
         }
 
-        public ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
+        internal ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
         {
-            if (candidate.operand.Length != arguments.Length)
+            var operands = candidate.operand.Select(o => o.operandTypeSpecifier).ToArray();
+            var positionResults = new List<ResolveResult<Expression>>();
+            int? nextPosition = 0;
+
+            while (nextPosition is not null)
             {
-                var errorExpression = candidate.CreateElmNode(arguments).WithResultType(candidate.resultTypeSpecifier);
-                return new(errorExpression, ERROR_COST * arguments.Length, $"The number or arguments ({arguments.Length}) do not match the number of " +
-                            $"parameters for {candidate.Signature()}.");
-            }
+                var start = nextPosition.Value;
+                nextPosition = null;
+                var iterationResults = new ResolveResult<Expression>[arguments.Length];
+                var assignments = new GenericParameterAssignments();
+                string? firstError = null;
 
-            var genericReplacements = new GenericParameterAssignments();
-            var testedHypotheses = new List<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>>();
-
-            while (true)
-            {
-                var result = tryBuild(candidate, arguments, genericReplacements, out var resolution, out var hypothesis);
-
-                if (result || hypothesis.Any() == false || hypothesis.All(testedHypotheses.Contains))
-                    return resolution;  // Final result, either success, or no more hypthesis to test
-
-                testedHypotheses.AddRange(hypothesis);
-                genericReplacements.Replace(hypothesis);
-            }
-        }
-
-        private bool tryBuild(FunctionDef candidate, Expression[] arguments, GenericParameterAssignments genericReplacements,
-          out ResolveResult<Expression> result, out GenericParameterAssignments hypothesis)
-        {
-            // Make sure that the expression we return contains dummy placeholders with the right types.
-            var argumentResults = arguments.Select(a => new ResolveResult<Expression>(a, int.MaxValue / 2, "Unprocessed node.")).ToArray();
-
-            hypothesis = new GenericParameterAssignments();
-            var newReplacements = new GenericParameterAssignments(genericReplacements.Concat(hypothesis));
-            var totalCost = 0;
-            string? error = null;
-
-            int argumentIndex = 0;
-            foreach (var operand in candidate.operand)
-            {
-                var to = operand.operandTypeSpecifier;
-                var argument = arguments[argumentIndex];
-
-                // Now, try to implicitly cast the argument to the parameter type.
-                var argumentResult = buildImplicitCast(argument, to, newReplacements, out var newHypothesis);
-                totalCost += argumentResult.Cost;
-
-                if (argumentResult.Success)
+                for (var iteration = 0; iteration < arguments.Length; iteration++)
                 {
-                    if (newHypothesis.Any())
-                    {
-                        hypothesis.AddRange(newHypothesis);
-                        newReplacements.AddRange(newHypothesis);
-                    }
+                    var argumentIndex = (start + iteration) % arguments.Length;
+                    var operand = operands[argumentIndex];
+                    var argument = arguments[argumentIndex];
 
-                    argumentResults[argumentIndex] = argumentResult;
-                }
-                else
-                {
-                    if (error is null)
-                    {
-                        var cleanedReplacements = newReplacements.WithNullAsAny();
-                        var errorCandidate = BuiltInFunctionDef.ReplaceGenericParameters(candidate, cleanedReplacements);
-                        var errorTo = to.ReplaceGenericParameters(cleanedReplacements);
-                        error = $"Cannot resolve call to {errorCandidate.Signature()}, " +
-                            $"the {BuiltInFunctionDef.GetArgumentName(argumentIndex)} argument {argumentResult.Error}.";
-                    }
+                    // Now, try to implicitly cast the argument to the parameter type.
+                    var operandToTest = operand.ReplaceGenericParameters(assignments);
+                    if (operandToTest != operand && argumentIndex > start && nextPosition is null) nextPosition = argumentIndex;
 
-                    // Ok, let's try it again later, but with the new hypothesis
-                    if (newHypothesis.Any())
-                        hypothesis.Replace(newHypothesis);
+                    var argumentResult = buildImplicitCast(argument, operandToTest, out var newAssignments);
+                    assignments.AddRange(newAssignments);
+
+                    if (!argumentResult.Success && firstError is null)
+                        firstError = $"the {BuiltInFunctionDef.GetArgumentName(argumentIndex)} argument {argumentResult.Error}.";
+
+                    iterationResults[argumentIndex] = argumentResult;
                 }
 
-                argumentIndex += 1;
+                var concreteCandidate = BuiltInFunctionDef.ReplaceGenericParameters(candidate, assignments);
+                var resultExpression = candidate.CreateElmNode(iterationResults.Select(a => a.Result).ToArray())
+                        .WithResultType(concreteCandidate.resultTypeSpecifier);
+                var totalCost = iterationResults.Sum(r => r.Cost);
+                var totalError = firstError is not null ? $"Cannot resolve call to {concreteCandidate.Signature()}, {firstError}" : null;
+
+                positionResults.Add(new(resultExpression, totalCost, totalError));
             }
 
-            var returnType = candidate.resultTypeSpecifier.ReplaceGenericParameters(newReplacements.WithNullAsAny());
-            var resultExpression = candidate.CreateElmNode(argumentResults.Select(a => a.Result).ToArray()).WithResultType(returnType);
-            var success = argumentResults.All(a => a.Success);
-
-            result = new(resultExpression, totalCost, error);
-            return success;
+            return ResolveResult<Expression>.SelectBestCandidate(positionResults).First();
         }
 
         private ResolveResult<Expression> buildImplicitCast(
-            Expression argument, TypeSpecifier to,
-            GenericParameterAssignments genericReplacements,
-            out GenericParameterAssignments hypothesis)
+            Expression argument, TypeSpecifier to, out GenericParameterAssignments newAssignments)
         {
             var argumentType = argument.resultTypeSpecifier;
             var locatorContext = new StringLocatorRuleContext(argument.locator);
 
             // by default, we don't have a new hypothesis
-            hypothesis = EmptyAssignments;
+            newAssignments = new();
 
             // Types are equal, or the argument is a subtype of the parameter type.
             if (argumentType.IsSubtypeOf(to, Provider))
@@ -142,13 +100,12 @@ namespace Hl7.Cql.CqlToElm
             // See https://cql.hl7.org/03-developersguide.html#implicit-casting
             if (argument is Null n)
             {
-                var unbound = to.ReplaceGenericParameters(genericReplacements).GetGenericParameters().ToList();
+                var unbound = to.GetGenericParameters().ToList();
 
-                hypothesis = new GenericParameterAssignments(
-                    unbound.Select(gp => KeyValuePair.Create(gp, (TypeSpecifier)NullTypeSpecifier.Instance)));
+                newAssignments = new GenericParameterAssignments(
+                    unbound.Select(gp => KeyValuePair.Create(gp, (TypeSpecifier)SystemTypes.AnyType)));
 
-                var bound = to.ReplaceGenericParameters(genericReplacements.WithNullAsAny())
-                    .ReplaceGenericParameters(hypothesis.WithNullAsAny());
+                var bound = to.ReplaceGenericParameters(newAssignments);
                 var @as = SystemLibrary.As.Build(false, bound, n, locatorContext);
 
                 // Make sure that we prefer any other solution than assigning
@@ -162,24 +119,8 @@ namespace Hl7.Cql.CqlToElm
             // to the assigned type for that generic type parameter.
             if (to is ParameterTypeSpecifier gtp)
             {
-                if (genericReplacements.TryGetValue(gtp, out var assignedType))
-                {
-                    var intermediate = buildImplicitCast(argument, assignedType, genericReplacements, out var _);
-                    if (intermediate.Success)
-                        return intermediate;
-                    else
-                    {
-                        // We cannot cast this parameter to the current generic parameter assignment.
-                        // Create a new suggestion for an assignment, and return failure.
-                        hypothesis = new GenericParameterAssignments(gtp, argumentType);
-                        return intermediate with { Result = argument };
-                    }
-                }
-                else
-                {
-                    hypothesis = new() { { gtp, argumentType } };
-                    return new(argument, 0, null);
-                }
+                newAssignments = new() { { gtp, argumentType } };
+                return new(argument, 0, null);
             }
 
             // Casting a List<X> to a List<Y> is not possible in general(?), but it is
@@ -187,11 +128,11 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
                 var prototypeInstance = new Literal { resultTypeSpecifier = fromList.elementType };
-                var elementCast = buildImplicitCast(prototypeInstance, toList.elementType, genericReplacements, out var nestedHypothesis);
+                var elementCast = buildImplicitCast(prototypeInstance, toList.elementType, out var nestedNewAssignments);
 
                 if (elementCast.Success && elementCast.Result == prototypeInstance)
                 {
-                    hypothesis = nestedHypothesis;
+                    newAssignments.AddRange(nestedNewAssignments);
                     return new(argument, elementCast.Cost, null);
                 }
             }
@@ -201,16 +142,21 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
             {
                 var prototypeInstance = new Literal { resultTypeSpecifier = fromInterval.pointType };
-                var elementCast = buildImplicitCast(prototypeInstance, toInterval.pointType, genericReplacements, out var nestedHypothesis);
+                var elementCast = buildImplicitCast(prototypeInstance, toInterval.pointType, out var nestedNewAssignments);
 
                 if (elementCast.Success && elementCast.Result == prototypeInstance)
                 {
-                    hypothesis = nestedHypothesis;
+                    newAssignments.AddRange(nestedNewAssignments);
                     return new(argument, elementCast.Cost, null);
                 }
             }
 
-            // TODO: choice, https://cql.hl7.org/03-developersguide.html#choice-types
+
+            if (argumentType is ChoiceTypeSpecifier cts && to is not ChoiceTypeSpecifier)
+            {
+                // TODO: choice, https://cql.hl7.org/03-developersguide.html#choice-types
+                //cts.choice.First(c => buildImplicitCast(argument, c, )
+            }
 
             // Implicit casts, see https://cql.hl7.org/03-developersguide.html#implicit-conversions
             // (note table is skewed, move first row 1 to the left, move row 2 2 to the left, etc)
@@ -241,7 +187,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
             {
                 var singleton = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
-                var intermediate = buildImplicitCast(singleton, to, genericReplacements, out hypothesis);
+                var intermediate = buildImplicitCast(singleton, to, out newAssignments);
                 return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
@@ -251,12 +197,11 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
             {
                 var list = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
-                var intermediate = buildImplicitCast(list, to, genericReplacements, out hypothesis);
+                var intermediate = buildImplicitCast(list, to, out newAssignments);
                 return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
             // No implicit cast found
-            var dummy = new Null { resultTypeSpecifier = to };
             return new(argument, ERROR_COST, $"is of type {argumentType}, which cannot implicitly be cast to type {to}");
         }
     }

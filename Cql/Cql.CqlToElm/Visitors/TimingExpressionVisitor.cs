@@ -42,105 +42,78 @@ namespace Hl7.Cql.CqlToElm.Visitors
                  Expression lhs,
                  Expression rhs)
             {
-                bool properly = false;
-                var index = 0;
+                var kw0 = context.GetChild(0).GetText();
+                var kw1 = context.GetChild(1).GetText();
 
-                var child = context.GetChild(index);
+                var properly = kw0 == "properly" || kw1 == "properly";
 
-                var kw0 = Keyword.Parse(child.GetText());
-                if (kw0.Length == 1)
+                if (kw0 == "starts")
                 {
-                    var keyword = kw0[0];
-                    if (keyword == CqlKeyword.Starts)
+                    var lhsPointType = PointType(lhs.resultTypeSpecifier);
+                    lhs = new Start
                     {
-                        var lhsPointType = PointType(lhs.resultTypeSpecifier);
-                        lhs = new Start
-                        {
-                            operand = lhs,
-                            localId = NextId(),
-                            locator = context.GetChild(0).Locator()!,
-                            resultTypeSpecifier = lhsPointType,
-                            resultTypeName = lhsPointType?.resultTypeName
-                        };
-                    }
-                    else if (keyword == CqlKeyword.Ends)
-                    {
-                        var lhsPointType = PointType(lhs.resultTypeSpecifier);
-                        lhs = new End
-                        {
-                            operand = lhs,
-                            localId = NextId(),
-                            locator = context.GetChild(0).Locator()!,
-                            resultTypeSpecifier = lhsPointType,
-                            resultTypeName = lhsPointType?.resultTypeName
-                        };
-                    }
-                    else if (keyword == CqlKeyword.Properly)
-                    {
-                        properly = true;
-                    }
+                        operand = lhs,
+                        localId = NextId(),
+                        locator = context.GetChild(0).Locator()!,
+                        resultTypeSpecifier = lhsPointType,
+                        resultTypeName = lhsPointType?.resultTypeName
+                    };
                 }
-                index++;
-                child = context.GetChild(index);
-                var kw1 = Keyword.Parse(child.GetText());
-                if (kw1.Length == 1)
+                else if (kw0 == "ends")
                 {
-                    var keyword = kw1[0];
-                    if (keyword == CqlKeyword.Properly)
+                    var lhsPointType = PointType(lhs.resultTypeSpecifier);
+                    lhs = new End
                     {
-                        properly = true;
-                    }
+                        operand = lhs,
+                        localId = NextId(),
+                        locator = context.GetChild(0).Locator()!,
+                        resultTypeSpecifier = lhsPointType,
+                        resultTypeName = lhsPointType?.resultTypeName
+                    };
                 }
-                index++;
-                child = context.GetChild(index);
-                if (child is not cqlParser.QuantityContext)
-                    index++;
-                child = context.GetChild(index);
+                else if (kw1 == "occurs")
+                {
+                    throw new NotImplementedException("Within with an 'occurs' is not yet implemented.");
+                }
+
                 var quantityTuple = context.quantity().Parse();
+
                 var quantity = new Quantity
                 {
                     localId = NextId(),
-                    locator = child.Locator(),
-                    resultTypeName = QuantityTypeQName,
-                    resultTypeSpecifier = NamedType(QuantityTypeQName, context),
+                    locator = context.quantity().Locator(),
                     value = quantityTuple.value,
                     valueSpecified = true,
                     unit = quantityTuple.unit,
-                };
-                index += 2;
-                if (index < context.ChildCount)
+                }.WithResultType(SystemTypes.QuantityType);
+
+                var startEnd = context.children[^1].GetText();
+
+                if (startEnd == "start")
                 {
-                    child = context.GetChild(index);
-                    var kwi = Keyword.Parse(child.GetText());
-                    if (kwi.Length == 1)
+                    var rhsPointType = PointType(rhs.resultTypeSpecifier);
+                    rhs = new Start
                     {
-                        var keyword = kwi[0];
-                        if (keyword == CqlKeyword.Start)
-                        {
-                            var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                            rhs = new Start
-                            {
-                                operand = rhs,
-                                localId = NextId(),
-                                locator = context.GetChild(0).Locator()!,
-                                resultTypeSpecifier = rhsPointType,
-                                resultTypeName = rhsPointType?.resultTypeName
-                            };
-                        }
-                        else if (keyword == CqlKeyword.Ends)
-                        {
-                            var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                            rhs = new End
-                            {
-                                operand = rhs,
-                                localId = NextId(),
-                                locator = context.GetChild(0).Locator()!,
-                                resultTypeSpecifier = rhsPointType,
-                                resultTypeName = rhsPointType?.resultTypeName
-                            };
-                        }
-                    }
+                        operand = rhs,
+                        localId = NextId(),
+                        locator = context.GetChild(0).Locator()!,
+                        resultTypeSpecifier = rhsPointType,
+                        resultTypeName = rhsPointType?.resultTypeName
+                    };
                 }
+                else if (startEnd == "end")
+                {
+                    var rhsPointType = PointType(rhs.resultTypeSpecifier);
+                    rhs = new End
+                    {
+                        operand = rhs,
+                        localId = NextId(),
+                        locator = context.GetChild(0).Locator()!,
+                        resultTypeSpecifier = rhsPointType,
+                        resultTypeName = rhsPointType?.resultTypeName
+                    };
+                }
+
                 if (properly)
                 {
                     var subtract = new Subtract
@@ -151,6 +124,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         resultTypeSpecifier = rhs.resultTypeSpecifier,
                         resultTypeName = rhs.resultTypeName,
                     };
+
                     var add = new Add
                     {
                         operand = new[] { rhs, quantity },
@@ -159,6 +133,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         resultTypeSpecifier = rhs.resultTypeSpecifier,
                         resultTypeName = rhs.resultTypeName,
                     };
+
                     rhs = new Hl7.Cql.Elm.Interval
                     {
                         low = subtract,
@@ -167,37 +142,37 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         highClosed = false,
                         localId = NextId(),
                         locator = rhs.locator,
-                        resultTypeSpecifier = IntervalType(subtract.resultTypeSpecifier!, context),
+                        resultTypeSpecifier = subtract.resultTypeSpecifier!.ToIntervalType(),
                     };
+
                     if (lhs is Elm.Interval)
                     {
                         rhs = new Elm.ToList
                         {
                             localId = NextId(),
                             locator = rhs.locator,
-                            resultTypeSpecifier = ListType(lhs.resultTypeSpecifier!, context),
+                            resultTypeSpecifier = lhs.resultTypeSpecifier!.ToListType(),
                             operand = rhs,
                         };
                     }
+
                     var @in = new In
                     {
                         localId = NextId(),
                         locator = context.Locator(),
                         operand = new[] { lhs, rhs },
-                        resultTypeName = BooleanTypeQName,
-                        resultTypeSpecifier = NamedType(BooleanTypeQName, context)
-                    };
+                    }.WithResultType(SystemTypes.BooleanType);
+
                     return @in;
                 }
-                if (properly || !properly)
-                    throw UnresolvedSignature("Within", lhs, rhs);
-                throw UnresolvedSignature("Within", lhs, rhs);
+                else
+                    throw new NotImplementedException("Properly within is not yet implemented.");
             }
 
             //| ('starts' | 'ends' | 'occurs')? 'properly'? ('during' | 'included in') dateTimePrecisionSpecifier?                    #includedInIntervalOperatorPhrase
             Expression HandleIncludedIn(cqlParser.IncludedInIntervalOperatorPhraseContext context,
-                Expression lhs,
-                Expression rhs)
+                    Expression lhs,
+                    Expression rhs)
             {
                 bool properly = false;
                 DateTimePrecision? dtp = null;
@@ -285,9 +260,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = new[] { lhs, rhs },
                         precision = dtp ?? default,
                         precisionSpecified = dtp.HasValue,
-                        resultTypeName = BooleanTypeQName,
-                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                    },
+                    }.WithResultType(SystemTypes.BooleanType),
                     _ => new IncludedIn
                     {
                         localId = NextId(),
@@ -295,16 +268,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         operand = new[] { lhs, rhs },
                         precision = dtp ?? default,
                         precisionSpecified = dtp.HasValue,
-                        resultTypeName = BooleanTypeQName,
-                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                    }
+                    }.WithResultType(SystemTypes.BooleanType),
                 };
             }
 
             //| 'overlaps'('before' | 'after') ? dateTimePrecisionSpecifier ?                                                          #overlapsIntervalOperatorPhrase
             Expression HandleOverlaps(cqlParser.OverlapsIntervalOperatorPhraseContext context,
-                Expression lhs,
-                Expression rhs)
+                    Expression lhs,
+                    Expression rhs)
             {
                 DateTimePrecision? dtPrecision =
                     context.dateTimePrecisionSpecifier() is { } p ?
@@ -335,12 +306,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 };
 
                 result.operand = new[] { lhs, rhs };
-                result.resultTypeName = BooleanTypeQName;
-                result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
                 result.localId = NextId();
                 result.locator = context.Locator();
 
-                return result;
+                return result.WithResultType(SystemTypes.BooleanType);
             }
         }
 
@@ -375,12 +344,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
 
             result.operand = new[] { lhs, rhs };
-            result.resultTypeName = BooleanTypeQName;
-            result.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
             result.localId = NextId();
             result.locator = context.Locator();
 
-            return result;
+            return result.WithResultType(SystemTypes.BooleanType);
         }
 
         //| 'starts' dateTimePrecisionSpecifier?                                                                                  #startsIntervalOperatorPhrase
@@ -398,9 +365,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 operand = new[] { lhs, rhs },
                 precisionSpecified = dtPrecision is not null,
                 precision = dtPrecision ?? default,
-                resultTypeName = BooleanTypeQName,
-                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-            };
+            }.WithResultType(SystemTypes.BooleanType);
         }
 
         // | 'ends' dateTimePrecisionSpecifier?                                                                                    #endsIntervalOperatorPhrase
@@ -418,9 +383,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 operand = new[] { lhs, rhs },
                 precisionSpecified = dtPrecision is not null,
                 precision = dtPrecision ?? default,
-                resultTypeName = BooleanTypeQName,
-                resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-            };
+            }.WithResultType(SystemTypes.BooleanType);
         }
 
         //| 'properly'? 'includes' dateTimePrecisionSpecifier? ('start' | 'end')?
@@ -496,10 +459,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             includes.localId = NextId();
             includes.locator = context.Locator();
             includes.operand = new[] { lhs, rhs };
-            includes.resultTypeName = BooleanTypeQName;
-            includes.resultTypeSpecifier = NamedType(BooleanTypeQName, context);
-            return includes;
-
+            return includes.WithResultType(SystemTypes.BooleanType);
         }
 
         //: ('starts' | 'ends' | 'occurs')? 'same' dateTimePrecision? (relativeQualifier | 'as') ('start' | 'end')?               #concurrentWithIntervalOperatorPhrase
@@ -578,7 +538,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             high = lhs,
                             localId = NextId(),
                             locator = lhsPointLocator,
-                            resultTypeSpecifier = IntervalType(lhsPointType!, context),
+                            resultTypeSpecifier = lhsPointType!.ToIntervalType(),
                         };
                     }
                 }
@@ -615,7 +575,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             high = rhs,
                             localId = NextId(),
                             locator = rhsPointLocator,
-                            resultTypeSpecifier = IntervalType(rhsPointType!, context),
+                            resultTypeSpecifier = rhsPointType!.ToIntervalType(),
                         };
                     }
                 }
@@ -631,9 +591,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = BooleanTypeQName,
-                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                        };
+                        }.WithResultType(SystemTypes.BooleanType);
                         return sameOrBefore;
                     }
                     else if (qualifier[1] == CqlKeyword.After)
@@ -645,9 +603,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = BooleanTypeQName,
-                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                        };
+                        }.WithResultType(SystemTypes.BooleanType);
                         return sameOrAfter;
                     }
                     else throw UnresolvedSignature("SameAs", lhs, rhs);
@@ -661,9 +617,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         precision = precision,
                         precisionSpecified = true,
                         operand = new[] { lhs, rhs },
-                        resultTypeName = BooleanTypeQName,
-                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                    };
+                    }.WithResultType(SystemTypes.BooleanType);
                     return same;
                 }
                 else throw UnresolvedSignature("SameAs", lhs, rhs);
@@ -683,9 +637,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = BooleanTypeQName,
-                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                        };
+                        }.WithResultType(SystemTypes.BooleanType);
                         return sameOrBefore;
                     }
                     else if (qualifier[1] == CqlKeyword.After)
@@ -697,9 +649,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             precision = precision,
                             precisionSpecified = true,
                             operand = new[] { lhs, rhs },
-                            resultTypeName = BooleanTypeQName,
-                            resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                        };
+                        }.WithResultType(SystemTypes.BooleanType);
                         return sameOrAfter;
                     }
                     else throw UnresolvedSignature("SameAs", lhs, rhs);
@@ -713,9 +663,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         precision = precision,
                         precisionSpecified = true,
                         operand = new[] { lhs, rhs },
-                        resultTypeName = BooleanTypeQName,
-                        resultTypeSpecifier = NamedType(BooleanTypeQName, context),
-                    };
+                    }.WithResultType(SystemTypes.BooleanType);
                     return same;
                 }
                 else throw UnresolvedSignature("SameAs", lhs, rhs);

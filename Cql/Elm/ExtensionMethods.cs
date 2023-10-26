@@ -72,7 +72,10 @@ namespace Hl7.Cql.Elm
             }
         }
 
-        internal static T AddError<T>(this T node,
+        /// <summary>
+        /// Adds an error or warning to the given node using a <see cref="CqlToElmError"/> annotation."/>
+        /// </summary>
+        public static T AddError<T>(this T node,
             string errorMessage,
             ErrorType errorType,
             ErrorSeverity severity = ErrorSeverity.error) where T : Element

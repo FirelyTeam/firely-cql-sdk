@@ -1,11 +1,9 @@
-﻿using Antlr4.Runtime;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics;
-using System.Xml;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -33,12 +31,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         protected string FormatLocator(int startLine, int startCol, int endLine, int endCol) =>
             $"{startLine}:{startCol}-{endLine}:{endCol}";
-
-        protected NamedTypeSpecifier NamedType(XmlQualifiedName name, ParserRuleContext _) => name.ToNamedType();
-
-        protected IntervalTypeSpecifier IntervalType(TypeSpecifier pointType, ParserRuleContext _) => pointType.ToIntervalType();
-
-        protected ListTypeSpecifier ListType(TypeSpecifier elementType, ParserRuleContext _) => elementType.ToListType();
 
         protected bool UnitsAreCompatible(string unitsX, string unitsY) => unitsX == unitsY;
 

@@ -75,16 +75,20 @@ namespace Hl7.Cql.CqlToElm
         /// <param name="nt">A <see cref="Elm.NamedTypeSpecifier"/>.</param>
         /// <param name="result">The <see cref="ModelResolveResult"/> if the type was found.</param>
         /// <returns>True is the type was found, false otherwise.</returns>
-        public static bool TryResolveFromNamedType(this IModelProvider provider, Elm.NamedTypeSpecifier nt, out ModelResolveResult? result)
+        public static bool TryResolveFromNamedType(this IModelProvider provider, Elm.NamedTypeSpecifier nt, out ModelResolveResult result)
         {
             var (uri, name) = nt.GetNameComponents();
-            if (provider.ModelFromUri(uri) is ModelInfo model &&
-                model.tryGetTypeInfoFor(name, out var ti))
-                result = new(model, ti!);
+            if (provider.ModelFromUri(uri) is ModelInfo model)
+            {
+                if (model.tryGetTypeInfoFor(name, out var ti))
+                    result = new(model, ti!);
+                else
+                    result = new(model, null);
+            }
             else
-                result = null;
+                result = new(null, null);
 
-            return result is not null;
+            return result.Model is not null && result.Type is not null;
         }
 
         private static Elm.NamedTypeSpecifier typeSpecifierForQualifiedName(IModelProvider provider, ModelInfo local, string qualifiedName)
@@ -119,9 +123,9 @@ namespace Hl7.Cql.CqlToElm
             if (!provider.TryResolveFromNamedType(type, out var result)) return null;
 
             // this lookup isn't even necessary, but it's what we would do in a "real" implementation, if it ever exists.
-            if (result!.Model.url == "http://hl7.org/fhir")
+            if (result.Model!.url == "http://hl7.org/fhir")
             {
-                var name = result.Type.GetNameFromTypeInfo();
+                var name = result.Type!.GetNameFromTypeInfo();
                 return $"http://hl7.org/fhir/StructureDefinition/{name}";
             }
             else
@@ -140,13 +144,13 @@ namespace Hl7.Cql.CqlToElm
             else if (subType is Elm.NamedTypeSpecifier subtypeNT && superType is Elm.NamedTypeSpecifier)
             {
                 var subTypeInfo = provider.TryResolveFromNamedType(subtypeNT, out var sti) ?
-                    sti! : throw new InvalidOperationException($"Type {subtypeNT.name} not found in model {subtypeNT.name.Name}.");
+                    sti! : throw new InvalidOperationException($"Type {subtypeNT.name} not found in model {sti.Model?.name}.");
 
-                var subtypeBaseTypeName = subTypeInfo.Type.baseType;
+                var subtypeBaseTypeName = subTypeInfo.Type!.baseType;
 
                 if (subtypeBaseTypeName is not null)
                 {
-                    var localModel = subTypeInfo.Model;
+                    var localModel = subTypeInfo.Model!;
                     var subtypeBaseType = typeSpecifierForQualifiedName(provider, localModel, subtypeBaseTypeName);
                     return subtypeBaseType.IsSubtypeOf(superType, provider);
                 }

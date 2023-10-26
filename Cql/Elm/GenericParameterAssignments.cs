@@ -7,19 +7,9 @@
  */
 
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Hl7.Cql.Elm
 {
-    internal class NullTypeSpecifier : TypeSpecifier
-    {
-        public static readonly NullTypeSpecifier Instance = new();
-
-        internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => System.Array.Empty<ParameterTypeSpecifier>();
-
-        internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
-    }
-
     /// <summary>
     /// A list of assignments of concrete types to generic parameters.
     /// </summary>
@@ -58,27 +48,10 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public void Replace(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> items)
         {
-            foreach(var item in items)
+            foreach (var item in items)
             {
                 Remove(item.Key);
                 Add(item.Key, item.Value);
-            }
-        }
-
-        /// <summary>
-        /// Returns a version of the assignments with the special NullTypeSpecifier replaced with AnyTypeSpecifier.
-        /// </summary>
-        /// <returns></returns>
-        public GenericParameterAssignments WithNullAsAny()
-        {
-            return new GenericParameterAssignments(this.Select(replace));
-
-            static KeyValuePair<ParameterTypeSpecifier, TypeSpecifier> replace(KeyValuePair<ParameterTypeSpecifier, TypeSpecifier> item)
-            {
-                if (item.Value is NullTypeSpecifier)
-                    return new(item.Key, SystemTypes.AnyType);
-                else
-                    return item;
             }
         }
     }

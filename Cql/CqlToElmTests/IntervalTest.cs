@@ -2,16 +2,11 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class IntervalTest: Base
+    public class IntervalTest : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -21,21 +16,21 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_InvalidType()
         {
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval['hello','world']
-            "));
+            ").ShouldReportError("Intervals*defined minimums and maximums*String is not allowed.");
         }
 
         [TestMethod]
         public void Interval_Quantity_Incompatible_Units()
         {
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[100 'a', 200 'kg']
-            "));
+            ").ShouldReportError("Intervals of quantities must be of compatible units.");
         }
 
         [TestMethod]
@@ -297,9 +292,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(result);
                 Assert.IsInstanceOfType(result, typeof(CqlInterval<CqlDate?>));
                 var cqlInterval = (CqlInterval<CqlDate?>)result;
-                Assert.AreEqual(new CqlDate(2023,1,1), cqlInterval.low);
+                Assert.AreEqual(new CqlDate(2023, 1, 1), cqlInterval.low);
                 Assert.IsTrue(cqlInterval.lowClosed);
-                Assert.AreEqual(new CqlDate(2023,12,31), cqlInterval.high);
+                Assert.AreEqual(new CqlDate(2023, 12, 31), cqlInterval.high);
                 Assert.IsTrue(cqlInterval.highClosed);
             }
         }
