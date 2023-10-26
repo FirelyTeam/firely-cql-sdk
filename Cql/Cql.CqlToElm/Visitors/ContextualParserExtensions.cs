@@ -121,11 +121,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
         public static IncludeDef Parse(this cqlParser.IncludeDefinitionContext context)
         {
-            var qualifiedId = context.qualifiedIdentifier().Parse();
+            var (qualifier, id) = context.qualifiedIdentifier().Parse();
 
             var includeDef = new IncludeDef
             {
-                path = string.IsNullOrWhiteSpace(qualifiedId.qualifier) ? qualifiedId.id : $"{qualifiedId.qualifier}.{qualifiedId.id}",
+                path = string.IsNullOrWhiteSpace(qualifier) ? id : $"{qualifier}.{id}",
                 localIdentifier = context.localIdentifier()?.identifier().Parse(),
                 version = context.versionSpecifier()?.STRING().ParseString(),
             }.WithLocator(context.Locator());
@@ -235,12 +235,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var identifier = context.identifier().Parse();
 
-            if(context.modelIdentifier() is {} mic)
+            if (context.modelIdentifier() is { } mic)
                 identifier = $"{mic.identifier().Parse()}.{identifier}";
-                
+
             return new ContextDef
             {
-                name =  identifier
+                name = identifier
             };
         }
 
@@ -283,7 +283,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var te = new TupleElement
             {
                 name = name,
-                value = expression,                
+                value = expression,
             };
 
             return te;
@@ -300,7 +300,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 system = id.qualifier,
                 version = context.versionSpecifier()?.STRING().ParseString()
             };
-            
+
             return versionedIdentifier;
         }
 

@@ -7,12 +7,9 @@ namespace Hl7.Cql.CqlToElm
 {
     internal class ConverterContext
     {
-        public ConverterContext(IServiceProvider services)
+        public ConverterContext()
         {
-            Services = services;
         }
-
-        public IServiceProvider Services { get; }
 
         private readonly List<Library> Libraries = new List<Library>();
 

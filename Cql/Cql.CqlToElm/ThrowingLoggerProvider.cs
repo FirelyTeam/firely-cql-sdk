@@ -52,7 +52,6 @@ namespace Hl7.Cql.CqlToElm
                 }
                 else throw exception;
             }
-
         }
     }
 }

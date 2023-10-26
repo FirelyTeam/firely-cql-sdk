@@ -11,7 +11,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class ContextDefTest : Base
     {
-        private Library makeLibrary(string cql)
+        private static Library MakeLibrary(string cql)
         {
             var services = LibraryTest.MakeMinimalServiceCollection()
                 .AddModels(mp =>
@@ -19,13 +19,15 @@ namespace Hl7.Cql.CqlToElm.Test
                     mp.Add(Models.ElmR1);
                     mp.Add(Models.Fhir401);
                 });
-            return new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(cql);
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            return converter.ConvertLibrary(cql);
         }
 
         [TestMethod]
         public void Context_Of_Known_Model()
         {
-            var lib = makeLibrary(@"
+            var lib = MakeLibrary(@"
                 library UsingTeest version '1.0.0'
 
                 using FHIR
@@ -54,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Of_Unknown_Model()
         {
-            Action act = () => makeLibrary(@"
+            Action act = () => MakeLibrary(@"
                 library UsingTeest version '1.0.0'
 
                 using FHIR
@@ -66,16 +68,16 @@ namespace Hl7.Cql.CqlToElm.Test
                 .WithMessage("*No type named FHIRX.Patient found in any model.*");
         }
 
-                [TestMethod]
+        [TestMethod]
         public void Context_Of_Unknown_Type()
         {
-            Action act = () => makeLibrary(@"
+            Action act = () => MakeLibrary(@"
                 library UsingTeest version '1.0.0'
 
                 using FHIR
 
                 context ObservationX
-            ");   
+            ");
 
             act.Should().Throw<AggregateException>()
                 .WithMessage("*No type named ObservationX found in any model.*");

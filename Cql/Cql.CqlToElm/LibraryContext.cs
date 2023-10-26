@@ -96,7 +96,7 @@ namespace Hl7.Cql.CqlToElm
             foreach (var @using in usings)
             {
                 var namedType = QualifiedName.MakeQualifiedTypeName(@using.uri, name).ToNamedType();
-                if(ModelProvider.TryResolveFromNamedType(namedType, out var result))
+                if (ModelProvider.TryResolveFromNamedType(namedType, out var result))
                     yield return result!;
             }
         }

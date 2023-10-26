@@ -3,7 +3,6 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,23 +11,33 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class LibraryVisitor : Visitor<Library>
     {
-        public LibraryVisitor(IServiceProvider services) : base(services)
+        public LibraryVisitor(
+            ConverterContext converterContext,
+            LibraryContext libraryContext,
+            IConfiguration configuration,
+            IModelProvider modelProvider,
+            ParameterDefinitionVisitor parameterDefinitionVisitor,
+            ExpressionVisitor expressionVisitor,
+            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
         {
+            ConverterContext = converterContext;
+            LibraryContext = libraryContext;
+            Configuration = configuration;
+            ModelProvider = modelProvider;
+            ParameterDefinitionVisitor = parameterDefinitionVisitor;
+            ExpressionVisitor = expressionVisitor;
         }
 
         #region Services
-        private ConverterContext ConverterContext => Services.GetRequiredService<ConverterContext>();
-        private LibraryContext LibraryContext => Services.GetRequiredService<LibraryContext>();
-
-        private IConfiguration Configuration => Services.GetRequiredService<IConfiguration>();
-        private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
-        private ParameterDefinitionVisitor ParameterDefinitionVisitor => Services.GetRequiredService<ParameterDefinitionVisitor>();
-        private ExpressionVisitor ExpressionVisitor => Services.GetRequiredService<ExpressionVisitor>();
-
+        private LibraryContext LibraryContext { get; }
+        private IConfiguration Configuration { get; }
+        private IModelProvider ModelProvider { get; }
+        private ParameterDefinitionVisitor ParameterDefinitionVisitor { get; }
+        private ExpressionVisitor ExpressionVisitor { get; }
+        public ConverterContext ConverterContext { get; }
         #endregion
 
-
-        private UsingDef? getDefaultSystemUsingDef()
+        private UsingDef? GetDefaultSystemUsingDef()
         {
             var systemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
             var systemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)] ?? SystemTypes.SystemModelVersion;
@@ -71,7 +80,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var contextStatements = new Dictionary<string, ExpressionDef>();
 
 
-            var systemUsing = getDefaultSystemUsingDef();
+            var systemUsing = GetDefaultSystemUsingDef();
             if (systemUsing is not null) usings.AddLast(systemUsing);
 
             // visit usings first so parameters can refer to models

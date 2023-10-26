@@ -1,5 +1,3 @@
-
-using Antlr4.Runtime;
 using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using Hl7.Cql.CqlToElm.Grammar;
@@ -22,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 cqlParser.ConcurrentWithIntervalOperatorPhraseContext ctx => HandleConcurrentWith(ctx, lhs, rhs),
                 cqlParser.IncludesIntervalOperatorPhraseContext ctx => HandleIncludes(ctx, lhs, rhs),
                 cqlParser.IncludedInIntervalOperatorPhraseContext ctx => HandleIncludedIn(ctx, lhs, rhs),
-                cqlParser.BeforeOrAfterIntervalOperatorPhraseContext ctx => throw new NotImplementedException(),
+                cqlParser.BeforeOrAfterIntervalOperatorPhraseContext => throw new NotImplementedException(),
                 cqlParser.WithinIntervalOperatorPhraseContext ctx => HandleWithin(ctx, lhs, rhs),
                 cqlParser.MeetsIntervalOperatorPhraseContext ctx => HandleMeets(ctx, lhs, rhs),
                 cqlParser.OverlapsIntervalOperatorPhraseContext ctx => HandleOverlaps(ctx, lhs, rhs),
@@ -76,15 +74,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     throw new NotImplementedException("Within with an 'occurs' is not yet implemented.");
                 }
 
-                var quantityTuple = context.quantity().Parse();
+                var (value, unit) = context.quantity().Parse();
 
                 var quantity = new Quantity
                 {
                     localId = NextId(),
                     locator = context.quantity().Locator(),
-                    value = quantityTuple.value,
+                    value = value,
                     valueSpecified = true,
-                    unit = quantityTuple.unit,
+                    unit = unit,
                 }.WithResultType(SystemTypes.QuantityType);
 
                 var startEnd = context.children[^1].GetText();
@@ -178,10 +176,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 DateTimePrecision? dtp = null;
 
                 var index = 0;
-                var kw0 = Keyword.Parse(context.GetChild(index).GetText());
-                if (kw0.Length == 1)
+                var kw0 = context.GetChild(index).ParseKeyword();
+                if (kw0 is not null)
                 {
-                    var keyword = kw0[0];
+                    var keyword = kw0;
                     if (keyword == CqlKeyword.Starts)
                     {
                         var lhsPointType = PointType(lhs.resultTypeSpecifier);
@@ -221,14 +219,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                     else
                     {
-                        var kw1 = Keyword.Parse(child.GetText());
-                        if (kw1.Length == 1)
+                        var kw1 = child.ParseKeyword();
+                        if (kw1 == CqlKeyword.Properly)
                         {
-                            var keyword = kw1[0];
-                            if (keyword == CqlKeyword.Properly)
-                            {
-                                properly = true;
-                            }
+                            properly = true;
                         }
                     }
                     index += 1;
@@ -249,8 +243,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         dtp = dtpc.dateTimePrecision().Parse();
                     }
-                    index += 1;
                 }
+
                 return properly switch
                 {
                     true => new ProperIncludedIn
@@ -281,8 +275,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     context.dateTimePrecisionSpecifier() is { } p ?
                         p.dateTimePrecision().Parse() : null;
 
-                CqlKeyword? boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
-                    Keyword.Parse(term.GetText())[0] : null;
+                var boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
+                    term.GetText() : null;
 
                 BinaryExpression result = boa switch
                 {
@@ -292,36 +286,33 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         precision = dtPrecision ?? default,
                     },
 
-                    CqlKeyword.Before => new OverlapsBefore
+                    "before" => new OverlapsBefore
                     {
                         precisionSpecified = dtPrecision is not null,
                         precision = dtPrecision ?? default,
                     },
-                    CqlKeyword.After => new OverlapsAfter
+
+                    "after" => new OverlapsAfter
                     {
                         precisionSpecified = dtPrecision is not null,
                         precision = dtPrecision ?? default,
                     },
-                    _ => throw UnresolvedSignature("Overlaps", lhs, rhs)
+                    _ => throw new InvalidOperationException($"Parser returned unknown token '{boa}' in an overlaps interval expression.")
                 };
 
                 result.operand = new[] { lhs, rhs };
-                result.localId = NextId();
-                result.locator = context.Locator();
-
-                return result.WithResultType(SystemTypes.BooleanType);
+                return result.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator());
             }
         }
 
         // | 'meets'('before' | 'after') ? dateTimePrecisionSpecifier ?                                                             #meetsIntervalOperatorPhrase
-        private Expression HandleMeets(cqlParser.MeetsIntervalOperatorPhraseContext context,
+        private static Expression HandleMeets(cqlParser.MeetsIntervalOperatorPhraseContext context,
                 Expression lhs,
                 Expression rhs)
         {
             DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
 
-            CqlKeyword? boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
-                Keyword.Parse(term.GetText())[0] : null;
+            var boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ? term.GetText() : null;
 
             BinaryExpression result = boa switch
             {
@@ -330,24 +321,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     precisionSpecified = precision is not null,
                     precision = precision ?? default,
                 },
-                CqlKeyword.Before => new MeetsBefore
+                "before" => new MeetsBefore
                 {
                     precisionSpecified = precision is not null,
                     precision = precision ?? default,
                 },
-                CqlKeyword.After => new MeetsAfter
+                "after" => new MeetsAfter
                 {
                     precisionSpecified = precision is not null,
                     precision = precision ?? default,
                 },
-                _ => throw UnresolvedSignature("Meets", lhs, rhs)
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{boa}' in a meets interval expression.")
             };
 
             result.operand = new[] { lhs, rhs };
-            result.localId = NextId();
-            result.locator = context.Locator();
-
-            return result.WithResultType(SystemTypes.BooleanType);
+            return result.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator());
         }
 
         //| 'starts' dateTimePrecisionSpecifier?                                                                                  #startsIntervalOperatorPhrase
@@ -391,66 +379,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 Expression lhs,
                 Expression rhs)
         {
-            var firstKeyword = Keyword.Parse(context.GetChild(0).GetText());
-            if (firstKeyword.Length != 1)
-                throw UnresolvedSignature("Includes", lhs, rhs);
-            bool properly;
-            int index;
-            if (firstKeyword[0] == CqlKeyword.Properly)
-            {
-                properly = true;
-                index = 2;
-            }
-            else if (firstKeyword[0] == CqlKeyword.Includes)
-            {
-                properly = false;
-                index = 1;
-            }
-            else
-                throw UnresolvedSignature("Includes", lhs, rhs);
+            var firstKeyword = context.GetChild(0).GetText();
+            var properly = firstKeyword == "properly";
 
-            var next = context.GetChild(index);
-            DateTimePrecision? precision;
-            if (next is cqlParser.DateTimePrecisionSpecifierContext dto)
-            {
-                precision = dto.dateTimePrecision().Parse();
-                index += 1;
-            }
-            else
-                precision = null;
+            DateTimePrecision? precision = context.dateTimePrecisionSpecifier() is { } dtp ? dtp.dateTimePrecision().Parse() : null;
 
-            if (index < context.ChildCount)
+            var startEnd = context.children[^1].GetText();
+
+            var rhsPointType = PointType(rhs.resultTypeSpecifier);
+            var locator = context.children[^1].Locator()!;
+
+            if (startEnd == "start")
             {
-                var rightPoint = Keyword.Parse(context.GetChild(index).GetText());
-                var rhsPointLocator = (context.GetChild(index) as ParserRuleContext)?.Locator();
-                if (rightPoint.Length == 1)
+                rhs = new Start
                 {
-                    var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                    if (rightPoint[0] == CqlKeyword.Start)
-                    {
-                        rhs = new Start
-                        {
-                            operand = rhs,
-                            localId = NextId(),
-                            locator = rhsPointLocator,
-                            resultTypeSpecifier = rhsPointType,
-                            resultTypeName = rhsPointType?.resultTypeName
-                        };
-                    }
-                    else if (rightPoint[0] == CqlKeyword.End)
-                    {
-                        rhs = new End
-                        {
-                            operand = rhs,
-                            localId = NextId(),
-                            locator = rhsPointLocator,
-                            resultTypeSpecifier = rhsPointType,
-                            resultTypeName = rhsPointType?.resultTypeName
-                        };
-                    }
-                    else throw UnresolvedSignature("Includes", lhs, rhs);
-                }
-                else throw UnresolvedSignature("Includes", lhs, rhs);
+                    operand = rhs,
+                }.WithLocator(locator).WithResultType(rhsPointType!);
+            }
+            else if (startEnd == "end")
+            {
+                rhs = new End
+                {
+                    operand = rhs,
+                }.WithLocator(locator).WithResultType(rhsPointType!);
             }
 
             BinaryExpression includes = properly
@@ -463,214 +414,109 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         //: ('starts' | 'ends' | 'occurs')? 'same' dateTimePrecision? (relativeQualifier | 'as') ('start' | 'end')?               #concurrentWithIntervalOperatorPhrase
-        private Expression HandleConcurrentWith(cqlParser.ConcurrentWithIntervalOperatorPhraseContext context,
+        private static Expression HandleConcurrentWith(cqlParser.ConcurrentWithIntervalOperatorPhraseContext context,
                 Expression lhs,
                 Expression rhs)
         {
-            if (context.ChildCount > 3)
+            var skipPointConversion = context.ChildCount == 3 && context.dateTimePrecision() is not null;
+
+            var qualifier = (context.relativeQualifier() is { } tree ? tree.ParseKeyword() : CqlKeyword.As) ??
+                throw new InvalidOperationException($"Parser returned an unknown relative time qualifier '{context.relativeQualifier().GetText()}' in a concurrent-with interval expression.");
+
+            if (!skipPointConversion)
             {
-                var firstKeyword = Keyword.Parse(context.GetChild(0).GetText());
-                int index;
-                CqlKeyword[] lhsPoint;
-                string? lhsPointLocator;
-                if (firstKeyword.Length == 1 && firstKeyword[0] == CqlKeyword.Same)
+                var leftPoint = context.GetChild(0).ParseKeyword() switch
                 {
-                    index = 1;
-                    lhsPoint = new[] { CqlKeyword.Occurs };
-                    lhsPointLocator = null;
-                }
-                else
+                    CqlKeyword.Same => CqlKeyword.Occurs,
+                    CqlKeyword.Starts => CqlKeyword.Starts,
+                    CqlKeyword.Ends => CqlKeyword.Ends,
+                    CqlKeyword.Occurs => CqlKeyword.Occurs,
+                    _ => throw new InvalidOperationException($"Parser returned an unknown keyword '{context.GetChild(0).GetText()}' at the start of a concurrent-with interval expression.")
+                };
+                var leftLocator = context.GetChild(0).Locator()!;
+
+                var rightPoint = context.children[^1].ParseKeyword() switch
                 {
-                    lhsPoint = firstKeyword!;
-                    lhsPointLocator = (context.GetChild(0) as ParserRuleContext)?.Locator();
-                    index = 2;
+                    CqlKeyword.Start => CqlKeyword.Start,
+                    CqlKeyword.End => CqlKeyword.End,
+                    var q when qualifier == q => CqlKeyword.Occurs,
+                    _ => throw new InvalidOperationException($"Parser returned an unknown keyword '{context.children[^1].GetText()}' at the end of a concurrent-with interval expression.")
+                };
+                var rightLocator = context.children[^1].Locator()!;
+
+                var lhsPointType = PointType(lhs.resultTypeSpecifier)!;
+
+                lhs = leftPoint switch
+                {
+                    CqlKeyword.Starts => new Start
+                    {
+                        operand = lhs,
+                    }.WithLocator(leftLocator).WithResultType(lhsPointType),
+                    CqlKeyword.Ends => new End
+                    {
+                        operand = lhs,
+                    }.WithLocator(leftLocator).WithResultType(lhsPointType),
+                    _ => lhs,
+                };
+
+                if (lhs.resultTypeSpecifier is not IntervalTypeSpecifier && rightPoint == CqlKeyword.Occurs)
+                {
+                    lhs = new Elm.Interval
+                    {
+                        low = lhs,
+                        high = lhs,
+                    }.WithLocator(leftLocator).WithResultType(lhsPointType.ToIntervalType());
                 }
 
-                var precision = context.dateTimePrecision().Parse();
-                index += 1;
-                var qualifier = Keyword.Parse(context.GetChild(index).GetText());
-                index += 1;
+                var rhsPointType = PointType(rhs.resultTypeSpecifier)!;
 
-                CqlKeyword[] rhsPoint;
-                string? rhsPointLocator;
-                if (index < context.ChildCount)
+                rhs = rightPoint switch
                 {
-                    rhsPoint = Keyword.Parse(context.GetChild(index).GetText());
-                    rhsPointLocator = (context.GetChild(index) as ParserRuleContext)?.Locator();
-                }
-                else
-                {
-                    rhsPoint = new[] { CqlKeyword.Occurs };
-                    rhsPointLocator = null;
-                }
+                    CqlKeyword.Start => new Start
+                    {
+                        operand = rhs,
+                    }.WithLocator(rightLocator).WithResultType(rhsPointType),
+                    CqlKeyword.End => new End
+                    {
+                        operand = rhs,
+                    }.WithLocator(rightLocator).WithResultType(rhsPointType),
+                    _ => rhs,
+                };
 
-                if (lhsPoint?.Length == 1)
+                if (rhs.resultTypeSpecifier is not IntervalTypeSpecifier && leftPoint == CqlKeyword.Occurs)
                 {
-                    var lhsPointType = PointType(lhs.resultTypeSpecifier);
-                    if (lhsPoint[0] == CqlKeyword.Starts)
+                    rhs = new Elm.Interval
                     {
-                        lhs = new Start
-                        {
-                            operand = lhs,
-                            localId = NextId(),
-                            locator = lhsPointLocator,
-                            resultTypeSpecifier = lhsPointType,
-                            resultTypeName = lhsPointType?.resultTypeName
-                        };
-
-                    }
-                    else if (lhsPoint[0] == CqlKeyword.Ends)
-                    {
-                        lhs = new End
-                        {
-                            operand = lhs,
-                            localId = NextId(),
-                            locator = lhsPointLocator,
-                            resultTypeSpecifier = lhsPointType,
-                            resultTypeName = lhsPointType?.resultTypeName
-                        };
-                    }
-                    if (rhsPoint![0] == CqlKeyword.Occurs)
-                    {
-                        lhs = new Elm.Interval
-                        {
-                            low = lhs,
-                            high = lhs,
-                            localId = NextId(),
-                            locator = lhsPointLocator,
-                            resultTypeSpecifier = lhsPointType!.ToIntervalType(),
-                        };
-                    }
+                        low = rhs,
+                        high = rhs,
+                    }.WithLocator(rightLocator).WithResultType(rhsPointType.ToIntervalType());
                 }
-                if (rhsPoint?.Length == 1)
-                {
-                    var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                    if (rhsPoint[0] == CqlKeyword.Start)
-                    {
-                        rhs = new Start
-                        {
-                            operand = rhs,
-                            localId = NextId(),
-                            locator = rhsPointLocator,
-                            resultTypeSpecifier = rhsPointType,
-                            resultTypeName = rhsPointType?.resultTypeName
-                        };
-                    }
-                    else if (rhsPoint[0] == CqlKeyword.End)
-                    {
-                        rhs = new End
-                        {
-                            operand = rhs,
-                            localId = NextId(),
-                            locator = lhsPointLocator,
-                            resultTypeSpecifier = rhsPointType,
-                            resultTypeName = rhsPointType?.resultTypeName
-                        };
-                    }
-                    if (lhsPoint![0] == CqlKeyword.Occurs)
-                    {
-                        rhs = new Elm.Interval
-                        {
-                            low = rhs,
-                            high = rhs,
-                            localId = NextId(),
-                            locator = rhsPointLocator,
-                            resultTypeSpecifier = rhsPointType!.ToIntervalType(),
-                        };
-                    }
-                }
-
-                if (qualifier.Length == 2)
-                {
-                    if (qualifier[1] == CqlKeyword.Before)
-                    {
-                        var sameOrBefore = new SameOrBefore
-                        {
-                            localId = NextId(),
-                            locator = context.Locator(),
-                            precision = precision,
-                            precisionSpecified = true,
-                            operand = new[] { lhs, rhs },
-                        }.WithResultType(SystemTypes.BooleanType);
-                        return sameOrBefore;
-                    }
-                    else if (qualifier[1] == CqlKeyword.After)
-                    {
-                        var sameOrAfter = new SameOrAfter
-                        {
-                            localId = NextId(),
-                            locator = context.Locator(),
-                            precision = precision,
-                            precisionSpecified = true,
-                            operand = new[] { lhs, rhs },
-                        }.WithResultType(SystemTypes.BooleanType);
-                        return sameOrAfter;
-                    }
-                    else throw UnresolvedSignature("SameAs", lhs, rhs);
-                }
-                else if (qualifier.Length == 1 && qualifier[0] == CqlKeyword.As)
-                {
-                    var same = new SameAs
-                    {
-                        localId = NextId(),
-                        locator = context.Locator(),
-                        precision = precision,
-                        precisionSpecified = true,
-                        operand = new[] { lhs, rhs },
-                    }.WithResultType(SystemTypes.BooleanType);
-                    return same;
-                }
-                else throw UnresolvedSignature("SameAs", lhs, rhs);
             }
-            else if (context.ChildCount == 3)
+
+            var precision = context.dateTimePrecision()?.Parse() ?? default;
+
+            return qualifier switch
             {
-                var precision = context.dateTimePrecision().Parse();
-                var qualifier = Keyword.Parse(context.GetChild(2).GetText());
-                if (qualifier.Length == 2)
+                CqlKeyword.Or_Before => new SameOrBefore
                 {
-                    if (qualifier[1] == CqlKeyword.Before)
-                    {
-                        var sameOrBefore = new SameOrBefore
-                        {
-                            localId = NextId(),
-                            locator = context.Locator(),
-                            precision = precision,
-                            precisionSpecified = true,
-                            operand = new[] { lhs, rhs },
-                        }.WithResultType(SystemTypes.BooleanType);
-                        return sameOrBefore;
-                    }
-                    else if (qualifier[1] == CqlKeyword.After)
-                    {
-                        var sameOrAfter = new SameOrAfter
-                        {
-                            localId = NextId(),
-                            locator = context.Locator(),
-                            precision = precision,
-                            precisionSpecified = true,
-                            operand = new[] { lhs, rhs },
-                        }.WithResultType(SystemTypes.BooleanType);
-                        return sameOrAfter;
-                    }
-                    else throw UnresolvedSignature("SameAs", lhs, rhs);
-                }
-                else if (qualifier.Length == 1 && qualifier[0] == CqlKeyword.As)
+                    precision = precision,
+                    precisionSpecified = true,
+                    operand = new[] { lhs, rhs },
+                }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator()),
+                CqlKeyword.Or_After => new SameOrAfter
                 {
-                    var same = new SameAs
-                    {
-                        localId = NextId(),
-                        locator = context.Locator(),
-                        precision = precision,
-                        precisionSpecified = true,
-                        operand = new[] { lhs, rhs },
-                    }.WithResultType(SystemTypes.BooleanType);
-                    return same;
-                }
-                else throw UnresolvedSignature("SameAs", lhs, rhs);
-            }
-            else throw UnresolvedSignature("SameAs", lhs, rhs);
-
-
+                    precision = precision,
+                    precisionSpecified = true,
+                    operand = new[] { lhs, rhs },
+                }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator()),
+                CqlKeyword.As => new SameAs
+                {
+                    precision = precision,
+                    precisionSpecified = true,
+                    operand = new[] { lhs, rhs },
+                }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator()),
+                _ => throw new InvalidOperationException("Cannot happen, we have already checked for all possible values of qualifier.")
+            };
         }
     }
 }

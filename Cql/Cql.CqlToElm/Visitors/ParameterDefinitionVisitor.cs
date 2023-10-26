@@ -1,16 +1,15 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class ParameterDefinitionVisitor : Visitor<ParameterDef>
     {
         public ParameterDefinitionVisitor(
-            IServiceProvider services,
             TypeSpecifierVisitor typeSpecVisitor,
-            ExpressionVisitor expressionVisitor) : base(services)
+            ExpressionVisitor expressionVisitor,
+            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
         {
             typeSpecifierVisitor = typeSpecVisitor;
             this.expressionVisitor = expressionVisitor;

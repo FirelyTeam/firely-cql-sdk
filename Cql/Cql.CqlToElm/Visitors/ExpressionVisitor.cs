@@ -13,8 +13,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             IModelProvider provider,
             LibraryContext libraryContext,
             TypeSpecifierVisitor typeSpecifierVisitor,
-            IServiceProvider services
-            ) : base(services)
+            LocalIdentifierProvider localIdentifierProvider
+            ) : base(localIdentifierProvider)
         {
             ModelProvider = provider;
             LibraryContext = libraryContext;
@@ -25,16 +25,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private readonly IModelProvider ModelProvider;
         private readonly LibraryContext LibraryContext;
         private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
-
-        private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
-            throw Critical($"Could not resolve call to operator {@operator} with signature " +
-                $"({string.Join(", ", operands.Select(o => o.resultTypeSpecifier?.ToString() ?? "unknown"))}");
-
-
-        //private T UnresolvedSignature<T>(T resultElement, string @operator, params Expression[] operands) where T : Element =>
-        //    resultElement.AddError($"Could not resolve call to operator {@operator} with signature " +
-        //        $"({string.Join(", ", operands.Select(o => o.resultTypeSpecifier?.ToString() ?? "unknown"))}", ErrorType.semantic);
-
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')

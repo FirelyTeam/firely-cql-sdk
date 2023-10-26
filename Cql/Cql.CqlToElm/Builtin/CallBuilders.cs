@@ -151,21 +151,21 @@ namespace Hl7.Cql.CqlToElm.Builtin
             if (result is BinaryExpression be)
             {
                 if (arguments.Length != 2)
-                    throw new ArgumentException($"Expected 2 arguments, but got {arguments.Length}", nameof(arguments));
+                    throw new ArgumentException($"Expected 2 arguments, but got {arguments.Length}.", nameof(arguments));
                 be.operand = arguments;
                 return be;
             }
             else if (result is UnaryExpression ue)
             {
                 if (arguments.Length != 1)
-                    throw new ArgumentException($"Expected 1 argument, but got {arguments.Length}", nameof(arguments));
+                    throw new ArgumentException($"Expected 1 argument, but got {arguments.Length}.", nameof(arguments));
                 ue.operand = arguments[0];
                 return ue;
             }
             else if (result is TernaryExpression te)
             {
                 if (arguments.Length != 3)
-                    throw new ArgumentException($"Expected 3 arguments, but got {arguments.Length}", nameof(arguments));
+                    throw new ArgumentException($"Expected 3 arguments, but got {arguments.Length}.", nameof(arguments));
                 te.operand = arguments;
                 return te;
             }

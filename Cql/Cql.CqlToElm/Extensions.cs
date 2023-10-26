@@ -48,7 +48,7 @@ namespace Hl7.Cql.CqlToElm
             return t;
         }
 
-        public static T WithLocator<T>(this T t, string locator) where T : Element
+        public static T WithLocator<T>(this T t, string? locator) where T : Element
         {
             t.WithId();
             t.locator = locator;
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm
             return t;
         }
 
-        public static T WithResultType<T>(this T t, TypeSpecifier type) where T : Element
+        public static T WithResultType<T>(this T t, TypeSpecifier? type) where T : Element
         {
             t.resultTypeSpecifier = type;
 
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm
             return t;
         }
 
-        public static XmlQualifiedName? TryToQualifiedName(this TypeSpecifier type)
+        public static XmlQualifiedName? TryToQualifiedName(this TypeSpecifier? type)
         {
             if (type is NamedTypeSpecifier nts)
                 return nts.name;

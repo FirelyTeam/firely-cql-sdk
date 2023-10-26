@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -85,6 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
+                .AddTransient<CqlToElmConverter>()
                 .AddConfiguration(cb => { });
 
         [TestMethod]
@@ -102,9 +102,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 });
 
             var x = services.BuildServiceProvider();
-            x.GetRequiredService<ILogger<LibraryContext>>().Should().NotBeNull();
-
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var converter = x.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_AllTerms_WithNamespace version '1.0.0' called Derp
@@ -130,7 +129,9 @@ namespace Hl7.Cql.CqlToElm.Test
                         version = "1.0.0"
                     });
                 });
-            var converter = new CqlToElmConverter(services.BuildServiceProvider());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var converter = serviceProvider.GetRequiredService<CqlToElmConverter>();
             var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
@@ -158,7 +159,9 @@ namespace Hl7.Cql.CqlToElm.Test
                         version = "1.0.0"
                     });
                 });
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_NoVersion_LocalIdentifier called Derp
@@ -185,7 +188,9 @@ namespace Hl7.Cql.CqlToElm.Test
                         version = "1.0.0"
                     });
                 });
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_Version_NoIdentifier version '1.0.0'
@@ -212,7 +217,9 @@ namespace Hl7.Cql.CqlToElm.Test
                     });
                 });
 
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_NoVersion_NoIdentifier
@@ -239,7 +246,9 @@ namespace Hl7.Cql.CqlToElm.Test
                     });
                 });
 
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using System version '1.0.0'
@@ -742,7 +751,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private concept Name: { ""code1"", ""code2"", ""code3"" } display 'My concept'
             ");
             var lib = ExpressionBuilderFor(library);
-            var lambdas = lib.Build();
+            _ = lib.Build();
         }
 
 

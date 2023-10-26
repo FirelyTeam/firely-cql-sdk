@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,8 +23,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         public TypeSpecifierVisitor(
-            IServiceProvider services,
-            LibraryContext libraryContext) : base(services)
+            LibraryContext libraryContext,
+            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
         {
             LibraryContext = libraryContext;
         }

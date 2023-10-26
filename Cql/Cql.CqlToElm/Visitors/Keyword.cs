@@ -1,22 +1,14 @@
-﻿using System;
-using System.Linq;
+﻿using Antlr4.Runtime.Tree;
+using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal static class Keyword
     {
-        public static CqlKeyword[] Parse(string text)
+        public static CqlKeyword? ParseKeyword(this IParseTree tree)
         {
-            var parts = text.Split(' ');
-            var keywords = parts
-                .Select(part =>
-                {
-                    if (Enum.TryParse<CqlKeyword>(part, true, out var keyword))
-                        return keyword;
-                    else throw new InvalidOperationException($"Parser returned unrecognized keyword '{part}'.");
-                })
-                .ToArray();
-            return keywords;
+            var text = tree.GetText().Replace(' ', '_');
+            return Enum.TryParse<CqlKeyword>(text, ignoreCase: true, out var keyword) ? keyword : null;
         }
     }
 }

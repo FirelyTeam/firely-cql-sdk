@@ -3,8 +3,10 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -16,13 +18,14 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// Constructs an instance.
         /// </summary>
-        /// <param name="services">The service provider.</param>
-        public CqlToElmConverter(IServiceProvider services)
+        public CqlToElmConverter(IServiceScopeFactory scopeFactory, ILogger<CqlToElmConverter> logger)
         {
-            Services = services;
+            ScopeFactory = scopeFactory;
+            Logger = logger;
         }
 
-        internal IServiceProvider Services { get; }
+        public IServiceScopeFactory ScopeFactory { get; }
+        public ILogger<CqlToElmConverter> Logger { get; }
 
         /// <summary>
         /// Converts the CQL contained in <paramref name="cqlLibrary"/> to an ELM <see cref="Library"/>.
@@ -47,12 +50,25 @@ namespace Hl7.Cql.CqlToElm
             parser.RemoveErrorListeners();
             parser.AddErrorListener(parserListener);
 
-            using (var scope = Services.CreateScope())
+            using (var scope = ScopeFactory.CreateScope())
             {
                 var libCtx = scope.ServiceProvider.GetRequiredService<LibraryContext>();
                 var visitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
-                var library = visitor.Visit(parser.library());
-                return library;
+
+                try
+                {
+                    var library = visitor.Visit(parser.library());
+
+                    if (library.GetErrors().Any())
+                        Logger.LogWarning("Parsed ELM tree contains errors.");
+
+                    return library;
+                }
+                catch (Exception e)
+                {
+                    Logger.LogCritical(e, "Exception while converting CQL to ELM.");
+                    throw;
+                }
             }
         }
 
