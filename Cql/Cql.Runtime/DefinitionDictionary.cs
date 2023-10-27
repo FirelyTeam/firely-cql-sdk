@@ -405,6 +405,14 @@ namespace Hl7.Cql.Runtime
                         }
                     }
                 }
+
+                foreach (var tagKey in dictionary.TagsByLibrary)
+                {
+                    if (!TagsByLibrary.Contains(tagKey))
+                    {
+                        TagsByLibrary.Add(tagKey.Key, tagKey.Value);
+                    }
+                }
             }
         }
 
