@@ -1,5 +1,14 @@
 ﻿#nullable enable
+const Hl7.Cql.Packaging.Constants.MeasureGroupCodeSystem = "https://ncqa.org/fhir/CodeSystem/measure-group" -> string!
+const Hl7.Cql.Packaging.Constants.ParameterAccessLevel = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.access-level" -> string!
+const Hl7.Cql.Packaging.Constants.ParameterCanonicalUri = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.canonical-uri" -> string!
+const Hl7.Cql.Packaging.Constants.ParameterCqlDefaultValue = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.cql-default-value" -> string!
+const Hl7.Cql.Packaging.Constants.ParameterCqlDefaultValueType = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.cql-default-type" -> string!
+const Hl7.Cql.Packaging.Constants.ParameterCqlElementType = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.cql-element-type" -> string!
+const Hl7.Cql.Packaging.Constants.ParameterCqlType = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.cql-type" -> string!
+const Hl7.Cql.Packaging.Constants.ParameterElementTypeExtensionUri = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.list-element-type" -> string!
 Hl7.Cql.Packaging.AssemblyLoadContextExtensions
+Hl7.Cql.Packaging.Constants
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.CqlTypeToFhirTypeMapper(Hl7.Cql.Abstractions.TypeResolver! typeResolver) -> void
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.CqlTypeToFhirTypeMapper(Hl7.Cql.Abstractions.TypeResolver! typeResolver, Hl7.Fhir.Introspection.ModelInspector! modelInspector) -> void
