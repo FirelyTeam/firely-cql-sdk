@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers: width of Interval[3,7]
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integers_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Null: width of (null as Interval<Integer>)
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integers_Null_Interval()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Error: width of Interval[1,null)

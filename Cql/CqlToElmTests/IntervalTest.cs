@@ -16,27 +16,27 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_InvalidType()
         {
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval['hello','world']
-            ").ShouldReportError("Intervals*defined minimums and maximums*String is not allowed.");
+            ", expectedError: "Intervals*defined minimums and maximums*String is not allowed.");
         }
 
         [TestMethod]
         public void Interval_Quantity_Incompatible_Units()
         {
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[100 'a', 200 'kg']
-            ").ShouldReportError("Intervals of quantities must be of compatible units.");
+            ", expectedError: "Intervals of quantities must be of compatible units.");
         }
 
         [TestMethod]
         public void Interval_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[1,2]
@@ -74,7 +74,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Integer_Null_High()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[1,null)
@@ -112,7 +112,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Integer_Null_Low()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[null, 1)
@@ -150,7 +150,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Long: Interval(-100L,20L]
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Decimal: Interval[-0.00000001, 0.0)
@@ -226,7 +226,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Decimal: Interval(100 '1', 200 '1')
@@ -264,7 +264,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Date()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Date: Interval[@2023-01-01, @2023-12-31]
@@ -302,7 +302,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_DateTime()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_DateTime: Interval[@2023-01-01T00:00:00.000Z, @2023-12-31T23:59:59.999Z]
@@ -341,7 +341,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Time()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_DateTime: Interval[@T00:00:00.000, @T23:59:59.999]

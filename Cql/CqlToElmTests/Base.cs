@@ -46,6 +46,20 @@ namespace Hl7.Cql.CqlToElm.Test
             ExpressionBuilder = ExpressionBuilderFor(lib);
         }
 
+        protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+
+        internal Library MakeLibrary(string cql, string? expectedError = null)
+        {
+            var library = ConvertLibrary(cql);
+
+            if (expectedError is not null)
+                library.ShouldReportError(new[] { expectedError });
+            else
+                library.ShouldSucceed();
+
+            return library;
+        }
+
         internal static object? Run(Expression expression, CqlContext? ctx = null)
         {
             var lambda = ExpressionBuilder.Lambda(expression);

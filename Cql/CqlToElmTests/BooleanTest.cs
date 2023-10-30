@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private Library createLibraryForExpression(string expression)
         {
-            return DefaultConverter.ConvertLibrary($@"
+            return MakeLibrary($@"
                 library IsTest version '1.0.0'
 
                 define private predicate: {expression}");

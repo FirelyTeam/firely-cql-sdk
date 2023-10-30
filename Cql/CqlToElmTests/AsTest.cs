@@ -13,7 +13,7 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         private Library createLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
         {
-            return DefaultConverter.ConvertLibrary($@"
+            return MakeLibrary($@"
                 library AsTest version '1.0.0'
 
                 define private ""{memberName}"": {expression}");
@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_As_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
@@ -46,7 +46,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_As_Vocabulary()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 valueset ""vs"": 'http://xyz.com'
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_As_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 define private Null_As_Decimal: null as System.Decimal

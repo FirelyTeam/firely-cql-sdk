@@ -19,9 +19,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => DefaultConverter.ConvertLibrary(string.Empty));
+            Assert.ThrowsException<ArgumentException>(() => MakeLibrary(string.Empty));
             using var cql = new FileStream(@"Input\LibraryTest\Empty.cql",
                 FileMode.Open, FileAccess.Read, FileShare.Read);
+
             Assert.ThrowsException<ArgumentException>(() => DefaultConverter.ConvertLibrary(cql));
         }
 
@@ -30,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_String()
         {
-            var library = DefaultConverter.ConvertLibrary("library String version '4.0.1'");
+            var library = MakeLibrary("library String version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("String", library.identifier.id);
@@ -42,7 +43,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_Namespace()
         {
-            var library = DefaultConverter.ConvertLibrary("library Namespace.Lib version '4.0.1'");
+            var library = MakeLibrary("library Namespace.Lib version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -54,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Only()
         {
-            var library = DefaultConverter.ConvertLibrary("library Lib");
+            var library = MakeLibrary("library Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -66,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Namespace()
         {
-            var library = DefaultConverter.ConvertLibrary("library Namespace.Lib");
+            var library = MakeLibrary("library Namespace.Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -268,7 +269,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 include MyLibrary version '1.0.0' called Derp
@@ -284,7 +285,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms_WithNamespace()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary version '1.0.0' called Derp
@@ -300,7 +301,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_LocalIdentifier()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary called Derp
@@ -317,7 +318,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_Version_NoIdentifier()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary version '1.0.0'
@@ -334,7 +335,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_NoIdentifier()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary
@@ -355,7 +356,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_AllTerms()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id' version 'version string'
@@ -371,7 +372,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Without_Access_Modifier()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id' version 'version string'
@@ -387,7 +388,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Without_Version()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id'
@@ -403,7 +404,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Minimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id'
@@ -419,7 +420,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystems_Two()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id' version 'version string'
@@ -447,7 +448,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_OneCodeSystems()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1 }
@@ -467,7 +468,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_EvenCodeSystems()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2 }
@@ -490,7 +491,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_OddCodeSystems()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2, lib2.cs3 }
@@ -514,7 +515,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Without_Access_Modifier()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' version 'version string'
@@ -530,7 +531,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Without_Version()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id'
@@ -546,7 +547,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Minimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id'
@@ -562,7 +563,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSets_Two()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string'
@@ -585,7 +586,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_CodeSystems_NoVersion()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' codesystems { lib.cs1, cs2, lib2.cs3 }
@@ -613,7 +614,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_WithoutDisplay()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 code Name: 'id' from lib.cs1
@@ -631,7 +632,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_AccessModifier_WithoutDisplay()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private code Name: 'id' from lib.cs1
@@ -650,7 +651,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_WithDisplay()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 code Name: 'id' from lib.cs1 display 'Code display text'
@@ -669,7 +670,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_AllTerms()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private code Name: 'id' from lib.cs1 display 'Code display text'
@@ -692,7 +693,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_AllTerms()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private concept Name: { lib.code1, code2, lib2.code3 } display 'My concept'
@@ -720,7 +721,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_NoDisplay()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 concept Name: { lib.code1 }
@@ -740,7 +741,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Build()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 codesystem ""System"": 'http://hl7.org'
@@ -762,7 +763,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Paramter_AllTerms()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.String default 'default value'

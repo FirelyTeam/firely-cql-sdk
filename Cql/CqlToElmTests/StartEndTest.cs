@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Start_of()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library StartEndTest version '1.0.0'
 
                 define private Start_of: start of Interval[1, 3]
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Start_of_null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library StartEndTest version '1.0.0'
 
                 define private Start_of_null: start of (null as Interval<Integer>)
@@ -70,7 +70,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Start_of_point_null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library StartEndTest version '1.0.0'
 
                 define private Start_of_point_null: start of Interval(null, 10]
@@ -96,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void End_of()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EndEndTest version '1.0.0'
 
                 define private End_of: end of Interval[1, 3]
@@ -122,7 +122,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void End_of_null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EndEndTest version '1.0.0'
 
                 define private End_of_null: end of (null as Interval<Integer>)
@@ -147,7 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void End_of_point_null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EndEndTest version '1.0.0'
 
                 define private End_of_point_null: end of Interval[10, null)

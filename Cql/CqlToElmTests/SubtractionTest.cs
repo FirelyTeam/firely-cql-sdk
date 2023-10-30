@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Integer_from_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Integer_from_Integer version '1.0.0'
 
                 define private Subtract: 2 - 1
@@ -87,7 +87,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Long_from_Long version '1.0.0'
 
                 define private Subtract: 1L - 2L
@@ -143,7 +143,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 2.0 - 1.0
@@ -200,7 +200,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Quantity version '1.0.0'
 
                 define private Subtract: -1.0 '1' - 2.0 '1'
@@ -263,7 +263,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Integer_from_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Integer_from_Long version '1.0.0'
 
                 define private Subtract: 2 - 1L
@@ -322,7 +322,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Integer_from_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Integer_from_Decimal version '1.0.0'
 
                 define private Subtract: 2 - 1.0
@@ -381,7 +381,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Integer_from_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Integer_from_Quantity version '1.0.0'
 
                 define private Subtract: 2 - 1.0 '1'
@@ -440,7 +440,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Long_from_Decimal version '1.0.0'
 
                 define private Subtract: 1L - 2.0
@@ -499,7 +499,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Integer_from_Quantity version '1.0.0'
 
                 define private Subtract: 1L - 2.0 '1'
@@ -558,7 +558,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Quantity version '1.0.0'
 
                 define private Subtract: -1.0 - 2.0 '1'
@@ -626,7 +626,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Long_from_Integer version '1.0.0'
 
                 define private Subtract: 1L - 2
@@ -682,7 +682,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Integer version '1.0.0'
 
                 define private Subtract: 5.25 - 2
@@ -738,7 +738,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Integer version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2
@@ -797,7 +797,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Long version '1.0.0'
 
                 define private Subtract: 5.25 - 2L
@@ -853,7 +853,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Quantity_from_Long version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2L
@@ -912,7 +912,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Quantity_from_Decimal version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2.0
@@ -973,7 +973,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Three_Decimals()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 6.0 - (2.0 - 3.0)
@@ -1029,7 +1029,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Two_Decimals()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 6.0 '1' - (2.0 - 3.0)

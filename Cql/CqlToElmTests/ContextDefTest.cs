@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class ContextDefTest : Base
     {
-        private static Library MakeLibrary(string cql, bool expectErrors = false)
+        protected override Library ConvertLibrary(string cql)
         {
             var services = LibraryTest.MakeMinimalServiceCollection()
                 .AddModels(mp =>
@@ -22,11 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var provider = services.BuildServiceProvider();
             var converter = provider.GetRequiredService<CqlToElmConverter>();
 
-            var library = converter.ConvertLibrary(cql);
-            var hasErrors = library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error);
-            hasErrors.Should().Be(expectErrors, "because the test case should {0} errors", expectErrors ? "have" : "not have");
-
-            return library;
+            return converter.ConvertLibrary(cql);
         }
 
         [TestMethod]
@@ -67,9 +63,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR
 
                 context FHIRX.Patient
-            ", expectErrors: true);
-
-            lib.ShouldReportError("There is no model matching qualifier 'FHIRX'.");
+            ", expectedError: "There is no model matching qualifier 'FHIRX'.");
         }
 
         [TestMethod]
@@ -81,9 +75,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR
 
                 context ObservationX
-            ", expectErrors: true);
-
-            lib.ShouldReportError("There is no type named 'ObservationX' in model(s) http://hl7.org/fhir (version unspecified).");
+            ", expectedError: "There is no type named 'ObservationX' in model(s) http://hl7.org/fhir (version unspecified).");
         }
 
     }

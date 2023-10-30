@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_True()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { 1, 3, 5, 7 }
@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Empty_List()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { }
@@ -61,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists null
@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_List_Nulls()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { null }

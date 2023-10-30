@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Integer: 1 = 1
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Integer_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Integer_False: 1 = 2
@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Long: 1 = 1L
@@ -190,7 +190,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Decimal_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Decimal_False: 1 = 1.01
@@ -247,7 +247,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_Equals_Quantity()
         {
             // 1 converts to 1.0 '1' and '1' units are equal to all units
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Quantity: 1 = 1.0 'g'
@@ -303,7 +303,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Quantity_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Quantity_False: 1 = 1.01 '1'
@@ -359,7 +359,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Null: 1 = null
@@ -414,7 +414,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_Equals_Integer: null = 1
@@ -473,7 +473,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_Equals_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_Equals_Long: 1L = 1L
@@ -529,7 +529,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_Equals_Long_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_Equals_Long_False: 1L = 2L
@@ -585,7 +585,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_Equals_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_Equals_Long: 1L = 1
@@ -641,7 +641,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_Equals_Decimal_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_DoesNotEqual_Decimal: 1L = 1.01
@@ -698,7 +698,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Long_Equals_Quantity()
         {
             // 1L converts to 1.0 '1' and '1' units are equal to all units
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_Equals_Quantity: 1L = 1.0 'g'
@@ -754,7 +754,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_DoesNotEqual_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_DoesNotEqual_Quantity: 1L = 1.01 '1'
@@ -810,7 +810,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_Equals_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_Equals_Null: 1L = null
@@ -865,7 +865,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_Equals_Long: null = 1L
@@ -924,7 +924,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Equals_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_Equals_Decimal: 1.0 = 1.0
@@ -980,7 +980,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Equals_Decimal_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_Equals_Decimal_False: 1.0 = 2.0
@@ -1036,7 +1036,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Equals_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_Equals_Decimal: 1.0 = 1
@@ -1092,7 +1092,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Equals_Long_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_DoesNotEqual_Decimal: 2.0 = 1L
@@ -1149,7 +1149,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Decimal_Equals_Quantity()
         {
             // 1.0 converts to 1.0 '1' and '1' units are equal to all units
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_Equals_Quantity: 1.0 = 1.0 'g'
@@ -1205,7 +1205,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_DoesNotEqual_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_DoesNotEqual_Quantity: 1.0 = 1.01 '1'
@@ -1261,7 +1261,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Equals_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_Equals_Null: 1.0 = null
@@ -1316,7 +1316,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_Equals_Decimal: null = 1.0
@@ -1375,7 +1375,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Equals_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_Equals_Quantity: 1.0 '1' = 1.0 '1'
@@ -1431,7 +1431,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Equals_Quantity_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_Equals_Quantity_False: 1.0 '1' = 2.0 '1'
@@ -1487,7 +1487,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Equals_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_Equals_Quantity: 1.0 '1' = 1
@@ -1543,7 +1543,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Equals_Long_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_DoesNotEqual_Quantity: 2.0 '1' = 1L
@@ -1600,7 +1600,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Quantity_Equals_Decimal()
         {
             // 1.0 converts to 1.0 '1' and '1' units are equal to all units
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_Equals_Decimal: 1.0 'g' = 1.0
@@ -1656,7 +1656,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_DoesNotEqual_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_DoesNotEqual_Quantity: 1.0 = 1.01 '1'
@@ -1712,7 +1712,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Equals_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_Equals_Null: 1.0 '1' = null
@@ -1767,7 +1767,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_Equals_Integer: null = 1.0 '1'
@@ -1825,7 +1825,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Equals_String()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private String_Equals_String: 'hello' = 'hello'
@@ -1881,7 +1881,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Equals_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private String_Equals_String: 'hello' = null
@@ -1936,7 +1936,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_String()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private String_Equals_String: null = 'hello'
@@ -1992,7 +1992,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_Equals_Date()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Date_Equals_Date: @2023 = @2023
@@ -2048,7 +2048,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_Equals_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Date_Equals_Date: @2023 = null
@@ -2103,7 +2103,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Date()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Date_Equals_Date: null = @2023

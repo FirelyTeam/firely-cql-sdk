@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_False: true implies false
@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_True()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_True: true implies true
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Implies_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private False_Implies_False: false implies false
@@ -183,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_Null: true implies null
@@ -238,7 +238,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_False: null implies false
@@ -293,7 +293,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_Null: null implies null
@@ -348,11 +348,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_1()
         {
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_1: true implies 1
-            ").ShouldReportError("Cannot resolve call*second argument*Integer*cannot implicitly be cast*Boolean.");
+            ", expectedError: "Cannot resolve call*second argument*Integer*cannot implicitly be cast*Boolean.");
         }
     }
 }

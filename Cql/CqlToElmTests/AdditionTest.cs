@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 1 + 2
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Long_to_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Long_to_Long version '1.0.0'
 
                 define private Three: 1L + 2L
@@ -136,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Decimal_to_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Decimal version '1.0.0'
 
                 define private Three: -1.0 + 2.0
@@ -195,7 +195,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Quantity version '1.0.0'
 
                 define private Three: -1.0 '1' + 2.0 '1'
@@ -262,7 +262,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Integer_to_Long version '1.0.0'
 
                 define private Three: 1 + 2L
@@ -322,7 +322,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Integer_to_Decimal version '1.0.0'
 
                 define private Three: 1 + 2.0
@@ -382,7 +382,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Integer_to_Quantity version '1.0.0'
 
                 define private Three: 1 + 2.0 '1'
@@ -443,7 +443,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Long_to_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Long_to_Decimal version '1.0.0'
 
                 define private Three: 1L + 2.0
@@ -503,7 +503,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Long_to_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Integer_to_Quantity version '1.0.0'
 
                 define private Three: 1L + 2.0 '1'
@@ -564,7 +564,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Decimal_to_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Quantity version '1.0.0'
 
                 define private Three: -1.0 + 2.0 '1'
@@ -632,7 +632,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Long_to_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Long_to_Integer version '1.0.0'
 
                 define private Three: 1L + 2
@@ -688,7 +688,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Decimal_to_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Integer version '1.0.0'
 
                 define private Three: 5.25 + 2
@@ -744,7 +744,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Integer version '1.0.0'
 
                 define private Three: 5.25 '1' + 2
@@ -803,7 +803,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Decimal_to_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Long version '1.0.0'
 
                 define private Three: 5.25 + 2L
@@ -859,7 +859,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Quantity_to_Long version '1.0.0'
 
                 define private Three: 5.25 '1' + 2L
@@ -918,7 +918,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Quantity_to_Decimal version '1.0.0'
 
                 define private Three: 5.25 '1' + 2.0
@@ -981,7 +981,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Null_to_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Null_to_Integer version '1.0.0'
 
                 define private AddNull: null + 1
@@ -1036,7 +1036,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Null_to_Integer version '1.0.0'
 
                 define private AddNull: 1 + null
@@ -1094,7 +1094,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Date()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Quantity_to_Date version '1.0.0'
 
                 define private Three: @2023-01-01 + 1 month
@@ -1154,7 +1154,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Null_to_Date()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Quantity_to_Date version '1.0.0'
 
                 define private Three: @2023-01-01 + null
@@ -1210,7 +1210,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_DateTime()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Quantity_to_DateTime version '1.0.0'
 
                 define private Three: @2023-01-01T01:23:45.300+01:30 + 1 month
@@ -1277,7 +1277,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Null_to_DateTime()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Null_To_DateTime version '1.0.0'
 
                 define private Three: @2023-01-01T01:23:45.300+01:30 + null
@@ -1333,7 +1333,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Time()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DefaultConverter version '1.0.0'
 
                 define private Three: @T01:23:45 + 1 hour
@@ -1394,7 +1394,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Null_to_Time()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Null_To_DateTime version '1.0.0'
 
                 define private Three: @T01:23:45 + null
@@ -1450,23 +1450,24 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_DateTypes_to_Quantity()
         {
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library Add_Date_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @2023-01-01
-            ").ShouldReportError("Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}Date*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
+            ",
+            expectedError: "Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}Date*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
 
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library Add_Time_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @T01:23:45
-            ").ShouldReportError("Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}Time*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
+            ", expectedError: "Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}Time*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
 
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library Add_DateTime_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @2023-01-01T01:23:45.300+01:30
-            ").ShouldReportError("Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}DateTime*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
+            ", expectedError: "Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}DateTime*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
         }
 
         #endregion
@@ -1474,7 +1475,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Three_Decimals()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Decimal version '1.0.0'
 
                 define private Three: 1.0 + (2.0 + 3.0)
@@ -1530,7 +1531,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Two_Decimals()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Decimal_to_Decimal version '1.0.0'
 
                 define private Three: 1.0 '1' + (2.0 + 3.0)

@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Properly_Within_Start()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library InTest version '1.0.0'
 
                 define private Starts_Properly_Within_Start: Interval[@2023, @2030] starts properly within 1 year of start Interval[@2022, @2030]
@@ -48,7 +48,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Properly_Within_Start()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library InTest version '1.0.0'
 
                 define private Properly_Within_Start: Interval[@2023, @2030] properly within 1 year of start Interval[@2022, @2030]

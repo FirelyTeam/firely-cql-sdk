@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -20,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static T ShouldSucceed<T>(this T e) where T : Element
         {
-            e.GetErrors().Should().BeEmpty();
+            e.GetErrors().Where(e => e.errorSeverity == ErrorSeverity.error).Should().BeEmpty();
             return e;
         }
     }

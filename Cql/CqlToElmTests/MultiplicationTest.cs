@@ -24,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Integer_by_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_to_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 2 * 3
@@ -80,7 +80,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Integer_by_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_to_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 2 * 3L
@@ -136,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Integer_by_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_to_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 2 * 3.0
@@ -192,7 +192,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Integer_by_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_by_Quantity version '1.0.0'
 
                 define private Multiply_Integer_by_Quantity: 2 * 3.0 '1'
@@ -252,7 +252,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Integer_by_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_by_Null version '1.0.0'
 
                 define private Product: 1 * null
@@ -306,7 +306,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Null_by_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_by_Null version '1.0.0'
 
                 define private Product: null * 1
@@ -364,7 +364,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Long_by_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Long_by_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -2L * 3
@@ -420,7 +420,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Long_by_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Long_by_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -2L * 3L
@@ -476,7 +476,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Long_by_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Long_by_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -2L * 3.0
@@ -532,7 +532,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Long_by_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_by_Quantity version '1.0.0'
 
                 define private Multiply_Integer_by_Quantity: 2L * 3.0 '1'
@@ -591,7 +591,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Long_by_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Long_by_Null version '1.0.0'
 
                 define private Product: 1L * null
@@ -645,7 +645,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Null_by_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_by_Null version '1.0.0'
 
                 define private Product: null * 1L
@@ -703,7 +703,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Decimal_by_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Decimal_by_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 0.0 * 3
@@ -759,7 +759,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Decimal_by_Long()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Decimal_by_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 5.0 * 5L
@@ -815,7 +815,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Decimal_by_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Decimal_by_Integer version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -10.0 * 10.0
@@ -871,7 +871,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Decimal_by_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_by_Quantity version '1.0.0'
 
                 define private Multiply_Integer_by_Quantity: 2.0 * 3.0 '1'
@@ -930,7 +930,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Decimal_by_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Decimal_by_Null version '1.0.0'
 
                 define private Product: 1.0 * null
@@ -984,7 +984,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Null_by_Decimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Integer_by_Null version '1.0.0'
 
                 define private Product: null * 1.0
@@ -1042,7 +1042,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Quantity_by_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Quantity_by_Quantity version '1.0.0'
 
                 define private Multiply_Quantity_by_Quantity: 3.0 '1' * 2.0 '1'
@@ -1101,7 +1101,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Quantity_by_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Quantity_by_Null version '1.0.0'
 
                 define private Multiply_Quantity_by_Null: 3.0 '1' * null
@@ -1156,7 +1156,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multiply_Null_by_Quantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Multiply_Null_by_Quantity version '1.0.0'
 
                 define private Multiply_Null_by_Quantity: null * 3.0 '1'

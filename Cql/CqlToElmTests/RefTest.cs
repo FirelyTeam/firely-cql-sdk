@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Local()
         {
-            var library = DefaultConverter.ConvertLibrary($@"
+            var library = MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 valueset ""vs"": 'http://xyz.com'
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Local()
         {
-            var library = DefaultConverter.ConvertLibrary($@"
+            var library = MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
@@ -57,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_Local()
         {
-            var library = DefaultConverter.ConvertLibrary($@"
+            var library = MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Local()
         {
-            var library = DefaultConverter.ConvertLibrary($@"
+            var library = MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
@@ -100,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter()
         {
-            var library = DefaultConverter.ConvertLibrary($@"
+            var library = MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private parameter ""Measurement Year"" System.Integer default 2023
