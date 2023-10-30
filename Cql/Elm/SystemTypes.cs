@@ -47,25 +47,28 @@ namespace Hl7.Cql.Elm
         internal static ParameterTypeSpecifier Generic(string name) =>
             gtpTsSingletons.GetOrAdd(name, n => new ParameterTypeSpecifier { parameterName = n });
 
-        private static NamedTypeSpecifier makeNT(string name) => bootstrapSystemModel.MakeQualifiedTypeName(name).ToNamedType();
+        /// <summary>
+        /// Create a new instance of a NamedType, given the name of a system type.
+        /// </summary>
+        public static NamedTypeSpecifier CreateNamedType(string name) => bootstrapSystemModel.MakeQualifiedTypeName(name).ToNamedType();
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        public static NamedTypeSpecifier AnyType = makeNT("Any");
-        public static NamedTypeSpecifier IntegerType = makeNT("Integer");
-        public static NamedTypeSpecifier LongType = makeNT("Long");
-        public static NamedTypeSpecifier DecimalType = makeNT("Decimal");
-        public static NamedTypeSpecifier QuantityType = makeNT("Quantity");
-        public static NamedTypeSpecifier StringType = makeNT("String");
-        public static NamedTypeSpecifier DateType = makeNT("Date");
-        public static NamedTypeSpecifier TimeType = makeNT("Time");
-        public static NamedTypeSpecifier DateTimeType = makeNT("DateTime");
-        public static NamedTypeSpecifier BooleanType = makeNT("Boolean");
-        public static NamedTypeSpecifier RatioType = makeNT("Ratio");
-        public static NamedTypeSpecifier CodeType = makeNT("Code");
-        public static NamedTypeSpecifier ConceptType = makeNT("Concept");
-        public static NamedTypeSpecifier VocabularyType = makeNT("Vocabulary");
-        public static NamedTypeSpecifier ValueSetType = makeNT("ValueSet");
-        public static NamedTypeSpecifier CodeSystemType = makeNT("CodeSystem");
+        public static NamedTypeSpecifier AnyType = CreateNamedType("Any");
+        public static NamedTypeSpecifier IntegerType = CreateNamedType("Integer");
+        public static NamedTypeSpecifier LongType = CreateNamedType("Long");
+        public static NamedTypeSpecifier DecimalType = CreateNamedType("Decimal");
+        public static NamedTypeSpecifier QuantityType = CreateNamedType("Quantity");
+        public static NamedTypeSpecifier StringType = CreateNamedType("String");
+        public static NamedTypeSpecifier DateType = CreateNamedType("Date");
+        public static NamedTypeSpecifier TimeType = CreateNamedType("Time");
+        public static NamedTypeSpecifier DateTimeType = CreateNamedType("DateTime");
+        public static NamedTypeSpecifier BooleanType = CreateNamedType("Boolean");
+        public static NamedTypeSpecifier RatioType = CreateNamedType("Ratio");
+        public static NamedTypeSpecifier CodeType = CreateNamedType("Code");
+        public static NamedTypeSpecifier ConceptType = CreateNamedType("Concept");
+        public static NamedTypeSpecifier VocabularyType = CreateNamedType("Vocabulary");
+        public static NamedTypeSpecifier ValueSetType = CreateNamedType("ValueSet");
+        public static NamedTypeSpecifier CodeSystemType = CreateNamedType("CodeSystem");
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>

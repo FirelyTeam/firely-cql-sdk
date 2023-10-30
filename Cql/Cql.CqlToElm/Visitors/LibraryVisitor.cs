@@ -182,22 +182,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     break;
                                 case cqlParser.ContextDefinitionContext ctx:
                                     {
-                                        var contextDef = ctx.Parse();
+                                        var (namedType, contextDef) = ctx.Parse(LibraryContext);
                                         LibraryContext.ActiveContext = contextDef;
 
                                         if (!contextStatements.ContainsKey(contextDef.name))
                                         {
-                                            var resolveResult = LibraryContext.ResolveDottedTypeName(contextDef.name)
-                                                ?? throw new InvalidOperationException($"Could not resolve context type {contextDef.name}");
-
-                                            var typeName = resolveResult.ToNamedType();
-                                            var exprName = contextDef.name.Split('.').Last();
+                                            var (_, exprName) = namedType.GetNameComponents();
 
                                             var retrieve = new Retrieve
                                             {
-                                                dataType = typeName.name,
-                                                templateId = ModelProvider.GetDefaultProfileUriForType(typeName),
-                                            }.WithLocator(ctx.Locator()).WithResultType(typeName.ToListType());
+                                                dataType = namedType.name,
+                                                templateId = ModelProvider.GetDefaultProfileUriForType(namedType),
+                                            }.WithLocator(ctx.Locator()).WithResultType(namedType.ToListType());
 
                                             Expression singleton = SystemLibrary.SingletonFrom.Call(ModelProvider, ctx, retrieve);
 

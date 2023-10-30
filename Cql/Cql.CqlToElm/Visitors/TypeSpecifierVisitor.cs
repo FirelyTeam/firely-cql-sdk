@@ -1,6 +1,7 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -84,9 +85,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
             var unqualified = (UnqualifiedTypeNameSpecifier)Visit(context.referentialOrTypeNameIdentifier());
 
-            var typeName = string.Join('.', qualifiers.Append(unqualified.UnqualifiedName));
-            var ts = LibraryContext.ResolveDottedTypeName(typeName);
-            return ts.ToNamedType().WithLocator(context.Locator());
+            if (qualifiers.Length > 1)
+                throw new InvalidOperationException($"Multiple qualifiers not supported.");
+
+            _ = LibraryContext.TryResolveNamedTypeSpecifier(qualifiers.SingleOrDefault(), unqualified.UnqualifiedName, out var result, out var error);
+
+            if (error is not null) result.AddError(error, ErrorType.semantic);
+
+            return result.WithLocator(context.Locator());
         }
 
         // : identifier | keywordIdentifier;

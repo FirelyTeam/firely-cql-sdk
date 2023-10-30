@@ -17,10 +17,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else if (context.keywordIdentifier() is { } kwi)
                 identifier = kwi.GetText();
             else
-                throw new InvalidOperationException($"Unexpected referential identifier child");
+                throw new InvalidOperationException($"Unexpected referential identifier child.");
 
-            return LibraryContext.Ref(null, identifier)?.WithLocator(context.Locator()) ??
-                    throw new InvalidOperationException($"Unable to resolve identifier {identifier}");
+            var reference = LibraryContext.Ref(null, identifier);
+            reference ??= new Null { resultTypeSpecifier = SystemTypes.AnyType }
+                .AddError("Unable to resolve identifier {identifier}.", ErrorType.semantic);
+
+            return reference.WithLocator(context.Locator());
         }
     }
 }

@@ -70,18 +70,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
         public static UsingDef Parse(this cqlParser.UsingDefinitionContext context, IModelProvider provider)
         {
-            var usingDef = new UsingDef();
-
+            // Although the rule allows for multiple qualifiers, it is not clear what a qualified model name would mean.
+            // For now, we take the whole qualified name as the name of the model.
             var (ns, id) = context.qualifiedIdentifier().Parse();
+            var modelName = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
+            var modelVersion = context.versionSpecifier()?.STRING().ParseString();
+            var localIdentifier = context.localIdentifier()?.identifier().Parse();
 
-            usingDef.version = context.versionSpecifier()?.STRING().ParseString();
-            usingDef.localIdentifier = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
-            var model = provider.ModelFromName(usingDef.localIdentifier, usingDef.version)
-                ?? throw new InvalidOperationException($"Model {usingDef.localIdentifier} version {usingDef.version ?? "<unspecified>"} is not available.");
-            usingDef.uri = model.url;
+            var model = provider.ModelFromName(modelName, modelVersion)
+                ?? throw new InvalidOperationException($"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.");
 
-            if (context.localIdentifier() is { } localId)
-                usingDef.localIdentifier = localId.identifier().Parse();
+            var usingDef = new UsingDef()
+            {
+                uri = model.url,
+                version = modelVersion,
+                localIdentifier = localIdentifier ?? modelName,
+            };
 
             return usingDef.WithLocator(context.Locator());
         }
@@ -110,7 +114,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (qualifiers.Any())
             {
                 if (qualifiers.Length > 1)
-                    throw new InvalidOperationException($"Multiple qualifiers not supported");
+                    throw new InvalidOperationException($"Multiple qualifiers not supported.");
 
                 return (qualifiers.Single(), context.identifier().Parse()!);
             }
@@ -231,17 +235,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         //    : 'context' (modelIdentifier '.')? identifier
-        public static ContextDef Parse(this cqlParser.ContextDefinitionContext context)
+        public static (NamedTypeSpecifier type, ContextDef cd) Parse(this cqlParser.ContextDefinitionContext context, LibraryContext library)
         {
-            var identifier = context.identifier().Parse();
+            var identifier = context.identifier().Parse()!;
+            var modelIdentifier = context.modelIdentifier()?.identifier().Parse();
 
-            if (context.modelIdentifier() is { } mic)
-                identifier = $"{mic.identifier().Parse()}.{identifier}";
+            _ = library.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
 
-            return new ContextDef
+            var cd = new ContextDef
             {
-                name = identifier
-            };
+                name = modelIdentifier is null ? identifier : $"{modelIdentifier}.{identifier}"
+            }.WithLocator(context.Locator());
+
+            if (error is not null) cd.AddError(error, ErrorType.semantic);
+
+            return (namedType, cd);
         }
 
         // 'define' accessModifier? identifier ':' expression

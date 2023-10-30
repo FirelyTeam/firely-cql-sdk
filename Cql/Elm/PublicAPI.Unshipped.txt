@@ -755,6 +755,7 @@ static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.ConceptType -> Hl7.Cql.Elm.NamedTypeSpecifier!
+static Hl7.Cql.Elm.SystemTypes.CreateNamedType(string! name) -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.DateTimeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.DateType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.DecimalType -> Hl7.Cql.Elm.NamedTypeSpecifier!

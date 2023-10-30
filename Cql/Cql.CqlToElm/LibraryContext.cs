@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,6 +20,14 @@ namespace Hl7.Cql.CqlToElm
         public Library ActiveLibrary { get; set; } = new Library();
         public ContextDef? ActiveContext { get; set; }
 
+        /// <summary>
+        /// Returns a reference to a user-defined ValueSet, CodeSystem, Concept, Code, Parameter, Definition or Context.
+        /// </summary>
+        /// <param name="qualifier"></param>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
+        /// <exception cref="InvalidOperationException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         internal Expression? Ref(string? qualifier, string identifier)
         {
             Library library;
@@ -84,52 +91,61 @@ namespace Hl7.Cql.CqlToElm
             }
         }
 
-        private IEnumerable<ModelResolveResult> matchDottedTypeName(string dottedName)
-        {
-            var parts = dottedName.Split(".");
-            var usings = parts.Length == 2 ?
-                ActiveLibrary.usings.Where(u => u.localIdentifier == parts[0]) :
-                ActiveLibrary.usings;
 
-            var name = parts.Length == 2 ? parts[1] : parts[0];
+        internal bool TryResolveTypeIdentifier(string? qualifier, string typeName, out ModelResolveResult? result, out string? error)
+        {
+            // If the typename is qualified, only look in the specified model, otherwise try all models.
+            var usings = ActiveLibrary.usings;
+            result = null;
+
+            if (qualifier is not null)
+            {
+                usings = usings.Where(u => u.localIdentifier == qualifier).ToArray();
+
+                if (usings.Length > 1)
+                {
+                    error = $"Ambiguous qualifier '{qualifier}', matches {modelNamesList(usings.Select(u => (u.uri, u.version)))}.";
+                    return false;
+                }
+                else if (usings.Length == 0)
+                {
+                    error = $"There is no model matching qualifier '{qualifier}'.";
+                    return false;
+                }
+            }
+
+            var matches = new List<ModelResolveResult>();
 
             foreach (var @using in usings)
             {
-                var namedType = QualifiedName.MakeQualifiedTypeName(@using.uri, name).ToNamedType();
-                if (ModelProvider.TryResolveFromNamedType(namedType, out var result))
-                    yield return result!;
+                if (ModelProvider.TryFindTypeInfoByName(@using.uri, typeName, out var typeInfo, out var model))
+                    matches.Add(new ModelResolveResult(model!, typeInfo!));
             }
+
+            error = matches.Count switch
+            {
+                0 => $"There is no type named '{typeName}' in model(s) {modelNamesList(usings.Select(u => (u.uri, u.version)))}.",
+                > 1 => $"Ambiguous type name '{typeName}', matches {modelNamesList(matches.Select(m => (m.Model.url, m.Model.version)))}.",
+                _ => null,
+            };
+
+            result = matches.FirstOrDefault();
+            return matches.Count == 1;
+
+            static string modelNamesList(IEnumerable<(string uri, string version)> models) =>
+                string.Join(", ", models.Select(m => $"{m.uri} (version {m.version ?? "unspecified"})"));
         }
 
-
-        /// <summary>
-        /// Given the literal (qualified) identifier for a type, returns the NamedTypeSpecifier for the type, 
-        /// or throws an exception if the type is not found or is ambiguous.
-        /// </summary>
-        /// <param name="dottedName">A (possibly) qualified identifier for a type.</param>
-        /// <returns></returns>
-        internal ModelResolveResult ResolveDottedTypeName(string dottedName)
+        internal bool TryResolveNamedTypeSpecifier(string? qualifier, string typeName, out NamedTypeSpecifier namedType, out string? error)
         {
-            var types = matchDottedTypeName(dottedName).ToArray();
+            var success = TryResolveTypeIdentifier(qualifier, typeName, out var result, out error);
 
-            if (types.Length == 1)
-            {
-                return types[0];
-            }
-            else if (types.Length == 0)
-            {
-                var message = $"No type named {dottedName} found in any model.";
-                var ex = new InvalidOperationException(message);
-                Log.LogCritical(ex, ex.Message);
-                throw ex;
-            }
+            if (result is null)
+                namedType = new NamedTypeSpecifier { name = Model.QualifiedName.MakeQualifiedTypeName(qualifier ?? "nosystem", typeName) };
             else
-            {
-                var message = $"Ambiguous type name {dottedName}.";
-                var ex = new InvalidOperationException(message);
-                Log.LogCritical(ex, ex.Message);
-                throw ex;
-            }
+                namedType = result.ToNamedType();
+
+            return success;
         }
     }
 }

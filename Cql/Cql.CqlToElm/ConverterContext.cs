@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm
         {
             if (GetLibrary(library.identifier.id, library.identifier.version) == null)
                 Libraries.Add(library);
-            else throw new ArgumentException($"Library already exists", nameof(library));
+            else throw new ArgumentException($"Library already exists.", nameof(library));
         }
 
     }

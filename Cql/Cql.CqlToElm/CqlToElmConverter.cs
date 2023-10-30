@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm
                 {
                     var library = visitor.Visit(parser.library());
 
-                    if (library.GetErrors().Any())
+                    if (library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
                         Logger.LogWarning("Parsed ELM tree contains errors.");
 
                     return library;
