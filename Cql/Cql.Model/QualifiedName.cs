@@ -11,7 +11,7 @@ using System.Xml;
 
 namespace Hl7.Cql.Model
 {
-    public static class ModelInfoExtensions
+    public static class QualifiedName
     {
         /// <summary>
         /// Qualifies <paramref name="typeName"/> with the namespace in <paramref name="model"/>.
@@ -19,7 +19,13 @@ namespace Hl7.Cql.Model
         /// <param name="model">The model containing <paramref name="typeName"/>.</param>
         /// <param name="typeName">The name to qualify.</param>
         /// <returns>A string in the form {<see cref="ModelInfo.url"/>}<paramref name="typeName"/></returns>
-        public static XmlQualifiedName MakeQualifiedTypeName(this ModelInfo model, string typeName) => new($"{{{model.url}}}{typeName}");
+        public static XmlQualifiedName MakeQualifiedTypeName(this ModelInfo model, string typeName) =>
+            MakeQualifiedTypeName(model.url, typeName);
+
+        /// <summary>
+        /// Build an <see cref="XmlQualifiedName"/> based on a type's url and name.
+        /// </summary>
+        public static XmlQualifiedName MakeQualifiedTypeName(string url, string typeName) => new($"{{{url}}}{typeName}");
 
     }
 }

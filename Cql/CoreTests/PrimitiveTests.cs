@@ -26,6 +26,7 @@ namespace CoreTests
     {
         private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
         private static readonly Hl7.Cql.Conversion.TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        private static readonly ExpressionBuilderOptions ignoreErrors = new ExpressionBuilderOptions { IgnoreElmErrorAnnotations = true };
 
 
         private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
@@ -3507,7 +3508,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger, ignoreErrors);
             var expressions = eb.Build();
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())

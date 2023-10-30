@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -10,6 +9,7 @@
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
 using System;
+using CM = System.ComponentModel;
 
 namespace Hl7.Cql.Compiler
 {
@@ -21,5 +21,15 @@ namespace Hl7.Cql.Compiler
             converter.AddConversion<string, DateTimePrecision>(Enum.Parse<DateTimePrecision>);
             return converter;
         }
+
+        public static CM.ListSortDirection ListSortOrder(this SortDirection direction) => direction switch
+        {
+            SortDirection.asc => CM.ListSortDirection.Ascending,
+            SortDirection.ascending => CM.ListSortDirection.Ascending,
+            SortDirection.desc => CM.ListSortDirection.Descending,
+            SortDirection.descending => CM.ListSortDirection.Descending,
+            _ => throw new ArgumentException($"Unrecognized sort direction {Enum.GetName(typeof(SortDirection), direction)}")
+        };
+
     }
 }

@@ -30,12 +30,12 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private Retrieve_AllTerms: [Patient->Condition: code in ""terminology""]
             ");
             Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Retrieve));
+            Assert.AreEqual(2, library.statements.Length);
+            Assert.IsNotNull(library.statements[1].expression.localId);
+            Assert.IsNotNull(library.statements[1].expression.locator);
+            Assert.IsInstanceOfType(library.statements[1].expression, typeof(Retrieve));
             {
-                var retrieve = (Retrieve)library.statements[0].expression;
+                var retrieve = (Retrieve)library.statements[1].expression;
                 Assert.IsNotNull(retrieve.context);
                 Assert.IsInstanceOfType(retrieve.context, typeof(ExpressionRef));
                 {

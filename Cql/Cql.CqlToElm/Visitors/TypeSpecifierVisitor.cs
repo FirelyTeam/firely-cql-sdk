@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,17 +23,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         public TypeSpecifierVisitor(
-            IServiceProvider services,
             LibraryContext libraryContext,
-            TupleElementDefinitionVisitor tedVisitor) : base(services)
+            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
         {
             LibraryContext = libraryContext;
-            TupleElementDefinitionVisitor = tedVisitor;
         }
 
         private readonly LibraryContext LibraryContext;
-        private TupleElementDefinitionVisitor TupleElementDefinitionVisitor { get; }
-
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
         public override TypeSpecifier VisitChoiceTypeSpecifier([NotNull] cqlParser.ChoiceTypeSpecifierContext context)
@@ -76,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var tuple = new TupleTypeSpecifier
             {
-                element = context.tupleElementDefinition().Select(TupleElementDefinitionVisitor.Visit).ToArray(),
+                element = context.tupleElementDefinition().Select(ted => ted.Parse(this)).ToArray(),
             }.WithLocator(context.Locator());
 
             return tuple;
@@ -91,7 +86,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var typeName = string.Join('.', qualifiers.Append(unqualified.UnqualifiedName));
             var ts = LibraryContext.ResolveDottedTypeName(typeName);
-            return ts.WithLocator(context.Locator());
+            return ts.ToNamedType().WithLocator(context.Locator());
         }
 
         // : identifier | keywordIdentifier;

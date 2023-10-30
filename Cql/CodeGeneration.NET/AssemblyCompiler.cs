@@ -86,7 +86,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new(false));
+                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new());
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }

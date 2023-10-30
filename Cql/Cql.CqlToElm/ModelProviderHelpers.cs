@@ -9,9 +9,30 @@ namespace Hl7.Cql.CqlToElm
     /// <summary>
     /// Additional function built on top of the <see cref="IModelProvider"/> and <see cref="ModelInfo"/> classes.
     /// </summary>
-    public static class ModelProviderHelpers
+    internal static class ModelProviderHelpers
     {
         private static readonly Regex QualifiedNameExpression = new("{(?'uri'.*)}(?'name'.*)", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Returns the name for a given <see cref="TypeInfo"/>.
+        /// </summary>
+        /// <returns>The name for a <see cref="SimpleTypeInfo"/> or <see cref="ClassInfo"/> or null otherwise.</returns>
+        public static string? GetNameFromTypeInfo(this TypeInfo ti)
+        {
+            var (ns, name) = ti switch
+            {
+                SimpleTypeInfo sti => (sti.@namespace, sti.name),
+                ClassInfo c => (c.@namespace, c.name),
+                _ => (null, null)
+            };
+
+            if (ns is null && name is null)
+                return null;
+            else if (ns is null) // if there is no namespace, it is part of the name
+                return name?.Split('.', 2).LastOrDefault();
+            else
+                return name;
+        }
 
         /// <summary>
         /// Gets the <see cref="TypeInfo"/> named <paramref name="name"/> in <paramref name="model"/>.
@@ -20,44 +41,19 @@ namespace Hl7.Cql.CqlToElm
         /// <param name="name">The name of the type, optionally prefixed with the name of the model.</param>
         /// <param name="result">The <see cref="TypeInfo"/>, if found.</param>
         /// <returns><see langword="true"/> if the info was found.</returns>
-        public static bool TryGetTypeInfoFor(this ModelInfo model, string name, out TypeInfo? result)
+        private static bool tryGetTypeInfoFor(this ModelInfo model, string name, out TypeInfo? result)
         {
-            var (nonDottedName, dottedName) = name.StartsWith(model.name + ".") ?
-                (name[(model.name.Length + 1)..], name) :
-                (name, model.name + "." + name);
+            var nonDottedName = name.StartsWith(model.name + ".") ?
+                name[(model.name.Length + 1)..] : name;
 
-            // Unfortunately, the typeInfo.name property will sometimes be qualified, sometimes not,
-            // so check for both variations.
-            var typeInfo = from ti in model.typeInfo
-                           let n = nameFromModelElement(ti)
-                           where n == dottedName || n == nonDottedName
+            var typeInfo = from ti in model.typeInfo ?? Enumerable.Empty<TypeInfo>()
+                           let n = ti.GetNameFromTypeInfo()
+                           where n == nonDottedName
                            select ti;
 
             result = typeInfo.FirstOrDefault();
             return result is not null;
-
-            static string? nameFromModelElement(TypeInfo ti) => ti switch
-            {
-                SimpleTypeInfo sti => sti.name,
-                ClassInfo c => c.name,
-                _ => null
-            };
         }
-
-        /// <summary>
-        /// Gets the <see cref="TypeInfo"/> named <paramref name="name"/> in <paramref name="model"/>.
-        /// </summary>
-        /// <param name="model">The model to interrogate.</param>
-        /// <param name="name">The name of the type, optionally prefixed with the name of the model.</param>
-        /// <exception cref="InvalidOperationException">If the info for the type was not found in the model.</exception>
-        public static TypeInfo TypeInfoFor(this ModelInfo model, string name)
-        {
-            if (model.TryGetTypeInfoFor(name, out var typeInfo))
-                return typeInfo!;
-            else
-                throw new InvalidOperationException($"Type {name} not found in model {model.name}.");
-        }
-
 
         /// <summary>
         /// Gets the model uri and name for the type specified by <paramref name="nt"/>.
@@ -65,7 +61,7 @@ namespace Hl7.Cql.CqlToElm
         /// <param name="nt">A <see cref="Elm.NamedTypeSpecifier"/> with a name in the form <c>{uri}type</c>.</param>
         /// <returns>The uri and the type parts of the name in the specifier.</returns>
         /// <exception cref="ArgumentException">If the name does not match the expected pattern.</exception>
-        public static (string uri, string name) GetNamedTypeComponents(this Elm.NamedTypeSpecifier nt)
+        public static (string uri, string name) GetNameComponents(this Elm.NamedTypeSpecifier nt)
         {
             var match = QualifiedNameExpression.Match(nt.name.Name);
             return match.Success ? (match.Groups["uri"].Value, match.Groups["name"].Value) :
@@ -73,32 +69,26 @@ namespace Hl7.Cql.CqlToElm
         }
 
         /// <summary>
-        /// Gets the model for the type specified by <paramref name="nt"/>.
+        /// Uses the provider to resolve a type specified by a <see cref="Elm.NamedTypeSpecifier"/> .
         /// </summary>
-        /// <param name="provider">The <see cref="IModelProvider"/> supplfying the models.</param>
-        /// <param name="nt">A <see cref="Elm.NamedTypeSpecifier"/> with a name in the form {uri}type.</param>
-        /// <exception cref="InvalidOperationException">If the model is not found.</exception>
-        public static ModelInfo ModelFromNamedType(this IModelProvider provider, Elm.NamedTypeSpecifier nt)
+        /// <param name="provider">The <see cref="IModelProvider"/> supplying the models.</param>
+        /// <param name="nt">A <see cref="Elm.NamedTypeSpecifier"/>.</param>
+        /// <param name="result">The <see cref="ModelResolveResult"/> if the type was found.</param>
+        /// <returns>True is the type was found, false otherwise.</returns>
+        public static bool TryResolveFromNamedType(this IModelProvider provider, Elm.NamedTypeSpecifier nt, out ModelResolveResult result)
         {
-            var (uri, _) = nt.GetNamedTypeComponents();
+            var (uri, name) = nt.GetNameComponents();
             if (provider.ModelFromUri(uri) is ModelInfo model)
-                return model;
+            {
+                if (model.tryGetTypeInfoFor(name, out var ti))
+                    result = new(model, ti!);
+                else
+                    result = new(model, null);
+            }
             else
-                throw new InvalidOperationException($"Type {nt} uses unknown model {uri}.");
-        }
+                result = new(null, null);
 
-        /// <summary>
-        /// Returns the <see cref="TypeInfo"/> for the type specified by <paramref name="nt"/>.
-        /// </summary>
-        /// <param name="provider">The <see cref="IModelProvider"/> supplfying the models.</param>
-        /// <param name="nt">A <see cref="Elm.NamedTypeSpecifier"/> with a name in the form {uri}type.</param>
-        /// <exception cref="InvalidOperationException">If the type was not found.</exception>
-        public static TypeInfo TypeInfoForNamedType(this IModelProvider provider, Elm.NamedTypeSpecifier nt)
-        {
-            var (_, name) = nt.GetNamedTypeComponents();
-            var model = provider.ModelFromNamedType(nt);
-
-            return model.TypeInfoFor(name);
+            return result.Model is not null && result.Type is not null;
         }
 
         private static Elm.NamedTypeSpecifier typeSpecifierForQualifiedName(IModelProvider provider, ModelInfo local, string qualifiedName)
@@ -108,7 +98,7 @@ namespace Hl7.Cql.CqlToElm
             var resolvingModel = model switch
             {
                 null => local,
-                string when qualifiedName == local.name => local,
+                string when model == local.name => local,
                 string => provider.ModelFromName(model) ?? throw new InvalidOperationException($"Type {qualifiedName} references an unknown model {model}.")
             };
 
@@ -130,12 +120,12 @@ namespace Hl7.Cql.CqlToElm
         /// may return null.</remarks>
         public static string? GetDefaultProfileUriForType(this IModelProvider provider, Elm.NamedTypeSpecifier type)
         {
-            var model = provider.ModelFromNamedType(type);
+            if (!provider.TryResolveFromNamedType(type, out var result)) return null;
 
             // this lookup isn't even necessary, but it's what we would do in a "real" implementation, if it ever exists.
-            if (model.url == "http://hl7.org/fhir")
+            if (result.Model!.url == "http://hl7.org/fhir")
             {
-                var (_, name) = GetNamedTypeComponents(type);
+                var name = result.Type!.GetNameFromTypeInfo();
                 return $"http://hl7.org/fhir/StructureDefinition/{name}";
             }
             else
@@ -153,11 +143,14 @@ namespace Hl7.Cql.CqlToElm
                 return true;
             else if (subType is Elm.NamedTypeSpecifier subtypeNT && superType is Elm.NamedTypeSpecifier)
             {
-                var subtypeBaseTypeName = provider.TypeInfoForNamedType(subtypeNT).baseType;
+                var subTypeInfo = provider.TryResolveFromNamedType(subtypeNT, out var sti) ?
+                    sti! : throw new InvalidOperationException($"Type {subtypeNT.name} not found in model {sti.Model?.name}.");
+
+                var subtypeBaseTypeName = subTypeInfo.Type!.baseType;
 
                 if (subtypeBaseTypeName is not null)
                 {
-                    var localModel = provider.ModelFromNamedType(subtypeNT);
+                    var localModel = subTypeInfo.Model!;
                     var subtypeBaseType = typeSpecifierForQualifiedName(provider, localModel, subtypeBaseTypeName);
                     return subtypeBaseType.IsSubtypeOf(superType, provider);
                 }
@@ -194,7 +187,5 @@ namespace Hl7.Cql.CqlToElm
             else
                 return false;
         }
-
-
     }
 }

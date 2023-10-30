@@ -3,7 +3,6 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -12,15 +11,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // | expression 'is' 'not'? ('null' | 'true' | 'false')                                            #booleanExpression
         public override Expression VisitBooleanExpression([NotNull] cqlParser.BooleanExpressionContext context)
         {
-            var lastChild = Keyword.Parse(context.children[^1]).Single();
-            var isNot = Keyword.Parse(context.children[^2]).Single() == CqlKeyword.Not;
+            var lastChild = context.children[^1].GetText();
+            var isNot = context.children[^2].GetText() == "not";
             var operand = Visit(context.expression());
 
             Expression boolean = lastChild switch
             {
-                CqlKeyword.Null => SystemLibrary.IsNull.Call(ModelProvider, context, operand),
-                CqlKeyword.True => SystemLibrary.IsTrue.Call(ModelProvider, context, operand),
-                CqlKeyword.False => SystemLibrary.IsFalse.Call(ModelProvider, context, operand),
+                "null" => SystemLibrary.IsNull.Call(ModelProvider, context, operand),
+                "true" => SystemLibrary.IsTrue.Call(ModelProvider, context, operand),
+                "false" => SystemLibrary.IsFalse.Call(ModelProvider, context, operand),
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
             };
 
@@ -65,59 +64,57 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitPredecessorExpressionTerm([NotNull] cqlParser.PredecessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
+            var call = SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
 
-            if (operand.resultTypeSpecifier.IsValidOrderedType())
-            {
-                return SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
-            }
-            else
-                throw UnresolvedSignature(nameof(Predecessor), operand);
+            if (!operand.resultTypeSpecifier.IsValidOrderedType())
+                call.AddError("Predecessor can only be applied to types that are ordered.", ErrorType.semantic);
+
+            return call;
         }
 
         //     | 'successor' 'of' expressionTerm                                               #successorExpressionTerm
         public override Expression VisitSuccessorExpressionTerm([NotNull] cqlParser.SuccessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
+            var call = SystemLibrary.Successor.Call(ModelProvider, context, operand);
 
-            if (operand.resultTypeSpecifier.IsValidOrderedType())
-            {
-                return SystemLibrary.Successor.Call(ModelProvider, context, operand);
-            }
-            else
-                throw UnresolvedSignature(nameof(Successor), operand);
+            if (!operand.resultTypeSpecifier.IsValidOrderedType())
+                call.AddError("Successor can only be applied to types that are ordered.", ErrorType.semantic);
+
+            return call;
         }
 
         //   | ('start' | 'end') 'of' expressionTerm                                         #timeBoundaryExpressionTerm
         public override Expression VisitTimeBoundaryExpressionTerm([NotNull] cqlParser.TimeBoundaryExpressionTermContext context)
         {
-            var startOrEnd = Keyword.Parse(context.GetChild(0)).Single();
+            var startOrEnd = context.GetChild(0).GetText();
             var operand = Visit(context.expressionTerm());
 
             return startOrEnd switch
             {
-                CqlKeyword.Start => SystemLibrary.Start.Call(ModelProvider, context, operand),
-                CqlKeyword.End => SystemLibrary.End.Call(ModelProvider, context, operand),
-                _ => throw UnresolvedSignature("Start", operand)
+                "start" => SystemLibrary.Start.Call(ModelProvider, context, operand),
+                "end" => SystemLibrary.End.Call(ModelProvider, context, operand),
+                _ => throw new InvalidOperationException($"Parser returned unknown start or end keyword '{startOrEnd}' in a time boundary expression.")
             };
         }
 
         //    ('minimum' | 'maximum') namedTypeSpecifier                                    #typeExtentExpressionTerm
         public override Expression VisitTypeExtentExpressionTerm([NotNull] cqlParser.TypeExtentExpressionTermContext context)
         {
-            var extent = Keyword.Parse(context.GetChild(0)).Single();
+            var extent = context.GetChild(0).GetText();
             var typeSpecifier = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
-            if (typeSpecifier.IsValidOrderedType())
+            Expression call = extent switch
             {
-                return extent switch
-                {
-                    CqlKeyword.Minimum => SystemLibrary.MinValue.Build(typeSpecifier, context),
-                    CqlKeyword.Maximum => SystemLibrary.MaxValue.Build(typeSpecifier, context),
-                    _ => throw Critical($"Unexpected extent: {extent}")
-                };
-            }
-            else
-                throw UnresolvedSignature(extent.ToString(), new Null().WithResultType(typeSpecifier));
+                "minimum" => SystemLibrary.MinValue.Build(typeSpecifier, context),
+                "maximum" => SystemLibrary.MaxValue.Build(typeSpecifier, context),
+                _ => throw new InvalidOperationException($"Parser returned unknown extent '{extent}' in a type extent expression.")
+            };
+
+            if (!typeSpecifier.IsValidOrderedType())
+                call.AddError($"Can only determine {extent} for types that are ordered.", ErrorType.semantic);
+
+            return call;
         }
 
         //   'width' expressionTerm                                                          #widthExpressionTerm
@@ -132,13 +129,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitTypeExpression([NotNull] cqlParser.TypeExpressionContext context)
         {
             var lhs = Visit(context.expression());
-            var @operator = Keyword.Parse(context.GetChild(1)).Single();
+            var @operator = context.GetChild(1).GetText();
             var typeSpec = TypeSpecifierVisitor.Visit(context.typeSpecifier());
 
             Expression? expression = @operator switch
             {
-                CqlKeyword.Is => SystemLibrary.Is.Build(typeSpec, lhs, context),
-                CqlKeyword.As => SystemLibrary.As.Build(false, typeSpec, lhs, context),
+                "is" => SystemLibrary.Is.Build(typeSpec, lhs, context),
+                "as" => SystemLibrary.As.Build(false, typeSpec, lhs, context),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in a type expression.")
             };
 

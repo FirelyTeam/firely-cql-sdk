@@ -4,7 +4,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -1451,21 +1450,23 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_DateTypes_to_Quantity()
         {
-            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                 library Add_Date_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @2023-01-01
-            "));
-            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
+            ").ShouldReportError("Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}Date*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
+
+            DefaultConverter.ConvertLibrary(@"
                 library Add_Time_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @T01:23:45
-            "));
-            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
+            ").ShouldReportError("Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}Time*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
+
+            DefaultConverter.ConvertLibrary(@"
                 library Add_DateTime_to_Quantity version '1.0.0'
 
                 define private Test: 1 month + @2023-01-01T01:23:45.300+01:30
-            "));
+            ").ShouldReportError("Cannot resolve call*the second argument*{urn:hl7-org:elm-types:r1}DateTime*cannot implicitly be cast*type {urn:hl7-org:elm-types:r1}Quantity.");
         }
 
         #endregion

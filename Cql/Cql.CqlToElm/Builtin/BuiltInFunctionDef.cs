@@ -60,6 +60,20 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return new BuiltInFunctionDef(name, newOperands.Select(o => o.operandTypeSpecifier), newResultType, ElmNodeType);
         }
 
+        public static FunctionDef ReplaceGenericParameters(FunctionDef def, GenericParameterAssignments replacements)
+        {
+            var newOperands = def.operand.Select(o => 
+                new OperandDef 
+                { 
+                    name = o.name, 
+                    operandTypeSpecifier =  o.operandTypeSpecifier.ReplaceGenericParameters(replacements), 
+                    operandType = o.operandTypeSpecifier.ReplaceGenericParameters(replacements).TryToQualifiedName() 
+                }).ToArray();
+
+            var newResultType = def.resultTypeSpecifier.ReplaceGenericParameters(replacements);
+            return new FunctionDef() { name = def.name, operand = newOperands, resultTypeSpecifier = newResultType };
+        }
+
         /// <summary>
         /// Return a string like "first", "second", "third", etc. for the given position of the argument.
         /// </summary>

@@ -1,8 +1,8 @@
 ﻿using Antlr4.Runtime.Misc;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,28 +11,58 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class LibraryVisitor : Visitor<Library>
     {
-        public LibraryVisitor(IServiceProvider services) : base(services)
+        public LibraryVisitor(
+            ConverterContext converterContext,
+            LibraryContext libraryContext,
+            IConfiguration configuration,
+            IModelProvider modelProvider,
+            ParameterDefinitionVisitor parameterDefinitionVisitor,
+            ExpressionVisitor expressionVisitor,
+            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
         {
+            ConverterContext = converterContext;
+            LibraryContext = libraryContext;
+            Configuration = configuration;
+            ModelProvider = modelProvider;
+            ParameterDefinitionVisitor = parameterDefinitionVisitor;
+            ExpressionVisitor = expressionVisitor;
         }
 
         #region Services
-        private ConverterContext ConverterContext => Services.GetRequiredService<ConverterContext>();
-        private LibraryContext LibraryContext => Services.GetRequiredService<LibraryContext>();
-
-        private IConfiguration Configuration => Services.GetRequiredService<IConfiguration>();
-        private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
-        private VersionedIdentifierVisitor VersionedIdentifierVisitor => Services.GetRequiredService<VersionedIdentifierVisitor>();
-        private ParameterDefinitionVisitor ParameterDefinitionVisitor => Services.GetRequiredService<ParameterDefinitionVisitor>();
-        private ExpressionDefinitionVisitor ExpressionDefinitionVisitor => Services.GetRequiredService<ExpressionDefinitionVisitor>();
-        private ContextDefVisitor ContextDefVisitor => Services.GetRequiredService<ContextDefVisitor>();
-
-
+        private LibraryContext LibraryContext { get; }
+        private IConfiguration Configuration { get; }
+        private IModelProvider ModelProvider { get; }
+        private ParameterDefinitionVisitor ParameterDefinitionVisitor { get; }
+        private ExpressionVisitor ExpressionVisitor { get; }
+        public ConverterContext ConverterContext { get; }
         #endregion
+
+        private UsingDef? GetDefaultSystemUsingDef()
+        {
+            var systemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
+            var systemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)] ?? SystemTypes.SystemModelVersion;
+
+            if (string.IsNullOrWhiteSpace(systemUri))
+                return null;
+
+            if (ModelProvider.ModelFromUri(systemUri, systemVersion) is { } model)
+            {
+                return new UsingDef
+                {
+                    uri = model.url,
+                    localIdentifier = "System",
+                }.WithId();
+            }
+            else
+                throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
+        }
+
+        // libraryDefinition? definition* statement* EOF;
         public override Library VisitLibrary([NotNull] cqlParser.LibraryContext context)
         {
             var library = new Library
             {
-                identifier = VersionedIdentifierVisitor.Visit(context.GetChild(0))
+                identifier = context.libraryDefinition().Parse()
             };
 
             ConverterContext.AddLibrary(library);
@@ -46,34 +76,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var concepts = new LinkedList<ConceptDef>();
             var parameters = new LinkedList<ParameterDef>();
             var statements = new LinkedList<ExpressionDef>();
+            var contextDefs = new LinkedList<ContextDef>();
             var contextStatements = new Dictionary<string, ExpressionDef>();
 
-            var defaultSystemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
-            var defaultSystemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)];
-            if (!string.IsNullOrWhiteSpace(defaultSystemUri)
-                && !string.IsNullOrWhiteSpace(defaultSystemVersion))
-            {
-                var model = ModelProvider.ModelFromUri(defaultSystemUri, defaultSystemVersion);
-                if (model != null)
-                {
-                    usings.AddFirst(new UsingDef
-                    {
-                        uri = model.url,
-                        localIdentifier = "System",
-                        localId = NextId(),
-                    });
-                }
-                else throw new InvalidOperationException($"Model {defaultSystemUri} version {defaultSystemVersion} is not available.");
-            }
+
+            var systemUsing = GetDefaultSystemUsingDef();
+            if (systemUsing is not null) usings.AddLast(systemUsing);
+
             // visit usings first so parameters can refer to models
-            foreach (var child in context.children.OfType<cqlParser.DefinitionContext>())
+            foreach (var child in context.definition())
             {
-                if (child.GetChild(0) is cqlParser.UsingDefinitionContext udc)
+                if (child.usingDefinition() is { } udc)
                 {
                     var usingDef = udc.Parse(ModelProvider);
                     usings.AddLast(usingDef);
                 }
             }
+
             library.usings = usings.ToArray();
 
             int i = 1;
@@ -155,7 +174,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             {
                                 case cqlParser.ExpressionDefinitionContext expression:
                                     {
-                                        var expressionDef = ExpressionDefinitionVisitor.Visit(expression);
+                                        var expressionDef = expression.Parse(ExpressionVisitor);
                                         if (LibraryContext.ActiveContext != null)
                                             expressionDef.context = LibraryContext.ActiveContext.name;
                                         statements.AddLast(expressionDef);
@@ -163,41 +182,40 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     break;
                                 case cqlParser.ContextDefinitionContext ctx:
                                     {
-                                        var contextDef = ContextDefVisitor.Visit(ctx);
+                                        var contextDef = ctx.Parse();
                                         LibraryContext.ActiveContext = contextDef;
+
                                         if (!contextStatements.ContainsKey(contextDef.name))
                                         {
-                                            var elementType = LibraryContext.ResolveDottedTypeName(contextDef.name);
+                                            var resolveResult = LibraryContext.ResolveDottedTypeName(contextDef.name)
+                                                ?? throw new InvalidOperationException($"Could not resolve context type {contextDef.name}");
+
+                                            var typeName = resolveResult.ToNamedType();
+                                            var exprName = contextDef.name.Split('.').Last();
 
                                             var retrieve = new Retrieve
                                             {
-                                                localId = NextId(),
-                                                locator = ctx.Locator(),
-                                                dataType = elementType.name,
-                                                templateId = ModelProvider.GetDefaultProfileUriForType(elementType),
-                                                resultTypeSpecifier = elementType.ToListType(),
-                                            };
-                                            var singleton = new SingletonFrom
-                                            {
-                                                localId = NextId(),
-                                                locator = ctx.Locator(),
-                                                operand = retrieve,
-                                                resultTypeSpecifier = elementType,
-                                                resultTypeName = elementType.name,
-                                            };
+                                                dataType = typeName.name,
+                                                templateId = ModelProvider.GetDefaultProfileUriForType(typeName),
+                                            }.WithLocator(ctx.Locator()).WithResultType(typeName.ToListType());
+
+                                            Expression singleton = SystemLibrary.SingletonFrom.Call(ModelProvider, ctx, retrieve);
+
                                             var exprDef = new ExpressionDef
                                             {
-                                                localId = NextId(),
-                                                locator = ctx.Locator(),
-                                                name = contextDef.name,
+                                                name = exprName,
                                                 expression = singleton,
-                                                resultTypeSpecifier = elementType,
-                                                resultTypeName = elementType.name,
-                                            };
+                                                context = contextDef.name,
+                                            }.WithLocator(ctx.Locator()).WithResultType(singleton.resultTypeSpecifier);
+
                                             contextStatements.Add(contextDef.name, exprDef);
+
+                                            contextDefs.AddLast(contextDef);
+                                            statements.AddLast(exprDef);
                                         }
                                     }
                                     break;
+
                                 default:
                                     throw new InvalidOperationException($"Unexpected context type {child.GetType().FullName}");
                             }
@@ -208,9 +226,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
             }
 
-
-
             library.statements = statements.ToArray();
+            library.contexts = contextDefs.ToArray();
             return library;
         }
 

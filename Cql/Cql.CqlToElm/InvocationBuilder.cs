@@ -6,19 +6,17 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal record FunctionResolveResult(Expression Call, int Cost, string? Error)
+    internal record ResolveResult<T>(T Result, int Cost, string? Error)
     {
         public bool Success => Error is null;
 
-        public static implicit operator Expression(FunctionResolveResult result)
-        {
-            if(result.Success)
-                return result.Call;
-            else
-                throw new InvalidOperationException(result.Error);
-        }
+        public static ResolveResult<T>[] SelectBestCandidate(IEnumerable<ResolveResult<T>> candidates) =>
+            candidates
+              .OrderBy(r => r.Cost)
+              .GroupBy(r => r.Cost)
+              .First()
+              .AsEnumerable().ToArray() ?? Array.Empty<ResolveResult<T>>();
     }
-
 
     /// <summary>
     /// Builds the implicit casts described in the CQL spec. Given the type of the parameter and an expression 
@@ -29,7 +27,7 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class InvocationBuilder
     {
-        private record ArgumentCaster(Expression Caster, int Cost, GenericParameterAssignments? Assignments, bool Success);
+        private static readonly int ERROR_COST = 1000;  // Cost for a cast that is not possible.
 
         public IModelProvider Provider { get; }
         public InvocationBuilder(IModelProvider provider)
@@ -37,130 +35,147 @@ namespace Hl7.Cql.CqlToElm
             Provider = provider;
         }
 
-        public FunctionResolveResult Build(FunctionDef candidate, Expression[] arguments)
+        internal ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
         {
-            var signature = candidate.Signature();
+            var operands = candidate.operand.Select(o => o.operandTypeSpecifier).ToArray();
+            var positionResults = new List<ResolveResult<Expression>>();
+            int? nextPosition = 0;
 
-            if (candidate.operand.Length != arguments.Length)
+            while (nextPosition is not null)
             {
-                var errorExpression = candidate.CreateElmNode(arguments).WithResultType(candidate.resultTypeSpecifier);
-                return new(errorExpression, int.MaxValue, $"The number or arguments ({arguments.Length}) do not match the number of parameters for {signature}.");
-            }
+                var start = nextPosition.Value;
+                nextPosition = null;
+                var iterationResults = new ResolveResult<Expression>[arguments.Length];
+                var assignments = new GenericParameterAssignments();
+                string? firstError = null;
 
-            var argumentResults = new List<ArgumentCaster>();
-            var genericReplacements = new GenericParameterAssignments();
-            var totalCost = 0;
-            string? error = null;
-
-            int argumentIndex = 0;
-            foreach (var operand in candidate.operand)
-            {
-                // Before we try to cast the argument to the parameter, make sure we have replaced any
-                // instantiated generic parameters.
-                var targetType = operand.operandTypeSpecifier.ReplaceGenericParameters(genericReplacements);
-                var argument = arguments[argumentIndex];
-                
-                // Now, try to implicitly cast the argument to the parameter type.
-                var argumentResult = buildImplicitCast(argument, targetType);
-
-                if (argumentResult.Success)
+                for (var iteration = 0; iteration < arguments.Length; iteration++)
                 {
-                    if (argumentResult.Assignments is not null)
-                        genericReplacements.AddRange(argumentResult.Assignments);
-                    
-                    totalCost += argumentResult.Cost;
-                }
-                else
-                {
-                    error = $"the argument for parameter '{operand.name}' is of type {argument.resultTypeSpecifier} " +
-                        $"which cannot implicitly be cast to type {targetType}";
+                    var argumentIndex = (start + iteration) % arguments.Length;
+                    var operand = operands[argumentIndex];
+                    var argument = arguments[argumentIndex];
+
+                    // Now, try to implicitly cast the argument to the parameter type.
+                    var operandToTest = operand.ReplaceGenericParameters(assignments);
+                    if (operandToTest != operand && argumentIndex > start && nextPosition is null) nextPosition = argumentIndex;
+
+                    var argumentResult = buildImplicitCast(argument, operandToTest, out var newAssignments);
+                    assignments.AddRange(newAssignments);
+
+                    if (!argumentResult.Success && firstError is null)
+                        firstError = $"the {BuiltInFunctionDef.GetArgumentName(argumentIndex)} argument {argumentResult.Error}.";
+
+                    iterationResults[argumentIndex] = argumentResult;
                 }
 
-                argumentResults.Add(argumentResult);
-                argumentIndex += 1;
+                var concreteCandidate = BuiltInFunctionDef.ReplaceGenericParameters(candidate, assignments);
+                var resultExpression = candidate.CreateElmNode(iterationResults.Select(a => a.Result).ToArray())
+                        .WithResultType(concreteCandidate.resultTypeSpecifier);
+                var totalCost = iterationResults.Sum(r => r.Cost);
+                var totalError = firstError is not null ? $"Cannot resolve call to {concreteCandidate.Signature()}, {firstError}" : null;
+
+                positionResults.Add(new(resultExpression, totalCost, totalError));
             }
 
-            var totalError = error is not null ? $"Cannot resolve call to {signature}, {error}." : null;
-            var returnType = candidate.resultTypeSpecifier.ReplaceGenericParameters(genericReplacements); 
-            var resultExpression = candidate.CreateElmNode(argumentResults.Select(a => a.Caster).ToArray()).WithResultType(returnType);
-
-            return new(resultExpression, error is null ? totalCost : int.MaxValue, totalError);
+            return ResolveResult<Expression>.SelectBestCandidate(positionResults).First();
         }
 
-        private ArgumentCaster buildImplicitCast(Expression argument, TypeSpecifier to)
+        private ResolveResult<Expression> buildImplicitCast(
+            Expression argument, TypeSpecifier to, out GenericParameterAssignments newAssignments)
         {
             var argumentType = argument.resultTypeSpecifier;
             var locatorContext = new StringLocatorRuleContext(argument.locator);
 
+            // by default, we don't have a new hypothesis
+            newAssignments = new();
+
             // Types are equal, or the argument is a subtype of the parameter type.
             if (argumentType.IsSubtypeOf(to, Provider))
-                return new(argument, 0, null, true);
+                return new(argument, 0, null);
+
+            // Untyped Nulls get promoted to any type necessary. If the target type has unbound
+            // generic parameters, we will default those to a special "NullTypeSpecifier" that
+            // we will replace by System.Any later on if no one cares to assign something more
+            // permanent to it.
+            // See https://cql.hl7.org/03-developersguide.html#implicit-casting
+            if (argument is Null n)
+            {
+                var unbound = to.GetGenericParameters().ToList();
+
+                newAssignments = new GenericParameterAssignments(
+                    unbound.Select(gp => KeyValuePair.Create(gp, (TypeSpecifier)SystemTypes.AnyType)));
+
+                var bound = to.ReplaceGenericParameters(newAssignments);
+                var @as = SystemLibrary.As.Build(false, bound, n, locatorContext);
+
+                // Make sure that we prefer any other solution than assigning
+                // Any to a generic parameter to Any just to make a null argument fit
+                // by giving it a high cost.
+                return new(@as, unbound.Any() ? 100 : 1, null);
+            }
 
             // If the parameter type is a generic type parameter, then we can assign any type to it,
             // unless it is already assigned to previously, in which case we need to check we can cast
             // to the assigned type for that generic type parameter.
             if (to is ParameterTypeSpecifier gtp)
-                return new(argument, 0, new() { { gtp, argumentType } }, true);
-
-            // Untyped Nulls get promoted to any type necessary. If the target type has unbound
-            // generic parameters, we will default those to System.Any.
-            // See https://cql.hl7.org/03-developersguide.html#implicit-casting
-            if (argument is Null n && (n.resultTypeSpecifier is null || to.IsSubtypeOf(n.resultTypeSpecifier, Provider)))
             {
-                var unbound = to.GetGenericParameters().ToList();
-                var map = unbound.Any()
-                    ? new GenericParameterAssignments(unbound.Select(gp => KeyValuePair.Create(gp, (TypeSpecifier)SystemTypes.AnyType)))
-                    : null;
-
-                if (map is not null)
-                    to = to.ReplaceGenericParameters(map);
-
-                var @as = SystemLibrary.As.Build(false, to, n, locatorContext);
-                return new(@as, 1, map, true);
+                newAssignments = new() { { gtp, argumentType } };
+                return new(argument, 0, null);
             }
 
             // Casting a List<X> to a List<Y> is not possible in general(?), but it is
             // when Y is an unbound generic type or a direct (covariant) cast.
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
-                var prototypeInstance = new Null { resultTypeSpecifier = fromList.elementType };
-                var elementCast = buildImplicitCast(prototypeInstance, toList.elementType);
+                var prototypeInstance = new Literal { resultTypeSpecifier = fromList.elementType };
+                var elementCast = buildImplicitCast(prototypeInstance, toList.elementType, out var nestedNewAssignments);
 
-                if (elementCast.Success && elementCast.Caster == prototypeInstance)
-                    return new(argument, elementCast.Cost, elementCast.Assignments, true);
+                if (elementCast.Success && elementCast.Result == prototypeInstance)
+                {
+                    newAssignments.AddRange(nestedNewAssignments);
+                    return new(argument, elementCast.Cost, null);
+                }
             }
 
             // Casting an Interval<X> to an Interval<Y> is not possible in general(?), but it is
             // when Y is an unbound generic type or a direct (covariant) cast.
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
             {
-                var prototypeInstance = new Null { resultTypeSpecifier = fromInterval.pointType };
-                var elementCast = buildImplicitCast(prototypeInstance, toInterval.pointType);
+                var prototypeInstance = new Literal { resultTypeSpecifier = fromInterval.pointType };
+                var elementCast = buildImplicitCast(prototypeInstance, toInterval.pointType, out var nestedNewAssignments);
 
-                if (elementCast.Success && elementCast.Caster == prototypeInstance)
-                    return new(argument, elementCast.Cost, elementCast.Assignments, true);
+                if (elementCast.Success && elementCast.Result == prototypeInstance)
+                {
+                    newAssignments.AddRange(nestedNewAssignments);
+                    return new(argument, elementCast.Cost, null);
+                }
             }
 
-            // TODO: choice, https://cql.hl7.org/03-developersguide.html#choice-types
+
+            if (argumentType is ChoiceTypeSpecifier cts && to is not ChoiceTypeSpecifier)
+            {
+                // TODO: choice, https://cql.hl7.org/03-developersguide.html#choice-types
+                //cts.choice.First(c => buildImplicitCast(argument, c, )
+            }
 
             // Implicit casts, see https://cql.hl7.org/03-developersguide.html#implicit-conversions
             // (note table is skewed, move first row 1 to the left, move row 2 2 to the left, etc)
             if (argumentType == SystemTypes.IntegerType && to == SystemTypes.LongType)
-                return new(SystemLibrary.IntegerToLong.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.IntegerToLong.Build(locatorContext, argument), 1, null);
             if (argumentType == SystemTypes.IntegerType && to == SystemTypes.DecimalType)
-                return new(SystemLibrary.IntegerToDecimal.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.IntegerToDecimal.Build(locatorContext, argument), 1, null);
             if (argumentType == SystemTypes.LongType && to == SystemTypes.DecimalType)
-                return new(SystemLibrary.LongToDecimal.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.LongToDecimal.Build(locatorContext, argument), 1, null);
             if (argumentType == SystemTypes.IntegerType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.IntegerToQuantity.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.IntegerToQuantity.Build(locatorContext, argument), 2, null);
             if (argumentType == SystemTypes.LongType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.LongToQuantity.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.LongToQuantity.Build(locatorContext, argument), 2, null);
             if (argumentType == SystemTypes.DecimalType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.DecimalToQuantity.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.DecimalToQuantity.Build(locatorContext, argument), 2, null);
             if (argumentType == SystemTypes.DateType && to == SystemTypes.DateTimeType)
-                return new(SystemLibrary.DateToDateTime.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.DateToDateTime.Build(locatorContext, argument), 2, null);
             if (argumentType == SystemTypes.CodeType && to == SystemTypes.ConceptType)
-                return new(SystemLibrary.CodeToConcept.Build(locatorContext, argument), 1, null, true);
+                return new(SystemLibrary.CodeToConcept.Build(locatorContext, argument), 1, null);
 
             // TODO: There is still ValueSet to List, but it's not clear which function to call,
             // ToList<T>(T) would probably create a list with a single element, the valueset, but
@@ -172,8 +187,8 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
             {
                 var singleton = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
-                var intermediate = buildImplicitCast(singleton, to);
-                return intermediate with { Cost = intermediate.Cost + 1 };
+                var intermediate = buildImplicitCast(singleton, to, out newAssignments);
+                return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
             // TODO: interval demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
@@ -181,16 +196,14 @@ namespace Hl7.Cql.CqlToElm
             // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
             if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
             {
-                var list = SystemLibrary.ToList.Call(Provider,locatorContext, argument);
-                var intermediate = buildImplicitCast(list, to);
-                return intermediate with { Cost = intermediate.Cost + 1 };
+                var list = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
+                var intermediate = buildImplicitCast(list, to, out newAssignments);
+                return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
             // No implicit cast found
-            var dummy = new Null { resultTypeSpecifier = to };
-            return new(dummy, int.MaxValue, null, false);
+            return new(argument, ERROR_COST, $"is of type {argumentType}, which cannot implicitly be cast to type {to}");
         }
-
     }
 }
 

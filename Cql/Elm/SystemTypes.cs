@@ -9,7 +9,6 @@
 using Hl7.Cql.Model;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Xml;
 
 namespace Hl7.Cql.Elm
 {
@@ -48,46 +47,25 @@ namespace Hl7.Cql.Elm
         internal static ParameterTypeSpecifier Generic(string name) =>
             gtpTsSingletons.GetOrAdd(name, n => new ParameterTypeSpecifier { parameterName = n });
 
-        internal static XmlQualifiedName QualifiedNameForSystemType(string name)
-        {
-            var nameWithoutPrefix = name.StartsWith(SystemModelPrefix) ? name[SystemModelPrefix.Length..] : name;
-            return bootstrapSystemModel.MakeQualifiedTypeName(nameWithoutPrefix);
-        }
+        private static NamedTypeSpecifier makeNT(string name) => bootstrapSystemModel.MakeQualifiedTypeName(name).ToNamedType();
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-        public static XmlQualifiedName AnyTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Any");
-        public static XmlQualifiedName IntegerTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Integer");
-        public static XmlQualifiedName LongTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Long");
-        public static XmlQualifiedName DecimalTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Decimal");
-        public static XmlQualifiedName QuantityTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Quantity");
-        public static XmlQualifiedName StringTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("String");
-        public static XmlQualifiedName DateTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Date");
-        public static XmlQualifiedName TimeTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Time");
-        public static XmlQualifiedName DateTimeTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("DateTime");
-        public static XmlQualifiedName BooleanTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Boolean");
-        public static XmlQualifiedName RatioTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Ratio");
-        public static XmlQualifiedName CodeTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Code");
-        public static XmlQualifiedName ConceptTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Concept");
-        public static XmlQualifiedName VocabularyTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("Vocabulary");
-        public static XmlQualifiedName ValueSetTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("ValueSet");
-        public static XmlQualifiedName CodeSystemTypeQName = bootstrapSystemModel.MakeQualifiedTypeName("CodeSystem");
-
-        public static NamedTypeSpecifier AnyType = AnyTypeQName.ToNamedType();
-        public static NamedTypeSpecifier IntegerType = IntegerTypeQName.ToNamedType();
-        public static NamedTypeSpecifier LongType = LongTypeQName.ToNamedType();
-        public static NamedTypeSpecifier DecimalType = DecimalTypeQName.ToNamedType();
-        public static NamedTypeSpecifier QuantityType = QuantityTypeQName.ToNamedType();
-        public static NamedTypeSpecifier StringType = StringTypeQName.ToNamedType();
-        public static NamedTypeSpecifier DateType = DateTypeQName.ToNamedType();
-        public static NamedTypeSpecifier TimeType = TimeTypeQName.ToNamedType();
-        public static NamedTypeSpecifier DateTimeType = DateTimeTypeQName.ToNamedType();
-        public static NamedTypeSpecifier BooleanType = BooleanTypeQName.ToNamedType();
-        public static NamedTypeSpecifier RatioType = RatioTypeQName.ToNamedType();
-        public static NamedTypeSpecifier CodeType = CodeTypeQName.ToNamedType();
-        public static NamedTypeSpecifier ConceptType = ConceptTypeQName.ToNamedType();
-        public static NamedTypeSpecifier VocabularyType = VocabularyTypeQName.ToNamedType();
-        public static NamedTypeSpecifier ValueSetType = ValueSetTypeQName.ToNamedType();
-        public static NamedTypeSpecifier CodeSystemType = CodeSystemTypeQName.ToNamedType();
+        public static NamedTypeSpecifier AnyType = makeNT("Any");
+        public static NamedTypeSpecifier IntegerType = makeNT("Integer");
+        public static NamedTypeSpecifier LongType = makeNT("Long");
+        public static NamedTypeSpecifier DecimalType = makeNT("Decimal");
+        public static NamedTypeSpecifier QuantityType = makeNT("Quantity");
+        public static NamedTypeSpecifier StringType = makeNT("String");
+        public static NamedTypeSpecifier DateType = makeNT("Date");
+        public static NamedTypeSpecifier TimeType = makeNT("Time");
+        public static NamedTypeSpecifier DateTimeType = makeNT("DateTime");
+        public static NamedTypeSpecifier BooleanType = makeNT("Boolean");
+        public static NamedTypeSpecifier RatioType = makeNT("Ratio");
+        public static NamedTypeSpecifier CodeType = makeNT("Code");
+        public static NamedTypeSpecifier ConceptType = makeNT("Concept");
+        public static NamedTypeSpecifier VocabularyType = makeNT("Vocabulary");
+        public static NamedTypeSpecifier ValueSetType = makeNT("ValueSet");
+        public static NamedTypeSpecifier CodeSystemType = makeNT("CodeSystem");
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>

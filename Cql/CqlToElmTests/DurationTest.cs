@@ -1,11 +1,5 @@
 ﻿using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -135,11 +129,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Date_In_Hours() =>
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Date_In_Hours: duration in hours between @2023-01-01 and @2024-02-01
-            "));
+            ").ShouldReportError("A precision of 'Hour'*Date.");
 
         [TestMethod]
         public void Duration_Between_Hours()
@@ -235,11 +229,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Time_In_Days() =>
-            Assert.ThrowsException<AggregateException>(() => DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in days between @T12:00:00.100 and @T12:00:00.300
-            "));
+            ").ShouldReportError("A precision of 'Day'*Time.");
 
         [TestMethod]
         public void Duration_Between_DateTimes()
@@ -282,11 +276,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Null_Null() =>
-            Assert.ThrowsException<InvalidOperationException>(() => DefaultConverter.ConvertLibrary(@"
+            DefaultConverter.ConvertLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and null
-            "));
+            ").ShouldReportError("Ambiguous call*");
 
     }
 }

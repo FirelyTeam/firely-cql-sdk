@@ -1,4 +1,3 @@
-using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -8,6 +7,7 @@ using System.IO;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
+
     [TestClass]
     public class LibraryTest : Base
     {
@@ -78,18 +78,19 @@ namespace Hl7.Cql.CqlToElm.Test
 
         #region Using
 
-        private IServiceCollection makeMinimalServiceCollection() =>
+        public static IServiceCollection MakeMinimalServiceCollection() =>
              new ServiceCollection()
                 .AddLogging(b => b.AddDebug().ThrowOn(LogLevel.Error))
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
+                .AddTransient<CqlToElmConverter>()
                 .AddConfiguration(cb => { });
 
         [TestMethod]
         public void Using_AllTerms()
         {
-            var services = makeMinimalServiceCollection()
+            var services = MakeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -101,9 +102,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 });
 
             var x = services.BuildServiceProvider();
-            x.GetRequiredService<ILogger<LibraryContext>>().Should().NotBeNull();
-
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var converter = x.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_AllTerms_WithNamespace version '1.0.0' called Derp
@@ -119,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms_WithNamespace()
         {
-            var services = makeMinimalServiceCollection()
+            var services = MakeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -129,7 +129,9 @@ namespace Hl7.Cql.CqlToElm.Test
                         version = "1.0.0"
                     });
                 });
-            var converter = new CqlToElmConverter(services.BuildServiceProvider());
+
+            var serviceProvider = services.BuildServiceProvider();
+            var converter = serviceProvider.GetRequiredService<CqlToElmConverter>();
             var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
@@ -147,7 +149,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_LocalIdentifier()
         {
-            var services = makeMinimalServiceCollection()
+            var services = MakeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -157,7 +159,9 @@ namespace Hl7.Cql.CqlToElm.Test
                         version = "1.0.0"
                     });
                 });
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_NoVersion_LocalIdentifier called Derp
@@ -174,7 +178,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Version_NoIdentifier()
         {
-            var services = makeMinimalServiceCollection()
+            var services = MakeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -184,7 +188,9 @@ namespace Hl7.Cql.CqlToElm.Test
                         version = "1.0.0"
                     });
                 });
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_Version_NoIdentifier version '1.0.0'
@@ -200,7 +206,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_NoIdentifier()
         {
-            var services = makeMinimalServiceCollection()
+            var services = MakeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -211,7 +217,9 @@ namespace Hl7.Cql.CqlToElm.Test
                     });
                 });
 
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_NoVersion_NoIdentifier
@@ -227,7 +235,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Duplicate_System_NoLocalAlias()
         {
-            var services = makeMinimalServiceCollection()
+            var services = MakeMinimalServiceCollection()
                 .AddModels(mp =>
                 {
                     mp.Add(new Model.ModelInfo
@@ -238,7 +246,9 @@ namespace Hl7.Cql.CqlToElm.Test
                     });
                 });
 
-            var library = new CqlToElmConverter(services.BuildServiceProvider()).ConvertLibrary(@"
+            var provider = services.BuildServiceProvider();
+            var converter = provider.GetRequiredService<CqlToElmConverter>();
+            var library = converter.ConvertLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using System version '1.0.0'
@@ -741,7 +751,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private concept Name: { ""code1"", ""code2"", ""code3"" } display 'My concept'
             ");
             var lib = ExpressionBuilderFor(library);
-            var lambdas = lib.Build();
+            _ = lib.Build();
         }
 
 
@@ -762,7 +772,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.parameters.Length);
             Assert.AreEqual(AccessModifier.Private, library.parameters[0].accessLevel);
             Assert.AreEqual("Name", library.parameters[0].name);
-            Assert.IsInstanceOfType(library.parameters[0].parameterTypeSpecifier, typeof(NamedTypeSpecifier));
+            Assert.IsInstanceOfType(library.parameters[0].parameterTypeSpecifier, typeof(Elm.NamedTypeSpecifier));
         }
         #endregion
     }

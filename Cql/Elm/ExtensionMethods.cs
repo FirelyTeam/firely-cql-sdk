@@ -8,9 +8,7 @@
  */
 
 using Hl7.Cql.Graph;
-using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 
 namespace Hl7.Cql.Elm
@@ -26,6 +24,9 @@ namespace Hl7.Cql.Elm
             return $"{def.name}({signature})";
         }
 
+        /// <summary>
+        /// Creates a formatted include name, which consists of its path and version.
+        /// </summary>
         public static string? NameAndVersion(this IncludeDef include)
         {
             if (include.path == null)
@@ -34,15 +35,6 @@ namespace Hl7.Cql.Elm
                 return include.path;
             else return $"{include.path}-{include.version}";
         }
-
-        public static ListSortDirection ListSortOrder(this SortDirection direction) => direction switch
-        {
-            SortDirection.asc => ListSortDirection.Ascending,
-            SortDirection.ascending => ListSortDirection.Ascending,
-            SortDirection.desc => ListSortDirection.Descending,
-            SortDirection.descending => ListSortDirection.Descending,
-            _ => throw new ArgumentException($"Unrecognized sort direction {Enum.GetName(typeof(SortDirection), direction)}")
-        };
 
         internal static IEnumerable<Library> Packages(this DirectedGraph graph)
         {
@@ -56,5 +48,52 @@ namespace Hl7.Cql.Elm
                 }
             }
         }
+
+        /// <summary>
+        /// Retrieves all error nodes in the ELM tree rooted in <paramref name="node"/>.
+        /// </summary>
+        public static CqlToElmError[] GetErrors(this Element node)
+        {
+            var allErrors = new List<CqlToElmError>();
+            var visitor = new ElmTreeWalker(nodeHandler);
+
+            visitor.Walk(node);
+            return allErrors.ToArray();
+
+            bool nodeHandler(object node)
+            {
+                if (node is Element element && element.annotation?.OfType<CqlToElmError>() is { } errors && errors.Any())
+                {
+                    allErrors.AddRange(errors);
+                }
+
+                // Let the walker visit my children.
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Adds an error or warning to the given node using a <see cref="CqlToElmError"/> annotation."/>
+        /// </summary>
+        public static T AddError<T>(this T node,
+            string errorMessage,
+            ErrorType errorType,
+            ErrorSeverity severity = ErrorSeverity.error) where T : Element
+        {
+            var error = new CqlToElmError
+            {
+                errorSeverity = severity,
+                errorSeveritySpecified = true,
+                errorType = errorType,
+                message = errorMessage,
+            };
+
+            node.annotation = node.annotation is { } annotations ?
+                annotations.Append(error).ToArray()
+                : new[] { error };
+
+            return node;
+        }
+
     }
 }

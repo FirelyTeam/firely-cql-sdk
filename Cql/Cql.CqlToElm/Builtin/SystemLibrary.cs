@@ -12,18 +12,11 @@ using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal static class FunctionDefinitionBuilders
-    {
-        public static BuiltInFunctionDef[] For(this BuiltInFunctionDef def, ParameterTypeSpecifier replace, params TypeSpecifier[] types) =>
-            types.Select(t => def.ReplaceGenericParameters(new() { { replace, t } })).ToArray();
-    }
-
     /// <summary>
     /// A Library that represents all the functions defined in the CQL spec.
     /// </summary>
     internal class SystemLibrary : Library
     {
-
         public SystemLibrary()
         {
             identifier = new VersionedIdentifier() { id = SystemModelPrefix, version = SystemModelVersion };
@@ -40,8 +33,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
             Predecessor, Successor,
             Is, As,
             MinValue, MaxValue,
-            And,
+            And, Implies, Or, Xor,
             IntegerToDecimal, LongToDecimal, IntegerToLong, IntegerToQuantity, DecimalToQuantity, DateToDateTime, CodeToConcept,
+            Concatenate,
+            Equal, NotEqual, Equivalent,
         };
 
         private static BuiltInFunctionDef unary<T>(TypeSpecifier argument, TypeSpecifier result) where T : OperatorExpression =>
@@ -63,14 +58,14 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef Width = unary<Width>(T.ToIntervalType(), T);
         public static FunctionDef Predecessor = unary<Predecessor>(T, T);
         public static FunctionDef Successor = unary<Successor>(T, T);
-
         public static AsFunctionDef As = new();
         public static IsFunctionDef Is = new();
         public static MinValueFunctionDef MinValue = new();
         public static MaxValueFunctionDef MaxValue = new();
-
         public static FunctionDef And = binary<And>(BooleanType, BooleanType, BooleanType);
-
+        public static FunctionDef Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
+        public static FunctionDef Or = binary<Or>(BooleanType, BooleanType, BooleanType);
+        public static FunctionDef Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);
         public static FunctionDef IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
         public static FunctionDef LongToDecimal = unary<ToDecimal>(LongType, DecimalType);
         public static FunctionDef IntegerToLong = unary<ToLong>(IntegerType, LongType);
@@ -79,18 +74,35 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef DecimalToQuantity = unary<ToQuantity>(DecimalType, QuantityType);
         public static FunctionDef DateToDateTime = unary<ToDateTime>(DateType, DateTimeType);
         public static FunctionDef CodeToConcept = unary<ToConcept>(CodeType, ConceptType);
-
         public static FunctionDef[] Add = binary<Add>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] AddDateTime = binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
-
         public static FunctionDef[] Subtract = binary<Subtract>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] SubtractDateTime = binary<Subtract>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
-
         public static FunctionDef Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static FunctionDef[] DifferenceBetween = binary<DifferenceBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
         public static FunctionDef[] DurationBetween = binary<DurationBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
-        public static FunctionDef Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
-        public static FunctionDef Or = binary<Or>(BooleanType, BooleanType, BooleanType);
-        public static FunctionDef Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);
+        public static FunctionDef Equal = binary<Equal>(T, T,BooleanType);
+        public static FunctionDef NotEqual = binary<NotEqual>(T, T, BooleanType);
+        public static FunctionDef Equivalent = binary<Equivalent>(T, T, BooleanType);
+        public static FunctionDef[] Greater = binary<Greater>(T, T, BooleanType).For(T,
+            ValidOrderedTypes.Append(StringType).ToArray());
+        public static FunctionDef[] GreaterOrEqual = binary<GreaterOrEqual>(T, T, BooleanType).For(T,
+            ValidOrderedTypes.Append(StringType).ToArray());
+        public static FunctionDef[] Less = binary<Less>(T, T, BooleanType).For(T,
+            ValidOrderedTypes.Append(StringType).ToArray());
+        public static FunctionDef[] LessOrEqual = binary<LessOrEqual>(T, T, BooleanType).For(T,
+            ValidOrderedTypes.Append(StringType).ToArray());
+        public static FunctionDef[] Multiply = binary<Multiply>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static FunctionDef[] Divide = binary<Divide>(T, T, T).For(T, DecimalType, QuantityType);
+        public static FunctionDef[] TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static FunctionDef[] Modulo = binary<Modulo>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static FunctionDef[] Power = binary<Power>(T,T,T).For(T, IntegerType, LongType, DecimalType);                    
     }
+
+    internal static class FunctionDefinitionBuilders
+    {
+        public static BuiltInFunctionDef[] For(this BuiltInFunctionDef def, ParameterTypeSpecifier replace, params TypeSpecifier[] types) =>
+            types.Select(t => def.ReplaceGenericParameters(new() { { replace, t } })).ToArray();
+    }
+
 }

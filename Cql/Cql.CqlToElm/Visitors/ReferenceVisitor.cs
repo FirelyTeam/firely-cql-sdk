@@ -7,31 +7,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
-        /*
-         * referentialIdentifier
-                : identifier
-                | keywordIdentifier
-                ;      
-        */
+        //  identifier | keywordIdentifier
         public override Expression VisitReferentialIdentifier([NotNull] cqlParser.ReferentialIdentifierContext context)
         {
-            var child = context.GetChild(0);
-            if (child is cqlParser.IdentifierContext identifierContext)
-            {
-                var identifier = identifierContext.Parse()
-                    ?? throw new InvalidOperationException($"Expecting non-null identifer");
-                var @ref = LibraryContext.Ref(null, identifier)?.WithLocator(context.Locator());
-                if (@ref != null)
-                    return @ref;
-                else
-                    throw Critical($"Unable to resolve identifier {identifier}");
-            }
-            else if (child is cqlParser.QualifiedIdentifierContext qualifiedIdentifierContext)
-            {
-                throw new NotImplementedException();
-            }
+            string? identifier;
+
+            if (context.identifier() is { } identifierContext)
+                identifier = identifierContext.Parse()!;
+            else if (context.keywordIdentifier() is { } kwi)
+                identifier = kwi.GetText();
             else
                 throw new InvalidOperationException($"Unexpected referential identifier child");
+
+            return LibraryContext.Ref(null, identifier)?.WithLocator(context.Locator()) ??
+                    throw new InvalidOperationException($"Unable to resolve identifier {identifier}");
         }
     }
 }

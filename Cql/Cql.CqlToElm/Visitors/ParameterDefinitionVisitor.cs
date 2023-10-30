@@ -1,16 +1,15 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class ParameterDefinitionVisitor : Visitor<ParameterDef>
     {
         public ParameterDefinitionVisitor(
-            IServiceProvider services,
             TypeSpecifierVisitor typeSpecVisitor,
-            ExpressionVisitor expressionVisitor) : base(services)
+            ExpressionVisitor expressionVisitor,
+            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
         {
             typeSpecifierVisitor = typeSpecVisitor;
             this.expressionVisitor = expressionVisitor;
@@ -27,16 +26,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 accessLevel = context.accessModifier().Parse(),
                 name = context.identifier().Parse(),
                 @default = expressionVisitor.Visit(context.expression()),
-                localId = NextId(),
-                locator = context.Locator()
-            };
+            }.WithLocator(context.Locator());
 
             if (context.typeSpecifier() is { } typeSpec)
             {
                 paramDef.parameterTypeSpecifier = typeSpecifierVisitor.Visit(typeSpec);
-
-                if (paramDef.parameterTypeSpecifier is NamedTypeSpecifier nts && nts.name?.Name != null)
-                    paramDef.parameterType = new System.Xml.XmlQualifiedName(nts.name.Name);
+                paramDef.parameterType = paramDef.parameterTypeSpecifier.TryToQualifiedName();
             }
 
             return paramDef;
