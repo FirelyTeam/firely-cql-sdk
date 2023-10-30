@@ -1,6 +1,5 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Collections;
-using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
@@ -17,7 +16,6 @@ namespace Hl7.Cql.CqlToElm.Test
     internal static class TestExtensions
     {
         internal static readonly IModelProvider Provider = new ModelProvider(M.Models.ElmR1, M.Models.Fhir401);
-        internal static readonly SystemLibrary SystemLibrary = new();
         internal static readonly NamedTypeSpecifier Patient = ForFhir("Patient");
         internal static readonly NamedTypeSpecifier Observation = ForFhir("Observation");
         internal static readonly NamedTypeSpecifier Resource = ForFhir("Resource");
@@ -53,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static FunctionResolveResult Cast(this FunctionDef def, Expression[] arguments)
         {
-            var builder = new InvocationBuilder(Provider, SystemLibrary);
+            var builder = new InvocationBuilder(Provider);
             var result = builder.Build(def, arguments);
             return result;
         }

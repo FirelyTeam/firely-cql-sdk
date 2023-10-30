@@ -1,11 +1,6 @@
-﻿using Antlr4.Runtime;
-using Antlr4.Runtime.Tree;
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -15,23 +10,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor : Visitor<Expression>
     {
-        public ExpressionVisitor(IServiceProvider services,
-            IModelProvider modelProvider,
+        public ExpressionVisitor(
+            IModelProvider provider,
             LibraryContext libraryContext,
             TypeSpecifierVisitor typeSpecifierVisitor,
-            SystemLibrary systemLibrary) : base(services)
+            IServiceProvider services,
+            SystemLibrary system) : base(services)
         {
-            ModelProvider = modelProvider;
+            ModelProvider = provider;
             LibraryContext = libraryContext;
             TypeSpecifierVisitor = typeSpecifierVisitor;
-            SystemLibrary = systemLibrary;
+            System = system;
         }
 
         #region Privates
         private readonly IModelProvider ModelProvider;
         private readonly LibraryContext LibraryContext;
         private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
-        private readonly SystemLibrary SystemLibrary;
 
         private XmlQualifiedName AnyTypeQName => SystemTypes.AnyTypeQName;
         private XmlQualifiedName IntegerTypeQName => SystemTypes.IntegerTypeQName;
@@ -45,20 +40,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private XmlQualifiedName BooleanTypeQName => SystemTypes.BooleanTypeQName;
         private XmlQualifiedName RatioTypeQName => SystemTypes.RatioTypeQName;
 
-        private ErrorExpression Error(ParserRuleContext rule, string message) 
-        {
-            var error = new ErrorExpression
-            {
-                Message = message,
-                localId = NextId(),
-                locator = rule.Locator(),
-            };
-            Log.LogCritical(error.Message);
-            return error;
-        }
-        private ErrorExpression UnresolvedSignature(ParserRuleContext rule, string @operator, params Expression[] operands) =>
-            Error(rule, 
-                $"Could not resolve call to operator {@operator} with signature ({string.Join(", ", operands.Select(o => o.resultTypeSpecifier?.ToString() ?? "unknown"))}");
+        private readonly SystemLibrary System;
+
+        private InvalidOperationException UnresolvedSignature(string @operator, params Expression[] operands) =>
+            throw Critical($"Could not resolve call to operator {@operator} with signature " +
+                $"({string.Join(", ", operands.Select(o => o.resultTypeSpecifier?.ToString() ?? "unknown"))}");
 
         #endregion
 
@@ -267,27 +253,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //  '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
         public override Expression VisitRetrieve([NotNull] cqlParser.RetrieveContext context)
         {
-            var contextName = context.contextIdentifier()?.GetText() ?? LibraryContext.ActiveContext?.name;
-            var typeSpecifier = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
-            var (typeUri, typeName) = typeSpecifier.GetNamedTypeComponents();
-            var templateId = ModelProvider.GetDefaultProfileUriForType(typeSpecifier);
-            if (templateId == null)
-                return Error(context.namedTypeSpecifier(), $"Unable to resolve a template ID for type {typeName} in model {typeUri}");
-            var codePath = context.codePath()?.GetText();
-            if (codePath == null)
-            {
-                var type = ModelProvider.TypeInfoForNamedType(typeSpecifier);
-                if (type is Model.ClassInfo @class)
-                {
-                    codePath = @class.primaryCodePath;
-                }
-                if (codePath == null)
-                {
-                    return Error(context.codePath(), $"Unable to resolve primary code path for type {typeName} in model {typeUri}");
-                }
-            }
-            var codeComparator = context.codeComparator()?.GetText() ?? "in";
+            var contextName = context.contextIdentifier().GetText();
+            var codePath = context.codePath().GetText();
+            var codeComparator = context.codeComparator().GetText();
             var terminology = Visit(context.terminology());
+            var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
+
             var contextExpressionRef = new ExpressionRef
             {
                 name = contextName,
@@ -297,13 +268,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 localId = NextId(),
                 locator = context.Locator(),
-                dataType = typeSpecifier.name,
-                templateId = templateId,
+                dataType = type.name,
+                templateId = ModelProvider.GetDefaultProfileUriForType(type),
                 context = contextExpressionRef,
                 codeComparator = codeComparator,
                 codes = terminology,
                 codeProperty = codePath,
-                resultTypeSpecifier = ListType(typeSpecifier, context)
+                resultTypeSpecifier = ListType(type, context)
             };
 
             return retrieve;

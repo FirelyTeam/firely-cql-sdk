@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            var and = SystemLibrary.And.Call(ModelProvider, SystemLibrary, context, lhs, rhs);
+            var and = SystemLibrary.And.Call(ModelProvider, context, lhs, rhs);
             return and;
         }
 
@@ -32,9 +32,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             Expression result = 
                 @operator switch
                 {
-                    "+" => SystemLibrary.Add.Concat(SystemLibrary.AddDateTime).Call(ModelProvider, SystemLibrary, context, lhs, rhs),
-                    "-" => SystemLibrary.Subtract.Concat(SystemLibrary.SubtractDateTime).Call(ModelProvider, SystemLibrary, context, lhs, rhs),
-                    "&" => SystemLibrary.Concatenate.Call(ModelProvider, SystemLibrary, context, lhs, rhs),
+                    "+" => SystemLibrary.Add.Concat(SystemLibrary.AddDateTime).Call(ModelProvider, context, lhs, rhs),
+                    "-" => SystemLibrary.Subtract.Concat(SystemLibrary.SubtractDateTime).Call(ModelProvider, context, lhs, rhs),
+                    "&" => SystemLibrary.Concatenate.Call(ModelProvider, context, lhs, rhs),
                     _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
                 };
 
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressionTerms[0]);
             var rhs = Visit(expressionTerms[1]);
 
-            var call = (DifferenceBetween)SystemLibrary.DifferenceBetween.Call(ModelProvider, SystemLibrary, context, lhs, rhs);
+            var call = (DifferenceBetween)SystemLibrary.DifferenceBetween.Call(ModelProvider, context, lhs, rhs);
             call.precision = precision;
             call.precisionSpecified = true;
 
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
 
-            var call = (DurationBetween)SystemLibrary.DurationBetween.Call(ModelProvider, SystemLibrary, context, lhs, rhs);
+            var call = (DurationBetween)SystemLibrary.DurationBetween.Call(ModelProvider, context, lhs, rhs);
             call.precision = precision;
             call.precisionSpecified = true;
 
@@ -351,7 +351,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            return SystemLibrary.Implies.Call(ModelProvider, SystemLibrary, context, lhs, rhs);
+            return SystemLibrary.Implies.Call(ModelProvider, context, lhs, rhs);
         }
 
         public override Expression VisitInequalityExpression([NotNull] cqlParser.InequalityExpressionContext context)
@@ -874,8 +874,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                "or" => SystemLibrary.Or.Call(ModelProvider, SystemLibrary, context, lhs, rhs),
-                "xor" => SystemLibrary.Xor.Call(ModelProvider, SystemLibrary, context, lhs, rhs),
+                "or" => SystemLibrary.Or.Call(ModelProvider, context, lhs, rhs),
+                "xor" => SystemLibrary.Xor.Call(ModelProvider, context, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in (x)or expression.")
             };
 

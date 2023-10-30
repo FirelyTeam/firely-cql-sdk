@@ -32,12 +32,9 @@ namespace Hl7.Cql.CqlToElm
         private record ArgumentCaster(Expression Caster, int Cost, GenericParameterAssignments? Assignments, bool Success);
 
         public IModelProvider Provider { get; }
-        public SystemLibrary SystemLibrary { get; }
-
-        public InvocationBuilder(IModelProvider provider, SystemLibrary systemLibrary)
+        public InvocationBuilder(IModelProvider provider)
         {
             Provider = provider;
-            SystemLibrary = systemLibrary;
         }
 
         public FunctionResolveResult Build(FunctionDef candidate, Expression[] arguments)
@@ -174,7 +171,7 @@ namespace Hl7.Cql.CqlToElm
             // List demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
             if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
             {
-                var singleton = SystemLibrary.SingletonFrom.Call(Provider, SystemLibrary, locatorContext, argument);
+                var singleton = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
                 var intermediate = buildImplicitCast(singleton, to);
                 return intermediate with { Cost = intermediate.Cost + 1 };
             }
@@ -184,7 +181,7 @@ namespace Hl7.Cql.CqlToElm
             // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
             if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
             {
-                var list = SystemLibrary.ToList.Call(Provider, SystemLibrary, locatorContext, argument);
+                var list = SystemLibrary.ToList.Call(Provider,locatorContext, argument);
                 var intermediate = buildImplicitCast(list, to);
                 return intermediate with { Cost = intermediate.Cost + 1 };
             }

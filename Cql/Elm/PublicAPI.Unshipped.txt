@@ -222,10 +222,6 @@ Hl7.Cql.Elm.Equal
 Hl7.Cql.Elm.Equal.Equal() -> void
 Hl7.Cql.Elm.Equivalent
 Hl7.Cql.Elm.Equivalent.Equivalent() -> void
-Hl7.Cql.Elm.ErrorExpression
-Hl7.Cql.Elm.ErrorExpression.ErrorExpression() -> void
-Hl7.Cql.Elm.ErrorExpression.Message.get -> string?
-Hl7.Cql.Elm.ErrorExpression.Message.set -> void
 Hl7.Cql.Elm.ErrorSeverity
 Hl7.Cql.Elm.ErrorSeverity.error = 2 -> Hl7.Cql.Elm.ErrorSeverity
 Hl7.Cql.Elm.ErrorSeverity.info = 0 -> Hl7.Cql.Elm.ErrorSeverity
