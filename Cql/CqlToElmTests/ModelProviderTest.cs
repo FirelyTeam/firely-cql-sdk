@@ -14,7 +14,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void LoadFHIRModel()
         {
-            var provider = new ModelProvider(Models.ElmR1, Models.Fhir401);
+            var provider = new BuiltinModelProvider(Models.ElmR1, Models.Fhir401);
             Assert.AreEqual("http://hl7.org/fhir", provider.ModelFromName("FHIR", "4.0.1")?.url);
             Assert.AreEqual("urn:hl7-org:elm-types:r1", provider.ModelFromName("System", "1.0.0")?.url);
         }

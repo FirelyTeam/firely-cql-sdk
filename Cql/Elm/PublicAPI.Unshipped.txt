@@ -441,7 +441,9 @@ Hl7.Cql.Elm.Modulo.Modulo() -> void
 Hl7.Cql.Elm.Multiply
 Hl7.Cql.Elm.Multiply.Multiply() -> void
 Hl7.Cql.Elm.NamedTypeSpecifier
+Hl7.Cql.Elm.NamedTypeSpecifier.Deconstruct(out string! uri, out string! name) -> void
 Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier() -> void
+Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier(string! uri, string! name) -> void
 Hl7.Cql.Elm.Narrative
 Hl7.Cql.Elm.Narrative.Narrative() -> void
 Hl7.Cql.Elm.NaryExpression

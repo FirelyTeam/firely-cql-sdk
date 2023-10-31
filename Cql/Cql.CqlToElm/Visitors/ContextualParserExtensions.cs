@@ -67,44 +67,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                _ => throw new InvalidOperationException($"Encountered invalid date time precision {context.GetText()}.")
            };
 
-        // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
-        public static UsingDef Parse(this cqlParser.UsingDefinitionContext context, IModelProvider provider)
-        {
-            // Although the rule allows for multiple qualifiers, it is not clear what a qualified model name would mean.
-            // For now, we take the whole qualified name as the name of the model.
-            var (ns, id) = context.qualifiedIdentifier().Parse();
-            var modelName = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
-            var modelVersion = context.versionSpecifier()?.STRING().ParseString();
-            var localIdentifier = context.localIdentifier()?.identifier().Parse();
-
-            var model = provider.ModelFromName(modelName, modelVersion)
-                ?? throw new InvalidOperationException($"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.");
-
-            var usingDef = new UsingDef()
-            {
-                uri = model.url,
-                version = modelVersion,
-                localIdentifier = localIdentifier ?? modelName,
-            };
-
-            return usingDef.WithLocator(context.Locator());
-        }
-
-        //  : accessModifier? 'valueset' identifier ':' valuesetId ('version' versionSpecifier)? codesystems?
-        public static ValueSetDef Parse(this cqlParser.ValuesetDefinitionContext context)
-        {
-            var valueSetDef = new ValueSetDef
-            {
-                accessLevel = context.accessModifier().Parse(),
-                name = context.identifier().Parse(),
-                id = context.valuesetId().STRING().ParseString(),
-                version = context.versionSpecifier()?.STRING().ParseString(),
-                codeSystem = context.codesystems()?.codesystemIdentifier().Select(csi =>
-                    csi.Parse()).ToArray(),
-            }.WithLocator(context.Locator());
-
-            return valueSetDef;
-        }
 
         // : (qualifier '.')* identifier
         public static (string qualifier, string id) Parse(this cqlParser.QualifiedIdentifierContext context)
@@ -122,51 +84,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return (string.Empty, context.identifier().Parse()!);
         }
 
-        //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
-        public static IncludeDef Parse(this cqlParser.IncludeDefinitionContext context)
-        {
-            var (qualifier, id) = context.qualifiedIdentifier().Parse();
-
-            var includeDef = new IncludeDef
-            {
-                path = string.IsNullOrWhiteSpace(qualifier) ? id : $"{qualifier}.{id}",
-                localIdentifier = context.localIdentifier()?.identifier().Parse(),
-                version = context.versionSpecifier()?.STRING().ParseString(),
-            }.WithLocator(context.Locator());
-
-            return includeDef;
-        }
-
-        //: accessModifier? 'concept' identifier ':' '{' codeIdentifier(',' codeIdentifier)* '}' displayClause?
-        public static ConceptDef Parse(this cqlParser.ConceptDefinitionContext context)
-        {
-            var conceptDef = new ConceptDef
-            {
-                accessLevel = context.accessModifier().Parse(),
-                name = context.identifier().Parse(),
-                code = context.codeIdentifier().Select(ci => ci.Parse()).ToArray(),
-                display = context.displayClause()?.STRING().ParseString(),
-            }.WithLocator(context.Locator());
-
-            return conceptDef;
-        }
-
-
-        //accessModifier? 'codesystem' identifier ':' codesystemId('version' versionSpecifier)?
-        public static CodeSystemDef Parse(this cqlParser.CodesystemDefinitionContext context)
-        {
-            var codeSystemDef = new CodeSystemDef
-            {
-                accessLevel = context.accessModifier().Parse(),
-                name = context.identifier().Parse(),
-                id = context.codesystemId().STRING().ParseString(),
-                version = context.versionSpecifier()?.STRING().ParseString(),
-            }.WithLocator(context.Locator());
-
-            return codeSystemDef;
-        }
-
-
         // : (libraryIdentifier '.')? identifier
         public static CodeRef Parse(this cqlParser.CodeIdentifierContext context)
         {
@@ -178,20 +95,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return codeRef;
         }
 
-        //: accessModifier? 'code' identifier ':' codeId 'from' codesystemIdentifier displayClause?
-        public static CodeDef Parse(this cqlParser.CodeDefinitionContext context)
-        {
-            var codeDef = new CodeDef()
-            {
-                accessLevel = context.accessModifier().Parse(),
-                name = context.identifier().Parse(),
-                id = context.codeId().STRING().ParseString(),
-                codeSystem = context.codesystemIdentifier().Parse(),
-                display = context.displayClause()?.STRING()?.ParseString(),
-            }.WithLocator(context.Locator());
 
-            return codeDef;
-        }
 
         // : (libraryIdentifier '.')? identifier
         public static CodeSystemRef? Parse(this cqlParser.CodesystemIdentifierContext context)
@@ -234,38 +138,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
         }
 
-        //    : 'context' (modelIdentifier '.')? identifier
-        public static (NamedTypeSpecifier type, ContextDef cd) Parse(this cqlParser.ContextDefinitionContext context, LibraryContext library)
-        {
-            var identifier = context.identifier().Parse()!;
-            var modelIdentifier = context.modelIdentifier()?.identifier().Parse();
-
-            _ = library.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
-
-            var cd = new ContextDef
-            {
-                name = modelIdentifier is null ? identifier : $"{modelIdentifier}.{identifier}"
-            }.WithLocator(context.Locator());
-
-            if (error is not null) cd.AddError(error, ErrorType.semantic);
-
-            return (namedType, cd);
-        }
-
-        // 'define' accessModifier? identifier ':' expression
-        public static ExpressionDef Parse(this cqlParser.ExpressionDefinitionContext context, ExpressionVisitor expressionVisitor)
-        {
-            var expression = expressionVisitor.Visit(context.expression());
-
-            var def = new ExpressionDef
-            {
-                accessLevel = context.accessModifier().Parse(),
-                name = context.identifier().Parse(),
-                expression = expression,
-            }.WithResultType(expression.resultTypeSpecifier).WithLocator(context.Locator());
-
-            return def;
-        }
 
         // : referentialIdentifier typeSpecifier
         public static TupleElementDefinition Parse(this cqlParser.TupleElementDefinitionContext context, TypeSpecifierVisitor typeSpecVisitor)

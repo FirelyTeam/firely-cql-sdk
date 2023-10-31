@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
+using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -19,13 +20,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //     | 'case' expression? caseExpressionItem+ 'else' expression 'end'                #caseExpressionTerm
         public override Expression VisitCaseExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.CaseExpressionTermContext context)
         {
-            return base.VisitCaseExpressionTerm(context);
+            throw new NotImplementedException("Case expressions are not yet implemented.");
         }
 
         //  : 'when' expression 'then' expression;
         public override Expression VisitCaseExpressionItem([Antlr4.Runtime.Misc.NotNull] cqlParser.CaseExpressionItemContext context)
         {
-            return base.VisitCaseExpressionItem(context);
+            throw new NotImplementedException("Case expressions are not yet implemented.");
         }
     }
 }

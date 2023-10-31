@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
 {
     internal static class TestExtensions
     {
-        internal static readonly IModelProvider Provider = new ModelProvider(M.Models.ElmR1, M.Models.Fhir401);
+        internal static readonly IModelProvider Provider = new BuiltinModelProvider(M.Models.ElmR1, M.Models.Fhir401);
         internal static readonly NamedTypeSpecifier Patient = ForFhir("Patient");
         internal static readonly NamedTypeSpecifier Observation = ForFhir("Observation");
         internal static readonly NamedTypeSpecifier Resource = ForFhir("Resource");

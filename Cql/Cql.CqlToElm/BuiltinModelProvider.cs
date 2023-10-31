@@ -5,9 +5,9 @@ using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal class ModelProvider : IModelProvider
+    internal class BuiltinModelProvider : IModelProvider
     {
-        public ModelProvider(params ModelInfo[] models)
+        public BuiltinModelProvider(params ModelInfo[] models)
         {
             foreach (var model in models)
                 Add(model);

@@ -18,7 +18,6 @@ namespace Hl7.Cql.CqlToElm
         private readonly IModelProvider ModelProvider;
 
         public Library ActiveLibrary { get; set; } = new Library();
-        public ContextDef? ActiveContext { get; set; }
 
         /// <summary>
         /// Returns a reference to a user-defined ValueSet, CodeSystem, Concept, Code, Parameter, Definition or Context.

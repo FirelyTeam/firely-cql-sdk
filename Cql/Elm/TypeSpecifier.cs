@@ -6,10 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Elm
 {
@@ -228,6 +230,43 @@ namespace Hl7.Cql.Elm
 
     public partial class NamedTypeSpecifier
     {
+        /// <summary>
+        /// Deserialization constructor.
+        /// </summary>
+        public NamedTypeSpecifier()
+        {
+            // Deserialization constructor
+        }
+
+        /// <summary>
+        /// Create a new named type given its uri and name.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="name"></param>
+        public NamedTypeSpecifier(string uri, string name)
+        {
+            this.name = QualifiedName.MakeQualifiedTypeName(uri, name);
+        }
+
+        private static readonly Regex QualifiedNameExpression = new("{(?'uri'.*)}(?'name'.*)", RegexOptions.Compiled);
+
+        /// <summary>
+        /// Gets the model uri and name for this named type.
+        /// </summary>
+        /// <returns>The uri and the type parts of the name in the specifier.</returns>
+        /// <exception cref="ArgumentException">If the name does not match the expected pattern.</exception>
+        public void Deconstruct(out string uri, out string name)
+        {
+            var match = QualifiedNameExpression.Match(this.name.Name);
+            if (match.Success)
+            {
+                uri = match.Groups["uri"].Value;
+                name = match.Groups["name"].Value;
+            }
+            else
+                throw new ArgumentException("NamedTypeSpecifier name does not match the expected pattern '{uri}name'.", nameof(name));
+        }
+
         /// <inheritdoc/>
         public override string ToString() => name?.ToString() ?? "null";
 
