@@ -22,13 +22,15 @@ namespace CoreTests.Elm
             TestEquality.EmptyTT.GetGenericParameters().Should().BeEquivalentTo(new[] { new ParameterTypeSpecifier() });
         }
 
+        private static ParameterTypeSpecifier gen(string t) => SystemTypes.Generic(t);
+
         private readonly GenericParameterAssignments testMap = new()
         {
-            { "A", SystemTypes.IntegerType },
-            { "B", SystemTypes.StringType },
-            { "C", SystemTypes.BooleanType },
-            { "D", SystemTypes.IntegerType },
-            { "E", SystemTypes.StringType },
+            { gen("A"), SystemTypes.IntegerType },
+            { gen("B"), SystemTypes.StringType },
+            { gen("C"), SystemTypes.BooleanType },
+            { gen("D"), SystemTypes.IntegerType },
+            { gen("E"), SystemTypes.StringType },
         };
 
         [

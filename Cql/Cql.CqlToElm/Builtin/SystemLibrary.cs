@@ -37,6 +37,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             IntegerToDecimal, LongToDecimal, IntegerToLong, IntegerToQuantity, DecimalToQuantity, DateToDateTime, CodeToConcept,
             Concatenate,
             Equal, NotEqual, Equivalent,
+            If
         };
 
         private static BuiltInFunctionDef unary<T>(TypeSpecifier argument, TypeSpecifier result) where T : OperatorExpression =>
@@ -81,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static FunctionDef[] DifferenceBetween = binary<DifferenceBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
         public static FunctionDef[] DurationBetween = binary<DurationBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
-        public static FunctionDef Equal = binary<Equal>(T, T,BooleanType);
+        public static FunctionDef Equal = binary<Equal>(T, T, BooleanType);
         public static FunctionDef NotEqual = binary<NotEqual>(T, T, BooleanType);
         public static FunctionDef Equivalent = binary<Equivalent>(T, T, BooleanType);
         public static FunctionDef[] Greater = binary<Greater>(T, T, BooleanType).For(T,
@@ -96,7 +97,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef[] Divide = binary<Divide>(T, T, T).For(T, DecimalType, QuantityType);
         public static FunctionDef[] TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] Modulo = binary<Modulo>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
-        public static FunctionDef[] Power = binary<Power>(T,T,T).For(T, IntegerType, LongType, DecimalType);                    
+        public static FunctionDef[] Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
+        public static IfFunctionDef If = new();
     }
 
     internal static class FunctionDefinitionBuilders

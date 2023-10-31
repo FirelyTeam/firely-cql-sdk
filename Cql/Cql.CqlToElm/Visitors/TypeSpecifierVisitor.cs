@@ -25,7 +25,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public TypeSpecifierVisitor(
             LibraryContext libraryContext,
-            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
+            LocalIdentifierProvider localIdentifierProvider,
+            InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             LibraryContext = libraryContext;
         }

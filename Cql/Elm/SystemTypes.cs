@@ -44,6 +44,10 @@ namespace Hl7.Cql.Elm
 
         internal static readonly ParameterTypeSpecifier T = Generic("T");
 
+        /// <summary>
+        /// Creates a <see cref="ParameterTypeSpecifier"/> with the given name.
+        /// </summary>
+        /// <remarks>Will return the same instance for two generic parameters with the same name.</remarks>
         internal static ParameterTypeSpecifier Generic(string name) =>
             gtpTsSingletons.GetOrAdd(name, n => new ParameterTypeSpecifier { parameterName = n });
 

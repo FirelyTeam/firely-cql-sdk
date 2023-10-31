@@ -18,7 +18,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             IModelProvider modelProvider,
             ParameterDefinitionVisitor parameterDefinitionVisitor,
             ExpressionVisitor expressionVisitor,
-            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
+            LocalIdentifierProvider localIdentifierProvider,
+            InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             ConverterContext = converterContext;
             LibraryContext = libraryContext;

@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm
                     var operandToTest = operand.ReplaceGenericParameters(assignments);
                     if (operandToTest != operand && argumentIndex > start && nextPosition is null) nextPosition = argumentIndex;
 
-                    var argumentResult = buildImplicitCast(argument, operandToTest, out var newAssignments);
+                    var argumentResult = BuildImplicitCast(argument, operandToTest, out var newAssignments);
                     assignments.AddRange(newAssignments);
 
                     if (!argumentResult.Success && firstError is null)
@@ -80,7 +80,17 @@ namespace Hl7.Cql.CqlToElm
             return ResolveResult<Expression>.SelectBestCandidate(positionResults).First();
         }
 
-        private ResolveResult<Expression> buildImplicitCast(
+        /// <summary>
+        /// Builds an expression that represents the implicit cast of the argument to the parameter type.
+        /// </summary>
+        /// <param name="argument">The expression to cast from.</param>
+        /// <param name="to">The type to cast to.</param>
+        /// <param name="newAssignments">If <paramref name="to"/> contains open generic parameters, this will contain the assignment parameters
+        /// to actual types to make the conversion work.</param>
+        /// <returns>A <see cref="ResolveResult{T}"/> that contains an Expression that casts the <paramref name="argument"/> to the type
+        /// <paramref name="to"/>. If this is not possible, <see cref="ResolveResult{T}.Error"/> is not null and contains a description of the
+        /// type error.</returns>
+        public ResolveResult<Expression> BuildImplicitCast(
             Expression argument, TypeSpecifier to, out GenericParameterAssignments newAssignments)
         {
             var argumentType = argument.resultTypeSpecifier;
@@ -128,7 +138,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
                 var prototypeInstance = new Literal { resultTypeSpecifier = fromList.elementType };
-                var elementCast = buildImplicitCast(prototypeInstance, toList.elementType, out var nestedNewAssignments);
+                var elementCast = BuildImplicitCast(prototypeInstance, toList.elementType, out var nestedNewAssignments);
 
                 if (elementCast.Success && elementCast.Result == prototypeInstance)
                 {
@@ -142,7 +152,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
             {
                 var prototypeInstance = new Literal { resultTypeSpecifier = fromInterval.pointType };
-                var elementCast = buildImplicitCast(prototypeInstance, toInterval.pointType, out var nestedNewAssignments);
+                var elementCast = BuildImplicitCast(prototypeInstance, toInterval.pointType, out var nestedNewAssignments);
 
                 if (elementCast.Success && elementCast.Result == prototypeInstance)
                 {
@@ -187,7 +197,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
             {
                 var singleton = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
-                var intermediate = buildImplicitCast(singleton, to, out newAssignments);
+                var intermediate = BuildImplicitCast(singleton, to, out newAssignments);
                 return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
@@ -197,7 +207,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
             {
                 var list = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
-                var intermediate = buildImplicitCast(list, to, out newAssignments);
+                var intermediate = BuildImplicitCast(list, to, out newAssignments);
                 return intermediate with { Cost = intermediate.Cost + 5 };
             }
 

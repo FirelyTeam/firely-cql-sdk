@@ -85,6 +85,7 @@ Hl7.Cql.Elm.Children
 Hl7.Cql.Elm.Children.Children() -> void
 Hl7.Cql.Elm.ChoiceTypeSpecifier
 Hl7.Cql.Elm.ChoiceTypeSpecifier.ChoiceTypeSpecifier() -> void
+Hl7.Cql.Elm.ChoiceTypeSpecifier.ChoiceTypeSpecifier(params Hl7.Cql.Elm.TypeSpecifier![]! choice) -> void
 Hl7.Cql.Elm.Coalesce
 Hl7.Cql.Elm.Coalesce.Coalesce() -> void
 Hl7.Cql.Elm.Code
@@ -749,7 +750,6 @@ static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! 
 static Hl7.Cql.Elm.ExtensionMethods.Signature(this Hl7.Cql.Elm.FunctionDef! def) -> string!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
-static Hl7.Cql.Elm.ParameterTypeSpecifier.implicit operator Hl7.Cql.Elm.ParameterTypeSpecifier!(string! parameterName) -> Hl7.Cql.Elm.ParameterTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!

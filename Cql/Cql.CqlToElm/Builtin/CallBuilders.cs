@@ -67,16 +67,53 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
             static string listSignatures(IEnumerable<FunctionDef> defs) =>
                 string.Join(", ", defs.Select(def => def.Signature()));
-
-            //static string listErrors(List<ResolveResult<Expression>> errorResults)
-            //{
-            //    if (errorResults.Count == 1)
-            //        return errorResults[0].Error!;
-            //    else
-            //        return "No matching overload found: " +
-            //            string.Join(Environment.NewLine, errorResults.Select(e => $"  {e.Error!}"));
-            //}
         }
+
+        public static If Call(this IfFunctionDef def, InvocationBuilder builder, ParserRuleContext context, Expression condition, Expression thenExpression, Expression elseExpression)
+        {
+            var ifNode = (If)def.CreateElmNode();
+
+            var ifCastResult = builder.BuildImplicitCast(condition, SystemTypes.BooleanType, out var _);
+
+            ifNode.condition = ifCastResult.Result;
+            if (ifCastResult.Error is not null)
+                ifNode.AddError("The condition " + ifCastResult.Error, ErrorType.semantic);
+
+            TypeSpecifier expressionType;
+
+            // First, try to see whether the then expressions can be cast to the type of the else expression.
+            var thenCastResult = builder.BuildImplicitCast(thenExpression, elseExpression.resultTypeSpecifier, out var _);
+
+            if (thenCastResult.Success)
+            {
+                ifNode.then = thenCastResult.Result;
+                ifNode.@else = elseExpression;
+                expressionType = elseExpression.resultTypeSpecifier;
+            }
+            else
+            {
+                // If that fails, try to see whether the else expression can be cast to the type of the then expression.
+                var elseCastResult = builder.BuildImplicitCast(elseExpression, thenExpression.resultTypeSpecifier, out var _);
+
+                if (elseCastResult.Success)
+                {
+                    ifNode.then = thenExpression;
+                    ifNode.@else = elseCastResult.Result;
+                    expressionType = thenExpression.resultTypeSpecifier;
+                }
+                else
+                {
+                    // Failing both, we have to cast both expressions to a common type, which is a choice of both types.
+                    var choiceType = new ChoiceTypeSpecifier(thenExpression.resultTypeSpecifier, elseExpression.resultTypeSpecifier);
+                    ifNode.then = SystemLibrary.As.Build(strict: false, choiceType, thenExpression, context);
+                    ifNode.@else = SystemLibrary.As.Build(strict: false, choiceType, elseExpression, context);
+                    expressionType = choiceType;
+                }
+            }
+
+            return ifNode.WithResultType(expressionType).WithLocator(context.Locator());
+        }
+
 
         /// <summary>
         /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that
@@ -143,7 +180,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// Given a <see cref="FunctionDef"/>, creates an <see cref="Expression"/> for the invocation with the
         /// operands initialized to the arguments given.
         /// </summary>
-        internal static Expression CreateElmNode(this FunctionDef def, Expression[] arguments)
+        internal static Expression CreateElmNode(this FunctionDef def, params Expression[] arguments)
         {
             var nodeType = def is BuiltInFunctionDef b ? b.ElmNodeType : typeof(FunctionRef);
             var result = Activator.CreateInstance(nodeType)!;

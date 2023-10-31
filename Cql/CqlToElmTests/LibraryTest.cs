@@ -86,6 +86,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddContext()
                 .AddLocalIdProvider()
                 .AddTransient<CqlToElmConverter>()
+                .AddTransient<InvocationBuilder>()
                 .AddConfiguration(cb => { });
 
         [TestMethod]

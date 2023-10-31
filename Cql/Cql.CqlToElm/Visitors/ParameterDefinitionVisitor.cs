@@ -9,7 +9,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public ParameterDefinitionVisitor(
             TypeSpecifierVisitor typeSpecVisitor,
             ExpressionVisitor expressionVisitor,
-            LocalIdentifierProvider localIdentifierProvider) : base(localIdentifierProvider)
+            LocalIdentifierProvider localIdentifierProvider,
+            InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             typeSpecifierVisitor = typeSpecVisitor;
             this.expressionVisitor = expressionVisitor;

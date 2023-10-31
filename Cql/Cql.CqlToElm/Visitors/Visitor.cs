@@ -5,12 +5,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal abstract class Visitor<T> : cqlBaseVisitor<T>
     {
-        protected Visitor(LocalIdentifierProvider localIdentifierProvider) : base()
+        protected Visitor(LocalIdentifierProvider localIdentifierProvider, InvocationBuilder invocationBuilder) : base()
         {
             LocalIdentifierProvider = localIdentifierProvider;
+            InvocationBuilder = invocationBuilder;
         }
 
         public LocalIdentifierProvider LocalIdentifierProvider { get; }
+        public InvocationBuilder InvocationBuilder { get; }
 
         protected string NextId() => LocalIdentifierProvider.Next();
 
