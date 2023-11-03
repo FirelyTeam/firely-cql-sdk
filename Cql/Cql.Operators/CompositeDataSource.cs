@@ -52,6 +52,25 @@ namespace Hl7.Cql.Operators
         public IDataSource[] DataSources { get; }
 
         /// <summary>
+        /// Gets the retrieve context value of the first data source in this composition by calling <see cref="IDataSource.GetRetrieveContext(Type)"/> on it.
+        /// </summary>
+        /// <remarks>
+        /// It is possible to create a <see cref="CompositeDataSource"/> out of several data sources, and then explicitly
+        /// set their retrieve contexts to different values separately.  This would result in inconsistent behavior and is
+        /// considered a usage error.  To set all retrieve contexts for every data source in this composition, use
+        /// <see cref="SetRetrieveContext(Type, object)"/>.
+        /// </remarks>
+        /// <param name="contextType">The resolved type of the context whose value you are setting.</param>
+        /// <returns>The context value of the first data source in this composition, or <see langword="default"/> if unspecified.</returns>
+        public object? GetRetrieveContext(Type contextType)
+        {
+            var first = DataSources.FirstOrDefault();
+            if (first != null)
+                return first.GetRetrieveContext(contextType);
+            else return default;
+        }
+
+        /// <summary>
         /// Retrieves resources whose code path contains a code from the <paramref name="codes"/> if specified.
         /// Otherwise, returns all resources of type <typeparamref name="T"/>.
         /// </summary>
@@ -85,6 +104,14 @@ namespace Hl7.Cql.Operators
                 result = result.Concat(source.RetrieveByValueSet<T>(valueSet, codeProperty));
             }
             return result;
+        }
+        
+        /// <inheritdoc/>
+        public IDataSource SetRetrieveContext(Type contextType, object contextValue)
+        {
+            foreach(var source in DataSources)
+                source.SetRetrieveContext(contextType, contextValue);
+            return this;
         }
     }
 }

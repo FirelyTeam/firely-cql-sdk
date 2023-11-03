@@ -183,9 +183,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         private IDictionary<string, (Expression, elm.Element)> Scopes { get; } = new Dictionary<string, (Expression, elm.Element)>();
 
-
         internal bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
-
 
         /// <summary>
         /// Creates a copy with the scopes provided.
@@ -250,7 +248,6 @@ namespace Hl7.Cql.Compiler
         {
             Builder.Logger.LogError(FormatMessage(message, element));
         }
-
 
         internal string FormatMessage(string message, elm.Element? element)
         {
