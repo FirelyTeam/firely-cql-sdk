@@ -23,13 +23,14 @@ namespace Hl7.Cql.Packaging
             this.logFactory = logFactory;
             this.resourceWriters = resourceWriters;
         }
- 
+
         /// <summary>
         /// Package the resources in the given ELM and CQL directories and output them using the writers provided in the constructor 
         /// </summary>
         /// <param name="elmDir">directory to find the ELM files</param>
         /// <param name="cqlDir">directory to find the CQL files</param>
-        public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir)
+        /// <param name="afterPackageMutator">optional mutator for the resources prior to writing</param>
+        public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action<IEnumerable<Resource>>? afterPackageMutator = null)
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
@@ -46,6 +47,11 @@ namespace Hl7.Cql.Packaging
                 new TypeManager(typeResolver),
                 CanonicalUri,
                 logFactory);
+
+            if(afterPackageMutator != null)
+            {
+                afterPackageMutator(resources);
+            }
 
             foreach(var writer in resourceWriters)
             {
