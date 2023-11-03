@@ -48,12 +48,9 @@ namespace Hl7.Cql.Packaging
                 CanonicalUri,
                 logFactory);
 
-            if(afterPackageMutator != null)
-            {
-                afterPackageMutator(resources);
-            }
+            afterPackageMutator?.Invoke(resources);
 
-            foreach(var writer in resourceWriters)
+            foreach (var writer in resourceWriters)
             {
                 writer.WriteResources(resources);
             }
