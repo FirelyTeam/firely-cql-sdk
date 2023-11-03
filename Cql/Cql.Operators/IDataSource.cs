@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -32,6 +33,44 @@ namespace Hl7.Cql.Operators
     /// </remarks>
     public interface IDataSource
     {
+    
+        /// <summary>
+        /// <para>
+        /// Sets the <see href="https://cql.hl7.org/02-authorsguide.html#retrieve-context">retrieve context</see> for the given type
+        /// for this data source.
+        /// </para>
+        /// <para>
+        /// Specifically, when set for <paramref name="contextType"/>, the <see cref="RetrieveByCodes{T}(IEnumerable{CqlCode?}?, PropertyInfo?)"/> and <see cref="RetrieveByValueSet{T}(CqlValueSet?, PropertyInfo?)"/>
+        /// methods will be return either <paramref name="contextValue"/> or an empty list, depending on whether <paramref name="contextValue"/> satisfies the other arguments to these methods.
+        /// </para>
+        /// <para>
+        /// In other words, setting a context for <paramref name="contextType"/> causes all retrieve statements of <paramref name="contextType"/> to only return <paramref name="contextValue"/>.
+        /// </para>
+        /// <para>
+        /// This method must be called on your data source for each context before you attempt to execute definitions in that context.  Otherwise,
+        /// the retrieve statements will return an empty list.  For definitions that refer to the implicitly defined context definition, 
+        /// e.g., "Patient" which is implemented as <code>define "Patient": singleton from [Patient]</code>, these context definitions will return <see langword="null"/>
+        /// and may result in runtime errors, incorect results, or both.
+        /// </para>
+        /// <para>
+        /// It is expected that the type <paramref name="contextType"/> will be one of the types resolved by the types of the contexts present in
+        /// the libraries being executed.  For example, if your <see cref="TypeResolver"/> resolves {http://hl7.org/fhir}Patient to <paramref name="contextType"/>,
+        /// then calling this method will set the Patient context to <paramref name="contextValue"/>.  This method will have no effect if none of the libraries
+        /// using this <see cref="IDataSource"/> have a context whose type resolves to <paramref name="contextType"/>.
+        /// </para>
+        /// </summary>
+        /// <param name="contextType">The resolved type of the context whose value you are setting.</param>
+        /// <param name="contextValue">The value to set.</param>
+        /// <returns>This <see cref="IDataSource"/></returns>
+        IDataSource SetRetrieveContext(Type contextType, object contextValue);
+
+        /// <summary>
+        /// Gets the context value set by <see cref="SetRetrieveContext(Type, object)"/>.
+        /// </summary>
+        /// <param name="contextType">The resolved type of the context whose value you are getting.</param>
+        /// <returns>The context value, or <see langword="default"/> if unspecified.</returns>
+        object? GetRetrieveContext(Type contextType);
+
         /// <summary>
         /// Retrieves resources whose code path contains a code from the <paramref name="codes"/> if specified.
         /// Otherwise, returns all resources of type <typeparamref name="T"/>.

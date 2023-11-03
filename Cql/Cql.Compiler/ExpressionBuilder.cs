@@ -2601,8 +2601,8 @@ namespace Hl7.Cql.Compiler
         }
 
         protected Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
-        Type definitionReturnType,
-        ExpressionBuilderContext ctx)
+            Type definitionReturnType,
+            ExpressionBuilderContext ctx)
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 

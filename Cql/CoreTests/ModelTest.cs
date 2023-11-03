@@ -66,6 +66,11 @@ namespace CoreTests
 
             public IList<object> Data { get; }
 
+            public object GetRetrieveContext(Type contextType)
+            {
+                throw new NotImplementedException();
+            }
+
 #if VNEXT
             public event EventHandler DataChanged;
 #endif
@@ -75,6 +80,11 @@ namespace CoreTests
 
             public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet = null, PropertyInfo _ = null) where T : class =>
                 Data.OfType<T>();
+
+            public IDataSource SetRetrieveContext(Type contextType, object contextValue)
+            {
+                throw new NotImplementedException();
+            }
         }
 
         private class UnitTestTypeResolver : BaseTypeResolver

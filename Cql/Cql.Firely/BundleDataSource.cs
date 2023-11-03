@@ -41,6 +41,7 @@ namespace Hl7.Cql.Fhir
             _codeComparer = codeComparer ?? DefaultStringComparer.Value;
             _systemComparer = systemComparer ?? DefaultStringComparer.Value;
             Bundle = bundle is not null ? new IndexedBundle(bundle.Entry) : throw new ArgumentNullException(nameof(bundle));
+            InitializeRetrieveContexts();
         }
 
         private static readonly Lazy<ICqlComparer> DefaultStringComparer = new(() =>
@@ -48,6 +49,8 @@ namespace Hl7.Cql.Fhir
 
         private IndexedBundle Bundle { get; init; }
         private IValueSetDictionary ValueSets { get; }
+
+        private readonly Dictionary<Type, object> RetrieveContexts = new();
 
         private readonly ICqlComparer _codeComparer;
         private readonly ICqlComparer _systemComparer;
@@ -77,7 +80,7 @@ namespace Hl7.Cql.Fhir
             }
             else
             {
-                return Bundle.FilterByType<T>();
+                return Retrieve<T>();
             }
         }
 
@@ -90,7 +93,7 @@ namespace Hl7.Cql.Fhir
             }
             else
             {
-                return Bundle.FilterByType<T>();
+                return Retrieve<T>();
             }
         }
 
@@ -101,7 +104,7 @@ namespace Hl7.Cql.Fhir
                 if (!typeof(T).IsAssignableTo(typeof(ICoded)))
                     throw new InvalidOperationException($"When retrieving with a code filter, a primary code path must exist for {typeof(T)}. None is defined.");
 
-                return Bundle.FilterByType<T>(filter);
+                return Retrieve<T>(filter);
             }
             else
             {
@@ -117,9 +120,66 @@ namespace Hl7.Cql.Fhir
                     };
                 }
 
-                return Bundle.FilterByType<T>(filter, getCodedValues);
+                return Retrieve<T>(filter, getCodedValues);
             }
         }
+
+        private IEnumerable<T> Retrieve<T>()
+        {
+            var context = (T?)GetRetrieveContext(typeof(T));
+            if (context != null)
+                yield return context;
+            else 
+                foreach (var t in Bundle.FilterByType<T>())
+                    yield return t;
+        }
+        private IEnumerable<T> Retrieve<T>(Predicate<Coding> filter)
+        {
+            var context = (T?)GetRetrieveContext(typeof(T));
+            if (context != null)
+                yield return context;
+            else
+                foreach (var t in Bundle.FilterByType<T>(filter))
+                    yield return t;
+        }
+
+        private IEnumerable<T> Retrieve<T>(Predicate<Coding> filter, Func<T, IEnumerable<Coding>> getCodes)
+        {
+            var context = (T?)GetRetrieveContext(typeof(T));
+            if (context != null)
+                yield return context;
+            else
+                foreach (var t in Bundle.FilterByType<T>(filter, getCodes))
+                    yield return t;
+        }
+        /// <inheritdoc/>
+        public IDataSource SetRetrieveContext(Type contextType, object contextValue)
+        {
+            RetrieveContexts[contextType] = contextValue;
+            return this;
+        }
+
+        /// <inheritdoc/>
+        public object? GetRetrieveContext(Type contextType)
+        {
+            if (RetrieveContexts.TryGetValue(contextType, out var contextValue))
+                return contextValue;
+            else return default;
+        }
+
+        /// <summary>
+        /// Set retrieve contexts for any resource in this bundle which is the only one of its type.
+        /// </summary>
+        private void InitializeRetrieveContexts()
+        {
+            var groupsByType = Bundle.Entries.Select(e => e.Resource).GroupBy(r => r.GetType());
+            foreach (var group in groupsByType)
+            {
+                if (group.Count() == 1)
+                    SetRetrieveContext(group.Key, group.First());
+            }
+        }
+
     }
 }
 #nullable disable
