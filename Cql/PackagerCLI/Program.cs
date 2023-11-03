@@ -1,13 +1,9 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
+using Hl7.Cql.Packaging.ResourceWriters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
-using System.Text.Json;
 
 namespace Hl7.Cql.Packager
 {
@@ -105,87 +101,16 @@ namespace Hl7.Cql.Packager
 #pragma warning restore CA1305 // Specify IFormatProvider
                     logging.AddSerilog();
                 });
-
-            var packagerLogger = logFactory.CreateLogger<LibraryPackager>();
-            var packages = LibraryPackager.LoadLibraries(elmDir);
-            var graph = Elm.Library.GetIncludedLibraries(packages.Values);
-            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
             var cliLogger = logFactory.CreateLogger("CLI");
 
-            var packager = new LibraryPackager();
-            var resources = packager.PackageResources(elmDir,
-                cqlDir,
-                graph,
-                typeResolver,
-                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
-                new TypeManager(typeResolver),
-                CanonicalUri,
-                logFactory);
+            List<ResourceWriter> resourceWriters = new();
+            if (fhirDir != null) resourceWriters.Add(new FhirResourceWriter(fhirDir, cliLogger));
+            if (csDir != null) resourceWriters.Add(new CSharpResourceWriter(csDir, cliLogger));
 
-            var options = new JsonSerializerOptions()
-                .ForFhir(typeof(Resource).Assembly)
-                .Pretty();
-            if (fhirDir != null)
-            {
-
-                cliLogger.LogInformation($"Writing FHIR resources to {fhirDir.FullName}");
-
-                foreach (var resource in resources)
-                {
-                    var file = new FileInfo(Path.Combine(fhirDir.FullName, $"{resource.Id}.json"));
-                    cliLogger.LogInformation($"Writing {file.FullName}");
-                    using var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
-                    JsonSerializer.Serialize(fs, resource, options);
-                }
-            }
-            if (csDir != null)
-            {
-                cliLogger.LogInformation($"Writing C# source files to {csDir.FullName}");
-                // Write out the C# source code to the desired output location
-                foreach (var resource in resources)
-                {
-                    if (resource is Binary binary)
-                    {
-                        if (binary.ContentType == "text/plain")
-                        {
-                            var bytes = binary.Data;
-                            DirectoryInfo? sourceDir = null;
-                            if (binary.Id.StartsWith("Tuple_"))
-                            {
-                                sourceDir = new(Path.Combine(csDir.FullName, "Tuples"));
-                            }
-                            else
-                            {
-                                sourceDir = new(csDir.FullName);
-                            }
-                            EnsureDirectory(sourceDir);
-                            var filePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
-                            cliLogger.LogInformation($"Writing {filePath}");
-                            File.WriteAllBytes(filePath, bytes);
-                        }
-                    }
-                    else if (resource is Library library && library.Content != null)
-                    {
-                        var textPlain = library.Content
-                            .SingleOrDefault(c => c.ContentType == "text/plain");
-                        if (textPlain != null)
-                        {
-                            var bytes = textPlain.Data;
-                            var sourceFilePath = Path.Combine(csDir.FullName, $"{library.Id}.cs");
-                            File.WriteAllBytes(sourceFilePath, bytes);
-                        }
-                    }
-                }
-            }
+            var resourcePackager = new ResourcePackager(logFactory, resourceWriters.ToArray());
+            resourcePackager.Package(elmDir, cqlDir);
         }
 
-        private static string CanonicalUri(Resource resource)
-        {
-            if (string.IsNullOrWhiteSpace(resource.Id))
-                throw new ArgumentException("Resource must have an id", nameof(resource));
-            var path = $"#/{resource.TypeName}/{resource.Id}";
-            return path;
-        }
 
         private static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
         {
@@ -204,7 +129,7 @@ namespace Hl7.Cql.Packager
         private static int ShowHelp()
         {
             Console.WriteLine();
-            Console.WriteLine("Measure Packager");
+            Console.WriteLine("Packager CLI");
             Console.WriteLine();
             Console.WriteLine($"\t--elm <directory>\tLibrary root path");
             Console.WriteLine($"\t--cql <directory>\tCQL root path");
