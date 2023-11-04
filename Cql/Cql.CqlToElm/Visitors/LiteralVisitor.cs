@@ -176,9 +176,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         }
 
-        public override Expression VisitInvocationTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.InvocationTermContext context) =>
-            Visit(context.GetChild(0));
-
         public override Expression VisitLongNumberLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.LongNumberLiteralContext context)
         {
             var literal = new Literal

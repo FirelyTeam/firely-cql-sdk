@@ -8,41 +8,50 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class DefinitionVisitor : Visitor<Elm.Element>
+    internal class DefinitionVisitor : Visitor<ISymbol>
     {
-        public LibraryContext LibraryContext { get; }
         public IModelProvider ModelProvider { get; }
         public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
+        public ILibraryProvider LibraryProvider { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
 
         public DefinitionVisitor(
-            LibraryContext libraryContext,
             LocalIdentifierProvider identifierProvider,
             InvocationBuilder invocationBuilder,
             IModelProvider modelProvider,
             ExpressionVisitor expressionVisitor,
-            TypeSpecifierVisitor typeSpecifierVisitor)
+            TypeSpecifierVisitor typeSpecifierVisitor,
+            ILibraryProvider libraryProvider)
             : base(identifierProvider, invocationBuilder)
         {
-            LibraryContext = libraryContext;
             ModelProvider = modelProvider;
             TypeSpecifierVisitor = typeSpecifierVisitor;
+            LibraryProvider = libraryProvider;
             ExpressionVisitor = expressionVisitor;
         }
 
         //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
-        public override Element VisitIncludeDefinition([NotNull] cqlParser.IncludeDefinitionContext context)
+        public override ISymbol VisitIncludeDefinition([NotNull] cqlParser.IncludeDefinitionContext context)
         {
             var (qualifier, id) = context.qualifiedIdentifier().Parse();
+            var libraryName = string.IsNullOrWhiteSpace(qualifier) ? id : $"{qualifier}.{id}";
+            var version = context.versionSpecifier()?.STRING().ParseString();
+            var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? libraryName;
 
-            var includeDef = new IncludeDef
+            var resolveSuccess = LibraryProvider.TryResolveLibrary(libraryName, version, out var libraryScope, out var error);
+
+            if (resolveSuccess)
             {
-                path = string.IsNullOrWhiteSpace(qualifier) ? id : $"{qualifier}.{id}",
-                localIdentifier = context.localIdentifier()?.identifier().Parse(),
-                version = context.versionSpecifier()?.STRING().ParseString(),
-            }.WithLocator(context.Locator());
 
-            return includeDef;
+                return new IncludedLibrary(localIdentifier, libraryScope!).WithLocator(context.Locator());
+            }
+            else
+            {
+                var emptyLibrary = new LibraryScope(new VersionedIdentifier { id = libraryName, version = version });
+                var errorInclude = new IncludedLibrary(localIdentifier, emptyLibrary);
+                errorInclude.AddError(error!, ErrorType.semantic);
+                return errorInclude.WithLocator(context.Locator());
+            }
         }
 
         // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?

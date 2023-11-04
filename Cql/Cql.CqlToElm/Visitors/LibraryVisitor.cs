@@ -11,7 +11,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public LibraryVisitor(
             ConverterContext converterContext,
-            LibraryContext libraryContext,
             IConfiguration configuration,
             IModelProvider modelProvider,
             DefinitionVisitor definitionVisitor,
@@ -19,21 +18,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
             InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             ConverterContext = converterContext;
-            LibraryContext = libraryContext;
             Configuration = configuration;
             ModelProvider = modelProvider;
             DefinitionVisitor = definitionVisitor;
         }
 
         #region Services
-        private LibraryContext LibraryContext { get; }
         private IConfiguration Configuration { get; }
         private IModelProvider ModelProvider { get; }
         public DefinitionVisitor DefinitionVisitor { get; }
         public ConverterContext ConverterContext { get; }
         #endregion
 
-        private UsingDef? GetDefaultSystemUsingDef()
+        private ModelLibrary? GetDefaultSystemModel()
         {
             var systemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
             var systemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)] ?? SystemTypes.SystemModelVersion;
@@ -42,13 +39,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return null;
 
             if (ModelProvider.ModelFromUri(systemUri, systemVersion) is { } model)
-            {
-                return new UsingDef
-                {
-                    uri = model.url,
-                    localIdentifier = "System",
-                }.WithId();
-            }
+                return new ModelLibrary("System", model);
             else
                 throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
         }
@@ -58,43 +49,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //     | conceptDefinition | parameterDefinition ;
         public override Library VisitLibrary([NotNull] cqlParser.LibraryContext context)
         {
-            var library = new Library
+            var identifier = context.libraryDefinition().Parse();
+            var libraryScope = new LibraryScope(identifier);
+            ConverterContext.EnterScope(libraryScope);
+
+            if (GetDefaultSystemModel() is { } systemModel)
+                libraryScope.TryAdd(systemModel);
+
+            foreach (var definition in context.definition())
             {
-                identifier = context.libraryDefinition().Parse()
-            };
+                libraryScope.TryAdd(DefinitionVisitor.Visit(definition));
+            }
+            context.definition().Select(DefinitionVisitor.Visit).ToList();
 
-            ConverterContext.AddLibrary(library);
-            LibraryContext.ActiveLibrary = library;
+            // The same is true for statements, although we have a specific visitor for those,
+            // to handle the fact that statements can be expressions or contexts and we need
+            // to make sure we change the context when we encounter one.
+            DefinitionVisitor.VisitStatements(context.statement()).ToList();
 
-            // visit usings and includes first so later definitions can refer to models.
-            var systemUsings = GetDefaultSystemUsingDef() is { } sys ? new[] { sys } : Enumerable.Empty<UsingDef>();
-            var firstDefinitions =
-                (from definition in context.definition()
-                 let usingOrInclude = buildUsingOrInclude(definition)
-                 where usingOrInclude is not null
-                 select usingOrInclude).ToList();
-
-            Element? buildUsingOrInclude(cqlParser.DefinitionContext context) => context switch
-            {
-                _ when context.usingDefinition() is { } @using => DefinitionVisitor.Visit(@using),
-                _ when context.includeDefinition() is { } include => DefinitionVisitor.Visit(@include),
-                _ => null
-            };
-
-            library.usings = systemUsings.Concat(firstDefinitions.OfType<UsingDef>()).ToArray();
-            library.includes = firstDefinitions.OfType<IncludeDef>().ToArray();
-
-            var definitions = context.definition().Select(DefinitionVisitor.Visit).ToList();
-            library.codeSystems = definitions.OfType<CodeSystemDef>().ToArray();
-            library.valueSets = definitions.OfType<ValueSetDef>().ToArray();
-            library.codes = definitions.OfType<CodeDef>().ToArray();
-            library.concepts = definitions.OfType<ConceptDef>().ToArray();
-            library.parameters = definitions.OfType<ParameterDef>().ToArray();
-
-            var statements = DefinitionVisitor.VisitStatements(context.statement()).ToList();
-            library.statements = statements.OfType<ExpressionDef>().ToArray();
-            library.contexts = statements.OfType<ContextDef>().ToArray();
-
+            var library = libraryScope.BuildLibrary();
             return library;
         }
     }

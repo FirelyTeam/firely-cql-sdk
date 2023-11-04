@@ -2,7 +2,6 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -28,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
-        public override Expression VisitIntervalSelector([NotNull] cqlParser.IntervalSelectorContext context)
+        public override Expression VisitIntervalSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.IntervalSelectorContext context)
         {
             var lowClosed = context.GetChild(1).GetText() switch
             {
@@ -80,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         // : ('List' ('<' typeSpecifier '>')?)? '{' (expression (',' expression)*)? '}'
-        public override Expression VisitListSelector([NotNull] cqlParser.ListSelectorContext context)
+        public override Expression VisitListSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.ListSelectorContext context)
         {
             var typeSpecifier = context.typeSpecifier() is { } tsContext ? TypeSpecifierVisitor.Visit(tsContext) : null;
             var elements = context.expression().Select(Visit).ToArray();
@@ -184,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         //  '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
-        public override Expression VisitRetrieve([NotNull] cqlParser.RetrieveContext context)
+        public override Expression VisitRetrieve([Antlr4.Runtime.Misc.NotNull] cqlParser.RetrieveContext context)
         {
             var contextName = context.contextIdentifier().GetText();
             var codePath = context.codePath().GetText();

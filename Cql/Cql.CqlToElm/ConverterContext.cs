@@ -26,5 +26,16 @@ namespace Hl7.Cql.CqlToElm
             else throw new ArgumentException($"Library already exists.", nameof(library));
         }
 
+        public ISymbolScope? CurrentScope { get; private set; }
+
+        public void EnterScope(ISymbolScope scope)
+        {
+            CurrentScope = scope;
+        }
+
+        public void ExitScope()
+        {
+            CurrentScope = CurrentScope?.Parent;
+        }
     }
 }

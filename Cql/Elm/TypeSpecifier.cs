@@ -15,7 +15,6 @@ using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Elm
 {
-
     public partial class TypeSpecifier
     {
         /// <summary>

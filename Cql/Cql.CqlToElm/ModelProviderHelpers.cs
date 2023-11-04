@@ -11,34 +11,13 @@ namespace Hl7.Cql.CqlToElm
     public static class ModelProvider
     {
         /// <summary>
-        /// Returns the unqualified name for a given <see cref="TypeInfo"/>.
-        /// </summary>
-        /// <returns>The name for a <see cref="SimpleTypeInfo"/> or <see cref="ClassInfo"/> or null otherwise.</returns>
-        public static string? GetNameFromTypeInfo(this TypeInfo ti)
-        {
-            var (ns, name) = ti switch
-            {
-                SimpleTypeInfo sti => (sti.@namespace, sti.name),
-                ClassInfo c => (c.@namespace, c.name),
-                _ => (null, null)
-            };
-
-            if (ns is null && name is null)
-                return null;
-            else if (ns is null) // if there is no namespace, it is part of the name
-                return name?.Split('.', 2).LastOrDefault();
-            else
-                return name;
-        }
-
-        /// <summary>
         /// Gets the <see cref="TypeInfo"/> named <paramref name="name"/> in <paramref name="model"/>.
         /// </summary>
         /// <param name="model">The model to interrogate.</param>
         /// <param name="name">The name of the type, optionally prefixed with the name of the model.</param>
         /// <param name="result">The <see cref="TypeInfo"/>, if found.</param>
         /// <returns><see langword="true"/> if the info was found.</returns>
-        private static bool tryGetTypeInfoFor(this ModelInfo model, string name, out TypeInfo? result)
+        public static bool TryGetTypeInfoFor(this ModelInfo model, string name, out TypeInfo? result)
         {
             var nonDottedName = name.StartsWith(model.name + ".") ?
                 name[(model.name.Length + 1)..] : name;
@@ -58,7 +37,7 @@ namespace Hl7.Cql.CqlToElm
             if (provider.ModelFromUri(uri) is ModelInfo mi)
             {
                 model = mi;
-                typeInfo = model.tryGetTypeInfoFor(typeName, out var ti) ? ti : null;
+                typeInfo = model.TryGetTypeInfoFor(typeName, out var ti) ? ti : null;
             }
             else
             {

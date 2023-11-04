@@ -1,10 +1,5 @@
 ﻿using Antlr4.Runtime;
 using Antlr4.Runtime.Tree;
-using Hl7.Cql.Elm;
-using System;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Xml;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -23,12 +18,6 @@ namespace Hl7.Cql.CqlToElm
 
     internal static class Extensions
     {
-        private static readonly ObjectIDGenerator _idGenerator = new();
-
-        public static string NextId(object context) => _idGenerator.GetId(context, out _)
-                .ToString(CultureInfo.InvariantCulture);
-
-        public static string NextId() => NextId(Random.Shared.Next());
 
         public static string Locator(this ParserRuleContext context)
         {
@@ -41,37 +30,5 @@ namespace Hl7.Cql.CqlToElm
 
         public static string? Locator(this IParseTree pt) => pt is ParserRuleContext ctx ? ctx.Locator() : null;
 
-        public static T WithId<T>(this T t) where T : Element
-        {
-            t.localId = NextId(t);
-
-            return t;
-        }
-
-        public static T WithLocator<T>(this T t, string? locator) where T : Element
-        {
-            t.WithId();
-            t.locator = locator;
-
-            return t;
-        }
-
-        public static T WithResultType<T>(this T t, TypeSpecifier? type) where T : Element
-        {
-            t.resultTypeSpecifier = type;
-
-            if (type is NamedTypeSpecifier nts)
-                t.resultTypeName = nts.name;
-
-            return t;
-        }
-
-        public static XmlQualifiedName? TryToQualifiedName(this TypeSpecifier? type)
-        {
-            if (type is NamedTypeSpecifier nts)
-                return nts.name;
-            else
-                return null;
-        }
     }
 }

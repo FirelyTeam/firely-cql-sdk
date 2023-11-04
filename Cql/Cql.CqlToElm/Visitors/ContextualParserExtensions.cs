@@ -95,7 +95,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return codeRef;
         }
 
-
+        //  : identifier | keywordIdentifier
+        public static string Parse(this cqlParser.ReferentialIdentifierContext context)
+        {
+            if (context.identifier() is { } identifierContext)
+                return identifierContext.Parse()!;
+            else if (context.keywordIdentifier() is { } kwi)
+                return kwi.GetText();
+            else
+                throw new InvalidOperationException($"Unexpected referential identifier child.");
+        }
 
         // : (libraryIdentifier '.')? identifier
         public static CodeSystemRef? Parse(this cqlParser.CodesystemIdentifierContext context)

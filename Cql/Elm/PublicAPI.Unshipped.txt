@@ -353,6 +353,9 @@ Hl7.Cql.Elm.IsNull
 Hl7.Cql.Elm.IsNull.IsNull() -> void
 Hl7.Cql.Elm.IsTrue
 Hl7.Cql.Elm.IsTrue.IsTrue() -> void
+Hl7.Cql.Elm.ISymbol
+Hl7.Cql.Elm.ISymbol.Access.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.ISymbol.Name.get -> string!
 Hl7.Cql.Elm.Iteration
 Hl7.Cql.Elm.Iteration.Iteration() -> void
 Hl7.Cql.Elm.Last

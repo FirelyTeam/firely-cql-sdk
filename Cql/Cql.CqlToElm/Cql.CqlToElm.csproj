@@ -39,16 +39,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="Visitors/TermExpressionTermVisitor.cs">
-			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
-		</Compile>
 		<Compile Update="Visitors/BinaryExpressionVisitor.cs">
 			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
 		</Compile>
 		<Compile Update="Visitors/UnaryExpressionVisitor.cs">
-			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
-		</Compile>
-		<Compile Update="Visitors/ReferenceVisitor.cs">
 			<DependentUpon>Visitors/ExpressionVisitor.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>

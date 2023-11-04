@@ -11,6 +11,7 @@ using System.Xml;
 
 namespace Hl7.Cql.Model
 {
+
     public static class QualifiedName
     {
         /// <summary>

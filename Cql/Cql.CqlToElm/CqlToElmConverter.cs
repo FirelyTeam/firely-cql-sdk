@@ -52,7 +52,6 @@ namespace Hl7.Cql.CqlToElm
 
             using (var scope = ScopeFactory.CreateScope())
             {
-                var libCtx = scope.ServiceProvider.GetRequiredService<LibraryContext>();
                 var visitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
 
                 try

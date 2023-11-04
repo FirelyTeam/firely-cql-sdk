@@ -94,6 +94,7 @@ Hl7.Cql.Model.TupleTypeSpecifier.TupleTypeSpecifier() -> void
 Hl7.Cql.Model.TupleTypeSpecifierElement
 Hl7.Cql.Model.TupleTypeSpecifierElement.TupleTypeSpecifierElement() -> void
 Hl7.Cql.Model.TypeInfo
+Hl7.Cql.Model.TypeInfo.GetNameFromTypeInfo() -> string?
 Hl7.Cql.Model.TypeInfo.TypeInfo() -> void
 Hl7.Cql.Model.TypeParameterInfo
 Hl7.Cql.Model.TypeParameterInfo.TypeParameterInfo() -> void
