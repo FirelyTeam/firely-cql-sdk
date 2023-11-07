@@ -31,7 +31,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.Write(text);
         }
 
-        private static string IndentString(int indent) => new string(Enumerable.Repeat('\t', indent).ToArray());
+        public static string IndentString(int indent) => new string(Enumerable.Repeat('\t', indent).ToArray());
 
         public static void AppendLine(this StringBuilder sb, int indent, string text)
         {

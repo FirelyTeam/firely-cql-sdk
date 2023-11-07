@@ -28,7 +28,11 @@ namespace Hl7.Cql.Compiler
             typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string) })!;
 
         public DefinitionCallExpression(Expression definitions,
-            string libraryName, string definitionName, Expression cqlContextParameter, Type definitionType)
+            string libraryName, 
+            string definitionName, 
+            Expression cqlContextParameter, 
+            Type definitionType,
+            bool fromUnfilteredContext)
         {
             if (definitions.Type != typeof(DefinitionDictionary<Delegate>))
                 throw new ArgumentException($"Argument should be of type {nameof(DefinitionDictionary<Delegate>)}",
@@ -42,6 +46,7 @@ namespace Hl7.Cql.Compiler
             DefinitionName = definitionName;
             CqlContextParameter = cqlContextParameter;
             DefinitionType = definitionType;
+            FromUnfilteredContext = fromUnfilteredContext;
         }
 
         public override bool CanReduce => true;
@@ -73,6 +78,7 @@ namespace Hl7.Cql.Compiler
         public override Type Type => GetReturnTypeFromDelegateType(DefinitionType);
 
         public Expression Definitions { get; }
+        public bool FromUnfilteredContext { get; }
         public string LibraryName { get; }
         public string DefinitionName { get; }
         public Expression CqlContextParameter { get; }

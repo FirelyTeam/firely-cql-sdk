@@ -145,21 +145,15 @@ namespace Hl7.Cql.Packaging
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
-            var elmLibraries = packageGraph.Nodes.Values
+            var cqlLibraries = packageGraph.Nodes.Values
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
                 .OfType<elm.Library>()
                 // Processing this deterministically to reduce different exceptions when running this repeatedly
-                .OrderBy(lib => lib.NameAndVersion) 
+                .OrderBy(lib => lib.NameAndVersion)
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();
-            foreach (var library in elmLibraries)
-            {
-                builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger, new(false));
-                var expressions = builder.Build();
-                all.Merge(expressions);
-            }
+            var cqlLibraryDictionary = cqlLibraries.ToDictionary(lib => lib.NameAndVersion!);
             var scw = new CSharpSourceCodeWriter(codeWriterLogger);
             foreach (var @using in typeResolver.ModelNamespaces)
                 scw.Usings.Add(@using);
@@ -168,10 +162,10 @@ namespace Hl7.Cql.Packaging
 
             var navToLibraryStream = new Dictionary<string, Stream>();
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
-            var assemblies = compiler.Compile(elmLibraries, logFactory);
-            var libraries = new Dictionary<string, Library>();
+            var assemblies = compiler.Compile(cqlLibraries, logFactory);
+            var fhirLibraries = new Dictionary<string, Library>();
             var typeCrosswalk = new CqlTypeToFhirTypeMapper(typeResolver);
-            foreach (var library in elmLibraries)
+            foreach (var library in cqlLibraries)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
                 if (!elmFile.Exists)
@@ -192,13 +186,27 @@ namespace Hl7.Cql.Packaging
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
+                // <<<<<<< HEAD
+                //                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
+                //                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
+                //                 libraries.Add(library.NameAndVersion, fhirLibrary);
+                // =======
+                var builder = new ExpressionBuilder(operatorBinding,
+                    typeManager,
+                    library.NameAndVersion!,
+                    cqlLibraryDictionary,
+                    builderLogger,
+                    new(false));
+                builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
+                var expressions = builder.Build();
+                all.Merge(expressions);
                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
-                libraries.Add(library.NameAndVersion, fhirLibrary);
+                fhirLibraries.Add(library.NameAndVersion, fhirLibrary);
+                // >>>>>>> ec93a98 (Defines with contexts now have an optional parameter that will be coalesced to the context definition (e.g. "Patient") when the parameter's value is not supplied (null).)
             }
 
             var resources = new List<Resource>();
-            resources.AddRange(libraries.Values);
+            resources.AddRange(fhirLibraries.Values);
 
             var tupleAssembly = assemblies["TupleTypes"];
 
@@ -221,7 +229,7 @@ namespace Hl7.Cql.Packaging
                 resources.Add(tuplesCSharp);
             }
 
-            foreach (var library in elmLibraries)
+            foreach (var library in cqlLibraries)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
                 foreach (var def in library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>())
@@ -266,7 +274,7 @@ namespace Hl7.Cql.Packaging
                             measure.Url = canon(measure)!;
                             if (library.NameAndVersion is null)
                                 throw new InvalidOperationException("Library NameAndVersion should not be null.");
-                            if (!libraries.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
+                            if (!fhirLibraries.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
                                 throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
                             measure.Library = new List<string> { libForMeasure!.Url };
                             resources.Add(measure);
@@ -278,7 +286,8 @@ namespace Hl7.Cql.Packaging
             return resources;
         }
 
-        private Hl7.Fhir.Model.Library createLibraryResource(FileInfo elmFile,
+        private Hl7.Fhir.Model.Library createLibraryResource(
+            FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,

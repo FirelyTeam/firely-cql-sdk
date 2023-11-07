@@ -28,7 +28,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var eb = ExpressionBuilder.SingleLibrary(binding, typeManager, elmPackage, logger);
             var expressions = eb.Build();
         }
 
@@ -53,7 +53,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var eb = ExpressionBuilder.SingleLibrary(binding, typeManager, elmPackage, logger);
             var expressions = eb.Build();
         }
 

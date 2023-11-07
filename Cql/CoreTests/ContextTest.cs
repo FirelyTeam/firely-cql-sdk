@@ -14,6 +14,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Hl7.Cql.CodeGeneration.NET;
+using Microsoft.CodeAnalysis;
 
 namespace CoreTests
 {
@@ -23,7 +25,9 @@ namespace CoreTests
         private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
         private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
         private static DefinitionDictionary<Delegate> Definitions;
+        private static Dictionary<string, MemoryStream> SourceCodeStreams = new Dictionary<string, MemoryStream>();
         private static HashValueSetDictionary ValueSets;
+        private static string SourceCode;
         private const string ContextLibrary = "Context_AG-1.0.0";
         [ClassInitialize]
         public static void Initialize(TestContext context)
@@ -31,19 +35,31 @@ namespace CoreTests
             var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
             var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\Context_AG-1.0.0.json");
-            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var logger = LoggerFactory
-                .Create(logging => logging.AddDebug())
-                .CreateLogger<ExpressionBuilder>();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var library = Hl7.Cql.Elm.Library.LoadFromJson(elm);
+            var lf = LoggerFactory
+                .Create(logging => logging.AddDebug());
+               
+            var eb = ExpressionBuilder.SingleLibrary(binding, typeManager, library, 
+                lf.CreateLogger<ExpressionBuilder>());
             var expressions = eb.Build();
+            var scw = new CSharpSourceCodeWriter(lf.CreateLogger<CSharpSourceCodeWriter>());
+            SourceCodeStreams[library.NameAndVersion] = new MemoryStream();
+            scw.Write(expressions, 
+                Enumerable.Empty<Type>(), 
+                expressions.SingleLibraryGraph(), 
+                key => SourceCodeStreams[key],
+                closeStream: false);
+            var stream = SourceCodeStreams[ContextLibrary];
+            stream.Position = 0;
+            var sr = new StreamReader(stream);
+            SourceCode = sr.ReadToEnd();
+
             Definitions = expressions
                 .CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
                 new CqlCode("code", "system", null, null));
         }
-
 
         [TestMethod]
         public void Context_AutomaticContext()
@@ -77,7 +93,7 @@ namespace CoreTests
             Assert.AreSame(patient, patientContext);
             var encounterCountext = ctx.Operators.DataSource.GetRetrieveContext<Encounter>();
             Assert.IsNull(encounterCountext);
-            var result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx);
+            var result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patient);
             Assert.AreEqual(true, result);
         }
 
@@ -122,9 +138,9 @@ namespace CoreTests
 
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
             ctx.Operators.DataSource.SetRetrieveContext(patients[0]);
-            var result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx);
+            var result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patients[0]);
             ctx.Operators.DataSource.SetRetrieveContext(patients[3]);
-            result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx);
+            result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patients[0]);
             Assert.AreEqual(false, result);
         }
 

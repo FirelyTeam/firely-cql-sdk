@@ -47,6 +47,9 @@ Hl7.Cql.Abstractions.IEquivalenceComparer<T>
 Hl7.Cql.Abstractions.IEquivalenceComparer<T>.Equivalent(T x, T y, string? precision) -> bool
 Hl7.Cql.Abstractions.IEquivalentable<T>
 Hl7.Cql.Abstractions.IEquivalentable<T>.Equivalent(T? other, string? precision) -> bool
+Hl7.Cql.Abstractions.RetrieveContextAttribute
+Hl7.Cql.Abstractions.RetrieveContextAttribute.Context.get -> string!
+Hl7.Cql.Abstractions.RetrieveContextAttribute.RetrieveContextAttribute(string! Context) -> void
 Hl7.Cql.Abstractions.TypeResolver
 Hl7.Cql.Abstractions.TypeResolver.TypeResolver() -> void
 Hl7.Cql.Abstractions.UCUMUnits
