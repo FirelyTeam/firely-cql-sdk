@@ -37,8 +37,6 @@ namespace Hl7.Cql.Packager
                 return -1;
             }
 
-
-
             var dArg = config["d"];
             bool debug = false;
             if (dArg != null && !bool.TryParse(dArg, out debug))
