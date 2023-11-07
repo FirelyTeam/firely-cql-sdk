@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public ConverterContext ConverterContext { get; }
         #endregion
 
-        private ModelLibrary? GetDefaultSystemModel()
+        private UsingDefSymbol? GetDefaultSystemModel()
         {
             var systemUri = Configuration[nameof(CqlToElmOptions.SystemElmModelUri)];
             var systemVersion = Configuration[nameof(CqlToElmOptions.SystemElmModelVersion)] ?? SystemTypes.SystemModelVersion;
@@ -39,7 +39,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return null;
 
             if (ModelProvider.ModelFromUri(systemUri, systemVersion) is { } model)
-                return new ModelLibrary("System", model);
+                return new UsingDefSymbol("System", model);
             else
                 throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
         }
@@ -50,24 +50,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Library VisitLibrary([NotNull] cqlParser.LibraryContext context)
         {
             var identifier = context.libraryDefinition().Parse();
-            var libraryScope = new LibraryScope(identifier);
-            ConverterContext.EnterScope(libraryScope);
+            var libraryBuilder = new LibraryBuilder(identifier);
+            ConverterContext.EnterScope(libraryBuilder);
 
+            // Add the default model, System
             if (GetDefaultSystemModel() is { } systemModel)
-                libraryScope.TryAdd(systemModel);
+                libraryBuilder.TryAdd(systemModel);
 
-            foreach (var definition in context.definition())
-            {
-                libraryScope.TryAdd(DefinitionVisitor.Visit(definition));
-            }
-            context.definition().Select(DefinitionVisitor.Visit).ToList();
+            // TODO: Add the default function library, SystemLibrary
+
+            // Parse the definitions, these will insert themselves into the current symbol table.
+            _ = context.definition().Select(DefinitionVisitor.Visit);
 
             // The same is true for statements, although we have a specific visitor for those,
             // to handle the fact that statements can be expressions or contexts and we need
             // to make sure we change the context when we encounter one.
             DefinitionVisitor.VisitStatements(context.statement()).ToList();
 
-            var library = libraryScope.BuildLibrary();
+            var library = libraryBuilder.Build();
             return library;
         }
     }

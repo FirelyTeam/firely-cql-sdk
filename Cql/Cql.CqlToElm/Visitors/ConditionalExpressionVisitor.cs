@@ -5,7 +5,7 @@ using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal partial class ExpressionVisitor : Visitor<Expression>
+    internal partial class ExpressionVisitor
     {
         // | 'if' expression 'then' expression 'else' expression                           #ifThenElseExpressionTerm
         public override Expression VisitIfThenElseExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.IfThenElseExpressionTermContext context)

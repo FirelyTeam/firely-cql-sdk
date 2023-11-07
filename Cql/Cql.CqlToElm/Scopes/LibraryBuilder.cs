@@ -4,16 +4,18 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal partial class LibraryScope : ISymbolScope
+    internal class LibraryBuilder : ISymbolScope
     {
         private static readonly VersionedIdentifier schemaIdentifier = new() { id = "urn:hl7-org:elm", version = "r1" };
 
-        public LibraryScope(VersionedIdentifier identifier)
+        public LibraryBuilder(VersionedIdentifier identifier)
         {
             Identifier = identifier;
         }
 
         public VersionedIdentifier Identifier { get; }
+
+        public ISymbolScope? Parent => null;
 
         //TODO: This code should go into the loading logic for libraries that are delivered to us
         //as ELM. The loading of these files should be done before compilation starts and errors should
@@ -67,34 +69,62 @@ namespace Hl7.Cql.CqlToElm
 
         //}
 
-        public Library BuildLibrary()
+        public Library Build()
         {
             return new Library
             {
                 identifier = Identifier,
                 schemaIdentifier = schemaIdentifier,
-                usings = symbols.Values.OfType<ModelLibrary>().Select(uds => uds.ToUsingDef()).ToArray(),
-                includes = symbols.Values.OfType<IncludedLibrary>().Select(uds => uds.ToIncludeDef()).ToArray(),
-                parameters = symbols.Values.OfType<ParameterDef>().ToArray(),
-                codeSystems = symbols.Values.OfType<CodeSystemDef>().ToArray(),
-                valueSets = symbols.Values.OfType<ValueSetDef>().ToArray(),
-                codes = symbols.Values.OfType<CodeDef>().ToArray(),
-                concepts = symbols.Values.OfType<ConceptDef>().ToArray(),
-                contexts = symbols.Values.OfType<ContextDef>().ToArray(),
-                statements = symbols.Values.OfType<ExpressionDef>().ToArray(),
+                usings = symbols.OfType<UsingDef>().ToArray(),
+                includes = symbols.OfType<IncludeDef>().ToArray(),
+                parameters = symbols.OfType<ParameterDef>().ToArray(),
+                codeSystems = symbols.OfType<CodeSystemDef>().ToArray(),
+                valueSets = symbols.OfType<ValueSetDef>().ToArray(),
+                codes = symbols.OfType<CodeDef>().ToArray(),
+                concepts = symbols.OfType<ConceptDef>().ToArray(),
+                contexts = symbols.OfType<ContextDef>().ToArray(),
+                statements = symbols.OfType<ExpressionDef>().ToArray(),
             };
         }
 
-        public IReadOnlyCollection<ModelLibrary> Models =>
-            symbols.Values.OfType<ModelLibrary>().ToArray();
+        private readonly Dictionary<string, IDefinitionElement> symbols = new();
 
-        private readonly Dictionary<string, ISymbol> symbols = new();
+        public bool TryAdd(IDefinitionElement symbol)
+        {
+            throw new System.NotImplementedException();
+        }
 
-        public ISymbolScope? Parent => null;   // this kind of symbol table is always the root.
+        private readonly List<UsingDefSymbol> includedModels = new();
 
-        public bool TryResolveSymbol(string identifier, AccessModifier access, out ISymbol? symbol) =>
-             symbols.TryGetValue(identifier, out symbol) && access >= symbol.Access;
+        public bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol)
+        {
+            // First, resolve the symbol in the current scope.
+            if (symbols.TryGetValue(identifier, out symbol))
+                return true;
 
-        public bool TryAdd(ISymbol symbol) => symbols.TryAdd(symbol.Name, symbol);
+            // Now, also try to find it in the included models. Since there may be more than
+            // one model included, this could result in an ambiguous match.
+            var matches = new List<ModelType>();
+
+            // For each of the used models in the library, now resolve the type.
+            foreach (var model in includedModels)
+            {
+                if (model.TryResolveSymbol(identifier, out var modelType))
+                    matches.Add((ModelType)modelType!);
+            }
+
+            switch (matches.Count)
+            {
+                case 0:
+                    symbol = null;
+                    return false;
+                case 1:
+                    symbol = matches.Single();
+                    return true;
+                default:
+                    symbol = matches.First();
+                    return false;
+            }
+        }
     }
 }

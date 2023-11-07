@@ -10,20 +10,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public ExpressionVisitor(
             IModelProvider provider,
-            LibraryContext libraryContext,
+            ConverterContext converterContext,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
-            LibraryContext = libraryContext;
+            ConverterContext = converterContext;
             TypeSpecifierVisitor = typeSpecifierVisitor;
         }
 
         #region Privates
         private readonly IModelProvider ModelProvider;
-        private readonly LibraryContext LibraryContext;
         private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
+
+        public ConverterContext ConverterContext { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')

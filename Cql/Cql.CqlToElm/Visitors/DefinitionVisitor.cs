@@ -8,10 +8,11 @@ using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class DefinitionVisitor : Visitor<ISymbol>
+    internal class DefinitionVisitor : Visitor<IDefinitionElement>
     {
         public IModelProvider ModelProvider { get; }
         public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
+        public ConverterContext ConverterContext { get; }
         public ILibraryProvider LibraryProvider { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
 
@@ -21,64 +22,67 @@ namespace Hl7.Cql.CqlToElm.Visitors
             IModelProvider modelProvider,
             ExpressionVisitor expressionVisitor,
             TypeSpecifierVisitor typeSpecifierVisitor,
+            ConverterContext converterContext,
             ILibraryProvider libraryProvider)
             : base(identifierProvider, invocationBuilder)
         {
             ModelProvider = modelProvider;
             TypeSpecifierVisitor = typeSpecifierVisitor;
+            ConverterContext = converterContext;
             LibraryProvider = libraryProvider;
             ExpressionVisitor = expressionVisitor;
         }
 
         //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
-        public override ISymbol VisitIncludeDefinition([NotNull] cqlParser.IncludeDefinitionContext context)
+        public override IDefinitionElement VisitIncludeDefinition([NotNull] cqlParser.IncludeDefinitionContext context)
         {
             var (qualifier, id) = context.qualifiedIdentifier().Parse();
             var libraryName = string.IsNullOrWhiteSpace(qualifier) ? id : $"{qualifier}.{id}";
             var version = context.versionSpecifier()?.STRING().ParseString();
             var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? libraryName;
 
-            var resolveSuccess = LibraryProvider.TryResolveLibrary(libraryName, version, out var libraryScope, out var error);
+            var resolveSuccess = LibraryProvider.TryResolveLibrary(libraryName, version, out var library, out var error);
 
             if (resolveSuccess)
             {
-
-                return new IncludedLibrary(localIdentifier, libraryScope!).WithLocator(context.Locator());
+                return new IncludeDefSymbol(localIdentifier, library!).WithLocator(context.Locator());
             }
             else
             {
-                var emptyLibrary = new LibraryScope(new VersionedIdentifier { id = libraryName, version = version });
-                var errorInclude = new IncludedLibrary(localIdentifier, emptyLibrary);
+                // To be able to continue to parse, create an empty library scope with the name and version
+                // and return that so we can act as if some library was found.
+                var emptyLibrary = new Library { identifier = new VersionedIdentifier { id = libraryName, version = version } };
+                var errorInclude = new IncludeDefSymbol(localIdentifier, emptyLibrary);
                 errorInclude.AddError(error!, ErrorType.semantic);
                 return errorInclude.WithLocator(context.Locator());
             }
         }
 
         // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
-        public override Element VisitUsingDefinition([NotNull] cqlParser.UsingDefinitionContext context)
+        public override IDefinitionElement VisitUsingDefinition([NotNull] cqlParser.UsingDefinitionContext context)
         {
             // Although the rule allows for multiple qualifiers, it is not clear what a qualified model name would mean.
             // For now, we take the whole qualified name as the name of the model.
             var (ns, id) = context.qualifiedIdentifier().Parse();
             var modelName = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
             var modelVersion = context.versionSpecifier()?.STRING().ParseString();
-            var localIdentifier = context.localIdentifier()?.identifier().Parse();
+            var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? modelName;
 
-            var model = ModelProvider.ModelFromName(modelName, modelVersion)
-                ?? throw new InvalidOperationException($"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.");
+            var model = ModelProvider.ModelFromName(modelName, modelVersion);
 
-            var usingDef = new UsingDef()
+            if (model is null)
             {
-                uri = model.url,
-                version = modelVersion,
-                localIdentifier = localIdentifier ?? modelName,
-            };
-
-            return usingDef.WithLocator(context.Locator());
+                var emptyModel = new Model.ModelInfo() { name = modelName, version = modelVersion };
+                var error = $"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.";
+                var usingDef = new UsingDefSymbol(localIdentifier, emptyModel).AddError(error, ErrorType.semantic);
+                return usingDef.WithLocator(context.Locator());
+            }
+            else
+                return new UsingDefSymbol(localIdentifier, model).WithLocator(context.Locator());
         }
 
         //accessModifier? 'codesystem' identifier ':' codesystemId('version' versionSpecifier)?
-        public override Element VisitCodesystemDefinition([NotNull] cqlParser.CodesystemDefinitionContext context)
+        public override IDefinitionElement VisitCodesystemDefinition([NotNull] cqlParser.CodesystemDefinitionContext context)
         {
             var codeSystemDef = new CodeSystemDef
             {
@@ -86,13 +90,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = context.identifier().Parse(),
                 id = context.codesystemId().STRING().ParseString(),
                 version = context.versionSpecifier()?.STRING().ParseString(),
-            }.WithLocator(context.Locator());
+            }.WithLocator(context.Locator()).WithResultType(SystemTypes.CodeSystemType);
 
             return codeSystemDef;
         }
 
         //  : accessModifier? 'valueset' identifier ':' valuesetId ('version' versionSpecifier)? codesystems?
-        public override Element VisitValuesetDefinition([NotNull] cqlParser.ValuesetDefinitionContext context)
+        public override IDefinitionElement VisitValuesetDefinition([NotNull] cqlParser.ValuesetDefinitionContext context)
         {
             var valueSetDef = new ValueSetDef
             {
@@ -102,13 +106,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 version = context.versionSpecifier()?.STRING().ParseString(),
                 codeSystem = context.codesystems()?.codesystemIdentifier().Select(csi =>
                     csi.Parse()).ToArray(),
-            }.WithLocator(context.Locator());
+            }.WithLocator(context.Locator()).WithResultType(SystemTypes.ValueSetType);
 
             return valueSetDef;
         }
 
         //: accessModifier? 'code' identifier ':' codeId 'from' codesystemIdentifier displayClause?
-        public override Element VisitCodeDefinition([NotNull] cqlParser.CodeDefinitionContext context)
+        public override IDefinitionElement VisitCodeDefinition([NotNull] cqlParser.CodeDefinitionContext context)
         {
             var codeDef = new CodeDef()
             {
@@ -117,13 +121,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 id = context.codeId().STRING().ParseString(),
                 codeSystem = context.codesystemIdentifier().Parse(),
                 display = context.displayClause()?.STRING()?.ParseString(),
-            }.WithLocator(context.Locator());
+            }.WithLocator(context.Locator()).WithResultType(SystemTypes.CodeType);
 
             return codeDef;
         }
 
         //: accessModifier? 'concept' identifier ':' '{' codeIdentifier(',' codeIdentifier)* '}' displayClause?
-        public override Element VisitConceptDefinition([NotNull] cqlParser.ConceptDefinitionContext context)
+        public override IDefinitionElement VisitConceptDefinition([NotNull] cqlParser.ConceptDefinitionContext context)
         {
             var conceptDef = new ConceptDef
             {
@@ -131,32 +135,51 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = context.identifier().Parse(),
                 code = context.codeIdentifier().Select(ci => ci.Parse()).ToArray(),
                 display = context.displayClause()?.STRING().ParseString(),
-            }.WithLocator(context.Locator());
+            }.WithLocator(context.Locator()).WithResultType(SystemTypes.ConceptType);
 
             return conceptDef;
         }
 
         //: accessModifier? 'parameter' identifier (typeSpecifier)? ('default' expression)?
-        public override ParameterDef VisitParameterDefinition([NotNull] cqlParser.ParameterDefinitionContext context)
+        //    public override ParameterDef VisitParameterDefinition([NotNull] cqlParser.ParameterDefinitionContext context)
+        public override IDefinitionElement VisitParameterDefinition([NotNull] cqlParser.ParameterDefinitionContext context)
         {
             var paramDef = new ParameterDef
             {
                 accessLevel = context.accessModifier().Parse(),
                 name = context.identifier().Parse(),
-                @default = ExpressionVisitor.Visit(context.expression()),
             }.WithLocator(context.Locator());
 
-            if (context.typeSpecifier() is { } typeSpec)
+            if (context.expression() is { } expr)
             {
-                paramDef.parameterTypeSpecifier = TypeSpecifierVisitor.Visit(typeSpec);
-                paramDef.parameterType = paramDef.parameterTypeSpecifier.TryToQualifiedName();
+                paramDef.@default = ExpressionVisitor.Visit(expr);
             }
 
-            return paramDef;
+            var typeSpec = context.typeSpecifier() is { } ts ? TypeSpecifierVisitor.Visit(ts) : null;
+
+            if (typeSpec is not null && paramDef.@default is null)
+            {
+                paramDef.parameterTypeSpecifier = typeSpec;
+                paramDef.parameterType = typeSpec?.TryToQualifiedName();
+            }
+            else if (typeSpec is null && paramDef.@default is not null)
+            {
+                paramDef.parameterTypeSpecifier = paramDef.@default.resultTypeSpecifier;
+                paramDef.parameterType = paramDef.parameterTypeSpecifier.TryToQualifiedName();
+            }
+            else
+            {
+                // TODO: both are set. We need to verify that the expression is assignable
+                // to the specified parameter type, and if necessery provide a cast, just
+                // like with expressions in operators.
+                throw new NotImplementedException("TODO: Implement parameter type coercion.");
+            }
+
+            return paramDef.WithResultType(paramDef.parameterTypeSpecifier);
         }
 
         // 'define' accessModifier? identifier ':' expression
-        public override Element VisitExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context)
+        public override IDefinitionElement VisitExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context)
         {
             var expression = ExpressionVisitor.Visit(context.expression());
 
@@ -171,10 +194,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         // statement : expressionDefinition   | contextDefinition | functionDefinition ;
-        public IEnumerable<Element> VisitStatements(cqlParser.StatementContext[] context)
+        public IEnumerable<IDefinitionElement> VisitStatements(cqlParser.StatementContext[] context)
         {
             ContextDef? activeContext = null;
-            List<NamedTypeSpecifier> definedContexts = new();
+            List<TypeSpecifier> definedContexts = new();
 
             // Go over the statements in order, since they can be interleaved
             // with context statements, which become active immediately.
@@ -190,14 +213,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                     yield return ed;
                 }
-                else if (statement is ContextDefWithNamedType cd)
+                else if (statement is ContextDef cd)
                 {
                     // If we encounter a context statement, it will be applied to all
                     // subsequent expressions we encounter
-                    activeContext = cd.ContextDefinition;
+                    activeContext = cd;
 
                     // Make sure we create just one ContextDef per model type.
-                    if (!definedContexts.Contains(cd.TypeName))
+                    if (!definedContexts.Contains(cd.resultTypeSpecifier))
                     {
                         // Build an expression named after the context, which will
                         // do a retrieve for all data of that type.
@@ -205,10 +228,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                         // Now return both the newly encountered context and the 
                         // expression def that represents it.
-                        yield return cd.ContextDefinition;
+                        yield return cd;
                         yield return exprDef;
 
-                        definedContexts.Add(cd.TypeName);
+                        definedContexts.Add(cd.resultTypeSpecifier);
                     }
                 }
                 else
@@ -216,59 +239,45 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
         }
 
-        private ExpressionDef buildContextExpression(cqlParser.StatementContext statementContext, ContextDefWithNamedType cd)
+        private ExpressionDef buildContextExpression(cqlParser.StatementContext statementContext, ContextDef cd)
         {
+            var resultType = cd.resultTypeSpecifier as NamedTypeSpecifier ??
+                throw new InvalidOperationException($"ContextDef {cd.name} has a resultType that is not a named type specifier.");
+
             var retrieve = new Retrieve
             {
-                dataType = cd.TypeName.name,
-                templateId = ModelProvider.GetDefaultProfileUriForType(cd.TypeName),
-            }.WithLocator(statementContext.Locator()).WithResultType(cd.TypeName.ToListType());
+                dataType = resultType.name,
+                templateId = ModelProvider.GetDefaultProfileUriForType(resultType),
+            }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType());
 
             var singleton = SystemLibrary.SingletonFrom.Call(ModelProvider, statementContext, retrieve);
-            var (_, exprName) = cd.TypeName;
+            var (_, exprName) = resultType;
             var exprDef = new ExpressionDef
             {
                 name = exprName,
                 expression = singleton,
-                context = cd.ContextDefinition.name,
+                context = cd.name,
             }.WithLocator(statementContext.Locator()).WithResultType(singleton.resultTypeSpecifier);
 
             return exprDef;
         }
 
         //    : 'context' (modelIdentifier '.')? identifier
-        public override Element VisitContextDefinition(cqlParser.ContextDefinitionContext context)
+        public override IDefinitionElement VisitContextDefinition(cqlParser.ContextDefinitionContext context)
         {
             var identifier = context.identifier().Parse()!;
             var modelIdentifier = context.modelIdentifier()?.identifier().Parse();
 
-            _ = LibraryContext.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
+            _ = ConverterContext.CurrentScope!.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
 
             var cd = new ContextDef
             {
                 name = modelIdentifier is null ? identifier : $"{modelIdentifier}.{identifier}"
-            }.WithLocator(context.Locator());
+            }.WithLocator(context.Locator()).WithResultType(namedType);
 
             if (error is not null) cd.AddError(error, ErrorType.semantic);
 
-            return new ContextDefWithNamedType(namedType, cd);
-        }
-
-
-        // This class is only used as a communication vehicle between the ContextDef parser and the statement parser.
-        // Its purpose is to fix a defect in ContextDef, which does not keep track of the full NamedTypeSpecificer the
-        // context represents. This type name is concatenated to a string name, but we need the full typespecifier later.
-        private class ContextDefWithNamedType : Element
-        {
-            public ContextDefWithNamedType(NamedTypeSpecifier typeName, ContextDef contextDefinition)
-            {
-                TypeName = typeName;
-                ContextDefinition = contextDefinition;
-            }
-
-            public NamedTypeSpecifier TypeName { get; }
-
-            public ContextDef ContextDefinition { get; }
+            return cd;
         }
     }
 }

@@ -9,6 +9,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class TypeSpecifierVisitor : Visitor<TypeSpecifier>
     {
+        public ConverterContext ConverterContext { get; }
+
         private class UnqualifiedTypeNameSpecifier : TypeSpecifier
         {
             public UnqualifiedTypeNameSpecifier(string unqualifiedName)
@@ -24,14 +26,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         public TypeSpecifierVisitor(
-            LibraryContext libraryContext,
+            ConverterContext converterContext,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
-            LibraryContext = libraryContext;
+            ConverterContext = converterContext;
         }
-
-        private readonly LibraryContext LibraryContext;
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
         public override TypeSpecifier VisitChoiceTypeSpecifier([NotNull] cqlParser.ChoiceTypeSpecifierContext context)
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (qualifiers.Length > 1)
                 throw new InvalidOperationException($"Multiple qualifiers not supported.");
 
-            _ = LibraryContext.TryResolveNamedTypeSpecifier(qualifiers.SingleOrDefault(), unqualified.UnqualifiedName, out var result, out var error);
+            _ = ConverterContext.CurrentScope!.TryResolveNamedTypeSpecifier(qualifiers.SingleOrDefault(), unqualified.UnqualifiedName, out var result, out var error);
 
             if (error is not null) result.AddError(error, ErrorType.semantic);
 

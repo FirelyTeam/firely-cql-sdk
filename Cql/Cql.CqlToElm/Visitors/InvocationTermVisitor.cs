@@ -11,11 +11,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var identifier = context.Parse();
 
-            var reference = LibraryContext.Ref(null, identifier);
-            reference ??= new Null { resultTypeSpecifier = SystemTypes.AnyType }
-                .AddError("Unable to resolve identifier {identifier}.", ErrorType.semantic);
+            var success = ConverterContext.CurrentScope!.TryGetRef(identifier, out var definitionRef);
+            var result = definitionRef ?? new Null { resultTypeSpecifier = SystemTypes.AnyType };
 
-            return reference.WithLocator(context.Locator());
+            if (!success)
+                result.AddError("Unable to resolve identifier {identifier}.", ErrorType.semantic);
+
+            return result.WithLocator(context.Locator());
         }
 
         // : referentialIdentifier             #memberInvocation
