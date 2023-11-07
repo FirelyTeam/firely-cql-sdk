@@ -42,13 +42,13 @@ namespace Hl7.Cql.CodeGeneration.NET
         private TypeManager TypeManager { get; }
         private OperatorBinding Binding { get; }
 
-        internal IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
+        internal IDictionary<string, AssemblyData> Compile(IEnumerable<Library> libraries,
                     ILoggerFactory logFactory)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
-            var graph = Library.GetIncludedLibraries(elmPackages);
+            var graph = Library.GetIncludedLibraries(libraries);
             var references = new[]
             {
             // Core engine references
@@ -84,9 +84,15 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
             var all = new DefinitionDictionary<LambdaExpression>();
-            foreach (var package in elmPackages)
+            var libraryDictionary = libraries.ToDictionary(lib => lib.NameAndVersion!);
+            foreach (var library in libraries)
             {
-                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new(false));
+                var builder = new ExpressionBuilder(Binding, 
+                    TypeManager, 
+                    library.NameAndVersion!, 
+                    libraryDictionary, 
+                    builderLogger, 
+                    new(false));
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }

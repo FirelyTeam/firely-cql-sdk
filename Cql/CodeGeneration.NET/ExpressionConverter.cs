@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CodeGeneration.NET.Expressions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
 using Microsoft.CodeAnalysis.CSharp;
@@ -17,6 +18,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -53,9 +55,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 FunctionCallExpression fce => convertFunctionCallExpression(indent, leadingIndentString, fce),
                 DefinitionCallExpression dce => convertDefinitionCallExpression(indent, leadingIndentString, dce),
                 ElmAsExpression ea => ConvertExpression(indent, ea.Reduce(), leadingIndent),
+                UseContextParameterExpression ucpe => convertUseContextParameterExpression(indent, leadingIndentString, ucpe),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
-            };
+            };;
         }
+
+        private string convertUseContextParameterExpression(int indent, string leadingIndentString, UseContextParameterExpression ucpe) =>
+            $"{leadingIndentString}{TextWriterExtensions.IndentString(indent)}{ucpe.ContextParameterName} ?? {ucpe.LazyName}.Value";
 
         private static readonly ObjectIDGenerator gen = new();
 
@@ -411,13 +417,32 @@ namespace Hl7.Cql.CodeGeneration.NET
             return $"{leadingIndentString}{nullCoalesce}";
         }
 
+        private static Regex ContextParameterNameExpression = new Regex(@"^\$(\w+)\$([\w\d]+)$", RegexOptions.Compiled);
+        internal static (string context, string parameterName, ParameterExpression parameter)? RetrieveContextParameter(ParameterExpression parameter)
+        {
+            var match = ContextParameterNameExpression.Match(parameter.Name!);
+            if (match.Success)
+            {
+                var contextName = match.Groups[1].Value;
+                var parameterName = match.Groups[2].Value;
+
+                return (contextName, parameterName, parameter);
+            }
+            else return null;
+        }
 
         private string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda, bool functionMode = false)
         {
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
-
-            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}"))})";
+            var parameterDeclarations = lambda.Parameters.Select(p => {
+                var rcp = RetrieveContextParameter(p);
+                if (rcp != null)
+                    return $"[RetrieveContext(\"{rcp.Value.context}\")] {PrettyTypeName(p.Type)} {rcp.Value.parameterName} = default)";
+                else 
+                    return $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}";
+            });
+            var lambdaParameters = $"({string.Join(", ", parameterDeclarations)})";
             lambdaSb.Append(lambdaParameters);
 
             if (lambda.Body is BlockExpression)
@@ -542,7 +567,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (right is LambdaExpression le)
                     return convertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
-                var rightCode = ConvertExpression(indent, right, false);
+                var rightCode = ConvertExpression(0, right, false);
                 string typeDeclaration = "var";
                 if (rightCode == "null" || rightCode == "default")
                     typeDeclaration = PrettyTypeName(left.Type);

@@ -75,5 +75,6 @@ namespace Hl7.Cql.Runtime
             var result = (T?)@delegate.DynamicInvoke(combined);
             return result;
         }
+    
     }
 }

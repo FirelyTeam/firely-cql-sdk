@@ -25,7 +25,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// <summary>
     /// Writes <see cref="LambdaExpression"/>s as members of a .NET class.
     /// </summary>
-    internal class CSharpSourceCodeWriter
+    internal partial class CSharpSourceCodeWriter
     {
         /// <summary>
         /// Creates an instance.
@@ -256,11 +256,20 @@ namespace Hl7.Cql.CodeGeneration.NET
                 {
                     if (isDefinition(overload.Item2))
                     {
+                        var methodParameter = string.Empty;
+                        var rcp = overload.Item2.Parameters
+                            .Select(p => ExpressionConverter.RetrieveContextParameter(p))
+                            .Where(rcp => rcp != null)
+                            .SingleOrDefault();
+                        if (rcp != null)
+                        {
+                            methodParameter = $"{rcp.Value.context}()";
+                        }
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
                         var returnType = ExpressionConverter.PrettyTypeName(overload.Item2.ReturnType);
                         var privateMethodName = PrivateMethodNameFor(methodName!);
-                        writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(this.{privateMethodName});");
+                        writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(()=>{privateMethodName}({methodParameter}));");
                     }
                 }
             }
@@ -342,9 +351,19 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static bool isDefinition(LambdaExpression overload) =>
-            overload.Parameters.Count == 1
-                && overload.Parameters[0].Type == typeof(CqlContext);
+        private static bool isDefinition(LambdaExpression overload)
+        {
+            if (overload.Parameters.Count == 1)
+            {
+                return overload.Parameters[0].Type == typeof(CqlContext);
+            }
+            else if (overload.Parameters.Count == 2)
+            {
+                return overload.Parameters[0].Type == typeof(CqlContext)
+                    && (overload.Parameters[1].Name?.StartsWith("$") ?? false);
+            }
+            return false;
+        }
 
         private void WriteLibraryMembers(TextWriter writer,
             DirectedGraph dependencyGraph,
@@ -409,17 +428,25 @@ namespace Hl7.Cql.CodeGeneration.NET
                 new RenameVariablesVisitor(vng),
                 new LocalVariableDeduper()
             );
-
             var expressionConverter = new ExpressionConverter(libraryName);
-
-            // Skip CqlContext
-            var parameters = overload.Parameters.Skip(1);
-
-            overload = Expression.Lambda(visitedBody, parameters);
-
-            if (isDef)
+            var rcp = overload.Parameters
+                .Select(p => ExpressionConverter.RetrieveContextParameter(p))
+                .Where(rcp => rcp != null)
+                .SingleOrDefault();
+            if (rcp != null)
             {
-                // Definitions, which are CQL expressions without parameter, can be memoized,
+                var cachedValueName = DefinitionCacheKeyForMethod(rcp.Value.context!);
+                var ucpv = new UseContextParameterVisitor(rcp.Value.context, rcp.Value.parameterName, cachedValueName);
+                visitedBody = Transform(visitedBody, ucpv);
+                var parameters = overload.Parameters.Skip(1);
+                overload = Expression.Lambda(visitedBody, parameters);
+                writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
+                WriteTags(writer, indentLevel, tags);
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+            }
+            else
+            {
+                // Definitions, which are CQL expressions without required parameters, can be memoized,
                 // so we generate a "generator" function (name ending in _Value) and a
                 // getter function, which just calls triggers the lazy to invoke this
                 // first _Value method.
@@ -455,13 +482,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                     lazyType.GetMember("Value").Single()));
 
                 writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!, "public"));
-            }
-            else
-            {
-                writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
-                WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
-                //      writer.WriteLine();
             }
         }
 

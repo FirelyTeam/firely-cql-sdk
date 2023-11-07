@@ -57,6 +57,5 @@ namespace Hl7.Cql.Graph
             return clonedNode;
         }
 
-
     }
 }

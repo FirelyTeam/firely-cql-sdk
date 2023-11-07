@@ -39,26 +39,50 @@ namespace Hl7.Cql.Compiler
         /// Creates an instance.
         /// </summary>
         /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
-        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="elm"/>.</param>
-        /// <param name="elm">The <see cref="Library"/> this builder will build.</param>
+        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="libraries"/>.</param>
+        /// <param name="library">The identifier in <paramref name="libraries"/> to compile.</param>
+        /// <param name="libraries">A dictionary keyed on <see cref="Library.NameAndVersion"/> containing the libraries on which <paramref name="library"/> could depend.</param>
         /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="Build"/>.</param>
         /// <param name="options">Optional features for the codegenerator.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
-        /// <exception cref="ArgumentException">If the <paramref name="elm"/> does not have a valid library or identifier.</exception>
+        /// <exception cref="ArgumentException">If the <paramref name="library"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(OperatorBinding operatorBinding,
             TypeManager typeManager,
-            Library elm,
+            string library,
+            IDictionary<string, Library> libraries,
             ILogger<ExpressionBuilder> logger,
             ExpressionBuilderOptions? options = null)
         {
             OperatorBinding = operatorBinding;
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
-            Library = elm ?? throw new ArgumentNullException(nameof(elm));
+            Libraries = libraries ?? throw new ArgumentNullException(nameof(libraries));
+            if (libraries.TryGetValue(library, out var lib))
+                Library = lib;
+            else throw new ArgumentException($"Library {library} does not exist in {nameof(libraries)}", nameof(library));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             this.options = options ?? new(EmitStackTraces: false);
             if (Library.identifier == null)
                 throw new ArgumentException("Package is missing a library identifier", nameof(elm));
         }
+
+        /// <summary>
+        /// Creates an <see cref="ExpressionBuilder"/> for a single library with no dependencies.
+        /// Note that <see cref="elm.ExpressionRef"/> and <see cref="elm.FunctionRef"/> nodes that reference external libraries will throw exceptions
+        /// when <see cref="Build"/> is called on the result of this function.
+        /// </summary>
+        internal static ExpressionBuilder SingleLibrary(OperatorBinding operatorBinding,
+            TypeManager typeManager,
+            Library library,
+            ILogger<ExpressionBuilder> logger,
+            ExpressionBuilderOptions? options = null) =>
+                new ExpressionBuilder(operatorBinding, typeManager,
+                    library.NameAndVersion ?? throw new ArgumentException(nameof(library)),
+                    new Dictionary<string, Library>
+                    {
+                        { library.NameAndVersion, library }
+                    },
+                    logger,
+                    options);
 
         /// <summary>
         /// Gets the settings used during <see cref="Build"/>.
@@ -87,6 +111,7 @@ namespace Hl7.Cql.Compiler
         /// The <see cref="Library"/> this builder will build.
         /// </summary>
         public Library Library { get; }
+        protected internal readonly IDictionary<string, Library> Libraries;
         protected internal TypeResolver TypeResolver => TypeManager.Resolver;
 
         protected internal ILogger<ExpressionBuilder> Logger { get; }
@@ -190,7 +215,7 @@ namespace Hl7.Cql.Compiler
 
                 if (Library.codeSystems != null)
                 {
-                    foreach(var codeSystem in Library.codeSystems)
+                    foreach (var codeSystem in Library.codeSystems)
                     {
                         if (codesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
                         {
@@ -291,7 +316,7 @@ namespace Hl7.Cql.Compiler
                     }
                 }
 
-                foreach (var def in Library.statements ?? Enumerable.Empty<elm.ExpressionDef>())
+                foreach (var def in Library.statements ?? Enumerable.Empty<ExpressionDef>())
                 {
                     if (def.expression != null)
                     {
@@ -328,10 +353,22 @@ namespace Hl7.Cql.Compiler
                                 }
                                 else throw new InvalidOperationException($"Operand for function {def.name} is missing its {nameof(operand.operandTypeSpecifier)} property");
                             }
-
-                            parameters = parameters
-                                .Concat(buildContext.Operands.Values)
-                                .ToArray();
+                            var defContextType = ContextTypeFor(def);
+                            if (defContextType != null)
+                            {
+                                var defContextParameterName = $"$Patient${TypeManager.ToCamelCase(TypeManager.PrettyTypeName(defContextType!))}Context";
+                                var defContextParameter = Expression.Parameter(defContextType, defContextParameterName);
+                                parameters = parameters
+                                    .Concat(buildContext.Operands.Values)
+                                    .Concat(new[] { defContextParameter })
+                                    .ToArray();
+                            }
+                            else
+                            {
+                                parameters = parameters
+                                    .Concat(buildContext.Operands.Values)
+                                    .ToArray();
+                            }
                             if (CustomImplementations.TryGetValue(customKey, out var factory) && factory != null)
                             {
                                 var customLambda = factory(parameters);
@@ -356,6 +393,23 @@ namespace Hl7.Cql.Compiler
                             }
 
                         }
+                        else
+                        {
+                            // Exclude the definition that cql-to-elm creates for ContextDef
+                            if (def.name != def.context)
+                            {
+                                var defContextType = ContextTypeFor(def);
+                                if (defContextType != null)
+                                {
+                                    var defContextParameterName = $"$Patient${TypeManager.ToCamelCase(TypeManager.PrettyTypeName(defContextType!))}Context";
+                                    var defContextParameter = Expression.Parameter(defContextType, defContextParameterName);
+                                    functionParameterTypes = new[] { defContextType };
+                                    parameters = parameters
+                                        .Concat(new[] { defContextParameter })
+                                        .ToArray();
+                                }
+                            }
+                        }
                         buildContext = buildContext.Deeper(def);
                         var bodyExpression = TranslateExpression(def.expression, buildContext);
                         var lambda = Expression.Lambda(bodyExpression, parameters);
@@ -378,7 +432,6 @@ namespace Hl7.Cql.Compiler
                                     {
                                         var value = tag.value ?? string.Empty;
                                         definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes ?? new Type[0], name, value);
-
                                     }
                                 }
                             }
@@ -1478,7 +1531,7 @@ namespace Hl7.Cql.Compiler
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw new ArgumentException($"The ValueSetRef at {valueSetRef.locator} is missing a name.", nameof(valueSetRef));
             var type = TypeManager.TypeFor(valueSetRef, ctx, throwIfNotFound: true)!;
-            var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
+            var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), false, ctx);
 
             if (IsOrImplementsIEnumerableOfT(type))
             {
@@ -1594,7 +1647,7 @@ namespace Hl7.Cql.Compiler
             {
                 var type = TypeResolver.ResolveType(cre.resultTypeName.Name!)
                     ?? throw new InvalidOperationException($"Unable to resolve type {cre.resultTypeName}");
-                return InvokeDefinitionThroughRuntimeContext(cre.name, cre.libraryName, type!, ctx);
+                return InvokeDefinitionThroughRuntimeContext(cre.name, cre.libraryName, type!, false, ctx);
             }
             else throw new InvalidOperationException($"CodeRefExpression {cre.name} is null");
         }
@@ -1604,7 +1657,7 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(csr.name))
             {
                 var type = TypeResolver.CodeType.MakeArrayType();
-                return InvokeDefinitionThroughRuntimeContext(csr.name, csr.libraryName, type!, ctx);
+                return InvokeDefinitionThroughRuntimeContext(csr.name, csr.libraryName, type!, false, ctx);
             }
             else throw new InvalidOperationException($"CodeSystemRef {csr.name} is null");
         }
@@ -1613,11 +1666,11 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(cr.name))
             {
                 var type = TypeResolver.CodeType.MakeArrayType();
-                return InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, type!, ctx);
+                return InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, type!, false, ctx);
             }
             else throw new InvalidOperationException($"CodeSystemRef {cr.name} is null");
         }
-        
+
 
         protected Expression Instance(Instance ine, ExpressionBuilderContext ctx)
         {
@@ -2177,7 +2230,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (string.IsNullOrWhiteSpace(valueSetRef.name))
                         throw new ArgumentException($"The ValueSetRef at {valueSetRef.locator} is missing a name.", nameof(retrieve));
-                    var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef!.libraryName, typeof(CqlValueSet), ctx);
+                    var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef!.libraryName, typeof(CqlValueSet), false, ctx);
                     var call = OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
                     return call;
@@ -2515,7 +2568,8 @@ namespace Hl7.Cql.Compiler
             }
             if (expressionType == null)
                 throw new InvalidOperationException($"Unable to determine type for {expressionRef.localId}");
-            var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType, ctx);
+            var fromUnfilteredContext = false;
+            var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType, fromUnfilteredContext, ctx);
             return invoke;
         }
 
@@ -2582,14 +2636,16 @@ namespace Hl7.Cql.Compiler
             {
                 var typeArgs = type.GetGenericArguments();
                 var returnType = typeArgs[^1];
-                var invoke = InvokeDefinitionThroughRuntimeContext(name, libraryAlias, returnType, ctx);
+                var invoke = InvokeDefinitionThroughRuntimeContext(name, libraryAlias, returnType, false, ctx);
                 return invoke;
             }
             else throw new ArgumentException("LambdaExpressions should be a variant of Func<>");
         }
 
-        protected Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
+        protected Expression InvokeDefinitionThroughRuntimeContext(string name,
+            string? libraryAlias,
             Type definitionReturnType,
+            bool fromUnfilteredContext,
             ExpressionBuilderContext ctx)
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
@@ -2603,7 +2659,14 @@ namespace Hl7.Cql.Compiler
             else libraryName = ThisLibraryKey;
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
-            return new DefinitionCallExpression(definitionsProperty, libraryName, name, ctx.RuntimeContextParameter, funcType);
+
+            var dce = new DefinitionCallExpression(definitionsProperty,
+                libraryName,
+                name,
+                ctx.RuntimeContextParameter,
+                funcType,
+                fromUnfilteredContext);
+            return dce;
         }
 
         protected Expression CoalesceNullableValueType(Expression nullable)
@@ -2790,6 +2853,23 @@ namespace Hl7.Cql.Compiler
             else if (IsNullable(type) && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
                 return true;
             return false;
+        }
+
+        protected Type? ContextTypeFor(ExpressionDef def)
+        {
+            if (def.context == "Unfiltered")
+            {
+                return null;
+            }
+            else
+            {
+                // TODO: this is wrong, but cql-to-elm does not give us real type info.  
+                // Nowhere in the ELM is context Patient expressed as {http://hl7.org/fhir}Patient
+                // https://github.com/cqframework/clinical_quality_language/issues/1273
+                var qualifiedName = $"{{http://hl7.org/fhir}}{def.context}";
+                var type = TypeManager.Resolver.ResolveType(qualifiedName);
+                return type;
+            }
         }
 
     }
