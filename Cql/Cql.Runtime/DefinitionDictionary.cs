@@ -9,6 +9,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace Hl7.Cql.Runtime
 {
@@ -485,20 +486,49 @@ namespace Hl7.Cql.Runtime
         internal class Tag
         {
             public string Library { get; }
+            public string Definition { get; }
+            public Type[] Signature { get; }
+            public string Value { get; }
+            public string Name { get; }
 
             public Tag(string library, string definition, Type[] signature, string name, string value)
             {
                 Library = library;
                 Definition = definition;
-                Value = value;
-                Name = name;
                 Signature = signature;
+                Name = name;
+                Value = CleanValue(value);
+            }
+            
+            //clean the 'Value' field
+            private static string CleanValue(string value)
+            {
+                if (string.IsNullOrEmpty(value)) return value;
+
+                char[] result = new char[value.Length];
+                int resultIndex = 0;
+                char space = (char)32;
+                char prevChar = space; 
+
+                foreach (char currentChar in value)
+                {
+                    if (char.IsWhiteSpace(currentChar))
+                    {
+                        if (prevChar != space)
+                        {
+                            result[resultIndex++] = space; 
+                        }
+                    }
+                    else
+                    {
+                        result[resultIndex++] = currentChar;
+                    }
+                    prevChar = currentChar;
+                }
+                return new string(result, 0, resultIndex);
             }
 
-            public string Definition { get; }
-            public Type[] Signature { get; }
-            public string Value { get; }
-            public string Name { get; }
+
         }
     }
 }
