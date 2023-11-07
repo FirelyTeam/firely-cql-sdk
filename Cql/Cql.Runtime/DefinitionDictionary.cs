@@ -485,12 +485,21 @@ namespace Hl7.Cql.Runtime
 
         internal class Tag
         {
+           
             public string Library { get; }
             public string Definition { get; }
             public Type[] Signature { get; }
             public string Value { get; }
             public string Name { get; }
 
+            /// <summary>
+            /// Constructor to create a tag.
+            /// </summary>
+            /// <param name="library">The library identifier in which <paramref name="definition"/> is defined.</param>
+            /// <param name="definition">The definition name whose tags to set.</param>
+            /// <param name="signature">The signature, or an empty array for non-function definitions.</param>
+            /// <param name="name">The name of the tag.</param>
+            /// <param name="value">The value of the tag.</param>
             public Tag(string library, string definition, Type[] signature, string name, string value)
             {
                 Library = library;
@@ -499,31 +508,42 @@ namespace Hl7.Cql.Runtime
                 Name = name;
                 Value = CleanValue(value);
             }
-            
-            //clean the 'Value' field
+
+            /// <summary>
+            /// Removes all unicode whitespace from the value, except for a single space between 'words'.
+            /// All newlines, tabs, and other whitespace characters will be replaced by a single <see langword="(char)32"/> space.
+            /// <see cref="char.IsWhiteSpace(char)">char.IsWhiteSpace(char)</see> is used to determine whitespace.
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns>The <paramref name="value"/> string with only single spaces</returns>
             private static string CleanValue(string value)
             {
+                value = value.Trim();
                 if (string.IsNullOrEmpty(value)) return value;
 
-                char[] result = new char[value.Length];
+                char[] result = new char[value.Trim().Length];
                 int resultIndex = 0;
                 char space = (char)32;
-                char prevChar = space; 
+                char prevChar = '\0';
 
                 foreach (char currentChar in value)
                 {
+                    //if whitespace (includes newlines, tabs, etc) and the previous character was not whitespace, replace with a space
                     if (char.IsWhiteSpace(currentChar))
                     {
                         if (prevChar != space)
                         {
-                            result[resultIndex++] = space; 
+                            result[resultIndex++] = space;
+                            prevChar = space;
                         }
                     }
+                    //otherwise, if not whitespace, add to the result
                     else
                     {
                         result[resultIndex++] = currentChar;
+                        prevChar = currentChar;
                     }
-                    prevChar = currentChar;
+                    
                 }
                 return new string(result, 0, resultIndex);
             }
