@@ -10,6 +10,8 @@ namespace Hl7.Cql.Packaging.ResourceWriters
     /// </summary>
     public class FhirResourceWriter : ResourceWriter
     {
+        private static readonly JsonSerializerOptions options = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector).Pretty();
+
         /// <summary>
         /// Instantiates a new resource writer
         /// </summary>
@@ -25,9 +27,6 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="resources">the resources to write</param>
         public override void WriteResources(IEnumerable<Resource> resources)
         {
-            var options = new JsonSerializerOptions()
-                .ForFhir(typeof(Resource).Assembly)
-                .Pretty();
             if (OutDirectory != null)
             {
                 Logger.LogInformation($"Writing FHIR resources to {OutDirectory.FullName}");
