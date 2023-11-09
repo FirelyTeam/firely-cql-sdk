@@ -11,7 +11,7 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     [Serializable]
     [XmlType(IncludeInSchema = false, TypeName = nameof(IncludeDef), Namespace = "urn:hl7-org:elm:r1")]
-    internal class IncludeDefSymbol : IncludeDef, ISymbolScope
+    internal class IncludeDefSymbol : IncludeDef
     {
         public IncludeDefSymbol(string localIdentifier, Library library)
         {
@@ -30,8 +30,6 @@ namespace Hl7.Cql.CqlToElm
         {
             var result = new Dictionary<string, IDefinitionElement>();
 
-            add(Library.usings);
-            add(Library.includes);
             add(Library.parameters);
             add(Library.codeSystems);
             add(Library.valueSets);
@@ -59,12 +57,9 @@ namespace Hl7.Cql.CqlToElm
 
         public Library Library { get; }
 
-        public ISymbolScope? Parent => null;
-
-        public bool TryAdd(IDefinitionElement symbol) => throw new InvalidOperationException("Referenced libraries are read-only.");
-
-        public bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol) =>
-            symbols.Value.TryGetValue(identifier, out symbol);
+        public bool TryResolveDefinition(string identifier, out IDefinitionElement? symbol)
+        {
+            return symbols.Value.TryGetValue(identifier, out symbol);
+        }
     }
 }
-

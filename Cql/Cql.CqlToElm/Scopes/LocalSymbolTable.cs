@@ -17,16 +17,16 @@ namespace Hl7.Cql.CqlToElm
         //    Name = name;
         //}
 
-        public LocalSymbolTable(ISymbolScope parent)
+        public LocalSymbolTable(ISymbolScope? parent)
         {
             Parent = parent;
         }
 
-        public ISymbolScope Parent { get; }
+        public ISymbolScope? Parent { get; }
 
         private readonly Dictionary<string, IDefinitionElement> symbols = new();
 
-        //public IEnumerable<IDefinitionElement> Symbols => symbols.Values;
+        public IEnumerable<IDefinitionElement> Symbols => symbols.Values;
 
         //public string? Name { get; }
 

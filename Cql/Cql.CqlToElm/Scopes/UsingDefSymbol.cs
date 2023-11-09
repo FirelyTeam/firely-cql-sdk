@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     [Serializable]
     [XmlType(IncludeInSchema = false, TypeName = nameof(UsingDef), Namespace = "urn:hl7-org:elm:r1")]
-    internal class UsingDefSymbol : UsingDef, ISymbolScope
+    internal class UsingDefSymbol : UsingDef
     {
         public UsingDefSymbol(string localIdentifier, Model.ModelInfo model)
         {
@@ -23,11 +23,7 @@ namespace Hl7.Cql.CqlToElm
 
         public Model.ModelInfo Model { get; }
 
-        public ISymbolScope? Parent => null;
-
-        public bool TryAdd(IDefinitionElement _) => throw new InvalidOperationException("Model libraries cannot be added to, they are read-only.");
-
-        public bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol)
+        public bool TryResolveType(string identifier, out ModelType? symbol)
         {
             var success = Model.TryGetTypeInfoFor(identifier, out var typeInfo);
 
