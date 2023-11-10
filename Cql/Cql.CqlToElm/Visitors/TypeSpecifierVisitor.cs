@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class TypeSpecifierVisitor : Visitor<TypeSpecifier>
     {
-        public ConverterContext ConverterContext { get; }
+        public LibraryBuilder LibraryBuilder { get; }
 
         private class UnqualifiedTypeNameSpecifier : TypeSpecifier
         {
@@ -26,11 +26,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         public TypeSpecifierVisitor(
-            ConverterContext converterContext,
+            LibraryBuilder libraryBuilder,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
-            ConverterContext = converterContext;
+            LibraryBuilder = libraryBuilder;
         }
 
         //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
@@ -89,10 +89,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (qualifiers.Length > 1)
                 throw new InvalidOperationException($"Multiple qualifiers not supported.");
 
-            _ = ConverterContext.CurrentScope!.TryResolveNamedTypeSpecifier(qualifiers.SingleOrDefault(), unqualified.UnqualifiedName, out var result, out var error);
+            _ = LibraryBuilder.TryResolveNamedTypeSpecifier(qualifiers.SingleOrDefault(), unqualified.UnqualifiedName, out var result, out var error);
 
-            if (error is not null) result.AddError(error, ErrorType.semantic);
+            result ??= new NamedTypeSpecifier("urn:cql-unknown-type", unqualified.UnqualifiedName);
 
+            if (error is not null) result!.AddError(error, ErrorType.semantic);
             return result.WithLocator(context.Locator());
         }
 

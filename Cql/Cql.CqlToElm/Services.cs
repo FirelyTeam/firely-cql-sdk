@@ -65,6 +65,8 @@ namespace Hl7.Cql.CqlToElm
         public static IServiceCollection AddContext(this IServiceCollection services) =>
             services
                 .AddScoped<SystemLibrary>()
+                .AddScoped<LibraryBuilder>()
+                .AddScoped<ILibraryProvider, ConverterContext>()
                 .AddScoped<ConverterContext>();
 
         public static ILoggingBuilder ThrowOn(this ILoggingBuilder builder, LogLevel threshold) =>

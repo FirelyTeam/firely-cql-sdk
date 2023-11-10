@@ -1,7 +1,4 @@
 ﻿using Hl7.Cql.Elm;
-using System;
-using System.Collections.Generic;
-using System.Xml.Serialization;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -9,57 +6,35 @@ namespace Hl7.Cql.CqlToElm
     /// A class extends <see cref="IncludeDef"/> with an actual reference to a Library, so it can function as a symbol table
     /// to resolve identifiers within the included library.
     /// </summary>
-    [Serializable]
-    [XmlType(IncludeInSchema = false, TypeName = nameof(IncludeDef), Namespace = "urn:hl7-org:elm:r1")]
-    internal class IncludeDefSymbol : IncludeDef
+    internal class IncludeDefSymbol : IncludeDef, IDefinitionElement
     {
-        public IncludeDefSymbol(string localIdentifier, Library library)
+        public IncludeDefSymbol(string localIdentifier, ReferencedLibrary library)
         {
             Library = library;
 
             this.localIdentifier = localIdentifier;
-            path = library.identifier.id;
-            version = library.identifier.version;
-
-            symbols = new(loadLibrary);
+            path = library.Source.identifier.id;
+            version = library.Source.identifier.version;
         }
 
-        private readonly Lazy<Dictionary<string, IDefinitionElement>> symbols;
+        public ReferencedLibrary Library { get; }
 
-        private Dictionary<string, IDefinitionElement> loadLibrary()
+        public Expression ToRef(string? _) => new IncludeRef(this);
+    }
+
+    /// <summary>
+    /// This class is used to represent a reference to an included library. Although it does not exist in ELM officially,
+    /// we introduce it here to allow the term parsing rules to return a reference to the included library, which we can then
+    /// handle in the higher-level parsing rules. This class is not supposed to be externally visible, so should never be serialized
+    /// into an ELM library.
+    /// </summary>
+    internal class IncludeRef : Expression
+    {
+        public IncludeRef(IncludeDefSymbol includeDef)
         {
-            var result = new Dictionary<string, IDefinitionElement>();
-
-            add(Library.parameters);
-            add(Library.codeSystems);
-            add(Library.valueSets);
-            add(Library.codes);
-            add(Library.concepts);
-            add(Library.contexts);
-            add(Library.statements);
-
-            return result;
-
-            void add(IEnumerable<IDefinitionElement> symbols)
-            {
-                foreach (var symbol in symbols)
-                {
-                    if (result.ContainsKey(symbol.Name))
-                        throw new InvalidOperationException($"Duplicate symbol {symbol.Name} in library {Library.NameAndVersion}.");
-                    else
-                    {
-                        if (symbol.IsVisible(AccessModifier.Public))
-                            result.Add(symbol.Name, symbol);
-                    }
-                }
-            }
+            IncludeDef = includeDef;
         }
 
-        public Library Library { get; }
-
-        public bool TryResolveDefinition(string identifier, out IDefinitionElement? symbol)
-        {
-            return symbols.Value.TryGetValue(identifier, out symbol);
-        }
+        public IncludeDefSymbol IncludeDef { get; }
     }
 }

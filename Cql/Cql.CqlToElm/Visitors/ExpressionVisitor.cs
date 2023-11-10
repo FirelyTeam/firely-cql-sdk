@@ -11,12 +11,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public ExpressionVisitor(
             IModelProvider provider,
             ConverterContext converterContext,
+            LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
             ConverterContext = converterContext;
+            LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
         }
 
@@ -25,6 +27,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
 
         public ConverterContext ConverterContext { get; }
+        public LibraryBuilder LibraryBuilder { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')

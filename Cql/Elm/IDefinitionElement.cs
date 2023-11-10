@@ -132,6 +132,8 @@ namespace Hl7.Cql.Elm
         // so for ContextDefs themselves, we will return an "unresolvable" name.
         string IDefinitionElement.Name => $"_context_{this.name}_";
 
+        public bool IsUnfiltered => name == "Unfiltered";
+
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
         // Since there is no way to reference a context definition, we will throw an exception
@@ -195,5 +197,4 @@ namespace Hl7.Cql.Elm
         Expression IDefinitionElement.ToRef(string? _) =>
             throw new InvalidOperationException("There is no reference type for an include statement.");
     }
-
 }

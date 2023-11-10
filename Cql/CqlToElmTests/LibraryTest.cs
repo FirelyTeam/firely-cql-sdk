@@ -1,3 +1,4 @@
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -328,7 +329,12 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
             Assert.AreEqual("1.0.0", library.includes[0].version);
-            Assert.IsTrue(string.IsNullOrWhiteSpace(library.includes[0].localIdentifier));
+
+            // EK: the localIdentifier is the same as the (last part of the) path, at least
+            // that's what I see Bryn's tool doing.
+            //Assert.IsTrue(string.IsNullOrWhiteSpace(library.includes[0].localIdentifier));
+            library.includes[0].localIdentifier.Should().Be("MyLibrary");
+
             Assert.IsNotNull(library.includes[0].localId);
 
         }
@@ -345,7 +351,12 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
             Assert.IsTrue(string.IsNullOrWhiteSpace(library.includes[0].version));
-            Assert.IsTrue(string.IsNullOrWhiteSpace(library.includes[0].localIdentifier));
+
+            // EK: the localIdentifier is the same as the (last part of the) path, at least
+            // that's what I see Bryn's tool doing.
+            // Assert.IsTrue(string.IsNullOrWhiteSpace(library.includes[0].localIdentifier));
+            library.includes[0].localIdentifier.Should().Be("MyLibrary");
+
             Assert.IsNotNull(library.includes[0].localId);
 
         }
@@ -745,10 +756,10 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
-                codesystem ""System"": 'http://hl7.org'
-                code ""code1"": 'code1' from ""System""
-                code ""code2"": 'code2' from ""System""
-                code ""code3"": 'code3' from ""System""
+                codesystem ""SystemA"": 'http://hl7.org'
+                code ""code1"": 'code1' from ""SystemA""
+                code ""code2"": 'code2' from ""SystemA""
+                code ""code3"": 'code3' from ""SystemA""
 
                 private concept Name: { ""code1"", ""code2"", ""code3"" } display 'My concept'
             ");

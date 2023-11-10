@@ -126,6 +126,7 @@ Hl7.Cql.Elm.Contains.precisionSpecified.get -> bool
 Hl7.Cql.Elm.Contains.precisionSpecified.set -> void
 Hl7.Cql.Elm.ContextDef
 Hl7.Cql.Elm.ContextDef.ContextDef() -> void
+Hl7.Cql.Elm.ContextDef.IsUnfiltered.get -> bool
 Hl7.Cql.Elm.Convert
 Hl7.Cql.Elm.Convert.Convert() -> void
 Hl7.Cql.Elm.ConvertQuantity

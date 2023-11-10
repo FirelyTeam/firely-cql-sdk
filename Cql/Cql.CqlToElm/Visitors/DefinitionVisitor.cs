@@ -12,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public IModelProvider ModelProvider { get; }
         public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
-        public ConverterContext ConverterContext { get; }
+        public LibraryBuilder LibraryBuilder { get; }
         public ILibraryProvider LibraryProvider { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
 
@@ -22,13 +22,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             IModelProvider modelProvider,
             ExpressionVisitor expressionVisitor,
             TypeSpecifierVisitor typeSpecifierVisitor,
-            ConverterContext converterContext,
+            LibraryBuilder libraryBuilder,
             ILibraryProvider libraryProvider)
             : base(identifierProvider, invocationBuilder)
         {
             ModelProvider = modelProvider;
             TypeSpecifierVisitor = typeSpecifierVisitor;
-            ConverterContext = converterContext;
+            LibraryBuilder = libraryBuilder;
             LibraryProvider = libraryProvider;
             ExpressionVisitor = expressionVisitor;
         }
@@ -39,20 +39,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var (qualifier, id) = context.qualifiedIdentifier().Parse();
             var libraryName = string.IsNullOrWhiteSpace(qualifier) ? id : $"{qualifier}.{id}";
             var version = context.versionSpecifier()?.STRING().ParseString();
-            var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? libraryName;
+            var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? id;
 
             var resolveSuccess = LibraryProvider.TryResolveLibrary(libraryName, version, out var library, out var error);
 
             if (resolveSuccess)
             {
-                return new IncludeDefSymbol(localIdentifier, library!).WithLocator(context.Locator());
+                return new IncludeDefSymbol(localIdentifier, new ReferencedLibrary(library!)).WithLocator(context.Locator());
             }
             else
             {
                 // To be able to continue to parse, create an empty library scope with the name and version
                 // and return that so we can act as if some library was found.
                 var emptyLibrary = new Library { identifier = new VersionedIdentifier { id = libraryName, version = version } };
-                var errorInclude = new IncludeDefSymbol(localIdentifier, emptyLibrary);
+                var errorInclude = new IncludeDefSymbol(localIdentifier, new ReferencedLibrary(emptyLibrary));
                 errorInclude.AddError(error!, ErrorType.semantic);
                 return errorInclude.WithLocator(context.Locator());
             }
@@ -74,11 +74,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var emptyModel = new Model.ModelInfo() { name = modelName, version = modelVersion };
                 var error = $"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.";
-                var usingDef = new UsingDefSymbol(localIdentifier, emptyModel).AddError(error, ErrorType.semantic);
+                var usingDef = new UsingDefSymbol(localIdentifier, modelVersion, emptyModel).AddError(error, ErrorType.semantic);
                 return usingDef.WithLocator(context.Locator());
             }
             else
-                return new UsingDefSymbol(localIdentifier, model).WithLocator(context.Locator());
+                return new UsingDefSymbol(localIdentifier, modelVersion, model).WithLocator(context.Locator());
         }
 
         //accessModifier? 'codesystem' identifier ':' codesystemId('version' versionSpecifier)?
@@ -157,23 +157,27 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var typeSpec = context.typeSpecifier() is { } ts ? TypeSpecifierVisitor.Visit(ts) : null;
 
-            if (typeSpec is not null && paramDef.@default is null)
+            var commonType = (typeSpec, paramDef.@default.resultTypeSpecifier) switch
             {
-                paramDef.parameterTypeSpecifier = typeSpec;
-                paramDef.parameterType = typeSpec?.TryToQualifiedName();
-            }
-            else if (typeSpec is null && paramDef.@default is not null)
+                ({ } l, null) => l,
+                (null, { } r) => r,
+                ({ } l, { } r) => coerceTypes(l, r),
+                (null, null) => null,
+            };
+
+            TypeSpecifier coerceTypes(TypeSpecifier l, TypeSpecifier r)
             {
-                paramDef.parameterTypeSpecifier = paramDef.@default.resultTypeSpecifier;
-                paramDef.parameterType = paramDef.parameterTypeSpecifier.TryToQualifiedName();
+                if (l != r)
+                    throw new NotImplementedException("TODO: Implement parameter type coercion.");
+
+                return l;
             }
-            else
-            {
-                // TODO: both are set. We need to verify that the expression is assignable
-                // to the specified parameter type, and if necessery provide a cast, just
-                // like with expressions in operators.
-                throw new NotImplementedException("TODO: Implement parameter type coercion.");
-            }
+
+            if (commonType is null)
+                paramDef.AddError("Parameter must have either a type or a default value.", ErrorType.semantic);
+
+            paramDef.parameterTypeSpecifier = commonType ?? SystemTypes.AnyType;
+            paramDef.parameterType = paramDef.parameterTypeSpecifier.TryToQualifiedName();
 
             return paramDef.WithResultType(paramDef.parameterTypeSpecifier);
         }
@@ -193,11 +197,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return def;
         }
 
+        public void VisitDefinitions(cqlParser.DefinitionContext[] context)
+        {
+            foreach (var definitionContext in context)
+            {
+                var definition = Visit(definitionContext);
+                add(definition);
+            }
+        }
+
         // statement : expressionDefinition   | contextDefinition | functionDefinition ;
-        public IEnumerable<IDefinitionElement> VisitStatements(cqlParser.StatementContext[] context)
+        public void VisitStatements(cqlParser.StatementContext[] context)
         {
             ContextDef? activeContext = null;
-            List<TypeSpecifier> definedContexts = new();
+            List<string> definedContexts = new();
 
             // Go over the statements in order, since they can be interleaved
             // with context statements, which become active immediately.
@@ -211,7 +224,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     if (activeContext is not null)
                         ed.context = activeContext.name;
 
-                    yield return ed;
+                    add(ed);
                 }
                 else if (statement is ContextDef cd)
                 {
@@ -220,23 +233,31 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     activeContext = cd;
 
                     // Make sure we create just one ContextDef per model type.
-                    if (!definedContexts.Contains(cd.resultTypeSpecifier))
+                    if (!definedContexts.Contains(cd.name))
                     {
-                        // Build an expression named after the context, which will
-                        // do a retrieve for all data of that type.
-                        ExpressionDef exprDef = buildContextExpression(statementContext, cd);
+                        add(cd);
 
-                        // Now return both the newly encountered context and the 
-                        // expression def that represents it.
-                        yield return cd;
-                        yield return exprDef;
+                        if (cd.resultTypeSpecifier is not null && !cd.IsUnfiltered)
+                        {
+                            // Build an expression named after the context, which will
+                            // do a retrieve for all data of that type.
+                            ExpressionDef exprDef = buildContextExpression(statementContext, cd);
+                            add(exprDef);
+                        }
 
-                        definedContexts.Add(cd.resultTypeSpecifier);
+                        definedContexts.Add(cd.name);
                     }
                 }
                 else
                     throw new InvalidOperationException($"Encountered unknown statement type {statement.GetType()}.");
             }
+
+        }
+
+        private void add(IDefinitionElement s)
+        {
+            if (!LibraryBuilder.CurrentScope.TryAdd(s))
+                throw new NotImplementedException("Cannot put errors about duplicate identifiers somewhere yet.");
         }
 
         private ExpressionDef buildContextExpression(cqlParser.StatementContext statementContext, ContextDef cd)
@@ -268,14 +289,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var identifier = context.identifier().Parse()!;
             var modelIdentifier = context.modelIdentifier()?.identifier().Parse();
 
-            _ = ConverterContext.CurrentScope!.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
-
             var cd = new ContextDef
             {
                 name = modelIdentifier is null ? identifier : $"{modelIdentifier}.{identifier}"
-            }.WithLocator(context.Locator()).WithResultType(namedType);
+            }.WithLocator(context.Locator());
 
-            if (error is not null) cd.AddError(error, ErrorType.semantic);
+            if (!cd.IsUnfiltered)
+            {
+                _ = LibraryBuilder.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
+                cd = cd.WithResultType(namedType);
+                if (error is not null) cd.AddError(error, ErrorType.semantic);
+            }
 
             return cd;
         }

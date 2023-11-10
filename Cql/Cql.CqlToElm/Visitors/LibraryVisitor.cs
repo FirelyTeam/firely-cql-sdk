@@ -3,31 +3,30 @@ using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
 using System;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class LibraryVisitor : Visitor<Library>
     {
         public LibraryVisitor(
-            ConverterContext converterContext,
+            LibraryBuilder libraryBuilder,
             IConfiguration configuration,
             IModelProvider modelProvider,
             DefinitionVisitor definitionVisitor,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
-            ConverterContext = converterContext;
+            LibraryBuilder = libraryBuilder;
             Configuration = configuration;
             ModelProvider = modelProvider;
             DefinitionVisitor = definitionVisitor;
         }
 
         #region Services
+        public LibraryBuilder LibraryBuilder { get; }
         private IConfiguration Configuration { get; }
         private IModelProvider ModelProvider { get; }
         public DefinitionVisitor DefinitionVisitor { get; }
-        public ConverterContext ConverterContext { get; }
         #endregion
 
         private UsingDefSymbol? GetDefaultSystemModel()
@@ -39,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return null;
 
             if (ModelProvider.ModelFromUri(systemUri, systemVersion) is { } model)
-                return new UsingDefSymbol("System", model);
+                return new UsingDefSymbol("System", systemVersion, model);
             else
                 throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
         }
@@ -49,25 +48,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //     | conceptDefinition | parameterDefinition ;
         public override Library VisitLibrary([NotNull] cqlParser.LibraryContext context)
         {
-            var identifier = context.libraryDefinition().Parse();
-            var libraryBuilder = new LibraryBuilder(identifier);
-            ConverterContext.EnterScope(libraryBuilder);
+            var identifier = context.libraryDefinition()?.Parse();
+            if (identifier is not null)
+                LibraryBuilder.Identifier = identifier;
 
             // Add the default model, System
             if (GetDefaultSystemModel() is { } systemModel)
-                libraryBuilder.TryAdd(systemModel);
+                LibraryBuilder.CurrentScope.TryAdd(systemModel);
 
             // TODO: Add the default function library, SystemLibrary
 
-            // Parse the definitions, these will insert themselves into the current symbol table.
-            _ = context.definition().Select(DefinitionVisitor.Visit);
+            // Parse the definitions, this function will insert the visited definitions into the current scope.
+            DefinitionVisitor.VisitDefinitions(context.definition());
 
             // The same is true for statements, although we have a specific visitor for those,
             // to handle the fact that statements can be expressions or contexts and we need
             // to make sure we change the context when we encounter one.
-            DefinitionVisitor.VisitStatements(context.statement()).ToList();
+            DefinitionVisitor.VisitStatements(context.statement());
 
-            var library = libraryBuilder.Build();
+            var library = LibraryBuilder.Build();
             return library;
         }
     }

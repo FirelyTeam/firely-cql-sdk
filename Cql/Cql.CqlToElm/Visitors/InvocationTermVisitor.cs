@@ -11,7 +11,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var identifier = context.Parse();
 
-            var success = ConverterContext.CurrentScope!.TryGetRef(identifier, out var definitionRef);
+            var success = LibraryBuilder.CurrentScope!.TryGetRef(null, identifier, out var definitionRef);
             var result = definitionRef ?? new Null { resultTypeSpecifier = SystemTypes.AnyType };
 
             if (!success)

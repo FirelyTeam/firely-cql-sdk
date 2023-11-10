@@ -1,5 +1,4 @@
 ﻿#nullable enable
 Hl7.Cql.Conversion.TypeConverter
-Hl7.Cql.Conversion.TypeConverter.Convert(object! from, System.Type! t) -> object!
 Hl7.Cql.Conversion.TypeConverter.Convert<T>(object? from) -> T
 static Hl7.Cql.Conversion.TypeConverter.Create() -> Hl7.Cql.Conversion.TypeConverter!

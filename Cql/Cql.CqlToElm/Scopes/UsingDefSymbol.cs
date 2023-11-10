@@ -10,33 +10,35 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     [Serializable]
     [XmlType(IncludeInSchema = false, TypeName = nameof(UsingDef), Namespace = "urn:hl7-org:elm:r1")]
-    internal class UsingDefSymbol : UsingDef
+    internal class UsingDefSymbol : UsingDef, IDefinitionElement
     {
-        public UsingDefSymbol(string localIdentifier, Model.ModelInfo model)
+        public UsingDefSymbol(string localIdentifier, string? version, Model.ModelInfo model)
         {
             Model = model;
 
             this.localIdentifier = localIdentifier;
-            this.uri = model.url;
-            this.version = model.version;
+            uri = model.url;
+            this.version = version;
         }
 
         public Model.ModelInfo Model { get; }
 
-        public bool TryResolveType(string identifier, out ModelType? symbol)
-        {
-            var success = Model.TryGetTypeInfoFor(identifier, out var typeInfo);
+        public Expression ToRef(string? _) => new UsingRef(this);
+    }
 
-            if (success)
-            {
-                symbol = new ModelType(Model, typeInfo!);
-                return true;
-            }
-            else
-            {
-                symbol = null;
-                return false;
-            }
+    /// <summary>
+    /// This class is used to represent a reference to a model library. Although it does not exist in ELM officially,
+    /// we introduce it here to allow the term parsing rules to return a reference to a model, which we can then
+    /// handle in the higher-level parsing rules. This class is not supposed to be externally visible, so should never be serialized
+    /// into an ELM library.
+    /// </summary>
+    internal class UsingRef : Expression
+    {
+        public UsingRef(UsingDefSymbol usingDef)
+        {
+            UsingDef = usingDef;
         }
+
+        public UsingDefSymbol UsingDef { get; }
     }
 }
