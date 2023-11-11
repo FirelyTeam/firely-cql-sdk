@@ -781,11 +781,64 @@ namespace Hl7.Cql.CqlToElm.Test
                 private parameter Name System.String default 'default value'
             ");
 
-            Assert.IsNotNull(library.parameters);
-            Assert.AreEqual(1, library.parameters.Length);
-            Assert.AreEqual(AccessModifier.Private, library.parameters[0].accessLevel);
-            Assert.AreEqual("Name", library.parameters[0].name);
-            Assert.IsInstanceOfType(library.parameters[0].parameterTypeSpecifier, typeof(Elm.NamedTypeSpecifier));
+            var par0 = library.parameters.Should().ContainSingle().Subject;
+            par0.accessLevel.Should().Be(AccessModifier.Private);
+            par0.name.Should().Be("Name");
+            par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);
+            par0.@default.Should().BeLiteralString("default value");
+        }
+
+        [TestMethod]
+        public void Parameter_AllTermsWithCast()
+        {
+            var library = MakeLibrary(@"
+                library IncludeTest version '1.0.0'
+
+                private parameter Name System.Decimal default 1
+            ");
+
+            var par0 = library.parameters.Should().ContainSingle().Subject;
+            par0.parameterTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            var todecimal = par0.@default.Should().BeOfType<ToDecimal>().Subject;
+            todecimal.operand.Should().BeLiteralInteger(1);
+        }
+
+        [TestMethod]
+        public void Parameter_Default()
+        {
+            var library = MakeLibrary(@"
+                library IncludeTest version '1.0.0'
+
+                private parameter Name default 'default value'
+            ");
+
+            var par0 = library.parameters.Should().ContainSingle().Subject;
+            par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);
+            par0.@default.Should().BeLiteralString("default value");
+        }
+
+        [TestMethod]
+        public void Parameter_Type()
+        {
+            var library = MakeLibrary(@"
+                library IncludeTest version '1.0.0'
+
+                private parameter Name System.String
+            ");
+
+            var par0 = library.parameters.Should().ContainSingle().Subject;
+            par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);
+            par0.@default.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void Parameter_None()
+        {
+            var library = MakeLibrary(@"
+                library IncludeTest version '1.0.0'
+
+                private parameter Name
+            ", expectedError: "Parameter must have either a type or a default value.");
         }
         #endregion
     }

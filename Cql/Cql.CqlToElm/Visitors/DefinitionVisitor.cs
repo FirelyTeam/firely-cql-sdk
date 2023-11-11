@@ -16,6 +16,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public ILibraryProvider LibraryProvider { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
 
+
         public DefinitionVisitor(
             LocalIdentifierProvider identifierProvider,
             InvocationBuilder invocationBuilder,
@@ -150,36 +151,41 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 name = context.identifier().Parse(),
             }.WithLocator(context.Locator());
 
-            if (context.expression() is { } expr)
-            {
-                paramDef.@default = ExpressionVisitor.Visit(expr);
-            }
-
+            var defaultExpr = context.expression() is { } expr ? ExpressionVisitor.Visit(expr) : null;
             var typeSpec = context.typeSpecifier() is { } ts ? TypeSpecifierVisitor.Visit(ts) : null;
 
-            var commonType = (typeSpec, paramDef.@default.resultTypeSpecifier) switch
+            var coercedDefault = (typeSpec, defaultExpr) switch
             {
-                ({ } l, null) => l,
-                (null, { } r) => r,
-                ({ } l, { } r) => coerceTypes(l, r),
+                ({ } t, null) => new Null().WithResultType(t),
+                (null, { } def) => def,
+                ({ } t, { } def) => coerceDefault(t, def),
                 (null, null) => null,
             };
 
-            TypeSpecifier coerceTypes(TypeSpecifier l, TypeSpecifier r)
+            if (coercedDefault is null)
             {
-                if (l != r)
-                    throw new NotImplementedException("TODO: Implement parameter type coercion.");
-
-                return l;
+                paramDef.AddError("Parameter must have either a type or a default value.", ErrorType.semantic);
+                paramDef.parameterTypeSpecifier = SystemTypes.AnyType;
+            }
+            else
+            {
+                if (coercedDefault is not Null) paramDef.@default = coercedDefault;
+                paramDef.parameterTypeSpecifier = coercedDefault.resultTypeSpecifier;
             }
 
-            if (commonType is null)
-                paramDef.AddError("Parameter must have either a type or a default value.", ErrorType.semantic);
-
-            paramDef.parameterTypeSpecifier = commonType ?? SystemTypes.AnyType;
             paramDef.parameterType = paramDef.parameterTypeSpecifier.TryToQualifiedName();
-
             return paramDef.WithResultType(paramDef.parameterTypeSpecifier);
+
+            Expression coerceDefault(TypeSpecifier type, Expression defaultExpr)
+            {
+                InvocationBuilder ib = new(ModelProvider);
+                var (result, _, error) = ib.BuildImplicitCast(defaultExpr, type, out var _);
+
+                if (error is null)
+                    return result;
+                else
+                    return defaultExpr.AddError($"Default value cannot be converted to parameter type {type}.", ErrorType.semantic);
+            }
         }
 
         // 'define' accessModifier? identifier ':' expression
@@ -257,7 +263,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private void add(IDefinitionElement s)
         {
             if (!LibraryBuilder.CurrentScope.TryAdd(s))
-                throw new NotImplementedException("Cannot put errors about duplicate identifiers somewhere yet.");
+                LibraryBuilder.AddError($"Duplicate identifier {s.Name} in scope.", ErrorType.semantic);
         }
 
         private ExpressionDef buildContextExpression(cqlParser.StatementContext statementContext, ContextDef cd)

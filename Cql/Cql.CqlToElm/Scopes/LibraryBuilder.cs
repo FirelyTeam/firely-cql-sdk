@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.Elm;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
@@ -34,12 +35,23 @@ namespace Hl7.Cql.CqlToElm
                 concepts = symbols.OfType<ConceptDef>().ToArray(),
                 contexts = symbols.OfType<ContextDef>().ToArray(),
                 statements = symbols.OfType<ExpressionDef>().ToArray(),
+                annotation = errors.ToArray()
             };
         }
+
+        private readonly List<CqlToElmError> errors = new();
 
         private readonly SymbolTable symbolTable = new(null);  // we're a top-level scope
 
         public ISymbolScope CurrentScope { get; private set; }
+
+        public void AddError(string message, ErrorType errorType) =>
+            errors.Add(new CqlToElmError()
+            {
+                message = message,
+                errorSeverity = ErrorSeverity.error,
+                errorType = errorType
+            });
 
         public void EnterScope()
         {
