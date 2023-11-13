@@ -203,6 +203,67 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return def;
         }
 
+        //  'define' accessModifier? fluentModifier? 'function' identifierOrFunctionIdentifier '(' (operandDefinition (',' operandDefinition)*)? ')'
+        // ('returns' typeSpecifier)? ':' (functionBody | 'external')
+        public override IDefinitionElement VisitFunctionDefinition([NotNull] cqlParser.FunctionDefinitionContext context)
+        {
+            var access = context.accessModifier().Parse();
+            var isFluent = context.fluentModifier() is not null;
+            var identifier = context.identifierOrFunctionIdentifier().Parse();
+            var operands = context.operandDefinition().Select(od => od.Parse(TypeSpecifierVisitor)).ToArray();
+            var returnType = context.typeSpecifier() is { } ts ? TypeSpecifierVisitor.Visit(ts) : null;
+            var functionBody = context.functionBody();
+
+            var functionDef = new FunctionDef
+            {
+                accessLevel = access,
+                name = identifier,
+                fluent = isFluent,
+                operand = operands,
+            }.WithLocator(context.Locator());
+
+            if (functionBody is not null)
+            {
+                // Enter a new scope for the function body, so that the operands are visible
+                LibraryBuilder.EnterScope();
+                foreach (var operand in operands)
+                    LibraryBuilder.CurrentScope.TryAdd(operand);
+
+                // Visit the function body, which will add the expression to the functionDef
+                functionDef.expression = ExpressionVisitor.Visit(functionBody.expression());
+
+                // Exit the scope for the function body
+                LibraryBuilder.ExitScope();
+
+                // If the function has a return type, make sure the expression is of that type.
+                var expressionType = functionDef.expression.resultTypeSpecifier;
+                if (returnType is not null)
+                {
+                    if (!expressionType.IsSubtypeOf(returnType, ModelProvider))
+                        functionDef.AddError($"Function {functionDef.name} has declared return type {returnType} but " +
+                            $"the function body returns incompatible type {expressionType}.", ErrorType.semantic);
+
+                    functionDef.resultTypeSpecifier = returnType;
+                }
+                else
+                    functionDef.resultTypeSpecifier = expressionType;
+            }
+            else
+            {
+                functionDef.external = true;
+
+                if (returnType is null)
+                {
+                    functionDef.AddError("External functions must specify a return type.", ErrorType.semantic);
+                    functionDef.WithResultType(SystemTypes.AnyType);   //TODO: might want to introduce some kind of error type.
+                }
+                else
+                    functionDef.WithResultType(returnType);
+            }
+
+            return functionDef;
+        }
+
         public void VisitDefinitions(cqlParser.DefinitionContext[] context)
         {
             foreach (var definitionContext in context)

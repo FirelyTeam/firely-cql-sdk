@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var result = definitionRef ?? new Null { resultTypeSpecifier = SystemTypes.AnyType };
 
             if (!success)
-                result.AddError("Unable to resolve identifier {identifier}.", ErrorType.semantic);
+                result.AddError($"Unable to resolve identifier {identifier}.", ErrorType.semantic);
 
             return result.WithLocator(context.Locator());
         }
