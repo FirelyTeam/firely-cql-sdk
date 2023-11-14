@@ -24,7 +24,7 @@ namespace Hl7.Cql.Packaging
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var builder = ExpressionBuilder.SingleLibrary(
+            var builder = ExpressionBuilder.ForSingleLibrary(
                 new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
                 library!, 
