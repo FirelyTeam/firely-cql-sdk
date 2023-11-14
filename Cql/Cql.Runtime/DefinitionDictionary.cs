@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Runtime
 {
@@ -510,9 +511,8 @@ namespace Hl7.Cql.Runtime
             }
 
             /// <summary>
-            /// Removes all unicode whitespace from the value, except for a single space between 'words'.
-            /// All newlines, tabs, and other whitespace characters will be replaced by a single <see langword="(char)32"/> space.
-            /// <see cref="char.IsWhiteSpace(char)">char.IsWhiteSpace(char)</see> is used to determine whitespace.
+            /// Removes all whitespace from the value, except for a single space between 'words'.
+            /// All newlines, tabs, and other whitespace characters will be replaced by a single space.            
             /// </summary>
             /// <param name="value"></param>
             /// <returns>The <paramref name="value"/> string with only single spaces</returns>
@@ -520,32 +520,7 @@ namespace Hl7.Cql.Runtime
             {
                 value = value.Trim();
                 if (string.IsNullOrEmpty(value)) return value;
-
-                char[] result = new char[value.Trim().Length];
-                int resultIndex = 0;
-                char space = (char)32;
-                char prevChar = '\0';
-
-                foreach (char currentChar in value)
-                {
-                    //if whitespace (includes newlines, tabs, etc) and the previous character was not whitespace, replace with a space
-                    if (char.IsWhiteSpace(currentChar))
-                    {
-                        if (prevChar != space)
-                        {
-                            result[resultIndex++] = space;
-                            prevChar = space;
-                        }
-                    }
-                    //otherwise, if not whitespace, add to the result
-                    else
-                    {
-                        result[resultIndex++] = currentChar;
-                        prevChar = currentChar;
-                    }
-                    
-                }
-                return new string(result, 0, resultIndex);
+                return Regex.Replace(value, @"\s+", " ");
             }
 
 
