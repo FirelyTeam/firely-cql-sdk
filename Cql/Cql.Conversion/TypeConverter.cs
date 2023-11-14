@@ -36,7 +36,17 @@ namespace Hl7.Cql.Conversion
         /// <typeparam name="T">The desired type.</typeparam>
         /// <param name="from">The object to convert.</param>
         /// <returns>The result of the conversion.</returns>
+        /// <exception cref="InvalidOperationException">If no conversion is defined.</exception>
         public T Convert<T>(object? from) => (T)ConvertHelper(from, typeof(T))!;
+
+        /// <summary>
+        /// Performs the conversion of an instance to type <paramref name="t"/> />.
+        /// </summary>
+        /// <param name="from">The object to convert.</param>
+        /// <param name="t">The type to convert the object to.</param>
+        /// <returns>The result of the conversion.</returns>
+        /// <exception cref="InvalidOperationException">If no conversion is defined.</exception>
+        public object Convert(object from, Type t) => ConvertHelper(from, t)!;
 
         /// <summary>
         /// Creates a TypeConverter with an empty set of conversions.
