@@ -15,7 +15,7 @@ namespace Hl7.Cql.Elm
     /// <summary>
     /// Represents an ELM Element that is used as a definition in a library or other resolution scope.
     /// </summary>
-    internal interface IDefinitionElement
+    public interface IDefinitionElement
     {
         /// <summary>
         /// The visibility of the definition within a resolution scope.

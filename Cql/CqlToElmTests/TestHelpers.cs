@@ -8,6 +8,15 @@ namespace Hl7.Cql.CqlToElm.Test
 {
     public static class TestHelpers
     {
+        public static T ShouldDefine<T>(this Library l, string name) where T : IDefinitionElement
+        {
+            var f = l.statements.Should().Contain(s => s.name == name).Which.Should().BeOfType<T>().Subject;
+            f.Name.Should().Be(name);
+
+            return f;
+        }
+
+
         public static T BeACorrectlyInitializedLibraryWithStatementOfType<T>(this ObjectAssertions l)
         {
             var library = l.Subject.Should().BeOfType<Library>().Subject;

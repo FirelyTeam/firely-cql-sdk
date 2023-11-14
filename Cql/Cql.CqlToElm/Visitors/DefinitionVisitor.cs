@@ -363,7 +363,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (!cd.IsUnfiltered)
             {
-                _ = LibraryBuilder.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
+                _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
                 cd = cd.WithResultType(namedType);
                 if (error is not null) cd.AddError(error, ErrorType.semantic);
             }

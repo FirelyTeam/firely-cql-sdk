@@ -13,13 +13,8 @@ namespace Hl7.Cql.CqlToElm.Test
         public static void Initialize(TestContext context) => ClassInitialize();
 #pragma warning restore IDE0060 // Remove unused parameter
 
-        private FunctionDef shouldDefineFunction(Library l, string name)
-        {
-            var f = l.statements.Should().Contain(s => s.name == name).Which.Should().BeOfType<FunctionDef>().Subject;
-            f.name.Should().Be(name);
-
-            return f;
-        }
+        private FunctionDef shouldDefineFunction(Library l, string name) =>
+            l.ShouldDefine<FunctionDef>(name);
 
         [TestMethod]
         public void DefinePrivateFluentFunction()

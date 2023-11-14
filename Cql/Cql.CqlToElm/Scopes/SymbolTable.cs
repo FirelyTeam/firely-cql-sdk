@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm
 
         private readonly Dictionary<string, IDefinitionElement> symbols = new();
 
-        public IEnumerable<IDefinitionElement> Symbols => symbols.Values;
+        public IReadOnlyCollection<IDefinitionElement> Symbols => symbols.Values;
 
         public bool TryResolveSymbol(string identifier, out IDefinitionElement? symbol)
         {

@@ -292,6 +292,10 @@ Hl7.Cql.Elm.GreaterOrEqual
 Hl7.Cql.Elm.GreaterOrEqual.GreaterOrEqual() -> void
 Hl7.Cql.Elm.HighBoundary
 Hl7.Cql.Elm.HighBoundary.HighBoundary() -> void
+Hl7.Cql.Elm.IDefinitionElement
+Hl7.Cql.Elm.IDefinitionElement.Access.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.IDefinitionElement.Name.get -> string!
+Hl7.Cql.Elm.IDefinitionElement.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.IdentifierRef
 Hl7.Cql.Elm.IdentifierRef.IdentifierRef() -> void
 Hl7.Cql.Elm.If

@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -84,14 +83,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)
         {
             var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
+            var libraryName = qualifiers.Any() ? string.Join(".", qualifiers) : null;
             var unqualified = (UnqualifiedTypeNameSpecifier)Visit(context.referentialOrTypeNameIdentifier());
 
-            if (qualifiers.Length > 1)
-                throw new InvalidOperationException($"Multiple qualifiers not supported.");
+            _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(libraryName, unqualified.UnqualifiedName, out var result, out var error);
 
-            _ = LibraryBuilder.TryResolveNamedTypeSpecifier(qualifiers.SingleOrDefault(), unqualified.UnqualifiedName, out var result, out var error);
-
-            result ??= new NamedTypeSpecifier("urn:cql-unknown-type", unqualified.UnqualifiedName);
+            result ??= new NamedTypeSpecifier($"urn:cql-unknown-type:{libraryName}", unqualified.UnqualifiedName);
 
             if (error is not null) result!.AddError(error, ErrorType.semantic);
             return result.WithLocator(context.Locator());

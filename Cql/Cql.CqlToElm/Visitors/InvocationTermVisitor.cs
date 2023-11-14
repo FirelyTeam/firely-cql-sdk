@@ -2,39 +2,79 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
-        public override Expression VisitReferentialIdentifier([NotNull] cqlParser.ReferentialIdentifierContext context)
+        // (qualifierExpression '.')* referentialIdentifier
+        public override Expression VisitQualifiedIdentifierExpression([NotNull] cqlParser.QualifiedIdentifierExpressionContext context)
         {
-            var identifier = context.Parse();
+            var qualifiers = context.qualifierExpression().Select(q => q.referentialIdentifier().Parse()).ToArray();
+            var unqualified = context.referentialIdentifier().Parse();
+            var libraryName = qualifiers.Any() ? string.Join(".", qualifiers) : null;
 
-            var success = LibraryBuilder.CurrentScope!.TryGetRef(null, identifier, out var definitionRef);
-            var result = definitionRef ?? new Null { resultTypeSpecifier = SystemTypes.AnyType };
-
-            if (!success)
-                result.AddError($"Unable to resolve identifier {identifier}.", ErrorType.semantic);
-
+            var result = LibraryBuilder.CurrentScope.ResolveIdentifier(libraryName, unqualified);
             return result.WithLocator(context.Locator());
         }
 
         // : referentialIdentifier             #memberInvocation
         public override Expression VisitMemberInvocation([NotNull] cqlParser.MemberInvocationContext context)
         {
-            // Note: this rule is a misnomer, as it is not meant to retrieve a member in a path expression, but is called when we're
-            // dealing with the beginning of a path, or just a single "reference" to a definition.
-            // We need some smarts here to make this work in context, since this CAN also be parsed as the qualifier in a path
-            // when the root of the path starts with a qualifier, not a definition.
-            return Visit(context.referentialIdentifier());
+            var identifier = context.referentialIdentifier().Parse();
+            var definitionRef = LibraryBuilder.CurrentScope!.ResolveIdentifier(null, identifier);
+
+            var result = definitionRef switch
+            {
+                // UsingRefs should only be encountered in the context of a typespecifier, not an identifier
+                UsingRef ur => throw new InvalidOperationException("Need to avoid this ever happening."),
+
+                // IncludeRefs should only be encountered as a qualifier in a dotted path and
+                // the expressionTerm rule should make sure that is resolved, so will we not end up here.
+                IncludeRef ir => throw new InvalidOperationException("Need to avoid this ever happening."),
+
+                // Otherwise, fine.
+                var r => r
+            };
+
+            return result.WithLocator(context.Locator());
         }
 
-        // | function                          #functionInvocation
-        public override Expression VisitFunctionInvocation([NotNull] cqlParser.FunctionInvocationContext context)
+        // function  : referentialIdentifier '(' paramList? ')'
+        public override Expression VisitFunction([NotNull] cqlParser.FunctionContext context)
         {
-            throw new NotImplementedException("Function invocations not yet implemented.");
+            var funcName = context.referentialIdentifier().Parse();
+            _ = LibraryBuilder.CurrentScope.TryResolveIdentifier(null, funcName, out var symbolRef, out var error);
+            Expression result;
+
+            symbolRef ??= new FunctionRef { name = funcName }
+                    .WithResultType(SystemTypes.AnyType)
+                    .AddError(error!, ErrorType.semantic);
+
+            if (symbolRef is FunctionRef funcRef)
+            {
+                var parameters = context.paramList() is { } pars ? ParseParamList(pars) : Array.Empty<Expression>();
+                funcRef.operand = parameters;
+                result = funcRef;
+            }
+            else if (symbolRef is ExpressionRef)
+            {
+                symbolRef.AddError($"{funcName} is an expression, and should be invoked without the parenthesis.", ErrorType.semantic);
+                result = symbolRef;
+            }
+            else
+            {
+                symbolRef.AddError($"{funcName} is not a function, so it cannot be invoked.", ErrorType.semantic);
+                result = symbolRef;
+            }
+
+            return result.WithLocator(context.Locator());
         }
+
+        // paramList : expression(',' expression)*
+        public Expression[] ParseParamList(cqlParser.ParamListContext context) => context.expression().Select(Visit).ToArray();
+
 
         // | '$this'                           #thisInvocation
         public override Expression VisitThisInvocation([NotNull] cqlParser.ThisInvocationContext context)

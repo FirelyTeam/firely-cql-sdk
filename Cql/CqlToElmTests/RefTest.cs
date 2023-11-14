@@ -1,8 +1,9 @@
-﻿using Hl7.Cql.Elm;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hl7.Cql.Runtime;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -137,6 +138,48 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsInstanceOfType(expression.resultTypeSpecifier, typeof(NamedTypeSpecifier));
             var nts = (NamedTypeSpecifier)expression.resultTypeSpecifier;
             Assert.AreEqual(typeName, nts.name?.Name);
+        }
+
+        private ExpressionDef shouldDefineExpression(Library l, string name) =>
+            l.ShouldDefine<ExpressionDef>(name);
+
+        [TestMethod]
+        public void Expression()
+        {
+            var library = MakeLibrary($@"
+                library {nameof(RefTest)} version '1.0.0'
+
+                define private four: 4
+
+                define private {nameof(Expression)}: four
+            ");
+
+            var f = shouldDefineExpression(library, nameof(Expression));
+            var fref = f.expression.Should().BeOfType<ExpressionRef>().Subject;
+            fref.name.Should().Be("four");
+
+            var result = Run<int>(library, nameof(Expression));
+            result.Should().Be(4);
+        }
+
+        [TestMethod]
+        public void Function()
+        {
+            var library = MakeLibrary($@"
+                library {nameof(RefTest)} version '1.0.0'
+
+                define private function double(a Integer): a*2
+
+                define private {nameof(Function)}: double(4)
+            ");
+
+            var f = shouldDefineExpression(library, nameof(Function));
+            var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
+            fref.name.Should().Be("double");
+            fref.operand.Should().ContainSingle().Which.Should().BeLiteralInteger(4);
+
+            var result = Run<int>(library, nameof(Function));
+            result.Should().Be(8);
         }
     }
 }
