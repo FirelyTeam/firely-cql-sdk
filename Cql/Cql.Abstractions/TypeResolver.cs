@@ -122,7 +122,7 @@ namespace Hl7.Cql.Abstractions
         /// </summary>
         /// <param name="typeSpecifier">The ELM type specifier.</param>
         /// <returns>The .NET property for the primary code path, or <see langword="null"/> if none exists.</returns>
-        internal abstract PropertyInfo? GetPrimaryCodePath(string typeSpecifier);
+        internal abstract PropertyInfo? GetPrimaryCodeProperty(string typeSpecifier);
 
         /// <summary>
         /// Gets the property for the given path.

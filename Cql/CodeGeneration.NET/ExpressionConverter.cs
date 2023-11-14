@@ -6,9 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET.Expressions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
@@ -55,13 +55,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 FunctionCallExpression fce => convertFunctionCallExpression(indent, leadingIndentString, fce),
                 DefinitionCallExpression dce => convertDefinitionCallExpression(indent, leadingIndentString, dce),
                 ElmAsExpression ea => ConvertExpression(indent, ea.Reduce(), leadingIndent),
-                UseContextParameterExpression ucpe => convertUseContextParameterExpression(indent, leadingIndentString, ucpe),
+                CrossContextDefinitionCallExpression ccdce => ConvertExpression(indent, ccdce.Reduce(), leadingIndent),
                 _ => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
-            };;
+            };
         }
 
-        private string convertUseContextParameterExpression(int indent, string leadingIndentString, UseContextParameterExpression ucpe) =>
-            $"{leadingIndentString}{TextWriterExtensions.IndentString(indent)}{ucpe.ContextParameterName} ?? {ucpe.LazyName}.Value";
+
 
         private static readonly ObjectIDGenerator gen = new();
 
@@ -76,7 +75,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 VariableNameGenerator.NormalizeIdentifier(dce.LibraryName);
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
 
-            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
+            if (dce.RetrieveContextParameter != null)
+                sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}({dce.RetrieveContextParameter.Name})");
+            else
+                sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
+
 
             return sb.ToString();
         }
@@ -417,31 +420,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             return $"{leadingIndentString}{nullCoalesce}";
         }
 
-        private static Regex ContextParameterNameExpression = new Regex(@"^\$(\w+)\$([\w\d]+)$", RegexOptions.Compiled);
-        internal static (string context, string parameterName, ParameterExpression parameter)? RetrieveContextParameter(ParameterExpression parameter)
-        {
-            var match = ContextParameterNameExpression.Match(parameter.Name!);
-            if (match.Success)
-            {
-                var contextName = match.Groups[1].Value;
-                var parameterName = match.Groups[2].Value;
-
-                return (contextName, parameterName, parameter);
-            }
-            else return null;
-        }
-
         private string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda, bool functionMode = false)
         {
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
-            var parameterDeclarations = lambda.Parameters.Select(p => {
-                var rcp = RetrieveContextParameter(p);
-                if (rcp != null)
-                    return $"[RetrieveContext(\"{rcp.Value.context}\")] {PrettyTypeName(p.Type)} {rcp.Value.parameterName} = default)";
-                else 
-                    return $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}";
-            });
+            var parameterDeclarations = lambda.Parameters
+                .Where(p => p.Type != typeof(CqlContext))
+                .Select(p => $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}");
             var lambdaParameters = $"({string.Join(", ", parameterDeclarations)})";
             lambdaSb.Append(lambdaParameters);
 

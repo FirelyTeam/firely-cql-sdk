@@ -87,12 +87,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             var libraryDictionary = libraries.ToDictionary(lib => lib.NameAndVersion!);
             foreach (var library in libraries)
             {
-                var builder = new ExpressionBuilder(Binding, 
-                    TypeManager, 
-                    library.NameAndVersion!, 
-                    libraryDictionary, 
-                    builderLogger, 
-                    new(false));
+                var builder = new ExpressionBuilder(Binding,
+                    TypeManager,
+                    library.NameAndVersion!,
+                    libraryDictionary,
+                    builderLogger);
                 var expressions = builder.Build();
                 all.Merge(expressions);
             }

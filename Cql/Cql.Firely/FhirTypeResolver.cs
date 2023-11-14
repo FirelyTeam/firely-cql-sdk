@@ -85,7 +85,7 @@ namespace Hl7.Cql.Fhir
             return result;
         }
 
-        internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
+        internal override PropertyInfo? GetPrimaryCodeProperty(string typeSpecifier)
         {
             // This is not used by the data source, but we'll implement it nonetheless.
             var specifiedType = ResolveType(typeSpecifier);

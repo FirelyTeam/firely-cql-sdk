@@ -25,14 +25,15 @@ namespace Hl7.Cql.Compiler
     internal class DefinitionCallExpression : Expression
     {
         private static readonly PropertyInfo itemProperty =
-            typeof(DefinitionDictionary<Delegate>).GetProperty("Item", new[] { typeof(string), typeof(string) })!;
-
+            typeof(DefinitionDictionary<Delegate>)
+            .GetProperty("Item", new[] { typeof(string), typeof(string), typeof(Type[]) })!;
         public DefinitionCallExpression(Expression definitions,
-            string libraryName, 
-            string definitionName, 
-            Expression cqlContextParameter, 
+            string libraryName,
+            string definitionName,
+            Expression cqlContextParameter,
             Type definitionType,
-            bool fromUnfilteredContext)
+            Type? retrieveContextType,
+            ParameterExpression? retrieveContext)
         {
             if (definitions.Type != typeof(DefinitionDictionary<Delegate>))
                 throw new ArgumentException($"Argument should be of type {nameof(DefinitionDictionary<Delegate>)}",
@@ -46,7 +47,8 @@ namespace Hl7.Cql.Compiler
             DefinitionName = definitionName;
             CqlContextParameter = cqlContextParameter;
             DefinitionType = definitionType;
-            FromUnfilteredContext = fromUnfilteredContext;
+            RetrieveContextType = retrieveContextType;
+            RetrieveContextParameter = retrieveContext;
         }
 
         public override bool CanReduce => true;
@@ -55,16 +57,31 @@ namespace Hl7.Cql.Compiler
 
         public override Expression Reduce()
         {
-            var indices = new Expression[]
+            Expression[] indices;
+            if (RetrieveContextParameter != null)
             {
-                Constant(LibraryName),
-                Constant(DefinitionName)
-            };
+                indices = new Expression[]
+                {
+                    Constant(LibraryName),
+                    Constant(DefinitionName),
+                    NewArrayInit(typeof(Type), new[] { Constant(RetrieveContextParameter.Type) }),
+                };
+            }
+            else
+            {
+                indices = new Expression[]
+                {
+                    Constant(LibraryName),
+                    Constant(DefinitionName),
+                    NewArrayInit(typeof(Type))
+                };
+            }
 
             var index = MakeIndex(Definitions, itemProperty, indices);
             var asFunc = TypeAs(index, DefinitionType);
-            var invoke = Invoke(asFunc, CqlContextParameter);
-
+            var invoke = RetrieveContextType == null
+                        ? Invoke(asFunc, CqlContextParameter)
+                        : Invoke(asFunc, CqlContextParameter, RetrieveContextParameter as Expression ?? Default(RetrieveContextType));
             return invoke;
         }
 
@@ -78,7 +95,11 @@ namespace Hl7.Cql.Compiler
         public override Type Type => GetReturnTypeFromDelegateType(DefinitionType);
 
         public Expression Definitions { get; }
-        public bool FromUnfilteredContext { get; }
+        /// <summary>
+        /// The type of the retrieve context; will be <see langword="null"/> in Unfiltered contexts
+        /// </summary>
+        public Type? RetrieveContextType { get; }
+        public ParameterExpression? RetrieveContextParameter { get; }
         public string LibraryName { get; }
         public string DefinitionName { get; }
         public Expression CqlContextParameter { get; }

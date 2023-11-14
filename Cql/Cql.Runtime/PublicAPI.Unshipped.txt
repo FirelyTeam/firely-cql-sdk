@@ -25,7 +25,6 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionsForLibrary(string? libraryNam
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Libraries.get -> System.Collections.Generic.IEnumerable<string!>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Merge(params Hl7.Cql.Runtime.DefinitionDictionary<T!>![]! dictionaries) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, string! definition, params System.Type![]! signature].get -> T!
-Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, string! definition].get -> T!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinesForLibrary(string? libraryName, out System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, T!>>? definitions) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinitionsForLibrary(string? libraryName, out System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.Collections.Generic.List<(System.Type![]!, T!)>!>>? definitions) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetTags(string! library, string! definition, System.Type![]! signature, out System.Linq.ILookup<string!, string!>? tags) -> bool

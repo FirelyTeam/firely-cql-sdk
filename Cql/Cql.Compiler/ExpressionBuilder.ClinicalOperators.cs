@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand!, ctx);
-            return OperatorBinding.Bind(CqlOperator.CalculateAge, ctx.RuntimeContextParameter, birthDate, units);
+            return OperatorBinding.Bind(CqlOperator.CalculateAge, ctx.CqlContextParameter, birthDate, units);
         }
 
         protected Expression CalculateAgeAt(elm.CalculateAgeAt e, ExpressionBuilderContext ctx)
@@ -33,26 +33,26 @@ namespace Hl7.Cql.Compiler
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand![0], ctx);
             var asOf = TranslateExpression(e.operand[1], ctx); // should be "as of" argument
-            return OperatorBinding.Bind(CqlOperator.CalculateAgeAt, ctx.RuntimeContextParameter, birthDate, asOf, units);
+            return OperatorBinding.Bind(CqlOperator.CalculateAgeAt, ctx.CqlContextParameter, birthDate, asOf, units);
         }
 
 
         protected Expression InValueSet(elm.InValueSet e, ExpressionBuilderContext ctx)
         {
             var code = TranslateExpression(e.code!, ctx);
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), false, ctx);
+            var valueSet = InvokeTerminology(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
             var codeType = code.Type;
             if (codeType == TypeResolver.CodeType)
             {
-                return OperatorBinding.Bind(CqlOperator.CodeInValueSet, ctx.RuntimeContextParameter, code, valueSet);
+                return OperatorBinding.Bind(CqlOperator.CodeInValueSet, ctx.CqlContextParameter, code, valueSet);
             }
             else if (codeType == TypeResolver.ConceptType)
             {
-                return OperatorBinding.Bind(CqlOperator.ConceptInValueSet, ctx.RuntimeContextParameter, code, valueSet);
+                return OperatorBinding.Bind(CqlOperator.ConceptInValueSet, ctx.CqlContextParameter, code, valueSet);
             }
             else if (codeType == typeof(string))
             {
-                return OperatorBinding.Bind(CqlOperator.StringInValueSet, ctx.RuntimeContextParameter, code, valueSet);
+                return OperatorBinding.Bind(CqlOperator.StringInValueSet, ctx.CqlContextParameter, code, valueSet);
             }
             else throw new NotImplementedException();
         }
@@ -63,18 +63,18 @@ namespace Hl7.Cql.Compiler
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
                 throw new ArgumentException("Only List types are allowed for AnyInValueSet", nameof(e));
             var codeType = TypeResolver.GetListElementType(codes.Type, true)!;
-            var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), false, ctx);
+            var valueSet = InvokeTerminology(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
             if (codeType == TypeResolver.CodeType)
             {
-                return OperatorBinding.Bind(CqlOperator.CodesInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
+                return OperatorBinding.Bind(CqlOperator.CodesInValueSet, ctx.CqlContextParameter, codes, valueSet);
             }
             else if (codeType == TypeResolver.ConceptType)
             {
-                return OperatorBinding.Bind(CqlOperator.ConceptsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
+                return OperatorBinding.Bind(CqlOperator.ConceptsInValueSet, ctx.CqlContextParameter, codes, valueSet);
             }
             else if (codeType == typeof(string))
             {
-                return OperatorBinding.Bind(CqlOperator.StringsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
+                return OperatorBinding.Bind(CqlOperator.StringsInValueSet, ctx.CqlContextParameter, codes, valueSet);
             }
             else throw new NotImplementedException($"AnyInValueSet not implemented for element type {TypeManager.PrettyTypeName(codeType)}");
 

@@ -116,7 +116,7 @@ namespace Hl7.Cql.Compiler
             else
             {
                 var source = TranslateExpression(e.source, ctx);
-                var call = OperatorBinding.Bind(CqlOperator.Descendents, ctx.RuntimeContextParameter, source);
+                var call = OperatorBinding.Bind(CqlOperator.Descendents, ctx.CqlContextParameter, source);
                 return call;
             }
         }
@@ -133,7 +133,7 @@ namespace Hl7.Cql.Compiler
         {
             var quantity = TranslateExpression(cqe.operand![0], ctx);
             var unit = TranslateExpression(cqe.operand![1], ctx);
-            var call = OperatorBinding.Bind(CqlOperator.ConvertQuantity, ctx.RuntimeContextParameter, quantity, unit);
+            var call = OperatorBinding.Bind(CqlOperator.ConvertQuantity, ctx.CqlContextParameter, quantity, unit);
             return call;
         }
 
@@ -228,7 +228,7 @@ namespace Hl7.Cql.Compiler
         protected Expression ToList(elm.ToList e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            var call = OperatorBinding.Bind(CqlOperator.ToList, ctx.RuntimeContextParameter, operand);
+            var call = OperatorBinding.Bind(CqlOperator.ToList, ctx.CqlContextParameter, operand);
             return call;
         }
 
@@ -246,12 +246,12 @@ namespace Hl7.Cql.Compiler
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, ctx));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType, ctx);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
-                var callSelect = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, input, lambda);
+                var callSelect = OperatorBinding.Bind(CqlOperator.Select, ctx.CqlContextParameter, input, lambda);
                 return callSelect;
             }
             else
             {
-                var call = OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter, input, Expression.Constant(outputType, typeof(Type)));
+                var call = OperatorBinding.Bind(CqlOperator.Convert, ctx.CqlContextParameter, input, Expression.Constant(outputType, typeof(Type)));
                 return call;
             }
         }

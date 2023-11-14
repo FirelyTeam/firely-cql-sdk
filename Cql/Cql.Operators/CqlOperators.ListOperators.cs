@@ -1096,7 +1096,6 @@ namespace Hl7.Cql.Runtime
                 return source.SingleOrDefault();
         }
 
-
         #endregion
 
         #region Slice, skip, take, tail
