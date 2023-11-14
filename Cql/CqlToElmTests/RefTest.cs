@@ -181,5 +181,29 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = Run<int>(library, nameof(Function));
             result.Should().Be(8);
         }
+
+        [TestMethod]
+        public void InvokeParameter()
+        {
+            var library = MakeLibrary($@"
+               library BareMinimum version '0.0.1'
+    
+                parameter x default 'bla'
+
+                define {nameof(InvokeParameter)}: x(4)
+            ", expectedError: "x is not a function, so it cannot be invoked.");
+        }
+
+        [TestMethod]
+        public void InvokeExpression()
+        {
+            var library = MakeLibrary($@"
+               library BareMinimum version '0.0.1'
+    
+                define pi: 3.14
+
+                define {nameof(InvokeExpression)}: pi()
+            ", expectedError: "pi is an expression, and should be invoked without the parenthesis.");
+        }
     }
 }

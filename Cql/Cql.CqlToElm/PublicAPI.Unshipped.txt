@@ -1,0 +1,15 @@
+﻿#nullable enable
+Hl7.Cql.CqlToElm.CqlToElmOptions
+Hl7.Cql.CqlToElm.CqlToElmOptions.CqlToElmOptions() -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.get -> string?
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.get -> string?
+Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.set -> void
+Hl7.Cql.CqlToElm.IModelProvider
+Hl7.Cql.CqlToElm.IModelProvider.Add(Hl7.Cql.Model.ModelInfo! model) -> Hl7.Cql.CqlToElm.IModelProvider!
+Hl7.Cql.CqlToElm.IModelProvider.ModelFromName(string! name, string? version = null) -> Hl7.Cql.Model.ModelInfo?
+Hl7.Cql.CqlToElm.IModelProvider.ModelFromUri(string! uri, string? version = null) -> Hl7.Cql.Model.ModelInfo?
+Hl7.Cql.CqlToElm.ModelProvider
+static Hl7.Cql.CqlToElm.ModelProvider.GetBaseType(Hl7.Cql.CqlToElm.IModelProvider! provider, Hl7.Cql.Elm.TypeSpecifier! type) -> Hl7.Cql.Elm.NamedTypeSpecifier?
+static Hl7.Cql.CqlToElm.ModelProvider.IsSubtypeOf(this Hl7.Cql.Elm.TypeSpecifier! subType, Hl7.Cql.Elm.TypeSpecifier! superType, Hl7.Cql.CqlToElm.IModelProvider! provider) -> bool
+static Hl7.Cql.CqlToElm.ModelProvider.TryGetTypeInfoFor(this Hl7.Cql.Model.ModelInfo! model, string! name, out Hl7.Cql.Model.TypeInfo? result) -> bool

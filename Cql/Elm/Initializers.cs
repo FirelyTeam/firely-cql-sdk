@@ -31,6 +31,13 @@ namespace Hl7.Cql.Elm
             return t;
         }
 
+
+        public static T With<T>(this T me, Action<T> action)
+        {
+            action(me);
+            return me;
+        }
+
         public static T WithLocator<T>(this T t, string? locator) where T : Element
         {
             t.WithId();

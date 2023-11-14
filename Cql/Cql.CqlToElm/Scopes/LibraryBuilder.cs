@@ -17,7 +17,9 @@ namespace Hl7.Cql.CqlToElm
 
         public VersionedIdentifier Identifier { get; set; }
 
-
+        /// <summary>
+        /// Builds a library from the current state of the builder.
+        /// </summary>
         public Library Build()
         {
             var symbols = SymbolTable.Symbols;

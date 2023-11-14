@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var unqualified = context.referentialIdentifier().Parse();
             var libraryName = qualifiers.Any() ? string.Join(".", qualifiers) : null;
 
-            var result = LibraryBuilder.CurrentScope.ResolveIdentifier(libraryName, unqualified);
+            var result = LibraryBuilder.CurrentScope.Ref(libraryName, unqualified);
             return result.WithLocator(context.Locator());
         }
 
@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitMemberInvocation([NotNull] cqlParser.MemberInvocationContext context)
         {
             var identifier = context.referentialIdentifier().Parse();
-            var definitionRef = LibraryBuilder.CurrentScope!.ResolveIdentifier(null, identifier);
+            var definitionRef = LibraryBuilder.CurrentScope!.Ref(null, identifier);
 
             var result = definitionRef switch
             {
@@ -45,35 +45,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitFunction([NotNull] cqlParser.FunctionContext context)
         {
             var funcName = context.referentialIdentifier().Parse();
-            _ = LibraryBuilder.CurrentScope.TryResolveIdentifier(null, funcName, out var symbolRef, out var error);
-            Expression result;
+            _ = LibraryBuilder.CurrentScope.TryResolveIdentifier(null, funcName, out var symbolDef, out var error);
 
-            symbolRef ??= new FunctionRef { name = funcName }
+            var symbolRef = symbolDef?.ToRef(null) ?? new FunctionRef { name = funcName }
                     .WithResultType(SystemTypes.AnyType)
                     .AddError(error!, ErrorType.semantic);
 
-            if (symbolRef is FunctionRef funcRef)
+            Expression result = symbolRef switch
             {
-                var parameters = context.paramList() is { } pars ? ParseParamList(pars) : Array.Empty<Expression>();
-                funcRef.operand = parameters;
-                result = funcRef;
-            }
-            else if (symbolRef is ExpressionRef)
-            {
-                symbolRef.AddError($"{funcName} is an expression, and should be invoked without the parenthesis.", ErrorType.semantic);
-                result = symbolRef;
-            }
-            else
-            {
-                symbolRef.AddError($"{funcName} is not a function, so it cannot be invoked.", ErrorType.semantic);
-                result = symbolRef;
-            }
+                FunctionRef funcRef => funcRef.With(f => f.operand = ParseParamList(context.paramList())),
+                ExpressionRef => symbolRef.AddError($"{funcName} is an expression, and should be invoked without the parenthesis.", ErrorType.semantic),
+                _ => symbolRef.AddError($"{funcName} is not a function, so it cannot be invoked.", ErrorType.semantic)
+            };
 
             return result.WithLocator(context.Locator());
         }
 
         // paramList : expression(',' expression)*
-        public Expression[] ParseParamList(cqlParser.ParamListContext context) => context.expression().Select(Visit).ToArray();
+        public Expression[] ParseParamList(cqlParser.ParamListContext? context) => context?.expression().Select(Visit).ToArray()
+            ?? Array.Empty<Expression>();
 
 
         // | '$this'                           #thisInvocation

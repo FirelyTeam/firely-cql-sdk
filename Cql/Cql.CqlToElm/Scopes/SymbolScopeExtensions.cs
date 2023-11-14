@@ -76,7 +76,7 @@ namespace Hl7.Cql.CqlToElm
         }
 
 
-        public static Expression ResolveIdentifier(this ISymbolScope symbolScope, string? libraryName, string identifier)
+        public static Expression Ref(this ISymbolScope symbolScope, string? libraryName, string identifier)
         {
             IdentifierRef makeErrorReference(string error) =>
                  new IdentifierRef() { libraryName = libraryName, name = identifier }
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm
                      .AddError(error, ErrorType.semantic);
 
             var success = TryResolveIdentifier(symbolScope, libraryName, identifier, out var result, out var error);
-            return success ? result! : makeErrorReference(error!);
+            return success ? result!.ToRef(libraryName) : makeErrorReference(error!);
         }
 
         /// <summary>
@@ -93,16 +93,14 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>True if the identifier was found, false otherwise. <paramref name="result"/> will contain the reference
         /// to the definition in the <see cref="ISymbolScope"/> on success or an <see cref="IdentifierRef"/> with an error 
         /// annotation otherwise.</returns>
-        public static bool TryResolveIdentifier(this ISymbolScope symbolScope, string? libraryName, string identifier, out Expression? result, out string? error)
+        public static bool TryResolveIdentifier(this ISymbolScope symbolScope, string? libraryName, string identifier, out IDefinitionElement? result, out string? error)
         {
             result = null;
             error = null;
 
             if (libraryName is null)
             {
-                if (symbolScope.TryResolveSymbol(identifier, out var definition))
-                    result = definition!.ToRef(null);
-                else
+                if (!symbolScope.TryResolveSymbol(identifier, out result))
                     error = $"Unable to resolve identifier {identifier}.";
             }
             else
@@ -112,7 +110,7 @@ namespace Hl7.Cql.CqlToElm
                     if (library is IncludeDefSymbol includeDef)
                     {
                         if (includeDef.Library.TryResolveSymbol(identifier, out var definition))
-                            result = definition!.ToRef(libraryName);
+                            result = definition;
                         else
                             error = $"Unable to resolve identifier {identifier} in library {libraryName}.";
                     }
@@ -123,7 +121,7 @@ namespace Hl7.Cql.CqlToElm
                     error = $"Unable to resolve library {libraryName}.";
             }
 
-            return result is not IdentifierRef;
+            return error is null;
         }
     }
 }
