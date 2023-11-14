@@ -256,20 +256,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 {
                     if (isDefinition(overload.Item2))
                     {
-                        var methodParameter = string.Empty;
-                        var rcp = overload.Item2.Parameters
-                            .Select(p => ExpressionConverter.RetrieveContextParameter(p))
-                            .Where(rcp => rcp != null)
-                            .SingleOrDefault();
-                        if (rcp != null)
-                        {
-                            methodParameter = $"{rcp.Value.context}()";
-                        }
                         var methodName = VariableNameGenerator.NormalizeIdentifier(kvp.Key);
                         var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
                         var returnType = ExpressionConverter.PrettyTypeName(overload.Item2.ReturnType);
                         var privateMethodName = PrivateMethodNameFor(methodName!);
-                        writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(()=>{privateMethodName}({methodParameter}));");
+                        writer.WriteLine(indentLevel, $"{cachedValueName} = new Lazy<{returnType}>(()=>{privateMethodName}());");
                     }
                 }
             }
@@ -422,22 +413,20 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
+
+            var expressionConverter = new ExpressionConverter(libraryName);
             var visitedBody = Transform(overload.Body,
                 new RedundantCastsTransformer(),
                 new SimplifyExpressionsVisitor(),
                 new RenameVariablesVisitor(vng),
                 new LocalVariableDeduper()
             );
-            var expressionConverter = new ExpressionConverter(libraryName);
             var rcp = overload.Parameters
-                .Select(p => ExpressionConverter.RetrieveContextParameter(p))
-                .Where(rcp => rcp != null)
+                .Where(p => p.Name == "retrieveContext")
                 .SingleOrDefault();
+
             if (rcp != null)
             {
-                var cachedValueName = DefinitionCacheKeyForMethod(rcp.Value.context!);
-                var ucpv = new UseContextParameterVisitor(rcp.Value.context, rcp.Value.parameterName, cachedValueName);
-                visitedBody = Transform(visitedBody, ucpv);
                 var parameters = overload.Parameters.Skip(1);
                 overload = Expression.Lambda(visitedBody, parameters);
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");

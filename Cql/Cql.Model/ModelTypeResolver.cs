@@ -15,7 +15,7 @@ using System.Reflection;
 namespace Hl7.Cql.Model
 {
     /// <summary>
-    /// This class implements <see cref="GetPrimaryCodePath"/> through the provided <see cref="ModelInfo"/>
+    /// This class implements <see cref="GetPrimaryCodeProperty"/> through the provided <see cref="ModelInfo"/>
     /// </summary>
     internal abstract class ModelTypeResolver : BaseTypeResolver
     {
@@ -54,7 +54,7 @@ namespace Hl7.Cql.Model
         private readonly IDictionary<string, ClassInfo> ClassInfo = new Dictionary<string, ClassInfo>();
         private readonly IDictionary<string, PropertyInfo?> Properties = new Dictionary<string, PropertyInfo?>();
 
-        internal override PropertyInfo? GetPrimaryCodePath(string typeSpecifier)
+        internal override PropertyInfo? GetPrimaryCodeProperty(string typeSpecifier)
         {
             PropertyInfo? propertyInfo = null;
             if (Properties.TryGetValue(typeSpecifier, out propertyInfo))

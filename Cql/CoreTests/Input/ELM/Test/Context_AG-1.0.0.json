@@ -4,41 +4,41 @@
 
     "identifier": {
       "type": "VersionedIdentifier",
+
       "id": "Context_AG",
+
       "version": "1.0.0"
     },
 
     "schemaIdentifier": {
       "type": "VersionedIdentifier",
+
       "id": "urn:hl7-org:elm",
+
       "version": "r1"
     },
 
     "usings": {
       "type": "Library$Usings",
+
       "def": [
         {
           "type": "UsingDef",
+
           "localIdentifier": "System",
+
           "uri": "urn:hl7-org:elm-types:r1"
         },
+
         {
           "type": "UsingDef",
+
           "locator": "3:1-3:26",
+
           "localIdentifier": "FHIR",
+
           "uri": "http://hl7.org/fhir",
-          "version": "4.0.1"
-        }
-      ]
-    },
-    "includes": {
-      "type": "Library$Includes",
-      "def": [
-        {
-          "type": "IncludeDef",
-          "locator": "5:1-5:62",
-          "localIdentifier": "FHIRHelpers",
-          "path": "https://cqlab.io/labs/cq_core/libraries/FHIRHelpers",
+
           "version": "4.0.1"
         }
       ]
@@ -46,15 +46,21 @@
 
     "contexts": {
       "type": "Library$Contexts",
+
       "def": [
         {
           "type": "ContextDef",
-          "locator": "7:1-7:15",
+
+          "locator": "5:1-5:15",
+
           "name": "Patient"
         },
+
         {
           "type": "ContextDef",
-          "locator": "12:1-12:18",
+
+          "locator": "10:1-10:18",
+
           "name": "Unfiltered"
         }
       ]
@@ -62,197 +68,217 @@
 
     "statements": {
       "type": "Library$Statements",
+
       "def": [
         {
           "type": "ExpressionDef",
+
           "expression": {
             "type": "SingletonFrom",
+
             "operand": {
               "type": "Retrieve",
-              "locator": "7:1-7:15",
+
+              "locator": "5:1-5:15",
+
               "dataType": "{http://hl7.org/fhir}Patient",
+
               "templateId": "http://hl7.org/fhir/StructureDefinition/Patient"
             }
           },
-          "locator": "7:1-7:15",
+
+          "locator": "5:1-5:15",
+
           "name": "Patient",
+
           "context": "Patient"
         },
+
         {
           "type": "ExpressionDef",
+
           "expression": {
-            "type": "And",
+            "type": "GreaterOrEqual",
+
             "operand": [
               {
-                "type": "GreaterOrEqual",
+                "type": "CalculateAgeAt",
+
                 "operand": [
                   {
-                    "type": "CalculateAgeAt",
-                    "operand": [
-                      {
-                        "type": "Property",
-                        "source": {
-                          "type": "ExpressionRef",
-                          "name": "Patient"
-                        },
-                        "path": "birthDate.value"
-                      },
-                      {
-                        "type": "Date",
-                        "year": {
-                          "type": "Literal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                          "value": "2013"
-                        },
-                        "month": {
-                          "type": "Literal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                          "value": "1"
-                        },
-                        "day": {
-                          "type": "Literal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                          "value": "1"
-                        },
-                        "locator": "10:16-10:26",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Date"
-                      }
-                    ],
-                    "locator": "10:3-10:27",
-                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                    "precision": "Year"
+                    "type": "Property",
+
+                    "source": {
+                      "type": "ExpressionRef",
+
+                      "name": "Patient"
+                    },
+
+                    "path": "birthDate.value"
                   },
+
                   {
-                    "type": "Literal",
-                    "locator": "10:32-10:33",
-                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                    "value": "16"
+                    "type": "Date",
+
+                    "year": {
+                      "type": "Literal",
+
+                      "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+
+                      "value": "2013"
+                    },
+
+                    "month": {
+                      "type": "Literal",
+
+                      "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+
+                      "value": "1"
+                    },
+
+                    "day": {
+                      "type": "Literal",
+
+                      "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+
+                      "value": "1"
+                    },
+
+                    "locator": "8:16-8:26",
+
+                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Date"
                   }
                 ],
-                "locator": "10:3-10:33",
-                "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+
+                "locator": "8:3-8:27",
+
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
+                "precision": "Year"
               },
+
               {
-                "type": "Less",
-                "operand": [
-                  {
-                    "type": "CalculateAgeAt",
-                    "operand": [
-                      {
-                        "type": "Property",
-                        "source": {
-                          "type": "ExpressionRef",
-                          "name": "Patient"
-                        },
-                        "path": "birthDate.value"
-                      },
-                      {
-                        "type": "Date",
-                        "year": {
-                          "type": "Literal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                          "value": "2013"
-                        },
-                        "month": {
-                          "type": "Literal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                          "value": "1"
-                        },
-                        "day": {
-                          "type": "Literal",
-                          "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                          "value": "1"
-                        },
-                        "locator": "10:52-10:62",
-                        "resultTypeName": "{urn:hl7-org:elm-types:r1}Date"
-                      }
-                    ],
-                    "locator": "10:39-10:63",
-                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                    "precision": "Year"
-                  },
-                  {
-                    "type": "Literal",
-                    "locator": "10:67-10:68",
-                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
-                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
-                    "value": "24"
-                  }
-                ],
-                "locator": "10:39-10:68",
-                "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+                "type": "Literal",
+
+                "locator": "8:32-8:33",
+
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+
+                "value": "16"
               }
             ],
-            "locator": "10:3-10:68",
+
+            "locator": "8:3-8:33",
+
             "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
           },
-          "locator": "9:1-10:68",
+
+          "locator": "7:1-8:33",
+
           "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
+
           "name": "InInitialPopulation",
+
           "context": "Patient",
+
           "accessLevel": "Public"
         },
+
         {
           "type": "ExpressionDef",
+
           "expression": {
             "type": "Count",
+
             "source": {
               "type": "Query",
+
               "source": [
                 {
                   "type": "AliasedQuerySource",
+
                   "expression": {
                     "type": "ExpressionRef",
+
                     "resultTypeSpecifier": {
                       "type": "ListTypeSpecifier",
+
                       "elementType": {
                         "type": "NamedTypeSpecifier",
+
                         "name": "{urn:hl7-org:elm-types:r1}Boolean"
                       }
                     },
-                    "locator": "15:9-15:27",
+
+                    "locator": "13:9-13:27",
+
                     "name": "InInitialPopulation"
                   },
+
                   "resultTypeSpecifier": {
                     "type": "ListTypeSpecifier",
+
                     "elementType": {
                       "type": "NamedTypeSpecifier",
+
                       "name": "{urn:hl7-org:elm-types:r1}Boolean"
                     }
                   },
-                  "locator": "15:9-15:30",
+
+                  "locator": "13:9-13:30",
+
                   "alias": "IP"
                 }
               ],
+
               "relationship": [],
+
               "where": {
                 "type": "IsTrue",
+
                 "operand": {
                   "type": "AliasRef",
-                  "locator": "15:38-15:39",
+
+                  "locator": "13:38-13:39",
+
                   "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
+
                   "name": "IP"
                 },
-                "locator": "15:32-15:47",
+
+                "locator": "13:32-13:47",
+
                 "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
               },
+
               "resultTypeSpecifier": {
                 "type": "ListTypeSpecifier",
+
                 "elementType": {
                   "type": "NamedTypeSpecifier",
+
                   "name": "{urn:hl7-org:elm-types:r1}Boolean"
                 }
               },
-              "locator": "15:9-15:47"
+
+              "locator": "13:9-13:47"
             },
-            "locator": "15:3-15:48",
+
+            "locator": "13:3-13:48",
+
             "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
           },
-          "locator": "14:1-15:48",
+
+          "locator": "12:1-13:48",
+
           "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
           "name": "InitialPopulationCount",
+
           "context": "Unfiltered",
+
           "accessLevel": "Public"
         }
       ]
@@ -261,6 +287,7 @@
     "annotation": [
       {
         "type": "CqlToElmInfo",
+
         "translatorOptions": "EnableLocators,EnableResultTypes,EnableDetailedErrors"
       }
     ]

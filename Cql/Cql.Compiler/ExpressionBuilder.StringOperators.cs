@@ -23,7 +23,7 @@ namespace Hl7.Cql.Compiler
             var operand = e.separator == null
                 ? Expression.Constant(null, typeof(string))
                 : TranslateExpression(e.separator, ctx);
-            var call = OperatorBinding.Bind(CqlOperator.Combine, ctx.RuntimeContextParameter, source, operand);
+            var call = OperatorBinding.Bind(CqlOperator.Combine, ctx.CqlContextParameter, source, operand);
             return call;
         }
 
@@ -39,11 +39,11 @@ namespace Hl7.Cql.Compiler
             var right = TranslateExpression(e!.operand![1]!, ctx);
             if (left.Type == typeof(string))
             {
-                return OperatorBinding.Bind(CqlOperator.CharAt, ctx.RuntimeContextParameter, left, right);
+                return OperatorBinding.Bind(CqlOperator.CharAt, ctx.CqlContextParameter, left, right);
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                return OperatorBinding.Bind(CqlOperator.ElementAt, ctx.RuntimeContextParameter, left, right);
+                return OperatorBinding.Bind(CqlOperator.ElementAt, ctx.CqlContextParameter, left, right);
             }
             else throw new NotImplementedException();
         }
@@ -52,7 +52,7 @@ namespace Hl7.Cql.Compiler
         {
             var @string = TranslateExpression(e!.@string!, ctx);
             var pattern = TranslateExpression(e!.pattern!, ctx);
-            return OperatorBinding.Bind(CqlOperator.LastPositionOf, ctx.RuntimeContextParameter, @string, pattern);
+            return OperatorBinding.Bind(CqlOperator.LastPositionOf, ctx.CqlContextParameter, @string, pattern);
         }
 
         protected Expression? Length(elm.Length len, ExpressionBuilderContext ctx)
@@ -60,11 +60,11 @@ namespace Hl7.Cql.Compiler
             var operand = TranslateExpression(len.operand!, ctx);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
-                return OperatorBinding.Bind(CqlOperator.ListLength, ctx.RuntimeContextParameter, operand);
+                return OperatorBinding.Bind(CqlOperator.ListLength, ctx.CqlContextParameter, operand);
             }
             else if (operand.Type == typeof(string))
             {
-                return OperatorBinding.Bind(CqlOperator.StringLength, ctx.RuntimeContextParameter, operand);
+                return OperatorBinding.Bind(CqlOperator.StringLength, ctx.CqlContextParameter, operand);
             }
             else throw new NotImplementedException();
         }
@@ -79,7 +79,7 @@ namespace Hl7.Cql.Compiler
         {
             var @string = TranslateExpression(e!.@string!, ctx);
             var pattern = TranslateExpression(e!.pattern!, ctx);
-            return OperatorBinding.Bind(CqlOperator.PositionOf, ctx.RuntimeContextParameter, pattern, @string);
+            return OperatorBinding.Bind(CqlOperator.PositionOf, ctx.CqlContextParameter, pattern, @string);
 
         }
 
@@ -88,14 +88,14 @@ namespace Hl7.Cql.Compiler
             var source = TranslateExpression(e.operand![0]!, ctx);
             var pattern = TranslateExpression(e.operand![1]!, ctx);
             var substitution = TranslateExpression(e.operand![2]!, ctx);
-            return OperatorBinding.Bind(CqlOperator.ReplaceMatches, ctx.RuntimeContextParameter, source, pattern, substitution);
+            return OperatorBinding.Bind(CqlOperator.ReplaceMatches, ctx.CqlContextParameter, source, pattern, substitution);
         }
 
         protected Expression Split(elm.Split e, ExpressionBuilderContext ctx)
         {
             var stringToSplit = TranslateExpression(e.stringToSplit!, ctx);
             var separator = TranslateExpression(e.separator!, ctx);
-            return OperatorBinding.Bind(CqlOperator.Split, ctx.RuntimeContextParameter, stringToSplit, separator);
+            return OperatorBinding.Bind(CqlOperator.Split, ctx.CqlContextParameter, stringToSplit, separator);
         }
 
         protected Expression? StartsWith(elm.StartsWith e, ExpressionBuilderContext ctx) =>
@@ -108,7 +108,7 @@ namespace Hl7.Cql.Compiler
             var length = e.length == null
                 ? Expression.Constant(null, typeof(int?))
                 : TranslateExpression(e.length, ctx);
-            return OperatorBinding.Bind(CqlOperator.Substring, ctx.RuntimeContextParameter, stringToSub, startIndex, length);
+            return OperatorBinding.Bind(CqlOperator.Substring, ctx.CqlContextParameter, stringToSub, startIndex, length);
         }
 
         protected Expression? Upper(elm.Upper e, ExpressionBuilderContext ctx) =>

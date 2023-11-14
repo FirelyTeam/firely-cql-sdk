@@ -97,7 +97,7 @@ namespace CoreTests
 
             internal override IEnumerable<string> ModelNamespaces => throw new NotImplementedException();
 
-            internal override PropertyInfo GetPrimaryCodePath(string typeSpecifier) => throw new NotImplementedException();
+            internal override PropertyInfo GetPrimaryCodeProperty(string typeSpecifier) => throw new NotImplementedException();
         }
     }
 }

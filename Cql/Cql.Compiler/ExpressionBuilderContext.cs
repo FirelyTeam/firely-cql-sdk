@@ -31,7 +31,7 @@ namespace Hl7.Cql.Compiler
             IDictionary<string, string> localLibraryIdentifiers)
         {
             Builder = builder;
-            RuntimeContextParameter = contextParameter;
+            CqlContextParameter = contextParameter;
             Definitions = definitions;
             LocalLibraryIdentifiers = localLibraryIdentifiers;
         }
@@ -40,7 +40,8 @@ namespace Hl7.Cql.Compiler
         {
             Libraries = other.Libraries;
             Builder = other.Builder;
-            RuntimeContextParameter = other.RuntimeContextParameter;
+            CqlContextParameter = other.CqlContextParameter;
+            RetrieveContextParameter = other.RetrieveContextParameter;
             Definitions = other.Definitions;
             LocalLibraryIdentifiers = other.LocalLibraryIdentifiers;
             Operands = other.Operands;
@@ -55,6 +56,12 @@ namespace Hl7.Cql.Compiler
             Scopes = scopes;
         }
 
+        private ExpressionBuilderContext(ExpressionBuilderContext other,
+            ParameterExpression retrieveContextParameter) : this(other)
+        {
+            RetrieveContextParameter = retrieveContextParameter;
+        }
+
         /// <summary>
         /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
         /// </summary>
@@ -65,7 +72,14 @@ namespace Hl7.Cql.Compiler
         /// <remarks>
         /// Having access to the <see cref="CqlContext"/> is almost always necessary when implementing operators because the context contains all comparers, value sets, CQL parameter values, and other data provided at runtime.
         /// </remarks>
-        public ParameterExpression RuntimeContextParameter { get; }
+        public ParameterExpression CqlContextParameter { get; }
+
+
+        /// <summary>
+        /// Gets the parameter used by expressions using a filtered context, e.g. context Patient.
+        /// This value will be <see langword="null"/> for definitions in the unfiltered context.
+        /// </summary>
+        public ParameterExpression? RetrieveContextParameter { get; }
 
         /// <summary>
         /// Gets the parent of the context's current expression.
@@ -124,6 +138,19 @@ namespace Hl7.Cql.Compiler
         internal string? ImpliedAlias { get; private set; } = null;
 
         private readonly IList<elm.Element> Predecessors = new List<elm.Element>();
+
+        internal string? RetrieveContext
+        {
+            get
+            {
+                var expressionDef = Predecessors.OfType<elm.ExpressionDef>().FirstOrDefault();
+                if (expressionDef != null)
+                {
+                    return expressionDef.context;
+                }
+                return null;
+            }
+        }
 
         internal static string? NormalizeIdentifier(string? identifier)
         {
@@ -220,7 +247,7 @@ namespace Hl7.Cql.Compiler
             var subContext = new ExpressionBuilderContext(this, scopes);
             return subContext;
         }
-
+        
         internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
         {
             var subContext = WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
@@ -228,6 +255,9 @@ namespace Hl7.Cql.Compiler
 
             return subContext;
         }
+
+        internal ExpressionBuilderContext WithRetrieveContext(ParameterExpression retrieveContext) =>
+            new ExpressionBuilderContext(this, retrieveContext);
 
         /// <summary>
         /// Clones this ExpressionBuilderContext, adding the current context as a predecessor.

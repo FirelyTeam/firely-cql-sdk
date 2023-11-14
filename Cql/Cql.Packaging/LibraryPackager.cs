@@ -188,8 +188,7 @@ namespace Hl7.Cql.Packaging
                     typeManager,
                     library.NameAndVersion!,
                     cqlLibraryDictionary,
-                    builderLogger,
-                    new(false));
+                    builderLogger);
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
                 var expressions = builder.Build();
                 all.Merge(expressions);

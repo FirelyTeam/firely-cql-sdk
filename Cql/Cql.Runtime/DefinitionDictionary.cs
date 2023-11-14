@@ -24,33 +24,8 @@ namespace Hl7.Cql.Runtime
 
         private readonly Dictionary<string, List<Tag>> TagsByLibrary = new();
 
-
-        /// <summary>
-        /// Gets the value for the given <paramref name="libraryName"/> and <paramref name="definition"/>.
-        /// This indexer should be used for CQL definitions.
-        /// </summary>
-        /// <param name="libraryName">The name of the library.</param>
-        /// <param name="definition">The name of the definition.</param>
-        /// <returns>The value, if present.</returns>
-        /// <exception cref="KeyNotFoundException">If the library &amp; definition pair is not found in the dictionary.</exception>
-        public T this[string? libraryName, string definition]
-        {
-            get
-            {
-                libraryName ??= string.Empty;
-                if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
-                {
-                    var overloads = library[definition];
-                    if (overloads.Count == 1 && overloads[0].Signature.Length == 0)
-                        return overloads[0].T;
-                }
-                throw new KeyNotFoundException($"No matching overload for {definition} in {libraryName} could be found.");
-            }
-        }
-
         /// <summary>
         /// Gets the value for the given <paramref name="libraryName"/>, <paramref name="definition"/>, and signature.
-        /// This indexer should be used for CQL functions.
         /// </summary>
         /// <param name="libraryName">The name of the library.</param>
         /// <param name="definition">The name of the definition.</param>
