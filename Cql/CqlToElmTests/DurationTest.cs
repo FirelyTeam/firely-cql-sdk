@@ -133,7 +133,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Date_In_Hours: duration in hours between @2023-01-01 and @2024-02-01
-            ", expectedError: "A precision of 'Hour'*Date.");
+            ", "A precision of 'Hour'*Date.");
 
         [TestMethod]
         public void Duration_Between_Hours()
@@ -233,7 +233,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in days between @T12:00:00.100 and @T12:00:00.300
-            ", expectedError: "A precision of 'Day'*Time.");
+            ", "A precision of 'Day'*Time.");
 
         [TestMethod]
         public void Duration_Between_DateTimes()
@@ -280,7 +280,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and null
-            ", expectedError: "Ambiguous call*");
+            ", "Ambiguous call*");
 
     }
 }

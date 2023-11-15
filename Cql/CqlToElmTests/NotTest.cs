@@ -153,6 +153,6 @@ namespace Hl7.Cql.CqlToElm.Test
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1
-            ", expectedError: "Cannot resolve call*first argument*Integer*cannot implicitly be cast*Boolean.");
+            ", "Cannot resolve call*first argument*Integer*cannot implicitly be cast*Boolean.");
     }
 }

@@ -124,7 +124,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Decimal_Literal: 0.123456789
-                ", expectedError: "Decimal literals cannot have a mantissa longer than 8 digits.");
+                ", "Decimal literals cannot have a mantissa longer than 8 digits.");
 
             // exactly 28 digits
             MakeLibrary(@"
@@ -138,7 +138,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     library Decimal_Errors_3 version '1.0.0'
 
                     define private Decimal_Literal: -123456789012345678901.12345678
-                ", expectedError: "Decimal literals cannot be longer than 28 digits.");
+                ", "Decimal literals cannot be longer than 28 digits.");
         }
 
         #endregion
@@ -208,13 +208,13 @@ namespace Hl7.Cql.CqlToElm.Test
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: -9223372036854775809
-                ", expectedError: "Unparseable numeric literal*.");
+                ", "Unparseable numeric literal*.");
 
             MakeLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: 9223372036854775808
-                ", expectedError: "Unparseable numeric literal*.");
+                ", "Unparseable numeric literal*.");
         }
 
         #endregion

@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             _ = MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define public function Ext(): external", expectedError: "External functions must specify a return type.");
+                define public function Ext(): external", "External functions must specify a return type.");
         }
 
 
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
             _ = MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 define function Two() returns Decimal: 2",
-                expectedError: "Function*declared return type*Decimal*but*returns*Integer.");
+                "Function*declared return type*Decimal*but*returns*Integer.");
         }
 
         [TestMethod]
@@ -105,7 +105,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             _ = MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): b", expectedError: "Unable to resolve identifier b.");
+                define function Double(a Integer): b", "Unable to resolve identifier b.");
         }
 
         [TestMethod]

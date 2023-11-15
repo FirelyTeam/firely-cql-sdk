@@ -353,7 +353,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library AndTest version '1.0.0'
 
                 define private True_And_1: true and 1
-            ", expectedError: "Cannot resolve*Integer*Boolean.");
+            ", "Cannot resolve*Integer*Boolean.");
         }
     }
 }

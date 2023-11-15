@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval['hello','world']
-            ", expectedError: "Intervals*defined minimums and maximums*String is not allowed.");
+            ", "Intervals*defined minimums and maximums*String is not allowed.");
         }
 
         [TestMethod]
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[100 'a', 200 'kg']
-            ", expectedError: "Intervals of quantities must be of compatible units.");
+            ", "Intervals of quantities must be of compatible units.");
         }
 
         [TestMethod]

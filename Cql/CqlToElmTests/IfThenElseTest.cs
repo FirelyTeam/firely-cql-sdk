@@ -13,12 +13,12 @@ namespace Hl7.Cql.CqlToElm.Test
         public static void Initialize(TestContext context) => ClassInitialize();
 #pragma warning restore IDE0060 // Remove unused parameter
 
-        private Library createLibraryForExpression(string expression, string? expectedError = null)
+        private Library createLibraryForExpression(string expression, params string[] expectedErrors)
         {
             return MakeLibrary($@"
                 library IsTest version '1.0.0'
 
-                define private predicate: {expression}", expectedError);
+                define private predicate: {expression}", expectedErrors);
         }
 
         [TestMethod]
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void String_Integer_Integer()
         {
             var library = createLibraryForExpression("if 'hello' then 4 else 5",
-                expectedError: "The condition is of type {urn:hl7-org:elm-types:r1}String, which cannot implicitly be cast to type {urn:hl7-org:elm-types:r1}Boolean");
+                "The condition is of type {urn:hl7-org:elm-types:r1}String, which cannot implicitly be cast to type {urn:hl7-org:elm-types:r1}Boolean");
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);

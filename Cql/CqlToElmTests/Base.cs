@@ -49,12 +49,12 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
 
-        internal Library MakeLibrary(string cql, string? expectedError = null)
+        internal Library MakeLibrary(string cql, params string[] expectedErrors)
         {
             var library = ConvertLibrary(cql);
 
-            if (expectedError is not null)
-                library.ShouldReportError(new[] { expectedError });
+            if (expectedErrors.Any())
+                library.ShouldReportError(expectedErrors);
             else
                 library.ShouldSucceed();
 

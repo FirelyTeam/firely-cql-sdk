@@ -191,7 +191,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 parameter x default 'bla'
 
                 define {nameof(InvokeParameter)}: x(4)
-            ", expectedError: "x is not a function, so it cannot be invoked.");
+            ", "x is not a function, so it cannot be invoked.");
         }
 
         [TestMethod]
@@ -203,20 +203,20 @@ namespace Hl7.Cql.CqlToElm.Test
                 define pi: 3.14
 
                 define {nameof(InvokeExpression)}: pi()
-            ", expectedError: "pi is an expression, and should be invoked without the parenthesis.");
+            ", "pi is an expression, and should be invoked without the parenthesis.");
         }
 
-        //[TestMethod]
-        //public void InvokeNonLocalFunction()
-        //{
-        //    var library = MakeLibrary($@"
-        //       library BareMinimum version '0.0.1'
+        [TestMethod]
+        public void InvokeNonLocalFunction()
+        {
+            var library = MakeLibrary($@"
+               library BareMinimum version '0.0.1'
 
-        //       include Math
+               include Math
 
-        //       define {nameof(InvokeExpression)}: Math.Floor(4)
-        //    ", expectedError: "pi is an expression, and should be invoked without the parenthesis.");
-        //}
+               define {nameof(InvokeExpression)}: Math.Floor(4)
+            ", "Could not find library Math.", "Unable to resolve identifier Floor in library Math.");
+        }
 
         [TestMethod]
         public void InvokeProperty()
@@ -238,6 +238,7 @@ namespace Hl7.Cql.CqlToElm.Test
             getContactName.operand.Should().ContainSingle().Which
                 .Should().BeOfType<OperandDef>().Which
                 .resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("Patient.Contact"));
+            getContactName.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("HumanName"));
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Property>().Subject;

@@ -63,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR
 
                 context FHIRX.Patient
-            ", expectedError: "There is no model named 'FHIRX'.");
+            ", "There is no model named 'FHIRX'.");
         }
 
         [TestMethod]
@@ -75,7 +75,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR
 
                 context ObservationX
-            ", expectedError: "There is no type named 'ObservationX' in model library FHIR.");
+            ", "There is no type named 'ObservationX' in model library FHIR.");
         }
 
     }

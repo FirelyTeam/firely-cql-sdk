@@ -275,7 +275,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 include MyLibrary version '1.0.0' called Derp
-            ");
+            ", "Could not find library MyLibrary version 1.0.0.");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("MyLibrary", library.includes[0].path);
@@ -291,7 +291,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary version '1.0.0' called Derp
-            ");
+            ", "Could not find library Namespace.MyLibrary version 1.0.0.");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -307,7 +307,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary called Derp
-            ");
+            ", "Could not find library Namespace.MyLibrary.");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -324,7 +324,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary version '1.0.0'
-            ");
+            ", "Could not find library Namespace.MyLibrary version 1.0.0.");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -346,7 +346,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary
-            ");
+            ", "Could not find library Namespace.MyLibrary.");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -838,7 +838,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private parameter Name
-            ", expectedError: "Parameter must have either a type or a default value.");
+            ", "Parameter must have either a type or a default value.");
         }
         #endregion
     }

@@ -40,6 +40,8 @@ namespace Hl7.Cql.CqlToElm
 
             void add(IEnumerable<IDefinitionElement> symbols)
             {
+                if (symbols is null) return;
+
                 foreach (var symbol in symbols.Where(s => s.IsVisible(AccessModifier.Public)))
                 {
                     if (!result.TryAdd(symbol))
