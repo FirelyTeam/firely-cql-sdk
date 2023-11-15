@@ -2,7 +2,6 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
-using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -37,10 +36,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (string.IsNullOrWhiteSpace(systemUri))
                 return null;
 
-            if (ModelProvider.ModelFromUri(systemUri, systemVersion) is { } model)
-                return new UsingDefSymbol("System", systemVersion, model);
-            else
-                throw new InvalidOperationException($"Model {systemUri} version {systemVersion} is not available.");
+            var model = ModelProvider.GetModelFromUri(systemUri, systemVersion);
+            return new UsingDefSymbol("System", systemVersion, model);
         }
 
         // libraryDefinition? definition* statement* EOF;

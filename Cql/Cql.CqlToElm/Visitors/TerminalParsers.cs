@@ -161,6 +161,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 throw new InvalidOperationException($"Unexpected referentialIdentifier child.");
         }
 
+        // referentialIdentifier | typeNameIdentifier;
+        public static string Parse(this cqlParser.ReferentialOrTypeNameIdentifierContext context)
+        {
+            if (context.referentialIdentifier() is { } ri)
+                return ri.Parse()!;
+            else if (context.typeNameIdentifier() is { } tni)
+                return tni.GetText();
+            else
+                throw new InvalidOperationException($"Unexpected referentialIdentifier child.");
+        }
+
         //  : identifier | functionIdentifier;
         public static string Parse(this cqlParser.IdentifierOrFunctionIdentifierContext context)
         {

@@ -1,7 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -9,20 +8,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
     internal class TypeSpecifierVisitor : Visitor<TypeSpecifier>
     {
         public LibraryBuilder LibraryBuilder { get; }
-
-        private class UnqualifiedTypeNameSpecifier : TypeSpecifier
-        {
-            public UnqualifiedTypeNameSpecifier(string unqualifiedName)
-            {
-                UnqualifiedName = unqualifiedName;
-            }
-
-            public string UnqualifiedName { get; set; }
-
-            internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
-
-            internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => Enumerable.Empty<ParameterTypeSpecifier>();
-        }
 
         public TypeSpecifierVisitor(
             LibraryBuilder libraryBuilder,
@@ -78,36 +63,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return tuple;
         }
 
-
         //    : (qualifier '.')* referentialOrTypeNameIdentifier
         public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)
         {
+            // Could be FHIR.Patient.Contact, so the first part is the library name, and the last part(s) are the type name.
             var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
-            var libraryName = qualifiers.Any() ? string.Join(".", qualifiers) : null;
-            var unqualified = (UnqualifiedTypeNameSpecifier)Visit(context.referentialOrTypeNameIdentifier());
 
-            _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(libraryName, unqualified.UnqualifiedName, out var result, out var error);
+            var libraryName = qualifiers.FirstOrDefault();
+            var typeName = string.Join(".", qualifiers.Skip(1).Append(context.referentialOrTypeNameIdentifier().Parse()));
 
-            result ??= new NamedTypeSpecifier($"urn:cql-unknown-type:{libraryName}", unqualified.UnqualifiedName);
+            _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(libraryName, typeName, out var result, out var error);
 
-            if (error is not null) result!.AddError(error, ErrorType.semantic);
+            //TODO: Might need ErrorTypeSpecifier here
+            result ??= new NamedTypeSpecifier($"urn:cql-unknown-type:{libraryName}", typeName);
+
+            if (error is not null) result!.AddError(error);
             return result.WithLocator(context.Locator());
-        }
-
-        // : identifier | keywordIdentifier;
-        public override TypeSpecifier VisitReferentialIdentifier([NotNull] cqlParser.ReferentialIdentifierContext context)
-        {
-            string typeName = context.keywordIdentifier()?.GetText() ??
-                context.identifier().Parse()!;
-
-            return new UnqualifiedTypeNameSpecifier(typeName).WithLocator(context.Locator());
-        }
-
-        // typeNameIdentifier: 'Code' | 'Concept' | 'date'| 'time';
-        public override TypeSpecifier VisitTypeNameIdentifier([NotNull] cqlParser.TypeNameIdentifierContext context)
-        {
-            // These are reserved words that are also valid type names
-            return new UnqualifiedTypeNameSpecifier(context.GetText()).WithLocator(context.Locator());
         }
     }
 }

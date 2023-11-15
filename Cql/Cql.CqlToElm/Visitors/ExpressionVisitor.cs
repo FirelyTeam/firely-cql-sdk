@@ -71,13 +71,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     if (low is Quantity lowQuantity && high is Quantity highQuantity
                         && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
-                        interval.AddError($"Intervals of quantities must be of compatible units.", ErrorType.semantic);
+                        interval.AddError($"Intervals of quantities must be of compatible units.");
                 }
                 else
-                    interval.AddError($"Intervals can only be constructed for types with defined minimums and maximums. Type {pointType} is not allowed.", ErrorType.semantic);
+                    interval.AddError($"Intervals can only be constructed for types with defined minimums and maximums. Type {pointType} is not allowed.");
             }
             else
-                interval.AddError($"Interval types for low ({low.resultTypeName}) and high ({high.resultTypeName}) do not match.", ErrorType.semantic);
+                interval.AddError($"Interval types for low ({low.resultTypeName}) and high ({high.resultTypeName}) do not match.");
 
             return interval;
         }

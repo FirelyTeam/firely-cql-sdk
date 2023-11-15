@@ -67,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var call = SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
 
             if (!operand.resultTypeSpecifier.IsValidOrderedType())
-                call.AddError("Predecessor can only be applied to types that are ordered.", ErrorType.semantic);
+                call.AddError("Predecessor can only be applied to types that are ordered.");
 
             return call;
         }
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var call = SystemLibrary.Successor.Call(ModelProvider, context, operand);
 
             if (!operand.resultTypeSpecifier.IsValidOrderedType())
-                call.AddError("Successor can only be applied to types that are ordered.", ErrorType.semantic);
+                call.AddError("Successor can only be applied to types that are ordered.");
 
             return call;
         }
@@ -112,7 +112,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             };
 
             if (!typeSpecifier.IsValidOrderedType())
-                call.AddError($"Can only determine {extent} for types that are ordered.", ErrorType.semantic);
+                call.AddError($"Can only determine {extent} for types that are ordered.");
 
             return call;
         }

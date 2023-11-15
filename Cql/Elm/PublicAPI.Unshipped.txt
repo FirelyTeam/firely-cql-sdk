@@ -751,7 +751,7 @@ override Hl7.Cql.Elm.TupleTypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.TupleTypeSpecifier.ToString() -> string!
 override Hl7.Cql.Elm.TypeSpecifier.Equals(object? obj) -> bool
 override Hl7.Cql.Elm.TypeSpecifier.GetHashCode() -> int
-static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
+static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType = Hl7.Cql.Elm.ErrorType.semantic, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! node) -> Hl7.Cql.Elm.CqlToElmError![]!
 static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! include) -> string?
 static Hl7.Cql.Elm.ExtensionMethods.Signature(this Hl7.Cql.Elm.FunctionDef! def) -> string!

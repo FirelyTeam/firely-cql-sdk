@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return callResult switch
             {
                 { Error: null, Result: var e } => e.expr,
-                { Error: not null, Result: var e } => e.expr.AddError(callResult.Error, ErrorType.semantic),
+                { Error: not null, Result: var e } => e.expr.AddError(callResult.Error),
             };
         }
 
@@ -59,9 +59,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return bestCandidates switch
             {
                 [var one] when success => one.Result.expr,
-                [var one] when !success => one.Result.expr.AddError(one.Error!, ErrorType.semantic),
-                var many when success => many.First().Result.expr.AddError($"Ambiguous call between {listSignatures(many.Select(m => m.Result.def))}.", ErrorType.semantic),
-                var many when !success => many.First().Result.expr.AddError($"No matching overload found between {listSignatures(many.Select(m => m.Result.def))}.", ErrorType.semantic),
+                [var one] when !success => one.Result.expr.AddError(one.Error!),
+                var many when success => many.First().Result.expr.AddError($"Ambiguous call between {listSignatures(many.Select(m => m.Result.def))}."),
+                var many when !success => many.First().Result.expr.AddError($"No matching overload found between {listSignatures(many.Select(m => m.Result.def))}."),
                 _ => throw new InvalidOperationException("Should not be possible.")
             };
 
@@ -77,7 +77,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
             ifNode.condition = ifCastResult.Result;
             if (ifCastResult.Error is not null)
-                ifNode.AddError("The condition " + ifCastResult.Error, ErrorType.semantic);
+                ifNode.AddError("The condition " + ifCastResult.Error);
 
             TypeSpecifier expressionType;
 

@@ -94,14 +94,16 @@ Hl7.Cql.Model.TupleTypeSpecifier.TupleTypeSpecifier() -> void
 Hl7.Cql.Model.TupleTypeSpecifierElement
 Hl7.Cql.Model.TupleTypeSpecifierElement.TupleTypeSpecifierElement() -> void
 Hl7.Cql.Model.TypeInfo
-Hl7.Cql.Model.TypeInfo.GetNameFromTypeInfo() -> string?
 Hl7.Cql.Model.TypeInfo.TypeInfo() -> void
+Hl7.Cql.Model.TypeInfoHelpers
 Hl7.Cql.Model.TypeParameterInfo
 Hl7.Cql.Model.TypeParameterInfo.TypeParameterInfo() -> void
 Hl7.Cql.Model.TypeSpecifier
 Hl7.Cql.Model.TypeSpecifier.TypeSpecifier() -> void
 static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(string! url, string! typeName) -> System.Xml.XmlQualifiedName!
 static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(this Hl7.Cql.Model.ModelInfo! model, string! typeName) -> System.Xml.XmlQualifiedName!
+static Hl7.Cql.Model.TypeInfoHelpers.GetNameFromTypeInfo(this Hl7.Cql.Model.TypeInfo! typeInfo) -> string?
+static Hl7.Cql.Model.TypeInfoHelpers.TryGetElement(this Hl7.Cql.Model.ClassInfo! ci, string! elementName, out Hl7.Cql.Model.ClassInfoElement? element) -> bool
 ~Hl7.Cql.Model.BindingInfo.description.get -> string
 ~Hl7.Cql.Model.BindingInfo.description.set -> void
 ~Hl7.Cql.Model.BindingInfo.name.get -> string

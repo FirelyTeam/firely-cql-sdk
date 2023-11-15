@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
@@ -34,48 +35,51 @@ namespace Hl7.Cql.CqlToElm
         {
             foreach (var requiredModel in requiredModelInfo)
             {
-                if (ModelFromName(requiredModel.name, requiredModel.version) is null)
+                if (!TryGetModelFromName(requiredModel.name, out var _, requiredModel.version))
                     throw new ArgumentException($"Model {name} depends on model {requiredModel.name} which has not yet been added to the provider.");
             }
         }
 
-        public ModelInfo? ModelFromUri(string uri, string? version = null)
+        public bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out ModelInfo? model, string? version = null)
         {
             if (ModelsByUriAndVersion.TryGetValue(uri, out var modelsByVersion))
             {
                 if (!string.IsNullOrWhiteSpace(version))
                 {
-                    if (modelsByVersion!.TryGetValue(version, out var modelInfo))
-                        return modelInfo;
-                    else
-                        return null;
+                    return modelsByVersion!.TryGetValue(version, out model);
                 }
                 else if (modelsByVersion.Count == 1)
-                    return modelsByVersion.Values.Single();
+                {
+                    model = modelsByVersion.Values.Single();
+                    return true;
+                }
                 else
                     throw new ArgumentException($"More than one version of model {uri} is available.  In this case, {nameof(version)} must be specified.", nameof(version));
             }
-            return null;
+
+            model = null;
+            return false;
         }
 
-        public ModelInfo? ModelFromName(string name, string? version = null)
+        public bool TryGetModelFromName(string name, [NotNullWhen(true)] out ModelInfo? model, string? version = null)
         {
             var models = ModelsByUriAndVersion.Values.SelectMany(dict => dict.Values);
-            var eligibleModels = new LinkedList<ModelInfo>();
-            foreach (var model in models)
-                if (model.name == name)
-                    eligibleModels.AddLast(model);
+            var eligibleModels = models
+                .Where(m => m.name == name)
+                .Where(m => string.IsNullOrEmpty(version) || m.version == version).ToList();
+
             if (eligibleModels.Count > 1)
             {
                 if (string.IsNullOrWhiteSpace(version))
                     throw new ArgumentException($"More than one version of model with name {name} is available.  In this case, {nameof(version)} must be specified.", nameof(version));
                 else
-                {
-                    var withVersion = eligibleModels.SingleOrDefault(m => m.version == version);
-                    return withVersion;
-                }
+                    throw new ArgumentException($"More than one version of model with name {name} is available.", nameof(name));
             }
-            else return eligibleModels.First();
+            else
+            {
+                model = eligibleModels.SingleOrDefault();
+                return model is not null;
+            }
         }
     }
 }

@@ -11,15 +11,15 @@ using System.Linq;
 
 namespace Hl7.Cql.Model
 {
-    public partial class TypeInfo
+    public static class TypeInfoHelpers
     {
         /// <summary>
         /// Returns the unqualified name for this <see cref="TypeInfo"/>.
         /// </summary>
         /// <returns>The name for a <see cref="SimpleTypeInfo"/> or <see cref="ClassInfo"/> or null otherwise.</returns>
-        public string? GetNameFromTypeInfo()
+        public static string? GetNameFromTypeInfo(this TypeInfo typeInfo)
         {
-            var (ns, name) = this switch
+            var (ns, name) = typeInfo switch
             {
                 SimpleTypeInfo sti => (sti.@namespace, sti.name),
                 ClassInfo c => (c.@namespace, c.name),
@@ -34,5 +34,15 @@ namespace Hl7.Cql.Model
                 return name;
         }
 
+        /// <summary>
+        /// Returns the definition information for an element in a class.
+        /// </summary>
+        /// <returns>True if the member was found, false otherwise.</returns>
+        public static bool TryGetElement(this ClassInfo ci, string elementName, out ClassInfoElement? element)
+        {
+            element = ci.element.SingleOrDefault(ele => ele.name == elementName);
+
+            return element is not null;
+        }
     }
 }

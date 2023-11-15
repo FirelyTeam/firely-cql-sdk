@@ -85,7 +85,7 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static T AddError<T>(this T node,
             string errorMessage,
-            ErrorType errorType,
+            ErrorType errorType = ErrorType.semantic,
             ErrorSeverity severity = ErrorSeverity.error) where T : Element
         {
             var error = new CqlToElmError
@@ -102,6 +102,5 @@ namespace Hl7.Cql.Elm
 
             return node;
         }
-
     }
 }

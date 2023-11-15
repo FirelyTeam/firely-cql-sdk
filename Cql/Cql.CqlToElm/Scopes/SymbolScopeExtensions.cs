@@ -76,15 +76,15 @@ namespace Hl7.Cql.CqlToElm
         }
 
 
+        public static IdentifierRef MakeErrorReference(string? libraryName, string identifier, string error) =>
+             new IdentifierRef() { libraryName = libraryName, name = identifier }
+                .WithResultType(SystemTypes.AnyType)
+                .AddError(error);
+
         public static Expression Ref(this ISymbolScope symbolScope, string? libraryName, string identifier)
         {
-            IdentifierRef makeErrorReference(string error) =>
-                 new IdentifierRef() { libraryName = libraryName, name = identifier }
-                     .WithResultType(SystemTypes.AnyType)
-                     .AddError(error, ErrorType.semantic);
-
             var success = TryResolveIdentifier(symbolScope, libraryName, identifier, out var result, out var error);
-            return success ? result!.ToRef(libraryName) : makeErrorReference(error!);
+            return success ? result!.ToRef(libraryName) : MakeErrorReference(libraryName, identifier, error!);
         }
 
         /// <summary>

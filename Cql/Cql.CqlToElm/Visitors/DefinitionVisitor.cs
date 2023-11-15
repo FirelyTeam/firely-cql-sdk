@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 // and return that so we can act as if some library was found.
                 var emptyLibrary = new Library { identifier = new VersionedIdentifier { id = libraryName, version = version } };
                 var errorInclude = new IncludeDefSymbol(localIdentifier, new ReferencedLibrary(emptyLibrary));
-                errorInclude.AddError(error!, ErrorType.semantic);
+                errorInclude.AddError(error!);
                 return errorInclude.WithLocator(context.Locator());
             }
         }
@@ -69,17 +69,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var modelVersion = context.versionSpecifier()?.STRING().ParseString();
             var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? modelName;
 
-            var model = ModelProvider.ModelFromName(modelName, modelVersion);
+            var success = ModelProvider.TryGetModelFromName(modelName, out var model, modelVersion);
 
-            if (model is null)
+            if (success)
+                return new UsingDefSymbol(localIdentifier, modelVersion, model!).WithLocator(context.Locator());
+            else
             {
                 var emptyModel = new Model.ModelInfo() { name = modelName, version = modelVersion };
                 var error = $"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.";
-                var usingDef = new UsingDefSymbol(localIdentifier, modelVersion, emptyModel).AddError(error, ErrorType.semantic);
+                var usingDef = new UsingDefSymbol(localIdentifier, modelVersion, emptyModel).AddError(error);
                 return usingDef.WithLocator(context.Locator());
             }
-            else
-                return new UsingDefSymbol(localIdentifier, modelVersion, model).WithLocator(context.Locator());
         }
 
         //accessModifier? 'codesystem' identifier ':' codesystemId('version' versionSpecifier)?
@@ -164,7 +164,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (coercedDefault is null)
             {
-                paramDef.AddError("Parameter must have either a type or a default value.", ErrorType.semantic);
+                paramDef.AddError("Parameter must have either a type or a default value.");
                 paramDef.parameterTypeSpecifier = SystemTypes.AnyType;
             }
             else
@@ -184,7 +184,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (error is null)
                     return result;
                 else
-                    return defaultExpr.AddError($"Default value cannot be converted to parameter type {type}.", ErrorType.semantic);
+                    return defaultExpr.AddError($"Default value cannot be converted to parameter type {type}.");
             }
         }
 
@@ -241,7 +241,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     if (!expressionType.IsSubtypeOf(returnType, ModelProvider))
                         functionDef.AddError($"Function {functionDef.name} has declared return type {returnType} but " +
-                            $"the function body returns incompatible type {expressionType}.", ErrorType.semantic);
+                            $"the function body returns incompatible type {expressionType}.");
 
                     functionDef.resultTypeSpecifier = returnType;
                 }
@@ -254,7 +254,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 if (returnType is null)
                 {
-                    functionDef.AddError("External functions must specify a return type.", ErrorType.semantic);
+                    functionDef.AddError("External functions must specify a return type.");
                     functionDef.WithResultType(SystemTypes.AnyType);   //TODO: might want to introduce some kind of error type.
                 }
                 else
@@ -365,7 +365,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 _ = LibraryBuilder.SymbolTable.TryResolveNamedTypeSpecifier(modelIdentifier, identifier, out var namedType, out var error);
                 cd = cd.WithResultType(namedType);
-                if (error is not null) cd.AddError(error, ErrorType.semantic);
+                if (error is not null) cd.AddError(error);
             }
 
             return cd;
