@@ -191,7 +191,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 parameter x default 'bla'
 
                 define {nameof(InvokeParameter)}: x(4)
-            ", "x is not a function, so it cannot be invoked.");
+            ", "'x' is not a function, so it cannot be invoked.");
         }
 
         [TestMethod]
@@ -215,7 +215,39 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.Floor(4)
-            ", "Could not find library Math.", "Unable to resolve identifier Floor in library Math.");
+            ", "Could not find library 'Math'.", "Unable to resolve identifier 'Floor' in library 'Math'.");
+        }
+
+        [TestMethod]
+        public void InvokeNonexistentFluentFunction()
+        {
+            var library = MakeLibrary($@"
+             library BareMinimum version '0.0.1'
+
+             using FHIR
+             context Patient
+
+             define firstName: Patient.name.first()
+            ", "Unable to resolve identifier 'first'.");
+        }
+
+        [TestMethod]
+        public void InvokeFluentFunction()
+        {
+            var library = MakeLibrary($@"
+             library BareMinimum version '0.0.1'
+
+             define fluent function double(a Integer): a*2
+             define total: 4.double()
+            ");
+
+            var f = shouldDefineExpression(library, "total");
+            var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
+            fref.name.Should().Be("double");
+            fref.operand.Should().ContainSingle().Which.Should().BeLiteralInteger(4);
+
+            var result = Run<int>(library, "total");
+            result.Should().Be(8);
         }
 
         [TestMethod]

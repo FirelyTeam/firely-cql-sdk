@@ -77,7 +77,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     else
                     {
                         return prop
-                            .AddError($"Member {memberName} not found for type {nts}.")
+                            .AddError($"Member '{memberName}' not found for type {nts}.")
                             .WithResultType(SystemTypes.AnyType);
                     }
                 }
@@ -106,13 +106,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (LeftExpressionTerm is IncludeRef ir)
             {
                 var libraryName = ir.IncludeDef.localIdentifier;
-                return createFunctionInvocation(libraryName, functionName, paramList).WithLocator(context.Locator());
+                return createFunctionInvocation(libraryName, functionName, paramList, fluent: false).WithLocator(context.Locator());
             }
 
             // Left side is not a library name, so we must assume we are dealing with a fluent function invocation.
             else
             {
-                throw new NotImplementedException("Invoking fluent functions is not yet supported.");
+                // Add left side of expression as first parameter.
+                var allParameters = paramList.Prepend(LeftExpressionTerm).ToArray();
+                return createFunctionInvocation(null, functionName, allParameters, fluent: true).WithLocator(context.Locator());
             }
         }
 
@@ -129,25 +131,35 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var funcName = context.referentialIdentifier().Parse();
             var paramList = ParseParamList(context.paramList());
-            return createFunctionInvocation(null, funcName, paramList).WithLocator(context.Locator());
+            return createFunctionInvocation(null, funcName, paramList, fluent: false).WithLocator(context.Locator());
         }
 
-        private Expression createFunctionInvocation(string? libraryName, string funcName, Expression[] paramList)
+        private Expression createFunctionInvocation(string? libraryName, string funcName, Expression[] paramList, bool fluent)
         {
             _ = LibraryBuilder.CurrentScope.TryResolveIdentifier(libraryName, funcName, out var symbolDef, out var error);
 
-            var symbolRef = symbolDef?.ToRef(null) ?? new FunctionRef { name = funcName }
-                    .WithResultType(SystemTypes.AnyType)
-                    .AddError(error!);
-
-            // TODO: cast all arguments to the expected types
-
-            return symbolRef switch
+            return symbolDef switch
             {
-                FunctionRef funcRef => funcRef.With(f => f.operand = paramList),
-                ExpressionRef => symbolRef.AddError($"{funcName} is an expression, and should be invoked without the parenthesis."),
-                _ => symbolRef.AddError($"{funcName} is not a function, so it cannot be invoked.")
+                FunctionDef funcDef => initializeFunctionRef(funcDef, funcDef.ToRef(libraryName), paramList, fluent),
+                ExpressionDef => errorRef($"{funcName} is an expression, and should be invoked without the parenthesis."),
+                null => errorRef(error!),
+                _ => errorRef($"'{funcName}' is not a function, so it cannot be invoked.")
             };
+
+            FunctionRef errorRef(string error) => new FunctionRef { name = funcName, operand = paramList }
+                    .WithResultType(SystemTypes.AnyType)
+                    .AddError(error);
+        }
+
+        private Expression initializeFunctionRef(FunctionDef funcDef, FunctionRef funcRef, Expression[] paramList, bool fluent)
+        {
+            // TODO: cast all arguments to the expected types
+            funcRef.operand = paramList;
+
+            if (fluent && !funcDef.fluent)
+                funcRef.AddError($"Function '{funcDef.name}' is called fluently, but its definition is not marked as fluent.");
+
+            return funcRef;
         }
 
         // paramList : expression(',' expression)*

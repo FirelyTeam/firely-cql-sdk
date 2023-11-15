@@ -101,7 +101,7 @@ namespace Hl7.Cql.CqlToElm
             if (libraryName is null)
             {
                 if (!symbolScope.TryResolveSymbol(identifier, out result))
-                    error = $"Unable to resolve identifier {identifier}.";
+                    error = $"Unable to resolve identifier '{identifier}'.";
             }
             else
             {
@@ -112,13 +112,13 @@ namespace Hl7.Cql.CqlToElm
                         if (includeDef.Library.TryResolveSymbol(identifier, out var definition))
                             result = definition;
                         else
-                            error = $"Unable to resolve identifier {identifier} in library {libraryName}.";
+                            error = $"Unable to resolve identifier '{identifier}' in library '{libraryName}'.";
                     }
                     else
-                        error = $"{libraryName} is not a reference to an included library.";
+                        error = $"'{libraryName}' is not a reference to an included library.";
                 }
                 else
-                    error = $"Unable to resolve library {libraryName}.";
+                    error = $"Unable to resolve library '{libraryName}'.";
             }
 
             return error is null;

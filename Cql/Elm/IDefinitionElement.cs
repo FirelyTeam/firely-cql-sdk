@@ -119,7 +119,9 @@ namespace Hl7.Cql.Elm
 
         string IDefinitionElement.Name => name;
 
-        Expression IDefinitionElement.ToRef(string? libraryName) => new FunctionRef
+        Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
+
+        internal FunctionRef ToRef(string? libraryName) => new FunctionRef
         {
             libraryName = libraryName,
             name = name,
