@@ -2775,7 +2775,7 @@ namespace Hl7.Cql.Compiler
                 return before;
             else
             {
-                return new NullConditionalMemberExpression(before, member, ctx.RetrieveContextParameter);
+                return new NullConditionalMemberExpression(before, member);
             }
         }
 
