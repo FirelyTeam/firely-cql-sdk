@@ -392,13 +392,11 @@ namespace Hl7.Cql.Compiler
                                 else throw new InvalidOperationException($"Operand for function {def.name} is missing its {nameof(operand.operandTypeSpecifier)} property");
                             }
                             var defContextType = ContextTypeFor(def);
-                            if (defContextType != null)
+                            if (buildContext.RetrieveContextParameter != null)
                             {
-                                var defContextParameterName = $"retrieveContext";
-                                var defContextParameter = Expression.Parameter(defContextType, defContextParameterName);
                                 parameters = parameters
                                     .Concat(buildContext.Operands.Values)
-                                    .Concat(new[] { defContextParameter })
+                                    .Concat(new[] { buildContext.RetrieveContextParameter })
                                     .ToArray();
                             }
                             else
@@ -437,13 +435,11 @@ namespace Hl7.Cql.Compiler
                             if (def.name != def.context)
                             {
                                 var defContextType = ContextTypeFor(def);
-                                if (defContextType != null)
+                                if (buildContext.RetrieveContextParameter != null)
                                 {
-                                    var defContextParameterName = $"retrieveContext";
-                                    var defContextParameter = Expression.Parameter(defContextType, defContextParameterName);
-                                    functionParameterTypes = new[] { defContextType };
+                                    functionParameterTypes = new[] { buildContext.RetrieveContextParameter.Type };
                                     parameters = parameters
-                                        .Concat(new[] { defContextParameter })
+                                        .Concat(new[] { buildContext.RetrieveContextParameter })
                                         .ToArray();
                                 }
                             }
