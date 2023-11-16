@@ -435,7 +435,7 @@ namespace Hl7.Cql.CqlToElm.Test
             prop.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("HumanName").ToListType());
 
             var result = runWithData<List<M.HumanName>>(library, "getName");
-            result.Should().ContainSingle().Which.Should().BeEquivalentTo(new { Given = new[] { "John" }, Family = "Doe" });
+            result.Should().BeEquivalentTo(new[] { new { Given = new[] { "John", "Maria" }, Family = "Doe" } });
         }
 
         [TestMethod]
