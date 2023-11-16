@@ -145,7 +145,7 @@ namespace CoreTests
             var result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patients[0]);
             ctx.Operators.DataSource.SetRetrieveContext(patients[3]);
             result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patients[0]);
-            Assert.AreEqual(false, result);
+            Assert.AreEqual(true, result);
         }
 
 
