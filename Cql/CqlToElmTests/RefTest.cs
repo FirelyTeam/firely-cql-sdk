@@ -168,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
-                define private function double(a Integer): a*2
+                define private function double(a Decimal): a*2
 
                 define private {nameof(Function)}: double(4)
             ");
@@ -176,10 +176,10 @@ namespace Hl7.Cql.CqlToElm.Test
             var f = shouldDefineExpression(library, nameof(Function));
             var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
             fref.name.Should().Be("double");
-            fref.operand.Should().ContainSingle().Which.Should().BeLiteralInteger(4);
+            fref.operand.Should().ContainSingleOfType<ToDecimal>().operand.Should().BeLiteralInteger(4);
 
-            var result = Run<int>(library, nameof(Function));
-            result.Should().Be(8);
+            var result = Run<decimal>(library, nameof(Function));
+            result.Should().Be(8.0m);
         }
 
         [TestMethod]

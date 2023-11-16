@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
@@ -238,7 +239,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return symbolDef switch
             {
-                FunctionDef funcDef => initializeFunctionRef(funcDef, funcDef.ToRef(libraryName), paramList, fluent),
+                FunctionDef funcDef => initializeFunctionRef(funcDef, libraryName, paramList, fluent),
                 ExpressionDef => errorRef($"{funcName} is an expression, and should be invoked without the parenthesis."),
                 null => errorRef(error!),
                 _ => errorRef($"'{funcName}' is not a function, so it cannot be invoked.")
@@ -249,10 +250,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .AddError(error);
         }
 
-        private Expression initializeFunctionRef(FunctionDef funcDef, FunctionRef funcRef, Expression[] paramList, bool fluent)
+        private Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] paramList, bool fluent)
         {
-            // TODO: cast all arguments to the expected types
-            funcRef.operand = paramList;
+            var funcRef = funcDef.Call(ModelProvider, null, paramList);
+
+            if (funcRef is FunctionRef fr)
+                fr.libraryName = libraryName;
 
             if (fluent && !funcDef.fluent)
                 funcRef.AddError($"Function '{funcDef.name}' is called fluently, but its definition is not marked as fluent.");

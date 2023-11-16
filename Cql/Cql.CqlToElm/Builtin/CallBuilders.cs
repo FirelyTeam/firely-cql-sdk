@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that
         /// function with the given arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
-        public static Expression Call(this FunctionDef def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        public static Expression Call(this FunctionDef def, IModelProvider provider, ParserRuleContext? context, params Expression[] arguments)
         {
             var callResult = buildCall(def, provider, context, arguments);
 
@@ -31,10 +31,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
             };
         }
 
-        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this FunctionDef def, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
+        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this FunctionDef def, IModelProvider provider, ParserRuleContext? context, params Expression[] arguments)
         {
             var castResult = buildInvocation(def, arguments, provider);
-            return new((castResult.Result.WithLocator(context.Locator()), def), castResult.Cost, castResult.Error);
+            var elmNode = castResult.Result;
+            if (context is not null)
+                elmNode = elmNode.WithLocator(context.Locator());
+            return new((elmNode, def), castResult.Cost, castResult.Error);
         }
 
 
@@ -213,6 +216,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }
             else if (result is FunctionRef fr)
             {
+                fr.name = def.name;
                 fr.operand = arguments;
                 return fr;
             }
