@@ -183,6 +183,30 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void FunctionIncorrectNumParam()
+        {
+            var library = MakeLibrary($@"
+                library {nameof(RefTest)} version '1.0.0'
+
+                define private function double(a Decimal): a*2
+
+                define private {nameof(Function)}: double(4,5)
+            ", "double(Decimal) must be called with 1 arguments, not 2.");
+        }
+
+        [TestMethod]
+        public void FunctionIncorrectParam()
+        {
+            var library = MakeLibrary($@"
+                library {nameof(RefTest)} version '1.0.0'
+
+                define private function double(a Decimal): a*2
+
+                define private {nameof(Function)}: double('hi')
+            ", "Cannot resolve call to double(Decimal)*first*type String*cast to type Decimal.");
+        }
+
+        [TestMethod]
         public void InvokeParameter()
         {
             var library = MakeLibrary($@"

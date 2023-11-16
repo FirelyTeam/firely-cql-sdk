@@ -37,6 +37,15 @@ namespace Hl7.Cql.CqlToElm
 
         internal ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
         {
+            if (candidate.operand.Length != arguments.Length)
+            {
+                var resultExpression = candidate.CreateElmNode(arguments)
+                    .WithResultType(candidate.resultTypeSpecifier);
+
+                return new ResolveResult<Expression>(resultExpression, ERROR_COST,
+                    $"{candidate.Signature()} must be called with {candidate.operand.Length} arguments, not {arguments.Length}.");
+            }
+
             var operands = candidate.operand.Select(o => o.operandTypeSpecifier).ToArray();
             var positionResults = new List<ResolveResult<Expression>>();
             int? nextPosition = 0;
@@ -129,7 +138,7 @@ namespace Hl7.Cql.CqlToElm
             // to the assigned type for that generic type parameter.
             if (to is ParameterTypeSpecifier gtp)
             {
-                newAssignments = new() { { gtp, argumentType } };
+                newAssignments.Add(gtp, argumentType);
                 return new(argument, 0, null);
             }
 
@@ -137,13 +146,14 @@ namespace Hl7.Cql.CqlToElm
             // when Y is an unbound generic type or a direct (covariant) cast.
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
-                var prototypeInstance = new Literal { resultTypeSpecifier = fromList.elementType };
-                var elementCast = BuildImplicitCast(prototypeInstance, toList.elementType, out var nestedNewAssignments);
-
-                if (elementCast.Success && elementCast.Result == prototypeInstance)
+                if (toList.elementType is ParameterTypeSpecifier pts)
                 {
-                    newAssignments.AddRange(nestedNewAssignments);
-                    return new(argument, elementCast.Cost, null);
+                    newAssignments.Add(pts, fromList.elementType);
+                    return new(argument, 0, null);
+                }
+                else if (fromList.elementType.IsSubtypeOf(toList.elementType, Provider))
+                {
+                    return new(argument, 0, null);
                 }
             }
 
