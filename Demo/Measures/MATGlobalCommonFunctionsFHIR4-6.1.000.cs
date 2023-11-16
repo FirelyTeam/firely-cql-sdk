@@ -1339,6 +1339,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("BaseExtensions")]
+    [CqlTag("description", "Returns any base-FHIR extensions defined on the given element with the specified id.")]
+    [CqlTag("comment", "NOTE: Extensions are not the preferred approach, but are used as a way to access content that is defined by extensions but not yet surfaced in the CQL model info.")]
 	public IEnumerable<Extension> BaseExtensions(Element element, string id)
 	{
 		bool? a_(Extension E)
@@ -1359,6 +1361,8 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	}
 
     [CqlDeclaration("BaseExtension")]
+    [CqlTag("description", "Returns the single base-FHIR extension (if present) on the given element with the specified id.")]
+    [CqlTag("comment", "This function uses singleton from to ensure that a run-time exception is thrown if there is more than one extension on the given resource with the specified url.")]
 	public Extension BaseExtension(Element element, string id)
 	{
 		var a_ = this.BaseExtensions(element, id);

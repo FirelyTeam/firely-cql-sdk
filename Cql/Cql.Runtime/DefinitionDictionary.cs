@@ -9,6 +9,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Runtime
 {
@@ -484,21 +486,44 @@ namespace Hl7.Cql.Runtime
 
         internal class Tag
         {
+           
             public string Library { get; }
-
-            public Tag(string library, string definition, Type[] signature, string name, string value)
-            {
-                Library = library;
-                Definition = definition;
-                Value = value;
-                Name = name;
-                Signature = signature;
-            }
-
             public string Definition { get; }
             public Type[] Signature { get; }
             public string Value { get; }
             public string Name { get; }
+
+            /// <summary>
+            /// Constructor to create a tag.
+            /// </summary>
+            /// <param name="library">The library identifier in which <paramref name="definition"/> is defined.</param>
+            /// <param name="definition">The definition name whose tags to set.</param>
+            /// <param name="signature">The signature, or an empty array for non-function definitions.</param>
+            /// <param name="name">The name of the tag.</param>
+            /// <param name="value">The value of the tag.</param>
+            public Tag(string library, string definition, Type[] signature, string name, string value)
+            {
+                Library = library;
+                Definition = definition;
+                Signature = signature;
+                Name = name;
+                Value = CleanValue(value);
+            }
+
+            /// <summary>
+            /// Removes all whitespace from the value, except for a single space between 'words'.
+            /// All newlines, tabs, and other whitespace characters will be replaced by a single space.            
+            /// </summary>
+            /// <param name="value"></param>
+            /// <returns>The <paramref name="value"/> string with only single spaces</returns>
+            private static string CleanValue(string value)
+            {
+                value = value.Trim();
+                if (string.IsNullOrEmpty(value)) return value;
+                return Regex.Replace(value, @"\s+", " ");
+            }
+
+
         }
     }
 }
