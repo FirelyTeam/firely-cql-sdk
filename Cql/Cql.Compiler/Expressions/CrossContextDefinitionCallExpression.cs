@@ -84,7 +84,7 @@ namespace Hl7.Cql.Compiler
             var selectMethod = operatorsProperty.PropertyType.GetMethod(nameof(ICqlOperators.SelectOrNull))!;
             var genericSelect = selectMethod.MakeGenericMethod(RetrieveContextType, functionReturnType);
            
-            var lambdaParameter = Parameter(RetrieveContextType, "retrieveContext");
+            var lambdaParameter = Parameter(RetrieveContextType, "x");
 
             var dce = new DefinitionCallExpression(Definitions,
                 LibraryName,

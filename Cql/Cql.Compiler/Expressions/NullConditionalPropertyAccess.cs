@@ -38,7 +38,6 @@ namespace Hl7.Cql.Compiler
         public NullConditionalMemberExpression(Expression expression, MemberInfo member, ParameterExpression? retrieveContextParameter) :
             this(MakeMemberAccess(expression, member), retrieveContextParameter)
         {
-            // Nothing	
         }
 
         public override bool CanReduce => true;
@@ -47,6 +46,8 @@ namespace Hl7.Cql.Compiler
 
         public override Expression Reduce()
         {
+
+
             var objectVariable = Variable(MemberExpression.Expression!.Type);
             ParameterExpression[] blockVariables;
             if (RetrieveContextParameter != null)
@@ -58,10 +59,13 @@ namespace Hl7.Cql.Compiler
 
             Expression nullableMemberExpression = (MemberExpression.Type != resultType) ?
                     Convert(MemberExpression, resultType) : MemberExpression;
-            var block = Block(blockVariables,
-                Assign(objectVariable, MemberExpression.Expression!),
-                Condition(notNull(objectVariable), nullableMemberExpression, Default(resultType)));
-            return block;
+
+            return Condition(notNull(MemberExpression.Expression!), nullableMemberExpression, Default(resultType));
+
+            //var block = Block(blockVariables,
+            //    Assign(objectVariable, MemberExpression.Expression!),
+            //    Condition(notNull(objectVariable), nullableMemberExpression, Default(resultType)));
+            //return block;
         }
 
         protected override Expression VisitChildren(ExpressionVisitor visitor)

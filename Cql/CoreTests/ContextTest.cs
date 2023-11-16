@@ -191,8 +191,9 @@ namespace CoreTests
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
             var measure = new Context_AG_1_0_0(ctx);
             var count = measure.InitialPopulationCount();
-            var result = Definitions.Invoke<bool?>(ContextLibrary, "InitialPopulationCount", ctx);
-            Assert.IsInstanceOfType(result, typeof(int?));
+            Assert.AreEqual(3, count);
+            var result = Definitions.Invoke<int?>(ContextLibrary, "InitialPopulationCount", ctx);
+            Assert.AreEqual(3, result);
         }
 
 
