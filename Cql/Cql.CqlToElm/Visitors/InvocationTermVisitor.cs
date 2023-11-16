@@ -20,6 +20,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return result.WithLocator(context.Locator());
         }
 
+        public override Expression VisitTermExpression([NotNull] cqlParser.TermExpressionContext context)
+        {
+            var term = base.VisitTermExpression(context);
+
+            if (term is UsingRef ur)
+                return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
+                    "A reference to a model library is unexpected at this point.").WithLocator(context.Locator());
+            else if (term is IncludeRef ir)
+                return SymbolScopeExtensions.MakeErrorReference(null, ir.IncludeDef.localIdentifier,
+                    "A reference to a library is unexpected at this point.").WithLocator(context.Locator());
+            else
+                return term;
+        }
+
         // This expression is used when constructing paths from left to right when parsing an invocation term.
         // It is set to the result of parsing the path so far, and then used to construct the next step in the path.
         private Expression? LeftExpressionTerm;
@@ -30,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lexpr = Visit(context.expressionTerm());
             if (lexpr is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                    "A reference to a model library is unexpected at this point.").WithLocator(context.Locator());
+                    "A reference to a type is unexpected at this point.").WithLocator(context.Locator());
 
             LeftExpressionTerm = lexpr;
 
@@ -59,36 +73,120 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // also known as a Property
             else
             {
-                if (LeftExpressionTerm.resultTypeSpecifier is Elm.NamedTypeSpecifier nts)
-                {
-                    var (_, type) = ModelProvider.FindTypeInfoByNamedType(nts);
+                return navigateIntoType(LeftExpressionTerm, memberName).WithLocator(context.Locator());
+            }
+        }
 
-                    var prop = new Property
-                    {
-                        source = LeftExpressionTerm,
-                        path = memberName,
-                        scope = null  // Don't know what this is for
-                    }.WithLocator(context.Locator());
+        private Expression navigateIntoType(Expression source, string memberName)
+        {
+            return source.resultTypeSpecifier switch
+            {
+                Elm.NamedTypeSpecifier nts => navigateIntoNamedType(source, nts, memberName),
+                Elm.TupleTypeSpecifier tts => navigateIntoTuple(source, tts, memberName),
+                Elm.IntervalTypeSpecifier ivs => navigateIntoInterval(source, ivs, memberName),
+                Elm.ListTypeSpecifier lts => navigateIntoList(source, lts, memberName),
+                _ => makeProp(source, memberName).AddError($"Type {source.resultTypeSpecifier} has no members.")
+            };
+        }
 
-                    if (type is ClassInfo ci && ci.TryGetElement(memberName, out var elementInfo))
+        private Expression navigateIntoList(Expression source, Elm.ListTypeSpecifier lts, string memberName)
+        {
+            // If we navigate into a list, say, Patient.name.family, we actually need to generate a
+            // query. In this query, Patient.name is the source, and "family" is the property we need to
+            // navigate into:
+            //
+            //    from Patient.name $this
+            //    where $this.name is not null
+            //    select $this.name
+            //
+            var aliasRef = new AliasRef { name = "$this" }.WithResultType(lts.elementType);
+            var prop = navigateIntoType(aliasRef, memberName);
+
+            var q = new Query()
+            {
+                source = new[] { new AliasedQuerySource()
                     {
-                        return prop.WithResultType(elementInfo!.GetTypeSpecifierForElement(ModelProvider));
-                    }
-                    else
-                    {
-                        return prop
-                            .AddError($"Member '{memberName}' not found for type {nts}.")
-                            .WithResultType(SystemTypes.AnyType);
-                    }
-                }
-                else
+                        expression = source,
+                        alias = "$this"
+                    }.WithResultType(lts) },
+                where = new Not
                 {
-                    // TODO:
-                    // If the type is a list, Bryn's compiler introduces a Query with $this to project to a 
-                    // list of the property's type.
-                    // also, intervals are navigable, and maybe the others too.
-                    throw new NotImplementedException($"Navigating into expressions of type {LeftExpressionTerm.resultTypeSpecifier} is not yet implemented.");
+                    operand = new IsNull
+                    {
+                        operand = prop
+                    }.WithResultType(SystemTypes.BooleanType)
+                }.WithResultType(SystemTypes.BooleanType),
+                @return = new ReturnClause()
+                {
+                    expression = prop,
+                    distinct = false
                 }
+            }.WithResultType(prop.resultTypeSpecifier.ToListType());
+
+            // If the result itself is again a list (as in Patient.name.given), then the FhirPath
+            // logic requires us to flatten that list.
+            return prop.resultTypeSpecifier switch
+            {
+                Elm.ListTypeSpecifier qlts => new Flatten { operand = q }.WithResultType(qlts),
+                _ => q
+            };
+        }
+
+        // https://build.fhir.org/ig/HL7/cql/04-logicalspecification.html#property
+        // Property expressions can also be used to access the individual points and closed indicators
+        // for interval types using the property names low, high, lowClosed, and highClosed.
+        private Property navigateIntoInterval(Expression source, Elm.IntervalTypeSpecifier ivs, string memberName)
+        {
+            var prop = makeProp(source, memberName).WithResultType(ivs.pointType);
+
+            return memberName switch
+            {
+                "low" or "high" => prop.WithResultType(ivs.pointType),
+                "lowClosed" or "highClosed" => prop.WithResultType(SystemTypes.BooleanType),
+                _ => prop.AddError($"Invalid interval property name '{memberName}'.")
+            };
+        }
+
+        private Property makeProp(Expression source, string member) => new()
+        {
+            source = source,
+            path = member,
+            scope = null  // Don't know what this is for
+        };
+
+        private Property navigateIntoTuple(Expression source, Elm.TupleTypeSpecifier tts, string memberName)
+        {
+            var targetElement = tts.element.Where(e => e.name == memberName).SingleOrDefault();
+            var prop = makeProp(source, memberName);
+
+            if (targetElement is not null)
+            {
+                prop.WithResultType(targetElement.elementType);
+            }
+            else
+            {
+                prop.AddError($"Member '{memberName}' not found in tuple.");
+                prop.WithResultType(SystemTypes.AnyType);
+            }
+
+            return prop;
+        }
+
+        private Property navigateIntoNamedType(Expression source, Elm.NamedTypeSpecifier nts, string memberName)
+        {
+            var (_, type) = ModelProvider.FindTypeInfoByNamedType(nts);
+
+            var prop = makeProp(source, memberName);
+
+            if (type is ClassInfo ci && ci.TryGetElement(memberName, out var elementInfo))
+            {
+                return prop.WithResultType(elementInfo!.GetTypeSpecifierForElement(ModelProvider));
+            }
+            else
+            {
+                return prop
+                    .AddError($"Member '{memberName}' not found for type {nts}.")
+                    .WithResultType(SystemTypes.AnyType);
             }
         }
 

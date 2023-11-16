@@ -7,6 +7,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 namespace Hl7.Cql.Model
@@ -14,6 +16,11 @@ namespace Hl7.Cql.Model
 
     public static class QualifiedName
     {
+        /// <summary>
+        /// A regex for parsing a CQL qualified name in a <see cref="NamedTypeSpecifier"/>
+        /// </summary>
+        public static readonly Regex QualifiedNameRegEx = new("{(?'uri'.*)}(?'name'.*)", RegexOptions.Compiled);
+
         /// <summary>
         /// Qualifies <paramref name="typeName"/> with the namespace in <paramref name="model"/>.
         /// </summary>
@@ -27,6 +34,22 @@ namespace Hl7.Cql.Model
         /// Build an <see cref="XmlQualifiedName"/> based on a type's url and name.
         /// </summary>
         public static XmlQualifiedName MakeQualifiedTypeName(string url, string typeName) => new($"{{{url}}}{typeName}");
+
+        /// <summary>
+        /// Splits the qualified name into an url and a type.
+        /// </summary>
+        public static void Deconstruct(this XmlQualifiedName qname, out string uri, out string name)
+        {
+            var match = QualifiedNameRegEx.Match(qname.Name);
+            if (match.Success)
+            {
+                uri = match.Groups["uri"].Value;
+                name = match.Groups["name"].Value;
+            }
+            else
+                throw new ArgumentException("NamedTypeSpecifier name does not match the expected pattern '{uri}name'.", nameof(name));
+        }
+
 
     }
 }

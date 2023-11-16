@@ -11,7 +11,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Elm
 {
@@ -247,27 +246,25 @@ namespace Hl7.Cql.Elm
             this.name = QualifiedName.MakeQualifiedTypeName(uri, name);
         }
 
-        private static readonly Regex QualifiedNameExpression = new("{(?'uri'.*)}(?'name'.*)", RegexOptions.Compiled);
 
         /// <summary>
         /// Gets the model uri and name for this named type.
         /// </summary>
         /// <returns>The uri and the type parts of the name in the specifier.</returns>
         /// <exception cref="ArgumentException">If the name does not match the expected pattern.</exception>
-        public void Deconstruct(out string uri, out string name)
-        {
-            var match = QualifiedNameExpression.Match(this.name.Name);
-            if (match.Success)
-            {
-                uri = match.Groups["uri"].Value;
-                name = match.Groups["name"].Value;
-            }
-            else
-                throw new ArgumentException("NamedTypeSpecifier name does not match the expected pattern '{uri}name'.", nameof(name));
-        }
+        public void Deconstruct(out string uri, out string name) => (uri, name) = this.name;
 
         /// <inheritdoc/>
-        public override string ToString() => name?.ToString() ?? "null";
+        public override string ToString()
+        {
+            if (name is null) return "null";
+
+            var (u, n) = name;
+            if (u == SystemTypes.SystemModelUri)
+                return n;
+            else
+                return name.ToString();
+        }
 
         /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)

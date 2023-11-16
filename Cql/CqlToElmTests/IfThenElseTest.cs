@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void String_Integer_Integer()
         {
             var library = createLibraryForExpression("if 'hello' then 4 else 5",
-                "The condition is of type {urn:hl7-org:elm-types:r1}String, which cannot implicitly be cast to type {urn:hl7-org:elm-types:r1}Boolean");
+                "The condition is of type String, which cannot implicitly be cast to type Boolean");
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);

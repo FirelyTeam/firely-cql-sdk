@@ -100,10 +100,12 @@ Hl7.Cql.Model.TypeParameterInfo
 Hl7.Cql.Model.TypeParameterInfo.TypeParameterInfo() -> void
 Hl7.Cql.Model.TypeSpecifier
 Hl7.Cql.Model.TypeSpecifier.TypeSpecifier() -> void
+static Hl7.Cql.Model.QualifiedName.Deconstruct(this System.Xml.XmlQualifiedName! qname, out string! uri, out string! name) -> void
 static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(string! url, string! typeName) -> System.Xml.XmlQualifiedName!
 static Hl7.Cql.Model.QualifiedName.MakeQualifiedTypeName(this Hl7.Cql.Model.ModelInfo! model, string! typeName) -> System.Xml.XmlQualifiedName!
 static Hl7.Cql.Model.TypeInfoHelpers.GetNameFromTypeInfo(this Hl7.Cql.Model.TypeInfo! typeInfo) -> string?
 static Hl7.Cql.Model.TypeInfoHelpers.TryGetElement(this Hl7.Cql.Model.ClassInfo! ci, string! elementName, out Hl7.Cql.Model.ClassInfoElement? element) -> bool
+static readonly Hl7.Cql.Model.QualifiedName.QualifiedNameRegEx -> System.Text.RegularExpressions.Regex!
 ~Hl7.Cql.Model.BindingInfo.description.get -> string
 ~Hl7.Cql.Model.BindingInfo.description.set -> void
 ~Hl7.Cql.Model.BindingInfo.name.get -> string
