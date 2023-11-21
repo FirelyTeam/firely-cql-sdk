@@ -44,7 +44,7 @@ namespace Hl7.Cql.Runtime
                         {
                             foreach (var visitor in visitors)
                             {
-                                lambda = visitor.Visit(lambda) as LambdaExpression;
+                                lambda = (LambdaExpression)visitor.Visit(lambda);
                             }
                         }
                         var @delegate = debug is not null ? lambda.Compile(debug) : lambda.Compile();
