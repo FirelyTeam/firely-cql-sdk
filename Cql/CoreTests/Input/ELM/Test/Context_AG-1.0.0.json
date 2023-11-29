@@ -59,7 +59,7 @@
         {
           "type": "ContextDef",
 
-          "locator": "10:1-10:18",
+          "locator": "19:1-19:18",
 
           "name": "Unfiltered"
         }
@@ -179,7 +179,57 @@
 
           "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
 
-          "name": "InInitialPopulation",
+          "name": "In Initial Population",
+
+          "context": "Patient",
+
+          "accessLevel": "Public"
+        },
+
+        {
+          "type": "ExpressionDef",
+
+          "expression": {
+            "type": "List",
+
+            "element": [
+              {
+                "type": "ExpressionRef",
+
+                "locator": "11:5-11:27",
+
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
+
+                "name": "In Initial Population"
+              }
+            ],
+
+            "resultTypeSpecifier": {
+              "type": "ListTypeSpecifier",
+
+              "elementType": {
+                "type": "NamedTypeSpecifier",
+
+                "name": "{urn:hl7-org:elm-types:r1}Boolean"
+              }
+            },
+
+            "locator": "11:3-11:29"
+          },
+
+          "resultTypeSpecifier": {
+            "type": "ListTypeSpecifier",
+
+            "elementType": {
+              "type": "NamedTypeSpecifier",
+
+              "name": "{urn:hl7-org:elm-types:r1}Boolean"
+            }
+          },
+
+          "locator": "10:1-11:29",
+
+          "name": "In Initial Population List",
 
           "context": "Patient",
 
@@ -212,9 +262,9 @@
                       }
                     },
 
-                    "locator": "13:9-13:27",
+                    "locator": "22:9-22:31",
 
-                    "name": "InInitialPopulation"
+                    "name": "In Initial Population"
                   },
 
                   "resultTypeSpecifier": {
@@ -227,7 +277,7 @@
                     }
                   },
 
-                  "locator": "13:9-13:30",
+                  "locator": "22:9-22:34",
 
                   "alias": "IP"
                 }
@@ -241,14 +291,14 @@
                 "operand": {
                   "type": "AliasRef",
 
-                  "locator": "13:38-13:39",
+                  "locator": "22:42-22:43",
 
                   "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
 
                   "name": "IP"
                 },
 
-                "locator": "13:32-13:47",
+                "locator": "22:36-22:51",
 
                 "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
               },
@@ -263,21 +313,165 @@
                 }
               },
 
-              "locator": "13:9-13:47"
+              "locator": "22:9-22:51"
             },
 
-            "locator": "13:3-13:48",
+            "locator": "22:3-22:52",
 
             "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
           },
 
-          "locator": "12:1-13:48",
+          "locator": "21:1-22:52",
 
           "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
 
-          "name": "InitialPopulationCount",
+          "name": "Initial Population Count 1",
 
           "context": "Unfiltered",
+
+          "accessLevel": "Public"
+        },
+
+        {
+          "type": "ExpressionDef",
+
+          "expression": {
+            "type": "ExpressionRef",
+
+            "locator": "14:3-14:30",
+
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
+            "name": "Initial Population Count 1"
+          },
+
+          "locator": "13:1-14:30",
+
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
+          "name": "Count from Context 1",
+
+          "context": "Patient",
+
+          "accessLevel": "Public"
+        },
+
+        {
+          "type": "ExpressionDef",
+
+          "expression": {
+            "type": "Count",
+
+            "source": {
+              "type": "Query",
+
+              "source": [
+                {
+                  "type": "AliasedQuerySource",
+
+                  "expression": {
+                    "type": "ExpressionRef",
+
+                    "resultTypeSpecifier": {
+                      "type": "ListTypeSpecifier",
+
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+
+                        "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                      }
+                    },
+
+                    "locator": "25:9-25:36",
+
+                    "name": "In Initial Population List"
+                  },
+
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+
+                      "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                    }
+                  },
+
+                  "locator": "25:9-25:39",
+
+                  "alias": "IP"
+                }
+              ],
+
+              "relationship": [],
+
+              "where": {
+                "type": "IsTrue",
+
+                "operand": {
+                  "type": "AliasRef",
+
+                  "locator": "25:47-25:48",
+
+                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean",
+
+                  "name": "IP"
+                },
+
+                "locator": "25:41-25:56",
+
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+              },
+
+              "resultTypeSpecifier": {
+                "type": "ListTypeSpecifier",
+
+                "elementType": {
+                  "type": "NamedTypeSpecifier",
+
+                  "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                }
+              },
+
+              "locator": "25:9-25:56"
+            },
+
+            "locator": "25:3-25:57",
+
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+
+          "locator": "24:1-25:57",
+
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
+          "name": "Initial Population Count 2",
+
+          "context": "Unfiltered",
+
+          "accessLevel": "Public"
+        },
+
+        {
+          "type": "ExpressionDef",
+
+          "expression": {
+            "type": "ExpressionRef",
+
+            "locator": "17:3-17:30",
+
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
+            "name": "Initial Population Count 2"
+          },
+
+          "locator": "16:1-17:30",
+
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer",
+
+          "name": "Count from Context 2",
+
+          "context": "Patient",
 
           "accessLevel": "Public"
         }

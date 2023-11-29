@@ -97,7 +97,7 @@ namespace CoreTests
             Assert.AreSame(patient, patientContext);
             var encounterCountext = ctx.Operators.DataSource.GetRetrieveContext<Encounter>();
             Assert.IsNull(encounterCountext);
-            var result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patient);
+            var result = Definitions.Invoke<bool?>(ContextLibrary, "In Initial Population", ctx, patient);
             Assert.AreEqual(true, result);
         }
 
@@ -142,12 +142,11 @@ namespace CoreTests
 
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
             ctx.Operators.DataSource.SetRetrieveContext(patients[0]);
-            var result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patients[0]);
+            var result = Definitions.Invoke<bool?>(ContextLibrary, "In Initial Population", ctx, patients[0]);
             ctx.Operators.DataSource.SetRetrieveContext(patients[3]);
-            result = Definitions.Invoke<bool?>(ContextLibrary, "InInitialPopulation", ctx, patients[0]);
+            result = Definitions.Invoke<bool?>(ContextLibrary, "In Initial Population", ctx, patients[0]);
             Assert.AreEqual(true, result);
         }
-
 
         [TestMethod]
         public void Context_Unfiltered()
@@ -189,79 +188,52 @@ namespace CoreTests
             });
 
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
-            var measure = new Context_AG_1_0_0(ctx);
-            var count = measure.InitialPopulationCount();
-            Assert.AreEqual(3, count);
-            var result = Definitions.Invoke<int?>(ContextLibrary, "InitialPopulationCount", ctx);
+            var result = Definitions.Invoke<int?>(ContextLibrary, "Initial Population Count 1", ctx);
             Assert.AreEqual(3, result);
         }
 
-
-
-
-        [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "1.0.0.0")]
-        [CqlLibrary("Context_AG", "1.0.0")]
-        public class Context_AG_1_0_0
+        [TestMethod]
+        public void Context_Unfiltered_List()
         {
-
-
-            internal CqlContext context;
-
-            #region Cached values
-
-            internal Lazy<int?> __InitialPopulationCount;
-
-            #endregion
-            public Context_AG_1_0_0(CqlContext context)
-            {
-                this.context = context ?? throw new ArgumentNullException("context");
-
-
-                __InitialPopulationCount = new Lazy<int?>(() => InitialPopulationCount_Value());
-            }
-            #region Dependencies
-
-
-            #endregion
-
-            [CqlDeclaration("InInitialPopulation")]
-            public bool? InInitialPopulation(Patient retrieveContext)
-            {
-                Patient a_()
+            var bundle = new Bundle();
+            var patients = new[] {
+                new Patient
                 {
-                    if ((retrieveContext != null))
-                    {
-                        return retrieveContext;
-                    }
-                    else
-                    {
-                        CqlValueSet f_ = null;
-                        PropertyInfo g_ = null;
-                        var h_ = context.Operators.RetrieveByValueSet<Patient>(f_, g_);
-                        var i_ = context.Operators.SingleOrNull<Patient>(h_);
+                    BirthDate = "1995-01-01"
+                },
+                new Patient
+                {
+                    BirthDate = "1996-01-01"
+                },
+                new Patient
+                {
+                    BirthDate = "1997-01-01"
+                },
+                new Patient
+                {
+                    BirthDate = "2002-01-01"
+                }
+            };
+            bundle.Entry.Add(new Bundle.EntryComponent
+            {
+                Resource = patients[0],
+            });
+            bundle.Entry.Add(new Bundle.EntryComponent
+            {
+                Resource = patients[1],
+            });
+            bundle.Entry.Add(new Bundle.EntryComponent
+            {
+                Resource = patients[2],
+            });
+            bundle.Entry.Add(new Bundle.EntryComponent
+            {
+                Resource = patients[3],
+            });
 
-                        return i_;
-                    };
-                };
-                var b_ = context.Operators.Convert<CqlDate>(a_()?.BirthDateElement?.Value);
-                var c_ = context.Operators.Date((int?)2013, (int?)1, (int?)1);
-                var d_ = context.Operators.CalculateAgeAt(b_, c_, "year");
-                var e_ = context.Operators.GreaterOrEqual(d_, (int?)16);
-
-                return e_;
-            }
-
-            private int? InitialPopulationCount_Value() =>
-                context.Operators.CountOrNull<bool?>(context.Operators.WhereOrNull<bool?>(context.Operators.SelectOrNull<Patient, bool?>(context.Operators.RetrieveByValueSet<Patient>(null, null), (Patient retrieveContext) =>
-                                this.InInitialPopulation(retrieveContext)), (bool? IP) =>
-                            context.Operators.IsTrue(IP)));
-
-            [CqlDeclaration("InitialPopulationCount")]
-            public int? InitialPopulationCount() =>
-                __InitialPopulationCount.Value;
-
+            var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
+            var result = Definitions.Invoke<int?>(ContextLibrary, "Initial Population Count 2", ctx);
+            Assert.AreEqual(3, result);
         }
-
     }
-
 }

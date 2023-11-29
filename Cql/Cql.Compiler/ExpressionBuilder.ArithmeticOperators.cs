@@ -82,7 +82,7 @@ namespace Hl7.Cql.Compiler
                 {
                     return Expression.Constant(int.MinValue);
                 }
-                else if (literalType == typeof(long?) && literal.value == long.MinValue.ToString(CultureInfo.InvariantCulture))
+                else if (literalType == typeof(long?) && literal.value == "9223372036854775808")
                 {
                     return Expression.Constant(long.MinValue);
                 }

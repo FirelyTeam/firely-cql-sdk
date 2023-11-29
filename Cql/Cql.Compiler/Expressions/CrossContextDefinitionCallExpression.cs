@@ -12,6 +12,7 @@ using Hl7.Cql.Runtime;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -74,6 +75,11 @@ namespace Hl7.Cql.Compiler
 
         public override Expression Reduce()
         {
+            var bools = new[] { true };
+            Enumerable.Range(1, 10)
+                .Select(i => bools)
+                .SelectMany(x => x);
+
             var operators = Property(CqlContextParameter, operatorsProperty)!;
 
             var retrieveMethod = operatorsProperty.PropertyType.GetMethod(nameof(ICqlOperators.RetrieveByValueSet))!;
@@ -91,12 +97,28 @@ namespace Hl7.Cql.Compiler
                 DefinitionName,
                 CqlContextParameter,
                 FunctionType,
-                RetrieveContextType,
                 lambdaParameter);
 
             var lambda = Lambda(dce, lambdaParameter);
             var callSelect = Call(operators, genericSelect, source, lambda);
-            return callSelect;
+
+            // In cross-context references, when the define returns a scalar value T, the return type of the reference
+            // is promoted to the vector value IEnumerable<T>.  When the define returns a vector value IEnumerable<T>,
+            // the select call will return IEnumerable<IEnmerable<T>>.  This has to be flattened, because by spec,
+            // cross-context references to defines which already return vector values (IEnumerable<T>), the result
+            // should be remain IEnumerable<T>.
+            if (Flatten)
+            {
+                var flattenMethod = operatorsProperty.PropertyType.GetMethod(nameof(ICqlOperators.FlattenList))!;
+                var enumerableType = functionReturnType.GetGenericArguments()[0];
+                var genericFlatten = flattenMethod.MakeGenericMethod(enumerableType);
+                var callFlatten = Call(operators, genericFlatten, callSelect);
+                return callFlatten;
+            }
+            else
+            {
+                return callSelect;
+            }
 
         }
 

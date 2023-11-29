@@ -71,8 +71,6 @@ namespace Hl7.Cql.Compiler
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
                     var rightElementType = TypeResolver.GetListElementType(right.Type, true)!;
-                    if (rightElementType != leftElementType)
-                        throw new InvalidOperationException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
                     var call = OperatorBinding.Bind(CqlOperator.ListEqual, ctx.CqlContextParameter, left, right);
                     return call;
                 }
@@ -95,12 +93,6 @@ namespace Hl7.Cql.Compiler
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
                     var rightElementType = TypeResolver.GetListElementType(right.Type);
-                    if (leftElementType != rightElementType)
-                    {
-                        // This appears in the CQL tests:
-                        //  { 'a', 'b', 'c' } ~ { 1, 2, 3 } = false
-                        return Expression.Constant(false, typeof(bool?));
-                    }
                     var call = OperatorBinding.Bind(CqlOperator.ListEquivalent, ctx.CqlContextParameter, left, right);
                     return call;
                 }

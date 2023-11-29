@@ -1,19 +1,22 @@
-library CqlErrorsAndMessagingOperatorsTest version '1.0.0'
+library CqlErrorsAndMessagingOperatorsTest
 
-using FHIR version '4.0.1'
+context Unfiltered
 
-include FHIRHelpers version '4.0.1' called FHIRHelpers
 
-context Patient
+define "TestMessageInfo Input":
+	Message(1, true, '100', 'Message', 'Test Message')
+define "TestMessageInfo Output":
+	1
 
-define "TestMessageInfo":
-  Message(1, true, '100', 'Message', 'Test Message')= 1
+define "TestMessageWarn Input":
+	Message(2, true, '200', 'Warning', 'You have been warned!')
+define "TestMessageWarn Output":
+	2
 
-define "TestMessageWarn":
-  Message(2, true, '200', 'Warning', 'You have been warned!')= 2
-
-define "TestMessageTrace":
-  Message({ 3, 4, 5 }, true, '300', 'Trace', 'This is a trace')= { 3, 4, 5 }
+define "TestMessageTrace Input":
+	Message({3, 4, 5}, true, '300', 'Trace', 'This is a trace')
+define "TestMessageTrace Output":
+	{3, 4, 5}
 
 define "TestMessageError":
-  Message(3 + 1, true, '400', 'Error', 'This is an error!')
+	Message(3 + 1, true, '400', 'Error', 'This is an error!')

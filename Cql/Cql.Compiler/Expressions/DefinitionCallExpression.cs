@@ -32,7 +32,6 @@ namespace Hl7.Cql.Compiler
             string definitionName,
             Expression cqlContextParameter,
             Type definitionType,
-            Type? retrieveContextType,
             ParameterExpression? retrieveContext)
         {
             if (definitions.Type != typeof(DefinitionDictionary<Delegate>))
@@ -47,7 +46,6 @@ namespace Hl7.Cql.Compiler
             DefinitionName = definitionName;
             CqlContextParameter = cqlContextParameter;
             DefinitionType = definitionType;
-            RetrieveContextType = retrieveContextType;
             RetrieveContextParameter = retrieveContext;
         }
 
@@ -79,9 +77,9 @@ namespace Hl7.Cql.Compiler
 
             var index = MakeIndex(Definitions, itemProperty, indices);
             var asFunc = TypeAs(index, DefinitionType);
-            var invoke = RetrieveContextType == null
+            var invoke = RetrieveContextParameter == null
                         ? Invoke(asFunc, CqlContextParameter)
-                        : Invoke(asFunc, CqlContextParameter, RetrieveContextParameter as Expression ?? Default(RetrieveContextType));
+                        : Invoke(asFunc, CqlContextParameter, RetrieveContextParameter!);
             return invoke;
         }
 
@@ -95,10 +93,6 @@ namespace Hl7.Cql.Compiler
         public override Type Type => GetReturnTypeFromDelegateType(DefinitionType);
 
         public Expression Definitions { get; }
-        /// <summary>
-        /// The type of the retrieve context; will be <see langword="null"/> in Unfiltered contexts
-        /// </summary>
-        public Type? RetrieveContextType { get; }
         public ParameterExpression? RetrieveContextParameter { get; }
         public string LibraryName { get; }
         public string DefinitionName { get; }

@@ -349,7 +349,15 @@ namespace Hl7.Cql.Compiler
                 {
                     if (def.expression != null)
                     {
-                        var isContext = Library.contexts.Any(ctx => ctx.name == def.name);
+                        // The reference implementation of cql-to-elm creates define statements for contexts if they exist in the CQL.
+                        // e.g. if you have a library which uses `context Patient` anywhere, the ELM will insert a definition
+                        // into the statements list automatically, whose body (in CQL) would have been:
+                        // define Patient: singleton from [Patient]
+                        // Historically, we created this definition and referenced it normally via ExpressionRefs.
+                        // We no longer do this, because it interferes with cross-context queries, and instead
+                        // we created a unique LINQ expression type called RetrieveContextExpression.
+                        // This code skips the creation of these automatic context definitions.
+                        var isContext = Library.contexts?.Any(ctx => ctx.name == def.name) ?? false;
                         if (isContext)
                             continue;
 
@@ -1194,7 +1202,7 @@ namespace Hl7.Cql.Compiler
                 var rce = new RetrieveContextExpression(type, ctx.CqlContextParameter, ctx.RetrieveContextParameter!);
                 return rce;
             }
-            var def = ResolveExpression(@ref.libraryName, @ref.name);
+            var def = ResolveExpression(@ref.libraryName, @ref.name, Array.Empty<Type>());
             if (def != null)
             {
 
@@ -1206,14 +1214,17 @@ namespace Hl7.Cql.Compiler
 
         protected Expression FunctionRef(FunctionRef @ref, ExpressionBuilderContext ctx)
         {
-            var def = ResolveExpression(@ref.libraryName, @ref.name);
+
+            var operands = @ref.operand
+                .Select(operand => TranslateExpression(operand, ctx))
+                .ToArray();
+            var operandTypes = operands
+                .Select(op => op.Type)
+                .ToArray();
+
+            var def = ResolveExpression(@ref.libraryName, @ref.name, operandTypes);
             if (def is FunctionDef function)
             {
-                var operands = @ref.operand
-                    .Select(operand => TranslateExpression(operand, ctx))
-                    .ToArray();
-                var operandTypes = operands
-                    .Select(op => op.Type);
 
                 var functionType = getFunctionRefReturnType(@ref, operandTypes, ctx);
 
@@ -1228,7 +1239,7 @@ namespace Hl7.Cql.Compiler
                 // FHIRHelpers has special handling in CQL-to-ELM and does not translate correctly - specifically,
                 // it interprets ToString(value string) oddly.  Normally when string is used in CQL it is resolved to the elm type.
                 // In FHIRHelpers, this string gets treated as a FHIR string, which is normally mapped to a StringElement abstraction.
-                if (@ref.libraryName != null && @ref.libraryName.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase))
+                if (@ref.libraryName != null && @ref.name.StartsWith("fhirhelpers", StringComparison.OrdinalIgnoreCase))
                 {
                     if (@ref.name!.Equals("tostring", StringComparison.OrdinalIgnoreCase))
                     {
@@ -1247,11 +1258,24 @@ namespace Hl7.Cql.Compiler
                 }
                 // all functions still take the bundle and context parameters, plus whatver the operands
                 // to the actual function are.
-                operands = operands.Prepend(ctx.CqlContextParameter).ToArray();
+                // for `context Patient` functions, they'll also take their retrieve context parameter.
+                if (ctx.RetrieveContextParameter != null)
+                {
+                    operands = operands
+                        .Prepend(ctx.CqlContextParameter)
+                        .Append(ctx.RetrieveContextParameter)
+                        .ToArray();
+                }
+                else
+                {
+                    operands = operands
+                        .Prepend(ctx.CqlContextParameter)
+                        .ToArray();
+                }
                 var invoke = InvokeFunction(@ref, function, operands, ctx);
                 return invoke;
             }
-            else throw new InvalidOperationException($"Could not resolve function {@ref.libraryName ?? ThisLibraryKey}.{@ref.name}");
+            else throw new InvalidOperationException($"Could not resolve function {@ref.libraryName}.{@ref.name}");
 
             Type getFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes, ExpressionBuilderContext ctx)
             {
@@ -1261,7 +1285,7 @@ namespace Hl7.Cql.Compiler
                     .ToArray();
 
                 // TODO: use the FHIR ModelInfo to figure this out
-                if (op.libraryName?.StartsWith("FHIRHelpers") ?? false)
+                if (op.libraryName?.StartsWith("FHIRHelpers", false, CultureInfo.InvariantCulture) ?? false)
                 {
                     // cql-to-elm does not handle FHIRHelpers conversion function refs appropriately; they are missing resultTypeSpecifiers
                     switch (op.name)
@@ -1332,7 +1356,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? IdentifierRef(IdentifierRef ire, ExpressionBuilderContext ctx)
         {
-            if (string.Equals("$this", ire.name) && ctx.ImpliedAlias != null)
+            if (string.Equals("$this", ire.name, StringComparison.OrdinalIgnoreCase) && ctx.ImpliedAlias != null)
             {
                 var scopeExpression = ctx.GetScopeExpression(ctx.ImpliedAlias);
                 return scopeExpression;
@@ -1359,7 +1383,8 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ParameterRef(ParameterRef @ref, ExpressionBuilderContext ctx)
         {
-            var libraryName = ResolveLibraryAlias(@ref.libraryName, ctx);
+            var libName = @ref.libraryName ?? ThisLibraryKey;
+            var libraryName = ResolveLibraryAlias(libName, ctx);
             var definitionsProperty = Expression.Property(ctx.CqlContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
             var resultType = TypeManager.TypeFor(@ref, ctx, true)!;
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), resultType);
@@ -1368,7 +1393,6 @@ namespace Hl7.Cql.Compiler
                 @ref.name,
                 ctx.CqlContextParameter,
                 funcType,
-                null,
                 null);
             return callExpression;
         }
@@ -2418,8 +2442,11 @@ namespace Hl7.Cql.Compiler
         {
             var type = TypeResolver.ResolveType(lit.valueType.Name!)
                 ?? throw new InvalidOperationException($"Cannot resolve type for {lit.valueType}");
-            var (value, convertedType) = ConvertLiteral(lit, type);
 
+            if (lit.value == "-9223372036854775808L")
+            {
+            }
+            var (value, convertedType) = ConvertLiteral(lit, type);
             if (IsNullable(type))
             {
                 var changed = Expression.Constant(value, convertedType);
@@ -2678,7 +2705,6 @@ namespace Hl7.Cql.Compiler
                 name,
                 ctx.CqlContextParameter,
                 funcType,
-                null,
                 null);
             return callExpression;
         }
@@ -2720,8 +2746,7 @@ namespace Hl7.Cql.Compiler
                     @ref.name,
                     ctx.CqlContextParameter,
                     funcType,
-                    contextType,
-                    null);
+                    ctx.RetrieveContextParameter);
                 return callExpression;
             }
         }
@@ -2734,11 +2759,18 @@ namespace Hl7.Cql.Compiler
             var libraryName = ResolveLibraryAlias(@ref.libraryName, ctx);
             var definitionsProperty = Expression.Property(ctx.CqlContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
             var resultType = TypeManager.TypeFor(@ref, ctx, true)!;
+
+            var funcGenericArgs = arguments
+                    .Select(exp => exp.Type)
+                    .Concat(new[] { resultType })
+                    .ToArray();
+            var funcType = FuncTypeFor(funcGenericArgs);
+
             var callExpression = new FunctionCallExpression(definitionsProperty,
                 libraryName,
                 @ref.name,
                 arguments,
-                resultType);
+                funcType);
             return callExpression;
         }
 
@@ -2858,82 +2890,8 @@ namespace Hl7.Cql.Compiler
             }
             return funcType;
         }
-
-        protected Type GetFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes, ExpressionBuilderContext ctx)
-        {
-            var operands = op.operand
-                .Select(operand => TranslateExpression(operand, ctx))
-                .Select(op => op.Type)
-                .ToArray();
-            if (op.libraryName?.StartsWith("FHIRHelpers") ?? false)
-            {
-                // cql-to-elm does not handle FHIRHelpers conversion function refs appropriately; they are missing resultTypeSpecifiers
-                switch (op.name)
-                {
-                    case "ToDate":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!;
-                    case "ToDateTime":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!;
-                    case "ToQuantity":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!;
-                    case "ToInteger":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!;
-                    case "ToInterval":
-                        if (op.operand?.Length == 1)
-                        {
-                            var operand = op.operand![0];
-                            var typeName = operand.resultTypeName?.Name;
-                            if (operand is As @as)
-                            {
-                                typeName = @as.asType?.Name;
-                                if (typeName == null && @as.asTypeSpecifier != null)
-                                    typeName = @as.asTypeSpecifier.resultTypeName.Name;
-                                if (typeName == null)
-                                    typeName = @as.resultTypeName.Name;
-                            }
-                            if (typeName == "{http://hl7.org/fhir}Period")
-                            {
-                                var pointType = TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
-                                var intervalType = TypeResolver.IntervalType(pointType!);
-                                return intervalType;
-                            }
-                            else if (typeName == "{http://hl7.org/fhir}Range")
-                            {
-                                var pointType = TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
-                                var intervalType = TypeResolver.IntervalType(pointType!);
-                                return intervalType;
-                            }
-                        }
-                        throw new NotImplementedException();
-                    case "ToBoolean":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!;
-                    case "ToString":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!;
-                    case "ToDecimal":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!;
-                    case "ToRatio":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!;
-                    case "ToCode":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!;
-                    case "ToConcept":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!;
-                    default: break;
-                }
-            }
-            if (op.resultTypeSpecifier != null)
-            {
-                return TypeManager.TypeFor(op.resultTypeSpecifier, ctx) ?? throw new InvalidOperationException($"Cannot resolve result type {op.resultTypeSpecifier}.");
-            }
-            else if (!string.IsNullOrWhiteSpace(op.resultTypeName.Name))
-            {
-                return TypeResolver.ResolveType(op.resultTypeName.Name!)
-                    ?? TypeResolver.ResolveType(op.resultTypeName.Name)
-                    ?? throw new ArgumentException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
-            }
-            throw new ArgumentException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
-        }
-
-        protected internal MemberInfo GetProperty(Type type, string name)
+        
+        protected MemberInfo GetProperty(Type type, string name)
         {
             if (type.IsGenericType)
             {
@@ -3069,9 +3027,14 @@ namespace Hl7.Cql.Compiler
                     if (statement is FunctionDef function)
                     {
                         var operands = function.operand
-                            .Select(od => TypeManager.TypeFor(od.resultTypeSpecifier, builderContext))
+                            .Select(od => TypeManager.TypeFor(od.operandTypeSpecifier, builderContext))
                             .ToArray();
-                        Expressions.Add(nav, statement.name, operands, function);
+                        // it is possible, particularly in FHIRHelpers, for two CQL functions to have the same signature
+                        // because their operands resolve to the same types, e.g. ToString
+                        if (!Expressions.ContainsKey(nav, statement.name, operands))
+                        {
+                            Expressions.Add(nav, statement.name, operands, function);
+                        }
                     }
                     else
                     {
@@ -3081,12 +3044,12 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected ExpressionDef? ResolveExpression(string? libraryAlias, string definition)
+        protected ExpressionDef? ResolveExpression(string? libraryAlias, string definition, Type[] signature)
         {
             string? nav = null;
             if (libraryAlias != null && !LibraryAliases.TryGetValue(libraryAlias, out nav))
                 throw new ArgumentException($"Library with alias {libraryAlias!} couldn't be resolved.", nameof(libraryAlias));
-            if (Expressions.TryGetValue(nav ?? ThisLibraryKey, definition, out var def))
+            if (Expressions.TryGetValue(nav ?? ThisLibraryKey, definition, signature, out var def))
                 return def;
             return null;
         }

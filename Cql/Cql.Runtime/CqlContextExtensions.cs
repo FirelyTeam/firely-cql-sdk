@@ -1,21 +1,22 @@
 ﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Operators;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Hl7.Cql.Operators
+namespace Hl7.Cql.Runtime
 {
     /// <summary>
-    /// Defines extension methods on <see cref="IDataSource"/>.
+    /// Defines extensions for the <see cref="CqlContext"/> class.
     /// </summary>
-    public static class IDataSourceExtensions
+    public static class CqlContextExtensions
     {
         /// <summary>
         /// <para>
         /// Sets the <see href="https://cql.hl7.org/02-authorsguide.html#retrieve-context">retrieve context</see> for the given type
-        /// for this data source.
+        /// for this runtime context.
         /// </para>
         /// <para>
         /// Specifically, when set for <typeparamref name="T"/>, the <see cref="IDataSource.RetrieveByCodes{T}(IEnumerable{Primitives.CqlCode?}?, System.Reflection.PropertyInfo?)"/> and <see cref="IDataSource.RetrieveByValueSet{T}(Primitives.CqlValueSet?, System.Reflection.PropertyInfo?)"/>
@@ -38,19 +39,11 @@ namespace Hl7.Cql.Operators
         /// </para>
         /// </summary>
         /// <typeparam name="T">The resolved type of the context whose value you are setting.</typeparam>
-        /// <param name="source">This data source.</param>
+        /// <param name="source">This runtime context.</param>
         /// <param name="contextValue">The value to set.</param>
-        /// <returns>This <see cref="IDataSource"/></returns>
-        public static IDataSource SetRetrieveContext<T>(this IDataSource source, T contextValue) where T: class =>
-            source.SetRetrieveContext(typeof(T), contextValue);
-
-        /// <summary>
-        /// Gets the context value set by <see cref="SetRetrieveContext{T}(IDataSource, T)"/>.
-        /// </summary>
-        /// <typeparam name="T">The resolved type of the context whose value you are getting.</typeparam>
-        /// <returns>The context value, or <see langword="default"/> if unspecified.</returns>
-        public static T? GetRetrieveContext<T>(this IDataSource source) where T : class =>
-            (T?)source.GetRetrieveContext(typeof(T));
-
+        public static void SetRetrieveContext<T>(this CqlContext source, T contextValue) where T : class
+        {
+            source.Operators.DataSource.SetRetrieveContext(typeof(T), contextValue);
+        }
     }
 }

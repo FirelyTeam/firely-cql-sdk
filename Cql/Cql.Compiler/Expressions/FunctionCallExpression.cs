@@ -31,7 +31,10 @@ namespace Hl7.Cql.Compiler
             .GetProperty("Item", new[] { typeof(string), typeof(string), typeof(Type[]) })!;
 
         public FunctionCallExpression(Expression definitions,
-            string libraryName, string functionName, IReadOnlyCollection<Expression> arguments, Type functionType)
+            string libraryName, 
+            string functionName, 
+            IReadOnlyCollection<Expression> arguments, 
+            Type functionType)
         {
             if (definitions.Type != typeof(DefinitionDictionary<Delegate>))
                 throw new ArgumentException($"Argument should be of type {nameof(DefinitionDictionary<Delegate>)}",
