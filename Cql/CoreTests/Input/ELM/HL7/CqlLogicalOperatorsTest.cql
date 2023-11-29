@@ -1,151 +1,199 @@
-library CqlLogicalOperatorsTest version '1.0.0'
+library CqlLogicalOperatorsTest
 
-using FHIR version '4.0.1'
+context Unfiltered
 
-include FHIRHelpers version '4.0.1' called FHIRHelpers
 
-context Patient
+define "TrueAndTrue Input":
+	true and true
+define "TrueAndTrue Output":
+	true
 
-define "TrueAndTrue":
-  ( true
-      and true
-  ) = true
+define "TrueAndFalse Input":
+	true and false
+define "TrueAndFalse Output":
+	false
 
-define "TrueAndFalse":
-  ( true
-      and false
-  ) = false
+define "TrueAndNull Input":
+	true and null
+define "TrueAndNull Output":
+	null
 
-define "TrueAndNull":
-  ( true
-      and null
-  ) = null
+define "FalseAndTrue Input":
+	false and true
+define "FalseAndTrue Output":
+	false
 
-define "FalseAndTrue":
-  ( false
-      and true
-  ) = false
+define "FalseAndFalse Input":
+	false and false
+define "FalseAndFalse Output":
+	false
 
-define "FalseAndFalse":
-  ( false
-      and false
-  ) = false
+define "FalseAndNull Input":
+	false and null
+define "FalseAndNull Output":
+	false
 
-define "FalseAndNull":
-  ( false
-      and null
-  ) = false
+define "NullAndTrue Input":
+	null and true
+define "NullAndTrue Output":
+	null
 
-define "NullAndTrue":
-  ( null
-      and true
-  ) = null
+define "NullAndFalse Input":
+	null and false
+define "NullAndFalse Output":
+	false
 
-define "NullAndFalse":
-  ( null
-      and false
-  ) = false
+define "NullAndNull Input":
+	null and null
+define "NullAndNull Output":
+	null
 
-define "NullAndNull":
-  ( null
-      and null
-  ) = null
+define "TrueImpliesTrue Input":
+	true implies true
+define "TrueImpliesTrue Output":
+	true
 
-define "NotTrue":
-  ( not true ) = false
+define "TrueImpliesFalse Input":
+	true implies false
+define "TrueImpliesFalse Output":
+	false
 
-define "NotFalse":
-  ( not false ) = true
+define "TrueImpliesNull Input":
+	true implies null
+define "TrueImpliesNull Output":
+	null
 
-define "NotNull":
-  ( not null ) = null
+define "FalseImpliesTrue Input":
+	false implies true
+define "FalseImpliesTrue Output":
+	true
 
-define "TrueOrTrue":
-  ( true
-      or true
-  ) = true
+define "FalseImpliesFalse Input":
+	false implies false
+define "FalseImpliesFalse Output":
+	true
 
-define "TrueOrFalse":
-  ( true
-      or false
-  ) = true
+define "FalseImpliesNull Input":
+	false implies null
+define "FalseImpliesNull Output":
+	true
 
-define "TrueOrNull":
-  ( true
-      or null
-  ) = true
+define "NullImpliesTrue Input":
+	null implies true
+define "NullImpliesTrue Output":
+	true
 
-define "FalseOrTrue":
-  ( false
-      or true
-  ) = true
+define "NullImpliesFalse Input":
+	null implies false
+define "NullImpliesFalse Output":
+	null
 
-define "FalseOrFalse":
-  ( false
-      or false
-  ) = false
+define "NullImpliesNull Input":
+	null implies null
+define "NullImpliesNull Output":
+	null
 
-define "FalseOrNull":
-  ( false
-      or null
-  ) = null
+define "NotTrue Input":
+	not true
+define "NotTrue Output":
+	false
 
-define "NullOrTrue":
-  ( null
-      or true
-  ) = true
+define "NotFalse Input":
+	not false
+define "NotFalse Output":
+	true
 
-define "NullOrFalse":
-  ( null
-      or false
-  ) = null
+define "NotNull Input":
+	not null
+define "NotNull Output":
+	null
 
-define "NullOrNull":
-  ( null
-      or null
-  ) = null
+define "TrueOrTrue Input":
+	true or true
+define "TrueOrTrue Output":
+	true
 
-define "TrueXorTrue":
-  ( true
-      xor true
-  ) = false
+define "TrueOrFalse Input":
+	true or false
+define "TrueOrFalse Output":
+	true
 
-define "TrueXorFalse":
-  ( true
-      xor false
-  ) = true
+define "TrueOrNull Input":
+	true or null
+define "TrueOrNull Output":
+	true
 
-define "TrueXorNull":
-  ( true
-      xor null
-  ) = null
+define "FalseOrTrue Input":
+	false or true
+define "FalseOrTrue Output":
+	true
 
-define "FalseXorTrue":
-  ( false
-      xor true
-  ) = true
+define "FalseOrFalse Input":
+	false or false
+define "FalseOrFalse Output":
+	false
 
-define "FalseXorFalse":
-  ( false
-      xor false
-  ) = false
+define "FalseOrNull Input":
+	false or null
+define "FalseOrNull Output":
+	null
 
-define "FalseXorNull":
-  ( false
-      xor null
-  ) = null
+define "NullOrTrue Input":
+	null or true
+define "NullOrTrue Output":
+	true
 
-define "NullXorTrue":
-  ( null
-      xor true
-  ) = null
+define "NullOrFalse Input":
+	null or false
+define "NullOrFalse Output":
+	null
 
-define "NullXorFalse":
-  ( null
-      xor false
-  ) = null
+define "NullOrNull Input":
+	null or null
+define "NullOrNull Output":
+	null
 
-define "NullXorNull":
-  ( null
-      xor null
-  ) = null
+define "TrueXorTrue Input":
+	true xor true
+define "TrueXorTrue Output":
+	false
+
+define "TrueXorFalse Input":
+	true xor false
+define "TrueXorFalse Output":
+	true
+
+define "TrueXorNull Input":
+	true xor null
+define "TrueXorNull Output":
+	null
+
+define "FalseXorTrue Input":
+	false xor true
+define "FalseXorTrue Output":
+	true
+
+define "FalseXorFalse Input":
+	false xor false
+define "FalseXorFalse Output":
+	false
+
+define "FalseXorNull Input":
+	false xor null
+define "FalseXorNull Output":
+	null
+
+define "NullXorTrue Input":
+	null xor true
+define "NullXorTrue Output":
+	null
+
+define "NullXorFalse Input":
+	null xor false
+define "NullXorFalse Output":
+	null
+
+define "NullXorNull Input":
+	null xor null
+define "NullXorNull Output":
+	null

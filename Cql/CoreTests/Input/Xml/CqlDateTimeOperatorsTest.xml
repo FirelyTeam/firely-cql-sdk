@@ -670,7 +670,7 @@
 			<output>2</output>
 		</test>
 		<test name="TimeDurationBetweenHourDiffPrecision">
-			<expression>hours between @T06Z and @T07:00:00Z</expression>
+			<expression>hours between @T06 and @T07:00:00</expression>
 			<output>1</output>
 			<!-- Translation Error: Syntax error at Z -->
 		</test>

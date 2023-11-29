@@ -1,73 +1,114 @@
-library CqlNullologicalOperatorsTest version '1.0.0'
+library CqlNullologicalOperatorsTest
 
-using FHIR version '4.0.1'
+context Unfiltered
 
-include FHIRHelpers version '4.0.1' called FHIRHelpers
 
-context Patient
+define "CoalesceANull Input":
+	Coalesce('a', null)
+define "CoalesceANull Output":
+	'a'
 
-define "CoalesceANull":
-  Coalesce('a', null)= 'a'
+define "CoalesceNullA Input":
+	Coalesce(null, 'a')
+define "CoalesceNullA Output":
+	'a'
 
-define "CoalesceNullA":
-  Coalesce(null, 'a')= 'a'
+define "CoalesceEmptyList Input":
+	Coalesce({})
+define "CoalesceEmptyList Output":
+	null
 
-define "CoalesceEmptyList":
-  Coalesce({ } as List<Integer>)= ( null as Integer )
+define "CoalesceListFirstA Input":
+	Coalesce({'a', null, null})
+define "CoalesceListFirstA Output":
+	'a'
 
-define "CoalesceListFirstA":
-  Coalesce({ 'a', null, null })= 'a'
+define "CoalesceListLastA Input":
+	Coalesce({null, null, 'a'})
+define "CoalesceListLastA Output":
+	'a'
 
-define "CoalesceListLastA":
-  Coalesce({ null, null, 'a' })= 'a'
+define "CoalesceFirstList Input":
+	Coalesce({'a'},null, null)
+define "CoalesceFirstList Output":
+	{'a'}
 
-define "CoalesceFirstList":
-  Coalesce({ 'a' }, null, null)= { 'a' }
+define "CoalesceLastList Input":
+	Coalesce(null, null, {'a'})
+define "CoalesceLastList Output":
+	{'a'}
 
-define "CoalesceLastList":
-  Coalesce(null as List<String>, null as List<String>, { 'a' })= { 'a' }
+define "DateTimeCoalesce Input":
+	Coalesce(null, null, DateTime(2012, 5, 18))
+define "DateTimeCoalesce Output":
+	DateTime(2012, 5, 18)
 
-define "DateTimeCoalesce":
-  Coalesce(null as DateTime, null as DateTime, DateTime(2012, 5, 18))= DateTime(2012, 5, 18)
+define "DateTimeListCoalesce Input":
+	Coalesce({ null, null, DateTime(2012, 5, 18) })
+define "DateTimeListCoalesce Output":
+	DateTime(2012, 5, 18)
 
-define "DateTimeListCoalesce":
-  Coalesce({ null as DateTime, null as DateTime, DateTime(2012, 5, 18)})= DateTime(2012, 5, 18)
+define "TimeCoalesce Input":
+	Coalesce(null, null, @T05:15:33.556)
+define "TimeCoalesce Output":
+	@T05:15:33.556
 
-define "TimeCoalesce":
-  Coalesce(null as Time, null as Time, @T05:15:33.556)= @T05:15:33.556
+define "TimeListCoalesce Input":
+	Coalesce({ null, null, @T05:15:33.556 })
+define "TimeListCoalesce Output":
+	@T05:15:33.556
 
-define "TimeListCoalesce":
-  Coalesce({ null as Time, null as Time, @T05:15:33.556 })= @T05:15:33.556
+define "IsNullTrue Input":
+	IsNull(null)
+define "IsNullTrue Output":
+	true
 
-define "IsNullTrue":
-  IsNull(null)= true
+define "IsNullFalseEmptyString Input":
+	IsNull('')
+define "IsNullFalseEmptyString Output":
+	false
 
-define "IsNullFalseEmptyString":
-  IsNull('')= false
+define "IsNullAlsoFalseAbcString Input":
+	IsNull('abc')
+define "IsNullAlsoFalseAbcString Output":
+	false
 
-define "IsNullAlsoFalseAbcString":
-  IsNull('abc')= false
+define "IsNullAlsoFalseNumber1 Input":
+	IsNull(1)
+define "IsNullAlsoFalseNumber1 Output":
+	false
 
-define "IsNullAlsoFalseNumber1":
-  IsNull(1)= false
+define "IsNullAlsoFalseNumberZero Input":
+	IsNull(0)
+define "IsNullAlsoFalseNumberZero Output":
+	false
 
-define "IsNullAlsoFalseNumberZero":
-  IsNull(0)= false
+define "IsFalseFalse Input":
+	IsFalse(false)
+define "IsFalseFalse Output":
+	true
 
-define "IsFalseFalse":
-  IsFalse(false)= true
+define "IsFalseTrue Input":
+	IsFalse(true)
+define "IsFalseTrue Output":
+	false
 
-define "IsFalseTrue":
-  IsFalse(true)= false
+define "IsFalseNull Input":
+	IsFalse(null)
+define "IsFalseNull Output":
+	false
 
-define "IsFalseNull":
-  IsFalse(null)= false
+define "IsTrueTrue Input":
+	IsTrue(true)
+define "IsTrueTrue Output":
+	true
 
-define "IsTrueTrue":
-  IsTrue(true)= true
+define "IsTrueFalse Input":
+	IsTrue(false)
+define "IsTrueFalse Output":
+	false
 
-define "IsTrueFalse":
-  IsTrue(false)= false
-
-define "IsTrueNull":
-  IsTrue(null)= false
+define "IsTrueNull Input":
+	IsTrue(null)
+define "IsTrueNull Output":
+	false

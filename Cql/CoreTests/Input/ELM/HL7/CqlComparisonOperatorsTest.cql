@@ -1,642 +1,919 @@
-library CqlComparisonOperatorsTest version '1.0.0'
-
-using FHIR version '4.0.1'
-
-include FHIRHelpers version '4.0.1' called FHIRHelpers
-
-context Patient
-
-define "BetweenIntTrue":
-  4 between 2 and 6 = true
-
-define "SimpleEqTrueTrue":
-  true = true = true
-
-define "SimpleEqTrueFalse":
-  true = false = false
-
-define "SimpleEqFalseFalse":
-  false = false = true
-
-define "SimpleEqFalseTrue":
-  false = true = false
-
-define "SimpleEqNullNull":
-  ( null as String = null as String ) = null
-
-define "SimpleEqTrueNull":
-  true = null = null
-
-define "SimpleEqNullTrue":
-  null = true = null
-
-define "SimpleEqInt1Int1":
-  1 = 1 = true
-
-define "SimpleEqInt1Int2":
-  1 = 2 = false
-
-define "SimpleEqStringAStringA":
-  'a' = 'a' = true
-
-define "SimpleEqStringAStringB":
-  'a' = 'b' = false
-
-define "SimpleEqFloat1Float1":
-  1.0 = 1.0 = true
-
-define "SimpleEqFloat1Float2":
-  1.0 = 2.0 = false
-
-define "SimpleEqFloat1Int1":
-  1.0 = 1 = true
-
-define "SimpleEqFloat1Int2":
-  1.0 = 2 = false
-
-define "QuantityEqCM1CM1":
-  1 'cm' = 1 'cm' = true
-
-define "QuantityEqCM1M01":
-  1 'cm' = 0.01 'm' = true
-
-define "QuantityEqDiffPrecision":
-  2.0 'cm' = 2.00 'cm' = true
-
-define "TupleEqJohnJohn":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } = Tuple {
-    Id: 1,
-    Name: 'John'
-  } = true
-
-define "TupleEqJohnJane":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } = Tuple {
-    Id: 2,
-    Name: 'Jane'
-  } = false
-
-define "TupleEqJohn1John2":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } = Tuple {
-    Id: 2,
-    Name: 'John'
-  } = false
-
-define "TupleEqDateTimeTrue":
-  Tuple {
-    dateId: 1,
-    Date: DateTime(2012, 10, 5, 0, 0, 0, 0)
-  } = Tuple {
-    dateId: 1,
-    Date: DateTime(2012, 10, 5, 0, 0, 0, 0)
-  } = true
-
-define "TupleEqDateTimeFalse":
-  Tuple {
-    dateId: 1,
-    Date: DateTime(2012, 10, 5, 0, 0, 0, 0)
-  } = Tuple {
-    dateId: 1,
-    Date: DateTime(2012, 10, 5, 5, 0, 0, 0)
-  } = false
-
-define "TupleEqTimeTrue":
-  Tuple {
-    timeId: 55,
-    TheTime: @T05:15:15.541
-  } = Tuple {
-    timeId: 55,
-    TheTime: @T05:15:15.541
-  } = true
-
-define "TupleEqTimeFalse":
-  Tuple {
-    timeId: 55,
-    TheTime: @T05:15:15.541
-  } = Tuple {
-    timeId: 55,
-    TheTime: @T05:15:15.540
-  } = false
-
-define "DateTimeEqTodayToday":
-  Today()= Today()= true
-
-define "DateTimeEqTodayYesterday":
-  Today()= Today()- 1 days = false
-
-define "DateTimeEqJanJan":
-  DateTime(2014, 1, 5, 5, 0, 0, 0, 0)= DateTime(2014, 1, 5, 5, 0, 0, 0, 0)= true
-
-define "DateTimeEqJanJuly":
-  DateTime(2014, 1, 5, 5, 0, 0, 0, 0)= DateTime(2014, 7, 5, 5, 0, 0, 0, 0)= false
-
-define "DateTimeEqNull":
-  DateTime(null)= DateTime(null)= null
-
-define "DateTimeUTC":
-  @2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00 = true
-
-define "TimeEq10A10A":
-  @T10:00:00.000 = @T10:00:00.000 = true
-
-define "TimeEq10A10P":
-  @T10:00:00.000 = @T22:00:00.000 = false
-
-define "GreaterZZ":
-  0 > 0 = false
-
-define "GreaterZ1":
-  0 > 1 = false
-
-define "GreaterZNeg1":
-  0 > - 1 = true
-
-define "GreaterDecZZ":
-  0.0 > 0.0 = false
-
-define "GreaterDecZ1":
-  0.0 > 1.0 = false
-
-define "GreaterDecZNeg1":
-  0.0 > - 1.0 = true
-
-define "GreaterCM0CM0":
-  0 'cm' > 0 'cm' = false
-
-define "GreaterCM0CM1":
-  0 'cm' > 1 'cm' = false
-
-define "GreaterCM0NegCM1":
-  0 'cm' > - 1 'cm' = true
-
-define "GreaterM1CM1":
-  1 'm' > 1 'cm' = true
-
-define "GreaterM1CM10":
-  1 'm' > 10 'cm' = true
-
-define "GreaterAA":
-  'a' > 'a' = false
-
-define "GreaterAB":
-  'a' > 'b' = false
-
-define "GreaterBA":
-  'b' > 'a' = true
-
-define "GreaterAThanAA":
-  'a' > 'aa' = false
-
-define "GreaterAAThanA":
-  'aa' > 'a' = true
-
-define "GreaterJackJill":
-  'Jack' > 'Jill' = false
-
-define "DateTimeGreaterTrue":
-  DateTime(2012, 2, 12)> DateTime(2012, 2, 10)= true
-
-define "DateTimeGreaterFalse":
-  DateTime(2012, 2, 12)> DateTime(2012, 2, 13)= false
-
-define "TimeGreaterTrue":
-  @T10:00:00.001 > @T10:00:00.000 = true
-
-define "TimeGreaterFalse":
-  @T10:00:00.000 > @T10:00:00.001 = false
-
-define "UncertaintyGreaterNull":
-  DateTime(2014)> DateTime(2014, 2, 15)= null
-
-define "UncertaintyGreaterTrue":
-  DateTime(2015)> DateTime(2014, 2, 15)= true
-
-define "UncertaintyGreaterFalse":
-  DateTime(2013)> DateTime(2014, 2, 15)= false
-
-define "GreaterOrEqualZZ":
-  0 >= 0 = true
-
-define "GreaterOrEqualZ1":
-  0 >= 1 = false
-
-define "GreaterOrEqualZNeg1":
-  0 >= - 1 = true
-
-define "GreaterOrEqualDecZZ":
-  0.0 >= 0.0 = true
-
-define "GreaterOrEqualDecZ1":
-  0.0 >= 1.0 = false
-
-define "GreaterOrEqualDecZNeg1":
-  0.0 >= - 1.0 = true
-
-define "GreaterOrEqualCM0CM0":
-  0 'cm' >= 0 'cm' = true
-
-define "GreaterOrEqualCM0CM1":
-  0 'cm' >= 1 'cm' = false
-
-define "GreaterOrEqualCM0NegCM1":
-  0 'cm' >= - 1 'cm' = true
-
-define "GreaterOrEqualM1CM1":
-  1 'm' >= 1 'cm' = true
-
-define "GreaterOrEqualM1CM10":
-  1 'm' >= 10 'cm' = true
-
-define "GreaterOrEqualAA":
-  'a' >= 'a' = true
-
-define "GreaterOrEqualAB":
-  'a' >= 'b' = false
-
-define "GreaterOrEqualBA":
-  'b' >= 'a' = true
-
-define "GreaterOrEqualAThanAA":
-  'a' >= 'aa' = false
-
-define "GreaterOrEqualAAThanA":
-  'aa' >= 'a' = true
-
-define "GreaterOrEqualJackJill":
-  'Jack' >= 'Jill' = false
-
-define "DateTimeGreaterEqTrue":
-  DateTime(2012, 2, 12, 0, 0, 0, 0)>= DateTime(2012, 2, 10, 0, 0, 0, 0)= true
-
-define "DateTimeGreaterEqTrue2":
-  DateTime(2012, 2, 12, 0, 0, 0, 0)>= DateTime(2012, 2, 12, 0, 0, 0, 0)= true
-
-define "DateTimeGreaterEqFalse":
-  DateTime(2012, 2, 12, 0, 0, 0, 0)>= DateTime(2012, 2, 13, 0, 0, 0, 0)= false
-
-define "TimeGreaterEqTrue":
-  @T10:00:00.001 >= @T10:00:00.000 = true
-
-define "TimeGreaterEqTrue2":
-  @T10:00:00.000 >= @T10:00:00.000 = true
-
-define "TimeGreaterEqFalse":
-  @T10:00:00.000 >= @T10:00:00.001 = false
-
-define "UncertaintyGreaterEqualNull":
-  DateTime(2014)>= DateTime(2014, 2, 15)= null
-
-define "UncertaintyGreaterEqualTrue":
-  DateTime(2015)>= DateTime(2014, 2, 15)= true
-
-define "UncertaintyGreaterEqualFalse":
-  DateTime(2013)>= DateTime(2014, 2, 15)= false
-
-define "LessZZ":
-  0 < 0 = false
-
-define "LessZ1":
-  0 < 1 = true
-
-define "LessZNeg1":
-  0 < - 1 = false
-
-define "LessDecZZ":
-  0.0 < 0.0 = false
-
-define "LessDecZ1":
-  0.0 < 1.0 = true
-
-define "LessDecZNeg1":
-  0.0 < - 1.0 = false
-
-define "LessCM0CM0":
-  0 'cm' < 0 'cm' = false
-
-define "LessCM0CM1":
-  0 'cm' < 1 'cm' = true
-
-define "LessCM0NegCM1":
-  0 'cm' < - 1 'cm' = false
-
-define "LessM1CM1":
-  1 'm' < 1 'cm' = false
-
-define "LessM1CM10":
-  1 'm' < 10 'cm' = false
-
-define "LessAA":
-  'a' < 'a' = false
-
-define "LessAB":
-  'a' < 'b' = true
-
-define "LessBA":
-  'b' < 'a' = false
-
-define "LessAThanAA":
-  'a' < 'aa' = true
-
-define "LessAAThanA":
-  'aa' < 'a' = false
-
-define "LessJackJill":
-  'Jack' < 'Jill' = true
-
-define "DateTimeLessTrue":
-  DateTime(2012, 2, 9)< DateTime(2012, 2, 10)= true
-
-define "DateTimeLessFalse":
-  DateTime(2012, 2, 14)< DateTime(2012, 2, 13)= false
-
-define "TimeLessTrue":
-  @T10:00:00.001 < @T10:00:00.002 = true
-
-define "TimeLessFalse":
-  @T10:10:00.000 < @T10:00:00.001 = false
-
-define "UncertaintyLessNull":
-  DateTime(2014)< DateTime(2014, 2, 15)= null
-
-define "UncertaintyLessTrue":
-  DateTime(2013)< DateTime(2014, 2, 15)= true
-
-define "UncertaintyLessFalse":
-  DateTime(2015)< DateTime(2014, 2, 15)= false
-
-define "LessOrEqualZZ":
-  0 <= 0 = true
-
-define "LessOrEqualZ1":
-  0 <= 1 = true
-
-define "LessOrEqualZNeg1":
-  0 <= - 1 = false
-
-define "LessOrEqualDecZZ":
-  0.0 <= 0.0 = true
-
-define "LessOrEqualDecZ1":
-  0.0 <= 1.0 = true
-
-define "LessOrEqualDecZNeg1":
-  0.0 <= - 1.0 = false
-
-define "LessOrEqualCM0CM0":
-  0 'cm' <= 0 'cm' = true
-
-define "LessOrEqualCM0CM1":
-  0 'cm' <= 1 'cm' = true
-
-define "LessOrEqualCM0NegCM1":
-  0 'cm' <= - 1 'cm' = false
-
-define "LessOrEqualM1CM1":
-  1 'm' <= 1 'cm' = false
-
-define "LessOrEqualM1CM10":
-  1 'm' <= 10 'cm' = false
-
-define "LessOrEqualAA":
-  'a' <= 'a' = true
-
-define "LessOrEqualAB":
-  'a' <= 'b' = true
-
-define "LessOrEqualBA":
-  'b' <= 'a' = false
-
-define "LessOrEqualAThanAA":
-  'a' <= 'aa' = true
-
-define "LessOrEqualAAThanA":
-  'aa' <= 'a' = false
-
-define "LessOrEqualJackJill":
-  'Jack' <= 'Jill' = true
-
-define "DateTimeLessEqTrue":
-  DateTime(2012, 2, 9, 0, 0, 0, 0)<= DateTime(2012, 2, 10, 0, 0, 0, 0)= true
-
-define "DateTimeLessEqTrue2":
-  DateTime(2012, 2, 12, 0, 0, 0, 0)<= DateTime(2012, 2, 12, 0, 0, 0, 0)= true
-
-define "DateTimeLessEqFalse":
-  DateTime(2012, 2, 12, 1, 0, 0, 0)<= DateTime(2012, 2, 12, 0, 0, 0, 0)= false
-
-define "TimeLessEqTrue":
-  @T10:00:00.001 <= @T10:00:00.002 = true
-
-define "TimeLessEqTrue2":
-  @T10:00:00.000 <= @T10:00:00.000 = true
-
-define "TimeLessEqFalse":
-  @T10:00:00.002 <= @T10:00:00.001 = false
-
-define "UncertaintyLessEqualNull":
-  DateTime(2014)<= DateTime(2014, 2, 15)= null
-
-define "UncertaintyLessEqualTrue":
-  DateTime(2013)<= DateTime(2014, 2, 15)= true
-
-define "UncertaintyLessEqualFalse":
-  DateTime(2015)<= DateTime(2014, 2, 15)= false
-
-define "EquivTrueTrue":
-  true ~ true = true
-
-define "EquivTrueFalse":
-  true ~ false = false
-
-define "EquivFalseFalse":
-  false ~ false = true
-
-define "EquivFalseTrue":
-  false ~ true = false
-
-define "EquivNullNull":
-  null as String ~ null as String = true
-
-define "EquivTrueNull":
-  true ~ null = false
-
-define "EquivNullTrue":
-  null ~ true = false
-
-define "EquivInt1Int1":
-  1 ~ 1 = true
-
-define "EquivInt1Int2":
-  1 ~ 2 = false
-
-define "EquivStringAStringA":
-  'a' ~ 'a' = true
-
-define "EquivStringAStringB":
-  'a' ~ 'b' = false
-
-define "EquivFloat1Float1":
-  1.0 ~ 1.0 = true
-
-define "EquivFloat1Float2":
-  1.0 ~ 2.0 = false
-
-define "EquivFloat1Int1":
-  1.0 ~ 1 = true
-
-define "EquivFloat1Int2":
-  1.0 ~ 2 = false
-
-define "EquivEqCM1CM1":
-  1 'cm' ~ 1 'cm' = true
-
-define "EquivEqCM1M01":
-  1 'cm' ~ 0.01 'm' = true
-
-define "EquivTupleJohnJohn":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } ~ Tuple {
-    Id: 1,
-    Name: 'John'
-  } = true
-
-define "EquivTupleJohnJohnWithNulls":
-  Tuple {
-    Id: 1,
-    Name: 'John',
-    Position: null
-  } ~ Tuple {
-    Id: 1,
-    Name: 'John',
-    Position: null
-  } = true
-
-define "EquivTupleJohnJane":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } ~ Tuple {
-    Id: 2,
-    Name: 'Jane'
-  } = false
-
-define "EquivTupleJohn1John2":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } ~ Tuple {
-    Id: 2,
-    Name: 'John'
-  } = false
-
-define "EquivDateTimeTodayToday":
-  Today()~ Today()= true
-
-define "EquivDateTimeTodayYesterday":
-  Today()~ Today()- 1 days = false
-
-define "EquivTime10A10A":
-  @T10:00:00.000 ~ @T10:00:00.000 = true
-
-define "EquivTime10A10P":
-  @T10:00:00.000 ~ @T22:00:00.000 = false
-
-define "SimpleNotEqTrueTrue":
-  true != true = false
-
-define "SimpleNotEqTrueFalse":
-  true != false = true
-
-define "SimpleNotEqFalseFalse":
-  false != false = false
-
-define "SimpleNotEqFalseTrue":
-  false != true = true
-
-define "SimpleNotEqNullNull":
-  ( null as String != null as String ) = null
-
-define "SimpleNotEqTrueNull":
-  true != null = null
-
-define "SimpleNotEqNullTrue":
-  null != true = null
-
-define "SimpleNotEqInt1Int1":
-  1 != 1 = false
-
-define "SimpleNotEqInt1Int2":
-  1 != 2 = true
-
-define "SimpleNotEqStringAStringA":
-  'a' != 'a' = false
-
-define "SimpleNotEqStringAStringB":
-  'a' != 'b' = true
-
-define "SimpleNotEqFloat1Float1":
-  1.0 != 1.0 = false
-
-define "SimpleNotEqFloat1Float2":
-  1.0 != 2.0 = true
-
-define "SimpleNotEqFloat1Int1":
-  1.0 != 1 = false
-
-define "SimpleNotEqFloat1Int2":
-  1.0 != 2 = true
-
-define "QuantityNotEqCM1CM1":
-  1 'cm' != 1 'cm' = false
-
-define "QuantityNotEqCM1M01":
-  1 'cm' != 0.01 'm' = false
-
-define "TupleNotEqJohnJohn":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } != Tuple {
-    Id: 1,
-    Name: 'John'
-  } = false
-
-define "TupleNotEqJohnJane":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } != Tuple {
-    Id: 2,
-    Name: 'Jane'
-  } = true
-
-define "TupleNotEqJohn1John2":
-  Tuple {
-    Id: 1,
-    Name: 'John'
-  } != Tuple {
-    Id: 2,
-    Name: 'John'
-  } = true
-
-define "DateTimeNotEqTodayToday":
-  Today()!= Today()= false
-
-define "DateTimeNotEqTodayYesterday":
-  Today()!= Today()- 1 days = true
-
-define "TimeNotEq10A10A":
-  @T10:00:00.000 != @T10:00:00.000 = false
-
-define "TimeNotEq10A10P":
-  @T10:00:00.000 != @T22:00:00.000 = true
+library CqlComparisonOperatorsTest
+
+context Unfiltered
+
+
+define "BetweenIntTrue Input":
+	4 between 2 and 6
+define "BetweenIntTrue Output":
+	true
+
+define "SimpleEqTrueTrue Input":
+	true = true
+define "SimpleEqTrueTrue Output":
+	true
+
+define "SimpleEqTrueFalse Input":
+	true = false
+define "SimpleEqTrueFalse Output":
+	false
+
+define "SimpleEqFalseFalse Input":
+	false = false
+define "SimpleEqFalseFalse Output":
+	true
+
+define "SimpleEqFalseTrue Input":
+	false = true
+define "SimpleEqFalseTrue Output":
+	false
+
+define "SimpleEqNullNull Input":
+	null as String = null
+define "SimpleEqNullNull Output":
+	null
+
+define "SimpleEqTrueNull Input":
+	true = null
+define "SimpleEqTrueNull Output":
+	null
+
+define "SimpleEqNullTrue Input":
+	null = true
+define "SimpleEqNullTrue Output":
+	null
+
+define "SimpleEqInt1Int1 Input":
+	1 = 1
+define "SimpleEqInt1Int1 Output":
+	true
+
+define "SimpleEqInt1Int2 Input":
+	1 = 2
+define "SimpleEqInt1Int2 Output":
+	false
+
+define "SimpleEqStringAStringA Input":
+	'a' = 'a'
+define "SimpleEqStringAStringA Output":
+	true
+
+define "SimpleEqStringAStringB Input":
+	'a' = 'b'
+define "SimpleEqStringAStringB Output":
+	false
+
+define "SimpleEqFloat1Float1 Input":
+	1.0 = 1.0
+define "SimpleEqFloat1Float1 Output":
+	true
+
+define "SimpleEqFloat1Float2 Input":
+	1.0 = 2.0
+define "SimpleEqFloat1Float2 Output":
+	false
+
+define "SimpleEqFloat1Int1 Input":
+	1.0 = 1
+define "SimpleEqFloat1Int1 Output":
+	true
+
+define "SimpleEqFloat1Int2 Input":
+	1.0 = 2
+define "SimpleEqFloat1Int2 Output":
+	false
+
+define "QuantityEqCM1CM1 Input":
+	1'cm' = 1'cm'
+define "QuantityEqCM1CM1 Output":
+	true
+
+define "QuantityEqCM1M01 Input":
+	1'cm' = 0.01'm'
+define "QuantityEqCM1M01 Output":
+	true
+
+define "QuantityEqDiffPrecision Input":
+	2.0'cm' = 2.00'cm'
+define "QuantityEqDiffPrecision Output":
+	true
+
+define "TupleEqJohnJohn Input":
+	Tuple { Id : 1, Name : 'John' } = Tuple { Id : 1, Name : 'John' }
+define "TupleEqJohnJohn Output":
+	true
+
+define "TupleEqJohnJane Input":
+	Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'Jane' }
+define "TupleEqJohnJane Output":
+	false
+
+define "TupleEqJohn1John2 Input":
+	Tuple { Id : 1, Name : 'John' } = Tuple { Id : 2, Name : 'John' }
+define "TupleEqJohn1John2 Output":
+	false
+
+define "TupleEqDateTimeTrue Input":
+	Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) }
+define "TupleEqDateTimeTrue Output":
+	true
+
+define "TupleEqDateTimeFalse Input":
+	Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 0, 0, 0, 0) } = Tuple { dateId: 1, Date: DateTime(2012, 10, 5, 5, 0, 0, 0) }
+define "TupleEqDateTimeFalse Output":
+	false
+
+define "TupleEqTimeTrue Input":
+	Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.541 }
+define "TupleEqTimeTrue Output":
+	true
+
+define "TupleEqTimeFalse Input":
+	Tuple { timeId: 55, TheTime: @T05:15:15.541 } = Tuple { timeId: 55, TheTime: @T05:15:15.540 }
+define "TupleEqTimeFalse Output":
+	false
+
+define "DateTimeEqTodayToday Input":
+	Today() = Today()
+define "DateTimeEqTodayToday Output":
+	true
+
+define "DateTimeEqTodayYesterday Input":
+	Today() = Today() - 1 days
+define "DateTimeEqTodayYesterday Output":
+	false
+
+define "DateTimeEqJanJan Input":
+	DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 1, 5, 5, 0, 0, 0, 0)
+define "DateTimeEqJanJan Output":
+	true
+
+define "DateTimeEqJanJuly Input":
+	DateTime(2014, 1, 5, 5, 0, 0, 0, 0) = DateTime(2014, 7, 5, 5, 0, 0, 0, 0)
+define "DateTimeEqJanJuly Output":
+	false
+
+define "DateTimeEqNull Input":
+	DateTime(null) = DateTime(null)
+define "DateTimeEqNull Output":
+	null
+
+define "DateTimeUTC Input":
+	@2014-01-25T14:30:14.559+01:00 = @2014-01-25T14:30:14.559+01:00
+define "DateTimeUTC Output":
+	true
+
+define "TimeEq10A10A Input":
+	@T10:00:00.000 = @T10:00:00.000
+define "TimeEq10A10A Output":
+	true
+
+define "TimeEq10A10P Input":
+	@T10:00:00.000 = @T22:00:00.000
+define "TimeEq10A10P Output":
+	false
+
+define "GreaterZZ Input":
+	0 > 0
+define "GreaterZZ Output":
+	false
+
+define "GreaterZ1 Input":
+	0 > 1
+define "GreaterZ1 Output":
+	false
+
+define "GreaterZNeg1 Input":
+	0 > -1
+define "GreaterZNeg1 Output":
+	true
+
+define "GreaterDecZZ Input":
+	0.0 > 0.0
+define "GreaterDecZZ Output":
+	false
+
+define "GreaterDecZ1 Input":
+	0.0 > 1.0
+define "GreaterDecZ1 Output":
+	false
+
+define "GreaterDecZNeg1 Input":
+	0.0 > -1.0
+define "GreaterDecZNeg1 Output":
+	true
+
+define "GreaterCM0CM0 Input":
+	0'cm' > 0'cm'
+define "GreaterCM0CM0 Output":
+	false
+
+define "GreaterCM0CM1 Input":
+	0'cm' > 1'cm'
+define "GreaterCM0CM1 Output":
+	false
+
+define "GreaterCM0NegCM1 Input":
+	0'cm' > -1'cm'
+define "GreaterCM0NegCM1 Output":
+	true
+
+define "GreaterM1CM1 Input":
+	1'm' > 1'cm'
+define "GreaterM1CM1 Output":
+	true
+
+define "GreaterM1CM10 Input":
+	1'm' > 10'cm'
+define "GreaterM1CM10 Output":
+	true
+
+define "GreaterAA Input":
+	'a' > 'a'
+define "GreaterAA Output":
+	false
+
+define "GreaterAB Input":
+	'a' > 'b'
+define "GreaterAB Output":
+	false
+
+define "GreaterBA Input":
+	'b' > 'a'
+define "GreaterBA Output":
+	true
+
+define "GreaterAThanAA Input":
+	'a' > 'aa'
+define "GreaterAThanAA Output":
+	false
+
+define "GreaterAAThanA Input":
+	'aa' > 'a'
+define "GreaterAAThanA Output":
+	true
+
+define "GreaterJackJill Input":
+	'Jack' > 'Jill'
+define "GreaterJackJill Output":
+	false
+
+define "DateTimeGreaterTrue Input":
+	DateTime(2012, 2, 12) > DateTime(2012, 2, 10)
+define "DateTimeGreaterTrue Output":
+	true
+
+define "DateTimeGreaterFalse Input":
+	DateTime(2012, 2, 12) > DateTime(2012, 2, 13)
+define "DateTimeGreaterFalse Output":
+	false
+
+define "TimeGreaterTrue Input":
+	@T10:00:00.001 > @T10:00:00.000
+define "TimeGreaterTrue Output":
+	true
+
+define "TimeGreaterFalse Input":
+	@T10:00:00.000 > @T10:00:00.001
+define "TimeGreaterFalse Output":
+	false
+
+define "UncertaintyGreaterNull Input":
+	DateTime(2014) > DateTime(2014, 2, 15)
+define "UncertaintyGreaterNull Output":
+	null
+
+define "UncertaintyGreaterTrue Input":
+	DateTime(2015) > DateTime(2014, 2, 15)
+define "UncertaintyGreaterTrue Output":
+	true
+
+define "UncertaintyGreaterFalse Input":
+	DateTime(2013) > DateTime(2014, 2, 15)
+define "UncertaintyGreaterFalse Output":
+	false
+
+define "GreaterOrEqualZZ Input":
+	0 >= 0
+define "GreaterOrEqualZZ Output":
+	true
+
+define "GreaterOrEqualZ1 Input":
+	0 >= 1
+define "GreaterOrEqualZ1 Output":
+	false
+
+define "GreaterOrEqualZNeg1 Input":
+	0 >= -1
+define "GreaterOrEqualZNeg1 Output":
+	true
+
+define "GreaterOrEqualDecZZ Input":
+	0.0 >= 0.0
+define "GreaterOrEqualDecZZ Output":
+	true
+
+define "GreaterOrEqualDecZ1 Input":
+	0.0 >= 1.0
+define "GreaterOrEqualDecZ1 Output":
+	false
+
+define "GreaterOrEqualDecZNeg1 Input":
+	0.0 >= -1.0
+define "GreaterOrEqualDecZNeg1 Output":
+	true
+
+define "GreaterOrEqualCM0CM0 Input":
+	0'cm' >= 0'cm'
+define "GreaterOrEqualCM0CM0 Output":
+	true
+
+define "GreaterOrEqualCM0CM1 Input":
+	0'cm' >= 1'cm'
+define "GreaterOrEqualCM0CM1 Output":
+	false
+
+define "GreaterOrEqualCM0NegCM1 Input":
+	0'cm' >= -1'cm'
+define "GreaterOrEqualCM0NegCM1 Output":
+	true
+
+define "GreaterOrEqualM1CM1 Input":
+	1'm' >= 1'cm'
+define "GreaterOrEqualM1CM1 Output":
+	true
+
+define "GreaterOrEqualM1CM10 Input":
+	1'm' >= 10'cm'
+define "GreaterOrEqualM1CM10 Output":
+	true
+
+define "GreaterOrEqualAA Input":
+	'a' >= 'a'
+define "GreaterOrEqualAA Output":
+	true
+
+define "GreaterOrEqualAB Input":
+	'a' >= 'b'
+define "GreaterOrEqualAB Output":
+	false
+
+define "GreaterOrEqualBA Input":
+	'b' >= 'a'
+define "GreaterOrEqualBA Output":
+	true
+
+define "GreaterOrEqualAThanAA Input":
+	'a' >= 'aa'
+define "GreaterOrEqualAThanAA Output":
+	false
+
+define "GreaterOrEqualAAThanA Input":
+	'aa' >= 'a'
+define "GreaterOrEqualAAThanA Output":
+	true
+
+define "GreaterOrEqualJackJill Input":
+	'Jack' >= 'Jill'
+define "GreaterOrEqualJackJill Output":
+	false
+
+define "DateTimeGreaterEqTrue Input":
+	DateTime(2012, 2, 12, 0, 0, 0, 0) >= DateTime(2012, 2, 10, 0, 0, 0, 0)
+define "DateTimeGreaterEqTrue Output":
+	true
+
+define "DateTimeGreaterEqTrue2 Input":
+	DateTime(2012, 2, 12, 0, 0, 0, 0) >= DateTime(2012, 2, 12, 0, 0, 0, 0)
+define "DateTimeGreaterEqTrue2 Output":
+	true
+
+define "DateTimeGreaterEqFalse Input":
+	DateTime(2012, 2, 12, 0, 0, 0, 0) >= DateTime(2012, 2, 13, 0, 0, 0, 0)
+define "DateTimeGreaterEqFalse Output":
+	false
+
+define "TimeGreaterEqTrue Input":
+	@T10:00:00.001 >= @T10:00:00.000
+define "TimeGreaterEqTrue Output":
+	true
+
+define "TimeGreaterEqTrue2 Input":
+	@T10:00:00.000 >= @T10:00:00.000
+define "TimeGreaterEqTrue2 Output":
+	true
+
+define "TimeGreaterEqFalse Input":
+	@T10:00:00.000 >= @T10:00:00.001
+define "TimeGreaterEqFalse Output":
+	false
+
+define "UncertaintyGreaterEqualNull Input":
+	DateTime(2014) >= DateTime(2014, 2, 15)
+define "UncertaintyGreaterEqualNull Output":
+	null
+
+define "UncertaintyGreaterEqualTrue Input":
+	DateTime(2015) >= DateTime(2014, 2, 15)
+define "UncertaintyGreaterEqualTrue Output":
+	true
+
+define "UncertaintyGreaterEqualFalse Input":
+	DateTime(2013) >= DateTime(2014, 2, 15)
+define "UncertaintyGreaterEqualFalse Output":
+	false
+
+define "LessZZ Input":
+	0 < 0
+define "LessZZ Output":
+	false
+
+define "LessZ1 Input":
+	0 < 1
+define "LessZ1 Output":
+	true
+
+define "LessZNeg1 Input":
+	0 < -1
+define "LessZNeg1 Output":
+	false
+
+define "LessDecZZ Input":
+	0.0 < 0.0
+define "LessDecZZ Output":
+	false
+
+define "LessDecZ1 Input":
+	0.0 < 1.0
+define "LessDecZ1 Output":
+	true
+
+define "LessDecZNeg1 Input":
+	0.0 < -1.0
+define "LessDecZNeg1 Output":
+	false
+
+define "LessCM0CM0 Input":
+	0'cm' < 0'cm'
+define "LessCM0CM0 Output":
+	false
+
+define "LessCM0CM1 Input":
+	0'cm' < 1'cm'
+define "LessCM0CM1 Output":
+	true
+
+define "LessCM0NegCM1 Input":
+	0'cm' < -1'cm'
+define "LessCM0NegCM1 Output":
+	false
+
+define "LessM1CM1 Input":
+	1'm' < 1'cm'
+define "LessM1CM1 Output":
+	false
+
+define "LessM1CM10 Input":
+	1'm' < 10'cm'
+define "LessM1CM10 Output":
+	false
+
+define "LessAA Input":
+	'a' < 'a'
+define "LessAA Output":
+	false
+
+define "LessAB Input":
+	'a' < 'b'
+define "LessAB Output":
+	true
+
+define "LessBA Input":
+	'b' < 'a'
+define "LessBA Output":
+	false
+
+define "LessAThanAA Input":
+	'a' < 'aa'
+define "LessAThanAA Output":
+	true
+
+define "LessAAThanA Input":
+	'aa' < 'a'
+define "LessAAThanA Output":
+	false
+
+define "LessJackJill Input":
+	'Jack' < 'Jill'
+define "LessJackJill Output":
+	true
+
+define "DateTimeLessTrue Input":
+	DateTime(2012, 2, 9) < DateTime(2012, 2, 10)
+define "DateTimeLessTrue Output":
+	true
+
+define "DateTimeLessFalse Input":
+	DateTime(2012, 2, 14) < DateTime(2012, 2, 13)
+define "DateTimeLessFalse Output":
+	false
+
+define "TimeLessTrue Input":
+	@T10:00:00.001 < @T10:00:00.002
+define "TimeLessTrue Output":
+	true
+
+define "TimeLessFalse Input":
+	@T10:10:00.000 < @T10:00:00.001
+define "TimeLessFalse Output":
+	false
+
+define "UncertaintyLessNull Input":
+	DateTime(2014) < DateTime(2014, 2, 15)
+define "UncertaintyLessNull Output":
+	null
+
+define "UncertaintyLessTrue Input":
+	DateTime(2013) < DateTime(2014, 2, 15)
+define "UncertaintyLessTrue Output":
+	true
+
+define "UncertaintyLessFalse Input":
+	DateTime(2015) < DateTime(2014, 2, 15)
+define "UncertaintyLessFalse Output":
+	false
+
+define "LessOrEqualZZ Input":
+	0 <= 0
+define "LessOrEqualZZ Output":
+	true
+
+define "LessOrEqualZ1 Input":
+	0 <= 1
+define "LessOrEqualZ1 Output":
+	true
+
+define "LessOrEqualZNeg1 Input":
+	0 <= -1
+define "LessOrEqualZNeg1 Output":
+	false
+
+define "LessOrEqualDecZZ Input":
+	0.0 <= 0.0
+define "LessOrEqualDecZZ Output":
+	true
+
+define "LessOrEqualDecZ1 Input":
+	0.0 <= 1.0
+define "LessOrEqualDecZ1 Output":
+	true
+
+define "LessOrEqualDecZNeg1 Input":
+	0.0 <= -1.0
+define "LessOrEqualDecZNeg1 Output":
+	false
+
+define "LessOrEqualCM0CM0 Input":
+	0'cm' <= 0'cm'
+define "LessOrEqualCM0CM0 Output":
+	true
+
+define "LessOrEqualCM0CM1 Input":
+	0'cm' <= 1'cm'
+define "LessOrEqualCM0CM1 Output":
+	true
+
+define "LessOrEqualCM0NegCM1 Input":
+	0'cm' <= -1'cm'
+define "LessOrEqualCM0NegCM1 Output":
+	false
+
+define "LessOrEqualM1CM1 Input":
+	1'm' <= 1'cm'
+define "LessOrEqualM1CM1 Output":
+	false
+
+define "LessOrEqualM1CM10 Input":
+	1'm' <= 10'cm'
+define "LessOrEqualM1CM10 Output":
+	false
+
+define "LessOrEqualAA Input":
+	'a' <= 'a'
+define "LessOrEqualAA Output":
+	true
+
+define "LessOrEqualAB Input":
+	'a' <= 'b'
+define "LessOrEqualAB Output":
+	true
+
+define "LessOrEqualBA Input":
+	'b' <= 'a'
+define "LessOrEqualBA Output":
+	false
+
+define "LessOrEqualAThanAA Input":
+	'a' <= 'aa'
+define "LessOrEqualAThanAA Output":
+	true
+
+define "LessOrEqualAAThanA Input":
+	'aa' <= 'a'
+define "LessOrEqualAAThanA Output":
+	false
+
+define "LessOrEqualJackJill Input":
+	'Jack' <= 'Jill'
+define "LessOrEqualJackJill Output":
+	true
+
+define "DateTimeLessEqTrue Input":
+	DateTime(2012, 2, 9, 0, 0, 0, 0) <= DateTime(2012, 2, 10, 0, 0, 0, 0)
+define "DateTimeLessEqTrue Output":
+	true
+
+define "DateTimeLessEqTrue2 Input":
+	DateTime(2012, 2, 12, 0, 0, 0, 0) <= DateTime(2012, 2, 12, 0, 0, 0, 0)
+define "DateTimeLessEqTrue2 Output":
+	true
+
+define "DateTimeLessEqFalse Input":
+	DateTime(2012, 2, 12, 1, 0, 0, 0) <= DateTime(2012, 2, 12, 0, 0, 0, 0)
+define "DateTimeLessEqFalse Output":
+	false
+
+define "TimeLessEqTrue Input":
+	@T10:00:00.001 <= @T10:00:00.002
+define "TimeLessEqTrue Output":
+	true
+
+define "TimeLessEqTrue2 Input":
+	@T10:00:00.000 <= @T10:00:00.000
+define "TimeLessEqTrue2 Output":
+	true
+
+define "TimeLessEqFalse Input":
+	@T10:00:00.002 <= @T10:00:00.001
+define "TimeLessEqFalse Output":
+	false
+
+define "UncertaintyLessEqualNull Input":
+	DateTime(2014) <= DateTime(2014, 2, 15)
+define "UncertaintyLessEqualNull Output":
+	null
+
+define "UncertaintyLessEqualTrue Input":
+	DateTime(2013) <= DateTime(2014, 2, 15)
+define "UncertaintyLessEqualTrue Output":
+	true
+
+define "UncertaintyLessEqualFalse Input":
+	DateTime(2015) <= DateTime(2014, 2, 15)
+define "UncertaintyLessEqualFalse Output":
+	false
+
+define "EquivTrueTrue Input":
+	true ~ true
+define "EquivTrueTrue Output":
+	true
+
+define "EquivTrueFalse Input":
+	true ~ false
+define "EquivTrueFalse Output":
+	false
+
+define "EquivFalseFalse Input":
+	false ~ false
+define "EquivFalseFalse Output":
+	true
+
+define "EquivFalseTrue Input":
+	false ~ true
+define "EquivFalseTrue Output":
+	false
+
+define "EquivNullNull Input":
+	null as String ~ null
+define "EquivNullNull Output":
+	true
+
+define "EquivTrueNull Input":
+	true ~ null
+define "EquivTrueNull Output":
+	false
+
+define "EquivNullTrue Input":
+	null ~ true
+define "EquivNullTrue Output":
+	false
+
+define "EquivInt1Int1 Input":
+	1 ~ 1
+define "EquivInt1Int1 Output":
+	true
+
+define "EquivInt1Int2 Input":
+	1 ~ 2
+define "EquivInt1Int2 Output":
+	false
+
+define "EquivStringAStringA Input":
+	'a' ~ 'a'
+define "EquivStringAStringA Output":
+	true
+
+define "EquivStringAStringB Input":
+	'a' ~ 'b'
+define "EquivStringAStringB Output":
+	false
+
+define "EquivFloat1Float1 Input":
+	1.0 ~ 1.0
+define "EquivFloat1Float1 Output":
+	true
+
+define "EquivFloat1Float2 Input":
+	1.0 ~ 2.0
+define "EquivFloat1Float2 Output":
+	false
+
+define "EquivFloat1Int1 Input":
+	1.0 ~ 1
+define "EquivFloat1Int1 Output":
+	true
+
+define "EquivFloat1Int2 Input":
+	1.0 ~ 2
+define "EquivFloat1Int2 Output":
+	false
+
+define "EquivEqCM1CM1 Input":
+	1'cm' ~ 1'cm'
+define "EquivEqCM1CM1 Output":
+	true
+
+define "EquivEqCM1M01 Input":
+	1'cm' ~ 0.01'm'
+define "EquivEqCM1M01 Output":
+	true
+
+define "EquivTupleJohnJohn Input":
+	Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 1, Name : 'John' }
+define "EquivTupleJohnJohn Output":
+	true
+
+define "EquivTupleJohnJohnWithNulls Input":
+	Tuple { Id : 1, Name : 'John', Position: null } ~ Tuple { Id : 1, Name : 'John', Position: null }
+define "EquivTupleJohnJohnWithNulls Output":
+	true
+
+define "EquivTupleJohnJane Input":
+	Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'Jane' }
+define "EquivTupleJohnJane Output":
+	false
+
+define "EquivTupleJohn1John2 Input":
+	Tuple { Id : 1, Name : 'John' } ~ Tuple { Id : 2, Name : 'John' }
+define "EquivTupleJohn1John2 Output":
+	false
+
+define "EquivDateTimeTodayToday Input":
+	Today() ~ Today()
+define "EquivDateTimeTodayToday Output":
+	true
+
+define "EquivDateTimeTodayYesterday Input":
+	Today() ~ Today() - 1 days
+define "EquivDateTimeTodayYesterday Output":
+	false
+
+define "EquivTime10A10A Input":
+	@T10:00:00.000 ~ @T10:00:00.000
+define "EquivTime10A10A Output":
+	true
+
+define "EquivTime10A10P Input":
+	@T10:00:00.000 ~ @T22:00:00.000
+define "EquivTime10A10P Output":
+	false
+
+define "SimpleNotEqTrueTrue Input":
+	true != true
+define "SimpleNotEqTrueTrue Output":
+	false
+
+define "SimpleNotEqTrueFalse Input":
+	true != false
+define "SimpleNotEqTrueFalse Output":
+	true
+
+define "SimpleNotEqFalseFalse Input":
+	false != false
+define "SimpleNotEqFalseFalse Output":
+	false
+
+define "SimpleNotEqFalseTrue Input":
+	false != true
+define "SimpleNotEqFalseTrue Output":
+	true
+
+define "SimpleNotEqNullNull Input":
+	null as String != null
+define "SimpleNotEqNullNull Output":
+	null
+
+define "SimpleNotEqTrueNull Input":
+	true != null
+define "SimpleNotEqTrueNull Output":
+	null
+
+define "SimpleNotEqNullTrue Input":
+	null != true
+define "SimpleNotEqNullTrue Output":
+	null
+
+define "SimpleNotEqInt1Int1 Input":
+	1 != 1
+define "SimpleNotEqInt1Int1 Output":
+	false
+
+define "SimpleNotEqInt1Int2 Input":
+	1 != 2
+define "SimpleNotEqInt1Int2 Output":
+	true
+
+define "SimpleNotEqStringAStringA Input":
+	'a' != 'a'
+define "SimpleNotEqStringAStringA Output":
+	false
+
+define "SimpleNotEqStringAStringB Input":
+	'a' != 'b'
+define "SimpleNotEqStringAStringB Output":
+	true
+
+define "SimpleNotEqFloat1Float1 Input":
+	1.0 != 1.0
+define "SimpleNotEqFloat1Float1 Output":
+	false
+
+define "SimpleNotEqFloat1Float2 Input":
+	1.0 != 2.0
+define "SimpleNotEqFloat1Float2 Output":
+	true
+
+define "SimpleNotEqFloat1Int1 Input":
+	1.0 != 1
+define "SimpleNotEqFloat1Int1 Output":
+	false
+
+define "SimpleNotEqFloat1Int2 Input":
+	1.0 != 2
+define "SimpleNotEqFloat1Int2 Output":
+	true
+
+define "QuantityNotEqCM1CM1 Input":
+	1'cm' != 1'cm'
+define "QuantityNotEqCM1CM1 Output":
+	false
+
+define "QuantityNotEqCM1M01 Input":
+	1'cm' != 0.01'm'
+define "QuantityNotEqCM1M01 Output":
+	false
+
+define "TupleNotEqJohnJohn Input":
+	Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 1, Name : 'John' }
+define "TupleNotEqJohnJohn Output":
+	false
+
+define "TupleNotEqJohnJane Input":
+	Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'Jane' }
+define "TupleNotEqJohnJane Output":
+	true
+
+define "TupleNotEqJohn1John2 Input":
+	Tuple{ Id : 1, Name : 'John' } != Tuple{ Id : 2, Name : 'John' }
+define "TupleNotEqJohn1John2 Output":
+	true
+
+define "DateTimeNotEqTodayToday Input":
+	Today() != Today()
+define "DateTimeNotEqTodayToday Output":
+	false
+
+define "DateTimeNotEqTodayYesterday Input":
+	Today() != Today() - 1 days
+define "DateTimeNotEqTodayYesterday Output":
+	true
+
+define "TimeNotEq10A10A Input":
+	@T10:00:00.000 != @T10:00:00.000
+define "TimeNotEq10A10A Output":
+	false
+
+define "TimeNotEq10A10P Input":
+	@T10:00:00.000 != @T22:00:00.000
+define "TimeNotEq10A10P Output":
+	true

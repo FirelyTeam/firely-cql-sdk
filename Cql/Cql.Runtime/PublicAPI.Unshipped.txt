@@ -13,6 +13,7 @@ Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
 Hl7.Cql.Runtime.CqlContext.RaiseContextEvent(Hl7.Cql.Runtime.ContextEventArgs! eventData) -> Hl7.Cql.Runtime.CqlContext!
 Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryNameAndVersion, string! parameterName, object? defaultValue) -> object?
+Hl7.Cql.Runtime.CqlContextExtensions
 Hl7.Cql.Runtime.DefinitionDictionary<T>
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, System.Type![]! signature, T! expression) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, T! expression) -> void
@@ -25,13 +26,12 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.DefinitionsForLibrary(string? libraryNam
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Libraries.get -> System.Collections.Generic.IEnumerable<string!>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Merge(params Hl7.Cql.Runtime.DefinitionDictionary<T!>![]! dictionaries) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.this[string? libraryName, string! definition, params System.Type![]! signature].get -> T!
-Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinesForLibrary(string? libraryName, out System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, T!>>? definitions) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinitionsForLibrary(string? libraryName, out System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<string!, System.Collections.Generic.List<(System.Type![]!, T!)>!>>? definitions) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetTags(string! library, string! definition, System.Type![]! signature, out System.Linq.ILookup<string!, string!>? tags) -> bool
-Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, out T? expression) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, System.Type![]! signature, out T? expression) -> bool
 override Hl7.Cql.Runtime.BaseTypeResolver.GetListElementType(System.Type! type, bool throw = false) -> System.Type?
 override Hl7.Cql.Runtime.BaseTypeResolver.ImplementsGenericInterface(System.Type! type, System.Type! genericInterfaceTypeDefinition) -> bool
 override Hl7.Cql.Runtime.BaseTypeResolver.ResolveType(string! typeSpecifier) -> System.Type?
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
+static Hl7.Cql.Runtime.CqlContextExtensions.SetRetrieveContext<T>(this Hl7.Cql.Runtime.CqlContext! source, T! contextValue) -> void
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?

@@ -27,13 +27,18 @@ namespace Hl7.Cql.Compiler
                 var call = OperatorBinding.Bind(CqlOperator.Coalesce, ctx.CqlContextParameter, operands[0]);
                 return call;
             }
-            var distinctOperandTypes = operands
-                .Select(op => op.Type)
-                .Distinct()
-                .ToArray();
-            if (distinctOperandTypes.Length != 1)
-                throw new InvalidOperationException("All operand types should match when using Coalesce");
-            var type = operands[0].Type;
+            var type = TypeManager.TypeFor(ce, ctx, false);
+            if (type == null)
+            {
+                var distinctTypes = operands
+                    .Select(op => op.Type)
+                    .Distinct()
+                    .ToArray();
+                if (distinctTypes.Length != 1)
+                    throw new InvalidOperationException($"Coalesce can only be performed on same-typed operands");
+                else
+                    type = distinctTypes[0];
+            }
             if (type.IsValueType && !IsNullable(type))
                 throw new NotSupportedException("Coalesce on value types is not defined.");
             else
@@ -42,11 +47,13 @@ namespace Hl7.Cql.Compiler
                     return operands[0];
                 else
                 {
-
-                    var coalesce = Expression.Coalesce(operands[0], operands[1]);
+                    var op1 = ChangeType(operands[0], type, ctx);
+                    var op2 = ChangeType(operands[1], type, ctx);
+                    var coalesce = Expression.Coalesce(op1, op2);
                     for (int i = 2; i < operands.Length; i++)
                     {
-                        coalesce = Expression.Coalesce(coalesce, operands[i]);
+                        var opi = ChangeType(operands[i], type, ctx);
+                        coalesce = Expression.Coalesce(coalesce, opi);
                     }
                     return coalesce;
                 }

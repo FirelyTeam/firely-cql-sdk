@@ -61,50 +61,92 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="HL7Tests.CqlAggregateFunctionsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlAggregateTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlArithmeticFunctionsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlComparisonOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlConditionalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlDateTimeOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlErrorsAndMessagingOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlIntervalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlListOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlLogicalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlNullologicalOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlStringOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlTypeOperatorsTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.CqlTypesTest.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
-		<Compile Update="HL7Tests.ValueLiteralsAndSelectors.cs">
-			<DependentUpon>HL7Tests.cs</DependentUpon>
-		</Compile>
+	  <None Update="Input\ELM\HL7\CqlArithmeticFunctionsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlArithmeticFunctionsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlComparisonOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlComparisonOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlConditionalOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlConditionalOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlDateTimeOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlDateTimeOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlErrorsAndMessagingOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlErrorsAndMessagingOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlIntervalOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlIntervalOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlListOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlListOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlLogicalOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlLogicalOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlNullologicalOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlNullologicalOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlStringOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlStringOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlTypeOperatorsTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlTypeOperatorsTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlTypesTest.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\CqlTypesTest.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\failingCqlComparisonOperatorsTests.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\failingCqlComparisonOperatorsTests.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\ValueLiteralsAndSelectors.cql">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\ELM\HL7\ValueLiteralsAndSelectors.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
+	  <None Update="Input\Xml\skiplist.txt">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </None>
 	</ItemGroup>
 </Project>

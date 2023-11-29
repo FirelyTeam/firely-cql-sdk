@@ -99,33 +99,6 @@ namespace Hl7.Cql.Runtime
         }
 
         /// <summary>
-        /// Tries to get the value for the given library and definition.
-        /// </summary>
-        /// <param name="libraryName">The name of the library.</param>
-        /// <param name="definition">The name of the definition.</param>
-        /// <param name="expression">The <see langword="out"/> parameter containing the result.</param>
-        /// <returns><see langword="true"/> if the <paramref name="libraryName"/> and <paramref name="definition"/> is present in this dictionary.</returns>
-        public bool TryGetValue(string? libraryName, string definition, out T? expression)
-        {
-            libraryName ??= string.Empty;
-            if (ExpressionsByLibrary.TryGetValue(libraryName, out var library))
-            {
-                if (library.TryGetValue(definition, out var overloads))
-                {
-                    if (overloads.Count == 1 && overloads[0].Signature.Length == 0)
-                    {
-                        expression = overloads[0].T;
-                        return true;
-                    }
-                }
-            }
-            expression = default;
-            return false;
-        }
-
-
-
-        /// <summary>
         /// Tries to get the value for <see langword="true"/> if the <paramref name="libraryName"/>, <paramref name="definition"/>, and <paramref name="signature"/>.
         /// </summary>
         /// <param name="libraryName">The name of the library.</param>
@@ -242,42 +215,6 @@ namespace Hl7.Cql.Runtime
             if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName, out var library))
             {
                 definitions = library;
-                return true;
-            }
-            else
-            {
-                definitions = null;
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Tries to get key-value pairs of definitions and their values.
-        /// This method only returns CQL <code>define</code> statements and not <code>define function</code> statements.
-        /// </summary>
-        /// <param name="libraryName">The name of the library.</param>
-        /// <param name="definitions">The <see langword="out"/> parameter containing the result.</param>
-        /// <returns><see langword="true"/> if the <paramref name="libraryName"/> is present in this dictionary.</returns>
-        public bool TryGetDefinesForLibrary(string? libraryName, out IEnumerable<KeyValuePair<string, T>>? definitions)
-        {
-            if (!string.IsNullOrWhiteSpace(libraryName) && ExpressionsByLibrary.TryGetValue(libraryName, out var library))
-            {
-                var allDefinitions = library;
-                var defines = new Dictionary<string, T>();
-
-                foreach (var (defName, overloads) in allDefinitions)
-                {
-                    foreach (var (paramTypes, del) in overloads)
-                    {
-                        if (paramTypes.Length == 0)
-                        {
-                            defines.Add(defName, del);
-                        }
-                    }
-                }
-
-                definitions = defines.ToArray();
-
                 return true;
             }
             else
