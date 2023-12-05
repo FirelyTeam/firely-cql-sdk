@@ -40,7 +40,7 @@ Hl7.Cql.Primitives.CqlDateTime.Equivalent(Hl7.Cql.Primitives.CqlDateTime? other,
 Hl7.Cql.Primitives.CqlDateTime.InUtc.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
 Hl7.Cql.Primitives.CqlDateTime.Precision.get -> Hl7.Cql.Iso8601.DateTimePrecision
 Hl7.Cql.Primitives.CqlDateTime.Predecessor() -> Hl7.Cql.Primitives.CqlDateTime!
-Hl7.Cql.Primitives.CqlDateTime.Subtract(Hl7.Cql.Primitives.CqlQuantity! quantity) -> Hl7.Cql.Primitives.CqlDateTime?
+Hl7.Cql.Primitives.CqlDateTime.Subtract(Hl7.Cql.Primitives.CqlQuantity? quantity) -> Hl7.Cql.Primitives.CqlDateTime?
 Hl7.Cql.Primitives.CqlDateTime.Successor() -> Hl7.Cql.Primitives.CqlDateTime!
 Hl7.Cql.Primitives.CqlDateTime.TimeOnly.get -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Primitives.CqlDateTime.Value.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
@@ -87,7 +87,7 @@ Hl7.Cql.Primitives.CqlRatio.CqlRatio(Hl7.Cql.Primitives.CqlQuantity? numerator, 
 Hl7.Cql.Primitives.CqlRatio.denominator.get -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Primitives.CqlRatio.numerator.get -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Primitives.CqlTime
-Hl7.Cql.Primitives.CqlTime.Add(Hl7.Cql.Primitives.CqlQuantity! quantity) -> Hl7.Cql.Primitives.CqlTime?
+Hl7.Cql.Primitives.CqlTime.Add(Hl7.Cql.Primitives.CqlQuantity? quantity) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Primitives.CqlTime.BoundariesBetween(Hl7.Cql.Primitives.CqlTime! high, string! precision) -> int?
 Hl7.Cql.Primitives.CqlTime.CompareTo(Hl7.Cql.Primitives.CqlTime? other, string? precision = null) -> int?
 Hl7.Cql.Primitives.CqlTime.Component(string! precision) -> int?
@@ -97,7 +97,7 @@ Hl7.Cql.Primitives.CqlTime.Equivalent(Hl7.Cql.Primitives.CqlTime? other, string?
 Hl7.Cql.Primitives.CqlTime.InUtc.get -> Hl7.Cql.Iso8601.TimeIso8601!
 Hl7.Cql.Primitives.CqlTime.Precision.get -> Hl7.Cql.Iso8601.DateTimePrecision
 Hl7.Cql.Primitives.CqlTime.Predecessor() -> Hl7.Cql.Primitives.CqlTime!
-Hl7.Cql.Primitives.CqlTime.Subtract(Hl7.Cql.Primitives.CqlQuantity! quantity) -> Hl7.Cql.Primitives.CqlTime?
+Hl7.Cql.Primitives.CqlTime.Subtract(Hl7.Cql.Primitives.CqlQuantity? quantity) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Primitives.CqlTime.Successor() -> Hl7.Cql.Primitives.CqlTime!
 Hl7.Cql.Primitives.CqlTime.Value.get -> Hl7.Cql.Iso8601.TimeIso8601!
 Hl7.Cql.Primitives.CqlTime.WholeCalendarPointsBetween(Hl7.Cql.Primitives.CqlTime! high, string! precision) -> int?

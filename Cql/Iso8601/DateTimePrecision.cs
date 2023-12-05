@@ -7,6 +7,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
+
 namespace Hl7.Cql.Iso8601
 {
     public static class DateTimePrecisionExtensions
@@ -41,6 +43,26 @@ namespace Hl7.Cql.Iso8601
                         break;
                 }
             return DateTimePrecision.Unknown;
+        }
+
+        public static string ToUCUMUnit(this DateTimePrecision precision) =>
+            precision switch
+            {
+                DateTimePrecision.Year => "a",
+                DateTimePrecision.Month => "mo",
+                DateTimePrecision.Day => "d",
+                DateTimePrecision.Hour => "h",
+                DateTimePrecision.Minute => "mi",
+                DateTimePrecision.Second => "s",
+                DateTimePrecision.Millisecond => "ms",
+                _ => throw new ArgumentException($"Unit {Enum.GetName<DateTimePrecision>(precision)} is not convertible to a UCUM unit.")
+            };
+
+        public static string? ToUCUMUnit(this DateTimePrecision? precision)
+        {
+            if (precision == null)
+                return null;
+            else return ToUCUMUnit(precision.Value);
         }
     }
 

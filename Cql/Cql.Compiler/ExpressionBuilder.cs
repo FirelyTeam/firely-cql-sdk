@@ -2413,9 +2413,6 @@ namespace Hl7.Cql.Compiler
             var type = TypeResolver.ResolveType(lit.valueType.Name!)
                 ?? throw new InvalidOperationException($"Cannot resolve type for {lit.valueType}");
 
-            if (lit.value == "-9223372036854775808L")
-            {
-            }
             var (value, convertedType) = ConvertLiteral(lit, type);
             if (IsNullable(type))
             {

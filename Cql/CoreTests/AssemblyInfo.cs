@@ -5,4 +5,4 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-[assembly: TestDataSourceDiscovery(TestDataSourceDiscoveryOption.DuringExecution)]
+[assembly: TestDataSourceDiscovery(TestDataSourceDiscoveryOption.DuringDiscovery)]

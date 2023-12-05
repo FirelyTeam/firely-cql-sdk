@@ -74,13 +74,13 @@ namespace Hl7.Cql.Conversion
         {
             var function = ConversionFunctionFor(fromUnit, toUnit);
             if (function != null)
-                return function(value);
+                return Math.Round(function(value), 8);
             else
             {
                 // Fast built-in method failed, call the slower UCUM library
                 var q = new CqlQuantity(value, fromUnit);
                 if (q.TryConvert(toUnit, out var converted))
-                    return converted!.value!.Value;
+                    return Math.Round(converted!.value!.Value, 8);
                 else
                     throw new ArgumentException($"Conversion for {fromUnit} to {toUnit} is not provided.  You can add your own using ${nameof(UseConversion)}");
             }
@@ -121,15 +121,15 @@ namespace Hl7.Cql.Conversion
             var year = new Dictionary<string, Func<decimal, decimal>>
             {
                 {  UCUMUnits.Day, (decimal value) => value * ConversionConstants.DaysPerYear },
-                {  UCUMUnits.Month, (decimal value) => value / 12m },
+                {  UCUMUnits.Month, (decimal value) => value * 12m },
                 {  UCUMUnits.Week, (decimal value) => (value* ConversionConstants.DaysPerYear) * 0.14285714285m /* 1/7 */ },
             };
             Conversions.Add(UCUMUnits.Year, year);
 
             var month = new Dictionary<string, Func<decimal, decimal>>
             {
+                {  UCUMUnits.Year, (decimal value) => value / 12m },
                 {  UCUMUnits.Day, (decimal value) => value * ConversionConstants.DaysPerMonth },
-                {  UCUMUnits.Year, (decimal value) => value * 12m },
                 {  UCUMUnits.Week, (decimal value) => (value * ConversionConstants.DaysPerMonth) * 0.14285714285m /* 1/7 */ },
             };
             Conversions.Add(UCUMUnits.Month, month);

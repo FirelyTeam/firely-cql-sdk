@@ -1239,12 +1239,9 @@ namespace Hl7.Cql.Runtime
 
             var lowCompare = Compare(larger.low ?? Minimum<T>()!, smaller.low ?? Minimum<T>()!, precision);
             var highCompare = Compare(larger.high ?? Maximum<T>()!, smaller.high ?? Maximum<T>()!, precision);
-            //var smallerSelfCompare = rtx.Compare(smaller.Low ?? Minimum<T>(), smaller.High ?? Maximum<T>(), precision);
-
-            // From docs: If smaller is point interval, and exactly on the boundary of either side of larger, null
-            //if (smallerSelfCompare == 0 && (lowCompare == 0 || highCompare == 0)) return null;
-
-            if (lowCompare <= 0 && highCompare >= 0)
+            if (lowCompare == null || highCompare == null)
+                return null;
+            else if (lowCompare <= 0 && highCompare >= 0)
                 return true;
             else
                 return false;
@@ -1265,10 +1262,44 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null) return null;
 
-            var leftLow = left.low ?? Minimum<T>();
-            var leftHigh = left.high ?? Maximum<T>();
-            var rightLow = right.low ?? Minimum<T>();
-            var rightHigh = right.high ?? Maximum<T>();
+            T leftLow;
+            if (left.low == null)
+            {
+                if (left.lowClosed ?? false)
+                    leftLow = Minimum<T>();
+                else return null;
+            }
+            else leftLow = left.low;
+
+            T leftHigh;
+            if (left.high == null)
+            {
+                if (left.highClosed ?? false)
+                    leftHigh = Maximum<T>();
+                else return null;
+            }
+            else leftHigh = left.high;
+
+
+            T rightLow;
+            if (right.low == null)
+            {
+                if (right.lowClosed ?? false)
+                    rightLow = Minimum<T>();
+                else return null;
+            }
+            else rightLow = right.low;
+
+            T rightHigh;
+            if (right.high == null)
+            {
+                if (right.highClosed ?? false)
+                    rightHigh = Maximum<T>();
+                else return null;
+            }
+            else rightHigh = right.high;
+
+
             if (Compare(leftLow!, rightHigh!, null) > 0 || Compare(rightLow!, leftHigh!, null) > 0) return null;
             else
             {
@@ -1389,17 +1420,54 @@ namespace Hl7.Cql.Runtime
             if (left == null || right == null)
                 return null;
 
-            // updates to fix returning true because the left.low and right.high are null
-            if (left.high != null || right.low != null)
+            T leftLow;
+            if (left.low == null)
             {
-                if (Compare(left.high!, right.low!, precision) == 0
-                    || Compare(left.high!, predecessor(right.low)!, precision) == 0)
+                if (left.lowClosed ?? false)
+                    leftLow = Minimum<T>();
+                else return null;
+            }
+            else leftLow = left.low;
+
+            T leftHigh;
+            if (left.high == null)
+            {
+                if (left.highClosed ?? false)
+                    leftHigh = Maximum<T>();
+                else return null;
+            }
+            else leftHigh = left.high;
+
+
+            T rightLow;
+            if (right.low == null)
+            {
+                if (right.lowClosed ?? false)
+                    rightLow = Minimum<T>();
+                else return null;
+            }
+            else rightLow = right.low;
+
+            T rightHigh;
+            if (right.high == null)
+            {
+                if (right.highClosed ?? false)
+                    rightHigh = Maximum<T>();
+                else return null;
+            }
+            else rightHigh = right.high;
+
+            // updates to fix returning true because the left.low and right.high are null
+            if (leftHigh != null || rightLow != null)
+            {
+                if (Compare(leftHigh!, rightLow!, precision) == 0
+                    || Compare(leftHigh!, predecessor(rightLow)!, precision) == 0)
                     return true;
             }
-            if (left.low != null || right.high != null)
+            if (leftLow != null || rightHigh != null)
             {
-                if (Compare(left.low!, right.high!, precision) == 0
-                    || Compare(predecessor(left.low)!, right.high!, precision) == 0)
+                if (Compare(leftLow!, rightHigh!, precision) == 0
+                    || Compare(predecessor(leftLow)!, rightHigh!, precision) == 0)
                     return true;
             }
 
@@ -1480,23 +1548,30 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.low!, right.high!, precision) == 0)
+
+            T leftLow;
+            if (left.low == null)
+            {
+                if (left.lowClosed ?? false)
+                    leftLow = Minimum<T>();
+                else return null;
+            }
+            else leftLow = left.low;
+
+            T rightHigh;
+            if (right.high == null)
+            {
+                if (right.highClosed ?? false)
+                    rightHigh = Maximum<T>();
+                else return null;
+            }
+            else rightHigh = right.high;
+
+            if (Compare(leftLow!, rightHigh!, precision) == 0)
                 return true;
 
-            if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Compare(predecessor(left.low)!, right.high!, precision) == 0)
-                return true;
-
-            return false;
-        }
-
-        private bool? MeetsAfterIgnoringClosed<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision, Func<T, T> predecessor)
-        {
-            if (left == null || right == null)
-                return null;
-            if (Compare(left.low!, right.high!, precision) == 0)
-                return true;
-
-            if (Compare(predecessor(left.low)!, right.high!, precision) == 0)
+            if ((left.lowClosed ?? false) && (right.highClosed ?? false) 
+                && Compare(predecessor(leftLow)!, rightHigh!, precision) == 0)
                 return true;
 
             return false;
@@ -1586,10 +1661,30 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.high!, right.low!, precision) == 0)
+            
+            T leftHigh;
+            if (left.high == null)
+            {
+                if (left.highClosed ?? false)
+                    leftHigh = Maximum<T>();
+                else return null;
+            }
+            else leftHigh = left.high;
+
+            T rightLow;
+            if (right.low == null)
+            {
+                if (right.lowClosed ?? false)
+                    rightLow = Minimum<T>();
+                else return null;
+            }
+            else rightLow = right.low;
+
+            if (Compare(leftHigh!, rightLow!, precision) == 0)
                 return true;
 
-            if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Compare(left.high!, predecessor(right.low)!, precision) == 0)
+            if ((right.lowClosed ?? false) && (left.highClosed ?? false) 
+                && Compare(leftHigh!, predecessor(rightLow)!, precision) == 0)
                 return true;
 
             return false;
@@ -1966,11 +2061,9 @@ namespace Hl7.Cql.Runtime
 
         public bool? IntervalProperlyIncludedInInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string precision)
         {
-            if (left == null)
+            if (left == null || right == null)
                 return null;
-            if (right == null)
-                return false;
-
+            
             var min = Minimum<T>()!;
 
             var low = Compare(left!.low ?? min!, right.low ?? min, precision);
@@ -1990,9 +2083,6 @@ namespace Hl7.Cql.Runtime
         public bool? IntervalProperlyIncludesInterval<T>(CqlInterval<T>? left, CqlInterval<T>? right, string precision) =>
             IntervalProperlyIncludedInInterval(right, left, precision);
 
-
-
-
         public bool? ElementProperlyIncludedInInterval<T>(T left, CqlInterval<T>? right)
         {
             if (left == null || right == null || right.low == null || right.high == null)
@@ -2004,8 +2094,8 @@ namespace Hl7.Cql.Runtime
                 return false;
             if (high > 0)
                 return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
+            // interval is a unit interval containing only the point, or the element is equal to either end of the interval
+            if (low == 0 || high == 0)
                 return false;
             return true;
         }
@@ -2028,8 +2118,8 @@ namespace Hl7.Cql.Runtime
                 return false;
             if (high > 0)
                 return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
+            // interval is a unit interval containing only the point, or the element is equal to either end of the interval
+            if (low == 0 || high == 0)
                 return false;
             return true;
         }
@@ -2053,8 +2143,8 @@ namespace Hl7.Cql.Runtime
                 return false;
             if (high > 0)
                 return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
+            // interval is a unit interval containing only the point, or the element is equal to either end of the interval
+            if (low == 0 || high == 0)
                 return false;
             return true;
         }
@@ -2078,12 +2168,11 @@ namespace Hl7.Cql.Runtime
                 return false;
             if (high > 0)
                 return false;
-            // interval is a unit interval containing only the point
-            if (low == 0 && high == 0)
+            // interval is a unit interval containing only the point, or the element is equal to either end of the interval
+            if (low == 0 || high == 0)
                 return false;
             return true;
         }
-
 
         public bool? IntervalProperlyIncludesElement<T>(CqlInterval<T>? left, T right) =>
             ElementProperlyIncludedInInterval(right, left);
