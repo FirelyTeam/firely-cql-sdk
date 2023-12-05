@@ -666,8 +666,11 @@ namespace Hl7.Cql.Runtime
                         var next = listItem.Add(per);
 
                         var high = next!.Subtract(onePrior);
-                        var listInterval = new CqlInterval<CqlTime?>(listItem, high, true, true);
-                        expanded.Add(listInterval);
+                        if (Compare(high, highInterval, null) <= -1)
+                        {
+                            var listInterval = new CqlInterval<CqlTime?>(listItem, high, true, true);
+                            expanded.Add(listInterval);
+                        }
                         listItem = next;
                     }
                     while (Compare(listItem!, highInterval!, null) <= 0);
@@ -711,11 +714,12 @@ namespace Hl7.Cql.Runtime
                     var listItem = interval.low!.Value;
                     do
                     {
-
-
                         var high = decimal.Add(listItem, per.value ?? 1);
-                        var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
-                        expanded.Add(listInterval);
+                        if (Compare(Predecessor(high), interval.high, null) <= 0)
+                        {
+                            var listInterval = new CqlInterval<decimal?>(listItem, Predecessor(high), true, true);
+                            expanded.Add(listInterval);
+                        }
                         listItem = high;
                     }
                     while (Compare(listItem, interval.high!, null) <= 0);
@@ -761,9 +765,11 @@ namespace Hl7.Cql.Runtime
                     {
                         var intQuantity = decimal.ToInt32(per.value ?? 1);
                         var high = listItem + intQuantity;
-                        var listInterval = new CqlInterval<int?>(listItem, Predecessor(high), true, true);
-                        expanded.Add(listInterval);
-
+                        if (Compare(Predecessor(high), interval.high, null) <= 0)
+                        {
+                            var listInterval = new CqlInterval<int?>(listItem, Predecessor(high), true, true);
+                            expanded.Add(listInterval);
+                        }
                         listItem = high;
                     }
                     while (Compare(listItem, interval.high!, null) <= 0);
@@ -809,9 +815,11 @@ namespace Hl7.Cql.Runtime
                     {
                         var intQuantity = decimal.ToInt64(per.value ?? 1);
                         var high = listItem + intQuantity;
-                        var listInterval = new CqlInterval<long?>(listItem, Predecessor(high), true, true);
-                        expanded.Add(listInterval);
-
+                        if (Compare(Predecessor(high), interval.high, null) <= 0)
+                        {
+                            var listInterval = new CqlInterval<long?>(listItem, Predecessor(high), true, true);
+                            expanded.Add(listInterval);
+                        }
                         listItem = high;
                     }
                     while (Compare(listItem, interval.high!, null) <= 0);
@@ -924,7 +932,10 @@ namespace Hl7.Cql.Runtime
                 var found = false;
                 foreach (var t in left)
                 {
-                    if (EqualityComparer.Equals(element!, t!))
+                    var result = Compare(element, t, null);
+                    if (result == null)
+                        return null; // if any comparison is null, the result should be null
+                    else if (result == 0)
                     {
                         found = true;
                         break;
@@ -1039,7 +1050,8 @@ namespace Hl7.Cql.Runtime
 
         public int? ListLength<T>(IEnumerable<T> list)
         {
-            if (list == null) return null;
+            if (list == null)
+                return 0; // If the argument is null, the result is 0.
             if (list is IList<T> l)
                 return l.Count;
             return list.Count();

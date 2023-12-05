@@ -57,7 +57,7 @@ namespace Hl7.Cql.Primitives
                 unitString = cqlUnit;
             }
 
-            return string.Create(CultureInfo.InvariantCulture, $"{value}{unitString}");
+            return string.Create(CultureInfo.InvariantCulture, $"{value} '{unitString}'");
         }
 
         /// <summary>

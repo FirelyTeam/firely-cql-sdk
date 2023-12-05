@@ -200,13 +200,14 @@ namespace Hl7.Cql.Primitives
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new date time with <paramref name="quantity"/> subtracted from it.</returns>
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
-        public CqlDateTime? Subtract(CqlQuantity quantity)
+        public CqlDateTime? Subtract(CqlQuantity? quantity)
         {
             if (quantity == null || quantity.value == null || quantity.unit == null)
                 return null;
 
             var value = -1 * quantity!.value.Value;
             var dto = Value.DateTimeOffset;
+
             switch (quantity.unit[0])
             {
                 case 'a':

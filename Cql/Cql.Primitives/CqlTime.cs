@@ -95,7 +95,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="quantity">The quantity to add.</param>
         /// <returns>A new time with <paramref name="quantity"/> added to it.</returns>
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
-        public CqlTime? Add(CqlQuantity quantity)
+        public CqlTime? Add(CqlQuantity? quantity)
         {
             if (quantity == null || quantity.value == null || quantity.unit == null)
                 return null;
@@ -145,7 +145,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="quantity">The quantity to subtract.</param>
         /// <returns>A new time with <paramref name="quantity"/> subtracted from it.</returns>
         /// <exception cref="ArgumentException">If the quantity is not expressed in supported units, or an overflow occurs.</exception>
-        public CqlTime? Subtract(CqlQuantity quantity)
+        public CqlTime? Subtract(CqlQuantity? quantity)
         {
             if (quantity == null || quantity.value == null || quantity.unit == null)
                 return null;

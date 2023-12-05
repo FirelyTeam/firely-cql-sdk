@@ -479,7 +479,7 @@ namespace Hl7.Cql.Runtime
             else if (left.value == null || right.value == null)
                 return null;
             else if (left.unit != "1" && right.unit != "1")
-                throw new NotSupportedException("Unit arithmetic is not supported.");
+               throw new NotSupportedException("Unit arithmetic is not supported.");
             else
                 return new CqlQuantity(Multiply(left.value, right.value), "1");
         }
@@ -672,7 +672,7 @@ namespace Hl7.Cql.Runtime
         public decimal? Round(decimal? argument, int? precision)
         {
             if (argument == null) return null;
-            else return Math.Round(argument.Value, precision ?? 0, MidpointRounding.AwayFromZero);
+            else return Math.Round(argument.Value, precision ?? 0);
         }
 
         #endregion

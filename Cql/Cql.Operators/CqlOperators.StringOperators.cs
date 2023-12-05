@@ -74,7 +74,7 @@ namespace Hl7.Cql.Runtime
         public int? StringLength(string argument)
         {
             if (argument == null)
-                return 0;
+                return null;
             else
                 return argument.Length;
         }
@@ -121,7 +121,7 @@ namespace Hl7.Cql.Runtime
         {
             if (source == null || pattern == null || substitution == null)
                 return null;
-            var result = Regex.Replace(source, pattern, substitution);
+            var result = Regex.Replace(source, pattern, Regex.Unescape(substitution));
             return result;
         }
         #endregion

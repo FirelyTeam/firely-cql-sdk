@@ -22,20 +22,47 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.Add(right);
+            else
+            {
+                var rightPrecision = (right.unit ?? "1").ToDateTimePrecision();
+                if (rightPrecision > left.Precision)
+                {
+                    var leftUnit = left.Precision.ToUCUMUnit();
+                    right = ConvertQuantity(right, leftUnit);
+                }
+                return left.Add(right);
+            }
         }
         public CqlDateTime? Add(CqlDateTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Add(right);
+            else
+            {
+                var rightPrecision = (right.unit ?? "1").ToDateTimePrecision();
+                if (rightPrecision > left.Precision)
+                {
+                    var leftUnit = left.Precision.ToUCUMUnit();
+                    right = ConvertQuantity(right, leftUnit);
+                }
+                return left.Add(right);
+            }
         }
 
         public CqlTime? Add(CqlTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Add(right);
+            else
+            {
+                var rightPrecision = (right.unit ?? "1").ToDateTimePrecision();
+                if (rightPrecision > left.Precision)
+                {
+                    var leftUnit = left.Precision.ToUCUMUnit();
+                    right = ConvertQuantity(right, leftUnit);
+                }
+                return left.Add(right);
+            }
         }
 
         #endregion
@@ -204,19 +231,37 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) >= 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result >= 0;
+            }
         }
         public bool? SameOrAfter(CqlDateTime? left, CqlDateTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) >= 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result >= 0;
+            }
         }
         public bool? SameOrAfter(CqlTime? left, CqlTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) >= 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result >= 0;
+            }
         }
 
         #endregion
@@ -226,19 +271,37 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) <= 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result <= 0;
+            }
         }
         public bool? SameOrBefore(CqlDateTime? left, CqlDateTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) <= 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result <= 0;
+            }
         }
         public bool? SameOrBefore(CqlTime? left, CqlTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) <= 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result <= 0;
+            }
         }
         #endregion
 
@@ -247,19 +310,38 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) == 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result == 0;
+            }
+
         }
         public bool? SameAs(CqlDateTime? left, CqlDateTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) == 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result == 0;
+            }
         }
         public bool? SameAs(CqlTime? left, CqlTime? right, string? precision)
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) == 0;
+            else
+            {
+                var result = left.CompareTo(right, precision);
+                if (result == null)
+                    return null;
+                else return result == 0;
+            }
         }
 
         #endregion
@@ -270,20 +352,50 @@ namespace Hl7.Cql.Runtime
         {
             if (left == null || right == null)
                 return null;
-            else return left.Subtract(right);
+            else
+            {
+                //For partial date / time values where the time-valued quantity is more precise than the partial date/ time,
+                //the operation is performed by converting the time - based quantity to the most precise value specified in
+                //the first argument(truncating any resulting decimal portion) and then subtracting it from the first argument.
+                var rightPrecision = (right.unit ?? "1").ToDateTimePrecision();
+                if (rightPrecision > left.Precision)
+                {
+                    var leftUnit = left.Precision.ToUCUMUnit();
+                    right = ConvertQuantity(right, leftUnit);
+                }
+                return left.Subtract(right);
+            }
         }
         public CqlDateTime? Subtract(CqlDateTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Subtract(right);
+            else
+            {
+                var rightPrecision = (right.unit ?? "1").ToDateTimePrecision();
+                if (rightPrecision > left.Precision)
+                {
+                    var leftUnit = left.Precision.ToUCUMUnit();
+                    right = ConvertQuantity(right, leftUnit);
+                }
+                return left.Subtract(right);
+            }
         }
 
         public CqlTime? Subtract(CqlTime? left, CqlQuantity? right)
         {
             if (left == null || right == null)
                 return null;
-            else return left.Subtract(right);
+            else
+            {
+                var rightPrecision = (right.unit ?? "1").ToDateTimePrecision();
+                if (rightPrecision > left.Precision)
+                {
+                    var leftUnit = left.Precision.ToUCUMUnit();
+                    right = ConvertQuantity(right, leftUnit);
+                }
+                return left.Subtract(right);
+            }
         }
 
         #endregion
