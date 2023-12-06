@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Runtime;
 using System;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
@@ -56,7 +57,10 @@ namespace Hl7.Cql.Compiler
         public override Expression Reduce()
         {
             Expression[] indices;
-            if (RetrieveContextParameter != null)
+            var dtArgs = DefinitionType.GenericTypeArguments;
+            var lastInputParameterType = dtArgs[^2]; // ^1 is the return type of the func
+            if (RetrieveContextParameter != null &&
+                 lastInputParameterType == RetrieveContextParameter.Type)
             {
                 indices = new Expression[]
                 {
@@ -64,6 +68,10 @@ namespace Hl7.Cql.Compiler
                     Constant(DefinitionName),
                     NewArrayInit(typeof(Type), new[] { Constant(RetrieveContextParameter.Type) }),
                 };
+                var index = MakeIndex(Definitions, itemProperty, indices);
+                var asFunc = TypeAs(index, DefinitionType);
+                var invoke = Invoke(asFunc, CqlContextParameter, RetrieveContextParameter!);
+                return invoke;
             }
             else
             {
@@ -73,14 +81,11 @@ namespace Hl7.Cql.Compiler
                     Constant(DefinitionName),
                     NewArrayInit(typeof(Type))
                 };
+                var index = MakeIndex(Definitions, itemProperty, indices);
+                var asFunc = TypeAs(index, DefinitionType);
+                var invoke = Invoke(asFunc, CqlContextParameter);
+                return invoke;
             }
-
-            var index = MakeIndex(Definitions, itemProperty, indices);
-            var asFunc = TypeAs(index, DefinitionType);
-            var invoke = RetrieveContextParameter == null
-                        ? Invoke(asFunc, CqlContextParameter)
-                        : Invoke(asFunc, CqlContextParameter, RetrieveContextParameter!);
-            return invoke;
         }
 
         protected override Expression VisitChildren(ExpressionVisitor visitor) => this;

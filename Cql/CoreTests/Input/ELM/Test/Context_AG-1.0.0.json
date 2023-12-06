@@ -245,43 +245,43 @@
             "source": {
               "type": "Query",
 
-              "source": [
-                {
-                  "type": "AliasedQuerySource",
+"source": [
+  {
+    "type": "AliasedQuerySource",
 
-                  "expression": {
-                    "type": "ExpressionRef",
+    "expression": {
+      "type": "ExpressionRef",
 
-                    "resultTypeSpecifier": {
-                      "type": "ListTypeSpecifier",
+      "resultTypeSpecifier": {
+        "type": "ListTypeSpecifier",
 
-                      "elementType": {
-                        "type": "NamedTypeSpecifier",
+        "elementType": {
+          "type": "NamedTypeSpecifier",
 
-                        "name": "{urn:hl7-org:elm-types:r1}Boolean"
-                      }
-                    },
+          "name": "{urn:hl7-org:elm-types:r1}Boolean"
+        }
+      },
 
-                    "locator": "22:9-22:31",
+      "locator": "22:9-22:31",
 
-                    "name": "In Initial Population"
-                  },
+      "name": "In Initial Population"
+    },
 
-                  "resultTypeSpecifier": {
-                    "type": "ListTypeSpecifier",
+    "resultTypeSpecifier": {
+      "type": "ListTypeSpecifier",
 
-                    "elementType": {
-                      "type": "NamedTypeSpecifier",
+      "elementType": {
+        "type": "NamedTypeSpecifier",
 
-                      "name": "{urn:hl7-org:elm-types:r1}Boolean"
-                    }
-                  },
+        "name": "{urn:hl7-org:elm-types:r1}Boolean"
+      }
+    },
 
-                  "locator": "22:9-22:34",
+    "locator": "22:9-22:34",
 
-                  "alias": "IP"
-                }
-              ],
+    "alias": "IP"
+  }
+],
 
               "relationship": [],
 
