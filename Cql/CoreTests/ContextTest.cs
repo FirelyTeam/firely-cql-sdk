@@ -149,7 +149,7 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Context_Unfiltered()
+        public void Context_Unfiltered_to_Patient()
         {
             var bundle = new Bundle();
             var patients = new[] {
@@ -193,7 +193,7 @@ namespace CoreTests
         }
 
         [TestMethod]
-        public void Context_Unfiltered_List()
+        public void Context_Unfiltered_to_Patient_List()
         {
             var bundle = new Bundle();
             var patients = new[] {
