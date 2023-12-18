@@ -377,7 +377,7 @@ namespace Hl7.Cql.Compiler
                                     if (!string.IsNullOrWhiteSpace(name))
                                     {
                                         var value = tag.value ?? string.Empty;
-                                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes ?? Array.Empty<Type>(), name, value);
+                                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes, name, value);
 
                                     }
                                 }
