@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.Runtime
@@ -86,7 +87,7 @@ namespace Hl7.Cql.Runtime
             if (argument == null)
                 return null;
             else
-                return argument.ToLower();
+                return argument.ToLower(culture: CultureInfo.InvariantCulture);
         }
 
         #endregion
@@ -178,7 +179,7 @@ namespace Hl7.Cql.Runtime
         public string? Upper(string argument)
         {
             if (argument == null) return null;
-            else return argument.ToUpper();
+            else return argument.ToUpper(CultureInfo.InvariantCulture);
         }
         #endregion
     }

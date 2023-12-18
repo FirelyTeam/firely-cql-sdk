@@ -190,7 +190,7 @@ namespace Hl7.Cql.Compiler
 
                 if (Library.codeSystems != null)
                 {
-                    foreach(var codeSystem in Library.codeSystems)
+                    foreach (var codeSystem in Library.codeSystems)
                     {
                         if (codesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
                         {
@@ -377,7 +377,7 @@ namespace Hl7.Cql.Compiler
                                     if (!string.IsNullOrWhiteSpace(name))
                                     {
                                         var value = tag.value ?? string.Empty;
-                                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes ?? new Type[0], name, value);
+                                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes, name, value);
 
                                     }
                                 }
@@ -1617,7 +1617,7 @@ namespace Hl7.Cql.Compiler
             }
             else throw new InvalidOperationException($"CodeSystemRef {cr.name} is null");
         }
-        
+
 
         protected Expression Instance(Instance ine, ExpressionBuilderContext ctx)
         {
