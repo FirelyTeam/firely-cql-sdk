@@ -87,7 +87,7 @@ namespace Hl7.Cql.Runtime
             if (argument == null)
                 return null;
             else
-                return argument.ToLower(culture: CultureInfo.InvariantCulture);
+                return argument.ToLower(CultureInfo.InvariantCulture);
         }
 
         #endregion

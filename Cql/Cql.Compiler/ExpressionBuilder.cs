@@ -382,7 +382,7 @@ namespace Hl7.Cql.Compiler
                                     }
                                 }
                             }
-                            definitions.Add(ThisLibraryKey, def.name, functionParameterTypes, lambda);
+                            definitions.Add(ThisLibraryKey, def.name, functionParameterTypes ?? Array.Empty<Type>(), lambda);
                         }
                     }
                     else throw new InvalidOperationException($"Definition {def.name} does not have an expression property");
