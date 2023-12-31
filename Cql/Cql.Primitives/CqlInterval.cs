@@ -119,7 +119,5 @@ namespace Hl7.Cql.Primitives
             }
             return false;
         }
-
     }
-
 }

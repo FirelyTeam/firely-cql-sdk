@@ -16,6 +16,7 @@ Hl7.Cql.Operators.ICqlOperators.Add(Hl7.Cql.Primitives.CqlQuantity? left, Hl7.Cq
 Hl7.Cql.Operators.ICqlOperators.Add(Hl7.Cql.Primitives.CqlTime? left, Hl7.Cql.Primitives.CqlQuantity? right) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Operators.ICqlOperators.Add(int? left, int? right) -> int?
 Hl7.Cql.Operators.ICqlOperators.Add(long? left, long? right) -> long?
+Hl7.Cql.Operators.ICqlOperators.Add<T>(T? left, T? right) -> T?
 Hl7.Cql.Operators.ICqlOperators.After(object? left, object? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Age(string! precision) -> int?
 Hl7.Cql.Operators.ICqlOperators.AgeAt(Hl7.Cql.Primitives.CqlDate? asOf, string! precision) -> int?

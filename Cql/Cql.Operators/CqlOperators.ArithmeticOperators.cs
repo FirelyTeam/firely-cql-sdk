@@ -56,6 +56,13 @@ namespace Hl7.Cql.Runtime
 
         #region Add
 
+        public T? Add<T>(T? left, T? right) where T : class, IAddable<T>
+        {
+            if (left == null || right == null)
+                return null;
+            else return left.Add(right);
+        }
+
         public int? Add(int? left, int? right)
         {
             if (left == null || right == null) return null;

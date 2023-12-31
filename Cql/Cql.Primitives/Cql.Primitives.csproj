@@ -16,4 +16,8 @@
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23525.2" PrivateAssets="All" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+	
 </Project>

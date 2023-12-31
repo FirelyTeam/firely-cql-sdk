@@ -30,6 +30,9 @@ namespace Hl7.Cql.Operators
         decimal? Abs(decimal? argument);
         int? Abs(int? argument);
         long? Abs(long? argument);
+
+        T? Add<T>(T? left, T? right) where T : class, IAddable<T>;
+
         CqlDate? Add(CqlDate? left, CqlQuantity? right);
         CqlDateTime? Add(CqlDateTime? left, CqlQuantity? right);
         CqlQuantity? Add(CqlQuantity? left, CqlQuantity? right);

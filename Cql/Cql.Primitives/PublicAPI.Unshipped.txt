@@ -45,6 +45,14 @@ Hl7.Cql.Primitives.CqlDateTime.Successor() -> Hl7.Cql.Primitives.CqlDateTime!
 Hl7.Cql.Primitives.CqlDateTime.TimeOnly.get -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Primitives.CqlDateTime.Value.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
 Hl7.Cql.Primitives.CqlDateTime.WholeCalendarPeriodsBetween(Hl7.Cql.Primitives.CqlDateTime! high, string! precision) -> int?
+Hl7.Cql.Primitives.CqlInteger
+Hl7.Cql.Primitives.CqlInteger.Add(Hl7.Cql.Primitives.CqlInteger? value) -> Hl7.Cql.Primitives.CqlInteger?
+Hl7.Cql.Primitives.CqlInteger.CqlInteger(int? lowUncertainty, int? highUncertainty) -> void
+Hl7.Cql.Primitives.CqlInteger.CqlInteger(int? value) -> void
+Hl7.Cql.Primitives.CqlInteger.IsUncertain.get -> bool
+Hl7.Cql.Primitives.CqlInteger.Subtract(Hl7.Cql.Primitives.CqlInteger? value) -> Hl7.Cql.Primitives.CqlInteger?
+Hl7.Cql.Primitives.CqlInteger.Uncertainty.get -> Hl7.Cql.Primitives.CqlInterval<int?>?
+Hl7.Cql.Primitives.CqlInteger.Value.get -> int?
 Hl7.Cql.Primitives.CqlInterval<T>
 Hl7.Cql.Primitives.CqlInterval<T>.CqlInterval(T low, T high, bool lowClosed, bool highClosed) -> void
 Hl7.Cql.Primitives.CqlInterval<T>.CqlInterval(T low, T high, bool? lowClosed, bool? highClosed) -> void
@@ -107,6 +115,12 @@ Hl7.Cql.Primitives.CqlVocabulary
 Hl7.Cql.Primitives.CqlVocabulary.CqlVocabulary(string? id, string? version) -> void
 Hl7.Cql.Primitives.CqlVocabulary.id.get -> string?
 Hl7.Cql.Primitives.CqlVocabulary.version.get -> string?
+Hl7.Cql.Primitives.IAddable<T>
+Hl7.Cql.Primitives.IAddable<T>.Add(T? value) -> T?
+Hl7.Cql.Primitives.IAddable<T>.Subtract(T? value) -> T?
+Hl7.Cql.Primitives.IUncertain<T>
+Hl7.Cql.Primitives.IUncertain<T>.IsUncertain.get -> bool
+Hl7.Cql.Primitives.IUncertain<T>.Uncertainty.get -> Hl7.Cql.Primitives.CqlInterval<T?>?
 Hl7.Cql.Primitives.TupleBaseType
 Hl7.Cql.Primitives.TupleBaseType.TupleBaseType() -> void
 override Hl7.Cql.Primitives.CqlDate.Equals(object? obj) -> bool
@@ -127,6 +141,9 @@ static Hl7.Cql.Primitives.CqlDate.TryParse(string! s, out Hl7.Cql.Primitives.Cql
 static Hl7.Cql.Primitives.CqlDateTime.implicit operator Hl7.Cql.Iso8601.DateTimeIso8601!(Hl7.Cql.Primitives.CqlDateTime! dateTime) -> Hl7.Cql.Iso8601.DateTimeIso8601!
 static Hl7.Cql.Primitives.CqlDateTime.implicit operator Hl7.Cql.Primitives.CqlDateTime!(Hl7.Cql.Iso8601.DateTimeIso8601! dateTime) -> Hl7.Cql.Primitives.CqlDateTime!
 static Hl7.Cql.Primitives.CqlDateTime.TryParse(string! s, out Hl7.Cql.Primitives.CqlDateTime? cqlDateTime) -> bool
+static Hl7.Cql.Primitives.CqlInteger.implicit operator Hl7.Cql.Primitives.CqlInteger!(int? value) -> Hl7.Cql.Primitives.CqlInteger!
+static Hl7.Cql.Primitives.CqlInteger.operator +(Hl7.Cql.Primitives.CqlInteger? x, Hl7.Cql.Primitives.CqlInteger? y) -> Hl7.Cql.Primitives.CqlInteger?
+static Hl7.Cql.Primitives.CqlInteger.operator -(Hl7.Cql.Primitives.CqlInteger? x, Hl7.Cql.Primitives.CqlInteger? y) -> Hl7.Cql.Primitives.CqlInteger?
 static Hl7.Cql.Primitives.CqlQuantity.TryParse(string! s, out Hl7.Cql.Primitives.CqlQuantity? q) -> bool
 static Hl7.Cql.Primitives.CqlRatio.TryParse(string! s, out Hl7.Cql.Primitives.CqlRatio? value) -> bool?
 static Hl7.Cql.Primitives.CqlTime.TryParse(string! s, out Hl7.Cql.Primitives.CqlTime? time) -> bool

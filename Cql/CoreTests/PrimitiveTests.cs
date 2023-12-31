@@ -3547,5 +3547,213 @@ namespace CoreTests
             Assert.IsNotNull(meets);
             Assert.IsFalse(meets ?? false);
         }
+
+        [TestMethod]
+        public void CqlInteger_Add()
+        {
+            CqlInteger x = 2;
+            CqlInteger y = 3;
+
+            var sum = x.Add(y);
+            Assert.IsNotNull(sum);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.AreEqual(5, sum.Value);
+            Assert.IsNull(sum.Uncertainty);
+            
+            sum = x + y;
+            Assert.IsNotNull(sum);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.AreEqual(5, sum.Value);
+            Assert.IsNull(sum.Uncertainty);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Add_Uncertain()
+        {
+            CqlInteger x = 2;
+            var y = new CqlInteger(3, 4);
+
+            var sum = x.Add(y);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+
+            sum = y.Add(x);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+
+            sum = x + y;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+
+            sum = y + x;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Add_Uncertain_Null_High()
+        {
+            CqlInteger x = 2;
+            var y = new CqlInteger(3, null);
+
+            var sum = x.Add(y);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+
+            sum = y.Add(x);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+
+            sum = x + y;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+
+            sum = y + x;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.AreEqual(5, sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Add_Uncertain_Null_Low()
+        {
+            CqlInteger x = 2;
+            var y = new CqlInteger(null, 4);
+
+            var sum = x.Add(y);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+
+            sum = y.Add(x);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+
+            sum = x + y;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+
+            sum = y + x;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.AreEqual(6, sum.Uncertainty.high);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Add_Uncertain_Null_Both()
+        {
+            CqlInteger x = 2;
+            var y = CqlInteger.PointNullUncertainty;
+
+            var sum = x.Add(y);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+
+            sum = y.Add(x);
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+
+            sum = x + y;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+
+            sum = y + x;
+            Assert.IsNotNull(sum);
+            Assert.IsTrue(sum.IsUncertain);
+            Assert.IsNotNull(sum.Uncertainty);
+            Assert.IsTrue(sum.Uncertainty.lowClosed);
+            Assert.IsNull(sum.Uncertainty.low);
+            Assert.IsTrue(sum.Uncertainty.highClosed);
+            Assert.IsNull(sum.Uncertainty.high);
+
+        }
+
+        [TestMethod]
+        public void CqlInteger_Add_Null_Operands()
+        {
+            CqlInteger x = 2;
+            CqlInteger y = null;
+
+            var sum = x.Add(y);
+            Assert.IsNull(sum);
+
+            sum = x + y;
+            Assert.IsNull(sum);
+
+            sum = y + x;
+            Assert.IsNull(sum);
+        }
     }
 }
