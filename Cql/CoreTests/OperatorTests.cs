@@ -125,21 +125,15 @@ namespace CoreTests
 
             var sum = Operators.Add(x, y);;
             Assert.IsNotNull(sum);
-            Assert.IsTrue(sum.IsUncertain);
-            Assert.IsNotNull(sum.Uncertainty);
-            Assert.IsTrue(sum.Uncertainty.lowClosed);
-            Assert.IsNull(sum.Uncertainty.low);
-            Assert.IsTrue(sum.Uncertainty.highClosed);
-            Assert.IsNull(sum.Uncertainty.high);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.IsNull(sum.Uncertainty);
+            Assert.IsNull(sum.Value);
 
             sum = Operators.Add(y,x);
             Assert.IsNotNull(sum);
-            Assert.IsTrue(sum.IsUncertain);
-            Assert.IsNotNull(sum.Uncertainty);
-            Assert.IsTrue(sum.Uncertainty.lowClosed);
-            Assert.IsNull(sum.Uncertainty.low);
-            Assert.IsTrue(sum.Uncertainty.highClosed);
-            Assert.IsNull(sum.Uncertainty.high);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.IsNull(sum.Uncertainty);
+            Assert.IsNull(sum.Value);
         }
 
         [TestMethod]

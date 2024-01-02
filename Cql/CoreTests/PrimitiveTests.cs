@@ -3704,39 +3704,27 @@ namespace CoreTests
 
             var sum = x.Add(y);
             Assert.IsNotNull(sum);
-            Assert.IsTrue(sum.IsUncertain);
-            Assert.IsNotNull(sum.Uncertainty);
-            Assert.IsTrue(sum.Uncertainty.lowClosed);
-            Assert.IsNull(sum.Uncertainty.low);
-            Assert.IsTrue(sum.Uncertainty.highClosed);
-            Assert.IsNull(sum.Uncertainty.high);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.IsNull(sum.Uncertainty);
+            Assert.IsNull(sum.Value);
 
             sum = y.Add(x);
             Assert.IsNotNull(sum);
-            Assert.IsTrue(sum.IsUncertain);
-            Assert.IsNotNull(sum.Uncertainty);
-            Assert.IsTrue(sum.Uncertainty.lowClosed);
-            Assert.IsNull(sum.Uncertainty.low);
-            Assert.IsTrue(sum.Uncertainty.highClosed);
-            Assert.IsNull(sum.Uncertainty.high);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.IsNull(sum.Uncertainty);
+            Assert.IsNull(sum.Value);
 
             sum = x + y;
             Assert.IsNotNull(sum);
-            Assert.IsTrue(sum.IsUncertain);
-            Assert.IsNotNull(sum.Uncertainty);
-            Assert.IsTrue(sum.Uncertainty.lowClosed);
-            Assert.IsNull(sum.Uncertainty.low);
-            Assert.IsTrue(sum.Uncertainty.highClosed);
-            Assert.IsNull(sum.Uncertainty.high);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.IsNull(sum.Uncertainty);
+            Assert.IsNull(sum.Value);
 
             sum = y + x;
             Assert.IsNotNull(sum);
-            Assert.IsTrue(sum.IsUncertain);
-            Assert.IsNotNull(sum.Uncertainty);
-            Assert.IsTrue(sum.Uncertainty.lowClosed);
-            Assert.IsNull(sum.Uncertainty.low);
-            Assert.IsTrue(sum.Uncertainty.highClosed);
-            Assert.IsNull(sum.Uncertainty.high);
+            Assert.IsFalse(sum.IsUncertain);
+            Assert.IsNull(sum.Uncertainty);
+            Assert.IsNull(sum.Value);
 
         }
 
@@ -3755,5 +3743,90 @@ namespace CoreTests
             sum = y + x;
             Assert.IsNull(sum);
         }
+
+        [TestMethod]
+        public void CqlInteger_Compare_Both_Uncertain()
+        {
+            CqlInteger a = new CqlInteger(2, 5);
+            CqlInteger b = new CqlInteger(1, 4);
+            var result = a.CompareTo(b);
+            Assert.IsTrue(result > 0);
+            result = b.CompareTo(a);
+            Assert.IsTrue(result < 0);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Compare_One_Uncertain_In_Range()
+        {
+            CqlInteger a = new CqlInteger(2, 5);
+            CqlInteger b = new CqlInteger(3);
+            var result = a.CompareTo(b);
+            Assert.IsNull(result);
+            result = b.CompareTo(a);
+            Assert.IsNull(result);
+
+            b = new CqlInteger(2);
+            result = a.CompareTo(b);
+            Assert.IsNull(result);
+            result = b.CompareTo(a);
+            Assert.IsNull(result);
+
+            b = new CqlInteger(5);
+            result = a.CompareTo(b);
+            Assert.IsNull(result);
+            result = b.CompareTo(a);
+            Assert.IsNull(result);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Compare_One_Uncertain_Before()
+        {
+            CqlInteger a = new CqlInteger(2, 5);
+            CqlInteger b = new CqlInteger(1);
+            var result = a.CompareTo(b);
+            Assert.IsTrue(result > 0);
+            result = b.CompareTo(a);
+            Assert.IsTrue(result < 0);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Compare_One_Uncertain_After()
+        {
+            CqlInteger a = new CqlInteger(2, 5);
+            CqlInteger b = new CqlInteger(6);
+            var result = a.CompareTo(b);
+            Assert.IsTrue(result < 0);
+            result = b.CompareTo(a);
+            Assert.IsTrue(result > 0);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Compare_Both_Certain()
+        {
+            CqlInteger a = new CqlInteger(5);
+            CqlInteger b = new CqlInteger(6);
+            var result = a.CompareTo(b);
+            Assert.IsTrue(result < 0);
+            result = b.CompareTo(a);
+            Assert.IsTrue(result > 0);
+        }
+
+        [TestMethod]
+        public void CqlInteger_Compare_Null()
+        {
+            CqlInteger a = new CqlInteger(null);
+            CqlInteger b = new CqlInteger(6);
+            var result = a.CompareTo(b);
+            Assert.IsNull(result);
+            result = b.CompareTo(a);
+            Assert.IsNull(result);
+
+            b = new CqlInteger(null);
+            result = a.CompareTo(b);
+            Assert.IsNull(result);
+            result = b.CompareTo(a);
+            Assert.IsNull(result);
+        }
+
     }
 }

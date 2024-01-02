@@ -47,6 +47,7 @@ Hl7.Cql.Primitives.CqlDateTime.Value.get -> Hl7.Cql.Iso8601.DateTimeIso8601!
 Hl7.Cql.Primitives.CqlDateTime.WholeCalendarPeriodsBetween(Hl7.Cql.Primitives.CqlDateTime! high, string! precision) -> int?
 Hl7.Cql.Primitives.CqlInteger
 Hl7.Cql.Primitives.CqlInteger.Add(Hl7.Cql.Primitives.CqlInteger? value) -> Hl7.Cql.Primitives.CqlInteger?
+Hl7.Cql.Primitives.CqlInteger.CompareTo(Hl7.Cql.Primitives.CqlInteger? other, string? precision = null) -> int?
 Hl7.Cql.Primitives.CqlInteger.CqlInteger(int? lowUncertainty, int? highUncertainty) -> void
 Hl7.Cql.Primitives.CqlInteger.CqlInteger(int? value) -> void
 Hl7.Cql.Primitives.CqlInteger.IsUncertain.get -> bool
