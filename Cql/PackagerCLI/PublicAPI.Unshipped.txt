@@ -1,0 +1,4 @@
+﻿#nullable enable
+Hl7.Cql.Packager.Program
+static Hl7.Cql.Packager.Program.Main(string![]! args) -> int
+static Hl7.Cql.Packager.Program.Package(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.IO.DirectoryInfo? csDir, System.IO.DirectoryInfo? fhirDir) -> void

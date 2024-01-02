@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hl7.Cql.CqlToElm
+﻿namespace Hl7.Cql.CqlToElm
 {
     /// <summary>
     /// Defines options and their default values used while converting CQL to ELM.

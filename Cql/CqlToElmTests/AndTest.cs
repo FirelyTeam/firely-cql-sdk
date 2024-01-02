@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private True_And_False: true and false
@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_True()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private True_And_True: true and true
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_And_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private False_And_False: false and false
@@ -183,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private True_And_Null: true and null
@@ -238,7 +238,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_And_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private Null_And_False: null and false
@@ -294,7 +294,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_And_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private Null_And_Null: null and null
@@ -349,11 +349,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_1()
         {
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library AndTest version '1.0.0'
 
                 define private True_And_1: true and 1
-            ").ShouldReportError("Cannot resolve*Integer*Boolean.");
+            ", "Cannot resolve*Integer*Boolean.");
         }
     }
 }

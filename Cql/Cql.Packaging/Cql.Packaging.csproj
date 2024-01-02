@@ -22,7 +22,6 @@
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23472.1" PrivateAssets="All" />
 	</ItemGroup>
 
 </Project>

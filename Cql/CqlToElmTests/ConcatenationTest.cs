@@ -1,15 +1,7 @@
 ﻿using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Primitives;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -25,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_String_To_String()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & 'world'
@@ -86,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Three_Strings()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & (' ' & 'world')

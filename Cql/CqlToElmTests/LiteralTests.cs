@@ -2,13 +2,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
 
-    public class LiteralTests
+    public class LiteralTests : Base
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -24,22 +23,21 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddLogging(builder => builder
                     .AddConsole()
                     .ThrowOn(LogLevel.Error))
+                .AddScoped<InvocationBuilder>()
                 .AddScoped<CqlToElmConverter>();
             Services = services.BuildServiceProvider();
         }
 
-        private static CqlToElmConverter DefaultConverter => Services.GetRequiredService<CqlToElmConverter>();
-
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        private static IServiceProvider Services;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-
-        private const string SystemUri = "urn:hl7-org:elm-types:r1";
+        protected override Library ConvertLibrary(string cql)
+        {
+            var converter = Services.GetRequiredService<CqlToElmConverter>();
+            return converter.ConvertLibrary(cql);
+        }
 
         [TestMethod]
         public void String_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DecimalTest version '1.0.0'
 
                 define private String_Literal: 'test'
@@ -68,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DecimalTest version '1.0.0'
 
                 define private Decimal_Literal: 1.0
@@ -95,7 +93,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Negative_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DecimalTest version '1.0.0'
 
                 define private Decimal_Literal: -123.567
@@ -122,25 +120,25 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Errors()
         {
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Decimal_Literal: 0.123456789
-                ").ShouldReportError("Decimal literals cannot have a mantissa longer than 8 digits.");
+                ", "Decimal literals cannot have a mantissa longer than 8 digits.");
 
             // exactly 28 digits
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                     library Decimal_Errors_2 version '1.0.0'
 
                     define private Decimal_Literal: -12345678901234567890.12345678
                 ").ShouldSucceed();
 
             // 29 digits
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                     library Decimal_Errors_3 version '1.0.0'
 
                     define private Decimal_Literal: -123456789012345678901.12345678
-                ").ShouldReportError("Decimal literals cannot be longer than 28 digits.");
+                ", "Decimal literals cannot be longer than 28 digits.");
         }
 
         #endregion
@@ -151,7 +149,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntegerTest version '1.0.0'
 
                 define private Integer_Literal: 1
@@ -178,7 +176,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Negative()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library IntegerTest version '1.0.0'
 
                 define private Integer_Literal: -123456789
@@ -206,17 +204,17 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_Overflows()
         {
             // minimum long is -9,223,372,036,854,775,808
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: -9223372036854775809
-                ").ShouldReportError("Unparseable numeric literal*.");
+                ", "Unparseable numeric literal*.");
 
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: 9223372036854775808
-                ").ShouldReportError("Unparseable numeric literal*.");
+                ", "Unparseable numeric literal*.");
         }
 
         #endregion
@@ -228,7 +226,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // max value of an int is 2,147,483,647
             // this will be parsed as a long
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library LongTest version '1.0.0'
 
                 define private Long_Literal: 2147483648L
@@ -256,7 +254,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // max value of an int is 2,147,483,647
             // this will be parsed as a long
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library LongTest version '1.0.0'
 
                 define private Long_Literal:  -2147483649L
@@ -287,7 +285,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Boolean_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library TrueTest version '1.0.0'
 
                 define private True_Literal: true
@@ -310,7 +308,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual("true", literal.value);
             }
 
-            library = DefaultConverter.ConvertLibrary(@"
+            library = MakeLibrary(@"
                 library FalseTest version '1.0.0'
 
                 define private False_Literal: false
@@ -338,7 +336,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library NullTest version '1.0.0'
 
                 define private Null_Test: null
@@ -366,7 +364,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_Literal_Day_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02
@@ -434,7 +432,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_Literal_Month_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01
@@ -489,7 +487,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_Literal_Year_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023
@@ -536,7 +534,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTime_Literal_Millisecond_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01:23:45.678+01:30
@@ -669,7 +667,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTime_Literal_Second_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01:23:45+01:30
@@ -790,7 +788,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTime_Literal_Minute_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01:23+01:30
@@ -899,7 +897,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTime_Literal_Hour_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01+01:30
@@ -996,7 +994,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTime_Literal_Hour_Precision_NoOffset()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01
@@ -1081,7 +1079,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Time_Literal_Millisecond_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01:23:45.678
@@ -1163,7 +1161,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Time_Literal_Second_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01:23:45
@@ -1229,7 +1227,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Time_Literal_Minute_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01:23
@@ -1283,7 +1281,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Time_Literal_Hour_Precision()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01
@@ -1329,7 +1327,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 6.2 'gm/cm3'
@@ -1351,7 +1349,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Year()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 6 year
@@ -1373,7 +1371,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Years()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 6 years
@@ -1395,7 +1393,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Month()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1.245671213 month
@@ -1417,7 +1415,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Months()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1.245671213 months
@@ -1439,7 +1437,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Day()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0 day
@@ -1461,7 +1459,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Days()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0 days
@@ -1483,7 +1481,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Hour()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.0 hour
@@ -1505,7 +1503,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Hours()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.0 hours
@@ -1527,7 +1525,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Minute()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.25 minute
@@ -1549,7 +1547,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Minutes()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.25 minutes
@@ -1571,7 +1569,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Second()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1 second
@@ -1594,7 +1592,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Seconds()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1 seconds
@@ -1616,7 +1614,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Millisecond()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 2000000 millisecond
@@ -1638,7 +1636,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Milliseconds()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 2000000 milliseconds
@@ -1662,7 +1660,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ratio_Literal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library RatioTest version '1.0.0'
 
                 define private Ratio_Literal:  6 'gm' : 10 'cm3'

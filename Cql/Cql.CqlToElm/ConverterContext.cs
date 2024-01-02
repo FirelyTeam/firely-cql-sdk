@@ -1,30 +1,42 @@
 ﻿using Hl7.Cql.Elm;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal class ConverterContext
+    internal class ConverterContext : ILibraryProvider
     {
-        public ConverterContext()
+        private readonly Dictionary<(string name, string version), Library> Libraries = new();
+
+        public bool TryAddLibrary(Library library)
         {
+            return Libraries.TryAdd((library.identifier.id, library.identifier.version), library);
         }
 
-        private readonly List<Library> Libraries = new List<Library>();
-
-        public Library? GetLibrary(string name, string version) =>
-            Libraries.SingleOrDefault(l => l.identifier.id == name && l.identifier.version == version);
-
-        public Library? GetLibrary(string name) =>
-            Libraries.SingleOrDefault(l => l.identifier.id == name);
-
-        public void AddLibrary(Library library)
+        public bool TryResolveLibrary(string libraryName, string? version, out Library? library, out string? error)
         {
-            if (GetLibrary(library.identifier.id, library.identifier.version) == null)
-                Libraries.Add(library);
-            else throw new ArgumentException($"Library already exists", nameof(library));
-        }
+            error = null;
 
+            if (version is not null)
+            {
+                var success = Libraries.TryGetValue((libraryName, version), out library);
+                error = success ? null : $"Could not find library '{libraryName}' version {version}.";
+                return success;
+            }
+            else
+            {
+                var hits = Libraries.Keys.Where(l => l.name == libraryName).ToArray();
+
+                (var success, error, library) = hits.Length switch
+                {
+                    0 => (false, $"Could not find library '{libraryName}'.", default(Library)),
+                    1 => (true, null, Libraries[hits.Single()]),
+                    _ => (false, $"Found multiple libraries with name '{libraryName}'.", null)
+                };
+
+                return success;
+            }
+
+        }
     }
 }

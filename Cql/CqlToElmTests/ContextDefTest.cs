@@ -3,7 +3,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -11,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class ContextDefTest : Base
     {
-        private static Library MakeLibrary(string cql)
+        protected override Library ConvertLibrary(string cql)
         {
             var services = LibraryTest.MakeMinimalServiceCollection()
                 .AddModels(mp =>
@@ -19,8 +18,10 @@ namespace Hl7.Cql.CqlToElm.Test
                     mp.Add(Models.ElmR1);
                     mp.Add(Models.Fhir401);
                 });
+
             var provider = services.BuildServiceProvider();
             var converter = provider.GetRequiredService<CqlToElmConverter>();
+
             return converter.ConvertLibrary(cql);
         }
 
@@ -56,31 +57,25 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Of_Unknown_Model()
         {
-            Action act = () => MakeLibrary(@"
+            var lib = MakeLibrary(@"
                 library UsingTeest version '1.0.0'
 
                 using FHIR
 
                 context FHIRX.Patient
-            ");
-
-            act.Should().Throw<AggregateException>()
-                .WithMessage("*No type named FHIRX.Patient found in any model.*");
+            ", "There is no model named 'FHIRX'.");
         }
 
         [TestMethod]
         public void Context_Of_Unknown_Type()
         {
-            Action act = () => MakeLibrary(@"
+            var lib = MakeLibrary(@"
                 library UsingTeest version '1.0.0'
 
                 using FHIR
 
                 context ObservationX
-            ");
-
-            act.Should().Throw<AggregateException>()
-                .WithMessage("*No type named ObservationX found in any model.*");
+            ", "There is no type named 'ObservationX' in model library FHIR.");
         }
 
     }

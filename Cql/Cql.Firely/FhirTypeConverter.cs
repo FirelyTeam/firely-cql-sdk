@@ -49,17 +49,27 @@ namespace Hl7.Cql.Fhir
             add((M.FhirBoolean p) => p.Value);
             add((M.FhirDecimal p) => p.Value);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
+            add((M.Date f) => f.TryToDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
             add((M.Time f) => f.TryToTime(out var time) ? new CqlTime(time!.Hours!.Value, time.Minutes, time.Seconds, time.Millis, null, null) : null);
             add((M.FhirDateTime f) => f.TryToDateTime(out var dt) ?
                 new CqlDateTime(
                     dt!.Years!.Value, dt.Months,
                     dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
                     dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null) : null);
+            add((M.FhirDateTime f) => f.TryToDateTime(out var dt) ? new CqlDate(dt!.Years!.Value, dt.Months, dt.Days) : null);
             add((M.Quantity f) => new CqlQuantity(f.Value, f.Unit));
+            add((M.Quantity f) => f.Value);
+            add((M.Quantity f) => (int?)f.Value);
             add((M.Period f) => new CqlInterval<CqlDateTime>(
                 converter.Convert<CqlDateTime>(f.StartElement), converter.Convert<CqlDateTime>(f.EndElement), lowClosed: true, highClosed: true));
+            add((M.Period f) => new CqlInterval<CqlDate>(
+                converter.Convert<CqlDate>(f.StartElement), converter.Convert<CqlDate>(f.EndElement), lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<CqlQuantity>(
                     converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
+            add((M.Range f) => new CqlInterval<decimal?>(converter.Convert<decimal?>(f.Low), converter.Convert<decimal?>(f.High), 
+                lowClosed: true, highClosed: true));
+            add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High), 
+                lowClosed: true, highClosed: true));
             add((M.Id id) => id.Value);
             add((M.PositiveInt pi) => new M.Integer(pi.Value));
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));

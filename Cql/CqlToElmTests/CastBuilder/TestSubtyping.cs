@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class TestSubtyping
     {
-        private readonly IModelProvider provider = new ModelProvider(M.Models.ElmR1, M.Models.Fhir401);
+        private readonly IModelProvider provider = new BuiltinModelProvider(M.Models.ElmR1, M.Models.Fhir401);
         private readonly NamedTypeSpecifier Patient = forFhir("Patient");
         private readonly NamedTypeSpecifier Observation = forFhir("Observation");
         private readonly NamedTypeSpecifier Resource = forFhir("Resource");

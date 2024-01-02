@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm
         {
             services.AddScoped<ExpressionVisitor>();
             services.AddScoped<LibraryVisitor>();
-            services.AddScoped<ParameterDefinitionVisitor>();
+            services.AddScoped<DefinitionVisitor>();
             services.AddScoped<TypeSpecifierVisitor>();
             return services;
         }
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm
         {
             services.AddSingleton<IModelProvider>(isp =>
             {
-                var provider = new ModelProvider();
+                var provider = new BuiltinModelProvider();
                 builder(provider);
                 return provider;
             });
@@ -65,8 +65,9 @@ namespace Hl7.Cql.CqlToElm
         public static IServiceCollection AddContext(this IServiceCollection services) =>
             services
                 .AddScoped<SystemLibrary>()
-                .AddScoped<ConverterContext>()
-                .AddScoped<LibraryContext>();
+                .AddScoped<LibraryBuilder>()
+                .AddScoped<ILibraryProvider, ConverterContext>()
+                .AddScoped<ConverterContext>();
 
         public static ILoggingBuilder ThrowOn(this ILoggingBuilder builder, LogLevel threshold) =>
             builder.AddProvider(new ThrowingLoggerProvider(threshold));

@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.Model;
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -20,26 +21,24 @@ namespace Hl7.Cql.CqlToElm
         /// Gets the model with URI <paramref name="uri"/>, and optionally with the specified
         /// <paramref name="version"/>
         /// </summary>
-        /// <param name="uri">The URI of the model</param>
-        /// <param name="version">The version, if specified.</param>
-        /// <returns>The matching model.</returns>
-        /// <exception cref="ArgumentException">
-        /// if two models with the same URI and different versions are available,
-        /// and <paramref name="version"/> is <see langword="null" /> or white space.
-        /// </exception>
-        ModelInfo? ModelFromUri(string uri, string? version = null);
+        /// <param name="uri">The uri of the model</param>
+        /// <param name="version">An optional version.</param>
+        /// <param name="model">The model, if found.</param>
+        /// <returns>True if the model was found.</returns>
+        /// <exception cref="ArgumentException">If two models with the same name and different versions are available,
+        /// and <paramref name="version"/> is <see langword="null" /> or white space.</exception>
+        bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out ModelInfo? model, string? version = null);
 
         /// <summary>
         /// Gets the model with name <paramref name="name"/>, and optionally with the specified
         /// <paramref name="version"/>
         /// </summary>
         /// <param name="name">The name of the model</param>
-        /// <param name="version">The version, if specified.</param>
-        /// <returns>The matching model.</returns>
-        /// <exception cref="ArgumentException">
-        /// if two models with the same name and different versions are available,
-        /// and <paramref name="version"/> is <see langword="null" /> or white space.
-        /// </exception>
-        ModelInfo? ModelFromName(string name, string? version = null);
+        /// <param name="version">An optional version.</param>
+        /// <param name="model">The model, if found.</param>
+        /// <returns>True if the model was found.</returns>
+        /// <exception cref="ArgumentException">If two models with the same name and different versions are available,
+        /// and <paramref name="version"/> is <see langword="null" /> or white space.</exception>
+        bool TryGetModelFromName(string name, [NotNullWhen(true)] out ModelInfo? model, string? version = null);
     }
 }

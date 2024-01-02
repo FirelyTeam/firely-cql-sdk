@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/* 
+﻿/* 
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  * 
@@ -7,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Model;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -14,7 +14,6 @@ using System.Linq;
 
 namespace Hl7.Cql.Elm
 {
-
     public partial class TypeSpecifier
     {
         /// <summary>
@@ -27,12 +26,16 @@ namespace Hl7.Cql.Elm
         /// </summary>
         internal abstract TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments);
 
+        /// <inheritdoc/>
         public override bool Equals(object? obj) => base.Equals(obj);
 
+        /// <inheritdoc/>
         public override int GetHashCode() => base.GetHashCode();
 
+        /// <inheritdoc/>
         public static bool operator ==(TypeSpecifier? a, TypeSpecifier? b) => a?.Equals(b) ?? b is null;
 
+        /// <inheritdoc/>
         public static bool operator !=(TypeSpecifier? a, TypeSpecifier? b) => !(a == b);
 
         internal static bool SequenceEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b) => EmptyIfNull(a).SequenceEqual(EmptyIfNull(b));
@@ -42,7 +45,26 @@ namespace Hl7.Cql.Elm
 
     public partial class ChoiceTypeSpecifier
     {
+        /// <summary>
+        /// Creates an empty Choice type. This is used for deserialization.
+        /// </summary>
+        public ChoiceTypeSpecifier()
+        {
+            // deserialization constructor
+        }
+
+        /// <summary>
+        /// Creates a Choice type with the given choices of types.
+        /// </summary>
+        public ChoiceTypeSpecifier(params TypeSpecifier[] choice)
+        {
+            this.choice = choice;
+        }
+
+        /// <inheritdoc/>
         public override string ToString() => $"Choice<{string.Join(", ", EmptyIfNull(choice))}>";
+
+        /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -54,6 +76,7 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(typeof(ChoiceTypeSpecifier), choice?.Length, choice?.FirstOrDefault());
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
@@ -78,7 +101,10 @@ namespace Hl7.Cql.Elm
 
     public partial class ParameterTypeSpecifier
     {
+        /// <inheritdoc/>
         public override string ToString() => parameterName ?? "Null";
+
+        /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -90,9 +116,8 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode() => parameterName?.GetHashCode() ?? typeof(ParameterTypeSpecifier).GetHashCode();
-
-        public static implicit operator ParameterTypeSpecifier(string parameterName) => new() { parameterName = parameterName };
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) =>
             assignments.TryGetValue(this, out var replacement) ? replacement : this;
@@ -102,7 +127,10 @@ namespace Hl7.Cql.Elm
 
     public partial class TupleElementDefinition
     {
+        /// <inheritdoc/>
         public override string ToString() => $"{name ?? "null"} {elementType?.ToString() ?? "Null"}";
+
+        /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -114,6 +142,7 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(name, type);
 
         internal TupleElementDefinition ReplaceGenericParameters(GenericParameterAssignments assignments)
@@ -132,8 +161,10 @@ namespace Hl7.Cql.Elm
 
     public partial class TupleTypeSpecifier
     {
+        /// <inheritdoc/>
         public override string ToString() => $"Tuple {{ {string.Join(", ", EmptyIfNull(element))} }}";
 
+        /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -145,6 +176,7 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), element?.Length, element?.FirstOrDefault());
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
@@ -163,8 +195,10 @@ namespace Hl7.Cql.Elm
 
     public partial class IntervalTypeSpecifier
     {
+        /// <inheritdoc/>
         public override string ToString() => $"Interval<{pointType}>";
 
+        /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -176,6 +210,7 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(typeof(IntervalTypeSpecifier), pointType);
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)
@@ -193,8 +228,45 @@ namespace Hl7.Cql.Elm
 
     public partial class NamedTypeSpecifier
     {
-        public override string ToString() => name?.ToString() ?? "null";
+        /// <summary>
+        /// Deserialization constructor.
+        /// </summary>
+        public NamedTypeSpecifier()
+        {
+            // Deserialization constructor
+        }
 
+        /// <summary>
+        /// Create a new named type given its uri and name.
+        /// </summary>
+        /// <param name="uri"></param>
+        /// <param name="name"></param>
+        public NamedTypeSpecifier(string uri, string name)
+        {
+            this.name = QualifiedName.MakeQualifiedTypeName(uri, name);
+        }
+
+
+        /// <summary>
+        /// Gets the model uri and name for this named type.
+        /// </summary>
+        /// <returns>The uri and the type parts of the name in the specifier.</returns>
+        /// <exception cref="ArgumentException">If the name does not match the expected pattern.</exception>
+        public void Deconstruct(out string uri, out string name) => (uri, name) = this.name;
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            if (name is null) return "null";
+
+            var (u, n) = name;
+            if (u == SystemTypes.SystemModelUri)
+                return n;
+            else
+                return name.ToString();
+        }
+
+        /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -206,6 +278,7 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode() => name?.GetHashCode() ?? typeof(NamedTypeSpecifier).GetHashCode();
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments) => this;
@@ -215,8 +288,10 @@ namespace Hl7.Cql.Elm
 
     public partial class ListTypeSpecifier
     {
+        /// <inheritdoc/>
         public override string ToString() => $"List<{elementType}>";
 
+        /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)
         {
             if (base.Equals(other))
@@ -228,6 +303,7 @@ namespace Hl7.Cql.Elm
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(typeof(ListTypeSpecifier), elementType);
 
         internal override TypeSpecifier ReplaceGenericParameters(GenericParameterAssignments assignments)

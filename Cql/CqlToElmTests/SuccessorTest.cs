@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Successor_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of 2
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Successor_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of (null as Integer)

@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Conversion;
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -10,6 +9,7 @@ using static Hl7.Fhir.Model.Parameters;
 namespace CoreTests
 {
     [TestClass]
+    [TestCategory("UnitTest")]
     public class FhirTypeConverterTests
     {
         internal static readonly TypeConverter FhirTypeConverter = Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
@@ -435,6 +435,43 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void ConvertFhirDateTime_CqlDateTime()
+        {
+            var date = new FhirDateTime(2022, 1, 1, 1, 1, 1, TimeSpan.Zero);
+            var converted = FhirTypeConverter.Convert<CqlDateTime>(date);
+
+            Assert.IsNotNull(converted);
+            var isoDateTime = converted.Value;
+            Assert.IsNotNull(isoDateTime);
+
+            Assert.AreEqual(2022, isoDateTime.Year);
+            Assert.AreEqual(1, isoDateTime.Month);
+            Assert.AreEqual(1, isoDateTime.Day);
+            Assert.AreEqual(1, isoDateTime.Hour);
+            Assert.AreEqual(1, isoDateTime.Minute);
+            Assert.AreEqual(1, isoDateTime.Second);
+        }
+
+
+        [TestMethod]
+        public void ConvertFhirDate_CqlDateTime()
+        {
+            var date = new Date(2022, 1, 1);
+            var converted = FhirTypeConverter.Convert<CqlDateTime>(date);
+
+            Assert.IsNotNull(converted);
+            var isoDateTime = converted.Value;
+            Assert.IsNotNull(isoDateTime);
+
+            Assert.AreEqual(2022, isoDateTime.Year);
+            Assert.AreEqual(1, isoDateTime.Month);
+            Assert.AreEqual(1, isoDateTime.Day);
+            Assert.AreEqual(0, isoDateTime.Hour);
+            Assert.AreEqual(0, isoDateTime.Minute);
+            Assert.AreEqual(0, isoDateTime.Second);
+        }
+
+        [TestMethod]
         public void ConvertCqlTime_FhirTime()
         {
             var date = new CqlTime(1, 1, 1, 1, null, null);
@@ -461,6 +498,28 @@ namespace CoreTests
 
             Assert.AreEqual(1, converted.Value);
             Assert.AreEqual("oranges", converted.Unit);
+        }
+
+        [TestMethod]
+        public void ConvertQuantity_Int()
+        {
+            var quantity = new Quantity(1, "oranges");
+            var converted = FhirTypeConverter.Convert<int?>(quantity);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1, converted.Value);
+        }
+
+        [TestMethod]
+        public void ConvertQuantity_Decimal()
+        {
+            var quantity = new Quantity(1, "oranges");
+            var converted = FhirTypeConverter.Convert<decimal?>(quantity);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1, converted.Value);
         }
 
         [TestMethod]
@@ -510,6 +569,32 @@ namespace CoreTests
             Assert.AreEqual(1, converted.Low.Value);
             Assert.AreEqual(10, converted.High.Value);
         }
+
+
+        [TestMethod]
+        public void Convert_Range_CqlIntInterval()
+        {
+            var range = new Hl7.Fhir.Model.Range() { Low = new Quantity { Value = 1, Unit = "a"}, High = new Quantity { Value = 10, Unit = "a" } };
+            var converted = FhirTypeConverter.Convert<CqlInterval<int?>>(range);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1, converted.low.Value);
+            Assert.AreEqual(10, converted.high.Value);
+        }
+
+        [TestMethod]
+        public void Convert_Range_CqlDecimalInterval()
+        {
+            var range = new Hl7.Fhir.Model.Range() { Low = new Quantity { Value = 1, Unit = "a" }, High = new Quantity { Value = 10, Unit = "a" } };
+            var converted = FhirTypeConverter.Convert<CqlInterval<decimal?>>(range);
+
+            Assert.IsNotNull(converted);
+
+            Assert.AreEqual(1, converted.low.Value);
+            Assert.AreEqual(10, converted.high.Value);
+        }
+
 
         [TestMethod]
         public void ConvertCqlRatio_Ratio()

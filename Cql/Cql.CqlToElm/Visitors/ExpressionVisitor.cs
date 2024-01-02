@@ -2,7 +2,6 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -11,24 +10,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public ExpressionVisitor(
             IModelProvider provider,
-            LibraryContext libraryContext,
+            ConverterContext converterContext,
+            LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
-            LocalIdentifierProvider localIdentifierProvider
-            ) : base(localIdentifierProvider)
+            LocalIdentifierProvider localIdentifierProvider,
+            InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
-            LibraryContext = libraryContext;
+            ConverterContext = converterContext;
+            LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
         }
 
         #region Privates
         private readonly IModelProvider ModelProvider;
-        private readonly LibraryContext LibraryContext;
         private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
+
+        public ConverterContext ConverterContext { get; }
+        public LibraryBuilder LibraryBuilder { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
-        public override Expression VisitIntervalSelector([NotNull] cqlParser.IntervalSelectorContext context)
+        public override Expression VisitIntervalSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.IntervalSelectorContext context)
         {
             var lowClosed = context.GetChild(1).GetText() switch
             {
@@ -68,19 +71,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     if (low is Quantity lowQuantity && high is Quantity highQuantity
                         && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
-                        interval.AddError($"Intervals of quantities must be of compatible units.", ErrorType.semantic);
+                        interval.AddError($"Intervals of quantities must be of compatible units.");
                 }
                 else
-                    interval.AddError($"Intervals can only be constructed for types with defined minimums and maximums. Type {pointType} is not allowed.", ErrorType.semantic);
+                    interval.AddError($"Intervals can only be constructed for types with defined minimums and maximums. Type {pointType} is not allowed.");
             }
             else
-                interval.AddError($"Interval types for low ({low.resultTypeName}) and high ({high.resultTypeName}) do not match.", ErrorType.semantic);
+                interval.AddError($"Interval types for low ({low.resultTypeName}) and high ({high.resultTypeName}) do not match.");
 
             return interval;
         }
 
         // : ('List' ('<' typeSpecifier '>')?)? '{' (expression (',' expression)*)? '}'
-        public override Expression VisitListSelector([NotNull] cqlParser.ListSelectorContext context)
+        public override Expression VisitListSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.ListSelectorContext context)
         {
             var typeSpecifier = context.typeSpecifier() is { } tsContext ? TypeSpecifierVisitor.Visit(tsContext) : null;
             var elements = context.expression().Select(Visit).ToArray();
@@ -184,7 +187,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         //  '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'
-        public override Expression VisitRetrieve([NotNull] cqlParser.RetrieveContext context)
+        public override Expression VisitRetrieve([Antlr4.Runtime.Misc.NotNull] cqlParser.RetrieveContext context)
         {
             var contextName = context.contextIdentifier().GetText();
             var codePath = context.codePath().GetText();

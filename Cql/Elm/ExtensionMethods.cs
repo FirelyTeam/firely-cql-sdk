@@ -16,6 +16,14 @@ namespace Hl7.Cql.Elm
     public static class ExtensionMethods
     {
         /// <summary>
+        /// Determines whether a given symbol is visible for the kind of access given in <paramref name="access"/>.
+        /// </summary>
+        internal static bool IsVisible(this IDefinitionElement symbol, AccessModifier access)
+        {
+            return access > symbol.Access;
+        }
+
+        /// <summary>
         /// Creates a string describing the signature of the given function.
         /// </summary>
         public static string Signature(this FunctionDef def)
@@ -77,7 +85,7 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static T AddError<T>(this T node,
             string errorMessage,
-            ErrorType errorType,
+            ErrorType errorType = ErrorType.semantic,
             ErrorSeverity severity = ErrorSeverity.error) where T : Element
         {
             var error = new CqlToElmError
@@ -94,6 +102,5 @@ namespace Hl7.Cql.Elm
 
             return node;
         }
-
     }
 }

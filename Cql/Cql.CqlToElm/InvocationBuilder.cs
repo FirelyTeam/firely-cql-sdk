@@ -37,6 +37,15 @@ namespace Hl7.Cql.CqlToElm
 
         internal ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
         {
+            if (candidate.operand.Length != arguments.Length)
+            {
+                var resultExpression = candidate.CreateElmNode(arguments)
+                    .WithResultType(candidate.resultTypeSpecifier);
+
+                return new ResolveResult<Expression>(resultExpression, ERROR_COST,
+                    $"{candidate.Signature()} must be called with {candidate.operand.Length} arguments, not {arguments.Length}.");
+            }
+
             var operands = candidate.operand.Select(o => o.operandTypeSpecifier).ToArray();
             var positionResults = new List<ResolveResult<Expression>>();
             int? nextPosition = 0;
@@ -59,7 +68,7 @@ namespace Hl7.Cql.CqlToElm
                     var operandToTest = operand.ReplaceGenericParameters(assignments);
                     if (operandToTest != operand && argumentIndex > start && nextPosition is null) nextPosition = argumentIndex;
 
-                    var argumentResult = buildImplicitCast(argument, operandToTest, out var newAssignments);
+                    var argumentResult = BuildImplicitCast(argument, operandToTest, out var newAssignments);
                     assignments.AddRange(newAssignments);
 
                     if (!argumentResult.Success && firstError is null)
@@ -80,7 +89,17 @@ namespace Hl7.Cql.CqlToElm
             return ResolveResult<Expression>.SelectBestCandidate(positionResults).First();
         }
 
-        private ResolveResult<Expression> buildImplicitCast(
+        /// <summary>
+        /// Builds an expression that represents the implicit cast of the argument to the parameter type.
+        /// </summary>
+        /// <param name="argument">The expression to cast from.</param>
+        /// <param name="to">The type to cast to.</param>
+        /// <param name="newAssignments">If <paramref name="to"/> contains open generic parameters, this will contain the assignment parameters
+        /// to actual types to make the conversion work.</param>
+        /// <returns>A <see cref="ResolveResult{T}"/> that contains an Expression that casts the <paramref name="argument"/> to the type
+        /// <paramref name="to"/>. If this is not possible, <see cref="ResolveResult{T}.Error"/> is not null and contains a description of the
+        /// type error.</returns>
+        public ResolveResult<Expression> BuildImplicitCast(
             Expression argument, TypeSpecifier to, out GenericParameterAssignments newAssignments)
         {
             var argumentType = argument.resultTypeSpecifier;
@@ -119,7 +138,7 @@ namespace Hl7.Cql.CqlToElm
             // to the assigned type for that generic type parameter.
             if (to is ParameterTypeSpecifier gtp)
             {
-                newAssignments = new() { { gtp, argumentType } };
+                newAssignments.Add(gtp, argumentType);
                 return new(argument, 0, null);
             }
 
@@ -127,13 +146,14 @@ namespace Hl7.Cql.CqlToElm
             // when Y is an unbound generic type or a direct (covariant) cast.
             if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
             {
-                var prototypeInstance = new Literal { resultTypeSpecifier = fromList.elementType };
-                var elementCast = buildImplicitCast(prototypeInstance, toList.elementType, out var nestedNewAssignments);
-
-                if (elementCast.Success && elementCast.Result == prototypeInstance)
+                if (toList.elementType is ParameterTypeSpecifier pts)
                 {
-                    newAssignments.AddRange(nestedNewAssignments);
-                    return new(argument, elementCast.Cost, null);
+                    newAssignments.Add(pts, fromList.elementType);
+                    return new(argument, 0, null);
+                }
+                else if (fromList.elementType.IsSubtypeOf(toList.elementType, Provider))
+                {
+                    return new(argument, 0, null);
                 }
             }
 
@@ -142,7 +162,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
             {
                 var prototypeInstance = new Literal { resultTypeSpecifier = fromInterval.pointType };
-                var elementCast = buildImplicitCast(prototypeInstance, toInterval.pointType, out var nestedNewAssignments);
+                var elementCast = BuildImplicitCast(prototypeInstance, toInterval.pointType, out var nestedNewAssignments);
 
                 if (elementCast.Success && elementCast.Result == prototypeInstance)
                 {
@@ -187,7 +207,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
             {
                 var singleton = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
-                var intermediate = buildImplicitCast(singleton, to, out newAssignments);
+                var intermediate = BuildImplicitCast(singleton, to, out newAssignments);
                 return intermediate with { Cost = intermediate.Cost + 5 };
             }
 
@@ -197,7 +217,7 @@ namespace Hl7.Cql.CqlToElm
             if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
             {
                 var list = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
-                var intermediate = buildImplicitCast(list, to, out newAssignments);
+                var intermediate = BuildImplicitCast(list, to, out newAssignments);
                 return intermediate with { Cost = intermediate.Cost + 5 };
             }
 

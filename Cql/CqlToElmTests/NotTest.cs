@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_True()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_True: not true
@@ -61,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_False()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_False: not false
@@ -106,7 +106,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_Null: not null
@@ -149,10 +149,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-             DefaultConverter.ConvertLibrary(@"
+             MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1
-            ").ShouldReportError("Cannot resolve call*first argument*Integer*cannot implicitly be cast*Boolean.");
+            ", "Cannot resolve call*first argument*Integer*cannot implicitly be cast*Boolean.");
     }
 }

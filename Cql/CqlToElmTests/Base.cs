@@ -36,6 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddLogging(builder => builder
                     .AddConsole()
                     .ThrowOn(LogLevel.Error))
+                .AddTransient<InvocationBuilder>()
                 .AddScoped<CqlToElmConverter>();
             Services = services.BuildServiceProvider();
 
@@ -44,6 +45,20 @@ namespace Hl7.Cql.CqlToElm.Test
                 identifier = new Elm.VersionedIdentifier { id = "Lambdas", version = "1.0.0" }
             };
             ExpressionBuilder = ExpressionBuilderFor(lib);
+        }
+
+        protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+
+        internal Library MakeLibrary(string cql, params string[] expectedErrors)
+        {
+            var library = ConvertLibrary(cql);
+
+            if (expectedErrors.Any())
+                library.ShouldReportError(expectedErrors);
+            else
+                library.ShouldSucceed();
+
+            return library;
         }
 
         internal static object? Run(Expression expression, CqlContext? ctx = null)

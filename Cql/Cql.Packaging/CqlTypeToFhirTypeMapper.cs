@@ -199,7 +199,7 @@ namespace Hl7.Cql.Packaging
             var fhirTypeName = ModelInspector.GetFhirTypeNameForType(type);
             if (fhirTypeName is not null)
             {
-                return TypeEntryFor(fhirTypeName);
+                return TypeEntryFor($"{{http://hl7.org/fhir}}{fhirTypeName}");
             }
             var cqlPrimitiveAttribute = type.GetCustomAttribute<CqlPrimitiveTypeAttribute>(true);
             if (cqlPrimitiveAttribute is not null)
@@ -287,9 +287,6 @@ namespace Hl7.Cql.Packaging
         {
             if (!string.IsNullOrWhiteSpace(name))
             {
-                var runtimeType = TypeResolver.ResolveType(name);
-                if (string.IsNullOrWhiteSpace(name))
-                    return null;
                 if (name.StartsWith("{urn:hl7-org:elm-types:r1}"))
                 {
                     int prefixLength = "{urn:hl7-org:elm-types:r1}".Length;
@@ -321,7 +318,11 @@ namespace Hl7.Cql.Packaging
         /// <param name="element">the ELM element</param>
         /// <returns>the Type mapping, or null</returns>
         public CqlTypeToFhirMapping? TypeEntryFor(Elm.Element element) =>
-            TypeEntryFor(element.resultTypeSpecifier);
+            element switch
+            {
+                Elm.Literal literal => TypeEntryFor(literal.valueType.Name),
+                _ => TypeEntryFor(element.resultTypeSpecifier)
+            };
 
         private bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 

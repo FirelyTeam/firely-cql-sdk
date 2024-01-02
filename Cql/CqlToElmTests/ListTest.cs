@@ -25,7 +25,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty_List()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private Empty_List: { }
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Integer()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private List_Integer: { 1, 2, 3 }
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_ToQuantity()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToQuantity: { 1, 2L, 3.0, 4.0 '1' }
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_ToDecimal()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToDecimal: { 1, 2L, 3.0 }
@@ -110,7 +110,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_ToLong()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToLong: { 1, 2L }
@@ -130,7 +130,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_Any()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_Any: { 1, 'string' }
@@ -151,7 +151,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Nulls()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private List_Nulls: { null, null }

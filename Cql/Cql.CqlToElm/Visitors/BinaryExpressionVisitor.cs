@@ -58,12 +58,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (selectedType == SystemTypes.DateType)
             {
                 if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.", ErrorType.semantic);
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.");
             }
             else if (selectedType == SystemTypes.TimeType)
             {
                 if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.", ErrorType.semantic);
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.");
             }
 
             return call;
@@ -87,12 +87,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (selectedType == SystemTypes.DateType)
             {
                 if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.", ErrorType.semantic);
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.");
             }
             else if (selectedType == SystemTypes.TimeType)
             {
                 if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.", ErrorType.semantic);
+                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.");
 
             }
 

@@ -52,23 +52,26 @@ namespace Hl7.Cql.CqlToElm
 
             using (var scope = ScopeFactory.CreateScope())
             {
-                var libCtx = scope.ServiceProvider.GetRequiredService<LibraryContext>();
                 var visitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
 
+#if !DEBUG
                 try
                 {
-                    var library = visitor.Visit(parser.library());
+#endif
+                var library = visitor.Visit(parser.library());
 
-                    if (library.GetErrors().Any())
-                        Logger.LogWarning("Parsed ELM tree contains errors.");
+                if (library.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
+                    Logger.LogWarning("Parsed ELM tree contains errors.");
 
-                    return library;
+                return library;
+#if !DEBUG
                 }
                 catch (Exception e)
                 {
                     Logger.LogCritical(e, "Exception while converting CQL to ELM.");
                     throw;
                 }
+#endif
             }
         }
 

@@ -7,7 +7,7 @@
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
 		<VersionPrefix>1.0.0</VersionPrefix>
-		<VersionSuffix>rc2</VersionSuffix>
+		<VersionSuffix>rc3</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2023 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
 		<PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl>
@@ -26,10 +26,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23472.1" PrivateAssets="All" />
 	</ItemGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.3.0</FirelySdkVersion>
+		<FirelySdkVersion>5.4.0</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Compiler settings -->

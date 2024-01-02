@@ -24,26 +24,21 @@ namespace Hl7.Cql.Elm
         /// </summary>
         /// <param name="visitor">A function that is passed the nodes in the tree. It should return <c>false</c> if this function
         /// handles the children of the nodes by itself, or <c>true</c> if the walker should visit the children automatically.</param>
-        /// <param name="additionalTypes"></param>
+        /// <param name="additionalTypes">Additional non-ELM types to visit.</param>
         public ElmTreeWalker(Func<object, bool> visitor, params Type[] additionalTypes)
         {
             this.visitor = visitor;
-            TypesToVisit = elmTypeLazy.Value.Concat(additionalTypes).ToArray();
+            AdditionalTypes = additionalTypes;
         }
 
-        private static readonly Lazy<Type[]> elmTypeLazy = new(elmTypeFactory, isThreadSafe: true);
         private readonly Func<object, bool> visitor;
 
-        private static Type[] elmTypeFactory()
-        {
-            var assembly = typeof(Element).Assembly;
-            return assembly.GetTypes().Where(isRelevant).ToArray();
+        private bool isRelevant(Type t) =>
+            AdditionalTypes.Contains(t) ||
+            t.Assembly == typeof(Element).Assembly ||
+            t.IsAssignableTo(typeof(Element));
 
-            static bool isRelevant(Type t) => t.IsAbstract == false && (t.GetCustomAttribute<SerializableAttribute>(inherit: false) is not null ||
-                    t.IsAssignableTo(typeof(Element)));
-        }
-
-        internal IReadOnlyCollection<Type> TypesToVisit { get; private set; }
+        internal IReadOnlyCollection<Type> AdditionalTypes { get; private set; }
 
         /// <summary>
         /// Perform the walk.
@@ -54,13 +49,13 @@ namespace Hl7.Cql.Elm
             if (root is null) return;
 
             if (getUnderlyingEnumerableType(root.GetType()) is { } collectionType &&
-                TypesToVisit.Contains(collectionType))
+                isRelevant(collectionType))
             {
                 foreach (var item in (IEnumerable)root) Walk(item);
                 return;
             }
 
-            if (!TypesToVisit.Contains(root.GetType())) return;
+            if (!isRelevant(root.GetType())) return;
 
             if (visitor(root)) return;
 

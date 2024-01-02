@@ -14,7 +14,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Days()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Days: duration in days between @2023-01-01 and @2023-01-31
@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Days_Shortform()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Days: days between @2023-01-01 and @2023-01-31
@@ -61,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Months()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in months between @2023-01-01 and @2023-02-01
@@ -83,7 +83,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Weeks()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between @2023-01-01 and @2023-01-08
@@ -107,7 +107,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Years()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in years between @2023-01-01 and @2024-02-01
@@ -129,16 +129,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Date_In_Hours() =>
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Date_In_Hours: duration in hours between @2023-01-01 and @2024-02-01
-            ").ShouldReportError("A precision of 'Hour'*Date.");
+            ", "A precision of 'Hour'*Date.");
 
         [TestMethod]
         public void Duration_Between_Hours()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Hours: duration in hours between @T12:00:00 and @T20:00:00
@@ -161,7 +161,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Minutes()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Minutes: duration in minutes between @T12:00:00 and @T20:00:00
@@ -184,7 +184,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Seconds()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Minutes: duration in seconds between @T12:00:00 and @T12:00:30
@@ -207,7 +207,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Milliseconds()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in milliseconds between @T12:00:00.100 and @T12:00:00.300
@@ -229,16 +229,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Time_In_Days() =>
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in days between @T12:00:00.100 and @T12:00:00.300
-            ").ShouldReportError("A precision of 'Day'*Time.");
+            ", "A precision of 'Day'*Time.");
 
         [TestMethod]
         public void Duration_Between_DateTimes()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_DateTimes_Years: duration in years between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
@@ -255,7 +255,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Null()
         {
-            var library = DefaultConverter.ConvertLibrary(@"
+            var library = MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and @2023-01-08
@@ -276,11 +276,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Null_Null() =>
-            DefaultConverter.ConvertLibrary(@"
+            MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and null
-            ").ShouldReportError("Ambiguous call*");
+            ", "Ambiguous call*");
 
     }
 }
