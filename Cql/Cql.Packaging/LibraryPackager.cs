@@ -190,7 +190,7 @@ namespace Hl7.Cql.Packaging
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
-                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
+                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -279,7 +279,6 @@ namespace Hl7.Cql.Packaging
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,
-            ExpressionBuilder builder,
             Func<Resource, string> canon,
             elm.Library? elmLibrary = null)
         {
