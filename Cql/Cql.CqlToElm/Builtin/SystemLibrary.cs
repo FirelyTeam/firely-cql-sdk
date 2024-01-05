@@ -99,6 +99,10 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef[] Modulo = binary<Modulo>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
         public static IfFunctionDef If = new();
+        public static CaseFunctionDef Case = new();
+        public static CaseItemFunctionDef CaseItem = new();
+
+
     }
 
     internal static class FunctionDefinitionBuilders

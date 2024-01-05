@@ -117,6 +117,89 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return ifNode.WithResultType(expressionType).WithLocator(context.Locator());
         }
 
+        public static Case Call(this CaseFunctionDef def,
+            InvocationBuilder builder,
+            ParserRuleContext context,
+            CaseItem[] caseItems,
+            Expression @else)
+        {
+            var @case = (Case)def.CreateElmNode();
+            if (caseItems.Length < 1)
+            {
+                @case.AddError($"At least one case item must exist in a case statement");
+                return @case;
+            }
+
+
+            var type = caseItems[0].resultTypeSpecifier;
+            var choiceTypes = new HashSet<TypeSpecifier>(caseItems.Length) { type };
+
+            foreach(var caseItem in caseItems)
+            {
+                var when = caseItem.when;
+                var whenCastResult = builder.BuildImplicitCast(when, SystemTypes.BooleanType, out var _);
+                if (whenCastResult.Success)
+                {
+                    caseItem.when = whenCastResult.Result;
+                }
+                else caseItem.AddError($"Condition could not be converted to a boolean expression");
+
+                var then = caseItem.then;
+                var thenCastResult = builder.BuildImplicitCast(then, type, out var _);
+                if (thenCastResult.Success)
+                {
+                    caseItem.then = thenCastResult.Result;
+                }
+                else if (!choiceTypes.Contains(then.resultTypeSpecifier))
+                {
+                    if (!choiceTypes.Contains(then.resultTypeSpecifier))
+                        choiceTypes.Add(then.resultTypeSpecifier);
+                }
+            }
+            var elseCastResult = builder.BuildImplicitCast(@else, type, out var _);
+            if (elseCastResult.Success)
+            {
+                @else = elseCastResult.Result;
+            }
+            else
+            {
+                choiceTypes.Add(@else.resultTypeSpecifier);
+            }
+
+            if (choiceTypes.Count > 1)
+            {
+                type = new ChoiceTypeSpecifier(choiceTypes);
+                foreach(var caseItem in caseItems)
+                {
+                    caseItem.then.resultTypeSpecifier = type;
+                    caseItem.resultTypeSpecifier = type;
+                }
+                @else.resultTypeSpecifier = type;
+            }
+
+            @case.caseItem = caseItems;
+            @case.@else = @else;
+            return @case
+                .WithResultType(type)
+                .WithLocator(context.Locator());
+        }
+
+        public static CaseItem Call(this CaseItemFunctionDef def, 
+            InvocationBuilder builder,
+            ParserRuleContext context,
+            Expression when, Expression then)
+        {
+            var caseItem = new CaseItem();
+            var whenCastResult = builder.BuildImplicitCast(when, SystemTypes.BooleanType, out var _);
+            caseItem.when = whenCastResult.Result;
+            if (whenCastResult.Error is not null)
+                caseItem.AddError("A case " + whenCastResult.Error);
+            caseItem.then = then;
+            return caseItem
+                .WithResultType(then.resultTypeSpecifier)
+                .WithLocator(context.Locator());
+        }
+
 
         /// <summary>
         /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that

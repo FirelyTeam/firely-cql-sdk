@@ -101,9 +101,9 @@ namespace Hl7.Cql.CqlToElm.Test
             var ttS2 = new TupleTypeSpecifier
             {
                 element = new[]
-               {
+                {
                     new TupleElementDefinition { name = "a", elementType = Resource },
-               }
+                }
             };
 
             var tt3 = new TupleTypeSpecifier

@@ -39,11 +39,27 @@ namespace Hl7.Cql.Elm
         public static bool operator !=(TypeSpecifier? a, TypeSpecifier? b) => !(a == b);
 
         internal static bool SequenceEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b) => EmptyIfNull(a).SequenceEqual(EmptyIfNull(b));
+        internal static bool SetEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b)
+        {
+            // tried using HashSet<>.SetEquals and it does not work even though all hashcodes are equal
+            var bCodes = b?
+                .Select(_b => _b?.GetHashCode() ?? default)
+                .ToArray()
+                ?? Array.Empty<int>();
+            foreach(var aCode in a?.Select(_a => _a?.GetHashCode() ?? default) ?? Enumerable.Empty<int>())
+            {
+                if (!bCodes.Contains(aCode))
+                    return false;
+            }
+            return true;
+        }
 
         internal static IEnumerable<T> EmptyIfNull<T>(IEnumerable<T>? a) => a ?? Enumerable.Empty<T>();
+
+
     }
 
-    public partial class ChoiceTypeSpecifier
+    public partial class ChoiceTypeSpecifier: IEquatable<ChoiceTypeSpecifier>
     {
         /// <summary>
         /// Creates an empty Choice type. This is used for deserialization.
@@ -61,20 +77,22 @@ namespace Hl7.Cql.Elm
             this.choice = choice;
         }
 
+        /// <summary>
+        /// Creates a Choice type with the given choices of types.
+        /// </summary>
+        public ChoiceTypeSpecifier(IEnumerable<TypeSpecifier> choice)
+        {
+            this.choice = choice.ToArray();
+        }
+
         /// <inheritdoc/>
         public override string ToString() => $"Choice<{string.Join(", ", EmptyIfNull(choice))}>";
 
         /// <inheritdoc/>
-        public override bool Equals([NotNullWhen(true)] object? other)
-        {
-            if (base.Equals(other))
-                return true;
+        public override bool Equals([NotNullWhen(true)] object? other) => Equals(other as ChoiceTypeSpecifier);
 
-            if (other is ChoiceTypeSpecifier c)
-                return SequenceEquals(c.choice, choice);
-
-            return false;
-        }
+        /// <inheritdoc/>
+        public bool Equals(ChoiceTypeSpecifier? other) => other == null ? false : SetEquals(other.choice, choice);
 
         /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(typeof(ChoiceTypeSpecifier), choice?.Length, choice?.FirstOrDefault());
@@ -97,6 +115,8 @@ namespace Hl7.Cql.Elm
         }
 
         internal override IEnumerable<ParameterTypeSpecifier> GetGenericParameters() => EmptyIfNull(choice?.SelectMany(c => c.GetGenericParameters()));
+
+
     }
 
     public partial class ParameterTypeSpecifier
@@ -143,7 +163,7 @@ namespace Hl7.Cql.Elm
         }
 
         /// <inheritdoc/>
-        public override int GetHashCode() => HashCode.Combine(name, type);
+        public override int GetHashCode() => HashCode.Combine(name, elementType);
 
         internal TupleElementDefinition ReplaceGenericParameters(GenericParameterAssignments assignments)
         {
@@ -171,7 +191,7 @@ namespace Hl7.Cql.Elm
                 return true;
 
             if (other is TupleTypeSpecifier tuple)
-                return SequenceEquals(element, tuple.element);
+                return SetEquals(element, tuple.element);
 
             return false;
         }

@@ -2,6 +2,7 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -20,13 +21,33 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //     | 'case' expression? caseExpressionItem+ 'else' expression 'end'                #caseExpressionTerm
         public override Expression VisitCaseExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.CaseExpressionTermContext context)
         {
-            throw new NotImplementedException("Case expressions are not yet implemented.");
-        }
+            var expressions = context.expression();
+            if (expressions.Length != 1)
+            {
+                var @case = (Case)SystemLibrary.Case.CreateElmNode();
+                return @case.AddError("Expecting expression for else case");
+            }
+            var @else = Visit(expressions[0]);
 
-        //  : 'when' expression 'then' expression;
-        public override Expression VisitCaseExpressionItem([Antlr4.Runtime.Misc.NotNull] cqlParser.CaseExpressionItemContext context)
-        {
-            throw new NotImplementedException("Case expressions are not yet implemented.");
+            var caseItems = context.caseExpressionItem()
+                .Select(item =>
+                {
+                    var itemExpressions = item.expression();
+                    if (itemExpressions.Length != 2)
+                    {
+                        var @caseItem = new CaseItem();
+                        return @caseItem
+                            .AddError("Case item should have two expressions: one for the when clause, and one for the then clause.");
+                    }
+                    else
+                    {
+                        var when = Visit(item.expression(0));
+                        var then = Visit(item.expression(1));
+                        return SystemLibrary.CaseItem.Call(InvocationBuilder, context, when, then);
+                    }
+                })
+                .ToArray();
+            return SystemLibrary.Case.Call(InvocationBuilder, context, caseItems, @else);
         }
     }
 }

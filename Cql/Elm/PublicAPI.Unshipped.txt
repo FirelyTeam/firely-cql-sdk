@@ -86,6 +86,8 @@ Hl7.Cql.Elm.Children.Children() -> void
 Hl7.Cql.Elm.ChoiceTypeSpecifier
 Hl7.Cql.Elm.ChoiceTypeSpecifier.ChoiceTypeSpecifier() -> void
 Hl7.Cql.Elm.ChoiceTypeSpecifier.ChoiceTypeSpecifier(params Hl7.Cql.Elm.TypeSpecifier![]! choice) -> void
+Hl7.Cql.Elm.ChoiceTypeSpecifier.ChoiceTypeSpecifier(System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.TypeSpecifier!>! choice) -> void
+Hl7.Cql.Elm.ChoiceTypeSpecifier.Equals(Hl7.Cql.Elm.ChoiceTypeSpecifier? other) -> bool
 Hl7.Cql.Elm.Coalesce
 Hl7.Cql.Elm.Coalesce.Coalesce() -> void
 Hl7.Cql.Elm.Code

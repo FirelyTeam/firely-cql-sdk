@@ -4,6 +4,9 @@
 		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<Nullable>enable</Nullable>
+		<RootNamespace>Hl7.Cql.CqlToElm.Test</RootNamespace>
+		<AssemlyName>Hl7.Cql.CqlToElm.Test</AssemlyName>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -50,6 +53,9 @@
 		<None Update="Input\LibraryTest\*.cql">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+		<None Update="Input\HL7\*.cql">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>		
 	</ItemGroup>
 
 </Project>

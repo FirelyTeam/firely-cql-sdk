@@ -80,5 +80,14 @@ namespace Hl7.Cql.CqlToElm.Test
             e.GetErrors().Where(e => e.errorSeverity == ErrorSeverity.error).Should().BeEmpty();
             return e;
         }
+
+        public static void BeNamedType(this ObjectAssertions l, string typeName)
+        {
+            l.Subject.Should().NotBeNull();
+            l.Subject.Should().BeOfType<NamedTypeSpecifier>();
+            var nts = (NamedTypeSpecifier)l.Subject;
+            nts.name.Should().NotBeNull();
+            nts.name.Should().Be(typeName);
+        }
     }
 }

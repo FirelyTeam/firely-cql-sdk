@@ -1,0 +1,1192 @@
+{
+  "library" : {
+    "type" : "Library",
+    "identifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "CqlNullologicalOperatorsTest"
+    },
+    "schemaIdentifier" : {
+      "type" : "VersionedIdentifier",
+      "id" : "urn:hl7-org:elm",
+      "version" : "r1"
+    },
+    "usings" : {
+      "type" : "Library$Usings",
+      "def" : [ {
+        "type" : "UsingDef",
+        "localIdentifier" : "System",
+        "uri" : "urn:hl7-org:elm-types:r1"
+      } ]
+    },
+    "contexts" : {
+      "type" : "Library$Contexts",
+      "def" : [ {
+        "type" : "ContextDef",
+        "locator" : "3:1-3:18",
+        "name" : "Unfiltered"
+      } ]
+    },
+    "statements" : {
+      "type" : "Library$Statements",
+      "def" : [ {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "Literal",
+            "locator" : "7:11-7:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a"
+          }, {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "7:16-7:19",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          } ],
+          "locator" : "7:2-7:20",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+        },
+        "locator" : "6:1-7:20",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "CoalesceANull Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "9:2-9:4",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "a"
+        },
+        "locator" : "8:1-9:4",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "CoalesceANull Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "12:11-12:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}String"
+          }, {
+            "type" : "Literal",
+            "locator" : "12:17-12:19",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a"
+          } ],
+          "locator" : "12:2-12:20",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String"
+        },
+        "locator" : "11:1-12:20",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "CoalesceNullA Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "14:2-14:4",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "a"
+        },
+        "locator" : "13:1-14:4",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "CoalesceNullA Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "List",
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Any"
+              }
+            },
+            "locator" : "17:11-17:12"
+          } ],
+          "locator" : "17:2-17:13",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "16:1-17:13",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "CoalesceEmptyList Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Null",
+          "locator" : "19:2-19:5",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "18:1-19:5",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "CoalesceEmptyList Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "22:12-22:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "22:17-22:20",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "22:23-22:26",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "22:11-22:27"
+          } ],
+          "locator" : "22:2-22:28",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "21:1-22:28",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "CoalesceListFirstA Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "24:2-24:4",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "a"
+        },
+        "locator" : "23:1-24:4",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "CoalesceListFirstA Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "List",
+            "element" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "27:12-27:15",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "27:18-27:21",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}String"
+            }, {
+              "type" : "Literal",
+              "locator" : "27:24-27:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "27:11-27:27"
+          } ],
+          "locator" : "27:2-27:28",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "26:1-27:28",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "CoalesceListLastA Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "29:2-29:4",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+          "valueType" : "{urn:hl7-org:elm-types:r1}String",
+          "value" : "a"
+        },
+        "locator" : "28:1-29:4",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+        "name" : "CoalesceListLastA Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            }
+          },
+          "operand" : [ {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "32:12-32:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "32:11-32:15"
+          }, {
+            "type" : "As",
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "operand" : {
+              "type" : "Null",
+              "locator" : "32:17-32:20",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          }, {
+            "type" : "As",
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "operand" : {
+              "type" : "Null",
+              "locator" : "32:23-32:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          } ],
+          "locator" : "32:2-32:27"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "locator" : "31:1-32:27",
+        "name" : "CoalesceFirstList Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "List",
+          "element" : [ {
+            "type" : "Literal",
+            "locator" : "34:3-34:5",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a"
+          } ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            }
+          },
+          "locator" : "34:2-34:6"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "locator" : "33:1-34:6",
+        "name" : "CoalesceFirstList Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            }
+          },
+          "operand" : [ {
+            "type" : "As",
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "operand" : {
+              "type" : "Null",
+              "locator" : "37:11-37:14",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          }, {
+            "type" : "As",
+            "asTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "operand" : {
+              "type" : "Null",
+              "locator" : "37:17-37:20",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            }
+          }, {
+            "type" : "List",
+            "element" : [ {
+              "type" : "Literal",
+              "locator" : "37:24-37:26",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+              "value" : "a"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}String"
+              }
+            },
+            "locator" : "37:23-37:27"
+          } ],
+          "locator" : "37:2-37:28"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "locator" : "36:1-37:28",
+        "name" : "CoalesceLastList Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "List",
+          "element" : [ {
+            "type" : "Literal",
+            "locator" : "39:3-39:5",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "a"
+          } ],
+          "resultTypeSpecifier" : {
+            "type" : "ListTypeSpecifier",
+            "elementType" : {
+              "type" : "NamedTypeSpecifier",
+              "name" : "{urn:hl7-org:elm-types:r1}String"
+            }
+          },
+          "locator" : "39:2-39:6"
+        },
+        "resultTypeSpecifier" : {
+          "type" : "ListTypeSpecifier",
+          "elementType" : {
+            "type" : "NamedTypeSpecifier",
+            "name" : "{urn:hl7-org:elm-types:r1}String"
+          }
+        },
+        "locator" : "38:1-39:6",
+        "name" : "CoalesceLastList Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "Null",
+            "locator" : "42:11-42:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          }, {
+            "type" : "Null",
+            "locator" : "42:17-42:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          }, {
+            "type" : "DateTime",
+            "year" : {
+              "type" : "Literal",
+              "locator" : "42:32-42:35",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "2012"
+            },
+            "month" : {
+              "type" : "Literal",
+              "locator" : "42:38",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "5"
+            },
+            "day" : {
+              "type" : "Literal",
+              "locator" : "42:41-42:42",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "18"
+            },
+            "locator" : "42:23-42:43",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+          } ],
+          "locator" : "42:2-42:44",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "41:1-42:44",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "DateTimeCoalesce Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "DateTime",
+          "year" : {
+            "type" : "Literal",
+            "locator" : "44:11-44:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2012"
+          },
+          "month" : {
+            "type" : "Literal",
+            "locator" : "44:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5"
+          },
+          "day" : {
+            "type" : "Literal",
+            "locator" : "44:20-44:21",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "18"
+          },
+          "locator" : "44:2-44:22",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+        },
+        "locator" : "43:1-44:22",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeCoalesce Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "List",
+            "element" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "47:13-47:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}DateTime"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "47:19-47:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}DateTime"
+            }, {
+              "type" : "DateTime",
+              "year" : {
+                "type" : "Literal",
+                "locator" : "47:34-47:37",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "2012"
+              },
+              "month" : {
+                "type" : "Literal",
+                "locator" : "47:40",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              },
+              "day" : {
+                "type" : "Literal",
+                "locator" : "47:43-47:44",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "18"
+              },
+              "locator" : "47:25-47:45",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}DateTime"
+              }
+            },
+            "locator" : "47:11-47:47"
+          } ],
+          "locator" : "47:2-47:48",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "46:1-47:48",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "DateTimeListCoalesce Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "DateTime",
+          "year" : {
+            "type" : "Literal",
+            "locator" : "49:11-49:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "2012"
+          },
+          "month" : {
+            "type" : "Literal",
+            "locator" : "49:17",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5"
+          },
+          "day" : {
+            "type" : "Literal",
+            "locator" : "49:20-49:21",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "18"
+          },
+          "locator" : "49:2-49:22",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime"
+        },
+        "locator" : "48:1-49:22",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+        "name" : "DateTimeListCoalesce Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "Null",
+            "locator" : "52:11-52:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          }, {
+            "type" : "Null",
+            "locator" : "52:17-52:20",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          }, {
+            "type" : "Time",
+            "hour" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "5"
+            },
+            "minute" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "15"
+            },
+            "second" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "33"
+            },
+            "millisecond" : {
+              "type" : "Literal",
+              "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+              "value" : "556"
+            },
+            "locator" : "52:23-52:36",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+          } ],
+          "locator" : "52:2-52:37",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "51:1-52:37",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "TimeCoalesce Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Time",
+          "hour" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5"
+          },
+          "minute" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "15"
+          },
+          "second" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "33"
+          },
+          "millisecond" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "556"
+          },
+          "locator" : "54:2-54:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+        },
+        "locator" : "53:1-54:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeCoalesce Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Coalesce",
+          "operand" : [ {
+            "type" : "List",
+            "element" : [ {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "57:13-57:16",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}Time"
+            }, {
+              "type" : "As",
+              "operand" : {
+                "type" : "Null",
+                "locator" : "57:19-57:22",
+                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+              },
+              "asType" : "{urn:hl7-org:elm-types:r1}Time"
+            }, {
+              "type" : "Time",
+              "hour" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "5"
+              },
+              "minute" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "15"
+              },
+              "second" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "33"
+              },
+              "millisecond" : {
+                "type" : "Literal",
+                "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                "value" : "556"
+              },
+              "locator" : "57:25-57:38",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+            } ],
+            "resultTypeSpecifier" : {
+              "type" : "ListTypeSpecifier",
+              "elementType" : {
+                "type" : "NamedTypeSpecifier",
+                "name" : "{urn:hl7-org:elm-types:r1}Time"
+              }
+            },
+            "locator" : "57:11-57:40"
+          } ],
+          "locator" : "57:2-57:41",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+        },
+        "locator" : "56:1-57:41",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+        "name" : "TimeListCoalesce Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Time",
+          "hour" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "5"
+          },
+          "minute" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "15"
+          },
+          "second" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "33"
+          },
+          "millisecond" : {
+            "type" : "Literal",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "556"
+          },
+          "locator" : "59:2-59:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time"
+        },
+        "locator" : "58:1-59:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Time",
+        "name" : "TimeListCoalesce Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsNull",
+          "operand" : {
+            "type" : "Null",
+            "locator" : "62:9-62:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+          },
+          "locator" : "62:2-62:13",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "61:1-62:13",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullTrue Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "64:2-64:5",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "true"
+        },
+        "locator" : "63:1-64:5",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullTrue Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsNull",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "67:9-67:10",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : ""
+          },
+          "locator" : "67:2-67:11",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "66:1-67:11",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullFalseEmptyString Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "69:2-69:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "68:1-69:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullFalseEmptyString Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsNull",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "72:9-72:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "valueType" : "{urn:hl7-org:elm-types:r1}String",
+            "value" : "abc"
+          },
+          "locator" : "72:2-72:14",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "71:1-72:14",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullAlsoFalseAbcString Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "74:2-74:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "73:1-74:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullAlsoFalseAbcString Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsNull",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "77:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "1"
+          },
+          "locator" : "77:2-77:10",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "76:1-77:10",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullAlsoFalseNumber1 Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "79:2-79:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "78:1-79:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullAlsoFalseNumber1 Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsNull",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "82:9",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+            "value" : "0"
+          },
+          "locator" : "82:2-82:10",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "81:1-82:10",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullAlsoFalseNumberZero Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "84:2-84:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "83:1-84:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsNullAlsoFalseNumberZero Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsFalse",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "87:10-87:14",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false"
+          },
+          "locator" : "87:2-87:15",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "86:1-87:15",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsFalseFalse Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "89:2-89:5",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "true"
+        },
+        "locator" : "88:1-89:5",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsFalseFalse Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsFalse",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "92:10-92:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          },
+          "locator" : "92:2-92:14",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "91:1-92:14",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsFalseTrue Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "94:2-94:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "93:1-94:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsFalseTrue Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsFalse",
+          "operand" : {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "97:10-97:13",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "locator" : "97:2-97:14",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "96:1-97:14",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsFalseNull Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "99:2-99:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "98:1-99:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsFalseNull Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsTrue",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "102:9-102:12",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "true"
+          },
+          "locator" : "102:2-102:13",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "101:1-102:13",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsTrueTrue Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "104:2-104:5",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "true"
+        },
+        "locator" : "103:1-104:5",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsTrueTrue Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsTrue",
+          "operand" : {
+            "type" : "Literal",
+            "locator" : "107:9-107:13",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "value" : "false"
+          },
+          "locator" : "107:2-107:14",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "106:1-107:14",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsTrueFalse Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "109:2-109:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "108:1-109:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsTrueFalse Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "IsTrue",
+          "operand" : {
+            "type" : "As",
+            "operand" : {
+              "type" : "Null",
+              "locator" : "112:9-112:12",
+              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any"
+            },
+            "asType" : "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "locator" : "112:2-112:13",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        "locator" : "111:1-112:13",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsTrueNull Input",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      }, {
+        "type" : "ExpressionDef",
+        "expression" : {
+          "type" : "Literal",
+          "locator" : "114:2-114:6",
+          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "valueType" : "{urn:hl7-org:elm-types:r1}Boolean",
+          "value" : "false"
+        },
+        "locator" : "113:1-114:6",
+        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+        "name" : "IsTrueNull Output",
+        "context" : "Unfiltered",
+        "accessLevel" : "Public"
+      } ]
+    },
+    "annotation" : [ {
+      "type" : "CqlToElmInfo",
+      "translatorOptions" : "EnableLocators,EnableResultTypes,DisableListTraversal"
+    } ]
+  }
+}
