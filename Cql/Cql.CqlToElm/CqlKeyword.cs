@@ -6,8 +6,10 @@
         After,
         As,
         Before,
+        Collapse,
         End,
         Ends,
+        Expand,
         Day,
         Days,
         During,
@@ -30,6 +32,7 @@
         Occurs,
         Of,
         Or,
+        On_Or,
         Or_Before,
         Or_After,
         Overlaps,
@@ -46,5 +49,6 @@
         Null,
         True,
         False,
+        Per,
     }
 }

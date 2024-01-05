@@ -31,8 +31,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else if (term is IncludeRef ir)
                 return SymbolScopeExtensions.MakeErrorReference(null, ir.IncludeDef.localIdentifier,
                     "A reference to a library is unexpected at this point.").WithLocator(context.Locator());
-            else
-                return term;
+            else if (term is null)
+                throw new NotImplementedException();
+            else return term;
         }
 
         // This expression is used when constructing paths from left to right when parsing an invocation term.

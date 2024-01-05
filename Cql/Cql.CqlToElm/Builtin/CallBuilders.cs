@@ -184,23 +184,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 .WithLocator(context.Locator());
         }
 
-        public static CaseItem Call(this CaseItemFunctionDef def, 
-            InvocationBuilder builder,
-            ParserRuleContext context,
-            Expression when, Expression then)
-        {
-            var caseItem = new CaseItem();
-            var whenCastResult = builder.BuildImplicitCast(when, SystemTypes.BooleanType, out var _);
-            caseItem.when = whenCastResult.Result;
-            if (whenCastResult.Error is not null)
-                caseItem.AddError("A case " + whenCastResult.Error);
-            caseItem.then = then;
-            return caseItem
-                .WithResultType(then.resultTypeSpecifier)
-                .WithLocator(context.Locator());
-        }
-
-
         /// <summary>
         /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that
         /// function with the given arguments. It will not attempt to cast the arguments to the parameters of the function.

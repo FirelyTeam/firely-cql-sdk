@@ -37,7 +37,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             IntegerToDecimal, LongToDecimal, IntegerToLong, IntegerToQuantity, DecimalToQuantity, DateToDateTime, CodeToConcept,
             Concatenate,
             Equal, NotEqual, Equivalent,
-            If
+            If,
+            Case
         };
 
         private static BuiltInFunctionDef unary<T>(TypeSpecifier argument, TypeSpecifier result) where T : OperatorExpression =>
@@ -100,9 +101,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef[] Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
         public static IfFunctionDef If = new();
         public static CaseFunctionDef Case = new();
-        public static CaseItemFunctionDef CaseItem = new();
-
-
     }
 
     internal static class FunctionDefinitionBuilders

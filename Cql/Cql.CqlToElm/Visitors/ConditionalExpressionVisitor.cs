@@ -43,7 +43,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         var when = Visit(item.expression(0));
                         var then = Visit(item.expression(1));
-                        return SystemLibrary.CaseItem.Call(InvocationBuilder, context, when, then);
+
+                        var caseItem = new CaseItem();
+                        var whenCastResult = InvocationBuilder.BuildImplicitCast(when, SystemTypes.BooleanType, out var _);
+                        if (whenCastResult.Error is not null)
+                            caseItem.AddError("A case " + whenCastResult.Error);
+                        else
+                            caseItem.when = whenCastResult.Result;
+                        caseItem.then = then;
+                        return caseItem
+                            .WithResultType(then.resultTypeSpecifier)
+                            .WithLocator(context.Locator());
                     }
                 })
                 .ToArray();
