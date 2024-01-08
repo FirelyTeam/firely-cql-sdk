@@ -32,7 +32,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return SymbolScopeExtensions.MakeErrorReference(null, ir.IncludeDef.localIdentifier,
                     "A reference to a library is unexpected at this point.").WithLocator(context.Locator());
             else if (term is null)
-                throw new NotImplementedException();
+            {
+                var message = $"Type {context.expressionTerm().GetType()} is not implemented";
+                return new Message()
+                {
+                    source = new Null().WithResultType(SystemTypes.AnyType),
+                    message = new Literal
+                    {
+                        value = message,
+                        resultTypeSpecifier = SystemTypes.StringType
+                    }
+                }
+                .AddError(message)
+                .WithLocator(context.Locator())
+                .WithResultType(SystemTypes.AnyType);
+            }
             else return term;
         }
 

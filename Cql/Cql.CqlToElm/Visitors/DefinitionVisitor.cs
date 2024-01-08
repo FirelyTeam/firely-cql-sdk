@@ -192,15 +192,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override IDefinitionElement VisitExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context)
         {
             var expression = ExpressionVisitor.Visit(context.expression());
-
-            var def = new ExpressionDef
+            if (expression is null)
             {
-                accessLevel = context.accessModifier().Parse(),
-                name = context.identifier().Parse(),
-                expression = expression,
-            }.WithResultType(expression.resultTypeSpecifier).WithLocator(context.Locator());
-
-            return def;
+                var msg = $"Expression type {context.expression().GetType()} is not implemented.";
+                var errorDef = new ExpressionDef()
+                {
+                    accessLevel = context.accessModifier().Parse(),
+                    name = context.identifier().Parse(),
+                    expression = new Null().WithResultType(SystemTypes.AnyType)
+                };
+                return errorDef
+                    .AddError(msg)
+                    .WithLocator(context.Locator())
+                    .WithResultType(SystemTypes.AnyType);
+            }
+            else
+            {
+                var def = new ExpressionDef
+                {
+                    accessLevel = context.accessModifier().Parse(),
+                    name = context.identifier().Parse(),
+                    expression = expression,
+                };
+                return def
+                    .WithLocator(context.Locator())
+                    .WithResultType(expression.resultTypeSpecifier);
+            }
         }
 
         //  'define' accessModifier? fluentModifier? 'function' identifierOrFunctionIdentifier '(' (operandDefinition (',' operandDefinition)*)? ')'
@@ -283,6 +300,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // with context statements, which become active immediately.
             foreach (var statementContext in context)
             {
+#if DEBUG
+                var statementText = statementContext.GetText();
+#endif
                 var statement = Visit(statementContext);
 
                 if (statement is ExpressionDef ed)
