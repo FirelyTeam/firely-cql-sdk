@@ -10,6 +10,7 @@ Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Primitives.CqlPri
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
+Hl7.Cql.Packaging.ElmLibraryExtensions
 Hl7.Cql.Packaging.LibraryPackager
 Hl7.Cql.Packaging.CqlTypeToFhirMapping
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
@@ -39,6 +40,7 @@ override Hl7.Cql.Packaging.CqlTypeToFhirMapping.Equals(object? obj) -> bool
 override Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.WriteResources(System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>! resources) -> void
 override Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.WriteResources(System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>! resources) -> void
 static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! ctx) -> System.Collections.Generic.IDictionary<string!, object?>!
+static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.LogLevel logLevel = Microsoft.Extensions.Logging.LogLevel.Error) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> System.Collections.Generic.IDictionary<string!, Hl7.Cql.Elm.Library!>!
