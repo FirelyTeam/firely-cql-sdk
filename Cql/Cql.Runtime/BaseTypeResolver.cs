@@ -150,8 +150,9 @@ namespace Hl7.Cql.Runtime
                 ) 
                     return type.GetGenericArguments()[0];
 
-                //Handle LINQ Iterator types
+                // handle LINQ cast iterators, where iterators, selects, etc.
                 if (genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable)) 
+                    && genericTypeDefinition.Namespace == "System.Linq"
                     && type.GenericTypeArguments.Length == 1)
                     return type.GetGenericArguments()[0];
 
