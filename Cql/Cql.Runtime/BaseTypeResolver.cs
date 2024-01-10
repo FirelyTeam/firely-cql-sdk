@@ -147,9 +147,14 @@ namespace Hl7.Cql.Runtime
                 if (genericTypeDefinition == typeof(IEnumerable<>) 
                      || genericTypeDefinition == typeof(List<>) 
                      || genericTypeDefinition == typeof(ICollection<>)
-                     || genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable)) //Handle LINQ Iterator types
                 ) 
                     return type.GetGenericArguments()[0];
+
+                //Handle LINQ Iterator types
+                if (genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable)) 
+                    && type.GenericTypeArguments.Length == 1)
+                    return type.GetGenericArguments()[0];
+
                 else if (@throw) throw new NotSupportedException();
                 else return null;
             }
