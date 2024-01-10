@@ -11,6 +11,6 @@ namespace Hl7.Cql.Packaging
     internal static class Constants
     {
         public const string ParameterElementTypeExtensionUri = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.list-element-type";
-        public const string ParameterAccessLevel = "https://ncqa.org/fhir/StructureDefinition/ext-parameter.access-level";
+        public const string ParameterAccessLevel = "http://hl7.org/fhir/StructureDefinition/cqf-cqlAccessLevel";
     }
 }
