@@ -150,5 +150,46 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return SystemLibrary.As.Build(true, typeSpecifier, operand, context);
         }
+
+        public override Expression VisitConversionExpressionTerm([NotNull] cqlParser.ConversionExpressionTermContext context)
+        {
+            var expression = Visit(context.expression());
+            var tsContext = context.typeSpecifier();
+            if (tsContext is not null)
+            {
+                var type = TypeSpecifierVisitor.Visit(tsContext);
+                UnaryExpression convert;
+                if (type is NamedTypeSpecifier nts)
+                {
+                    if (nts == SystemTypes.IntegerType)
+                        convert = new ToInteger().WithResultType(SystemTypes.IntegerType);
+                    if (nts == SystemTypes.LongType)
+                        convert = new ToLong().WithResultType(SystemTypes.LongType);
+                    else if (nts == SystemTypes.DecimalType)
+                        convert = new ToDecimal().WithResultType(SystemTypes.DecimalType);
+                    else if (nts == SystemTypes.DateTimeType)
+                        convert = new ToDateTime().WithResultType(SystemTypes.DateTimeType);
+                    else if (nts == SystemTypes.DateType)
+                        convert = new ToDate().WithResultType(SystemTypes.DateType);
+                    else if (nts == SystemTypes.ConceptType)
+                        convert = new ToConcept().WithResultType(SystemTypes.ConceptType);
+                    else if (nts == SystemTypes.BooleanType)
+                        convert = new ToBoolean().WithResultType(SystemTypes.BooleanType);
+                    else
+                        convert = new Elm.Convert() { toTypeSpecifier = type }.WithResultType(type);
+                }
+                else {
+                    convert = new Elm.Convert() { toTypeSpecifier = type }.WithResultType(type);
+                }
+                convert.operand = expression;
+                return convert
+                    .WithLocator(context.Locator());
+            }
+            else
+            {
+                var unitContext = Visit(context.unit());
+            }
+            throw new NotImplementedException();
+        }
     }
 }

@@ -193,5 +193,36 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return SystemLibrary.Power.Call(ModelProvider, context, lhs, rhs);
         }
+
+        public override Expression VisitIndexedExpressionTerm([NotNull] cqlParser.IndexedExpressionTermContext context)
+        {
+            var term = Visit(context.expressionTerm());
+            var index = Visit(context.expression());
+            var indexer = new Indexer
+            {
+                operand = new[] { term, index }
+            };
+            TypeSpecifier type;
+            if (term.resultTypeSpecifier is ListTypeSpecifier listType)
+                type = listType.elementType;
+            else if (term.resultTypeSpecifier is NamedTypeSpecifier namedType)
+            {
+                if (namedType == SystemTypes.StringType)
+                    type = SystemTypes.StringType;
+                else
+                {
+                    indexer.AddError($"Unable to index type {namedType.name}");
+                    type = SystemTypes.AnyType;
+                }
+            }
+            else
+            {
+                indexer.AddError($"Unable to index type {term.resultTypeSpecifier}");
+                type = SystemTypes.AnyType;
+            }
+            return indexer
+                .WithLocator(context.Locator())
+                .WithResultType(type);
+        }
     }
 }

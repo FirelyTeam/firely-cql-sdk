@@ -50,6 +50,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else return term;
         }
 
+        public override Expression VisitInstanceSelector([NotNull] cqlParser.InstanceSelectorContext context)
+        {
+            var type = TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
+            var elements = context
+                .instanceElementSelector()
+                .Select(ies =>
+                {
+                    var name = ies.referentialIdentifier().Parse();
+                    var expression = Visit(ies.expression());
+                    var ele = new InstanceElement()
+                    {
+                        name = name,
+                        value = expression,
+                    };
+                    return ele;
+                })
+                .ToArray();
+            var instance = new Instance { element = elements }
+                .WithResultType(type)
+                .WithLocator(context.Locator());
+            return instance;
+        }
+
         // This expression is used when constructing paths from left to right when parsing an invocation term.
         // It is set to the result of parsing the path so far, and then used to construct the next step in the path.
         private Expression? LeftExpressionTerm;

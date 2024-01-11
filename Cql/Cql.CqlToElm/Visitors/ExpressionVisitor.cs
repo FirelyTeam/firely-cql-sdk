@@ -213,6 +213,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return retrieve;
         }
 
+        protected Expression ErrorMessage(string message, string locator)
+        {
+            return new Message()
+            {
+                message = new Literal() { value = message }.WithResultType(SystemTypes.StringType),
+                source = new Null().WithResultType(SystemTypes.AnyType)
+            }
+            .AddError(message)
+            .WithLocator(locator)
+            .WithResultType(SystemTypes.AnyType);
+        }
+
         private enum ListElementPromotion
         {
             None,
