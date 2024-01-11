@@ -3,6 +3,8 @@ using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTests
 {
@@ -44,6 +46,56 @@ namespace CoreTests
             var typeEntry = crosswalk.TypeEntryFor(cqlType);
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.Claim, typeEntry.FhirType.Value);
+        }
+
+
+        [TestMethod]
+        public void String_MapToFhirType()
+        {
+            var cqlType = typeof(string);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.String, typeEntry.FhirType.Value);
+        }
+
+        [TestMethod]
+        public void Decimal_MapToFhirType()
+        {
+            var cqlType = typeof(decimal);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Decimal, typeEntry.FhirType.Value);
+        }
+
+
+
+        [TestMethod]
+        public void Boolean_MapToFhirType()
+        {
+            var cqlType = typeof(bool);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Boolean, typeEntry.FhirType.Value);
+        }
+        
+        [TestMethod]
+        public void LINQResult_MapToFhirType()
+        {
+            var list = new List<object> { new Claim() { Id = "claim1" } };
+
+            var linqResult = list.Cast<Claim>();
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(linqResult.GetType());
+            Assert.IsNotNull(typeEntry, $"Unable to express {linqResult.GetType()} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.List, typeEntry.FhirType.Value);
+            Assert.AreEqual(FHIRAllTypes.Claim, typeEntry.ElementType.FhirType);
         }
 
         #endregion

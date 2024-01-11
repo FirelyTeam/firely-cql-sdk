@@ -196,6 +196,14 @@ namespace Hl7.Cql.Packaging
         /// <returns>the Type mapping, or null</returns>
         public CqlTypeToFhirMapping? TypeEntryFor(Type type)
         {
+            if (type.IsPrimitive || type.IsValueType || type == typeof(string))
+            {
+                var fhirType = PrimitiveToFhir(type);
+                if (fhirType == null) return null;
+
+                return TypeEntryFor(fhirType.Value);
+            }
+
             var fhirTypeName = ModelInspector.GetFhirTypeNameForType(type);
             if (fhirTypeName is not null)
             {
@@ -226,17 +234,12 @@ namespace Hl7.Cql.Packaging
             if (IsOrImplementsIEnumerableOfT(type))
             {
                 var elementType = TypeResolver.GetListElementType(type);
+                if (elementType is null)
+                    return null;
                 var elementEntry = TypeEntryFor(elementType!);
                 if (elementEntry is null)
                     return null;
                 return TypeEntryFor(CqlPrimitiveType.List, elementEntry);
-            }
-            if (type.IsPrimitive || type.IsValueType || type == typeof(string))
-            {
-                var fhirType = PrimitiveToFhir(type);
-                if (fhirType == null) return null;
-
-                return TypeEntryFor(fhirType.Value);
             }
 
             return null;
