@@ -49,7 +49,7 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
         {
-            CqlDateTime.TryParse("1960", out var baseDate);
+            Assert.IsTrue(CqlDateTime.TryParse("1960", out var baseDate));
             Assert.AreEqual(DateTimePrecision.Year, baseDate.Value.Precision);
             var plusOneYear = baseDate.Add(new CqlQuantity(1m, "year"));
             Assert.AreEqual(DateTimePrecision.Year, plusOneYear.Value.Precision);
@@ -85,7 +85,7 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_Add_Month()
         {
-            CqlDateTime.TryParse("2022-01-01", out var baseDate);
+            Assert.IsTrue(CqlDateTime.TryParse("2022-01-01", out var baseDate));
 
             var plus1Month = baseDate.Add(new CqlQuantity(1m, "month"));
             Assert.AreEqual(DateTimePrecision.Day, plus1Month.Value.Precision);
@@ -107,7 +107,7 @@ namespace CoreTests
         [TestMethod]
         public void CqlDateTime_Subtract_Month()
         {
-            CqlDateTime.TryParse("2022-03-01", out var baseDate);
+            Assert.IsTrue(CqlDateTime.TryParse("2022-03-01", out var baseDate));
 
             var minus1Month = baseDate.Subtract(new CqlQuantity(1m, "month"));
             Assert.AreEqual(DateTimePrecision.Day, minus1Month.Value.Precision);
@@ -170,7 +170,6 @@ namespace CoreTests
             boundariesBetween = new CqlDateTime(startDate).BoundariesBetween(cqlEndDate, "month");
             Assert.AreEqual(1, boundariesBetween);
 
-
             Assert.IsTrue(DateTimeIso8601.TryParse("2020-03-01", out startDate));
             Assert.IsTrue(CqlDateTime.TryParse("2020-04-30", out cqlStartDate));
             Assert.IsTrue(CqlDateTime.TryParse("2020-03-31", out cqlEndDate));
@@ -205,7 +204,6 @@ namespace CoreTests
 
             var boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(0, boundariesBetween);
-
 
             Assert.IsTrue(CqlDateTime.TryParse("2021-02-28", out cqlStartDate));
             boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
