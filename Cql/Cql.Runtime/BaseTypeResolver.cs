@@ -144,12 +144,18 @@ namespace Hl7.Cql.Runtime
             if (type.IsGenericType)
             {
                 var genericTypeDefinition = type.GetGenericTypeDefinition();
-                if (genericTypeDefinition == typeof(IEnumerable<>))
+                if (genericTypeDefinition == typeof(IEnumerable<>) 
+                     || genericTypeDefinition == typeof(List<>) 
+                     || genericTypeDefinition == typeof(ICollection<>)
+                ) 
                     return type.GetGenericArguments()[0];
-                else if (genericTypeDefinition == typeof(List<>))
+
+                // handle LINQ cast iterators, where iterators, selects, etc.
+                if (genericTypeDefinition.GetInterfaces().Contains(typeof(System.Collections.IEnumerable)) 
+                    && genericTypeDefinition.Namespace == "System.Linq"
+                    && type.GenericTypeArguments.Length == 1)
                     return type.GetGenericArguments()[0];
-                else if (genericTypeDefinition == typeof(ICollection<>))
-                    return type.GetGenericArguments()[0];
+
                 else if (@throw) throw new NotSupportedException();
                 else return null;
             }
