@@ -263,24 +263,6 @@ namespace Hl7.Cql.Iso8601
                 timeValue = null;
                 return false;
             }
-            else
-            {
-                timeValue = stringValue;
-                return true;
-            }
-
-        }
-
-        /// <summary>
-        /// Converts a string to an ISO 8601 time, or throws.
-        /// </summary>
-        /// <param name="stringValue">The string to convert.</param>
-        /// <exception cref="ArgumentException">When <paramref name="stringValue"/> cannot be parsed.</exception>
-        public static implicit operator TimeIso8601(string stringValue)
-        {
-            var parts = Expression.Match(stringValue);
-            if (!parts.Success || parts.Captures.Count != 1 || parts.Captures[0].Length != stringValue.Length)
-                throw new ArgumentException($"Invalid ISO 8601 date time: {stringValue}", nameof(stringValue));
 
 
             int hour;
@@ -335,9 +317,14 @@ namespace Hl7.Cql.Iso8601
                     }
                 }
             }
-            else throw new ArgumentException("At least hour must be specified", nameof(stringValue));
-            var isoTime = new TimeIso8601(hour, minute, second, ms, osHour, osMinute);
-            return isoTime;
+            else
+            {
+                timeValue = null;
+                return false;
+            }
+
+            timeValue = new TimeIso8601(hour, minute, second, ms, osHour, osMinute);
+            return true;
         }
 
         private static string Format(int hour, int? minute, int? second, int? ms, int? osHour, int? osMinute, DateTimePrecision precision)
