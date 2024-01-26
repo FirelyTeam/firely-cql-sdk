@@ -322,7 +322,7 @@ namespace Hl7.Cql.Runtime
                 }
                 else
                 {
-                    var sizes = new Dictionary<object, int>(IEqualityComparer);
+                    var sizes = new Dictionary<object, int>(EqualityComparer);
                     object? modeObject = null;
                     var modeCount = 0;
                     foreach (var o in nonNull)
