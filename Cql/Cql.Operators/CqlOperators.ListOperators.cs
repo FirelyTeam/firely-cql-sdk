@@ -1175,49 +1175,13 @@ namespace Hl7.Cql.Runtime
             }
         }
 
-        public IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right)
+		public IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right)
         {
             if (left == null || right == null)
                 return null;
-            
-            if (left is IValueSetFacade leftFacade)
-            {
-                if (right is IValueSetFacade rightFacade)
-                {
-                    var union = new ValueSetUnion(new[] { leftFacade, rightFacade }, this);
-                    return union;
-                }
-                else if (right is ValueSetUnion rightUnion)
-                {
-                    var all = rightUnion.Facades
-                        .Concat(new[] { leftFacade })
-                        .ToArray();
-                    var union = new ValueSetUnion(all, this);
-                    return union;
-                }
-            }
-            else if (left is ValueSetUnion leftUnion)
-            {
-                if (right is ValueSetFacade rightFacade)
-                {
-                    var all = leftUnion.Facades
-                        .Concat(new[] { rightFacade })
-                        .ToArray();
-                    var union = new ValueSetUnion(all, this);
-                    return union;
-                }
-                else if (right is ValueSetUnion rightUnion)
-                {
-                    var all = leftUnion.Facades
-                        .Concat(rightUnion.Facades)
-                        .ToArray();
-                    var union = new ValueSetUnion(all, this);
-                    return union;
-                }
-            }
-            
-            return ListUnion(left, right);
-        }
+            else
+                return left.Union(right);
+        }            
 
         #endregion
 

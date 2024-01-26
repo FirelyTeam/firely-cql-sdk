@@ -175,8 +175,7 @@ namespace Hl7.Cql.Runtime
         public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
-        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) =>
-            new ValueSetFacade(valueSet, ValueSets);
+        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);
 
 
         public object NotSupported() => throw new NotSupportedException();
