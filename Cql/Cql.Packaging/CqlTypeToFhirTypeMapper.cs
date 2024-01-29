@@ -320,13 +320,14 @@ namespace Hl7.Cql.Packaging
         /// </summary>
         /// <param name="element">the ELM element</param>
         /// <returns>the Type mapping, or null</returns>
-        public CqlTypeToFhirMapping? TypeEntryFor(Elm.Element element) =>
-            element switch
+        public CqlTypeToFhirMapping? TypeEntryFor(Elm.Element element)
+        {
+            return element switch
             {
                 Elm.Literal literal => TypeEntryFor(literal.valueType.Name),
-                _ => TypeEntryFor(element.resultTypeSpecifier)
+                _ => element.resultTypeName != null ? TypeEntryFor(element.resultTypeName.Name) : TypeEntryFor(element.resultTypeSpecifier)
             };
-
+        }
         private bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)

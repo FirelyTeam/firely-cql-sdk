@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -23,6 +24,21 @@ namespace CoreTests
             var typeEntry = crosswalk.TypeEntryFor(cqlType);
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.Date, typeEntry.FhirType.Value);
+        }
+
+
+        [TestMethod]
+        public void Element_ResultName_MapToFhirType()
+        {
+            var element = new Hl7.Cql.Elm.ParameterDef()
+            {
+                resultTypeName = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}boolean")
+            };
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(element);
+            Assert.IsNotNull(typeEntry, $"Unable to express {element} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Boolean, typeEntry.FhirType.Value);
         }
 
         [TestMethod]
@@ -70,8 +86,6 @@ namespace CoreTests
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.Decimal, typeEntry.FhirType.Value);
         }
-
-
 
         [TestMethod]
         public void Boolean_MapToFhirType()
