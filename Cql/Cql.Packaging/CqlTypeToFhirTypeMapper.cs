@@ -149,7 +149,7 @@ namespace Hl7.Cql.Packaging
                         case CqlPrimitiveType.Decimal:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Decimal));
                         case CqlPrimitiveType.Integer:
-                            return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Decimal));
+                            return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Integer));
                         case CqlPrimitiveType.Quantity:
                             return new CqlTypeToFhirMapping(FHIRAllTypes.Range, cqlType, TypeEntryFor(FHIRAllTypes.Quantity));
                         case CqlPrimitiveType.Ratio:

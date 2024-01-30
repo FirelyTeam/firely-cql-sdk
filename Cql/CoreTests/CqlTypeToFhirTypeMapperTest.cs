@@ -54,6 +54,30 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void CqlIntervalOfInt_MapToFhirType()
+        {
+            var cqlType = typeof(CqlInterval<int>);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Range, typeEntry.FhirType.Value);
+            Assert.AreEqual(FHIRAllTypes.Integer, typeEntry.ElementType.FhirType.Value);
+        }
+
+        [TestMethod]
+        public void CqlIntervalOfDecimal_MapToFhirType()
+        {
+            var cqlType = typeof(CqlInterval<decimal>);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Range, typeEntry.FhirType.Value);
+            Assert.AreEqual(FHIRAllTypes.Decimal, typeEntry.ElementType.FhirType.Value);
+        }
+
+        [TestMethod]
         public void Claim_MapToFhirType()
         {
             var cqlType = typeof(Hl7.Fhir.Model.Claim);
