@@ -23,7 +23,7 @@ Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Cql.Packaging.Cq
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Fhir.Model.FHIRAllTypes? FhirType, Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType = null) -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.Deconstruct(out Hl7.Fhir.Model.FHIRAllTypes? FhirType, out Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, out Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType) -> void
 Hl7.Cql.Packaging.ResourcePackager
-Hl7.Cql.Packaging.ResourcePackager.Package(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null) -> void
+Hl7.Cql.Packaging.ResourcePackager.Package(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, string? resourceCanonicalRootUrl = null, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null) -> void
 Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging.ILoggerFactory! logFactory, params Hl7.Cql.Packaging.ResourceWriters.ResourceWriter![]! resourceWriters) -> void
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger! logger) -> void

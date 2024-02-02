@@ -29,8 +29,9 @@ namespace Hl7.Cql.Packaging
         /// </summary>
         /// <param name="elmDir">directory to find the ELM files</param>
         /// <param name="cqlDir">directory to find the CQL files</param>
+        /// <param name="resourceCanonicalRootUrl">root part of the resource canonical; otherwise just a '#'</param>
         /// <param name="afterPackageMutator">optional mutator for the resources prior to writing</param>
-        public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action<IEnumerable<Resource>>? afterPackageMutator = null)
+        public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, string? resourceCanonicalRootUrl = null, Action<IEnumerable<Resource>>? afterPackageMutator = null)
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
@@ -45,7 +46,7 @@ namespace Hl7.Cql.Packaging
                 typeResolver,
                 new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
-                CanonicalUri,
+                resource => CanonicalUri(resource, resourceCanonicalRootUrl),
                 logFactory);
 
             afterPackageMutator?.Invoke(resources);
@@ -56,11 +57,11 @@ namespace Hl7.Cql.Packaging
             }
         }
 
-        private static string CanonicalUri(Resource resource)
+        private static string CanonicalUri(Resource resource, string? resourceCanonicalRootUrl)
         {
             if (string.IsNullOrWhiteSpace(resource.Id))
                 throw new ArgumentException("Resource must have an id", nameof(resource));
-            var path = $"#/{resource.TypeName}/{resource.Id}";
+            var path = $"{resourceCanonicalRootUrl ?? "#"}/{resource.TypeName}/{resource.Id}";
             return path;
         }
 
