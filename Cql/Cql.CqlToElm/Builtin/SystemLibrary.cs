@@ -26,9 +26,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
         // Only symbols with function-like usage should be added to the symbol table.
         // Otherwise, if all symbols were added, then functions like Add(1, 2) would resolve in this table,
         // but that syntax is not recognized by the cql-to-elm reference implementation.
-        public SymbolTable Symbols = new SymbolTable(null, 
-            AllTrue,
-            AnyTrue);
+        public SymbolTable Symbols = new SymbolTable(null,
+            new[] {
+                AllTrue,
+                AnyTrue,
+            }
+            .Concat(Avg)
+            .ToArray());
 
         private static readonly ExpressionDef[] expressions = typeof(SystemLibrary)
                 .GetFields(System.Reflection.BindingFlags.Static)
@@ -43,14 +47,16 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static BuiltInFunctionDef binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result) where T : OperatorExpression =>
             new(typeof(T).Name, new[] { first, second }, result, typeof(T));
 
-        private static BuiltInFunctionDef aggregate<T>(ListTypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
-            new(typeof(T).Name, new[] { source }, result, typeof(T));
+        private static BuiltInFunctionDef aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
+            new(typeof(T).Name, new[] { source.ToListType() }, result, typeof(T));
 
         // Alphabetized
         public static FunctionDef[] Add = binary<Add>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] AddDateTime = binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
-        public static FunctionDef AllTrue = aggregate<AllTrue>(BooleanType.ToListType(), BooleanType);
-        public static FunctionDef AnyTrue = aggregate<AnyTrue>(BooleanType.ToListType(), BooleanType);
+        public static FunctionDef AllTrue = aggregate<AllTrue>(BooleanType, BooleanType);
+        public static FunctionDef AnyTrue = aggregate<AnyTrue>(BooleanType, BooleanType);
+        public static FunctionDef[] Avg = aggregate<Avg>(T, T).For(T, DecimalType, QuantityType);
+
         public static AsFunctionDef As = new();
         public static CaseFunctionDef Case = new();
         public static FunctionDef And = binary<And>(BooleanType, BooleanType, BooleanType);
