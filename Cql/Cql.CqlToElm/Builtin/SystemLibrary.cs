@@ -27,7 +27,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         // Otherwise, if all symbols were added, then functions like Add(1, 2) would resolve in this table,
         // but that syntax is not recognized by the cql-to-elm reference implementation.
         public SymbolTable Symbols = new SymbolTable(null, 
-            AllTrue);
+            AllTrue,
+            AnyTrue);
 
         private static readonly ExpressionDef[] expressions = typeof(SystemLibrary)
                 .GetFields(System.Reflection.BindingFlags.Static)
@@ -49,6 +50,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef[] Add = binary<Add>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] AddDateTime = binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
         public static FunctionDef AllTrue = aggregate<AllTrue>(BooleanType.ToListType(), BooleanType);
+        public static FunctionDef AnyTrue = aggregate<AnyTrue>(BooleanType.ToListType(), BooleanType);
         public static AsFunctionDef As = new();
         public static CaseFunctionDef Case = new();
         public static FunctionDef And = binary<And>(BooleanType, BooleanType, BooleanType);
