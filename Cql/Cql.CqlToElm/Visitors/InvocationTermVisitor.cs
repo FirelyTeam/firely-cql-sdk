@@ -273,13 +273,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Expression createFunctionInvocation(string? libraryName, string funcName, Expression[] paramList, bool fluent)
         {
-            _ = LibraryBuilder.CurrentScope.TryResolveIdentifier(libraryName, funcName, out var symbolDef, out var error);
+            IDefinitionElement? symbolDef = null;
+
+            var inScope = LibraryBuilder.CurrentScope.TryResolveIdentifier(libraryName, funcName, out var scopeDef, out var scopeError);
+            var inSystemScope = LibraryBuilder.SystemScope.TryResolveIdentifier(libraryName, funcName, out var systemDef, out var systemError);
+            if (inScope)
+            {
+                if (inSystemScope)
+                    return errorRef($"Ambiguous function {funcName} found in both local and system scope.");
+                symbolDef = scopeDef;
+            }
+            else if (inSystemScope)
+                symbolDef = systemDef;
 
             return symbolDef switch
             {
                 FunctionDef funcDef => initializeFunctionRef(funcDef, libraryName, paramList, fluent),
                 ExpressionDef => errorRef($"{funcName} is an expression, and should be invoked without the parenthesis."),
-                null => errorRef(error!),
+                null => errorRef($"Unable to resolve function {funcName}."),
                 _ => errorRef($"'{funcName}' is not a function, so it cannot be invoked.")
             };
 

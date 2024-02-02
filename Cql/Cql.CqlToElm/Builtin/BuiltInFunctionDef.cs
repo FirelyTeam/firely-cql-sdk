@@ -9,6 +9,7 @@
 using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Builtin
@@ -17,6 +18,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
     /// <summary>
     /// A kind of FunctionDef that represents a built-in CQL function.
     /// </summary>
+    [DebuggerDisplay("{name}")]
     internal class BuiltInFunctionDef : FunctionDef
     {
         public static readonly TypeSpecifier[] EmptyOperands = Array.Empty<TypeSpecifier>();

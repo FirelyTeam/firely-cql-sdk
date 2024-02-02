@@ -280,6 +280,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 ne.operand = arguments;
                 return ne;
             }
+            else if (result is AggregateExpression ae)
+            {
+                if (arguments.Length != 1)
+                    throw new ArgumentException($"Expected 1 argument, but got {arguments.Length}.", nameof(arguments));
+                ae.source = arguments[0];
+                return ae;
+            }
             else if (result is FunctionRef fr)
             {
                 fr.name = def.name;

@@ -1,4 +1,6 @@
-﻿using Hl7.Cql.Elm;
+﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Elm;
+using System.Diagnostics;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
@@ -101,7 +103,9 @@ namespace Hl7.Cql.CqlToElm
             if (libraryName is null)
             {
                 if (!symbolScope.TryResolveSymbol(identifier, out result))
+                {
                     error = $"Unable to resolve identifier '{identifier}'.";
+                }
             }
             else
             {

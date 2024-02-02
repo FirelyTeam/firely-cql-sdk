@@ -15,6 +15,13 @@ namespace Hl7.Cql.CqlToElm
             Parent = parent;
         }
 
+        public SymbolTable(ISymbolScope? parent, params IDefinitionElement[] defs)
+        {
+            Parent = parent;
+            foreach (var def in defs)
+                symbols.TryAdd(def.Name, def);
+        }
+
         public ISymbolScope? Parent { get; }
 
         private readonly Dictionary<string, IDefinitionElement> symbols = new();

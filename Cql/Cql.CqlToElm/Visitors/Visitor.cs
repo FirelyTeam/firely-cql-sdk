@@ -1,11 +1,13 @@
-﻿using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal abstract class Visitor<T> : cqlBaseVisitor<T>
     {
-        protected Visitor(LocalIdentifierProvider localIdentifierProvider, InvocationBuilder invocationBuilder) : base()
+        protected Visitor(LocalIdentifierProvider localIdentifierProvider, 
+            InvocationBuilder invocationBuilder) : base()
         {
             LocalIdentifierProvider = localIdentifierProvider;
             InvocationBuilder = invocationBuilder;

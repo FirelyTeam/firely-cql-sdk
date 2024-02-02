@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,13 +10,15 @@ namespace Hl7.Cql.CqlToElm
     {
         private static readonly VersionedIdentifier schemaIdentifier = new() { id = "urn:hl7-org:elm", version = "r1" };
 
-        public LibraryBuilder()
+        public LibraryBuilder(SystemLibrary systemLibrary)
         {
             CurrentScope = SymbolTable;
             Identifier = new VersionedIdentifier() { id = "unset", version = "0.0.0" };
+            SystemScope = systemLibrary.Symbols;
         }
 
         public VersionedIdentifier Identifier { get; set; }
+
 
         /// <summary>
         /// Builds a library from the current state of the builder.
@@ -46,6 +49,7 @@ namespace Hl7.Cql.CqlToElm
         public SymbolTable SymbolTable { get; } = new(null);  // we're a top-level scope
 
         public ISymbolScope CurrentScope { get; private set; }
+        public ISymbolScope SystemScope { get; }
 
         public void AddError(string message, ErrorType errorType) =>
             errors.Add(new CqlToElmError()

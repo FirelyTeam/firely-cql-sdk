@@ -8,8 +8,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor : Visitor<Expression>
     {
-        public ExpressionVisitor(
-            IModelProvider provider,
+        public ExpressionVisitor(IModelProvider provider,
             ConverterContext converterContext,
             LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
@@ -21,6 +20,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
         }
+
 
         #region Privates
         private readonly IModelProvider ModelProvider;
@@ -86,104 +86,59 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitListSelector([Antlr4.Runtime.Misc.NotNull] cqlParser.ListSelectorContext context)
         {
             var typeSpecifier = context.typeSpecifier() is { } tsContext ? TypeSpecifierVisitor.Visit(tsContext) : null;
-            var elements = context.expression().Select(Visit).ToArray();
-
-            if (!elements.Any())
+            var elements = context
+                .expression()
+                .Select(Visit)
+                .ToArray();
+            if (elements.Length == 0)
+                return new List()
+                    .WithLocator(context.Locator())
+                    .WithResultType((typeSpecifier ?? SystemTypes.AnyType).ToListType());
+            else
             {
+                var nonNullElements = elements
+                    .Except(elements
+                        .OfType<Null>()
+                        .Where(@null => @null.resultTypeSpecifier == SystemTypes.AnyType))
+                    .ToArray();
+                var distinctTypes = nonNullElements
+                    .Select(ele => ele.resultTypeSpecifier)
+                    .Distinct()
+                    .ToArray();
+                var typedElements = new Expression[elements.Length];
+                TypeSpecifier elementType;
+                if (distinctTypes.Length == 1)
+                {
+                    elementType = distinctTypes[0];
+                }
+                else if (distinctTypes.All(NumericTypeSpecifierComparer.IsNumeric))
+                {
+                    elementType = distinctTypes.Max()!;
+                }
+                else
+                {
+                    Array.Copy(elements, typedElements, elements.Length);
+                    elementType = SystemTypes.AnyType;
+                }
+
+                for (int i = 0; i < elements.Length; i++)
+                {
+                    var ei = elements[i];
+                    var result = InvocationBuilder.BuildImplicitCast(ei, elementType, out var _);
+                    if (result.Success)
+                        typedElements[i] = result.Result;
+                    else if (!string.IsNullOrWhiteSpace(result.Error))
+                        typedElements[i] = ei.AddError(result.Error);
+                }
+
                 return new List
                 {
-                    element = Array.Empty<Expression>(),
-                }.WithLocator(context.Locator()).WithResultType(SystemTypes.AnyType.ToListType());
+                    element = typedElements,
+                }
+                .WithLocator(context.Locator())
+                .WithResultType(elementType.ToListType());
             }
 
-            var maximalElementType = ListElementPromotion.None;
-            var elementTypes = new ListElementPromotion[elements.Length];
-
-            for (var ix = 0; ix < elements.Length; ix++)
-            {
-                var element = elements[ix];
-
-                if (element.resultTypeSpecifier == SystemTypes.QuantityType)
-                {
-                    elementTypes[ix] = ListElementPromotion.Quantity;
-                    maximalElementType = ListElementPromotion.Quantity;
-                }
-                else if (element.resultTypeSpecifier == SystemTypes.DecimalType)
-                {
-                    elementTypes[ix] = ListElementPromotion.Decimal;
-                    maximalElementType = (ListElementPromotion)Math.Max((int)maximalElementType, (int)ListElementPromotion.Decimal);
-                }
-                else if (element.resultTypeSpecifier == SystemTypes.LongType)
-                {
-                    elementTypes[ix] = ListElementPromotion.Long;
-                    maximalElementType = (ListElementPromotion)Math.Max((int)maximalElementType, (int)ListElementPromotion.Long);
-                }
-                else if (element.resultTypeSpecifier == SystemTypes.IntegerType)
-                {
-                    elementTypes[ix] = ListElementPromotion.Integer;
-                }
-            }
-
-            for (int i = 0; i < elements.Length; i++)
-                elements[i] = promote(elements[i], elementTypes[i], maximalElementType);
-
-            Expression promote(Expression expression, ListElementPromotion from, ListElementPromotion to) =>
-                from switch
-                {
-                    ListElementPromotion.Decimal => to switch
-                    {
-                        ListElementPromotion.Quantity => toQuantity(expression),
-                        _ => expression
-                    },
-                    ListElementPromotion.Long => to switch
-                    {
-                        ListElementPromotion.Quantity => toQuantity(expression),
-                        ListElementPromotion.Decimal => toDecimal(expression),
-                        _ => expression
-                    },
-                    ListElementPromotion.Integer => to switch
-                    {
-                        ListElementPromotion.Quantity => toQuantity(expression),
-                        ListElementPromotion.Decimal => toDecimal(expression),
-                        ListElementPromotion.Long => toLong(expression),
-                        _ => expression,
-                    },
-                    _ => expression,
-                };
-
-            Expression toQuantity(Expression ex) => new ToQuantity
-            {
-                operand = new ToDecimal
-                {
-                    operand = ex,
-                }.WithLocator(ex.locator).WithResultType(SystemTypes.DecimalType),
-            }.WithLocator(ex.locator).WithResultType(SystemTypes.QuantityType);
-
-            Expression toDecimal(Expression ex) => new ToDecimal
-            {
-                operand = ex,
-            }.WithLocator(ex.locator).WithResultType(SystemTypes.DecimalType);
-
-            Expression toLong(Expression ex) => new ToLong
-            {
-                operand = ex,
-            }.WithLocator(ex.locator).WithResultType(SystemTypes.LongType);
-
-            var typeCount = elements
-                .Select(e => e.resultTypeName)
-                .Distinct()
-                .Count();
-
-            var listElementType = typeCount == 1
-                ? elements[0].resultTypeSpecifier
-                : SystemTypes.AnyType;
-
-            var list = new List
-            {
-                element = elements,
-            }.WithLocator(context.Locator()).WithResultType(listElementType.ToListType());
-
-            return list;
         }
 
         //  '[' (contextIdentifier '->')? namedTypeSpecifier (':' (codePath codeComparator)? terminology)? ']'

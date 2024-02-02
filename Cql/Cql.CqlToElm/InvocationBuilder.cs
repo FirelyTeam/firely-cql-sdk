@@ -155,6 +155,15 @@ namespace Hl7.Cql.CqlToElm
                 {
                     return new(argument, 0, null);
                 }
+                else if (fromList.elementType == SystemTypes.AnyType
+                    && argument is List list 
+                    && (list.element?.Length ?? 0) == 0)
+                {
+                    var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
+                    return new(@as, 0, null);
+                }
+                    
+                    
             }
 
             // Casting an Interval<X> to an Interval<Y> is not possible in general(?), but it is
