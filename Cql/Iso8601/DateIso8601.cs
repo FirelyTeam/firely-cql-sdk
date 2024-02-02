@@ -172,27 +172,8 @@ namespace Hl7.Cql.Iso8601
                 dateValue = null;
                 return false;
             }
-            else
-            {
-                dateValue = stringValue;
-                return true;
-            }
 
-        }
-
-        /// <summary>
-        /// Converts a string to an ISO 8601 date, or throws.
-        /// </summary>
-        /// <param name="stringValue">The string to convert.</param>
-        /// <exception cref="ArgumentException">When <paramref name="stringValue"/> cannot be parsed.</exception>
-        public static implicit operator DateIso8601(string stringValue)
-        {
-            var parts = Expression.Match(stringValue);
-            if (!parts.Success || parts.Captures.Count != 1 || parts.Captures[0].Length != stringValue.Length)
-                throw new ArgumentException($"Invalid ISO 8601 date: {stringValue}", nameof(stringValue));
-
-            int? year = null, month = null, day = null;
-
+            int? year, month = null, day = null;
             var yearGroup = parts.Groups["year"];
             var monthGroup = parts.Groups["month"];
             var dayGroup = parts.Groups["day"];
@@ -209,10 +190,14 @@ namespace Hl7.Cql.Iso8601
                     }
                 }
             }
-            else throw new ArgumentException($"Dates must have at least year specified.", nameof(stringValue));
+            else
+            {
+                dateValue = null;
+                return false;
+            }
 
-            var isoDate = new DateIso8601(stringValue, year!.Value, month, day);
-            return isoDate;
+            dateValue = new DateIso8601(stringValue, year!.Value, month, day);
+            return true;
         }
 
         private static string Format(int year, int? month, int? day, DateTimePrecision precision)
