@@ -37,7 +37,24 @@ namespace Hl7.Cql.CqlToElm
 
         internal ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
         {
-            if (candidate.operand.Length != arguments.Length)
+            if (candidate is BuiltInFunctionDef builtIn)
+            {
+                if (arguments.Length < (builtIn.RequiredParameterCount ?? builtIn.operand.Length))
+                {
+                    var resultExpression = candidate.CreateElmNode(arguments)
+                        .WithResultType(candidate.resultTypeSpecifier);
+                    return new ResolveResult<Expression>(resultExpression, ERROR_COST,
+                        $"{candidate.Signature()} must be called with at least {builtIn.RequiredParameterCount} arguments, not {arguments.Length}.");
+                }
+                else if (arguments.Length > builtIn.operand.Length)
+                {
+                    var resultExpression = candidate.CreateElmNode(arguments)
+                        .WithResultType(candidate.resultTypeSpecifier);
+                    return new ResolveResult<Expression>(resultExpression, ERROR_COST,
+                        $"{candidate.Signature()} must be called with no more than {builtIn.operand.Length} arguments, not {arguments.Length}.");
+                }
+            }
+            else if (candidate.operand.Length != arguments.Length)
             {
                 var resultExpression = candidate.CreateElmNode(arguments)
                     .WithResultType(candidate.resultTypeSpecifier);

@@ -9,6 +9,8 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System;
+using System.Linq;
+using System.Xml;
 
 namespace Hl7.Cql.Elm
 {
@@ -198,5 +200,40 @@ namespace Hl7.Cql.Elm
 
         Expression IDefinitionElement.ToRef(string? _) =>
             throw new InvalidOperationException("There is no reference type for an include statement.");
+    }
+
+    /// <summary>
+    /// Defines a function with multiple overloads.
+    /// </summary>
+    public sealed class OverloadedFunctionDef: IDefinitionElement
+    {
+        public static OverloadedFunctionDef Create(params FunctionDef[] functions)
+        {
+            if (functions.Length < 2)
+                throw new ArgumentException($"Overloads must have at least two functions provided.", nameof(functions));
+            var names = functions.Select(fd => fd.name).Distinct().ToArray();
+            if (names.Length > 1)
+                throw new ArgumentException($"All functions in an overload must have the same name.", nameof(functions));
+            var accessLevel = functions.Select(fd => fd.accessLevel).Min(); // public < private; any public overload makes this public
+            return new OverloadedFunctionDef(functions, names[0], accessLevel);       
+        }
+
+        public FunctionDef[] Functions { get; }
+
+        public string Name { get; }
+        public AccessModifier Access { get; }
+
+        private OverloadedFunctionDef(FunctionDef[] functions, 
+            string name, 
+            AccessModifier access)
+        {
+            Functions = functions;
+            Name = name;
+            Access = access;
+        }
+
+        Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
+
+        internal FunctionRef ToRef(string? libraryName) => throw new NotSupportedException($"Refs cannot be created until the overload is resolved.");
     }
 }

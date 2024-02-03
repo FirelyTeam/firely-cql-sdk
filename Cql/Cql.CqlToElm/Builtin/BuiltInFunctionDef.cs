@@ -25,7 +25,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
         public Type ElmNodeType { get; }
 
-        public BuiltInFunctionDef(string name, IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, Type elmNodeType)
+        public BuiltInFunctionDef(string name, IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, Type elmNodeType,
+            int? requiredParameterCount = null)
         {
             this.name = name;
             expression = null;
@@ -46,6 +47,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 .ToArray();
            
             ElmNodeType = elmNodeType;
+            RequiredParameterCount = requiredParameterCount;
         }
 
         public BuiltInFunctionDef ReplaceGenericParameters(GenericParameterAssignments replacements)
@@ -92,5 +94,11 @@ namespace Hl7.Cql.CqlToElm.Builtin
             8 => "ninth",
             _ => $"{position + 1}th"
         };
+
+        /// <summary>
+        /// For system functions with variable length argument lists, this represents the minimum number of parameters required to be provided.
+        /// For example, Date() can take up to 3 parameters but only requires 1.
+        /// </summary>
+        public int? RequiredParameterCount { get; }
     }
 }

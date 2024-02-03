@@ -31,6 +31,21 @@ namespace Hl7.Cql.CqlToElm.Builtin
             };
         }
 
+        public static Expression Call(this OverloadedFunctionDef def, 
+            IModelProvider provider, 
+            ParserRuleContext? context, 
+            Expression[] arguments,
+            out FunctionDef? selectedOverload)
+        {
+            var callResult = buildCall(def, provider, context, arguments, out selectedOverload);
+
+            return callResult switch
+            {
+                { Error: null, Result: var e } => e.expr,
+                { Error: not null, Result: var e } => e.expr.AddError(callResult.Error),
+            };
+        }
+
         private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this FunctionDef def, IModelProvider provider, ParserRuleContext? context, params Expression[] arguments)
         {
             var castResult = buildInvocation(def, arguments, provider);
@@ -40,6 +55,35 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return new((elmNode, def), castResult.Cost, castResult.Error);
         }
 
+        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this OverloadedFunctionDef def, 
+            IModelProvider provider, 
+            ParserRuleContext? context,             
+            Expression[] arguments,
+            out FunctionDef? selectedOverload)
+        {
+            ResolveResult<Expression>? castResult = null;
+            foreach (var fd in def.Functions)
+            {
+                castResult = buildInvocation(fd, arguments, provider);
+                if (castResult.Success)
+                {
+                    var node = castResult.Result;
+                    if (context is not null)
+                        node = node.WithLocator(context.Locator());
+                    selectedOverload = fd;
+                    return new((node, fd), castResult.Cost, castResult.Error);
+                }
+            }
+            if (castResult != null)
+            {
+                var errorNode = castResult.Result;
+                if (context is not null)
+                    errorNode = errorNode.WithLocator(context.Locator());
+                selectedOverload = null;
+                return new((errorNode, def.Functions[0]), castResult.Cost, castResult.Error);
+            }
+            else throw new InvalidOperationException($"Unable to build call for {nameof(OverloadedFunctionDef)}."); // should never happen
+        }
 
         /// <summary>
         /// Choses the best matching overload of a set of <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the 
@@ -292,6 +336,48 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 fr.name = def.name;
                 fr.operand = arguments;
                 return fr;
+            }
+            else if (result is Date d)
+            {
+                if (arguments.Length > 0)
+                    d.year = arguments[0];
+                if (arguments.Length > 1)
+                    d.month = arguments[1];
+                if (arguments.Length > 2)
+                    d.day = arguments[2];
+                return d;
+            }
+            else if (result is Elm.DateTime dt)
+            {
+                if (arguments.Length > 0)
+                    dt.year = arguments[0];
+                if (arguments.Length > 1)
+                    dt.month = arguments[1];
+                if (arguments.Length > 2)
+                    dt.day = arguments[2];
+                if (arguments.Length > 3)
+                    dt.hour = arguments[3];
+                if (arguments.Length > 4)
+                    dt.minute = arguments[4];
+                if (arguments.Length > 5)
+                    dt.second = arguments[5];
+                if (arguments.Length > 6)
+                    dt.millisecond = arguments[6];
+                if (arguments.Length > 7)
+                    dt.timezoneOffset = arguments[7];
+                return dt;
+            }
+            else if (result is Time t)
+            {
+                if (arguments.Length > 0)
+                    t.hour = arguments[0];
+                if (arguments.Length > 1)
+                    t.minute = arguments[1];
+                if (arguments.Length > 2)
+                    t.second = arguments[2];
+                if (arguments.Length > 3)
+                    t.millisecond = arguments[3];
+                return t;
             }
             else if (result is Expression e && arguments.Length == 0)
             {

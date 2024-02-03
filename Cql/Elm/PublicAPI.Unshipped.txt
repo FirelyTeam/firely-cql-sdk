@@ -493,6 +493,8 @@ Hl7.Cql.Elm.OverlapsBefore.precision.get -> Hl7.Cql.Elm.DateTimePrecision
 Hl7.Cql.Elm.OverlapsBefore.precision.set -> void
 Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.get -> bool
 Hl7.Cql.Elm.OverlapsBefore.precisionSpecified.set -> void
+Hl7.Cql.Elm.OverloadedFunctionDef
+Hl7.Cql.Elm.OverloadedFunctionDef.Access.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.ParameterDef
 Hl7.Cql.Elm.ParameterDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.ParameterDef.accessLevel.set -> void
@@ -759,6 +761,7 @@ static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! 
 static Hl7.Cql.Elm.ExtensionMethods.Signature(this Hl7.Cql.Elm.FunctionDef! def) -> string!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.FunctionDef![]! functions) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!

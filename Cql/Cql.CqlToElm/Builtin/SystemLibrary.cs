@@ -27,12 +27,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
         // Otherwise, if all symbols were added, then functions like Add(1, 2) would resolve in this table,
         // but that syntax is not recognized by the cql-to-elm reference implementation.
         public SymbolTable Symbols = new SymbolTable(null,
-            new[] {
+                OverloadedFunctionDef.Create(Avg),
                 AllTrue,
                 AnyTrue,
-            }
-            .Concat(Avg)
-            .ToArray());
+                Count,
+                Date,
+                DateTime,
+                OverloadedFunctionDef.Create(Max),
+                OverloadedFunctionDef.Create(Min),
+                Time);
 
         private static readonly ExpressionDef[] expressions = typeof(SystemLibrary)
                 .GetFields(System.Reflection.BindingFlags.Static)
@@ -47,6 +50,12 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static BuiltInFunctionDef binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result) where T : OperatorExpression =>
             new(typeof(T).Name, new[] { first, second }, result, typeof(T));
 
+        private static BuiltInFunctionDef nary<T>(TypeSpecifier[] operands, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
+            new(typeof(T).Name, operands, result, typeof(T), requiredParameterCount);
+
+        private static BuiltInFunctionDef nary<T>(TypeSpecifier operandType, int operandCount, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
+            new(typeof(T).Name, Enumerable.Range(0, operandCount).Select(i=>operandType).ToArray(), result, typeof(T), requiredParameterCount);
+
         private static BuiltInFunctionDef aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
             new(typeof(T).Name, new[] { source.ToListType() }, result, typeof(T));
 
@@ -54,14 +63,16 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef[] Add = binary<Add>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] AddDateTime = binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
         public static FunctionDef AllTrue = aggregate<AllTrue>(BooleanType, BooleanType);
+        public static FunctionDef And = binary<And>(BooleanType, BooleanType, BooleanType);
         public static FunctionDef AnyTrue = aggregate<AnyTrue>(BooleanType, BooleanType);
         public static FunctionDef[] Avg = aggregate<Avg>(T, T).For(T, DecimalType, QuantityType);
-
         public static AsFunctionDef As = new();
         public static CaseFunctionDef Case = new();
-        public static FunctionDef And = binary<And>(BooleanType, BooleanType, BooleanType);
         public static FunctionDef CodeToConcept = unary<ToConcept>(CodeType, ConceptType);
         public static FunctionDef Concatenate = binary<Concatenate>(StringType, StringType, StringType);
+        public static FunctionDef Count = aggregate<Count>(AnyType, IntegerType);
+        public static FunctionDef Date = nary<Date>(IntegerType, 3, 1, DateType);
+        public static FunctionDef DateTime = nary<DateTime>(new[] { IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, DecimalType }, 1, DateTimeType);
         public static FunctionDef DateToDateTime = unary<ToDateTime>(DateType, DateTimeType);
         public static FunctionDef DecimalToQuantity = unary<ToQuantity>(DecimalType, QuantityType);
         public static FunctionDef[] DifferenceBetween = binary<DifferenceBetween>(T, T, IntegerType).For(T, DateType, DateTimeType, TimeType);
@@ -86,7 +97,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef[] LessOrEqual = binary<LessOrEqual>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
         public static FunctionDef LongToDecimal = unary<ToDecimal>(LongType, DecimalType);
         public static FunctionDef LongToQuantity = unary<ToQuantity>(LongType, QuantityType);
+        public static FunctionDef[] Min = aggregate<Min>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static MinValueFunctionDef MinValue = new();
+        public static FunctionDef[] Max = aggregate<Max>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static MaxValueFunctionDef MaxValue = new();
         public static FunctionDef[] Modulo = binary<Modulo>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] Multiply = binary<Multiply>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
@@ -101,6 +114,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static FunctionDef[] Subtract = binary<Subtract>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef[] SubtractDateTime = binary<Subtract>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType);
         public static FunctionDef Successor = unary<Successor>(T, T);
+        public static FunctionDef Time = nary<Time>(IntegerType, 4, 1, TimeType);
         public static FunctionDef ToList = unary<ToList>(T, T.ToListType());
         public static FunctionDef[] TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static FunctionDef Width = unary<Width>(T.ToIntervalType(), T);

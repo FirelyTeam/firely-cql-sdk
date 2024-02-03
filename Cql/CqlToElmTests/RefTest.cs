@@ -207,6 +207,31 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void FunctionVariableParamCount()
+        {
+            var library1 = MakeLibrary($@"
+                library {nameof(RefTest)}1 version '1.0.0'
+                define private {nameof(Function)}: Date(1)
+            ");
+            var library2 = MakeLibrary($@"
+                library {nameof(RefTest)}2 version '1.0.0'
+                define private {nameof(Function)}: Date(1,2)
+            ");
+            var library3 = MakeLibrary($@"
+                library {nameof(RefTest)}3 version '1.0.0'
+                define private {nameof(Function)}: Date(1,2,3)
+            ");
+            var library4 = MakeLibrary($@"
+                library {nameof(RefTest)}4 version '1.0.0'
+                define private {nameof(Function)}: Date(1,2,3,4)
+            ", "Date(Integer, Integer, Integer) must be called with no more than 3 arguments, not 4.");
+            var library5 = MakeLibrary($@"
+                library {nameof(RefTest)}5 version '1.0.0'
+                define private {nameof(Function)}: Date()
+            ", "Date(Integer, Integer, Integer) must be called with at least 1 arguments, not 0.");
+        }
+
+        [TestMethod]
         public void InvokeParameter()
         {
             var library = MakeLibrary($@"

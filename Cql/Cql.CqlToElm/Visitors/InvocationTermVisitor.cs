@@ -288,11 +288,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return symbolDef switch
             {
+                OverloadedFunctionDef overloads => initializeFunctionRef(overloads, libraryName, paramList, fluent),
                 FunctionDef funcDef => initializeFunctionRef(funcDef, libraryName, paramList, fluent),
                 ExpressionDef => errorRef($"{funcName} is an expression, and should be invoked without the parenthesis."),
                 null => errorRef($"Unable to resolve function {funcName}."),
                 _ => errorRef($"'{funcName}' is not a function, so it cannot be invoked.")
-            };
+            }; ;
 
             FunctionRef errorRef(string error) => new FunctionRef { name = funcName, operand = paramList }
                     .WithResultType(SystemTypes.AnyType)
@@ -311,6 +312,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return funcRef;
         }
+        private Expression initializeFunctionRef(OverloadedFunctionDef funcDef, string? libraryName, Expression[] paramList, bool fluent)
+        {
+            var funcRef = funcDef.Call(ModelProvider, null, paramList, out var selectedOverload);
+            if (funcRef is FunctionRef fr)
+                fr.libraryName = libraryName;
+            if (selectedOverload == null)
+                funcRef.AddError($"Unable to resolve overload for {funcDef.Name} with arguments {paramList.Select(p => p.resultTypeSpecifier)}");
+            else if (fluent && !selectedOverload.fluent)
+                funcRef.AddError($"Function '{selectedOverload.name}' is called fluently, but its definition is not marked as fluent.");
+            return funcRef;
+        }
+
 
         // paramList : expression(',' expression)*
         public Expression[] ParseParamList(cqlParser.ParamListContext? context) => context?.expression().Select(Visit).ToArray()
