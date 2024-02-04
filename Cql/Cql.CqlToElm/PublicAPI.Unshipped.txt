@@ -5,6 +5,8 @@ Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.get -> string?
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.get -> string?
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.set -> void
 Hl7.Cql.CqlToElm.IModelProvider
 Hl7.Cql.CqlToElm.IModelProvider.Add(Hl7.Cql.Model.ModelInfo! model) -> Hl7.Cql.CqlToElm.IModelProvider!
 Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromName(string! name, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool

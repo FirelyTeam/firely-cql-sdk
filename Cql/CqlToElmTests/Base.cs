@@ -25,14 +25,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-        protected static void ClassInitialize()
+        protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
         {
             var services = new ServiceCollection()
                 .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
                 .AddVisitors()
                 .AddContext()
                 .AddLocalIdProvider()
-                .AddConfiguration(cb => cb.WithDefaultOptions())
+                .AddConfiguration(cb => cb.WithOptions(options ?? (o => { })))
                 .AddLogging(builder => builder
                     .AddConsole()
                     .ThrowOn(LogLevel.Error))

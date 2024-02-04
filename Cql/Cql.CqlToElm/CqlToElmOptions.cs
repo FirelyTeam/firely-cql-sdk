@@ -23,7 +23,6 @@
         /// <seealso cref="SystemElmModelVersion"/>
         public string? SystemElmModelUri { get; set; } = "urn:hl7-org:elm-types:r1";
 
-
         /// <summary>
         /// <para>
         /// Sets the default version of the ELM model that will be automatically included
@@ -42,7 +41,15 @@
         /// <seealso cref="SystemElmModelUri"/>
         public string? SystemElmModelVersion { get; set; } = "1.0.0";
 
-
+        /// <summary>
+        /// When <see langword="true"/>, illegal literals that would fall outside the range of their minimum and maximum values will raise errors.
+        /// The defualt value is <see langword="true"/>.
+        /// </summary>
+        /// <remarks>
+        /// If your execution enviornment has different minimum and maximum values for some types, you should set this value to <see langword="false"/> as necessary.
+        /// Note that doing so will run the risk of creating ELM libraries that cannot be used by other execution environments.
+        /// </remarks>
+        public bool? ValidateLiterals { get; set; } = true;
 
     }
 }

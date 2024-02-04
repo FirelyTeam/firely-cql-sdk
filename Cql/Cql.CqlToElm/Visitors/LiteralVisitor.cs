@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
+using System;
 using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -183,10 +184,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 valueType = SystemTypes.LongType.name
             }.WithResultType(SystemTypes.LongType).WithLocator(context.Locator());
 
+            if (!bool.TryParse(Configuration[nameof(CqlToElmOptions.ValidateLiterals)] ?? bool.FalseString, out var validateLiterals))
+                validateLiterals = true;
+
             var valueText = context.GetText()[..^1];
             literal.value = valueText;
 
-            if (!long.TryParse(valueText, out long _))
+            if (validateLiterals && !long.TryParse(valueText, out long _))
             {
                 literal.AddError($"Unparseable long literal {valueText}.", ErrorType.syntax);
             }
@@ -212,6 +216,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 value = value,
             };
 
+            if (!bool.TryParse(Configuration[nameof(CqlToElmOptions.ValidateLiterals)] ?? bool.FalseString, out var validateLiterals))
+                validateLiterals = true;
+
             NamedTypeSpecifier? typeSpecifier = null;
 
             if (DecimalExpression.IsMatch(value))
@@ -221,26 +228,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     abs = abs[1..];
                 var parts = abs.Split('.');
 
-                if (parts.Sum(p => p.Length) > 28)
-                {
-                    literal.AddError("Decimal literals cannot be longer than 28 digits.", ErrorType.syntax);
-                }
-                else if (parts.Length > 1 && parts[1].Length > 8)
-                {
-                    literal.AddError("Decimal literals cannot have a mantissa longer than 8 digits.", ErrorType.syntax);
-                }
 
+                if (validateLiterals)
+                {
+                    if (parts.Sum(p => p.Length) > 28)
+                    {
+                        literal.AddError("Decimal literals cannot be longer than 28 digits.", ErrorType.syntax);
+                    }
+                    else if (parts.Length > 1 && parts[1].Length > 8)
+                    {
+                        literal.AddError("Decimal literals cannot have a mantissa longer than 8 digits.", ErrorType.syntax);
+                    }
+                }
                 typeSpecifier = SystemTypes.DecimalType;
             }
             else if (int.TryParse(value, out var i))
             {
                 typeSpecifier = SystemTypes.IntegerType;
             }
+            else if (validateLiterals)
+                return literal.AddError($"Unparseable numeric literal '{value}'.", ErrorType.syntax);
             else
             {
-                return literal.AddError($"Unparseable numeric literal '{value}'.", ErrorType.syntax);
+                typeSpecifier = SystemTypes.AnyType;
             }
-
             literal.valueType = typeSpecifier.name;
             literal = literal.WithResultType(typeSpecifier).WithLocator(context.Locator());
             return literal;
@@ -255,14 +266,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var sign = context.GetChild(0).GetText();
             var expression = Visit(context.expressionTerm());
 
-            if (expression is Literal literal)
-                literal.value = $"{sign}{literal.value}";
-            else if (expression is Quantity quantity && sign == "-")
-                quantity.value = -1 * quantity.value;
-            else
-                expression.AddError("Expected result of polarity expression to be a literal", ErrorType.syntax);
-
-            return expression;
+            if (sign == "-")
+                return new Negate
+                {
+                    operand = expression,
+                }
+                .WithLocator(context.Locator())
+                .WithResultType(expression.resultTypeSpecifier);
+            else return expression;
         }
 
         public override Expression VisitQuantityLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityLiteralContext context)

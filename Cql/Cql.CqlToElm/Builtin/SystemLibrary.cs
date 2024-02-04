@@ -27,22 +27,34 @@ namespace Hl7.Cql.CqlToElm.Builtin
         // Otherwise, if all symbols were added, then functions like Add(1, 2) would resolve in this table,
         // but that syntax is not recognized by the cql-to-elm reference implementation.
         public SymbolTable Symbols = new SymbolTable(null,
-                Avg,
-                AllTrue,
-                AnyTrue,
-                Count,
-                Date,
-                DateTime,
-                Max,
-                Median,
-                Min,
-                Mode,
-                PopulationStdDev,
-                PopulationVariance,
-                StdDev,
-                Sum,
-                Time,
-                Variance);
+            Abs,
+            Avg,
+            AllTrue,
+            AnyTrue,
+            Ceiling,
+            Count,
+            Date,
+            DateTime,
+            Exp,
+            Floor,
+            HighBoundary,
+            Ln,
+            Log,
+            LowBoundary,
+            Max,
+            Median,
+            Min,
+            Mode,
+            PopulationStdDev,
+            PopulationVariance,
+            Power, // has both operator and function usage in spec & tests
+            Precision,
+            Round,
+            StdDev,
+            Sum,
+            Time,
+            Truncate,
+            Variance);
 
         private static readonly ExpressionDef[] expressions = typeof(SystemLibrary)
                 .GetFields(System.Reflection.BindingFlags.Static)
@@ -64,15 +76,19 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static SystemFunction<T> aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
             new(new[] { source.ToListType() }, result, typeof(T).Name);
         public static readonly TypeSpecifier[] EmptyOperands = System.Array.Empty<TypeSpecifier>();
+        public static readonly TypeSpecifier[] NumericTypes = new[] { IntegerType, LongType, DecimalType, QuantityType };
+
 
         // Alphabetized
-        public static OverloadedFunctionDef Add = binary<Add>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType).Combine(binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType));
+        public static OverloadedFunctionDef Abs = unary<Abs>(T, T).For(T, NumericTypes);
+        public static OverloadedFunctionDef Add = binary<Add>(T, T, T).For(T, NumericTypes).Combine(binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType));
         public static SystemFunction<AllTrue> AllTrue = aggregate<AllTrue>(BooleanType, BooleanType);
         public static SystemFunction<And> And = binary<And>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<AnyTrue> AnyTrue = aggregate<AnyTrue>(BooleanType, BooleanType);
         public static OverloadedFunctionDef Avg = aggregate<Avg>(T, T).For(T, DecimalType, QuantityType);
         public static SystemFunction<As> As = unary<As>(AnyType, T);
         public static SystemFunction<Case> Case = new SystemFunction<Case>(new TypeSpecifier[] { BooleanType, T, T }, T);
+        public static OverloadedFunctionDef Ceiling = unary<Ceiling>(T, T).For(T, NumericTypes);
         public static SystemFunction<ToConcept> CodeToConcept = unary<ToConcept>(CodeType, ConceptType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
         public static SystemFunction<Count> Count = aggregate<Count>(T, IntegerType);
@@ -91,6 +107,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Equal> Equal = binary<Equal>(T, T, BooleanType);
         public static SystemFunction<Equivalent> Equivalent = binary<Equivalent>(T, T, BooleanType);
         public static SystemFunction<Exists> Exists = unary<Exists>(T.ToListType(), BooleanType);
+        public static SystemFunction<Exp> Exp = unary<Exp>(DecimalType, DecimalType);
+        public static OverloadedFunctionDef Floor = unary<Floor>(T, T).For(T, NumericTypes);
+        public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<If> If = new SystemFunction<If>(new TypeSpecifier[] { BooleanType, T, T }, T);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<ToDecimal> IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
@@ -104,16 +123,19 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef GreaterOrEqual = binary<GreaterOrEqual>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
         public static OverloadedFunctionDef Less = binary<Less>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
         public static OverloadedFunctionDef LessOrEqual = binary<LessOrEqual>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
+        public static SystemFunction<Ln> Ln = unary<Ln>(DecimalType, DecimalType);
         public static SystemFunction<ToDecimal> LongToDecimal = unary<ToDecimal>(LongType, DecimalType);
         public static SystemFunction<ToQuantity> LongToQuantity = unary<ToQuantity>(LongType, QuantityType);
+        public static SystemFunction<Log> Log = binary<Log>(DecimalType, DecimalType, DecimalType);
+        public static OverloadedFunctionDef LowBoundary = binary<LowBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static OverloadedFunctionDef Max = aggregate<Max>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static SystemFunction<MaxValue> MaxValue = new SystemFunction<MaxValue>(EmptyOperands, T);
         public static OverloadedFunctionDef Median = aggregate<Median>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Min = aggregate<Min>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static SystemFunction<MinValue> MinValue = new SystemFunction<MinValue>(EmptyOperands, T);
         public static SystemFunction<Mode> Mode = aggregate<Mode>(T, T);
-        public static OverloadedFunctionDef Modulo = binary<Modulo>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
-        public static OverloadedFunctionDef Multiply = binary<Multiply>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static OverloadedFunctionDef Modulo = binary<Modulo>(T, T, T).For(T, NumericTypes);
+        public static OverloadedFunctionDef Multiply = binary<Multiply>(T, T, T).For(T, NumericTypes);
         public static SystemFunction<Not> Not = unary<Not>(BooleanType, BooleanType);
         public static SystemFunction<NotEqual> NotEqual = binary<NotEqual>(T, T, BooleanType);
         public static SystemFunction<Or> Or = binary<Or>(BooleanType, BooleanType, BooleanType);
@@ -121,16 +143,19 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef PopulationStdDev = aggregate<PopulationStdDev>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef PopulationVariance = aggregate<PopulationVariance>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
+        public static OverloadedFunctionDef Precision = unary<Precision>(T, IntegerType).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Predecessor> Predecessor = unary<Predecessor>(T, T);
+        public static SystemFunction<Round> Round = nary<Round>(new[] { DecimalType, IntegerType }, 1, DecimalType);
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
         public static SystemFunction<Start> Start = unary<Start>(T.ToIntervalType(), T);
         public static OverloadedFunctionDef StdDev = aggregate<StdDev>(T, T).For(T, DecimalType, QuantityType);
-        public static OverloadedFunctionDef Subtract = binary<Subtract>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType).Combine(binary<Subtract>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType));
+        public static OverloadedFunctionDef Subtract = binary<Subtract>(T, T, T).For(T, NumericTypes).Combine(binary<Subtract>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType));
         public static SystemFunction<Successor> Successor = unary<Successor>(T, T);
-        public static OverloadedFunctionDef Sum = aggregate<Sum>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static OverloadedFunctionDef Sum = aggregate<Sum>(T, T).For(T, NumericTypes);
         public static SystemFunction<Time> Time = nary<Time>(IntegerType, 4, 1, TimeType);
         public static SystemFunction<ToList> ToList = unary<ToList>(T, T.ToListType());
-        public static OverloadedFunctionDef TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static SystemFunction<Truncate> Truncate = unary<Truncate>(DecimalType, IntegerType);
+        public static OverloadedFunctionDef TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef Variance = aggregate<Variance>(T, T).For(T, DecimalType, QuantityType);
         public static SystemFunction<Width> Width = unary<Width>(T.ToIntervalType(), T);
         public static SystemFunction<Xor> Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);

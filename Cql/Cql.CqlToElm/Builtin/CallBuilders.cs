@@ -385,12 +385,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 ae.source = arguments[0];
                 return ae;
             }
-            else if (result is FunctionRef fr)
-            {
-                fr.name = def.name;
-                fr.operand = arguments;
-                return fr;
-            }
             else if (result is Date d)
             {
                 if (arguments.Length > 0)
@@ -432,6 +426,19 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 if (arguments.Length > 3)
                     t.millisecond = arguments[3];
                 return t;
+            }
+            else if (result is Round rnd)
+            {
+                rnd.operand = arguments[0];
+                if (arguments.Length > 1)
+                    rnd.precision = arguments[1];
+                return rnd;
+            }
+            else if (result is FunctionRef fr)
+            {
+                fr.name = def.name;
+                fr.operand = arguments;
+                return fr;
             }
             else if (result is Expression e && arguments.Length == 0)
             {

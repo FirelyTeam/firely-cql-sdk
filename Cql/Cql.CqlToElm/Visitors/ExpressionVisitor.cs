@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Linq;
 
@@ -9,6 +10,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
     internal partial class ExpressionVisitor : Visitor<Expression>
     {
         public ExpressionVisitor(IModelProvider provider,
+            IConfiguration configuration,
             ConverterContext converterContext,
             LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
@@ -16,6 +18,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
+            Configuration = configuration;
             ConverterContext = converterContext;
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
@@ -26,6 +29,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private readonly IModelProvider ModelProvider;
         private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
 
+        public IConfiguration Configuration { get; }
         public ConverterContext ConverterContext { get; }
         public LibraryBuilder LibraryBuilder { get; }
         #endregion
