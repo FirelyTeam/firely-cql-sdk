@@ -266,13 +266,27 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var sign = context.GetChild(0).GetText();
             var expression = Visit(context.expressionTerm());
 
-            if (sign == "-")
-                return new Negate
+            if (expression is Literal literal)
+            {
+                literal.value = $"{sign}{literal.value}";
+                return literal;
+            }            
+            else if (sign == "-")
+            {
+                if (expression is Quantity quantity)
                 {
-                    operand = expression,
+                    quantity.value *= -1;
+                    return quantity;
                 }
-                .WithLocator(context.Locator())
-                .WithResultType(expression.resultTypeSpecifier);
+                else {
+                    return new Negate
+                    {
+                        operand = expression,
+                    }
+                    .WithLocator(context.Locator())
+                    .WithResultType(expression.resultTypeSpecifier);
+                }
+            }
             else return expression;
         }
 
