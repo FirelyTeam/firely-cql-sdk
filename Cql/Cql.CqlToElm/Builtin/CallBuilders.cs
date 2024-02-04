@@ -146,7 +146,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 string.Join(", ", defs.Select(def => def.Signature()));
         }
 
-        public static If Call(this IfFunctionDef def, InvocationBuilder builder, ParserRuleContext context, Expression condition, Expression thenExpression, Expression elseExpression)
+        public static If Call(this SystemFunction<If> def, InvocationBuilder builder, ParserRuleContext context, Expression condition, Expression thenExpression, Expression elseExpression)
         {
             var ifNode = (If)def.CreateElmNode();
 
@@ -191,7 +191,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return ifNode.WithResultType(expressionType).WithLocator(context.Locator());
         }
 
-        public static Case Call(this CaseFunctionDef def,
+        public static Case Call(this SystemFunction<Case> def,
             InvocationBuilder builder,
             ParserRuleContext context,
             CaseItem[] caseItems,
@@ -268,7 +268,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                     .WithResultType(def.resultTypeSpecifier).WithLocator(context.Locator());
         }
 
-        public static As Build(this AsFunctionDef _, bool strict, TypeSpecifier typeArgument, Expression argument, ParserRuleContext context)
+        public static As Build(this SystemFunction<As> _, bool strict, TypeSpecifier typeArgument, Expression argument, ParserRuleContext context)
         {
             // Note that there is no automatic casting done here:
             // I *think* `{ true } is Boolean` should be false, even though `{ true }` can be demoted to `Boolean`,
@@ -283,7 +283,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }.WithResultType(typeArgument).WithLocator(context.Locator());
         }
 
-        public static Is Build(this IsFunctionDef _, TypeSpecifier typeArgument, Expression argument, ParserRuleContext context)
+        public static Is Build(this SystemFunction<Is> _, TypeSpecifier typeArgument, Expression argument, ParserRuleContext context)
         {
             // Note that there is no automatic casting done here:
             // I *think* `{ true } is Boolean` should be false, even though `{ true }` can be demoted to `Boolean`,
@@ -297,7 +297,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }.WithResultType(typeArgument).WithLocator(context.Locator());
         }
 
-        public static MinValue Build(this MinValueFunctionDef _, NamedTypeSpecifier typeArgument, ParserRuleContext context)
+        public static MinValue Build(this SystemFunction<MinValue> _, NamedTypeSpecifier typeArgument, ParserRuleContext context)
         {
             return new MinValue()
             {
@@ -305,7 +305,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }.WithResultType(typeArgument).WithLocator(context.Locator());
         }
 
-        public static MaxValue Build(this MaxValueFunctionDef _, NamedTypeSpecifier typeArgument, ParserRuleContext context)
+        public static MaxValue Build(this SystemFunction<MaxValue> _, NamedTypeSpecifier typeArgument, ParserRuleContext context)
         {
             return new MaxValue()
             {

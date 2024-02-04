@@ -67,15 +67,14 @@ namespace Hl7.Cql.CqlToElm.Builtin
     internal class SystemFunction<T> : SystemFunction
         where T: Element
     {
-        public static readonly TypeSpecifier[] EmptyOperands = Array.Empty<TypeSpecifier>();
 
         public override Type ElmNodeType => typeof(T);
 
         public override int? RequiredParameterCount { get; }
 
-        public SystemFunction(string name, IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, int? requiredParameterCount = null)
+        public SystemFunction(IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, string? name = null, int? requiredParameterCount = null)
         {
-            this.name = name;
+            this.name = name ?? typeof(T).Name;
             expression = null;
             external = true;
             fluent = false;   // not too sure, maybe should be true for fhirpath functions?
@@ -107,7 +106,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 });
 
             var newResultType = resultTypeSpecifier.ReplaceGenericParameters(replacements);
-            var bd = new SystemFunction<T>(name, newOperands.Select(o => o.operandTypeSpecifier), newResultType, RequiredParameterCount);
+            var bd = new SystemFunction<T>(newOperands.Select(o => o.operandTypeSpecifier), newResultType, name, RequiredParameterCount);
             bd.validators.AddRange(validators);
             return bd;
         }
