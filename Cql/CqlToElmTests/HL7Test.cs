@@ -46,7 +46,8 @@ namespace Hl7.Cql.CqlToElm.Test
                     using var stream = file.OpenRead();
                     var library = DefaultConverter.ConvertLibrary(stream);
                     var errors = library.GetErrors();
-                    Assert.AreEqual(0, errors.Length, errors[0].message);
+                    if (errors.Length > 0)
+                        Assert.Fail(errors[0].message);
                     foreach (var statement in library.statements)
                     {
                         yield return new object[] { file, library, statement };

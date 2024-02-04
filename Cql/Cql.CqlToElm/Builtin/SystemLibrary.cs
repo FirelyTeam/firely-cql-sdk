@@ -37,7 +37,12 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 Median,
                 Min,
                 Mode,
-                Time);
+                PopulationStdDev,
+                PopulationVariance,
+                StdDev,
+                Sum,
+                Time,
+                Variance);
 
         private static readonly ExpressionDef[] expressions = typeof(SystemLibrary)
                 .GetFields(System.Reflection.BindingFlags.Static)
@@ -48,16 +53,12 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
         private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result) where T : OperatorExpression =>
             new(new[] { argument }, result, typeof(T).Name);
-
         private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result) where T : OperatorExpression =>
             new(new[] { first, second }, result, typeof(T).Name);
-
         private static SystemFunction<T> binaryWithPrecision<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result) where T : OperatorExpression =>
             new(new[] { first, second, StringType, }, result, typeof(T).Name, 2);
-
         private static SystemFunction<T> nary<T>(TypeSpecifier[] operands, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
             new(operands, result, typeof(T).Name, requiredParameterCount);
-
         private static SystemFunction<T> nary<T>(TypeSpecifier operandType, int operandCount, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
             new(Enumerable.Range(0, operandCount).Select(i => operandType).ToArray(), result, typeof(T).Name, requiredParameterCount);
         private static SystemFunction<T> aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
@@ -117,20 +118,22 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<NotEqual> NotEqual = binary<NotEqual>(T, T, BooleanType);
         public static SystemFunction<Or> Or = binary<Or>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<PointFrom> PointFrom = unary<PointFrom>(T.ToIntervalType(), T);
+        public static OverloadedFunctionDef PopulationStdDev = aggregate<PopulationStdDev>(T, T).For(T, DecimalType, QuantityType);
+        public static OverloadedFunctionDef PopulationVariance = aggregate<PopulationVariance>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
         public static SystemFunction<Predecessor> Predecessor = unary<Predecessor>(T, T);
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
         public static SystemFunction<Start> Start = unary<Start>(T.ToIntervalType(), T);
+        public static OverloadedFunctionDef StdDev = aggregate<StdDev>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Subtract = binary<Subtract>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType).Combine(binary<Subtract>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType));
         public static SystemFunction<Successor> Successor = unary<Successor>(T, T);
+        public static OverloadedFunctionDef Sum = aggregate<Sum>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
         public static SystemFunction<Time> Time = nary<Time>(IntegerType, 4, 1, TimeType);
         public static SystemFunction<ToList> ToList = unary<ToList>(T, T.ToListType());
         public static OverloadedFunctionDef TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, IntegerType, LongType, DecimalType, QuantityType);
+        public static OverloadedFunctionDef Variance = aggregate<Variance>(T, T).For(T, DecimalType, QuantityType);
         public static SystemFunction<Width> Width = unary<Width>(T.ToIntervalType(), T);
         public static SystemFunction<Xor> Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);
-
-
-
     }
 
     internal static class Validators
