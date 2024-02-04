@@ -11,8 +11,8 @@ using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal class MaxValueFunctionDef : BuiltInFunctionDef
+    internal class MaxValueFunctionDef : SystemFunction<Max>
     {
-        public MaxValueFunctionDef() : base(nameof(MaxValue), EmptyOperands, T, typeof(Max)) { }
+        public MaxValueFunctionDef() : base(nameof(MaxValue), EmptyOperands, T) { }
     }
 }

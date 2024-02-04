@@ -91,7 +91,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .Select(Visit)
                 .ToArray();
             if (elements.Length == 0)
-                return new List()
+                return new List() { element = Array.Empty<Expression>(), }
                     .WithLocator(context.Locator())
                     .WithResultType((typeSpecifier ?? SystemTypes.AnyType).ToListType());
             else
@@ -106,19 +106,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .Distinct()
                     .ToArray();
                 var typedElements = new Expression[elements.Length];
-                TypeSpecifier elementType;
+                TypeSpecifier elementType = SystemTypes.AnyType;
                 if (distinctTypes.Length == 1)
                 {
                     elementType = distinctTypes[0];
                 }
-                else if (distinctTypes.All(NumericTypeSpecifierComparer.IsNumeric))
-                {
-                    elementType = distinctTypes.Max()!;
-                }
                 else
-                {
-                    Array.Copy(elements, typedElements, elements.Length);
-                    elementType = SystemTypes.AnyType;
+                { 
+                    var numericTypes = distinctTypes
+                        .OfType<NamedTypeSpecifier>()
+                        .Where(NumericTypeSpecifierComparer.IsNumeric)
+                        .ToArray();
+                    if (numericTypes.Length > 0 && numericTypes.Length == distinctTypes.Length)
+                    {
+                        elementType = numericTypes.Max(NumericTypeSpecifierComparer.Default)!;
+                    }
                 }
 
                 for (int i = 0; i < elements.Length; i++)

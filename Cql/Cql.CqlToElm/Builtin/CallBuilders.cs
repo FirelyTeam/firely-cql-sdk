@@ -10,14 +10,16 @@ using Antlr4.Runtime;
 using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
     internal static class CallBuilders
     {
         /// <summary>
-        /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that
+        /// Uses the <see cref="SystemFunction{T}"/> to create an <see cref="Expression"/> for the invocation of that
         /// function with the given arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
         public static Expression Call(this FunctionDef def, IModelProvider provider, ParserRuleContext? context, params Expression[] arguments)
@@ -31,9 +33,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
             };
         }
 
-        public static Expression Call(this OverloadedFunctionDef def, 
-            IModelProvider provider, 
-            ParserRuleContext? context, 
+        public static Expression Call(this OverloadedFunctionDef def,
+            IModelProvider provider,
+            ParserRuleContext? context,
             Expression[] arguments,
             out FunctionDef? selectedOverload)
         {
@@ -55,38 +57,66 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return new((elmNode, def), castResult.Cost, castResult.Error);
         }
 
-        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this OverloadedFunctionDef def, 
-            IModelProvider provider, 
-            ParserRuleContext? context,             
+        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this OverloadedFunctionDef def,
+            IModelProvider provider,
+            ParserRuleContext? context,
             Expression[] arguments,
             out FunctionDef? selectedOverload)
         {
-            ResolveResult<Expression>? castResult = null;
-            foreach (var fd in def.Functions)
+            var groupByCostLowestFirst = def.Functions
+                .Select(f => (Function: f, Result: buildInvocation(f, arguments, provider)))
+                .Where(t => t.Result.Success)
+                .GroupBy(t => t.Result.Cost)
+                .OrderBy(g => g.Key)
+                .ToArray();
+            // Presumably, the the best match has the lowest cost.
+            // If there is more than overload with the same cost, the call is ambiguous.
+            if (groupByCostLowestFirst.Length > 0)
             {
-                castResult = buildInvocation(fd, arguments, provider);
-                if (castResult.Success)
+                var successfulMatches = groupByCostLowestFirst[0].ToArray();
+                if (successfulMatches.Length == 1)
                 {
-                    var node = castResult.Result;
+                    var result = successfulMatches[0].Result;
+                    var node = result.Result;
+                    var function = successfulMatches[0].Function;
                     if (context is not null)
                         node = node.WithLocator(context.Locator());
-                    selectedOverload = fd;
-                    return new((node, fd), castResult.Cost, castResult.Error);
+                    selectedOverload = successfulMatches[0].Function;
+                    return new((node, function), result.Cost, result.Error);
+                }
+                else if (successfulMatches.Length > 1) // Ambiguous
+                {
+                    var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+                    // match cql-to-elm reference implementation (Java) error messages
+                    var errorSb = new StringBuilder();
+                    errorSb.AppendLine(CultureInfo.InvariantCulture, $"Call to operator {def.Name}({argTypeString}) is ambiguous with:");
+                    foreach (var match in successfulMatches)
+                    {
+                        var matchTypeString = string.Join(", ", match.Function.operand.Select(od => od.resultTypeSpecifier.ToString()));
+                        errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {def.Name}({matchTypeString})");
+                    }
+                    var error = errorSb.ToString();
+                    var result = successfulMatches[0].Result;
+                    var node = result.Result;
+                    var function = successfulMatches[0].Function;
+                    if (context is not null)
+                        node = node.WithLocator(context.Locator());
+                    selectedOverload = null;
+                    return new((node, function), result.Cost, error);
                 }
             }
-            if (castResult != null)
-            {
-                var errorNode = castResult.Result;
-                if (context is not null)
-                    errorNode = errorNode.WithLocator(context.Locator());
-                selectedOverload = null;
-                return new((errorNode, def.Functions[0]), castResult.Cost, castResult.Error);
-            }
-            else throw new InvalidOperationException($"Unable to build call for {nameof(OverloadedFunctionDef)}."); // should never happen
+            // need an overload to fail on
+            var firstInvocation = buildInvocation(def.Functions[0], arguments, provider);
+            var errorNode = firstInvocation.Result;
+            var unresolved = $"Could not resolve call to operator {def.Name} with signature({string.Join(", ", arguments.Select(t => t.resultTypeSpecifier.ToString()))}).";
+            if (context is not null)
+                errorNode = errorNode.WithLocator(context.Locator());
+            selectedOverload = null;
+            return new((errorNode, def.Functions[0]), firstInvocation.Cost, unresolved);
         }
 
         /// <summary>
-        /// Choses the best matching overload of a set of <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the 
+        /// Choses the best matching overload of a set of <see cref="SystemFunction{T}"/> to create an <see cref="Expression"/> for the 
         /// invocation, given the types of the arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
         public static Expression Call(this IEnumerable<FunctionDef> defs, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
@@ -178,7 +208,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             var type = caseItems[0].resultTypeSpecifier;
             var choiceTypes = new HashSet<TypeSpecifier>(caseItems.Length) { type };
 
-            foreach(var caseItem in caseItems)
+            foreach (var caseItem in caseItems)
             {
                 var when = caseItem.when;
                 var whenCastResult = builder.BuildImplicitCast(when, SystemTypes.BooleanType, out var _);
@@ -213,7 +243,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             if (choiceTypes.Count > 1)
             {
                 type = new ChoiceTypeSpecifier(choiceTypes);
-                foreach(var caseItem in caseItems)
+                foreach (var caseItem in caseItems)
                 {
                     caseItem.then.resultTypeSpecifier = type;
                     caseItem.resultTypeSpecifier = type;
@@ -229,7 +259,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         }
 
         /// <summary>
-        /// Uses the <see cref="BuiltInFunctionDef"/> to create an <see cref="Expression"/> for the invocation of that
+        /// Uses the <see cref="SystemFunction{T}"/> to create an <see cref="Expression"/> for the invocation of that
         /// function with the given arguments. It will not attempt to cast the arguments to the parameters of the function.
         /// </summary>
         public static Expression Build(this FunctionDef def, ParserRuleContext context, params Expression[] arguments)
@@ -295,12 +325,36 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// </summary>
         internal static Expression CreateElmNode(this FunctionDef def, params Expression[] arguments)
         {
-            var nodeType = def is BuiltInFunctionDef b ? b.ElmNodeType : typeof(FunctionRef);
+            var nodeType = def is SystemFunction b ? b.ElmNodeType : typeof(FunctionRef);
             var result = Activator.CreateInstance(nodeType)!;
 
             if (result is BinaryExpression be)
             {
-                if (arguments.Length != 2)
+                if (result is DifferenceBetween dib)
+                {
+                    if (arguments.Length > 2 && arguments[2] is Literal literal)
+                    {
+                        if (Enum.TryParse<DateTimePrecision>(literal.value, out var precision))
+                        {
+                            dib.precision = precision;
+                            dib.precisionSpecified = true;
+                        }
+                        else throw new ArgumentException($"Expected argument 3 to be a string literal representing precision.");
+                    }
+                }
+                else if (result is DurationBetween dub)
+                {
+                    if (arguments.Length > 2 && arguments[2] is Literal literal)
+                    {
+                        if (Enum.TryParse<DateTimePrecision>(literal.value, out var precision))
+                        {
+                            dub.precision = precision;
+                            dub.precisionSpecified = true;
+                        }
+                        else throw new ArgumentException($"Expected argument 3 to be a string literal representing precision.");
+                    }
+                }
+                else if (arguments.Length != 2)
                     throw new ArgumentException($"Expected 2 arguments, but got {arguments.Length}.", nameof(arguments));
                 be.operand = arguments;
                 return be;

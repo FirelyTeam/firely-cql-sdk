@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm
 
         internal ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
         {
-            if (candidate is BuiltInFunctionDef builtIn)
+            if (candidate is SystemFunction builtIn)
             {
                 if (arguments.Length < (builtIn.RequiredParameterCount ?? builtIn.operand.Length))
                 {
@@ -89,12 +89,12 @@ namespace Hl7.Cql.CqlToElm
                     assignments.AddRange(newAssignments);
 
                     if (!argumentResult.Success && firstError is null)
-                        firstError = $"the {BuiltInFunctionDef.GetArgumentName(argumentIndex)} argument {argumentResult.Error}.";
+                        firstError = $"the {SystemFunction.GetArgumentName(argumentIndex)} argument {argumentResult.Error}.";
 
                     iterationResults[argumentIndex] = argumentResult;
                 }
 
-                var concreteCandidate = BuiltInFunctionDef.ReplaceGenericParameters(candidate, assignments);
+                var concreteCandidate = SystemFunction.ReplaceGenericParameters(candidate, assignments);
                 var resultExpression = candidate.CreateElmNode(iterationResults.Select(a => a.Result).ToArray())
                         .WithResultType(concreteCandidate.resultTypeSpecifier);
                 var totalCost = iterationResults.Sum(r => r.Cost);

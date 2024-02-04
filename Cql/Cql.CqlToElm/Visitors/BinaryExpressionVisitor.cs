@@ -31,8 +31,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             Expression result =
                 @operator switch
                 {
-                    "+" => SystemLibrary.Add.Concat(SystemLibrary.AddDateTime).Call(ModelProvider, context, lhs, rhs),
-                    "-" => SystemLibrary.Subtract.Concat(SystemLibrary.SubtractDateTime).Call(ModelProvider, context, lhs, rhs),
+                    "+" => SystemLibrary.Add.Call(ModelProvider, context, new[] { lhs, rhs, }, out var _a),
+                    "-" => SystemLibrary.Subtract.Call(ModelProvider, context, new[] { lhs, rhs, }, out var _s),
                     "&" => SystemLibrary.Concatenate.Call(ModelProvider, context, lhs, rhs),
                     _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
                 };
@@ -41,63 +41,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
-        public override Expression VisitDifferenceBetweenExpression([NotNull] cqlParser.DifferenceBetweenExpressionContext context)
-        {
-            var precision = context.pluralDateTimePrecision().Parse();
-
-            var expressionTerms = context.expressionTerm();
-            var lhs = Visit(expressionTerms[0]);
-            var rhs = Visit(expressionTerms[1]);
-
-            var call = (DifferenceBetween)SystemLibrary.DifferenceBetween.Call(ModelProvider, context, lhs, rhs);
-            call.precision = precision;
-            call.precisionSpecified = true;
-
-            var selectedType = call.operand[0].resultTypeSpecifier;
-
-            if (selectedType == SystemTypes.DateType)
-            {
-                if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.");
-            }
-            else if (selectedType == SystemTypes.TimeType)
-            {
-                if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.");
-            }
-
-            return call;
-        }
+        public override Expression VisitDifferenceBetweenExpression([NotNull] cqlParser.DifferenceBetweenExpressionContext context) =>
+            VisitBinaryWithPrecision(SystemLibrary.DifferenceBetween, context, context.pluralDateTimePrecision(), context.expressionTerm());
 
         //     | ('duration' 'in')? pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm      #durationBetweenExpression
-        public override Expression VisitDurationBetweenExpression([NotNull] cqlParser.DurationBetweenExpressionContext context)
-        {
-            var precision = context.pluralDateTimePrecision().Parse();
+        public override Expression VisitDurationBetweenExpression([NotNull] cqlParser.DurationBetweenExpressionContext context) =>
+            VisitBinaryWithPrecision(SystemLibrary.DurationBetween, context, context.pluralDateTimePrecision(), context.expressionTerm());
 
-            var terms = context.expressionTerm();
-            var lhs = Visit(terms[0]);
-            var rhs = Visit(terms[1]);
-
-            var call = (DurationBetween)SystemLibrary.DurationBetween.Call(ModelProvider, context, lhs, rhs);
-            call.precision = precision;
-            call.precisionSpecified = true;
-
-            var selectedType = call.operand[0].resultTypeSpecifier;
-
-            if (selectedType == SystemTypes.DateType)
-            {
-                if (!(precision is DateTimePrecision.Year or DateTimePrecision.Month or DateTimePrecision.Week or DateTimePrecision.Day))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.DateType}.");
-            }
-            else if (selectedType == SystemTypes.TimeType)
-            {
-                if (!(precision is DateTimePrecision.Hour or DateTimePrecision.Minute or DateTimePrecision.Second or DateTimePrecision.Millisecond))
-                    call.AddError($"A precision of '{precision}' is not allowed for operands of type {SystemTypes.TimeType}.");
-
-            }
-
-            return call;
-        }
 
         // | expression ('=' | '!=' | '~' | '!~') expression                                               #equalityExpression
         public override Expression VisitEqualityExpression([NotNull] cqlParser.EqualityExpressionContext context)
@@ -138,10 +88,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                ">" => SystemLibrary.Greater.Call(ModelProvider, context, lhs, rhs),
-                ">=" => SystemLibrary.GreaterOrEqual.Call(ModelProvider, context, lhs, rhs),
-                "<" => SystemLibrary.Less.Call(ModelProvider, context, lhs, rhs),
-                "<=" => SystemLibrary.LessOrEqual.Call(ModelProvider, context, lhs, rhs),
+                ">" => SystemLibrary.Greater.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                ">=" => SystemLibrary.GreaterOrEqual.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                "<" => SystemLibrary.Less.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                "<=" => SystemLibrary.LessOrEqual.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in inequality expression."),
             };
 
@@ -158,10 +108,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return @operator switch
             {
-                "*" => (Expression)SystemLibrary.Multiply.Call(ModelProvider, context, lhs, rhs),
-                "/" => (Expression)SystemLibrary.Divide.Call(ModelProvider, context, lhs, rhs),
-                "div" => (Expression)SystemLibrary.TruncatedDivide.Call(ModelProvider, context, lhs, rhs),
-                "mod" => (Expression)SystemLibrary.Modulo.Call(ModelProvider, context, lhs, rhs),
+                "*" => SystemLibrary.Multiply.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                "/" => SystemLibrary.Divide.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                "div" => SystemLibrary.TruncatedDivide.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                "mod" => SystemLibrary.Modulo.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression."),
             };
         }
@@ -191,7 +141,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
 
-            return SystemLibrary.Power.Call(ModelProvider, context, lhs, rhs);
+            return SystemLibrary.Power.Call(ModelProvider, context, new[] { lhs, rhs }, out var _);
         }
 
         public override Expression VisitIndexedExpressionTerm([NotNull] cqlParser.IndexedExpressionTermContext context)
@@ -222,7 +172,31 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             return indexer
                 .WithLocator(context.Locator())
-                .WithResultType(type);
+                .WithResultType(type);               
         }
+
+
+        public Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
+            Antlr4.Runtime.ParserRuleContext? context,
+            cqlParser.PluralDateTimePrecisionContext precisionContext,
+            cqlParser.ExpressionTermContext[] expressionTerms)
+        {
+            var precision = Precision(precisionContext);
+            var lhs = Visit(expressionTerms[0]);
+            var rhs = Visit(expressionTerms[1]);
+
+            var call = systemFunction.Call(ModelProvider, context, new[] { lhs, rhs, precision }, out var selectedOverload);
+            return selectedOverload switch
+            {
+                SystemFunction bd => bd.Validate(call),
+                _ => call
+            };
+        }
+
+        private static Literal Precision(cqlParser.PluralDateTimePrecisionContext context) =>
+            new Literal { value = Enum.GetName(context.Parse()) }.WithResultType(SystemTypes.StringType);
+
+
+
     }
 }

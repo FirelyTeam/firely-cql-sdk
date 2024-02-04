@@ -102,5 +102,11 @@ namespace Hl7.Cql.Elm
 
             return node;
         }
+
+        public static T AddUnresolvedOperatorError<T>(this T node, string name, params TypeSpecifier[] argumentTypes)
+            where T: Element =>
+            AddError(node,
+                $"Could not resolve call to operator {name} with signature({string.Join(", ", argumentTypes.Select(t=>t.ToString()))}).");                
+
     }
 }

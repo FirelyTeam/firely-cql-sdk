@@ -280,24 +280,28 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (inScope)
             {
                 if (inSystemScope)
-                    return errorRef($"Ambiguous function {funcName} found in both local and system scope.");
+                    return error($"Ambiguous function {funcName} found in both local and system scope.");
                 symbolDef = scopeDef;
             }
             else if (inSystemScope)
                 symbolDef = systemDef;
 
+            // All 3 of error cases in this 
             return symbolDef switch
             {
                 OverloadedFunctionDef overloads => initializeFunctionRef(overloads, libraryName, paramList, fluent),
                 FunctionDef funcDef => initializeFunctionRef(funcDef, libraryName, paramList, fluent),
-                ExpressionDef => errorRef($"{funcName} is an expression, and should be invoked without the parenthesis."),
-                null => errorRef($"Unable to resolve function {funcName}."),
-                _ => errorRef($"'{funcName}' is not a function, so it cannot be invoked.")
+                ExpressionDef => error($"Operator {funcName} is not a function and must not be called with ()."),
+                _ => unresolved()
             }; ;
 
-            FunctionRef errorRef(string error) => new FunctionRef { name = funcName, operand = paramList }
+            FunctionRef error(string msg) => new FunctionRef { name = funcName, operand = paramList }
+                .WithResultType(SystemTypes.AnyType)
+                .AddError(msg);
+            FunctionRef unresolved() => new FunctionRef { name = funcName, operand = paramList }
                     .WithResultType(SystemTypes.AnyType)
-                    .AddError(error);
+                    .AddUnresolvedOperatorError(funcName, paramList.Select(p => p.resultTypeSpecifier).ToArray());
+
         }
 
         private Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] paramList, bool fluent)

@@ -11,8 +11,8 @@ using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal class CaseFunctionDef : BuiltInFunctionDef
+    internal class CaseFunctionDef : SystemFunction<Case>
     {
-        public CaseFunctionDef() : base(nameof(Case), new TypeSpecifier[] { BooleanType, T, T }, T, typeof(Case)) { }
+        public CaseFunctionDef() : base(nameof(Case), new TypeSpecifier[] { BooleanType, T, T }, T) { }
     }
 }

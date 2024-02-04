@@ -108,7 +108,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Date_In_Hours: difference in hours between @2023-01-01 and @2024-02-01
-            ", "*precision of 'Hour'*Date.");
+            ", "For Date values, precision must be one of: years, months, weeks, or days.");
 
         [TestMethod]
         public void Difference_Between_Hours()
@@ -208,7 +208,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Milliseconds: difference in days between @T12:00:00.100 and @T12:00:00.300
-            ", "A precision of 'Day'*Time.");
+            ", "For Time values, precision must be one of: hours, minutes, seconds, or milliseconds.");
 
         [TestMethod]
         public void Difference_Between_DateTimes()
@@ -255,7 +255,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Months: difference in weeks between null and null
-            ", "Ambiguous call*");
+            ", "Call to operator DifferenceBetween(Any, Any, String) is ambiguous with*");
 
     }
 }

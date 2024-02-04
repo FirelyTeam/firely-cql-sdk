@@ -11,8 +11,8 @@ using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal class MinValueFunctionDef : BuiltInFunctionDef
+    internal class MinValueFunctionDef : SystemFunction<Min>
     {
-        public MinValueFunctionDef() : base(nameof(MinValue), EmptyOperands, T, typeof(Min)) { }
+        public MinValueFunctionDef() : base(nameof(MinValue), EmptyOperands, T) { }
     }
 }

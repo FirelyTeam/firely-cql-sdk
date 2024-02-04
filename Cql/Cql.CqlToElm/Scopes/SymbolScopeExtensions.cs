@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm
                         if (includeDef.Library.TryResolveSymbol(identifier, out var definition))
                             result = definition;
                         else
-                            error = $"Unable to resolve identifier '{identifier}' in library '{libraryName}'.";
+                            error = $"Unable to resolve identifier {identifier} in library {libraryName}.";
                     }
                     else
                         error = $"'{libraryName}' is not a reference to an included library.";

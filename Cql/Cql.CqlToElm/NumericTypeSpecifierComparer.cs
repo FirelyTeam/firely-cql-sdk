@@ -9,6 +9,9 @@ namespace Hl7.Cql.CqlToElm
 {
     internal class NumericTypeSpecifierComparer : IComparer<NamedTypeSpecifier>
     {
+        public static readonly NumericTypeSpecifierComparer Default = new NumericTypeSpecifierComparer();
+        private NumericTypeSpecifierComparer() { }
+
         public int Compare(NamedTypeSpecifier? x, NamedTypeSpecifier? y)
         {
             if (x == null)

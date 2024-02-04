@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm
             if (version is not null)
             {
                 var success = Libraries.TryGetValue((libraryName, version), out library);
-                error = success ? null : $"Could not find library '{libraryName}' version {version}.";
+                error = success ? null : $"Could not find library: {libraryName} version '{version ?? "latest"}'. Are you sure this library version exists and that you have access?";
                 return success;
             }
             else
@@ -29,9 +29,11 @@ namespace Hl7.Cql.CqlToElm
 
                 (var success, error, library) = hits.Length switch
                 {
-                    0 => (false, $"Could not find library '{libraryName}'.", default(Library)),
+                    0 => (false, $"Could not find library: {libraryName} version '{version ?? "latest"}'. Are you sure this library version exists and that you have access?", default(Library)),
                     1 => (true, null, Libraries[hits.Single()]),
+                    // reference impl allows the same lib to be included multiple times as long as the local identifier is different
                     _ => (false, $"Found multiple libraries with name '{libraryName}'.", null)
+                    
                 };
 
                 return success;

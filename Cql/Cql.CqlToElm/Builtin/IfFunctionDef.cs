@@ -11,8 +11,8 @@ using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal class IfFunctionDef : BuiltInFunctionDef
+    internal class IfFunctionDef : SystemFunction<If>
     {
-        public IfFunctionDef() : base(nameof(If), new TypeSpecifier[] { BooleanType, T, T }, T, typeof(If)) { }
+        public IfFunctionDef() : base(nameof(If), new TypeSpecifier[] { BooleanType, T, T }, T) { }
     }
 }

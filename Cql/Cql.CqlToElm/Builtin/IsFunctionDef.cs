@@ -11,8 +11,8 @@ using static Hl7.Cql.Elm.SystemTypes;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {
-    internal class IsFunctionDef : BuiltInFunctionDef
+    internal class IsFunctionDef : SystemFunction<Is>
     {
-        public IsFunctionDef() : base(nameof(Is), new[] { AnyType }, T, typeof(Is)) { }
+        public IsFunctionDef() : base(nameof(Is), new[] { AnyType }, T) { }
     }
 }

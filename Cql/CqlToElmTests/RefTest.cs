@@ -240,7 +240,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 parameter x default 'bla'
 
                 define {nameof(InvokeParameter)}: x(4)
-            ", "'x' is not a function, so it cannot be invoked.");
+            ", "Could not resolve call to operator x with signature(Integer).");
         }
 
         [TestMethod]
@@ -252,7 +252,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define pi: 3.14
 
                 define {nameof(InvokeExpression)}: pi()
-            ", "pi is an expression, and should be invoked without the parenthesis.");
+            ", "Operator pi is not a function and must not be called with ().");
         }
 
         [TestMethod]
@@ -264,7 +264,7 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.Floor(4)
-            ", "Could not find library 'Math'.", "Unable to resolve identifier 'Floor' in library 'Math'.");
+            ", "Could not find library: Math*", "Could not resolve call to operator*");
         }
 
         [TestMethod]
@@ -276,7 +276,7 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math
-            ", "Could not find library 'Math'.", "A reference to a library is unexpected at this point.");
+            ", "Could not find library: Math*", "A reference to a library is unexpected at this point.");
         }
 
         [TestMethod]
@@ -288,8 +288,9 @@ namespace Hl7.Cql.CqlToElm.Test
                include Math
 
                define {nameof(InvokeExpression)}: Math.MaxInt
-            ", "Could not find library 'Math'.", "Unable to resolve identifier 'MaxInt' in library 'Math'.");
+            ", "Could not find library: Math*", "Unable to resolve identifier MaxInt in library Math.");
         }
+
 
         [TestMethod]
         public void InvokeNonexistentFluentFunction()
@@ -300,8 +301,8 @@ namespace Hl7.Cql.CqlToElm.Test
              using FHIR
              context Patient
 
-             define firstName: Patient.name.first()
-            ", "Unable to resolve identifier 'first'.");
+             define firstName: Patient.name.bad()
+            ", "Could not resolve call to operator*");
         }
 
         [TestMethod]
@@ -440,7 +441,7 @@ namespace Hl7.Cql.CqlToElm.Test
             include Math
 
              define error: Patient
-            ", "Could not find library 'Math'.", "Unable to resolve identifier 'Patient'.");
+            ", "Could not find library: Math*", "Unable to resolve identifier 'Patient'.");
         }
 
         [TestMethod]
