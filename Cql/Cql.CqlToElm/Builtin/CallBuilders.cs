@@ -194,67 +194,21 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static Case Call(this SystemFunction<Case> def,
             InvocationBuilder builder,
             ParserRuleContext context,
+            Expression? comparand,
             CaseItem[] caseItems,
             Expression @else)
         {
             var @case = (Case)def.CreateElmNode();
+            @case.comparand = comparand;
             if (caseItems.Length < 1)
             {
                 @case.AddError($"At least one case item must exist in a case statement");
                 return @case;
             }
-
-
-            var type = caseItems[0].resultTypeSpecifier;
-            var choiceTypes = new HashSet<TypeSpecifier>(caseItems.Length) { type };
-
-            foreach (var caseItem in caseItems)
-            {
-                var when = caseItem.when;
-                var whenCastResult = builder.BuildImplicitCast(when, SystemTypes.BooleanType, out var _);
-                if (whenCastResult.Success)
-                {
-                    caseItem.when = whenCastResult.Result;
-                }
-                else caseItem.AddError($"Condition could not be converted to a boolean expression");
-
-                var then = caseItem.then;
-                var thenCastResult = builder.BuildImplicitCast(then, type, out var _);
-                if (thenCastResult.Success)
-                {
-                    caseItem.then = thenCastResult.Result;
-                }
-                else if (!choiceTypes.Contains(then.resultTypeSpecifier))
-                {
-                    if (!choiceTypes.Contains(then.resultTypeSpecifier))
-                        choiceTypes.Add(then.resultTypeSpecifier);
-                }
-            }
-            var elseCastResult = builder.BuildImplicitCast(@else, type, out var _);
-            if (elseCastResult.Success)
-            {
-                @else = elseCastResult.Result;
-            }
-            else
-            {
-                choiceTypes.Add(@else.resultTypeSpecifier);
-            }
-
-            if (choiceTypes.Count > 1)
-            {
-                type = new ChoiceTypeSpecifier(choiceTypes);
-                foreach (var caseItem in caseItems)
-                {
-                    caseItem.then.resultTypeSpecifier = type;
-                    caseItem.resultTypeSpecifier = type;
-                }
-                @else.resultTypeSpecifier = type;
-            }
-
             @case.caseItem = caseItems;
             @case.@else = @else;
             return @case
-                .WithResultType(type)
+                .WithResultType(@else.resultTypeSpecifier)
                 .WithLocator(context.Locator());
         }
 

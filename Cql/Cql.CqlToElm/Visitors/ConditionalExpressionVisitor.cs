@@ -2,6 +2,7 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
@@ -22,13 +23,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitCaseExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.CaseExpressionTermContext context)
         {
             var expressions = context.expression();
-            if (expressions.Length != 1)
+            Expression? comparand = null;
+            Expression @else;
+            if (expressions.Length == 2)
             {
-                var @case = (Case)SystemLibrary.Case.CreateElmNode();
-                return @case.AddError("Expecting expression for else case");
+                comparand = Visit(expressions[0]);
+                @else = Visit(expressions[1]);
             }
-            var @else = Visit(expressions[0]);
-
+            else if (expressions.Length == 1)
+            {
+                @else = Visit(expressions[0]);
+            }
+            else
+            {
+                return (Case)SystemLibrary.Case.CreateElmNode()
+                    .AddError($"Case statements should contain 1 or 2 expressions, not {expressions.Length}");
+            }
             var caseItems = context.caseExpressionItem()
                 .Select(item =>
                 {
@@ -41,23 +51,51 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                     else
                     {
-                        var when = Visit(item.expression(0));
-                        var then = Visit(item.expression(1));
-
                         var caseItem = new CaseItem();
-                        var whenCastResult = InvocationBuilder.BuildImplicitCast(when, SystemTypes.BooleanType, out var _);
-                        if (whenCastResult.Error is not null)
-                            caseItem.AddError("A case " + whenCastResult.Error);
-                        else
+
+                        var when = Visit(item.expression(0));
+                        var whenCastResult = InvocationBuilder.BuildImplicitCast(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType, out var _);
+                        if (whenCastResult.Success)
                             caseItem.when = whenCastResult.Result;
-                        caseItem.then = then;
+                        else if (whenCastResult.Error is not null)
+                            caseItem.AddError(whenCastResult.Error);
+
+                        caseItem.then = Visit(item.expression(1));
+
                         return caseItem
-                            .WithResultType(then.resultTypeSpecifier)
+                            .WithResultType(caseItem.then.resultTypeSpecifier)
                             .WithLocator(context.Locator());
                     }
                 })
                 .ToArray();
-            return SystemLibrary.Case.Call(InvocationBuilder, context, caseItems, @else);
+
+            var resultTypes = new HashSet<TypeSpecifier>(caseItems
+                .Select(item => item.then.resultTypeSpecifier)
+                .Append(@else.resultTypeSpecifier));
+            TypeSpecifier returnType;
+            if (resultTypes.Count == 1)
+                returnType = resultTypes.Single();
+            else
+                returnType = new ChoiceTypeSpecifier(resultTypes);
+            foreach (var item in caseItems)
+            {
+                var then = item.then;
+                var thenCastResult = InvocationBuilder.BuildImplicitCast(then, returnType, out var _);
+                if (thenCastResult.Success)
+                {
+                    item.then = thenCastResult.Result;
+                    item.resultTypeSpecifier = item.then.resultTypeSpecifier;
+                }
+                else if (thenCastResult.Error is not null)
+                    item.AddError(thenCastResult.Error);
+            }
+            var elseCastResult = InvocationBuilder.BuildImplicitCast(@else, returnType, out var _);
+            if (elseCastResult.Success)
+                @else = elseCastResult.Result;
+            else if (elseCastResult.Error is not null)
+                @else.AddError(elseCastResult.Error);
+            
+            return SystemLibrary.Case.Call(InvocationBuilder, context, comparand, caseItems, @else);
         }
     }
 }

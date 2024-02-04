@@ -6,7 +6,7 @@ context Unfiltered
 define "DateTimeAdd5Years Input":
 	DateTime(2005, 10, 10) + 5 years
 define "DateTimeAdd5Years Output":
-	@2010-10-10T
+	@2010-10-10
 
 define "DateTimeAddInvalidYears":
 	DateTime(2005, 10, 10) + 8000 years
@@ -14,22 +14,22 @@ define "DateTimeAddInvalidYears":
 define "DateTimeAdd5Months Input":
 	DateTime(2005, 5, 10) + 5 months
 define "DateTimeAdd5Months Output":
-	@2005-10-10T
+	@2005-10-10
 
 define "DateTimeAddMonthsOverflow Input":
 	DateTime(2005, 5, 10) + 10 months
 define "DateTimeAddMonthsOverflow Output":
-	@2006-03-10T
+	@2006-03-10
 
 define "DateTimeAdd5Days Input":
 	DateTime(2005, 5, 10) + 5 days
 define "DateTimeAdd5Days Output":
-	@2005-05-15T
+	@2005-05-15
 
 define "DateTimeAddDaysOverflow Input":
 	DateTime(2016, 6, 10) + 21 days
 define "DateTimeAddDaysOverflow Output":
-	@2016-07-01T
+	@2016-07-01
 
 define "DateTimeAdd5Hours Input":
 	DateTime(2005, 5, 10, 5) + 5 hours
@@ -74,22 +74,22 @@ define "DateTimeAddMillisecondsOverflow Output":
 define "DateTimeAddLeapYear Input":
 	DateTime(2012, 2, 29) + 1 year
 define "DateTimeAddLeapYear Output":
-	@2013-02-28T
+	@2013-02-28
 
 define "DateTimeAdd2YearsByMonths Input":
 	DateTime(2014) + 24 months
 define "DateTimeAdd2YearsByMonths Output":
-	@2016T
+	@2016
 
 define "DateTimeAdd2YearsByDays Input":
 	DateTime(2014) + 730 days
 define "DateTimeAdd2YearsByDays Output":
-	@2016T
+	@2016
 
 define "DateTimeAdd2YearsByDaysRem5Days Input":
 	DateTime(2014) + 735 days
 define "DateTimeAdd2YearsByDaysRem5Days Output":
-	@2016T
+	@2016
 
 define "TimeAdd5Hours Input":
 	@T15:59:59.999 + 5 hours
@@ -384,17 +384,17 @@ define "TimeBeforeMillisecondFalse Output":
 define "DateTimeYear Input":
 	DateTime(2003)
 define "DateTimeYear Output":
-	@2003T
+	@2003
 
 define "DateTimeMonth Input":
 	DateTime(2003, 10)
 define "DateTimeMonth Output":
-	@2003-10T
+	@2003-10
 
 define "DateTimeDay Input":
 	DateTime(2003, 10, 29)
 define "DateTimeDay Output":
-	@2003-10-29T
+	@2003-10-29
 
 define "DateTimeHour Input":
 	DateTime(2003, 10, 29, 20)
@@ -1394,12 +1394,12 @@ define "DateTimeSubtractMillisecondsUnderflow Output":
 define "DateTimeSubtract2YearsAsMonths Input":
 	DateTime(2014) - 24 months
 define "DateTimeSubtract2YearsAsMonths Output":
-	@2012T
+	@2012
 
 define "DateTimeSubtract2YearsAsMonthsRem1 Input":
 	DateTime(2014) - 25 months
 define "DateTimeSubtract2YearsAsMonthsRem1 Output":
-	@2012T
+	@2012
 
 define "TimeSubtract5Hours Input":
 	@T15:59:59.999 - 5 hours

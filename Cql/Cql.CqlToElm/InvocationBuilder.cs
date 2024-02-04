@@ -161,28 +161,36 @@ namespace Hl7.Cql.CqlToElm
 
             // Casting a List<X> to a List<Y> is not possible in general(?), but it is
             // when Y is an unbound generic type or a direct (covariant) cast.
-            if (argumentType is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
+            if (to is ListTypeSpecifier toList)
             {
-                if (toList.elementType is ParameterTypeSpecifier pts)
+                if (argumentType is ListTypeSpecifier fromList)
                 {
-                    newAssignments.Add(pts, fromList.elementType);
-                    return new(argument, 0, null);
+                    if (toList.elementType is ParameterTypeSpecifier pts)
+                    {
+                        newAssignments.Add(pts, fromList.elementType);
+                        return new(argument, 0, null);
+                    }
+                    else if (fromList.elementType.IsSubtypeOf(toList.elementType, Provider))
+                    {
+                        return new(argument, 0, null);
+                    }
+                    else if (fromList.elementType == SystemTypes.AnyType
+                        && argument is List list
+                        && (list.element?.Length ?? 0) == 0)
+                    {
+                        var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
+                        return new(@as, 0, null);
+                    }
                 }
-                else if (fromList.elementType.IsSubtypeOf(toList.elementType, Provider))
+                // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
+                else
                 {
-                    return new(argument, 0, null);
+                    var list = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
+                    var intermediate = BuildImplicitCast(list, to, out newAssignments);
+                    return intermediate with { Cost = intermediate.Cost + 5 };
                 }
-                else if (fromList.elementType == SystemTypes.AnyType
-                    && argument is List list 
-                    && (list.element?.Length ?? 0) == 0)
-                {
-                    var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
-                    return new(@as, 0, null);
-                }
-                    
-                    
-            }
 
+            }
             // Casting an Interval<X> to an Interval<Y> is not possible in general(?), but it is
             // when Y is an unbound generic type or a direct (covariant) cast.
             if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
@@ -197,11 +205,21 @@ namespace Hl7.Cql.CqlToElm
                 }
             }
 
-
-            if (argumentType is ChoiceTypeSpecifier cts && to is not ChoiceTypeSpecifier)
+            if (argumentType is ChoiceTypeSpecifier fromChoice)
             {
-                // TODO: choice, https://cql.hl7.org/03-developersguide.html#choice-types
-                //cts.choice.First(c => buildImplicitCast(argument, c, )
+                if (to is not ChoiceTypeSpecifier)
+                {
+                    if (fromChoice.choice?.Contains(to) ?? false)
+                        return new(argument, 0, null);
+                }
+            } 
+            else if (to is ChoiceTypeSpecifier toChoice)
+            {
+                if (toChoice.choice?.Contains(argumentType) ?? false)
+                {
+                    var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
+                    return new(@as.WithResultType(to), 0, null);
+                }
             }
 
             // Implicit casts, see https://cql.hl7.org/03-developersguide.html#implicit-conversions
@@ -238,14 +256,6 @@ namespace Hl7.Cql.CqlToElm
             }
 
             // TODO: interval demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
-
-            // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
-            if (argumentType is not ListTypeSpecifier && to is ListTypeSpecifier)
-            {
-                var list = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
-                var intermediate = BuildImplicitCast(list, to, out newAssignments);
-                return intermediate with { Cost = intermediate.Cost + 5 };
-            }
 
             // No implicit cast found
             return new(argument, ERROR_COST, $"is of type {argumentType}, which cannot implicitly be cast to type {to}");

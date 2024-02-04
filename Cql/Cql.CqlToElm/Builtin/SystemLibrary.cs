@@ -45,6 +45,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             Median,
             Min,
             Mode,
+            Now,
             PopulationStdDev,
             PopulationVariance,
             Power, // has both operator and function usage in spec & tests
@@ -53,6 +54,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             StdDev,
             Sum,
             Time,
+            TimeOfDay,
+            Today,
             Truncate,
             Variance);
 
@@ -63,6 +66,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 .Cast<ExpressionDef>()
                 .ToArray();
 
+        private static SystemFunction<T> nullary<T>(TypeSpecifier result) where T : Expression =>
+            new(EmptyOperands, result, typeof(T).Name);
         private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result) where T : OperatorExpression =>
             new(new[] { argument }, result, typeof(T).Name);
         private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result) where T : OperatorExpression =>
@@ -129,14 +134,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Log> Log = binary<Log>(DecimalType, DecimalType, DecimalType);
         public static OverloadedFunctionDef LowBoundary = binary<LowBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static OverloadedFunctionDef Max = aggregate<Max>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
-        public static SystemFunction<MaxValue> MaxValue = new SystemFunction<MaxValue>(EmptyOperands, T);
+        public static SystemFunction<MaxValue> MaxValue = nullary<MaxValue>(T);
         public static OverloadedFunctionDef Median = aggregate<Median>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef Min = aggregate<Min>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
-        public static SystemFunction<MinValue> MinValue = new SystemFunction<MinValue>(EmptyOperands, T);
+        public static SystemFunction<MinValue> MinValue = nullary<MinValue>(T);
         public static SystemFunction<Mode> Mode = aggregate<Mode>(T, T);
         public static OverloadedFunctionDef Modulo = binary<Modulo>(T, T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef Multiply = binary<Multiply>(T, T, T).For(T, NumericTypes);
         public static SystemFunction<Not> Not = unary<Not>(BooleanType, BooleanType);
+        public static SystemFunction<Now> Now = nullary<Now>(DateTimeType);
         public static SystemFunction<NotEqual> NotEqual = binary<NotEqual>(T, T, BooleanType);
         public static SystemFunction<Or> Or = binary<Or>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<PointFrom> PointFrom = unary<PointFrom>(T.ToIntervalType(), T);
@@ -153,6 +159,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Successor> Successor = unary<Successor>(T, T);
         public static OverloadedFunctionDef Sum = aggregate<Sum>(T, T).For(T, NumericTypes);
         public static SystemFunction<Time> Time = nary<Time>(IntegerType, 4, 1, TimeType);
+        public static SystemFunction<TimeOfDay> TimeOfDay = nullary<TimeOfDay>(TimeType);
+        public static SystemFunction<Today> Today = nullary<Today>(DateType);
         public static SystemFunction<ToList> ToList = unary<ToList>(T, T.ToListType());
         public static SystemFunction<Truncate> Truncate = unary<Truncate>(DecimalType, IntegerType);
         public static OverloadedFunctionDef TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, NumericTypes);
