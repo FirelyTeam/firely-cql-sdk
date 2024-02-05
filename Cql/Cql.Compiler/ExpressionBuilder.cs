@@ -166,36 +166,41 @@ internal partial class ExpressionBuilder
             var codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
             if (Library.codes != null)
             {
+                HashSet<(string codeName, string codeSystemUrl)> codeName_CodeSystemUrls = new();
+
                 foreach (var code in Library.codes)
                 {
-                    if (code.codeSystem == null)
+                    if (code.codeSystem is not {} codeCodeSystem)
                         throw new InvalidOperationException("Code definition has a null codeSystem node.");
-    
-                    if (!codeSystemUrls.TryGetValue(code.codeSystem.name, out var csUrl))
-                        throw new InvalidOperationException($"Undefined code system {code.codeSystem.name}");
+
+                    var codeCodeSystemName = codeCodeSystem.name;
+                    var codeId = code.id;
+                    var codeName = code.name;
+
+                    if (!codeSystemUrls.TryGetValue(codeCodeSystemName, out var codeSystemUrl))
+                        throw new InvalidOperationException($"Undefined code system {codeCodeSystemName}");
+
+                    if (!codeName_CodeSystemUrls.Add((codeName, codeSystemUrl)))
+                        throw new InvalidOperationException($"Duplicate code detected: {codeId} from {codeCodeSystemName} ({codeSystemUrl})");
                     
-                    var existingCode = codesByName.Values.SingleOrDefault(c => c.code == code.id && c.system == csUrl);
-                    if (existingCode != null)
-                        throw new InvalidOperationException($"Duplicate code detected: {code.id} from {code.codeSystem.name} ({csUrl})");
-                    
-                    var systemCode = new CqlCode(code.id, csUrl);
-                    codesByName.Add(code.name, systemCode);
-                    if (!codesByCodeSystemName.TryGetValue(code.codeSystem.name, out var codings))
+                    var systemCode = new CqlCode(codeId, codeSystemUrl);
+                    codesByName.Add(codeName, systemCode);
+                    if (!codesByCodeSystemName.TryGetValue(codeCodeSystemName, out var codings))
                     {
                         codings = new List<CqlCode>();
-                        codesByCodeSystemName.Add(code.codeSystem.name, codings);
+                        codesByCodeSystemName.Add(codeCodeSystemName, codings);
                     }
                     codings.Add(systemCode);
 
                     var newCodingExpression = Expression.New(codeCtor,
-                        Expression.Constant(code.id),
-                        Expression.Constant(csUrl),
+                        Expression.Constant(codeId),
+                        Expression.Constant(codeSystemUrl),
                         Expression.Constant(null, typeof(string)),
                         Expression.Constant(null, typeof(string))
                     );
                     var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                     var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-                    definitions.Add(ThisLibraryKey, code.name, lambda);
+                    definitions.Add(ThisLibraryKey, codeName, lambda);
                 }
             }
 
