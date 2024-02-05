@@ -13,74 +13,22 @@ namespace Hl7.Cql.Packager
     {
         public static int Main(string[] args)
         {
-            Dictionary<string, string?>? config2 = GetConfigFromArgs(args);
-            if (config2 is null)
-                return ShowHelp();
-
-            PackagerArgs config = ParseConfig(config2);
+            var configKeyValues = GetConfigFromArgs(args);
+            PackagerArgs config = ParseConfig(configKeyValues);
 
             if (config.ShowHelp is true
-                || config.ElmDir is null 
-                || config.CqlDir is null)
-                return ShowHelp();
+                || config.Errors.Any())
+                return ShowHelp(config.Errors.ToArray());
 
-            if (!config.ElmDir.Exists)
-                return ShowError($"-elm: path {config.ElmDir} does not exist.");
+            if (config.CSharpDir is { Exists: false } csDir) 
+                EnsureDirectory(csDir);
 
-            if (!config.CqlDir.Exists)
-                return ShowError($"-elm: path {config.CqlDir} does not exist.");
+            if (config.FhirDir is { Exists: false } fhirDir) 
+                EnsureDirectory(fhirDir);
 
-            if (config["d"] is {} dArg && !bool.TryParse(dArg, out bool debug))
-            {
-                Console.Error.WriteLine($"-d: expected true|false, got {dArg}");
-                return -1;
-            }
 
-            // cs
-
-            DirectoryInfo? csDir = null;
-            if (config["cs"] is {} csArg)
-            {
-                csDir = new DirectoryInfo(csArg);
-                if (!csDir.Exists)
-                {
-                    EnsureDirectory(csDir);
-                }
-            }
-
-            // f
-
-            if (config["f"] is {} fArg 
-                && !bool.TryParse(fArg, out var force))
-            {
-                Console.Error.WriteLine($"-f: expected true|false, got {fArg}");
-                return -1;
-            }
-
-            // fhir
-
-            DirectoryInfo? fhirDir = null;
-            if (config["fhir"] is {} fhirArg)
-            {
-                fhirDir = new DirectoryInfo(fhirArg);
-                if (!fhirDir.Exists)
-                {
-                    EnsureDirectory(fhirDir);
-                }
-            }
-
-            // canonical-root-url
-
-            var resourceCanonicalRootUrl = config["canonical-root-url"]?.TrimEnd('/');
-
-            Package(config.ElmDir, cqlDir, csDir, fhirDir, resourceCanonicalRootUrl);
+            Package(config.ElmDir!, config.CqlDir!, config.CSharpDir, config.FhirDir, config.CanonicalRootUrl);
             return 0;
-        }
-
-        private static int ShowError(string error)
-        {
-            Console.Error.WriteLine(error);
-            return -1;
         }
 
         private record PackagerArgs
@@ -93,6 +41,7 @@ namespace Hl7.Cql.Packager
             public bool? Debug { get; set; }
             public bool? Force { get; set; }
             public string? CanonicalRootUrl { get; set; }
+            public HashSet<string> Errors { get; set; } = new();
 
             public IEnumerable<(string Key, object? Value)> KeyValues()
             {
@@ -106,68 +55,121 @@ namespace Hl7.Cql.Packager
             }
         }
 
-        private static PackagerArgs ParseConfig(IReadOnlyDictionary<string, string?> config)
-        {
-            PackagerArgs args = new PackagerArgs();
-
-            T? Get<T>(string key, Func<string,T?> parse) => config.GetValueOrDefault(key) is { Length:>0 } value ? parse(value) : default(T?);
-            
-            static DirectoryInfo? ParseDir(string dir) => new(Path.GetFullPath(dir));
-
-            static bool? ParseBool(string val) => bool.TryParse(val, out var result) ? result : null;
-
-            args.ElmDir           = Get("elm", ParseDir);
-            args.CqlDir           = Get("cql", ParseDir);
-            args.CSharpDir        = Get("cs", ParseDir);
-            args.FhirDir          = Get("fhir", ParseDir);
-            args.Debug            = Get("d", ParseBool);
-            args.Force            = Get("f", ParseBool);
-            args.CanonicalRootUrl = Get("canonical-root-url", s => s.TrimEnd('/'));
-
-
-            Debug.WriteLine(
-                $$"""
-                  Parsed config:
-                  {{
-                      string.Join(Environment.NewLine,
-                      from kv in args.KeyValues()
-                      orderby kv.Key
-                      select $"- {kv.Key}: {kv.Value}")
-                  }}
-                  """);
-
-
-            return args;
-        }
-
-        private static Dictionary<string, string?>? GetConfigFromArgs(string[] args)
+        private static IEnumerable<(string Key, string? Value)> GetConfigFromArgs(string[] args)
         {
             var configuration = new ConfigurationBuilder()
                 .AddCommandLine(args)
                 .Build();
 
-            var config = configuration
+            return configuration
                 .AsEnumerable()
-                .ToDictionary(kv => kv.Key, kv => kv.Value);
+                .Select(kv => (kv.Key, kv.Value));
+        }
+
+        private static PackagerArgs ParseConfig(IEnumerable<(string Key, string? Value)> configKeyValues)
+        {
+            PackagerArgs args = new PackagerArgs();
+
+            HashSet<string> found = new();
+            HashSet<string> duplicates = new();
+            HashSet<string> unsupported = new();
+            HashSet<string> errors = new();
+            args.Errors = errors;
+
+            foreach (var (key, value) in configKeyValues)
+            {
+                if (!found.Add(key))
+                {
+                    errors.Add($"Duplicate argument: {key}");
+                    duplicates.Add(key);
+                    continue;
+                }
+
+                switch (key)
+                {
+                    case "elm":
+                        args.ElmDir = TryParse(value, ParseDir);
+                        break;
+                    case "cql":
+                        args.CqlDir = TryParse(value, ParseDir);
+                        break;
+                    case "cs":
+                        args.CSharpDir = TryParse(value, ParseDir);
+                        break;
+                    case "fhir":
+                        args.FhirDir = TryParse(value, ParseDir);
+                        break;
+                    case "d":
+                        args.Debug = TryParse(value, ParseBool);
+                        break;
+                    case "f":
+                        args.Force = TryParse(value, ParseBool);
+                        break;
+                    case "canonical-root-url":
+                        args.CanonicalRootUrl = value?.TrimEnd('/');
+                        break;
+                    default:
+                        errors.Add($"Unsupported argument: {key}");
+                        unsupported.Add(key);
+                        break;
+                }
+            }
+
+            if (args.ElmDir is null)
+                errors.Add("Missing required argument: elm");
+            else if (!args.ElmDir.Exists)
+                errors.Add("Directory does not exist: elm");
+
+            if (args.CqlDir is null)
+                errors.Add("Missing required argument: cql");
+            else if (!args.CqlDir.Exists)
+                errors.Add("Directory does not exist: cql");
+
+            T? TryParse<T>(string? val, Func<string, T> parse)
+            {
+                if (val is not { } v)
+                    return default;
+
+                try
+                {
+                    if (parse(v) is { } p)
+                        return p;
+                }
+                catch (Exception e)
+                {
+                    errors.Add($"Unable to parse argument: {val} to a {typeof(T)} ({e.Message})");
+                    return default;
+                }
+
+                errors.Add($"Unable to parse argument: {val} to a {typeof(T)}");
+                return default;
+            }
+
+            static DirectoryInfo? ParseDir(string dir) => new(Path.GetFullPath(dir));
+
+            static bool? ParseBool(string val) => bool.TryParse(val, out var result) ? result : null;
 
             Debug.WriteLine(
                 $$"""
-                  PackageCLI called with {{config.Count}} argument(s):
-                  {{string.Join(Environment.NewLine,
-                      from kv in config
-                      orderby kv.Key
-                      select $"- {kv.Key}: {kv.Value}")}}
+                  Parsed Config:
+                  {{
+                      string.Join(
+                          Environment.NewLine,
+                          from kv in args.KeyValues()
+                          orderby kv.Key
+                          select $"- {kv.Key}: {kv.Value}")
+                  }}
+                  Errors:
+                  {{
+                      string.Join(
+                      Environment.NewLine,
+                      from error in errors
+                      select $"- {error}")
+                  }}
                   """);
 
-            if (config.Keys
-                .Except(supportedArgs)
-                .ToList() is { Count: > 0 } unknownArgs)
-            {
-                Console.Error.WriteLine($"Unknown args: {string.Join(", ", unknownArgs)}.");
-                return null;
-            }
 
-            return config;
+            return args;
         }
 
         private static void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir, string? resourceCanonicalRootUrl)
@@ -216,13 +218,18 @@ namespace Hl7.Cql.Packager
             }
         }
 
-        private static string[] supportedArgs = new[] { "elm", "cql", "fhir", "cs", "d", "f", "canonical-root-url" };
-
-        private static int ShowHelp()
+        private static int ShowHelp(params string[] errors)
         {
             Console.WriteLine();
             Console.WriteLine("Packager CLI");
+            if (errors.Length > 0)
+            {
+                Console.WriteLine();
+                Console.WriteLine("Errors:");
+                foreach (var error in errors) Console.WriteLine($"\t{error}");
+            }
             Console.WriteLine();
+            Console.WriteLine("Usage:");
             Console.WriteLine($"\t--elm <directory>\tLibrary root path");
             Console.WriteLine($"\t--cql <directory>\tCQL root path");
             Console.WriteLine($"\t[--fhir] <file>\tResource location, either file name or directory");

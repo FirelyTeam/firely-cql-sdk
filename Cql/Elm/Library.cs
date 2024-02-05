@@ -97,13 +97,11 @@ namespace Hl7.Cql.Elm
             {
                 var includes = GetIncludedLibraries(library, (name, version) =>
                 {
-                    var dependency = libraries.SingleOrDefault(p =>
-                        p.identifier?.id == name
-                        && p.identifier?.version == version);
+                    var dependency = libraries.SingleOrDefault(p => p.identifier?.id == name && p.identifier?.version == version);
                     if (dependency != null)
                         return dependency;
-                    else
-                        throw new InvalidOperationException($"Cannot find library {name} version {version} referenced in {library.NameAndVersion}");
+
+                    throw new InvalidOperationException($"Cannot find library {name} version {version} referenced in {library.NameAndVersion}");
                 });
                 Merge(includes, buildOrder);
             }
