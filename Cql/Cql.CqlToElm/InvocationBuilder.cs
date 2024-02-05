@@ -165,21 +165,52 @@ namespace Hl7.Cql.CqlToElm
             {
                 if (argumentType is ListTypeSpecifier fromList)
                 {
-                    if (toList.elementType is ParameterTypeSpecifier pts)
+                    var toElement = toList.elementType;
+                    var fromElement = fromList.elementType;
+                    var sameDepth = true;
+                    while (true)
                     {
-                        newAssignments.Add(pts, fromList.elementType);
-                        return new(argument, 0, null);
+                        if (toElement is ListTypeSpecifier t)
+                        {
+                            if (fromElement is ListTypeSpecifier f)
+                            {
+                                toElement = t.elementType;
+                                fromElement = f.elementType;
+                            }
+                            else
+                            {
+                                sameDepth = false;
+                                break;
+                            }
+                        }
+                        else if (fromElement is ListTypeSpecifier)
+                        {
+                            sameDepth = false;
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
                     }
-                    else if (fromList.elementType.IsSubtypeOf(toList.elementType, Provider))
+                    if (sameDepth)
                     {
-                        return new(argument, 0, null);
-                    }
-                    else if (fromList.elementType == SystemTypes.AnyType
-                        && argument is List list
-                        && (list.element?.Length ?? 0) == 0)
-                    {
-                        var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
-                        return new(@as, 0, null);
+                        if (toElement is ParameterTypeSpecifier pts)
+                        {
+                            newAssignments.Add(pts, fromElement);
+                            return new(argument, 0, null);
+                        }
+                        else if (fromElement.IsSubtypeOf(toElement, Provider))
+                        {
+                            return new(argument, 0, null);
+                        }
+                        else if (fromElement == SystemTypes.AnyType
+                            && argument is List list
+                            && (list.element?.Length ?? 0) == 0)
+                        {
+                            var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
+                            return new(@as, 0, null);
+                        }
                     }
                 }
                 // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion

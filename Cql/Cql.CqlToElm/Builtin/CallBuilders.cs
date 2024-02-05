@@ -397,6 +397,48 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 msg.message = arguments[4];
                 return msg;
             }
+            else if (result is First f)
+            {
+                f.source = arguments[0];
+                return f;
+            }
+            else if (result is Last l)
+            {
+                l.source = arguments[0];
+                return l;
+            }
+            else if (result is IndexOf io)
+            {
+                io.source = arguments[0];
+                return io;
+            }
+            else if (result is Slice slice) 
+            {
+                slice.source = arguments[0];
+                // slice is used for Skip, Take & Tail functions.  there isn't a function called Slice
+                if (def.name == nameof(SystemLibrary.Skip))
+                {
+                    slice.startIndex = arguments[1];
+                    slice.endIndex = new Null().WithResultType(SystemTypes.IntegerType);
+                }
+                else if (def.name == nameof(SystemLibrary.Take))
+                {
+                    slice.startIndex = new Literal { value = "0" }.WithResultType(SystemTypes.IntegerType);
+                    slice.endIndex = arguments[0];
+                }
+                if (def.name == nameof(SystemLibrary.Tail))
+                {
+                    slice.startIndex = new Literal { value = "1" }.WithResultType(SystemTypes.IntegerType);
+                    slice.endIndex = new Null().WithResultType(SystemTypes.IntegerType);
+                }
+                return slice;
+            }
+            else if (result is Descendents desc)
+            {
+                desc.source = arguments[0];
+                return desc;
+            }
+
             else if (result is FunctionRef fr)
             {
                 fr.name = def.name;

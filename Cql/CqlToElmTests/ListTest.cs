@@ -21,7 +21,6 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
 
-
         [TestMethod]
         public void Empty_List()
         {

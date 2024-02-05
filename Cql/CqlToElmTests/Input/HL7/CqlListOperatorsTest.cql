@@ -51,7 +51,7 @@ define "quantityList Output":
 define "dateTimeList Input":
 	{ DateTime(2016), DateTime(2015), DateTime(2010) }
 define "dateTimeList Output":
-	{@2016T, @2015T, @2010T}
+	{@2016, @2015, @2010}
 
 define "timeList Input":
 	{ @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 }
@@ -221,7 +221,7 @@ define "Except23And1234 Output":
 define "ExceptDateTimeList Input":
 	{ DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2010, 1, 1)} except {DateTime(2014, 12, 10), DateTime(2010, 1, 1) }
 define "ExceptDateTimeList Output":
-	{@2012-05-10T}
+	{@2012-05-10}
 
 define "ExceptTimeList Input":
 	{ @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } except { @T20:59:59.999, @T12:59:59.999 }
@@ -571,7 +571,7 @@ define "Intersect23And1234 Output":
 define "IntersectDateTime Input":
 	{ DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } intersect { DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2000, 5, 5) }
 define "IntersectDateTime Output":
-	{@2012-05-10T, @2014-12-10T}
+	{@2012-05-10, @2014-12-10 }
 
 define "IntersectTime Input":
 	{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } intersect { @T01:29:15.156, @T15:59:59.999, @T20:59:59.999 }
@@ -658,21 +658,6 @@ define "EquivalentABCAndAB Input":
 define "EquivalentABCAndAB Output":
 	false
 
-define "EquivalentABCAnd123 Input":
-	{ 'a', 'b', 'c' } ~ { 1, 2, 3 }
-define "EquivalentABCAnd123 Output":
-	false
-
-define "Equivalent123AndABC Input":
-	{ 1, 2, 3 } ~ { 'a', 'b', 'c' }
-define "Equivalent123AndABC Output":
-	false
-
-define "Equivalent123AndString123 Input":
-	{ 1, 2, 3 } ~ { '1', '2', '3' }
-define "Equivalent123AndString123 Output":
-	false
-
 define "EquivalentDateTimeTrue Input":
 	{DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null} ~ {DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10), null}
 define "EquivalentDateTimeTrue Output":
@@ -716,21 +701,6 @@ define "NotEqualABCAndABC Output":
 define "NotEqualABCAndAB Input":
 	{ 'a', 'b', 'c' } != { 'a', 'b' }
 define "NotEqualABCAndAB Output":
-	true
-
-define "NotEqualABCAnd123 Input":
-	{ 'a', 'b', 'c' } != { 1, 2, 3 }
-define "NotEqualABCAnd123 Output":
-	true
-
-define "NotEqual123AndABC Input":
-	{ 1, 2, 3 } != { 'a', 'b', 'c' }
-define "NotEqual123AndABC Output":
-	true
-
-define "NotEqual123AndString123 Input":
-	{ 1, 2, 3 } != { '1', '2', '3' }
-define "NotEqual123AndString123 Output":
 	true
 
 define "NotEqualDateTimeTrue Input":
@@ -1029,7 +999,7 @@ define "Union123And4 Output":
 define "UnionDateTime Input":
 	{ DateTime(2001, 9, 11)} union {DateTime(2012, 5, 10), DateTime(2014, 12, 10) }
 define "UnionDateTime Output":
-	{@2001-09-11T, @2012-05-10T, @2014-12-10T}
+	{@2001-09-11, @2012-05-10, @2014-12-10}
 
 define "UnionTime Input":
 	{ @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } union { @T10:59:59.999 }

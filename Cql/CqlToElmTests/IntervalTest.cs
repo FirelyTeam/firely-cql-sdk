@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval['hello','world']
-            ", "Intervals*defined minimums and maximums*String is not allowed.");
+            ", "Intervals can only be constructed for orderable types*");
         }
 
         [TestMethod]
