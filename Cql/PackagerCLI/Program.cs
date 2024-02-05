@@ -1,4 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using System.Diagnostics;
+using System.Text;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Microsoft.Extensions.Configuration;
@@ -11,49 +13,22 @@ namespace Hl7.Cql.Packager
     {
         public static int Main(string[] args)
         {
-            var config = new ConfigurationBuilder()
-                .AddCommandLine(args)
-                .Build();
-
-            if (args.Length == 0 || config["?"] != null || config["h"] != null || config["help"] != null)
+            Dictionary<string, string?>? config2 = GetConfigFromArgs(args);
+            if (config2 is null)
                 return ShowHelp();
 
-            if (config.AsEnumerable()
-                    .Select(kv => kv.Key)
-                    .Except(supportedArgs)
-                    .ToList() is { Count: > 0 } unknownArgs)
-            {
-                Console.Error.WriteLine($"Unknown args: {string.Join(", ", unknownArgs)}.");
-                ShowHelp();
-                return -1;
-            }
+            PackagerArgs config = ParseConfig(config2);
 
-
-            // elm
-
-            if (config["elm"] is not {} elmArg)
+            if (config.ShowHelp is true
+                || config.ElmDir is null 
+                || config.CqlDir is null)
                 return ShowHelp();
 
-            var elmDir = new DirectoryInfo(elmArg);
-            if (!elmDir.Exists)
-            {
-                Console.Error.WriteLine($"-elm: path {elmArg} does not exist.");
-                return -1;
-            }
+            if (!config.ElmDir.Exists)
+                return ShowError($"-elm: path {config.ElmDir} does not exist.");
 
-            // cql
-
-            if (config["cql"] is not {} cqlArg )
-                return ShowHelp();
-
-            var cqlDir = new DirectoryInfo(cqlArg);
-            if (!cqlDir.Exists)
-            {
-                Console.Error.WriteLine($"-cql: path {cqlArg} does not exist.");
-                return -1;
-            }
-
-            // d
+            if (!config.CqlDir.Exists)
+                return ShowError($"-elm: path {config.CqlDir} does not exist.");
 
             if (config["d"] is {} dArg && !bool.TryParse(dArg, out bool debug))
             {
@@ -98,8 +73,101 @@ namespace Hl7.Cql.Packager
 
             var resourceCanonicalRootUrl = config["canonical-root-url"]?.TrimEnd('/');
 
-            Package(elmDir, cqlDir, csDir, fhirDir, resourceCanonicalRootUrl);
+            Package(config.ElmDir, cqlDir, csDir, fhirDir, resourceCanonicalRootUrl);
             return 0;
+        }
+
+        private static int ShowError(string error)
+        {
+            Console.Error.WriteLine(error);
+            return -1;
+        }
+
+        private record PackagerArgs
+        {
+            public bool? ShowHelp { get; set; }
+            public DirectoryInfo? ElmDir { get; set; }
+            public DirectoryInfo? CqlDir { get; set; }
+            public DirectoryInfo? CSharpDir { get; set; }
+            public DirectoryInfo? FhirDir { get; set; }
+            public bool? Debug { get; set; }
+            public bool? Force { get; set; }
+            public string? CanonicalRootUrl { get; set; }
+
+            public IEnumerable<(string Key, object? Value)> KeyValues()
+            {
+                if (ShowHelp is { } showHelp) yield return (nameof(ShowHelp), showHelp);
+                if (ElmDir is {} elm) yield return (nameof(ElmDir), elm);
+                if (CqlDir is {} cql) yield return (nameof(CqlDir), cql);
+                if (CSharpDir is {} cs) yield return (nameof(CSharpDir), cs);
+                if (Debug is {} d) yield return (nameof(Debug), d);
+                if (Force is {} f) yield return (nameof(Force), f);
+                if (CanonicalRootUrl is {} canonicalRootUrl) yield return (nameof(CanonicalRootUrl), canonicalRootUrl);
+            }
+        }
+
+        private static PackagerArgs ParseConfig(IReadOnlyDictionary<string, string?> config)
+        {
+            PackagerArgs args = new PackagerArgs();
+
+            T? Get<T>(string key, Func<string,T?> parse) => config.GetValueOrDefault(key) is { Length:>0 } value ? parse(value) : default(T?);
+            
+            static DirectoryInfo? ParseDir(string dir) => new(Path.GetFullPath(dir));
+
+            static bool? ParseBool(string val) => bool.TryParse(val, out var result) ? result : null;
+
+            args.ElmDir           = Get("elm", ParseDir);
+            args.CqlDir           = Get("cql", ParseDir);
+            args.CSharpDir        = Get("cs", ParseDir);
+            args.FhirDir          = Get("fhir", ParseDir);
+            args.Debug            = Get("d", ParseBool);
+            args.Force            = Get("f", ParseBool);
+            args.CanonicalRootUrl = Get("canonical-root-url", s => s.TrimEnd('/'));
+
+
+            Debug.WriteLine(
+                $$"""
+                  Parsed config:
+                  {{
+                      string.Join(Environment.NewLine,
+                      from kv in args.KeyValues()
+                      orderby kv.Key
+                      select $"- {kv.Key}: {kv.Value}")
+                  }}
+                  """);
+
+
+            return args;
+        }
+
+        private static Dictionary<string, string?>? GetConfigFromArgs(string[] args)
+        {
+            var configuration = new ConfigurationBuilder()
+                .AddCommandLine(args)
+                .Build();
+
+            var config = configuration
+                .AsEnumerable()
+                .ToDictionary(kv => kv.Key, kv => kv.Value);
+
+            Debug.WriteLine(
+                $$"""
+                  PackageCLI called with {{config.Count}} argument(s):
+                  {{string.Join(Environment.NewLine,
+                      from kv in config
+                      orderby kv.Key
+                      select $"- {kv.Key}: {kv.Value}")}}
+                  """);
+
+            if (config.Keys
+                .Except(supportedArgs)
+                .ToList() is { Count: > 0 } unknownArgs)
+            {
+                Console.Error.WriteLine($"Unknown args: {string.Join(", ", unknownArgs)}.");
+                return null;
+            }
+
+            return config;
         }
 
         private static void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir, string? resourceCanonicalRootUrl)
