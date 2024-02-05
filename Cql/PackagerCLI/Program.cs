@@ -129,7 +129,7 @@ namespace Hl7.Cql.Packager
             if (fhirDir != null) resourceWriters.Add(new FhirResourceWriter(fhirDir, cliLogger));
             if (csDir != null) resourceWriters.Add(new CSharpResourceWriter(csDir, cliLogger));
 
-            var resourcePackager = new ResourcePackager(logFactory, [..resourceWriters]);
+            var resourcePackager = new ResourcePackager(logFactory, resourceWriters.ToArray());
             resourcePackager.Package(new PackageArgs(elmDir, cqlDir, resourceCanonicalRootUrl: resourceCanonicalRootUrl));
         }
 
