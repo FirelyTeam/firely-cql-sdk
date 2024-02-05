@@ -277,11 +277,11 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// Given a <see cref="FunctionDef"/>, creates an <see cref="Expression"/> for the invocation with the
         /// operands initialized to the arguments given.
         /// </summary>
+        // TODO: consider a factory pattern here
         internal static Expression CreateElmNode(this FunctionDef def, params Expression[] arguments)
         {
             var nodeType = def is SystemFunction b ? b.ElmNodeType : typeof(FunctionRef);
             var result = Activator.CreateInstance(nodeType)!;
-
             if (result is BinaryExpression be)
             {
                 if (result is DifferenceBetween dib)
@@ -387,6 +387,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 if (arguments.Length > 1)
                     rnd.precision = arguments[1];
                 return rnd;
+            }
+            else if (result is Message msg)
+            {
+                msg.source = arguments[0];
+                msg.condition = arguments[1];
+                msg.code = arguments[2];
+                msg.severity = arguments[3];
+                msg.message = arguments[4];
+                return msg;
             }
             else if (result is FunctionRef fr)
             {

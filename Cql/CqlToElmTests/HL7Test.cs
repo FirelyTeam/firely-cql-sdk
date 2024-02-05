@@ -20,6 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public static void Initialize(TestContext context) => ClassInitialize(opt =>
         {
             opt.ValidateLiterals = false;
+            opt.AllowNullIntervals = true;
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 

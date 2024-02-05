@@ -13,7 +13,7 @@ using System.Collections.Generic;
 namespace Hl7.Cql.Elm
 {
     /// <summary>
-    /// Represents the list of types defined in the CQL System model.
+    /// Represents the list of types defined in the CQL System model (r1).
     /// </summary>
     public static class SystemTypes
     {
@@ -88,5 +88,7 @@ namespace Hl7.Cql.Elm
                 TimeType,
                 DateTimeType,
             };
+
+        internal static readonly TypeSpecifier[] NumericTypes = new[] { IntegerType, LongType, DecimalType, QuantityType };
     }
 }

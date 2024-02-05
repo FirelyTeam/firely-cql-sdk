@@ -43,6 +43,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             LowBoundary,
             Max,
             Median,
+            Message,
             Min,
             Mode,
             Now,
@@ -81,7 +82,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static SystemFunction<T> aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
             new(new[] { source.ToListType() }, result, typeof(T).Name);
         public static readonly TypeSpecifier[] EmptyOperands = System.Array.Empty<TypeSpecifier>();
-        public static readonly TypeSpecifier[] NumericTypes = new[] { IntegerType, LongType, DecimalType, QuantityType };
 
 
         // Alphabetized
@@ -136,6 +136,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Max = aggregate<Max>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static SystemFunction<MaxValue> MaxValue = nullary<MaxValue>(T);
         public static OverloadedFunctionDef Median = aggregate<Median>(T, T).For(T, DecimalType, QuantityType);
+        public static SystemFunction<Message> Message = nary<Message>(new TypeSpecifier[] { T, BooleanType, StringType, StringType, StringType }, 5, T);
         public static OverloadedFunctionDef Min = aggregate<Min>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static SystemFunction<MinValue> MinValue = nullary<MinValue>(T);
         public static SystemFunction<Mode> Mode = aggregate<Mode>(T, T);

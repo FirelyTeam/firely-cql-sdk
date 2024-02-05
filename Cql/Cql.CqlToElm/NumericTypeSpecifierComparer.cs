@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal class NumericTypeSpecifierComparer : IComparer<NamedTypeSpecifier>
+    internal class NumericTypeSpecifierComparer : IComparer<NamedTypeSpecifier>, IComparer<TypeSpecifier>
     {
         public static readonly NumericTypeSpecifierComparer Default = new NumericTypeSpecifierComparer();
         private NumericTypeSpecifierComparer() { }
@@ -27,8 +27,10 @@ namespace Hl7.Cql.CqlToElm
                 return orderX - orderY;
             else return -1;
         }
+        public int Compare(TypeSpecifier? x, TypeSpecifier? y) => Compare(x as NamedTypeSpecifier, y as NamedTypeSpecifier);
 
         public static bool IsNumeric(TypeSpecifier type) => Order.ContainsKey(type);
+
 
         private static Dictionary<TypeSpecifier, int> Order = new()
         {

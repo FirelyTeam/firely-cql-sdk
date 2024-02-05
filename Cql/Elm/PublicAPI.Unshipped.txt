@@ -785,6 +785,7 @@ static Hl7.Cql.Elm.SystemTypes.ValueSetType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.SystemTypes.VocabularyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifier.operator !=(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
 static Hl7.Cql.Elm.TypeSpecifier.operator ==(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
+static Hl7.Cql.Elm.TypeSpecifierExtensions.IsNumericType(this Hl7.Cql.Elm.TypeSpecifier! type) -> bool
 static Hl7.Cql.Elm.TypeSpecifierExtensions.IsValidOrderedType(this Hl7.Cql.Elm.TypeSpecifier! type) -> bool
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToIntervalType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToListType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.ListTypeSpecifier!

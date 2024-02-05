@@ -39,5 +39,11 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static bool IsValidOrderedType(this TypeSpecifier type) => SystemTypes.ValidOrderedTypes.Contains(type);
 
+        /// <summary>
+        /// Determines if a type is numeric.
+        /// </summary>
+        public static bool IsNumericType(this TypeSpecifier type) => SystemTypes.NumericTypes.Contains(type);
+
+
     }
 }

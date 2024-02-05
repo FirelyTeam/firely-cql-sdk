@@ -6,6 +6,11 @@
     public class CqlToElmOptions
     {
         /// <summary>
+        /// The default options.
+        /// </summary>
+        public static readonly CqlToElmOptions Default = new();
+
+        /// <summary>
         /// <para>
         /// Sets the default URI of the ELM model that will be automatically included
         /// as a <code>using</code> directive, using the local identifer <code>System</code>.
@@ -50,6 +55,24 @@
         /// Note that doing so will run the risk of creating ELM libraries that cannot be used by other execution environments.
         /// </remarks>
         public bool? ValidateLiterals { get; set; } = true;
+
+        /// <summary>
+        /// When <see langword="true"/>, intervals' point types will be required to be an ordered type.
+        /// Ordered types are specifically types for which predecessor, successor, and comparison operators exist.
+        /// Specifically, this includes Integer, Long, Decimal, Quantity, Date, DateTime, and Type types.
+        /// The defualt value is <see langword="true"/>.
+        /// </summary>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
+        public bool? ValidateIntervals { get; set; } = true;
+
+        /// <summary>
+        /// When <see langword="true"/>, Interval(null, null) will be a valid construct.
+        /// When <see langword="false"/>, an error will be generated when an interval's low and high values are both null.
+        /// Note that this setting will only prevent intervals explicitly declared with the null keyword.
+        /// The defualt value is <see langword="false"/>.
+        /// </summary>
+        /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
+        public bool? AllowNullIntervals { get; set; } = false;
 
     }
 }

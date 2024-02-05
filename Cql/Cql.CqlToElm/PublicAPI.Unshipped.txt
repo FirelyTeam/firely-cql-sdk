@@ -1,10 +1,14 @@
 ﻿#nullable enable
 Hl7.Cql.CqlToElm.CqlToElmOptions
+Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.CqlToElmOptions() -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.get -> string?
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.get -> string?
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelVersion.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.get -> bool?
+Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.set -> void
 Hl7.Cql.CqlToElm.IModelProvider
@@ -25,3 +29,4 @@ static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifie
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifierElement! ttse, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TupleElementDefinition!
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TypeSpecifier! ts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TypeSpecifier!
 static Hl7.Cql.CqlToElm.ModelProvider.TryGetTypeInfoFor(this Hl7.Cql.Model.ModelInfo! model, string! name, out Hl7.Cql.Model.TypeInfo? result) -> bool
+static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
