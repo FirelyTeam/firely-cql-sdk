@@ -23,6 +23,12 @@ public record PackageArgs
         ResourceCanonicalRootUrl = resourceCanonicalRootUrl;
     }
 
+    /// <summary>directory to find the ELM files</summary>
+    public DirectoryInfo ElmDir { get; }
+
+    /// <summary>directory to find the CQL files</summary>
+    public DirectoryInfo CqlDir { get; }
+
     /// <summary>
     /// Optional mutator for the resources prior to writing.
     /// </summary>
@@ -32,10 +38,4 @@ public record PackageArgs
     /// Root part of the resource canonical; otherwise just a '#'.
     /// </summary>
     public string? ResourceCanonicalRootUrl { get; init; }
-
-    /// <summary>directory to find the ELM files</summary>
-    public DirectoryInfo ElmDir { get; }
-
-    /// <summary>directory to find the CQL files</summary>
-    public DirectoryInfo CqlDir { get; }
 }
