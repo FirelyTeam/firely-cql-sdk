@@ -18,7 +18,6 @@
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<NoWarn>CA1311,CS8601,CS8602,CS8604</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -36,7 +35,7 @@
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
-		<LangVersion>11.0</LangVersion>
+		<LangVersion>12.0</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Configurations>Debug;Release;FullDebug</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>

@@ -29,9 +29,19 @@ namespace Hl7.Cql.Packaging
         /// </summary>
         /// <param name="elmDir">directory to find the ELM files</param>
         /// <param name="cqlDir">directory to find the CQL files</param>
-        /// <param name="resourceCanonicalRootUrl">root part of the resource canonical; otherwise just a '#'</param>
         /// <param name="afterPackageMutator">optional mutator for the resources prior to writing</param>
-        public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, string? resourceCanonicalRootUrl = null, Action<IEnumerable<Resource>>? afterPackageMutator = null)
+        public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
+            Action<IEnumerable<Resource>>? afterPackageMutator = null) =>
+            PackageCore(elmDir, cqlDir, afterPackageMutator, null);
+
+        /// <summary>
+        /// Package the resources in the given ELM and CQL directories and output them using the writers provided in the constructor 
+        /// </summary>
+        /// <param name="args">A</param>
+        public void Package(PackageArgs args) =>
+            PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl);
+
+        private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action<IEnumerable<Resource>>? afterPackageMutator, string? resourceCanonicalRootUrl)
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
