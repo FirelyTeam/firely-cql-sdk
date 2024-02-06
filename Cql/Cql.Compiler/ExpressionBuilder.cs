@@ -24,6 +24,8 @@ using System.Reflection;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
+using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
+
 namespace Hl7.Cql.Compiler
 {
     internal record ExpressionBuilderOptions(bool EmitStackTraces);
@@ -158,15 +160,16 @@ namespace Hl7.Cql.Compiler
                 var codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
                 if (Library.codes != null)
                 {
+                    HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
+
                     foreach (var code in Library.codes)
                     {
                         if (code.codeSystem == null)
                             throw new InvalidOperationException("Code definition has a null codeSystem node.");
                         if (!codeSystemUrls.TryGetValue(code.codeSystem.name, out var csUrl))
                             throw new InvalidOperationException($"Undefined code system {code.codeSystem.name!}");
-                        var existingCode = codesByName.Values.SingleOrDefault(c => c.code == code.id && c.system == csUrl);
-                        if (existingCode != null)
-                            throw new InvalidOperationException($"Duplicate code detected: {code.id} from {code.codeSystem.name} ({csUrl})");
+                        if (!foundCodeNameCodeSystemUrls.Add((code.name, csUrl)))
+                            throw new InvalidOperationException($"Duplicate code name detected: {code.name} from {code.codeSystem.name} ({csUrl})");
                         var systemCode = new CqlCode(code.id, csUrl, null, null);
                         codesByName.Add(code.name, systemCode);
                         if (!codesByCodeSystemName.TryGetValue(code.codeSystem!.name!, out var codings))
@@ -1085,17 +1088,17 @@ namespace Hl7.Cql.Compiler
                 if (querySourceAlias == "ItemOnLine")
                 {
                 }
-                var scopes = new[] { new KeyValuePair<string, (Expression, elm.Element)>(querySourceAlias!, (whereLambdaParameter, querySource.expression)) };
+                var scopes = new[] { new ExpressionElementPairForIdentifier(querySourceAlias!, (whereLambdaParameter, querySource.expression)) };
                 var subContext = ctx.WithScopes(scopes);
 
                 if (query.let != null)
                 {
-                    var letScopes = new KeyValuePair<string, (Expression, elm.Element)>[query.let.Length];
+                    var letScopes = new ExpressionElementPairForIdentifier[query.let.Length];
                     for (int i = 0; i < query.let.Length; i++)
                     {
                         var let = query.let[i];
                         var expression = TranslateExpression(let.expression!, subContext);
-                        letScopes[i] = new KeyValuePair<string, (Expression, elm.Element)>(let.identifier!, (expression, let.expression!));
+                        letScopes[i] = new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!));
                     }
                     subContext = subContext.WithScopes(letScopes);
                 }
@@ -1113,7 +1116,7 @@ namespace Hl7.Cql.Compiler
 
                 var selectLambdaParameter = Expression.Parameter(elementType, parameterName);
 
-                var scopes = new[] { new KeyValuePair<string, (Expression, elm.Element)>(querySourceAlias!, (selectLambdaParameter, query.@return)) };
+                var scopes = new[] { new ExpressionElementPairForIdentifier(querySourceAlias!, (selectLambdaParameter, query.@return)) };
                 var subContext = ctx.WithScopes(scopes);
 
                 if (query.let != null)
@@ -1122,7 +1125,7 @@ namespace Hl7.Cql.Compiler
                     {
                         var let = query.let[i];
                         var expression = TranslateExpression(let.expression!, subContext);
-                        subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(let.identifier!, (expression, let.expression!)));
+                        subContext = subContext.WithScopes(new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!)));
                     }
                 }
                 var selectBody = TranslateExpression(query.@return.expression!, subContext);
@@ -1153,8 +1156,8 @@ namespace Hl7.Cql.Compiler
                 var resultParameter = Expression.Parameter(resultType, resultAlias);
                 var scopes = new[]
                 {
-                        new KeyValuePair<string, (Expression, elm.Element)>(querySourceAlias!, (sourceAliasParameter, query)),
-                        new KeyValuePair<string, (Expression, elm.Element)>(resultAlias!, (resultParameter, query.aggregate))
+                        new ExpressionElementPairForIdentifier(querySourceAlias!, (sourceAliasParameter, query)),
+                        new ExpressionElementPairForIdentifier(resultAlias!, (resultParameter, query.aggregate))
                     };
                 var subContext = ctx.WithScopes(scopes);
                 if (query.let != null)
@@ -1163,7 +1166,7 @@ namespace Hl7.Cql.Compiler
                     {
                         var let = query.let[i];
                         var expression = TranslateExpression(let.expression!, subContext);
-                        subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(let.identifier!, (expression, let.expression!)));
+                        subContext = subContext.WithScopes(new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!)));
                     }
                 }
                 var startingValue = TranslateExpression(query.aggregate.starting!, subContext);
@@ -1294,7 +1297,7 @@ namespace Hl7.Cql.Compiler
                     (
                         from property in multiSourceTupleType!.GetProperties()
                         let propertyAccess = Expression.Property(whereLambdaParameter, property)
-                        select new KeyValuePair<string, (Expression, elm.Element)>(property.Name, (propertyAccess, query.@where))
+                        select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query.@where))
                     )
                     .ToArray();
                 var subContext = ctx.WithScopes(scopes);
@@ -1302,12 +1305,12 @@ namespace Hl7.Cql.Compiler
 
                 if (query.let != null)
                 {
-                    var letScopes = new KeyValuePair<string, (Expression, elm.Element)>[query.let.Length];
+                    var letScopes = new ExpressionElementPairForIdentifier[query.let.Length];
                     for (int i = 0; i < query.let.Length; i++)
                     {
                         var let = query.let[i];
                         var expression = TranslateExpression(let.expression!, subContext);
-                        letScopes[i] = new KeyValuePair<string, (Expression, elm.Element)>(let.identifier!, (expression, let.expression!));
+                        letScopes[i] = new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!));
                     }
                     subContext = subContext.WithScopes(letScopes);
                 }
@@ -1329,7 +1332,7 @@ namespace Hl7.Cql.Compiler
                     (
                         from property in multiSourceTupleType!.GetProperties()
                         let propertyAccess = Expression.Property(selectLambdaParameter, property)
-                        select new KeyValuePair<string, (Expression, elm.Element)>(property.Name, (propertyAccess, query.@return))
+                        select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query.@return))
                     )
                     .ToArray();
                 var subContext = ctx.WithScopes(scopes);
@@ -1341,7 +1344,7 @@ namespace Hl7.Cql.Compiler
                     {
                         var let = query.let[i];
                         var expression = TranslateExpression(let.expression!, subContext);
-                        subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(let.identifier!, (expression, let.expression!)));
+                        subContext = subContext.WithScopes(new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!)));
                     }
                 }
                 var selectBody = TranslateExpression(query.@return.expression!, subContext);
@@ -1360,7 +1363,7 @@ namespace Hl7.Cql.Compiler
                         (
                             from property in multiSourceTupleType!.GetProperties()
                             let propertyAccess = Expression.Property(sourceParameter, property)
-                            select new KeyValuePair<string, (Expression, elm.Element)>(property.Name, (propertyAccess, query))
+                            select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, query))
                         )
                         .ToArray();
                     var subContext = ctx.WithScopes(scopes);
@@ -1381,16 +1384,16 @@ namespace Hl7.Cql.Compiler
                     }
                     var resultParameter = Expression.Parameter(resultType, resultAlias);
 
-                    subContext = subContext.WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(resultAlias!, (resultParameter, query.aggregate)));
+                    subContext = subContext.WithScopes(new ExpressionElementPairForIdentifier(resultAlias!, (resultParameter, query.aggregate)));
 
                     if (query.let != null)
                     {
-                        var letScopes = new KeyValuePair<string, (Expression, elm.Element)>[query.let.Length];
+                        var letScopes = new ExpressionElementPairForIdentifier[query.let.Length];
                         for (int i = 0; i < query.let.Length; i++)
                         {
                             var let = query.let[i];
                             var expression = TranslateExpression(let.expression!, subContext);
-                            letScopes[i] = new KeyValuePair<string, (Expression, elm.Element)>(let.identifier!, (expression, let.expression!));
+                            letScopes[i] = new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!));
                         }
                         subContext = subContext.WithScopes(letScopes);
                     }
@@ -2038,7 +2041,7 @@ namespace Hl7.Cql.Compiler
             //            .Where(P => true) // such that goes here
             //            .Select(P => E));
             var selectManyParameter = Expression.Parameter(outerElementType, outerScope);
-            var selectManyContext = ctx.WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(outerScope, (selectManyParameter, with)));
+            var selectManyContext = ctx.WithScopes(new ExpressionElementPairForIdentifier(outerScope, (selectManyParameter, with)));
             var source = TranslateExpression(with.expression, selectManyContext);
             if (!IsOrImplementsIEnumerableOfT(source.Type))
             {
@@ -2052,7 +2055,7 @@ namespace Hl7.Cql.Compiler
             var sourcElementType = TypeResolver.GetListElementType(source.Type)!;
 
             var whereLambdaParameter = Expression.Parameter(sourcElementType, with.alias);
-            var whereContext = selectManyContext.WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(with.alias!, (whereLambdaParameter, with)));
+            var whereContext = selectManyContext.WithScopes(new ExpressionElementPairForIdentifier(with.alias!, (whereLambdaParameter, with)));
             var suchThatBody = TranslateExpression(with.suchThat, whereContext);
 
             var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
@@ -2104,7 +2107,7 @@ namespace Hl7.Cql.Compiler
             var selectManyParameter = Expression.Parameter(tupleType, TypeNameToIdentifier(tupleType, ctx));
             var scopes = (from property in tupleType.GetProperties()
                           let propertyAccess = Expression.Property(selectManyParameter, property)
-                          select new KeyValuePair<string, (Expression, elm.Element)>(property.Name, (propertyAccess, with)))
+                          select new ExpressionElementPairForIdentifier(property.Name, (propertyAccess, with)))
                          .ToArray();
             var selectManyContext = ctx.WithScopes(scopes);
 
@@ -2112,7 +2115,7 @@ namespace Hl7.Cql.Compiler
             var sourceElementType = TypeResolver.GetListElementType(source.Type)!;
 
             var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
-            var whereContext = selectManyContext.WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(with.alias!, (whereLambdaParameter, with)));
+            var whereContext = selectManyContext.WithScopes(new ExpressionElementPairForIdentifier(with.alias!, (whereLambdaParameter, with)));
             var suchThatBody = TranslateExpression(with.suchThat, whereContext);
             var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
             var callWhereOnSource = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, source, whereLambda);
