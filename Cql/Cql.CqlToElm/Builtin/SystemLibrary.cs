@@ -84,8 +84,15 @@ namespace Hl7.Cql.CqlToElm.Builtin
             Tail,
             Time,
             TimeOfDay,
+            ToBoolean,
+            ToConcept,
+            ToDateTime,
+            ToDecimal,
+            ToInteger,
             Today,
             ToStringFunction,
+            ToQuantity,
+            ToTime,
             Truncate,
             Upper,
             Variance);
@@ -213,9 +220,16 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Slice> Tail = unary<Slice>(T.ToListType(), T.ToListType(), "Tail");
         public static SystemFunction<Time> Time = nary<Time>(IntegerType, 4, 1, TimeType);
         public static SystemFunction<TimeOfDay> TimeOfDay = nullary<TimeOfDay>(TimeType);
+        public static OverloadedFunctionDef ToBoolean = unary<ToBoolean>(T, BooleanType).For(T, IntegerType, LongType, DecimalType, StringType);
+        public static OverloadedFunctionDef ToConcept = unary<ToConcept>(T, ConceptType).For(T, CodeType, CodeType.ToListType());
+        public static OverloadedFunctionDef ToDateTime = unary<ToDateTime>(T, DateTimeType).For(T, DateType, StringType);
+        public static OverloadedFunctionDef ToDecimal = unary<ToDecimal>(T, DecimalType).For(T,BooleanType, StringType);
+        public static OverloadedFunctionDef ToInteger = unary<ToInteger>(T, IntegerType).For(T, BooleanType, StringType, LongType);
         public static SystemFunction<Today> Today = nullary<Today>(DateType);
         public static SystemFunction<ToList> ToList = unary<ToList>(T, T.ToListType());
+        public static OverloadedFunctionDef ToQuantity = unary<ToQuantity>(T, QuantityType).For(T, DecimalType, IntegerType, RatioType, StringType);
         public static OverloadedFunctionDef ToStringFunction = unary<ToString>(T, StringType).For(T, BooleanType, IntegerType, LongType, DecimalType, QuantityType, RatioType, DateType, DateTimeType, TimeType);
+        public static SystemFunction<ToTime> ToTime = unary<ToTime>(StringType, TimeType);
         public static SystemFunction<Truncate> Truncate = unary<Truncate>(DecimalType, IntegerType);
         public static OverloadedFunctionDef TruncatedDivide = binary<TruncatedDivide>(T, T, T).For(T, NumericTypes);
         public static SystemFunction<Upper> Upper = unary<Upper>(StringType, StringType);
