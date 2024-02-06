@@ -438,7 +438,39 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 desc.source = arguments[0];
                 return desc;
             }
-
+            else if (result is Combine combine)
+            {
+                combine.source = arguments[0];
+                if (arguments.Length > 1)
+                    combine.separator = arguments[1];
+                return combine;
+            }
+            else if (result is LastPositionOf lpo)
+            {
+                lpo.@string = arguments[0];
+                lpo.pattern = arguments[1];
+                return lpo;
+            }
+            else if (result is PositionOf po)
+            {
+                po.@string = arguments[0];
+                po.pattern = arguments[1];
+                return po;
+            }
+            else if (result is Split sp)
+            {
+                sp.stringToSplit = arguments[0];
+                sp.separator = arguments[1];
+                return sp;
+            }
+            else if (result is Substring ss)
+            {
+                ss.stringToSub = arguments[0];
+                ss.startIndex = arguments[1];
+                if (arguments.Length > 2)
+                    ss.length = arguments[2];
+                return ss;
+            }
             else if (result is FunctionRef fr)
             {
                 fr.name = def.name;
