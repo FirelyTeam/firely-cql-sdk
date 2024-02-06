@@ -150,7 +150,7 @@ namespace Hl7.Cql.Packaging
                 .OrderBy(lib => lib.NameAndVersion) 
                 .ToArray();
 
-            var allleanu = new DefinitionDictionary<LambdaExpression>();
+            var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
