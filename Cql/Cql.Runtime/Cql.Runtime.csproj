@@ -7,7 +7,6 @@
 		<RootNamespace>Hl7.Cql.Runtime</RootNamespace>
 		<Product>CQL engine runtime</Product>
 		<Description>Support package for Hl7.Cql. Contains the required runtime components for CQL execution.</Description>
-		<NoWarn>CS8601</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
