@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
@@ -25,6 +26,21 @@ namespace CoreTests
             Assert.AreEqual(FHIRAllTypes.Date, typeEntry.FhirType.Value);
         }
 
+
+        [TestMethod]
+        public void Element_ResultName_MapToFhirType()
+        {
+            var element = new Hl7.Cql.Elm.ParameterDef()
+            {
+                resultTypeName = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}boolean")
+            };
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(element);
+            Assert.IsNotNull(typeEntry, $"Unable to express {element} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Boolean, typeEntry.FhirType.Value);
+        }
+
         [TestMethod]
         public void CqlIntervalOfDate_MapToFhirType()
         {
@@ -35,6 +51,30 @@ namespace CoreTests
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.Period, typeEntry.FhirType.Value);
             Assert.AreEqual(FHIRAllTypes.Date, typeEntry.ElementType.FhirType.Value);
+        }
+
+        [TestMethod]
+        public void CqlIntervalOfInt_MapToFhirType()
+        {
+            var cqlType = typeof(CqlInterval<int>);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Range, typeEntry.FhirType.Value);
+            Assert.AreEqual(FHIRAllTypes.Integer, typeEntry.ElementType.FhirType.Value);
+        }
+
+        [TestMethod]
+        public void CqlIntervalOfDecimal_MapToFhirType()
+        {
+            var cqlType = typeof(CqlInterval<decimal>);
+
+            var crosswalk = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+            var typeEntry = crosswalk.TypeEntryFor(cqlType);
+            Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
+            Assert.AreEqual(FHIRAllTypes.Range, typeEntry.FhirType.Value);
+            Assert.AreEqual(FHIRAllTypes.Decimal, typeEntry.ElementType.FhirType.Value);
         }
 
         [TestMethod]
@@ -70,8 +110,6 @@ namespace CoreTests
             Assert.IsNotNull(typeEntry, $"Unable to express {cqlType} as a FHIR type");
             Assert.AreEqual(FHIRAllTypes.Decimal, typeEntry.FhirType.Value);
         }
-
-
 
         [TestMethod]
         public void Boolean_MapToFhirType()
