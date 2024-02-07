@@ -25,7 +25,7 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm.Test" Key="$(LibraryPKHash)" />
-    <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23525.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23525.2" PrivateAssets="All" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -66,6 +66,9 @@
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
 		<Compile Update="ExpressionBuilder.Types.cs">
+			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		</Compile>
+		<Compile Update="ExpressionBuilder.Building.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
