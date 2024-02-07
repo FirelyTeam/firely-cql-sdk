@@ -73,28 +73,62 @@ namespace Hl7.Cql.Compiler
         {
             if (element?.resultTypeSpecifier != null)
                 return TypeFor(element.resultTypeSpecifier, context);
-            else if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
+
+            if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
                 return Resolver.ResolveType(element!.resultTypeName!.Name)
-                    ?? throw new ArgumentException("Cannot resolve type for expression");
-            else if (element is elm.ExpressionDef def && def.expression != null)
+                       ?? throw new ArgumentException("Cannot resolve type for expression");
+
+            if (element is elm.ExpressionDef def)
             {
-                var type = TypeFor(def.expression, context, false);
-                if (type == null)
+                if (def.expression != null)
                 {
-                    if (def.expression is elm.SingletonFrom singleton)
+                    var type = TypeFor(def.expression, context, false);
+                    if (type == null)
                     {
-                        type = TypeFor(singleton, context, false);
-                        if (type == null)
+                        if (def.expression is elm.SingletonFrom singleton)
                         {
-                            if (singleton.operand is elm.Retrieve retrieve && retrieve.dataType != null)
+                            type = TypeFor(singleton, context, false);
+                            if (type == null)
                             {
-                                type = Resolver.ResolveType(retrieve.dataType.Name);
-                                if (type != null)
-                                    return type;
+                                if (singleton.operand is elm.Retrieve retrieve && retrieve.dataType != null)
+                                {
+                                    type = Resolver.ResolveType(retrieve.dataType.Name);
+                                    if (type != null)
+                                        return type;
+                                }
                             }
+                            else return type;
                         }
-                        else return type;
                     }
+                }
+                else if (element is elm.Property propertyExpression && !string.IsNullOrWhiteSpace(propertyExpression.path))
+                {
+                    Type? sourceType = null;
+                    if (propertyExpression.source != null)
+                        sourceType = TypeFor(propertyExpression.source!, context);
+                    else if (propertyExpression.scope != null)
+                    {
+                        var scope = context.GetScope(propertyExpression.scope);
+                        sourceType = scope.Item1.Type;
+                    }
+                    if (sourceType != null)
+                    {
+                        var property = Resolver.GetProperty(sourceType, propertyExpression.path);
+                        if (property != null)
+                            return property.PropertyType;
+                        return typeof(object); // this is likely a choice
+                    }
+                }
+                else if (element is elm.AliasRef aliasRef && !string.IsNullOrWhiteSpace(aliasRef.name))
+                {
+                    var scope = context.GetScope(aliasRef.name);
+                    return scope.Item1.Type;
+                }
+                else if (element is elm.OperandRef operandRef && !string.IsNullOrWhiteSpace(operandRef.name))
+                {
+                    context.Operands.TryGetValue(operandRef.name, out var operand);
+                    if (operand != null)
+                        return operand.Type;
                 }
             }
             else if (element is elm.Property propertyExpression && !string.IsNullOrWhiteSpace(propertyExpression.path))
@@ -112,7 +146,7 @@ namespace Hl7.Cql.Compiler
                     var property = Resolver.GetProperty(sourceType, propertyExpression.path);
                     if (property != null)
                         return property.PropertyType;
-                    else return typeof(object); // this is likely a choice
+                    return typeof(object); // this is likely a choice
                 }
             }
             else if (element is elm.AliasRef aliasRef && !string.IsNullOrWhiteSpace(aliasRef.name))
@@ -126,9 +160,10 @@ namespace Hl7.Cql.Compiler
                 if (operand != null)
                     return operand.Type;
             }
+
             if (throwIfNotFound)
-                throw new ArgumentException("Cannot resolve type for expression");
-            else return null;
+                throw new ArgumentException($"Cannot resolve type for expression '{element?.GetType().FullName}'");
+            return null;
         }
 
         internal Type TypeFor(elm.TypeSpecifier resultTypeSpecifier,
