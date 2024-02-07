@@ -145,8 +145,9 @@ namespace Hl7.Cql.Packaging
 
             var elmLibraries = packageGraph.Nodes.Values
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
-                .Where(p => p is not null)
-                .Select(p => p!)
+                .OfType<elm.Library>()
+                // Processing this deterministically to reduce different exceptions when running this repeatedly
+                .OrderBy(lib => lib.NameAndVersion) 
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();
