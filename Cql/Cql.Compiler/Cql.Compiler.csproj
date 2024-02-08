@@ -30,43 +30,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update="ExpressionBuilder.AggregateFunctions.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
+		<Compile Update="DefinitionBuilding\DefinitionsBuilder.*.cs">
+			<DependentUpon>DefinitionBuilding\DefinitionsBuilder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="ExpressionBuilder.ArithmeticOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.ClinicalOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.ComparisonOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.DateAndTimeOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.ErrorsAndMessaging.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.IntervalOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.ListOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.LogicalOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.NullologicalOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.StringOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.TypeOperators.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
-		<Compile Update="ExpressionBuilder.Types.cs">
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="ExpressionBuilder.*.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
