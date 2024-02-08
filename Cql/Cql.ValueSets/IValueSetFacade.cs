@@ -16,6 +16,7 @@ namespace Hl7.Cql.ValueSets
     /// is from a value set, enabling implementations to use <see cref="IsCodeInValueSet(CqlCode?)"/>
     /// for optimized code-in-valueset checks.
     /// </summary>
+    /// <remarks>Care should be taken to implement these functions performantly, including using the enumerator.</remarks>
     public interface IValueSetFacade : IEnumerable<CqlCode>
     {
         /// <summary>
