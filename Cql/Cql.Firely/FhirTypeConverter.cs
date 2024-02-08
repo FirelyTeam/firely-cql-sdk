@@ -271,11 +271,13 @@ namespace Hl7.Cql.Fhir
                 converter.AddConversion(codeType, typeof(CqlCode), (code) =>
                 {
                     var systemAndCode = (ISystemAndCode)code;
-                    return new CqlCode(systemAndCode.Code, systemAndCode.System, null, null);
+                    return new CqlCode(systemAndCode.Code, systemAndCode.System);
                 });
                 converter.AddConversion(codeType, nullableEnumType, (code) => 
                     code.GetType().GetProperty("Value")!.GetValue(code)!);
-
+                converter.AddConversion(enumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
+                converter.AddConversion(nullableEnumType, codeType, enumValue => Activator.CreateInstance(codeType, enumValue)!);
+                
                 converter.AddConversion(codeType, typeof(string), (code) =>
                 {
                     var systemAndCode = (ISystemAndCode)code;
