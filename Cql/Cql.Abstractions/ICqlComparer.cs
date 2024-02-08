@@ -37,7 +37,7 @@ namespace Hl7.Cql.Abstractions
         int? Compare(object? x, object? y, string? precision);
         /// <summary>
         /// Computes a hash code for <paramref name="x"/>.
-        /// If <see cref="Equals(object, object, string?)"/> returns <see langword="true"/> for two objects x and y, this method must return the same value for both x and y.
+        /// If <see cref="Equals(object?, object?, string?)"/> returns <see langword="true"/> for two objects x and y, this method must return the same value for both x and y.
         /// If it returns <see langword="false"/>, this method must return two different values for x and y.
         /// </summary>
         /// <param name="x">The object whose hash code to compute.</param>

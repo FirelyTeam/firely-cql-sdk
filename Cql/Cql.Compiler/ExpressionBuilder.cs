@@ -12,7 +12,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,6 +20,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -1488,8 +1488,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeResolver.GetListElementType(type);
                 if (elementType == typeof(CqlCode))
                 {
-                    var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(CqlContext) })!;
-                    var @new = Expression.New(ctor, cqlValueSet, ctx.RuntimeContextParameter);
+                    var @new = CallCreateValueSetFacade(ctx, cqlValueSet);
                     return @new;
                 }
                 else
@@ -2267,7 +2266,6 @@ namespace Hl7.Cql.Compiler
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }
-                throw new NotImplementedException();
             }
             else throw new NotImplementedException();
         }
@@ -2785,7 +2783,7 @@ namespace Hl7.Cql.Compiler
             //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
             return lambda;
         }
-
+        
         protected static bool IsEnum(Type type)
         {
             if (type.IsEnum)
@@ -2795,5 +2793,14 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
+        internal MethodCallExpression CallCreateValueSetFacade(ExpressionBuilderContext ctx, Expression operand)
+        {
+            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
+            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
+            var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);
+            var call = Expression.Call(property, createFacadeMethod, operand);
+
+            return call;
+        }
     }
 }
