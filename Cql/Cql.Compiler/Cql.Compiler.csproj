@@ -69,8 +69,5 @@
 		<Compile Update="ExpressionBuilder.Types.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
-		<Compile Update="ExpressionBuilder.Building.cs">
-			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
-		</Compile>
 	</ItemGroup>
 </Project>

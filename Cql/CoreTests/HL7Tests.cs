@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Definitions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Runtime;
@@ -49,9 +50,8 @@ namespace CoreTests
             var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            var fhirHelpersBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
-            ExpressionBuilder.LibraryDefinitionsBuilder lib = new(fhirHelpersBuilder);
-            var definitions = lib.Build();
+            var expressionBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
+            var definitions = new DefinitionsBuilderForLibrary(expressionBuilder).BuildDefinitions();
             LambdasByTestName.Lambdas.Merge(definitions);
 
 
@@ -63,8 +63,7 @@ namespace CoreTests
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
                 var includes = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
                 var builder = new ExpressionBuilder(binding, typeManager, elmPackage, CreateLogger());
-                ExpressionBuilder.LibraryDefinitionsBuilder lib1 = new(builder);
-                definitions = lib1.Build();
+                definitions = new DefinitionsBuilderForLibrary(builder).BuildDefinitions();
                 LambdasByTestName.Lambdas.Merge(definitions);
             }
 

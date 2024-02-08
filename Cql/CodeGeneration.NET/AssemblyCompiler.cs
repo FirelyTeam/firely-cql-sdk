@@ -24,6 +24,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Hl7.Cql.Compiler.Definitions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -87,8 +88,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             foreach (var package in elmPackages)
             {
                 ExpressionBuilder expressionBuilder = new(Binding, TypeManager, package, builderLogger);
-                ExpressionBuilder.LibraryDefinitionsBuilder lib = new(expressionBuilder);
-                var definitions = lib.Build();
+                DefinitionsBuilderForLibrary definitionsBuilderForLibrary = new(expressionBuilder);
+                var definitions = definitionsBuilderForLibrary.BuildDefinitions();
                 all.Merge(definitions);
             }
 

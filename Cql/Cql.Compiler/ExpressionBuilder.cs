@@ -72,7 +72,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// The <see cref="TypeManager"/> used to resolve and create types referenced in <see cref="Library"/>.
         /// </summary>
-        private TypeManager TypeManager { get; }
+        public TypeManager TypeManager { get; }
         /// <summary>
         /// The <see cref="Library"/> this builder will build.
         /// </summary>
@@ -110,7 +110,7 @@ namespace Hl7.Cql.Compiler
             return lambda;
         }
 
-        private Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
+        internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
         {
             ctx = ctx.Deeper(op);
             Expression? expression;
@@ -1526,8 +1526,7 @@ namespace Hl7.Cql.Compiler
                     if (IsOrImplementsIEnumerableOfT(TypeResolver, value.Type))
                     {
                         var elementType = TypeResolver.GetListElementType(property.PropertyType)!;
-                        var listType = typeof(List<>).MakeGenericType(elementType);
-                        var ctor = listType.GetConstructor(new[] { typeof(IEnumerable<>).MakeGenericType(elementType) })!;
+                        var ctor = ConstructorInfos.ListOf(elementType);
                         var newList = Expression.New(ctor, value);
                         return Expression.Bind(memberInfo, newList);
                     }
@@ -2413,7 +2412,7 @@ namespace Hl7.Cql.Compiler
             return new NullConditionalMemberExpression(before, member);
         }
 
-        private static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
+        internal static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
         {
             var typeName = type.Name.ToLowerInvariant();
             if (type.IsGenericType)

@@ -10,4 +10,9 @@ internal static class ReflectionUtility
         => fnToCtor.Body is NewExpression ne
             ? ne.Constructor
             : null;
+
+    public static MethodInfo? MethodOf<T>(Expression<Func<T>> fnToMethodCall)
+        => fnToMethodCall.Body is MethodCallExpression mce
+            ? mce.Method
+            : null;
 }

@@ -390,7 +390,7 @@ namespace Hl7.Cql.Compiler
         {
             var fieldBuilder = myTypeBuilder.DefineField($"_{normalizedName}", type, FieldAttributes.Private);
             var propertyBuilder = myTypeBuilder.DefineProperty(normalizedName, PropertyAttributes.None, type, null);
-            var customAttributeBuilder = new CustomAttributeBuilder(typeof(CqlDeclarationAttribute).GetConstructor(new[] { typeof(string) })!, new object?[] { cqlName });
+            var customAttributeBuilder = new CustomAttributeBuilder(ConstructorInfos.CqlDeclarationAttribute, new object?[] { cqlName });
             propertyBuilder.SetCustomAttribute(customAttributeBuilder);
             MethodAttributes attributes = MethodAttributes.Public
                     | MethodAttributes.SpecialName
@@ -414,6 +414,5 @@ namespace Hl7.Cql.Compiler
                 propertyBuilder.SetSetMethod(set);
             }
         }
-
     }
 }

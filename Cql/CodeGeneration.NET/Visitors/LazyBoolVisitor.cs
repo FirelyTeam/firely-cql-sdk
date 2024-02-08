@@ -10,13 +10,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class LazyBoolAssignmentVisitor : ExpressionVisitor
     {
-        private static readonly ConstructorInfo LazyCtor = typeof(Lazy<bool?>).GetConstructor(new[] { typeof(Func<bool?>) })!;
-
         public List<ParameterExpression> NewParameters { get; } = new List<ParameterExpression>();
 
         private readonly LazyBoolAccessorVisitor LazyBoolAccessorVisitor;
@@ -34,7 +33,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 var right = Visit(node.Right);
                 right = LazyBoolAccessorVisitor.Visit(right);
                 var lambda = Expression.Lambda(right);
-                var newLazy = Expression.New(LazyCtor, lambda);
+                var newLazy = Expression.New(ConstructorInfos.LazyOfBoolCtor, lambda);
                 var newParam = Expression.Parameter(typeof(Lazy<bool?>), variable.Name);
                 NewParameters.Add(newParam);
                 var newAssignment = Expression.Assign(newParam, newLazy);

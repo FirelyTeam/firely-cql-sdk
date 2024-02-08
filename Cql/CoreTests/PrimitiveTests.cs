@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Definitions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
@@ -3521,8 +3522,7 @@ namespace CoreTests
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
             var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            ExpressionBuilder.LibraryDefinitionsBuilder lib1 = new(eb);
-            var definitions = lib1.Build();
+            var definitions = new DefinitionsBuilderForLibrary(eb).BuildDefinitions();
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())
              .CreateLogger<CSharpSourceCodeWriter>();
