@@ -25,7 +25,8 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     internal class ExpressionBuilderContext
     {
-        internal ExpressionBuilderContext(ExpressionBuilder builder,
+        internal ExpressionBuilderContext(
+            ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers)
@@ -45,7 +46,7 @@ namespace Hl7.Cql.Compiler
             LocalLibraryIdentifiers = other.LocalLibraryIdentifiers;
             Operands = other.Operands;
             Scopes = other.Scopes;
-            Predecessors = other.Predecessors.ToList(); // copy it
+            _predecessors = other._predecessors.ToList(); // copy it
             ImpliedAlias = other.ImpliedAlias;
         }
 
@@ -74,11 +75,11 @@ namespace Hl7.Cql.Compiler
         {
             get
             {
-                if (Predecessors.Count < 0)
+                if (_predecessors.Count < 0)
                     return null;
-                else if (Predecessors.Count == 1)
-                    return Predecessors[0];
-                else return Predecessors[Predecessors.Count - 2];
+                else if (_predecessors.Count == 1)
+                    return _predecessors[0];
+                else return _predecessors[_predecessors.Count - 2];
             }
         }
         /// <summary>
@@ -123,7 +124,9 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal string? ImpliedAlias { get; private set; } = null;
 
-        private readonly IList<elm.Element> Predecessors = new List<elm.Element>();
+        private readonly IList<elm.Element> _predecessors = new List<elm.Element>();
+
+        internal IReadOnlyCollection<elm.Element> Predecessors => _predecessors.ToArray();
 
         internal static string? NormalizeIdentifier(string? identifier)
         {
@@ -237,7 +240,7 @@ namespace Hl7.Cql.Compiler
         internal ExpressionBuilderContext Deeper(elm.Element expression)
         {
             var subContext = new ExpressionBuilderContext(this);
-            subContext.Predecessors.Add(expression);
+            subContext._predecessors.Add(expression);
             return subContext;
         }
 

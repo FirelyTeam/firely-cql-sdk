@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -36,13 +37,8 @@ partial class ExpressionBuilder
 
         BuildValueSets(definitions);
 
-        var codeCtor = typeof(CqlCode).GetConstructor(new Type[]
-        {
-            typeof(string),
-            typeof(string),
-            typeof(string),
-            typeof(string)
-        })!;
+        var codeCtor = ReflectionUtility.ConstructorOf(() => new CqlCode("","","",""))!;
+
         var codeSystemUrls = Library.codeSystems?
             .ToDictionary(cs => cs.name, cs => cs.id) ?? new Dictionary<string, string>();
         var codesByName = new Dictionary<string, CqlCode>();
@@ -222,7 +218,7 @@ partial class ExpressionBuilder
 
     private void BuildStatements(DefinitionDictionary<LambdaExpression> definitions, Dictionary<string, string> localLibraryIdentifiers, string nav)
     {
-        foreach (var def in Library.statements.OrEmpty())
+        foreach (var def in Library.statements.OrEmptyArray())
         {
             if (def.expression == null)
                 throw new InvalidOperationException(
