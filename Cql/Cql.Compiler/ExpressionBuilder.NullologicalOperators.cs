@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
             var operands = ce.operand!
                 .Select(op => TranslateExpression(op, ctx))
                 .ToArray();
-            if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
+            if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(TypeResolver, operands[0].Type))
             {
                 var call = OperatorBinding.Bind(CqlOperator.Coalesce, ctx.RuntimeContextParameter, operands[0]);
                 return call;

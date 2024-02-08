@@ -183,9 +183,7 @@ namespace Hl7.Cql.Compiler
 
             if (throwIfNotFound)
             {
-                var cqlCompilerException = new CqlExpressionBuilderError(CqlExpressionBuilderError.TypeForNotFound, element!, context).ToException();
-                _ = cqlCompilerException.Message;
-                throw cqlCompilerException;
+                throw new CqlExpressionBuilderError(CqlExpressionBuilderError.TypeForNotFound, element!, context).ToException();
             }
 
             //throw new ArgumentException($"Cannot resolve type for expression '{element?.GetType().FullName}'");

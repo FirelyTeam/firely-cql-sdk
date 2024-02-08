@@ -3521,7 +3521,8 @@ namespace CoreTests
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
             var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var expressions = eb.Build();
+            ExpressionBuilder.LibraryDefinitionsBuilder lib1 = new(eb);
+            var definitions = lib1.Build();
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())
              .CreateLogger<CSharpSourceCodeWriter>();
@@ -3530,7 +3531,7 @@ namespace CoreTests
             var graph = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\libs"));
 
             var dict = new Dictionary<string, MemoryStream>();
-            writer.Write(expressions, typeManager.TupleTypes, graph, lib => { var ms = new MemoryStream(); dict[lib] = ms; return ms; });
+            writer.Write(definitions, typeManager.TupleTypes, graph, lib => { var ms = new MemoryStream(); dict[lib] = ms; return ms; });
         }
 
         [TestMethod]

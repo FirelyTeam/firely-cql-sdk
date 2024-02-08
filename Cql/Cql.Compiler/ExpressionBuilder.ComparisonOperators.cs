@@ -65,10 +65,10 @@ namespace Hl7.Cql.Compiler
                 }
                 else throw new NotImplementedException();
             }
-            else if (IsOrImplementsIEnumerableOfT(left.Type))
+            else if (IsOrImplementsIEnumerableOfT(TypeResolver, left.Type))
             {
                 var leftElementType = TypeResolver.GetListElementType(left.Type, true)!;
-                if (IsOrImplementsIEnumerableOfT(right.Type))
+                if (IsOrImplementsIEnumerableOfT(TypeResolver, right.Type))
                 {
                     var rightElementType = TypeResolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
@@ -89,10 +89,10 @@ namespace Hl7.Cql.Compiler
         {
             var left = TranslateExpression(eqv.operand![0], ctx);
             var right = TranslateExpression(eqv.operand![1], ctx);
-            if (IsOrImplementsIEnumerableOfT(left.Type))
+            if (IsOrImplementsIEnumerableOfT(TypeResolver, left.Type))
             {
                 var leftElementType = TypeResolver.GetListElementType(left.Type);
-                if (IsOrImplementsIEnumerableOfT(right.Type))
+                if (IsOrImplementsIEnumerableOfT(TypeResolver, right.Type))
                 {
                     var rightElementType = TypeResolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)

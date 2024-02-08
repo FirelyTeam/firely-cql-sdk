@@ -3,152 +3,249 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Reflection.Metadata.Ecma335;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 
 #pragma warning disable CS1591
+
 partial class ExpressionBuilder
 {
 
-    /// <summary>
-    /// Builds <see cref="LambdaExpression"/>s for each definition in <see cref="Library"/>.
-    /// </summary>
-    /// <returns>The <see cref="DefinitionDictionary{LambdaExpression}"/> for this <see cref="Library"/>.</returns>
-    /// <exception cref="InvalidOperationException">If any fatal translation errors occur.</exception>
-    public DefinitionDictionary<LambdaExpression> Build()
+    private record LibraryStatementsBuilder(LibraryDefinitionsBuilder OuterLib, DefinitionDictionary<LambdaExpression> Definitions, ExpressionDef[] ExpressionDefs)
     {
-        var definitions = new DefinitionDictionary<LambdaExpression>();
-        var localLibraryIdentifiers = new Dictionary<string, string>();
-
-        var version = Library.identifier!.version;
-        if (string.IsNullOrWhiteSpace(version))
-            version = "1.0.0";
-
-        if (string.IsNullOrWhiteSpace(Library.identifier!.id))
-            throw new InvalidOperationException("This package does not have a name and version.");
-
-        var nav = ThisLibraryKey;
-        BuildIncludes(localLibraryIdentifiers);
-
-        BuildValueSets(definitions);
-
-        var codeCtor = ReflectionUtility.ConstructorOf(() => new CqlCode("","","",""))!;
-
-        var codeSystemUrls = Library.codeSystems?
-            .ToDictionary(cs => cs.name, cs => cs.id) ?? new Dictionary<string, string>();
-        var codesByName = new Dictionary<string, CqlCode>();
-        var codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
-
-        BuildCodes(codeSystemUrls, codesByName, codesByCodeSystemName, codeCtor, definitions);
-
-        BuildCodeSystems(codesByCodeSystemName, codeCtor, definitions);
-
-        BuildConcepts(codesByName, codeCtor, definitions);
-
-        BuildParameters(definitions, localLibraryIdentifiers);
-
-        BuildStatements(definitions, localLibraryIdentifiers, nav);
-
-        return definitions;
-    }
-
-    private void BuildCodes(Dictionary<string, string> codeSystemUrls, Dictionary<string, CqlCode> codesByName, Dictionary<string, List<CqlCode>> codesByCodeSystemName,
-        ConstructorInfo codeCtor, DefinitionDictionary<LambdaExpression> definitions)
-    {
-        if (Library.codes != null)
+        public void Build()
         {
-            HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
+            var lib = OuterLib;
 
-            foreach (var code in Library.codes)
+            foreach (var expressionDef in ExpressionDefs)
             {
-                if (code.codeSystem == null)
-                    throw new InvalidOperationException("Code definition has a null codeSystem node.");
-                if (!codeSystemUrls.TryGetValue(code.codeSystem.name, out var csUrl))
-                    throw new InvalidOperationException($"Undefined code system {code.codeSystem.name!}");
-                if (!foundCodeNameCodeSystemUrls.Add((code.name, csUrl)))
+                if (expressionDef.expression == null)
                     throw new InvalidOperationException(
-                        $"Duplicate code name detected: {code.name} from {code.codeSystem.name} ({csUrl})");
-                var systemCode = new CqlCode(code.id, csUrl, null, null);
-                codesByName.Add(code.name, systemCode);
-                if (!codesByCodeSystemName.TryGetValue(code.codeSystem!.name!, out var codings))
+                        $"Definition {expressionDef.name} does not have an expression property");
+
+                var buildContext = new ExpressionBuilderContext(
+                    lib.ExpressionBuilder,
+                    Expression.Parameter(typeof(CqlContext), "context"),
+                    Definitions,
+                    lib.LocalLibraryIdentifiers);
+
+                if (string.IsNullOrWhiteSpace(expressionDef.name))
                 {
-                    codings = new List<CqlCode>();
-                    codesByCodeSystemName.Add(code.codeSystem!.name!, codings);
+                    var message =
+                        $"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.";
+                    buildContext.LogError(message, expressionDef);
+                    throw new InvalidOperationException(message);
                 }
 
-                codings.Add(systemCode);
-
-                var newCodingExpression = Expression.New(codeCtor,
-                    Expression.Constant(code.id),
-                    Expression.Constant(csUrl),
-                    Expression.Constant(null, typeof(string)),
-                    Expression.Constant(null, typeof(string))!
-                );
-                var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-                definitions.Add(ThisLibraryKey, code.name!, lambda);
+                try
+                {
+                    new LibraryStatementBuilder(this, expressionDef, buildContext).Build();
+                }
+                catch (Exception e)
+                {
+                    throw new InvalidOperationException(
+                        $"Unhandled exception while building statement for definition '{expressionDef.name} 'in library '{lib.Library.NameAndVersion}'. See InnerException for more details.",
+                        e);
+                }
             }
         }
     }
 
-    private void BuildCodeSystems(Dictionary<string, List<CqlCode>> codesByCodeSystemName, ConstructorInfo codeCtor,
-        DefinitionDictionary<LambdaExpression> definitions)
+    private record LibraryStatementBuilder(
+        LibraryStatementsBuilder OuterStatements,
+        ExpressionDef ExpressionDef,
+        ExpressionBuilderContext BuildContext)
     {
-        if (Library.codeSystems != null)
+        public void Build()
         {
-            foreach (var codeSystem in Library.codeSystems)
+            ExpressionDef def = ExpressionDef;
+            ExpressionBuilderContext buildContext = BuildContext;
+            var lib = OuterStatements.OuterLib;
+            var expressionBuilder = lib.ExpressionBuilder;
+            var customKey = $"{lib.LibraryNameAndVersion}.{def.name}";
+            Type[] functionParameterTypes = Type.EmptyTypes;
+            var parameters = new[] { buildContext.RuntimeContextParameter };
+            var function = def as FunctionDef;
+            var definitions = OuterStatements.Definitions;
+
+            if (function != null && function.operand != null)
             {
-                if (codesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
+                functionParameterTypes = new Type[function.operand!.Length];
+                int i = 0;
+                foreach (var operand in function.operand!)
                 {
-                    var initMembers = codes
-                        .Select(coding =>
-                            Expression.New(codeCtor,
-                                Expression.Constant(coding.code),
-                                Expression.Constant(coding.system),
-                                Expression.Constant(null, typeof(string)),
-                                Expression.Constant(null, typeof(string))
-                            ))
-                        .ToArray();
-                    var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                    var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                    var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-                    definitions.Add(ThisLibraryKey, codeSystem.name, lambda);
+                    if (operand.operandTypeSpecifier != null)
+                    {
+                        var operandType = lib.TypeManager.TypeFor(operand.operandTypeSpecifier, buildContext)!;
+                        var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
+                        var parameter = Expression.Parameter(operandType, opName);
+                        buildContext.Operands.Add(operand.name!, parameter);
+                        functionParameterTypes[i] = parameter.Type;
+                        i += 1;
+                    }
+                    else
+                        throw new InvalidOperationException(
+                            $"Operand for function {def.name} is missing its {nameof(operand.operandTypeSpecifier)} property");
                 }
-                else
+
+                parameters = parameters
+                    .Concat(buildContext.Operands.Values)
+                    .ToArray();
+                if (expressionBuilder.CustomImplementations.TryGetValue(customKey, out var factory) && factory != null)
+                {
+                    var customLambda = factory(parameters);
+                    definitions.Add(lib.LibraryNameAndVersion, def.name, functionParameterTypes, customLambda);
+                    return;
+                }
+                else if (function?.external ?? false)
+                {
+                    var message =
+                        $"{customKey} is declared external, but {nameof(CustomImplementations)} does not define this function.";
+                    buildContext.LogError(message, def);
+                    if (lib.ExpressionBuilder.Settings.AllowUnresolvedExternals)
+                    {
+                        var returnType = lib.TypeManager.TypeFor(def, buildContext, throwIfNotFound: true)!;
+                        var paramTypes = new[] { typeof(CqlContext) }
+                            .Concat(functionParameterTypes)
+                            .ToArray();
+                        var notImplemented =
+                            NotImplemented(customKey, paramTypes, returnType, buildContext);
+                        definitions.Add(lib.LibraryNameAndVersion, def.name, paramTypes, notImplemented);
+                        return;
+                    }
+                    else throw new InvalidOperationException(message);
+                }
+            }
+
+            buildContext = buildContext.Deeper(def);
+            var bodyExpression = lib.ExpressionBuilder.TranslateExpression(def.expression, buildContext);
+            var lambda = Expression.Lambda(bodyExpression, parameters);
+            if (function?.operand != null &&
+                definitions.ContainsKey(lib.LibraryNameAndVersion, def.name, functionParameterTypes))
+            {
+                var ops = function.operand
+                    .Where(op =>
+                        op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
+                    .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
+                var message =
+                    $"Function {def.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists.";
+                buildContext.LogWarning(message, def);
+            }
+            else
+            {
+                foreach (var annotation in def.annotation?.OfType<Annotation>() ??
+                                           Enumerable.Empty<Annotation>())
+                {
+                    foreach (var tag in annotation.t ?? Enumerable.Empty<Tag>())
+                    {
+                        var name = tag.name;
+                        if (!string.IsNullOrWhiteSpace(name))
+                        {
+                            var value = tag.value ?? string.Empty;
+                            definitions.AddTag(lib.LibraryNameAndVersion, def.name, functionParameterTypes, name, value);
+                        }
+                    }
+                }
+
+                definitions.Add(lib.LibraryNameAndVersion, def.name, functionParameterTypes ?? Array.Empty<Type>(), lambda);
+            }
+        }
+
+        private static LambdaExpression NotImplemented(string nav, Type[] functionParameterTypes, Type returnType, ExpressionBuilderContext context)
+        {
+            var parameters = functionParameterTypes
+                .Select((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, context) + index))
+                .ToArray();
+            var ctor = typeof(NotImplementedException).GetConstructor(new[] { typeof(string) })!;
+            var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
+            var @throw = Expression.Throw(@new, returnType);
+            var lambda = Expression.Lambda(@throw, parameters);
+            //var funcTypes = new Type[functionParameterTypes.Length + 1];
+            //Array.Copy(functionParameterTypes, funcTypes, functionParameterTypes.Length);
+            //funcTypes[funcTypes.Length - 1] = returnType;
+            //var funcType = GetFuncType(funcTypes);
+            //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
+            //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
+            return lambda;
+        }
+    }
+
+    private record LibraryParametersBuilder(LibraryDefinitionsBuilder OuterLib, DefinitionDictionary<LambdaExpression> Definitions, ParameterDef[] ParameterDefs)
+    {
+        public void Build()
+        {
+            LibraryDefinitionsBuilder lib = OuterLib;
+            var expressionBuilder = lib.ExpressionBuilder;
+
+            foreach (var parameter in ParameterDefs)
+            {
+                if (Definitions.ContainsKey(null, parameter.name!))
+                    throw new InvalidOperationException(
+                        $"There is already a definition named {parameter.name}");
+
+                var buildContext = new ExpressionBuilderContext(
+                    expressionBuilder,
+                    Expression.Parameter(typeof(CqlContext), "context"),
+                    Definitions,
+                    lib.LocalLibraryIdentifiers);
+
+                Expression? defaultValue = null;
+                if (parameter.@default != null)
+                    defaultValue = Expression.TypeAs(expressionBuilder.TranslateExpression(parameter.@default, buildContext),
+                        typeof(object));
+                else defaultValue = Expression.Constant(null, typeof(object));
+
+                var resolveParam = Expression.Call(
+                    buildContext.RuntimeContextParameter,
+                    typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
+                    Expression.Constant(lib.Library.NameAndVersion),
+                    Expression.Constant(parameter.name),
+                    defaultValue
+                );
+
+                var parameterType = lib.TypeManager.TypeFor(parameter.parameterTypeSpecifier!, buildContext);
+                var cast = Expression.Convert(resolveParam, parameterType);
+                // e.g. (bundle, context) => context.Parameters["Measurement Period"]
+                var lambda = Expression.Lambda(cast, buildContext.RuntimeContextParameter);
+
+                Definitions.Add(lib.LibraryNameAndVersion, parameter.name!, lambda);
+            }
+        }
+    }
+
+    private record LibraryConceptsBuilder(LibraryDefinitionsBuilder OuterLib, DefinitionDictionary<LambdaExpression> Definitions, ConceptDef[] ConceptDefs)
+    {
+        public void Build()
+        {
+            var lib = OuterLib;
+            foreach (var conceptDef in ConceptDefs)
+            {
+                if (conceptDef.code.Length <= 0)
                 {
                     var newArray =
                         Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
                     var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                     var lambda = Expression.Lambda(newArray, contextParameter);
-                    definitions.Add(ThisLibraryKey, codeSystem.name, lambda);
+                    Definitions.Add(lib.LibraryNameAndVersion, conceptDef.name, lambda);
                 }
-            }
-        }
-    }
-
-    private void BuildConcepts(Dictionary<string, CqlCode> codesByName, ConstructorInfo codeCtor, DefinitionDictionary<LambdaExpression> definitions)
-    {
-        if (Library.concepts != null)
-        {
-            var conceptCtor =
-                typeof(CqlConcept).GetConstructor(new[] { typeof(IEnumerable<CqlCode>), typeof(string) });
-            foreach (var concept in Library.concepts)
-            {
-                if (concept.code.Length > 0)
+                else
                 {
-                    var initMembers = new Expression[concept.code.Length];
-                    for (int i = 0; i < concept.code.Length; i++)
+                    var initMembers = new Expression[conceptDef.code.Length];
+                    for (int i = 0; i < conceptDef.code.Length; i++)
                     {
-                        var codeRef = concept.code[i];
-                        if (!codesByName.TryGetValue(codeRef.name, out var systemCode))
+                        var codeRef = conceptDef.code[i];
+                        if (!lib.CodesByName.TryGetValue(codeRef.name, out var systemCode))
                             throw new InvalidOperationException(
-                                $"Code {codeRef.name} in concept {concept.name} is not defined.");
-                        initMembers[i] = Expression.New(codeCtor,
+                                $"Code {codeRef.name} in concept {conceptDef.name} is not defined.");
+                        initMembers[i] = Expression.New(
+                            ConstructorInfos.CqlCode,
                             Expression.Constant(systemCode.code),
                             Expression.Constant(systemCode.system),
                             Expression.Constant(null, typeof(string)),
@@ -158,11 +255,42 @@ partial class ExpressionBuilder
 
                     var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
                     var asEnumerable = Expression.TypeAs(arrayOfCodesInitializer, typeof(IEnumerable<CqlCode>));
-                    var display = Expression.Constant(concept.display, typeof(string));
-                    var newConcept = Expression.New(conceptCtor!, asEnumerable, display);
+                    var display = Expression.Constant(conceptDef.display, typeof(string));
+                    var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
                     var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                     var lambda = Expression.Lambda(newConcept, contextParameter);
-                    definitions.Add(ThisLibraryKey, concept.name, lambda);
+                    Definitions.Add(lib.LibraryNameAndVersion, conceptDef.name, lambda);
+                }
+            }
+        }
+    }
+
+    private record LibraryCodeSystemsBuilder(LibraryDefinitionsBuilder OuterLib, DefinitionDictionary<LambdaExpression> Definitions, CodeSystemDef[] CodeSystemDefs)
+    {
+        public void Build()
+        {
+            LibraryDefinitionsBuilder lib = OuterLib;
+            var thisLibraryKey = lib.LibraryNameAndVersion;
+            var library = lib.Library;
+
+            foreach (var codeSystem in CodeSystemDefs)
+            {
+                if (lib.CodesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
+                {
+                    var initMembers = codes
+                        .Select(coding =>
+                            Expression.New(
+                                ConstructorInfos.CqlCode,
+                                Expression.Constant(coding.code),
+                                Expression.Constant(coding.system),
+                                Expression.Constant(null, typeof(string)),
+                                Expression.Constant(null, typeof(string))
+                            ))
+                        .ToArray();
+                    var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
+                    var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
+                    var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
+                    Definitions.Add(thisLibraryKey, codeSystem.name, lambda);
                 }
                 else
                 {
@@ -170,216 +298,157 @@ partial class ExpressionBuilder
                         Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
                     var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                     var lambda = Expression.Lambda(newArray, contextParameter);
-                    definitions.Add(ThisLibraryKey, concept.name, lambda);
+                    Definitions.Add(thisLibraryKey, codeSystem.name, lambda);
                 }
             }
         }
     }
 
-    private void BuildParameters(DefinitionDictionary<LambdaExpression> definitions, Dictionary<string, string> localLibraryIdentifiers)
+    public record LibraryDefinitionsBuilder
     {
-        if (Library.parameters != null)
+        public ExpressionBuilder ExpressionBuilder { get; }
+        public Library Library { get; }
+        public string LibraryNameAndVersion => Library.NameAndVersion.NotNull();
+        public TypeManager TypeManager { get; }
+        public Dictionary<string, string> LocalLibraryIdentifiers { get; } = new();
+        //public DefinitionDictionary<LambdaExpression> Definitions { get; }
+        public Dictionary<string, string> CodeSystemUrls { get; }
+        public Dictionary<string, CqlCode> CodesByName { get; } = new();
+        public Dictionary<string, List<CqlCode>> CodesByCodeSystemName { get; } = new();
+
+        public LibraryDefinitionsBuilder(ExpressionBuilder expressionBuilder)
         {
-            foreach (var parameter in Library.parameters ?? Enumerable.Empty<Elm.ParameterDef>())
-            {
-                if (definitions.ContainsKey(null, parameter.name!))
-                    throw new InvalidOperationException(
-                        $"There is already a definition named {parameter.name}");
+            ExpressionBuilder = expressionBuilder;
+            Library = expressionBuilder.Library;
+            TypeManager = expressionBuilder.TypeManager;
+            //Definitions = new();
+            CodeSystemUrls = Library.codeSystems
+                                 ?.ToDictionary(cs => cs.name, cs => cs.id)
+                             ?? new();
+        }
 
-                var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                var buildContext = new ExpressionBuilderContext(this,
-                    contextParameter,
-                    definitions,
-                    localLibraryIdentifiers);
+        public DefinitionDictionary<LambdaExpression> Build()
+        {
+            _ = LibraryNameAndVersion; // This checks that the library has a name and version
+            DefinitionDictionary<LambdaExpression> definitions = new();
 
-                Expression? defaultValue = null;
-                if (parameter.@default != null)
-                    defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default, buildContext),
-                        typeof(object));
-                else defaultValue = Expression.Constant(null, typeof(object));
+            if (Library.includes is { Length: > 0 } includes)
+                new LibraryIncludesBuilder(this, definitions, includes).Build();
 
-                var resolveParam = Expression.Call(
-                    contextParameter,
-                    typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
-                    Expression.Constant(Library.NameAndVersion),
-                    Expression.Constant(parameter.name),
-                    defaultValue
-                );
+            if (Library.valueSets is { Length: > 0 } valueSets)
+                new LibraryValueSetsBuilder(this, definitions, valueSets).Build();
 
-                var parameterType = TypeManager.TypeFor(parameter.parameterTypeSpecifier!, buildContext);
-                var cast = Expression.Convert(resolveParam, parameterType);
-                // e.g. (bundle, context) => context.Parameters["Measurement Period"]
-                var lambda = Expression.Lambda(cast, contextParameter);
+            if (Library.codes is { Length: > 0 } codes)
+                new LibraryCodesBuilder(this, definitions, codes).Build();
 
-                definitions.Add(ThisLibraryKey, parameter.name!, lambda);
-            }
+            if (Library.codeSystems is { Length: > 0 } codeSystems)
+                new LibraryCodeSystemsBuilder(this, definitions, codeSystems).Build();
+
+            if (Library.concepts is { Length: > 0 } concepts)
+                new LibraryConceptsBuilder(this, definitions, concepts).Build();
+
+            if (Library.parameters is { Length: > 0 } parameters)
+                new LibraryParametersBuilder(this, definitions, parameters).Build();
+
+            if (Library.statements is { Length: > 0 } statements)
+                new LibraryStatementsBuilder(this, definitions, statements).Build();
+
+            return definitions;
         }
     }
-
-    private void BuildStatements(DefinitionDictionary<LambdaExpression> definitions, Dictionary<string, string> localLibraryIdentifiers, string nav)
+    
+    private record LibraryValueSetsBuilder(LibraryDefinitionsBuilder OuterLib, DefinitionDictionary<LambdaExpression> Definitions, ValueSetDef[] LibraryValueSets)
     {
-        foreach (var def in Library.statements.OrEmptyArray())
+        public void Build()
         {
-            if (def.expression == null)
-                throw new InvalidOperationException(
-                    $"Definition {def.name} does not have an expression property");
-
-            var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-            var buildContext = new ExpressionBuilderContext(this,
-                contextParameter,
-                definitions,
-                localLibraryIdentifiers);
-
-            if (string.IsNullOrWhiteSpace(def.name))
-            {
-                var message =
-                    $"Definition with local ID {def.localId} does not have a name.  This is not allowed.";
-                buildContext.LogError(message, def);
-                throw new InvalidOperationException(message);
-            }
-
-            try
-            {
-                BuildStatement(definitions, nav, def, buildContext);
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException(
-                    $"Unhandled exception while building statement for definition '{def.name} 'in library '{Library.NameAndVersion}'. See InnerException for more details.",
-                    e);
-            }
-        }
-    }
-
-    private void BuildStatement(DefinitionDictionary<LambdaExpression> definitions, string nav, ExpressionDef def, ExpressionBuilderContext buildContext)
-    {
-        var customKey = $"{nav}.{def.name}";
-        Type[] functionParameterTypes = Type.EmptyTypes;
-        var parameters = new[] { buildContext.RuntimeContextParameter };
-        var function = def as FunctionDef;
-        if (function != null && function.operand != null)
-        {
-            functionParameterTypes = new Type[function.operand!.Length];
-            int i = 0;
-            foreach (var operand in function.operand!)
-            {
-                if (operand.operandTypeSpecifier != null)
-                {
-                    var operandType = TypeManager.TypeFor(operand.operandTypeSpecifier, buildContext)!;
-                    var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
-                    var parameter = Expression.Parameter(operandType, opName);
-                    buildContext.Operands.Add(operand.name!, parameter);
-                    functionParameterTypes[i] = parameter.Type;
-                    i += 1;
-                }
-                else
-                    throw new InvalidOperationException(
-                        $"Operand for function {def.name} is missing its {nameof(operand.operandTypeSpecifier)} property");
-            }
-
-            parameters = parameters
-                .Concat(buildContext.Operands.Values)
-                .ToArray();
-            if (CustomImplementations.TryGetValue(customKey, out var factory) && factory != null)
-            {
-                var customLambda = factory(parameters);
-                definitions.Add(ThisLibraryKey, def.name, functionParameterTypes, customLambda);
-                return;
-            }
-            else if (function?.external ?? false)
-            {
-                var message =
-                    $"{customKey} is declared external, but {nameof(CustomImplementations)} does not define this function.";
-                buildContext.LogError(message, def);
-                if (Settings.AllowUnresolvedExternals)
-                {
-                    var returnType = TypeManager.TypeFor(def, buildContext, throwIfNotFound: true)!;
-                    var paramTypes = new[] { typeof(CqlContext) }
-                        .Concat(functionParameterTypes)
-                        .ToArray();
-                    var notImplemented =
-                        NotImplemented(customKey, paramTypes, returnType, buildContext);
-                    definitions.Add(ThisLibraryKey, def.name, paramTypes, notImplemented);
-                    return;
-                }
-                else throw new InvalidOperationException(message);
-            }
-        }
-
-        buildContext = buildContext.Deeper(def);
-        var bodyExpression = TranslateExpression(def.expression, buildContext);
-        var lambda = Expression.Lambda(bodyExpression, parameters);
-        if (function?.operand != null &&
-            definitions.ContainsKey(ThisLibraryKey, def.name, functionParameterTypes))
-        {
-            var ops = function.operand
-                .Where(op =>
-                    op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
-                .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
-            var message =
-                $"Function {def.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists.";
-            buildContext.LogWarning(message, def);
-        }
-        else
-        {
-            foreach (var annotation in def.annotation?.OfType<Annotation>() ??
-                                       Enumerable.Empty<Annotation>())
-            {
-                foreach (var tag in annotation.t ?? Enumerable.Empty<Tag>())
-                {
-                    var name = tag.name;
-                    if (!string.IsNullOrWhiteSpace(name))
-                    {
-                        var value = tag.value ?? string.Empty;
-                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes, name,
-                            value);
-                    }
-                }
-            }
-
-            definitions.Add(ThisLibraryKey, def.name, functionParameterTypes ?? Array.Empty<Type>(),
-                lambda);
-        }
-    }
-
-    private void BuildValueSets(DefinitionDictionary<LambdaExpression> definitions)
-    {
-        if (Library.valueSets != null)
-        {
-            foreach (var def in Library.valueSets!)
+            foreach (ValueSetDef libraryValueSet in LibraryValueSets)
             {
                 var ctor = typeof(CqlValueSet).GetConstructor(new[] { typeof(string), typeof(string) }) ??
                            throw new InvalidOperationException(
                                "CqlValueSet type requires a constructor with two string parameters.");
-                var @new = Expression.New(ctor, Expression.Constant(def.id, typeof(string)),
-                    Expression.Constant(def.version, typeof(string)));
+                var @new = Expression.New(ctor, Expression.Constant(libraryValueSet.id, typeof(string)),
+                    Expression.Constant(libraryValueSet.version, typeof(string)));
                 var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                 var lambda = Expression.Lambda(@new, contextParameter);
-                definitions.Add(ThisLibraryKey, def.name!, lambda);
+                Definitions.Add(OuterLib.LibraryNameAndVersion, libraryValueSet.name!, lambda);
             }
         }
     }
 
-    private void BuildIncludes(Dictionary<string, string> localLibraryIdentifiers)
+    private record LibraryCodesBuilder(LibraryDefinitionsBuilder OuterLib, DefinitionDictionary<LambdaExpression> Definitions, CodeDef[] LibraryCodeDefs)
     {
-        if (Library.includes != null)
+        public void Build()
         {
-            foreach (var def in Library!.includes!)
+            HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
+            foreach (var libraryCodeDef in LibraryCodeDefs)
             {
-                var alias = !string.IsNullOrWhiteSpace(def.localIdentifier)
-                    ? def.localIdentifier!
-                    : def.path!;
-
-                var libNav = def.NameAndVersion();
-                if (libNav != null)
-                {
-                    localLibraryIdentifiers.Add(alias, libNav);
-                }
-                else
-                    throw new InvalidOperationException(
-                        $"Include {def.localId} does not have a well-formed name and version");
+                new LibraryCodeBuilder(this, libraryCodeDef, foundCodeNameCodeSystemUrls).Build();
             }
         }
     }
 
+    private record LibraryCodeBuilder(
+        LibraryCodesBuilder OuterCodes,
+        CodeDef CodeDef,
+        HashSet<(string codeName, string codeSystemUrl)> CodeNameCodeSystemUrlsSet)
+    {
+        public void Build()
+        {
+            var codeDef = CodeDef;
+            var lib = OuterCodes.OuterLib;
+            var outerLibCodeSystemUrls = lib.CodeSystemUrls;
+            var outerLibCodesByName = lib.CodesByName;
+            var outerLibCodesByCodeSystemName = lib.CodesByCodeSystemName;
+
+            if (codeDef.codeSystem == null)
+                throw new InvalidOperationException("Code definition has a null codeSystem node.");
+
+            if (!outerLibCodeSystemUrls.TryGetValue(codeDef.codeSystem.name, out var csUrl))
+                throw new InvalidOperationException($"Undefined code system {codeDef.codeSystem.name!}");
+
+            if (!CodeNameCodeSystemUrlsSet.Add((codeDef.name, csUrl)))
+                throw new InvalidOperationException(
+                    $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})");
+
+            var systemCode = new CqlCode(codeDef.id, csUrl, null, null);
+            outerLibCodesByName.Add(codeDef.name, systemCode);
+            if (!outerLibCodesByCodeSystemName.TryGetValue(codeDef.codeSystem!.name!, out var codings))
+            {
+                codings = new List<CqlCode>();
+                outerLibCodesByCodeSystemName.Add(codeDef.codeSystem!.name!, codings);
+            }
+
+            codings.Add(systemCode);
+
+            var newCodingExpression = Expression.New(
+                ConstructorInfos.CqlCode,
+                Expression.Constant(codeDef.id),
+                Expression.Constant(csUrl),
+                Expression.Constant(null, typeof(string)),
+                Expression.Constant(null, typeof(string))!
+            );
+            var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
+            var lambda = Expression.Lambda(newCodingExpression, contextParameter);
+            OuterCodes.Definitions.Add(lib.LibraryNameAndVersion, codeDef.name!, lambda);
+        }
+    }
+
+    private record LibraryIncludesBuilder(LibraryDefinitionsBuilder OuterLibraryArgs, DefinitionDictionary<LambdaExpression> Definitions, IncludeDef[] LibraryIncludesDefs)
+    {
+        public void Build()
+        {
+            foreach (var includeDef in LibraryIncludesDefs)
+            {
+                var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
+                    ? includeDef.localIdentifier!
+                    : includeDef.path!;
+
+                var libNav = includeDef.NameAndVersion();
+                if (libNav == null)
+                    throw new InvalidOperationException($"Include {includeDef.localId} does not have a well-formed name and version");
+
+                OuterLibraryArgs.LocalLibraryIdentifiers.Add(alias, libNav);
+            }
+        }
+    }
 }

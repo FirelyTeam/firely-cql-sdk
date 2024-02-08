@@ -27,7 +27,7 @@ namespace Hl7.Cql.Packaging
             var builder = new ExpressionBuilder(
                 new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
-                library!, builderLogger, new(false));
+                library!, builderLogger);
             var lambda = builder.Lambda(expression);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);

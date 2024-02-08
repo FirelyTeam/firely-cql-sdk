@@ -1,6 +1,9 @@
-﻿using System;
+﻿using Hl7.Cql.Elm;
+using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Hl7.Cql.Compiler
 {
@@ -14,7 +17,12 @@ namespace Hl7.Cql.Compiler
 
         public static IEnumerable<T> OrEmptyEnumerable<T>(this IEnumerable<T>? enumerable) 
             => enumerable ?? Enumerable.Empty<T>();
+
+        public static T NotNull<T>([NotNull]this T? value, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
+        {
+            if (value == null)
+                throw new ArgumentNullException(valueExpr);
+            return value;
+        }
     }
-
-
 }

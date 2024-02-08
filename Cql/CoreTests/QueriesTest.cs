@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace CoreTests
 {
@@ -32,8 +33,9 @@ namespace CoreTests
                 .Create(logging => logging.AddDebug())
                 .CreateLogger<ExpressionBuilder>();
             var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var expressions = eb.Build();
-            QueriesDefinitions = expressions
+            ExpressionBuilder.LibraryDefinitionsBuilder lib1 = new(eb);
+            var definitions = lib1.Build();
+            QueriesDefinitions = definitions
                 .CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
@@ -43,9 +45,9 @@ namespace CoreTests
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            expressions = eb.Build();
-            AggregatesDefinitions = expressions
-                .CompileAll();
+            ExpressionBuilder.LibraryDefinitionsBuilder lib = new(eb);
+            definitions = lib.Build();
+            AggregatesDefinitions = definitions.CompileAll();
 
         }
 

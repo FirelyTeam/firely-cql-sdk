@@ -18,7 +18,7 @@ using elm = Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.Build"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Element, ExpressionBuilderContext)"/>.
@@ -179,7 +179,6 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
         }
 
-        internal Expression? ImpliedAliasExpression => ImpliedAlias != null ? GetScopeExpression(ImpliedAlias) : null;
 
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
@@ -260,9 +259,9 @@ namespace Hl7.Cql.Compiler
             var locator = element?.locator;
             if (!string.IsNullOrWhiteSpace(locator))
             {
-                return $"{Builder.ThisLibraryKey} line {locator}: {message}";
+                return $"{Builder.Library.NameAndVersion.NotNull()} line {locator}: {message}";
             }
-            else return $"{Builder.ThisLibraryKey}: {message}";
+            else return $"{Builder.Library.NameAndVersion.NotNull()}: {message}";
         }
 
     }

@@ -36,7 +36,7 @@ namespace Hl7.Cql.Compiler
         {
             var source = TranslateExpression(e.source!, ctx);
             var element = TranslateExpression(e.element!, ctx);
-            if (IsOrImplementsIEnumerableOfT(source.Type))
+            if (IsOrImplementsIEnumerableOfT(TypeResolver, source.Type))
             {
                 return OperatorBinding.Bind(CqlOperator.IndexOf, ctx.RuntimeContextParameter, source, element);
             }
@@ -63,7 +63,7 @@ namespace Hl7.Cql.Compiler
             var end = slice.endIndex == null || slice.endIndex is elm.Null
                 ? Expression.Constant(null, typeof(int?))
                 : TranslateExpression(slice.endIndex!, ctx);
-            if (IsOrImplementsIEnumerableOfT(source.Type))
+            if (IsOrImplementsIEnumerableOfT(TypeResolver, source.Type))
             {
                 return OperatorBinding.Bind(CqlOperator.Slice, ctx.RuntimeContextParameter, source, start, end);
             }

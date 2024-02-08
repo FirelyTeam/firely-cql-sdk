@@ -41,7 +41,7 @@ namespace Hl7.Cql.Compiler
             {
                 return OperatorBinding.Bind(CqlOperator.CharAt, ctx.RuntimeContextParameter, left, right);
             }
-            else if (IsOrImplementsIEnumerableOfT(left.Type))
+            else if (IsOrImplementsIEnumerableOfT(TypeResolver, left.Type))
             {
                 return OperatorBinding.Bind(CqlOperator.ElementAt, ctx.RuntimeContextParameter, left, right);
             }
@@ -58,7 +58,7 @@ namespace Hl7.Cql.Compiler
         protected Expression? Length(elm.Length len, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(len.operand!, ctx);
-            if (IsOrImplementsIEnumerableOfT(operand.Type))
+            if (IsOrImplementsIEnumerableOfT(TypeResolver, operand.Type))
             {
                 return OperatorBinding.Bind(CqlOperator.ListLength, ctx.RuntimeContextParameter, operand);
             }

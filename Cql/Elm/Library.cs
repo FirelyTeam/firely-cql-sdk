@@ -24,9 +24,11 @@ namespace Hl7.Cql.Elm
             {
                 if (identifier == null)
                     return null;
-                else if (string.IsNullOrWhiteSpace(identifier.version))
+                
+                if (string.IsNullOrWhiteSpace(identifier.version))
                     return identifier.id;
-                else return $"{identifier.id}-{identifier.version}";
+
+                return $"{identifier.id}-{identifier.version}";
             }
         }
 

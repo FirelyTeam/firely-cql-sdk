@@ -50,8 +50,9 @@ namespace CoreTests
 
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
             var fhirHelpersBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
-            var fhirHelpersLambdas = fhirHelpersBuilder.Build();
-            LambdasByTestName.Lambdas.Merge(fhirHelpersLambdas);
+            ExpressionBuilder.LibraryDefinitionsBuilder lib = new(fhirHelpersBuilder);
+            var definitions = lib.Build();
+            LambdasByTestName.Lambdas.Merge(definitions);
 
 
             foreach (var file in hl7TestDirectory.GetFiles("*.json"))
@@ -62,8 +63,9 @@ namespace CoreTests
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
                 var includes = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
                 var builder = new ExpressionBuilder(binding, typeManager, elmPackage, CreateLogger());
-                var lambdas = builder.Build();
-                LambdasByTestName.Lambdas.Merge(lambdas);
+                ExpressionBuilder.LibraryDefinitionsBuilder lib1 = new(builder);
+                definitions = lib1.Build();
+                LambdasByTestName.Lambdas.Merge(definitions);
             }
 
             var buildOrder = new DirectedGraph();

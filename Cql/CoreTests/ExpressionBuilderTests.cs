@@ -7,6 +7,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Linq.Expressions;
+using Hl7.Cql.Runtime;
 
 namespace CoreTests
 {
@@ -28,8 +30,9 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var expressions = eb.Build();
+            ExpressionBuilder eb = new(binding, typeManager, elmPackage, logger);
+            ExpressionBuilder.LibraryDefinitionsBuilder lib = new(eb);
+            lib.Build();
         }
 
         [TestMethod]
@@ -40,8 +43,9 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var expressions = eb.Build();
+            ExpressionBuilder eb = new(binding, typeManager, elmPackage, logger);
+            ExpressionBuilder.LibraryDefinitionsBuilder lib = new(eb);
+            lib.Build();
         }
 
         // https://github.com/FirelyTeam/firely-cql-sdk/issues/129
@@ -60,8 +64,9 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var expressions = eb.Build();
-            Assert.IsNotNull(expressions);
+            ExpressionBuilder.LibraryDefinitionsBuilder lib = new(eb);
+            var definitions = lib.Build();
+            Assert.IsNotNull(definitions);
         }
     }
 }
