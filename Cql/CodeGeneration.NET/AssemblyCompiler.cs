@@ -88,8 +88,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             foreach (var package in elmPackages)
             {
                 ExpressionBuilder expressionBuilder = new(Binding, TypeManager, package, builderLogger);
-                DefinitionsBuilderForLibrary definitionsBuilderForLibrary = new(expressionBuilder);
-                var definitions = definitionsBuilderForLibrary.BuildDefinitions();
+                DefinitionsBuilder definitionsBuilder = new(expressionBuilder);
+                var definitions = definitionsBuilder.BuildDefinitions();
                 all.Merge(definitions);
             }
 

@@ -32,7 +32,7 @@ namespace CoreTests
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
             ExpressionBuilder eb = new(binding, typeManager, elmPackage, logger);
-            new DefinitionsBuilderForLibrary(eb).BuildDefinitions();
+            new DefinitionsBuilder(eb).BuildDefinitions();
         }
 
         [TestMethod]
@@ -44,7 +44,7 @@ namespace CoreTests
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
             ExpressionBuilder eb = new(binding, typeManager, elmPackage, logger);
-            new DefinitionsBuilderForLibrary(eb).BuildDefinitions();
+            new DefinitionsBuilder(eb).BuildDefinitions();
         }
 
         // https://github.com/FirelyTeam/firely-cql-sdk/issues/129
@@ -63,7 +63,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = new DefinitionsBuilderForLibrary(eb).BuildDefinitions();
+            var definitions = new DefinitionsBuilder(eb).BuildDefinitions();
             Assert.IsNotNull(definitions);
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -8,18 +9,25 @@ using Expression = System.Linq.Expressions.Expression;
 namespace Hl7.Cql.Compiler.Definitions;
 
 #pragma warning disable CS1591
-internal record DefinitionsBuilderForCodeDef(
-    DefinitionsBuilderForCodeDefs OuterCodes,
-    CodeDef CodeDef,
-    HashSet<(string codeName, string codeSystemUrl)> CodeNameCodeSystemUrlsSet)
+internal partial record DefinitionsBuilder
 {
-    public void Build()
+    private void Visit(
+        DefinitionDictionary<LambdaExpression> definitions,
+        CodeDef[] codeDefs)
     {
-        var codeDef = CodeDef;
-        var lib = OuterCodes.OuterLib;
-        var outerLibCodeSystemUrls = lib.CodeSystemUrls;
-        var outerLibCodesByName = lib.CodesByName;
-        var outerLibCodesByCodeSystemName = lib.CodesByCodeSystemName;
+        HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
+        foreach (var codeDef in codeDefs)
+            Visit(foundCodeNameCodeSystemUrls, definitions, codeDef);
+    }
+
+    private void Visit(
+        HashSet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
+        DefinitionDictionary<LambdaExpression> definitions,
+        CodeDef codeDef)
+    {
+        var outerLibCodeSystemUrls = CodeSystemUrls;
+        var outerLibCodesByName = CodesByName;
+        var outerLibCodesByCodeSystemName = CodesByCodeSystemName;
 
         if (codeDef.codeSystem == null)
             throw new InvalidOperationException("Code definition has a null codeSystem node.");
@@ -27,7 +35,7 @@ internal record DefinitionsBuilderForCodeDef(
         if (!outerLibCodeSystemUrls.TryGetValue(codeDef.codeSystem.name, out var csUrl))
             throw new InvalidOperationException($"Undefined code system {codeDef.codeSystem.name!}");
 
-        if (!CodeNameCodeSystemUrlsSet.Add((codeDef.name, csUrl)))
+        if (!codeNameCodeSystemUrlsSet.Add((codeDef.name, csUrl)))
             throw new InvalidOperationException(
                 $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})");
 
@@ -50,6 +58,7 @@ internal record DefinitionsBuilderForCodeDef(
         );
         var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
         var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-        OuterCodes.Definitions.Add(lib.Library.NameAndVersion!, codeDef.name!, lambda);
+        definitions.Add(Library.NameAndVersion!, codeDef.name!, lambda);
     }
+
 }

@@ -159,7 +159,7 @@ namespace Hl7.Cql.Packaging
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger);
-                var expressions = new DefinitionsBuilderForLibrary(builder).BuildDefinitions();
+                var expressions = new DefinitionsBuilder(builder).BuildDefinitions();
                 all.Merge(expressions);
             }
             var scw = new CSharpSourceCodeWriter(codeWriterLogger);

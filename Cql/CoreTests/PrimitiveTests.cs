@@ -3522,7 +3522,7 @@ namespace CoreTests
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
             var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var definitions = new DefinitionsBuilderForLibrary(eb).BuildDefinitions();
+            var definitions = new DefinitionsBuilder(eb).BuildDefinitions();
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())
              .CreateLogger<CSharpSourceCodeWriter>();
