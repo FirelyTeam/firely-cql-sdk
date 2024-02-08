@@ -14,22 +14,38 @@ namespace Hl7.Cql.Packager
             var config = new ConfigurationBuilder()
                 .AddCommandLine(args)
                 .Build();
+
             if (args.Length == 0 || config["?"] != null || config["h"] != null || config["help"] != null)
                 return ShowHelp();
 
-            var elmArg = config["elm"];
-            if (elmArg == null)
+            if (config.AsEnumerable()
+                    .Select(kv => kv.Key)
+                    .Except(supportedArgs)
+                    .ToList() is { Count: > 0 } unknownArgs)
+            {
+                Console.Error.WriteLine($"Unknown args: {string.Join(", ", unknownArgs)}.");
+                ShowHelp();
+                return -1;
+            }
+
+
+            // elm
+
+            if (config["elm"] is not {} elmArg)
                 return ShowHelp();
+
             var elmDir = new DirectoryInfo(elmArg);
             if (!elmDir.Exists)
             {
                 Console.Error.WriteLine($"-elm: path {elmArg} does not exist.");
                 return -1;
             }
-            var cqlArg = config["cql"];
 
-            if (cqlArg == null)
+            // cql
+
+            if (config["cql"] is not {} cqlArg )
                 return ShowHelp();
+
             var cqlDir = new DirectoryInfo(cqlArg);
             if (!cqlDir.Exists)
             {
@@ -37,17 +53,18 @@ namespace Hl7.Cql.Packager
                 return -1;
             }
 
-            var dArg = config["d"];
-            bool debug = false;
-            if (dArg != null && !bool.TryParse(dArg, out debug))
+            // d
+
+            if (config["d"] is {} dArg && !bool.TryParse(dArg, out bool debug))
             {
                 Console.Error.WriteLine($"-d: expected true|false, got {dArg}");
                 return -1;
             }
 
+            // cs
+
             DirectoryInfo? csDir = null;
-            var csArg = config["cs"];
-            if (csArg != null)
+            if (config["cs"] is {} csArg)
             {
                 csDir = new DirectoryInfo(csArg);
                 if (!csDir.Exists)
@@ -56,17 +73,19 @@ namespace Hl7.Cql.Packager
                 }
             }
 
-            var fArg = config["f"];
-            bool force = false;
-            if (fArg != null && !bool.TryParse(fArg, out force))
+            // f
+
+            if (config["f"] is {} fArg 
+                && !bool.TryParse(fArg, out var force))
             {
                 Console.Error.WriteLine($"-f: expected true|false, got {fArg}");
                 return -1;
             }
 
+            // fhir
+
             DirectoryInfo? fhirDir = null;
-            var fhirArg = config["fhir"];
-            if (fhirArg != null)
+            if (config["fhir"] is {} fhirArg)
             {
                 fhirDir = new DirectoryInfo(fhirArg);
                 if (!fhirDir.Exists)
@@ -74,11 +93,16 @@ namespace Hl7.Cql.Packager
                     EnsureDirectory(fhirDir);
                 }
             }
-            Package(elmDir, cqlDir, csDir, fhirDir);
+
+            // canonical-root-url
+
+            var resourceCanonicalRootUrl = config["canonical-root-url"]?.TrimEnd('/');
+
+            Package(elmDir, cqlDir, csDir, fhirDir, resourceCanonicalRootUrl);
             return 0;
         }
 
-        public static void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir)
+        private static void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, DirectoryInfo? csDir, DirectoryInfo? fhirDir, string? resourceCanonicalRootUrl)
         {
             var logLevel = LogLevel.Trace;
             var logFactory = LoggerFactory
@@ -106,7 +130,7 @@ namespace Hl7.Cql.Packager
             if (csDir != null) resourceWriters.Add(new CSharpResourceWriter(csDir, cliLogger));
 
             var resourcePackager = new ResourcePackager(logFactory, resourceWriters.ToArray());
-            resourcePackager.Package(elmDir, cqlDir);
+            resourcePackager.Package(new PackageArgs(elmDir, cqlDir, resourceCanonicalRootUrl: resourceCanonicalRootUrl));
         }
 
 
@@ -124,6 +148,8 @@ namespace Hl7.Cql.Packager
             }
         }
 
+        private static string[] supportedArgs = new[] { "elm", "cql", "fhir", "cs", "d", "f", "canonical-root-url" };
+
         private static int ShowHelp()
         {
             Console.WriteLine();
@@ -135,6 +161,7 @@ namespace Hl7.Cql.Packager
             Console.WriteLine($"\t[--cs] <file>\tC# output location, either file name or directory");
             Console.WriteLine($"\t[--d] true|false\t\tProduce as a debug assembly");
             Console.WriteLine($"\t[--f] true|false\tIf output file already exists, overwrite");
+            Console.WriteLine($"\t[--canonical-root-url] <url>\tThe root url used for the resource canonical. If omitted a '#' will be used");
             Console.WriteLine();
             return -1;
         }
