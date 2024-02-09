@@ -67,7 +67,7 @@ internal partial class DefinitionsBuilder
         private readonly DefinitionDictionary<LambdaExpression> _definitions;
 
         public Library Library { get; }
-        public string LibraryNameAndVersion => Library.NameAndVersion.ArgNotNull();
+        public string LibraryNameAndVersion => Library.NameAndVersion!;
         public Dictionary<string, string> LocalLibraryIdentifiers { get; }
         public Dictionary<string, string> CodeSystemUrls { get; }
         public Dictionary<string, CqlCode> CodesByName { get; }

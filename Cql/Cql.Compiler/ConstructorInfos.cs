@@ -13,51 +13,51 @@ internal static class ConstructorInfos
     public static ConstructorInfo CqlCode { get; } = 
         ReflectionUtility
             .ConstructorOf(() => new CqlCode(default(string?), default(string?), default(string?), default(string?)))
-            .ArgNotNull();
+            .CheckNotNull();
 
     public static ConstructorInfo CqlConcept { get; } =
         ReflectionUtility
             .ConstructorOf(() => new CqlConcept(default(IEnumerable<CqlCode>)!, default(string?)))
-            .ArgNotNull();
+            .CheckNotNull();
 
     public static ConstructorInfo CqlDeclarationAttribute { get; } =
         ReflectionUtility
             .ConstructorOf(() => new CqlDeclarationAttribute(default(string)!))
-            .ArgNotNull();
+            .CheckNotNull();
 
     public static ConstructorInfo LazyOfBoolCtor { get; } =
         ReflectionUtility
             .ConstructorOf(() => new Lazy<bool?>(default(Func<bool?>)!))
-            .ArgNotNull();
+            .CheckNotNull();
 
     public static ConstructorInfo NotImplementedException { get; } =
         ReflectionUtility
             .ConstructorOf(() => new NotImplementedException(default(string?)))
-            .ArgNotNull();
+            .CheckNotNull();
 
     public static ConstructorInfo CqlValueSet { get; } =
         ReflectionUtility
             .ConstructorOf(() => new CqlValueSet(default(string?)!, default(string?)!))
-            .ArgNotNull();
+            .CheckNotNull();
 
     public static ConstructorInfo CqlRatio { get; } =
         ReflectionUtility
             .ConstructorOf(() => new CqlRatio(default(CqlQuantity?), default(CqlQuantity?)))
-            .ArgNotNull();
+            .CheckNotNull();
 
     public static ConstructorInfo CqlQuantity { get; } = 
         ReflectionUtility
             .ConstructorOf(() => new CqlQuantity(default(decimal?), default(string?)))
-            .ArgNotNull();
+            .CheckNotNull();
 
     private static ConstructorInfo ListOf<T>() =>
         ReflectionUtility
             .ConstructorOf(() => new List<T>((IEnumerable<T>)default(IEnumerable<T>)!))
-            .ArgNotNull();
+            .CheckNotNull();
 
     private static MethodInfo GenericDefinitionMethodListOf { get; } =
         // MethodInfo to ListOf<>()
-        ReflectionUtility.GenericDefinitionMethodOf(() => ListOf<object>()).ArgNotNull();
+        ReflectionUtility.GenericDefinitionMethodOf(() => ListOf<object>()).CheckNotNull();
 
 
     public static ConstructorInfo ListOf(Type elementType) =>
@@ -68,5 +68,5 @@ internal static class ConstructorInfos
             // Get the ConstructorInfo for ListOf< elementType >()
             .Invoke(null, null)
             // Check that ConstructorInfo is not null
-            .ArgNotNull();
+            .CheckNotNull();
 }

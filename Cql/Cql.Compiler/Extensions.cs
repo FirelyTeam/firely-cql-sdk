@@ -21,24 +21,38 @@ namespace Hl7.Cql.Compiler
         public static IEnumerable<T> OrEmptyEnumerable<T>(this IEnumerable<T>? enumerable) 
             => enumerable ?? Enumerable.Empty<T>();
 
-        public static T ArgNotNull<T>([NotNull]this T? value, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
+        public static T ArgNotNull<T>(
+            [NotNull] this T? value,
+            [CallerArgumentExpression(nameof(value))] string valueExpr = "")
         {
             if (value == null)
                 throw new ArgumentNullException(valueExpr);
             return value;
         }
 
-        public static T CheckNotNull<T>([NotNull] this T? value, FormattableString message, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
+        public static T CheckNotNull<T>(
+            [NotNull] this T? value, 
+            [CallerArgumentExpression(nameof(value))] string valueExpr = "", 
+            FormattableString? message = null)
         {
             if (value == null)
-                throw new InvalidOperationException($"{message} - Expression was '{valueExpr}'");
+                throw new InvalidOperationException(
+                    message == null
+                        ? $"Expression '{valueExpr}' must not be null."
+                        : $"{message} - Expression '{valueExpr}'");
             return value;
         }
 
-        public static string CheckNotNullOrWhitespace([NotNull] this string? value, FormattableString message, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
+        public static string CheckNotNullOrWhitespace(
+            [NotNull] this string? value,
+            [CallerArgumentExpression(nameof(value))] string valueExpr = "",
+            FormattableString? message = null)
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new InvalidOperationException($"{message} - Expression was '{valueExpr}'");
+                throw new InvalidOperationException(
+                    message == null
+                        ? $"Expression '{valueExpr}' must not be null or whitespace."
+                        : $"{message} - Expression '{valueExpr}'");
             return value;
         }
     }

@@ -33,8 +33,7 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
-                        var listElementType = TypeResolver.GetListElementType(type)
-                            .CheckNotNull($"{type} was expected to be a list type.");
+                        var listElementType = TypeResolver.GetListElementType(type).CheckNotNull(message:$"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
                         var elmAs = new ElmAsExpression(newArray, type);
                         return elmAs;
@@ -60,9 +59,9 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                @as.asType.Name.CheckNotNullOrWhitespace($"asType cannot be null or whitespace");
-                @as.operand.CheckNotNull($"operand cannot be null");
-                var type = TypeResolver.ResolveType(@as.asType.Name!).CheckNotNull($"Cannot resolve type {@as.asType.Name}");
+                @as.asType.Name.CheckNotNullOrWhitespace();
+                @as.operand.CheckNotNull(message: $"operand cannot be null");
+                var type = TypeResolver.ResolveType(@as.asType.Name!).CheckNotNull(message:$"Cannot resolve type {@as.asType.Name}");
                 var operand = TranslateExpression(@as.operand, ctx);
                 if (!type.IsAssignableFrom(operand.Type))
                     ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
@@ -80,24 +79,26 @@ namespace Hl7.Cql.Compiler
             {
                 if (@is.isTypeSpecifier is elm.ChoiceTypeSpecifier choice)
                 {
-                    var firstChoiceType = TypeManager.TypeFor(choice.choice[0], ctx).CheckNotNull($"Could not resolve type for Is expression");
+                    var firstChoiceType = TypeManager.TypeFor(choice.choice[0], ctx).CheckNotNull(message:$"Could not resolve type for Is expression");
                     Expression result = Expression.TypeIs(op, firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
-                        var cti = TypeManager.TypeFor(choice.choice[i], ctx).CheckNotNull($"Could not resolve type for Is expression");
+                        var cti = TypeManager.TypeFor(choice.choice[i], ctx).CheckNotNull(message:$"Could not resolve type for Is expression");
                         var ie = Expression.TypeIs(op, cti);
                         result = Expression.Or(result, ie);
                     }
                     var ta = Expression.TypeAs(result, typeof(bool?));
                     return ta;
                 }
-                type = TypeManager.TypeFor(@is.isTypeSpecifier, ctx).CheckNotNull($"Could not resolve type for Is expression");
+
+                type = TypeManager.TypeFor(@is.isTypeSpecifier, ctx).CheckNotNull(message:$"Could not resolve type for Is expression");
             }
-            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name)) 
+            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
             {
-                type = TypeResolver.ResolveType(@is.isType.Name).CheckNotNull($"Could not resolve type {@is.isType.Name}");
+                type = TypeResolver.ResolveType(@is.isType.Name).CheckNotNull(message:$"Could not resolve type {@is.isType.Name}");
             }
-            type.CheckNotNull($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
+
+            type.CheckNotNull(message:$"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
             var isExpression = Expression.TypeIs(op, type);
             var nullable = Expression.TypeAs(isExpression, typeof(bool?));
             return nullable;
