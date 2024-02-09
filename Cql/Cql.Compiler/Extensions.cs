@@ -36,10 +36,7 @@ namespace Hl7.Cql.Compiler
             FormattableString? message = null)
         {
             if (value == null)
-                throw new InvalidOperationException(
-                    message == null
-                        ? $"Expression '{valueExpr}' must not be null."
-                        : $"{message} - Expression '{valueExpr}'");
+                throw new InvalidOperationException(message?.ToString(null) ?? $"Expression '{valueExpr}' must not be null.");
             return value;
         }
 
@@ -49,10 +46,7 @@ namespace Hl7.Cql.Compiler
             FormattableString? message = null)
         {
             if (string.IsNullOrWhiteSpace(value))
-                throw new InvalidOperationException(
-                    message == null
-                        ? $"Expression '{valueExpr}' must not be null or whitespace."
-                        : $"{message} - Expression '{valueExpr}'");
+                throw new InvalidOperationException(message?.ToString(null) ?? $"Expression '{valueExpr}' must not be null or whitespace.");
             return value;
         }
     }
