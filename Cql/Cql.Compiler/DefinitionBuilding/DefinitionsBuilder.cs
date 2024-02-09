@@ -56,7 +56,9 @@ internal sealed partial class DefinitionsBuilder
         private readonly DefinitionDictionary<LambdaExpression> _definitions = new();
 
         public Library Library { get; }
+
         public string LibraryKey => Library.NameAndVersion!;
+
         public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
         public ExpressionBuilderContext NewExpressionBuilderContext() =>
@@ -84,25 +86,17 @@ internal sealed partial class DefinitionsBuilder
         public bool ContainsDefinition(string definition) => 
             _definitions.ContainsKey(LibraryKey, definition);
 
-        public void AddIncludeAlias(string includeAlias, string includeNameAndVersion)
-        {
+        public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) => 
             _localLibraryIdentifiers.Add(includeAlias, includeNameAndVersion);
-        }
 
-        public void AddCodeByName(string codeDefName, CqlCode cqlCode)
-        {
+        public void AddCodeByName(string codeDefName, CqlCode cqlCode) => 
             _codesByName.Add(codeDefName, cqlCode);
-        }
 
-        public bool TryGetCodeByCodeName(string codeName, [NotNullWhen(true)] out CqlCode? code)
-        {
-            return _codesByName.TryGetValue(codeName, out code);
-        }
+        public bool TryGetCodeByCodeName(string codeName, [NotNullWhen(true)] out CqlCode? code) => 
+            _codesByName.TryGetValue(codeName, out code);
 
-        public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes)
-        {
-            return _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
-        }
+        public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) => 
+            _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
 
         public List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
         {
@@ -116,10 +110,8 @@ internal sealed partial class DefinitionsBuilder
             return codings;
         }
 
-        public bool TryGetCustomImplementationByExpressionKey(string expressionKey, [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory)
-        {
-            return _expressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
-        }
+        public bool TryGetCustomImplementationByExpressionKey(string expressionKey, [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) => 
+            _expressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
     }
 
     private void VisitLibrary(
