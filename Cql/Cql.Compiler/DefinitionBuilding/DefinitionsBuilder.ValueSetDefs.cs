@@ -1,31 +1,30 @@
-﻿using System.Linq.Expressions;
-using Hl7.Cql.Elm;
+﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler.Definitions;
+namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
 #pragma warning disable CS1591
-internal partial record DefinitionsBuilder
+internal partial class DefinitionsBuilder
 {
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitValueSetDefs(
+        LibraryContext libraryContext,
         ValueSetDef[] valueSetDefs)
     {
-        foreach (ValueSetDef libraryValueSet in valueSetDefs)
+        foreach (ValueSetDef valueSetDef in valueSetDefs)
         {
-            Visit(definitions, libraryValueSet);
+            VisitValueSetDef(libraryContext, valueSetDef);
         }
     }
 
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitValueSetDef(
+        LibraryContext libraryContext,
         ValueSetDef valueSetDef)
     {
         var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
             Expression.Constant(valueSetDef.version, typeof(string)));
         var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
         var lambda = Expression.Lambda(@new, contextParameter);
-        definitions.Add(Library.NameAndVersion!, valueSetDef.name!, lambda);
+        libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, valueSetDef.name!, lambda);
     }
 }

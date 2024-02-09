@@ -5,57 +5,107 @@ using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler.Definitions;
+namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
-#pragma warning disable CS1591
-internal partial record DefinitionsBuilder
+internal partial class DefinitionsBuilder
 {
-    public ExpressionBuilder ExpressionBuilder { get; }
-    public Library Library { get; }
-    public TypeManager TypeManager { get; }
-    public Dictionary<string, string> LocalLibraryIdentifiers { get; } = new();
-    public Dictionary<string, string> CodeSystemUrls { get; }
-    public Dictionary<string, CqlCode> CodesByName { get; } = new();
-    public Dictionary<string, List<CqlCode>> CodesByCodeSystemName { get; } = new();
+    public static DefinitionsBuilder Instance { get; } = new();
 
-    public DefinitionsBuilder(ExpressionBuilder expressionBuilder)
+    private DefinitionsBuilder()
     {
-        ExpressionBuilder = expressionBuilder;
-        Library = expressionBuilder.Library;
-        TypeManager = expressionBuilder.TypeManager;
-        CodeSystemUrls = Library.codeSystems
-                             ?.ToDictionary(cs => cs.name, cs => cs.id)
-                         ?? new();
+        // This class contains no state, so use it as a singleton
     }
 
-    public DefinitionDictionary<LambdaExpression> BuildDefinitions()
+    public DefinitionDictionary<LambdaExpression> BuildDefinitions(OperatorBinding operatorBinding,
+        TypeManager typeManager,
+        Library library,
+        ILogger<ExpressionBuilder> logger)
     {
-        ExpressionBuilder.Library.NameAndVersion.NotNull(); // This checks that the library has a name and version
+        library.NameAndVersion.NotNull();
+
+        ExpressionBuilder expressionBuilder = new ExpressionBuilder(operatorBinding, typeManager, library, logger);
         DefinitionDictionary<LambdaExpression> definitions = new();
-
-        if (Library.includes is { Length: > 0 } includes)
-            Visit(includes);
-
-        if (Library.valueSets is { Length: > 0 } valueSets)
-            Visit(definitions, valueSets);
-
-        if (Library.codes is { Length: > 0 } codes)
-            Visit(definitions, codes);
-
-        if (Library.codeSystems is { Length: > 0 } codeSystems)
-            Visit(definitions, codeSystems);
-
-        if (Library.concepts is { Length: > 0 } concepts)
-            Visit(definitions, concepts);
-
-        if (Library.parameters is { Length: > 0 } parameters)
-            Visit(definitions, parameters);
-
-        if (Library.statements is { Length: > 0 } statements)
-            Visit(definitions, statements);
-
+        Dictionary<string, string> localLibraryIdentifiers = new();
+        Dictionary<string, string> codeSystemUrls =
+            library.codeSystems
+                ?.ToDictionary(cs => cs.name, cs => cs.id)
+            ?? new();
+        Dictionary<string, CqlCode> codesByName = new();
+        Dictionary<string, List<CqlCode>> codesByCodeSystemName = new();
+        LibraryContext libraryContext = new(library, expressionBuilder, definitions, localLibraryIdentifiers, codeSystemUrls, codesByName, codesByCodeSystemName);
+        VisitLibrary(libraryContext);
         return definitions;
+    }
+
+    private record struct LibraryContext
+    {
+        public LibraryContext(Library Library,
+            ExpressionBuilder ExpressionBuilder,
+            DefinitionDictionary<LambdaExpression> Definitions,
+            Dictionary<string, string> LocalLibraryIdentifiers,
+            Dictionary<string, string> CodeSystemUrls,
+            Dictionary<string, CqlCode> CodesByName,
+            Dictionary<string, List<CqlCode>> CodesByCodeSystemName)
+        {
+            this.Library = Library;
+            this._expressionBuilder = ExpressionBuilder;
+            this.Definitions = Definitions;
+            this.LocalLibraryIdentifiers = LocalLibraryIdentifiers;
+            this.CodeSystemUrls = CodeSystemUrls;
+            this.CodesByName = CodesByName;
+            this.CodesByCodeSystemName = CodesByCodeSystemName;
+        }
+
+        public Library Library { get; }
+        private readonly ExpressionBuilder _expressionBuilder; // Do not expose this
+        public DefinitionDictionary<LambdaExpression> Definitions { get; }
+        public Dictionary<string, string> LocalLibraryIdentifiers { get; }
+        public Dictionary<string, string> CodeSystemUrls { get; }
+        public Dictionary<string, CqlCode> CodesByName { get; }
+        public Dictionary<string, List<CqlCode>> CodesByCodeSystemName { get; }
+
+        public ExpressionBuilderContext NewExpressionBuilderContext() =>
+            new(
+                _expressionBuilder,
+                Expression.Parameter(typeof(CqlContext), "context"),
+                Definitions,
+                LocalLibraryIdentifiers);
+
+        public TypeManager TypeManager => _expressionBuilder.TypeManager;
+        public IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations => _expressionBuilder.CustomImplementations;
+        public Expression TranslateExpression(Element op, ExpressionBuilderContext ctx) => _expressionBuilder.TranslateExpression(op, ctx);
+        public ExpressionBuilderSettings Settings => _expressionBuilder.Settings;
+
+
+    }
+
+    private void VisitLibrary(
+        LibraryContext libraryContext)
+    {
+        var library = libraryContext.Library;
+
+        if (library.includes is { Length: > 0 } includesDefs)
+            VisitIncludeDefs(libraryContext, includesDefs);
+
+        if (library.valueSets is { Length: > 0 } valueSetDefs)
+            VisitValueSetDefs(libraryContext, valueSetDefs);
+
+        if (library.codes is { Length: > 0 } codeDefs)
+            VisitCodeDefs(libraryContext, codeDefs);
+
+        if (library.codeSystems is { Length: > 0 } codeSystemDefs)
+            VisitCodeSystemDefs(libraryContext, codeSystemDefs);
+
+        if (library.concepts is { Length: > 0 } conceptDefs)
+            VisitConceptDefs(libraryContext, conceptDefs);
+
+        if (library.parameters is { Length: > 0 } parameterDefs)
+            VisitParameterDefs(libraryContext, parameterDefs);
+
+        if (library.statements is { Length: > 0 } expressionDefs)
+            VisitExpressionDefs(libraryContext, expressionDefs);
     }
 }

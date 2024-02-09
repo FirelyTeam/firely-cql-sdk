@@ -1,28 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler.Definitions;
+namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
 #pragma warning disable CS1591
-internal partial record DefinitionsBuilder
+internal partial class DefinitionsBuilder
 {
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitConceptDefs(
+        LibraryContext libraryContext,
         ConceptDef[] conceptDefs)
     {
         foreach (var conceptDef in conceptDefs)
         {
-            Visit(definitions, conceptDef);
+            VisitConceptDef(libraryContext, conceptDef);
         }
     }
 
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitConceptDef(
+        LibraryContext libraryContext,
         ConceptDef conceptDef)
     {
         if (conceptDef.code.Length <= 0)
@@ -31,7 +30,7 @@ internal partial record DefinitionsBuilder
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(newArray, contextParameter);
-            definitions.Add(Library.NameAndVersion!, conceptDef.name, lambda);
+            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, conceptDef.name, lambda);
         }
         else
         {
@@ -39,7 +38,7 @@ internal partial record DefinitionsBuilder
             for (int i = 0; i < conceptDef.code.Length; i++)
             {
                 var codeRef = conceptDef.code[i];
-                if (!CodesByName.TryGetValue(codeRef.name, out var systemCode))
+                if (!libraryContext.CodesByName.TryGetValue(codeRef.name, out var systemCode))
                     throw new InvalidOperationException(
                         $"Code {codeRef.name} in concept {conceptDef.name} is not defined.");
                 initMembers[i] = Expression.New(
@@ -57,7 +56,7 @@ internal partial record DefinitionsBuilder
             var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(newConcept, contextParameter);
-            definitions.Add(Library.NameAndVersion!, conceptDef.name, lambda);
+            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, conceptDef.name, lambda);
         }
     }
 

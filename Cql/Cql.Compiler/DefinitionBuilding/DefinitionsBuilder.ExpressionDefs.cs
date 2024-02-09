@@ -5,46 +5,47 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler.Definitions;
+namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
 #pragma warning disable CS1591
-partial record DefinitionsBuilder
+partial class DefinitionsBuilder
 {
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions, 
+    private void VisitExpressionDefs(
+        LibraryContext libraryContext,
         ExpressionDef[] expressionDefs)
     {
-        foreach (var expressionDef in expressionDefs) 
-            Visit(definitions, expressionDef);
+        foreach (var expressionDef in expressionDefs)
+        {
+            VisitExpressionDef(libraryContext, expressionDef);
+        }
     }
 
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitExpressionDef(
+        LibraryContext libraryContext,
         ExpressionDef expressionDef)
     {
         if (expressionDef.expression == null)
             throw new InvalidOperationException(
                 $"Definition {expressionDef.name} does not have an expression property");
 
-        var buildContext = new ExpressionBuilderContext(
-            ExpressionBuilder,
-            Expression.Parameter(typeof(CqlContext), "context"),
-            definitions,
-            LocalLibraryIdentifiers);
+        var libraryContextDefinitions = libraryContext.Definitions;
+        var expressionBuilderContext = libraryContext.NewExpressionBuilderContext();
 
         if (string.IsNullOrWhiteSpace(expressionDef.name))
         {
             var message =
                 $"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.";
-            buildContext.LogError(message, expressionDef);
+            expressionBuilderContext.LogError(message, expressionDef);
             throw new InvalidOperationException(message);
         }
 
+        var libraryKey = libraryContext.Library.NameAndVersion;
+
         try
         {
-            var customKey = $"{Library.NameAndVersion!}.{expressionDef.name}";
+            var customKey = $"{libraryKey!}.{expressionDef.name}";
             Type[] functionParameterTypes = Type.EmptyTypes;
-            var parameters = new[] { buildContext.RuntimeContextParameter };
+            var parameters = new[] { expressionBuilderContext.RuntimeContextParameter };
             var functionDef = expressionDef as FunctionDef;
 
             if (functionDef != null && functionDef.operand != null)
@@ -55,10 +56,10 @@ partial record DefinitionsBuilder
                 {
                     if (operand.operandTypeSpecifier != null)
                     {
-                        var operandType = TypeManager.TypeFor(operand.operandTypeSpecifier, buildContext)!;
+                        var operandType = libraryContext.TypeManager.TypeFor(operand.operandTypeSpecifier, expressionBuilderContext)!;
                         var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
                         var parameter = Expression.Parameter(operandType, opName);
-                        buildContext.Operands.Add(operand.name!, parameter);
+                        expressionBuilderContext.Operands.Add(operand.name!, parameter);
                         functionParameterTypes[i] = parameter.Type;
                         i += 1;
                     }
@@ -68,38 +69,38 @@ partial record DefinitionsBuilder
                 }
 
                 parameters = parameters
-                    .Concat(buildContext.Operands.Values)
+                    .Concat(expressionBuilderContext.Operands.Values)
                     .ToArray();
-                if (ExpressionBuilder.CustomImplementations.TryGetValue(customKey, out var factory) && factory != null)
+                if (libraryContext.CustomImplementations.TryGetValue(customKey, out var factory) && factory != null)
                 {
                     var customLambda = factory(parameters);
-                    definitions.Add(Library.NameAndVersion!, expressionDef.name, functionParameterTypes, customLambda);
+                    libraryContextDefinitions.Add(libraryKey!, expressionDef.name, functionParameterTypes, customLambda);
                 }
                 else if (functionDef?.external ?? false)
                 {
                     var message =
                         $"{customKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
-                    buildContext.LogError(message, expressionDef);
-                    if (ExpressionBuilder.Settings.AllowUnresolvedExternals)
+                    expressionBuilderContext.LogError(message, expressionDef);
+                    if (libraryContext.Settings.AllowUnresolvedExternals)
                     {
-                        var returnType = TypeManager.TypeFor(expressionDef, buildContext, throwIfNotFound: true)!;
+                        var returnType = libraryContext.TypeManager.TypeFor(expressionDef, expressionBuilderContext, throwIfNotFound: true)!;
                         var paramTypes = new[] { typeof(CqlContext) }
                             .Concat(functionParameterTypes)
                             .ToArray();
                         var notImplemented =
-                            NotImplemented(customKey, paramTypes, returnType, buildContext);
-                        definitions.Add(Library.NameAndVersion!, expressionDef.name, paramTypes, notImplemented);
+                            NotImplemented(customKey, paramTypes, returnType, expressionBuilderContext);
+                        libraryContextDefinitions.Add(libraryKey!, expressionDef.name, paramTypes, notImplemented);
                     }
                     else throw new InvalidOperationException(message);
                 }
             }
             else
             {
-                var innerExpressionBuilderContext = buildContext.Deeper(expressionDef);
-                var bodyExpression = ExpressionBuilder.TranslateExpression(expressionDef.expression, innerExpressionBuilderContext);
+                var innerExpressionBuilderContext = expressionBuilderContext.Deeper(expressionDef);
+                var bodyExpression = libraryContext.TranslateExpression(expressionDef.expression, innerExpressionBuilderContext);
                 var lambda = Expression.Lambda(bodyExpression, parameters);
                 if (functionDef?.operand != null &&
-                    definitions.ContainsKey(Library.NameAndVersion!, expressionDef.name, functionParameterTypes))
+                    libraryContextDefinitions.ContainsKey(libraryKey!, expressionDef.name, functionParameterTypes))
                 {
                     var ops = functionDef.operand
                         .Where(op =>
@@ -119,19 +120,19 @@ partial record DefinitionsBuilder
                             if (!string.IsNullOrWhiteSpace(name))
                             {
                                 var value = tag.value ?? string.Empty;
-                                definitions.AddTag(Library.NameAndVersion!, expressionDef.name, functionParameterTypes, name, value);
+                                libraryContextDefinitions.AddTag(libraryKey!, expressionDef.name, functionParameterTypes, name, value);
                             }
                         }
                     }
 
-                    definitions.Add(Library.NameAndVersion!, expressionDef.name, functionParameterTypes.OrEmptyArray(), lambda);
+                    libraryContextDefinitions.Add(libraryKey!, expressionDef.name, functionParameterTypes.OrEmptyArray(), lambda);
                 }
             }
         }
         catch (Exception e)
         {
             throw new InvalidOperationException(
-                $"Unhandled exception while building statement for definition '{expressionDef.name} 'in library '{Library.NameAndVersion}'. See InnerException for more details.",
+                $"Unhandled exception while building statement for definition '{expressionDef.name} 'in library '{libraryKey}'. See InnerException for more details.",
                 e);
         }
     }

@@ -1,20 +1,24 @@
 ﻿using System;
 using Hl7.Cql.Elm;
 
-namespace Hl7.Cql.Compiler.Definitions;
+namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
 #pragma warning disable CS1591
-internal partial record DefinitionsBuilder
+internal partial class DefinitionsBuilder
 {
-    private void Visit(IncludeDef[] libraryIncludesDefs)
+    private void VisitIncludeDefs(
+        LibraryContext libraryContext, 
+        IncludeDef[] includesDefs)
     {
-        foreach (var includeDef in libraryIncludesDefs)
+        foreach (var includeDef in includesDefs)
         {
-            Visit(includeDef);
+            VisitIncludeDef(libraryContext, includeDef);
         }
     }
 
-    private void Visit(IncludeDef includeDef)
+    private void VisitIncludeDef(
+        LibraryContext libraryContext,
+        IncludeDef includeDef)
     {
         var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
             ? includeDef.localIdentifier!
@@ -24,7 +28,7 @@ internal partial record DefinitionsBuilder
         if (libNav == null)
             throw new InvalidOperationException($"Include {includeDef.localId} does not have a well-formed name and version");
 
-        LocalLibraryIdentifiers.Add(alias, libNav);
+        libraryContext.LocalLibraryIdentifiers.Add(alias, libNav);
     }
 
 }

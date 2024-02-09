@@ -1,30 +1,29 @@
 ﻿using System.Linq;
-using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler.Definitions;
+namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
 #pragma warning disable CS1591
-internal partial record DefinitionsBuilder
+internal partial class DefinitionsBuilder
 {
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitCodeSystemDefs(
+        LibraryContext libraryContext,
         CodeSystemDef[] codeSystemDefs)
     {
         foreach (var codeSystemDef in codeSystemDefs)
         {
-            Visit(definitions, codeSystemDef);
+            VisitCodeSystemDef(libraryContext, codeSystemDef);
         }
     }
 
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitCodeSystemDef(
+        LibraryContext libraryContext,
         CodeSystemDef codeSystem)
     {
-        if (CodesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
+        if (libraryContext.CodesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
         {
             var initMembers = codes
                 .Select(coding =>
@@ -39,7 +38,7 @@ internal partial record DefinitionsBuilder
             var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-            definitions.Add(Library.NameAndVersion!, codeSystem.name, lambda);
+            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, codeSystem.name, lambda);
         }
         else
         {
@@ -47,7 +46,7 @@ internal partial record DefinitionsBuilder
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(newArray, contextParameter);
-            definitions.Add(Library.NameAndVersion!, codeSystem.name, lambda);
+            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, codeSystem.name, lambda);
         }
     }
 }

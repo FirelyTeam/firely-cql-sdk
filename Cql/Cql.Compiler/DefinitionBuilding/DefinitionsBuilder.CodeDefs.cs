@@ -1,64 +1,64 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq.Expressions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Expression = System.Linq.Expressions.Expression;
 
-namespace Hl7.Cql.Compiler.Definitions;
+namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
 #pragma warning disable CS1591
-internal partial record DefinitionsBuilder
+internal partial class DefinitionsBuilder
 {
-    private void Visit(
-        DefinitionDictionary<LambdaExpression> definitions,
+    private void VisitCodeDefs(
+        LibraryContext libraryContext,
         CodeDef[] codeDefs)
     {
         HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
         foreach (var codeDef in codeDefs)
-            Visit(foundCodeNameCodeSystemUrls, definitions, codeDef);
+        {
+            VisitCodeDef(libraryContext, new CodeDefContext(codeDef, foundCodeNameCodeSystemUrls));
+        }
     }
 
-    private void Visit(
-        HashSet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
-        DefinitionDictionary<LambdaExpression> definitions,
-        CodeDef codeDef)
-    {
-        var outerLibCodeSystemUrls = CodeSystemUrls;
-        var outerLibCodesByName = CodesByName;
-        var outerLibCodesByCodeSystemName = CodesByCodeSystemName;
+    private record struct CodeDefContext(
+        CodeDef CodeDef,
+        HashSet<(string codeName, string codeSystemUrl)> CodeNameCodeSystemUrlsSet);
 
-        if (codeDef.codeSystem == null)
+    private void VisitCodeDef(
+        LibraryContext libraryContext,
+        CodeDefContext codeDefContext)
+    {
+        if (codeDefContext.CodeDef.codeSystem == null)
             throw new InvalidOperationException("Code definition has a null codeSystem node.");
 
-        if (!outerLibCodeSystemUrls.TryGetValue(codeDef.codeSystem.name, out var csUrl))
-            throw new InvalidOperationException($"Undefined code system {codeDef.codeSystem.name!}");
+        if (!libraryContext.CodeSystemUrls.TryGetValue(codeDefContext.CodeDef.codeSystem.name, out var csUrl))
+            throw new InvalidOperationException($"Undefined code system {codeDefContext.CodeDef.codeSystem.name!}");
 
-        if (!codeNameCodeSystemUrlsSet.Add((codeDef.name, csUrl)))
+        if (!codeDefContext.CodeNameCodeSystemUrlsSet.Add((codeDefContext.CodeDef.name, csUrl)))
             throw new InvalidOperationException(
-                $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})");
+                $"Duplicate code name detected: {codeDefContext.CodeDef.name} from {codeDefContext.CodeDef.codeSystem.name} ({csUrl})");
 
-        var systemCode = new CqlCode(codeDef.id, csUrl, null, null);
-        outerLibCodesByName.Add(codeDef.name, systemCode);
-        if (!outerLibCodesByCodeSystemName.TryGetValue(codeDef.codeSystem!.name!, out var codings))
+        var systemCode = new CqlCode(codeDefContext.CodeDef.id, csUrl);
+        libraryContext.CodesByName.Add(codeDefContext.CodeDef.name, systemCode);
+        if (!libraryContext.CodesByCodeSystemName.TryGetValue(codeDefContext.CodeDef.codeSystem!.name!, out var codings))
         {
             codings = new List<CqlCode>();
-            outerLibCodesByCodeSystemName.Add(codeDef.codeSystem!.name!, codings);
+            libraryContext.CodesByCodeSystemName.Add(codeDefContext.CodeDef.codeSystem!.name!, codings);
         }
 
         codings.Add(systemCode);
 
         var newCodingExpression = Expression.New(
             ConstructorInfos.CqlCode,
-            Expression.Constant(codeDef.id),
+            Expression.Constant(codeDefContext.CodeDef.id),
             Expression.Constant(csUrl),
             Expression.Constant(null, typeof(string)),
             Expression.Constant(null, typeof(string))!
         );
         var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
         var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-        definitions.Add(Library.NameAndVersion!, codeDef.name!, lambda);
+        libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, codeDefContext.CodeDef.name!, lambda);
     }
 
 }
