@@ -894,7 +894,7 @@ namespace Hl7.Cql.Compiler
                         var parameterName = "@this";
                         var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
                         var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                        var pathMemberType = TypeManager.TypeFor(byColumn, ctx);
+                        var pathMemberType = ctx.TypeFor(byColumn);
                         if (pathMemberType == null)
                         {
                             var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
@@ -1170,7 +1170,7 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw new ArgumentException($"The ValueSetRef at {valueSetRef.locator} is missing a name.", nameof(valueSetRef));
-            var type = TypeManager.TypeFor(valueSetRef, ctx, throwIfNotFound: true)!;
+            var type = ctx.TypeFor(valueSetRef, throwIfNotFound: true)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
 
             if (IsOrImplementsIEnumerableOfT(type))
@@ -1556,7 +1556,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression Null(Null @null, ExpressionBuilderContext ctx)
         {
-            var nullType = TypeManager.TypeFor(@null, ctx, false) ?? typeof(object);
+            var nullType = ctx.TypeFor(@null, false) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
@@ -1877,7 +1877,7 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = ctx.GetScopeExpression(op.scope!);
-                var expectedType = TypeManager.TypeFor(op, ctx, false) ?? typeof(object);
+                var expectedType = ctx.TypeFor(op, false) ?? typeof(object);
                 var pathMemberInfo = TypeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
                     TypeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -1900,7 +1900,7 @@ namespace Hl7.Cql.Compiler
                 //    var call = Expression.Call(method, propogate);
                 //    return call;
                 //}
-                var resultType = TypeManager.TypeFor(op, ctx, false).CheckNotNull( message:$"TypeManager failed to resolve type.");
+                var resultType = ctx.TypeFor(op, false).CheckNotNull( message:$"TypeManager failed to resolve type.");
                 if (resultType != propogate.Type)
                 {
                     propogate = ChangeType(propogate, resultType, ctx);
@@ -1928,7 +1928,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = TypeManager.TypeFor(op, ctx, throwIfNotFound: true)!;
+                    var expectedType = ctx.TypeFor(op, throwIfNotFound: true)!;
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }
@@ -2176,7 +2176,7 @@ namespace Hl7.Cql.Compiler
                     .SingleOrDefault(d => d.name == expressionRef.name);
                 if (def != null)
                 {
-                    expressionType = TypeManager.TypeFor(def, ctx);
+                    expressionType = ctx.TypeFor(def);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }
