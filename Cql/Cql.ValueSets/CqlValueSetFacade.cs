@@ -19,31 +19,37 @@ namespace Hl7.Cql.ValueSets
     /// Implements <see cref="IValueSetFacade"/>.
     /// </summary>
     [DebuggerDisplay("{Uri}")]
-    internal class ValueSetFacade : IValueSetFacade
+    internal class CqlValueSetFacade : IValueSetFacade
     {
         /// <summary>
-        /// Creates an interface for <paramref name="valueSet"/>.
+        /// Creates an interface for a <paramref name="valueSet"/> from a <see cref="IValueSetDictionary"/>.
         /// </summary>
         /// <param name="valueSet">The value set for this facade.</param>
         /// <param name="valueSets">The  <see cref="IValueSetDictionary"/> with all valuesets.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null" />.</exception>
         /// <exception cref="ArgumentException">If <paramref name="valueSet"/> has a <see langword="null" /> <see cref="CqlVocabulary.id"/> property.</exception>
-        public ValueSetFacade(CqlValueSet valueSet, IValueSetDictionary valueSets)
+        public CqlValueSetFacade(CqlValueSet valueSet, IValueSetDictionary valueSets)
         {
             if (valueSet is null)
                 throw new ArgumentNullException(nameof(valueSet));
-            Id = valueSet.id ?? throw new ArgumentException("Value set is missing an ID", nameof(valueSet));
-            ValueSets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
+            _canonical = valueSet.id ?? throw new ArgumentException("Value set is missing an ID", nameof(valueSet));
+            _valuesets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
         }
-        /// <summary>
-        /// The ID of the value set.
-        /// </summary>
-        public string Id { get; }
 
         /// <summary>
-        /// A link to the dictionary where the content of this valueset can be retrieved.
+        /// Creates an interface for a <paramref name="id"/> from a <see cref="IValueSetDictionary"/>.
         /// </summary>
-        public IValueSetDictionary ValueSets { get; }
+        /// <param name="id">The canonica of the value set for this facade.</param>
+        /// <param name="valueSets">The dictionary of valuesets to get the valueset from.</param>
+        /// <exception cref="ArgumentNullException">If any argument is <see langword="null" />.</exception>
+        public CqlValueSetFacade(string id, IValueSetDictionary valueSets)
+        {
+            _canonical = id ?? throw new ArgumentNullException(nameof(id));
+            _valuesets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
+        }
+
+        private readonly string _canonical;
+        private readonly IValueSetDictionary _valuesets;
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
@@ -56,12 +62,12 @@ namespace Hl7.Cql.ValueSets
                 return null;
             if (code.system != null)
             {
-                var @in = ValueSets.IsCodeInValueSet(Id, code.code, code.system);
+                var @in = _valuesets.IsCodeInValueSet(_canonical, code.code, code.system);
                 return @in;
             }
             else
             {
-                var @in = ValueSets.IsCodeInValueSet(Id, code.code);
+                var @in = _valuesets.IsCodeInValueSet(_canonical, code.code);
                 return @in;
             }
         }
@@ -76,7 +82,7 @@ namespace Hl7.Cql.ValueSets
         {
             if (code == null || system == null)
                 return null;
-            else return ValueSets.IsCodeInValueSet(Id, code, system);
+            else return _valuesets.IsCodeInValueSet(_canonical, code, system);
         }
 
         /// <summary>
@@ -84,7 +90,7 @@ namespace Hl7.Cql.ValueSets
         /// </summary>
         public IEnumerator<CqlCode> GetEnumerator()
         {
-            if (ValueSets.TryGetCodesInValueSet(Id, out var cqlCodes))
+            if (_valuesets.TryGetCodesInValueSet(_canonical, out var cqlCodes))
             {
                 return cqlCodes!.GetEnumerator();
             }

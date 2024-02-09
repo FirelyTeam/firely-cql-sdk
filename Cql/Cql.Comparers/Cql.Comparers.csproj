@@ -14,6 +14,7 @@
 		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
 		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.ValueSets" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
