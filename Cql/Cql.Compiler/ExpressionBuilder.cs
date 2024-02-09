@@ -139,7 +139,7 @@ namespace Hl7.Cql.Compiler
                 {
                     foreach (var def in Library.valueSets!)
                     {
-                        var ctor = typeof(CqlValueSet).GetConstructor(new[] { typeof(string), typeof(string) }) ?? throw new InvalidOperationException("CqlValueSet type requires a constructor with two string parameters.");
+                        var ctor = ConstructorInfos.CqlValueSet;
                         var @new = Expression.New(ctor, Expression.Constant(def.id, typeof(string)), Expression.Constant(def.version, typeof(string)));
                         var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
                         var lambda = Expression.Lambda(@new, contextParameter);
@@ -147,13 +147,7 @@ namespace Hl7.Cql.Compiler
                     }
                 }
 
-                var codeCtor = typeof(CqlCode).GetConstructor(new Type[]
-                {
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string)
-                })!;
+                var codeCtor = ConstructorInfos.CqlCode;
                 var codeSystemUrls = Library.codeSystems?
                     .ToDictionary(cs => cs.name, cs => cs.id) ?? new Dictionary<string, string>();
                 var codesByName = new Dictionary<string, CqlCode>();
@@ -223,7 +217,7 @@ namespace Hl7.Cql.Compiler
 
                 if (Library.concepts != null)
                 {
-                    var conceptCtor = typeof(CqlConcept).GetConstructor(new[] { typeof(IEnumerable<CqlCode>), typeof(string) });
+                    var conceptCtor = ConstructorInfos.CqlConcept;
                     foreach (var concept in Library.concepts)
                     {
                         if (concept.code.Length > 0)
@@ -418,7 +412,7 @@ namespace Hl7.Cql.Compiler
             return lambda;
         }
 
-        protected Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
+        internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
         {
             ctx = ctx.Deeper(op);
             Expression? expression;
@@ -1683,7 +1677,7 @@ namespace Hl7.Cql.Compiler
                         denominatorExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlRatio)}");
                 }
-                var ctor = typeof(CqlRatio).GetConstructor(new[] { typeof(CqlQuantity), typeof(CqlQuantity) })!;
+                var ctor = ConstructorInfos.CqlRatio;
                 var @new = Expression.New(ctor,
                     numeratorExpr ?? Expression.Default(typeof(CqlQuantity)),
                     denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
@@ -1702,7 +1696,7 @@ namespace Hl7.Cql.Compiler
                         unitExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
                 }
-                var ctor = typeof(CqlQuantity).GetConstructor(new[] { typeof(decimal?), typeof(string) })!;
+                var ctor = ConstructorInfos.CqlQuantity;
 
                 if (unitExpr is not null)
                     unitExpr = ChangeType(unitExpr, typeof(string), ctx);
@@ -1732,12 +1726,7 @@ namespace Hl7.Cql.Compiler
                         displayExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlCode)}");
                 }
-                var ctor = typeof(CqlCode).GetConstructor(new[] {
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string)
-                }) ?? throw new InvalidOperationException("CqlCode needs a constructor with four string arguments.");
+                var ctor = ConstructorInfos.CqlCode;
                 var @new = Expression.New(ctor,
                     codeExpr ?? Expression.Default(typeof(string)),
                     systemExpr ?? Expression.Default(typeof(string)),
@@ -1758,7 +1747,7 @@ namespace Hl7.Cql.Compiler
                         displayExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlConcept)}");
                 }
-                var ctor = typeof(CqlConcept).GetConstructor(new[] { typeof(IEnumerable<CqlCode>), typeof(string) })!;
+                var ctor = ConstructorInfos.CqlConcept;
                 var @new = Expression.New(ctor,
                     codesExpr ?? Expression.Default(typeof(IEnumerable<CqlCode>)),
                     displayExpr ?? Expression.Default(typeof(string)));
@@ -1833,8 +1822,7 @@ namespace Hl7.Cql.Compiler
                     if (IsOrImplementsIEnumerableOfT(value.Type))
                     {
                         var elementType = TypeResolver.GetListElementType(property.PropertyType)!;
-                        var listType = typeof(List<>).MakeGenericType(elementType);
-                        var ctor = listType.GetConstructor(new[] { typeof(IEnumerable<>).MakeGenericType(elementType) })!;
+                        var ctor = ConstructorInfos.ListOf(elementType);
                         var newList = Expression.New(ctor, value);
                         return Expression.Bind(memberInfo, newList);
                     }
@@ -2726,7 +2714,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
+        internal static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
         {
             var typeName = type.Name.ToLowerInvariant();
             if (type.IsGenericType)
@@ -2771,7 +2759,7 @@ namespace Hl7.Cql.Compiler
             var parameters = functionParameterTypes
                 .Select((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, context) + index))
                 .ToArray();
-            var ctor = typeof(NotImplementedException).GetConstructor(new[] { typeof(string) })!;
+            var ctor = ConstructorInfos.NotImplementedException;
             var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
             var @throw = Expression.Throw(@new, returnType);
             var lambda = Expression.Lambda(@throw, parameters);

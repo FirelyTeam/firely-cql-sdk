@@ -10,12 +10,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.CodeGeneration.NET.Visitors
 {
     internal class LazyBoolAssignmentVisitor : ExpressionVisitor
     {
-        private static readonly ConstructorInfo LazyCtor = typeof(Lazy<bool?>).GetConstructor(new[] { typeof(Func<bool?>) })!;
+        private static readonly ConstructorInfo LazyCtor = ConstructorInfos.LazyOfBoolCtor;
 
         public List<ParameterExpression> NewParameters { get; } = new List<ParameterExpression>();
 

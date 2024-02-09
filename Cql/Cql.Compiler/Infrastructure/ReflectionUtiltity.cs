@@ -16,4 +16,7 @@ internal static class ReflectionUtility
             ? mce.Method
             : null;
 
+    public static MethodInfo? GenericDefinitionMethodOf(Expression<Action> fnToMethodCall) =>
+        MethodOf(fnToMethodCall)
+        ?.GetGenericMethodDefinition();
 }
