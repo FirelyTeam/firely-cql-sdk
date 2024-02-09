@@ -32,7 +32,7 @@ internal partial class DefinitionsBuilder
             defaultValue
         );
 
-        var parameterType = libraryContext.TypeManager.TypeFor(parameter.parameterTypeSpecifier!, expressionBuilderContext);
+        var parameterType = expressionBuilderContext.TypeFor(parameter.parameterTypeSpecifier);
         var cast = Expression.Convert(resolveParam, parameterType);
         // e.g. (bundle, context) => context.Parameters["Measurement Period"]
         var lambda = Expression.Lambda(cast, expressionBuilderContext.RuntimeContextParameter);

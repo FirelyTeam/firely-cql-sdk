@@ -25,7 +25,8 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     internal class ExpressionBuilderContext
     {
-        internal ExpressionBuilderContext(ExpressionBuilder builder,
+        internal ExpressionBuilderContext(
+            ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers)
@@ -255,5 +256,10 @@ namespace Hl7.Cql.Compiler
                 : $"{libraryKey} line {locator}: {message}";
         }
 
+        public Type TypeFor(elm.TypeSpecifier resultTypeSpecifier) => 
+            Builder.TypeManager.TypeFor(resultTypeSpecifier, this);
+
+        public Type? TypeFor(elm.Element element, bool throwIfNotFound = true) =>
+            Builder.TypeManager.TypeFor(element, this, throwIfNotFound);
     }
 }

@@ -57,7 +57,6 @@ internal sealed partial class DefinitionsBuilder
 
         public Library Library { get; }
         public string LibraryKey => Library.NameAndVersion!;
-        public TypeManager TypeManager => _expressionBuilder.TypeManager;
         public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
         public ExpressionBuilderContext NewExpressionBuilderContext() =>

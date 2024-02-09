@@ -40,7 +40,7 @@ partial class DefinitionsBuilder
             {
                 if (operand.operandTypeSpecifier != null)
                 {
-                    var operandType = libraryContext.TypeManager.TypeFor(operand.operandTypeSpecifier, builderContext)!;
+                    var operandType = builderContext.TypeFor(operand.operandTypeSpecifier)!;
                     var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
                     var parameter = Expression.Parameter(operandType, opName);
                     builderContext.Operands.Add(operand.name!, parameter);
@@ -68,8 +68,7 @@ partial class DefinitionsBuilder
                 builderContext.LogError(message, expressionDef);
                 if (libraryContext.AllowUnresolvedExternals)
                 {
-                    var returnType =
-                        libraryContext.TypeManager.TypeFor(expressionDef, builderContext, throwIfNotFound: true)!;
+                    var returnType = builderContext.TypeFor(expressionDef, throwIfNotFound: true)!;
                     var paramTypes = new[] { typeof(CqlContext) }
                         .Concat(functionParameterTypes)
                         .ToArray();
