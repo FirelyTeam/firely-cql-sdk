@@ -148,7 +148,10 @@ namespace Hl7.Cql.Packaging
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
                 .OfType<elm.Library>()
                 // Processing this deterministically to reduce different exceptions when running this repeatedly
-                .OrderBy(lib => lib.NameAndVersion) 
+                //.OrderBy(lib => lib.NameAndVersion)
+                // REVIEW: Remove two lines below and uncomment one line above (Only used during debugging)
+                .OrderBy(lib => lib.Name!.ToLowerInvariant() == "hfbetablockertherapyforlvsdfhir" ? 0 : 1)
+                .ThenBy(lib => lib.NameAndVersion)
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();

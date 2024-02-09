@@ -11,6 +11,7 @@ using Hl7.Cql.Abstractions;
 using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -34,7 +35,7 @@ namespace Hl7.Cql.Compiler
             if (distinctOperandTypes.Length != 1)
                 throw new InvalidOperationException("All operand types should match when using Coalesce");
             var type = operands[0].Type;
-            if (type.IsValueType && !IsNullable(type))
+            if (type.IsValueType && !ReflectionUtility.IsNullable(type))
                 throw new NotSupportedException("Coalesce on value types is not defined.");
             else
             {
@@ -56,7 +57,7 @@ namespace Hl7.Cql.Compiler
         private Expression IsNull(elm.IsNull isn, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(isn.operand!, ctx);
-            if (operand.Type.IsValueType && IsNullable(operand.Type) == false)
+            if (operand.Type.IsValueType && ReflectionUtility.IsNullable(operand.Type) == false)
                 return Expression.Constant(false, typeof(bool?));
             else
             {

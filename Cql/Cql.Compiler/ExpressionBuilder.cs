@@ -20,6 +20,8 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Compiler.DefinitionBuilding;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Operators;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
@@ -33,9 +35,12 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal sealed partial class ExpressionBuilder
     {
+        private readonly DefinitionsBuilder.LibraryContext _libraryContext;
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
+        /// <param name="libraryContext"></param>
         /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="elm"/>.</param>
         /// <param name="elm">The <see cref="Library"/> this builder will build.</param>
@@ -43,16 +48,18 @@ namespace Hl7.Cql.Compiler
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         /// <exception cref="ArgumentException">If the <paramref name="elm"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(
+            DefinitionsBuilder.LibraryContext libraryContext, 
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             Library elm,
             ILogger<ExpressionBuilder> logger)
         {
-            OperatorBinding = operatorBinding;
+            _libraryContext = libraryContext.ArgNotNull();
             TypeManager = typeManager.ArgNotNull();
             Library = elm.ArgNotNull();
             Logger = logger.ArgNotNull();
             Library.identifier.ArgNotNull();
+            OperatorBinding = operatorBinding;
         }
 
         public ExpressionBuilderSettings Settings { get; } = new ExpressionBuilderSettings();
@@ -103,7 +110,7 @@ namespace Hl7.Cql.Compiler
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            ctx ??= new ExpressionBuilderContext(this, parameter, lambdas, new Dictionary<string, string>());
+            ctx ??= new ExpressionBuilderContext(_libraryContext, this, parameter, lambdas, new Dictionary<string, string>());
             lambdas = new DefinitionDictionary<LambdaExpression>();
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
@@ -1244,7 +1251,7 @@ namespace Hl7.Cql.Compiler
                 var elements = list.element?
                     .Select(ele => TranslateExpression(ele, ctx))
                     .ToArray() ?? new Expression[0];
-                if (!IsNullable(elementType) && elements.Any(exp => IsNullable(exp.Type)))
+                if (!ReflectionUtility.IsNullable(elementType) && elements.Any(exp => ReflectionUtility.IsNullable(exp.Type)))
                 {
                     for (int i = 0; i < elements.Length; i++)
                     {
@@ -1518,7 +1525,7 @@ namespace Hl7.Cql.Compiler
                 return true;
             if (to.IsAssignableFrom(from))
                 return true;
-            if (IsNullable(from) && !IsNullable(to))
+            if (ReflectionUtility.IsNullable(from) && !ReflectionUtility.IsNullable(to))
                 return true;
             if (IsOrImplementsIEnumerableOfT(from) && IsOrImplementsIEnumerableOfT(to))
             {
@@ -1566,7 +1573,7 @@ namespace Hl7.Cql.Compiler
             var type = TypeManager.Resolver.ResolveType(lit.valueType.Name!).CheckNotNull(message:(FormattableString?)$"Cannot resolve type for {lit.valueType}");
             var (value, convertedType) = ConvertLiteral(lit, type);
 
-            if (IsNullable(type))
+            if (ReflectionUtility.IsNullable(type))
             {
                 var changed = Expression.Constant(value, convertedType);
                 var asNullable = Expression.Convert(changed, type);
@@ -1579,7 +1586,7 @@ namespace Hl7.Cql.Compiler
         {
             if (type == null)
                 throw new NotImplementedException();
-            else if (IsNullable(type))
+            else if (ReflectionUtility.IsNullable(type))
             {
                 if (string.IsNullOrWhiteSpace(lit.value))
                     return (null, type);
@@ -1657,7 +1664,7 @@ namespace Hl7.Cql.Compiler
                         if (caseThen.Type != elseThen.Type)
                             caseThen = Expression.Convert(caseThen, elseThen.Type);
 
-                        if (IsNullable(caseWhen.Type))
+                        if (ReflectionUtility.IsNullable(caseWhen.Type))
                         {
                             caseWhen = Expression.Coalesce(caseWhen, Expression.Constant(false));
                         }
@@ -2283,15 +2290,14 @@ namespace Hl7.Cql.Compiler
             else return nullable;
         }
 
-        private static bool IsNullable(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
         private Expression HandleNullable(Expression expression, Type targetType)
         {
-            if (IsNullable(targetType))
+            if (ReflectionUtility.IsNullable(targetType))
             {
-                if (!IsNullable(expression.Type))
+                if (!ReflectionUtility.IsNullable(expression.Type))
                     expression = Expression.Convert(expression, targetType);
             }
-            else if (IsNullable(expression.Type))
+            else if (ReflectionUtility.IsNullable(expression.Type))
                 expression = CoalesceNullableValueType(expression);
             return expression;
         }
@@ -2436,7 +2442,7 @@ namespace Hl7.Cql.Compiler
         {
             if (type.IsEnum)
                 return true;
-            else if (IsNullable(type) && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
+            else if (ReflectionUtility.IsNullable(type) && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
                 return true;
             return false;
         }

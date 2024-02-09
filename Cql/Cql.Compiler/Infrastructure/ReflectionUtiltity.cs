@@ -27,4 +27,6 @@ internal static class ReflectionUtility
         (MethodOf(fnToMethodCall, expression)
         ?.GetGenericMethodDefinition())
         .CheckNotNull(message: $"Expression is not a generic method: '{expression}'.");
+
+    public static bool IsNullable(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 }

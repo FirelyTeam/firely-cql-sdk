@@ -31,7 +31,7 @@ internal sealed partial class DefinitionsBuilder
         return libraryContext.BuildDefinitions();
     }
 
-    private readonly record struct LibraryContext
+    internal readonly record struct LibraryContext
     {
         public LibraryContext(
             OperatorBinding operatorBinding,
@@ -39,8 +39,8 @@ internal sealed partial class DefinitionsBuilder
             Library library,
             ILogger<ExpressionBuilder> logger)
         {
-            _expressionBuilder = new ExpressionBuilder(operatorBinding, typeManager, library, logger);
-            Library = library;
+            Library = library.ArgNotNull();
+            _expressionBuilder = new ExpressionBuilder(this, operatorBinding, typeManager, library, logger);
         }
 
         public DefinitionDictionary<LambdaExpression> BuildDefinitions()
@@ -63,6 +63,7 @@ internal sealed partial class DefinitionsBuilder
 
         public ExpressionBuilderContext NewExpressionBuilderContext() =>
             new(
+                this,
                 _expressionBuilder,
                 Expression.Parameter(typeof(CqlContext), "context"),
                 _definitions,
@@ -225,6 +226,10 @@ internal sealed partial class DefinitionsBuilder
                 try
                 {
                     VisitExpressionDef(libraryContext, expressionDef);
+                }
+                catch (NotImplementedException)
+                {
+                    // REVIEW: Ignore for now and just coninue
                 }
                 catch (Exception e)
                 {

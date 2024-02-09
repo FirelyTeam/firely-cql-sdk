@@ -13,6 +13,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.DefinitionBuilding;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -26,11 +27,13 @@ namespace Hl7.Cql.Compiler
     internal class ExpressionBuilderContext
     {
         internal ExpressionBuilderContext(
+            DefinitionsBuilder.LibraryContext libraryContext, 
             ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers)
         {
+            _libraryContext = libraryContext.ArgNotNull();
             Builder = builder;
             RuntimeContextParameter = contextParameter;
             Definitions = definitions;
@@ -39,6 +42,7 @@ namespace Hl7.Cql.Compiler
 
         private ExpressionBuilderContext(ExpressionBuilderContext other)
         {
+            _libraryContext = other._libraryContext;
             Libraries = other.Libraries;
             Builder = other.Builder;
             RuntimeContextParameter = other.RuntimeContextParameter;
@@ -95,7 +99,11 @@ namespace Hl7.Cql.Compiler
             }
         }
 
+
         internal DefinitionDictionary<LambdaExpression> Definitions { get; }
+
+        private readonly DefinitionsBuilder.LibraryContext _libraryContext;
+        public string LibraryKey => _libraryContext.LibraryKey;
 
         /// <summary>
         /// Used for mappings such as:
