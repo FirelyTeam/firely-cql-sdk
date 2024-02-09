@@ -6,16 +6,6 @@ namespace Hl7.Cql.Compiler.DefinitionBuilding;
 #pragma warning disable CS1591
 internal partial class DefinitionsBuilder
 {
-    private void VisitIncludeDefs(
-        LibraryContext libraryContext, 
-        IncludeDef[] includesDefs)
-    {
-        foreach (var includeDef in includesDefs)
-        {
-            VisitIncludeDef(libraryContext, includeDef);
-        }
-    }
-
     private void VisitIncludeDef(
         LibraryContext libraryContext,
         IncludeDef includeDef)

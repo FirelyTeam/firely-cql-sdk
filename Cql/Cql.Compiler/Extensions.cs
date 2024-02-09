@@ -9,6 +9,9 @@ namespace Hl7.Cql.Compiler
 {
     internal static class Extensions
     {
+        public static string OrEmptyString(this string? value)
+            => value ?? "";
+
         public static T[] OrEmptyArray<T>(this T[]? array) 
             => array ?? Array.Empty<T>();
 

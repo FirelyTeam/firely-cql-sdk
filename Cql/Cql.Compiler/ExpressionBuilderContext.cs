@@ -257,9 +257,9 @@ namespace Hl7.Cql.Compiler
             var locator = element?.locator;
             if (!string.IsNullOrWhiteSpace(locator))
             {
-                return $"{Builder.ThisLibraryKey} line {locator}: {message}";
+                return $"{Builder.Library.NameAndVersion.NotNull()} line {locator}: {message}";
             }
-            else return $"{Builder.ThisLibraryKey}: {message}";
+            else return $"{Builder.Library.NameAndVersion.NotNull()}: {message}";
         }
 
     }

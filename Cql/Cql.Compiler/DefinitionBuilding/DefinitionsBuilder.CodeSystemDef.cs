@@ -9,16 +9,6 @@ namespace Hl7.Cql.Compiler.DefinitionBuilding;
 #pragma warning disable CS1591
 internal partial class DefinitionsBuilder
 {
-    private void VisitCodeSystemDefs(
-        LibraryContext libraryContext,
-        CodeSystemDef[] codeSystemDefs)
-    {
-        foreach (var codeSystemDef in codeSystemDefs)
-        {
-            VisitCodeSystemDef(libraryContext, codeSystemDef);
-        }
-    }
-
     private void VisitCodeSystemDef(
         LibraryContext libraryContext,
         CodeSystemDef codeSystem)
@@ -38,7 +28,7 @@ internal partial class DefinitionsBuilder
             var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, codeSystem.name, lambda);
+            libraryContext.AddDefinition(codeSystem.name, lambda);
         }
         else
         {
@@ -46,7 +36,7 @@ internal partial class DefinitionsBuilder
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(newArray, contextParameter);
-            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, codeSystem.name, lambda);
+            libraryContext.AddDefinition(codeSystem.name, lambda);
         }
     }
 }

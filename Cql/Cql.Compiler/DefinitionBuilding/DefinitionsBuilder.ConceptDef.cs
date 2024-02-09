@@ -10,16 +10,6 @@ namespace Hl7.Cql.Compiler.DefinitionBuilding;
 #pragma warning disable CS1591
 internal partial class DefinitionsBuilder
 {
-    private void VisitConceptDefs(
-        LibraryContext libraryContext,
-        ConceptDef[] conceptDefs)
-    {
-        foreach (var conceptDef in conceptDefs)
-        {
-            VisitConceptDef(libraryContext, conceptDef);
-        }
-    }
-
     private void VisitConceptDef(
         LibraryContext libraryContext,
         ConceptDef conceptDef)
@@ -30,7 +20,7 @@ internal partial class DefinitionsBuilder
                 Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(newArray, contextParameter);
-            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, conceptDef.name, lambda);
+            libraryContext.AddDefinition(conceptDef.name, lambda);
         }
         else
         {
@@ -56,7 +46,7 @@ internal partial class DefinitionsBuilder
             var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
             var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
             var lambda = Expression.Lambda(newConcept, contextParameter);
-            libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, conceptDef.name, lambda);
+            libraryContext.AddDefinition(conceptDef.name, lambda);
         }
     }
 

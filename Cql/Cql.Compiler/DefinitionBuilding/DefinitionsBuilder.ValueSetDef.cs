@@ -7,15 +7,6 @@ namespace Hl7.Cql.Compiler.DefinitionBuilding;
 #pragma warning disable CS1591
 internal partial class DefinitionsBuilder
 {
-    private void VisitValueSetDefs(
-        LibraryContext libraryContext,
-        ValueSetDef[] valueSetDefs)
-    {
-        foreach (ValueSetDef valueSetDef in valueSetDefs)
-        {
-            VisitValueSetDef(libraryContext, valueSetDef);
-        }
-    }
 
     private void VisitValueSetDef(
         LibraryContext libraryContext,
@@ -25,6 +16,6 @@ internal partial class DefinitionsBuilder
             Expression.Constant(valueSetDef.version, typeof(string)));
         var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
         var lambda = Expression.Lambda(@new, contextParameter);
-        libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, valueSetDef.name!, lambda);
+        libraryContext.AddDefinition(valueSetDef.name!, lambda);
     }
 }

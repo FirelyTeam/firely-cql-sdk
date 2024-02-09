@@ -8,19 +8,11 @@ namespace Hl7.Cql.Compiler.DefinitionBuilding;
 #pragma warning disable CS1591
 internal partial class DefinitionsBuilder
 {
-    private void VisitParameterDefs(
-        LibraryContext libraryContext,
-        ParameterDef[] parameterDefs)
-    {
-        foreach (var parameter in parameterDefs)
-            VisitParameterDef(libraryContext, parameter);
-    }
-
     private void VisitParameterDef(
         LibraryContext libraryContext,
         ParameterDef parameter)
     {
-        if (libraryContext.Definitions.ContainsKey(null, parameter.name!))
+        if (libraryContext.ContainsDefinition(parameter.name!))
             throw new InvalidOperationException(
                 $"There is already a definition named {parameter.name}");
 
@@ -35,7 +27,7 @@ internal partial class DefinitionsBuilder
         var resolveParam = Expression.Call(
             expressionBuilderContext.RuntimeContextParameter,
             typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
-            Expression.Constant(libraryContext.Library.NameAndVersion),
+            Expression.Constant(libraryContext.LibraryNameAndVersion),
             Expression.Constant(parameter.name),
             defaultValue
         );
@@ -44,6 +36,6 @@ internal partial class DefinitionsBuilder
         var cast = Expression.Convert(resolveParam, parameterType);
         // e.g. (bundle, context) => context.Parameters["Measurement Period"]
         var lambda = Expression.Lambda(cast, expressionBuilderContext.RuntimeContextParameter);
-        libraryContext.Definitions.Add(libraryContext.Library.NameAndVersion!, parameter.name!, lambda);
+        libraryContext.AddDefinition(parameter.name!, lambda);
     }
 }
