@@ -61,7 +61,7 @@ namespace Hl7.Cql.Fhir
                 if (dateTimes.TryGetValue(f.Value, out var datetime))
                     return datetime;
 
-                if(f.TryToDateTime(out var dt))
+                if (f.TryToDateTime(out var dt))
                 {
                     var cqlDateTime = new CqlDateTime(
                         dt!.Years!.Value, dt.Months,
@@ -75,7 +75,23 @@ namespace Hl7.Cql.Fhir
                 return null;
             });
             add((M.FhirDateTime f) => f.ToString());
-            add((M.FhirDateTime f) => f.TryToDateTime(out var dt) ? new CqlDate(dt!.Years!.Value, dt.Months, dt.Days) : null);
+            add((M.FhirDateTime f) => {
+                if (dateTimes.TryGetValue(f.Value, out var datetime))
+                    return datetime.DateOnly;
+
+                if (f.TryToDateTime(out var dt))
+                {
+                    var cqlDateTime = new CqlDateTime(
+                        dt!.Years!.Value, dt.Months,
+                        dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
+                        dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
+
+                    dateTimes.TryAdd(f.Value, cqlDateTime);
+                    return cqlDateTime.DateOnly;
+                }
+
+                return null;
+            });
             add((M.Quantity f) => new CqlQuantity(f.Value, f.Unit));
             add((M.Quantity f) => f.Value);
             add((M.Quantity f) => (int?)f.Value);
