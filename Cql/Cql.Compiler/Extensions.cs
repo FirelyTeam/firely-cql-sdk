@@ -21,10 +21,24 @@ namespace Hl7.Cql.Compiler
         public static IEnumerable<T> OrEmptyEnumerable<T>(this IEnumerable<T>? enumerable) 
             => enumerable ?? Enumerable.Empty<T>();
 
-        public static T NotNull<T>([NotNull]this T? value, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
+        public static T ArgNotNull<T>([NotNull]this T? value, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
         {
             if (value == null)
                 throw new ArgumentNullException(valueExpr);
+            return value;
+        }
+
+        public static T CheckNotNull<T>([NotNull] this T? value, FormattableString message, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
+        {
+            if (value == null)
+                throw new InvalidOperationException($"{message} - Expression was '{valueExpr}'");
+            return value;
+        }
+
+        public static string CheckNotNullOrWhitespace([NotNull] this string? value, FormattableString message, [CallerArgumentExpression(nameof(value))] string valueExpr = "")
+        {
+            if (string.IsNullOrWhiteSpace(value))
+                throw new InvalidOperationException($"{message} - Expression was '{valueExpr}'");
             return value;
         }
     }

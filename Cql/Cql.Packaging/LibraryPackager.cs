@@ -22,6 +22,7 @@ using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Runtime.Loader;
 using System.Text;
+using Hl7.Cql.Compiler.DefinitionBuilding;
 using elm = Hl7.Cql.Elm;
 using Library = Hl7.Fhir.Model.Library;
 
@@ -154,8 +155,7 @@ namespace Hl7.Cql.Packaging
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger, new(false));
-                var expressions = builder.Build();
+                var expressions = DefinitionsBuilder.Instance.BuildDefinitions(operatorBinding, typeManager, library!, builderLogger);
                 all.Merge(expressions);
             }
             var scw = new CSharpSourceCodeWriter(codeWriterLogger);
@@ -190,7 +190,7 @@ namespace Hl7.Cql.Packaging
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
+                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger);
                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }

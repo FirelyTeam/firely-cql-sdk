@@ -147,12 +147,13 @@ namespace Hl7.Cql.Compiler
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsInterval(left.Type, out var leftElementType))
             {
-                if (IsInterval(right.Type, out var rightElementType))
-                {
-                    return OperatorBinding.Bind(CqlOperator.IntervalSameAs, ctx.RuntimeContextParameter, left, right, precision);
-                }
-                else
+                if (!IsInterval(right.Type, out var rightElementType))
                     throw new InvalidOperationException();
+                else
+                {
+                    return OperatorBinding.Bind(CqlOperator.IntervalSameAs, ctx.RuntimeContextParameter, left, right,
+                        precision);
+                }
             }
             else
             {
@@ -167,12 +168,13 @@ namespace Hl7.Cql.Compiler
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsInterval(left.Type, out var leftElementType))
             {
-                if (IsInterval(right.Type, out var rightElementType))
-                {
-                    return OperatorBinding.Bind(CqlOperator.IntervalSameOrAfter, ctx.RuntimeContextParameter, left, right, precision);
-                }
-                else
+                if (!IsInterval(right.Type, out var rightElementType))
                     throw new InvalidOperationException();
+                else
+                {
+                    return OperatorBinding.Bind(CqlOperator.IntervalSameOrAfter, ctx.RuntimeContextParameter, left,
+                        right, precision);
+                }
             }
             else
             {

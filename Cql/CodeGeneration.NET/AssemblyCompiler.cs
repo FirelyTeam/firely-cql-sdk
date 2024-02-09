@@ -24,6 +24,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Hl7.Cql.Compiler.DefinitionBuilding;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -86,8 +87,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new(false));
-                var expressions = builder.Build();
+                var expressions = DefinitionsBuilder.Instance.BuildDefinitions(Binding, TypeManager, package, builderLogger);
                 all.Merge(expressions);
             }
 

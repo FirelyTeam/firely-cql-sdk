@@ -18,7 +18,7 @@ using elm = Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.Build"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Element, ExpressionBuilderContext)"/>.
@@ -197,26 +197,20 @@ namespace Hl7.Cql.Compiler
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key);
-                    if (!string.IsNullOrWhiteSpace(normalized))
-                    {
-                        scopes[normalized] = kvp.Value;
-                    }
-                    else throw new InvalidOperationException();
+                    var normalized = NormalizeIdentifier(kvp.Key).CheckNotNullOrWhitespace($"Identifier cannot be null or whitespace.");
+                    scopes[normalized] = kvp.Value;
                 }
             }
             else
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key);
-                    if (!string.IsNullOrWhiteSpace(normalized))
-                    {
-                        if (scopes.ContainsKey(normalized))
-                            throw new InvalidOperationException($"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
-                        scopes.Add(normalized, kvp.Value);
-                    }
-                    else throw new InvalidOperationException();
+                    var normalized = NormalizeIdentifier(kvp.Key).CheckNotNullOrWhitespace($"Identifier cannot be null or whitespace.");
+                    
+                    if (scopes.ContainsKey(normalized))
+                        throw new InvalidOperationException(
+                            $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
+                    scopes.Add(normalized, kvp.Value);
                 }
             }
             var subContext = new ExpressionBuilderContext(this, scopes);
@@ -257,9 +251,9 @@ namespace Hl7.Cql.Compiler
             var locator = element?.locator;
             if (!string.IsNullOrWhiteSpace(locator))
             {
-                return $"{Builder.Library.NameAndVersion.NotNull()} line {locator}: {message}";
+                return $"{Builder.Library.NameAndVersion.ArgNotNull()} line {locator}: {message}";
             }
-            else return $"{Builder.Library.NameAndVersion.NotNull()}: {message}";
+            else return $"{Builder.Library.NameAndVersion.ArgNotNull()}: {message}";
         }
 
     }

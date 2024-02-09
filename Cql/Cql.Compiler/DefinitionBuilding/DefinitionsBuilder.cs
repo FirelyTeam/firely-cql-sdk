@@ -26,7 +26,7 @@ internal partial class DefinitionsBuilder
         Library library,
         ILogger<ExpressionBuilder> logger)
     {
-        library.NameAndVersion.NotNull();
+        library.NameAndVersion.ArgNotNull();
 
         ExpressionBuilder expressionBuilder = new ExpressionBuilder(operatorBinding, typeManager, library, logger);
 
@@ -67,7 +67,7 @@ internal partial class DefinitionsBuilder
         private readonly DefinitionDictionary<LambdaExpression> _definitions;
 
         public Library Library { get; }
-        public string LibraryNameAndVersion => Library.NameAndVersion.NotNull();
+        public string LibraryNameAndVersion => Library.NameAndVersion.ArgNotNull();
         public Dictionary<string, string> LocalLibraryIdentifiers { get; }
         public Dictionary<string, string> CodeSystemUrls { get; }
         public Dictionary<string, CqlCode> CodesByName { get; }
