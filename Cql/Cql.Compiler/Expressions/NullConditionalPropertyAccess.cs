@@ -22,7 +22,7 @@ namespace Hl7.Cql.Compiler
         public MemberExpression MemberExpression { get; private set; }
         private readonly Type resultType;
 
-        public NullConditionalMemberExpression(MemberExpression expression)
+        private NullConditionalMemberExpression(MemberExpression expression)
         {
             if (expression.Expression is null)
                 throw new ArgumentException("Expression is not applicable to static member access");
@@ -64,7 +64,7 @@ namespace Hl7.Cql.Compiler
 
         public override Type Type => resultType;
 
-        public NullConditionalMemberExpression Update(Expression? expression)
+        private NullConditionalMemberExpression Update(Expression? expression)
         {
             if (expression is null) return this;
 

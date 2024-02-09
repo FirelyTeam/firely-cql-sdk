@@ -21,14 +21,14 @@ namespace Hl7.Cql.Compiler
     internal partial class ExpressionBuilder
     {
 
-        protected Expression CalculateAge(elm.CalculateAge e, ExpressionBuilderContext ctx)
+        private Expression CalculateAge(elm.CalculateAge e, ExpressionBuilderContext ctx)
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand!, ctx);
             return OperatorBinding.Bind(CqlOperator.CalculateAge, ctx.RuntimeContextParameter, birthDate, units);
         }
 
-        protected Expression CalculateAgeAt(elm.CalculateAgeAt e, ExpressionBuilderContext ctx)
+        private Expression CalculateAgeAt(elm.CalculateAgeAt e, ExpressionBuilderContext ctx)
         {
             var units = Precision(e.precision, e.precisionSpecified);
             var birthDate = TranslateExpression(e.operand![0], ctx);
@@ -37,16 +37,16 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression InValueSet(elm.InValueSet e, ExpressionBuilderContext ctx)
+        private Expression InValueSet(elm.InValueSet e, ExpressionBuilderContext ctx)
         {
             var code = TranslateExpression(e.code!, ctx);
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
             var codeType = code.Type;
-            if (codeType == TypeResolver.CodeType)
+            if (codeType == TypeManager.Resolver.CodeType)
             {
                 return OperatorBinding.Bind(CqlOperator.CodeInValueSet, ctx.RuntimeContextParameter, code, valueSet);
             }
-            else if (codeType == TypeResolver.ConceptType)
+            else if (codeType == TypeManager.Resolver.ConceptType)
             {
                 return OperatorBinding.Bind(CqlOperator.ConceptInValueSet, ctx.RuntimeContextParameter, code, valueSet);
             }
@@ -62,13 +62,13 @@ namespace Hl7.Cql.Compiler
             var codes = TranslateExpression(e.codes!, ctx);
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
                 throw new ArgumentException("Only List types are allowed for AnyInValueSet", nameof(e));
-            var codeType = TypeResolver.GetListElementType(codes.Type, true)!;
+            var codeType = TypeManager.Resolver.GetListElementType(codes.Type, true)!;
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
-            if (codeType == TypeResolver.CodeType)
+            if (codeType == TypeManager.Resolver.CodeType)
             {
                 return OperatorBinding.Bind(CqlOperator.CodesInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
             }
-            else if (codeType == TypeResolver.ConceptType)
+            else if (codeType == TypeManager.Resolver.ConceptType)
             {
                 return OperatorBinding.Bind(CqlOperator.ConceptsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
             }
@@ -80,7 +80,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        public Expression ExpandValueSet(elm.ExpandValueSet e, ExpressionBuilderContext ctx)
+        private Expression ExpandValueSet(elm.ExpandValueSet e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
             var call = CallCreateValueSetFacade(ctx, operand);

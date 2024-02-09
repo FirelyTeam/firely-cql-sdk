@@ -16,14 +16,14 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression Equal(elm.Equal eq, ExpressionBuilderContext ctx)
+        private Expression Equal(elm.Equal eq, ExpressionBuilderContext ctx)
         {
             var lhsExpression = TranslateExpression(eq.operand![0], ctx);
             var rhsExpression = TranslateExpression(eq.operand![1], ctx);
             return Equal(lhsExpression, rhsExpression, ctx);
         }
 
-        protected Expression NotEqual(elm.NotEqual eq, ExpressionBuilderContext ctx)
+        private Expression NotEqual(elm.NotEqual eq, ExpressionBuilderContext ctx)
         {
             var lhsExpression = TranslateExpression(eq.operand![0], ctx);
             var rhsExpression = TranslateExpression(eq.operand![1], ctx);
@@ -32,7 +32,7 @@ namespace Hl7.Cql.Compiler
             return not;
         }
 
-        protected Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)
+        private Expression Equal(Expression left, Expression right, ExpressionBuilderContext ctx)
         {
             if (IsEnum(left.Type))
             {
@@ -67,10 +67,10 @@ namespace Hl7.Cql.Compiler
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type, true)!;
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type, true)!;
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(right.Type, true)!;
+                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
                         throw new InvalidOperationException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
                     var call = OperatorBinding.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
@@ -85,16 +85,16 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Equivalent(elm.Equivalent eqv, ExpressionBuilderContext ctx)
+        private Expression Equivalent(elm.Equivalent eqv, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(eqv.operand![0], ctx);
             var right = TranslateExpression(eqv.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type);
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(right.Type);
+                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                     {
                         // This appears in the CQL tests:
@@ -116,15 +116,15 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Greater(elm.Greater e, ExpressionBuilderContext ctx) =>
+        private Expression Greater(elm.Greater e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Greater, e, ctx);
 
-        protected Expression GreaterOrEqual(elm.GreaterOrEqual e, ExpressionBuilderContext ctx) =>
+        private Expression GreaterOrEqual(elm.GreaterOrEqual e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.GreaterOrEqual, e, ctx);
 
-        protected Expression Less(elm.Less e, ExpressionBuilderContext ctx) =>
+        private Expression Less(elm.Less e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Less, e, ctx);
-        protected Expression LessOrEqual(elm.LessOrEqual e, ExpressionBuilderContext ctx) =>
+        private Expression LessOrEqual(elm.LessOrEqual e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.LessOrEqual, e, ctx);
 
 

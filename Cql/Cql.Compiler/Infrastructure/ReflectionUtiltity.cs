@@ -11,7 +11,7 @@ internal static class ReflectionUtility
             ? ne.Constructor
             : null;
 
-    public static MethodInfo? MethodOf(Expression<Action> fnToMethodCall)
+    private static MethodInfo? MethodOf(Expression<Action> fnToMethodCall)
         => fnToMethodCall.Body is MethodCallExpression mce
             ? mce.Method
             : null;

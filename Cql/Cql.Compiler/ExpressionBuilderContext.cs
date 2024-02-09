@@ -58,7 +58,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
         /// </summary>
-        public ExpressionBuilder Builder { get; }
+        private ExpressionBuilder Builder { get; }
         /// <summary>
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
         /// </summary>
@@ -108,7 +108,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal IDictionary<string, ParameterExpression> Operands { get; } = new Dictionary<string, ParameterExpression>();
 
-        internal IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; } = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+        private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; } = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
 
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
@@ -246,7 +246,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        internal string FormatMessage(string message, elm.Element? element)
+        private string FormatMessage(string message, elm.Element? element)
         {
             var locator = element?.locator;
             var libraryKey = Builder.Library.NameAndVersion.CheckNotNull();

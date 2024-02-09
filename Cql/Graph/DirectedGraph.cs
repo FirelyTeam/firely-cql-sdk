@@ -15,7 +15,7 @@ using System.Text.Json;
 
 namespace Hl7.Cql.Graph
 {
-    internal class DirectedGraph
+    internal sealed class DirectedGraph
     {
 
         public DirectedGraphNode StartNode { get; set; } = new DirectedGraphNode { NodeId = DirectedGraphNode.StartId };
@@ -290,7 +290,7 @@ namespace Hl7.Cql.Graph
             return hasCycle;
         }
 
-        public virtual ExecutedPath<TContext> Run<TContext>(TContext context, IList<DirectedGraphEdge> edges)
+        public ExecutedPath<TContext> Run<TContext>(TContext context, IList<DirectedGraphEdge> edges)
             where TContext : ExecutionContext
         {
             var executedPath = new ExecutedPath<TContext>(context);

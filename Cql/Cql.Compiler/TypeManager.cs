@@ -23,12 +23,12 @@ namespace Hl7.Cql.Compiler
     /// The TypeManager class maps ELM types to .NET types usually through its <see cref="Resolver"/>, and
     /// also creates new types (e.g. for Tuples) as needed.
     /// </summary>
-    internal class TypeManager
+    internal sealed class TypeManager
     {
         /// <summary>
         /// Gets the assembly name for any generated types created by this type manager.
         /// </summary>
-        public string AssemblyName { get; }
+        private string AssemblyName { get; }
         /// <summary>
         /// Gets the <see cref="TypeResolver"/> this TypeManager uses.
         /// </summary>
@@ -36,7 +36,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the namespace for generated tuple types as supplied in the constructor.
         /// </summary>
-        public string TupleTypeNamespace { get; }
+        private string TupleTypeNamespace { get; }
         /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
         /// </summary>
@@ -44,7 +44,7 @@ namespace Hl7.Cql.Compiler
 
         private readonly List<Type> TupleTypeList = new List<Type>();
         private ModuleBuilder ModuleBuilder { get; }
-        internal Hasher Hasher { get; } = new Hasher();
+        private Hasher Hasher { get; } = new Hasher();
 
         /// <summary>
         /// Creates an instance with the specified resolver, assembly name, and tuple type namespace.
@@ -236,7 +236,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext context, Func<Type, Type>? changeType)
+        private Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext context, Func<Type, Type>? changeType)
         {
             var elementInfo = elements!
                                 .ToDictionary(el => el.name, el =>
@@ -298,7 +298,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
         /// <returns>The unique tuple type name.</returns>
-        protected virtual string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
+        private string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)

@@ -13,7 +13,7 @@ using System.Linq.Expressions;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal class VariableNameGenerator
+    internal sealed class VariableNameGenerator
     {
         private readonly object SyncRoot = new();
         public string Postfix { get; }
@@ -60,7 +60,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Letters = state;
         }
 
-        public virtual string Next()
+        public string Next()
         {
             lock (SyncRoot)
             {

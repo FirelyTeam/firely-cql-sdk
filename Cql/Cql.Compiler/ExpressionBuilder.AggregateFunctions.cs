@@ -7,50 +7,50 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression AllTrue(elm.AllTrue e, ExpressionBuilderContext ctx) =>
+        private Expression AllTrue(elm.AllTrue e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.AllTrue, e, ctx);
 
-        protected Expression AnyTrue(elm.AnyTrue e, ExpressionBuilderContext ctx) =>
+        private Expression AnyTrue(elm.AnyTrue e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.AnyTrue, e, ctx);
 
-        protected Expression Avg(elm.Avg e, ExpressionBuilderContext ctx) =>
+        private Expression Avg(elm.Avg e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.Avg, e, ctx);
 
-        protected Expression Count(elm.Count e, ExpressionBuilderContext ctx) =>
+        private Expression Count(elm.Count e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.Count, e, ctx);
 
-        protected Expression? GeometricMean(elm.GeometricMean e, ExpressionBuilderContext ctx) =>
+        private Expression? GeometricMean(elm.GeometricMean e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.GeometricMean, e, ctx);
 
-        protected Expression Max(elm.Max e, ExpressionBuilderContext ctx) =>
+        private Expression Max(elm.Max e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.MaxElementInList, e, ctx);
 
-        protected Expression Min(elm.Min e, ExpressionBuilderContext ctx) =>
+        private Expression Min(elm.Min e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.MinElementInList, e, ctx);
 
-        protected Expression? Median(elm.Median e, ExpressionBuilderContext ctx) =>
+        private Expression? Median(elm.Median e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.Median, e, ctx);
 
-        protected Expression? Mode(elm.Mode e, ExpressionBuilderContext ctx) =>
+        private Expression? Mode(elm.Mode e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.Mode, e, ctx);
 
 
-        protected Expression? PopulationStdDev(elm.PopulationStdDev e, ExpressionBuilderContext ctx) =>
+        private Expression? PopulationStdDev(elm.PopulationStdDev e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.PopulationStdDev, e, ctx);
 
-        protected Expression? PopulationVariance(elm.PopulationVariance e, ExpressionBuilderContext ctx) =>
+        private Expression? PopulationVariance(elm.PopulationVariance e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.PopulationVariance, e, ctx);
 
-        protected Expression Product(elm.Product e, ExpressionBuilderContext ctx) =>
+        private Expression Product(elm.Product e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.Product, e, ctx);
 
-        protected Expression? StdDev(elm.StdDev e, ExpressionBuilderContext ctx) =>
+        private Expression? StdDev(elm.StdDev e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.StdDev, e, ctx);
 
-        protected Expression Sum(elm.Sum e, ExpressionBuilderContext ctx) =>
+        private Expression Sum(elm.Sum e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.Sum, e, ctx);
 
-        protected Expression? Variance(elm.Variance e, ExpressionBuilderContext ctx) =>
+        private Expression? Variance(elm.Variance e, ExpressionBuilderContext ctx) =>
             AggregateOperator(CqlOperator.Variance, e, ctx);
     }
 }

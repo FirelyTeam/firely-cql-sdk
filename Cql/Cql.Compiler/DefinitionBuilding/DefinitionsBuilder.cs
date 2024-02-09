@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Elm;
@@ -11,7 +10,7 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler.DefinitionBuilding;
 
-internal partial class DefinitionsBuilder
+internal sealed partial class DefinitionsBuilder
 {
     public static DefinitionsBuilder Instance { get; } = new();
 

@@ -72,10 +72,10 @@ namespace Hl7.Cql.Compiler
 
         public override Type Type => GetReturnTypeFromDelegateType(DefinitionType);
 
-        public Expression Definitions { get; }
+        private Expression Definitions { get; }
         public string LibraryName { get; }
         public string DefinitionName { get; }
-        public Expression CqlContextParameter { get; }
-        public Type DefinitionType { get; }
+        private Expression CqlContextParameter { get; }
+        private Type DefinitionType { get; }
     }
 }
