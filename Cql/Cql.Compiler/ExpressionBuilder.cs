@@ -12,7 +12,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,6 +20,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -28,45 +28,35 @@ using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePa
 
 namespace Hl7.Cql.Compiler
 {
-    internal record ExpressionBuilderOptions(bool EmitStackTraces);
-
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>
-    internal partial class ExpressionBuilder
+    internal sealed partial class ExpressionBuilder
     {
-        private readonly ExpressionBuilderOptions options;
-
         /// <summary>
         /// Creates an instance.
         /// </summary>
         /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="elm"/>.</param>
         /// <param name="elm">The <see cref="Library"/> this builder will build.</param>
-        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="Build"/>.</param>
-        /// <param name="options">Optional features for the codegenerator.</param>
+        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         /// <exception cref="ArgumentException">If the <paramref name="elm"/> does not have a valid library or identifier.</exception>
-        public ExpressionBuilder(OperatorBinding operatorBinding,
+        public ExpressionBuilder(
+            OperatorBinding operatorBinding,
             TypeManager typeManager,
             Library elm,
-            ILogger<ExpressionBuilder> logger,
-            ExpressionBuilderOptions? options = null)
+            ILogger<ExpressionBuilder> logger)
         {
             OperatorBinding = operatorBinding;
-            TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
-            Library = elm ?? throw new ArgumentNullException(nameof(elm));
-            Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            this.options = options ?? new(EmitStackTraces: false);
-            if (Library.identifier == null)
-                throw new ArgumentException("Package is missing a library identifier", nameof(elm));
+            TypeManager = typeManager.ArgNotNull();
+            Library = elm.ArgNotNull();
+            Logger = logger.ArgNotNull();
+            Library.identifier.ArgNotNull();
         }
 
-        /// <summary>
-        /// Gets the settings used during <see cref="Build"/>.
-        /// These should be set as desired before <see cref="Build"/> is called.
-        /// </summary>
         public ExpressionBuilderSettings Settings { get; } = new ExpressionBuilderSettings();
+
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
         /// to a factory which will produce a <see cref="LambdaExpression"/> given the values of <see cref="ParameterExpression"/>.
@@ -74,13 +64,13 @@ namespace Hl7.Cql.Compiler
         /// <remarks>
         /// This function can be used to provide .NET native functions in place of ELM functions, and should also be used to implement
         /// functions defined in CQL with the <code>external</code> keyword.
-        /// </remarks>
+        /// </remarks> 
         public IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
             = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         /// <summary>
         /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
         /// </summary>
-        public OperatorBinding OperatorBinding { get; }
+        private OperatorBinding OperatorBinding { get; }
         /// <summary>
         /// The <see cref="TypeManager"/> used to resolve and create types referenced in <see cref="Library"/>.
         /// </summary>
@@ -89,311 +79,13 @@ namespace Hl7.Cql.Compiler
         /// The <see cref="Library"/> this builder will build.
         /// </summary>
         public Library Library { get; }
-        protected internal TypeResolver TypeResolver => TypeManager.Resolver;
 
-        protected internal ILogger<ExpressionBuilder> Logger { get; }
+        internal ILogger<ExpressionBuilder> Logger { get; }
 
         /// <summary>
         /// The expression visitors that will be executed (in order) on translated expressions.
         /// </summary>
-        public IList<IExpressionMutator> ExpressionMutators { get; } = new List<IExpressionMutator>();
-
-        internal string ThisLibraryKey => Library.NameAndVersion
-            ?? throw new InvalidOperationException("Name and version is null.");
-
-        /// <summary>
-        /// Builds <see cref="LambdaExpression"/>s for each definition in <see cref="Library"/>.
-        /// </summary>
-        /// <returns>The <see cref="DefinitionDictionary{LambdaExpression}"/> for this <see cref="Library"/>.</returns>
-        /// <exception cref="InvalidOperationException">If any fatal translation errors occur.</exception>
-        public DefinitionDictionary<LambdaExpression> Build()
-        {
-            var definitions = new DefinitionDictionary<LambdaExpression>();
-            var localLibraryIdentifiers = new Dictionary<string, string>();
-
-            var version = Library.identifier!.version;
-            if (string.IsNullOrWhiteSpace(version))
-                version = "1.0.0";
-
-            if (!string.IsNullOrWhiteSpace(Library.identifier!.id))
-            {
-                var nav = ThisLibraryKey;
-                if (Library.includes != null)
-                {
-                    foreach (var def in Library!.includes!)
-                    {
-                        var alias = !string.IsNullOrWhiteSpace(def.localIdentifier)
-                            ? def.localIdentifier!
-                            : def.path!;
-
-                        var libNav = def.NameAndVersion();
-                        if (libNav != null)
-                        {
-                            localLibraryIdentifiers.Add(alias, libNav);
-                        }
-                        else throw new InvalidOperationException($"Include {def.localId} does not have a well-formed name and version");
-                    }
-                }
-
-                if (Library.valueSets != null)
-                {
-                    foreach (var def in Library.valueSets!)
-                    {
-                        var ctor = typeof(CqlValueSet).GetConstructor(new[] { typeof(string), typeof(string) }) ?? throw new InvalidOperationException("CqlValueSet type requires a constructor with two string parameters.");
-                        var @new = Expression.New(ctor, Expression.Constant(def.id, typeof(string)), Expression.Constant(def.version, typeof(string)));
-                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                        var lambda = Expression.Lambda(@new, contextParameter);
-                        definitions.Add(ThisLibraryKey, def.name!, lambda);
-                    }
-                }
-
-                var codeCtor = typeof(CqlCode).GetConstructor(new Type[]
-                {
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string)
-                })!;
-                var codeSystemUrls = Library.codeSystems?
-                    .ToDictionary(cs => cs.name, cs => cs.id) ?? new Dictionary<string, string>();
-                var codesByName = new Dictionary<string, CqlCode>();
-                var codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
-                if (Library.codes != null)
-                {
-                    HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
-
-                    foreach (var code in Library.codes)
-                    {
-                        if (code.codeSystem == null)
-                            throw new InvalidOperationException("Code definition has a null codeSystem node.");
-                        if (!codeSystemUrls.TryGetValue(code.codeSystem.name, out var csUrl))
-                            throw new InvalidOperationException($"Undefined code system {code.codeSystem.name!}");
-                        if (!foundCodeNameCodeSystemUrls.Add((code.name, csUrl)))
-                            throw new InvalidOperationException($"Duplicate code name detected: {code.name} from {code.codeSystem.name} ({csUrl})");
-                        var systemCode = new CqlCode(code.id, csUrl, null, null);
-                        codesByName.Add(code.name, systemCode);
-                        if (!codesByCodeSystemName.TryGetValue(code.codeSystem!.name!, out var codings))
-                        {
-                            codings = new List<CqlCode>();
-                            codesByCodeSystemName.Add(code.codeSystem!.name!, codings);
-                        }
-                        codings.Add(systemCode);
-
-                        var newCodingExpression = Expression.New(codeCtor,
-                            Expression.Constant(code.id),
-                            Expression.Constant(csUrl),
-                            Expression.Constant(null, typeof(string)),
-                            Expression.Constant(null, typeof(string))!
-                        );
-                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                        var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-                        definitions.Add(ThisLibraryKey, code.name!, lambda);
-                    }
-                }
-
-                if (Library.codeSystems != null)
-                {
-                    foreach (var codeSystem in Library.codeSystems)
-                    {
-                        if (codesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
-                        {
-                            var initMembers = codes
-                                .Select(coding =>
-                                    Expression.New(codeCtor,
-                                        Expression.Constant(coding.code),
-                                        Expression.Constant(coding.system),
-                                        Expression.Constant(null, typeof(string)),
-                                        Expression.Constant(null, typeof(string))
-                                    ))
-                                .ToArray();
-                            var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                            var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                            var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-                            definitions.Add(ThisLibraryKey, codeSystem.name, lambda);
-                        }
-                        else
-                        {
-                            var newArray = Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-                            var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                            var lambda = Expression.Lambda(newArray, contextParameter);
-                            definitions.Add(ThisLibraryKey, codeSystem.name, lambda);
-                        }
-                    }
-                }
-
-                if (Library.concepts != null)
-                {
-                    var conceptCtor = typeof(CqlConcept).GetConstructor(new[] { typeof(IEnumerable<CqlCode>), typeof(string) });
-                    foreach (var concept in Library.concepts)
-                    {
-                        if (concept.code.Length > 0)
-                        {
-                            var initMembers = new Expression[concept.code.Length];
-                            for (int i = 0; i < concept.code.Length; i++)
-                            {
-                                var codeRef = concept.code[i];
-                                if (!codesByName.TryGetValue(codeRef.name, out var systemCode))
-                                    throw new InvalidOperationException($"Code {codeRef.name} in concept {concept.name} is not defined.");
-                                initMembers[i] = Expression.New(codeCtor,
-                                        Expression.Constant(systemCode.code),
-                                        Expression.Constant(systemCode.system),
-                                        Expression.Constant(null, typeof(string)),
-                                        Expression.Constant(null, typeof(string))
-                                );
-                            }
-                            var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
-                            var asEnumerable = Expression.TypeAs(arrayOfCodesInitializer, typeof(IEnumerable<CqlCode>));
-                            var display = Expression.Constant(concept.display, typeof(string));
-                            var newConcept = Expression.New(conceptCtor!, asEnumerable, display);
-                            var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                            var lambda = Expression.Lambda(newConcept, contextParameter);
-                            definitions.Add(ThisLibraryKey, concept.name, lambda);
-                        }
-                        else
-                        {
-                            var newArray = Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
-                            var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                            var lambda = Expression.Lambda(newArray, contextParameter);
-                            definitions.Add(ThisLibraryKey, concept.name, lambda);
-                        }
-                    }
-                }
-
-                if (Library.parameters != null)
-                {
-                    foreach (var parameter in Library.parameters ?? Enumerable.Empty<elm.ParameterDef>())
-                    {
-                        if (definitions.ContainsKey(null, parameter.name!))
-                            throw new InvalidOperationException($"There is already a definition named {parameter.name}");
-
-                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                        var buildContext = new ExpressionBuilderContext(this,
-                            contextParameter,
-                            definitions,
-                            localLibraryIdentifiers);
-
-                        Expression? defaultValue = null;
-                        if (parameter.@default != null)
-                            defaultValue = Expression.TypeAs(TranslateExpression(parameter.@default, buildContext), typeof(object));
-                        else defaultValue = Expression.Constant(null, typeof(object));
-
-                        var resolveParam = Expression.Call(
-                            contextParameter,
-                            typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
-                            Expression.Constant(Library.NameAndVersion),
-                            Expression.Constant(parameter.name),
-                            defaultValue
-                        );
-
-                        var parameterType = TypeManager.TypeFor(parameter.parameterTypeSpecifier!, buildContext);
-                        var cast = Expression.Convert(resolveParam, parameterType);
-                        // e.g. (bundle, context) => context.Parameters["Measurement Period"]
-                        var lambda = Expression.Lambda(cast, contextParameter);
-
-                        definitions.Add(ThisLibraryKey, parameter.name!, lambda);
-                    }
-                }
-
-                foreach (var def in Library.statements ?? Enumerable.Empty<elm.ExpressionDef>())
-                {
-                    if (def.expression != null)
-                    {
-                        var contextParameter = Expression.Parameter(typeof(CqlContext), "context");
-                        var buildContext = new ExpressionBuilderContext(this,
-                            contextParameter,
-                            definitions,
-                            localLibraryIdentifiers);
-
-                        if (string.IsNullOrWhiteSpace(def.name))
-                        {
-                            var message = $"Definition with local ID {def.localId} does not have a name.  This is not allowed.";
-                            buildContext.LogError(message, def);
-                            throw new InvalidOperationException(message);
-                        }
-                        var customKey = $"{nav}.{def.name}";
-                        Type[] functionParameterTypes = Type.EmptyTypes;
-                        var parameters = new[] { buildContext.RuntimeContextParameter };
-                        var function = def as FunctionDef;
-                        if (function != null && function.operand != null)
-                        {
-                            functionParameterTypes = new Type[function.operand!.Length];
-                            int i = 0;
-                            foreach (var operand in function.operand!)
-                            {
-                                if (operand.operandTypeSpecifier != null)
-                                {
-                                    var operandType = TypeManager.TypeFor(operand.operandTypeSpecifier, buildContext)!;
-                                    var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
-                                    var parameter = Expression.Parameter(operandType, opName);
-                                    buildContext.Operands.Add(operand.name!, parameter);
-                                    functionParameterTypes[i] = parameter.Type;
-                                    i += 1;
-                                }
-                                else throw new InvalidOperationException($"Operand for function {def.name} is missing its {nameof(operand.operandTypeSpecifier)} property");
-                            }
-
-                            parameters = parameters
-                                .Concat(buildContext.Operands.Values)
-                                .ToArray();
-                            if (CustomImplementations.TryGetValue(customKey, out var factory) && factory != null)
-                            {
-                                var customLambda = factory(parameters);
-                                definitions.Add(ThisLibraryKey, def.name, functionParameterTypes, customLambda);
-                                continue;
-                            }
-                            else if (function?.external ?? false)
-                            {
-                                var message = $"{customKey} is declared external, but {nameof(CustomImplementations)} does not define this function.";
-                                buildContext.LogError(message, def);
-                                if (Settings.AllowUnresolvedExternals)
-                                {
-                                    var returnType = TypeManager.TypeFor(def, buildContext, throwIfNotFound: true)!;
-                                    var paramTypes = new[] { typeof(CqlContext) }
-                                        .Concat(functionParameterTypes)
-                                        .ToArray();
-                                    var notImplemented = NotImplemented(customKey, paramTypes, returnType, buildContext);
-                                    definitions.Add(ThisLibraryKey, def.name, paramTypes, notImplemented);
-                                    continue;
-                                }
-                                else throw new InvalidOperationException(message);
-                            }
-
-                        }
-                        buildContext = buildContext.Deeper(def);
-                        var bodyExpression = TranslateExpression(def.expression, buildContext);
-                        var lambda = Expression.Lambda(bodyExpression, parameters);
-                        if (function?.operand != null && definitions.ContainsKey(ThisLibraryKey, def.name, functionParameterTypes))
-                        {
-                            var ops = function.operand
-                                .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
-                                .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
-                            var message = $"Function {def.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists.";
-                            buildContext.LogWarning(message, def);
-                        }
-                        else
-                        {
-                            foreach (var annotation in def.annotation?.OfType<Annotation>() ?? Enumerable.Empty<Annotation>())
-                            {
-                                foreach (var tag in annotation.t ?? Enumerable.Empty<Tag>())
-                                {
-                                    var name = tag.name;
-                                    if (!string.IsNullOrWhiteSpace(name))
-                                    {
-                                        var value = tag.value ?? string.Empty;
-                                        definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes, name, value);
-
-                                    }
-                                }
-                            }
-                            definitions.Add(ThisLibraryKey, def.name, functionParameterTypes ?? Array.Empty<Type>(), lambda);
-                        }
-                    }
-                    else throw new InvalidOperationException($"Definition {def.name} does not have an expression property");
-                }
-                return definitions;
-            }
-            else throw new InvalidOperationException("This package does not have a name and version.");
-        }
+        private IList<IExpressionMutator> ExpressionMutators { get; } = new List<IExpressionMutator>();
 
         /// <summary>
         /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
@@ -418,7 +110,7 @@ namespace Hl7.Cql.Compiler
             return lambda;
         }
 
-        protected Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
+        internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
         {
             ctx = ctx.Deeper(op);
             Expression? expression;
@@ -947,7 +639,7 @@ namespace Hl7.Cql.Compiler
             return expression!;
         }
 
-        protected Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be, ExpressionBuilderContext ctx)
+        private Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be, ExpressionBuilderContext ctx)
         {
             var lhsExpression = TranslateExpression(be.operand![0], ctx);
             var rhsExpression = TranslateExpression(be.operand![1], ctx);
@@ -955,7 +647,7 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        protected Expression UnaryOperator(CqlOperator @operator, elm.UnaryExpression unary, ExpressionBuilderContext ctx)
+        private Expression UnaryOperator(CqlOperator @operator, elm.UnaryExpression unary, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(unary.operand!, ctx);
             var resultType = unary.resultTypeSpecifier != null
@@ -973,7 +665,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression NaryOperator(CqlOperator @operator, elm.NaryExpression ne, ExpressionBuilderContext ctx)
+        private Expression NaryOperator(CqlOperator @operator, elm.NaryExpression ne, ExpressionBuilderContext ctx)
         {
             var operators = ne.operand
                 .Select(op => TranslateExpression(op, ctx))
@@ -982,7 +674,7 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        protected ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
+        private ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
         {
             if (precisionSpecified)
             {
@@ -997,14 +689,14 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression AggregateOperator(CqlOperator @operator, AggregateExpression aggregate, ExpressionBuilderContext ctx)
+        private Expression AggregateOperator(CqlOperator @operator, AggregateExpression aggregate, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(aggregate.source!, ctx);
             var call = OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
             return call;
         }
 
-        protected Expression? IdentifierRef(IdentifierRef ire, ExpressionBuilderContext ctx)
+        private Expression? IdentifierRef(IdentifierRef ire, ExpressionBuilderContext ctx)
         {
             if (string.Equals("$this", ire.name) && ctx.ImpliedAlias != null)
             {
@@ -1024,7 +716,7 @@ namespace Hl7.Cql.Compiler
             return prop;
         }
 
-        protected Expression Query(Query query, ExpressionBuilderContext ctx)
+        private Expression Query(Query query, ExpressionBuilderContext ctx)
         {
             if (query?.source?.Length == 0)
                 throw new NotSupportedException("Queries must define at least 1 source");
@@ -1035,7 +727,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        protected Expression SingleSourceQuery(Query query, ExpressionBuilderContext ctx)
+        private Expression SingleSourceQuery(Query query, ExpressionBuilderContext ctx)
         {
             var querySource = query.source![0];
             var querySourceAlias = querySource.alias;
@@ -1054,7 +746,7 @@ namespace Hl7.Cql.Compiler
                 isSingle = true;
             }
             var @return = source;
-            Type elementType = TypeResolver.GetListElementType(@return.Type, @throw: true)!;
+            Type elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
 
             // handle with/such-that
             if (query.relationship != null)
@@ -1078,7 +770,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
             // The element type may have changed
-            elementType = TypeResolver.GetListElementType(@return.Type, @throw: true)!;
+            elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
 
             if (query.where != null)
             {
@@ -1147,12 +839,10 @@ namespace Hl7.Cql.Compiler
                 }
                 else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
                 {
-                    resultType = TypeResolver.ResolveType(query.aggregate.resultTypeName.Name!);
+                    resultType = TypeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
                 }
-                if (resultType == null)
-                {
-                    throw new InvalidOperationException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
-                }
+
+                resultType.CheckNotNull(message:$"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
                 var resultParameter = Expression.Parameter(resultType, resultAlias);
                 var scopes = new[]
                 {
@@ -1189,7 +879,7 @@ namespace Hl7.Cql.Compiler
                     if (by is ByExpression byExpression)
                     {
                         var parameterName = "@this";
-                        var returnElementType = TypeResolver.GetListElementType(@return.Type, true)!;
+                        var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
                         var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
                         var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
                         var sortMemberExpression = TranslateExpression(byExpression.expression, subContext);
@@ -1202,9 +892,9 @@ namespace Hl7.Cql.Compiler
                     else if (by is ByColumn byColumn)
                     {
                         var parameterName = "@this";
-                        var returnElementType = TypeResolver.GetListElementType(@return.Type, true)!;
+                        var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
                         var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                        var pathMemberType = TypeManager.TypeFor(byColumn, ctx);
+                        var pathMemberType = ctx.TypeFor(byColumn);
                         if (pathMemberType == null)
                         {
                             var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
@@ -1235,7 +925,7 @@ namespace Hl7.Cql.Compiler
 
             return @return;
         }
-        protected Expression MultiSourceQuery(Query query, ExpressionBuilderContext ctx)
+        private Expression MultiSourceQuery(Query query, ExpressionBuilderContext ctx)
         {
             // The technique here is to create a cross product of all the query sources.
             // The combinations will be stored in a tuple whose fields are named by source alias.
@@ -1243,16 +933,18 @@ namespace Hl7.Cql.Compiler
             // and use that as the singular query source for subsequent parts of the query.
             var tupleSpecifier = new elm.TupleTypeSpecifier
             {
-                element = query.source.Select(source => new TupleElementDefinition
+                element = query.source.Select(source =>
                 {
-                    name = source.alias ?? throw new InvalidOperationException("Missing alias for multi-source query; this is illegal"),
-                    elementType = source.resultTypeSpecifier,
-
+                    return new TupleElementDefinition
+                    {
+                        name = source.alias.CheckNotNull(message:$"Missing alias for multi-source query; this is illegal"),
+                        elementType = source.resultTypeSpecifier,
+                    };
                 }).ToArray(),
             };
             var multiSourceTupleType = TypeManager.TupleTypeFor(tupleSpecifier, ctx, (type) =>
                 IsOrImplementsIEnumerableOfT(type)
-                    ? TypeResolver.GetListElementType(type, true)!
+                    ? TypeManager.Resolver.GetListElementType(type, true)!
                     : throw new NotSupportedException("Query sources must be lists."));
             var crossJoinedSource = CrossJoin(query.source!, multiSourceTupleType, ctx);
             var source = crossJoinedSource;
@@ -1287,7 +979,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            var elementType = TypeResolver.GetListElementType(@return.Type, true)!;
+            var elementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
             if (query.where != null)
             {
                 var parameterName = TypeNameToIdentifier(elementType, ctx);
@@ -1376,12 +1068,10 @@ namespace Hl7.Cql.Compiler
                     }
                     else if (!string.IsNullOrWhiteSpace(query.aggregate.resultTypeName.Name!))
                     {
-                        resultType = TypeResolver.ResolveType(query.aggregate.resultTypeName.Name!);
+                        resultType = TypeManager.Resolver.ResolveType(query.aggregate.resultTypeName.Name!);
                     }
-                    if (resultType == null)
-                    {
-                        throw new InvalidOperationException($"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
-                    }
+
+                    resultType.CheckNotNull(message:$"Could not resolve aggregate query result type for query {query.localId} at {query.locator}");
                     var resultParameter = Expression.Parameter(resultType, resultAlias);
 
                     subContext = subContext.WithScopes(new ExpressionElementPairForIdentifier(resultAlias!, (resultParameter, query.aggregate)));
@@ -1466,7 +1156,7 @@ namespace Hl7.Cql.Compiler
 
             if (isSingle)
             {
-                var returnElementType = TypeResolver.GetListElementType(@return.Type);
+                var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type);
                 var callSingle = OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
                 @return = callSingle;
             }
@@ -1474,62 +1164,57 @@ namespace Hl7.Cql.Compiler
             return @return;
         }
 
-        protected bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
+        private bool IsOrImplementsIEnumerableOfT(Type type) => TypeManager.Resolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
-        protected Expression ValueSetRef(ValueSetRef valueSetRef, ExpressionBuilderContext ctx)
+        private Expression ValueSetRef(ValueSetRef valueSetRef, ExpressionBuilderContext ctx)
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw new ArgumentException($"The ValueSetRef at {valueSetRef.locator} is missing a name.", nameof(valueSetRef));
-            var type = TypeManager.TypeFor(valueSetRef, ctx, throwIfNotFound: true)!;
+            var type = ctx.TypeFor(valueSetRef, throwIfNotFound: true)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
 
             if (IsOrImplementsIEnumerableOfT(type))
             {
-                var elementType = TypeResolver.GetListElementType(type);
-                if (elementType == typeof(CqlCode))
-                {
-                    var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(CqlContext) })!;
-                    var @new = Expression.New(ctor, cqlValueSet, ctx.RuntimeContextParameter);
-                    return @new;
-                }
-                else
+                var elementType = TypeManager.Resolver.GetListElementType(type);
+                if (elementType != typeof(CqlCode))
                 {
                     var message = $"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}";
                     ctx.LogError(message, valueSetRef);
                     throw new InvalidOperationException(message);
                 }
+
+                var @new = CallCreateValueSetFacade(ctx, cqlValueSet);
+                return @new;
             }
             return cqlValueSet;
         }
 
-        protected Expression QueryLetRef(QueryLetRef qlre, ExpressionBuilderContext ctx)
+        private Expression QueryLetRef(QueryLetRef qlre, ExpressionBuilderContext ctx)
         {
             var name = qlre.name!;
             var expr = ctx.GetScopeExpression(name);
             return expr;
         }
 
-        protected Expression AliasRef(AliasRef ar, ExpressionBuilderContext ctx)
+        private Expression AliasRef(AliasRef ar, ExpressionBuilderContext ctx)
         {
             var expr = ctx.GetScopeExpression(ar.name!);
             return expr;
         }
 
-        protected Expression Tuple(elm.Tuple tuple, ExpressionBuilderContext ctx)
+        private Expression Tuple(elm.Tuple tuple, ExpressionBuilderContext ctx)
         {
             Type tupleType;
-            if (tuple.resultTypeSpecifier != null)
-            {
-                if (tuple.resultTypeSpecifier is elm.TupleTypeSpecifier tupleTypeSpecifier)
-                {
-                    tupleType = TypeManager.TupleTypeFor(tupleTypeSpecifier, ctx);
-                }
-                else throw new InvalidOperationException($"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
-            }
-            else
+            if (tuple.resultTypeSpecifier is null)
             {
                 tupleType = TypeManager.TupleTypeFor(tuple, ctx);
             }
+            else
+            {
+                var tupleTypeSpecifier = (tuple.resultTypeSpecifier as elm.TupleTypeSpecifier).CheckNotNull(message:$"Tuple expression has a resultType that is not a TupleTypeSpecifier.");
+                tupleType = TypeManager.TupleTypeFor(tupleTypeSpecifier, ctx);
+            }
+
             var @new = Expression.New(tupleType);
             if (tuple.element?.Length > 0)
             {
@@ -1548,7 +1233,7 @@ namespace Hl7.Cql.Compiler
             else return @new;
         }
 
-        protected Expression List(List list, ExpressionBuilderContext ctx)
+        private Expression List(List list, ExpressionBuilderContext ctx)
         {
             if (list.resultTypeSpecifier == null)
                 throw new ArgumentException($"List is missing a result type specifier.", nameof(list));
@@ -1591,41 +1276,30 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        protected Expression CodeRef(CodeRef cre, ExpressionBuilderContext ctx)
+        private Expression CodeRef(CodeRef codeRef, ExpressionBuilderContext ctx)
         {
-            if (!string.IsNullOrWhiteSpace(cre.name))
-            {
-                var type = TypeResolver.ResolveType(cre.resultTypeName.Name!)
-                    ?? throw new InvalidOperationException($"Unable to resolve type {cre.resultTypeName}");
-                return InvokeDefinitionThroughRuntimeContext(cre.name, cre.libraryName, type!, ctx);
-            }
-            else throw new InvalidOperationException($"CodeRefExpression {cre.name} is null");
+            codeRef.name.CheckNotNullOrWhitespace();
+            var type = TypeManager.Resolver.ResolveType(codeRef.resultTypeName.Name).CheckNotNull(message:$"Unable to resolve type {codeRef.resultTypeName}");
+            return InvokeDefinitionThroughRuntimeContext(codeRef.name, codeRef.libraryName, type!, ctx);
         }
 
-        protected Expression CodeSystemRef(CodeSystemRef csr, ExpressionBuilderContext ctx)
+        private Expression CodeSystemRef(CodeSystemRef codeSystemRef, ExpressionBuilderContext ctx)
         {
-            if (!string.IsNullOrWhiteSpace(csr.name))
-            {
-                var type = TypeResolver.CodeType.MakeArrayType();
-                return InvokeDefinitionThroughRuntimeContext(csr.name, csr.libraryName, type!, ctx);
-            }
-            else throw new InvalidOperationException($"CodeSystemRef {csr.name} is null");
+            codeSystemRef.name.CheckNotNullOrWhitespace();
+            var type = TypeManager.Resolver.CodeType.MakeArrayType();
+            return InvokeDefinitionThroughRuntimeContext(codeSystemRef.name, codeSystemRef.libraryName, type!, ctx);
         }
-        protected Expression ConceptRef(ConceptRef cr, ExpressionBuilderContext ctx)
+        private Expression ConceptRef(ConceptRef conceptRef, ExpressionBuilderContext ctx)
         {
-            if (!string.IsNullOrWhiteSpace(cr.name))
-            {
-                var type = TypeResolver.CodeType.MakeArrayType();
-                return InvokeDefinitionThroughRuntimeContext(cr.name, cr.libraryName, type!, ctx);
-            }
-            else throw new InvalidOperationException($"CodeSystemRef {cr.name} is null");
+            conceptRef.name.CheckNotNullOrWhitespace();
+            var type = TypeManager.Resolver.CodeType.MakeArrayType();
+            return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type!, ctx);
         }
 
 
-        protected Expression Instance(Instance ine, ExpressionBuilderContext ctx)
+        private Expression Instance(Instance ine, ExpressionBuilderContext ctx)
         {
-            var instanceType = TypeResolver.ResolveType(ine.classType.Name!) ??
-                throw new ArgumentException($"Can't resolve type for instance", nameof(ine));
+            var instanceType = TypeManager.Resolver.ResolveType(ine.classType.Name!).CheckNotNull();
             if (IsEnum(instanceType))
             {
                 // constructs like:
@@ -1684,7 +1358,7 @@ namespace Hl7.Cql.Compiler
                         denominatorExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlRatio)}");
                 }
-                var ctor = typeof(CqlRatio).GetConstructor(new[] { typeof(CqlQuantity), typeof(CqlQuantity) })!;
+                var ctor = ConstructorInfos.CqlRatio;
                 var @new = Expression.New(ctor,
                     numeratorExpr ?? Expression.Default(typeof(CqlQuantity)),
                     denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
@@ -1703,7 +1377,7 @@ namespace Hl7.Cql.Compiler
                         unitExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
                 }
-                var ctor = typeof(CqlQuantity).GetConstructor(new[] { typeof(decimal?), typeof(string) })!;
+                var ctor = ConstructorInfos.CqlQuantity;
 
                 if (unitExpr is not null)
                     unitExpr = ChangeType(unitExpr, typeof(string), ctx);
@@ -1733,12 +1407,7 @@ namespace Hl7.Cql.Compiler
                         displayExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlCode)}");
                 }
-                var ctor = typeof(CqlCode).GetConstructor(new[] {
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string)
-                }) ?? throw new InvalidOperationException("CqlCode needs a constructor with four string arguments.");
+                var ctor = ConstructorInfos.CqlCode;
                 var @new = Expression.New(ctor,
                     codeExpr ?? Expression.Default(typeof(string)),
                     systemExpr ?? Expression.Default(typeof(string)),
@@ -1759,7 +1428,7 @@ namespace Hl7.Cql.Compiler
                         displayExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlConcept)}");
                 }
-                var ctor = typeof(CqlConcept).GetConstructor(new[] { typeof(IEnumerable<CqlCode>), typeof(string) })!;
+                var ctor = ConstructorInfos.CqlConcept;
                 var @new = Expression.New(ctor,
                     codesExpr ?? Expression.Default(typeof(IEnumerable<CqlCode>)),
                     displayExpr ?? Expression.Default(typeof(string)));
@@ -1773,9 +1442,7 @@ namespace Hl7.Cql.Compiler
                     var tuple = tuples[i];
                     var element = tuple.Item1;
                     var expression = tuple.Item2;
-                    var memberInfo = GetProperty(instanceType!, element);
-                    if (memberInfo == null)
-                        throw new InvalidOperationException($"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType!)}");
+                    var memberInfo = GetProperty(instanceType!, element).CheckNotNull(message:(FormattableString?)$"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType!)}");
                     var binding = Binding(expression, memberInfo, ctx);
                     elementBindings[i] = binding;
                 }
@@ -1786,7 +1453,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected MemberAssignment Binding(Expression value, MemberInfo memberInfo, ExpressionBuilderContext ctx)
+        private MemberAssignment Binding(Expression value, MemberInfo memberInfo, ExpressionBuilderContext ctx)
         {
             if (memberInfo is PropertyInfo property)
             {
@@ -1805,7 +1472,7 @@ namespace Hl7.Cql.Compiler
                     }
                     else if (value.Type.IsGenericType)
                     {
-                        var valueEnumerableElement = TypeResolver.GetListElementType(value.Type) ?? throw new InvalidOperationException($"{value.Type} was expected to be a list type.");
+                        var valueEnumerableElement = TypeManager.Resolver.GetListElementType(value.Type).CheckNotNull(message:$"{value.Type} was expected to be a list type.");
                         var memberArrayElement = property.PropertyType.GetElementType()!;
                         if (valueEnumerableElement == memberArrayElement)
                         {
@@ -1829,13 +1496,12 @@ namespace Hl7.Cql.Compiler
                         }
                     }
                 }
-                else if (TypeResolver.ImplementsGenericInterface(property.PropertyType, typeof(ICollection<>)))
+                else if (TypeManager.Resolver.ImplementsGenericInterface(property.PropertyType, typeof(ICollection<>)))
                 {
                     if (IsOrImplementsIEnumerableOfT(value.Type))
                     {
-                        var elementType = TypeResolver.GetListElementType(property.PropertyType)!;
-                        var listType = typeof(List<>).MakeGenericType(elementType);
-                        var ctor = listType.GetConstructor(new[] { typeof(IEnumerable<>).MakeGenericType(elementType) })!;
+                        var elementType = TypeManager.Resolver.GetListElementType(property.PropertyType)!;
+                        var ctor = ConstructorInfos.ListOf(elementType);
                         var newList = Expression.New(ctor, value);
                         return Expression.Bind(memberInfo, newList);
                     }
@@ -1846,7 +1512,7 @@ namespace Hl7.Cql.Compiler
             else throw new NotImplementedException();
         }
 
-        protected bool IsConvertible(Type from, Type to)
+        private bool IsConvertible(Type from, Type to)
         {
             if (from == to)
                 return true;
@@ -1856,14 +1522,14 @@ namespace Hl7.Cql.Compiler
                 return true;
             if (IsOrImplementsIEnumerableOfT(from) && IsOrImplementsIEnumerableOfT(to))
             {
-                var fromElement = TypeResolver.GetListElementType(from, @throw: true)!;
-                var toElement = TypeResolver.GetListElementType(to, @throw: true)!;
+                var fromElement = TypeManager.Resolver.GetListElementType(from, @throw: true)!;
+                var toElement = TypeManager.Resolver.GetListElementType(to, @throw: true)!;
                 return IsConvertible(fromElement, toElement);
             }
             return false;
         }
 
-        protected Expression If(If @if, ExpressionBuilderContext ctx)
+        private Expression If(If @if, ExpressionBuilderContext ctx)
         {
             var rc = TranslateExpression(@if.condition!, ctx);
             var condition = Expression.Coalesce(rc, Expression.Constant(false, typeof(bool)));
@@ -1888,17 +1554,16 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Null(Null @null, ExpressionBuilderContext ctx)
+        private Expression Null(Null @null, ExpressionBuilderContext ctx)
         {
-            var nullType = TypeManager.TypeFor(@null, ctx, false) ?? typeof(object);
+            var nullType = ctx.TypeFor(@null, false) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
 
-        protected Expression Literal(Literal lit, ExpressionBuilderContext ctx)
+        private Expression Literal(Literal lit, ExpressionBuilderContext ctx)
         {
-            var type = TypeResolver.ResolveType(lit.valueType.Name!)
-                ?? throw new InvalidOperationException($"Cannot resolve type for {lit.valueType}");
+            var type = TypeManager.Resolver.ResolveType(lit.valueType.Name!).CheckNotNull(message:(FormattableString?)$"Cannot resolve type for {lit.valueType}");
             var (value, convertedType) = ConvertLiteral(lit, type);
 
             if (IsNullable(type))
@@ -1910,7 +1575,7 @@ namespace Hl7.Cql.Compiler
             return Expression.Constant(value, convertedType);
         }
 
-        public static (object?, Type) ConvertLiteral(Literal lit, Type? type)
+        private static (object?, Type) ConvertLiteral(Literal lit, Type? type)
         {
             if (type == null)
                 throw new NotImplementedException();
@@ -1949,14 +1614,14 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression OperandRef(OperandRef ore, ExpressionBuilderContext ctx)
+        private Expression OperandRef(OperandRef ore, ExpressionBuilderContext ctx)
         {
             if (ctx.Operands.TryGetValue(ore.name!, out var expression))
                 return expression;
             else throw new ArgumentException($"Operand reference to {ore.name} not found in definition operands.", nameof(ore));
         }
 
-        protected Expression Case(Case ce, ExpressionBuilderContext ctx)
+        private Expression Case(Case ce, ExpressionBuilderContext ctx)
         {
 
             //[{ when1, then1 }, { when2, then2}, { when3, then3 }]
@@ -2007,7 +1672,7 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("Invalid case expression.  At least 1 case and an else must be present.", nameof(ce));
         }
 
-        protected bool IsInterval(Type t, out Type? elementType)
+        private bool IsInterval(Type t, out Type? elementType)
         {
             if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(CqlInterval<>))
             {
@@ -2018,7 +1683,7 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
-        protected LambdaExpression WithToSelectManyBody(string outerScope,
+        private LambdaExpression WithToSelectManyBody(string outerScope,
             Type outerElementType,
             RelationshipClause with,
             ExpressionBuilderContext ctx)
@@ -2052,7 +1717,7 @@ namespace Hl7.Cql.Compiler
                 var newArray = Expression.NewArrayInit(source.Type, source);
                 source = newArray;
             }
-            var sourcElementType = TypeResolver.GetListElementType(source.Type)!;
+            var sourcElementType = TypeManager.Resolver.GetListElementType(source.Type)!;
 
             var whereLambdaParameter = Expression.Parameter(sourcElementType, with.alias);
             var whereContext = selectManyContext.WithScopes(new ExpressionElementPairForIdentifier(with.alias!, (whereLambdaParameter, with)));
@@ -2070,7 +1735,7 @@ namespace Hl7.Cql.Compiler
             return selectManyLambda;
         }
 
-        protected LambdaExpression WithToSelectManyBody(Type tupleType,
+        private LambdaExpression WithToSelectManyBody(Type tupleType,
             RelationshipClause with,
             ExpressionBuilderContext ctx)
         {
@@ -2112,7 +1777,7 @@ namespace Hl7.Cql.Compiler
             var selectManyContext = ctx.WithScopes(scopes);
 
             var source = TranslateExpression(with.expression, selectManyContext);
-            var sourceElementType = TypeResolver.GetListElementType(source.Type)!;
+            var sourceElementType = TypeManager.Resolver.GetListElementType(source.Type)!;
 
             var whereLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
             var whereContext = selectManyContext.WithScopes(new ExpressionElementPairForIdentifier(with.alias!, (whereLambdaParameter, with)));
@@ -2132,7 +1797,7 @@ namespace Hl7.Cql.Compiler
         // Yeah, hardwired to FHIR 4.0.1 for now.
         private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
 
-        protected Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
+        private Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
         {
             Type? sourceElementType;
             string? cqlRetrieveResultType;
@@ -2144,7 +1809,7 @@ namespace Hl7.Cql.Compiler
                     throw new ArgumentException("If a Retrieve lacks a ResultTypeSpecifier it must have a DataType", nameof(retrieve));
                 cqlRetrieveResultType = retrieve.dataType.Name;
 
-                sourceElementType = TypeResolver.ResolveType(cqlRetrieveResultType);
+                sourceElementType = TypeManager.Resolver.ResolveType(cqlRetrieveResultType);
             }
             else
             {
@@ -2166,7 +1831,7 @@ namespace Hl7.Cql.Compiler
 
             if (hasCodePropertySpecified && !isDefaultCodeProperty)
             {
-                var codePropertyInfo = TypeResolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
+                var codePropertyInfo = TypeManager.Resolver.GetProperty(sourceElementType!, retrieve.codeProperty!);
                 codeProperty = Expression.Constant(codePropertyInfo, typeof(PropertyInfo));
             }
             else
@@ -2203,7 +1868,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected Expression Property(Property op, ExpressionBuilderContext ctx)
+        private Expression Property(Property op, ExpressionBuilderContext ctx)
         {
             if (string.IsNullOrWhiteSpace(op.path))
                 throw new ArgumentException("path cannot be null or empty", nameof(op));
@@ -2212,9 +1877,9 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = ctx.GetScopeExpression(op.scope!);
-                var expectedType = TypeManager.TypeFor(op, ctx, false) ?? typeof(object);
-                var pathMemberInfo = TypeResolver.GetProperty(scopeExpression.Type, path!) ??
-                    TypeResolver.GetProperty(scopeExpression.Type, op.path);
+                var expectedType = ctx.TypeFor(op, false) ?? typeof(object);
+                var pathMemberInfo = TypeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
+                    TypeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
                 {
                     ctx.LogWarning($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op);
@@ -2235,7 +1900,7 @@ namespace Hl7.Cql.Compiler
                 //    var call = Expression.Call(method, propogate);
                 //    return call;
                 //}
-                var resultType = TypeManager.TypeFor(op, ctx, false) ?? throw new InvalidOperationException($"TypeManager failed to resolve type.");
+                var resultType = ctx.TypeFor(op, false).CheckNotNull( message:$"TypeManager failed to resolve type.");
                 if (resultType != propogate.Type)
                 {
                     propogate = ChangeType(propogate, resultType, ctx);
@@ -2252,7 +1917,7 @@ namespace Hl7.Cql.Compiler
                     for (int i = 0; i < parts.Length; i++)
                     {
                         var pathPart = parts[i];
-                        var pathMemberInfo = TypeResolver.GetProperty(source.Type, pathPart!);
+                        var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, pathPart!);
                         if (pathMemberInfo != null)
                         {
                             var propertyAccess = PropogateNull(source, pathMemberInfo, ctx);
@@ -2263,18 +1928,17 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = TypeManager.TypeFor(op, ctx, throwIfNotFound: true)!;
+                    var expectedType = ctx.TypeFor(op, throwIfNotFound: true)!;
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }
-                throw new NotImplementedException();
             }
             else throw new NotImplementedException();
         }
 
-        protected Expression PropertyHelper(Expression source, string? path, Type expectedType, ExpressionBuilderContext ctx)
+        private Expression PropertyHelper(Expression source, string? path, Type expectedType, ExpressionBuilderContext ctx)
         {
-            var pathMemberInfo = TypeResolver.GetProperty(source.Type, path!);
+            var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, path!);
             if (pathMemberInfo == null)
             {
                 ctx.LogWarning($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.");
@@ -2317,7 +1981,7 @@ namespace Hl7.Cql.Compiler
             return result;
         }
 
-        protected Expression FunctionRef(FunctionRef op, ExpressionBuilderContext ctx)
+        private Expression FunctionRef(FunctionRef op, ExpressionBuilderContext ctx)
         {
             var operands = op.operand
                 .Select(operand => TranslateExpression(operand, ctx))
@@ -2363,7 +2027,7 @@ namespace Hl7.Cql.Compiler
             return invoke;
         }
 
-        protected Type GetFuncType(Type[] funcTypeParameters)
+        private Type GetFuncType(Type[] funcTypeParameters)
         {
             Type? funcType;
             switch (funcTypeParameters.Length)
@@ -2421,7 +2085,7 @@ namespace Hl7.Cql.Compiler
             return funcType;
         }
 
-        protected Type GetFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes, ExpressionBuilderContext ctx)
+        private Type GetFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes, ExpressionBuilderContext ctx)
         {
             var operands = op.operand
                 .Select(operand => TranslateExpression(operand, ctx))
@@ -2433,13 +2097,13 @@ namespace Hl7.Cql.Compiler
                 switch (op.name)
                 {
                     case "ToDate":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!;
                     case "ToDateTime":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!;
                     case "ToQuantity":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!;
                     case "ToInteger":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!;
                     case "ToInterval":
                         if (op.operand?.Length == 1)
                         {
@@ -2455,47 +2119,47 @@ namespace Hl7.Cql.Compiler
                             }
                             if (typeName == "{http://hl7.org/fhir}Period")
                             {
-                                var pointType = TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
-                                var intervalType = TypeResolver.IntervalType(pointType!);
+                                var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
+                                var intervalType = TypeManager.Resolver.IntervalType(pointType!);
                                 return intervalType;
                             }
                             else if (typeName == "{http://hl7.org/fhir}Range")
                             {
-                                var pointType = TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
-                                var intervalType = TypeResolver.IntervalType(pointType!);
+                                var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
+                                var intervalType = TypeManager.Resolver.IntervalType(pointType!);
                                 return intervalType;
                             }
                         }
                         throw new NotImplementedException();
                     case "ToBoolean":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!;
                     case "ToString":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!;
                     case "ToDecimal":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!;
                     case "ToRatio":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!;
                     case "ToCode":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!;
                     case "ToConcept":
-                        return TypeResolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!;
+                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!;
                     default: break;
                 }
             }
             if (op.resultTypeSpecifier != null)
             {
-                return TypeManager.TypeFor(op.resultTypeSpecifier, ctx) ?? throw new InvalidOperationException($"Cannot resolve result type {op.resultTypeSpecifier}.");
+                return TypeManager.TypeFor(op.resultTypeSpecifier, ctx).CheckNotNull(message:$"Cannot resolve result type {op.resultTypeSpecifier}.");
             }
             else if (!string.IsNullOrWhiteSpace(op.resultTypeName.Name))
             {
-                return TypeResolver.ResolveType(op.resultTypeName.Name!)
-                    ?? TypeResolver.ResolveType(op.resultTypeName.Name)
+                return TypeManager.Resolver.ResolveType(op.resultTypeName.Name!)
+                    ?? TypeManager.Resolver.ResolveType(op.resultTypeName.Name)
                     ?? throw new ArgumentException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
             }
             throw new ArgumentException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
         }
 
-        protected Expression ExpressionRef(ExpressionRef expressionRef, ExpressionBuilderContext ctx)
+        private Expression ExpressionRef(ExpressionRef expressionRef, ExpressionBuilderContext ctx)
         {
             Type? expressionType = null;
             if (expressionRef.resultTypeSpecifier != null)
@@ -2504,7 +2168,7 @@ namespace Hl7.Cql.Compiler
             }
             else if (!string.IsNullOrWhiteSpace(expressionRef.resultTypeName?.Name))
             {
-                expressionType = TypeResolver.ResolveType(expressionRef.resultTypeName.Name!);
+                expressionType = TypeManager.Resolver.ResolveType(expressionRef.resultTypeName.Name!);
             }
             else
             {
@@ -2512,19 +2176,19 @@ namespace Hl7.Cql.Compiler
                     .SingleOrDefault(d => d.name == expressionRef.name);
                 if (def != null)
                 {
-                    expressionType = TypeManager.TypeFor(def, ctx);
+                    expressionType = ctx.TypeFor(def);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }
-            if (expressionType == null)
-                throw new InvalidOperationException($"Unable to determine type for {expressionRef.localId}");
+
+            expressionType.CheckNotNull(message:$"Unable to determine type for {expressionRef.localId}");
             var invoke = InvokeDefinitionThroughRuntimeContext(expressionRef.name!, expressionRef.libraryName, expressionType, ctx);
             return invoke;
         }
 
-        protected Expression ParameterRef(ParameterRef op, ExpressionBuilderContext ctx)
+        private Expression ParameterRef(ParameterRef op, ExpressionBuilderContext ctx)
         {
-            if (ctx.Definitions.TryGetValue(ThisLibraryKey, op.name!, out var lambda) && lambda != null)
+            if (ctx.Definitions.TryGetValue(Library.NameAndVersion.CheckNotNull(), op.name!, out var lambda) && lambda != null)
             {
                 var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda, ctx);
                 return invoke;
@@ -2533,7 +2197,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        protected MemberInfo GetProperty(Type type, string name)
+        private MemberInfo GetProperty(Type type, string name)
         {
             if (type.IsGenericType)
             {
@@ -2542,7 +2206,7 @@ namespace Hl7.Cql.Compiler
                 {
                     if (string.Equals(name, "value", StringComparison.OrdinalIgnoreCase))
                     {
-                        var valueMember = type.GetProperty("Value") ?? throw new InvalidOperationException("value element not found as a Value property on object.");
+                        var valueMember = type.GetProperty("Value").CheckNotNull(message:(FormattableString?)$"value element not found as a Value property on object.");
                         return valueMember;
                     }
                 }
@@ -2558,7 +2222,7 @@ namespace Hl7.Cql.Compiler
         /// <param name="arguments">The function arguments</param>
         /// <param name="ctx">The builder context.</param>
         /// <returns></returns>
-        protected Expression InvokeDefinedFunctionThroughRuntimeContext(string name, string libraryAlias,
+        private Expression InvokeDefinedFunctionThroughRuntimeContext(string name, string libraryAlias,
             Type definitionType,
             Expression[] arguments,
             ExpressionBuilderContext ctx)
@@ -2571,12 +2235,12 @@ namespace Hl7.Cql.Compiler
                 if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
                     throw new InvalidOperationException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
             }
-            else libraryName = ThisLibraryKey;
+            else libraryName = Library.NameAndVersion.CheckNotNull();
 
             return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
         }
 
-        protected Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
+        private Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
             LambdaExpression definition,
             ExpressionBuilderContext ctx)
         {
@@ -2591,7 +2255,7 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("LambdaExpressions should be a variant of Func<>");
         }
 
-        protected Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
+        private Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
         Type definitionReturnType,
         ExpressionBuilderContext ctx)
         {
@@ -2603,13 +2267,13 @@ namespace Hl7.Cql.Compiler
                 if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
                     throw new InvalidOperationException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
             }
-            else libraryName = ThisLibraryKey;
+            else libraryName = Library.NameAndVersion.CheckNotNull();
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
             return new DefinitionCallExpression(definitionsProperty, libraryName, name, ctx.RuntimeContextParameter, funcType);
         }
 
-        protected Expression CoalesceNullableValueType(Expression nullable)
+        private Expression CoalesceNullableValueType(Expression nullable)
         {
             if (nullable.Type.IsGenericType && nullable.Type.GetGenericTypeDefinition() == typeof(Nullable<>))
             {
@@ -2619,8 +2283,8 @@ namespace Hl7.Cql.Compiler
             else return nullable;
         }
 
-        protected static bool IsNullable(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
-        protected Expression HandleNullable(Expression expression, Type targetType)
+        private static bool IsNullable(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+        private Expression HandleNullable(Expression expression, Type targetType)
         {
             if (IsNullable(targetType))
             {
@@ -2631,7 +2295,7 @@ namespace Hl7.Cql.Compiler
                 expression = CoalesceNullableValueType(expression);
             return expression;
         }
-        protected Expression CrossJoin(elm.AliasedQuerySource[] sources, Type tupleType, ExpressionBuilderContext ctx)
+        private Expression CrossJoin(elm.AliasedQuerySource[] sources, Type tupleType, ExpressionBuilderContext ctx)
         {
 
             //var a = new int[] { 1, 2, 3 };
@@ -2656,10 +2320,10 @@ namespace Hl7.Cql.Compiler
             // they are working only off of the initial selectmany parameters.
             var first = sources[0];
             var firstExpression = TranslateExpression(first.expression!, ctx);
-            var firstElementType = TypeResolver.GetListElementType(firstExpression.Type)!;
+            var firstElementType = TypeManager.Resolver.GetListElementType(firstExpression.Type)!;
             var second = sources[1];
             var secondExpression = TranslateExpression(second.expression!, ctx);
-            var secondElementType = TypeResolver.GetListElementType(secondExpression.Type)!;
+            var secondElementType = TypeManager.Resolver.GetListElementType(secondExpression.Type)!;
 
             var firstLambdaParameter = Expression.Parameter(firstElementType, $"_{first.alias}");
             var firstSelectManyParameter = Expression.Lambda(secondExpression, firstLambdaParameter);
@@ -2685,7 +2349,7 @@ namespace Hl7.Cql.Compiler
                     var source = sources[i];
 
                     var sourceExpression = TranslateExpression(source.expression!, ctx);
-                    var sourceElementType = TypeResolver.GetListElementType(sourceExpression.Type) ?? throw new InvalidOperationException($"{sourceExpression.Type} was expected to be a list type.");
+                    var sourceElementType = TypeManager.Resolver.GetListElementType(sourceExpression.Type).CheckNotNull(message:$"{sourceExpression.Type} was expected to be a list type.");
 
                     var parameterName = string.Join(string.Empty, sources.Take(i).Select(st => st.alias));
                     var parameter = Expression.Parameter(tupleType, $"_{parameterName}");
@@ -2718,7 +2382,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Implements the null propogation operator (x?.y) into (x == null ? null : x.y);
         /// </summary>
-        protected Expression PropogateNull(Expression before, MemberInfo member, ExpressionBuilderContext ctx)
+        private Expression PropogateNull(Expression before, MemberInfo member, ExpressionBuilderContext ctx)
         {
             if (before.Type.IsValueType)
                 return before;
@@ -2728,7 +2392,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
+        internal static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
         {
             var typeName = type.Name.ToLowerInvariant();
             if (type.IsGenericType)
@@ -2756,7 +2420,7 @@ namespace Hl7.Cql.Compiler
             return ExpressionBuilderContext.NormalizeIdentifier(typeName!)!;
         }
 
-        protected readonly Lazy<MethodInfo> MakeGenericLambda = new(() =>
+        private readonly Lazy<MethodInfo> MakeGenericLambda = new(() =>
             (from method in
                 typeof(Expression).GetMethods(BindingFlags.Public | BindingFlags.Static)
              where method.Name == nameof(Expression.Lambda)
@@ -2768,25 +2432,7 @@ namespace Hl7.Cql.Compiler
              select method).Single());
 
 
-        protected LambdaExpression NotImplemented(string nav, Type[] functionParameterTypes, Type returnType, ExpressionBuilderContext context)
-        {
-            var parameters = functionParameterTypes
-                .Select((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, context) + index))
-                .ToArray();
-            var ctor = typeof(NotImplementedException).GetConstructor(new[] { typeof(string) })!;
-            var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
-            var @throw = Expression.Throw(@new, returnType);
-            var lambda = Expression.Lambda(@throw, parameters);
-            //var funcTypes = new Type[functionParameterTypes.Length + 1];
-            //Array.Copy(functionParameterTypes, funcTypes, functionParameterTypes.Length);
-            //funcTypes[funcTypes.Length - 1] = returnType;
-            //var funcType = GetFuncType(funcTypes);
-            //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
-            //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
-            return lambda;
-        }
-
-        protected static bool IsEnum(Type type)
+        private static bool IsEnum(Type type)
         {
             if (type.IsEnum)
                 return true;
@@ -2795,5 +2441,14 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
+        private MethodCallExpression CallCreateValueSetFacade(ExpressionBuilderContext ctx, Expression operand)
+        {
+            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
+            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
+            var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);
+            var call = Expression.Call(property, createFacadeMethod, operand);
+
+            return call;
+        }
     }
 }

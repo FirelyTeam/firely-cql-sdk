@@ -3,7 +3,7 @@
  * See the file CONTRIBUTORS for details.
  * 
  * This file is licensed under the BSD 3-Clause license
- * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
 using Hl7.Cql.Abstractions;
@@ -114,7 +114,9 @@ namespace Hl7.Cql.Runtime
             return GetPropertyCore(type, propertyName);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Additional logic get retrieve a <see cref="PropertyInfo"/> by name for a given type.
+        /// </summary>
         protected virtual PropertyInfo? GetPropertyCore(Type type, string propertyName) =>
             type.GetProperty(propertyName, BindingFlags.Public | BindingFlags.Instance);
 

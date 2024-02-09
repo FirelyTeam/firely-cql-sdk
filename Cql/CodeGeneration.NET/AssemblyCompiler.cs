@@ -24,6 +24,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Hl7.Cql.Compiler.DefinitionBuilding;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -68,7 +69,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var namespaces = new[]
             {
                 typeof(CqlDeclarationAttribute).Namespace!,
-                typeof(ValueSetFacade).Namespace!,
+                typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
             }
             .Concat(TypeResolver.ModelNamespaces)
@@ -86,8 +87,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var builder = new ExpressionBuilder(Binding, TypeManager, package, builderLogger, new(false));
-                var expressions = builder.Build();
+                var expressions = DefinitionsBuilder.Instance.BuildDefinitions(Binding, TypeManager, package, builderLogger);
                 all.Merge(expressions);
             }
 

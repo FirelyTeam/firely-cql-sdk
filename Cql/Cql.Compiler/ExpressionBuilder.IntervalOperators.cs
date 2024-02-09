@@ -21,7 +21,7 @@ namespace Hl7.Cql.Compiler
             var operand = TranslateExpression(e.operand![0]!, ctx);
             if (IsOrImplementsIEnumerableOfT(operand.Type))
             {
-                var elementType = TypeResolver.GetListElementType(operand.Type, @throw: true)!;
+                var elementType = TypeManager.Resolver.GetListElementType(operand.Type, @throw: true)!;
                 if (IsInterval(elementType, out var pointType))
                 {
                     var precision = Expression.Constant(null, typeof(string));
@@ -42,7 +42,7 @@ namespace Hl7.Cql.Compiler
             var precision = Precision(e.precision, e.precisionSpecified);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var elementType = TypeResolver.GetListElementType(left.Type, @throw: true)!;
+                var elementType = TypeManager.Resolver.GetListElementType(left.Type, @throw: true)!;
                 if (elementType != right.Type)
                 {
                     if (elementType.IsAssignableFrom(right.Type))
@@ -83,7 +83,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression Except(elm.Except e, ExpressionBuilderContext ctx)
+        private Expression Except(elm.Except e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -105,14 +105,14 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? Expand(elm.Expand e, ExpressionBuilderContext ctx)
+        private Expression? Expand(elm.Expand e, ExpressionBuilderContext ctx)
         {
             var source = TranslateExpression(e!.operand![0]!, ctx);
             var quantity = TranslateExpression(e!.operand![1]!, ctx);
             return OperatorBinding.Bind(CqlOperator.Expand, ctx.RuntimeContextParameter, source, quantity);
         }
 
-        protected Expression In(elm.In e, ExpressionBuilderContext ctx)
+        private Expression In(elm.In e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0]!, ctx);
             var right = TranslateExpression(e.operand![1]!, ctx);
@@ -131,16 +131,16 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression? Includes(elm.Includes e, ExpressionBuilderContext ctx)
+        private Expression? Includes(elm.Includes e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type);
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(left.Type);
+                    var rightElementType = TypeManager.Resolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
                     return OperatorBinding.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, left, right);
@@ -168,17 +168,17 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression IncludedIn(elm.IncludedIn e, ExpressionBuilderContext ctx)
+        private Expression IncludedIn(elm.IncludedIn e, ExpressionBuilderContext ctx)
         {
 
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type);
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(left.Type);
+                    var rightElementType = TypeManager.Resolver.GetListElementType(left.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
                     return OperatorBinding.Bind(CqlOperator.ListIncludesList, ctx.RuntimeContextParameter, right, left);
@@ -206,7 +206,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression Intersect(elm.Intersect e, ExpressionBuilderContext ctx)
+        private Expression Intersect(elm.Intersect e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0]!, ctx);
             var right = TranslateExpression(e.operand![1]!, ctx);
@@ -225,7 +225,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? Meets(elm.Meets e, ExpressionBuilderContext ctx)
+        private Expression? Meets(elm.Meets e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -280,7 +280,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression Overlaps(elm.Overlaps e, ExpressionBuilderContext ctx)
+        private Expression Overlaps(elm.Overlaps e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -337,10 +337,10 @@ namespace Hl7.Cql.Compiler
 
 
 
-        protected Expression? PointFrom(elm.PointFrom e, ExpressionBuilderContext ctx) =>
+        private Expression? PointFrom(elm.PointFrom e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.PointFrom, e, ctx);
 
-        protected Expression? ProperIncludes(elm.ProperIncludes e, ExpressionBuilderContext ctx)
+        private Expression? ProperIncludes(elm.ProperIncludes e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -358,10 +358,10 @@ namespace Hl7.Cql.Compiler
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type);
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(right.Type);
+                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
                     return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
                 }
                 else
@@ -373,7 +373,7 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression? ProperIncludedIn(elm.ProperIncludedIn e, ExpressionBuilderContext ctx)
+        private Expression? ProperIncludedIn(elm.ProperIncludedIn e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -387,10 +387,10 @@ namespace Hl7.Cql.Compiler
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type);
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(right.Type);
+                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
                     return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, right, left);
@@ -420,16 +420,16 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? ProperContains(elm.ProperContains e, ExpressionBuilderContext ctx)
+        private Expression? ProperContains(elm.ProperContains e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type);
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(right.Type);
+                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
                     return OperatorBinding.Bind(CqlOperator.ListProperlyIncludesList, ctx.RuntimeContextParameter, left, right);
@@ -452,11 +452,11 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Start(elm.Start start, ExpressionBuilderContext ctx) =>
+        private Expression Start(elm.Start start, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.IntervalStart, start, ctx);
 
 
-        protected Expression? Starts(elm.Starts e, ExpressionBuilderContext ctx)
+        private Expression? Starts(elm.Starts e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
@@ -475,16 +475,16 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        protected Expression Union(elm.Union e, ExpressionBuilderContext ctx)
+        private Expression Union(elm.Union e, ExpressionBuilderContext ctx)
         {
             var left = TranslateExpression(e.operand![0], ctx);
             var right = TranslateExpression(e.operand![1], ctx);
             if (IsOrImplementsIEnumerableOfT(left.Type))
             {
-                var leftElementType = TypeResolver.GetListElementType(left.Type);
+                var leftElementType = TypeManager.Resolver.GetListElementType(left.Type);
                 if (IsOrImplementsIEnumerableOfT(right.Type))
                 {
-                    var rightElementType = TypeResolver.GetListElementType(right.Type);
+                    var rightElementType = TypeManager.Resolver.GetListElementType(right.Type);
                     if (leftElementType != rightElementType)
                         throw new InvalidOperationException();
                     return OperatorBinding.Bind(CqlOperator.ListUnion, ctx.RuntimeContextParameter, left, right);
@@ -502,7 +502,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression? Width(elm.Width e, ExpressionBuilderContext ctx) =>
+        private Expression? Width(elm.Width e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Width, e, ctx);
     }
 }

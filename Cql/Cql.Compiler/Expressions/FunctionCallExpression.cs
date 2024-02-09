@@ -80,7 +80,7 @@ namespace Hl7.Cql.Compiler
             return Update(visitedArgs);
         }
 
-        public Expression Update(IReadOnlyCollection<Expression> arguments)
+        private Expression Update(IReadOnlyCollection<Expression> arguments)
         {
             if (Enumerable.SequenceEqual(Arguments, arguments))
                 return this;
@@ -90,10 +90,10 @@ namespace Hl7.Cql.Compiler
 
         public override Type Type => DefinitionCallExpression.GetReturnTypeFromDelegateType(FunctionType);
 
-        public Expression Definitions { get; }
+        private Expression Definitions { get; }
         public string LibraryName { get; }
         public string FunctionName { get; }
         public IReadOnlyCollection<Expression> Arguments { get; }
-        public Type FunctionType { get; }
+        private Type FunctionType { get; }
     }
 }

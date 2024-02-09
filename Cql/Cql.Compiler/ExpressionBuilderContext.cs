@@ -18,14 +18,15 @@ using elm = Hl7.Cql.Elm;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.Build"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
     internal class ExpressionBuilderContext
     {
-        internal ExpressionBuilderContext(ExpressionBuilder builder,
+        internal ExpressionBuilderContext(
+            ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers)
@@ -58,7 +59,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
         /// </summary>
-        public ExpressionBuilder Builder { get; }
+        private ExpressionBuilder Builder { get; }
         /// <summary>
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
         /// </summary>
@@ -108,7 +109,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal IDictionary<string, ParameterExpression> Operands { get; } = new Dictionary<string, ParameterExpression>();
 
-        internal IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; } = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+        private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; } = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
 
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
@@ -197,26 +198,20 @@ namespace Hl7.Cql.Compiler
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key);
-                    if (!string.IsNullOrWhiteSpace(normalized))
-                    {
-                        scopes[normalized] = kvp.Value;
-                    }
-                    else throw new InvalidOperationException();
+                    var normalized = NormalizeIdentifier(kvp.Key).CheckNotNullOrWhitespace(message: $"Identifier cannot be null or whitespace.");
+                    scopes[normalized] = kvp.Value;
                 }
             }
             else
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key);
-                    if (!string.IsNullOrWhiteSpace(normalized))
-                    {
-                        if (scopes.ContainsKey(normalized))
-                            throw new InvalidOperationException($"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
-                        scopes.Add(normalized, kvp.Value);
-                    }
-                    else throw new InvalidOperationException();
+                    var normalized = NormalizeIdentifier(kvp.Key).CheckNotNullOrWhitespace(message: $"Identifier cannot be null or whitespace.");
+                    
+                    if (scopes.ContainsKey(normalized))
+                        throw new InvalidOperationException(
+                            $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
+                    scopes.Add(normalized, kvp.Value);
                 }
             }
             var subContext = new ExpressionBuilderContext(this, scopes);
@@ -252,15 +247,19 @@ namespace Hl7.Cql.Compiler
         }
 
 
-        internal string FormatMessage(string message, elm.Element? element)
+        private string FormatMessage(string message, elm.Element? element)
         {
             var locator = element?.locator;
-            if (!string.IsNullOrWhiteSpace(locator))
-            {
-                return $"{Builder.ThisLibraryKey} line {locator}: {message}";
-            }
-            else return $"{Builder.ThisLibraryKey}: {message}";
+            var libraryKey = Builder.Library.NameAndVersion.CheckNotNull();
+            return string.IsNullOrWhiteSpace(locator) 
+                ? $"{libraryKey}: {message}"
+                : $"{libraryKey} line {locator}: {message}";
         }
 
+        public Type TypeFor(elm.TypeSpecifier resultTypeSpecifier) => 
+            Builder.TypeManager.TypeFor(resultTypeSpecifier, this);
+
+        public Type? TypeFor(elm.Element element, bool throwIfNotFound = true) =>
+            Builder.TypeManager.TypeFor(element, this, throwIfNotFound);
     }
 }

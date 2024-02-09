@@ -16,23 +16,23 @@ namespace Hl7.Cql.Compiler
 {
     internal partial class ExpressionBuilder
     {
-        protected Expression? Distinct(elm.Distinct e, ExpressionBuilderContext ctx) =>
+        private Expression? Distinct(elm.Distinct e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Distinct, e, ctx);
 
-        protected Expression Exists(elm.Exists e, ExpressionBuilderContext ctx) =>
+        private Expression Exists(elm.Exists e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Exists, e, ctx);
 
-        protected Expression Flatten(elm.Flatten e, ExpressionBuilderContext ctx) =>
+        private Expression Flatten(elm.Flatten e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Flatten, e, ctx);
 
-        protected Expression First(elm.First e, ExpressionBuilderContext ctx)
+        private Expression First(elm.First e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.source!, ctx);
             var call = OperatorBinding.Bind(CqlOperator.First, ctx.RuntimeContextParameter, operand);
             return call;
         }
 
-        protected Expression IndexOf(elm.IndexOf e, ExpressionBuilderContext ctx)
+        private Expression IndexOf(elm.IndexOf e, ExpressionBuilderContext ctx)
         {
             var source = TranslateExpression(e.source!, ctx);
             var element = TranslateExpression(e.element!, ctx);
@@ -43,7 +43,7 @@ namespace Hl7.Cql.Compiler
             throw new NotImplementedException();
         }
 
-        protected Expression Last(elm.Last e, ExpressionBuilderContext ctx)
+        private Expression Last(elm.Last e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.source!, ctx);
             var call = OperatorBinding.Bind(CqlOperator.Last, ctx.RuntimeContextParameter, operand);

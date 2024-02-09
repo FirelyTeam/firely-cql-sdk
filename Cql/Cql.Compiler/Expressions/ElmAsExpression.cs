@@ -13,8 +13,8 @@ namespace Hl7.Cql.Compiler.Expressions
 
         public override bool CanReduce => true;
         public override ExpressionType NodeType => ExpressionType.Extension;
-        public Expression Expression { get; }
-        public Type AsType { get; }
+        private Expression Expression { get; }
+        private Type AsType { get; }
         public override Type Type => AsType;
         public override Expression Reduce()
         {
@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler.Expressions
         protected override Expression VisitChildren(ExpressionVisitor visitor) =>
             Update(visitor.Visit(Expression));
 
-        public Expression Update(Expression expression) =>
+        private Expression Update(Expression expression) =>
             expression != Expression
                 ? new ElmAsExpression(expression, AsType)
                 : this;

@@ -15,6 +15,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.DefinitionBuilding;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -216,6 +217,12 @@ namespace CoreTests
             Assert.IsTrue(CqlDateTime.TryParse("2021-06-30", out cqlStartDate));
             boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(1, boundariesBetween);
+
+            Assert.IsTrue(DateTimeIso8601.TryParse("2008-04-11", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2024-04-10", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(15, boundariesBetween);
+
         }
 
         [TestMethod]
@@ -3520,8 +3527,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var expressions = eb.Build();
+            var expressions = DefinitionsBuilder.Instance.BuildDefinitions(binding, typeManager, elmPackage, logger);
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())
              .CreateLogger<CSharpSourceCodeWriter>();

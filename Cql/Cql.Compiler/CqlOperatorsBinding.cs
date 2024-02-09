@@ -25,10 +25,10 @@ namespace Hl7.Cql.Compiler
     /// <summary>
     /// Implements <see cref="OperatorBinding"/> by calling methods in <see cref="CqlOperators"/>.
     /// </summary>
-    internal class CqlOperatorsBinding : OperatorBinding
+    internal sealed class CqlOperatorsBinding : OperatorBinding
     {
-        internal TypeConverter? TypeConverter { get; private set; }
-        internal TypeResolver TypeResolver { get; private set; }
+        private TypeConverter? TypeConverter { get; }
+        private TypeResolver TypeResolver { get; }
 
         /// <summary>
         /// Creates an instance.
@@ -49,9 +49,9 @@ namespace Hl7.Cql.Compiler
             TypeResolver = typeResolver;
         }
 
-        protected virtual PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
+        private PropertyInfo OperatorsProperty => typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
 
-        protected virtual Type OperatorsType => OperatorsProperty.PropertyType;
+        private Type OperatorsType => OperatorsProperty.PropertyType;
 
         /// <summary>
         /// Binds <paramref name="operator"/> to an <see cref="Expression"/>.
@@ -509,7 +509,7 @@ namespace Hl7.Cql.Compiler
         {
             if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
             {
-                var elementType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var elementType = TypeResolver.GetListElementType(source.Type).CheckNotNull(message: $"'{source.Type}' was expected to be a list type.");
                 var method = OperatorsType
                     .GetMethod(nameof(ICqlOperators.ListSortBy))!
                     .MakeGenericMethod(elementType);
@@ -535,7 +535,7 @@ namespace Hl7.Cql.Compiler
 
         private Expression ListUnion(MemberExpression operators, Expression left, Expression right)
         {
-            if (left.Type == typeof(ValueSetFacade) && right.Type == typeof(ValueSetFacade))
+            if (left.Type == typeof(IValueSetFacade) && right.Type == typeof(IValueSetFacade))
             {
                 return BindBinaryOperator(nameof(ICqlOperators.ValueSetUnion), operators,
                     Expression.TypeAs(left, typeof(IEnumerable<CqlCode>)),
@@ -630,7 +630,7 @@ namespace Hl7.Cql.Compiler
             var elementType = TypeResolver.GetListElementType(operand.Type, @throw: true)!;
             if (IsOrImplementsIEnumerableOfT(elementType))
             {
-                var nestedElementType = TypeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"{elementType} was expected to be a list type.");
+                var nestedElementType = TypeResolver.GetListElementType(elementType).CheckNotNull(message: $"'{elementType}' was expected to be a list type.");
                 var method = OperatorsType
                         .GetMethod(nameof(ICqlOperators.FlattenList))!
                         .MakeGenericMethod(nestedElementType);
@@ -646,7 +646,6 @@ namespace Hl7.Cql.Compiler
                 return call;
             }
             else return operand; // flatten is being called on a list that is already flat.
-            throw new ArgumentException("Operands to this method must be an enumeration of enumerations, e.g. IEnumerable<IEnumerable<object>>", nameof(operand));
         }
 
         private Expression Width(MemberExpression operators, Expression operand)
@@ -755,7 +754,7 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("Expected constant type expression", nameof(typeExpression));
         }
 
-        protected MethodCallExpression BindBinaryOperator(string methodName, Expression operators, Expression left, Expression right)
+        private MethodCallExpression BindBinaryOperator(string methodName, Expression operators, Expression left, Expression right)
         {
             var methods = OperatorsType
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -778,7 +777,8 @@ namespace Hl7.Cql.Compiler
             }
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
-        protected MethodCallExpression BindTernaryOperator(string methodName, Expression operators, Expression first, Expression second, Expression third)
+
+        private MethodCallExpression BindTernaryOperator(string methodName, Expression operators, Expression first, Expression second, Expression third)
         {
             var methods = OperatorsType
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -807,7 +807,7 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"No suitable binary method {methodName}({first.Type}, {second.Type}) could be found.", nameof(methodName));
         }
 
-        protected MethodCallExpression BindBinaryOperatorWithPrecision(string methodName, Expression operators, Expression left, Expression right, Expression precision)
+        private MethodCallExpression BindBinaryOperatorWithPrecision(string methodName, Expression operators, Expression left, Expression right, Expression precision)
         {
             var methods = OperatorsType
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -845,7 +845,7 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
 
-        protected MethodCallExpression BindUnaryOperator(string methodName, Expression operators, Expression operand)
+        private MethodCallExpression BindUnaryOperator(string methodName, Expression operators, Expression operand)
         {
             var methods = OperatorsType
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -870,7 +870,7 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"No suitable unary method {methodName}({operand.Type}) could be found.", nameof(methodName));
         }
 
-        protected MethodCallExpression BindUnaryOperatorWithPrecision(string methodName, Expression operators, Expression operand, Expression precision)
+        private MethodCallExpression BindUnaryOperatorWithPrecision(string methodName, Expression operators, Expression operand, Expression precision)
         {
             var methods = OperatorsType
                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
@@ -899,7 +899,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Calls methods with a signature of Method%lt;T&gt;(Argument%lt;T&gt;)
         /// </summary>
-        protected MethodCallExpression BindUnaryGenericOperator(string methodName, Expression operators, Expression operand)
+        private MethodCallExpression BindUnaryGenericOperator(string methodName, Expression operators, Expression operand)
         {
             Type? elementType = null;
             if (operand.Type.IsGenericType)
@@ -937,7 +937,7 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException("Operands to this method must be generic with a single generic type parameter, e.g. IEnumerable<T>", nameof(operand));
         }
 
-        protected MethodCallExpression BindBinaryGenericOperator(string methodName, Expression operators, Expression left, Expression right,
+        private MethodCallExpression BindBinaryGenericOperator(string methodName, Expression operators, Expression left, Expression right,
             bool genericArgumentFromRight = false)
         {
             var methods = OperatorsType
@@ -968,7 +968,7 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"No suitable binary method {methodName}({left.Type}, {right.Type}) could be found.", nameof(methodName));
         }
 
-        protected Expression BindBinaryGenericOperatorOrNull(string methodName, Expression operators, Expression left, Expression right,
+        private Expression BindBinaryGenericOperatorOrNull(string methodName, Expression operators, Expression left, Expression right,
             bool genericArgumentFromRight = false)
         {
             var methods = OperatorsType
@@ -999,7 +999,7 @@ namespace Hl7.Cql.Compiler
             return Expression.Constant(null, typeof(object));
         }
 
-        protected MethodCallExpression BindTernaryGenericOperator(string methodName, Expression operators,
+        private MethodCallExpression BindTernaryGenericOperator(string methodName, Expression operators,
             Expression left, Expression right, Expression precision, bool genericParameterFromRight = false)
         {
             var methods = OperatorsType
@@ -1064,7 +1064,7 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("First parameter to Retrieve is expected to be a constant Type", nameof(typeExpression));
         }
 
-        protected MethodCallExpression Retrieve(MemberExpression operators,
+        private MethodCallExpression Retrieve(MemberExpression operators,
             Type resourceType, Expression codes, Expression codeProperty)
         {
             MethodInfo? forType = null;
@@ -1106,7 +1106,7 @@ namespace Hl7.Cql.Compiler
         {
             if (lambda is LambdaExpression lamdaExpr)
             {
-                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var sourceType = TypeResolver.GetListElementType(source.Type).CheckNotNull(message: $"'{source.Type}' was expected to be a list type.");
                 var resultType = lamdaExpr.ReturnType;
                 var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType, resultType);
@@ -1120,7 +1120,7 @@ namespace Hl7.Cql.Compiler
         {
             if (lambda is LambdaExpression lamdaExpr)
             {
-                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var sourceType = TypeResolver.GetListElementType(source.Type).CheckNotNull(message: $"'{source.Type}' was expected to be a list type.");
                 var method = OperatorsType.GetMethod(nameof(ICqlOperators.WhereOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType);
                 var call = Expression.Call(operators, genericMethod, source, lambda);
@@ -1134,10 +1134,10 @@ namespace Hl7.Cql.Compiler
         {
             if (collectionSelectorLambda is LambdaExpression collectionSelector)
             {
-                var firstGenericArgument = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var firstGenericArgument = TypeResolver.GetListElementType(source.Type).CheckNotNull(message: $"{source.Type} was expected to be a list type.");
                 if (IsOrImplementsIEnumerableOfT(collectionSelector.ReturnType))
                 {
-                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
+                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType).CheckNotNull(message: $"{collectionSelector.Type} was expected to be a list type.");
                     var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectManyOrNull))!;
                     var genericMethod = method.MakeGenericMethod(
                         firstGenericArgument,
@@ -1155,10 +1155,10 @@ namespace Hl7.Cql.Compiler
         {
             if (collectionSelectorLambda is LambdaExpression collectionSelector)
             {
-                var firstGenericArgument = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var firstGenericArgument = TypeResolver.GetListElementType(source.Type).CheckNotNull(message: $"{source.Type} was expected to be a list type.");
                 if (IsOrImplementsIEnumerableOfT(collectionSelector.ReturnType))
                 {
-                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType) ?? throw new InvalidOperationException($"{collectionSelector.Type} was expected to be a list type.");
+                    var secondGenericArgument = TypeResolver.GetListElementType(collectionSelector.ReturnType).CheckNotNull(message: $"{collectionSelector.Type} was expected to be a list type.");
                     if (resultSelectorLambda is LambdaExpression resultSelector)
                     {
                         var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectManyResultsOrNull))!;
@@ -1224,7 +1224,7 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        protected bool IsInterval(Type type)
+        private bool IsInterval(Type type)
         {
             if (type.IsGenericType)
             {
@@ -1235,7 +1235,7 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
-        protected bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
+        private bool IsOrImplementsIEnumerableOfT(Type type) => TypeResolver.ImplementsGenericInterface(type, typeof(IEnumerable<>));
 
         private enum ConversionType
         {

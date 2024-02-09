@@ -77,8 +77,8 @@ namespace Hl7.Cql.Runtime
             TypeConverter = typeConverter ?? throw new ArgumentNullException(nameof(typeConverter));
             DataSource = dataSource;
             var bridge = new CqlComparerBridge<object>(this);
-            IComparer = bridge;
-            IEqualityComparer = bridge;
+            DataComparer = bridge;
+            EqualityComparer = bridge;
         }
 
         /// <summary>
@@ -89,22 +89,24 @@ namespace Hl7.Cql.Runtime
         /// </remarks>
         /// <seealso cref="CqlComparers"/>
         public ICqlComparer Comparer { get; set; }
+        
         /// <summary>
-        /// Gets the implemenation of <see cref="IValueSetDictionary"/> to use.
+        /// Gets the implementation of <see cref="IValueSetDictionary"/> to use.
         /// </summary>
         public IValueSetDictionary ValueSets { get; }
         public IUnitConverter UnitConverter { get; }
 
         public TypeResolver TypeResolver { get; }
         public TypeConverter TypeConverter { get; }
+        
         /// <summary>
         /// Gets the implementation of <see cref="IDataSource"/> used to implement retrieve methods.
         /// </summary>
         public IDataSource DataSource { get; }
         public CqlDateTime NowValue { get; }
 
-        internal IEqualityComparer<object> IEqualityComparer { get; private set; }
-        internal IComparer<object> IComparer { get; private set; }
+        internal IEqualityComparer<object> EqualityComparer { get; private set; }
+        internal IComparer<object> DataComparer { get; private set; }
 
         internal ICqlComparer EnumComparer { get; private set; }
 
@@ -153,12 +155,11 @@ namespace Hl7.Cql.Runtime
         }
 
         public IEnumerable<R>? SelectOrNull<T, R>(IEnumerable<T?>? source, Func<T?, R> select) =>
-            source == null ? null : source.Select(select).ToList();
+            source?.Select(select).ToList();
 
         public IEnumerable<TResult>? SelectManyOrNull<TSource, TResult>(IEnumerable<TSource>? source,
             Func<TSource, IEnumerable<TResult>> collectionSelector) =>
-            source == null ? null : source
-                .Where(t => t != null)
+            source?.Where(t => t != null)
                 .SelectMany(t => collectionSelector(t) ?? Enumerable.Empty<TResult>())?
                 .ToList();
 
@@ -174,8 +175,7 @@ namespace Hl7.Cql.Runtime
         public TAccumulate? AggregateOrNull<TSource, TAccumulate>(IEnumerable<TSource?>? source, TAccumulate? seed, Func<TAccumulate?, TSource?, TAccumulate?> lambda) =>
             source == null ? default : source.Aggregate(seed, lambda);
 
-        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) =>
-            new ValueSetFacade(valueSet, ValueSets);
+        public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);
 
 
         public object NotSupported() => throw new NotSupportedException();
