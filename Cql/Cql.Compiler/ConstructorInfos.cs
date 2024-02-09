@@ -11,28 +11,31 @@ namespace Hl7.Cql.Compiler;
 internal static class ConstructorInfos
 {
     public static ConstructorInfo CqlCode { get; } = 
-        ReflectionUtility.ConstructorOf(() => new CqlCode(default, default, default, default))!;
+        ReflectionUtility.ConstructorOf(() => new CqlCode(default(string?), default(string?), default(string?), default(string?)))!;
 
     public static ConstructorInfo CqlConcept { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlConcept(default!, default))!;
-
+        ReflectionUtility.ConstructorOf(() => new CqlConcept(default(IEnumerable<CqlCode>)!, default(string?)))!;
+    
     public static ConstructorInfo CqlDeclarationAttribute { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlDeclarationAttribute(default!))!;
+        ReflectionUtility.ConstructorOf(() => new CqlDeclarationAttribute(default(string)!))!;
 
     public static ConstructorInfo LazyOfBoolCtor { get; } =
         ReflectionUtility.ConstructorOf(() => new Lazy<bool?>(default(Func<bool?>)!))!;
 
     public static ConstructorInfo NotImplementedException { get; } =
-        ReflectionUtility.ConstructorOf(() => new NotImplementedException(default))!;
+        ReflectionUtility.ConstructorOf(() => new NotImplementedException(default(string?)))!;
 
     public static ConstructorInfo CqlValueSet { get; } =
-        ReflectionUtility.ConstructorOf(() => new CqlValueSet(default!, default!))!;
+        ReflectionUtility.ConstructorOf(() => new CqlValueSet(default(string?)!, default(string?)!))!;
 
-    public static ConstructorInfo? ValueSetFacade { get; } =
-        ReflectionUtility.ConstructorOf(() => new ValueSetFacade(default!, default!))!;
+    public static ConstructorInfo CqlRatio { get; } =
+        ReflectionUtility.ConstructorOf(() => new CqlRatio(default(CqlQuantity?), default(CqlQuantity?)))!;
+
+    public static ConstructorInfo CqlQuantity { get; } = 
+        ReflectionUtility.ConstructorOf(() => new CqlQuantity(default(decimal?), default(string?)))!;
 
     public static ConstructorInfo ListOf<T>() =>
-        ReflectionUtility.ConstructorOf(() => new List<T>((IEnumerable<T>)default!))!;
+        ReflectionUtility.ConstructorOf(() => new List<T>((IEnumerable<T>)default(IEnumerable<T>)!))!;
 
     public static ConstructorInfo ListOf(Type elementType) =>
         (ConstructorInfo)

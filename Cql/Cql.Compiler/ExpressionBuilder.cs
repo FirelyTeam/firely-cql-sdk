@@ -12,7 +12,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,6 +20,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -1176,8 +1176,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeResolver.GetListElementType(type);
                 if (elementType == typeof(CqlCode))
                 {
-                    var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(CqlContext) })!;
-                    var @new = Expression.New(ctor, cqlValueSet, ctx.RuntimeContextParameter);
+                    var @new = CallCreateValueSetFacade(ctx, cqlValueSet);
                     return @new;
                 }
 
@@ -1374,7 +1373,7 @@ namespace Hl7.Cql.Compiler
                         denominatorExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlRatio)}");
                 }
-                var ctor = typeof(CqlRatio).GetConstructor(new[] { typeof(CqlQuantity), typeof(CqlQuantity) })!;
+                var ctor = ConstructorInfos.CqlRatio;
                 var @new = Expression.New(ctor,
                     numeratorExpr ?? Expression.Default(typeof(CqlQuantity)),
                     denominatorExpr ?? Expression.Default(typeof(CqlQuantity)));
@@ -1394,7 +1393,7 @@ namespace Hl7.Cql.Compiler
                         unitExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlQuantity)}");
                 }
-                var ctor = typeof(CqlQuantity).GetConstructor(new[] { typeof(decimal?), typeof(string) })!;
+                var ctor = ConstructorInfos.CqlQuantity;
 
                 if (unitExpr is not null)
                     unitExpr = ChangeType(unitExpr, typeof(string), ctx);
@@ -1424,12 +1423,7 @@ namespace Hl7.Cql.Compiler
                         displayExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlCode)}");
                 }
-                var ctor = typeof(CqlCode).GetConstructor(new[] {
-                    typeof(string),
-                    typeof(string),
-                    typeof(string),
-                    typeof(string)
-                }) ?? throw new InvalidOperationException("CqlCode needs a constructor with four string arguments.");
+                var ctor = ConstructorInfos.CqlCode;
                 var @new = Expression.New(ctor,
                     codeExpr ?? Expression.Default(typeof(string)),
                     systemExpr ?? Expression.Default(typeof(string)),
@@ -1450,7 +1444,7 @@ namespace Hl7.Cql.Compiler
                         displayExpr = tuple.Item2;
                     else throw new InvalidOperationException($"No property called {tuple.Item1} should exist on {nameof(CqlConcept)}");
                 }
-                var ctor = typeof(CqlConcept).GetConstructor(new[] { typeof(IEnumerable<CqlCode>), typeof(string) })!;
+                var ctor = ConstructorInfos.CqlConcept;
                 var @new = Expression.New(ctor,
                     codesExpr ?? Expression.Default(typeof(IEnumerable<CqlCode>)),
                     displayExpr ?? Expression.Default(typeof(string)));
@@ -2452,7 +2446,25 @@ namespace Hl7.Cql.Compiler
              select method).Single());
 
 
-        private static bool IsEnum(Type type)
+        protected LambdaExpression NotImplemented(string nav, Type[] functionParameterTypes, Type returnType, ExpressionBuilderContext context)
+        {
+            var parameters = functionParameterTypes
+                .Select((type, index) => Expression.Parameter(type, TypeNameToIdentifier(type, context) + index))
+                .ToArray();
+            var ctor = ConstructorInfos.NotImplementedException;
+            var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
+            var @throw = Expression.Throw(@new, returnType);
+            var lambda = Expression.Lambda(@throw, parameters);
+            //var funcTypes = new Type[functionParameterTypes.Length + 1];
+            //Array.Copy(functionParameterTypes, funcTypes, functionParameterTypes.Length);
+            //funcTypes[funcTypes.Length - 1] = returnType;
+            //var funcType = GetFuncType(funcTypes);
+            //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
+            //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
+            return lambda;
+        }
+
+        protected static bool IsEnum(Type type)
         {
             if (type.IsEnum)
                 return true;
@@ -2461,5 +2473,14 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
+        internal MethodCallExpression CallCreateValueSetFacade(ExpressionBuilderContext ctx, Expression operand)
+        {
+            var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
+            var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
+            var property = Expression.Property(ctx.RuntimeContextParameter, operatorsProperty);
+            var call = Expression.Call(property, createFacadeMethod, operand);
+
+            return call;
+        }
     }
 }

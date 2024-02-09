@@ -142,7 +142,7 @@ namespace Hl7.Cql.Primitives
                     // for leap years, this normalizes 3-1 from being day 61 back to day 60.
                     if (DateTime.IsLeapYear(firstDto.Year) && firstDayInYear > 60)
                         firstDayInYear -= 1;
-                    else if (DateTime.IsLeapYear(secondDto.Year) && secondDayInYear > 60)
+                    if (DateTime.IsLeapYear(secondDto.Year) && secondDayInYear > 60)
                         secondDayInYear -= 1;
 
                     if (yearDiff > 0 && secondDayInYear < firstDayInYear)
