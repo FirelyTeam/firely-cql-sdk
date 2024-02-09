@@ -13,12 +13,13 @@ internal partial class DefinitionsBuilder
     private void VisitCodeDef(
         LibraryContext libraryContext,
         CodeDef codeDef, 
-        HashSet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet)
+        HashSet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet, 
+        Dictionary<string, string> codeSystemUrls)
     {
         if (codeDef.codeSystem == null)
             throw new InvalidOperationException("Code definition has a null codeSystem node.");
 
-        if (!libraryContext.CodeSystemUrls.TryGetValue(codeDef.codeSystem.name, out var csUrl))
+        if (!codeSystemUrls.TryGetValue(codeDef.codeSystem.name, out var csUrl))
             throw new InvalidOperationException($"Undefined code system {codeDef.codeSystem.name!}");
 
         if (!codeNameCodeSystemUrlsSet.Add((codeDef.name, csUrl)))
@@ -26,12 +27,9 @@ internal partial class DefinitionsBuilder
                 $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})");
 
         var systemCode = new CqlCode(codeDef.id, csUrl);
-        libraryContext.CodesByName.Add(codeDef.name, systemCode);
-        if (!libraryContext.CodesByCodeSystemName.TryGetValue(codeDef.codeSystem!.name!, out var codings))
-        {
-            codings = new List<CqlCode>();
-            libraryContext.CodesByCodeSystemName.Add(codeDef.codeSystem!.name!, codings);
-        }
+        libraryContext.AddCodeByName(codeDef.name, systemCode);
+        var codeSystemName = codeDef.codeSystem!.name;
+        var codings = libraryContext.GetOrCreateCodesByCodeSystemName(codeSystemName);
 
         codings.Add(systemCode);
 

@@ -28,9 +28,10 @@ internal partial class DefinitionsBuilder
             for (int i = 0; i < conceptDef.code.Length; i++)
             {
                 var codeRef = conceptDef.code[i];
-                if (!libraryContext.CodesByName.TryGetValue(codeRef.name, out var systemCode))
+                if (!libraryContext.TryGetCodeByCodeName(codeRef.name, out var systemCode))
                     throw new InvalidOperationException(
                         $"Code {codeRef.name} in concept {conceptDef.name} is not defined.");
+
                 initMembers[i] = Expression.New(
                     ConstructorInfos.CqlCode,
                     Expression.Constant(systemCode.code),
@@ -49,5 +50,4 @@ internal partial class DefinitionsBuilder
             libraryContext.AddDefinition(conceptDef.name, lambda);
         }
     }
-
 }

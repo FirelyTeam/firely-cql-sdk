@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -13,7 +14,7 @@ internal partial class DefinitionsBuilder
         LibraryContext libraryContext,
         CodeSystemDef codeSystem)
     {
-        if (libraryContext.CodesByCodeSystemName.TryGetValue(codeSystem.name, out var codes))
+        if (libraryContext.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
         {
             var initMembers = codes
                 .Select(coding =>

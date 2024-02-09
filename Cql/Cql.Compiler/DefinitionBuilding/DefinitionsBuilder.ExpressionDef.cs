@@ -28,11 +28,11 @@ partial class DefinitionsBuilder
             throw new InvalidOperationException(message);
         }
 
-        var customKey = $"{libraryContext.LibraryNameAndVersion}.{expressionDef.name}";
+        var expressionKey = $"{libraryContext.LibraryKey}.{expressionDef.name}";
         Type[] functionParameterTypes = Type.EmptyTypes;
         var parameters = new[] { builderContext.RuntimeContextParameter };
         var function = expressionDef as FunctionDef;
-        if (function != null && function.operand != null)
+        if (function is { operand: not null })
         {
             functionParameterTypes = new Type[function.operand!.Length];
             int i = 0;
@@ -55,7 +55,7 @@ partial class DefinitionsBuilder
             parameters = parameters
                 .Concat(builderContext.Operands.Values)
                 .ToArray();
-            if (libraryContext.CustomImplementations.TryGetValue(customKey, out var factory) && factory != null)
+            if (libraryContext.TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
             {
                 var customLambda = factory(parameters);
                 libraryContext.AddDefinition(expressionDef.name, functionParameterTypes, customLambda);
@@ -64,16 +64,16 @@ partial class DefinitionsBuilder
 
             if (function?.external ?? false)
             {
-                var message = $"{customKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
+                var message = $"{expressionKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
                 builderContext.LogError(message, expressionDef);
-                if (libraryContext.Settings.AllowUnresolvedExternals)
+                if (libraryContext.AllowUnresolvedExternals)
                 {
                     var returnType =
                         libraryContext.TypeManager.TypeFor(expressionDef, builderContext, throwIfNotFound: true)!;
                     var paramTypes = new[] { typeof(CqlContext) }
                         .Concat(functionParameterTypes)
                         .ToArray();
-                    var notImplemented = NotImplemented(customKey, paramTypes, returnType, builderContext);
+                    var notImplemented = NotImplemented(expressionKey, paramTypes, returnType, builderContext);
                     libraryContext.AddDefinition(expressionDef.name, paramTypes, notImplemented);
                     return;
                 }
@@ -88,8 +88,7 @@ partial class DefinitionsBuilder
         if (function?.operand != null && libraryContext.ContainsDefinition(expressionDef.name, functionParameterTypes))
         {
             var ops = function.operand
-                .Where(op =>
-                    op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
+                .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
                 .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
             var message =
                 $"Function {expressionDef.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists.";

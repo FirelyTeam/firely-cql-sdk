@@ -27,7 +27,7 @@ internal partial class DefinitionsBuilder
         var resolveParam = Expression.Call(
             expressionBuilderContext.RuntimeContextParameter,
             typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
-            Expression.Constant(libraryContext.LibraryNameAndVersion),
+            Expression.Constant(libraryContext.LibraryKey),
             Expression.Constant(parameter.name),
             defaultValue
         );

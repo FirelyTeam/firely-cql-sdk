@@ -14,11 +14,7 @@ internal partial class DefinitionsBuilder
             ? includeDef.localIdentifier!
             : includeDef.path!;
 
-        var libNav = includeDef.NameAndVersion();
-        if (libNav == null)
-            throw new InvalidOperationException($"Include {includeDef.localId} does not have a well-formed name and version");
-
-        libraryContext.LocalLibraryIdentifiers.Add(alias, libNav);
+        var libNav = includeDef.NameAndVersion().CheckNotNull($"Include {includeDef.localId} does not have a well-formed name and version");
+        libraryContext.AddIncludeAlias(alias, libNav);
     }
-
 }
