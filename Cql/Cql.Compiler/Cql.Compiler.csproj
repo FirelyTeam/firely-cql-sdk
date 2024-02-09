@@ -36,8 +36,4 @@
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
 	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Infrastructure\" />
-	</ItemGroup>
 </Project>
