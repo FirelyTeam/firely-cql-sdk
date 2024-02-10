@@ -48,5 +48,5 @@ internal static class ConstructorInfos
             // Get the ConstructorInfo for ListOf< elementType >()
             .Invoke(null, null)
             // Check that ConstructorInfo is not null
-            .CheckNotNull();
+            .NotNull();
 }

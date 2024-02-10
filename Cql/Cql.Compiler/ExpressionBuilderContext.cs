@@ -206,7 +206,7 @@ namespace Hl7.Cql.Compiler
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key).CheckNotNullOrWhitespace(message: $"Identifier cannot be null or whitespace.");
+                    var normalized = NormalizeIdentifier(kvp.Key).NotNullOrWhitespace($"Identifier cannot be null or whitespace.");
                     scopes[normalized] = kvp.Value;
                 }
             }
@@ -214,7 +214,7 @@ namespace Hl7.Cql.Compiler
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key).CheckNotNullOrWhitespace(message: $"Identifier cannot be null or whitespace.");
+                    var normalized = NormalizeIdentifier(kvp.Key).NotNullOrWhitespace($"Identifier cannot be null or whitespace.");
                     
                     if (scopes.ContainsKey(normalized))
                         throw new InvalidOperationException(
@@ -258,7 +258,7 @@ namespace Hl7.Cql.Compiler
         private string FormatMessage(string message, elm.Element? element)
         {
             var locator = element?.locator;
-            var libraryKey = Builder.Library.NameAndVersion.CheckNotNull();
+            var libraryKey = Builder.Library.NameAndVersion.NotNull();
             return string.IsNullOrWhiteSpace(locator) 
                 ? $"{libraryKey}: {message}"
                 : $"{libraryKey} line {locator}: {message}";
