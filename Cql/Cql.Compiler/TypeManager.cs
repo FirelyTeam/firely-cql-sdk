@@ -84,7 +84,7 @@ namespace Hl7.Cql.Compiler
             {
                 case ExpressionRef expressionRef:
                 {
-                    var libraryName = expressionRef.libraryName ?? context.LibraryKey;
+                    var libraryName = expressionRef.libraryName ?? context.Builder.LibraryKey;
                     if (!context.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 

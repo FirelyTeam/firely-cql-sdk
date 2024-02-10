@@ -22,7 +22,6 @@ using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Runtime.Loader;
 using System.Text;
-using Hl7.Cql.Compiler.DefinitionBuilding;
 using elm = Hl7.Cql.Elm;
 using Library = Hl7.Fhir.Model.Library;
 
@@ -158,7 +157,8 @@ namespace Hl7.Cql.Packaging
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var expressions = DefinitionsBuilder.Instance.BuildDefinitions(operatorBinding, typeManager, library!, builderLogger);
+                elm.Library library1 = library!;
+                var expressions = new ExpressionBuilder(operatorBinding, typeManager, library1, builderLogger).BuildDefinitions();
                 all.Merge(expressions);
             }
 

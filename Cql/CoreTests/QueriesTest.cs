@@ -12,8 +12,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
-using Hl7.Cql.Compiler.DefinitionBuilding;
 
 namespace CoreTests
 {
@@ -33,7 +31,7 @@ namespace CoreTests
             var logger = LoggerFactory
                 .Create(logging => logging.AddDebug())
                 .CreateLogger<ExpressionBuilder>();
-            var expressions = DefinitionsBuilder.Instance.BuildDefinitions(binding, typeManager, elmPackage, logger);
+            var expressions = new ExpressionBuilder(binding, typeManager, elmPackage, logger).BuildDefinitions();
             QueriesDefinitions = expressions
                 .CompileAll();
             ValueSets = new HashValueSetDictionary();
@@ -43,7 +41,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            expressions = DefinitionsBuilder.Instance.BuildDefinitions(binding, typeManager, elmPackage, logger);
+            expressions = new ExpressionBuilder(binding, typeManager, elmPackage, logger).BuildDefinitions();
             AggregatesDefinitions = expressions
                 .CompileAll();
 

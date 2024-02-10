@@ -13,7 +13,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.DefinitionBuilding;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -27,22 +26,29 @@ namespace Hl7.Cql.Compiler
     internal class ExpressionBuilderContext
     {
         internal ExpressionBuilderContext(
-            DefinitionsBuilder.LibraryContext libraryContext, 
             ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers)
         {
-            _libraryContext = libraryContext.ArgNotNull();
             Builder = builder;
             RuntimeContextParameter = contextParameter;
+            LocalLibraryIdentifiers = new Dictionary<string, string>();
+            Operands = new Dictionary<string, ParameterExpression>();
+            Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+            ImpliedAlias = null;
+            Scopes = new Dictionary<string, (Expression, elm.Element)>();
             Definitions = definitions;
             LocalLibraryIdentifiers = localLibraryIdentifiers;
         }
 
         private ExpressionBuilderContext(ExpressionBuilderContext other)
         {
-            _libraryContext = other._libraryContext;
+            LocalLibraryIdentifiers = new Dictionary<string, string>();
+            Operands = new Dictionary<string, ParameterExpression>();
+            Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+            ImpliedAlias = null;
+            Scopes = new Dictionary<string, (Expression, elm.Element)>();
             Libraries = other.Libraries;
             Builder = other.Builder;
             RuntimeContextParameter = other.RuntimeContextParameter;
@@ -50,7 +56,6 @@ namespace Hl7.Cql.Compiler
             LocalLibraryIdentifiers = other.LocalLibraryIdentifiers;
             Operands = other.Operands;
             Scopes = other.Scopes;
-            Predecessors = other.Predecessors.ToList(); // copy it
             ImpliedAlias = other.ImpliedAlias;
         }
 
@@ -61,9 +66,9 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <summary>
-        /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
+        /// Gets the <see cref="Hl7.Cql.Compiler.ExpressionBuilder"/> from which this context derives.
         /// </summary>
-        private ExpressionBuilder Builder { get; }
+        public ExpressionBuilder Builder { get; }
         /// <summary>
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
         /// </summary>
@@ -73,23 +78,9 @@ namespace Hl7.Cql.Compiler
         public ParameterExpression RuntimeContextParameter { get; }
 
         /// <summary>
-        /// Gets the parent of the context's current expression.
-        /// </summary>
-        public elm.Element? Parent
-        {
-            get
-            {
-                if (Predecessors.Count < 0)
-                    return null;
-                else if (Predecessors.Count == 1)
-                    return Predecessors[0];
-                else return Predecessors[Predecessors.Count - 2];
-            }
-        }
-        /// <summary>
         /// Gets key value pairs mapping the library identifier to its library-local alias.
         /// </summary>
-        public IEnumerable<KeyValuePair<string, string>> LibraryIdentifiers
+        private IEnumerable<KeyValuePair<string, string>> LibraryIdentifiers
         {
             // Don't return the dictionary, to protect against cast attacks.  The source dictionary must be readonly.
             get
@@ -102,22 +93,19 @@ namespace Hl7.Cql.Compiler
 
         internal DefinitionDictionary<LambdaExpression> Definitions { get; }
 
-        private readonly DefinitionsBuilder.LibraryContext _libraryContext;
-        public string LibraryKey => _libraryContext.LibraryKey;
-
         /// <summary>
         /// Used for mappings such as:
         ///     include canonical_id version '1.0.0' called alias
         /// The key is "alias" and the value is "canonical_id.1.0.0"
         /// </summary>
-        internal readonly IDictionary<string, string> LocalLibraryIdentifiers = new Dictionary<string, string>();
+        internal readonly IDictionary<string, string> LocalLibraryIdentifiers;
 
         /// <summary>
         /// Parameters for function definitions.
         /// </summary>
-        internal IDictionary<string, ParameterExpression> Operands { get; } = new Dictionary<string, ParameterExpression>();
+        internal IDictionary<string, ParameterExpression> Operands { get; }
 
-        private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; } = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
+        private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; }
 
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
@@ -130,9 +118,7 @@ namespace Hl7.Cql.Compiler
         /// The use of "effective" here is unqualified and is implied to be PHQ.effective
         /// No idea how this is supposed to work with queries with multiple sources (e.g., with let statements)
         /// </summary>
-        internal string? ImpliedAlias { get; private set; } = null;
-
-        private readonly IList<elm.Element> Predecessors = new List<elm.Element>();
+        internal string? ImpliedAlias { get; private set; }
 
         internal static string? NormalizeIdentifier(string? identifier)
         {
@@ -190,7 +176,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private IDictionary<string, (Expression, elm.Element)> Scopes { get; } = new Dictionary<string, (Expression, elm.Element)>();
+        private IDictionary<string, (Expression, elm.Element)> Scopes { get; }
 
 
         internal bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
@@ -239,8 +225,8 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal ExpressionBuilderContext Deeper(elm.Element expression)
         {
+            _ = expression;
             var subContext = new ExpressionBuilderContext(this);
-            subContext.Predecessors.Add(expression);
             return subContext;
         }
 

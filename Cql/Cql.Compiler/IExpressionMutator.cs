@@ -18,7 +18,7 @@ namespace Hl7.Cql.Compiler
     {
         /// <summary>
         /// Gets the keys that are required by this interceptor.
-        /// Using two <see cref="IExpressionMutator"/> on the same <see cref="ExpressionBuilder"/> which require the same keys will result in an <see cref="InvalidOperationException"/>.
+        /// Using two <see cref="IExpressionMutator"/> on the same <see cref="Hl7.Cql.Compiler.ExpressionBuilder"/> which require the same keys will result in an <see cref="InvalidOperationException"/>.
         /// </summary>
         public IEnumerable<(string, Type)> RuntimeContextKeys { get; }
 

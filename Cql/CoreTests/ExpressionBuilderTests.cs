@@ -7,12 +7,12 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using Hl7.Cql.Compiler.DefinitionBuilding;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests
 {
     [TestClass]
-    public class DefinitionsBuilderTests
+    public class ExpressionBuilderTests
     {
         private static readonly TypeResolver TypeResolver = new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
         private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
@@ -29,7 +29,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var expressions = DefinitionsBuilder.Instance.BuildDefinitions(binding, typeManager, elmPackage, logger);
+            var expressions = new ExpressionBuilder(binding, typeManager, elmPackage, logger).BuildDefinitions();
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var expressions = DefinitionsBuilder.Instance.BuildDefinitions(binding, typeManager, elmPackage, logger);
+            var expressions = new ExpressionBuilder(binding, typeManager, elmPackage, logger).BuildDefinitions();
         }
 
         // https://github.com/FirelyTeam/firely-cql-sdk/issues/129
@@ -58,7 +58,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var expressions = DefinitionsBuilder.Instance.BuildDefinitions(binding, typeManager, elmPackage, logger);
+            var expressions = new ExpressionBuilder(binding, typeManager, elmPackage, logger).BuildDefinitions();
             Assert.IsNotNull(expressions);
         }
     }

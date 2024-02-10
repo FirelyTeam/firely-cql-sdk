@@ -20,14 +20,12 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using Hl7.Cql.Compiler.DefinitionBuilding;
 using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Operators;
 using elm = Hl7.Cql.Elm;
 using Expression = System.Linq.Expressions.Expression;
 
 using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePair<string, (System.Linq.Expressions.Expression, Hl7.Cql.Elm.Element)>;
-using System.Data.SqlTypes;
 
 namespace Hl7.Cql.Compiler
 {
@@ -36,12 +34,9 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal sealed partial class ExpressionBuilder
     {
-        private readonly DefinitionsBuilder.LibraryContext _libraryContext;
-
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="libraryContext"></param>
         /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="elm"/>.</param>
         /// <param name="elm">The <see cref="Library"/> this builder will build.</param>
@@ -49,21 +44,34 @@ namespace Hl7.Cql.Compiler
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         /// <exception cref="ArgumentException">If the <paramref name="elm"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(
-            DefinitionsBuilder.LibraryContext libraryContext, 
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             Library elm,
             ILogger<ExpressionBuilder> logger)
         {
-            _libraryContext = libraryContext.ArgNotNull();
+            Settings = new ExpressionBuilderSettings();
+            CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
+            ExpressionMutators = new List<IExpressionMutator>();
+            MakeGenericLambda = new Lazy<MethodInfo>(() =>
+                (from method in
+                        typeof(Expression).GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    where method.Name == nameof(Expression.Lambda)
+                          && method.IsGenericMethod
+                    let parameters = method.GetParameters()
+                    where parameters.Length == 2
+                          && parameters[0].ParameterType == typeof(Expression)
+                          && parameters[1].ParameterType == typeof(ParameterExpression[])
+                    select method).Single());
             TypeManager = typeManager.ArgNotNull();
             Library = elm.ArgNotNull();
             Logger = logger.ArgNotNull();
             Library.identifier.ArgNotNull();
+            Library.NameAndVersion.ArgNotNull();
             OperatorBinding = operatorBinding;
+            _definitionsBuilder = new DefinitionsBuilder(this);
         }
 
-        public ExpressionBuilderSettings Settings { get; } = new ExpressionBuilderSettings();
+        public ExpressionBuilderSettings Settings { get; }
 
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
@@ -74,7 +82,6 @@ namespace Hl7.Cql.Compiler
         /// functions defined in CQL with the <code>external</code> keyword.
         /// </remarks> 
         public IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
-            = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         /// <summary>
         /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
         /// </summary>
@@ -88,12 +95,17 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         public Library Library { get; }
 
+        /// <summary>
+        /// The Name and Version of the Library.
+        /// </summary>
+        public string LibraryKey => Library.NameAndVersion!;
+
         internal ILogger<ExpressionBuilder> Logger { get; }
 
         /// <summary>
         /// The expression visitors that will be executed (in order) on translated expressions.
         /// </summary>
-        private IList<IExpressionMutator> ExpressionMutators { get; } = new List<IExpressionMutator>();
+        private IList<IExpressionMutator> ExpressionMutators { get; }
 
         /// <summary>
         /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
@@ -111,7 +123,7 @@ namespace Hl7.Cql.Compiler
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            ctx ??= new ExpressionBuilderContext(_libraryContext, this, parameter, lambdas, new Dictionary<string, string>());
+            ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, new Dictionary<string, string>());
             lambdas = new DefinitionDictionary<LambdaExpression>();
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
@@ -1895,7 +1907,7 @@ namespace Hl7.Cql.Compiler
                         scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
                 }
-                var propogate = PropogateNull(scopeExpression, pathMemberInfo, ctx);
+                var propogate = PropogateNull(scopeExpression, pathMemberInfo);
                 // This is only necessary for Firely b/c it always initializes colleciton members even if they are 
                 // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
                 //
@@ -1928,7 +1940,7 @@ namespace Hl7.Cql.Compiler
                         var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, pathPart!);
                         if (pathMemberInfo != null)
                         {
-                            var propertyAccess = PropogateNull(source, pathMemberInfo, ctx);
+                            var propertyAccess = PropogateNull(source, pathMemberInfo);
                             source = propertyAccess;
                         }
                     }
@@ -1975,7 +1987,7 @@ namespace Hl7.Cql.Compiler
                 var condition = Expression.Condition(isCheck, ifIs, elseNull);
                 return condition;
             }
-            var propogateNull = PropogateNull(source, pathMemberInfo, ctx);
+            var propogateNull = PropogateNull(source, pathMemberInfo);
             var result = propogateNull;
             if (expectedType != null && expectedType != result.Type)
             {
@@ -2384,7 +2396,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Implements the null propogation operator (x?.y) into (x == null ? null : x.y);
         /// </summary>
-        private Expression PropogateNull(Expression before, MemberInfo member, ExpressionBuilderContext ctx)
+        private Expression PropogateNull(Expression before, MemberInfo member)
         {
             if (before.Type.IsValueType)
                 return before;
@@ -2422,16 +2434,7 @@ namespace Hl7.Cql.Compiler
             return ExpressionBuilderContext.NormalizeIdentifier(typeName!)!;
         }
 
-        private readonly Lazy<MethodInfo> MakeGenericLambda = new(() =>
-            (from method in
-                typeof(Expression).GetMethods(BindingFlags.Public | BindingFlags.Static)
-             where method.Name == nameof(Expression.Lambda)
-                 && method.IsGenericMethod
-             let parameters = method.GetParameters()
-             where parameters.Length == 2
-             && parameters[0].ParameterType == typeof(Expression)
-             && parameters[1].ParameterType == typeof(ParameterExpression[])
-             select method).Single());
+        private readonly Lazy<MethodInfo> MakeGenericLambda;
 
 
         private static bool IsEnum(Type type)
