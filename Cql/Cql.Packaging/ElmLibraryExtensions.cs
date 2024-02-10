@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.DefinitionBuilding;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
@@ -24,11 +25,10 @@ namespace Hl7.Cql.Packaging
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var builder = new ExpressionBuilder(
-                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
-                new TypeManager(typeResolver),
-                library!, builderLogger);
-            var lambda = builder.Lambda(expression);
+            var operatorsBinding = new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector));
+            var typeManager = new TypeManager(typeResolver);
+            var libraryContext = new DefinitionsBuilder.LibraryContext(operatorsBinding, typeManager, library, builderLogger);
+            var lambda = libraryContext.ExpressionBuilder.Lambda(expression);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);
         }

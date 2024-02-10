@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,6 +8,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
+using static Hl7.Cql.Compiler.DefinitionBuilding.DefinitionsBuilder;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler.DefinitionBuilding;
@@ -40,7 +42,7 @@ internal sealed partial class DefinitionsBuilder
             ILogger<ExpressionBuilder> logger)
         {
             Library = library.ArgNotNull();
-            _expressionBuilder = new ExpressionBuilder(this, operatorBinding, typeManager, library, logger);
+            ExpressionBuilder = new ExpressionBuilder(this, operatorBinding, typeManager, library, logger);
         }
 
         public DefinitionDictionary<LambdaExpression> BuildDefinitions()
@@ -49,28 +51,30 @@ internal sealed partial class DefinitionsBuilder
             return _definitions;
         }
 
-        private readonly ExpressionBuilder _expressionBuilder;
         private readonly Dictionary<string, string> _localLibraryIdentifiers = new();
         private readonly Dictionary<string, CqlCode> _codesByName = new();
         private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName = new();
         private readonly DefinitionDictionary<LambdaExpression> _definitions = new();
 
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        internal ExpressionBuilder ExpressionBuilder { get; }
+
         public Library Library { get; }
 
         public string LibraryKey => Library.NameAndVersion!;
 
-        public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
+        public bool AllowUnresolvedExternals => ExpressionBuilder.Settings.AllowUnresolvedExternals;
 
         public ExpressionBuilderContext NewExpressionBuilderContext() =>
             new(
                 this,
-                _expressionBuilder,
+                ExpressionBuilder,
                 Expression.Parameter(typeof(CqlContext), "context"),
                 _definitions,
                 _localLibraryIdentifiers);
 
         public Expression TranslateExpression(Element op, ExpressionBuilderContext ctx) =>
-            _expressionBuilder.TranslateExpression(op, ctx);
+            ExpressionBuilder.TranslateExpression(op, ctx);
 
         public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) => 
             _definitions.AddTag(LibraryKey, definition, signature, name, values);
@@ -112,7 +116,7 @@ internal sealed partial class DefinitionsBuilder
         }
 
         public bool TryGetCustomImplementationByExpressionKey(string expressionKey, [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) => 
-            _expressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
+            ExpressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
     }
 
     private void VisitLibrary(
@@ -226,10 +230,6 @@ internal sealed partial class DefinitionsBuilder
                 try
                 {
                     VisitExpressionDef(libraryContext, expressionDef);
-                }
-                catch (NotImplementedException)
-                {
-                    // REVIEW: Ignore for now and just coninue
                 }
                 catch (Exception e)
                 {

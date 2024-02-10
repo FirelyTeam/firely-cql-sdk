@@ -161,9 +161,11 @@ namespace Hl7.Cql.Packaging
                 var expressions = DefinitionsBuilder.Instance.BuildDefinitions(operatorBinding, typeManager, library!, builderLogger);
                 all.Merge(expressions);
             }
+
             var scw = new CSharpSourceCodeWriter(codeWriterLogger);
             foreach (var @using in typeResolver.ModelNamespaces)
                 scw.Usings.Add(@using);
+
             foreach (var alias in typeResolver.Aliases)
                 scw.AliasedUsings.Add(alias);
 

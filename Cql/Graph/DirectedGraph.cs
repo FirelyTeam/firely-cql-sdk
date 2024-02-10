@@ -17,18 +17,18 @@ namespace Hl7.Cql.Graph
 {
     internal sealed class DirectedGraph
     {
-
-        public DirectedGraphNode StartNode { get; set; } = new DirectedGraphNode { NodeId = DirectedGraphNode.StartId };
-        public DirectedGraphNode EndNode { get; set; } = new DirectedGraphNode { NodeId = DirectedGraphNode.EndId };
+        public DirectedGraphNode StartNode { get; } = new DirectedGraphNode { NodeId = DirectedGraphNode.StartId };
+        public DirectedGraphNode EndNode { get; } = new DirectedGraphNode { NodeId = DirectedGraphNode.EndId };
 
         public IDictionary<string, DirectedGraphNode> Nodes { get; } = new Dictionary<string, DirectedGraphNode>();
         public IDictionary<string, DirectedGraphEdge> Edges { get; } = new Dictionary<string, DirectedGraphEdge>();
 
-        public IDictionary<string, object>? Properties { get; set; }
+        private IDictionary<string, object>? Properties { get; set; }
 
         public void Add(DirectedGraphNode node) => Nodes.Add(node.NodeId, node);
         public void Add(DirectedGraphEdge edge) => Edges.Add(edge.EdgeId, edge);
-        public void AddEdge(DirectedGraphNode from, DirectedGraphNode to)
+
+        private void AddEdge(DirectedGraphNode from, DirectedGraphNode to)
         {
             var edge = new DirectedGraphEdge(from, to);
             if (Edges.ContainsKey(edge.EdgeId))
@@ -37,7 +37,7 @@ namespace Hl7.Cql.Graph
             from.ForwardEdges.Add(edge);
         }
 
-        public DirectedGraphNode Attach(string newNodeId, DirectedGraphNode from, string? edgeId = null)
+        private DirectedGraphNode Attach(string newNodeId, DirectedGraphNode from, string? edgeId = null)
         {
             if (Nodes.ContainsKey(newNodeId))
                 throw new ArgumentException($"Node {newNodeId} already exists in this graph.");
@@ -60,7 +60,7 @@ namespace Hl7.Cql.Graph
             return node;
         }
 
-        public DirectedGraphNode Attach(string newNodeId, params DirectedGraphNode[] from)
+        private DirectedGraphNode Attach(string newNodeId, params DirectedGraphNode[] from)
         {
             if (Nodes.ContainsKey(newNodeId))
                 throw new ArgumentException($"Node {newNodeId} already exists in this graph.");
@@ -87,7 +87,7 @@ namespace Hl7.Cql.Graph
         }
 
 
-        public DirectedGraphEdge Add(DirectedGraph subGraph, string fromNodeId, string? edgeId = null)
+        private DirectedGraphEdge Add(DirectedGraph subGraph, string fromNodeId, string? edgeId = null)
         {
             if (subGraph is null)
             {
@@ -132,7 +132,7 @@ namespace Hl7.Cql.Graph
             return newEdge;
         }
 
-        public void AddAndReparentSubgraph(DirectedGraph subGraph, string fromNodeId)
+        private void AddAndReparentSubgraph(DirectedGraph subGraph, string fromNodeId)
         {
             if (subGraph is null)
             {
@@ -177,7 +177,7 @@ namespace Hl7.Cql.Graph
 
         }
 
-        public IEnumerable<IList<DirectedGraphEdge>> GetAllPaths(DirectedGraphNode? node = null)
+        private IEnumerable<IList<DirectedGraphEdge>> GetAllPaths(DirectedGraphNode? node = null)
         {
             var danglingLeafNodeIds = Nodes.Values
                 .Where(node => node.NodeId != DirectedGraphNode.EndId && node.ForwardEdges.Count == 0)
@@ -189,7 +189,7 @@ namespace Hl7.Cql.Graph
                 yield return path;
         }
 
-        public IEnumerable<(DirectedGraphEdge Edge, DirectedGraphNode Node)> GetNodesConnectedTo(DirectedGraphNode node)
+        private IEnumerable<(DirectedGraphEdge Edge, DirectedGraphNode Node)> GetNodesConnectedTo(DirectedGraphNode node)
         {
             foreach (var edge in node.ForwardEdges)
             {
@@ -203,7 +203,7 @@ namespace Hl7.Cql.Graph
             }
         }
 
-        public IList<DirectedGraphNode> NodesBreadthFirst()
+        private IList<DirectedGraphNode> NodesBreadthFirst()
         {
             var order = new List<DirectedGraphNode>(Nodes.Count);
             var queue = new List<DirectedGraphNode>(Nodes.Count);
@@ -277,20 +277,20 @@ namespace Hl7.Cql.Graph
             }
         }
 
-        public void ValidateGraph(out bool hasCycle)
+        private void ValidateGraph(out bool hasCycle)
         {
             var cycles = new List<DirectedGraphEdge>();
             DepthFirst(StartNode, new DirectedGraphEdge[0], new List<DirectedGraphEdge>(), cycles).ToList();
             hasCycle = cycles.Any();
         }
 
-        public bool HasCycle()
+        private bool HasCycle()
         {
             ValidateGraph(out bool hasCycle);
             return hasCycle;
         }
 
-        public ExecutedPath<TContext> Run<TContext>(TContext context, IList<DirectedGraphEdge> edges)
+        private ExecutedPath<TContext> Run<TContext>(TContext context, IList<DirectedGraphEdge> edges)
             where TContext : ExecutionContext
         {
             var executedPath = new ExecutedPath<TContext>(context);
@@ -354,7 +354,7 @@ namespace Hl7.Cql.Graph
             return executedPath;
         }
 
-        public void SerializeToJson(Stream jsonStream)
+        private void SerializeToJson(Stream jsonStream)
         {
             if (jsonStream is null)
             {
@@ -370,25 +370,25 @@ namespace Hl7.Cql.Graph
             jsonStream.Flush();
         }
 
-        public DirectedGraph Clone()
-        {
-            var clone = new DirectedGraph();
-            foreach (var kvp in Nodes)
-            {
-                var newNode = kvp.Value.Clone();
-                clone.Add(newNode);
-                foreach (var edge in newNode.ForwardEdges)
-                    clone.Add(edge);
-            }
-            clone.StartNode = clone.Nodes[StartNode.NodeId];
-            clone.EndNode = clone.Nodes[EndNode.NodeId];
-            return clone;
-        }
+        // private DirectedGraph Clone()
+        // {
+        //     var clone = new DirectedGraph();
+        //     foreach (var kvp in Nodes)
+        //     {
+        //         var newNode = kvp.Value.Clone();
+        //         clone.Add(newNode);
+        //         foreach (var edge in newNode.ForwardEdges)
+        //             clone.Add(edge);
+        //     }
+        //     clone.StartNode = clone.Nodes[StartNode.NodeId];
+        //     clone.EndNode = clone.Nodes[EndNode.NodeId];
+        //     return clone;
+        // }
 
         /// <summary>
         /// Creates a reversed graph whose edge directions are all changed.
         /// </summary>
-        public DirectedGraph Reverse()
+        private DirectedGraph Reverse()
         {
             var reversed = new DirectedGraph();
             foreach (var kvp in Nodes)
