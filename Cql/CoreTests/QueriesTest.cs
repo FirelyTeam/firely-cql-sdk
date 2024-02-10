@@ -31,7 +31,8 @@ namespace CoreTests
             var logger = LoggerFactory
                 .Create(logging => logging.AddDebug())
                 .CreateLogger<ExpressionBuilder>();
-            var expressions = new ExpressionBuilder(binding, typeManager, elmPackage, logger).BuildDefinitions();
+            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var expressions = eb.BuildDefinitions();
             QueriesDefinitions = expressions
                 .CompileAll();
             ValueSets = new HashValueSetDictionary();
@@ -41,7 +42,8 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            expressions = new ExpressionBuilder(binding, typeManager, elmPackage, logger).BuildDefinitions();
+            eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            expressions = eb.BuildDefinitions();
             AggregatesDefinitions = expressions
                 .CompileAll();
 

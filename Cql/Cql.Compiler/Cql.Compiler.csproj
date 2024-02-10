@@ -29,9 +29,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<Compile Update=".\DefinitionBuilding\DefinitionsBuilder.*.cs">
-			<DependentUpon>.\DefinitionBuilding\DefinitionsBuilder.cs</DependentUpon>
-		</Compile>
 		<Compile Update="ExpressionBuilder.*.cs">
 			<DependentUpon>ExpressionBuilder.cs</DependentUpon>
 		</Compile>
