@@ -18,41 +18,30 @@ partial class ExpressionBuilder
     public DefinitionDictionary<LambdaExpression> BuildDefinitions() => 
         _definitionsBuilder.BuildDefinitions();
 
-    class DefinitionsBuilder
+    private class DefinitionsBuilder
     {
         private static readonly ParameterExpression RuntimeContextParameter = Expression.Parameter(typeof(CqlContext), "context");
 
-        private readonly ExpressionBuilder expressionBuilder;
+        private readonly DefinitionsBuilderContext _context;
+        private readonly DefinitionDictionary<LambdaExpression> _definitions;
 
         public DefinitionsBuilder(ExpressionBuilder expressionBuilder)
-        {
-            this.expressionBuilder = expressionBuilder;
-        }
-
-        public DefinitionDictionary<LambdaExpression> BuildDefinitions()
         {
             var localLibraryIdentifiers = new Dictionary<string, string>();
             var codesByName = new Dictionary<string, CqlCode>();
             var codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
-            var definitions = new DefinitionDictionary<LambdaExpression>();
-            DefinitionsBuilderContext context = new(expressionBuilder, localLibraryIdentifiers, codesByName, codesByCodeSystemName, definitions);
-            VisitLibrary(context);
-            return definitions;
+            _definitions = new DefinitionDictionary<LambdaExpression>();
+            _context = new(expressionBuilder, localLibraryIdentifiers, codesByName, codesByCodeSystemName, _definitions);
         }
 
-        private interface IExpressionBuilderContextFacade
+        public DefinitionDictionary<LambdaExpression> BuildDefinitions()
         {
-            IDictionary<string, ParameterExpression> Operands { get; }
-            void LogWarning(string message, Element? expression = null);
-            void LogError(string message, Element? element = null);
-            Type TypeFor(TypeSpecifier resultTypeSpecifier);
-            Type? TypeFor(Element element, bool throwIfNotFound = true);
-            IExpressionBuilderContextFacade Deeper(Element expression);
-            Expression TranslateExpression(Element op);
-            string TypeNameToIdentifier(Type type);
+            ProcessLibrary();
+            return _definitions;
         }
 
-        private class ExpressionBuilderContextFacade : IExpressionBuilderContextFacade
+
+        private class ExpressionBuilderContextFacade
         {
             private readonly ExpressionBuilderContext _expressionBuilderContext;
 
@@ -75,7 +64,7 @@ partial class ExpressionBuilder
             public Type? TypeFor(Element element, bool throwIfNotFound = true) =>
                 _expressionBuilderContext.TypeFor(element, throwIfNotFound);
 
-            public IExpressionBuilderContextFacade Deeper(Element expression) =>
+            public ExpressionBuilderContextFacade Deeper(Element expression) =>
                 new ExpressionBuilderContextFacade(_expressionBuilderContext.Deeper(expression));
 
             public Expression TranslateExpression(Element op) =>
@@ -113,7 +102,7 @@ partial class ExpressionBuilder
 
             public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
-            public IExpressionBuilderContextFacade NewExpressionBuilderContext() =>
+            public ExpressionBuilderContextFacade NewExpressionBuilderContext() =>
                 new ExpressionBuilderContextFacade(
                     new ExpressionBuilderContext(
                         _expressionBuilder,
@@ -164,10 +153,9 @@ partial class ExpressionBuilder
                 _expressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
         }
 
-        private static void VisitLibrary(
-            DefinitionsBuilderContext context)
+        private void ProcessLibrary()
         {
-            var library = context.Library;
+            var library = _context.Library;
 
             if (library.includes is { Length: > 0 } includeDefs)
             {
@@ -175,7 +163,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        VisitIncludeDef(context, includeDef);
+                        ProcessIncludes(includeDef);
                     }
                     catch (Exception e)
                     {
@@ -194,7 +182,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        VisitValueSetDef(context, valueSetDef);
+                        ProcessValueSets(valueSetDef);
                     }
                     catch (Exception e)
                     {
@@ -214,7 +202,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        VisitCodeDef(context, codeDef, foundCodeNameCodeSystemUrls, codeSystemUrls);
+                        ProcessCodes(codeDef, foundCodeNameCodeSystemUrls, codeSystemUrls);
                     }
                     catch (Exception e)
                     {
@@ -229,7 +217,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        VisitCodeSystemDef(context, codeSystemDef);
+                        ProcessCodeSystems(codeSystemDef);
                     }
                     catch (Exception e)
                     {
@@ -244,7 +232,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        VisitConceptDef(context, conceptDef);
+                        ProcessConcepts(conceptDef);
                     }
                     catch (Exception e)
                     {
@@ -259,7 +247,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        VisitParameterDef(context, parameterDef);
+                        ProcessParameters(parameterDef);
                     }
                     catch (Exception e)
                     {
@@ -274,7 +262,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        VisitExpressionDef(context, expressionDef);
+                        ProcessStatements(expressionDef);
                     }
                     catch (Exception e)
                     {
@@ -285,15 +273,14 @@ partial class ExpressionBuilder
 
             Exception ExceptionWhileBuilding(string elementName, string locator, Exception innerException) =>
                 throw new InvalidOperationException(
-                    $"Exception while building expression definition '{elementName} ' in library '{context.LibraryKey}' at location '{locator}'. See InnerException for more details.",
+                    $"Exception while building expression definition '{elementName} ' in library '{_context.LibraryKey}' at location '{locator}'. See InnerException for more details.",
                     innerException);
         }
 
-        private static void VisitCodeSystemDef(
-            DefinitionsBuilderContext context,
+        private void ProcessCodeSystems(
             CodeSystemDef codeSystem)
         {
-            if (context.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
+            if (_context.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
             {
                 var initMembers = codes
                     .Select(coding =>
@@ -308,7 +295,7 @@ partial class ExpressionBuilder
                 var arrayOfCodesInitializer = Expression.NewArrayInit(typeof(CqlCode), initMembers);
                 var contextParameter = RuntimeContextParameter;
                 var lambda = Expression.Lambda(arrayOfCodesInitializer, contextParameter);
-                context.AddDefinition(codeSystem.name, lambda);
+                _context.AddDefinition(codeSystem.name, lambda);
             }
             else
             {
@@ -316,12 +303,11 @@ partial class ExpressionBuilder
                     Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
                 var contextParameter = RuntimeContextParameter;
                 var lambda = Expression.Lambda(newArray, contextParameter);
-                context.AddDefinition(codeSystem.name, lambda);
+                _context.AddDefinition(codeSystem.name, lambda);
             }
         }
 
-        private static void VisitConceptDef(
-            DefinitionsBuilderContext context,
+        private void ProcessConcepts(
             ConceptDef conceptDef)
         {
             if (conceptDef.code.Length <= 0)
@@ -330,7 +316,7 @@ partial class ExpressionBuilder
                     Expression.NewArrayBounds(typeof(CqlCode), Expression.Constant(0, typeof(int)));
                 var contextParameter = RuntimeContextParameter;
                 var lambda = Expression.Lambda(newArray, contextParameter);
-                context.AddDefinition(conceptDef.name, lambda);
+                _context.AddDefinition(conceptDef.name, lambda);
             }
             else
             {
@@ -338,7 +324,7 @@ partial class ExpressionBuilder
                 for (int i = 0; i < conceptDef.code.Length; i++)
                 {
                     var codeRef = conceptDef.code[i];
-                    if (!context.TryGetCodeByCodeName(codeRef.name, out var systemCode))
+                    if (!_context.TryGetCodeByCodeName(codeRef.name, out var systemCode))
                         throw new InvalidOperationException(
                             $"Code {codeRef.name} in concept {conceptDef.name} is not defined.");
 
@@ -357,12 +343,11 @@ partial class ExpressionBuilder
                 var newConcept = Expression.New(ConstructorInfos.CqlConcept!, asEnumerable, display);
                 var contextParameter = RuntimeContextParameter;
                 var lambda = Expression.Lambda(newConcept, contextParameter);
-                context.AddDefinition(conceptDef.name, lambda);
+                _context.AddDefinition(conceptDef.name, lambda);
             }
         }
 
-        private static void VisitCodeDef(
-            DefinitionsBuilderContext context,
+        private void ProcessCodes(
             CodeDef codeDef,
             ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
             IReadOnlyDictionary<string, string> codeSystemUrls)
@@ -378,9 +363,9 @@ partial class ExpressionBuilder
                     $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})");
 
             var systemCode = new CqlCode(codeDef.id, csUrl);
-            context.AddCodeByName(codeDef.name, systemCode);
+            _context.AddCodeByName(codeDef.name, systemCode);
             var codeSystemName = codeDef.codeSystem!.name;
-            var codings = context.GetOrCreateCodesByCodeSystemName(codeSystemName);
+            var codings = _context.GetOrCreateCodesByCodeSystemName(codeSystemName);
 
             codings.Add(systemCode);
 
@@ -393,18 +378,17 @@ partial class ExpressionBuilder
             );
             var contextParameter = RuntimeContextParameter;
             var lambda = Expression.Lambda(newCodingExpression, contextParameter);
-            context.AddDefinition(codeDef.name!, lambda);
+            _context.AddDefinition(codeDef.name!, lambda);
         }
 
-        private static void VisitExpressionDef(
-            DefinitionsBuilderContext context,
+        private void ProcessStatements(
             ExpressionDef expressionDef)
         {
             if (expressionDef.expression == null)
                 throw new InvalidOperationException(
                     $"Definition '{expressionDef.name}' does not have an expression property");
 
-            var builderContext = context.NewExpressionBuilderContext();
+            var builderContext = _context.NewExpressionBuilderContext();
 
             if (string.IsNullOrWhiteSpace(expressionDef.name))
             {
@@ -414,7 +398,7 @@ partial class ExpressionBuilder
                 throw new InvalidOperationException(message);
             }
 
-            var expressionKey = $"{context.LibraryKey}.{expressionDef.name}";
+            var expressionKey = $"{_context.LibraryKey}.{expressionDef.name}";
             Type[] functionParameterTypes = Type.EmptyTypes;
             var parameters = new[] { RuntimeContextParameter };
             var function = expressionDef as FunctionDef;
@@ -441,10 +425,10 @@ partial class ExpressionBuilder
                 parameters = parameters
                     .Concat(builderContext.Operands.Values)
                     .ToArray();
-                if (context.TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
+                if (_context.TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
                 {
                     var customLambda = factory(parameters);
-                    context.AddDefinition(expressionDef.name, functionParameterTypes, customLambda);
+                    _context.AddDefinition(expressionDef.name, functionParameterTypes, customLambda);
                     return;
                 }
 
@@ -452,14 +436,14 @@ partial class ExpressionBuilder
                 {
                     var message = $"{expressionKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
                     builderContext.LogError(message, expressionDef);
-                    if (context.AllowUnresolvedExternals)
+                    if (_context.AllowUnresolvedExternals)
                     {
                         var returnType = builderContext.TypeFor(expressionDef, throwIfNotFound: true)!;
                         var paramTypes = new[] { typeof(CqlContext) }
                             .Concat(functionParameterTypes)
                             .ToArray();
-                        var notImplemented = NotImplemented(expressionKey, paramTypes, returnType, builderContext);
-                        context.AddDefinition(expressionDef.name, paramTypes, notImplemented);
+                        var notImplemented = NotImplemented(builderContext, expressionKey, paramTypes, returnType);
+                        _context.AddDefinition(expressionDef.name, paramTypes, notImplemented);
                         return;
                     }
 
@@ -470,7 +454,7 @@ partial class ExpressionBuilder
             builderContext = builderContext.Deeper(expressionDef);
             var bodyExpression = builderContext.TranslateExpression(expressionDef.expression);
             var lambda = Expression.Lambda(bodyExpression, parameters);
-            if (function?.operand != null && context.ContainsDefinition(expressionDef.name, functionParameterTypes))
+            if (function?.operand != null && _context.ContainsDefinition(expressionDef.name, functionParameterTypes))
             {
                 var ops = function.operand
                     .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
@@ -489,22 +473,22 @@ partial class ExpressionBuilder
 
                     foreach (var tag in tags)
                     {
-                        context.AddDefinitionTag(expressionDef.name, functionParameterTypes, tag.name, tag.value.OrEmptyString());
+                        _context.AddDefinitionTag(expressionDef.name, functionParameterTypes, tag.name, tag.value.OrEmptyString());
                     }
                 }
 
-                context.AddDefinition(expressionDef.name, functionParameterTypes.OrEmptyArray(), lambda);
+                _context.AddDefinition(expressionDef.name, functionParameterTypes.OrEmptyArray(), lambda);
             }
         }
 
         private static LambdaExpression NotImplemented(
+            ExpressionBuilderContextFacade expressionBuilderContextFacade, 
             string nav,
-            Type[] functionParameterTypes,
-            Type returnType,
-            IExpressionBuilderContextFacade context)
+            Type[] signature,
+            Type returnType)
         {
-            var parameters = functionParameterTypes
-                .Select((type, index) => Expression.Parameter(type, context.TypeNameToIdentifier(type) + index))
+            var parameters = signature
+                .Select((type, index) => Expression.Parameter(type, expressionBuilderContextFacade.TypeNameToIdentifier(type) + index))
                 .ToArray();
             var ctor = ConstructorInfos.NotImplementedException;
             var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
@@ -519,8 +503,7 @@ partial class ExpressionBuilder
             return lambda;
         }
 
-        private static void VisitIncludeDef(
-            DefinitionsBuilderContext context,
+        private void ProcessIncludes(
             IncludeDef includeDef)
         {
             var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
@@ -528,18 +511,17 @@ partial class ExpressionBuilder
                 : includeDef.path!;
 
             var libNav = includeDef.NameAndVersion().NotNull($"Include {includeDef.localId} does not have a well-formed name and version");
-            context.AddIncludeAlias(alias, libNav);
+            _context.AddIncludeAlias(alias, libNav);
         }
 
-        private static void VisitParameterDef(
-            DefinitionsBuilderContext context,
+        private void ProcessParameters(
             ParameterDef parameter)
         {
-            if (context.ContainsDefinition(parameter.name!))
+            if (_context.ContainsDefinition(parameter.name!))
                 throw new InvalidOperationException(
                     $"There is already a definition named {parameter.name}");
 
-            var expressionBuilderContext = context.NewExpressionBuilderContext();
+            var expressionBuilderContext = _context.NewExpressionBuilderContext();
 
             Expression? defaultValue = null;
             if (parameter.@default != null)
@@ -550,7 +532,7 @@ partial class ExpressionBuilder
             var resolveParam = Expression.Call(
                 RuntimeContextParameter,
                 typeof(CqlContext).GetMethod(nameof(CqlContext.ResolveParameter))!,
-                Expression.Constant(context.LibraryKey),
+                Expression.Constant(_context.LibraryKey),
                 Expression.Constant(parameter.name),
                 defaultValue
             );
@@ -559,18 +541,17 @@ partial class ExpressionBuilder
             var cast = Expression.Convert(resolveParam, parameterType);
             // e.g. (bundle, context) => context.Parameters["Measurement Period"]
             var lambda = Expression.Lambda(cast, RuntimeContextParameter);
-            context.AddDefinition(parameter.name!, lambda);
+            _context.AddDefinition(parameter.name!, lambda);
         }
 
-        private static void VisitValueSetDef(
-            DefinitionsBuilderContext context,
+        private void ProcessValueSets(
             ValueSetDef valueSetDef)
         {
             var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
                 Expression.Constant(valueSetDef.version, typeof(string)));
             var contextParameter = RuntimeContextParameter;
             var lambda = Expression.Lambda(@new, contextParameter);
-            context.AddDefinition(valueSetDef.name!, lambda);
+            _context.AddDefinition(valueSetDef.name!, lambda);
         }
     }
 }
