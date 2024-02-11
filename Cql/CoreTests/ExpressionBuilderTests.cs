@@ -7,14 +7,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
-using System.Linq.Expressions;
-using Hl7.Cql.Runtime;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests
 {
     [TestClass]
-    public class LibraryExpressionsBuilderTests
+    public class ExpressionBuilderTests
     {
         private static readonly TypeResolver TypeResolver = new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
         private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);

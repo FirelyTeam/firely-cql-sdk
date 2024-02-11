@@ -51,8 +51,7 @@ namespace CoreTests
             var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            ILogger<ExpressionBuilder> logger = CreateLogger();
-            var fhirHelpersLambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, fhirHelpersPackage);
+            var fhirHelpersLambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, CreateLogger(), fhirHelpersPackage);
             LambdasByTestName.Lambdas.Merge(fhirHelpersLambdas);
 
 
@@ -63,8 +62,7 @@ namespace CoreTests
                 //    continue;
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
                 var includes = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
-                ILogger<ExpressionBuilder> logger1 = CreateLogger();
-                var lambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger1, elmPackage);
+                var lambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, CreateLogger(), elmPackage);
                 LambdasByTestName.Lambdas.Merge(lambdas);
             }
 
