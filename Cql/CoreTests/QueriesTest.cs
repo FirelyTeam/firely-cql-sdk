@@ -33,7 +33,7 @@ namespace CoreTests
             var logger = LoggerFactory
                 .Create(logging => logging.AddDebug())
                 .CreateLogger<ExpressionBuilder>();
-            var expressions = (DefinitionDictionary<LambdaExpression>)ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
+            var expressions = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
             QueriesDefinitions = expressions
                 .CompileAll();
             ValueSets = new HashValueSetDictionary();
