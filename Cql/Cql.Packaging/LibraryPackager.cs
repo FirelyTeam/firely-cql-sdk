@@ -147,20 +147,24 @@ namespace Hl7.Cql.Packaging
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
                 .OfType<elm.Library>()
                 // Processing this deterministically to reduce different exceptions when running this repeatedly
-                .OrderBy(lib => lib.NameAndVersion) 
+                //.OrderBy(lib => lib.NameAndVersion)
+                // REVIEW: Remove two lines below and uncomment one line above (Only used during debugging)
+                .OrderBy(lib => lib.Name!.ToLowerInvariant() == "hfbetablockertherapyforlvsdfhir" ? 0 : 1)
+                .ThenBy(lib => lib.NameAndVersion)
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library!, builderLogger, new(false));
-                var expressions = builder.Build();
+                var expressions = ExpressionBuilder.BuildLibraryDefinitions(operatorBinding, typeManager, builderLogger, library!);
                 all.Merge(expressions);
             }
+
             var scw = new CSharpSourceCodeWriter(codeWriterLogger);
             foreach (var @using in typeResolver.ModelNamespaces)
                 scw.Usings.Add(@using);
+
             foreach (var alias in typeResolver.Aliases)
                 scw.AliasedUsings.Add(alias);
 
@@ -190,7 +194,6 @@ namespace Hl7.Cql.Packaging
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }

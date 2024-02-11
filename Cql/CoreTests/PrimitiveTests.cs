@@ -17,6 +17,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests
 {
@@ -3526,8 +3527,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var expressions = eb.Build();
+            var expressions = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())
              .CreateLogger<CSharpSourceCodeWriter>();

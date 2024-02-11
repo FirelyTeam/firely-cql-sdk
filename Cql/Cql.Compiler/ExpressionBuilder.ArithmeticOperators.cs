@@ -11,6 +11,7 @@ using Hl7.Cql.Abstractions;
 using System;
 using System.Globalization;
 using System.Linq.Expressions;
+using Hl7.Cql.Runtime;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -51,7 +52,7 @@ namespace Hl7.Cql.Compiler
         protected Expression MaxValue(elm.MaxValue max, ExpressionBuilderContext ctx)
         {
 
-            var type = TypeResolver.ResolveType(max.valueType!.Name);
+            var type = TypeManager.Resolver.ResolveType(max.valueType!.Name);
             var call = OperatorBinding.Bind(CqlOperator.MaximumValue,
                 ctx.RuntimeContextParameter,
                 Expression.Constant(type, typeof(Type)));
@@ -59,7 +60,7 @@ namespace Hl7.Cql.Compiler
         }
         protected Expression MinValue(elm.MinValue min, ExpressionBuilderContext ctx)
         {
-            var type = TypeResolver.ResolveType(min.valueType!.Name);
+            var type = TypeManager.Resolver.ResolveType(min.valueType!.Name);
             var call = OperatorBinding.Bind(CqlOperator.MinimumValue,
                 ctx.RuntimeContextParameter,
                 Expression.Constant(type, typeof(Type)));
@@ -77,7 +78,7 @@ namespace Hl7.Cql.Compiler
             // since int.MaxValue is 2147483647, we have to handle this specially
             if (e.operand is elm.Literal literal)
             {
-                var literalType = TypeManager.TypeFor(literal, ctx);
+                var literalType = ctx.TypeFor(literal);
                 if (literalType == typeof(int?) && literal.value == "2147483648")
                 {
                     return Expression.Constant(int.MinValue);

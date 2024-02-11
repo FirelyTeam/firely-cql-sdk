@@ -28,7 +28,7 @@ namespace Hl7.Cql.Compiler
                     var type = TypeManager.TypeFor(@as.asTypeSpecifier!, ctx);
                     if (IsOrImplementsIEnumerableOfT(type))
                     {
-                        var listElementType = TypeResolver.GetListElementType(type) ?? throw new InvalidOperationException($"{type} was expected to be a list type.");
+                        var listElementType = TypeManager.Resolver.GetListElementType(type).NotNull($"{type} was expected to be a list type.");
                         var newArray = Expression.NewArrayBounds(listElementType, Expression.Constant(0));
                         var elmAs = new ElmAsExpression(newArray, type);
                         return elmAs;
@@ -58,12 +58,9 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                if (string.IsNullOrWhiteSpace(@as.asType.Name))
-                    throw new ArgumentException("asType cannot be null", nameof(@as));
-                if (@as.operand == null)
-                    throw new ArgumentException("operand cannot be null", nameof(@as));
-                var type = TypeResolver.ResolveType(@as.asType.Name!)
-                    ?? throw new InvalidOperationException($"Cannot resolve type {@as.asType.Name}");
+                @as.asType.Name.NotNullOrWhitespace();
+                @as.operand.NotNull($"operand cannot be null");
+                var type = TypeManager.Resolver.ResolveType(@as.asType.Name!).NotNull($"Cannot resolve type {@as.asType.Name}");
                 var operand = TranslateExpression(@as.operand, ctx);
                 if (!type.IsAssignableFrom(operand.Type))
                     ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
@@ -81,29 +78,26 @@ namespace Hl7.Cql.Compiler
             {
                 if (@is.isTypeSpecifier is elm.ChoiceTypeSpecifier choice)
                 {
-                    var firstChoiceType = TypeManager.TypeFor(choice.choice[0], ctx)
-                            ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+                    var firstChoiceType = TypeManager.TypeFor(choice.choice[0], ctx).NotNull($"Could not resolve type for Is expression");
                     Expression result = Expression.TypeIs(op, firstChoiceType);
                     for (int i = 1; i < choice.choice.Length; i++)
                     {
-                        var cti = TypeManager.TypeFor(choice.choice[i], ctx)
-                            ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+                        var cti = TypeManager.TypeFor(choice.choice[i], ctx).NotNull($"Could not resolve type for Is expression");
                         var ie = Expression.TypeIs(op, cti);
                         result = Expression.Or(result, ie);
                     }
                     var ta = Expression.TypeAs(result, typeof(bool?));
                     return ta;
                 }
-                type = TypeManager.TypeFor(@is.isTypeSpecifier, ctx)
-                    ?? throw new InvalidOperationException($"Could not resolve type for Is expression");
+
+                type = TypeManager.TypeFor(@is.isTypeSpecifier, ctx).NotNull($"Could not resolve type for Is expression");
             }
-            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name)) 
+            else if (!string.IsNullOrWhiteSpace(@is.isType?.Name))
             {
-                type = TypeResolver.ResolveType(@is.isType.Name)
-                    ?? throw new InvalidOperationException($"Could not resolve type {@is.isType.Name}");
+                type = TypeManager.Resolver.ResolveType(@is.isType.Name).NotNull($"Could not resolve type {@is.isType.Name}");
             }
-            if (type == null)
-                throw new InvalidOperationException($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
+
+            type.NotNull($"Could not identify Is type specifer via {nameof(elm.Is.isTypeSpecifier)} or {nameof(elm.Is.isType)}.");
             var isExpression = Expression.TypeIs(op, type);
             var nullable = Expression.TypeAs(isExpression, typeof(bool?));
             return nullable;
@@ -174,19 +168,19 @@ namespace Hl7.Cql.Compiler
         protected Expression? ToConcept(elm.ToConcept e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            return ChangeType(operand, TypeResolver.ConceptType, ctx);
+            return ChangeType(operand, TypeManager.Resolver.ConceptType, ctx);
         }
 
         protected Expression? ToDate(elm.ToDate e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            return ChangeType(operand, TypeResolver.DateType, ctx);
+            return ChangeType(operand, TypeManager.Resolver.DateType, ctx);
         }
 
         protected Expression ToDateTime(elm.ToDateTime e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            return ChangeType(operand, TypeResolver.DateTimeType, ctx);
+            return ChangeType(operand, TypeManager.Resolver.DateTimeType, ctx);
         }
 
 
@@ -211,7 +205,7 @@ namespace Hl7.Cql.Compiler
         protected Expression? ToQuantity(elm.ToQuantity tq, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(tq.operand!, ctx);
-            return ChangeType(operand, TypeResolver.QuantityType, ctx);
+            return ChangeType(operand, TypeManager.Resolver.QuantityType, ctx);
         }
 
         protected Expression? ToString(elm.ToString e, ExpressionBuilderContext ctx)
@@ -222,7 +216,7 @@ namespace Hl7.Cql.Compiler
         protected Expression? ToTime(elm.ToTime e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-            return ChangeType(operand, TypeResolver.TimeType, ctx);
+            return ChangeType(operand, TypeManager.Resolver.TimeType, ctx);
         }
 
         protected Expression ToList(elm.ToList e, ExpressionBuilderContext ctx)
@@ -241,8 +235,8 @@ namespace Hl7.Cql.Compiler
             else if (IsOrImplementsIEnumerableOfT(input.Type)
                 && IsOrImplementsIEnumerableOfT(outputType))
             {
-                var inputElementType = TypeResolver.GetListElementType(input.Type, true)!;
-                var outputElementType = TypeResolver.GetListElementType(outputType, true)!;
+                var inputElementType = TypeManager.Resolver.GetListElementType(input.Type, true)!;
+                var outputElementType = TypeManager.Resolver.GetListElementType(outputType, true)!;
                 var lambdaParameter = Expression.Parameter(inputElementType, TypeNameToIdentifier(inputElementType, ctx));
                 var lambdaBody = ChangeType(lambdaParameter, outputElementType, ctx);
                 var lambda = Expression.Lambda(lambdaBody, lambdaParameter);
