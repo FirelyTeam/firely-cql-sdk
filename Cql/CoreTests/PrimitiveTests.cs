@@ -3527,7 +3527,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var expressions = LibraryExpressionsBuilder.Build(binding, typeManager, logger, elmPackage);
+            var expressions = (DefinitionDictionary<LambdaExpression>)ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
             var writerLogger = LoggerFactory
              .Create(logging => logging.AddDebug())
              .CreateLogger<CSharpSourceCodeWriter>();

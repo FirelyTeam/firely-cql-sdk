@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
@@ -38,7 +39,5 @@ namespace Hl7.Cql.Compiler
             UnaryOperator(CqlOperator.Not, e, ctx);
         private Expression Xor(elm.Xor e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Xor, e, ctx);
-
-
     }
 }

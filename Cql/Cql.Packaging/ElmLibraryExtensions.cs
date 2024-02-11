@@ -26,7 +26,7 @@ namespace Hl7.Cql.Packaging
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
             var operatorsBinding = new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector));
             var typeManager = new TypeManager(typeResolver);
-            var expressionBuilder = new ExpressionBuilder(operatorsBinding, typeManager, library, builderLogger);
+            var expressionBuilder = new ExpressionBuilder(operatorsBinding, typeManager, builderLogger, library);
             var lambda = expressionBuilder.Lambda(expression);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);

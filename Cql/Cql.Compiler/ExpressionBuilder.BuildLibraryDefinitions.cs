@@ -11,11 +11,10 @@ using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 
-/// <summary>
-/// Class responsible for building library definitions.
-/// </summary>
-internal class LibraryExpressionsBuilder
+partial class ExpressionBuilder
 {
+    private static readonly ParameterExpression RuntimeContextParameter = Expression.Parameter(typeof(CqlContext), "context");
+
     /// <summary>
     /// Builds the definitions for the library.
     /// </summary>
@@ -24,43 +23,137 @@ internal class LibraryExpressionsBuilder
     /// <param name="logger">The logger.</param>
     /// <param name="library">The library ELM.</param>
     /// <returns>The definition dictionary of lambda expressions.</returns>
-    public static DefinitionDictionary<LambdaExpression> Build(
+    public static DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(
         OperatorBinding operatorBinding,
         TypeManager typeManager,
         ILogger<ExpressionBuilder> logger,
-        Library library)
+        Library library) =>
+        new ExpressionBuilder(operatorBinding, typeManager, logger, library).BuildLibraryDefinitions();
+
+    /// <summary>
+    /// Builds the definitions for the library.
+    /// </summary>
+    /// <returns>The definition dictionary of lambda expressions.</returns>
+    public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions()
     {
-        var libraryBuilder = new LibraryExpressionsBuilder(operatorBinding, typeManager, logger);
-        return libraryBuilder.BuildExpressions(library);
-    }
-
-    private static readonly ParameterExpression RuntimeContextParameter = Expression.Parameter(typeof(CqlContext), "context");
-
-    // Helpers that don't mutate their state 
-    private readonly OperatorBinding _operatorBinding;
-    private readonly TypeManager _typeManager;
-    private readonly ILogger<ExpressionBuilder> _logger;
-
-    private LibraryExpressionsBuilder(
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        ILogger<ExpressionBuilder> logger)
-    {
-        _operatorBinding = operatorBinding;
-        _typeManager = typeManager;
-        _logger = logger;
-    }
-
-    private DefinitionDictionary<LambdaExpression> BuildExpressions(Library elm)
-    {
-        var eb = new ExpressionBuilder(_operatorBinding, _typeManager, elm, _logger);
         var definitions = new DefinitionDictionary<LambdaExpression>();
-        var dbc = new LibraryExpressionsBuilderContext(eb, definitions);
-        ProcessLibrary(dbc);
+        var context = new ProcessLibraryContext(this, definitions);
+        ProcessLibrary(context);
         return definitions;
     }
-    
-    private static void ProcessLibrary(LibraryExpressionsBuilderContext context)
+
+    private readonly record struct ProcessLibraryContext
+    {
+        public ProcessLibraryContext(
+            ExpressionBuilder expressionBuilder,
+            DefinitionDictionary<LambdaExpression> definitionDictionary)
+        {
+            _localLibraryIdentifiers = new Dictionary<string, string>();
+            _codesByName = new Dictionary<string, CqlCode>();
+            _codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
+            _definitions = definitionDictionary;
+            _expressionBuilder = expressionBuilder;
+        }
+
+        private readonly Dictionary<string, string> _localLibraryIdentifiers;
+        private readonly Dictionary<string, CqlCode> _codesByName;
+        private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
+        private readonly DefinitionDictionary<LambdaExpression> _definitions;
+        private readonly ExpressionBuilder _expressionBuilder;
+
+        public bool TryGetCustomImplementationByExpressionKey(
+            string expressionKey, 
+            [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) =>
+            _expressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
+
+        public Library Library => _expressionBuilder.Library;
+
+        public string LibraryKey => _expressionBuilder.LibraryKey;
+
+        public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
+
+        public ExpressionBuilderContextFacade NewExpressionBuilderContext() =>
+            new ExpressionBuilderContextFacade(
+                new ExpressionBuilderContext(
+                    _expressionBuilder,
+                    RuntimeContextParameter,
+                    _definitions,
+                    _localLibraryIdentifiers));
+
+        public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
+            _definitions.AddTag(LibraryKey, definition, signature, name, values);
+
+        public void AddDefinition(string definition, LambdaExpression expression) =>
+            _definitions.Add(LibraryKey, definition, expression);
+
+        public void AddDefinition(string definition, Type[] signature, LambdaExpression expression) =>
+            _definitions.Add(LibraryKey, definition, signature, expression);
+
+        public bool ContainsDefinition(string definition, Type[] signature) =>
+            _definitions.ContainsKey(LibraryKey, definition, signature);
+
+        public bool ContainsDefinition(string definition) =>
+            _definitions.ContainsKey(LibraryKey, definition);
+
+        public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
+            _localLibraryIdentifiers.Add(includeAlias, includeNameAndVersion);
+
+        public void AddCodeByName(string codeDefName, CqlCode cqlCode) =>
+            _codesByName.Add(codeDefName, cqlCode);
+
+        public bool TryGetCodeByCodeName(string codeName, [NotNullWhen(true)] out CqlCode? code) =>
+            _codesByName.TryGetValue(codeName, out code);
+
+        public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
+            _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
+
+        public List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
+        {
+            if (!_codesByCodeSystemName.TryGetValue(codeSystemName!, out var codings))
+            {
+                codings = new List<CqlCode>();
+                _codesByCodeSystemName.Add(codeSystemName!, codings);
+                return codings;
+            }
+
+            return codings;
+        }
+    }
+
+    private class ExpressionBuilderContextFacade
+    {
+        private readonly ExpressionBuilderContext _expressionBuilderContext;
+
+        public ExpressionBuilderContextFacade(ExpressionBuilderContext expressionBuilderContext)
+        {
+            _expressionBuilderContext = expressionBuilderContext;
+        }
+
+        public IDictionary<string, ParameterExpression> Operands => _expressionBuilderContext.Operands;
+
+        public void LogWarning(string message, Element? expression = null) =>
+            _expressionBuilderContext.LogWarning(message, expression);
+
+        public void LogError(string message, Element? element = null) =>
+            _expressionBuilderContext.LogError(message, element);
+
+        public Type TypeFor(TypeSpecifier resultTypeSpecifier) =>
+            _expressionBuilderContext.TypeFor(resultTypeSpecifier);
+
+        public Type? TypeFor(Element element, bool throwIfNotFound = true) =>
+            _expressionBuilderContext.TypeFor(element, throwIfNotFound);
+
+        public ExpressionBuilderContextFacade Deeper(Element expression) =>
+            new ExpressionBuilderContextFacade(_expressionBuilderContext.Deeper(expression));
+
+        public Expression TranslateExpression(Element op) =>
+            _expressionBuilderContext.Builder.TranslateExpression(op, _expressionBuilderContext);
+
+        public string TypeNameToIdentifier(Type type) =>
+            ExpressionBuilder.TypeNameToIdentifier(type, _expressionBuilderContext);
+    }
+
+    private static void ProcessLibrary(ProcessLibraryContext context)
     {
         var library = context.Library;
 
@@ -184,7 +277,7 @@ internal class LibraryExpressionsBuilder
                 innerException);
     }
 
-    private static void ProcessCodeSystems(LibraryExpressionsBuilderContext context, CodeSystemDef codeSystem)
+    private static void ProcessCodeSystems(ProcessLibraryContext context, CodeSystemDef codeSystem)
     {
         if (context.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
         {
@@ -213,7 +306,7 @@ internal class LibraryExpressionsBuilder
         }
     }
 
-    private static void ProcessConcepts(LibraryExpressionsBuilderContext context, ConceptDef conceptDef)
+    private static void ProcessConcepts(ProcessLibraryContext context, ConceptDef conceptDef)
     {
         if (conceptDef.code.Length <= 0)
         {
@@ -252,7 +345,7 @@ internal class LibraryExpressionsBuilder
         }
     }
 
-    private static void ProcessCodes(LibraryExpressionsBuilderContext context, CodeDef codeDef,
+    private static void ProcessCodes(ProcessLibraryContext context, CodeDef codeDef,
         ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
         IReadOnlyDictionary<string, string> codeSystemUrls)
     {
@@ -285,7 +378,7 @@ internal class LibraryExpressionsBuilder
         context.AddDefinition(codeDef.name!, lambda);
     }
 
-    private static void ProcessStatements(LibraryExpressionsBuilderContext context, ExpressionDef expressionDef)
+    private static void ProcessStatements(ProcessLibraryContext context, ExpressionDef expressionDef)
     {
         if (expressionDef.expression == null)
             throw new InvalidOperationException(
@@ -337,7 +430,7 @@ internal class LibraryExpressionsBuilder
 
             if (function?.external ?? false)
             {
-                var message = $"{expressionKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
+                var message = $"{expressionKey} is declared external, but {nameof(CustomImplementations)} does not define this function.";
                 builderContext.LogError(message, expressionDef);
                 if (context.AllowUnresolvedExternals)
                 {
@@ -406,7 +499,7 @@ internal class LibraryExpressionsBuilder
         return lambda;
     }
 
-    private static void ProcessIncludes(LibraryExpressionsBuilderContext context, IncludeDef includeDef)
+    private static void ProcessIncludes(ProcessLibraryContext context, IncludeDef includeDef)
     {
         var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
             ? includeDef.localIdentifier!
@@ -416,7 +509,7 @@ internal class LibraryExpressionsBuilder
         context.AddIncludeAlias(alias, libNav);
     }
 
-    private static void ProcessParameters(LibraryExpressionsBuilderContext context, ParameterDef parameter)
+    private static void ProcessParameters(ProcessLibraryContext context, ParameterDef parameter)
     {
         if (context.ContainsDefinition(parameter.name!))
             throw new InvalidOperationException(
@@ -445,122 +538,12 @@ internal class LibraryExpressionsBuilder
         context.AddDefinition(parameter.name!, lambda);
     }
 
-    private static void ProcessValueSets(LibraryExpressionsBuilderContext context, ValueSetDef valueSetDef)
+    private static void ProcessValueSets(ProcessLibraryContext context, ValueSetDef valueSetDef)
     {
         var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
             Expression.Constant(valueSetDef.version, typeof(string)));
         var contextParameter = RuntimeContextParameter;
         var lambda = Expression.Lambda(@new, contextParameter);
         context.AddDefinition(valueSetDef.name!, lambda);
-    }
-
-
-    private class ExpressionBuilderContextFacade
-    {
-        private readonly ExpressionBuilderContext _expressionBuilderContext;
-
-        public ExpressionBuilderContextFacade(ExpressionBuilderContext expressionBuilderContext)
-        {
-            _expressionBuilderContext = expressionBuilderContext;
-        }
-
-        public IDictionary<string, ParameterExpression> Operands => _expressionBuilderContext.Operands;
-
-        public void LogWarning(string message, Element? expression = null) =>
-            _expressionBuilderContext.LogWarning(message, expression);
-
-        public void LogError(string message, Element? element = null) =>
-            _expressionBuilderContext.LogError(message, element);
-
-        public Type TypeFor(TypeSpecifier resultTypeSpecifier) =>
-            _expressionBuilderContext.TypeFor(resultTypeSpecifier);
-
-        public Type? TypeFor(Element element, bool throwIfNotFound = true) =>
-            _expressionBuilderContext.TypeFor(element, throwIfNotFound);
-
-        public ExpressionBuilderContextFacade Deeper(Element expression) =>
-            new ExpressionBuilderContextFacade(_expressionBuilderContext.Deeper(expression));
-
-        public Expression TranslateExpression(Element op) =>
-            _expressionBuilderContext.Builder.TranslateExpression(op, _expressionBuilderContext);
-
-        public string TypeNameToIdentifier(Type type) =>
-            ExpressionBuilder.TypeNameToIdentifier(type, _expressionBuilderContext);
-    }
-
-    private readonly record struct LibraryExpressionsBuilderContext
-    {
-        public LibraryExpressionsBuilderContext(
-            ExpressionBuilder expressionBuilder,
-            DefinitionDictionary<LambdaExpression> definitionDictionary)
-        {
-            _localLibraryIdentifiers = new Dictionary<string, string>();
-            _codesByName = new Dictionary<string, CqlCode>();
-            _codesByCodeSystemName = new Dictionary<string, List<CqlCode>>();
-            _definitions = definitionDictionary;
-            _expressionBuilder = expressionBuilder;
-        }
-
-        private readonly Dictionary<string, string> _localLibraryIdentifiers;
-        private readonly Dictionary<string, CqlCode> _codesByName;
-        private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
-        private readonly DefinitionDictionary<LambdaExpression> _definitions;
-        private readonly ExpressionBuilder _expressionBuilder;
-
-        public Library Library => _expressionBuilder.Library;
-
-        public string LibraryKey => _expressionBuilder.LibraryKey;
-
-        public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
-
-        public ExpressionBuilderContextFacade NewExpressionBuilderContext() =>
-            new ExpressionBuilderContextFacade(
-                new ExpressionBuilderContext(
-                    _expressionBuilder,
-                    RuntimeContextParameter,
-                    _definitions,
-                    _localLibraryIdentifiers));
-
-        public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
-            _definitions.AddTag(LibraryKey, definition, signature, name, values);
-
-        public void AddDefinition(string definition, LambdaExpression expression) =>
-            _definitions.Add(LibraryKey, definition, expression);
-
-        public void AddDefinition(string definition, Type[] signature, LambdaExpression expression) =>
-            _definitions.Add(LibraryKey, definition, signature, expression);
-
-        public bool ContainsDefinition(string definition, Type[] signature) =>
-            _definitions.ContainsKey(LibraryKey, definition, signature);
-
-        public bool ContainsDefinition(string definition) =>
-            _definitions.ContainsKey(LibraryKey, definition);
-
-        public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
-            _localLibraryIdentifiers.Add(includeAlias, includeNameAndVersion);
-
-        public void AddCodeByName(string codeDefName, CqlCode cqlCode) =>
-            _codesByName.Add(codeDefName, cqlCode);
-
-        public bool TryGetCodeByCodeName(string codeName, [NotNullWhen(true)] out CqlCode? code) =>
-            _codesByName.TryGetValue(codeName, out code);
-
-        public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
-            _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
-
-        public List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
-        {
-            if (!_codesByCodeSystemName.TryGetValue(codeSystemName!, out var codings))
-            {
-                codings = new List<CqlCode>();
-                _codesByCodeSystemName.Add(codeSystemName!, codings);
-                return codings;
-            }
-
-            return codings;
-        }
-
-        public bool TryGetCustomImplementationByExpressionKey(string expressionKey, [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) =>
-            _expressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
     }
 }

@@ -651,7 +651,7 @@ namespace Hl7.Cql.Compiler
         private Expression Width(MemberExpression operators, Expression operand)
         {
             // This should be disallowed but isn't, so handle it:
-            if (operand.Type == typeof(Primitives.CqlInterval<object>))
+            if (operand.Type == typeof(CqlInterval<object>))
                 return Expression.Constant(null, typeof(int?));
             else return BindUnaryOperator(nameof(ICqlOperators.Width), operators, operand);
         }
@@ -678,9 +678,9 @@ namespace Hl7.Cql.Compiler
             {
                 if (low.Type == high.Type)
                 {
-                    return Expression.Constant(null, typeof(Primitives.CqlInterval<>).MakeGenericType(low.Type));
+                    return Expression.Constant(null, typeof(CqlInterval<>).MakeGenericType(low.Type));
                 }
-                else return Expression.Constant(null, typeof(Primitives.CqlInterval<object>));
+                else return Expression.Constant(null, typeof(CqlInterval<object>));
 
             }
 

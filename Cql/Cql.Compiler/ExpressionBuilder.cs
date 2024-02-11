@@ -41,20 +41,20 @@ namespace Hl7.Cql.Compiler
         /// Creates an instance.
         /// </summary>
         /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
-        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="elm"/>.</param>
-        /// <param name="elm">The <see cref="Library"/> this builder will build.</param>
+        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="library"/>.</param>
         /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued.</param>
+        /// <param name="library">The <see cref="Library"/> this builder will build.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
-        /// <exception cref="ArgumentException">If the <paramref name="elm"/> does not have a valid library or identifier.</exception>
+        /// <exception cref="ArgumentException">If the <paramref name="library"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(
             OperatorBinding operatorBinding,
             TypeManager typeManager,
-            Library elm,
-            ILogger<ExpressionBuilder> logger)
+            ILogger<ExpressionBuilder> logger, 
+            Library library)
         {
             OperatorBinding = operatorBinding.ArgNotNull();
             TypeManager = typeManager.ArgNotNull();
-            Library = elm.ArgNotNull();
+            Library = library.ArgNotNull();
             Logger = logger.ArgNotNull();
             Library.identifier.ArgNotNull();
             Library.NameAndVersion.ArgNotNull();
@@ -75,6 +75,14 @@ namespace Hl7.Cql.Compiler
         /// functions defined in CQL with the <code>external</code> keyword.
         /// </remarks> 
         public IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
+
+        internal ILogger<ExpressionBuilder> Logger { get; }
+
+        /// <summary>
+        /// The expression visitors that will be executed (in order) on translated expressions.
+        /// </summary>
+        private IList<IExpressionMutator> ExpressionMutators { get; }
+
         /// <summary>
         /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
         /// </summary>
@@ -93,13 +101,6 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         public string LibraryKey => Library.NameAndVersion!;
 
-        internal ILogger<ExpressionBuilder> Logger { get; }
-
-        /// <summary>
-        /// The expression visitors that will be executed (in order) on translated expressions.
-        /// </summary>
-        private IList<IExpressionMutator> ExpressionMutators { get; }
-
         /// <summary>
         /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
         /// <paramref name="expression"/> translated into a <see cref="Expression"/>.
@@ -117,13 +118,14 @@ namespace Hl7.Cql.Compiler
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, new Dictionary<string, string>());
+            var localLibraryIdentifiers = new Dictionary<string, string>();
+            ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, localLibraryIdentifiers);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
         }
 
-        internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
+        internal Expression TranslateExpression(Element op, ExpressionBuilderContext ctx)
         {
             ctx = ctx.Deeper(op);
             Expression? expression;
@@ -651,7 +653,6 @@ namespace Hl7.Cql.Compiler
             }
             return expression!;
         }
-
         private Expression BinaryOperator(CqlOperator @operator, elm.BinaryExpression be, ExpressionBuilderContext ctx)
         {
             var lhsExpression = TranslateExpression(be.operand![0], ctx);
@@ -678,7 +679,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        private Expression NaryOperator(CqlOperator @operator, elm.NaryExpression ne, ExpressionBuilderContext ctx)
+        private Expression NaryOperator(CqlOperator @operator, NaryExpression ne, ExpressionBuilderContext ctx)
         {
             var operators = ne.operand
                 .Select(op => TranslateExpression(op, ctx))
@@ -808,7 +809,7 @@ namespace Hl7.Cql.Compiler
                     subContext = subContext.WithScopes(letScopes);
                 }
                 var whereBody = TranslateExpression(query.where, subContext);
-                var whereLambda = System.Linq.Expressions.Expression.Lambda(whereBody, whereLambdaParameter);
+                var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
                 var callWhere = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
                 @return = callWhere;
             }
@@ -897,7 +898,7 @@ namespace Hl7.Cql.Compiler
                         var subContext = ctx.WithImpliedAlias(parameterName!, sortMemberParameter, byExpression.expression);
                         var sortMemberExpression = TranslateExpression(byExpression.expression, subContext);
                         var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
-                        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                        var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                         var sort = OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
                             @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                         @return = sort;
@@ -916,7 +917,7 @@ namespace Hl7.Cql.Compiler
                         }
                         var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!, ctx);
                         var lambdaBody = Expression.Convert(pathExpression, typeof(object));
-                        var sortLambda = System.Linq.Expressions.Expression.Lambda(lambdaBody, sortMemberParameter);
+                        var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
                         var sort = OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
                             @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                         @return = sort;
@@ -1021,7 +1022,7 @@ namespace Hl7.Cql.Compiler
                 }
 
                 var whereBody = TranslateExpression(query.where, subContext);
-                var whereLambda = System.Linq.Expressions.Expression.Lambda(whereBody, whereLambdaParameter);
+                var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
                 var callWhere = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
                 @return = callWhere;
             }
@@ -1060,7 +1061,7 @@ namespace Hl7.Cql.Compiler
 
             if (query.aggregate != null)
             {
-                if (query.aggregate is elm.AggregateClause)
+                if (query.aggregate is AggregateClause)
                 {
                     var parameterName = TypeNameToIdentifier(elementType, ctx);
                     var sourceParameter = Expression.Parameter(multiSourceTupleType, parameterName);
@@ -2299,7 +2300,7 @@ namespace Hl7.Cql.Compiler
                 _ => expression,
             };
 
-        private Expression CrossJoin(elm.AliasedQuerySource[] sources, Type tupleType, ExpressionBuilderContext ctx)
+        private Expression CrossJoin(AliasedQuerySource[] sources, Type tupleType, ExpressionBuilderContext ctx)
         {
 
             //var a = new int[] { 1, 2, 3 };
