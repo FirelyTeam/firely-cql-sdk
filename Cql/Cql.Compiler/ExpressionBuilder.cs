@@ -68,7 +68,7 @@ namespace Hl7.Cql.Compiler
             Library.identifier.ArgNotNull();
             Library.NameAndVersion.ArgNotNull();
             OperatorBinding = operatorBinding;
-            _definitionsBuilder = new DefinitionsBuilder(this);
+            LibraryBuilder = new LibraryBuilderContext(this);
         }
 
         public ExpressionBuilderSettings Settings { get; }
@@ -117,7 +117,8 @@ namespace Hl7.Cql.Compiler
         /// <param name="expression">The ELM expression to convert</param>
         /// <param name="lambdas">Existing lambdas, required if <paramref name="expression"/> contains any references to other ELM definitions</param>
         /// <param name="ctx">If <paramref name="expression"/> requires contextual scope, provide it via an <see cref="ExpressionBuilderContext"/>.</param>
-        public LambdaExpression Lambda(elm.Expression expression,
+        public LambdaExpression Lambda(
+            elm.Expression expression,
             DefinitionDictionary<LambdaExpression>? lambdas = null,
             ExpressionBuilderContext? ctx = null)
         {

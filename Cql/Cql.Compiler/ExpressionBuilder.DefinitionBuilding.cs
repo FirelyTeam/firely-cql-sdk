@@ -6,26 +6,51 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
 
 
 namespace Hl7.Cql.Compiler;
 
+
+/// <summary>
+/// Class responsible for building library definitions.
+/// </summary>
+internal static class LibraryBuilder
+{
+    /// <summary>
+    /// Builds the definitions for the library.
+    /// </summary>
+    /// <param name="operatorBinding">The operator binding.</param>
+    /// <param name="typeManager">The type manager.</param>
+    /// <param name="elm">The library ELM.</param>
+    /// <param name="logger">The logger.</param>
+    /// <returns>The definition dictionary of lambda expressions.</returns>
+    public static DefinitionDictionary<LambdaExpression> BuildDefinitions(
+        OperatorBinding operatorBinding,
+        TypeManager typeManager,
+        Library elm,
+        ILogger<ExpressionBuilder> logger)
+    {
+        var eb = new ExpressionBuilder(operatorBinding, typeManager, elm, logger);
+        return ExpressionBuilder.LibraryBuilderContext.BuildDefinitions(eb.LibraryBuilder);
+    }
+}
+
+
+
 partial class ExpressionBuilder
 {
-    private readonly DefinitionsBuilder _definitionsBuilder;
+    public LibraryBuilderContext LibraryBuilder { get; }
 
-    public DefinitionDictionary<LambdaExpression> BuildDefinitions() => 
-        _definitionsBuilder.BuildDefinitions();
-
-    private class DefinitionsBuilder
+    public class LibraryBuilderContext
     {
         private static readonly ParameterExpression RuntimeContextParameter = Expression.Parameter(typeof(CqlContext), "context");
 
         private readonly DefinitionsBuilderContext _context;
         private readonly DefinitionDictionary<LambdaExpression> _definitions;
 
-        public DefinitionsBuilder(ExpressionBuilder expressionBuilder)
+        public LibraryBuilderContext(ExpressionBuilder expressionBuilder)
         {
             var localLibraryIdentifiers = new Dictionary<string, string>();
             var codesByName = new Dictionary<string, CqlCode>();
@@ -34,10 +59,10 @@ partial class ExpressionBuilder
             _context = new(expressionBuilder, localLibraryIdentifiers, codesByName, codesByCodeSystemName, _definitions);
         }
 
-        public DefinitionDictionary<LambdaExpression> BuildDefinitions()
+        public static DefinitionDictionary<LambdaExpression> BuildDefinitions(LibraryBuilderContext libraryBuilderContext)
         {
-            ProcessLibrary();
-            return _definitions;
+            libraryBuilderContext.ProcessLibrary();
+            return libraryBuilderContext._definitions;
         }
 
 
