@@ -2293,8 +2293,8 @@ namespace Hl7.Cql.Compiler
 
         private static Expression HandleNullable(Expression expression, Type targetType) =>
             (
-                expression.Type.DeNullifyType(),
-                targetType.DeNullifyType()) switch
+                expression.Type.GetUnderlyingTypeForNullable(),
+                targetType.GetUnderlyingTypeForNullable()) switch
             {
                 // Only targetType is nullable
                 ((_, isNullable: false), (_, isNullable: true)) => Expression.Convert(expression, targetType),
