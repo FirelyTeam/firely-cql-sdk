@@ -157,7 +157,7 @@ namespace Hl7.Cql.Packaging
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var expressions = LibraryBuilder.BuildDefinitions(operatorBinding, typeManager, library!, builderLogger);
+                var expressions = LibraryExpressionsBuilder.Build(operatorBinding, typeManager, builderLogger, library!);
                 all.Merge(expressions);
             }
 

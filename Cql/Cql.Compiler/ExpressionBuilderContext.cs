@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
@@ -76,19 +75,6 @@ namespace Hl7.Cql.Compiler
         /// Having access to the <see cref="CqlContext"/> is almost always necessary when implementing operators because the context contains all comparers, value sets, CQL parameter values, and other data provided at runtime.
         /// </remarks>
         public ParameterExpression RuntimeContextParameter { get; }
-
-        /// <summary>
-        /// Gets key value pairs mapping the library identifier to its library-local alias.
-        /// </summary>
-        private IEnumerable<KeyValuePair<string, string>> LibraryIdentifiers
-        {
-            // Don't return the dictionary, to protect against cast attacks.  The source dictionary must be readonly.
-            get
-            {
-                foreach (var kvp in LibraryIdentifiers)
-                    yield return kvp;
-            }
-        }
 
 
         internal DefinitionDictionary<LambdaExpression> Definitions { get; }
@@ -170,8 +156,6 @@ namespace Hl7.Cql.Compiler
                 return expression;
             else throw new ArgumentException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
         }
-
-        internal Expression? ImpliedAliasExpression => ImpliedAlias != null ? GetScopeExpression(ImpliedAlias) : null;
 
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"

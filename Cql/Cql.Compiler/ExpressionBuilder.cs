@@ -34,6 +34,9 @@ namespace Hl7.Cql.Compiler
     /// </summary>
     internal sealed partial class ExpressionBuilder
     {
+        // Yeah, hardwired to FHIR 4.0.1 for now.
+        private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
@@ -49,26 +52,16 @@ namespace Hl7.Cql.Compiler
             Library elm,
             ILogger<ExpressionBuilder> logger)
         {
-            Settings = new ExpressionBuilderSettings();
-            CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
-            ExpressionMutators = new List<IExpressionMutator>();
-            MakeGenericLambda = new Lazy<MethodInfo>(() =>
-                (from method in
-                        typeof(Expression).GetMethods(BindingFlags.Public | BindingFlags.Static)
-                    where method.Name == nameof(Expression.Lambda)
-                          && method.IsGenericMethod
-                    let parameters = method.GetParameters()
-                    where parameters.Length == 2
-                          && parameters[0].ParameterType == typeof(Expression)
-                          && parameters[1].ParameterType == typeof(ParameterExpression[])
-                    select method).Single());
+            OperatorBinding = operatorBinding.ArgNotNull();
             TypeManager = typeManager.ArgNotNull();
             Library = elm.ArgNotNull();
             Logger = logger.ArgNotNull();
             Library.identifier.ArgNotNull();
             Library.NameAndVersion.ArgNotNull();
-            OperatorBinding = operatorBinding;
-            LibraryBuilder = new LibraryBuilderContext(this);
+
+            Settings = new ExpressionBuilderSettings();
+            CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
+            ExpressionMutators = new List<IExpressionMutator>();
         }
 
         public ExpressionBuilderSettings Settings { get; }
@@ -125,7 +118,6 @@ namespace Hl7.Cql.Compiler
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
             ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, new Dictionary<string, string>());
-            lambdas = new DefinitionDictionary<LambdaExpression>();
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
@@ -695,7 +687,7 @@ namespace Hl7.Cql.Compiler
             return call;
         }
 
-        private ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
+        private static ConstantExpression Precision(DateTimePrecision elmPrecision, bool precisionSpecified)
         {
             if (precisionSpecified)
             {
@@ -731,7 +723,7 @@ namespace Hl7.Cql.Compiler
                 localId = ire.localId,
                 locator = ire.locator,
                 path = ire.name,
-                scope = ctx.ImpliedAlias,
+                scope = ctx.ImpliedAlias!,
             };
             var prop = Property(pe, ctx);
             return prop;
@@ -1210,14 +1202,14 @@ namespace Hl7.Cql.Compiler
             return cqlValueSet;
         }
 
-        private Expression QueryLetRef(QueryLetRef qlre, ExpressionBuilderContext ctx)
+        private static Expression QueryLetRef(QueryLetRef qlre, ExpressionBuilderContext ctx)
         {
             var name = qlre.name!;
             var expr = ctx.GetScopeExpression(name);
             return expr;
         }
 
-        private Expression AliasRef(AliasRef ar, ExpressionBuilderContext ctx)
+        private static Expression AliasRef(AliasRef ar, ExpressionBuilderContext ctx)
         {
             var expr = ctx.GetScopeExpression(ar.name!);
             return expr;
@@ -1575,7 +1567,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        private Expression Null(Null @null, ExpressionBuilderContext ctx)
+        private static Expression Null(Null @null, ExpressionBuilderContext ctx)
         {
             var nullType = ctx.TypeFor(@null, false) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
@@ -1635,7 +1627,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        private Expression OperandRef(OperandRef ore, ExpressionBuilderContext ctx)
+        private static Expression OperandRef(OperandRef ore, ExpressionBuilderContext ctx)
         {
             if (ctx.Operands.TryGetValue(ore.name!, out var expression))
                 return expression;
@@ -1693,7 +1685,7 @@ namespace Hl7.Cql.Compiler
             else throw new ArgumentException("Invalid case expression.  At least 1 case and an else must be present.", nameof(ce));
         }
 
-        private bool IsInterval(Type t, out Type? elementType)
+        private static bool IsInterval(Type t, out Type? elementType)
         {
             if (t.IsGenericType && t.GetGenericTypeDefinition() == typeof(CqlInterval<>))
             {
@@ -1815,9 +1807,6 @@ namespace Hl7.Cql.Compiler
             return selectManyLambda;
         }
 
-        // Yeah, hardwired to FHIR 4.0.1 for now.
-        private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
-
         private Expression Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx)
         {
             Type? sourceElementType;
@@ -1908,7 +1897,7 @@ namespace Hl7.Cql.Compiler
                         scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
                 }
-                var propogate = PropogateNull(scopeExpression, pathMemberInfo);
+                var propogate = PropagateNull(scopeExpression, pathMemberInfo);
                 // This is only necessary for Firely b/c it always initializes colleciton members even if they are 
                 // not included in the FHIR, and this makes it impossible for CQL to differentiate [] from null
                 //
@@ -1941,7 +1930,7 @@ namespace Hl7.Cql.Compiler
                         var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, pathPart!);
                         if (pathMemberInfo != null)
                         {
-                            var propertyAccess = PropogateNull(source, pathMemberInfo);
+                            var propertyAccess = PropagateNull(source, pathMemberInfo);
                             source = propertyAccess;
                         }
                     }
@@ -1988,7 +1977,7 @@ namespace Hl7.Cql.Compiler
                 var condition = Expression.Condition(isCheck, ifIs, elseNull);
                 return condition;
             }
-            var propogateNull = PropogateNull(source, pathMemberInfo);
+            var propogateNull = PropagateNull(source, pathMemberInfo);
             var result = propogateNull;
             if (expectedType != null && expectedType != result.Type)
             {
@@ -2048,7 +2037,7 @@ namespace Hl7.Cql.Compiler
             return invoke;
         }
 
-        private Type GetFuncType(Type[] funcTypeParameters)
+        private static Type GetFuncType(Type[] funcTypeParameters)
         {
             Type? funcType;
             switch (funcTypeParameters.Length)
@@ -2218,7 +2207,7 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        private MemberInfo GetProperty(Type type, string name)
+        private static MemberInfo GetProperty(Type type, string name)
         {
             if (type.IsGenericType)
             {
@@ -2397,7 +2386,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Implements the null propogation operator (x?.y) into (x == null ? null : x.y);
         /// </summary>
-        private Expression PropogateNull(Expression before, MemberInfo member)
+        private static Expression PropagateNull(Expression before, MemberInfo member)
         {
             if (before.Type.IsValueType)
                 return before;
@@ -2435,9 +2424,6 @@ namespace Hl7.Cql.Compiler
             return ExpressionBuilderContext.NormalizeIdentifier(typeName!)!;
         }
 
-        private readonly Lazy<MethodInfo> MakeGenericLambda;
-
-
         private static bool IsEnum(Type type)
         {
             if (type.IsEnum)
@@ -2447,7 +2433,7 @@ namespace Hl7.Cql.Compiler
             return false;
         }
 
-        private MethodCallExpression CallCreateValueSetFacade(ExpressionBuilderContext ctx, Expression operand)
+        private static MethodCallExpression CallCreateValueSetFacade(ExpressionBuilderContext ctx, Expression operand)
         {
             var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
             var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
