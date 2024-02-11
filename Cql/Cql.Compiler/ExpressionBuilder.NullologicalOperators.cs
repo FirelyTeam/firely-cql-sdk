@@ -35,7 +35,7 @@ namespace Hl7.Cql.Compiler
             if (distinctOperandTypes.Length != 1)
                 throw new InvalidOperationException("All operand types should match when using Coalesce");
             var type = operands[0].Type;
-            if (type.IsValueType && !ReflectionUtility.IsNullable(type))
+            if (type.IsValueType && !type.IsNullable())
                 throw new NotSupportedException("Coalesce on value types is not defined.");
             else
             {
@@ -57,7 +57,7 @@ namespace Hl7.Cql.Compiler
         protected Expression IsNull(elm.IsNull isn, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(isn.operand!, ctx);
-            if (operand.Type.IsValueType && ReflectionUtility.IsNullable(operand.Type) == false)
+            if (operand.Type.IsValueType && operand.Type.IsNullable() == false)
                 return Expression.Constant(false, typeof(bool?));
             else
             {

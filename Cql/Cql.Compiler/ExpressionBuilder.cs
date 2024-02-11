@@ -1265,7 +1265,7 @@ namespace Hl7.Cql.Compiler
                 var elements = list.element?
                     .Select(ele => TranslateExpression(ele, ctx))
                     .ToArray() ?? new Expression[0];
-                if (!ReflectionUtility.IsNullable(elementType) && elements.Any(exp => ReflectionUtility.IsNullable(exp.Type)))
+                if (!elementType.IsNullable() && elements.Any(exp => exp.Type.IsNullable()))
                 {
                     for (int i = 0; i < elements.Length; i++)
                     {
@@ -1539,7 +1539,7 @@ namespace Hl7.Cql.Compiler
                 return true;
             if (to.IsAssignableFrom(from))
                 return true;
-            if (ReflectionUtility.IsNullable(from) && !ReflectionUtility.IsNullable(to))
+            if (from.IsNullable() && !to.IsNullable())
                 return true;
             if (IsOrImplementsIEnumerableOfT(from) && IsOrImplementsIEnumerableOfT(to))
             {
@@ -1587,7 +1587,7 @@ namespace Hl7.Cql.Compiler
             var type = TypeManager.Resolver.ResolveType(lit.valueType.Name!).NotNull($"Cannot resolve type for {lit.valueType}");
             var (value, convertedType) = ConvertLiteral(lit, type);
 
-            if (ReflectionUtility.IsNullable(type))
+            if (type.IsNullable())
             {
                 var changed = Expression.Constant(value, convertedType);
                 var asNullable = Expression.Convert(changed, type);
@@ -1600,7 +1600,7 @@ namespace Hl7.Cql.Compiler
         {
             if (type == null)
                 throw new NotImplementedException();
-            else if (ReflectionUtility.IsNullable(type))
+            else if (type.IsNullable())
             {
                 if (string.IsNullOrWhiteSpace(lit.value))
                     return (null, type);
@@ -1678,7 +1678,7 @@ namespace Hl7.Cql.Compiler
                         if (caseThen.Type != elseThen.Type)
                             caseThen = Expression.Convert(caseThen, elseThen.Type);
 
-                        if (ReflectionUtility.IsNullable(caseWhen.Type))
+                        if (caseWhen.Type.IsNullable())
                         {
                             caseWhen = Expression.Coalesce(caseWhen, Expression.Constant(false));
                         }
@@ -2293,15 +2293,14 @@ namespace Hl7.Cql.Compiler
 
         private static Expression HandleNullable(Expression expression, Type targetType) =>
             (
-                ReflectionUtility.GetNullableUnderlyingType(expression.Type),
-                ReflectionUtility.GetNullableUnderlyingType(targetType)) switch
-
+                expression.Type.DeNullifyType(),
+                targetType.DeNullifyType()) switch
             {
                 // Only targetType is nullable
-                ((_, false), (_, true)) => Expression.Convert(expression, targetType),
+                ((_, isNullable: false), (_, isNullable: true)) => Expression.Convert(expression, targetType),
 
                 // Only expression is nullable
-                (({ } underlyingExprType, true), (_, false)) => Expression.Coalesce(expression, Expression.Default(underlyingExprType)),
+                (({ } underlyingExprType, isNullable: true), (_, false)) => Expression.Coalesce(expression, Expression.Default(underlyingExprType)),
 
                 // Both are nullable or not nullable
                 _ => expression,
@@ -2436,7 +2435,7 @@ namespace Hl7.Cql.Compiler
         {
             if (type.IsEnum)
                 return true;
-            else if (ReflectionUtility.IsNullable(type) && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
+            else if (type.IsNullable() && (Nullable.GetUnderlyingType(type)?.IsEnum ?? false))
                 return true;
             return false;
         }

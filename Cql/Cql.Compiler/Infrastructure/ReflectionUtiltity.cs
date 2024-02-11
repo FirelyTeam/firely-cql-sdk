@@ -56,7 +56,7 @@ internal static class ReflectionUtility
     /// </summary>
     /// <param name="type">The type to check.</param>
     /// <returns>True if the type is nullable, false otherwise.</returns>
-    public static bool IsNullable(Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
+    public static bool IsNullable(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
 
 
     /// <summary>
@@ -64,7 +64,7 @@ internal static class ReflectionUtility
     /// </summary>
     /// <param name="type">The type to check.</param>
     /// <returns>A tuple containing the underlying type (or specified type) and a boolean indicating if the type was nullable.</returns>
-    public static (Type type, bool wasNullable) GetNullableUnderlyingType(Type type)
+    public static (Type nonNullableType, bool isNullable) DeNullifyType(this Type type)
     {
         return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
             ? (type.GetGenericArguments()[0], true)
