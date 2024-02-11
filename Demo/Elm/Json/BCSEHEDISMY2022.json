@@ -1,0 +1,2639 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "BCSEHEDISMY2022",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "locator" : "3:1-3:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "5:1-5:56",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.0.001"
+         }, {
+            "locator" : "6:1-6:66",
+            "localIdentifier" : "Enrollment",
+            "path" : "NCQAHealthPlanEnrollment",
+            "version" : "1.0.0"
+         }, {
+            "locator" : "7:1-7:48",
+            "localIdentifier" : "Status",
+            "path" : "NCQAStatus",
+            "version" : "1.0.0"
+         }, {
+            "locator" : "8:1-8:52",
+            "localIdentifier" : "FHIRBase",
+            "path" : "NCQAFHIRBase",
+            "version" : "1.0.0"
+         }, {
+            "locator" : "9:1-9:50",
+            "localIdentifier" : "Hospice",
+            "path" : "NCQAHospice",
+            "version" : "1.0.0"
+         }, {
+            "locator" : "10:1-10:83",
+            "localIdentifier" : "AdvancedIllnessFrailty",
+            "path" : "NCQAAdvancedIllnessandFrailty",
+            "version" : "1.0.0"
+         }, {
+            "locator" : "11:1-11:64",
+            "localIdentifier" : "PalliativeCare",
+            "path" : "NCQAPalliativeCare",
+            "version" : "1.0.0"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "29:1-29:49",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "locator" : "29:32-29:49",
+               "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "pointType" : {
+                  "locator" : "29:41-29:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "13:1-13:105",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Absence of Left Breast",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "14:1-14:106",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Absence of Right Breast",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "15:1-15:103",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Bilateral Mastectomy",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "16:1-16:101",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Bilateral Modifier",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "17:1-17:110",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Clinical Bilateral Modifier",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "18:1-18:105",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Clinical Left Modifier",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "19:1-19:106",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Clinical Right Modifier",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "20:1-20:113",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Clinical Unilateral Mastectomy",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "21:1-21:114",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "History of Bilateral Mastectomy",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "22:1-22:96",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Left Modifier",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "23:1-23:94",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Mammography",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "24:1-24:97",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Right Modifier",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "25:1-25:104",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Unilateral Mastectomy",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "26:1-26:109",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Unilateral Mastectomy Left",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "27:1-27:110",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Unilateral Mastectomy Right",
+            "id" : "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "31:1-31:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "31:1-31:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "31:1-31:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/StructureDefinition/Patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "locator" : "59:1-60:79",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+            "name" : "October 1 Two Years Prior to the Measurement Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "60:3-60:79",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+               "type" : "DateTime",
+               "year" : {
+                  "locator" : "60:12-60:56",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "type" : "Subtract",
+                  "operand" : [ {
+                     "locator" : "60:13-60:51",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "precision" : "Year",
+                     "type" : "DateTimeComponentFrom",
+                     "operand" : {
+                        "locator" : "60:23-60:51",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "Start",
+                        "operand" : {
+                           "locator" : "60:32-60:51",
+                           "name" : "Measurement Period",
+                           "type" : "ParameterRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        }
+                     }
+                  }, {
+                     "locator" : "60:55",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2",
+                     "type" : "Literal"
+                  } ]
+               },
+               "month" : {
+                  "locator" : "60:59-60:60",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "10",
+                  "type" : "Literal"
+               },
+               "day" : {
+                  "locator" : "60:63",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "1",
+                  "type" : "Literal"
+               },
+               "hour" : {
+                  "locator" : "60:66",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "minute" : {
+                  "locator" : "60:69",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "second" : {
+                  "locator" : "60:72",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "millisecond" : {
+                  "locator" : "60:75",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                  "value" : "0",
+                  "type" : "Literal"
+               },
+               "timezoneOffset" : {
+                  "type" : "ToDecimal",
+                  "operand" : {
+                     "locator" : "60:78",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            }
+         }, {
+            "locator" : "55:1-57:30",
+            "name" : "Participation Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "56:3-57:30",
+               "lowClosed" : true,
+               "highClosed" : true,
+               "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "low" : {
+                  "locator" : "56:12-56:64",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "October 1 Two Years Prior to the Measurement Period",
+                  "type" : "ExpressionRef"
+               },
+               "high" : {
+                  "locator" : "57:3-57:29",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "End",
+                  "operand" : {
+                     "locator" : "57:10-57:29",
+                     "name" : "Measurement Period",
+                     "type" : "ParameterRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               }
+            }
+         }, {
+            "locator" : "51:1-53:84",
+            "name" : "Member Coverage",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Coverage",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "52:3-53:84",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Coverage",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "52:3-52:14",
+                  "alias" : "C",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Coverage",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "52:3-52:12",
+                     "dataType" : "{http://hl7.org/fhir}Coverage",
+                     "templateId" : "http://hl7.org/fhir/StructureDefinition/Coverage",
+                     "type" : "Retrieve",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Coverage",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "53:5-53:84",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Overlaps",
+                  "operand" : [ {
+                     "locator" : "53:11-53:52",
+                     "name" : "Normalize Interval",
+                     "libraryName" : "FHIRBase",
+                     "type" : "FunctionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "type" : "As",
+                        "operand" : {
+                           "locator" : "53:43-53:50",
+                           "resultTypeName" : "{http://hl7.org/fhir}Period",
+                           "path" : "period",
+                           "scope" : "C",
+                           "type" : "Property"
+                        },
+                        "asTypeSpecifier" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{http://hl7.org/fhir}dateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}date",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Period",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Timing",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}instant",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}string",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Age",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Range",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        }
+                     } ]
+                  }, {
+                     "locator" : "53:63-53:84",
+                     "name" : "Participation Period",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "40:1-49:38",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Enrolled During Participation Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "41:3-49:38",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "And",
+               "operand" : [ {
+                  "locator" : "41:3-46:47",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "operand" : [ {
+                     "locator" : "41:3-43:45",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "Health Plan Enrollment Criteria",
+                     "libraryName" : "Enrollment",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "locator" : "41:50-41:66",
+                        "name" : "Member Coverage",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Coverage",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }, {
+                        "locator" : "41:69-42:29",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "DateFrom",
+                        "operand" : {
+                           "locator" : "42:3-42:29",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "End",
+                           "operand" : {
+                              "locator" : "42:10-42:29",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        }
+                     }, {
+                        "locator" : "42:32-43:40",
+                        "lowClosed" : true,
+                        "highClosed" : true,
+                        "type" : "Interval",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "low" : {
+                           "locator" : "42:41-42:103",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "DateFrom",
+                           "operand" : {
+                              "locator" : "42:51-42:103",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "name" : "October 1 Two Years Prior to the Measurement Period",
+                              "type" : "ExpressionRef"
+                           }
+                        },
+                        "high" : {
+                           "locator" : "42:106-43:39",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "Subtract",
+                           "operand" : [ {
+                              "locator" : "42:106-43:29",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "DateFrom",
+                              "operand" : {
+                                 "locator" : "43:3-43:29",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "End",
+                                 "operand" : {
+                                    "locator" : "43:10-43:29",
+                                    "name" : "Measurement Period",
+                                    "type" : "ParameterRef",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 }
+                              }
+                           }, {
+                              "locator" : "43:33-43:39",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "value" : 2,
+                              "unit" : "years",
+                              "type" : "Quantity"
+                           } ]
+                        }
+                     }, {
+                        "locator" : "43:43",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "0",
+                        "type" : "Literal"
+                     } ]
+                  }, {
+                     "locator" : "44:9-46:47",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "Health Plan Enrollment Criteria",
+                     "libraryName" : "Enrollment",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "locator" : "44:56-44:72",
+                        "name" : "Member Coverage",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Coverage",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }, {
+                        "locator" : "44:75-45:31",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "DateFrom",
+                        "operand" : {
+                           "locator" : "45:5-45:31",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "End",
+                           "operand" : {
+                              "locator" : "45:12-45:31",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        }
+                     }, {
+                        "locator" : "45:34-46:41",
+                        "lowClosed" : true,
+                        "highClosed" : true,
+                        "type" : "Interval",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "low" : {
+                           "locator" : "45:43-45:90",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "Subtract",
+                           "operand" : [ {
+                              "locator" : "45:43-45:81",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "DateFrom",
+                              "operand" : {
+                                 "locator" : "45:53-45:81",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "Start",
+                                 "operand" : {
+                                    "locator" : "45:62-45:81",
+                                    "name" : "Measurement Period",
+                                    "type" : "ParameterRef",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 }
+                              }
+                           }, {
+                              "locator" : "45:85-45:90",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "value" : 1,
+                              "unit" : "year",
+                              "type" : "Quantity"
+                           } ]
+                        },
+                        "high" : {
+                           "locator" : "45:93-46:40",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "Subtract",
+                           "operand" : [ {
+                              "locator" : "45:93-46:31",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                              "type" : "DateFrom",
+                              "operand" : {
+                                 "locator" : "46:5-46:31",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "End",
+                                 "operand" : {
+                                    "locator" : "46:12-46:31",
+                                    "name" : "Measurement Period",
+                                    "type" : "ParameterRef",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 }
+                              }
+                           }, {
+                              "locator" : "46:35-46:40",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "value" : 1,
+                              "unit" : "year",
+                              "type" : "Quantity"
+                           } ]
+                        }
+                     }, {
+                        "locator" : "46:44-46:45",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "value" : "45",
+                        "type" : "Literal"
+                     } ]
+                  } ]
+               }, {
+                  "locator" : "47:9-49:38",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "Health Plan Enrollment Criteria",
+                  "libraryName" : "Enrollment",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "locator" : "47:56-47:72",
+                     "name" : "Member Coverage",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Coverage",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "locator" : "47:75-48:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                     "type" : "DateFrom",
+                     "operand" : {
+                        "locator" : "48:5-48:31",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "End",
+                        "operand" : {
+                           "locator" : "48:12-48:31",
+                           "name" : "Measurement Period",
+                           "type" : "ParameterRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        }
+                     }
+                  }, {
+                     "locator" : "48:34-49:32",
+                     "lowClosed" : true,
+                     "highClosed" : true,
+                     "type" : "Interval",
+                     "resultTypeSpecifier" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "low" : {
+                        "locator" : "48:43-48:81",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "DateFrom",
+                        "operand" : {
+                           "locator" : "48:53-48:81",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "Start",
+                           "operand" : {
+                              "locator" : "48:62-48:81",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        }
+                     },
+                     "high" : {
+                        "locator" : "48:84-49:31",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                        "type" : "DateFrom",
+                        "operand" : {
+                           "locator" : "49:5-49:31",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "End",
+                           "operand" : {
+                              "locator" : "49:12-49:31",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        }
+                     }
+                  }, {
+                     "locator" : "49:35-49:36",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "45",
+                     "type" : "Literal"
+                  } ]
+               } ]
+            }
+         }, {
+            "locator" : "33:1-38:46",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "34:3-38:46",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "And",
+               "operand" : [ {
+                  "locator" : "34:3-37:39",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "operand" : [ {
+                     "locator" : "34:3-36:22",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "34:3-36:3",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                        "precision" : "Year",
+                        "type" : "CalculateAgeAt",
+                        "operand" : [ {
+                           "path" : "birthDate.value",
+                           "type" : "Property",
+                           "source" : {
+                              "name" : "Patient",
+                              "type" : "ExpressionRef"
+                           }
+                        }, {
+                           "locator" : "34:16-35:31",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                           "type" : "DateFrom",
+                           "operand" : {
+                              "locator" : "35:5-35:31",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "End",
+                              "operand" : {
+                                 "locator" : "35:12-35:31",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              }
+                           }
+                        } ]
+                     }, {
+                        "locator" : "36:7-36:22",
+                        "lowClosed" : true,
+                        "highClosed" : true,
+                        "type" : "Interval",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "low" : {
+                           "locator" : "36:16-36:17",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "52",
+                           "type" : "Literal"
+                        },
+                        "high" : {
+                           "locator" : "36:20-36:21",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                           "value" : "74",
+                           "type" : "Literal"
+                        }
+                     } ]
+                  }, {
+                     "locator" : "37:9-37:39",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Equal",
+                     "operand" : [ {
+                        "locator" : "37:9-37:28",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "locator" : "37:9-37:22",
+                           "resultTypeName" : "{http://hl7.org/fhir}AdministrativeGender",
+                           "path" : "gender",
+                           "type" : "Property",
+                           "source" : {
+                              "locator" : "37:9-37:15",
+                              "resultTypeName" : "{http://hl7.org/fhir}Patient",
+                              "name" : "Patient",
+                              "type" : "ExpressionRef"
+                           }
+                        }
+                     }, {
+                        "locator" : "37:32-37:39",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                        "value" : "female",
+                        "type" : "Literal"
+                     } ]
+                  } ]
+               }, {
+                  "locator" : "38:9-38:46",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "Enrolled During Participation Period",
+                  "type" : "ExpressionRef"
+               } ]
+            }
+         }, {
+            "locator" : "62:1-63:22",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Denominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "63:3-63:22",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "Initial Population",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "locator" : "82:1-85:31",
+            "name" : "Right Mastectomy Diagnosis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Condition",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "83:3-85:31",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "83:3-83:99",
+                  "alias" : "RightMastectomyDiagnosis",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "83:3-83:74",
+                     "name" : "Active Condition",
+                     "libraryName" : "Status",
+                     "type" : "FunctionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "locator" : "83:33-83:70",
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "83:45-83:69",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Absence of Right Breast",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "84:5-85:31",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "SameOrBefore",
+                  "operand" : [ {
+                     "locator" : "84:69-84:74",
+                     "type" : "Start",
+                     "operand" : {
+                        "locator" : "84:11-84:67",
+                        "name" : "Prevalence Period",
+                        "libraryName" : "FHIRBase",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "84:42-84:65",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "RightMastectomyDiagnosis",
+                           "type" : "AliasRef"
+                        } ]
+                     }
+                  }, {
+                     "locator" : "85:5-85:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "85:12-85:31",
+                        "name" : "Measurement Period",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "87:1-96:31",
+            "name" : "Right Mastectomy Procedure",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Procedure",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "88:3-96:31",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "88:3-94:32",
+                  "alias" : "RightMastectomyProcedure",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "88:3-94:7",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "locator" : "88:5-91:5",
+                        "type" : "Union",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "88:5-88:83",
+                           "name" : "Completed Procedure",
+                           "libraryName" : "Status",
+                           "type" : "FunctionRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "operand" : [ {
+                              "locator" : "88:38-88:79",
+                              "dataType" : "{http://hl7.org/fhir}Procedure",
+                              "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                              "codeProperty" : "code",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "locator" : "88:50-88:78",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Unilateral Mastectomy Right",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        }, {
+                           "locator" : "89:11-91:5",
+                           "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "source" : [ {
+                              "locator" : "89:13-89:115",
+                              "alias" : "UnilateralMastectomyProcedure",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "expression" : {
+                                 "locator" : "89:13-89:85",
+                                 "name" : "Completed Procedure",
+                                 "libraryName" : "Status",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Procedure",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "locator" : "89:46-89:81",
+                                    "dataType" : "{http://hl7.org/fhir}Procedure",
+                                    "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                                    "codeProperty" : "code",
+                                    "codeComparator" : "in",
+                                    "type" : "Retrieve",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Procedure",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "codes" : {
+                                       "locator" : "89:58-89:80",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Unilateral Mastectomy",
+                                       "preserve" : true,
+                                       "type" : "ValueSetRef"
+                                    }
+                                 } ]
+                              }
+                           } ],
+                           "relationship" : [ ],
+                           "where" : {
+                              "locator" : "90:9-90:72",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "AnyInValueSet",
+                              "codes" : {
+                                 "type" : "Query",
+                                 "source" : [ {
+                                    "alias" : "X",
+                                    "expression" : {
+                                       "locator" : "90:15-90:52",
+                                       "path" : "bodySite",
+                                       "scope" : "UnilateralMastectomyProcedure",
+                                       "type" : "Property",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }
+                                    }
+                                 } ],
+                                 "return" : {
+                                    "distinct" : false,
+                                    "expression" : {
+                                       "name" : "ToConcept",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "operand" : [ {
+                                          "name" : "X",
+                                          "type" : "AliasRef"
+                                       } ]
+                                    }
+                                 }
+                              },
+                              "valueset" : {
+                                 "locator" : "90:57-90:72",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Right Modifier",
+                                 "preserve" : true
+                              }
+                           }
+                        } ]
+                     }, {
+                        "locator" : "92:11-94:5",
+                        "type" : "Query",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "source" : [ {
+                           "locator" : "92:13-92:132",
+                           "alias" : "ClinicalUnilateralMastectomyProcedure",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "expression" : {
+                              "locator" : "92:13-92:94",
+                              "name" : "Completed Procedure",
+                              "libraryName" : "Status",
+                              "type" : "FunctionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "operand" : [ {
+                                 "locator" : "92:46-92:90",
+                                 "dataType" : "{http://hl7.org/fhir}Procedure",
+                                 "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                                 "codeProperty" : "code",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Procedure",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "locator" : "92:58-92:89",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Clinical Unilateral Mastectomy",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 }
+                              } ]
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "locator" : "93:9-93:89",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "AnyInValueSet",
+                           "codes" : {
+                              "type" : "Query",
+                              "source" : [ {
+                                 "alias" : "X",
+                                 "expression" : {
+                                    "locator" : "93:15-93:60",
+                                    "path" : "bodySite",
+                                    "scope" : "ClinicalUnilateralMastectomyProcedure",
+                                    "type" : "Property",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 }
+                              } ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "expression" : {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "name" : "X",
+                                       "type" : "AliasRef"
+                                    } ]
+                                 }
+                              }
+                           },
+                           "valueset" : {
+                              "locator" : "93:65-93:89",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Clinical Right Modifier",
+                              "preserve" : true
+                           }
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "95:5-96:31",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "SameOrBefore",
+                  "operand" : [ {
+                     "locator" : "95:80-95:83",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "95:11-95:78",
+                        "name" : "Normalize Interval",
+                        "libraryName" : "FHIRBase",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "95:43-95:76",
+                           "path" : "performed",
+                           "scope" : "RightMastectomyProcedure",
+                           "type" : "Property",
+                           "resultTypeSpecifier" : {
+                              "type" : "ChoiceTypeSpecifier",
+                              "choice" : [ {
+                                 "name" : "{http://hl7.org/fhir}dateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Age",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Range",
+                                 "type" : "NamedTypeSpecifier"
+                              } ]
+                           }
+                        } ]
+                     }
+                  }, {
+                     "locator" : "96:5-96:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "96:12-96:31",
+                        "name" : "Measurement Period",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "98:1-101:31",
+            "name" : "Left Mastectomy Diagnosis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Condition",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "99:3-101:31",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "99:3-99:97",
+                  "alias" : "LeftMastectomyDiagnosis",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "99:3-99:73",
+                     "name" : "Active Condition",
+                     "libraryName" : "Status",
+                     "type" : "FunctionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "locator" : "99:33-99:69",
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "99:45-99:68",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Absence of Left Breast",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "100:5-101:31",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "SameOrBefore",
+                  "operand" : [ {
+                     "locator" : "100:68-100:73",
+                     "type" : "Start",
+                     "operand" : {
+                        "locator" : "100:11-100:66",
+                        "name" : "Prevalence Period",
+                        "libraryName" : "FHIRBase",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "100:42-100:64",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "LeftMastectomyDiagnosis",
+                           "type" : "AliasRef"
+                        } ]
+                     }
+                  }, {
+                     "locator" : "101:5-101:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "101:12-101:31",
+                        "name" : "Measurement Period",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "103:1-112:31",
+            "name" : "Left Mastectomy Procedure",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Procedure",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "104:3-112:31",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "104:3-110:31",
+                  "alias" : "LeftMastectomyProcedure",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "104:3-110:7",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "locator" : "104:5-107:5",
+                        "type" : "Union",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "104:5-104:82",
+                           "name" : "Completed Procedure",
+                           "libraryName" : "Status",
+                           "type" : "FunctionRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "operand" : [ {
+                              "locator" : "104:38-104:78",
+                              "dataType" : "{http://hl7.org/fhir}Procedure",
+                              "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                              "codeProperty" : "code",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "locator" : "104:50-104:77",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Unilateral Mastectomy Left",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        }, {
+                           "locator" : "105:11-107:5",
+                           "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "source" : [ {
+                              "locator" : "105:13-105:115",
+                              "alias" : "UnilateralMastectomyProcedure",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "expression" : {
+                                 "locator" : "105:13-105:85",
+                                 "name" : "Completed Procedure",
+                                 "libraryName" : "Status",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Procedure",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "locator" : "105:46-105:81",
+                                    "dataType" : "{http://hl7.org/fhir}Procedure",
+                                    "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                                    "codeProperty" : "code",
+                                    "codeComparator" : "in",
+                                    "type" : "Retrieve",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Procedure",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "codes" : {
+                                       "locator" : "105:58-105:80",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Unilateral Mastectomy",
+                                       "preserve" : true,
+                                       "type" : "ValueSetRef"
+                                    }
+                                 } ]
+                              }
+                           } ],
+                           "relationship" : [ ],
+                           "where" : {
+                              "locator" : "106:9-106:71",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "AnyInValueSet",
+                              "codes" : {
+                                 "type" : "Query",
+                                 "source" : [ {
+                                    "alias" : "X",
+                                    "expression" : {
+                                       "locator" : "106:15-106:52",
+                                       "path" : "bodySite",
+                                       "scope" : "UnilateralMastectomyProcedure",
+                                       "type" : "Property",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }
+                                    }
+                                 } ],
+                                 "return" : {
+                                    "distinct" : false,
+                                    "expression" : {
+                                       "name" : "ToConcept",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "operand" : [ {
+                                          "name" : "X",
+                                          "type" : "AliasRef"
+                                       } ]
+                                    }
+                                 }
+                              },
+                              "valueset" : {
+                                 "locator" : "106:57-106:71",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Left Modifier",
+                                 "preserve" : true
+                              }
+                           }
+                        } ]
+                     }, {
+                        "locator" : "108:11-110:5",
+                        "type" : "Query",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "source" : [ {
+                           "locator" : "108:13-108:132",
+                           "alias" : "ClinicalUnilateralMastectomyProcedure",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "expression" : {
+                              "locator" : "108:13-108:94",
+                              "name" : "Completed Procedure",
+                              "libraryName" : "Status",
+                              "type" : "FunctionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "operand" : [ {
+                                 "locator" : "108:46-108:90",
+                                 "dataType" : "{http://hl7.org/fhir}Procedure",
+                                 "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                                 "codeProperty" : "code",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Procedure",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "locator" : "108:58-108:89",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Clinical Unilateral Mastectomy",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 }
+                              } ]
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "locator" : "109:9-109:88",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "AnyInValueSet",
+                           "codes" : {
+                              "type" : "Query",
+                              "source" : [ {
+                                 "alias" : "X",
+                                 "expression" : {
+                                    "locator" : "109:15-109:60",
+                                    "path" : "bodySite",
+                                    "scope" : "ClinicalUnilateralMastectomyProcedure",
+                                    "type" : "Property",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 }
+                              } ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "expression" : {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "name" : "X",
+                                       "type" : "AliasRef"
+                                    } ]
+                                 }
+                              }
+                           },
+                           "valueset" : {
+                              "locator" : "109:65-109:88",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Clinical Left Modifier",
+                              "preserve" : true
+                           }
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "111:5-112:31",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "SameOrBefore",
+                  "operand" : [ {
+                     "locator" : "111:79-111:82",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "111:11-111:77",
+                        "name" : "Normalize Interval",
+                        "libraryName" : "FHIRBase",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "111:43-111:75",
+                           "path" : "performed",
+                           "scope" : "LeftMastectomyProcedure",
+                           "type" : "Property",
+                           "resultTypeSpecifier" : {
+                              "type" : "ChoiceTypeSpecifier",
+                              "choice" : [ {
+                                 "name" : "{http://hl7.org/fhir}dateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Age",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Range",
+                                 "type" : "NamedTypeSpecifier"
+                              } ]
+                           }
+                        } ]
+                     }
+                  }, {
+                     "locator" : "112:5-112:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "112:12-112:31",
+                        "name" : "Measurement Period",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "114:1-117:31",
+            "name" : "Bilateral Mastectomy Diagnosis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Condition",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "115:3-117:31",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "115:3-115:109",
+                  "alias" : "BilateralMastectomyHistory",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "115:3-115:82",
+                     "name" : "Active Condition",
+                     "libraryName" : "Status",
+                     "type" : "FunctionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "locator" : "115:33-115:78",
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/Condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "115:45-115:77",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "History of Bilateral Mastectomy",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "116:5-117:31",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "SameOrBefore",
+                  "operand" : [ {
+                     "locator" : "116:71-116:76",
+                     "type" : "Start",
+                     "operand" : {
+                        "locator" : "116:11-116:69",
+                        "name" : "Prevalence Period",
+                        "libraryName" : "FHIRBase",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "116:42-116:67",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "BilateralMastectomyHistory",
+                           "type" : "AliasRef"
+                        } ]
+                     }
+                  }, {
+                     "locator" : "117:5-117:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "117:12-117:31",
+                        "name" : "Measurement Period",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "119:1-128:31",
+            "name" : "Bilateral Mastectomy Procedure",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Procedure",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "120:3-128:31",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Procedure",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "120:3-126:36",
+                  "alias" : "BilateralMastectomyPerformed",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Procedure",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "120:3-126:7",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "locator" : "120:5-123:5",
+                        "type" : "Union",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "120:5-120:76",
+                           "name" : "Completed Procedure",
+                           "libraryName" : "Status",
+                           "type" : "FunctionRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "operand" : [ {
+                              "locator" : "120:38-120:72",
+                              "dataType" : "{http://hl7.org/fhir}Procedure",
+                              "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                              "codeProperty" : "code",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "locator" : "120:50-120:71",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Bilateral Mastectomy",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        }, {
+                           "locator" : "121:11-123:5",
+                           "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "source" : [ {
+                              "locator" : "121:13-121:115",
+                              "alias" : "UnilateralMastectomyProcedure",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "expression" : {
+                                 "locator" : "121:13-121:85",
+                                 "name" : "Completed Procedure",
+                                 "libraryName" : "Status",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Procedure",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "locator" : "121:46-121:81",
+                                    "dataType" : "{http://hl7.org/fhir}Procedure",
+                                    "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                                    "codeProperty" : "code",
+                                    "codeComparator" : "in",
+                                    "type" : "Retrieve",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}Procedure",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "codes" : {
+                                       "locator" : "121:58-121:80",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                       "name" : "Unilateral Mastectomy",
+                                       "preserve" : true,
+                                       "type" : "ValueSetRef"
+                                    }
+                                 } ]
+                              }
+                           } ],
+                           "relationship" : [ ],
+                           "where" : {
+                              "locator" : "122:9-122:76",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "AnyInValueSet",
+                              "codes" : {
+                                 "type" : "Query",
+                                 "source" : [ {
+                                    "alias" : "X",
+                                    "expression" : {
+                                       "locator" : "122:15-122:52",
+                                       "path" : "bodySite",
+                                       "scope" : "UnilateralMastectomyProcedure",
+                                       "type" : "Property",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ListTypeSpecifier",
+                                          "elementType" : {
+                                             "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }
+                                    }
+                                 } ],
+                                 "return" : {
+                                    "distinct" : false,
+                                    "expression" : {
+                                       "name" : "ToConcept",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "operand" : [ {
+                                          "name" : "X",
+                                          "type" : "AliasRef"
+                                       } ]
+                                    }
+                                 }
+                              },
+                              "valueset" : {
+                                 "locator" : "122:57-122:76",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Bilateral Modifier",
+                                 "preserve" : true
+                              }
+                           }
+                        } ]
+                     }, {
+                        "locator" : "124:11-126:5",
+                        "type" : "Query",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "source" : [ {
+                           "locator" : "124:13-124:132",
+                           "alias" : "ClinicalUnilateralMastectomyProcedure",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Procedure",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "expression" : {
+                              "locator" : "124:13-124:94",
+                              "name" : "Completed Procedure",
+                              "libraryName" : "Status",
+                              "type" : "FunctionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "operand" : [ {
+                                 "locator" : "124:46-124:90",
+                                 "dataType" : "{http://hl7.org/fhir}Procedure",
+                                 "templateId" : "http://hl7.org/fhir/StructureDefinition/Procedure",
+                                 "codeProperty" : "code",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Procedure",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "locator" : "124:58-124:89",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Clinical Unilateral Mastectomy",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 }
+                              } ]
+                           }
+                        } ],
+                        "relationship" : [ ],
+                        "where" : {
+                           "locator" : "125:9-125:93",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "AnyInValueSet",
+                           "codes" : {
+                              "type" : "Query",
+                              "source" : [ {
+                                 "alias" : "X",
+                                 "expression" : {
+                                    "locator" : "125:15-125:60",
+                                    "path" : "bodySite",
+                                    "scope" : "ClinicalUnilateralMastectomyProcedure",
+                                    "type" : "Property",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{http://hl7.org/fhir}CodeableConcept",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 }
+                              } ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "expression" : {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "name" : "X",
+                                       "type" : "AliasRef"
+                                    } ]
+                                 }
+                              }
+                           },
+                           "valueset" : {
+                              "locator" : "125:65-125:93",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Clinical Bilateral Modifier",
+                              "preserve" : true
+                           }
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "127:5-128:31",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "SameOrBefore",
+                  "operand" : [ {
+                     "locator" : "127:84-127:87",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "127:11-127:82",
+                        "name" : "Normalize Interval",
+                        "libraryName" : "FHIRBase",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "127:43-127:80",
+                           "path" : "performed",
+                           "scope" : "BilateralMastectomyPerformed",
+                           "type" : "Property",
+                           "resultTypeSpecifier" : {
+                              "type" : "ChoiceTypeSpecifier",
+                              "choice" : [ {
+                                 "name" : "{http://hl7.org/fhir}dateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Period",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}string",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Age",
+                                 "type" : "NamedTypeSpecifier"
+                              }, {
+                                 "name" : "{http://hl7.org/fhir}Range",
+                                 "type" : "NamedTypeSpecifier"
+                              } ]
+                           }
+                        } ]
+                     }
+                  }, {
+                     "locator" : "128:5-128:31",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "End",
+                     "operand" : {
+                        "locator" : "128:12-128:31",
+                        "name" : "Measurement Period",
+                        "type" : "ParameterRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "71:1-80:46",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Mastectomy Exclusion",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "72:3-80:46",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Or",
+               "operand" : [ {
+                  "locator" : "72:3-79:46",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "locator" : "72:3-78:3",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "operand" : [ {
+                        "locator" : "72:5-74:5",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Or",
+                        "operand" : [ {
+                           "locator" : "72:7-72:41",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Exists",
+                           "operand" : {
+                              "locator" : "72:14-72:41",
+                              "name" : "Right Mastectomy Diagnosis",
+                              "type" : "ExpressionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Condition",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        }, {
+                           "locator" : "73:12-73:46",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Exists",
+                           "operand" : {
+                              "locator" : "73:19-73:46",
+                              "name" : "Right Mastectomy Procedure",
+                              "type" : "ExpressionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        } ]
+                     }, {
+                        "locator" : "75:11-77:7",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Or",
+                        "operand" : [ {
+                           "locator" : "75:13-75:46",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Exists",
+                           "operand" : {
+                              "locator" : "75:20-75:46",
+                              "name" : "Left Mastectomy Diagnosis",
+                              "type" : "ExpressionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Condition",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        }, {
+                           "locator" : "76:14-76:47",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Exists",
+                           "operand" : {
+                              "locator" : "76:21-76:47",
+                              "name" : "Left Mastectomy Procedure",
+                              "type" : "ExpressionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Procedure",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           }
+                        } ]
+                     } ]
+                  }, {
+                     "locator" : "79:8-79:46",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Exists",
+                     "operand" : {
+                        "locator" : "79:15-79:46",
+                        "name" : "Bilateral Mastectomy Diagnosis",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     }
+                  } ]
+               }, {
+                  "locator" : "80:8-80:46",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Exists",
+                  "operand" : {
+                     "locator" : "80:15-80:46",
+                     "name" : "Bilateral Mastectomy Procedure",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "65:1-69:83",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Exclusions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "66:3-69:83",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Or",
+               "operand" : [ {
+                  "locator" : "66:3-68:96",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Or",
+                  "operand" : [ {
+                     "locator" : "66:3-67:29",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Or",
+                     "operand" : [ {
+                        "locator" : "66:3-66:45",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "name" : "Hospice Intervention or Encounter",
+                        "libraryName" : "Hospice",
+                        "type" : "ExpressionRef"
+                     }, {
+                        "locator" : "67:8-67:29",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "name" : "Mastectomy Exclusion",
+                        "type" : "ExpressionRef"
+                     } ]
+                  }, {
+                     "locator" : "68:8-68:96",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "name" : "Advanced Illness and Frailty Exclusion Not Including Over Age 80",
+                     "libraryName" : "AdvancedIllnessFrailty",
+                     "type" : "ExpressionRef"
+                  } ]
+               }, {
+                  "locator" : "69:8-69:83",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "Palliative Care Overlapping Period",
+                  "libraryName" : "PalliativeCare",
+                  "type" : "FunctionRef",
+                  "operand" : [ {
+                     "locator" : "69:62-69:81",
+                     "name" : "Measurement Period",
+                     "type" : "ParameterRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               } ]
+            }
+         }, {
+            "locator" : "130:1-133:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Numerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "131:3-133:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "operand" : {
+                  "locator" : "131:10-133:3",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Observation",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "131:12-131:49",
+                     "alias" : "Mammogram",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Observation",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "131:12-131:39",
+                        "dataType" : "{http://hl7.org/fhir}Observation",
+                        "templateId" : "http://hl7.org/fhir/StructureDefinition/Observation",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Observation",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "131:26-131:38",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Mammography",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "locator" : "132:7-132:100",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "132:67-132:70",
+                        "type" : "End",
+                        "operand" : {
+                           "locator" : "132:13-132:65",
+                           "name" : "Normalize Interval",
+                           "libraryName" : "FHIRBase",
+                           "type" : "FunctionRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "operand" : [ {
+                              "locator" : "132:45-132:63",
+                              "path" : "effective",
+                              "scope" : "Mammogram",
+                              "type" : "Property",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ChoiceTypeSpecifier",
+                                 "choice" : [ {
+                                    "name" : "{http://hl7.org/fhir}dateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{http://hl7.org/fhir}Period",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{http://hl7.org/fhir}Timing",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{http://hl7.org/fhir}instant",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ]
+                              }
+                           } ]
+                        }
+                     }, {
+                        "locator" : "132:79-132:100",
+                        "name" : "Participation Period",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+
