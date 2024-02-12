@@ -222,7 +222,7 @@ partial class ExpressionBuilder
                 for (int i = 0; i < conceptDef.code.Length; i++)
                 {
                     var codeRef = conceptDef.code[i];
-                    if (!_context.TryGetCodeByCodeName(codeRef.name, out var systemCode))
+                    if (!_context._codesByName.TryGetValue(codeRef.name, out var systemCode))
                         throw new InvalidOperationException(
                             $"Code {codeRef.name} in concept {conceptDef.name} is not defined.");
 
@@ -245,7 +245,8 @@ partial class ExpressionBuilder
             }
         }
 
-        private void ProcessCodeDef(CodeDef codeDef,
+        private void ProcessCodeDef(
+            CodeDef codeDef,
             ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
             IReadOnlyDictionary<string, string> codeSystemUrls)
         {
@@ -260,11 +261,7 @@ partial class ExpressionBuilder
                     $"Duplicate code name detected: {codeDef.name} from {codeDef.codeSystem.name} ({csUrl})");
 
             var systemCode = new CqlCode(codeDef.id, csUrl);
-            _context.AddCodeByName(codeDef.name, systemCode);
-            var codeSystemName = codeDef.codeSystem!.name;
-            var codings = _context.GetOrCreateCodesByCodeSystemName(codeSystemName);
-
-            codings.Add(systemCode);
+            _context.AddCode(codeDef, systemCode);
 
             var newCodingExpression = Expression.New(
                 ConstructorInfos.CqlCode,
@@ -309,7 +306,7 @@ partial class ExpressionBuilder
                         var operandType = builderContext.TypeFor(operand.operandTypeSpecifier)!;
                         var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
                         var parameter = Expression.Parameter(operandType, opName);
-                        builderContext.Operands.Add(operand.name!, parameter);
+                        builderContext.AddParameterExpression(operand, parameter);
                         functionParameterTypes[i] = parameter.Type;
                         i += 1;
                     }
@@ -319,7 +316,7 @@ partial class ExpressionBuilder
                 }
 
                 parameters = parameters
-                    .Concat(builderContext.Operands.Values)
+                    .Concat(builderContext.GetParameterExpressions())
                     .ToArray();
                 if (_context.TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
                 {
@@ -507,24 +504,25 @@ partial class ExpressionBuilder
         public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
             _localLibraryIdentifiers.Add(includeAlias, includeNameAndVersion);
 
-        public void AddCodeByName(string codeDefName, CqlCode cqlCode) =>
-            _codesByName.Add(codeDefName, cqlCode);
-
-        public bool TryGetCodeByCodeName(string codeName, [NotNullWhen(true)] out CqlCode? code) =>
-            _codesByName.TryGetValue(codeName, out code);
-
         public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
             _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
 
-        public List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
+        public void AddCode(CodeDef codeDef, CqlCode cqlCode)
         {
-            if (!_codesByCodeSystemName.TryGetValue(codeSystemName!, out var codings))
-            {
-                codings = new List<CqlCode>();
-                _codesByCodeSystemName.Add(codeSystemName!, codings);
-                return codings;
-            }
+            _codesByName.Add(codeDef.name, cqlCode);
 
+            var codeSystemName = codeDef.codeSystem!.name;
+            var codings = GetOrCreateCodesByCodeSystemName(codeSystemName);
+            codings.Add(cqlCode);
+        }
+
+        private List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
+        {
+            if (_codesByCodeSystemName.TryGetValue(codeSystemName!, out var codings)) 
+                return codings;
+
+            codings = new List<CqlCode>();
+            _codesByCodeSystemName.Add(codeSystemName!, codings);
             return codings;
         }
     }
@@ -540,8 +538,6 @@ partial class ExpressionBuilder
         {
             _expressionBuilderContext = expressionBuilderContext;
         }
-
-        public IDictionary<string, ParameterExpression> Operands => _expressionBuilderContext.Operands;
 
         public void LogWarning(string message, Element? expression = null) =>
             _expressionBuilderContext.LogWarning(message, expression);
@@ -563,5 +559,11 @@ partial class ExpressionBuilder
 
         public string TypeNameToIdentifier(Type type) =>
             ExpressionBuilder.TypeNameToIdentifier(type, _expressionBuilderContext);
+
+        public void AddParameterExpression(OperandDef operand, ParameterExpression parameter) => 
+            _expressionBuilderContext.Operands.Add(operand.name!, parameter);
+
+        public IEnumerable<ParameterExpression> GetParameterExpressions() => 
+            _expressionBuilderContext.Operands.Values;
     }
 }
