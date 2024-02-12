@@ -28,7 +28,8 @@ namespace Hl7.Cql.Fhir
         /// </summary>
         public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
 
-        static ConcurrentDictionary<string, CqlDateTime> dateTimes = new();
+        //static ConcurrentDictionary<string, CqlDateTime> dateTimes = new();
+        static LRUCache<CqlDateTime> dateTimes = new LRUCache<CqlDateTime>(10_000);
 
         /// <summary>
         /// Allows for the creation of a converter with the specified model 
@@ -59,7 +60,9 @@ namespace Hl7.Cql.Fhir
             add((M.FhirDateTime f) =>
             {
                 if (dateTimes.TryGetValue(f.Value, out var datetime))
+                {
                     return datetime;
+                }
 
                 if (f.TryToDateTime(out var dt))
                 {
@@ -68,7 +71,7 @@ namespace Hl7.Cql.Fhir
                         dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
                         dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
 
-                    dateTimes.TryAdd(f.Value, cqlDateTime);
+                    dateTimes.Insert(f.Value, cqlDateTime);
                     return cqlDateTime;
                 }
 
@@ -86,7 +89,7 @@ namespace Hl7.Cql.Fhir
                         dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
                         dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
 
-                    dateTimes.TryAdd(f.Value, cqlDateTime);
+                    dateTimes.Insert(f.Value, cqlDateTime);
                     return cqlDateTime.DateOnly;
                 }
 
@@ -306,7 +309,7 @@ namespace Hl7.Cql.Fhir
                     return new CqlCode(systemAndCode.Code, systemAndCode.System, null, null);
                 });
                 converter.AddConversion(codeType, nullableEnumType, (code) => 
-                    code.GetType().GetProperty("Value")!.GetValue(code)!);
+                    code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
 
                 converter.AddConversion(codeType, typeof(string), (code) =>
                 {
