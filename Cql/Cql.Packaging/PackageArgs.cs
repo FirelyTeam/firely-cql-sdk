@@ -9,18 +9,21 @@ public record PackageArgs
     /// <summary>Creates an instance of this type to be passed on for the <see cref="ResourcePackager.Package(PackageArgs)"/> method.</summary>
     /// <param name="elmDir">Directory to find the ELM files</param>
     /// <param name="cqlDir">Directory to find the CQL files</param>
+    /// <param name="cacheSize">Size of the LRU Cache</param>
     /// <param name="afterPackageMutator">Optional mutator for the resources prior to writing</param>
     /// <param name="resourceCanonicalRootUrl">Root part of the resource canonical; otherwise just a '#'</param>
     public PackageArgs(
         DirectoryInfo elmDir, 
-        DirectoryInfo cqlDir, 
+        DirectoryInfo cqlDir,
         Action<IEnumerable<Resource>>? afterPackageMutator = null, 
-        string? resourceCanonicalRootUrl = null)
+        string? resourceCanonicalRootUrl = null,
+        int? cacheSize = null)
     {
         ElmDir = elmDir;
         CqlDir = cqlDir;
         AfterPackageMutator = afterPackageMutator;
         ResourceCanonicalRootUrl = resourceCanonicalRootUrl;
+        LRUCacheSize = cacheSize ?? 10000;
     }
 
     /// <summary>directory to find the ELM files</summary>
@@ -38,4 +41,9 @@ public record PackageArgs
     /// Root part of the resource canonical; otherwise just a '#'.
     /// </summary>
     public string? ResourceCanonicalRootUrl { get; init; }
+
+    /// <summary>
+    /// Size of the LRU cache to use for the resource packager.
+    /// </summary>
+    public int LRUCacheSize { get; init; }
 }

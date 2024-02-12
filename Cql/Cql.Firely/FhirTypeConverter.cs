@@ -26,23 +26,31 @@ namespace Hl7.Cql.Fhir
         /// <summary>
         /// Singleton for the default configuration of this TypeConverter
         /// </summary>
-        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
+        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector, 0);
 
-        //static ConcurrentDictionary<string, CqlDateTime> dateTimes = new();
-        static LRUCache<CqlDateTime> dateTimes = new LRUCache<CqlDateTime>(10_000);
+        static LRUCache<CqlDateTime>? dateTimes;
 
         /// <summary>
         /// Allows for the creation of a converter with the specified model 
         /// </summary>
         /// <param name="model">the model</param>
+        /// <param name="cacheSize">the size of the LRU cache</param>
         /// <returns>the type converter</returns>
-        public static TypeConverter Create(ModelInspector model) =>
-            TypeConverter
+        public static TypeConverter Create(ModelInspector model, int? cacheSize)
+        {
+            var lruCacheSize = cacheSize ?? 0;  
+            if (lruCacheSize > 0 && dateTimes is null)
+            {
+                dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
+            }
+
+            return TypeConverter
                 .Create()
                 .ConvertSystemTypes()
                 .ConvertFhirToCqlPrimitives()
                 .ConvertCqlPrimitivesToFhir()
                 .ConvertCodeTypes(model);
+        }
 
         internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
@@ -59,7 +67,7 @@ namespace Hl7.Cql.Fhir
             add((M.Time f) => f.ToString());
             add((M.FhirDateTime f) =>
             {
-                if (dateTimes.TryGetValue(f.Value, out var datetime))
+                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                 {
                     return datetime;
                 }
@@ -71,7 +79,7 @@ namespace Hl7.Cql.Fhir
                         dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
                         dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
 
-                    dateTimes.Insert(f.Value, cqlDateTime);
+                    dateTimes?.Insert(f.Value, cqlDateTime);
                     return cqlDateTime;
                 }
 
@@ -79,7 +87,7 @@ namespace Hl7.Cql.Fhir
             });
             add((M.FhirDateTime f) => f.ToString());
             add((M.FhirDateTime f) => {
-                if (dateTimes.TryGetValue(f.Value, out var datetime))
+                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                     return datetime.DateOnly;
 
                 if (f.TryToDateTime(out var dt))
@@ -89,7 +97,7 @@ namespace Hl7.Cql.Fhir
                         dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
                         dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
 
-                    dateTimes.Insert(f.Value, cqlDateTime);
+                    dateTimes?.Insert(f.Value, cqlDateTime);
                     return cqlDateTime.DateOnly;
                 }
 

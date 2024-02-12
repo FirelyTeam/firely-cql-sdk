@@ -31,12 +31,17 @@ namespace Hl7.Cql.Packaging
     {
         internal LibraryPackager()
         {
-            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
         }
 
-        internal LibraryPackager(TypeConverter? typeConverter)
+        internal LibraryPackager(int cacheSize)
         {
-            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
+        }
+
+        internal LibraryPackager(TypeConverter? typeConverter, int cacheSize)
+        {
+            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
         }
 
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
@@ -80,7 +85,8 @@ namespace Hl7.Cql.Packaging
 #pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
           string lib,
           string version,
-          LogLevel logLevel = LogLevel.Error)
+          LogLevel logLevel = LogLevel.Error,
+          int cacheSize = 0)
         {
             var logFactory = LoggerFactory
                           .Create(logging =>
@@ -92,13 +98,14 @@ namespace Hl7.Cql.Packaging
                               });
                           });
 
-            return LoadElm(elmDirectory, lib, version, logFactory);
+            return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
         }
 
         public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
             string lib,
             string version,
-            ILoggerFactory logFactory)
+            ILoggerFactory logFactory,
+            int cacheSize)
         {
             var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
             if (!elmFile.Exists)
@@ -113,7 +120,7 @@ namespace Hl7.Cql.Packaging
                 .ToArray();
 
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
+            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
             var typeManager = new TypeManager(typeResolver);
             var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);

@@ -19,13 +19,14 @@ namespace Hl7.Cql.Packaging
         /// <param name="expression">the expression to evaluate</param>
         /// <param name="context">the context of the expression evaluation</param>
         /// <param name="logFactory">logger</param>
+        /// <param name="cacheSize">LRU cache size</param>
         /// <returns>the result of the expression</returns>
-        public static object? EvaluateExpression(this Library library, Elm.Expression expression, CqlContext context, ILoggerFactory logFactory)
+        public static object? EvaluateExpression(this Library library, Elm.Expression expression, CqlContext context, ILoggerFactory logFactory, int cacheSize)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
             var builder = new ExpressionBuilder(
-                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
+                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize)),
                 new TypeManager(typeResolver),
                 library!, builderLogger, new(false));
             var lambda = builder.Lambda(expression);

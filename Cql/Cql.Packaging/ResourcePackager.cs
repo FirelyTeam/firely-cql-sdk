@@ -30,18 +30,22 @@ namespace Hl7.Cql.Packaging
         /// <param name="elmDir">directory to find the ELM files</param>
         /// <param name="cqlDir">directory to find the CQL files</param>
         /// <param name="afterPackageMutator">optional mutator for the resources prior to writing</param>
+        /// <param name="cacheSize"></param>
         public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
-            Action<IEnumerable<Resource>>? afterPackageMutator = null) =>
-            PackageCore(elmDir, cqlDir, afterPackageMutator, null);
+            Action<IEnumerable<Resource>>? afterPackageMutator = null, int? cacheSize = null) =>
+            PackageCore(elmDir, cqlDir, afterPackageMutator, null, cacheSize);
 
         /// <summary>
         /// Package the resources in the given ELM and CQL directories and output them using the writers provided in the constructor 
         /// </summary>
         /// <param name="args">A</param>
         public void Package(PackageArgs args) =>
-            PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl);
+            PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl, args.LRUCacheSize);
 
-        private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action<IEnumerable<Resource>>? afterPackageMutator, string? resourceCanonicalRootUrl)
+        private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
+            Action<IEnumerable<Resource>>? afterPackageMutator, 
+            string? resourceCanonicalRootUrl, 
+            int? cacheSize)
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
@@ -49,12 +53,12 @@ namespace Hl7.Cql.Packaging
             var graph = Elm.Library.GetIncludedLibraries(packages.Values);
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
 
-            var packager = new LibraryPackager();
+            var packager = new LibraryPackager(cacheSize ?? 0);
             var resources = packager.PackageResources(elmDir,
                 cqlDir,
                 graph,
                 typeResolver,
-                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
+                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize)),
                 new TypeManager(typeResolver),
                 resource => CanonicalUri(resource, resourceCanonicalRootUrl),
                 logFactory);
