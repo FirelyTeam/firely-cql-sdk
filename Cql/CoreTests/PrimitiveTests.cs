@@ -15,9 +15,9 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Elm;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests
 {

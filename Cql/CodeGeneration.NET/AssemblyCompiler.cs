@@ -48,7 +48,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
-            var graph = Library.GetIncludedLibraries(elmPackages);
+            var graph = elmPackages.GetIncludedLibraries();
             var references = new[]
             {
             // Core engine references

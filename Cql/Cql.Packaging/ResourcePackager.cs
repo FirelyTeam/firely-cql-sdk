@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
@@ -46,7 +47,7 @@ namespace Hl7.Cql.Packaging
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
             var packages = LibraryPackager.LoadLibraries(elmDir);
-            var graph = Elm.Library.GetIncludedLibraries(packages.Values);
+            var graph = packages.Values.GetIncludedLibraries();
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
 
             var packager = new LibraryPackager();

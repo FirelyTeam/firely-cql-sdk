@@ -107,8 +107,8 @@ namespace Hl7.Cql.Packaging
                 throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
             var library = Elm.Library.LoadFromJson(elmFile)
                 ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
-            var dependencies = Elm.Library
-                .GetIncludedLibraries(library, elmDirectory)
+            var dependencies = 
+                library.GetIncludedLibraries(elmDirectory)
                 .Packages()
                 .ToArray();
 

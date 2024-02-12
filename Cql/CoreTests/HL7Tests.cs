@@ -5,11 +5,10 @@ using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using Library = Hl7.Cql.Elm.Library;
+using Hl7.Cql.Elm;
 
 namespace CoreTests
 {
