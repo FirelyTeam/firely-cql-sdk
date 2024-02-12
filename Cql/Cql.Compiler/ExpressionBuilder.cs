@@ -29,8 +29,6 @@ using ExpressionElementPairForIdentifier = System.Collections.Generic.KeyValuePa
 
 namespace Hl7.Cql.Compiler
 {
-    internal record ExpressionBuilderOptions(bool EmitStackTraces);
-
     /// <summary>
     /// The ExpressionBuilder translates ELM <see cref="elm.Expression"/>s into <see cref="Expression"/>.
     /// </summary>

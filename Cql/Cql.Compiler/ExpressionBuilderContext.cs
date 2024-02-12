@@ -31,15 +31,15 @@ namespace Hl7.Cql.Compiler
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers)
         {
-            Builder = builder;
-            RuntimeContextParameter = contextParameter;
+            Builder = builder.ArgNotNull();
+            RuntimeContextParameter = contextParameter.ArgNotNull();
+            Definitions = definitions.ArgNotNull();
+            LocalLibraryIdentifiers = localLibraryIdentifiers.ArgNotNull();
+            ImpliedAlias = null;
             LocalLibraryIdentifiers = new Dictionary<string, string>();
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            ImpliedAlias = null;
             Scopes = new Dictionary<string, (Expression, elm.Element)>();
-            Definitions = definitions;
-            LocalLibraryIdentifiers = localLibraryIdentifiers;
         }
 
         private ExpressionBuilderContext(ExpressionBuilderContext other)
