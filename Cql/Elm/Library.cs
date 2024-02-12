@@ -74,7 +74,13 @@ namespace Hl7.Cql.Elm
         }
         public static Library LoadFromJson(Stream stream) =>
             JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
-                throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
+            stream switch
+            {
+                FileStream fs => throw new ArgumentException(
+                    $"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
+                _ => throw new ArgumentException(
+                    $"Stream does not represent a valid {nameof(Library)}")
+            };
 
         /// <summary>
         /// Get a flat list of ELM libraries included in the set of libraries passed in. 

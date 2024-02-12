@@ -39,20 +39,14 @@ namespace Hl7.Cql.Packaging
             TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
-        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
-        {
-            var dict = new ConcurrentDictionary<string, elm.Library>();
-            var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
-            Parallel.ForEach(files, file =>
-            {
-                var library = elm.Library.LoadFromJson(file);
-                if (library?.NameAndVersion != null)
-                {
-                    dict.TryAdd(library.NameAndVersion, library);
-                }
-            });
-            return dict;
-        }
+        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir) =>
+            elmDir.GetFiles("*.json", SearchOption.AllDirectories)
+                .AsParallel()
+                .AsOrdered()
+                .Select(file => elm.Library.LoadFromJson(file))
+                .Where(library => library?.NameAndVersion != null)
+                .AsSequential()
+                .ToDictionary(d => d.NameAndVersion!, d => d);
 
         public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
         {
