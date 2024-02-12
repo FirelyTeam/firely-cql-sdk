@@ -36,7 +36,7 @@ namespace Hl7.Cql.Fhir
         /// <param name="model">the model</param>
         /// <param name="cacheSize">the size of the LRU cache</param>
         /// <returns>the type converter</returns>
-        public static TypeConverter Create(ModelInspector model, int? cacheSize)
+        public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
         {
             var lruCacheSize = cacheSize ?? 0;  
             if (lruCacheSize > 0 && dateTimes is null)
