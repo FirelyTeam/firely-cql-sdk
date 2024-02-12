@@ -30,11 +30,9 @@ namespace Hl7.Cql.Fhir
         private LRUValue<T>? Tail;
         private int Count;
         private int Capacity;
-        private Mutex mutex;
 
         public LRUCache(int capacity)
         {
-            mutex = new Mutex();
             Cache = new Dictionary<string, LRUValue<T>>();
             Count = 0;
             Capacity = capacity;
