@@ -222,7 +222,7 @@ partial class ExpressionBuilder
                 for (int i = 0; i < conceptDef.code.Length; i++)
                 {
                     var codeRef = conceptDef.code[i];
-                    if (!_context._codesByName.TryGetValue(codeRef.name, out var systemCode))
+                    if (!_context.TryGetCode(codeRef, out var systemCode))
                         throw new InvalidOperationException(
                             $"Code {codeRef.name} in concept {conceptDef.name} is not defined.");
 
@@ -525,6 +525,9 @@ partial class ExpressionBuilder
             _codesByCodeSystemName.Add(codeSystemName!, codings);
             return codings;
         }
+
+        public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)]out CqlCode? systemCode) => 
+            _codesByName.TryGetValue(codeRef.name, out systemCode);
     }
 
     /// <summary>
