@@ -36,7 +36,6 @@ namespace Hl7.Cql.Compiler
             Definitions = definitions.ArgNotNull();
             LocalLibraryIdentifiers = localLibraryIdentifiers.ArgNotNull();
             ImpliedAlias = null;
-            LocalLibraryIdentifiers = new Dictionary<string, string>();
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
             Scopes = new Dictionary<string, (Expression, elm.Element)>();
@@ -44,19 +43,14 @@ namespace Hl7.Cql.Compiler
 
         private ExpressionBuilderContext(ExpressionBuilderContext other)
         {
-            LocalLibraryIdentifiers = new Dictionary<string, string>();
-            Operands = new Dictionary<string, ParameterExpression>();
-            Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            ImpliedAlias = null;
-            Scopes = new Dictionary<string, (Expression, elm.Element)>();
-            Libraries = other.Libraries;
             Builder = other.Builder;
             RuntimeContextParameter = other.RuntimeContextParameter;
             Definitions = other.Definitions;
             LocalLibraryIdentifiers = other.LocalLibraryIdentifiers;
-            Operands = other.Operands;
-            Scopes = other.Scopes;
             ImpliedAlias = other.ImpliedAlias;
+            Operands = other.Operands;
+            Libraries = other.Libraries;
+            Scopes = other.Scopes;
         }
 
         private ExpressionBuilderContext(ExpressionBuilderContext other,

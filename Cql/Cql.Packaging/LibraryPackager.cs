@@ -137,7 +137,9 @@ namespace Hl7.Cql.Packaging
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
 
-            var elmLibraries = packageGraph.Nodes.Values
+            var elmLibraries =
+                packageGraph.Nodes.Values
+                //packageGraph.NodesBreadthFirst()
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
                 .OfType<elm.Library>()
                 // Processing this deterministically to reduce different exceptions when running this repeatedly
