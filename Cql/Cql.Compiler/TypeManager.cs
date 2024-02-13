@@ -88,8 +88,6 @@ namespace Hl7.Cql.Compiler
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
                     var returnType = definition!.ReturnType;
-                    if (returnType.IsNullable())
-                        returnType = returnType.GetGenericArguments()[0];
 
                     return returnType;
                 }
