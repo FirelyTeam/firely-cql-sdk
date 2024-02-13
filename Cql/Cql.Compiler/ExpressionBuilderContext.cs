@@ -86,7 +86,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal IDictionary<string, ParameterExpression> Operands { get; }
 
-        internal IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; }
+        private IDictionary<string, DefinitionDictionary<LambdaExpression>> Libraries { get; }
 
         /// <summary>
         /// In dodgy sort expressions where the properties are named using the undocumented IdentifierRef expression type,
