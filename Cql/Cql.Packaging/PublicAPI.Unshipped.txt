@@ -47,7 +47,7 @@ Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger! logger) -> void
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter
-Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.FhirResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger! logger) -> void
+Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.FhirResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger! logger, System.DateTime? overrideDate = null) -> void
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.EnsureDirectory(System.IO.DirectoryInfo! directory, int timeoutMs = 5000) -> void
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.Logger.get -> Microsoft.Extensions.Logging.ILogger!

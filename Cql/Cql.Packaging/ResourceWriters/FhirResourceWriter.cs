@@ -10,6 +10,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
     /// </summary>
     public class FhirResourceWriter : ResourceWriter
     {
+        private readonly DateTime? _overrideDate;
         private static readonly JsonSerializerOptions options = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector).Pretty();
 
         /// <summary>
@@ -17,8 +18,13 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// </summary>
         /// <param name="outDirectory">the output directory</param>
         /// <param name="logger">logger</param>
-        public FhirResourceWriter(DirectoryInfo outDirectory, ILogger logger) : base(outDirectory, logger)
+        /// <param name="overrideDate">Override date for library</param>
+        public FhirResourceWriter(
+            DirectoryInfo outDirectory,
+            ILogger logger,
+            DateTime? overrideDate = null) : base(outDirectory, logger)
         {
+            _overrideDate = overrideDate;
         }
 
         /// <summary>
@@ -33,6 +39,16 @@ namespace Hl7.Cql.Packaging.ResourceWriters
 
                 foreach (var resource in resources)
                 {
+                    if (_overrideDate is {} date
+                        && resource is Library library)
+                    {
+                        library.Date = date.ToString("u");
+                        if (library.Meta is { } meta)
+                        {
+                            meta.LastUpdated = date;
+                        }
+                    }
+
                     var file = new FileInfo(Path.Combine(OutDirectory.FullName, $"{resource.Id}.json"));
                     Logger.LogInformation($"Writing {file.FullName}");
                     using var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
