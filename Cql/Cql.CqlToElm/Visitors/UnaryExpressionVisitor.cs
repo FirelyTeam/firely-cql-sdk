@@ -17,14 +17,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression boolean = lastChild switch
             {
-                "null" => SystemLibrary.IsNull.Call(ModelProvider, context, operand),
-                "true" => SystemLibrary.IsTrue.Call(ModelProvider, context, operand),
-                "false" => SystemLibrary.IsFalse.Call(ModelProvider, context, operand),
+                "null" => SystemLibrary.IsNull.Call(InvocationBuilder, context, operand),
+                "true" => SystemLibrary.IsTrue.Call(InvocationBuilder, context, operand),
+                "false" => SystemLibrary.IsFalse.Call(InvocationBuilder, context, operand),
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
             };
 
             if (isNot)
-                boolean = SystemLibrary.Not.Call(ModelProvider, context, boolean);
+                boolean = SystemLibrary.Not.Call(InvocationBuilder, context, boolean);
 
             return boolean;
         }
@@ -34,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return SystemLibrary.SingletonFrom.Call(ModelProvider, context, operand);
+            return SystemLibrary.SingletonFrom.Call(InvocationBuilder, context, operand);
         }
 
         //     | 'exists' expression                                                                           #existenceExpression
@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
 
-            return SystemLibrary.Exists.Call(ModelProvider, context, operand);
+            return SystemLibrary.Exists.Call(InvocationBuilder, context, operand);
         }
 
         // | 'not' expression                                                                              #notExpression
@@ -50,21 +50,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
 
-            return SystemLibrary.Not.Call(ModelProvider, context, operand);
+            return SystemLibrary.Not.Call(InvocationBuilder, context, operand);
         }
 
         //    | 'point' 'from' expressionTerm                                                 #pointExtractorExpressionTerm
         public override Expression VisitPointExtractorExpressionTerm([NotNull] cqlParser.PointExtractorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-            return SystemLibrary.PointFrom.Call(ModelProvider, context, operand);
+            return SystemLibrary.PointFrom.Call(InvocationBuilder, context, operand);
         }
 
         //    | 'predecessor' 'of' expressionTerm                                             #predecessorExpressionTerm
         public override Expression VisitPredecessorExpressionTerm([NotNull] cqlParser.PredecessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-            var call = SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
+            var call = SystemLibrary.Predecessor.Call(InvocationBuilder, context, operand);
 
             if (!operand.resultTypeSpecifier.IsValidOrderedType())
                 call.AddError("Predecessor can only be applied to types that are ordered.");
@@ -76,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitSuccessorExpressionTerm([NotNull] cqlParser.SuccessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-            var call = SystemLibrary.Successor.Call(ModelProvider, context, operand);
+            var call = SystemLibrary.Successor.Call(InvocationBuilder, context, operand);
 
             if (!operand.resultTypeSpecifier.IsValidOrderedType())
                 call.AddError("Successor can only be applied to types that are ordered.");
@@ -92,8 +92,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return startOrEnd switch
             {
-                "start" => SystemLibrary.Start.Call(ModelProvider, context, operand),
-                "end" => SystemLibrary.End.Call(ModelProvider, context, operand),
+                "start" => SystemLibrary.Start.Call(InvocationBuilder, context, operand),
+                "end" => SystemLibrary.End.Call(InvocationBuilder, context, operand),
                 _ => throw new InvalidOperationException($"Parser returned unknown start or end keyword '{startOrEnd}' in a time boundary expression.")
             };
         }
@@ -122,7 +122,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return SystemLibrary.Width.Call(ModelProvider, context, operand);
+            return SystemLibrary.Width.Call(InvocationBuilder, context, operand);
         }
 
         //   expression ('is' | 'as') typeSpecifier  

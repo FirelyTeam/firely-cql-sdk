@@ -10,6 +10,7 @@ using Antlr4.Runtime;
 using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
 using System.Text;
@@ -22,49 +23,49 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// Uses the <see cref="SystemFunction{T}"/> to create an <see cref="Expression"/> for the invocation of that
         /// function with the given arguments. If arguments need to be cast first, it will attempt to do so.
         /// </summary>
-        public static Expression Call(this FunctionDef def, IModelProvider provider, ParserRuleContext? context, params Expression[] arguments)
+        [DebuggerStepThrough]
+        public static Expression Call(this FunctionDef def, InvocationBuilder builder, ParserRuleContext? context, params Expression[] arguments)
         {
-            var callResult = buildCall(def, provider, context, arguments);
-
+            var callResult = buildCall(def, builder, context, arguments);
             return callResult switch
             {
-                { Error: null, Result: var e } => e.expr,
-                { Error: not null, Result: var e } => e.expr.AddError(callResult.Error),
+                { Error: null, Expression: var e } => e.expr,
+                { Error: not null, Expression: var e } => e.expr.AddError(callResult.Error),
             };
         }
 
+        [DebuggerStepThrough]
         public static Expression Call(this OverloadedFunctionDef def,
-            IModelProvider provider,
+            InvocationBuilder builder,
             ParserRuleContext? context,
             Expression[] arguments,
             out FunctionDef? selectedOverload)
         {
-            var callResult = buildCall(def, provider, context, arguments, out selectedOverload);
-
+            var callResult = buildCall(def, builder, context, arguments, out selectedOverload);
             return callResult switch
             {
-                { Error: null, Result: var e } => e.expr,
-                { Error: not null, Result: var e } => e.expr.AddError(callResult.Error),
+                { Error: null, Expression: var e } => e.expr,
+                { Error: not null, Expression: var e } => e.expr.AddError(callResult.Error),
             };
         }
 
-        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this FunctionDef def, IModelProvider provider, ParserRuleContext? context, params Expression[] arguments)
+        private static ConversionResult<(Expression expr, FunctionDef def)> buildCall(this FunctionDef def, InvocationBuilder builder, ParserRuleContext? context, params Expression[] arguments)
         {
-            var castResult = buildInvocation(def, arguments, provider);
-            var elmNode = castResult.Result;
+            var castResult = buildInvocation(def, arguments, builder);
+            var elmNode = castResult.Expression;
             if (context is not null)
                 elmNode = elmNode.WithLocator(context.Locator());
-            return new((elmNode, def), castResult.Cost, castResult.Error);
+            return new((elmNode, def), castResult.Cost, castResult.Errors);
         }
 
-        private static ResolveResult<(Expression expr, FunctionDef def)> buildCall(this OverloadedFunctionDef def,
-            IModelProvider provider,
+        private static ConversionResult<(Expression expr, FunctionDef def)> buildCall(this OverloadedFunctionDef def,
+            InvocationBuilder builder,
             ParserRuleContext? context,
             Expression[] arguments,
             out FunctionDef? selectedOverload)
         {
             var groupByCostLowestFirst = def.Functions
-                .Select(f => (Function: f, Result: buildInvocation(f, arguments, provider)))
+                .Select(f => (Function: f, Result: buildInvocation(f, arguments, builder)))
                 .Where(t => t.Result.Success)
                 .GroupBy(t => t.Result.Cost)
                 .OrderBy(g => g.Key)
@@ -77,12 +78,12 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 if (successfulMatches.Length == 1)
                 {
                     var result = successfulMatches[0].Result;
-                    var node = result.Result;
+                    var node = result.Expression;
                     var function = successfulMatches[0].Function;
                     if (context is not null)
                         node = node.WithLocator(context.Locator());
                     selectedOverload = successfulMatches[0].Function;
-                    return new((node, function), result.Cost, result.Error);
+                    return new((node, function), result.Cost, result.Errors);
                 }
                 else if (successfulMatches.Length > 1) // Ambiguous
                 {
@@ -97,85 +98,54 @@ namespace Hl7.Cql.CqlToElm.Builtin
                     }
                     var error = errorSb.ToString();
                     var result = successfulMatches[0].Result;
-                    var node = result.Result;
+                    var node = result.Expression;
                     var function = successfulMatches[0].Function;
                     if (context is not null)
                         node = node.WithLocator(context.Locator());
                     selectedOverload = null;
-                    return new((node, function), result.Cost, error);
+                    return new((node, function), ConversionCost.Incompatible, error);
                 }
             }
             // need an overload to fail on
-            var firstInvocation = buildInvocation(def.Functions[0], arguments, provider);
-            var errorNode = firstInvocation.Result;
+            var firstInvocation = buildInvocation(def.Functions[0], arguments, builder);
+            var errorNode = firstInvocation.Expression;
             var unresolved = $"Could not resolve call to operator {def.Name} with signature({string.Join(", ", arguments.Select(t => t.resultTypeSpecifier.ToString()))}).";
             if (context is not null)
                 errorNode = errorNode.WithLocator(context.Locator());
             selectedOverload = null;
-            return new((errorNode, def.Functions[0]), firstInvocation.Cost, unresolved);
+            return new((errorNode, def.Functions[0]), ConversionCost.Incompatible, unresolved);
         }
 
-        /// <summary>
-        /// Choses the best matching overload of a set of <see cref="SystemFunction{T}"/> to create an <see cref="Expression"/> for the 
-        /// invocation, given the types of the arguments. If arguments need to be cast first, it will attempt to do so.
-        /// </summary>
-        public static Expression Call(this IEnumerable<FunctionDef> defs, IModelProvider provider, ParserRuleContext context, params Expression[] arguments)
-        {
-            var results = defs.Select(d => buildCall(d, provider, context, arguments)).ToList();
-            if (!results.Any()) throw new ArgumentException("Should be called with at least one overload.", nameof(defs));
-
-            var success = results.Any(r => r.Success);
-
-            var bestCandidates = results
-                .OrderBy(r => r.Cost)
-                .GroupBy(r => r.Cost)
-                .First()
-                .AsEnumerable()
-                .ToList();
-
-            return bestCandidates switch
-            {
-                [var one] when success => one.Result.expr,
-                [var one] when !success => one.Result.expr.AddError(one.Error!),
-                var many when success => many.First().Result.expr.AddError($"Ambiguous call between {listSignatures(many.Select(m => m.Result.def))}."),
-                var many when !success => many.First().Result.expr.AddError($"No matching overload found between {listSignatures(many.Select(m => m.Result.def))}."),
-                _ => throw new InvalidOperationException("Should not be possible.")
-            };
-
-            static string listSignatures(IEnumerable<FunctionDef> defs) =>
-                string.Join(", ", defs.Select(def => def.Signature()));
-        }
-
-        public static If Call(this SystemFunction<If> def, InvocationBuilder builder, ParserRuleContext context, Expression condition, Expression thenExpression, Expression elseExpression)
+        public static If Call(this SystemFunction<If> def, TypeConverter converter, ParserRuleContext context, Expression condition, Expression thenExpression, Expression elseExpression)
         {
             var ifNode = (If)def.CreateElmNode();
 
-            var ifCastResult = builder.BuildImplicitCast(condition, SystemTypes.BooleanType, out var _);
+            var ifCastResult = converter.Convert(condition, SystemTypes.BooleanType);
 
-            ifNode.condition = ifCastResult.Result;
+            ifNode.condition = ifCastResult.Expression;
             if (ifCastResult.Error is not null)
                 ifNode.AddError("The condition " + ifCastResult.Error);
 
             TypeSpecifier expressionType;
 
             // First, try to see whether the then expressions can be cast to the type of the else expression.
-            var thenCastResult = builder.BuildImplicitCast(thenExpression, elseExpression.resultTypeSpecifier, out var _);
+            var thenCastResult = converter.Convert(thenExpression, elseExpression.resultTypeSpecifier);
 
             if (thenCastResult.Success)
             {
-                ifNode.then = thenCastResult.Result;
+                ifNode.then = thenCastResult.Expression;
                 ifNode.@else = elseExpression;
                 expressionType = elseExpression.resultTypeSpecifier;
             }
             else
             {
                 // If that fails, try to see whether the else expression can be cast to the type of the then expression.
-                var elseCastResult = builder.BuildImplicitCast(elseExpression, thenExpression.resultTypeSpecifier, out var _);
+                var elseCastResult = converter.Convert(elseExpression, thenExpression.resultTypeSpecifier);
 
                 if (elseCastResult.Success)
                 {
                     ifNode.then = thenExpression;
-                    ifNode.@else = elseCastResult.Result;
+                    ifNode.@else = elseCastResult.Expression;
                     expressionType = thenExpression.resultTypeSpecifier;
                 }
                 else
@@ -267,11 +237,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }.WithResultType(typeArgument).WithLocator(context.Locator());
         }
 
-        private static ResolveResult<Expression> buildInvocation(FunctionDef def, Expression[] arguments, IModelProvider provider)
-        {
-            var castBuilder = new InvocationBuilder(provider);
-            return castBuilder.Build(def, arguments);
-        }
+        [DebuggerStepThrough]
+        private static ConversionResult<Expression> buildInvocation(FunctionDef def, Expression[] arguments, InvocationBuilder builder) =>
+            builder.Build(def, arguments);
 
         /// <summary>
         /// Given a <see cref="FunctionDef"/>, creates an <see cref="Expression"/> for the invocation with the
@@ -284,33 +252,22 @@ namespace Hl7.Cql.CqlToElm.Builtin
             var result = Activator.CreateInstance(nodeType)!;
             if (result is BinaryExpression be)
             {
-                if (result is DifferenceBetween dib)
+                if (result is IHasPrecision hp)
                 {
                     if (arguments.Length > 2 && arguments[2] is Literal literal)
                     {
                         if (Enum.TryParse<DateTimePrecision>(literal.value, out var precision))
                         {
-                            dib.precision = precision;
-                            dib.precisionSpecified = true;
+                            hp.precision = precision;
+                            hp.precisionSpecified = true;
                         }
                         else throw new ArgumentException($"Expected argument 3 to be a string literal representing precision.");
                     }
-                }
-                else if (result is DurationBetween dub)
-                {
-                    if (arguments.Length > 2 && arguments[2] is Literal literal)
-                    {
-                        if (Enum.TryParse<DateTimePrecision>(literal.value, out var precision))
-                        {
-                            dub.precision = precision;
-                            dub.precisionSpecified = true;
-                        }
-                        else throw new ArgumentException($"Expected argument 3 to be a string literal representing precision.");
-                    }
+                    be.operand = new[] { arguments[0], arguments[1] };
                 }
                 else if (arguments.Length != 2)
                     throw new ArgumentException($"Expected 2 arguments, but got {arguments.Length}.", nameof(arguments));
-                be.operand = arguments;
+                else be.operand = arguments;
                 return be;
             }
             else if (result is UnaryExpression ue)

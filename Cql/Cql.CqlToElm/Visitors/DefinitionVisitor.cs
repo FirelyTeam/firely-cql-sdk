@@ -14,8 +14,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
         public LibraryBuilder LibraryBuilder { get; }
         public ILibraryProvider LibraryProvider { get; }
+        public TypeConverter TypeConverter { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
-
+        
 
         public DefinitionVisitor(
             LocalIdentifierProvider identifierProvider,
@@ -24,13 +25,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             ExpressionVisitor expressionVisitor,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LibraryBuilder libraryBuilder,
-            ILibraryProvider libraryProvider)
+            ILibraryProvider libraryProvider,
+            TypeConverter typeConverter)
             : base(identifierProvider, invocationBuilder)
         {
             ModelProvider = modelProvider;
             TypeSpecifierVisitor = typeSpecifierVisitor;
             LibraryBuilder = libraryBuilder;
             LibraryProvider = libraryProvider;
+            TypeConverter = typeConverter;
             ExpressionVisitor = expressionVisitor;
         }
 
@@ -178,13 +181,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression coerceDefault(TypeSpecifier type, Expression defaultExpr)
             {
-                InvocationBuilder ib = new(ModelProvider);
-                var (result, _, error) = ib.BuildImplicitCast(defaultExpr, type, out var _);
+                var result = TypeConverter.Convert(defaultExpr, type);
 
-                if (error is null)
-                    return result;
+                if (result.Errors.Any())
+                    return result.Expression;
                 else
-                    return defaultExpr.AddError($"Default value cannot be converted to parameter type {type}.");
+                    return defaultExpr.AddError($"Expected an expression of type '{type}', but found an expression of type '{defaultExpr.resultTypeSpecifier}'.");
             }
         }
 
@@ -358,7 +360,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 templateId = ModelProvider.GetDefaultProfileUriForType(resultType),
             }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType());
 
-            var singleton = SystemLibrary.SingletonFrom.Call(ModelProvider, statementContext, retrieve);
+            var singleton = SystemLibrary.SingletonFrom.Call(InvocationBuilder, statementContext, retrieve);
             var (_, exprName) = resultType;
             var exprDef = new ExpressionDef
             {

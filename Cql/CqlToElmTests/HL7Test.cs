@@ -21,6 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             opt.ValidateLiterals = false;
             opt.AllowNullIntervals = true;
+            opt.LongsRequireSuffix = false; // promote test values of 2147483648 to longs so ExpressionBuilder doesn't throw
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 
@@ -52,6 +53,8 @@ namespace Hl7.Cql.CqlToElm.Test
                     var errors = library.GetErrors();
                     if (errors.Length > 0)
                         Assert.Fail(errors[0].message);
+                    var eb = ExpressionBuilderFor(library);
+                    //var lambdas = eb.Build();
                     foreach (var statement in library.statements)
                     {
                         yield return new object[] { file, library, statement };

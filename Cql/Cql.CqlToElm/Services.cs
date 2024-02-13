@@ -3,6 +3,7 @@ using Hl7.Cql.CqlToElm.Visitors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 
@@ -58,7 +59,12 @@ namespace Hl7.Cql.CqlToElm
         {
             var cb = new ConfigurationBuilder();
             builder(cb);
-            services.AddScoped<IConfiguration>(isp => cb.Build());
+            var config = cb.Build();
+            services.AddSingleton<IConfiguration>(config);
+            var options = new CqlToElmOptions();
+            config.Bind(options);
+            var wrapper = new OptionsWrapper<CqlToElmOptions>(options);
+            services.AddSingleton<IOptions<CqlToElmOptions>>(wrapper);
             return services;
         }
 

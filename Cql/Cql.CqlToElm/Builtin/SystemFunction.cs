@@ -63,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
     /// <summary>
     /// A kind of FunctionDef that represents a built-in CQL function.
     /// </summary>
-    [DebuggerDisplay("{name}")]
+    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal class SystemFunction<T> : SystemFunction
         where T: Element
     {
@@ -136,5 +136,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             foreach (var validator in validators) validator(element);
             return element;
         }
+
+        private string GetDebuggerDisplay() =>
+            $"{name}({string.Join(", ", operand?.Select(o => o.resultTypeSpecifier) ?? Enumerable.Empty<TypeSpecifier>())})";
     }
 }

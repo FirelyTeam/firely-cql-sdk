@@ -185,6 +185,16 @@ namespace Hl7.Cql.CqlToElm
             return new(model!, typeInfo!);
         }
 
+        internal static TypeInfo? FindTypeInfo(this ModelInfo model, string name) =>
+            model.typeInfo?.SingleOrDefault(t => t.Name() == name);
+
+        internal static string? Name(this TypeInfo t) => t switch
+        {
+            ClassInfo ci => ci.name,
+            SimpleTypeInfo sti => sti.name,
+            _ => null
+        };
+
         internal static Elm.NamedTypeSpecifier TypeSpecifierForQualifiedName(IModelProvider provider, string qualifiedName)
         {
             var (model, name) = splitTypeName(qualifiedName);
@@ -278,9 +288,7 @@ namespace Hl7.Cql.CqlToElm
         /// See https://cql.hl7.org/03-developersguide.html#type-testing for more information.</remarks>
         public static bool IsSubtypeOf(this Elm.TypeSpecifier subType, Elm.TypeSpecifier superType, IModelProvider provider)
         {
-            if (superType == subType || superType == SystemTypes.AnyType)
-                return true;
-            else if (subType is Elm.NamedTypeSpecifier subtypeNT && superType is Elm.NamedTypeSpecifier)
+            if (subType is Elm.NamedTypeSpecifier subtypeNT && superType is Elm.NamedTypeSpecifier)
             {
                 var baseType = GetBaseType(provider, subtypeNT);
                 if (baseType is not null)

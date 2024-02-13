@@ -306,7 +306,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] paramList, bool fluent)
         {
-            var funcRef = funcDef.Call(ModelProvider, null, paramList);
+            var funcRef = funcDef.Call(InvocationBuilder, null, paramList);
 
             if (funcRef is FunctionRef fr)
                 fr.libraryName = libraryName;
@@ -318,7 +318,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
         private Expression initializeFunctionRef(OverloadedFunctionDef funcDef, string? libraryName, Expression[] paramList, bool fluent)
         {
-            var funcRef = funcDef.Call(ModelProvider, null, paramList, out var selectedOverload);
+            var funcRef = funcDef.Call(InvocationBuilder, null, paramList, out var selectedOverload);
             if (funcRef is FunctionRef fr)
                 fr.libraryName = libraryName;
             if (selectedOverload == null)

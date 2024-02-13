@@ -54,9 +54,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         var caseItem = new CaseItem();
 
                         var when = Visit(item.expression(0));
-                        var whenCastResult = InvocationBuilder.BuildImplicitCast(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType, out var _);
+                        var whenCastResult = TypeConverter.Convert(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType);
                         if (whenCastResult.Success)
-                            caseItem.when = whenCastResult.Result;
+                            caseItem.when = whenCastResult.Expression;
                         else if (whenCastResult.Error is not null)
                             caseItem.AddError(whenCastResult.Error);
 
@@ -80,18 +80,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
             foreach (var item in caseItems)
             {
                 var then = item.then;
-                var thenCastResult = InvocationBuilder.BuildImplicitCast(then, returnType, out var _);
+                var thenCastResult = TypeConverter.Convert(then, returnType);
                 if (thenCastResult.Success)
                 {
-                    item.then = thenCastResult.Result;
+                    item.then = thenCastResult.Expression;
                     item.resultTypeSpecifier = item.then.resultTypeSpecifier;
                 }
                 else if (thenCastResult.Error is not null)
                     item.AddError(thenCastResult.Error);
             }
-            var elseCastResult = InvocationBuilder.BuildImplicitCast(@else, returnType, out var _);
+            var elseCastResult = TypeConverter.Convert(@else, returnType);
             if (elseCastResult.Success)
-                @else = elseCastResult.Result;
+                @else = elseCastResult.Expression;
             else if (elseCastResult.Error is not null)
                 @else.AddError(elseCastResult.Error);
             

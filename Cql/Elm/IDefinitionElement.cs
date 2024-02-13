@@ -213,7 +213,7 @@ namespace Hl7.Cql.Elm
                 throw new ArgumentException($"Overloads must have at least two functions provided.", nameof(functions));
             var names = functions.Select(fd => fd.name).Distinct().ToArray();
             if (names.Length > 1)
-                throw new ArgumentException($"All functions in an overload must have the same name.", nameof(functions));
+                throw new ArgumentException($"All functions in an overload must have the same name. Found {string.Join(", ", names)}", nameof(functions));
             var accessLevel = functions.Select(fd => fd.accessLevel).Min(); // public < private; any public overload makes this public
             return new OverloadedFunctionDef(functions, names[0], accessLevel);       
         }

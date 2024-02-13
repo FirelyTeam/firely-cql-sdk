@@ -122,6 +122,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
                _ => throw new InvalidOperationException($"Encountered invalid date time precision {context.GetText()}.")
            };
 
+        public static DateTimePrecision Parse(this cqlParser.DateTimePrecisionSpecifierContext context) =>
+           context.GetText() switch
+           {
+               "year" => DateTimePrecision.Year,
+               "month" => DateTimePrecision.Month,
+               "week" => DateTimePrecision.Week,
+               "day" => DateTimePrecision.Day,
+               "hour" => DateTimePrecision.Hour,
+               "minute" => DateTimePrecision.Minute,
+               "second" => DateTimePrecision.Second,
+               "millisecond" => DateTimePrecision.Millisecond,
+               _ => throw new InvalidOperationException($"Encountered invalid date time precision {context.GetText()}.")
+           };
+
+        
+
 
         // : (qualifier '.')* identifier
         public static (string qualifier, string id) Parse(this cqlParser.QualifiedIdentifierContext context)

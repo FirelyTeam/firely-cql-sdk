@@ -29,18 +29,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIn));
             {
-                var includedIn = (ProperIncludedIn)library.statements[0].expression;
-                Assert.IsTrue(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var properIn = (ProperIn)library.statements[0].expression;
+                Assert.IsTrue(properIn.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", properIn.resultTypeName.Name);
+                Assert.IsInstanceOfType(properIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)properIn.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(properIn.operand);
+                Assert.AreEqual(2, properIn.operand.Length);
+                Assert.IsInstanceOfType(properIn.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(properIn.operand[1], typeof(Interval));
+                var result = Run(properIn);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -57,18 +57,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIn));
             {
-                var includedIn = (ProperIncludedIn)library.statements[0].expression;
-                Assert.IsTrue(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var properIn = (ProperIn)library.statements[0].expression;
+                Assert.IsTrue(properIn.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", properIn.resultTypeName.Name);
+                Assert.IsInstanceOfType(properIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)properIn.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(properIn.operand);
+                Assert.AreEqual(2, properIn.operand.Length);
+                Assert.IsInstanceOfType(properIn.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(properIn.operand[1], typeof(Interval));
+                var result = Run(properIn);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -86,18 +86,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(IncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(In));
             {
-                var includedIn = (IncludedIn)library.statements[0].expression;
-                Assert.IsTrue(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var @in = (In)library.statements[0].expression;
+                Assert.IsTrue(@in.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", @in.resultTypeName.Name);
+                Assert.IsInstanceOfType(@in.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)@in.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(@in.operand);
+                Assert.AreEqual(2, @in.operand.Length);
+                Assert.IsInstanceOfType(@in.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(@in.operand[1], typeof(Interval));
+                var result = Run(@in);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -115,18 +115,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(IncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(In));
             {
-                var includedIn = (IncludedIn)library.statements[0].expression;
-                Assert.IsTrue(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var @in = (In)library.statements[0].expression;
+                Assert.IsTrue(@in.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", @in.resultTypeName.Name);
+                Assert.IsInstanceOfType(@in.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)@in.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(@in.operand);
+                Assert.AreEqual(2, @in.operand.Length);
+                Assert.IsInstanceOfType(@in.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(@in.operand[1], typeof(Interval));
+                var result = Run(@in);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -318,18 +318,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(IncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(In));
             {
-                var includedIn = (IncludedIn)library.statements[0].expression;
-                Assert.IsFalse(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var @in = (In)library.statements[0].expression;
+                Assert.IsFalse(@in.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", @in.resultTypeName.Name);
+                Assert.IsInstanceOfType(@in.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)@in.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(@in.operand);
+                Assert.AreEqual(2, @in.operand.Length);
+                Assert.IsInstanceOfType(@in.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(@in.operand[1], typeof(Interval));
+                var result = Run(@in);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -347,18 +347,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(IncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(In));
             {
-                var includedIn = (IncludedIn)library.statements[0].expression;
-                Assert.IsFalse(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var @in = (In)library.statements[0].expression;
+                Assert.IsFalse(@in.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", @in.resultTypeName.Name);
+                Assert.IsInstanceOfType(@in.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)@in.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(@in.operand);
+                Assert.AreEqual(2, @in.operand.Length);
+                Assert.IsInstanceOfType(@in.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(@in.operand[1], typeof(Interval));
+                var result = Run(@in);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -376,18 +376,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIn));
             {
-                var includedIn = (ProperIncludedIn)library.statements[0].expression;
-                Assert.IsFalse(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var properIn = (ProperIn)library.statements[0].expression;
+                Assert.IsFalse(properIn.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", properIn.resultTypeName.Name);
+                Assert.IsInstanceOfType(properIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)properIn.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(properIn.operand);
+                Assert.AreEqual(2, properIn.operand.Length);
+                Assert.IsInstanceOfType(properIn.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(properIn.operand[1], typeof(Interval));
+                var result = Run(properIn);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -404,18 +404,18 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIncludedIn));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(ProperIn));
             {
-                var includedIn = (ProperIncludedIn)library.statements[0].expression;
-                Assert.IsFalse(includedIn.precisionSpecified);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", includedIn.resultTypeName.Name);
-                Assert.IsInstanceOfType(includedIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)includedIn.resultTypeSpecifier).name.Name);
-                Assert.IsNotNull(includedIn.operand);
-                Assert.AreEqual(2, includedIn.operand.Length);
-                Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
-                Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var properIn = (ProperIn)library.statements[0].expression;
+                Assert.IsFalse(properIn.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", properIn.resultTypeName.Name);
+                Assert.IsInstanceOfType(properIn.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)properIn.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(properIn.operand);
+                Assert.AreEqual(2, properIn.operand.Length);
+                Assert.IsInstanceOfType(properIn.operand[0], typeof(Start));
+                Assert.IsInstanceOfType(properIn.operand[1], typeof(Interval));
+                var result = Run(properIn);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }

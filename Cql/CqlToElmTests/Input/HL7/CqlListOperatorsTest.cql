@@ -419,7 +419,7 @@ define "IncludesNullLeft Output":
 	null
 
 define "IncludesNullRight Input":
-	{'s', 'a', 'm'} includes null
+	{'s', 'a', 'm'} includes null as String
 define "IncludesNullRight Output":
 	null
 
@@ -724,12 +724,12 @@ define "NotEqualTimeFalse Output":
 	false
 
 define "ProperContainsNullRightFalse Input":
-	{'s', 'u', 'n'} properly includes null
+	{'s', 'u', 'n'} properly includes null as String
 define "ProperContainsNullRightFalse Output":
 	false
 
 define "ProperContainsNullRightTrue Input":
-	{'s', 'u', 'n', null} properly includes null
+	{'s', 'u', 'n', null} properly includes null as String
 define "ProperContainsNullRightTrue Output":
 	true
 

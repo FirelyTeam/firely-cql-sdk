@@ -1,6 +1,8 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Collections;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.Options;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 using static Hl7.Cql.CqlToElm.Test.TestExtensions;
@@ -11,6 +13,7 @@ namespace Hl7.Cql.CqlToElm.Test
     internal static class TestExtensions
     {
         internal static readonly IModelProvider Provider = new BuiltinModelProvider(M.Models.ElmR1, M.Models.Fhir401);
+        internal static readonly TypeConverter TypeConverter = new TypeConverter(Provider, new OptionsWrapper<CqlToElmOptions>(CqlToElmOptions.Default));
         internal static readonly NamedTypeSpecifier Patient = ForFhir("Patient");
         internal static readonly NamedTypeSpecifier Observation = ForFhir("Observation");
         internal static readonly NamedTypeSpecifier Resource = ForFhir("Resource");
@@ -24,19 +27,19 @@ namespace Hl7.Cql.CqlToElm.Test
         public static readonly ParameterTypeSpecifier T = new() { parameterName = "T" };
         public static readonly ParameterTypeSpecifier U = new() { parameterName = "U" };
 
-        public static ResolveResult<Expression> ShouldBe(this ResolveResult<Expression> result, int cost, Expression[]? e = null)
+        public static ConversionResult<Expression> ShouldBe(this ConversionResult<Expression> result, int cost, Expression[]? e = null)
         {
             result.Success.Should().BeTrue();
             result.Error.Should().BeNull();
-            result.Cost.Should().Be(cost);
+            result.Cost.Sum(c=>(int)c).Should().Be(cost);
 
             if (e is not null)
-                result.Result.Should().BeOfType<FunctionRef>().Subject.operand.Should().BeEquivalentTo(e);
+                result.Expression.Should().BeOfType<FunctionRef>().Subject.operand.Should().BeEquivalentTo(e);
 
             return result;
         }
 
-        public static ResolveResult<Expression> Fails(this ResolveResult<Expression> result)
+        public static ConversionResult<Expression> Fails(this ConversionResult<Expression> result)
         {
             result.Success.Should().BeFalse();
             result.Error.Should().NotBeNull();
@@ -44,19 +47,19 @@ namespace Hl7.Cql.CqlToElm.Test
             return result;
         }
 
-        public static ResolveResult<Expression> Cast(this FunctionDef def, Expression[] arguments)
+        public static ConversionResult<Expression> Cast(this FunctionDef def, Expression[] arguments)
         {
-            var builder = new InvocationBuilder(Provider);
+            var builder = new InvocationBuilder(Provider, TypeConverter);
             var result = builder.Build(def, arguments);
             return result;
         }
 
-        public static ResolveResult<Expression> Assigned(this ResolveResult<Expression> result, TypeSpecifier t, TypeSpecifier? u = null)
+        public static ConversionResult<Expression> Assigned(this ConversionResult<Expression> result, TypeSpecifier t, TypeSpecifier? u = null)
         {
             if (u is null)
-                result.Result.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, U, SystemTypes.BooleanType } });
+                result.Expression.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, U, SystemTypes.BooleanType } });
             else
-                result.Result.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, u, SystemTypes.BooleanType } });
+                result.Expression.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, u, SystemTypes.BooleanType } });
 
             return result;
         }
@@ -121,12 +124,12 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var f = buildF(SystemTypes.DecimalType);
             var arg = new[] { new Null { } }; // untyped null
-            var @as = f.Cast(arg).ShouldBe(cost: 1).Result.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
+            var @as = f.Cast(arg).ShouldBe(cost: 1).Expression.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
             @as.operand.Should().Be(arg[0]);
             @as.resultTypeSpecifier.Should().Be(SystemTypes.DecimalType);
 
             var f2 = buildF(T.ToListType());
-            var @as2 = f2.Cast(arg).ShouldBe(cost: 100).Result.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
+            var @as2 = f2.Cast(arg).ShouldBe(cost: 100).Expression.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
             @as2.operand.Should().Be(arg[0]);
             @as2.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());
         }

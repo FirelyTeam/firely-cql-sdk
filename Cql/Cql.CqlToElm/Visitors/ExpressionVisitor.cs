@@ -16,13 +16,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
-            InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
+            InvocationBuilder invocationBuilder,
+            TypeConverter typeConverter) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
             Configuration = configuration;
             ConverterContext = converterContext;
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
+            TypeConverter = typeConverter;
         }
 
 
@@ -33,6 +35,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public IConfiguration Configuration { get; }
         public ConverterContext ConverterContext { get; }
         public LibraryBuilder LibraryBuilder { get; }
+        public TypeConverter TypeConverter { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -71,15 +74,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else pointType = lowType;
             }
 
-            var lowCast = InvocationBuilder.BuildImplicitCast(low, pointType, out var _l);
-            var highCast = InvocationBuilder.BuildImplicitCast(high, pointType, out var _h);
+            var lowCast = TypeConverter.Convert(low, pointType);
+            var highCast = TypeConverter.Convert(high, pointType);
 
             if (!lowCast.Success && lowCast.Error is not null)
                 low.AddError(lowCast.Error ?? $"Could not convert low interval value to {pointType}");
-            else low = lowCast.Result;
+            else low = lowCast.Expression;
             if (!highCast.Success && highCast.Error is not null)
                 high.AddError(highCast.Error ?? $"Could not convert high interval value to {pointType}");
-            else high = highCast.Result;
+            else high = highCast.Expression;
 
             var interval = new Interval
             {
@@ -160,9 +163,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 for (int i = 0; i < elements.Length; i++)
                 {
                     var ei = elements[i];
-                    var result = InvocationBuilder.BuildImplicitCast(ei, elementType, out var _);
+                    var result = TypeConverter.Convert(ei, elementType);
                     if (result.Success)
-                        typedElements[i] = result.Result;
+                        typedElements[i] = result.Expression;
                     else if (!string.IsNullOrWhiteSpace(result.Error))
                         typedElements[i] = ei.AddError(result.Error);
                 }
@@ -254,6 +257,42 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var t = (T)System.Convert.ChangeType(value, typeof(T), System.Globalization.CultureInfo.InvariantCulture);
             return t;
         }
+
+        private Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
+            Antlr4.Runtime.ParserRuleContext? context,
+            cqlParser.PluralDateTimePrecisionContext precisionContext,
+            cqlParser.ExpressionTermContext[] expressionTerms)
+        {
+            var precision = Precision(precisionContext);
+            var lhs = Visit(expressionTerms[0]);
+            var rhs = Visit(expressionTerms[1]);
+
+            FunctionDef? selectedOverload;
+            var call = precision switch
+            {
+                { } => systemFunction.Call(InvocationBuilder, context, new[] { lhs, rhs, precision }, out selectedOverload),
+                _ => systemFunction.Call(InvocationBuilder, context, new[] { lhs, rhs, }, out selectedOverload)
+            };
+            return selectedOverload switch
+            {
+                SystemFunction bd => bd.Validate(call),
+                _ => call
+            };
+        }
+
+        private static Literal? Precision(cqlParser.PluralDateTimePrecisionContext context) =>
+            context is null 
+            ? null
+            : new Literal { value = Enum.GetName(context.Parse()) }.WithResultType(SystemTypes.StringType);
+        private static Literal? Precision(cqlParser.DateTimePrecisionSpecifierContext context)
+        {
+            var dtp = context?.dateTimePrecision();
+            return dtp is null
+                ? null
+                : new Literal { value = Enum.GetName(dtp.Parse()) }.WithResultType(SystemTypes.StringType);
+        }
+
+        
 
         private enum ListElementPromotion
         {

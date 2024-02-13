@@ -37,15 +37,17 @@ namespace Hl7.Cql.CqlToElm.Test
                     .AddConsole()
                     .ThrowOn(LogLevel.Error))
                 .AddTransient<InvocationBuilder>()
+                .AddSingleton<TypeConverter>()
                 .AddScoped<CqlToElmConverter>();
             Services = services.BuildServiceProvider();
 
-            var lib = new Elm.Library
+            var lib = new Library
             {
-                identifier = new Elm.VersionedIdentifier { id = "Lambdas", version = "1.0.0" }
+                identifier = new VersionedIdentifier { id = "Lambdas", version = "1.0.0" }
             };
             ExpressionBuilder = ExpressionBuilderFor(lib);
         }
+
 
         protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
 
@@ -83,7 +85,7 @@ namespace Hl7.Cql.CqlToElm.Test
             return result;
         }
 
-        internal static ExpressionBuilder ExpressionBuilderFor(Elm.Library lib)
+        internal static ExpressionBuilder ExpressionBuilderFor(Library lib)
         {
             var tr = FhirTypeResolver.Default;
             var tc = FhirTypeConverter.Default;
@@ -123,6 +125,15 @@ namespace Hl7.Cql.CqlToElm.Test
             var nts = (NamedTypeSpecifier)lts.pointType;
             Assert.IsNotNull(nts.name);
             Assert.AreEqual(pointTypeName, nts.name.Name);
+        }
+
+        protected void AssertIntervalType(TypeSpecifier typeSpecifier, TypeSpecifier pointType)
+        {
+            Assert.IsInstanceOfType(typeSpecifier, typeof(IntervalTypeSpecifier));
+            var lts = (IntervalTypeSpecifier)typeSpecifier;
+            Assert.IsNotNull(lts.pointType);
+            Assert.AreEqual(lts.pointType, pointType);
+           
         }
 
         protected void AssertChoiceType(TypeSpecifier specifier, params string[] namedTypes)

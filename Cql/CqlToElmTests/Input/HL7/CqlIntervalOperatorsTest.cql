@@ -608,7 +608,7 @@ define "Issue32Interval Output":
 	true
 
 define "TestIncludesNull Input":
-	Interval[1, 10] includes null
+	Interval[1, 10] includes null as Integer
 define "TestIncludesNull Output":
 	null
 

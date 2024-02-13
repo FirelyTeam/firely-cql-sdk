@@ -110,8 +110,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             new(new[] { argument }, result, name ?? typeof(T).Name);
         private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
             new(new[] { first, second }, result, name ?? typeof(T).Name);
-        private static SystemFunction<T> binaryWithPrecision<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result) where T : OperatorExpression =>
-            new(new[] { first, second, StringType, }, result, typeof(T).Name, 2);
+        private static SystemFunction<T> binaryWithPrecision<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+            new(new[] { first, second, StringType, }, result, name ?? typeof(T).Name, 2);
         private static SystemFunction<T> nary<T>(TypeSpecifier[] operands, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
             new(operands, result, typeof(T).Name, requiredParameterCount);
         private static SystemFunction<T> nary<T>(TypeSpecifier operandType, int operandCount, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
@@ -119,7 +119,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
         private static SystemFunction<T> aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
             new(new[] { source.ToListType() }, result, typeof(T).Name);
         public static readonly TypeSpecifier[] EmptyOperands = System.Array.Empty<TypeSpecifier>();
-
 
         // Alphabetized
         public static OverloadedFunctionDef Abs = unary<Abs>(T, T).For(T, NumericTypes);
@@ -149,6 +148,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             .ValidateWith(Validators.Validate)
             .For(T, DateType, DateTimeType, TimeType);
         public static SystemFunction<End> End = unary<End>(T.ToIntervalType(), T);
+        public static SystemFunction<Ends> Ends = binaryWithPrecision<Ends>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
         public static SystemFunction<EndsWith> EndsWith = binary<EndsWith>(StringType, StringType, BooleanType);
         public static SystemFunction<Equal> Equal = binary<Equal>(T, T, BooleanType);
         public static SystemFunction<Equivalent> Equivalent = binary<Equivalent>(T, T, BooleanType);
@@ -161,6 +161,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<If> If = new SystemFunction<If>(new TypeSpecifier[] { BooleanType, T, T }, T);        
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
+        public static OverloadedFunctionDef In = OverloadedFunctionDef.Create(binary<In>(T, T.ToListType(), BooleanType), binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef IncludedIn = OverloadedFunctionDef.Create(binary<IncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<IncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef Includes = OverloadedFunctionDef.Create(
+            binary<Contains>(T.ToListType(), T, BooleanType, nameof(Elm.Includes)),
+            binary<Includes>(T.ToListType(), T.ToListType(), BooleanType),
+            binaryWithPrecision<Contains>(T.ToIntervalType(), T, BooleanType, nameof(Elm.Includes)),
+            binaryWithPrecision<Includes>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<Indexer> Indexer = binary<Indexer>(StringType, IntegerType, StringType);
         public static SystemFunction<IndexOf> IndexOf = binary<IndexOf>(T.ToListType(), T, IntegerType);
         public static SystemFunction<ToDecimal> IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
@@ -204,6 +211,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
         public static OverloadedFunctionDef Precision = unary<Precision>(T, IntegerType).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Predecessor> Predecessor = unary<Predecessor>(T, T);
+        public static SystemFunction<ProperIn> ProperIn = binaryWithPrecision<ProperIn>(T, T.ToIntervalType(), BooleanType);
+        public static OverloadedFunctionDef ProperIncludedIn = OverloadedFunctionDef.Create(binary<ProperIncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<ProperIncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef ProperIncludes = OverloadedFunctionDef.Create(
+            binary<ProperContains>(T.ToListType(), T, BooleanType, nameof(Elm.ProperIncludes)), 
+            binary<ProperIncludes>(T.ToListType(), T.ToListType(), BooleanType),
+            binaryWithPrecision<ProperContains>(T.ToIntervalType(), T, BooleanType, nameof(Elm.ProperIncludes)),
+            binaryWithPrecision<ProperIncludes>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<ReplaceMatches> ReplaceMatches = nary<ReplaceMatches>(new[] { StringType, StringType, StringType }, 3, StringType);
         public static SystemFunction<Round> Round = nary<Round>(new[] { DecimalType, IntegerType }, 1, DecimalType);
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
@@ -236,6 +250,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Variance = aggregate<Variance>(T, T).For(T, DecimalType, QuantityType);
         public static SystemFunction<Width> Width = unary<Width>(T.ToIntervalType(), T);
         public static SystemFunction<Xor> Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);
+
+
+
     }
 
     internal static class Validators

@@ -216,8 +216,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 value = value,
             };
 
-            if (!bool.TryParse(Configuration[nameof(CqlToElmOptions.ValidateLiterals)] ?? bool.FalseString, out var validateLiterals))
-                validateLiterals = true;
+            var validateLiterals = Option(o => o.ValidateLiterals);
 
             NamedTypeSpecifier? typeSpecifier = null;
 
@@ -227,7 +226,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (abs.StartsWith('-'))
                     abs = abs[1..];
                 var parts = abs.Split('.');
-
 
                 if (validateLiterals)
                 {
@@ -243,9 +241,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 typeSpecifier = SystemTypes.DecimalType;
             }
             else if (int.TryParse(value, out var i))
-            {
                 typeSpecifier = SystemTypes.IntegerType;
+            else if (long.TryParse(value, out var l) && !Option(o => o.LongsRequireSuffix))
+            {
+                typeSpecifier = SystemTypes.LongType;
             }
+
             else if (validateLiterals)
                 return literal.AddError($"Unparseable numeric literal '{value}'.", ErrorType.syntax);
             else
@@ -268,9 +269,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (expression is Literal literal)
             {
-                literal.value = $"{sign}{literal.value}";
+                literal.value = apply(sign, literal.value);
                 return literal;
-            }            
+            }
             else if (sign == "-")
             {
                 if (expression is Quantity quantity)
@@ -278,7 +279,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     quantity.value *= -1;
                     return quantity;
                 }
-                else {
+                else
+                {
                     return new Negate
                     {
                         operand = expression,
@@ -288,6 +290,25 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
             }
             else return expression;
+
+            string apply(string polarity, string number)
+            {
+                if (polarity == "-")
+                {
+                    if (number.StartsWith("-"))
+                    {
+                        return number.Substring(1);
+                    }
+                    else
+                    {
+                        return "-" + number;
+                    }
+                }
+                else
+                {
+                    return number;
+                }
+            }
         }
 
         public override Expression VisitQuantityLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityLiteralContext context)
@@ -302,6 +323,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 valueSpecified = true,
             }.WithResultType(SystemTypes.QuantityType);
             return quantity;
+        }
+
+        public override Expression VisitQuantity([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityContext context)
+        {
+            var quantity = new Quantity();
+            var unit = context.unit()?.GetText();
+            if (string.IsNullOrWhiteSpace(unit))
+            {
+                quantity.AddError($"Unit is missing");
+            }
+            else
+            {
+                quantity.unit = unit ?? "1";
+            }
+            if (!decimal.TryParse(context.NUMBER().GetText(), out var value))
+            {
+                quantity.AddError($"Could not parse {context.NUMBER()} as a number.");
+            }
+            else
+            {
+                quantity.value = value;
+                quantity.valueSpecified = true;
+            }
+            return quantity
+                .WithLocator(context.Locator())
+                .WithResultType(SystemTypes.QuantityType);
         }
 
         public override Expression VisitRatioLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.RatioLiteralContext context)

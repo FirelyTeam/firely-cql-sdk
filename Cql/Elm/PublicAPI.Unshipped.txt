@@ -735,6 +735,7 @@ Hl7.Cql.Elm.Xor.Xor() -> void
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.ChoiceTypeSpecifier.ToString() -> string!
+override Hl7.Cql.Elm.DateTime.ToString() -> string!
 override Hl7.Cql.Elm.IntervalTypeSpecifier.Equals(object? other) -> bool
 override Hl7.Cql.Elm.IntervalTypeSpecifier.GetHashCode() -> int
 override Hl7.Cql.Elm.IntervalTypeSpecifier.ToString() -> string!

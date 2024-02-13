@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            var and = SystemLibrary.And.Call(ModelProvider, context, lhs, rhs);
+            var and = SystemLibrary.And.Call(InvocationBuilder, context, lhs, rhs);
             return and;
         }
 
@@ -31,9 +31,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             Expression result =
                 @operator switch
                 {
-                    "+" => SystemLibrary.Add.Call(ModelProvider, context, new[] { lhs, rhs, }, out var _a),
-                    "-" => SystemLibrary.Subtract.Call(ModelProvider, context, new[] { lhs, rhs, }, out var _s),
-                    "&" => SystemLibrary.Concatenate.Call(ModelProvider, context, lhs, rhs),
+                    "+" => SystemLibrary.Add.Call(InvocationBuilder, context, new[] { lhs, rhs, }, out var _a),
+                    "-" => SystemLibrary.Subtract.Call(InvocationBuilder, context, new[] { lhs, rhs, }, out var _s),
+                    "&" => SystemLibrary.Concatenate.Call(InvocationBuilder, context, lhs, rhs),
                     _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
                 };
 
@@ -59,11 +59,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return @operator switch
             {
-                "=" => (Expression)SystemLibrary.Equal.Call(ModelProvider, context, lhs, rhs),
-                "!=" => (Expression)SystemLibrary.NotEqual.Call(ModelProvider, context, lhs, rhs),
-                "~" => (Expression)SystemLibrary.Equivalent.Call(ModelProvider, context, lhs, rhs),
-                "!~" => (Expression)SystemLibrary.Not.Call(ModelProvider, context,
-                                        SystemLibrary.Equivalent.Call(ModelProvider, context, lhs, rhs)),
+                "=" => (Expression)SystemLibrary.Equal.Call(InvocationBuilder, context, lhs, rhs),
+                "!=" => (Expression)SystemLibrary.NotEqual.Call(InvocationBuilder, context, lhs, rhs),
+                "~" => (Expression)SystemLibrary.Equivalent.Call(InvocationBuilder, context, lhs, rhs),
+                "!~" => (Expression)SystemLibrary.Not.Call(InvocationBuilder, context, SystemLibrary.Equivalent.Call(InvocationBuilder, context, lhs, rhs)),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression."),
             };
         }
@@ -75,7 +74,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            return SystemLibrary.Implies.Call(ModelProvider, context, lhs, rhs);
+            return SystemLibrary.Implies.Call(InvocationBuilder, context, lhs, rhs);
         }
 
         //    | expression ('<=' | '<' | '>' | '>=') expression                                               #inequalityExpression
@@ -88,10 +87,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                ">" => SystemLibrary.Greater.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                ">=" => SystemLibrary.GreaterOrEqual.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "<" => SystemLibrary.Less.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "<=" => SystemLibrary.LessOrEqual.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                ">" => SystemLibrary.Greater.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
+                ">=" => SystemLibrary.GreaterOrEqual.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
+                "<" => SystemLibrary.Less.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
+                "<=" => SystemLibrary.LessOrEqual.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in inequality expression."),
             };
 
@@ -108,10 +107,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             return @operator switch
             {
-                "*" => SystemLibrary.Multiply.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "/" => SystemLibrary.Divide.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "div" => SystemLibrary.TruncatedDivide.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "mod" => SystemLibrary.Modulo.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                "*" => SystemLibrary.Multiply.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
+                "/" => SystemLibrary.Divide.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
+                "div" => SystemLibrary.TruncatedDivide.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
+                "mod" => SystemLibrary.Modulo.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression."),
             };
         }
@@ -126,8 +125,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                "or" => SystemLibrary.Or.Call(ModelProvider, context, lhs, rhs),
-                "xor" => SystemLibrary.Xor.Call(ModelProvider, context, lhs, rhs),
+                "or" => SystemLibrary.Or.Call(InvocationBuilder, context, lhs, rhs),
+                "xor" => SystemLibrary.Xor.Call(InvocationBuilder, context, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in (x)or expression.")
             };
 
@@ -141,7 +140,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
 
-            return SystemLibrary.Power.Call(ModelProvider, context, new[] { lhs, rhs }, out var _);
+            return SystemLibrary.Power.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _);
         }
 
         public override Expression VisitIndexedExpressionTerm([NotNull] cqlParser.IndexedExpressionTermContext context)
@@ -176,25 +175,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
 
-        public Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
-            Antlr4.Runtime.ParserRuleContext? context,
-            cqlParser.PluralDateTimePrecisionContext precisionContext,
-            cqlParser.ExpressionTermContext[] expressionTerms)
-        {
-            var precision = Precision(precisionContext);
-            var lhs = Visit(expressionTerms[0]);
-            var rhs = Visit(expressionTerms[1]);
-
-            var call = systemFunction.Call(ModelProvider, context, new[] { lhs, rhs, precision }, out var selectedOverload);
-            return selectedOverload switch
-            {
-                SystemFunction bd => bd.Validate(call),
-                _ => call
-            };
-        }
-
-        private static Literal Precision(cqlParser.PluralDateTimePrecisionContext context) =>
-            new Literal { value = Enum.GetName(context.Parse()) }.WithResultType(SystemTypes.StringType);
 
 
 
