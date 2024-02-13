@@ -29,7 +29,7 @@
 	</ItemGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.4.0</FirelySdkVersion>
+		<FirelySdkVersion>5.5.1</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Compiler settings -->
