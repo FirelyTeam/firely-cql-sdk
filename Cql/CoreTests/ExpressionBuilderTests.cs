@@ -14,7 +14,7 @@ namespace CoreTests
     public class ExpressionBuilderTests
     {
         private static readonly TypeResolver TypeResolver = new FhirTypeResolver(Hl7.Fhir.Model.ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector, 0);
+        private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
         private ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
             .Create(logging => logging.AddDebug())

@@ -34,14 +34,9 @@ namespace Hl7.Cql.Packaging
             TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
         }
 
-        internal LibraryPackager(int cacheSize)
+        internal LibraryPackager(TypeConverter? typeConverter)
         {
-            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
-        }
-
-        internal LibraryPackager(TypeConverter? typeConverter, int cacheSize)
-        {
-            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
+            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
         }
 
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)

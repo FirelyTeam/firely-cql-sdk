@@ -33,19 +33,18 @@ namespace Hl7.Cql.Packaging
         /// <param name="cacheSize"></param>
         public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
             Action<IEnumerable<Resource>>? afterPackageMutator = null, int? cacheSize = null) =>
-            PackageCore(elmDir, cqlDir, afterPackageMutator, null, cacheSize);
+            PackageCore(elmDir, cqlDir, afterPackageMutator, null);
 
         /// <summary>
         /// Package the resources in the given ELM and CQL directories and output them using the writers provided in the constructor 
         /// </summary>
         /// <param name="args">A</param>
         public void Package(PackageArgs args) =>
-            PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl, args.LRUCacheSize);
+            PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl);
 
         private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
             Action<IEnumerable<Resource>>? afterPackageMutator, 
-            string? resourceCanonicalRootUrl, 
-            int? cacheSize)
+            string? resourceCanonicalRootUrl)
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
@@ -53,12 +52,12 @@ namespace Hl7.Cql.Packaging
             var graph = Elm.Library.GetIncludedLibraries(packages.Values);
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
 
-            var packager = new LibraryPackager(cacheSize ?? 0);
+            var packager = new LibraryPackager();
             var resources = packager.PackageResources(elmDir,
                 cqlDir,
                 graph,
                 typeResolver,
-                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize)),
+                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
                 resource => CanonicalUri(resource, resourceCanonicalRootUrl),
                 logFactory);

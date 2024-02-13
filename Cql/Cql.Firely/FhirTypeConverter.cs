@@ -26,7 +26,7 @@ namespace Hl7.Cql.Fhir
         /// <summary>
         /// Singleton for the default configuration of this TypeConverter
         /// </summary>
-        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector, 0);
+        public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
 
         static LRUCache<CqlDateTime>? dateTimes;
 

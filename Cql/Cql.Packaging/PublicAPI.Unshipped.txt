@@ -27,13 +27,11 @@ Hl7.Cql.Packaging.PackageArgs.ElmDir.get -> System.IO.DirectoryInfo!
 Hl7.Cql.Packaging.PackageArgs.CqlDir.get -> System.IO.DirectoryInfo!
 Hl7.Cql.Packaging.PackageArgs.AfterPackageMutator.init -> void
 Hl7.Cql.Packaging.PackageArgs.AfterPackageMutator.get -> System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>?
-Hl7.Cql.Packaging.PackageArgs.LRUCacheSize.get -> int
-Hl7.Cql.Packaging.PackageArgs.LRUCacheSize.init -> void
-Hl7.Cql.Packaging.PackageArgs.PackageArgs(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null, string? resourceCanonicalRootUrl = null, int? cacheSize = null) -> void
+Hl7.Cql.Packaging.PackageArgs.PackageArgs(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null, string? resourceCanonicalRootUrl = null) -> void
 Hl7.Cql.Packaging.ResourcePackager.Package(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null, int? cacheSize = null) -> void
 override Hl7.Cql.Packaging.PackageArgs.GetHashCode() -> int
 override Hl7.Cql.Packaging.PackageArgs.Equals(object? obj) -> bool
-static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory, int cacheSize) -> object?
+static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.ILoggerFactory! logFactory, int cacheSize) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.LogLevel logLevel = Microsoft.Extensions.Logging.LogLevel.Error, int cacheSize = 0) -> System.Runtime.Loader.AssemblyLoadContext!
 virtual Hl7.Cql.Packaging.PackageArgs.PrintMembers(System.Text.StringBuilder! builder) -> bool
