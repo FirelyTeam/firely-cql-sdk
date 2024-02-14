@@ -57,17 +57,4 @@ internal static class ReflectionUtility
     /// <param name="type">The type to check.</param>
     /// <returns>True if the type is nullable, false otherwise.</returns>
     public static bool IsNullable(this Type type) => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>);
-
-
-    /// <summary>
-    /// Retrieves the underlying type from a nullable type; or just the type itself if it wasn't nullable.
-    /// </summary>
-    /// <param name="type">The type to check.</param>
-    /// <returns>A tuple containing the underlying type (or specified type) and a boolean indicating if the type was nullable.</returns>
-    public static (Type nonNullableType, bool isNullable) GetUnderlyingTypeForNullable(this Type type)
-    {
-        return type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>)
-            ? (type.GetGenericArguments()[0], true)
-            : (type, false);
-    }
 }

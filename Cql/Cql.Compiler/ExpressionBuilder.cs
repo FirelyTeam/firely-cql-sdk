@@ -2291,16 +2291,15 @@ namespace Hl7.Cql.Compiler
 
         private static Expression HandleNullable(Expression expression, Type targetType) =>
             (
-                expression.Type.GetUnderlyingTypeForNullable(),
-                targetType.GetUnderlyingTypeForNullable()) switch
+                exprNullTypeArg: Nullable.GetUnderlyingType(expression.Type),
+                targetNullTypeArg: Nullable.GetUnderlyingType(targetType)) switch
             {
                 // Only targetType is nullable
-                ((_, isNullable: false), (_, isNullable: true)) => Expression.Convert(expression, targetType),
-
-                // Only expression is nullable
-                (({ } underlyingExprType, isNullable: true), (_, false)) => Expression.Coalesce(expression, Expression.Default(underlyingExprType)),
+                (exprNullTypeArg: null, targetNullTypeArg: not null) => Expression.Convert(expression, targetType),
 
                 // Both are nullable or not nullable
+                ({ } exprNullTypeArg, targetNullTypeArg: null) => Expression.Coalesce(expression, Expression.Default(exprNullTypeArg)),
+
                 _ => expression,
             };
 
