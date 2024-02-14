@@ -2423,7 +2423,7 @@ namespace Hl7.Cql.Compiler
                     funcType = typeof(Func<,,,,,,,,,,,,,,>).MakeGenericType(funcTypeParameters);
                     break;
                 default:
-                    throw new NotSupportedException("Fucntions with more than 15 parameters are not supported.");
+                    throw new NotSupportedException("Functions with more than 15 parameters are not supported.");
             }
             return funcType;
         }
