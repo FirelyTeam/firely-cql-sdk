@@ -381,7 +381,7 @@ partial class ExpressionBuilder
                 ? includeDef.localIdentifier!
                 : includeDef.path!;
 
-            var libNav = includeDef.NameAndVersion().NotNull($"Include {includeDef.localId} does not have a well-formed name and version");
+            var libNav = includeDef.NameAndVersion() ?? throw new InvalidOperationException($"Include {includeDef.localId} does not have a well-formed name and version");
             _context.AddIncludeAlias(alias, libNav);
         }
 

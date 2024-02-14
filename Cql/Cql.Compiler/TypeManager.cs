@@ -63,7 +63,7 @@ namespace Hl7.Cql.Compiler
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
-            Resolver = resolver.ArgNotNull();
+            Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             TupleTypeNamespace = tupleTypeNamespace;
         }
 
@@ -262,7 +262,7 @@ namespace Hl7.Cql.Compiler
                 return typeof(object);
 
             var elementTuples = elements!
-                .Select(e => (e.name, e.value.resultTypeSpecifier.NotNull($"Tuple element value does not have a resultTypeSpecifier")))
+                .Select(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")))
                 .ToArray();
             return TupleTypeFor(elementTuples, context, changeType);
         }

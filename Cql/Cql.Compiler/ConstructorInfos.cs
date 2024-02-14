@@ -46,7 +46,5 @@ internal static class ConstructorInfos
             GenericDefinitionMethodListOf
             .MakeGenericMethod(elementType)
             // Get the ConstructorInfo for ListOf< elementType >()
-            .Invoke(null, null)
-            // Check that ConstructorInfo is not null
-            .NotNull();
+            .Invoke(null, null)!;
 }

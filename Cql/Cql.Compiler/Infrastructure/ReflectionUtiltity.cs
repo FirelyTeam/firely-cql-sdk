@@ -20,10 +20,11 @@ internal static class ReflectionUtility
     /// <returns>The constructor information.</returns>
     public static ConstructorInfo ConstructorOf<T>(
         Expression<Func<T>> fnToCtor,
-        [CallerArgumentExpression(nameof(fnToCtor))] string expression = "")
-        => (fnToCtor.Body is NewExpression ne
+        [CallerArgumentExpression(nameof(fnToCtor))] string expression = "") =>
+        (fnToCtor.Body is NewExpression ne
             ? ne.Constructor
-            : null).NotNull($"Expression is not a constructor: '{expression}'.");
+            : null)
+            ?? throw new InvalidOperationException($"Expression is not a constructor: '{expression}'.");
 
     /// <summary>
     /// Retrieves the method information for the specified method call expression.
@@ -33,10 +34,11 @@ internal static class ReflectionUtility
     /// <returns>The method information.</returns>
     private static MethodInfo MethodOf(
         Expression<Action> fnToMethodCall,
-        [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "")
-        => (fnToMethodCall.Body is MethodCallExpression mce
+        [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "") =>
+        (fnToMethodCall.Body is MethodCallExpression mce
             ? mce.Method
-            : null).NotNull($"Expression is not a method: '{expression}'.");
+            : null) 
+            ?? throw new InvalidOperationException($"Expression is not a method: '{expression}'.");
 
     /// <summary>
     /// Retrieves the generic method definition for the specified method call expression.
@@ -48,8 +50,8 @@ internal static class ReflectionUtility
         Expression<Action> fnToMethodCall,
         [CallerArgumentExpression(nameof(fnToMethodCall))] string expression = "") =>
         (MethodOf(fnToMethodCall, expression)
-        ?.GetGenericMethodDefinition())
-        .NotNull($"Expression is not a generic method: '{expression}'.");
+            ?.GetGenericMethodDefinition())
+            ?? throw new InvalidOperationException($"Expression is not a generic method: '{expression}'.");
 
     /// <summary>
     /// Checks if the specified type is nullable.

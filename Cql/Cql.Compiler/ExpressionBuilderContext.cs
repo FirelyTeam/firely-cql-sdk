@@ -31,10 +31,10 @@ namespace Hl7.Cql.Compiler
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers)
         {
-            Builder = builder.ArgNotNull();
-            RuntimeContextParameter = contextParameter.ArgNotNull();
-            Definitions = definitions.ArgNotNull();
-            LocalLibraryIdentifiers = localLibraryIdentifiers.ArgNotNull();
+            Builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
+            Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
+            LocalLibraryIdentifiers = localLibraryIdentifiers ?? throw new ArgumentNullException(nameof(localLibraryIdentifiers));
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -171,20 +171,25 @@ namespace Hl7.Cql.Compiler
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key).NotNullOrWhitespace($"Identifier cannot be null or whitespace.");
-                    scopes[normalized] = kvp.Value;
+                    string? normalizedIdentifier = NormalizeIdentifier(kvp.Key);
+                    if (string.IsNullOrWhiteSpace(normalizedIdentifier))
+                        throw new InvalidOperationException("The normalized identifier is not available.");
+
+                    scopes[normalizedIdentifier] = kvp.Value;
                 }
             }
             else
             {
                 foreach (var kvp in kvps)
                 {
-                    var normalized = NormalizeIdentifier(kvp.Key).NotNullOrWhitespace($"Identifier cannot be null or whitespace.");
-                    
-                    if (scopes.ContainsKey(normalized))
+                    string? normalizedIdentifier = NormalizeIdentifier(kvp.Key);
+                    if (string.IsNullOrWhiteSpace(normalizedIdentifier))
+                        throw new InvalidOperationException("The normalize identifier is not available.");
+
+                    if (scopes.ContainsKey(normalizedIdentifier))
                         throw new InvalidOperationException(
                             $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
-                    scopes.Add(normalized, kvp.Value);
+                    scopes.Add(normalizedIdentifier, kvp.Value);
                 }
             }
             var subContext = new ExpressionBuilderContext(this, scopes);
@@ -223,7 +228,10 @@ namespace Hl7.Cql.Compiler
         private string FormatMessage(string message, elm.Element? element)
         {
             var locator = element?.locator;
-            var libraryKey = Builder.Library.NameAndVersion.NotNull();
+            var libraryKey = Builder.Library.NameAndVersion;
+            if (libraryKey is null)
+                throw new InvalidOperationException("Library name and version is null");
+
             return string.IsNullOrWhiteSpace(locator) 
                 ? $"{libraryKey}: {message}"
                 : $"{libraryKey} line {locator}: {message}";
