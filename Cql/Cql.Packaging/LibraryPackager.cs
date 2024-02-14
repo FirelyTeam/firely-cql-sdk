@@ -39,14 +39,38 @@ namespace Hl7.Cql.Packaging
             TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector);
         }
 
-        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir) =>
-            elmDir.GetFiles("*.json", SearchOption.AllDirectories)
-                .AsParallel()
-                .AsOrdered()
-                .Select(file => elm.Library.LoadFromJson(file))
-                .Where(library => library?.NameAndVersion != null)
-                .AsSequential()
-                .ToDictionary(d => d.NameAndVersion!, d => d);
+        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
+        {
+            // Load libraries from ELM files in a deterministic order
+
+            (FileInfo file, int index)[] input = elmDir
+                .GetFiles("*.json", SearchOption.AllDirectories)
+                .OrderBy(f => f.FullName)
+                .Select((file, index) => (file, index))
+                .ToArray();
+
+            elm.Library[] libraries = new elm.Library[input.Length];
+
+            Parallel.ForEach(input, tuple =>
+            {
+                var library = elm.Library.LoadFromJson(tuple.file);
+                if (library?.NameAndVersion != null)
+                {
+                    libraries[tuple.index] = library;
+                }
+            });
+
+            var dict = new Dictionary<string, elm.Library>();
+            foreach (var library in libraries)
+            {
+                if (library?.NameAndVersion != null)
+                {
+                    dict.TryAdd(library.NameAndVersion, library);
+                }
+            }
+
+            return dict;
+        }
 
         public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
         {
