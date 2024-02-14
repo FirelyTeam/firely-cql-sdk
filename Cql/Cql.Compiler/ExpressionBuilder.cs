@@ -2006,8 +2006,8 @@ namespace Hl7.Cql.Compiler
                     var condition = Expression.Condition(isCheck, ifIs, elseNull);
                     return condition;
                 }
-                var propogateNull = PropagateNull(source, pathMemberInfo);
-                result = propogateNull;
+
+                result = PropagateNull(source, pathMemberInfo);
             }
                 
             if (expectedType != null && expectedType != result.Type)
