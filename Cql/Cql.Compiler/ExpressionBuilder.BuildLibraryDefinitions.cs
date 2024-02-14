@@ -360,17 +360,17 @@ partial class ExpressionBuilder
                 if (expressionDef.annotation is { Length: > 0 } annotations)
                 {
                     var tags = annotations.OfType<Annotation>()
-                        .SelectMany(a => a.t.OrEmptyEnumerable())
+                        .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
                         .Where(tag => !string.IsNullOrWhiteSpace(tag?.name));
 
                     foreach (var tag in tags)
                     {
-                        string[] values = new[] { tag.value.OrEmptyString() };
+                        string[] values = new[] { tag.value ?? "" };
                         _context.AddDefinitionTag(expressionDef.name, functionParameterTypes, tag.name, values);
                     }
                 }
 
-                Type[] signature = functionParameterTypes.OrEmptyArray();
+                Type[] signature = functionParameterTypes ?? Array.Empty<Type>();
                 _context.AddDefinition(expressionDef.name, signature, lambda);
             }
         }
