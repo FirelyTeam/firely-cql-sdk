@@ -19,6 +19,7 @@ internal static class Check
     /// <param name="valueExpr">The expression representing the value.</param>
     /// <returns>The specified value if it is not null.</returns>
     /// <exception cref="InvalidOperationException">It the specified value is null.</exception>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T ArgNotNull<T>(
         [NotNull] this T? value,
         [CallerArgumentExpression(nameof(value))] string valueExpr = "")
@@ -38,6 +39,7 @@ internal static class Check
     /// <param name="valueExpr">The expression representing the value.</param>
     /// <returns>The specified value if it is not null.</returns>
     /// <exception cref="InvalidOperationException">It the specified value is null.</exception>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T NotNull<T>(
         [NotNull] this T? value,
         FormattableString? message = null,
@@ -57,6 +59,7 @@ internal static class Check
     /// <param name="valueExpr">The expression representing the string.</param>
     /// <returns>The specified string if it is not null or whitespace.</returns>
     /// <exception cref="InvalidOperationException">It the specified string is null or empty.</exception>
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static string NotNullOrWhitespace(
         [NotNull] this string? value,
         FormattableString? message = null,
