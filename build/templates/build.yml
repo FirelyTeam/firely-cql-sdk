@@ -3,7 +3,7 @@
 
 parameters:
   # Default values
-  dotNetCoreVersion: '8.x' # can also be use with wildcards:  latest minor version of 3. , use '3.x'
+  dotNetCoreVersion: '6.0.x' # can also be use with wildcards:  latest minor version of 3. , use '3.x'
   useVersionSuffix: true
   restoreDependencies: false
   nuGetServiceConnections: #required when restoreDependies = true
