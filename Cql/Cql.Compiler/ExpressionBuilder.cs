@@ -1970,37 +1970,46 @@ namespace Hl7.Cql.Compiler
 
         protected Expression PropertyHelper(Expression source, string? path, Type expectedType, ExpressionBuilderContext ctx)
         {
-            var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, path!);
-            if (pathMemberInfo == null)
+            Expression? result = null;
+            if (TypeManager.Resolver.ShouldUseSourceObject(source.Type, path!))
             {
-                ctx.LogWarning($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.");
-                var call = OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
-                    source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
-                return call;
+                result = source;
             }
-            if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
+            else
             {
-                var isCheck = Expression.TypeIs(source, pathMemberInfo.DeclaringType!);
-                var typeAs = Expression.TypeAs(source, pathMemberInfo.DeclaringType!);
-                var pathAccess = Expression.MakeMemberAccess(typeAs, pathMemberInfo);
-                Expression? ifIs = pathAccess;
-                Expression elseNull = Expression.Constant(null, property.PropertyType);
-                // some ops, like properties on alias refs, don't have type information on them.
-                // can't check against what we don't have.
-                if (expectedType != null)
+                var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, path!);
+                if (pathMemberInfo == null)
                 {
-                    if (expectedType != ifIs.Type)
-                    {
-                        ifIs = ChangeType(ifIs, expectedType!, ctx);
-                    }
-                    if (expectedType != elseNull.Type)
-                        elseNull = ChangeType(elseNull, expectedType, ctx);
+                    ctx.LogWarning($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.");
+                    var call = OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
+                        source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
+                    return call;
                 }
-                var condition = Expression.Condition(isCheck, ifIs, elseNull);
-                return condition;
+                if (pathMemberInfo is PropertyInfo property && pathMemberInfo.DeclaringType != source.Type) // the property is on a derived type, so cast it
+                {
+                    var isCheck = Expression.TypeIs(source, pathMemberInfo.DeclaringType!);
+                    var typeAs = Expression.TypeAs(source, pathMemberInfo.DeclaringType!);
+                    var pathAccess = Expression.MakeMemberAccess(typeAs, pathMemberInfo);
+                    Expression? ifIs = pathAccess;
+                    Expression elseNull = Expression.Constant(null, property.PropertyType);
+                    // some ops, like properties on alias refs, don't have type information on them.
+                    // can't check against what we don't have.
+                    if (expectedType != null)
+                    {
+                        if (expectedType != ifIs.Type)
+                        {
+                            ifIs = ChangeType(ifIs, expectedType!, ctx);
+                        }
+                        if (expectedType != elseNull.Type)
+                            elseNull = ChangeType(elseNull, expectedType, ctx);
+                    }
+                    var condition = Expression.Condition(isCheck, ifIs, elseNull);
+                    return condition;
+                }
+                var propogateNull = PropagateNull(source, pathMemberInfo);
+                result = propogateNull;
             }
-            var propogateNull = PropagateNull(source, pathMemberInfo);
-            var result = propogateNull;
+                
             if (expectedType != null && expectedType != result.Type)
             {
                 if (expectedType == typeof(string))
@@ -2112,7 +2121,7 @@ namespace Hl7.Cql.Compiler
                     funcType = typeof(Func<,,,,,,,,,,,,,,>).MakeGenericType(funcTypeParameters);
                     break;
                 default:
-                    throw new NotSupportedException("Fucntions with more than 15 parameters are not supported.");
+                    throw new NotSupportedException("Functions with more than 15 parameters are not supported.");
             }
             return funcType;
         }
@@ -2423,7 +2432,7 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <summary>
-        /// Implements the null propogation operator (x?.y) into (x == null ? null : x.y);
+        /// Implements the null propagation operator (x?.y) into (x == null ? null : x.y);
         /// </summary>
         private static Expression PropagateNull(Expression before, MemberInfo member)
         {

@@ -11,6 +11,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
+using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text;
 using M = Hl7.Fhir.Model;
@@ -27,18 +28,29 @@ namespace Hl7.Cql.Fhir
         /// </summary>
         public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
 
+        static LRUCache<CqlDateTime>? dateTimes;
+
         /// <summary>
         /// Allows for the creation of a converter with the specified model 
         /// </summary>
         /// <param name="model">the model</param>
+        /// <param name="cacheSize">the size of the LRU cache</param>
         /// <returns>the type converter</returns>
-        public static TypeConverter Create(ModelInspector model) =>
-            TypeConverter
+        public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
+        {
+            var lruCacheSize = cacheSize ?? 0;  
+            if (lruCacheSize > 0 && dateTimes is null)
+            {
+                dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
+            }
+
+            return TypeConverter
                 .Create()
                 .ConvertSystemTypes()
                 .ConvertFhirToCqlPrimitives()
                 .ConvertCqlPrimitivesToFhir()
                 .ConvertCodeTypes(model);
+        }
 
         internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
@@ -53,13 +65,44 @@ namespace Hl7.Cql.Fhir
             add((M.Date f) => f.ToString());
             add((M.Time f) => f.TryToTime(out var time) ? new CqlTime(time!.Hours!.Value, time.Minutes, time.Seconds, time.Millis, null, null) : null);
             add((M.Time f) => f.ToString());
-            add((M.FhirDateTime f) => f.TryToDateTime(out var dt) ?
-                new CqlDateTime(
-                    dt!.Years!.Value, dt.Months,
-                    dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
-                    dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null) : null);
+            add((M.FhirDateTime f) =>
+            {
+                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
+                {
+                    return datetime;
+                }
+
+                if (f.TryToDateTime(out var dt))
+                {
+                    var cqlDateTime = new CqlDateTime(
+                        dt!.Years!.Value, dt.Months,
+                        dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
+                        dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
+
+                    dateTimes?.Insert(f.Value, cqlDateTime);
+                    return cqlDateTime;
+                }
+
+                return null;
+            });
             add((M.FhirDateTime f) => f.ToString());
-            add((M.FhirDateTime f) => f.TryToDateTime(out var dt) ? new CqlDate(dt!.Years!.Value, dt.Months, dt.Days) : null);
+            add((M.FhirDateTime f) => {
+                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
+                    return datetime.DateOnly;
+
+                if (f.TryToDateTime(out var dt))
+                {
+                    var cqlDateTime = new CqlDateTime(
+                        dt!.Years!.Value, dt.Months,
+                        dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
+                        dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
+
+                    dateTimes?.Insert(f.Value, cqlDateTime);
+                    return cqlDateTime.DateOnly;
+                }
+
+                return null;
+            });
             add((M.Quantity f) => new CqlQuantity(f.Value, f.Unit));
             add((M.Quantity f) => f.Value);
             add((M.Quantity f) => (int?)f.Value);
@@ -274,7 +317,7 @@ namespace Hl7.Cql.Fhir
                     return new CqlCode(systemAndCode.Code, systemAndCode.System, null, null);
                 });
                 converter.AddConversion(codeType, nullableEnumType, (code) => 
-                    code.GetType().GetProperty("Value")!.GetValue(code)!);
+                    code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
 
                 converter.AddConversion(codeType, typeof(string), (code) =>
                 {

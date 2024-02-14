@@ -11,6 +11,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
+using Hl7.FhirPath.Sprache;
 using System.Reflection;
 
 namespace Hl7.Cql.Fhir
@@ -94,6 +95,15 @@ namespace Hl7.Cql.Fhir
             var codeProperty = codeInterfaceType.GetProperty("Code", BindingFlags.Instance | BindingFlags.Public);
 
             return codeProperty;
+        }
+
+        /// <summary>
+        /// Returns a boolean indicating if we should use the type instead of the property
+        /// </summary>
+        internal override bool ShouldUseSourceObject(Type type, string propertyName)
+        {
+            // only handling FhirDateTime to avoid string conversions which are expensive
+            return type == typeof(FhirDateTime) && propertyName == "value";
         }
 
         internal override Type? PatientType => Inspector.PatientMapping?.NativeType;

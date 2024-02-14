@@ -13,7 +13,7 @@ public record PackageArgs
     /// <param name="resourceCanonicalRootUrl">Root part of the resource canonical; otherwise just a '#'</param>
     public PackageArgs(
         DirectoryInfo elmDir, 
-        DirectoryInfo cqlDir, 
+        DirectoryInfo cqlDir,
         Action<IEnumerable<Resource>>? afterPackageMutator = null, 
         string? resourceCanonicalRootUrl = null)
     {
