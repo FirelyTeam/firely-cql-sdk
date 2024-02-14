@@ -2,7 +2,7 @@
   "profiles": {
     "PackagerCLI": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"2024-01-01\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(ProjectDir)/../../Demo/Elm/Json\" --cql \"$(ProjectDir)/../../Demo/Cql/input\" --fhir \"$(ProjectDir)/../../Demo/Test/Resources\" --cs \"$(ProjectDir)/../../Demo/Measures\" --f true"
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(ProjectDir)/../../Demo/Elm/Json\" --cql \"$(ProjectDir)/../../Demo/Cql/input\" --fhir \"$(ProjectDir)/../../Demo/Test/Resources\" --cs \"$(ProjectDir)/../../Demo/Measures\" --f true"
     }
   }
 }
