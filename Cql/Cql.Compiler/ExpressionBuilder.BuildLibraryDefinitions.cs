@@ -344,7 +344,7 @@ partial class ExpressionBuilder
                 }
             }
 
-            builderContext = builderContext.Deeper(expressionDef);
+            builderContext = builderContext.Deeper();
             var bodyExpression = builderContext.TranslateExpression(expressionDef.expression);
             var lambda = Expression.Lambda(bodyExpression, parameters);
             if (function?.operand != null && _context.ContainsDefinition(expressionDef.name, functionParameterTypes))
@@ -554,8 +554,8 @@ partial class ExpressionBuilder
         public Type? TypeFor(Element element, bool throwIfNotFound = true) =>
             _expressionBuilderContext.TypeFor(element, throwIfNotFound);
 
-        public ExpressionBuilderContextFacade Deeper(Element expression) =>
-            new ExpressionBuilderContextFacade(_expressionBuilderContext.Deeper(expression));
+        public ExpressionBuilderContextFacade Deeper() =>
+            new ExpressionBuilderContextFacade(_expressionBuilderContext.Deeper());
 
         public Expression TranslateExpression(Element op) =>
             _expressionBuilderContext.Builder.TranslateExpression(op, _expressionBuilderContext);

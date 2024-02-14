@@ -131,7 +131,7 @@ namespace Hl7.Cql.Compiler
 
         internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
         {
-            ctx = ctx.Deeper(op);
+            ctx = ctx.Deeper();
             Expression? expression;
             switch (op)
             {

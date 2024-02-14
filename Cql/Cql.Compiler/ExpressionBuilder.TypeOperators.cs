@@ -64,7 +64,9 @@ namespace Hl7.Cql.Compiler
                 if (@as.operand is null)
                     throw new InvalidOperationException("Operand cannot be null");
 
-                var type = TypeManager.Resolver.ResolveType(@as.asType.Name!) ?? throw new InvalidOperationException($"Cannot resolve type {@as.asType.Name}");
+                var type = TypeManager.Resolver.ResolveType(@as.asType.Name!) 
+                    ?? throw new InvalidOperationException($"Cannot resolve type {@as.asType.Name}");
+
                 var operand = TranslateExpression(@as.operand, ctx);
                 if (!type.IsAssignableFrom(operand.Type))
                     ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);

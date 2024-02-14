@@ -205,11 +205,10 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <summary>
-        /// Clones this ExpressionBuilderContext, adding the current context as a predecessor.
+        /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ExpressionBuilderContext Deeper(elm.Element expression)
+        internal ExpressionBuilderContext Deeper()
         {
-            _ = expression;
             var subContext = new ExpressionBuilderContext(this);
             return subContext;
         }
