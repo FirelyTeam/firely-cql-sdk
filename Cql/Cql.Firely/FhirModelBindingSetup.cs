@@ -15,6 +15,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
 {
@@ -39,7 +40,7 @@ namespace Hl7.Cql.Fhir
             Comparers = new CqlComparers();
             Operators = CqlOperators.Create(
                     TypeResolver,
-                    FhirTypeConverter.Default,
+                    FhirTypeConverter.Create(ModelInfo.ModelInspector, _options.LRUCacheSize),
                     dataSource,
                     Comparers,
                     valuesets,

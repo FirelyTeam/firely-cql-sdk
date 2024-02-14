@@ -30,8 +30,9 @@ namespace Hl7.Cql.Packaging
         /// <param name="elmDir">directory to find the ELM files</param>
         /// <param name="cqlDir">directory to find the CQL files</param>
         /// <param name="afterPackageMutator">optional mutator for the resources prior to writing</param>
+        /// <param name="cacheSize"></param>
         public void Package(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
-            Action<IEnumerable<Resource>>? afterPackageMutator = null) =>
+            Action<IEnumerable<Resource>>? afterPackageMutator = null, int? cacheSize = null) =>
             PackageCore(elmDir, cqlDir, afterPackageMutator, null);
 
         /// <summary>
@@ -41,7 +42,9 @@ namespace Hl7.Cql.Packaging
         public void Package(PackageArgs args) =>
             PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl);
 
-        private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action<IEnumerable<Resource>>? afterPackageMutator, string? resourceCanonicalRootUrl)
+        private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
+            Action<IEnumerable<Resource>>? afterPackageMutator, 
+            string? resourceCanonicalRootUrl)
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
