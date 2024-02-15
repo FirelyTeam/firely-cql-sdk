@@ -14,7 +14,7 @@ public record PackageArgs
     public PackageArgs(
         DirectoryInfo elmDir, 
         DirectoryInfo cqlDir,
-        Action<IEnumerable<Resource>>? afterPackageMutator = null, 
+        Action<IEnumerable<Resource>>? afterPackageMutator = null,
         string? resourceCanonicalRootUrl = null)
     {
         ElmDir = elmDir;
