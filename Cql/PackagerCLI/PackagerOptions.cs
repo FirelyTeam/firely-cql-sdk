@@ -1,4 +1,4 @@
-﻿namespace Hl7.Cql.Packaging;
+﻿namespace Hl7.Cql.Packager;
 
 internal partial class PackagerOptions
 {

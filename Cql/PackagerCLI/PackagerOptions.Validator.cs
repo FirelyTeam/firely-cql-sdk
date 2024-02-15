@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.Packaging;
+namespace Hl7.Cql.Packager;
 
 partial class PackagerOptions
 {

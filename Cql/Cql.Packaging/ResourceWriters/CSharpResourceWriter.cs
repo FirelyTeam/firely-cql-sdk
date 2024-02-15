@@ -1,4 +1,5 @@
 ﻿using Hl7.Fhir.Model;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging.ResourceWriters
@@ -13,7 +14,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// </summary>
         /// <param name="outDirectory">the output directory</param>
         /// <param name="logger">logger</param>
-        public CSharpResourceWriter(DirectoryInfo outDirectory, ILogger logger) : base(outDirectory, logger)
+        public CSharpResourceWriter([FromKeyedServices("CSharp")] DirectoryInfo outDirectory, ILogger<CSharpResourceWriter> logger) : base(outDirectory, logger)
         {
         }
 

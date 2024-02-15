@@ -1,19 +1,18 @@
-﻿using Hl7.Cql.Packaging.ResourceWriters;
-using Microsoft.Extensions.Logging;
+﻿using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.Packaging;
+namespace Hl7.Cql.Packager;
 
 internal class PackagerService
 {
-    private readonly ILoggerFactory _loggerFactory;
+    private readonly ResourcePackager _resourcePackager;
     private readonly PackagerOptions _packagerOptions;
 
     public PackagerService(
-        ILoggerFactory loggerFactory,
+        ResourcePackager resourcePackager,
         IOptions<PackagerOptions> packageArgsOptions)
     {
-        _loggerFactory = loggerFactory;
+        _resourcePackager = resourcePackager;
         _packagerOptions = packageArgsOptions.Value;
     }
 
@@ -22,18 +21,9 @@ internal class PackagerService
         var opt = _packagerOptions;
         var elmDir = opt.ElmDirectory!;
         var cqlDir = opt.CqlDirectory!;
-        var fhirDir = opt.FhirDirectory;
-        var csDir = opt.CSharpDirectory;
         var canonicalRootUrl = opt.CanonicalRootUrl;
-        var logFactory = _loggerFactory;
-        var cliLogger = _loggerFactory.CreateLogger("CLI");
-
-        List<ResourceWriter> resourceWriters = new();
-        if (fhirDir != null) resourceWriters.Add(new FhirResourceWriter(fhirDir, cliLogger));
-        if (csDir != null) resourceWriters.Add(new CSharpResourceWriter(csDir, cliLogger));
-
-        var resourcePackager = new ResourcePackager(logFactory, resourceWriters.ToArray());
-        resourcePackager.Package(new PackageArgs(elmDir, cqlDir, resourceCanonicalRootUrl: canonicalRootUrl?.ToString()));
+        var packageArgs = new PackageArgs(elmDir, cqlDir, resourceCanonicalRootUrl: canonicalRootUrl?.ToString());
+        _resourcePackager.Package(packageArgs);
         return 0;
     }
 }

@@ -1,7 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
-using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -56,6 +55,7 @@ public class Program
     static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
     {
         services.AddPackagerServices();
+        services.AddResourcePackager();
     }
 
     private static int Run(IHostBuilder hostBuilder)

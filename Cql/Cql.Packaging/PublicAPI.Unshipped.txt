@@ -46,11 +46,11 @@ virtual Hl7.Cql.Packaging.PackageArgs.EqualityContract.get -> System.Type!
 override Hl7.Cql.Packaging.PackageArgs.ToString() -> string!
 Hl7.Cql.Packaging.ResourcePackager
 Hl7.Cql.Packaging.ResourcePackager.Package(Hl7.Cql.Packaging.PackageArgs! args) -> void
-Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging.ILoggerFactory! logFactory, params Hl7.Cql.Packaging.ResourceWriters.ResourceWriter![]! resourceWriters) -> void
+Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging.ILoggerFactory! logFactory, System.Collections.Generic.IEnumerable<Hl7.Cql.Packaging.ResourceWriters.ResourceWriter!>! resourceWriters) -> void
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter
-Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger! logger) -> void
+Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter!>! logger) -> void
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter
-Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.FhirResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger! logger) -> void
+Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.FhirResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter!>! logger) -> void
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.EnsureDirectory(System.IO.DirectoryInfo! directory, int timeoutMs = 5000) -> void
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.Logger.get -> Microsoft.Extensions.Logging.ILogger!

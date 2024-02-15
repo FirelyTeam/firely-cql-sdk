@@ -2,6 +2,7 @@
 using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Logging;
 using System.Text.Json;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Packaging.ResourceWriters
 {
@@ -17,7 +18,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// </summary>
         /// <param name="outDirectory">the output directory</param>
         /// <param name="logger">logger</param>
-        public FhirResourceWriter(DirectoryInfo outDirectory, ILogger logger) : base(outDirectory, logger)
+        public FhirResourceWriter([FromKeyedServices("Fhir")]DirectoryInfo outDirectory, ILogger<FhirResourceWriter> logger) : base(outDirectory, logger)
         {
         }
 

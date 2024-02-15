@@ -2,6 +2,7 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging
@@ -19,9 +20,9 @@ namespace Hl7.Cql.Packaging
         /// </summary>
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
-        public ResourcePackager(ILoggerFactory logFactory, params ResourceWriter[] resourceWriters){
+        public ResourcePackager(ILoggerFactory logFactory, IEnumerable<ResourceWriter> resourceWriters) {
             this.logFactory = logFactory;
-            this.resourceWriters = resourceWriters;
+            this.resourceWriters = resourceWriters.ToArray();
         }
 
         /// <summary>
