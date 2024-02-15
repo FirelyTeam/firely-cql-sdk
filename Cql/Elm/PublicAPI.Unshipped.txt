@@ -359,7 +359,9 @@ Hl7.Cql.Elm.LetClause
 Hl7.Cql.Elm.LetClause.LetClause() -> void
 Hl7.Cql.Elm.Library
 Hl7.Cql.Elm.Library.Library() -> void
+Hl7.Cql.Elm.Library.Name.get -> string?
 Hl7.Cql.Elm.Library.NameAndVersion.get -> string?
+Hl7.Cql.Elm.Library.Version.get -> string?
 Hl7.Cql.Elm.List
 Hl7.Cql.Elm.List.List() -> void
 Hl7.Cql.Elm.ListTypeSpecifier
@@ -711,6 +713,7 @@ Hl7.Cql.Elm.Xor
 Hl7.Cql.Elm.Xor.Xor() -> void
 static Hl7.Cql.Elm.ExtensionMethods.ListSortOrder(this Hl7.Cql.Elm.SortDirection direction) -> System.ComponentModel.ListSortDirection
 static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! include) -> string?
+static Hl7.Cql.Elm.Library.GetIncludedElmLibraries(System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.Library!>! libraries) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library!
 static readonly Hl7.Cql.Elm.Library.JsonSerializerOptions -> System.Text.Json.JsonSerializerOptions!

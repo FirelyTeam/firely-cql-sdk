@@ -31,12 +31,12 @@ namespace Hl7.Cql.Packaging
     {
         internal LibraryPackager()
         {
-            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
         }
 
         internal LibraryPackager(TypeConverter? typeConverter)
         {
-            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector);
+            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
         }
 
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
@@ -80,7 +80,8 @@ namespace Hl7.Cql.Packaging
 #pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
           string lib,
           string version,
-          LogLevel logLevel = LogLevel.Error)
+          LogLevel logLevel = LogLevel.Error,
+          int cacheSize = 0)
         {
             var logFactory = LoggerFactory
                           .Create(logging =>
@@ -92,13 +93,14 @@ namespace Hl7.Cql.Packaging
                               });
                           });
 
-            return LoadElm(elmDirectory, lib, version, logFactory);
+            return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
         }
 
         public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
             string lib,
             string version,
-            ILoggerFactory logFactory)
+            ILoggerFactory logFactory,
+            int cacheSize)
         {
             var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
             if (!elmFile.Exists)
@@ -113,7 +115,7 @@ namespace Hl7.Cql.Packaging
                 .ToArray();
 
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
+            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
             var typeManager = new TypeManager(typeResolver);
             var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
@@ -145,8 +147,9 @@ namespace Hl7.Cql.Packaging
 
             var elmLibraries = packageGraph.Nodes.Values
                 .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
-                .Where(p => p is not null)
-                .Select(p => p!)
+                .OfType<elm.Library>()
+                // Processing this deterministically to reduce different exceptions when running this repeatedly
+                .OrderBy(lib => lib.NameAndVersion) 
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();
@@ -190,7 +193,7 @@ namespace Hl7.Cql.Packaging
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
-                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
+                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -279,7 +282,6 @@ namespace Hl7.Cql.Packaging
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,
-            ExpressionBuilder builder,
             Func<Resource, string> canon,
             elm.Library? elmLibrary = null)
         {

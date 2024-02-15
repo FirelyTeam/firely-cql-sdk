@@ -11,6 +11,7 @@ using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
+using System.Collections.Concurrent;
 using System.Reflection;
 using System.Text;
 using M = Hl7.Fhir.Model;
@@ -27,18 +28,29 @@ namespace Hl7.Cql.Fhir
         /// </summary>
         public static readonly TypeConverter Default = Create(ModelInfo.ModelInspector);
 
+        static LRUCache<CqlDateTime>? dateTimes;
+
         /// <summary>
         /// Allows for the creation of a converter with the specified model 
         /// </summary>
         /// <param name="model">the model</param>
+        /// <param name="cacheSize">the size of the LRU cache</param>
         /// <returns>the type converter</returns>
-        public static TypeConverter Create(ModelInspector model) =>
-            TypeConverter
+        public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
+        {
+            var lruCacheSize = cacheSize ?? 0;  
+            if (lruCacheSize > 0 && dateTimes is null)
+            {
+                dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
+            }
+
+            return TypeConverter
                 .Create()
                 .ConvertSystemTypes()
                 .ConvertFhirToCqlPrimitives()
                 .ConvertCqlPrimitivesToFhir()
                 .ConvertCodeTypes(model);
+        }
 
         internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
         {
@@ -50,13 +62,47 @@ namespace Hl7.Cql.Fhir
             add((M.FhirDecimal p) => p.Value);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
+            add((M.Date f) => f.ToString());
             add((M.Time f) => f.TryToTime(out var time) ? new CqlTime(time!.Hours!.Value, time.Minutes, time.Seconds, time.Millis, null, null) : null);
-            add((M.FhirDateTime f) => f.TryToDateTime(out var dt) ?
-                new CqlDateTime(
-                    dt!.Years!.Value, dt.Months,
-                    dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
-                    dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null) : null);
-            add((M.FhirDateTime f) => f.TryToDateTime(out var dt) ? new CqlDate(dt!.Years!.Value, dt.Months, dt.Days) : null);
+            add((M.Time f) => f.ToString());
+            add((M.FhirDateTime f) =>
+            {
+                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
+                {
+                    return datetime;
+                }
+
+                if (f.TryToDateTime(out var dt))
+                {
+                    var cqlDateTime = new CqlDateTime(
+                        dt!.Years!.Value, dt.Months,
+                        dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
+                        dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
+
+                    dateTimes?.Insert(f.Value, cqlDateTime);
+                    return cqlDateTime;
+                }
+
+                return null;
+            });
+            add((M.FhirDateTime f) => f.ToString());
+            add((M.FhirDateTime f) => {
+                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
+                    return datetime.DateOnly;
+
+                if (f.TryToDateTime(out var dt))
+                {
+                    var cqlDateTime = new CqlDateTime(
+                        dt!.Years!.Value, dt.Months,
+                        dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
+                        dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
+
+                    dateTimes?.Insert(f.Value, cqlDateTime);
+                    return cqlDateTime.DateOnly;
+                }
+
+                return null;
+            });
             add((M.Quantity f) => new CqlQuantity(f.Value, f.Unit));
             add((M.Quantity f) => f.Value);
             add((M.Quantity f) => (int?)f.Value);
@@ -70,9 +116,15 @@ namespace Hl7.Cql.Fhir
                 lowClosed: true, highClosed: true));
             add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High), 
                 lowClosed: true, highClosed: true));
+            
             add((M.Id id) => id.Value);
+            
             add((M.PositiveInt pi) => new M.Integer(pi.Value));
+            add((M.PositiveInt pi) => pi.ToString());
             add((M.UnsignedInt ui) => new M.Integer(ui.Value));
+            add((M.UnsignedInt ui) => ui.ToString());
+
+            add((M.Canonical c) => c.ToString());
 
             addParametersToCqlPrimitivesConverters(toTypes);
             return converter;
@@ -258,18 +310,21 @@ namespace Hl7.Cql.Fhir
             void addEnumConversion(Type enumType)
             {
                 var codeType = typeof(Code<>).MakeGenericType(enumType);
+                var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
                 converter.AddConversion(codeType, typeof(CqlCode), (code) =>
                 {
                     var systemAndCode = (ISystemAndCode)code;
                     return new CqlCode(systemAndCode.Code, systemAndCode.System, null, null);
                 });
+                converter.AddConversion(codeType, nullableEnumType, (code) => 
+                    code.GetType().GetProperty("ObjectValue")!.GetValue(code)!);
+
                 converter.AddConversion(codeType, typeof(string), (code) =>
                 {
                     var systemAndCode = (ISystemAndCode)code;
                     return systemAndCode.Code;
                 });
 
-                var nullableEnumType = typeof(Nullable<>).MakeGenericType(enumType);
                 converter.AddConversion(nullableEnumType, typeof(string), (@enum) =>
                     Enum.GetName(nullableEnumType, @enum) ?? throw new InvalidOperationException($"Did not find enum member {@enum} on type {nullableEnumType}."));
             }
