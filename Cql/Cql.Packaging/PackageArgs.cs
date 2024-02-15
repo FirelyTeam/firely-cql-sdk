@@ -2,7 +2,6 @@
 
 namespace Hl7.Cql.Packaging;
 
-
 /// <summary>Arguments for the <see cref="ResourcePackager.Package(PackageArgs)"/> method.</summary>
 public record PackageArgs
 {

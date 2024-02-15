@@ -2,9 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace Hl7.Cql.Packager;
+namespace Hl7.Cql.Packaging;
 
-#pragma warning disable CS1591
 internal static class DependencyInjection
 {
     public static void AddPackagerServices(this IServiceCollection services)
