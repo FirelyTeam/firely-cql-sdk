@@ -15,6 +15,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
 
         private readonly DirectoryInfo _outDirectory;
         private readonly ILogger<FhirResourceWriter> _logger;
+        private readonly DateTime? _overrideDate;
 
         /// <summary>
         /// Instantiates a new resource writer
@@ -36,6 +37,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         {
             var opt = options.Value;
             _outDirectory = opt.OutDirectory ?? throw new InvalidOperationException("The FhirResourceWriter needs a valid value for OutDirectory.");
+            _overrideDate = opt.OverrideDate;
             _logger = logger;
         }
 
@@ -52,6 +54,16 @@ namespace Hl7.Cql.Packaging.ResourceWriters
 
             foreach (var resource in resources)
             {
+                if (resource is Library library
+                    && _overrideDate is { } overrideDate)
+                {
+                    library.Date = overrideDate.ToString("u");
+                    if (library.Meta is { } meta)
+                    {
+                        meta.LastUpdated = overrideDate;
+                    }
+                }
+
                 var file = Path.GetFullPath(Path.Combine(outDirectoryFullName, $"{resource.Id}.json"));
                 _logger.LogInformation("Writing '{file}'", file);
                 using var fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Read);

@@ -22,6 +22,13 @@ public class FhirResourceWriterOptions
     internal const string ArgNameOutDirectory = "--fhir";
 
     /// <summary>
+    /// Gets or sets the override date.
+    /// </summary>
+    public DateTime? OverrideDate { get; set; }
+
+    internal const string ArgNameOverrideDate = "--override-utc-date-time";
+
+    /// <summary>
     /// Binds the configuration values to the FhirResourceWriterOptions object.
     /// </summary>
     /// <param name="opt">The FhirResourceWriterOptions object to bind the configuration values to.</param>
@@ -33,6 +40,9 @@ public class FhirResourceWriterOptions
 
         // DirectoryInfos cannot be bound directly from IConfiguration, so we do it manually.
         opt.OutDirectory = GetDirectoryInfo(nameof(OutDirectory))!;
+
+        // While DateTimes can be bound directly from IConfiguration, we convert to UTC
+        opt.OverrideDate = opt.OverrideDate?.ToUniversalTime();
 
         DirectoryInfo? GetDirectoryInfo(string key)
         {

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -24,5 +24,36 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23525.2" PrivateAssets="All" />
 	</ItemGroup>
+
+	<!--This task sorts the PublicAPI.*.txt files -->
+	<UsingTask
+		TaskName="SortPublicAPIFiles"
+		TaskFactory="RoslynCodeTaskFactory"
+		AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.Core.dll" >
+		<ParameterGroup />
+		<Task>
+			<Using Namespace="System"/>
+			<Using Namespace="System.IO"/>
+			<Code Type="Fragment" Language="cs">
+				<![CDATA[
+	foreach (var path in new[] { "PublicAPI.Unshipped.txt", "PublicAPI.Shipped.txt" }) 
+	{
+		string[] lines = File.ReadAllLines(path);
+		var hashBefore =  ((IStructuralEquatable)lines).GetHashCode(EqualityComparer<string>.Default);
+		Array.Sort(Enumerable.Range(0, lines.Length).Select(_ => Random.Shared.NextDouble()).ToArray(), lines);
+		var hashAfter = ((IStructuralEquatable)lines).GetHashCode(EqualityComparer<string>.Default);
+		if (hashBefore != hashAfter) {
+			Log.LogMessage($"Sorted lines in '{path}'");
+			File.WriteAllLines(path, lines);			
+		}
+	}
+]]>
+			</Code>
+		</Task>
+	</UsingTask>
+
+	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
+		<!--<SortPublicAPIFiles />-->
+	</Target>
 
 </Project>
