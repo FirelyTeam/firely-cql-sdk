@@ -52,23 +52,20 @@ public class Program
         };
     }
 
-    public const string Usage =
+    private const string Usage =
         """
         Packager CLI Usage:
         
-            -?|-h|-help                     Show this help
-        
-            --elm       <directory>         Library root directory
-            --cql       <directory>         CQL root directory
-            [--fhir]    <file|directory>    Resource location, either file name or directory
-            [--cs]      <file|directory>    C# output location, either file name or directory
-            [--d]       <true|false>        Produce as a debug assembly
-            [--f]       <true|false>        Force an overwrite even if the output file already exists
-            [--canonical-root-url]          The root url used for the resource canonical.
-                        <url>               If omitted a '#' will be used
-            [--override-utc-date-time]      The date time to use for the library and resource last updated.
-                        <utc-date-time>     If omitted the current date time will be used.
-                                            (example: 2000-12-31T23:59:59.99Z)
+            -?|-h|-help                                Show this help
+                                                       
+            --elm                  <directory>         Library root directory
+            --cql                  <directory>         CQL root directory
+            [--fhir]               <file|directory>    Resource location, either file name or directory
+            [--cs]                 <file|directory>    C# output location, either file name or directory
+            [--d]                  <true|false>        Produce as a debug assembly
+            [--f]                  <true|false>        Force an overwrite even if the output file already exists
+            [--canonical-root-url] <url>               The root url used for the resource canonical.
+                                                       If omitted a '#' will be used.
         """;
 
 
