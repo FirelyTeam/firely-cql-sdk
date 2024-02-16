@@ -22,14 +22,14 @@ public class Program
         }
 
         var hostBuilder = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration(ConfigureConfiguration(args))
+            .ConfigureAppConfiguration(ConfigureAppConfiguration(args))
             .ConfigureLogging(ConfigureLogging)
             .ConfigureServices(ConfigureServices);
 
         return Run(hostBuilder);
     }
 
-    static Action<HostBuilderContext, IConfigurationBuilder> ConfigureConfiguration(string[] args) =>
+    static Action<HostBuilderContext, IConfigurationBuilder> ConfigureAppConfiguration(string[] args) =>
         (hostContext, config) =>
         {
             IDictionary<string, string> switchMappings = PackagerOptions.BuildSwitchMappings();
