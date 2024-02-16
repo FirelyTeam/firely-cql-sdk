@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using Hl7.Cql.Packaging;
+﻿using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,55 +9,62 @@ namespace Hl7.Cql.Packager;
 
 internal static class DependencyInjection
 {
-    public static void AddPackagerServices(this IServiceCollection services)
+    public static void AddPackagerServices(this IServiceCollection services, IConfiguration config)
     {
-        services.TryAddPackagerOptions();
+        services.TryAddPackagerOptions(config);
         services.TryAddTransient<PackagerService>();
     }
 
-    private static void TryAddPackagerOptions(this IServiceCollection services)
+    private static void TryAddPackagerOptions(this IServiceCollection services, IConfiguration config)
     {
         if (services.Any(s => s.ServiceType == typeof(IValidateOptions<PackagerOptions>)))
             return;
 
-        services.AddOptions<PackagerOptions>()
-            .BindConfiguration(PackagerOptions.ConfigSection)
-            .Configure<IConfiguration>((opt, config) => { PackagerOptions.BindDirectoryInfos(config, opt); })
+        services
+            .AddOptions<PackagerOptions>()
+            .Configure<IConfiguration>(PackagerOptions.BindConfig)
             .ValidateOnStart();
+
         services.AddSingleton<IValidateOptions<PackagerOptions>, PackagerOptions.Validator>();
     }
 
     public static void AddResourcePackager(this IServiceCollection services, IConfiguration config)
     {
-        services.TryAddPackagerOptions();
+        services.TryAddPackagerOptions(config);
         services.TryAddSingleton<ResourcePackager>();
 
-        var unvalidatedPackagerOptions = TryGetPackagerOptions(config);
-        List<ServiceDescriptor> descriptors = new(2);
+        PackagerOptions packagerOptions = new();
+        PackagerOptions.BindConfig(packagerOptions, config);
 
-        if (unvalidatedPackagerOptions.FhirDirectory is {} fhirDir)
+        FhirResourceWriterOptions fhirResourceWriterOptions = new();
+        FhirResourceWriterOptions.BindConfig(fhirResourceWriterOptions, config);
+
+        CSharpResourceWriterOptions cSharpResourceWriterOptions = new();
+        CSharpResourceWriterOptions.BindConfig(cSharpResourceWriterOptions, config);
+
+        List<ServiceDescriptor> resourceWritersServiceDescriptors = new(2);
+
+        if (fhirResourceWriterOptions.OutDirectory is {})
         {
-            services.TryAddKeyedSingleton("Fhir", fhirDir);
-            descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, FhirResourceWriter>());
+            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, FhirResourceWriter>());
+            services
+                .AddOptions<FhirResourceWriterOptions>()
+                .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
+                .ValidateOnStart();
         }
 
-        if (unvalidatedPackagerOptions.CSharpDirectory is {} csharpDir)
+        if (cSharpResourceWriterOptions.OutDirectory is {} csharpDir)
         {
-            services.TryAddKeyedSingleton("CSharp", csharpDir);
-            descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
+            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
+            services
+                .AddOptions<CSharpResourceWriterOptions>()
+                .Configure<IConfiguration>(CSharpResourceWriterOptions.BindConfig)
+                .ValidateOnStart();
         }
 
-        if (descriptors.Count > 0)
+        if (resourceWritersServiceDescriptors.Count > 0)
         {
-            services.TryAddEnumerable(descriptors);
+            services.TryAddEnumerable(resourceWritersServiceDescriptors);
         }
-    }
-
-    private static PackagerOptions TryGetPackagerOptions(IConfiguration config)
-    {
-        PackagerOptions opt = new();
-        config.GetSection(PackagerOptions.ConfigSection).Bind(opt);
-        PackagerOptions.BindDirectoryInfos(config, opt);
-        return opt;
     }
 }

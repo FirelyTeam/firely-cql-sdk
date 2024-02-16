@@ -4,13 +4,14 @@ namespace Hl7.Cql.Packager;
 
 partial class PackagerOptions
 {
-    internal static void BindDirectoryInfos(IConfiguration config, PackagerOptions opt)
+    public static void BindConfig(PackagerOptions opt, IConfiguration config)
     {
         var section = config.GetRequiredSection(ConfigSection);
+        section.Bind(opt);
+
+        // DirectoryInfos cannot be bound directly from IConfiguration, so we do it manually.
         opt.ElmDirectory = GetDirectoryInfo(nameof(ElmDirectory))!;
         opt.CqlDirectory = GetDirectoryInfo(nameof(CqlDirectory))!;
-        opt.CSharpDirectory = GetDirectoryInfo(nameof(CSharpDirectory));
-        opt.FhirDirectory = GetDirectoryInfo(nameof(FhirDirectory));
 
         DirectoryInfo? GetDirectoryInfo(string key)
         {
