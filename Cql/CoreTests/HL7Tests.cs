@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Elm;
 
 namespace CoreTests
 {
@@ -49,8 +50,7 @@ namespace CoreTests
             var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            var fhirHelpersBuilder = new ExpressionBuilder(binding, typeManager, fhirHelpersPackage, CreateLogger());
-            var fhirHelpersLambdas = fhirHelpersBuilder.Build();
+            var fhirHelpersLambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, CreateLogger(), fhirHelpersPackage);
             LambdasByTestName.Lambdas.Merge(fhirHelpersLambdas);
 
 
@@ -61,8 +61,7 @@ namespace CoreTests
                 //    continue;
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
                 var includes = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
-                var builder = new ExpressionBuilder(binding, typeManager, elmPackage, CreateLogger());
-                var lambdas = builder.Build();
+                var lambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, CreateLogger(), elmPackage);
                 LambdasByTestName.Lambdas.Merge(lambdas);
             }
 

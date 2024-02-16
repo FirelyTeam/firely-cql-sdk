@@ -9,12 +9,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
 
 namespace Hl7.Cql.Graph
 {
+    [DebuggerDisplay("DirectedGraph (Nodes:{Nodes.Count}, Edges:{Edges.Count})")]
     internal class DirectedGraph
     {
 
@@ -478,6 +480,31 @@ namespace Hl7.Cql.Graph
         }
 
 
+        public string GraphvizDiagram =>
+            $$"""
+            digraph G {
+              
+                graph [ splines="polyline" rankdir="LR" ];
+                node [ shape="rectangle" ];
+                edge [ color="#22 22 22, arrowtail=dot, arrowhead=open" ];
+
+            {{
+                string.Join(Environment.NewLine,
+                    from node in Nodes.Values
+                    select $"""
+                            "{node.NodeId}";
+                            """)
+            }}
+            
+            {{
+                string.Join(Environment.NewLine,
+                    from edge in Edges.Values
+                    select $"""
+                            "{edge.FromId}" -> "{edge.ToId}";
+                            """)
+            }}
+            }
+            """;
     }
 
 }

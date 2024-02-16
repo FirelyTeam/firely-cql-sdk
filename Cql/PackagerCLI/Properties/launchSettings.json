@@ -2,7 +2,7 @@
   "profiles": {
     "PackagerCLI": {
       "commandName": "Project",
-      "commandLineArgs": "--canonical-root-url https://fire.ly/fhir/ --elm $(ProjectDir)/../../Demo/Elm/Json --cql $(ProjectDir)/../../Demo/Cql/input --fhir $(ProjectDir)/../../Demo/Test/Resources --cs $(ProjectDir)/../../Demo/Measures --f true"
+      "commandLineArgs": "--canonical-root-url https://fire.ly/fhir/ --elm \"$(ProjectDir)/../../Demo/Elm/Json\" --cql \"$(ProjectDir)/../../Demo/Cql/input\" --fhir \"$(ProjectDir)/../../Demo/Test/Resources\" --cs \"$(ProjectDir)/../../Demo/Measures\" --f true"
     }
   }
 }

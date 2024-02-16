@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.Abstractions;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -19,7 +20,7 @@ namespace Hl7.Cql.Compiler
                 source = Expression.TypeAs(constant, constant.Type);
             }
             var call = OperatorBinding.Bind(CqlOperator.Message, ctx.RuntimeContextParameter, source, code, severity, message);
-            if (IsNullable(condition.Type))
+            if (condition.Type.IsNullable())
             {
                 condition = Expression.Coalesce(condition, Expression.Constant(false, typeof(bool)));
             }

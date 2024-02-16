@@ -34,7 +34,7 @@ namespace Hl7.Cql.Packager
             if (config["elm"] is not {} elmArg)
                 return ShowHelp();
 
-            var elmDir = new DirectoryInfo(elmArg);
+            var elmDir = new DirectoryInfo(Path.GetFullPath(elmArg));
             if (!elmDir.Exists)
             {
                 Console.Error.WriteLine($"-elm: path {elmArg} does not exist.");
@@ -46,7 +46,7 @@ namespace Hl7.Cql.Packager
             if (config["cql"] is not {} cqlArg )
                 return ShowHelp();
 
-            var cqlDir = new DirectoryInfo(cqlArg);
+            var cqlDir = new DirectoryInfo(Path.GetFullPath(cqlArg));
             if (!cqlDir.Exists)
             {
                 Console.Error.WriteLine($"-cql: path {cqlArg} does not exist.");
@@ -66,7 +66,7 @@ namespace Hl7.Cql.Packager
             DirectoryInfo? csDir = null;
             if (config["cs"] is {} csArg)
             {
-                csDir = new DirectoryInfo(csArg);
+                csDir = new DirectoryInfo(Path.GetFullPath(csArg));
                 if (!csDir.Exists)
                 {
                     EnsureDirectory(csDir);
@@ -87,7 +87,7 @@ namespace Hl7.Cql.Packager
             DirectoryInfo? fhirDir = null;
             if (config["fhir"] is {} fhirArg)
             {
-                fhirDir = new DirectoryInfo(fhirArg);
+                fhirDir = new DirectoryInfo(Path.GetFullPath(fhirArg));
                 if (!fhirDir.Exists)
                 {
                     EnsureDirectory(fhirDir);

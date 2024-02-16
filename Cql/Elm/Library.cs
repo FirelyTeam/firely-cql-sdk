@@ -2,6 +2,7 @@
 using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
@@ -9,6 +10,7 @@ using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Elm
 {
+    [DebuggerDisplay("Library ({NameAndVersion})")]
     public partial class Library
     {
         public const string JsonMimeType = "application/elm+json";
@@ -72,7 +74,13 @@ namespace Hl7.Cql.Elm
         }
         public static Library LoadFromJson(Stream stream) =>
             JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
-                throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}");
+            stream switch
+            {
+                FileStream fs => throw new ArgumentException(
+                    $"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
+                _ => throw new ArgumentException(
+                    $"Stream does not represent a valid {nameof(Library)}")
+            };
 
         /// <summary>
         /// Get a flat list of ELM libraries included in the set of libraries passed in. 
@@ -80,17 +88,22 @@ namespace Hl7.Cql.Elm
         /// <param name="libraries">top-level libraries</param>
         /// <returns>flat list of all included libraries</returns>
         public static IEnumerable<Library> GetIncludedElmLibraries(IEnumerable<Library> libraries)
+            => libraries.GetIncludedElmLibraries();
+    }
+
+    internal static class LibraryExtensions
+    {
+        public static IEnumerable<Library> GetIncludedElmLibraries(this IEnumerable<Library> libraries)
         {
-            var packageGraph = GetIncludedLibraries(libraries);
+            var packageGraph = libraries.GetIncludedLibraries();
             var elmLibraries = packageGraph.Nodes.Values
-                .Select(node => node.Properties?[LibraryNodeProperty] as Library)
-                .Where(p => p is not null)
-                .Select(p => p!)
+                .Select(node => node.Properties?[Library.LibraryNodeProperty])
+                .OfType<Library>()
                 .ToArray();
             return elmLibraries;
         }
 
-        internal static DirectedGraph GetIncludedLibraries(IEnumerable<Library> libraries)
+        public static DirectedGraph GetIncludedLibraries(this IEnumerable<Library> libraries)
         {
             var buildOrder = new DirectedGraph();
             foreach (var library in libraries)
@@ -110,55 +123,17 @@ namespace Hl7.Cql.Elm
             return buildOrder;
         }
 
+        private static DirectedGraph GetIncludedLibraries(Library library, Func<string, string, Library> locateLibrary) => SanitizeDependencyGraph(GetDependencySubgraph(library, locateLibrary));
 
-        internal static DirectedGraph GetIncludedLibraries(Library library, Func<string, string, Library> locateLibrary) =>
-            SanitizeDependencyGraph(GetDependencySubgraph(library, locateLibrary));
-
-        internal static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, DirectoryInfo libraryPath) =>
-            GetIncludedLibraries(elmLocation, (name, version) =>
-            {
-                var stream = OpenLibrary(libraryPath, name, version);
-                var library = LoadFromJson(stream) ?? throw new InvalidOperationException($"Cannot load ELM for {name} version {version}");
-                return library;
-            });
-
-        internal static DirectedGraph GetIncludedLibraries(Library library, DirectoryInfo libraryPath) =>
+        internal static DirectedGraph GetIncludedLibraries(this Library library, DirectoryInfo libraryPath) =>
             SanitizeDependencyGraph(GetDependencySubgraph(library, (name, version) =>
             {
                 var stream = OpenLibrary(libraryPath, name, version);
-                var dependentLibrary = LoadFromJson(stream) ?? throw new InvalidOperationException($"Cannot load ELM for {name} version {version}");
+                var dependentLibrary = Library.LoadFromJson((Stream)stream) ?? throw new InvalidOperationException($"Cannot load ELM for {name} version {version}");
                 return dependentLibrary;
             }));
 
-        internal static DirectedGraph GetIncludedLibraries(FileInfo elmLocation, Func<string, string, Library>? locateLibrary = null)
-        {
-            if (locateLibrary == null)
-            {
-                locateLibrary = (name, version) =>
-                {
-                    if (elmLocation.Directory is null) throw new InvalidOperationException("Directory within library is null.");
-                    var path = Path.Combine(elmLocation.Directory.FullName, $"{name}-{version}.json");
-                    var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-                    var library = LoadFromJson(stream) ?? throw new InvalidOperationException($"Cannot load ELM from {path}");
-                    return library;
-                };
-            }
-            using var stream = elmLocation.OpenRead();
-            var library = LoadFromJson(stream) ?? throw new InvalidOperationException($"Cannot load ELM from {elmLocation}");
-            var graph = GetDependencySubgraph(library, locateLibrary);
-            var sanitized = SanitizeDependencyGraph(graph);
-            return sanitized;
-        }
-
-        internal DirectedGraph GetIncludedLibraries(DirectoryInfo libraryPath) =>
-            SanitizeDependencyGraph(GetDependencySubgraph((name, version) =>
-            {
-                var stream = OpenLibrary(libraryPath, name, version);
-                var library = LoadFromJson(stream) ?? throw new InvalidOperationException($"Cannot load ELM for {name} version {version}");
-                return library;
-            }));
-
-        internal static Stream OpenLibrary(DirectoryInfo libraryPath, string name, string version)
+        private static Stream OpenLibrary(DirectoryInfo libraryPath, string name, string version)
         {
             var path = Path.Combine(libraryPath.FullName, $"{name}-{version}.json");
             if (!File.Exists(path))
@@ -171,16 +146,6 @@ namespace Hl7.Cql.Elm
             return stream;
         }
 
-        private static DirectedGraph GetDependencySubgraph(Library library, Func<string, string, Library> locateLibrary)
-        {
-            if (library is null)
-            {
-                throw new ArgumentNullException(nameof(library));
-            }
-            var graph = library!.GetDependencySubgraph(locateLibrary);
-            return graph;
-        }
-
         private static DirectedGraph SanitizeDependencyGraph(DirectedGraph graph)
         {
             graph.Add(graph.StartNode);
@@ -188,27 +153,31 @@ namespace Hl7.Cql.Elm
             return graph;
         }
 
-        private DirectedGraph GetDependencySubgraph(Func<string, string, Library> locateLibrary, bool includeLibraryProperty = true)
+        private static DirectedGraph GetDependencySubgraph(Library library, Func<string, string, Library> locateLibrary, bool includeLibraryProperty = true)
         {
+            if (library is null)
+            {
+                throw new ArgumentNullException(nameof(library));
+            }
             var thisGraph = new DirectedGraph();
             var properties = new Dictionary<string, object>();
             if (includeLibraryProperty)
-                properties.Add(LibraryNodeProperty, this);
-
+                properties.Add(Library.LibraryNodeProperty, library);
+        
             var packageNode = new DirectedGraphNode
             {
-                NodeId = $"{identifier!.id}-{identifier.version}",
-                Label = identifier!.id,
+                NodeId = $"{library.identifier!.id}-{library.identifier.version}",
+                Label = library.identifier!.id,
                 Properties = properties,
             };
             thisGraph.Add(packageNode);
             var edgeFromStart = new DirectedGraphEdge(thisGraph.StartNode, packageNode);
             thisGraph.StartNode.ForwardEdges.Add(edgeFromStart);
             thisGraph.Add(edgeFromStart);
-
-            if (includes?.Length > 0)
+        
+            if (library.includes?.Length > 0)
             {
-                foreach (var include in includes ?? Enumerable.Empty<IncludeDef>())
+                foreach (var include in library.includes ?? Enumerable.Empty<IncludeDef>())
                 {
                     var includedPackage = locateLibrary(include.path!, include.version!);
                     var libGraph = GetDependencySubgraph(includedPackage, locateLibrary);
@@ -268,6 +237,5 @@ namespace Hl7.Cql.Elm
                 into.Add(new DirectedGraphEdge(into.StartNode.NodeId, from.StartNode.NodeId));
             }
         }
-
     }
 }

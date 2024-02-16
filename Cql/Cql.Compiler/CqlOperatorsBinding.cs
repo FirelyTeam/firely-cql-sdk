@@ -509,7 +509,7 @@ namespace Hl7.Cql.Compiler
         {
             if (by is LambdaExpression lambda && order is ConstantExpression orderConstant && orderConstant.Type == typeof(ListSortDirection))
             {
-                var elementType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var elementType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
                 var method = OperatorsType
                     .GetMethod(nameof(ICqlOperators.ListSortBy))!
                     .MakeGenericMethod(elementType);
@@ -630,7 +630,7 @@ namespace Hl7.Cql.Compiler
             var elementType = TypeResolver.GetListElementType(operand.Type, @throw: true)!;
             if (IsOrImplementsIEnumerableOfT(elementType))
             {
-                var nestedElementType = TypeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"{elementType} was expected to be a list type.");
+                var nestedElementType = TypeResolver.GetListElementType(elementType) ?? throw new InvalidOperationException($"'{elementType}' was expected to be a list type.");
                 var method = OperatorsType
                         .GetMethod(nameof(ICqlOperators.FlattenList))!
                         .MakeGenericMethod(nestedElementType);
@@ -646,7 +646,6 @@ namespace Hl7.Cql.Compiler
                 return call;
             }
             else return operand; // flatten is being called on a list that is already flat.
-            throw new ArgumentException("Operands to this method must be an enumeration of enumerations, e.g. IEnumerable<IEnumerable<object>>", nameof(operand));
         }
 
         private Expression Width(MemberExpression operators, Expression operand)
@@ -1106,7 +1105,7 @@ namespace Hl7.Cql.Compiler
         {
             if (lambda is LambdaExpression lamdaExpr)
             {
-                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
                 var resultType = lamdaExpr.ReturnType;
                 var method = OperatorsType.GetMethod(nameof(ICqlOperators.SelectOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType, resultType);
@@ -1120,7 +1119,7 @@ namespace Hl7.Cql.Compiler
         {
             if (lambda is LambdaExpression lamdaExpr)
             {
-                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"{source.Type} was expected to be a list type.");
+                var sourceType = TypeResolver.GetListElementType(source.Type) ?? throw new InvalidOperationException($"'{source.Type}' was expected to be a list type.");
                 var method = OperatorsType.GetMethod(nameof(ICqlOperators.WhereOrNull))!;
                 var genericMethod = method.MakeGenericMethod(sourceType);
                 var call = Expression.Call(operators, genericMethod, source, lambda);

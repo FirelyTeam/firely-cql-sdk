@@ -57,6 +57,9 @@ namespace Hl7.Cql.Graph
             return clonedNode;
         }
 
-
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(NodeId, Label, ForwardEdges, Properties);
+        }
     }
 }

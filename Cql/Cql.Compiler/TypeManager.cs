@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using Hl7.Cql.Compiler.Infrastructure;
 using elm = Hl7.Cql.Elm;
 
 
@@ -63,96 +64,126 @@ namespace Hl7.Cql.Compiler
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
-
             TupleTypeNamespace = tupleTypeNamespace;
         }
 
-        internal Type? TypeFor(elm.Element element,
+        internal Type? TypeFor(
+            Element element,
             ExpressionBuilderContext context,
             bool throwIfNotFound = true)
         {
             if (element?.resultTypeSpecifier != null)
                 return TypeFor(element.resultTypeSpecifier, context);
-            else if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
+
+            if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
                 return Resolver.ResolveType(element!.resultTypeName!.Name)
-                    ?? throw new ArgumentException("Cannot resolve type for expression");
-            else if (element is elm.ExpressionDef def && def.expression != null)
+                       ?? throw new ArgumentException("Cannot resolve type for expression");
+
+            switch (element)
             {
-                var type = TypeFor(def.expression, context, false);
-                if (type == null)
+                case ExpressionRef expressionRef:
                 {
-                    if (def.expression is elm.SingletonFrom singleton)
+                    var libraryName = expressionRef.libraryName ?? context.Builder.LibraryKey;
+                    if (!context.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                        throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
+
+                    var returnType = definition!.ReturnType;
+
+                    return returnType;
+                }
+
+                case ExpressionDef { expression: not null } def:
+                {
+                    var type = TypeFor(def.expression, context, false);
+                    if (type == null)
                     {
-                        type = TypeFor(singleton, context, false);
-                        if (type == null)
+                        if (def.expression is SingletonFrom singleton)
                         {
-                            if (singleton.operand is elm.Retrieve retrieve && retrieve.dataType != null)
+                            type = TypeFor(singleton, context, false);
+                            if (type == null)
                             {
-                                type = Resolver.ResolveType(retrieve.dataType.Name);
-                                if (type != null)
-                                    return type;
+                                if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
+                                {
+                                    type = Resolver.ResolveType(retrieve.dataType.Name);
+                                    if (type != null)
+                                        return type;
+                                }
                             }
+                            else return type;
                         }
-                        else return type;
                     }
+
+                    break;
                 }
-            }
-            else if (element is elm.Property propertyExpression && !string.IsNullOrWhiteSpace(propertyExpression.path))
-            {
-                Type? sourceType = null;
-                if (propertyExpression.source != null)
-                    sourceType = TypeFor(propertyExpression.source!, context);
-                else if (propertyExpression.scope != null)
+
+                case Property propertyExpression when !string.IsNullOrWhiteSpace(propertyExpression.path):
                 {
-                    var scope = context.GetScope(propertyExpression.scope);
-                    sourceType = scope.Item1.Type;
+                    Type? sourceType = null;
+                    if (propertyExpression.source != null)
+                        sourceType = TypeFor(propertyExpression.source!, context);
+                    else if (propertyExpression.scope != null)
+                    {
+                        var scope = context.GetScope(propertyExpression.scope);
+                        sourceType = scope.Item1.Type;
+                    }
+                    if (sourceType != null)
+                    {
+                        var property = Resolver.GetProperty(sourceType, propertyExpression.path);
+                        if (property != null)
+                            return property.PropertyType;
+                        return typeof(object); // this is likely a choice
+                    }
+
+                    break;
                 }
-                if (sourceType != null)
+
+                case AliasRef aliasRef when !string.IsNullOrWhiteSpace(aliasRef.name):
                 {
-                    var property = Resolver.GetProperty(sourceType, propertyExpression.path);
-                    if (property != null)
-                        return property.PropertyType;
-                    else return typeof(object); // this is likely a choice
+                    var scope = context.GetScope(aliasRef.name);
+                    return scope.Item1.Type;
                 }
-            }
-            else if (element is elm.AliasRef aliasRef && !string.IsNullOrWhiteSpace(aliasRef.name))
-            {
-                var scope = context.GetScope(aliasRef.name);
-                return scope.Item1.Type;
-            }
-            else if (element is elm.OperandRef operandRef && !string.IsNullOrWhiteSpace(operandRef.name))
-            {
-                context.Operands.TryGetValue(operandRef.name, out var operand);
-                if (operand != null)
-                    return operand.Type;
+
+                case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
+                {
+                    context.Operands.TryGetValue(operandRef.name, out var operand);
+                    if (operand != null)
+                        return operand.Type;
+                    break;
+                }
             }
             if (throwIfNotFound)
                 throw new ArgumentException("Cannot resolve type for expression");
-            else return null;
+            
+            return null;
         }
 
-        internal Type TypeFor(elm.TypeSpecifier resultTypeSpecifier,
+        internal Type TypeFor(TypeSpecifier resultTypeSpecifier,
             ExpressionBuilderContext context)
         {
-            if (resultTypeSpecifier == null) return typeof(object);
-            else if (resultTypeSpecifier is IntervalTypeSpecifier interval)
+            if (resultTypeSpecifier == null) 
+                return typeof(object);
+
+            if (resultTypeSpecifier is IntervalTypeSpecifier interval)
             {
                 var pointType = TypeFor(interval.pointType!, context);
                 var intervalType = typeof(CqlInterval<>).MakeGenericType(pointType);
                 return intervalType;
             }
-            else if (resultTypeSpecifier is NamedTypeSpecifier named)
+
+            if (resultTypeSpecifier is NamedTypeSpecifier named)
             {
                 var type = Resolver.ResolveType(named.name.Name!);
                 if (type == null)
                     throw new ArgumentException("Cannot resolve type for expression");
                 return type!;
             }
-            else if (resultTypeSpecifier is ChoiceTypeSpecifier)
+
+            if (resultTypeSpecifier is ChoiceTypeSpecifier)
             {
                 return typeof(object);
             }
-            else if (resultTypeSpecifier is ListTypeSpecifier list)
+
+            if (resultTypeSpecifier is ListTypeSpecifier list)
             {
                 if (list.elementType == null)
                     throw new ArgumentException("ListTypeSpecifier must have a non-null elementType");
@@ -163,7 +194,8 @@ namespace Hl7.Cql.Compiler
                 var enumerableOfElementType = typeof(IEnumerable<>).MakeGenericType(elementType);
                 return enumerableOfElementType;
             }
-            else if (resultTypeSpecifier is elm.TupleTypeSpecifier tuple)
+
+            if (resultTypeSpecifier is TupleTypeSpecifier tuple)
             {
                 // witnessed in ELM:
                 //"type" : "TupleTypeSpecifier",
@@ -177,9 +209,11 @@ namespace Hl7.Cql.Compiler
                 // Code handles x but not y
                 if (resultTypeSpecifier.resultTypeSpecifier != null)
                     return TypeFor(tuple.resultTypeSpecifier, context);
-                else return TupleTypeFor(tuple, context);
+
+                return TupleTypeFor(tuple, context);
             }
-            else throw new NotImplementedException();
+
+            throw new NotImplementedException();
         }
 
         internal static string PrettyTypeName(Type type)
@@ -213,13 +247,11 @@ namespace Hl7.Cql.Compiler
 
             if (elements?.Length == 0)
                 return typeof(object);
-            else
-            {
-                var elementTuples = elements!
-                    .Select(e => (e.name, e.elementType))
-                    .ToArray();
-                return TupleTypeFor(elementTuples, context, changeType);
-            }
+
+            var elementTuples = elements!
+                .Select(e => (e.name, e.elementType))
+                .ToArray();
+            return TupleTypeFor(elementTuples, context, changeType);
         }
 
         internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
@@ -228,14 +260,11 @@ namespace Hl7.Cql.Compiler
 
             if (elements?.Length == 0)
                 return typeof(object);
-            else
-            {
-                var elementTuples = elements!
-                    .Select(e => (e.name, e.value.resultTypeSpecifier ??
-                        throw new InvalidOperationException("Tuple element value does not have a resultTypeSpecifier")))
-                    .ToArray();
-                return TupleTypeFor(elementTuples, context, changeType);
-            }
+
+            var elementTuples = elements!
+                .Select(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")))
+                .ToArray();
+            return TupleTypeFor(elementTuples, context, changeType);
         }
 
         internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext context, Func<Type, Type>? changeType)
