@@ -37,7 +37,12 @@ Hl7.Cql.Packaging.ResourcePackager.Package(System.IO.DirectoryInfo! elmDir, Syst
 Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging.ILoggerFactory! logFactory, params Hl7.Cql.Packaging.ResourceWriters.ResourceWriter![]! resourceWriters) -> void
 Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging.ILoggerFactory! logFactory, System.Collections.Generic.IEnumerable<Hl7.Cql.Packaging.ResourceWriters.ResourceWriter!>! resourceWriters) -> void
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter
+Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(Microsoft.Extensions.Options.IOptions<Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions!>! options, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter!>! logger) -> void
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter!>! logger) -> void
+Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions
+Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions.CSharpResourceWriterOptions() -> void
+Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
+Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions.OutDirectory.set -> void
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.FhirResourceWriter(Microsoft.Extensions.Options.IOptions<Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions!>! options, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter!>! logger) -> void
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.FhirResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter!>! logger) -> void
@@ -48,7 +53,6 @@ Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OutDirectory.set -> 
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.get -> System.DateTime?
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.set -> void
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter
-Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.EnsureDirectory(System.IO.DirectoryInfo! directory, int timeoutMs = 5000) -> void
 Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.ResourceWriter() -> void
 override Hl7.Cql.Packaging.CqlTypeToFhirMapping.Equals(object? obj) -> bool
 override Hl7.Cql.Packaging.CqlTypeToFhirMapping.GetHashCode() -> int
@@ -68,6 +72,7 @@ static Hl7.Cql.Packaging.LibraryPackager.LoadLibraries(System.IO.DirectoryInfo! 
 static Hl7.Cql.Packaging.LibraryPackager.LoadResources(System.IO.DirectoryInfo! dir, string! lib, string! version) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.PackageArgs.operator !=(Hl7.Cql.Packaging.PackageArgs? left, Hl7.Cql.Packaging.PackageArgs? right) -> bool
 static Hl7.Cql.Packaging.PackageArgs.operator ==(Hl7.Cql.Packaging.PackageArgs? left, Hl7.Cql.Packaging.PackageArgs? right) -> bool
+static Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions.BindConfig(Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 static Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.BindConfig(Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.<Clone>$() -> Hl7.Cql.Packaging.CqlTypeToFhirMapping!
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.EqualityContract.get -> System.Type!

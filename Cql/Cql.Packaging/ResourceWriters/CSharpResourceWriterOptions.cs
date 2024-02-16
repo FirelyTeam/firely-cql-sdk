@@ -2,47 +2,36 @@
 
 namespace Hl7.Cql.Packaging.ResourceWriters;
 
-
 /// <summary>
-/// Represents the options for the FhirResourceWriter.
+/// Represents the options for the CSharpResourceWriter.
 /// </summary>
-public class FhirResourceWriterOptions
+public class CSharpResourceWriterOptions
 
 {
     /// <summary>
     /// The name of the config setting.
     /// </summary>
-    internal const string ConfigSection = "FhirResourceWriter";
+    internal const string ConfigSection = "CSharpResourceWriter";
 
     /// <summary>
     /// Gets or sets the output directory.
     /// </summary>
     public DirectoryInfo? OutDirectory { get; set; }
 
-    internal const string ArgNameOutDirectory = "--fhir";
+    internal const string ArgNameOutDirectory = "--cs";
 
     /// <summary>
-    /// Gets or sets the override date.
+    /// Binds the configuration values to the CSharpResourceWriterOptions object.
     /// </summary>
-    public DateTime? OverrideDate { get; set; }
-
-    internal const string ArgNameOverrideDate = "--override-utc-date-time";
-
-    /// <summary>
-    /// Binds the configuration values to the FhirResourceWriterOptions object.
-    /// </summary>
-    /// <param name="opt">The FhirResourceWriterOptions object to bind the configuration values to.</param>
+    /// <param name="opt">The CSharpResourceWriterOptions object to bind the configuration values to.</param>
     /// <param name="config">The IConfiguration object containing the configuration values.</param>
-    public static void BindConfig(FhirResourceWriterOptions opt, IConfiguration config)
+    public static void BindConfig(CSharpResourceWriterOptions opt, IConfiguration config)
     {
         var section = config.GetSection(ConfigSection);
         section.Bind(opt);
 
         // DirectoryInfos cannot be bound directly from IConfiguration, so we do it manually.
         opt.OutDirectory = GetDirectoryInfo(nameof(OutDirectory))!;
-
-        // While DateTimes can be bound directly from IConfiguration, we convert to UTC
-        opt.OverrideDate = opt.OverrideDate?.ToUniversalTime();
 
         DirectoryInfo? GetDirectoryInfo(string key)
         {

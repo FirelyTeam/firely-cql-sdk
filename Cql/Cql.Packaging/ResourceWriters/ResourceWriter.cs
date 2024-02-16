@@ -19,7 +19,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="directory">the directory</param>
         /// <param name="timeoutMs">optional override for how long to wait</param>
         /// <exception cref="InvalidOperationException"></exception>
-        protected void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
+        private protected static void EnsureDirectory(DirectoryInfo directory, int timeoutMs = 5000)
         {
             var now = DateTime.Now;
             var loop = true;

@@ -1,6 +1,7 @@
 ﻿using Hl7.Fhir.Model;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging.ResourceWriters
 {
@@ -24,6 +25,18 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         }
 
         /// <summary>
+        /// Instantiates a new resource writer
+        /// </summary>
+        /// <param name="options">the resource writer options</param>
+        /// <param name="logger">logger</param>
+        public CSharpResourceWriter(IOptions<CSharpResourceWriterOptions> options, ILogger<CSharpResourceWriter> logger)
+        {
+            var opt = options.Value;
+            _outDirectory = opt.OutDirectory ?? throw new InvalidOperationException("The CSharpResourceWriter needs a valid value for OutDirectory.");
+            _logger = logger;
+        }
+
+        /// <summary>
         /// Writes the specified resources to the output directory in the C# format
         /// </summary>
         /// <param name="resources">the resources to write</param>
@@ -32,7 +45,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
             if (_outDirectory is not { FullName: { } directoryFullName }) 
                 return;
 
-            _logger.LogInformation($"Writing C# source files to {directoryFullName}");
+            _logger.LogInformation("Writing C# source files to '{directory}'", directoryFullName);
             
             // Write out the C# source code to the desired output location
             foreach (var resource in resources)
@@ -53,7 +66,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
                         }
                         EnsureDirectory(sourceDir);
                         var filePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
-                        _logger.LogInformation("Writing '{filePath}'", filePath);
+                        _logger.LogInformation("Writing '{file}'", filePath);
                         File.WriteAllBytes(filePath, bytes);
                         break;
                     }

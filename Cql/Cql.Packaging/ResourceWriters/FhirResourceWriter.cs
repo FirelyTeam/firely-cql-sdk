@@ -50,7 +50,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
             if (_outDirectory is not { FullName: { } outDirectoryFullName }) 
                 return;
 
-            _logger.LogInformation("Writing FHIR resources to {directory}", outDirectoryFullName);
+            _logger.LogInformation("Writing FHIR resources to '{directory}'", outDirectoryFullName);
 
             foreach (var resource in resources)
             {
@@ -65,7 +65,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
                 }
 
                 var file = Path.GetFullPath(Path.Combine(outDirectoryFullName, $"{resource.Id}.json"));
-                _logger.LogInformation("Writing {file}", file);
+                _logger.LogInformation("Writing '{file}'", file);
                 using var fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Read);
                 JsonSerializer.Serialize(fs, resource, JsonSerializerOptions);
             }

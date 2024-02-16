@@ -1,10 +1,8 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using Hl7.Cql.Packaging;
+﻿using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
@@ -41,6 +39,9 @@ internal static class DependencyInjection
         FhirResourceWriterOptions fhirResourceWriterOptions = new();
         FhirResourceWriterOptions.BindConfig(fhirResourceWriterOptions, config);
 
+        CSharpResourceWriterOptions cSharpResourceWriterOptions = new();
+        CSharpResourceWriterOptions.BindConfig(cSharpResourceWriterOptions, config);
+
         List<ServiceDescriptor> resourceWritersServiceDescriptors = new(2);
 
         if (fhirResourceWriterOptions.OutDirectory is {})
@@ -52,15 +53,13 @@ internal static class DependencyInjection
                 .ValidateOnStart();
         }
 
-        if (packagerOptions.CSharpDirectory is {} csharpDir)
+        if (cSharpResourceWriterOptions.OutDirectory is {} csharpDir)
         {
-            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>(
-                sp =>
-                {
-                    var outDirectory = csharpDir;
-                    var logger = sp.GetRequiredService<ILogger<CSharpResourceWriter>>();
-                    return new CSharpResourceWriter(outDirectory, logger);
-                }));
+            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
+            services
+                .AddOptions<CSharpResourceWriterOptions>()
+                .Configure<IConfiguration>(CSharpResourceWriterOptions.BindConfig)
+                .ValidateOnStart();
         }
 
         if (resourceWritersServiceDescriptors.Count > 0)

@@ -33,20 +33,22 @@ public class Program
     private static IDictionary<string, string> BuildSwitchMappings()
     {
         const string PackageSection = PackagerOptions.ConfigSection + ":";
+        const string CSharpResourceWriterSection = CSharpResourceWriterOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
         return new SortedDictionary<string, string>
         {
             // @formatter:off
-            [PackagerOptions.ArgNameElmDirectory]     = PackageSection + nameof(PackagerOptions.ElmDirectory),
-            [PackagerOptions.ArgNameCqlDirectory]     = PackageSection + nameof(PackagerOptions.CqlDirectory),
-            [PackagerOptions.ArgNameCSharpDirectory]  = PackageSection + nameof(PackagerOptions.CSharpDirectory),
-            [PackagerOptions.ArgNameDebug]            = PackageSection + nameof(PackagerOptions.Debug),
-            [PackagerOptions.ArgNameForce]            = PackageSection + nameof(PackagerOptions.Force),
-            [PackagerOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(PackagerOptions.CanonicalRootUrl),
+            [PackagerOptions.ArgNameElmDirectory]             = PackageSection + nameof(PackagerOptions.ElmDirectory),
+            [PackagerOptions.ArgNameCqlDirectory]             = PackageSection + nameof(PackagerOptions.CqlDirectory),
+            [PackagerOptions.ArgNameDebug]                    = PackageSection + nameof(PackagerOptions.Debug),
+            [PackagerOptions.ArgNameForce]                    = PackageSection + nameof(PackagerOptions.Force),
+            [PackagerOptions.ArgNameCanonicalRootUrl]         = PackageSection + nameof(PackagerOptions.CanonicalRootUrl),
 
-            [FhirResourceWriterOptions.ArgNameOutDirectory] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
-            [FhirResourceWriterOptions.ArgNameOverrideDate] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
+            [CSharpResourceWriterOptions.ArgNameOutDirectory] = CSharpResourceWriterSection + nameof(CSharpResourceWriterOptions.OutDirectory),
+
+            [FhirResourceWriterOptions.ArgNameOutDirectory]   = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+            [FhirResourceWriterOptions.ArgNameOverrideDate]   = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
             // @formatter:on
         };
     }
