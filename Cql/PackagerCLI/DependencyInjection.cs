@@ -28,39 +28,37 @@ internal static class DependencyInjection
         services.AddSingleton<IValidateOptions<PackagerOptions>, PackagerOptions.Validator>();
     }
 
-    public static void AddResourcePackager(this IServiceCollection services)
+    public static void AddResourcePackager(this IServiceCollection services, IConfiguration config)
     {
         services.TryAddPackagerOptions();
         services.TryAddSingleton<ResourcePackager>();
 
-        var unvalidatedPackagerOptions = TryGetPackagerOptions(services);
-        if (unvalidatedPackagerOptions != null)
+        var unvalidatedPackagerOptions = TryGetPackagerOptions(config);
+        List<ServiceDescriptor> descriptors = new(2);
+
+        if (unvalidatedPackagerOptions.FhirDirectory is {} fhirDir)
         {
-            List<ServiceDescriptor> descriptors = new(2);
+            services.TryAddKeyedSingleton("Fhir", fhirDir);
+            descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, FhirResourceWriter>());
+        }
 
-            if (unvalidatedPackagerOptions.FhirDirectory is {} fhirDir)
-            {
-                services.TryAddKeyedSingleton("Fhir", fhirDir);
-                descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, FhirResourceWriter>());
-            }
+        if (unvalidatedPackagerOptions.CSharpDirectory is {} csharpDir)
+        {
+            services.TryAddKeyedSingleton("CSharp", csharpDir);
+            descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
+        }
 
-            if (unvalidatedPackagerOptions.CSharpDirectory is {} csharpDir)
-            {
-                services.TryAddKeyedSingleton("CSharp", csharpDir);
-                descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
-            }
-
-            if (descriptors.Count > 0)
-            {
-                services.TryAddEnumerable(descriptors);
-            }
+        if (descriptors.Count > 0)
+        {
+            services.TryAddEnumerable(descriptors);
         }
     }
 
-    private static PackagerOptions? TryGetPackagerOptions(IServiceCollection services)
+    private static PackagerOptions TryGetPackagerOptions(IConfiguration config)
     {
-        using var sp = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = false, ValidateScopes = false });
-        var opt = sp.GetService<IOptions<PackagerOptions>>();
-        return opt?.Value;
+        PackagerOptions opt = new();
+        config.GetSection(PackagerOptions.ConfigSection).Bind(opt);
+        PackagerOptions.BindDirectoryInfos(config, opt);
+        return opt;
     }
 }

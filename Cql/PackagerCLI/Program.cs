@@ -55,7 +55,7 @@ public class Program
     static void ConfigureServices(HostBuilderContext hostContext, IServiceCollection services)
     {
         services.AddPackagerServices();
-        services.AddResourcePackager();
+        services.AddResourcePackager(hostContext.Configuration);
     }
 
     private static int Run(IHostBuilder hostBuilder)
