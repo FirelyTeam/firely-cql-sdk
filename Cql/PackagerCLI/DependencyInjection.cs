@@ -4,63 +4,68 @@ using Hl7.Cql.Packaging.ResourceWriters;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
 
 internal static class DependencyInjection
 {
-    public static void AddPackagerServices(this IServiceCollection services)
+    public static void AddPackagerServices(this IServiceCollection services, IConfiguration config)
     {
-        services.TryAddPackagerOptions();
+        services.TryAddPackagerOptions(config);
         services.TryAddTransient<PackagerService>();
     }
 
-    private static void TryAddPackagerOptions(this IServiceCollection services)
+    private static void TryAddPackagerOptions(this IServiceCollection services, IConfiguration config)
     {
         if (services.Any(s => s.ServiceType == typeof(IValidateOptions<PackagerOptions>)))
             return;
 
-        services.AddOptions<PackagerOptions>()
-            .BindConfiguration(PackagerOptions.ConfigSection)
-            .Configure<IConfiguration>((opt, config) => { PackagerOptions.BindDirectoryInfos(config, opt); })
+        services
+            .AddOptions<PackagerOptions>()
+            .Configure<IConfiguration>(PackagerOptions.BindConfig)
             .ValidateOnStart();
+
         services.AddSingleton<IValidateOptions<PackagerOptions>, PackagerOptions.Validator>();
     }
 
-    public static void AddResourcePackager(this IServiceCollection services)
+    public static void AddResourcePackager(this IServiceCollection services, IConfiguration config)
     {
-        services.TryAddPackagerOptions();
+        services.TryAddPackagerOptions(config);
         services.TryAddSingleton<ResourcePackager>();
 
-        var unvalidatedPackagerOptions = TryGetPackagerOptions(services);
-        if (unvalidatedPackagerOptions != null)
+        PackagerOptions packagerOptions = new();
+        PackagerOptions.BindConfig(packagerOptions, config);
+
+        FhirResourceWriterOptions fhirResourceWriterOptions = new();
+        FhirResourceWriterOptions.BindConfig(fhirResourceWriterOptions, config);
+
+        List<ServiceDescriptor> resourceWritersServiceDescriptors = new(2);
+
+        if (fhirResourceWriterOptions.OutDirectory is {})
         {
-            List<ServiceDescriptor> descriptors = new(2);
-
-            if (unvalidatedPackagerOptions.FhirDirectory is {} fhirDir)
-            {
-                services.TryAddKeyedSingleton("Fhir", fhirDir);
-                descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, FhirResourceWriter>());
-            }
-
-            if (unvalidatedPackagerOptions.CSharpDirectory is {} csharpDir)
-            {
-                services.TryAddKeyedSingleton("CSharp", csharpDir);
-                descriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>());
-            }
-
-            if (descriptors.Count > 0)
-            {
-                services.TryAddEnumerable(descriptors);
-            }
+            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, FhirResourceWriter>());
+            services
+                .AddOptions<FhirResourceWriterOptions>()
+                .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
+                .ValidateOnStart();
         }
-    }
 
-    private static PackagerOptions? TryGetPackagerOptions(IServiceCollection services)
-    {
-        using var sp = services.BuildServiceProvider(new ServiceProviderOptions { ValidateOnBuild = false, ValidateScopes = false });
-        var opt = sp.GetService<IOptions<PackagerOptions>>();
-        return opt?.Value;
+        if (packagerOptions.CSharpDirectory is {} csharpDir)
+        {
+            resourceWritersServiceDescriptors.Add(ServiceDescriptor.Singleton<ResourceWriter, CSharpResourceWriter>(
+                sp =>
+                {
+                    var outDirectory = csharpDir;
+                    var logger = sp.GetRequiredService<ILogger<CSharpResourceWriter>>();
+                    return new CSharpResourceWriter(outDirectory, logger);
+                }));
+        }
+
+        if (resourceWritersServiceDescriptors.Count > 0)
+        {
+            services.TryAddEnumerable(resourceWritersServiceDescriptors);
+        }
     }
 }

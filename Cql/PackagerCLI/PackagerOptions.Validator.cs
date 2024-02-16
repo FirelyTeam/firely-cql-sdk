@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
 
@@ -14,18 +13,10 @@ partial class PackagerOptions
 
             var elm = (ArgNameElmDirectory, options.ElmDirectory);
             var cql = (ArgNameCqlDirectory, options.CqlDirectory);
-            var cs = (ArgNameCSharpDirectory, options.CSharpDirectory);
-            var fhir = (ArgNameFhirDirectory, options.FhirDirectory);
 
             _ = ValidateRequired(elm) && ValidateDirectoryExists(elm);
 
             _ = ValidateRequired(cql) && ValidateDirectoryExists(cql);
-
-            Task.WhenAll(
-                    CreateDirectoryIfNotExistsAsync(cs),
-                    CreateDirectoryIfNotExistsAsync(fhir))
-                .GetAwaiter().GetResult();
-
 
             var result = builder?.Build() ?? ValidateOptionsResult.Success;
             return result;
@@ -46,36 +37,6 @@ partial class PackagerOptions
                 if (arg.value is { Exists: false } dir)
                 {
                     AddError($"{arg.name}: directory '{dir}' does not exist.");
-                    return false;
-                }
-
-                return true;
-            }
-
-            async Task<bool> CreateDirectoryIfNotExistsAsync((string name, DirectoryInfo? value) arg)
-            {
-                if (arg.value is { Exists: false } dir)
-                {
-                    Stopwatch sw = Stopwatch.StartNew();
-                    try
-                    {
-                        while (sw.ElapsedMilliseconds < 5000)
-                        {
-                            dir.Create();
-                            dir.Refresh();
-                            if (dir.Exists)
-                                return true;
-
-                            await Task.Delay(250);
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        AddError($"{arg.name}: directory '{dir}' could not be created: {e.Message}");
-                        return false;
-                    }
-
-                    AddError($"{arg.name}: directory '{dir}' could not be created.");
                     return false;
                 }
 

@@ -29,4 +29,10 @@
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<Compile Update="PackagerOptions.*.cs">
+			<DependentUpon>PackagerOptions.cs</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
 </Project>

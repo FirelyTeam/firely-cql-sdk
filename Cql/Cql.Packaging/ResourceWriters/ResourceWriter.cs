@@ -1,5 +1,4 @@
 ﻿using Hl7.Fhir.Model;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging.ResourceWriters
 {
@@ -8,27 +7,6 @@ namespace Hl7.Cql.Packaging.ResourceWriters
     /// </summary>
     public abstract class ResourceWriter
     {
-        /// <summary>
-        /// Instantiates a new resource writer for the given directory
-        /// </summary>
-        /// <param name="outDirectory">directory to write to</param>
-        /// <param name="logger">logger</param>
-        protected ResourceWriter(DirectoryInfo outDirectory, ILogger logger)
-        {
-            OutDirectory = outDirectory;
-            Logger = logger;
-        }
-
-        /// <summary>
-        /// Directory to write to
-        /// </summary>
-        protected DirectoryInfo OutDirectory { get; }
-
-        /// <summary>
-        /// Logger
-        /// </summary>
-        protected ILogger Logger { get; }
-
         /// <summary>
         /// Writes the given resources to the specified output directory
         /// </summary>
