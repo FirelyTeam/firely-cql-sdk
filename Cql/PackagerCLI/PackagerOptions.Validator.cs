@@ -9,7 +9,6 @@ partial class PackagerOptions
         public ValidateOptionsResult Validate(string? name, PackagerOptions options)
         {
             ValidateOptionsResultBuilder? builder = null;
-            SemaphoreSlim slimLock = new(initialCount: 1, maxCount: 1);
 
             var elm = (ArgNameElmDirectory, options.ElmDirectory);
             var cql = (ArgNameCqlDirectory, options.CqlDirectory);
@@ -43,20 +42,8 @@ partial class PackagerOptions
                 return true;
             }
 
-            void AddError(string message)
-            {
-                if (!slimLock.Wait(Timeout.Infinite))
-                    throw new InvalidOperationException("Failed to acquire lock.");
-
-                try
-                {
-                    (builder ??= new()).AddError(message);
-                }
-                finally
-                {
-                    slimLock.Release();
-                }
-            }
+            void AddError(string message) => 
+                (builder ??= new()).AddError(message);
         }
     }
 }
