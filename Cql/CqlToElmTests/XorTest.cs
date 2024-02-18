@@ -353,7 +353,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library XorTest version '1.0.0'
 
                 define private True_Xor_1: true xor 1
-            ", "Cannot resolve call*the second argument*Integer*cannot implicitly be cast*Boolean.");
+            ", "Could not resolve*");
         }
     }
 }

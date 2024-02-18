@@ -289,11 +289,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // All 3 of error cases in this 
             return symbolDef switch
             {
-                OverloadedFunctionDef overloads => initializeFunctionRef(overloads, libraryName, paramList, fluent),
-                FunctionDef funcDef => initializeFunctionRef(funcDef, libraryName, paramList, fluent),
+                OverloadedFunctionDef overloadedDef => initializeOverload(overloadedDef, libraryName, paramList, fluent),
+                FunctionDef function => initializeFunctionRef(function, libraryName, paramList, fluent),
                 ExpressionDef => error($"Operator {funcName} is not a function and must not be called with ()."),
                 _ => unresolved()
-            }; ;
+            };
 
             FunctionRef error(string msg) => new FunctionRef { name = funcName, operand = paramList }
                 .WithResultType(SystemTypes.AnyType)
@@ -302,31 +302,35 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType(SystemTypes.AnyType)
                     .AddUnresolvedOperatorError(funcName, paramList.Select(p => p.resultTypeSpecifier).ToArray());
 
+            Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] arguments, bool fluent)
+            {
+                var funcRef = InvocationBuilder.Invoke(funcDef, libraryName, arguments);
+                if (funcRef is FunctionRef fr)
+                    fr.libraryName = libraryName;
+                if (fluent && !funcDef.fluent)
+                    funcRef.AddError($"Function '{funcDef.name}' is called fluently, but its definition is not marked as fluent.");
+                return funcRef;
+            }
+            Expression initializeOverload(OverloadedFunctionDef function, string? libraryName, Expression[] arguments, bool fluent)
+            {
+                var result = InvocationBuilder.SelectBestOverload(function, arguments);
+                if (result.Compatible)
+                {
+                    var expression = InvocationBuilder.Invoke(result.Function, libraryName, arguments);
+                    if (fluent && !result.Function.fluent)
+                        expression.AddError($"Function '{result.Function.name}' is called fluently, but its definition is not marked as fluent.");
+                    return expression;
+                }
+                else 
+                    return new FunctionRef()
+                    {
+                        name = function.Name,
+                        libraryName = libraryName,
+                    }
+                    .AddError(result.Error ?? throw new InvalidOperationException($"No compatible overload was found, but no error message was populated."));
+            }
         }
 
-        private Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] paramList, bool fluent)
-        {
-            var funcRef = funcDef.Call(InvocationBuilder, null, paramList);
-
-            if (funcRef is FunctionRef fr)
-                fr.libraryName = libraryName;
-
-            if (fluent && !funcDef.fluent)
-                funcRef.AddError($"Function '{funcDef.name}' is called fluently, but its definition is not marked as fluent.");
-
-            return funcRef;
-        }
-        private Expression initializeFunctionRef(OverloadedFunctionDef funcDef, string? libraryName, Expression[] paramList, bool fluent)
-        {
-            var funcRef = funcDef.Call(InvocationBuilder, null, paramList, out var selectedOverload);
-            if (funcRef is FunctionRef fr)
-                fr.libraryName = libraryName;
-            if (selectedOverload == null)
-                funcRef.AddError($"Unable to resolve overload for {funcDef.Name} with arguments {paramList.Select(p => p.resultTypeSpecifier)}");
-            else if (fluent && !selectedOverload.fluent)
-                funcRef.AddError($"Function '{selectedOverload.name}' is called fluently, but its definition is not marked as fluent.");
-            return funcRef;
-        }
 
 
         // paramList : expression(',' expression)*

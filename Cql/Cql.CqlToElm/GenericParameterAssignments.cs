@@ -6,14 +6,16 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Elm;
 using System.Collections.Generic;
 
-namespace Hl7.Cql.Elm
+namespace Hl7.Cql.CqlToElm
 {
     /// <summary>
     /// A list of assignments of concrete types to generic parameters.
     /// </summary>
-    public class GenericParameterAssignments : Dictionary<ParameterTypeSpecifier, TypeSpecifier>
+    internal class GenericParameterAssignments : Dictionary<GenericTypeSpecifier, TypeSpecifier>
     {
         /// <inheritdoc/>
         public GenericParameterAssignments()
@@ -21,14 +23,14 @@ namespace Hl7.Cql.Elm
         }
 
         /// <inheritdoc/>
-        public GenericParameterAssignments(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> collection) : base(collection)
+        public GenericParameterAssignments(IEnumerable<KeyValuePair<GenericTypeSpecifier, TypeSpecifier>> collection) : base(collection)
         {
         }
 
         /// <summary>
         /// Construct a new set of assignments with a single initial assignment.
         /// </summary>
-        public GenericParameterAssignments(ParameterTypeSpecifier key, TypeSpecifier value)
+        public GenericParameterAssignments(GenericTypeSpecifier key, TypeSpecifier value)
         {
             Add(key, value);
         }
@@ -36,7 +38,7 @@ namespace Hl7.Cql.Elm
         /// <summary>
         /// Adds a range of assignments to the list.    
         /// </summary>
-        public void AddRange(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> items)
+        public void AddRange(IEnumerable<KeyValuePair<GenericTypeSpecifier, TypeSpecifier>> items)
         {
             foreach (var item in items)
                 Add(item.Key, item.Value);
@@ -46,7 +48,7 @@ namespace Hl7.Cql.Elm
         /// Replaces assignments in the current set with those in <paramref name="items"/> and leaves the
         /// rest unchanged.
         /// </summary>
-        public void Replace(IEnumerable<KeyValuePair<ParameterTypeSpecifier, TypeSpecifier>> items)
+        public void Replace(IEnumerable<KeyValuePair<GenericTypeSpecifier, TypeSpecifier>> items)
         {
             foreach (var item in items)
             {

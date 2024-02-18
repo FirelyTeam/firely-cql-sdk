@@ -42,6 +42,19 @@ namespace Hl7.Cql.CqlToElm.Test
             literal.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
         }
 
+        public static void BeNullAs(this ObjectAssertions l, TypeSpecifier type)
+        {
+            var @as = l.Subject.Should().BeOfType<As>().Subject;
+            @as.asTypeSpecifier.Should().Be(type);
+            @as.resultTypeSpecifier.Should().Be(type);
+            if (type is NamedTypeSpecifier nts)
+            {
+                @as.asType.Should().Be(nts.name);
+                @as.resultTypeName.Should().Be(nts.name);
+            }
+
+        }
+
         public static void BeLiteralInteger(this ObjectAssertions l, int i)
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
@@ -60,6 +73,19 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var literal = l.Subject.Should().BeOfType<Null>().Subject;
             literal.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
+        }
+
+        public static void HaveType(this ObjectAssertions l, TypeSpecifier type)
+        {
+            if (l.Subject is Expression subject)
+            {
+                subject.resultTypeSpecifier.Should().Be(type);
+                if (type is NamedTypeSpecifier nts)
+                {
+                    subject.resultTypeName.Should().Be(nts.name);
+                }
+            }
+            else Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("Subject is not an Expression");
         }
 
         public static T ShouldReportError<T>(this T e, params string[] errorTexts) where T : Element

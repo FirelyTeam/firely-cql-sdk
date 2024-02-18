@@ -11,8 +11,6 @@ namespace CoreTests.Elm
         {
             element = new[]
           {
-                    new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier { parameterName = "A" } },
-                    new TupleElementDefinition { name = "typeParam2", elementType = SystemTypes.T },
                     new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier { elementType = new ParameterTypeSpecifier { parameterName = "B" } } },
                     new TupleElementDefinition { name = "interval", elementType = new IntervalTypeSpecifier { pointType = new ParameterTypeSpecifier { parameterName = "C" } } },
                     new TupleElementDefinition { name = "interval2", elementType = new IntervalTypeSpecifier { pointType = new ParameterTypeSpecifier { parameterName = "C" } } },
@@ -25,7 +23,6 @@ namespace CoreTests.Elm
         {
             element = new[]
             {
-                    new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier() },
                     new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier()},
                     new TupleElementDefinition { name = "interval", elementType = new IntervalTypeSpecifier()},
                     new TupleElementDefinition { name = "interval2", elementType = new IntervalTypeSpecifier()},

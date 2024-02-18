@@ -183,8 +183,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var result = TypeConverter.Convert(defaultExpr, type);
 
-                if (result.Errors.Any())
-                    return result.Expression;
+                if (result.Error != null)
+                    return result.Result;
                 else
                     return defaultExpr.AddError($"Expected an expression of type '{type}', but found an expression of type '{defaultExpr.resultTypeSpecifier}'.");
             }
@@ -258,7 +258,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var expressionType = functionDef.expression.resultTypeSpecifier;
                 if (returnType is not null)
                 {
-                    if (!expressionType.IsSubtypeOf(returnType, ModelProvider))
+                    var result = TypeConverter.Convert(functionDef.expression, returnType);
+                    if (!result.Success)
                         functionDef.AddError($"Function {functionDef.name} has declared return type {returnType} but " +
                             $"the function body returns incompatible type {expressionType}.");
 
@@ -360,7 +361,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 templateId = ModelProvider.GetDefaultProfileUriForType(resultType),
             }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType());
 
-            var singleton = SystemLibrary.SingletonFrom.Call(InvocationBuilder, statementContext, retrieve);
+            var singleton = InvocationBuilder.Invoke(SystemLibrary.SingletonFrom, retrieve);
             var (_, exprName) = resultType;
             var exprDef = new ExpressionDef
             {

@@ -223,7 +223,7 @@ namespace Hl7.Cql.Elm
         public string Name { get; }
         public AccessModifier Access { get; }
 
-        private OverloadedFunctionDef(FunctionDef[] functions, 
+        internal OverloadedFunctionDef(FunctionDef[] functions, 
             string name, 
             AccessModifier access)
         {

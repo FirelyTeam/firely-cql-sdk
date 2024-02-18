@@ -11,22 +11,9 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context)
+        public static void Initialize(TestContext context) => ClassInitialize();
 #pragma warning restore IDE0060 // Remove unused parameter
-        {
-            var services = new ServiceCollection()
-                .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
-                .AddConfiguration(cb => cb.WithDefaultOptions())
-                .AddLogging(builder => builder
-                    .AddConsole()
-                    .ThrowOn(LogLevel.Error))
-                .AddScoped<InvocationBuilder>()
-                .AddScoped<CqlToElmConverter>();
-            Services = services.BuildServiceProvider();
-        }
+  
 
         protected override Library ConvertLibrary(string cql)
         {

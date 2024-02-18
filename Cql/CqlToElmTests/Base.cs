@@ -114,6 +114,23 @@ namespace Hl7.Cql.CqlToElm.Test
                 throw ex.InnerException!;
             }
         }
+        public void AssertNullResult(Expression be)
+        {
+            var lambda = ExpressionBuilder.Lambda(@be);
+            var dg = lambda.Compile();
+            var ctx = FhirCqlContext.ForBundle();
+
+            try
+            {
+                var result = dg.DynamicInvoke(ctx);
+                Assert.IsNull(result);
+            }
+            catch (TargetInvocationException ex)
+            {
+                throw ex.InnerException!;
+            }
+        }
+
 
         protected void AssertIntervalType(TypeSpecifier specifier, string pointTypeName)
         {
@@ -191,6 +208,14 @@ namespace Hl7.Cql.CqlToElm.Test
             for (int i = 0; i < expectedValues.Length; i++)
                 Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
 
+        }
+
+        protected Library createLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        {
+            return MakeLibrary($@"
+                library AsTest version '1.0.0'
+
+                define private ""{memberName}"": {expression}");
         }
     }
 }

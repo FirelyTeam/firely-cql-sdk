@@ -10,6 +10,7 @@ using Hl7.Cql.Model;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 
+
 namespace Hl7.Cql.Elm
 {
     /// <summary>
@@ -41,16 +42,6 @@ namespace Hl7.Cql.Elm
         };
 
         private static readonly ConcurrentDictionary<string, ParameterTypeSpecifier> gtpTsSingletons = new();
-
-        internal static readonly ParameterTypeSpecifier T = Generic("T");
-
-        /// <summary>
-        /// Creates a <see cref="ParameterTypeSpecifier"/> with the given name.
-        /// </summary>
-        /// <remarks>Will return the same instance for two generic parameters with the same name.</remarks>
-        internal static ParameterTypeSpecifier Generic(string name) =>
-            gtpTsSingletons.GetOrAdd(name, n => new ParameterTypeSpecifier { parameterName = n });
-
         /// <summary>
         /// Create a new instance of a NamedType, given the name of a system type.
         /// </summary>

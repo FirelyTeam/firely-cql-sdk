@@ -16,8 +16,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            var and = SystemLibrary.And.Call(InvocationBuilder, context, lhs, rhs);
-            return and;
+            var and = InvocationBuilder.Invoke(SystemLibrary.And, lhs, rhs);
+            return and
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // expressionTerm('+' | '-' | '&') expressionTerm                               #additionExpressionTerm
@@ -28,16 +30,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(terms[1]);
 
-            Expression result =
-                @operator switch
-                {
-                    "+" => SystemLibrary.Add.Call(InvocationBuilder, context, new[] { lhs, rhs, }, out var _a),
-                    "-" => SystemLibrary.Subtract.Call(InvocationBuilder, context, new[] { lhs, rhs, }, out var _s),
-                    "&" => SystemLibrary.Concatenate.Call(InvocationBuilder, context, lhs, rhs),
-                    _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
-                };
-
-            return result;
+            var invocation = @operator switch
+            {
+                "+" => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
+                "-" => InvocationBuilder.Invoke(SystemLibrary.Subtract, lhs, rhs),
+                "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
+            };
+            return invocation
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
@@ -57,14 +59,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(expressions[1]);
 
-            return @operator switch
+            var expression = @operator switch
             {
-                "=" => (Expression)SystemLibrary.Equal.Call(InvocationBuilder, context, lhs, rhs),
-                "!=" => (Expression)SystemLibrary.NotEqual.Call(InvocationBuilder, context, lhs, rhs),
-                "~" => (Expression)SystemLibrary.Equivalent.Call(InvocationBuilder, context, lhs, rhs),
-                "!~" => (Expression)SystemLibrary.Not.Call(InvocationBuilder, context, SystemLibrary.Equivalent.Call(InvocationBuilder, context, lhs, rhs)),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression."),
+                "=" => InvocationBuilder.Invoke(SystemLibrary.Equal, lhs, rhs),
+                "!=" => InvocationBuilder.Invoke(SystemLibrary.NotEqual, lhs, rhs),
+                "~" => InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs),
+                "!~" => InvocationBuilder.Invoke(SystemLibrary.Not, lhs, rhs),
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression.")
             };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //  expression 'implies' expression                                                               #impliesExpression
@@ -74,7 +79,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            return SystemLibrary.Implies.Call(InvocationBuilder, context, lhs, rhs);
+            return InvocationBuilder.Invoke(SystemLibrary.Implies, lhs, rhs)
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //    | expression ('<=' | '<' | '>' | '>=') expression                                               #inequalityExpression
@@ -87,14 +94,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                ">" => SystemLibrary.Greater.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
-                ">=" => SystemLibrary.GreaterOrEqual.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
-                "<" => SystemLibrary.Less.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
-                "<=" => SystemLibrary.LessOrEqual.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
+                ">" => InvocationBuilder.Invoke(SystemLibrary.Greater, lhs, rhs),
+                ">=" => InvocationBuilder.Invoke(SystemLibrary.GreaterOrEqual, lhs, rhs),
+                "<" => InvocationBuilder.Invoke(SystemLibrary.Less, lhs, rhs),
+                "<=" => InvocationBuilder.Invoke(SystemLibrary.LessOrEqual, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in inequality expression."),
             };
 
-            return result;
+            return result
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // | expressionTerm ('*' | '/' | 'div' | 'mod') expressionTerm                     #multiplicationExpressionTerm
@@ -105,14 +114,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(expressionTerms[1]);
 
-            return @operator switch
+            var expression = @operator switch
             {
-                "*" => SystemLibrary.Multiply.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
-                "/" => SystemLibrary.Divide.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
-                "div" => SystemLibrary.TruncatedDivide.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
-                "mod" => SystemLibrary.Modulo.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression."),
+                "*" => InvocationBuilder.Invoke(SystemLibrary.Multiply, lhs, rhs),
+                "/" => InvocationBuilder.Invoke(SystemLibrary.Divide, lhs, rhs),
+                "div" => InvocationBuilder.Invoke(SystemLibrary.TruncatedDivide, lhs, rhs),
+                "mod" => InvocationBuilder.Invoke(SystemLibrary.Modulo, lhs, rhs),
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression.")
             };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
+
         }
 
         //     | expression ('or' | 'xor') expression                                                          #orExpression
@@ -125,12 +138,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                "or" => SystemLibrary.Or.Call(InvocationBuilder, context, lhs, rhs),
-                "xor" => SystemLibrary.Xor.Call(InvocationBuilder, context, lhs, rhs),
+                "or" => InvocationBuilder.Invoke(SystemLibrary.Or, lhs, rhs),
+                "xor" => InvocationBuilder.Invoke(SystemLibrary.Xor, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in (x)or expression.")
             };
 
-            return result;
+            return result
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //| expressionTerm '^' expressionTerm                                             #powerExpressionTerm
@@ -140,7 +155,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
 
-            return SystemLibrary.Power.Call(InvocationBuilder, context, new[] { lhs, rhs }, out var _);
+            return InvocationBuilder.Invoke(SystemLibrary.Power, lhs, rhs)
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         public override Expression VisitIndexedExpressionTerm([NotNull] cqlParser.IndexedExpressionTermContext context)
@@ -171,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             return indexer
                 .WithLocator(context.Locator())
-                .WithResultType(type);               
+                .WithResultType(type);
         }
 
 

@@ -2,6 +2,7 @@
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NuGet.Frameworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,8 +15,6 @@ namespace Hl7.Cql.CqlToElm.Test
     public class TypeConverterTests : Base
     {
         internal static TypeConverter TypeConverter => Services.GetRequiredService<TypeConverter>();
-
-
 
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -49,8 +48,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Integer();
             var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.ExactMatch, result.TotalCost);
+            Assert.AreSame(expression, result.Result);
+            Assert.AreEqual(ConversionCost.ExactMatch, result.Cost);
         }
 
         [TestMethod]
@@ -59,8 +58,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = new Null().WithResultType(Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             var result = TypeConverter.Convert(expression, Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.ExactMatch, result.TotalCost);
+            Assert.AreSame(expression, result.Result);
+            Assert.AreEqual(ConversionCost.ExactMatch, result.Cost);
         }
 
         [TestMethod]
@@ -70,8 +69,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var tupleType = TupleType(("y", SystemTypes.IntegerType), ("x", SystemTypes.IntegerType));
             var result = TypeConverter.Convert(expression, tupleType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.ExactMatch, result.TotalCost);
+            Assert.AreSame(expression, result.Result);
+            Assert.AreEqual(ConversionCost.ExactMatch, result.Cost);
         }
 
         [TestMethod]
@@ -89,8 +88,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // <ns4:typeInfo xsi:type="ns4:SimpleTypeInfo" name="System.Integer" baseType="System.Any"/>
             var result = TypeConverter.Convert(expression, SystemTypes.AnyType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.Subtype, result.TotalCost);
+            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
         }
 
         [TestMethod]
@@ -118,8 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // <ns4:typeInfo xsi:type="ns4:ClassInfo" name="System.ValueSet" baseType="System.Vocabulary"/>
             var result = TypeConverter.Convert(expression, SystemTypes.VocabularyType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.Subtype, result.TotalCost);
+            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
         }
 
         [TestMethod]
@@ -130,8 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // <ns4:typeInfo xsi:type="ns4:ClassInfo" name="System.Vocabulary" baseType="System.Any">
             var result = TypeConverter.Convert(expression, SystemTypes.AnyType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.Subtype, result.TotalCost);
+            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
         }
 
         [TestMethod]
@@ -140,8 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Integer();
             var result = TypeConverter.Convert(expression, Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.Compatible, result.TotalCost);
+            Assert.AreEqual(ConversionCost.Compatible, result.Cost);
         }
 
         [TestMethod]
@@ -150,8 +145,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = new Null().WithResultType(Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             var result = TypeConverter.Convert(expression, Choice(SystemTypes.IntegerType, SystemTypes.DecimalType));
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.Compatible, result.TotalCost);
+            Assert.AreEqual(ConversionCost.Compatible, result.Cost);
         }
 
         [TestMethod]
@@ -160,8 +154,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Null();
             var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.Compatible, result.TotalCost);
+            Assert.AreEqual(ConversionCost.Compatible, result.Cost);
         }
 
         [TestMethod]
@@ -170,8 +163,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Integer();
             var result = TypeConverter.Convert(expression, SystemTypes.LongType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.ImplicitToSimpleType, result.TotalCost);
+            Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.Cost);
         }
 
         [TestMethod]
@@ -180,8 +172,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Integer();
             var result = TypeConverter.Convert(expression, SystemTypes.IntegerType.ToIntervalType());
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.IntervalPromotion, result.TotalCost);
+            Assert.AreEqual(ConversionCost.IntervalPromotion, result.Cost);
         }
 
         [TestMethod]
@@ -190,8 +181,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Integer();
             var result = TypeConverter.Convert(expression, SystemTypes.IntegerType.ToListType());
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.ListPromotion, result.TotalCost);
+            Assert.AreEqual(ConversionCost.ListPromotion, result.Cost);
         }
 
         [TestMethod]
@@ -200,8 +190,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = Interval(Integer(1), Integer(2));
             var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.IntervalDemotion, result.TotalCost);
+            Assert.AreEqual(ConversionCost.IntervalDemotion, result.Cost);
         }
         [TestMethod]
         public void ListCanBeDemoted()
@@ -209,8 +198,17 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = List(SystemTypes.IntegerType, Integer(1), Integer(2));
             var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreSame(expression, result.Expression);
-            Assert.AreEqual((int)ConversionCost.ListDemotion, result.TotalCost);
+            Assert.AreEqual(ConversionCost.ListDemotion, result.Cost);
         }
+        [TestMethod]
+        public void IntegerPromotedToDecimal()
+        {
+            var expression = Integer(2);
+            var result = TypeConverter.Convert(expression, SystemTypes.DecimalType);
+            Assert.IsTrue(result.Success);
+            Assert.IsInstanceOfType(result.Result, typeof(ToDecimal));
+            Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.Cost);
+        }
+
     }
 }

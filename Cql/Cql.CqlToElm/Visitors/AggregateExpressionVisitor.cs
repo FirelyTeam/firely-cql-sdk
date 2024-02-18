@@ -45,7 +45,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var per = Visit(expressions[1]);
                 if (per is Literal literal)
-                    per = SystemLibrary.ToQuantity.Call(InvocationBuilder, context, new[] { per }, out var overload);
+                    per = InvocationBuilder.Invoke(SystemLibrary.ToQuantity, per)
+                        .WithLocator(expressions[1].Locator());
                      
                 return keyword switch
                 {

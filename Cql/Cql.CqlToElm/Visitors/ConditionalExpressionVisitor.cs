@@ -16,10 +16,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var then = Visit(context.expression(1));
             var @else = Visit(context.expression(2));
 
-            return SystemLibrary.If.Call(InvocationBuilder, context, condition, then, @else);
+            var @if = InvocationBuilder.If(condition, then, @else);
+            return @if
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //     | 'case' expression? caseExpressionItem+ 'else' expression 'end'                #caseExpressionTerm
+        // TODO: refactor case terms into the InvocationBuilder?
         public override Expression VisitCaseExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.CaseExpressionTermContext context)
         {
             var expressions = context.expression();
@@ -36,8 +40,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
             {
-                return (Case)SystemLibrary.Case.CreateElmNode()
-                    .AddError($"Case statements should contain 1 or 2 expressions, not {expressions.Length}");
+                return new Case()
+                    .AddError($"Case statements should contain 1 or 2 expressions, not {expressions.Length}")
+                    .WithId()
+                    .WithLocator(context.Locator());
             }
             var caseItems = context.caseExpressionItem()
                 .Select(item =>
@@ -56,7 +62,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         var when = Visit(item.expression(0));
                         var whenCastResult = TypeConverter.Convert(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType);
                         if (whenCastResult.Success)
-                            caseItem.when = whenCastResult.Expression;
+                            caseItem.when = whenCastResult.Result;
                         else if (whenCastResult.Error is not null)
                             caseItem.AddError(whenCastResult.Error);
 
@@ -83,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var thenCastResult = TypeConverter.Convert(then, returnType);
                 if (thenCastResult.Success)
                 {
-                    item.then = thenCastResult.Expression;
+                    item.then = thenCastResult.Result;
                     item.resultTypeSpecifier = item.then.resultTypeSpecifier;
                 }
                 else if (thenCastResult.Error is not null)
@@ -91,11 +97,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             var elseCastResult = TypeConverter.Convert(@else, returnType);
             if (elseCastResult.Success)
-                @else = elseCastResult.Expression;
+                @else = elseCastResult.Result;
             else if (elseCastResult.Error is not null)
                 @else.AddError(elseCastResult.Error);
-            
-            return SystemLibrary.Case.Call(InvocationBuilder, context, comparand, caseItems, @else);
+
+            return InvocationBuilder.Case(comparand, caseItems, @else)
+                .WithId()
+                .WithLocator(context.Locator());
         }
     }
 }

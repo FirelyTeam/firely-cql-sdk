@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
@@ -26,15 +27,115 @@ namespace Hl7.Cql.CqlToElm
         public IModelProvider ModelProvider { get; }
         public CqlToElmOptions Options { get; }
 
+
         public ConversionResult<Expression> Convert(Expression expression, TypeSpecifier to)
         {
+            // Checking the cost also determines the kind of conversion, if any, we can do.
             var cost = GetConversionCost(expression.resultTypeSpecifier, to);
-            if (cost == ConversionCost.Incompatible)
-                return new(expression, cost, IncompatibilityMessage(expression.resultTypeSpecifier, to));
-            else
-                return new(expression, cost);
+            // Next we apply the conversion.  
+            return cost switch
+            {
+                ConversionCost.ExactMatch => new(expression, cost),
+                // Usually, it is a non-strict As, which has the effect of retyping the expression.
+                ConversionCost.Subtype => new(As(expression, to), cost),
+                ConversionCost.Compatible => new(As(expression, to), cost),
+                ConversionCost.Cast => new(As(expression, to), cost),
+                ConversionCost.ImplicitToSimpleType => new(ImplicitCastToSimple(expression, to), cost),
+                ConversionCost.ImplicitToClassType => new(ImplicitCastToClass(expression, to), cost),
+                // For promotions and demotions, it involves constructing other expressions.
+                ConversionCost.IntervalPromotion when to is IntervalTypeSpecifier toInterval => new(ToInterval(expression, toInterval), cost),
+                ConversionCost.ListDemotion => new(FromList(expression, to), cost),
+                ConversionCost.IntervalDemotion => new(FromInterval(expression, to), cost),
+                ConversionCost.ListPromotion when to is ListTypeSpecifier toList => new(ToList(expression, toList), cost),
+                // For incompatible conversions, the expression remains unchanged.
+                ConversionCost.Incompatible => new(expression, cost, IncompatibilityMessage(expression.resultTypeSpecifier, to)),
+                _ => throw new InvalidOperationException($"Unexpected cost: {Enum.GetName(cost)}")
+            };
+
+            // These are the conversions.
+            Expression As(Expression expression, TypeSpecifier type)
+            {
+                if (expression.resultTypeSpecifier == type)
+                    return expression;
+                else return new As
+                {
+                    operand = expression,
+                    asTypeSpecifier = type,
+                    asType = type is NamedTypeSpecifier nts ? nts.name : null,
+                    locator = expression.locator,
+                }.WithResultType(type);
+            }
+
+            Expression ImplicitCastToSimple(Expression expression, TypeSpecifier type)
+            {
+                Expression convert;
+                if (type == SystemTypes.BooleanType)
+                    convert = new ToBoolean { operand = expression };
+                else if (type == SystemTypes.IntegerType)
+                    convert = new ToInteger {  operand = expression };
+                else if (type == SystemTypes.LongType)
+                    convert = new ToLong { operand = expression };
+                else if (type == SystemTypes.DecimalType)
+                    convert = new ToDecimal { operand = expression };
+                else if (type == SystemTypes.StringType)
+                    convert = new ToString { operand = expression };
+                else
+                    convert = new As 
+                    {
+                        operand = expression,
+                        asTypeSpecifier = type,  
+                        asType = type is NamedTypeSpecifier nts ? nts.name : null 
+                    };
+                return convert
+                    .WithLocator(expression.locator)
+                    .WithResultType(type);
+            }
+
+            Expression ImplicitCastToClass(Expression expression, TypeSpecifier type)
+            {
+                Expression convert;
+                if (type == SystemTypes.QuantityType)
+                    convert = new ToQuantity { operand = expression };
+                else if (type == SystemTypes.DateType)
+                    convert = new ToDate { operand = expression };
+                else if (type == SystemTypes.DateTimeType)
+                    convert = new ToDateTime { operand = expression };
+                else if (type == SystemTypes.TimeType)
+                    convert = new ToTime { operand = expression };
+                else if (type == SystemTypes.ConceptType)
+                    convert = new ToConcept { operand = expression };
+                else if (type == SystemTypes.RatioType)
+                    convert = new ToRatio { operand = expression };
+                else
+                    convert = new As
+                    {
+                        operand = expression,
+                        asTypeSpecifier = type,
+                        asType = type is NamedTypeSpecifier nts ? nts.name : null
+                    };
+                return convert
+                    .WithLocator(expression.locator)
+                    .WithResultType(type);
+            }
+
+
+            Interval ToInterval(Expression expression, IntervalTypeSpecifier type) =>
+                new Interval { low = As(expression, type.pointType), high = As(expression, type.pointType) }.WithResultType(type);
+
+            Expression FromList(Expression list, TypeSpecifier to) =>
+                As(new SingletonFrom { operand = list }.WithResultType(to), to);
+
+            Expression FromInterval(Expression interval, TypeSpecifier to) =>
+                As(new Start { operand = interval }.WithResultType(to), to);
+
+            Expression ToList(Expression expression, ListTypeSpecifier to) =>
+                new List { element = new[] { As(expression, to.elementType) } }.WithResultType(to);
         }
 
+        /// <summary>
+        /// Computes the cost of conversion according to the specification's conversion precendence rules.
+        /// </summary>
+        /// <seealso href="https://cql.hl7.org/03-developersguide.html#conversion-precedence"/>
         public ConversionCost GetConversionCost(TypeSpecifier from, TypeSpecifier to)
         {
             if (IsExactMatch(from, to))
@@ -70,7 +171,7 @@ namespace Hl7.Cql.CqlToElm
                 return ConversionCost.Incompatible;
         }
 
-        internal string IncompatibilityMessage(TypeSpecifier from, TypeSpecifier to) => 
+        internal string IncompatibilityMessage(TypeSpecifier from, TypeSpecifier to) =>
             $"Expression of type '{from}' cannot be cast as a value of type '{to}'.";
 
         internal virtual bool IsExactMatch(TypeSpecifier argumentType, TypeSpecifier to) => argumentType == to;
@@ -216,7 +317,7 @@ namespace Hl7.Cql.CqlToElm
 
         // The declared type is an interval and the invocation type can be promoted to an interval of that type
         // Presumably 
-        internal virtual bool CanBePromoted(TypeSpecifier from, IntervalTypeSpecifier to) 
+        internal virtual bool CanBePromoted(TypeSpecifier from, IntervalTypeSpecifier to)
         {
             var pointType = to.pointType;
             // written this way for easier debugging
@@ -288,5 +389,4 @@ namespace Hl7.Cql.CqlToElm
             else return false;
         }
     }
-
 }

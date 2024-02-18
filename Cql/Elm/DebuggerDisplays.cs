@@ -69,6 +69,10 @@ namespace Hl7.Cql.Elm
     {
         private string GetDebuggerDisplay() =>
             $"{name}({string.Join(", ", operand?.Select(o => o.resultTypeSpecifier) ?? Enumerable.Empty<TypeSpecifier>())})";
+    }
 
+    [DebuggerDisplay($"{{{nameof(name)}}} {{{nameof(operandTypeSpecifier)}}}")]
+    partial class OperandDef
+    {
     }
 }

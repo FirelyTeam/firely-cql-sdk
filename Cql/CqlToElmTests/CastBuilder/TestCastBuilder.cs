@@ -31,10 +31,10 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             result.Success.Should().BeTrue();
             result.Error.Should().BeNull();
-            result.Cost.Sum(c=>(int)c).Should().Be(cost);
+            result.Cost.Should().Be((ConversionCost)cost);
 
             if (e is not null)
-                result.Expression.Should().BeOfType<FunctionRef>().Subject.operand.Should().BeEquivalentTo(e);
+                result.Result.Should().BeOfType<FunctionRef>().Subject.operand.Should().BeEquivalentTo(e);
 
             return result;
         }
@@ -50,16 +50,16 @@ namespace Hl7.Cql.CqlToElm.Test
         public static ConversionResult<Expression> Cast(this FunctionDef def, Expression[] arguments)
         {
             var builder = new InvocationBuilder(Provider, TypeConverter);
-            var result = builder.Build(def, arguments);
-            return result;
+            var result = builder.Invoke(def, null, arguments);
+            return new(result, ConversionCost.ExactMatch);
         }
 
         public static ConversionResult<Expression> Assigned(this ConversionResult<Expression> result, TypeSpecifier t, TypeSpecifier? u = null)
         {
             if (u is null)
-                result.Expression.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, U, SystemTypes.BooleanType } });
+                result.Result.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, U, SystemTypes.BooleanType } });
             else
-                result.Expression.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, u, SystemTypes.BooleanType } });
+                result.Result.resultTypeSpecifier.Should().Be(new ChoiceTypeSpecifier { choice = new TypeSpecifier[] { t, u, SystemTypes.BooleanType } });
 
             return result;
         }
@@ -124,12 +124,12 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var f = buildF(SystemTypes.DecimalType);
             var arg = new[] { new Null { } }; // untyped null
-            var @as = f.Cast(arg).ShouldBe(cost: 1).Expression.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
+            var @as = f.Cast(arg).ShouldBe(cost: 1).Result.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
             @as.operand.Should().Be(arg[0]);
             @as.resultTypeSpecifier.Should().Be(SystemTypes.DecimalType);
 
             var f2 = buildF(T.ToListType());
-            var @as2 = f2.Cast(arg).ShouldBe(cost: 100).Expression.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
+            var @as2 = f2.Cast(arg).ShouldBe(cost: 100).Result.Should().BeOfType<FunctionRef>().Subject.operand.Should().ContainSingleOfType<As>();
             @as2.operand.Should().Be(arg[0]);
             @as2.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());
         }

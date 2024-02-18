@@ -23,7 +23,12 @@ namespace Hl7.Cql.Elm
     partial class ProperIncludedIn : IHasPrecision { }
     partial class ProperIncludes : IHasPrecision { }
 
+    internal interface IHasPrecisionExpression
+    {
+        Expression precision { get; set; }
+    }
 
+    partial class  Round: IHasPrecisionExpression {}
 
 
 

@@ -79,10 +79,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (!lowCast.Success && lowCast.Error is not null)
                 low.AddError(lowCast.Error ?? $"Could not convert low interval value to {pointType}");
-            else low = lowCast.Expression;
+            else low = lowCast.Result;
             if (!highCast.Success && highCast.Error is not null)
                 high.AddError(highCast.Error ?? $"Could not convert high interval value to {pointType}");
-            else high = highCast.Expression;
+            else high = highCast.Result;
 
             var interval = new Interval
             {
@@ -165,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     var ei = elements[i];
                     var result = TypeConverter.Convert(ei, elementType);
                     if (result.Success)
-                        typedElements[i] = result.Expression;
+                        typedElements[i] = result.Result;
                     else if (!string.IsNullOrWhiteSpace(result.Error))
                         typedElements[i] = ei.AddError(result.Error);
                 }
@@ -259,7 +259,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         private Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
-            Antlr4.Runtime.ParserRuleContext? context,
+            Antlr4.Runtime.ParserRuleContext context,
             cqlParser.PluralDateTimePrecisionContext precisionContext,
             cqlParser.ExpressionTermContext[] expressionTerms)
         {
@@ -267,17 +267,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressionTerms[0]);
             var rhs = Visit(expressionTerms[1]);
 
-            FunctionDef? selectedOverload;
-            var call = precision switch
+            var expression = precision switch
             {
-                { } => systemFunction.Call(InvocationBuilder, context, new[] { lhs, rhs, precision }, out selectedOverload),
-                _ => systemFunction.Call(InvocationBuilder, context, new[] { lhs, rhs, }, out selectedOverload)
+                { } => InvocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
+                _ => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
             };
-            return selectedOverload switch
-            {
-                SystemFunction bd => bd.Validate(call),
-                _ => call
-            };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
+;
         }
 
         private static Literal? Precision(cqlParser.PluralDateTimePrecisionContext context) =>

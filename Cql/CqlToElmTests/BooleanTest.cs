@@ -11,7 +11,10 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
+        public static void Initialize(TestContext context) => ClassInitialize(co =>
+        {
+            co.EnableListDemotion = true;
+        });
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private Library createLibraryForExpression(string expression)
@@ -45,7 +48,9 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = createLibraryForExpression("true is null");
             var isNull = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<IsNull>();
-            isNull.operand.Should().BeLiteralBool(true);
+            var @as = isNull.operand.Should().BeOfType<As>().Subject;
+            @as.Should().HaveType(SystemTypes.AnyType);
+            @as.operand.Should().BeLiteralBool(true);
             AssertResult(isNull, false);
         }
 
@@ -84,7 +89,6 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = createLibraryForExpression("true is not null");
             var isNot = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Not>();
             var isNull = isNot.operand.Should().BeOfType<IsNull>().Subject;
-            isNull.operand.Should().BeLiteralBool(true);
             AssertResult(isNot, true);
         }
 

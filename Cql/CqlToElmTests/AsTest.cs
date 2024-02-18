@@ -11,13 +11,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class AsTest : Base
     {
-        private Library createLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
-        {
-            return MakeLibrary($@"
-                library AsTest version '1.0.0'
 
-                define private ""{memberName}"": {expression}");
-        }
 
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -31,16 +25,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(As));
-            {
-                var @as = AssertAsTypes(library, $"{{{SystemUri}}}Integer", $"{{{SystemUri}}}Decimal");
-                AssertAsNull(@as);
-            }
+            ", "Expression of type*");
+           
         }
 
         [TestMethod]

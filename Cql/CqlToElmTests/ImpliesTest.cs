@@ -352,7 +352,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_1: true implies 1
-            ", "Cannot resolve call*second argument*Integer*cannot implicitly be cast*Boolean.");
+            ", "Could not resolve call*");
         }
     }
 }

@@ -211,33 +211,63 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
 
+                Expression expression;
                 if (properly)
                 {
-                    FunctionDef? overload = null;
-                    var call = SystemLibrary.ProperIn.Call(InvocationBuilder, context, args);
-                    if (!call.GetErrors().Any())
-                        overload = SystemLibrary.ProperIn;
-                    if (overload is null)
-                        call = SystemLibrary.ProperIncludedIn.Call(InvocationBuilder, context, args, out overload);
-                    if (overload is null)
-                        call = new Contains()
-                            .WithId()
-                            .WithLocator(context.Locator())
-                            .AddUnresolvedOperatorError("ProperIn", lhs.resultTypeSpecifier, rhs.resultTypeSpecifier);
-                    return call;
+                    var properIn = InvocationBuilder.MatchSignature(SystemLibrary.ProperIn, args);
+                    if (properIn.Compatible)
+                    {
+                        expression = InvocationBuilder.Invoke(SystemLibrary.ProperIn, args);
+                    }
+                    else
+                    {
+                        var properIncludedIn = InvocationBuilder.SelectBestOverload(SystemLibrary.ProperIncludedIn, args);
+                        if (properIncludedIn.Compatible)
+                        {
+                            expression = InvocationBuilder.Invoke(SystemLibrary.ProperIncludedIn, args);
+                        }
+                        else
+                        {
+                            if (properIncludedIn.Error is not null)
+                                expression = new Contains()
+                                    .WithId()
+                                    .WithLocator(context.Locator())
+                                    .AddError(properIncludedIn.Error);
+                            else
+                                throw new InvalidOperationException($"Overload is incompatible but no error is set.");
+                        }
+                    }
                 }
                 else
                 {
-                    var call = SystemLibrary.In.Call(InvocationBuilder, context, args, out var overload);
-                    if (overload is null)
-                        call = SystemLibrary.IncludedIn.Call(InvocationBuilder, context, args, out overload);
-                    if (overload is null)
-                        call = new Contains()
-                            .WithId()
-                            .WithLocator(context.Locator())
-                            .AddUnresolvedOperatorError("In", lhs.resultTypeSpecifier, rhs.resultTypeSpecifier);
-                    return call;
+                    var @in = InvocationBuilder.SelectBestOverload(SystemLibrary.In, args);
+                    if (@in.Compatible)
+                    {
+                        expression = InvocationBuilder.Invoke(SystemLibrary.In, args);
+                    }
+                    else
+                    {
+                        var properIncludedIn = InvocationBuilder.SelectBestOverload(SystemLibrary.IncludedIn, args);
+                        if (properIncludedIn.Compatible)
+                        {
+                            expression = InvocationBuilder.Invoke(SystemLibrary.IncludedIn, args);
+                        }
+                        else
+                        {
+                            if (properIncludedIn.Error is not null)
+                                expression = new Contains()
+                                    .WithId()
+                                    .WithLocator(context.Locator())
+                                    .AddError(properIncludedIn.Error);
+                            else
+                                throw new InvalidOperationException($"Overload is incompatible but no error is set.");
+                        }
+                    }
                 }
+                return expression
+                    .WithId()
+                    .WithLocator(context.Locator());
+
             }
 
             //| 'overlaps'('before' | 'after') ? dateTimePrecisionSpecifier ?                                                          #overlapsIntervalOperatorPhrase
@@ -548,19 +578,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 Expression rhs)
         {
             var dtp = context.dateTimePrecisionSpecifier();
-            Expression call;
+            Expression expression;
             if (dtp is null)
-                call = SystemLibrary.Ends.Call(InvocationBuilder, context, new[] { lhs, rhs });
+                expression = InvocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs);
             else
             {
                 var precision = Precision(dtp);
-                call = precision switch
+                expression = precision switch
                 {
-                    { } => SystemLibrary.Ends.Call(InvocationBuilder, context, new[] { lhs, rhs, precision }),
-                    _ => SystemLibrary.Ends.Call(InvocationBuilder, context, new[] { lhs, rhs }),
+                    { } => InvocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs, precision),
+                    _ => InvocationBuilder.Invoke(SystemLibrary.Ends, lhs, rhs),
                 };
             }
-            return call;
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //| 'properly'? 'includes' dateTimePrecisionSpecifier? ('start' | 'end')?
@@ -579,8 +611,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             // IntervalIncludes for 2 intervals
             // IntervalContains for 1 interval, 1 point
-            // ref engine tries Contains first
-
             if (startEnd == "start")
             {
                 rhs = new Start
@@ -599,9 +629,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
 
             if (properly)
-                return SystemLibrary.ProperIncludes.Call(InvocationBuilder, context, args, out var overload);
+                return InvocationBuilder.Invoke(SystemLibrary.ProperIncludes, args)
+                    .WithId()
+                    .WithLocator(context.Locator());
             else
-                return SystemLibrary.Includes.Call(InvocationBuilder, context, args, out var overload);
+                return InvocationBuilder.Invoke(SystemLibrary.Includes, args)
+                    .WithId()
+                    .WithLocator(context.Locator());
         }
 
         //: ('starts' | 'ends' | 'occurs')? 'same' dateTimePrecision? (relativeQualifier | 'as') ('start' | 'end')?               #concurrentWithIntervalOperatorPhrase

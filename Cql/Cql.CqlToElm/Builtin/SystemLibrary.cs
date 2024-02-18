@@ -120,6 +120,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             new(new[] { source.ToListType() }, result, typeof(T).Name);
         public static readonly TypeSpecifier[] EmptyOperands = System.Array.Empty<TypeSpecifier>();
 
+        private static readonly GenericTypeSpecifier T = new(nameof(T));
+
         // Alphabetized
         public static OverloadedFunctionDef Abs = unary<Abs>(T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef Add = binary<Add>(T, T, T).For(T, new[] { IntegerType, LongType, DecimalType, QuantityType, StringType }).Combine(binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType));
@@ -139,7 +141,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<DateTime> DateTime = nary<DateTime>(new[] { IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, DecimalType }, 1, DateTimeType);
         public static SystemFunction<ToDateTime> DateToDateTime = unary<ToDateTime>(DateType, DateTimeType);
         public static SystemFunction<ToQuantity> DecimalToQuantity = unary<ToQuantity>(DecimalType, QuantityType);
-        public static SystemFunction<Descendents> Descendants = unary<Descendents>(AnyType, AnyType, "descendents").IsFluent(); // this is always called like <any>.descendents()
+        public static SystemFunction<Descendents> Descendants = unary<Descendents>(AnyType, AnyType, "descendents").MakeFluent(); // this is always called like <any>.descendents()
         public static OverloadedFunctionDef DifferenceBetween = binaryWithPrecision<DifferenceBetween>(T, T, IntegerType)
             .ValidateWith(Validators.Validate)
             .For(T, DateType, DateTimeType, TimeType);
@@ -159,7 +161,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Flatten> Flatten = unary<Flatten>(T.ToListType().ToListType(), T.ToListType());
         public static OverloadedFunctionDef Floor = unary<Floor>(T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
-        public static SystemFunction<If> If = new SystemFunction<If>(new TypeSpecifier[] { BooleanType, T, T }, T);        
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
         public static OverloadedFunctionDef In = OverloadedFunctionDef.Create(binary<In>(T, T.ToListType(), BooleanType), binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef IncludedIn = OverloadedFunctionDef.Create(binary<IncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<IncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
@@ -251,8 +252,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Width> Width = unary<Width>(T.ToIntervalType(), T);
         public static SystemFunction<Xor> Xor = binary<Xor>(BooleanType, BooleanType, BooleanType);
 
-
-
     }
 
     internal static class Validators
@@ -284,28 +283,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
                     element.AddError("For Time values, precision must be one of: hours, minutes, seconds, or milliseconds.");
             }
             return element;
-        }
-    }
-
-    internal static class FunctionDefinitionBuilders
-    {
-        public static OverloadedFunctionDef For<T>(this SystemFunction<T> def, ParameterTypeSpecifier replace, params TypeSpecifier[] types)
-            where T: Element =>
-            OverloadedFunctionDef.Create(types.Select(t => def.ReplaceGenericParameters(new() { { replace, t } })).ToArray());
-
-        public static OverloadedFunctionDef Combine(this OverloadedFunctionDef def, params OverloadedFunctionDef[] defs) =>
-            OverloadedFunctionDef.Create(def.Functions.Concat(defs.SelectMany(def => def.Functions)).ToArray());
-
-        public static OverloadedFunctionDef Combine<T>(this SystemFunction<T> def, params SystemFunction<T>[] defs) where T: Element =>
-            OverloadedFunctionDef.Create(defs.Append(def).ToArray());
-
-
-        public static SystemFunction<T> IsFluent<T>(this SystemFunction<T> function)
-            where T: Element
-        {
-            function.fluent = true;
-            function.fluentSpecified = true;
-            return function;
         }
     }
 

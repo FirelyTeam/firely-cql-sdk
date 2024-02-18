@@ -286,7 +286,7 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         /// <remarks>This function checks a subtyping relationship, not whether in- or explicit casts may exist between the types.
         /// See https://cql.hl7.org/03-developersguide.html#type-testing for more information.</remarks>
-        public static bool IsSubtypeOf(this Elm.TypeSpecifier subType, Elm.TypeSpecifier superType, IModelProvider provider)
+        internal static bool IsSubtypeOf(this Elm.TypeSpecifier subType, Elm.TypeSpecifier superType, IModelProvider provider)
         {
             if (subType is Elm.NamedTypeSpecifier subtypeNT && superType is Elm.NamedTypeSpecifier)
             {
