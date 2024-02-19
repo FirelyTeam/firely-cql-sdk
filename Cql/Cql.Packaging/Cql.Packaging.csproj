@@ -34,13 +34,14 @@
 		<Task>
 			<Using Namespace="System"/>
 			<Using Namespace="System.IO"/>
+			<Using Namespace="System.Globalization"/>
 			<Code Type="Fragment" Language="cs">
 				<![CDATA[
 	foreach (var path in new[] { "PublicAPI.Unshipped.txt", "PublicAPI.Shipped.txt" }) 
 	{
 		string[] lines = File.ReadAllLines(path);
 		var hashBefore =  ((IStructuralEquatable)lines).GetHashCode(EqualityComparer<string>.Default);
-		Array.Sort(Enumerable.Range(0, lines.Length).Select(_ => Random.Shared.NextDouble()).ToArray(), lines);
+		Array.Sort(left, (a,b) => a.StartsWith("#") ? -1 : CultureInfo.InvariantCulture.CompareInfo.Compare(a,b) );
 		var hashAfter = ((IStructuralEquatable)lines).GetHashCode(EqualityComparer<string>.Default);
 		if (hashBefore != hashAfter) {
 			Log.LogMessage($"Sorted lines in '{path}'");
@@ -53,7 +54,7 @@
 	</UsingTask>
 
 	<Target Name="PostBuild" AfterTargets="PostBuildEvent">
-		<!--<SortPublicAPIFiles />-->
+		<!-- <SortPublicAPIFiles /> -->
 	</Target>
 
 </Project>

@@ -8,16 +8,10 @@ namespace Hl7.Cql.Packaging.ResourceWriters
     public abstract class ResourceWriter
     {
         /// <summary>
-        /// Loops over the given resources, and writes time with the <see cref="WriteResource"/> method.
+        /// Writes all the given resources.
         /// </summary>
         /// <param name="resources">the resources to write</param>
         public abstract void WriteResources(IEnumerable<Resource> resources);
-
-        /// <summary>
-        /// Writes the given resource.
-        /// </summary>
-        /// <param name="resource">the resource to write</param>
-        public abstract void WriteResource(Resource resource);
 
         /// <summary>
         /// Ensures that the specified directory exists, and if it doesn't it creates it
