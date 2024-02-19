@@ -11,11 +11,11 @@ internal static class DependencyInjection
 {
     public static void AddPackagerServices(this IServiceCollection services, IConfiguration config)
     {
-        services.TryAddPackagerOptions(config);
+        TryAddPackagerOptions(services, config);
         services.TryAddTransient<PackagerService>();
     }
 
-    private static void TryAddPackagerOptions(this IServiceCollection services, IConfiguration config)
+    private static void TryAddPackagerOptions(IServiceCollection services, IConfiguration config)
     {
         if (services.Any(s => s.ServiceType == typeof(IValidateOptions<PackagerOptions>)))
             return;
@@ -30,9 +30,20 @@ internal static class DependencyInjection
 
     public static void AddResourcePackager(this IServiceCollection services, IConfiguration config)
     {
-        services.TryAddPackagerOptions(config);
+        TryAddPackagerOptions(services, config);
         services.TryAddSingleton<ResourcePackager>();
+        TryAddConfiguredResourceWriters(services, config);
+    }
 
+    /// <summary>
+    ///     Load the options for the Fhir and CSharp resource writers, and only load them up as services when necessary.
+    /// </summary>
+    /// <remarks>
+    ///     Only the resource writers that are configured, will be loaded as keyed services, as well as IEnumerable
+    ///     of resource writer (which is loaded into the ResourcePackager)
+    /// </remarks>
+    private static void TryAddConfiguredResourceWriters(IServiceCollection services, IConfiguration config)
+    {
         PackagerOptions packagerOptions = new();
         PackagerOptions.BindConfig(packagerOptions, config);
 
