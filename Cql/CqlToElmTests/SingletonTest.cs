@@ -12,7 +12,10 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
+        public static void Initialize(TestContext context) => ClassInitialize(co =>
+        {
+            co.EnableListPromotion = true;
+        });
 #pragma warning restore IDE0060 // Remove unused parameter
 
         [TestMethod]

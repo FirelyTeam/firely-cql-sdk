@@ -64,12 +64,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 "=" => InvocationBuilder.Invoke(SystemLibrary.Equal, lhs, rhs),
                 "!=" => InvocationBuilder.Invoke(SystemLibrary.NotEqual, lhs, rhs),
                 "~" => InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs),
-                "!~" => InvocationBuilder.Invoke(SystemLibrary.Not, lhs, rhs),
+                "!~" => NotEquivalent(lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression.")
             };
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
+
+            Expression NotEquivalent(Expression lhs, Expression rhs)
+            {
+                var equivalent = InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs);
+                var not = InvocationBuilder.Invoke(SystemLibrary.Not, equivalent);
+                return not;
+            }
         }
 
         //  expression 'implies' expression                                                               #impliesExpression

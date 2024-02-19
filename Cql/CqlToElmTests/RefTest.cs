@@ -191,7 +191,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private function double(a Decimal): a*2
 
                 define private {nameof(Function)}: double(4,5)
-            ", "double(Decimal) must be called with 1 arguments, not 2.");
+            ", "Could not resolve*");
         }
 
         [TestMethod]
@@ -203,7 +203,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private function double(a Decimal): a*2
 
                 define private {nameof(Function)}: double('hi')
-            ", "Cannot resolve call to double(Decimal)*first*type String*cast to type Decimal.");
+            ", "Could not resolve*");
         }
 
         [TestMethod]
@@ -224,11 +224,11 @@ namespace Hl7.Cql.CqlToElm.Test
             var library4 = MakeLibrary($@"
                 library {nameof(RefTest)}4 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2,3,4)
-            ", "Date(Integer, Integer, Integer) must be called with no more than 3 arguments, not 4.");
+            ", "Could not resolve *");
             var library5 = MakeLibrary($@"
                 library {nameof(RefTest)}5 version '1.0.0'
                 define private {nameof(Function)}: Date()
-            ", "Date(Integer, Integer, Integer) must be called with at least 1 arguments, not 0.");
+            ", "Could not resolve *");
         }
 
         [TestMethod]

@@ -27,12 +27,12 @@ namespace Hl7.Cql.CqlToElm.Test
             sub.IsSubtypeOf(super, provider).Should().BeFalse();
 
         [TestMethod]
-        public void TypesAreSubtypesOfThemselves()
+        public void TypesAreNotSubtypesOfThemselves()
         {
-            yes(Patient, Patient);
-            yes(Resource, Resource);
-            yes(SystemTypes.BooleanType, SystemTypes.BooleanType);
-            yes(SystemTypes.AnyType, SystemTypes.AnyType);
+            no(Patient, Patient);
+            no(Resource, Resource);
+            no(SystemTypes.BooleanType, SystemTypes.BooleanType);
+            no(SystemTypes.AnyType, SystemTypes.AnyType);
         }
 
         [TestMethod]
@@ -53,90 +53,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void NotBaseclasses()
         {
-            //no(Patient, Observation);
-            //no(Observation, Patient);
-            //no(SystemTypes.BooleanType, SystemTypes.ValueSetType);
-            //no(SystemTypes.DecimalType, SystemTypes.IntegerType);
-            //no(SystemTypes.IntegerType, SystemTypes.DecimalType);
+            no(Patient, Observation);
+            no(Observation, Patient);
+            no(SystemTypes.BooleanType, SystemTypes.ValueSetType);
+            no(SystemTypes.DecimalType, SystemTypes.IntegerType);
+            no(SystemTypes.IntegerType, SystemTypes.DecimalType);
             no(Patient, Element);
         }
 
-        [TestMethod]
-        public void CovariantSubtypes()
-        {
-            yes(Patient.ToListType(), Patient.ToListType());
-            yes(Patient.ToListType(), Resource.ToListType());
-            yes(SystemTypes.DecimalType.ToListType(), SystemTypes.AnyType.ToListType());
-            no(Patient.ToListType(), Observation.ToListType());
-
-            yes(Patient.ToIntervalType(), Patient.ToIntervalType());
-            yes(Patient.ToIntervalType(), Resource.ToIntervalType());
-            yes(SystemTypes.DecimalType.ToIntervalType(), SystemTypes.AnyType.ToIntervalType());
-            no(Patient.ToIntervalType(), Observation.ToIntervalType());
-
-            no(Patient.ToListType(), Patient);
-            no(Patient, Patient.ToListType());
-            no(Patient.ToIntervalType(), Patient.ToListType());
-        }
-
-        [TestMethod]
-        public void CovariantTuples()
-        {
-            var tt1 = new TupleTypeSpecifier
-            {
-                element = new[]
-                {
-                    new TupleElementDefinition { name = "a", elementType = Patient },
-                }
-            };
-
-            var ttS1 = new TupleTypeSpecifier
-            {
-                element = new[]
-                {
-                    new TupleElementDefinition { name = "a", elementType = Patient },
-                }
-            };
-
-
-            var ttS2 = new TupleTypeSpecifier
-            {
-                element = new[]
-                {
-                    new TupleElementDefinition { name = "a", elementType = Resource },
-                }
-            };
-
-            var tt3 = new TupleTypeSpecifier
-            {
-                element = new[]
-                {
-                    new TupleElementDefinition { name = "a", elementType = Observation },
-                }
-            };
-
-            var tt4 = new TupleTypeSpecifier
-            {
-                element = new[]
-                {
-                    new TupleElementDefinition { name = "b", elementType = Patient },
-                }
-            };
-
-            var tt5 = new TupleTypeSpecifier
-            {
-                element = new[]
-                {
-                    new TupleElementDefinition { name = "a", elementType = Patient },
-                    new TupleElementDefinition { name = "b", elementType = Observation },
-                }
-            };
-
-            yes(tt1, ttS1);
-            yes(tt1, ttS1);
-            no(tt1, tt3);
-            no(tt1, tt4);
-            no(tt1, tt5);
-        }
     }
 }

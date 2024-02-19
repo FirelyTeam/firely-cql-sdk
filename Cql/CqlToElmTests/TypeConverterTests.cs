@@ -209,6 +209,13 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsInstanceOfType(result.Result, typeof(ToDecimal));
             Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.Cost);
         }
-
+        [TestMethod]
+        public void ListAnyCanBeCastToListInteger()
+        {
+            var expression = List(SystemTypes.AnyType);
+            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType.ToListType());
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(ConversionCost.Cast, result.Cost);
+        }
     }
 }

@@ -31,13 +31,19 @@ namespace Hl7.Cql.CqlToElm
             TypeConverter = typeConverter;
         }
 
+        /// <summary>
+        /// Invokes a system function.
+        /// </summary>
+        /// <param name="systemFunction">The system function to invoke.</param>
+        /// <param name="arguments">The arguments to invoke.</param>
+        /// <returns>The invocation of this system function.</returns>
         internal Expression Invoke(SystemFunction systemFunction, params Expression[] arguments)
         {
             var result = MatchSignature(systemFunction, arguments);
             var newArguments = result.Arguments
                 .Select(cr => cr.Result)
                 .ToArray();
-            var expression = Invoke(systemFunction, null, newArguments);
+            var expression = CreateElmNode(systemFunction, null, newArguments);
             if (!result.Compatible)
                 expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
             expression = systemFunction.Validate(expression);
@@ -46,14 +52,19 @@ namespace Hl7.Cql.CqlToElm
                 .WithResultType(newResultType);
         }
 
-
+        /// <summary>
+        /// Invokes an overloaded function.
+        /// </summary>
+        /// <param name="overloadedFunction">The overloaded function to invoke.</param>
+        /// <param name="arguments">The arguments to invoke.</param>
+        /// <returns>The invocation of the best-matching overload.</returns>
         internal Expression Invoke(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
             var result = SelectBestOverload(overloadedFunction, arguments);
             var newArguments = result.Arguments
                 .Select(cr => cr.Result)
                 .ToArray();
-            var expression = Invoke(result.Function, null, newArguments);
+            var expression = CreateElmNode(result.Function, null, newArguments);
             if (!result.Compatible)
                 expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
             if (result.Function is SystemFunction systemFunction)
@@ -63,7 +74,28 @@ namespace Hl7.Cql.CqlToElm
                 .WithResultType(newResultType);
         }
 
-        internal Expression Invoke(FunctionDef function, string? library = null, params Expression[] arguments)
+        /// <summary>
+        /// Invokes a user defined function.
+        /// </summary>
+        /// <param name="function">The overloaded function to invoke.</param>
+        /// <param name="library">The libary in which this function is defined, or <see langword="null"/> if the function is colocated within the same library as the invocation site.</param>
+        /// <param name="arguments">The arguments to invoke.</param>
+        /// <returns>The invocation of the best-matching overload.</returns>
+        internal Expression Invoke(FunctionDef function, string? library, params Expression[] arguments)
+        {
+            var result = MatchSignature(function, arguments);
+            var newArguments = result.Arguments
+                .Select(cr => cr.Result)
+                .ToArray();
+            var expression = CreateElmNode(function, null, newArguments);
+            if (!result.Compatible)
+                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+            var newResultType = ReplaceGenericTypes(function.resultTypeSpecifier, result.GenericInferences);
+            return expression
+                .WithResultType(newResultType);
+        }
+
+        private Expression CreateElmNode(FunctionDef function, string? library, Expression[] arguments)
         {
             var nodeType = function is SystemFunction b ? b.ElmNodeType : typeof(FunctionRef);
             Expression result = (Expression)Activator.CreateInstance(nodeType)!;
@@ -403,9 +435,9 @@ namespace Hl7.Cql.CqlToElm
             {
                 GenericTypeSpecifier generic => new() { { generic.typeArgumentName, argumentType } },
                 ListTypeSpecifier opList when argumentType is ListTypeSpecifier argList => InferGenericArgument(opList.elementType, argList.elementType),
-                ListTypeSpecifier opList when argumentType == SystemTypes.AnyType => InferGenericArgument(opList.elementType, SystemTypes.AnyType),
-
+                ListTypeSpecifier opList when argumentType is not ListTypeSpecifier => InferGenericArgument(opList.elementType, argumentType),
                 IntervalTypeSpecifier opInt when argumentType is IntervalTypeSpecifier argInt => InferGenericArgument(opInt.pointType, argInt.pointType),
+                IntervalTypeSpecifier opInt when argumentType is not IntervalTypeSpecifier => InferGenericArgument(opInt.pointType, argumentType),
                 _ => new()
             };
 

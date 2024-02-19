@@ -183,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var result = TypeConverter.Convert(defaultExpr, type);
 
-                if (result.Error != null)
+                if (result.Error is null)
                     return result.Result;
                 else
                     return defaultExpr.AddError($"Expected an expression of type '{type}', but found an expression of type '{defaultExpr.resultTypeSpecifier}'.");

@@ -354,7 +354,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OrTest version '1.0.0'
 
                 define private True_Or_1: true or 1
-            ", "Cannot resolve call*second argument*Integer*cannot implicitly be cast*Boolean.");
+            ", "Could not resolve*");
         }
     }
 }

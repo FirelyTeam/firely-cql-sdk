@@ -292,7 +292,12 @@ namespace Hl7.Cql.CqlToElm
             {
                 var baseType = GetBaseType(provider, subtypeNT);
                 if (baseType is not null)
-                    return baseType.IsSubtypeOf(superType, provider);
+                {
+                    if (baseType == superType) 
+                        return true;
+                    else 
+                        return baseType.IsSubtypeOf(superType, provider);
+                }
                 else
                     return false;
             }

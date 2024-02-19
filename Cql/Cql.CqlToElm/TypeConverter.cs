@@ -129,7 +129,7 @@ namespace Hl7.Cql.CqlToElm
                 As(new Start { operand = interval }.WithResultType(to), to);
 
             Expression ToList(Expression expression, ListTypeSpecifier to) =>
-                new List { element = new[] { As(expression, to.elementType) } }.WithResultType(to);
+                new ToList {  operand = As(expression, to.elementType) }.WithResultType(to);
         }
 
         /// <summary>
@@ -214,7 +214,7 @@ namespace Hl7.Cql.CqlToElm
         {
             if (from == SystemTypes.AnyType)
                 return true;
-            if (from is ChoiceTypeSpecifier fromChoice)
+            else if (from is ChoiceTypeSpecifier fromChoice)
             {
                 if (to is ChoiceTypeSpecifier toChoice)
                     return fromChoice.choice?.Any(ft => toChoice.choice?.Contains(ft) ?? false) ?? false;
@@ -232,6 +232,10 @@ namespace Hl7.Cql.CqlToElm
             // Casting is the operation of treating a value of some base type as a more specific type at run-time. 
             if (IsSubtype(to, from))
                 return true;
+            else if (from is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
+                return CanBeCast(fromList.elementType, toList.elementType);
+            else if (from is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
+                return CanBeCast(fromInterval.pointType, toInterval.pointType);
             else return false;
         }
 
