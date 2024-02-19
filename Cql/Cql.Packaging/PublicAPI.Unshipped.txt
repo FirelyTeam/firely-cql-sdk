@@ -1,8 +1,6 @@
 #nullable enable
-Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Elm.Element! element) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
-Hl7.Cql.Packaging.ResourcePackager
-Hl7.Cql.Packaging.CqlTypeToFhirMapping.FhirType.init -> void
-Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
+abstract Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.WriteResources(System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>! resources) -> void
+abstract Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 Hl7.Cql.Packaging.AssemblyLoadContextExtensions
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions
 Hl7.Cql.Packaging.PackageArgs.AfterPackageMutator.get -> System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>?
