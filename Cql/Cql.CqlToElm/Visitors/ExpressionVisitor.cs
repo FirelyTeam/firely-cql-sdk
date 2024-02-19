@@ -17,7 +17,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder,
-            TypeConverter typeConverter) : base(localIdentifierProvider, invocationBuilder)
+            TypeConverter typeConverter,
+            ElmFactory elmFactory) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
             Configuration = configuration;
@@ -25,6 +26,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
             TypeConverter = typeConverter;
+            ElmFactory = elmFactory;
         }
 
 
@@ -36,6 +38,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public ConverterContext ConverterContext { get; }
         public LibraryBuilder LibraryBuilder { get; }
         public TypeConverter TypeConverter { get; }
+        public ElmFactory ElmFactory { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')

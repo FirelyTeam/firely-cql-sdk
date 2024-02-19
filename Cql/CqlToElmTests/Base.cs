@@ -38,6 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     .ThrowOn(LogLevel.Error))
                 .AddTransient<InvocationBuilder>()
                 .AddSingleton<TypeConverter>()
+                .AddSingleton<ElmFactory>()
                 .AddScoped<CqlToElmConverter>();
             Services = services.BuildServiceProvider();
 

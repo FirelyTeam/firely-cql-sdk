@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var then = Visit(context.expression(1));
             var @else = Visit(context.expression(2));
 
-            var @if = InvocationBuilder.If(condition, then, @else);
+            var @if = ElmFactory.If(condition, then, @else);
             return @if
                 .WithId()
                 .WithLocator(context.Locator());
@@ -101,7 +101,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else if (elseCastResult.Error is not null)
                 @else.AddError(elseCastResult.Error);
 
-            return InvocationBuilder.Case(comparand, caseItems, @else)
+            return ElmFactory.Case(comparand, caseItems, @else)
                 .WithId()
                 .WithLocator(context.Locator());
         }

@@ -89,6 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddTransient<CqlToElmConverter>()
                 .AddTransient<InvocationBuilder>()
                 .AddSingleton<TypeConverter>()
+                .AddSingleton<ElmFactory>()
                 .AddConfiguration(cb => { });
 
         [TestMethod]

@@ -126,8 +126,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression expression = extent switch
             {
-                "minimum" => InvocationBuilder.MinValue(typeSpecifier),
-                "maximum" => InvocationBuilder.MaxValue(typeSpecifier),
+                "minimum" => ElmFactory.MinValue(typeSpecifier),
+                "maximum" => ElmFactory.MaxValue(typeSpecifier),
                 _ => throw new InvalidOperationException($"Parser returned unknown extent '{extent}' in a type extent expression.")
             };
 
