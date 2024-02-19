@@ -114,7 +114,7 @@ public class Program
         var packageService = mainScope.ServiceProvider.GetRequiredService<PackagerService>();
         try
         {
-            return packageService.Run();
+            return packageService.Package();
         }
         catch (Exception e)
         {

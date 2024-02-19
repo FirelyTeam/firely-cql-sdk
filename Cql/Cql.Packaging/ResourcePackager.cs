@@ -55,7 +55,7 @@ namespace Hl7.Cql.Packaging
         /// Package the resources in the given ELM and CQL directories and output them using the writers provided in the constructor 
         /// </summary>
         /// <param name="args">A</param>
-        public void Package(PackageArgs args) =>
+        public void Package(ResourcePackageArgs args) =>
             PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl);
 
         private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
@@ -75,7 +75,7 @@ namespace Hl7.Cql.Packaging
                 typeResolver,
                 new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
-                resource => CanonicalUri(resource, resourceCanonicalRootUrl),
+                resource => resource.CanonicalUri(resourceCanonicalRootUrl),
                 logFactory);
 
             afterPackageMutator?.Invoke(resources);
@@ -85,14 +85,5 @@ namespace Hl7.Cql.Packaging
                 writer.WriteResources(resources);
             }
         }
-
-        private static string CanonicalUri(Resource resource, string? resourceCanonicalRootUrl)
-        {
-            if (string.IsNullOrWhiteSpace(resource.Id))
-                throw new ArgumentException("Resource must have an id", nameof(resource));
-            var path = $"{resourceCanonicalRootUrl ?? "#"}/{resource.TypeName}/{resource.Id}";
-            return path;
-        }
-
     }
 }

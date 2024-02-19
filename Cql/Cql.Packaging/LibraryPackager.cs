@@ -18,7 +18,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
-using System.Collections.Concurrent;
 using System.Linq.Expressions;
 using System.Runtime.Loader;
 using System.Text;
@@ -151,7 +150,8 @@ namespace Hl7.Cql.Packaging
             return asmContext;
         }
 
-        internal IEnumerable<Resource> PackageResources(DirectoryInfo elmDirectory,
+        internal IEnumerable<Resource> PackageResources(
+            DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
             DirectedGraph packageGraph,
             TypeResolver typeResolver,
@@ -210,7 +210,7 @@ namespace Hl7.Cql.Packaging
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -295,7 +295,7 @@ namespace Hl7.Cql.Packaging
             return resources;
         }
 
-        private Hl7.Fhir.Model.Library createLibraryResource(FileInfo elmFile,
+        private Hl7.Fhir.Model.Library CreateLibraryResource(FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,
