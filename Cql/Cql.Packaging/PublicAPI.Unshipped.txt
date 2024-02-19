@@ -1,4 +1,4 @@
-﻿#nullable enable
+#nullable enable
 abstract Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.WriteResources(System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>! resources) -> void
 Hl7.Cql.Packaging.AssemblyLoadContextExtensions
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper
@@ -29,6 +29,8 @@ Hl7.Cql.Packaging.PackageArgs.AfterPackageMutator.init -> void
 Hl7.Cql.Packaging.PackageArgs.AfterPackageMutator.get -> System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>?
 Hl7.Cql.Packaging.PackageArgs.PackageArgs(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null, string? resourceCanonicalRootUrl = null) -> void
 Hl7.Cql.Packaging.ResourcePackager.Package(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null, int? cacheSize = null) -> void
+Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.get -> System.DateTime?
+Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.set -> void
 override Hl7.Cql.Packaging.PackageArgs.GetHashCode() -> int
 override Hl7.Cql.Packaging.PackageArgs.Equals(object? obj) -> bool
 static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?

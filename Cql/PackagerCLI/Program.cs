@@ -66,6 +66,9 @@ public class Program
             [--f]                  <true|false>        Force an overwrite even if the output file already exists
             [--canonical-root-url] <url>               The root url used for the resource canonical.
                                                        If omitted a '#' will be used.
+            [--fhir-override-date] <ISO8601-date-time> The UTC date to override in the generated FHIR resource libraries.
+                                                       (example: 2000-12-31T23:59:59.99Z)
+                                                       If omitted the current date time will be used.
         """;
 
 
