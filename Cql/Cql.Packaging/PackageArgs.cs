@@ -2,7 +2,6 @@
 
 namespace Hl7.Cql.Packaging;
 
-
 /// <summary>Arguments for the <see cref="ResourcePackager.Package(PackageArgs)"/> method.</summary>
 public record PackageArgs
 {
@@ -14,7 +13,7 @@ public record PackageArgs
     public PackageArgs(
         DirectoryInfo elmDir, 
         DirectoryInfo cqlDir,
-        Action<IEnumerable<Resource>>? afterPackageMutator = null, 
+        Action<IEnumerable<Resource>>? afterPackageMutator = null,
         string? resourceCanonicalRootUrl = null)
     {
         ElmDir = elmDir;

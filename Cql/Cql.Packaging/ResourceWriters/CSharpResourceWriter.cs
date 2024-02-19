@@ -1,5 +1,6 @@
 ﻿using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging.ResourceWriters
 {
@@ -8,13 +9,30 @@ namespace Hl7.Cql.Packaging.ResourceWriters
     /// </summary>
     public class CSharpResourceWriter : ResourceWriter
     {
+        private readonly DirectoryInfo _outDirectory;
+        private readonly ILogger<CSharpResourceWriter> _logger;
+
         /// <summary>
         /// Instantiates a new resource writer
         /// </summary>
         /// <param name="outDirectory">the output directory</param>
         /// <param name="logger">logger</param>
-        public CSharpResourceWriter(DirectoryInfo outDirectory, ILogger logger) : base(outDirectory, logger)
+        public CSharpResourceWriter(DirectoryInfo outDirectory, ILogger<CSharpResourceWriter> logger)
         {
+            _outDirectory = outDirectory;
+            _logger = logger;
+        }
+
+        /// <summary>
+        /// Instantiates a new resource writer
+        /// </summary>
+        /// <param name="options">the resource writer options</param>
+        /// <param name="logger">logger</param>
+        public CSharpResourceWriter(IOptions<CSharpResourceWriterOptions> options, ILogger<CSharpResourceWriter> logger)
+        {
+            var opt = options.Value;
+            _outDirectory = opt.OutDirectory ?? throw new InvalidOperationException("The CSharpResourceWriter needs a valid value for OutDirectory.");
+            _logger = logger;
         }
 
         /// <summary>
@@ -23,42 +41,47 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="resources">the resources to write</param>
         public override void WriteResources(IEnumerable<Resource> resources)
         {
-            if (OutDirectory != null)
+            if (_outDirectory is not { FullName: { } directoryFullName }) 
+                return;
+
+            _logger.LogInformation("Writing C# source files to '{directory}'", directoryFullName);
+            
+            // Write out the C# source code to the desired output location
+            foreach (var resource in resources)
             {
-                Logger.LogInformation($"Writing C# source files to {OutDirectory.FullName}");
-                // Write out the C# source code to the desired output location
-                foreach (var resource in resources)
+                switch (resource)
                 {
-                    if (resource is Binary binary)
+                    case Binary { ContentType: "text/plain" } binary:
                     {
-                        if (binary.ContentType == "text/plain")
+                        var bytes = binary.Data;
+                        DirectoryInfo sourceDir;
+                        if (binary.Id.StartsWith("Tuple_"))
                         {
-                            var bytes = binary.Data;
-                            DirectoryInfo? sourceDir = null;
-                            if (binary.Id.StartsWith("Tuple_"))
-                            {
-                                sourceDir = new(Path.Combine(OutDirectory.FullName, "Tuples"));
-                            }
-                            else
-                            {
-                                sourceDir = new(OutDirectory.FullName);
-                            }
-                            EnsureDirectory(sourceDir);
-                            var filePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
-                            Logger.LogInformation($"Writing {filePath}");
-                            File.WriteAllBytes(filePath, bytes);
+                            sourceDir = new(Path.Combine(directoryFullName, "Tuples"));
                         }
+                        else
+                        {
+                            sourceDir = new(directoryFullName);
+                        }
+                        EnsureDirectory(sourceDir);
+                        var filePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
+                        _logger.LogInformation("Writing '{file}'", filePath);
+                        File.WriteAllBytes(filePath, bytes);
+                        break;
                     }
-                    else if (resource is Library library && library.Content != null)
+
+                    case Library { Content: not null } library:
                     {
                         var textPlain = library.Content
                             .SingleOrDefault(c => c.ContentType == "text/plain");
                         if (textPlain != null)
                         {
                             var bytes = textPlain.Data;
-                            var sourceFilePath = Path.Combine(OutDirectory.FullName, $"{library.Id}.cs");
+                            var sourceFilePath = Path.Combine(directoryFullName, $"{library.Id}.cs");
                             File.WriteAllBytes(sourceFilePath, bytes);
                         }
+
+                        break;
                     }
                 }
             }

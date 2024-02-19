@@ -20,9 +20,24 @@ namespace Hl7.Cql.Packaging
         /// </summary>
         /// <param name="logFactory">logger factory</param>
         /// <param name="resourceWriters">set of writers to output the resources using</param>
-        public ResourcePackager(ILoggerFactory logFactory, params ResourceWriter[] resourceWriters){
+        public ResourcePackager(ILoggerFactory logFactory, params ResourceWriter[] resourceWriters)
+        {
             this.logFactory = logFactory;
             this.resourceWriters = resourceWriters;
+        }
+
+        /// <summary>
+        /// Instantiates a new Resource Packager.
+        /// </summary>
+        /// <remarks>
+        ///     With hosted services, IEnumerable resourceWriters required registering
+        ///     multiple service implementations on the same service type.
+        /// </remarks>
+        /// <param name="logFactory">logger factory</param>
+        /// <param name="resourceWriters">set of writers to output the resources using</param>
+        public ResourcePackager(ILoggerFactory logFactory, IEnumerable<ResourceWriter> resourceWriters) {
+            this.logFactory = logFactory;
+            this.resourceWriters = resourceWriters as ResourceWriter[] ?? resourceWriters.ToArray();
         }
 
         /// <summary>
