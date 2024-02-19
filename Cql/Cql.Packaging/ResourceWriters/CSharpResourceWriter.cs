@@ -31,7 +31,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         public CSharpResourceWriter(IOptions<CSharpResourceWriterOptions> options, ILogger<CSharpResourceWriter> logger)
         {
             var opt = options.Value;
-            _outDirectory = opt.OutDirectory ?? throw new InvalidOperationException("The CSharpResourceWriter needs a valid value for OutDirectory.");
+            _outDirectory = opt.OutDirectory ?? throw new ArgumentException("OutDirectory is required.");
             _logger = logger;
         }
 
@@ -41,48 +41,46 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="resources">the resources to write</param>
         public override void WriteResources(IEnumerable<Resource> resources)
         {
-            if (_outDirectory is not { FullName: { } directoryFullName }) 
-                return;
-
-            _logger.LogInformation("Writing C# source files to '{directory}'", directoryFullName);
+            _logger.LogInformation("Writing C# source files to '{directory}'", _outDirectory);
             
             // Write out the C# source code to the desired output location
             foreach (var resource in resources)
             {
-                switch (resource)
+                WriteResource(resource);
+            }
+        }
+
+        /// <inheritdoc />
+        public override void WriteResource(Resource resource)
+        {
+            var directory = _outDirectory.FullName;
+            switch (resource)
+            {
+                case Binary { ContentType: "text/plain" } binary:
                 {
-                    case Binary { ContentType: "text/plain" } binary:
-                    {
-                        var bytes = binary.Data;
-                        DirectoryInfo sourceDir;
-                        if (binary.Id.StartsWith("Tuple_"))
-                        {
-                            sourceDir = new(Path.Combine(directoryFullName, "Tuples"));
-                        }
-                        else
-                        {
-                            sourceDir = new(directoryFullName);
-                        }
-                        EnsureDirectory(sourceDir);
-                        var filePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
-                        _logger.LogInformation("Writing '{file}'", filePath);
-                        File.WriteAllBytes(filePath, bytes);
-                        break;
-                    }
+                    var bytes = binary.Data;
+                    var sourceDirPath = binary.Id.StartsWith("Tuple_")
+                        ? Path.Combine(directory, "Tuples"):
+                        directory;
+                    DirectoryInfo sourceDir = new(sourceDirPath);
+                    EnsureDirectory(sourceDir);
+                    var sourceFilePath = Path.Combine(sourceDir.FullName, $"{binary.Id}.cs");
+                    _logger.LogInformation("Writing '{file}'", sourceFilePath);
+                    File.WriteAllBytes(sourceFilePath, bytes);
+                    break;
+                }
 
-                    case Library { Content: not null } library:
+                case Library { Content: not null } library:
+                {
+                    var textPlain = library.Content
+                        .SingleOrDefault(c => c.ContentType == "text/plain");
+                    if (textPlain != null)
                     {
-                        var textPlain = library.Content
-                            .SingleOrDefault(c => c.ContentType == "text/plain");
-                        if (textPlain != null)
-                        {
-                            var bytes = textPlain.Data;
-                            var sourceFilePath = Path.Combine(directoryFullName, $"{library.Id}.cs");
-                            File.WriteAllBytes(sourceFilePath, bytes);
-                        }
-
-                        break;
+                        var bytes = textPlain.Data;
+                        var sourceFilePath = Path.Combine(directory, $"{library.Id}.cs");
+                        File.WriteAllBytes(sourceFilePath, bytes);
                     }
+                    break;
                 }
             }
         }

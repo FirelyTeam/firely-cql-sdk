@@ -47,28 +47,34 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="resources">the resources to write</param>
         public override void WriteResources(IEnumerable<Resource> resources)
         {
-            if (_outDirectory is not { FullName: { } outDirectoryFullName }) 
-                return;
-
+            var outDirectoryFullName = _outDirectory.FullName;
             _logger.LogInformation("Writing FHIR resources to '{directory}'", outDirectoryFullName);
 
             foreach (var resource in resources)
             {
-                if (resource is Library library
-                    && _overrideDate is { } overrideDate)
-                {
-                    library.Date = overrideDate.ToString("u");
-                    if (library.Meta is { } meta)
-                    {
-                        meta.LastUpdated = overrideDate;
-                    }
-                }
-
-                var file = Path.GetFullPath(Path.Combine(outDirectoryFullName, $"{resource.Id}.json"));
-                _logger.LogInformation("Writing '{file}'", file);
-                using var fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Read);
-                JsonSerializer.Serialize(fs, resource, JsonSerializerOptions);
+                WriteResource(resource);
             }
+        }
+
+        /// <inheritdoc />
+        public override void WriteResource(Resource resource)
+        {
+            var outDirectoryFullName = _outDirectory.FullName;
+
+            if (resource is Library library
+                && _overrideDate is { } overrideDate)
+            {
+                library.Date = overrideDate.ToString("u");
+                if (library.Meta is { } meta)
+                {
+                    meta.LastUpdated = overrideDate;
+                }
+            }
+
+            var file = Path.GetFullPath(Path.Combine(outDirectoryFullName, $"{resource.Id}.json"));
+            _logger.LogInformation("Writing '{file}'", file);
+            using var fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Read);
+            JsonSerializer.Serialize(fs, resource, JsonSerializerOptions);
         }
     }
 }

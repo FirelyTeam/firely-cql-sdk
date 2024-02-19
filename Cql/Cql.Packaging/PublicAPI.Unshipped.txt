@@ -1,4 +1,5 @@
 #nullable enable
+abstract Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 abstract Hl7.Cql.Packaging.ResourceWriters.ResourceWriter.WriteResources(System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>! resources) -> void
 Hl7.Cql.Packaging.AssemblyLoadContextExtensions
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper
@@ -33,6 +34,8 @@ Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.get -> 
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.set -> void
 override Hl7.Cql.Packaging.PackageArgs.GetHashCode() -> int
 override Hl7.Cql.Packaging.PackageArgs.Equals(object? obj) -> bool
+override Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
+override Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.ILoggerFactory! logFactory, int cacheSize) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.LogLevel logLevel = Microsoft.Extensions.Logging.LogLevel.Error, int cacheSize = 0) -> System.Runtime.Loader.AssemblyLoadContext!
