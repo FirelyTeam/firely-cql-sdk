@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Elm;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -24,13 +25,14 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// <returns>A new <see cref="OverloadedFunctionDef"/> containing all the new overloads.</returns>
         /// <exception cref="System.ArgumentException">If <paramref name="def"/> has no operands, or the resulting replacements would create duplicate overloads, or the replacements would not create at least 2 overloads.</exception>
         public static OverloadedFunctionDef For<T>(this SystemFunction<T> def, GenericTypeSpecifier typeArgument, params TypeSpecifier[] replacements)
-            where T : Element 
+            where T : Element
         {
             if (replacements.Length < 2)
                 throw new System.ArgumentException($"At least two types must be supplied to create overloads.", nameof(replacements));
             var functions = new FunctionDef[replacements.Length];
             var operandCount = def.operand?.Count() ?? 0;
-            if (operandCount > 0) {
+            if (operandCount > 0)
+            {
 
                 for (int i = 0; i < replacements.Length; i++)
                 {
@@ -42,8 +44,11 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 return overloaded;
             }
             else throw new System.ArgumentException($"Function has no operands", nameof(def));
-
         }
+        public static OverloadedFunctionDef WithListAndIntervalVariants<T>(this SystemFunction<T> def, GenericTypeSpecifier typeArgument)
+             where T : Element =>
+            new OverloadedFunctionDef(For(def, typeArgument, typeArgument.ToIntervalType(), typeArgument.ToListType()).Functions.Append(def).Reverse().ToArray(),
+                def.name, def.accessLevel);
 
         internal static SystemFunction CreateOverload<T>(SystemFunction<T> baseFunctionDef, int operandCount, Dictionary<string, TypeSpecifier> replacements) where T : Element
         {
@@ -71,11 +76,11 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Combine(this OverloadedFunctionDef def, params OverloadedFunctionDef[] defs) =>
             OverloadedFunctionDef.Create(def.Functions.Concat(defs.SelectMany(def => def.Functions)).ToArray());
 
-        public static OverloadedFunctionDef Combine<T>(this SystemFunction<T> def, params SystemFunction<T>[] defs) where T: Element =>
+        public static OverloadedFunctionDef Combine<T>(this SystemFunction<T> def, params SystemFunction<T>[] defs) where T : Element =>
             OverloadedFunctionDef.Create(defs.Append(def).ToArray());
 
         public static SystemFunction<T> MakeFluent<T>(this SystemFunction<T> function)
-            where T: Element
+            where T : Element
         {
             function.fluent = true;
             function.fluentSpecified = true;

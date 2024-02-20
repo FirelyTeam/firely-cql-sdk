@@ -164,11 +164,16 @@ namespace Hl7.Cql.CqlToElm
         internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier operandType, TypeSpecifier argumentType) =>
             operandType switch
             {
-                GenericTypeSpecifier generic => new() { { generic.typeArgumentName, argumentType } },
-                ListTypeSpecifier opList when argumentType is ListTypeSpecifier argList => InferGenericArgument(opList.elementType, argList.elementType),
-                ListTypeSpecifier opList when argumentType is not ListTypeSpecifier => InferGenericArgument(opList.elementType, argumentType),
-                IntervalTypeSpecifier opInt when argumentType is IntervalTypeSpecifier argInt => InferGenericArgument(opInt.pointType, argInt.pointType),
-                IntervalTypeSpecifier opInt when argumentType is not IntervalTypeSpecifier => InferGenericArgument(opInt.pointType, argumentType),
+                GenericTypeSpecifier generic 
+                    when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.typeArgumentName, argumentType } },
+                ListTypeSpecifier opList 
+                    when argumentType is ListTypeSpecifier argList => InferGenericArgument(opList.elementType, argList.elementType),
+                ListTypeSpecifier opList 
+                    when argumentType is not ListTypeSpecifier => InferGenericArgument(opList.elementType, argumentType),
+                IntervalTypeSpecifier opInt 
+                    when argumentType is IntervalTypeSpecifier argInt => InferGenericArgument(opInt.pointType, argInt.pointType),
+                IntervalTypeSpecifier opInt 
+                    when argumentType is not IntervalTypeSpecifier => InferGenericArgument(opInt.pointType, argumentType),
                 _ => new()
             };
 

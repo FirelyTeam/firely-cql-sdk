@@ -30,13 +30,14 @@ namespace Hl7.Cql.CqlToElm
                 Message msg => Populate(msg, arguments),
                 NaryExpression ne => Populate(ne, arguments),
                 PositionOf po => Populate(po, arguments),
+                Round round => Populate(round, arguments),
                 Slice slice => Populate(function, slice, arguments),
                 Split split => Populate(split, arguments),
                 Substring sub => Populate(sub, arguments),
                 TernaryExpression te => Populate(te, arguments),
                 Time time => Populate(time, arguments),
                 UnaryExpression ue => Populate(ue, arguments),
-                _ => throw new InvalidOperationException($"Cannot convert {result.GetType()} to {typeof(Expression)}")
+                _ => throw new InvalidOperationException($"Population of {result.GetType()} is not implemented.")
             };
             return result;
         }
@@ -210,6 +211,20 @@ namespace Hl7.Cql.CqlToElm
             po.pattern = arguments[1];
             return po;
         }
+
+        internal Round Populate(Round round, Expression[] arguments)
+        {
+            if (arguments.Length > 1)
+            {
+                round.precision = arguments[1];
+            }
+            else if (arguments.Length != 1)
+                throw new ArgumentException($"Expected 1-2 argument, but got {arguments.Length}.", nameof(arguments));
+            round.operand = arguments[0];
+            return round;
+        }
+
+
         internal Slice Populate(FunctionDef function, Slice slice, Expression[] arguments)
         {
             slice.source = arguments[0];

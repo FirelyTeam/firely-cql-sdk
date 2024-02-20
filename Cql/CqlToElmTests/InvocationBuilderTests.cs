@@ -29,6 +29,8 @@ namespace Hl7.Cql.CqlToElm.Test
         private static GenericTypeSpecifier Generic(string argumentName = "T") => new GenericTypeSpecifier(argumentName);
 
         private static Literal Boolean(bool value = true) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.BooleanType);
+        private static Literal String(string value = "") => new Literal { value = value }.WithResultType(SystemTypes.StringType);
+
         private static Literal Integer(int value = 1) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.IntegerType);
         private static Literal Decimal(decimal value = 1m) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.DecimalType);
         private static Quantity Quantity(decimal value = 1) => new Quantity { value = value, unit = "1"}.WithResultType(SystemTypes.QuantityType);
@@ -218,5 +220,63 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Add, arguments);
             Assert.IsFalse(result.Compatible);
         }
+
+        [TestMethod]
+        public void MatchIncludesWithNullAndList()
+        {
+            //define"Includes Null Left Input": null includes {2}
+
+            var arguments = new Expression[] { Null, List(Integer(2)) };
+            var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Includes, arguments);
+            Assert.IsTrue(result.Compatible);
+        }
+
+        [TestMethod]
+        public void MatchMessageWithListArgument()
+        {
+            //define "TestMessageTrace Input": Message({ 3,4,5},true,'300','Trace','This is a trace')
+            var arguments = new Expression[] { List(Integer(3)), Boolean(true), String("300"), String("Trace"), String("This is a trace") };
+            var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Message, arguments);
+            Assert.IsTrue(result.Compatible);
+        }
+
+        [TestMethod]
+        public void MatchAnyOperandWithListArgument()
+        {
+            var function = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.AnyType }, SystemTypes.AnyType, "f");
+            var arguments = new Expression[] { List(Integer(1)) };
+            var result = InvocationBuilder.MatchSignature(function, arguments);
+            Assert.IsTrue(result.Compatible);
+        }
+
+        [TestMethod]
+        public void MatchEqualWithIntervalArguments()
+        {
+            var arguments = new Expression[] { Interval(Integer(1), Integer(2)), Interval(Null, Null) };
+            var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Equal, arguments);
+            Assert.IsTrue(result.Compatible);
+        }
+
+        [TestMethod]
+        public void MatchIndexOf()
+        {
+            //IndexOf(null, {})
+            var arguments = new Expression[] { Null, List(Null) };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.IndexOf, arguments);
+            Assert.IsTrue(result.Compatible);
+        }
+
+        // NYI
+        public void MatchChoiceIntegerToDecimal()
+        {
+
+            var choiceType = new ChoiceTypeSpecifier(SystemTypes.IntegerType, SystemTypes.StringType);
+            var @as = new As { operand = Integer(1), asTypeSpecifier = choiceType }.WithResultType(choiceType);
+            var arguments = new Expression[] { @as };
+            var function = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.DecimalType }, SystemTypes.AnyType, "f");
+            var result = InvocationBuilder.MatchSignature(function, arguments);
+            Assert.IsTrue(result.Compatible);
+        }
+
     }
 }

@@ -153,31 +153,35 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //   expression ('is' | 'as') typeSpecifier  
         public override Expression VisitTypeExpression([NotNull] cqlParser.TypeExpressionContext context)
         {
-            var lhs = Visit(context.expression());
+            var operand = Visit(context.expression());
             var @operator = context.GetChild(1).GetText();
             var typeSpec = TypeSpecifierVisitor.Visit(context.typeSpecifier());
 
             Expression expression;
+            // the is operator is performend at runtime.  It is possible through static type analysis to
+            // conclude that some is statements will always be false, but we're not doing that here.
             if (@operator == "is")
             {
-                expression = InvocationBuilder.Invoke(SystemLibrary.Is, lhs);
-                if (expression is Is @is)
+                expression = new Is
                 {
-                    @is.isTypeSpecifier = typeSpec;
-                    if (typeSpec is NamedTypeSpecifier nts)
-                        @is.isType = nts.name;
-                }
-                else throw new InvalidOperationException($"Expecting Is node; got {expression.GetType()}");
+                    operand = operand,
+                    isTypeSpecifier = typeSpec,
+                    isType = typeSpec is NamedTypeSpecifier nts ? typeSpec.resultTypeName : null
+                }.WithResultType(SystemTypes.BooleanType);                
             }
             else if (@operator == "as")
             {
-                var result = TypeConverter.Convert(lhs, typeSpec);
-                expression = result.Result;
-                if (result.Cost > ConversionCost.Cast || result.Result is not As)
+                // using the as operator is an explicit cast.  we will statically determine some failures.
+                expression = new As
+                {
+                    operand = operand,
+                    asTypeSpecifier = typeSpec,
+                    asType = typeSpec is NamedTypeSpecifier nts ? typeSpec.resultTypeName : null
+                }.WithResultType(typeSpec);                
+                var cost = TypeConverter.GetConversionCost(operand.resultTypeSpecifier, typeSpec);
+                if (cost > ConversionCost.Cast)
                     expression
                         .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpec}'.");
-                if (result.Error is not null)
-                    expression = result.Result.AddError(result.Error);
             }
             else throw new InvalidOperationException($"Unexpected term {@operator}.  Expected 'is' or 'as'.");
 
@@ -189,22 +193,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // 'cast' expression 'as' typeSpecifier                                                          #castExpression
         public override Expression VisitCastExpression([NotNull] cqlParser.CastExpressionContext context)
         {
+            // using the as operator is an explicit cast.  we will statically determine some failures.
             var operand = Visit(context.expression());
             var typeSpecifier = TypeSpecifierVisitor.Visit(context.typeSpecifier());
-            var result = TypeConverter.Convert(operand, typeSpecifier);
-            if (result.Cost <= ConversionCost.Cast && result.Result is As @as)
+            var expression = new As
             {
-                @as.strict = true;
-                return @as
-                    .WithId()
-                    .WithLocator(context.Locator());
-            }
-            else
-                return result.Result
-                    .WithId()
-                    .WithLocator(context.Locator())
-                    .AddError($"Expression of type '{operand.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpecifier}'.")
-                    .WithResultType(typeSpecifier);
+                operand = operand,
+                asTypeSpecifier = typeSpecifier,
+                asType = typeSpecifier is NamedTypeSpecifier nts ? typeSpecifier.resultTypeName : null,
+                strict = true,
+            }.WithResultType(typeSpecifier);
+            var cost = TypeConverter.GetConversionCost(operand.resultTypeSpecifier, typeSpecifier);
+            if (cost > ConversionCost.Cast)
+                expression
+                    .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpecifier}'.");
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         public override Expression VisitConversionExpressionTerm([NotNull] cqlParser.ConversionExpressionTermContext context)

@@ -72,7 +72,7 @@ namespace Hl7.Cql.CqlToElm
                 if (type == SystemTypes.BooleanType)
                     convert = new ToBoolean { operand = expression };
                 else if (type == SystemTypes.IntegerType)
-                    convert = new ToInteger {  operand = expression };
+                    convert = new ToInteger { operand = expression };
                 else if (type == SystemTypes.LongType)
                     convert = new ToLong { operand = expression };
                 else if (type == SystemTypes.DecimalType)
@@ -80,11 +80,11 @@ namespace Hl7.Cql.CqlToElm
                 else if (type == SystemTypes.StringType)
                     convert = new ToString { operand = expression };
                 else
-                    convert = new As 
+                    convert = new As
                     {
                         operand = expression,
-                        asTypeSpecifier = type,  
-                        asType = type is NamedTypeSpecifier nts ? nts.name : null 
+                        asTypeSpecifier = type,
+                        asType = type is NamedTypeSpecifier nts ? nts.name : null
                     };
                 return convert
                     .WithLocator(expression.locator)
@@ -129,7 +129,7 @@ namespace Hl7.Cql.CqlToElm
                 As(new Start { operand = interval }.WithResultType(to), to);
 
             Expression ToList(Expression expression, ListTypeSpecifier to) =>
-                new ToList {  operand = As(expression, to.elementType) }.WithResultType(to);
+                new ToList { operand = As(expression, to.elementType) }.WithResultType(to);
         }
 
         /// <summary>
@@ -174,11 +174,13 @@ namespace Hl7.Cql.CqlToElm
         internal string IncompatibilityMessage(TypeSpecifier from, TypeSpecifier to) =>
             $"Expression of type '{from}' cannot be cast as a value of type '{to}'.";
 
-        internal virtual bool IsExactMatch(TypeSpecifier argumentType, TypeSpecifier to) => argumentType == to;
+        // All types exactly match Any
+        internal virtual bool IsExactMatch(TypeSpecifier from, TypeSpecifier to) =>
+            from == to;
 
-        internal virtual bool IsSubtype(TypeSpecifier argumentType, TypeSpecifier to)
+        internal virtual bool IsSubtype(TypeSpecifier from, TypeSpecifier to)
         {
-            if (argumentType is NamedTypeSpecifier argNts && to is NamedTypeSpecifier toNts)
+            if (from is NamedTypeSpecifier argNts && to is NamedTypeSpecifier toNts)
             {
                 var argTypeInfo = ModelProvider.FindTypeInfoByNamedType(argNts);
                 var toTypeInfo = ModelProvider.FindTypeInfoByNamedType(toNts);
@@ -214,11 +216,13 @@ namespace Hl7.Cql.CqlToElm
         {
             if (from == SystemTypes.AnyType)
                 return true;
+
             else if (from is ChoiceTypeSpecifier fromChoice)
             {
                 if (to is ChoiceTypeSpecifier toChoice)
                     return fromChoice.choice?.Any(ft => toChoice.choice?.Contains(ft) ?? false) ?? false;
-                else fromChoice.choice?.Any(ft => ft == to);
+                else
+                    return fromChoice.choice?.Any(ft => ft == to) ?? false;
             }
             else if (to is ChoiceTypeSpecifier toChoice)
             {
@@ -243,7 +247,6 @@ namespace Hl7.Cql.CqlToElm
         // https://cql.hl7.org/09-b-cqlreference.html#convert
         internal virtual bool HasImplicitConversion(TypeSpecifier fromType, TypeSpecifier to)
         {
-
             if (fromType == SystemTypes.IntegerType
                 && (to == SystemTypes.LongType || to == SystemTypes.DecimalType || to == SystemTypes.QuantityType))
                 return true;
@@ -338,9 +341,9 @@ namespace Hl7.Cql.CqlToElm
             else return false;
         }
 
-        internal virtual bool CanBeDemoted(ListTypeSpecifier expressionType, TypeSpecifier to)
+        internal virtual bool CanBeDemoted(ListTypeSpecifier from, TypeSpecifier to)
         {
-            var elementType = expressionType.elementType;
+            var elementType = from.elementType;
             // written this way for easier debugging
             if (IsExactMatch(elementType, to))
                 return true;
@@ -350,7 +353,7 @@ namespace Hl7.Cql.CqlToElm
                 return true;
             else if (CanBeCast(elementType, to))
                 return true;
-            else if (HasImplicitConversion(expressionType, to))
+            else if (HasImplicitConversion(from, to))
                 return true;
             else return false;
         }
