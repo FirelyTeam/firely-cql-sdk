@@ -162,14 +162,15 @@ public class Program
     }
 }
 
-internal class PackagerTypeManager : TypeManager
+// REVIEW: Move these classes into a separate files
+file class PackagerTypeManager : TypeManager
 {
     public PackagerTypeManager([FromKeyedServices("Fhir")] TypeResolver resolver) : base(resolver)
     {
     }
 }
 
-internal class PackagerCqlOperatorBinding : CqlOperatorsBinding
+file class PackagerCqlOperatorBinding : CqlOperatorsBinding
 {
     public PackagerCqlOperatorBinding(
         [FromKeyedServices("Fhir")] TypeResolver typeResolver,

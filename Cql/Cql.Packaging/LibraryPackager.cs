@@ -148,7 +148,7 @@ namespace Hl7.Cql.Packaging
             OperatorBinding operatorBinding,
             TypeManager typeManager,
             ILoggerFactory logFactory,
-            LibraryPackageEvents events = default)
+            LibraryPackageCallbacks callbacks = default)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
@@ -174,9 +174,11 @@ namespace Hl7.Cql.Packaging
             foreach (var alias in typeResolver.Aliases)
                 scw.AliasedUsings.Add(alias);
 
+            var resources = new List<Resource>();
+            var librariesByNameAndVersion = new Dictionary<string, Library>();
+
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
             var assemblies = compiler.Compile(elmLibraries, logFactory);
-            var libraries = new Dictionary<string, Library>();
             var typeCrosswalk = new CqlTypeToFhirTypeMapper(typeResolver);
             foreach (var library in elmLibraries)
             {
@@ -205,12 +207,11 @@ namespace Hl7.Cql.Packaging
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
 
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, events);
-                libraries.Add(library.NameAndVersion, fhirLibrary);
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, callbacks);
+                librariesByNameAndVersion.Add(library.NameAndVersion, fhirLibrary);
+                resources.Add(fhirLibrary);
             }
 
-            var resources = new List<Resource>();
-            resources.AddRange(libraries.Values);
 
             var tupleAssembly = assemblies["TupleTypes"];
 
@@ -273,11 +274,11 @@ namespace Hl7.Cql.Packaging
                             End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
                         };
                         measure.Group = new List<Measure.GroupComponent>();
-                        measure.Url = events.BuildUrlFromResource(measure);
+                        measure.Url = callbacks.BuildUrlFromResource(measure);
                         if (library.NameAndVersion is null)
                             throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-                        if (!libraries.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
+                        if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
                             throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
 
                         measure.Library = new List<string> { libForMeasure!.Url };
@@ -295,7 +296,7 @@ namespace Hl7.Cql.Packaging
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,
             elm.Library? elmLibrary = null,
-            LibraryPackageEvents events = default)
+            LibraryPackageCallbacks callbacks = default)
         {
             if (!elmFile.Exists)
                 throw new ArgumentException($"Couldn't find library {elmFile.FullName}", nameof(elmFile));
@@ -395,8 +396,8 @@ namespace Hl7.Cql.Packaging
                 }
             }
 
-            library.Url = events.BuildUrlFromResource(library);
-            events.NotifyLibraryResourceCreated(library);
+            library.Url = callbacks.BuildUrlFromResource(library);
+            callbacks.NotifyLibraryResourceCreated(library);
             return library;
         }
 
@@ -484,9 +485,9 @@ namespace Hl7.Cql.Packaging
         }
     }
 
-    internal readonly record struct LibraryPackageEvents
+    internal readonly record struct LibraryPackageCallbacks
     {
-        public LibraryPackageEvents(
+        public LibraryPackageCallbacks(
             Func<Resource, string>? buildUrlFromResource = null,
             Action<Library>? onLibraryResourceCreated = null)
         {

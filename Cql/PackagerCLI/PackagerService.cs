@@ -48,7 +48,8 @@ internal class PackagerService
         var librariesByNameAndVersion = LibraryPackager.LoadLibraries(opt.ElmDirectory!);
         var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);
         HashSet<Resource> resourcesWritten = new();
-        var resources = LibraryPackager.PackageResources(opt.ElmDirectory!,
+        var resources = LibraryPackager.PackageResources(
+            opt.ElmDirectory!,
             opt.CqlDirectory!,
             directedGraph,
             _fhirTypeResolver,
