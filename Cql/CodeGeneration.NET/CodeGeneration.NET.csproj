@@ -25,4 +25,8 @@
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
 </Project>

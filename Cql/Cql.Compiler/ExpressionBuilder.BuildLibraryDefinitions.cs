@@ -34,12 +34,14 @@ partial class ExpressionBuilder
     /// Builds the definitions for the library.
     /// </summary>
     /// <returns>The definition dictionary of lambda expressions.</returns>
-    public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions()
+    private DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions()
     {
+        Logger.LogInformation("Building expressions for '{library}'", LibraryKey);
+
         var definitions = new DefinitionDictionary<LambdaExpression>();
         var definitionsBuilderContext = new DefinitionsBuilderContext(this, definitions);
-        var definitiionsBuilder = new DefinitionsBuilder(definitionsBuilderContext);
-        definitiionsBuilder.ProcessLibrary();
+        var definitionsBuilder = new DefinitionsBuilder(definitionsBuilderContext);
+        definitionsBuilder.ProcessLibrary();
         return definitions;
     }
 
@@ -568,5 +570,27 @@ partial class ExpressionBuilder
 
         public IEnumerable<ParameterExpression> GetParameterExpressions() => 
             _expressionBuilderContext.Operands.Values;
+    }
+}
+
+internal class LibraryDefinitionsBuilder
+{
+    private readonly ILogger<ExpressionBuilder> _logger;
+    private readonly OperatorBinding _operatorBinding;
+    private readonly TypeManager _typeManager;
+
+    public LibraryDefinitionsBuilder(
+        ILogger<ExpressionBuilder> logger, 
+        OperatorBinding operatorBinding,
+        TypeManager typeManager)
+    {
+        _logger = logger;
+        _operatorBinding = operatorBinding;
+        _typeManager = typeManager;
+    }
+
+    public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(Library library)
+    {
+        return ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _logger, library);
     }
 }

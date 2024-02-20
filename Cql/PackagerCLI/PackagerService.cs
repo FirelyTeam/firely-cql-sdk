@@ -1,28 +1,50 @@
 ﻿using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
 
 internal class PackagerService
 {
+    private readonly OptionsConsoleDumper _optionsConsoleDumper;
     private readonly PackagerOptions _packagerOptions;
     private readonly ResourceWriter[] _resourceWriters;
+    private readonly ILogger<PackagerService> _logger;
     private readonly LibraryPackagerService _libraryPackager;
 
     public PackagerService(
+        ILogger<PackagerService> logger,
         IOptions<PackagerOptions> packageArgsOptions,
         IEnumerable<ResourceWriter> resourceWriters,
-        LibraryPackagerService libraryPackager)
+        LibraryPackagerService libraryPackager, OptionsConsoleDumper optionsConsoleDumper)
     {
+        _logger = logger;
         _libraryPackager = libraryPackager;
+        _optionsConsoleDumper = optionsConsoleDumper;
         _packagerOptions = packageArgsOptions.Value;
         _resourceWriters = resourceWriters.ToArray();
     }
 
-    public int Package()
+    public int Run()
     {
+        try
+        {
+            return RunCore();
+        }
+        catch (Exception e)
+        {
+            _logger.LogError(e, "An error occurred while running the packager");
+            Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the log for more detail.");
+            return -1;
+        }
+    }
+
+    private int RunCore()
+    {
+        _optionsConsoleDumper.DumpToConsole();
+
         if (_resourceWriters.Length == 0) return 0; //Skip since no writers provided
 
         var opt = _packagerOptions;
@@ -42,7 +64,6 @@ internal class PackagerService
                         resourceWriter.WriteResource(library);
                         resourcesWritten.Add(library);
                     }
-
                 }))!;
 
         var remainingResources = resources.Except(resourcesWritten).ToList();

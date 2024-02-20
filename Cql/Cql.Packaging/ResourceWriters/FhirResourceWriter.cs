@@ -47,8 +47,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="resources">the resources to write</param>
         public override void WriteResources(IEnumerable<Resource> resources)
         {
-            var outDirectoryFullName = _outDirectory.FullName;
-            _logger.LogInformation("Writing FHIR resources to '{directory}'", outDirectoryFullName);
+            _logger.LogInformation("Writing FHIR resources to '{directory}'", _outDirectory);
 
             foreach (var resource in resources)
             {
@@ -59,6 +58,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <inheritdoc />
         public override void WriteResource(Resource resource)
         {
+            EnsureDirectory(_outDirectory);
             var outDirectoryFullName = _outDirectory.FullName;
 
             if (resource is Library library

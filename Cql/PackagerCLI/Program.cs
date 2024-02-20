@@ -2,6 +2,7 @@
 
 using System.Globalization;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
@@ -112,8 +113,13 @@ public class Program
         services.TryAddKeyedSingleton<TypeResolver>("Fhir", FhirTypeResolver.Default);
         services.TryAddKeyedSingleton<TypeConverter>("Fhir", FhirTypeConverter.Default);
         services.TryAddSingleton<OperatorBinding, PackagerCqlOperatorBinding>();
-        services.TryAddTransient<TypeManager, PackagerTypeManager>();
-        services.TryAddTransient<LibraryPackagerService>();
+        services.TryAddSingleton<TypeManager, PackagerTypeManager>();
+        services.TryAddSingleton<LibraryPackagerService>();
+        services.TryAddSingleton<OptionsConsoleDumper>();
+        services.TryAddSingleton<AssemblyCompiler, PackagerAssemblyCompiler>();
+        services.TryAddSingleton<LibraryDefinitionsBuilder>();
+        services.Add(ServiceDescriptor.Singleton(typeof(Factory<>), typeof(ServiceProviderFactory<>)));
+
     }
 
     private static int Run(IHostBuilder hostBuilder)
@@ -126,18 +132,8 @@ public class Program
         }
 
         using var mainScope = host.Services.CreateScope();
-        var programLogger = mainScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
         var packageService = mainScope.ServiceProvider.GetRequiredService<PackagerService>();
-        try
-        {
-            return packageService.Package();
-        }
-        catch (Exception e)
-        {
-            programLogger.LogError(e, "An error occurred while running the packager");
-            Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the log for more detail.");
-            return -1;
-        }
+        return packageService.Run();
     }
 
     private static IHost? CreateHost(IHostBuilder hostBuilder)
@@ -165,6 +161,27 @@ public class Program
 }
 
 // REVIEW: Move these classes into a separate files
+
+file class ServiceProviderFactory<T> : Factory<T>
+{
+    private readonly IServiceProvider _sp;
+
+    public ServiceProviderFactory(IServiceProvider sp) => _sp = sp;
+
+    public override T Create() => ActivatorUtilities.CreateInstance<T>(_sp);
+}
+
+file class PackagerAssemblyCompiler : AssemblyCompiler
+{
+    public PackagerAssemblyCompiler(
+        LibraryDefinitionsBuilder libraryDefinitionsBuilder,
+        [FromKeyedServices("Fhir")] TypeResolver typeResolver, 
+        TypeManager typeManager, 
+        OperatorBinding operatorBinding) : base(libraryDefinitionsBuilder,typeResolver, typeManager, operatorBinding)
+    {
+    }
+}
+
 file class PackagerTypeManager : TypeManager
 {
     public PackagerTypeManager([FromKeyedServices("Fhir")] TypeResolver resolver) : base(resolver)

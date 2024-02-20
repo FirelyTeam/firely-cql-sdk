@@ -29,21 +29,26 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        internal AssemblyCompiler(TypeResolver typeResolver,
+        private readonly TypeResolver _typeResolver;
+        private readonly TypeManager _typeManager;
+        private readonly OperatorBinding _binding;
+        private readonly LibraryDefinitionsBuilder _libraryDefinitionsBuilder;
+
+        internal AssemblyCompiler(
+            LibraryDefinitionsBuilder libraryDefinitionsBuilder,
+            TypeResolver typeResolver, 
             TypeManager? typeManager = null,
             OperatorBinding? operatorBinding = null)
         {
-            TypeResolver = typeResolver;
-            TypeManager = typeManager ?? new TypeManager(typeResolver);
-            Binding = operatorBinding ?? new CqlOperatorsBinding(typeResolver);
+            _typeResolver = typeResolver;
+            _libraryDefinitionsBuilder = libraryDefinitionsBuilder;
+            _typeManager = typeManager ?? new TypeManager(typeResolver);
+            _binding = operatorBinding ?? new CqlOperatorsBinding(typeResolver);
         }
 
-        private TypeResolver TypeResolver { get; }
-        private TypeManager TypeManager { get; }
-        private OperatorBinding Binding { get; }
-
         internal IDictionary<string, AssemblyData> Compile(
-            IEnumerable<Library> elmPackages, ILoggerFactory logFactory)
+            IEnumerable<Library> elmPackages, 
+            ILoggerFactory logFactory)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
@@ -61,7 +66,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(IValueSetDictionary).Assembly, // Cql.ValueSets
                 typeof(Iso8601.DateIso8601).Assembly, // Iso8601
             }
-            .Concat(TypeResolver.ModelAssemblies)
+            .Concat(_typeResolver.ModelAssemblies)
             .Distinct()
             .ToArray();
 
@@ -71,14 +76,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
             }
-            .Concat(TypeResolver.ModelNamespaces)
+            .Concat(_typeResolver.ModelNamespaces)
             .Distinct()
             .ToArray();
 
             var scw = new CSharpSourceCodeWriter(codeWriterLogger);
             foreach (var @using in namespaces)
                 scw.Usings.Add(@using);
-            var aliases = TypeResolver.Aliases;
+            var aliases = _typeResolver.Aliases;
             foreach (var alias in aliases)
                 scw.AliasedUsings.Add(alias);
 
@@ -86,19 +91,20 @@ namespace Hl7.Cql.CodeGeneration.NET
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var expressions = ExpressionBuilder.BuildLibraryDefinitions(Binding, TypeManager, builderLogger, package);
+                var expressions = _libraryDefinitionsBuilder.BuildLibraryDefinitions(package);
                 all.Merge(expressions);
             }
 
-            var assemblies = generate(all,
-                TypeManager,
+            var assemblies = Generate(all,
+                _typeManager,
                 graph,
                 scw,
                 references);
             return assemblies;
         }
 
-        private IDictionary<string, AssemblyData> generate(DefinitionDictionary<LambdaExpression> expressions,
+        private static IDictionary<string, AssemblyData> Generate(
+            DefinitionDictionary<LambdaExpression> expressions,
            TypeManager typeManager,
            DirectedGraph dependencies,
            CSharpSourceCodeWriter writer,
@@ -141,7 +147,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return assemblies;
         }
 
-        private AssemblyData CompileTuples(IEnumerable<KeyValuePair<string, Stream>> tupleStreams,
+        private static AssemblyData CompileTuples(IEnumerable<KeyValuePair<string, Stream>> tupleStreams,
             IEnumerable<Assembly> assemblyReferences)
         {
             var metadataReferences = new List<MetadataReference>();
@@ -203,7 +209,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             return asmData;
         }
 
-        private void CompileNode(Stream sourceCodeStream,
+        private static void CompileNode(Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
             DirectedGraphNode node,
             IEnumerable<Assembly> assemblyReferences,
@@ -284,7 +290,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
 
-        private void AddNetCoreReferences(List<MetadataReference> metadataReferences)
+        private static void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {
             var rtPath = Path.GetDirectoryName(typeof(object).Assembly.Location) ??
                 throw new InvalidOperationException($"Couldn't identify system file path for the System assembly");
@@ -320,7 +326,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
         }
-        private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
+        private static IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
         {
             var sorted = minimalGraph.TopologicalSort()
                 .Where(n => n.NodeId != minimalGraph.StartNode.NodeId && n.NodeId != minimalGraph.EndNode.NodeId)

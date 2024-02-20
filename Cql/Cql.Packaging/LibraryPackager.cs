@@ -24,43 +24,6 @@ using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
 {
-    public static class LibraryLoader
-    {
-        public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
-        {
-            // Load libraries from ELM files in a deterministic order
-
-            (FileInfo file, int index)[] input = elmDir
-                .GetFiles("*.json", SearchOption.AllDirectories)
-                .OrderBy(f => f.FullName)
-                .Select((file, index) => (file, index))
-                .ToArray();
-
-            elm.Library[] libraries = new elm.Library[input.Length];
-
-            Parallel.ForEach(input, tuple =>
-            {
-                var library = elm.Library.LoadFromJson(tuple.file);
-                if (library?.NameAndVersion != null)
-                {
-                    libraries[tuple.index] = library;
-                }
-            });
-
-            var dict = new Dictionary<string, elm.Library>();
-            foreach (var library in libraries)
-            {
-                if (library?.NameAndVersion != null)
-                {
-                    dict.TryAdd(library.NameAndVersion, library);
-                }
-            }
-
-            return dict;
-        }
-    }
-
-
     public static class LibraryPackager
     {
         internal static IEnumerable<Resource> PackageResources(
@@ -73,107 +36,50 @@ namespace Hl7.Cql.Packaging
             ILoggerFactory logFactory,
             LibraryPackageCallbacks callbacks = default)
         {
-            var resourcePackagerService = new LibraryPackagerService(typeResolver, operatorBinding, typeManager, logFactory);
+            var expressionBuilderLogger = logFactory.CreateLogger<ExpressionBuilder>();
+            var libraryDefinitionsBuilder = new LibraryDefinitionsBuilder(expressionBuilderLogger, operatorBinding, typeManager);
+            var assemblyCompiler = new AssemblyCompiler(libraryDefinitionsBuilder, typeResolver, typeManager, operatorBinding);
+            var resourcePackagerService = new LibraryPackagerService(
+                logFactory,
+                expressionBuilderLogger,
+                typeResolver, 
+                operatorBinding,
+                typeManager,
+                assemblyCompiler
+                //new CSharpSourceCodeWriter(logFactory.CreateLogger< CSharpSourceCodeWriter>())
+                );
             return resourcePackagerService.PackageResources(elmDirectory, cqlDirectory, packageGraph, callbacks);
         }
     }
 
+
     internal class LibraryPackagerService
     {
+        private readonly AssemblyCompiler _assemblyCompiler;
         private readonly TypeResolver _typeResolver;
         private readonly OperatorBinding _operatorBinding;
         private readonly TypeManager _typeManager;
         private readonly ILoggerFactory _loggerFactory;
+        // private readonly Factory<CSharpSourceCodeWriter> _cSharpSourceCodeWriterFactory;
+        private readonly ILogger<ExpressionBuilder> _expressionBuilderLogger;
 
         public LibraryPackagerService(
+            ILoggerFactory loggerFactory,
+            ILogger<ExpressionBuilder> expressionBuilderLogger,
             [FromKeyedServices("Fhir")] TypeResolver typeResolver,
             [FromKeyedServices("Cql")] OperatorBinding operatorBinding,
             [FromKeyedServices("Fhir")] TypeManager typeManager,
-            ILoggerFactory loggerFactory)
+            // Factory<CSharpSourceCodeWriter> cSharpSourceCodeWriterFactory, 
+            AssemblyCompiler assemblyCompiler)
         {
             _typeResolver = typeResolver;
             _operatorBinding = operatorBinding;
             _typeManager = typeManager;
             _loggerFactory = loggerFactory;
+            // _cSharpSourceCodeWriterFactory = cSharpSourceCodeWriterFactory;
+            _expressionBuilderLogger = expressionBuilderLogger;
+            _assemblyCompiler = assemblyCompiler;
         }
-        //         public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
-        //         {
-        //             var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
-        //             using var fs = libFile.OpenRead();
-        //             var library = fs.ParseFhir<Library>();
-        //             var dependencies = library.GetDependencies(dir);
-        //             var allLibs = dependencies.AllLibraries();
-        //             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        //             allLibs.LoadAssemblies(asmContext);
-        //
-        //             var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
-        //             using var tupleFs = tupleTypes.OpenRead();
-        //             var binaries = new[]
-        //             {
-        //                 tupleFs.ParseFhir<Binary>()
-        //             };
-        //
-        //             binaries.LoadAssembles(asmContext);
-        //             return asmContext;
-        //         }
-        //
-        // #pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-        //         public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-        // #pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-        //           string lib,
-        //           string version,
-        //           LogLevel logLevel = LogLevel.Error,
-        //           int cacheSize = 0)
-        //         {
-        //             var logFactory = LoggerFactory
-        //                           .Create(logging =>
-        //                           {
-        //                               logging.AddFilter(level => level >= logLevel);
-        //                               logging.AddConsole(console =>
-        //                               {
-        //                                   console.LogToStandardErrorThreshold = LogLevel.Error;
-        //                               });
-        //                           });
-        //
-        //             return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
-        //         }
-        //
-        // private static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-        //     string lib,
-        //     string version,
-        //     ILoggerFactory logFactory,
-        //     int cacheSize)
-        // {
-        //     var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
-        //     if (!elmFile.Exists)
-        //         elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
-        //     if (!elmFile.Exists)
-        //         throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
-        //     var library = Elm.Library.LoadFromJson(elmFile)
-        //         ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
-        //     var dependencies = 
-        //         library.GetIncludedLibraries(elmDirectory)
-        //         .Packages()
-        //         .ToArray();
-        //
-        //     var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-        //     var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
-        //     var typeManager = new TypeManager(typeResolver);
-        //     var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
-        //     var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
-        //
-        //     var assemblyData = compiler.Compile(dependencies,
-        //         logFactory);
-        //
-        //     var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        //     foreach (var kvp in assemblyData)
-        //     {
-        //         var assemblyBytes = kvp.Value.Binary;
-        //         using var ms = new MemoryStream(assemblyBytes);
-        //         asmContext.LoadFromStream(ms);
-        //     }
-        //     return asmContext;
-        // }
 
         internal IEnumerable<Resource> PackageResources(
             DirectoryInfo elmDirectory,
@@ -181,36 +87,46 @@ namespace Hl7.Cql.Packaging
             DirectedGraph packageGraph,
             LibraryPackageCallbacks callbacks = default)
         {
-            var builderLogger = _loggerFactory.CreateLogger<ExpressionBuilder>();
-            var codeWriterLogger = _loggerFactory.CreateLogger<CSharpSourceCodeWriter>();
 
-            var elmLibraries =
-                packageGraph.Nodes.Values
-                .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
-                .OfType<elm.Library>()
-                .ToArray();
+            var elmLibrariesEnumerable = BuildElmLibraries(packageGraph);
+            var elmLibraries = elmLibrariesEnumerable.ToList();
 
-            var all = new DefinitionDictionary<LambdaExpression>();
-            foreach (var library in elmLibraries)
-            {
-                builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var expressions = ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, builderLogger, library!);
-                all.Merge(expressions);
-            }
-
-            var scw = new CSharpSourceCodeWriter(codeWriterLogger);
-            foreach (var @using in _typeResolver.ModelNamespaces)
-                scw.Usings.Add(@using);
-
-            foreach (var alias in _typeResolver.Aliases)
-                scw.AliasedUsings.Add(alias);
+            // REVIEW: This was never used
+            // CSharpSourceCodeWriter cSharpSourceCodeWriter = _cSharpSourceCodeWriterFactory.Create();
+            // foreach (var @using in _typeResolver.ModelNamespaces)
+            //     cSharpSourceCodeWriter.Usings.Add(@using);
+            //
+            // foreach (var alias in _typeResolver.Aliases)
+            //     cSharpSourceCodeWriter.AliasedUsings.Add(alias);
 
             var resources = new List<Resource>();
             var librariesByNameAndVersion = new Dictionary<string, Library>();
 
-            var compiler = new AssemblyCompiler(_typeResolver, _typeManager, _operatorBinding);
-            var assemblies = compiler.Compile(elmLibraries, _loggerFactory);
+            var assemblies = _assemblyCompiler.Compile(elmLibraries, _loggerFactory);
             var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
+
+
+            var tupleAssembly = assemblies["TupleTypes"];
+            var tuplesBinary = new Binary
+            {
+                Id = "TupleTypes-Binary",
+                ContentType = "application/octet-stream",
+                Data = tupleAssembly.Binary,
+            };
+            resources.Add(tuplesBinary);
+
+            foreach (var sourceKvp in tupleAssembly.SourceCode)
+            {
+                var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
+                var tuplesCSharp = new Binary
+                {
+                    Id = sourceKvp.Key.Replace("_", "-"),
+                    ContentType = "text/plain",
+                    Data = tuplesSourceBytes,
+                };
+                resources.Add(tuplesCSharp);
+            }
+
             foreach (var library in elmLibraries)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
@@ -241,28 +157,6 @@ namespace Hl7.Cql.Packaging
                 var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, callbacks);
                 librariesByNameAndVersion.Add(library.NameAndVersion, fhirLibrary);
                 resources.Add(fhirLibrary);
-            }
-
-
-            var tupleAssembly = assemblies["TupleTypes"];
-
-            var tuplesBinary = new Binary
-            {
-                Id = "TupleTypes-Binary",
-                ContentType = "application/octet-stream",
-                Data = tupleAssembly.Binary,
-            };
-            resources.Add(tuplesBinary);
-            foreach (var sourceKvp in tupleAssembly.SourceCode)
-            {
-                var tuplesSourceBytes = Encoding.UTF8.GetBytes(sourceKvp.Value);
-                var tuplesCSharp = new Binary
-                {
-                    Id = sourceKvp.Key.Replace("_", "-"),
-                    ContentType = "text/plain",
-                    Data = tuplesSourceBytes,
-                };
-                resources.Add(tuplesCSharp);
             }
 
             foreach (var library in elmLibraries)
@@ -319,6 +213,30 @@ namespace Hl7.Cql.Packaging
             }
 
             return resources;
+        }
+
+        private IEnumerable<elm.Library> BuildElmLibraries(DirectedGraph packageGraph)
+        {
+            var elmLibraries =
+                packageGraph.Nodes.Values
+                    .Select(node => node.Properties?[elm.Library.LibraryNodeProperty])
+                    .OfType<elm.Library>()
+                    .ToArray();
+
+            var definitions = new DefinitionDictionary<LambdaExpression>();
+            foreach (var library in elmLibraries)
+            {
+                try
+                {
+                    var expressions = ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _expressionBuilderLogger, library!);
+                    definitions.Merge(expressions);
+                }
+                catch (Exception)
+                {
+                    continue;
+                }
+                yield return library;
+            }
         }
 
         private static Library CreateLibraryResource(

@@ -53,6 +53,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <inheritdoc />
         public override void WriteResource(Resource resource)
         {
+            EnsureDirectory(_outDirectory);
             var directory = _outDirectory.FullName;
             switch (resource)
             {
@@ -72,8 +73,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
 
                 case Library { Content: not null } library:
                 {
-                    var textPlain = library.Content
-                        .SingleOrDefault(c => c.ContentType == "text/plain");
+                    var textPlain = library.Content.SingleOrDefault(c => c.ContentType == "text/plain");
                     if (textPlain != null)
                     {
                         var bytes = textPlain.Data;
