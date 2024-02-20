@@ -5,6 +5,7 @@ using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packager;
 
@@ -29,22 +30,26 @@ internal class PackagerService
         if (_resourceWriters.Length == 0) return 0; //Skip since no writers provided
 
         var opt = _packagerOptions;
-        var packages = LibraryPackager.LoadLibraries(opt.ElmDirectory!);
-        var graph = Elm.LibraryExtensions.GetIncludedLibraries(packages.Values);
-        var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-        var packager = new LibraryPackager();
-        var resources = packager.PackageResources(
+        var librariesByNameAndVersion = LibraryPackager.LoadLibraries(opt.ElmDirectory!);
+        var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);
+        var modelInspector = ModelInfo.ModelInspector;
+        var fhirTypeResolver = new FhirTypeResolver(modelInspector);
+        var libraryPackager = new LibraryPackager();
+        var fhirTypeConverter = FhirTypeConverter.Create(modelInspector);
+        var cqlOperatorsBinding = new CqlOperatorsBinding(fhirTypeResolver, fhirTypeConverter);
+        var typeManager = new TypeManager(fhirTypeResolver);
+        var resources = libraryPackager.PackageResources(
             opt.ElmDirectory!,
             opt.CqlDirectory!,
-            graph,
-            typeResolver,
-            new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
-            new TypeManager(typeResolver),
+            directedGraph,
+            fhirTypeResolver,
+            cqlOperatorsBinding,
+            typeManager,
             resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
             _loggerFactory)!;
 
-        foreach (var writer in _resourceWriters) 
-            writer.WriteResources(resources);
+        foreach (var resourceWriter in _resourceWriters) 
+            resourceWriter.WriteResources(resources);
 
         return 0;
     }

@@ -4,6 +4,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packaging
 {
@@ -64,25 +65,29 @@ namespace Hl7.Cql.Packaging
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
-            var packages = LibraryPackager.LoadLibraries(elmDir);
-            var graph = packages.Values.GetIncludedLibraries();
-            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-
-            var packager = new LibraryPackager();
-            var resources = packager.PackageResources(elmDir,
+            var librariesByNameAndVersion = LibraryPackager.LoadLibraries(elmDir);
+            var directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();
+            var modelInspector = ModelInfo.ModelInspector;
+            var fhirTypeResolver = new FhirTypeResolver(modelInspector);
+            var libraryPackager = new LibraryPackager();
+            var fhirTypeConverter = FhirTypeConverter.Create(modelInspector);
+            var cqlOperatorsBinding = new CqlOperatorsBinding(fhirTypeResolver, fhirTypeConverter);
+            var typeManager = new TypeManager(fhirTypeResolver);
+            var resources = libraryPackager.PackageResources(
+                elmDir,
                 cqlDir,
-                graph,
-                typeResolver,
-                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
-                new TypeManager(typeResolver),
+                directedGraph,
+                fhirTypeResolver,
+                cqlOperatorsBinding,
+                typeManager,
                 resource => resource.CanonicalUri(resourceCanonicalRootUrl),
-                logFactory);
+                logFactory)!;
 
             afterPackageMutator?.Invoke(resources);
 
-            foreach (var writer in resourceWriters)
+            foreach (var resourceWriter in resourceWriters)
             {
-                writer.WriteResources(resources);
+                resourceWriter.WriteResources(resources);
             }
         }
     }

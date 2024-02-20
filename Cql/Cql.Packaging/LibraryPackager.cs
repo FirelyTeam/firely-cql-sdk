@@ -184,7 +184,6 @@ namespace Hl7.Cql.Packaging
             foreach (var alias in typeResolver.Aliases)
                 scw.AliasedUsings.Add(alias);
 
-            var navToLibraryStream = new Dictionary<string, Stream>();
             var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
             var assemblies = compiler.Compile(elmLibraries, logFactory);
             var libraries = new Dictionary<string, Library>();
