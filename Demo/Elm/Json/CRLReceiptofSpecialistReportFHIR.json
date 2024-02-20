@@ -1,0 +1,1399 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "CRLReceiptofSpecialistReportFHIR",
+         "version" : "0.2.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "locator" : "3:1-3:28",
+            "localIdentifier" : "QICore",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "5:1-5:56",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.3.000"
+         }, {
+            "locator" : "6:1-6:61",
+            "localIdentifier" : "SDE",
+            "path" : "SupplementalDataElements",
+            "version" : "3.4.000"
+         }, {
+            "locator" : "7:1-7:58",
+            "localIdentifier" : "QICoreCommon",
+            "path" : "QICoreCommon",
+            "version" : "2.0.000"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "18:1-18:114",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "default" : {
+               "locator" : "18:58-18:114",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "low" : {
+                  "locator" : "18:67-18:88",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2025",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "locator" : "18:91-18:112",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2026",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "locator" : "18:32-18:49",
+               "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "pointType" : {
+                  "locator" : "18:41-18:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "9:1-9:109",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Consultant Report",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1006",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "10:1-10:104",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Office Visit",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "11:1-11:107",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Ophthalmological Services",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "12:1-12:154",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Preventive Care Services - Established Office Visit, 18 and Up",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "13:1-13:147",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Preventive Care Services, Initial Office Visit, 0 to 17",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "14:1-14:148",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Preventive Care Services-Initial Office Visit, 18 and Up",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "15:1-15:142",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Preventive Care, Established Office Visit, 0 to 17",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "16:1-16:100",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Referral",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1046",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "20:1-20:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "20:1-20:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "20:1-20:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "locator" : "41:1-50:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Has Encounter during Measurement Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "42:3-50:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "operand" : {
+                  "locator" : "42:10-50:3",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "42:12-47:89",
+                     "alias" : "Encounter",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "42:12-47:79",
+                        "type" : "Union",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "42:14-45:82",
+                           "type" : "Union",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{http://hl7.org/fhir}Encounter",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "operand" : [ {
+                              "locator" : "42:14-43:52",
+                              "type" : "Union",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "operand" : [ {
+                                 "locator" : "42:14-42:40",
+                                 "dataType" : "{http://hl7.org/fhir}Encounter",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
+                                 "codeProperty" : "type",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "locator" : "42:26-42:39",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Office Visit",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 }
+                              }, {
+                                 "locator" : "43:13-43:52",
+                                 "dataType" : "{http://hl7.org/fhir}Encounter",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
+                                 "codeProperty" : "type",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "locator" : "43:25-43:51",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Ophthalmological Services",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 }
+                              } ]
+                           }, {
+                              "type" : "Union",
+                              "operand" : [ {
+                                 "locator" : "44:13-44:89",
+                                 "dataType" : "{http://hl7.org/fhir}Encounter",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
+                                 "codeProperty" : "type",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "locator" : "44:25-44:88",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Preventive Care Services - Established Office Visit, 18 and Up",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 }
+                              }, {
+                                 "locator" : "45:13-45:82",
+                                 "dataType" : "{http://hl7.org/fhir}Encounter",
+                                 "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
+                                 "codeProperty" : "type",
+                                 "codeComparator" : "in",
+                                 "type" : "Retrieve",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ListTypeSpecifier",
+                                    "elementType" : {
+                                       "name" : "{http://hl7.org/fhir}Encounter",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "codes" : {
+                                    "locator" : "45:25-45:81",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                    "name" : "Preventive Care Services, Initial Office Visit, 0 to 17",
+                                    "preserve" : true,
+                                    "type" : "ValueSetRef"
+                                 }
+                              } ]
+                           } ]
+                        }, {
+                           "type" : "Union",
+                           "operand" : [ {
+                              "locator" : "46:13-46:83",
+                              "dataType" : "{http://hl7.org/fhir}Encounter",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
+                              "codeProperty" : "type",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "locator" : "46:25-46:82",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Preventive Care Services-Initial Office Visit, 18 and Up",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef"
+                              }
+                           }, {
+                              "locator" : "47:13-47:77",
+                              "dataType" : "{http://hl7.org/fhir}Encounter",
+                              "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
+                              "codeProperty" : "type",
+                              "codeComparator" : "in",
+                              "type" : "Retrieve",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{http://hl7.org/fhir}Encounter",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "codes" : {
+                                 "locator" : "47:25-47:76",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                                 "name" : "Preventive Care, Established Office Visit, 0 to 17",
+                                 "preserve" : true,
+                                 "type" : "ValueSetRef"
+                              }
+                           } ]
+                        } ]
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "locator" : "48:7-49:63",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "operand" : [ {
+                        "locator" : "48:13-48:41",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Equal",
+                        "operand" : [ {
+                           "locator" : "48:13-48:28",
+                           "resultTypeName" : "{http://hl7.org/fhir}EncounterStatus",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "status",
+                              "scope" : "Encounter",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "locator" : "48:32-48:41",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "finished",
+                           "type" : "Literal"
+                        } ]
+                     }, {
+                        "locator" : "49:13-49:63",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "precision" : "Day",
+                        "type" : "IncludedIn",
+                        "operand" : [ {
+                           "locator" : "49:13-49:28",
+                           "name" : "ToInterval",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "operand" : [ {
+                              "path" : "period",
+                              "scope" : "Encounter",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "locator" : "49:44-49:63",
+                           "name" : "Measurement Period",
+                           "type" : "ParameterRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }
+                        } ]
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "52:1-62:3",
+            "name" : "First Referral during First 10 Months of Measurement Period",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "name" : "ID",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "name" : "AuthorDate",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "53:3-62:3",
+               "type" : "First",
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "ID",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "name" : "AuthorDate",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               },
+               "source" : {
+                  "locator" : "53:9-61:34",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "name" : "ID",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "name" : "AuthorDate",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "53:9-53:50",
+                     "alias" : "ReferralOrder",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}ServiceRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "53:9-53:36",
+                        "dataType" : "{http://hl7.org/fhir}ServiceRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}ServiceRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "53:26-53:35",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Referral",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "locator" : "54:7-56:145",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "operand" : [ {
+                        "locator" : "54:13-55:42",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "operand" : [ {
+                           "locator" : "54:13-54:61",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "In",
+                           "operand" : [ {
+                              "locator" : "54:13-54:32",
+                              "resultTypeName" : "{http://hl7.org/fhir}ServiceRequestStatus",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "status",
+                                 "scope" : "ReferralOrder",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "locator" : "54:37-54:61",
+                              "type" : "List",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "element" : [ {
+                                 "locator" : "54:39-54:46",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "active",
+                                 "type" : "Literal"
+                              }, {
+                                 "locator" : "54:49-54:59",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "completed",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        }, {
+                           "locator" : "55:13-55:42",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Equal",
+                           "operand" : [ {
+                              "locator" : "55:13-55:32",
+                              "resultTypeName" : "{http://hl7.org/fhir}ServiceRequestIntent",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "intent",
+                                 "scope" : "ReferralOrder",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "locator" : "55:36-55:42",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "order",
+                              "type" : "Literal"
+                           } ]
+                        } ]
+                     }, {
+                        "locator" : "56:13-56:145",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "precision" : "Day",
+                        "type" : "In",
+                        "operand" : [ {
+                           "locator" : "56:13-56:36",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "authoredOn",
+                              "scope" : "ReferralOrder",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "locator" : "56:52-56:145",
+                           "lowClosed" : true,
+                           "highClosed" : true,
+                           "type" : "Interval",
+                           "resultTypeSpecifier" : {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "low" : {
+                              "locator" : "56:61-56:89",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "Start",
+                              "operand" : {
+                                 "locator" : "56:70-56:89",
+                                 "name" : "Measurement Period",
+                                 "type" : "ParameterRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }
+                              }
+                           },
+                           "high" : {
+                              "type" : "ToDateTime",
+                              "operand" : {
+                                 "locator" : "56:92-56:144",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
+                                 "type" : "Date",
+                                 "year" : {
+                                    "locator" : "56:97-56:135",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "precision" : "Year",
+                                    "type" : "DateTimeComponentFrom",
+                                    "operand" : {
+                                       "locator" : "56:107-56:135",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "Start",
+                                       "operand" : {
+                                          "locator" : "56:116-56:135",
+                                          "name" : "Measurement Period",
+                                          "type" : "ParameterRef",
+                                          "resultTypeSpecifier" : {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          }
+                                       }
+                                    }
+                                 },
+                                 "month" : {
+                                    "locator" : "56:138-56:139",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "10",
+                                    "type" : "Literal"
+                                 },
+                                 "day" : {
+                                    "locator" : "56:142-56:143",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                                    "value" : "31",
+                                    "type" : "Literal"
+                                 }
+                              }
+                           }
+                        } ]
+                     } ]
+                  },
+                  "return" : {
+                     "locator" : "57:7-60:7",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "name" : "ID",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "name" : "AuthorDate",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "57:14-60:7",
+                        "type" : "Tuple",
+                        "resultTypeSpecifier" : {
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "name" : "ID",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "name" : "AuthorDate",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        },
+                        "element" : [ {
+                           "name" : "ID",
+                           "value" : {
+                              "locator" : "58:13-58:28",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "id",
+                                 "scope" : "ReferralOrder",
+                                 "type" : "Property"
+                              }
+                           }
+                        }, {
+                           "name" : "AuthorDate",
+                           "value" : {
+                              "locator" : "59:21-59:44",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "authoredOn",
+                                 "scope" : "ReferralOrder",
+                                 "type" : "Property"
+                              }
+                           }
+                        } ]
+                     }
+                  },
+                  "sort" : {
+                     "locator" : "61:7-61:34",
+                     "by" : [ {
+                        "locator" : "61:15-61:34",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "direction" : "ascending",
+                        "path" : "AuthorDate",
+                        "type" : "ByColumn"
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "37:1-39:81",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "38:3-39:81",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "And",
+               "operand" : [ {
+                  "locator" : "38:3-38:43",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "name" : "Has Encounter during Measurement Period",
+                  "type" : "ExpressionRef"
+               }, {
+                  "locator" : "39:9-39:81",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "Not",
+                  "operand" : {
+                     "locator" : "39:9-39:81",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "IsNull",
+                     "operand" : {
+                        "locator" : "39:9-39:69",
+                        "name" : "First Referral during First 10 Months of Measurement Period",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "name" : "ID",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "name" : "AuthorDate",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "22:1-23:22",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Denominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "23:3-23:22",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "Initial Population",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "locator" : "25:1-26:21",
+            "name" : "SDE Ethnicity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "name" : "codes",
+                  "elementType" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "name" : "display",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "26:3-26:21",
+               "name" : "SDE Ethnicity",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "codes",
+                     "elementType" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "display",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "28:1-29:17",
+            "name" : "SDE Payer",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "code",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "name" : "period",
+                     "elementType" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               }
+            },
+            "expression" : {
+               "locator" : "29:3-29:17",
+               "name" : "SDE Payer",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "name" : "code",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "name" : "period",
+                        "elementType" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "31:1-32:16",
+            "name" : "SDE Race",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "name" : "codes",
+                  "elementType" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "name" : "display",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "32:3-32:16",
+               "name" : "SDE Race",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "codes",
+                     "elementType" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "display",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "34:1-35:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "SDE Sex",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "35:3-35:15",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+               "name" : "SDE Sex",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef"
+            }
+         }, {
+            "locator" : "76:1-78:50",
+            "name" : "TaskGetRequestID",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "type" : "FunctionDef",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "77:3-78:50",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "77:3-77:19",
+                  "alias" : "Task",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Reference",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "77:3-77:14",
+                     "path" : "basedOn",
+                     "type" : "Property",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Reference",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "source" : {
+                        "name" : "task",
+                        "type" : "OperandRef"
+                     }
+                  }
+               } ],
+               "relationship" : [ ],
+               "return" : {
+                  "locator" : "78:5-78:50",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "78:12-78:50",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "name" : "GetId",
+                     "libraryName" : "QICoreCommon",
+                     "type" : "FunctionRef",
+                     "operand" : [ {
+                        "locator" : "78:35-78:48",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "reference",
+                           "scope" : "Task",
+                           "type" : "Property"
+                        }
+                     } ]
+                  }
+               }
+            },
+            "operand" : [ {
+               "name" : "task",
+               "operandTypeSpecifier" : {
+                  "locator" : "76:41-76:44",
+                  "resultTypeName" : "{http://hl7.org/fhir}Task",
+                  "name" : "{http://hl7.org/fhir}Task",
+                  "type" : "NamedTypeSpecifier"
+               }
+            } ]
+         }, {
+            "locator" : "67:1-74:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Referring Clinician Receives Consultant Report to Close Referral Loop",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "68:3-74:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "operand" : {
+                  "locator" : "68:10-74:3",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Task",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "68:12-68:63",
+                     "alias" : "ConsultantReportObtained",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Task",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "68:12-68:38",
+                        "dataType" : "{http://hl7.org/fhir}Task",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-task",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Task",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "68:19-68:37",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Consultant Report",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ {
+                     "locator" : "69:7-73:94",
+                     "alias" : "FirstReferral",
+                     "type" : "With",
+                     "resultTypeSpecifier" : {
+                        "type" : "TupleTypeSpecifier",
+                        "element" : [ {
+                           "name" : "ID",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }, {
+                           "name" : "AuthorDate",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ]
+                     },
+                     "expression" : {
+                        "locator" : "69:12-69:72",
+                        "name" : "First Referral during First 10 Months of Measurement Period",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "TupleTypeSpecifier",
+                           "element" : [ {
+                              "name" : "ID",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           }, {
+                              "name" : "AuthorDate",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           } ]
+                        }
+                     },
+                     "suchThat" : {
+                        "locator" : "70:19-73:94",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "operand" : [ {
+                           "locator" : "70:19-72:59",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "And",
+                           "operand" : [ {
+                              "locator" : "70:19-71:90",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "And",
+                              "operand" : [ {
+                                 "locator" : "70:19-70:82",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "In",
+                                 "operand" : [ {
+                                    "locator" : "70:19-70:34",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                    "path" : "ID",
+                                    "scope" : "FirstReferral",
+                                    "type" : "Property"
+                                 }, {
+                                    "locator" : "70:39-70:82",
+                                    "name" : "TaskGetRequestID",
+                                    "type" : "FunctionRef",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "ListTypeSpecifier",
+                                       "elementType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}String",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "operand" : [ {
+                                       "locator" : "70:58-70:81",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Task",
+                                       "name" : "ConsultantReportObtained",
+                                       "type" : "AliasRef"
+                                    } ]
+                                 } ]
+                              }, {
+                                 "locator" : "71:15-71:90",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "After",
+                                 "operand" : [ {
+                                    "locator" : "71:56-71:59",
+                                    "type" : "End",
+                                    "operand" : {
+                                       "locator" : "71:15-71:54",
+                                       "name" : "ToInterval",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "IntervalTypeSpecifier",
+                                          "pointType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       },
+                                       "operand" : [ {
+                                          "path" : "executionPeriod",
+                                          "scope" : "ConsultantReportObtained",
+                                          "type" : "Property"
+                                       } ]
+                                    }
+                                 }, {
+                                    "locator" : "71:67-71:90",
+                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "path" : "AuthorDate",
+                                    "scope" : "FirstReferral",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "72:15-72:59",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Equal",
+                              "operand" : [ {
+                                 "locator" : "72:15-72:45",
+                                 "resultTypeName" : "{http://hl7.org/fhir}TaskStatus",
+                                 "path" : "value",
+                                 "type" : "Property",
+                                 "source" : {
+                                    "path" : "status",
+                                    "scope" : "ConsultantReportObtained",
+                                    "type" : "Property"
+                                 }
+                              }, {
+                                 "locator" : "72:49-72:59",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "completed",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        }, {
+                           "locator" : "73:15-73:94",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "precision" : "Day",
+                           "type" : "In",
+                           "operand" : [ {
+                              "locator" : "73:56-73:59",
+                              "type" : "End",
+                              "operand" : {
+                                 "locator" : "73:15-73:54",
+                                 "name" : "ToInterval",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 },
+                                 "operand" : [ {
+                                    "path" : "executionPeriod",
+                                    "scope" : "ConsultantReportObtained",
+                                    "type" : "Property"
+                                 } ]
+                              }
+                           }, {
+                              "locator" : "73:75-73:94",
+                              "name" : "Measurement Period",
+                              "type" : "ParameterRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              }
+                           } ]
+                        } ]
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "64:1-65:73",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Numerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "65:3-65:73",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "name" : "Referring Clinician Receives Consultant Report to Close Referral Loop",
+               "type" : "ExpressionRef"
+            }
+         } ]
+      }
+   }
+}
+
