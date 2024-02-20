@@ -73,15 +73,14 @@ namespace Hl7.Cql.Packaging
             var fhirTypeConverter = FhirTypeConverter.Create(modelInspector);
             var cqlOperatorsBinding = new CqlOperatorsBinding(fhirTypeResolver, fhirTypeConverter);
             var typeManager = new TypeManager(fhirTypeResolver);
-            var resources = libraryPackager.PackageResources(
-                elmDir,
+            var resources = LibraryPackager.PackageResources(libraryPackager, elmDir,
                 cqlDir,
                 directedGraph,
                 fhirTypeResolver,
                 cqlOperatorsBinding,
                 typeManager,
-                resource => resource.CanonicalUri(resourceCanonicalRootUrl),
-                logFactory)!;
+                logFactory,
+                new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl)));
 
             afterPackageMutator?.Invoke(resources);
 

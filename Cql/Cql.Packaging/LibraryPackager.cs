@@ -150,15 +150,16 @@ namespace Hl7.Cql.Packaging
             return asmContext;
         }
 
-        internal IEnumerable<Resource> PackageResources(
+        internal static IEnumerable<Resource> PackageResources(
+            LibraryPackager libraryPackager, 
             DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
             DirectedGraph packageGraph,
             TypeResolver typeResolver,
             OperatorBinding operatorBinding,
             TypeManager typeManager,
-            Func<Resource, string> canon,
-            ILoggerFactory logFactory)
+            ILoggerFactory logFactory,
+            LibraryPackageEvents events = default)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
@@ -193,8 +194,10 @@ namespace Hl7.Cql.Packaging
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
                 if (!elmFile.Exists)
                     elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
+
                 if (!elmFile.Exists)
                     throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion}");
+
                 var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion}.cql", SearchOption.AllDirectories);
                 if (cqlFiles.Length == 0)
                 {
@@ -202,14 +205,18 @@ namespace Hl7.Cql.Packaging
                     if (cqlFiles.Length == 0)
                         throw new InvalidOperationException($"{library.identifier!.id}.cql");
                 }
+
                 if (cqlFiles.Length > 1)
                     throw new InvalidOperationException($"More than 1 CQL file found.");
+
                 var cqlFile = cqlFiles[0];
                 if (library.NameAndVersion is null)
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
+
+                var fhirLibrary = libraryPackager.CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, events);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -242,51 +249,50 @@ namespace Hl7.Cql.Packaging
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
                 foreach (var def in library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>())
                 {
-                    if (def.annotation != null)
+                    if (def.annotation == null) 
+                        continue;
+
+                    var tags = new List<Tag>();
+                    foreach (var a in def.annotation.OfType<Elm.Annotation>())
                     {
-                        var tags = new List<Tag>();
-                        foreach (var a in def.annotation.OfType<Elm.Annotation>())
+                        if (a.t == null) 
+                            continue;
+
+                        foreach (var t in a.t)
                         {
-                            if (a.t != null)
-                            {
-                                foreach (var t in a.t)
-                                {
-                                    if (t != null)
-                                        tags.Add(t);
-                                }
-                            }
+                            if (t != null)
+                                tags.Add(t);
                         }
-                        var measureAnnotation = tags
-                            .SingleOrDefault(t => t?.name == "measure");
-                        var yearAnnotation = tags
-                            .SingleOrDefault(t => t?.name == "year");
-                        if (measureAnnotation != null
-                            && !string.IsNullOrWhiteSpace(measureAnnotation.value)
-                            && yearAnnotation != null
-                            && !string.IsNullOrWhiteSpace(yearAnnotation.value)
-                            && int.TryParse(yearAnnotation.value, out var measureYear))
+                    }
+                    var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
+                    var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
+                    if (measureAnnotation != null
+                        && !string.IsNullOrWhiteSpace(measureAnnotation.value)
+                        && yearAnnotation != null
+                        && !string.IsNullOrWhiteSpace(yearAnnotation.value)
+                        && int.TryParse(yearAnnotation.value, out var measureYear))
+                    {
+                        var measure = new Measure();
+                        measure.Name = measureAnnotation.value;
+                        measure.Id = library.identifier?.id!;
+                        measure.Version = library.identifier?.version!;
+                        measure.Status = PublicationStatus.Active;
+                        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond).ToString();
+                        measure.EffectivePeriod = new Period
                         {
-                            var measure = new Measure();
-                            measure.Name = measureAnnotation.value;
-                            measure.Id = library.identifier?.id!;
-                            measure.Version = library.identifier?.version!;
-                            measure.Status = PublicationStatus.Active;
-                            measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond)
-                                .ToString();
-                            measure.EffectivePeriod = new Period
-                            {
-                                Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
-                                End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
-                            };
-                            measure.Group = new List<Measure.GroupComponent>();
-                            measure.Url = canon(measure)!;
-                            if (library.NameAndVersion is null)
-                                throw new InvalidOperationException("Library NameAndVersion should not be null.");
-                            if (!libraries.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
-                                throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
-                            measure.Library = new List<string> { libForMeasure!.Url };
-                            resources.Add(measure);
-                        }
+                            Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
+                            End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
+                        };
+                        measure.Group = new List<Measure.GroupComponent>();
+                        measure.Url = events.BuildUrlFromResource(measure);
+                        if (library.NameAndVersion is null)
+                            throw new InvalidOperationException("Library NameAndVersion should not be null.");
+
+                        if (!libraries.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
+                            throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
+
+                        measure.Library = new List<string> { libForMeasure!.Url };
+                        resources.Add(measure);
                     }
                 }
             }
@@ -294,111 +300,115 @@ namespace Hl7.Cql.Packaging
             return resources;
         }
 
-        private Hl7.Fhir.Model.Library CreateLibraryResource(FileInfo elmFile,
+        private Library CreateLibraryResource(
+            FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,
-            Func<Resource, string> canon,
-            elm.Library? elmLibrary = null)
+            elm.Library? elmLibrary = null,
+            LibraryPackageEvents events = default)
         {
-            if (elmFile.Exists)
+            if (!elmFile.Exists)
+                throw new ArgumentException($"Couldn't find library {elmFile.FullName}", nameof(elmFile));
+
+            if (elmLibrary is null)
             {
+                elmLibrary = elm.Library.LoadFromJson(elmFile);
                 if (elmLibrary is null)
-                {
-                    elmLibrary = elm.Library.LoadFromJson(elmFile);
-                    if (elmLibrary is null)
-                        throw new ArgumentException($"File at {elmFile.FullName} is not valid ELM");
-                }
-                var bytes = File.ReadAllBytes(elmFile.FullName);
-                var attachment = new Attachment
-                {
-                    ElementId = $"{elmLibrary.NameAndVersion}+elm",
-                    ContentType = elm.Library.JsonMimeType,
-                    Data = bytes,
-                };
-                var library = new Hl7.Fhir.Model.Library();
-                library.Content.Add(attachment);
-                library.Type = LogicLibraryCodeableConcept;
-                string libraryId = $"{elmLibrary!.NameAndVersion}";
-                library.Id = libraryId!;
-                library.Version = elmLibrary!.identifier?.version!;
-                library.Name = elmLibrary!.identifier?.id!;
-                library.Status = PublicationStatus.Active;
-                library.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond).ToString();
-                var parameters = new List<ParameterDefinition>();
-                var inParams = elmLibrary.parameters?
-                    .Select(pd => ElmParameterToFhir(pd, typeCrosswalk));
-                if (inParams is not null)
-                    parameters.AddRange(inParams);
-                var outParams = elmLibrary.statements?
-                    .Where(def => def.name != "Patient" && def is not FunctionDef)
-                    .Select(def => ElmDefinitionToParameter(def, typeCrosswalk));
-                if (outParams is not null)
-                    parameters.AddRange(outParams);
-                var valueSetParameterDefinitions = new List<ParameterDefinition>();
-                foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<elm.ValueSetDef>())
-                {
-                    var valueSetParameter = new ParameterDefinition
-                    {
-                        Type = FHIRAllTypes.ValueSet,
-                        Name = valueSet.id!,
-                        Use = OperationParameterUse.In,
-                    };
-                    valueSetParameterDefinitions.Add(valueSetParameter);
-                }
-                parameters.AddRange(valueSetParameterDefinitions);
-                library.Parameter = parameters.Count > 0 ? parameters : null!;
-
-                foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<elm.IncludeDef>())
-                {
-                    var includeId = $"{include.path}-{include.version}";
-                    library.RelatedArtifact.Add(new RelatedArtifact
-                    {
-                        Type = RelatedArtifact.RelatedArtifactType.DependsOn,
-                        Resource = includeId,
-                    });
-                }
-
-                if (cqlFile!.Exists)
-                {
-                    var cqlBytes = File.ReadAllBytes(cqlFile.FullName);
-
-                    var cqlAttachment = new Attachment
-                    {
-                        ElementId = $"{elmLibrary!.NameAndVersion}+cql",
-                        ContentType = "text/cql",
-                        Data = cqlBytes,
-                    };
-                    library.Content.Add(cqlAttachment);
-                }
-                if (assembly != null)
-                {
-                    var assemblyBytes = assembly.Binary;
-                    var assemblyAttachment = new Attachment
-                    {
-                        ElementId = $"{elmLibrary!.NameAndVersion}+dll",
-                        ContentType = "application/octet-stream",
-                        Data = assemblyBytes,
-                    };
-                    library.Content.Add(assemblyAttachment);
-                    foreach (var kvp in assembly.SourceCode)
-                    {
-                        var sourceBytes = Encoding.UTF8.GetBytes(kvp.Value);
-                        var sourceBase64 = System.Convert.ToBase64String(sourceBytes);
-                        var sourceAttachment = new Attachment
-                        {
-                            ElementId = $"{kvp.Key}+csharp",
-                            ContentType = "text/plain",
-                            Data = sourceBytes,
-                        };
-                        library.Content.Add(sourceAttachment);
-                    }
-
-                }
-                library.Url = canon(library)!;
-                return library;
+                    throw new ArgumentException($"File at {elmFile.FullName} is not valid ELM");
             }
-            else throw new ArgumentException($"Couldn't find library {elmFile.FullName}", nameof(elmFile));
+
+            var bytes = File.ReadAllBytes(elmFile.FullName);
+            var attachment = new Attachment
+            {
+                ElementId = $"{elmLibrary.NameAndVersion}+elm",
+                ContentType = elm.Library.JsonMimeType,
+                Data = bytes,
+            };
+            var library = new Hl7.Fhir.Model.Library();
+            library.Content.Add(attachment);
+            library.Type = LogicLibraryCodeableConcept;
+            string libraryId = $"{elmLibrary!.NameAndVersion}";
+            library.Id = libraryId!;
+            library.Version = elmLibrary!.identifier?.version!;
+            library.Name = elmLibrary!.identifier?.id!;
+            library.Status = PublicationStatus.Active;
+            library.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond).ToString();
+            var parameters = new List<ParameterDefinition>();
+            var inParams = elmLibrary.parameters?
+                .Select(pd => ElmParameterToFhir(pd, typeCrosswalk));
+            if (inParams is not null)
+                parameters.AddRange(inParams);
+            var outParams = elmLibrary.statements?
+                .Where(def => def.name != "Patient" && def is not FunctionDef)
+                .Select(def => ElmDefinitionToParameter(def, typeCrosswalk));
+            if (outParams is not null)
+                parameters.AddRange(outParams);
+            var valueSetParameterDefinitions = new List<ParameterDefinition>();
+            foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<elm.ValueSetDef>())
+            {
+                var valueSetParameter = new ParameterDefinition
+                {
+                    Type = FHIRAllTypes.ValueSet,
+                    Name = valueSet.id!,
+                    Use = OperationParameterUse.In,
+                };
+                valueSetParameterDefinitions.Add(valueSetParameter);
+            }
+
+            parameters.AddRange(valueSetParameterDefinitions);
+            library.Parameter = parameters.Count > 0 ? parameters : null!;
+
+            foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<elm.IncludeDef>())
+            {
+                var includeId = $"{include.path}-{include.version}";
+                library.RelatedArtifact.Add(new RelatedArtifact
+                {
+                    Type = RelatedArtifact.RelatedArtifactType.DependsOn,
+                    Resource = includeId,
+                });
+            }
+
+            if (cqlFile!.Exists)
+            {
+                var cqlBytes = File.ReadAllBytes(cqlFile.FullName);
+
+                var cqlAttachment = new Attachment
+                {
+                    ElementId = $"{elmLibrary!.NameAndVersion}+cql",
+                    ContentType = "text/cql",
+                    Data = cqlBytes,
+                };
+                library.Content.Add(cqlAttachment);
+            }
+
+            if (assembly != null)
+            {
+                var assemblyBytes = assembly.Binary;
+                var assemblyAttachment = new Attachment
+                {
+                    ElementId = $"{elmLibrary!.NameAndVersion}+dll",
+                    ContentType = "application/octet-stream",
+                    Data = assemblyBytes,
+                };
+                library.Content.Add(assemblyAttachment);
+                foreach (var kvp in assembly.SourceCode)
+                {
+                    var sourceBytes = Encoding.UTF8.GetBytes(kvp.Value);
+                    //var sourceBase64 = System.Convert.ToBase64String(sourceBytes);
+                    var sourceAttachment = new Attachment
+                    {
+                        ElementId = $"{kvp.Key}+csharp",
+                        ContentType = "text/plain",
+                        Data = sourceBytes,
+                    };
+                    library.Content.Add(sourceAttachment);
+                }
+            }
+
+            library.Url = events.BuildUrlFromResource(library);
+            events.NotifyLibraryResourceCreated(library);
+            return library;
         }
 
         private static readonly CodeableConcept LogicLibraryCodeableConcept = new CodeableConcept
@@ -485,5 +495,25 @@ namespace Hl7.Cql.Packaging
 
             return parameterDefinition;
         }
+    }
+
+    internal readonly record struct LibraryPackageEvents
+    {
+        public LibraryPackageEvents(
+            Func<Resource, string>? buildUrlFromResource = null,
+            Action<Library>? onLibraryResourceCreated = null)
+        {
+            _buildUrlFromResource = buildUrlFromResource;
+            _onLibraryResourceCreated = onLibraryResourceCreated;
+        }
+
+        private readonly Func<Resource, string>? _buildUrlFromResource;
+        private readonly Action<Library>? _onLibraryResourceCreated;
+
+        public string BuildUrlFromResource(Resource resource) => 
+            _buildUrlFromResource?.Invoke(resource) ?? "#";
+
+        public void NotifyLibraryResourceCreated(Library library) => 
+            _onLibraryResourceCreated?.Invoke(library);
     }
 }

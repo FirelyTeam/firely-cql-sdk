@@ -42,8 +42,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private TypeManager TypeManager { get; }
         private OperatorBinding Binding { get; }
 
-        internal IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
-                    ILoggerFactory logFactory)
+        internal IDictionary<string, AssemblyData> Compile(
+            IEnumerable<Library> elmPackages, ILoggerFactory logFactory)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();

@@ -38,18 +38,34 @@ internal class PackagerService
         var fhirTypeConverter = FhirTypeConverter.Create(modelInspector);
         var cqlOperatorsBinding = new CqlOperatorsBinding(fhirTypeResolver, fhirTypeConverter);
         var typeManager = new TypeManager(fhirTypeResolver);
-        var resources = libraryPackager.PackageResources(
-            opt.ElmDirectory!,
+        HashSet<Resource> resourcesWritten = new();
+        var resources = LibraryPackager.PackageResources(libraryPackager, opt.ElmDirectory!,
             opt.CqlDirectory!,
             directedGraph,
             fhirTypeResolver,
             cqlOperatorsBinding,
             typeManager,
-            resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
-            _loggerFactory)!;
+            _loggerFactory,
+            new (
+                buildUrlFromResource: resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
+                onLibraryResourceCreated: library =>
+                {
+                    foreach (var resourceWriter in _resourceWriters)
+                    {
+                        resourceWriter.WriteResource(library);
+                        resourcesWritten.Add(library);
+                    }
 
-        foreach (var resourceWriter in _resourceWriters) 
-            resourceWriter.WriteResources(resources);
+                }))!;
+
+        var remainingResources = resources.Except(resourcesWritten).ToList();
+        if (remainingResources.Any())
+        {
+            foreach (var resourceWriter in _resourceWriters)
+            {
+                resourceWriter.WriteResources(remainingResources);
+            }
+        }
 
         return 0;
     }
