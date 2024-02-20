@@ -5,6 +5,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
@@ -112,6 +113,7 @@ public class Program
         services.TryAddKeyedSingleton<TypeConverter>("Fhir", FhirTypeConverter.Default);
         services.TryAddSingleton<OperatorBinding, PackagerCqlOperatorBinding>();
         services.TryAddTransient<TypeManager, PackagerTypeManager>();
+        services.TryAddTransient<LibraryPackagerService>();
     }
 
     private static int Run(IHostBuilder hostBuilder)

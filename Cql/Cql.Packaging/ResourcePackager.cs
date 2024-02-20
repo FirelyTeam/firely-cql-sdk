@@ -65,7 +65,7 @@ namespace Hl7.Cql.Packaging
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
-            var librariesByNameAndVersion = LibraryPackager.LoadLibraries(elmDir);
+            var librariesByNameAndVersion = LibraryLoader.LoadLibraries(elmDir);
             var directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();
             var modelInspector = ModelInfo.ModelInspector;
             var fhirTypeResolver = new FhirTypeResolver(modelInspector);

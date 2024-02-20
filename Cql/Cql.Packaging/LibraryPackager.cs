@@ -10,23 +10,21 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using System.Linq.Expressions;
-using System.Runtime.Loader;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 using elm = Hl7.Cql.Elm;
 using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
 {
-    public static class LibraryPackager
+    public static class LibraryLoader
     {
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
         {
@@ -60,86 +58,11 @@ namespace Hl7.Cql.Packaging
 
             return dict;
         }
+    }
 
-        public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
-        {
-            var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
-            using var fs = libFile.OpenRead();
-            var library = fs.ParseFhir<Library>();
-            var dependencies = library.GetDependencies(dir);
-            var allLibs = dependencies.AllLibraries();
-            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-            allLibs.LoadAssemblies(asmContext);
 
-            var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
-            using var tupleFs = tupleTypes.OpenRead();
-            var binaries = new[]
-            {
-                tupleFs.ParseFhir<Binary>()
-            };
-
-            binaries.LoadAssembles(asmContext);
-            return asmContext;
-        }
-
-#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-        public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
-          string lib,
-          string version,
-          LogLevel logLevel = LogLevel.Error,
-          int cacheSize = 0)
-        {
-            var logFactory = LoggerFactory
-                          .Create(logging =>
-                          {
-                              logging.AddFilter(level => level >= logLevel);
-                              logging.AddConsole(console =>
-                              {
-                                  console.LogToStandardErrorThreshold = LogLevel.Error;
-                              });
-                          });
-
-            return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
-        }
-
-        public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-            string lib,
-            string version,
-            ILoggerFactory logFactory,
-            int cacheSize)
-        {
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
-            if (!elmFile.Exists)
-                elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
-            if (!elmFile.Exists)
-                throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
-            var library = Elm.Library.LoadFromJson(elmFile)
-                ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
-            var dependencies = 
-                library.GetIncludedLibraries(elmDirectory)
-                .Packages()
-                .ToArray();
-
-            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
-            var typeManager = new TypeManager(typeResolver);
-            var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
-            var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
-
-            var assemblyData = compiler.Compile(dependencies,
-                logFactory);
-
-            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-            foreach (var kvp in assemblyData)
-            {
-                var assemblyBytes = kvp.Value.Binary;
-                using var ms = new MemoryStream(assemblyBytes);
-                asmContext.LoadFromStream(ms);
-            }
-            return asmContext;
-        }
-
+    public static class LibraryPackager
+    {
         internal static IEnumerable<Resource> PackageResources(
             DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
@@ -150,8 +73,116 @@ namespace Hl7.Cql.Packaging
             ILoggerFactory logFactory,
             LibraryPackageCallbacks callbacks = default)
         {
-            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-            var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
+            var resourcePackagerService = new LibraryPackagerService(typeResolver, operatorBinding, typeManager, logFactory);
+            return resourcePackagerService.PackageResources(elmDirectory, cqlDirectory, packageGraph, callbacks);
+        }
+    }
+
+    internal class LibraryPackagerService
+    {
+        private readonly TypeResolver _typeResolver;
+        private readonly OperatorBinding _operatorBinding;
+        private readonly TypeManager _typeManager;
+        private readonly ILoggerFactory _loggerFactory;
+
+        public LibraryPackagerService(
+            [FromKeyedServices("Fhir")] TypeResolver typeResolver,
+            [FromKeyedServices("Cql")] OperatorBinding operatorBinding,
+            [FromKeyedServices("Fhir")] TypeManager typeManager,
+            ILoggerFactory loggerFactory)
+        {
+            _typeResolver = typeResolver;
+            _operatorBinding = operatorBinding;
+            _typeManager = typeManager;
+            _loggerFactory = loggerFactory;
+        }
+        //         public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
+        //         {
+        //             var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
+        //             using var fs = libFile.OpenRead();
+        //             var library = fs.ParseFhir<Library>();
+        //             var dependencies = library.GetDependencies(dir);
+        //             var allLibs = dependencies.AllLibraries();
+        //             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+        //             allLibs.LoadAssemblies(asmContext);
+        //
+        //             var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
+        //             using var tupleFs = tupleTypes.OpenRead();
+        //             var binaries = new[]
+        //             {
+        //                 tupleFs.ParseFhir<Binary>()
+        //             };
+        //
+        //             binaries.LoadAssembles(asmContext);
+        //             return asmContext;
+        //         }
+        //
+        // #pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
+        //         public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
+        // #pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
+        //           string lib,
+        //           string version,
+        //           LogLevel logLevel = LogLevel.Error,
+        //           int cacheSize = 0)
+        //         {
+        //             var logFactory = LoggerFactory
+        //                           .Create(logging =>
+        //                           {
+        //                               logging.AddFilter(level => level >= logLevel);
+        //                               logging.AddConsole(console =>
+        //                               {
+        //                                   console.LogToStandardErrorThreshold = LogLevel.Error;
+        //                               });
+        //                           });
+        //
+        //             return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
+        //         }
+        //
+        // private static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
+        //     string lib,
+        //     string version,
+        //     ILoggerFactory logFactory,
+        //     int cacheSize)
+        // {
+        //     var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
+        //     if (!elmFile.Exists)
+        //         elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
+        //     if (!elmFile.Exists)
+        //         throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
+        //     var library = Elm.Library.LoadFromJson(elmFile)
+        //         ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
+        //     var dependencies = 
+        //         library.GetIncludedLibraries(elmDirectory)
+        //         .Packages()
+        //         .ToArray();
+        //
+        //     var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+        //     var typeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, cacheSize);
+        //     var typeManager = new TypeManager(typeResolver);
+        //     var operatorBinding = new CqlOperatorsBinding(typeResolver, typeConverter);
+        //     var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
+        //
+        //     var assemblyData = compiler.Compile(dependencies,
+        //         logFactory);
+        //
+        //     var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+        //     foreach (var kvp in assemblyData)
+        //     {
+        //         var assemblyBytes = kvp.Value.Binary;
+        //         using var ms = new MemoryStream(assemblyBytes);
+        //         asmContext.LoadFromStream(ms);
+        //     }
+        //     return asmContext;
+        // }
+
+        internal IEnumerable<Resource> PackageResources(
+            DirectoryInfo elmDirectory,
+            DirectoryInfo cqlDirectory,
+            DirectedGraph packageGraph,
+            LibraryPackageCallbacks callbacks = default)
+        {
+            var builderLogger = _loggerFactory.CreateLogger<ExpressionBuilder>();
+            var codeWriterLogger = _loggerFactory.CreateLogger<CSharpSourceCodeWriter>();
 
             var elmLibraries =
                 packageGraph.Nodes.Values
@@ -163,23 +194,23 @@ namespace Hl7.Cql.Packaging
             foreach (var library in elmLibraries)
             {
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
-                var expressions = ExpressionBuilder.BuildLibraryDefinitions(operatorBinding, typeManager, builderLogger, library!);
+                var expressions = ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, builderLogger, library!);
                 all.Merge(expressions);
             }
 
             var scw = new CSharpSourceCodeWriter(codeWriterLogger);
-            foreach (var @using in typeResolver.ModelNamespaces)
+            foreach (var @using in _typeResolver.ModelNamespaces)
                 scw.Usings.Add(@using);
 
-            foreach (var alias in typeResolver.Aliases)
+            foreach (var alias in _typeResolver.Aliases)
                 scw.AliasedUsings.Add(alias);
 
             var resources = new List<Resource>();
             var librariesByNameAndVersion = new Dictionary<string, Library>();
 
-            var compiler = new AssemblyCompiler(typeResolver, typeManager, operatorBinding);
-            var assemblies = compiler.Compile(elmLibraries, logFactory);
-            var typeCrosswalk = new CqlTypeToFhirTypeMapper(typeResolver);
+            var compiler = new AssemblyCompiler(_typeResolver, _typeManager, _operatorBinding);
+            var assemblies = compiler.Compile(elmLibraries, _loggerFactory);
+            var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
             foreach (var library in elmLibraries)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
@@ -237,15 +268,15 @@ namespace Hl7.Cql.Packaging
             foreach (var library in elmLibraries)
             {
                 var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
-                foreach (var def in library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>())
+                foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
                 {
-                    if (def.annotation == null) 
+                    if (def.annotation == null)
                         continue;
 
                     var tags = new List<Tag>();
-                    foreach (var a in def.annotation.OfType<Elm.Annotation>())
+                    foreach (var a in def.annotation.OfType<elm.Annotation>())
                     {
-                        if (a.t == null) 
+                        if (a.t == null)
                             continue;
 
                         foreach (var t in a.t)
@@ -315,7 +346,7 @@ namespace Hl7.Cql.Packaging
                 ContentType = elm.Library.JsonMimeType,
                 Data = bytes,
             };
-            var library = new Hl7.Fhir.Model.Library();
+            var library = new Library();
             library.Content.Add(attachment);
             library.Type = LogicLibraryCodeableConcept;
             string libraryId = $"{elmLibrary!.NameAndVersion}";
@@ -335,7 +366,7 @@ namespace Hl7.Cql.Packaging
             if (outParams is not null)
                 parameters.AddRange(outParams);
             var valueSetParameterDefinitions = new List<ParameterDefinition>();
-            foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<elm.ValueSetDef>())
+            foreach (var valueSet in elmLibrary.valueSets ?? Enumerable.Empty<ValueSetDef>())
             {
                 var valueSetParameter = new ParameterDefinition
                 {
@@ -349,7 +380,7 @@ namespace Hl7.Cql.Packaging
             parameters.AddRange(valueSetParameterDefinitions);
             library.Parameter = parameters.Count > 0 ? parameters : null!;
 
-            foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<elm.IncludeDef>())
+            foreach (var include in elmLibrary?.includes ?? Enumerable.Empty<IncludeDef>())
             {
                 var includeId = $"{include.path}-{include.version}";
                 library.RelatedArtifact.Add(new RelatedArtifact
@@ -401,7 +432,7 @@ namespace Hl7.Cql.Packaging
             return library;
         }
 
-        private static readonly CodeableConcept LogicLibraryCodeableConcept = new CodeableConcept
+        private static readonly CodeableConcept LogicLibraryCodeableConcept = new()
         {
             Coding = new List<Coding>
             {
@@ -413,7 +444,8 @@ namespace Hl7.Cql.Packaging
             }
         };
 
-        private static ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.ParameterDef elmParameter,
+        private static ParameterDefinition ElmParameterToFhir(
+            ParameterDef elmParameter,
             CqlTypeToFhirTypeMapper typeCrosswalk)
         {
             var typeSpecifier = elmParameter.resultTypeSpecifier ?? elmParameter.parameterTypeSpecifier;
@@ -424,7 +456,7 @@ namespace Hl7.Cql.Packaging
                 throw new ArgumentException($"Unable to identify a valid FHIR type for this parameter.", nameof(elmParameter));
 
             var annotations = (elmParameter.annotation?
-                .OfType<Elm.Annotation>()
+                .OfType<elm.Annotation>()
                 .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
                 ?? Enumerable.Empty<Tag>())
                 .ToArray();
@@ -440,12 +472,13 @@ namespace Hl7.Cql.Packaging
             return parameterDefinition;
         }
 
-        private static ParameterDefinition ElmDefinitionToParameter(Hl7.Cql.Elm.ExpressionDef definition,
+        private static ParameterDefinition ElmDefinitionToParameter(
+            ExpressionDef definition,
             CqlTypeToFhirTypeMapper typeCrosswalk)
         {
             var resultTypeSpecifier = definition.resultTypeSpecifier;
             if (resultTypeSpecifier is null && !string.IsNullOrWhiteSpace(definition.resultTypeName.Name))
-                resultTypeSpecifier = new Hl7.Cql.Elm.NamedTypeSpecifier
+                resultTypeSpecifier = new NamedTypeSpecifier
                 {
                     name = definition.resultTypeName
                 };
