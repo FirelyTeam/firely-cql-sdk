@@ -26,18 +26,8 @@ using Library = Hl7.Fhir.Model.Library;
 
 namespace Hl7.Cql.Packaging
 {
-    public class LibraryPackager
+    public static class LibraryPackager
     {
-        internal LibraryPackager()
-        {
-            TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
-        }
-
-        internal LibraryPackager(TypeConverter? typeConverter)
-        {
-            TypeConverter = typeConverter ?? FhirTypeConverter.Create(ModelInfo.ModelInspector, 0);
-        }
-
         public static IDictionary<string, elm.Library> LoadLibraries(DirectoryInfo elmDir)
         {
             // Load libraries from ELM files in a deterministic order
@@ -151,7 +141,6 @@ namespace Hl7.Cql.Packaging
         }
 
         internal static IEnumerable<Resource> PackageResources(
-            LibraryPackager libraryPackager, 
             DirectoryInfo elmDirectory,
             DirectoryInfo cqlDirectory,
             DirectedGraph packageGraph,
@@ -216,7 +205,7 @@ namespace Hl7.Cql.Packaging
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
 
-                var fhirLibrary = libraryPackager.CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, events);
+                var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, events);
                 libraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -300,7 +289,7 @@ namespace Hl7.Cql.Packaging
             return resources;
         }
 
-        private Library CreateLibraryResource(
+        private static Library CreateLibraryResource(
             FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
@@ -423,9 +412,7 @@ namespace Hl7.Cql.Packaging
             }
         };
 
-        internal TypeConverter TypeConverter { get; }
-
-        private ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.ParameterDef elmParameter,
+        private static ParameterDefinition ElmParameterToFhir(Hl7.Cql.Elm.ParameterDef elmParameter,
             CqlTypeToFhirTypeMapper typeCrosswalk)
         {
             var typeSpecifier = elmParameter.resultTypeSpecifier ?? elmParameter.parameterTypeSpecifier;
@@ -452,7 +439,7 @@ namespace Hl7.Cql.Packaging
             return parameterDefinition;
         }
 
-        private ParameterDefinition ElmDefinitionToParameter(Hl7.Cql.Elm.ExpressionDef definition,
+        private static ParameterDefinition ElmDefinitionToParameter(Hl7.Cql.Elm.ExpressionDef definition,
             CqlTypeToFhirTypeMapper typeCrosswalk)
         {
             var resultTypeSpecifier = definition.resultTypeSpecifier;

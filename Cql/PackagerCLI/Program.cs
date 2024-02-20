@@ -1,9 +1,16 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging.ResourceWriters;
+using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -98,6 +105,13 @@ public class Program
     {
         services.AddPackagerServices(context.Configuration);
         services.AddResourcePackager(context.Configuration);
+
+        // REVIEW: Move these into a separate method
+        services.TryAddSingleton(ModelInfo.ModelInspector);
+        services.TryAddKeyedSingleton<TypeResolver>("Fhir", FhirTypeResolver.Default);
+        services.TryAddKeyedSingleton<TypeConverter>("Fhir", FhirTypeConverter.Default);
+        services.TryAddSingleton<OperatorBinding, PackagerCqlOperatorBinding>();
+        services.TryAddTransient<TypeManager, PackagerTypeManager>();
     }
 
     private static int Run(IHostBuilder hostBuilder)
@@ -145,5 +159,21 @@ public class Program
     private static void ShowHelp()
     {
         Console.WriteLine(Usage);
+    }
+}
+
+internal class PackagerTypeManager : TypeManager
+{
+    public PackagerTypeManager([FromKeyedServices("Fhir")] TypeResolver resolver) : base(resolver)
+    {
+    }
+}
+
+internal class PackagerCqlOperatorBinding : CqlOperatorsBinding
+{
+    public PackagerCqlOperatorBinding(
+        [FromKeyedServices("Fhir")] TypeResolver typeResolver,
+        [FromKeyedServices("Fhir")] TypeConverter? typeConverter = null) : base(typeResolver, typeConverter)
+    {
     }
 }

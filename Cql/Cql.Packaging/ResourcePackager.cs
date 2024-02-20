@@ -69,11 +69,10 @@ namespace Hl7.Cql.Packaging
             var directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();
             var modelInspector = ModelInfo.ModelInspector;
             var fhirTypeResolver = new FhirTypeResolver(modelInspector);
-            var libraryPackager = new LibraryPackager();
             var fhirTypeConverter = FhirTypeConverter.Create(modelInspector);
             var cqlOperatorsBinding = new CqlOperatorsBinding(fhirTypeResolver, fhirTypeConverter);
             var typeManager = new TypeManager(fhirTypeResolver);
-            var resources = LibraryPackager.PackageResources(libraryPackager, elmDir,
+            var resources = LibraryPackager.PackageResources(elmDir,
                 cqlDir,
                 directedGraph,
                 fhirTypeResolver,

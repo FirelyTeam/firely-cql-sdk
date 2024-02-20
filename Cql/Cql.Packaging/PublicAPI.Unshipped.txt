@@ -12,7 +12,6 @@ Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTyp
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.ElmLibraryExtensions
-Hl7.Cql.Packaging.LibraryPackager
 Hl7.Cql.Packaging.CqlTypeToFhirMapping
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.init -> void
@@ -23,6 +22,7 @@ Hl7.Cql.Packaging.CqlTypeToFhirMapping.FhirType.init -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Cql.Packaging.CqlTypeToFhirMapping! original) -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Fhir.Model.FHIRAllTypes? FhirType, Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType = null) -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.Deconstruct(out Hl7.Fhir.Model.FHIRAllTypes? FhirType, out Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, out Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType) -> void
+Hl7.Cql.Packaging.LibraryPackager
 Hl7.Cql.Packaging.ResourcePackageArgs
 Hl7.Cql.Packaging.ResourcePackageArgs.ElmDir.get -> System.IO.DirectoryInfo!
 Hl7.Cql.Packaging.ResourcePackageArgs.CqlDir.get -> System.IO.DirectoryInfo!
