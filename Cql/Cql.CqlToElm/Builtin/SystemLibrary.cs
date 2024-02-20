@@ -122,7 +122,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             new(new[] { source.ToListType() }, result, typeof(T).Name);
         public static readonly TypeSpecifier[] EmptyOperands = System.Array.Empty<TypeSpecifier>();
 
-        private static readonly GenericTypeSpecifier T = new(nameof(T));
+        private static readonly ParameterTypeSpecifier T = new ParameterTypeSpecifier { parameterName = nameof(T) };
 
         // Note: generic T does not match List<T> or Interval<T>.
         // For functions that could take a T, a List<T>, or an Interval<T> and need to know what T is (e.g., because the function returns the same type as a parameter),

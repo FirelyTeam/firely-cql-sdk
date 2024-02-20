@@ -24,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         /// <param name="replacements">The types with which to replace <paramref name="typeArgument"/>.</param>
         /// <returns>A new <see cref="OverloadedFunctionDef"/> containing all the new overloads.</returns>
         /// <exception cref="System.ArgumentException">If <paramref name="def"/> has no operands, or the resulting replacements would create duplicate overloads, or the replacements would not create at least 2 overloads.</exception>
-        public static OverloadedFunctionDef For<T>(this SystemFunction<T> def, GenericTypeSpecifier typeArgument, params TypeSpecifier[] replacements)
+        public static OverloadedFunctionDef For<T>(this SystemFunction<T> def, ParameterTypeSpecifier typeArgument, params TypeSpecifier[] replacements)
             where T : Element
         {
             if (replacements.Length < 2)
@@ -36,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
                 for (int i = 0; i < replacements.Length; i++)
                 {
-                    var genericMap = new Dictionary<string, TypeSpecifier> { { typeArgument.typeArgumentName, replacements![i] } };
+                    var genericMap = new Dictionary<string, TypeSpecifier> { { typeArgument.parameterName, replacements![i] } };
                     var overload = CreateOverload(def, operandCount, genericMap);
                     functions[i] = overload;
                 }
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             }
             else throw new System.ArgumentException($"Function has no operands", nameof(def));
         }
-        public static OverloadedFunctionDef WithListAndIntervalVariants<T>(this SystemFunction<T> def, GenericTypeSpecifier typeArgument)
+        public static OverloadedFunctionDef WithListAndIntervalVariants<T>(this SystemFunction<T> def, ParameterTypeSpecifier typeArgument)
              where T : Element =>
             new OverloadedFunctionDef(For(def, typeArgument, typeArgument.ToIntervalType(), typeArgument.ToListType()).Functions.Append(def).Reverse().ToArray(),
                 def.name, def.accessLevel);

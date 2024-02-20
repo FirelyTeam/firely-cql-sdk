@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 
-        private static GenericTypeSpecifier Generic(string argumentName = "T") => new GenericTypeSpecifier(argumentName);
+        private static ParameterTypeSpecifier Generic(string parameterName = "T") => new ParameterTypeSpecifier { parameterName = parameterName };
 
         private static Literal Boolean(bool value = true) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.BooleanType);
         private static Literal Integer(int value = 1) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.IntegerType);

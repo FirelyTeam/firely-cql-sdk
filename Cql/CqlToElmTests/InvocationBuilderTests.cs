@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 
-        private static GenericTypeSpecifier Generic(string argumentName = "T") => new GenericTypeSpecifier(argumentName);
+        private static ParameterTypeSpecifier Generic(string parameterName = "T") => new ParameterTypeSpecifier { parameterName = parameterName };
 
         private static Literal Boolean(bool value = true) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.BooleanType);
         private static Literal String(string value = "") => new Literal { value = value }.WithResultType(SystemTypes.StringType);
@@ -116,16 +116,16 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new[] { Integer(1) };
             var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.IntegerType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
             AssertCompatible(function, arguments, ConversionCost.ExactMatch);
 
 
             arguments = new[] { Decimal(1) };
             inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.DecimalType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.DecimalType, inference[T.parameterName]);
             AssertCompatible(function, arguments, ConversionCost.ExactMatch);
         }
 
@@ -137,8 +137,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new[] { List(Integer(1)) };
             var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.IntegerType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
             AssertCompatible(function, arguments, ConversionCost.ExactMatch);
         }
 
@@ -152,8 +152,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new[] { Interval(Integer(1), Integer(10)) };
             var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.IntegerType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
             AssertCompatible(function, arguments, ConversionCost.ExactMatch);
 
         }
@@ -165,8 +165,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new[] { List(List(Integer(1))) };
             var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.IntegerType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
             AssertCompatible(function, arguments, ConversionCost.ExactMatch);
         }
 
@@ -178,8 +178,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new[] { List(Null), List(Null) };
             var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.AnyType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
             Assert.AreEqual(ConversionCost.ListDemotion, result.Arguments[1].Cost);
@@ -192,8 +192,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new Expression[] { List(Null), List(Null) };
             var inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.AnyType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
             Assert.AreEqual(ConversionCost.ListDemotion, result.Arguments[1].Cost);
@@ -205,8 +205,8 @@ namespace Hl7.Cql.CqlToElm.Test
             arguments = new Expression[] { List(Null), Null };
             inference = InvocationBuilder.InferGenericArgument(function.operand[0].resultTypeSpecifier, arguments[0].resultTypeSpecifier);
             Assert.AreEqual(1, inference.Count);
-            Assert.IsTrue(inference.ContainsKey(T.typeArgumentName));
-            Assert.AreEqual(SystemTypes.AnyType, inference[T.typeArgumentName]);
+            Assert.IsTrue(inference.ContainsKey(T.parameterName));
+            Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
             Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[1].Cost);

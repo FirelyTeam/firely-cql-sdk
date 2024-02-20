@@ -164,8 +164,8 @@ namespace Hl7.Cql.CqlToElm
         internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier operandType, TypeSpecifier argumentType) =>
             operandType switch
             {
-                GenericTypeSpecifier generic 
-                    when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.typeArgumentName, argumentType } },
+                ParameterTypeSpecifier generic 
+                    when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.parameterName, argumentType } },
                 ListTypeSpecifier opList 
                     when argumentType is ListTypeSpecifier argList => InferGenericArgument(opList.elementType, argList.elementType),
                 ListTypeSpecifier opList 
@@ -192,11 +192,11 @@ namespace Hl7.Cql.CqlToElm
 
         internal static TypeSpecifier ReplaceGenericTypes(TypeSpecifier type, IDictionary<string, TypeSpecifier> replacements)
         {
-            if (type is GenericTypeSpecifier generic)
+            if (type is ParameterTypeSpecifier generic)
             {
-                if (replacements.TryGetValue(generic.typeArgumentName, out var resolvedType))
+                if (replacements.TryGetValue(generic.parameterName, out var resolvedType))
                     return resolvedType;
-                else throw new ArgumentException($"Generic type {generic.typeArgumentName} does not have a replacement defined.", nameof(replacements));
+                else throw new ArgumentException($"Generic type {generic.parameterName} does not have a replacement defined.", nameof(replacements));
             }
             else if (type is ListTypeSpecifier listType)
                 return ReplaceGenericTypes(listType.elementType, replacements).ToListType();
