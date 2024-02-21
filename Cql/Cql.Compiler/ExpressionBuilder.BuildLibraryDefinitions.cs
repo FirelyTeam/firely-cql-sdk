@@ -277,10 +277,6 @@ partial class ExpressionBuilder
 
         private void ProcessExpressionDef(ExpressionDef expressionDef)
         {
-            if (expressionDef.expression == null)
-                throw new InvalidOperationException(
-                    $"Definition '{expressionDef.name}' does not have an expression property");
-
             var builderContext = _context.NewExpressionBuilderContext();
 
             if (string.IsNullOrWhiteSpace(expressionDef.name))
@@ -295,6 +291,7 @@ partial class ExpressionBuilder
             Type[] functionParameterTypes = Type.EmptyTypes;
             var parameters = new[] { RuntimeContextParameter };
             var function = expressionDef as FunctionDef;
+            
             if (function is { operand: not null })
             {
                 functionParameterTypes = new Type[function.operand!.Length];
@@ -344,6 +341,10 @@ partial class ExpressionBuilder
                 }
             }
 
+            if (expressionDef.expression is null)
+                throw new InvalidOperationException(
+                    $"Definition '{expressionDef.name}' does not have an expression property");
+            
             builderContext = builderContext.Deeper();
             var bodyExpression = builderContext.TranslateExpression(expressionDef.expression);
             var lambda = Expression.Lambda(bodyExpression, parameters);
