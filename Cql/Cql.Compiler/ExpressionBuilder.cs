@@ -2158,20 +2158,21 @@ namespace Hl7.Cql.Compiler
                                 if (typeName == null)
                                     typeName = @as.resultTypeName.Name;
                             }
-                            if (typeName == "{http://hl7.org/fhir}Period")
+                            
+                            if (typeName == "{http://hl7.org/fhir}Range")
                             {
-                                var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
-                                var intervalType = TypeManager.Resolver.IntervalType(pointType!);
-                                return intervalType;
-                            }
-                            else if (typeName == "{http://hl7.org/fhir}Range")
-                            {
-                                var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
-                                var intervalType = TypeManager.Resolver.IntervalType(pointType!);
-                                return intervalType;
+                                var pT = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!;
+                                var iT = TypeManager.Resolver.IntervalType(pT);
+                                return iT;
                             }
                         }
-                        throw new NotImplementedException();
+                        
+                        // The default, if the special cases above don't apply, is DateTime, since that's the
+                        // defined return type for ToInterval().
+                        var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
+                        var intervalType = TypeManager.Resolver.IntervalType(pointType!);
+                        return intervalType;
+                    
                     case "ToBoolean":
                         return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!;
                     case "ToString":

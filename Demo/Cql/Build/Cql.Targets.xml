@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
 	<ItemGroup>
-		<ElmFiles Include="$(MSBuildProjectDirectory)\..\Elm\Json\*.json"></ElmFiles>
+		<ElmFiles Include="$(MSBuildProjectDirectory)\..\Elm\Json\*.json" />
 	</ItemGroup>
 
 	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-2.11.0.jar">
-		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies"></Exec>
+		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies" />
 	</Target>
 	<Target Name="CQL to ELM"
 			DependsOnTargets="Download CQL to ELM CLI via Maven"
@@ -14,7 +14,7 @@
 		<Exec Command="java -classpath Build\target\dependency\* org.cqframework.cql.cql2elm.cli.CqlTranslator -input $(MSBuildProjectDirectory)\input -f JSON -output $(MSBuildProjectDirectory)\..\Elm\Json -locators true -result-types true"/>
 	</Target>
 	<Target Name="Delete ELM" AfterTargets="Clean">
-		<Message Text="Deleting ELM files...$(MSBuildProjectDirectory)\..\Elm\Json\*.json"></Message>
+		<Message Text="Deleting ELM files...$(MSBuildProjectDirectory)\..\Elm\Json\*.json" />
 		<Delete Files="@(ElmFiles)" />
 	</Target>
 </Project>
