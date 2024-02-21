@@ -23,8 +23,8 @@ internal class OptionsConsoleDumper
 
     public void DumpToConsole()
     {
-        WriteLine("PackageCLI Argument Provided");
-        WriteLine("----------------------------");
+        WriteLine("PackageCLI Arguments Provided");
+        WriteLine("-----------------------------");
         (string name, object? value)[] values = new[]
         {
             Of(_packagerOptions.CqlDirectory),
