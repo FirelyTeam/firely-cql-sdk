@@ -117,10 +117,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private static IDictionary<string, AssemblyData> Generate(
             DefinitionDictionary<LambdaExpression> expressions,
-           TypeManager typeManager,
-           DirectedGraph dependencies,
-           CSharpSourceCodeWriter writer,
-           IEnumerable<Assembly> references)
+            TypeManager typeManager,
+            DirectedGraph dependencies,
+            CSharpSourceCodeWriter writer,
+            IEnumerable<Assembly> references)
         {
             Dictionary<string, Stream> navToLibraryStream = new();
 
