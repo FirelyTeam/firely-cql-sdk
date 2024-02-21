@@ -67,6 +67,9 @@ namespace Hl7.Cql.Fhir
             add((M.Time f) => f.ToString());
             add((M.FhirDateTime f) =>
             {
+                if (f.Value is null)
+                    return null;
+
                 if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                 {
                     return datetime;
@@ -87,6 +90,9 @@ namespace Hl7.Cql.Fhir
             });
             add((M.FhirDateTime f) => f.ToString());
             add((M.FhirDateTime f) => {
+                if (f.Value is null)
+                    return null;
+
                 if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
                     return datetime.DateOnly;
 
