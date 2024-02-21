@@ -38,16 +38,16 @@ namespace Hl7.Cql.Packaging
         {
             var expressionBuilderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var libraryDefinitionsBuilder = new LibraryDefinitionsBuilder(expressionBuilderLogger, operatorBinding, typeManager);
-            var assemblyCompiler = new AssemblyCompiler(libraryDefinitionsBuilder, typeResolver, typeManager, operatorBinding);
+            var cSharpSourceCodeWriterL = logFactory.CreateLogger<CSharpSourceCodeWriter>();
+            var cSharpSourceCodeWriter = new CSharpSourceCodeWriter(cSharpSourceCodeWriterL);
+            var assemblyCompiler = new AssemblyCompiler(libraryDefinitionsBuilder, typeResolver, cSharpSourceCodeWriter, typeManager);
             var resourcePackagerService = new LibraryPackagerService(
-                logFactory,
                 expressionBuilderLogger,
                 typeResolver, 
                 operatorBinding,
                 typeManager,
-                assemblyCompiler
-                //new CSharpSourceCodeWriter(logFactory.CreateLogger< CSharpSourceCodeWriter>())
-                );
+                assemblyCompiler,
+                libraryDefinitionsBuilder);
             return resourcePackagerService.PackageResources(elmDirectory, cqlDirectory, packageGraph, callbacks);
         }
     }
@@ -55,30 +55,27 @@ namespace Hl7.Cql.Packaging
 
     internal class LibraryPackagerService
     {
+        private readonly ILogger<ExpressionBuilder> _expressionBuilderLogger;
         private readonly AssemblyCompiler _assemblyCompiler;
         private readonly TypeResolver _typeResolver;
         private readonly OperatorBinding _operatorBinding;
         private readonly TypeManager _typeManager;
-        private readonly ILoggerFactory _loggerFactory;
-        // private readonly Factory<CSharpSourceCodeWriter> _cSharpSourceCodeWriterFactory;
-        private readonly ILogger<ExpressionBuilder> _expressionBuilderLogger;
+        private readonly LibraryDefinitionsBuilder _libraryDefinitionsBuilder;
 
         public LibraryPackagerService(
-            ILoggerFactory loggerFactory,
             ILogger<ExpressionBuilder> expressionBuilderLogger,
             [FromKeyedServices("Fhir")] TypeResolver typeResolver,
             [FromKeyedServices("Cql")] OperatorBinding operatorBinding,
             [FromKeyedServices("Fhir")] TypeManager typeManager,
-            // Factory<CSharpSourceCodeWriter> cSharpSourceCodeWriterFactory, 
-            AssemblyCompiler assemblyCompiler)
+            AssemblyCompiler assemblyCompiler,
+            LibraryDefinitionsBuilder libraryDefinitionsBuilder)
         {
             _typeResolver = typeResolver;
             _operatorBinding = operatorBinding;
             _typeManager = typeManager;
-            _loggerFactory = loggerFactory;
-            // _cSharpSourceCodeWriterFactory = cSharpSourceCodeWriterFactory;
             _expressionBuilderLogger = expressionBuilderLogger;
             _assemblyCompiler = assemblyCompiler;
+            _libraryDefinitionsBuilder = libraryDefinitionsBuilder;
         }
 
         internal IEnumerable<Resource> PackageResources(
@@ -102,7 +99,7 @@ namespace Hl7.Cql.Packaging
             var resources = new List<Resource>();
             var librariesByNameAndVersion = new Dictionary<string, Library>();
 
-            var assemblies = _assemblyCompiler.Compile(elmLibraries, _loggerFactory);
+            var assemblies = _assemblyCompiler.Compile(elmLibraries);
             var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
 
 

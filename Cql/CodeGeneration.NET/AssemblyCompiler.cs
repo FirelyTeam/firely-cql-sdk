@@ -15,7 +15,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,6 +23,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -31,41 +31,39 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private readonly TypeResolver _typeResolver;
         private readonly TypeManager _typeManager;
-        private readonly OperatorBinding _binding;
         private readonly LibraryDefinitionsBuilder _libraryDefinitionsBuilder;
+        private readonly CSharpSourceCodeWriter _cSharpSourceCodeWriter;
 
-        internal AssemblyCompiler(
+        public AssemblyCompiler(
             LibraryDefinitionsBuilder libraryDefinitionsBuilder,
-            TypeResolver typeResolver, 
-            TypeManager? typeManager = null,
-            OperatorBinding? operatorBinding = null)
+            [FromKeyedServices("Fhir")] TypeResolver typeResolver, 
+            CSharpSourceCodeWriter cSharpSourceCodeWriter,
+            [FromKeyedServices("Fhir")] TypeManager? typeManager)
         {
             _typeResolver = typeResolver;
+            _cSharpSourceCodeWriter = cSharpSourceCodeWriter;
             _libraryDefinitionsBuilder = libraryDefinitionsBuilder;
             _typeManager = typeManager ?? new TypeManager(typeResolver);
-            _binding = operatorBinding ?? new CqlOperatorsBinding(typeResolver);
         }
 
         internal IDictionary<string, AssemblyData> Compile(
-            IEnumerable<Library> elmPackages, 
-            ILoggerFactory logFactory)
+            IReadOnlyCollection<Library> elmPackages)
         {
-            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-            var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
-
-            var graph = elmPackages.GetIncludedLibraries();
             var references = new[]
-            {
-            // Core engine references
-                typeof(CqlDeclarationAttribute).Assembly, // Cql.Abstractions
-                typeof(Comparers.CqlComparers).Assembly, // Cql.Comparers
-                typeof(Conversion.IUnitConverter).Assembly, // Cql.Conversion
-                typeof(Operators.ICqlOperators).Assembly, // Cql.Operators
-                typeof(Primitives.CqlPrimitiveType).Assembly, // Cql.Primitives
-                typeof(CqlContext).Assembly, // Cql.Runtime
-                typeof(IValueSetDictionary).Assembly, // Cql.ValueSets
-                typeof(Iso8601.DateIso8601).Assembly, // Iso8601
-            }
+            {                                        // @formatter off
+
+                                                     // Core engine references
+                typeof(CqlDeclarationAttribute),     // Cql.Abstractions
+                typeof(Comparers.CqlComparers),      // Cql.Comparers
+                typeof(Conversion.IUnitConverter),   // Cql.Conversion
+                typeof(Operators.ICqlOperators),     // Cql.Operators
+                typeof(Primitives.CqlPrimitiveType), // Cql.Primitives
+                typeof(CqlContext),                  // Cql.Runtime
+                typeof(IValueSetDictionary),         // Cql.ValueSets
+                typeof(Iso8601.DateIso8601),         // Iso8601
+
+            }                                        // @formatter on
+            .Select(type => type.Assembly)
             .Concat(_typeResolver.ModelAssemblies)
             .Distinct()
             .ToArray();
@@ -80,12 +78,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             .Distinct()
             .ToArray();
 
-            var scw = new CSharpSourceCodeWriter(codeWriterLogger);
             foreach (var @using in namespaces)
-                scw.Usings.Add(@using);
-            var aliases = _typeResolver.Aliases;
-            foreach (var alias in aliases)
-                scw.AliasedUsings.Add(alias);
+                _cSharpSourceCodeWriter.Usings.Add(@using);
+
+            foreach (var alias in _typeResolver.Aliases)
+                _cSharpSourceCodeWriter.AliasedUsings.Add(alias);
 
 
             var all = new DefinitionDictionary<LambdaExpression>();
@@ -95,10 +92,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 all.Merge(expressions);
             }
 
-            var assemblies = Generate(all,
+            var graph = elmPackages.GetIncludedLibraries();
+            var assemblies = Generate(
+                all,
                 _typeManager,
                 graph,
-                scw,
+                _cSharpSourceCodeWriter,
                 references);
             return assemblies;
         }

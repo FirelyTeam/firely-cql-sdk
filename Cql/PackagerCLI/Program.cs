@@ -31,13 +31,16 @@ public class Program
             return -1;
         }
 
-        var hostBuilder = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
-            .ConfigureLogging((context, logging) => ConfigureLogging(logging))
-            .ConfigureServices((context, services) => ConfigureServices(context, services));
+        var hostBuilder = CreateHostBuilder(args);
 
         return Run(hostBuilder);
     }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder()
+            .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
+            .ConfigureLogging((context, logging) => ConfigureLogging(logging))
+            .ConfigureServices((context, services) => ConfigureServices(context, services));
 
     private static IDictionary<string, string> BuildSwitchMappings()
     {
@@ -116,9 +119,10 @@ public class Program
         services.TryAddSingleton<TypeManager, PackagerTypeManager>();
         services.TryAddSingleton<LibraryPackagerService>();
         services.TryAddSingleton<OptionsConsoleDumper>();
-        services.TryAddSingleton<AssemblyCompiler, PackagerAssemblyCompiler>();
+        services.TryAddSingleton<CSharpSourceCodeWriter>();
+        services.TryAddSingleton<AssemblyCompiler>();
         services.TryAddSingleton<LibraryDefinitionsBuilder>();
-        services.Add(ServiceDescriptor.Singleton(typeof(Factory<>), typeof(ServiceProviderFactory<>)));
+        services.TryAdd(ServiceDescriptor.Singleton(typeof(Factory<>), typeof(ServiceProviderFactory<>)));
 
     }
 
@@ -162,24 +166,14 @@ public class Program
 
 // REVIEW: Move these classes into a separate files
 
+
 file class ServiceProviderFactory<T> : Factory<T>
 {
-    private readonly IServiceProvider _sp;
+    private readonly IServiceProvider _serviceProvider;
 
-    public ServiceProviderFactory(IServiceProvider sp) => _sp = sp;
+    public ServiceProviderFactory(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
 
-    public override T Create() => ActivatorUtilities.CreateInstance<T>(_sp);
-}
-
-file class PackagerAssemblyCompiler : AssemblyCompiler
-{
-    public PackagerAssemblyCompiler(
-        LibraryDefinitionsBuilder libraryDefinitionsBuilder,
-        [FromKeyedServices("Fhir")] TypeResolver typeResolver, 
-        TypeManager typeManager, 
-        OperatorBinding operatorBinding) : base(libraryDefinitionsBuilder,typeResolver, typeManager, operatorBinding)
-    {
-    }
+    public override T Create() => ActivatorUtilities.CreateInstance<T>(_serviceProvider);
 }
 
 file class PackagerTypeManager : TypeManager
