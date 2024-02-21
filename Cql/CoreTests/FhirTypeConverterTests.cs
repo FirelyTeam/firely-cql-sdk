@@ -450,6 +450,10 @@ namespace CoreTests
             Assert.AreEqual(1, isoDateTime.Hour);
             Assert.AreEqual(1, isoDateTime.Minute);
             Assert.AreEqual(1, isoDateTime.Second);
+
+            var nullDateTime = new FhirDateTime(null);
+            var nullConverted = FhirTypeConverter.Convert<CqlDateTime>(nullDateTime);
+            Assert.IsNull(nullConverted);
         }
 
 
@@ -675,6 +679,25 @@ namespace CoreTests
             Assert.IsNull(end.Minute);
             Assert.IsNull(end.Second);
             Assert.IsNull(end.Millisecond);
+        }
+
+        [TestMethod]
+        public void ConvertFhirDateTime_CqlDate()
+        {
+            var date = new FhirDateTime(2022, 1, 1, 1, 1, 1, TimeSpan.Zero);
+            var converted = FhirTypeConverter.Convert<CqlDate>(date);
+
+            Assert.IsNotNull(converted);
+            var isoDateTime = converted.Value;
+            Assert.IsNotNull(isoDateTime);
+
+            Assert.AreEqual(2022, isoDateTime.Year);
+            Assert.AreEqual(1, isoDateTime.Month);
+            Assert.AreEqual(1, isoDateTime.Day);
+
+            var nullDateTime = new FhirDateTime(null);
+            var nullConverted = FhirTypeConverter.Convert<CqlDateTime>(nullDateTime);
+            Assert.IsNull(nullConverted);
         }
     }
 }
