@@ -572,25 +572,3 @@ partial class ExpressionBuilder
             _expressionBuilderContext.Operands.Values;
     }
 }
-
-internal class LibraryDefinitionsBuilder
-{
-    private readonly ILogger<ExpressionBuilder> _logger;
-    private readonly OperatorBinding _operatorBinding;
-    private readonly TypeManager _typeManager;
-
-    public LibraryDefinitionsBuilder(
-        ILogger<ExpressionBuilder> logger, 
-        OperatorBinding operatorBinding,
-        TypeManager typeManager)
-    {
-        _logger = logger;
-        _operatorBinding = operatorBinding;
-        _typeManager = typeManager;
-    }
-
-    public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(Library library)
-    {
-        return ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _logger, library);
-    }
-}
