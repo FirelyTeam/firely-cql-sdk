@@ -23,5 +23,13 @@ namespace Hl7.Cql.Primitives
         public CqlValueSet(string? id, string? version) : base(id, version)
         {
         }
+
+        /// <summary>
+        /// Creates an instance with no id or version.
+        /// </summary>
+        public CqlValueSet() : base()
+        {
+            // Nothing
+        }
     }
 }

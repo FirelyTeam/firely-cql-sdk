@@ -24,14 +24,23 @@ namespace Hl7.Cql.Primitives
             this.version = version;
         }
 
+
+        /// <summary>
+        /// Constructs a new CqlVocabulary instance with no id or version.
+        /// </summary>
+        protected CqlVocabulary() : this(null, null)
+        {
+            // Nothing
+        }
+
         /// <summary>
         /// The canonical URL of the value set.
         /// </summary>
-        public string? id { get; }
+        public string? id { get; init; }
         /// <summary>
         /// The version of the value set.
         /// </summary>
-        public string? version { get; }
+        public string? version { get; init; }
 
 
     }

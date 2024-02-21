@@ -102,11 +102,15 @@ Hl7.Cql.Primitives.CqlTime.Successor() -> Hl7.Cql.Primitives.CqlTime!
 Hl7.Cql.Primitives.CqlTime.Value.get -> Hl7.Cql.Iso8601.TimeIso8601!
 Hl7.Cql.Primitives.CqlTime.WholeCalendarPointsBetween(Hl7.Cql.Primitives.CqlTime! high, string! precision) -> int?
 Hl7.Cql.Primitives.CqlValueSet
+Hl7.Cql.Primitives.CqlValueSet.CqlValueSet() -> void
 Hl7.Cql.Primitives.CqlValueSet.CqlValueSet(string? id, string? version) -> void
 Hl7.Cql.Primitives.CqlVocabulary
+Hl7.Cql.Primitives.CqlVocabulary.CqlVocabulary() -> void
 Hl7.Cql.Primitives.CqlVocabulary.CqlVocabulary(string? id, string? version) -> void
 Hl7.Cql.Primitives.CqlVocabulary.id.get -> string?
+Hl7.Cql.Primitives.CqlVocabulary.id.init -> void
 Hl7.Cql.Primitives.CqlVocabulary.version.get -> string?
+Hl7.Cql.Primitives.CqlVocabulary.version.init -> void
 Hl7.Cql.Primitives.TupleBaseType
 Hl7.Cql.Primitives.TupleBaseType.TupleBaseType() -> void
 override Hl7.Cql.Primitives.CqlDate.Equals(object? obj) -> bool
