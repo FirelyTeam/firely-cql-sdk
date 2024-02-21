@@ -18,7 +18,8 @@ internal class PackagerService
         ILogger<PackagerService> logger,
         IOptions<PackagerOptions> packageArgsOptions,
         IEnumerable<ResourceWriter> resourceWriters,
-        LibraryPackagerService libraryPackager, OptionsConsoleDumper optionsConsoleDumper)
+        LibraryPackagerService libraryPackager, 
+        OptionsConsoleDumper optionsConsoleDumper)
     {
         _logger = logger;
         _libraryPackager = libraryPackager;

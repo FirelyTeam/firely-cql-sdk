@@ -126,7 +126,6 @@ public class Program
         services.TryAddSingleton<AssemblyCompiler>();
         services.TryAddSingleton<LibraryDefinitionsBuilder>();
         services.TryAdd(ServiceDescriptor.Singleton(typeof(Factory<>), typeof(ServiceProviderFactory<>)));
-
     }
 
     private static int Run(IHostBuilder hostBuilder)
@@ -168,6 +167,22 @@ public class Program
 }
 
 // REVIEW: Move these classes into a separate files
+
+internal abstract class Factory<T>
+{
+    public abstract T Create();
+
+    public static implicit operator Factory<T>(T value) => new ConcreteFactory<T>(value);
+
+    private sealed class ConcreteFactory<TConcrete> : Factory<TConcrete>
+    {
+        private readonly TConcrete _value;
+
+        public ConcreteFactory(TConcrete value) => _value = value;
+
+        public override TConcrete Create() => _value;
+    }
+}
 
 
 file class ServiceProviderFactory<T> : Factory<T>

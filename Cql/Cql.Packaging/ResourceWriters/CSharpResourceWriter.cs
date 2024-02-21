@@ -28,7 +28,9 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// </summary>
         /// <param name="options">the resource writer options</param>
         /// <param name="logger">logger</param>
-        public CSharpResourceWriter(IOptions<CSharpResourceWriterOptions> options, ILogger<CSharpResourceWriter> logger)
+        public CSharpResourceWriter(
+            IOptions<CSharpResourceWriterOptions> options, 
+            ILogger<CSharpResourceWriter> logger)
         {
             var opt = options.Value;
             _outDirectory = opt.OutDirectory ?? throw new ArgumentException("OutDirectory is required.");

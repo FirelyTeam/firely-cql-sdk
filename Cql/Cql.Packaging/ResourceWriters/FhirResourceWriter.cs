@@ -33,7 +33,9 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// </summary>
         /// <param name="options">the resource writer options</param>
         /// <param name="logger">logger</param>
-        public FhirResourceWriter(IOptions<FhirResourceWriterOptions> options, ILogger<FhirResourceWriter> logger) 
+        public FhirResourceWriter(
+            IOptions<FhirResourceWriterOptions> options, 
+            ILogger<FhirResourceWriter> logger) 
         {
             var opt = options.Value;
             _outDirectory = opt.OutDirectory ?? throw new InvalidOperationException("The FhirResourceWriter needs a valid value for OutDirectory.");
