@@ -60,6 +60,7 @@ namespace Hl7.Cql.Fhir
             add((M.FhirString p) => p.Value);
             add((M.FhirBoolean p) => p.Value);
             add((M.FhirDecimal p) => p.Value);
+            add((M.Code c) => c.Value);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
             add((M.Date f) => f.ToString());
