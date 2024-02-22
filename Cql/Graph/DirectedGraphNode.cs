@@ -19,28 +19,17 @@ namespace Hl7.Cql.Graph
         public const string StartId = "Start";
         public const string EndId = "End";
 
-        public string NodeId { get; set; } = string.Empty;
+        public string NodeId { get; init; } = string.Empty;
 
-        public string? Label { get; set; }
+        public string? Label { get; init; }
 
         [JsonIgnore]
         public IList<DirectedGraphEdge> ForwardEdges { get; } = new List<DirectedGraphEdge>();
-
-        public IEnumerable<string> ForwardEdgeIds { get => ForwardEdges.Select(edge => edge.EdgeId); }
 
         public IDictionary<string, object>? Properties { get; set; }
 
         public override string ToString() => NodeId;
 
-        public T OptionalProperty<T>(string property, T defaultIfMissing)
-        {
-            if (Properties != null && Properties.TryGetValue(property, out var value))
-            {
-                if (value is T t)
-                    return t;
-            }
-            return defaultIfMissing;
-        }
 
         public DirectedGraphNode Clone(Func<string, string>? newId = null)
         {

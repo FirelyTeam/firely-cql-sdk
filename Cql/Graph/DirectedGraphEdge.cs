@@ -14,7 +14,9 @@ namespace Hl7.Cql.Graph
 {
     internal class DirectedGraphEdge
     {
-        public DirectedGraphEdge() { }
+        public DirectedGraphEdge() : this("", "")
+        {
+        }
 
         public DirectedGraphEdge(DirectedGraphNode from, DirectedGraphNode to) : this(
                 from?.NodeId ?? throw new ArgumentNullException(nameof(from)),
@@ -24,21 +26,20 @@ namespace Hl7.Cql.Graph
 
         public DirectedGraphEdge(string fromId, string toId)
         {
+            FromId = DirectedGraphNode.StartId;
+            ToId = DirectedGraphNode.EndId;
             FromId = fromId;
             ToId = toId;
             EdgeId = $"From {fromId} to {toId}";
         }
 
-        public string EdgeId { get; set; } = string.Empty;
+        public string EdgeId { get; private init; }
 
-        public IList<EdgeAction> Actions { get; } = new List<EdgeAction>();
+        public string FromId { get; private init; }
 
-        public string FromId { get; set; } = DirectedGraphNode.StartId;
-
-        public string ToId { get; set; } = DirectedGraphNode.EndId;
+        public string ToId { get; private init; }
 
         public override string ToString() => $"[{EdgeId}] {FromId}-->{ToId}";
-        public IDictionary<string, object>? Properties { get; set; }
 
         public DirectedGraphEdge Clone(Func<string, string>? newId = null)
         {
@@ -49,8 +50,6 @@ namespace Hl7.Cql.Graph
                 FromId = FromId,
                 ToId = ToId,
             };
-            foreach (var action in Actions)
-                clone.Actions.Add(action);
             return clone;
         }
     }
