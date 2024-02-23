@@ -34,8 +34,6 @@ Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.set -> 
 override Hl7.Cql.Packaging.PackageArgs.GetHashCode() -> int
 override Hl7.Cql.Packaging.PackageArgs.Equals(object? obj) -> bool
 static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
-static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.ILoggerFactory! logFactory, int cacheSize) -> System.Runtime.Loader.AssemblyLoadContext!
-static Hl7.Cql.Packaging.LibraryPackager.LoadElm(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, Microsoft.Extensions.Logging.LogLevel logLevel = Microsoft.Extensions.Logging.LogLevel.Error, int cacheSize = 0) -> System.Runtime.Loader.AssemblyLoadContext!
 virtual Hl7.Cql.Packaging.PackageArgs.PrintMembers(System.Text.StringBuilder! builder) -> bool
 virtual Hl7.Cql.Packaging.PackageArgs.Equals(Hl7.Cql.Packaging.PackageArgs? other) -> bool
 virtual Hl7.Cql.Packaging.PackageArgs.<Clone>$() -> Hl7.Cql.Packaging.PackageArgs!
@@ -65,7 +63,6 @@ override Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.WriteResources(S
 override Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.WriteResources(System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>! resources) -> void
 static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! ctx) -> System.Collections.Generic.IDictionary<string!, object?>!
 static Hl7.Cql.Packaging.LibraryPackager.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> System.Collections.Generic.IDictionary<string!, Hl7.Cql.Elm.Library!>!
-static Hl7.Cql.Packaging.LibraryPackager.LoadResources(System.IO.DirectoryInfo! dir, string! lib, string! version) -> System.Runtime.Loader.AssemblyLoadContext!
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator !=(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator ==(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.EqualityContract.get -> System.Type!

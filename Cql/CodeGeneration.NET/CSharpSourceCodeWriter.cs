@@ -269,9 +269,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static void writeDependencies(DirectedGraph dependencyGraph, Func<string?, string?> libraryNameToClassName, string libraryName, StreamWriter writer, int indentLevel)
         {
             var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = node.ForwardEdges?
-                .Select(edge => edge.ToId)
-                .Except(new[] { dependencyGraph.EndNode.NodeId })
+            var requiredLibraries = dependencyGraph.GetForwardNodeIds(node.NodeId)
+                .Except(new[] { DirectedGraphNode.EndId })
                 .Distinct();
             foreach (var dependentLibrary in requiredLibraries!)
             {
@@ -353,9 +352,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             int indent)
         {
             var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = node.ForwardEdges?
-                .Select(edge => edge.ToId)
-                .Except(new[] { dependencyGraph.EndNode.NodeId })
+            var requiredLibraries = dependencyGraph.GetForwardNodeIds(node.NodeId)
+                .Except(new[] { DirectedGraphNode.EndId })
                 .Distinct();
             if (requiredLibraries != null)
             {
@@ -378,9 +376,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
         {
-            var sorted = minimalGraph.TopologicalSort()
-                .Where(n => n.NodeId != minimalGraph.StartNode.NodeId
-                    && n.NodeId != minimalGraph.EndNode.NodeId)
+            var sorted = minimalGraph
+                .TopologicalSort()
+                .Where(n => n is {IsStartNode:false, IsEndNode:false})
+                // .Where(n => n.NodeId != minimalGraph.StartNode.NodeId && n.NodeId != minimalGraph.EndNode.NodeId)
                 .ToList();
             return sorted;
         }

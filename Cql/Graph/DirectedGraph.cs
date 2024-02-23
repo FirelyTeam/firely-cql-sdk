@@ -10,50 +10,98 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
 
 namespace Hl7.Cql.Graph
 {
     [DebuggerDisplay("DirectedGraph (Nodes:{Nodes.Count}, Edges:{Edges.Count})")]
     internal class DirectedGraph
     {
-
-        public DirectedGraphNode StartNode { get; } = new DirectedGraphNode { NodeId = DirectedGraphNode.StartId };
-        public DirectedGraphNode EndNode { get; } = new DirectedGraphNode { NodeId = DirectedGraphNode.EndId };
-
-        public IDictionary<string, DirectedGraphNode> Nodes { get; } = new Dictionary<string, DirectedGraphNode>();
-        public IDictionary<string, DirectedGraphEdge> Edges { get; } = new Dictionary<string, DirectedGraphEdge>();
-
-
-        public void Add(DirectedGraphNode node) => Nodes.Add(node.NodeId, node);
-        public void Add(DirectedGraphEdge edge) => Edges.Add(edge.EdgeId, edge);
-
-        public IEnumerable<(DirectedGraphEdge Edge, DirectedGraphNode Node)> GetNodesConnectedTo(DirectedGraphNode node)
+        public DirectedGraph()
         {
-            foreach (var edge in node.ForwardEdges)
+            _startNode = new DirectedGraphNode() { NodeId = DirectedGraphNode.StartId };
+            _endNode = new DirectedGraphNode() { NodeId = DirectedGraphNode.EndId };
+            _nodes = new ();
+            _edges = new ();
+        }
+
+
+        private readonly DirectedGraphNode _startNode;
+
+        private readonly DirectedGraphNode _endNode;
+
+        private readonly Dictionary<string, DirectedGraphNode> _nodes;
+        public IReadOnlyDictionary<string, DirectedGraphNode> Nodes => _nodes;
+
+        private readonly HashSet<(string FromId, string ToId)> _edges;
+
+        public IReadOnlyCollection<(string FromId, string ToId)> Edges => _edges;
+
+
+        public void AddNode(DirectedGraphNode node) =>
+            _nodes.Add(node.NodeId, node);
+
+        public void AddEdge((DirectedGraphNode? FromNode, DirectedGraphNode? ToNode) edge) => 
+            AddEdge((edge.FromNode?.NodeId, edge.ToNode?.NodeId));
+
+        public void AddEdge((string? FromId, string? ToId) edge)
+        {
+            Debug.Assert(edge.FromId != edge.ToId, "Self referencing edge not allowed.");
+            _edges.Add(new(edge.FromId ?? DirectedGraphNode.StartId, edge.ToId ?? DirectedGraphNode.EndId));
+        }
+
+        public IEnumerable<string> GetForwardNodeIds(string nodeId)
+        {
+            if (nodeId == DirectedGraphNode.EndId)
+                return Enumerable.Empty<string>();
+
+            var result = Edges
+                .Where(e => e.FromId == nodeId)
+                .Select(e => e.ToId)
+                .ToList(); // TODO: Remove ToList()
+            
+            Debug.Assert(!result.Contains(nodeId), "Cyclic dependency");
+
+            return result;
+        }
+
+        private IEnumerable<DirectedGraphNode> GetNodesConnectedTo(DirectedGraphNode node)
+        {
+            foreach (var nodeId in GetForwardNodeIds(node.NodeId))
             {
-                if (edge.ToId == EndNode?.NodeId)
-                    yield return (edge, EndNode);
-                else if (edge.ToId == StartNode?.NodeId)
-                    yield return (edge, StartNode);
-                else if (Nodes.TryGetValue(edge.ToId, out var to))
-                    yield return (edge, to);
-                else throw new ArgumentException($"Edge {edge.EdgeId} points to node {edge.ToId} which does not exist in this graph.", nameof(node));
+                switch (nodeId)
+                {
+                    case DirectedGraphNode.EndId:
+                        yield return _endNode;
+                        break;
+
+                    case DirectedGraphNode.StartId:
+                        yield return _startNode;
+                        break;
+
+                    default:
+                    {
+                        if (!Nodes.TryGetValue(nodeId, out var to))
+                            throw new InvalidOperationException($"The node id {nodeId} does not exist in this graph.");
+                        
+                        yield return to;
+                        break;
+                    }
+                }
             }
         }
         
         public IList<DirectedGraphNode> TopologicalSort()
         {
-            var sorted = Sort(Nodes.Values,
-                node => GetNodesConnectedTo(node).Select(tuple => tuple.Node));
-            if (sorted.Count > 0 && sorted[0].NodeId == EndNode.NodeId)
+            var sorted = Sort(Nodes.Values, node => GetNodesConnectedTo(node));
+            if (sorted.Count > 0 && sorted[0].IsEndNode)
                 sorted.RemoveAt(0);
             return sorted;
 
-            void Visit<T>(T item, Func<T, IEnumerable<T>> getDependencies,
-                          List<T> sorted, Dictionary<T, bool> visited) where T : notnull
+            void Visit<T>(T item, 
+                Func<T, IEnumerable<T>> getDependencies,
+                ICollection<T> sorted,
+                IDictionary<T, bool> visited) where T : notnull
             {
                 bool inProcess;
                 var alreadyVisited = visited.TryGetValue(item, out inProcess);
@@ -82,6 +130,7 @@ namespace Hl7.Cql.Graph
                     sorted.Add(item);
                 }
             }
+            
             IList<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies) where T : notnull
             {
                 var sorted = new List<T>();
@@ -114,13 +163,37 @@ namespace Hl7.Cql.Graph
             
             {{
                 string.Join(Environment.NewLine,
-                    from edge in Edges.Values
+                    from edge in Edges
                     select $"""
                             "{edge.FromId}" -> "{edge.ToId}";
                             """)
             }}
             }
             """;
+
+        public void AddEndNode()
+        {
+            AddNode(_endNode);
+        }
+
+        public void AddStartNode()
+        {
+            AddNode(_startNode);
+        }
+
+        public void MergeInto(DirectedGraph into)
+        {
+            foreach (var node in Nodes)
+            {
+                if (!into.Nodes.ContainsKey(node.Key))
+                    into.AddNode(node.Value);
+            }
+            foreach (var edge in Edges)
+            {
+                if (!into.Edges.Contains(edge))
+                    into.AddEdge(edge);
+            }
+        }
     }
 
 }
