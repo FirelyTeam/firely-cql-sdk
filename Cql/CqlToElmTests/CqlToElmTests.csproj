@@ -5,12 +5,11 @@
 		<IsPackable>false</IsPackable>
 		<Nullable>enable</Nullable>
 		<RootNamespace>Hl7.Cql.CqlToElm.Test</RootNamespace>
-		<AssemlyName>Hl7.Cql.CqlToElm.Test</AssemlyName>
 		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.3.0</FirelySdkVersion>
+		<FirelySdkVersion>5.4.0</FirelySdkVersion>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
