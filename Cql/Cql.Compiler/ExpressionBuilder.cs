@@ -804,15 +804,22 @@ namespace Hl7.Cql.Compiler
 
                 if (query.let != null)
                 {
-                    var letScopes = new ExpressionElementPairForIdentifier[query.let.Length];
-                    for (int i = 0; i < query.let.Length; i++)
+                    // var letScopes = new ExpressionElementPairForIdentifier[query.let.Length];
+                    // for (int i = 0; i < query.let.Length; i++)
+                    // {
+                    //     var let = query.let[i];
+                    //     var expression = TranslateExpression(let.expression!, subContext);
+                    //     letScopes[i] = new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!));
+                    // }
+                    // subContext = subContext.WithScopes(letScopes);
+                    
+                    foreach(var lete in query.let)
                     {
-                        var let = query.let[i];
-                        var expression = TranslateExpression(let.expression!, subContext);
-                        letScopes[i] = new ExpressionElementPairForIdentifier(let.identifier!, (expression, let.expression!));
+                        var expression = TranslateExpression(lete.expression!, subContext);
+                        subContext = subContext.WithScopes(new ExpressionElementPairForIdentifier(lete.identifier!, (expression, lete.expression!)));
                     }
-                    subContext = subContext.WithScopes(letScopes);
                 }
+                
                 var whereBody = TranslateExpression(query.where, subContext);
                 var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
                 var callWhere = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
@@ -938,7 +945,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            if (isSingle)
+            if (isSingle && !(query.resultTypeSpecifier is elm.ListTypeSpecifier))
             {
                 var callSingle = OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
                 @return = callSingle;
@@ -2165,14 +2172,26 @@ namespace Hl7.Cql.Compiler
                                 var iT = TypeManager.Resolver.IntervalType(pT);
                                 return iT;
                             }
+                            
+                            if (typeName == "{http://hl7.org/fhir}Quantity")
+                            {
+                                var pT = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!;
+                                var iT = TypeManager.Resolver.IntervalType(pT);
+                                return iT;
+                            }
+
+                            // HACK: if the type is not specified (probably because it is not known at compile time
+                            // because of a choice type), let's assume the common Period for now, so we can at least
+                            // continue to generate code for the CMS measures
+                            if (typeName is null || typeName == "{http://hl7.org/fhir}Period")
+                            {
+                                var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
+                                var intervalType = TypeManager.Resolver.IntervalType(pointType!);
+                                return intervalType;
+                            }
                         }
-                        
-                        // The default, if the special cases above don't apply, is DateTime, since that's the
-                        // defined return type for ToInterval().
-                        var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
-                        var intervalType = TypeManager.Resolver.IntervalType(pointType!);
-                        return intervalType;
-                    
+
+                        throw new NotImplementedException();                  
                     case "ToBoolean":
                         return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!;
                     case "ToString":
@@ -2185,6 +2204,8 @@ namespace Hl7.Cql.Compiler
                         return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!;
                     case "ToConcept":
                         return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!;
+                    case "ToValue":
+                        return typeof(object);
                     default: break;
                 }
             }

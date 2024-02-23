@@ -245,6 +245,35 @@ partial class ExpressionBuilder
             }
         }
 
+
+        private readonly static Dictionary<string, string> qiCoreCommonExternalCodeSystems = new Dictionary<string, string>()
+        {
+            ["LOINC"] = "http://loinc.org",
+            ["SNOMEDCT"] = "http://snomed.info/sct",
+            // codesystem "ActCode": 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
+            // codesystem "RoleCode": 'http://terminology.hl7.org/CodeSystem/v3-RoleCode'
+            // codesystem "Diagnosis Role": 'http://terminology.hl7.org/CodeSystem/diagnosis-role'
+            // codesystem "RequestIntent": 'http://hl7.org/fhir/request-intent'
+            // codesystem "MedicationRequestCategory": 'http://terminology.hl7.org/CodeSystem/medicationrequest-category'
+            // codesystem "ConditionClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/condition-clinical'
+            // codesystem "ConditionVerificationStatusCodes": 'http://terminology.hl7.org/CodeSystem/condition-ver-status'
+            // codesystem "AllergyIntoleranceClinicalStatusCodes": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical'
+            // codesystem "AllergyIntoleranceVerificationStatusCodes": 'http://terminology.hl7.org/CodeSystem/allergyintolerance-verification'
+            // codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/observation-category'
+            // codesystem "USCoreObservationCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/us-core-observation-category'  
+            // codesystem "ConditionCategory": 'http://terminology.hl7.org/CodeSystem/condition-category'
+            // codesystem "USCoreConditionCategoryExtensionCodes": 'http://hl7.org/fhir/us/core/CodeSystem/condition-category'
+        };
+        
+        private string? getUrlForExternalCodeSystem(CodeSystemRef csr)
+        {
+            return csr switch
+            {
+                { libraryName: "QICoreCommon" } => qiCoreCommonExternalCodeSystems[csr.name],
+                _ => null
+            };
+        }
+
         private void ProcessCodeDef(
             CodeDef codeDef,
             ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
@@ -254,7 +283,12 @@ partial class ExpressionBuilder
                 throw new InvalidOperationException("Code definition has a null codeSystem node.");
 
             if (!codeSystemUrls.TryGetValue(codeDef.codeSystem.name, out var csUrl))
-                throw new InvalidOperationException($"Undefined code system {codeDef.codeSystem.name!}");
+            {
+                // HACK: try to resolve the code system URL from externally defined files,
+                // which we dont yet support.
+                csUrl = getUrlForExternalCodeSystem(codeDef.codeSystem);
+                if(csUrl is null) throw new InvalidOperationException($"Undefined code system {codeDef.codeSystem.name!}");
+            }
 
             if (!codeNameCodeSystemUrlsSet.Add((codeDef.name, csUrl)))
                 throw new InvalidOperationException(

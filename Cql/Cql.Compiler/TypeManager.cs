@@ -76,8 +76,17 @@ namespace Hl7.Cql.Compiler
                 return TypeFor(element.resultTypeSpecifier, context);
 
             if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
-                return Resolver.ResolveType(element!.resultTypeName!.Name)
+            {
+                var typeToResolve = element!.resultTypeName!.Name;
+                
+                // A hack to handle the fact that the QICore model uses "Status" as a type name,
+                // but the actual type is "ObservationStatus"
+                if (typeToResolve == "{http://hl7.org/fhir}Status")
+                    typeToResolve = "{http://hl7.org/fhir}ObservationStatus";
+                return Resolver.ResolveType(typeToResolve)
                        ?? throw new ArgumentException("Cannot resolve type for expression");
+            }
+
 
             switch (element)
             {

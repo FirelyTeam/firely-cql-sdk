@@ -132,6 +132,10 @@ namespace Hl7.Cql.Fhir
             add((M.UnsignedInt ui) => ui.ToString());
 
             add((M.Canonical c) => c.ToString());
+            
+            // HACK, just lets get this on
+            add((M.DataType dt) => dt is FhirString fs ? fs.Value : throw new InvalidCastException());
+            add((M.DataType dt) => dt is Period per ? converter.Convert<CqlDateTime>(per) : throw new InvalidCastException());
 
             addParametersToCqlPrimitivesConverters(toTypes);
             return converter;

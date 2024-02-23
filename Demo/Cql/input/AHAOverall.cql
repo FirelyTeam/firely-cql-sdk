@@ -135,31 +135,4 @@ define fluent function overlapsHeartFailureOutpatientEncounter(Diagnosis Conditi
           )
 
 define fluent function overlapsAfterHeartFailureOutpatientEncounter(Event Choice<Condition, Procedure, AllergyIntolerance, MedicationRequest, "observation-heartrate">):
-  exists ( "Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD" ModerateOrSevereLVSDHFOutpatientEncounter
-            where
-              case
-                when Event is Condition then
-                  Event.prevalenceInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.isConfirmedActiveDiagnosis()
-                when Event is Procedure then
-                  Event.performed.toInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.status = 'completed'
-                when Event is AllergyIntolerance then
-                  Interval[start of Event.onset.toInterval(), Event.lastOccurrence] overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.clinicalStatus ~ QICoreCommon."allergy-active"
-                    and not (Event.verificationStatus ~ QICoreCommon."allergy-unconfirmed"
-                        or Event.verificationStatus ~ QICoreCommon."allergy-refuted"
-                        or Event.verificationStatus ~ "allergy-entered-in-error")
-                when Event is MedicationRequest then
-                  First( ( collapse (Event.dosageInstruction.timing.repeat.bounds DoseTime
-                                        return DoseTime.toInterval()) ) DrugPeriods
-                           sort by start of $this ) overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.status in { 'active', 'completed' }
-                    and Event.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
-                    and Event.doNotPerform is not true
-                when Event is "observation-heartrate" then
-                  Event.effective.toInterval() overlaps after day of ModerateOrSevereLVSDHFOutpatientEncounter.period
-                    and Event.status in {'final', 'amended', 'corrected'}
-                else false
-              end
-          )
+  false

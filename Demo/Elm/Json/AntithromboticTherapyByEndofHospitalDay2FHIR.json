@@ -2553,7 +2553,7 @@
                   }, {
                      "name" : "authoredOn",
                      "elementType" : {
-                        "name" : "{http://hl7.org/fhir}NotDoneRecorded",
+                        "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "NamedTypeSpecifier"
                      }
                   } ]
@@ -2575,7 +2575,7 @@
                      }, {
                         "name" : "authoredOn",
                         "elementType" : {
-                           "name" : "{http://hl7.org/fhir}NotDoneRecorded",
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "NamedTypeSpecifier"
                         }
                      } ]
@@ -2718,7 +2718,7 @@
                         }, {
                            "name" : "authoredOn",
                            "elementType" : {
-                              "name" : "{http://hl7.org/fhir}NotDoneRecorded",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
@@ -2738,7 +2738,7 @@
                         }, {
                            "name" : "authoredOn",
                            "elementType" : {
-                              "name" : "{http://hl7.org/fhir}NotDoneRecorded",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
@@ -2759,51 +2759,9 @@
                      }, {
                         "name" : "authoredOn",
                         "value" : {
-                           "locator" : "121:19-121:40",
-                           "resultTypeName" : "{http://hl7.org/fhir}NotDoneRecorded",
-                           "type" : "SingletonFrom",
-                           "operand" : {
-                              "type" : "Query",
-                              "source" : [ {
-                                 "alias" : "$this",
-                                 "expression" : {
-                                    "path" : "extension",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "MedicationAdm",
-                                       "type" : "AliasRef"
-                                    }
-                                 }
-                              } ],
-                              "where" : {
-                                 "type" : "Equal",
-                                 "operand" : [ {
-                                    "name" : "ToString",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "path" : "url",
-                                       "scope" : "$this",
-                                       "type" : "Property"
-                                    } ]
-                                 }, {
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded",
-                                    "type" : "Literal"
-                                 } ]
-                              },
-                              "return" : {
-                                 "distinct" : false,
-                                 "expression" : {
-                                    "path" : "value.value",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "name" : "$this",
-                                       "type" : "AliasRef"
-                                    }
-                                 }
-                              }
-                           }
+                           "locator" : "121:19-121:23",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "Now"
                         }
                      } ]
                   }
@@ -2895,7 +2853,7 @@
                         }, {
                            "name" : "authoredOn",
                            "elementType" : {
-                              "name" : "{http://hl7.org/fhir}NotDoneRecorded",
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "NamedTypeSpecifier"
                            }
                         } ]
