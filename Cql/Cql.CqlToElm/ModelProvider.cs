@@ -97,12 +97,16 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         public static Elm.IntervalTypeSpecifier ToElm(this Model.IntervalTypeSpecifier its, IModelProvider provider)
         {
-            var pts = its.pointTypeSpecifier?.ToElm(provider) ??
-                TypeSpecifierForQualifiedName(provider, its.pointType);
-
+            var pts = its.pointTypeSpecifier?.ToElm(provider);
+            if (pts is null)
+            {
+                if (provider.TryGetTypeSpecifierForQualifiedName(its.pointType, out var stuff))
+                    pts = stuff;
+                else throw new ArgumentException($"Could not resolve invertal point type {its.pointType}", nameof(its));
+            }
             return new()
             {
-                pointType = pts
+                pointType = pts!
             };
         }
 
@@ -125,12 +129,16 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         public static Elm.ListTypeSpecifier ToElm(this Model.ListTypeSpecifier lts, IModelProvider provider)
         {
-            var ets = lts.elementTypeSpecifier?.ToElm(provider) ??
-                TypeSpecifierForQualifiedName(provider, lts.elementType);
-
+            var ets = lts.elementTypeSpecifier?.ToElm(provider);
+            if (ets is null)
+            {
+                if (provider.TryGetTypeSpecifierForQualifiedName(lts.elementType, out var stuff))
+                    ets = stuff;
+                else throw new ArgumentException($"Could not resolve invertal point type {lts.elementType}", nameof(lts));
+            }
             return new()
             {
-                elementType = ets
+                elementType = ets!
             };
         }
 
@@ -195,35 +203,24 @@ namespace Hl7.Cql.CqlToElm
             _ => null
         };
 
-        internal static Elm.NamedTypeSpecifier TypeSpecifierForQualifiedName(IModelProvider provider, string qualifiedName)
-        {
-            var (model, name) = splitTypeName(qualifiedName);
-            if (string.IsNullOrEmpty(model))
-                throw new InvalidOperationException("Type specifier must be qualified with a model name.");
 
-            if (!provider.TryGetModelFromName(model, out var resolvingModel))
-                throw new InvalidOperationException($"Type {qualifiedName} references an unknown model {model}.");
-
-            return resolvingModel.MakeQualifiedTypeName(name).ToNamedType();
-        }
 
         internal static Elm.TypeSpecifier GetTypeSpecifierForElement(this ClassInfoElement element, IModelProvider provider)
         {
             if (element.elementTypeSpecifier is not null)
                 return element.elementTypeSpecifier.ToElm(provider);
-            else if (element.elementType is not null)
-                return TypeSpecifierForQualifiedName(provider, element.elementType);
-            else
-                throw new InvalidOperationException($"Element {element.name} does not have a type specifier.");
+            else if (element.elementType is not null
+                && provider.TryGetTypeSpecifierForQualifiedName(element.elementType, out var elementType)
+                && elementType is not null)
+                return elementType;
+            else if (element.type is not null
+                && provider.TryGetTypeSpecifierForQualifiedName(element.type, out var type)
+                && type is not null)
+                return type;
+            else throw new InvalidOperationException($"Element {element.name} does not have a type specifier.");
         }
 
-        // Split the typename on the first '.'.  If there is no '.', return ("", typename).
-        private static (string modelPrefix, string typename) splitTypeName(string typename) => typename.Split('.', 2) switch
-        {
-            string[] parts when parts.Length == 2 => (parts[0], parts[1]),
-            string[] parts when parts.Length == 1 => ("", parts[0]),
-            _ => throw new ArgumentException($"Type name {typename} is not valid.")
-        };
+
 
         /// <summary>
         /// Return the default profile URI for the type specified by <paramref name="type"/>, if any.
@@ -259,10 +256,9 @@ namespace Hl7.Cql.CqlToElm
 
                 if (subtypeBaseTypeName is not null)
                 {
-                    var subtypeBaseType = TypeSpecifierForQualifiedName(provider, subtypeBaseTypeName);
-                    return subtypeBaseType;
+                    if (provider.TryGetTypeSpecifierForQualifiedName(subtypeBaseTypeName, out var subtypeBaseType))
+                        return subtypeBaseType!;
                 }
-                else
                     return null;  // root of the inheritance chain.
             }
             else
@@ -293,9 +289,9 @@ namespace Hl7.Cql.CqlToElm
                 var baseType = GetBaseType(provider, subtypeNT);
                 if (baseType is not null)
                 {
-                    if (baseType == superType) 
+                    if (baseType == superType)
                         return true;
-                    else 
+                    else
                         return baseType.IsSubtypeOf(superType, provider);
                 }
                 else

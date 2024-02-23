@@ -28,13 +28,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static ParameterTypeSpecifier Generic(string parameterName = "T") => new ParameterTypeSpecifier { parameterName = parameterName };
 
-        private static Literal Boolean(bool value = true) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.BooleanType);
-        private static Literal Integer(int value = 1) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.IntegerType);
-        private static Literal Decimal(decimal value = 1m) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.DecimalType);
-        private static List List(Expression first, params Expression[] elements) => new List { element = new[] { first }.Concat(elements).ToArray() }.WithResultType(first.resultTypeSpecifier.ToListType());
-        private static Interval Interval(Expression low, Expression high) => new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
-        private static readonly Null Null = new Null().WithResultType(SystemTypes.AnyType);
-
         [TestMethod]
         public void ForSimpleTypes()
         {

@@ -31,14 +31,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
 
         #region Privates
-        private readonly IModelProvider ModelProvider;
-        private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
+        private IModelProvider ModelProvider { get; }
+        private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
 
-        public IConfiguration Configuration { get; }
-        public ConverterContext ConverterContext { get; }
-        public LibraryBuilder LibraryBuilder { get; }
-        public TypeConverter TypeConverter { get; }
-        public ElmFactory ElmFactory { get; }
+        private IConfiguration Configuration { get; }
+        private ConverterContext ConverterContext { get; }
+        private LibraryBuilder LibraryBuilder { get; }
+        private TypeConverter TypeConverter { get; }
+        private ElmFactory ElmFactory { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 pointType = new[] { lowType, highType }.Max(NumericTypeSpecifierComparer.Default)!;
             else
             {
-                if ((low is Null || lowType == SystemTypes.AnyType) 
+                if ((low is Null || lowType == SystemTypes.AnyType)
                     && (high is not Null && highType != SystemTypes.AnyType))
                     pointType = highType;
                 else pointType = lowType;
@@ -214,7 +214,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             return new Message()
             {
-                message = new Literal() { value = message }.WithResultType(SystemTypes.StringType),
+                message = ElmFactory.Literal(message),
                 source = new Null().WithResultType(SystemTypes.AnyType)
             }
             .AddError(message)
@@ -278,22 +278,34 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
-;
+            ;
         }
 
-        private static Literal? Precision(cqlParser.PluralDateTimePrecisionContext context) =>
-            context is null 
-            ? null
-            : new Literal { value = Enum.GetName(context.Parse()) }.WithResultType(SystemTypes.StringType);
-        private static Literal? Precision(cqlParser.DateTimePrecisionSpecifierContext context)
+        private Literal? Precision(cqlParser.PluralDateTimePrecisionContext context)
+        {
+            if (context is null)
+                return null;
+            else
+            {
+                var name = Enum.GetName(context.Parse());
+                if (name is null)
+                    return null;
+                else return ElmFactory.Literal(name);
+            }
+        }
+        private Literal? Precision(cqlParser.DateTimePrecisionSpecifierContext context)
         {
             var dtp = context?.dateTimePrecision();
-            return dtp is null
-                ? null
-                : new Literal { value = Enum.GetName(dtp.Parse()) }.WithResultType(SystemTypes.StringType);
+            if (dtp is null)
+                return null;
+            else
+            {
+                var name = Enum.GetName(dtp.Parse());
+                if (name is null)
+                    return null;
+                else return ElmFactory.Literal(name);
+            }
         }
-
-        
 
         private enum ListElementPromotion
         {

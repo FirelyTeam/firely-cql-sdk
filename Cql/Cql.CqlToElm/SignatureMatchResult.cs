@@ -15,6 +15,9 @@ namespace Hl7.Cql.CqlToElm
         public bool Compatible => Error is null && Flags == SignatureMatchFlags.None && Arguments.All(op => op.Cost != ConversionCost.Incompatible);
         public bool HasTooFewArguments => Flags.HasFlag(SignatureMatchFlags.TooFewArguments);
         public bool HasTooManyArguments => Flags.HasFlag(SignatureMatchFlags.TooManyArguments);
+
+        public override string ToString() =>
+            $"{Function} [{(Compatible ? "OK" : "FAIL")}, {Enum.GetName(MostExpensive)}, total={TotalCost}]";
     }
 
     [Flags]

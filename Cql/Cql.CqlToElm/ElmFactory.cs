@@ -1,6 +1,8 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+﻿using Fhir.Metrics;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using System;
+using System.Globalization;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -25,7 +27,7 @@ namespace Hl7.Cql.CqlToElm
                 Elm.DateTime dt => Populate(dt, arguments),
                 Expression e when arguments.Length == 0 => e,
                 FunctionRef fr => Populate(function, library, fr, arguments),
-                IHasSource ihs => (Expression)Populate(ihs, arguments),
+                IndexOf io => Populate(io, arguments),
                 LastPositionOf lpo => Populate(lpo, arguments),
                 Message msg => Populate(msg, arguments),
                 NaryExpression ne => Populate(ne, arguments),
@@ -37,10 +39,41 @@ namespace Hl7.Cql.CqlToElm
                 TernaryExpression te => Populate(te, arguments),
                 Time time => Populate(time, arguments),
                 UnaryExpression ue => Populate(ue, arguments),
+                
+                IHasSource ihs => (Expression)Populate(ihs, arguments),
                 _ => throw new InvalidOperationException($"Population of {result.GetType()} is not implemented.")
             };
             return result;
         }
+
+        internal Literal Literal(int value) => 
+            Literal(value.ToString(CultureInfo.InvariantCulture), SystemTypes.IntegerType);
+        internal Literal Literal(long value) =>
+            Literal(value.ToString(CultureInfo.InvariantCulture), SystemTypes.LongType);
+        internal Literal Literal(bool value) =>
+            Literal(value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant(), SystemTypes.BooleanType);
+        internal Literal Literal(decimal value) =>
+            Literal(value.ToString(CultureInfo.InvariantCulture), SystemTypes.DecimalType);
+        internal Literal Literal(string value) =>
+            Literal(value, SystemTypes.StringType);
+        internal Elm.Quantity Quantity(decimal value, string unit) =>
+            new Elm.Quantity
+            {
+                value = value,
+                valueSpecified = true,
+                unit = unit
+            }.WithResultType(SystemTypes.QuantityType);
+                
+
+
+        private Literal Literal(string value, NamedTypeSpecifier namedType) =>
+            new Literal
+            {
+                value = value,
+                valueType = namedType.name,
+                resultTypeName = namedType.name,
+                resultTypeSpecifier = namedType,
+            };
 
         internal Expression If(Expression condition, Expression then, Expression @else)
         {
@@ -179,6 +212,15 @@ namespace Hl7.Cql.CqlToElm
         }
 
 
+        internal IndexOf Populate(IndexOf indexOf, Expression[] arguments)
+        {
+            if (arguments.Length != 2)
+                throw new ArgumentException($"Expected 2 argument, but got {arguments.Length}.", nameof(arguments));
+            indexOf.source = arguments[0];
+            indexOf.element = arguments[1];
+            return indexOf;
+        }
+
         internal IHasSource Populate(IHasSource hasSource, Expression[] arguments)
         {
             hasSource.source = arguments[0];
@@ -236,12 +278,15 @@ namespace Hl7.Cql.CqlToElm
             }
             else if (function.name == nameof(SystemLibrary.Take))
             {
-                slice.startIndex = new Literal { value = "0" }.WithResultType(SystemTypes.IntegerType);
-                slice.endIndex = arguments[0];
+                slice.startIndex = Literal(0);
+                slice.endIndex = new Coalesce
+                {
+                    operand = new[] { arguments[1], Literal(0) },
+                }.WithResultType(SystemTypes.IntegerType);
             }
             if (function.name == nameof(SystemLibrary.Tail))
             {
-                slice.startIndex = new Literal { value = "1" }.WithResultType(SystemTypes.IntegerType);
+                slice.startIndex = Literal(1);
                 slice.endIndex = new Null().WithResultType(SystemTypes.IntegerType);
             }
             return slice;

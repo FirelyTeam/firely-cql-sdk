@@ -14,6 +14,8 @@ namespace Hl7.Cql.CqlToElm.Test
     public class InvocationBuilderTest : Base
     {
         internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
+        internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();
+
 
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -28,14 +30,13 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static ParameterTypeSpecifier Generic(string parameterName = "T") => new ParameterTypeSpecifier { parameterName = parameterName };
 
-        private static Literal Boolean(bool value = true) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.BooleanType);
-        private static Literal String(string value = "") => new Literal { value = value }.WithResultType(SystemTypes.StringType);
+        private static Literal Boolean(bool value = true) => ElmFactory.Literal(value);
+        private static Literal String(string value = "") => ElmFactory.Literal(value);
 
-        private static Literal Integer(int value = 1) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.IntegerType);
-        private static Literal Decimal(decimal value = 1m) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.DecimalType);
-        private static Quantity Quantity(decimal value = 1) => new Quantity { value = value, unit = "1"}.WithResultType(SystemTypes.QuantityType);
+        private static Literal Integer(int value = 1) => ElmFactory.Literal(value);
+        private static Literal Decimal(decimal value = 1m) => ElmFactory.Literal(value);
+        private static Quantity Quantity(decimal value = 1) => ElmFactory.Quantity(value, "1");
         private static Elm.DateTime DateTime() => new Elm.DateTime { year = Integer(2024) }.WithResultType(SystemTypes.DateTimeType);
-
         private static List List(Expression first, params Expression[] elements) => new List { element = new[] { first }.Concat(elements).ToArray() }.WithResultType(first.resultTypeSpecifier.ToListType());
         private static Interval Interval(Expression low, Expression high) => new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
         private static readonly Null Null = new Null().WithResultType(SystemTypes.AnyType);
@@ -182,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
-            Assert.AreEqual(ConversionCost.ListDemotion, result.Arguments[1].Cost);
+            Assert.AreEqual(ConversionCost.Subtype, result.Arguments[1].Cost);
         }
         [TestMethod]
         public void MatchGenericListAndT()
@@ -196,8 +197,8 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
-            Assert.AreEqual(ConversionCost.ListDemotion, result.Arguments[1].Cost);
-            Assert.AreEqual(ConversionCost.ListDemotion, result.MostExpensive);
+            Assert.AreEqual(ConversionCost.Subtype, result.Arguments[1].Cost);
+            Assert.AreEqual(ConversionCost.Subtype, result.MostExpensive);
 
             // These arguments are cheaper than passing two lists.
             // Because in both cases T is inferred to be Any, in the two list case, this results in a List Demotion to T.
@@ -261,21 +262,24 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MatchIndexOf()
         {
             //IndexOf(null, {})
-            var arguments = new Expression[] { Null, List(Null) };
-            var result = InvocationBuilder.MatchSignature(SystemLibrary.IndexOf, arguments);
-            Assert.IsTrue(result.Compatible);
+            var arguments = new Expression[] { Null, new List().WithResultType(SystemTypes.AnyType.ToListType()) };
+            var match = InvocationBuilder.MatchSignature(SystemLibrary.IndexOf, arguments);
+            Assert.IsTrue(match.Compatible);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.IndexOf, arguments);
+            var result = Run(expression);
+            Assert.IsNull(result);
         }
 
-        // NYI
+        [TestMethod]
         public void MatchChoiceIntegerToDecimal()
         {
-
             var choiceType = new ChoiceTypeSpecifier(SystemTypes.IntegerType, SystemTypes.StringType);
             var @as = new As { operand = Integer(1), asTypeSpecifier = choiceType }.WithResultType(choiceType);
             var arguments = new Expression[] { @as };
             var function = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.DecimalType }, SystemTypes.AnyType, "f");
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.IsTrue(result.Compatible);
+            Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.MostExpensive);
         }
 
     }

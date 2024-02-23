@@ -15,6 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
     public class TypeConverterTests : Base
     {
         internal static TypeConverter TypeConverter => Services.GetRequiredService<TypeConverter>();
+        internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();
 
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
@@ -28,9 +29,8 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);
-        private static Literal Integer(int value = 1) => new Literal { value = value.ToString() }.WithResultType(SystemTypes.IntegerType);
-        private static Literal String(string value = "hello") => new Literal { value = value }.WithResultType(SystemTypes.StringType);
-        private static Interval Interval(Expression low, Expression high) => new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
+        private static Literal String(string value = "") => ElmFactory.Literal(value);
+        private static Literal Integer(int value = 1) => ElmFactory.Literal(value); private static Interval Interval(Expression low, Expression high) => new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
 
         private static ValueSetRef ValueSet(string url = "http://hl7.org") => new ValueSetRef { name = "TestValueSet" }.WithResultType(SystemTypes.ValueSetType);
         private static List List(TypeSpecifier elementType, params Expression[] elements) => new List { element = elements }.WithResultType(elementType.ToListType());
@@ -92,15 +92,9 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void AnyIsNotSubtypeOfAny()
+        public void AnyIsSubtypeOfAny()
         {
-            Assert.IsFalse(TypeConverter.IsSubtype(SystemTypes.AnyType, SystemTypes.AnyType));
-        }
-
-        [TestMethod]
-        public void ListIsNotSubtypeOfAny()
-        {
-            Assert.IsFalse(TypeConverter.IsSubtype(SystemTypes.AnyType.ToListType(), SystemTypes.AnyType));
+            Assert.IsTrue(TypeConverter.IsSubtype(SystemTypes.AnyType, SystemTypes.AnyType));
         }
 
         [TestMethod]
@@ -216,6 +210,14 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = TypeConverter.Convert(expression, SystemTypes.IntegerType.ToListType());
             Assert.IsTrue(result.Success);
             Assert.AreEqual(ConversionCost.Cast, result.Cost);
+        }
+        [TestMethod]
+        public void ListIsSubtypeOfAny()
+        {
+            var expression = List(SystemTypes.IntegerType);
+            var result = TypeConverter.Convert(expression, SystemTypes.AnyType);
+            Assert.IsTrue(result.Success);
+            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
         }
     }
 }

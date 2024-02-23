@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var invocation = @operator switch
             {
-                "+" => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
+                "+"  => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
                 "-" => InvocationBuilder.Invoke(SystemLibrary.Subtract, lhs, rhs),
                 "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),

@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -58,7 +59,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     if (errors.Length > 0)
                         Assert.Fail(errors[0].message);
                     var eb = ExpressionBuilderFor(library);
-                    //var lambdas = eb.Build();
+                    var lambdas = eb.Build();
                     foreach (var statement in library.statements)
                     {
                         yield return new object[] { file, library, statement };

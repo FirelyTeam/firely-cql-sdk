@@ -1632,12 +1632,6 @@ define "QuantityIntervalTestWidth5 Input":
 define "QuantityIntervalTestWidth5 Output":
 	5.0'g'
 
-define "DateTimeWidth":
-	width of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)]
-
-define "TimeWidth":
-	width of Interval[@T05:59:59.999, @T15:59:59.999]
-
 define "IntegerIntervalTest Input":
 	Interval[1, 10]
 define "IntegerIntervalTest Output":

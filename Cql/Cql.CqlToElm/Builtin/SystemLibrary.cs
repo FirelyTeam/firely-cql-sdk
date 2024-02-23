@@ -130,7 +130,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         // If you don't need T for anything other than parameter matching, you can use Any, which should match Lists and Intervals.
         // Alphabetized
         public static OverloadedFunctionDef Abs = unary<Abs>(T, T).For(T, NumericTypes);
-        public static OverloadedFunctionDef Add = binary<Add>(T, T, T).For(T, new[] { IntegerType, LongType, DecimalType, QuantityType, StringType }).Combine(binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType));
+        public static OverloadedFunctionDef Add = binary<Add>(T, T, T).For(T, new[] { IntegerType, LongType, DecimalType, QuantityType })
+            .Combine(binary<Add>(T, QuantityType, T).For(T, DateType, DateTimeType, TimeType))
+            .Combine(binary<Concatenate>(StringType, StringType, StringType, "Add"));
         public static SystemFunction<AllTrue> AllTrue = aggregate<AllTrue>(BooleanType, BooleanType);
         public static SystemFunction<And> And = binary<And>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<AnyTrue> AnyTrue = aggregate<AnyTrue>(BooleanType, BooleanType);
@@ -213,6 +215,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Now> Now = nullary<Now>(DateTimeType);
         public static OverloadedFunctionDef NotEqual = binary<NotEqual>(T, T, BooleanType).WithListAndIntervalVariants(T);
         public static SystemFunction<Or> Or = binary<Or>(BooleanType, BooleanType, BooleanType);
+        public static SystemFunction<Overlaps> Overlaps = binaryWithPrecision<Overlaps>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
+        public static SystemFunction<OverlapsAfter> OverlapsAfter = binaryWithPrecision<OverlapsAfter>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
+        public static SystemFunction<OverlapsBefore> OverlapsBefore = binaryWithPrecision<OverlapsBefore>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
         public static SystemFunction<PointFrom> PointFrom = unary<PointFrom>(T.ToIntervalType(), T);
         public static OverloadedFunctionDef PopulationStdDev = aggregate<PopulationStdDev>(T, T).For(T, DecimalType, QuantityType);
         public static OverloadedFunctionDef PopulationVariance = aggregate<PopulationVariance>(T, T).For(T, DecimalType, QuantityType);
@@ -220,7 +225,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
         public static OverloadedFunctionDef Precision = unary<Precision>(T, IntegerType).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Predecessor> Predecessor = unary<Predecessor>(T, T);
-        public static SystemFunction<ProperIn> ProperIn = binaryWithPrecision<ProperIn>(T, T.ToIntervalType(), BooleanType);
+        public static OverloadedFunctionDef ProperIn = OverloadedFunctionDef.Create(binaryWithPrecision<ProperIn>(T, T.ToIntervalType(), BooleanType), binaryWithPrecision<ProperIn>(T, T.ToListType(), BooleanType));
         public static OverloadedFunctionDef ProperIncludedIn = OverloadedFunctionDef.Create(binary<ProperIncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<ProperIncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef ProperIncludes = OverloadedFunctionDef.Create(
             binary<ProperContains>(T.ToListType(), T, BooleanType, nameof(Elm.ProperIncludes)), 
@@ -229,10 +234,18 @@ namespace Hl7.Cql.CqlToElm.Builtin
             binaryWithPrecision<ProperIncludes>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<ReplaceMatches> ReplaceMatches = nary<ReplaceMatches>(new[] { StringType, StringType, StringType }, 3, StringType);
         public static SystemFunction<Round> Round = nary<Round>(new[] { DecimalType, IntegerType }, 1, DecimalType);
+        public static OverloadedFunctionDef Same = binaryWithPrecision<SameAs>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
+            .Combine(binaryWithPrecision<SameAs>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef SameOrAfter = binaryWithPrecision<SameOrAfter>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
+            .Combine(binaryWithPrecision<SameOrAfter>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef SameOrBefore = binaryWithPrecision<SameOrBefore>(T, T, BooleanType).For(T, DateType, DateTimeType, TimeType)
+            .Combine(binaryWithPrecision<SameOrBefore>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static SystemFunction<SingletonFrom> SingletonFrom = unary<SingletonFrom>(T.ToListType(), T);
         public static SystemFunction<Slice> Skip = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Skip");
         public static SystemFunction<Split> Split = binary<Split>(StringType, StringType, StringType.ToListType());
         public static SystemFunction<Start> Start = unary<Start>(T.ToIntervalType(), T);
+        public static SystemFunction<Starts> Starts = binaryWithPrecision<Starts>(T.ToIntervalType(), T.ToIntervalType(), BooleanType);
+
         public static SystemFunction<StartsWith> StartsWith = binary<StartsWith>(StringType, StringType, BooleanType);
         public static OverloadedFunctionDef StdDev = aggregate<StdDev>(T, T).For(T, DecimalType, QuantityType);
         public static SystemFunction<Substring> Substring = nary<Substring>(new[] { StringType, IntegerType, IntegerType }, 2, StringType);

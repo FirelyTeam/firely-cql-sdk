@@ -73,11 +73,14 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return overload;
         }
 
-        public static OverloadedFunctionDef Combine(this OverloadedFunctionDef def, params OverloadedFunctionDef[] defs) =>
-            OverloadedFunctionDef.Create(def.Functions.Concat(defs.SelectMany(def => def.Functions)).ToArray());
+        public static OverloadedFunctionDef Combine(this OverloadedFunctionDef @this, params OverloadedFunctionDef[] overloadedFunctions) =>
+            OverloadedFunctionDef.Create(@this.Functions.Concat(overloadedFunctions.SelectMany(def => def.Functions)).ToArray());
 
-        public static OverloadedFunctionDef Combine<T>(this SystemFunction<T> def, params SystemFunction<T>[] defs) where T : Element =>
-            OverloadedFunctionDef.Create(defs.Append(def).ToArray());
+        public static OverloadedFunctionDef Combine<T>(this SystemFunction<T> @this, params SystemFunction<T>[] functions) where T : Element =>
+            OverloadedFunctionDef.Create(functions.Append(@this).ToArray());
+
+        public static OverloadedFunctionDef Combine<T>(this OverloadedFunctionDef @this, params SystemFunction<T>[] functions) where T : Element =>
+            OverloadedFunctionDef.Create(@this.Functions.Concat(functions).ToArray());
 
         public static SystemFunction<T> MakeFluent<T>(this SystemFunction<T> function)
             where T : Element

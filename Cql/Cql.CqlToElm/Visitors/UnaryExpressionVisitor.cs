@@ -232,10 +232,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         convert = new ToDateTime().WithResultType(SystemTypes.DateTimeType);
                     else if (nts == SystemTypes.DateType)
                         convert = new ToDate().WithResultType(SystemTypes.DateType);
+                    else if (nts == SystemTypes.TimeType)
+                        convert = new ToTime().WithResultType(SystemTypes.TimeType);
                     else if (nts == SystemTypes.ConceptType)
                         convert = new ToConcept().WithResultType(SystemTypes.ConceptType);
                     else if (nts == SystemTypes.BooleanType)
                         convert = new ToBoolean().WithResultType(SystemTypes.BooleanType);
+                    else if (nts == SystemTypes.StringType)
+                        convert = new ToString().WithResultType(SystemTypes.StringType);
                     else
                         convert = new Elm.Convert() { toTypeSpecifier = type }.WithResultType(type);
                 }

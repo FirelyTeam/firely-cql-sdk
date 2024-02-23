@@ -232,7 +232,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             if (context is null) return @default;
 
-            return context.GetText().ToLower() switch
+            return context.GetText().ToLower(CultureInfo.InvariantCulture) switch
             {
                 "public" => AccessModifier.Public,
                 "private" => AccessModifier.Private,

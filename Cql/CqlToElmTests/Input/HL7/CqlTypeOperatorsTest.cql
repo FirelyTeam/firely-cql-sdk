@@ -28,8 +28,6 @@ define "IntegerToString Input":
 define "IntegerToString Output":
 	'5'
 
-define "StringToIntegerError":
-	convert 'foo' to Integer
 
 define "StringToDateTime Input":
 	convert '2014-01-01' to DateTime

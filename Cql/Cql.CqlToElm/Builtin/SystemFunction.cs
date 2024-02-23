@@ -47,7 +47,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
     /// <summary>
     /// A kind of FunctionDef that represents a built-in CQL function.
     /// </summary>
-    [DebuggerDisplay("{GetDebuggerDisplay(),nq}")]
     internal class SystemFunction<T> : SystemFunction
         where T: Element
     {
@@ -125,7 +124,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return element;
         }
 
-        private string GetDebuggerDisplay() =>
+        public override string ToString() =>
             $"{name}({string.Join(", ", operand?.Select(o => o.resultTypeSpecifier) ?? Enumerable.Empty<TypeSpecifier>())})";
+
     }
 }

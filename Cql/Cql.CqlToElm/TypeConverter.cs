@@ -180,7 +180,12 @@ namespace Hl7.Cql.CqlToElm
 
         internal virtual bool IsSubtype(TypeSpecifier from, TypeSpecifier to)
         {
-            if (from is NamedTypeSpecifier argNts && to is NamedTypeSpecifier toNts)
+            // https://cql.hl7.org/09-b-cqlreference.html#any
+            // The Any type is the maximal supertype in the CQL type system, meaning that all types derive from Any,
+            // including list, interval, and structured types. In addition, the type of a null result is Any.
+            if (to == SystemTypes.AnyType)
+                return true;
+            else if (from is NamedTypeSpecifier argNts && to is NamedTypeSpecifier toNts)
             {
                 var argTypeInfo = ModelProvider.FindTypeInfoByNamedType(argNts);
                 var toTypeInfo = ModelProvider.FindTypeInfoByNamedType(toNts);
@@ -216,7 +221,6 @@ namespace Hl7.Cql.CqlToElm
         {
             if (from == SystemTypes.AnyType)
                 return true;
-
             else if (from is ChoiceTypeSpecifier fromChoice)
             {
                 if (to is ChoiceTypeSpecifier toChoice)
@@ -236,6 +240,17 @@ namespace Hl7.Cql.CqlToElm
             // Casting is the operation of treating a value of some base type as a more specific type at run-time. 
             if (IsSubtype(to, from))
                 return true;
+            else if (from is ChoiceTypeSpecifier fromChoice)
+            {
+                if (to is ChoiceTypeSpecifier toChoice)
+                    return fromChoice.choice?.Any(ft => toChoice.choice?.Any(tt => CanBeCast(ft, tt)) ?? false) ?? false;
+                else
+                    return fromChoice.choice?.Any(ft => CanBeCast(ft, to)) ?? false;
+            }
+            else if (to is ChoiceTypeSpecifier toChoice)
+            {
+                return toChoice.choice?.Any(tt => CanBeCast(from, tt)) ?? false;
+            }
             else if (from is ListTypeSpecifier fromList && to is ListTypeSpecifier toList)
                 return CanBeCast(fromList.elementType, toList.elementType);
             else if (from is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
@@ -245,28 +260,39 @@ namespace Hl7.Cql.CqlToElm
 
         // Implicit conversions table is here:
         // https://cql.hl7.org/09-b-cqlreference.html#convert
-        internal virtual bool HasImplicitConversion(TypeSpecifier fromType, TypeSpecifier to)
+        internal virtual bool HasImplicitConversion(TypeSpecifier from, TypeSpecifier to)
         {
-            if (fromType == SystemTypes.IntegerType
+            if (from is ChoiceTypeSpecifier fromChoice)
+            {
+                if (to is ChoiceTypeSpecifier toChoice)
+                    return fromChoice.choice?.Any(ft => toChoice.choice?.Any(tt => HasImplicitConversion(ft, tt)) ?? false) ?? false;
+                else
+                    return fromChoice.choice?.Any(ft => HasImplicitConversion(ft, to)) ?? false;
+            }
+            else if (to is ChoiceTypeSpecifier toChoice)
+            {
+                return toChoice.choice?.Any(tt => HasImplicitConversion(from, tt)) ?? false;
+            }
+            else if (from == SystemTypes.IntegerType
                 && (to == SystemTypes.LongType || to == SystemTypes.DecimalType || to == SystemTypes.QuantityType))
                 return true;
-            else if (fromType == SystemTypes.LongType
+            else if (from == SystemTypes.LongType
                 && (to == SystemTypes.DecimalType || to == SystemTypes.QuantityType))
                 return true;
-            else if (fromType == SystemTypes.DecimalType
+            else if (from == SystemTypes.DecimalType
                 && to == SystemTypes.QuantityType)
                 return true;
-            else if (fromType == SystemTypes.DateType
+            else if (from == SystemTypes.DateType
                 && to == SystemTypes.DateTimeType)
                 return true;
-            else if (fromType == SystemTypes.CodeType
+            else if (from == SystemTypes.CodeType
                 && to == SystemTypes.ConceptType)
                 return true;
             // Tuple types are compatible if:
             // * every element in from exists in to
             // * every element in to exists in from
             // * every element in from is implicitly convertible to the element in to
-            else if (fromType is TupleTypeSpecifier fromTuple
+            else if (from is TupleTypeSpecifier fromTuple
                 && to is TupleTypeSpecifier toTupleType)
             {
                 if (fromTuple.element?.Length != toTupleType.element?.Length)
@@ -395,5 +421,6 @@ namespace Hl7.Cql.CqlToElm
                 return true;
             else return false;
         }
+
     }
 }

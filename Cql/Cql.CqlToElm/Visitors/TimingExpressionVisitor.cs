@@ -34,279 +34,225 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
                 _ => throw new NotImplementedException()
             }; ;
+        }
 
-            /*
-            intervalOperatorPhrase
-            | ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')?   #beforeOrAfterIntervalOperatorPhrase
-            */
+        private Expression HandleWithin(cqlParser.WithinIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
+        {
+            var kw0 = context.GetChild(0).GetText();
+            var kw1 = context.GetChild(1).GetText();
 
-            //| ('starts' | 'ends' | 'occurs')? 'properly'? 'within' quantity 'of' ('start' | 'end')?                                 #withinIntervalOperatorPhrase
-            Expression HandleWithin(cqlParser.WithinIntervalOperatorPhraseContext context,
-                 Expression lhs,
-                 Expression rhs)
+            var properly = kw0 == "properly" || kw1 == "properly";
+
+            if (kw0 == "starts")
             {
-                var kw0 = context.GetChild(0).GetText();
-                var kw1 = context.GetChild(1).GetText();
-
-                var properly = kw0 == "properly" || kw1 == "properly";
-
-                if (kw0 == "starts")
+                var lhsPointType = PointType(lhs.resultTypeSpecifier);
+                lhs = new Start
                 {
-                    var lhsPointType = PointType(lhs.resultTypeSpecifier);
-                    lhs = new Start
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = context.GetChild(0).Locator()!,
-                        resultTypeSpecifier = lhsPointType,
-                        resultTypeName = lhsPointType?.resultTypeName
-                    };
-                }
-                else if (kw0 == "ends")
-                {
-                    var lhsPointType = PointType(lhs.resultTypeSpecifier);
-                    lhs = new End
-                    {
-                        operand = lhs,
-                        localId = NextId(),
-                        locator = context.GetChild(0).Locator()!,
-                        resultTypeSpecifier = lhsPointType,
-                        resultTypeName = lhsPointType?.resultTypeName
-                    };
-                }
-                else if (kw1 == "occurs")
-                {
-                    throw new NotImplementedException("Within with an 'occurs' is not yet implemented.");
-                }
-
-                var (value, unit) = context.quantity().Parse();
-
-                var quantity = new Quantity
-                {
+                    operand = lhs,
                     localId = NextId(),
-                    locator = context.quantity().Locator(),
-                    value = value,
-                    valueSpecified = true,
-                    unit = unit,
-                }.WithResultType(SystemTypes.QuantityType);
-
-                var startEnd = context.children[^1].GetText();
-
-                if (startEnd == "start")
+                    locator = context.GetChild(0).Locator()!,
+                    resultTypeSpecifier = lhsPointType,
+                    resultTypeName = lhsPointType?.resultTypeName
+                };
+            }
+            else if (kw0 == "ends")
+            {
+                var lhsPointType = PointType(lhs.resultTypeSpecifier);
+                lhs = new End
                 {
-                    var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                    rhs = new Start
-                    {
-                        operand = rhs,
-                        localId = NextId(),
-                        locator = context.GetChild(0).Locator()!,
-                        resultTypeSpecifier = rhsPointType,
-                        resultTypeName = rhsPointType?.resultTypeName
-                    };
-                }
-                else if (startEnd == "end")
-                {
-                    var rhsPointType = PointType(rhs.resultTypeSpecifier);
-                    rhs = new End
-                    {
-                        operand = rhs,
-                        localId = NextId(),
-                        locator = context.GetChild(0).Locator()!,
-                        resultTypeSpecifier = rhsPointType,
-                        resultTypeName = rhsPointType?.resultTypeName
-                    };
-                }
-
-                if (properly)
-                {
-                    var subtract = new Subtract
-                    {
-                        operand = new[] { rhs, quantity },
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeSpecifier = rhs.resultTypeSpecifier,
-                        resultTypeName = rhs.resultTypeName,
-                    };
-
-                    var add = new Add
-                    {
-                        operand = new[] { rhs, quantity },
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeSpecifier = rhs.resultTypeSpecifier,
-                        resultTypeName = rhs.resultTypeName,
-                    };
-
-                    rhs = new Hl7.Cql.Elm.Interval
-                    {
-                        low = subtract,
-                        high = add,
-                        lowClosed = false,
-                        highClosed = false,
-                        localId = NextId(),
-                        locator = rhs.locator,
-                        resultTypeSpecifier = subtract.resultTypeSpecifier!.ToIntervalType(),
-                    };
-
-                    if (lhs is Elm.Interval)
-                    {
-                        rhs = new Elm.ToList
-                        {
-                            localId = NextId(),
-                            locator = rhs.locator,
-                            resultTypeSpecifier = lhs.resultTypeSpecifier!.ToListType(),
-                            operand = rhs,
-                        };
-                    }
-
-                    var @in = new In
-                    {
-                        localId = NextId(),
-                        locator = context.Locator(),
-                        operand = new[] { lhs, rhs },
-                    }.WithResultType(SystemTypes.BooleanType);
-
-                    return @in;
-                }
-                else
-                    throw new NotImplementedException("Properly within is not yet implemented.");
+                    operand = lhs,
+                    localId = NextId(),
+                    locator = context.GetChild(0).Locator()!,
+                    resultTypeSpecifier = lhsPointType,
+                    resultTypeName = lhsPointType?.resultTypeName
+                };
+            }
+            else if (kw1 == "occurs")
+            {
+                throw new NotImplementedException("Within with an 'occurs' is not yet implemented.");
             }
 
-            //| ('starts' | 'ends' | 'occurs')? 'properly'? ('during' | 'included in') dateTimePrecisionSpecifier?                    #includedInIntervalOperatorPhrase
-            Expression HandleIncludedIn(cqlParser.IncludedInIntervalOperatorPhraseContext context,
-                    Expression lhs,
-                    Expression rhs)
+            var (value, unit) = context.quantity().Parse();
+
+            var quantity = new Quantity
             {
-                bool properly = false;
-                var firstToken = context.GetChild(0).GetText();
-                if (firstToken == "starts")
+                localId = NextId(),
+                locator = context.quantity().Locator(),
+                value = value,
+                valueSpecified = true,
+                unit = unit,
+            }.WithResultType(SystemTypes.QuantityType);
+
+            var startEnd = context.children[^1].GetText();
+
+            if (startEnd == "start")
+            {
+                var rhsPointType = PointType(rhs.resultTypeSpecifier);
+                rhs = new Start
                 {
-                    if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval)
-                        lhs = new Start { operand = lhs }.WithResultType(lhsInterval.pointType);
-                    else return new In()
-                            .WithLocator(context.Locator())
-                            .WithId()
-                            .WithResultType(SystemTypes.BooleanType)
-                            .AddUnresolvedOperatorError("Start", lhs.resultTypeSpecifier);
-                }
-                else if (firstToken == "ends")
+                    operand = rhs,
+                    localId = NextId(),
+                    locator = context.GetChild(0).Locator()!,
+                    resultTypeSpecifier = rhsPointType,
+                    resultTypeName = rhsPointType?.resultTypeName
+                };
+            }
+            else if (startEnd == "end")
+            {
+                var rhsPointType = PointType(rhs.resultTypeSpecifier);
+                rhs = new End
                 {
-                    if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval)
-                        lhs = new End { operand = lhs }.WithResultType(lhsInterval.pointType);
-                    else return new In()
-                            .WithLocator(context.Locator())
-                            .WithId()
-                            .WithResultType(SystemTypes.BooleanType)
-                            .AddUnresolvedOperatorError("End", lhs.resultTypeSpecifier);
+                    operand = rhs,
+                    localId = NextId(),
+                    locator = context.GetChild(0).Locator()!,
+                    resultTypeSpecifier = rhsPointType,
+                    resultTypeName = rhsPointType?.resultTypeName
+                };
+            }
+
+            if (properly)
+            {
+                var subtract = new Subtract
+                {
+                    operand = new[] { rhs, quantity },
+                    localId = NextId(),
+                    locator = rhs.locator,
+                    resultTypeSpecifier = rhs.resultTypeSpecifier,
+                    resultTypeName = rhs.resultTypeName,
+                };
+
+                var add = new Add
+                {
+                    operand = new[] { rhs, quantity },
+                    localId = NextId(),
+                    locator = rhs.locator,
+                    resultTypeSpecifier = rhs.resultTypeSpecifier,
+                    resultTypeName = rhs.resultTypeName,
+                };
+
+                rhs = new Hl7.Cql.Elm.Interval
+                {
+                    low = subtract,
+                    high = add,
+                    lowClosed = false,
+                    highClosed = false,
+                    localId = NextId(),
+                    locator = rhs.locator,
+                    resultTypeSpecifier = subtract.resultTypeSpecifier!.ToIntervalType(),
+                };
+
+                if (lhs is Elm.Interval)
+                {
+                    rhs = new Elm.ToList
+                    {
+                        localId = NextId(),
+                        locator = rhs.locator,
+                        resultTypeSpecifier = lhs.resultTypeSpecifier!.ToListType(),
+                        operand = rhs,
+                    };
                 }
-                else if (firstToken == "properly")
+
+                var @in = new In
+                {
+                    localId = NextId(),
+                    locator = context.Locator(),
+                    operand = new[] { lhs, rhs },
+                }.WithResultType(SystemTypes.BooleanType);
+
+                return @in;
+            }
+            else
+                throw new NotImplementedException("Properly within is not yet implemented.");
+        }
+
+        private Expression HandleIncludedIn(cqlParser.IncludedInIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
+        {
+            bool properly = false;
+            var firstToken = context.GetChild(0).GetText();
+            if (firstToken == "starts")
+            {
+                if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval)
+                    lhs = new Start { operand = lhs }.WithResultType(lhsInterval.pointType);
+                else return new In()
+                        .WithLocator(context.Locator())
+                        .WithId()
+                        .WithResultType(SystemTypes.BooleanType)
+                        .AddUnresolvedOperatorError("Start", lhs.resultTypeSpecifier);
+            }
+            else if (firstToken == "ends")
+            {
+                if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval)
+                    lhs = new End { operand = lhs }.WithResultType(lhsInterval.pointType);
+                else return new In()
+                        .WithLocator(context.Locator())
+                        .WithId()
+                        .WithResultType(SystemTypes.BooleanType)
+                        .AddUnresolvedOperatorError("End", lhs.resultTypeSpecifier);
+            }
+            else if (firstToken == "properly")
+                properly = true;
+            if (context.ChildCount > 1)
+            {
+                var secondToken = context.GetChild(1).GetText();
+                if (secondToken == "properly")
                     properly = true;
-                if (context.ChildCount > 1)
-                {
-                    var secondToken = context.GetChild(1).GetText();
-                    if (secondToken == "properly")
-                        properly = true;
-                }
-                var precision = Precision(context.dateTimePrecisionSpecifier());
+            }
+            var precision = Precision(context.dateTimePrecisionSpecifier());
 
-                var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
+            var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
 
-                Expression expression;
-                if (properly)
+            // If we use only the overload matching here, we will end up with the wrong pick.
+            // Specifically, expressions like:
+            // Interval[1, 10] included in Interval[null, null]
+            // Will cause the generic operand T to be cheapestly resolved as Any matching the
+            // T, Interval<T> overload, which produces a ProperIn.
+            // This is incorrect, as this expression should be a ProperIncludedIn.
+            Expression expression;
+            if (properly)
+            {
+                expression = lhs.resultTypeSpecifier switch
                 {
-                    var properIn = InvocationBuilder.MatchSignature(SystemLibrary.ProperIn, args);
-                    if (properIn.Compatible)
-                    {
-                        expression = InvocationBuilder.Invoke(SystemLibrary.ProperIn, args);
-                    }
-                    else
-                    {
-                        var properIncludedIn = InvocationBuilder.SelectBestOverload(SystemLibrary.ProperIncludedIn, args);
-                        if (properIncludedIn.Compatible)
-                        {
-                            expression = InvocationBuilder.Invoke(SystemLibrary.ProperIncludedIn, args);
-                        }
-                        else
-                        {
-                            if (properIncludedIn.Error is not null)
-                                expression = new Contains()
-                                    .WithId()
-                                    .WithLocator(context.Locator())
-                                    .AddError(properIncludedIn.Error);
-                            else
-                                throw new InvalidOperationException($"Overload is incompatible but no error is set.");
-                        }
-                    }
-                }
-                else
-                {
-                    var @in = InvocationBuilder.SelectBestOverload(SystemLibrary.In, args);
-                    if (@in.Compatible)
-                    {
-                        expression = InvocationBuilder.Invoke(SystemLibrary.In, args);
-                    }
-                    else
-                    {
-                        var properIncludedIn = InvocationBuilder.SelectBestOverload(SystemLibrary.IncludedIn, args);
-                        if (properIncludedIn.Compatible)
-                        {
-                            expression = InvocationBuilder.Invoke(SystemLibrary.IncludedIn, args);
-                        }
-                        else
-                        {
-                            if (properIncludedIn.Error is not null)
-                                expression = new Contains()
-                                    .WithId()
-                                    .WithLocator(context.Locator())
-                                    .AddError(properIncludedIn.Error);
-                            else
-                                throw new InvalidOperationException($"Overload is incompatible but no error is set.");
-                        }
-                    }
-                }
+                    IntervalTypeSpecifier or ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.ProperIncludedIn, args),
+                    _ => InvocationBuilder.Invoke(SystemLibrary.ProperIn, args)
+                };
+                Debug.Assert(expression.GetErrors().Length == 0);
                 return expression
                     .WithId()
                     .WithLocator(context.Locator());
-
             }
-
-            //| 'overlaps'('before' | 'after') ? dateTimePrecisionSpecifier ?                                                          #overlapsIntervalOperatorPhrase
-            Expression HandleOverlaps(cqlParser.OverlapsIntervalOperatorPhraseContext context,
-                    Expression lhs,
-                    Expression rhs)
+            else
             {
-                DateTimePrecision? dtPrecision =
-                    context.dateTimePrecisionSpecifier() is { } p ?
-                        p.dateTimePrecision().Parse() : null;
-
-                var boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
-                    term.GetText() : null;
-
-                BinaryExpression result = boa switch
+                expression = lhs.resultTypeSpecifier switch
                 {
-                    null => new Overlaps
-                    {
-                        precisionSpecified = dtPrecision is not null,
-                        precision = dtPrecision ?? default,
-                    },
+                    IntervalTypeSpecifier or ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.IncludedIn, args),
+                    _ => InvocationBuilder.Invoke(SystemLibrary.In, args),
 
-                    "before" => new OverlapsBefore
-                    {
-                        precisionSpecified = dtPrecision is not null,
-                        precision = dtPrecision ?? default,
-                    },
-
-                    "after" => new OverlapsAfter
-                    {
-                        precisionSpecified = dtPrecision is not null,
-                        precision = dtPrecision ?? default,
-                    },
-                    _ => throw new InvalidOperationException($"Parser returned unknown token '{boa}' in an overlaps interval expression.")
                 };
-
-                result.operand = new[] { lhs, rhs };
-                return result.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator());
+                Debug.Assert(expression.GetErrors().Length == 0);
+                return expression
+                    .WithId()
+                    .WithLocator(context.Locator());
             }
+        }
+
+        private Expression HandleOverlaps(cqlParser.OverlapsIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
+        {
+            var boa = context.ChildCount > 1 && context.GetChild(1) is ITerminalNode term ?
+                term.GetText() : null;
+            var precision = Precision(context.dateTimePrecisionSpecifier());
+            var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
+
+            SystemFunction function = boa switch
+            {
+                null => SystemLibrary.Overlaps,
+                "before" => SystemLibrary.OverlapsBefore,
+                "after" => SystemLibrary.OverlapsAfter,
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{boa}' in an overlaps interval expression.")
+            };
+            var expression = InvocationBuilder.Invoke(function, args);
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // ('starts' | 'ends' | 'occurs')? quantityOffset? temporalRelationship dateTimePrecisionSpecifier? ('start' | 'end')? 
@@ -341,8 +287,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             throw new NotImplementedException();
         }
 
-
-        private static Expression HandleBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
+        private Expression HandleBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
         {
             DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
             var before = new Before()
@@ -362,27 +307,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithResultType(SystemTypes.BooleanType)
                 .WithLocator(context.Locator());
         }
-        private static Expression HandleOnOrBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
+        private Expression HandleOnOrBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
         {
-            DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
-            var sameOrBefore = new SameOrBefore()
-            {
-                operand = new Expression[] { lhs, rhs },
-            };
-            if (precision.HasValue)
-            {
-                sameOrBefore.precision = precision.Value;
-                sameOrBefore.precisionSpecified = true;
-            }
-            else
-            {
-                sameOrBefore.precisionSpecified = false;
-            }
-            return sameOrBefore
+            var precision = Precision(context.dateTimePrecisionSpecifier());
+            var args = precision is null ? new[] { lhs, rhs } : new[] { lhs, rhs, precision };
+            var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrBefore, args);
+            return expression
                 .WithResultType(SystemTypes.BooleanType)
                 .WithLocator(context.Locator());
         }
-        private static Expression HandleAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
+        private Expression HandleAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
         {
             DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
             var after = new After()
@@ -404,7 +338,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
         private Expression HandleOnOrAfter(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
         {
-            DateTimePrecision? precision = context.dateTimePrecisionSpecifier()?.dateTimePrecision().Parse();
+            var precision = Precision(context.dateTimePrecisionSpecifier());
+
+            // These timing phrases have complicated operand setups.
+            // Depending on the phrase, setup lhs and rhs operands.
             if (lhs.resultTypeSpecifier is IntervalTypeSpecifier lhsInterval)
             {
                 var offset = context.quantityOffset();
@@ -424,35 +361,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     operand = rhs
                                 }.WithResultType(rhsInterval.pointType);
                             }
-                            var soa = new SameOrAfter
-                            {
-                                operand = new Expression[]
-                                {
-                                    new Start
-                                    {
-                                        operand = lhs,
-                                    }.WithResultType(lhsInterval.pointType),
-                                    new Add
-                                    {
-                                        operand = new Expression[]
-                                        {
-                                            rhs,
-                                            quantity,
-                                        }
-                                    }.WithResultType(lhsInterval.pointType)
-                                }
-                            }.WithResultType(SystemTypes.BooleanType)
-                            .WithId()
-                            .WithLocator(context.Locator());
-                            if (precision is not null)
-                            {
-                                soa.precision = precision.Value;
-                                soa.precisionSpecified = true;
-                            }
-                            return soa;
+                            lhs = new Start { operand = lhs, }
+                                .WithResultType(lhsInterval.pointType);
+
+                            rhs = new Add { operand = new Expression[] { rhs, quantity, } }
+                                .WithResultType(rhs.resultTypeSpecifier);
                         }
                         else if (offsetRelative == "or less")
                         {
+                            // this case is an exception.
                             // this mirrors the generation done for this operator by the reference cql-to-elm implementation
                             // it's weird
                             var @in = new In
@@ -474,10 +391,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                     }.WithResultType(lhsInterval.resultTypeSpecifier)
                                 }
                             }.WithResultType(SystemTypes.BooleanType);
-                            if (precision is not null)
+                            if (precision != null)
                             {
-                                @in.precision = precision.Value;
-                                @in.precisionSpecified = true;
+                                if (Enum.TryParse<DateTimePrecision>(precision.value, out var dtp))
+                                {
+                                    @in.precisionSpecified = true;
+                                    @in.precision = dtp;
+                                }
+                                else @in.AddError($"Unknown precision '{precision.value}'.");
                             }
                             var not = new Not
                             {
@@ -503,26 +424,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                 }
             }
-            var sameOrAfter = new SameOrAfter()
-            {
-                operand = new Expression[] { lhs, rhs },
-            };
-            if (precision.HasValue)
-            {
-                sameOrAfter.precision = precision.Value;
-                sameOrAfter.precisionSpecified = true;
-            }
-            else
-            {
-                sameOrAfter.precisionSpecified = false;
-            }
-            return sameOrAfter
-                .WithResultType(SystemTypes.BooleanType)
+            var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
+            var expression = InvocationBuilder.Invoke(SystemLibrary.SameOrAfter, args);
+            return expression
+                .WithId()
                 .WithLocator(context.Locator());
         }
 
         // | 'meets'('before' | 'after') ? dateTimePrecisionSpecifier ?                                                             #meetsIntervalOperatorPhrase
-        private static Expression HandleMeets(cqlParser.MeetsIntervalOperatorPhraseContext context,
+        private Expression HandleMeets(cqlParser.MeetsIntervalOperatorPhraseContext context,
                 Expression lhs,
                 Expression rhs)
         {
@@ -559,17 +469,22 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 Expression lhs,
                 Expression rhs)
         {
-            DateTimePrecision? dtPrecision = context.dateTimePrecisionSpecifier() is { } p ?
-                p.dateTimePrecision().Parse() : null;
-
-            return new Starts
+            var dtp = context.dateTimePrecisionSpecifier();
+            Expression expression;
+            if (dtp is null)
+                expression = InvocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs);
+            else
             {
-                localId = NextId(),
-                locator = context.Locator(),
-                operand = new[] { lhs, rhs },
-                precisionSpecified = dtPrecision is not null,
-                precision = dtPrecision ?? default,
-            }.WithResultType(SystemTypes.BooleanType);
+                var precision = Precision(dtp);
+                expression = precision switch
+                {
+                    { } => InvocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs, precision),
+                    _ => InvocationBuilder.Invoke(SystemLibrary.Starts, lhs, rhs),
+                };
+            }
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // | 'ends' dateTimePrecisionSpecifier?                                                                                    #endsIntervalOperatorPhrase
@@ -639,7 +554,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         }
 
         //: ('starts' | 'ends' | 'occurs')? 'same' dateTimePrecision? (relativeQualifier | 'as') ('start' | 'end')?               #concurrentWithIntervalOperatorPhrase
-        private static Expression HandleConcurrentWith(cqlParser.ConcurrentWithIntervalOperatorPhraseContext context,
+        private Expression HandleConcurrentWith(cqlParser.ConcurrentWithIntervalOperatorPhraseContext context,
                 Expression lhs,
                 Expression rhs)
         {

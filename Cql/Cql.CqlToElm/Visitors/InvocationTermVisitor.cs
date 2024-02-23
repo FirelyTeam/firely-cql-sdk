@@ -37,11 +37,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return new Message()
                 {
                     source = new Null().WithResultType(SystemTypes.AnyType),
-                    message = new Literal
-                    {
-                        value = message,
-                        resultTypeSpecifier = SystemTypes.StringType
-                    }
+                    message = ElmFactory.Literal(message),
                 }
                 .AddError(message)
                 .WithLocator(context.Locator())
@@ -53,24 +49,98 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitInstanceSelector([NotNull] cqlParser.InstanceSelectorContext context)
         {
             var type = TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
-            var elements = context
-                .instanceElementSelector()
-                .Select(ies =>
+            if (type is Elm.NamedTypeSpecifier namedType)
+            {
+                var modelType = ModelProvider.FindTypeInfoByNamedType(namedType);
+                if (modelType != null)
                 {
-                    var name = ies.referentialIdentifier().Parse();
-                    var expression = Visit(ies.expression());
-                    var ele = new InstanceElement()
+                    if (modelType.Type is ClassInfo @class)
                     {
-                        name = name,
-                        value = expression,
-                    };
-                    return ele;
-                })
-                .ToArray();
-            var instance = new Instance { element = elements }
-                .WithResultType(type)
-                .WithLocator(context.Locator());
-            return instance;
+                        var instanceElementContexts = context.instanceElementSelector();
+                        var instanceElements = new InstanceElement[instanceElementContexts.Length];
+                        for (int i = 0; i < instanceElementContexts.Length; i++)
+                        {
+                            var elementName = instanceElementContexts[i].referentialIdentifier().Parse();
+                            if (!@class.TryGetElement(elementName, out var classElement) || classElement is null)
+                            {
+                                return new Instance()
+                                    .AddError($"Member {elementName} not found for type {namedType.name.Name}.")
+                                    .WithLocator(context.Locator())
+                                    .WithResultType(type);
+                            }
+                            else
+                            {
+                                Elm.TypeSpecifier elementType;
+                                if (classElement.typeSpecifier is not null)
+                                    elementType = classElement.typeSpecifier.ToElm(ModelProvider);
+                                else if (classElement.type is not null)
+                                {
+                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.type, out var ent))
+                                        elementType = ent!;
+                                    else
+                                        return new Instance()
+                                            .AddError($"The named type '{classElement.type}' for element {elementName} could not be resolved to any model type.")
+                                            .WithLocator(context.Locator())
+                                            .WithResultType(type);
+                                }
+                                else if (classElement.elementType is not null)
+                                {
+                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.elementType, out var ent))
+                                        elementType = ent!;
+                                    else
+                                        return new Instance()
+                                            .AddError($"The named type '{classElement.elementType}' for element {elementName} could not be resolved to any model type.")
+                                            .WithLocator(context.Locator())
+                                            .WithResultType(type);
+                                }
+                                else
+                                {
+                                    return new Instance()
+                                        .AddError($"Element {elementName} does not have any declared type.")
+                                        .WithLocator(context.Locator())
+                                        .WithResultType(type);
+                                }
+                                var elementExpression = Visit(instanceElementContexts[i]);
+                                var conversionResult = TypeConverter.Convert(elementExpression, elementType);
+                                if (conversionResult.Success)
+                                {
+                                    var instanceElement = new InstanceElement()
+                                    {
+                                        name = elementName,
+                                        value = conversionResult.Result,
+                                    };
+                                    instanceElements[i] = instanceElement;
+                                }
+                                else
+                                {
+                                    throw new NotImplementedException();
+                                }
+                            }
+                        }
+                        var instance = new Instance
+                        {
+                            element = instanceElements,
+                            classType = namedType.name,
+                        };
+                        return instance
+                            .WithId()
+                            .WithLocator(context.Locator())
+                            .WithResultType(namedType);
+                    }
+                    else return new Instance()
+                        .AddError($"The named type '{namedType.name.Name}' is not a class type.")
+                        .WithLocator(context.Locator())
+                        .WithResultType(type);
+                }
+                else return new Instance()
+                    .AddError($"The named type '{namedType.name.Name}' could not be resolved to any model type.")
+                    .WithLocator(context.Locator())
+                    .WithResultType(type);
+            }
+            else return new Instance()
+                .AddError("A named type is required in this context.")
+                .WithLocator(context.Locator())
+                .WithResultType(type);
         }
 
         // This expression is used when constructing paths from left to right when parsing an invocation term.
@@ -321,7 +391,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         expression.AddError($"Function '{result.Function.name}' is called fluently, but its definition is not marked as fluent.");
                     return expression;
                 }
-                else 
+                else
                     return new FunctionRef()
                     {
                         name = function.Name,
