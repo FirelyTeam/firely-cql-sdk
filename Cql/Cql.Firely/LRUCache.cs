@@ -113,7 +113,7 @@ namespace Hl7.Cql.Fhir
         {
             lock (Cache)
             {
-                if (Cache.TryGetValue(key, out var lruValue))
+                if (key != null && Cache.TryGetValue(key, out var lruValue))
                 {
                     value = lruValue.Value;
                     return true;
