@@ -34,20 +34,32 @@ internal static class LibraryExtensions
                 else
                     throw new InvalidOperationException($"Cannot find library {name} version {version} referenced in {library.NameAndVersion}");
             });
-            Merge(includes, buildOrder);
+            includes.MergeInto(buildOrder);
         }
         return buildOrder;
     }
 
-    private static DirectedGraph GetIncludedLibraries(Library library, Func<string, string, Library> locateLibrary) => SanitizeDependencyGraph(GetDependencySubgraph(library, locateLibrary));
+    private static DirectedGraph GetIncludedLibraries(Library library, Func<string, string, Library> locateLibrary)
+    {
+        var graph = GetDependencySubgraph(library, locateLibrary);
+        graph.AddStartNode();
+        graph.AddEndNode();
+        return graph;
+    }
 
-    internal static DirectedGraph GetIncludedLibraries(this Library library, DirectoryInfo libraryPath) =>
-        SanitizeDependencyGraph(GetDependencySubgraph(library, (name, version) =>
+    internal static DirectedGraph GetIncludedLibraries(this Library library, DirectoryInfo libraryPath)
+    {
+        var subgraph = GetDependencySubgraph(library, (name, version) =>
         {
             var stream = OpenLibrary(libraryPath, name, version);
-            var dependentLibrary = Library.LoadFromJson((Stream)stream) ?? throw new InvalidOperationException($"Cannot load ELM for {name} version {version}");
+            var dependentLibrary = Library.LoadFromJson((Stream)stream) ??
+                                   throw new InvalidOperationException($"Cannot load ELM for {name} version {version}");
             return dependentLibrary;
-        }));
+        });
+        subgraph.AddStartNode();
+        subgraph.AddEndNode();
+        return subgraph;
+    }
 
     private static Stream OpenLibrary(DirectoryInfo libraryPath, string name, string version)
     {
@@ -60,13 +72,6 @@ internal static class LibraryExtensions
         }
         var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
         return stream;
-    }
-
-    private static DirectedGraph SanitizeDependencyGraph(DirectedGraph graph)
-    {
-        graph.Add(graph.StartNode);
-        graph.Add(graph.EndNode);
-        return graph;
     }
 
     private static DirectedGraph GetDependencySubgraph(Library library, Func<string, string, Library> locateLibrary, bool includeLibraryProperty = true)
@@ -86,10 +91,8 @@ internal static class LibraryExtensions
             Label = library.identifier!.id,
             Properties = properties,
         };
-        thisGraph.Add(packageNode);
-        var edgeFromStart = new DirectedGraphEdge(thisGraph.StartNode, packageNode);
-        thisGraph.StartNode.ForwardEdges.Add(edgeFromStart);
-        thisGraph.Add(edgeFromStart);
+        thisGraph.AddNode(packageNode);
+        thisGraph.AddEdge((null, packageNode));
         
         if (library.includes?.Length > 0)
         {
@@ -98,59 +101,27 @@ internal static class LibraryExtensions
                 var includedPackage = locateLibrary(include.path!, include.version!);
                 var libGraph = GetDependencySubgraph(includedPackage, locateLibrary);
                 // add all nodes & forward edges to graph.
-                foreach (var kvp in libGraph.Nodes)
+                foreach (var (nodeId, node) in libGraph.Nodes)
                 {
-                    if (thisGraph.Nodes.ContainsKey(kvp.Key) == false)
+                    if (thisGraph.Nodes.ContainsKey(nodeId) == false)
                     {
-                        var clonedNode = kvp.Value.Clone();
-                        thisGraph.Add(clonedNode);
-                        foreach (var edge in kvp.Value.ForwardEdges)
-                            thisGraph.Add(edge);
+                        var clonedNode = node.Clone();
+                        thisGraph.AddNode(clonedNode);
+                        foreach (var forwardNodeId in libGraph.GetForwardNodeIds(node.NodeId)) 
+                            thisGraph.AddEdge((nodeId, forwardNodeId));
                     }
                 }
                 // add all forward edges from lib start node to package node
-                foreach (var forwardEdge in libGraph.StartNode.ForwardEdges)
+                foreach (var forwardNodeId in libGraph.GetForwardNodeIds(DirectedGraphNode.StartId))
                 {
-                    var destinationNodeId = forwardEdge.ToId;
-                    var newEdge = new DirectedGraphEdge(packageNode.NodeId, destinationNodeId);
-                    packageNode.ForwardEdges.Add(newEdge);
-                    thisGraph.Add(newEdge);
+                    thisGraph.AddEdge((packageNode.NodeId, forwardNodeId));
                 }
             }
         }
         else
         {
-            var edgeToEnd = new DirectedGraphEdge(packageNode, thisGraph.EndNode);
-            packageNode.ForwardEdges.Add(edgeToEnd);
-            thisGraph.Add(edgeToEnd);
+            thisGraph.AddEdge((packageNode, null));
         }
         return thisGraph;
-    }
-
-    private static void Merge(DirectedGraph from, DirectedGraph into)
-    {
-        foreach (var sourceNode in from.Nodes)
-        {
-            if (!into.Nodes.ContainsKey(sourceNode.Key))
-                into.Add(sourceNode.Value);
-        }
-        foreach (var edge in from.Edges)
-        {
-            if (!into.Edges.ContainsKey(edge.Key))
-                into.Add(edge.Value);
-        }
-        var orphaned = true;
-        foreach (var edge in into.Edges)
-        {
-            if (edge.Value.ToId == from.StartNode.NodeId)
-            {
-                orphaned = false;
-                break;
-            }
-        }
-        if (orphaned)
-        {
-            into.Add(new DirectedGraphEdge(into.StartNode.NodeId, from.StartNode.NodeId));
-        }
     }
 }
