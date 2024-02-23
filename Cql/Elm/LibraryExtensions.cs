@@ -93,35 +93,36 @@ internal static class LibraryExtensions
         };
         thisGraph.AddNode(packageNode);
         thisGraph.AddEdge((null, packageNode));
-        
-        if (library.includes?.Length > 0)
-        {
-            foreach (var include in library.includes ?? Enumerable.Empty<IncludeDef>())
-            {
-                var includedPackage = locateLibrary(include.path!, include.version!);
-                var libGraph = GetDependencySubgraph(includedPackage, locateLibrary);
-                // add all nodes & forward edges to graph.
-                foreach (var (nodeId, node) in libGraph.Nodes)
-                {
-                    if (thisGraph.Nodes.ContainsKey(nodeId) == false)
-                    {
-                        var clonedNode = node.Clone();
-                        thisGraph.AddNode(clonedNode);
-                        foreach (var forwardNodeId in libGraph.GetForwardNodeIds(node.NodeId)) 
-                            thisGraph.AddEdge((nodeId, forwardNodeId));
-                    }
-                }
-                // add all forward edges from lib start node to package node
-                foreach (var forwardNodeId in libGraph.GetForwardNodeIds(DirectedGraphNode.StartId))
-                {
-                    thisGraph.AddEdge((packageNode.NodeId, forwardNodeId));
-                }
-            }
-        }
-        else
+
+        if ((library.includes?.Length ?? 0) == 0)
         {
             thisGraph.AddEdge((packageNode, null));
+            return thisGraph;
         }
+
+        foreach (var include in library.includes ?? Enumerable.Empty<IncludeDef>())
+        {
+            var includedPackage = locateLibrary(include.path!, include.version!);
+            var libGraph = GetDependencySubgraph(includedPackage, locateLibrary);
+            // add all nodes & forward edges to graph.
+            foreach (var (nodeId, node) in libGraph.Nodes)
+            {
+                if (thisGraph.Nodes.ContainsKey(nodeId) == false)
+                {
+                    var clonedNode = node.Clone();
+                    thisGraph.AddNode(clonedNode);
+                    foreach (var forwardNodeId in libGraph.GetForwardNodeIds(node.NodeId))
+                        thisGraph.AddEdge((nodeId, forwardNodeId));
+                }
+            }
+
+            // add all forward edges from lib start node to package node
+            foreach (var forwardNodeId in libGraph.GetForwardNodeIds(DirectedGraphNode.StartId))
+            {
+                thisGraph.AddEdge((packageNode.NodeId, forwardNodeId));
+            }
+        }
+
         return thisGraph;
     }
 }
