@@ -125,7 +125,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Func<string, Stream> libraryNameToStream,
             bool closeStream, Predicate<string> writeFile, Func<string?, string?> libraryNameToClassName)
         {
-            var buildOrder = DetermineBuildOrder(dependencyGraph);
+            var buildOrder = dependencyGraph.DetermineBuildOrder();
 
             foreach (var library in buildOrder)
             {
@@ -269,9 +269,11 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static void writeDependencies(DirectedGraph dependencyGraph, Func<string?, string?> libraryNameToClassName, string libraryName, StreamWriter writer, int indentLevel)
         {
             var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = dependencyGraph.GetForwardNodeIds(node.NodeId)
+            var requiredLibraries = dependencyGraph
+                .GetForwardNodeIds(node.NodeId)
                 .Except(new[] { DirectedGraphNode.EndId })
                 .Distinct();
+
             foreach (var dependentLibrary in requiredLibraries!)
             {
                 var typeName = libraryNameToClassName!(dependentLibrary);
@@ -352,36 +354,24 @@ namespace Hl7.Cql.CodeGeneration.NET
             int indent)
         {
             var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = dependencyGraph.GetForwardNodeIds(node.NodeId)
+            var requiredLibraries = dependencyGraph
+                .GetForwardNodeIds(node.NodeId)
                 .Except(new[] { DirectedGraphNode.EndId })
                 .Distinct();
-            if (requiredLibraries != null)
+            
+            writer.WriteLine(indent, "#region Dependencies");
+            writer.WriteLine();
+
+            foreach (var dependentLibrary in requiredLibraries)
             {
-
-                writer.WriteLine(indent, "#region Dependencies");
-                writer.WriteLine();
-
-                foreach (var dependentLibrary in requiredLibraries)
-                {
-                    var typeName = libraryNameToClassName(dependentLibrary);
-                    var memberName = typeName;
-                    writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
-                }
-
-                writer.WriteLine();
-                writer.WriteLine(indent, "#endregion");
-                writer.WriteLine();
+                var typeName = libraryNameToClassName(dependentLibrary);
+                var memberName = typeName;
+                writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
             }
-        }
 
-        private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
-        {
-            var sorted = minimalGraph
-                .TopologicalSort()
-                .Where(n => n is {IsStartNode:false, IsEndNode:false})
-                // .Where(n => n.NodeId != minimalGraph.StartNode.NodeId && n.NodeId != minimalGraph.EndNode.NodeId)
-                .ToList();
-            return sorted;
+            writer.WriteLine();
+            writer.WriteLine(indent, "#endregion");
+            writer.WriteLine();
         }
 
         private string DefinitionCacheKeyForMethod(string methodName)

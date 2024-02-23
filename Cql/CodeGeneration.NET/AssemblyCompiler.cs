@@ -131,7 +131,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 tupleAssembly
             };
             assemblies.Add("TupleTypes", tupleAssembly);
-            var buildOrder = DetermineBuildOrder(dependencies);
+            var buildOrder = dependencies.DetermineBuildOrder();
             foreach (var node in buildOrder)
             {
                 if (!navToLibraryStream.TryGetValue(node.NodeId, out var sourceCodeStream))
@@ -323,15 +323,5 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
         }
-        private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
-        {
-            var sorted = minimalGraph.TopologicalSort()
-                .Where(n => n is {IsStartNode:false, IsEndNode:false})
-                // .Where(n => n.NodeId != minimalGraph.StartNode.NodeId && n.NodeId != minimalGraph.EndNode.NodeId)
-                .ToList();
-            return sorted;
-        }
-
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
