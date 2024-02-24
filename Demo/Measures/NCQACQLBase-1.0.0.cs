@@ -27,11 +27,6 @@ public class NCQACQLBase_1_0_0
 
 
     }
-    #region Dependencies
-
-
-    #endregion
-
     [CqlDeclaration("Sort Date Intervals")]
 	public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(IEnumerable<CqlInterval<CqlDate>> intervals)
 	{

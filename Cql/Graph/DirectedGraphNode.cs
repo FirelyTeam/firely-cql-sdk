@@ -14,52 +14,41 @@ using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Graph
 {
-    internal class DirectedGraphNode
+    internal readonly struct DirectedGraphNode
     {
         public const string StartId = "Start";
         public const string EndId = "End";
 
-        public string NodeId { get; set; } = string.Empty;
+        public DirectedGraphNode()
+        {
+            NodeId = string.Empty;
+        }
 
-        public string? Label { get; set; }
-
-        [JsonIgnore]
-        public IList<DirectedGraphEdge> ForwardEdges { get; } = new List<DirectedGraphEdge>();
-
-        public IEnumerable<string> ForwardEdgeIds { get => ForwardEdges.Select(edge => edge.EdgeId); }
-
-        public IDictionary<string, object>? Properties { get; set; }
+        private DirectedGraphNode(DirectedGraphNode source)
+        {
+            NodeId = source.NodeId;
+            Label = source.Label;
+            Properties = source.Properties?.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+        }
 
         public override string ToString() => NodeId;
 
-        public T OptionalProperty<T>(string property, T defaultIfMissing)
-        {
-            if (Properties != null && Properties.TryGetValue(property, out var value))
-            {
-                if (value is T t)
-                    return t;
-            }
-            return defaultIfMissing;
-        }
 
-        public DirectedGraphNode Clone(Func<string, string>? newId = null)
-        {
-            var id = newId != null ? newId(NodeId) : NodeId;
-            var clonedNode = new DirectedGraphNode
-            {
-                NodeId = id,
-                Label = Label,
-            };
-            if (Properties != null)
-                clonedNode.Properties = Properties.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
-            foreach (var edge in ForwardEdges)
-                clonedNode.ForwardEdges.Add(edge.Clone(newId));
-            return clonedNode;
-        }
+        public DirectedGraphNode Clone() => new(this);
 
-        public override int GetHashCode()
-        {
-            return HashCode.Combine(NodeId, Label, ForwardEdges, Properties);
-        }
+        public override int GetHashCode() =>
+            HashCode.Combine(NodeId, Label, Properties);
+
+        public string NodeId { get; init; }
+
+        public string? Label { get; init; }
+
+        [JsonIgnore]
+        public bool IsStartNode => NodeId == StartId;
+
+        [JsonIgnore]
+        public bool IsEndNode => NodeId == EndId;
+
+        public IDictionary<string, object>? Properties { get; init; }
     }
 }

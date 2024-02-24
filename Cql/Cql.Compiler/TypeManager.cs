@@ -15,7 +15,6 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Hl7.Cql.Compiler.Infrastructure;
-using Microsoft.Extensions.DependencyInjection;
 using elm = Hl7.Cql.Elm;
 
 

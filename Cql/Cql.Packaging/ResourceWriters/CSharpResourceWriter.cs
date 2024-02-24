@@ -33,7 +33,7 @@ namespace Hl7.Cql.Packaging.ResourceWriters
             ILogger<CSharpResourceWriter> logger)
         {
             var opt = options.Value;
-            _outDirectory = opt.OutDirectory ?? throw new ArgumentException("OutDirectory is required.");
+            _outDirectory = opt.OutDirectory ?? throw new InvalidOperationException("The CSharpResourceWriter needs a valid value for OutDirectory.");
             _logger = logger;
         }
 
@@ -43,7 +43,10 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="resources">the resources to write</param>
         public override void WriteResources(IEnumerable<Resource> resources)
         {
-            _logger.LogInformation("Writing C# source files to '{directory}'", _outDirectory);
+            if (_outDirectory is not { FullName: { } directoryFullName }) 
+                return;
+
+            _logger.LogInformation("Writing C# source files to '{directory}'", directoryFullName);
             
             // Write out the C# source code to the desired output location
             foreach (var resource in resources)

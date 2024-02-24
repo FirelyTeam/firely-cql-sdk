@@ -49,7 +49,10 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// <param name="resources">the resources to write</param>
         public override void WriteResources(IEnumerable<Resource> resources)
         {
-            _logger.LogInformation("Writing FHIR resources to '{directory}'", _outDirectory);
+            if (_outDirectory is not { FullName: { } outDirectoryFullName }) 
+                return;
+
+            _logger.LogInformation("Writing FHIR resources to '{directory}'", outDirectoryFullName);
 
             foreach (var resource in resources)
             {

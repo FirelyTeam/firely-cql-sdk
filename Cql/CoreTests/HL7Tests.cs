@@ -91,37 +91,9 @@ namespace CoreTests
                 {
                     var package = Hl7.Cql.Elm.Library.LoadFromJson(elm);
                     var includes = package.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
-                    MergeGraphInto(includes, buildOrder);
+                    includes.MergeInto(buildOrder);
                 }
-            }
-        }
-
-        private static void MergeGraphInto(DirectedGraph graph, DirectedGraph into)
-        {
-            foreach (var sourceNode in graph.Nodes)
-            {
-                if (!into.Nodes.ContainsKey(sourceNode.Key))
-                    into.Add(sourceNode.Value);
-            }
-            foreach (var edge in graph.Edges)
-            {
-                if (!into.Edges.ContainsKey(edge.Key))
-                    into.Add(edge.Value);
-            }
-            var orphaned = true;
-            foreach (var edge in into.Edges)
-            {
-                if (edge.Value.ToId == graph.StartNode.NodeId)
-                {
-                    orphaned = false;
-                    break;
-                }
-            }
-            if (orphaned)
-            {
-                into.Add(new DirectedGraphEdge(into.StartNode.NodeId, graph.StartNode.NodeId));
             }
         }
     }
-
 }

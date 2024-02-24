@@ -223,6 +223,17 @@ namespace CoreTests
             boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
             Assert.AreEqual(15, boundariesBetween);
 
+            // leap year
+            Assert.IsTrue(DateTimeIso8601.TryParse("2020-04-11", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2023-05-11", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(3, boundariesBetween);
+
+            // leap day
+            Assert.IsTrue(DateTimeIso8601.TryParse("2003-03-01", out startDate));
+            Assert.IsTrue(CqlDateTime.TryParse("2024-02-29", out cqlStartDate));
+            boundariesBetween = new CqlDateTime(startDate).WholeCalendarPeriodsBetween(cqlStartDate, "year");
+            Assert.AreEqual(20, boundariesBetween);
         }
 
         [TestMethod]
