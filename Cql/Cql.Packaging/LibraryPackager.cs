@@ -88,14 +88,6 @@ namespace Hl7.Cql.Packaging
             var elmLibrariesEnumerable = BuildElmLibraries(packageGraph);
             var elmLibraries = elmLibrariesEnumerable.ToList();
 
-            // REVIEW: This was never used
-            // CSharpSourceCodeWriter cSharpSourceCodeWriter = _cSharpSourceCodeWriterFactory.Create();
-            // foreach (var @using in _typeResolver.ModelNamespaces)
-            //     cSharpSourceCodeWriter.Usings.Add(@using);
-            //
-            // foreach (var alias in _typeResolver.Aliases)
-            //     cSharpSourceCodeWriter.AliasedUsings.Add(alias);
-
             var resources = new List<Resource>();
             var librariesByNameAndVersion = new Dictionary<string, Library>();
 
@@ -215,7 +207,8 @@ namespace Hl7.Cql.Packaging
         private IEnumerable<elm.Library> BuildElmLibraries(DirectedGraph packageGraph)
         {
             var elmLibraries =
-                packageGraph.Nodes.Values
+                packageGraph
+                    .TopologicalSort()
                     .Select(node => node.Properties?[elm.Library.LibraryNodeProperty])
                     .OfType<elm.Library>()
                     .ToArray();
@@ -223,15 +216,8 @@ namespace Hl7.Cql.Packaging
             var definitions = new DefinitionDictionary<LambdaExpression>();
             foreach (var library in elmLibraries)
             {
-                try
-                {
-                    var expressions = ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _expressionBuilderLogger, library!);
-                    definitions.Merge(expressions);
-                }
-                catch (Exception)
-                {
-                    continue;
-                }
+                var expressions = ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _expressionBuilderLogger, library!);
+                definitions.Merge(expressions);
                 yield return library;
             }
         }
