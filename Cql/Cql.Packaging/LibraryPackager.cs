@@ -21,6 +21,7 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection;
 using elm = Hl7.Cql.Elm;
 using Library = Hl7.Fhir.Model.Library;
+using System.Runtime.ExceptionServices;
 
 namespace Hl7.Cql.Packaging
 {
@@ -41,13 +42,7 @@ namespace Hl7.Cql.Packaging
             var cSharpSourceCodeWriterL = logFactory.CreateLogger<CSharpSourceCodeWriter>();
             var cSharpSourceCodeWriter = new CSharpSourceCodeWriter(cSharpSourceCodeWriterL);
             var assemblyCompiler = new AssemblyCompiler(libraryDefinitionsBuilder, typeResolver, cSharpSourceCodeWriter, typeManager);
-            var resourcePackagerService = new LibraryPackagerService(
-                expressionBuilderLogger,
-                typeResolver, 
-                operatorBinding,
-                typeManager,
-                assemblyCompiler,
-                libraryDefinitionsBuilder);
+            var resourcePackagerService = new LibraryPackagerService(typeResolver, assemblyCompiler, libraryDefinitionsBuilder);
             return resourcePackagerService.PackageResources(elmDirectory, cqlDirectory, packageGraph, callbacks);
         }
     }
@@ -55,25 +50,16 @@ namespace Hl7.Cql.Packaging
 
     internal class LibraryPackagerService
     {
-        private readonly ILogger<ExpressionBuilder> _expressionBuilderLogger;
         private readonly AssemblyCompiler _assemblyCompiler;
         private readonly TypeResolver _typeResolver;
-        private readonly OperatorBinding _operatorBinding;
-        private readonly TypeManager _typeManager;
         private readonly LibraryDefinitionsBuilder _libraryDefinitionsBuilder;
 
         public LibraryPackagerService(
-            ILogger<ExpressionBuilder> expressionBuilderLogger,
             [FromKeyedServices("Fhir")] TypeResolver typeResolver,
-            [FromKeyedServices("Cql")] OperatorBinding operatorBinding,
-            [FromKeyedServices("Fhir")] TypeManager typeManager,
             AssemblyCompiler assemblyCompiler,
             LibraryDefinitionsBuilder libraryDefinitionsBuilder)
         {
             _typeResolver = typeResolver;
-            _operatorBinding = operatorBinding;
-            _typeManager = typeManager;
-            _expressionBuilderLogger = expressionBuilderLogger;
             _assemblyCompiler = assemblyCompiler;
             _libraryDefinitionsBuilder = libraryDefinitionsBuilder;
         }
@@ -84,9 +70,20 @@ namespace Hl7.Cql.Packaging
             DirectedGraph packageGraph,
             LibraryPackageCallbacks callbacks = default)
         {
+            // Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
+            // while we try to continue building the rest of the artifacts up until the point of failure.
 
-            var elmLibrariesEnumerable = BuildElmLibraries(packageGraph);
-            var elmLibraries = elmLibrariesEnumerable.ToList();
+            List<elm.Library> elmLibraries = new();
+            ExceptionDispatchInfo? exception = null;
+            foreach (var (library, e) in GetSortedBuildElmLibraries(packageGraph))
+            {
+                if (e is not null)
+                {
+                    exception = e;
+                    break;
+                }
+                elmLibraries.Add(library);
+            }
 
             var resources = new List<Resource>();
             var librariesByNameAndVersion = new Dictionary<string, Library>();
@@ -201,10 +198,13 @@ namespace Hl7.Cql.Packaging
                 }
             }
 
+            if (exception is not null)
+                exception.Throw();
+
             return resources;
         }
 
-        private IEnumerable<elm.Library> BuildElmLibraries(DirectedGraph packageGraph)
+        private IEnumerable<(elm.Library library, ExceptionDispatchInfo? exception)> GetSortedBuildElmLibraries(DirectedGraph packageGraph)
         {
             var elmLibraries =
                 packageGraph
@@ -213,12 +213,21 @@ namespace Hl7.Cql.Packaging
                     .OfType<elm.Library>()
                     .ToArray();
 
-            var definitions = new DefinitionDictionary<LambdaExpression>();
+            ExceptionDispatchInfo? exceptionDispatchInfo = null;
             foreach (var library in elmLibraries)
             {
-                var expressions = ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _expressionBuilderLogger, library!);
-                definitions.Merge(expressions);
-                yield return library;
+                try
+                {
+                    _libraryDefinitionsBuilder.BuildLibraryDefinitions(library!);
+                }
+                catch (Exception e)
+                {
+                    exceptionDispatchInfo = ExceptionDispatchInfo.Capture(e);
+                }
+                yield return (library, exceptionDispatchInfo);
+
+                if (exceptionDispatchInfo is not null)
+                    break;
             }
         }
 
