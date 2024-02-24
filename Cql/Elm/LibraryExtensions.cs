@@ -104,23 +104,13 @@ internal static class LibraryExtensions
         {
             var includedPackage = locateLibrary(include.path!, include.version!);
             var libGraph = GetDependencySubgraph(includedPackage, locateLibrary);
-            // add all nodes & forward edges to graph.
-            foreach (var (nodeId, node) in libGraph.Nodes)
-            {
-                if (thisGraph.Nodes.ContainsKey(nodeId) == false)
-                {
-                    var clonedNode = node.Clone();
-                    thisGraph.AddNode(clonedNode);
-                    foreach (var forwardNodeId in libGraph.GetForwardNodeIds(node.NodeId))
-                        thisGraph.AddEdge((nodeId, forwardNodeId));
-                }
-            }
-
-            // add all forward edges from lib start node to package node
-            foreach (var forwardNodeId in libGraph.GetForwardNodeIds(DirectedGraphNode.StartId))
-            {
-                thisGraph.AddEdge((packageNode.NodeId, forwardNodeId));
-            }
+            libGraph.MergeInto(
+                thisGraph,
+                // Add starting nodes of 'libGraph' as forwarding nodes of 'packageNode'
+                replaceMergeEdge: edge => edge.FromNodeId is DirectedGraphNode.StartId
+                    ? (packageNode.NodeId, edge.ToNodeId)
+                    : edge
+                );
         }
 
         return thisGraph;

@@ -29,11 +29,6 @@ public class FHIRHelpers_4_0_001
 
         __Patient = new Lazy<Patient>(this.Patient_Value);
     }
-    #region Dependencies
-
-
-    #endregion
-
 	private Patient Patient_Value()
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);

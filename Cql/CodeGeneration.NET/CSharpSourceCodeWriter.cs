@@ -359,19 +359,28 @@ namespace Hl7.Cql.CodeGeneration.NET
                 .Except(new[] { DirectedGraphNode.EndId })
                 .Distinct();
             
-            writer.WriteLine(indent, "#region Dependencies");
-            writer.WriteLine();
+            bool atFirst = true;
 
             foreach (var dependentLibrary in requiredLibraries)
             {
+                if (atFirst)
+                {
+                    atFirst = false;
+                    writer.WriteLine(indent, "#region Dependencies");
+                    writer.WriteLine();
+                }
+
                 var typeName = libraryNameToClassName(dependentLibrary);
                 var memberName = typeName;
                 writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
             }
 
-            writer.WriteLine();
-            writer.WriteLine(indent, "#endregion");
-            writer.WriteLine();
+            if (!atFirst)
+            {
+                writer.WriteLine();
+                writer.WriteLine(indent, "#endregion");
+                writer.WriteLine();
+            }
         }
 
         private string DefinitionCacheKeyForMethod(string methodName)

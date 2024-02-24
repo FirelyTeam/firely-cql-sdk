@@ -11,43 +11,57 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Hl7.Cql.Graph
 {
-    [DebuggerDisplay("DirectedGraph (Nodes:{Nodes.Count}, Edges:{Edges.Count})")]
+    [DebuggerDisplay("DirectedGraph (Nodes:{Nodes.Count}, Edges:{GetEdgesCount()})")]
     internal class DirectedGraph
     {
         public DirectedGraph()
         {
             _startNode = new DirectedGraphNode() { NodeId = DirectedGraphNode.StartId };
             _endNode = new DirectedGraphNode() { NodeId = DirectedGraphNode.EndId };
-            _nodes = new ();
-            _edges = new ();
+            _nodesByNodeId = new ();
+            _forwardNodesByNodeId = new();
         }
 
 
         private readonly DirectedGraphNode _startNode;
-
         private readonly DirectedGraphNode _endNode;
+        private readonly Dictionary<string, DirectedGraphNode> _nodesByNodeId;
+        private readonly Dictionary<string, HashSet<DirectedGraphNode>> _forwardNodesByNodeId;
 
-        private readonly Dictionary<string, DirectedGraphNode> _nodes;
-        public IReadOnlyDictionary<string, DirectedGraphNode> Nodes => _nodes;
-
-        private readonly HashSet<(string FromId, string ToId)> _edges;
-
-        public IReadOnlyCollection<(string FromId, string ToId)> Edges => _edges;
-
+        public IReadOnlyDictionary<string, DirectedGraphNode> Nodes => _nodesByNodeId;
 
         public void AddNode(DirectedGraphNode node) =>
-            _nodes.Add(node.NodeId, node);
+            _nodesByNodeId.Add(node.NodeId, node);
 
-        public void AddEdge((DirectedGraphNode? FromNode, DirectedGraphNode? ToNode) edge) => 
-            AddEdge((edge.FromNode?.NodeId, edge.ToNode?.NodeId));
+        private void AddEdgeImpl(string? fromNodeId, DirectedGraphNode? toNode)
+        {
+            fromNodeId ??= DirectedGraphNode.StartId;
+            ref var forwardNodes = ref CollectionsMarshal.GetValueRefOrAddDefault(_forwardNodesByNodeId, fromNodeId, out bool exists);
+            if (!exists)
+                forwardNodes = new();
+
+            forwardNodes!.Add(toNode ?? _endNode);
+        }
+
+        public void AddEdge((DirectedGraphNode? FromNode, DirectedGraphNode? ToNode) edge)
+        {
+            AddEdgeImpl(edge.FromNode?.NodeId, edge.ToNode);
+        }
 
         public void AddEdge((string? FromId, string? ToId) edge)
         {
-            Debug.Assert(edge.FromId != edge.ToId, "Self referencing edge not allowed.");
-            _edges.Add(new(edge.FromId ?? DirectedGraphNode.StartId, edge.ToId ?? DirectedGraphNode.EndId));
+            if ((edge.ToId ?? DirectedGraphNode.EndId) is DirectedGraphNode.EndId)
+                AddEdgeImpl(edge.FromId, null);
+            else
+            {
+                if (!_nodesByNodeId.TryGetValue(edge.ToId!, out var toNode))
+                    throw new KeyNotFoundException($"No node by ID '{edge.ToId}' exists in this graph.");
+                AddEdgeImpl(edge.FromId, toNode);
+            }
         }
 
         public IEnumerable<string> GetForwardNodeIds(string nodeId)
@@ -55,14 +69,11 @@ namespace Hl7.Cql.Graph
             if (nodeId == DirectedGraphNode.EndId)
                 return Enumerable.Empty<string>();
 
-            var result = Edges
-                .Where(e => e.FromId == nodeId)
-                .Select(e => e.ToId)
-                .ToList(); // TODO: Remove ToList()
-            
-            Debug.Assert(!result.Contains(nodeId), "Cyclic dependency");
+            // If node doesn't belong to this graph, just return empty
+            if (!_forwardNodesByNodeId.TryGetValue(nodeId, out var forwardNodes))
+                return Enumerable.Empty<string>();
 
-            return result;
+            return forwardNodes.Select(forwardNode => forwardNode.NodeId);
         }
 
         private IEnumerable<DirectedGraphNode> GetNodesConnectedTo(DirectedGraphNode node)
@@ -144,33 +155,6 @@ namespace Hl7.Cql.Graph
             }
         }
 
-
-        public string GraphvizDiagram =>
-            $$"""
-            digraph G {
-              
-                graph [ splines="polyline" rankdir="LR" ];
-                node [ shape="rectangle" ];
-                edge [ color="#22 22 22, arrowtail=dot, arrowhead=open" ];
-
-            {{
-                string.Join(Environment.NewLine,
-                    from node in Nodes.Values
-                    select $"""
-                            "{node.NodeId}";
-                            """)
-            }}
-            
-            {{
-                string.Join(Environment.NewLine,
-                    from edge in Edges
-                    select $"""
-                            "{edge.FromId}" -> "{edge.ToId}";
-                            """)
-            }}
-            }
-            """;
-
         public void AddEndNode()
         {
             AddNode(_endNode);
@@ -181,19 +165,81 @@ namespace Hl7.Cql.Graph
             AddNode(_startNode);
         }
 
-        public void MergeInto(DirectedGraph into)
+        public void MergeInto(
+            DirectedGraph into,
+            Func<(string FromNodeId, string ToNodeId), (string FromNodeId, string ToNodeId)>? replaceMergeEdge = null
+            )
         {
             foreach (var node in Nodes)
             {
                 if (!into.Nodes.ContainsKey(node.Key))
                     into.AddNode(node.Value);
             }
-            foreach (var edge in Edges)
+
+            replaceMergeEdge ??= edge => edge;
+            foreach ( (string nodeId, HashSet<DirectedGraphNode> forwardNodes) in _forwardNodesByNodeId)
             {
-                if (!into.Edges.Contains(edge))
-                    into.AddEdge(edge);
+                foreach (var forwardNode in forwardNodes)
+                {
+                    var edge = replaceMergeEdge((nodeId, forwardNode.NodeId));
+                    into.AddEdge((edge.FromNodeId, edge.ToNodeId));
+                }
             }
         }
+
+        #region Debugging
+
+        private int GetEdgesCount() => _forwardNodesByNodeId.Sum(kvp => kvp.Value.Count);
+
+#if DEBUG
+        public string GraphvizDiagramUri =>
+            new UriBuilder("https://edotor.net/?engine=dot")
+            {
+                Fragment = Uri.EscapeDataString(GraphvizDiagram)
+            }.Uri.ToString();
+
+        public string GraphvizDiagram
+        {
+            get
+            {
+                var ordinalByNodeId =
+                    TopologicalSort()
+                        .Select((node, ordinal) => (node, ordinal))
+                        .ToDictionary(t => t.node.NodeId, t => t.ordinal);
+
+                string GetNodeText(string nodeId)
+                {
+                    int ordinal = ordinalByNodeId!.GetValueOrDefault(nodeId, -1);
+                    return $"""
+                            "{nodeId} {(ordinal < 0 ? "(?)" : $"({ordinal})")}"
+                            """;
+                }
+
+
+                return $$"""
+                         digraph G {
+                           
+                             graph [ splines="polyline" rankdir="LR" ];
+                             node [ shape="rectangle" ];
+                             edge [ color="#22 22 22, arrowtail=dot, arrowhead=open" ];
+
+                         {{string.Join(Environment.NewLine,
+                             from nodeId in ordinalByNodeId.Keys
+                             select GetNodeText(nodeId))}}
+
+                         {{string.Join(Environment.NewLine,
+                             from forwardNodeByNodeId in _forwardNodesByNodeId
+                             from forwardNode in forwardNodeByNodeId.Value
+                             select $"""
+                                     {GetNodeText(forwardNodeByNodeId.Key)} -> {GetNodeText(forwardNode.NodeId)};
+                                     """)}}
+                         }
+                         """;
+            }
+        }
+#endif
+
+        #endregion
     }
 
 }
