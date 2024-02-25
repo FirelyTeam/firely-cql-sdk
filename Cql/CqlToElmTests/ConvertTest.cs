@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Primitives;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -31,6 +32,18 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = createLibraryForExpression("convert 5 to String");
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToString>();
+        }
+
+        [TestMethod]
+        public void Convert_String_to_DateTime()
+        {
+            var library = createLibraryForExpression("ToDateTime('2014-01-01T12:05:05.955-01:15')");
+            var toDateTime = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToDateTime>();
+            var result = Run(toDateTime);
+            var dt = result.Should().BeOfType<CqlDateTime>().Subject;
+            dt.Value.OffsetHour.Should().Be(-1);
+            dt.Value.OffsetMinute.Should().Be(-15);
+            dt.Value.DateTimeOffset.Offset.Should().Be(TimeSpan.FromMinutes(-75));
         }
     }
 }
