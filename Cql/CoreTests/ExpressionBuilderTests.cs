@@ -76,5 +76,24 @@ namespace CoreTests
             var expressions = eb.Build();
             Assert.IsNotNull(expressions);
         }
+
+
+        [TestMethod]
+        public void Get_Property_Uses_TypeResolver()
+        {
+            var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
+            var typeManager = new TypeManager(TypeResolver);
+            var logger = CreateLogger();
+            var lib = new Hl7.Cql.Elm.Library
+            {
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier()
+            };
+            var eb = new ExpressionBuilder(binding, typeManager, lib, logger);
+
+            var property = eb.GetProperty(typeof(MeasureReport.PopulationComponent), "id");
+            Assert.AreEqual(typeof(Element), property.DeclaringType);
+            Assert.AreEqual(nameof(Element.ElementId), property.Name);
+        }
+
     }
 }
