@@ -13,7 +13,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
-		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.23525.2" PrivateAssets="All" />
+		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24072.1" PrivateAssets="All" />
 		<PackageReference Include="System.Globalization" Version="4.3.0" />
 	</ItemGroup>
 
