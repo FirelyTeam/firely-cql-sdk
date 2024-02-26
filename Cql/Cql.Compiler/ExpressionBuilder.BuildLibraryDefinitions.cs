@@ -34,12 +34,14 @@ partial class ExpressionBuilder
     /// Builds the definitions for the library.
     /// </summary>
     /// <returns>The definition dictionary of lambda expressions.</returns>
-    public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions()
+    private DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions()
     {
+        Logger.LogInformation("Building expressions for '{library}'", LibraryKey);
+
         var definitions = new DefinitionDictionary<LambdaExpression>();
         var definitionsBuilderContext = new DefinitionsBuilderContext(this, definitions);
-        var definitiionsBuilder = new DefinitionsBuilder(definitionsBuilderContext);
-        definitiionsBuilder.ProcessLibrary();
+        var definitionsBuilder = new DefinitionsBuilder(definitionsBuilderContext);
+        definitionsBuilder.ProcessLibrary();
         return definitions;
     }
 

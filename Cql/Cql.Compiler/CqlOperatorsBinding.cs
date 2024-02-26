@@ -18,6 +18,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.Extensions.DependencyInjection;
 using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Compiler
@@ -43,7 +44,9 @@ namespace Hl7.Cql.Compiler
         /// you may get errors at runtime, because this binding will think a conversion is possible when at runtime it is not.
         /// If not provided, only conversions defined in <see cref="CqlOperators"/> will be used.
         /// </param>
-        public CqlOperatorsBinding(TypeResolver typeResolver, TypeConverter? typeConverter = null)
+        public CqlOperatorsBinding(
+            TypeResolver typeResolver,
+            TypeConverter? typeConverter = null)
         {
             TypeConverter = typeConverter;
             TypeResolver = typeResolver;

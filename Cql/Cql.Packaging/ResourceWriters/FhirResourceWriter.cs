@@ -33,7 +33,9 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         /// </summary>
         /// <param name="options">the resource writer options</param>
         /// <param name="logger">logger</param>
-        public FhirResourceWriter(IOptions<FhirResourceWriterOptions> options, ILogger<FhirResourceWriter> logger) 
+        public FhirResourceWriter(
+            IOptions<FhirResourceWriterOptions> options, 
+            ILogger<FhirResourceWriter> logger) 
         {
             var opt = options.Value;
             _outDirectory = opt.OutDirectory ?? throw new InvalidOperationException("The FhirResourceWriter needs a valid value for OutDirectory.");
@@ -54,21 +56,30 @@ namespace Hl7.Cql.Packaging.ResourceWriters
 
             foreach (var resource in resources)
             {
-                if (resource is Library library
-                    && _overrideDate is { } overrideDate)
-                {
-                    library.Date = overrideDate.ToString("u");
-                    if (library.Meta is { } meta)
-                    {
-                        meta.LastUpdated = overrideDate;
-                    }
-                }
-
-                var file = Path.GetFullPath(Path.Combine(outDirectoryFullName, $"{resource.Id}.json"));
-                _logger.LogInformation("Writing '{file}'", file);
-                using var fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Read);
-                JsonSerializer.Serialize(fs, resource, JsonSerializerOptions);
+                WriteResource(resource);
             }
+        }
+
+        /// <inheritdoc />
+        public override void WriteResource(Resource resource)
+        {
+            EnsureDirectory(_outDirectory);
+            var outDirectoryFullName = _outDirectory.FullName;
+
+            if (resource is Library library
+                && _overrideDate is { } overrideDate)
+            {
+                library.Date = overrideDate.ToString("u");
+                if (library.Meta is { } meta)
+                {
+                    meta.LastUpdated = overrideDate;
+                }
+            }
+
+            var file = Path.GetFullPath(Path.Combine(outDirectoryFullName, $"{resource.Id}.json"));
+            _logger.LogInformation("Writing '{file}'", file);
+            using var fs = new FileStream(file, FileMode.Create, FileAccess.Write, FileShare.Read);
+            JsonSerializer.Serialize(fs, resource, JsonSerializerOptions);
         }
     }
 }

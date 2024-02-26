@@ -27,13 +27,15 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// </summary>
     internal class CSharpSourceCodeWriter
     {
+        private readonly ILogger<CSharpSourceCodeWriter> _logger;
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="log">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
-        public CSharpSourceCodeWriter(ILogger<CSharpSourceCodeWriter> log)
+        /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
+        public CSharpSourceCodeWriter(ILogger<CSharpSourceCodeWriter> logger)
         {
-            Log = log;
+            _logger = logger;
         }
 
         /// <summary>
@@ -92,7 +94,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 .Product
             ?? "ELM-to-CSharp";
 
-        internal ILogger<CSharpSourceCodeWriter> Log { get; }
 
         /// <summary>
         /// Writes C# source code from inputs.
@@ -136,7 +137,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 if (!definitions.Libraries.Contains(libraryName))
                 {
-                    Log.LogInformation($"Skipping library {libraryName}, which has no definitions");
+                    _logger.LogInformation($"Skipping library {libraryName}, which has no definitions");
                     continue;
                 }
 
@@ -339,7 +340,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else
             {
-                Log.LogInformation($"No tuple types detected; skipping.");
+                _logger.LogInformation($"No tuple types detected; skipping.");
             }
         }
 
