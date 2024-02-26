@@ -212,36 +212,36 @@ define function "BodyStructureResource"(arg BodyStructure):
     patient : a.patient
   }
 
-define function "CapabilityStatementResource"(arg CapabilityStatement):
-  arg a
-  return CapabilityStatement {
-    url : a.url,
-    version : a.version,
-    name : a.name,
-    title : a.title,
-    status : a.status,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    purpose : a.purpose,
-    copyright : a.copyright,
-    kind : a.kind,
-    instantiates : a.instantiates,
-    imports : a.imports,
-    software : a.software,
-    implementation : a.implementation,
-    fhirVersion : a.fhirVersion,
-    format : a.format,
-    patchFormat : a.patchFormat,
-    implementationGuide : a.implementationGuide,
-    rest : a.rest,
-    messaging : a.messaging,
-    document : a.document
-  }
+// define function "CapabilityStatementResource"(arg CapabilityStatement):
+//   arg a
+//   return CapabilityStatement {
+//     url : a.url,
+//     version : a.version,
+//     name : a.name,
+//     title : a.title,
+//     status : a.status,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     purpose : a.purpose,
+//     copyright : a.copyright,
+//     kind : a.kind,
+//     instantiates : a.instantiates,
+//     imports : a.imports,
+//     software : a.software,
+//     implementation : a.implementation,
+//     fhirVersion : a.fhirVersion,
+//     format : a.format,
+//     patchFormat : a.patchFormat,
+//     implementationGuide : a.implementationGuide,
+//     rest : a.rest,
+//     messaging : a.messaging,
+//     document : a.document
+//   }
 
 define function "CarePlanResource"(arg CarePlan):
   arg a
@@ -541,24 +541,24 @@ define function "CommunicationRequestResource"(arg CommunicationRequest):
     note : a.note
   }
 
-define function "CompartmentDefinitionResource"(arg CompartmentDefinition):
-  arg a
-  return CompartmentDefinition {
-    url : a.url,
-    version : a.version,
-    name : a.name,
-    status : a.status,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    purpose : a.purpose,
-    code : a.code,
-    search : a.search,
-    resource : a.resource
-  }
+// define function "CompartmentDefinitionResource"(arg CompartmentDefinition):
+//   arg a
+//   return CompartmentDefinition {
+//     url : a.url,
+//     version : a.version,
+//     name : a.name,
+//     status : a.status,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     purpose : a.purpose,
+//     code : a.code,
+//     search : a.search,
+//     resource : a.resource
+//   }
 
 define function "CompositionResource"(arg Composition):
   arg a
@@ -1162,27 +1162,27 @@ define function "EvidenceVariableResource"(arg EvidenceVariable):
     characteristic : a.characteristic
   }
 
-define function "ExampleScenarioResource"(arg ExampleScenario):
-  arg a
-  return ExampleScenario {
-    url : a.url,
-    identifier : a.identifier,
-    version : a.version,
-    name : a.name,
-    status : a.status,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    copyright : a.copyright,
-    purpose : a.purpose,
-    actor : a.actor,
-    instance : a.instance,
-    process : a.process,
-    workflow : a.workflow
-  }
+// define function "ExampleScenarioResource"(arg ExampleScenario):
+//   arg a
+//   return ExampleScenario {
+//     url : a.url,
+//     identifier : a.identifier,
+//     version : a.version,
+//     name : a.name,
+//     status : a.status,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     copyright : a.copyright,
+//     purpose : a.purpose,
+//     actor : a.actor,
+//     instance : a.instance,
+//     process : a.process,
+//     workflow : a.workflow
+//   }
 
 define function "ExplanationOfBenefitResource"(arg ExplanationOfBenefit):
   arg a
@@ -1289,25 +1289,25 @@ define function "GoalResource"(arg Goal):
     outcomeReference : a.outcomeReference
   }
 
-define function "GraphDefinitionResource"(arg GraphDefinition):
-  arg a
-  return GraphDefinition {
-    url : a.url,
-    version : a.version,
-    name : a.name,
-    status : a.status,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    purpose : a.purpose,
-    start : a.start,
-    profile : a.profile,
-    link : a.link
-  }
+// define function "GraphDefinitionResource"(arg GraphDefinition):
+//   arg a
+//   return GraphDefinition {
+//     url : a.url,
+//     version : a.version,
+//     name : a.name,
+//     status : a.status,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     purpose : a.purpose,
+//     start : a.start,
+//     profile : a.profile,
+//     link : a.link
+//   }
 
 define function "GroupResource"(arg Group):
   arg a
@@ -1459,30 +1459,30 @@ define function "ImmunizationRecommendationResource"(arg ImmunizationRecommendat
     recommendation : a.recommendation
   }
 
-define function "ImplementationGuideResource"(arg ImplementationGuide):
-  arg a
-  return ImplementationGuide {
-    url : a.url,
-    version : a.version,
-    name : a.name,
-    title : a.title,
-    status : a.status,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    copyright : a.copyright,
-    packageId : a.packageId,
-    license : a.license,
-    fhirVersion : a.fhirVersion,
-    dependsOn : a.dependsOn,
-    global : a.global,
-    definition : a.definition,
-    manifest : a.manifest
-  }
+// define function "ImplementationGuideResource"(arg ImplementationGuide):
+//   arg a
+//   return ImplementationGuide {
+//     url : a.url,
+//     version : a.version,
+//     name : a.name,
+//     title : a.title,
+//     status : a.status,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     copyright : a.copyright,
+//     packageId : a.packageId,
+//     license : a.license,
+//     fhirVersion : a.fhirVersion,
+//     dependsOn : a.dependsOn,
+//     global : a.global,
+//     definition : a.definition,
+//     manifest : a.manifest
+//   }
 
 define function "InsurancePlanResource"(arg InsurancePlan):
   arg a
@@ -1992,34 +1992,34 @@ define function "MedicinalProductUndesirableEffectResource"(arg MedicinalProduct
     population : a.population
   }
 
-define function "MessageDefinitionResource"(arg MessageDefinition):
-  arg a
-  return MessageDefinition {
-    url : a.url,
-    identifier : a.identifier,
-    version : a.version,
-    name : a.name,
-    title : a.title,
-    replaces : a.replaces,
-    status : a.status,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    purpose : a.purpose,
-    copyright : a.copyright,
-    base : a.base,
-    parent : a.parent,
-    event : a.event,
-    category : a.category,
-    focus : a.focus,
-    responseRequired : a.responseRequired,
-    allowedResponse : a.allowedResponse,
-    graph : a.graph
-  }
+// define function "MessageDefinitionResource"(arg MessageDefinition):
+//   arg a
+//   return MessageDefinition {
+//     url : a.url,
+//     identifier : a.identifier,
+//     version : a.version,
+//     name : a.name,
+//     title : a.title,
+//     replaces : a.replaces,
+//     status : a.status,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     purpose : a.purpose,
+//     copyright : a.copyright,
+//     base : a.base,
+//     parent : a.parent,
+//     event : a.event,
+//     category : a.category,
+//     focus : a.focus,
+//     responseRequired : a.responseRequired,
+//     allowedResponse : a.allowedResponse,
+//     graph : a.graph
+//   }
 
 define function "MessageHeaderResource"(arg MessageHeader):
   arg a
@@ -2145,36 +2145,36 @@ define function "ObservationDefinitionResource"(arg ObservationDefinition):
     criticalCodedValueSet : a.criticalCodedValueSet
   }
 
-define function "OperationDefinitionResource"(arg OperationDefinition):
-  arg a
-  return OperationDefinition {
-    url : a.url,
-    version : a.version,
-    name : a.name,
-    title : a.title,
-    status : a.status,
-    kind : a.kind,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    purpose : a.purpose,
-    affectsState : a.affectsState,
-    code : a.code,
-    comment : a.comment,
-    base : a.base,
-    resource : a.resource,
-    system : a.system,
-    type : a.type,
-    instance : a.instance,
-    inputProfile : a.inputProfile,
-    outputProfile : a.outputProfile,
-    parameter : a.parameter,
-    overload : a.overload
-  }
+// define function "OperationDefinitionResource"(arg OperationDefinition):
+//   arg a
+//   return OperationDefinition {
+//     url : a.url,
+//     version : a.version,
+//     name : a.name,
+//     title : a.title,
+//     status : a.status,
+//     kind : a.kind,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     purpose : a.purpose,
+//     affectsState : a.affectsState,
+//     code : a.code,
+//     comment : a.comment,
+//     base : a.base,
+//     resource : a.resource,
+//     system : a.system,
+//     type : a.type,
+//     instance : a.instance,
+//     inputProfile : a.inputProfile,
+//     outputProfile : a.outputProfile,
+//     parameter : a.parameter,
+//     overload : a.overload
+//   }
 
 define function "OperationOutcomeResource"(arg OperationOutcome):
   arg a
@@ -2405,32 +2405,32 @@ define function "ProvenanceResource"(arg Provenance):
     signature : a.signature
   }
 
-define function "QuestionnaireResource"(arg Questionnaire):
-  arg a
-  return Questionnaire {
-    url : a.url,
-    identifier : a.identifier,
-    version : a.version,
-    name : a.name,
-    title : a.title,
-    derivedFrom : a.derivedFrom,
-    status : a.status,
-    experimental : a.experimental,
-    subjectType : a.subjectType,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    purpose : a.purpose,
-    copyright : a.copyright,
-    approvalDate : a.approvalDate,
-    lastReviewDate : a.lastReviewDate,
-    effectivePeriod : a.effectivePeriod,
-    code : a.code,
-    item : a.item
-  }
+// define function "QuestionnaireResource"(arg Questionnaire):
+//   arg a
+//   return Questionnaire {
+//     url : a.url,
+//     identifier : a.identifier,
+//     version : a.version,
+//     name : a.name,
+//     title : a.title,
+//     derivedFrom : a.derivedFrom,
+//     status : a.status,
+//     experimental : a.experimental,
+//     subjectType : a.subjectType,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     purpose : a.purpose,
+//     copyright : a.copyright,
+//     approvalDate : a.approvalDate,
+//     lastReviewDate : a.lastReviewDate,
+//     effectivePeriod : a.effectivePeriod,
+//     code : a.code,
+//     item : a.item
+//   }
 
 define function "QuestionnaireResponseResource"(arg QuestionnaireResponse):
   arg a
@@ -2678,36 +2678,36 @@ define function "ScheduleResource"(arg Schedule):
     comment : a.comment
   }
 
-define function "SearchParameterResource"(arg SearchParameter):
-  arg a
-  return SearchParameter {
-    url : a.url,
-    version : a.version,
-    name : a.name,
-    derivedFrom : a.derivedFrom,
-    status : a.status,
-    experimental : a.experimental,
-    date : a.date,
-    publisher : a.publisher,
-    contact : a.contact,
-    description : a.description,
-    useContext : a.useContext,
-    jurisdiction : a.jurisdiction,
-    purpose : a.purpose,
-    code : a.code,
-    base : a.base,
-    type : a.type,
-    expression : a.expression,
-    xpath : a.xpath,
-    xpathUsage : a.xpathUsage,
-    target : a.target,
-    multipleOr : a.multipleOr,
-    multipleAnd : a.multipleAnd,
-    comparator : a.comparator,
-    modifier : a.modifier,
-    chain : a.chain,
-    component : a.component
-  }
+// define function "SearchParameterResource"(arg SearchParameter):
+//   arg a
+//   return SearchParameter {
+//     url : a.url,
+//     version : a.version,
+//     name : a.name,
+//     derivedFrom : a.derivedFrom,
+//     status : a.status,
+//     experimental : a.experimental,
+//     date : a.date,
+//     publisher : a.publisher,
+//     contact : a.contact,
+//     description : a.description,
+//     useContext : a.useContext,
+//     jurisdiction : a.jurisdiction,
+//     purpose : a.purpose,
+//     code : a.code,
+//     base : a.base,
+//     type : a.type,
+//     expression : a.expression,
+//     xpath : a.xpath,
+//     xpathUsage : a.xpathUsage,
+//     target : a.target,
+//     multipleOr : a.multipleOr,
+//     multipleAnd : a.multipleAnd,
+//     comparator : a.comparator,
+//     modifier : a.modifier,
+//     chain : a.chain,
+//     component : a.component
+//   }
 
 define function "ServiceRequestResource"(arg ServiceRequest):
   arg a
