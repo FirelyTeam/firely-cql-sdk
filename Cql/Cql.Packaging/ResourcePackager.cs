@@ -89,7 +89,7 @@ namespace Hl7.Cql.Packaging
 
             afterPackageMutator?.Invoke(resources);
 
-            foreach (ResourceWriter resourceWriter in resourceWriters)
+            foreach (var resourceWriter in resourceWriters)
             {
                 resourceWriter.WriteResources(resources);
             }
