@@ -15,7 +15,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -24,85 +23,104 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        internal AssemblyCompiler(TypeResolver typeResolver,
-            TypeManager? typeManager = null,
-            OperatorBinding? operatorBinding = null)
+        private readonly TypeResolver _typeResolver;
+        private readonly TypeManager _typeManager;
+        private readonly LibraryDefinitionsBuilder _libraryDefinitionsBuilder;
+        private readonly Factory<CSharpSourceCodeWriter> _cSharpSourceCodeWriterFactory;
+        private readonly Lazy<Assembly[]> _referencesLazy;
+
+        public AssemblyCompiler(
+            LibraryDefinitionsBuilder libraryDefinitionsBuilder,
+            [FromKeyedServices("Fhir")] TypeResolver typeResolver,
+            Factory<CSharpSourceCodeWriter> cSharpSourceCodeWriterFactory,
+            [FromKeyedServices("Fhir")] TypeManager? typeManager)
         {
-            TypeResolver = typeResolver;
-            TypeManager = typeManager ?? new TypeManager(typeResolver);
-            Binding = operatorBinding ?? new CqlOperatorsBinding(typeResolver);
+            _typeResolver = typeResolver;
+            _cSharpSourceCodeWriterFactory = cSharpSourceCodeWriterFactory;
+            _libraryDefinitionsBuilder = libraryDefinitionsBuilder;
+            _typeManager = typeManager ?? new TypeManager(typeResolver);
+            _referencesLazy = new Lazy<Assembly[]>(
+                () =>
+                {
+                    var references = new[]
+                        {                                        // @formatter off
+
+                            // Core engine references
+                            typeof(CqlDeclarationAttribute),     // Cql.Abstractions
+                            typeof(Comparers.CqlComparers),      // Cql.Comparers
+                            typeof(Conversion.IUnitConverter),   // Cql.Conversion
+                            typeof(Operators.ICqlOperators),     // Cql.Operators
+                            typeof(Primitives.CqlPrimitiveType), // Cql.Primitives
+                            typeof(CqlContext),                  // Cql.Runtime
+                            typeof(IValueSetDictionary),         // Cql.ValueSets
+                            typeof(Iso8601.DateIso8601),         // Iso8601
+
+                        }                                        // @formatter on
+                        .Select(type => type.Assembly)
+                        .Concat(_typeResolver.ModelAssemblies)
+                        .Distinct()
+                        .ToArray();
+                    return references;
+                });
         }
 
-        private TypeResolver TypeResolver { get; }
-        private TypeManager TypeManager { get; }
-        private OperatorBinding Binding { get; }
-
-        internal IDictionary<string, AssemblyData> Compile(IEnumerable<Library> elmPackages,
-                    ILoggerFactory logFactory)
+        internal IDictionary<string, AssemblyData> Compile(
+            IReadOnlyCollection<Library> elmPackages)
         {
-            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-            var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
-
-            var graph = elmPackages.GetIncludedLibraries();
-            var references = new[]
-            {
-            // Core engine references
-                typeof(CqlDeclarationAttribute).Assembly, // Cql.Abstractions
-                typeof(Comparers.CqlComparers).Assembly, // Cql.Comparers
-                typeof(Conversion.IUnitConverter).Assembly, // Cql.Conversion
-                typeof(Operators.ICqlOperators).Assembly, // Cql.Operators
-                typeof(Primitives.CqlPrimitiveType).Assembly, // Cql.Primitives
-                typeof(CqlContext).Assembly, // Cql.Runtime
-                typeof(IValueSetDictionary).Assembly, // Cql.ValueSets
-                typeof(Iso8601.DateIso8601).Assembly, // Iso8601
-            }
-            .Concat(TypeResolver.ModelAssemblies)
-            .Distinct()
-            .ToArray();
-
-            var namespaces = new[]
-            {
-                typeof(CqlDeclarationAttribute).Namespace!,
-                typeof(IValueSetFacade).Namespace!,
-                typeof(Iso8601.DateIso8601).Namespace!,
-            }
-            .Concat(TypeResolver.ModelNamespaces)
-            .Distinct()
-            .ToArray();
-
-            var scw = new CSharpSourceCodeWriter(codeWriterLogger);
-            foreach (var @using in namespaces)
-                scw.Usings.Add(@using);
-            var aliases = TypeResolver.Aliases;
-            foreach (var alias in aliases)
-                scw.AliasedUsings.Add(alias);
+            var cSharpSourceCodeWriter = BuildCSharpSourceCodeWriter();
 
 
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var expressions = ExpressionBuilder.BuildLibraryDefinitions(Binding, TypeManager, builderLogger, package);
+                var expressions = _libraryDefinitionsBuilder.BuildLibraryDefinitions(package);
                 all.Merge(expressions);
             }
 
-            var assemblies = generate(all,
-                TypeManager,
+            var graph = elmPackages.GetIncludedLibraries();
+            var assemblies = Generate(
+                all,
+                _typeManager,
                 graph,
-                scw,
-                references);
+                cSharpSourceCodeWriter,
+                _referencesLazy.Value);
             return assemblies;
         }
 
-        private IDictionary<string, AssemblyData> generate(DefinitionDictionary<LambdaExpression> expressions,
-           TypeManager typeManager,
-           DirectedGraph dependencies,
-           CSharpSourceCodeWriter writer,
-           IEnumerable<Assembly> references)
+        private CSharpSourceCodeWriter BuildCSharpSourceCodeWriter()
+        {
+            var namespaces = new[]
+                {
+                    typeof(CqlDeclarationAttribute).Namespace!,
+                    typeof(IValueSetFacade).Namespace!,
+                    typeof(Iso8601.DateIso8601).Namespace!,
+                }
+                .Concat(_typeResolver.ModelNamespaces)
+                .Distinct()
+                .ToArray();
+
+            var cSharpSourceCodeWriter = _cSharpSourceCodeWriterFactory.Create();
+            foreach (var @using in namespaces)
+                cSharpSourceCodeWriter.Usings.Add(@using);
+
+            foreach (var alias in _typeResolver.Aliases)
+                cSharpSourceCodeWriter.AliasedUsings.Add(alias);
+
+            return cSharpSourceCodeWriter;
+        }
+
+        private static IDictionary<string, AssemblyData> Generate(
+            DefinitionDictionary<LambdaExpression> expressions,
+            TypeManager typeManager,
+            DirectedGraph dependencies,
+            CSharpSourceCodeWriter writer,
+            IEnumerable<Assembly> references)
         {
             Dictionary<string, Stream> navToLibraryStream = new();
 
@@ -142,7 +160,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             return assemblies;
         }
 
-        private AssemblyData CompileTuples(IEnumerable<KeyValuePair<string, Stream>> tupleStreams,
+        private static AssemblyData CompileTuples(
+            IEnumerable<KeyValuePair<string, Stream>> tupleStreams,
             IEnumerable<Assembly> assemblyReferences)
         {
             var metadataReferences = new List<MetadataReference>();

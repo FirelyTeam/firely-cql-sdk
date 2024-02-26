@@ -2,15 +2,15 @@
 
 namespace Hl7.Cql.Packaging;
 
-/// <summary>Arguments for the <see cref="ResourcePackager.Package(PackageArgs)"/> method.</summary>
-public record PackageArgs
+/// <summary>Arguments for the <see cref="ResourcePackager.Package(ResourcePackageArgs)"/> method.</summary>
+public record ResourcePackageArgs
 {
-    /// <summary>Creates an instance of this type to be passed on for the <see cref="ResourcePackager.Package(PackageArgs)"/> method.</summary>
+    /// <summary>Creates an instance of this type to be passed on for the <see cref="ResourcePackager.Package(ResourcePackageArgs)"/> method.</summary>
     /// <param name="elmDir">Directory to find the ELM files</param>
     /// <param name="cqlDir">Directory to find the CQL files</param>
     /// <param name="afterPackageMutator">Optional mutator for the resources prior to writing</param>
     /// <param name="resourceCanonicalRootUrl">Root part of the resource canonical; otherwise just a '#'</param>
-    public PackageArgs(
+    public ResourcePackageArgs(
         DirectoryInfo elmDir, 
         DirectoryInfo cqlDir,
         Action<IEnumerable<Resource>>? afterPackageMutator = null,

@@ -1,5 +1,11 @@
-﻿using Hl7.Cql.Packaging;
+﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
+using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
@@ -12,7 +18,7 @@ internal static class DependencyInjection
     public static void AddPackagerServices(this IServiceCollection services, IConfiguration config)
     {
         TryAddPackagerOptions(services, config);
-        services.TryAddTransient<PackagerService>();
+        services.TryAddTransient<PackagerCliProgram>();
     }
 
     private static void TryAddPackagerOptions(IServiceCollection services, IConfiguration config)
@@ -77,5 +83,55 @@ internal static class DependencyInjection
         {
             services.TryAddEnumerable(resourceWritersServiceDescriptors);
         }
+    }
+
+
+    public static void TryAddCompilationServices(this IServiceCollection services)
+    {
+        services.TryAddSingleton<OperatorBinding, PackagerCqlOperatorBinding>();
+        services.TryAddSingleton<CSharpSourceCodeWriter>();
+        services.TryAddSingleton<AssemblyCompiler>();
+        services.TryAddSingleton<LibraryDefinitionsBuilder>();
+    }
+
+    public static void TryAddFactoryPattern(this IServiceCollection services)
+    {
+        services.TryAdd(ServiceDescriptor.Singleton(typeof(Factory<>), typeof(ServiceProviderFactory<>)));
+    }
+
+    public static void TryAddTypeServices(this IServiceCollection services)
+    {
+        services.TryAddSingleton(ModelInfo.ModelInspector);
+        services.TryAddKeyedSingleton<TypeResolver>("Fhir", FhirTypeResolver.Default);
+        services.TryAddKeyedSingleton<TypeConverter>("Fhir", FhirTypeConverter.Default);
+        services.TryAddSingleton<TypeManager, PackagerTypeManager>();
+    }
+}
+
+
+
+file class ServiceProviderFactory<T> : Factory<T>
+{
+    private readonly IServiceProvider _serviceProvider;
+
+    public ServiceProviderFactory(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
+
+    public override T Create() => ActivatorUtilities.CreateInstance<T>(_serviceProvider);
+}
+
+file class PackagerTypeManager : TypeManager
+{
+    public PackagerTypeManager(
+        [FromKeyedServices("Fhir")] TypeResolver resolver) : base(resolver)
+    {
+    }
+}
+
+file class PackagerCqlOperatorBinding : CqlOperatorsBinding
+{
+    public PackagerCqlOperatorBinding(
+        [FromKeyedServices("Fhir")] TypeResolver typeResolver,
+        [FromKeyedServices("Fhir")] TypeConverter typeConverter) : base(typeResolver, typeConverter)
+    {
     }
 }
