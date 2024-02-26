@@ -1,4 +1,7 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize();
 #pragma warning restore IDE0060 // Remove unused parameter
-  
+        internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
 
         protected override Library ConvertLibrary(string cql)
         {
@@ -1668,5 +1671,20 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void Ceiling_1D()
+        {
+            var input = createLibraryForExpression("Ceiling(1.0)");
+            var ceiling = input.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Ceiling>();
+            var output = createLibraryForExpression("1");
+            var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
+            var context = FhirCqlContext.ForBundle();
+            var equalsOverload = InvocationBuilder.SelectBestOverload(SystemLibrary.Equal, new Expression[] { ceiling, literal });
+            equalsOverload.Compatible.Should().BeTrue();
+            var invokeEquals = InvocationBuilder.Invoke(equalsOverload, null);
+            invokeEquals.GetErrors().Should().BeEmpty();
+            var equalsCall = Run(invokeEquals);
+            Assert.AreEqual(true, equalsCall);
+        }
     }
 }

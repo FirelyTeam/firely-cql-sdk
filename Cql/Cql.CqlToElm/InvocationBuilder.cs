@@ -97,6 +97,30 @@ namespace Hl7.Cql.CqlToElm
                 .WithResultType(newResultType);
         }
 
+        internal Expression Invoke(SignatureMatchResult result, string? library = null)
+        {
+            var args = result.Arguments.Select(arg => arg.Result).ToArray();
+            if (result.Compatible)
+            {
+                if (result.Function is SystemFunction sysFunc)
+                    return Invoke(sysFunc, args);
+                else if (library is null)
+                    throw new System.ArgumentException($"Library must be non-null when invoking a user defined function.", nameof(library));
+                else
+                    return Invoke(result.Function, library, args);
+            }
+            else
+            {
+                var expression = ElmFactory.CreateElmNode(result.Function, null, args);
+                if (result.Error is not null)
+                    expression.AddError(result.Error);
+                else
+                    expression.AddUnresolvedOperatorError(result.Function.name,
+                        result.Arguments.Select(arg => arg.Result.resultTypeSpecifier).ToArray());
+                return expression;
+            }
+        }
+
 
         #region Generic inference
 
@@ -148,13 +172,13 @@ namespace Hl7.Cql.CqlToElm
             else
             {
                 newOperands = new ConversionResult<Expression>[arguments.Length];
-                for(int i = 0; i < arguments.Length; i++)
+                for (int i = 0; i < arguments.Length; i++)
                 {
                     newOperands[i] = TypeConverter.Convert(arguments[i], operandTypes[i]);
                 }
                 string? error = null;
                 if (newOperands.Any(op => op.Cost == ConversionCost.Incompatible))
-                    error = candidate.GetUnresolvedOperatorMessage(arguments.Select(arg=>arg.resultTypeSpecifier).ToArray());
+                    error = candidate.GetUnresolvedOperatorMessage(arguments.Select(arg => arg.resultTypeSpecifier).ToArray());
                 return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
             }
         }
@@ -164,15 +188,15 @@ namespace Hl7.Cql.CqlToElm
         internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier operandType, TypeSpecifier argumentType) =>
             operandType switch
             {
-                ParameterTypeSpecifier generic 
+                ParameterTypeSpecifier generic
                     when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.parameterName, argumentType } },
-                ListTypeSpecifier opList 
+                ListTypeSpecifier opList
                     when argumentType is ListTypeSpecifier argList => InferGenericArgument(opList.elementType, argList.elementType),
-                ListTypeSpecifier opList 
+                ListTypeSpecifier opList
                     when argumentType is not ListTypeSpecifier => InferGenericArgument(opList.elementType, argumentType),
-                IntervalTypeSpecifier opInt 
+                IntervalTypeSpecifier opInt
                     when argumentType is IntervalTypeSpecifier argInt => InferGenericArgument(opInt.pointType, argInt.pointType),
-                IntervalTypeSpecifier opInt 
+                IntervalTypeSpecifier opInt
                     when argumentType is not IntervalTypeSpecifier => InferGenericArgument(opInt.pointType, argumentType),
                 _ => new()
             };

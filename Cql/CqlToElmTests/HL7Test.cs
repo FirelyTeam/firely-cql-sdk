@@ -1,8 +1,11 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,23 +36,22 @@ namespace Hl7.Cql.CqlToElm.Test
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 
+        internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
 
         [DynamicData(nameof(LoadCqlFiles), DynamicDataSourceType.Method,
           DynamicDataDisplayName = nameof(DisplayName))]
         [TestMethod]
         public void ExecuteExpression(FileInfo cqlFile, 
             Library library, 
-            Dictionary<string, Delegate>  delegates,
-            string name)
+            string name,
+            Func<CqlContext, bool?> equalsDef)
         {
             var context = FhirCqlContext.ForBundle();
-            var inputDelegate = delegates[$"{name} Input"];
-            var outputDelegate = delegates[$"{name} Output"];
             try
             {
-                var input = inputDelegate.DynamicInvoke(context);
-                var output = outputDelegate.DynamicInvoke(context);
-                var comparison = context.Operators.Comparer.Compare(input, output, null);
+                // All inputs & outputs should be Equal
+                var result = equalsDef(context);
+                Assert.IsTrue(result);
             }
             catch(TargetInvocationException tie)
             {
@@ -61,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static string DisplayName(MethodInfo method, object[] data)
         {
-            (var library, var test) =  ((Library)data[1], (string)data[3]);
+            (var library, var test) =  ((Library)data[1], (string)data[2]);
             return $"{library.NameAndVersion}: {test}";
         }
 
@@ -78,13 +80,13 @@ namespace Hl7.Cql.CqlToElm.Test
                     var errors = library.GetErrors();
                     if (errors.Length > 0)
                         Assert.Fail(errors[0].message);
+                    
+                    // Esnure all inputs & outputs are able to be built
                     var eb = ExpressionBuilderFor(library);
                     var lambdas = eb.Build();
-                    var delegates = lambdas.CompileAll();
-                    Assert.IsTrue(delegates.TryGetDefinesForLibrary(library.NameAndVersion, out var definitions));
-                    var libDelegates = definitions!.ToDictionary(kvp=>kvp.Key, kvp=>kvp.Value);
+
                     var byName = library.statements.ToDictionary(ed => ed.name);
-                    foreach(var key in byName.Keys.Where(key => key.EndsWith("Input")))
+                    foreach (var key in byName.Keys.Where(key => key.EndsWith("Input")))
                     {
                         var inputIndex = key.LastIndexOf("Input");
                         var testName = key.Substring(0, inputIndex).Trim();
@@ -92,12 +94,18 @@ namespace Hl7.Cql.CqlToElm.Test
                         if (byName.TryGetValue(outputKey, out var outputDef))
                         {
                             var inputDef = byName[key];
-                            yield return new object[] { file, library, libDelegates, testName  };
+
+                            var eqr = InvocationBuilder.SelectBestOverload(SystemLibrary.Equal, new[] { inputDef.expression, outputDef.expression });
+                            Assert.IsTrue(eqr.Compatible);
+                            var invokeEquals = InvocationBuilder.Invoke(eqr);
+                            var equalsLambda = ExpressionBuilder.Lambda(invokeEquals);
+                            var @delegate = equalsLambda.Compile() as Func<CqlContext, bool?>;
+                            @delegate.Should().NotBeNull();
+                            yield return new object[] { file, library, testName, @delegate! };
                         }
                     }
                 }
             }
-
         }
     }
 }
