@@ -81,11 +81,11 @@ namespace Hl7.Cql.Packaging
             ILogger<CSharpSourceCodeWriter> cSharpSourceCodeWriterL = logFactory.CreateLogger<CSharpSourceCodeWriter>();
             CSharpSourceCodeWriter cSharpSourceCodeWriter = new(cSharpSourceCodeWriterL);
             AssemblyCompiler assemblyCompiler = new(expressionBuilderService, fhirTypeResolver, cSharpSourceCodeWriter, typeManager);
-            LibraryPackagerService resourcePackagerService = new(fhirTypeResolver, assemblyCompiler, expressionBuilderService);
+            LibraryPackager resourcePackager = new(fhirTypeResolver, assemblyCompiler, expressionBuilderService);
 
             IDictionary<string, Library> librariesByNameAndVersion = LibraryLoader.LoadLibraries(elmDir);
             DirectedGraph directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();
-            IEnumerable<Resource> resources = resourcePackagerService.PackageResources(elmDir, cqlDir, directedGraph, callbacks);
+            IEnumerable<Resource> resources = resourcePackager.PackageResources(elmDir, cqlDir, directedGraph, callbacks);
 
             afterPackageMutator?.Invoke(resources);
 

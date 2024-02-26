@@ -110,7 +110,7 @@ public class Program
         services.TryAddTypeServices();
         services.TryAddCompilationServices();
         services.TryAddFactoryPattern();
-        services.TryAddSingleton<LibraryPackagerService>();
+        services.TryAddSingleton<LibraryPackager>();
         services.TryAddSingleton<OptionsConsoleDumper>();
     }
 

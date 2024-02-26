@@ -12,13 +12,13 @@ internal class PackagerCliProgram
     private readonly PackagerOptions _packagerOptions;
     private readonly ResourceWriter[] _resourceWriters;
     private readonly ILogger<PackagerCliProgram> _logger;
-    private readonly LibraryPackagerService _libraryPackager;
+    private readonly LibraryPackager _libraryPackager;
 
     public PackagerCliProgram(
         ILogger<PackagerCliProgram> logger,
         IOptions<PackagerOptions> packageArgsOptions,
         IEnumerable<ResourceWriter> resourceWriters,
-        LibraryPackagerService libraryPackager, 
+        LibraryPackager libraryPackager, 
         OptionsConsoleDumper optionsConsoleDumper)
     {
         _logger = logger;

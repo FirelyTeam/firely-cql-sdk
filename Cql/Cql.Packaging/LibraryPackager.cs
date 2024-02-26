@@ -13,13 +13,13 @@ using Library = Hl7.Fhir.Model.Library;
 namespace Hl7.Cql.Packaging;
 
 #pragma warning disable CS1591
-internal class LibraryPackagerService
+internal class LibraryPackager
 {
     private readonly AssemblyCompiler _assemblyCompiler;
     private readonly TypeResolver _typeResolver;
     private readonly ExpressionBuilderService _expressionBuilderService;
 
-    public LibraryPackagerService(
+    public LibraryPackager(
         [FromKeyedServices("Fhir")] TypeResolver typeResolver,
         AssemblyCompiler assemblyCompiler,
         ExpressionBuilderService expressionBuilderService)
