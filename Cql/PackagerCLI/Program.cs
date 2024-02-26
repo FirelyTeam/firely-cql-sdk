@@ -109,7 +109,6 @@ public class Program
         services.AddResourcePackager(context.Configuration);
         services.TryAddTypeServices();
         services.TryAddCompilationServices();
-        services.TryAddFactoryPattern();
         services.TryAddSingleton<LibraryPackager>();
         services.TryAddSingleton<OptionsConsoleDumper>();
     }

@@ -78,8 +78,8 @@ namespace Hl7.Cql.Packaging
             LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
             ILogger<ExpressionBuilder> expressionBuilderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             ExpressionBuilderService expressionBuilderService = new(expressionBuilderLogger, cqlOperatorsBinding, typeManager);
-            ILogger<CSharpSourceCodeWriter> cSharpSourceCodeWriterL = logFactory.CreateLogger<CSharpSourceCodeWriter>();
-            CSharpSourceCodeWriter cSharpSourceCodeWriter = new(cSharpSourceCodeWriterL);
+            ILogger<CSharpSourceCodeWriter> cSharpSourceCodeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
+            CSharpSourceCodeWriter cSharpSourceCodeWriter = new(cSharpSourceCodeWriterLogger, fhirTypeResolver);
             AssemblyCompiler assemblyCompiler = new(expressionBuilderService, fhirTypeResolver, cSharpSourceCodeWriter, typeManager);
             LibraryPackager resourcePackager = new(fhirTypeResolver, assemblyCompiler, expressionBuilderService);
 

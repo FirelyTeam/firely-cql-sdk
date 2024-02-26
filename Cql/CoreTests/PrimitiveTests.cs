@@ -3543,7 +3543,7 @@ namespace CoreTests
              .Create(logging => logging.AddDebug())
              .CreateLogger<CSharpSourceCodeWriter>();
 
-            var writer = new CSharpSourceCodeWriter(writerLogger);
+            var writer = new CSharpSourceCodeWriter(writerLogger, TypeResolver);
             var graph = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\libs"));
 
             var dict = new Dictionary<string, MemoryStream>();

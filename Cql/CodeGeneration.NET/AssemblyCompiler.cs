@@ -32,17 +32,17 @@ namespace Hl7.Cql.CodeGeneration.NET
         private readonly TypeResolver _typeResolver;
         private readonly TypeManager _typeManager;
         private readonly ExpressionBuilderService _expressionBuilderService;
-        private readonly Factory<CSharpSourceCodeWriter> _cSharpSourceCodeWriterFactory;
+        private readonly CSharpSourceCodeWriter _cSharpSourceCodeWriter;
         private readonly Lazy<Assembly[]> _referencesLazy;
 
         public AssemblyCompiler(
             ExpressionBuilderService expressionBuilderService,
             [FromKeyedServices("Fhir")] TypeResolver typeResolver,
-            Factory<CSharpSourceCodeWriter> cSharpSourceCodeWriterFactory,
+            CSharpSourceCodeWriter cSharpSourceCodeWriter,
             [FromKeyedServices("Fhir")] TypeManager? typeManager)
         {
             _typeResolver = typeResolver;
-            _cSharpSourceCodeWriterFactory = cSharpSourceCodeWriterFactory;
+            _cSharpSourceCodeWriter = cSharpSourceCodeWriter;
             _expressionBuilderService = expressionBuilderService;
             _typeManager = typeManager ?? new TypeManager(typeResolver);
             _referencesLazy = new Lazy<Assembly[]>(
@@ -73,9 +73,6 @@ namespace Hl7.Cql.CodeGeneration.NET
         internal IDictionary<string, AssemblyData> Compile(
             IReadOnlyCollection<Library> elmPackages)
         {
-            var cSharpSourceCodeWriter = BuildCSharpSourceCodeWriter();
-
-
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
@@ -88,31 +85,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                 all,
                 _typeManager,
                 graph,
-                cSharpSourceCodeWriter,
+                _cSharpSourceCodeWriter,
                 _referencesLazy.Value);
             return assemblies;
-        }
-
-        private CSharpSourceCodeWriter BuildCSharpSourceCodeWriter()
-        {
-            var namespaces = new[]
-                {
-                    typeof(CqlDeclarationAttribute).Namespace!,
-                    typeof(IValueSetFacade).Namespace!,
-                    typeof(Iso8601.DateIso8601).Namespace!,
-                }
-                .Concat(_typeResolver.ModelNamespaces)
-                .Distinct()
-                .ToArray();
-
-            var cSharpSourceCodeWriter = _cSharpSourceCodeWriterFactory.Create();
-            foreach (var @using in namespaces)
-                cSharpSourceCodeWriter.Usings.Add(@using);
-
-            foreach (var alias in _typeResolver.Aliases)
-                cSharpSourceCodeWriter.AliasedUsings.Add(alias);
-
-            return cSharpSourceCodeWriter;
         }
 
         private static IDictionary<string, AssemblyData> Generate(

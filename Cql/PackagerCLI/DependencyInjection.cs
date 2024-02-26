@@ -94,11 +94,6 @@ internal static class DependencyInjection
         services.TryAddSingleton<ExpressionBuilderService>();
     }
 
-    public static void TryAddFactoryPattern(this IServiceCollection services)
-    {
-        services.TryAdd(ServiceDescriptor.Singleton(typeof(Factory<>), typeof(ServiceProviderFactory<>)));
-    }
-
     public static void TryAddTypeServices(this IServiceCollection services)
     {
         services.TryAddSingleton(ModelInfo.ModelInspector);
@@ -106,17 +101,6 @@ internal static class DependencyInjection
         services.TryAddKeyedSingleton<TypeConverter>("Fhir", FhirTypeConverter.Default);
         services.TryAddSingleton<TypeManager, PackagerTypeManager>();
     }
-}
-
-
-
-file class ServiceProviderFactory<T> : Factory<T>
-{
-    private readonly IServiceProvider _serviceProvider;
-
-    public ServiceProviderFactory(IServiceProvider serviceProvider) => _serviceProvider = serviceProvider;
-
-    public override T Create() => ActivatorUtilities.CreateInstance<T>(_serviceProvider);
 }
 
 file class PackagerTypeManager : TypeManager
