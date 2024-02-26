@@ -131,12 +131,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 tupleAssembly
             };
             assemblies.Add("TupleTypes", tupleAssembly);
-            var buildOrder = DetermineBuildOrder(dependencies);
+            var buildOrder = dependencies.DetermineBuildOrder();
             foreach (var node in buildOrder)
             {
                 if (!navToLibraryStream.TryGetValue(node.NodeId, out var sourceCodeStream))
                     throw new InvalidOperationException($"Library {node.NodeId} doesn't exist in the source code dictionary.");
-                CompileNode(sourceCodeStream, assemblies, node, references, additionalReferences);
+
+                CompileNode(sourceCodeStream, assemblies, dependencies, node, references, additionalReferences);
             }
             return assemblies;
         }
@@ -203,8 +204,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             return asmData;
         }
 
-        private void CompileNode(Stream sourceCodeStream,
+        private static void CompileNode(
+            Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
+            DirectedGraph graph,
             DirectedGraphNode node,
             IEnumerable<Assembly> assemblyReferences,
             IEnumerable<AssemblyData>? dependencyAssemblies)
@@ -220,9 +223,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }
-            foreach (var edge in node.ForwardEdges)
+            foreach (var forwardNodeId in graph.GetForwardNodeIds(node.NodeId))
             {
-                if (assemblies.TryGetValue(edge.ToId, out var referencedDll))
+                if (assemblies.TryGetValue(forwardNodeId, out var referencedDll))
                 {
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
                 }
@@ -284,7 +287,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
 
-        private void AddNetCoreReferences(List<MetadataReference> metadataReferences)
+        private static void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {
             var rtPath = Path.GetDirectoryName(typeof(object).Assembly.Location) ??
                 throw new InvalidOperationException($"Couldn't identify system file path for the System assembly");
@@ -320,14 +323,5 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
         }
-        private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
-        {
-            var sorted = minimalGraph.TopologicalSort()
-                .Where(n => n.NodeId != minimalGraph.StartNode.NodeId && n.NodeId != minimalGraph.EndNode.NodeId)
-                .ToList();
-            return sorted;
-        }
-
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

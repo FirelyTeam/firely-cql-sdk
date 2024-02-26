@@ -10,234 +10,109 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Text.Json;
+using System.Runtime.InteropServices;
 
 namespace Hl7.Cql.Graph
 {
-    [DebuggerDisplay("DirectedGraph (Nodes:{Nodes.Count}, Edges:{Edges.Count})")]
+    [DebuggerDisplay("DirectedGraph (Nodes:{Nodes.Count}, Edges:{GetEdgesCount()})")]
     internal class DirectedGraph
     {
-
-        public DirectedGraphNode StartNode { get; set; } = new DirectedGraphNode { NodeId = DirectedGraphNode.StartId };
-        public DirectedGraphNode EndNode { get; set; } = new DirectedGraphNode { NodeId = DirectedGraphNode.EndId };
-
-        public IDictionary<string, DirectedGraphNode> Nodes { get; } = new Dictionary<string, DirectedGraphNode>();
-        public IDictionary<string, DirectedGraphEdge> Edges { get; } = new Dictionary<string, DirectedGraphEdge>();
-
-        public IDictionary<string, object>? Properties { get; set; }
-
-        public void Add(DirectedGraphNode node) => Nodes.Add(node.NodeId, node);
-        public void Add(DirectedGraphEdge edge) => Edges.Add(edge.EdgeId, edge);
-        public void AddEdge(DirectedGraphNode from, DirectedGraphNode to)
+        public DirectedGraph()
         {
-            var edge = new DirectedGraphEdge(from, to);
-            if (Edges.ContainsKey(edge.EdgeId))
-                throw new ArgumentException($"Edge {edge.EdgeId} already exists");
-            Add(edge);
-            from.ForwardEdges.Add(edge);
+            _startNode = new DirectedGraphNode() { NodeId = DirectedGraphNode.StartId };
+            _endNode = new DirectedGraphNode() { NodeId = DirectedGraphNode.EndId };
+            _nodesByNodeId = new ();
+            _forwardNodesByNodeId = new();
         }
 
-        public DirectedGraphNode Attach(string newNodeId, DirectedGraphNode from, string? edgeId = null)
+
+        private readonly DirectedGraphNode _startNode;
+        private readonly DirectedGraphNode _endNode;
+        private readonly Dictionary<string, DirectedGraphNode> _nodesByNodeId;
+        private readonly Dictionary<string, HashSet<DirectedGraphNode>> _forwardNodesByNodeId;
+
+        public IReadOnlyDictionary<string, DirectedGraphNode> Nodes => _nodesByNodeId;
+
+        public void AddNode(DirectedGraphNode node) =>
+            _nodesByNodeId.Add(node.NodeId, node);
+
+        private void AddEdgeImpl(string? fromNodeId, DirectedGraphNode? toNode)
         {
-            if (Nodes.ContainsKey(newNodeId))
-                throw new ArgumentException($"Node {newNodeId} already exists in this graph.");
-            edgeId ??= $"{from.NodeId}->{newNodeId}";
-            if (Edges.ContainsKey(edgeId))
-                throw new ArgumentException($"Edge {edgeId} already exists in this graph.");
-            var node = new DirectedGraphNode
-            {
-                NodeId = newNodeId,
-            };
-            Add(node);
-            var edge = new DirectedGraphEdge
-            {
-                EdgeId = edgeId,
-                FromId = from.NodeId,
-                ToId = newNodeId,
-            };
-            Add(edge);
-            from.ForwardEdges.Add(edge);
-            return node;
+            fromNodeId ??= DirectedGraphNode.StartId;
+            ref var forwardNodes = ref CollectionsMarshal.GetValueRefOrAddDefault(_forwardNodesByNodeId, fromNodeId, out bool exists);
+            if (!exists)
+                forwardNodes = new();
+
+            forwardNodes!.Add(toNode ?? _endNode);
         }
 
-        public DirectedGraphNode Attach(string newNodeId, params DirectedGraphNode[] from)
+        public void AddEdge((DirectedGraphNode? FromNode, DirectedGraphNode? ToNode) edge)
         {
-            if (Nodes.ContainsKey(newNodeId))
-                throw new ArgumentException($"Node {newNodeId} already exists in this graph.");
-            var node = new DirectedGraphNode
+            AddEdgeImpl(edge.FromNode?.NodeId, edge.ToNode);
+        }
+
+        public void AddEdge((string? FromId, string? ToId) edge)
+        {
+            if ((edge.ToId ?? DirectedGraphNode.EndId) is DirectedGraphNode.EndId)
+                AddEdgeImpl(edge.FromId, null);
+            else
             {
-                NodeId = newNodeId,
-            };
-            Add(node);
-            foreach (var fromNode in from)
+                if (!_nodesByNodeId.TryGetValue(edge.ToId!, out var toNode))
+                    throw new KeyNotFoundException($"No node by ID '{edge.ToId}' exists in this graph.");
+                AddEdgeImpl(edge.FromId, toNode);
+            }
+        }
+
+        public IEnumerable<string> GetForwardNodeIds(string nodeId)
+        {
+            if (nodeId == DirectedGraphNode.EndId)
+                return Enumerable.Empty<string>();
+
+            // If node doesn't belong to this graph, just return empty
+            if (!_forwardNodesByNodeId.TryGetValue(nodeId, out var forwardNodes))
+                return Enumerable.Empty<string>();
+
+            return forwardNodes.Select(forwardNode => forwardNode.NodeId);
+        }
+
+        private IEnumerable<DirectedGraphNode> GetNodesConnectedTo(DirectedGraphNode node)
+        {
+            foreach (var nodeId in GetForwardNodeIds(node.NodeId))
             {
-                var edgeId = $"{fromNode.NodeId}->{newNodeId}";
-                if (Edges.ContainsKey(edgeId))
-                    throw new ArgumentException($"Edge {edgeId} already exists in this graph.");
-                var edge = new DirectedGraphEdge
+                switch (nodeId)
                 {
-                    EdgeId = edgeId,
-                    FromId = fromNode.NodeId,
-                    ToId = newNodeId,
-                };
-                Add(edge);
-                fromNode.ForwardEdges.Add(edge);
-            }
-            return node;
-        }
+                    case DirectedGraphNode.EndId:
+                        yield return _endNode;
+                        break;
 
+                    case DirectedGraphNode.StartId:
+                        yield return _startNode;
+                        break;
 
-        public DirectedGraphEdge Add(DirectedGraph subGraph, string fromNodeId, string? edgeId = null)
-        {
-            if (subGraph is null)
-            {
-                throw new ArgumentNullException(nameof(subGraph));
-            }
-
-            if (fromNodeId is null)
-            {
-                throw new ArgumentNullException(nameof(fromNodeId));
-            }
-            if (!Nodes.TryGetValue(fromNodeId, out var fromNode))
-                throw new ArgumentException($"The node with id {fromNodeId} does not exist in this graph.", nameof(fromNodeId));
-
-            foreach (var node in subGraph.Nodes.Values)
-            {
-                if (!Nodes.ContainsKey(node.NodeId))
-                    Add(node);
-                else
-                {
-                    foreach (var fwdEdge in node.ForwardEdges)
+                    default:
                     {
-                        if (!Nodes[node.NodeId].ForwardEdgeIds.Contains(fwdEdge.EdgeId))
-                        {
-                            Nodes[node.NodeId].ForwardEdges.Add(fwdEdge);
-                        }
+                        if (!Nodes.TryGetValue(nodeId, out var to))
+                            throw new InvalidOperationException($"The node id {nodeId} does not exist in this graph.");
+                        
+                        yield return to;
+                        break;
                     }
                 }
             }
-
-            foreach (var edge in subGraph.Edges.Values)
-                if (!Edges.ContainsKey(edge.EdgeId))
-                    Add(edge);
-
-            var newEdge = new DirectedGraphEdge
-            {
-                FromId = fromNode!.NodeId,
-                ToId = subGraph.StartNode.NodeId,
-                EdgeId = edgeId ?? $"From {fromNode!.NodeId} to {subGraph.StartNode.NodeId}"
-            };
-            Edges.Add(newEdge.EdgeId, newEdge);
-            fromNode.ForwardEdges.Add(newEdge);
-            return newEdge;
         }
-
-        public void AddAndReparentSubgraph(DirectedGraph subGraph, string fromNodeId)
-        {
-            if (subGraph is null)
-            {
-                throw new ArgumentNullException(nameof(subGraph));
-            }
-
-            if (fromNodeId is null)
-            {
-                throw new ArgumentNullException(nameof(fromNodeId));
-            }
-
-            if (!Nodes.TryGetValue(fromNodeId, out var fromNode))
-                throw new ArgumentException($"The node with id {fromNodeId} does not exist in this graph.", nameof(fromNodeId));
-
-            foreach (var node in subGraph.Nodes.Values)
-            {
-                if (node.NodeId == subGraph.StartNode.NodeId)
-                {
-                    continue;
-                }
-
-                if (!Nodes.ContainsKey(node.NodeId))
-                    Add(node);
-            }
-            foreach (var edge in subGraph.Edges.Values)
-            {
-                if (edge.FromId == subGraph.StartNode.NodeId)
-                {
-                    var newEdge = new DirectedGraphEdge
-                    {
-                        FromId = fromNodeId,
-                        ToId = edge.ToId,
-                        EdgeId = $"From {fromNodeId} to {edge.ToId}"
-                    };
-                    Edges.Add(newEdge.EdgeId, newEdge);
-                    fromNode.ForwardEdges.Add(newEdge);
-
-                }
-                else if (!Edges.ContainsKey(edge.EdgeId))
-                    Add(edge);
-            }
-
-        }
-
-        public IEnumerable<IList<DirectedGraphEdge>> GetAllPaths(DirectedGraphNode? node = null)
-        {
-            var danglingLeafNodeIds = Nodes.Values
-                .Where(node => node.NodeId != DirectedGraphNode.EndId && node.ForwardEdges.Count == 0)
-                .Select(node => node.NodeId)
-                .ToList();
-            if (danglingLeafNodeIds.Count > 0)
-                throw new InvalidOperationException($"Dangling leaf nodes detected.  Node IDs: {string.Join(", ", danglingLeafNodeIds)}");
-            foreach (var path in DepthFirst(node ?? StartNode, new DirectedGraphEdge[0], new List<DirectedGraphEdge>(), new List<DirectedGraphEdge>()))
-                yield return path;
-        }
-
-        public IEnumerable<(DirectedGraphEdge Edge, DirectedGraphNode Node)> GetNodesConnectedTo(DirectedGraphNode node)
-        {
-            foreach (var edge in node.ForwardEdges)
-            {
-                if (edge.ToId == EndNode?.NodeId)
-                    yield return (edge, EndNode);
-                else if (edge.ToId == StartNode?.NodeId)
-                    yield return (edge, StartNode);
-                else if (Nodes.TryGetValue(edge.ToId, out var to))
-                    yield return (edge, to);
-                else throw new ArgumentException($"Edge {edge.EdgeId} points to node {edge.ToId} which does not exist in this graph.", nameof(node));
-            }
-        }
-
-        public IList<DirectedGraphNode> NodesBreadthFirst()
-        {
-            var order = new List<DirectedGraphNode>(Nodes.Count);
-            var queue = new List<DirectedGraphNode>(Nodes.Count);
-            var visited = new List<string>(Nodes.Count);
-            queue.Add(StartNode);
-            while (queue.Count > 0)
-            {
-                var node = queue[0];
-                queue.RemoveAt(0);
-                visited.Add(node.NodeId);
-                if (!order.Contains(node) && node != StartNode && node != EndNode)
-                    order.Add(node);
-                foreach (var edge in node.ForwardEdges)
-                {
-                    var to = Nodes[edge.ToId];
-                    if (!visited.Contains(to.NodeId))
-                        queue.Add(to);
-                }
-            }
-            return order;
-        }
-
+        
         public IList<DirectedGraphNode> TopologicalSort()
         {
-            var sorted = Sort(Nodes.Values,
-                node => GetNodesConnectedTo(node).Select(tuple => tuple.Node));
-            if (sorted.Count > 0 && sorted[0].NodeId == EndNode.NodeId)
+            var sorted = Sort(Nodes.Values, node => GetNodesConnectedTo(node));
+            if (sorted.Count > 0 && sorted[0].IsEndNode)
                 sorted.RemoveAt(0);
             return sorted;
 
-            void Visit<T>(T item, Func<T, IEnumerable<T>> getDependencies,
-                          List<T> sorted, Dictionary<T, bool> visited) where T : notnull
+            void Visit<T>(T item, 
+                Func<T, IEnumerable<T>> getDependencies,
+                ICollection<T> sorted,
+                IDictionary<T, bool> visited) where T : notnull
             {
                 bool inProcess;
                 var alreadyVisited = visited.TryGetValue(item, out inProcess);
@@ -266,6 +141,7 @@ namespace Hl7.Cql.Graph
                     sorted.Add(item);
                 }
             }
+            
             IList<T> Sort<T>(IEnumerable<T> source, Func<T, IEnumerable<T>> getDependencies) where T : notnull
             {
                 var sorted = new List<T>();
@@ -279,232 +155,91 @@ namespace Hl7.Cql.Graph
             }
         }
 
-        public void ValidateGraph(out bool hasCycle)
+        public void AddEndNode()
         {
-            var cycles = new List<DirectedGraphEdge>();
-            DepthFirst(StartNode, new DirectedGraphEdge[0], new List<DirectedGraphEdge>(), cycles).ToList();
-            hasCycle = cycles.Any();
+            AddNode(_endNode);
         }
 
-        public bool HasCycle()
+        public void AddStartNode()
         {
-            ValidateGraph(out bool hasCycle);
-            return hasCycle;
+            AddNode(_startNode);
         }
 
-        public virtual ExecutedPath<TContext> Run<TContext>(TContext context, IList<DirectedGraphEdge> edges)
-            where TContext : ExecutionContext
+        public void MergeInto(
+            DirectedGraph into,
+            Func<(string FromNodeId, string ToNodeId), (string FromNodeId, string ToNodeId)>? replaceMergeEdge = null
+            )
         {
-            var executedPath = new ExecutedPath<TContext>(context);
-            DirectedGraphEdge? edge = null;
-            var enumerator = edges.GetEnumerator();
-            while (enumerator.MoveNext())
+            foreach (var node in Nodes)
             {
-                edge = enumerator.Current;
-                context.Log.WriteLine($"Node {edge.FromId} to {edge.ToId}");
-                foreach (var action in edge.Actions.OfType<EdgeAction<TContext>>())
-                {
-                    try
-                    {
-                        action.Execute(executedPath);
-                    }
-                    catch (Exception ex)
-                    {
-                        var error = new GraphException
-                        {
-                            Path = edges,
-                            ErrorEdge = edge,
-                            ErrorAction = action,
-                            ExceptionMessage = ex.Message,
-                            IsRandomSelectedEdge = false
-                        };
-                        context.Exceptions.Add(error);
-                        throw;
-                    }
-                }
+                if (!into.Nodes.ContainsKey(node.Key))
+                    into.AddNode(node.Value);
             }
-            // If this path was a partial - meaning all subsequent edges were already hit by other paths -
-            // then just randomly select paths until an end event occurs.
-            while (edge!.ToId != DirectedGraphNode.EndId)
-            {
-                var to = Nodes[edge!.ToId];
-                if (to.ForwardEdges?.Count > 0)
-                {
-                    var nextEdgeIndex = executedPath.Context.Random.Next(0, to.ForwardEdges?.Count ?? 0);
-                    edge = to.ForwardEdges![nextEdgeIndex];
-                    context.Log.WriteLine($"Node {edge.FromId} to {edge.ToId}");
-                    foreach (var action in edge.Actions.OfType<EdgeAction<TContext>>())
-                        try
-                        {
-                            action.Execute(executedPath);
-                        }
-                        catch (Exception ex)
-                        {
-                            var error = new GraphException
-                            {
-                                Path = edges,
-                                ErrorEdge = edge,
-                                ErrorAction = action,
-                                ExceptionMessage = ex.Message,
-                                IsRandomSelectedEdge = true
-                            };
-                            context.Exceptions.Add(error);
-                            throw;
-                        }
-                }
-            }
-            return executedPath;
-        }
 
-        public void SerializeToJson(Stream jsonStream)
-        {
-            if (jsonStream is null)
+            replaceMergeEdge ??= edge => edge;
+            foreach ( (string nodeId, HashSet<DirectedGraphNode> forwardNodes) in _forwardNodesByNodeId)
             {
-                throw new ArgumentNullException(nameof(jsonStream));
-            }
-            if (!jsonStream.CanWrite)
-                throw new InvalidOperationException("Stream can't write.");
-
-            JsonSerializer.Serialize(jsonStream, this, new JsonSerializerOptions
-            {
-                WriteIndented = true
-            });
-            jsonStream.Flush();
-        }
-
-        public DirectedGraph Clone()
-        {
-            var clone = new DirectedGraph();
-            foreach (var kvp in Nodes)
-            {
-                var newNode = kvp.Value.Clone();
-                clone.Add(newNode);
-                foreach (var edge in newNode.ForwardEdges)
-                    clone.Add(edge);
-            }
-            clone.StartNode = clone.Nodes[StartNode.NodeId];
-            clone.EndNode = clone.Nodes[EndNode.NodeId];
-            return clone;
-        }
-
-        /// <summary>
-        /// Creates a reversed graph whose edge directions are all changed.
-        /// </summary>
-        public DirectedGraph Reverse()
-        {
-            var reversed = new DirectedGraph();
-            foreach (var kvp in Nodes)
-            {
-                var newNode = new DirectedGraphNode
+                foreach (var forwardNode in forwardNodes)
                 {
-                    NodeId = kvp.Value.NodeId
-                };
-                reversed.Add(newNode);
-            }
-            foreach (var kvp in Edges)
-            {
-                var from = kvp.Value.ToId;
-                if (from == EndNode.NodeId)
-                    from = StartNode.NodeId;
-                var to = kvp.Value.FromId;
-                if (to == StartNode.NodeId)
-                    to = EndNode.NodeId;
-
-                var newEdge = new DirectedGraphEdge
-                {
-                    FromId = from,
-                    ToId = to,
-                    EdgeId = $"[Reversed] {kvp.Value.EdgeId}"
-                };
-                reversed.Add(newEdge);
-            }
-            foreach (var group in reversed.Edges.Values.GroupBy(e => e.FromId))
-            {
-                DirectedGraphNode? fromNode = null;
-                if (group.Key == StartNode.NodeId)
-                    fromNode = StartNode;
-                else
-                    fromNode = reversed.Nodes[group.Key];
-                foreach (var edge in group)
-                    fromNode.ForwardEdges.Add(edge);
-            }
-            return reversed;
-        }
-
-        private IEnumerable<IList<DirectedGraphEdge>> DepthFirst(DirectedGraphNode start, IList<DirectedGraphEdge> pathSoFar, List<DirectedGraphEdge> visited, List<DirectedGraphEdge> cycles, bool failOnCycle = false)
-        {
-            if (start.NodeId == DirectedGraphNode.EndId || start.ForwardEdges?.Count == 0)
-                yield return pathSoFar;
-            else
-            {
-                var unvisitedEdges = (start.ForwardEdges ?? Enumerable.Empty<DirectedGraphEdge>())
-                    .Where(forwardEdge => visited.Contains(forwardEdge) == false)
-                    .ToList();
-                if (unvisitedEdges.Any())
-                {
-                    var nodesVisited = pathSoFar
-                        .Select(x => x.FromId)
-                        .Union(pathSoFar
-                        .Select(x => x.ToId))
-                        .ToHashSet();
-                    foreach (var edge in unvisitedEdges)
-                    {
-                        visited.Add(edge);
-                        if (edge.ToId != start.NodeId &&
-                            !pathSoFar.Contains(edge) &&
-                            !nodesVisited.Contains(edge.ToId))
-                        {
-                            var newPath = new List<DirectedGraphEdge>(pathSoFar);
-                            newPath.Add(edge);
-                            if (Nodes.TryGetValue(edge.ToId, out var to))
-                                foreach (var path in DepthFirst(to, newPath, visited, cycles, failOnCycle))
-                                    yield return path;
-                            else
-                            {
-                                yield return newPath;
-                            }
-                        }
-                        else
-                        {
-                            cycles.Add(edge);
-                            if (failOnCycle)
-                                throw new InvalidDataException($"Cycle Detected for node: {edge.ToId}");
-                        }
-                    }
-                }
-                else
-                {
-                    yield return pathSoFar;
+                    var edge = replaceMergeEdge((nodeId, forwardNode.NodeId));
+                    into.AddEdge((edge.FromNodeId, edge.ToNodeId));
                 }
             }
         }
 
+        #region Debugging
 
-        public string GraphvizDiagram =>
-            $$"""
-            digraph G {
-              
-                graph [ splines="polyline" rankdir="LR" ];
-                node [ shape="rectangle" ];
-                edge [ color="#22 22 22, arrowtail=dot, arrowhead=open" ];
+        private int GetEdgesCount() => _forwardNodesByNodeId.Sum(kvp => kvp.Value.Count);
 
-            {{
-                string.Join(Environment.NewLine,
-                    from node in Nodes.Values
-                    select $"""
-                            "{node.NodeId}";
-                            """)
-            }}
-            
-            {{
-                string.Join(Environment.NewLine,
-                    from edge in Edges.Values
-                    select $"""
-                            "{edge.FromId}" -> "{edge.ToId}";
-                            """)
-            }}
+#if DEBUG
+        public string GraphvizDiagramUri =>
+            new UriBuilder("https://edotor.net/?engine=dot")
+            {
+                Fragment = Uri.EscapeDataString(GraphvizDiagram)
+            }.Uri.ToString();
+
+        public string GraphvizDiagram
+        {
+            get
+            {
+                var ordinalByNodeId =
+                    TopologicalSort()
+                        .Select((node, ordinal) => (node, ordinal))
+                        .ToDictionary(t => t.node.NodeId, t => t.ordinal);
+
+                string GetNodeText(string nodeId)
+                {
+                    int ordinal = ordinalByNodeId!.GetValueOrDefault(nodeId, -1);
+                    return $"""
+                            "{nodeId} {(ordinal < 0 ? "(?)" : $"({ordinal})")}"
+                            """;
+                }
+
+
+                return $$"""
+                         digraph G {
+                           
+                             graph [ splines="polyline" rankdir="LR" ];
+                             node [ shape="rectangle" ];
+                             edge [ color="#22 22 22, arrowtail=dot, arrowhead=open" ];
+
+                         {{string.Join(Environment.NewLine,
+                             from nodeId in ordinalByNodeId.Keys
+                             select GetNodeText(nodeId))}}
+
+                         {{string.Join(Environment.NewLine,
+                             from forwardNodeByNodeId in _forwardNodesByNodeId
+                             from forwardNode in forwardNodeByNodeId.Value
+                             select $"""
+                                     {GetNodeText(forwardNodeByNodeId.Key)} -> {GetNodeText(forwardNode.NodeId)};
+                                     """)}}
+                         }
+                         """;
             }
-            """;
+        }
+#endif
+
+        #endregion
     }
 
 }
