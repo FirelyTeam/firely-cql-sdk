@@ -770,9 +770,26 @@ namespace Hl7.Cql.Compiler
             // handle with/such-that
             if (query.relationship != null)
             {
+                var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
+                                    ?? TypeNameToIdentifier(elementType, ctx);
+                var whereLambdaParameter = Expression.Parameter(elementType, parameterName);
+                
+                var scopes = new[] { new ExpressionElementPairForIdentifier(querySourceAlias!, (whereLambdaParameter, querySource.expression)) };
+                var subContext = ctx.WithScopes(scopes);
+
+                if (query.let is not null)
+                {
+                    foreach (var lete in query.let)
+                    {
+                        var expression = TranslateExpression(lete.expression!, subContext);
+                        subContext = subContext.WithScopes(
+                            new ExpressionElementPairForIdentifier(lete.identifier!, (expression, lete.expression!)));
+                    }
+                }
+
                 foreach (var relationship in query.relationship ?? Enumerable.Empty<RelationshipClause>())
                 {
-                    var selectManyLambda = WithToSelectManyBody(querySourceAlias!, elementType, relationship, ctx);
+                    var selectManyLambda = WithToSelectManyBody(querySourceAlias!, elementType, relationship, subContext);
 
                     var selectManyCall = OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
                         @return, selectManyLambda);
@@ -796,9 +813,6 @@ namespace Hl7.Cql.Compiler
                 var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
                     ?? TypeNameToIdentifier(elementType, ctx);
                 var whereLambdaParameter = Expression.Parameter(elementType, parameterName);
-                if (querySourceAlias == "ItemOnLine")
-                {
-                }
                 var scopes = new[] { new ExpressionElementPairForIdentifier(querySourceAlias!, (whereLambdaParameter, querySource.expression)) };
                 var subContext = ctx.WithScopes(scopes);
 
