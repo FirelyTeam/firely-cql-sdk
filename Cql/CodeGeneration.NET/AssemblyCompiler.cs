@@ -31,19 +31,19 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private readonly TypeResolver _typeResolver;
         private readonly TypeManager _typeManager;
-        private readonly LibraryDefinitionsBuilder _libraryDefinitionsBuilder;
+        private readonly ExpressionBuilderService _expressionBuilderService;
         private readonly Factory<CSharpSourceCodeWriter> _cSharpSourceCodeWriterFactory;
         private readonly Lazy<Assembly[]> _referencesLazy;
 
         public AssemblyCompiler(
-            LibraryDefinitionsBuilder libraryDefinitionsBuilder,
+            ExpressionBuilderService expressionBuilderService,
             [FromKeyedServices("Fhir")] TypeResolver typeResolver,
             Factory<CSharpSourceCodeWriter> cSharpSourceCodeWriterFactory,
             [FromKeyedServices("Fhir")] TypeManager? typeManager)
         {
             _typeResolver = typeResolver;
             _cSharpSourceCodeWriterFactory = cSharpSourceCodeWriterFactory;
-            _libraryDefinitionsBuilder = libraryDefinitionsBuilder;
+            _expressionBuilderService = expressionBuilderService;
             _typeManager = typeManager ?? new TypeManager(typeResolver);
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var all = new DefinitionDictionary<LambdaExpression>();
             foreach (var package in elmPackages)
             {
-                var expressions = _libraryDefinitionsBuilder.BuildLibraryDefinitions(package);
+                var expressions = _expressionBuilderService.BuildLibraryDefinitions(package);
                 all.Merge(expressions);
             }
 

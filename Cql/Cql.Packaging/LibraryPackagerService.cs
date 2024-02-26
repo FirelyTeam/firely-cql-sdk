@@ -17,16 +17,16 @@ internal class LibraryPackagerService
 {
     private readonly AssemblyCompiler _assemblyCompiler;
     private readonly TypeResolver _typeResolver;
-    private readonly LibraryDefinitionsBuilder _libraryDefinitionsBuilder;
+    private readonly ExpressionBuilderService _expressionBuilderService;
 
     public LibraryPackagerService(
         [FromKeyedServices("Fhir")] TypeResolver typeResolver,
         AssemblyCompiler assemblyCompiler,
-        LibraryDefinitionsBuilder libraryDefinitionsBuilder)
+        ExpressionBuilderService expressionBuilderService)
     {
         _typeResolver = typeResolver;
         _assemblyCompiler = assemblyCompiler;
-        _libraryDefinitionsBuilder = libraryDefinitionsBuilder;
+        _expressionBuilderService = expressionBuilderService;
     }
 
     internal IEnumerable<Resource> PackageResources(
@@ -183,7 +183,7 @@ internal class LibraryPackagerService
         {
             try
             {
-                _libraryDefinitionsBuilder.BuildLibraryDefinitions(library!);
+                _expressionBuilderService.BuildLibraryDefinitions(library!);
             }
             catch (Exception e)
             {

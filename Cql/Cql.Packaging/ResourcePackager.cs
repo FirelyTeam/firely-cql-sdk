@@ -77,11 +77,11 @@ namespace Hl7.Cql.Packaging
             TypeManager typeManager = new(fhirTypeResolver);
             LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
             ILogger<ExpressionBuilder> expressionBuilderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-            LibraryDefinitionsBuilder libraryDefinitionsBuilder = new(expressionBuilderLogger, cqlOperatorsBinding, typeManager);
+            ExpressionBuilderService expressionBuilderService = new(expressionBuilderLogger, cqlOperatorsBinding, typeManager);
             ILogger<CSharpSourceCodeWriter> cSharpSourceCodeWriterL = logFactory.CreateLogger<CSharpSourceCodeWriter>();
             CSharpSourceCodeWriter cSharpSourceCodeWriter = new(cSharpSourceCodeWriterL);
-            AssemblyCompiler assemblyCompiler = new(libraryDefinitionsBuilder, fhirTypeResolver, cSharpSourceCodeWriter, typeManager);
-            LibraryPackagerService resourcePackagerService = new(fhirTypeResolver, assemblyCompiler, libraryDefinitionsBuilder);
+            AssemblyCompiler assemblyCompiler = new(expressionBuilderService, fhirTypeResolver, cSharpSourceCodeWriter, typeManager);
+            LibraryPackagerService resourcePackagerService = new(fhirTypeResolver, assemblyCompiler, expressionBuilderService);
 
             IDictionary<string, Library> librariesByNameAndVersion = LibraryLoader.LoadLibraries(elmDir);
             DirectedGraph directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();

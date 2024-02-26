@@ -5,13 +5,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibraryDefinitionsBuilder
+internal class ExpressionBuilderService
 {
     private readonly ILogger<ExpressionBuilder> _logger;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
 
-    public LibraryDefinitionsBuilder(
+    public ExpressionBuilderService(
         ILogger<ExpressionBuilder> logger, 
         OperatorBinding operatorBinding,
         TypeManager typeManager)

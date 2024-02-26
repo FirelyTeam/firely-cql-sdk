@@ -91,7 +91,7 @@ internal static class DependencyInjection
         services.TryAddSingleton<OperatorBinding, PackagerCqlOperatorBinding>();
         services.TryAddSingleton<CSharpSourceCodeWriter>();
         services.TryAddSingleton<AssemblyCompiler>();
-        services.TryAddSingleton<LibraryDefinitionsBuilder>();
+        services.TryAddSingleton<ExpressionBuilderService>();
     }
 
     public static void TryAddFactoryPattern(this IServiceCollection services)
