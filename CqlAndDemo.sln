@@ -246,6 +246,7 @@ Global
 		{7D787B73-D44A-4B65-B83F-4AF4A752F26C} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		FileExplorer = |build\
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
 	EndGlobalSection
 EndGlobal
