@@ -2245,7 +2245,7 @@ namespace Hl7.Cql.Compiler
             throw new ArgumentException($"Parameter {op.name} hasn't been defined yet.", nameof(op));
         }
 
-        protected MemberInfo GetProperty(Type type, string name)
+        protected internal MemberInfo GetProperty(Type type, string name)
         {
             if (type.IsGenericType)
             {
@@ -2261,7 +2261,9 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            var member = type.GetProperty(name, BindingFlags.IgnoreCase | BindingFlags.Public | BindingFlags.Instance) ?? throw new ArgumentException($"Unknown property {name} on type {type}.");
+            var member = TypeResolver.GetProperty(type, name);
+            if (member is null)
+                throw new ArgumentException($"Couldn't find property {name} on type {type}");
             return member;
         }
 
