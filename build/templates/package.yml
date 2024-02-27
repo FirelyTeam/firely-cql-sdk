@@ -2,14 +2,15 @@ parameters:
   # Default values
   useVersionSuffix: true
   artifactName: 'NuGetPackages'
+  solutionFile: 'Cql.slnf'
 
 steps:
   # Package nugets
-  - script: dotnet pack --no-build --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --output $(Build.artifactStagingDirectory)/packages
+  - script: dotnet pack ${{ parameters.solutionFile }} --no-build --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --output $(Build.artifactStagingDirectory)/packages
     displayName: 'dotnet pack $(buildConfiguration) with version suffix'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'true'))
 
-  - script: dotnet pack --no-build --configuration $(buildConfiguration) --output $(Build.artifactStagingDirectory)/packages
+  - script: dotnet pack ${{ parameters.solutionFile }} --no-build --configuration $(buildConfiguration) --output $(Build.artifactStagingDirectory)/packages
     displayName: 'dotnet pack $(buildConfiguration)'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
