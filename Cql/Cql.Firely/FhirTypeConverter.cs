@@ -63,6 +63,8 @@ namespace Hl7.Cql.Fhir
             add((M.Markdown p) => p.Value);
             add((M.Instant p) => p.Value);
             add((M.FhirUrl p) => p.Value);
+            add((M.Integer c) => new UnsignedInt(c.Value));
+            add((M.Integer c) => new PositiveInt(c.Value));
             add((M.Code c) => c.Value);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
