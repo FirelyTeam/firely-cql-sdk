@@ -33,6 +33,19 @@ namespace CoreTests
         }
 
         [TestMethod]
+        public void FHIRTypeConversionTest_1_0_0()
+        {
+            var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
+            var typeManager = new TypeManager(TypeResolver);
+            var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
+            var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
+            var logger = CreateLogger();
+            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var expressions = eb.Build();
+            Assert.IsNotNull(expressions);
+        }
+
+        [TestMethod]
         public void QueriesTest_1_0_0()
         {
             var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
