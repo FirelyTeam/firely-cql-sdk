@@ -383,7 +383,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             Expression initializeOverload(OverloadedFunctionDef function, string? libraryName, Expression[] arguments, bool fluent)
             {
-                var result = InvocationBuilder.SelectBestOverload(function, arguments);
+                var result = InvocationBuilder.MatchSignature(function, arguments);
                 if (result.Compatible)
                 {
                     var expression = InvocationBuilder.Invoke(result.Function, libraryName, arguments);

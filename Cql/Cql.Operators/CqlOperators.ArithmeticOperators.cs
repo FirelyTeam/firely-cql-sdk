@@ -281,7 +281,7 @@ namespace Hl7.Cql.Runtime
             else
             {
                 if (argument == 1m && @base == 1m)
-                    return 0m;
+                    return null;
                 var result = (decimal?)Math.Log((double)argument, (double)@base);
                 return result;
             }

@@ -110,12 +110,14 @@ namespace Hl7.Cql.CqlToElm.Builtin
             new(EmptyOperands, result, typeof(T).Name);
         private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
             new(new[] { argument }, result, name ?? typeof(T).Name);
+        private static SystemFunction<T> unaryWithPrecision<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+            new(new[] { argument, StringType }, result, name ?? typeof(T).Name, 1);
         private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
             new(new[] { first, second }, result, name ?? typeof(T).Name);
         private static SystemFunction<T> binaryWithPrecision<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
             new(new[] { first, second, StringType, }, result, name ?? typeof(T).Name, 2);
-        private static SystemFunction<T> nary<T>(TypeSpecifier[] operands, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
-            new(operands, result, typeof(T).Name, requiredParameterCount);
+        private static SystemFunction<T> nary<T>(TypeSpecifier[] operands, int requiredParameterCount, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+            new(operands, result, name ?? typeof(T).Name, requiredParameterCount);
         private static SystemFunction<T> nary<T>(TypeSpecifier operandType, int operandCount, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
             new(Enumerable.Range(0, operandCount).Select(i => operandType).ToArray(), result, typeof(T).Name, requiredParameterCount);
         private static SystemFunction<T> aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
@@ -137,14 +139,17 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<And> And = binary<And>(BooleanType, BooleanType, BooleanType);
         public static SystemFunction<AnyTrue> AnyTrue = aggregate<AnyTrue>(BooleanType, BooleanType);
         public static OverloadedFunctionDef Avg = aggregate<Avg>(T, T).For(T, DecimalType, QuantityType);
+        public static OverloadedFunctionDef Between = nary<Between>(new[] { T, T, T }, 3, BooleanType).For(T, OrderedTypes.ToArray());
         public static SystemFunction<Case> Case = new SystemFunction<Case>(new TypeSpecifier[] { BooleanType, T, T }, T);
         public static OverloadedFunctionDef Ceiling = unary<Ceiling>(T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef Coalesce = nary<Coalesce>(new[] { T, T, T, T, T }, 2, T).Combine(unary<Coalesce>(T.ToListType(), T));
         public static SystemFunction<ToConcept> CodeToConcept = unary<ToConcept>(CodeType, ConceptType);
         public static SystemFunction<Combine> Combine = nary<Combine>(new TypeSpecifier[] { StringType.ToListType(), StringType }, 1, StringType);
         public static SystemFunction<Concatenate> Concatenate = binary<Concatenate>(StringType, StringType, StringType);
+        public static OverloadedFunctionDef Contains = OverloadedFunctionDef.Create(binary<Contains>(T.ToListType(), T, BooleanType), binary<Contains>(T.ToIntervalType(), T, BooleanType));
         public static SystemFunction<Count> Count = aggregate<Count>(T, IntegerType);
         public static SystemFunction<Date> Date = nary<Date>(IntegerType, 3, 1, DateType);
+        public static SystemFunction<DateFrom> DateFrom = unary<DateFrom>(DateTimeType, DateType);
         public static SystemFunction<DateTime> DateTime = nary<DateTime>(new[] { IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, IntegerType, DecimalType }, 1, DateTimeType);
         public static SystemFunction<ToDateTime> DateToDateTime = unary<ToDateTime>(DateType, DateTimeType);
         public static SystemFunction<ToQuantity> DecimalToQuantity = unary<ToQuantity>(DecimalType, QuantityType);
@@ -169,7 +174,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Floor = unary<Floor>(T, T).For(T, NumericTypes);
         public static OverloadedFunctionDef HighBoundary = binary<HighBoundary>(T, IntegerType, T).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Implies> Implies = binary<Implies>(BooleanType, BooleanType, BooleanType);
-        public static OverloadedFunctionDef In = OverloadedFunctionDef.Create(binary<In>(T, T.ToListType(), BooleanType), binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType));
+        public static OverloadedFunctionDef In = binaryWithPrecision<In>(T, T.ToIntervalType(), BooleanType).For(T, OrderedTypes.ToArray())
+            .Combine(binary<In>(T, T.ToListType(), BooleanType));
         public static OverloadedFunctionDef IncludedIn = OverloadedFunctionDef.Create(binary<IncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<IncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef Includes = OverloadedFunctionDef.Create(
             binary<Contains>(T.ToListType(), T, BooleanType, nameof(Elm.Includes)),
@@ -184,13 +190,13 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<IsFalse> IsFalse = unary<IsFalse>(BooleanType, BooleanType);
         public static SystemFunction<IsNull> IsNull = unary<IsNull>(AnyType, BooleanType);
         public static SystemFunction<IsTrue> IsTrue = unary<IsTrue>(BooleanType, BooleanType);
-        public static OverloadedFunctionDef Greater = binary<Greater>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
-        public static OverloadedFunctionDef GreaterOrEqual = binary<GreaterOrEqual>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
+        public static OverloadedFunctionDef Greater = binary<Greater>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
+        public static OverloadedFunctionDef GreaterOrEqual = binary<GreaterOrEqual>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
         public static SystemFunction<Last> Last = unary<Last>(T.ToListType(), T);
         public static SystemFunction<LastPositionOf> LastPositionOf = binary<LastPositionOf>(StringType, StringType, IntegerType);
         public static SystemFunction<Length> Length = unary<Length>(T.ToListType(), IntegerType);
-        public static OverloadedFunctionDef Less = binary<Less>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
-        public static OverloadedFunctionDef LessOrEqual = binary<LessOrEqual>(T, T, BooleanType).For(T, ValidOrderedTypes.Append(StringType).ToArray());
+        public static OverloadedFunctionDef Less = binary<Less>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
+        public static OverloadedFunctionDef LessOrEqual = binary<LessOrEqual>(T, T, BooleanType).For(T, OrderedTypes.ToArray());
         public static SystemFunction<Ln> Ln = unary<Ln>(DecimalType, DecimalType);
         public static SystemFunction<ToDecimal> LongToDecimal = unary<ToDecimal>(LongType, DecimalType);
         public static SystemFunction<ToQuantity> LongToQuantity = unary<ToQuantity>(LongType, QuantityType);
@@ -205,7 +211,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
             .Combine(
                 nary<Message>(new TypeSpecifier[] { T.ToListType(), BooleanType, StringType, StringType, StringType }, 5, T.ToListType()), 
                 nary<Message>(new TypeSpecifier[] { T.ToIntervalType(), BooleanType, StringType, StringType, StringType }, 5, T.ToIntervalType()));
-
         public static OverloadedFunctionDef Min = aggregate<Min>(T, T).For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType, StringType);
         public static SystemFunction<MinValue> MinValue = nullary<MinValue>(T);
         public static SystemFunction<Mode> Mode = aggregate<Mode>(T, T);
@@ -225,6 +230,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static OverloadedFunctionDef Power = binary<Power>(T, T, T).For(T, IntegerType, LongType, DecimalType);
         public static OverloadedFunctionDef Precision = unary<Precision>(T, IntegerType).For(T, DecimalType, DateType, DateTimeType, TimeType);
         public static SystemFunction<Predecessor> Predecessor = unary<Predecessor>(T, T);
+        public static OverloadedFunctionDef ProperBetween = nary<ProperBetween>(new[] { T, T, T }, 3, BooleanType).For(T, OrderedTypes.ToArray());
         public static OverloadedFunctionDef ProperIn = OverloadedFunctionDef.Create(binaryWithPrecision<ProperIn>(T, T.ToIntervalType(), BooleanType), binaryWithPrecision<ProperIn>(T, T.ToListType(), BooleanType));
         public static OverloadedFunctionDef ProperIncludedIn = OverloadedFunctionDef.Create(binary<ProperIncludedIn>(T.ToListType(), T.ToListType(), BooleanType), binaryWithPrecision<ProperIncludedIn>(T.ToIntervalType(), T.ToIntervalType(), BooleanType));
         public static OverloadedFunctionDef ProperIncludes = OverloadedFunctionDef.Create(
@@ -255,6 +261,11 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<Slice> Take = binary<Slice>(T.ToListType(), IntegerType, T.ToListType(), "Take");
         public static SystemFunction<Slice> Tail = unary<Slice>(T.ToListType(), T.ToListType(), "Tail");
         public static SystemFunction<Time> Time = nary<Time>(IntegerType, 4, 1, TimeType);
+        public static OverloadedFunctionDef TimeComponent = unaryWithPrecision<DateTimeComponentFrom>(T, IntegerType)
+            .ValidateWith(Validators.Validate)
+            .For(T, DateType, DateTimeType, TimeType);
+        public static SystemFunction<TimeFrom> TimeFrom = unary<TimeFrom>(DateTimeType, TimeType);
+        public static SystemFunction<TimezoneOffsetFrom> TimezoneOffsetFrom = unary<TimezoneOffsetFrom>(DateTimeType, DecimalType);
         public static SystemFunction<TimeOfDay> TimeOfDay = nullary<TimeOfDay>(TimeType);
         public static OverloadedFunctionDef ToBoolean = unary<ToBoolean>(T, BooleanType).For(T, IntegerType, LongType, DecimalType, StringType);
         public static OverloadedFunctionDef ToConcept = unary<ToConcept>(T, ConceptType).For(T, CodeType, CodeType.ToListType());
@@ -283,6 +294,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
         internal static void Validate(DurationBetween db) => db
             .HasSameOperandTypes()
             .HasValidPrecision(db.operand[0].resultTypeSpecifier, db.precisionSpecified, db.precision);
+
+        internal static void Validate(DateTimeComponentFrom dtc) =>
+            dtc.HasValidPrecision(dtc.operand.resultTypeSpecifier, dtc.precisionSpecified, dtc.precision);
 
         public static T HasSameOperandTypes<T>(this T element) where T : Element =>
             element switch

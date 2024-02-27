@@ -37,7 +37,7 @@ namespace Hl7.Cql.Elm
         /// <summary>
         /// Determines if a types can be used as the point type for an interval, and has a successor and predecessor.
         /// </summary>
-        public static bool IsValidOrderedType(this TypeSpecifier type) => SystemTypes.ValidOrderedTypes.Contains(type);
+        public static bool IsOrderedType(this TypeSpecifier type) => SystemTypes.OrderedTypes.Contains(type);
 
         /// <summary>
         /// Determines if a type is numeric.

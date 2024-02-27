@@ -29,7 +29,7 @@ namespace Hl7.Cql.CqlToElm.Test
             MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
-                define private Interval_InvalidType: Interval['hello','world']
+                define private Interval_InvalidType: Interval[{},{}]
             ", "Intervals can only be constructed for orderable types*");
         }
 

@@ -198,7 +198,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 .WithResultType(type);
         }
 
-
+        // expression('in' | 'contains') dateTimePrecisionSpecifier? expression
+        public override Expression VisitMembershipExpression([NotNull] cqlParser.MembershipExpressionContext context)
+        {
+            var terms = context.expression();
+            var lhs = Visit(terms[0]);
+            var rhs = Visit(terms[1]);
+            Expression expression;
+            if (context.GetChild(1).GetText() == "in")
+            {
+                var precision = Precision(context.dateTimePrecisionSpecifier());
+                var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
+                var match = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
+                expression = InvocationBuilder.Invoke(match);
+            }
+            else
+            {
+                var match = InvocationBuilder.MatchSignature(SystemLibrary.Contains, new[] { lhs, rhs });
+                expression = InvocationBuilder.Invoke(match);
+            }
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
+        }
 
 
 
