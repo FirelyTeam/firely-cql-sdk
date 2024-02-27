@@ -14,6 +14,12 @@ namespace Hl7.Cql.Packaging.ResourceWriters
         public abstract void WriteResources(IEnumerable<Resource> resources);
 
         /// <summary>
+        /// Writes all the given resource.
+        /// </summary>
+        /// <param name="resource">the resource to write</param>
+        public abstract void WriteResource(Resource resource);
+
+        /// <summary>
         /// Ensures that the specified directory exists, and if it doesn't it creates it
         /// </summary>
         /// <param name="directory">the directory</param>
