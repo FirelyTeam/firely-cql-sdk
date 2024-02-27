@@ -17,7 +17,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Graph\Graph.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />

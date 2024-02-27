@@ -1,14 +1,19 @@
+using System.Collections.Concurrent;
 using System.Runtime.ExceptionServices;
+using System.Runtime.Loader;
 using System.Text;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
 using Hl7.Fhir.Model;
+using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
 using Library = Hl7.Fhir.Model.Library;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging;
 
@@ -391,4 +396,101 @@ internal class LibraryPackager
 
         return parameterDefinition;
     }
+
+    #region Static Utiltities
+
+    [UsedImplicitly]
+    public static IDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
+    {
+        var dict = new ConcurrentDictionary<string, Elm.Library>();
+        var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
+        Parallel.ForEach(files, file =>
+        {
+            var library = Elm.Library.LoadFromJson(file);
+            if (library?.NameAndVersion != null)
+            {
+                dict.TryAdd(library.NameAndVersion, library);
+            }
+        });
+        return dict;
+    }
+
+    [UsedImplicitly]
+    public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
+    {
+        var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
+        using var fs = libFile.OpenRead();
+        var library = fs.ParseFhir<Library>();
+        var dependencies = library.GetDependencies(dir);
+        var allLibs = dependencies.AllLibraries();
+        var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+        allLibs.LoadAssemblies(asmContext);
+        
+        var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
+        using var tupleFs = tupleTypes.OpenRead();
+        var binaries = new[]
+        {
+                tupleFs.ParseFhir<Binary>()
+            };
+        
+        binaries.LoadAssembles(asmContext);
+        return asmContext;
+    }
+
+    [UsedImplicitly]
+#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
+    public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
+#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
+      string lib,
+      string version,
+      LogLevel logLevel = LogLevel.Error,
+      int cacheSize = 0)
+    {
+        var logFactory = LoggerFactory
+                      .Create(logging =>
+                      {
+                          logging.AddFilter(level => level >= logLevel);
+                          logging.AddConsole(console =>
+                          {
+                              console.LogToStandardErrorThreshold = LogLevel.Error;
+                          });
+                      });
+
+        return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
+    }
+
+    [UsedImplicitly]
+    public static AssemblyLoadContext LoadElm(
+        DirectoryInfo elmDirectory,
+        string lib,
+        string version,
+        ILoggerFactory logFactory,
+        int cacheSize)
+    {
+        var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
+        if (!elmFile.Exists)
+            elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
+        if (!elmFile.Exists)
+            throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
+        var library = Elm.Library.LoadFromJson(elmFile)
+            ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
+        var dependencies = library
+            .GetIncludedLibraries(elmDirectory)
+            .Packages()
+            .ToArray();
+
+        LibraryPackagerCreator creator = new LibraryPackagerCreator(logFactory);
+        var assemblyData = creator.AssemblyCompiler.Compile(dependencies);
+
+        var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+        foreach (var kvp in assemblyData)
+        {
+            var assemblyBytes = kvp.Value.Binary;
+            using var ms = new MemoryStream(assemblyBytes);
+            asmContext.LoadFromStream(ms);
+        }
+        return asmContext;
+    }
+
+    #endregion 
 }

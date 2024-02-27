@@ -11,7 +11,6 @@ Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Primitives.CqlPri
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
-Hl7.Cql.Packaging.ElmLibraryExtensions
 Hl7.Cql.Packaging.CqlTypeToFhirMapping
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.init -> void
@@ -22,6 +21,7 @@ Hl7.Cql.Packaging.CqlTypeToFhirMapping.FhirType.init -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Cql.Packaging.CqlTypeToFhirMapping! original) -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Fhir.Model.FHIRAllTypes? FhirType, Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType = null) -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.Deconstruct(out Hl7.Fhir.Model.FHIRAllTypes? FhirType, out Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, out Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType) -> void
+Hl7.Cql.Packaging.LibraryExtensions
 Hl7.Cql.Packaging.LibraryLoader
 Hl7.Cql.Packaging.ResourcePackageArgs
 Hl7.Cql.Packaging.ResourcePackageArgs.ElmDir.get -> System.IO.DirectoryInfo!
@@ -36,7 +36,7 @@ override Hl7.Cql.Packaging.ResourcePackageArgs.GetHashCode() -> int
 override Hl7.Cql.Packaging.ResourcePackageArgs.Equals(object? obj) -> bool
 override Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 override Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
-static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
+static Hl7.Cql.Packaging.LibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
 static Hl7.Cql.Packaging.LibraryLoader.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> System.Collections.Generic.IDictionary<string!, Hl7.Cql.Elm.Library!>!
 virtual Hl7.Cql.Packaging.ResourcePackageArgs.PrintMembers(System.Text.StringBuilder! builder) -> bool
 virtual Hl7.Cql.Packaging.ResourcePackageArgs.Equals(Hl7.Cql.Packaging.ResourcePackageArgs? other) -> bool
