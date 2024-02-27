@@ -62,7 +62,7 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>The invocation of the best-matching overload.</returns>
         internal Expression Invoke(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
-            var result = SelectBestOverload(overloadedFunction, arguments);
+            var result = MatchSignature(overloadedFunction, arguments);
             var newArguments = result.Arguments
                 .Select(cr => cr.Result)
                 .ToArray();
@@ -239,7 +239,7 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// Picks the function which has the lowest maximum cost in converting its operands to be compatible with the invocation.
         /// </summary>
-        internal SignatureMatchResult SelectBestOverload(OverloadedFunctionDef overloadedFunction, Expression[] arguments)
+        internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, Expression[] arguments)
         {
             var matches = overloadedFunction.Functions
                 .Select(function => MatchSignature(function, arguments))

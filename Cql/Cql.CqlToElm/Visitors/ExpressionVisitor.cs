@@ -100,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var validate = Option(o => o.ValidateIntervals);
             if (validate)
             {
-                if (pointType.IsValidOrderedType())
+                if (pointType.IsOrderedType())
                 {
                     if (low is Quantity lowQuantity && high is Quantity highQuantity
                         && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
@@ -110,7 +110,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 else if (low is not Null || high is not Null) // the Interval(null,null) case is handled separately below.
                 {
-                    interval.AddError($"Intervals can only be constructed for orderable types ({string.Join(", ", SystemTypes.ValidOrderedTypes)}). Type {pointType} is not allowed.");
+                    interval.AddError($"Intervals can only be constructed for orderable types ({string.Join(", ", SystemTypes.OrderedTypes)}). Type {pointType} is not allowed.");
                 }
             }
             var allowNullIntervals = Option(o => o.AllowNullIntervals);
@@ -294,6 +294,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
         }
         private Literal? Precision(cqlParser.DateTimePrecisionSpecifierContext context)
+        {
+            var dtp = context?.dateTimePrecision();
+            if (dtp is null)
+                return null;
+            else
+            {
+                var name = Enum.GetName(dtp.Parse());
+                if (name is null)
+                    return null;
+                else return ElmFactory.Literal(name);
+            }
+        }
+
+        private Literal? Precision(cqlParser.DateTimeComponentContext context)
         {
             var dtp = context?.dateTimePrecision();
             if (dtp is null)

@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 AggregateExpression ae => Populate(ae, arguments),
                 Combine combine => Populate(combine, arguments),
-                BinaryExpression be => Populate(be, arguments),
+                Between between => Populate(between, arguments),
                 Date d => Populate(d, arguments),
                 Elm.DateTime dt => Populate(dt, arguments),
                 Expression e when arguments.Length == 0 => e,
@@ -32,14 +32,16 @@ namespace Hl7.Cql.CqlToElm
                 Message msg => Populate(msg, arguments),
                 NaryExpression ne => Populate(ne, arguments),
                 PositionOf po => Populate(po, arguments),
+                ProperBetween pb => Populate(pb, arguments),
                 Round round => Populate(round, arguments),
                 Slice slice => Populate(function, slice, arguments),
                 Split split => Populate(split, arguments),
                 Substring sub => Populate(sub, arguments),
-                TernaryExpression te => Populate(te, arguments),
                 Time time => Populate(time, arguments),
+
                 UnaryExpression ue => Populate(ue, arguments),
-                
+                BinaryExpression be => Populate(be, arguments),
+                TernaryExpression te => Populate(te, arguments),
                 IHasSource ihs => (Expression)Populate(ihs, arguments),
                 _ => throw new InvalidOperationException($"Population of {result.GetType()} is not implemented.")
             };
@@ -145,6 +147,18 @@ namespace Hl7.Cql.CqlToElm
             aggregate.source = arguments[0];
             return aggregate;
         }
+        internal And Populate(Between binary, Expression[] arguments)
+        {
+            // we use Between to pattern match this overload, but between returns an And
+            var gt = new GreaterOrEqual { operand = new[] { arguments[0], arguments[1] } }
+                .WithResultType(SystemTypes.BooleanType);
+            var lt = new LessOrEqual { operand = new[] { arguments[0], arguments[2] } }
+                .WithResultType(SystemTypes.BooleanType);
+            var and = new And { operand = new Expression[] { gt, lt } };
+            return and;
+        }
+
+
         internal BinaryExpression Populate(BinaryExpression binary, Expression[] arguments)
         {
             if (binary is IHasPrecision hp)
@@ -253,6 +267,18 @@ namespace Hl7.Cql.CqlToElm
             po.pattern = arguments[1];
             return po;
         }
+        internal And Populate(ProperBetween between, Expression[] arguments)
+        {
+            // we use ProperBetween to pattern match this overload,
+            // but proper between returns an And
+            var gt = new Greater { operand = new[] { arguments[0], arguments[1] } }
+                .WithResultType(SystemTypes.BooleanType);
+            var lt = new Less { operand = new[] { arguments[0], arguments[2] } }
+                .WithResultType(SystemTypes.BooleanType);
+            var and = new And { operand = new Expression[] { gt, lt } };
+            return and;
+        }
+
 
         internal Round Populate(Round round, Expression[] arguments)
         {

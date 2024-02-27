@@ -179,7 +179,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 literal = ElmFactory.Literal(longValue);
             else
             {
-                literal = ElmFactory.Literal(valueText);
+                literal = ElmFactory.Literal(valueText)
+                    .WithResultType(SystemTypes.LongType);
+                literal.valueType = SystemTypes.LongType.name;
                 if (validateLiterals)
                     literal.AddError($"Unparseable long literal {valueText}.", ErrorType.syntax);
             }
@@ -256,49 +258,62 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //   | ('+' | '-') expressionTerm                                                    #polarityExpressionTerm
         public override Expression VisitPolarityExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.PolarityExpressionTermContext context)
         {
-            var sign = context.GetChild(0).GetText();
-            var expression = Visit(context.expressionTerm());
+            var text = context.GetText();
+            if (text == "-2147483648")
+                return ElmFactory.Literal(-2147483648)
+                    .WithLocator(context.Locator());
+            else if (text == "-9223372036854775808L")
+                return ElmFactory.Literal(-9223372036854775808L)
+                    .WithLocator(context.Locator());
+            else if (text == "-99999999999999999999.99999999")
+                return ElmFactory.Literal(-99999999999999999999.99999999m)
+                    .WithLocator(context.Locator());
+            else
+            {
+                var sign = context.GetChild(0).GetText();
+                var expression = Visit(context.expressionTerm());
 
-            if (expression is Literal literal)
-            {
-                literal.value = apply(sign, literal.value);
-                return literal;
-            }
-            else if (sign == "-")
-            {
-                if (expression is Quantity quantity)
+                if (expression is Literal literal)
                 {
-                    quantity.value *= -1;
-                    return quantity;
+                    literal.value = apply(sign, literal.value);
+                    return literal;
                 }
-                else
+                else if (sign == "-")
                 {
-                    return new Negate
+                    if (expression is Quantity quantity)
                     {
-                        operand = expression,
-                    }
-                    .WithLocator(context.Locator())
-                    .WithResultType(expression.resultTypeSpecifier);
-                }
-            }
-            else return expression;
-
-            string apply(string polarity, string number)
-            {
-                if (polarity == "-")
-                {
-                    if (number.StartsWith("-"))
-                    {
-                        return number.Substring(1);
+                        quantity.value *= -1;
+                        return quantity;
                     }
                     else
                     {
-                        return "-" + number;
+                        return new Negate
+                        {
+                            operand = expression,
+                        }
+                        .WithLocator(context.Locator())
+                        .WithResultType(expression.resultTypeSpecifier);
                     }
                 }
-                else
+                else return expression;
+
+                string apply(string polarity, string number)
                 {
-                    return number;
+                    if (polarity == "-")
+                    {
+                        if (number.StartsWith("-"))
+                        {
+                            return number.Substring(1);
+                        }
+                        else
+                        {
+                            return "-" + number;
+                        }
+                    }
+                    else
+                    {
+                        return number;
+                    }
                 }
             }
         }

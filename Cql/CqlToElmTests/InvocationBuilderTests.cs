@@ -218,7 +218,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MatchInvalidAddSignature()
         {
             var arguments = new Expression[] { Quantity(), DateTime() };
-            var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Add, arguments);
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Add, arguments);
             Assert.IsFalse(result.Compatible);
         }
 
@@ -228,7 +228,7 @@ namespace Hl7.Cql.CqlToElm.Test
             //define"Includes Null Left Input": null includes {2}
 
             var arguments = new Expression[] { Null, List(Integer(2)) };
-            var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Includes, arguments);
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Includes, arguments);
             Assert.IsTrue(result.Compatible);
         }
 
@@ -237,7 +237,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             //define "TestMessageTrace Input": Message({ 3,4,5},true,'300','Trace','This is a trace')
             var arguments = new Expression[] { List(Integer(3)), Boolean(true), String("300"), String("Trace"), String("This is a trace") };
-            var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Message, arguments);
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Message, arguments);
             Assert.IsTrue(result.Compatible);
         }
 
@@ -254,7 +254,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MatchEqualWithIntervalArguments()
         {
             var arguments = new Expression[] { Interval(Integer(1), Integer(2)), Interval(Null, Null) };
-            var result = InvocationBuilder.SelectBestOverload(SystemLibrary.Equal, arguments);
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Equal, arguments);
             Assert.IsTrue(result.Compatible);
         }
 
@@ -280,6 +280,24 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.IsTrue(result.Compatible);
             Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.MostExpensive);
+        }
+
+        [TestMethod]
+        public void MatchIntegerInIntervalAny()
+        {
+            var arguments = new Expression[] { Integer(), Interval(Null, Null) };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.In, arguments);
+            Assert.IsTrue(result.Compatible);
+            Assert.AreEqual(ConversionCost.Cast, result.MostExpensive);
+        }
+        [TestMethod]
+        public void NullContainsIntegerAmibugious()
+        {
+            // null contains 5
+            var arguments = new Expression[] { Null, Integer(5) };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Contains, arguments);
+            Assert.IsFalse(result.Compatible);
+            Assert.IsTrue(result.IsAmbiguous);
         }
 
     }

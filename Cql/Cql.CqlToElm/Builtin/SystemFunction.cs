@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
     internal abstract class SystemFunction: FunctionDef
     {
         public abstract Type ElmNodeType { get; }
-        public abstract int? RequiredParameterCount { get; }
+        public abstract int? RequiredParameterCount { get; protected set; }
 
         /// <summary>
         /// Calls all validators associated with this function def on the specified call, adding any resulting errors.
@@ -67,11 +67,12 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 resultTypeName = newReturnType is NamedTypeSpecifier rnts ? rnts.name : null,
                 resultTypeSpecifier = newReturnType,
                 validators = new(validators),
+                RequiredParameterCount = RequiredParameterCount,
             };
 
         public override Type ElmNodeType => typeof(T);
 
-        public override int? RequiredParameterCount { get; }
+        public override int? RequiredParameterCount { get; protected set; }
         private SystemFunction()
         {
         }

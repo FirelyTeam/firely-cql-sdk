@@ -14,7 +14,9 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
+        public static void Initialize(TestContext context) => ClassInitialize(co =>
+        {
+        });
 #pragma warning restore IDE0060 // Remove unused parameter
         internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
 
@@ -264,6 +266,15 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
                 Assert.AreEqual("-2147483649", literal.value);
             }
+        }
+
+        [TestMethod]
+
+        public void Long_MinValue()
+        {
+            var lib = createLibraryForExpression("-9223372036854775808L");
+            var literal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>(false);
+            literal.Should().HaveType(SystemTypes.LongType);
         }
 
         #endregion
@@ -1679,7 +1690,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var output = createLibraryForExpression("1");
             var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
             var context = FhirCqlContext.ForBundle();
-            var equalsOverload = InvocationBuilder.SelectBestOverload(SystemLibrary.Equal, new Expression[] { ceiling, literal });
+            var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, new Expression[] { ceiling, literal });
             equalsOverload.Compatible.Should().BeTrue();
             var invokeEquals = InvocationBuilder.Invoke(equalsOverload, null);
             invokeEquals.GetErrors().Should().BeEmpty();

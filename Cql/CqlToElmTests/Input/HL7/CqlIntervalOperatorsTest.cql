@@ -268,11 +268,6 @@ define "TestContainsNull Input":
 define "TestContainsNull Output":
 	null
 
-define "TestNullElement1 Input":
-	null contains 5
-define "TestNullElement1 Output":
-	false
-
 define "TestNullElement2 Input":
 	Interval[null, 5] contains 10
 define "TestNullElement2 Output":

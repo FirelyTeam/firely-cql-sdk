@@ -79,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var operand = Visit(context.expressionTerm());
             var expression = InvocationBuilder.Invoke(SystemLibrary.Predecessor, operand);
 
-            if (!operand.resultTypeSpecifier.IsValidOrderedType())
+            if (!operand.resultTypeSpecifier.IsOrderedType())
                 expression.AddError("Predecessor can only be applied to types that are ordered.");
 
             return expression
@@ -93,7 +93,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var operand = Visit(context.expressionTerm());
             var expression = InvocationBuilder.Invoke(SystemLibrary.Successor, operand);
 
-            if (!operand.resultTypeSpecifier.IsValidOrderedType())
+            if (!operand.resultTypeSpecifier.IsOrderedType())
                 expression.AddError("Successor can only be applied to types that are ordered.");
 
             return expression
@@ -131,7 +131,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => throw new InvalidOperationException($"Parser returned unknown extent '{extent}' in a type extent expression.")
             };
 
-            if (!typeSpecifier.IsValidOrderedType())
+            if (!typeSpecifier.IsOrderedType())
                 expression.AddError($"Can only determine {extent} for types that are ordered.");
             
             return expression
@@ -255,6 +255,40 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var unitContext = Visit(context.unit());
             }
             throw new NotImplementedException();
+        }
+
+        public override Expression VisitTimeUnitExpressionTerm([NotNull] cqlParser.TimeUnitExpressionTermContext context)
+        {
+            var operand = Visit(context.expressionTerm());
+            var dtcText = context.dateTimeComponent().GetText();
+            Expression expression;
+            if (dtcText == "date")
+            {
+                expression = InvocationBuilder.Invoke(SystemLibrary.DateFrom, operand);
+            }
+            else if (dtcText == "time")
+            {
+                expression = InvocationBuilder.Invoke(SystemLibrary.TimeFrom, operand);
+            }
+            else if (dtcText == "timezoneoffset")
+            {
+                expression = InvocationBuilder.Invoke(SystemLibrary.TimezoneOffsetFrom, operand);
+            }
+            else
+            {
+                var precision = Precision(context.dateTimeComponent());
+                if (precision is null)
+                    return new DateTimeComponentFrom { operand = operand }
+                        .AddError($"Invalid precision: {context.dateTimeComponent().GetText()}")
+                        .WithId()
+                        .WithLocator(context.Locator())
+                        .WithResultType(SystemTypes.IntegerType);
+                 expression = InvocationBuilder.Invoke(SystemLibrary.TimeComponent, operand, precision);
+
+            }
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
     }
 }

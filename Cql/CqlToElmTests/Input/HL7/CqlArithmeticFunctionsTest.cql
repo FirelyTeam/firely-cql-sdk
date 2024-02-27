@@ -336,19 +336,19 @@ define "Ln1000D Output":
 	6.90775528
 
 define "IntegerMinValue Input":
-	minimum Integer
+	minimum Integer <= 	-2147483648
 define "IntegerMinValue Output":
-	-2147483648
+	true
 
 define "LongMinValue Input":
-	minimum Long
+	minimum Long <= -9223372036854775808L
 define "LongMinValue Output":
-	-9223372036854775808L
+	true
 
 define "DecimalMinValue Input":
-	minimum Decimal
+	minimum Decimal <= -99999999999999999999.99999999
 define "DecimalMinValue Output":
-	-99999999999999999999.99999999
+	true
 
 define "DateTimeMinValue Input":
 	minimum DateTime
@@ -366,19 +366,19 @@ define "TimeMinValue Output":
 	@T00:00:00.000
 
 define "IntegerMaxValue Input":
-	maximum Integer
+	maximum Integer >= 2147483647
 define "IntegerMaxValue Output":
-	2147483647
+	true
 
 define "LongMaxValue Input":
-	maximum Long
+	maximum Long >= 9223372036854775807L
 define "LongMaxValue Output":
-	9223372036854775807L
+	true
 
 define "DecimalMaxValue Input":
-	maximum Decimal
+	maximum Decimal >= 99999999999999999999.99999999
 define "DecimalMaxValue Output":
-	99999999999999999999.99999999
+	true
 
 define "DateTimeMaxValue Input":
 	maximum DateTime

@@ -71,6 +71,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = dg.DynamicInvoke(ctx ?? FhirCqlContext.ForBundle());
             return result;
         }
+        internal static T? Run<T>(Expression expression, CqlContext? ctx = null) =>
+            (T?)Run(expression, ctx);
 
         internal static object? Run(Library library,
             Func<DefinitionDictionary<Delegate>, CqlContext> ctxFactory,

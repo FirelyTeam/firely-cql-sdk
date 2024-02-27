@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                     locator = existingOperand.locator,
                     operandTypeSpecifier = operandType,
                     resultTypeName = operandType is NamedTypeSpecifier onts ? onts.name : null,
-                    resultTypeSpecifier = operandType
+                    resultTypeSpecifier = operandType,
                 };
                 newOperands[j] = newOperand;
             }

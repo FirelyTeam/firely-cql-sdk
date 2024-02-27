@@ -9,6 +9,7 @@
 using Hl7.Cql.Model;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Dynamic;
 
 
 namespace Hl7.Cql.Elm
@@ -69,16 +70,20 @@ namespace Hl7.Cql.Elm
         /// <summary>
         /// The types that can be used as the point type for an interval, and have a successor and predecessor
         /// </summary>
-        internal static IReadOnlyCollection<NamedTypeSpecifier> ValidOrderedTypes = new[]
+        internal static IEnumerable<NamedTypeSpecifier> OrderedTypes
+        {
+            get
             {
-                IntegerType,
-                LongType,
-                DecimalType,
-                QuantityType,
-                DateType,
-                TimeType,
-                DateTimeType,
-            };
+                yield return IntegerType;
+                yield return LongType;
+                yield return DecimalType;
+                yield return QuantityType;
+                yield return DateType;
+                yield return TimeType;
+                yield return DateTimeType;
+                yield return StringType;
+            }
+        }
 
         internal static readonly TypeSpecifier[] NumericTypes = new[] { IntegerType, LongType, DecimalType, QuantityType };
     }
