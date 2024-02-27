@@ -15,7 +15,7 @@ parameters:
   zipAfterPublish: false
   checkoutSubmodules: false
   pool: {}
-  solutionFile: Cql.slnf
+  solutionFile: 'Cql.slnf'
 
 jobs:
 - job: Build
@@ -35,15 +35,15 @@ jobs:
         nuGetServiceConnections: ${{ parameters.nuGetServiceConnections }}
         nuGetSources: ${{ parameters.nuGetSources }}
       
-  - script: dotnet build $(solutionFile) --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true 
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) --no-restore /p:ContinuousIntegrationBuild=true 
     displayName: 'dotnet build $(buildConfiguration) with version suffix  and no restore'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'true')))
     
-  - script: dotnet build $(solutionFile) --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) --version-suffix $(build.buildNumber) /p:ContinuousIntegrationBuild=true
     displayName: 'dotnet build $(buildConfiguration) with version suffix'
     condition: and(succeeded(), and(eq('${{ parameters.useVersionSuffix }}', 'true'), eq('${{ parameters.restoreDependencies }}', 'false')))
 
-  - script: dotnet build $(solutionFile) --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true 
+  - script: dotnet build ${{ parameters.solutionFile }} --configuration $(buildConfiguration) /p:ContinuousIntegrationBuild=true 
     displayName: 'dotnet build $(buildConfiguration)'
     condition: and(succeeded(), eq('${{ parameters.useVersionSuffix }}', 'false'))
 
