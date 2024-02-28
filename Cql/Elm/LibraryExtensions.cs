@@ -4,25 +4,29 @@ using System.IO;
 using System.Linq;
 using Hl7.Cql.Graph;
 using JetBrains.Annotations;
-using ElmLibrary= Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Elm;
 
 #pragma warning disable CS1591
-internal static class LibraryExtensions
+public static class LibraryExtensions
 {
+    /// <summary>
+    /// Get a flat list of ELM libraries included in the set of libraries passed in. 
+    /// </summary>
+    /// <param name="libraries">top-level libraries</param>
+    /// <returns>flat list of all included libraries</returns>
     [UsedImplicitly]
-    public static IEnumerable<ElmLibrary> GetIncludedElmLibraries(this IEnumerable<ElmLibrary> libraries)
+    public static IEnumerable<Library> GetIncludedElmLibraries(this IEnumerable<Library> libraries)
     {
         var packageGraph = libraries.GetIncludedLibraries();
         var elmLibraries = packageGraph.Nodes.Values
-            .Select(node => node.Properties?[ElmLibrary.LibraryNodeProperty])
-            .OfType<ElmLibrary>()
+            .Select(node => node.Properties?[Library.LibraryNodeProperty])
+            .OfType<Library>()
             .ToArray();
         return elmLibraries;
     }
 
-    public static DirectedGraph GetIncludedLibraries(this IEnumerable<ElmLibrary> libraries)
+    internal static DirectedGraph GetIncludedLibraries(this IEnumerable<Library> libraries)
     {
         var buildOrder = new DirectedGraph();
         foreach (var library in libraries)
@@ -42,7 +46,7 @@ internal static class LibraryExtensions
         return buildOrder;
     }
 
-    private static DirectedGraph GetIncludedLibraries(ElmLibrary library, Func<string, string, ElmLibrary> locateLibrary)
+    private static DirectedGraph GetIncludedLibraries(Library library, Func<string, string, Library> locateLibrary)
     {
         var graph = GetDependencySubgraph(library, locateLibrary);
         graph.AddStartNode();
@@ -50,12 +54,12 @@ internal static class LibraryExtensions
         return graph;
     }
 
-    internal static DirectedGraph GetIncludedLibraries(this ElmLibrary library, DirectoryInfo libraryPath)
+    internal static DirectedGraph GetIncludedLibraries(this Library library, DirectoryInfo libraryPath)
     {
         var subgraph = GetDependencySubgraph(library, (name, version) =>
         {
             var stream = OpenLibrary(libraryPath, name, version);
-            var dependentLibrary = ElmLibrary.LoadFromJson((Stream)stream) ??
+            var dependentLibrary = Library.LoadFromJson((Stream)stream) ??
                                    throw new InvalidOperationException($"Cannot load ELM for {name} version {version}");
             return dependentLibrary;
         });
@@ -77,7 +81,7 @@ internal static class LibraryExtensions
         return stream;
     }
 
-    private static DirectedGraph GetDependencySubgraph(ElmLibrary library, Func<string, string, ElmLibrary> locateLibrary, bool includeLibraryProperty = true)
+    private static DirectedGraph GetDependencySubgraph(Library library, Func<string, string, Library> locateLibrary, bool includeLibraryProperty = true)
     {
         if (library is null)
         {
@@ -86,7 +90,7 @@ internal static class LibraryExtensions
         var thisGraph = new DirectedGraph();
         var properties = new Dictionary<string, object>();
         if (includeLibraryProperty)
-            properties.Add(ElmLibrary.LibraryNodeProperty, library);
+            properties.Add(Library.LibraryNodeProperty, library);
 
         var packageNode = new DirectedGraphNode
         {
