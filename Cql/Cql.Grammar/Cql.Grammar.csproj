@@ -11,7 +11,7 @@
         <NoWarn>RS0016</NoWarn>
     </PropertyGroup>
     
-    <ItemGroup Condition="'$(BuildingInsideVisualStudio)' != 'true'">
+    <ItemGroup>
         <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
         <AssemblyAttribute Include="System.CLSCompliantAttribute">
             <_Parameter1>true</_Parameter1>

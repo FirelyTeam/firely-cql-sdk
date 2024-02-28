@@ -102,10 +102,7 @@ namespace Hl7.Cql.CqlToElm.Test
                                 else
                                 {
                                     var eqr = InvocationBuilder.MatchSignature(SystemLibrary.Equal, new[] { inputDef.expression, outputDef.expression });
-                                    if (!eqr.Compatible)
-                                    {
-                                    }
-                                    //Assert.IsTrue(eqr.Compatible);
+                                    Assert.IsTrue(eqr.Compatible);
                                     var invokeEquals = InvocationBuilder.Invoke(eqr);
                                     var equalsLambda = ExpressionBuilder.Lambda(invokeEquals);
                                     var @delegate = equalsLambda.Compile() as Func<CqlContext, bool?>;
