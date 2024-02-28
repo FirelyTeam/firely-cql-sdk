@@ -45,7 +45,7 @@ internal class LibraryPackager
 
         List<Elm.Library> elmLibraries = new();
         ExceptionDispatchInfo? exception = null;
-        foreach (var (library, e) in GetSortedBuildElmLibraries(packageGraph))
+        try
         {
             foreach (var library in GetSortedBuildElmLibraries(packageGraph))
                 elmLibraries.Add(library);
@@ -174,7 +174,7 @@ internal class LibraryPackager
         return resources;
     }
 
-    private IEnumerable<(Elm.Library library, ExceptionDispatchInfo? exception)> GetSortedBuildElmLibraries(DirectedGraph packageGraph)
+    private IEnumerable<Elm.Library> GetSortedBuildElmLibraries(DirectedGraph packageGraph)
     {
         var elmLibraries =
             packageGraph
@@ -183,21 +183,21 @@ internal class LibraryPackager
                 .OfType<Elm.Library>()
                 .ToArray();
 
-        ExceptionDispatchInfo? exceptionDispatchInfo = null;
+        int i = 0;
         foreach (var library in elmLibraries)
         {
+            ++i;
             try
             {
-                _expressionBuilderService.BuildLibraryDefinitions(library!);
+                _expressionBuilderService.BuildLibraryDefinitions(library);
             }
             catch (Exception e)
             {
-                exceptionDispatchInfo = ExceptionDispatchInfo.Capture(e);
+                throw new InvalidOperationException(
+                    $"Failed building library {i} of {elmLibraries.Length} '{library.NameAndVersion}'. See InnerException for more details.",
+                    e);
             }
-            yield return (library, exceptionDispatchInfo);
-
-            if (exceptionDispatchInfo is not null)
-                break;
+            yield return library;
         }
     }
 
