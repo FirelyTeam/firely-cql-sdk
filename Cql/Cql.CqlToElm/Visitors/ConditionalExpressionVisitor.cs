@@ -77,8 +77,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var resultTypes = new HashSet<TypeSpecifier>(caseItems
                 .Select(item => item.then.resultTypeSpecifier)
-                .Append(@else.resultTypeSpecifier));
+                .Append(@else.resultTypeSpecifier))
+                .Except(new[] { SystemTypes.AnyType })
+                .ToList();
             TypeSpecifier returnType;
+            if (resultTypes.Count == 0)
+                returnType = SystemTypes.AnyType;
             if (resultTypes.Count == 1)
                 returnType = resultTypes.Single();
             else

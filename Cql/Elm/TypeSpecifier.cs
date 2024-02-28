@@ -36,6 +36,8 @@ namespace Hl7.Cql.Elm
                 .Select(_b => _b?.GetHashCode() ?? default)
                 .ToArray()
                 ?? Array.Empty<int>();
+            if (a?.Count() != b?.Count())
+                return false;
             foreach(var aCode in a?.Select(_a => _a?.GetHashCode() ?? default) ?? Enumerable.Empty<int>())
             {
                 if (!bCodes.Contains(aCode))
