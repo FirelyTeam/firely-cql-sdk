@@ -1,9 +1,7 @@
 ﻿using Hl7.Cql.Compiler;
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using Hl7.Fhir.Model;
+using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packaging
 {
@@ -20,14 +18,15 @@ namespace Hl7.Cql.Packaging
         /// <param name="context">the context of the expression evaluation</param>
         /// <param name="logFactory">logger</param>
         /// <returns>the result of the expression</returns>
-        public static object? EvaluateExpression(this Library library, Elm.Expression expression, CqlContext context, ILoggerFactory logFactory)
+        [UsedImplicitly]
+        public static object? EvaluateExpression(
+            this Elm.Library library, 
+            Elm.Expression expression, 
+            CqlContext context,
+            ILoggerFactory logFactory)
         {
-            var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var operatorsBinding = new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector));
-            var typeManager = new TypeManager(typeResolver);
-            var expressionBuilder = new ExpressionBuilder(operatorsBinding, typeManager, builderLogger, library);
-            var lambda = expressionBuilder.Lambda(expression);
+            var expressionBuilder = new ExpressionBuilderFactory(logFactory).ExpressionBuilderService;
+            var lambda = expressionBuilder.Lambda(library, expression);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);
         }

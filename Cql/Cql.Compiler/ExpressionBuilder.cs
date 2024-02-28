@@ -2261,7 +2261,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
 
-            var member = TypeResolver.GetProperty(type, name);
+            var member = TypeManager.Resolver.GetProperty(type, name);
             if (member is null)
                 throw new ArgumentException($"Couldn't find property {name} on type {type}");
             return member;

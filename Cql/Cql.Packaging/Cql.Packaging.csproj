@@ -26,6 +26,7 @@
 
 	<ItemGroup>
 		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Test" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 

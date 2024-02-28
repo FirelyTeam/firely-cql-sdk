@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Graph;
+using JetBrains.Annotations;
 
 namespace Hl7.Cql.Elm;
 
 #pragma warning disable CS1591
-internal static class LibraryExtensions
+public static class LibraryExtensions
 {
+    /// <summary>
+    /// Get a flat list of ELM libraries included in the set of libraries passed in. 
+    /// </summary>
+    /// <param name="libraries">top-level libraries</param>
+    /// <returns>flat list of all included libraries</returns>
+    [UsedImplicitly]
     public static IEnumerable<Library> GetIncludedElmLibraries(this IEnumerable<Library> libraries)
     {
         var packageGraph = libraries.GetIncludedLibraries();
@@ -19,7 +26,7 @@ internal static class LibraryExtensions
         return elmLibraries;
     }
 
-    public static DirectedGraph GetIncludedLibraries(this IEnumerable<Library> libraries)
+    internal static DirectedGraph GetIncludedLibraries(this IEnumerable<Library> libraries)
     {
         var buildOrder = new DirectedGraph();
         foreach (var library in libraries)

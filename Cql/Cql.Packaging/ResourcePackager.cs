@@ -1,12 +1,6 @@
-﻿using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Conversion;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Packaging.ResourceWriters;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Library = Hl7.Cql.Elm.Library;
@@ -70,22 +64,12 @@ namespace Hl7.Cql.Packaging
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
-            ModelInspector modelInspector = ModelInfo.ModelInspector;
-            FhirTypeResolver fhirTypeResolver = new(modelInspector);
-            TypeConverter fhirTypeConverter = FhirTypeConverter.Create(modelInspector);
-            CqlOperatorsBinding cqlOperatorsBinding = new(fhirTypeResolver, fhirTypeConverter);
-            TypeManager typeManager = new(fhirTypeResolver);
-            LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
-            ILogger<ExpressionBuilder> expressionBuilderLogger = logFactory.CreateLogger<ExpressionBuilder>();
-            ExpressionBuilderService expressionBuilderService = new(expressionBuilderLogger, cqlOperatorsBinding, typeManager);
-            ILogger<CSharpSourceCodeWriter> cSharpSourceCodeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
-            CSharpSourceCodeWriter cSharpSourceCodeWriter = new(cSharpSourceCodeWriterLogger, fhirTypeResolver);
-            AssemblyCompiler assemblyCompiler = new(expressionBuilderService, fhirTypeResolver, cSharpSourceCodeWriter, typeManager);
-            LibraryPackager resourcePackager = new(fhirTypeResolver, assemblyCompiler, expressionBuilderService);
+            LibraryPackager libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
 
+            LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
             IDictionary<string, Library> librariesByNameAndVersion = LibraryLoader.LoadLibraries(elmDir);
             DirectedGraph directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();
-            IEnumerable<Resource> resources = resourcePackager.PackageResources(elmDir, cqlDir, directedGraph, callbacks);
+            IEnumerable<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, directedGraph, callbacks);
 
             afterPackageMutator?.Invoke(resources);
 
