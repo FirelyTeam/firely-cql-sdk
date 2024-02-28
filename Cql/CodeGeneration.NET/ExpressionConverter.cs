@@ -460,7 +460,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             funcSb.Append(indent, specifiers + " ");
             funcSb.Append(PrettyTypeName(function.ReturnType) + " ");
             funcSb.Append(name);
-
+            
             var lambda = convertLambdaExpression(indent, "", function, functionMode: true);
             funcSb.Append(lambda);
 
@@ -519,6 +519,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                             $"{leadingIndentString}{Parenthesize($"({typeName}){operand}")}";
                         return code;
                     }
+                case ExpressionType.Throw:
+                {
+                    var operand = ConvertExpression(indent, strippedUnary.Operand, false);
+                    return $"{leadingIndentString}throw ({operand})";
+                }
+                    
                 default:
                     throw new NotSupportedException($"Don't know how to convert unary operator {strippedUnary.NodeType} into C#.");
             }

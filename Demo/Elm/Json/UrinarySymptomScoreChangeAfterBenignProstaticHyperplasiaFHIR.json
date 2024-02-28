@@ -496,7 +496,7 @@
                }
             }
          }, {
-            "locator" : "174:1-181:15",
+            "locator" : "169:1-176:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "isConfirmedActiveDiagnosis",
             "context" : "Patient",
@@ -504,23 +504,23 @@
             "fluent" : true,
             "type" : "FunctionDef",
             "expression" : {
-               "locator" : "175:3-181:15",
+               "locator" : "170:3-176:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
                "operand" : {
-                  "locator" : "175:3-181:15",
+                  "locator" : "170:3-176:15",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
                   "operand" : {
-                     "locator" : "175:3-181:3",
+                     "locator" : "170:3-176:3",
                      "resultTypeName" : "{http://hl7.org/fhir}Condition",
                      "type" : "Query",
                      "source" : [ {
-                        "locator" : "175:5-175:23",
+                        "locator" : "170:5-170:23",
                         "resultTypeName" : "{http://hl7.org/fhir}Condition",
                         "alias" : "Diagnosis",
                         "expression" : {
-                           "locator" : "175:5-175:13",
+                           "locator" : "170:5-170:13",
                            "resultTypeName" : "{http://hl7.org/fhir}Condition",
                            "name" : "Condition",
                            "type" : "OperandRef"
@@ -528,15 +528,15 @@
                      } ],
                      "relationship" : [ ],
                      "where" : {
-                        "locator" : "176:7-180:9",
+                        "locator" : "171:7-175:9",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "operand" : [ {
-                           "locator" : "176:13-176:60",
+                           "locator" : "171:13-171:60",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Equivalent",
                            "operand" : [ {
-                              "locator" : "176:13-176:36",
+                              "locator" : "171:13-171:36",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                               "name" : "ToConcept",
                               "libraryName" : "FHIRHelpers",
@@ -549,7 +549,7 @@
                            }, {
                               "type" : "ToConcept",
                               "operand" : {
-                                 "locator" : "176:40-176:60",
+                                 "locator" : "171:40-171:60",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                  "name" : "active",
                                  "libraryName" : "QICoreCommon",
@@ -557,23 +557,23 @@
                               }
                            } ]
                         }, {
-                           "locator" : "177:13-180:9",
+                           "locator" : "172:13-175:9",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Not",
                            "operand" : {
-                              "locator" : "177:17-180:9",
+                              "locator" : "172:17-175:9",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Or",
                               "operand" : [ {
-                                 "locator" : "177:19-178:68",
+                                 "locator" : "172:19-173:68",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Or",
                                  "operand" : [ {
-                                    "locator" : "177:19-177:75",
+                                    "locator" : "172:19-172:75",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "locator" : "177:19-177:46",
+                                       "locator" : "172:19-172:46",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
@@ -586,7 +586,7 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "locator" : "177:50-177:75",
+                                          "locator" : "172:50-172:75",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "unconfirmed",
                                           "libraryName" : "QICoreCommon",
@@ -594,11 +594,11 @@
                                        }
                                     } ]
                                  }, {
-                                    "locator" : "178:16-178:68",
+                                    "locator" : "173:16-173:68",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "operand" : [ {
-                                       "locator" : "178:16-178:43",
+                                       "locator" : "173:16-173:43",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "name" : "ToConcept",
                                        "libraryName" : "FHIRHelpers",
@@ -611,7 +611,7 @@
                                     }, {
                                        "type" : "ToConcept",
                                        "operand" : {
-                                          "locator" : "178:47-178:68",
+                                          "locator" : "173:47-173:68",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "refuted",
                                           "libraryName" : "QICoreCommon",
@@ -620,11 +620,11 @@
                                     } ]
                                  } ]
                               }, {
-                                 "locator" : "179:16-179:77",
+                                 "locator" : "174:16-174:77",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Equivalent",
                                  "operand" : [ {
-                                    "locator" : "179:16-179:43",
+                                    "locator" : "174:16-174:43",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
                                     "name" : "ToConcept",
                                     "libraryName" : "FHIRHelpers",
@@ -637,7 +637,7 @@
                                  }, {
                                     "type" : "ToConcept",
                                     "operand" : {
-                                       "locator" : "179:47-179:77",
+                                       "locator" : "174:47-174:77",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                        "name" : "entered-in-error",
                                        "libraryName" : "QICoreCommon",
@@ -654,24 +654,24 @@
             "operand" : [ {
                "name" : "Condition",
                "operandTypeSpecifier" : {
-                  "locator" : "174:61-174:69",
+                  "locator" : "169:61-169:69",
                   "resultTypeName" : "{http://hl7.org/fhir}Condition",
                   "name" : "{http://hl7.org/fhir}Condition",
                   "type" : "NamedTypeSpecifier"
                }
             } ]
          }, {
-            "locator" : "166:1-172:3",
+            "locator" : "161:1-167:3",
             "resultTypeName" : "{http://hl7.org/fhir}Condition",
             "name" : "Initial BPH Diagnosis Starts Within 6 Months Before or After Start of Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "167:3-172:3",
+               "locator" : "162:3-167:3",
                "resultTypeName" : "{http://hl7.org/fhir}Condition",
                "type" : "First",
                "source" : {
-                  "locator" : "167:9-171:41",
+                  "locator" : "162:9-166:41",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -681,7 +681,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "167:9-167:101",
+                     "locator" : "162:9-162:101",
                      "alias" : "NewBPHDiagnosis",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -691,7 +691,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "167:9-167:85",
+                        "locator" : "162:9-162:85",
                         "dataType" : "{http://hl7.org/fhir}Condition",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                         "codeProperty" : "code",
@@ -707,7 +707,7 @@
                         "codes" : {
                            "type" : "ToList",
                            "operand" : {
-                              "locator" : "167:21-167:84",
+                              "locator" : "162:21-162:84",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                               "name" : "Benign prostatic hyperplasia with lower urinary tract symptoms",
                               "type" : "CodeRef"
@@ -717,19 +717,19 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "168:7-170:56",
+                     "locator" : "163:7-165:56",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "operand" : [ {
-                        "locator" : "168:13-169:34",
+                        "locator" : "163:13-164:34",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "In",
                         "operand" : [ {
-                           "locator" : "168:50-168:55",
+                           "locator" : "163:50-163:55",
                            "type" : "Start",
                            "operand" : {
-                              "locator" : "168:13-168:48",
+                              "locator" : "163:13-163:48",
                               "name" : "prevalenceInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
@@ -741,14 +741,14 @@
                                  }
                               },
                               "operand" : [ {
-                                 "locator" : "168:13-168:27",
+                                 "locator" : "163:13-163:27",
                                  "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                  "name" : "NewBPHDiagnosis",
                                  "type" : "AliasRef"
                               } ]
                            }
                         }, {
-                           "locator" : "168:71-169:34",
+                           "locator" : "163:71-164:34",
                            "lowClosed" : true,
                            "highClosed" : true,
                            "type" : "Interval",
@@ -760,15 +760,15 @@
                               }
                            },
                            "low" : {
-                              "locator" : "168:80-168:119",
+                              "locator" : "163:80-163:119",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "Subtract",
                               "operand" : [ {
-                                 "locator" : "168:80-168:108",
+                                 "locator" : "163:80-163:108",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "operand" : {
-                                    "locator" : "168:89-168:108",
+                                    "locator" : "163:89-163:108",
                                     "name" : "Measurement Period",
                                     "type" : "ParameterRef",
                                     "resultTypeSpecifier" : {
@@ -780,7 +780,7 @@
                                     }
                                  }
                               }, {
-                                 "locator" : "168:112-168:119",
+                                 "locator" : "163:112-163:119",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                  "value" : 6,
                                  "unit" : "months",
@@ -788,11 +788,11 @@
                               } ]
                            },
                            "high" : {
-                              "locator" : "169:7-169:33",
+                              "locator" : "164:7-164:33",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "type" : "End",
                               "operand" : {
-                                 "locator" : "169:14-169:33",
+                                 "locator" : "164:14-164:33",
                                  "name" : "Measurement Period",
                                  "type" : "ParameterRef",
                                  "resultTypeSpecifier" : {
@@ -806,12 +806,12 @@
                            }
                         } ]
                      }, {
-                        "locator" : "170:13-170:56",
+                        "locator" : "165:13-165:56",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "isConfirmedActiveDiagnosis",
                         "type" : "FunctionRef",
                         "operand" : [ {
-                           "locator" : "170:13-170:27",
+                           "locator" : "165:13-165:27",
                            "resultTypeName" : "{http://hl7.org/fhir}Condition",
                            "name" : "NewBPHDiagnosis",
                            "type" : "AliasRef"
@@ -819,18 +819,18 @@
                      } ]
                   },
                   "sort" : {
-                     "locator" : "171:7-171:41",
+                     "locator" : "166:7-166:41",
                      "by" : [ {
-                        "locator" : "171:15-171:41",
+                        "locator" : "166:15-166:41",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "direction" : "asc",
                         "type" : "ByExpression",
                         "expression" : {
-                           "locator" : "171:15-171:41",
+                           "locator" : "166:15-166:41",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
                            "operand" : {
-                              "locator" : "171:24-171:41",
+                              "locator" : "166:24-166:41",
                               "name" : "toInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
@@ -842,7 +842,7 @@
                                  }
                               },
                               "operand" : [ {
-                                 "locator" : "171:24-171:28",
+                                 "locator" : "166:24-166:28",
                                  "name" : "ToValue",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
@@ -3685,7 +3685,7 @@
                } ]
             }
          }, {
-            "locator" : "159:1-164:3",
+            "locator" : "154:1-159:3",
             "name" : "Urinary Symptom Score Within 1 Month after Initial BPH Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3706,7 +3706,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "160:3-164:3",
+               "locator" : "155:3-159:3",
                "type" : "First",
                "resultTypeSpecifier" : {
                   "type" : "TupleTypeSpecifier",
@@ -3725,7 +3725,7 @@
                   } ]
                },
                "source" : {
-                  "locator" : "160:9-163:31",
+                  "locator" : "155:9-158:31",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -3747,7 +3747,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "160:9-160:56",
+                     "locator" : "155:9-155:56",
                      "alias" : "USSAssessment",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -3769,7 +3769,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "160:9-160:42",
+                        "locator" : "155:9-155:42",
                         "name" : "Urinary Symptom Score Assessment",
                         "type" : "ExpressionRef",
                         "resultTypeSpecifier" : {
@@ -3794,32 +3794,32 @@
                      }
                   } ],
                   "relationship" : [ {
-                     "locator" : "161:7-162:134",
+                     "locator" : "156:7-157:134",
                      "resultTypeName" : "{http://hl7.org/fhir}Condition",
                      "alias" : "InitialBPHDiagnosis",
                      "type" : "With",
                      "expression" : {
-                        "locator" : "161:12-161:101",
+                        "locator" : "156:12-156:101",
                         "resultTypeName" : "{http://hl7.org/fhir}Condition",
                         "name" : "Initial BPH Diagnosis Starts Within 6 Months Before or After Start of Measurement Period",
                         "type" : "ExpressionRef"
                      },
                      "suchThat" : {
-                        "locator" : "162:19-162:134",
+                        "locator" : "157:19-157:134",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "operand" : [ {
-                           "locator" : "162:51-162:65",
+                           "locator" : "157:51-157:65",
                            "precision" : "Day",
                            "type" : "In",
                            "operand" : [ {
-                              "locator" : "162:19-162:49",
+                              "locator" : "157:19-157:49",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                               "path" : "effectiveDatetime",
                               "scope" : "USSAssessment",
                               "type" : "Property"
                            }, {
-                              "locator" : "162:51-162:65",
+                              "locator" : "157:51-157:65",
                               "lowClosed" : true,
                               "highClosed" : true,
                               "type" : "Interval",
@@ -3831,11 +3831,11 @@
                                  }
                               },
                               "low" : {
-                                 "locator" : "162:86-162:134",
+                                 "locator" : "157:86-157:134",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "operand" : {
-                                    "locator" : "162:95-162:134",
+                                    "locator" : "157:95-157:134",
                                     "name" : "prevalenceInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -3847,7 +3847,7 @@
                                        }
                                     },
                                     "operand" : [ {
-                                       "locator" : "162:95-162:113",
+                                       "locator" : "157:95-157:113",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "InitialBPHDiagnosis",
                                        "type" : "AliasRef"
@@ -3855,14 +3855,14 @@
                                  }
                               },
                               "high" : {
-                                 "locator" : "162:86-162:134",
+                                 "locator" : "157:86-157:134",
                                  "type" : "Add",
                                  "operand" : [ {
-                                    "locator" : "162:86-162:134",
+                                    "locator" : "157:86-157:134",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
                                     "operand" : {
-                                       "locator" : "162:95-162:134",
+                                       "locator" : "157:95-157:134",
                                        "name" : "prevalenceInterval",
                                        "libraryName" : "QICoreCommon",
                                        "type" : "FunctionRef",
@@ -3874,14 +3874,14 @@
                                           }
                                        },
                                        "operand" : [ {
-                                          "locator" : "162:95-162:113",
+                                          "locator" : "157:95-157:113",
                                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                           "name" : "InitialBPHDiagnosis",
                                           "type" : "AliasRef"
                                        } ]
                                     }
                                  }, {
-                                    "locator" : "162:51-162:57",
+                                    "locator" : "157:51-157:57",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                                     "value" : 1,
                                     "unit" : "month",
@@ -3890,17 +3890,17 @@
                               }
                            } ]
                         }, {
-                           "locator" : "162:51-162:65",
+                           "locator" : "157:51-157:65",
                            "type" : "Not",
                            "operand" : {
-                              "locator" : "162:51-162:65",
+                              "locator" : "157:51-157:65",
                               "type" : "IsNull",
                               "operand" : {
-                                 "locator" : "162:86-162:134",
+                                 "locator" : "157:86-157:134",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Start",
                                  "operand" : {
-                                    "locator" : "162:95-162:134",
+                                    "locator" : "157:95-157:134",
                                     "name" : "prevalenceInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -3912,7 +3912,7 @@
                                        }
                                     },
                                     "operand" : [ {
-                                       "locator" : "162:95-162:113",
+                                       "locator" : "157:95-157:113",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "InitialBPHDiagnosis",
                                        "type" : "AliasRef"
@@ -3924,9 +3924,9 @@
                      }
                   } ],
                   "sort" : {
-                     "locator" : "163:7-163:31",
+                     "locator" : "158:7-158:31",
                      "by" : [ {
-                        "locator" : "163:15-163:31",
+                        "locator" : "158:15-158:31",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "direction" : "asc",
                         "path" : "effectiveDatetime",
@@ -5215,155 +5215,42 @@
                } ]
             }
          }, {
-            "locator" : "147:1-152:20",
+            "locator" : "147:1-147:40",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
             "name" : "Urinary Symptom Score Change",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "148:3-152:20",
+               "locator" : "147:40",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-               "type" : "Query",
-               "source" : [ {
-                  "locator" : "149:5-149:89",
-                  "alias" : "FirstUSSAssessment",
-                  "resultTypeSpecifier" : {
-                     "type" : "TupleTypeSpecifier",
-                     "element" : [ {
-                        "name" : "effectiveDatetime",
-                        "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }, {
-                        "name" : "valueInteger",
-                        "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ]
-                  },
-                  "expression" : {
-                     "locator" : "149:5-149:70",
-                     "name" : "Urinary Symptom Score Within 1 Month after Initial BPH Diagnosis",
-                     "type" : "ExpressionRef",
-                     "resultTypeSpecifier" : {
-                        "type" : "TupleTypeSpecifier",
-                        "element" : [ {
-                           "name" : "effectiveDatetime",
-                           "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        }, {
-                           "name" : "valueInteger",
-                           "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ]
-                     }
-                  }
-               }, {
-                  "locator" : "150:5-150:92",
-                  "alias" : "FollowUpUSSAssessment",
-                  "resultTypeSpecifier" : {
-                     "type" : "TupleTypeSpecifier",
-                     "element" : [ {
-                        "name" : "effectiveDatetime",
-                        "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }, {
-                        "name" : "valueInteger",
-                        "elementType" : {
-                           "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     } ]
-                  },
-                  "expression" : {
-                     "locator" : "150:5-150:70",
-                     "name" : "Urinary Symptom Score 6 to 12 Months After Initial BPH Diagnosis",
-                     "type" : "ExpressionRef",
-                     "resultTypeSpecifier" : {
-                        "type" : "TupleTypeSpecifier",
-                        "element" : [ {
-                           "name" : "effectiveDatetime",
-                           "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        }, {
-                           "name" : "valueInteger",
-                           "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ]
-                     }
-                  }
-               } ],
-               "let" : [ {
-                  "locator" : "151:9-151:95",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "identifier" : "USSChange",
-                  "expression" : {
-                     "locator" : "151:20-151:95",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "type" : "Subtract",
-                     "operand" : [ {
-                        "locator" : "151:20-151:54",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "path" : "valueInteger",
-                        "scope" : "FirstUSSAssessment",
-                        "type" : "Property"
-                     }, {
-                        "locator" : "151:58-151:95",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "path" : "valueInteger",
-                        "scope" : "FollowUpUSSAssessment",
-                        "type" : "Property"
-                     } ]
-                  }
-               } ],
-               "relationship" : [ ],
-               "return" : {
-                  "locator" : "152:5-152:20",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                  "expression" : {
-                     "locator" : "152:12-152:20",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "name" : "USSChange",
-                     "type" : "QueryLetRef"
-                  }
-               }
+               "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+               "value" : "5",
+               "type" : "Literal"
             }
          }, {
-            "locator" : "154:1-157:15",
+            "locator" : "149:1-152:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Urinary Symptom Score Improvement Greater Than or Equal To 3",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "155:3-157:15",
+               "locator" : "150:3-152:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Not",
                "operand" : {
-                  "locator" : "155:3-157:15",
+                  "locator" : "150:3-152:15",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "IsNull",
                   "operand" : {
-                     "locator" : "155:3-157:3",
+                     "locator" : "150:3-152:3",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                      "type" : "Query",
                      "source" : [ {
-                        "locator" : "155:5-155:49",
+                        "locator" : "150:5-150:49",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                         "alias" : "USSImprovement",
                         "expression" : {
-                           "locator" : "155:5-155:34",
+                           "locator" : "150:5-150:34",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "Urinary Symptom Score Change",
                            "type" : "ExpressionRef"
@@ -5371,16 +5258,16 @@
                      } ],
                      "relationship" : [ ],
                      "where" : {
-                        "locator" : "156:7-156:31",
+                        "locator" : "151:7-151:31",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "GreaterOrEqual",
                         "operand" : [ {
-                           "locator" : "156:13-156:26",
+                           "locator" : "151:13-151:26",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "name" : "USSImprovement",
                            "type" : "AliasRef"
                         }, {
-                           "locator" : "156:31",
+                           "locator" : "151:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
                            "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                            "value" : "3",

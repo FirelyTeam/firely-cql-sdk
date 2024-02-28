@@ -1981,7 +1981,18 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = ctx.TypeFor(op, throwIfNotFound: true)!;
+                    var expectedType = ctx.TypeFor(op, throwIfNotFound: false);
+                    
+                    // Ok, the ELM is missing the required type info, but if the source of the
+                    // property has type info, we can use that.
+                    if(expectedType is null)
+                    {
+                        if(TypeManager.Resolver.GetProperty(source.Type, path!) is {} prop)
+                            expectedType = prop.PropertyType;
+                        else
+                            throw new ArgumentException("Cannot resolve type for expression");
+                    }
+                    
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }

@@ -136,7 +136,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 if (!navToLibraryStream.TryGetValue(node.NodeId, out var sourceCodeStream))
                     throw new InvalidOperationException($"Library {node.NodeId} doesn't exist in the source code dictionary.");
-                CompileNode(sourceCodeStream, assemblies, node, references, additionalReferences);
+                CompileNode(sourceCodeStream, assemblies, node, references, additionalReferences, writer.Log);
             }
             return assemblies;
         }
@@ -207,7 +207,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Dictionary<string, AssemblyData> assemblies,
             DirectedGraphNode node,
             IEnumerable<Assembly> assemblyReferences,
-            IEnumerable<AssemblyData>? dependencyAssemblies)
+            IEnumerable<AssemblyData>? dependencyAssemblies, ILogger<CSharpSourceCodeWriter> writerLog)
         {
             sourceCodeStream.Flush();
             sourceCodeStream.Seek(0, SeekOrigin.Begin);
@@ -275,8 +275,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {node.NodeId}:{Environment.NewLine}{sb}");
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
-
-                throw ex;
+                writerLog.LogError(ex.Message);
+                // throw ex;
             }
             var bytes = codeStream.ToArray();
             var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { node.NodeId, sourceCode } });

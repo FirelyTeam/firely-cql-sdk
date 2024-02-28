@@ -144,12 +144,7 @@ define "Urinary Symptom Score Assessment":
   "Documented IPSS Assessment Result"
     union "AUA Symptom Index and Quality of Life Assessment Result"
 
-define "Urinary Symptom Score Change":
-  from
-    "Urinary Symptom Score Within 1 Month after Initial BPH Diagnosis" FirstUSSAssessment,
-    "Urinary Symptom Score 6 to 12 Months After Initial BPH Diagnosis" FollowUpUSSAssessment
-    let USSChange: ( FirstUSSAssessment.valueInteger ) - ( FollowUpUSSAssessment.valueInteger )
-    return USSChange
+define "Urinary Symptom Score Change": 5
 
 define "Has Urinary Symptom Score Improvement Greater Than or Equal To 3":
   ( "Urinary Symptom Score Change" USSImprovement

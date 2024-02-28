@@ -129,7 +129,7 @@ namespace Hl7.Cql.Compiler
                 {
                     Type? sourceType = null;
                     if (propertyExpression.source != null)
-                        sourceType = TypeFor(propertyExpression.source!, context);
+                        sourceType = TypeFor(propertyExpression.source!, context, throwIfNotFound);
                     else if (propertyExpression.scope != null)
                     {
                         var scope = context.GetScope(propertyExpression.scope);
