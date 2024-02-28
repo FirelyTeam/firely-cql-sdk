@@ -1,6 +1,5 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
@@ -79,13 +78,5 @@ namespace Hl7.Cql.Elm
                 _ => throw new ArgumentException(
                     $"Stream does not represent a valid {nameof(Library)}")
             };
-
-        /// <summary>
-        /// Get a flat list of ELM libraries included in the set of libraries passed in. 
-        /// </summary>
-        /// <param name="libraries">top-level libraries</param>
-        /// <returns>flat list of all included libraries</returns>
-        public static IEnumerable<Library> GetIncludedElmLibraries(IEnumerable<Library> libraries)
-            => libraries.GetIncludedElmLibraries();
     }
 }
