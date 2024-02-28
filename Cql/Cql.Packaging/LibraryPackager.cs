@@ -479,8 +479,8 @@ internal class LibraryPackager
             .Packages()
             .ToArray();
 
-        LibraryPackagerCreator creator = new LibraryPackagerCreator(logFactory);
-        var assemblyData = creator.AssemblyCompiler.Compile(dependencies);
+        LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory);
+        var assemblyData = factory.AssemblyCompiler.Compile(dependencies);
 
         var asmContext = new AssemblyLoadContext($"{lib}-{version}");
         foreach (var kvp in assemblyData)

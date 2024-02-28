@@ -5,8 +5,13 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
-#pragma warning disable CS1591
-internal class ExpressionBuilderCreator
+/// <summary>
+/// This creates all services necessary for a <see cref="ExpressionBuilderService"/>.
+/// The idea is not to inject this into service types, it's purpose is to
+/// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
+/// </summary>
+
+internal class ExpressionBuilderFactory
 {
     private readonly Lazy<FhirTypeResolver> _FhirTypeResolver;
     private readonly Lazy<Conversion.TypeConverter> _TypeConverter;
@@ -14,7 +19,7 @@ internal class ExpressionBuilderCreator
     private readonly Lazy<TypeManager> _TypeManager;
     private readonly Lazy<ExpressionBuilderService> _ExpressionBuilderService;
 
-    public ExpressionBuilderCreator(ILoggerFactory loggerFactory, int? cacheSize = null)
+    public ExpressionBuilderFactory(ILoggerFactory loggerFactory, int? cacheSize = null)
     {
         _FhirTypeResolver = Deferred(() => new FhirTypeResolver(ModelInspector));
         _TypeConverter = Deferred(() => FhirTypeConverter.Create(ModelInspector, cacheSize));

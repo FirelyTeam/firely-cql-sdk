@@ -13,7 +13,7 @@ namespace CoreTests
         private ExpressionBuilderService NewExpressionBuilderService()
         {
             var loggerFactory = LoggerFactory.Create(logging => logging.AddDebug());
-            var expressionBuilderCreator = new ExpressionBuilderCreator(loggerFactory);
+            var expressionBuilderCreator = new ExpressionBuilderFactory(loggerFactory);
             return expressionBuilderCreator.ExpressionBuilderService;
         }
 

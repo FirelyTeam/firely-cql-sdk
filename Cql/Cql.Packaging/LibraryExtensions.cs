@@ -25,7 +25,7 @@ namespace Hl7.Cql.Packaging
             CqlContext context,
             ILoggerFactory logFactory)
         {
-            var expressionBuilder = new ExpressionBuilderCreator(logFactory).ExpressionBuilderService;
+            var expressionBuilder = new ExpressionBuilderFactory(logFactory).ExpressionBuilderService;
             var lambda = expressionBuilder.Lambda(library, expression);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);
