@@ -47,12 +47,12 @@ internal class LibraryPackager
         ExceptionDispatchInfo? exception = null;
         foreach (var (library, e) in GetSortedBuildElmLibraries(packageGraph))
         {
-            if (e is not null)
-            {
-                exception = e;
-                break;
-            }
-            elmLibraries.Add(library);
+            foreach (var library in GetSortedBuildElmLibraries(packageGraph))
+                elmLibraries.Add(library);
+        }
+        catch (Exception e)
+        {
+            ExceptionDispatchInfo.Capture(e);
         }
 
         var resources = new List<Resource>();
@@ -425,14 +425,14 @@ internal class LibraryPackager
         var allLibs = dependencies.AllLibraries();
         var asmContext = new AssemblyLoadContext($"{lib}-{version}");
         allLibs.LoadAssemblies(asmContext);
-        
+
         var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
         using var tupleFs = tupleTypes.OpenRead();
         var binaries = new[]
         {
                 tupleFs.ParseFhir<Binary>()
             };
-        
+
         binaries.LoadAssembles(asmContext);
         return asmContext;
     }
