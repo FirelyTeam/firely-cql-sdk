@@ -16,16 +16,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var source = visitSource(context.sourceClause());
             var sort = visitSort(context.sortClause());
+            var @return = visitReturn(context.returnClause()); // pass aliases & lets?
+            
+            TypeSpecifier returnType = @return?.resultTypeSpecifier.ToListType() ??
+                (returnType = source.Length == 1
+                    ? source[0].resultTypeSpecifier
+                    : SystemTypes.AnyType.ToListType());
             var query = new Query()
             {
                 source = source,
                 sort = sort!,
+                @return = @return,
             };
             if (query.source.Length == 0)
                 query.AddError($"At least one source is required for this query");
             return query
+                .WithId()
                 .WithLocator(context.Locator())
-                .WithResultType(SystemTypes.AnyType);
+                .WithResultType(returnType);
 
 
             AliasedQuerySource[] visitSource(cqlParser.SourceClauseContext sourceClauseCtx) =>
@@ -109,6 +117,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithLocator(sortClauseCtx.Locator());
             }
 
+            ReturnClause? visitReturn(cqlParser.ReturnClauseContext? returnClauseCtx)
+            {
+                if (returnClauseCtx is null)
+                    return null;
+                // set the scope to include aliases & lets?
+                var expression = Visit(returnClauseCtx);
+                var rc = new ReturnClause
+                {
+                    expression = expression,
+                };
+                return rc
+                    .WithLocator(returnClauseCtx.Locator())
+                    .WithResultType(expression.resultTypeSpecifier);
+            }
         }
 
     }

@@ -1076,6 +1076,16 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void DateTime_Literal_T()
+        {
+            var lib = createLibraryForExpression("@2016T");
+            var dt = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateTime>();
+            var yearLiteral = dt.year.Should().BeOfType<Literal>().Subject;
+            yearLiteral.value.Should().Be("2016");
+            dt.month.Should().BeNull();
+        }
+
+        [TestMethod]
         public void Time_Literal_Millisecond_Precision()
         {
             var library = MakeLibrary(@"

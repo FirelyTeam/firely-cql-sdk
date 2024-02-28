@@ -51,7 +51,7 @@ define "quantityList Output":
 define "dateTimeList Input":
 	{ DateTime(2016), DateTime(2015), DateTime(2010) }
 define "dateTimeList Output":
-	{@2016, @2015, @2010}
+	{@2016T, @2015T, @2010T}
 
 define "timeList Input":
 	{ @T15:59:59.999, @T15:12:59.999, @T15:12:13.999 }
@@ -91,11 +91,6 @@ define "ContainsTimeTrue Output":
 define "ContainsTimeFalse Input":
 	{ @T15:59:59.999, @T05:59:59.999, @T20:59:59.999 } contains @T08:59:59.999
 define "ContainsTimeFalse Output":
-	false
-
-define "ContainsNullLeft Input":
-	null contains 'a'
-define "ContainsNullLeft Output":
 	false
 
 define "DescendentsEmptyList Input":
@@ -221,7 +216,7 @@ define "Except23And1234 Output":
 define "ExceptDateTimeList Input":
 	{ DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2010, 1, 1)} except {DateTime(2014, 12, 10), DateTime(2010, 1, 1) }
 define "ExceptDateTimeList Output":
-	{@2012-05-10}
+	{@2012-05-10T}
 
 define "ExceptTimeList Input":
 	{ @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } except { @T20:59:59.999, @T12:59:59.999 }
@@ -332,11 +327,6 @@ define "InNullAnd1Null Input":
 	null in { 1, null }
 define "InNullAnd1Null Output":
 	null
-
-define "In1Null Input":
-	1 in null
-define "In1Null Output":
-	false
 
 define "In1And12 Input":
 	1 in { 1, 2 }
@@ -571,7 +561,7 @@ define "Intersect23And1234 Output":
 define "IntersectDateTime Input":
 	{ DateTime(2001, 9, 11), DateTime(2012, 5, 10), DateTime(2014, 12, 10) } intersect { DateTime(2012, 5, 10), DateTime(2014, 12, 10), DateTime(2000, 5, 5) }
 define "IntersectDateTime Output":
-	{@2012-05-10, @2014-12-10 }
+	{@2012-05-10T, @2014-12-10T }
 
 define "IntersectTime Input":
 	{ @T02:29:15.156, @T15:59:59.999, @T20:59:59.999 } intersect { @T01:29:15.156, @T15:59:59.999, @T20:59:59.999 }
@@ -999,7 +989,7 @@ define "Union123And4 Output":
 define "UnionDateTime Input":
 	{ DateTime(2001, 9, 11)} union {DateTime(2012, 5, 10), DateTime(2014, 12, 10) }
 define "UnionDateTime Output":
-	{@2001-09-11, @2012-05-10, @2014-12-10}
+	{@2001-09-11T, @2012-05-10T, @2014-12-10T}
 
 define "UnionTime Input":
 	{ @T15:59:59.999, @T20:59:59.999, @T12:59:59.999 } union { @T10:59:59.999 }

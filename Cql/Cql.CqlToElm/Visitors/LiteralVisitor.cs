@@ -69,6 +69,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }.WithLocator(context.Locator()).WithResultType(SystemTypes.DateTimeType);
 
             var dateText = context.GetText()[1..];
+            if (dateText.EndsWith("T"))
+                dateText = dateText[0..^1];
 
             if (DateTimeIso8601.TryParse(dateText, out var dateTime) && dateTime is not null)
             {

@@ -1591,6 +1591,19 @@ namespace Hl7.Cql.CqlToElm.Test
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
+
+        [TestMethod]
+        public void DateTimeList_Equals_DateTimeList()
+        {
+            var lib = createLibraryForExpression("{ DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016T, @2015T, @2010T }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            equal.operand.Should().HaveCount(2);
+            equal.operand[0].Should().HaveType(SystemTypes.DateTimeType.ToListType());
+            equal.operand[1].Should().HaveType(SystemTypes.DateTimeType.ToListType());
+            var result = Run<bool?>(equal);
+            Assert.IsTrue(result);
+
+        }
     }
 
 

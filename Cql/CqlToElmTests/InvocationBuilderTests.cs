@@ -300,5 +300,14 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(result.IsAmbiguous);
         }
 
+        [TestMethod]
+        public void EqualsListIntervals()
+        {
+            var list = List(Interval(Integer(1), Integer(2)));
+            var arguments = new Expression[] { list, list };
+            var result = InvocationBuilder.MatchSignature(SystemLibrary.Equal, arguments);
+            Assert.IsTrue(result.Compatible);
+        }
+
     }
 }

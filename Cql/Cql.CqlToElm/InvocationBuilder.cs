@@ -185,21 +185,36 @@ namespace Hl7.Cql.CqlToElm
 
         // At present we are not going to consider generics with mulitple type arguments, as those do not exist in any system functions.
         // We'll leave the type as Dictionary for now for future proofing
-        internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier operandType, TypeSpecifier argumentType) =>
-            operandType switch
+        internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier operandType, TypeSpecifier argumentType) {
+            return operandType switch
             {
                 ParameterTypeSpecifier generic
                     when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.parameterName, argumentType } },
                 ListTypeSpecifier opList
-                    when argumentType is ListTypeSpecifier argList => InferGenericArgument(opList.elementType, argList.elementType),
+                    when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
                 ListTypeSpecifier opList
                     when argumentType is not ListTypeSpecifier => InferGenericArgument(opList.elementType, argumentType),
                 IntervalTypeSpecifier opInt
-                    when argumentType is IntervalTypeSpecifier argInt => InferGenericArgument(opInt.pointType, argInt.pointType),
+                    when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
                 IntervalTypeSpecifier opInt
                     when argumentType is not IntervalTypeSpecifier => InferGenericArgument(opInt.pointType, argumentType),
                 _ => new()
             };
+            Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier operandType, TypeSpecifier argumentType) =>
+                operandType switch
+                {
+                    ParameterTypeSpecifier generic => new() { { generic.parameterName, argumentType } },
+                    ListTypeSpecifier opList
+                        when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
+                    ListTypeSpecifier opList
+                        when argumentType is not ListTypeSpecifier => InferNestedGeneric(opList.elementType, argumentType),
+                    IntervalTypeSpecifier opInt
+                        when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
+                    IntervalTypeSpecifier opInt
+                        when argumentType is not IntervalTypeSpecifier => InferNestedGeneric(opInt.pointType, argumentType),
+                    _ => new()
+                };
+        }
 
         internal ConversionResult<Expression>[] TryGenericReplacement(TypeSpecifier[] operandTypes,
             Expression[] arguments, IDictionary<string, TypeSpecifier> replacements)
