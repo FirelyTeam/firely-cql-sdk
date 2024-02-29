@@ -35,21 +35,28 @@ namespace Hl7.Cql.Primitives
         }
 
         /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        public CqlCode()
+        {
+        }
+
+        /// <summary>
         /// The value of the code.
         /// </summary>
-        public string? code { get; }
+        public string? code { get; set; }
         /// <summary>
         /// The display value for this code.
         /// </summary>
-        public string? display { get; }
+        public string? display { get; set;  }
         /// <summary>
         /// The code system.
         /// </summary>
-        public string? system { get; }
+        public string? system { get; set;  }
         /// <summary>
         /// The code version.
         /// </summary>
-        public string? version { get; }
+        public string? version { get; set; }
 
     }
 
