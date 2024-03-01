@@ -178,5 +178,17 @@ namespace Hl7.Cql.Abstractions
         internal virtual IEnumerable<(string alias, string type)> Aliases =>
             Enumerable.Empty<(string alias, string type)>();
 
+        /// <summary>
+        /// Returns whether the source object should be used for the given property.
+        /// </summary>
+        /// <remarks>
+        /// This is primarily used when using FhirDateTime types and trying to access the value property.
+        /// It causes an unncessary string parse into a CqlDateTime object when we have a FhirDateTime to CqlDateTime converter
+        /// that is much more performant.
+        /// </remarks>
+        /// <param name="type">The .NET type</param>
+        /// <param name="propertyName">The property name.</param>
+        internal abstract bool ShouldUseSourceObject(Type type, string propertyName);
+
     }
 }

@@ -23,15 +23,21 @@ namespace Hl7.Cql.Primitives
             this.id = id;
             this.version = version;
         }
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        protected CqlVocabulary()
+        {
+        }
 
         /// <summary>
         /// The canonical URL of the value set.
         /// </summary>
-        public string? id { get; }
+        public string? id { get; set; }
         /// <summary>
         /// The version of the value set.
         /// </summary>
-        public string? version { get; }
+        public string? version { get; set; }
 
 
     }

@@ -25,11 +25,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All"/>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/>
 	</ItemGroup>
 
 	<PropertyGroup>
-		<FirelySdkVersion>5.4.0</FirelySdkVersion>
+		<FirelySdkVersion>5.5.1</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Compiler settings -->

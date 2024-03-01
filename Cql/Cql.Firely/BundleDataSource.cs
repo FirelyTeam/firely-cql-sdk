@@ -67,7 +67,7 @@ namespace Hl7.Cql.Fhir
         {
             if (allowedCodes is not null)
             {
-                Predicate<Coding> filter = allowedCodes is ValueSetFacade valueSet ?
+                Predicate<Coding> filter = allowedCodes is IValueSetFacade valueSet ?
                     c => valueSet.IsCodeInValueSet(c.Code, c.System) == true
                     : listFilter;
 

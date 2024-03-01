@@ -21,11 +21,11 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// The codes in this concept.
         /// </summary>
-        public CqlCode[]? codes { get; }
+        public CqlCode[]? codes { get; set;  }
         /// <summary>
         /// The display name of this concept.
         /// </summary>
-        public string? display { get; }
+        public string? display { get; set;  }
 
         /// <summary>
         /// Creates an instance.
@@ -39,6 +39,13 @@ namespace Hl7.Cql.Primitives
             else
                 this.codes = codes.ToArray();
             this.display = display;
+        }
+
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        public CqlConcept()
+        {
         }
 
     }

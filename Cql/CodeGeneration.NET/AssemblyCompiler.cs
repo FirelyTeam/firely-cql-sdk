@@ -68,7 +68,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var namespaces = new[]
             {
                 typeof(CqlDeclarationAttribute).Namespace!,
-                typeof(ValueSetFacade).Namespace!,
+                typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
             }
             .Concat(TypeResolver.ModelNamespaces)
