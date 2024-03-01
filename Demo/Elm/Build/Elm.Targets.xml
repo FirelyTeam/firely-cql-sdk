@@ -7,7 +7,7 @@
 	<Target Name="ELM to C#"
 			BeforeTargets="Compile">
 		<Message Text="Converting ELM to C#"/>
-		<Exec Command="$(MSBuildProjectDirectory)/../../Cql/PackagerCLI/bin/debug/net6.0/Hl7.Cql.Packager.exe --elm $(MSBuildProjectDirectory)/Json --cql $(MSBuildProjectDirectory)/../Cql/input --cs $(MSBuildProjectDirectory)/../Measures --fhir $(MSBuildProjectDirectory)/../Test/Resources" />
+		<Exec Command='$(MSBuildProjectDirectory)/../../Cql/PackagerCLI/bin/debug/net6.0/Hl7.Cql.Packager.exe --canonical-root-url https://fire.ly/fhir/ --elm "$(MSBuildProjectDirectory)/Json" --cql "$(MSBuildProjectDirectory)/../Cql/input" --cs "$(MSBuildProjectDirectory)/../Measures" --fhir "$(MSBuildProjectDirectory)/../Test/Resources"' />
 	</Target>
 	<Target Name="Delete C#" AfterTargets="Clean">
 		<Message Text="Deleting C# files...$(MSBuildProjectDirectory)\..\Measures\*.cs"></Message>
