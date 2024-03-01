@@ -19,6 +19,7 @@ namespace Hl7.Cql.Primitives
         /// Creates an instance.
         /// </summary>
         public CqlRatio() { }
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
@@ -33,11 +34,11 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// The numerator of this ratio.
         /// </summary>
-        public CqlQuantity? numerator { get; set;  }
+        public CqlQuantity? numerator { get; init;  }
         /// <summary>
         /// The denominator of this ratio.
         /// </summary>
-        public CqlQuantity? denominator { get; set;  }
+        public CqlQuantity? denominator { get; init;  }
 
         /// <summary>
         /// Gets a string representation of this ratio.

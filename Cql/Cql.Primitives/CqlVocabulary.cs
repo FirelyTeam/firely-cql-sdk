@@ -16,14 +16,6 @@ namespace Hl7.Cql.Primitives
     public abstract class CqlVocabulary
     {
         /// <summary>
-        /// Constructs a new CqlVocabulary instance
-        /// </summary>
-        protected CqlVocabulary(string? id, string? version)
-        {
-            this.id = id;
-            this.version = version;
-        }
-        /// <summary>
         /// Creates an instance.
         /// </summary>
         protected CqlVocabulary()
@@ -31,13 +23,22 @@ namespace Hl7.Cql.Primitives
         }
 
         /// <summary>
+        /// Constructs a new CqlVocabulary instance
+        /// </summary>
+        protected CqlVocabulary(string? id, string? version)
+        {
+            this.id = id;
+            this.version = version;
+        }
+
+        /// <summary>
         /// The canonical URL of the value set.
         /// </summary>
-        public string? id { get; set; }
+        public string? id { get; init; }
         /// <summary>
         /// The version of the value set.
         /// </summary>
-        public string? version { get; set; }
+        public string? version { get; init; }
 
 
     }
