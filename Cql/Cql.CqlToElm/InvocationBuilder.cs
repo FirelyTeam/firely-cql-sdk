@@ -23,13 +23,13 @@ namespace Hl7.Cql.CqlToElm
     internal class InvocationBuilder
     {
         public IModelProvider Provider { get; }
-        public TypeConverter TypeConverter { get; }
+        public CoercionProvider CoercionProvider { get; }
         public ElmFactory ElmFactory { get; }
 
-        public InvocationBuilder(IModelProvider provider, TypeConverter typeConverter, ElmFactory elmFactory)
+        public InvocationBuilder(IModelProvider provider, CoercionProvider coercionProvider, ElmFactory elmFactory)
         {
             Provider = provider;
-            TypeConverter = typeConverter;
+            CoercionProvider = coercionProvider;
             ElmFactory = elmFactory;
         }
 
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm
             if (!result.Compatible)
                 expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
             expression = systemFunction.Validate(expression);
-            var newResultType = ReplaceGenericTypes(systemFunction.resultTypeSpecifier, result.GenericInferences);
+            var newResultType = ReplaceGenericType(systemFunction.resultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
         }
@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm
                 expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
             if (result.Function is SystemFunction systemFunction)
                 expression = systemFunction.Validate(expression);
-            var newResultType = ReplaceGenericTypes(result.Function.resultTypeSpecifier, result.GenericInferences);
+            var newResultType = ReplaceGenericType(result.Function.resultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
         }
@@ -92,7 +92,7 @@ namespace Hl7.Cql.CqlToElm
             var expression = ElmFactory.CreateElmNode(function, null, newArguments);
             if (!result.Compatible)
                 expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
-            var newResultType = ReplaceGenericTypes(function.resultTypeSpecifier, result.GenericInferences);
+            var newResultType = ReplaceGenericType(function.resultTypeSpecifier, result.GenericInferences);
             return expression
                 .WithResultType(newResultType);
         }
@@ -141,14 +141,14 @@ namespace Hl7.Cql.CqlToElm
             if (flags > SignatureMatchFlags.None)
             {
                 var conversionResults = arguments
-                    .Select(arg => new ConversionResult<Expression>(arg, ConversionCost.ExactMatch))
+                    .Select(arg => new CoercionResult<Expression>(arg, CoercionCost.ExactMatch))
                     .ToArray();
                 return new SignatureMatchResult(candidate, conversionResults, EmptyInferences, flags);
             }
             // doing this to make debugging easier
-            ConversionResult<Expression>[]? newOperands = null;
+            CoercionResult<Expression>[]? newOperands = null;
             IDictionary<string, TypeSpecifier>? genericInferences = null;
-            var lowestCost = ConversionCost.Incompatible;
+            var lowestCost = CoercionCost.Incompatible;
             // For each argument, try to use it for inference.
             // As we go, keep track of which of those inferences results in the cheapest translation cost.
             // We are using max cost here instead of total cost.
@@ -157,8 +157,8 @@ namespace Hl7.Cql.CqlToElm
                 var inferences = InferGenericArgument(operands[i].operandTypeSpecifier, arguments[i].resultTypeSpecifier);
                 if (inferences.Count > 0)
                 {
-                    var replaced = TryGenericReplacement(operandTypes, arguments, inferences);
-                    var mostExpensiveOperand = (ConversionCost)replaced.Max(operand => (int)operand.Cost);
+                    var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
+                    var mostExpensiveOperand = (CoercionCost)replaced.Max(operand => (int)operand.Cost);
                     if (mostExpensiveOperand < lowestCost)
                     {
                         lowestCost = mostExpensiveOperand;
@@ -171,13 +171,13 @@ namespace Hl7.Cql.CqlToElm
                 return new SignatureMatchResult(candidate, newOperands, genericInferences, flags);
             else
             {
-                newOperands = new ConversionResult<Expression>[arguments.Length];
+                newOperands = new CoercionResult<Expression>[arguments.Length];
                 for (int i = 0; i < arguments.Length; i++)
                 {
-                    newOperands[i] = TypeConverter.Convert(arguments[i], operandTypes[i]);
+                    newOperands[i] = CoercionProvider.Coerce(arguments[i], operandTypes[i]);
                 }
                 string? error = null;
-                if (newOperands.Any(op => op.Cost == ConversionCost.Incompatible))
+                if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))
                     error = candidate.GetUnresolvedOperatorMessage(arguments.Select(arg => arg.resultTypeSpecifier).ToArray());
                 return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
             }
@@ -216,20 +216,20 @@ namespace Hl7.Cql.CqlToElm
                 };
         }
 
-        internal ConversionResult<Expression>[] TryGenericReplacement(TypeSpecifier[] operandTypes,
+        internal CoercionResult<Expression>[] ReplaceGenericArguments(TypeSpecifier[] operandTypes,
             Expression[] arguments, IDictionary<string, TypeSpecifier> replacements)
         {
-            var convertedArguments = new ConversionResult<Expression>[arguments.Length];
+            var convertedArguments = new CoercionResult<Expression>[arguments.Length];
             for (int i = 0; i < arguments.Length; i++)
             {
                 var argument = arguments[i];
                 var operandType = operandTypes[i];
-                convertedArguments[i] = TryGenericReplacement(operandType, argument, replacements);
+                convertedArguments[i] = ReplaceGenericArgument(operandType, argument, replacements);
             }
             return convertedArguments;
         }
 
-        internal static TypeSpecifier ReplaceGenericTypes(TypeSpecifier type, IDictionary<string, TypeSpecifier> replacements)
+        internal static TypeSpecifier ReplaceGenericType(TypeSpecifier type, IDictionary<string, TypeSpecifier> replacements)
         {
             if (type is ParameterTypeSpecifier generic)
             {
@@ -238,16 +238,16 @@ namespace Hl7.Cql.CqlToElm
                 else throw new ArgumentException($"Generic type {generic.parameterName} does not have a replacement defined.", nameof(replacements));
             }
             else if (type is ListTypeSpecifier listType)
-                return ReplaceGenericTypes(listType.elementType, replacements).ToListType();
+                return ReplaceGenericType(listType.elementType, replacements).ToListType();
             else if (type is IntervalTypeSpecifier intervalType)
-                return ReplaceGenericTypes(intervalType.pointType, replacements).ToIntervalType();
+                return ReplaceGenericType(intervalType.pointType, replacements).ToIntervalType();
             else return type;
         }
 
-        internal ConversionResult<Expression> TryGenericReplacement(TypeSpecifier operandType, Expression argument, IDictionary<string, TypeSpecifier> replacements)
+        internal CoercionResult<Expression> ReplaceGenericArgument(TypeSpecifier operandType, Expression argument, IDictionary<string, TypeSpecifier> replacements)
         {
-            var newType = ReplaceGenericTypes(operandType, replacements);
-            var conversion = TypeConverter.Convert(argument, newType);
+            var newType = ReplaceGenericType(operandType, replacements);
+            var conversion = CoercionProvider.Coerce(argument, newType);
             return conversion;
         }
 

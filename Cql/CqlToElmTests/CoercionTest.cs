@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class TypeConverterTests : Base
+    public class CoercionTest : Base
     {
-        internal static TypeConverter TypeConverter => Services.GetRequiredService<TypeConverter>();
+        internal static CoercionProvider CoercionProvider => Services.GetRequiredService<CoercionProvider>();
         internal static ElmFactory ElmFactory => Services.GetRequiredService<ElmFactory>();
 
         [ClassInitialize]
@@ -46,20 +46,20 @@ namespace Hl7.Cql.CqlToElm.Test
         public void IntegerExactyMatchesInteger()
         {
             var expression = Integer();
-            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
             Assert.AreSame(expression, result.Result);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.Cost);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.Cost);
         }
 
         [TestMethod]
         public void ChoiceIsExactlyMatchesChoice()
         {
             var expression = new Null().WithResultType(Choice(SystemTypes.IntegerType, SystemTypes.StringType));
-            var result = TypeConverter.Convert(expression, Choice(SystemTypes.IntegerType, SystemTypes.StringType));
+            var result = CoercionProvider.Coerce(expression, Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             Assert.IsTrue(result.Success);
             Assert.AreSame(expression, result.Result);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.Cost);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.Cost);
         }
 
         [TestMethod]
@@ -67,10 +67,10 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var expression = Tuple(("x", Integer(1)), ("y", Integer(2)));
             var tupleType = TupleType(("y", SystemTypes.IntegerType), ("x", SystemTypes.IntegerType));
-            var result = TypeConverter.Convert(expression, tupleType);
+            var result = CoercionProvider.Coerce(expression, tupleType);
             Assert.IsTrue(result.Success);
             Assert.AreSame(expression, result.Result);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.Cost);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.Cost);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var expression = Tuple(("x", Integer(1)), ("y", Integer(2)));
             var tupleType = TupleType(("y", SystemTypes.IntegerType), ("x", SystemTypes.LongType));
-            Assert.IsFalse(TypeConverter.IsExactMatch(expression.resultTypeSpecifier, tupleType));
+            Assert.IsFalse(CoercionProvider.IsExactMatch(expression.resultTypeSpecifier, tupleType));
         }
 
         [TestMethod]
@@ -86,21 +86,21 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var expression = Integer();
             // <ns4:typeInfo xsi:type="ns4:SimpleTypeInfo" name="System.Integer" baseType="System.Any"/>
-            var result = TypeConverter.Convert(expression, SystemTypes.AnyType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.AnyType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
+            Assert.AreEqual(CoercionCost.Subtype, result.Cost);
         }
 
         [TestMethod]
         public void AnyIsSubtypeOfAny()
         {
-            Assert.IsTrue(TypeConverter.IsSubtype(SystemTypes.AnyType, SystemTypes.AnyType));
+            Assert.IsTrue(CoercionProvider.IsSubtype(SystemTypes.AnyType, SystemTypes.AnyType));
         }
 
         [TestMethod]
         public void IntegerIsNotSubtypeOfLong()
         {
-            Assert.IsFalse(TypeConverter.IsSubtype(SystemTypes.IntegerType, SystemTypes.LongType));
+            Assert.IsFalse(CoercionProvider.IsSubtype(SystemTypes.IntegerType, SystemTypes.LongType));
         }
 
         [TestMethod]
@@ -108,9 +108,9 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var expression = ValueSet();
             // <ns4:typeInfo xsi:type="ns4:ClassInfo" name="System.ValueSet" baseType="System.Vocabulary"/>
-            var result = TypeConverter.Convert(expression, SystemTypes.VocabularyType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.VocabularyType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
+            Assert.AreEqual(CoercionCost.Subtype, result.Cost);
         }
 
         [TestMethod]
@@ -119,105 +119,105 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = ValueSet();
             // <ns4:typeInfo xsi:type="ns4:ClassInfo" name="System.ValueSet" baseType="System.Vocabulary"/>
             // <ns4:typeInfo xsi:type="ns4:ClassInfo" name="System.Vocabulary" baseType="System.Any">
-            var result = TypeConverter.Convert(expression, SystemTypes.AnyType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.AnyType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
+            Assert.AreEqual(CoercionCost.Subtype, result.Cost);
         }
 
         [TestMethod]
         public void IntegerIsCompatibleWithChoice()
         {
             var expression = Integer();
-            var result = TypeConverter.Convert(expression, Choice(SystemTypes.IntegerType, SystemTypes.StringType));
+            var result = CoercionProvider.Coerce(expression, Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Compatible, result.Cost);
+            Assert.AreEqual(CoercionCost.Compatible, result.Cost);
         }
 
         [TestMethod]
         public void ChoiceIsCompatibleWithChoice()
         {
             var expression = new Null().WithResultType(Choice(SystemTypes.IntegerType, SystemTypes.StringType));
-            var result = TypeConverter.Convert(expression, Choice(SystemTypes.IntegerType, SystemTypes.DecimalType));
+            var result = CoercionProvider.Coerce(expression, Choice(SystemTypes.IntegerType, SystemTypes.DecimalType));
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Compatible, result.Cost);
+            Assert.AreEqual(CoercionCost.Compatible, result.Cost);
         }
 
         [TestMethod]
         public void AnyIsCompatibleWithInteger()
         {
             var expression = Null();
-            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Compatible, result.Cost);
+            Assert.AreEqual(CoercionCost.Compatible, result.Cost);
         }
 
         [TestMethod]
         public void IntegerHasImplicitConversionToLong()
         {
             var expression = Integer();
-            var result = TypeConverter.Convert(expression, SystemTypes.LongType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.LongType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.Cost);
+            Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.Cost);
         }
 
         [TestMethod]
         public void IntegerCanBePromotedToInterval()
         {
             var expression = Integer();
-            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType.ToIntervalType());
+            var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType.ToIntervalType());
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.IntervalPromotion, result.Cost);
+            Assert.AreEqual(CoercionCost.IntervalPromotion, result.Cost);
         }
 
         [TestMethod]
         public void IntegerCanBePromotedToList()
         {
             var expression = Integer();
-            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType.ToListType());
+            var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType.ToListType());
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.ListPromotion, result.Cost);
+            Assert.AreEqual(CoercionCost.ListPromotion, result.Cost);
         }
 
         [TestMethod]
         public void IntervalCanBeDemoted()
         {
             var expression = Interval(Integer(1), Integer(2));
-            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.IntervalDemotion, result.Cost);
+            Assert.AreEqual(CoercionCost.IntervalDemotion, result.Cost);
         }
         [TestMethod]
         public void ListCanBeDemoted()
         {
             var expression = List(SystemTypes.IntegerType, Integer(1), Integer(2));
-            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.ListDemotion, result.Cost);
+            Assert.AreEqual(CoercionCost.ListDemotion, result.Cost);
         }
         [TestMethod]
         public void IntegerPromotedToDecimal()
         {
             var expression = Integer(2);
-            var result = TypeConverter.Convert(expression, SystemTypes.DecimalType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.DecimalType);
             Assert.IsTrue(result.Success);
             Assert.IsInstanceOfType(result.Result, typeof(ToDecimal));
-            Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.Cost);
+            Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.Cost);
         }
         [TestMethod]
         public void ListAnyCanBeCastToListInteger()
         {
             var expression = List(SystemTypes.AnyType);
-            var result = TypeConverter.Convert(expression, SystemTypes.IntegerType.ToListType());
+            var result = CoercionProvider.Coerce(expression, SystemTypes.IntegerType.ToListType());
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Cast, result.Cost);
+            Assert.AreEqual(CoercionCost.Cast, result.Cost);
         }
         [TestMethod]
         public void ListIsSubtypeOfAny()
         {
             var expression = List(SystemTypes.IntegerType);
-            var result = TypeConverter.Convert(expression, SystemTypes.AnyType);
+            var result = CoercionProvider.Coerce(expression, SystemTypes.AnyType);
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(ConversionCost.Subtype, result.Cost);
+            Assert.AreEqual(CoercionCost.Subtype, result.Cost);
         }
     }
 }

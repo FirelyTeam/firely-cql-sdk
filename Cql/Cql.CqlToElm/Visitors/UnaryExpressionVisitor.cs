@@ -178,8 +178,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     asTypeSpecifier = typeSpec,
                     asType = typeSpec is NamedTypeSpecifier nts ? typeSpec.resultTypeName : null
                 }.WithResultType(typeSpec);                
-                var cost = TypeConverter.GetConversionCost(operand.resultTypeSpecifier, typeSpec);
-                if (cost > ConversionCost.Cast)
+                var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpec);
+                if (cost > CoercionCost.Cast)
                     expression
                         .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpec}'.");
             }
@@ -203,8 +203,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 asType = typeSpecifier is NamedTypeSpecifier nts ? typeSpecifier.resultTypeName : null,
                 strict = true,
             }.WithResultType(typeSpecifier);
-            var cost = TypeConverter.GetConversionCost(operand.resultTypeSpecifier, typeSpecifier);
-            if (cost > ConversionCost.Cast)
+            var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpecifier);
+            if (cost > CoercionCost.Cast)
                 expression
                     .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpecifier}'.");
             return expression

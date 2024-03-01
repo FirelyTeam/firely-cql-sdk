@@ -12,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Test
     internal static class TestExtensions
     {
         internal static readonly IModelProvider Provider = new BuiltinModelProvider(M.Models.ElmR1, M.Models.Fhir401);
-        internal static readonly TypeConverter TypeConverter = new TypeConverter(Provider, new OptionsWrapper<CqlToElmOptions>(CqlToElmOptions.Default));
+        internal static readonly CoercionProvider CoercionProvider = new CoercionProvider(Provider, new OptionsWrapper<CqlToElmOptions>(CqlToElmOptions.Default));
         internal static readonly NamedTypeSpecifier Patient = ForFhir("Patient");
         internal static readonly NamedTypeSpecifier Observation = ForFhir("Observation");
         internal static readonly NamedTypeSpecifier Resource = ForFhir("Resource");

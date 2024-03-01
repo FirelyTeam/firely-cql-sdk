@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
             for (int j = 0; j < operandCount; j++)
             {
                 var existingOperand = baseFunctionDef.operand![j];
-                var operandType = InvocationBuilder.ReplaceGenericTypes(existingOperand.operandTypeSpecifier, replacements);
+                var operandType = InvocationBuilder.ReplaceGenericType(existingOperand.operandTypeSpecifier, replacements);
                 var newOperand = new OperandDef
                 {
                     name = existingOperand.name,
@@ -68,7 +68,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 };
                 newOperands[j] = newOperand;
             }
-            var newReturnType = InvocationBuilder.ReplaceGenericTypes(baseFunctionDef.resultTypeSpecifier, replacements);
+            var newReturnType = InvocationBuilder.ReplaceGenericType(baseFunctionDef.resultTypeSpecifier, replacements);
             var overload = baseFunctionDef.CreateOverload(newOperands, newReturnType);
             return overload;
         }

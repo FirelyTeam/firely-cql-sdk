@@ -6,13 +6,13 @@ using System.Linq;
 namespace Hl7.Cql.CqlToElm
 {
     internal record SignatureMatchResult(FunctionDef Function,
-        ConversionResult<Expression>[] Arguments,
+        CoercionResult<Expression>[] Arguments,
         IDictionary<string, TypeSpecifier> GenericInferences, SignatureMatchFlags Flags = SignatureMatchFlags.None,
         string? Error = null)
     {
-        public ConversionCost MostExpensive => Arguments.Length == 0 ? ConversionCost.ExactMatch : Arguments.Max(op => op.Cost);
+        public CoercionCost MostExpensive => Arguments.Length == 0 ? CoercionCost.ExactMatch : Arguments.Max(op => op.Cost);
         public int TotalCost => Arguments.Sum(op => (int)op.Cost);
-        public bool Compatible => Error is null && Flags == SignatureMatchFlags.None && Arguments.All(op => op.Cost != ConversionCost.Incompatible);
+        public bool Compatible => Error is null && Flags == SignatureMatchFlags.None && Arguments.All(op => op.Cost != CoercionCost.Incompatible);
         public bool HasTooFewArguments => Flags.HasFlag(SignatureMatchFlags.TooFewArguments);
         public bool HasTooManyArguments => Flags.HasFlag(SignatureMatchFlags.TooManyArguments);
         public bool IsAmbiguous => Flags.HasFlag(SignatureMatchFlags.Ambiguous);

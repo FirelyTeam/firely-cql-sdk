@@ -16,9 +16,9 @@ namespace Hl7.Cql.CqlToElm
     /// Implements type conversion according to the rules defined by the specification. 
     /// </summary>
     /// <seealso href="https://cql.hl7.org/03-developersguide.html#conversion-precedence"/>
-    internal class TypeConverter
+    internal class CoercionProvider
     {
-        public TypeConverter(IModelProvider modelProvider, IOptions<CqlToElmOptions> options)
+        public CoercionProvider(IModelProvider modelProvider, IOptions<CqlToElmOptions> options)
         {
             ModelProvider = modelProvider;
             Options = options.Value;
@@ -28,27 +28,27 @@ namespace Hl7.Cql.CqlToElm
         public CqlToElmOptions Options { get; }
 
 
-        public ConversionResult<Expression> Convert(Expression expression, TypeSpecifier to)
+        public CoercionResult<Expression> Coerce(Expression expression, TypeSpecifier to)
         {
             // Checking the cost also determines the kind of conversion, if any, we can do.
-            var cost = GetConversionCost(expression.resultTypeSpecifier, to);
+            var cost = GetCoercionCost(expression.resultTypeSpecifier, to);
             // Next we apply the conversion.  
             return cost switch
             {
-                ConversionCost.ExactMatch => new(expression, cost),
+                CoercionCost.ExactMatch => new(expression, cost),
                 // Usually, it is a non-strict As, which has the effect of retyping the expression.
-                ConversionCost.Subtype => new(As(expression, to), cost),
-                ConversionCost.Compatible => new(As(expression, to), cost),
-                ConversionCost.Cast => new(As(expression, to), cost),
-                ConversionCost.ImplicitToSimpleType => new(ImplicitCastToSimple(expression, to), cost),
-                ConversionCost.ImplicitToClassType => new(ImplicitCastToClass(expression, to), cost),
+                CoercionCost.Subtype => new(As(expression, to), cost),
+                CoercionCost.Compatible => new(As(expression, to), cost),
+                CoercionCost.Cast => new(As(expression, to), cost),
+                CoercionCost.ImplicitToSimpleType => new(ImplicitCastToSimple(expression, to), cost),
+                CoercionCost.ImplicitToClassType => new(ImplicitCastToClass(expression, to), cost),
                 // For promotions and demotions, it involves constructing other expressions.
-                ConversionCost.IntervalPromotion when to is IntervalTypeSpecifier toInterval => new(ToInterval(expression, toInterval), cost),
-                ConversionCost.ListDemotion => new(FromList(expression, to), cost),
-                ConversionCost.IntervalDemotion => new(FromInterval(expression, to), cost),
-                ConversionCost.ListPromotion when to is ListTypeSpecifier toList => new(ToList(expression, toList), cost),
+                CoercionCost.IntervalPromotion when to is IntervalTypeSpecifier toInterval => new(ToInterval(expression, toInterval), cost),
+                CoercionCost.ListDemotion => new(FromList(expression, to), cost),
+                CoercionCost.IntervalDemotion => new(FromInterval(expression, to), cost),
+                CoercionCost.ListPromotion when to is ListTypeSpecifier toList => new(ToList(expression, toList), cost),
                 // For incompatible conversions, the expression remains unchanged.
-                ConversionCost.Incompatible => new(expression, cost, IncompatibilityMessage(expression.resultTypeSpecifier, to)),
+                CoercionCost.Incompatible => new(expression, cost, IncompatibilityMessage(expression.resultTypeSpecifier, to)),
                 _ => throw new InvalidOperationException($"Unexpected cost: {Enum.GetName(cost)}")
             };
 
@@ -136,39 +136,39 @@ namespace Hl7.Cql.CqlToElm
         /// Computes the cost of conversion according to the specification's conversion precendence rules.
         /// </summary>
         /// <seealso href="https://cql.hl7.org/03-developersguide.html#conversion-precedence"/>
-        public ConversionCost GetConversionCost(TypeSpecifier from, TypeSpecifier to)
+        public CoercionCost GetCoercionCost(TypeSpecifier from, TypeSpecifier to)
         {
             if (IsExactMatch(from, to))
-                return ConversionCost.ExactMatch;
+                return CoercionCost.ExactMatch;
             else if (IsSubtype(from, to))
-                return ConversionCost.Subtype;
+                return CoercionCost.Subtype;
             else if (IsCompatible(from, to))
-                return ConversionCost.Compatible;
+                return CoercionCost.Compatible;
             else if (CanBeCast(from, to))
-                return ConversionCost.Cast;
+                return CoercionCost.Cast;
             else if (HasImplicitConversion(from, to))
             {
                 if (IsSimpleType(to))
-                    return ConversionCost.ImplicitToSimpleType;
+                    return CoercionCost.ImplicitToSimpleType;
                 else if (IsClassType(to))
-                    return ConversionCost.ImplicitToClassType;
-                else return ConversionCost.Incompatible;
+                    return CoercionCost.ImplicitToClassType;
+                else return CoercionCost.Incompatible;
             }
             else if ((Options.EnableIntervalPromotion ?? false)
                 && to is IntervalTypeSpecifier promotableInterval
                 && CanBePromoted(from, promotableInterval))
-                return ConversionCost.IntervalPromotion;
+                return CoercionCost.IntervalPromotion;
             else if ((Options.EnableListDemotion ?? false)
                 && from is ListTypeSpecifier listType && CanBeDemoted(listType, to))
-                return ConversionCost.ListDemotion;
+                return CoercionCost.ListDemotion;
             else if ((Options.EnableIntervalDemotion ?? false)
                 && from is IntervalTypeSpecifier demotableInterval && CanBeDemoted(demotableInterval, to))
-                return ConversionCost.IntervalDemotion;
+                return CoercionCost.IntervalDemotion;
             else if ((Options.EnableListPromotion ?? false)
                 && to is ListTypeSpecifier promotableListType && CanBePromoted(from, promotableListType))
-                return ConversionCost.ListPromotion;
+                return CoercionCost.ListPromotion;
             else
-                return ConversionCost.Incompatible;
+                return CoercionCost.Incompatible;
         }
 
         internal string IncompatibilityMessage(TypeSpecifier from, TypeSpecifier to) =>

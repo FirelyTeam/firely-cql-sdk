@@ -101,7 +101,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                                         .WithResultType(type);
                                 }
                                 var elementExpression = Visit(instanceElementContexts[i]);
-                                var conversionResult = TypeConverter.Convert(elementExpression, elementType);
+                                var conversionResult = CoercionProvider.Coerce(elementExpression, elementType);
                                 if (conversionResult.Success)
                                 {
                                     var instanceElement = new InstanceElement()

@@ -8,7 +8,7 @@
     /// compatible in all cases.
     /// </remarks>
     /// <seealso href="https://cql.hl7.org/03-developersguide.html#conversion-precedence"/>
-    internal enum ConversionCost: int
+    internal enum CoercionCost: int
     {
         ExactMatch,
         Subtype,

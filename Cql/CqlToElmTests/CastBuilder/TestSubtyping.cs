@@ -22,17 +22,31 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void yes(TypeSpecifier sub, TypeSpecifier super) =>
             sub.IsSubtypeOf(super, provider).Should().BeTrue();
+        private void properYes(TypeSpecifier sub, TypeSpecifier super) =>
+            sub.IsSubtypeOf(super, provider).Should().BeTrue();
 
         private void no(TypeSpecifier sub, TypeSpecifier super) =>
             sub.IsSubtypeOf(super, provider).Should().BeFalse();
+        private void properNo(TypeSpecifier sub, TypeSpecifier super) =>
+            sub.IsProperSubtypeOf(super, provider).Should().BeFalse();
 
         [TestMethod]
-        public void TypesAreNotSubtypesOfThemselves()
+        public void TypesAreSubtypesOfThemselves()
         {
-            no(Patient, Patient);
-            no(Resource, Resource);
-            no(SystemTypes.BooleanType, SystemTypes.BooleanType);
-            no(SystemTypes.AnyType, SystemTypes.AnyType);
+            yes(Patient, Patient);
+            yes(Resource, Resource);
+            yes(SystemTypes.BooleanType, SystemTypes.BooleanType);
+            yes(SystemTypes.AnyType, SystemTypes.AnyType);
+        }
+
+        [TestMethod]
+        public void TypesAreNotProperSubtypesOfThemselves()
+        {
+            properNo(Patient, Patient);
+            properNo(Resource, Resource);
+            properYes(Patient, Resource);
+            properNo(SystemTypes.BooleanType, SystemTypes.BooleanType);
+            properYes(SystemTypes.AnyType, SystemTypes.AnyType); // Any is a subtype of Any?
         }
 
         [TestMethod]

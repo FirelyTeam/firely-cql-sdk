@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder,
-            TypeConverter typeConverter,
+            CoercionProvider coercionProvider,
             ElmFactory elmFactory) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
@@ -25,7 +25,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             ConverterContext = converterContext;
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
-            TypeConverter = typeConverter;
+            CoercionProvider = coercionProvider;
             ElmFactory = elmFactory;
         }
 
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private IConfiguration Configuration { get; }
         private ConverterContext ConverterContext { get; }
         private LibraryBuilder LibraryBuilder { get; }
-        private TypeConverter TypeConverter { get; }
+        private CoercionProvider CoercionProvider { get; }
         private ElmFactory ElmFactory { get; }
         #endregion
 
@@ -77,8 +77,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else pointType = lowType;
             }
 
-            var lowCast = TypeConverter.Convert(low, pointType);
-            var highCast = TypeConverter.Convert(high, pointType);
+            var lowCast = CoercionProvider.Coerce(low, pointType);
+            var highCast = CoercionProvider.Coerce(high, pointType);
 
             if (!lowCast.Success && lowCast.Error is not null)
                 low.AddError(lowCast.Error ?? $"Could not convert low interval value to {pointType}");
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 for (int i = 0; i < elements.Length; i++)
                 {
                     var ei = elements[i];
-                    var result = TypeConverter.Convert(ei, elementType);
+                    var result = CoercionProvider.Coerce(ei, elementType);
                     if (result.Success)
                         typedElements[i] = result.Result;
                     else if (!string.IsNullOrWhiteSpace(result.Error))

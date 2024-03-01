@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
         private static readonly Null Null = new Null().WithResultType(SystemTypes.AnyType);
 
 
-        private static void AssertCompatible(FunctionDef function, Expression[] arguments, ConversionCost mostExpensive, int? totalCost = null)
+        private static void AssertCompatible(FunctionDef function, Expression[] arguments, CoercionCost mostExpensive, int? totalCost = null)
         {
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.IsTrue(result.Compatible);
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MatchAnd()
         {
             var arguments = new[] { Boolean(), Boolean() };
-            AssertCompatible(SystemLibrary.And, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(SystemLibrary.And, arguments, CoercionCost.ExactMatch);
         }
 
         [TestMethod]
@@ -81,7 +81,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MatchNow()
         {
             var arguments = Array.Empty<Expression>();
-            AssertCompatible(SystemLibrary.Now, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(SystemLibrary.Now, arguments, CoercionCost.ExactMatch);
 
         }
 
@@ -90,13 +90,13 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             Expression[] arguments = new[] { Integer(2023) };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.Date, arguments);
-            AssertCompatible(SystemLibrary.Date, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(SystemLibrary.Date, arguments, CoercionCost.ExactMatch);
 
             arguments = new[] { Integer(2023), Integer(1) };
-            AssertCompatible(SystemLibrary.Date, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(SystemLibrary.Date, arguments, CoercionCost.ExactMatch);
 
             arguments = new[] { Integer(2023), Integer(2), Integer(14) };
-            AssertCompatible(SystemLibrary.Date, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(SystemLibrary.Date, arguments, CoercionCost.ExactMatch);
 
             arguments = Array.Empty<Expression>();
             result = InvocationBuilder.MatchSignature(SystemLibrary.Date, arguments);
@@ -119,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
-            AssertCompatible(function, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(function, arguments, CoercionCost.ExactMatch);
 
 
             arguments = new[] { Decimal(1) };
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.DecimalType, inference[T.parameterName]);
-            AssertCompatible(function, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(function, arguments, CoercionCost.ExactMatch);
         }
 
         [TestMethod]
@@ -140,7 +140,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
-            AssertCompatible(function, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(function, arguments, CoercionCost.ExactMatch);
         }
 
 
@@ -155,7 +155,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
-            AssertCompatible(function, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(function, arguments, CoercionCost.ExactMatch);
 
         }
         [TestMethod]
@@ -168,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, inference.Count);
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.IntegerType, inference[T.parameterName]);
-            AssertCompatible(function, arguments, ConversionCost.ExactMatch);
+            AssertCompatible(function, arguments, CoercionCost.ExactMatch);
         }
 
         [TestMethod]
@@ -182,8 +182,8 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             var result = InvocationBuilder.MatchSignature(function, arguments);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
-            Assert.AreEqual(ConversionCost.Subtype, result.Arguments[1].Cost);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.Arguments[0].Cost);
+            Assert.AreEqual(CoercionCost.Subtype, result.Arguments[1].Cost);
         }
         [TestMethod]
         public void MatchGenericListAndT()
@@ -196,9 +196,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             var result = InvocationBuilder.MatchSignature(function, arguments);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
-            Assert.AreEqual(ConversionCost.Subtype, result.Arguments[1].Cost);
-            Assert.AreEqual(ConversionCost.Subtype, result.MostExpensive);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.Arguments[0].Cost);
+            Assert.AreEqual(CoercionCost.Subtype, result.Arguments[1].Cost);
+            Assert.AreEqual(CoercionCost.Subtype, result.MostExpensive);
 
             // These arguments are cheaper than passing two lists.
             // Because in both cases T is inferred to be Any, in the two list case, this results in a List Demotion to T.
@@ -209,9 +209,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(inference.ContainsKey(T.parameterName));
             Assert.AreEqual(SystemTypes.AnyType, inference[T.parameterName]);
             result = InvocationBuilder.MatchSignature(function, arguments);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[0].Cost);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.Arguments[1].Cost);
-            Assert.AreEqual(ConversionCost.ExactMatch, result.MostExpensive);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.Arguments[0].Cost);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.Arguments[1].Cost);
+            Assert.AreEqual(CoercionCost.ExactMatch, result.MostExpensive);
         }
 
         [TestMethod]
@@ -279,7 +279,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var function = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.DecimalType }, SystemTypes.AnyType, "f");
             var result = InvocationBuilder.MatchSignature(function, arguments);
             Assert.IsTrue(result.Compatible);
-            Assert.AreEqual(ConversionCost.ImplicitToSimpleType, result.MostExpensive);
+            Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.MostExpensive);
         }
 
         [TestMethod]
@@ -288,7 +288,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var arguments = new Expression[] { Integer(), Interval(Null, Null) };
             var result = InvocationBuilder.MatchSignature(SystemLibrary.In, arguments);
             Assert.IsTrue(result.Compatible);
-            Assert.AreEqual(ConversionCost.Cast, result.MostExpensive);
+            Assert.AreEqual(CoercionCost.Cast, result.MostExpensive);
         }
         [TestMethod]
         public void NullContainsIntegerAmibugious()

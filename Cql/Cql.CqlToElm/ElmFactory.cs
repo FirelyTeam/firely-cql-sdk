@@ -8,11 +8,11 @@ namespace Hl7.Cql.CqlToElm
 {
     internal class ElmFactory
     {
-        public ElmFactory(TypeConverter typeConverter)
+        public ElmFactory(CoercionProvider coercionProvider)
         {
-            TypeConverter = typeConverter;
+            CoercionProvider = coercionProvider;
         }
-        public TypeConverter TypeConverter { get; }
+        public CoercionProvider CoercionProvider { get; }
 
         public Expression CreateElmNode(FunctionDef function, string? library, Expression[] arguments)
         {
@@ -80,25 +80,25 @@ namespace Hl7.Cql.CqlToElm
         internal Expression If(Expression condition, Expression then, Expression @else)
         {
             var @if = new If();
-            var convertCondition = TypeConverter.Convert(condition, SystemTypes.BooleanType);
+            var convertCondition = CoercionProvider.Coerce(condition, SystemTypes.BooleanType);
             if (convertCondition.Success)
                 condition = convertCondition.Result;
             else if (convertCondition.Error is not null)
                 @if.AddError(convertCondition.Error);
 
-            var convertThenToElse = TypeConverter.Convert(then, @else.resultTypeSpecifier);
-            var convertElseToThen = TypeConverter.Convert(@else, then.resultTypeSpecifier);
+            var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
+            var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
             var compatible = true;
             if (convertThenToElse.Cost < convertElseToThen.Cost)
             {
-                if (convertThenToElse.Cost == ConversionCost.Incompatible)
+                if (convertThenToElse.Cost == CoercionCost.Incompatible)
                     compatible = false;
                 else
                     then = convertThenToElse.Result;
             }
             else
             {
-                if (convertElseToThen.Cost == ConversionCost.Incompatible)
+                if (convertElseToThen.Cost == CoercionCost.Incompatible)
                     compatible = false;
                 else
                     @else = convertElseToThen.Result;
@@ -106,8 +106,8 @@ namespace Hl7.Cql.CqlToElm
             if (!compatible)
             {
                 var choiceType = new ChoiceTypeSpecifier(then.resultTypeSpecifier, @else.resultTypeSpecifier);
-                then = TypeConverter.Convert(then, choiceType).Result; // it will succeed
-                @else = TypeConverter.Convert(@else, choiceType).Result; // it will succeed
+                then = CoercionProvider.Coerce(then, choiceType).Result; // it will succeed
+                @else = CoercionProvider.Coerce(@else, choiceType).Result; // it will succeed
             }
 
             @if.condition = condition;

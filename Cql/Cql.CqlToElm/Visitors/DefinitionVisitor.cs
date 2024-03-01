@@ -14,7 +14,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
         public LibraryBuilder LibraryBuilder { get; }
         public ILibraryProvider LibraryProvider { get; }
-        public TypeConverter TypeConverter { get; }
+        public CoercionProvider CoercionProvider { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
         
 
@@ -26,14 +26,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifierVisitor typeSpecifierVisitor,
             LibraryBuilder libraryBuilder,
             ILibraryProvider libraryProvider,
-            TypeConverter typeConverter)
+            CoercionProvider coercionProvider)
             : base(identifierProvider, invocationBuilder)
         {
             ModelProvider = modelProvider;
             TypeSpecifierVisitor = typeSpecifierVisitor;
             LibraryBuilder = libraryBuilder;
             LibraryProvider = libraryProvider;
-            TypeConverter = typeConverter;
+            CoercionProvider = coercionProvider;
             ExpressionVisitor = expressionVisitor;
         }
 
@@ -181,7 +181,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression coerceDefault(TypeSpecifier type, Expression defaultExpr)
             {
-                var result = TypeConverter.Convert(defaultExpr, type);
+                var result = CoercionProvider.Coerce(defaultExpr, type);
 
                 if (result.Error is null)
                     return result.Result;
@@ -258,7 +258,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var expressionType = functionDef.expression.resultTypeSpecifier;
                 if (returnType is not null)
                 {
-                    var result = TypeConverter.Convert(functionDef.expression, returnType);
+                    var result = CoercionProvider.Coerce(functionDef.expression, returnType);
                     if (!result.Success)
                         functionDef.AddError($"Function {functionDef.name} has declared return type {returnType} but " +
                             $"the function body returns incompatible type {expressionType}.");

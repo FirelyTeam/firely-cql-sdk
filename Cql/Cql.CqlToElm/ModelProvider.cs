@@ -278,12 +278,26 @@ namespace Hl7.Cql.CqlToElm
 
 
         /// <summary>
-        /// Determines whether instances of <paramref name="subType"/> can be used where a variables of type <paramref name="superType"/> is expected.
+        /// Determines whether instances of <paramref name="subType"/> is a subtype of <paramref name="superType"/>.
         /// </summary>
-        /// <remarks>This function checks a subtyping relationship, not whether in- or explicit casts may exist between the types.
-        /// See https://cql.hl7.org/03-developersguide.html#type-testing for more information.</remarks>
-        internal static bool IsSubtypeOf(this Elm.TypeSpecifier subType, Elm.TypeSpecifier superType, IModelProvider provider)
+        /// <remarks>
+        /// Note that the Any type is considered a supertype of all types, even if they are not declared in any model (e.g., List, Interval).
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/03-developersguide.html#type-testing" />
+        internal static bool IsSubtypeOf(this Elm.TypeSpecifier subType, Elm.TypeSpecifier superType, IModelProvider provider) =>
+            superType == subType || IsProperSubtypeOf(subType, superType, provider);
+
+        /// <summary>
+        /// Determines whether instances of <paramref name="subType"/> is a proper subtype of <paramref name="superType"/>.
+        /// </summary>
+        /// <remarks>
+        /// Note that the Any type is considered a supertype of all types, even if they are not declared in any model (e.g., List, Interval).
+        /// </remarks>
+        /// <seealso href="https://cql.hl7.org/03-developersguide.html#type-testing" />
+        internal static bool IsProperSubtypeOf(this Elm.TypeSpecifier subType, Elm.TypeSpecifier superType, IModelProvider provider)
         {
+            if (superType == SystemTypes.AnyType)
+                return true;
             if (subType is Elm.NamedTypeSpecifier subtypeNT && superType is Elm.NamedTypeSpecifier)
             {
                 var baseType = GetBaseType(provider, subtypeNT);

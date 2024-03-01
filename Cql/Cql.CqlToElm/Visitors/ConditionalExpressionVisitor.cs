@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         var caseItem = new CaseItem();
 
                         var when = Visit(item.expression(0));
-                        var whenCastResult = TypeConverter.Convert(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType);
+                        var whenCastResult = CoercionProvider.Coerce(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType);
                         if (whenCastResult.Success)
                             caseItem.when = whenCastResult.Result;
                         else if (whenCastResult.Error is not null)
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             foreach (var item in caseItems)
             {
                 var then = item.then;
-                var thenCastResult = TypeConverter.Convert(then, returnType);
+                var thenCastResult = CoercionProvider.Coerce(then, returnType);
                 if (thenCastResult.Success)
                 {
                     item.then = thenCastResult.Result;
@@ -99,7 +99,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else if (thenCastResult.Error is not null)
                     item.AddError(thenCastResult.Error);
             }
-            var elseCastResult = TypeConverter.Convert(@else, returnType);
+            var elseCastResult = CoercionProvider.Coerce(@else, returnType);
             if (elseCastResult.Success)
                 @else = elseCastResult.Result;
             else if (elseCastResult.Error is not null)
