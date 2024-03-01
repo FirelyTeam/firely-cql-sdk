@@ -36,12 +36,12 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// The value of this quantity.
         /// </summary>
-        public decimal? value { get; }
+        public decimal? value { get; set; }
 
         /// <summary>
         /// The UCUM units of this quantity.
         /// </summary>
-        public string? unit { get; }
+        public string? unit { get; set;  }
 
         /// <summary>
         /// Gets a string representation of this quantity.

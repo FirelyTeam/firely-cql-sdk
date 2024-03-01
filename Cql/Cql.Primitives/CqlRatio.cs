@@ -33,11 +33,11 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// The numerator of this ratio.
         /// </summary>
-        public CqlQuantity? numerator { get; }
+        public CqlQuantity? numerator { get; set;  }
         /// <summary>
         /// The denominator of this ratio.
         /// </summary>
-        public CqlQuantity? denominator { get; }
+        public CqlQuantity? denominator { get; set;  }
 
         /// <summary>
         /// Gets a string representation of this ratio.
