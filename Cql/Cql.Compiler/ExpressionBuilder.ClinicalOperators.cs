@@ -80,18 +80,28 @@ namespace Hl7.Cql.Compiler
 
         }
 
-        public Expression ExpandValueSet(elm.ExpandValueSet e, ExpressionBuilderContext ctx)
+        protected Expression ExpandValueSet(elm.ExpandValueSet e, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(e.operand!, ctx);
-<<<<<<< HEAD
-            var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(IValueSetDictionary) });
+// // <<<<<<< HEAD
+//             var ctor = typeof(ValueSetFacade).GetConstructor(new[] { typeof(CqlValueSet), typeof(IValueSetDictionary) });
+//             var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
+//             var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
+//             var property = Expression.Property(ctx.CqlContextParameter, operatorsProperty);
+//             var call = Expression.Call(property, createFacadeMethod, operand);
+// =======
+             var call = CallCreateValueSetFacade(ctx, operand);
+// >>>>>>> develop
+            return call;
+        }
+
+        protected MethodCallExpression CallCreateValueSetFacade(ExpressionBuilderContext ctx, Expression operand)
+        {
             var operatorsProperty = typeof(CqlContext).GetProperty(nameof(CqlContext.Operators))!;
             var createFacadeMethod = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.CreateValueSetFacade))!;
             var property = Expression.Property(ctx.CqlContextParameter, operatorsProperty);
             var call = Expression.Call(property, createFacadeMethod, operand);
-=======
-            var call = CallCreateValueSetFacade(ctx, operand);
->>>>>>> develop
+
             return call;
         }
     }

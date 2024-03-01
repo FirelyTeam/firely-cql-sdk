@@ -293,28 +293,28 @@ namespace Hl7.Cql.Compiler
             return typeInfo!;
         }
 
-        internal static string ToCamelCase(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-            {
-                return input;
-            }
-
-            // Split the input string into words based on spaces or other delimiters
-            string[] words = input.Split(new char[] { ' ', '_', '-', '.' }, StringSplitOptions.RemoveEmptyEntries);
-
-            // Ensure that the first word starts with a lowercase letter
-            words[0] = words[0].ToLower();
-
-            for (int i = 1; i < words.Length; i++)
-            {
-                // Capitalize the first letter of each subsequent word
-                words[i] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(words[i]);
-            }
-
-            // Concatenate the words to form the camelCase string
-            return string.Join("", words);
-        }
+        // internal static string ToCamelCase(string input)
+        // {
+        //     if (string.IsNullOrEmpty(input))
+        //     {
+        //         return input;
+        //     }
+        //
+        //     // Split the input string into words based on spaces or other delimiters
+        //     string[] words = input.Split(new char[] { ' ', '_', '-', '.' }, StringSplitOptions.RemoveEmptyEntries);
+        //
+        //     // Ensure that the first word starts with a lowercase letter
+        //     words[0] = words[0].ToLower();
+        //
+        //     for (int i = 1; i < words.Length; i++)
+        //     {
+        //         // Capitalize the first letter of each subsequent word
+        //         words[i] = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(words[i]);
+        //     }
+        //
+        //     // Concatenate the words to form the camelCase string
+        //     return string.Join("", words);
+        // }
 
         /// <summary>
         /// Gets a unique tuple name given the elements (members) of the type.

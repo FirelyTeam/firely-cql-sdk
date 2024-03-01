@@ -192,7 +192,7 @@ namespace Hl7.Cql.Packaging
                 builderLogger.LogInformation($"Building expressions for {library.NameAndVersion}");
                 var expressions = builder.Build();
                 all.Merge(expressions);
-                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, builder, canon, library);
+                var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
                 fhirLibraries.Add(library.NameAndVersion, fhirLibrary);
             }
 
@@ -277,7 +277,8 @@ namespace Hl7.Cql.Packaging
             return resources;
         }
 
-        private Hl7.Fhir.Model.Library createLibraryResource(FileInfo elmFile,
+        private Hl7.Fhir.Model.Library createLibraryResource(
+            FileInfo elmFile,
             FileInfo? cqlFile,
             AssemblyData assembly,
             CqlTypeToFhirTypeMapper typeCrosswalk,
