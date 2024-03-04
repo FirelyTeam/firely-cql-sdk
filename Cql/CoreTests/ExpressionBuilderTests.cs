@@ -40,7 +40,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var eb = ExpressionBuilder.SingleLibrary(binding, typeManager, elmPackage, logger);
             var expressions = eb.Build();
             Assert.IsNotNull(expressions);
         }
@@ -66,7 +66,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Medication_Request_Example.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
+            var eb = ExpressionBuilder.SingleLibrary(binding, typeManager, elmPackage, logger);
 
             var fdt = new FhirDateTime(2023, 12, 11, 9, 41, 30, TimeSpan.FromHours(-5));
             var fdts = fdt.ToString();
@@ -88,7 +88,7 @@ namespace CoreTests
             {
                 identifier = new Hl7.Cql.Elm.VersionedIdentifier()
             };
-            var eb = new ExpressionBuilder(binding, typeManager, lib, logger);
+            var eb = ExpressionBuilder.SingleLibrary(binding, typeManager, lib, logger);
 
             var property = eb.GetProperty(typeof(MeasureReport.PopulationComponent), "id");
             Assert.AreEqual(typeof(Element), property.DeclaringType);

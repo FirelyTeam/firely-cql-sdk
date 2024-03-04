@@ -304,7 +304,7 @@ namespace Hl7.Cql.Compiler
             string[] words = input.Split(new char[] { ' ', '_', '-', '.' }, StringSplitOptions.RemoveEmptyEntries);
 
             // Ensure that the first word starts with a lowercase letter
-            words[0] = words[0].ToLower();
+            words[0] = words[0].ToLowerInvariant();
 
             for (int i = 1; i < words.Length; i++)
             {

@@ -24,10 +24,11 @@ namespace Hl7.Cql.Packaging
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var builder = new ExpressionBuilder(
+            var builder = ExpressionBuilder.SingleLibrary(
                 new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
                 new TypeManager(typeResolver),
-                library!, builderLogger, new(false));
+                library!, 
+                builderLogger);
             var lambda = builder.Lambda(expression);
             var func = lambda.Compile();
             return func.DynamicInvoke(context);
