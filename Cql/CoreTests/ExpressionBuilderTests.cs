@@ -86,7 +86,7 @@ namespace CoreTests
             var logger = CreateLogger();
             var lib = new Hl7.Cql.Elm.Library
             {
-                identifier = new Hl7.Cql.Elm.VersionedIdentifier()
+                identifier = new Hl7.Cql.Elm.VersionedIdentifier { id="Test" }
             };
             var eb = ExpressionBuilder.ForSingleLibrary(binding, typeManager, lib, logger);
 
