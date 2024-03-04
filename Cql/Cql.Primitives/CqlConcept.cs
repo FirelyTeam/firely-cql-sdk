@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,13 +20,11 @@ namespace Hl7.Cql.Primitives
     public class CqlConcept
     {
         /// <summary>
-        /// The codes in this concept.
+        /// Creates an instance.
         /// </summary>
-        public CqlCode[]? codes { get; set;  }
-        /// <summary>
-        /// The display name of this concept.
-        /// </summary>
-        public string? display { get; set;  }
+        public CqlConcept()
+        {
+        }
 
         /// <summary>
         /// Creates an instance.
@@ -34,19 +33,19 @@ namespace Hl7.Cql.Primitives
         /// <param name="display">The display name of this concept.</param>
         public CqlConcept(IEnumerable<CqlCode> codes, string? display)
         {
-            if (codes == null)
-                this.codes = new CqlCode[0];
-            else
-                this.codes = codes.ToArray();
+            this.codes = codes?.ToArray() ?? Array.Empty<CqlCode>();
             this.display = display;
         }
 
         /// <summary>
-        /// Creates an instance.
+        /// The codes in this concept.
         /// </summary>
-        public CqlConcept()
-        {
-        }
+        public CqlCode[]? codes { get; init; }
+
+        /// <summary>
+        /// The display name of this concept.
+        /// </summary>
+        public string? display { get; init; }
 
     }
 }

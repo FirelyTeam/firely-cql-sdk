@@ -18,6 +18,13 @@ namespace Hl7.Cql.Primitives
         /// <summary>
         /// Creates an instance.
         /// </summary>
+        public CqlCode()
+        {
+        }
+
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
         /// <remarks>
         /// Be careful about superfluously populating <see cref="version"/> and <see cref="display"/>.
         /// CQL equality semantics check these values for operators like In as well as with value set checks.
@@ -35,30 +42,21 @@ namespace Hl7.Cql.Primitives
         }
 
         /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        public CqlCode()
-        {
-        }
-
-        /// <summary>
         /// The value of the code.
         /// </summary>
-        public string? code { get; set; }
+        public string? code { get; init; }
         /// <summary>
         /// The display value for this code.
         /// </summary>
-        public string? display { get; set;  }
+        public string? display { get; init; }
         /// <summary>
         /// The code system.
         /// </summary>
-        public string? system { get; set;  }
+        public string? system { get; init; }
         /// <summary>
         /// The code version.
         /// </summary>
-        public string? version { get; set; }
+        public string? version { get; init; }
 
     }
-
-
 }
