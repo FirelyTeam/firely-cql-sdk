@@ -1214,7 +1214,6 @@ namespace Hl7.Cql.Compiler
 
         protected Expression FunctionRef(FunctionRef @ref, ExpressionBuilderContext ctx)
         {
-
             var operands = @ref.operand
                 .Select(operand => TranslateExpression(operand, ctx))
                 .ToArray();
@@ -1226,7 +1225,7 @@ namespace Hl7.Cql.Compiler
             if (def is FunctionDef function)
             {
 
-                var functionType = getFunctionRefReturnType(@ref, operandTypes, ctx);
+                var functionType = getFunctionRefReturnType(@ref, ctx);
 
                 var funcTypeParameters =
                     new[] { typeof(CqlContext) }
@@ -1277,7 +1276,7 @@ namespace Hl7.Cql.Compiler
             }
             else throw new InvalidOperationException($"Could not resolve function {@ref.libraryName}.{@ref.name}");
 
-            Type getFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes, ExpressionBuilderContext ctx)
+            Type getFunctionRefReturnType(FunctionRef op, ExpressionBuilderContext ctx)
             {
                 var operands = op.operand
                     .Select(operand => TranslateExpression(operand, ctx))
@@ -2891,7 +2890,7 @@ namespace Hl7.Cql.Compiler
             return funcType;
         }
         
-        protected MemberInfo GetProperty(Type type, string name)
+        protected internal MemberInfo GetProperty(Type type, string name)
         {
             if (type.IsGenericType)
             {
