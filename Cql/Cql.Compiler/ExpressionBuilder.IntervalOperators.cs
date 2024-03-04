@@ -199,7 +199,7 @@ namespace Hl7.Cql.Compiler
             {
                 var precision = Precision(e.precision, e.precisionSpecified);
                 if (left.Type != pointType)
-                    throw new InvalidOperationException();
+                    throw new InvalidOperationException($"IncludedIn requires that the operands have compatible types.");
                 return OperatorBinding.Bind(CqlOperator.IntervalIncludesElement, ctx.RuntimeContextParameter, right, left, precision);
 
             }

@@ -10,9 +10,7 @@ namespace CoreTests.Elm
         internal static readonly TypeSpecifier FullTT = new TupleTypeSpecifier
         {
             element = new[]
-          {
-                    new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier { parameterName = "A" } },
-                    new TupleElementDefinition { name = "typeParam2", elementType = SystemTypes.T },
+            {
                     new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier { elementType = new ParameterTypeSpecifier { parameterName = "B" } } },
                     new TupleElementDefinition { name = "interval", elementType = new IntervalTypeSpecifier { pointType = new ParameterTypeSpecifier { parameterName = "C" } } },
                     new TupleElementDefinition { name = "interval2", elementType = new IntervalTypeSpecifier { pointType = new ParameterTypeSpecifier { parameterName = "C" } } },
@@ -25,7 +23,6 @@ namespace CoreTests.Elm
         {
             element = new[]
             {
-                    new TupleElementDefinition { name = "typeParam", elementType = new ParameterTypeSpecifier() },
                     new TupleElementDefinition { name = "list", elementType = new ListTypeSpecifier()},
                     new TupleElementDefinition { name = "interval", elementType = new IntervalTypeSpecifier()},
                     new TupleElementDefinition { name = "interval2", elementType = new IntervalTypeSpecifier()},
@@ -130,9 +127,11 @@ namespace CoreTests.Elm
             var cts2 = new ChoiceTypeSpecifier() { choice = new[] { SystemTypes.LongType, SystemTypes.StringType } };
             var cts3 = new ChoiceTypeSpecifier() { choice = new[] { SystemTypes.LongType, SystemTypes.BooleanType } };
             var cts4 = new ChoiceTypeSpecifier();
-
+            cts1.Equals(cts4);
             eq(cts1, cts2);
             neq(cts1, cts3);
+            TypeSpecifier.SetEquals(cts1.choice, cts4.choice).Should().BeFalse();
+            TypeSpecifier.SetEquals(cts4.choice, cts1.choice).Should().BeFalse();
             neq(cts1, cts4);
         }
 

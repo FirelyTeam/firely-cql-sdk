@@ -14,8 +14,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
         public LibraryBuilder LibraryBuilder { get; }
         public ILibraryProvider LibraryProvider { get; }
+        public CoercionProvider CoercionProvider { get; }
         public ExpressionVisitor ExpressionVisitor { get; }
-
+        
 
         public DefinitionVisitor(
             LocalIdentifierProvider identifierProvider,
@@ -24,13 +25,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             ExpressionVisitor expressionVisitor,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LibraryBuilder libraryBuilder,
-            ILibraryProvider libraryProvider)
+            ILibraryProvider libraryProvider,
+            CoercionProvider coercionProvider)
             : base(identifierProvider, invocationBuilder)
         {
             ModelProvider = modelProvider;
             TypeSpecifierVisitor = typeSpecifierVisitor;
             LibraryBuilder = libraryBuilder;
             LibraryProvider = libraryProvider;
+            CoercionProvider = coercionProvider;
             ExpressionVisitor = expressionVisitor;
         }
 
@@ -178,13 +181,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression coerceDefault(TypeSpecifier type, Expression defaultExpr)
             {
-                InvocationBuilder ib = new(ModelProvider);
-                var (result, _, error) = ib.BuildImplicitCast(defaultExpr, type, out var _);
+                var result = CoercionProvider.Coerce(defaultExpr, type);
 
-                if (error is null)
-                    return result;
+                if (result.Error is null)
+                    return result.Result;
                 else
-                    return defaultExpr.AddError($"Default value cannot be converted to parameter type {type}.");
+                    return defaultExpr.AddError($"Expected an expression of type '{type}', but found an expression of type '{defaultExpr.resultTypeSpecifier}'.");
             }
         }
 
@@ -256,7 +258,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var expressionType = functionDef.expression.resultTypeSpecifier;
                 if (returnType is not null)
                 {
-                    if (!expressionType.IsSubtypeOf(returnType, ModelProvider))
+                    var result = CoercionProvider.Coerce(functionDef.expression, returnType);
+                    if (!result.Success)
                         functionDef.AddError($"Function {functionDef.name} has declared return type {returnType} but " +
                             $"the function body returns incompatible type {expressionType}.");
 
@@ -358,7 +361,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 templateId = ModelProvider.GetDefaultProfileUriForType(resultType),
             }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType());
 
-            var singleton = SystemLibrary.SingletonFrom.Call(ModelProvider, statementContext, retrieve);
+            var singleton = InvocationBuilder.Invoke(SystemLibrary.SingletonFrom, retrieve);
             var (_, exprName) = resultType;
             var exprDef = new ExpressionDef
             {

@@ -37,15 +37,18 @@ namespace Hl7.Cql.CqlToElm.Test
                     .AddConsole()
                     .ThrowOn(LogLevel.Error))
                 .AddTransient<InvocationBuilder>()
+                .AddSingleton<CoercionProvider>()
+                .AddSingleton<ElmFactory>()
                 .AddScoped<CqlToElmConverter>();
             Services = services.BuildServiceProvider();
 
-            var lib = new Elm.Library
+            var lib = new Library
             {
-                identifier = new Elm.VersionedIdentifier { id = "Lambdas", version = "1.0.0" }
+                identifier = new VersionedIdentifier { id = "Lambdas", version = "1.0.0" }
             };
             ExpressionBuilder = ExpressionBuilderFor(lib);
         }
+
 
         protected virtual Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
 
@@ -68,6 +71,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var result = dg.DynamicInvoke(ctx ?? FhirCqlContext.ForBundle());
             return result;
         }
+        internal static T? Run<T>(Expression expression, CqlContext? ctx = null) =>
+            (T?)Run(expression, ctx);
 
         internal static object? Run(Library library,
             Func<DefinitionDictionary<Delegate>, CqlContext> ctxFactory,
@@ -83,7 +88,7 @@ namespace Hl7.Cql.CqlToElm.Test
             return result;
         }
 
-        internal static ExpressionBuilder ExpressionBuilderFor(Elm.Library lib)
+        internal static ExpressionBuilder ExpressionBuilderFor(Library lib)
         {
             var tr = FhirTypeResolver.Default;
             var tc = FhirTypeConverter.Default;
@@ -112,6 +117,23 @@ namespace Hl7.Cql.CqlToElm.Test
                 throw ex.InnerException!;
             }
         }
+        public void AssertNullResult(Expression be)
+        {
+            var lambda = ExpressionBuilder.Lambda(@be);
+            var dg = lambda.Compile();
+            var ctx = FhirCqlContext.ForBundle();
+
+            try
+            {
+                var result = dg.DynamicInvoke(ctx);
+                Assert.IsNull(result);
+            }
+            catch (TargetInvocationException ex)
+            {
+                throw ex.InnerException!;
+            }
+        }
+
 
         protected void AssertIntervalType(TypeSpecifier specifier, string pointTypeName)
         {
@@ -123,6 +145,15 @@ namespace Hl7.Cql.CqlToElm.Test
             var nts = (NamedTypeSpecifier)lts.pointType;
             Assert.IsNotNull(nts.name);
             Assert.AreEqual(pointTypeName, nts.name.Name);
+        }
+
+        protected void AssertIntervalType(TypeSpecifier typeSpecifier, TypeSpecifier pointType)
+        {
+            Assert.IsInstanceOfType(typeSpecifier, typeof(IntervalTypeSpecifier));
+            var lts = (IntervalTypeSpecifier)typeSpecifier;
+            Assert.IsNotNull(lts.pointType);
+            Assert.AreEqual(lts.pointType, pointType);
+           
         }
 
         protected void AssertChoiceType(TypeSpecifier specifier, params string[] namedTypes)
@@ -180,6 +211,14 @@ namespace Hl7.Cql.CqlToElm.Test
             for (int i = 0; i < expectedValues.Length; i++)
                 Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
 
+        }
+
+        protected Library createLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        {
+            return MakeLibrary($@"
+                library AsTest version '1.0.0'
+
+                define private ""{memberName}"": {expression}");
         }
     }
 }

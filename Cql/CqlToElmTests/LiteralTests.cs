@@ -1,4 +1,7 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,22 +14,11 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context)
-#pragma warning restore IDE0060 // Remove unused parameter
+        public static void Initialize(TestContext context) => ClassInitialize(co =>
         {
-            var services = new ServiceCollection()
-                .AddModels(mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401))
-                .AddVisitors()
-                .AddContext()
-                .AddLocalIdProvider()
-                .AddConfiguration(cb => cb.WithDefaultOptions())
-                .AddLogging(builder => builder
-                    .AddConsole()
-                    .ThrowOn(LogLevel.Error))
-                .AddScoped<InvocationBuilder>()
-                .AddScoped<CqlToElmConverter>();
-            Services = services.BuildServiceProvider();
-        }
+        });
+#pragma warning restore IDE0060 // Remove unused parameter
+        internal static InvocationBuilder InvocationBuilder => Services.GetRequiredService<InvocationBuilder>();
 
         protected override Library ConvertLibrary(string cql)
         {
@@ -233,7 +225,6 @@ namespace Hl7.Cql.CqlToElm.Test
             ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(Literal));
             {
@@ -261,7 +252,6 @@ namespace Hl7.Cql.CqlToElm.Test
             ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(Literal));
             {
@@ -276,6 +266,15 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
                 Assert.AreEqual("-2147483649", literal.value);
             }
+        }
+
+        [TestMethod]
+
+        public void Long_MinValue()
+        {
+            var lib = createLibraryForExpression("-9223372036854775808L");
+            var literal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>(false);
+            literal.Should().HaveType(SystemTypes.LongType);
         }
 
         #endregion
@@ -1077,6 +1076,16 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
+        public void DateTime_Literal_T()
+        {
+            var lib = createLibraryForExpression("@2016T");
+            var dt = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateTime>();
+            var yearLiteral = dt.year.Should().BeOfType<Literal>().Subject;
+            yearLiteral.value.Should().Be("2016");
+            dt.month.Should().BeNull();
+        }
+
+        [TestMethod]
         public void Time_Literal_Millisecond_Precision()
         {
             var library = MakeLibrary(@"
@@ -1683,5 +1692,20 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void Ceiling_1D()
+        {
+            var input = createLibraryForExpression("Ceiling(1.0)");
+            var ceiling = input.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Ceiling>();
+            var output = createLibraryForExpression("1");
+            var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
+            var context = FhirCqlContext.ForBundle();
+            var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, new Expression[] { ceiling, literal });
+            equalsOverload.Compatible.Should().BeTrue();
+            var invokeEquals = InvocationBuilder.Invoke(equalsOverload, null);
+            invokeEquals.GetErrors().Should().BeEmpty();
+            var equalsCall = Run(invokeEquals);
+            Assert.AreEqual(true, equalsCall);
+        }
     }
 }

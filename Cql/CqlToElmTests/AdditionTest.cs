@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using FluentAssertions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
@@ -1586,6 +1587,12 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void Add_Strings_With_Plus()
+        {
+            var library = createLibraryForExpression("'hello' + 'world'");
+            var concat = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Concatenate>();
+        }
 
 
     }

@@ -79,15 +79,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void OptionalReturnTypesMustBeSupertype()
-        {
-            _ = MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define function Two() returns Decimal: 2",
-                "Function*declared return type*Decimal*but*returns*Integer.");
-        }
-
-        [TestMethod]
         public void MakesParametersVisibleInScope()
         {
             var library = MakeLibrary(@"

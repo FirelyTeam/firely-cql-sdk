@@ -16,8 +16,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            var and = SystemLibrary.And.Call(ModelProvider, context, lhs, rhs);
-            return and;
+            var and = InvocationBuilder.Invoke(SystemLibrary.And, lhs, rhs);
+            return and
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // expressionTerm('+' | '-' | '&') expressionTerm                               #additionExpressionTerm
@@ -28,16 +30,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(terms[1]);
 
-            Expression result =
-                @operator switch
-                {
-                    "+" => SystemLibrary.Add.Call(ModelProvider, context, new[] { lhs, rhs, }, out var _a),
-                    "-" => SystemLibrary.Subtract.Call(ModelProvider, context, new[] { lhs, rhs, }, out var _s),
-                    "&" => SystemLibrary.Concatenate.Call(ModelProvider, context, lhs, rhs),
-                    _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
-                };
-
-            return result;
+            var invocation = @operator switch
+            {
+                "+"  => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
+                "-" => InvocationBuilder.Invoke(SystemLibrary.Subtract, lhs, rhs),
+                "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
+            };
+            return invocation
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
@@ -57,15 +59,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(expressions[1]);
 
-            return @operator switch
+            var expression = @operator switch
             {
-                "=" => (Expression)SystemLibrary.Equal.Call(ModelProvider, context, lhs, rhs),
-                "!=" => (Expression)SystemLibrary.NotEqual.Call(ModelProvider, context, lhs, rhs),
-                "~" => (Expression)SystemLibrary.Equivalent.Call(ModelProvider, context, lhs, rhs),
-                "!~" => (Expression)SystemLibrary.Not.Call(ModelProvider, context,
-                                        SystemLibrary.Equivalent.Call(ModelProvider, context, lhs, rhs)),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression."),
+                "=" => InvocationBuilder.Invoke(SystemLibrary.Equal, lhs, rhs),
+                "!=" => InvocationBuilder.Invoke(SystemLibrary.NotEqual, lhs, rhs),
+                "~" => InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs),
+                "!~" => NotEquivalent(lhs, rhs),
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression.")
             };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
+
+            Expression NotEquivalent(Expression lhs, Expression rhs)
+            {
+                var equivalent = InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs);
+                var not = InvocationBuilder.Invoke(SystemLibrary.Not, equivalent);
+                return not;
+            }
         }
 
         //  expression 'implies' expression                                                               #impliesExpression
@@ -75,7 +86,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            return SystemLibrary.Implies.Call(ModelProvider, context, lhs, rhs);
+            return InvocationBuilder.Invoke(SystemLibrary.Implies, lhs, rhs)
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //    | expression ('<=' | '<' | '>' | '>=') expression                                               #inequalityExpression
@@ -88,14 +101,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                ">" => SystemLibrary.Greater.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                ">=" => SystemLibrary.GreaterOrEqual.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "<" => SystemLibrary.Less.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "<=" => SystemLibrary.LessOrEqual.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
+                ">" => InvocationBuilder.Invoke(SystemLibrary.Greater, lhs, rhs),
+                ">=" => InvocationBuilder.Invoke(SystemLibrary.GreaterOrEqual, lhs, rhs),
+                "<" => InvocationBuilder.Invoke(SystemLibrary.Less, lhs, rhs),
+                "<=" => InvocationBuilder.Invoke(SystemLibrary.LessOrEqual, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in inequality expression."),
             };
 
-            return result;
+            return result
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // | expressionTerm ('*' | '/' | 'div' | 'mod') expressionTerm                     #multiplicationExpressionTerm
@@ -106,14 +121,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @operator = context.GetChild(1).GetText();
             var rhs = Visit(expressionTerms[1]);
 
-            return @operator switch
+            var expression = @operator switch
             {
-                "*" => SystemLibrary.Multiply.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "/" => SystemLibrary.Divide.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "div" => SystemLibrary.TruncatedDivide.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                "mod" => SystemLibrary.Modulo.Call(ModelProvider, context, new[] { lhs, rhs }, out var _),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression."),
+                "*" => InvocationBuilder.Invoke(SystemLibrary.Multiply, lhs, rhs),
+                "/" => InvocationBuilder.Invoke(SystemLibrary.Divide, lhs, rhs),
+                "div" => InvocationBuilder.Invoke(SystemLibrary.TruncatedDivide, lhs, rhs),
+                "mod" => InvocationBuilder.Invoke(SystemLibrary.Modulo, lhs, rhs),
+                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression.")
             };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
+
         }
 
         //     | expression ('or' | 'xor') expression                                                          #orExpression
@@ -126,12 +145,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                "or" => SystemLibrary.Or.Call(ModelProvider, context, lhs, rhs),
-                "xor" => SystemLibrary.Xor.Call(ModelProvider, context, lhs, rhs),
+                "or" => InvocationBuilder.Invoke(SystemLibrary.Or, lhs, rhs),
+                "xor" => InvocationBuilder.Invoke(SystemLibrary.Xor, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in (x)or expression.")
             };
 
-            return result;
+            return result
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //| expressionTerm '^' expressionTerm                                             #powerExpressionTerm
@@ -141,7 +162,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
 
-            return SystemLibrary.Power.Call(ModelProvider, context, new[] { lhs, rhs }, out var _);
+            return InvocationBuilder.Invoke(SystemLibrary.Power, lhs, rhs)
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         public override Expression VisitIndexedExpressionTerm([NotNull] cqlParser.IndexedExpressionTermContext context)
@@ -172,29 +195,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             return indexer
                 .WithLocator(context.Locator())
-                .WithResultType(type);               
+                .WithResultType(type);
         }
 
-
-        public Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
-            Antlr4.Runtime.ParserRuleContext? context,
-            cqlParser.PluralDateTimePrecisionContext precisionContext,
-            cqlParser.ExpressionTermContext[] expressionTerms)
+        // expression('in' | 'contains') dateTimePrecisionSpecifier? expression
+        public override Expression VisitMembershipExpression([NotNull] cqlParser.MembershipExpressionContext context)
         {
-            var precision = Precision(precisionContext);
-            var lhs = Visit(expressionTerms[0]);
-            var rhs = Visit(expressionTerms[1]);
-
-            var call = systemFunction.Call(ModelProvider, context, new[] { lhs, rhs, precision }, out var selectedOverload);
-            return selectedOverload switch
+            var terms = context.expression();
+            var lhs = Visit(terms[0]);
+            var rhs = Visit(terms[1]);
+            Expression expression;
+            if (context.GetChild(1).GetText() == "in")
             {
-                SystemFunction bd => bd.Validate(call),
-                _ => call
-            };
+                var precision = Precision(context.dateTimePrecisionSpecifier());
+                var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
+                var match = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
+                expression = InvocationBuilder.Invoke(match);
+            }
+            else
+            {
+                var match = InvocationBuilder.MatchSignature(SystemLibrary.Contains, new[] { lhs, rhs });
+                expression = InvocationBuilder.Invoke(match);
+            }
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
-
-        private static Literal Precision(cqlParser.PluralDateTimePrecisionContext context) =>
-            new Literal { value = Enum.GetName(context.Parse()) }.WithResultType(SystemTypes.StringType);
 
 
 

@@ -33,10 +33,13 @@ namespace Hl7.Cql.Compiler
                         var elmAs = new ElmAsExpression(newArray, type, @as.strict);
                         return elmAs;
                     }
-                    else
+                    else if (type == TypeResolver.AnyType) // handles untyped empty lists whose type is Any
                     {
-                        throw new InvalidOperationException("Cannot use as operator on a list if the as type is not also a list type.");
+                        var newArray = Expression.NewArrayBounds(TypeResolver.AnyType, Expression.Constant(0));
+                        var elmAs = new ElmAsExpression(newArray, type, @as.strict);
+                        return elmAs;
                     }
+                    throw new InvalidOperationException("Cannot use as operator on a list if the as type is not also a list type.");
                 }
             }
 

@@ -15,55 +15,45 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override Expression VisitBooleanLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.BooleanLiteralContext context)
         {
             var value = context.GetText();
-            var literal = new Literal
-            {
-                value = value,
-                valueType = SystemTypes.BooleanType.name,
-            }.WithResultType(SystemTypes.BooleanType).WithLocator(context.Locator());
-
-            return literal;
+            Literal literal;
+            if (bool.TryParse(value, out var bv))
+                literal = ElmFactory.Literal(bv);
+            else 
+                literal = ElmFactory.Literal(value)
+                    .AddError($"Unable to parse '{value}' as a boolean value.");
+            return literal
+                .WithLocator(context.Locator());
         }
 
         public override Expression VisitDateLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.DateLiteralContext context)
         {
             var dateLiteral = new Date
             {
-            }.WithResultType(SystemTypes.DateType).WithLocator(context.Locator());
+            }
+            .WithLocator(context.Locator())
+            .WithResultType(SystemTypes.DateType);
 
             var dateText = context.GetText()[1..];
 
-            if (DateIso8601.TryParse(dateText, out var date))
+            if (DateIso8601.TryParse(dateText, out var date) && date is not null)
             {
                 var startLine = context.Start.Line;
                 int startCol = context.Start.Column;
 
-                dateLiteral.year = new Literal
-                {
-                    value = date!.Year.ToString(CultureInfo.InvariantCulture),
-                    valueType = SystemTypes.IntegerType.name,
-                }.WithLocator(FormatLocator(startLine, startCol, startLine, startCol + 4))
-                    .WithResultType(SystemTypes.IntegerType);
+                dateLiteral.year = ElmFactory.Literal(date!.Year)
+                    .WithLocator(FormatLocator(startLine, startCol, startLine, startCol + 4));
 
-                if (date.Precision > Iso8601.DateTimePrecision.Year)
+                if (date.Precision > Iso8601.DateTimePrecision.Year && date.Month is not null)
                 {
-                    dateLiteral.month = new Literal
-                    {
-                        value = date.Month.ToString(),
-                        valueType = SystemTypes.IntegerType.name,
-                    }.WithLocator(FormatLocator(startLine + 5, startCol, startLine, startCol + 7))
-                        .WithResultType(SystemTypes.IntegerType);
+                    dateLiteral.month = ElmFactory.Literal(date.Month.Value)
+                        .WithLocator(FormatLocator(startLine + 5, startCol, startLine, startCol + 7));
                 }
 
-                if (date.Precision > Iso8601.DateTimePrecision.Month)
+                if (date.Precision > Iso8601.DateTimePrecision.Month && date.Day is not null)
                 {
-                    dateLiteral.day = new Literal
-                    {
-                        value = date.Day.ToString(),
-                        valueType = SystemTypes.IntegerType.name,
-                    }.WithLocator(FormatLocator(startLine + 8, startCol, startLine, startCol + 10))
-                        .WithResultType(SystemTypes.IntegerType);
+                    dateLiteral.day = ElmFactory.Literal(date.Day.Value)
+                        .WithLocator(FormatLocator(startLine + 8, startCol, startLine, startCol + 10));
                 }
-
                 return dateLiteral;
             }
             else
@@ -79,8 +69,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }.WithLocator(context.Locator()).WithResultType(SystemTypes.DateTimeType);
 
             var dateText = context.GetText()[1..];
+            if (dateText.EndsWith("T"))
+                dateText = dateText[0..^1];
 
-            if (DateTimeIso8601.TryParse(dateText, out var dateTime))
+            if (DateTimeIso8601.TryParse(dateText, out var dateTime) && dateTime is not null)
             {
                 var integerType = SystemTypes.IntegerType;
                 var startLine = context.Start.Line;
@@ -94,60 +86,60 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     valueType = integerType.name,
                     resultTypeSpecifier = integerType,
                 };
-                if (dateTime.Precision > Iso8601.DateTimePrecision.Year)
+                if (dateTime.Precision > Iso8601.DateTimePrecision.Year && dateTime.Month.HasValue)
                     dateTimeLiteral.month = new Literal
                     {
-                        value = dateTime.Month.ToString(),
+                        value = dateTime.Month.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 5, startCol, startLine, startCol + 7),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
-                if (dateTime.Precision > Iso8601.DateTimePrecision.Month)
+                if (dateTime.Precision > Iso8601.DateTimePrecision.Month && dateTime.Day.HasValue)
                     dateTimeLiteral.day = new Literal
                     {
-                        value = dateTime.Day.ToString(),
+                        value = dateTime.Day.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 8, startCol, startLine, startCol + 10),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
-                if (dateTime.Precision > Iso8601.DateTimePrecision.Day)
+                if (dateTime.Precision > Iso8601.DateTimePrecision.Day && dateTime.Hour.HasValue)
                     dateTimeLiteral.hour = new Literal
                     {
-                        value = dateTime.Hour.ToString(),
+                        value = dateTime.Hour.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 11, startCol, startLine, startCol + 13),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
-                if (dateTime.Precision > Iso8601.DateTimePrecision.Hour)
+                if (dateTime.Precision > Iso8601.DateTimePrecision.Hour && dateTime.Minute.HasValue)
                     dateTimeLiteral.minute = new Literal
                     {
-                        value = dateTime.Minute.ToString(),
+                        value = dateTime.Minute.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 14, startCol, startLine, startCol + 16),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
-                if (dateTime.Precision > Iso8601.DateTimePrecision.Minute)
+                if (dateTime.Precision > Iso8601.DateTimePrecision.Minute && dateTime.Second.HasValue)
                     dateTimeLiteral.second = new Literal
                     {
-                        value = dateTime.Second.ToString(),
+                        value = dateTime.Second.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
-                if (dateTime.Precision > Iso8601.DateTimePrecision.Second)
+                if (dateTime.Precision > Iso8601.DateTimePrecision.Second && dateTime.Millisecond.HasValue)
                     dateTimeLiteral.millisecond = new Literal
                     {
-                        value = dateTime.Millisecond.ToString(),
+                        value = dateTime.Millisecond.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
                         resultTypeName = integerType.name,
@@ -179,23 +171,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         public override Expression VisitLongNumberLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.LongNumberLiteralContext context)
         {
-            var literal = new Literal
-            {
-                valueType = SystemTypes.LongType.name
-            }.WithResultType(SystemTypes.LongType).WithLocator(context.Locator());
-
             if (!bool.TryParse(Configuration[nameof(CqlToElmOptions.ValidateLiterals)] ?? bool.FalseString, out var validateLiterals))
                 validateLiterals = true;
 
             var valueText = context.GetText()[..^1];
-            literal.value = valueText;
 
-            if (validateLiterals && !long.TryParse(valueText, out long _))
+            Literal literal;
+            if (long.TryParse(valueText, out long longValue))
+                literal = ElmFactory.Literal(longValue);
+            else
             {
-                literal.AddError($"Unparseable long literal {valueText}.", ErrorType.syntax);
+                literal = ElmFactory.Literal(valueText)
+                    .WithResultType(SystemTypes.LongType);
+                literal.valueType = SystemTypes.LongType.name;
+                if (validateLiterals)
+                    literal.AddError($"Unparseable long literal {valueText}.", ErrorType.syntax);
             }
-
-            return literal;
+            return literal
+                .WithLocator(context.Locator());
         }
 
         public override Expression VisitNullLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.NullLiteralContext context)
@@ -203,9 +196,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @null = new Null
             {
                 valueType = SystemTypes.AnyType.name,
-            }.WithLocator(context.Locator()).WithResultType(SystemTypes.AnyType);
+            };
 
-            return @null;
+            return @null
+                .WithLocator(context.Locator())
+                .WithResultType(SystemTypes.AnyType);
         }
 
         public override Expression VisitNumberLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.NumberLiteralContext context)
@@ -216,8 +211,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 value = value,
             };
 
-            if (!bool.TryParse(Configuration[nameof(CqlToElmOptions.ValidateLiterals)] ?? bool.FalseString, out var validateLiterals))
-                validateLiterals = true;
+            var validateLiterals = Option(o => o.ValidateLiterals);
 
             NamedTypeSpecifier? typeSpecifier = null;
 
@@ -227,7 +221,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (abs.StartsWith('-'))
                     abs = abs[1..];
                 var parts = abs.Split('.');
-
 
                 if (validateLiterals)
                 {
@@ -243,9 +236,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 typeSpecifier = SystemTypes.DecimalType;
             }
             else if (int.TryParse(value, out var i))
-            {
                 typeSpecifier = SystemTypes.IntegerType;
+            else if (long.TryParse(value, out var l) && !Option(o => o.LongsRequireSuffix))
+            {
+                typeSpecifier = SystemTypes.LongType;
             }
+
             else if (validateLiterals)
                 return literal.AddError($"Unparseable numeric literal '{value}'.", ErrorType.syntax);
             else
@@ -253,8 +249,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 typeSpecifier = SystemTypes.AnyType;
             }
             literal.valueType = typeSpecifier.name;
-            literal = literal.WithResultType(typeSpecifier).WithLocator(context.Locator());
-            return literal;
+            return literal
+                .WithLocator(context.Locator())
+                .WithResultType(typeSpecifier);
         }
 
         public override Expression VisitParenthesizedTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.ParenthesizedTermContext context) =>
@@ -263,31 +260,64 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //   | ('+' | '-') expressionTerm                                                    #polarityExpressionTerm
         public override Expression VisitPolarityExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.PolarityExpressionTermContext context)
         {
-            var sign = context.GetChild(0).GetText();
-            var expression = Visit(context.expressionTerm());
+            var text = context.GetText();
+            if (text == "-2147483648")
+                return ElmFactory.Literal(-2147483648)
+                    .WithLocator(context.Locator());
+            else if (text == "-9223372036854775808L")
+                return ElmFactory.Literal(-9223372036854775808L)
+                    .WithLocator(context.Locator());
+            else if (text == "-99999999999999999999.99999999")
+                return ElmFactory.Literal(-99999999999999999999.99999999m)
+                    .WithLocator(context.Locator());
+            else
+            {
+                var sign = context.GetChild(0).GetText();
+                var expression = Visit(context.expressionTerm());
 
-            if (expression is Literal literal)
-            {
-                literal.value = $"{sign}{literal.value}";
-                return literal;
-            }            
-            else if (sign == "-")
-            {
-                if (expression is Quantity quantity)
+                if (expression is Literal literal)
                 {
-                    quantity.value *= -1;
-                    return quantity;
+                    literal.value = apply(sign, literal.value);
+                    return literal;
                 }
-                else {
-                    return new Negate
+                else if (sign == "-")
+                {
+                    if (expression is Quantity quantity)
                     {
-                        operand = expression,
+                        quantity.value *= -1;
+                        return quantity;
                     }
-                    .WithLocator(context.Locator())
-                    .WithResultType(expression.resultTypeSpecifier);
+                    else
+                    {
+                        return new Negate
+                        {
+                            operand = expression,
+                        }
+                        .WithLocator(context.Locator())
+                        .WithResultType(expression.resultTypeSpecifier);
+                    }
+                }
+                else return expression;
+
+                string apply(string polarity, string number)
+                {
+                    if (polarity == "-")
+                    {
+                        if (number.StartsWith("-"))
+                        {
+                            return number.Substring(1);
+                        }
+                        else
+                        {
+                            return "-" + number;
+                        }
+                    }
+                    else
+                    {
+                        return number;
+                    }
                 }
             }
-            else return expression;
         }
 
         public override Expression VisitQuantityLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityLiteralContext context)
@@ -302,6 +332,32 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 valueSpecified = true,
             }.WithResultType(SystemTypes.QuantityType);
             return quantity;
+        }
+
+        public override Expression VisitQuantity([Antlr4.Runtime.Misc.NotNull] cqlParser.QuantityContext context)
+        {
+            var quantity = new Quantity();
+            var unit = context.unit()?.GetText();
+            if (string.IsNullOrWhiteSpace(unit))
+            {
+                quantity.AddError($"Unit is missing");
+            }
+            else
+            {
+                quantity.unit = unit ?? "1";
+            }
+            if (!decimal.TryParse(context.NUMBER().GetText(), out var value))
+            {
+                quantity.AddError($"Could not parse {context.NUMBER()} as a number.");
+            }
+            else
+            {
+                quantity.value = value;
+                quantity.valueSpecified = true;
+            }
+            return quantity
+                .WithLocator(context.Locator())
+                .WithResultType(SystemTypes.QuantityType);
         }
 
         public override Expression VisitRatioLiteral([Antlr4.Runtime.Misc.NotNull] cqlParser.RatioLiteralContext context)
@@ -379,30 +435,30 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     valueType = integerType.name,
                     resultTypeSpecifier = integerType,
                 };
-                if (time.Precision > Iso8601.DateTimePrecision.Hour)
+                if (time.Precision > Iso8601.DateTimePrecision.Hour && time.Minute.HasValue)
                     timeLiteral.minute = new Literal
                     {
-                        value = time.Minute.ToString(),
+                        value = time.Minute.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 14, startCol, startLine, startCol + 16),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
-                if (time.Precision > Iso8601.DateTimePrecision.Minute)
+                if (time.Precision > Iso8601.DateTimePrecision.Minute && time.Second.HasValue)
                     timeLiteral.second = new Literal
                     {
-                        value = time.Second.ToString(),
+                        value = time.Second.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
                         resultTypeName = integerType.name,
                         valueType = integerType.name,
                         resultTypeSpecifier = integerType,
                     };
-                if (time.Precision > Iso8601.DateTimePrecision.Second)
+                if (time.Precision > Iso8601.DateTimePrecision.Second && time.Millisecond.HasValue)
                     timeLiteral.millisecond = new Literal
                     {
-                        value = time.Millisecond.ToString(),
+                        value = time.Millisecond.Value.ToString(CultureInfo.InvariantCulture),
                         localId = NextId(),
                         locator = FormatLocator(startLine + 17, startCol, startLine, startCol + 19),
                         resultTypeName = integerType.name,

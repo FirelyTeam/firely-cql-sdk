@@ -1,23 +1,42 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<TargetFramework>net6.0</TargetFramework>
-		<ImplicitUsings>disable</ImplicitUsings>
-		<Nullable>enable</Nullable>
-		<AssemblyName>Hl7.Cql.CqlToElm.Grammar</AssemblyName>
-		<RootNamespace>Hl7.Cql.CqlToElm.Grammar</RootNamespace>
-	</PropertyGroup>
+    <Import Project="..\..\cql-sdk.props"/>
 
-	<ItemGroup>
-		<PackageReference Include="Antlr4.Runtime.Standard" Version="4.11.1" />
-		<PackageReference Include="Antlr4BuildTasks" Version="12.2.0" PrivateAssets="all" />
-	</ItemGroup>
+    <PropertyGroup>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>disable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <AssemblyName>Hl7.Cql.CqlToElm.Grammar</AssemblyName>
+        <RootNamespace>Hl7.Cql.CqlToElm.Grammar</RootNamespace>
+        <NoWarn>RS0016</NoWarn>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
+        <AssemblyAttribute Include="System.CLSCompliantAttribute">
+            <_Parameter1>true</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Antlr4 Include="cql.g4">
-			<Visitor>true</Visitor>
-			<Package>Hl7.Cql.CqlToElm.Grammar</Package>
-		</Antlr4>
-	</ItemGroup>
+    <!--
+    The ANTLR4 build tasks require msbuild, so cannot be run from VS Code, Rider or a
+    standard dotnet build. They can only be run from Visual Studio. This is why the
+    Antlr4 package reference and Antlr4 build tasks are commented out. We have included
+    the generated files in the repository so that the project can be built without
+    needing to run the ANTLR4 build tasks.
+    
+    If the grammar changes, the generated files will need to be updated. Uncomment the 
+    lines below, run the build in Visual Studio, copy the generated files from the
+    obj/debug directory and then commit the updated generated files. 
+        
+    <ItemGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
+        <PackageReference Include="Antlr4BuildTasks" Version="12.8" PrivateAssets="All"/>
+        <Antlr4 Include="cql.g4">
+            <Visitor>true</Visitor>
+            <Package>Hl7.Cql.CqlToElm.Grammar</Package>
+        </Antlr4>
+    </ItemGroup>
+    -->
 
 </Project>

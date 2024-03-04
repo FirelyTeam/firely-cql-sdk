@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -359,111 +360,17 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Null()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Integer_Equals_Null: 1 = null
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as Literal;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as As;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("1 = null");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         [TestMethod]
         public void Null_Equals_Integer()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Null_Equals_Integer: null = 1
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as As;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as Literal;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("null = 1");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         #endregion
@@ -810,111 +717,17 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_Equals_Null()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Long_Equals_Null: 1L = null
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as Literal;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as As;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("1L = null");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         [TestMethod]
         public void Null_Equals_Long()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Null_Equals_Long: null = 1L
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as As;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as Literal;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("null = 1L");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         #endregion
@@ -1261,111 +1074,17 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Equals_Null()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Decimal_Equals_Null: 1.0 = null
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as Literal;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as As;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("1.0 = null");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         [TestMethod]
         public void Null_Equals_Decimal()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Null_Equals_Decimal: null = 1.0
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as As;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as Literal;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("null = 1.0");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         #endregion
@@ -1712,111 +1431,17 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Equals_Null()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Integer_Equals_Null: 1.0 '1' = null
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as Quantity;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as As;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("1.0 '1' = null");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         [TestMethod]
         public void Null_Equals_Quantity()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Null_Equals_Integer: null = 1.0 '1'
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as As;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as Quantity;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("null = 1.0 '1'");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         #endregion
@@ -1881,111 +1506,17 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Equals_Null()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private String_Equals_String: 'hello' = null
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as Literal;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}String", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}String", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as As;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}String", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}String", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("'hello' = null");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         [TestMethod]
         public void Null_Equals_String()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private String_Equals_String: null = 'hello'
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as As;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}String", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}String", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as Literal;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}String", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}String", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("null = 'hello'");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
 
@@ -2048,111 +1579,30 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_Equals_Null()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
-
-                define private Date_Equals_Date: @2023 = null
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as Date;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as As;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", rhsnts.name.Name);
-                }
-
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
+            var library = createLibraryForExpression("@2023 = null");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
         }
 
         [TestMethod]
         public void Null_Equals_Date()
         {
-            var library = MakeLibrary(@"
-                library EqualsTest version '1.0.0'
+            var library = createLibraryForExpression("null = @2023");
+            var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            AssertNullResult(equal);
+        }
 
-                define private Date_Equals_Date: null = @2023
-            ");
-            Assert.IsNotNull(library.statements);
-            Assert.AreEqual(1, library.statements.Length);
-            Assert.IsNotNull(library.statements[0].expression.localId);
-            Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Equal));
-            {
-                var equal = (Equal)library.statements[0].expression;
-                Assert.IsNotNull(equal.resultTypeName);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", equal.resultTypeName.Name);
-                Assert.IsNotNull(equal.resultTypeSpecifier);
-                Assert.IsInstanceOfType(equal.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                var nts = (NamedTypeSpecifier)equal.resultTypeSpecifier;
-                Assert.IsNotNull(nts.name);
-                Assert.IsNotNull(nts.name.Name);
-                Assert.AreEqual($"{{{SystemUri}}}Boolean", nts.name.Name);
-                Assert.IsNotNull(equal.operand);
-                Assert.AreEqual(2, equal.operand.Length);
-                {
-                    var lhs = equal.operand[0] as As;
-                    Assert.IsNotNull(lhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", lhs!.resultTypeName.Name);
-                    Assert.IsNotNull(lhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(lhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var lhsnts = (NamedTypeSpecifier)lhs.resultTypeSpecifier;
-                    Assert.IsNotNull(lhsnts.name);
-                    Assert.IsNotNull(lhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", lhsnts.name.Name);
-                }
-                {
-                    var rhs = equal.operand[1] as Date;
-                    Assert.IsNotNull(rhs!.resultTypeName);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", rhs!.resultTypeName.Name);
-                    Assert.IsNotNull(rhs.resultTypeSpecifier);
-                    Assert.IsInstanceOfType(rhs.resultTypeSpecifier, typeof(NamedTypeSpecifier));
-                    var rhsnts = (NamedTypeSpecifier)rhs.resultTypeSpecifier;
-                    Assert.IsNotNull(rhsnts.name);
-                    Assert.IsNotNull(rhsnts.name.Name);
-                    Assert.AreEqual($"{{{SystemUri}}}Date", rhsnts.name.Name);
-                }
+        [TestMethod]
+        public void DateTimeList_Equals_DateTimeList()
+        {
+            var lib = createLibraryForExpression("{ DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016T, @2015T, @2010T }");
+            var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            equal.operand.Should().HaveCount(2);
+            equal.operand[0].Should().HaveType(SystemTypes.DateTimeType.ToListType());
+            equal.operand[1].Should().HaveType(SystemTypes.DateTimeType.ToListType());
+            var result = Run<bool?>(equal);
+            Assert.IsTrue(result);
 
-                var lambda = ExpressionBuilder.Lambda(equal);
-                var dg = lambda.Compile();
-                var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
-                Assert.IsNull(result);
-            }
         }
     }
 

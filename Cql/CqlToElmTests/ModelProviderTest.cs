@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Model;
+﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test

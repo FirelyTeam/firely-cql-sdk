@@ -17,16 +17,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression boolean = lastChild switch
             {
-                "null" => SystemLibrary.IsNull.Call(ModelProvider, context, operand),
-                "true" => SystemLibrary.IsTrue.Call(ModelProvider, context, operand),
-                "false" => SystemLibrary.IsFalse.Call(ModelProvider, context, operand),
+                "null" => InvocationBuilder.Invoke(SystemLibrary.IsNull, operand),
+                "true" => InvocationBuilder.Invoke(SystemLibrary.IsTrue, operand),
+                "false" => InvocationBuilder.Invoke(SystemLibrary.IsFalse, operand),
                 _ => throw new InvalidOperationException($"Unexpected boolean comparison argument {lastChild}.")
             };
 
             if (isNot)
-                boolean = SystemLibrary.Not.Call(ModelProvider, context, boolean);
+                boolean = InvocationBuilder.Invoke(SystemLibrary.Not, boolean);
 
-            return boolean;
+            return boolean
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //     | 'singleton' 'from' expressionTerm                                             #elementExtractorExpressionTerm
@@ -34,7 +36,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return SystemLibrary.SingletonFrom.Call(ModelProvider, context, operand);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.SingletonFrom, operand);
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //     | 'exists' expression                                                                           #existenceExpression
@@ -42,46 +47,58 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expression());
 
-            return SystemLibrary.Exists.Call(ModelProvider, context, operand);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.Exists, operand);
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // | 'not' expression                                                                              #notExpression
         public override Expression VisitNotExpression([NotNull] cqlParser.NotExpressionContext context)
         {
             var operand = Visit(context.expression());
-
-            return SystemLibrary.Not.Call(ModelProvider, context, operand);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.Not, operand);
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //    | 'point' 'from' expressionTerm                                                 #pointExtractorExpressionTerm
         public override Expression VisitPointExtractorExpressionTerm([NotNull] cqlParser.PointExtractorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-            return SystemLibrary.PointFrom.Call(ModelProvider, context, operand);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.PointFrom, operand);
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //    | 'predecessor' 'of' expressionTerm                                             #predecessorExpressionTerm
         public override Expression VisitPredecessorExpressionTerm([NotNull] cqlParser.PredecessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-            var call = SystemLibrary.Predecessor.Call(ModelProvider, context, operand);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.Predecessor, operand);
 
-            if (!operand.resultTypeSpecifier.IsValidOrderedType())
-                call.AddError("Predecessor can only be applied to types that are ordered.");
+            if (!operand.resultTypeSpecifier.IsOrderedType())
+                expression.AddError("Predecessor can only be applied to types that are ordered.");
 
-            return call;
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //     | 'successor' 'of' expressionTerm                                               #successorExpressionTerm
         public override Expression VisitSuccessorExpressionTerm([NotNull] cqlParser.SuccessorExpressionTermContext context)
         {
             var operand = Visit(context.expressionTerm());
-            var call = SystemLibrary.Successor.Call(ModelProvider, context, operand);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.Successor, operand);
 
-            if (!operand.resultTypeSpecifier.IsValidOrderedType())
-                call.AddError("Successor can only be applied to types that are ordered.");
+            if (!operand.resultTypeSpecifier.IsOrderedType())
+                expression.AddError("Successor can only be applied to types that are ordered.");
 
-            return call;
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //   | ('start' | 'end') 'of' expressionTerm                                         #timeBoundaryExpressionTerm
@@ -90,12 +107,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var startOrEnd = context.GetChild(0).GetText();
             var operand = Visit(context.expressionTerm());
 
-            return startOrEnd switch
+            var expression = startOrEnd switch
             {
-                "start" => SystemLibrary.Start.Call(ModelProvider, context, operand),
-                "end" => SystemLibrary.End.Call(ModelProvider, context, operand),
+                "start" => InvocationBuilder.Invoke(SystemLibrary.Start, operand),
+                "end" => InvocationBuilder.Invoke(SystemLibrary.End, operand),
                 _ => throw new InvalidOperationException($"Parser returned unknown start or end keyword '{startOrEnd}' in a time boundary expression.")
             };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //    ('minimum' | 'maximum') namedTypeSpecifier                                    #typeExtentExpressionTerm
@@ -104,17 +124,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var extent = context.GetChild(0).GetText();
             var typeSpecifier = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
 
-            Expression call = extent switch
+            Expression expression = extent switch
             {
-                "minimum" => SystemLibrary.MinValue.Build(typeSpecifier, context),
-                "maximum" => SystemLibrary.MaxValue.Build(typeSpecifier, context),
+                "minimum" => ElmFactory.MinValue(typeSpecifier),
+                "maximum" => ElmFactory.MaxValue(typeSpecifier),
                 _ => throw new InvalidOperationException($"Parser returned unknown extent '{extent}' in a type extent expression.")
             };
 
-            if (!typeSpecifier.IsValidOrderedType())
-                call.AddError($"Can only determine {extent} for types that are ordered.");
-
-            return call;
+            if (!typeSpecifier.IsOrderedType())
+                expression.AddError($"Can only determine {extent} for types that are ordered.");
+            
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //   'width' expressionTerm                                                          #widthExpressionTerm
@@ -122,33 +144,72 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var operand = Visit(context.expressionTerm());
 
-            return SystemLibrary.Width.Call(ModelProvider, context, operand);
+            var expression = InvocationBuilder.Invoke(SystemLibrary.Width, operand);
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //   expression ('is' | 'as') typeSpecifier  
         public override Expression VisitTypeExpression([NotNull] cqlParser.TypeExpressionContext context)
         {
-            var lhs = Visit(context.expression());
+            var operand = Visit(context.expression());
             var @operator = context.GetChild(1).GetText();
             var typeSpec = TypeSpecifierVisitor.Visit(context.typeSpecifier());
 
-            Expression? expression = @operator switch
+            Expression expression;
+            // the is operator is performend at runtime.  It is possible through static type analysis to
+            // conclude that some is statements will always be false, but we're not doing that here.
+            if (@operator == "is")
             {
-                "is" => SystemLibrary.Is.Build(typeSpec, lhs, context),
-                "as" => SystemLibrary.As.Build(false, typeSpec, lhs, context),
-                _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in a type expression.")
-            };
+                expression = new Is
+                {
+                    operand = operand,
+                    isTypeSpecifier = typeSpec,
+                    isType = typeSpec is NamedTypeSpecifier nts ? typeSpec.resultTypeName : null
+                }.WithResultType(SystemTypes.BooleanType);                
+            }
+            else if (@operator == "as")
+            {
+                // using the as operator is an explicit cast.  we will statically determine some failures.
+                expression = new As
+                {
+                    operand = operand,
+                    asTypeSpecifier = typeSpec,
+                    asType = typeSpec is NamedTypeSpecifier nts ? typeSpec.resultTypeName : null
+                }.WithResultType(typeSpec);                
+                var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpec);
+                if (cost > CoercionCost.Cast)
+                    expression
+                        .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpec}'.");
+            }
+            else throw new InvalidOperationException($"Unexpected term {@operator}.  Expected 'is' or 'as'.");
 
-            return expression;
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         // 'cast' expression 'as' typeSpecifier                                                          #castExpression
         public override Expression VisitCastExpression([NotNull] cqlParser.CastExpressionContext context)
         {
+            // using the as operator is an explicit cast.  we will statically determine some failures.
             var operand = Visit(context.expression());
             var typeSpecifier = TypeSpecifierVisitor.Visit(context.typeSpecifier());
-
-            return SystemLibrary.As.Build(true, typeSpecifier, operand, context);
+            var expression = new As
+            {
+                operand = operand,
+                asTypeSpecifier = typeSpecifier,
+                asType = typeSpecifier is NamedTypeSpecifier nts ? typeSpecifier.resultTypeName : null,
+                strict = true,
+            }.WithResultType(typeSpecifier);
+            var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpecifier);
+            if (cost > CoercionCost.Cast)
+                expression
+                    .AddError($"Expression of type '{expression.resultTypeSpecifier}' cannot be cast as a value of type '{typeSpecifier}'.");
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         public override Expression VisitConversionExpressionTerm([NotNull] cqlParser.ConversionExpressionTermContext context)
@@ -171,10 +232,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         convert = new ToDateTime().WithResultType(SystemTypes.DateTimeType);
                     else if (nts == SystemTypes.DateType)
                         convert = new ToDate().WithResultType(SystemTypes.DateType);
+                    else if (nts == SystemTypes.TimeType)
+                        convert = new ToTime().WithResultType(SystemTypes.TimeType);
                     else if (nts == SystemTypes.ConceptType)
                         convert = new ToConcept().WithResultType(SystemTypes.ConceptType);
                     else if (nts == SystemTypes.BooleanType)
                         convert = new ToBoolean().WithResultType(SystemTypes.BooleanType);
+                    else if (nts == SystemTypes.StringType)
+                        convert = new ToString().WithResultType(SystemTypes.StringType);
                     else
                         convert = new Elm.Convert() { toTypeSpecifier = type }.WithResultType(type);
                 }
@@ -190,6 +255,40 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var unitContext = Visit(context.unit());
             }
             throw new NotImplementedException();
+        }
+
+        public override Expression VisitTimeUnitExpressionTerm([NotNull] cqlParser.TimeUnitExpressionTermContext context)
+        {
+            var operand = Visit(context.expressionTerm());
+            var dtcText = context.dateTimeComponent().GetText();
+            Expression expression;
+            if (dtcText == "date")
+            {
+                expression = InvocationBuilder.Invoke(SystemLibrary.DateFrom, operand);
+            }
+            else if (dtcText == "time")
+            {
+                expression = InvocationBuilder.Invoke(SystemLibrary.TimeFrom, operand);
+            }
+            else if (dtcText == "timezoneoffset")
+            {
+                expression = InvocationBuilder.Invoke(SystemLibrary.TimezoneOffsetFrom, operand);
+            }
+            else
+            {
+                var precision = Precision(context.dateTimeComponent());
+                if (precision is null)
+                    return new DateTimeComponentFrom { operand = operand }
+                        .AddError($"Invalid precision: {context.dateTimeComponent().GetText()}")
+                        .WithId()
+                        .WithLocator(context.Locator())
+                        .WithResultType(SystemTypes.IntegerType);
+                 expression = InvocationBuilder.Invoke(SystemLibrary.TimeComponent, operand, precision);
+
+            }
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using FluentAssertions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -167,5 +168,21 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+        [TestMethod]
+        public void Take_Null_Integer()
+        {
+            var library = createLibraryForExpression("Take(null, 3)");
+            var slice = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Slice>();
+            var @as = slice.source.Should().BeOfType<As>().Subject;
+            @as.Should().HaveType(SystemTypes.AnyType.ToListType());
+            @as.operand.Should().BeOfType<Null>();
+            slice.startIndex.Should().BeLiteralInteger(0);
+            var coalesce = slice.endIndex.Should().BeOfType<Coalesce>().Subject;
+            coalesce.operand.Should().HaveCount(2);
+            coalesce.operand[0].Should().BeLiteralInteger(3);
+            coalesce.operand[1].Should().BeLiteralInteger(0);
+            var result = Run(slice);
+            Assert.IsNull(result);
+        }
     }
 }

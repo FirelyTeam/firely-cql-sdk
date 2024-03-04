@@ -48,7 +48,7 @@
 
         /// <summary>
         /// When <see langword="true"/>, illegal literals that would fall outside the range of their minimum and maximum values will raise errors.
-        /// The defualt value is <see langword="true"/>.
+        /// The default value is <see langword="true"/>.
         /// </summary>
         /// <remarks>
         /// If your execution enviornment has different minimum and maximum values for some types, you should set this value to <see langword="false"/> as necessary.
@@ -57,10 +57,17 @@
         public bool? ValidateLiterals { get; set; } = true;
 
         /// <summary>
+        /// When <see langword="true"/>, literals like 2147483648 without the L suffix required for long values
+        /// will be allowed.  Otherwise, these literals will be treated as errors if <see cref="ValidateLiterals"/> is <see langword="true"/>.
+        /// The default value is <see langword="true"/>.
+        /// </summary>
+        public bool? LongsRequireSuffix { get; set; } = true;
+
+        /// <summary>
         /// When <see langword="true"/>, intervals' point types will be required to be an ordered type.
         /// Ordered types are specifically types for which predecessor, successor, and comparison operators exist.
         /// Specifically, this includes Integer, Long, Decimal, Quantity, Date, DateTime, and Type types.
-        /// The defualt value is <see langword="true"/>.
+        /// The default value is <see langword="true"/>.
         /// </summary>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
         public bool? ValidateIntervals { get; set; } = true;
@@ -69,10 +76,47 @@
         /// When <see langword="true"/>, Interval(null, null) will be a valid construct.
         /// When <see langword="false"/>, an error will be generated when an interval's low and high values are both null.
         /// Note that this setting will only prevent intervals explicitly declared with the null keyword.
-        /// The defualt value is <see langword="false"/>.
+        /// The default value is <see langword="false"/>.
         /// </summary>
         /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
         public bool? AllowNullIntervals { get; set; } = false;
 
+        /// <summary>
+        /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
+        /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
+        /// The default value is <see langword="false"/>.
+        /// </summary>
+        public bool? EnableIntervalPromotion { get; set; } = false;
+
+        /// <summary>
+        /// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.
+        /// When <see langword="false"/>, an error will occur; authors will be required to create lists explicitly.
+        /// The default value is <see langword="false"/>.
+        /// </summary>
+        /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
+        public bool? EnableListPromotion { get; set; } = false;
+
+        /// <summary>
+        /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
+        /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
+        /// The default value is <see langword="false"/>.
+        /// </summary>
+        /// <remarks>
+        /// Note that whether an interval is a point interval cannot be known at compile time.
+        /// This type of conversion will issue a warning and could fail at runtime.
+        /// </remarks>
+        public bool? EnableIntervalDemotion { get; set; } = false;
+
+        /// <summary>
+        /// When <see langword="true"/>, lists of size 1 will automatically be converted to scalar values as necessary.
+        /// When <see langword="false"/>, an error will occur; authors will be required to access the single list value explicitly.
+        /// The default value is <see langword="false"/>.
+        /// </summary>
+        /// <remarks>
+        /// Note that whether a list has only one element cannot be known at compile time.
+        /// This type of conversion will issue a warning and could fail at runtime.
+        /// </remarks>
+        /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
+        public bool? EnableListDemotion { get; set; } = false;
     }
 }

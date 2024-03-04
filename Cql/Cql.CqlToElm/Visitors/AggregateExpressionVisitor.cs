@@ -1,9 +1,11 @@
 ﻿using Antlr4.Runtime.Misc;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,6 +44,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 var per = Visit(expressions[1]);
+                if (per is Literal literal)
+                    per = InvocationBuilder.Invoke(SystemLibrary.ToQuantity, per)
+                        .WithLocator(expressions[1].Locator());
+                     
                 return keyword switch
                 {
                     CqlKeyword.Collapse => HandleCollapse(context, Visit(expressions[0]), per),
@@ -95,7 +101,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             var expand = new Expand()
             {
-                operand = new[] { expression }
+                operand = new[] 
+                { 
+                    expression, 
+                    new Null().WithResultType(SystemTypes.QuantityType) 
+                }
             };
             return expand
                 .WithResultType(expression.resultTypeSpecifier)
@@ -125,6 +135,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Expression HandleExpand(cqlParser.SetAggregateExpressionTermContext context, Expression expression, Expression per)
         {
+            Debug.Assert(per.resultTypeSpecifier == SystemTypes.QuantityType);
             var expand = new Expand()
             {
                 operand = new[]

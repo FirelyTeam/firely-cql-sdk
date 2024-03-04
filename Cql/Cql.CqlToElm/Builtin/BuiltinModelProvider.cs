@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using ModelInfo = Hl7.Cql.Model.ModelInfo;
 
-namespace Hl7.Cql.CqlToElm
+namespace Hl7.Cql.CqlToElm.Builtin
 {
     internal class BuiltinModelProvider : IModelProvider
     {

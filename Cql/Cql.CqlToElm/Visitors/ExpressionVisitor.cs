@@ -16,23 +16,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LibraryBuilder libraryBuilder,
             TypeSpecifierVisitor typeSpecifierVisitor,
             LocalIdentifierProvider localIdentifierProvider,
-            InvocationBuilder invocationBuilder) : base(localIdentifierProvider, invocationBuilder)
+            InvocationBuilder invocationBuilder,
+            CoercionProvider coercionProvider,
+            ElmFactory elmFactory) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
             Configuration = configuration;
             ConverterContext = converterContext;
             LibraryBuilder = libraryBuilder;
             TypeSpecifierVisitor = typeSpecifierVisitor;
+            CoercionProvider = coercionProvider;
+            ElmFactory = elmFactory;
         }
 
 
         #region Privates
-        private readonly IModelProvider ModelProvider;
-        private readonly TypeSpecifierVisitor TypeSpecifierVisitor;
+        private IModelProvider ModelProvider { get; }
+        private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
 
-        public IConfiguration Configuration { get; }
-        public ConverterContext ConverterContext { get; }
-        public LibraryBuilder LibraryBuilder { get; }
+        private IConfiguration Configuration { get; }
+        private ConverterContext ConverterContext { get; }
+        private LibraryBuilder LibraryBuilder { get; }
+        private CoercionProvider CoercionProvider { get; }
+        private ElmFactory ElmFactory { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -65,14 +71,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 pointType = new[] { lowType, highType }.Max(NumericTypeSpecifierComparer.Default)!;
             else
             {
-                if ((low is Null || lowType == SystemTypes.AnyType) 
+                if ((low is Null || lowType == SystemTypes.AnyType)
                     && (high is not Null && highType != SystemTypes.AnyType))
                     pointType = highType;
                 else pointType = lowType;
             }
 
-            var lowCast = InvocationBuilder.BuildImplicitCast(low, pointType, out var _l);
-            var highCast = InvocationBuilder.BuildImplicitCast(high, pointType, out var _h);
+            var lowCast = CoercionProvider.Coerce(low, pointType);
+            var highCast = CoercionProvider.Coerce(high, pointType);
 
             if (!lowCast.Success && lowCast.Error is not null)
                 low.AddError(lowCast.Error ?? $"Could not convert low interval value to {pointType}");
@@ -94,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var validate = Option(o => o.ValidateIntervals);
             if (validate)
             {
-                if (pointType.IsValidOrderedType())
+                if (pointType.IsOrderedType())
                 {
                     if (low is Quantity lowQuantity && high is Quantity highQuantity
                         && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
@@ -104,7 +110,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
                 else if (low is not Null || high is not Null) // the Interval(null,null) case is handled separately below.
                 {
-                    interval.AddError($"Intervals can only be constructed for orderable types ({string.Join(", ", SystemTypes.ValidOrderedTypes)}). Type {pointType} is not allowed.");
+                    interval.AddError($"Intervals can only be constructed for orderable types ({string.Join(", ", SystemTypes.OrderedTypes)}). Type {pointType} is not allowed.");
                 }
             }
             var allowNullIntervals = Option(o => o.AllowNullIntervals);
@@ -160,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 for (int i = 0; i < elements.Length; i++)
                 {
                     var ei = elements[i];
-                    var result = InvocationBuilder.BuildImplicitCast(ei, elementType, out var _);
+                    var result = CoercionProvider.Coerce(ei, elementType);
                     if (result.Success)
                         typedElements[i] = result.Result;
                     else if (!string.IsNullOrWhiteSpace(result.Error))
@@ -208,7 +214,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             return new Message()
             {
-                message = new Literal() { value = message }.WithResultType(SystemTypes.StringType),
+                message = ElmFactory.Literal(message),
                 source = new Null().WithResultType(SystemTypes.AnyType)
             }
             .AddError(message)
@@ -253,6 +259,66 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             var t = (T)System.Convert.ChangeType(value, typeof(T), System.Globalization.CultureInfo.InvariantCulture);
             return t;
+        }
+
+        private Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,
+            Antlr4.Runtime.ParserRuleContext context,
+            cqlParser.PluralDateTimePrecisionContext precisionContext,
+            cqlParser.ExpressionTermContext[] expressionTerms)
+        {
+            var precision = Precision(precisionContext);
+            var lhs = Visit(expressionTerms[0]);
+            var rhs = Visit(expressionTerms[1]);
+
+            var expression = precision switch
+            {
+                { } => InvocationBuilder.Invoke(systemFunction, lhs, rhs, precision),
+                _ => InvocationBuilder.Invoke(systemFunction, lhs, rhs),
+            };
+            return expression
+                .WithId()
+                .WithLocator(context.Locator());
+            ;
+        }
+
+        private Literal? Precision(cqlParser.PluralDateTimePrecisionContext context)
+        {
+            if (context is null)
+                return null;
+            else
+            {
+                var name = Enum.GetName(context.Parse());
+                if (name is null)
+                    return null;
+                else return ElmFactory.Literal(name);
+            }
+        }
+        private Literal? Precision(cqlParser.DateTimePrecisionSpecifierContext context)
+        {
+            var dtp = context?.dateTimePrecision();
+            if (dtp is null)
+                return null;
+            else
+            {
+                var name = Enum.GetName(dtp.Parse());
+                if (name is null)
+                    return null;
+                else return ElmFactory.Literal(name);
+            }
+        }
+
+        private Literal? Precision(cqlParser.DateTimeComponentContext context)
+        {
+            var dtp = context?.dateTimePrecision();
+            if (dtp is null)
+                return null;
+            else
+            {
+                var name = Enum.GetName(dtp.Parse());
+                if (name is null)
+                    return null;
+                else return ElmFactory.Literal(name);
+            }
         }
 
         private enum ListElementPromotion

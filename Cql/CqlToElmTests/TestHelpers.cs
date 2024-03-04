@@ -17,11 +17,13 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        public static T BeACorrectlyInitializedLibraryWithStatementOfType<T>(this ObjectAssertions l)
+        public static T BeACorrectlyInitializedLibraryWithStatementOfType<T>(this ObjectAssertions l,
+            bool requireLocalId = true)
         {
             var library = l.Subject.Should().BeOfType<Library>().Subject;
             library.statements.Should().HaveCount(1);
-            library.statements[0].expression.localId.Should().NotBeNull();
+            if (requireLocalId)
+                library.statements[0].expression.localId.Should().NotBeNull();
             library.statements[0].expression.locator.Should().NotBeNull();
 
             return library.statements[0].expression.Should().BeOfType<T>().Subject;
@@ -42,6 +44,19 @@ namespace Hl7.Cql.CqlToElm.Test
             literal.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
         }
 
+        public static void BeNullAs(this ObjectAssertions l, TypeSpecifier type)
+        {
+            var @as = l.Subject.Should().BeOfType<As>().Subject;
+            @as.asTypeSpecifier.Should().Be(type);
+            @as.resultTypeSpecifier.Should().Be(type);
+            if (type is NamedTypeSpecifier nts)
+            {
+                @as.asType.Should().Be(nts.name);
+                @as.resultTypeName.Should().Be(nts.name);
+            }
+
+        }
+
         public static void BeLiteralInteger(this ObjectAssertions l, int i)
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
@@ -60,6 +75,19 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var literal = l.Subject.Should().BeOfType<Null>().Subject;
             literal.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
+        }
+
+        public static void HaveType(this ObjectAssertions l, TypeSpecifier type)
+        {
+            if (l.Subject is Expression subject)
+            {
+                subject.resultTypeSpecifier.Should().Be(type);
+                if (type is NamedTypeSpecifier nts)
+                {
+                    subject.resultTypeName.Should().Be(nts.name);
+                }
+            }
+            else Microsoft.VisualStudio.TestTools.UnitTesting.Assert.Fail("Subject is not an Expression");
         }
 
         public static T ShouldReportError<T>(this T e, params string[] errorTexts) where T : Element

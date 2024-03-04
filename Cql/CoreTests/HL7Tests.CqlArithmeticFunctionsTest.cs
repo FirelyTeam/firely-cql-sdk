@@ -714,6 +714,7 @@ namespace CoreTests
 		/// </summary>
         [TestCategory("CqlArithmeticFunctionsTest")]
         [TestMethod]
+        [Ignore("Test changed to return null, because Log(1,1) is mathematically undefined")]
         public void Log1Base1_Test()
         {
             var lambda = LambdasByTestName["CqlArithmeticFunctionsTest", "Log1Base1"];

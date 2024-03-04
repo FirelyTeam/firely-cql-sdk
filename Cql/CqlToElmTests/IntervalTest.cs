@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using FluentAssertions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,7 +11,16 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
+        public static void Initialize(TestContext context) => ClassInitialize(co =>
+        {
+            co.ValidateLiterals = false;
+            co.AllowNullIntervals = true;
+            co.LongsRequireSuffix = false; // promote test values of 2147483648 to longs so ExpressionBuilder doesn't throw
+            co.EnableListPromotion = true;
+            co.EnableListDemotion = true;
+            co.EnableIntervalPromotion = true;
+            co.EnableIntervalDemotion = true;
+        });
 #pragma warning restore IDE0060 // Remove unused parameter
 
         [TestMethod]
@@ -19,7 +29,7 @@ namespace Hl7.Cql.CqlToElm.Test
             MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
-                define private Interval_InvalidType: Interval['hello','world']
+                define private Interval_InvalidType: Interval[{},{}]
             ", "Intervals can only be constructed for orderable types*");
         }
 
@@ -375,5 +385,53 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsTrue(cqlInterval.highClosed);
             }
         }
+
+
+        [TestMethod]
+        public void Interval_Includes_Null()
+        {
+            var library = MakeLibrary(@"
+                library IntervalTest version '1.0.0'
+
+                define private TestIncludesNull: Interval[1, 10] includes null
+            ", "Call to operator Includes(Interval<Integer>, Any) is ambiguous*");
+
+            library = MakeLibrary(@"
+                library IntervalTest version '1.0.0'
+
+                define private TestIncludesNull: Interval[1, 10] includes null as Integer
+            ");
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Contains));
+            var includes = (Contains)library.statements[0].expression;
+            var result = Run(includes);
+            Assert.IsNull(result);
+
+        }
+
+
+        [TestMethod]
+        public void Interval_Properly_Included_in_Interval_Null()
+        {
+            var library = createLibraryForExpression("Interval[1, 10] properly included in Interval[null, null]");
+            var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
+            var result = Run(pii);
+            Assert.IsFalse((bool?)result);
+        }
+
+        [TestMethod]
+        public void Interval_Null_Starts_Interval()
+        {
+            var library = createLibraryForExpression("Interval[null, null] starts Interval[1, 10]");
+            var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
+            var result = Run(pii);
+            Assert.IsNull(result);
+        }
+
+        
+
     }
 }

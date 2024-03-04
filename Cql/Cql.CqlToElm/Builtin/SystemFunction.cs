@@ -17,9 +17,7 @@ namespace Hl7.Cql.CqlToElm.Builtin
     internal abstract class SystemFunction: FunctionDef
     {
         public abstract Type ElmNodeType { get; }
-        public abstract int? RequiredParameterCount { get; }
-
-        public abstract SystemFunction ReplaceGenericParameters(GenericParameterAssignments replacements);
+        public abstract int? RequiredParameterCount { get; protected set; }
 
         /// <summary>
         /// Calls all validators associated with this function def on the specified call, adding any resulting errors.
@@ -44,34 +42,40 @@ namespace Hl7.Cql.CqlToElm.Builtin
             8 => "ninth",
             _ => $"{position + 1}th"
         };
-
-        internal static FunctionDef ReplaceGenericParameters(FunctionDef def, GenericParameterAssignments replacements)
-        {
-            var newOperands = def.operand.Select(o =>
-                new OperandDef
-                {
-                    name = o.name,
-                    operandTypeSpecifier = o.operandTypeSpecifier.ReplaceGenericParameters(replacements),
-                    operandType = o.operandTypeSpecifier.ReplaceGenericParameters(replacements).TryToQualifiedName()
-                }).ToArray();
-
-            var newResultType = def.resultTypeSpecifier.ReplaceGenericParameters(replacements);
-            return new FunctionDef() { name = def.name, operand = newOperands, resultTypeSpecifier = newResultType };
-        }
     }
 
     /// <summary>
     /// A kind of FunctionDef that represents a built-in CQL function.
     /// </summary>
-    [DebuggerDisplay("{name}")]
     internal class SystemFunction<T> : SystemFunction
         where T: Element
     {
+        public SystemFunction<T> CreateOverload(OperandDef[] newOperands, TypeSpecifier newReturnType) =>
+            new SystemFunction<T>()
+            {
+                accessLevel = accessLevel,
+                annotation = annotation,
+                context = context,
+                expression = expression,
+                external = external,
+                externalSpecified = externalSpecified,
+                fluent = fluent,
+                fluentSpecified = fluentSpecified,
+                locator = locator,
+                name = name,
+                operand = newOperands,
+                resultTypeName = newReturnType is NamedTypeSpecifier rnts ? rnts.name : null,
+                resultTypeSpecifier = newReturnType,
+                validators = new(validators),
+                RequiredParameterCount = RequiredParameterCount,
+            };
 
         public override Type ElmNodeType => typeof(T);
 
-        public override int? RequiredParameterCount { get; }
-
+        public override int? RequiredParameterCount { get; protected set; }
+        private SystemFunction()
+        {
+        }
         public SystemFunction(IEnumerable<TypeSpecifier> operands, TypeSpecifier resultType, string? name = null, int? requiredParameterCount = null)
         {
             this.name = name ?? typeof(T).Name;
@@ -93,22 +97,6 @@ namespace Hl7.Cql.CqlToElm.Builtin
                 .ToArray();
 
             RequiredParameterCount = requiredParameterCount;
-        }
-
-        public override SystemFunction<T> ReplaceGenericParameters(GenericParameterAssignments replacements)
-        {
-            var newOperands = operand.Select(o =>
-                new OperandDef
-                {
-                    name = o.name,
-                    operandTypeSpecifier = o.operandTypeSpecifier.ReplaceGenericParameters(replacements),
-                    operandType = o.operandTypeSpecifier.ReplaceGenericParameters(replacements).TryToQualifiedName()
-                });
-
-            var newResultType = resultTypeSpecifier.ReplaceGenericParameters(replacements);
-            var bd = new SystemFunction<T>(newOperands.Select(o => o.operandTypeSpecifier), newResultType, name, RequiredParameterCount);
-            bd.validators.AddRange(validators);
-            return bd;
         }
 
         /// <summary>
@@ -136,5 +124,9 @@ namespace Hl7.Cql.CqlToElm.Builtin
             foreach (var validator in validators) validator(element);
             return element;
         }
+
+        public override string ToString() =>
+            $"{name}({string.Join(", ", operand?.Select(o => o.resultTypeSpecifier) ?? Enumerable.Empty<TypeSpecifier>())})";
+
     }
 }

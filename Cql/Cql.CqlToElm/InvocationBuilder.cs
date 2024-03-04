@@ -1,22 +1,17 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
+using System.Configuration.Assemblies;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 
 namespace Hl7.Cql.CqlToElm
 {
-    internal record ResolveResult<T>(T Result, int Cost, string? Error)
-    {
-        public bool Success => Error is null;
 
-        public static ResolveResult<T>[] SelectBestCandidate(IEnumerable<ResolveResult<T>> candidates) =>
-            candidates
-              .OrderBy(r => r.Cost)
-              .GroupBy(r => r.Cost)
-              .First()
-              .AsEnumerable().ToArray() ?? Array.Empty<ResolveResult<T>>();
-    }
 
     /// <summary>
     /// Builds the implicit casts described in the CQL spec. Given the type of the parameter and an expression 
@@ -27,270 +22,304 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class InvocationBuilder
     {
-        private static readonly int ERROR_COST = 1000;  // Cost for a cast that is not possible.
-
         public IModelProvider Provider { get; }
-        public InvocationBuilder(IModelProvider provider)
+        public CoercionProvider CoercionProvider { get; }
+        public ElmFactory ElmFactory { get; }
+
+        public InvocationBuilder(IModelProvider provider, CoercionProvider coercionProvider, ElmFactory elmFactory)
         {
             Provider = provider;
-        }
-
-        internal ResolveResult<Expression> Build(FunctionDef candidate, Expression[] arguments)
-        {
-            if (candidate is SystemFunction builtIn)
-            {
-                if (arguments.Length < (builtIn.RequiredParameterCount ?? builtIn.operand.Length))
-                {
-                    var resultExpression = candidate.CreateElmNode(arguments)
-                        .WithResultType(candidate.resultTypeSpecifier);
-                    return new ResolveResult<Expression>(resultExpression, ERROR_COST,
-                        $"{candidate.Signature()} must be called with at least {builtIn.RequiredParameterCount} arguments, not {arguments.Length}.");
-                }
-                else if (arguments.Length > builtIn.operand.Length)
-                {
-                    var resultExpression = candidate.CreateElmNode(arguments)
-                        .WithResultType(candidate.resultTypeSpecifier);
-                    return new ResolveResult<Expression>(resultExpression, ERROR_COST,
-                        $"{candidate.Signature()} must be called with no more than {builtIn.operand.Length} arguments, not {arguments.Length}.");
-                }
-            }
-            else if (candidate.operand.Length != arguments.Length)
-            {
-                var resultExpression = candidate.CreateElmNode(arguments)
-                    .WithResultType(candidate.resultTypeSpecifier);
-
-                return new ResolveResult<Expression>(resultExpression, ERROR_COST,
-                    $"{candidate.Signature()} must be called with {candidate.operand.Length} arguments, not {arguments.Length}.");
-            }
-
-            var operands = candidate.operand.Select(o => o.operandTypeSpecifier).ToArray();
-            var positionResults = new List<ResolveResult<Expression>>();
-            int? nextPosition = 0;
-
-            while (nextPosition is not null)
-            {
-                var start = nextPosition.Value;
-                nextPosition = null;
-                var iterationResults = new ResolveResult<Expression>[arguments.Length];
-                var assignments = new GenericParameterAssignments();
-                string? firstError = null;
-
-                for (var iteration = 0; iteration < arguments.Length; iteration++)
-                {
-                    var argumentIndex = (start + iteration) % arguments.Length;
-                    var operand = operands[argumentIndex];
-                    var argument = arguments[argumentIndex];
-
-                    // Now, try to implicitly cast the argument to the parameter type.
-                    var operandToTest = operand.ReplaceGenericParameters(assignments);
-                    if (operandToTest != operand && argumentIndex > start && nextPosition is null) nextPosition = argumentIndex;
-
-                    var argumentResult = BuildImplicitCast(argument, operandToTest, out var newAssignments);
-                    assignments.AddRange(newAssignments);
-
-                    if (!argumentResult.Success && firstError is null)
-                        firstError = $"the {SystemFunction.GetArgumentName(argumentIndex)} argument {argumentResult.Error}.";
-
-                    iterationResults[argumentIndex] = argumentResult;
-                }
-
-                var concreteCandidate = SystemFunction.ReplaceGenericParameters(candidate, assignments);
-                var resultExpression = candidate.CreateElmNode(iterationResults.Select(a => a.Result).ToArray())
-                        .WithResultType(concreteCandidate.resultTypeSpecifier);
-                var totalCost = iterationResults.Sum(r => r.Cost);
-                var totalError = firstError is not null ? $"Cannot resolve call to {concreteCandidate.Signature()}, {firstError}" : null;
-
-                positionResults.Add(new(resultExpression, totalCost, totalError));
-            }
-
-            return ResolveResult<Expression>.SelectBestCandidate(positionResults).First();
+            CoercionProvider = coercionProvider;
+            ElmFactory = elmFactory;
         }
 
         /// <summary>
-        /// Builds an expression that represents the implicit cast of the argument to the parameter type.
+        /// Invokes a system function.
         /// </summary>
-        /// <param name="argument">The expression to cast from.</param>
-        /// <param name="to">The type to cast to.</param>
-        /// <param name="newAssignments">If <paramref name="to"/> contains open generic parameters, this will contain the assignment parameters
-        /// to actual types to make the conversion work.</param>
-        /// <returns>A <see cref="ResolveResult{T}"/> that contains an Expression that casts the <paramref name="argument"/> to the type
-        /// <paramref name="to"/>. If this is not possible, <see cref="ResolveResult{T}.Error"/> is not null and contains a description of the
-        /// type error.</returns>
-        public ResolveResult<Expression> BuildImplicitCast(
-            Expression argument, TypeSpecifier to, out GenericParameterAssignments newAssignments)
+        /// <param name="systemFunction">The system function to invoke.</param>
+        /// <param name="arguments">The arguments to invoke.</param>
+        /// <returns>The invocation of this system function.</returns>
+        internal Expression Invoke(SystemFunction systemFunction, params Expression[] arguments)
         {
-            var argumentType = argument.resultTypeSpecifier;
-            var locatorContext = new StringLocatorRuleContext(argument.locator);
-
-            // by default, we don't have a new hypothesis
-            newAssignments = new();
-
-            // Types are equal, or the argument is a subtype of the parameter type.
-            if (argumentType.IsSubtypeOf(to, Provider))
-                return new(argument, 0, null);
-
-            // Untyped Nulls get promoted to any type necessary. If the target type has unbound
-            // generic parameters, we will default those to a special "NullTypeSpecifier" that
-            // we will replace by System.Any later on if no one cares to assign something more
-            // permanent to it.
-            // See https://cql.hl7.org/03-developersguide.html#implicit-casting
-            if (argument is Null n)
-            {
-                var unbound = to.GetGenericParameters().ToList();
-
-                newAssignments = new GenericParameterAssignments(
-                    unbound.Select(gp => KeyValuePair.Create(gp, (TypeSpecifier)SystemTypes.AnyType)));
-
-                var bound = to.ReplaceGenericParameters(newAssignments);
-                var @as = SystemLibrary.As.Build(false, bound, n, locatorContext);
-
-                // Make sure that we prefer any other solution than assigning
-                // Any to a generic parameter to Any just to make a null argument fit
-                // by giving it a high cost.
-                return new(@as, unbound.Any() ? 100 : 1, null);
-            }
-
-            // If the parameter type is a generic type parameter, then we can assign any type to it,
-            // unless it is already assigned to previously, in which case we need to check we can cast
-            // to the assigned type for that generic type parameter.
-            if (to is ParameterTypeSpecifier gtp)
-            {
-                newAssignments.Add(gtp, argumentType);
-                return new(argument, 0, null);
-            }
-
-            // Casting a List<X> to a List<Y> is not possible in general(?), but it is
-            // when Y is an unbound generic type or a direct (covariant) cast.
-            if (to is ListTypeSpecifier toList)
-            {
-                if (argumentType is ListTypeSpecifier fromList)
-                {
-                    var toElement = toList.elementType;
-                    var fromElement = fromList.elementType;
-                    var sameDepth = true;
-                    while (true)
-                    {
-                        if (toElement is ListTypeSpecifier t)
-                        {
-                            if (fromElement is ListTypeSpecifier f)
-                            {
-                                toElement = t.elementType;
-                                fromElement = f.elementType;
-                            }
-                            else
-                            {
-                                sameDepth = false;
-                                break;
-                            }
-                        }
-                        else if (fromElement is ListTypeSpecifier)
-                        {
-                            sameDepth = false;
-                            break;
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                    if (sameDepth)
-                    {
-                        if (toElement is ParameterTypeSpecifier pts)
-                        {
-                            newAssignments.Add(pts, fromElement);
-                            return new(argument, 0, null);
-                        }
-                        else if (fromElement.IsSubtypeOf(toElement, Provider))
-                        {
-                            return new(argument, 0, null);
-                        }
-                        else if (fromElement == SystemTypes.AnyType
-                            && argument is List list
-                            && (list.element?.Length ?? 0) == 0)
-                        {
-                            var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
-                            return new(@as, 0, null);
-                        }
-                    }
-                }
-                // List promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
-                else
-                {
-                    var list = SystemLibrary.ToList.Call(Provider, locatorContext, argument);
-                    var intermediate = BuildImplicitCast(list, to, out newAssignments);
-                    return intermediate with { Cost = intermediate.Cost + 5 };
-                }
-
-            }
-            // Casting an Interval<X> to an Interval<Y> is not possible in general(?), but it is
-            // when Y is an unbound generic type or a direct (covariant) cast.
-            if (argumentType is IntervalTypeSpecifier fromInterval && to is IntervalTypeSpecifier toInterval)
-            {
-                var prototypeInstance = new Literal { resultTypeSpecifier = fromInterval.pointType };
-                var elementCast = BuildImplicitCast(prototypeInstance, toInterval.pointType, out var nestedNewAssignments);
-
-                if (elementCast.Success && elementCast.Result == prototypeInstance)
-                {
-                    newAssignments.AddRange(nestedNewAssignments);
-                    return new(argument, elementCast.Cost, null);
-                }
-            }
-
-            if (argumentType is ChoiceTypeSpecifier fromChoice)
-            {
-                if (to is not ChoiceTypeSpecifier)
-                {
-                    if (fromChoice.choice?.Contains(to) ?? false)
-                        return new(argument, 0, null);
-                }
-            } 
-            else if (to is ChoiceTypeSpecifier toChoice)
-            {
-                if (toChoice.choice?.Contains(argumentType) ?? false)
-                {
-                    var @as = SystemLibrary.As.Build(false, to, argument, locatorContext);
-                    return new(@as.WithResultType(to), 0, null);
-                }
-            }
-
-            // Implicit casts, see https://cql.hl7.org/03-developersguide.html#implicit-conversions
-            // (note table is skewed, move first row 1 to the left, move row 2 2 to the left, etc)
-            if (argumentType == SystemTypes.IntegerType && to == SystemTypes.LongType)
-                return new(SystemLibrary.IntegerToLong.Build(locatorContext, argument), 1, null);
-            if (argumentType == SystemTypes.IntegerType && to == SystemTypes.DecimalType)
-                return new(SystemLibrary.IntegerToDecimal.Build(locatorContext, argument), 1, null);
-            if (argumentType == SystemTypes.LongType && to == SystemTypes.DecimalType)
-                return new(SystemLibrary.LongToDecimal.Build(locatorContext, argument), 1, null);
-            if (argumentType == SystemTypes.IntegerType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.IntegerToQuantity.Build(locatorContext, argument), 2, null);
-            if (argumentType == SystemTypes.LongType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.LongToQuantity.Build(locatorContext, argument), 2, null);
-            if (argumentType == SystemTypes.DecimalType && to == SystemTypes.QuantityType)
-                return new(SystemLibrary.DecimalToQuantity.Build(locatorContext, argument), 2, null);
-            if (argumentType == SystemTypes.DateType && to == SystemTypes.DateTimeType)
-                return new(SystemLibrary.DateToDateTime.Build(locatorContext, argument), 2, null);
-            if (argumentType == SystemTypes.CodeType && to == SystemTypes.ConceptType)
-                return new(SystemLibrary.CodeToConcept.Build(locatorContext, argument), 1, null);
-
-            // TODO: There is still ValueSet to List, but it's not clear which function to call,
-            // ToList<T>(T) would probably create a list with a single element, the valueset, but
-            // that is not the intent.
-
-            // TODO: interval promotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
-
-            // List demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
-            if (argumentType is ListTypeSpecifier && to is not ListTypeSpecifier)
-            {
-                var singleton = SystemLibrary.SingletonFrom.Call(Provider, locatorContext, argument);
-                var intermediate = BuildImplicitCast(singleton, to, out newAssignments);
-                return intermediate with { Cost = intermediate.Cost + 5 };
-            }
-
-            // TODO: interval demotion https://cql.hl7.org/03-developersguide.html#promotion-and-demotion
-
-            // No implicit cast found
-            return new(argument, ERROR_COST, $"is of type {argumentType}, which cannot implicitly be cast to type {to}");
+            var result = MatchSignature(systemFunction, arguments);
+            var newArguments = result.Arguments
+                .Select(cr => cr.Result)
+                .ToArray();
+            var expression = ElmFactory.CreateElmNode(systemFunction, null, newArguments);
+            if (!result.Compatible)
+                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+            expression = systemFunction.Validate(expression);
+            var newResultType = ReplaceGenericType(systemFunction.resultTypeSpecifier, result.GenericInferences);
+            return expression
+                .WithResultType(newResultType);
         }
+
+        /// <summary>
+        /// Invokes an overloaded function.
+        /// </summary>
+        /// <param name="overloadedFunction">The overloaded function to invoke.</param>
+        /// <param name="arguments">The arguments to invoke.</param>
+        /// <returns>The invocation of the best-matching overload.</returns>
+        internal Expression Invoke(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
+        {
+            var result = MatchSignature(overloadedFunction, arguments);
+            var newArguments = result.Arguments
+                .Select(cr => cr.Result)
+                .ToArray();
+            var expression = ElmFactory.CreateElmNode(result.Function, null, newArguments);
+            if (!result.Compatible)
+                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+            if (result.Function is SystemFunction systemFunction)
+                expression = systemFunction.Validate(expression);
+            var newResultType = ReplaceGenericType(result.Function.resultTypeSpecifier, result.GenericInferences);
+            return expression
+                .WithResultType(newResultType);
+        }
+
+        /// <summary>
+        /// Invokes a user defined function.
+        /// </summary>
+        /// <param name="function">The overloaded function to invoke.</param>
+        /// <param name="library">The libary in which this function is defined, or <see langword="null"/> if the function is colocated within the same library as the invocation site.</param>
+        /// <param name="arguments">The arguments to invoke.</param>
+        /// <returns>The invocation of the best-matching overload.</returns>
+        internal Expression Invoke(FunctionDef function, string? library, params Expression[] arguments)
+        {
+            var result = MatchSignature(function, arguments);
+            var newArguments = result.Arguments
+                .Select(cr => cr.Result)
+                .ToArray();
+            var expression = ElmFactory.CreateElmNode(function, null, newArguments);
+            if (!result.Compatible)
+                expression.AddError(result.Error ?? result.Function.GetUnresolvedOperatorMessage(arguments));
+            var newResultType = ReplaceGenericType(function.resultTypeSpecifier, result.GenericInferences);
+            return expression
+                .WithResultType(newResultType);
+        }
+
+        internal Expression Invoke(SignatureMatchResult result, string? library = null)
+        {
+            var args = result.Arguments.Select(arg => arg.Result).ToArray();
+            if (result.Compatible)
+            {
+                if (result.Function is SystemFunction sysFunc)
+                    return Invoke(sysFunc, args);
+                else if (library is null)
+                    throw new System.ArgumentException($"Library must be non-null when invoking a user defined function.", nameof(library));
+                else
+                    return Invoke(result.Function, library, args);
+            }
+            else
+            {
+                var expression = ElmFactory.CreateElmNode(result.Function, null, args);
+                if (result.Error is not null)
+                    expression.AddError(result.Error);
+                else
+                    expression.AddUnresolvedOperatorError(result.Function.name,
+                        result.Arguments.Select(arg => arg.Result.resultTypeSpecifier).ToArray());
+                return expression;
+            }
+        }
+
+
+        #region Generic inference
+
+        private static readonly System.Collections.ObjectModel.ReadOnlyDictionary<string, TypeSpecifier> EmptyInferences = new(new Dictionary<string, TypeSpecifier>());
+
+        internal SignatureMatchResult MatchSignature(FunctionDef candidate, Expression[] arguments)
+        {
+            var operands = candidate.operand ?? Array.Empty<OperandDef>();
+            var operandTypes = operands.Select(op => op.operandTypeSpecifier).ToArray();
+            var flags = SignatureMatchFlags.None;
+            int requiredArgumentCount = operands.Length;
+            if (candidate is SystemFunction systemFunction && systemFunction.RequiredParameterCount.HasValue)
+                requiredArgumentCount = Math.Min(systemFunction.RequiredParameterCount.Value, requiredArgumentCount);
+            if (arguments.Length > operands.Length)
+                flags |= SignatureMatchFlags.TooManyArguments;
+            else if (arguments.Length < requiredArgumentCount)
+                flags |= SignatureMatchFlags.TooFewArguments;
+            if (flags > SignatureMatchFlags.None)
+            {
+                var conversionResults = arguments
+                    .Select(arg => new CoercionResult<Expression>(arg, CoercionCost.ExactMatch))
+                    .ToArray();
+                return new SignatureMatchResult(candidate, conversionResults, EmptyInferences, flags);
+            }
+            // doing this to make debugging easier
+            CoercionResult<Expression>[]? newOperands = null;
+            IDictionary<string, TypeSpecifier>? genericInferences = null;
+            var lowestCost = CoercionCost.Incompatible;
+            // For each argument, try to use it for inference.
+            // As we go, keep track of which of those inferences results in the cheapest translation cost.
+            // We are using max cost here instead of total cost.
+            for (int i = 0; i < arguments.Length; i++)
+            {
+                var inferences = InferGenericArgument(operands[i].operandTypeSpecifier, arguments[i].resultTypeSpecifier);
+                if (inferences.Count > 0)
+                {
+                    var replaced = ReplaceGenericArguments(operandTypes, arguments, inferences);
+                    var mostExpensiveOperand = (CoercionCost)replaced.Max(operand => (int)operand.Cost);
+                    if (mostExpensiveOperand < lowestCost)
+                    {
+                        lowestCost = mostExpensiveOperand;
+                        newOperands = replaced;
+                        genericInferences = inferences;
+                    }
+                }
+            }
+            if (newOperands != null && genericInferences != null)
+                return new SignatureMatchResult(candidate, newOperands, genericInferences, flags);
+            else
+            {
+                newOperands = new CoercionResult<Expression>[arguments.Length];
+                for (int i = 0; i < arguments.Length; i++)
+                {
+                    newOperands[i] = CoercionProvider.Coerce(arguments[i], operandTypes[i]);
+                }
+                string? error = null;
+                if (newOperands.Any(op => op.Cost == CoercionCost.Incompatible))
+                    error = candidate.GetUnresolvedOperatorMessage(arguments.Select(arg => arg.resultTypeSpecifier).ToArray());
+                return new SignatureMatchResult(candidate, newOperands, EmptyInferences, default, error);
+            }
+        }
+
+        // At present we are not going to consider generics with mulitple type arguments, as those do not exist in any system functions.
+        // We'll leave the type as Dictionary for now for future proofing
+        internal Dictionary<string, TypeSpecifier> InferGenericArgument(TypeSpecifier operandType, TypeSpecifier argumentType) {
+            return operandType switch
+            {
+                ParameterTypeSpecifier generic
+                    when argumentType is not ListTypeSpecifier && argumentType is not IntervalTypeSpecifier => new() { { generic.parameterName, argumentType } },
+                ListTypeSpecifier opList
+                    when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
+                ListTypeSpecifier opList
+                    when argumentType is not ListTypeSpecifier => InferGenericArgument(opList.elementType, argumentType),
+                IntervalTypeSpecifier opInt
+                    when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
+                IntervalTypeSpecifier opInt
+                    when argumentType is not IntervalTypeSpecifier => InferGenericArgument(opInt.pointType, argumentType),
+                _ => new()
+            };
+            Dictionary<string, TypeSpecifier> InferNestedGeneric(TypeSpecifier operandType, TypeSpecifier argumentType) =>
+                operandType switch
+                {
+                    ParameterTypeSpecifier generic => new() { { generic.parameterName, argumentType } },
+                    ListTypeSpecifier opList
+                        when argumentType is ListTypeSpecifier argList => InferNestedGeneric(opList.elementType, argList.elementType),
+                    ListTypeSpecifier opList
+                        when argumentType is not ListTypeSpecifier => InferNestedGeneric(opList.elementType, argumentType),
+                    IntervalTypeSpecifier opInt
+                        when argumentType is IntervalTypeSpecifier argInt => InferNestedGeneric(opInt.pointType, argInt.pointType),
+                    IntervalTypeSpecifier opInt
+                        when argumentType is not IntervalTypeSpecifier => InferNestedGeneric(opInt.pointType, argumentType),
+                    _ => new()
+                };
+        }
+
+        internal CoercionResult<Expression>[] ReplaceGenericArguments(TypeSpecifier[] operandTypes,
+            Expression[] arguments, IDictionary<string, TypeSpecifier> replacements)
+        {
+            var convertedArguments = new CoercionResult<Expression>[arguments.Length];
+            for (int i = 0; i < arguments.Length; i++)
+            {
+                var argument = arguments[i];
+                var operandType = operandTypes[i];
+                convertedArguments[i] = ReplaceGenericArgument(operandType, argument, replacements);
+            }
+            return convertedArguments;
+        }
+
+        internal static TypeSpecifier ReplaceGenericType(TypeSpecifier type, IDictionary<string, TypeSpecifier> replacements)
+        {
+            if (type is ParameterTypeSpecifier generic)
+            {
+                if (replacements.TryGetValue(generic.parameterName, out var resolvedType))
+                    return resolvedType;
+                else throw new ArgumentException($"Generic type {generic.parameterName} does not have a replacement defined.", nameof(replacements));
+            }
+            else if (type is ListTypeSpecifier listType)
+                return ReplaceGenericType(listType.elementType, replacements).ToListType();
+            else if (type is IntervalTypeSpecifier intervalType)
+                return ReplaceGenericType(intervalType.pointType, replacements).ToIntervalType();
+            else return type;
+        }
+
+        internal CoercionResult<Expression> ReplaceGenericArgument(TypeSpecifier operandType, Expression argument, IDictionary<string, TypeSpecifier> replacements)
+        {
+            var newType = ReplaceGenericType(operandType, replacements);
+            var conversion = CoercionProvider.Coerce(argument, newType);
+            return conversion;
+        }
+
+        /// <summary>
+        /// Picks the function which has the lowest maximum cost in converting its operands to be compatible with the invocation.
+        /// </summary>
+        internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, Expression[] arguments)
+        {
+            var matches = overloadedFunction.Functions
+                .Select(function => MatchSignature(function, arguments))
+                .ToArray();
+            var byCost = matches
+                .Where(result => result.Compatible)
+                .GroupBy(result => result.MostExpensive)
+                .OrderBy(group => group.Key)
+                .ToArray();
+            if (byCost.Length > 0)
+            {
+                var cheapest = byCost[0].ToArray();
+                if (cheapest.Length == 1)
+                {
+                    return cheapest[0];
+                }
+                else if (cheapest.Length > 0)
+                {
+                    // This can happen, for example, when adding an Int and a Long.
+                    // There are two ways to convert this function where the most expensive conversion
+                    // is implicit to simple type:
+                    //      * The Integer can be converted to a Long, matching Add(Long,Long)
+                    //      * Both can be converted to Decimals, matching Add(Decimal,Decimal)
+                    // In the event where the maximum cost is the same across multiple overloads,
+                    // see which, if any, has the lowest total cost.
+                    var byTotalCost = cheapest
+                        .GroupBy(result => result.TotalCost)
+                        .OrderBy(group => group.Key)
+                        .ToArray();
+                    if (byTotalCost.Length > 1)
+                    {
+                        var lowestTotalCost = byTotalCost[0].ToArray();
+                        if (lowestTotalCost.Length == 1)
+                        {
+                            return lowestTotalCost[0];
+                        }
+                    }
+                    var argTypeString = string.Join(", ", arguments.Select(a => a.resultTypeSpecifier.ToString()));
+                    // match cql-to-elm reference implementation (Java) error messages
+                    var errorSb = new StringBuilder();
+                    errorSb.AppendLine(CultureInfo.InvariantCulture, $"Call to operator {overloadedFunction.Name}({argTypeString}) is ambiguous with:");
+                    foreach (var match in cheapest)
+                    {
+                        var matchTypeString = string.Join(", ", match.Arguments.Select(od => od.Result.resultTypeSpecifier.ToString()));
+                        errorSb.AppendLine(CultureInfo.InvariantCulture, $"\t- {overloadedFunction.Name}({matchTypeString})");
+                    }
+                    return new(cheapest[0].Function,
+                        cheapest[0].Arguments,
+                        cheapest[0].GenericInferences,
+                        cheapest[0].Flags | SignatureMatchFlags.Ambiguous,
+                        errorSb.ToString());
+                }
+            }
+            var firstMatch = matches[0];
+            var result = new SignatureMatchResult(firstMatch.Function,
+                firstMatch.Arguments,
+                firstMatch.GenericInferences,
+                firstMatch.Flags,
+                firstMatch.Function.GetUnresolvedOperatorMessage(arguments.Select(t => t.resultTypeSpecifier).ToArray()));
+            return result;
+        }
+
+        #endregion
     }
+
+
 }
 

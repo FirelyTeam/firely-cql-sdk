@@ -16,10 +16,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var then = Visit(context.expression(1));
             var @else = Visit(context.expression(2));
 
-            return SystemLibrary.If.Call(InvocationBuilder, context, condition, then, @else);
+            var @if = ElmFactory.If(condition, then, @else);
+            return @if
+                .WithId()
+                .WithLocator(context.Locator());
         }
 
         //     | 'case' expression? caseExpressionItem+ 'else' expression 'end'                #caseExpressionTerm
+        // TODO: refactor case terms into the InvocationBuilder?
         public override Expression VisitCaseExpressionTerm([Antlr4.Runtime.Misc.NotNull] cqlParser.CaseExpressionTermContext context)
         {
             var expressions = context.expression();
@@ -36,8 +40,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             else
             {
-                return (Case)SystemLibrary.Case.CreateElmNode()
-                    .AddError($"Case statements should contain 1 or 2 expressions, not {expressions.Length}");
+                return new Case()
+                    .AddError($"Case statements should contain 1 or 2 expressions, not {expressions.Length}")
+                    .WithId()
+                    .WithLocator(context.Locator());
             }
             var caseItems = context.caseExpressionItem()
                 .Select(item =>
@@ -54,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         var caseItem = new CaseItem();
 
                         var when = Visit(item.expression(0));
-                        var whenCastResult = InvocationBuilder.BuildImplicitCast(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType, out var _);
+                        var whenCastResult = CoercionProvider.Coerce(when, comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType);
                         if (whenCastResult.Success)
                             caseItem.when = whenCastResult.Result;
                         else if (whenCastResult.Error is not null)
@@ -71,8 +77,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var resultTypes = new HashSet<TypeSpecifier>(caseItems
                 .Select(item => item.then.resultTypeSpecifier)
-                .Append(@else.resultTypeSpecifier));
+                .Append(@else.resultTypeSpecifier))
+                .Except(new[] { SystemTypes.AnyType })
+                .ToList();
             TypeSpecifier returnType;
+            if (resultTypes.Count == 0)
+                returnType = SystemTypes.AnyType;
             if (resultTypes.Count == 1)
                 returnType = resultTypes.Single();
             else
@@ -80,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             foreach (var item in caseItems)
             {
                 var then = item.then;
-                var thenCastResult = InvocationBuilder.BuildImplicitCast(then, returnType, out var _);
+                var thenCastResult = CoercionProvider.Coerce(then, returnType);
                 if (thenCastResult.Success)
                 {
                     item.then = thenCastResult.Result;
@@ -89,13 +99,15 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 else if (thenCastResult.Error is not null)
                     item.AddError(thenCastResult.Error);
             }
-            var elseCastResult = InvocationBuilder.BuildImplicitCast(@else, returnType, out var _);
+            var elseCastResult = CoercionProvider.Coerce(@else, returnType);
             if (elseCastResult.Success)
                 @else = elseCastResult.Result;
             else if (elseCastResult.Error is not null)
                 @else.AddError(elseCastResult.Error);
-            
-            return SystemLibrary.Case.Call(InvocationBuilder, context, comparand, caseItems, @else);
+
+            return ElmFactory.Case(comparand, caseItems, @else)
+                .WithId()
+                .WithLocator(context.Locator());
         }
     }
 }

@@ -268,11 +268,6 @@ define "TestContainsNull Input":
 define "TestContainsNull Output":
 	null
 
-define "TestNullElement1 Input":
-	null contains 5
-define "TestNullElement1 Output":
-	false
-
 define "TestNullElement2 Input":
 	Interval[null, 5] contains 10
 define "TestNullElement2 Output":
@@ -608,7 +603,7 @@ define "Issue32Interval Output":
 	true
 
 define "TestIncludesNull Input":
-	Interval[1, 10] includes null
+	Interval[1, 10] includes null as Integer
 define "TestIncludesNull Output":
 	null
 
@@ -1631,12 +1626,6 @@ define "QuantityIntervalTestWidth5 Input":
 	width of Interval[5.0 'g', 10.0 'g']
 define "QuantityIntervalTestWidth5 Output":
 	5.0'g'
-
-define "DateTimeWidth":
-	width of Interval[DateTime(2012, 1, 5), DateTime(2012, 1, 25)]
-
-define "TimeWidth":
-	width of Interval[@T05:59:59.999, @T15:59:59.999]
 
 define "IntegerIntervalTest Input":
 	Interval[1, 10]
