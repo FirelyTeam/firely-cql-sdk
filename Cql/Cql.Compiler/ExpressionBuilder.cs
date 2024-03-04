@@ -51,7 +51,7 @@ namespace Hl7.Cql.Compiler
             string library,
             IDictionary<string, Library> libraries,
             ILogger<ExpressionBuilder> logger,
-            ExpressionBuilderSettings? settings = null)
+            ExpressionBuilderOptions? settings = null)
         {
             OperatorBinding = operatorBinding;
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
@@ -60,7 +60,7 @@ namespace Hl7.Cql.Compiler
                 Library = lib;
             else throw new ArgumentException($"Library {library} does not exist in {nameof(libraries)}", nameof(library));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            Settings = settings ?? new(false, true);
+            Options = settings ?? new(false, true);
             if (Library.identifier == null)
                 throw new ArgumentException("Package is missing a library identifier", nameof(elm));
             InitializeStatementDictionaries(libraries.Values);
@@ -77,7 +77,7 @@ namespace Hl7.Cql.Compiler
             TypeManager typeManager,
             Library library,
             ILogger<ExpressionBuilder> logger,
-            ExpressionBuilderSettings? options = null) =>
+            ExpressionBuilderOptions? options = null) =>
                 new(operatorBinding, typeManager,
                     library.NameAndVersion ?? throw new ArgumentException(nameof(library)),
                     new Dictionary<string, Library>
@@ -93,7 +93,7 @@ namespace Hl7.Cql.Compiler
         /// Gets the settings used during <see cref="Build"/>.
         /// These should be set as desired before <see cref="Build"/> is called.
         /// </summary>
-        public ExpressionBuilderSettings Settings { get; }
+        public ExpressionBuilderOptions Options { get; }
 
         /// <summary>
         /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
@@ -402,7 +402,7 @@ namespace Hl7.Cql.Compiler
                             {
                                 var message = $"{customKey} is declared external, but {nameof(CustomImplementations)} does not define this function.";
                                 buildContext.LogError(message, def);
-                                if (Settings.AllowUnresolvedExternals)
+                                if (Options.AllowUnresolvedExternals)
                                 {
                                     var returnType = TypeManager.TypeFor(def, buildContext, throwIfNotFound: true)!;
                                     var paramTypes = new[] { typeof(CqlContext) }

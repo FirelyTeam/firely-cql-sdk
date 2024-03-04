@@ -1,2 +1,1 @@
 ﻿#nullable enable
-Hl7.Cql.Compiler.ExpressionBuilderSettings

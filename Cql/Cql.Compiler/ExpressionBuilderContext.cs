@@ -218,7 +218,7 @@ namespace Hl7.Cql.Compiler
         internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
             var scopes = new Dictionary<string, (Expression, elm.Element)>(Scopes);
-            if (Builder.Settings.AllowScopeRedefinition)
+            if (Builder.Options.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
                 {
@@ -238,7 +238,7 @@ namespace Hl7.Cql.Compiler
                     if (!string.IsNullOrWhiteSpace(normalized))
                     {
                         if (scopes.ContainsKey(normalized))
-                            throw new InvalidOperationException($"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
+                            throw new InvalidOperationException($"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderOptions.AllowScopeRedefinition)} to true");
                         scopes.Add(normalized, kvp.Value);
                     }
                     else throw new InvalidOperationException();
