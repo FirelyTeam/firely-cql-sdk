@@ -64,7 +64,7 @@ namespace Hl7.Cql.Runtime
         public int? ConvertBooleanToInteger(bool? b) => b == null ? null : (b.Value ? 1 : 0);
         public long? ConvertBooleanToLong(bool? b) => b == null ? null : (b.Value ? 1 : 0);
         public decimal? ConvertBooleanToDecimal(bool? b) => b == null ? null : (b.Value ? 1m : 0m);
-        public string? ConvertBooleanToString(bool? b) => b?.ToString()?.ToLower();
+        public string? ConvertBooleanToString(bool? b) => b?.ToString()?.ToLowerInvariant();
 
 
         public bool? ConvertIntegerToBoolean(int? i) => i == null ? null : (i.Value == 1 ? true : false);
@@ -92,7 +92,7 @@ namespace Hl7.Cql.Runtime
             if (s == null) return null;
             else
             {
-                switch (s.ToLower())
+                switch (s.ToLowerInvariant())
                 {
                     case "true":
                     case "t":

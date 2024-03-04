@@ -86,7 +86,7 @@ namespace Hl7.Cql.Runtime
             if (argument == null)
                 return null;
             else
-                return argument.ToLower();
+                return argument.ToLowerInvariant();
         }
 
         #endregion
@@ -178,7 +178,7 @@ namespace Hl7.Cql.Runtime
         public string? Upper(string argument)
         {
             if (argument == null) return null;
-            else return argument.ToUpper();
+            else return argument.ToUpperInvariant();
         }
         #endregion
     }
