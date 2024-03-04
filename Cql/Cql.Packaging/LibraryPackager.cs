@@ -144,12 +144,10 @@ namespace Hl7.Cql.Packaging
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var codeWriterLogger = logFactory.CreateLogger<CSharpSourceCodeWriter>();
-
-            var cqlLibraries = packageGraph.Nodes.Values
-                .Select(node => node.Properties?[elm.Library.LibraryNodeProperty] as elm.Library)
+            var cqlLibraries = packageGraph
+                .TopologicalSort() // Processing this deterministically to reduce different exceptions when running this repeatedly				
+                .Select(node => node.Properties?[elm.Library.LibraryNodeProperty])
                 .OfType<elm.Library>()
-                // Processing this deterministically to reduce different exceptions when running this repeatedly
-                .OrderBy(lib => lib.NameAndVersion)
                 .ToArray();
 
             var all = new DefinitionDictionary<LambdaExpression>();
@@ -186,11 +184,6 @@ namespace Hl7.Cql.Packaging
                     throw new InvalidOperationException("Library NameAndVersion should not be null.");
                 if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
                     throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
-                // <<<<<<< HEAD
-                //                 var builder = new ExpressionBuilder(operatorBinding, typeManager, library, builderLogger, new(false));
-                //                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
-                //                 libraries.Add(library.NameAndVersion, fhirLibrary);
-                // =======
                 var builder = new ExpressionBuilder(operatorBinding,
                     typeManager,
                     library.NameAndVersion!,
@@ -201,7 +194,6 @@ namespace Hl7.Cql.Packaging
                 all.Merge(expressions);
                 var fhirLibrary = createLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, canon, library);
                 fhirLibraries.Add(library.NameAndVersion, fhirLibrary);
-                // >>>>>>> ec93a98 (Defines with contexts now have an optional parameter that will be coalesced to the context definition (e.g. "Patient") when the parameter's value is not supplied (null).)
             }
 
             var resources = new List<Resource>();

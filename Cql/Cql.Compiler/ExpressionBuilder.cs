@@ -74,7 +74,8 @@ namespace Hl7.Cql.Compiler
         /// Note that <see cref="elm.ExpressionRef"/> and <see cref="elm.FunctionRef"/> nodes that reference external libraries will throw exceptions
         /// when <see cref="Build"/> is called on the result of this function.
         /// </summary>
-        internal static ExpressionBuilder ForSingleLibrary(OperatorBinding operatorBinding,
+        internal static ExpressionBuilder ForSingleLibrary(
+            OperatorBinding operatorBinding,
             TypeManager typeManager,
             Library library,
             ILogger<ExpressionBuilder> logger,
@@ -473,12 +474,7 @@ namespace Hl7.Cql.Compiler
                                     if (!string.IsNullOrWhiteSpace(name))
                                     {
                                         var value = tag.value ?? string.Empty;
-                                        // <<<<<<< HEAD
-                                        //                                         definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes, name, value);
-                                        //
-                                        // =======
                                         definitions.AddTag(ThisLibraryKey, def.name, functionParameterTypes ?? Type.EmptyTypes, name, value);
-                                        // >>>>>>> ec93a98 (Defines with contexts now have an optional parameter that will be coalesced to the context definition (e.g. "Patient") when the parameter's value is not supplied (null).)
                                     }
                                 }
                             }
@@ -1224,7 +1220,6 @@ namespace Hl7.Cql.Compiler
             var def = ResolveExpression(@ref.libraryName, @ref.name, operandTypes);
             if (def is FunctionDef function)
             {
-
                 var functionType = getFunctionRefReturnType(@ref, ctx);
 
                 var funcTypeParameters =
@@ -2569,7 +2564,10 @@ namespace Hl7.Cql.Compiler
             Expression? result = null;
             if (TypeResolver.ShouldUseSourceObject(source.Type, path!))
             {
-                result = source;
+                ctx.LogWarning($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.");
+                var call = OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.CqlContextParameter,
+                    source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
+                return call;
             }
             else
             {

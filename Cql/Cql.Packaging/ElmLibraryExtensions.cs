@@ -20,7 +20,11 @@ namespace Hl7.Cql.Packaging
         /// <param name="context">the context of the expression evaluation</param>
         /// <param name="logFactory">logger</param>
         /// <returns>the result of the expression</returns>
-        public static object? EvaluateExpression(this Library library, Elm.Expression expression, CqlContext context, ILoggerFactory logFactory)
+        public static object? EvaluateExpression(
+            this Library library,
+            Elm.Expression expression, 
+            CqlContext context, 
+            ILoggerFactory logFactory)
         {
             var builderLogger = logFactory.CreateLogger<ExpressionBuilder>();
             var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);

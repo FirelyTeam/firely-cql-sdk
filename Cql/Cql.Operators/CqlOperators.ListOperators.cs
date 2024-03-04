@@ -1186,13 +1186,13 @@ namespace Hl7.Cql.Runtime
             }
         }
 
-		public IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right)
+        public IEnumerable<CqlCode>? ValueSetUnion(IEnumerable<CqlCode>? left, IEnumerable<CqlCode>? right)
         {
             if (left == null || right == null)
                 return null;
             else
                 return left.Union(right);
-        }            
+        }
 
         #endregion
 
