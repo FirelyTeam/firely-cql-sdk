@@ -24,8 +24,8 @@ namespace Hl7.Cql.CqlToElm
             Options = options.Value;
         }
 
-        public IModelProvider ModelProvider { get; }
-        public CqlToElmOptions Options { get; }
+        private IModelProvider ModelProvider { get; }
+        private CqlToElmOptions Options { get; }
 
 
         public CoercionResult<Expression> Coerce(Expression expression, TypeSpecifier to)

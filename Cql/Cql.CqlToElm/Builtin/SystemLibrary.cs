@@ -108,17 +108,17 @@ namespace Hl7.Cql.CqlToElm.Builtin
 
         private static SystemFunction<T> nullary<T>(TypeSpecifier result) where T : Expression =>
             new(EmptyOperands, result, typeof(T).Name);
-        private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+        private static SystemFunction<T> unary<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { argument }, result, name ?? typeof(T).Name);
-        private static SystemFunction<T> unaryWithPrecision<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+        private static SystemFunction<T> unaryWithPrecision<T>(TypeSpecifier argument, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { argument, StringType }, result, name ?? typeof(T).Name, 1);
-        private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+        private static SystemFunction<T> binary<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { first, second }, result, name ?? typeof(T).Name);
-        private static SystemFunction<T> binaryWithPrecision<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+        private static SystemFunction<T> binaryWithPrecision<T>(TypeSpecifier first, TypeSpecifier second, TypeSpecifier result, string? name = null) where T : Expression =>
             new(new[] { first, second, StringType, }, result, name ?? typeof(T).Name, 2);
-        private static SystemFunction<T> nary<T>(TypeSpecifier[] operands, int requiredParameterCount, TypeSpecifier result, string? name = null) where T : OperatorExpression =>
+        private static SystemFunction<T> nary<T>(TypeSpecifier[] operands, int requiredParameterCount, TypeSpecifier result, string? name = null) where T : Expression =>
             new(operands, result, name ?? typeof(T).Name, requiredParameterCount);
-        private static SystemFunction<T> nary<T>(TypeSpecifier operandType, int operandCount, int requiredParameterCount, TypeSpecifier result) where T : OperatorExpression =>
+        private static SystemFunction<T> nary<T>(TypeSpecifier operandType, int operandCount, int requiredParameterCount, TypeSpecifier result) where T : Expression =>
             new(Enumerable.Range(0, operandCount).Select(i => operandType).ToArray(), result, typeof(T).Name, requiredParameterCount);
         private static SystemFunction<T> aggregate<T>(TypeSpecifier source, TypeSpecifier result) where T : AggregateExpression =>
             new(new[] { source.ToListType() }, result, typeof(T).Name);
@@ -187,6 +187,8 @@ namespace Hl7.Cql.CqlToElm.Builtin
         public static SystemFunction<ToDecimal> IntegerToDecimal = unary<ToDecimal>(IntegerType, DecimalType);
         public static SystemFunction<ToLong> IntegerToLong = unary<ToLong>(IntegerType, LongType);
         public static SystemFunction<ToQuantity> IntegerToQuantity = unary<ToQuantity>(IntegerType, QuantityType);
+        public static OverloadedFunctionDef Interval = nary<Interval>(new TypeSpecifier[] { T, T, BooleanType, BooleanType, }, 4, T.ToIntervalType())
+            .For(T, IntegerType, LongType, DecimalType, QuantityType, DateType, DateTimeType, TimeType);
         public static SystemFunction<IsFalse> IsFalse = unary<IsFalse>(BooleanType, BooleanType);
         public static SystemFunction<IsNull> IsNull = unary<IsNull>(AnyType, BooleanType);
         public static SystemFunction<IsTrue> IsTrue = unary<IsTrue>(BooleanType, BooleanType);

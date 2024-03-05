@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm
 
         private static readonly System.Collections.ObjectModel.ReadOnlyDictionary<string, TypeSpecifier> EmptyInferences = new(new Dictionary<string, TypeSpecifier>());
 
-        internal SignatureMatchResult MatchSignature(FunctionDef candidate, Expression[] arguments)
+        internal SignatureMatchResult MatchSignature(FunctionDef candidate, params Expression[] arguments)
         {
             var operands = candidate.operand ?? Array.Empty<OperandDef>();
             var operandTypes = operands.Select(op => op.operandTypeSpecifier).ToArray();
@@ -254,7 +254,7 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// Picks the function which has the lowest maximum cost in converting its operands to be compatible with the invocation.
         /// </summary>
-        internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, Expression[] arguments)
+        internal SignatureMatchResult MatchSignature(OverloadedFunctionDef overloadedFunction, params Expression[] arguments)
         {
             var matches = overloadedFunction.Functions
                 .Select(function => MatchSignature(function, arguments))
