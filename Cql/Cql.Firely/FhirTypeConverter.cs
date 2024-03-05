@@ -10,6 +10,7 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
+using Hl7.Fhir.Support;
 using Hl7.Fhir.Utility;
 using System.Collections.Concurrent;
 using System.Reflection;
@@ -60,6 +61,19 @@ namespace Hl7.Cql.Fhir
             add((M.FhirString p) => p.Value);
             add((M.FhirBoolean p) => p.Value);
             add((M.FhirDecimal p) => p.Value);
+            add((M.Markdown p) => p.Value);
+            add((M.Instant p) => p.Value);
+            add((M.Instant p) =>
+            {
+                if (p.Value is null)
+                    return null;
+                if(p.Value is DateTimeOffset dto)
+                    return new CqlDateTime(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes);
+                return null;
+            });
+            add((M.FhirUrl p) => p.Value);
+            add((M.Integer c) => new UnsignedInt(c.Value));
+            add((M.Integer c) => new PositiveInt(c.Value));
             add((M.Code c) => c.Value);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDate(date!.Years!.Value, date.Months, date.Days) : null);
             add((M.Date f) => f.TryToDate(out var date) ? new CqlDateTime(date!.Years!.Value, date.Months, date.Days, 0, 0, 0, 0, 0, 0) : null);
