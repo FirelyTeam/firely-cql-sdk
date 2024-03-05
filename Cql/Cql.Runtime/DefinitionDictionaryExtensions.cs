@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
+using System.Xml.Linq;
 
 namespace Hl7.Cql.Runtime
 {
@@ -56,25 +57,38 @@ namespace Hl7.Cql.Runtime
         }
 
         /// <summary>
-        /// Invokes the delegate <paramref name="define"/> in <paramref name="libraryName"/> with <paramref name="parameters"/>.
+        /// Invokes the delegate <paramref name="define"/> in <paramref name="libraryName"/>.
         /// </summary>
-        /// <typeparam name="T">The expected return type of the delegate.</typeparam>
         /// <param name="delegates">The delegates containing this definition.</param>
         /// <param name="libraryName">The library containing this definition.</param>
         /// <param name="define">The name of the definition.</param>
         /// <param name="rtx">The runtime context to use for the execution.</param>
-        /// <param name="parameters">The definition's parameters, excluding <paramref name="rtx"/>.</param>
-        /// <returns></returns>
-        public static T? Invoke<T>(this DefinitionDictionary<Delegate> delegates, string libraryName, string define, CqlContext rtx, params object[] parameters)
+        public static object? Invoke(this DefinitionDictionary<Delegate> delegates, string libraryName,
+            string define, CqlContext rtx) =>
+            InvokeShared(delegates, libraryName, define, Type.EmptyTypes, rtx);
+        
+        /// <inheritdoc cref="Invoke"/>
+        public static object? Invoke<TArg1>(this DefinitionDictionary<Delegate> delegates, string libraryName,
+            string define, CqlContext rtx, TArg1 arg1) =>
+            InvokeShared(delegates, libraryName, define, new[] { typeof(TArg1) }, rtx, arg1);
+
+        /// <inheritdoc cref="Invoke"/>
+        public static object? Invoke<TArg1, TArg2>(this DefinitionDictionary<Delegate> delegates, string libraryName,
+            string define, CqlContext rtx, TArg1 arg1, TArg2 arg2) =>
+            InvokeShared(delegates, libraryName, define, new[] { typeof(TArg1), typeof(TArg2) }, rtx, arg1, arg2);
+
+        /// <inheritdoc cref="Invoke"/>
+        public static object? Invoke<TArg1, TArg2, TArg3>(this DefinitionDictionary<Delegate> delegates,
+            string libraryName, string define, CqlContext rtx, TArg1 arg1, TArg2 arg2, TArg3 arg3) =>
+            InvokeShared(delegates, libraryName, define, new[] { typeof(TArg1), typeof(TArg2), typeof(TArg3) }, rtx, arg1, arg2, arg3);
+
+        /// <inheritdoc cref="Invoke"/>
+        private static object? InvokeShared(DefinitionDictionary<Delegate> delegates, string libraryName, string define,
+            Type[] parameterTypes, params object?[] rtxWithParameters)
         {
-            var parameterTypes = parameters.Select(p => p.GetType()).ToArray();
-            var @delegate = delegates[libraryName, define, parameterTypes];
-            var combined = new object[parameters.Length + 1];
-            combined[0] = rtx;
-            Array.Copy(parameters, 0, combined, 1, parameters.Length);
-            var result = (T?)@delegate.DynamicInvoke(combined);
+            Delegate @delegate = delegates[libraryName, define, parameterTypes];
+            var result = @delegate.DynamicInvoke(rtxWithParameters);
             return result;
         }
-    
     }
 }

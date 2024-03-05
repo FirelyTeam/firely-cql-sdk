@@ -346,8 +346,10 @@ namespace Hl7.Cql.Compiler
                     }
                 }
 
+                int ord = -1;
                 foreach (var def in Library.statements ?? Enumerable.Empty<ExpressionDef>())
                 {
+                    ++ord;
                     if (def.expression != null)
                     {
                         // The reference implementation of cql-to-elm creates define statements for contexts if they exist in the CQL.
@@ -1189,7 +1191,7 @@ namespace Hl7.Cql.Compiler
         protected Expression ExpressionRef(ExpressionRef @ref, ExpressionBuilderContext ctx)
         {
             if (string.IsNullOrWhiteSpace(@ref.libraryName)
-                && Library.contexts.Any(ctx => ctx.name == @ref.name))
+                && (Library.contexts?.Any(ctx => ctx.name == @ref.name) ?? false))
             {
                 if (ctx.RetrieveContextParameter == null)
                     throw new InvalidOperationException($"Encountered an ExpressionRef to a context without a context parameter available on the {nameof(ExpressionBuilderContext)}");

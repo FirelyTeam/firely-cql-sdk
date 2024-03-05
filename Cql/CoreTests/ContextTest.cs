@@ -17,6 +17,7 @@ using System.Runtime.CompilerServices;
 using Hl7.Cql.CodeGeneration.NET;
 using Microsoft.CodeAnalysis;
 using System.Reflection;
+using DefinitionDictionaryExtensions = Hl7.Cql.Runtime.DefinitionDictionaryExtensions;
 
 namespace CoreTests
 {
@@ -97,7 +98,7 @@ namespace CoreTests
             Assert.AreSame(patient, patientContext);
             var encounterCountext = ctx.Operators.DataSource.GetRetrieveContext<Encounter>();
             Assert.IsNull(encounterCountext);
-            var result = Definitions.Invoke<bool?>(ContextLibrary, "In Initial Population", ctx, patient);
+            var result = (bool?)Definitions.Invoke(ContextLibrary, "In Initial Population", ctx, patient);
             Assert.AreEqual(true, result);
         }
 
@@ -142,9 +143,11 @@ namespace CoreTests
 
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
             ctx.Operators.DataSource.SetRetrieveContext(patients[0]);
-            var result = Definitions.Invoke<bool?>(ContextLibrary, "In Initial Population", ctx, patients[0]);
+            object arg1 = patients[0];
+            var result = (bool?)Definitions.Invoke(ContextLibrary, "In Initial Population", ctx, arg1)!;
             ctx.Operators.DataSource.SetRetrieveContext(patients[3]);
-            result = Definitions.Invoke<bool?>(ContextLibrary, "In Initial Population", ctx, patients[0]);
+            object arg2 = patients[0];
+            result = (bool?)Definitions.Invoke(ContextLibrary, "In Initial Population", ctx, arg2)!;
             Assert.AreEqual(true, result);
         }
 
@@ -188,7 +191,7 @@ namespace CoreTests
             });
 
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
-            var result = Definitions.Invoke<int?>(ContextLibrary, "Initial Population Count 1", ctx);
+            var result = (int?)Definitions.Invoke(ContextLibrary, "Initial Population Count 1", ctx)!;
             Assert.AreEqual(3, result);
         }
 
@@ -232,7 +235,7 @@ namespace CoreTests
             });
 
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: Definitions);
-            var result = Definitions.Invoke<int?>(ContextLibrary, "Initial Population Count 2", ctx);
+            var result = (int?)Definitions.Invoke(ContextLibrary, "Initial Population Count 2", ctx)!;
             Assert.AreEqual(3, result);
         }
     }

@@ -339,12 +339,17 @@ namespace Hl7.Cql.Runtime
         /// <returns>The best match for <paramref name="parameterTypes"/>, or <c>null</c> if no match exists</returns>
         internal T? BestMatch(Type[] parameterTypes, IEnumerable<(Type[] Signature, T T)> overloads)
         {
-            var groups = (from overload in overloads
-                          let score = Score(parameterTypes, overload.Signature)
-                          where score != null
-                          group overload by score into g
-                          orderby g.Key
-                          select g).ToArray();
+            IGrouping<int?, (Type[] Signature, T T)>[] groups =
+            (
+                from overload in overloads
+                let score = Score(parameterTypes, overload.Signature)
+                where score != null
+                group overload by score
+                into g
+                orderby g.Key
+                select g
+                ).ToArray();
+
             if (groups.Length > 0)
             {
                 var candidate = groups[0];
