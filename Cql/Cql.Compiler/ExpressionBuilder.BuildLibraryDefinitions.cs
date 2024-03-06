@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -61,7 +62,7 @@ partial class ExpressionBuilder
 
             if (library.includes is { Length: > 0 } includeDefs)
             {
-                foreach (var includeDef in includeDefs)
+                foreach (var (includeDef, ordinal) in includeDefs.WithOrdinals())
                 {
                     try
                     {
@@ -69,7 +70,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding(includeDef switch
+                        throw ExceptionWhileBuilding("include definition", ordinal, includeDef switch
                         {
                             { version: { } version } => $"{includeDef.path} {version}",
                             _ => includeDef.path,
@@ -80,7 +81,7 @@ partial class ExpressionBuilder
 
             if (library.valueSets is { Length: > 0 } valueSetDefs)
             {
-                foreach (ValueSetDef valueSetDef in valueSetDefs)
+                foreach (var (valueSetDef, ordinal) in valueSetDefs.WithOrdinals())
                 {
                     try
                     {
@@ -88,7 +89,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding(valueSetDef.name, valueSetDef.locator, e);
+                        throw ExceptionWhileBuilding("value set", ordinal, valueSetDef.name, valueSetDef.locator, e);
                     }
                 }
             }
@@ -100,7 +101,7 @@ partial class ExpressionBuilder
                     library.codeSystems?.ToDictionary(cs => cs.name, cs => cs.id)
                     ?? new();
 
-                foreach (var codeDef in codeDefs)
+                foreach (var (codeDef, ordinal) in codeDefs.WithOrdinals())
                 {
                     try
                     {
@@ -108,14 +109,14 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding(codeDef.name, codeDef.locator, e);
+                        throw ExceptionWhileBuilding("code definition", ordinal, codeDef.name, codeDef.locator, e);
                     }
                 }
             }
 
             if (library.codeSystems is { Length: > 0 } codeSystemDefs)
             {
-                foreach (var codeSystemDef in codeSystemDefs)
+                foreach (var (codeSystemDef, ordinal) in codeSystemDefs.WithOrdinals())
                 {
                     try
                     {
@@ -123,14 +124,14 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding(codeSystemDef.name, codeSystemDef.locator, e);
+                        throw ExceptionWhileBuilding("code system definition", ordinal, codeSystemDef.name, codeSystemDef.locator, e);
                     }
                 }
             }
 
             if (library.concepts is { Length: > 0 } conceptDefs)
             {
-                foreach (var conceptDef in conceptDefs)
+                foreach (var (conceptDef, ordinal) in conceptDefs.WithOrdinals())
                 {
                     try
                     {
@@ -138,14 +139,14 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding(conceptDef.name, conceptDef.locator, e);
+                        throw ExceptionWhileBuilding("concept definition", ordinal, conceptDef.name, conceptDef.locator, e);
                     }
                 }
             }
 
             if (library.parameters is { Length: > 0 } parameterDefs)
             {
-                foreach (var parameterDef in parameterDefs)
+                foreach (var (parameterDef, ordinal) in parameterDefs.WithOrdinals())
                 {
                     try
                     {
@@ -153,14 +154,14 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding(parameterDef.name, parameterDef.locator, e);
+                        throw ExceptionWhileBuilding("parameter definition", ordinal, parameterDef.name, parameterDef.locator, e);
                     }
                 }
             }
 
             if (library.statements is { Length: > 0 } expressionDefs)
             {
-                foreach (var expressionDef in expressionDefs)
+                foreach (var (expressionDef, ordinal) in expressionDefs.WithOrdinals())
                 {
                     try
                     {
@@ -168,14 +169,15 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding(expressionDef.name, expressionDef.locator, e);
+                        throw ExceptionWhileBuilding("expression definition", ordinal, expressionDef.name, expressionDef.locator, e);
                     }
                 }
             }
 
-            Exception ExceptionWhileBuilding(string elementName, string locator, Exception innerException) =>
+            Exception ExceptionWhileBuilding(string elmType, Ordinal ordinal, string elementName, string locator,
+                Exception innerException) =>
                 throw new InvalidOperationException(
-                    $"Exception while building expression definition '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
+                    $"Exception while building the {ordinal} {elmType} '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
                     innerException);
         }
 
@@ -279,11 +281,10 @@ partial class ExpressionBuilder
 
         private void ProcessExpressionDef(ExpressionDef expressionDef)
         {
-            if (expressionDef.expression == null)
-                throw new InvalidOperationException(
-                    $"Definition '{expressionDef.name}' does not have an expression property");
+            var builderContext = _context.NewExpressionBuilderContext(expressionDef);
 
-            var builderContext = _context.NewExpressionBuilderContext();
+            if (expressionDef.expression is null)
+                throw builderContext.NewExpressionBuildingException($"Definition '{expressionDef.name}' does not have an expression property");
 
             if (string.IsNullOrWhiteSpace(expressionDef.name))
             {
@@ -346,7 +347,7 @@ partial class ExpressionBuilder
                 }
             }
 
-            builderContext = builderContext.Deeper();
+            builderContext = builderContext.Deeper(expressionDef);
             var bodyExpression = builderContext.TranslateExpression(expressionDef.expression);
             var lambda = Expression.Lambda(bodyExpression, parameters);
             if (function?.operand != null && _context.ContainsDefinition(expressionDef.name, functionParameterTypes))
@@ -389,11 +390,11 @@ partial class ExpressionBuilder
 
         private void ProcessParameterDef(ParameterDef parameter)
         {
+            var expressionBuilderContext = _context.NewExpressionBuilderContext(parameter);
+
             if (_context.ContainsDefinition(parameter.name!))
                 throw new InvalidOperationException(
                     $"There is already a definition named {parameter.name}");
-
-            var expressionBuilderContext = _context.NewExpressionBuilderContext();
 
             Expression? defaultValue = null;
             if (parameter.@default != null)
@@ -475,13 +476,27 @@ partial class ExpressionBuilder
 
         public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
-        public ExpressionBuilderContextFacade NewExpressionBuilderContext() =>
+        public ExpressionBuilderContextFacade NewExpressionBuilderContext(
+            Elm.ParameterDef parameterDef) =>
             new ExpressionBuilderContextFacade(
                 new ExpressionBuilderContext(
                     _expressionBuilder,
                     RuntimeContextParameter,
                     _definitions,
-                    _localLibraryIdentifiers));
+                    _localLibraryIdentifiers,
+                    parameterDef)
+                {});
+
+        public ExpressionBuilderContextFacade NewExpressionBuilderContext(
+            Elm.ExpressionDef expressionDef) =>
+            new ExpressionBuilderContextFacade(
+                new ExpressionBuilderContext(
+                        _expressionBuilder,
+                        RuntimeContextParameter,
+                        _definitions,
+                        _localLibraryIdentifiers,
+                        expressionDef)
+                    { });
 
         public bool TryGetCustomImplementationByExpressionKey(
             string expressionKey,
@@ -530,6 +545,7 @@ partial class ExpressionBuilder
 
         public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)]out CqlCode? systemCode) => 
             _codesByName.TryGetValue(codeRef.name, out systemCode);
+            
     }
 
     /// <summary>
@@ -556,8 +572,8 @@ partial class ExpressionBuilder
         public Type? TypeFor(Element element, bool throwIfNotFound = true) =>
             _expressionBuilderContext.TypeFor(element, throwIfNotFound);
 
-        public ExpressionBuilderContextFacade Deeper() =>
-            new ExpressionBuilderContextFacade(_expressionBuilderContext.Deeper());
+        public ExpressionBuilderContextFacade Deeper(Element expression) =>
+            new(_expressionBuilderContext.Deeper(expression));
 
         public Expression TranslateExpression(Element op) =>
             _expressionBuilderContext.Builder.TranslateExpression(op, _expressionBuilderContext);
@@ -570,5 +586,10 @@ partial class ExpressionBuilder
 
         public IEnumerable<ParameterExpression> GetParameterExpressions() => 
             _expressionBuilderContext.Operands.Values;
+
+        public ExpressionBuildingException NewExpressionBuildingException(
+            string message,
+            Exception? innerException = null) =>
+            _expressionBuilderContext.NewExpressionBuildingException(message, innerException);
     }
 }

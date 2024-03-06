@@ -11,7 +11,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
 
@@ -21,16 +20,23 @@ namespace Hl7.Cql.Compiler
     /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.BuildLibraryDefinitions()"/>.
     /// </summary>
     /// <remarks>
-    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, elm.Element, ExpressionBuilderContext)"/>.
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(System.Linq.Expressions.Expression, Elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
-    internal class ExpressionBuilderContext
+    internal partial class ExpressionBuilderContext
     {
+
         internal ExpressionBuilderContext(
             ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
-            IDictionary<string, string> localLibraryIdentifiers)
+            IDictionary<string, string> localLibraryIdentifiers,
+            Elm.Element element)
         {
+            if (element is not (Elm.ParameterDef or Elm.ExpressionDef or Elm.Expression))
+                throw new ArgumentException("An ExpressionBuilderContext can only start on a ParameterDef, ExpressionDef or Expression.");
+
+            Element = element;
+            OuterContext = null;
             Builder = builder ?? throw new ArgumentNullException(nameof(builder));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
             Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
@@ -41,22 +47,21 @@ namespace Hl7.Cql.Compiler
             Scopes = new Dictionary<string, (Expression, elm.Element)>();
         }
 
-        private ExpressionBuilderContext(ExpressionBuilderContext other)
+        private ExpressionBuilderContext(
+            ExpressionBuilderContext source,
+            Elm.Element? overrideElement = null,
+            IDictionary<string, (Expression, elm.Element)>? overrideScopes = null)
         {
-            Builder = other.Builder;
-            RuntimeContextParameter = other.RuntimeContextParameter;
-            Definitions = other.Definitions;
-            LocalLibraryIdentifiers = other.LocalLibraryIdentifiers;
-            ImpliedAlias = other.ImpliedAlias;
-            Operands = other.Operands;
-            Libraries = other.Libraries;
-            Scopes = other.Scopes;
-        }
-
-        private ExpressionBuilderContext(ExpressionBuilderContext other,
-            Dictionary<string, (Expression, elm.Element)> scopes) : this(other)
-        {
-            Scopes = scopes;
+            Element = overrideElement ?? source.Element;
+            OuterContext = source.OuterContext;
+            Builder = source.Builder;
+            RuntimeContextParameter = source.RuntimeContextParameter;
+            Definitions = source.Definitions;
+            LocalLibraryIdentifiers = source.LocalLibraryIdentifiers;
+            ImpliedAlias = source.ImpliedAlias;
+            Operands = source.Operands;
+            Libraries = source.Libraries;
+            Scopes = overrideScopes ?? source.Scopes;
         }
 
         /// <summary>
@@ -155,7 +160,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private IDictionary<string, (Expression, elm.Element)> Scopes { get; }
+        private IDictionary<string, (Expression, elm.Element)> Scopes { get; init; }
 
 
         internal bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
@@ -192,24 +197,27 @@ namespace Hl7.Cql.Compiler
                     scopes.Add(normalizedIdentifier, kvp.Value);
                 }
             }
-            var subContext = new ExpressionBuilderContext(this, scopes);
-            return subContext;
-        }
-
-        internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
-        {
-            var subContext = WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
-            subContext.ImpliedAlias = aliasName;
-
+            var subContext = this.WithScopes(scopes);
             return subContext;
         }
 
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ExpressionBuilderContext Deeper()
+        private ExpressionBuilderContext WithScopes(
+            IDictionary<string, (Expression, elm.Element)> scopes) =>
+            new(this, overrideScopes: scopes);
+
+        /// <summary>
+        /// Clones this ExpressionBuilderContext
+        /// </summary>
+        internal ExpressionBuilderContext Deeper(elm.Element element) => 
+            new(this, overrideElement: element);
+
+        internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
         {
-            var subContext = new ExpressionBuilderContext(this);
+            var subContext = WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
+            subContext.ImpliedAlias = aliasName;
             return subContext;
         }
 

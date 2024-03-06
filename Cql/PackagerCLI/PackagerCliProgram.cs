@@ -37,7 +37,7 @@ internal class PackagerCliProgram
         catch (Exception e)
         {
             _logger.LogError(e, "An error occurred while running the packager");
-            Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the log for more detail.");
+            Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
             return -1;
         }
     }

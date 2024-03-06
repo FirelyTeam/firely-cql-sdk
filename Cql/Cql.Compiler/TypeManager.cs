@@ -152,7 +152,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
             if (throwIfNotFound)
-                throw new ArgumentException("Cannot resolve type for expression");
+                throw context.Deeper(element!).NewExpressionBuildingException("Cannot resolve type for expression");
             
             return null;
         }

@@ -94,7 +94,9 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// The <see cref="TypeManager"/> used to resolve and create types referenced in <see cref="Library"/>.
         /// </summary>
+
         public TypeManager TypeManager { get; }
+
         /// <summary>
         /// The <see cref="Library"/> this builder will build.
         /// </summary>
@@ -123,7 +125,7 @@ namespace Hl7.Cql.Compiler
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
             var localLibraryIdentifiers = new Dictionary<string, string>();
-            ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, localLibraryIdentifiers);
+            ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, localLibraryIdentifiers, expression);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
@@ -131,7 +133,7 @@ namespace Hl7.Cql.Compiler
 
         internal Expression TranslateExpression(elm.Element op, ExpressionBuilderContext ctx)
         {
-            ctx = ctx.Deeper();
+            ctx = ctx.Deeper(op);
             Expression? expression;
             switch (op)
             {
@@ -796,9 +798,6 @@ namespace Hl7.Cql.Compiler
                 var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
                     ?? TypeNameToIdentifier(elementType, ctx);
                 var whereLambdaParameter = Expression.Parameter(elementType, parameterName);
-                if (querySourceAlias == "ItemOnLine")
-                {
-                }
                 var scopes = new[] { new ExpressionElementPairForIdentifier(querySourceAlias!, (whereLambdaParameter, querySource.expression)) };
                 var subContext = ctx.WithScopes(scopes);
 
@@ -813,6 +812,7 @@ namespace Hl7.Cql.Compiler
                     }
                     subContext = subContext.WithScopes(letScopes);
                 }
+                
                 var whereBody = TranslateExpression(query.where, subContext);
                 var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
                 var callWhere = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
@@ -1324,7 +1324,6 @@ namespace Hl7.Cql.Compiler
             var type = TypeManager.Resolver.CodeType.MakeArrayType();
             return InvokeDefinitionThroughRuntimeContext(conceptRef.name, conceptRef.libraryName, type!, ctx);
         }
-
 
         protected Expression Instance(Instance ine, ExpressionBuilderContext ctx)
         {

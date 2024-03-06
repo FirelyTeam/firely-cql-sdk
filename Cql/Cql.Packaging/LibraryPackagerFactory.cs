@@ -22,16 +22,14 @@ internal class LibraryPackagerFactory
     public LibraryPackagerFactory(ILoggerFactory loggerFactory, int cacheSize = 0)
     {
         _expressionBuilderFactory = new ExpressionBuilderFactory(loggerFactory, cacheSize);
-        _CSharpSourceCodeWriter = Deferred(() =>
-        {
-            ILogger<CSharpSourceCodeWriter> cSharpSourceCodeWriterLogger = loggerFactory.CreateLogger<CSharpSourceCodeWriter>(); 
-            return new CSharpSourceCodeWriter(cSharpSourceCodeWriterLogger, FhirTypeResolver);
-        });
+        _CSharpSourceCodeWriter = Deferred(() => new CSharpSourceCodeWriter(Logger<CSharpSourceCodeWriter>(), FhirTypeResolver));
         _AssemblyCompiler = Deferred(() => new AssemblyCompiler(ExpressionBuilderService, FhirTypeResolver, CSharpSourceCodeWriter, TypeManager));
-        _LibraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler, ExpressionBuilderService));
+        _LibraryPackager = Deferred(() => new LibraryPackager(Logger<LibraryPackager>(), FhirTypeResolver, AssemblyCompiler, ExpressionBuilderService));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
+
+        ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
     }
 
     public ModelInspector ModelInspector => _expressionBuilderFactory.ModelInspector;
