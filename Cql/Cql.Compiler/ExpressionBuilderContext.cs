@@ -144,7 +144,7 @@ namespace Hl7.Cql.Compiler
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (_scopes.TryGetValue(normalized, out var expression))
                 return expression.Item1;
-            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
+            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
 
         internal (Expression, elm.Element) GetScope(string elmAlias)
@@ -152,7 +152,7 @@ namespace Hl7.Cql.Compiler
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (_scopes.TryGetValue(normalized, out var expression))
                 return expression;
-            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
+            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
 
         /// <summary>
