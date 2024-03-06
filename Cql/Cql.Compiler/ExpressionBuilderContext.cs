@@ -199,6 +199,13 @@ namespace Hl7.Cql.Compiler
             return subContext;
         }
 
+        internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
+        {
+            var subContext = WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
+            subContext.ImpliedAlias = aliasName;
+            return subContext;
+        }
+
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
@@ -211,13 +218,6 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal ExpressionBuilderContext Deeper(elm.Element element) => 
             new(this, overrideElement: element);
-
-        internal ExpressionBuilderContext WithImpliedAlias(string aliasName, Expression linqExpression, elm.Element elmExpression)
-        {
-            var subContext = WithScopes(new KeyValuePair<string, (Expression, elm.Element)>(aliasName, (linqExpression, elmExpression)));
-            subContext.ImpliedAlias = aliasName;
-            return subContext;
-        }
 
         internal void LogWarning(string message, elm.Element? expression = null)
         {

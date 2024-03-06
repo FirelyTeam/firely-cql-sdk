@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 
 namespace Hl7.Cql.Compiler.Infrastructure;
 
@@ -17,28 +16,4 @@ internal static class EnumerableExtensions
             yield return (item, new Ordinal(i));
         }
     }
-}
-
-internal readonly struct Ordinal
-{
-    private readonly int _value;
-
-    public Ordinal(int value)
-    {
-        Debug.Assert(value >= 0);
-        _value = value;
-    }
-
-    public int Value => _value;
-
-    public override string ToString() => 
-        $"{_value}{OrdinalIndicator(_value)}";
-
-    private static string OrdinalIndicator(int ordinal) => ordinal switch
-    {
-        1 => "st", // 1st
-        2 => "nd", // 2nd
-        3 => "rd", // 3rd
-        _ => "th"  // 0th, 4th, 5th, etc.
-    };
 }
