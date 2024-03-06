@@ -71,7 +71,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding("include definition", ordinal, includeDef switch
+                        throw ExceptionWhileBuilding("include definition", ordinal, includeDefs.Length, includeDef switch
                         {
                             { version: { } version } => $"{includeDef.path} {version}",
                             _ => includeDef.path,
@@ -90,7 +90,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding("value set", ordinal, valueSetDef.name, valueSetDef.locator, e);
+                        throw ExceptionWhileBuilding("value set", ordinal, valueSetDefs.Length, valueSetDef.name, valueSetDef.locator, e);
                     }
                 }
             }
@@ -110,7 +110,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding("code definition", ordinal, codeDef.name, codeDef.locator, e);
+                        throw ExceptionWhileBuilding("code definition", ordinal, codeDefs.Length, codeDef.name, codeDef.locator, e);
                     }
                 }
             }
@@ -125,7 +125,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding("code system definition", ordinal, codeSystemDef.name, codeSystemDef.locator, e);
+                        throw ExceptionWhileBuilding("code system definition", ordinal, codeSystemDefs.Length, codeSystemDef.name, codeSystemDef.locator, e);
                     }
                 }
             }
@@ -140,7 +140,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding("concept definition", ordinal, conceptDef.name, conceptDef.locator, e);
+                        throw ExceptionWhileBuilding("concept definition", ordinal, conceptDefs.Length, conceptDef.name, conceptDef.locator, e);
                     }
                 }
             }
@@ -155,7 +155,7 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding("parameter definition", ordinal, parameterDef.name, parameterDef.locator, e);
+                        throw ExceptionWhileBuilding("parameter definition", ordinal, parameterDefs.Length, parameterDef.name, parameterDef.locator, e);
                     }
                 }
             }
@@ -170,15 +170,15 @@ partial class ExpressionBuilder
                     }
                     catch (Exception e)
                     {
-                        throw ExceptionWhileBuilding("expression definition", ordinal, expressionDef.name, expressionDef.locator, e);
+                        throw ExceptionWhileBuilding("expression definition", ordinal, expressionDefs.Length, expressionDef.name, expressionDef.locator, e);
                     }
                 }
             }
 
-            Exception ExceptionWhileBuilding(string elmType, Ordinal ordinal, string elementName, string locator,
+            Exception ExceptionWhileBuilding(string elmType, Ordinal ordinal, int count, string elementName, string locator,
                 Exception innerException) =>
                 throw new ExpressionBuildingException(
-                    message: $"Exception while building the {ordinal} {elmType} '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
+                    message: $"Exception while building the {ordinal} of {count} {elmType} '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
                     innerException: innerException);
         }
 
@@ -287,9 +287,6 @@ partial class ExpressionBuilder
         private void ProcessExpressionDef(ExpressionDef expressionDef)
         {
             var ctx = _context.NewExpressionBuilderContext(expressionDef);
-
-            if (expressionDef.expression is null)
-                throw ctx.NewExpressionBuildingException($"Definition '{expressionDef.name}' does not have an expression property");
 
             if (string.IsNullOrWhiteSpace(expressionDef.name))
             {
