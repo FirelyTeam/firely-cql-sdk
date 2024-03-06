@@ -13,19 +13,19 @@ namespace Hl7.Cql.Compiler;
 
 internal class ExpressionBuilderFactory
 {
-    private readonly Lazy<FhirTypeResolver> _FhirTypeResolver;
-    private readonly Lazy<Conversion.TypeConverter> _TypeConverter;
-    private readonly Lazy<CqlOperatorsBinding> _CqlOperatorsBinding;
-    private readonly Lazy<TypeManager> _TypeManager;
-    private readonly Lazy<ExpressionBuilderService> _ExpressionBuilderService;
+    private readonly Lazy<FhirTypeResolver> _fhirTypeResolver;
+    private readonly Lazy<Conversion.TypeConverter> _typeConverter;
+    private readonly Lazy<CqlOperatorsBinding> _cqlOperatorsBinding;
+    private readonly Lazy<TypeManager> _typeManager;
+    private readonly Lazy<ExpressionBuilderService> _expressionBuilderService;
 
     public ExpressionBuilderFactory(ILoggerFactory loggerFactory, int? cacheSize = null)
     {
-        _FhirTypeResolver = Deferred(() => new FhirTypeResolver(ModelInspector));
-        _TypeConverter = Deferred(() => FhirTypeConverter.Create(ModelInspector, cacheSize));
-        _CqlOperatorsBinding = Deferred(() => new CqlOperatorsBinding(FhirTypeResolver, TypeConverter));
-        _TypeManager = Deferred(() => new TypeManager(FhirTypeResolver));
-        _ExpressionBuilderService = Deferred(() => new ExpressionBuilderService(Logger<ExpressionBuilder>(), CqlOperatorsBinding, TypeManager));
+        _fhirTypeResolver = Deferred(() => new FhirTypeResolver(ModelInspector));
+        _typeConverter = Deferred(() => FhirTypeConverter.Create(ModelInspector, cacheSize));
+        _cqlOperatorsBinding = Deferred(() => new CqlOperatorsBinding(FhirTypeResolver, TypeConverter));
+        _typeManager = Deferred(() => new TypeManager(FhirTypeResolver));
+        _expressionBuilderService = Deferred(() => new ExpressionBuilderService(Logger<ExpressionBuilder>(), CqlOperatorsBinding, TypeManager));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
@@ -34,10 +34,10 @@ internal class ExpressionBuilderFactory
     }
 
     public ModelInspector ModelInspector => Hl7.Fhir.Model.ModelInfo.ModelInspector;
-    public Conversion.TypeConverter TypeConverter => _TypeConverter.Value;
-    public FhirTypeResolver FhirTypeResolver => _FhirTypeResolver.Value;
-    public CqlOperatorsBinding CqlOperatorsBinding => _CqlOperatorsBinding.Value;
-    public TypeManager TypeManager => _TypeManager.Value;
-    public ExpressionBuilderService ExpressionBuilderService => _ExpressionBuilderService.Value;
+    public Conversion.TypeConverter TypeConverter => _typeConverter.Value;
+    public FhirTypeResolver FhirTypeResolver => _fhirTypeResolver.Value;
+    public CqlOperatorsBinding CqlOperatorsBinding => _cqlOperatorsBinding.Value;
+    public TypeManager TypeManager => _typeManager.Value;
+    public ExpressionBuilderService ExpressionBuilderService => _expressionBuilderService.Value;
 
 }

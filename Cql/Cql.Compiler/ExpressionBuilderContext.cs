@@ -10,6 +10,7 @@ using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using elm = Hl7.Cql.Elm;
@@ -20,7 +21,7 @@ namespace Hl7.Cql.Compiler
     /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.BuildLibraryDefinitions()"/>.
     /// </summary>
     /// <remarks>
-    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(System.Linq.Expressions.Expression, Elm.Element, ExpressionBuilderContext)"/>.
+    /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
     internal partial class ExpressionBuilderContext
     {
@@ -32,8 +33,8 @@ namespace Hl7.Cql.Compiler
             IDictionary<string, string> localLibraryIdentifiers,
             Elm.Element element)
         {
-            Element = element;
-            OuterContext = null;
+            _element = element;
+            _outerContext = null;
             Builder = builder ?? throw new ArgumentNullException(nameof(builder));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
             Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
@@ -49,8 +50,8 @@ namespace Hl7.Cql.Compiler
             Elm.Element? overrideElement = null,
             IDictionary<string, (Expression, elm.Element)>? overrideScopes = null)
         {
-            Element = overrideElement ?? source.Element;
-            OuterContext = source.OuterContext;
+            _element = overrideElement ?? source._element;
+            _outerContext = source._outerContext;
             Builder = source.Builder;
             RuntimeContextParameter = source.RuntimeContextParameter;
             Definitions = source.Definitions;

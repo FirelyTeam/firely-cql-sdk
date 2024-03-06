@@ -230,8 +230,7 @@ partial class ExpressionBuilder
                 {
                     var codeRef = conceptDef.code[i];
                     if (!_context.TryGetCode(codeRef, out var systemCode))
-                        throw ctx.
-                            NewExpressionBuildingException(
+                        throw ctx.NewExpressionBuildingException(
                             $"Code {codeRef.name} in concept {conceptDef.name} is not defined.");
 
                     initMembers[i] = Expression.New(

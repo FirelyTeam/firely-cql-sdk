@@ -4,15 +4,14 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using elm = Hl7.Cql.Elm;
-using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 
 partial class ExpressionBuilderContext
 {
-    private Elm.Element Element { get; init; }
+    private readonly Elm.Element _element;
 
-    private ExpressionBuilderContext? OuterContext { get; init; }
+    private readonly ExpressionBuilderContext? _outerContext;
 
 
     internal IEnumerable<ExpressionBuilderContext> SelfAndAncestorContexts
@@ -23,7 +22,7 @@ partial class ExpressionBuilderContext
             while (current != null)
             {
                 yield return current;
-                current = current.OuterContext;
+                current = current._outerContext;
             }
         }
     }
@@ -31,7 +30,7 @@ partial class ExpressionBuilderContext
 
     internal IEnumerable<Elm.Element> SelfAndAncestorElements =>
         SelfAndAncestorContexts
-            .Select(context => context.Element)
+            .Select(context => context._element)
             .OfType<Elm.Element>();
 
     internal readonly record struct BasicElementInfo(
@@ -67,7 +66,7 @@ partial class ExpressionBuilderContext
         get
         {
             var contextsAndElements = SelfAndAncestorContexts
-                .Select(context => (context, context.Element))
+                .Select(context => (context, Element: context._element))
                 .ToList();
 
             for (int i = 0; i < contextsAndElements.Count; i++)
