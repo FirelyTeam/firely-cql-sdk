@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Hl7.Cql.Runtime;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
 using System.Text;
 using elm = Hl7.Cql.Elm;
@@ -9,7 +11,8 @@ namespace Hl7.Cql.Compiler;
 
 partial class ExpressionBuilderContext
 {
-    private readonly Elm.Element _element;
+    public elm.Element Element => GetElement();
+    protected abstract elm.Element GetElement();
 
     private readonly ExpressionBuilderContext? _outerContext;
 
@@ -30,7 +33,7 @@ partial class ExpressionBuilderContext
 
     internal IEnumerable<Elm.Element> SelfAndAncestorElements =>
         SelfAndAncestorContexts
-            .Select(context => context._element)
+            .Select(context => context.Element)
             .OfType<Elm.Element>();
 
     internal readonly record struct BasicElementInfo(
@@ -66,7 +69,7 @@ partial class ExpressionBuilderContext
         get
         {
             var contextsAndElements = SelfAndAncestorContexts
-                .Select(context => (context, Element: context._element))
+                .Select(context => (context, Element: context.Element))
                 .ToList();
 
             for (int i = 0; i < contextsAndElements.Count; i++)
@@ -130,4 +133,47 @@ partial class ExpressionBuilderContext
     public ExpressionBuildingException NewExpressionBuildingException(
         string? message = null, Exception? innerException = null) => 
         new(this, message, innerException);
+}
+
+
+internal class ExpressionBuilderContext<TElement> : ExpressionBuilderContext
+    where TElement : Elm.Element
+{
+    internal ExpressionBuilderContext(
+        ExpressionBuilder builder,
+        ParameterExpression contextParameter,
+        DefinitionDictionary<LambdaExpression> definitions,
+        IDictionary<string, string> localLibraryIdentifiers,
+        TElement element)
+        : base(builder, contextParameter, definitions, localLibraryIdentifiers)
+    {
+        Element = element ?? throw new ArgumentNullException(nameof(element));
+    }
+
+    protected ExpressionBuilderContext(
+        ExpressionBuilderContext source,
+        TElement element)
+        : base(source)
+    {
+        Element = element;
+    }
+
+    protected ExpressionBuilderContext(
+        ExpressionBuilderContext<TElement> source,
+        IDictionary<string, (Expression, elm.Element)>? overrideScopes = null)
+        : base(source, overrideScopes: overrideScopes)
+    {
+        Element = source.Element;
+    }
+
+    protected override ExpressionBuilderContext WithScopes(IDictionary<string, (Expression, elm.Element)> scopes) =>
+        new ExpressionBuilderContext<TElement>(this, scopes);
+
+    internal override ExpressionBuilderContext<TInnerElement> Deeper<TInnerElement>(TInnerElement element) =>
+        new(this, element);
+
+
+    public new TElement Element { get; }
+
+    protected override elm.Element GetElement() => Element;
 }

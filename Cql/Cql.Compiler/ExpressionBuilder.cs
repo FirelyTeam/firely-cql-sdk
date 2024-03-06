@@ -125,7 +125,7 @@ namespace Hl7.Cql.Compiler
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
             var localLibraryIdentifiers = new Dictionary<string, string>();
-            ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, localLibraryIdentifiers, expression);
+            ctx ??= new Compiler.ExpressionBuilderContext<elm.Expression>( this, parameter, lambdas, localLibraryIdentifiers, expression);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;

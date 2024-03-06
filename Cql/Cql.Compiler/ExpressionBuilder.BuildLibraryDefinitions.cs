@@ -41,25 +41,21 @@ partial class ExpressionBuilder
         Logger.LogInformation("Building expressions for '{library}'", LibraryKey);
 
         var definitions = new DefinitionDictionary<LambdaExpression>();
-        var definitionsBuilderContext = new DefinitionsBuilderContext(this, definitions);
-        var definitionsBuilder = new DefinitionsBuilder(definitionsBuilderContext);
-        definitionsBuilder.ProcessLibrary();
+        var context = new LibraryExpressionsBuilderContext(this, definitions);
+        var definitionsBuilder = new LibraryExpressionsBuilder();
+        definitionsBuilder.ProcessLibrary(context);
         return definitions;
     }
 
     /// <summary>
     /// The builder for processing the library into definitions.
     /// </summary>
-    private readonly record struct DefinitionsBuilder
+    private readonly record struct LibraryExpressionsBuilder
     {
-        private readonly DefinitionsBuilderContext _context;
-
-        public DefinitionsBuilder(DefinitionsBuilderContext context) => _context = context;
-
-        public void ProcessLibrary()
+        public void ProcessLibrary(LibraryExpressionsBuilderContext ctx)
         {
-            var library = _context.Library;
-            var libraryKey = _context.LibraryKey;
+            var library = ctx.Library;
+            var libraryKey = ctx.LibraryKey;
 
             if (library.includes is { Length: > 0 } includeDefs)
             {
@@ -67,7 +63,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        ProcessIncludes(includeDef);
+                        ProcessIncludes(ctx.NewExpressionBuilderContext(includeDef));
                     }
                     catch (Exception e)
                     {
@@ -86,7 +82,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        ProcessValueSetDef(valueSetDef);
+                        ProcessValueSetDef(ctx.NewExpressionBuilderContext(valueSetDef));
                     }
                     catch (Exception e)
                     {
@@ -106,7 +102,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        ProcessCodeDef(codeDef, foundCodeNameCodeSystemUrls, codeSystemUrls);
+                        ProcessCodeDef(ctx.NewExpressionBuilderContext(codeDef), foundCodeNameCodeSystemUrls, codeSystemUrls);
                     }
                     catch (Exception e)
                     {
@@ -121,7 +117,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        ProcessCodeSystemDef(codeSystemDef);
+                        ProcessCodeSystemDef(ctx.NewExpressionBuilderContext(codeSystemDef));
                     }
                     catch (Exception e)
                     {
@@ -136,7 +132,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        ProcessConceptDef(conceptDef);
+                        ProcessConceptDef(ctx.NewExpressionBuilderContext(conceptDef));
                     }
                     catch (Exception e)
                     {
@@ -151,7 +147,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        ProcessParameterDef(parameterDef);
+                        ProcessParameterDef(ctx.NewExpressionBuilderContext(parameterDef));
                     }
                     catch (Exception e)
                     {
@@ -166,7 +162,7 @@ partial class ExpressionBuilder
                 {
                     try
                     {
-                        ProcessExpressionDef(expressionDef);
+                        ProcessExpressionDef(ctx.NewExpressionBuilderContext(expressionDef));
                     }
                     catch (Exception e)
                     {
@@ -182,8 +178,11 @@ partial class ExpressionBuilder
                     innerException: innerException);
         }
 
-        private void ProcessCodeSystemDef(CodeSystemDef codeSystem)
+        private void ProcessCodeSystemDef(ExpressionBuilderContext<CodeSystemDef> ctx)
         {
+            var codeSystem = ctx.Element;
+            var _context = ctx.LibraryContext;
+
             if (_context.TryGetCodesByCodeSystemName(codeSystem.name, out var codes))
             {
                 var initMembers = codes
@@ -211,9 +210,10 @@ partial class ExpressionBuilder
             }
         }
 
-        private void ProcessConceptDef(ConceptDef conceptDef)
+        private void ProcessConceptDef(ExpressionBuilderContext<ConceptDef> ctx)
         {
-            var ctx = _context.NewExpressionBuilderContext(conceptDef);
+            var conceptDef = ctx.Element;
+            var _context = ctx.LibraryContext;
 
             if (conceptDef.code.Length <= 0)
             {
@@ -253,11 +253,12 @@ partial class ExpressionBuilder
         }
 
         private void ProcessCodeDef(
-            CodeDef codeDef,
+            ExpressionBuilderContext<CodeDef> ctx,
             ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
             IReadOnlyDictionary<string, string> codeSystemUrls)
         {
-            var ctx = _context.NewExpressionBuilderContext(codeDef);
+            var codeDef = ctx.Element;
+            var _context = ctx.LibraryContext;
 
             if (codeDef.codeSystem == null)
                 throw ctx.NewExpressionBuildingException("Code definition has a null codeSystem node.");
@@ -284,9 +285,10 @@ partial class ExpressionBuilder
             _context.AddDefinition(codeDef.name!, lambda);
         }
 
-        private void ProcessExpressionDef(ExpressionDef expressionDef)
+        private void ProcessExpressionDef(ExpressionBuilderContext<ExpressionDef> ctx)
         {
-            var ctx = _context.NewExpressionBuilderContext(expressionDef);
+            var expressionDef = ctx.Element;
+            var _context = ctx.LibraryContext;
 
             if (string.IsNullOrWhiteSpace(expressionDef.name))
             {
@@ -380,21 +382,23 @@ partial class ExpressionBuilder
             }
         }
 
-        private void ProcessIncludes(IncludeDef includeDef)
+        private void ProcessIncludes(ExpressionBuilderContext<IncludeDef> ctx)
         {
-            var ctx = _context.NewExpressionBuilderContext(includeDef);
+            var includeDef = ctx.Element;
+            var libctx = ctx.LibraryContext;
 
             var alias = !string.IsNullOrWhiteSpace(includeDef.localIdentifier)
                 ? includeDef.localIdentifier!
                 : includeDef.path!;
 
             var libNav = includeDef.NameAndVersion() ?? throw ctx.NewExpressionBuildingException($"Include {includeDef.localId} does not have a well-formed name and version");
-            _context.AddIncludeAlias(alias, libNav);
+            libctx.AddIncludeAlias(alias, libNav);
         }
 
-        private void ProcessParameterDef(ParameterDef parameter)
+        private void ProcessParameterDef(ExpressionBuilderContext<ParameterDef> ctx)
         {
-            var ctx = _context.NewExpressionBuilderContext(parameter);
+            var parameter = ctx.Element;
+            var _context = ctx.LibraryContext;
 
             if (_context.ContainsDefinition(parameter.name!))
                 throw ctx.NewExpressionBuildingException(
@@ -420,8 +424,11 @@ partial class ExpressionBuilder
             _context.AddDefinition(parameter.name!, lambda);
         }
 
-        private void ProcessValueSetDef(ValueSetDef valueSetDef)
+        private void ProcessValueSetDef(ExpressionBuilderContext<ValueSetDef> ctx)
         {
+            var valueSetDef = ctx.Element;
+            var _context = ctx.LibraryContext;
+
             var @new = Expression.New(ConstructorInfos.CqlValueSet, Expression.Constant(valueSetDef.id, typeof(string)),
                 Expression.Constant(valueSetDef.version, typeof(string)));
             var contextParameter = RuntimeContextParameter;
@@ -429,25 +436,20 @@ partial class ExpressionBuilder
             _context.AddDefinition(valueSetDef.name!, lambda);
         }
 
-        private static LambdaExpression NotImplemented(
-            ExpressionBuilderContextFacade expressionBuilderContextFacade,
+        private static LambdaExpression NotImplemented<TElement>(
+            ExpressionBuilderContext<TElement> expressionBuilderContext,
             string nav,
             Type[] signature,
             Type returnType)
+             where TElement : Elm.Element
         {
             var parameters = signature
-                .Select((type, index) => Expression.Parameter(type, expressionBuilderContextFacade.TypeNameToIdentifier(type) + index))
+                .Select((type, index) => Expression.Parameter(type, expressionBuilderContext.TypeNameToIdentifier(type) + index))
                 .ToArray();
             var ctor = ConstructorInfos.NotImplementedException;
             var @new = Expression.New(ctor, Expression.Constant($"External function {nav} is not implemented."));
             var @throw = Expression.Throw(@new, returnType);
             var lambda = Expression.Lambda(@throw, parameters);
-            //var funcTypes = new Type[functionParameterTypes.Length + 1];
-            //Array.Copy(functionParameterTypes, funcTypes, functionParameterTypes.Length);
-            //funcTypes[funcTypes.Length - 1] = returnType;
-            //var funcType = GetFuncType(funcTypes);
-            //var makeLambda = MakeGenericLambda.Value.MakeGenericMethod(funcType);
-            //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
             return lambda;
         }
     }
@@ -455,7 +457,7 @@ partial class ExpressionBuilder
     /// <summary>
     /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
     /// </summary>
-    private readonly record struct DefinitionsBuilderContext
+    private readonly record struct LibraryExpressionsBuilderContext
     {
         private readonly ExpressionBuilder _expressionBuilder;
         private readonly Dictionary<string, string> _localLibraryIdentifiers;
@@ -463,7 +465,7 @@ partial class ExpressionBuilder
         private readonly Dictionary<string, CqlCode> _codesByName;
         private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
-        public DefinitionsBuilderContext(
+        public LibraryExpressionsBuilderContext(
             ExpressionBuilder expressionBuilder, 
             DefinitionDictionary<LambdaExpression> definitions)
         {
@@ -480,16 +482,17 @@ partial class ExpressionBuilder
 
         public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
-        public ExpressionBuilderContextFacade NewExpressionBuilderContext(
-            Elm.Element element) =>
-            new ExpressionBuilderContextFacade(
-                new ExpressionBuilderContext(
+        public ExpressionBuilderContext<TElement> NewExpressionBuilderContext<TElement>(
+            TElement element)
+            where TElement : Elm.Element =>
+            new ExpressionBuilderContext<TElement>(
+                this,
+                new Compiler.ExpressionBuilderContext<TElement>(
                     _expressionBuilder,
                     RuntimeContextParameter,
                     _definitions,
                     _localLibraryIdentifiers,
-                    element)
-                {});
+                    element));
 
         public bool TryGetCustomImplementationByExpressionKey(
             string expressionKey,
@@ -544,14 +547,20 @@ partial class ExpressionBuilder
     /// <summary>
     /// Encapsulates the ExpressionBuilderContext for building definitions.
     /// </summary>
-    private readonly record struct ExpressionBuilderContextFacade
+    private readonly record struct ExpressionBuilderContext<TElement>
+        where TElement : Elm.Element
     {
-        private readonly ExpressionBuilderContext _expressionBuilderContext;
+        private readonly Compiler.ExpressionBuilderContext<TElement> _expressionBuilderContext;
 
-        public ExpressionBuilderContextFacade(ExpressionBuilderContext expressionBuilderContext)
+        public ExpressionBuilderContext(LibraryExpressionsBuilderContext ctx, Compiler.ExpressionBuilderContext<TElement> expressionBuilderContext)
         {
+            LibraryContext = ctx;
             _expressionBuilderContext = expressionBuilderContext;
         }
+
+        public LibraryExpressionsBuilderContext LibraryContext { get; }
+
+        public TElement Element => _expressionBuilderContext.Element;
 
         public void LogWarning(string message, Element? expression = null) =>
             _expressionBuilderContext.LogWarning(message, expression);
@@ -565,8 +574,11 @@ partial class ExpressionBuilder
         public Type? TypeFor(Element element, bool throwIfNotFound = true) =>
             _expressionBuilderContext.TypeFor(element, throwIfNotFound);
 
-        public ExpressionBuilderContextFacade Deeper(Element expression) =>
-            new(_expressionBuilderContext.Deeper(expression));
+        public ExpressionBuilderContext<TInnerElement> Deeper<TInnerElement>(TInnerElement expression)
+            where TInnerElement : Elm.Element =>
+            new ExpressionBuilderContext<TInnerElement>( 
+                LibraryContext,
+                _expressionBuilderContext.Deeper(expression));
 
         public Expression TranslateExpression(Element op) =>
             _expressionBuilderContext.Builder.TranslateExpression(op, _expressionBuilderContext);

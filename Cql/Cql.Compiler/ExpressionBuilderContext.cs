@@ -23,17 +23,15 @@ namespace Hl7.Cql.Compiler
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
-    internal partial class ExpressionBuilderContext
+    internal abstract partial class ExpressionBuilderContext
     {
 
-        internal ExpressionBuilderContext(
+        protected ExpressionBuilderContext(
             ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
-            IDictionary<string, string> localLibraryIdentifiers,
-            Elm.Element element)
+            IDictionary<string, string> localLibraryIdentifiers)
         {
-            _element = element;
             _outerContext = null;
             Builder = builder ?? throw new ArgumentNullException(nameof(builder));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
@@ -45,12 +43,10 @@ namespace Hl7.Cql.Compiler
             _scopes = new Dictionary<string, (Expression, elm.Element)>();
         }
 
-        private ExpressionBuilderContext(
+        protected ExpressionBuilderContext(
             ExpressionBuilderContext source,
-            Elm.Element? overrideElement = null,
             IDictionary<string, (Expression, elm.Element)>? overrideScopes = null)
         {
-            _element = overrideElement ?? source._element;
             _outerContext = source._outerContext;
             Builder = source.Builder;
             RuntimeContextParameter = source.RuntimeContextParameter;
@@ -144,7 +140,7 @@ namespace Hl7.Cql.Compiler
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (_scopes.TryGetValue(normalized, out var expression))
                 return expression.Item1;
-            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
+            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
 
         internal (Expression, elm.Element) GetScope(string elmAlias)
@@ -152,7 +148,7 @@ namespace Hl7.Cql.Compiler
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (_scopes.TryGetValue(normalized, out var expression))
                 return expression;
-            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
+            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
 
         /// <summary>
@@ -209,15 +205,14 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        private ExpressionBuilderContext WithScopes(
-            IDictionary<string, (Expression, elm.Element)> scopes) =>
-            new(this, overrideScopes: scopes);
+        protected abstract ExpressionBuilderContext WithScopes(
+            IDictionary<string, (Expression, elm.Element)> scopes);
 
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ExpressionBuilderContext Deeper(elm.Element element) => 
-            new(this, overrideElement: element);
+        internal abstract ExpressionBuilderContext Deeper<TElement>(TElement element)
+            where TElement : Elm.Element;
 
         internal void LogWarning(string message, elm.Element? expression = null)
         {
