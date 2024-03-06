@@ -15,6 +15,14 @@ namespace Hl7.Cql.Primitives
     [CqlPrimitiveType(CqlPrimitiveType.ValueSet)]
     public class CqlValueSet : CqlVocabulary
     {
+
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        public CqlValueSet()
+        {
+        }
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
@@ -22,14 +30,6 @@ namespace Hl7.Cql.Primitives
         /// <param name="version">The version of the value set.</param>
         public CqlValueSet(string? id, string? version) : base(id, version)
         {
-        }
-
-        /// <summary>
-        /// Creates an instance with no id or version.
-        /// </summary>
-        public CqlValueSet() : base()
-        {
-            // Nothing
         }
     }
 }

@@ -16,21 +16,19 @@ namespace Hl7.Cql.Primitives
     public abstract class CqlVocabulary
     {
         /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        protected CqlVocabulary()
+        {
+        }
+
+        /// <summary>
         /// Constructs a new CqlVocabulary instance
         /// </summary>
         protected CqlVocabulary(string? id, string? version)
         {
             this.id = id;
             this.version = version;
-        }
-
-
-        /// <summary>
-        /// Constructs a new CqlVocabulary instance with no id or version.
-        /// </summary>
-        protected CqlVocabulary() : this(null, null)
-        {
-            // Nothing
         }
 
         /// <summary>

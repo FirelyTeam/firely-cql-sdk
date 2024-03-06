@@ -152,7 +152,7 @@ namespace Hl7.Cql.Compiler
                     return OperatorBinding.Bind(CqlOperator.IntervalSameAs, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else
-                    throw new InvalidOperationException();
+                    throw ctx.NewExpressionBuildingException();
             }
             else
             {
@@ -172,7 +172,7 @@ namespace Hl7.Cql.Compiler
                     return OperatorBinding.Bind(CqlOperator.IntervalSameOrAfter, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else
-                    throw new InvalidOperationException();
+                    throw ctx.NewExpressionBuildingException();
             }
             else
             {
@@ -192,7 +192,7 @@ namespace Hl7.Cql.Compiler
                     return OperatorBinding.Bind(CqlOperator.IntervalSameOrBefore, ctx.RuntimeContextParameter, left, right, precision);
                 }
                 else
-                    throw new InvalidOperationException();
+                    throw ctx.NewExpressionBuildingException();
             }
             else
             {

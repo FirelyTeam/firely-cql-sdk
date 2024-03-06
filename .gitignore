@@ -391,6 +391,4 @@ VSCodeExtension/ncqa-cql-engine/dist/*.map
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/bundles/*.json
 VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/Test/Resources
-/Demo/Elm/build.txt
 /Demo/Cql/Build/target/**/*.*
-/Demo/build.txt

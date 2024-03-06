@@ -11,6 +11,7 @@ using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -27,44 +29,79 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// </summary>
     internal class CSharpSourceCodeWriter
     {
+        private readonly ILogger<CSharpSourceCodeWriter> _logger;
+
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="log">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
-        public CSharpSourceCodeWriter(ILogger<CSharpSourceCodeWriter> log)
+        /// <param name="logger">The <see cref="ILogger{TCategoryName}"/> to report output.</param>
+        /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
+        public CSharpSourceCodeWriter(
+            ILogger<CSharpSourceCodeWriter> logger,
+            [FromKeyedServices("Fhir")]TypeResolver typeResolver)
         {
-            Log = log;
+            _logger = logger;
+            _contextAccessModifier = AccessModifier.Internal;
+            _definesAccessModifier = AccessModifier.Internal;
+            _usings = BuildUsings(typeResolver);
+            _version = GetType().Assembly?.GetName()?.Version?.ToString() ?? "1.0.0";
+            _tool = GetType()
+                       .Assembly?
+                       .GetCustomAttributes(false)
+                       .OfType<AssemblyProductAttribute>()
+                       .SingleOrDefault()?
+                       .Product
+                   ?? "ELM-to-CSharp";
+            _aliasedUsings = BuildAliasedUsings(typeResolver);
+        }
+
+        private static List<(string, string)> BuildAliasedUsings(TypeResolver typeResolver) => 
+            typeResolver.Aliases.ToList();
+
+        private static HashSet<string> BuildUsings(TypeResolver typeResolver)
+        {
+            var hashSet = new HashSet<string>
+            {
+                nameof(System),
+                typeof(Enumerable).Namespace!, // System.Linq
+                typeof(ICollection<>).Namespace!, // System.Collections.Generic
+                typeof(CqlContext).Namespace!,
+                typeof(CqlPrimitiveType).Namespace!,
+                typeof(CqlDeclarationAttribute).Namespace!,
+                typeof(IValueSetFacade).Namespace!,
+                typeof(Iso8601.DateIso8601).Namespace!,
+            };
+
+            foreach (var @using in typeResolver.ModelNamespaces)
+                hashSet.Add(@using);
+
+            return hashSet;
         }
 
         /// <summary>
         /// Gets or sets the namespace for generated .NET types.
         /// </summary>
-        public string? Namespace { get; set; }
+        private string? Namespace { get; }
         /// <summary>
         /// If <see langword="true"/>, classes will be declared with the <see langword="partial"/> keyword.
         /// </summary>
-        public bool PartialClass { get; set; }
+        private bool PartialClass { get; }
 
         /// <summary>
         /// The <see cref="AccessModifier"/> to use for the <see cref="CqlContext"/> class member; its default value is <see cref="AccessModifier.Internal"/>.
         /// </summary>
-        public AccessModifier ContextAccessModifier { get; set; } = AccessModifier.Internal;
+        private readonly AccessModifier _contextAccessModifier;
+
         /// <summary>
         /// The <see cref="AccessModifier"/> to use for all CQL defines; its default value is <see cref="AccessModifier.Internal"/>.
         /// </summary>
-        public AccessModifier DefinesAccessModifier { get; set; } = AccessModifier.Internal;
+        private readonly AccessModifier _definesAccessModifier;
 
         /// <summary>
         /// Gets the <see langword="using"/> statements to be included in the generated code.
         /// </summary>
-        public IList<string> Usings { get; } = new List<string>
-        {
-            nameof(System),
-            typeof(Enumerable).Namespace!, // System.Linq
-            typeof(ICollection<>).Namespace!, // System.Collections.Generic
-            typeof(CqlContext).Namespace!,
-            typeof(CqlPrimitiveType).Namespace!,
-        };
+        private readonly HashSet<string> _usings;
+
         /// <summary>
         /// Gets the aliased <see langword="using"/> statements to be included in the generated code.
         /// For example,
@@ -72,27 +109,18 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// using Item1 = Item2;
         /// </code>
         /// </summary>
-        public IList<(string, string)> AliasedUsings { get; } = new List<(string, string)>
-        {
-        };
+        private readonly IList<(string, string)> _aliasedUsings;
 
         /// <summary>
         /// Gets the version of this <see cref="CSharpSourceCodeWriter"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
         /// </summary>
-        public string Version => GetType().Assembly?.GetName()?.Version?.ToString() ?? "1.0.0";
+        private readonly string _version;
+
         /// <summary>
         /// Gets the product of this <see cref="CSharpSourceCodeWriter"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
         /// </summary>
-        public string Tool =>
-                GetType()
-                .Assembly?
-                .GetCustomAttributes(false)
-                .OfType<AssemblyProductAttribute>()
-                .SingleOrDefault()?
-                .Product
-            ?? "ELM-to-CSharp";
+        private readonly string _tool;
 
-        internal ILogger<CSharpSourceCodeWriter> Log { get; }
 
         /// <summary>
         /// Writes C# source code from inputs.
@@ -125,7 +153,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Func<string, Stream> libraryNameToStream,
             bool closeStream, Predicate<string> writeFile, Func<string?, string?> libraryNameToClassName)
         {
-            var buildOrder = DetermineBuildOrder(dependencyGraph);
+            var buildOrder = dependencyGraph.DetermineBuildOrder();
 
             foreach (var library in buildOrder)
             {
@@ -136,7 +164,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 if (!definitions.Libraries.Contains(libraryName))
                 {
-                    Log.LogInformation($"Skipping library {libraryName}, which has no definitions");
+                    _logger.LogInformation($"Skipping library {libraryName}, which has no definitions");
                     continue;
                 }
 
@@ -181,7 +209,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             string libraryName, StreamWriter writer,
             int indentLevel)
         {
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{Tool}\", \"{Version}\")]");
+            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
 
             var libraryAttribute = libraryName;
             var versionAttribute = string.Empty;
@@ -208,7 +236,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 writer.WriteLine();
 
-                writer.WriteLine(indentLevel, $"{AccessModifierString(ContextAccessModifier)} CqlContext context;");
+                writer.WriteLine(indentLevel, $"{AccessModifierString(_contextAccessModifier)} CqlContext context;");
                 writer.WriteLine();
                 writeCachedValues(definitions, libraryName, writer, indentLevel);
 
@@ -269,10 +297,11 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static void writeDependencies(DirectedGraph dependencyGraph, Func<string?, string?> libraryNameToClassName, string libraryName, StreamWriter writer, int indentLevel)
         {
             var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = node.ForwardEdges?
-                .Select(edge => edge.ToId)
-                .Except(new[] { dependencyGraph.EndNode.NodeId })
+            var requiredLibraries = dependencyGraph
+                .GetForwardNodeIds(node.NodeId)
+                .Except(new[] { DirectedGraphNode.EndId })
                 .Distinct();
+
             foreach (var dependentLibrary in requiredLibraries!)
             {
                 var typeName = libraryNameToClassName!(dependentLibrary);
@@ -285,7 +314,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             writer.WriteLine(indentLevel, "#region Cached values");
             writer.WriteLine();
-            var accessModifier = AccessModifierString(DefinesAccessModifier);
+            var accessModifier = AccessModifierString(_definesAccessModifier);
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
                 foreach (var overload in kvp.Value)
@@ -338,7 +367,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else
             {
-                Log.LogInformation($"No tuple types detected; skipping.");
+                _logger.LogInformation($"No tuple types detected; skipping.");
             }
         }
 
@@ -353,36 +382,33 @@ namespace Hl7.Cql.CodeGeneration.NET
             int indent)
         {
             var node = dependencyGraph.Nodes[libraryName];
-            var requiredLibraries = node.ForwardEdges?
-                .Select(edge => edge.ToId)
-                .Except(new[] { dependencyGraph.EndNode.NodeId })
+            var requiredLibraries = dependencyGraph
+                .GetForwardNodeIds(node.NodeId)
+                .Except(new[] { DirectedGraphNode.EndId })
                 .Distinct();
-            if (requiredLibraries != null)
+            
+            bool atFirst = true;
+
+            foreach (var dependentLibrary in requiredLibraries)
             {
-
-                writer.WriteLine(indent, "#region Dependencies");
-                writer.WriteLine();
-
-                foreach (var dependentLibrary in requiredLibraries)
+                if (atFirst)
                 {
-                    var typeName = libraryNameToClassName(dependentLibrary);
-                    var memberName = typeName;
-                    writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
+                    atFirst = false;
+                    writer.WriteLine(indent, "#region Dependencies");
+                    writer.WriteLine();
                 }
 
+                var typeName = libraryNameToClassName(dependentLibrary);
+                var memberName = typeName;
+                writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
+            }
+
+            if (!atFirst)
+            {
                 writer.WriteLine();
                 writer.WriteLine(indent, "#endregion");
                 writer.WriteLine();
             }
-        }
-
-        private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
-        {
-            var sorted = minimalGraph.TopologicalSort()
-                .Where(n => n.NodeId != minimalGraph.StartNode.NodeId
-                    && n.NodeId != minimalGraph.EndNode.NodeId)
-                .ToList();
-            return sorted;
         }
 
         private string DefinitionCacheKeyForMethod(string methodName)
@@ -481,11 +507,11 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private void WriteUsings(TextWriter writer)
         {
-            foreach (var @using in Usings.Distinct())
+            foreach (var @using in _usings.Distinct())
             {
                 writer.WriteLine($"using {@using};");
             }
-            foreach (var @using in AliasedUsings)
+            foreach (var @using in _aliasedUsings)
             {
                 writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
@@ -493,7 +519,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private int WriteTupleType(TextWriter writer, int indentLevel, Type tupleType)
         {
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{Tool}\", \"{Version}\")]");
+            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode(\"{_tool}\", \"{_version}\")]");
             writer.WriteLine(indentLevel, $"public class {tupleType.Name}: {ExpressionConverter.PrettyTypeName(tupleType.BaseType!)}");
             writer.WriteLine(indentLevel, "{");
 

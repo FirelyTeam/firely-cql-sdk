@@ -1,16 +1,25 @@
 ﻿#nullable enable
 Hl7.Cql.Primitives.CqlCode
 Hl7.Cql.Primitives.CqlCode.code.get -> string?
+Hl7.Cql.Primitives.CqlCode.code.init -> void
+Hl7.Cql.Primitives.CqlCode.CqlCode() -> void
 Hl7.Cql.Primitives.CqlCode.CqlCode(string? code, string? system, string? version = null, string? display = null) -> void
 Hl7.Cql.Primitives.CqlCode.display.get -> string?
+Hl7.Cql.Primitives.CqlCode.display.init -> void
 Hl7.Cql.Primitives.CqlCode.system.get -> string?
+Hl7.Cql.Primitives.CqlCode.system.init -> void
 Hl7.Cql.Primitives.CqlCode.version.get -> string?
+Hl7.Cql.Primitives.CqlCode.version.init -> void
 Hl7.Cql.Primitives.CqlCodeSystem
+Hl7.Cql.Primitives.CqlCodeSystem.CqlCodeSystem() -> void
 Hl7.Cql.Primitives.CqlCodeSystem.CqlCodeSystem(string? id, string? version) -> void
 Hl7.Cql.Primitives.CqlConcept
 Hl7.Cql.Primitives.CqlConcept.codes.get -> Hl7.Cql.Primitives.CqlCode![]?
+Hl7.Cql.Primitives.CqlConcept.codes.init -> void
+Hl7.Cql.Primitives.CqlConcept.CqlConcept() -> void
 Hl7.Cql.Primitives.CqlConcept.CqlConcept(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! codes, string? display) -> void
 Hl7.Cql.Primitives.CqlConcept.display.get -> string?
+Hl7.Cql.Primitives.CqlConcept.display.init -> void
 Hl7.Cql.Primitives.CqlDate
 Hl7.Cql.Primitives.CqlDate.Add(Hl7.Cql.Primitives.CqlQuantity? quantity) -> Hl7.Cql.Primitives.CqlDate?
 Hl7.Cql.Primitives.CqlDate.BoundariesBetween(Hl7.Cql.Primitives.CqlDate? high, string? precision) -> int?
@@ -80,12 +89,16 @@ Hl7.Cql.Primitives.CqlQuantity
 Hl7.Cql.Primitives.CqlQuantity.CqlQuantity() -> void
 Hl7.Cql.Primitives.CqlQuantity.CqlQuantity(decimal? value, string? unit) -> void
 Hl7.Cql.Primitives.CqlQuantity.unit.get -> string?
+Hl7.Cql.Primitives.CqlQuantity.unit.init -> void
 Hl7.Cql.Primitives.CqlQuantity.value.get -> decimal?
+Hl7.Cql.Primitives.CqlQuantity.value.init -> void
 Hl7.Cql.Primitives.CqlRatio
 Hl7.Cql.Primitives.CqlRatio.CqlRatio() -> void
 Hl7.Cql.Primitives.CqlRatio.CqlRatio(Hl7.Cql.Primitives.CqlQuantity? numerator, Hl7.Cql.Primitives.CqlQuantity? denominator) -> void
 Hl7.Cql.Primitives.CqlRatio.denominator.get -> Hl7.Cql.Primitives.CqlQuantity?
+Hl7.Cql.Primitives.CqlRatio.denominator.init -> void
 Hl7.Cql.Primitives.CqlRatio.numerator.get -> Hl7.Cql.Primitives.CqlQuantity?
+Hl7.Cql.Primitives.CqlRatio.numerator.init -> void
 Hl7.Cql.Primitives.CqlTime
 Hl7.Cql.Primitives.CqlTime.Add(Hl7.Cql.Primitives.CqlQuantity! quantity) -> Hl7.Cql.Primitives.CqlTime?
 Hl7.Cql.Primitives.CqlTime.BoundariesBetween(Hl7.Cql.Primitives.CqlTime! high, string! precision) -> int?

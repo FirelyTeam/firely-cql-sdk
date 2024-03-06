@@ -27,11 +27,6 @@ public class FHIRHelpers_4_3_000
 
 
     }
-    #region Dependencies
-
-
-    #endregion
-
     [CqlDeclaration("ToInterval")]
     [CqlTag("description", "Converts the given [Period](https://hl7.org/fhir/datatypes.html#Period) value to a CQL DateTime Interval")]
     [CqlTag("comment", "If the start value of the given period is unspecified, the starting boundary of the resulting interval will be open (meaning the start of the interval is unknown, as opposed to interpreted as the beginning of time).")]
@@ -380,13 +375,12 @@ public class FHIRHelpers_4_3_000
 				{
 					Value = reference,
 				};
-				var c_ = context.Operators.Convert<string>(b_);
-				var d_ = new ResourceReference
+				var c_ = new ResourceReference
 				{
-					Reference = c_,
+					ReferenceElement = b_,
 				};
 
-				return d_;
+				return c_;
 			};
 		};
 

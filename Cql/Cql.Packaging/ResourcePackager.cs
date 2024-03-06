@@ -1,9 +1,9 @@
-﻿using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Graph;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Packaging
 {
@@ -55,7 +55,7 @@ namespace Hl7.Cql.Packaging
         /// Package the resources in the given ELM and CQL directories and output them using the writers provided in the constructor 
         /// </summary>
         /// <param name="args">A</param>
-        public void Package(PackageArgs args) =>
+        public void Package(ResourcePackageArgs args) =>
             PackageCore(args.ElmDir, args.CqlDir, args.AfterPackageMutator, args.ResourceCanonicalRootUrl);
 
         private void PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, 
@@ -64,35 +64,19 @@ namespace Hl7.Cql.Packaging
         {
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
-            var packages = LibraryPackager.LoadLibraries(elmDir);
-            var graph = packages.Values.GetIncludedLibraries();
-            var typeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+            LibraryPackager libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
 
-            var packager = new LibraryPackager();
-            var resources = packager.PackageResources(elmDir,
-                cqlDir,
-                graph,
-                typeResolver,
-                new CqlOperatorsBinding(typeResolver, FhirTypeConverter.Create(ModelInfo.ModelInspector)),
-                new TypeManager(typeResolver),
-                resource => CanonicalUri(resource, resourceCanonicalRootUrl),
-                logFactory);
+            LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
+            IDictionary<string, Library> librariesByNameAndVersion = LibraryLoader.LoadLibraries(elmDir);
+            DirectedGraph directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();
+            IEnumerable<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, directedGraph, callbacks);
 
             afterPackageMutator?.Invoke(resources);
 
-            foreach (var writer in resourceWriters)
+            foreach (var resourceWriter in resourceWriters)
             {
-                writer.WriteResources(resources);
+                resourceWriter.WriteResources(resources);
             }
         }
-
-        private static string CanonicalUri(Resource resource, string? resourceCanonicalRootUrl)
-        {
-            if (string.IsNullOrWhiteSpace(resource.Id))
-                throw new ArgumentException("Resource must have an id", nameof(resource));
-            var path = $"{resourceCanonicalRootUrl ?? "#"}/{resource.TypeName}/{resource.Id}";
-            return path;
-        }
-
     }
 }

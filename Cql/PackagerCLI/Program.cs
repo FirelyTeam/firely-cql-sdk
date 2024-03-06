@@ -1,9 +1,12 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
+using Hl7.Fhir.Model;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -22,13 +25,16 @@ public class Program
             return -1;
         }
 
-        var hostBuilder = Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
-            .ConfigureLogging((context, logging) => ConfigureLogging(logging))
-            .ConfigureServices((context, services) => ConfigureServices(context, services));
+        var hostBuilder = CreateHostBuilder(args);
 
         return Run(hostBuilder);
     }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder()
+            .ConfigureAppConfiguration((context, config) => ConfigureAppConfiguration(config, args))
+            .ConfigureLogging((context, logging) => ConfigureLogging(logging))
+            .ConfigureServices((context, services) => ConfigureServices(context, services));
 
     private static IDictionary<string, string> BuildSwitchMappings()
     {
@@ -80,12 +86,15 @@ public class Program
 
     private static void ConfigureLogging(ILoggingBuilder logging)
     {
+        logging.ClearProviders();
+
         logging.AddFilter(level => level >= LogLevel.Trace);
-        logging.AddConsole(console =>
-        {
-            console.LogToStandardErrorThreshold = LogLevel.Error;
-        });
-        var logFile = Path.Combine(".", "build.txt");
+        // logging.AddConsole(console =>
+        // {
+        //     console.LogToStandardErrorThreshold = LogLevel.Error;
+        // });
+
+        var logFile = Path.Combine(".", "build.log");
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .WriteTo
@@ -94,10 +103,14 @@ public class Program
         logging.AddSerilog();
     }
 
-    private static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
+    public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         services.AddPackagerServices(context.Configuration);
         services.AddResourcePackager(context.Configuration);
+        services.TryAddTypeServices();
+        services.TryAddCompilationServices();
+        services.TryAddSingleton<LibraryPackager>();
+        services.TryAddSingleton<OptionsConsoleDumper>();
     }
 
     private static int Run(IHostBuilder hostBuilder)
@@ -110,18 +123,8 @@ public class Program
         }
 
         using var mainScope = host.Services.CreateScope();
-        var programLogger = mainScope.ServiceProvider.GetRequiredService<ILogger<Program>>();
-        var packageService = mainScope.ServiceProvider.GetRequiredService<PackagerService>();
-        try
-        {
-            return packageService.Run();
-        }
-        catch (Exception e)
-        {
-            programLogger.LogError(e, "An error occurred while running the packager");
-            Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the log for more detail.");
-            return -1;
-        }
+        var packageService = mainScope.ServiceProvider.GetRequiredService<PackagerCliProgram>();
+        return packageService.Run();
     }
 
     private static IHost? CreateHost(IHostBuilder hostBuilder)

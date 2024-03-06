@@ -45,7 +45,7 @@ namespace Hl7.Cql.Compiler
             {
                 return OperatorBinding.Bind(CqlOperator.ElementAt, ctx.RuntimeContextParameter, left, right);
             }
-            else throw new NotImplementedException();
+            else throw new NotImplementedException().WithContext(ctx);
         }
 
         protected Expression? LastPositionOf(elm.LastPositionOf e, ExpressionBuilderContext ctx)
@@ -66,7 +66,7 @@ namespace Hl7.Cql.Compiler
             {
                 return OperatorBinding.Bind(CqlOperator.StringLength, ctx.RuntimeContextParameter, operand);
             }
-            else throw new NotImplementedException();
+            else throw new NotImplementedException().WithContext(ctx);
         }
 
         protected Expression? Lower(elm.Lower e, ExpressionBuilderContext ctx) =>

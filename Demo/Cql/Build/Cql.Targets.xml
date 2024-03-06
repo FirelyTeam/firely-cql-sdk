@@ -11,7 +11,7 @@
 			DependsOnTargets="Download CQL to ELM CLI via Maven"
 			AfterTargets="Build">
 		<Message Text="Converting CQL to ELM"/>
-		<Exec Command="java -classpath Build\target\dependency\* org.cqframework.cql.cql2elm.cli.CqlTranslator -input $(MSBuildProjectDirectory)\input -f JSON -output $(MSBuildProjectDirectory)\..\Elm\Json -locators true -result-types true"/>
+		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(MSBuildProjectDirectory)\input" -f JSON -output "$(MSBuildProjectDirectory)\..\Elm\Json" -locators true -result-types true'/>
 	</Target>
 	<Target Name="Delete ELM" AfterTargets="Clean">
 		<Message Text="Deleting ELM files...$(MSBuildProjectDirectory)\..\Elm\Json\*.json" />
