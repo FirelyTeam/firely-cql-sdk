@@ -42,7 +42,7 @@ namespace Hl7.Cql.Compiler
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            Scopes = new Dictionary<string, (Expression, elm.Element)>();
+            _scopes = new Dictionary<string, (Expression, elm.Element)>();
         }
 
         private ExpressionBuilderContext(
@@ -59,7 +59,7 @@ namespace Hl7.Cql.Compiler
             ImpliedAlias = source.ImpliedAlias;
             Operands = source.Operands;
             Libraries = source.Libraries;
-            Scopes = overrideScopes ?? source.Scopes;
+            _scopes = overrideScopes ?? source._scopes;
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace Hl7.Cql.Compiler
         internal Expression GetScopeExpression(string elmAlias)
         {
             var normalized = NormalizeIdentifier(elmAlias!)!;
-            if (Scopes.TryGetValue(normalized, out var expression))
+            if (_scopes.TryGetValue(normalized, out var expression))
                 return expression.Item1;
             else throw new ArgumentException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
         }
@@ -150,7 +150,7 @@ namespace Hl7.Cql.Compiler
         internal (Expression, elm.Element) GetScope(string elmAlias)
         {
             var normalized = NormalizeIdentifier(elmAlias!)!;
-            if (Scopes.TryGetValue(normalized, out var expression))
+            if (_scopes.TryGetValue(normalized, out var expression))
                 return expression;
             else throw new ArgumentException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.", nameof(elmAlias));
         }
@@ -158,10 +158,10 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private IDictionary<string, (Expression, elm.Element)> Scopes { get; init; }
+        private readonly IDictionary<string, (Expression, elm.Element)> _scopes;
 
 
-        internal bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
+        internal bool HasScope(string elmAlias) => _scopes.ContainsKey(elmAlias);
 
 
         /// <summary>
@@ -169,7 +169,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
-            var scopes = new Dictionary<string, (Expression, elm.Element)>(Scopes);
+            var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
             if (Builder.Settings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
