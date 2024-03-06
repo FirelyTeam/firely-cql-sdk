@@ -733,6 +733,7 @@ namespace Hl7.Cql.Compiler
                 path = ire.name,
                 scope = ctx.ImpliedAlias!,
             };
+            ctx = ctx.Deeper(pe);
             var prop = Property(pe, ctx);
             return prop;
         }
@@ -754,8 +755,10 @@ namespace Hl7.Cql.Compiler
             var querySourceAlias = querySource.alias;
             if (string.IsNullOrWhiteSpace(querySource.alias))
                 throw ctx.NewExpressionBuildingException("Only aliased query sources are supported.");
+
             if (querySource.expression == null)
                 throw ctx.NewExpressionBuildingException("Query sources must have an expression");
+
             var source = TranslateExpression(querySource.expression!, ctx);
 
             var isSingle = false;
@@ -769,11 +772,16 @@ namespace Hl7.Cql.Compiler
             var @return = source;
             Type elementType = TypeManager.Resolver.GetListElementType(@return.Type, @throw: true)!;
 
+            Stack<ExpressionBuilderContext> ctxStack = new();
+
             // handle with/such-that
             if (query.relationship != null)
             {
                 foreach (var relationship in query.relationship ?? Enumerable.Empty<RelationshipClause>())
                 {
+                    ctxStack.Push(ctx);
+                    ctx = ctx.Deeper(relationship);
+
                     var selectManyLambda = WithToSelectManyBody(querySourceAlias!, elementType, relationship, ctx);
 
                     var selectManyCall = OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
@@ -788,6 +796,8 @@ namespace Hl7.Cql.Compiler
                     {
                         @return = selectManyCall;
                     }
+
+                    ctx = ctxStack.Pop();
                 }
             }
             // The element type may have changed
@@ -795,10 +805,14 @@ namespace Hl7.Cql.Compiler
 
             if (query.where != null)
             {
+                ctxStack.Push(ctx);
+                ctx = ctx.Deeper(query.where);
+
                 var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
                     ?? TypeNameToIdentifier(elementType, ctx);
                 var whereLambdaParameter = Expression.Parameter(elementType, parameterName);
                 var scopes = new[] { new ExpressionElementPairForIdentifier(querySourceAlias!, (whereLambdaParameter, querySource.expression)) };
+
                 var subContext = ctx.WithScopes(scopes);
 
                 if (query.let != null)
@@ -817,10 +831,15 @@ namespace Hl7.Cql.Compiler
                 var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
                 var callWhere = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
                 @return = callWhere;
+
+                ctx = ctxStack.Pop();
             }
 
             if (query.@return != null)
             {
+                ctxStack.Push(ctx);
+                ctx = ctx.Deeper(query.@return);
+
                 var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
                 ?? TypeNameToIdentifier(elementType, ctx);
 
@@ -843,10 +862,15 @@ namespace Hl7.Cql.Compiler
                 var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
                 var callSelect = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, @return, selectLambda);
                 @return = callSelect;
+
+                ctx = ctxStack.Pop();
             }
 
             if (query.aggregate != null)
             {
+                ctxStack.Push(ctx);
+                ctx = ctx.Deeper(query.aggregate);
+
                 var parameterName = ExpressionBuilderContext.NormalizeIdentifier(querySourceAlias)
                 ?? TypeNameToIdentifier(elementType, ctx);
                 var sourceAliasParameter = Expression.Parameter(elementType, parameterName);
@@ -886,6 +910,8 @@ namespace Hl7.Cql.Compiler
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceAliasParameter);
                 var aggregateCall = OperatorBinding.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
                 @return = aggregateCall;
+
+                ctx = ctxStack.Pop();
             }
 
 
@@ -894,8 +920,14 @@ namespace Hl7.Cql.Compiler
             //[System.Xml.Serialization.XmlIncludeAttribute(typeof(ByDirection))]
             if (query.sort != null && query.sort.by != null && query.sort.by.Length > 0)
             {
+                ctxStack.Push(ctx);
+                ctx = ctx.Deeper(query.sort);
+
                 foreach (var by in query.sort.by)
                 {
+                    ctxStack.Push(ctx);
+                    ctx = ctx.Deeper(by);
+
                     ListSortDirection order = ExtensionMethods.ListSortOrder(by.direction);
                     if (by is ByExpression byExpression)
                     {
@@ -935,7 +967,11 @@ namespace Hl7.Cql.Compiler
                             @return, Expression.Constant(order, typeof(ListSortDirection)));
                         @return = sort;
                     }
+
+                    ctx = ctxStack.Pop();
                 }
+
+                ctx = ctxStack.Pop();
             }
 
             if (isSingle)
@@ -2217,6 +2253,7 @@ namespace Hl7.Cql.Compiler
                     .SingleOrDefault(d => d.name == expressionRef.name);
                 if (def != null)
                 {
+                    ctx = ctx.Deeper(def);
                     expressionType = ctx.TypeFor(def);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");

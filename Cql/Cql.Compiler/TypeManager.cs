@@ -77,7 +77,7 @@ namespace Hl7.Cql.Compiler
 
             if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
                 return Resolver.ResolveType(element!.resultTypeName!.Name)
-                       ?? throw new ArgumentException("Cannot resolve type for expression");
+                       ?? throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
 
             switch (element)
             {
@@ -94,6 +94,7 @@ namespace Hl7.Cql.Compiler
 
                 case ExpressionDef { expression: not null } def:
                 {
+                    ctx = ctx.Deeper(def.expression);
                     var type = TypeFor(def.expression, ctx, false);
                     if (type == null)
                     {
@@ -120,7 +121,7 @@ namespace Hl7.Cql.Compiler
                 {
                     Type? sourceType = null;
                     if (propertyExpression.source != null)
-                        sourceType = TypeFor(propertyExpression.source!, ctx);
+                        sourceType = TypeFor(propertyExpression.source!, ctx.Deeper(propertyExpression.source));
                     else if (propertyExpression.scope != null)
                     {
                         var scope = ctx.GetScope(propertyExpression.scope);
@@ -152,7 +153,7 @@ namespace Hl7.Cql.Compiler
                 }
             }
             if (throwIfNotFound)
-                throw ctx.Deeper(element!).NewExpressionBuildingException("Cannot resolve type for expression");
+                throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
             
             return null;
         }
