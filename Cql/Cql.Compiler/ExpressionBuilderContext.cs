@@ -32,9 +32,6 @@ namespace Hl7.Cql.Compiler
             IDictionary<string, string> localLibraryIdentifiers,
             Elm.Element element)
         {
-            if (element is not (Elm.ParameterDef or Elm.ExpressionDef or Elm.Expression))
-                throw new ArgumentException("An ExpressionBuilderContext can only start on a ParameterDef, ExpressionDef or Expression.");
-
             Element = element;
             OuterContext = null;
             Builder = builder ?? throw new ArgumentNullException(nameof(builder));
@@ -178,7 +175,7 @@ namespace Hl7.Cql.Compiler
                 {
                     string? normalizedIdentifier = NormalizeIdentifier(kvp.Key);
                     if (string.IsNullOrWhiteSpace(normalizedIdentifier))
-                        throw new InvalidOperationException("The normalized identifier is not available.");
+                        throw NewExpressionBuildingException("The normalized identifier is not available.");
 
                     scopes[normalizedIdentifier] = kvp.Value;
                 }
@@ -189,10 +186,10 @@ namespace Hl7.Cql.Compiler
                 {
                     string? normalizedIdentifier = NormalizeIdentifier(kvp.Key);
                     if (string.IsNullOrWhiteSpace(normalizedIdentifier))
-                        throw new InvalidOperationException("The normalize identifier is not available.");
+                        throw NewExpressionBuildingException("The normalize identifier is not available.");
 
                     if (scopes.ContainsKey(normalizedIdentifier))
-                        throw new InvalidOperationException(
+                        throw NewExpressionBuildingException(
                             $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
                     scopes.Add(normalizedIdentifier, kvp.Value);
                 }
@@ -237,7 +234,7 @@ namespace Hl7.Cql.Compiler
             var locator = element?.locator;
             var libraryKey = Builder.Library.NameAndVersion;
             if (libraryKey is null)
-                throw new InvalidOperationException("Library name and version is null");
+                throw NewExpressionBuildingException("Library name and version is null");
 
             return string.IsNullOrWhiteSpace(locator) 
                 ? $"{libraryKey}: {message}"

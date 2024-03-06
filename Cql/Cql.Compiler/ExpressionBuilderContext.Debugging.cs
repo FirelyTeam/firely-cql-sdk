@@ -128,6 +128,7 @@ partial class ExpressionBuilderContext
         }
     }
 
-    public ExpressionBuildingException NewExpressionBuildingException(string message, Exception? innerException = null) => 
+    public ExpressionBuildingException NewExpressionBuildingException(
+        string? message = null, Exception? innerException = null) => 
         new(this, message, innerException);
 }

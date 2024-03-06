@@ -54,14 +54,14 @@ namespace Hl7.Cql.Compiler
             {
                 return OperatorBinding.Bind(CqlOperator.StringInValueSet, ctx.RuntimeContextParameter, code, valueSet);
             }
-            else throw new NotImplementedException();
+            else throw new NotImplementedException().WithContext(ctx);
         }
 
         private Expression AnyInValueSet(elm.AnyInValueSet e, ExpressionBuilderContext ctx)
         {
             var codes = TranslateExpression(e.codes!, ctx);
             if (!IsOrImplementsIEnumerableOfT(codes.Type))
-                throw new ArgumentException("Only List types are allowed for AnyInValueSet", nameof(e));
+                throw ctx.NewExpressionBuildingException("Only List types are allowed for AnyInValueSet");
             var codeType = TypeManager.Resolver.GetListElementType(codes.Type, true)!;
             var valueSet = InvokeDefinitionThroughRuntimeContext(e.valueset!.name!, e.valueset.libraryName, typeof(CqlValueSet), ctx);
             if (codeType == TypeManager.Resolver.CodeType)
@@ -76,7 +76,7 @@ namespace Hl7.Cql.Compiler
             {
                 return OperatorBinding.Bind(CqlOperator.StringsInValueSet, ctx.RuntimeContextParameter, codes, valueSet);
             }
-            else throw new NotImplementedException($"AnyInValueSet not implemented for element type {TypeManager.PrettyTypeName(codeType)}");
+            else throw new NotImplementedException($"AnyInValueSet not implemented for element type {TypeManager.PrettyTypeName(codeType)}").WithContext(ctx);
 
         }
 

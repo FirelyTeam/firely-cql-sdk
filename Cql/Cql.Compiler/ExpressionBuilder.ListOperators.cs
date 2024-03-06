@@ -40,7 +40,7 @@ namespace Hl7.Cql.Compiler
             {
                 return OperatorBinding.Bind(CqlOperator.IndexOf, ctx.RuntimeContextParameter, source, element);
             }
-            throw new NotImplementedException();
+            throw new NotImplementedException().WithContext(ctx);
         }
 
         protected Expression Last(elm.Last e, ExpressionBuilderContext ctx)
@@ -67,7 +67,7 @@ namespace Hl7.Cql.Compiler
             {
                 return OperatorBinding.Bind(CqlOperator.Slice, ctx.RuntimeContextParameter, source, start, end);
             }
-            throw new NotImplementedException();
+            throw new NotImplementedException().WithContext(ctx);
         }
 
     }

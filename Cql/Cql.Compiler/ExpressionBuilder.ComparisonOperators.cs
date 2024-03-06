@@ -50,7 +50,7 @@ namespace Hl7.Cql.Compiler
                         right);
                     return call;
                 }
-                else throw new NotImplementedException();
+                else throw new NotImplementedException().WithContext(ctx);
             }
             else if (IsEnum(right.Type))
             {
@@ -63,7 +63,7 @@ namespace Hl7.Cql.Compiler
                     return call;
 
                 }
-                else throw new NotImplementedException();
+                else throw new NotImplementedException().WithContext(ctx);
             }
             else if (IsOrImplementsIEnumerableOfT(left.Type))
             {
@@ -72,11 +72,11 @@ namespace Hl7.Cql.Compiler
                 {
                     var rightElementType = TypeManager.Resolver.GetListElementType(right.Type, true)!;
                     if (rightElementType != leftElementType)
-                        throw new InvalidOperationException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
+                        throw ctx.NewExpressionBuildingException($"Cannot compare a list of {TypeManager.PrettyTypeName(leftElementType)} with {TypeManager.PrettyTypeName(rightElementType)}");
                     var call = OperatorBinding.Bind(CqlOperator.ListEqual, ctx.RuntimeContextParameter, left, right);
                     return call;
                 }
-                throw new NotImplementedException();
+                throw new NotImplementedException().WithContext(ctx);
             }
             else
             {
@@ -106,7 +106,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    throw new NotImplementedException();
+                    throw new NotImplementedException().WithContext(ctx);
                 }
             }
             else

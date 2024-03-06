@@ -28,13 +28,13 @@ internal class ExpressionBuilderService
     public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(Library library) => 
         ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _logger, library);
 
-    public MemberInfo GetProperty(
+    public MemberInfo? TryGetProperty(
         Library library,
         Type type,
         string name)
     {
         var expressionBuilder = new ExpressionBuilder(_operatorBinding, _typeManager, _logger, library);
-        return expressionBuilder.GetProperty(type, name);
+        return expressionBuilder.TryGetProperty(type, name);
     }
 
     public LambdaExpression Lambda(
