@@ -29,19 +29,12 @@ partial class ExpressionBuilder
         OperatorBinding operatorBinding,
         TypeManager typeManager,
         ILogger<ExpressionBuilder> logger,
-        Library library) =>
-        new ExpressionBuilder(operatorBinding, typeManager, logger, library).BuildLibraryDefinitions();
-
-    /// <summary>
-    /// Builds the definitions for the library.
-    /// </summary>
-    /// <returns>The definition dictionary of lambda expressions.</returns>
-    private DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions()
+        Library library)
     {
-        Logger.LogInformation("Building expressions for '{library}'", LibraryKey);
-
+        var expressionBuilder = new ExpressionBuilder(typeManager, logger, library);
+        expressionBuilder.Logger.LogInformation("Building expressions for '{library}'", expressionBuilder.LibraryKey);
         var definitions = new DefinitionDictionary<LambdaExpression>();
-        var definitionsBuilderContext = new DefinitionsBuilderContext(this, definitions);
+        var definitionsBuilderContext = new DefinitionsBuilderContext(expressionBuilder, operatorBinding, definitions);
         var definitionsBuilder = new DefinitionsBuilder(definitionsBuilderContext);
         definitionsBuilder.ProcessLibrary();
         return definitions;
@@ -458,16 +451,18 @@ partial class ExpressionBuilder
     private readonly record struct DefinitionsBuilderContext
     {
         private readonly ExpressionBuilder _expressionBuilder;
+        private readonly OperatorBinding _operatorBinding;
         private readonly Dictionary<string, string> _localLibraryIdentifiers;
         private readonly DefinitionDictionary<LambdaExpression> _definitions;
         private readonly Dictionary<string, CqlCode> _codesByName;
         private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
-        public DefinitionsBuilderContext(
-            ExpressionBuilder expressionBuilder, 
+        public DefinitionsBuilderContext(ExpressionBuilder expressionBuilder,
+            OperatorBinding operatorBinding,
             DefinitionDictionary<LambdaExpression> definitions)
         {
             _expressionBuilder = expressionBuilder;
+            _operatorBinding = operatorBinding;
             _definitions = definitions;
             _localLibraryIdentifiers = new();
             _codesByName = new();
@@ -484,6 +479,7 @@ partial class ExpressionBuilder
             Elm.Element element) =>
             new ExpressionBuilderContextFacade(
                 new ExpressionBuilderContext(
+                    _operatorBinding,
                     _expressionBuilder,
                     RuntimeContextParameter,
                     _definitions,

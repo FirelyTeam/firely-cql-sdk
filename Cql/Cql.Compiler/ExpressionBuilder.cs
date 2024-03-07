@@ -40,19 +40,16 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="library"/>.</param>
-        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="BuildLibraryDefinitions()"/>.</param>
+        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="BuildLibraryDefinitions"/>.</param>
         /// <param name="library">The <see cref="Library"/> this builder will build.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         /// <exception cref="ArgumentException">If the <paramref name="library"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(
-            OperatorBinding operatorBinding,
             TypeManager typeManager,
             ILogger<ExpressionBuilder> logger,
             Library library)
         {
-            OperatorBinding = operatorBinding ?? throw new ArgumentNullException(nameof(operatorBinding));
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
             Library = library ?? throw new ArgumentNullException(nameof(library));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -65,8 +62,8 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <summary>
-        /// Gets the settings used during <see cref="BuildLibraryDefinitions()"/>.
-        /// These should be set as desired before <see cref="BuildLibraryDefinitions()"/> is called.
+        /// Gets the settings used during <see cref="BuildLibraryDefinitions"/>.
+        /// These should be set as desired before <see cref="BuildLibraryDefinitions"/> is called.
         /// </summary>
         public ExpressionBuilderSettings Settings { get; }
 
@@ -87,10 +84,6 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         private IList<IExpressionMutator> ExpressionMutators { get; }
 
-        /// <summary>
-        /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
-        /// </summary>
-        private OperatorBinding OperatorBinding { get; }
         /// <summary>
         /// The <see cref="TypeManager"/> used to resolve and create types referenced in <see cref="Library"/>.
         /// </summary>
@@ -115,17 +108,17 @@ namespace Hl7.Cql.Compiler
         /// This can be compiled to a <see cref="Delegate"/> and executed to resolve a value.
         /// </remarks>
         /// <param name="expression">The ELM expression to convert</param>
+        /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="lambdas">Existing lambdas, required if <paramref name="expression"/> contains any references to other ELM definitions</param>
-        /// <param name="ctx">If <paramref name="expression"/> requires contextual scope, provide it via an <see cref="ExpressionBuilderContext"/>.</param>
         public LambdaExpression Lambda(
-            elm.Expression expression,
-            DefinitionDictionary<LambdaExpression>? lambdas = null,
-            ExpressionBuilderContext? ctx = null)
+            Elm.Expression expression,
+            OperatorBinding operatorBinding,
+            DefinitionDictionary<LambdaExpression>? lambdas = null)
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
             var localLibraryIdentifiers = new Dictionary<string, string>();
-            ctx ??= new ExpressionBuilderContext( this, parameter, lambdas, localLibraryIdentifiers, expression);
+            var ctx = new ExpressionBuilderContext( operatorBinding, this, parameter, lambdas, localLibraryIdentifiers, expression);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
@@ -664,7 +657,7 @@ namespace Hl7.Cql.Compiler
         {
             var lhsExpression = TranslateExpression(be.operand![0], ctx);
             var rhsExpression = TranslateExpression(be.operand![1], ctx);
-            var call = OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, lhsExpression, rhsExpression);
+            var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, lhsExpression, rhsExpression);
             return call;
         }
 
@@ -674,7 +667,7 @@ namespace Hl7.Cql.Compiler
             var resultType = unary.resultTypeSpecifier != null
                 ? TypeManager.TypeFor(unary.resultTypeSpecifier, ctx)
                 : null;
-            var call = OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
+            var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
             if (resultType != null && resultType != call.Type)
             {
                 var typeAs = ChangeType(call, resultType, ctx);
@@ -691,7 +684,7 @@ namespace Hl7.Cql.Compiler
             var operators = ne.operand
                 .Select(op => TranslateExpression(op, ctx))
                 .ToArray();
-            var call = OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operators);
+            var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operators);
             return call;
         }
 
@@ -713,7 +706,7 @@ namespace Hl7.Cql.Compiler
         protected Expression AggregateOperator(CqlOperator @operator, AggregateExpression aggregate, ExpressionBuilderContext ctx)
         {
             var operand = TranslateExpression(aggregate.source!, ctx);
-            var call = OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
+            var call = ctx.OperatorBinding.Bind(@operator, ctx.RuntimeContextParameter, operand);
             return call;
         }
 
@@ -784,11 +777,11 @@ namespace Hl7.Cql.Compiler
 
                     var selectManyLambda = WithToSelectManyBody(querySourceAlias!, elementType, relationship, ctx);
 
-                    var selectManyCall = OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
+                    var selectManyCall = ctx.OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
                         @return, selectManyLambda);
                     if (relationship is Without)
                     {
-                        var callExcept = OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter,
+                        var callExcept = ctx.OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter,
                             @return, selectManyCall);
                         @return = callExcept;
                     }
@@ -829,7 +822,7 @@ namespace Hl7.Cql.Compiler
                 
                 var whereBody = TranslateExpression(query.where, subContext);
                 var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
-                var callWhere = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
+                var callWhere = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
                 @return = callWhere;
 
                 ctx = ctxStack.Pop();
@@ -860,7 +853,7 @@ namespace Hl7.Cql.Compiler
                 }
                 var selectBody = TranslateExpression(query.@return.expression!, subContext);
                 var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-                var callSelect = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, @return, selectLambda);
+                var callSelect = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, @return, selectLambda);
                 @return = callSelect;
 
                 ctx = ctxStack.Pop();
@@ -908,7 +901,7 @@ namespace Hl7.Cql.Compiler
 
                 var lambdaBody = TranslateExpression(query.aggregate.expression!, subContext);
                 var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceAliasParameter);
-                var aggregateCall = OperatorBinding.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
+                var aggregateCall = ctx.OperatorBinding.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
                 @return = aggregateCall;
 
                 ctx = ctxStack.Pop();
@@ -938,7 +931,7 @@ namespace Hl7.Cql.Compiler
                         var sortMemberExpression = TranslateExpression(byExpression.expression, subContext);
                         var lambdaBody = Expression.Convert(sortMemberExpression, typeof(object));
                         var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                        var sort = OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                        var sort = ctx.OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
                             @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                         @return = sort;
                     }
@@ -957,13 +950,13 @@ namespace Hl7.Cql.Compiler
                         var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!, ctx);
                         var lambdaBody = Expression.Convert(pathExpression, typeof(object));
                         var sortLambda = Expression.Lambda(lambdaBody, sortMemberParameter);
-                        var sort = OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
+                        var sort = ctx.OperatorBinding.Bind(CqlOperator.SortBy, ctx.RuntimeContextParameter,
                             @return, sortLambda, Expression.Constant(order, typeof(ListSortDirection)));
                         @return = sort;
                     }
                     else
                     {
-                        var sort = OperatorBinding.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
+                        var sort = ctx.OperatorBinding.Bind(CqlOperator.Sort, ctx.RuntimeContextParameter,
                             @return, Expression.Constant(order, typeof(ListSortDirection)));
                         @return = sort;
                     }
@@ -976,7 +969,7 @@ namespace Hl7.Cql.Compiler
 
             if (isSingle)
             {
-                var callSingle = OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
+                var callSingle = ctx.OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
                 @return = callSingle;
             }
 
@@ -1021,11 +1014,11 @@ namespace Hl7.Cql.Compiler
                 {
                     var selectManyLambda = WithToSelectManyBody(multiSourceTupleType, relationship, ctx);
 
-                    var selectManyCall = OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
+                    var selectManyCall = ctx.OperatorBinding.Bind(CqlOperator.SelectMany, ctx.RuntimeContextParameter,
                         @return, selectManyLambda);
                     if (relationship is Without)
                     {
-                        var callExcept = OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter,
+                        var callExcept = ctx.OperatorBinding.Bind(CqlOperator.ListExcept, ctx.RuntimeContextParameter,
                             @return, selectManyCall);
                         @return = callExcept;
                     }
@@ -1066,7 +1059,7 @@ namespace Hl7.Cql.Compiler
 
                 var whereBody = TranslateExpression(query.where, subContext);
                 var whereLambda = Expression.Lambda(whereBody, whereLambdaParameter);
-                var callWhere = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
+                var callWhere = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, @return, whereLambda);
                 @return = callWhere;
             }
 
@@ -1098,7 +1091,7 @@ namespace Hl7.Cql.Compiler
                 }
                 var selectBody = TranslateExpression(query.@return.expression!, subContext);
                 var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-                var callSelect = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, @return, selectLambda);
+                var callSelect = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, @return, selectLambda);
                 @return = callSelect;
             }
 
@@ -1151,7 +1144,7 @@ namespace Hl7.Cql.Compiler
 
                     var lambdaBody = TranslateExpression(query.aggregate.expression!, subContext);
                     var lambda = Expression.Lambda(lambdaBody, resultParameter, sourceParameter);
-                    var aggregateCall = OperatorBinding.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
+                    var aggregateCall = ctx.OperatorBinding.Bind(CqlOperator.Aggregate, subContext.RuntimeContextParameter, @return, lambda, startingValue);
                     @return = aggregateCall;
                 }
                 else
@@ -1216,7 +1209,7 @@ namespace Hl7.Cql.Compiler
             if (isSingle)
             {
                 var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type);
-                var callSingle = OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
+                var callSingle = ctx.OperatorBinding.Bind(CqlOperator.Single, ctx.RuntimeContextParameter, @return);
                 @return = callSingle;
             }
 
@@ -1555,7 +1548,7 @@ namespace Hl7.Cql.Compiler
                             var selectParameter = Expression.Parameter(valueEnumerableElement, TypeNameToIdentifier(value.Type, ctx));
                             var body = ChangeType(selectParameter, memberArrayElement, ctx);
                             var selectLambda = Expression.Lambda(body, selectParameter);
-                            var callSelectMethod = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, value, selectLambda);
+                            var callSelectMethod = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, value, selectLambda);
                             var toArrayMethod = typeof(Enumerable)
                                 .GetMethod(nameof(Enumerable.ToArray))!
                                 .MakeGenericMethod(memberArrayElement);
@@ -1793,12 +1786,12 @@ namespace Hl7.Cql.Compiler
             var suchThatBody = TranslateExpression(with.suchThat, whereContext);
 
             var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-            var callWhereOnSource = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, source, whereLambda);
+            var callWhereOnSource = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, source, whereLambda);
 
             var selectLambdaParameter = Expression.Parameter(sourcElementType, with.alias);
             var selectBody = selectManyParameter; // P => E
             var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-            var callSelectOnWhere = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, callWhereOnSource, selectLambda);
+            var callSelectOnWhere = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, callWhereOnSource, selectLambda);
             var selectManyLambda = Expression.Lambda(callSelectOnWhere, selectManyParameter);
 
             return selectManyLambda;
@@ -1852,12 +1845,12 @@ namespace Hl7.Cql.Compiler
             var whereContext = selectManyContext.WithScopes(new ExpressionElementPairForIdentifier(with.alias!, (whereLambdaParameter, with)));
             var suchThatBody = TranslateExpression(with.suchThat, whereContext);
             var whereLambda = Expression.Lambda(suchThatBody, whereLambdaParameter);
-            var callWhereOnSource = OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, source, whereLambda);
+            var callWhereOnSource = ctx.OperatorBinding.Bind(CqlOperator.Where, ctx.RuntimeContextParameter, source, whereLambda);
 
             var selectLambdaParameter = Expression.Parameter(sourceElementType, with.alias);
             var selectBody = selectManyParameter; // P => E
             var selectLambda = Expression.Lambda(selectBody, selectLambdaParameter);
-            var callSelectOnWhere = OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, callWhereOnSource, selectLambda);
+            var callSelectOnWhere = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, callWhereOnSource, selectLambda);
 
             var selectManyLambda = Expression.Lambda(callSelectOnWhere, selectManyParameter);
             return selectManyLambda;
@@ -1912,7 +1905,7 @@ namespace Hl7.Cql.Compiler
                     if (string.IsNullOrWhiteSpace(valueSetRef.name))
                         throw ctx.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
                     var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef!.libraryName, typeof(CqlValueSet), ctx);
-                    var call = OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
+                    var call = ctx.OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty!);
                     return call;
                 }
@@ -1921,14 +1914,14 @@ namespace Hl7.Cql.Compiler
                     // In this construct, instead of querying a value set, we're testing resources
                     // against a list of codes, e.g., as defined by the code from or codesystem construct
                     var codes = TranslateExpression(retrieve.codes, ctx);
-                    var call = OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
+                    var call = ctx.OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                         Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty!);
                     return call;
                 }
             }
             else
             {
-                var call = OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
+                var call = ctx.OperatorBinding.Bind(CqlOperator.Retrieve, ctx.RuntimeContextParameter,
                     Expression.Constant(sourceElementType, typeof(Type)), Expression.Constant(null, typeof(CqlValueSet)), codeProperty!);
                 return call;
             }
@@ -1949,7 +1942,7 @@ namespace Hl7.Cql.Compiler
                 if (pathMemberInfo == null)
                 {
                     ctx.LogWarning($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op);
-                    var call = OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
+                    var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
                         scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
                 }
@@ -2016,7 +2009,7 @@ namespace Hl7.Cql.Compiler
                 if (pathMemberInfo == null)
                 {
                     ctx.LogWarning($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.");
-                    var call = OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
+                    var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
                         source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
                 }
@@ -2088,7 +2081,7 @@ namespace Hl7.Cql.Compiler
                     }
                     else
                     {
-                        var bind = OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter,
+                        var bind = ctx.OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter,
 
                             new[] { operands[0], Expression.Constant(typeof(string), typeof(Type)) });
                         return bind;
@@ -2422,7 +2415,7 @@ namespace Hl7.Cql.Compiler
                 Expression.Bind(tupleType.GetProperty(second.alias)!, secondLambdaParameter));
             var secondSelectManyParameter = Expression.Lambda(memberInit, firstLambdaParameter, secondLambdaParameter);
 
-            var callSelectMany = OperatorBinding.Bind(CqlOperator.SelectManyResults, ctx.RuntimeContextParameter,
+            var callSelectMany = ctx.OperatorBinding.Bind(CqlOperator.SelectManyResults, ctx.RuntimeContextParameter,
                 firstExpression,
                 firstSelectManyParameter,
                 secondSelectManyParameter);
@@ -2457,7 +2450,7 @@ namespace Hl7.Cql.Compiler
                     memberInit = Expression.MemberInit(newTuple, bindings);
                     var p2 = Expression.Lambda(memberInit, ab, c);
 
-                    var callAgain = OperatorBinding.Bind(CqlOperator.SelectManyResults, ctx.RuntimeContextParameter,
+                    var callAgain = ctx.OperatorBinding.Bind(CqlOperator.SelectManyResults, ctx.RuntimeContextParameter,
                         callSelectMany,
                         p1,
                         p2);

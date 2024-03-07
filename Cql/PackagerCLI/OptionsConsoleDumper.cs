@@ -23,7 +23,8 @@ internal class OptionsConsoleDumper
 
     public void DumpToConsole()
     {
-        WriteLine("PackageCLI Arguments Provided");
+        WriteLine("PackageCLI running in {0}", Environment.CurrentDirectory);
+        WriteLine("Arguments Provided");
         WriteLine("-----------------------------");
         (string name, object? value)[] values = new[]
         {

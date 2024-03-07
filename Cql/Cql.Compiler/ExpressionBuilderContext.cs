@@ -13,12 +13,13 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.BuildLibraryDefinitions()"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.BuildLibraryDefinitions"/>.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
@@ -27,17 +28,19 @@ namespace Hl7.Cql.Compiler
     {
 
         internal ExpressionBuilderContext(
+            OperatorBinding operatorBinding, 
             ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers,
-            Elm.Element element)
+            elm.Element element)
         {
             _element = element;
             _outerContext = null;
             Builder = builder ?? throw new ArgumentNullException(nameof(builder));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
             Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
+            _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             LocalLibraryIdentifiers = localLibraryIdentifiers ?? throw new ArgumentNullException(nameof(localLibraryIdentifiers));
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
@@ -50,6 +53,7 @@ namespace Hl7.Cql.Compiler
             Elm.Element? overrideElement = null,
             IDictionary<string, (Expression, elm.Element)>? overrideScopes = null)
         {
+            _operatorBinding = new OperatorBindingRethrowDecorator(this, source._operatorBinding.Inner);
             _element = overrideElement ?? source._element;
             _outerContext = source._outerContext;
             Builder = source.Builder;
@@ -76,6 +80,13 @@ namespace Hl7.Cql.Compiler
 
 
         internal DefinitionDictionary<LambdaExpression> Definitions { get; }
+
+        private readonly OperatorBindingRethrowDecorator _operatorBinding;
+
+        /// <summary>
+        /// The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.
+        /// </summary>
+        public OperatorBinding OperatorBinding => _operatorBinding;
 
         /// <summary>
         /// Used for mappings such as:

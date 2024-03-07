@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler
                 .ToArray();
             if (operands.Length == 1 && IsOrImplementsIEnumerableOfT(operands[0].Type))
             {
-                var call = OperatorBinding.Bind(CqlOperator.Coalesce, ctx.RuntimeContextParameter, operands[0]);
+                var call = ctx.OperatorBinding.Bind(CqlOperator.Coalesce, ctx.RuntimeContextParameter, operands[0]);
                 return call;
             }
             var distinctOperandTypes = operands

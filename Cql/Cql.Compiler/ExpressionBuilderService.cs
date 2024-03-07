@@ -33,17 +33,17 @@ internal class ExpressionBuilderService
         Type type,
         string name)
     {
-        var expressionBuilder = new ExpressionBuilder(_operatorBinding, _typeManager, _logger, library);
+        var expressionBuilder = new ExpressionBuilder(_typeManager, _logger, library);
         return expressionBuilder.TryGetProperty(type, name);
     }
 
     public LambdaExpression Lambda(
         Library library,
         Expression expression,
-        DefinitionDictionary<LambdaExpression>? lambdas = null,
-        ExpressionBuilderContext? ctx = null)
+        OperatorBinding operatorBinding,
+        DefinitionDictionary<LambdaExpression>? lambdas = null)
     {
-        var expressionBuilder = new ExpressionBuilder(_operatorBinding, _typeManager, _logger, library);
-        return expressionBuilder.Lambda(expression, lambdas, ctx);
+        var expressionBuilder = new ExpressionBuilder(_typeManager, _logger, library);
+        return expressionBuilder.Lambda(expression, operatorBinding, lambdas/*, ctx*/);
     }
 }
