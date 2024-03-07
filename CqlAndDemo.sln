@@ -47,6 +47,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cql", "Demo\Cql\Cql.csproj", "{1C19BCFA-9965-49EC-952B-DBC753E219A2}"
+	ProjectSection(ProjectDependencies) = postProject
+		{FEF0C134-505D-4206-8630-569A6762F787} = {FEF0C134-505D-4206-8630-569A6762F787}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Elm", "Demo\Elm\Elm.csproj", "{280C6857-E1CC-4B4A-9552-13B5AA5932E0}"
 EndProject
@@ -246,7 +249,7 @@ Global
 		{7D787B73-D44A-4B65-B83F-4AF4A752F26C} = {B00E560D-AE0C-48E1-9013-57115AF05F41}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = |build\
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
+		FileExplorer = |build\
 	EndGlobalSection
 EndGlobal
