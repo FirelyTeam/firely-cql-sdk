@@ -11,10 +11,29 @@ namespace Hl7.Cql.Compiler;
 
 partial class ExpressionBuilderContext
 {
+    private string GetDebuggerDisplay() => $$"""
+        Expression Builder Context: {{string.Concat(
+            from item in ElementPathToRoot.Reverse()
+            select $@"
+            - {item}"
+              )}}
+        """;
+
     public elm.Element Element => GetElement();
     protected abstract elm.Element GetElement();
 
+
     private readonly ExpressionBuilderContext? _outerContext;
+
+    protected ExpressionBuilderContext? OuterContext
+    {
+        get => _outerContext;
+        init
+        {
+            _outerContext = value!;
+            _operatorBinding = new OperatorBindingRethrowDecorator(this, value!._operatorBinding.Inner);
+        }
+    }
 
 
     internal IEnumerable<ExpressionBuilderContext> SelfAndAncestorContexts
@@ -25,7 +44,7 @@ partial class ExpressionBuilderContext
             while (current != null)
             {
                 yield return current;
-                current = current._outerContext;
+                current = current.OuterContext;
             }
         }
     }

@@ -10,11 +10,12 @@ using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
+using Hl7.Fhir.Language.Debugging;
 
 namespace Hl7.Cql.Compiler
 {
@@ -24,6 +25,7 @@ namespace Hl7.Cql.Compiler
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
+    [DebuggerDisplay("{GetDebuggerDisplay()}")]
     internal abstract partial class ExpressionBuilderContext
     {
 
@@ -35,23 +37,22 @@ namespace Hl7.Cql.Compiler
             IDictionary<string, string> localLibraryIdentifiers)
         {
             _outerContext = null;
+            _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             Builder = builder ?? throw new ArgumentNullException(nameof(builder));
             RuntimeContextParameter = contextParameter ?? throw new ArgumentNullException(nameof(contextParameter));
             Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
-            _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             LocalLibraryIdentifiers = localLibraryIdentifiers ?? throw new ArgumentNullException(nameof(localLibraryIdentifiers));
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
-            _scopes = new Dictionary<string, (Expression, elm.Element)>();
+            Scopes = new Dictionary<string, (Expression, elm.Element)>();
         }
 
         protected ExpressionBuilderContext(
-            ExpressionBuilderContext source,
-            IDictionary<string, (Expression, elm.Element)>? overrideScopes = null)
+            ExpressionBuilderContext source)
         {
-            _operatorBinding = new OperatorBindingRethrowDecorator(this, source._operatorBinding.Inner);
-            _outerContext = source._outerContext;
+            _operatorBinding = source._operatorBinding;
+            _outerContext = source.OuterContext;
             Builder = source.Builder;
             RuntimeContextParameter = source.RuntimeContextParameter;
             Definitions = source.Definitions;
@@ -59,7 +60,7 @@ namespace Hl7.Cql.Compiler
             ImpliedAlias = source.ImpliedAlias;
             Operands = source.Operands;
             Libraries = source.Libraries;
-            _scopes = overrideScopes ?? source._scopes;
+            Scopes = source.Scopes;
         }
 
         /// <summary>
@@ -149,7 +150,7 @@ namespace Hl7.Cql.Compiler
         internal Expression GetScopeExpression(string elmAlias)
         {
             var normalized = NormalizeIdentifier(elmAlias!)!;
-            if (_scopes.TryGetValue(normalized, out var expression))
+            if (Scopes.TryGetValue(normalized, out var expression))
                 return expression.Item1;
             else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
@@ -157,7 +158,7 @@ namespace Hl7.Cql.Compiler
         internal (Expression, elm.Element) GetScope(string elmAlias)
         {
             var normalized = NormalizeIdentifier(elmAlias!)!;
-            if (_scopes.TryGetValue(normalized, out var expression))
+            if (Scopes.TryGetValue(normalized, out var expression))
                 return expression;
             else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
@@ -165,10 +166,10 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Contains query aliases and let declarations, and any other symbol that is now "in scope"
         /// </summary>
-        private readonly IDictionary<string, (Expression, elm.Element)> _scopes;
+        protected IDictionary<string, (Expression, elm.Element)> Scopes { get; init;  }
 
 
-        internal bool HasScope(string elmAlias) => _scopes.ContainsKey(elmAlias);
+        internal bool HasScope(string elmAlias) => Scopes.ContainsKey(elmAlias);
 
 
         /// <summary>
@@ -176,7 +177,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal ExpressionBuilderContext WithScopes(params KeyValuePair<string, (Expression, elm.Element)>[] kvps)
         {
-            var scopes = new Dictionary<string, (Expression, elm.Element)>(_scopes);
+            var scopes = new Dictionary<string, (Expression, elm.Element)>(Scopes);
             if (Builder.Settings.AllowScopeRedefinition)
             {
                 foreach (var kvp in kvps)
@@ -216,14 +217,8 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        protected abstract ExpressionBuilderContext WithScopes(
+        protected abstract  ExpressionBuilderContext WithScopes(
             IDictionary<string, (Expression, elm.Element)> scopes);
-
-        /// <summary>
-        /// Clones this ExpressionBuilderContext
-        /// </summary>
-        internal abstract ExpressionBuilderContext Deeper<TElement>(TElement element)
-            where TElement : Elm.Element;
 
         internal void LogWarning(string message, elm.Element? expression = null)
         {
@@ -253,5 +248,8 @@ namespace Hl7.Cql.Compiler
 
         public Type? TypeFor(elm.Element element, bool throwIfNotFound = true) =>
             Builder.TypeManager.TypeFor(element, this, throwIfNotFound);
+
+        internal abstract ExpressionBuilderContext<TInnerElement> Deeper<TInnerElement>(TInnerElement element)
+            where TInnerElement : Elm.Element;
     }
 }
