@@ -11,13 +11,14 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
 /// </summary>
-internal class LibraryExpressionBuilderContext
+internal class LibraryExpressionBuilderContext : IBuilderContext
 {
     private readonly ExpressionBuilder _expressionBuilder;
     private readonly OperatorBinding _operatorBinding;
     private readonly Dictionary<string, string> _localLibraryIdentifiers;
     private readonly DefinitionDictionary<LambdaExpression> _definitions;
     private readonly Library _library;
+    private readonly int _libraryOrdinal;
     private readonly Dictionary<string, CqlCode> _codesByName;
     private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
@@ -25,7 +26,8 @@ internal class LibraryExpressionBuilderContext
         ExpressionBuilder expressionBuilder,
         OperatorBinding operatorBinding,
         DefinitionDictionary<LambdaExpression> definitions,
-        Library library)
+        Library library,
+        int libraryOrdinal)
     {
         if (string.IsNullOrWhiteSpace(library.NameAndVersion))
             throw new ArgumentException("Library must have a name and version.");
@@ -37,6 +39,7 @@ internal class LibraryExpressionBuilderContext
         _operatorBinding = operatorBinding;
         _definitions = definitions;
         _library = library;
+        _libraryOrdinal = libraryOrdinal;
         _localLibraryIdentifiers = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
@@ -44,12 +47,15 @@ internal class LibraryExpressionBuilderContext
 
     public Elm.Library Library => _library;
 
+    public int LibraryOrdinal => _libraryOrdinal;
+
     public string LibraryKey => _library.NameAndVersion!;
 
     public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
     public ExpressionBuilderContext NewExpressionBuilderContext(
-        Elm.Element element) =>
+        Elm.Element element,
+        int elementOrdinal) =>
         new ExpressionBuilderContext(
             _operatorBinding,
             _expressionBuilder,
@@ -57,7 +63,8 @@ internal class LibraryExpressionBuilderContext
             _definitions,
             _localLibraryIdentifiers,
             this,
-            element);
+            element,
+            elementOrdinal);
 
     public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
         _definitions.AddTag(LibraryKey, definition, signature, name, values);
@@ -101,4 +108,8 @@ internal class LibraryExpressionBuilderContext
 
     public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
         _codesByName.TryGetValue(codeRef.name, out systemCode);
+
+    IBuilderContext? IBuilderContext.OuterContext => null;
+
+    BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(Library, LibraryOrdinal);
 }

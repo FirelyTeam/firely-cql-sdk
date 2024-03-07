@@ -23,13 +23,13 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Hl7.Cql.Compiler.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        private readonly TypeResolver _typeResolver;
         private readonly TypeManager _typeManager;
         private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
         private readonly CSharpSourceCodeWriter _cSharpSourceCodeWriter;
@@ -37,14 +37,12 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public AssemblyCompiler(
             LibraryExpressionBuilder libraryExpressionBuilder,
-            [FromKeyedServices("Fhir")] TypeResolver typeResolver,
             CSharpSourceCodeWriter cSharpSourceCodeWriter,
-            [FromKeyedServices("Fhir")] TypeManager? typeManager)
+            [FromKeyedServices("Fhir")] TypeManager typeManager)
         {
-            _typeResolver = typeResolver;
             _cSharpSourceCodeWriter = cSharpSourceCodeWriter;
             _libraryExpressionBuilder = libraryExpressionBuilder;
-            _typeManager = typeManager ?? new TypeManager(typeResolver);
+            _typeManager = typeManager;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
                 {
@@ -63,27 +61,27 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                         }                                        // @formatter on
                         .Select(type => type.Assembly)
-                        .Concat(_typeResolver.ModelAssemblies)
+                        .Concat(typeManager.Resolver.ModelAssemblies)
                         .Distinct()
                         .ToArray();
                     return references;
                 });
         }
 
-        internal IDictionary<string, AssemblyData> Compile(
-            IReadOnlyCollection<Library> elmPackages)
+        public IDictionary<string, AssemblyData> Compile(
+            IReadOnlyCollection<Library> elmLibraries, DefinitionDictionary<LambdaExpression> definitions)
         {
-            var all = new DefinitionDictionary<LambdaExpression>();
-            foreach (var package in elmPackages)
+            foreach (var (elmLibrary, ordinal) in elmLibraries.WithOrdinals())
             {
-                var expressions = new DefinitionDictionary<LambdaExpression>();
-                _libraryExpressionBuilder.ProcessLibrary(package, expressions);
-                all.Merge(expressions);
+                var packageDefinitions = new DefinitionDictionary<LambdaExpression>();
+                var libctx = _libraryExpressionBuilder.CreateContext(elmLibrary, ordinal, packageDefinitions);
+                _libraryExpressionBuilder.ProcessLibrary(libctx);
+                definitions.Merge(packageDefinitions);
             }
 
-            var graph = elmPackages.GetIncludedLibraries();
+            var graph = elmLibraries.GetIncludedLibraries();
             var assemblies = Generate(
-                all,
+                definitions,
                 _typeManager,
                 graph,
                 _cSharpSourceCodeWriter,

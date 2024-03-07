@@ -23,7 +23,7 @@ internal class LibraryPackagerFactory
     {
         _libraryExpressionBuilderFactory = new LibraryExpressionBuilderFactory(loggerFactory, cacheSize);
         _cSharpSourceCodeWriter = Deferred(() => new CSharpSourceCodeWriter(Logger<CSharpSourceCodeWriter>(), FhirTypeResolver));
-        _assemblyCompiler = Deferred(() => new AssemblyCompiler(LibraryExpressionBuilder, FhirTypeResolver, CSharpSourceCodeWriter, TypeManager));
+        _assemblyCompiler = Deferred(() => new AssemblyCompiler(LibraryExpressionBuilder, CSharpSourceCodeWriter, TypeManager));
         _libraryPackager = Deferred(() => new LibraryPackager(Logger<LibraryPackager>(), FhirTypeResolver, AssemblyCompiler, LibraryExpressionBuilder));
 
 

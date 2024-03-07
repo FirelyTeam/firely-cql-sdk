@@ -7,6 +7,8 @@ namespace Hl7.Cql.Compiler.Infrastructure;
 /// </summary>
 internal readonly struct Ordinal
 {
+    public const int NotFoundInt = -1;
+
     private readonly int _value;
 
     public Ordinal(int value)

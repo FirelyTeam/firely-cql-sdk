@@ -54,7 +54,7 @@ internal class LibraryPackager
         var resources = new List<Resource>();
         var librariesByNameAndVersion = new Dictionary<string, Library>();
 
-        var assemblies = _assemblyCompiler.Compile(elmLibraries);
+        var assemblies = _assemblyCompiler.Compile(elmLibraries, new DefinitionDictionary<LambdaExpression>());
         var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
 
 
@@ -453,7 +453,7 @@ internal class LibraryPackager
             .ToArray();
 
         LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory);
-        var assemblyData = factory.AssemblyCompiler.Compile(dependencies);
+        var assemblyData = factory.AssemblyCompiler.Compile(dependencies, new DefinitionDictionary<LambdaExpression>());
 
         var asmContext = new AssemblyLoadContext($"{lib}-{version}");
         foreach (var kvp in assemblyData)
