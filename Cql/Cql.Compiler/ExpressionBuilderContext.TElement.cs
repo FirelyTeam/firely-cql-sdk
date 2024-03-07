@@ -10,16 +10,17 @@ internal class ExpressionBuilderContext<TElement> : ExpressionBuilderContext
 {
     internal ExpressionBuilderContext(
         ExpressionBuilder builder,
+        OperatorBinding operatorBinding,
         ParameterExpression contextParameter,
         DefinitionDictionary<LambdaExpression> definitions,
         IDictionary<string, string> localLibraryIdentifiers,
         TElement element)
-        : base(builder, contextParameter, definitions, localLibraryIdentifiers)
+        : base(builder, operatorBinding, contextParameter, definitions, localLibraryIdentifiers)
     {
         Element = element ?? throw new ArgumentNullException(nameof(element));
     }
 
-    protected ExpressionBuilderContext(
+    private ExpressionBuilderContext(
         ExpressionBuilderContext source,
         TElement element)
         : base(source)
@@ -27,7 +28,7 @@ internal class ExpressionBuilderContext<TElement> : ExpressionBuilderContext
         Element = element;
     }
 
-    protected ExpressionBuilderContext(
+    private ExpressionBuilderContext(
         ExpressionBuilderContext<TElement> source,
         IDictionary<string, (Expression, Elm.Element)>? overrideScopes = null)
         : base(source, overrideScopes: overrideScopes)

@@ -29,30 +29,23 @@ partial class ExpressionBuilder
         OperatorBinding operatorBinding,
         TypeManager typeManager,
         ILogger<ExpressionBuilder> logger,
-        Library library) =>
-        new ExpressionBuilder(operatorBinding, typeManager, logger, library).BuildLibraryDefinitions();
-
-    /// <summary>
-    /// Builds the definitions for the library.
-    /// </summary>
-    /// <returns>The definition dictionary of lambda expressions.</returns>
-    private DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions()
+        Library library)
     {
-        Logger.LogInformation("Building expressions for '{library}'", LibraryKey);
-
+        var expressionBuilder = new ExpressionBuilder(typeManager, logger, library);
+        expressionBuilder.Logger.LogInformation("Building expressions for '{library}'", expressionBuilder.LibraryKey);
         var definitions = new DefinitionDictionary<LambdaExpression>();
-        var context = new LibraryExpressionsBuilderContext(this, definitions);
-        var definitionsBuilder = new LibraryExpressionsBuilder();
-        definitionsBuilder.ProcessLibrary(context);
+        var definitionsBuilderContext = new DefinitionsBuilderContext(expressionBuilder, operatorBinding, definitions);
+        var definitionsBuilder = new DefinitionsBuilder();
+        definitionsBuilder.ProcessLibrary(definitionsBuilderContext);
         return definitions;
     }
 
     /// <summary>
     /// The builder for processing the library into definitions.
     /// </summary>
-    private readonly record struct LibraryExpressionsBuilder
+    private readonly record struct DefinitionsBuilder
     {
-        public void ProcessLibrary(LibraryExpressionsBuilderContext ctx)
+        public void ProcessLibrary(DefinitionsBuilderContext ctx)
         {
             var library = ctx.Library;
             var libraryKey = ctx.LibraryKey;
@@ -171,14 +164,14 @@ partial class ExpressionBuilder
                 }
             }
 
-            Exception ExceptionWhileBuilding(string elmType, Ordinal ordinal, int count, string elementName, string locator,
+            Exception ExceptionWhileBuilding(string elmType, int ordinal, int count, string elementName, string locator,
                 Exception innerException) =>
                 throw new ExpressionBuildingException(
-                    message: $"Exception while building the {ordinal} of {count} {elmType} '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
+                    message: $"Exception while building the {new Ordinal(ordinal+1)} of {count} {elmType} '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
                     innerException: innerException);
         }
 
-        private void ProcessCodeSystemDef(ExpressionBuilderContext<CodeSystemDef> ctx)
+        private void ProcessCodeSystemDef(ExpressionBuilderContextFacade<CodeSystemDef> ctx)
         {
             var codeSystem = ctx.Element;
             var _context = ctx.LibraryContext;
@@ -210,7 +203,7 @@ partial class ExpressionBuilder
             }
         }
 
-        private void ProcessConceptDef(ExpressionBuilderContext<ConceptDef> ctx)
+        private void ProcessConceptDef(ExpressionBuilderContextFacade<ConceptDef> ctx)
         {
             var conceptDef = ctx.Element;
             var _context = ctx.LibraryContext;
@@ -253,7 +246,7 @@ partial class ExpressionBuilder
         }
 
         private void ProcessCodeDef(
-            ExpressionBuilderContext<CodeDef> ctx,
+            ExpressionBuilderContextFacade<CodeDef> ctx,
             ISet<(string codeName, string codeSystemUrl)> codeNameCodeSystemUrlsSet,
             IReadOnlyDictionary<string, string> codeSystemUrls)
         {
@@ -285,7 +278,7 @@ partial class ExpressionBuilder
             _context.AddDefinition(codeDef.name!, lambda);
         }
 
-        private void ProcessExpressionDef(ExpressionBuilderContext<ExpressionDef> ctx)
+        private void ProcessExpressionDef(ExpressionBuilderContextFacade<ExpressionDef> ctx)
         {
             var expressionDef = ctx.Element;
             var _context = ctx.LibraryContext;
@@ -382,7 +375,7 @@ partial class ExpressionBuilder
             }
         }
 
-        private void ProcessIncludes(ExpressionBuilderContext<IncludeDef> ctx)
+        private void ProcessIncludes(ExpressionBuilderContextFacade<IncludeDef> ctx)
         {
             var includeDef = ctx.Element;
             var libctx = ctx.LibraryContext;
@@ -395,7 +388,7 @@ partial class ExpressionBuilder
             libctx.AddIncludeAlias(alias, libNav);
         }
 
-        private void ProcessParameterDef(ExpressionBuilderContext<ParameterDef> ctx)
+        private void ProcessParameterDef(ExpressionBuilderContextFacade<ParameterDef> ctx)
         {
             var parameter = ctx.Element;
             var _context = ctx.LibraryContext;
@@ -424,7 +417,7 @@ partial class ExpressionBuilder
             _context.AddDefinition(parameter.name!, lambda);
         }
 
-        private void ProcessValueSetDef(ExpressionBuilderContext<ValueSetDef> ctx)
+        private void ProcessValueSetDef(ExpressionBuilderContextFacade<ValueSetDef> ctx)
         {
             var valueSetDef = ctx.Element;
             var _context = ctx.LibraryContext;
@@ -437,7 +430,7 @@ partial class ExpressionBuilder
         }
 
         private static LambdaExpression NotImplemented<TElement>(
-            ExpressionBuilderContext<TElement> expressionBuilderContext,
+            ExpressionBuilderContextFacade<TElement> expressionBuilderContext,
             string nav,
             Type[] signature,
             Type returnType)
@@ -457,19 +450,22 @@ partial class ExpressionBuilder
     /// <summary>
     /// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
     /// </summary>
-    private readonly record struct LibraryExpressionsBuilderContext
+    private readonly record struct DefinitionsBuilderContext
     {
         private readonly ExpressionBuilder _expressionBuilder;
+        private readonly OperatorBinding _operatorBinding;
         private readonly Dictionary<string, string> _localLibraryIdentifiers;
         private readonly DefinitionDictionary<LambdaExpression> _definitions;
         private readonly Dictionary<string, CqlCode> _codesByName;
         private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
-        public LibraryExpressionsBuilderContext(
+        public DefinitionsBuilderContext(
             ExpressionBuilder expressionBuilder, 
+            OperatorBinding operatorBinding,
             DefinitionDictionary<LambdaExpression> definitions)
         {
             _expressionBuilder = expressionBuilder;
+            _operatorBinding = operatorBinding;
             _definitions = definitions;
             _localLibraryIdentifiers = new();
             _codesByName = new();
@@ -482,13 +478,14 @@ partial class ExpressionBuilder
 
         public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
-        public ExpressionBuilderContext<TElement> NewExpressionBuilderContext<TElement>(
+        public ExpressionBuilderContextFacade<TElement> NewExpressionBuilderContext<TElement>(
             TElement element)
             where TElement : Elm.Element =>
-            new ExpressionBuilderContext<TElement>(
+            new ExpressionBuilderContextFacade<TElement>(
                 this,
                 new Compiler.ExpressionBuilderContext<TElement>(
                     _expressionBuilder,
+                    _operatorBinding,
                     RuntimeContextParameter,
                     _definitions,
                     _localLibraryIdentifiers,
@@ -547,18 +544,18 @@ partial class ExpressionBuilder
     /// <summary>
     /// Encapsulates the ExpressionBuilderContext for building definitions.
     /// </summary>
-    private readonly record struct ExpressionBuilderContext<TElement>
+    private readonly record struct ExpressionBuilderContextFacade<TElement>
         where TElement : Elm.Element
     {
         private readonly Compiler.ExpressionBuilderContext<TElement> _expressionBuilderContext;
 
-        public ExpressionBuilderContext(LibraryExpressionsBuilderContext ctx, Compiler.ExpressionBuilderContext<TElement> expressionBuilderContext)
+        public ExpressionBuilderContextFacade(DefinitionsBuilderContext ctx, Compiler.ExpressionBuilderContext<TElement> expressionBuilderContext)
         {
             LibraryContext = ctx;
             _expressionBuilderContext = expressionBuilderContext;
         }
 
-        public LibraryExpressionsBuilderContext LibraryContext { get; }
+        public DefinitionsBuilderContext LibraryContext { get; }
 
         public TElement Element => _expressionBuilderContext.Element;
 
@@ -574,9 +571,9 @@ partial class ExpressionBuilder
         public Type? TypeFor(Element element, bool throwIfNotFound = true) =>
             _expressionBuilderContext.TypeFor(element, throwIfNotFound);
 
-        public ExpressionBuilderContext<TInnerElement> Deeper<TInnerElement>(TInnerElement expression)
+        public ExpressionBuilderContextFacade<TInnerElement> Deeper<TInnerElement>(TInnerElement expression)
             where TInnerElement : Elm.Element =>
-            new ExpressionBuilderContext<TInnerElement>( 
+            new ExpressionBuilderContextFacade<TInnerElement>( 
                 LibraryContext,
                 _expressionBuilderContext.Deeper(expression));
 

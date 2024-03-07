@@ -18,7 +18,7 @@ namespace Hl7.Cql.Compiler
             highClosed = ChangeType(highClosed, typeof(bool?), ctx);
             var low = TranslateExpression(ie.low!, ctx);
             var high = TranslateExpression(ie.high!, ctx);
-            var call = OperatorBinding.Bind(CqlOperator.Interval, ctx.RuntimeContextParameter, low, high, lowClosed, highClosed);
+            var call = ctx.OperatorBinding.Bind(CqlOperator.Interval, ctx.RuntimeContextParameter, low, high, lowClosed, highClosed);
             return call;
         }
 
@@ -36,11 +36,11 @@ namespace Hl7.Cql.Compiler
             var numExprTranslated = TranslateExpression(numExpr, ctx);
             var denomExprTranslated = TranslateExpression(numExpr, ctx);
 
-            return OperatorBinding.Bind(CqlOperator.Ratio, ctx.RuntimeContextParameter, numExprTranslated, denomExprTranslated);
+            return ctx.OperatorBinding.Bind(CqlOperator.Ratio, ctx.RuntimeContextParameter, numExprTranslated, denomExprTranslated);
         }
 
         private Expression Quantity(elm.Quantity quantityExpression, ExpressionBuilderContext ctx) =>
-            OperatorBinding.Bind(CqlOperator.Quantity, ctx.RuntimeContextParameter,
+            ctx.OperatorBinding.Bind(CqlOperator.Quantity, ctx.RuntimeContextParameter,
                 Expression.Constant(quantityExpression.value, typeof(decimal?)),
                 Expression.Constant(quantityExpression.unit, typeof(string)),
                 Expression.Constant("http://unitsofmeasure.org", typeof(string)));

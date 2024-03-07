@@ -70,7 +70,7 @@ namespace CoreTests
                 }
             };
 
-            var property = NewExpressionBuilder().TryGetProperty(lib, typeof(MeasureReport.PopulationComponent), "id");
+            var property = NewExpressionBuilder().GetProperty(lib, typeof(MeasureReport.PopulationComponent), "id");
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }
