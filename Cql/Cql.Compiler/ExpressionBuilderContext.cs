@@ -259,26 +259,5 @@ namespace Hl7.Cql.Compiler
 
             return new ExpressionBuilderContext(this, element: element);
         }
-
-        internal void LogWarning(string message, elm.Element? expression = null)
-        {
-            Builder.Logger.LogWarning(FormatMessage(message, expression));
-        }
-
-        internal void LogError(string message, elm.Element? element = null)
-        {
-            Builder.Logger.LogError(FormatMessage(message, element));
-        }
-
-
-        private string FormatMessage(string message, elm.Element? element)
-        {
-            var locator = element?.locator;
-            var libraryKey = LibraryContext.LibraryKey;
-
-            return string.IsNullOrWhiteSpace(locator) 
-                ? $"{libraryKey}: {message}"
-                : $"{libraryKey} line {locator}: {message}";
-        }
     }
 }

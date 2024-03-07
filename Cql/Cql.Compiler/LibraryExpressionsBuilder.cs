@@ -299,10 +299,7 @@ internal class LibraryExpressionsBuilder
     {
         if (string.IsNullOrWhiteSpace(expressionDef.name))
         {
-            var message =
-                $"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.";
-            ctx.LogError(message, expressionDef);
-            throw ctx.NewExpressionBuildingException(message, null);
+            throw ctx.NewExpressionBuildingException($"Definition with local ID {expressionDef.localId} does not have a name.  This is not allowed.", null);
         }
 
         var expressionKey = $"{ctx.LibraryContext.LibraryKey}.{expressionDef.name}";
@@ -342,9 +339,8 @@ internal class LibraryExpressionsBuilder
 
             if (function?.external ?? false)
             {
-                var message =
-                    $"{expressionKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
-                ctx.LogError(message, expressionDef);
+                var message = $"{expressionKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
+                _logger.LogError(ctx.FormatMessage(message, expressionDef));
                 if (ctx.LibraryContext.AllowUnresolvedExternals)
                 {
                     var returnType = ctx.Builder.TypeFor(expressionDef, ctx)!;
@@ -369,9 +365,7 @@ internal class LibraryExpressionsBuilder
             var ops = function.operand
                 .Where(op => op.operandTypeSpecifier != null && op.operandTypeSpecifier.resultTypeName != null)
                 .Select(op => $"{op.name} {op.operandTypeSpecifier!.resultTypeName!}");
-            var message =
-                $"Function {expressionDef.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists.";
-            ctx.LogWarning(message, expressionDef);
+            _logger.LogWarning(ctx.FormatMessage($"Function {expressionDef.name}({string.Join(", ", ops)}) skipped; another function matching this signature already exists."));
         }
         else
         {

@@ -159,4 +159,13 @@ partial class ExpressionBuilderContext
             }
         }
     }
+
+    public string FormatMessage(string message, elm.Element? element = null)
+    {
+        var locator = element?.locator;
+
+        return string.IsNullOrWhiteSpace(locator)
+            ? $"{LibraryContext.LibraryKey}: {message}"
+            : $"{LibraryContext.LibraryKey} line {locator}: {message}";
+    }
 }

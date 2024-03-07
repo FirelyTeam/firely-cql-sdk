@@ -252,7 +252,7 @@ namespace Hl7.Cql.Compiler
             return typeName;
         }
 
-        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ExpressionBuilderContext ctx, Func<Type, Type>? changeType = null)
         {
             var elements = tuple.element;
 
@@ -262,10 +262,10 @@ namespace Hl7.Cql.Compiler
             var elementTuples = elements!
                 .Select(e => (e.name, e.elementType))
                 .ToArray();
-            return TupleTypeFor(elementTuples, context, changeType);
+            return TupleTypeFor(elementTuples, ctx, changeType);
         }
 
-        internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext ctx, Func<Type, Type>? changeType = null)
         {
             var elements = tuple.element;
 
@@ -275,22 +275,20 @@ namespace Hl7.Cql.Compiler
             var elementTuples = elements!
                 .Select(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")))
                 .ToArray();
-            return TupleTypeFor(elementTuples, context, changeType);
+            return TupleTypeFor(elementTuples, ctx, changeType);
         }
 
-        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext context, Func<Type, Type>? changeType)
+        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext ctx, Func<Type, Type>? changeType)
         {
             var elementInfo = elements!
                                 .ToDictionary(el => el.name, el =>
                                 {
                                     Type? type;
                                     if (el.elementType != null)
-                                        type = TypeFor(el.elementType!, context);
+                                        type = TypeFor(el.elementType!, ctx);
                                     else
                                     {
-                                        var msg = $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.";
-                                        context.LogError(msg);
-                                        throw new InvalidOperationException(msg);
+                                        throw ctx.NewExpressionBuildingException($"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
                                     }
                                     if (changeType != null)
                                         type = changeType(type);

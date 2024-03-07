@@ -10,6 +10,7 @@
 using Hl7.Cql.Abstractions;
 using System;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Logging;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -113,8 +114,5 @@ namespace Hl7.Cql.Compiler
 
         protected Expression? Upper(elm.Upper e, ExpressionBuilderContext ctx) =>
             UnaryOperator(CqlOperator.Upper, e, ctx);
-
-
-
     }
 }

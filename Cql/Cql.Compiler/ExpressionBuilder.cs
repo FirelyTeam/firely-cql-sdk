@@ -35,7 +35,7 @@ namespace Hl7.Cql.Compiler
     internal partial class ExpressionBuilder
     {
         // Yeah, hardwired to FHIR 4.0.1 for now.
-        private static readonly IDictionary<string, ClassInfo> modelMapping = Models.ClassesById(Models.Fhir401);
+        private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
 
         /// <summary>
         /// Creates an instance.
@@ -70,7 +70,8 @@ namespace Hl7.Cql.Compiler
         /// </remarks> 
         public IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
 
-        internal ILogger<ExpressionBuilder> Logger { get; }
+        private ILogger<ExpressionBuilder> Logger { get; }
+
 
         /// <summary>
         /// The expression visitors that will be executed (in order) on translated expressions.
@@ -929,9 +930,7 @@ namespace Hl7.Cql.Compiler
                         var pathMemberType = TypeFor(byColumn, ctx);
                         if (pathMemberType == null)
                         {
-                            var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
-                            ctx.LogError(msg);
-                            throw ctx.NewExpressionBuildingException(msg);
+                            throw ctx.NewExpressionBuildingException($"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.");
                         }
                         var pathExpression = PropertyHelper(sortMemberParameter, byColumn.path, pathMemberType!, ctx);
                         var lambdaBody = Expression.Convert(pathExpression, typeof(object));
@@ -1216,9 +1215,7 @@ namespace Hl7.Cql.Compiler
                 var elementType = TypeManager.Resolver.GetListElementType(type);
                 if (elementType != typeof(CqlCode))
                 {
-                    var message = $"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}";
-                    ctx.LogError(message, valueSetRef);
-                    throw ctx.NewExpressionBuildingException(message);
+                    throw ctx.NewExpressionBuildingException($"The expected type for value set {valueSetRef.name} in this context is {TypeManager.PrettyTypeName(type)}");
                 }
 
                 var @new = CallCreateValueSetFacade(ctx, cqlValueSet);
@@ -1871,7 +1868,7 @@ namespace Hl7.Cql.Compiler
             var hasCodePropertySpecified = sourceElementType != null && retrieve.codeProperty != null;
             var isDefaultCodeProperty = retrieve.codeProperty is null ||
                 (cqlRetrieveResultType is not null &&
-                 modelMapping.TryGetValue(cqlRetrieveResultType, out ClassInfo? classInfo) &&
+                 ModelMapping.TryGetValue(cqlRetrieveResultType, out ClassInfo? classInfo) &&
                  classInfo.primaryCodePath == retrieve.codeProperty);
 
             if (hasCodePropertySpecified && !isDefaultCodeProperty)
@@ -1927,7 +1924,7 @@ namespace Hl7.Cql.Compiler
                     TypeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
                 {
-                    ctx.LogWarning($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op);
+                    Logger.LogWarning(ctx.FormatMessage($"Property {op.path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", op));
                     var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
                         scopeExpression, Expression.Constant(op.path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
@@ -1994,7 +1991,7 @@ namespace Hl7.Cql.Compiler
                 var pathMemberInfo = TypeManager.Resolver.GetProperty(source.Type, path!);
                 if (pathMemberInfo == null)
                 {
-                    ctx.LogWarning($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.");
+                    Logger.LogWarning(ctx.FormatMessage($"Property {path} can't be known at design time, and will be late-bound, slowing performance.  Consider casting the source first so that this property can be definitely bound.", null));
                     var call = ctx.OperatorBinding.Bind(CqlOperator.LateBoundProperty, ctx.RuntimeContextParameter,
                         source, Expression.Constant(path, typeof(string)), Expression.Constant(expectedType, typeof(Type)));
                     return call;
