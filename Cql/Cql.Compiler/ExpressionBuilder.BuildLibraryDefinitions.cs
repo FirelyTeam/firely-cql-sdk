@@ -342,7 +342,7 @@ partial class ExpressionBuilder
                 }
             }
 
-            ctx = ctx.Deeper(expressionDef);
+            //ctx = ctx.Deeper(expressionDef);
             var bodyExpression = ctx.TranslateExpression(expressionDef.expression);
             var lambda = Expression.Lambda(bodyExpression, parameters);
             if (function?.operand != null && _context.ContainsDefinition(expressionDef.name, functionParameterTypes))

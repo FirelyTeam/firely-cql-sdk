@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
@@ -69,6 +70,7 @@ namespace Hl7.Cql.Compiler
             ExpressionBuilderContext outer,
             Elm.Element element) : this(outer)
         {
+            Debug.Assert(element != this._element);
             _outerContext = outer;
             _operatorBinding = new OperatorBindingRethrowDecorator(this, outer._operatorBinding.Inner);
             _element = element;
@@ -242,8 +244,16 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ExpressionBuilderContext Deeper(elm.Element element) => 
-            new(this, element: element);
+        internal ExpressionBuilderContext Deeper(elm.Element element)
+        {
+            if (element == _element)
+            {
+                Debug.WriteLine("Unnecessary call to Deeper, since the current context already points to the element.");
+                return this;
+            }
+
+            return new ExpressionBuilderContext(this, element: element);
+        }
 
         internal void LogWarning(string message, elm.Element? expression = null)
         {
