@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Compiler.Infrastructure;
@@ -17,13 +16,22 @@ namespace Hl7.Cql.Compiler;
 /// <summary>
 /// The builder for processing the library into definitions.
 /// </summary>
-internal class LibraryExpressionsBuilder
+internal class LibraryExpressionBuilder
 {
-    private readonly ILogger<LibraryExpressionsBuilder> _logger;
+    public static readonly ParameterExpression ContextParameter = Expression.Parameter(typeof(CqlContext), "context");
 
-    public LibraryExpressionsBuilder(ILogger<LibraryExpressionsBuilder> logger)
+    private readonly ILogger<LibraryExpressionBuilder> _logger;
+    private readonly ExpressionBuilder _expressionBuilder;
+    private readonly OperatorBinding _operatorBinding;
+
+    public LibraryExpressionBuilder(
+        ILogger<LibraryExpressionBuilder> logger,
+        ExpressionBuilder expressionBuilder, 
+        OperatorBinding operatorBinding)
     {
         _logger = logger;
+        _expressionBuilder = expressionBuilder;
+        _operatorBinding = operatorBinding;
     }
 
     /// <summary>
@@ -41,21 +49,21 @@ internal class LibraryExpressionsBuilder
         Elm.Library library)
     {
         var expressionBuilder = new ExpressionBuilder(typeManager, loggerFactory.CreateLogger<ExpressionBuilder>());
-
         var definitions = new DefinitionDictionary<LambdaExpression>();
-        var definitionsBuilderContext =
-            new LibraryExpressionsBuilderContext(expressionBuilder, operatorBinding, definitions, library);
-
-        var libraryExpressionsBuilderLogger = loggerFactory.CreateLogger<LibraryExpressionsBuilder>();
-        var definitionsBuilder = new LibraryExpressionsBuilder(libraryExpressionsBuilderLogger);
-        definitionsBuilder.ProcessLibrary(definitionsBuilderContext);
+        var libraryExpressionsBuilderLogger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
+        var definitionsBuilder = new LibraryExpressionBuilder(libraryExpressionsBuilderLogger, expressionBuilder, operatorBinding);
+        definitionsBuilder.ProcessLibrary(library, definitions);
 
         return definitions;
     }
 
-    public static readonly ParameterExpression ContextParameter = Expression.Parameter(typeof(CqlContext), "context");
+    public void ProcessLibrary(Library library, DefinitionDictionary<LambdaExpression> definitions)
+    {
+        var libctx = new LibraryExpressionBuilderContext(_expressionBuilder, _operatorBinding, definitions, library);
+        ProcessLibrary(libctx);
+    }
 
-    public void ProcessLibrary(LibraryExpressionsBuilderContext libCtx)
+    private void ProcessLibrary(LibraryExpressionBuilderContext libCtx)
     {
         var library = libCtx.Library;
         var libraryKey = libCtx.LibraryKey;
@@ -459,99 +467,4 @@ internal class LibraryExpressionsBuilder
         //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
         return lambda;
     }
-}
-
-/// <summary>
-/// Encapsulates the ExpressionBuilder and state dictionaries for building definitions.
-/// </summary>
-internal class LibraryExpressionsBuilderContext
-{
-    private readonly ExpressionBuilder _expressionBuilder;
-    private readonly OperatorBinding _operatorBinding;
-    private readonly Dictionary<string, string> _localLibraryIdentifiers;
-    private readonly DefinitionDictionary<LambdaExpression> _definitions;
-    private readonly Library _library;
-    private readonly Dictionary<string, CqlCode> _codesByName;
-    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
-
-    public LibraryExpressionsBuilderContext(
-        ExpressionBuilder expressionBuilder,
-        OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> definitions,
-        Library library)
-    {
-        if (string.IsNullOrWhiteSpace(library.NameAndVersion))
-            throw new ArgumentException("Library must have a name and version.");
-
-        if (library.identifier is null) 
-            throw new ArgumentException("Library must have an identifier.");
-
-        _expressionBuilder = expressionBuilder;
-        _operatorBinding = operatorBinding;
-        _definitions = definitions;
-        _library = library;
-        _localLibraryIdentifiers = new();
-        _codesByName = new();
-        _codesByCodeSystemName = new();
-    }
-
-    public Elm.Library Library => _library;
-
-    public string LibraryKey => _library.NameAndVersion!;
-
-    public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
-
-    public ExpressionBuilderContext NewExpressionBuilderContext(
-        Elm.Element element) =>
-        new ExpressionBuilderContext(
-            _operatorBinding,
-            _expressionBuilder,
-            LibraryExpressionsBuilder.ContextParameter,
-            _definitions,
-            _localLibraryIdentifiers,
-            this,
-            element);
-
-    public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
-        _definitions.AddTag(LibraryKey, definition, signature, name, values);
-
-    public void AddDefinition(string definition, LambdaExpression expression) =>
-        _definitions.Add(LibraryKey, definition, expression);
-
-    public void AddDefinition(string definition, Type[] signature, LambdaExpression expression) =>
-        _definitions.Add(LibraryKey, definition, signature, expression);
-
-    public bool ContainsDefinition(string definition, Type[] signature) =>
-        _definitions.ContainsKey(LibraryKey, definition, signature);
-
-    public bool ContainsDefinition(string definition) =>
-        _definitions.ContainsKey(LibraryKey, definition);
-
-    public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
-        _localLibraryIdentifiers.Add(includeAlias, includeNameAndVersion);
-
-    public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
-        _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
-
-    public void AddCode(CodeDef codeDef, CqlCode cqlCode)
-    {
-        _codesByName.Add(codeDef.name, cqlCode);
-
-        var codeSystemName = codeDef.codeSystem!.name;
-        var codings = GetOrCreateCodesByCodeSystemName(codeSystemName);
-        codings.Add(cqlCode);
-    }
-
-    private List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
-    {
-        if (_codesByCodeSystemName.TryGetValue(codeSystemName!, out var codings))
-            return codings;
-
-        codings = new List<CqlCode>();
-        _codesByCodeSystemName.Add(codeSystemName!, codings);
-        return codings;
-    }
-
-    public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
-        _codesByName.TryGetValue(codeRef.name, out systemCode);
 }

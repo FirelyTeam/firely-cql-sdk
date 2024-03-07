@@ -4,17 +4,28 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using System.Linq;
+using System.Linq.Expressions;
+using Hl7.Cql.Packaging;
+using Hl7.Cql.Runtime;
 
 namespace CoreTests
 {
     [TestClass]
     public class ExpressionBuilderTests
     {
-        private ExpressionBuilderService NewExpressionBuilder()
+        private LibraryExpressionBuilder NewLibraryExpressionBuilder()
+        {
+            var loggerFactory = LoggerFactory.Create(logging => logging.AddDebug());
+            var expressionBuilderCreator = new LibraryExpressionBuilderFactory(loggerFactory);
+            return expressionBuilderCreator.LibraryExpressionBuilder;
+        }
+
+        private ExpressionBuilder NewExpressionBuilder()
         {
             var loggerFactory = LoggerFactory.Create(logging => logging.AddDebug());
             var expressionBuilderCreator = new ExpressionBuilderFactory(loggerFactory);
-            return expressionBuilderCreator.ExpressionBuilderService;
+            return expressionBuilderCreator.ExpressionBuilder;
         }
 
         [TestMethod]
@@ -22,7 +33,10 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            _ = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
+            var definitions = new DefinitionDictionary<LambdaExpression>();
+            NewLibraryExpressionBuilder().ProcessLibrary(elmPackage, definitions);
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
         }
 
         [TestMethod]
@@ -30,8 +44,10 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var expressions = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
-            Assert.IsNotNull(expressions);
+            var definitions = new DefinitionDictionary<LambdaExpression>();
+            NewLibraryExpressionBuilder().ProcessLibrary(elmPackage, definitions);
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
         }
 
         [TestMethod]
@@ -39,7 +55,10 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            _ = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
+            var definitions = new DefinitionDictionary<LambdaExpression>();
+            NewLibraryExpressionBuilder().ProcessLibrary(elmPackage, definitions);
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
         }
 
         // https://github.com/FirelyTeam/firely-cql-sdk/issues/129
@@ -54,8 +73,10 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var expressions = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
-            Assert.IsNotNull(expressions);
+            var definitions = new DefinitionDictionary<LambdaExpression>();
+            NewLibraryExpressionBuilder().ProcessLibrary(elmPackage, definitions);
+            Assert.IsNotNull(definitions);
+            Assert.IsTrue(definitions.Libraries.Any());
         }
 
 

@@ -19,7 +19,7 @@ using System.Diagnostics.CodeAnalysis;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="LibraryExpressionBuilder.BuildLibraryDefinitions"/>.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
@@ -32,7 +32,7 @@ namespace Hl7.Cql.Compiler
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers,
-            LibraryExpressionsBuilderContext libContext,
+            LibraryExpressionBuilderContext libContext,
             elm.Element element)
         {
             _element = element;
@@ -87,7 +87,7 @@ namespace Hl7.Cql.Compiler
             _scopes = scopes;
         }
 
-        internal LibraryExpressionsBuilderContext LibraryContext { get; }
+        internal LibraryExpressionBuilderContext LibraryContext { get; }
 
         /// <summary>
         /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
@@ -114,6 +114,7 @@ namespace Hl7.Cql.Compiler
         /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
         /// </summary>
         public ExpressionBuilder Builder { get; }
+
         /// <summary>
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
         /// </summary>

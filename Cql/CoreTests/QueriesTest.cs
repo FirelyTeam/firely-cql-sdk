@@ -33,7 +33,7 @@ namespace CoreTests
             var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var expressions = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
+            var expressions = LibraryExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
             QueriesDefinitions = expressions
                 .CompileAll();
             ValueSets = new HashValueSetDictionary();
@@ -43,7 +43,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            expressions = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
+            expressions = LibraryExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
             AggregatesDefinitions = expressions
                 .CompileAll();
 

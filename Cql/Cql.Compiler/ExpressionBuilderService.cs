@@ -25,7 +25,7 @@ internal class ExpressionBuilderService
     }
 
     public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(Library library) => 
-        LibraryExpressionsBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _loggerFactory, library);
+        LibraryExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _loggerFactory, library);
 
     public MemberInfo? GetProperty(
         Type type,

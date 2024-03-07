@@ -3537,7 +3537,7 @@ namespace CoreTests
             var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var expressions = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
+            var expressions = LibraryExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
             var writerLogger = LoggerFactory.CreateLogger<CSharpSourceCodeWriter>();
 
             var writer = new CSharpSourceCodeWriter(writerLogger, TypeResolver);

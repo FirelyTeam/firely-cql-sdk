@@ -41,7 +41,7 @@ namespace Hl7.Cql.Compiler
         /// Creates an instance.
         /// </summary>
         /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced.</param>
-        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/>.</param>
+        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="LibraryExpressionBuilder.BuildLibraryDefinitions"/>.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
         public ExpressionBuilder(
             TypeManager typeManager,
@@ -53,8 +53,8 @@ namespace Hl7.Cql.Compiler
         }
 
         /// <summary>
-        /// Gets the settings used during <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/>.
-        /// These should be set as desired before <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/> is called.
+        /// Gets the settings used during <see cref="LibraryExpressionBuilder.BuildLibraryDefinitions"/>.
+        /// These should be set as desired before <see cref="LibraryExpressionBuilder.BuildLibraryDefinitions"/> is called.
         /// </summary>
         public ExpressionBuilderSettings Settings { get; }
 
@@ -85,8 +85,7 @@ namespace Hl7.Cql.Compiler
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            var localLibraryIdentifiers = new Dictionary<string, string>();
-            var libraryExpressionsBuilderContext = new LibraryExpressionsBuilderContext(this, operatorBinding, lambdas, library);
+            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(this, operatorBinding, lambdas, library);
             var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);

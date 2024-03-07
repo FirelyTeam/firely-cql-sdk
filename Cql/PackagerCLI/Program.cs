@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
@@ -110,6 +111,8 @@ public class Program
         services.TryAddTypeServices();
         services.TryAddCompilationServices();
         services.TryAddSingleton<LibraryPackager>();
+        services.TryAddSingleton<ExpressionBuilder>();
+        services.TryAddSingleton<LibraryExpressionBuilder>();
         services.TryAddSingleton<OptionsConsoleDumper>();
     }
 

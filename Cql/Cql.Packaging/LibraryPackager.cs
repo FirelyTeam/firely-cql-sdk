@@ -1,4 +1,5 @@
 using System.Collections.Concurrent;
+using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Runtime.Loader;
 using System.Text;
@@ -10,6 +11,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using JetBrains.Annotations;
 using Microsoft.Extensions.DependencyInjection;
@@ -24,18 +26,18 @@ internal class LibraryPackager
     private readonly AssemblyCompiler _assemblyCompiler;
     private readonly ILogger<LibraryPackager> _logger;
     private readonly TypeResolver _typeResolver;
-    private readonly ExpressionBuilderService _expressionBuilderService;
+    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
     public LibraryPackager(
         ILogger<LibraryPackager> logger,
         [FromKeyedServices("Fhir")] TypeResolver typeResolver,
         AssemblyCompiler assemblyCompiler,
-        ExpressionBuilderService expressionBuilderService)
+        LibraryExpressionBuilder libraryExpressionBuilder)
     {
         _logger = logger;
         _typeResolver = typeResolver;
         _assemblyCompiler = assemblyCompiler;
-        _expressionBuilderService = expressionBuilderService;
+        _libraryExpressionBuilder = libraryExpressionBuilder;
     }
 
     internal IEnumerable<Resource> PackageResources(
@@ -47,18 +49,7 @@ internal class LibraryPackager
         // Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
         // while we try to continue building the rest of the artifacts up until the point of failure.
 
-        List<Elm.Library> elmLibraries = new();
-        ExceptionDispatchInfo? exception = null;
-        try
-        {
-            foreach (var library in GetSortedBuildElmLibraries(packageGraph))
-                elmLibraries.Add(library);
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e, "Exception occurred while processing elm libraries.");
-            exception = ExceptionDispatchInfo.Capture(e);
-        }
+        List<Elm.Library> elmLibraries = GetSortedElmLibraries(packageGraph).ToList();
 
         try
         {
@@ -183,30 +174,12 @@ internal class LibraryPackager
         }
     }
 
-    private IEnumerable<Elm.Library> GetSortedBuildElmLibraries(DirectedGraph packageGraph)
-    {
-        var elmLibraries =
-            packageGraph
-                .TopologicalSort()
-                .Select(node => node.Properties?[Elm.Library.LibraryNodeProperty])
-                .OfType<Elm.Library>()
-                .ToArray();
-
-        foreach (var (library, ordinal) in elmLibraries.WithOrdinals())
-        {
-            try
-            {
-                _expressionBuilderService.BuildLibraryDefinitions(library);
-            }
-            catch (Exception e)
-            {
-                throw new InvalidOperationException(
-                    $"Failed building the {ordinal} of {elmLibraries.Length} libraries '{library.NameAndVersion}'. See InnerException for more details.",
-                    e);
-            }
-            yield return library;
-        }
-    }
+    private IEnumerable<Elm.Library> GetSortedElmLibraries(DirectedGraph packageGraph) =>
+        packageGraph
+            .TopologicalSort()
+            .Select(node => node.Properties?[Elm.Library.LibraryNodeProperty])
+            .OfType<Elm.Library>()
+            .ToArray();
 
     private static Library CreateLibraryResource(
         FileInfo elmFile,
