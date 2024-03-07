@@ -168,10 +168,10 @@ partial class ExpressionBuilder
                 }
             }
 
-            Exception ExceptionWhileBuilding(string elmType, Ordinal ordinal, int count, string elementName, string locator,
+            Exception ExceptionWhileBuilding(string elmType, int ordinal, int count, string elementName, string locator,
                 Exception innerException) =>
                 throw new ExpressionBuildingException(
-                    message: $"Exception while building the {ordinal} of {count} {elmType} '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
+                    message: $"Exception while building the {new Ordinal(ordinal+1)} of {count} {elmType} '{elementName} ' in library '{libraryKey}' at location '{locator}'. See InnerException for more details.",
                     innerException: innerException);
         }
 

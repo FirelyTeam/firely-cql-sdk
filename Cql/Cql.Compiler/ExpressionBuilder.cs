@@ -1274,7 +1274,7 @@ namespace Hl7.Cql.Compiler
                                .Select(element =>
                                {
                                    var value = TranslateExpression(element.value!, ctx);
-                                   var memberInfo = TryGetProperty(tupleType, ExpressionBuilderContext.NormalizeIdentifier(element.name!)!) 
+                                   var memberInfo = GetProperty(tupleType, ExpressionBuilderContext.NormalizeIdentifier(element.name!)!) 
                                                     ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(tupleType!)}");
                                    var binding = Binding(value, memberInfo, ctx);
                                    return binding;
@@ -1502,7 +1502,7 @@ namespace Hl7.Cql.Compiler
                     var tuple = tuples[i];
                     var element = tuple.Item1;
                     var expression = tuple.Item2;
-                    var memberInfo = TryGetProperty(instanceType!, element) ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType!)}");
+                    var memberInfo = GetProperty(instanceType!, element) ?? throw ctx.NewExpressionBuildingException($"Could not find member {element} on type {TypeManager.PrettyTypeName(instanceType!)}");
                     var binding = Binding(expression, memberInfo, ctx);
                     elementBindings[i] = binding;
                 }
@@ -2274,7 +2274,7 @@ namespace Hl7.Cql.Compiler
             throw ctx.NewExpressionBuildingException($"Parameter {op.name} hasn't been defined yet.");
         }
 
-        protected internal MemberInfo? TryGetProperty(Type type, string name)
+        protected internal MemberInfo? GetProperty(Type type, string name)
         {
             if (type.IsGenericType)
             {
