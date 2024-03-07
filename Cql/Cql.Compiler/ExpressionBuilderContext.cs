@@ -8,15 +8,13 @@
 
 using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
-using Hl7.Fhir.Language.Debugging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.Compiler
 {
@@ -28,9 +26,6 @@ namespace Hl7.Cql.Compiler
     /// </remarks>
     internal partial class ExpressionBuilderContext
     {
-
-        internal LibraryExpressionsBuilderContext LibraryContext { get; init; }
-
         internal ExpressionBuilderContext(
             OperatorBinding operatorBinding, 
             ExpressionBuilder builder,
@@ -52,6 +47,8 @@ namespace Hl7.Cql.Compiler
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
             _scopes = new Dictionary<string, (Expression, elm.Element)>();
             LibraryContext = libContext;
+            ExpressionMutators = new List<IExpressionMutator>();
+            CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
 
         private ExpressionBuilderContext(
@@ -69,6 +66,8 @@ namespace Hl7.Cql.Compiler
             Libraries = source.Libraries;
             _scopes = source._scopes;
             LibraryContext = source.LibraryContext;
+            ExpressionMutators = source.ExpressionMutators;
+            CustomImplementations = source.CustomImplementations;
         }
 
         private ExpressionBuilderContext(
@@ -87,6 +86,29 @@ namespace Hl7.Cql.Compiler
         {
             _scopes = scopes;
         }
+
+        internal LibraryExpressionsBuilderContext LibraryContext { get; }
+
+        /// <summary>
+        /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
+        /// to a factory which will produce a <see cref="LambdaExpression"/> given the values of <see cref="ParameterExpression"/>.
+        /// </summary>
+        /// <remarks>
+        /// This function can be used to provide .NET native functions in place of ELM functions, and should also be used to implement
+        /// functions defined in CQL with the <code>external</code> keyword.
+        /// </remarks> 
+        private IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
+
+
+        public bool TryGetCustomImplementationByExpressionKey(
+            string expressionKey,
+            [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) =>
+            CustomImplementations.TryGetValue(expressionKey, out factory);
+
+        /// <summary>
+        /// The expression visitors that will be executed (in order) on translated expressions.
+        /// </summary>
+        private IList<IExpressionMutator> ExpressionMutators { get; }
 
         /// <summary>
         /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
@@ -258,6 +280,15 @@ namespace Hl7.Cql.Compiler
             }
 
             return new ExpressionBuilderContext(this, element: element);
+        }
+
+        public Expression? Mutate(elm.Element op, Expression? expression)
+        {
+            foreach (var visitor in ExpressionMutators)
+            {
+                expression = visitor.Mutate(expression!, op, this);
+            }
+            return expression;
         }
     }
 }

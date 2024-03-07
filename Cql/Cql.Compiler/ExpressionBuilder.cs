@@ -50,8 +50,6 @@ namespace Hl7.Cql.Compiler
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
             Settings = new ExpressionBuilderSettings();
-            CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
-            ExpressionMutators = new List<IExpressionMutator>();
         }
 
         /// <summary>
@@ -60,23 +58,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         public ExpressionBuilderSettings Settings { get; }
 
-        /// <summary>
-        /// A dictionary which maps qualified definition names in the form of {<see cref="Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
-        /// to a factory which will produce a <see cref="LambdaExpression"/> given the values of <see cref="ParameterExpression"/>.
-        /// </summary>
-        /// <remarks>
-        /// This function can be used to provide .NET native functions in place of ELM functions, and should also be used to implement
-        /// functions defined in CQL with the <code>external</code> keyword.
-        /// </remarks> 
-        public IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
-
         private ILogger<ExpressionBuilder> Logger { get; }
-
-
-        /// <summary>
-        /// The expression visitors that will be executed (in order) on translated expressions.
-        /// </summary>
-        private IList<IExpressionMutator> ExpressionMutators { get; }
 
         /// <summary>
         /// The <see cref="TypeManager"/> used to resolve and create types referenced in <see cref="Library"/>.
@@ -632,11 +614,8 @@ namespace Hl7.Cql.Compiler
                     break;
                 default: throw ctx.NewExpressionBuildingException($"Expression {op.GetType().FullName} is not implemented.");
             }
-            foreach (var visitor in ExpressionMutators)
-            {
-                if (visitor != null)
-                    expression = visitor.Mutate(expression!, op, ctx);
-            }
+
+            expression = ctx.Mutate(op, expression);
             return expression!;
         }
 

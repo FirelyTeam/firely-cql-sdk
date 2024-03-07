@@ -330,7 +330,7 @@ internal class LibraryExpressionsBuilder
             parameters = parameters
                 .Concat(ctx.Operands.Values)
                 .ToArray();
-            if (ctx.LibraryContext.TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
+            if (ctx.TryGetCustomImplementationByExpressionKey(expressionKey, out var factory))
             {
                 var customLambda = factory(parameters);
                 ctx.LibraryContext.AddDefinition(expressionDef.name, functionParameterTypes, customLambda);
@@ -339,8 +339,6 @@ internal class LibraryExpressionsBuilder
 
             if (function?.external ?? false)
             {
-                var message = $"{expressionKey} is declared external, but {nameof(ExpressionBuilder.CustomImplementations)} does not define this function.";
-                _logger.LogError(ctx.FormatMessage(message, expressionDef));
                 if (ctx.LibraryContext.AllowUnresolvedExternals)
                 {
                     var returnType = ctx.Builder.TypeFor(expressionDef, ctx)!;
@@ -352,7 +350,7 @@ internal class LibraryExpressionsBuilder
                     return;
                 }
 
-                throw ctx.NewExpressionBuildingException(message, null);
+                throw ctx.NewExpressionBuildingException($"{expressionKey} is declared external, but it was not defined in the expression scope.");
             }
         }
 
@@ -513,11 +511,6 @@ internal class LibraryExpressionsBuilderContext
             _localLibraryIdentifiers,
             this,
             element);
-
-    public bool TryGetCustomImplementationByExpressionKey(
-        string expressionKey,
-        [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) =>
-        _expressionBuilder.CustomImplementations.TryGetValue(expressionKey, out factory);
 
     public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
         _definitions.AddTag(LibraryKey, definition, signature, name, values);
