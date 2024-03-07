@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
+using Hl7.Fhir.Language.Debugging;
 
 namespace Hl7.Cql.Compiler
 {
@@ -49,12 +50,10 @@ namespace Hl7.Cql.Compiler
         }
 
         private ExpressionBuilderContext(
-            ExpressionBuilderContext source,
-            Elm.Element? overrideElement = null,
-            IDictionary<string, (Expression, elm.Element)>? overrideScopes = null)
+            ExpressionBuilderContext source)
         {
-            _operatorBinding = new OperatorBindingRethrowDecorator(this, source._operatorBinding.Inner);
-            _element = overrideElement ?? source._element;
+            _operatorBinding = source._operatorBinding;
+            _element = source._element;
             _outerContext = source._outerContext;
             Builder = source.Builder;
             RuntimeContextParameter = source.RuntimeContextParameter;
@@ -63,7 +62,23 @@ namespace Hl7.Cql.Compiler
             ImpliedAlias = source.ImpliedAlias;
             Operands = source.Operands;
             Libraries = source.Libraries;
-            _scopes = overrideScopes ?? source._scopes;
+            _scopes = source._scopes;
+        }
+
+        private ExpressionBuilderContext(
+            ExpressionBuilderContext outer,
+            Elm.Element element) : this(outer)
+        {
+            _outerContext = outer;
+            _operatorBinding = new OperatorBindingRethrowDecorator(this, outer._operatorBinding.Inner);
+            _element = element;
+        }
+
+        private ExpressionBuilderContext(
+            ExpressionBuilderContext outer,
+            IDictionary<string, (Expression, elm.Element)> scopes) : this(outer)
+        {
+            _scopes = scopes;
         }
 
         /// <summary>
@@ -222,13 +237,13 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         private ExpressionBuilderContext WithScopes(
             IDictionary<string, (Expression, elm.Element)> scopes) =>
-            new(this, overrideScopes: scopes);
+            new(this, scopes: scopes);
 
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
         internal ExpressionBuilderContext Deeper(elm.Element element) => 
-            new(this, overrideElement: element);
+            new(this, element: element);
 
         internal void LogWarning(string message, elm.Element? expression = null)
         {
