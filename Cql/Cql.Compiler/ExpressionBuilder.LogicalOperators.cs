@@ -39,5 +39,9 @@ namespace Hl7.Cql.Compiler
             UnaryOperator(CqlOperator.Not, e, ctx);
         protected Expression Xor(elm.Xor e, ExpressionBuilderContext ctx) =>
             BinaryOperator(CqlOperator.Xor, e, ctx);
+
+        public Type TypeFor(elm.TypeSpecifier resultTypeSpecifier, ExpressionBuilderContext ctx) => TypeManager.TypeFor(resultTypeSpecifier, ctx);
+
+        public Type? TypeFor(elm.Element element, ExpressionBuilderContext ctx, bool throwIfNotFound = true) => TypeManager.TypeFor(element, ctx, throwIfNotFound);
     }
 }

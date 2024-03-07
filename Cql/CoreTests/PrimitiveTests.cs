@@ -29,9 +29,9 @@ namespace CoreTests
         private static readonly Hl7.Cql.Conversion.TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
 
-        private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
-            .Create(logging => logging.AddDebug())
-            .CreateLogger<ExpressionBuilder>();
+        private static ILoggerFactory LoggerFactory { get; } =
+            Microsoft.Extensions.Logging.LoggerFactory
+                .Create(logging => logging.AddDebug());
 
         private static readonly LambdasFacade LambdasByTestName = new();
 
@@ -3537,11 +3537,8 @@ namespace CoreTests
             var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var logger = CreateLogger();
-            var expressions = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
-            var writerLogger = LoggerFactory
-             .Create(logging => logging.AddDebug())
-             .CreateLogger<CSharpSourceCodeWriter>();
+            var expressions = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
+            var writerLogger = LoggerFactory.CreateLogger<CSharpSourceCodeWriter>();
 
             var writer = new CSharpSourceCodeWriter(writerLogger, TypeResolver);
             var graph = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\libs"));

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Xml.Linq;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging;
@@ -11,29 +10,28 @@ namespace Hl7.Cql.Compiler;
 
 internal class ExpressionBuilderService
 {
-    private readonly ILogger<ExpressionBuilder> _logger;
+    private readonly ILoggerFactory _loggerFactory;
     private readonly OperatorBinding _operatorBinding;
     private readonly TypeManager _typeManager;
 
     public ExpressionBuilderService(
-        ILogger<ExpressionBuilder> logger, 
+        ILoggerFactory loggerFactory, 
         OperatorBinding operatorBinding,
         TypeManager typeManager)
     {
-        _logger = logger;
+        _loggerFactory = loggerFactory;
         _operatorBinding = operatorBinding;
         _typeManager = typeManager;
     }
 
     public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(Library library) => 
-        ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _logger, library);
+        LibraryExpressionsBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _loggerFactory, library);
 
     public MemberInfo? GetProperty(
-        Library library,
         Type type,
         string name)
     {
-        var expressionBuilder = new ExpressionBuilder(_typeManager, _logger, library);
+        var expressionBuilder = new ExpressionBuilder(_typeManager, _loggerFactory.CreateLogger<ExpressionBuilder>());
         return expressionBuilder.GetProperty(type, name);
     }
 
@@ -43,7 +41,7 @@ internal class ExpressionBuilderService
         OperatorBinding operatorBinding,
         DefinitionDictionary<LambdaExpression>? lambdas = null)
     {
-        var expressionBuilder = new ExpressionBuilder(_typeManager, _logger, library);
-        return expressionBuilder.Lambda(expression, operatorBinding, lambdas/*, ctx*/);
+        var expressionBuilder = new ExpressionBuilder(_typeManager, _loggerFactory.CreateLogger<ExpressionBuilder>());
+        return expressionBuilder.Lambda(library, expression, operatorBinding, lambdas);
     }
 }

@@ -22,6 +22,9 @@ namespace CoreTests
     {
         private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
         private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
+        private static ILoggerFactory LoggerFactory { get; } =
+            Microsoft.Extensions.Logging.LoggerFactory
+                .Create(logging => logging.AddDebug());
 
         [ClassInitialize]
         public static void Initialize(TestContext context)
@@ -30,10 +33,7 @@ namespace CoreTests
             var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var logger = LoggerFactory
-                .Create(logging => logging.AddDebug())
-                .CreateLogger<ExpressionBuilder>();
-            var expressions = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
+            var expressions = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
             QueriesDefinitions = expressions
                 .CompileAll();
             ValueSets = new HashValueSetDictionary();
@@ -43,7 +43,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            expressions = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
+            expressions = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
             AggregatesDefinitions = expressions
                 .CompileAll();
 

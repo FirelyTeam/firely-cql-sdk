@@ -62,15 +62,7 @@ namespace CoreTests
         [TestMethod]
         public void Get_Property_Uses_TypeResolver()
         {
-            var lib = new Hl7.Cql.Elm.Library
-            {
-                identifier = new Hl7.Cql.Elm.VersionedIdentifier()
-                {
-                    id = "Id"
-                }
-            };
-
-            var property = NewExpressionBuilder().GetProperty(lib, typeof(MeasureReport.PopulationComponent), "id");
+            var property = NewExpressionBuilder().GetProperty(typeof(MeasureReport.PopulationComponent), "id");
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

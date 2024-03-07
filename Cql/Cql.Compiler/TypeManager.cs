@@ -30,22 +30,27 @@ namespace Hl7.Cql.Compiler
         /// Gets the assembly name for any generated types created by this type manager.
         /// </summary>
         public string AssemblyName { get; }
+
         /// <summary>
         /// Gets the <see cref="TypeResolver"/> this TypeManager uses.
         /// </summary>
         public TypeResolver Resolver { get; }
+
         /// <summary>
         /// Gets the namespace for generated tuple types as supplied in the constructor.
         /// </summary>
         public string TupleTypeNamespace { get; }
+
         /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
         /// </summary>
         public IEnumerable<Type> TupleTypes => TupleTypeList;
 
-        private readonly List<Type> TupleTypeList = new List<Type>();
+        private readonly List<Type> TupleTypeList;
+
         private ModuleBuilder ModuleBuilder { get; }
-        internal Hasher Hasher { get; } = new Hasher();
+
+        private Hasher Hasher { get; }
 
         /// <summary>
         /// Creates an instance with the specified resolver, assembly name, and tuple type namespace.
@@ -54,7 +59,10 @@ namespace Hl7.Cql.Compiler
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
         /// <param name="tupleTypeNamespace">The namespace of all generated tuple types.  If not specified, the value will be "Tuples".</param>
         /// <exception cref="ArgumentNullException">If <paramref name="resolver"/> is <c>null</c>.</exception>
-        public TypeManager(TypeResolver resolver, string assemblyName = "Tuples", string? tupleTypeNamespace = "Tuples")
+        public TypeManager(
+            TypeResolver resolver,
+            string assemblyName = "Tuples",
+            string? tupleTypeNamespace = "Tuples")
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
                 assemblyName = "Tuples";
@@ -62,6 +70,8 @@ namespace Hl7.Cql.Compiler
                 tupleTypeNamespace = "Tuples";
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
+            TupleTypeList = new List<Type>();
+            Hasher = new Hasher();
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             TupleTypeNamespace = tupleTypeNamespace;
@@ -83,7 +93,7 @@ namespace Hl7.Cql.Compiler
             {
                 case ExpressionRef expressionRef:
                 {
-                    var libraryName = expressionRef.libraryName ?? ctx.Builder.LibraryKey;
+                    var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
                     if (!ctx.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 

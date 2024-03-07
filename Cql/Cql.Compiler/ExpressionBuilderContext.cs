@@ -21,7 +21,7 @@ using Hl7.Fhir.Language.Debugging;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.BuildLibraryDefinitions"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/>.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
@@ -29,12 +29,15 @@ namespace Hl7.Cql.Compiler
     internal partial class ExpressionBuilderContext
     {
 
+        internal LibraryExpressionsBuilderContext LibraryContext { get; init; }
+
         internal ExpressionBuilderContext(
             OperatorBinding operatorBinding, 
             ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers,
+            LibraryExpressionsBuilderContext libContext,
             elm.Element element)
         {
             _element = element;
@@ -48,6 +51,7 @@ namespace Hl7.Cql.Compiler
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
             _scopes = new Dictionary<string, (Expression, elm.Element)>();
+            LibraryContext = libContext;
         }
 
         private ExpressionBuilderContext(
@@ -64,6 +68,7 @@ namespace Hl7.Cql.Compiler
             Operands = source.Operands;
             Libraries = source.Libraries;
             _scopes = source._scopes;
+            LibraryContext = source.LibraryContext;
         }
 
         private ExpressionBuilderContext(
@@ -269,19 +274,11 @@ namespace Hl7.Cql.Compiler
         private string FormatMessage(string message, elm.Element? element)
         {
             var locator = element?.locator;
-            var libraryKey = Builder.Library.NameAndVersion;
-            if (libraryKey is null)
-                throw NewExpressionBuildingException("Library name and version is null");
+            var libraryKey = LibraryContext.LibraryKey;
 
             return string.IsNullOrWhiteSpace(locator) 
                 ? $"{libraryKey}: {message}"
                 : $"{libraryKey} line {locator}: {message}";
         }
-
-        public Type TypeFor(elm.TypeSpecifier resultTypeSpecifier) => 
-            Builder.TypeManager.TypeFor(resultTypeSpecifier, this);
-
-        public Type? TypeFor(elm.Element element, bool throwIfNotFound = true) =>
-            Builder.TypeManager.TypeFor(element, this, throwIfNotFound);
     }
 }

@@ -23,9 +23,9 @@ namespace CoreTests
         public const string NotSupported = "Not supported";
         public const string BadTest = "Test is nonsensical";
 
-        private static ILogger<ExpressionBuilder> CreateLogger() => LoggerFactory
-            .Create(logging => logging.AddDebug())
-            .CreateLogger<ExpressionBuilder>();
+        private static ILoggerFactory LoggerFactory { get; } = 
+            Microsoft.Extensions.Logging.LoggerFactory
+            .Create(logging => logging.AddDebug());
 
         private static readonly LambdasFacade LambdasByTestName = new();
 
@@ -50,7 +50,7 @@ namespace CoreTests
             var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            var fhirHelpersLambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, CreateLogger(), fhirHelpersPackage);
+            var fhirHelpersLambdas = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, fhirHelpersPackage);
             LambdasByTestName.Lambdas.Merge(fhirHelpersLambdas);
 
 
@@ -61,19 +61,13 @@ namespace CoreTests
                 //    continue;
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
                 var includes = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
-                var lambdas = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, CreateLogger(), elmPackage);
+                var lambdas = LibraryExpressionsBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
                 LambdasByTestName.Lambdas.Merge(lambdas);
             }
 
             var buildOrder = new DirectedGraph();
             MergeAllCqlInto(hl7TestDirectory, buildOrder);
             MergeAllCqlInto(new DirectoryInfo(@"Input\ELM\Libs"), buildOrder);
-
-            var logFactory = LoggerFactory
-                .Create(logging =>
-                {
-                    logging.AddConsole();
-                });
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
             Context = FhirCqlContext.WithDataSource(delegates: allDelegates);

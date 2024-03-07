@@ -40,30 +40,23 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Creates an instance.
         /// </summary>
-        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced in <paramref name="library"/>.</param>
-        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="BuildLibraryDefinitions"/>.</param>
-        /// <param name="library">The <see cref="Library"/> this builder will build.</param>
+        /// <param name="typeManager">The <see cref="TypeManager"/> used to resolve and create types referenced.</param>
+        /// <param name="logger">The <see cref="ILogger{ExpressionBuilder}"/> used to log all messages issued during <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/>.</param>
         /// <exception cref="ArgumentNullException">If any argument is <see langword="null"/></exception>
-        /// <exception cref="ArgumentException">If the <paramref name="library"/> does not have a valid library or identifier.</exception>
         public ExpressionBuilder(
             TypeManager typeManager,
-            ILogger<ExpressionBuilder> logger,
-            Library library)
+            ILogger<ExpressionBuilder> logger)
         {
             TypeManager = typeManager ?? throw new ArgumentNullException(nameof(typeManager));
-            Library = library ?? throw new ArgumentNullException(nameof(library));
             Logger = logger ?? throw new ArgumentNullException(nameof(logger));
-            if (Library.identifier is null) throw new InvalidOperationException("The library identifier must not be null.");
-            if (Library.NameAndVersion is null) throw new InvalidOperationException("The library name and version must not be null.");
-
             Settings = new ExpressionBuilderSettings();
             CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
             ExpressionMutators = new List<IExpressionMutator>();
         }
 
         /// <summary>
-        /// Gets the settings used during <see cref="BuildLibraryDefinitions"/>.
-        /// These should be set as desired before <see cref="BuildLibraryDefinitions"/> is called.
+        /// Gets the settings used during <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/>.
+        /// These should be set as desired before <see cref="LibraryExpressionsBuilder.BuildLibraryDefinitions"/> is called.
         /// </summary>
         public ExpressionBuilderSettings Settings { get; }
 
@@ -88,17 +81,7 @@ namespace Hl7.Cql.Compiler
         /// The <see cref="TypeManager"/> used to resolve and create types referenced in <see cref="Library"/>.
         /// </summary>
 
-        public TypeManager TypeManager { get; }
-
-        /// <summary>
-        /// The <see cref="Library"/> this builder will build.
-        /// </summary>
-        public Library Library { get; }
-
-        /// <summary>
-        /// The Name and Version of the Library.
-        /// </summary>
-        public string LibraryKey => Library.NameAndVersion!;
+        private TypeManager TypeManager { get; }
 
         /// <summary>
         /// Generates a lambda expression taking a <see cref="CqlContext"/> parameter whose body is
@@ -107,10 +90,12 @@ namespace Hl7.Cql.Compiler
         /// <remarks>
         /// This can be compiled to a <see cref="Delegate"/> and executed to resolve a value.
         /// </remarks>
+        /// <param name="library">The containing ELM library</param>
         /// <param name="expression">The ELM expression to convert</param>
         /// <param name="operatorBinding">The <see cref="Compiler.OperatorBinding"/> used to invoke <see cref="CqlOperator"/>.</param>
         /// <param name="lambdas">Existing lambdas, required if <paramref name="expression"/> contains any references to other ELM definitions</param>
         public LambdaExpression Lambda(
+            Elm.Library library,
             Elm.Expression expression,
             OperatorBinding operatorBinding,
             DefinitionDictionary<LambdaExpression>? lambdas = null)
@@ -118,7 +103,8 @@ namespace Hl7.Cql.Compiler
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
             var localLibraryIdentifiers = new Dictionary<string, string>();
-            var ctx = new ExpressionBuilderContext( operatorBinding, this, parameter, lambdas, localLibraryIdentifiers, expression);
+            var libraryExpressionsBuilderContext = new LibraryExpressionsBuilderContext(this, operatorBinding, lambdas, library);
+            var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;
@@ -940,7 +926,7 @@ namespace Hl7.Cql.Compiler
                         var parameterName = "@this";
                         var returnElementType = TypeManager.Resolver.GetListElementType(@return.Type, true)!;
                         var sortMemberParameter = Expression.Parameter(returnElementType, parameterName);
-                        var pathMemberType = ctx.TypeFor(byColumn);
+                        var pathMemberType = TypeFor(byColumn, ctx);
                         if (pathMemberType == null)
                         {
                             var msg = $"Type specifier {by.resultTypeName} at {by.locator ?? "unknown"} could not be resolved.";
@@ -1222,7 +1208,7 @@ namespace Hl7.Cql.Compiler
         {
             if (string.IsNullOrWhiteSpace(valueSetRef.name))
                 throw ctx.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-            var type = ctx.TypeFor(valueSetRef, throwIfNotFound: true)!;
+            var type = TypeFor(valueSetRef, ctx, throwIfNotFound: true)!;
             var cqlValueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name, valueSetRef.libraryName, typeof(CqlValueSet), ctx);
 
             if (IsOrImplementsIEnumerableOfT(type))
@@ -1617,7 +1603,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression Null(Null @null, ExpressionBuilderContext ctx)
         {
-            var nullType = ctx.TypeFor(@null, false) ?? typeof(object);
+            var nullType = TypeFor(@null, ctx) ?? typeof(object);
             var constant = Expression.Constant(null, nullType);
             return constant;
         }
@@ -1936,7 +1922,7 @@ namespace Hl7.Cql.Compiler
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = ctx.GetScopeExpression(op.scope!);
-                var expectedType = ctx.TypeFor(op, false) ?? typeof(object);
+                var expectedType = TypeFor(op, ctx) ?? typeof(object);
                 var pathMemberInfo = TypeManager.Resolver.GetProperty(scopeExpression.Type, path!) ??
                     TypeManager.Resolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -1960,7 +1946,7 @@ namespace Hl7.Cql.Compiler
                 //    return call;
                 //}
                 string message = $"TypeManager failed to resolve type.";
-                var resultType = ctx.TypeFor(op, false) ?? throw ctx.NewExpressionBuildingException(message);
+                var resultType = TypeFor(op, ctx) ?? throw ctx.NewExpressionBuildingException(message);
                 if (resultType != propogate.Type)
                 {
                     propogate = ChangeType(propogate, resultType, ctx);
@@ -1988,7 +1974,7 @@ namespace Hl7.Cql.Compiler
                 }
                 else
                 {
-                    var expectedType = ctx.TypeFor(op, throwIfNotFound: true)!;
+                    var expectedType = TypeFor(op, ctx, throwIfNotFound: true)!;
                     var result = PropertyHelper(source, path, expectedType, ctx);
                     return result;
                 }
@@ -2242,12 +2228,11 @@ namespace Hl7.Cql.Compiler
             }
             else
             {
-                var def = Library.statements?
-                    .SingleOrDefault(d => d.name == expressionRef.name);
+                var def = ctx.LibraryContext.Library.statements?.SingleOrDefault(d => d.name == expressionRef.name);
                 if (def != null)
                 {
                     ctx = ctx.Deeper(def);
-                    expressionType = ctx.TypeFor(def);
+                    expressionType = TypeFor(def, ctx);
                 }
                 else throw new NotSupportedException("Unable to resolve expression reference type.");
             }
@@ -2261,11 +2246,7 @@ namespace Hl7.Cql.Compiler
 
         protected Expression ParameterRef(ParameterRef op, ExpressionBuilderContext ctx)
         {
-            var libraryKey = Library.NameAndVersion;
-            if (libraryKey is null)
-                throw ctx.NewExpressionBuildingException("Library name and version is null.");
-
-            if (ctx.Definitions.TryGetValue(libraryKey, op.name!, out var lambda) && lambda != null)
+            if (ctx.Definitions.TryGetValue(ctx.LibraryContext.LibraryKey, op.name!, out var lambda) && lambda != null)
             {
                 var invoke = InvokeDefinitionThroughRuntimeContext(op.name!, null, lambda, ctx);
                 return invoke;
@@ -2308,22 +2289,22 @@ namespace Hl7.Cql.Compiler
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
             string? libraryName;
-            if (!string.IsNullOrWhiteSpace(libraryAlias))
+            if (string.IsNullOrWhiteSpace(libraryAlias))
             {
-                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
-                    throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
+                libraryName = ctx.LibraryContext.LibraryKey;
             }
             else
             {
-                libraryName = Library.NameAndVersion;
-                if (libraryName is null)
-                    throw ctx.NewExpressionBuildingException("Library name and version is null.");
+                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
+                    throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
             }
 
             return new FunctionCallExpression(definitionsProperty, libraryName, name, arguments, definitionType);
         }
 
-        protected Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
+        protected Expression InvokeDefinitionThroughRuntimeContext(
+            string name, 
+            string? libraryAlias,
             LambdaExpression definition,
             ExpressionBuilderContext ctx)
         {
@@ -2338,23 +2319,24 @@ namespace Hl7.Cql.Compiler
             else throw ctx.NewExpressionBuildingException("LambdaExpressions should be a variant of Func<>");
         }
 
-        protected Expression InvokeDefinitionThroughRuntimeContext(string name, string? libraryAlias,
-        Type definitionReturnType,
-        ExpressionBuilderContext ctx)
+        protected Expression InvokeDefinitionThroughRuntimeContext(
+            string name, 
+            string? libraryAlias,
+            Type definitionReturnType,
+            ExpressionBuilderContext ctx)
         {
             var definitionsProperty = Expression.Property(ctx.RuntimeContextParameter, typeof(CqlContext).GetProperty(nameof(CqlContext.Definitions))!);
 
             string? libraryName;
-            if (!string.IsNullOrWhiteSpace(libraryAlias))
+            if (string.IsNullOrWhiteSpace(libraryAlias))
             {
-                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
-                    throw ctx.NewExpressionBuildingException($"Local library {libraryAlias} is not defined; are you missing a using statement?");
+                libraryName = ctx.LibraryContext.LibraryKey;
             }
             else
             {
-                libraryName = Library.NameAndVersion;
-                if (libraryName is null)
-                    throw ctx.NewExpressionBuildingException("Library name and version is null.");
+                if (!ctx.LocalLibraryIdentifiers.TryGetValue(libraryAlias, out libraryName))
+                    throw ctx.NewExpressionBuildingException(
+                        $"Local library {libraryAlias} is not defined; are you missing a using statement?");
             }
 
             var funcType = typeof(Func<,>).MakeGenericType(typeof(CqlContext), definitionReturnType);
@@ -2473,7 +2455,7 @@ namespace Hl7.Cql.Compiler
             }
         }
 
-        protected static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
+        internal static string TypeNameToIdentifier(Type type, ExpressionBuilderContext? ctx)
         {
             var typeName = type.Name.ToLowerInvariant();
             if (type.IsGenericType)
