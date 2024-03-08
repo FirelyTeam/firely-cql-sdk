@@ -2,13 +2,14 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
 using Hl7.Cql.Runtime;
-using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Packaging;
 
 namespace CoreTests
 {
@@ -45,24 +46,25 @@ namespace CoreTests
         public static void ClassInitialize(TestContext context)
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
-            var resolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            var binding = new CqlOperatorsBinding(resolver, FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
-            var typeManager = new TypeManager(resolver);
+            // var resolver = new FhirTypeResolver(ModelInfo.ModelInspector);
+            // var binding = new CqlOperatorsBinding(resolver, FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
+            // var typeManager = new TypeManager(resolver);
 
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
-            var fhirHelpersLambdas = LibraryExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, fhirHelpersPackage);
-            LambdasByTestName.Lambdas.Merge(fhirHelpersLambdas);
+            var libraryExpressionBuilder = NewLibraryExpressionBuilder();
+            var definitions = new DefinitionDictionary<LambdaExpression>();
+            var libctx = libraryExpressionBuilder.CreateContext(definitions, fhirHelpersPackage, Ordinal.Unspecified);
+            libraryExpressionBuilder.ProcessLibrary(libctx);
+            LambdasByTestName.Lambdas.Merge(definitions);
 
 
-            foreach (var file in hl7TestDirectory.GetFiles("*.json"))
+            foreach (var (file, ord) in hl7TestDirectory.GetFiles("*.json").WithOrdinals())
             {
-                //if (file.Name == "CqlComparisonOperatorsTest.json"
-                //    || file.Name == "CqlConditionalOperatorsTest.json")
-                //    continue;
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
-                var includes = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\Libs"));
-                var lambdas = LibraryExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
-                LambdasByTestName.Lambdas.Merge(lambdas);
+                definitions = new();
+                libctx = libraryExpressionBuilder.CreateContext(definitions, elmPackage, ord);
+                libraryExpressionBuilder.ProcessLibrary(libctx);
+                LambdasByTestName.Lambdas.Merge(definitions);
             }
 
             var buildOrder = new DirectedGraph();
@@ -71,6 +73,11 @@ namespace CoreTests
 
             var allDelegates = LambdasByTestName.Lambdas.CompileAll();
             Context = FhirCqlContext.WithDataSource(delegates: allDelegates);
+        }
+
+        private static LibraryExpressionBuilder NewLibraryExpressionBuilder()
+        {
+            return new LibraryExpressionBuilderFactory(LoggerFactory).LibraryExpressionBuilder;
         }
 
         internal static CqlContext Context;

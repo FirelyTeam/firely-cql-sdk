@@ -75,7 +75,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             foreach (var (elmLibrary, ordinal) in elmLibraries.WithOrdinals())
             {
                 var packageDefinitions = new DefinitionDictionary<LambdaExpression>();
-                var libctx = _libraryExpressionBuilder.CreateContext(elmLibrary, ordinal, packageDefinitions);
+                var libctx = _libraryExpressionBuilder.CreateContext(packageDefinitions, elmLibrary, ordinal);
                 _libraryExpressionBuilder.ProcessLibrary(libctx);
                 definitions.Merge(packageDefinitions);
             }

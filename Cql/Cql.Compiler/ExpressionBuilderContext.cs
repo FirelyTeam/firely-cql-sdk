@@ -20,7 +20,7 @@ using Hl7.Cql.Compiler.Infrastructure;
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="LibraryExpressionBuilder.BuildLibraryDefinitions"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
@@ -280,7 +280,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         internal ExpressionBuilderContext Deeper(
             elm.Element element,
-            int elementOrdinal = Ordinal.NotFoundInt)
+            int elementOrdinal = Ordinal.Unspecified)
         {
             if (element == _element)
             {

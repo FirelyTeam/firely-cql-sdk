@@ -1,12 +1,8 @@
-﻿using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -15,7 +11,9 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Packaging;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
 
@@ -25,15 +23,11 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
-        private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-        private static readonly Hl7.Cql.Conversion.TypeConverter TypeConverter = FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
-
-
         private static ILoggerFactory LoggerFactory { get; } =
             Microsoft.Extensions.Logging.LoggerFactory
                 .Create(logging => logging.AddDebug());
 
-        private static readonly LambdasFacade LambdasByTestName = new();
+        private static LibraryPackagerFactory Factory = new(LoggerFactory);
 
         private class LambdasFacade
         {
@@ -3533,18 +3527,19 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
-            var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var expressions = LibraryExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, LoggerFactory, elmPackage);
-            var writerLogger = LoggerFactory.CreateLogger<CSharpSourceCodeWriter>();
+            
+            var libbld = Factory.LibraryExpressionBuilder;
+            var definitions = new DefinitionDictionary<LambdaExpression>();
+            var libctx = libbld.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
+            libbld.ProcessLibrary(libctx);
 
-            var writer = new CSharpSourceCodeWriter(writerLogger, TypeResolver);
+            var writer = Factory.CSharpSourceCodeWriter;
             var graph = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\libs"));
 
             var dict = new Dictionary<string, MemoryStream>();
-            writer.Write(expressions, typeManager.TupleTypes, graph, lib => { var ms = new MemoryStream(); dict[lib] = ms; return ms; });
+            writer.Write(definitions, Factory.TypeManager.TupleTypes, graph, lib => { var ms = new MemoryStream(); dict[lib] = ms; return ms; });
         }
 
         [TestMethod]

@@ -12,6 +12,7 @@ using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Expression = System.Linq.Expressions.Expression;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.Compiler;
 
@@ -36,33 +37,10 @@ internal class LibraryExpressionBuilder
         _operatorBinding = operatorBinding;
     }
 
-    /// <summary>
-    /// Builds the definitions for the library.
-    /// </summary>
-    /// <param name="operatorBinding">The operator binding.</param>
-    /// <param name="typeManager">The type manager.</param>
-    /// <param name="loggerFactory">The logger factory</param>
-    /// <param name="library">The library ELM.</param>
-    /// <returns>The definition dictionary of lambda expressions.</returns>
-    public static DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(
-        OperatorBinding operatorBinding,
-        TypeManager typeManager,
-        ILoggerFactory loggerFactory,
-        Elm.Library library)
-    {
-        var expressionBuilder = new ExpressionBuilder(typeManager, loggerFactory.CreateLogger<ExpressionBuilder>());
-        var definitions = new DefinitionDictionary<LambdaExpression>();
-        var libraryExpressionsBuilderLogger = loggerFactory.CreateLogger<LibraryExpressionBuilder>();
-        var definitionsBuilder = new LibraryExpressionBuilder(libraryExpressionsBuilderLogger, expressionBuilder, operatorBinding);
-        var libctx = definitionsBuilder.CreateContext(library, Ordinal.NotFoundInt, definitions);
-        definitionsBuilder.ProcessLibrary(libctx);
-        return definitions;
-    }
-
     public LibraryExpressionBuilderContext CreateContext(
-        Elm.Library library, 
-        int libraryOrdinal,
-        DefinitionDictionary<LambdaExpression> definitions) =>
+        DefinitionDictionary<LambdaExpression> definitions,
+        Library library,
+        int libraryOrdinal) =>
         new(_expressionBuilder, _operatorBinding, definitions, library, libraryOrdinal);
 
     public void ProcessLibrary(LibraryExpressionBuilderContext libCtx)
