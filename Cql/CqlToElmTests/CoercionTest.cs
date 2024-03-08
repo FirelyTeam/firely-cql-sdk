@@ -142,7 +142,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expression = new Null().WithResultType(Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             var result = CoercionProvider.Coerce(expression, Choice(SystemTypes.IntegerType, SystemTypes.DecimalType));
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(CoercionCost.Compatible, result.Cost);
+            Assert.AreEqual(CoercionCost.Cast, result.Cost);
         }
 
         [TestMethod]

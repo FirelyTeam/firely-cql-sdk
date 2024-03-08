@@ -182,12 +182,12 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsSubtype(TypeSpecifier from, TypeSpecifier to) =>
             from.IsSubtypeOf(to, ModelProvider);
-     
+
         // The spec language is:
         // If the invocation type is compatible with the declared type of the argument (e.g., the invocation type is Any)
         // Update: per Bryn, this conversion is specifically to allow the null keyword to be passed to functions without casting.
         internal bool IsCompatible(Expression from, TypeSpecifier to) =>
-            from is Null;
+            from.resultTypeSpecifier == SystemTypes.AnyType;
 
         internal bool CanBeCast(TypeSpecifier from, TypeSpecifier to)
         {
