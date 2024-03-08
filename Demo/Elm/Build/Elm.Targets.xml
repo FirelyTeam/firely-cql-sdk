@@ -2,15 +2,19 @@
 <Project>
 	<ItemGroup>
 		<CSharpFiles Include="$(MSBuildProjectDirectory)\..\Measures\*.cs" />
+<!--		<CSharpFiles Include="$(MSBuildProjectDirectory)\..\Measures-cms\*.cs" /> -->
 	</ItemGroup>
 
 	<Target Name="ELM to C#"
 			BeforeTargets="Compile">
 		<Message Text="Converting ELM to C#"/>
 		<Exec Command='"$(MSBuildProjectDirectory)/../../Cql/PackagerCLI/bin/debug/net6.0/Hl7.Cql.Packager.exe" --canonical-root-url https://fire.ly/fhir/ --elm "$(MSBuildProjectDirectory)/Json" --cql "$(MSBuildProjectDirectory)/../Cql/input" 			  --cs "$(MSBuildProjectDirectory)/../Measures" --fhir "$(MSBuildProjectDirectory)/../Test/Resources"' />
+		<!-- Until we fixed the issues in our expression builder around the CMS measures, this will not yet work
+		<Exec Command='"$(MSBuildProjectDirectory)/../../Cql/PackagerCLI/bin/debug/net6.0/Hl7.Cql.Packager.exe" --canonical-root-url https://fire.ly/fhir/ --elm "$(MSBuildProjectDirectory)/Json-cms" --cql "$(MSBuildProjectDirectory)/../Cql/input-cms" 			  --cs "$(MSBuildProjectDirectory)/../Measures-cms" --fhir "$(MSBuildProjectDirectory)/../Test/Resources-cms"' />
+		-->
 	</Target>
 	<Target Name="Delete C#" AfterTargets="Clean">
-		<Message Text="Deleting C# files...$(MSBuildProjectDirectory)\..\Measures\*.cs"></Message>
+		<Message Text="Deleting C# files...$(MSBuildProjectDirectory)\..\Measures\*.cs" />
 		<Delete Files="@(CSharpFiles)" />
 	</Target>
 </Project>

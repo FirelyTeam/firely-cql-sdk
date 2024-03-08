@@ -30,16 +30,18 @@ internal class PackagerCliProgram
 
     public int Run()
     {
-        try
-        {
-            return RunCore();
-        }
-        catch (Exception e)
-        {
-            _logger.LogError(e, "An error occurred while running the packager");
-            Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
-            return -1;
-        }
+        return RunCore();
+        
+        // try
+        // {
+        //     return RunCore();
+        // }
+        // catch (Exception e)
+        // {
+        //     _logger.LogError(e, "An error occurred while running the packager");
+        //     Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
+        //     return -1;
+        // }
     }
 
     private int RunCore()

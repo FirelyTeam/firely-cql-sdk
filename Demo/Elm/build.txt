@@ -1,0 +1,87 @@
+2024-03-08 12:51:57.387 +01:00 [INF] Building expressions for AdultOutpatientEncountersFHIR4-2.2.000
+2024-03-08 12:51:58.022 +01:00 [ERR] An error occurred while running the packager
+System.InvalidOperationException: Exception while building expression definition 'Qualifying Encounters ' in library 'AdultOutpatientEncountersFHIR4-2.2.000' at location '18:1-27:100'. See InnerException for more details.
+ ---> System.ArgumentException: Cannot resolve type for expression
+   at Hl7.Cql.Compiler.TypeManager.TypeFor(Element element, ExpressionBuilderContext context, Boolean throwIfNotFound) in C:\Git\ncqa-cql\Cql\Cql.Compiler\TypeManager.cs:line 164
+   at Hl7.Cql.Compiler.ExpressionBuilder.Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 1874
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 532
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.SingleSourceQuery(Query query, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 757
+   at Hl7.Cql.Compiler.ExpressionBuilder.Query(Query query, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 743
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 520
+   at Hl7.Cql.Compiler.ExpressionBuilder.ExpressionBuilderContextFacade.TranslateExpression(Element op) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 592
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessExpressionDef(ExpressionDef expressionDef) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 383
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessLibrary() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 165
+   --- End of inner exception stack trace ---
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.<ProcessLibrary>g__ExceptionWhileBuilding|2_0(String elementName, String locator, Exception innerException, <>c__DisplayClass2_0& ) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 175
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessLibrary() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 169
+   at Hl7.Cql.Compiler.ExpressionBuilder.BuildLibraryDefinitions() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 42
+   at Hl7.Cql.Compiler.ExpressionBuilder.BuildLibraryDefinitions(OperatorBinding operatorBinding, TypeManager typeManager, ILogger`1 logger, Library library) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 31
+   at Hl7.Cql.Packaging.LibraryPackager.PackageResources(DirectoryInfo elmDirectory, DirectoryInfo cqlDirectory, DirectedGraph packageGraph, TypeResolver typeResolver, OperatorBinding operatorBinding, TypeManager typeManager, Func`2 canon, ILoggerFactory logFactory) in C:\Git\ncqa-cql\Cql\Cql.Packaging\LibraryPackager.cs:line 176
+   at Hl7.Cql.Packaging.ResourcePackager.PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action`1 afterPackageMutator, String resourceCanonicalRootUrl) in C:\Git\ncqa-cql\Cql\Cql.Packaging\ResourcePackager.cs:line 72
+   at Hl7.Cql.Packaging.ResourcePackager.Package(PackageArgs args) in C:\Git\ncqa-cql\Cql\Cql.Packaging\ResourcePackager.cs:line 59
+   at Hl7.Cql.Packager.PackagerService.Run() in C:\Git\ncqa-cql\Cql\PackagerCLI\PackagerService.cs:line 26
+   at Hl7.Cql.Packager.Program.Run(IHostBuilder hostBuilder) in C:\Git\ncqa-cql\Cql\PackagerCLI\Program.cs:line 117
+2024-03-08 12:53:02.310 +01:00 [INF] Building expressions for AdultOutpatientEncountersFHIR4-2.2.000
+2024-03-08 12:53:02.642 +01:00 [ERR] An error occurred while running the packager
+System.InvalidOperationException: Exception while building expression definition 'Qualifying Encounters ' in library 'AdultOutpatientEncountersFHIR4-2.2.000' at location '18:1-27:100'. See InnerException for more details.
+ ---> System.ArgumentException: Cannot resolve type for expression
+   at Hl7.Cql.Compiler.TypeManager.TypeFor(Element element, ExpressionBuilderContext context, Boolean throwIfNotFound) in C:\Git\ncqa-cql\Cql\Cql.Compiler\TypeManager.cs:line 164
+   at Hl7.Cql.Compiler.ExpressionBuilder.Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 1874
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 532
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.SingleSourceQuery(Query query, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 757
+   at Hl7.Cql.Compiler.ExpressionBuilder.Query(Query query, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 743
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 520
+   at Hl7.Cql.Compiler.ExpressionBuilder.ExpressionBuilderContextFacade.TranslateExpression(Element op) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 592
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessExpressionDef(ExpressionDef expressionDef) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 383
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessLibrary() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 165
+   --- End of inner exception stack trace ---
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.<ProcessLibrary>g__ExceptionWhileBuilding|2_0(String elementName, String locator, Exception innerException, <>c__DisplayClass2_0& ) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 175
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessLibrary() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 169
+   at Hl7.Cql.Compiler.ExpressionBuilder.BuildLibraryDefinitions() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 42
+   at Hl7.Cql.Compiler.ExpressionBuilder.BuildLibraryDefinitions(OperatorBinding operatorBinding, TypeManager typeManager, ILogger`1 logger, Library library) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 31
+   at Hl7.Cql.Packaging.LibraryPackager.PackageResources(DirectoryInfo elmDirectory, DirectoryInfo cqlDirectory, DirectedGraph packageGraph, TypeResolver typeResolver, OperatorBinding operatorBinding, TypeManager typeManager, Func`2 canon, ILoggerFactory logFactory) in C:\Git\ncqa-cql\Cql\Cql.Packaging\LibraryPackager.cs:line 176
+   at Hl7.Cql.Packaging.ResourcePackager.PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action`1 afterPackageMutator, String resourceCanonicalRootUrl) in C:\Git\ncqa-cql\Cql\Cql.Packaging\ResourcePackager.cs:line 72
+   at Hl7.Cql.Packaging.ResourcePackager.Package(PackageArgs args) in C:\Git\ncqa-cql\Cql\Cql.Packaging\ResourcePackager.cs:line 59
+   at Hl7.Cql.Packager.PackagerService.Run() in C:\Git\ncqa-cql\Cql\PackagerCLI\PackagerService.cs:line 26
+   at Hl7.Cql.Packager.Program.Run(IHostBuilder hostBuilder) in C:\Git\ncqa-cql\Cql\PackagerCLI\Program.cs:line 117
+2024-03-08 12:53:25.805 +01:00 [INF] Building expressions for AdultOutpatientEncountersFHIR4-2.2.000
+2024-03-08 12:53:25.968 +01:00 [ERR] An error occurred while running the packager
+System.InvalidOperationException: Exception while building expression definition 'Qualifying Encounters ' in library 'AdultOutpatientEncountersFHIR4-2.2.000' at location '18:1-27:100'. See InnerException for more details.
+ ---> System.ArgumentException: Cannot resolve type for expression
+   at Hl7.Cql.Compiler.TypeManager.TypeFor(Element element, ExpressionBuilderContext context, Boolean throwIfNotFound) in C:\Git\ncqa-cql\Cql\Cql.Compiler\TypeManager.cs:line 164
+   at Hl7.Cql.Compiler.ExpressionBuilder.Retrieve(Retrieve retrieve, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 1874
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 532
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.Union(Union e, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.IntervalOperators.cs:line 481
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 634
+   at Hl7.Cql.Compiler.ExpressionBuilder.SingleSourceQuery(Query query, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 757
+   at Hl7.Cql.Compiler.ExpressionBuilder.Query(Query query, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 743
+   at Hl7.Cql.Compiler.ExpressionBuilder.TranslateExpression(Element op, ExpressionBuilderContext ctx) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.cs:line 520
+   at Hl7.Cql.Compiler.ExpressionBuilder.ExpressionBuilderContextFacade.TranslateExpression(Element op) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 592
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessExpressionDef(ExpressionDef expressionDef) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 383
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessLibrary() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 165
+   --- End of inner exception stack trace ---
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.<ProcessLibrary>g__ExceptionWhileBuilding|2_0(String elementName, String locator, Exception innerException, <>c__DisplayClass2_0& ) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 175
+   at Hl7.Cql.Compiler.ExpressionBuilder.DefinitionsBuilder.ProcessLibrary() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 169
+   at Hl7.Cql.Compiler.ExpressionBuilder.BuildLibraryDefinitions() in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 42
+   at Hl7.Cql.Compiler.ExpressionBuilder.BuildLibraryDefinitions(OperatorBinding operatorBinding, TypeManager typeManager, ILogger`1 logger, Library library) in C:\Git\ncqa-cql\Cql\Cql.Compiler\ExpressionBuilder.BuildLibraryDefinitions.cs:line 31
+   at Hl7.Cql.Packaging.LibraryPackager.PackageResources(DirectoryInfo elmDirectory, DirectoryInfo cqlDirectory, DirectedGraph packageGraph, TypeResolver typeResolver, OperatorBinding operatorBinding, TypeManager typeManager, Func`2 canon, ILoggerFactory logFactory) in C:\Git\ncqa-cql\Cql\Cql.Packaging\LibraryPackager.cs:line 176
+   at Hl7.Cql.Packaging.ResourcePackager.PackageCore(DirectoryInfo elmDir, DirectoryInfo cqlDir, Action`1 afterPackageMutator, String resourceCanonicalRootUrl) in C:\Git\ncqa-cql\Cql\Cql.Packaging\ResourcePackager.cs:line 72
+   at Hl7.Cql.Packaging.ResourcePackager.Package(PackageArgs args) in C:\Git\ncqa-cql\Cql\Cql.Packaging\ResourcePackager.cs:line 59
+   at Hl7.Cql.Packager.PackagerService.Run() in C:\Git\ncqa-cql\Cql\PackagerCLI\PackagerService.cs:line 26
+   at Hl7.Cql.Packager.Program.Run(IHostBuilder hostBuilder) in C:\Git\ncqa-cql\Cql\PackagerCLI\Program.cs:line 117
