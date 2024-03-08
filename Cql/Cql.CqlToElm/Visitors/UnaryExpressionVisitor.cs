@@ -202,7 +202,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 asType = typeSpecifier is NamedTypeSpecifier nts ? typeSpecifier.resultTypeName : null,
                 strict = true,
             }.WithResultType(typeSpecifier);
-            var cost = CoercionProvider.GetCoercionCost(operand, typeSpecifier);
+            var cost = CoercionProvider.GetCoercionCost(operand.resultTypeSpecifier, typeSpecifier);
             if (cost > CoercionCost.Cast)
                 expression
                     .AddError(Messaging.TypeCannotBeCast(operand.resultTypeSpecifier, typeSpecifier));

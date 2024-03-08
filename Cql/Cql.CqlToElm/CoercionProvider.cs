@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm
         public CoercionResult<Expression> Coerce(Expression expression, TypeSpecifier to)
         {
             // Checking the cost also determines the kind of conversion, if any, we can do.
-            var cost = GetCoercionCost(expression, to);
+            var cost = GetCoercionCost(expression.resultTypeSpecifier, to);
             // Next we apply the conversion.  
             return cost switch
             {
@@ -136,9 +136,8 @@ namespace Hl7.Cql.CqlToElm
         /// Computes the cost of conversion according to the specification's conversion precendence rules.
         /// </summary>
         /// <seealso href="https://cql.hl7.org/03-developersguide.html#conversion-precedence"/>
-        public CoercionCost GetCoercionCost(Expression from, TypeSpecifier to)
+        public CoercionCost GetCoercionCost(TypeSpecifier fromType, TypeSpecifier to)
         {
-            var fromType = from.resultTypeSpecifier;
             if (IsExactMatch(fromType, to))
                 return CoercionCost.ExactMatch;
             // Do not coerce to an invalid interval type - comes before subtype because every interval type
@@ -147,7 +146,7 @@ namespace Hl7.Cql.CqlToElm
                 return CoercionCost.Incompatible;
             else if (IsSubtype(fromType, to))
                 return CoercionCost.Subtype;
-            else if (IsCompatible(from, to))
+            else if (IsCompatible(fromType, to))
                 return CoercionCost.Compatible;
             else if (CanBeCast(fromType, to))
                 return CoercionCost.Cast;
@@ -186,8 +185,8 @@ namespace Hl7.Cql.CqlToElm
         // The spec language is:
         // If the invocation type is compatible with the declared type of the argument (e.g., the invocation type is Any)
         // Update: per Bryn, this conversion is specifically to allow the null keyword to be passed to functions without casting.
-        internal bool IsCompatible(Expression from, TypeSpecifier to) =>
-            from.resultTypeSpecifier == SystemTypes.AnyType;
+        internal bool IsCompatible(TypeSpecifier from, TypeSpecifier to) =>
+            from == SystemTypes.AnyType;
 
         internal bool CanBeCast(TypeSpecifier from, TypeSpecifier to)
         {
@@ -302,69 +301,21 @@ namespace Hl7.Cql.CqlToElm
 
         // The declared type is an interval and the invocation type can be promoted to an interval of that type
         // Presumably 
-        internal bool CanBePromoted(TypeSpecifier from, IntervalTypeSpecifier to)
-        {
-            var pointType = to.pointType;
-            // written this way for easier debugging
-            if (IsExactMatch(from, pointType))
-                return true;
-            else if (IsSubtype(from, pointType))
-                return true;
-            else if (CanBeCast(from, pointType))
-                return true;
-            else if (HasImplicitConversion(from, pointType))
-                return true;
-            else return false;
-        }
+        internal bool CanBePromoted(TypeSpecifier from, IntervalTypeSpecifier to) =>
+            GetCoercionCost(from, to.pointType) != CoercionCost.Incompatible;
 
-        internal bool CanBeDemoted(ListTypeSpecifier from, TypeSpecifier to)
-        {
-            var elementType = from.elementType;
-            // written this way for easier debugging
-            if (IsExactMatch(elementType, to))
-                return true;
-            else if (IsSubtype(elementType, to))
-                return true;
-            else if (CanBeCast(elementType, to))
-                return true;
-            else if (HasImplicitConversion(from, to))
-                return true;
-            else return false;
-        }
+        internal bool CanBeDemoted(ListTypeSpecifier from, TypeSpecifier to) =>
+            GetCoercionCost(from.elementType, to) != CoercionCost.Incompatible;
 
         // The invocation type of the argument is an interval and can be demoted to the declared type
         // Note that whether an interval is a point interval or not cannot be known at compile time.
         // This type of conversion will issue a warning and could fail at runtime.
-        internal bool CanBeDemoted(IntervalTypeSpecifier from, TypeSpecifier to)
-        {
-            var pointType = from.pointType;
-            // written this way for easier debugging
-            if (IsExactMatch(pointType, to))
-                return true;
-            else if (IsSubtype(pointType, to))
-                return true;
-            else if (CanBeCast(pointType, to))
-                return true;
-            else if (HasImplicitConversion(from, pointType))
-                return true;
-            else return false;
-        }
+        internal bool CanBeDemoted(IntervalTypeSpecifier from, TypeSpecifier to) =>
+            GetCoercionCost(from.pointType, to) != CoercionCost.Incompatible;
 
         // The declared type is a list and the invocation type can be promoted to a list of that type
-        internal bool CanBePromoted(TypeSpecifier from, ListTypeSpecifier to)
-        {
-            var elementType = to.elementType;
-            // written this way for easier debugging
-            if (IsExactMatch(from, elementType))
-                return true;
-            else if (IsSubtype(from, elementType))
-                return true;
-            else if (CanBeCast(from, elementType))
-                return true;
-            else if (HasImplicitConversion(from, elementType))
-                return true;
-            else return false;
-        }
+        internal bool CanBePromoted(TypeSpecifier from, ListTypeSpecifier to) =>
+            GetCoercionCost(from, to.elementType) != CoercionCost.Incompatible;
 
         internal bool CanBeExplicitlyCast(TypeSpecifier from, TypeSpecifier to) =>
             IsSubtype(from, to) || CanBeCast(from, to);
