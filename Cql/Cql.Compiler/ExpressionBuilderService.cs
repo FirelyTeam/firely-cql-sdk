@@ -28,22 +28,22 @@ internal class ExpressionBuilderService
     public DefinitionDictionary<LambdaExpression> BuildLibraryDefinitions(Library library) => 
         ExpressionBuilder.BuildLibraryDefinitions(_operatorBinding, _typeManager, _logger, library);
 
-    public MemberInfo GetProperty(
+    public MemberInfo? GetProperty(
         Library library,
         Type type,
         string name)
     {
-        var expressionBuilder = new ExpressionBuilder(_operatorBinding, _typeManager, _logger, library);
+        var expressionBuilder = new ExpressionBuilder(_typeManager, _logger, library);
         return expressionBuilder.GetProperty(type, name);
     }
 
     public LambdaExpression Lambda(
         Library library,
         Expression expression,
-        DefinitionDictionary<LambdaExpression>? lambdas = null,
-        ExpressionBuilderContext? ctx = null)
+        OperatorBinding operatorBinding,
+        DefinitionDictionary<LambdaExpression>? lambdas = null)
     {
-        var expressionBuilder = new ExpressionBuilder(_operatorBinding, _typeManager, _logger, library);
-        return expressionBuilder.Lambda(expression, lambdas, ctx);
+        var expressionBuilder = new ExpressionBuilder(_typeManager, _logger, library);
+        return expressionBuilder.Lambda(expression, operatorBinding, lambdas/*, ctx*/);
     }
 }

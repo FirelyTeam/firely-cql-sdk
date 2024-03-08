@@ -69,22 +69,22 @@ namespace Hl7.Cql.Compiler
 
         internal Type? TypeFor(
             Element element,
-            ExpressionBuilderContext context,
+            ExpressionBuilderContext ctx,
             bool throwIfNotFound = true)
         {
             if (element?.resultTypeSpecifier != null)
-                return TypeFor(element.resultTypeSpecifier, context);
+                return TypeFor(element.resultTypeSpecifier, ctx);
 
             if (!string.IsNullOrWhiteSpace(element?.resultTypeName?.Name))
                 return Resolver.ResolveType(element!.resultTypeName!.Name)
-                       ?? throw new ArgumentException("Cannot resolve type for expression");
+                       ?? throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
 
             switch (element)
             {
                 case ExpressionRef expressionRef:
                 {
-                    var libraryName = expressionRef.libraryName ?? context.Builder.LibraryKey;
-                    if (!context.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
+                    var libraryName = expressionRef.libraryName ?? ctx.Builder.LibraryKey;
+                    if (!ctx.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
                     var returnType = definition!.ReturnType;
@@ -94,12 +94,13 @@ namespace Hl7.Cql.Compiler
 
                 case ExpressionDef { expression: not null } def:
                 {
-                    var type = TypeFor(def.expression, context, false);
+                    ctx = ctx.Deeper(def.expression);
+                    var type = TypeFor(def.expression, ctx, false);
                     if (type == null)
                     {
                         if (def.expression is SingletonFrom singleton)
                         {
-                            type = TypeFor(singleton, context, false);
+                            type = TypeFor(singleton, ctx, false);
                             if (type == null)
                             {
                                 if (singleton.operand is Retrieve retrieve && retrieve.dataType != null)
@@ -120,10 +121,10 @@ namespace Hl7.Cql.Compiler
                 {
                     Type? sourceType = null;
                     if (propertyExpression.source != null)
-                        sourceType = TypeFor(propertyExpression.source!, context);
+                        sourceType = TypeFor(propertyExpression.source!, ctx.Deeper(propertyExpression.source));
                     else if (propertyExpression.scope != null)
                     {
-                        var scope = context.GetScope(propertyExpression.scope);
+                        var scope = ctx.GetScope(propertyExpression.scope);
                         sourceType = scope.Item1.Type;
                     }
                     if (sourceType != null)
@@ -139,33 +140,33 @@ namespace Hl7.Cql.Compiler
 
                 case AliasRef aliasRef when !string.IsNullOrWhiteSpace(aliasRef.name):
                 {
-                    var scope = context.GetScope(aliasRef.name);
+                    var scope = ctx.GetScope(aliasRef.name);
                     return scope.Item1.Type;
                 }
 
                 case OperandRef operandRef when !string.IsNullOrWhiteSpace(operandRef.name):
                 {
-                    context.Operands.TryGetValue(operandRef.name, out var operand);
+                    ctx.Operands.TryGetValue(operandRef.name, out var operand);
                     if (operand != null)
                         return operand.Type;
                     break;
                 }
             }
             if (throwIfNotFound)
-                throw new ArgumentException("Cannot resolve type for expression");
+                throw ctx.NewExpressionBuildingException("Cannot resolve type for expression");
             
             return null;
         }
 
         internal Type TypeFor(TypeSpecifier resultTypeSpecifier,
-            ExpressionBuilderContext context)
+            ExpressionBuilderContext ctx)
         {
             if (resultTypeSpecifier == null) 
                 return typeof(object);
 
             if (resultTypeSpecifier is IntervalTypeSpecifier interval)
             {
-                var pointType = TypeFor(interval.pointType!, context);
+                var pointType = TypeFor(interval.pointType!, ctx);
                 var intervalType = typeof(CqlInterval<>).MakeGenericType(pointType);
                 return intervalType;
             }
@@ -187,7 +188,7 @@ namespace Hl7.Cql.Compiler
             {
                 if (list.elementType == null)
                     throw new ArgumentException("ListTypeSpecifier must have a non-null elementType");
-                var elementType = TypeFor(list.elementType, context);
+                var elementType = TypeFor(list.elementType, ctx);
                 if (elementType == null)
                     throw new ArgumentException("Cannot resolve type for expression");
 
@@ -208,12 +209,12 @@ namespace Hl7.Cql.Compiler
                 // In the example above, x and y have different structures.
                 // Code handles x but not y
                 if (resultTypeSpecifier.resultTypeSpecifier != null)
-                    return TypeFor(tuple.resultTypeSpecifier, context);
+                    return TypeFor(tuple.resultTypeSpecifier, ctx);
 
-                return TupleTypeFor(tuple, context);
+                return TupleTypeFor(tuple, ctx);
             }
 
-            throw new NotImplementedException();
+            throw new NotImplementedException().WithContext(ctx);
         }
 
         internal static string PrettyTypeName(Type type)

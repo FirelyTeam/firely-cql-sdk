@@ -15,23 +15,21 @@ namespace Hl7.Cql.Packaging;
 internal class LibraryPackagerFactory
 {
     private readonly ExpressionBuilderFactory _expressionBuilderFactory;
-    private readonly Lazy<CSharpSourceCodeWriter> _CSharpSourceCodeWriter;
-    private readonly Lazy<AssemblyCompiler> _AssemblyCompiler;
-    private readonly Lazy<LibraryPackager> _LibraryPackager;
+    private readonly Lazy<CSharpSourceCodeWriter> _cSharpSourceCodeWriter;
+    private readonly Lazy<AssemblyCompiler> _assemblyCompiler;
+    private readonly Lazy<LibraryPackager> _libraryPackager;
 
     public LibraryPackagerFactory(ILoggerFactory loggerFactory, int cacheSize = 0)
     {
         _expressionBuilderFactory = new ExpressionBuilderFactory(loggerFactory, cacheSize);
-        _CSharpSourceCodeWriter = Deferred(() =>
-        {
-            ILogger<CSharpSourceCodeWriter> cSharpSourceCodeWriterLogger = loggerFactory.CreateLogger<CSharpSourceCodeWriter>(); 
-            return new CSharpSourceCodeWriter(cSharpSourceCodeWriterLogger, FhirTypeResolver);
-        });
-        _AssemblyCompiler = Deferred(() => new AssemblyCompiler(ExpressionBuilderService, FhirTypeResolver, CSharpSourceCodeWriter, TypeManager));
-        _LibraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler, ExpressionBuilderService));
+        _cSharpSourceCodeWriter = Deferred(() => new CSharpSourceCodeWriter(Logger<CSharpSourceCodeWriter>(), FhirTypeResolver));
+        _assemblyCompiler = Deferred(() => new AssemblyCompiler(ExpressionBuilderService, FhirTypeResolver, CSharpSourceCodeWriter, TypeManager));
+        _libraryPackager = Deferred(() => new LibraryPackager(Logger<LibraryPackager>(), FhirTypeResolver, AssemblyCompiler, ExpressionBuilderService));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
+
+        ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
     }
 
     public ModelInspector ModelInspector => _expressionBuilderFactory.ModelInspector;
@@ -40,8 +38,8 @@ internal class LibraryPackagerFactory
     public CqlOperatorsBinding CqlOperatorsBinding => _expressionBuilderFactory.CqlOperatorsBinding;
     public TypeManager TypeManager => _expressionBuilderFactory.TypeManager;
     public ExpressionBuilderService ExpressionBuilderService => _expressionBuilderFactory.ExpressionBuilderService;
-    public CSharpSourceCodeWriter CSharpSourceCodeWriter => _CSharpSourceCodeWriter.Value;
-    public AssemblyCompiler AssemblyCompiler => _AssemblyCompiler.Value;
-    public LibraryPackager LibraryPackager => _LibraryPackager.Value;
+    public CSharpSourceCodeWriter CSharpSourceCodeWriter => _cSharpSourceCodeWriter.Value;
+    public AssemblyCompiler AssemblyCompiler => _assemblyCompiler.Value;
+    public LibraryPackager LibraryPackager => _libraryPackager.Value;
 
 }

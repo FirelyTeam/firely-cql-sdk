@@ -10,7 +10,7 @@ namespace CoreTests
     [TestClass]
     public class ExpressionBuilderTests
     {
-        private ExpressionBuilderService NewExpressionBuilderService()
+        private ExpressionBuilderService NewExpressionBuilder()
         {
             var loggerFactory = LoggerFactory.Create(logging => logging.AddDebug());
             var expressionBuilderCreator = new ExpressionBuilderFactory(loggerFactory);
@@ -22,19 +22,15 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            _ = NewExpressionBuilderService().BuildLibraryDefinitions(elmPackage);
+            _ = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
         }
 
         [TestMethod]
         public void FHIRTypeConversionTest_1_0_0()
         {
-            var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
-            var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var logger = CreateLogger();
-            var eb = new ExpressionBuilder(binding, typeManager, elmPackage, logger);
-            var expressions = eb.Build();
+            var expressions = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
             Assert.IsNotNull(expressions);
         }
 
@@ -43,7 +39,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            _ = NewExpressionBuilderService().BuildLibraryDefinitions(elmPackage);
+            _ = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
         }
 
         // https://github.com/FirelyTeam/firely-cql-sdk/issues/129
@@ -58,7 +54,7 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var expressions = NewExpressionBuilderService().BuildLibraryDefinitions(elmPackage);
+            var expressions = NewExpressionBuilder().BuildLibraryDefinitions(elmPackage);
             Assert.IsNotNull(expressions);
         }
 
@@ -74,7 +70,7 @@ namespace CoreTests
                 }
             };
 
-            var property = NewExpressionBuilderService().GetProperty(lib, typeof(MeasureReport.PopulationComponent), "id");
+            var property = NewExpressionBuilder().GetProperty(lib, typeof(MeasureReport.PopulationComponent), "id");
             Assert.AreEqual(typeof(Element), property.DeclaringType);
             Assert.AreEqual(nameof(Element.ElementId), property.Name);
         }

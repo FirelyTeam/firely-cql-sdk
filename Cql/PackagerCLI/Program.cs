@@ -89,12 +89,12 @@ public class Program
         logging.ClearProviders();
 
         logging.AddFilter(level => level >= LogLevel.Trace);
-        logging.AddConsole(console =>
-        {
-            console.LogToStandardErrorThreshold = LogLevel.Error;
-        });
+        // logging.AddConsole(console =>
+        // {
+        //     console.LogToStandardErrorThreshold = LogLevel.Error;
+        // });
 
-        var logFile = Path.Combine(".", "build.txt");
+        var logFile = Path.Combine(".", "build.log");
         Log.Logger = new LoggerConfiguration()
             .Enrich.FromLogContext()
             .WriteTo
