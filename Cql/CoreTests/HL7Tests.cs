@@ -46,10 +46,6 @@ namespace CoreTests
         public static void ClassInitialize(TestContext context)
         {
             var hl7TestDirectory = new DirectoryInfo(@"Input\ELM\HL7");
-            // var resolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-            // var binding = new CqlOperatorsBinding(resolver, FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector));
-            // var typeManager = new TypeManager(resolver);
-
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
             var libraryExpressionBuilder = NewLibraryExpressionBuilder();
             var definitions = new DefinitionDictionary<LambdaExpression>();
