@@ -1,12 +1,10 @@
 using System.Collections.Concurrent;
 using System.Linq.Expressions;
-using System.Runtime.ExceptionServices;
 using System.Runtime.Loader;
 using System.Text;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Graph;
@@ -14,7 +12,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using JetBrains.Annotations;
-using Microsoft.Extensions.DependencyInjection;
 using Library = Hl7.Fhir.Model.Library;
 using Microsoft.Extensions.Logging;
 

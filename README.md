@@ -16,6 +16,7 @@ at [firely-cql-sdk/releases](https://github.com/FirelyTeam/firely-cql-sdk/releas
 * There is a great presentation on the engine from [DevDays 2023](https://youtu.be/CkTbgfbttJc).
 * [The CQL section](https://docs.fire.ly/projects/Firely-NET-SDK/en/latest/cql.html) in the .NET SDK documentation
 * A [word document](cql/CQL%20Engine%20Architecture.docx) with background documentation on the design. May be somewhat outdated.
+* A [diagram](docs/packager-cli-dependency-graph.md) showing how all the classes and their dependencies involved.
 * A [graphic](docs/CQL%20Engine%20v2.png) showing the main (internal) parts of the engine. May be somewhat outdated.
 
 
