@@ -6,6 +6,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -77,5 +78,8 @@ namespace Hl7.Cql.CqlToElm
 
         public static ILoggingBuilder ThrowOn(this ILoggingBuilder builder, LogLevel threshold) =>
             builder.AddProvider(new ThrowingLoggerProvider(threshold));
+
+        public static IServiceCollection AddMessaging(this IServiceCollection services, CultureInfo? culture = null) =>
+            services.AddSingleton(new MessageProvider(culture ?? CultureInfo.InvariantCulture));
     }
 }

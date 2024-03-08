@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm
         public CoercionResult<Expression> Coerce(Expression expression, TypeSpecifier to)
         {
             // Checking the cost also determines the kind of conversion, if any, we can do.
-            var cost = GetCoercionCost(expression.resultTypeSpecifier, to);
+            var cost = GetCoercionCost(expression, to);
             // Next we apply the conversion.  
             return cost switch
             {
@@ -48,7 +48,7 @@ namespace Hl7.Cql.CqlToElm
                 CoercionCost.IntervalDemotion => new(FromInterval(expression, to), cost),
                 CoercionCost.ListPromotion when to is ListTypeSpecifier toList => new(ToList(expression, toList), cost),
                 // For incompatible conversions, the expression remains unchanged.
-                CoercionCost.Incompatible => new(expression, cost, IncompatibilityMessage(expression.resultTypeSpecifier, to)),
+                CoercionCost.Incompatible => new(expression, cost),
                 _ => throw new InvalidOperationException($"Unexpected cost: {Enum.GetName(cost)}")
             };
 
@@ -136,17 +136,22 @@ namespace Hl7.Cql.CqlToElm
         /// Computes the cost of conversion according to the specification's conversion precendence rules.
         /// </summary>
         /// <seealso href="https://cql.hl7.org/03-developersguide.html#conversion-precedence"/>
-        public CoercionCost GetCoercionCost(TypeSpecifier from, TypeSpecifier to)
+        public CoercionCost GetCoercionCost(Expression from, TypeSpecifier to)
         {
-            if (IsExactMatch(from, to))
+            var fromType = from.resultTypeSpecifier;
+            if (IsExactMatch(fromType, to))
                 return CoercionCost.ExactMatch;
-            else if (IsSubtype(from, to))
+            // Do not coerce to an invalid interval type - comes before subtype because every interval type
+            // is a subtype of Interval<Any>
+            else if (to is IntervalTypeSpecifier toInterval && !IsValidIntervalType(toInterval))
+                return CoercionCost.Incompatible;
+            else if (IsSubtype(fromType, to))
                 return CoercionCost.Subtype;
             else if (IsCompatible(from, to))
                 return CoercionCost.Compatible;
-            else if (CanBeCast(from, to))
+            else if (CanBeCast(fromType, to))
                 return CoercionCost.Cast;
-            else if (HasImplicitConversion(from, to))
+            else if (HasImplicitConversion(fromType, to))
             {
                 if (IsSimpleType(to))
                     return CoercionCost.ImplicitToSimpleType;
@@ -156,86 +161,35 @@ namespace Hl7.Cql.CqlToElm
             }
             else if ((Options.EnableIntervalPromotion ?? false)
                 && to is IntervalTypeSpecifier promotableInterval
-                && CanBePromoted(from, promotableInterval))
+                && CanBePromoted(fromType, promotableInterval))
                 return CoercionCost.IntervalPromotion;
             else if ((Options.EnableListDemotion ?? false)
-                && from is ListTypeSpecifier listType && CanBeDemoted(listType, to))
+                && fromType is ListTypeSpecifier listType && CanBeDemoted(listType, to))
                 return CoercionCost.ListDemotion;
             else if ((Options.EnableIntervalDemotion ?? false)
-                && from is IntervalTypeSpecifier demotableInterval && CanBeDemoted(demotableInterval, to))
+                && fromType is IntervalTypeSpecifier demotableInterval && CanBeDemoted(demotableInterval, to))
                 return CoercionCost.IntervalDemotion;
             else if ((Options.EnableListPromotion ?? false)
-                && to is ListTypeSpecifier promotableListType && CanBePromoted(from, promotableListType))
+                && to is ListTypeSpecifier promotableListType && CanBePromoted(fromType, promotableListType))
                 return CoercionCost.ListPromotion;
             else
                 return CoercionCost.Incompatible;
         }
 
-        internal string IncompatibilityMessage(TypeSpecifier from, TypeSpecifier to) =>
-            $"Expression of type '{from}' cannot be cast as a value of type '{to}'.";
-
         // All types exactly match Any
-        internal virtual bool IsExactMatch(TypeSpecifier from, TypeSpecifier to) =>
+        internal bool IsExactMatch(TypeSpecifier from, TypeSpecifier to) =>
             from == to;
 
-        internal virtual bool IsSubtype(TypeSpecifier from, TypeSpecifier to)
-        {
-            // https://cql.hl7.org/09-b-cqlreference.html#any
-            // The Any type is the maximal supertype in the CQL type system, meaning that all types derive from Any,
-            // including list, interval, and structured types. In addition, the type of a null result is Any.
-            if (to == SystemTypes.AnyType)
-                return true;
-            else if (from is NamedTypeSpecifier argNts && to is NamedTypeSpecifier toNts)
-            {
-                var argTypeInfo = ModelProvider.FindTypeInfoByNamedType(argNts);
-                var toTypeInfo = ModelProvider.FindTypeInfoByNamedType(toNts);
-                var toModel = toTypeInfo.Model;
-                var baseType = argTypeInfo.Type.baseType;
-                while (baseType != null)
-                {
-                    var parts = baseType.Split(".");
-                    if (parts.Length > 1)
-                    {
-                        if (ModelProvider.TryGetModelFromName(parts[0], out var baseModel))
-                        {
-                            var baseTypeInfo = baseModel.FindTypeInfo(baseType);
-                            if (baseTypeInfo != null)
-                            {
-                                if (toModel.url == baseModel.url
-                                    && toTypeInfo.Type.Name() == baseTypeInfo.Name())
-                                    return true;
-                                else baseType = baseTypeInfo.baseType;
-                            }
-                            else baseType = null;
-                        }
-                        else baseType = null;
-                    }
-                }
-            }
-            return false;
-        }
-
+        internal bool IsSubtype(TypeSpecifier from, TypeSpecifier to) =>
+            from.IsSubtypeOf(to, ModelProvider);
+     
         // The spec language is:
         // If the invocation type is compatible with the declared type of the argument (e.g., the invocation type is Any)
-        internal virtual bool IsCompatible(TypeSpecifier from, TypeSpecifier to)
-        {
-            if (from == SystemTypes.AnyType)
-                return true;
-            else if (from is ChoiceTypeSpecifier fromChoice)
-            {
-                if (to is ChoiceTypeSpecifier toChoice)
-                    return fromChoice.choice?.Any(ft => toChoice.choice?.Contains(ft) ?? false) ?? false;
-                else
-                    return fromChoice.choice?.Any(ft => ft == to) ?? false;
-            }
-            else if (to is ChoiceTypeSpecifier toChoice)
-            {
-                return toChoice.choice?.Any(tt => tt == from) ?? false;
-            }
-            return false;
-        }
+        // Update: per Bryn, this conversion is specifically to allow the null keyword to be passed to functions without casting.
+        internal bool IsCompatible(Expression from, TypeSpecifier to) =>
+            from is Null;
 
-        internal virtual bool CanBeCast(TypeSpecifier from, TypeSpecifier to)
+        internal bool CanBeCast(TypeSpecifier from, TypeSpecifier to)
         {
             // Casting is the operation of treating a value of some base type as a more specific type at run-time. 
             if (IsSubtype(to, from))
@@ -260,7 +214,7 @@ namespace Hl7.Cql.CqlToElm
 
         // Implicit conversions table is here:
         // https://cql.hl7.org/09-b-cqlreference.html#convert
-        internal virtual bool HasImplicitConversion(TypeSpecifier from, TypeSpecifier to)
+        internal bool HasImplicitConversion(TypeSpecifier from, TypeSpecifier to)
         {
             if (from is ChoiceTypeSpecifier fromChoice)
             {
@@ -313,8 +267,6 @@ namespace Hl7.Cql.CqlToElm
                                 return true;
                             else if (IsSubtype(fromElementType, toElementType))
                                 return true;
-                            else if (IsCompatible(fromElementType, toElementType))
-                                return true;
                             else if (CanBeCast(fromElementType, toElementType))
                                 return true;
                             else if (HasImplicitConversion(fromElementType, toElementType))
@@ -328,7 +280,7 @@ namespace Hl7.Cql.CqlToElm
             return false;
         }
 
-        internal virtual bool IsSimpleType(TypeSpecifier typeSpecifier)
+        internal bool IsSimpleType(TypeSpecifier typeSpecifier)
         {
             if (typeSpecifier is NamedTypeSpecifier fromNts)
             {
@@ -338,7 +290,7 @@ namespace Hl7.Cql.CqlToElm
             return false;
         }
 
-        internal virtual bool IsClassType(TypeSpecifier typeSpecifier)
+        internal bool IsClassType(TypeSpecifier typeSpecifier)
         {
             if (typeSpecifier is NamedTypeSpecifier fromNts)
             {
@@ -350,15 +302,13 @@ namespace Hl7.Cql.CqlToElm
 
         // The declared type is an interval and the invocation type can be promoted to an interval of that type
         // Presumably 
-        internal virtual bool CanBePromoted(TypeSpecifier from, IntervalTypeSpecifier to)
+        internal bool CanBePromoted(TypeSpecifier from, IntervalTypeSpecifier to)
         {
             var pointType = to.pointType;
             // written this way for easier debugging
             if (IsExactMatch(from, pointType))
                 return true;
             else if (IsSubtype(from, pointType))
-                return true;
-            else if (IsCompatible(from, pointType))
                 return true;
             else if (CanBeCast(from, pointType))
                 return true;
@@ -367,15 +317,13 @@ namespace Hl7.Cql.CqlToElm
             else return false;
         }
 
-        internal virtual bool CanBeDemoted(ListTypeSpecifier from, TypeSpecifier to)
+        internal bool CanBeDemoted(ListTypeSpecifier from, TypeSpecifier to)
         {
             var elementType = from.elementType;
             // written this way for easier debugging
             if (IsExactMatch(elementType, to))
                 return true;
             else if (IsSubtype(elementType, to))
-                return true;
-            else if (IsCompatible(elementType, to))
                 return true;
             else if (CanBeCast(elementType, to))
                 return true;
@@ -387,15 +335,13 @@ namespace Hl7.Cql.CqlToElm
         // The invocation type of the argument is an interval and can be demoted to the declared type
         // Note that whether an interval is a point interval or not cannot be known at compile time.
         // This type of conversion will issue a warning and could fail at runtime.
-        internal virtual bool CanBeDemoted(IntervalTypeSpecifier from, TypeSpecifier to)
+        internal bool CanBeDemoted(IntervalTypeSpecifier from, TypeSpecifier to)
         {
             var pointType = from.pointType;
             // written this way for easier debugging
             if (IsExactMatch(pointType, to))
                 return true;
             else if (IsSubtype(pointType, to))
-                return true;
-            else if (IsCompatible(pointType, to))
                 return true;
             else if (CanBeCast(pointType, to))
                 return true;
@@ -405,7 +351,7 @@ namespace Hl7.Cql.CqlToElm
         }
 
         // The declared type is a list and the invocation type can be promoted to a list of that type
-        internal virtual bool CanBePromoted(TypeSpecifier from, ListTypeSpecifier to)
+        internal bool CanBePromoted(TypeSpecifier from, ListTypeSpecifier to)
         {
             var elementType = to.elementType;
             // written this way for easier debugging
@@ -413,14 +359,18 @@ namespace Hl7.Cql.CqlToElm
                 return true;
             else if (IsSubtype(from, elementType))
                 return true;
-            else if (IsCompatible(from, elementType))
-                return true;
             else if (CanBeCast(from, elementType))
                 return true;
             else if (HasImplicitConversion(from, elementType))
                 return true;
             else return false;
         }
+
+        internal bool CanBeExplicitlyCast(TypeSpecifier from, TypeSpecifier to) =>
+            IsSubtype(from, to) || CanBeCast(from, to);
+
+        internal bool IsValidIntervalType(IntervalTypeSpecifier typeSpecifier) =>
+            SystemTypes.IntervalPointTypes.Contains(typeSpecifier.pointType);
 
     }
 }

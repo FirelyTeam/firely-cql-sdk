@@ -68,7 +68,7 @@ namespace Hl7.Cql.Elm
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 
         /// <summary>
-        /// The types that can be used as the point type for an interval, and have a successor and predecessor
+        /// The types that have ordering applied and can be used in comparison expressions
         /// </summary>
         internal static IEnumerable<NamedTypeSpecifier> OrderedTypes
         {
@@ -82,6 +82,23 @@ namespace Hl7.Cql.Elm
                 yield return TimeType;
                 yield return DateTimeType;
                 yield return StringType;
+            }
+        }
+
+        /// <summary>
+        /// The types that are valid interval point types, which can be both used in comparison expressions and for which have predecessor and successor operators defined.
+        /// </summary>
+        internal static IEnumerable<NamedTypeSpecifier> IntervalPointTypes
+        {
+            get
+            {
+                yield return IntegerType;
+                yield return LongType;
+                yield return DecimalType;
+                yield return QuantityType;
+                yield return DateType;
+                yield return TimeType;
+                yield return DateTimeType;
             }
         }
 

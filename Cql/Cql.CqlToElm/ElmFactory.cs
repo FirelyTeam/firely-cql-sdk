@@ -9,11 +9,13 @@ namespace Hl7.Cql.CqlToElm
 {
     internal class ElmFactory
     {
-        public ElmFactory(CoercionProvider coercionProvider)
+        public ElmFactory(CoercionProvider coercionProvider, MessageProvider messaging)
         {
             CoercionProvider = coercionProvider;
+            Messaging = messaging;
         }
         public CoercionProvider CoercionProvider { get; }
+        public MessageProvider Messaging { get; }
 
         public Expression CreateElmNode(FunctionDef function, string? library, Expression[] arguments)
         {
@@ -85,8 +87,7 @@ namespace Hl7.Cql.CqlToElm
             var convertCondition = CoercionProvider.Coerce(condition, SystemTypes.BooleanType);
             if (convertCondition.Success)
                 condition = convertCondition.Result;
-            else if (convertCondition.Error is not null)
-                @if.AddError(convertCondition.Error);
+            else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
 
             var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
             var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);

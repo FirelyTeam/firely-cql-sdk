@@ -19,7 +19,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             LocalIdentifierProvider localIdentifierProvider,
             InvocationBuilder invocationBuilder,
             CoercionProvider coercionProvider,
-            ElmFactory elmFactory) : base(localIdentifierProvider, invocationBuilder)
+            ElmFactory elmFactory,
+            MessageProvider messageProvider) : base(localIdentifierProvider, invocationBuilder)
         {
             ModelProvider = provider;
             ConverterContext = converterContext;
@@ -27,6 +28,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             TypeSpecifierVisitor = typeSpecifierVisitor;
             CoercionProvider = coercionProvider;
             ElmFactory = elmFactory;
+            Messaging = messageProvider;
             Options = options.Value;
         }
 
@@ -40,6 +42,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private LibraryBuilder LibraryBuilder { get; }
         private CoercionProvider CoercionProvider { get; }
         private ElmFactory ElmFactory { get; }
+        private MessageProvider Messaging { get; }
         #endregion
 
         // 'Interval' ('['|'(') expression ',' expression (']'|')')
@@ -162,8 +165,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     var result = CoercionProvider.Coerce(ei, elementType);
                     if (result.Success)
                         typedElements[i] = result.Result;
-                    else if (!string.IsNullOrWhiteSpace(result.Error))
-                        typedElements[i] = ei.AddError(result.Error);
+                    else
+                    {
+                        typedElements[i] = ei.AddError($"Expected an expression of type '{elementType}', but found an expression of type '{ei.resultTypeSpecifier}'.");
+                    }
                 }
 
                 return new List

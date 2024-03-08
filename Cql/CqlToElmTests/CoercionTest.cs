@@ -1,4 +1,5 @@
-﻿using FluentAssertions.Types;
+﻿using FluentAssertions;
+using FluentAssertions.Types;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -41,6 +42,8 @@ namespace Hl7.Cql.CqlToElm.Test
             .WithResultType(TupleType(tuple.Select(t=>(t.name, t.value.resultTypeSpecifier)).ToArray()));
         private static TypeSpecifier TupleType(params (string name, TypeSpecifier type)[] tuple) =>
             new TupleTypeSpecifier { element = tuple.Select(t => new TupleElementDefinition { name = t.name, elementType = t.type }).ToArray() };
+
+        private static ParameterTypeSpecifier T = new ParameterTypeSpecifier { parameterName = "T" };
 
         [TestMethod]
         public void IntegerExactyMatchesInteger()
@@ -125,12 +128,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void IntegerIsCompatibleWithChoice()
+        public void IntegerCanBeCastToChoice()
         {
             var expression = Integer();
             var result = CoercionProvider.Coerce(expression, Choice(SystemTypes.IntegerType, SystemTypes.StringType));
             Assert.IsTrue(result.Success);
-            Assert.AreEqual(CoercionCost.Compatible, result.Cost);
+            Assert.AreEqual(CoercionCost.Cast, result.Cost);
         }
 
         [TestMethod]
@@ -219,5 +222,16 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(result.Success);
             Assert.AreEqual(CoercionCost.Subtype, result.Cost);
         }
+
+        [TestMethod]
+        public void IntegerCanBeCastAsInteger() =>
+            CoercionProvider.CanBeCast(SystemTypes.IntegerType, SystemTypes.IntegerType)
+                .Should().BeTrue();
+
+        [TestMethod]
+        public void AnyCanBeCastAsIntervalAny() =>
+            CoercionProvider.CanBeCast(SystemTypes.AnyType, SystemTypes.AnyType.ToIntervalType())
+                .Should().BeTrue();
+
     }
 }
