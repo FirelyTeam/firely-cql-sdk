@@ -30,7 +30,7 @@ internal class LibraryPackager
 
     public LibraryPackager(
         ILogger<LibraryPackager> logger,
-        [FromKeyedServices("Fhir")] TypeResolver typeResolver,
+        TypeResolver typeResolver,
         AssemblyCompiler assemblyCompiler,
         LibraryExpressionBuilder libraryExpressionBuilder)
     {

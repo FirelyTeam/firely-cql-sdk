@@ -29,7 +29,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the assembly name for any generated types created by this type manager.
         /// </summary>
-        public string AssemblyName { get; }
+        private string AssemblyName { get; }
 
         /// <summary>
         /// Gets the <see cref="TypeResolver"/> this TypeManager uses.
@@ -39,7 +39,7 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the namespace for generated tuple types as supplied in the constructor.
         /// </summary>
-        public string TupleTypeNamespace { get; }
+        private string TupleTypeNamespace { get; }
 
         /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
@@ -338,7 +338,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
         /// <returns>The unique tuple type name.</returns>
-        protected virtual string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
+        protected string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)
@@ -347,7 +347,6 @@ namespace Hl7.Cql.Compiler
             var ns = TupleTypeNamespace;
             return $"Tuple_{tupleId}";
         }
-
 
         private void AddTupleType(Type type)
         {

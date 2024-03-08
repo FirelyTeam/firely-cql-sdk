@@ -88,7 +88,7 @@ internal static class DependencyInjection
 
     public static void TryAddCompilationServices(this IServiceCollection services)
     {
-        services.TryAddSingleton<OperatorBinding, PackagerCqlOperatorBinding>();
+        services.TryAddSingleton<OperatorBinding, CqlOperatorsBinding>();
         services.TryAddSingleton<CSharpSourceCodeWriter>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
@@ -96,25 +96,8 @@ internal static class DependencyInjection
     public static void TryAddTypeServices(this IServiceCollection services)
     {
         services.TryAddSingleton(ModelInfo.ModelInspector);
-        services.TryAddKeyedSingleton<TypeResolver>("Fhir", FhirTypeResolver.Default);
-        services.TryAddKeyedSingleton<TypeConverter>("Fhir", FhirTypeConverter.Default);
-        services.TryAddSingleton<TypeManager, PackagerTypeManager>();
-    }
-}
-
-file class PackagerTypeManager : TypeManager
-{
-    public PackagerTypeManager(
-        [FromKeyedServices("Fhir")] TypeResolver resolver) : base(resolver)
-    {
-    }
-}
-
-file class PackagerCqlOperatorBinding : CqlOperatorsBinding
-{
-    public PackagerCqlOperatorBinding(
-        [FromKeyedServices("Fhir")] TypeResolver typeResolver,
-        [FromKeyedServices("Fhir")] TypeConverter typeConverter) : base(typeResolver, typeConverter)
-    {
+        services.TryAddSingleton<TypeResolver>(FhirTypeResolver.Default);
+        services.TryAddSingleton<TypeConverter>(FhirTypeConverter.Default);
+        services.TryAddSingleton<TypeManager, TypeManager>();
     }
 }

@@ -38,7 +38,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         public AssemblyCompiler(
             LibraryExpressionBuilder libraryExpressionBuilder,
             CSharpSourceCodeWriter cSharpSourceCodeWriter,
-            [FromKeyedServices("Fhir")] TypeManager typeManager)
+            TypeManager typeManager)
         {
             _cSharpSourceCodeWriter = cSharpSourceCodeWriter;
             _libraryExpressionBuilder = libraryExpressionBuilder;
@@ -69,7 +69,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         public IDictionary<string, AssemblyData> Compile(
-            IReadOnlyCollection<Library> elmLibraries, DefinitionDictionary<LambdaExpression> definitions)
+            IReadOnlyCollection<Library> elmLibraries, 
+            DefinitionDictionary<LambdaExpression> definitions)
         {
             foreach (var (elmLibrary, ordinal) in elmLibraries.WithOrdinals())
             {
