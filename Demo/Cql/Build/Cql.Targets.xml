@@ -5,7 +5,7 @@
 		<ElmFiles Include="$(MSBuildProjectDirectory)\..\Elm\Json-cms\*.json" />
 	</ItemGroup>
 
-	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-2.11.0.jar">
+	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-3.8.0.jar">
 		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies" />
 	</Target>
 	<Target Name="CQL to ELM"

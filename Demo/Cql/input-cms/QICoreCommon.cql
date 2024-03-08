@@ -376,7 +376,7 @@ define function ToAbatementInterval(condition Condition):
 	  Interval[Patient.birthDate + (condition.abatement.low as Quantity),
 		  Patient.birthDate + (condition.abatement.high as Quantity) + 1 year)
 	else if condition.abatement is Interval<DateTime> then
-	  Interval[condition.abatement.low, condition.abatement.high)
+	  Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime)
 	else null as Interval<DateTime>
 
 /*
@@ -399,7 +399,7 @@ define fluent function abatementInterval(condition Condition):
 	  Interval[Patient.birthDate + (condition.abatement.low as Quantity),
 		  Patient.birthDate + (condition.abatement.high as Quantity) + 1 year)
 	else if condition.abatement is Interval<DateTime> then
-	  Interval[condition.abatement.low, condition.abatement.high)
+	  Interval[condition.abatement.low as DateTime, condition.abatement.high as DateTime)
 	else null as Interval<DateTime>
 
 /*
