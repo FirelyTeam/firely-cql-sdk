@@ -10,7 +10,7 @@
     },
     "PackagerCLI (CMS Measures)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/Demo/Elm/Json-cms\" --cql \"$(SolutionDir)/Demo/Elm/input-cms\" --fhir \"$(SolutionDir)/Demo/Test/Resources-cms\" --cs \"$(SolutionDir)/Demo/Measures-cms\" --f true"
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/Demo/Elm/Json-cms\" --cql \"$(SolutionDir)/Demo/Cql/input-cms\" --fhir \"$(SolutionDir)/Demo/Test/Resources-cms\" --cs \"$(SolutionDir)/Demo/Measures-cms\" --f true"
     }
   }
 }
