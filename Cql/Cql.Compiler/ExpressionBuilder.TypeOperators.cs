@@ -274,6 +274,7 @@ namespace Hl7.Cql.Compiler
         // At this moment (20240308) the QICore translation by the current tooling (3.8.0.0) of the CQl-to-ELM
         // translator is incorrect. This method is a temporary workaround to correct the incorrectly mapped binding
         // names. This method should be removed once the QICore translation is fixed.
+        // See https://github.com/cqframework/cqf-tooling/issues/518.
         private static bool TryCorrectQiCoreBindingError(Type source, Type to, out Type? correctedTo)
         {
             return KnownErrors.TryGetValue((source,to), out correctedTo);
