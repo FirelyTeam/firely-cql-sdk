@@ -13,7 +13,7 @@
 VSWorkspaceState.json
 .vs/
 *.snk
-.idea/
+# .idea/
 
 
 # User-specific files (MonoDevelop/Xamarin Studio)
