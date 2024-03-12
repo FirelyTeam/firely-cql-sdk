@@ -3530,9 +3530,7 @@ namespace CoreTests
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             
             var libbld = Factory.LibraryExpressionBuilder;
-            var definitions = new DefinitionDictionary<LambdaExpression>();
-            var libctx = libbld.CreateContext(definitions, elmPackage);
-            libbld.ProcessLibrary(libctx);
+            var definitions = libbld.ProcessLibrary(elmPackage);
 
             var writer = Factory.CSharpSourceCodeWriter;
             var graph = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\libs"));

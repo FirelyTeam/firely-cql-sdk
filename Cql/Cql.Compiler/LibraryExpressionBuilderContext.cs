@@ -22,10 +22,10 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
     public LibraryExpressionBuilderContext(
+        Library library, 
         ExpressionBuilder expressionBuilder,
         OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> definitions,
-        Library library)
+        DefinitionDictionary<LambdaExpression> definitions)
     {
         if (string.IsNullOrWhiteSpace(library.NameAndVersion))
             throw new ArgumentException("Library must have a name and version.");

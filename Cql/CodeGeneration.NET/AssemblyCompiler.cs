@@ -72,11 +72,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             IReadOnlyCollection<Library> elmLibraries, 
             DefinitionDictionary<LambdaExpression> definitions)
         {
-            foreach (var (elmLibrary, ordinal) in elmLibraries.WithOrdinals())
+            foreach (var elmLibrary in elmLibraries)
             {
-                var packageDefinitions = new DefinitionDictionary<LambdaExpression>();
-                var libctx = _libraryExpressionBuilder.CreateContext(packageDefinitions, elmLibrary);
-                _libraryExpressionBuilder.ProcessLibrary(libctx);
+                var packageDefinitions =  _libraryExpressionBuilder.ProcessLibrary(elmLibrary);
                 definitions.Merge(packageDefinitions);
             }
 

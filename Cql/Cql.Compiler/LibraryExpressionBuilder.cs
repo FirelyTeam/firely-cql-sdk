@@ -34,9 +34,20 @@ internal class LibraryExpressionBuilder
     }
 
     public LibraryExpressionBuilderContext CreateContext(
-        DefinitionDictionary<LambdaExpression> definitions,
-        Library library) =>
-        new(_expressionBuilder, _operatorBinding, definitions, library);
+        Library library,
+        DefinitionDictionary<LambdaExpression> definitions) =>
+        new(library, _expressionBuilder, _operatorBinding, definitions);
+
+    public DefinitionDictionary<LambdaExpression> ProcessLibrary(
+        Library library,
+        DefinitionDictionary<LambdaExpression>? definitions = null)
+
+    {
+        definitions ??= new();
+        var libctx = CreateContext(library, definitions);
+        ProcessLibrary(libctx);
+        return definitions;
+    }
 
     public void ProcessLibrary(LibraryExpressionBuilderContext libCtx)
     {
@@ -45,7 +56,7 @@ internal class LibraryExpressionBuilder
 
         if (library.includes is { Length: > 0 } includeDefs)
         {
-            foreach (var (includeDef, ordinal) in includeDefs.WithOrdinals())
+            foreach (var includeDef in includeDefs)
             {
                 ProcessIncludes(includeDef, libCtx.NewExpressionBuilderContext(includeDef));
             }
@@ -53,7 +64,7 @@ internal class LibraryExpressionBuilder
 
         if (library.valueSets is { Length: > 0 } valueSetDefs)
         {
-            foreach (var (valueSetDef, ordinal) in valueSetDefs.WithOrdinals())
+            foreach (var valueSetDef in valueSetDefs)
             {
                 ProcessValueSetDef(valueSetDef, libCtx.NewExpressionBuilderContext(valueSetDef));
             }
@@ -66,7 +77,7 @@ internal class LibraryExpressionBuilder
                 library.codeSystems?.ToDictionary(cs => cs.name, cs => cs.id)
                 ?? new();
 
-            foreach (var (codeDef, ordinal) in codeDefs.WithOrdinals())
+            foreach (var codeDef in codeDefs)
             {
                 ProcessCodeDef(codeDef, libCtx.NewExpressionBuilderContext(codeDef), foundCodeNameCodeSystemUrls, codeSystemUrls);
             }
@@ -74,7 +85,7 @@ internal class LibraryExpressionBuilder
 
         if (library.codeSystems is { Length: > 0 } codeSystemDefs)
         {
-            foreach (var (codeSystemDef, ordinal) in codeSystemDefs.WithOrdinals())
+            foreach (var codeSystemDef in codeSystemDefs)
             {
                 ProcessCodeSystemDef(codeSystemDef, libCtx.NewExpressionBuilderContext(codeSystemDef));
             }
@@ -82,7 +93,7 @@ internal class LibraryExpressionBuilder
 
         if (library.concepts is { Length: > 0 } conceptDefs)
         {
-            foreach (var (conceptDef, ordinal) in conceptDefs.WithOrdinals())
+            foreach (var conceptDef in conceptDefs)
             {
                 ProcessConceptDef(conceptDef, libCtx.NewExpressionBuilderContext(conceptDef));
             }
@@ -90,7 +101,7 @@ internal class LibraryExpressionBuilder
 
         if (library.parameters is { Length: > 0 } parameterDefs)
         {
-            foreach (var (parameterDef, ordinal) in parameterDefs.WithOrdinals())
+            foreach (var parameterDef in parameterDefs)
             {
                 ProcessParameterDef(parameterDef, libCtx.NewExpressionBuilderContext(parameterDef));
             }
@@ -98,7 +109,7 @@ internal class LibraryExpressionBuilder
 
         if (library.statements is { Length: > 0 } expressionDefs)
         {
-            foreach (var (expressionDef, ordinal) in expressionDefs.WithOrdinals())
+            foreach (var expressionDef in expressionDefs)
             {
                 ProcessExpressionDef(expressionDef, libCtx.NewExpressionBuilderContext(expressionDef));
             }
