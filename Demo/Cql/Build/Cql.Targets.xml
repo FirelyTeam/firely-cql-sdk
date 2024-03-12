@@ -1,20 +1,22 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
 	<ItemGroup>
-		<ElmFiles Include="$(MSBuildProjectDirectory)\..\Elm\Json\*.json"></ElmFiles>
+		<ElmFiles Include="$(SolutionDir)\LibrarySets\Demo\Cql\*.json" />
+		<ElmFiles Include="$(SolutionDir)\LibrarySets\CMS\Cql\*.json" />
 	</ItemGroup>
 
-	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-2.11.0.jar">
-		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies"></Exec>
+	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-3.8.0.jar">
+		<Exec Command="mvn -f Build\pom.xml dependency:copy-dependencies" />
 	</Target>
 	<Target Name="CQL to ELM"
 			DependsOnTargets="Download CQL to ELM CLI via Maven"
 			AfterTargets="Build">
 		<Message Text="Converting CQL to ELM"/>
-		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(MSBuildProjectDirectory)\input" -f JSON -output "$(MSBuildProjectDirectory)\..\Elm\Json" -locators true -result-types true'/>
+		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(SolutionDir)\LibrarySets\Demo\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\Demo\Elm" -locators true -result-types true'/>
+		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(SolutionDir)\LibrarySets\CMS\Cql" -f JSON -output "$(SolutionDir)\LibrarySets\CMS\Elm" -locators true -result-types true'/>		
 	</Target>
 	<Target Name="Delete ELM" AfterTargets="Clean">
-		<Message Text="Deleting ELM files...$(MSBuildProjectDirectory)\..\Elm\Json\*.json"></Message>
+		<Message Text="Deleting ELM files..." />
 		<Delete Files="@(ElmFiles)" />
 	</Target>
 </Project>

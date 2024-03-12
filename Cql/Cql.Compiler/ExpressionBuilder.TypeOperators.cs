@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.Extensions.Logging;
 using elm = Hl7.Cql.Elm;
+using F = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Compiler
 {
@@ -253,11 +254,30 @@ namespace Hl7.Cql.Compiler
                 var callSelect = ctx.OperatorBinding.Bind(CqlOperator.Select, ctx.RuntimeContextParameter, input, lambda);
                 return callSelect;
             }
+            else if(TryCorrectQiCoreBindingError(input.Type, outputType, out var correctedTo))
+            {
+                var call = ctx.OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter, input, Expression.Constant(correctedTo, typeof(Type)));
+                return call;
+            }
             else
             {
                 var call = ctx.OperatorBinding.Bind(CqlOperator.Convert, ctx.RuntimeContextParameter, input, Expression.Constant(outputType, typeof(Type)));
                 return call;
             }
+        }
+  
+        private static readonly Dictionary<(Type,Type),Type> KnownErrors = new()
+        {
+            [(typeof(F.ObservationStatus?), typeof(F.Code<F.VerificationResult.StatusCode>))] = typeof(F.ObservationStatus?)
+        };   
+        
+        // At this moment (20240308) the QICore translation by the current tooling (3.8.0.0) of the CQl-to-ELM
+        // translator is incorrect. This method is a temporary workaround to correct the incorrectly mapped binding
+        // names. This method should be removed once the QICore translation is fixed.
+        // See https://github.com/cqframework/cqf-tooling/issues/518.
+        private static bool TryCorrectQiCoreBindingError(Type source, Type to, out Type? correctedTo)
+        {
+            return KnownErrors.TryGetValue((source,to), out correctedTo);
         }
     }
 }

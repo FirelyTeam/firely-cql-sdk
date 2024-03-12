@@ -1,0 +1,1791 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "DischargedonAntithromboticTherapyFHIR",
+         "version" : "0.9.000"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "locator" : "6:1-6:28",
+            "localIdentifier" : "QICore",
+            "uri" : "http://hl7.org/fhir"
+         } ]
+      },
+      "includes" : {
+         "def" : [ {
+            "locator" : "8:1-8:56",
+            "localIdentifier" : "FHIRHelpers",
+            "path" : "FHIRHelpers",
+            "version" : "4.3.000"
+         }, {
+            "locator" : "9:1-9:52",
+            "localIdentifier" : "CQMCommon",
+            "path" : "CQMCommon",
+            "version" : "2.0.000"
+         }, {
+            "locator" : "10:1-10:58",
+            "localIdentifier" : "QICoreCommon",
+            "path" : "QICoreCommon",
+            "version" : "2.0.000"
+         }, {
+            "locator" : "11:1-11:61",
+            "localIdentifier" : "SDE",
+            "path" : "SupplementalDataElements",
+            "version" : "3.4.000"
+         }, {
+            "locator" : "12:1-12:48",
+            "localIdentifier" : "TJC",
+            "path" : "TJCOverall",
+            "version" : "8.11.000"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "19:1-20:66",
+            "name" : "Measurement Period",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "IntervalTypeSpecifier",
+               "pointType" : {
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "default" : {
+               "locator" : "20:11-20:66",
+               "lowClosed" : true,
+               "highClosed" : false,
+               "type" : "Interval",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "low" : {
+                  "locator" : "20:20-20:41",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2025",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               },
+               "high" : {
+                  "locator" : "20:44-20:65",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "DateTime",
+                  "year" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "2026",
+                     "type" : "Literal"
+                  },
+                  "month" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "day" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "hour" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "minute" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "second" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  },
+                  "millisecond" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
+                     "value" : "0",
+                     "type" : "Literal"
+                  }
+               }
+            },
+            "parameterTypeSpecifier" : {
+               "locator" : "19:32-19:49",
+               "type" : "IntervalTypeSpecifier",
+               "resultTypeSpecifier" : {
+                  "type" : "IntervalTypeSpecifier",
+                  "pointType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "pointType" : {
+                  "locator" : "19:41-19:48",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                  "type" : "NamedTypeSpecifier"
+               }
+            }
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "14:1-14:123",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Antithrombotic Therapy for Ischemic Stroke",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "15:1-15:127",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Medical Reason For Not Providing Treatment",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "16:1-16:99",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Patient Refusal",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "17:1-17:141",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "Pharmacological Contraindications For Antithrombotic Therapy",
+            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "contexts" : {
+         "def" : [ {
+            "locator" : "22:1-22:15",
+            "name" : "Patient"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "22:1-22:15",
+            "name" : "Patient",
+            "context" : "Patient",
+            "expression" : {
+               "type" : "SingletonFrom",
+               "operand" : {
+                  "locator" : "22:1-22:15",
+                  "dataType" : "{http://hl7.org/fhir}Patient",
+                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
+                  "type" : "Retrieve"
+               }
+            }
+         }, {
+            "locator" : "24:1-25:50",
+            "name" : "Initial Population",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "25:3-25:50",
+               "name" : "Encounter with Principal Diagnosis and Age",
+               "libraryName" : "TJC",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         }, {
+            "locator" : "27:1-28:33",
+            "name" : "Denominator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "28:3-28:33",
+               "name" : "Ischemic Stroke Encounter",
+               "libraryName" : "TJC",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }
+            }
+         }, {
+            "locator" : "34:1-37:151",
+            "name" : "Encounter with Comfort Measures during Hospitalization for Patients with Documented Ischemic Stroke",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "35:3-37:151",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "35:3-35:25",
+                  "alias" : "Encounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "35:3-35:15",
+                     "name" : "Denominator",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "locator" : "36:5-37:151",
+                  "alias" : "ComfortMeasure",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "type" : "ChoiceTypeSpecifier",
+                        "choice" : [ {
+                           "name" : "{http://hl7.org/fhir}ServiceRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "name" : "{http://hl7.org/fhir}Procedure",
+                           "type" : "NamedTypeSpecifier"
+                        } ]
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "36:10-36:44",
+                     "name" : "Intervention Comfort Measures",
+                     "libraryName" : "TJC",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "type" : "ChoiceTypeSpecifier",
+                           "choice" : [ {
+                              "name" : "{http://hl7.org/fhir}ServiceRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{http://hl7.org/fhir}Procedure",
+                              "type" : "NamedTypeSpecifier"
+                           } ]
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "locator" : "37:17-37:151",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "37:17-37:99",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "type" : "Coalesce",
+                        "operand" : [ {
+                           "locator" : "37:26-37:71",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "Start",
+                           "operand" : {
+                              "locator" : "37:35-37:71",
+                              "name" : "toInterval",
+                              "libraryName" : "QICoreCommon",
+                              "type" : "FunctionRef",
+                              "resultTypeSpecifier" : {
+                                 "type" : "IntervalTypeSpecifier",
+                                 "pointType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "operand" : [ {
+                                 "locator" : "37:35-37:58",
+                                 "name" : "ToValue",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "resultTypeSpecifier" : {
+                                    "type" : "ChoiceTypeSpecifier",
+                                    "choice" : [ {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ]
+                                 },
+                                 "operand" : [ {
+                                    "path" : "performed",
+                                    "scope" : "ComfortMeasure",
+                                    "type" : "Property"
+                                 } ]
+                              } ]
+                           }
+                        }, {
+                           "locator" : "37:74-37:98",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "authoredOn",
+                              "scope" : "ComfortMeasure",
+                              "type" : "Property"
+                           }
+                        } ]
+                     }, {
+                        "locator" : "37:108-37:151",
+                        "name" : "hospitalizationWithObservation",
+                        "libraryName" : "CQMCommon",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "locator" : "37:108-37:116",
+                           "resultTypeName" : "{http://hl7.org/fhir}Encounter",
+                           "name" : "Encounter",
+                           "type" : "AliasRef"
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "30:1-32:111",
+            "name" : "Denominator Exclusions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "31:3-32:111",
+               "type" : "Union",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "operand" : [ {
+                  "locator" : "31:3-31:61",
+                  "name" : "Ischemic Stroke Encounters with Discharge Disposition",
+                  "libraryName" : "TJC",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "locator" : "32:11-32:111",
+                  "name" : "Encounter with Comfort Measures during Hospitalization for Patients with Documented Ischemic Stroke",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "39:1-42:88",
+            "name" : "Numerator",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "40:3-42:88",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "40:3-40:57",
+                  "alias" : "IschemicStrokeEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "40:3-40:33",
+                     "name" : "Ischemic Stroke Encounter",
+                     "libraryName" : "TJC",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "locator" : "41:5-42:88",
+                  "alias" : "DischargeAntithrombotic",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "41:10-41:76",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "locator" : "41:32-41:75",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "locator" : "41:10-41:76",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "41:32-41:75",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  },
+                  "suchThat" : {
+                     "locator" : "42:17-42:88",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "42:17-42:50",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "authoredOn",
+                           "scope" : "DischargeAntithrombotic",
+                           "type" : "Property"
+                        }
+                     }, {
+                        "locator" : "42:59-42:88",
+                        "name" : "ToInterval",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "path" : "period",
+                           "scope" : "IschemicStrokeEncounter",
+                           "type" : "Property"
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "44:1-51:49",
+            "name" : "Antithrombotic Therapy at Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}MedicationRequest",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "45:3-51:49",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "45:3-45:84",
+                  "alias" : "Antithrombotic",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "45:3-45:69",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "locator" : "45:25-45:68",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "locator" : "45:3-45:69",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "45:25-45:68",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "46:5-51:49",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "operand" : [ {
+                     "locator" : "46:11-50:114",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "operand" : [ {
+                        "locator" : "46:11-49:60",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "operand" : [ {
+                           "locator" : "46:11-48:5",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Or",
+                           "operand" : [ {
+                              "locator" : "46:13-46:42",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "isCommunity",
+                              "libraryName" : "QICoreCommon",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "locator" : "46:13-46:26",
+                                 "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "Antithrombotic",
+                                 "type" : "AliasRef"
+                              } ]
+                           }, {
+                              "locator" : "47:12-47:41",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "isDischarge",
+                              "libraryName" : "QICoreCommon",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "locator" : "47:12-47:25",
+                                 "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "Antithrombotic",
+                                 "type" : "AliasRef"
+                              } ]
+                           } ]
+                        }, {
+                           "locator" : "49:11-49:60",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "In",
+                           "operand" : [ {
+                              "locator" : "49:11-49:31",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "status",
+                                 "scope" : "Antithrombotic",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "locator" : "49:36-49:60",
+                              "type" : "List",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "element" : [ {
+                                 "locator" : "49:38-49:45",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "active",
+                                 "type" : "Literal"
+                              }, {
+                                 "locator" : "49:48-49:58",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "completed",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "locator" : "50:11-50:114",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "In",
+                        "operand" : [ {
+                           "locator" : "50:11-50:31",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "intent",
+                              "scope" : "Antithrombotic",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "locator" : "50:36-50:114",
+                           "type" : "List",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "element" : [ {
+                              "locator" : "50:38-50:44",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "50:47-50:62",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "original-order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "50:65-50:78",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "reflex-order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "50:81-50:94",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "filler-order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "50:97-50:112",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "instance-order",
+                              "type" : "Literal"
+                           } ]
+                        } ]
+                     } ]
+                  }, {
+                     "locator" : "51:11-51:49",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Not",
+                     "operand" : {
+                        "locator" : "51:11-51:49",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "locator" : "51:11-51:37",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "doNotPerform",
+                              "scope" : "Antithrombotic",
+                              "type" : "Property"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "64:1-72:125",
+            "name" : "Reason for Not Giving Antithrombotic at Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}MedicationRequest",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "65:3-72:125",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "65:3-65:100",
+                  "alias" : "NoAntithromboticDischarge",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "65:3-65:74",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "locator" : "65:30-65:73",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "locator" : "65:3-65:74",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "~",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "65:30-65:73",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Antithrombotic Therapy for Ischemic Stroke",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "66:5-72:125",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "operand" : [ {
+                     "locator" : "66:11-71:7",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "operand" : [ {
+                        "locator" : "66:11-68:5",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Or",
+                        "operand" : [ {
+                           "locator" : "66:13-66:96",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "AnyInValueSet",
+                           "codes" : {
+                              "locator" : "66:13-66:48",
+                              "type" : "Query",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "source" : [ {
+                                 "alias" : "$this",
+                                 "expression" : {
+                                    "path" : "reasonCode",
+                                    "scope" : "NoAntithromboticDischarge",
+                                    "type" : "Property"
+                                 }
+                              } ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "expression" : {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "name" : "$this",
+                                       "type" : "AliasRef"
+                                    } ]
+                                 }
+                              }
+                           },
+                           "valueset" : {
+                              "locator" : "66:53-66:96",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Medical Reason For Not Providing Treatment",
+                              "preserve" : true
+                           }
+                        }, {
+                           "locator" : "67:12-67:68",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "AnyInValueSet",
+                           "codes" : {
+                              "locator" : "67:12-67:47",
+                              "type" : "Query",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "source" : [ {
+                                 "alias" : "$this",
+                                 "expression" : {
+                                    "path" : "reasonCode",
+                                    "scope" : "NoAntithromboticDischarge",
+                                    "type" : "Property"
+                                 }
+                              } ],
+                              "return" : {
+                                 "distinct" : false,
+                                 "expression" : {
+                                    "name" : "ToConcept",
+                                    "libraryName" : "FHIRHelpers",
+                                    "type" : "FunctionRef",
+                                    "operand" : [ {
+                                       "name" : "$this",
+                                       "type" : "AliasRef"
+                                    } ]
+                                 }
+                              }
+                           },
+                           "valueset" : {
+                              "locator" : "67:52-67:68",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                              "name" : "Patient Refusal",
+                              "preserve" : true
+                           }
+                        } ]
+                     }, {
+                        "locator" : "69:11-71:7",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "Or",
+                        "operand" : [ {
+                           "locator" : "69:13-69:53",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "isCommunity",
+                           "libraryName" : "QICoreCommon",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "locator" : "69:13-69:37",
+                              "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "NoAntithromboticDischarge",
+                              "type" : "AliasRef"
+                           } ]
+                        }, {
+                           "locator" : "70:14-70:54",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "isDischarge",
+                           "libraryName" : "QICoreCommon",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "locator" : "70:14-70:38",
+                              "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                              "name" : "NoAntithromboticDischarge",
+                              "type" : "AliasRef"
+                           } ]
+                        } ]
+                     } ]
+                  }, {
+                     "locator" : "72:11-72:125",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "72:11-72:42",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "intent",
+                           "scope" : "NoAntithromboticDischarge",
+                           "type" : "Property"
+                        }
+                     }, {
+                        "locator" : "72:47-72:125",
+                        "type" : "List",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "element" : [ {
+                           "locator" : "72:49-72:55",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "order",
+                           "type" : "Literal"
+                        }, {
+                           "locator" : "72:58-72:73",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "original-order",
+                           "type" : "Literal"
+                        }, {
+                           "locator" : "72:76-72:89",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "reflex-order",
+                           "type" : "Literal"
+                        }, {
+                           "locator" : "72:92-72:105",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "filler-order",
+                           "type" : "Literal"
+                        }, {
+                           "locator" : "72:108-72:123",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                           "value" : "instance-order",
+                           "type" : "Literal"
+                        } ]
+                     } ]
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "59:1-62:90",
+            "name" : "Encounter with Documented Reason for No Antithrombotic At Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "60:3-62:90",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "60:3-60:57",
+                  "alias" : "IschemicStrokeEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "60:3-60:33",
+                     "name" : "Ischemic Stroke Encounter",
+                     "libraryName" : "TJC",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "locator" : "61:5-62:90",
+                  "alias" : "NoDischargeAntithrombotic",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "61:10-61:60",
+                     "name" : "Reason for Not Giving Antithrombotic at Discharge",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "locator" : "62:17-62:90",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "62:17-62:52",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "authoredOn",
+                           "scope" : "NoDischargeAntithrombotic",
+                           "type" : "Property"
+                        }
+                     }, {
+                        "locator" : "62:61-62:90",
+                        "name" : "ToInterval",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "path" : "period",
+                           "scope" : "IschemicStrokeEncounter",
+                           "type" : "Property"
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "79:1-86:50",
+            "name" : "Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}MedicationRequest",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "80:3-86:50",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "80:3-80:103",
+                  "alias" : "Pharmacological",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "80:3-80:87",
+                     "type" : "Union",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "operand" : [ {
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "codes" : {
+                           "locator" : "80:25-80:86",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Pharmacological Contraindications For Antithrombotic Therapy",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }, {
+                        "locator" : "80:3-80:87",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "80:25-80:86",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Pharmacological Contraindications For Antithrombotic Therapy",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     } ]
+                  }
+               } ],
+               "relationship" : [ ],
+               "where" : {
+                  "locator" : "81:5-86:50",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                  "type" : "And",
+                  "operand" : [ {
+                     "locator" : "81:11-85:115",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "operand" : [ {
+                        "locator" : "81:11-84:61",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "And",
+                        "operand" : [ {
+                           "locator" : "81:11-83:5",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Or",
+                           "operand" : [ {
+                              "locator" : "81:13-81:43",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "isCommunity",
+                              "libraryName" : "QICoreCommon",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "locator" : "81:13-81:27",
+                                 "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "Pharmacological",
+                                 "type" : "AliasRef"
+                              } ]
+                           }, {
+                              "locator" : "82:12-82:42",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "isDischarge",
+                              "libraryName" : "QICoreCommon",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "locator" : "82:12-82:26",
+                                 "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                 "name" : "Pharmacological",
+                                 "type" : "AliasRef"
+                              } ]
+                           } ]
+                        }, {
+                           "locator" : "84:11-84:61",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "In",
+                           "operand" : [ {
+                              "locator" : "84:11-84:32",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "status",
+                                 "scope" : "Pharmacological",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "locator" : "84:37-84:61",
+                              "type" : "List",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "element" : [ {
+                                 "locator" : "84:39-84:46",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "active",
+                                 "type" : "Literal"
+                              }, {
+                                 "locator" : "84:49-84:59",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "completed",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
+                        } ]
+                     }, {
+                        "locator" : "85:11-85:115",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "In",
+                        "operand" : [ {
+                           "locator" : "85:11-85:32",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "intent",
+                              "scope" : "Pharmacological",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "locator" : "85:37-85:115",
+                           "type" : "List",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "element" : [ {
+                              "locator" : "85:39-85:45",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "85:48-85:63",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "original-order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "85:66-85:79",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "reflex-order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "85:82-85:95",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "filler-order",
+                              "type" : "Literal"
+                           }, {
+                              "locator" : "85:98-85:113",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                              "value" : "instance-order",
+                              "type" : "Literal"
+                           } ]
+                        } ]
+                     } ]
+                  }, {
+                     "locator" : "86:11-86:50",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Not",
+                     "operand" : {
+                        "locator" : "86:11-86:50",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "IsTrue",
+                        "operand" : {
+                           "locator" : "86:11-86:38",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "doNotPerform",
+                              "scope" : "Pharmacological",
+                              "type" : "Property"
+                           }
+                        }
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "74:1-77:89",
+            "name" : "Encounter with Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "75:3-77:89",
+               "type" : "Query",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "source" : [ {
+                  "locator" : "75:3-75:57",
+                  "alias" : "IschemicStrokeEncounter",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "75:3-75:33",
+                     "name" : "Ischemic Stroke Encounter",
+                     "libraryName" : "TJC",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }
+               } ],
+               "relationship" : [ {
+                  "locator" : "76:5-77:89",
+                  "alias" : "DischargePharmacological",
+                  "type" : "With",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "expression" : {
+                     "locator" : "76:10-76:84",
+                     "name" : "Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
+                     "type" : "ExpressionRef",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  },
+                  "suchThat" : {
+                     "locator" : "77:17-77:89",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "In",
+                     "operand" : [ {
+                        "locator" : "77:17-77:51",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "authoredOn",
+                           "scope" : "DischargePharmacological",
+                           "type" : "Property"
+                        }
+                     }, {
+                        "locator" : "77:60-77:89",
+                        "name" : "ToInterval",
+                        "libraryName" : "FHIRHelpers",
+                        "type" : "FunctionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "operand" : [ {
+                           "path" : "period",
+                           "scope" : "IschemicStrokeEncounter",
+                           "type" : "Property"
+                        } ]
+                     } ]
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "55:1-57:100",
+            "name" : "Denominator Exceptions",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "name" : "{http://hl7.org/fhir}Encounter",
+                  "type" : "NamedTypeSpecifier"
+               }
+            },
+            "expression" : {
+               "locator" : "56:3-57:100",
+               "type" : "Union",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Encounter",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               },
+               "operand" : [ {
+                  "locator" : "56:3-56:71",
+                  "name" : "Encounter with Documented Reason for No Antithrombotic At Discharge",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "locator" : "57:11-57:100",
+                  "name" : "Encounter with Pharmacological Contraindications for Antithrombotic Therapy at Discharge",
+                  "type" : "ExpressionRef",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Encounter",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               } ]
+            }
+         }, {
+            "locator" : "90:1-91:21",
+            "name" : "SDE Ethnicity",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "name" : "codes",
+                  "elementType" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "name" : "display",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "91:3-91:21",
+               "name" : "SDE Ethnicity",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "codes",
+                     "elementType" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "display",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "93:1-94:17",
+            "name" : "SDE Payer",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "ListTypeSpecifier",
+               "elementType" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "code",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "name" : "period",
+                     "elementType" : {
+                        "type" : "IntervalTypeSpecifier",
+                        "pointType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  } ]
+               }
+            },
+            "expression" : {
+               "locator" : "94:3-94:17",
+               "name" : "SDE Payer",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "type" : "TupleTypeSpecifier",
+                     "element" : [ {
+                        "name" : "code",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }, {
+                        "name" : "period",
+                        "elementType" : {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "96:1-97:16",
+            "name" : "SDE Race",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "name" : "codes",
+                  "elementType" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }
+               }, {
+                  "name" : "display",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "97:3-97:16",
+               "name" : "SDE Race",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef",
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "codes",
+                     "elementType" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Code",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     }
+                  }, {
+                     "name" : "display",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               }
+            }
+         }, {
+            "locator" : "99:1-100:15",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "SDE Sex",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "100:3-100:15",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+               "name" : "SDE Sex",
+               "libraryName" : "SDE",
+               "type" : "ExpressionRef"
+            }
+         } ]
+      }
+   }
+}
+

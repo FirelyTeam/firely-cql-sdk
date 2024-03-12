@@ -2116,77 +2116,85 @@ namespace Hl7.Cql.Compiler
 
         protected Type GetFunctionRefReturnType(FunctionRef op, IEnumerable<Type> operandTypes, ExpressionBuilderContext ctx)
         {
-            var operands = op.operand
-                .Select(operand => TranslateExpression(operand, ctx))
-                .Select(op => op.Type)
-                .ToArray();
-            if (op.libraryName?.StartsWith("FHIRHelpers") ?? false)
-            {
-                // cql-to-elm does not handle FHIRHelpers conversion function refs appropriately; they are missing resultTypeSpecifiers
-                switch (op.name)
-                {
-                    case "ToDate":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!;
-                    case "ToDateTime":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!;
-                    case "ToQuantity":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!;
-                    case "ToInteger":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!;
-                    case "ToInterval":
-                        if (op.operand?.Length == 1)
-                        {
-                            var operand = op.operand![0];
-                            var typeName = operand.resultTypeName?.Name;
-                            if (operand is As @as)
-                            {
-                                typeName = @as.asType?.Name;
-                                if (typeName == null && @as.asTypeSpecifier != null)
-                                    typeName = @as.asTypeSpecifier.resultTypeName.Name;
-                                if (typeName == null)
-                                    typeName = @as.resultTypeName.Name;
-                            }
-                            if (typeName == "{http://hl7.org/fhir}Period")
-                            {
-                                var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
-                                var intervalType = TypeManager.Resolver.IntervalType(pointType!);
-                                return intervalType;
-                            }
-                            else if (typeName == "{http://hl7.org/fhir}Range")
-                            {
-                                var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
-                                var intervalType = TypeManager.Resolver.IntervalType(pointType!);
-                                return intervalType;
-                            }
-                        }
-                        throw new NotImplementedException().WithContext(ctx);
-                    case "ToBoolean":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!;
-                    case "ToString":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!;
-                    case "ToDecimal":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!;
-                    case "ToRatio":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!;
-                    case "ToCode":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!;
-                    case "ToConcept":
-                        return TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!;
-                    default: break;
-                }
-            }
+            // Try determining the return type from the resultTypeSpecifier or resultTypeName
             if (op.resultTypeSpecifier != null)
             {
                 string message = $"Cannot resolve result type {op.resultTypeSpecifier}.";
                 return TypeManager.TypeFor(op.resultTypeSpecifier, ctx) ?? throw ctx.NewExpressionBuildingException(message);
             }
-            else if (!string.IsNullOrWhiteSpace(op.resultTypeName.Name))
+            
+            if (!string.IsNullOrWhiteSpace(op.resultTypeName?.Name))
             {
                 return TypeManager.Resolver.ResolveType(op.resultTypeName.Name!)
-                    ?? TypeManager.Resolver.ResolveType(op.resultTypeName.Name)
                     ?? throw ctx.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
             }
+            
+            // If that failed, try some hard-coded special cases from the FHIRHelpers
+            if (op.libraryName?.StartsWith("FHIRHelpers") == true)
+            {
+                if (DetermineFhirHelpersReturnType(op) is {} resolved) return resolved;
+            }
+            
+            // We failed....
             throw ctx.NewExpressionBuildingException($"Cannot determine type for function {op.libraryName ?? ""}.{op.name}");
+        }
+
+        private Type? DetermineFhirHelpersReturnType(FunctionRef op)
+        {
+            // cql-to-elm does not handle FHIRHelpers conversion function refs appropriately; they are missing resultTypeSpecifiers
+            return op.name switch
+            {
+                "ToDate" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Date")!,
+                "ToDateTime" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime")!,
+                "ToQuantity" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity")!,
+                "ToInteger" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Integer")!,
+                "ToBoolean" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Boolean")!,
+                "ToString" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}String")!,
+                "ToDecimal" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Decimal")!,
+                "ToRatio" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Ratio")!,
+                "ToCode" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Code")!,
+                "ToConcept" => TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Concept")!,
+                "ToValue" => typeof(object),  // choice type
+                "ToInterval" when op is { resultTypeSpecifier: null, resultTypeName: null } => BindToInterval(),
+                _ => null
+            };
+
+            Type? BindToInterval()
+            {
+                if (op.operand?.Length == 1)
+                {
+                    var operand = op.operand![0];
+                    var typeName = operand.resultTypeName?.Name;
+                            
+                    if (operand is As @as)
+                    {
+                        typeName = @as.asType?.Name;
+                        if (typeName == null && @as.asTypeSpecifier != null)
+                            typeName = @as.asTypeSpecifier.resultTypeName.Name;
+                        if (typeName == null)
+                            typeName = @as.resultTypeName.Name;
+                    }
+                            
+                    if (typeName == "{http://hl7.org/fhir}Period")
+                    {
+                        var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}DateTime");
+                        var intervalType = TypeManager.Resolver.IntervalType(pointType!);
+                        {
+                            return intervalType;
+                        }
+                    }
+                    else if (typeName == "{http://hl7.org/fhir}Range")
+                    {
+                        var pointType = TypeManager.Resolver.ResolveType("{urn:hl7-org:elm-types:r1}Quantity");
+                        var intervalType = TypeManager.Resolver.IntervalType(pointType!);
+                        {
+                            return intervalType;
+                        }
+                    }
+                }
+
+                return null;
+            }
         }
 
         protected Expression ExpressionRef(ExpressionRef expressionRef, ExpressionBuilderContext ctx)

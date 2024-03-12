@@ -1,16 +1,12 @@
 {
   "profiles": {
-    "PackagerCLI": {
+    "PackageCLI (Demo LibrarySet)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(ProjectDir)/../../Demo/Elm/Json\" --cql \"$(ProjectDir)/../../Demo/Cql/input\" --fhir \"$(ProjectDir)/../../Demo/Test/Resources\" --cs \"$(ProjectDir)/../../Demo/Measures\" --f true"
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(SolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(SolutionDir)/Demo/Test/Resources\" --cs \"$(SolutionDir)/Demo/Measures\" --f true"
     },
-    "PackagerCLI (Current)": {
+    "PackageCLI (CMS Measures LibrarySet)": {
       "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(ProjectDir)/../../Demo/Elm/Json\" --cql \"$(ProjectDir)/../../Demo/Cql/input\" --fhir \"$(ProjectDir)/../../Demo/Test/Resources\" --cs \"$(ProjectDir)/../../Demo/Measures\" --f true"
-    },
-    "PackagerCLI (CMS Measures)": {
-      "commandName": "Project",
-      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/../INPUT-FILES-ONLY/CMS Measures/Demo/Elm/Json\" --cql \"$(SolutionDir)/../INPUT-FILES-ONLY/CMS Measures/Demo/Cql/input\" --fhir \"$(ProjectDir)/../../Demo/Test/Resources\" --cs \"$(ProjectDir)/../../Demo/Measures\" --f true"
+      "commandLineArgs": "--override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"$(SolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(SolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(SolutionDir)/Demo/Test/Resources-cms\" --cs \"$(SolutionDir)/Demo/Measures-cms\" --f true"
     }
   }
 }
