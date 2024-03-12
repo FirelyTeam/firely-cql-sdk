@@ -14,7 +14,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using Hl7.Cql.Compiler.Infrastructure;
 using elm = Hl7.Cql.Elm;
 
 
@@ -56,22 +55,26 @@ namespace Hl7.Cql.Compiler
         /// Creates an instance with the specified resolver, assembly name, and tuple type namespace.
         /// </summary>
         /// <param name="resolver">The <see cref="TypeResolver"/> that this instance uses.</param>
+        /// <param name="hasher">The hashing to use for tuple names</param>
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
         /// <param name="tupleTypeNamespace">The namespace of all generated tuple types.  If not specified, the value will be "Tuples".</param>
         /// <exception cref="ArgumentNullException">If <paramref name="resolver"/> is <c>null</c>.</exception>
         public TypeManager(
             TypeResolver resolver,
+            Hasher hasher,
             string assemblyName = "Tuples",
             string? tupleTypeNamespace = "Tuples")
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
                 assemblyName = "Tuples";
+
             if (string.IsNullOrWhiteSpace(tupleTypeNamespace))
                 tupleTypeNamespace = "Tuples";
+
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
             TupleTypeList = new List<Type>();
-            Hasher = new Hasher();
+            Hasher = hasher;
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             TupleTypeNamespace = tupleTypeNamespace;

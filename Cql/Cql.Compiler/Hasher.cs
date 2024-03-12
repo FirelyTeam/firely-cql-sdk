@@ -15,8 +15,8 @@ namespace Hl7.Cql.Compiler
 {
     internal class Hasher
     {
-
         private MD5 MD5 { get; } = MD5.Create();
+
         public virtual string Hash(string input)
         {
             var bytes = Encoding.UTF8.GetBytes(input);
@@ -25,7 +25,7 @@ namespace Hl7.Cql.Compiler
             return alpha;
         }
 
-        public string ToAlphaString(byte[] toConvert, bool bigEndian = false)
+        private string ToAlphaString(byte[] toConvert, bool bigEndian = false)
         {
             const string alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
             if (bigEndian) Array.Reverse(toConvert); // !BitConverter.IsLittleEndian might be an alternative

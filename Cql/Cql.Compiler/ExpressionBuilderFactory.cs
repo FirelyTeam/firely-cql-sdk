@@ -16,15 +16,17 @@ internal class ExpressionBuilderFactory
     private readonly Lazy<FhirTypeResolver> _fhirTypeResolver;
     private readonly Lazy<Conversion.TypeConverter> _typeConverter;
     private readonly Lazy<CqlOperatorsBinding> _cqlOperatorsBinding;
+    private readonly Lazy<Hasher> _hasher;
     private readonly Lazy<TypeManager> _typeManager;
     private readonly Lazy<ExpressionBuilder> _expressionBuilder;
 
     public ExpressionBuilderFactory(ILoggerFactory loggerFactory, int? cacheSize = null)
     {
         _fhirTypeResolver = Deferred(() => new FhirTypeResolver(ModelInspector));
+        _hasher = Deferred(() => new Hasher());
         _typeConverter = Deferred(() => FhirTypeConverter.Create(ModelInspector, cacheSize));
         _cqlOperatorsBinding = Deferred(() => new CqlOperatorsBinding(FhirTypeResolver, TypeConverter));
-        _typeManager = Deferred(() => new TypeManager(FhirTypeResolver));
+        _typeManager = Deferred(() => new TypeManager(FhirTypeResolver, Hasher));
         _expressionBuilder = Deferred(() => new ExpressionBuilder(TypeManager, Logger<ExpressionBuilder>()));
 
         ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
@@ -36,6 +38,7 @@ internal class ExpressionBuilderFactory
     public FhirTypeResolver FhirTypeResolver => _fhirTypeResolver.Value;
     public CqlOperatorsBinding CqlOperatorsBinding => _cqlOperatorsBinding.Value;
     public TypeManager TypeManager => _typeManager.Value;
+    public Hasher Hasher => _hasher.Value;
     public ExpressionBuilder ExpressionBuilder => _expressionBuilder.Value;
 
 }
