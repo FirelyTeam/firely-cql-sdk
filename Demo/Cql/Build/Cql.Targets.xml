@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project>
 	<ItemGroup>
-		<ElmFiles Include="$(MSBuildProjectDirectory)\..\Elm\Json\*.json" />
-		<ElmFiles Include="$(MSBuildProjectDirectory)\..\Elm\Json-cms\*.json" />
+		<ElmFiles Include="$(SolutionDir)\Datasets\Demo\Cql\*.json" />
+		<ElmFiles Include="$(SolutionDir)\Datasets\CMS\Cql\*.json" />
 	</ItemGroup>
 
 	<Target Name="Download CQL to ELM CLI via Maven" Inputs="Build\pom.xml" Outputs="Build\target\dependency\cql-to-elm-cli-3.8.0.jar">
@@ -12,11 +12,11 @@
 			DependsOnTargets="Download CQL to ELM CLI via Maven"
 			AfterTargets="Build">
 		<Message Text="Converting CQL to ELM"/>
-		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(MSBuildProjectDirectory)\input" -f JSON -output "$(MSBuildProjectDirectory)\..\Elm\Json" -locators true -result-types true'/>
-		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(MSBuildProjectDirectory)\input-cms" -f JSON -output "$(MSBuildProjectDirectory)\..\Elm\Json-cms" -locators true -result-types true'/>
+		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(SolutionDir)\Datasets\Demo\Cql" -f JSON -output "$(SolutionDir)\Datasets\Demo\Elm" -locators true -result-types true'/>
+		<Exec Command='java -classpath "$(MSBuildProjectDirectory)\Build\target\dependency\*" org.cqframework.cql.cql2elm.cli.CqlTranslator -input "$(SolutionDir)\Datasets\CMS\Cql" -f JSON -output "$(SolutionDir)\Datasets\CMS\Elm" -locators true -result-types true'/>		
 	</Target>
 	<Target Name="Delete ELM" AfterTargets="Clean">
-		<Message Text="Deleting ELM files...$(MSBuildProjectDirectory)\..\Elm\Json\*.json" />
+		<Message Text="Deleting ELM files..." />
 		<Delete Files="@(ElmFiles)" />
 	</Target>
 </Project>
