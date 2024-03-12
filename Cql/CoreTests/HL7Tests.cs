@@ -49,7 +49,7 @@ namespace CoreTests
             var fhirHelpersPackage = Hl7.Cql.Elm.Library.LoadFromJson(new FileInfo(@"Input\ELM\Libs\FHIRHelpers-4.0.1.json"));
             var libraryExpressionBuilder = NewLibraryExpressionBuilder();
             var definitions = new DefinitionDictionary<LambdaExpression>();
-            var libctx = libraryExpressionBuilder.CreateContext(definitions, fhirHelpersPackage, Ordinal.Unspecified);
+            var libctx = libraryExpressionBuilder.CreateContext(definitions, fhirHelpersPackage);
             libraryExpressionBuilder.ProcessLibrary(libctx);
             LambdasByTestName.Lambdas.Merge(definitions);
 
@@ -58,7 +58,7 @@ namespace CoreTests
             {
                 var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(file);
                 definitions = new();
-                libctx = libraryExpressionBuilder.CreateContext(definitions, elmPackage, ord);
+                libctx = libraryExpressionBuilder.CreateContext(definitions, elmPackage);
                 libraryExpressionBuilder.ProcessLibrary(libctx);
                 LambdasByTestName.Lambdas.Merge(definitions);
             }

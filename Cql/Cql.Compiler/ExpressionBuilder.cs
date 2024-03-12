@@ -84,8 +84,8 @@ namespace Hl7.Cql.Compiler
         {
             var parameter = Expression.Parameter(typeof(CqlContext), "rtx");
             lambdas ??= new DefinitionDictionary<LambdaExpression>();
-            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(this, operatorBinding, lambdas, library, -1);
-            var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression, Ordinal.Unspecified);
+            var libraryExpressionsBuilderContext = new LibraryExpressionBuilderContext(this, operatorBinding, lambdas, library);
+            var ctx = libraryExpressionsBuilderContext.NewExpressionBuilderContext(expression);
             var translated = TranslateExpression(expression, ctx);
             var lambda = Expression.Lambda(translated, parameter);
             return lambda;

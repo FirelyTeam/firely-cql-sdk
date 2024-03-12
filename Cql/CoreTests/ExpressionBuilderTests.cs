@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 
@@ -26,7 +25,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = new DefinitionDictionary<LambdaExpression>();
-            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
+            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage);
             Factory.LibraryExpressionBuilder.ProcessLibrary(libctx);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
@@ -38,7 +37,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRTypeConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = new DefinitionDictionary<LambdaExpression>();
-            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
+            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage);
             Factory.LibraryExpressionBuilder.ProcessLibrary(libctx);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
@@ -50,7 +49,7 @@ namespace CoreTests
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             var definitions = new DefinitionDictionary<LambdaExpression>();
-            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
+            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage);
             Factory.LibraryExpressionBuilder.ProcessLibrary(libctx);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
@@ -69,7 +68,7 @@ namespace CoreTests
             Assert.AreEqual(fdt, fs);
 
             var definitions = new DefinitionDictionary<LambdaExpression>();
-            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
+            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage);
             Factory.LibraryExpressionBuilder.ProcessLibrary(libctx);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());

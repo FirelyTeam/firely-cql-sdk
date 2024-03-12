@@ -1,14 +1,13 @@
-﻿using System.Globalization;
+﻿using Hl7.Cql.Elm;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Hl7.Cql.Compiler.Infrastructure;
+using System.Xml.Linq;
 
 namespace Hl7.Cql.Compiler;
 
 internal readonly record struct BuilderContextInfo(
     string ElementType,
-    int? ElementOrdinal,
     string? Locator,
     string? ResultType,
     string? Name)
@@ -16,8 +15,6 @@ internal readonly record struct BuilderContextInfo(
     public override string ToString()
     {
         StringBuilder sb = new();
-        if (ElementOrdinal is { } ord and >= 0 )
-            sb.Append(new Ordinal(ord + 1));
         Append("", ElementType);
         Append("named", Name);
         Append("of type", ResultType);
@@ -39,11 +36,10 @@ internal readonly record struct BuilderContextInfo(
         return sb.ToString();
     }
 
-    public static BuilderContextInfo FromElement(Elm.Element element, int elementOrdinal)
+    public static BuilderContextInfo FromElement(Elm.Element element)
     {
         BuilderContextInfo obj = new(
             ElementType: element.GetType().Name,
-            ElementOrdinal: elementOrdinal,
             Locator: element.locator,
             ResultType: GetElemTypeName(element),
             Name: GetNameText(element));

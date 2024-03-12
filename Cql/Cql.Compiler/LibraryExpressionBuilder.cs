@@ -35,9 +35,8 @@ internal class LibraryExpressionBuilder
 
     public LibraryExpressionBuilderContext CreateContext(
         DefinitionDictionary<LambdaExpression> definitions,
-        Library library,
-        int libraryOrdinal) =>
-        new(_expressionBuilder, _operatorBinding, definitions, library, libraryOrdinal);
+        Library library) =>
+        new(_expressionBuilder, _operatorBinding, definitions, library);
 
     public void ProcessLibrary(LibraryExpressionBuilderContext libCtx)
     {
@@ -48,7 +47,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var (includeDef, ordinal) in includeDefs.WithOrdinals())
             {
-                ProcessIncludes(includeDef, libCtx.NewExpressionBuilderContext(includeDef, ordinal));
+                ProcessIncludes(includeDef, libCtx.NewExpressionBuilderContext(includeDef));
             }
         }
 
@@ -56,7 +55,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var (valueSetDef, ordinal) in valueSetDefs.WithOrdinals())
             {
-                ProcessValueSetDef(valueSetDef, libCtx.NewExpressionBuilderContext(valueSetDef, ordinal));
+                ProcessValueSetDef(valueSetDef, libCtx.NewExpressionBuilderContext(valueSetDef));
             }
         }
 
@@ -69,7 +68,7 @@ internal class LibraryExpressionBuilder
 
             foreach (var (codeDef, ordinal) in codeDefs.WithOrdinals())
             {
-                ProcessCodeDef(codeDef, libCtx.NewExpressionBuilderContext(codeDef, ordinal), foundCodeNameCodeSystemUrls, codeSystemUrls);
+                ProcessCodeDef(codeDef, libCtx.NewExpressionBuilderContext(codeDef), foundCodeNameCodeSystemUrls, codeSystemUrls);
             }
         }
 
@@ -77,7 +76,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var (codeSystemDef, ordinal) in codeSystemDefs.WithOrdinals())
             {
-                ProcessCodeSystemDef(codeSystemDef, libCtx.NewExpressionBuilderContext(codeSystemDef, ordinal));
+                ProcessCodeSystemDef(codeSystemDef, libCtx.NewExpressionBuilderContext(codeSystemDef));
             }
         }
 
@@ -85,7 +84,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var (conceptDef, ordinal) in conceptDefs.WithOrdinals())
             {
-                ProcessConceptDef(conceptDef, libCtx.NewExpressionBuilderContext(conceptDef, ordinal));
+                ProcessConceptDef(conceptDef, libCtx.NewExpressionBuilderContext(conceptDef));
             }
         }
 
@@ -93,7 +92,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var (parameterDef, ordinal) in parameterDefs.WithOrdinals())
             {
-                ProcessParameterDef(parameterDef, libCtx.NewExpressionBuilderContext(parameterDef, ordinal));
+                ProcessParameterDef(parameterDef, libCtx.NewExpressionBuilderContext(parameterDef));
             }
         }
 
@@ -101,7 +100,7 @@ internal class LibraryExpressionBuilder
         {
             foreach (var (expressionDef, ordinal) in expressionDefs.WithOrdinals())
             {
-                ProcessExpressionDef(expressionDef, libCtx.NewExpressionBuilderContext(expressionDef, ordinal));
+                ProcessExpressionDef(expressionDef, libCtx.NewExpressionBuilderContext(expressionDef));
             }
         }
     }
