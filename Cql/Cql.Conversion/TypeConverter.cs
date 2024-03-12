@@ -20,6 +20,7 @@ namespace Hl7.Cql.Conversion
     {
         private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> Converters
             = new();
+
         /// <summary>
         /// Creates a default instance that provides some default conversions.
         /// </summary>
@@ -59,7 +60,7 @@ namespace Hl7.Cql.Conversion
         /// Provides utility for converting common .NET types that don't have implicit conversions defined, e.g. <see cref="string"/> and <see cref="Uri"/>.
         /// </summary>
         /// <returns>This instance.</returns>
-        internal TypeConverter ConvertNetTypes()
+        private TypeConverter ConvertNetTypes()
         {
             AddConversion<Uri, string>(uri => uri.AbsoluteUri);
             AddConversion<string, Uri>(@string => new Uri(@string));
@@ -71,7 +72,7 @@ namespace Hl7.Cql.Conversion
         /// Provides conversion between types in the <see cref="Hl7.Cql.Primitives"/> namespace to equivalent <see cref="Iso8601"/> types.
         /// </summary>
         /// <returns>This instance.</returns>
-        internal TypeConverter ConvertsIsoToCqlPrimitives()
+        private TypeConverter ConvertsIsoToCqlPrimitives()
         {
             AddConversion<DateIso8601, CqlDate>(isoDate => new CqlDate(isoDate));
             AddConversion<DateIso8601, CqlDateTime>(isoDate => new CqlDateTime(isoDate.Year, isoDate.Month, isoDate.Day, null, null, null, null, null, null));

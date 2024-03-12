@@ -1,7 +1,5 @@
-﻿using Hl7.Cql.Abstractions;
-using Hl7.Cql.Compiler;
-using Hl7.Cql.Conversion;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -13,29 +11,25 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests
 {
     [TestClass]
     public class QueriesTest
     {
-        private static readonly TypeResolver TypeResolver = new FhirTypeResolver(ModelInfo.ModelInspector);
-        private static readonly TypeConverter TypeConverter = FhirTypeConverter.Create(ModelInfo.ModelInspector);
+        private static ILoggerFactory LoggerFactory { get; } =
+            Microsoft.Extensions.Logging.LoggerFactory
+                .Create(logging => logging.AddDebug());
+
+        private static LibraryExpressionBuilderFactory Factory = new(LoggerFactory);
 
         [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            var binding = new CqlOperatorsBinding(TypeResolver, TypeConverter);
-            var typeManager = new TypeManager(TypeResolver);
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var logger = LoggerFactory
-                .Create(logging => logging.AddDebug())
-                .CreateLogger<ExpressionBuilder>();
-            var expressions = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
-            QueriesDefinitions = expressions
-                .CompileAll();
+            DefinitionDictionary<LambdaExpression> definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
                 new CqlCode("code", "system", null, null));
@@ -43,10 +37,8 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            expressions = ExpressionBuilder.BuildLibraryDefinitions(binding, typeManager, logger, elmPackage);
-            AggregatesDefinitions = expressions
-                .CompileAll();
-
+            Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage, definitions);
+            AggregatesDefinitions = definitions.CompileAll();
         }
 
         private static DefinitionDictionary<Delegate> QueriesDefinitions;

@@ -69,6 +69,5 @@ namespace Hl7.Cql.Compiler
             }
             throw new NotImplementedException().WithContext(ctx);
         }
-
     }
 }

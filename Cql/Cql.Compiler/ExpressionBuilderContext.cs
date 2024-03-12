@@ -8,33 +8,31 @@
 
 using Hl7.Cql.Runtime;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
-using Hl7.Fhir.Language.Debugging;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.Compiler
 {
     /// <summary>
-    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements during <see cref="ExpressionBuilder.BuildLibraryDefinitions"/>.
+    /// The ExpressionBuilderContext class maintains scope information for the traversal of ElmPackage statements.
     /// </summary>
     /// <remarks>
     /// The scope information in this class is useful for <see cref="IExpressionMutator"/> and is supplied to <see cref="IExpressionMutator.Mutate(Expression, Elm.Element, ExpressionBuilderContext)"/>.
     /// </remarks>
     internal partial class ExpressionBuilderContext
     {
-
         internal ExpressionBuilderContext(
             OperatorBinding operatorBinding, 
             ExpressionBuilder builder,
             ParameterExpression contextParameter,
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers,
+            LibraryExpressionBuilderContext libContext,
             elm.Element element)
         {
             _element = element;
@@ -48,6 +46,9 @@ namespace Hl7.Cql.Compiler
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
             _scopes = new Dictionary<string, (Expression, elm.Element)>();
+            LibraryContext = libContext;
+            ExpressionMutators = new List<IExpressionMutator>();
+            CustomImplementations = new Dictionary<string, Func<ParameterExpression[], LambdaExpression>>();
         }
 
         private ExpressionBuilderContext(
@@ -64,6 +65,9 @@ namespace Hl7.Cql.Compiler
             Operands = source.Operands;
             Libraries = source.Libraries;
             _scopes = source._scopes;
+            LibraryContext = source.LibraryContext;
+            ExpressionMutators = source.ExpressionMutators;
+            CustomImplementations = source.CustomImplementations;
         }
 
         private ExpressionBuilderContext(
@@ -83,10 +87,34 @@ namespace Hl7.Cql.Compiler
             _scopes = scopes;
         }
 
+        internal LibraryExpressionBuilderContext LibraryContext { get; }
+
+        /// <summary>
+        /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
+        /// to a factory which will produce a <see cref="LambdaExpression"/> given the values of <see cref="ParameterExpression"/>.
+        /// </summary>
+        /// <remarks>
+        /// This function can be used to provide .NET native functions in place of ELM functions, and should also be used to implement
+        /// functions defined in CQL with the <code>external</code> keyword.
+        /// </remarks> 
+        private IDictionary<string, Func<ParameterExpression[], LambdaExpression>> CustomImplementations { get; }
+
+
+        public bool TryGetCustomImplementationByExpressionKey(
+            string expressionKey,
+            [NotNullWhen(true)] out Func<ParameterExpression[], LambdaExpression>? factory) =>
+            CustomImplementations.TryGetValue(expressionKey, out factory);
+
+        /// <summary>
+        /// The expression visitors that will be executed (in order) on translated expressions.
+        /// </summary>
+        private IList<IExpressionMutator> ExpressionMutators { get; }
+
         /// <summary>
         /// Gets the <see cref="ExpressionBuilder"/> from which this context derives.
         /// </summary>
         public ExpressionBuilder Builder { get; }
+
         /// <summary>
         /// Gets the <see cref="ParameterExpression"/> which is passed to the <see cref="OperatorBinding"/> for operators to use.        
         /// </summary>
@@ -172,7 +200,7 @@ namespace Hl7.Cql.Compiler
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (_scopes.TryGetValue(normalized, out var expression))
                 return expression.Item1;
-            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
+            else throw this.NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
 
         internal (Expression, elm.Element) GetScope(string elmAlias)
@@ -180,7 +208,7 @@ namespace Hl7.Cql.Compiler
             var normalized = NormalizeIdentifier(elmAlias!)!;
             if (_scopes.TryGetValue(normalized, out var expression))
                 return expression;
-            else throw NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
+            else throw this.NewExpressionBuildingException($"The scope alias {elmAlias}, normalized to {normalized}, is not present in the scopes dictionary.");
         }
 
         /// <summary>
@@ -204,7 +232,7 @@ namespace Hl7.Cql.Compiler
                 {
                     string? normalizedIdentifier = NormalizeIdentifier(kvp.Key);
                     if (string.IsNullOrWhiteSpace(normalizedIdentifier))
-                        throw NewExpressionBuildingException("The normalized identifier is not available.");
+                        throw this.NewExpressionBuildingException("The normalized identifier is not available.");
 
                     scopes[normalizedIdentifier] = kvp.Value;
                 }
@@ -215,10 +243,10 @@ namespace Hl7.Cql.Compiler
                 {
                     string? normalizedIdentifier = NormalizeIdentifier(kvp.Key);
                     if (string.IsNullOrWhiteSpace(normalizedIdentifier))
-                        throw NewExpressionBuildingException("The normalize identifier is not available.");
+                        throw this.NewExpressionBuildingException("The normalize identifier is not available.");
 
                     if (scopes.ContainsKey(normalizedIdentifier))
-                        throw NewExpressionBuildingException(
+                        throw this.NewExpressionBuildingException(
                             $"Scope {kvp.Key}, normalized to {NormalizeIdentifier(kvp.Key)}, is already defined and this builder does not allow scope redefinition.  Check the CQL source, or set {nameof(ExpressionBuilderSettings.AllowScopeRedefinition)} to true");
                     scopes.Add(normalizedIdentifier, kvp.Value);
                 }
@@ -244,7 +272,8 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Clones this ExpressionBuilderContext
         /// </summary>
-        internal ExpressionBuilderContext Deeper(elm.Element element)
+        internal ExpressionBuilderContext Deeper(
+            elm.Element element)
         {
             if (element == _element)
             {
@@ -252,36 +281,16 @@ namespace Hl7.Cql.Compiler
                 return this;
             }
 
-            return new ExpressionBuilderContext(this, element: element);
+            return new ExpressionBuilderContext(this, element);
         }
 
-        internal void LogWarning(string message, elm.Element? expression = null)
+        public Expression? Mutate(elm.Element op, Expression? expression)
         {
-            Builder.Logger.LogWarning(FormatMessage(message, expression));
+            foreach (var visitor in ExpressionMutators)
+            {
+                expression = visitor.Mutate(expression!, op, this);
+            }
+            return expression;
         }
-
-        internal void LogError(string message, elm.Element? element = null)
-        {
-            Builder.Logger.LogError(FormatMessage(message, element));
-        }
-
-
-        private string FormatMessage(string message, elm.Element? element)
-        {
-            var locator = element?.locator;
-            var libraryKey = Builder.Library.NameAndVersion;
-            if (libraryKey is null)
-                throw NewExpressionBuildingException("Library name and version is null");
-
-            return string.IsNullOrWhiteSpace(locator) 
-                ? $"{libraryKey}: {message}"
-                : $"{libraryKey} line {locator}: {message}";
-        }
-
-        public Type TypeFor(elm.TypeSpecifier resultTypeSpecifier) => 
-            Builder.TypeManager.TypeFor(resultTypeSpecifier, this);
-
-        public Type? TypeFor(elm.Element element, bool throwIfNotFound = true) =>
-            Builder.TypeManager.TypeFor(element, this, throwIfNotFound);
     }
 }

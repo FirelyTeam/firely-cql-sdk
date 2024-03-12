@@ -38,7 +38,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <param name="typeResolver">The <see cref="TypeResolver"/> to use to include namespaces and aliases from.</param>
         public CSharpSourceCodeWriter(
             ILogger<CSharpSourceCodeWriter> logger,
-            [FromKeyedServices("Fhir")]TypeResolver typeResolver)
+            TypeResolver typeResolver)
         {
             _logger = logger;
             _contextAccessModifier = AccessModifier.Internal;

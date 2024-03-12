@@ -12,6 +12,7 @@ using Hl7.Cql.Compiler.Expressions;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using Microsoft.Extensions.Logging;
 using elm = Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler
@@ -69,7 +70,10 @@ namespace Hl7.Cql.Compiler
 
                 var operand = TranslateExpression(@as.operand, ctx);
                 if (!type.IsAssignableTo(operand.Type))
-                    ctx.LogWarning($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand);
+                {
+                    Logger.LogWarning(ctx.FormatMessage($"Potentially unsafe cast from {TypeManager.PrettyTypeName(operand.Type)} to type {TypeManager.PrettyTypeName(type)}", @as.operand));
+                }
+
                 return new ElmAsExpression(operand, type);
             }
         }

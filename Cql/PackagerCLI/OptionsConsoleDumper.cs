@@ -23,9 +23,10 @@ internal class OptionsConsoleDumper
 
     public void DumpToConsole()
     {
-        WriteLine("PackageCLI running in {0}", Environment.CurrentDirectory);
-        WriteLine("Arguments Provided");
-        WriteLine("-----------------------------");
+        WriteLine("PackageCLI");
+        WriteLine("- Environment -----------------------------------");
+        WriteLine("{0,-20} : {1}", "Current Directory", Environment.CurrentDirectory);
+        WriteLine("- Arguments Provided ----------------------------");
         (string name, object? value)[] values = new[]
         {
             ArgFor(_packagerOptions.CqlDirectory),

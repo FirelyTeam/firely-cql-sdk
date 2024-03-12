@@ -29,23 +29,28 @@ namespace Hl7.Cql.Compiler
         /// <summary>
         /// Gets the assembly name for any generated types created by this type manager.
         /// </summary>
-        public string AssemblyName { get; }
+        private string AssemblyName { get; }
+
         /// <summary>
         /// Gets the <see cref="TypeResolver"/> this TypeManager uses.
         /// </summary>
         public TypeResolver Resolver { get; }
+
         /// <summary>
         /// Gets the namespace for generated tuple types as supplied in the constructor.
         /// </summary>
-        public string TupleTypeNamespace { get; }
+        private string TupleTypeNamespace { get; }
+
         /// <summary>
         /// Gets the tuple types created by this <see cref="TypeManager"/>.
         /// </summary>
         public IEnumerable<Type> TupleTypes => TupleTypeList;
 
-        private readonly List<Type> TupleTypeList = new List<Type>();
+        private readonly List<Type> TupleTypeList;
+
         private ModuleBuilder ModuleBuilder { get; }
-        internal Hasher Hasher { get; } = new Hasher();
+
+        private Hasher Hasher { get; }
 
         /// <summary>
         /// Creates an instance with the specified resolver, assembly name, and tuple type namespace.
@@ -54,7 +59,10 @@ namespace Hl7.Cql.Compiler
         /// <param name="assemblyName">The name of the assembly in which generated tuple types will be created. If not specified, the value will be "Tuples".</param>
         /// <param name="tupleTypeNamespace">The namespace of all generated tuple types.  If not specified, the value will be "Tuples".</param>
         /// <exception cref="ArgumentNullException">If <paramref name="resolver"/> is <c>null</c>.</exception>
-        public TypeManager(TypeResolver resolver, string assemblyName = "Tuples", string? tupleTypeNamespace = "Tuples")
+        public TypeManager(
+            TypeResolver resolver,
+            string assemblyName = "Tuples",
+            string? tupleTypeNamespace = "Tuples")
         {
             if (string.IsNullOrWhiteSpace(assemblyName))
                 assemblyName = "Tuples";
@@ -62,6 +70,8 @@ namespace Hl7.Cql.Compiler
                 tupleTypeNamespace = "Tuples";
             AssemblyName = assemblyName;
             var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(AssemblyName), AssemblyBuilderAccess.Run);
+            TupleTypeList = new List<Type>();
+            Hasher = new Hasher();
             ModuleBuilder = assemblyBuilder.DefineDynamicModule(AssemblyName);
             Resolver = resolver ?? throw new ArgumentNullException(nameof(resolver));
             TupleTypeNamespace = tupleTypeNamespace;
@@ -83,7 +93,7 @@ namespace Hl7.Cql.Compiler
             {
                 case ExpressionRef expressionRef:
                 {
-                    var libraryName = expressionRef.libraryName ?? ctx.Builder.LibraryKey;
+                    var libraryName = expressionRef.libraryName ?? ctx.LibraryContext.LibraryKey;
                     if (!ctx.Definitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                         throw new InvalidOperationException($"Unabled to get an expression by name : '{libraryName}.{expressionRef.name}'");
 
@@ -242,7 +252,7 @@ namespace Hl7.Cql.Compiler
             return typeName;
         }
 
-        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(TupleTypeSpecifier tuple, ExpressionBuilderContext ctx, Func<Type, Type>? changeType = null)
         {
             var elements = tuple.element;
 
@@ -252,10 +262,10 @@ namespace Hl7.Cql.Compiler
             var elementTuples = elements!
                 .Select(e => (e.name, e.elementType))
                 .ToArray();
-            return TupleTypeFor(elementTuples, context, changeType);
+            return TupleTypeFor(elementTuples, ctx, changeType);
         }
 
-        internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext context, Func<Type, Type>? changeType = null)
+        internal Type TupleTypeFor(elm.Tuple tuple, ExpressionBuilderContext ctx, Func<Type, Type>? changeType = null)
         {
             var elements = tuple.element;
 
@@ -265,22 +275,20 @@ namespace Hl7.Cql.Compiler
             var elementTuples = elements!
                 .Select(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")))
                 .ToArray();
-            return TupleTypeFor(elementTuples, context, changeType);
+            return TupleTypeFor(elementTuples, ctx, changeType);
         }
 
-        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext context, Func<Type, Type>? changeType)
+        internal Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, ExpressionBuilderContext ctx, Func<Type, Type>? changeType)
         {
             var elementInfo = elements!
                                 .ToDictionary(el => el.name, el =>
                                 {
                                     Type? type;
                                     if (el.elementType != null)
-                                        type = TypeFor(el.elementType!, context);
+                                        type = TypeFor(el.elementType!, ctx);
                                     else
                                     {
-                                        var msg = $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.";
-                                        context.LogError(msg);
-                                        throw new InvalidOperationException(msg);
+                                        throw ctx.NewExpressionBuildingException($"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
                                     }
                                     if (changeType != null)
                                         type = changeType(type);
@@ -330,7 +338,7 @@ namespace Hl7.Cql.Compiler
         /// </summary>
         /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
         /// <returns>The unique tuple type name.</returns>
-        protected virtual string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
+        protected string TupleTypeNameFor(IEnumerable<KeyValuePair<string, Type>> elementInfo)
         {
             var hashInput = string.Join("+", elementInfo
                 .OrderBy(k => k.Key)
@@ -339,7 +347,6 @@ namespace Hl7.Cql.Compiler
             var ns = TupleTypeNamespace;
             return $"Tuple_{tupleId}";
         }
-
 
         private void AddTupleType(Type type)
         {

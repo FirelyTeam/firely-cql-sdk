@@ -78,7 +78,7 @@ namespace Hl7.Cql.Compiler
             // since int.MaxValue is 2147483647, we have to handle this specially
             if (e.operand is elm.Literal literal)
             {
-                var literalType = ctx.TypeFor(literal);
+                var literalType = TypeFor(literal, ctx);
                 if (literalType == typeof(int?) && literal.value == "2147483648")
                 {
                     return Expression.Constant(int.MinValue);
