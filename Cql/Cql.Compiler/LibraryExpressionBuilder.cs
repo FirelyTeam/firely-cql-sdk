@@ -273,9 +273,9 @@ internal class LibraryExpressionBuilder
                 if (operand.operandTypeSpecifier != null)
                 {
                     var operandType = ctx.Builder.TypeFor(operand.operandTypeSpecifier, ctx)!;
-                    var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name);
+                    var opName = ExpressionBuilderContext.NormalizeIdentifier(operand.name!);
                     var parameter = Expression.Parameter(operandType, opName);
-                    ctx.Operands.Add(operand.name!, parameter);
+                    ctx.Operands.Add(operand.name, parameter);
                     functionParameterTypes[i] = parameter.Type;
                     i += 1;
                 }
