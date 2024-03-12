@@ -8,13 +8,12 @@ namespace Hl7.Cql.Compiler;
 partial class ExpressionBuilderContext : IBuilderContext
 {
     private readonly Elm.Element _element;
-    private readonly int _elementOrdinal;
 
     private readonly ExpressionBuilderContext? _outerContext;
 
     IBuilderContext? IBuilderContext.OuterContext => (IBuilderContext?)_outerContext ?? LibraryContext;
 
-    BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(_element, _elementOrdinal);
+    BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(_element);
 
     private sealed class OperatorBindingRethrowDecorator : OperatorBinding
     {

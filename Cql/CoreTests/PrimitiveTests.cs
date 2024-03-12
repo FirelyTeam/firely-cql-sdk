@@ -11,7 +11,6 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
@@ -3531,9 +3530,7 @@ namespace CoreTests
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
             
             var libbld = Factory.LibraryExpressionBuilder;
-            var definitions = new DefinitionDictionary<LambdaExpression>();
-            var libctx = libbld.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
-            libbld.ProcessLibrary(libctx);
+            var definitions = libbld.ProcessLibrary(elmPackage);
 
             var writer = Factory.CSharpSourceCodeWriter;
             var graph = elmPackage.GetIncludedLibraries(new DirectoryInfo(@"Input\ELM\libs"));

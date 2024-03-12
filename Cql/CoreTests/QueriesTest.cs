@@ -11,7 +11,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
 
 namespace CoreTests
 {
@@ -29,9 +28,7 @@ namespace CoreTests
         {
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            DefinitionDictionary<LambdaExpression> definitions = new();
-            var libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
-            Factory.LibraryExpressionBuilder.ProcessLibrary(libctx);
+            DefinitionDictionary<LambdaExpression> definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
             ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
@@ -40,8 +37,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            libctx = Factory.LibraryExpressionBuilder.CreateContext(definitions, elmPackage, Ordinal.Unspecified);
-            Factory.LibraryExpressionBuilder.ProcessLibrary(libctx);
+            Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage, definitions);
             AggregatesDefinitions = definitions.CompileAll();
         }
 

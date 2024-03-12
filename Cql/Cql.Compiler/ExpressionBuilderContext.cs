@@ -15,7 +15,6 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using elm = Hl7.Cql.Elm;
 using System.Diagnostics.CodeAnalysis;
-using Hl7.Cql.Compiler.Infrastructure;
 
 namespace Hl7.Cql.Compiler
 {
@@ -34,8 +33,7 @@ namespace Hl7.Cql.Compiler
             DefinitionDictionary<LambdaExpression> definitions,
             IDictionary<string, string> localLibraryIdentifiers,
             LibraryExpressionBuilderContext libContext,
-            elm.Element element,
-            int elementOrdinal)
+            elm.Element element)
         {
             _element = element;
             _outerContext = null;
@@ -44,7 +42,6 @@ namespace Hl7.Cql.Compiler
             Definitions = definitions ?? throw new ArgumentNullException(nameof(definitions));
             _operatorBinding = new OperatorBindingRethrowDecorator(this, operatorBinding);
             LocalLibraryIdentifiers = localLibraryIdentifiers ?? throw new ArgumentNullException(nameof(localLibraryIdentifiers));
-            _elementOrdinal = elementOrdinal;
             ImpliedAlias = null;
             Operands = new Dictionary<string, ParameterExpression>();
             Libraries = new Dictionary<string, DefinitionDictionary<LambdaExpression>>();
@@ -59,7 +56,6 @@ namespace Hl7.Cql.Compiler
         {
             _operatorBinding = source._operatorBinding;
             _element = source._element;
-            _elementOrdinal = source._elementOrdinal;
             _outerContext = source._outerContext;
             Builder = source.Builder;
             RuntimeContextParameter = source.RuntimeContextParameter;
@@ -76,14 +72,12 @@ namespace Hl7.Cql.Compiler
 
         private ExpressionBuilderContext(
             ExpressionBuilderContext outer,
-            Elm.Element element,
-            int elementOrdinal) : this(outer)
+            Elm.Element element) : this(outer)
         {
             Debug.Assert(element != this._element);
             _outerContext = outer;
             _operatorBinding = new OperatorBindingRethrowDecorator(this, outer._operatorBinding.Inner);
             _element = element;
-            _elementOrdinal = elementOrdinal;
         }
 
         private ExpressionBuilderContext(
@@ -279,8 +273,7 @@ namespace Hl7.Cql.Compiler
         /// Clones this ExpressionBuilderContext
         /// </summary>
         internal ExpressionBuilderContext Deeper(
-            elm.Element element,
-            int elementOrdinal = Ordinal.Unspecified)
+            elm.Element element)
         {
             if (element == _element)
             {
@@ -288,7 +281,7 @@ namespace Hl7.Cql.Compiler
                 return this;
             }
 
-            return new ExpressionBuilderContext(this, element, elementOrdinal);
+            return new ExpressionBuilderContext(this, element);
         }
 
         public Expression? Mutate(elm.Element op, Expression? expression)
