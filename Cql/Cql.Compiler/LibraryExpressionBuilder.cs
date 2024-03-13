@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -417,5 +416,4 @@ internal class LibraryExpressionBuilder
         //var lambda = (LambdaExpression)makeLambda.Invoke(null, new object[] { @throw, parameters });
         return lambda;
     }
-
 }

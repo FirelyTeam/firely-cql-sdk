@@ -34,10 +34,9 @@ internal static class DependencyInjection
         services.AddSingleton<IValidateOptions<PackagerOptions>, PackagerOptions.Validator>();
     }
 
-    public static void AddResourcePackager(this IServiceCollection services, IConfiguration config)
+    public static void TryAddResourceWriters(this IServiceCollection services, IConfiguration config)
     {
         TryAddPackagerOptions(services, config);
-        services.TryAddSingleton<ResourcePackager>();
         TryAddConfiguredResourceWriters(services, config);
     }
 
@@ -100,5 +99,12 @@ internal static class DependencyInjection
         services.TryAddSingleton<TypeConverter>(FhirTypeConverter.Default);
         services.TryAddSingleton<Hasher>();
         services.TryAddSingleton<TypeManager>();
+    }
+
+    public static void TryAddBuilders(this IServiceCollection services)
+    {
+        services.TryAddSingleton<LibraryPackager>();
+        services.TryAddSingleton<LibraryExpressionBuilder>();
+        services.TryAddSingleton<ExpressionBuilder>();
     }
 }

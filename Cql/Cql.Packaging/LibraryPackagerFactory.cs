@@ -24,7 +24,7 @@ internal class LibraryPackagerFactory
         _libraryExpressionBuilderFactory = new LibraryExpressionBuilderFactory(loggerFactory, cacheSize);
         _cSharpSourceCodeWriter = Deferred(() => new CSharpSourceCodeWriter(Logger<CSharpSourceCodeWriter>(), FhirTypeResolver));
         _assemblyCompiler = Deferred(() => new AssemblyCompiler(LibraryExpressionBuilder, CSharpSourceCodeWriter, TypeManager));
-        _libraryPackager = Deferred(() => new LibraryPackager(Logger<LibraryPackager>(), FhirTypeResolver, AssemblyCompiler, LibraryExpressionBuilder));
+        _libraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);

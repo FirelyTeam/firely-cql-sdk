@@ -21,20 +21,14 @@ namespace Hl7.Cql.Packaging;
 internal class LibraryPackager
 {
     private readonly AssemblyCompiler _assemblyCompiler;
-    private readonly ILogger<LibraryPackager> _logger;
     private readonly TypeResolver _typeResolver;
-    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
     public LibraryPackager(
-        ILogger<LibraryPackager> logger,
         TypeResolver typeResolver,
-        AssemblyCompiler assemblyCompiler,
-        LibraryExpressionBuilder libraryExpressionBuilder)
+        AssemblyCompiler assemblyCompiler)
     {
-        _logger = logger;
         _typeResolver = typeResolver;
         _assemblyCompiler = assemblyCompiler;
-        _libraryExpressionBuilder = libraryExpressionBuilder;
     }
 
     internal IEnumerable<Resource> PackageResources(

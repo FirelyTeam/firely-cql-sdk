@@ -28,6 +28,7 @@ classDiagram
     IEnumerable_ResourceWriter_ ..> PackagerCliProgram : injected 
     LibraryPackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
+    LibraryLoader ..> PackagerCliProgram : used by 
 
     TypeConverter ..> CqlOperatorsBinding : injected         
     TypeResolver ..> CqlOperatorsBinding : injected    
@@ -38,7 +39,6 @@ classDiagram
 
     TypeResolver ..> LibraryPackager : injected
     AssemblyCompiler ..> LibraryPackager : injected
-    LibraryExpressionBuilder ..> LibraryPackager : injected 
     
     TypeResolver ..> CSharpSourceCodeWriter : injected
 
@@ -47,4 +47,7 @@ classDiagram
 
     %% Rest
     ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
+
+    %% Obsolete
+    IEnumerable_ResourceWriter_ ..> ResourcePackager_Obsolete_ : injected 
 ```
