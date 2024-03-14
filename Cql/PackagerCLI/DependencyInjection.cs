@@ -104,7 +104,8 @@ internal static class DependencyInjection
     public static void TryAddBuilders(this IServiceCollection services)
     {
         services.TryAddSingleton<LibraryPackager>();
-        services.TryAddSingleton<LibraryExpressionBuilder>();
         services.TryAddSingleton<ExpressionBuilder>();
+        services.TryAddSingleton<LibraryExpressionBuilder>();
+        services.TryAddSingleton<LibrarySetExpressionBuilder>();
     }
 }

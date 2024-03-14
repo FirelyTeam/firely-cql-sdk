@@ -14,15 +14,16 @@ namespace Hl7.Cql.Compiler;
 internal class LibrarySet
 {
     public string Name { get; }
-    private IReadOnlyCollection<string> _sortedKeys;
-    private IReadOnlySet<string> _rootKeys;
+    public IReadOnlyCollection<Library> TopologicallySortedLibraries { get; private set; }
+    public IReadOnlySet<Library> RootLibraries { get; private set; }
+
     private readonly Dictionary<string, (string filePath, Library library, List<Library> dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
 
     public LibrarySet(string name = "")
     {
         Name = name;
-        _sortedKeys = Array.Empty<string>();
-        _rootKeys = EmptySet<string>.Empty;
+        TopologicallySortedLibraries = Array.Empty<Library>();
+        RootLibraries = EmptySet<Library>.Empty;
         _libraryInfosByKey = new Dictionary<string, (string filePath, Library library, List<Library> dependencies)>();
     }
 
@@ -102,33 +103,34 @@ internal class LibrarySet
                 {
                     var fromLib = tuple.library;
                     var fromKey = fromLib.NameAndVersion!;
+
                     var toKey = includeDef.NameAndVersion() 
                                 ?? throw new LibraryMissingIncludeDefPathError(tuple.filePath, fromLib,
                                     includeDef).ToException();
-                    
-                    // Make sure we actually have the 'to' library, and add it as a dependency on the 'from' library
                     var toLib = GetLibrary(toKey)
                                 ?? throw new LibraryIncludeDefUnresolvedError(tuple.filePath, fromLib, includeDef)
                                     .ToException();
                     _libraryInfosByKey[fromKey].dependencies.Add(toLib);
-                    return (From:fromKey, To:toKey);
+                    
+                    return (From:fromLib, To:toLib);
                 });
 
-        HashSet<string> rootKeys = new();
+        HashSet<Library> rootLibraries = new();
         foreach (var root in fromToPairs.Roots())
         {
-            rootKeys.Add(root);
+            rootLibraries.Add(root);
         }
+        RootLibraries = rootLibraries;
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
-        const string RootOfRoots = "";
-        var sortedKeys = Traversal.TopologicalSort(
-                RootOfRoots,
-                key => key switch
+        const Library RootOfRoots = null!;
+        var sortedKeys = Traversal.TopologicalSort<Library>(
+                RootOfRoots!,
+                fromLibrary => fromLibrary switch
                 {
-                    RootOfRoots => rootKeys,
-                    _ => _libraryInfosByKey[key].dependencies.Select(lib => lib.NameAndVersion!)
+                    RootOfRoots => RootLibraries,
+                    _ => _libraryInfosByKey[fromLibrary.NameAndVersion!].dependencies
                 })
             .SkipLast(1)
             .ToList();
@@ -136,8 +138,7 @@ internal class LibrarySet
 
         // Replace fields
 
-        _rootKeys = rootKeys;
-        _sortedKeys = sortedKeys;
+        TopologicallySortedLibraries = sortedKeys;
     }
 }
 

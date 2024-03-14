@@ -1,6 +1,8 @@
-﻿using Hl7.Cql.Compiler;
+﻿using System.Linq.Expressions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -14,17 +16,20 @@ internal class PackagerCliProgram
     private readonly ResourceWriter[] _resourceWriters;
     private readonly ILogger<PackagerCliProgram> _logger;
     private readonly LibraryPackager _libraryPackager;
+    private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
 
     public PackagerCliProgram(
         ILogger<PackagerCliProgram> logger,
         IOptions<PackagerOptions> packageArgsOptions,
         IEnumerable<ResourceWriter> resourceWriters,
         LibraryPackager libraryPackager, 
-        OptionsConsoleDumper optionsConsoleDumper)
+        OptionsConsoleDumper optionsConsoleDumper, 
+        LibrarySetExpressionBuilder librarySetExpressionBuilder)
     {
         _logger = logger;
         _libraryPackager = libraryPackager;
         _optionsConsoleDumper = optionsConsoleDumper;
+        _librarySetExpressionBuilder = librarySetExpressionBuilder;
         _packagerOptions = packageArgsOptions.Value;
         _resourceWriters = resourceWriters.ToArray();
     }
@@ -50,8 +55,10 @@ internal class PackagerCliProgram
         if (_resourceWriters.Length == 0) return 0; //Skip since no writers provided
 
         var opt = _packagerOptions;
-        LibrarySet ls = new();
-        ls.LoadLibraries(opt.ElmDirectory.GetFiles("*.json"));
+
+        LibrarySet librarySet = new(opt.ElmDirectory.FullName);
+        librarySet.LoadLibraries(opt.ElmDirectory.GetFiles("*.json"));
+        DefinitionDictionary<LambdaExpression> definitions = _librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
 
         var librariesByNameAndVersion = LibraryLoader.LoadLibraries(opt.ElmDirectory!);
         var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);

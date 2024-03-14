@@ -34,17 +34,19 @@ internal class LibraryExpressionBuilder
 
     public LibraryExpressionBuilderContext CreateContext(
         Library library,
+        LibrarySetExpressionBuilderContext? libsCtx,
         DefinitionDictionary<LambdaExpression> definitions) =>
-        new(library, _expressionBuilder, _operatorBinding, definitions);
+        new(library, _expressionBuilder, _operatorBinding, definitions, libsCtx);
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrary(
         Library library,
+        LibrarySetExpressionBuilderContext? libsCtx = null,
         DefinitionDictionary<LambdaExpression>? definitions = null)
 
     {
         definitions ??= new();
-        var libctx = CreateContext(library, definitions);
-        ProcessLibrary(libctx);
+        var libCtx = CreateContext(library, libsCtx, definitions);
+        ProcessLibrary(libCtx);
         return definitions;
     }
 

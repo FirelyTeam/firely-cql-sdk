@@ -1,42 +1,45 @@
-﻿using Microsoft.Extensions.Logging;
-using System;
+﻿using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
+using System.Linq.Expressions;
+using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
 internal class LibrarySetExpressionBuilder
 {
     private readonly ILogger<LibrarySetExpressionBuilder> _logger;
+    private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
-    public LibrarySetExpressionBuilder(ILogger<LibrarySetExpressionBuilder> logger)
+    public LibrarySetExpressionBuilder(
+        ILogger<LibrarySetExpressionBuilder> logger, 
+        LibraryExpressionBuilder libraryExpressionBuilder)
     {
         _logger = logger;
+        _libraryExpressionBuilder = libraryExpressionBuilder;
     }
-}
 
+    public LibrarySetExpressionBuilderContext CreateContext(
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression> definitions) =>
+        new LibrarySetExpressionBuilderContext(librarySet, definitions);
 
-internal class LibrarySetExpressionBuilderContext : IBuilderContext
-{
-    // Load a set of ELM libraries from a folder (in parallel) into a dictionary by name and version (maybe also alias?)
-    // Topologically sort them by their included libraries
+    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression>? definitions = null)
 
-
-    public IBuilderContext? OuterContext => null; // This is the top level
-    public BuilderContextInfo ContextInfo { get; } = new();
-}
-
-internal class LibrarySetExpressionBuilderFactory
-{
-    private readonly Lazy<LibrarySetExpressionBuilder> _librarySetExpressionBuilder;
-
-    public LibrarySetExpressionBuilderFactory(ILoggerFactory loggerFactory)
     {
-        _librarySetExpressionBuilder = Deferred(() => new LibrarySetExpressionBuilder(Logger<LibrarySetExpressionBuilder>()));
-
-
-        static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
-
-        ILogger<T> Logger<T>() => loggerFactory.CreateLogger<T>();
+        definitions ??= new();
+        var libsCtx = CreateContext(librarySet, definitions);
+        ProcessLibrarySet(libsCtx);
+        return definitions;
     }
 
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder => _librarySetExpressionBuilder.Value;
+    private void ProcessLibrarySet(LibrarySetExpressionBuilderContext libsCtx)
+    {
+        foreach (var library in libsCtx.TopologicallySortedLibraries)
+        { 
+            var packageDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, libsCtx);
+            libsCtx.MergeDefinitions(packageDefinitions);
+        }
+    }
 }

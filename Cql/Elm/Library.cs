@@ -1,85 +1,85 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using JetBrains.Annotations;
 
-namespace Hl7.Cql.Elm
+namespace Hl7.Cql.Elm;
+
+[DebuggerDisplay("Library ({NameAndVersion})")]
+public partial class Library : IComparable<Library>
 {
-    [DebuggerDisplay("Library ({NameAndVersion})")]
-    public partial class Library
+    public const string JsonMimeType = "application/elm+json";
+    public const string XmlMimeType = "application/elm+xml";
+    public const string LibraryNodeProperty = "Library";
+
+    public static readonly JsonSerializerOptions JsonSerializerOptions = GetSerializerOptions(false);
+    public static readonly JsonSerializerOptions JsonSerializerOptionsStrict = GetSerializerOptions(true);
+
+    public string? NameAndVersion
     {
-        public const string JsonMimeType = "application/elm+json";
-        public const string XmlMimeType = "application/elm+xml";
-        public const string LibraryNodeProperty = "Library";
-
-        public static readonly JsonSerializerOptions JsonSerializerOptions = GetSerializerOptions(false);
-        public static readonly JsonSerializerOptions JsonSerializerOptionsStrict = GetSerializerOptions(true);
-
-        public string? NameAndVersion
+        get
         {
-            get
-            {
-                if (identifier == null)
-                    return null;
-                else if (string.IsNullOrWhiteSpace(identifier.version))
-                    return identifier.id;
-                else return $"{identifier.id}-{identifier.version}";
-            }
-        }
-
-        public string? Name
-        {
-            get
-            {
-                if (identifier == null)
-                    return null;
+            if (identifier == null)
+                return null;
+            else if (string.IsNullOrWhiteSpace(identifier.version))
                 return identifier.id;
-            }
+            else return $"{identifier.id}-{identifier.version}";
         }
+    }
 
-        public string? Version
+    public string? Name
+    {
+        get
         {
-            get
-            {
-                if (identifier == null)
-                    return null;
-                return identifier.version;
-            }
+            if (identifier == null)
+                return null;
+            return identifier.id;
         }
+    }
 
-        private static JsonSerializerOptions GetSerializerOptions(bool strict)
+    public string? Version
+    {
+        get
         {
-            var options = new JsonSerializerOptions()
+            if (identifier == null)
+                return null;
+            return identifier.version;
+        }
+    }
+
+    private static JsonSerializerOptions GetSerializerOptions(bool strict)
+    {
+        var options = new JsonSerializerOptions()
             {
                 MaxDepth = int.MaxValue
             }
             .AddLibraryConverters()
             .AddPolymorphicConverters(strict);
-            options.Converters.Add(new XmlQualifiedNameConverter());
-            options.Converters.Add(new JsonStringEnumConverter());
-            return options;
-        }
-
-        public static Library LoadFromJson(FileInfo file)
-        {
-            if (!file.Exists)
-                throw new ArgumentException($"File {file.FullName} does not exist.");
-            using var stream = file.OpenRead();
-            return LoadFromJson(stream);
-        }
-        public static Library LoadFromJson(Stream stream) =>
-            JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
-            stream switch
-            {
-                FileStream fs => throw new ArgumentException(
-                    $"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
-                _ => throw new ArgumentException(
-                    $"Stream does not represent a valid {nameof(Library)}")
-            };
+        options.Converters.Add(new XmlQualifiedNameConverter());
+        options.Converters.Add(new JsonStringEnumConverter());
+        return options;
     }
+
+    public static Library LoadFromJson(FileInfo file)
+    {
+        if (!file.Exists)
+            throw new ArgumentException($"File {file.FullName} does not exist.");
+        using var stream = file.OpenRead();
+        return LoadFromJson(stream);
+    }
+    public static Library LoadFromJson(Stream stream) =>
+        JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
+        stream switch
+        {
+            FileStream fs => throw new ArgumentException(
+                $"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
+            _ => throw new ArgumentException(
+                $"Stream does not represent a valid {nameof(Library)}")
+        };
+
+    int IComparable<Library>.CompareTo(Library? other) => 
+        Comparer.DefaultInvariant.Compare(this.NameAndVersion, other?.NameAndVersion);
 }

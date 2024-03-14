@@ -18,14 +18,16 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     private readonly Dictionary<string, string> _localLibraryIdentifiers;
     private readonly DefinitionDictionary<LambdaExpression> _definitions;
     private readonly Library _library;
+    private readonly LibrarySetExpressionBuilderContext? _libsCtx;
     private readonly Dictionary<string, CqlCode> _codesByName;
     private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
     public LibraryExpressionBuilderContext(
-        Library library, 
+        Library library,
         ExpressionBuilder expressionBuilder,
         OperatorBinding operatorBinding,
-        DefinitionDictionary<LambdaExpression> definitions)
+        DefinitionDictionary<LambdaExpression> definitions,
+        LibrarySetExpressionBuilderContext? libsCtx = null)
     {
         if (string.IsNullOrWhiteSpace(library.NameAndVersion))
             throw new ArgumentException("Library must have a name and version.");
@@ -37,6 +39,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         _operatorBinding = operatorBinding;
         _definitions = definitions;
         _library = library;
+        _libsCtx = libsCtx;
         _localLibraryIdentifiers = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
@@ -102,7 +105,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
         _codesByName.TryGetValue(codeRef.name, out systemCode);
 
-    IBuilderContext? IBuilderContext.OuterContext => null;
+    IBuilderContext? IBuilderContext.OuterContext => _libsCtx;
 
     BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(Library);
 }

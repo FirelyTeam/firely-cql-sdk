@@ -37,7 +37,7 @@ namespace CoreTests
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage, definitions);
+            Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage, definitions: definitions);
             AggregatesDefinitions = definitions.CompileAll();
         }
 

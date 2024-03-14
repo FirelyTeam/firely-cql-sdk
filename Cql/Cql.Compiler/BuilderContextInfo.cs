@@ -8,9 +8,9 @@ namespace Hl7.Cql.Compiler;
 
 internal readonly record struct BuilderContextInfo(
     string ElementType,
-    string? Locator,
-    string? ResultType,
-    string? Name)
+    string? Locator = null,
+    string? ResultType = null,
+    string? Name = null)
 {
     public override string ToString()
     {
@@ -84,7 +84,7 @@ internal readonly record struct BuilderContextInfo(
                 Elm.ListTypeSpecifier t => $"List<{GetTypeSpecifierName(t.elementType)}>",
                 Elm.NamedTypeSpecifier t => t.name.ToString(),
                 Elm.ParameterTypeSpecifier t => t.parameterName,
-                Elm.TupleTypeSpecifier t => $"Tuple {{{string.Join(", ", from c in t.element select $"{c.name}: {GetTypeSpecifierName(c.type)}}}")}>",
+                Elm.TupleTypeSpecifier t => $"Tuple {{{string.Join(", ", from c in t.element select $"{c.name}: {GetTypeSpecifierName(c.elementType)}}}")}>",
                 _ => throw new SwitchExpressionException("Unexpected switch type: " + type.GetType()),
             };
     }
