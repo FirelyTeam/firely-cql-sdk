@@ -28,13 +28,16 @@ classDiagram
     IEnumerable_ResourceWriter_ ..> PackagerCliProgram : injected 
     LibraryPackager ..> PackagerCliProgram : injected 
     OptionsConsoleDumper ..> PackagerCliProgram : injected 
+    LibrarySetExpressionBuilder ..> PackagerCliProgram : injected
     LibraryLoader ..> PackagerCliProgram : used by 
+    
 
     TypeConverter ..> CqlOperatorsBinding : injected         
     TypeResolver ..> CqlOperatorsBinding : injected    
 
     ModelInspector ..> TypeConverter : injected  
 
+    Hasher ..> TypeManager : injected
     TypeResolver ..> TypeManager : injected
 
     TypeResolver ..> LibraryPackager : injected
@@ -44,6 +47,8 @@ classDiagram
 
     ExpressionBuilder ..> LibraryExpressionBuilder : injected
     OperatorBinding ..> LibraryExpressionBuilder : injected
+
+    LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 
     %% Rest
     ResourceWriter ..> IEnumerable_ResourceWriter_ : item in
