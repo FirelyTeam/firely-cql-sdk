@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;
+using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
 internal class LibrarySet
 {
-    private List<string> _sortedKeys;
-    private readonly HashSet<string> _rootKeys;
+    public string Name { get; }
+    private IReadOnlyCollection<string> _sortedKeys;
+    private IReadOnlySet<string> _rootKeys;
     private readonly Dictionary<string, (string filePath, Library library, List<Library> dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
 
-    public LibrarySet()
+    public LibrarySet(string name = "")
     {
-        _sortedKeys = new List<string>();
-        _rootKeys = new HashSet<string>();
+        Name = name;
+        _sortedKeys = Array.Empty<string>();
+        _rootKeys = EmptySet<string>.Empty;
         _libraryInfosByKey = new Dictionary<string, (string filePath, Library library, List<Library> dependencies)>();
     }
 
@@ -35,7 +39,7 @@ internal class LibrarySet
                 return true;
         }
 
-        if (throwError) throw new LibraryNotFoundByKey(key ?? "(null)").ToException();
+        if (throwError) throw new LibraryNotFoundError(key ?? "(null)").ToException();
         return false;
     }
 
@@ -50,9 +54,6 @@ internal class LibrarySet
 
     public void LoadLibraries(IReadOnlyCollection<FileInfo> files)
     {
-        _rootKeys.Clear();
-        _sortedKeys.Clear();
-
         // Loading libraries in parallel
 
         (FileInfo file, int index)[] input = files
@@ -113,18 +114,60 @@ internal class LibrarySet
                     return (From:fromKey, To:toKey);
                 });
 
+        HashSet<string> rootKeys = new();
         foreach (var root in fromToPairs.Roots())
         {
-            _rootKeys.Add(root);
+            rootKeys.Add(root);
         }
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
-        _sortedKeys = Traversal.TopologicalSort(
-                "",
-                key => key is ""
-                    ? _rootKeys
-                    : _libraryInfosByKey[key].dependencies.Select(lib => lib.NameAndVersion!))
+        const string RootOfRoots = "";
+        var sortedKeys = Traversal.TopologicalSort(
+                RootOfRoots,
+                key => key switch
+                {
+                    RootOfRoots => rootKeys,
+                    _ => _libraryInfosByKey[key].dependencies.Select(lib => lib.NameAndVersion!)
+                })
+            .SkipLast(1)
             .ToList();
+        Debug.Assert(sortedKeys.Count == _libraryInfosByKey.Count);
+
+        // Replace fields
+
+        _rootKeys = rootKeys;
+        _sortedKeys = sortedKeys;
     }
+}
+
+internal interface ILibraryError : ICqlError
+{
+    string FilePath { get; }
+    Library Library { get; }
+}
+
+internal readonly record struct LibraryNotFoundError(string Key) : ICqlError
+{
+    public string GetMessage() => $"Library was not found by key. Key: '{Key}'";
+}
+
+internal readonly record struct LibraryMissingIncludeDefPathError(string FilePath, Library Library, IncludeDef IncludeDef) : ILibraryError
+{
+    public string GetMessage() => $"Library has an include definition with a missing path. Library Path: '{FilePath}'";
+}
+
+internal readonly record struct LibraryIncludeDefUnresolvedError(string FilePath, Library Library, IncludeDef IncludeDef) : ILibraryError
+{
+    public string GetMessage() => $"Library has an include definition that did not resolve to a target library in the set. Library Path: '{FilePath}', IncludeDef: '{IncludeDef.NameAndVersion()}'";
+}
+
+internal readonly record struct LibraryMissingNameAndVersionError(string FilePath, Library Library) : ILibraryError
+{
+    public string GetMessage() => $"Library did not have a valid name and version. Library Path: '{FilePath}'";
+}
+
+internal readonly record struct LibraryNameAndVersionMustBeUniqueError(string FilePath, Library Library) : ILibraryError
+{
+    public string GetMessage() => $"Library did not have a unique name and version in the set. Library Path: '{FilePath}', Duplication: '{Library.NameAndVersion}'";
 }

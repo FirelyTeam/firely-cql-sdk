@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Compiler;
 
@@ -41,35 +39,4 @@ internal class LibrarySetExpressionBuilderFactory
     }
 
     public LibrarySetExpressionBuilder LibrarySetExpressionBuilder => _librarySetExpressionBuilder.Value;
-}
-
-internal interface ILibraryError : ICqlError
-{
-    string FilePath { get; }
-    Library Library { get; }
-}
-
-internal readonly record struct LibraryNotFoundByKey(string Key) : ICqlError
-{
-    public string GetMessage() => $"Library was not found by key. Key: '{Key}'";
-}
-
-internal readonly record struct LibraryMissingIncludeDefPathError(string FilePath, Library Library, IncludeDef IncludeDef) : ILibraryError
-{
-    public string GetMessage() => $"Library has an include definition with a missing path. Library Path: '{FilePath}'";
-}
-
-internal readonly record struct LibraryIncludeDefUnresolvedError(string FilePath, Library Library, IncludeDef IncludeDef) : ILibraryError
-{
-    public string GetMessage() => $"Library has an include definition that did not resolve to a target library in the set. Library Path: '{FilePath}', IncludeDef: '{IncludeDef.NameAndVersion()}'";
-}
-
-internal readonly record struct LibraryMissingNameAndVersionError(string FilePath, Library Library) : ILibraryError
-{
-    public string GetMessage() => $"Library did not have a valid name and version. Library Path: '{FilePath}'";
-}
-
-internal readonly record struct LibraryNameAndVersionMustBeUniqueError(string FilePath, Library Library) : ILibraryError
-{
-    public string GetMessage() => $"Library did not have a unique name and version in the set. Library Path: '{FilePath}', Duplication: '{Library.NameAndVersion}'";
 }
