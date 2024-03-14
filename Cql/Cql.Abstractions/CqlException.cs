@@ -10,7 +10,7 @@ internal interface ICqlError
 internal static class CqlErrorExtensions
 {
     public static CqlException<TError> ToException<TError>(this TError cqlError, Exception? innerException = null)
-        where TError : ICqlError =>
+        where TError : struct, ICqlError =>
         new CqlException<TError>(cqlError, innerException);
 }
 
@@ -25,7 +25,7 @@ internal abstract class CqlException : Exception
 }
 
 internal class CqlException<TError> : CqlException
-    where TError : ICqlError
+    where TError : struct, ICqlError
 {
     public new ICqlError Error { get; }
     protected override ICqlError GetError() => Error;

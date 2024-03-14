@@ -35,7 +35,7 @@ partial class ExpressionBuilderContext : IBuilderContext
             {
                 return Inner.Bind(@operator, runtimeContext, parameters);
             }
-            catch (CqlException e) when (e.Error is ExpressionBuildingError)
+            catch (CqlException<ExpressionBuildingError>)
             {
                 throw;
             }
