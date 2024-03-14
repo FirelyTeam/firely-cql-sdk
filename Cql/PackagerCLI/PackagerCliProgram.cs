@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Packaging;
+﻿using Hl7.Cql.Compiler;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.ResourceWriters;
 using Hl7.Fhir.Model;
 using Microsoft.Extensions.Logging;
@@ -49,6 +50,9 @@ internal class PackagerCliProgram
         if (_resourceWriters.Length == 0) return 0; //Skip since no writers provided
 
         var opt = _packagerOptions;
+        LibrarySet ls = new();
+        ls.LoadLibraries(opt.ElmDirectory.GetFiles("*.json"));
+
         var librariesByNameAndVersion = LibraryLoader.LoadLibraries(opt.ElmDirectory!);
         var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);
         HashSet<Resource> resourcesWritten = new();

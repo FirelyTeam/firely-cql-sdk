@@ -11,19 +11,22 @@ using Hl7.Cql.Graph;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Elm
 {
     public static class ExtensionMethods
     {
-        public static string? NameAndVersion(this IncludeDef include)
-        {
-            if (include.path == null)
-                return null;
-            else if (string.IsNullOrWhiteSpace(include.version))
-                return include.path;
-            else return $"{include.path}-{include.version}";
-        }
+        /// <exception cref="CqlException{IncludeDefMissingPathError}">If includeDef does not have a path, and if throwError is <c>true</c>.</exception>
+        public static string? NameAndVersion(this IncludeDef includeDef, bool throwError = false) =>
+            (path: includeDef.path?.Trim(), version: includeDef.version?.Trim(), throwError) switch
+            {
+                (path: null or "", _, throwError: true) => throw new IncludeDefMissingPathError(includeDef).ToException(),
+                (path: null or "", _, throwError: false) => null,
+                (path:{} path, version:null or "", _) => path,
+                (path:{} path, version:{} version, _) => $"{path}-{version}",
+            };
 
         public static ListSortDirection ListSortOrder(this SortDirection direction) => direction switch
         {
@@ -47,4 +50,9 @@ namespace Hl7.Cql.Elm
             }
         }
     }
+}
+
+internal readonly record struct IncludeDefMissingPathError(IncludeDef IncludeDef) : ICqlError
+{
+    public string GetMessage() => "IncludeDef must have a valid path.";
 }
