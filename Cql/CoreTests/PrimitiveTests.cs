@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -23,6 +24,12 @@ namespace CoreTests
     [TestCategory("UnitTest")]
     public class PrimitiveTests
     {
+        private static ILoggerFactory LoggerFactory { get; } =
+            Microsoft.Extensions.Logging.LoggerFactory
+                .Create(logging => logging.AddDebug());
+
+        private static LibraryPackagerFactory Factory = new(LoggerFactory);
+
         [TestMethod]
         public void CqlDateTime_Add_Year_By_Units()
         {
@@ -3512,21 +3519,21 @@ namespace CoreTests
             var librarySet = new LibrarySet();
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-
-            var factory = new LibraryPackagerFactory(NullLoggerFactory.Instance);
-            var definitions = factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
-            
-            var writer = factory.CSharpSourceCodeWriter;
-            
+            var definitions = Factory.LibraryExpressionBuilder.ProcessLibrary(elmPackage);
+            var writer = Factory.CSharpSourceCodeWriter;
             var dict = new Dictionary<string, MemoryStream>();
+
             writer.Write(
                 definitions, 
-                factory.TypeManager.TupleTypes,
+                Factory.TypeManager.TupleTypes,
                 librarySet,
                 lib =>
                 {
-                    var ms = new MemoryStream(); dict[lib] = ms; return ms;
+                    var ms = new MemoryStream();
+                    dict[lib] = ms; 
+                    return ms;
                 });
+            Debug.Assert(dict.Any());
         }
 
         [TestMethod]

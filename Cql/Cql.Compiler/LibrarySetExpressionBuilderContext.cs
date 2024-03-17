@@ -20,10 +20,6 @@ internal class LibrarySetExpressionBuilderContext : IBuilderContext
         ContextInfo = new BuilderContextInfo("LibrarySet", Name: _librarySet.Name!);
     }
 
-    // Load a set of ELM libraries from a folder (in parallel) into a dictionary by name and version (maybe also alias?)
-    // Topologically sort them by their included libraries
-
-
     public IBuilderContext? OuterContext { get; }
 
     public BuilderContextInfo ContextInfo { get; }

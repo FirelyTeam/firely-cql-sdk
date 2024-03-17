@@ -358,23 +358,19 @@ internal class LibraryPackager
     #region Static Utiltities
 
     [UsedImplicitly]
-    public static IDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
+    [Obsolete("Use LibrarySet.LoadLibraries instead.")]
+    public static IReadOnlyDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
     {
-        var dict = new ConcurrentDictionary<string, Elm.Library>();
-        var files = elmDir.GetFiles("*.json", SearchOption.AllDirectories);
-        Parallel.ForEach(files, file =>
-        {
-            var library = Elm.Library.LoadFromJson(file);
-            if (library?.NameAndVersion != null)
-            {
-                dict.TryAdd(library.NameAndVersion, library);
-            }
-        });
-        return dict;
+        LibrarySet ls = new(elmDir.FullName);
+        ls.LoadLibraries(elmDir.GetFiles("*.json", SearchOption.AllDirectories));
+        return ls;
     }
 
     [UsedImplicitly]
-    public static AssemblyLoadContext LoadResources(DirectoryInfo dir, string lib, string version)
+    public static AssemblyLoadContext LoadResources(
+        DirectoryInfo dir, 
+        string lib, 
+        string version)
     {
         var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
         using var fs = libFile.OpenRead();
@@ -396,11 +392,12 @@ internal class LibraryPackager
     }
 
     [UsedImplicitly]
-    public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-      string lib,
-      string version,
-      LogLevel logLevel = LogLevel.Error,
-      int cacheSize = 0)
+    public static AssemblyLoadContext LoadElm(
+        DirectoryInfo elmDirectory,
+        string lib,
+        string version,
+        LogLevel logLevel = LogLevel.Error,
+        int cacheSize = 0)
     {
         var logFactory = LoggerFactory
                       .Create(logging =>
@@ -411,7 +408,6 @@ internal class LibraryPackager
                               console.LogToStandardErrorThreshold = LogLevel.Error;
                           });
                       });
-
         return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
     }
 
@@ -423,22 +419,9 @@ internal class LibraryPackager
         ILoggerFactory logFactory,
         int cacheSize)
     {
-        var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
-        if (!elmFile.Exists)
-            elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
-        if (!elmFile.Exists)
-            throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
-
-        // var library = Elm.Library.LoadFromJson(elmFile)
-        //     ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
-        // var dependencies = library
-        //     .GetIncludedLibraries(elmDirectory)
-        //     .Packages()
-        //     .ToArray();
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
-        
-        LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory);
+        LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory, cacheSize);
         var assemblyData = factory.AssemblyCompiler.Compile(librarySet);
         var asmContext = new AssemblyLoadContext($"{lib}-{version}");
         foreach (var kvp in assemblyData)
