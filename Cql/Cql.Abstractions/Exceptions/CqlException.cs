@@ -15,9 +15,9 @@ internal abstract class CqlException : Exception
 internal class CqlException<TError> : CqlException
     where TError : struct, ICqlError
 {
-    public new ICqlError Error { get; }
+    public new TError Error { get; }
     protected override ICqlError GetError() => Error;
 
-    public CqlException(ICqlError error, Exception? innerException = null) : base(innerException) =>
+    public CqlException(TError error, Exception? innerException = null) : base(innerException) =>
         Error = error;
 }
