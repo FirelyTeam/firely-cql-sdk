@@ -65,9 +65,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public IDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet, 
-            DefinitionDictionary<LambdaExpression> definitions)
+            DefinitionDictionary<LambdaExpression>? definitions = null)
         {
             Dictionary<string, Stream> navToLibraryStream = new();
+            definitions ??= new();
 
             Stream getStreamForLibrary(string nav)
             {

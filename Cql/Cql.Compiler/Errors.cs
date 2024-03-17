@@ -3,10 +3,6 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
-internal readonly record struct LibraryMissingIncludeDefPathError(Library Library, IncludeDef IncludeDef) : ILibraryError
-{
-    public string GetMessage() => $"Library has an include definition with a missing path. Library Identifier: '{Library.NameAndVersion}'";
-}
 
 internal readonly record struct LibraryIncludeDefUnresolvedError(Library Library, IncludeDef IncludeDef) : ILibraryError
 {

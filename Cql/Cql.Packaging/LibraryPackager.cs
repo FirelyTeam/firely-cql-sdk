@@ -396,9 +396,7 @@ internal class LibraryPackager
     }
 
     [UsedImplicitly]
-#pragma warning disable RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
     public static AssemblyLoadContext LoadElm(DirectoryInfo elmDirectory,
-#pragma warning restore RS0027 // API with optional parameter(s) should have the most parameters amongst its public overloads
       string lib,
       string version,
       LogLevel logLevel = LogLevel.Error,
@@ -425,32 +423,31 @@ internal class LibraryPackager
         ILoggerFactory logFactory,
         int cacheSize)
     {
-        // TODO: Needs fixing
-        throw new NotImplementedException();
+        var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
+        if (!elmFile.Exists)
+            elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
+        if (!elmFile.Exists)
+            throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
 
-        // var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}-{version}.json"));
-        // if (!elmFile.Exists)
-        //     elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{lib}.json"));
-        // if (!elmFile.Exists)
-        //     throw new ArgumentException($"Cannot find a matching ELM file for {lib} version {version} in {elmDirectory.FullName}", nameof(lib));
         // var library = Elm.Library.LoadFromJson(elmFile)
         //     ?? throw new InvalidOperationException($"File {elmFile.FullName} is not a valid ELM package.");
         // var dependencies = library
         //     .GetIncludedLibraries(elmDirectory)
         //     .Packages()
         //     .ToArray();
-        //
-        // LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory);
-        // var assemblyData = factory.AssemblyCompiler.Compile(dependencies, new DefinitionDictionary<LambdaExpression>());
-        //
-        // var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        // foreach (var kvp in assemblyData)
-        // {
-        //     var assemblyBytes = kvp.Value.Binary;
-        //     using var ms = new MemoryStream(assemblyBytes);
-        //     asmContext.LoadFromStream(ms);
-        // }
-        // return asmContext;
+        LibrarySet librarySet = new();
+        librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
+        
+        LibraryPackagerFactory factory = new LibraryPackagerFactory(logFactory);
+        var assemblyData = factory.AssemblyCompiler.Compile(librarySet);
+        var asmContext = new AssemblyLoadContext($"{lib}-{version}");
+        foreach (var kvp in assemblyData)
+        {
+            var assemblyBytes = kvp.Value.Binary;
+            using var ms = new MemoryStream(assemblyBytes);
+            asmContext.LoadFromStream(ms);
+        }
+        return asmContext;
     }
 
     #endregion 

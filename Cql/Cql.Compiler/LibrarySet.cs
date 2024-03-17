@@ -23,11 +23,13 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     /// </summary>
     public string Name { get; }
 
-    private IReadOnlyCollection<Library> TopologicallySortedLibraries { get; set; }
-
-    private IReadOnlySet<Library> RootLibraries { get; set; }
-
     private readonly Dictionary<string, (Library library, List<Library> dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
+    
+    private (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted) _calculatedState;
+    private bool _shouldRecalculateState;
+
+    private static readonly (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted)
+        EmptyCached = (EmptySet<Library>.Empty, Array.Empty<Library>());
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySet"/> class.
@@ -36,8 +38,8 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     public LibrarySet(string name = "")
     {
         Name = name;
-        TopologicallySortedLibraries = Array.Empty<Library>();
-        RootLibraries = EmptySet<Library>.Empty;
+        _shouldRecalculateState = false;
+        _calculatedState = EmptyCached;
         _libraryInfosByKey = new Dictionary<string, (Library library, List<Library> dependencies)>();
     }
 
@@ -86,16 +88,17 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     /// <exception cref="FileNotFoundException"></exception>
     /// <exception cref="CqlException{LibraryMissingNameAndVersionError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     /// <exception cref="CqlException{NotAValidLibraryFileError}"></exception>
-    public void LoadLibraries(IReadOnlyCollection<FileInfo> files)
+    public IReadOnlyCollection<Library> LoadLibraries(IReadOnlyCollection<FileInfo> files)
     {
+        _shouldRecalculateState = true;
+
         // Loading libraries in parallel
 
         (FileInfo file, int index)[] input = files
             .Select((file, ordinal) => (file, index: ordinal))
             .ToArray();
 
-        var libraries = new Library[input.Length];
-
+        Library[] libraries = new Library[input.Length];
         Parallel.ForEach(input, t =>
         {
             var library = Library.LoadFromJson(t.file)!;
@@ -119,6 +122,20 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
             }
         }
 
+        return libraries;
+    }
+
+    private (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted) GetCalculatedState()
+    {
+        if (_shouldRecalculateState)
+        {
+            SortTopologically();
+        }
+        return _calculatedState;
+    }
+
+    private void SortTopologically()
+    {
         // Determining root libraries i.e. those that are not dependencies for others.
 
         var fromToPairs = _libraryInfosByKey
@@ -130,7 +147,7 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
                     var fromLib = tuple.library;
                     var fromKey = fromLib.NameAndVersion!;
 
-                    var toKey = includeDef.NameAndVersion() ?? throw new LibraryMissingIncludeDefPathError(fromLib, includeDef).ToException();
+                    var toKey = includeDef.NameAndVersion()!;
                     var toLib = GetLibrary(toKey, false) ?? throw new LibraryIncludeDefUnresolvedError(fromLib, includeDef).ToException();
                     _libraryInfosByKey[fromKey].dependencies.Add(toLib);
 
@@ -138,39 +155,49 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
                 });
 
         HashSet<Library> rootLibraries = new();
-        foreach (var root in fromToPairs.Roots())
+        if (!fromToPairs.Any() && _libraryInfosByKey.Any())
         {
-            rootLibraries.Add(root);
+            rootLibraries.Add(_libraryInfosByKey.First().Value.library);
         }
-        RootLibraries = rootLibraries;
+        else 
+        {
+            foreach (var root in fromToPairs.Roots())
+            {
+                rootLibraries.Add(root);
+            }
+        }
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
         const Library RootOfRoots = null!;
-        var sortedKeys = Traversal.TopologicalSort<Library>(
+        var topologicallySortedLibraries = Traversal.TopologicalSort(
                 RootOfRoots!,
                 fromLibrary => fromLibrary switch
                 {
-                    RootOfRoots => RootLibraries,
+                    RootOfRoots => rootLibraries,
                     _ => _libraryInfosByKey[fromLibrary.NameAndVersion!].dependencies
                 })
             .SkipLast(1)
             .ToList();
-        Debug.Assert(sortedKeys.Count == _libraryInfosByKey.Count);
-        TopologicallySortedLibraries = sortedKeys;
+        Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByKey.Count);
+        
+        // Set calculation state
+        _calculatedState = (rootLibraries, topologicallySortedLibraries);
+        _shouldRecalculateState = false;
     }
 
     IEnumerator<KeyValuePair<string, Library>> IEnumerable<KeyValuePair<string, Library>>.GetEnumerator() =>
-        TopologicallySortedLibraries.Select(lib => KeyValuePair.Create(lib.NameAndVersion!, lib)).GetEnumerator();
+        GetCalculatedState().TopologicallySorted.Select(lib => KeyValuePair.Create(lib.NameAndVersion!, lib)).GetEnumerator();
 
     /// <inheritdoc/>
-    public IEnumerator<Library> GetEnumerator() => TopologicallySortedLibraries.GetEnumerator();
+    public IEnumerator<Library> GetEnumerator() => 
+        GetCalculatedState().TopologicallySorted.GetEnumerator();
 
     /// <inheritdoc/>
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
     
     /// <inheritdoc/>
-    public int Count => TopologicallySortedLibraries.Count;
+    public int Count => _libraryInfosByKey.Count;
 
     /// <inheritdoc/>
     bool IReadOnlyDictionary<string, Library>.ContainsKey(string key) =>
@@ -197,4 +224,56 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     
     /// <inheritdoc/>
     IEnumerable<Library> IReadOnlyDictionary<string, Library>.Values => _libraryInfosByKey.Values.Select(v => v.library).ToArray();
+
+    /// <summary>
+    /// Loads the specified library and its dependencies from the specified directory.
+    /// </summary>
+    /// <param name="elmDirectory">The directory containing the ELM files.</param>
+    /// <param name="lib">The name of the library to load.</param>
+    /// <param name="version">The version of the library to load.</param>
+    /// <returns>A collection of loaded libraries, including the specified library and its dependencies.</returns>
+    public IReadOnlyCollection<Library> LoadLibraryAndDependencies(
+        DirectoryInfo elmDirectory,
+        string lib,
+        string version = "")
+    {
+        List<Library> libraries = new();
+        List<(string lib, string version)> librariesToLoad = new() { (lib, version) };
+
+        while (librariesToLoad.Any())
+        {
+            _shouldRecalculateState = true;
+
+            var librariesToLoadWithOrdinals = librariesToLoad.Select((lib, i) => (lib, ordinal:i)).ToList();
+            Library[] librariesLoaded = new Library[librariesToLoad.Count];
+            Parallel.ForEach(librariesToLoadWithOrdinals, t =>
+            {
+                var library = Library.LoadFromJson(elmDirectory, t.lib.lib, t.lib.version)!;
+                librariesLoaded[t.ordinal] = library;
+            });
+            librariesToLoad.Clear();
+
+            foreach (var library in librariesLoaded)
+            {
+                if (!_libraryInfosByKey.TryAdd(library.NameAndVersion!, (library, new())))
+                    continue; // Already loaded, skip
+
+                if (library.includes is { Length: > 0 } includeDefs)
+                {
+                    foreach (var includeDef in includeDefs)
+                    {
+                        if (_libraryInfosByKey.ContainsKey($"{includeDef.path}-{includeDef.version}"))
+                            continue; // Already loaded, skip
+
+                        librariesToLoad.Add((includeDef.path, includeDef.version));
+                    }
+                }
+                libraries.Add(library);
+            }
+
+            libraries.AddRange(librariesLoaded);
+        }
+
+        return libraries;
+    }
 }

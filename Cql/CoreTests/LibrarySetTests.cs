@@ -8,20 +8,17 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CoreTests;
 
 [TestClass]
-public class LibraryLoaderTests
+public class LibrarySetTests
 {
     [TestMethod]
     public void LibraryLoader_Test()
     {
         var solutionDirectory = GetSolutionDirectory();
-        var cmsElmDirectory = new DirectoryInfo(Path.Combine(solutionDirectory.FullName, "LibrarySets", "CMS", "Elm"));
+        var dir = new DirectoryInfo(Path.Combine(solutionDirectory.FullName, "LibrarySets", "CMS", "Elm"));
 
-        // Use the solutionDirectory string as needed in your test
-        // DischargedonAntithromboticTherapyFHIR-0.0.010
-
-        LibraryLoader loader = new();
-        var fileInfoByNameAndVersion = loader.GetFileInfoByNameAndVersion(cmsElmDirectory, "DischargedonAntithromboticTherapyFHIR");
-        Assert.IsNotNull(fileInfoByNameAndVersion);
+        LibrarySet librarySet = new();
+        var libraries = librarySet.LoadLibraryAndDependencies(dir, "DischargedonAntithromboticTherapyFHIR");
+        Assert.IsTrue(libraries.Count == 13, "Expected 13 libraries to load for DischargedonAntithromboticTherapyFHIR");
     }
 
     private static DirectoryInfo GetSolutionDirectory() =>

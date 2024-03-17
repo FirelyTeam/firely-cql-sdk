@@ -22,36 +22,11 @@ Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Cql.Packaging.Cq
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlTypeToFhirMapping(Hl7.Fhir.Model.FHIRAllTypes? FhirType, Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType = null) -> void
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.Deconstruct(out Hl7.Fhir.Model.FHIRAllTypes? FhirType, out Hl7.Cql.Primitives.CqlPrimitiveType? CqlType, out Hl7.Cql.Packaging.CqlTypeToFhirMapping? ElementType) -> void
 Hl7.Cql.Packaging.ElmLibraryExtensions
-Hl7.Cql.Packaging.LibraryLoader
-Hl7.Cql.Packaging.ResourcePackageArgs
-Hl7.Cql.Packaging.ResourcePackageArgs.ElmDir.get -> System.IO.DirectoryInfo!
-Hl7.Cql.Packaging.ResourcePackageArgs.CqlDir.get -> System.IO.DirectoryInfo!
-Hl7.Cql.Packaging.ResourcePackageArgs.AfterPackageMutator.init -> void
-Hl7.Cql.Packaging.ResourcePackageArgs.AfterPackageMutator.get -> System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>?
-Hl7.Cql.Packaging.ResourcePackageArgs.ResourcePackageArgs(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null, string? resourceCanonicalRootUrl = null) -> void
-Hl7.Cql.Packaging.ResourcePackager.Package(System.IO.DirectoryInfo! elmDir, System.IO.DirectoryInfo! cqlDir, System.Action<System.Collections.Generic.IEnumerable<Hl7.Fhir.Model.Resource!>!>? afterPackageMutator = null, int? cacheSize = null) -> void
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.get -> System.DateTime?
 Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriterOptions.OverrideDate.set -> void
-override Hl7.Cql.Packaging.ResourcePackageArgs.GetHashCode() -> int
-override Hl7.Cql.Packaging.ResourcePackageArgs.Equals(object? obj) -> bool
 override Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 override Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
-static Hl7.Cql.Packaging.LibraryLoader.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> Hl7.Cql.Compiler.LibrarySet!
-virtual Hl7.Cql.Packaging.ResourcePackageArgs.PrintMembers(System.Text.StringBuilder! builder) -> bool
-virtual Hl7.Cql.Packaging.ResourcePackageArgs.Equals(Hl7.Cql.Packaging.ResourcePackageArgs? other) -> bool
-virtual Hl7.Cql.Packaging.ResourcePackageArgs.<Clone>$() -> Hl7.Cql.Packaging.ResourcePackageArgs!
-Hl7.Cql.Packaging.ResourcePackageArgs.ResourcePackageArgs(Hl7.Cql.Packaging.ResourcePackageArgs! original) -> void
-Hl7.Cql.Packaging.ResourcePackageArgs.ResourceCanonicalRootUrl.init -> void
-Hl7.Cql.Packaging.ResourcePackageArgs.ResourceCanonicalRootUrl.get -> string?
-static Hl7.Cql.Packaging.ResourcePackageArgs.operator !=(Hl7.Cql.Packaging.ResourcePackageArgs? left, Hl7.Cql.Packaging.ResourcePackageArgs? right) -> bool
-static Hl7.Cql.Packaging.ResourcePackageArgs.operator ==(Hl7.Cql.Packaging.ResourcePackageArgs? left, Hl7.Cql.Packaging.ResourcePackageArgs? right) -> bool
-virtual Hl7.Cql.Packaging.ResourcePackageArgs.EqualityContract.get -> System.Type!
-override Hl7.Cql.Packaging.ResourcePackageArgs.ToString() -> string!
-Hl7.Cql.Packaging.ResourcePackager
-Hl7.Cql.Packaging.ResourcePackager.Package(Hl7.Cql.Packaging.ResourcePackageArgs! args) -> void
-Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging.ILoggerFactory! logFactory, params Hl7.Cql.Packaging.ResourceWriters.ResourceWriter![]! resourceWriters) -> void
-Hl7.Cql.Packaging.ResourcePackager.ResourcePackager(Microsoft.Extensions.Logging.ILoggerFactory! logFactory, System.Collections.Generic.IEnumerable<Hl7.Cql.Packaging.ResourceWriters.ResourceWriter!>! resourceWriters) -> void
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(System.IO.DirectoryInfo! outDirectory, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter!>! logger) -> void
 Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.CSharpResourceWriter(Microsoft.Extensions.Options.IOptions<Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriterOptions!>! options, Microsoft.Extensions.Logging.ILogger<Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter!>! logger) -> void
