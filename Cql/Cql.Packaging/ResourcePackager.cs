@@ -65,7 +65,6 @@ namespace Hl7.Cql.Packaging
             if (resourceWriters.Length == 0) return; //Skip since no writers provided
 
             LibraryPackager libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
-
             LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
             IDictionary<string, Library> librariesByNameAndVersion = LibraryLoader.LoadLibraries(elmDir);
             DirectedGraph directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();

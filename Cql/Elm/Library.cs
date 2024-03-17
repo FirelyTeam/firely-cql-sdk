@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+using Hl7.Cql.Abstractions.Exceptions;
 using System;
-using System.Collections;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 namespace Hl7.Cql.Elm;
 
 [DebuggerDisplay("Library ({NameAndVersion})")]
-public partial class Library : IComparable<Library>
+public partial class Library
 {
     public const string JsonMimeType = "application/elm+json";
     public const string XmlMimeType = "application/elm+xml";
@@ -30,24 +30,14 @@ public partial class Library : IComparable<Library>
         }
     }
 
-    public string? Name
-    {
-        get
-        {
-            if (identifier == null)
-                return null;
-            return identifier.id;
-        }
-    }
+    public string? Name => identifier?.id;
 
-    public string? Version
+    public string? Version => identifier?.version;
+
+    private void Validate(FileInfo file)
     {
-        get
-        {
-            if (identifier == null)
-                return null;
-            return identifier.version;
-        }
+        if (string.IsNullOrWhiteSpace(NameAndVersion))
+            throw new LibraryMissingNameAndVersionError(this, file.FullName).ToException();
     }
 
     private static JsonSerializerOptions GetSerializerOptions(bool strict)
@@ -63,23 +53,36 @@ public partial class Library : IComparable<Library>
         return options;
     }
 
-    public static Library LoadFromJson(FileInfo file)
+    public static Library LoadFromJson(
+        FileInfo file,
+        bool noValidate = false)
     {
         if (!file.Exists)
-            throw new ArgumentException($"File {file.FullName} does not exist.");
+            throw new FileNotFoundException($"File does not exist.", file.FullName);
+        
         using var stream = file.OpenRead();
-        return LoadFromJson(stream);
+        var library = LoadFromJson(stream);
+        if (!noValidate) 
+            library.Validate(file);
+
+        return library;
     }
+
     public static Library LoadFromJson(Stream stream) =>
         JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
         stream switch
         {
-            FileStream fs => throw new ArgumentException(
-                $"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
-            _ => throw new ArgumentException(
-                $"Stream does not represent a valid {nameof(Library)}")
+            FileStream fs => throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
+            _ => throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}")
         };
+}
 
-    int IComparable<Library>.CompareTo(Library? other) => 
-        Comparer.DefaultInvariant.Compare(this.NameAndVersion, other?.NameAndVersion);
+internal interface ILibraryError : ICqlError
+{
+    Library Library { get; }
+}
+
+internal readonly record struct LibraryMissingNameAndVersionError(Library Library, string FilePath) : ILibraryError
+{
+    public string GetMessage() => $"Library did not have a valid name and version. Library Name&Version: '{Library.NameAndVersion}', Library Path: '{FilePath}'";
 }

@@ -1,8 +1,11 @@
 namespace Hl7.Cql.Packaging;
 
 #pragma warning disable CS1591
+
+// TODO: Remove?
 public static class LibraryLoader
 {
+    // TODO: Remove?
     public static IDictionary<string, Elm.Library> LoadLibraries(DirectoryInfo elmDir)
     {
         // Load libraries from ELM files in a deterministic order

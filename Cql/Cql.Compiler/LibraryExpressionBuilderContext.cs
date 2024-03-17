@@ -29,11 +29,6 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         DefinitionDictionary<LambdaExpression> definitions,
         LibrarySetExpressionBuilderContext? libsCtx = null)
     {
-        if (string.IsNullOrWhiteSpace(library.NameAndVersion))
-            throw new ArgumentException("Library must have a name and version.");
-
-        if (library.identifier is null) 
-            throw new ArgumentException("Library must have an identifier.");
 
         _expressionBuilder = expressionBuilder;
         _operatorBinding = operatorBinding;

@@ -1,37 +1,39 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;
 using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibrarySet
+internal class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<string, Library>
 {
     public string Name { get; }
-    public IReadOnlyCollection<Library> TopologicallySortedLibraries { get; private set; }
-    public IReadOnlySet<Library> RootLibraries { get; private set; }
+    private IReadOnlyCollection<Library> TopologicallySortedLibraries { get; set; }
+    private IReadOnlySet<Library> RootLibraries { get; set; }
 
-    private readonly Dictionary<string, (string filePath, Library library, List<Library> dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
+    private readonly Dictionary<string, (Library library, List<Library> dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
 
     public LibrarySet(string name = "")
     {
         Name = name;
         TopologicallySortedLibraries = Array.Empty<Library>();
         RootLibraries = EmptySet<Library>.Empty;
-        _libraryInfosByKey = new Dictionary<string, (string filePath, Library library, List<Library> dependencies)>();
+        _libraryInfosByKey = new Dictionary<string, (Library library, List<Library> dependencies)>();
     }
 
-    /// <exception cref="CqlException{TError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
+    /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     private bool TryGetLibraryInfoByKey(
         string? key,
         bool throwError,
-        out (string filePath, Library library, List<Library> dependencies) info)
+        out (Library library, List<Library> dependencies) info)
     {
         info = default;
         if (key is not (null or ""))
@@ -40,19 +42,20 @@ internal class LibrarySet
                 return true;
         }
 
-        if (throwError) throw new LibraryNotFoundError(key ?? "(null)").ToException();
+        if (throwError) throw new KeyNotFoundError(key ?? "(null)", "Library").ToException();
         return false;
     }
 
-    /// <exception cref="CqlException{LibraryNotFoundByKey}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
+    /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     public Library? GetLibrary(string key, bool throwError = false) => 
         TryGetLibraryInfoByKey(key, throwError, out var info) ? info.library : null;
 
 
-    /// <exception cref="CqlException{LibraryNotFoundByKey}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
+    /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     public IReadOnlyList<Library> GetLibraryDependencies(string key, bool throwError = false) =>
         TryGetLibraryInfoByKey(key, throwError, out var info) ? info.dependencies : Array.Empty<Library>();
 
+    /// <exception cref="CqlException{LibraryMissingNameAndVersionError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     public void LoadLibraries(IReadOnlyCollection<FileInfo> files)
     {
         // Loading libraries in parallel
@@ -66,21 +69,14 @@ internal class LibrarySet
         Parallel.ForEach(input, t =>
         {
             var library = Library.LoadFromJson(t.file);
-            if (string.IsNullOrEmpty(library.NameAndVersion))
-            {
-                throw new LibraryMissingNameAndVersionError(t.file.FullName, library).ToException();
-            }
             libraries[t.index] = library;
         });
 
-        for (var index = 0; index < libraries.Length; index++)
+        foreach (var library in libraries)
         {
-            var library = libraries[index];
-            string filePath = input[index].file.FullName;
-
             try
             {
-                _libraryInfosByKey.Add(library.NameAndVersion!, (filePath, library, new List<Library>()));
+                _libraryInfosByKey.Add(library.NameAndVersion!, (library, new List<Library>()));
             }
             catch (ArgumentNullException)
             {
@@ -89,7 +85,7 @@ internal class LibrarySet
             catch (ArgumentException)
             {
                 // This will be due to a duplicate key
-                throw new LibraryNameAndVersionMustBeUniqueError(filePath, library).ToException();
+                throw new LibraryIdentifierMustBeUniqueError(library).ToException();
             }
         }
 
@@ -104,12 +100,8 @@ internal class LibrarySet
                     var fromLib = tuple.library;
                     var fromKey = fromLib.NameAndVersion!;
 
-                    var toKey = includeDef.NameAndVersion() 
-                                ?? throw new LibraryMissingIncludeDefPathError(tuple.filePath, fromLib,
-                                    includeDef).ToException();
-                    var toLib = GetLibrary(toKey)
-                                ?? throw new LibraryIncludeDefUnresolvedError(tuple.filePath, fromLib, includeDef)
-                                    .ToException();
+                    var toKey = includeDef.NameAndVersion() ?? throw new LibraryMissingIncludeDefPathError(fromLib, includeDef).ToException();
+                    var toLib = GetLibrary(toKey) ?? throw new LibraryIncludeDefUnresolvedError(fromLib, includeDef).ToException();
                     _libraryInfosByKey[fromKey].dependencies.Add(toLib);
                     
                     return (From:fromLib, To:toLib);
@@ -135,40 +127,34 @@ internal class LibrarySet
             .SkipLast(1)
             .ToList();
         Debug.Assert(sortedKeys.Count == _libraryInfosByKey.Count);
-
-        // Replace fields
-
         TopologicallySortedLibraries = sortedKeys;
     }
-}
 
-internal interface ILibraryError : ICqlError
-{
-    string FilePath { get; }
-    Library Library { get; }
-}
+    IEnumerator<KeyValuePair<string, Library>> IEnumerable<KeyValuePair<string, Library>>.GetEnumerator() => 
+        TopologicallySortedLibraries.Select(lib => KeyValuePair.Create(lib.NameAndVersion!, lib)).GetEnumerator();
 
-internal readonly record struct LibraryNotFoundError(string Key) : ICqlError
-{
-    public string GetMessage() => $"Library was not found by key. Key: '{Key}'";
-}
+    public IEnumerator<Library> GetEnumerator() => TopologicallySortedLibraries.GetEnumerator();
 
-internal readonly record struct LibraryMissingIncludeDefPathError(string FilePath, Library Library, IncludeDef IncludeDef) : ILibraryError
-{
-    public string GetMessage() => $"Library has an include definition with a missing path. Library Path: '{FilePath}'";
-}
+    IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-internal readonly record struct LibraryIncludeDefUnresolvedError(string FilePath, Library Library, IncludeDef IncludeDef) : ILibraryError
-{
-    public string GetMessage() => $"Library has an include definition that did not resolve to a target library in the set. Library Path: '{FilePath}', IncludeDef: '{IncludeDef.NameAndVersion()}'";
-}
+    public int Count => TopologicallySortedLibraries.Count;
 
-internal readonly record struct LibraryMissingNameAndVersionError(string FilePath, Library Library) : ILibraryError
-{
-    public string GetMessage() => $"Library did not have a valid name and version. Library Path: '{FilePath}'";
-}
+    bool IReadOnlyDictionary<string, Library>.ContainsKey(string key) => 
+        _libraryInfosByKey.ContainsKey(key);
 
-internal readonly record struct LibraryNameAndVersionMustBeUniqueError(string FilePath, Library Library) : ILibraryError
-{
-    public string GetMessage() => $"Library did not have a unique name and version in the set. Library Path: '{FilePath}', Duplication: '{Library.NameAndVersion}'";
+    bool IReadOnlyDictionary<string, Library>.TryGetValue(string key, [NotNullWhen(true)]out Library? value)
+    {
+        if (_libraryInfosByKey.TryGetValue(key, out var t))
+        {
+            value = t.library;
+            return true;
+        }
+
+        value = default;
+        return false;
+    }
+
+    public Library this[string key] => _libraryInfosByKey[key].library;
+    IEnumerable<string> IReadOnlyDictionary<string, Library>.Keys => _libraryInfosByKey.Keys;
+    IEnumerable<Library> IReadOnlyDictionary<string, Library>.Values => _libraryInfosByKey.Values.Select(v => v.library).ToArray();
 }

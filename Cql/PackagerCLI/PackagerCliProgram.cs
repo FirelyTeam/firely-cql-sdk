@@ -60,32 +60,32 @@ internal class PackagerCliProgram
         librarySet.LoadLibraries(opt.ElmDirectory.GetFiles("*.json"));
         DefinitionDictionary<LambdaExpression> definitions = _librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
 
-        var librariesByNameAndVersion = LibraryLoader.LoadLibraries(opt.ElmDirectory!);
-        var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);
-        HashSet<Resource> resourcesWritten = new();
-        var resources = _libraryPackager.PackageResources(
-            opt.ElmDirectory!,
-            opt.CqlDirectory!,
-            directedGraph,
-            new (
-                buildUrlFromResource: resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
-                onLibraryResourceCreated: library =>
-                {
-                    foreach (var resourceWriter in _resourceWriters)
-                    {
-                        resourceWriter.WriteResource(library);
-                        resourcesWritten.Add(library);
-                    }
-                }))!;
-
-        var remainingResources = resources.Except(resourcesWritten).ToList();
-        if (remainingResources.Any())
-        {
-            foreach (var resourceWriter in _resourceWriters)
-            {
-                resourceWriter.WriteResources(remainingResources);
-            }
-        }
+        // var librariesByNameAndVersion = LibraryLoader.LoadLibraries(opt.ElmDirectory!);
+        // var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);
+        // HashSet<Resource> resourcesWritten = new();
+        // var resources = _libraryPackager.PackageResources(
+        //     opt.ElmDirectory!,
+        //     opt.CqlDirectory!,
+        //     directedGraph,
+        //     new (
+        //         buildUrlFromResource: resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
+        //         onLibraryResourceCreated: library =>
+        //         {
+        //             foreach (var resourceWriter in _resourceWriters)
+        //             {
+        //                 resourceWriter.WriteResource(library);
+        //                 resourcesWritten.Add(library);
+        //             }
+        //         }))!;
+        //
+        // var remainingResources = resources.Except(resourcesWritten).ToList();
+        // if (remainingResources.Any())
+        // {
+        //     foreach (var resourceWriter in _resourceWriters)
+        //     {
+        //         resourceWriter.WriteResources(remainingResources);
+        //     }
+        // }
 
         return 0;
     }
