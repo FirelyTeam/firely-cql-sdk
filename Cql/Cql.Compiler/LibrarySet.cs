@@ -13,14 +13,26 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<string, Library>
+/// <summary>
+/// Contains a set of libraries ordered topologically.
+/// </summary>
+public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<string, Library>
 {
+    /// <summary>
+    /// The name of this library set. An example could be the directory name containing the libraries.
+    /// </summary>
     public string Name { get; }
+
     private IReadOnlyCollection<Library> TopologicallySortedLibraries { get; set; }
+
     private IReadOnlySet<Library> RootLibraries { get; set; }
 
     private readonly Dictionary<string, (Library library, List<Library> dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LibrarySet"/> class.
+    /// </summary>
+    /// <param name="name">The name of the library set.</param>
     public LibrarySet(string name = "")
     {
         Name = name;
@@ -46,16 +58,34 @@ internal class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<st
         return false;
     }
 
+    /// <summary>
+    /// Gets the library with the specified key.
+    /// </summary>
+    /// <param name="key">The key of the library to retrieve.</param>
+    /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
+    /// <returns>The library with the specified key, or <c>null</c> if the library is not found.</returns>
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    public Library? GetLibrary(string key, bool throwError = false) => 
+    public Library? GetLibrary(string key, bool throwError = true) =>
         TryGetLibraryInfoByKey(key, throwError, out var info) ? info.library : null;
 
 
+    /// <summary>
+    /// Gets the dependencies of the library with the specified key.
+    /// </summary>
+    /// <param name="key">The key of the library to retrieve the dependencies for.</param>
+    /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
+    /// <returns>The dependencies of the library with the specified key, or an empty list if the library is not found.</returns>
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    public IReadOnlyList<Library> GetLibraryDependencies(string key, bool throwError = false) =>
+    public IReadOnlyList<Library> GetLibraryDependencies(string key, bool throwError = true) =>
         TryGetLibraryInfoByKey(key, throwError, out var info) ? info.dependencies : Array.Empty<Library>();
 
+    /// <summary>
+    /// Loads the libraries from the specified collection of files.
+    /// </summary>
+    /// <param name="files">The collection of files to load the libraries from.</param>
+    /// <exception cref="FileNotFoundException"></exception>
     /// <exception cref="CqlException{LibraryMissingNameAndVersionError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
+    /// <exception cref="CqlException{NotAValidLibraryFileError}"></exception>
     public void LoadLibraries(IReadOnlyCollection<FileInfo> files)
     {
         // Loading libraries in parallel
@@ -68,7 +98,7 @@ internal class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<st
 
         Parallel.ForEach(input, t =>
         {
-            var library = Library.LoadFromJson(t.file);
+            var library = Library.LoadFromJson(t.file)!;
             libraries[t.index] = library;
         });
 
@@ -94,17 +124,17 @@ internal class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<st
         var fromToPairs = _libraryInfosByKey
             .Values
             .SelectMany(
-                value => value.library.includes ?? Array.Empty<IncludeDef>(), 
+                value => value.library.includes ?? Array.Empty<IncludeDef>(),
                 (tuple, includeDef) =>
                 {
                     var fromLib = tuple.library;
                     var fromKey = fromLib.NameAndVersion!;
 
                     var toKey = includeDef.NameAndVersion() ?? throw new LibraryMissingIncludeDefPathError(fromLib, includeDef).ToException();
-                    var toLib = GetLibrary(toKey) ?? throw new LibraryIncludeDefUnresolvedError(fromLib, includeDef).ToException();
+                    var toLib = GetLibrary(toKey, false) ?? throw new LibraryIncludeDefUnresolvedError(fromLib, includeDef).ToException();
                     _libraryInfosByKey[fromKey].dependencies.Add(toLib);
-                    
-                    return (From:fromLib, To:toLib);
+
+                    return (From: fromLib, To: toLib);
                 });
 
         HashSet<Library> rootLibraries = new();
@@ -130,19 +160,24 @@ internal class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<st
         TopologicallySortedLibraries = sortedKeys;
     }
 
-    IEnumerator<KeyValuePair<string, Library>> IEnumerable<KeyValuePair<string, Library>>.GetEnumerator() => 
+    IEnumerator<KeyValuePair<string, Library>> IEnumerable<KeyValuePair<string, Library>>.GetEnumerator() =>
         TopologicallySortedLibraries.Select(lib => KeyValuePair.Create(lib.NameAndVersion!, lib)).GetEnumerator();
 
+    /// <inheritdoc/>
     public IEnumerator<Library> GetEnumerator() => TopologicallySortedLibraries.GetEnumerator();
 
+    /// <inheritdoc/>
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
+    
+    /// <inheritdoc/>
     public int Count => TopologicallySortedLibraries.Count;
 
-    bool IReadOnlyDictionary<string, Library>.ContainsKey(string key) => 
+    /// <inheritdoc/>
+    bool IReadOnlyDictionary<string, Library>.ContainsKey(string key) =>
         _libraryInfosByKey.ContainsKey(key);
 
-    bool IReadOnlyDictionary<string, Library>.TryGetValue(string key, [NotNullWhen(true)]out Library? value)
+    /// <inheritdoc/>
+    bool IReadOnlyDictionary<string, Library>.TryGetValue(string key, [NotNullWhen(true)] out Library? value)
     {
         if (_libraryInfosByKey.TryGetValue(key, out var t))
         {
@@ -154,7 +189,12 @@ internal class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<st
         return false;
     }
 
-    public Library this[string key] => _libraryInfosByKey[key].library;
+    /// <inheritdoc/>
+    Library IReadOnlyDictionary<string, Library>.this[string key] => _libraryInfosByKey[key].library;
+    
+    /// <inheritdoc/>
     IEnumerable<string> IReadOnlyDictionary<string, Library>.Keys => _libraryInfosByKey.Keys;
+    
+    /// <inheritdoc/>
     IEnumerable<Library> IReadOnlyDictionary<string, Library>.Values => _libraryInfosByKey.Values.Select(v => v.library).ToArray();
 }

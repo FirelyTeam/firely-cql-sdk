@@ -16,8 +16,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     internal static class TextWriterExtensions
     {
         public const int SpacesPerIndentLevel = 4;
-        public static readonly string Indent = string.Join(string.Empty,
-            Enumerable.Range(0, SpacesPerIndentLevel).Select(i => ' '));
+
         public static void WriteLine(this TextWriter writer, int indent, string text)
         {
             for (int i = 0; i < indent * SpacesPerIndentLevel; i++)

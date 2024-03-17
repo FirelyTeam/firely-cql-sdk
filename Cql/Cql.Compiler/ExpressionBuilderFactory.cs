@@ -34,11 +34,16 @@ internal class ExpressionBuilderFactory
     }
 
     public ModelInspector ModelInspector => Hl7.Fhir.Model.ModelInfo.ModelInspector;
-    public Conversion.TypeConverter TypeConverter => _typeConverter.Value;
-    public FhirTypeResolver FhirTypeResolver => _fhirTypeResolver.Value;
-    public CqlOperatorsBinding CqlOperatorsBinding => _cqlOperatorsBinding.Value;
-    public TypeManager TypeManager => _typeManager.Value;
-    public Hasher Hasher => _hasher.Value;
-    public ExpressionBuilder ExpressionBuilder => _expressionBuilder.Value;
 
+    public Conversion.TypeConverter TypeConverter => _typeConverter.Value;
+
+    public FhirTypeResolver FhirTypeResolver => _fhirTypeResolver.Value;
+
+    public CqlOperatorsBinding CqlOperatorsBinding => _cqlOperatorsBinding.Value;
+
+    public TypeManager TypeManager => _typeManager.Value;
+
+    public Hasher Hasher => _hasher.Value;
+
+    public ExpressionBuilder ExpressionBuilder => _expressionBuilder.Value;
 }

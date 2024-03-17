@@ -66,10 +66,8 @@ namespace Hl7.Cql.Packaging
 
             LibraryPackager libraryPackager = new LibraryPackagerFactory(logFactory).LibraryPackager;
             LibraryPackageCallbacks callbacks = new(buildUrlFromResource: resource => resource.CanonicalUri(resourceCanonicalRootUrl));
-            IDictionary<string, Library> librariesByNameAndVersion = LibraryLoader.LoadLibraries(elmDir);
-            DirectedGraph directedGraph = librariesByNameAndVersion.Values.GetIncludedLibraries();
-            IEnumerable<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, directedGraph, callbacks);
-
+            var librarySet = LibraryLoader.LoadLibraries(elmDir);
+            IEnumerable<Resource> resources = libraryPackager.PackageResources(elmDir, cqlDir, librarySet, callbacks);
             afterPackageMutator?.Invoke(resources);
 
             foreach (var resourceWriter in resourceWriters)

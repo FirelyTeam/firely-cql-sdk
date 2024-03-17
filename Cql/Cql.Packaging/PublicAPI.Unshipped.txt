@@ -37,7 +37,7 @@ override Hl7.Cql.Packaging.ResourcePackageArgs.Equals(object? obj) -> bool
 override Hl7.Cql.Packaging.ResourceWriters.CSharpResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 override Hl7.Cql.Packaging.ResourceWriters.FhirResourceWriter.WriteResource(Hl7.Fhir.Model.Resource! resource) -> void
 static Hl7.Cql.Packaging.ElmLibraryExtensions.EvaluateExpression(this Hl7.Cql.Elm.Library! library, Hl7.Cql.Elm.Expression! expression, Hl7.Cql.Runtime.CqlContext! context, Microsoft.Extensions.Logging.ILoggerFactory! logFactory) -> object?
-static Hl7.Cql.Packaging.LibraryLoader.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> System.Collections.Generic.IDictionary<string!, Hl7.Cql.Elm.Library!>!
+static Hl7.Cql.Packaging.LibraryLoader.LoadLibraries(System.IO.DirectoryInfo! elmDir) -> Hl7.Cql.Compiler.LibrarySet!
 virtual Hl7.Cql.Packaging.ResourcePackageArgs.PrintMembers(System.Text.StringBuilder! builder) -> bool
 virtual Hl7.Cql.Packaging.ResourcePackageArgs.Equals(Hl7.Cql.Packaging.ResourcePackageArgs? other) -> bool
 virtual Hl7.Cql.Packaging.ResourcePackageArgs.<Clone>$() -> Hl7.Cql.Packaging.ResourcePackageArgs!

@@ -16,20 +16,17 @@ internal class PackagerCliProgram
     private readonly ResourceWriter[] _resourceWriters;
     private readonly ILogger<PackagerCliProgram> _logger;
     private readonly LibraryPackager _libraryPackager;
-    private readonly LibrarySetExpressionBuilder _librarySetExpressionBuilder;
 
     public PackagerCliProgram(
         ILogger<PackagerCliProgram> logger,
         IOptions<PackagerOptions> packageArgsOptions,
         IEnumerable<ResourceWriter> resourceWriters,
         LibraryPackager libraryPackager, 
-        OptionsConsoleDumper optionsConsoleDumper, 
-        LibrarySetExpressionBuilder librarySetExpressionBuilder)
+        OptionsConsoleDumper optionsConsoleDumper)
     {
         _logger = logger;
         _libraryPackager = libraryPackager;
         _optionsConsoleDumper = optionsConsoleDumper;
-        _librarySetExpressionBuilder = librarySetExpressionBuilder;
         _packagerOptions = packageArgsOptions.Value;
         _resourceWriters = resourceWriters.ToArray();
     }
@@ -58,34 +55,34 @@ internal class PackagerCliProgram
 
         LibrarySet librarySet = new(opt.ElmDirectory.FullName);
         librarySet.LoadLibraries(opt.ElmDirectory.GetFiles("*.json"));
-        DefinitionDictionary<LambdaExpression> definitions = _librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
-
+        // DefinitionDictionary<LambdaExpression> definitions = _librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
         // var librariesByNameAndVersion = LibraryLoader.LoadLibraries(opt.ElmDirectory!);
         // var directedGraph = Elm.LibraryExtensions.GetIncludedLibraries(librariesByNameAndVersion.Values);
-        // HashSet<Resource> resourcesWritten = new();
-        // var resources = _libraryPackager.PackageResources(
-        //     opt.ElmDirectory!,
-        //     opt.CqlDirectory!,
-        //     directedGraph,
-        //     new (
-        //         buildUrlFromResource: resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
-        //         onLibraryResourceCreated: library =>
-        //         {
-        //             foreach (var resourceWriter in _resourceWriters)
-        //             {
-        //                 resourceWriter.WriteResource(library);
-        //                 resourcesWritten.Add(library);
-        //             }
-        //         }))!;
-        //
-        // var remainingResources = resources.Except(resourcesWritten).ToList();
-        // if (remainingResources.Any())
-        // {
-        //     foreach (var resourceWriter in _resourceWriters)
-        //     {
-        //         resourceWriter.WriteResources(remainingResources);
-        //     }
-        // }
+
+        HashSet<Resource> resourcesWritten = new();
+        var resources = _libraryPackager.PackageResources(
+            opt.ElmDirectory!,
+            opt.CqlDirectory!,
+            librarySet,
+            new (
+                buildUrlFromResource: resource => resource.CanonicalUri(opt.CanonicalRootUrl?.ToString()),
+                onLibraryResourceCreated: library =>
+                {
+                    foreach (var resourceWriter in _resourceWriters)
+                    {
+                        resourceWriter.WriteResource(library);
+                        resourcesWritten.Add(library);
+                    }
+                }))!;
+        
+        var remainingResources = resources.Except(resourcesWritten).ToList();
+        if (remainingResources.Any())
+        {
+            foreach (var resourceWriter in _resourceWriters)
+            {
+                resourceWriter.WriteResources(remainingResources);
+            }
+        }
 
         return 0;
     }

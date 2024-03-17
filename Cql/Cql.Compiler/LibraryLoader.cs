@@ -40,17 +40,17 @@ internal class LibraryLoader
     //
     //     return intoLibraries;
     // }
-    
-    public static Library LoadLibrary(FileInfo fileInfo)
-    {
-        var library = Library.LoadFromJson(fileInfo) ?? throw new NotAValidLibraryFileError(fileInfo.FullName).ToException();
-        // if (string.IsNullOrEmpty(library.GetNameAndVersion()))
-        // {
-        //     throw new LibraryMissingNameAndVersionError(fileInfo.FullName, library).ToException();
-        // }
-    
-        return library;
-    }
+    //
+    // public static Library LoadLibrary(FileInfo fileInfo)
+    // {
+    //     var library = Library.LoadFromJson(fileInfo) ?? throw new NotAValidLibraryFileError(fileInfo.FullName).ToException();
+    //     // if (string.IsNullOrEmpty(library.GetNameAndVersion()))
+    //     // {
+    //     //     throw new LibraryMissingNameAndVersionError(fileInfo.FullName, library).ToException();
+    //     // }
+    //
+    //     return library;
+    // }
     //
     // public HashSet<Library> LoadLibraryAndDependencies(
     //     DirectoryInfo directory,

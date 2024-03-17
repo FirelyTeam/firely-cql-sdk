@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging;
@@ -8,7 +9,7 @@ namespace Hl7.Cql.Packaging;
 /// The idea is not to inject this into service types, it's purpose is to
 /// be one alternative to the .net hosting's <see cref="IServiceProvider"/>.
 /// </summary>
-internal class LibraryPackagerFactory : LibraryExpressionBuilderFactory
+internal class LibraryPackagerFactory : LibrarySetExpressionBuilderFactory
 {
     private readonly Lazy<CSharpSourceCodeWriter> _cSharpSourceCodeWriter;
     private readonly Lazy<AssemblyCompiler> _assemblyCompiler;
@@ -17,8 +18,8 @@ internal class LibraryPackagerFactory : LibraryExpressionBuilderFactory
     public LibraryPackagerFactory(ILoggerFactory loggerFactory, int cacheSize = 0) : base(loggerFactory, cacheSize)
     {
         _cSharpSourceCodeWriter = Deferred(() => new CSharpSourceCodeWriter(Logger<CSharpSourceCodeWriter>(), FhirTypeResolver));
-        _assemblyCompiler = Deferred(() => new AssemblyCompiler(LibraryExpressionBuilder, CSharpSourceCodeWriter, TypeManager));
-        _libraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler));
+        _assemblyCompiler = Deferred(() => new AssemblyCompiler(CSharpSourceCodeWriter, TypeManager));
+        _libraryPackager = Deferred(() => new LibraryPackager(FhirTypeResolver, AssemblyCompiler, LibrarySetExpressionBuilder));
 
 
         static Lazy<T> Deferred<T>(Func<T> deferred) => new(deferred);
@@ -27,6 +28,8 @@ internal class LibraryPackagerFactory : LibraryExpressionBuilderFactory
     }
 
     public CSharpSourceCodeWriter CSharpSourceCodeWriter => _cSharpSourceCodeWriter.Value;
+
     public AssemblyCompiler AssemblyCompiler => _assemblyCompiler.Value;
+
     public LibraryPackager LibraryPackager => _libraryPackager.Value;
 }

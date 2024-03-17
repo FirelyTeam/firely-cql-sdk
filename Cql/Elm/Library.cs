@@ -34,6 +34,7 @@ public partial class Library
 
     public string? Version => identifier?.version;
 
+    /// <exception cref="CqlException{LibraryMissingNameAndVersionError}"></exception>
     private void Validate(FileInfo file)
     {
         if (string.IsNullOrWhiteSpace(NameAndVersion))
@@ -53,22 +54,30 @@ public partial class Library
         return options;
     }
 
-    public static Library LoadFromJson(
+    /// <exception cref="FileNotFoundException"></exception>
+    /// <exception cref="CqlException{LibraryMissingNameAndVersionError}"></exception>
+    /// <exception cref="CqlException{NotAValidLibraryFileError}"></exception>
+    public static Library? LoadFromJson(
         FileInfo file,
         bool noValidate = false)
     {
         if (!file.Exists)
-            throw new FileNotFoundException($"File does not exist.", file.FullName);
+            throw new FileNotFoundException("File does not exist.", file.FullName);
         
         using var stream = file.OpenRead();
         var library = LoadFromJson(stream);
-        if (!noValidate) 
+        if (!noValidate)
+        {
+            if (library is null)
+                throw new NotAValidLibraryFileError(file.FullName).ToException();
             library.Validate(file);
+        }
 
         return library;
     }
 
-    public static Library LoadFromJson(Stream stream) =>
+    /// <exception cref="ArgumentException"></exception>
+    public static Library? LoadFromJson(Stream stream) =>
         JsonSerializer.Deserialize<Library>(stream, JsonSerializerOptions) ??
         stream switch
         {
