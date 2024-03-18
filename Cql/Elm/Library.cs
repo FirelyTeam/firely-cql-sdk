@@ -33,13 +33,13 @@ public partial class Library
         if (IsValidated)
             return;
 
-        GetNameAndVersion(throwError: true);
+        NameAndVersion(throwError: true);
 
         if (includes is { Length: > 0 } includeDefs)
         {
             foreach (var includeDef in includeDefs)
             {
-                if (includeDef.GetNameAndVersion(throwError: false) == null)
+                if (includeDef.NameAndVersion(throwError: false) == null)
                     throw new LibraryMissingIncludeDefPathError(this, includeDef).ToException();
             }
         }
@@ -116,10 +116,10 @@ public partial class Library
         };
 
     public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =
-        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.GetNameAndVersion(true)!);
+        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
 
     public static IComparer<Library> ComparerByNameAndVersion { get; } =
-        ComparerFactory.For<Library>.CreateByKey(lib => lib.GetNameAndVersion(true)!);
+        ComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
 }
 
 internal class LibraryByNameAndVersionHashSet : HashSet<Library>

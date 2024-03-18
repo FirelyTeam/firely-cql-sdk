@@ -90,7 +90,7 @@ namespace Hl7.Cql.Compiler
         internal LibraryExpressionBuilderContext LibraryContext { get; }
 
         /// <summary>
-        /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.GetNameAndVersion(bool)"/>}.{<c>Definition.name"</c>}
+        /// A dictionary which maps qualified definition names in the form of {<see cref="Elm.Library.NameAndVersion"/>}.{<c>Definition.name"</c>}
         /// to a factory which will produce a <see cref="LambdaExpression"/> given the values of <see cref="ParameterExpression"/>.
         /// </summary>
         /// <remarks>

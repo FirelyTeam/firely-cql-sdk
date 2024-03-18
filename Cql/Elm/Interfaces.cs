@@ -9,27 +9,27 @@ internal interface IGetNameAndVersion
     /// <summary>
     /// Gets the name with version, or just the name if no version exists.
     /// </summary>
-    string? GetNameAndVersion(bool throwError = true);
+    string? NameAndVersion(bool throwError = true);
 }
 
 partial class Library : IGetNameAndVersion
 {
     /// <inheritedoc/>
-    public string? GetNameAndVersion(bool throwError = true)
+    public string? NameAndVersion(bool throwError = true)
     {
         if (identifier == null)
         {
             if (throwError) throw new MissingIdentifierError(this).ToException();
             return null;
         }
-        return identifier.GetNameAndVersion(throwError);
+        return identifier.NameAndVersion(throwError);
     }
 }
 
 partial class IncludeDef : IGetNameAndVersion
 {
     /// <inheritedoc/>
-    public string? GetNameAndVersion(bool throwError = true)
+    public string? NameAndVersion(bool throwError = true)
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -49,7 +49,7 @@ partial class IncludeDef : IGetNameAndVersion
 partial class VersionedIdentifier : IGetNameAndVersion
 {
     /// <inheritedoc/>
-    public string? GetNameAndVersion(bool throwError = true)
+    public string? NameAndVersion(bool throwError = true)
     {
         if (string.IsNullOrEmpty(id))
         {

@@ -33,7 +33,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         _definitions = definitions;
         _library = library;
         _libsCtx = libsCtx;
-        _localLibraryIdentifiers = new();
+        _libraryNameAndVersionByAlias = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
         _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
@@ -42,7 +42,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     public Elm.Library Library => _library;
 
-    public string LibraryKey => _library.GetNameAndVersion()!;
+    public string LibraryKey => _library.NameAndVersion()!;
 
     public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
@@ -53,7 +53,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
             _expressionBuilder,
             LibraryExpressionBuilder.ContextParameter,
             _definitions,
-            _localLibraryIdentifiers,
+            _libraryNameAndVersionByAlias,
             this,
             element);
 
@@ -80,10 +80,13 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     #region Local Library Identifiers
 
-    private readonly Dictionary<string, string> _localLibraryIdentifiers;
+    private readonly Dictionary<string, string> _libraryNameAndVersionByAlias;
 
     public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
-        _localLibraryIdentifiers.Add(includeAlias, includeNameAndVersion);
+        _libraryNameAndVersionByAlias.Add(includeAlias, includeNameAndVersion);
+
+    private string GetIncludeNameAndVersion(string? alias) => 
+        alias == null ? Library.NameAndVersion()! : _libraryNameAndVersionByAlias[alias];
 
     #endregion
 
@@ -130,10 +133,9 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     private void BuildUrlByCodeSystemRef()
     {
-        //_library.codeSystems
         if (_libsCtx != null)
         {
-            foreach (var libraryDependency in _libsCtx.LibrarySet.GetLibraryDependencies(Library.GetNameAndVersion()!))
+            foreach (var libraryDependency in _libsCtx.LibrarySet.GetLibraryDependencies(Library.NameAndVersion()!))
             {
                 AddCodeSystemRefs(libraryDependency);
             }
@@ -149,14 +151,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
             {
                 foreach (var codeSystemDef in codeSystemDefs)
                 {
-                    if (isForOwnLibrary)
-                    {
-                        _codeSystemIdsByCodeSystemRefs.Add(new (null, codeSystemDef.name), codeSystemDef.id);
-                    } 
-                    else if (codeSystemDef.accessLevel == AccessModifier.Public)
-                    {
-                        _codeSystemIdsByCodeSystemRefs.Add(new(library.GetNameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
-                    }
+                    _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
                 }
             }
         }
@@ -164,7 +159,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)]out string? url)
     {
-        var libraryName = codeSystemRef.libraryName is {} libraryAlias ? _localLibraryIdentifiers[libraryAlias] : null;
+        var libraryName = GetIncludeNameAndVersion(codeSystemRef.libraryName);
         return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
     }
 

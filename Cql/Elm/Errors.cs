@@ -9,7 +9,7 @@ internal interface ILibraryError : ICqlError
 
 internal readonly record struct LibraryMissingIncludeDefPathError(Library Library, IncludeDef IncludeDef) : ILibraryError
 {
-    public string GetMessage() => $"Library has an include definition with a missing path. Library Identifier: '{Library.GetNameAndVersion(false)}'";
+    public string GetMessage() => $"Library has an include definition with a missing path. Library Identifier: '{Library.NameAndVersion(false)}'";
 }
 
 internal readonly record struct MissingNameError(IGetNameAndVersion Source) : ICqlError

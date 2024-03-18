@@ -3,6 +3,8 @@ using System;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -32,12 +34,18 @@ public class LibrarySetTests
 
 
     [TestMethod]
-    public void Test()
+    public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
         LibrarySet librarySet = new();
-        var libraries = librarySet.LoadLibraryAndDependencies(CmsDirectory, "CumulativeMedicationDuration");
+        librarySet.LoadLibraryAndDependencies(CmsDirectory, "CumulativeMedicationDuration");
         var f = new LibrarySetExpressionBuilderFactory(NullLoggerFactory.Instance);
         var defs = f.LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet);
+        var lambdaExpression = defs["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];
+        Assert.IsNotNull(lambdaExpression);
+
+        var del = lambdaExpression.Compile(true);
+        var res = (CqlCode)del.DynamicInvoke(new CqlContext(CqlOperators.Create(f.FhirTypeResolver, f.TypeConverter)));
+        Assert.AreEqual(("307469008", "http://snomed.info/sct"), (res.code, res.system));
     }
 
     private static DirectoryInfo GetSolutionDirectory() =>

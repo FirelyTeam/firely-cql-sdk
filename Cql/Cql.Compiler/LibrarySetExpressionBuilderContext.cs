@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq.Expressions;
-using Hl7.Cql.Elm;
+﻿using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;

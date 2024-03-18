@@ -114,7 +114,7 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
         {
             try
             {
-                _libraryInfosByKey.Add(library.GetNameAndVersion()!, (library, new ()));
+                _libraryInfosByKey.Add(library.NameAndVersion()!, (library, new ()));
             }
             catch (ArgumentNullException)
             {
@@ -144,12 +144,12 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     {
         foreach (var library in _librariesNotCalculatedYet)
         {
-            var dependencies = _libraryInfosByKey[library.GetNameAndVersion()!].dependencies;
+            var dependencies = _libraryInfosByKey[library.NameAndVersion()!].dependencies;
             if (library.includes is { Length: > 0 } includeDefs)
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    var toKey = includeDef.GetNameAndVersion(true)!;
+                    var toKey = includeDef.NameAndVersion(true)!;
                     var toLib = _libraryInfosByKey.GetValueOrDefault(toKey).library ?? throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
                     dependencies.Add(toLib);
                 }
@@ -166,12 +166,12 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
 
         var rootLibraries = new LibraryByNameAndVersionHashSet(
             allLibraries
-            .GetRoots(lib => GetLibraryDependencies(lib.GetNameAndVersion()!)));
+            .GetRoots(lib => GetLibraryDependencies(lib.NameAndVersion()!)));
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
         var topologicallySortedLibraries = allLibraries
-            .TopologicalSort(lib => GetLibraryDependencies(lib.GetNameAndVersion()!))
+            .TopologicalSort(lib => GetLibraryDependencies(lib.NameAndVersion()!))
             .ToList();
         Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByKey.Count);
         
@@ -180,7 +180,7 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     }
 
     IEnumerator<KeyValuePair<string, Library>> IEnumerable<KeyValuePair<string, Library>>.GetEnumerator() =>
-        GetCalculatedState().TopologicallySorted.Select(lib => KeyValuePair.Create(lib.GetNameAndVersion()!, lib)).GetEnumerator();
+        GetCalculatedState().TopologicallySorted.Select(lib => KeyValuePair.Create(lib.NameAndVersion()!, lib)).GetEnumerator();
 
     /// <inheritdoc/>
     public IEnumerator<Library> GetEnumerator() => 
@@ -246,7 +246,7 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
 
             foreach (var library in librariesLoaded)
             {
-                if (!_libraryInfosByKey.TryAdd(library.GetNameAndVersion()!, (library, new())))
+                if (!_libraryInfosByKey.TryAdd(library.NameAndVersion()!, (library, new())))
                     continue; // Already loaded, skip
 
                 if (library.includes is { Length: > 0 } includeDefs)

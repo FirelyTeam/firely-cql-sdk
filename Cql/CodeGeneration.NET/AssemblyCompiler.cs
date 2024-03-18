@@ -98,8 +98,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             assemblies.Add("TupleTypes", tupleAssembly);
             foreach (var library in librarySet)
             {
-                if (!navToLibraryStream.TryGetValue(library.GetNameAndVersion()!, out var sourceCodeStream))
-                    throw new InvalidOperationException($"Library {library.GetNameAndVersion()!} doesn't exist in the source code dictionary.");
+                if (!navToLibraryStream.TryGetValue(library.NameAndVersion()!, out var sourceCodeStream))
+                    throw new InvalidOperationException($"Library {library.NameAndVersion()!} doesn't exist in the source code dictionary.");
 
                 CompileNode(sourceCodeStream, assemblies, librarySet, library, _referencesLazy.Value, additionalReferences);
             }
@@ -188,9 +188,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
             }
-            foreach (var libraryDependency in librarySet.GetLibraryDependencies(library.GetNameAndVersion()!))
+            foreach (var libraryDependency in librarySet.GetLibraryDependencies(library.NameAndVersion()!))
             {
-                if (assemblies.TryGetValue(libraryDependency.GetNameAndVersion()!, out var referencedDll))
+                if (assemblies.TryGetValue(libraryDependency.NameAndVersion()!, out var referencedDll))
                 {
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
                 }
@@ -203,7 +203,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
             var asmInfo = new StringBuilder();
-            var parts = library.GetNameAndVersion()!.Split('-');
+            var parts = library.NameAndVersion()!.Split('-');
             string name = parts[0];
             string version = string.Empty;
             if (parts.Length > 1)
@@ -211,7 +211,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
             var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
-            var compilation = CSharpCompilation.Create($"{library.GetNameAndVersion()!}")
+            var compilation = CSharpCompilation.Create($"{library.NameAndVersion()!}")
                 .WithOptions(new CSharpCompilationOptions(outputKind: OutputKind.DynamicallyLinkedLibrary,
                     optimizationLevel: OptimizationLevel.Release))
                 .WithReferences(metadataReferences)
@@ -240,15 +240,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     sb.AppendLine(diag.ToString());
                 }
-                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.GetNameAndVersion()!}:{Environment.NewLine}{sb}");
+                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.NameAndVersion()!}:{Environment.NewLine}{sb}");
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
 
                 throw ex;
             }
             var bytes = codeStream.ToArray();
-            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.GetNameAndVersion()!, sourceCode } });
-            assemblies.Add(library.GetNameAndVersion()!, asmData);
+            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.NameAndVersion()!, sourceCode } });
+            assemblies.Add(library.NameAndVersion()!, asmData);
         }
 
 
