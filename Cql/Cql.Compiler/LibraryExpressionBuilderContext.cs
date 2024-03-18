@@ -103,4 +103,9 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     IBuilderContext? IBuilderContext.OuterContext => _libsCtx;
 
     BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(Library);
+
+    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, out string? url)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -5,10 +5,13 @@
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Fhir.Model;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Runtime.Serialization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Elm;
 
@@ -103,7 +106,7 @@ public partial class Library
         if (validate)
         {
             if (library is null)
-                throw new NotAValidLibraryFileError(file.FullName).ToException();
+                throw new CouldNotDeserializeFileError(file.FullName, "ELM Library").ToException();
             library.Validate(file);
         }
 
@@ -118,18 +121,52 @@ public partial class Library
             FileStream fs => throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}: {fs.Name}"),
             _ => throw new ArgumentException($"Stream does not represent a valid {nameof(Library)}")
         };
+
+    public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =
+        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion!);
+
+    public static IComparer<Library> ComparerByNameAndVersion { get; } =
+        ComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion!);
 }
 
-internal interface ILibraryError : ICqlError
+internal class LibraryByNameAndVersionHashSet : HashSet<Library>
 {
-    Library Library { get; }
+    public LibraryByNameAndVersionHashSet() : base(Library.EqualityComparerByNameAndVersion)
+    {
+    }
+
+    public LibraryByNameAndVersionHashSet(IEnumerable<Library> collection) : base(collection, Library.EqualityComparerByNameAndVersion)
+    {
+    }
+
+    public LibraryByNameAndVersionHashSet(int capacity) : base(capacity, Library.EqualityComparerByNameAndVersion)
+    {
+    }
+
+    protected LibraryByNameAndVersionHashSet(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
 }
 
-internal readonly record struct LibraryMissingNameAndVersionError(Library Library, string FilePath) : ILibraryError
+internal class LibraryByNameAndVersionDictionary<TValue> : Dictionary<Library, TValue>
 {
-    public string GetMessage() => $"Library did not have a valid name and version. Library Name&Version: '{Library.NameAndVersion}', Library Path: '{FilePath}'";
-}
-internal readonly record struct LibraryMissingIncludeDefPathError(Library Library, IncludeDef IncludeDef) : ILibraryError
-{
-    public string GetMessage() => $"Library has an include definition with a missing path. Library Identifier: '{Library.NameAndVersion}'";
+    public LibraryByNameAndVersionDictionary() : base(Library.EqualityComparerByNameAndVersion)
+    {
+    }
+
+    public LibraryByNameAndVersionDictionary(IDictionary<Library, TValue> dictionary) : base(dictionary, Library.EqualityComparerByNameAndVersion)
+    {
+    }
+
+    public LibraryByNameAndVersionDictionary(IEnumerable<KeyValuePair<Library, TValue>> collection) : base(collection, Library.EqualityComparerByNameAndVersion)
+    {
+    }
+
+    public LibraryByNameAndVersionDictionary(int capacity) : base(capacity, Library.EqualityComparerByNameAndVersion)
+    {
+    }
+
+    protected LibraryByNameAndVersionDictionary(SerializationInfo info, StreamingContext context) : base(info, context)
+    {
+    }
 }

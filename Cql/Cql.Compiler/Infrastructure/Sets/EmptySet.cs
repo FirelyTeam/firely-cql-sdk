@@ -6,7 +6,7 @@ namespace Hl7.Cql.Compiler.Infrastructure.Sets
 {
     internal readonly struct EmptySet<T>  : IReadOnlySet<T>
     {
-        public static EmptySet<T> Empty { get; } = new EmptySet<T>();
+        public static EmptySet<T> Instance { get; } = new EmptySet<T>();
 
         public IEnumerator<T> GetEnumerator()
         {

@@ -713,6 +713,8 @@ Hl7.Cql.Elm.Xor
 Hl7.Cql.Elm.Xor.Xor() -> void
 static Hl7.Cql.Elm.ExtensionMethods.ListSortOrder(this Hl7.Cql.Elm.SortDirection direction) -> System.ComponentModel.ListSortDirection
 static Hl7.Cql.Elm.ExtensionMethods.NameAndVersion(this Hl7.Cql.Elm.IncludeDef! includeDef, bool throwError = false) -> string?
+static Hl7.Cql.Elm.Library.ComparerByNameAndVersion.get -> System.Collections.Generic.IComparer<Hl7.Cql.Elm.Library!>!
+static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library?
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library?
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream) -> Hl7.Cql.Elm.Library?

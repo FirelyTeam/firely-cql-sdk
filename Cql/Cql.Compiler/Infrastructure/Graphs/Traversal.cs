@@ -26,30 +26,22 @@ internal static class Traversal
         callbacks.Exit?.Invoke((previous, current));
     }
 
-    public static IEnumerable<T> Roots<T>(this IEnumerable<(T From, T To)> edges)
-    {
-        HashSet<T> froms = new HashSet<T>();
-        HashSet<T> tos = new HashSet<T>();
-        foreach (var edge in edges)
-        {
-            froms.Add(edge.From);
-            tos.Add(edge.To);
-        }
 
-        return froms.Except(tos);
+    public static IEnumerable<T> GetRoots<T>(
+        this IEnumerable<T> allItems,
+        Func<T, IEnumerable<T>> getNextItems)
+    {
+        HashSet<T> allItemsSet = new HashSet<T>(allItems);
+        HashSet<T> notARootSet = new HashSet<T>(allItems.SelectMany(getNextItems));
+        IEnumerable<T> roots = allItemsSet.Except(notARootSet);
+        return roots;
     }
 
     public static IEnumerable<T> TopologicalSort<T>(
-        T current,
+        this IEnumerable<T> allItems,
         Func<T, IEnumerable<T>> getNextItems)
     {
-        // Get the whole graph first (assuming everything is reachable from the current node)
-        HashSet<T> unvisited = new();
-        foreach (var next in DepthFirst(current, getNextItems))
-        {
-            unvisited.Add(next);
-        }
-
+        HashSet<T> unvisited = new(allItems);
         HashSet<T> visited = new();
         Queue<T> results = new();
         TraversalCallbacks<T> callbacks2 =

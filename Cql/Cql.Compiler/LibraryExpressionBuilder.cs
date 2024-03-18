@@ -74,9 +74,7 @@ internal class LibraryExpressionBuilder
         if (library.codes is { Length: > 0 } codeDefs)
         {
             HashSet<(string codeName, string codeSystemUrl)> foundCodeNameCodeSystemUrls = new();
-            Dictionary<string, string> codeSystemUrls =
-                library.codeSystems?.ToDictionary(cs => cs.name, cs => cs.id)
-                ?? new();
+            Dictionary<string, string> codeSystemUrls = library.codeSystems?.ToDictionary(cs => cs.name, cs => cs.id) ?? new();
 
             foreach (var codeDef in codeDefs)
             {
@@ -225,6 +223,15 @@ internal class LibraryExpressionBuilder
         if (codeDef.codeSystem == null)
             throw ctx.NewExpressionBuildingException("Code definition has a null codeSystem node.", null);
 
+        if (ctx.LibraryContext.TryGetCodeSystemName(codeDef.codeSystem, out string? csUrl))
+        {
+
+        }
+
+        if (codeDef.codeSystem.libraryName != null)
+        {
+            ; // break;
+        }
         if (!codeSystemUrls.TryGetValue(codeDef.codeSystem.name, out var csUrl))
         {
             // HACK: try to resolve the code system URL from externally defined files,

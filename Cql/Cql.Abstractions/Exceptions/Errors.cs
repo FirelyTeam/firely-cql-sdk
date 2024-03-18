@@ -5,7 +5,7 @@ internal readonly record struct KeyNotFoundError(string Key, string? ValueTypeNa
     public string GetMessage() => $"{ValueTypeName ?? "Object"} not found by key. Key: '{Key}'";
 }
 
-internal readonly record struct NotAValidLibraryFileError(string FilePath) : ICqlError
+internal readonly record struct CouldNotDeserializeFileError(string FilePath, string? ObjectTypeName = null) : ICqlError
 {
-    public string GetMessage() => $"Not a valid ELM library. Library Path: '{FilePath}'";
+    public string GetMessage() => $"Could not deserialize to a valid {ObjectTypeName ?? "Object"}. Path: '{FilePath}'";
 }

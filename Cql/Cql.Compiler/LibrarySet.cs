@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;
 using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
@@ -23,13 +24,16 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     /// </summary>
     public string Name { get; }
 
-    private readonly Dictionary<string, (Library library, List<Library> dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
+    private readonly Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
     
     private (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted) _calculatedState;
-    private bool _shouldRecalculateState;
+    private readonly LibraryByNameAndVersionHashSet _librariesNotCalculatedYet;
+
+    private bool ShouldRecalculateState() => _librariesNotCalculatedYet.Any();
+
 
     private static readonly (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted)
-        EmptyCached = (EmptySet<Library>.Empty, Array.Empty<Library>());
+        EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySet"/> class.
@@ -38,17 +42,20 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     public LibrarySet(string name = "")
     {
         Name = name;
-        _shouldRecalculateState = false;
+        _librariesNotCalculatedYet = new();
         _calculatedState = EmptyCached;
-        _libraryInfosByKey = new Dictionary<string, (Library library, List<Library> dependencies)>();
+        _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)>();
     }
 
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     private bool TryGetLibraryInfoByKey(
         string? key,
         bool throwError,
-        out (Library library, List<Library> dependencies) info)
+        out (Library library, LibraryByNameAndVersionHashSet dependencies) info)
     {
+        if (ShouldRecalculateState())
+            RecalculateState();
+
         info = default;
         if (key is not (null or ""))
         {
@@ -78,8 +85,8 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
     /// <returns>The dependencies of the library with the specified key, or an empty list if the library is not found.</returns>
     /// <exception cref="CqlException{KeyNotFoundError}">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    public IReadOnlyList<Library> GetLibraryDependencies(string key, bool throwError = true) =>
-        TryGetLibraryInfoByKey(key, throwError, out var info) ? info.dependencies : Array.Empty<Library>();
+    public IReadOnlySet<Library> GetLibraryDependencies(string key, bool throwError = true) =>
+        TryGetLibraryInfoByKey(key, throwError, out var info) ? info.dependencies : EmptySet<Library>.Instance;
 
     /// <summary>
     /// Loads the libraries from the specified collection of files.
@@ -90,8 +97,6 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
     /// <exception cref="CqlException{NotAValidLibraryFileError}"></exception>
     public IReadOnlyCollection<Library> LoadLibraries(IReadOnlyCollection<FileInfo> files)
     {
-        _shouldRecalculateState = true;
-
         // Loading libraries in parallel
 
         (FileInfo file, int index)[] input = files
@@ -109,7 +114,7 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
         {
             try
             {
-                _libraryInfosByKey.Add(library.NameAndVersion!, (library, new List<Library>()));
+                _libraryInfosByKey.Add(library.NameAndVersion!, (library, new ()));
             }
             catch (ArgumentNullException)
             {
@@ -122,68 +127,56 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
             }
         }
 
+        _librariesNotCalculatedYet.AddRange(libraries);
+
         return libraries;
     }
 
     private (IReadOnlySet<Library> Roots, IReadOnlyCollection<Library> TopologicallySorted) GetCalculatedState()
     {
-        if (_shouldRecalculateState)
-        {
-            SortTopologically();
-        }
+        if (ShouldRecalculateState()) 
+            RecalculateState();
+
         return _calculatedState;
     }
 
-    private void SortTopologically()
+    private void RecalculateState()
     {
-        // Determining root libraries i.e. those that are not dependencies for others.
-
-        var fromToPairs = _libraryInfosByKey
-            .Values
-            .SelectMany(
-                value => value.library.includes ?? Array.Empty<IncludeDef>(),
-                (tuple, includeDef) =>
-                {
-                    var fromLib = tuple.library;
-                    var fromKey = fromLib.NameAndVersion!;
-
-                    var toKey = includeDef.NameAndVersion()!;
-                    var toLib = GetLibrary(toKey, false) ?? throw new LibraryIncludeDefUnresolvedError(fromLib, includeDef).ToException();
-                    _libraryInfosByKey[fromKey].dependencies.Add(toLib);
-
-                    return (From: fromLib, To: toLib);
-                });
-
-        HashSet<Library> rootLibraries = new();
-        if (!fromToPairs.Any() && _libraryInfosByKey.Any())
+        foreach (var library in _librariesNotCalculatedYet)
         {
-            rootLibraries.Add(_libraryInfosByKey.First().Value.library);
-        }
-        else 
-        {
-            foreach (var root in fromToPairs.Roots())
+            var dependencies = _libraryInfosByKey[library.NameAndVersion!].dependencies;
+            if (library.includes is { Length: > 0 } includeDefs)
             {
-                rootLibraries.Add(root);
+                foreach (var includeDef in includeDefs)
+                {
+                    var toKey = includeDef.NameAndVersion()!;
+                    var toLib = _libraryInfosByKey.GetValueOrDefault(toKey).library ?? throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
+                    dependencies.Add(toLib);
+                }
             }
         }
+        _librariesNotCalculatedYet.Clear();
+
+
+        // Determining root libraries i.e. those that are not dependencies for others.
+
+        var allLibraries = _libraryInfosByKey
+            .Values
+            .Select(v => v.library);
+
+        var rootLibraries = new LibraryByNameAndVersionHashSet(
+            allLibraries
+            .GetRoots(lib => GetLibraryDependencies(lib.NameAndVersion!)));
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
-        const Library RootOfRoots = null!;
-        var topologicallySortedLibraries = Traversal.TopologicalSort(
-                RootOfRoots!,
-                fromLibrary => fromLibrary switch
-                {
-                    RootOfRoots => rootLibraries,
-                    _ => _libraryInfosByKey[fromLibrary.NameAndVersion!].dependencies
-                })
-            .SkipLast(1)
+        var topologicallySortedLibraries = allLibraries
+            .TopologicalSort(lib => GetLibraryDependencies(lib.NameAndVersion!))
             .ToList();
         Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByKey.Count);
         
         // Set calculation state
         _calculatedState = (rootLibraries, topologicallySortedLibraries);
-        _shouldRecalculateState = false;
     }
 
     IEnumerator<KeyValuePair<string, Library>> IEnumerable<KeyValuePair<string, Library>>.GetEnumerator() =>
@@ -242,8 +235,6 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
 
         while (librariesToLoad.Any())
         {
-            _shouldRecalculateState = true;
-
             var librariesToLoadWithOrdinals = librariesToLoad.Select((lib, i) => (lib, ordinal:i)).ToList();
             Library[] librariesLoaded = new Library[librariesToLoad.Count];
             Parallel.ForEach(librariesToLoadWithOrdinals, t =>
@@ -270,9 +261,9 @@ public class LibrarySet : IReadOnlyCollection<Library>, IReadOnlyDictionary<stri
                 }
                 libraries.Add(library);
             }
-
-            libraries.AddRange(librariesLoaded);
         }
+
+        _librariesNotCalculatedYet.AddRange(libraries);
 
         return libraries;
     }
