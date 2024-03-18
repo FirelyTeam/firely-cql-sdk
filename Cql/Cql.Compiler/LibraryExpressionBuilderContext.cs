@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using System.Runtime.Serialization;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -15,12 +17,8 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 {
     private readonly ExpressionBuilder _expressionBuilder;
     private readonly OperatorBinding _operatorBinding;
-    private readonly Dictionary<string, string> _localLibraryIdentifiers;
-    private readonly DefinitionDictionary<LambdaExpression> _definitions;
     private readonly Library _library;
     private readonly LibrarySetExpressionBuilderContext? _libsCtx;
-    private readonly Dictionary<string, CqlCode> _codesByName;
-    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
 
     public LibraryExpressionBuilderContext(
         Library library,
@@ -38,6 +36,8 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         _localLibraryIdentifiers = new();
         _codesByName = new();
         _codesByCodeSystemName = new();
+        _codeSystemIdsByCodeSystemRefs = new ByLibraryNameAndNameDictionary<string>();
+        BuildUrlByCodeSystemRef();
     }
 
     public Elm.Library Library => _library;
@@ -57,6 +57,10 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
             this,
             element);
 
+    #region Definitions
+
+    private readonly DefinitionDictionary<LambdaExpression> _definitions;
+
     public void AddDefinitionTag(string definition, Type[] signature, string name, params string[] values) =>
         _definitions.AddTag(LibraryKey, definition, signature, name, values);
 
@@ -72,20 +76,23 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
     public bool ContainsDefinition(string definition) =>
         _definitions.ContainsKey(LibraryKey, definition);
 
+    #endregion
+
+    #region Local Library Identifiers
+
+    private readonly Dictionary<string, string> _localLibraryIdentifiers;
+
     public void AddIncludeAlias(string includeAlias, string includeNameAndVersion) =>
         _localLibraryIdentifiers.Add(includeAlias, includeNameAndVersion);
 
+    #endregion
+
+    #region Codes By CodeSystemName
+
+    private readonly Dictionary<string, List<CqlCode>> _codesByCodeSystemName;
+
     public bool TryGetCodesByCodeSystemName(string codeSystemName, [NotNullWhen(true)] out List<CqlCode>? codes) =>
         _codesByCodeSystemName.TryGetValue(codeSystemName, out codes);
-
-    public void AddCode(CodeDef codeDef, CqlCode cqlCode)
-    {
-        _codesByName.Add(codeDef.name, cqlCode);
-
-        var codeSystemName = codeDef.codeSystem!.name;
-        var codings = GetOrCreateCodesByCodeSystemName(codeSystemName);
-        codings.Add(cqlCode);
-    }
 
     private List<CqlCode> GetOrCreateCodesByCodeSystemName(string codeSystemName)
     {
@@ -97,15 +104,81 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         return codings;
     }
 
+    #endregion
+
+    #region Codes By Name
+
+    private readonly Dictionary<string, CqlCode> _codesByName;
+
     public bool TryGetCode(CodeRef codeRef, [NotNullWhen(true)] out CqlCode? systemCode) =>
         _codesByName.TryGetValue(codeRef.name, out systemCode);
+    
+    public void AddCode(CodeDef codeDef, CqlCode cqlCode)
+    {
+        _codesByName.Add(codeDef.name, cqlCode);
+
+        var codeSystemName = codeDef.codeSystem!.name;
+        var codings = GetOrCreateCodesByCodeSystemName(codeSystemName);
+        codings.Add(cqlCode);
+    }
+
+    #endregion
+
+    #region Url By CodeSystemRef
+
+    private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
+
+    private void BuildUrlByCodeSystemRef()
+    {
+        //_library.codeSystems
+        if (_libsCtx != null)
+        {
+            foreach (var libraryDependency in _libsCtx.LibrarySet.GetLibraryDependencies(Library.NameAndVersion!))
+            {
+                AddCodeSystemRefs(libraryDependency);
+            }
+        }
+
+        AddCodeSystemRefs(Library);
+
+        void AddCodeSystemRefs(Library library)
+        {
+            bool isForOwnLibrary = library == Library;
+
+            if (library.codeSystems is { Length: > 0 } codeSystemDefs)
+            {
+                foreach (var codeSystemDef in codeSystemDefs)
+                {
+                    if (isForOwnLibrary)
+                    {
+                        _codeSystemIdsByCodeSystemRefs.Add(new (null, codeSystemDef.name), codeSystemDef.id);
+                    } 
+                    else if (codeSystemDef.accessLevel == AccessModifier.Public)
+                    {
+                        _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion!, codeSystemDef.name), codeSystemDef.id);
+                    }
+                }
+            }
+        }
+    }
+
+    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)]out string? url)
+    {
+        var libraryName = codeSystemRef.libraryName is {} libraryAlias ? _localLibraryIdentifiers[libraryAlias] : null;
+        return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
+    }
+
+    #endregion
 
     IBuilderContext? IBuilderContext.OuterContext => _libsCtx;
 
     BuilderContextInfo IBuilderContext.ContextInfo => BuilderContextInfo.FromElement(Library);
 
-    public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, out string? url)
+
+    private readonly record struct LibraryNameAndName(string? LibraryName, string Name);
+
+    private class ByLibraryNameAndNameDictionary<TValue> : Dictionary<LibraryNameAndName, TValue>
     {
-        throw new NotImplementedException();
     }
 }
+

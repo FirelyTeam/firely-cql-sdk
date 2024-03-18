@@ -24,7 +24,7 @@ internal class LibrarySetExpressionBuilderContext : IBuilderContext
 
     public BuilderContextInfo ContextInfo { get; }
 
-    public IReadOnlyCollection<Elm.Library> TopologicallySortedLibraries => _librarySet;
+    public LibrarySet LibrarySet => _librarySet;
 
     public void MergeDefinitions(DefinitionDictionary<LambdaExpression> definitions) => 
         _definitions.Merge(definitions);

@@ -36,7 +36,7 @@ internal class LibrarySetExpressionBuilder
 
     private void ProcessLibrarySet(LibrarySetExpressionBuilderContext libsCtx)
     {
-        foreach (var library in libsCtx.TopologicallySortedLibraries)
+        foreach (var library in libsCtx.LibrarySet)
         { 
             var packageDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, libsCtx);
             libsCtx.MergeDefinitions(packageDefinitions);
