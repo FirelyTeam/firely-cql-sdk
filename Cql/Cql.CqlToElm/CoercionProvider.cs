@@ -120,7 +120,7 @@ namespace Hl7.Cql.CqlToElm
 
 
             Interval ToInterval(Expression expression, IntervalTypeSpecifier type) =>
-                new Interval { low = As(expression, type.pointType), high = As(expression, type.pointType) }.WithResultType(type);
+                new Interval { low = As(expression, type.pointType), high = As(expression, type.pointType), highClosed = true, lowClosed = true }.WithResultType(type);
 
             Expression FromList(Expression list, TypeSpecifier to) =>
                 As(new SingletonFrom { operand = list }.WithResultType(to), to);
