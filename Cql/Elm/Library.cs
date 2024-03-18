@@ -15,7 +15,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Elm;
 
-[DebuggerDisplay("Library ({NameAndVersion})")]
+[DebuggerDisplay("Library ({GetNameAndVersion(false)})")]
 public partial class Library
 {
     public const string JsonMimeType = "application/elm+json";
@@ -25,38 +25,21 @@ public partial class Library
     public static readonly JsonSerializerOptions JsonSerializerOptions = GetSerializerOptions(false);
     public static readonly JsonSerializerOptions JsonSerializerOptionsStrict = GetSerializerOptions(true);
 
-    [JsonIgnore]
-    public string? NameAndVersion
-    {
-        get
-        {
-            if (identifier == null)
-                return null;
-            else if (string.IsNullOrWhiteSpace(identifier.version))
-                return identifier.id;
-            else return $"{identifier.id}-{identifier.version}";
-        }
-    }
-
-    [JsonIgnore]
-    public string? Name => identifier?.id;
-
-    [JsonIgnore]
-    public string? Version => identifier?.version;
-
     internal bool IsValidated { get; private set; }
 
     /// <exception cref="CqlException{LibraryMissingNameAndVersionError}"></exception>
-    private void Validate(FileInfo file)
+    private void Validate()
     {
-        if (string.IsNullOrWhiteSpace(NameAndVersion))
-            throw new LibraryMissingNameAndVersionError(this, file.FullName).ToException();
+        if (IsValidated)
+            return;
+
+        GetNameAndVersion(throwError: true);
 
         if (includes is { Length: > 0 } includeDefs)
         {
             foreach (var includeDef in includeDefs)
             {
-                if (string.IsNullOrEmpty(includeDef.path))
+                if (includeDef.GetNameAndVersion(throwError: false) == null)
                     throw new LibraryMissingIncludeDefPathError(this, includeDef).ToException();
             }
         }
@@ -106,8 +89,18 @@ public partial class Library
         if (validate)
         {
             if (library is null)
+            {
                 throw new CouldNotDeserializeFileError(file.FullName, "ELM Library").ToException();
-            library.Validate(file);
+            }
+
+            try
+            {
+                library.Validate();
+            }
+            catch (Exception e)
+            {
+                throw new CouldNotValidateFileError(file.FullName, "ELM Library").ToException(e);
+            }
         }
 
         return library;
@@ -123,10 +116,10 @@ public partial class Library
         };
 
     public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =
-        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion!);
+        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.GetNameAndVersion(true)!);
 
     public static IComparer<Library> ComparerByNameAndVersion { get; } =
-        ComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion!);
+        ComparerFactory.For<Library>.CreateByKey(lib => lib.GetNameAndVersion(true)!);
 }
 
 internal class LibraryByNameAndVersionHashSet : HashSet<Library>

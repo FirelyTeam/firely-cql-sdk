@@ -9,3 +9,8 @@ internal readonly record struct CouldNotDeserializeFileError(string FilePath, st
 {
     public string GetMessage() => $"Could not deserialize to a valid {ObjectTypeName ?? "Object"}. Path: '{FilePath}'";
 }
+
+internal readonly record struct CouldNotValidateFileError(string FilePath, string? ObjectTypeName = null) : ICqlError
+{
+    public string GetMessage() => $"Could not validate {ObjectTypeName ?? "Object"}. Path: '{FilePath}'";
+}

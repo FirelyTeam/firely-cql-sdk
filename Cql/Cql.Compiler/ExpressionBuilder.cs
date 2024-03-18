@@ -885,7 +885,7 @@ namespace Hl7.Cql.Compiler
                     ctxStack.Push(ctx);
                     ctx = ctx.Deeper(by);
 
-                    ListSortDirection order = ExtensionMethods.ListSortOrder(by.direction);
+                    ListSortDirection order = by.direction.ListSortOrder();
                     if (by is ByExpression byExpression)
                     {
                         var parameterName = "@this";

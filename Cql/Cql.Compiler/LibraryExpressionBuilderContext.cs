@@ -42,7 +42,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     public Elm.Library Library => _library;
 
-    public string LibraryKey => _library.NameAndVersion!;
+    public string LibraryKey => _library.GetNameAndVersion()!;
 
     public bool AllowUnresolvedExternals => _expressionBuilder.Settings.AllowUnresolvedExternals;
 
@@ -133,7 +133,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
         //_library.codeSystems
         if (_libsCtx != null)
         {
-            foreach (var libraryDependency in _libsCtx.LibrarySet.GetLibraryDependencies(Library.NameAndVersion!))
+            foreach (var libraryDependency in _libsCtx.LibrarySet.GetLibraryDependencies(Library.GetNameAndVersion()!))
             {
                 AddCodeSystemRefs(libraryDependency);
             }
@@ -155,7 +155,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
                     } 
                     else if (codeSystemDef.accessLevel == AccessModifier.Public)
                     {
-                        _codeSystemIdsByCodeSystemRefs.Add(new(library.NameAndVersion!, codeSystemDef.name), codeSystemDef.id);
+                        _codeSystemIdsByCodeSystemRefs.Add(new(library.GetNameAndVersion()!, codeSystemDef.name), codeSystemDef.id);
                     }
                 }
             }

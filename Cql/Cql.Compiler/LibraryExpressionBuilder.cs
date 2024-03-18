@@ -319,7 +319,7 @@ internal class LibraryExpressionBuilder
             ? includeDef.localIdentifier!
             : includeDef.path!;
 
-        var libNav = includeDef.NameAndVersion() ??
+        var libNav = includeDef.GetNameAndVersion(false) ??
                      throw ctx.NewExpressionBuildingException(
                          $"Include {includeDef.localId} does not have a well-formed name and version", null);
         ctx.LibraryContext.AddIncludeAlias(alias, libNav);

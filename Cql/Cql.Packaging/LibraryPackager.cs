@@ -1,5 +1,3 @@
-using System.Collections.Concurrent;
-using System.Linq.Expressions;
 using System.Runtime.Loader;
 using System.Text;
 using Hl7.Cql.Abstractions;
@@ -7,9 +5,7 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Graph;
 using Hl7.Cql.Iso8601;
-using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using JetBrains.Annotations;
 using Library = Hl7.Fhir.Model.Library;
@@ -73,14 +69,14 @@ internal class LibraryPackager
 
         foreach (var library in librarySet)
         {
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.GetNameAndVersion()}.json"));
             if (!elmFile.Exists)
                 elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.identifier?.id ?? string.Empty}.json"));
 
             if (!elmFile.Exists)
-                throw new InvalidOperationException($"Cannot find ELM file for {library.NameAndVersion}");
+                throw new InvalidOperationException($"Cannot find ELM file for {library.GetNameAndVersion()}");
 
-            var cqlFiles = cqlDirectory.GetFiles($"{library.NameAndVersion}.cql", SearchOption.AllDirectories);
+            var cqlFiles = cqlDirectory.GetFiles($"{library.GetNameAndVersion()}.cql", SearchOption.AllDirectories);
             if (cqlFiles.Length == 0)
             {
                 cqlFiles = cqlDirectory.GetFiles($"{library.identifier!.id}.cql", SearchOption.AllDirectories);
@@ -92,20 +88,20 @@ internal class LibraryPackager
                 throw new InvalidOperationException($"More than 1 CQL file found.");
 
             var cqlFile = cqlFiles[0];
-            if (library.NameAndVersion is null)
+            if (library.GetNameAndVersion() is null)
                 throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-            if (!assemblies.TryGetValue(library.NameAndVersion, out var assembly))
-                throw new InvalidOperationException($"No assembly for {library.NameAndVersion}");
+            if (!assemblies.TryGetValue(library.GetNameAndVersion()!, out var assembly))
+                throw new InvalidOperationException($"No assembly for {library.GetNameAndVersion()}");
 
             var fhirLibrary = CreateLibraryResource(elmFile, cqlFile, assembly, typeCrosswalk, library, callbacks);
-            librariesByNameAndVersion.Add(library.NameAndVersion, fhirLibrary);
+            librariesByNameAndVersion.Add(library.GetNameAndVersion()!, fhirLibrary);
             resources.Add(fhirLibrary);
         }
 
         foreach (var library in librarySet)
         {
-            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.NameAndVersion}.json"));
+            var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{library.GetNameAndVersion()}.json"));
             foreach (var def in library.statements ?? Enumerable.Empty<ExpressionDef>())
             {
                 if (def.annotation == null)
@@ -144,10 +140,10 @@ internal class LibraryPackager
                     };
                     measure.Group = new List<Measure.GroupComponent>();
                     measure.Url = callbacks.BuildUrlFromResource(measure);
-                    if (library.NameAndVersion is null)
+                    if (library.GetNameAndVersion() is null)
                         throw new InvalidOperationException("Library NameAndVersion should not be null.");
 
-                    if (!librariesByNameAndVersion.TryGetValue(library.NameAndVersion, out var libForMeasure) || libForMeasure is null)
+                    if (!librariesByNameAndVersion.TryGetValue(library.GetNameAndVersion()!, out var libForMeasure) || libForMeasure is null)
                         throw new InvalidOperationException($"We didn't create a measure for library {libForMeasure}");
 
                     measure.Library = new List<string> { libForMeasure!.Url };
@@ -180,14 +176,14 @@ internal class LibraryPackager
         var bytes = File.ReadAllBytes(elmFile.FullName);
         var attachment = new Attachment
         {
-            ElementId = $"{elmLibrary.NameAndVersion}+elm",
+            ElementId = $"{elmLibrary.GetNameAndVersion()}+elm",
             ContentType = Elm.Library.JsonMimeType,
             Data = bytes,
         };
         var library = new Library();
         library.Content.Add(attachment);
         library.Type = LogicLibraryCodeableConcept;
-        string libraryId = $"{elmLibrary!.NameAndVersion}";
+        string libraryId = $"{elmLibrary!.GetNameAndVersion()}";
         library.Id = libraryId!;
         library.Version = elmLibrary!.identifier?.version!;
         library.Name = elmLibrary!.identifier?.id!;
@@ -234,7 +230,7 @@ internal class LibraryPackager
 
             var cqlAttachment = new Attachment
             {
-                ElementId = $"{elmLibrary!.NameAndVersion}+cql",
+                ElementId = $"{elmLibrary!.GetNameAndVersion()}+cql",
                 ContentType = "text/cql",
                 Data = cqlBytes,
             };
@@ -246,7 +242,7 @@ internal class LibraryPackager
             var assemblyBytes = assembly.Binary;
             var assemblyAttachment = new Attachment
             {
-                ElementId = $"{elmLibrary!.NameAndVersion}+dll",
+                ElementId = $"{elmLibrary!.GetNameAndVersion()}+dll",
                 ContentType = "application/octet-stream",
                 Data = assemblyBytes,
             };

@@ -160,7 +160,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             foreach (var library in librarySet)
             {
-                string libraryName = library.NameAndVersion!;
+                string libraryName = library.GetNameAndVersion()!;
 
                 if (!writeFile(libraryName))
                     continue;
@@ -309,7 +309,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var dependentLibrary in requiredLibraries!)
             {
-                var typeName = libraryNameToClassName!(dependentLibrary.NameAndVersion!);
+                var typeName = libraryNameToClassName!(dependentLibrary.GetNameAndVersion()!);
                 var memberName = typeName;
                 writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
             }
@@ -399,7 +399,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     writer.WriteLine();
                 }
 
-                var typeName = libraryNameToClassName(dependentLibrary.NameAndVersion!);
+                var typeName = libraryNameToClassName(dependentLibrary.GetNameAndVersion()!);
                 var memberName = typeName;
                 writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
             }

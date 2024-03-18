@@ -1,20 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Elm;
 
-internal class Interfaces
+#region NameAndVersion
+
+internal interface IGetNameAndVersion
 {
+    /// <summary>
+    /// Gets the name with version, or just the name if no version exists.
+    /// </summary>
+    string? GetNameAndVersion(bool throwError = true);
 }
+
+partial class Library : IGetNameAndVersion
+{
+    /// <inheritedoc/>
+    public string? GetNameAndVersion(bool throwError = true)
+    {
+        if (identifier == null)
+        {
+            if (throwError) throw new MissingIdentifierError(this).ToException();
+            return null;
+        }
+        return identifier.GetNameAndVersion(throwError);
+    }
+}
+
+partial class IncludeDef : IGetNameAndVersion
+{
+    /// <inheritedoc/>
+    public string? GetNameAndVersion(bool throwError = true)
+    {
+        if (string.IsNullOrEmpty(path))
+        {
+            if (throwError) throw new MissingNameError(this).ToException();
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(version))
+        {
+            return path;
+        }
+
+        return $"{path}-{version}";
+    }
+}
+
+partial class VersionedIdentifier : IGetNameAndVersion
+{
+    /// <inheritedoc/>
+    public string? GetNameAndVersion(bool throwError = true)
+    {
+        if (string.IsNullOrEmpty(id))
+        {
+            if (throwError) throw new MissingNameError(this).ToException();
+            return null;
+        }
+
+        if (string.IsNullOrEmpty(version))
+        {
+            return id;
+        }
+
+        return $"{id}-{version}";
+    }
+}
+
+#endregion
+
+
+#region LibraryName
 
 internal interface IGetLibraryName
 {
     string libraryName { get; }
 }
-
 partial class CodeRef : IGetLibraryName {}
 partial class CodeSystemRef : IGetLibraryName {}
 partial class ConceptRef : IGetLibraryName {}
@@ -23,6 +83,10 @@ partial class IdentifierRef : IGetLibraryName {}
 partial class ParameterRef : IGetLibraryName {}
 partial class ValueSetRef : IGetLibraryName {}
 
+#endregion
+
+
+#region Name
 
 internal interface IGetName 
 {
@@ -47,3 +111,5 @@ partial class TupleElement: IGetName { }
 partial class TupleElementDefinition: IGetName { }
 partial class ValueSetDef: IGetName { }
 partial class ValueSetRef: IGetName { }
+
+#endregion
