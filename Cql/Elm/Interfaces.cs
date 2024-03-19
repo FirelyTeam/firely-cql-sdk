@@ -1,4 +1,6 @@
-﻿using Hl7.Cql.Abstractions.Exceptions;
+﻿#pragma warning disable IDE1006 // Naming violation suppressed.
+
+using Hl7.Cql.Abstractions.Exceptions;
 
 namespace Hl7.Cql.Elm;
 
@@ -73,7 +75,7 @@ partial class VersionedIdentifier : IGetNameAndVersion
 
 internal interface IGetLibraryName
 {
-    string libraryName { get; }
+    string? libraryName { get; }
 }
 partial class CodeRef : IGetLibraryName {}
 partial class CodeSystemRef : IGetLibraryName {}
@@ -85,12 +87,24 @@ partial class ValueSetRef : IGetLibraryName {}
 
 #endregion
 
+#region Path
+
+internal interface IGetPath
+{
+    string? path { get; }
+}
+partial class AggregateExpression : IGetPath { }
+partial class ByColumn : IGetPath { }
+partial class Property : IGetPath { }
+
+#endregion
+
 
 #region Name
 
 internal interface IGetName 
 {
-    string name { get; }
+    string? name { get; }
 }
 partial class AliasRef : IGetName { }
 partial class CodeRef : IGetName { }

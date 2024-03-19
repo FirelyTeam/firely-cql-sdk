@@ -109,7 +109,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     #endregion
 
-    #region Codes By Name
+    #region Codes By Name (cross library???)
 
     private readonly Dictionary<string, CqlCode> _codesByName;
 
@@ -127,7 +127,7 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
     #endregion
 
-    #region Url By CodeSystemRef
+    #region Url By CodeSystemRef (cross library)
 
     private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs;
 
@@ -145,8 +145,6 @@ internal class LibraryExpressionBuilderContext : IBuilderContext
 
         void AddCodeSystemRefs(Library library)
         {
-            bool isForOwnLibrary = library == Library;
-
             if (library.codeSystems is { Length: > 0 } codeSystemDefs)
             {
                 foreach (var codeSystemDef in codeSystemDefs)

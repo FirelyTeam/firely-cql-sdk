@@ -49,21 +49,25 @@ internal readonly record struct BuilderContextInfo(
         string? GetNameText(Elm.Element elem)
         {
             StringBuilder sb = new();
-            var elemType = elem.GetType();
-            AppendProp("NameAndVersion");
-            AppendProp("libraryName");
-            AppendProp("context");
-            AppendProp("name");
-            AppendProp("path");
+            Append(FromNameAndVersion());
+            Append(FromLibraryName());
+            Append(FromContext());
+            Append(FromName());
+            Append(FromPath());
             return sb.Length==0 ? null : sb.ToString();
 
-            StringBuilder AppendProp(string prop)
+            void Append(string? text)
             {
-                string? text = elemType.GetProperty(prop)?.GetValue(elem)?.ToString();
-                if (string.IsNullOrEmpty(text)) return sb;
-                if (sb.Length > 0) sb.Append('.');
-                return sb.Append(text);
+                if (text is null or "") return;
+                if (sb.Length > 0) sb.Append(".");
+                sb.Append(text);
             }
+
+            string? FromPath() => (elem as IGetPath)?.path;
+            string? FromContext() => (elem as ExpressionDef)?.context;
+            string? FromNameAndVersion() => (elem as IGetNameAndVersion)?.NameAndVersion(throwError: false);
+            string? FromLibraryName() => (elem as IGetLibraryName)?.libraryName;
+            string? FromName() => (elem as IGetName)?.name;
         }
 
         string? GetElemTypeName(Elm.Element elem) =>

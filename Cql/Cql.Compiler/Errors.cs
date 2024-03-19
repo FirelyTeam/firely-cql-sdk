@@ -13,9 +13,3 @@ internal readonly record struct LibraryIdentifierMustBeUniqueError(Library Libra
 {
     public string GetMessage() => $"Library did not have a unique name and version in the set. Duplicate Identifier: '{Library.NameAndVersion()}'";
 }
-
-
-internal readonly record struct CannotFindLibraryInDirectoryError(string Directory, string Name, string? Version) : ICqlError
-{
-    public string GetMessage() => $"Cannot find ELM file by name/version in directory. Name: '{Name}', Version: '{Version}', Directory: '{Directory}'";
-}
